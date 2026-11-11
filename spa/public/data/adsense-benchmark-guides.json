@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-11T20:34:51.555Z",
+  "generatedAt": "2026-11-11T21:13:43.582Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -324,70 +324,6 @@
           "views": 102,
           "answers": 1,
           "askedAt": "2026.10.31"
-        }
-      ]
-    },
-    {
-      "id": "e81f0a59891990ed",
-      "urls": [
-        "https://edgeo.gong24.kr/83"
-      ],
-      "guide": {
-        "direction": "검색자는 편의점에서 선불카드를 직접 충전하는 것과 '자동충전'이 어떻게 다른지 헷갈린다. 고수 글은 '충전 방법'만 뭉쳐 설명하고, 자동충전형 카드는 등록계좌로만 충전되고 편의점 수동충전이 안 된다는 점은 빼놓는다. 카드 종류별(선불·자동충전·후불) 충전 방법 표로 이 글에서 혼란을 끝낸다.",
-        "searchTargets": [
-          "하이패스 충전방법",
-          "편의점 하이패스 충전",
-          "선불하이패스 충전",
-          "하이패스 충전카드"
-        ],
-        "mustInclude": [
-          "선불 하이패스카드는 편의점·휴게소에서 직접 충전 가능(카드 투입 후 금액 선택)",
-          "자동충전형 카드는 등록계좌 자동충전만 가능, 편의점 등 별도 수동충전 불가",
-          "자동충전 설정 시 최초 1회는 기준금액 이상 충전해둬야 작동함",
-          "자동충전에서 후불로 교체 시 단말기 재등록만으로 카드 교체 가능",
-          "하이플러스카드 고객센터 1644-6500 문의처(카드 유형별 문의)"
-        ],
-        "mustAvoid": [
-          "선불카드 수동충전과 자동충전형 계좌충전을 같은 '충전방법'으로 뭉쳐 설명",
-          "후불하이패스는 충전 개념이 없다는 점을 빼먹고 충전방법에 섞어 설명"
-        ],
-        "checkBefore": [
-          "카드사별(하이플러스카드 등) 자동충전 가능 여부·설정 방법은 공식 홈페이지/고객센터로 확인",
-          "편의점 충전 가능 여부는 제휴 편의점(씨유, GS25 등) 최신 현황으로 확인"
-        ],
-        "solves": [
-          "편의점에서 충전했는데 자동충전이랑 뭐가 다른가 → 선불카드 수동충전 vs 자동충전형 계좌충전 구분",
-          "자동충전 설정했는데 편의점에서 또 충전해야 하나 → 자동충전형은 편의점 수동충전 불가, 계좌충전만 가능",
-          "자동충전에서 후불로 바꾸려면 → 단말기 재등록 절차 정리"
-        ],
-        "actionTitles": [
-          "하이패스 충전방법, 편의점·휴게소 선불카드 충전 순서"
-        ]
-      },
-      "at": "2026-11-04T20:53:36.042Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "편의점 자동충전 하이패스 카드 질문",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=81103&docId=471724866&answerNo=1&qb=7ZWY7J207Yyo7IqkIOy2qeyghCDsnpDrj5nstqnsoIQ=",
-          "views": 5258,
-          "answers": 2,
-          "askedAt": "2024.06.28"
-        },
-        {
-          "title": "자동충전 셀프 하이패스카드요.",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=81208&docId=466653339&answerNo=2&qb=7ZWY7J207Yyo7IqkIOy2qeyghCDsnpDrj5nstqnsoIQ=",
-          "views": 1524,
-          "answers": 2,
-          "askedAt": "2024.03.22"
-        },
-        {
-          "title": "하이패스 자동충전에서 후불하이패스로 교체",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=81103&docId=492422450&answerNo=2&qb=7ZWY7J207Yyo7IqkIOy2qeyghCDsnpDrj5nstqnsoIQ=",
-          "views": 348,
-          "answers": 2,
-          "askedAt": "2026.03.11"
         }
       ]
     },
@@ -23172,72 +23108,6 @@
       ]
     },
     {
-      "id": "a4a0895b058959ba",
-      "urls": [
-        "https://bodyandwell.com/%ea%b3%a8%eb%93%9c%ec%b9%b4%eb%ac%b4%ed%8a%b8%ed%9a%a8%ec%86%8c-%ed%9a%a8%eb%8a%a5-%ea%b8%b0%eb%8c%80-%eb%b2%94%ec%9c%84%ec%99%80-%ec%84%ad%ec%b7%a8%eb%b0%a9%eb%b2%95-%ea%b7%b8%eb%a6%ac%ea%b3%a0/",
-        "https://alldogam.tistory.com/entry/%ED%8F%AC%EC%8A%A4%ED%8C%8C%ED%8B%B0%EB%94%9C%EC%84%B8%EB%A6%B0-%ED%9A%A8%EB%8A%A5-%EB%B0%8F-%EB%B6%80%EC%9E%91%EC%9A%A9-%EC%B4%9D%EC%A0%95%EB%A6%AC-%EA%B6%8C%EC%9E%A5%EB%9F%89-%EC%84%AD%EC%B7%A8%EB%B0%A9%EB%B2%95"
-      ],
-      "guide": {
-        "direction": "검색자는 '포스파티딜세린이 치매를 예방·치료해주는지'와 '먹어도 체감이 없는 이유'에서 막혀 있다. 고수 글들은 효능 나열에 그치고 제품별 함량·복용법 차이, 기억력개선과 치매치료의 구분을 정리하지 않는다. 이 글은 성분 역할·기대 가능한 범위·복용법·제품 비교표로 과장 없이 끝내준다.",
-        "searchTargets": [
-          "포스파티딜세린 효능 치매",
-          "포스파티딜세린 효능 및 부작용",
-          "포스파티딜세린 효능 복용법",
-          "포스파티딜세린 효능 추천"
-        ],
-        "mustInclude": [
-          "뇌세포막 구성 인지질이라는 성분 설명 (지식인 다수 질문 핵심)",
-          "치매 예방·치료 효과는 입증되지 않았고 기억력 개선 수준이라는 구분",
-          "복용법·권장량 (확인 필요: 제품 라벨 또는 식약처 고시자료)",
-          "제품별 함량·가격 비교표",
-          "부작용 및 체감이 없을 수 있다는 개인차 안내"
-        ],
-        "mustAvoid": [
-          "치매 치료제처럼 효과를 서술",
-          "아이 두뇌발달 효과를 확정적으로 단정"
-        ],
-        "checkBefore": [
-          "식약처 고시 기능성 원료 인정 범위",
-          "제품별 포스파티딜세린 함량 표기 (제조사 공식 페이지)"
-        ],
-        "solves": [
-          "치매 예방 효과 있는지 → 치매 치료·예방 아닌 기억력 개선 수준으로 한계 명시",
-          "먹어봤는데 체감 안 됨 → 제품별 함량 차이와 개인차로 원인 설명",
-          "아이 두뇌발달에 효과 있는지 → 인지질 구성성분 역할로 범위 설명"
-        ],
-        "actionTitles": [
-          "포스파티딜세린 치매 예방 효과 있는지 정확히 확인하는 법",
-          "포스파티딜세린 효능 제품별 차이 비교로 고르는 법"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "포스파티딜세린 효능 및 효과 알려주세요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70404&docId=474588006&answerNo=5&qb=7Y+s7Iqk7YyM7Yuw65Sc7IS466aw7Zqo64ql",
-          "views": 769,
-          "answers": 6,
-          "askedAt": "2026.07.07"
-        },
-        {
-          "title": "부모님 기억력 저하에 포스파티딜세린 효과 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70601&docId=487686561&answerNo=8&qb=7Y+s7Iqk7YyM7Yuw65Sc7IS466aw7Zqo64ql",
-          "views": 637,
-          "answers": 9,
-          "askedAt": "2026.08.06"
-        },
-        {
-          "title": "깜빡깜빡 심해졌는데 포스파티딜세린효능 알....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8050105&docId=490929299&answerNo=7&qb=7Y+s7Iqk7YyM7Yuw65Sc7IS466aw7Zqo64ql",
-          "views": 534,
-          "answers": 9,
-          "askedAt": "2026.04.08"
-        }
-      ]
-    },
-    {
       "id": "903406eebd09469f",
       "urls": [
         "https://flameleaf.tistory.com/entry/%EC%A0%84%EB%B6%81%EC%9D%80%ED%96%89-%EB%B9%84%EB%8C%80%EB%A9%B4-%EC%9E%85%EC%B6%9C%EA%B8%88-%ED%86%B5%EC%9E%A5-%EA%B0%9C%EC%84%A4-%EB%B0%A9%EB%B2%95-%EC%A4%80%EB%B9%84%EB%AC%BC-%ED%95%84%EC%88%98-%EC%84%9C%EB%A5%98-%EC%95%88%EB%82%B4",
@@ -23364,64 +23234,6 @@
           "views": 800,
           "answers": 2,
           "askedAt": "2025.07.13"
-        }
-      ]
-    },
-    {
-      "id": "f509110d3f3ff7c9",
-      "urls": [
-        "https://luvgg.com/daehanminguk-guseokguseok-lodging-discount-2026/",
-        "https://lastplace.tistory.com/230"
-      ],
-      "guide": {
-        "direction": "검색자는 숙박할인권이 정확히 몇 시에 풀리는지 몰라 매번 선착순에서 놓치는 게 가장 큰 문제다. 고수 글들은 신청방법만 설명하고 발급 시각·소진 속도·매수 제한처럼 이번 회차에 바로 쓸 정보는 다루지 않는다. 이 글은 접속 전 준비물과 신청 순서를 체크리스트로 정리해 독자가 다음 발급 시각에 바로 대응하게 한다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "대한민국구석구석 공식 사이트·앱 접속 경로 (확인 필요: 공식 사이트)",
-          "쿠폰 발급 시각 (확인 필요: 대한민국구석구석 공지사항)",
-          "1인당 신청 가능 매수·횟수 제한 (확인 필요: 공지사항)",
-          "선착순 마감까지 걸리는 시간 (확인 필요: 이용자 후기·공지)"
-        ],
-        "mustAvoid": [],
-        "checkBefore": [
-          "대한민국구석구석 공식 사이트·앱 공지사항에서 이번 회차 발급 일정·시각 확인",
-          "한국관광공사 공식 SNS·보도자료에서 신청 자격과 매수 제한 확인"
-        ],
-        "solves": [
-          "선착순 몇 시에 풀리는지 몰라서 매번 놓침 → 발급 시각과 접속 전 체크리스트 제공",
-          "신청은 했는데 어떻게 쓰는지 모름 → 연동 플랫폼에서 적용하는 방법 정리",
-          "매수·횟수 제한이 헷갈림 → 1인당 신청 가능 수량 안내"
-        ],
-        "actionTitles": [
-          "대한민국구석구석 숙박할인권 신청방법, 선착순 시간 미리 확인",
-          "숙박할인권 놓치지 않는 법, 발급 시각부터 신청 순서까지",
-          "대한민국구석구석 할인권 신청 전 꼭 확인할 체크리스트"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "주간보호센터 이용을 하면서 방문요양서비스....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100103&docId=132905149&answerNo=3&qb=64W47J247JqU7JaRIOuwqeusuOyalOyWkSDsi5zqsIQg7Iug7LKt67Cp67KV",
-          "views": 4753,
-          "answers": 5,
-          "askedAt": "2026.09.27"
-        },
-        {
-          "title": "노인장기요양등급 신청 절차, 어렵지 않나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=601&docId=492969741&answerNo=19&qb=64W47J247JqU7JaRIOuwqeusuOyalOyWkSDsi5zqsIQg7Iug7LKt67Cp67KV",
-          "views": 822,
-          "answers": 22,
-          "askedAt": "2026.10.24"
-        },
-        {
-          "title": "노인 장기요양보험 신청 인정 합격비율 궁금....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100103&docId=495594044&answerNo=9&qb=64W47J247JqU7JaRIOuwqeusuOyalOyWkSDsi5zqsIQg7Iug7LKt67Cp67KV",
-          "views": 364,
-          "answers": 11,
-          "askedAt": "2026.10.26"
         }
       ]
     },
@@ -23625,71 +23437,6 @@
       ]
     },
     {
-      "id": "ad231816f3aebf6c",
-      "urls": [
-        "https://life.sano.co.kr/%ec%9d%98%eb%8c%80-%eb%85%bc%ec%88%a0-%ec%b5%9c%ec%a0%80-%ec%88%98%eb%8a%a5-%ec%b5%9c%ec%a0%80-%ec%97%86%eb%8a%94-%ec%a0%84%ed%98%95%ea%b9%8c%ec%a7%80-%ed%95%9c%eb%88%88%ec%97%90-%ec%a4%80%eb%b9%84/"
-      ],
-      "guide": {
-        "direction": "검색자는 수능최저가 있는 의대 논술전형과 없는 전형을 어떻게 구분해 지원하는지, 가천대처럼 최저가 다른 대학과 비교해 헷갈려 지식인에 반복 질문한다. 고수 블로그는 '한눈에 준비'만 내세우고 대학별 최저 기준과 논술 범위를 구체적으로 안 풀어준다. 최저 있는/없는 전형 구분표와 가천대 사례, 최저→범위→일정 확인 순서로 독자가 자기 지원 전략을 바로 세우게 한다.",
-        "searchTargets": [
-          "의대 논술 최저",
-          "가천대 의대 논술",
-          "의대 논술 전형",
-          "의대 논술 일정"
-        ],
-        "mustInclude": [
-          "의·치·약·한·수 계열 논술전형 모집 대학 수·인원(대입정보포털 기준, 확인 필요: 연도)",
-          "가천대 논술전형 최저 기준 사례(국어·수학·탐구 등, 확인 필요: 모집요강)",
-          "수능 최저 있는 전형 vs 없는 전형 대학별 구분표",
-          "의대 논술은 수학 논술 비중이 높다는 특징과 범위 정리",
-          "(확인 필요: 각 대학 최신 수시모집요강의 최저·범위 확정치)"
-        ],
-        "mustAvoid": [
-          "의대 논술전형을 치대·한의대·약대 전형과 그대로 동일시하지 않기(계열별 최저·범위 다름)",
-          "'최저 없는 전형=쉬운 전형'으로 단정하지 않기(경쟁률·논술 난도는 더 높을 수 있음)"
-        ],
-        "checkBefore": [
-          "대학별 논술전형 수능최저 기준(각 대학 수시모집요강 원문)",
-          "대입정보포털의 논술전형 모집대학 수·모집인원 최신 수치"
-        ],
-        "solves": [
-          "수능최저 있는 전형과 없는 전형을 못 구분한다 → 대학별 최저 유무 구분표로 정리",
-          "가천대 의대 논술 최저가 정확히 뭔지 모른다 → 가천대 사례로 최저 기준 설명",
-          "의대 논술 범위가 어디까지인지 몰라 준비를 못 시작한다 → 수학 논술 비중 중심 범위 정리"
-        ],
-        "actionTitles": [
-          "의대 논술 최저 있는 전형 없는 전형 구분하는 법",
-          "가천대 의대 논술 최저 기준부터 확인하고 준비하는 법"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "경희대 의대 수능최저 사탐 가능한가요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110408&docId=485581072&answerNo=1&qb=7J2Y64yAIOuFvOyIoCDstZzsoIAg7IiY64qlIOyghO2YlQ==",
-          "views": 1446,
-          "answers": 4,
-          "askedAt": "2025.05.26"
-        },
-        {
-          "title": "부산대 의대 논술 최저 관련 질문",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110408&docId=494750913&answerNo=2&qb=7J2Y64yAIOuFvOyIoCDstZzsoIAg7IiY64qlIOyghO2YlQ==",
-          "views": 388,
-          "answers": 2,
-          "askedAt": "2026.08.16"
-        },
-        {
-          "title": "가천대 한의대 논술 최저",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110408&docId=495152152&answerNo=3&qb=7J2Y64yAIOuFvOyIoCDstZzsoIAg7IiY64qlIOyghO2YlQ==",
-          "views": 117,
-          "answers": 3,
-          "askedAt": "2026.09.16"
-        }
-      ]
-    },
-    {
       "id": "3316654c6573da68",
       "urls": [
         "https://odysseuss.tistory.com/entry/%EC%84%9C%EC%9A%B8-%EC%8B%9D%EB%AC%BC%EC%9B%90-%EC%9C%84%EC%B9%98"
@@ -23855,1235 +23602,6 @@
       ]
     },
     {
-      "id": "f81a3f9248e7ade1",
-      "urls": [
-        "https://life.sano.co.kr/%ec%b6%94%ec%88%98%ea%b0%90%ec%82%ac%ec%a0%88-%ea%b8%b0%eb%8f%84%eb%ac%b8-%eb%aa%a8%ec%9d%8c-%ec%a3%bc%ec%9d%bc%ec%98%88%eb%b0%b0%ec%99%80-%ea%b0%80%ec%a0%95%ec%98%88%eb%b0%b0%eb%a5%bc-%ec%9c%84/"
-      ],
-      "guide": {
-        "direction": "대표기도나 가정예배 기도문을 직접 써야 하는 사람은 감사·회개·중보 중 무엇을 먼저 넣고 어떻게 이어야 할지부터 막힌다. 고수 블로그의 '모음' 제목은 기도문을 나열만 할 뿐 주일예배용과 가정예배용을 구분하거나 쓰는 순서를 짚어주지 않는다. 이 글은 상황별로 기도문을 나누고 감사-회개-중보 순서 체크리스트를 주어 그 자리에서 완성하게 한다.",
-        "searchTargets": [
-          "추수감사절 기도문",
-          "2026 추수감사절 기도문",
-          "추수감사절 기도문 예시"
-        ],
-        "mustInclude": [
-          "주일예배용 대표기도와 가정예배용 기도문을 항목을 나눠 제시",
-          "기도문 구성 순서(감사→회개→중보→마침) 체크리스트",
-          "2026년 추수감사주일 날짜(확인 필요: 소속 교단·교회 공지)",
-          "대표기도 시 주의할 점(지식인 질문에서 묻는 기본 요소)"
-        ],
-        "mustAvoid": [
-          "안식일·이단 논쟁 등 교리 시비로 글을 끌어가지 않기",
-          "특정 교회 설교나 기도문을 출처 없이 그대로 가져오지 않기"
-        ],
-        "checkBefore": [
-          "2026년 추수감사주일 정확한 날짜 - 소속 교단 또는 교회 공식 공지 확인",
-          "인용하는 기도문 예시 출처 확인"
-        ],
-        "solves": [
-          "대표기도를 어떻게 구성해야 할지 모름 → 감사-회개-중보 순서 체크리스트로 제공",
-          "주일예배용과 가정예배용 기도문이 섞여 헷갈림 → 상황별로 나눠 정리"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "청년부 대표기도 작성하려는데 도와주세요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60901&docId=259699486&answerNo=2&qb=7LaU7IiY6rCQ7IKs7KCIIOq4sOuPhOusuCDso7zsnbzsmIjrsLAg6rCA7KCV7JiI67CwIOychO2VnA==",
-          "views": 26254,
-          "answers": 4,
-          "askedAt": "2016.09.02"
-        },
-        {
-          "title": "기독교에서 예배의 요소는 어떤것들이 있나....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60901&docId=223295449&answerNo=1&qb=7LaU7IiY6rCQ7IKs7KCIIOq4sOuPhOusuCDso7zsnbzsmIjrsLAg6rCA7KCV7JiI67CwIOychO2VnA==",
-          "views": 15921,
-          "answers": 2,
-          "askedAt": "2015.04.19"
-        },
-        {
-          "title": "왜 제 7일의안식교가 이단인가요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60906&docId=48031297&answerNo=10&qb=7LaU7IiY6rCQ7IKs7KCIIOq4sOuPhOusuCDso7zsnbzsmIjrsLAg6rCA7KCV7JiI67CwIOychO2VnA==",
-          "views": 11077,
-          "answers": 8,
-          "askedAt": "2008.06.15"
-        }
-      ]
-    },
-    {
-      "id": "af7c9f6e2a2aeeb2",
-      "urls": [
-        "https://semo-gif.tistory.com/entry/%EB%B9%84%ED%83%80%EB%AF%BCC-%ED%95%98%EB%A3%A8-%EA%B6%8C%EC%9E%A5%EB%9F%89%EA%B3%BC-%EB%B3%B5%EC%9A%A9-%EC%8B%9C%EA%B0%84%EF%BD%9C%EA%B3%A0%EC%9A%A9%EB%9F%89-%EB%B3%B5%EC%9A%A9-%EB%B6%80%EC%9E%91%EC%9A%A9%C2%B7%EC%8B%A0%EC%9E%A5%EA%B2%B0%EC%84%9D-%EC%9C%84%ED%97%98%C2%B7%EC%A3%BC%EC%9D%98-%EB%8C%80%EC%83%81"
-      ],
-      "guide": {
-        "direction": "검색자는 제품마다 1000·2000·3000mg으로 표시된 비타민C 중 실제 안전한 하루 상한선이 어디인지 헷갈려 막힌다. 고수 블로그 제목은 권장량·부작용·주의대상을 다뤘지만 D-마노스·철분·비타민D 등 다른 영양제와 함께 먹을 때 간격을 얼마나 둬야 하는지는 비워뒀다. 이 글은 권장량·상한섭취량을 표로 정리하고 병용 영양제별 복용 간격 체크리스트로 끝낸다.",
-        "searchTargets": [
-          "비타민c 하루 권장량",
-          "비타민c 하루권장량 메가도스",
-          "비타민c 하루 권장량 1000mg",
-          "비타민c 하루 섭취 권장량"
-        ],
-        "mustInclude": [
-          "성인 하루 권장량 수치(확인 필요: 2020 한국인 영양소 섭취기준)",
-          "하루 상한섭취량 수치(확인 필요: 식약처·2020 한국인 영양소 섭취기준)",
-          "1000·2000·3000mg 제품별 권장량 대비 초과 여부 비교표",
-          "신장결석 위험군(과거 결석 병력 등) 기준",
-          "D-마노스·철분·비타민D 등과 복용 간격(식후, 1~2시간 등)"
-        ],
-        "mustAvoid": [
-          "특정 제품명(투엑스트리플 등)을 광고처럼 단정 추천하지 않기",
-          "복용량을 의사 상담 없이 처방처럼 확정해서 안내하지 않기"
-        ],
-        "checkBefore": [
-          "성인 권장량·상한섭취량 수치 - 식약처 또는 2020 한국인 영양소 섭취기준 원자료 확인",
-          "신장결석 위험 관련 수치 - 관련 의학 자료·식약처 공지 확인"
-        ],
-        "solves": [
-          "제품마다 1000·2000·3000mg으로 달라 뭐가 맞는지 모름 → 권장량·상한선 비교표로 정리",
-          "다른 영양제와 같이 먹어도 되는지 불안 → 병용 간격 체크리스트 제공",
-          "고용량 먹으면 신장결석 생기나 걱정 → 위험군 여부로 구분해 제시"
-        ],
-        "actionTitles": [
-          "비타민c 하루 권장량 1000·2000·3000mg 기준 비교",
-          "비타민c 하루권장량 메가도스, 신장결석 위험 확인하기"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "비타민c 하루권장량",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70403&docId=432441076&answerNo=2&qb=67mE7YOA66+8YyDtlZjro6gg6raM7J6l65+JIOuzteyaqSDsi5zqsITqs6Dsmqnrn4k=",
-          "views": 1876,
-          "answers": 4,
-          "askedAt": "2022.11.11"
-        },
-        {
-          "title": "고용량 비타민C 와 디마노스 복용",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=50801&docId=487897138&answerNo=2&qb=67mE7YOA66+8YyDtlZjro6gg6raM7J6l65+JIOuzteyaqSDsi5zqsITqs6Dsmqnrn4k=",
-          "views": 216,
-          "answers": 2,
-          "askedAt": "2025.08.11"
-        },
-        {
-          "title": "발포 비타민C 고용량 복용 질문드립니다.",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8020302&docId=490210031&answerNo=3&qb=67mE7YOA66+8YyDtlZjro6gg6raM7J6l65+JIOuzteyaqSDsi5zqsITqs6Dsmqnrn4k=",
-          "views": 183,
-          "answers": 5,
-          "askedAt": "2025.11.16"
-        }
-      ]
-    },
-    {
-      "id": "5fae57891cc8889f",
-      "urls": [
-        "https://on.sano.co.kr/%ea%b0%90%ec%82%ac-%ec%b0%ac%ec%96%91-%ec%b6%94%ec%88%98%ea%b0%90%ec%82%ac%ec%a0%88%ec%97%90-%ec%9a%b8%eb%a6%bc-%ec%a3%bc%eb%8a%94-%ec%b0%ac%ec%86%a1%ea%b0%80%ec%99%80-ccm-%ec%b6%94%ec%b2%9c/"
-      ],
-      "guide": {
-        "direction": "추수감사절 예배 찬양 콘티를 짜야 하는 사람은 찬송가와 CCM 중 무엇을 어떤 순서로 배치할지부터 막힌다. 고수 블로그의 '추천' 제목은 곡을 나열만 하고 경배-찬양-감사-결단으로 이어지는 예배 흐름 순서나 악보·가사를 구하는 경로는 짚지 않는다. 이 글은 찬송가·CCM을 순서별 콘티표로 정리하고 악보·가사 구하는 방법까지 안내해 끝낸다.",
-        "searchTargets": [
-          "감사 찬양 콘티",
-          "감사 찬양 추천",
-          "감사 찬양 모음",
-          "감사 찬양 악보 모음"
-        ],
-        "mustInclude": [
-          "찬송가 제목과 장 번호(확인 필요: 찬송가책)",
-          "CCM 제목과 아티스트(확인 필요: 각 곡 정보)",
-          "경배-찬양-감사-결단 순서로 배치한 콘티 예시",
-          "악보·가사를 구하는 경로(교회음악 저작권 사이트 등, 확인 필요)"
-        ],
-        "mustAvoid": [
-          "저작권 있는 악보 이미지를 출처 없이 무단 첨부하지 않기"
-        ],
-        "checkBefore": [
-          "찬송가 장 번호·가사 정확성 - 찬송가책 원본 확인",
-          "CCM 사용 가능 범위 - CCLI 등 저작권 단체 확인"
-        ],
-        "solves": [
-          "추수감사 찬양 콘티를 어떻게 짜야 할지 모름 → 순서별 곡 배치 예시로 제공",
-          "찬송가만 쓸지 CCM도 섞을지 고민됨 → 혼합 콘티 예시로 정리",
-          "악보·가사 구하기 번거로움 → 구하는 경로 안내"
-        ],
-        "actionTitles": [
-          "추수감사 찬양 콘티, 찬송가·CCM 순서대로 배치하는 법",
-          "감사 찬양 추천 모음, 악보까지 한 번에 찾는 법"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "인도의 명절은 무엇인지 알려주세요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=130102&docId=163070978&answerNo=1&qb=6rCQ7IKsIOywrOyWkSDstpTsiJjqsJDsgqzsoIgg7Jq466a8IOyjvOuKlA==",
-          "views": 14633,
-          "answers": 2,
-          "askedAt": "2012.12.10"
-        },
-        {
-          "title": "인도 명절 음식",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=130102&docId=162399938&answerNo=1&qb=6rCQ7IKsIOywrOyWkSDstpTsiJjqsJDsgqzsoIgg7Jq466a8IOyjvOuKlA==",
-          "views": 11929,
-          "answers": 1,
-          "askedAt": "2012.12.10"
-        },
-        {
-          "title": "(내공 100 )하나님이 살아 있을까요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60901&docId=119898230&answerNo=20&qb=6rCQ7IKsIOywrOyWkSDstpTsiJjqsJDsgqzsoIgg7Jq466a8IOyjvOuKlA==",
-          "views": 11268,
-          "answers": 17,
-          "askedAt": "2010.11.26"
-        }
-      ]
-    },
-    {
-      "id": "53a7488d4c8ae1ce",
-      "urls": [
-        "https://yeeso.tistory.com/entry/%EC%97%B0%EB%A7%90%EC%A0%95%EC%82%B0-%ED%99%98%EA%B8%89%EA%B8%88-%EB%A7%88%EC%9D%B4%EB%84%88%EC%8A%A4-%EC%9D%98%EB%AF%B8%EF%BD%9C%EC%B0%A8%EA%B0%90%EC%A7%95%EC%88%98%EC%84%B8%EC%95%A1-%ED%94%8C%EB%9F%AC%EC%8A%A4%C2%B7%EB%A7%88%EC%9D%B4%EB%84%88%EC%8A%A4%EC%99%80-%EC%B6%94%EA%B0%80-%EB%82%A9%EB%B6%80-%ED%99%95%EC%9D%B8-%EB%B0%A9%EB%B2%95"
-      ],
-      "guide": {
-        "direction": "지식인 질문처럼 '차감징수세액'이 마이너스로 뜨면 환급인지 추가 납부인지 몰라 혼란스러워하는 지점을 짚는다. 고수 글은 제목에서 부호 의미를 던지지만 중도퇴사·미리보기 오차 등 실제 사례별 판단 기준은 비어 있다. 부호별 의미표와 손택스 조회 경로, 지급일·미지급 대응 순서까지 넣어 글 하나로 판단을 끝내게 한다.",
-        "searchTargets": [
-          "연말정산 환급금 조회",
-          "연말정산 환급금 조회 손택스",
-          "연말정산 환급금 지급일",
-          "연말정산 환급금 미지급"
-        ],
-        "mustInclude": [
-          "차감징수세액 플러스=추가납부, 마이너스=환급 부호 비교표 (확인 필요: 국세청 안내)",
-          "손택스 앱에서 연말정산 환급금 조회하는 메뉴 경로",
-          "환급금 지급일(통상 2월 급여 반영)과 미지급 시 확인 절차 (확인 필요: 국세청 공지)",
-          "중도퇴사자 연말정산 환급 처리 방식 차이"
-        ],
-        "mustAvoid": [
-          "미리보기 결과만으로 실제 환급액을 확정적으로 예측하는 것",
-          "경정청구(과거년도 숨은 환급)와 올해 정기 연말정산을 혼동"
-        ],
-        "checkBefore": [
-          "차감징수세액 부호의 정확한 의미 - 국세청 홈택스/손택스 공식 안내 확인",
-          "연말정산 환급금 지급 시기 - 회사 급여지급 공지 및 국세청 안내 확인"
-        ],
-        "solves": [
-          "차감징수세액이 마이너스로 나오는데 환급인지 추가납부인지 몰라 불안함 → 부호별 의미표로 바로 판단",
-          "미리보기 결과와 실제 환급액이 다름 → 왜 차이가 나는지와 손택스에서 실제 금액 확인하는 법 안내",
-          "중도퇴사자인데 환급을 못 받았음 → 중도퇴사 연말정산 환급 처리 흐름 설명"
-        ],
-        "actionTitles": [
-          "연말정산 환급금 조회, 손택스에서 바로 확인하는 방법",
-          "차감징수세액 마이너스면 환급인지 추가납부인지 구분하기",
-          "연말정산 환급금 지급일과 미지급 시 조회하는 방법 총정리"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "연말정산 환급금",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40309&docId=492760249&answerNo=14&qb=7Jew66eQ7KCV7IKw7ZmY6riJ6riI",
-          "views": 1451,
-          "answers": 15,
-          "askedAt": "2026.11.03"
-        },
-        {
-          "title": "연말정산 토스 환급금",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40311&docId=494844079&answerNo=9&qb=7Jew66eQ7KCV7IKw7ZmY6riJ6riI",
-          "views": 619,
-          "answers": 10,
-          "askedAt": "2026.10.30"
-        },
-        {
-          "title": "연말정산 환급금 조회 결과, 실제와 차이 많....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40309&docId=495730635&answerNo=8&qb=7Jew66eQ7KCV7IKw7ZmY6riJ6riI",
-          "views": 203,
-          "answers": 10,
-          "askedAt": "2026.11.03"
-        }
-      ]
-    },
-    {
-      "id": "38c28056cec081bf",
-      "urls": [
-        "https://moncar.tistory.com/260"
-      ],
-      "guide": {
-        "direction": "지식인에서도 반복되는 '몇 km·몇 년마다 갈아야 하나' 질문처럼, 교체주기를 지나쳤을 때 실제로 무슨 문제가 생기는지 몰라 불안한 지점을 짚는다. 고수 글은 5천 vs 1만km 실험 수치를 던지지만 가혹조건·차종별 차이, 시간(1년) 기준은 비어 있다. km·시간 기준 비교표와 지나쳤을 때 증상 체크리스트로 내 차에 맞는 주기를 바로 판단하게 한다.",
-        "searchTargets": [
-          "자동차 엔진오일 교체주기 시간",
-          "자동차 엔진오일 교체주기 지나면",
-          "자동차 엔진오일 경고등",
-          "현대자동차 엔진오일"
-        ],
-        "mustInclude": [
-          "5천km vs 1만km 실험 수치 비교표 (확인 필요: 실험 출처)",
-          "단거리·공회전 많은 가혹조건 기준 교체주기 단축표",
-          "km와 별개로 '1년' 시간 기준 교체를 권장하는 이유",
-          "교체주기 지나면 생기는 증상(소음·연비저하) 체크리스트",
-          "현대자동차 등 제조사 권장 주기 vs 정비소 권장 주기 비교"
-        ],
-        "mustAvoid": [
-          "특정 브랜드 오일 제품을 광고성으로 성능 과장해 단정 추천",
-          "엔진 종류·가혹조건을 무시하고 모든 차종에 같은 주기를 적용"
-        ],
-        "checkBefore": [
-          "차량 매뉴얼·제조사 공식 권장 교체주기 확인 (현대자동차 서비스센터 공지 등)",
-          "5천 vs 1만km 실험 데이터의 출처와 테스트 조건 확인"
-        ],
-        "solves": [
-          "5천km랑 1만km 중 뭐가 맞는지 헷갈림 → 실험 결과 수치로 두 주기의 실제 차이를 비교",
-          "교체주기 지나면 어떻게 되는지 모름 → 지나쳤을 때 나타나는 증상과 위험을 정리",
-          "경고등 뜨면 무조건 바로 가야 하는지 헷갈림 → 경고등 의미와 대응 순서 안내"
-        ],
-        "actionTitles": [
-          "자동차 엔진오일 교체주기 5천 vs 1만km 실험 비교",
-          "엔진오일 교체주기 지나면 생기는 증상 바로 확인하는 법"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "자동차 엔진 튜닝쪽 잘아시는분(터보,슈퍼차....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=81104&docId=74528945&answerNo=1&qb=7J6Q64+Z7LCoIOyXlOynhOyYpOydvCDqtZDssrTso7zquLAg7Iuk7ZeYIO2MkOuLqA==",
-          "views": 22435,
-          "answers": 1,
-          "askedAt": "2004.03.26"
-        },
-        {
-          "title": "정차시 중립(N) 과 드라이브(D) 중 뭐가 좋은가....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=811&docId=145372439&answerNo=2&qb=7J6Q64+Z7LCoIOyXlOynhOyYpOydvCDqtZDssrTso7zquLAg7Iuk7ZeYIO2MkOuLqA==",
-          "views": 15286,
-          "answers": 2,
-          "askedAt": "2012.02.10"
-        },
-        {
-          "title": "엔진오일교환주기가 궁금해서요^^",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=811&docId=263967639&answerNo=1&qb=7J6Q64+Z7LCoIOyXlOynhOyYpOydvCDqtZDssrTso7zquLAg7Iuk7ZeYIO2MkOuLqA==",
-          "views": 7464,
-          "answers": 1,
-          "askedAt": "2016.11.08"
-        }
-      ]
-    },
-    {
-      "id": "6cf76a72ca2da642",
-      "urls": [
-        "https://funding.tistory.com/entry/%EC%9E%AC%EA%B1%B4%EC%B6%95-%EB%B6%84%EB%8B%B4%EA%B8%88-%EA%B3%84%EC%82%B0%EC%9D%98-%EA%B3%B5%EC%8B%9D%EC%9D%B4-%EB%8B%AC%EB%9D%BC%EC%A1%8C%EB%8B%A4-2026%EB%85%84-11%EC%9B%94-%EC%9D%80%EB%A7%88-%E2%80%98%EC%9E%AC%EC%B4%88%ED%99%98-46%EC%96%B5%E2%80%99%EC%9D%B4-%EB%A7%90%ED%95%B4%EC%A3%BC%EB%8A%94-%EB%82%B4-%EC%B2%AD%EA%B5%AC%EC%84%9C%EC%9D%98-%EC%A7%84%EC%A7%9C-%EC%A0%95%EC%B2%B4"
-      ],
-      "guide": {
-        "direction": "'은마는 왜 재건축이 안 되나'라는 지식인 질문처럼, 분담금이 왜 이렇게 큰지·계산 구조가 뭔지 몰라 막막한 지점을 짚는다. 고수 글은 '재초환 4.6억'이라는 숫자를 던지지만 일반 분담금과의 차이, 타 단지(목동·반포) 수준 비교는 비어 있다. 계산 공식 단계와 타 단지 비교표, 대출 가능 여부까지 정리해 내 아파트 분담금을 가늠하게 한다.",
-        "searchTargets": [
-          "재건축 분담금 뜻",
-          "은마 재건축 분담금",
-          "재건축 분담금 대출",
-          "목동 재건축 분담금"
-        ],
-        "mustInclude": [
-          "은마 재초환 부담금 4.6억, 2026년 11월 발표 시점 (확인 필요: 원문 기사)",
-          "재초환 부담금과 일반 공사비 분담금의 차이 비교표",
-          "분담금 계산 공식 단계별 정리 (확인 필요: 국토부/조합 공지)",
-          "목동·반포·강남 등 타 단지 분담금 수준 비교 (확인 필요: 각 조합 공지)",
-          "분담금 대출(이주비·중도금) 가능 여부 (확인 필요: 은행/조합 공지)"
-        ],
-        "mustAvoid": [
-          "은마아파트 재건축 진행 여부·시기를 확정적으로 예측",
-          "재건축과 재개발 용어를 혼용(지식인에서도 혼동이 큰 부분)",
-          "타 단지(반포·목동 등) 분담금 수치를 은마와 단순 비교해 오해 유발"
-        ],
-        "checkBefore": [
-          "은마아파트 재초환 4.6억 수치의 출처와 산정 기준 - 원문 기사/조합 공지 확인",
-          "분담금 계산 공식 변화 여부 - 국토부 또는 관련 보도자료 확인"
-        ],
-        "solves": [
-          "은마아파트는 왜 재건축이 안 되는지 → 사업성·분담금 부담이 지연 원인임을 계산 구조로 설명",
-          "재건축 분담금이 정확히 뭔지 모름 → 재초환 부담금과 공사비 분담금의 차이를 구분해 정리",
-          "분담금이 너무 커서 대출이 가능한지 궁금함 → 분담금 대출 가능 여부와 확인 경로 안내"
-        ],
-        "actionTitles": [
-          "은마 재건축 분담금 대출, 조건과 한도 확인하는 법",
-          "목동 재건축 분담금 수준, 은마와 비교해 보는 계산법"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "은마아파트 재건축 안하고 있는 원인이",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40201&docId=355189562&answerNo=1&qb=7J6s6rG07LaVIOu2hOuLtOq4iCDqs7Xsi50g64us65287KGM64ukIOydgOuniA==",
-          "views": 19489,
-          "answers": 1,
-          "askedAt": "2020.05.03"
-        },
-        {
-          "title": "재건축 & 재개발...",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=402&docId=35093492&answerNo=1&qb=7J6s6rG07LaVIOu2hOuLtOq4iCDqs7Xsi50g64us65287KGM64ukIOydgOuniA==",
-          "views": 1825,
-          "answers": 1,
-          "askedAt": "2008.10.31"
-        },
-        {
-          "title": "대치동 은마아파트는 구축인데 왜 재건축 안....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=402&docId=490389785&answerNo=3&qb=7J6s6rG07LaVIOu2hOuLtOq4iCDqs7Xsi50g64us65287KGM64ukIOydgOuniA==",
-          "views": 1098,
-          "answers": 6,
-          "askedAt": "2025.11.25"
-        }
-      ]
-    },
-    {
-      "id": "beca11fb48a02d7d",
-      "urls": [
-        "https://jab-guyver.co.kr/7420"
-      ],
-      "guide": {
-        "direction": "ASRock 사용자는 BIOS 업데이트·fTPM 설정 중 BitLocker가 복구키를 요구해 잠길까 걱정하거나, fTPM을 켜도 TPM이 인식 안 되는(x570 사례) 지점에서 막힌다. '경고 해결' 류 제목은 업데이트 전 복구키 백업과 보호 일시중지의 선후 순서, 보드 세대별 fTPM 메뉴 위치 차이까지는 못 짚었다. 이 글은 백업→보호 일시중지→Instant Flash→fTPM 켜기→재인식 확인의 체크리스트로 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "BitLocker 복구키 백업 방법(마이크로소프트 계정/USB/텍스트 파일 저장)",
-          "BitLocker 보호 일시중지 절차(제어판 또는 manage-bde 명령)",
-          "Instant Flash 진행 중 전원·USB 분리 주의사항",
-          "fTPM 활성화 후에도 인식 안 될 때 추가 확인(CSM·Secure Boot 설정)",
-          "ASRock 보드별 fTPM 메뉴 위치 차이(확인 필요: 보드 모델별 매뉴얼)"
-        ],
-        "mustAvoid": [
-          "Z87·B550·X570·B150M 등 세대가 다른 보드의 메뉴 구성을 동일하게 설명",
-          "개별 TPM 모듈과 펌웨어 fTPM을 구분 없이 혼용",
-          "BitLocker를 '그냥 끄면 된다'로 단순화해 복구키 분실 위험 누락"
-        ],
-        "checkBefore": [
-          "해당 ASRock 보드 모델의 BIOS 변경 로그·매뉴얼을 공식 지원 페이지에서 확인",
-          "BitLocker 복구키 확인 경로를 Microsoft 공식 계정 페이지(account.microsoft.com)에서 확인"
-        ],
-        "solves": [
-          "BIOS 업데이트 시 BitLocker 복구키 요구 경고가 뜬다 → 업데이트 전 백업·일시중지 순서를 제시",
-          "fTPM을 켜도 TPM이 인식 안 된다 → 보드별 메뉴 위치와 CSM/Secure Boot 점검 항목 제공",
-          "BitLocker를 꺼야 할지 BIOS만 업데이트하면 될지 헷갈린다 → 상황별 선택 기준 정리"
-        ],
-        "actionTitles": [
-          "ASRock BIOS 업데이트 전 BitLocker 복구키 백업하는 법",
-          "fTPM 설정 켜도 TPM 인식 안 될 때 확인할 것들"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "ASRock Z87 Pro3 메인보드 tpm활성화 질문",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=5020304&docId=393963121&answerNo=1&qb=YXNyb2NrIGJpb3MgYml0bG9ja2VyIHRwbSDqsr3qs6A=",
-          "views": 604,
-          "answers": 1,
-          "askedAt": "2021.07.06"
-        },
-        {
-          "title": "컴퓨터에서 이상한게 떠요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=101&docId=439635064&answerNo=2&qb=YXNyb2NrIGJpb3MgYml0bG9ja2VyIHRwbSDqsr3qs6A=",
-          "views": 250,
-          "answers": 2,
-          "askedAt": "2023.02.16"
-        },
-        {
-          "title": "애즈락 b550m 팬텀 tpm 질문드립니다",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10301&docId=485280154&answerNo=1&qb=YXNyb2NrIGJpb3MgYml0bG9ja2VyIHRwbSDqsr3qs6A=",
-          "views": 129,
-          "answers": 2,
-          "askedAt": "2025.05.17"
-        }
-      ]
-    },
-    {
-      "id": "103f208394a0e017",
-      "urls": [
-        "https://sweetonion1005.tistory.com/entry/%EB%8B%A4%ED%81%AC-%EC%84%9C%ED%81%B4-%EC%97%86%EC%95%A0%EB%8A%94-%EC%95%84%EC%9D%B4%ED%81%AC%EB%A6%BC-%EC%84%B1%EB%B6%84-%EC%84%A0%ED%83%9D%EB%B6%80%ED%84%B0-%EC%98%AC%EB%B0%94%EB%A5%B8-%EC%82%AC%EC%9A%A9%EB%B2%95%EA%B9%8C%EC%A7%80"
-      ],
-      "guide": {
-        "direction": "검색자는 크림을 써도 다크서클이 안 없어진다는 불만에서, 색소형과 혈관형을 구분 못 해 맞는 성분을 못 고르는 지점에 막힌다. '성분 선택부터 사용법까지' 류 제목은 눌러보기로 타입을 가르는 자가진단법과 타입별 기대치 차이를 구체적으로 못 짚었다. 이 글은 타입 자가진단 체크리스트와 성분표, 기간별 한계를 함께 줘서 끝낸다.",
-        "searchTargets": [
-          "다크서클 없애는법",
-          "다크서클 없애는 크림",
-          "다크서클 없애는법 시술"
-        ],
-        "mustInclude": [
-          "색소형·혈관형 다크서클 구분법(눌렀을 때 색이 변하는지 테스트)",
-          "색소형에 쓰는 성분(나이아신아마이드, 비타민C)",
-          "혈관형은 크림만으로는 효과가 제한적이라는 설명",
-          "오래되고 깊은 다크서클은 크림+생활습관 병행이 필요하다는 기준",
-          "크림으로 한계가 있을 때 고려하는 시술 옵션 간단 소개"
-        ],
-        "mustAvoid": [
-          "특정 제품을 '바로 없어진다'는 식으로 효능 과장",
-          "혈관형 다크서클을 색소형과 같은 성분으로 해결 가능하다고 혼동",
-          "레이저 등 시술 효과를 화장품 크림 효과처럼 설명"
-        ],
-        "checkBefore": [
-          "성분별 효능은 식약처 화장품 성분 정보나 피부과 공식 자료로 확인",
-          "시술 관련 언급 시 의료광고 규정에 저촉되는 과장 표현인지 확인"
-        ],
-        "solves": [
-          "다크서클 크림 써도 안 없어진다 → 색소형·혈관형 구분과 타입별 기대 효과 차이를 짚어준다",
-          "다크서클 없애는 크림 성분 뭘 봐야 하나 → 타입별 성분표를 제공한다",
-          "오래된 다크서클도 크림으로 되나 → 기간별 한계와 병행 방법을 알려준다"
-        ],
-        "actionTitles": [
-          "다크서클 없애는 크림 성분 나이아신아마이드 비교",
-          "다크서클 없애는법 시술까지 가야 하는 경우 확인법"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "다크서클없애는방법",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70306&docId=492875016&answerNo=5&qb=64uk7YGsIOyEnO2BtCDsl4bslaAg7JWE7J207YGs66a8IOyEseu2hA==",
-          "views": 2567,
-          "answers": 5,
-          "askedAt": "2026.07.29"
-        },
-        {
-          "title": "다크서클 크림",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8030104&docId=495615507&answerNo=1&qb=64uk7YGsIOyEnO2BtCDsl4bslaAg7JWE7J207YGs66a8IOyEseu2hA==",
-          "views": 756,
-          "answers": 4,
-          "askedAt": "2026.10.20"
-        },
-        {
-          "title": "다크써클 없애는 크림이나 앰플 알려주세요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8030104&docId=491274069&answerNo=4&qb=64uk7YGsIOyEnO2BtCDsl4bslaAg7JWE7J207YGs66a8IOyEseu2hA==",
-          "views": 627,
-          "answers": 5,
-          "askedAt": "2026.01.11"
-        }
-      ]
-    },
-    {
-      "id": "08385eae801d1bdf",
-      "urls": [
-        "https://wealti.tistory.com/entry/%EB%84%A4%EC%9D%B4%EB%B2%84%ED%8E%98%EC%9D%B4-%EC%82%AC%EC%9A%A9-%EC%A0%84-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%98%B5%EC%85%98-%ED%95%B4%EC%A0%9C-%EB%B0%A9%EB%B2%95%EF%BD%9C%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C-%EC%84%A4%EC%A0%95-%EC%9C%84%EC%B9%98"
-      ],
-      "guide": {
-        "direction": "검색자는 네이버페이 사용 중 개발자옵션을 끄라는 경고에 막혀 설정 위치를 못 찾거나, 꺼도 계속 차단되는 지점에서 헤맨다. '설정 위치' 류 제목은 제조사별 메뉴 경로 차이와 끈 뒤에도 안 풀릴 때의 추가 조치까지는 못 짚었다. 이 글은 기기별 경로와 끈 후 재확인 체크리스트로 끝낸다.",
-        "searchTargets": [
-          "네이버페이 개발자옵션 끄기",
-          "네이버페이 개발자옵션 끄는법",
-          "네이버페이 개발자 옵션 문제",
-          "네이버페이 개발자옵션 비활성화"
-        ],
-        "mustInclude": [
-          "개발자옵션 켜는 경로(설정>휴대전화 정보>빌드번호 7회 탭)와 끄는 경로",
-          "네이버페이가 개발자옵션을 보안 위험으로 차단하는 이유",
-          "제조사별 설정 메뉴명 차이(확인 필요: 삼성·기타 제조사 실제 화면)"
-        ],
-        "mustAvoid": [
-          "카카오페이 등 다른 간편결제 앱의 차단 방식과 혼동",
-          "루트 권한 해제와 개발자옵션 해제를 같은 조치로 혼용"
-        ],
-        "checkBefore": [
-          "네이버페이 공식 고객센터 공지에서 개발자옵션 차단 정책 문구 확인",
-          "삼성·기타 제조사 설정 메뉴명을 실제 화면으로 확인"
-        ],
-        "solves": [
-          "네이버페이 쓰려는데 개발자옵션 끄라고 뜬다 → 설정 위치와 끄는 절차를 안내한다",
-          "개발자옵션을 껐는데도 계속 막힌다 → 캐시삭제·재부팅 등 추가 체크리스트를 준다",
-          "개발자옵션이 어디 있는지 모른다 → 기기별 메뉴 경로를 짚어준다"
-        ],
-        "actionTitles": [
-          "네이버페이 개발자옵션 꺼도 안 될 때 확인할 것",
-          "네이버페이 개발자옵션 비활성화 끝까지 하는 법"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
-    },
-    {
-      "id": "ca486badecea6280",
-      "urls": [
-        "https://beyond-the-story.tistory.com/entry/%ED%9B%84%EC%BF%A0%EC%98%A4%EC%B9%B4-%EA%B3%B5%ED%95%AD%EC%97%90%EC%84%9C-%ED%95%98%EC%B9%B4%ED%83%80%EC%97%AD-%EA%B0%80%EB%8A%94-%EB%B0%A9%EB%B2%95%EF%BD%9C%EA%B5%AD%EB%82%B4%EC%84%A0-%EC%A7%80%ED%95%98%EC%B2%A0%C2%B7%EA%B5%AD%EC%A0%9C%EC%84%A0-%EB%B2%84%EC%8A%A4-%EA%B3%B5%EC%8B%9D-%EC%95%88%EB%82%B4"
-      ],
-      "guide": {
-        "direction": "검색자는 국제선 터미널에서 지하철을 바로 탈 수 없어 셔틀버스로 국내선까지 이동해야 하는 구조와, 버스 요금이 자료마다 270엔·310엔으로 다르게 나오는 점에서 막힌다. 고수 글은 지하철·버스를 나눠 설명했지만 승차장 번호(⑪번, ⑥⑦번)와 요금 차이를 한 표로 정리하지 않아 환승 경로가 여전히 헷갈린다. 이 글은 국제선·국내선 터미널별 경로·소요시간·요금을 표로 비교해 독자가 자신 상황에 맞는 이동 방법을 한 번에 고르게 한다.",
-        "searchTargets": [
-          "후쿠오카 공항 하카타역 가는법",
-          "후쿠오카 공항 하카타역 버스 티켓",
-          "후쿠오카 공항 하카타역 택시 요금",
-          "후쿠오카 공항 하카타역 지하철"
-        ],
-        "mustInclude": [
-          "하카타버스터미널 1층 ⑪번 승차장→국제선터미널, 약 15분, 요금 270엔·310엔 혼재(확인 필요: 니시테츠버스 공식요금)",
-          "국제선터미널에서 지하철 바로 탑승 불가, 셔틀버스로 국내선터미널 이동 후 지하철 환승",
-          "국내선터미널~하카타역 지하철 약 5분 소요",
-          "국제선터미널 ⑥⑦번 승차장에서 하카타역(치쿠시구치) 방향 버스 탑승",
-          "버스 요금 터치결제 가능 카드 여부(확인 필요: 니시테츠버스 공식 안내)"
-        ],
-        "mustAvoid": [
-          "국제선 터미널에서 지하철로 바로 간다고 써서 셔틀버스 환승 단계를 빠뜨리는 것",
-          "버스 요금을 270엔 또는 310엔 중 하나로 단정해 쓰는 것(자료 간 불일치, 확인 필요)"
-        ],
-        "checkBefore": [
-          "니시테츠버스 공식 홈페이지의 공항버스 요금·시간표",
-          "후쿠오카공항 공식 교통안내 페이지의 터미널 간 셔틀버스 운행 정보",
-          "하카타역 지하철(후쿠오카시 교통국) 공식 요금 정보"
-        ],
-        "solves": [
-          "국제선에서 지하철 바로 타나요? → 셔틀버스로 국내선까지 이동 후 지하철 환승하는 경로 안내",
-          "버스 요금 얼마인가요? → 승차장별 요금(270엔·310엔 혼재) 비교표로 정리",
-          "가장 빠른 방법은? → 지하철 약 5분, 버스 약 15분 소요시간 비교"
-        ],
-        "actionTitles": [
-          "후쿠오카공항 하카타역 가는법, 지하철·버스 요금 비교",
-          "후쿠오카공항 하카타역 택시 요금 미리 확인하고 비교하기"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "하카타역에서 후쿠오카 공항 가는 법 질문합....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=9020101&docId=454772596&answerNo=1&qb=7ZuE7L+g7Jik7Lm0IOqzte2VrSDtlZjsubTtg4Dsl60g6rCA64qUIOuwqeuyleq1reuCtOyEoA==",
-          "views": 8567,
-          "answers": 2,
-          "askedAt": "2023.09.16"
-        },
-        {
-          "title": "하카타역 -&gt; 후쿠오카 국제선 공항 버스로 가....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=9020101&docId=482784035&answerNo=1&qb=7ZuE7L+g7Jik7Lm0IOqzte2VrSDtlZjsubTtg4Dsl60g6rCA64qUIOuwqeuyleq1reuCtOyEoA==",
-          "views": 2223,
-          "answers": 3,
-          "askedAt": "2025.03.06"
-        },
-        {
-          "title": "후쿠오카 공항에서 하카타역까지, 지하철 타....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=9020101&docId=494425901&answerNo=2&qb=7ZuE7L+g7Jik7Lm0IOqzte2VrSDtlZjsubTtg4Dsl60g6rCA64qUIOuwqeuyleq1reuCtOyEoA==",
-          "views": 581,
-          "answers": 3,
-          "askedAt": "2026.07.23"
-        }
-      ]
-    },
-    {
-      "id": "28aeb39f9abae1bd",
-      "urls": [
-        "https://recreation.comingmoney.com/entry/%EC%9A%A9%EC%82%B0-%EC%B9%98%EC%9D%B4%EC%B9%B4%EC%99%80%EC%83%B5-%EC%95%84%EC%9D%B4%ED%8C%8C%ED%81%AC%EB%AA%B0-%EC%9C%84%EC%B9%98-%EC%9A%B4%EC%98%81%EC%8B%9C%EA%B0%84-%EC%9E%AC%EA%B3%A0-%EC%A3%BC%EC%B0%A8-%EB%8C%80%EA%B8%B0"
-      ],
-      "guide": {
-        "direction": "검색자는 네이버 사전예약이 되는지, 태블릿 현장 등록만 가능한지 운영 방식부터 헷갈려 한다. 고수 글은 위치·운영시간·재고·주차·대기를 나열했지만 시간대별 대기 체감(오전 9시 1,000명 이상 대 오후 4시대 여유)과 최근 입고 품목 확인 순서는 못 짚었다. 이 글은 예약 방식, 시간대별 대기·재고 사례, 품절 잘 되는 품목 체크 순서를 정리해 방문 전 판단을 끝내게 한다.",
-        "searchTargets": [
-          "용산 치이카와샵 예약",
-          "용산 치이카와샵 웨이팅",
-          "용산 치이카와샵 재고",
-          "용산 치이카와샵 오픈런"
-        ],
-        "mustInclude": [
-          "네이버 사전예약이 아닌 태블릿 현장 대기 등록 방식(확인 필요: 매장 최신 운영 공지)",
-          "오전 9시 기준 대기 1,000명 이상, 오전 10시경 재고 안내 시작한 사례",
-          "오후 4시, 오후 7시경에는 비교적 진열대 재고 여유 있었다는 답변 사례",
-          "11월 5일 입고 품목(극장판 세이렌, 섬 아저씨 굿즈 등) 확인 권장",
-          "주차 정보(확인 필요: 아이파크몰 주차 요금·연계 할인)"
-        ],
-        "mustAvoid": [
-          "예약 링크가 있는 것처럼 써서 현장 등록제 운영 방식과 혼동을 주는 것",
-          "특정 시점 재고를 고정 사실처럼 써서 이미 지난 정보로 오해하게 하는 것"
-        ],
-        "checkBefore": [
-          "아이파크몰·치이카와샵 공식 SNS·공지",
-          "네이버 예약 페이지의 현재 운영 방식(사전예약 여부)",
-          "최근 입고 공지(11월 5일 외 최신 일자)"
-        ],
-        "solves": [
-          "예약 가능한가요? → 태블릿 현장 등록제라는 점과 예약 링크 유무 명확히 안내",
-          "평일 웨이팅 4시간 걸리나요? → 시간대별 대기 체감 사례(오전·오후) 정리",
-          "오후에 가면 재고 있나요? → 시간대별 재고 확인 사례와 품절 잘 되는 품목 안내"
-        ],
-        "actionTitles": [
-          "용산 치이카와샵 예약 가능할까? 현장 대기 등록 확인하기",
-          "용산 치이카와샵 웨이팅 시간대별 비교, 오픈런 전 체크",
-          "용산 치이카와샵 재고 확인하는 법, 품절 잘 되는 품목 정리"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "용산 치이카와샵 웨이팅",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=30309&docId=495481970&answerNo=2&qb=7Jqp7IKwIOy5mOydtOy5tOyZgOyDtSDslYTsnbTtjIztgazrqrAg7J6s6rOgIOuMgOq4sA==",
-          "views": 259,
-          "answers": 2,
-          "askedAt": "2026.10.10"
-        },
-        {
-          "title": "용산 치이카와샵, 항상 열려 있나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=81302&docId=495450050&answerNo=1&qb=7Jqp7IKwIOy5mOydtOy5tOyZgOyDtSDslYTsnbTtjIztgazrqrAg7J6s6rOgIOuMgOq4sA==",
-          "views": 168,
-          "answers": 1,
-          "askedAt": "2026.10.07"
-        },
-        {
-          "title": "용산 치이카와샵 금요일",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=120135&docId=495436743&answerNo=1&qb=7Jqp7IKwIOy5mOydtOy5tOyZgOyDtSDslYTsnbTtjIztgazrqrAg7J6s6rOgIOuMgOq4sA==",
-          "views": 161,
-          "answers": 1,
-          "askedAt": "2026.10.06"
-        }
-      ]
-    },
-    {
-      "id": "902c69fa6ba0a8e3",
-      "urls": [
-        "https://hanbre.tistory.com/1921"
-      ],
-      "guide": {
-        "direction": "검색자는 QuickConnect가 느리거나 끊길 때 포트포워딩·VPN 같은 대안을 몰라 막힌다. 고수 글은 'QuickConnect 접속 안됨 → 외부 연결 방법'까지 제목으로 뽑았지만 NAS IP 고정, SMB 포트 차단, 이중 라우터 환경별 설정 순서는 구체적으로 안 풀었다. 이 글은 QuickConnect 실패 시 포트포워딩과 VPN 서버 두 경로를 네트워크 환경별로 나눠 설정 순서로 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "NAS IP 고정 설정 후 포트포워딩 해야 한다는 지식인 답변 근거",
-          "외부에서 SMB 포트는 기본적으로 막혀있어 그대로 연결 불가",
-          "공유기 VPN 서버 기능으로 먼저 VPN 연결 후 NAS 접근하는 대안 경로",
-          "모뎀-공유기-NAS 연결 구성(이중 라우터 여부)에 따라 설정 방식이 달라짐"
-        ],
-        "mustAvoid": [
-          "포트포워딩을 보안 위험 안내 없이 무조건 권장하는 것(외부에 SMB 등 포트 개방 노출)",
-          "공유기·모뎀 모델에 관계없이 동일한 설정값이 통한다고 단정하는 것"
-        ],
-        "checkBefore": [
-          "시놀로지 공식 지식베이스의 QuickConnect 문제해결 문서",
-          "사용 중인 공유기 제조사의 포트포워딩·VPN 서버 설정 가이드"
-        ],
-        "solves": [
-          "QuickConnect 왜 안되나요? → 이중 라우터 등 네트워크 구성별 원인 점검 순서 제공",
-          "포트포워딩 어떻게 하나요? → NAS IP 고정 후 설정 단계 정리",
-          "외부에서 SMB/AFP 접속하려면? → 포트포워딩 대신 VPN 서버 경로를 대안으로 제시"
-        ],
-        "actionTitles": [
-          "시놀로지 QuickConnect 접속 안될 때 원인별 확인하는 법",
-          "시놀로지 외부 접속 포트포워딩 설정하는 법 단계별 정리",
-          "시놀로지 나스 VPN으로 외부 접속하는 법, 포트포워딩 대안"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "synology(시놀로지) 외부에서 afp와 webdav접속방....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10503&docId=215151457&answerNo=1&qb=7Iuc64aA66Gc7KeAIHF1aWNrY29ubmVjdCDsoJHsho0g7JWI65CoIOyZuOu2gA==",
-          "views": 9110,
-          "answers": 1,
-          "askedAt": "2015.01.15"
-        },
-        {
-          "title": "Synology DS718+ 외부 액세스가 안됩니다.",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10801&docId=315872709&answerNo=1&qb=7Iuc64aA66Gc7KeAIHF1aWNrY29ubmVjdCDsoJHsho0g7JWI65CoIOyZuOu2gA==",
-          "views": 1222,
-          "answers": 4,
-          "askedAt": "2018.12.05"
-        },
-        {
-          "title": "synology nas 외부접속",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10801&docId=406086954&answerNo=1&qb=7Iuc64aA66Gc7KeAIHF1aWNrY29ubmVjdCDsoJHsho0g7JWI65CoIOyZuOu2gA==",
-          "views": 735,
-          "answers": 1,
-          "askedAt": "2021.12.02"
-        }
-      ]
-    },
-    {
-      "id": "410695d8b5f68747",
-      "urls": [
-        "https://shinnaburo.tistory.com/entry/jisoo-nayeon-trainee-friendship-2026"
-      ],
-      "guide": {
-        "direction": "검색자는 '틈만나면 지수'로 들어와 지수가 정확히 무슨 말을 했는지, 나연이 왜 그 발언에 언급됐는지를 궁금해한다. 고수 블로그 제목은 발언 요지(소속사 달라도 연습생끼리 왕래, 나연이 유명했던 이유)만 던지고 구체적 맥락은 풀지 않는다. 이 글은 방송 회차·출연진·발언 전후 맥락과 나연이 언급된 구체적 이유를 정리해 끝까지 읽히게 한다.",
-        "searchTargets": [
-          "틈만나면 지수"
-        ],
-        "mustInclude": [
-          "프로그램명 '틈만나면' 및 해당 회차 출연진(확인 필요: 방송사 공식 클립)",
-          "지수 발언 핵심 워딩: 소속사 달라도 연습생끼리 왕래했다는 내용",
-          "나연이 연습생 시절 유명했던 구체적 이유(확인 필요: 방송 원문)"
-        ],
-        "mustAvoid": [
-          "지수·나연 사생활이나 친분 관계를 임의로 추측해 서술"
-        ],
-        "checkBefore": [
-          "방송사 공식 클립이나 보도 원문에서 지수 발언의 정확한 워딩 확인",
-          "나연 관련 언급이 정확히 어떤 맥락(칭찬·일화 등)인지 원문에서 재확인"
-        ],
-        "solves": [
-          "틈만나면 지수가 무슨 말을 했는지 궁금함 → 발언 전후 맥락과 요지를 정리해 전달",
-          "나연이 왜 언급됐는지 모름 → 지수가 밝힌 구체적 이유를 명확히 설명"
-        ],
-        "actionTitles": [
-          "틈만나면 지수 발언 전체 정리, 나연 언급 이유 확인"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
-    },
-    {
-      "id": "2008fd26afbada37",
-      "urls": [
-        "https://hohoblog.co.kr/keytruda-qlex-alteogen-sales-milestones/"
-      ],
-      "guide": {
-        "direction": "검색자는 알테오젠이 머크의 키트루다 SC(피하주사) 매출에서 '실제로 언제' 돈을 받는지, 마일스톤과 로열티 구조를 몰라 막혀 있다. 고수 블로그 제목은 질문만 던지고 계약 구조·승인 현황·지급 조건을 구체적으로 풀지 않는다. 이 글은 머크-알테오젠 계약의 마일스톤/로열티 구분과 SC 제형 승인 현황, 예상 지급 시점을 표로 정리해 끝낸다.",
-        "searchTargets": [
-          "키트루다 관련주"
-        ],
-        "mustInclude": [
-          "알테오젠-머크(MSD) 계약 구조: 마일스톤 지급과 로열티 지급 구분(확인 필요: 공시자료)",
-          "키트루다 SC 제형 FDA·EMA 승인 현재 진행 상태(확인 필요: 머크·FDA 발표)",
-          "알테오젠이 키트루다 관련주로 분류되는 이유: ALT-B4 플랫폼 기술"
-        ],
-        "mustAvoid": [
-          "셀트리온 제품인 짐펜트라와 머크의 키트루다를 같은 매출 구조로 혼동"
-        ],
-        "checkBefore": [
-          "전자공시(DART) 원문에서 알테오젠-머크 계약의 마일스톤·로열티 조건 확인",
-          "키트루다 SC 제형 FDA/EMA 승인 현재 단계 재확인"
-        ],
-        "solves": [
-          "키트루다 SC 매출이 나면 바로 알테오젠이 돈 받는지 궁금함 → 로열티 지급 조건과 시점 구조 정리",
-          "알테오젠이 왜 키트루다 관련주로 묶이는지 모름 → ALT-B4 플랫폼과 계약 관계 설명"
-        ],
-        "actionTitles": [
-          "키트루다 관련주 알테오젠 로열티 지급 시점 확인하기",
-          "키트루다 관련주 알테오젠 매출 반영 시점 미리 계산하기"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "바이오주 ㅊㅊ",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=494817531&answerNo=3&qb=7YKk7Yq466Oo64ukIOq0gOugqOyjvCDslYzthYzsmKTsoKAg66+46rWtIOuouO2BrA==",
-          "views": 246,
-          "answers": 5,
-          "askedAt": "2026.08.20"
-        }
-      ]
-    },
-    {
-      "id": "10edbbe07de77787",
-      "urls": [
-        "https://cogone.tistory.com/877"
-      ],
-      "guide": {
-        "direction": "검색자는 허리·목 디스크 증상이 있을 때 신경외과와 정형외과 중 어디부터 가야 하는지, CT로 충분한지 MRI가 필요한지 헷갈려 있다. 고수 블로그 제목은 '차이 5가지'만 제시하고 증상별로 어느 과부터 가야 하는지, CT·MRI 선택 기준은 구체적으로 알려주지 않는다. 이 글은 증상별 진료과 선택 기준과 CT/MRI 선택 기준, 검사·치료 진행 순서를 표로 정리해 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "신경외과와 정형외과의 역할 차이(신경 압박·수술 담당 여부 등)",
-          "CT와 MRI 검사 선택 기준(지식인 상담의사 답변: CT로도 신경 압박 판단 가능하다는 내용 포함)",
-          "증상별(다리 저림·마비 등) 진료과 선택 가이드",
-          "교통사고 후 통증의학과에서 정형외과·신경외과로 전환하는 기준"
-        ],
-        "mustAvoid": [
-          "특정 병원·의사 이름을 추천처럼 명시해 광고성으로 보이게 서술",
-          "지식인 답변만으로 디스크 수술 필요 여부를 단정적으로 진단",
-          "교통사고 보험 처리 절차와 진료과 선택 기준을 혼동해 법적 조언처럼 서술"
-        ],
-        "checkBefore": [
-          "지식인 상담의사(대한의사협회) 답변 원문에서 CT·MRI 역할 차이 재확인",
-          "신경외과·정형외과의 공식 진료 범위(학회·병원 안내자료)에서 재확인"
-        ],
-        "solves": [
-          "허리디스크일 때 신경외과 갈지 정형외과 갈지 모름 → 증상별 진료과 선택 기준 정리",
-          "CT로 디스크·신경 압박 확인이 가능한지 궁금함 → CT·MRI 검사 선택 기준 비교",
-          "교통사고 후 어느 과로 옮겨야 하는지 모름 → 통증의학과에서 전환하는 기준 정리"
-        ],
-        "actionTitles": [
-          "신경외과 정형외과 차이 확인, 디스크 증상별 선택법",
-          "허리디스크 CT MRI 검사 선택 기준 쉽게 비교하는 법",
-          "목디스크 검사 순서부터 진료과 선택까지 완벽 체크리스트"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "허리 CT 검사로 디스크나 신경 압박 여부를 확....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70107&docId=491093812&answerNo=2&qb=7Iug6rK97Jm4IOygle2YleyZuCDrlJTsiqTtgawg6rKA7IKsIOy5mOujjA==",
-          "views": 703,
-          "answers": 3,
-          "askedAt": "2026.01.02"
-        },
-        {
-          "title": "허리디스크 증상, 허리/엉덩이 통증",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70106&docId=495509635&answerNo=4&qb=7Iug6rK97Jm4IOygle2YleyZuCDrlJTsiqTtgawg6rKA7IKsIOy5mOujjA==",
-          "views": 476,
-          "answers": 10,
-          "askedAt": "2026.10.12"
-        },
-        {
-          "title": "목디스크이 있으면 어떤 검사를 받아야 하나....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70108&docId=494162647&answerNo=2&qb=7Iug6rK97Jm4IOygle2YleyZuCDrlJTsiqTtgawg6rKA7IKsIOy5mOujjA==",
-          "views": 463,
-          "answers": 2,
-          "askedAt": "2026.07.06"
-        }
-      ]
-    },
-    {
-      "id": "ef9c73d4d6ce65c3",
-      "urls": [
-        "https://supercoms.tistory.com/entry/%EC%84%9C%EB%A1%A0"
-      ],
-      "guide": {
-        "direction": "검색자는 보고서·논증문·최후진술서를 쓰다가 서론과 본론을 어디서 끊어야 할지, 서론에 뭘 넣어야 할지 몰라 검색한다. 고수 글 제목이 '서론' 하나뿐이라 구분 기준이나 실제 예시가 없다. 보고서용·논증문용·최후진술용 서론을 상황별로 나눠 문단 구분 기준과 체크리스트로 제시해 바로 쓰게 한다.",
-        "searchTargets": [
-          "서론 뜻",
-          "서론 본론 결론",
-          "서론 예시",
-          "서론 쓰는법"
-        ],
-        "mustInclude": [
-          "서론-본론-결론 3단 구조 문단 구분표",
-          "보고서 서론과 논증문 서론의 차이 예시",
-          "피고인 최후진술 서론 작성법(자기소개 불필요 등 지식인 사례)",
-          "서론이 길어질 때 줄이는 기준(서론이 길다 뜻)"
-        ],
-        "mustAvoid": [
-          "공간서론(건축·논문 전문용어)과 혼동해서 섞어 쓰기",
-          "서로네일 같은 동음이의 검색어를 본문에 억지로 끼워넣기",
-          "영어 에세이 서론 쓰는법을 국어 글쓰기와 구분 없이 설명"
-        ],
-        "checkBefore": [
-          "서론 본론 결론 각 단계 정의를 국어 작문 가이드로 재확인"
-        ],
-        "solves": [
-          "서론 본론 문단 구분이 안 됨 → 3단 구조 구분표로 해결",
-          "논증글 서론에 뭘 써야 하는지 모름 → 문제·입장 제시 체크리스트 제공",
-          "서론이 늘어져서 지루해짐(서론이 길다 뜻) → 적정 분량 기준 제시"
-        ],
-        "actionTitles": [
-          "논증글 서론 쓰는법과 서론 본론 결론 구조 체크리스트"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "예시 주장하는 글쓰기 서론 개요 작성방법",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=11080105&docId=493573526&answerNo=1&qb=7ISc66Gg",
-          "views": 395,
-          "answers": 1,
-          "askedAt": "2026.05.27"
-        },
-        {
-          "title": "보고서 서론 문단구분",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=30705&docId=490344529&answerNo=1&qb=7ISc66Gg",
-          "views": 126,
-          "answers": 1,
-          "askedAt": "2025.11.23"
-        },
-        {
-          "title": "서론 본론 결론 쓰는방법",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=11080105&docId=495193400&answerNo=1&qb=7ISc66Gg",
-          "views": 110,
-          "answers": 2,
-          "askedAt": "2026.09.17"
-        }
-      ]
-    },
-    {
-      "id": "097de2970679baf0",
-      "urls": [
-        "https://snappick.tistory.com/entry/chair-brand-ranking-by-use"
-      ],
-      "guide": {
-        "direction": "검색자는 사무용·학생용·게임용 의자를 같은 기준으로 비교하다가 안마의자·식탁의자 브랜드까지 뒤섞여 뭘 봐야 할지 막힌다. 고수 글 제목은 키워드만 나열해 실제 용도별 브랜드 비교표가 없다. 지식인에 실제 언급된 시디즈·네오체어·체어스코 등을 용도별 표로 정리해 바로 고르게 한다.",
-        "searchTargets": [
-          "사무용 의자 브랜드",
-          "의자 브랜드 순위",
-          "안마의자 브랜드 순위",
-          "고급 의자 브랜드"
-        ],
-        "mustInclude": [
-          "시디즈 vs 네오체어 vs 체어스코 사무용/학생용 비교",
-          "사무용·학생용·게임용 의자 용도별 구분표",
-          "풀메쉬 소재 특징과 높이조절 기능 설명",
-          "브랜드형과 일반형 가격 차이 이유(보증·AS 기간 중심, 구체 수치는 확인 필요: 각 브랜드 공식몰)"
-        ],
-        "mustAvoid": [
-          "안마의자 브랜드 순위와 사무용 의자 브랜드 순위를 같은 표에 섞기",
-          "디시인사이드 여론을 공식 순위처럼 수치화해서 포장하기"
-        ],
-        "checkBefore": [
-          "시디즈·네오체어·체어스코 등 모델명·가격은 각 브랜드 공식몰에서 재확인"
-        ],
-        "solves": [
-          "사무용·학생용·게임용 의자가 뭐가 다른지 모름 → 용도별 비교표로 해결",
-          "브랜드마다 가격이 왜 다른지 모름 → AS/내구성 비교로 해결",
-          "안마의자·식탁의자 브랜드까지 섞여 검색됨 → 용도별로 분리 정리"
-        ],
-        "actionTitles": [
-          "사무용 의자 브랜드 순위 학생용과 비교해서 고르는 법",
-          "고급 의자 브랜드 풀메쉬 종류 높이조절까지 비교하기"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "사무용,학생용,컴퓨터용(게임용) 의자 비교",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=108&docId=320653370&answerNo=3&qb=7J2Y7J6QIOu4jOuenOuTnCDsgqzrrLTsmqkg7LGF7IOBIO2VmeyDneyaqQ==",
-          "views": 3692,
-          "answers": 3,
-          "askedAt": "2019.02.08"
-        },
-        {
-          "title": "학생용 의자는 어디 브랜드가 좋은가요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=50501&docId=414784005&answerNo=1&qb=7J2Y7J6QIOu4jOuenOuTnCDsgqzrrLTsmqkg7LGF7IOBIO2VmeyDneyaqQ==",
-          "views": 1091,
-          "answers": 6,
-          "askedAt": "2022.03.15"
-        },
-        {
-          "title": "의자 3개중에 골라줘여",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=80802&docId=476196826&answerNo=3&qb=7J2Y7J6QIOu4jOuenOuTnCDsgqzrrLTsmqkg7LGF7IOBIO2VmeyDneyaqQ==",
-          "views": 333,
-          "answers": 3,
-          "askedAt": "2026.02.14"
-        }
-      ]
-    },
-    {
-      "id": "5e2de056b3ed10c8",
-      "urls": [
-        "https://by.infotoktok.com/7663"
-      ],
-      "guide": {
-        "direction": "검색자는 내 보험 가입경력이 몇 년 인정됐는지, 상대방 차가 보험에 들었는지, 책임보험만 가입된 경우 대물처리를 어떻게 하는지 막혀서 검색한다. 고수 글 제목은 '확인방법'이라고만 해 무엇을 어디서 확인하는지 안 알려준다. 본인 확인·상대방 확인·책임보험만 가입된 경우를 상황별로 나눠 확인 순서로 알려줘 끝내게 한다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "본인 가입 확인 방법(보험사 콜센터 문의, 보장분석전산 조회)",
-          "상대방 차량 보험 가입 여부 확인 방법(사고 시 상대 보험사 확인)",
-          "책임보험만 가입된 경우 대물배상 처리 순서(가해자 보험사 확인, 지급명령 신청 등)",
-          "가입경력 확인 시 등급 적용 기준(본인 명의 vs 가족 명의 운전자 범위)"
-        ],
-        "mustAvoid": [
-          "보험사기 의심 신고 절차와 단순 가입 여부 확인을 혼동해 설명",
-          "특정 보험사만 유리하게 소개하는 식의 광고성 서술"
-        ],
-        "checkBefore": [
-          "보장분석전산·가입경력 조회 절차는 보험사 콜센터 또는 공식 앱 공지로 재확인"
-        ],
-        "solves": [
-          "상대방 차가 보험에 들었는지 모름 → 가해자 보험사 확인하는 방법 제시",
-          "내 가입경력이 몇 년 인정됐는지 모름 → 콜센터 확인 절차 안내",
-          "책임보험만 가입된 경우 대물처리 방법 모름 → 처리 순서 단계별 안내"
-        ],
-        "actionTitles": [
-          "자동차보험 가입 여부 확인방법 상대방까지 조회하기",
-          "자동차보험 가입경력확인 등급 적용까지 한번에 보기",
-          "책임보험 가입여부 확인하고 대물 처리 순서 정리하기"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "자동차보험 가입경력확인",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=401030202&docId=485876280&answerNo=6&qb=7J6Q64+Z7LCo67O07ZeYIOyXrOu2gCDtmZXsnbjrsKnrspU=",
-          "views": 3421,
-          "answers": 9,
-          "askedAt": "2025.06.19"
-        },
-        {
-          "title": "자동차보험가입확인",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=401030202&docId=486262274&answerNo=5&qb=7J6Q64+Z7LCo67O07ZeYIOyXrOu2gCDtmZXsnbjrsKnrspU=",
-          "views": 1915,
-          "answers": 7,
-          "askedAt": "2025.06.17"
-        },
-        {
-          "title": "책임보험만 가입되어있는경우 대물",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=401030202&docId=495751957&answerNo=4&qb=7J6Q64+Z7LCo67O07ZeYIOyXrOu2gCDtmZXsnbjrsKnrspU=",
-          "views": 667,
-          "answers": 6,
-          "askedAt": "2026.10.30"
-        }
-      ]
-    },
-    {
-      "id": "b8181050b80bf34d",
-      "urls": [
-        "https://hohoblog.co.kr/semiconductor-neon-gas-posco-temc/"
-      ],
-      "guide": {
-        "direction": "투자자는 '왜 제철소에서 반도체용 네온가스가 나오는지'와 '포스코홀딩스·티이엠씨가 왜 같이 묶이는지'를 궁금해하지만 고수 글 제목은 질문만 던지고 공정 원리와 두 회사의 실제 관계는 안 풀었다. 이 글은 제철 공정 부산물로 네온가스가 나오는 원리, 티이엠씨의 네온가스 정제·공급 사업, 포스코홀딩스와의 관계를 표로 정리해 끝까지 읽히게 한다. 매수 추천이 아니라 관계도·공정 설명으로 신뢰를 준다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "광양제철소 공정에서 네온가스가 부산물로 나오는 원리 설명",
-          "반도체 공정(엑시머 레이저)에서 네온가스가 쓰이는 이유",
-          "티이엠씨의 네온가스 정제·공급 사업 비중(확인 필요: 사업보고서·DART)",
-          "포스코홀딩스와 티이엠씨의 지분·공급계약 관계(확인 필요: 전자공시)",
-          "해외(러시아·우크라이나) 네온가스 수급 이슈와 국내 대체 생산 의미(확인 필요: 원문 기사)"
-        ],
-        "mustAvoid": [
-          "네온가스 이슈=주가 급등 보장처럼 과장하기",
-          "헬륨 등 다른 희귀가스 관련주와 혼동하기"
-        ],
-        "checkBefore": [
-          "포스코홀딩스-티이엠씨 실제 지분·계약 관계(전자공시시스템 DART)",
-          "광양제철소 네온가스 생산 공정 사실 여부(포스코 공식 자료·원문 기사)"
-        ],
-        "solves": [
-          "제철소에서 왜 네온가스가 나오는지 모르겠다 → 공정 부산물 원리로 설명",
-          "포스코홀딩스와 티이엠씨가 왜 같이 언급되는지 모르겠다 → 사업·공시 관계 정리"
-        ],
-        "actionTitles": [
-          "포스코홀딩스 네온가스 관련주 이유 바로 확인하기",
-          "티이엠씨 네온가스 사업 비중 확인하는 법"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
-    },
-    {
-      "id": "33f274eb98b3d140",
-      "urls": [
-        "https://lifewisdom-review.tistory.com/228"
-      ],
-      "guide": {
-        "direction": "검색자는 내가 국가건강검진 대상인지, 어디서 받고 결과는 어떻게 조회하는지, 백수도 받을 수 있는지를 막혀 묻는다. 고수 글 제목은 '요건·절차 안내'라고만 하고 종합건강검진과의 차이, 조기정신증 선별검사 포함 여부, 건강iN·The건강보험 앱 조회법은 구체적으로 안 짚었다. 이 글은 대상 조회부터 기관 찾기, 정신건강검사 포함 여부, 결과 조회까지 순서대로 정리해 한 번에 끝내준다.",
-        "searchTargets": [
-          "국가 건강검진 대상 조회",
-          "국가 건강검진 기관 찾기",
-          "국가건강검진 정신건강 검사",
-          "국가 건강검진 종목"
-        ],
-        "mustInclude": [
-          "건강iN(국민건강보험공단 홈페이지)·The건강보험 앱으로 대상·결과 조회하는 법",
-          "조기정신증 선별검사가 국가건강검진 정신건강 항목에 포함되는지 여부",
-          "구강검진이 기본 항목인지, 병원별 추가 항목 차이",
-          "무직자(백수)·지역가입자도 국가건강검진 대상인지 여부",
-          "검진 전 공복(식사) 여부 등 검진 당일 준비사항"
-        ],
-        "mustAvoid": [
-          "국가건강검진과 사설 종합건강검진 패키지를 같은 것처럼 섞어 쓰기",
-          "특정 병원·검진센터를 광고성으로 추천하기",
-          "정신건강증진센터(공공기관)를 사설 심리상담소와 혼동시키기"
-        ],
-        "checkBefore": [
-          "국가건강검진 대상 연령·주기 최신 기준(국민건강보험공단 공식 공지)",
-          "조기정신증 선별검사 포함 연령대·조건(공단 공지)",
-          "지역별 정신건강복지센터 운영 방식 차이(해당 보건소 공지)"
-        ],
-        "solves": [
-          "국가건강검진 대상자인지 모르겠다 → 건강iN·앱으로 대상 조회하는 법 안내",
-          "국가건강검진 결과 조회 방법을 모른다 → 공동인증서·간편인증 로그인 절차 정리",
-          "백수도 국가건강검진 받을 수 있는지 모른다 → 지역가입자 대상 여부 설명"
-        ],
-        "actionTitles": [
-          "국가 건강검진 대상 조회 지금 바로 하는 법",
-          "국가 건강검진 기관 찾기부터 신청까지 정리",
-          "국가건강검진 정신건강 검사 포함 여부 확인"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "국가건강검진, 종합건강검진에 대해",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100401&docId=487634921&answerNo=7&qb=6rWt6rCAIOqxtOqwleqygOynhCDsoJXsi6DqsbTqsJUg7ISc67mE7IqkIOydtOyaqQ==",
-          "views": 3512,
-          "answers": 8,
-          "askedAt": "2026.04.03"
-        },
-        {
-          "title": "국가건강검진 항목??",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100401&docId=493703937&answerNo=5&qb=6rWt6rCAIOqxtOqwleqygOynhCDsoJXsi6DqsbTqsJUg7ISc67mE7IqkIOydtOyaqQ==",
-          "views": 3137,
-          "answers": 6,
-          "askedAt": "2026.07.07"
-        },
-        {
-          "title": "정신건강증진센터 방문하려하는데요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70109&docId=420355730&answerNo=2&qb=6rWt6rCAIOqxtOqwleqygOynhCDsoJXsi6DqsbTqsJUg7ISc67mE7IqkIOydtOyaqQ==",
-          "views": 1969,
-          "answers": 2,
-          "askedAt": "2022.05.27"
-        }
-      ]
-    },
-    {
-      "id": "75510b0c73a80d98",
-      "urls": [
-        "https://healphy.co.kr/%ed%98%91%ec%8b%ac%ec%a6%9d-%ec%9b%90%ec%9d%b8/"
-      ],
-      "guide": {
-        "direction": "검색자는 가슴통증이 왜 오는지, 스트레스와 무슨 관계인지, 약을 평생 먹어야 하는지를 막혀 묻는다. 고수 글 제목은 '동맥경화와 혈관경련이 원인'이라고만 하고 안정형(동맥경화)과 변이형(혈관경련) 협심증의 증상·상황 차이는 구분하지 않았다. 이 글은 두 기전을 표로 나누고 새벽·출근길 통증 같은 변이형 특징, 복약 지속 여부를 정리해 끝까지 읽히게 한다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "동맥경화형(안정형) vs 혈관경련형(변이형) 협심증 기전·증상 차이",
-          "새벽·출근길 등 특정 시간대에 나타나는 변이형 협심증 통증 특징",
-          "스트레스·혈압상승·염증반응이 동맥경화를 가속화하는 과정",
-          "가슴 압박감·조이는 느낌 등 협심증 통증 체크리스트",
-          "진단 유형별 평생 약 복용 필요 여부"
-        ],
-        "mustAvoid": [
-          "협심증과 심근경색을 같은 증상처럼 혼용하기"
-        ],
-        "checkBefore": [
-          "안정형·변이형 협심증 구분 기준과 증상 차이(의학 전문자료·질병관리청)",
-          "혈관경련(변이형) 기전 설명의 의학적 정확성(원문 기사·전문의 자료)"
-        ],
-        "solves": [
-          "협심증 원인이 뭔지 모르겠다 → 동맥경화·혈관경련 두 기전으로 구분해 설명",
-          "스트레스와 협심증이 무슨 관계인지 모르겠다 → 염증·혈압 가속 기전으로 정리",
-          "협심증 진단 후 약을 평생 먹어야 하는지 모르겠다 → 유형별 복약 기준 안내"
-        ],
-        "actionTitles": [
-          "협심증 원인 동맥경화·혈관경련 차이 확인하기",
-          "변이형 협심증 증상 체크리스트로 확인하는 법",
-          "협심증 약 평생 먹어야 하는지 바로 확인하기"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "협심증의 주요 원인은 무엇인가요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=7010103&docId=492949671&answerNo=1&qb=7ZiR7Ius7KadIOuPmeunpeqyve2ZlCDtmIjqtIAg6rK966CoIOqwgOyKtA==",
-          "views": 971,
-          "answers": 4,
-          "askedAt": "2026.04.14"
-        },
-        {
-          "title": "스트레스와 협심증은 어떤 관계가 있나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=7010103&docId=492949681&answerNo=1&qb=7ZiR7Ius7KadIOuPmeunpeqyve2ZlCDtmIjqtIAg6rK966CoIOqwgOyKtA==",
-          "views": 747,
-          "answers": 3,
-          "askedAt": "2026.04.14"
-        },
-        {
-          "title": "30대 젊은 나이에 심근경색 발병 이유는 무엇....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=7010103&docId=493417157&answerNo=1&qb=7ZiR7Ius7KadIOuPmeunpeqyve2ZlCDtmIjqtIAg6rK966CoIOqwgOyKtA==",
-          "views": 593,
-          "answers": 2,
-          "askedAt": "2026.05.16"
-        }
-      ]
-    },
-    {
       "id": "611538121e4f6552",
       "urls": [
         "https://4jsm.com/entry/HLB-%EB%B3%B5%EC%A7%80%EB%AA%B0-%EC%9D%B4%EC%9A%A9%ED%9B%84%EA%B8%B0%EF%BD%9C%EB%A1%9C%EA%B7%B8%EC%9D%B8%C2%B7%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85%C2%B7%EB%B3%B5%EC%A7%80%ED%98%9C%ED%83%9D%C2%B7%EB%B0%B0%EC%86%A1%EC%A1%B0%ED%9A%8C"
@@ -25113,177 +23631,6 @@
           "HLB 복지몰 로그인 안될 때 해결하는 방법 총정리",
           "HLB 복지몰 회원가입 조건과 신청 방법을 확인하기",
           "HLB 복지몰 배송조회 하는 법, 주문내역 확인까지"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
-    },
-    {
-      "id": "270eb0d35735d7d2",
-      "urls": [
-        "https://by.infotoktok.com/7662"
-      ],
-      "guide": {
-        "direction": "지식인 답변들은 '근로자안심대출'이 정부 상품이 아니라 민간 대출중개업체이며 전화 응대를 조심하라고 반복 경고한다. 고수 블로그 제목은 조건·금리만 다뤄 '이게 정부지원인지, 전화받아도 되는지'라는 핵심 불안은 못 풀었다. 이 글은 성격 구분과 전화·개인정보 대응 체크리스트로 불안을 끝낸다.",
-        "searchTargets": [
-          "근로자 안심대출 조건",
-          "근로자 안심대출 자격",
-          "근로자 안심대출 금리",
-          "근로자 안심대출 신청"
-        ],
-        "mustInclude": [
-          "정부기관이 아닌 민간 대출중개업체라는 점(지식인 답변 근거)",
-          "한도조회만 한 경우와 전화 응대한 경우의 위험도 차이",
-          "개인회생자 신청 가능 여부(확인 필요: 공식 안내)",
-          "자격·조건·금리 요약표(확인 필요: 실제 업체 공시)"
-        ],
-        "mustAvoid": [
-          "민간 중개업체를 정부 지원 대출처럼 서술",
-          "실제 신청·전화연결을 유도하는 안내",
-          "개인회생자도 무조건 가능하다고 보장하는 서술"
-        ],
-        "checkBefore": [
-          "서민금융진흥원·금융감독원 공식 자료로 정부지원 대출 여부 재확인",
-          "실제 운영 업체명과 대출 중개업 등록 여부 확인"
-        ],
-        "solves": [
-          "정부 지원 대출인지 헷갈릴 때 → 민간 중개업체임을 밝히고 구분 기준 제공",
-          "자격·금리가 궁금할 때 → 실제 조건과 확인 방법 정리"
-        ],
-        "actionTitles": [
-          "근로자 안심대출 조건과 자격, 전화받기 전 확인할 점",
-          "근로자 안심대출 금리·신청 전 개인회생 가능여부 체크",
-          "근로자 안심대출 어디서, 정부지원 아닌 이유 확인하기"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "근로자안심대출",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=4010502&docId=479682556&answerNo=22&qb=6re866Gc7J6QIOyViOyLrOuMgOy2nA==",
-          "views": 25677,
-          "answers": 23,
-          "askedAt": "2025.08.16"
-        },
-        {
-          "title": "근로자 안심대출",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40105&docId=441333576&answerNo=14&qb=6re866Gc7J6QIOyViOyLrOuMgOy2nA==",
-          "views": 21157,
-          "answers": 18,
-          "askedAt": "2025.08.03"
-        },
-        {
-          "title": "근로자안심금융 대출한도 조회",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40105&docId=474984083&answerNo=2&qb=6re866Gc7J6QIOyViOyLrOuMgOy2nA==",
-          "views": 10121,
-          "answers": 13,
-          "askedAt": "2024.09.06"
-        }
-      ]
-    },
-    {
-      "id": "1b2ab43a15e43a73",
-      "urls": [
-        "https://lifewisdom-review.tistory.com/227"
-      ],
-      "guide": {
-        "direction": "지식인 질문은 '내 사업장이 100인 미만인데도 당장 교체해야 하는지', '테이블오더기도 해당되는지' 등 적용 범위에서 막혀 있다. 고수 글 제목은 대상·시기·신청을 다뤘지만 지원사업 두 가지(스마트상점지원사업·배리어프리 키오스크 보급사업)를 구분하지 않아 혼란이 남는다. 이 글은 사업장 규모·시행일 기준표와 지원사업 비교표로 끝낸다.",
-        "searchTargets": [
-          "베리어프리 키오스크 의무화",
-          "베리어프리 키오스크 지원금",
-          "베리어프리 키오스크 지원",
-          "베리어프리 키오스크 설치"
-        ],
-        "mustInclude": [
-          "2025년 1월 28일부터 100인 미만 사업장도 신규 설치시 의무화 시행",
-          "기존 설치된 키오스크는 교체 의무 아님, 신규 설치·운영시만 적용",
-          "스마트상점지원사업(구입형, 장애인사업주·간이과세자·1인자영업자) 대상",
-          "배리어프리 키오스크 보급사업(한국장애인개발원) 지원금 규모(확인 필요: 공고문)",
-          "테이블오더기 포함 여부(확인 필요: 소관부처 유권해석)"
-        ],
-        "mustAvoid": [
-          "스마트상점지원사업과 배리어프리 키오스크 보급사업을 하나로 혼동",
-          "모든 사업장이 기존 설치물까지 당장 교체해야 한다는 과장",
-          "법 시행일(2024년 1월20일/2025년1월28일)을 혼용해 틀리게 서술"
-        ],
-        "checkBefore": [
-          "장애인차별금지법 개정 시행일과 적용 사업장 규모 한국장애인개발원 공지로 재확인",
-          "스마트상점지원사업·배리어프리 키오스크 보급사업 공고문에서 지원금액·신청기간 재확인"
-        ],
-        "solves": [
-          "내 사업장이 의무화 대상인지 헷갈릴 때 → 사업장 규모·시행일 기준표로 확인",
-          "기존 키오스크도 교체해야하는지 궁금할 때 → 신규 설치 기준과 예외 범위 정리",
-          "지원금을 어디서 얼마나 받을 수 있는지 모를 때 → 지원사업별 대상·한도 비교"
-        ],
-        "actionTitles": [
-          "베리어프리 키오스크 의무화 대상 확인하고 지원금 신청하기",
-          "베리어프리 키오스크 지원사업 비교하고 얼마 받는지 확인",
-          "베리어프리 키오스크 교체 의무 대상인지 확인하는 법"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "베리어프리 키오스크 질문",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40703&docId=485649665&answerNo=4&qb=67Kg66as7Ja07ZSE66asIO2CpOyYpOyKpO2BrCDsnZjrrLTtmZQg7KCV67aAIOyngOybkOyCrOyXhQ==",
-          "views": 1320,
-          "answers": 5,
-          "askedAt": "2026.03.23"
-        },
-        {
-          "title": "무인 스터디카페 배리어프리 키오스크 꼭 교....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40611&docId=483838756&answerNo=4&qb=67Kg66as7Ja07ZSE66asIO2CpOyYpOyKpO2BrCDsnZjrrLTtmZQg7KCV67aAIOyngOybkOyCrOyXhQ==",
-          "views": 1317,
-          "answers": 9,
-          "askedAt": "2025.05.10"
-        },
-        {
-          "title": "테이블오더기도 키오스크로 분류되나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40401&docId=480964776&answerNo=4&qb=67Kg66as7Ja07ZSE66asIO2CpOyYpOyKpO2BrCDsnZjrrLTtmZQg7KCV67aAIOyngOybkOyCrOyXhQ==",
-          "views": 521,
-          "answers": 5,
-          "askedAt": "2026.03.16"
-        }
-      ]
-    },
-    {
-      "id": "333b27c4b8497cb7",
-      "urls": [
-        "https://lifewisdom-review.tistory.com/226"
-      ],
-      "guide": {
-        "direction": "검색자는 '스위트그라운드'와 '스위트 코코아'가 같은 제품인지, 다크초콜릿용·코코아용 중 베이킹에 뭘 써야 하는지부터 막힌다. 고수 블로그 제목들은 제품 소개에 그쳐 정작 '안전 확인 절차'를 어디서 어떻게 하는지는 구체적으로 못 짚었다. 이 글은 두 라인업 용도 비교표와 안전 확인 체크리스트로 구매 전 궁금증을 끝낸다.",
-        "searchTargets": [
-          "기라델리 스위트 그라운드 초콜릿",
-          "기라델리 스위트그라운드",
-          "기라델리 스위트그라운드 파우더",
-          "기라델리 스위트 코코아"
-        ],
-        "mustInclude": [
-          "스위트 그라운드(다크초콜릿용)와 스위트 코코아(코코아 분말)의 정확한 제품명·용도 구분",
-          "안전 확인 절차 — 어느 사이트·채널에서 로트번호·수입식품 정보를 조회하는지 (확인 필요: 식약처 수입식품 정보마루)"
-        ],
-        "mustAvoid": [
-          "기라델리 스퀘어 초콜릿 등 다른 라인업 제품과 혼동"
-        ],
-        "checkBefore": [
-          "기라델리 공식 홈페이지 제품 페이지에서 정확한 제품명·성분표 확인",
-          "식약처 수입식품 정보마루에서 해당 제품 수입·안전 이슈 여부 확인"
-        ],
-        "solves": [
-          "스위트 그라운드와 스위트그라운드 표기 차이가 헷갈린다 → 정확한 제품명과 라인업 정리",
-          "다크초콜릿용과 코코아용 구분이 안 된다 → 용도별 비교표 제공",
-          "이 제품이 안전한지 어떻게 확인하는지 모른다 → 확인 사이트와 절차 안내"
-        ],
-        "actionTitles": [
-          "기라델리 스위트그라운드 파우더, 제품 정보와 안전 확인하는 법",
-          "기라델리 스위트 코코아·다크초콜릿 차이 비교와 구매 가이드",
-          "기라델리 스위트그라운드 초콜릿 구매 전 꼭 확인할 체크리스트"
         ]
       },
       "at": "2026-11-10T20:55:24.201Z",
@@ -25327,1884 +23674,6 @@
       "at": "2026-11-10T20:55:24.201Z",
       "rules": "2026-10-20-solve",
       "provider": "claude"
-    },
-    {
-      "id": "6568ce150e8728bc",
-      "urls": [
-        "https://lifewisdom-review.tistory.com/225"
-      ],
-      "guide": {
-        "direction": "검색자는 의정부·군산·전주·익산 등 거주 지역에 맞는 테니스 레슨 시설을 못 찾아 지식인에 직접 묻고, 레슨비 부담 때문에 시설관리공단 강좌 같은 저가 대안을 찾는다. 고수 블로그의 '지역화폐 활용' 제목은 지역화폐로 레슨비를 실제 결제할 수 있는 가맹점 확인 절차까지는 못 짚었을 가능성이 크다. 이 글은 지역별 시설·공공강좌 비교표와 지역화폐 결제 가능 여부 확인 순서를 정리해 끝낸다.",
-        "searchTargets": [
-          "테니스 레슨",
-          "테니스 레슨비",
-          "전주 테니스 레슨",
-          "일산 테니스 레슨"
-        ],
-        "mustInclude": [
-          "지역별(부산·울산·광주·대전·대구·전주·수원·일산) 레슨 시설·레슨비 비교표 (확인 필요: 각 지역 공식 홈페이지)",
-          "시설관리공단·구청 운영 저가 테니스 강좌 신청 방법 (지식인 답변 근거: 거주지·직장 인근 시설관리공단 강좌 추천)",
-          "지역화폐로 테니스 레슨비 결제 가능한 가맹점 확인 절차(지역화폐 앱 가맹점 조회)",
-          "레슨 시작 전 그립·스탠스 등 기본 이론 학습 체크리스트",
-          "사설 레슨 vs 지인·선출 코치 레슨 차이 비교 (지식인 답변 근거: 선출 코치 추천 의견)"
-        ],
-        "mustAvoid": [
-          "특정 테니스장·코치 실명을 확인 없이 추천처럼 단정",
-          "레슨비를 전국 단일가처럼 일반화해 지역 차이 무시",
-          "지역화폐와 일반 상품권·카드 혜택을 혼동"
-        ],
-        "checkBefore": [
-          "해당 지역 시설관리공단·구청 홈페이지에서 공공 테니스 강좌 개설 여부와 요금 확인",
-          "지역화폐 앱에서 테니스장 가맹점 등록 여부 확인",
-          "지식인 답변에 언급된 업체명(예: 의정부 ITA테니스존)은 네이버 검색으로 실재·전화번호 재확인"
-        ],
-        "solves": [
-          "거주 지역에 테니스 레슨 받을 곳을 못 찾겠다 → 지역별 시설 목록과 확인 방법 정리",
-          "레슨비가 부담된다 → 시설관리공단·구청 저가 강좌 찾는 순서 안내"
-        ],
-        "actionTitles": [
-          "부산·전주 등 지역별 테니스 레슨 시설 찾는 법과 레슨비 비교",
-          "테니스 레슨비 아끼는 법, 지역화폐·공단 강좌 신청 순서",
-          "테니스 레슨 받기 전 지역별 시설·이론 학습 체크리스트"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "의정부 테니스레슨 문의!",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=100105&docId=397118260&answerNo=2&qb=7YWM64uI7IqkIOugiOyKqCDsi5zshKQg7ISg7YOdIOychO2VnA==",
-          "views": 1167,
-          "answers": 3,
-          "askedAt": "2021.08.13"
-        },
-        {
-          "title": "테니스레슨 배우려하는데요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=100105&docId=368647434&answerNo=1&qb=7YWM64uI7IqkIOugiOyKqCDsi5zshKQg7ISg7YOdIOychO2VnA==",
-          "views": 957,
-          "answers": 1,
-          "askedAt": "2020.09.20"
-        },
-        {
-          "title": "테니스 레슨 관련 질문 드립니다.",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=100105&docId=487670495&answerNo=1&qb=7YWM64uI7IqkIOugiOyKqCDsi5zshKQg7ISg7YOdIOychO2VnA==",
-          "views": 229,
-          "answers": 1,
-          "askedAt": "2025.08.03"
-        }
-      ]
-    },
-    {
-      "id": "b7684c721195f07a",
-      "urls": [
-        "https://by.infotoktok.com/7661"
-      ],
-      "guide": {
-        "direction": "검색자는 '7년 이상 연체면 무조건 탕감'인지, 20년 이상 공공기관 채권 소각 뉴스가 내 빚에도 적용되는지, 장기렌트 채무조정과 같은 제도인지 헷갈려 한다. 고수 글은 '탕감 조건'만 나열하고 이 세 가지 혼동 지점을 구분해주지 않는다. 채권자별 원금·연체기간 기준표와 '자동소각 대상 vs 개별신청 대상' 구분으로 글 안에서 내 해당 여부를 바로 판단하게 한다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "채권자별 연체원금 5천만원 이하 기준 (확인 필요: 신용회복위원회)",
-          "연체기간 7년 이상, 채권자 수 무관 적용 조건",
-          "20년 이상 공공기관 장기연체채권 일괄 소각과 개별 신청 탕감의 차이",
-          "소득·재산가액 심사 기준 (확인 필요: 신용회복위원회 공고)",
-          "장기렌트 채무조정과 개인 장기연체채권 탕감의 별개 제도임을 구분"
-        ],
-        "mustAvoid": [
-          "공공기관 장기연체채권 소각 뉴스를 모든 장기연체자에게 자동 적용되는 것처럼 서술",
-          "장기렌트(자동차) 채무탕감과 개인 장기연체채권 탕감제도 혼동",
-          "채무 규모가 큰 사람도 이 제도로 탕감 가능한 것처럼 일반화"
-        ],
-        "checkBefore": [
-          "신용회복위원회 공식 공지의 장기소액연체자 지원 기준(원금·기간·소득)",
-          "금융위원회·캠코의 공공기관 장기연체채권 소각 대상·시기 공식 발표"
-        ],
-        "solves": [
-          "채권자별 5천만원 이하면 채권자 수와 무관하게 탕감되는지 몰랐던 독자 → 기준표로 즉시 판단",
-          "공공기관 채권 소각 뉴스가 내 빚에도 적용되는지 헷갈리는 독자 → 자동소각 대상과 개별신청 대상 구분",
-          "장기렌트 이용 중 채무탕감 가능한지 궁금한 독자 → 자동차 렌트 조정과 개인 탕감제도는 별개임을 명시"
-        ],
-        "actionTitles": [
-          "장기채무 탕감 조건 확인하고 원금·연체기간 기준표 보기",
-          "공공기관 장기연체채권 소각 대상인지 확인하는 법 정리",
-          "개인 장기채무 탕감 조건 신청 전 체크리스트 총정리표"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "개인 7년이상 장기연체 채무탕감기준",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40106&docId=486578301&answerNo=4&qb=7YOV6rCQIOyepeq4sOyxhOustA==",
-          "views": 4419,
-          "answers": 17,
-          "askedAt": "2025.06.28"
-        },
-        {
-          "title": "장기렌트 이용중 채무탕감제도를 사용하면 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60203&docId=478087765&answerNo=12&qb=7YOV6rCQIOyepeq4sOyxhOustA==",
-          "views": 3648,
-          "answers": 14,
-          "askedAt": "2025.08.20"
-        },
-        {
-          "title": "현재 기초생활수급자 인데요 개인파산 vs 수....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60203&docId=495778079&answerNo=5&qb=7YOV6rCQIOyepeq4sOyxhOustA==",
-          "views": 432,
-          "answers": 12,
-          "askedAt": "2026.11.01"
-        }
-      ]
-    },
-    {
-      "id": "733fd03001f4fe29",
-      "urls": [
-        "https://by.infotoktok.com/7660"
-      ],
-      "guide": {
-        "direction": "검색자는 '개인채무 탕감제도'를 정부가 빚을 공식 탕감해주는 단일 창구로 오해하거나, 수급자 채무탕감과 개인파산 중 뭐가 유리한지, 3500만~6000만원 규모 채무에 개인회생·파산 중 뭐가 맞는지 판단 기준이 없다. 고수 글은 '탕감제도'라는 이름만 다루고 실제로는 신용회복위 채무조정·법원 개인회생·개인파산이라는 서로 다른 경로임을 구분해주지 않는다. 채무한도(무담보 10억·담보 15억)와 상황별 비교표로 내 채무가 어느 경로에 해당하는지 글 안에서 판단하게 한다.",
-        "searchTargets": [
-          "개인채무 탕감",
-          "개인채무 탕감제도",
-          "개인 채무 탕감 조건",
-          "개인 채무 탕감 방법"
-        ],
-        "mustInclude": [
-          "개인회생 채무한도: 무담보채무 10억원, 담보부채무 15억원 이하",
-          "개인파산은 채무 전체를 한 번에 탕감받는 절차라는 점",
-          "신용회복위원회 채무조정(워크아웃)과 법원 개인회생·파산의 차이표",
-          "기초생활수급자 대상 채무탕감 특례 조건 (확인 필요: 신용회복위원회·법원)",
-          "담당 변호사·법무사에 따라 탕감률이 달라질 수 있다는 점"
-        ],
-        "mustAvoid": [
-          "정부가 운영하는 단일 '채무탕감제도'가 있는 것처럼 서술(실제는 신용회복위·법원 등 여러 경로)",
-          "특정 채무액(3500만원·6000만원) 상담 사례를 모든 독자에게 같은 결론으로 일반화",
-          "개인회생과 개인파산을 같은 절차처럼 혼용"
-        ],
-        "checkBefore": [
-          "신용회복위원회 공식 채무조정 자격 기준(홈페이지 공고)",
-          "법원의 개인회생·파산 채무한도 최신 기준(대법원 공고)",
-          "기초생활수급자 채무탕감 특례 조건 최신 공지"
-        ],
-        "solves": [
-          "수급자인데 개인파산과 채무탕감 중 뭐가 유리한지 모르는 독자 → 조건·효과 비교표로 선택 기준 제시",
-          "채무액 규모별(3500만원, 6000만원)로 어느 제도가 맞는지 → 채무한도·소득 기준으로 구분"
-        ],
-        "actionTitles": [
-          "개인채무 탕감제도 조건 확인하고 맞는 방법 고르는 법",
-          "개인채무 탕감 전 개인회생 vs 개인파산 비교하는 법",
-          "개인 채무 탕감 받는 방법 신청 전 자격 조건 확인하기"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "현재 기초생활수급자 인데요 개인파산 vs 수....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60203&docId=495778079&answerNo=4&qb=6rCc7J247LGE66y0IO2DleqwkCDqsJzsnbjrtoDssYQg7KCc64+E",
-          "views": 432,
-          "answers": 12,
-          "askedAt": "2026.11.01"
-        },
-        {
-          "title": "도박빚 개인회생..",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40106&docId=232969733&answerNo=16&qb=6rCc7J247LGE66y0IO2DleqwkCDqsJzsnbjrtoDssYQg7KCc64+E",
-          "views": 5784,
-          "answers": 14,
-          "askedAt": "2026.11.09"
-        },
-        {
-          "title": "부천개인회생 빚탕감 이 상황에서 어떡하죠??",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60203&docId=450413984&answerNo=13&qb=6rCc7J247LGE66y0IO2DleqwkCDqsJzsnbjrtoDssYQg7KCc64+E",
-          "views": 5600,
-          "answers": 13,
-          "askedAt": "2026.10.21"
-        }
-      ]
-    },
-    {
-      "id": "e10f32550e48e9eb",
-      "urls": [
-        "https://anotherdifference.tistory.com/2586"
-      ],
-      "guide": {
-        "direction": "검색자는 임산부가 몇 주차에 맞아야 하는지, 배우자도 맞아야 하는지, 보건소 무료 대상인지 병원서 돈 내야 하는지 구분을 못 한다. 고수 글의 '가격·비용 비교'는 전국 단일 기준처럼 보일 위험이 있고, 당진시·서초보건지소처럼 지자체마다 대상·기간이 다른 지원사업은 다루지 않는다. 대상자별 무료·유료 기준표와 거주지 지원사업 확인 순서로 글 안에서 내 비용을 바로 알게 한다.",
-        "searchTargets": [
-          "백일해 예방접종 가격",
-          "백일해 예방접종 보건소",
-          "백일해 예방접종 시기",
-          "성인 백일해 예방접종"
-        ],
-        "mustInclude": [
-          "임산부 접종 권장 주차 (확인 필요: 질병관리청 예방접종도우미)",
-          "배우자 등 가족 동반접종 권장 이유와 비용",
-          "보건소 무료접종 대상(영유아·임산부·취약계층) vs 병원 유료 비용 비교표",
-          "지자체별 지원사업 예시: 당진시 2026년 지원 대상 확대, 서초보건지소 어린이 무료접종",
-          "입영 전 장병 대상 Tdap(파상풍·디프테리아·백일해) 접종 안내"
-        ],
-        "mustAvoid": [
-          "모든 지역 보건소 지원사업이 동일하다고 일반화(지자체마다 대상·기간 다름)",
-          "백신 부작용을 특정 사례로 과장해 공포 조성",
-          "백일해 단독백신과 Tdap(복합백신)을 혼동해서 서술"
-        ],
-        "checkBefore": [
-          "거주 지자체 보건소 공식 공지(지원 대상·기간)",
-          "질병관리청 예방접종도우미의 임산부·성인 접종 권고 시기",
-          "병원별 Tdap 접종 비용 최신 공지"
-        ],
-        "solves": [
-          "임산부가 몇 주차에 맞아야 하는지, 배우자도 맞아야 하는지 모르는 독자 → 권장 시기와 가족 접종 필요성 정리",
-          "보건소 무료 대상인지 병원서 돈 내야 하는지 헷갈리는 독자 → 대상자별 무료·유료 기준표 제공",
-          "당진시·서초구 등 지자체 지원사업이 내게도 적용되는지 → 거주지별 확인 방법 안내"
-        ],
-        "actionTitles": [
-          "백일해 예방접종 가격 비교, 보건소 무료 대상 확인",
-          "성인 백일해 예방접종 시기 확인하고 가족 접종 하는 법",
-          "백일해 예방접종 보건소 지원사업 대상인지 신청 전 확인"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "27년 2월 입대 예정인데 예방접종 목록",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60302&docId=495688666&answerNo=1&qb=67Cx7J287ZW0IOyYiOuwqeygkeyihSDsgqzsl4U=",
-          "views": 110,
-          "answers": 1,
-          "askedAt": "2026.10.25"
-        },
-        {
-          "title": "임산부인데 백일해 예방접종은 몇 주 차에 꼭....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=7011401&docId=495441863&answerNo=1&qb=67Cx7J287ZW0IOyYiOuwqeygkeyihSDsgqzsl4U=",
-          "views": 90,
-          "answers": 1,
-          "askedAt": "2026.10.12"
-        },
-        {
-          "title": "국가예방접종사업은 어떤 대상과 접종을 포....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=7010107&docId=493172252&answerNo=1&qb=67Cx7J287ZW0IOyYiOuwqeygkeyihSDsgqzsl4U=",
-          "views": 268,
-          "answers": 1,
-          "askedAt": "2026.04.28"
-        }
-      ]
-    },
-    {
-      "id": "37883a27d83ed91d",
-      "urls": [
-        "https://by.infotoktok.com/7659"
-      ],
-      "guide": {
-        "direction": "검색자는 '정부가 빚을 대신 갚아준다'는 기대로 검색하지만 실제로는 신용회복위원회 채무조정·개인회생·새출발기금 등 제도별 조건이 다르다는 걸 모른다. 고수 블로그는 제도명만 나열하고 소득·채무 규모·채무 발생 원인(도박·주식·보증빚 등)별로 어떤 제도가 맞는지 구분해주지 않는다. 이 글은 채무 유형별 지원 가능 여부와 신청 순서를 표로 정리해 한 번에 끝내게 한다.",
-        "searchTargets": [
-          "정부지원 채무탕감",
-          "정부지원 채무탕감 조건",
-          "정부지원 채무탕감 방법",
-          "정부지원 채무 탕감 제도"
-        ],
-        "mustInclude": [
-          "신용회복위원회 채무조정(개인워크아웃) 신청 조건 — 연체 기간·채무액 기준 (확인 필요: 신용회복위원회 홈페이지)",
-          "새출발기금 지원 대상 — 소상공인·자영업자 피해 여부 (확인 필요: 새출발기금 공식 사이트)",
-          "개인회생 vs 채무조정 — 재산·소득 심사 기준 비교표",
-          "도박·주식 투자로 생긴 빚도 개인회생·채무조정 대상이 되는지 여부",
-          "2026년 폐업 소상공인 체납 세금 감면 범위 — 일괄 탕감 아님 (확인 필요: 국세청 공지)"
-        ],
-        "mustAvoid": [
-          "채무탕감 브로커 광고성 문구와 혼동되지 않게 공식 기관명만 명시",
-          "도박·주식 빚 사례를 일반화해 모두 탕감된다고 암시하지 않기"
-        ],
-        "checkBefore": [
-          "신용회복위원회 공식 홈페이지에서 개인워크아웃·프리워크아웃 최신 조건 확인",
-          "새출발기금 홈페이지에서 2026년 지원 대상·기한 확인",
-          "국세청·지자체 공지에서 체납 세금 감면 범위 확인"
-        ],
-        "solves": [
-          "소상공인 정부 지원금 뭐 있나요? → 대환대출·채무조정 등 채무 완화 제도를 유형별로 정리",
-          "도박·주식으로 생긴 빚도 탕감되나요? → 개인회생·채무조정 대상 여부와 조건 구분",
-          "모든 체납 세금이 탕감되나요? → 일괄 탕감이 아니라는 점과 실제 감면 범위 설명"
-        ],
-        "actionTitles": [
-          "정부지원 채무탕감 조건 확인하고 나에게 맞는 제도 찾는 법",
-          "정부지원 채무탕감 방법, 신청 순서와 필요 서류 정리",
-          "정부지원 채무 탕감 제도, 유형별 지원 가능 여부 비교"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "26년 소상공인 정부 지원금 뭐 좀 있나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=404&docId=492047688&answerNo=44&qb=7KCV67aA7KeA7JuQIOyxhOustO2DleqwkCDsoJXrtoDrtoDssYQg7YOV6rCQ",
-          "views": 1389,
-          "answers": 45,
-          "askedAt": "2026.11.07"
-        },
-        {
-          "title": "어머니 농협 대출 보증과 연대보증 빚, 수입 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60215&docId=495683995&answerNo=1&qb=7KCV67aA7KeA7JuQIOyxhOustO2DleqwkCDsoJXrtoDrtoDssYQg7YOV6rCQ",
-          "views": 33,
-          "answers": 1,
-          "askedAt": "2026.10.25"
-        },
-        {
-          "title": "정부에서 실시하는 빚 탕감에",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60203&docId=495070804&answerNo=18&qb=7KCV67aA7KeA7JuQIOyxhOustO2DleqwkCDsoJXrtoDrtoDssYQg7YOV6rCQ",
-          "views": 1140,
-          "answers": 19,
-          "askedAt": "2026.10.12"
-        }
-      ]
-    },
-    {
-      "id": "d25a577d30fa0124",
-      "urls": [
-        "https://anotherdifference.tistory.com/2585"
-      ],
-      "guide": {
-        "direction": "검색자는 전주시청의 정확한 위치(덕진구 노송광장)와 층별 부서 배치, 민원 연락처를 찾고 있는데 고수 블로그는 '총정리'라고만 하고 층별 안내나 가는 방법은 짚지 않는다. 이 글은 전주시청 주소·층별 민원창구·대중교통·주차 정보를 표로 정리해 한 번에 확인하게 한다. 정치·선거 관련 내용은 무관하므로 제외한다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "전주시청 주소 — 전주시 덕진구 노송광장 1길 1",
-          "전주시청 대표전화·민원실 연락처 (확인 필요: 전주시청 공식 홈페이지)",
-          "층별 부서 배치 — 민원여권과·세무과 등 주요 부서 위치 (확인 필요: 전주시청 조직안내)",
-          "전주시청 홈페이지 바로가기 링크 및 주요 민원 신청 메뉴 위치",
-          "주차장·대중교통(버스 노선) 이용 안내 (확인 필요: 전주시청 공식 공지)"
-        ],
-        "mustAvoid": [
-          "전주시청과 전북도청·광주광역시청 등 비슷한 다른 행정기관과 혼동하지 않기",
-          "선거·후보자 공약 등 정치적 내용과 섞지 않기"
-        ],
-        "checkBefore": [
-          "전주시청 공식 홈페이지 조직도에서 최신 층별 부서 배치 확인",
-          "전주시청 대표전화·민원실 번호를 공식 홈페이지에서 재확인",
-          "주차·교통 안내를 전주시청 공식 공지에서 확인"
-        ],
-        "solves": [
-          "전주시청은 몇 층입니까? → 층별 주요 부서 배치를 정리해 바로 찾아가게 안내",
-          "전주시청은 어디에 있나요? → 정확한 주소와 대중교통·주차 이용법 안내",
-          "전주시청 홈페이지에서 민원 신청 메뉴를 못 찾는 문제 → 바로가기 링크와 메뉴 위치 안내"
-        ],
-        "actionTitles": [
-          "전주시청 몇 층인지, 부서별 위치 한눈에 확인하는 법",
-          "전주시청 어디에 있는지, 가는 길과 주차 정보 확인하기",
-          "전주시청 홈페이지 바로가기, 민원 신청 메뉴 찾는 법"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "광주광역시 후보자 정당,성명.공약점 갈켜주....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=61402&docId=54560507&answerNo=1&qb=7KCE7KO87Iuc7LKtIOyjvOyalCDrr7zsm5Ag7IOd7Zmc",
-          "views": 119526,
-          "answers": 5,
-          "askedAt": "2008.04.09"
-        },
-        {
-          "title": "사회 숙제입니다",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=130102&docId=108402290&answerNo=4&qb=7KCE7KO87Iuc7LKtIOyjvOyalCDrr7zsm5Ag7IOd7Zmc",
-          "views": 16997,
-          "answers": 5,
-          "askedAt": "2010.04.15"
-        },
-        {
-          "title": "전주시청은 몇 층입니까?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=121305&docId=20040913&answerNo=1&qb=7KCE7KO87Iuc7LKtIOyjvOyalCDrr7zsm5Ag7IOd7Zmc",
-          "views": 3123,
-          "answers": 1,
-          "askedAt": "2005.01.08"
-        }
-      ]
-    },
-    {
-      "id": "16193371025d0b23",
-      "urls": [
-        "https://choicemon.com/government-training-types/"
-      ],
-      "guide": {
-        "direction": "검색자는 국비지원교육이 처음이라 본인 상황(비전공자·취업연계 여부)에 맞는 과정을 고용24에서 어떻게 찾는지 막혀 있다. 고수 블로그는 '나한테 맞는 과정 찾는 법'이라고만 하고 실제 고용24 검색 절차나 국비지원카드 발급 자격은 짚지 않는다. 이 글은 목적별(취업연계·디지털·AI) 과정 구분표와 고용24 검색·신청 순서를 정리해 끝내게 한다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "고용24 홈페이지에서 국비지원 교육과정 검색하는 방법",
-          "국민내일배움카드(국비지원카드) 발급 자격 및 신청 절차 (확인 필요: 고용24 공식 안내)",
-          "취업연계형 vs 디지털·AI 과정 차이 — 목적별 구분표",
-          "비전공자도 AI 교육 신청 가능 여부와 조건 (확인 필요: 고용24 과정 상세)",
-          "전액 국비지원 여부와 본인부담금 발생 조건 (확인 필요: 고용24 과정별 공지)"
-        ],
-        "mustAvoid": [
-          "모든 과정이 전액 무료라고 단정하지 않기 — 과정별 본인부담 차이 존재",
-          "양재교육처럼 노출 적은 분야를 '지원 안 됨'으로 오해하지 않게 구분"
-        ],
-        "checkBefore": [
-          "고용24 공식 홈페이지에서 국비지원 교육과정 검색·필터 기능 최신 화면 확인",
-          "국민내일배움카드 발급 자격(연령·고용보험 가입 여부 등) 고용24 공지에서 확인",
-          "비전공자 AI 과정, 양재 과정 등 분야별 개설 현황을 고용24에서 재확인"
-        ],
-        "solves": [
-          "국비지원교육 처음인데 어떻게 찾나요? → 고용24에서 과정 검색하는 순서를 안내",
-          "비전공자도 AI 교육 신청 가능한가요? → 신청 자격과 조건을 구분해 안내",
-          "국비지원되는 양재교육 있나요? → 분야별 과정 개설 여부 확인하는 법 안내"
-        ],
-        "actionTitles": [
-          "국비지원카드 신청 자격과 발급 절차 한번에 확인하기",
-          "국비지원 교육과정, 고용24에서 검색하고 신청하는 법"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "국비지원교육에 관해 질문 있습니다",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40612&docId=495173726&answerNo=8&qb=6rWt67mE7KeA7JuQ6rWQ7JyhIOuCmO2VnO2FjCDqs7zsoJUg7LC+64qU",
-          "views": 297,
-          "answers": 9,
-          "askedAt": "2026.10.12"
-        },
-        {
-          "title": "국비지원 교육과정이요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110704&docId=493740674&answerNo=5&qb=6rWt67mE7KeA7JuQ6rWQ7JyhIOuCmO2VnO2FjCDqs7zsoJUg7LC+64qU",
-          "views": 287,
-          "answers": 11,
-          "askedAt": "2026.06.09"
-        },
-        {
-          "title": "국비지원카드, 비전공자도 AI 교육 신청 가능....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=601&docId=493687860&answerNo=5&qb=6rWt67mE7KeA7JuQ6rWQ7JyhIOuCmO2VnO2FjCDqs7zsoJUg7LC+64qU",
-          "views": 282,
-          "answers": 13,
-          "askedAt": "2026.06.08"
-        }
-      ]
-    },
-    {
-      "id": "07589d20da431efd",
-      "urls": [
-        "https://flameleaf.tistory.com/entry/%EC%97%90%EC%BD%94%EB%A8%B8%EB%8B%88-%ED%8F%AC%EC%9D%B8%ED%8A%B8-%EC%86%8C%EB%A9%B8-%EC%8B%9C%EC%A0%90-%EA%B4%80%EB%A6%AC%ED%95%98%EC%A7%80-%EC%95%8A%EC%9C%BC%EB%A9%B4-%EC%86%90%EC%8B%A4%EB%90%9C%EB%8B%A4"
-      ],
-      "guide": {
-        "direction": "에코머니 포인트가 언제 소멸되는지 몰라 모아둔 포인트를 날리는 사람이 많아 검색이 생긴다. 고수 블로그 제목은 '관리하지 않으면 손실된다'는 경고만 하고 실제 소멸 기준·조회 경로는 구체적으로 짚지 않는다. 소멸 기준표와 조회 방법, 사용처를 정리해 읽는 즉시 자기 포인트 상태를 확인하게 한다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "소멸 기준(적립 후 몇 년, 어떤 조건에서 소멸되는지) (확인 필요: 에코머니 공식 홈페이지)",
-          "포인트 조회 방법(사이트·앱 경로)",
-          "소멸 전 알림을 받는 방법 유무 (확인 필요: 고객센터 공지)"
-        ],
-        "mustAvoid": [
-          "OK캐쉬백·L.POINT 등 다른 적립 포인트와 혼동",
-          "정확한 소멸 기간을 확인 없이 '몇 년'이라 단정"
-        ],
-        "checkBefore": [
-          "에코머니 공식 홈페이지 또는 고객센터에서 소멸 기준과 조회 방법 확인",
-          "적립처별로 소멸 정책이 다른지 확인"
-        ],
-        "solves": [
-          "포인트가 언제 소멸되는지 몰라 불안하다 → 소멸 기준과 조회 방법 정리",
-          "쌓인 포인트를 어디서 쓸 수 있는지 모른다 → 사용처 정리로 해결"
-        ],
-        "actionTitles": [
-          "에코머니 포인트 소멸 시점 조회하는 법",
-          "에코머니 포인트 소멸 전 사용처 확인하기"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "시티즌과 네티즌에 대하여 내공팍팍드림 감....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1060101&docId=62052626&answerNo=1&qb=7JeQ7L2U66i464uIIOyGjOupuCDsi5zsoJAg6rSA66as7ZWY7KeAIOyViuycvOuptA==",
-          "views": 24813,
-          "answers": 5,
-          "askedAt": "2008.07.30"
-        }
-      ]
-    },
-    {
-      "id": "200daa2aa31af498",
-      "urls": [
-        "https://brainhackers.kr/entry/%EC%9E%90%EB%B6%80-%EB%9C%BB-%ED%97%B7%EA%B0%88%EB%A6%AC%EB%8A%94-%ED%98%B8%EC%B9%AD-%ED%95%9C-%EB%B2%88%EC%97%90-%EC%A0%95%EB%A6%AC%ED%95%B4%EB%93%9C%EB%A6%BD%EB%8B%88%EB%8B%A4"
-      ],
-      "guide": {
-        "direction": "'자부'가 며느리를 뜻하는지 다른 호칭과 뭐가 다른지 헷갈려 검색하는 경우가 많다. 고수 블로그 제목은 '헷갈리는 호칭 한 번에 정리'라고만 하고 한자 풀이나 비교표 같은 실제 구분 기준을 제시하지 않는다. 한자 뜻풀이와 질부·손부 등 유사 호칭 비교표로 끝까지 헷갈리지 않게 정리한다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "한자 뜻풀이(자부가 가리키는 대상이 누구인지)",
-          "질부·손부 등 비슷한 호칭과의 비교표"
-        ],
-        "mustAvoid": [
-          "집안·지역마다 다를 수 있는 호칭 사용을 하나의 정답처럼 단정"
-        ],
-        "checkBefore": [
-          "국립국어원 표준국어대사전에서 '자부'의 정확한 뜻과 한자 확인"
-        ],
-        "solves": [
-          "자부가 며느리인지 다른 뜻인지 헷갈린다 → 한자 풀이로 명확히 정리",
-          "질부·손부 등 비슷한 호칭과 구분이 안 된다 → 비교표로 정리"
-        ],
-        "actionTitles": [
-          "자부 뜻 헷갈리는 호칭 구분하는 법",
-          "자부·질부·손부 뜻 한번에 비교하기",
-          "자부 뜻과 실제 쓰는 예시 확인하기"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
-    },
-    {
-      "id": "913e0569944a79da",
-      "urls": [
-        "https://anotherdifference.tistory.com/2584"
-      ],
-      "guide": {
-        "direction": "조합원들이 연수원 예약 자격이 되는지, 요금이 얼마인지, 경쟁이 심해 예약이 되는지(가동률)를 궁금해 검색한다. 고수 블로그 제목은 자격·요금·가동률까지만 다루고 조식, 주변 맛집, 편의점 같은 실제 이용 정보는 빠져 있다. 자격조건·요금표·가동률 확인법에 조식과 주변 편의시설 정보까지 더해 예약부터 이용까지 한 번에 끝내게 한다.",
-        "searchTargets": [
-          "제주 새마을금고 연수원 예약",
-          "제주 새마을금고 연수원 가격",
-          "제주 새마을금고 연수원 조식",
-          "제주 새마을금고 연수원 근처 맛집"
-        ],
-        "mustInclude": [
-          "예약 자격 조건(조합원 전용인지, 가족 동반 가능 여부) (확인 필요: 새마을금고 연수원 공식 예약시스템)",
-          "객실 등급별 이용요금표 (확인 필요: 공식 홈페이지)",
-          "가동률(예약 경쟁이 심한 시기·확인 방법) (확인 필요: 예약시스템 공지)",
-          "조식 운영 여부와 메뉴 구성",
-          "주변 맛집·편의점 등 편의시설 정리"
-        ],
-        "mustAvoid": [
-          "일반 리조트·호텔 예약 사이트와 혼동(조합원 전용 복지시설임을 명확히)",
-          "다른 지역 새마을금고 연수원과 혼동",
-          "요금·가동률을 확인 없이 추측해 단정"
-        ],
-        "checkBefore": [
-          "새마을금고 중앙회 또는 제주연수원 공식 예약시스템에서 자격조건·요금표 확인",
-          "최신 가동률·예약 가능 시기 공지 확인"
-        ],
-        "solves": [
-          "조합원이 아니어도 예약 가능한지 모른다 → 예약 자격 조건 정리로 해결",
-          "요금이 얼마인지, 가동률이 높아 예약이 힘든지 모른다 → 요금표·가동률 확인법 정리",
-          "연수원 근처에 뭐가 있는지 몰라 불편하다 → 조식·맛집·편의점 정보 정리"
-        ],
-        "actionTitles": [
-          "제주 새마을금고 연수원 예약 자격 확인하는 법",
-          "제주 새마을금고 연수원 이용요금 가동률 조회하기"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
-    },
-    {
-      "id": "edd18b7a96f3f241",
-      "urls": [
-        "https://namuh9.tistory.com/entry/2027%EB%85%84-%EB%AC%B8%EC%B2%B4%EB%B6%80-%EC%98%88%EC%82%B0-9%EC%A1%B0-%EC%9B%90-%EB%AC%B8%ED%99%94%C2%B7%EC%98%88%EC%88%A0-446-%EC%A6%9D%EA%B0%80-%EC%A4%91%EC%A0%90-%ED%88%AC%EC%9E%90-%EB%B0%A9%ED%96%A5-%EC%B4%9D%EC%A0%95%EB%A6%AC"
-      ],
-      "guide": {
-        "direction": "검색자는 9조 원이라는 총액보다 내 분야 예산이 작년보다 얼마나 늘었는지, 문화·예술 44.6% 증가가 어디에 쓰이는지를 알고 싶어 막혀 있다. 고수 글 제목은 증가율만 던지고 분야별 세부 배정과 예산안이 확정인지 국회 심의 중인지는 짚지 않았다. 분야별 증감 정리표와 예산안 처리 단계를 한 번에 보여주면 검색자가 다시 찾아볼 필요가 없다.",
-        "searchTargets": [
-          "문체부 예산",
-          "문체부 예산안"
-        ],
-        "mustInclude": [
-          "총예산 9조 원, 문화·예술 부문 44.6% 증가 수치(확인 필요: 문체부 보도자료)",
-          "분야별 중점 투자 방향 정리표(확인 필요: 문체부 2027 예산안 발표자료)",
-          "2026년 대비 증감률 비교(확인 필요: 기획재정부·문체부 자료)",
-          "예산안이 국회 심의 중인지 확정인지 처리 단계(확인 필요: 국회 공지)"
-        ],
-        "mustAvoid": [
-          "다문화가족지원·여가부 사업 등 다른 부처 예산과 혼동",
-          "심의 중인 예산안을 확정 예산처럼 단정"
-        ],
-        "checkBefore": [
-          "9조 원·44.6% 수치가 보도자료 기준인지 국회 제출안 기준인지 확인",
-          "2027 예산안 국회 심의·확정 일정 확인(국회·문체부 공지)"
-        ],
-        "solves": [
-          "예산안이 확정인지 심의 중인지 헷갈림 → 처리 단계를 명시해 해결"
-        ],
-        "actionTitles": [
-          "2027년 문체부 예산안 총정리, 분야별 증감 확인하기",
-          "문체부 예산 9조 원, 44.6% 어디에 쓰이는지 확인",
-          "2027 문체부 예산안, 확정인지 심의 중인지 확인"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "미국 다문화 정책에 대해서",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=408&docId=183705665&answerNo=1&qb=66y47LK067aAIOyYiOyCsCDrrLjtmZQg7JiI7IigIOymneqwgA==",
-          "views": 17110,
-          "answers": 1,
-          "askedAt": "2013.11.02"
-        },
-        {
-          "title": "부산의 문화 축제",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=111001&docId=63721208&answerNo=1&qb=66y47LK067aAIOyYiOyCsCDrrLjtmZQg7JiI7IigIOymneqwgA==",
-          "views": 14247,
-          "answers": 7,
-          "askedAt": "2009.11.02"
-        },
-        {
-          "title": "부산의 축제나 문화재좀.....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=130102&docId=37978337&answerNo=1&qb=66y47LK067aAIOyYiOyCsCDrrLjtmZQg7JiI7IigIOymneqwgA==",
-          "views": 7083,
-          "answers": 9,
-          "askedAt": "2006.11.17"
-        }
-      ]
-    },
-    {
-      "id": "39673ca256865830",
-      "urls": [
-        "https://axles.kr/entry/%EA%B3%A0%EC%A0%95%EC%A7%80%EC%B6%9C-20%EB%A7%8C-%EC%9B%90-%EC%A4%84%EC%9D%B4%EA%B8%B0-%EB%A3%A8%ED%8B%B4-%EC%95%8C%EB%9C%B0%ED%8F%B0-%EC%85%80%ED%94%84-%EA%B0%9C%ED%86%B5%EB%B6%80%ED%84%B0-%EA%B5%AC%EB%8F%85-%EC%84%9C%EB%B9%84%EC%8A%A4-%EB%8B%A4%EC%9D%B4%EC%96%B4%ED%8A%B8%EA%B9%8C%EC%A7%80-%ED%86%B5%EC%8B%A0%EB%B9%84-%EC%84%A0%ED%83%9D%EC%95%BD%EC%A0%95-25-%EA%B0%B1%EC%8B%A0-%ED%8C%81"
-      ],
-      "guide": {
-        "direction": "검색자는 선택약정 25% 할인을 언제 어떻게 갱신해야 하는지, 알뜰폰을 셀프로 개통하는 절차를 몰라 막혀 있다. 고수 글 제목은 '20만 원 줄이기'라는 결과만 보여주고 갱신 시점 확인법과 셀프 개통 순서는 구체적으로 짚지 않았다. 선택약정 갱신 체크법, 셀프 개통 순서, 구독서비스 정리 체크리스트를 표로 주면 바로 따라 할 수 있다.",
-        "searchTargets": [
-          "고정지출 줄이기"
-        ],
-        "mustInclude": [
-          "월 고정지출 20만 원 절감 목표액과 구성 항목(통신비·구독료) 분해",
-          "선택약정 25% 할인 갱신 주기(통상 2년)와 확인 방법(확인 필요: 통신사 고객센터)",
-          "알뜰폰 셀프 개통 절차 단계별 순서(확인 필요: 해당 알뜰폰사 홈페이지)",
-          "구독서비스 다이어트 체크리스트(사용 빈도별 해지 우선순위)"
-        ],
-        "mustAvoid": [
-          "특정 알뜰폰 통신사를 최고라고 단정하는 과장 비교",
-          "공시지원금과 선택약정 할인을 혼동해 설명",
-          "모든 구독서비스를 무조건 해지하라는 비현실적 조언"
-        ],
-        "checkBefore": [
-          "선택약정 25% 할인 갱신 가능 시점은 가입 통신사 공식 앱·고객센터에서 확인",
-          "알뜰폰 개통 절차와 요금제는 해당 알뜰폰사 공식 홈페이지 기준으로 확인"
-        ],
-        "solves": [
-          "선택약정 할인 갱신 시점을 몰라 놓침 → 갱신 주기와 확인법 정리로 해결",
-          "알뜰폰 개통이 복잡해 보여 못 함 → 셀프 개통 순서를 단계별로 정리해 해결",
-          "구독서비스가 얼마나 나가는지 모름 → 체크리스트로 해지 우선순위 해결"
-        ],
-        "actionTitles": [
-          "고정지출 20만 원 줄이기, 선택약정 25% 갱신하는 법",
-          "고정지출 줄이기 루틴, 구독서비스 다이어트 체크리스트"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
-    },
-    {
-      "id": "85a0b673c3e4d8bd",
-      "urls": [
-        "https://anotherdifference.tistory.com/2583"
-      ],
-      "guide": {
-        "direction": "검색자는 구자욱 선수에게 현재 공식적으로 확인된 여자친구가 있는지, 결혼 상태인지를 궁금해한다. 고수 글 제목은 '총정리'라고만 하고 2016년 열애설과 최근 소문을 구분해 정리하지 않았다. 연애·결혼 관련 공식 발표 여부를 시기별로 정리해 주면 소문과 사실을 구분할 수 있다.",
-        "searchTargets": [
-          "구자욱 여자"
-        ],
-        "mustInclude": [
-          "2016년 열애설 언급 시점(확인 필요: 당시 기사 날짜)",
-          "2026년 기준 공식 확인된 연애·결혼 발표 여부(확인 필요: 소속사·구단 공식 발표)",
-          "소속팀 삼성 라이온즈 등 기본 프로필 정리",
-          "시기별 열애설 타임라인 정리표"
-        ],
-        "mustAvoid": [
-          "일반인으로 추정되는 상대의 신상·사진을 특정해 공개",
-          "다른 야구선수의 열애설과 혼동해서 서술"
-        ],
-        "checkBefore": [
-          "최근 연애·결혼 관련 보도 실재 여부를 스포츠 기사·구단 공식 채널에서 확인",
-          "2016년 열애설 기사의 정확한 출처와 날짜 확인"
-        ],
-        "solves": [
-          "구자욱 여친 있는지 모름 → 공식 확인된 발표 여부를 시기별로 정리해 해결",
-          "2016년 열애설과 최근 소문이 섞여 헷갈림 → 타임라인으로 구분해 해결"
-        ],
-        "actionTitles": [
-          "구자욱 여자친구 2026, 공식 확인된 사실만 정리"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "구자욱 여친 있나요 ??",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=50104&docId=457958129&answerNo=2&qb=6rWs7J6Q7JqxIOyXrOyekCDsuZzqtawg6rKw7Zi8IOyXsOyVoA==",
-          "views": 4761,
-          "answers": 3,
-          "askedAt": "2023.11.17"
-        },
-        {
-          "title": "구자욱 연애",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10010205&docId=457043517&answerNo=1&qb=6rWs7J6Q7JqxIOyXrOyekCDsuZzqtawg6rKw7Zi8IOyXsOyVoA==",
-          "views": 3669,
-          "answers": 1,
-          "askedAt": "2023.10.21"
-        },
-        {
-          "title": "삼성라이온즈 구자욱선수 여자친구",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1001020206&docId=471772420&answerNo=3&qb=6rWs7J6Q7JqxIOyXrOyekCDsuZzqtawg6rKw7Zi8IOyXsOyVoA==",
-          "views": 2867,
-          "answers": 4,
-          "askedAt": "2024.07.10"
-        }
-      ]
-    },
-    {
-      "id": "9421fdf99ec1740f",
-      "urls": [
-        "https://hanbre.tistory.com/1920"
-      ],
-      "guide": {
-        "direction": "① ipDISK 외부접속 안됨 질문은 DDNS 등록 자체보다 통신사 모뎀+iptime 공유기 이중 사용 시 생기는 이중NAT 구조에서 막힌다. ② 고수 블로그 제목은 '해결방법'만 적어 이중NAT 진단과 모뎀 브릿지모드 전환 순서가 빠져 있다. ③ 공인IP 확인→이중NAT 체크→브릿지모드 전환→포트포워딩→DDNS 주소 접속 테스트 순서 체크리스트로 끝낸다.",
-        "searchTargets": [
-          "iptime ddns 설정",
-          "iptime ddns 원격접속",
-          "iptime DDNS 주소 아는법",
-          "iptime ddns 접속방법"
-        ],
-        "mustInclude": [
-          "공인IP·사설IP 구분법(관리도구 > 상태정보에서 확인하는 경로)",
-          "통신사 모뎀+iptime 공유기 동시 사용 시 모뎀 브릿지모드 전환 절차",
-          "ipDISK 포트포워딩 포트 번호 (확인 필요: iptime 공식 매뉴얼)",
-          "DDNS 주소 확인 경로(관리도구 > 특수기능 > DDNS 설정)"
-        ],
-        "mustAvoid": [
-          "외부접속 실패를 전부 DDNS 문제로 단정(실제 원인은 이중NAT·방화벽인 경우 多)",
-          "NAS2dual(공유기 겸 모뎀형)과 일반 iptime 공유기를 같은 설정법으로 혼동"
-        ],
-        "checkBefore": [
-          "iptime 공식 홈페이지/고객센터에서 최신 DDNS 등록·ipDISK 설정 절차 확인",
-          "통신사(KT/SK/LG)별 모뎀 브릿지모드 전환 방법 차이 확인"
-        ],
-        "solves": [
-          "IPDISK 외부접속 안됨 → 이중NAT 진단 후 모뎀 브릿지모드+포트포워딩 순서로 해결",
-          "iptime DDNS 주소 아는법 → 관리도구 내 정확한 확인 경로 안내",
-          "ipdisk nas 외부접속 → NAS 제조사 메뉴얼과 iptime 설정을 맞추는 법"
-        ],
-        "actionTitles": [
-          "iptime DDNS 등록 실패, 이중NAT부터 확인하는 법",
-          "iptime DDNS 주소 확인하고 원격접속 연결하는 법"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "IPDISk 외부접속 안됨",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10801&docId=458211241&answerNo=1&qb=aXB0aW1lIGRkbnMg7Iuk7YyoIGlwZGlzayDsmbjrtoDsoJHsho0=",
-          "views": 3409,
-          "answers": 1,
-          "askedAt": "2023.11.09"
-        },
-        {
-          "title": "ipDisk 외부접속 불가",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10801&docId=384282007&answerNo=1&qb=aXB0aW1lIGRkbnMg7Iuk7YyoIGlwZGlzayDsmbjrtoDsoJHsho0=",
-          "views": 2546,
-          "answers": 1,
-          "askedAt": "2021.03.12"
-        },
-        {
-          "title": "ipdisk nas 외부접속",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1010406&docId=479037992&answerNo=1&qb=aXB0aW1lIGRkbnMg7Iuk7YyoIGlwZGlzayDsmbjrtoDsoJHsho0=",
-          "views": 785,
-          "answers": 1,
-          "askedAt": "2024.12.12"
-        }
-      ]
-    },
-    {
-      "id": "ecfe56886fac56dc",
-      "urls": [
-        "https://allqueen.tistory.com/1681"
-      ],
-      "guide": {
-        "direction": "① 검색자는 '안경이 스마트폰처럼 통역·번역을 대신할 수 있는지'가 궁금한데 구체 스펙이 안 보여 막힌다. ② 고수 블로그 제목은 '미래' 서사만 강조해 출시일·가격·지원 언어 수 같은 확인 가능한 정보는 비어 있다. ③ 공식 발표 기준 스펙표와 경쟁 제품 비교로 궁금증을 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "공식 출시일·가격 (확인 필요: 젠틀몬스터/아이아이컴바인드 공식 발표)",
-          "통역 작동 방식: 온디바이스 처리인지 스마트폰 연동 클라우드 처리인지 (확인 필요: 공식 스펙)",
-          "지원 언어 수 및 번역 가능 범위 (확인 필요: 공식 보도자료)",
-          "스마트폰 없이 단독 사용 가능 여부 (확인 필요: 공식 발표)"
-        ],
-        "mustAvoid": [],
-        "checkBefore": [
-          "젠틀몬스터(아이아이컴바인드) 공식 보도자료·SNS에서 출시일·가격·기능 재확인"
-        ],
-        "solves": [
-          "AI 안경이 스마트폰을 대신하는지 → 공식 발표 기준 기능 범위를 명확히 정리",
-          "실시간 통역 안경 작동 원리 → 온디바이스/클라우드 처리 방식 구분 설명"
-        ],
-        "actionTitles": [
-          "AI 안경 실시간 통역, 스마트폰 없이 되는지 확인",
-          "젠틀몬스터 AI안경 vs 레이밴 메타, 기능 비교정리"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "미래의 직업",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=13&docId=40111749&answerNo=18&qb=7Ya17JetIOyLnOuMgCDslYjqsr0g7Iqk66eI7Yq47Y+wIOuMgOyLoO2VnOuLpA==",
-          "views": 71438,
-          "answers": 23,
-          "askedAt": "2008.07.14"
-        },
-        {
-          "title": "신기술 5가지 정도만 알려주세요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1114&docId=50900102&answerNo=2&qb=7Ya17JetIOyLnOuMgCDslYjqsr0g7Iqk66eI7Yq47Y+wIOuMgOyLoO2VnOuLpA==",
-          "views": 23810,
-          "answers": 2,
-          "askedAt": "2008.07.14"
-        },
-        {
-          "title": "미래의자동차의 전망과 신기술 하나만 알려....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=811&docId=74232070&answerNo=2&qb=7Ya17JetIOyLnOuMgCDslYjqsr0g7Iqk66eI7Yq47Y+wIOuMgOyLoO2VnOuLpA==",
-          "views": 16245,
-          "answers": 4,
-          "askedAt": "2008.07.14"
-        }
-      ]
-    },
-    {
-      "id": "b4c80f1ff9e07185",
-      "urls": [
-        "https://self-explorer.tistory.com/786"
-      ],
-      "guide": {
-        "direction": "① 검색자는 오늘·이번 주 운세 내용을 찾으면서 동시에 '별자리 운세가 유사과학 아닌지'도 궁금해 두 수요가 겹쳐 막힌다. ② 고수 블로그 제목은 '점검과 균형' 같은 추상 테마만 걸어 12별자리별 구체 코멘트는 비어 있다. ③ 12별자리 애정·재물·건강 한줄 표와 유사과학 논쟁 짧은 안내로 끝낸다.",
-        "searchTargets": [
-          "11월 별자리 운세",
-          "별자리 운세 유사과학",
-          "별자리 운세 순위",
-          "별자리 운세 염소자리"
-        ],
-        "mustInclude": [
-          "2026년 11월 11일 날짜 명시 및 해당 주 범위 표기",
-          "12별자리 각각 애정·재물·건강 핵심 한줄 표",
-          "별자리 운세 유사과학 논쟁 한두 줄 안내(오락용 성격 명시)",
-          "염소자리 등 특정 별자리 검색자를 위한 개별 섹션 구분"
-        ],
-        "mustAvoid": [
-          "사주(명리학)와 별자리 운세를 같은 체계처럼 혼동해서 설명"
-        ],
-        "checkBefore": [
-          "2026년 11월 11일이 요일·특정 기념일과 겹치는지 확인 (확인 필요)",
-          "요약 대상 원문 콘텐츠의 발행처·작성 기준(서양 별자리 vs 다른 체계) 확인"
-        ],
-        "solves": [
-          "별자리 운세가 유사과학인지 → 과학적 근거 논쟁을 짧게 짚고 오락용으로 안내",
-          "11월 별자리 운세 → 12별자리 각각 이번 주 핵심 포인트 표 제공",
-          "별자리 운세 순위 → 인기 있는 별자리 운세 콘텐츠 비교"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "태어난 시간을 모를때는 몇시로 잡아야 되나....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=31504&docId=483247953&answerNo=6&qb=67OE7J6Q66asIOyatOyEuCDspJHsi6wg6reg7ZiVIOyeoeq4sA==",
-          "views": 880,
-          "answers": 6,
-          "askedAt": "2026.10.14"
-        },
-        {
-          "title": "(유니버셜) 오늘의운세 리딩 부탁드립니다.",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=31504&docId=495504125&answerNo=3&qb=67OE7J6Q66asIOyatOyEuCDspJHsi6wg6reg7ZiVIOyeoeq4sA==",
-          "views": 279,
-          "answers": 4,
-          "askedAt": "2026.10.11"
-        },
-        {
-          "title": "아기출산택일 괜찮은지 궁금해요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=31504&docId=495146466&answerNo=9&qb=67OE7J6Q66asIOyatOyEuCDspJHsi6wg6reg7ZiVIOyeoeq4sA==",
-          "views": 193,
-          "answers": 10,
-          "askedAt": "2026.09.15"
-        }
-      ]
-    },
-    {
-      "id": "8dedb08fb00fa6c4",
-      "urls": [
-        "https://self-explorer.tistory.com/794"
-      ],
-      "guide": {
-        "direction": "검색자는 원작 웹소설과 드라마 '나의 유죄인간'의 결말이 다른지, 진범이 누구인지 궁금해하며 지식인에도 같은 질문이 반복 올라온다. 고수 블로그는 8화 결말과 9화 예고만 다루고 원작과의 결말 차이, 몇부작 여부는 짚지 않는다. 1~8화 요약표와 원작·드라마 결말 비교, 몇부작·재방송·OTT 정보를 한 번에 정리해 끝낸다.",
-        "searchTargets": [
-          "나의 유죄인간 줄거리 결말",
-          "나의 유죄인간 몇부작",
-          "나의 유죄인간 인물관계도",
-          "나의 유죄인간 ott"
-        ],
-        "mustInclude": [
-          "1화~8화 회차별 핵심 줄거리 요약표",
-          "원작 웹소설과 드라마 결말 차이 여부(확인 필요: 원작 플랫폼·제작진 발표)",
-          "총 몇부작인지(확인 필요: 방송사 공식 편성 공지)",
-          "주요 인물관계도 정리",
-          "재방송·OTT 편성 정보(확인 필요: 방송사·OTT 공지)"
-        ],
-        "mustAvoid": [
-          "실제 사건 인물(글렌 에드워드 로저스 등)과 드라마 등장인물·설정을 동일시",
-          "공식 발표 전 원작 결말을 단정적 스포일러로 서술"
-        ],
-        "checkBefore": [
-          "원작 웹소설 결말(연재 플랫폼·출판사 공지)",
-          "방송 회차 수·편성표(방송사 공식 채널)",
-          "OTT 서비스명·재방송 일정(방송사·OTT 공지)"
-        ],
-        "solves": [
-          "원작과 드라마 결말이 같은지 몰라 헷갈림 → 결말 차이 여부를 항목별로 비교 정리",
-          "몇부작인지, 언제 재방송하는지 몰라 불편 → 편성·OTT 정보를 표로 안내(확인 필요)",
-          "인물관계가 복잡해 못 따라감 → 인물관계도로 한눈에 정리"
-        ],
-        "actionTitles": [
-          "나의 유죄인간 몇부작인지와 재방송·OTT 편성 확인하는 법",
-          "나의 유죄인간 원작과 드라마 결말 차이점 비교 정리하기"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "1995년에 4명의 여성의 살인사건 용의자로 지....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=602060201&docId=490528179&answerNo=1&qb=64KY7J2YIOycoOyjhOyduOqwhCDspITqsbDrpqwg7Lap6rKpIOqysOunkA==",
-          "views": 1594,
-          "answers": 1,
-          "askedAt": "2025.12.07"
-        },
-        {
-          "title": "'나의 유죄인간' 원작 결말과 드라마 결말, 어....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=3010101&docId=495654156&answerNo=4&qb=64KY7J2YIOycoOyjhOyduOqwhCDspITqsbDrpqwg7Lap6rKpIOqysOunkA==",
-          "views": 839,
-          "answers": 6,
-          "askedAt": "2026.10.29"
-        },
-        {
-          "title": "드라마 '나의 유죄인간' 원작 결말, 정말 범인....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6020602&docId=495699865&answerNo=2&qb=64KY7J2YIOycoOyjhOyduOqwhCDspITqsbDrpqwg7Lap6rKpIOqysOunkA==",
-          "views": 576,
-          "answers": 3,
-          "askedAt": "2026.10.28"
-        }
-      ]
-    },
-    {
-      "id": "d1fb1a647032e468",
-      "urls": [
-        "https://moncar.tistory.com/258"
-      ],
-      "guide": {
-        "direction": "검색자는 이번 달 어떤 차종이 할인되고, 법인 명의 구매나 생산월 조건에 따라 할인이 어떻게 달라지는지 궁금해한다. 고수 블로그는 브랜드별 할인율만 나열하고 조건별(재고·생산월·결제수단) 차이는 짚지 않는다. 브랜드·차종별 할인조건 비교표와 중복 적용 가능 여부 체크리스트로 끝낼 수 있게 한다.",
-        "searchTargets": [
-          "자동차 브랜드 별 보증기간",
-          "자동차 브랜드별 특징"
-        ],
-        "mustInclude": [
-          "브랜드별(현대·기아·수입차 등) 11월 할인조건 비교표",
-          "생산월·재고 조건에 따른 할인 차등 여부(확인 필요: 제조사 공식 공지)",
-          "법인 명의·개인카드 결제시 중복할인 가능 여부(확인 필요: 딜러사·제조사)",
-          "지자체 보조금 소진 시 브랜드 자체 지원금 여부(확인 필요: 해당 브랜드 공지)"
-        ],
-        "mustAvoid": [
-          "시점이 지난 할인 데이터(예: 특정 생산월 기준 할인)를 현재 조건처럼 서술",
-          "전기차 보조금과 제조사 자체 할인을 같은 성격으로 혼동",
-          "특정 브랜드 결함·보증기간 이슈를 할인 혜택과 무관하게 섞어 서술"
-        ],
-        "checkBefore": [
-          "각 제조사(현대·기아·수입사) 공식 홈페이지 11월 프로모션 공지",
-          "딜러사별 중복할인·결제수단 조건(제조사 공식 안내)",
-          "지자체 전기차 보조금 소진 현황(지자체 공고)"
-        ],
-        "solves": [
-          "이번 달 어떤 차종이 할인되는지 몰라 헷갈림 → 브랜드별·차종별 11월 할인조건을 표로 정리",
-          "법인차량 구매시 중복할인 가능한지 궁금 → 결제수단별 중복 가능 여부 체크리스트 제공",
-          "보조금 소진시 자체지원금 있는지 헷갈림 → 브랜드별 자체 지원 여부 정리(확인 필요)"
-        ],
-        "actionTitles": [
-          "11월 자동차 브랜드별 할인조건 한눈에 비교하기",
-          "법인차량 할인, 중복 가능 여부 체크리스트 확인",
-          "자동차 보증기간까지 포함한 브랜드별 혜택 비교"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "기아자동차 차량으로 구매시 할인혜택여부",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8110201&docId=485170263&answerNo=1&qb=7J6Q64+Z7LCoIOu4jOuenOuTnOuzhCDtirnrs4Qg7ZSE66Gc66qo7IWYIOywqOyiheuzhA==",
-          "views": 550,
-          "answers": 5,
-          "askedAt": "2025.05.13"
-        },
-        {
-          "title": "장기렌트카로 어떤차량 타셨었나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40701&docId=493840092&answerNo=4&qb=7J6Q64+Z7LCoIOu4jOuenOuTnOuzhCDtirnrs4Qg7ZSE66Gc66qo7IWYIOywqOyiheuzhA==",
-          "views": 321,
-          "answers": 4,
-          "askedAt": "2026.06.15"
-        },
-        {
-          "title": "이번 달 자동차 할인 혜택, 어떤 차종이 가장 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8110201&docId=490001735&answerNo=2&qb=7J6Q64+Z7LCoIOu4jOuenOuTnOuzhCDtirnrs4Qg7ZSE66Gc66qo7IWYIOywqOyiheuzhA==",
-          "views": 300,
-          "answers": 3,
-          "askedAt": "2025.11.06"
-        }
-      ]
-    },
-    {
-      "id": "634d0ddd9e7ca236",
-      "urls": [
-        "https://story7880.tistory.com/entry/%EA%B8%88%EC%9C%B5%EB%B3%B4%EC%95%88%EC%9B%90%EB%A7%88%EC%A0%80-%ED%95%B4%ED%82%B9%EB%8B%B9%ED%96%88%EB%8B%A4-%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD-%EA%B8%88%EC%9C%B5%EB%B3%B4%EC%95%88%EC%9D%98-%EA%B2%BD%EA%B3%A0%EB%93%B1"
-      ],
-      "guide": {
-        "direction": "검색자는 금융보안원이 실제로 해킹당했는지, 내 개인정보·금융정보가 유출 범위에 포함되는지 궁금해한다. 고수 블로그는 '경고등'이라는 제목으로 위기감만 조성하고 유출 확인·신고 방법은 다루지 않는다. 해킹 경위 타임라인과 개인정보 유출 확인 방법, 신고 절차를 정리해 끝낼 수 있게 한다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "금융보안원 해킹 발생 시점·경위 타임라인(확인 필요: 금융보안원 공식 발표)",
-          "피해 범위에 개인정보·금융정보 포함 여부(확인 필요: 공식 발표)",
-          "KISA(118)·경찰청 사이버수사대 신고 절차",
-          "개인정보 유출 여부 조회 방법(확인 필요: 관련 공식 조회 사이트)"
-        ],
-        "mustAvoid": [
-          "공식 발표 전 해킹 경위·원인을 단정적으로 서술",
-          "금융보안원과 금융감독원 등 유사 기관 혼동",
-          "피싱 의심 사이트 링크를 공식 경로처럼 안내"
-        ],
-        "checkBefore": [
-          "금융보안원 공식 보도자료·공지",
-          "KISA(한국인터넷진흥원) 공지",
-          "금융위원회 등 관계기관 발표"
-        ],
-        "solves": [
-          "해킹 당하면 어떻게 해야 하는지 몰라 당황함 → KISA·경찰청 사이버수사대 신고 절차 정리",
-          "금융보안원 해킹 경위가 정확히 뭔지 헷갈림 → 공식 발표 기준 타임라인으로 정리(확인 필요)"
-        ],
-        "actionTitles": [
-          "금융보안원 해킹 경위 확인하고 대처하는 법",
-          "내 금융정보 유출 여부 조회하는 방법 정리",
-          "해킹 피해시 KISA·경찰 신고 절차 확인하기"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "표현의 자유",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=80101&docId=495646170&answerNo=18&qb=6riI7Jy167O07JWI7JuQ66eI7KCAIO2VtO2CueuLue2WiOuLpCDrjIDtlZzrr7zqta0g6riI7Jy167O07JWIIOqyveqzoOuTsQ==",
-          "views": 20766,
-          "answers": 18,
-          "askedAt": "2026.11.08"
-        },
-        {
-          "title": "해킹 당하면 어떻게 해야하나요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=11001&docId=484122450&answerNo=3&qb=6riI7Jy167O07JWI7JuQ66eI7KCAIO2VtO2CueuLue2WiOuLpCDrjIDtlZzrr7zqta0g6riI7Jy167O07JWIIOqyveqzoOuTsQ==",
-          "views": 106,
-          "answers": 3,
-          "askedAt": "2025.04.11"
-        },
-        {
-          "title": "텔레그램 계정 삭제 문자 피싱인가요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=11003&docId=493106121&answerNo=6&qb=6riI7Jy167O07JWI7JuQ66eI7KCAIO2VtO2CueuLue2WiOuLpCDrjIDtlZzrr7zqta0g6riI7Jy167O07JWIIOqyveqzoOuTsQ==",
-          "views": 5352,
-          "answers": 8,
-          "askedAt": "2026.04.24"
-        }
-      ]
-    },
-    {
-      "id": "186279a500099b4f",
-      "urls": [
-        "https://codingzero.tistory.com/entry/aliexpress-1111-sale-promo-codes-coupons-2026"
-      ],
-      "guide": {
-        "direction": "지식인에 '쿠폰 빨리 써야하나' 질문이 올라오는 건 코드 중복적용·마감시점을 몰라서다. 고수 글은 6종·80%·11/18 마감만 나열하고 코드별 적용 순서·중복 가능 여부는 비워뒀다. 코드명·조건·마감시각을 한 표로 묶고 적용 순서를 단계별로 짚어주면 글을 끝까지 읽는다.",
-        "searchTargets": [
-          "알리익스프레스 광군제 할인코드",
-          "알리익스프레스 광군제 할인코드 방법",
-          "알리익스프레스 광군제 기간",
-          "알리익스프레스 광군제 쿠폰"
-        ],
-        "mustInclude": [
-          "6종 할인코드명·최소구매조건·할인율 표(확인 필요: 알리익스프레스 공식 앱 공지)",
-          "최대 80% 할인 적용 조건(품목·구간, 확인 필요)",
-          "11월 18일 마감 정확한 시각(한국시간 기준, 확인 필요: 공식 공지)",
-          "코드 중복 적용 가능 여부(확인 필요: 알리익스프레스 앱)",
-          "쿠폰 적용 순서(장바구니→코드 입력 단계) 캡처 또는 단계 설명"
-        ],
-        "mustAvoid": [
-          "작년 광군제 할인코드를 올해 코드로 재사용",
-          "테슬라 특가·카드사 제휴 할인 등 별도 프로모션을 알리 자체 코드로 혼동",
-          "코드 유효기간 지난 뒤에도 '아직 쓸 수 있다'는 식 서술"
-        ],
-        "checkBefore": [
-          "알리익스프레스 공식 앱/사이트 공지에서 코드별 마감일시·중복적용 여부 확인"
-        ],
-        "solves": [
-          "쿠폰 빨리 써야하나요? → 코드별 마감시각 정리표로 바로 확인",
-          "할인코드 적용방법 모르겠음 → 적용 순서를 단계별로 안내",
-          "최대 80% 조건이 헷갈림 → 품목·구간별 조건표로 정리"
-        ],
-        "actionTitles": [
-          "알리 광군제 쿠폰 11/18 마감, 지금 코드 확인하기"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "알리 광군제 쿠폰은 빨리 사용해야하나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=512&docId=477418616&answerNo=6&qb=7JWM66as7J217Iqk7ZSE66CI7IqkIOq0keq1sOygnCDtlaDsnbjsvZTrk5wg7KCB7Jqp67Cp67KVIOuniOqwkA==",
-          "views": 1715,
-          "answers": 17,
-          "askedAt": "2024.11.07"
-        }
-      ]
-    },
-    {
-      "id": "a7f1484f9ae30f87",
-      "urls": [
-        "https://traveljubunam.tistory.com/570"
-      ],
-      "guide": {
-        "direction": "지식인 질문자들은 AI 관련주 추천이나 차트 보는 법을 물으면서 인텔의 현재 위치를 헷갈려한다. 고수 글 제목 '동향 분석과 고려사항'은 포괄적이지만 구체적 수치(현재가·변동률·목표가)가 비어 있다. 날짜 기준 가격표와 호재·악재 타임라인, 경쟁사 대비 포지션을 정리하면 판단 기준이 생긴다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "11월 기준 종가·전일 대비 변동률(확인 필요: 증권사 시세 또는 야후파이낸스)",
-          "최근 실적·파운드리 관련 주요 이슈 타임라인(확인 필요: 인텔 IR 자료)",
-          "AI 반도체 경쟁사(엔비디아·AMD) 대비 포지션 간단 비교"
-        ],
-        "mustAvoid": [
-          "매수·매도를 직접 권유하는 투자권유성 서술",
-          "오래된 캡처 화면의 가격을 최신인 것처럼 재인용",
-          "AMD·엔비디아 등 다른 반도체주 이슈를 인텔 이슈로 혼동"
-        ],
-        "checkBefore": [
-          "인텔 공식 IR 자료 또는 최신 증권사 리포트에서 실적·가격 재확인"
-        ],
-        "solves": [
-          "AI 관련주 뭐가 있나요? → 인텔 포지션과 경쟁사 비교로 정리",
-          "인텔 주가 왜 이런가요? → 최근 이슈 타임라인으로 설명",
-          "지금 사도 되나요? → 밸류에이션 지표 기준 참고 정보 제공(투자권유 아님)"
-        ],
-        "actionTitles": [
-          "인텔 INTC 주가, 11월 기준 동향 지금 바로 확인",
-          "인텔 주가 오를까 내릴까, 투자 전 고려사항 체크",
-          "인텔 INTC 주가 전망, 매수 전 체크리스트 확인하기"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "국제 금가격, 미 채권 가격 , 환율 차트 보는....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=35361353&answerNo=1&qb=7J247YWUIGludGMg7KO86rCAIOuPme2WpSDrtoTshJ0=",
-          "views": 180172,
-          "answers": 1,
-          "askedAt": "2009.02.22"
-        },
-        {
-          "title": "AI주식 종목들이 대표적인게 무엇인가요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=80301&docId=477845383&answerNo=4&qb=7J247YWUIGludGMg7KO86rCAIOuPme2WpSDrtoTshJ0=",
-          "views": 10403,
-          "answers": 10,
-          "askedAt": "2025.03.28"
-        }
-      ]
-    },
-    {
-      "id": "33f50deba3c5604c",
-      "urls": [
-        "https://aljal.tistory.com/entry/%EA%B0%80%EC%A1%B1-%EB%82%98%EB%93%A4%EC%9D%B4-%ED%9B%84%EB%B3%B4-%EA%B0%99%EC%9D%B4-%EA%B3%A0%EB%A5%B4%EA%B8%B0-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EC%95%88-%ED%95%98%EB%A9%B4-10%EA%B0%9C%EC%9D%B8%EB%8D%B0-%EA%B0%80%EC%9E%85%ED%95%98%EA%B3%A0-%EA%B3%B5%EC%9C%A0%ED%95%98%EB%A9%B4-50%EA%B0%9C%EA%B9%8C%EC%A7%80-%EB%8B%B4%EC%95%84%EC%9A%94"
-      ],
-      "guide": {
-        "direction": "'가족 나들이 경기도·코스·도시락' 검색자는 후보지를 여러 개 추려 가족과 같이 고르고 싶은데 어떤 서비스로 비교하면 되는지 모른다. 고수 글 제목은 로그인 전 10개·가입 후 50개 저장 기능만 언급하고 지역별 추천 코스·도시락 팁은 비워뒀다. 지역 추천 리스트와 공유해서 고르는 단계를 묶으면 끝까지 읽힌다.",
-        "searchTargets": [
-          "가족 나들이 경기도",
-          "가족 나들이 코스",
-          "가족 나들이 장소",
-          "가족 나들이 도시락"
-        ],
-        "mustInclude": [
-          "로그인 전 저장 가능 개수(10개)와 가입 후 공유 시 저장 가능 개수(50개)",
-          "경기도 가족 나들이 추천 장소·코스 목록(확인 필요: 구체 지명)",
-          "나들이 도시락 준비 팁 또는 체크리스트"
-        ],
-        "mustAvoid": [
-          "'다산 가족나들이' 등 지역명을 다른 장소와 혼동",
-          "계절·날씨가 안 맞는 나들이 정보를 그대로 섞어 쓰기"
-        ],
-        "checkBefore": [
-          "해당 서비스 공식 페이지에서 로그인 전후 저장 개수 정책 재확인",
-          "추천 장소의 최신 운영시간·휴무일을 공식 공지에서 재확인"
-        ],
-        "solves": [
-          "가족끼리 나들이 후보 비교 어떻게? → 로그인+공유로 같이 고르는 방법 안내",
-          "경기도 가족 나들이 어디로? → 지역별 추천 코스 목록 제공",
-          "도시락 뭐 싸갈까? → 나들이 도시락 체크리스트 추가"
-        ],
-        "actionTitles": [
-          "가족 나들이 장소 10개 넘게 담는 법, 가입하고 공유하기",
-          "가족 나들이 도시락까지, 후보 50개 담아 비교하는 법"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
-    },
-    {
-      "id": "3d096130b41f72db",
-      "urls": [
-        "https://traveljubunam.tistory.com/569"
-      ],
-      "guide": {
-        "direction": "QLD를 토스에서 사려는 사람은 매수 가능 여부와 기본예탁금 규정부터 막힌다. 고수 글은 2배 추종의 원리만 짚고, 국내 레버리지 ETF에만 적용되는 기본예탁금을 해외 상장 QLD에도 내야 하는지는 풀지 않는다. 이 글은 QLD 매수 절차·기본예탁금 적용 여부·배당과 하락기 변동성 끌림까지 표로 정리해 끝까지 읽히게 한다.",
-        "searchTargets": [
-          "qld 주가 매수방법",
-          "qld 주가 토스",
-          "qld 주가 하락",
-          "qld 주가 배당"
-        ],
-        "mustInclude": [
-          "QLD(ProShares Ultra QQQ) 미국 NYSE Arca 상장 여부 (확인 필요: 운용사 공식자료)",
-          "토스 앱에서 QLD 해외주식 매수 절차 및 거래시간 안내",
-          "기본예탁금은 국내 상장 레버리지 ETF 규정이며 해외주식 QLD엔 미적용 (확인 필요: 금투협 규정)",
-          "QLD 배당 지급 여부 및 배당률 (확인 필요: 운용사 공시)",
-          "변동성 끌림(decay) 현상이 하락기 주가에 미치는 영향"
-        ],
-        "mustAvoid": [
-          "QLD를 국내 상장 레버리지 ETF처럼 설명해 기본예탁금·상장폐지 규정 혼동시키기",
-          "특정 매수 시점·목표가 제시 등 투자 권유성 단정"
-        ],
-        "checkBefore": [
-          "ProShares 공식 홈페이지에서 QLD 보수·배당·구조 확인",
-          "금융투자협회 규정에서 기본예탁금이 해외주식에도 적용되는지 확인",
-          "토스 앱 공지에서 해외주식 매수 가능 여부·수수료 확인"
-        ],
-        "solves": [
-          "QLD 기본예탁금 어디 채우나요 → 해외주식은 기본예탁금 제도 미적용임을 규정으로 설명",
-          "QLD 토스에서 매수 가능한가 → 매수 절차와 거래시간 정리",
-          "etf 레버리지 상장폐지 위험 질문 → 펀드해지와 국내 ETF 상장폐지의 구조 차이 설명"
-        ],
-        "actionTitles": [
-          "QLD 주가 토스 매수방법과 기본예탁금 필요 여부 확인",
-          "QLD 주가 하락 시 배당까지 따지는 투자 체크리스트 정리",
-          "QLD 주가 매수방법 전 기본예탁금 규정부터 확인"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "나스닥 2배 레버리지 투자 전략과 주의사항",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=486281791&answerNo=4&qb=cWxkIOyjvOqwgCDroIjrsoTrpqzsp4AgZXRmIOydtO2VtA==",
-          "views": 1971,
-          "answers": 7,
-          "askedAt": "2025.06.19"
-        },
-        {
-          "title": "etf 레버리지 질문",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=494673800&answerNo=2&qb=cWxkIOyjvOqwgCDroIjrsoTrpqzsp4AgZXRmIOydtO2VtA==",
-          "views": 439,
-          "answers": 13,
-          "askedAt": "2026.08.10"
-        },
-        {
-          "title": "qld 기본예탁금 어디다채워야하나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=495038353&answerNo=3&qb=cWxkIOyjvOqwgCDroIjrsoTrpqzsp4AgZXRmIOydtO2VtA==",
-          "views": 192,
-          "answers": 5,
-          "askedAt": "2026.09.05"
-        }
-      ]
-    },
-    {
-      "id": "359c2b5a07ec2849",
-      "urls": [
-        "https://aljal.tistory.com/entry/%EB%AF%B8%EC%88%A0-%EB%94%94%EC%9E%90%EC%9D%B8-%EC%A0%84%EA%B3%B5-%EB%8C%80%ED%95%99-2027%ED%95%99%EB%85%84%EB%8F%84-%EC%A0%95%EC%8B%9C%EB%8A%94-%EA%B0%99%EC%9D%80-%ED%95%99%EA%B5%90%EB%8F%84-%EC%8B%A4%EA%B8%B0%EC%8B%9C%ED%97%98%EC%9D%B4-%EB%94%B0%EB%A1%9C-%EC%9E%88%EC%96%B4%EC%9A%94"
-      ],
-      "guide": {
-        "direction": "비실기 정시를 찾는 수험생은 같은 홍익대·경희대인데 왜 전공마다 실기 여부가 다른지부터 막힌다. 고수 글은 원리만 짚고 2027학년도 기준 구체적으로 어떤 학교·전공이 비실기인지 목록은 주지 않는다. 이 글은 학교·전공별 실기 유무와 반영과목을 표로 정리해 비교를 끝내준다.",
-        "searchTargets": [
-          "미술디자인사학"
-        ],
-        "mustInclude": [
-          "경희대 도예학과·의류디자인학과 비실기 전형 존재 여부 (확인 필요: 경희대 2027 모집요강)",
-          "홍익대 산업디자인전공 디자인학부 통합모집, 2학년 전공선택 구조 (확인 필요: 홍익대 입학처)",
-          "서울여대 시각디자인전공 정시 반영과목 국/수/영/탐구 (확인 필요: 서울여대 입학처)",
-          "비실기로 미대·디자인 진입 가능한 학교·전공 목록표",
-          "질문 자료에 2027·2028학년도가 섞여 있어 학년도 구분 명시"
-        ],
-        "mustAvoid": [
-          "2027학년도와 2028학년도 모집요강 수치를 혼동해서 섞어 쓰기",
-          "특정 학생·고등학교 사례를 근거로 일반화하기"
-        ],
-        "checkBefore": [
-          "각 대학 입학처 2027학년도 정시 모집요강 PDF로 실기·비실기 여부 재확인",
-          "대입정보포털(어디가)에서 학교별 반영비율 재확인"
-        ],
-        "solves": [
-          "같은 학교인데 전공마다 실기 여부가 다른 이유 → 학과별 비실기/실기 구조 설명",
-          "비실기로 갈 수 있는 미대·디자인 전공이 어디인지 → 학교별 비교표 제공",
-          "정시 반영과목이 학교마다 달라 뭘 봐야 할지 모름 → 국수영탐 반영비율 정리"
-        ],
-        "actionTitles": [
-          "미술디자인 정시 비실기 가능 대학 2027학년도 비교",
-          "경희대 홍익대 미대 실기 비실기 전형 확인하는 법"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "경희대 도예학과 의류디자인학과 정시 비실....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=11050405&docId=495610720&answerNo=2&qb=66+47IigIOuUlOyekOyduCDsoITqs7Ug64yA7ZWZIOygleyLnA==",
-          "views": 229,
-          "answers": 4,
-          "askedAt": "2026.10.19"
-        },
-        {
-          "title": "홍익대 산업디자인전공",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=11050405&docId=495504102&answerNo=3&qb=66+47IigIOuUlOyekOyduCDsoITqs7Ug64yA7ZWZIOygleyLnA==",
-          "views": 185,
-          "answers": 3,
-          "askedAt": "2026.10.12"
-        },
-        {
-          "title": "고1 일반고 시각디자인 미대입시",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=31301&docId=495528646&answerNo=4&qb=66+47IigIOuUlOyekOyduCDsoITqs7Ug64yA7ZWZIOygleyLnA==",
-          "views": 158,
-          "answers": 5,
-          "askedAt": "2026.10.18"
-        }
-      ]
-    },
-    {
-      "id": "7a21cb18d8291b25",
-      "urls": [
-        "https://recreation.comingmoney.com/entry/%EB%8F%99%EC%A0%84%EC%A3%BC-%EA%B8%89%EB%93%B1-%EC%A3%BC%EA%B0%80-%EC%BD%94%EC%8A%A4%EB%8B%A5-%EB%B0%98%EB%93%B1%EA%B3%BC-%EC%95%A1%EB%A9%B4%EB%B3%91%ED%95%A9-%ED%99%95%EC%9D%B8"
-      ],
-      "guide": {
-        "direction": "동전주가 갑자기 급등하면 액면병합 때문인지 테마성 변동성인지부터 헷갈린다. 고수 글은 반등 현상은 설명하지만 실제 액면병합 공시를 어디서 확인하는지는 짚지 않는다. 이 글은 DART 공시 확인 순서와 급등락 제도까지 정리해 혼동을 끝내준다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "DART 전자공시시스템에서 액면병합 공시 확인하는 방법·절차",
-          "동전주 정의(주당 가격대가 낮은 코스닥 소형주 등) 및 특징 설명",
-          "급등 후 급락하는 테마성 변동성 패턴 사례 설명",
-          "사이드카·서킷브레이커 등 급등락 시장조치 제도 설명"
-        ],
-        "mustAvoid": [
-          "중앙디앤엠·에이스하이텍·이트론·아이에이 등 특정 종목 매수·단타 추천으로 비치는 서술",
-          "반기문 테마주 등 미확정 테마 루머를 사실처럼 확산"
-        ],
-        "checkBefore": [
-          "DART 전자공시에서 실제 액면병합 공시 여부 확인",
-          "한국거래소 시장조치(거래정지·사이드카) 공식 공지 확인"
-        ],
-        "solves": [
-          "동전주가 왜 갑자기 급등하나 → 테마성 변동성·유동성 특성으로 설명",
-          "액면병합하면 주가가 오르나 → 공시 확인하는 법과 주가 영향 짚기",
-          "급등하는 동전주 단타 가능한가 → 상한가·급락 위험과 시장조치 제도 설명"
-        ],
-        "actionTitles": [
-          "동전주 급등 원인과 액면병합 공시 확인하는 방법",
-          "코스닥 반등 동전주, 급락 위험까지 함께 확인",
-          "액면병합 동전주 찾는 법과 투자 주의사항 정리"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "중앙디앤엠 주가 폭등랠리 뭐죠??",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=429878217&answerNo=3&qb=64+Z7KCE7KO8IOq4ieuTsSDso7zqsIAg7L2U7Iqk64ulIOuwmOuTsQ==",
-          "views": 3609,
-          "answers": 6,
-          "askedAt": "2022.10.06"
-        },
-        {
-          "title": "에이스하이텍 주식 잔잔한 흐름에서 반등으....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=220478612&answerNo=2&qb=64+Z7KCE7KO8IOq4ieuTsSDso7zqsIAg7L2U7Iqk64ulIOuwmOuTsQ==",
-          "views": 1472,
-          "answers": 2,
-          "askedAt": "2015.03.13"
-        },
-        {
-          "title": "이트론 단타 가능 할까요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=423417511&answerNo=4&qb=64+Z7KCE7KO8IOq4ieuTsSDso7zqsIAg7L2U7Iqk64ulIOuwmOuTsQ==",
-          "views": 757,
-          "answers": 5,
-          "askedAt": "2022.07.09"
-        }
-      ]
-    },
-    {
-      "id": "ea322f7ebcabf925",
-      "urls": [
-        "https://hwichistory.tistory.com/1296"
-      ],
-      "guide": {
-        "direction": "검색자는 르뱅쿠키를 구우려다 반죽이 옆으로 퍼져 부침개처럼 납작해진 이유를 몰라 막혀있다. 고수 글 제목은 '3가지 착각'만 나열해 어떤 착각이 어느 정도 온도차·시간차로 이어지는지 구체적으로 안 보여준다. 독자는 버터 온도·반죽 휴지시간·오븐 예열 여부를 체크리스트로 점검하면 바로 원인을 찾아 다음 반죽에 적용할 수 있다.",
-        "searchTargets": [
-          "쿠키 퍼지는 이유"
-        ],
-        "mustInclude": [
-          "버터 완전히 녹인 상태 vs 상온 포마드 상태 온도 차이 비교",
-          "반죽 휴지(냉장) 유무에 따른 퍼짐 정도 비교",
-          "오븐 예열 여부와 반죽 온도 체크리스트",
-          "3가지 착각을 원인별로 정리한 표",
-          "(확인 필요: 정확한 휴지 시간·버터 온도 수치는 원문 확인)"
-        ],
-        "mustAvoid": [
-          "모든 쿠키 레시피에 똑같이 적용되는 것처럼 일반화(르뱅쿠키 특성 무시)",
-          "버터 브랜드·무염/가염 비교처럼 소재와 무관한 내용 추가"
-        ],
-        "checkBefore": [
-          "버터 녹는 정도·반죽 휴지 시간의 정확한 수치는 원문 레시피로 확인",
-          "'3가지 착각'이 구체적으로 무엇인지 원문 기사로 재확인"
-        ],
-        "solves": [
-          "버터를 녹여 써도 되는지 → 녹인 버터와 포마드 버터의 퍼짐 차이를 비교로 설명",
-          "반죽 휴지를 꼭 해야 하는지 → 휴지 유무에 따른 결과 차이를 제시",
-          "쿠키가 왜 퍼지는지 → 3가지 착각을 원인별로 정리해 바로 확인"
-        ],
-        "actionTitles": [
-          "쿠키 퍼지는 이유 확인, 버터·휴지 체크리스트로 점검하기",
-          "르뱅쿠키 퍼지는 이유 3가지 착각 바로 확인하는 법"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
-    },
-    {
-      "id": "63fc2a7137ccc2c5",
-      "urls": [
-        "https://tmhub.co.kr/1469"
-      ],
-      "guide": {
-        "direction": "검색자는 욕지도 여행 전 차를 배에 실어갈지, 렌터카를 빌릴지, 그냥 도보로 다닐지 결정 못해 막혀있다. 고수 글 제목은 '비교'라고만 해놓고 선적 비용·소요시간·예약 방법을 표로 안 보여준다. 독자는 세 가지 이동 방식의 비용·시간·예약 순서를 정리한 비교표로 자기 일정에 맞는 방법을 그 자리에서 고른다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "차량 선적 여객선 운임표(차종별 요금, 확인 필요: 운항사 공지)",
-          "렌터카 업체·요금·예약 방법(확인 필요: 욕지도 현지 렌터카 업체 정보)",
-          "도보로 다닐 수 있는 거리·소요시간(확인 필요: 욕지도 둘레길 거리)",
-          "선적 가능 여객선 시간표·예약 순서(확인 필요: 통영여객선터미널 공지)",
-          "세 가지 방법 비용·시간 비교표"
-        ],
-        "mustAvoid": [
-          "확인되지 않은 선적 비용·시간표를 추정치로 단정"
-        ],
-        "checkBefore": [
-          "차량 선적 가능 여객선 운항사·시간표는 공식 홈페이지/통영여객선터미널 공지로 확인",
-          "욕지도 현지 렌터카 업체 존재 여부와 요금은 업체 공지로 확인"
-        ],
-        "solves": [
-          "욕지도에 차를 가져갈 수 있는지 → 차량 선적 가능 여부와 운임을 바로 확인",
-          "렌터카가 나은지 도보가 나은지 → 비용·시간 비교표로 바로 판단",
-          "선적 예약은 어떻게 하는지 → 예약 순서를 단계별로 정리"
-        ],
-        "actionTitles": [
-          "욕지도 차량 선적 비용 확인, 렌터카·도보와 비교하기",
-          "욕지도 여행 차 가져갈까? 선적·렌터카 요금 비교하는 법",
-          "욕지도 차량 선적 예약하는 법, 도보·렌터카와 비교"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
-    },
-    {
-      "id": "9420f2e64b3fd85d",
-      "urls": [
-        "https://flameleaf.tistory.com/entry/%ED%95%B8%EB%93%9C%ED%8F%B0-%EC%A0%95%EC%83%81-%ED%95%B4%EC%A7%80-%EC%A0%88%EC%B0%A8-%EB%B0%8F-%EC%84%A0%EB%B6%88%ED%8F%B0-%EA%B0%9C%ED%86%B5%ED%95%98%EB%8A%94-%EB%B2%95"
-      ],
-      "guide": {
-        "direction": "검색자는 기존 번호를 정상해지 처리해야 선불폰이나 다른 통신사에서 본인인증(문자인증)을 그대로 쓸 수 있는지, 정상해지가 뭔지부터 막혀있다. 고수 글 제목은 '절차'라고만 써놓고 정상해지 여부를 직접 조회하는 방법과 선불폰 개통 순서를 단계별로 안 보여준다. 독자는 정상해지 뜻·조회 방법·선불폰 개통 순서를 체크리스트로 따라가면 미납·요금제 문제까지 한 번에 해결한다.",
-        "searchTargets": [
-          "핸드폰 정상해지",
-          "핸드폰 정상해지 확인",
-          "핸드폰 정상해지 하는 법",
-          "핸드폰 정상해지 조회"
-        ],
-        "mustInclude": [
-          "정상해지 뜻(미납 없이 해지 완료된 상태) 정의",
-          "정상해지 여부 조회 방법(확인 필요: 통신사 고객센터·앱 조회 경로)",
-          "선불폰·선불유심 개통 시 본인인증(문자인증) 가능 여부",
-          "요금 미납 상태에서도 선불폰 개통 가능한 경우(지식인 질문 근거)",
-          "선불폰 개통 순서(유심 구매→개통→본인인증) 체크리스트"
-        ],
-        "mustAvoid": [
-          "알뜰폰 일반 개통과 선불폰 비대면 개통을 같은 절차로 혼동",
-          "통신사별로 다른 정상해지 조회 방법을 하나로 일반화"
-        ],
-        "checkBefore": [
-          "정상해지 조회 정확한 경로(앱/고객센터)는 각 통신사 공식 안내로 확인",
-          "요금 미납 시 선불폰 개통 가능 여부는 해당 통신사 공지로 재확인"
-        ],
-        "solves": [
-          "선불폰이 뭔지, 유심개통이 뭔지 → 정상해지와 선불폰 개통의 관계를 정리해 설명",
-          "요금 미납 상태에서도 선불폰 개통되는지 → 가능한 경우와 조건을 확인시켜줌",
-          "정상해지 여부를 어떻게 확인하는지 → 조회 방법을 단계별로 안내"
-        ],
-        "actionTitles": [
-          "핸드폰 정상해지 확인하는 법, 선불폰 개통까지 한번에",
-          "핸드폰 정상해지 조회하고 선불폰 개통하는 순서 정리",
-          "핸드폰 정상해지 뜻부터 선불폰 개통하는 법까지 정리"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "선불폰or유심개통",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=107020103&docId=493147942&answerNo=40&qb=7ZW465Oc7Y+wIOygleyDgSDshKDrtojtj7Ag6rCc7Ya1",
-          "views": 895,
-          "answers": 41,
-          "askedAt": "2026.10.30"
-        },
-        {
-          "title": "선불폰이뭔가요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=50106&docId=181593257&answerNo=6&qb=7ZW465Oc7Y+wIOygleyDgSDshKDrtojtj7Ag6rCc7Ya1",
-          "views": 811,
-          "answers": 6,
-          "askedAt": "2026.11.09"
-        },
-        {
-          "title": "선불폰 비대면 개통",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40403&docId=469353383&answerNo=13&qb=7ZW465Oc7Y+wIOygleyDgSDshKDrtojtj7Ag6rCc7Ya1",
-          "views": 402,
-          "answers": 13,
-          "askedAt": "2026.11.05"
-        }
-      ]
-    },
-    {
-      "id": "277fe1bee608e604",
-      "urls": [
-        "https://sweetonion1005.tistory.com/entry/%EB%84%B7%ED%94%8C%EB%A6%AD%EC%8A%A4-%EC%97%B0%EA%B2%B0-%EC%98%A4%EB%A5%98-5%EA%B0%80%EC%A7%80-%EA%B0%84%EB%8B%A8%ED%95%9C-%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95"
-      ],
-      "guide": {
-        "direction": "넷플릭스 이용자는 tvq-pb-101, nw-2-5, nw-3-6, E105, E111, E109, 5.8 같은 오류코드를 보고도 뜻을 몰라 지식인에서조차 '무슨 오류인지 적어야 해결한다'는 되물음을 받는다. 고수 블로그의 '5가지 간단한 방법'은 코드 구분 없이 일반 해법만 나열해 자기 코드에 맞는 해결을 찾지 못한다. 이 글은 코드별 원인·해결 비교표와 재설정 전 데이터 삭제 경고, VPN·네트워크 체크리스트 순서를 줘서 코드 하나로 바로 확인하고 끝내게 한다.",
-        "searchTargets": [
-          "넷플릭스 오류 tvq-pb-101",
-          "넷플릭스 오류 nw-2-5",
-          "넷플릭스 오류코드 E105",
-          "넷플릭스 오류코드 E111"
-        ],
-        "mustInclude": [
-          "오류코드별(tvq-pb-101, nw-2-5, nw-3-6, E105, E111, E109, 5.8) 원인·해결 비교표",
-          "로그아웃 후 집 와이파이 연결 상태에서 재로그인하는 순서",
-          "앱 재설정 시 기기에 저장된 다운로드 영상이 삭제된다는 경고",
-          "VPN 완전 종료 → 앱 완전 종료 → 와이파이 끄고 LTE/5G 재접속 체크리스트",
-          "이미 본 걸로 오인해 다음 화로 자동 넘어가는 버그 현상 설명"
-        ],
-        "mustAvoid": [
-          "아이폰·스마트TV·콘솔 등 기기별 해결법을 구분 없이 섞어서 설명",
-          "개인 네트워크 문제와 넷플릭스 서버 자체 장애를 구분하지 않고 서술",
-          "오류코드 의미를 확인 없이 추측해서 단정"
-        ],
-        "checkBefore": [
-          "각 오류코드(tvq-pb-101, E105, E111, E109, nw-2-5, nw-3-6, 5.8)의 공식 정의 — 넷플릭스 고객센터 도움말",
-          "현재 넷플릭스 서비스 장애 여부 — 넷플릭스 공식 상태 공지"
-        ],
-        "solves": [
-          "오류코드만 보고 뭘 해야 할지 모름 → 코드별 원인·해결 비교표로 바로 확인",
-          "재설정하면 다운로드 영상이 날아갈까 걱정 → 재설정 전 삭제 범위 안내",
-          "VPN·와이파이 문제인지 넷플릭스 서버 문제인지 구분 안 됨 → 체크리스트로 순서대로 확인"
-        ],
-        "actionTitles": [
-          "넷플릭스 오류코드 E105·E111·E109 원인과 해결 순서",
-          "넷플릭스 오류 nw-2-5 nw-3-6 해결하는 법 총정리",
-          "넷플릭스 오류 tvq-pb-101 해결법, 데이터 안 날리고 재설정"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "넷플릭스 로그인 오류",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10905&docId=495772056&answerNo=2&qb=64S37ZSM66at7IqkIOyYpOulmCDqsITri6jtlZw=",
-          "views": 266,
-          "answers": 4,
-          "askedAt": "2026.10.31"
-        },
-        {
-          "title": "넷플릭스 오류",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10905&docId=495682159&answerNo=1&qb=64S37ZSM66at7IqkIOyYpOulmCDqsITri6jtlZw=",
-          "views": 180,
-          "answers": 2,
-          "askedAt": "2026.10.25"
-        },
-        {
-          "title": "넷플릭스 오류 해결법",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10905&docId=493401170&answerNo=1&qb=64S37ZSM66at7IqkIOyYpOulmCDqsITri6jtlZw=",
-          "views": 145,
-          "answers": 1,
-          "askedAt": "2026.05.16"
-        }
-      ]
-    },
-    {
-      "id": "e3763ee638f6ea28",
-      "urls": [
-        "https://kinghell.tistory.com/entry/%EB%B3%80%EA%B8%B0-%EC%84%B8%EC%A0%95%EC%A0%9C-%EB%88%84%EC%88%98-%EC%9B%90%EC%9D%B8%EA%B3%BC-%EB%82%B4%EB%B6%80-%EB%B6%80%EC%86%8D%ED%92%88-%EC%A0%90%EA%B2%80-%EA%B5%90%EC%B2%B4-%EB%B0%A9%EB%B2%95"
-      ],
-      "guide": {
-        "direction": "세정제를 넣고 쓰다가 변기에서 물이 새면 지식인 답변은 대부분 '패킹이 약해졌다'고만 하고, 정작 가쯔·다이소·곰돌이·청크린·홈스타 발포·아스토니쉬 같은 특정 제품이 부식을 유발하는지는 알려주지 않는다. 고수 블로그의 '원인과 부속품 점검교체' 제목은 교체법은 다루지만 세정제를 뺀 뒤 급수밸브를 잠그고 확인하는 자가진단 순서는 빠져 있기 쉽다. 이 글은 자가진단 순서와 부속 확인·교체 단계를 정리해 어느 세정제를 쓰든 바로 적용하게 한다.",
-        "searchTargets": [
-          "변기 세정제",
-          "가쯔 변기 세정제",
-          "다이소 변기 세정제",
-          "청크린 변기 세정제"
-        ],
-        "mustInclude": [
-          "세정제 제거 → 급수밸브 잠금 → 바닥 건조 → 누수 재확인하는 자가진단 순서",
-          "세정제 화학성분이 고무 패킹·플라스틱 부품을 부식시켜 누수를 유발한다는 설명",
-          "물탱크 뚜껑 열고 부속(패킹 등) 상태 확인하는 방법",
-          "가쯔·다이소·곰돌이·청크린·홈스타 발포·아스토니쉬 등 세정제 종류 정리",
-          "부속 교체 시 잘못 조립하면 새 문제가 생긴다는 주의사항"
-        ],
-        "mustAvoid": [
-          "특정 브랜드 세정제를 안전·위험으로 단정 짓는 과장(성분별 안전성 데이터 없음)",
-          "변기 본체 교체가 필요한 중대 누수와 단순 패킹 노화를 구분 없이 섞어서 설명",
-          "세정제 자체 문제와 변기 노후화로 인한 누수를 혼동해서 서술"
-        ],
-        "checkBefore": [
-          "세정제 성분이 실제로 고무 패킹을 부식시키는지 — 제조사 성분표·제품 라벨",
-          "자가진단으로 멈추지 않는 중대 누수는 전문 설비기사 확인이 필요한지"
-        ],
-        "solves": [
-          "세정제 쓰다 물이 새는데 원인을 모름 → 세정제 제거 후 급수밸브 잠그고 확인하는 자가진단 순서 제공",
-          "어떤 부속을 바꿔야 할지 모름 → 물탱크 뚜껑 열고 패킹 상태 확인하는 법 안내",
-          "부속 교체 후 또 문제가 생길까 걱정 → 올바른 조립 순서와 주의사항 정리"
-        ],
-        "actionTitles": [
-          "변기 세정제 누수 자가진단하는 법, 급수밸브부터 잠그기",
-          "변기 세정제 부속품 부식 원인과 패킹 교체하는 법 총정리"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "변기 물샘",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=50503&docId=463428014&answerNo=2&qb=67OA6riwIOyEuOygleygnCDriITsiJgg64K067aAIOu2gOyGje2SiA==",
-          "views": 920,
-          "answers": 2,
-          "askedAt": "2024.02.01"
-        },
-        {
-          "title": "클로락스변기세정제 사용시 변기부속품 부식",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=50503&docId=487310711&answerNo=1&qb=67OA6riwIOyEuOygleygnCDriITsiJgg64K067aAIOu2gOyGje2SiA==",
-          "views": 672,
-          "answers": 3,
-          "askedAt": "2025.07.23"
-        },
-        {
-          "title": "욕실 변기물 누수",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=80901&docId=494634099&answerNo=2&qb=67OA6riwIOyEuOygleygnCDriITsiJgg64K067aAIOu2gOyGje2SiA==",
-          "views": 197,
-          "answers": 2,
-          "askedAt": "2026.08.07"
-        }
-      ]
-    },
-    {
-      "id": "4f50d49468264f9e",
-      "urls": [
-        "https://johome.tistory.com/1058"
-      ],
-      "guide": {
-        "direction": "'초음파 집속 치료기기 관련주'를 찾는 사람은 어떤 기업이 이 기술과 실제로 관련 있고 어디가 저평가인지 궁금한데, 제공된 자동완성·지식인 자료는 이 질문과 무관한 의료초음파 검사 사례뿐이라 실제 검색 의도를 뒷받침할 근거가 부족하다. 고수 블로그의 'TOP7 총정리'는 종목을 나열하는 데 그쳐 각 종목의 기술 비중·실적 근거 없이 '저평가·유망' 표현만 반복할 위험이 있다. 이 글은 종목별 기술 연관성과 근거를 표로 정리하고 투자 유의사항을 명시해 과장 없이 끝내게 한다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "치료기기 기술 보유 기업명과 사업 비중 (확인 필요: 기업 공시·사업보고서)",
-          "'관련주' 분류 근거(매출 비중 등)를 종목별 표로 정리 (확인 필요: DART 공시)",
-          "'저평가·유망' 표현의 실적·수주 근거 (확인 필요: 최근 공시)"
-        ],
-        "mustAvoid": [
-          "특정 종목의 미래 주가를 단정적으로 예측하거나 매수를 권유하는 표현",
-          "의료기기의 임상·인허가 단계를 확인 없이 '치료 가능'처럼 과장"
-        ],
-        "checkBefore": [
-          "해당 기업들이 실제로 이 치료기기 기술을 보유·개발 중인지 — 전자공시(DART)·기업 IR 자료",
-          "기기의 임상·허가 현황 — 식약처·FDA 등 공식 인허가 자료"
-        ],
-        "solves": [
-          "어떤 기업이 이 치료기기 기술과 관련 있는지 모름 → 기업명·기술 비중을 표로 정리",
-          "'저평가 유망주'라는 말이 근거가 있는지 불확실 → 실적·공시 근거를 함께 제시",
-          "투자 판단 기준이 없음 → 투자 유의사항과 책임 고지 체크리스트 제공"
-        ],
-        "actionTitles": [
-          "뇌 질환 초음파 집속 치료기기 관련주 TOP7 확인하는 법",
-          "초음파 집속 치료기기 관련주 저평가 종목 비교 확인법",
-          "뇌 질환 치료기기 관련주 TOP7, 투자 전 확인할 점"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "이거 임신 초음파 사진 맞나요???",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=7011401&docId=490642044&answerNo=1&qb=7KeI7ZmYIOy0iOydjO2MjCDsp5Hsho0g7LmY66OM6riw6riwIOq0gOugqOyjvA==",
-          "views": 347,
-          "answers": 2,
-          "askedAt": "2025.12.08"
-        },
-        {
-          "title": "정신과 의사",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70109&docId=495791530&answerNo=1&qb=7KeI7ZmYIOy0iOydjO2MjCDsp5Hsho0g7LmY66OM6riw6riwIOq0gOugqOyjvA==",
-          "views": 202,
-          "answers": 1,
-          "askedAt": "2026.11.04"
-        },
-        {
-          "title": "4차 기형아 검사에서 태아 심장 이상이 발견....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70114&docId=489394298&answerNo=3&qb=7KeI7ZmYIOy0iOydjO2MjCDsp5Hsho0g7LmY66OM6riw6riwIOq0gOugqOyjvA==",
-          "views": 115,
-          "answers": 3,
-          "askedAt": "2025.10.14"
-        }
-      ]
-    },
-    {
-      "id": "a7bdc09a85bc4048",
-      "urls": [
-        "https://comitube.tistory.com/1494"
-      ],
-      "guide": {
-        "direction": "검색자는 영농형 태양광의 실제 시공비·월 통장 수익·대출 상환 구조를 알고 싶어 지식인에 올린다. 고수 블로그는 제도 변화는 짚었지만 100kW급 기준 시공비, SMP/REC 수익표, 농어촌공사 영농 이행점검 기준은 비워뒀다. 독자는 이 수치들을 한 표로 묶은 조건표로 글을 끝낼 수 있다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "100kW급 기준 시공비 총액 (확인 필요: 시공업체 견적서)",
-          "SMP·REC 기준 월 전기판매 수익 계산표 (확인 필요: 전력거래소 고시가)",
-          "지자체·농어촌공사의 연간 영농 이행 실태 점검 기준",
-          "대출 규모 대비 월 상환액과 순수익 비교표 (확인 필요: 금융기관 대출조건)",
-          "영농조합법인으로 가능한 사업 범위와 단순 전기판매형과의 차이"
-        ],
-        "mustAvoid": [
-          "특정 태양광 시공업체를 추천·홍보처럼 서술하는 것",
-          "SMP·REC 수익을 확정 수익처럼 단정하는 것",
-          "일반 노지형 태양광 사업과 영농형을 혼동해 설명하는 것"
-        ],
-        "checkBefore": [
-          "전력거래소 SMP·REC 최신 고시가",
-          "농림축산식품부·농어촌공사의 영농형 태양광 이행점검 기준 공지",
-          "지자체 인허가 조건 및 농지법상 허용 범위"
-        ],
-        "solves": [
-          "100kW급 발전소를 지었을 때 진짜 시공비와 매월 통장에 들어오는 돈이 궁금함 → 시공비·월수익 계산표로 정리",
-          "영농 이행 실태 점검을 통과 못하면 어떻게 되는지 모름 → 점검 기준과 불이행 시 리스크 명시",
-          "영농조합법인으로 태양광 사업이 가능한지 헷갈림 → 가능한 사업구조와 단순 전기판매형의 한계 구분"
-        ],
-        "actionTitles": [
-          "영농형 태양광 100kW 시공비와 월 수익 확인하는 법",
-          "영농형 태양광 SMP·REC 수익 구조 비교 정리하기",
-          "영농형 태양광 장단점과 이행 점검 기준 꼭 비교하기"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "영농형태양광을 하고 싶거든요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1122&docId=392463856&answerNo=3&qb=64aN7IKs7KeT6rOgIOyghOq4sCDsg53sgrDtlZzri6Qg7JiB64aN7ZiVIO2DnOyWkeq0kQ==",
-          "views": 1964,
-          "answers": 3,
-          "askedAt": "2026.10.14"
-        },
-        {
-          "title": "영농형 태양광 장단점 좀 알려주세요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1122&docId=394709214&answerNo=4&qb=64aN7IKs7KeT6rOgIOyghOq4sCDsg53sgrDtlZzri6Qg7JiB64aN7ZiVIO2DnOyWkeq0kQ==",
-          "views": 1591,
-          "answers": 4,
-          "askedAt": "2026.10.14"
-        },
-        {
-          "title": "태양광발전사업에 대해 궁금합니다",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8020608&docId=489963805&answerNo=3&qb=64aN7IKs7KeT6rOgIOyghOq4sCDsg53sgrDtlZzri6Qg7JiB64aN7ZiVIO2DnOyWkeq0kQ==",
-          "views": 282,
-          "answers": 3,
-          "askedAt": "2025.11.04"
-        }
-      ]
-    },
-    {
-      "id": "194d8046ceb2fdc9",
-      "urls": [
-        "https://hyperlipidemia.tistory.com/entry/%F0%9F%90%9F-%EC%98%A4%EB%A9%94%EA%B0%80-3-%EC%A7%80%EB%B0%A9%EC%82%B0%EC%9D%98-%EC%A7%84%EC%8B%A4-%E2%80%94-%ED%9A%A8%EA%B3%BC%EC%99%80-%ED%95%9C%EA%B3%84-%EC%9D%98%ED%95%99%EC%A0%81-%EA%B7%BC%EA%B1%B0-%EC%B4%9D%EC%A0%95%EB%A6%AC"
-      ],
-      "guide": {
-        "direction": "주어진 지식인 자료가 소재와 무관한 노이즈여서 실제 검색 의도는 오메가3 효과가 효능별로 어디까지 입증됐는지에 대한 혼란으로 판단된다. 고수 글은 '진실·근거 총정리'라는 제목으로 포괄적이지만 효과별 근거 등급을 나누지 못한 경우가 많다. 독자는 효과별 근거 등급표와 섭취량·주의사항 체크리스트로 글을 끝낼 수 있다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "효과별 근거 등급 구분표: 심혈관·중성지질·관절·인지기능 (확인 필요: 메타분석 자료)",
-          "어유(피쉬오일)와 알지네이트 오메가3의 성분·흡수 차이 (확인 필요: 제품 성분표)"
-        ],
-        "mustAvoid": [
-          "근거가 제한적인 효과(치매·우울증 예방 등)를 확정 효과처럼 서술하는 것",
-          "단일 연구 결과를 전체 효과로 일반화하는 것"
-        ],
-        "checkBefore": [
-          "의약품안전나라의 오메가3-약물 상호작용 정보"
-        ],
-        "solves": [
-          "오메가3가 정말 효과 있는지 헷갈림 → 효과별 입증·제한적·미입증 등급표로 구분",
-          "오메가3를 얼마나 먹어야 하는지 모름 → 권장 섭취량 기준 제시",
-          "오메가3 부작용이나 약 복용 중 주의사항이 궁금함 → 병용 금기·주의 대상 정리"
-        ],
-        "actionTitles": [
-          "오메가3 진짜 효과와 근거 등급 제대로 확인하는 법",
-          "오메가3 부작용과 복용 주의사항 체크리스트 정리하기",
-          "오메가3 권장 섭취량 계산하고 제품까지 비교하는 법"
-        ]
-      },
-      "at": "2026-11-10T20:55:24.201Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "고등학교 영어단어",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=11080301&docId=55734729&answerNo=3&qb=7Jik66mUIOyngOuwqeyCsCDsp4Tsi6Qg7ZWc6rOEIOydmO2VmeyggQ==",
-          "views": 8980,
-          "answers": 4,
-          "askedAt": "2005.11.22"
-        },
-        {
-          "title": "슬픈 이야기좀 해주세요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70109&docId=26705839&answerNo=1&qb=7Jik66mUIOyngOuwqeyCsCDsp4Tsi6Qg7ZWc6rOEIOydmO2VmeyggQ==",
-          "views": 2853,
-          "answers": 5,
-          "askedAt": "2006.07.04"
-        }
-      ]
     },
     {
       "id": "c561ea5d2c8568cf",
@@ -65675,6 +62144,393 @@
           "views": 1458,
           "answers": 4,
           "askedAt": "2025.09.16"
+        }
+      ]
+    },
+    {
+      "id": "c724119787823aa1",
+      "urls": [
+        "https://infobros.tistory.com/entry/%EC%A2%85%EC%86%8C%EC%84%B8-%ED%99%98%EA%B8%89%EC%9D%BC"
+      ],
+      "guide": {
+        "direction": "지식인 질문들은 환급일 자체보다 '원클릭 환급신고'와 'My홈택스 조회'의 차이, 경정청구 환급금의 지급 시기와 이자(환급가산금) 계산법을 더 헷갈려 한다. 고수 블로그 제목은 '일정과 신청 방법'만 뭉뚱그려 정기신고와 경정청구를 구분하지 못한다. 신고유형별 환급 소요기간표와 My홈택스 조회 경로, 환급가산금 계산 예시를 주면 이 글에서 끝난다.",
+        "searchTargets": [
+          "종합소득세 환급일 9월"
+        ],
+        "mustInclude": [
+          "정기신고 환급 소요기간(신고 후 통상 소요 기간, 확인 필요: 국세청 공지)",
+          "경정청구 환급 소요기간과 지급결정일까지 이자 계산법(확인 필요: 국세청/세무사)",
+          "원클릭 환급신고 vs My홈택스 진행상황 조회 경로 비교",
+          "환급가산금 계산 예시(원금×이자율×기간, 확인 필요: 국세청 고시 이자율)",
+          "개인지방소득세는 별도 청구 대상이라는 점과 확인 경로"
+        ],
+        "mustAvoid": [
+          "올해 환급일을 특정 날짜로 확정해서 단정(실제는 개인별 신고일에 따라 다름)",
+          "경정청구 절차와 정기신고 절차를 같은 것처럼 섞어서 설명",
+          "지방소득세 환급을 국세 환급과 동일 절차로 안내"
+        ],
+        "checkBefore": [
+          "올해 환급 소요기간 공식 안내(국세청 홈택스 공지)",
+          "환급가산금 이자율 최신 수치(국세청 고시)",
+          "경정청구 청구기한 최신 기준(국세청/세무사 확인)"
+        ],
+        "solves": [
+          "환급일이 언제인지 모르겠다 → 신고유형별 소요기간표로 바로 확인",
+          "홈택스에서 뭘 봐야 할지 모르겠다 → 원클릭 환급신고/My홈택스 조회 경로 비교",
+          "경정청구 환급금에 이자가 붙는지 몰랐다 → 환급가산금 계산 예시 제공"
+        ],
+        "actionTitles": [
+          "종합소득세 환급일 9월, 홈택스에서 지금 조회하는 법",
+          "종합소득세 환급일 지연 시 My홈택스 진행상황 확인법",
+          "종합소득세 경정청구 환급금 지급일·환급가산금 계산법"
+        ]
+      },
+      "at": "2026-11-11T21:11:58.814Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "종합소득세 환급일 조회, 홈택스에서 어떻게 ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40301&docId=493822081&answerNo=1&qb=7KKF7ZWp7IaM65Od7IS4IO2ZmOq4ieydvA==",
+          "views": 333,
+          "answers": 5,
+          "askedAt": "2026.06.12"
+        },
+        {
+          "title": "종합소득세 경정청구로 환급받았는데, 지방....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40309&docId=495814497&answerNo=1&qb=7KKF7ZWp7IaM65Od7IS4IO2ZmOq4ieydvA==",
+          "views": 37,
+          "answers": 1,
+          "askedAt": "2026.11.03"
+        },
+        {
+          "title": "경정청구 환급금 지급 시기, 돌려받을 세금에....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40309&docId=495761327&answerNo=1&qb=7KKF7ZWp7IaM65Od7IS4IO2ZmOq4ieydvA==",
+          "views": 35,
+          "answers": 1,
+          "askedAt": "2026.10.30"
+        }
+      ]
+    },
+    {
+      "id": "1301caced1debb43",
+      "urls": [
+        "https://odysseuss.tistory.com/entry/%EB%8C%80%EC%A0%84-%EC%9C%A0%EC%84%B1%EC%98%A8%EC%B2%9C-%EC%B6%95%EC%A0%9C-%EC%8B%A4%ED%8C%A8-%EB%8B%B9%EC%9D%BC%EC%B9%98%EA%B8%B0-%EC%BD%94%EC%8A%A4"
+      ],
+      "guide": {
+        "direction": "자동완성엔 '축제' 관련 검색어가 전혀 없고 사우나·호텔·맛집·역·숙소·찜질방·카페·칼국수 같은 시설별 검색이 대부분이라, 검색자는 축제 관람보다 '역에서 내려 뭘 먼저 가야 동선이 안 겹치는지'를 궁금해한다. 고수 블로그는 축제를 전제로 코스를 짜 실제 시설 선택 기준(사우나냐 호텔 온천이냐)을 못 짚는다. 역 기준 동선표와 선택 기준을 주면 당일치기 코스가 바로 완성된다.",
+        "searchTargets": [
+          "대전 유성온천역",
+          "대전 유성온천 사우나",
+          "대전 유성온천 호텔",
+          "대전 유성온천 칼국수"
+        ],
+        "mustInclude": [
+          "유성온천역에서 도보 이동 가능한 사우나/찜질방 목록(확인 필요: 지도·공식 정보)",
+          "사우나·찜질방 vs 호텔 온천 선택 기준 비교",
+          "대전 유성온천 칼국수 맛집 위치와 특징(확인 필요: 현지 정보)",
+          "유성온천역 주변 카페 추천과 방문 순서",
+          "당일치기 시 숙소 필요 여부 판단 기준(찜질방 대체 가능 여부)"
+        ],
+        "mustAvoid": [
+          "실제 열리는지 불확실한 '축제' 일정을 확정적으로 적어 독자를 헷갈리게 함",
+          "유성온천을 다른 지역 온천(온양·수안보 등)과 혼동",
+          "사우나·찜질방·호텔 온천의 차이를 구분 없이 뭉뚱그려 설명"
+        ],
+        "checkBefore": [
+          "올해 유성온천 관련 축제가 실제로 열리는지와 공식 일정(유성구청 공지)",
+          "추천할 사우나/호텔/맛집/카페의 최신 영업 여부(지도 앱·공식 SNS)"
+        ],
+        "solves": [
+          "유성온천역에서 뭐부터 가야 할지 모르겠다 → 역 기준 동선표로 순서 제시",
+          "사우나·찜질방이랑 호텔 온천 중 뭐가 나은지 모르겠다 → 선택 기준 비교 제공",
+          "칼국수 맛집이 어디인지 모르겠다 → 위치와 특징 정리"
+        ],
+        "actionTitles": [
+          "대전 유성온천 사우나 vs 호텔 온천, 뭐가 나은지 비교"
+        ]
+      },
+      "at": "2026-11-11T21:11:58.814Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "사회숙제 대전 유성구의 대학교",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=12060644&docId=177057617&answerNo=1&qb=64yA7KCEIOycoOyEseyYqOyynCDstpXsoJwg7Iuk7YyoIOuLueydvOy5mOq4sA==",
+          "views": 33018,
+          "answers": 1,
+          "askedAt": "2013.07.22"
+        }
+      ]
+    },
+    {
+      "id": "3504dbf752beb19b",
+      "urls": [
+        "https://odysseuss.tistory.com/entry/%EC%83%81%ED%95%98%EC%9D%B4-%EC%97%AC%ED%96%89-%EC%A4%80%EB%B9%84%EB%AC%BC"
+      ],
+      "guide": {
+        "direction": "자동완성에 '준비물·경비·시기·12월 상하이여행'이 함께 떠, 검색자는 돈(경비/환전)과 날씨(12월 추위) 두 가지를 동시에 걱정하며 뭘 챙길지 못 정한 상태다. 고수 블로그 제목 '완벽하게 챙기는 법'은 일반 체크리스트만 나열해 시기별(특히 12월) 준비물과 경비 구간을 구분하지 못한다. 시기별 준비물 체크리스트, 비자·유심·환전 수단, 예상 경비표를 주면 이 글에서 끝난다.",
+        "searchTargets": [
+          "상하이 여행 준비물",
+          "상하이 여행 경비",
+          "상하이 여행 시기",
+          "12월 상하이 여행"
+        ],
+        "mustInclude": [
+          "상하이 무비자 체류 가능 기간과 조건(확인 필요: 중국 출입국당국 공지)",
+          "12월 상하이 평균 기온대와 그에 맞는 옷차림(확인 필요: 기상정보)",
+          "유심/이심·VPN 등 중국 현지 인터넷 준비물(확인 필요: 최신 통신사 안내)",
+          "교통/숙박/식비 구간별 예상 경비표(확인 필요: 최신 물가)"
+        ],
+        "mustAvoid": [
+          "비자 면제 조건을 베이징 등 다른 중국 도시 기준과 혼동",
+          "계절 무관하게 동일한 짐 목록을 제시해 12월 추위 대비를 놓침",
+          "결제·환전 수단을 홍콩·대만 등 다른 중국어권 지역과 혼동"
+        ],
+        "checkBefore": [
+          "최신 무비자 체류 기간·조건(중국 대사관/출입국 공식 공지)",
+          "12월 상하이 실제 평균기온·날씨(기상청/현지 날씨 앱)"
+        ],
+        "solves": [
+          "뭘 챙겨야 할지 모르겠다 → 시기별(12월 포함) 준비물 체크리스트 제공",
+          "경비가 얼마나 드는지 모르겠다 → 구간별 예상 경비표 제공",
+          "유심/결제를 어떻게 준비해야 할지 모르겠다 → 유심·간편결제 준비법 정리"
+        ],
+        "actionTitles": [
+          "12월 상하이 여행 준비물, 추위 대비 체크리스트 챙기는 법",
+          "상하이 여행 경비 얼마나 드는지 구간별로 계산하는 법"
+        ]
+      },
+      "at": "2026-11-11T21:11:58.814Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "ca4f25a961b79be3",
+      "urls": [
+        "https://nav0120.tistory.com/entry/%EC%9E%90%EC%A0%84%EA%B1%B0-%EB%8F%84%EB%91%91-%EA%B9%80%EC%86%8C%EC%A7%84-%EC%95%84%EB%B2%84%EC%A7%80%EC%9D%98-%EB%BA%A8-%ED%95%9C-%EB%8C%80%EA%B0%80-%EC%95%84%EB%93%A4%EC%97%90%EA%B2%8C-%EB%82%A8%EA%B8%B4-%ED%8F%89%EC%83%9D%EC%9D%98-%EB%B6%80%EB%81%84%EB%9F%AC%EC%9B%80%EA%B3%BC-%EC%82%AC%EB%9E%91"
+      ],
+      "guide": {
+        "direction": "검색자는 '자전거 도둑'이 김소진 소설인지 박완서 작품인지 영화인지 헷갈려 지식인에 되묻고, 학력평가 기출 지문 뜻과 아버지가 뺨 맞는 장면의 의미를 궁금해한다. 고수 블로그 제목은 요약만 주고 박완서·영화와의 구분, 기출 출전을 밝히지 않는다. 작가별 비교표와 뺨 맞는 장면의 상징 해설, 기출 출처 표기로 한 번에 정리해 끝낸다.",
+        "searchTargets": [
+          "박완서 자전거 도둑",
+          "자전거 도둑 영화",
+          "자전거 도둑 줄거리",
+          "자전거 도둑 주제"
+        ],
+        "mustInclude": [
+          "김소진 소설 속 아버지가 뺨 맞는 장면과 그 상징적 의미 정리(확인 필요: 구체적 장면 묘사)",
+          "박완서 동명 소설 '자전거 도둑'과의 작가·줄거리 차이 비교표",
+          "비토리오 데 시카 감독 영화 \u003c자전거 도둑>과의 혼동 주의 및 소설과의 구분",
+          "2007학년도 6월 고2 전국연합학력평가 언어영역 출제 지문 출처 표기(확인 필요: 정확한 회차)",
+          "소설의 주제(가난·부끄러움·부자간 사랑) 한 줄 정리"
+        ],
+        "mustAvoid": [
+          "자전거 도둑맞는 꿈 해몽이나 실제 절도 처벌·잡는법과 섞어 다루지 않기",
+          "박완서 작품·영화와 섞어 설명해 독자가 어떤 작품인지 못 찾게 하지 않기",
+          "아버지가 뺨 맞는 장면을 선정적으로 묘사하지 않기"
+        ],
+        "checkBefore": [
+          "'자전거 도둑' 지문이 정확히 몇 학년도 몇 월 학력평가에 출제됐는지 원문 기출 자료로 확인",
+          "박완서 동명 작품의 정확한 발표 연도·내용을 원작으로 확인"
+        ],
+        "solves": [
+          "자전거 도둑이 김소진·박완서·영화 중 무엇인지 헷갈림 → 작가·장르별 비교표로 구분",
+          "학력평가 기출 지문 뜻과 아버지 뺨 맞는 장면 의미를 모름 → 장면별 해설과 주제 정리로 해결"
+        ],
+        "actionTitles": [
+          "자전거 도둑 김소진 박완서 작품 차이, 한눈에 비교 정리",
+          "자전거 도둑 영화·소설 구분, 헷갈리는 이유 바로 확인"
+        ]
+      },
+      "at": "2026-11-11T21:11:58.814Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "옛날말&lt;진짜 왕 급해요!!(내공100!!)",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=130101&docId=111495133&answerNo=1&qb=7J6Q7KCE6rGwIOuPhOuRkSDquYDshozsp4Qg7JWE67KE7KeAIOuMgOqwgA==",
+          "views": 155447,
+          "answers": 15,
+          "askedAt": "2010.06.10"
+        },
+        {
+          "title": "2007학년도 6월 고2 전국연합학력평가 언어영....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110401&docId=130498209&answerNo=1&qb=7J6Q7KCE6rGwIOuPhOuRkSDquYDshozsp4Qg7JWE67KE7KeAIOuMgOqwgA==",
+          "views": 1329,
+          "answers": 1,
+          "askedAt": "2011.05.15"
+        }
+      ]
+    },
+    {
+      "id": "32e79f58bc1517ff",
+      "urls": [
+        "https://infobros.tistory.com/entry/%ED%94%BC%EB%98%A5%EC%8B%B8%EB%8A%94-%EC%9D%B4%EC%9C%A0"
+      ],
+      "guide": {
+        "direction": "피 섞인 변을 본 사람은 색깔(검은색·검붉은색·선홍색)별로 어느 부위 출혈인지, 지금 병원에 가야 하는지를 가장 먼저 알고 싶어한다. 고수 블로그 제목은 색깔별 원인만 나열하고 맹장수술 후 혈변처럼 '이례적 상황이 정상인지'는 다루지 않는다. 색깔별 원인·대처 체크표와 지사제 임의복용 주의, 병원 방문 기준을 함께 줘서 글을 끝내게 한다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "색깔별 구분: 검은색(식도·위 출혈)·검붉은색(대장 출혈)·선홍색(항문·직장 하부 출혈) 표",
+          "맹장 수술 직후 혈변은 대부분 정상 회복 과정이 아님, 항생제·진통제 복용 중 증상 관찰(확인 필요: 구체 비율)",
+          "혈변 시 임의로 지사제 먹지 말고 수분 섭취 먼저 권장",
+          "장염으로 인한 일시적 혈변을 크론병으로 바로 단정하지 않는다는 점"
+        ],
+        "mustAvoid": [
+          "혈변 사진을 자극적으로 노출해 불쾌감 주는 구성",
+          "색깔만 보고 대장암·크론병 등으로 단정해 불필요한 공포 조성",
+          "자가진단만으로 병원 방문을 미루게 하는 서술"
+        ],
+        "checkBefore": [
+          "색깔별 출혈 부위 분류의 의학적 정확성을 의사 자문이나 공식 의료정보에서 재확인",
+          "맹장 수술 후 혈변 관련 서술이 일반적 의학 소견과 일치하는지 확인"
+        ],
+        "solves": [
+          "피똥 색깔별로 어디서 출혈인지 모름 → 검은색·검붉은색·선홍색 구분표로 해결",
+          "맹장 수술 후 피똥 싸도 되는지 불안 → 정상 회복 여부 판단 기준 제시",
+          "지사제를 먹어야 하나 고민 → 임의 복용 주의와 수분 섭취 권장으로 답"
+        ],
+        "actionTitles": [
+          "피똥 색깔별 원인 확인, 병원 가야 할 때 바로 판단",
+          "혈변 대처 방법, 지사제 먹기 전 꼭 확인할 것",
+          "맹장 수술 후 피똥 정상인지 지금 바로 확인하기"
+        ]
+      },
+      "at": "2026-11-11T21:11:58.814Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "피똥싸는데 좀 심각한거같아요..",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=7010104&docId=488176573&answerNo=1&qb=7ZS865il7Iu4IO2YiOuzgCDsg4nquZTrs4Q=",
+          "views": 2130,
+          "answers": 3,
+          "askedAt": "2025.08.20"
+        },
+        {
+          "title": "혈변 피똥싸는이유",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70104&docId=493844092&answerNo=3&qb=7ZS865il7Iu4IO2YiOuzgCDsg4nquZTrs4Q=",
+          "views": 820,
+          "answers": 9,
+          "askedAt": "2026.06.14"
+        },
+        {
+          "title": "피똥 쌌는데 별 문제 없겠죠?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70104&docId=494713494&answerNo=3&qb=7ZS865il7Iu4IO2YiOuzgCDsg4nquZTrs4Q=",
+          "views": 160,
+          "answers": 9,
+          "askedAt": "2026.08.12"
+        }
+      ]
+    },
+    {
+      "id": "5099b14a0d48a040",
+      "urls": [
+        "https://semo-gif.tistory.com/entry/%ED%9E%88%EB%B9%84%EC%8A%A4%EC%BB%A4%EC%8A%A4%EC%B0%A8%EC%99%80-%EB%A7%88%ED%85%8C%EC%B0%A8-%ED%9A%A8%EB%8A%A5-%EB%B9%84%EA%B5%90%EF%BD%9C%EC%B9%B4%ED%8E%98%EC%9D%B8-%ED%95%A8%EB%9F%89%C2%B7%ED%98%88%EC%95%95-%EC%98%81%ED%96%A5%C2%B7%EB%A7%A4%EC%9D%BC-%EB%A7%88%EC%8B%A4-%EB%95%8C-%EB%B6%80%EC%9E%91%EC%9A%A9"
+      ],
+      "guide": {
+        "direction": "커피 대신 마실 차를 찾는 사람은 카페인 있는 마테차와 무카페인 히비스커스차 중 혈압·매일 섭취 시 부작용까지 비교해 고르고 싶어한다. 고수 블로그 제목은 두 차를 나열만 하고 '매일 마실 때' 카페인 함량·혈압 영향을 직접 비교한 표는 주지 않는다. 카페인 함량·혈압 영향·부작용을 한 표로 정리해 어떤 차를 언제 마실지 바로 결정하게 한다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "마테차 카페인 함량 수치와 커피 대비 비교(확인 필요: 정확한 mg)",
+          "히비스커스차는 카페인 없음, 혈압 낮추는 효능 여부(확인 필요: 임상 근거)",
+          "매일 마실 때 부작용(히비스커스차 저혈압 위험, 마테차 과다 섭취 영향)(확인 필요: 구체 부작용)",
+          "카페인 민감자·저혈압 환자 등 상황별 선택 가이드"
+        ],
+        "mustAvoid": [
+          "루이보스·민트 등 다른 무카페인 차와 섞어 비교해 초점 흐리기",
+          "임상적으로 검증 안 된 효능을 단정적으로 서술"
+        ],
+        "checkBefore": [
+          "마테차 카페인 함량과 히비스커스차 혈압 영향에 대한 수치·근거를 공식 영양정보나 논문에서 확인"
+        ],
+        "solves": [
+          "커피 대신 마실 차를 고를 때 카페인 유무를 모름 → 마테차(카페인)·히비스커스차(무카페인) 구분으로 해결",
+          "매일 마셔도 되는지 부작용이 걱정됨 → 혈압 영향·부작용 비교로 답"
+        ],
+        "actionTitles": [
+          "히비스커스차 마테차 카페인 함량 비교, 맞는 차 확인",
+          "매일 마실 차 고르기, 혈압 영향까지 한번에 비교",
+          "히비스커스차 부작용 확인하고 안전하게 마시는 법"
+        ]
+      },
+      "at": "2026-11-11T21:11:58.814Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "커피 대신 마실만한 차가 뭐가 있을까요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=8020306&docId=391042087&answerNo=5&qb=7Z6I67mE7Iqk7Luk7Iqk7LCoIOuniO2FjOywqCDtmqjriqUg67mE6rWQ7Lm07Y6Y7J24IO2VqOufiQ==",
+          "views": 1169,
+          "answers": 5,
+          "askedAt": "2021.05.30"
+        }
+      ]
+    },
+    {
+      "id": "b90eb590c26ba13a",
+      "urls": [
+        "https://hotkim.tistory.com/entry/%EC%88%98%EB%A9%B4%EB%AC%B4%ED%98%B8%ED%9D%A1%EC%A6%9D-%EC%A6%9D%EC%83%81%EA%B3%BC-%EA%B2%80%EC%82%AC-%EB%B9%84%EC%9A%A9%EF%BD%9C%EC%BD%94%EA%B3%A8%EC%9D%B4%C2%B7%EC%A3%BC%EA%B0%84-%EC%A1%B8%EB%A6%BC%C2%B7%EC%88%98%EB%A9%B4%EB%8B%A4%EC%9B%90%EA%B2%80%EC%82%AC%EC%99%80-%EC%96%91%EC%95%95%EA%B8%B0-%EC%B9%98%EB%A3%8C"
+      ],
+      "guide": {
+        "direction": "검색자는 코골이·주간 졸림이 있을 때 어느 과에서 수면다원검사를 받아야 하는지, 비중격만곡증과 무호흡증의 관계를 몰라 막혀있다. 고수 블로그 제목은 증상·검사비용을 다루지만 실비보험 적용 여부, 검사 소요시간, 지역별(부산 등) 병원 선택 기준은 구체적으로 풀지 않았다. 이 글은 진료과 안내·검사 측정항목·비용 구조·실비보험 체크리스트를 순서대로 제시해 독자가 바로 병원을 고르고 검사를 신청하게 한다.",
+        "searchTargets": [
+          "수면무호흡증 검사방법",
+          "수면무호흡증 검사비용",
+          "수면무호흡증 검사 실비보험",
+          "수면무호흡증 검사 병원 추천"
+        ],
+        "mustInclude": [
+          "수면다원검사(폴리솜노그래피) 측정항목: 무호흡·저호흡 빈도, 산소포화도 저하, 수면 중 각성 횟수",
+          "검사 진료과(이비인후과·수면센터 등) 선택 기준 (확인 필요: 병원 공지)",
+          "검사비용·실비보험 적용 여부 (확인 필요: 건강보험심사평가원·보험사 공지)",
+          "검사 소요시간(1박 입원형 여부) (확인 필요: 병원 공지)",
+          "비중격만곡증과 수면무호흡증의 관계·구분 기준"
+        ],
+        "mustAvoid": [
+          "부산 등 특정 지역 병원을 검증 없이 실명 추천",
+          "비중격만곡증 수술만으로 수면무호흡증이 해결된다고 단정",
+          "코골이 소리만으로 자가진단 확정하듯 서술"
+        ],
+        "checkBefore": [
+          "실비보험 적용 여부·비급여 기준은 보험사 공지 또는 건강보험심사평가원에서 확인",
+          "검사비용 범위·소요시간은 실제 시행 병원(수면센터) 공지로 확인"
+        ],
+        "solves": [
+          "코골이+주간졸림인데 어느 과로 가야 할지 모름 → 증상별 진료과·검사 흐름 안내",
+          "검사비용·실비보험 적용 여부가 불확실함 → 비용 구조와 실비보험 체크 포인트 정리",
+          "비중격만곡증과 수면무호흡증을 혼동함 → 두 질환의 관계·평가 기준 구분 제시"
+        ],
+        "actionTitles": [
+          "수면무호흡증 검사비용·실비보험 적용 여부 확인하는 법",
+          "수면무호흡증 검사방법과 소요시간, 가격까지 한번에 정리"
+        ]
+      },
+      "at": "2026-11-11T21:11:58.814Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "비중격만곡증이 코골이나 수면 무호흡에도 ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70102&docId=492529182&answerNo=2&qb=7IiY66m066y07Zi47Z2h7KadIOqygOyCrCDruYTsmqnsvZTqs6gg7KO86rCEIOyhuOumvA==",
+          "views": 893,
+          "answers": 5,
+          "askedAt": "2026.03.18"
+        },
+        {
+          "title": "낮에 너무 졸린데 수면무호흡 검사는 어떻게 ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=7010101&docId=495433213&answerNo=2&qb=7IiY66m066y07Zi47Z2h7KadIOqygOyCrCDruYTsmqnsvZTqs6gg7KO86rCEIOyhuOumvA==",
+          "views": 201,
+          "answers": 3,
+          "askedAt": "2026.10.12"
+        },
+        {
+          "title": "수면무호흡증과 코골이가 함께 나타날 때는 ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70102&docId=493383428&answerNo=4&qb=7IiY66m066y07Zi47Z2h7KadIOqygOyCrCDruYTsmqnsvZTqs6gg7KO86rCEIOyhuOumvA==",
+          "views": 96,
+          "answers": 4,
+          "askedAt": "2026.10.27"
         }
       ]
     }
