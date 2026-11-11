@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-06T07:06:53.233Z",
+ "builtAt": "2026-11-11T13:41:04.817Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,183 +11,196 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "쿠팡 과징금 정지",
+   "keyword": "이재명 대통령 민주당 만찬",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 28,
-   "recent20": 4,
-   "press": 28,
-   "firstArticleAt": "2026-11-06T05:39:00.000Z",
+   "articles90": 50,
+   "recent20": 8,
+   "press": 43,
+   "firstArticleAt": "2026-11-11T12:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "4200억 유지, 2000억 정지…쿠팡 과징금, 법원 판단 왜 갈렸나",
+     "title": "李대통령, 與 투톱 만나 \"당정 한마음 한뜻으로 움직여야\"",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-11T13:40:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5082471"
+    },
+    {
+     "title": "이 대통령, 김민석·한병도와 만찬서 \"당정 한마음 한뜻 움직여야\"(종합...",
      "press": "newsis.com",
-     "publishedAt": "2026-11-06T06:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014306574?sid=102"
+     "publishedAt": "2026-11-11T13:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014316904?sid=100"
     },
     {
-     "title": "쿠팡 2011억원 과징금 집행 일단 멈췄다…법원 효력정지 결정",
-     "press": "thefirstmedia.net",
-     "publishedAt": "2026-11-06T06:54:00.000Z",
-     "link": "http://www.thefirstmedia.net/news/articleView.html?idxno=212891"
-    },
-    {
-     "title": "쿠팡, 개인정보 유출 과징금 4235억 집행정지 '불발'",
-     "press": "safetimes.co.kr",
-     "publishedAt": "2026-11-06T06:50:00.000Z",
-     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247272"
+     "title": "이 대통령, 민주당 투탑 만찬…\"당정 한마음\"",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-11T13:32:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1543470"
     }
    ]
   },
   {
-   "keyword": "한 동티모르 공동언론발표",
+   "keyword": "3연승 박철우 감독",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 19,
+   "articles90": 15,
    "recent20": 3,
-   "press": 17,
-   "firstArticleAt": "2026-11-06T05:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[한-동티모르 정상회담] 李-오르타 대통령 정상회담⋯고위급 외교협의체...",
-     "press": "polinews.co.kr",
-     "publishedAt": "2026-11-06T07:01:00.000Z",
-     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=747894"
-    },
-    {
-     "title": "‘DJ 노벨평화상 추천’ 동티모르 대통령 “韓 빛의 혁명, 노벨상 추천...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-06T06:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003696639?sid=100"
-    },
-    {
-     "title": "[한·동티모르 정상회담] 재건 지원 신뢰, 아세안 공조로 확대",
-     "press": "sisaweek.com",
-     "publishedAt": "2026-11-06T06:52:00.000Z",
-     "link": "https://www.sisaweek.com/news/articleView.html?idxno=238832"
-    }
-   ]
-  },
-  {
-   "keyword": "김종철 경찰청장 후보자",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 13,
-   "recent20": 5,
-   "press": 12,
-   "firstArticleAt": "2026-11-06T05:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김종철 경찰청장 후보자 \"쇄신 요구 엄중히 인식·신뢰 회복\"(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-06T07:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016426713?sid=102"
-    },
-    {
-     "title": "김종철 경찰청장 후보자 \"이상동기·관계성 범죄 시스템 해결 급선무\"",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-06T06:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006405262?sid=102"
-    },
-    {
-     "title": "김종철 경찰청장 후보자 \"이상동기·관계성 범죄 대응 최우선\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-06T06:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005437726?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "두번째 시그널 12월 방송 확정",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 12,
-   "recent20": 3,
-   "press": 12,
-   "firstArticleAt": "2026-11-06T05:40:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-11T12:21:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "조진웅 여파 속 '시그널2', 우여곡절 끝에 편성… AI 배우 교체 검토 까...",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-06T07:04:00.000Z",
-     "link": "https://m.entertain.naver.com/article/469/0000964073"
+     "title": "아라우조 부상에도 3연승…박철우 우리카드 감독 \"팀 배구 했다\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-11T13:32:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/001/0016436987"
     },
     {
-     "title": "\"AI로 조진웅 교체까지 시도\"…결국 원본 그대로 공개되는 '시그널2'",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-06T06:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005600622?sid=103"
+     "title": "'작년과는 다르다' 파죽의 3연승 우리카드, 박철우 감독 \"절실했던 승리...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-11T13:25:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/241/0003541292"
     },
     {
-     "title": "tvN, 조진웅 논란 딛고 '두번째 시그널' 12월 7일 첫 방송 확정",
-     "press": "dailysportshankook.co.kr",
-     "publishedAt": "2026-11-06T06:48:00.000Z",
-     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435242"
+     "title": "박철우 우리카드 감독 \"아라우조 대신한 선수들 잘해줘\"",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-11T13:24:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=882422"
     }
    ]
   },
   {
-   "keyword": "경기도 말라리아 감소",
+   "keyword": "광주 아파트 화재",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 3,
-   "press": 5,
-   "firstArticleAt": "2026-11-06T06:11:00.000Z",
+   "articles90": 8,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-11T12:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "경기도 말라리아 환자 43% 급감… 접경지 ‘집중 방역’ 통했다",
-     "press": "kgnews.co.kr",
-     "publishedAt": "2026-11-06T07:04:00.000Z",
-     "link": "https://www.kgnews.co.kr/news/article.html?no=918486"
+     "title": "전남광주 북구 21층짜리 아파트서 불‥경비원 심정지",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-11T13:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001534995?sid=102"
     },
     {
-     "title": "[위클리오늘] 경기도, 재정 자율성 제약 구조 분석",
-     "press": "weeklytoday.com",
-     "publishedAt": "2026-11-06T07:00:00.000Z",
-     "link": "http://www.weeklytoday.com/news/articleView.html?idxno=801333"
+     "title": "전남광주 도심 아파트 화재로 70대 경비원 심정지…경찰 \"방화 정황 수사...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-11T13:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005603005?sid=102"
     },
     {
-     "title": "경기도 말라리아 환자 전년 대비 43% 감소…퇴치 위해 민·관·군 총력",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-06T06:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005839245?sid=102"
+     "title": "광주 북구 아파트 6층서 화재…1명 심정지",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-11T13:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000925236?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "최민희 하이에나 사과",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-11T12:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "최민희 '하이에나 떼' 발언 논란…정점식 \"민주당 언론혐오증\"",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-11T13:12:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885183"
+    },
+    {
+     "title": "[영상] 최민희 \"하이에나 떼들\" 사과...과거까지 줄소환",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-11T13:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002431573?sid=100"
+    },
+    {
+     "title": "최민희, 취재진에 \"하이에나\"...논란 일자 사과",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-11T13:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002431570?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "고잔동",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-11T12:31:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "인천 고잔동 가스 누출 신고…5명 연기 흡입",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-11T13:30:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1543471"
+    },
+    {
+     "title": "인천 고잔동 염소가스 유출…이병래 남동구청장 “피해 입으신 분들의 ...",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-11T13:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000131688?sid=100"
+    },
+    {
+     "title": "인천 고잔동 공장서 가스 누출 신고…1명 호흡곤란 이송",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-11T12:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004009068?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1167,
-  "matched": 556,
-  "avgLeadMin": 503,
+  "flagged": 416,
+  "matched": 175,
+  "avgLeadMin": 438,
   "recent": [
+   {
+    "keyword": "출근길 바람에 체감온도 뚝",
+    "hitKeyword": "분당 출근길 버스 사고",
+    "hitAt": "2026-11-11T22:30:00+09:00",
+    "leadMin": 8006
+   },
+   {
+    "keyword": "김수현, 명예훼손 재판 증인 출석",
+    "hitKeyword": "김수현 법정 증언",
+    "hitAt": "2026-11-11T22:30:00+09:00",
+    "leadMin": 7674
+   },
+   {
+    "keyword": "김수현, 김세의 재판 출석",
+    "hitKeyword": "김수현 법정 증언",
+    "hitAt": "2026-11-11T22:30:00+09:00",
+    "leadMin": 7664
+   },
    {
     "keyword": "박항서 감독 인종차별 항의",
     "hitKeyword": "박항서 인종차별 항의",
     "hitAt": "2026-11-06T16:00:00+09:00",
     "leadMin": 33
-   },
-   {
-    "keyword": "딸은 메타, 아들은 엔비디아",
-    "hitKeyword": "엔비디아 칩 트럭 도난",
-    "hitAt": "2026-11-06T15:00:00+09:00",
-    "leadMin": 2674
    },
    {
     "keyword": "법원, 쿠팡 과징금 유지",
@@ -224,18 +237,6 @@
     "hitKeyword": "신용융자 담보비율 면제",
     "hitAt": "2026-11-06T14:30:00+09:00",
     "leadMin": 54
-   },
-   {
-    "keyword": "신용융자 담보비율 면제",
-    "hitKeyword": "신용융자 담보비율 면제",
-    "hitAt": "2026-11-06T14:30:00+09:00",
-    "leadMin": 24
-   },
-   {
-    "keyword": "재혼 황후 논란",
-    "hitKeyword": "재혼 황후 드라마",
-    "hitAt": "2026-11-06T14:00:00+09:00",
-    "leadMin": 316
    }
   ]
  }
