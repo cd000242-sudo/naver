@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-11T21:04:31.017Z",
+ "builtAt": "2026-11-11T21:24:35.760Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,12 +11,77 @@
  "measured": 10,
  "candidates": [
   {
+   "keyword": "젠슨 황 스캔들 영향",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 3,
+   "press": 9,
+   "firstArticleAt": "2026-11-11T20:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "젠슨 황 사태 이후 美, 반도체 수출규제 속도전…파장은? [글로벌 뉴스픽...",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-11T21:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000543148?sid=104"
+    },
+    {
+     "title": "젠슨황 스캔들, K반도체에 '불똥'...對中규제 강화 움직임",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-11T21:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001272469?sid=105"
+    },
+    {
+     "title": "젠슨 황, 스캔들에도 리더십은 그대로? 국내 영향은 ‘아직’",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-11T21:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012292182?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "수사",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-11T20:00:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[단독]여기저기 뚫리는데…사이버수사, '국' 복원 제동[사라진 사이버 ...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-11T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014317032?sid=102"
+    },
+    {
+     "title": "법무부 “공소청 특활비 필요”… 기획처 “수사 비용 편성 불가”",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-11T20:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003698459?sid=100"
+    },
+    {
+     "title": "[단독] 각 경찰서에 '수사 회의' 도입…\"변호사·회계사 투입\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-11T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004208892?sid=102"
+    }
+   ]
+  },
+  {
    "keyword": "김민석 만찬 당정 한마음 강조",
    "sources": [
     "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-11T20:19:00.000Z",
    "exclusive": false,
@@ -43,42 +108,42 @@
    ]
   },
   {
-   "keyword": "수사",
+   "keyword": "무인 항공기",
    "sources": [
     "signal.bz",
     "google"
    ],
-   "articles90": 5,
+   "articles90": 3,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-11T20:00:00.000Z",
-   "exclusive": true,
+   "press": 3,
+   "firstArticleAt": "2026-11-11T20:06:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[단독]여기저기 뚫리는데…사이버수사, '국' 복원 제동[사라진 사이버 ...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-11T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014317032?sid=102"
+     "title": "레드와이어, 미 육군 스토커 무인기 유지지원 후속 주문",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-11T21:16:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=403878"
     },
     {
-     "title": "법무부 “공소청 특활비 필요”… 기획처 “수사 비용 편성 불가”",
+     "title": "무인기·수직이착륙기…우주청, 미래 항공기 개발",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-11T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000925305?sid=105"
+    },
+    {
+     "title": "성층권 무인기, 170시간 비행 성공… 활주로 필요 없는 항공기도 만든다",
      "press": "seoul.co.kr",
-     "publishedAt": "2026-11-11T20:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003698459?sid=100"
-    },
-    {
-     "title": "인천항 '다단계 부풀리기 전대' 의혹…해경, 전방위 수사",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-11T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004208896?sid=102"
+     "publishedAt": "2026-11-11T20:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003698518?sid=105"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 397,
+  "flagged": 398,
   "matched": 163,
   "avgLeadMin": 756,
   "recent": [
