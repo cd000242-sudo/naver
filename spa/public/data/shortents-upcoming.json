@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-11T22:55:13.489Z",
+ "builtAt": "2026-11-11T23:05:21.010Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,175 +8,117 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 18,
+ "measured": 10,
  "candidates": [
   {
-   "keyword": "트럼프 이란전쟁 종전",
+   "keyword": "젠슨 황 해임 검토",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 14,
-   "recent20": 5,
-   "press": 14,
-   "firstArticleAt": "2026-11-11T21:26:00.000Z",
+   "articles90": 11,
+   "recent20": 7,
+   "press": 11,
+   "firstArticleAt": "2026-11-11T22:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "밴스 美 부통령, 이란 강경파 안보 수장과 직접 회담 검토...종전 협상 ...",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-11T22:48:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=72915"
+     "title": "[속보] 엔비디아 이사회, 젠슨 황 해임 검토하나…거취 논의 임박",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-11T23:04:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101110"
     },
     {
-     "title": "트럼프 \"전쟁 곧 끝나\" 거듭 자신…이란은 '협상 조건' 고수",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-11T22:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000520327?sid=104"
+     "title": "WSJ \"엔비디아 이사회, 젠슨 황 해임 검토\"…이사회 회의 임박",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-11T23:02:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=242970"
     },
     {
-     "title": "트럼프 \"이란전 곧 끝날 것…93% 아닌 완전한 승리 원해\"",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-11T22:40:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1320164&inflow=N"
+     "title": "\"젠슨 황 결국 쫓겨나나\"…엔비디아 이사회, 해임 준비·이르면 11일 결...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-11T22:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003154171?sid=104"
     }
    ]
   },
   {
-   "keyword": "전세사기 피해자 추가 인정",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-11T22:09:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "전세사기 피해 480건 추가 인정…누적 4만2000건 넘어",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-11T22:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003482202?sid=101"
-    },
-    {
-     "title": "전세사기 피해 인정 4만2000건 넘어… 480건 추가 가결",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-11T22:48:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3448026"
-    },
-    {
-     "title": "전세사기 피해자 480명 추가, 누적 4만2039명 ... 네명 중 셋은 40세 미만...",
-     "press": "queen.co.kr",
-     "publishedAt": "2026-11-11T22:36:00.000Z",
-     "link": "http://www.queen.co.kr/news/articleView.html?idxno=466182"
-    }
-   ]
-  },
-  {
-   "keyword": "2026년 11월 12일 운세",
+   "keyword": "사우디 훈련하는 축구",
    "sources": [
     "nate"
    ],
    "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-11T21:36:00.000Z",
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-11T21:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[오늘의 띠별 운세] 2026년 11월 12일 목요일",
-     "press": "mhns.co.kr",
-     "publishedAt": "2026-11-11T22:50:00.000Z",
-     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=768687"
+     "title": "내일 사우디전…하나로 뭉쳐 승리한다!",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-11T22:51:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/055/0001402420"
     },
     {
-     "title": "[오늘의 운세] 2026년 11월 12일 띠별 운세",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-11T22:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003484785?sid=103"
+     "title": "모레노호, 사우디전 대비 첫 전술훈련…'세트피스' 다듬기 주력",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-11T22:11:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/055/0001402401"
     },
     {
-     "title": "[오늘의 운세] 2026년 11월 12일 (목) 띠별운세 '남은 힘을 한곳에 모으...",
-     "press": "dailypop.kr",
-     "publishedAt": "2026-11-11T21:40:00.000Z",
-     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103978"
+     "title": "'원팀' 시험대 오른 모레노호…13일 사우디와 맞대결",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-11T22:00:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/003/0014317070"
     }
    ]
   },
   {
-   "keyword": "러 우크라 포로교환 합의",
+   "keyword": "GS건설 침해사고 직권조사",
    "sources": [
     "signal.bz"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-11T21:26:00.000Z",
+   "firstArticleAt": "2026-11-11T21:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美·러·우크라 종전협상 빈손 종료…포로교환 합의에도 영토 문제 '평행...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-11T22:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003154164?sid=104"
+     "title": "GS건설, 해킹 조사 미동의 논란…정부 첫 직권조사",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-11T22:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006408551?sid=101"
     },
     {
-     "title": "러·우크라, 종전 협상서 최대 규모 포로 교환 합의…영토 문제는 평행...",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-11T22:02:00.000Z",
-     "link": "https://www.ajunews.com/view/20261112065843705"
+     "title": "GS건설 아파트 침해사고, 과기정통부 직권조사 착수... 피해 규모는?",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-11T22:04:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885198"
     },
     {
-     "title": "러·우크라, 역대 최대 포로교환 합의... 영토·안보 입장은 ‘평행선’",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-11T21:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004009182?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "김정은, 통천 주택구 시찰",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 2,
-   "firstArticleAt": "2026-11-11T21:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김정은, 동해안 해군기지 건설현장 시찰…“정해진 기간 내 완결”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-11T22:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012292222?sid=100"
-    },
-    {
-     "title": "김정은, 동해안 해군기지 건설현장 시찰…\"정해진 기간내 완결\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-11T21:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016437164?sid=100"
-    },
-    {
-     "title": "김정은, 새로 건설된 강원도 통천군 주택구 시찰",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-11T21:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016437155?sid=100"
+     "title": "[뉴스픽] '입주민 정보 유출' GS건설‥정부 '직권조사'",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-11T21:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001535046?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 390,
+  "flagged": 391,
   "matched": 159,
-  "avgLeadMin": 944,
+  "avgLeadMin": 942,
   "recent": [
+   {
+    "keyword": "전세사기 피해자 추가 인정",
+    "hitKeyword": "성범죄 피해자 살해",
+    "hitAt": "2026-11-12T08:00:00+09:00",
+    "leadMin": 25
+   },
    {
     "keyword": "철도노조 총파업 예고",
     "hitKeyword": "스페인 노동자 총파업",
@@ -230,12 +172,6 @@
     "hitKeyword": "이란 지하 미사일 도시",
     "hitAt": "2026-11-12T06:00:00+09:00",
     "leadMin": 297
-   },
-   {
-    "keyword": "유럽 학교 폭파 협박",
-    "hitKeyword": "유럽 학교 폭탄 협박",
-    "hitAt": "2026-11-12T06:00:00+09:00",
-    "leadMin": 26
    }
   ]
  }
