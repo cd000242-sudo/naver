@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-11T15:52:46.683Z",
+ "builtAt": "2026-11-11T16:02:50.036Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,81 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 18,
+ "measured": 10,
  "candidates": [
+  {
+   "keyword": "이란 지하 미사일 도시",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-11T14:43:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이란, 지하 '미사일 도시' 공개… 탄도미사일·발사 장비 배치",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-11T15:54:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3448016"
+    },
+    {
+     "title": "이란 혁명수비대, 첨단 무기 ‘미사일 도시’ 공개",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-11T15:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012292161?sid=104"
+    },
+    {
+     "title": "\"미 공습에도 끄떡없다\"...이란 '지하 미사일 도시' 공개",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-11T15:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002431606?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "COP31 기후위기 대응",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-11T14:45:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"미래세대 생존보다 무기에 더 관심\"…룰라, 기후위기 대응 촉구(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-11T15:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016437061?sid=104"
+    },
+    {
+     "title": "룰라 \"미래세대 생존보다 무기·관세에 더 관심\"...기후위기 대응 촉구",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-11T15:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002431602?sid=104"
+    },
+    {
+     "title": "“미래 세대, 생존보다 무기에 더 관심”…룰라, 기후위기 대응 촉구",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-11T14:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012292159?sid=104"
+    }
+   ]
+  },
   {
    "keyword": "러 우크라 포로교환 합의",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-11T14:30:00.000Z",
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-11T14:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -41,43 +105,11 @@
      "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=624594"
     }
    ]
-  },
-  {
-   "keyword": "이재명 대통령 민주당 만찬",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-11T14:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령 \"당정 한마음 움직여야\"…김민석 \"양극화 대책 필요\"",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-11T15:12:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2017480"
-    },
-    {
-     "title": "李대통령, 민주당 지도부와 3시간 만찬… \"당정 한마음으로 움직여야\"",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-11T14:44:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3448006"
-    },
-    {
-     "title": "이 대통령, 김민석·한병도와 靑 만찬… \"당정 한마음 한뜻 움직여야\"",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-11T14:28:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261111500645"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 397,
+  "flagged": 399,
   "matched": 167,
   "avgLeadMin": 645,
   "recent": [
