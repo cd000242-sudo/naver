@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-11T16:02:50.036Z",
+ "builtAt": "2026-11-11T16:12:53.517Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 20,
  "candidates": [
   {
    "keyword": "이란 지하 미사일 도시",
@@ -39,6 +39,38 @@
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-11T15:19:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002431606?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "크러쉬 조이",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-11T14:49:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "크러쉬♥조이, 공개 열애 6년 만 '삐그덕' 듀엣…반려견 안고 나란히 등...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-11T16:02:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16274320"
+    },
+    {
+     "title": "크러쉬♥조이, 빼빼로데이 맞아 깜짝 듀엣…6년 차 애정전선 이상 無",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-11T15:01:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001407989"
+    },
+    {
+     "title": "크러쉬, 아이유가 피처링했던 노래 ♥조이와 듀엣으로…라이브 깜짝 공...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-11T14:55:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002079623"
     }
    ]
   },
@@ -109,9 +141,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 399,
-  "matched": 167,
-  "avgLeadMin": 645,
+  "flagged": 397,
+  "matched": 164,
+  "avgLeadMin": 649,
   "recent": [
    {
     "keyword": "데블스플랜3",
