@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "day": "2026-11-11",
+  "day": "2026-11-12",
   "posts": [
     {
       "sourceId": "celeb_fashion_magazine",
@@ -3644,9 +3644,9 @@
     }
   ],
   "fetchedAt": "2026-11-10T18:05:02.945Z",
-  "snapshotId": "sd_mwb02t4s27wylwxtwf",
-  "snapshotStatus": "ready",
-  "reserved": 40,
+  "snapshotId": null,
+  "snapshotStatus": "failed",
+  "reserved": 0,
   "attempts": 1,
-  "reason": null
+  "reason": "인스타 읽기 요청 실패(HTTP 400)."
 }
