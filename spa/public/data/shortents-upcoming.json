@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-11T15:01:47.886Z",
+ "builtAt": "2026-11-11T15:11:52.853Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,14 +11,79 @@
  "measured": 10,
  "candidates": [
   {
+   "keyword": "광주 아파트 화재",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 12,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-11T13:53:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "광주 아파트서 방화 추정 화재로 14명 중경상",
+     "press": "kwangju.co.kr",
+     "publishedAt": "2026-11-11T14:52:00.000Z",
+     "link": "http://www.kwangju.co.kr/article.php?aid=1794408369805291006"
+    },
+    {
+     "title": "전남광주 북구 아파트서 불‥주민 방화 혐의로 입건",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-11T14:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001534999?sid=102"
+    },
+    {
+     "title": "전남광주 도심 아파트 화재는 방화…40대 남성 입건",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-11T14:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014316911?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "러 우크라 포로교환 합의",
+   "sources": [
+    "signal.bz",
+    "daum"
+   ],
+   "articles90": 11,
+   "recent20": 0,
+   "press": 11,
+   "firstArticleAt": "2026-11-11T13:45:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美·러·우크라 종전협상 종료…포로교환 합의에도 영토 문제 등 난항(종...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-11T14:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009284391?sid=104"
+    },
+    {
+     "title": "러, 돈바스 반환 요구…우크라 \"전선 동결·휴전\" 맞서 입장차",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-11T14:46:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=624594"
+    },
+    {
+     "title": "러·우크라, 역대 최대 규모 포로교환 합의…안보 입장차는 여전",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-11T14:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000925255?sid=104"
+    }
+   ]
+  },
+  {
    "keyword": "이재명 대통령 민주당 만찬",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-11T13:32:00.000Z",
+   "articles90": 11,
+   "recent20": 0,
+   "press": 10,
+   "firstArticleAt": "2026-11-11T13:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -43,44 +108,56 @@
    ]
   },
   {
-   "keyword": "광주 아파트 화재",
+   "keyword": "최민희 하이에나 사과",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-11T13:40:00.000Z",
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-11T14:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "광주 아파트서 방화 추정 화재로 14명 중경상",
-     "press": "kwangju.co.kr",
-     "publishedAt": "2026-11-11T14:52:00.000Z",
-     "link": "http://www.kwangju.co.kr/article.php?aid=1794408369805291006"
+     "title": "[사설] 걸핏하면 언론 비하하는 최민희의 삐뚤어진 인식",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-11T15:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000965088?sid=110"
     },
     {
-     "title": "전남광주 북구 아파트서 불‥주민 방화 혐의로 입건",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-11T14:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001534999?sid=102"
+     "title": "최민희, 기자들에 '하이에나 떼' 표현 사과…국힘 \"언론 혐오증\"",
+     "press": "kado.net",
+     "publishedAt": "2026-11-11T15:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000210843?sid=100"
     },
     {
-     "title": "전남광주 도심 아파트 화재는 방화…40대 남성 입건",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-11T14:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014316911?sid=102"
+     "title": "사진기자들 ‘하이에나 떼’라는 최민희…“모욕” 비판에 “사과”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-11T14:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012292156?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 405,
-  "matched": 171,
-  "avgLeadMin": 548,
+  "flagged": 400,
+  "matched": 170,
+  "avgLeadMin": 641,
   "recent": [
+   {
+    "keyword": "데블스플랜3",
+    "hitKeyword": "데블스플랜3 장동민",
+    "hitAt": "2026-11-12T00:00:00+09:00",
+    "leadMin": 9086
+   },
+   {
+    "keyword": "장동민",
+    "hitKeyword": "데블스플랜3 장동민",
+    "hitAt": "2026-11-12T00:00:00+09:00",
+    "leadMin": 8962
+   },
    {
     "keyword": "이 대통령 유튜브 소통",
     "hitKeyword": "빠니보틀 유튜브 수익",
@@ -128,18 +205,6 @@
     "hitKeyword": "김수현 법정 증언",
     "hitAt": "2026-11-11T22:30:00+09:00",
     "leadMin": 7664
-   },
-   {
-    "keyword": "박항서 감독 인종차별 항의",
-    "hitKeyword": "박항서 인종차별 항의",
-    "hitAt": "2026-11-06T16:00:00+09:00",
-    "leadMin": 33
-   },
-   {
-    "keyword": "법원, 쿠팡 과징금 유지",
-    "hitKeyword": "쿠팡 과징금 효력정지",
-    "hitAt": "2026-11-06T15:00:00+09:00",
-    "leadMin": 1101
    }
   ]
  }
