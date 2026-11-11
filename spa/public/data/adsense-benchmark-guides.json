@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-11T02:15:00.563Z",
+  "generatedAt": "2026-11-11T02:30:01.491Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -324,69 +324,6 @@
           "views": 102,
           "answers": 1,
           "askedAt": "2026.10.31"
-        }
-      ]
-    },
-    {
-      "id": "029896267da706e1",
-      "urls": [
-        "https://angju.tistory.com/1000"
-      ],
-      "guide": {
-        "direction": "지식인 질문들은 '히터보다 에어컨이 빠르다'는 조언과 '실내용 김서림방지제·실외용 발수제'를 구분 못 쓰는 혼동을 공통으로 보인다. 고수 블로그 제목이 '외기유입·에어컨 순서'를 내세웠지만 실제 실내외 제품 구분이나 예열과의 관계는 아직 풀리지 않았다. 이 글은 외기유입 버튼 위치부터 에어컨 작동, 실내외 제품 사용 순서를 번호 매긴 체크리스트로 제시해 1분 내 해결까지 끝내게 한다.",
-        "searchTargets": [
-          "겨울철 자동차 습기",
-          "겨울철 자동차 히터",
-          "겨울철 자동차 히터 온도",
-          "겨울철 자동차 예열"
-        ],
-        "mustInclude": [
-          "외기유입 vs 내기순환 버튼 구분과 작동 순서",
-          "히터보다 에어컨이 김서림 제거에 더 빠르다는 근거(지식인 답변 기반)",
-          "실내용 김서림방지제와 실외용 유리발수제 구분 사용법",
-          "1분 내 제거 가능한 단계별 체크리스트(번호 순서)"
-        ],
-        "mustAvoid": [
-          "히터 온도만 올리면 해결된다는 단순화 — 실제로는 에어컨+외기유입 조합이 핵심",
-          "실내용 제품과 실외용 제품을 혼동해서 같은 용도로 추천"
-        ],
-        "checkBefore": [
-          "차종별 외기유입·에어컨 버튼 위치 차이가 있다는 점을 일반 설명 전제로 명시할지 확인",
-          "히터보다 에어컨이 빠르다는 효과 차이에 대해 지식인 답변 외 추가 근거 유무 확인"
-        ],
-        "solves": [
-          "히터 틀어도 김서림이 안 없어진다 → 에어컨+외기유입 조합 순서로 설명",
-          "실내용·실외용 제품이 뭐가 다른지 모르겠다 → 유리발수제(실외)·김서림방지제(실내) 구분 정리",
-          "몇 분이면 없어지는지 감이 안 온다 → 1분 내 제거 단계별 체크리스트 제공"
-        ],
-        "actionTitles": [
-          "겨울철 자동차 습기 제거, 외기유입 버튼 찾는 법"
-        ]
-      },
-      "at": "2026-11-04T02:38:58.374Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "자동차부품과 설명 급함....[내공걸어요]",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=50703&docId=128385582&answerNo=1&qb=6rKo7Jq47LKgIOyekOuPmeywqCDslZ7snKDrpqwg6rmA7ISc66a8IOunjOyXkA==",
-          "views": 192158,
-          "answers": 1,
-          "askedAt": "2011.04.05"
-        },
-        {
-          "title": "유산균과 콜레스테롤의 관계 정확히 좀 심도 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=708&docId=23459313&answerNo=1&qb=6rKo7Jq47LKgIOyekOuPmeywqCDslZ7snKDrpqwg6rmA7ISc66a8IOunjOyXkA==",
-          "views": 11223,
-          "answers": 4,
-          "askedAt": "2004.06.14"
-        },
-        {
-          "title": "자동차 습기",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=50704&docId=153913856&answerNo=1&qb=6rKo7Jq47LKgIOyekOuPmeywqCDslZ7snKDrpqwg6rmA7ISc66a8IOunjOyXkA==",
-          "views": 3651,
-          "answers": 2,
-          "askedAt": "2012.06.30"
         }
       ]
     },
@@ -2445,67 +2382,6 @@
           "views": 162,
           "answers": 4,
           "askedAt": "2025.08.13"
-        }
-      ]
-    },
-    {
-      "id": "4feb0689163822ef",
-      "urls": [
-        "https://codingzero.tistory.com/entry/2026-second-semester-student-loan-deadline"
-      ],
-      "guide": {
-        "direction": "검색자는 생활비대출만 신청한 경우 승인 문자와 실행기간이 언제인지 몰라 막히고, 신규 신청자와 기존 대출자(전환대출)의 절차 차이도 헷갈려한다. 기존 글들은 마감시간·금리·한도 숫자만 나열해 실제 신청 후 '언제 돈이 나오는지' 과정은 설명하지 못한다. 이 글은 생활비대출·등록금대출 신청부터 심사·실행까지 단계별 체크리스트로 한 번에 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "신청마감 11월17일 오후6시 정각(확인 필요: 한국장학재단 공식 공지)",
-          "생활비대출 한도 200만원·금리 1.7% 조건(확인 필요: 한국장학재단)",
-          "생활비대출과 등록금대출(학자금대출) 신청 절차 구분표",
-          "신규 신청자 vs 기존 대출자(전환대출) 신청 방법 차이",
-          "심사완료 승인문자 수신 후 실행기간 내 실행 필요(확인 필요: 재단 공지)"
-        ],
-        "mustAvoid": [
-          "2025년 지식인 답변(7월2일 신청, 11월10일 일괄심사)을 2026년 일정처럼 혼용",
-          "소득구간별 지원대상 여부를 확인 없이 일반화"
-        ],
-        "checkBefore": [
-          "한국장학재단 홈페이지·공식 공지에서 2026년 2학기 정확한 마감시각·금리·한도 재확인",
-          "신규/전환대출 구분 기준(만 35세 이하 등 연령 조건)을 재단 공지로 재확인"
-        ],
-        "solves": [
-          "생활비대출만 신청했는데 언제 실행되나 → 승인문자·실행기간 절차 안내",
-          "신청 마감 시간 지나면 어떻게 되나 → 마감시각과 이후 조치 설명",
-          "기존 대출자인데 전환대출 해야 하나 → 조건별 신청 흐름표 제공"
-        ],
-        "actionTitles": [
-          "학자금대출 신청방법 총정리, 11월17일 마감 전 확인",
-          "생활비대출 200만원 신청자격과 금리 1.7% 조건 확인",
-          "한국장학재단 학자금대출 마감시간·실행일정 체크리스트"
-        ]
-      },
-      "at": "2026-11-05T11:53:03.658Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "긴급 생활안정 지원금 및 5차 긴급 고용안정....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=408&docId=414461608&answerNo=1&qb=7ZWZ7J6Q6riI64yA7LacIOuniOqwkDEx7JuUIOyYpO2bhCDsg53tmZzruYQg7Iug7LKt67Cp67KV",
-          "views": 5594,
-          "answers": 2,
-          "askedAt": "2022.03.11"
-        },
-        {
-          "title": "한국장학재단 2025년 2학기 생활비대출",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=4010504&docId=486613508&answerNo=16&qb=7ZWZ7J6Q6riI64yA7LacIOuniOqwkDEx7JuUIOyYpO2bhCDsg53tmZzruYQg7Iug7LKt67Cp67KV",
-          "views": 3675,
-          "answers": 21,
-          "askedAt": "2025.07.04"
-        },
-        {
-          "title": "학자금 대출 전환",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=4010504&docId=475697632&answerNo=3&qb=7ZWZ7J6Q6riI64yA7LacIOuniOqwkDEx7JuUIOyYpO2bhCDsg53tmZzruYQg7Iug7LKt67Cp67KV",
-          "views": 1317,
-          "answers": 7,
-          "askedAt": "2024.09.23"
         }
       ]
     },
@@ -18855,71 +18731,6 @@
           "views": 247,
           "answers": 7,
           "askedAt": "2026.10.29"
-        }
-      ]
-    },
-    {
-      "id": "e5c5001d8fd89d78",
-      "urls": [
-        "https://hanoelswould.com/entry/%EC%A0%9C%EC%8A%B5%EA%B8%B0-%EC%A0%84%EA%B8%B0%EC%84%B8-%ED%8F%AD%ED%83%84-%EB%A7%89%EB%8A%94-%EA%B3%84%EC%82%B0%EB%B6%80%ED%84%B0-%EC%A0%88%EC%95%BD%EA%B9%8C%EC%A7%80-%EC%99%84%EB%B2%BD-%EA%B0%80%EC%9D%B4%EB%93%9C",
-        "https://smans.tistory.com/entry/%EA%B2%A8%EC%9A%B8-%EC%A0%84%EA%B8%B0%EC%84%B8-%EB%88%84%EC%A7%84%EC%A0%9C-%ED%8F%AD%ED%83%84-%EB%A7%89%EB%8A%94-%EB%B2%95-%E2%80%93-%EA%B5%AC%EA%B0%84%ED%91%9C%C2%B7%EB%82%9C%EB%B0%A9%EA%B8%B0%EA%B5%AC%EB%B3%84-%EC%9A%94%EA%B8%88-%EB%B9%84%EA%B5%90%C2%B7%EC%A0%88%EC%95%BD-%ED%8C%81-%EC%B4%9D%EC%A0%95%EB%A6%AC"
-      ],
-      "guide": {
-        "direction": "겨울철 전기세가 왜 갑자기 뛰는지, 욕실온풍기 같은 난방기구 전기요금이 얼마나 나오는지 몰라 검색한다. 하지만 제목은 제습기(여름 가전)라 계절이 안 맞고, 난방기구별 소비전력·요금 비교표도 빠져 있다. 누진제 구간별 kWh 단가표와 욕실온풍기 등 난방기구 요금 비교표, 구간 안 넘기는 절약 체크리스트를 넣으면 이 글로 검색이 끝난다.",
-        "searchTargets": [
-          "겨울 전기세",
-          "겨울 전기세 아끼는법",
-          "겨울전기세 누진세"
-        ],
-        "mustInclude": [
-          "누진제 구간별 kWh당 단가표(예: 월 200kWh 이하 kWh당 약 120원, 확인 필요: 한전 고시)",
-          "욕실온풍기 등 난방기구별 소비전력·예상 전기요금 비교표",
-          "겨울 전기세 아끼는 구체 실천법(사용시간 조절 등 구간 안 넘기는 법)",
-          "감전 걱정 없는 욕실 난방기 안전 정보와 요금 정보를 함께 제공"
-        ],
-        "mustAvoid": [
-          "제목은 제습기(여름 가전)인데 실제 수요는 겨울 난방기구 중심이라 계절 혼동으로 이탈",
-          "지식인 답변 하나의 누진제 단가만 믿고 한전 공식 고시처럼 확정적으로 쓰기"
-        ],
-        "checkBefore": [
-          "한국전력 공식 전기요금 누진제 구간·단가 고시",
-          "욕실온풍기 등 난방기구 실제 소비전력(제품 사양표)"
-        ],
-        "solves": [
-          "전기요금이 왜 갑자기 폭탄처럼 뛰는지 몰라 검색 → 누진제 구간표와 kWh당 단가로 설명",
-          "욕실온풍기 등 난방기구 전기세가 얼마나 나오는지 몰라 검색 → 기구별 요금 비교표 제공",
-          "겨울 전기세 아끼는 법을 몰라 검색 → 구간 안 넘기는 구체 절약 체크리스트 제공"
-        ],
-        "actionTitles": [
-          "겨울 전기세 아끼는법 총정리, 누진세 구간표로 계산하기",
-          "겨울전기세 누진세, 난방기구별 요금 비교로 꼼꼼히 확인",
-          "겨울 전기세 폭탄 막는 난방기구별 요금 비교 체크리스트"
-        ]
-      },
-      "at": "2026-11-09T20:33:46.901Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "전기요금 폭탄",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1118&docId=491476868&answerNo=6&qb=6rKo7Jq4IOyghOq4sOyEuCDriITsp4TsoJwg7Y+t7YOEIOunieuKlA==",
-          "views": 855,
-          "answers": 7,
-          "askedAt": "2026.03.18"
-        },
-        {
-          "title": "화장실 너무 추워요 욕실온풍기 써보신분 ㅠ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=50503&docId=495628322&answerNo=8&qb=6rKo7Jq4IOyghOq4sOyEuCDriITsp4TsoJwg7Y+t7YOEIOunieuKlA==",
-          "views": 579,
-          "answers": 10,
-          "askedAt": "2026.11.05"
-        },
-        {
-          "title": "감전 걱정 없는 화장실 난방기는요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8080102&docId=480108523&answerNo=7&qb=6rKo7Jq4IOyghOq4sOyEuCDriITsp4TsoJwg7Y+t7YOEIOunieuKlA==",
-          "views": 450,
-          "answers": 7,
-          "askedAt": "2026.11.05"
         }
       ]
     },
@@ -73933,6 +73744,1365 @@
           "askedAt": "2026.10.31"
         }
       ]
+    },
+    {
+      "id": "8f25d351fb966c5c",
+      "urls": [
+        "https://www.primusy.com/feeds/2005467547476867562/comments/default",
+        "https://memogipost.tistory.com/entry/2026-%EA%B5%B0%EC%82%B0%EB%B6%88%EA%BD%83%EC%B6%95%EC%A0%9C"
+      ],
+      "guide": {
+        "direction": "검색자는 '2026 군산 불꽃축제'가 정확히 몇 월 며칠 몇 시인지, 차 없이 갈지 차 끌고 갈지부터 막힌다. 고수 글들은 '명당·주차·셔틀' 제목만 걸고 실제 셔틀 배차 시간표나 주차장별 도보 거리 비교는 비워둔다. 날짜·시간·명당 3곳·주차장별 특징·셔틀 노선을 표 하나로 정리하면 이 글에서 끝난다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "2026 행사 정확한 날짜·시간대 (확인 필요: 군산시청 공식 발표)",
+          "명당 포인트별 특징(시야 트인 정도, 혼잡도) 비교",
+          "주차장별 위치·요금·수용 규모 (확인 필요: 주최측 공지)",
+          "셔틀버스 탑승지·배차 간격·막차 시간 (확인 필요: 주최측 공지)"
+        ],
+        "mustAvoid": [
+          "작년(2025) 일정·장소를 2026 정보로 혼동해 쓰지 않기",
+          "여수·부산 등 다른 지역 불꽃축제와 혼동하지 않기"
+        ],
+        "checkBefore": [
+          "2026년 정확한 개최 일시 - 군산시청 또는 주최 측 보도자료 확인",
+          "셔틀버스 운행 여부·노선 - 행사 공식 공지 확인"
+        ],
+        "solves": [
+          "몇 시에 시작하는지 몰라 헛걸음할까 걱정 → 2026 정확한 일정 명시",
+          "어디서 봐야 잘 보이는지 몰라 자리 못 잡음 → 명당 포인트 비교 제공",
+          "차 가져가도 되는지 애매함 → 주차장·셔틀버스 노선 정리"
+        ],
+        "actionTitles": [
+          "2026 군산 불꽃축제 일정 확인, 명당 자리 미리 잡는 법",
+          "군산 불꽃축제 주차장 vs 셔틀버스, 뭐가 편한지 비교"
+        ]
+      },
+      "at": "2026-11-11T02:25:53.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "906814b11cc5b721",
+      "urls": [
+        "https://apt-view.com/%ec%9d%b5%ec%82%b0%ec%a0%9c3%ec%9d%bc%eb%b0%98%ec%82%b0%eb%8b%a8-%ed%96%89%eb%b3%b5%ec%a3%bc%ed%83%9d-%eb%82%ad%ec%82%b0%eb%a9%b4-%ec%8b%a0%ed%98%bc%eb%b6%80%eb%b6%80-%ec%b2%ad%eb%85%84-%ec%9e%85/",
+        "https://lsy4857.tistory.com/234"
+      ],
+      "guide": {
+        "direction": "검색자는 자신이 청년·신혼부부 자격에 해당하는지, 실제 내부 구조가 어떤지, 입주 후 문의는 어디로 하는지가 막힌 지점이다. 고수 글은 '입주자격 신청'까지만 다루고 자동완성이 가리키는 '내부 구조'와 '관리사무소' 정보는 비워뒀다. 소득·자산 기준표와 평형별 내부 구조, 관리사무소 연락처를 한 번에 정리하면 이 글에서 끝난다.",
+        "searchTargets": [
+          "익산 제3일반산단 행복주택 내부",
+          "익산 제3일반산단 행복주택 관리사무소"
+        ],
+        "mustInclude": [
+          "청년·신혼부부별 소득·자산 기준표 (확인 필요: LH 공고문)",
+          "신청 접수 기간·방법 (확인 필요: LH청약플러스 공고)",
+          "평형별 내부 구조 정보 (확인 필요: LH 공고문 또는 모델하우스)",
+          "관리사무소 연락처·위치 (확인 필요: 해당 단지 공식 안내)"
+        ],
+        "mustAvoid": [
+          "익산 제1·2일반산단 등 다른 행복주택과 혼동하지 않기"
+        ],
+        "checkBefore": [
+          "정확한 소득·자산 기준과 접수 일정 - LH청약플러스 공식 공고문 확인",
+          "관리사무소 실제 연락처 - 단지 관리사무소 또는 익산시청 공고 확인"
+        ],
+        "solves": [
+          "내가 자격 되는지 모름 → 청년·신혼부부별 소득·자산 기준표 제공",
+          "내부가 어떤 구조인지 모름 → 평형별 내부 구조 정리",
+          "입주 후 어디에 문의할지 모름 → 관리사무소 연락처 안내"
+        ],
+        "actionTitles": [
+          "익산제3일반산단 행복주택 입주자격 신청 방법 총정리",
+          "익산 제3일반산단 행복주택 내부 구조와 관리사무소 확인",
+          "낭산면 행복주택 소득·자산 기준 확인하고 신청하는 법"
+        ]
+      },
+      "at": "2026-11-11T02:25:53.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "광주광역시 후보자 정당,성명.공약점 갈켜주....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=61402&docId=54560507&answerNo=1&qb=7J217IKw7KCcM+ydvOuwmOyCsOuLqO2WieuzteyjvO2DnQ==",
+          "views": 119533,
+          "answers": 5,
+          "askedAt": "2008.04.09"
+        },
+        {
+          "title": "사회수행편가 내공많이 드림 !!!",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=61402&docId=62610523&answerNo=1&qb=7J217IKw7KCcM+ydvOuwmOyCsOuLqO2WieuzteyjvO2DnQ==",
+          "views": 71549,
+          "answers": 4,
+          "askedAt": "2008.04.10"
+        }
+      ]
+    },
+    {
+      "id": "634c22d4e2092690",
+      "urls": [
+        "https://flameleaf.tistory.com/entry/%EC%8A%A4%ED%82%A4-%EA%B0%95%EC%8A%B5-%EA%B0%80%EA%B2%A9-%EC%B4%88%EB%B3%B4%EC%9E%90%EA%B0%80-%EC%95%8C%EC%95%84%EC%95%BC-%ED%95%A0-%EB%B9%84%EC%9A%A9-%EC%A0%88%EA%B0%90-%EA%BF%80%ED%8C%81",
+        "https://wonderful-info.com/%ed%9c%98%eb%8b%89%ec%8a%a4%ed%8c%8c%ed%81%ac-%ec%8a%a4%ed%82%a4-%ea%b0%95%ec%8a%b5-%ec%b4%88%eb%b3%b4%ec%9e%90-%ec%99%84%eb%b2%bd-%ea%b0%80%ec%9d%b4%eb%93%9c-%ec%97%90%ec%9d%b4%ec%8a%a4-%eb%a0%8c/"
+      ],
+      "guide": {
+        "direction": "초보자는 리조트마다 강습비가 얼마나 다른지, 아이도 강습받을 수 있는지, 셔틀버스 좌석이 마감될 수 있다는 점에서 막힌다. 고수 글은 휘닉스파크 한 곳의 렌탈샵 후기에 머물러 곤지암·비발디·지산·무주·하이원 등 타 리조트 비교는 비워뒀다. 리조트별 강습비·어린이 강습 여부·셔틀 사전예약 팁을 한 표로 정리하면 이 글에서 끝난다.",
+        "searchTargets": [
+          "곤지암스키강습",
+          "비발디파크스키강습",
+          "지산스키강습",
+          "무주스키강습"
+        ],
+        "mustInclude": [
+          "리조트별 강습비 비교표(곤지암·비발디파크·지산·무주·하이원·휘닉스파크) (확인 필요: 각 스키장 공식 요금표)",
+          "어린이 전용 강습 운영 여부·정원 (확인 필요: 각 스키장 공지)",
+          "셔틀버스 사전예약 필요성과 마감 임박 시점",
+          "초보자 1:1 vs 1:3 그룹 강습 선택 기준"
+        ],
+        "mustAvoid": [
+          "특정 렌탈샵·강사를 체험 후기처럼 꾸며 추천하지 않기"
+        ],
+        "checkBefore": [
+          "리조트별 2026 시즌 강습비·강습 시간 - 각 스키장 공식 홈페이지 확인",
+          "셔틀버스 사전예약 가능 여부 - 각 스키장 셔틀버스 안내 공지 확인"
+        ],
+        "solves": [
+          "어느 스키장이 더 저렴한지 모름 → 리조트별 강습비 비교표 제공",
+          "어린이도 강습 가능한지 모름 → 어린이 전용 강습 운영 현황 정리",
+          "강습받으러 갈 때 셔틀버스 탈 수 있는지 모름 → 사전예약 꿀팁 안내"
+        ],
+        "actionTitles": [
+          "곤지암·비발디·지산 스키강습비 한눈에 비교하는 법",
+          "무주·하이원스키강습 신청 전 셔틀버스 예약 확인하기",
+          "휘닉스파크 스키강습 어린이 가능 여부 확인하는 법"
+        ]
+      },
+      "at": "2026-11-11T02:25:53.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "비발디파크 스키강습 어린이 가르쳐주는곳 ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=100301&docId=490694658&answerNo=2&qb=7Iqk7YKk6rCV7Iq1",
+          "views": 2148,
+          "answers": 4,
+          "askedAt": "2025.12.17"
+        },
+        {
+          "title": "스키 강습 질문",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=100301&docId=475873781&answerNo=1&qb=7Iqk7YKk6rCV7Iq1",
+          "views": 305,
+          "answers": 6,
+          "askedAt": "2024.09.28"
+        },
+        {
+          "title": "비발디파크 스키강습 받으려면 셔틀버스 이....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=100301&docId=491249443&answerNo=1&qb=7Iqk7YKk6rCV7Iq1",
+          "views": 196,
+          "answers": 2,
+          "askedAt": "2026.01.09"
+        }
+      ]
+    },
+    {
+      "id": "8e6dbc80d451205a",
+      "urls": [
+        "https://maruara-story.tistory.com/entry/%EA%B5%AC%EA%B8%80-%ED%95%99%EA%B5%90-AI-%EA%B8%B0%EB%B3%B8-%EC%B0%A8%EB%8B%A8-%EC%A0%95%EC%B1%85%EA%B3%BC-%EA%B0%80%EC%9D%B4%EB%93%9C-%ED%95%99%EC%8A%B5-%EC%B4%9D%EC%A0%95%EB%A6%AC"
+      ],
+      "guide": {
+        "direction": "구글 학교계정(Education) 사용자는 제미나이 등 AI 기능이 기본적으로 막힌 걸 로그인·비밀번호 오류로 오해해 복구만 반복한다. 고수 블로그는 차단 정책 설명에 머물고 실제 계정 생성·로그인·비밀번호 찾기 절차와의 구분은 비워뒀다. 이 글은 학교계정 생성부터 로그인, 비밀번호 복구, AI 차단 해제(관리자 승인) 확인까지 순서대로 정리해 끝낸다.",
+        "searchTargets": [
+          "구글 학교계정",
+          "구글 학교 계정 로그인",
+          "구글 학교 계정 복구",
+          "구글 학교이메일 뜻"
+        ],
+        "mustInclude": [
+          "구글 학교계정(Workspace for Education) 유형별 AI 기능 기본 차단 여부 (확인 필요: Google 관리자 고지)",
+          "학교 계정 생성·로그인·비밀번호 찾기를 순서대로 정리한 단계",
+          "계정 복구 시 필요한 학교 발급 이메일 형식과 확인 방법",
+          "AI 차단 해제 시 필요한 학교(관리자) 승인 절차 (확인 필요: 학교 IT 담당자 공지)"
+        ],
+        "mustAvoid": [
+          "일반 개인 구글 계정과 학교(Workspace for Education) 계정의 AI 정책을 같은 것처럼 섞어 쓰지 않기",
+          "특정 학교·학생의 계정 정보나 사생활을 추측해서 쓰지 않기"
+        ],
+        "checkBefore": [
+          "Google Workspace for Education 관리자 고지에서 AI 기능 기본 차단 여부 확인",
+          "학교 IT/행정실 공지에서 실제 적용 정책 확인"
+        ],
+        "solves": [
+          "구글 학교 계정에서 제미나이 등 AI가 왜 막히는지 모르겠다 → 기본 차단 정책과 해제(관리자 승인) 절차를 정리",
+          "구글 학교 계정 비밀번호를 잊었다 → 복구 절차를 단계별로 안내",
+          "구글 학교 이메일이 뭔지, 일반 계정과 뭐가 다른지 모르겠다 → 차이와 생성 방법을 설명"
+        ],
+        "actionTitles": [
+          "구글 학교 계정 비밀번호 찾는 법과 복구 절차 정리",
+          "구글 학교 계정 만들기부터 AI 차단 확인까지 정리",
+          "구글 학교이메일 뜻과 계정 로그인 안 될 때 해결법"
+        ]
+      },
+      "at": "2026-11-11T02:25:53.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "표현의 자유",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80101&docId=495646170&answerNo=16&qb=6rWs6riAIO2Vmeq1kCBhaSDquLDrs7gg7LCo64uo",
+          "views": 20953,
+          "answers": 18,
+          "askedAt": "2026.11.07"
+        },
+        {
+          "title": "안철수 공약",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60701&docId=405225145&answerNo=3&qb=6rWs6riAIO2Vmeq1kCBhaSDquLDrs7gg7LCo64uo",
+          "views": 12936,
+          "answers": 3,
+          "askedAt": "2021.11.21"
+        },
+        {
+          "title": "미국에 갈수 있을까요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110601&docId=489380397&answerNo=3&qb=6rWs6riAIO2Vmeq1kCBhaSDquLDrs7gg7LCo64uo",
+          "views": 2870,
+          "answers": 5,
+          "askedAt": "2025.10.10"
+        }
+      ]
+    },
+    {
+      "id": "3ae4162d05dd69f8",
+      "urls": [
+        "https://gilwon.tistory.com/527"
+      ],
+      "guide": {
+        "direction": "검색자는 프라도 미술관이 월요일에 쉬는지, 다른 마드리드 미술관처럼 요일 휴관이 있는지 헷갈려 일정을 못 짠다. 고수 블로그 제목은 '월요일보다 단축 운영일'을 짚었지만 실제 날짜별 운영시간과 무료입장 시간대까지는 비워뒀다. 이 글은 휴관일·단축 운영일·무료입장 시간을 표로 정리하고 예약·투어 방법까지 순서대로 끝낸다.",
+        "searchTargets": [
+          "프라도 미술관",
+          "프라도 미술관 예약",
+          "프라도 미술관 입장권",
+          "프라도 미술관 무료입장"
+        ],
+        "mustInclude": [
+          "프라도 미술관 연중무휴 여부와 실제 휴관일(1/1, 5/1, 12/25 등) (확인 필요: museodelprado.es 운영시간 안내)",
+          "단축 운영일(1/6, 12/24, 12/31 등)의 구체적 운영시간 (확인 필요: 공식 홈페이지)",
+          "무료입장 가능 시간대와 조건 (확인 필요: 공식 홈페이지 무료입장 안내)",
+          "입장권·투어 예약 방법과 고야 등 대표작 관람 동선 정리"
+        ],
+        "mustAvoid": [
+          "프라도를 월요일 휴관인 티센보르네미사미술관, 화요일 휴관인 레이나소피아미술관과 혼동하지 않기",
+          "확인되지 않은 휴관일·운영시간을 단정적으로 쓰지 않기(시즌별 변경 가능)"
+        ],
+        "checkBefore": [
+          "museodelprado.es 공식 홈페이지에서 최신 휴관일·단축 운영일 공지 확인",
+          "무료입장 시간대와 예약 필요 여부를 공식 안내에서 확인"
+        ],
+        "solves": [
+          "프라도 미술관이 월요일에 문 여는지 헷갈린다 → 요일별 운영시간과 단축 운영일을 표로 정리",
+          "프라도 미술관 무료입장 시간이 따로 있는지 모른다 → 무료입장 조건과 시간대를 안내",
+          "프라도 미술관 티켓·투어를 어디서 예약해야 하는지 모른다 → 예약 방법을 순서대로 정리"
+        ],
+        "actionTitles": [
+          "프라도 미술관 휴관일과 단축 운영일 한번에 확인",
+          "프라도 미술관 무료입장 시간 확인하고 예약하는 법",
+          "프라도 미술관 입장권·투어 비교하고 예약하는 법"
+        ]
+      },
+      "at": "2026-11-11T02:25:53.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "9c89f54b53fe7ef7",
+      "urls": [
+        "https://codingzero.tistory.com/entry/interest-rate-reduction-request-2026"
+      ],
+      "guide": {
+        "direction": "검색자는 신용평점이 올랐거나 대출을 1년 넘게 썼을 때 금리인하요구가 되는지, 주택담보대출도 대상인지 궁금해하지만 고수 글은 조건·서류만 나열하고 거절당했을 때 대응은 비워둔다. 이 글은 대출 종류별(주담대 포함) 신청 가능 여부, 최소 이용기간, 거절 시 소비자분쟁조정위원회 이의제기 순서까지 체크리스트로 끝낸다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "신용평점 상승, 취업·연봉상승 등 신청 가능 조건과 필요 서류 목록",
+          "최소 대출 이용기간 기준(통상 1년 이상) (확인 필요: 은행연합회·금융감독원 공지)",
+          "주택담보대출 등 대출 종류별 신청 가능 여부 비교표",
+          "거절 시 소비자분쟁조정위원회 이의제기 절차와 재신청 가능 시점"
+        ],
+        "mustAvoid": [
+          "모든 대출이 무조건 인하된다고 단정하지 않기(심사 결과에 따라 거절 가능)"
+        ],
+        "checkBefore": [
+          "금융감독원·은행연합회 공지에서 2026년 기준 신청 조건·절차 확인",
+          "신청 은행 공식 앱/고객센터에서 최신 필요 서류 목록 확인"
+        ],
+        "solves": [
+          "주담대도 금리인하요구 가능한가요? → 대출 종류별 신청 가능 여부를 비교표로 정리",
+          "대출 후 얼마나 지나야 금리인하요구 할 수 있나요? → 최소 이용기간 기준을 안내",
+          "이자율 인하 요구가 거절되면 어떻게 하나요? → 소비자분쟁조정위원회 이의제기 절차를 정리"
+        ],
+        "actionTitles": [
+          "2026 금리인하요구권 신청방법·조건·서류 확인하기",
+          "대출 금리인하요구 거절됐을 때 이의제기하는 법",
+          "주담대도 금리인하요구권 신청 가능한지 확인하는 법"
+        ]
+      },
+      "at": "2026-11-11T02:25:53.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "주담대 금리인하요구 가능한가요??",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40105&docId=398144410&answerNo=2&qb=6riI66as7J247ZWY7JqU6rWs6raMIOyLoOyyreuwqeuyleuMgOy2nOydtOyekCDrgq7stpQ=",
+          "views": 2350,
+          "answers": 4,
+          "askedAt": "2021.08.25"
+        },
+        {
+          "title": "이자 1프로대 대출 금리인하요구권 적",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=4010506&docId=387126027&answerNo=4&qb=6riI66as7J247ZWY7JqU6rWs6raMIOyLoOyyreuwqeuyleuMgOy2nOydtOyekCDrgq7stpQ=",
+          "views": 1824,
+          "answers": 5,
+          "askedAt": "2021.04.13"
+        },
+        {
+          "title": "기존에 대출 금리인하요구",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=4010506&docId=381332852&answerNo=5&qb=6riI66as7J247ZWY7JqU6rWs6raMIOyLoOyyreuwqeuyleuMgOy2nOydtOyekCDrgq7stpQ=",
+          "views": 301,
+          "answers": 5,
+          "askedAt": "2021.02.08"
+        }
+      ]
+    },
+    {
+      "id": "8e1ed40a42fa4ab0",
+      "urls": [
+        "https://life.sano.co.kr/%eb%94%b0%eb%9c%bb%ed%95%9c-%ed%95%9c%eb%b0%98%eb%8f%84-%ec%82%ac%eb%9e%91%ec%9d%98-%ec%97%b0%ed%83%84%eb%82%98%eb%88%94%ec%9a%b4%eb%8f%99-%ec%97%b0%ed%83%84-%ed%95%9c-%ec%9e%a5%ec%9d%b4-%ec%a3%bc/"
+      ],
+      "guide": {
+        "direction": "지식인 질문 대부분은 연탄나눔운동과 무관하고 '후원단체 추천'만 겨우 연탄나눔을 언급해, 실제 검색자는 참여·후원 방법을 몰라 헤맨다. 고수 글은 '온기' 같은 감성 제목만 걸고 신청 경로·연탄 가격·필요 수량은 알려주지 않는다. 신청 방법과 가격·수량표를 넣어야 끝까지 읽힌다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "연탄 한 장 가격과 한 가구 겨울나기 필요 장수(확인 필요: 주최 단체 공지)",
+          "주최 단체명과 공식 신청·후원 경로(확인 필요: 공식 홈페이지)"
+        ],
+        "mustAvoid": [
+          "한반도 통일 이슈 등 정치적 해석과 혼동"
+        ],
+        "checkBefore": [
+          "주최 단체 공식 홈페이지·SNS 공지"
+        ],
+        "solves": [
+          "\"후원단체 추천해달라\" → 연탄나눔운동 참여·후원 경로 정리",
+          "\"연탄나눔이 얼마나 필요한지 모르겠다\" → 연탄 가격·필요량 계산"
+        ],
+        "actionTitles": [
+          "연탄나눔운동 참여 방법과 후원 신청 총정리",
+          "연탄 한 장 가격과 겨울나기 필요 수량 계산법",
+          "연탄나눔운동 후원 신청 경로 확인하기"
+        ]
+      },
+      "at": "2026-11-11T02:25:53.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "전주에 맛있는 맛집 추천해주셔요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=121305&docId=20340799&answerNo=2&qb=65Sw65y77ZWcIO2VnOuwmCDsgqzrnpEg7Jew7YOE64KY64iU7Jq064+ZIOyXsO2DhA==",
+          "views": 597653,
+          "answers": 21,
+          "askedAt": "2005.04.27"
+        },
+        {
+          "title": "적조에 대하여",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=130102&docId=41079358&answerNo=3&qb=65Sw65y77ZWcIO2VnOuwmCDsgqzrnpEg7Jew7YOE64KY64iU7Jq064+ZIOyXsO2DhA==",
+          "views": 56797,
+          "answers": 3,
+          "askedAt": "2008.10.27"
+        },
+        {
+          "title": "옛 우물 전문...",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=307&docId=62476817&answerNo=1&qb=65Sw65y77ZWcIO2VnOuwmCDsgqzrnpEg7Jew7YOE64KY64iU7Jq064+ZIOyXsO2DhA==",
+          "views": 23484,
+          "answers": 2,
+          "askedAt": "2006.02.24"
+        }
+      ]
+    },
+    {
+      "id": "759a2617ffbce94a",
+      "urls": [
+        "https://infodemic.kr/3670",
+        "https://infodemic.kr/3669",
+        "https://infodemic.kr/3668"
+      ],
+      "guide": {
+        "direction": "지식인엔 결혼식 분위기 추측과 차경은·이유진 결혼으로 생기는 동서지간 관계 질문이 섞여 있어, 검색자는 복잡한 관계도를 헷갈린다. 고수 글은 프로필·나이만 나열하고 자매·동서 관계는 풀어주지 않는다. 공식 발표 사실과 관계도표로 정리하면 끝까지 읽힌다.",
+        "searchTargets": [
+          "장동윤 김승윤",
+          "배우 장동윤 김승윤"
+        ],
+        "mustInclude": [
+          "장동윤·김승윤 나이·출연작 프로필 비교표(확인 필요: 소속사 공지)",
+          "결혼 발표 날짜·소속사 공식 입장(확인 필요: 보도자료)",
+          "차경은-김승윤 자매 관계 및 동서지간 관계도",
+          "차경은·이유진 결혼 소식과의 구분 설명"
+        ],
+        "mustAvoid": [
+          "결혼식 분위기·장소 등 사생활 추측성 서술",
+          "차경은·이유진 결혼과 장동윤·김승윤 결혼을 혼동"
+        ],
+        "checkBefore": [
+          "결혼 날짜·장소 관련 원문 기사"
+        ],
+        "solves": [
+          "\"결혼식 분위기 어떨까\" → 추측 대신 공식 발표 기반 정리",
+          "\"차경은 이유진 결혼으로 동서지간 되나\" → 관계도표로 명확히 정리"
+        ],
+        "actionTitles": [
+          "배우 장동윤 김승윤 나이 프로필 비교",
+          "장동윤 김승윤 동서지간 관계 확인하기"
+        ]
+      },
+      "at": "2026-11-11T02:25:53.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "남자들도 미련 남았으면",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80101&docId=494902704&answerNo=1&qb=7J6l64+Z7JykIOq5gOyKueycpCDqsrDtmLw=",
+          "views": 346,
+          "answers": 5,
+          "askedAt": "2026.08.26"
+        },
+        {
+          "title": "차경은·이유진 결혼, 주변 반응은 어떤가요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80101&docId=495544849&answerNo=1&qb=7J6l64+Z7JykIOq5gOyKueycpCDqsrDtmLw=",
+          "views": 190,
+          "answers": 1,
+          "askedAt": "2026.10.14"
+        },
+        {
+          "title": "상갓집(초상 初喪)",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=3120102&docId=494901060&answerNo=1&qb=7J6l64+Z7JykIOq5gOyKueycpCDqsrDtmLw=",
+          "views": 54,
+          "answers": 2,
+          "askedAt": "2026.08.26"
+        }
+      ]
+    },
+    {
+      "id": "204395402465de6d",
+      "urls": [
+        "https://njhyou.tistory.com/entry/%ED%98%88%EB%8B%B9-%EA%B4%80%EB%A6%AC-%EC%8B%9D%EB%8B%A8%EA%B3%BC-%EC%83%9D%ED%99%9C%EC%8A%B5%EA%B4%80-%EA%B3%B5%EB%B3%B5%ED%98%88%EB%8B%B9-%EB%86%92%EC%9D%84-%EB%95%8C-%EB%A8%BC%EC%A0%80-%ED%99%95%EC%9D%B8%ED%95%A0-7%EA%B0%80%EC%A7%80"
+      ],
+      "guide": {
+        "direction": "공복혈당이 한 번 높게 나왔을 때 바로 당뇨 확진인지 헷갈려 검색하는 사람이 많다. 고수 글은 '7가지'라는 숫자만 내세우고 정상·경계·당뇨 구간 수치 기준과 재검사 시점은 짚어주지 않는다. 이 글은 수치 기준표와 식후 걷기 등 7가지 체크리스트를 그대로 따라 하게 해 끝까지 읽히게 한다.",
+        "searchTargets": [
+          "혈당 식단"
+        ],
+        "mustInclude": [
+          "공복혈당 정상·공복혈당장애(경계)·당뇨 의심 구간 수치 기준표",
+          "공복혈당이 반복해서 높게 나올 때 재검사 권장 시점",
+          "식후 30분~1시간 걷기 등 식후 혈당 스파이크 억제 습관",
+          "수면부족·스트레스가 공복혈당에 영향 주는 메커니즘 설명",
+          "포도즙 등 특정 식품을 경계 수준에서 마셔도 되는지 여부(확인 필요: 의료 가이드라인)"
+        ],
+        "mustAvoid": [
+          "공복혈당 한 번 높게 나온 것을 당뇨 확진처럼 단정하는 서술",
+          "포도즙 등 특정 식품을 치료 효과가 있는 것처럼 과장",
+          "의사 진단 없이 이 글만으로 당뇨 여부를 판단하게 하는 표현"
+        ],
+        "checkBefore": [
+          "공복혈당 정상/경계/당뇨 진단 기준 수치를 대한당뇨병학회 등 공식 가이드라인에서 확인",
+          "포도즙 등 특정 식품의 혈당 영향에 대한 근거 자료 확인"
+        ],
+        "solves": [
+          "공복혈당이 한 번 높게 나온 게 당뇨인지 모름 → 정상·경계·당뇨 구간 기준표로 바로 확인하게 함",
+          "생활습관을 구체적으로 어떻게 바꿔야 할지 모름 → 식후 걷기 등 7가지 체크리스트 제시",
+          "수면부족·스트레스가 혈당과 관련 있는지 궁금함 → 관련성을 수치 기준과 함께 설명"
+        ],
+        "actionTitles": [
+          "공복혈당 높을 때 확인할 7가지, 기준표로 바로 체크",
+          "혈당 식단 관리법, 공복혈당 경계 수준 체크리스트"
+        ]
+      },
+      "at": "2026-11-11T02:25:53.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "공복혈당이 한 번 높게 나왔다고 당뇨는 아니....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=7010106&docId=495263051&answerNo=3&qb=7ZiI64u5IOyLneuLqCDsg53tmZzsirXqtIAg6rO167O17ZiI64u5IOuGkuydhA==",
+          "views": 281,
+          "answers": 8,
+          "askedAt": "2026.10.13"
+        },
+        {
+          "title": "공복혈당을 낮추려면 생활습관을 어떻게 관....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=7010106&docId=495774369&answerNo=1&qb=7ZiI64u5IOyLneuLqCDsg53tmZzsirXqtIAg6rO167O17ZiI64u5IOuGkuydhA==",
+          "views": 210,
+          "answers": 5,
+          "askedAt": "2026.10.31"
+        },
+        {
+          "title": "공복혈당 높은이유 생활습관 때문인가요?(공....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=71104&docId=494873277&answerNo=1&qb=7ZiI64u5IOyLneuLqCDsg53tmZzsirXqtIAg6rO167O17ZiI64u5IOuGkuydhA==",
+          "views": 202,
+          "answers": 1,
+          "askedAt": "2026.08.24"
+        }
+      ]
+    },
+    {
+      "id": "c68934904c649fde",
+      "urls": [
+        "https://one.hmseoul.com/1874"
+      ],
+      "guide": {
+        "direction": "액티언 하이브리드 가격이 얼마인지, 토레스 하이브리드와 뭐가 다른지 몰라 검색이 몰린다. 고수 글은 '가격 확인하기'라는 제목만 걸고 트림별 실제 가격표와 토레스 비교, 블랙박스 유무는 풀어주지 않는다. 이 글은 트림별 가격·옵션표와 토레스 비교표를 바로 제시해 구매 결정을 끝내게 한다.",
+        "searchTargets": [
+          "액티언 하이브리드 가격",
+          "액티언 하이브리드 연비",
+          "쌍용 액티언 하이브리드",
+          "액티언 하이브리드 견적"
+        ],
+        "mustInclude": [
+          "트림별(S8 등) 친환경차 세제혜택 후 가격, 예: S8 3,790만 원(확인 필요: KGM 공식 가격표)",
+          "20인치 휠·12.3인치 디지털 클러스터·내비게이션 등 기본 옵션 구성",
+          "토레스 하이브리드와의 연비·가격 비교표",
+          "빌트인캠(블랙박스) 기본 미탑재 여부",
+          "복합연비 공식 수치(확인 필요: KGM 공식 인증 연비)"
+        ],
+        "mustAvoid": [
+          "토레스 하이브리드와 액티언 하이브리드를 같은 모델처럼 혼동해서 서술",
+          "직접 시승한 것처럼 1인칭 체험을 지어내는 표현"
+        ],
+        "checkBefore": [
+          "KGM 공식 홈페이지·보도자료에서 트림별 최종 가격과 공식 연비 확인",
+          "사전계약 시작일과 실제 출시(인도) 일정을 구분해서 확인"
+        ],
+        "solves": [
+          "액티언 하이브리드 가격이 얼마인지 모름 → 트림별 가격표로 바로 확인하게 함",
+          "토레스 하이브리드와 뭐가 다른지 헷갈림 → 연비·가격 비교표 제공",
+          "블랙박스(빌트인캠) 기본 탑재 여부가 궁금함 → 옵션 유무를 명시"
+        ],
+        "actionTitles": [
+          "액티언 하이브리드 가격, 트림별 견적표로 확인하기",
+          "액티언 하이브리드 vs 토레스 하이브리드 연비 비교",
+          "액티언 하이브리드 옵션·블랙박스 유무 계약 전 체크"
+        ]
+      },
+      "at": "2026-11-11T02:25:53.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "KGM 액티언 하이브리드와 토레스 하이브리드....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=81101&docId=486755178&answerNo=1&qb=7JWh7Yuw7Ja4IO2VmOydtOu4jOumrOuTnA==",
+          "views": 921,
+          "answers": 1,
+          "askedAt": "2025.07.04"
+        },
+        {
+          "title": "KGM 액티언 하이브리드의 연비와 주행 성능은 ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=81104&docId=489413727&answerNo=1&qb=7JWh7Yuw7Ja4IO2VmOydtOu4jOumrOuTnA==",
+          "views": 342,
+          "answers": 1,
+          "askedAt": "2025.10.11"
+        },
+        {
+          "title": "KGM 액티언 하이브리드의 주행 성능과 연비는?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=50704&docId=487627541&answerNo=1&qb=7JWh7Yuw7Ja4IO2VmOydtOu4jOumrOuTnA==",
+          "views": 225,
+          "answers": 1,
+          "askedAt": "2025.08.02"
+        }
+      ]
+    },
+    {
+      "id": "8753a5a4e580fc37",
+      "urls": [
+        "https://hyunrhee.tistory.com/entry/%EC%82%AC%EB%A7%88%EC%B2%9C%E5%8F%B8%E9%A6%AC%E9%81%B7%EC%9D%B4-%E3%80%8A%EC%82%AC%EA%B8%B0%E5%8F%B2%E8%A8%98%E3%80%8B-%EC%9D%98-%EC%A0%95%EC%B9%98%EC%9D%98-%EB%8B%A4%EC%84%AF-%EB%8B%A8%EA%B3%84"
+      ],
+      "guide": {
+        "direction": "사마천이 사기에서 제시한 정치(통치)의 5단계가 정확히 무엇인지 몰라 헷갈리는 검색자가 있을 수 있다. 다만 이 소재는 자동완성이 없고 제공된 지식인 질문도 문화재·족보 등 무관한 내용이라 실제 검색 수요가 확인되지 않는다. 글을 쓰기 전 화식열전 원문과 실제 키워드 수요를 먼저 검증해야 끝까지 읽히는 글이 된다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "사마천이 사기를 쓴 시기(기원전 100년경)와 배경(지식인 질문 근거)",
+          "사기 화식열전에 등장하는 정치(통치) 5단계 원문과 순서(확인 필요: 사기 원문 번역본)"
+        ],
+        "mustAvoid": [
+          "경기도 문화재·의흥 예씨 족보 등 이 소재와 무관한 지식인 질문을 억지로 연결",
+          "정치의 5단계를 특정 현대 정치인·사건에 직접 대입해 추측성 비교"
+        ],
+        "checkBefore": [
+          "사기 화식열전의 정치(통치) 5단계 원문과 순서를 사기 원문 번역본으로 확인",
+          "이 주제의 실제 검색 수요를 키워드 도구로 재확인(현재 제공된 지식인 질문은 무관한 내용)"
+        ],
+        "solves": [
+          "사마천 사기의 정치(통치) 5단계가 정확히 뭔지 모름 → 원문 5단계를 번역·해설로 정리(확인 필요: 화식열전 원문)",
+          "사기와 사마천의 저술 시기·배경이 헷갈림 → 기원전 100년경 저술 배경을 짚어 정리(지식인 질문 근거)"
+        ],
+        "actionTitles": [
+          "사마천 사기 정치 5단계, 원문으로 뜻 확인하기",
+          "사마천이 제시한 정치 5단계, 순서와 의미 확인"
+        ]
+      },
+      "at": "2026-11-11T02:25:53.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "중국,영국,필리핀,칠레,태국",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=61302&docId=61708583&answerNo=1&qb=7KCV7LmYIOyCrOuniCDsgqzquLAg7JeQ7IScIOygnOyLnA==",
+          "views": 36999,
+          "answers": 1,
+          "askedAt": "2004.10.25"
+        },
+        {
+          "title": "경기도 문화재 가르쳐 주세용",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=130102&docId=37034269&answerNo=11&qb=7KCV7LmYIOyCrOuniCDsgqzquLAg7JeQ7IScIOygnOyLnA==",
+          "views": 11096,
+          "answers": 26,
+          "askedAt": "2007.04.11"
+        },
+        {
+          "title": "의흥 예씨[芮氏]에 대해서 질문 있습니다.",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=61302&docId=47865293&answerNo=1&qb=7KCV7LmYIOyCrOuniCDsgqzquLAg7JeQ7IScIOygnOyLnA==",
+          "views": 5619,
+          "answers": 1,
+          "askedAt": "2003.12.01"
+        }
+      ]
+    },
+    {
+      "id": "69361eef11712585",
+      "urls": [
+        "https://one.hmseoul.com/1873"
+      ],
+      "guide": {
+        "direction": "검색자는 신형 2027 액티언 트림별 가격표뿐 아니라 사이드미러 교체비, 조기폐차 고철값, 올도색 비용, 수동 중고차 시세 같은 실제 부품·중고 거래 비용도 함께 찾는다. 고수 블로그의 '가격표 바로보기'류 제목은 신차 가격만 보여주고 이런 부품·중고·폐차 관련 질문은 풀어주지 못한다. 이 글은 트림별 신차 가격표에 사이드미러·도색·폐차 고철값 등 실용 비용을 표로 묶어 끝까지 읽히게 한다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "2027 액티언 트림별 가격표(확인 필요: KGM 쌍용자동차 공식 홈페이지)",
+          "엑티언 폐차 고철값 지역 평균 35만~45만원(지식인 답변 기준, 지역·업체별 편차 있음)",
+          "엑티언스포츠 올도색 비용대(확인 필요: 도색 업체 견적)",
+          "액티언 수동 중고가격 시세(확인 필요: 엔카·KB차차차 등)"
+        ],
+        "mustAvoid": [
+          "구형 엑티언(2006~2011)과 2027년형 신형 액티언을 같은 차로 혼동하지 않기",
+          "고철값·도색비를 업체 홍보성 수치로 단정해 제시하지 않기(지역·업체별 편차 큼)"
+        ],
+        "checkBefore": [
+          "2027 액티언 공식 가격표는 KGM(쌍용자동차) 홈페이지에서 확인",
+          "엑티언 고철값·올도색 비용은 실제 폐차장·정비업체 견적으로 재확인"
+        ],
+        "solves": [
+          "2027 액티언 가격표가 트림별로 헷갈린다 → 트림별 가격표로 정리",
+          "엑티언 폐차하면 고철값이 얼마나 나오는지 모른다 → 지역 평균 범위 제시",
+          "엑티언 중고/수동 모델 시세를 모른다 → 중고가 비교 가이드 제공"
+        ],
+        "actionTitles": [
+          "2027 액티언 가격표 트림별로 한눈에 비교하는 법",
+          "엑티언 폐차시 고철값 얼마나 나오는지 확인하는 법",
+          "엑티언 중고차 가격 수동모델까지 비교하는 법"
+        ]
+      },
+      "at": "2026-11-11T02:25:53.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "액티언흰색 사이드 미러 가격을 알고 싶습니....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=100507&docId=46134208&answerNo=1&qb=7JWh7Yuw7Ja4IOqwgOqyqe2RnA==",
+          "views": 930,
+          "answers": 2,
+          "askedAt": "2007.03.27"
+        },
+        {
+          "title": "조기폐차시 엑티언 고철값 얼마나오나요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=8110202&docId=339029975&answerNo=5&qb=7JWh7Yuw7Ja4IOqwgOqyqe2RnA==",
+          "views": 737,
+          "answers": 7,
+          "askedAt": "2019.10.28"
+        },
+        {
+          "title": "액티언가격",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=8110202&docId=278432699&answerNo=2&qb=7JWh7Yuw7Ja4IOqwgOqyqe2RnA==",
+          "views": 154,
+          "answers": 5,
+          "askedAt": "2017.06.12"
+        }
+      ]
+    },
+    {
+      "id": "3edcbc25b50a2e5e",
+      "urls": [
+        "https://life.sano.co.kr/%eb%af%b8%ec%8b%9c%eb%a7%88-%eb%b6%80%ec%82%ac-%ec%9d%bc%eb%b0%98-%eb%b6%80%ec%82%ac%ec%99%80-%eb%8b%a4%eb%a5%b8-%ec%a0%90%ec%9d%80-%eb%ac%b4%ec%97%87%ec%9d%bc%ea%b9%8c%ec%9a%94/"
+      ],
+      "guide": {
+        "direction": "검색자는 '미시마 부사'가 일반 정통부사와 식감·저장성에서 어떻게 다른지, 또 부사 계통 품종(조생부사·코린·미시마후지 등)이 어떻게 구분되는지 궁금해한다. 고수 블로그 제목은 질문만 던지고 품종 계통과 차이를 표로 정리해 주지 못한다. 이 글은 부사 계통 품종 목록과 미시마의 식감·저장성 차이를 표로 정리해 끝까지 읽히게 한다.",
+        "searchTargets": [
+          "미시마 부사"
+        ],
+        "mustInclude": [
+          "부사 계통 품종 목록: 조생부사·코린·스퍼골든데리셔스·광명·홍아이카·봉촌·미시마후지·사이라이·핑크레이디",
+          "미시마는 일반 정통부사보다 식감이 덜 푸석거리는 편(지식인 답변 기준, 확인 필요: 농진청 자료)",
+          "부사는 저장성이 길어 아오리보다 늦게 출하된다는 저장성 차이(확인 필요: 농산물품질관리원)",
+          "미야비·미시마 등 부사 쪽 품종별 겉모양(점 등) 차이(확인 필요: 품종 등록 정보)"
+        ],
+        "mustAvoid": [
+          "미시마를 후지(부사)와 전혀 다른 별개 과일 품종으로 오인하지 않기",
+          "식감 차이를 '훨씬 맛있다'처럼 과장해 단정하지 않기(개인차·개체차 존재)"
+        ],
+        "checkBefore": [
+          "미시마후지 등 품종 설명은 농촌진흥청·농산물품질관리원 공식 품종 정보로 대조 확인"
+        ],
+        "solves": [
+          "미시마 부사가 일반 부사와 뭐가 다른지 모른다 → 식감·저장성 차이 정리",
+          "사과 품종 보는 법을 모르겠다 → 후지 계열 품종 목록으로 정리",
+          "부사 종류가 너무 많아 헷갈린다 → 계통표로 구분"
+        ],
+        "actionTitles": [
+          "미시마 부사와 일반 부사 차이 한눈에 비교하기",
+          "미시마후지 등 부사 계통 품종 구분하는 법"
+        ]
+      },
+      "at": "2026-11-11T02:25:53.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "배 와 사과 품종보는법쫌요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=8020603&docId=158524040&answerNo=1&qb=66+47Iuc66eIIOu2gOyCrCDsnbzrsJgg7KCQ7J2A",
+          "views": 10110,
+          "answers": 1,
+          "askedAt": "2012.09.22"
+        },
+        {
+          "title": "부사 사과의 종류에 대해서 알고 싶습니다. ex....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=8020603&docId=432977131&answerNo=1&qb=66+47Iuc66eIIOu2gOyCrCDsnbzrsJgg7KCQ7J2A",
+          "views": 177,
+          "answers": 2,
+          "askedAt": "2022.11.18"
+        },
+        {
+          "title": "사과 특히 부사 품종에 대해서",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1116&docId=372195059&answerNo=0&qb=66+47Iuc66eIIOu2gOyCrCDsnbzrsJgg7KCQ7J2A",
+          "views": 35,
+          "answers": 0,
+          "askedAt": "2020.11.01"
+        }
+      ]
+    },
+    {
+      "id": "497c008a202977e7",
+      "urls": [
+        "https://infodemic.kr/3666"
+      ],
+      "guide": {
+        "direction": "검색자는 분당 시내버스 연쇄 추돌 사고의 발생 일시·장소·원인·피해 규모를 궁금해하지만, 자동완성에는 '분당시내버스요금'처럼 사고와 무관한 요금 문의도 함께 걸린다. 고수 블로그 제목은 사고명만 달고 구체 사실(언제·어디서·몇 대·사상자)을 확인해 정리하지 못했을 가능성이 높다. 이 글은 확인된 사고 사실을 표로 정리하고, 요금 정보까지 함께 담아 혼재된 검색 의도를 모두 끝낸다.",
+        "searchTargets": [
+          "분당시내버스요금"
+        ],
+        "mustInclude": [
+          "사고 발생 일시·장소(확인 필요: 소방서·경찰 공식 발표 또는 뉴스 원문)",
+          "추돌한 버스 노선·대수, 사상자 수(확인 필요: 공식 발표)",
+          "분당 시내버스 요금표(확인 필요: 성남시·경기버스정보 공식 자료)"
+        ],
+        "mustAvoid": [
+          "사고 원인(졸음운전·급제동 등)을 공식 발표 전 단정해서 쓰지 않기",
+          "서해대교·인천대교 추돌사고 등 과거 유사 사고와 혼동하지 않기",
+          "사상자·피해 규모를 추측성 숫자로 제시하지 않기"
+        ],
+        "checkBefore": [
+          "사고 발생 사실은 성남소방서·경기남부경찰청 공식 발표 또는 원문 뉴스 기사로 확인",
+          "분당 시내버스 요금은 성남시청·경기버스정보시스템 공식 자료로 확인"
+        ],
+        "solves": [
+          "분당 시내버스 사고가 언제 어디서 났는지 모른다 → 확인된 사실만 정리",
+          "분당 시내버스 요금이 얼마인지 궁금하다 → 요금표로 정리",
+          "이 사고가 과거 다른 추돌사고와 같은 건지 헷갈린다 → 사고를 명확히 구분"
+        ],
+        "actionTitles": [
+          "분당 시내버스 연쇄 추돌 사고 발생 일시·장소 확인하기",
+          "분당 시내버스 요금표 한눈에 조회하는 법",
+          "분당 시내버스 사고 원인과 대처 상황 확인하기"
+        ]
+      },
+      "at": "2026-11-11T02:25:53.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "울진. 삼척 사태를 아시는 분이 .....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=604&docId=48555258&answerNo=4&qb=67aE64u5IOyLnOuCtOuyhOyKpCDsl7Dsh4Qg7LaU64+MIOyCrOqzoA==",
+          "views": 83757,
+          "answers": 8,
+          "askedAt": "2008.10.25"
+        },
+        {
+          "title": "도로교통공단은 무슨 일을 하는 기관일까요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=812&docId=31990288&answerNo=1126&qb=67aE64u5IOyLnOuCtOuyhOyKpCDsl7Dsh4Qg7LaU64+MIOyCrOqzoA==",
+          "views": 67017,
+          "answers": 1346,
+          "askedAt": "2008.10.05"
+        },
+        {
+          "title": "한국사 세계사",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=111001&docId=431909041&answerNo=1&qb=67aE64u5IOyLnOuCtOuyhOyKpCDsl7Dsh4Qg7LaU64+MIOyCrOqzoA==",
+          "views": 31605,
+          "answers": 4,
+          "askedAt": "2022.11.04"
+        }
+      ]
+    },
+    {
+      "id": "2bdc380ef22bafb3",
+      "urls": [
+        "https://healphy.co.kr/%ea%b2%8c%ec%8b%a4%ec%97%bc-%ec%a6%9d%ec%83%81/"
+      ],
+      "guide": {
+        "direction": "왼쪽 아랫배가 계속 아픈데 장염·맹장염 중 뭔지 몰라 병원 갈지 고민하는 사람이 많다. 고수 글 제목은 둘을 가른다고만 하고 오른쪽 통증 시 맹장염과의 감별 어려움(CT 필요)까지는 짚지 않는다. 동반증상(발열·압통·변비)별 체크리스트와 위치별 구별표로 자가판단 기준을 끝내준다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "왼쪽 아랫배 지속통증+압통+발열 조합이 게실염 전형 패턴(지식iN 상담의사 답변 근거)",
+          "장염은 설사·구토 동반, 게실염은 발열·압통 중심이라는 동반증상 비교표",
+          "오른쪽 아랫배 게실염은 맹장염과 감별 어려워 CT 필요(지식iN 전제혁 답변 근거)",
+          "미열·오한 동반 시 의심 강도를 나누는 체크리스트",
+          "(확인 필요: 응급실 즉시 방문이 필요한 통증 강도·동반증상 기준)"
+        ],
+        "mustAvoid": [
+          "오른쪽 통증을 맹장염으로 단정하고 게실염 가능성을 빼먹는 서술",
+          "자가진단만으로 병원 방문을 미루게 하는 민간요법·약물 안내",
+          "흔한 장염으로 단정해 심각한 신호를 놓치게 하는 서술"
+        ],
+        "checkBefore": [
+          "게실염-장염-맹장염 감별 기준을 의학 전문자료나 지식iN 전문의 답변으로 재검증",
+          "왼쪽/오른쪽 호발 위치 차이를 최신 의학 정보로 재확인"
+        ],
+        "solves": [
+          "왼쪽 아랫배가 계속 아픈데 장염인지 게실염인지 모르겠다 → 동반증상별 구별 체크리스트 제공",
+          "오른쪽 아랫배가 아프면 맹장염 아닌가 → 게실염도 오른쪽일 수 있는 감별점 정리",
+          "병원을 가야 하는지 판단이 안 된다 → 응급 신호와 경과관찰 가능한 신호 구분"
+        ],
+        "actionTitles": [
+          "왼쪽 아랫배 통증이 계속되면 게실염 자가진단 체크리스트",
+          "게실염 증상 장염과 구별하는 법, 발열·압통 체크포인트"
+        ]
+      },
+      "at": "2026-11-11T02:25:53.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "왼쪽 아랫배가 아프고 열이 나는데 게실염 검....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=7010102&docId=495884345&answerNo=1&qb=6rKM7Iuk7Je8IOyVhOueq+uwsCDtlZzsqr0g6rOE7IaNIOyVhO2UjA==",
+          "views": 35,
+          "answers": 2,
+          "askedAt": "2026.11.09"
+        },
+        {
+          "title": "아랫배가 너무 아파서 병원에 갔더니 게실염....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=7010102&docId=495138634&answerNo=1&qb=6rKM7Iuk7Je8IOyVhOueq+uwsCDtlZzsqr0g6rOE7IaNIOyVhO2UjA==",
+          "views": 1102,
+          "answers": 1,
+          "askedAt": "2026.09.13"
+        },
+        {
+          "title": "게실염 증상 중에서 오른쪽 아랫배 통증이 가....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=7010102&docId=492927282&answerNo=1&qb=6rKM7Iuk7Je8IOyVhOueq+uwsCDtlZzsqr0g6rOE7IaNIOyVhO2UjA==",
+          "views": 987,
+          "answers": 2,
+          "askedAt": "2026.04.12"
+        }
+      ]
+    },
+    {
+      "id": "af586718e890de43",
+      "urls": [
+        "https://bangulnote.com/entry/samsung-biologics-rights-forfeited-qa/"
+      ],
+      "guide": {
+        "direction": "11월 12~13일 일반공모에 주주가 아닌 일반 투자자도 청약할 수 있는지, 얼마에 사는지가 가장 막히는 지점이다. 고수 글의 '8가지 Q&A'는 포괄적이라 확정가 산정 시점과 청약 신청 순서까지는 단계별로 안 짚는다. 청약 자격·일정표·확정가 계산방식·계좌개설부터 신청까지 순서를 정리해 끝내준다.",
+        "searchTargets": [
+          "삼성바이오로직스 유상증자 일정",
+          "삼성바이오로직스 유상증자 청약 방법",
+          "삼성바이오로직스 유상증자 확정가",
+          "삼성바이오로직스 유상증자 받는법"
+        ],
+        "mustInclude": [
+          "11월 12~13일 일반공모 청약 일정·시간 표 (확인 필요: 전자공시 공고)",
+          "발행가와 최종 확정가 산정 시점·방식 차이 (확인 필요: 공시 원문)",
+          "실권주 발생 시 일반공모 청약 자격(비주주 가능 여부) (확인 필요: 공시)",
+          "청약 배정 방식(균등배정/비례배정 등) (확인 필요: 공시)",
+          "계좌개설→청약한도 확인→청약 신청까지 단계별 순서"
+        ],
+        "mustAvoid": [
+          "비슷한 시기 다른 종목 유상증자·공모주 일정과 혼동해 날짜를 잘못 쓰는 것",
+          "주주배정 유상증자와 실권주 일반공모 절차를 같은 것으로 섞어 설명"
+        ],
+        "checkBefore": [
+          "11월 12~13일 일반공모 정확한 일정·시간은 금감원 전자공시시스템(DART) 공고로 재확인",
+          "확정가·발행가 수치는 삼성바이오로직스 공시 원문으로 재확인",
+          "청약 가능 주관 증권사 목록은 공시 원문에서 확인"
+        ],
+        "solves": [
+          "일반공모 누가 신청할 수 있나 → 실권주 발생 시 일반공모 자격 조건 정리",
+          "확정가는 언제 어떻게 정해지나 → 발행가와 확정가 산정 시점·방식 비교",
+          "청약 신청방법을 모르겠다 → 계좌개설부터 청약까지 단계별 순서 제공"
+        ],
+        "actionTitles": [
+          "삼성바이오로직스 유상증자 청약방법, 11월 12~13일 일정 정리",
+          "삼성바이오로직스 유상증자 확정가 계산법과 받는법 총정리",
+          "삼성바이오로직스 유상증자 일반공모 신청방법 한눈에 보기"
+        ]
+      },
+      "at": "2026-11-11T02:25:53.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "삼성바이오로직스 주주배정 유상증자",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=264850080&answerNo=2&qb=7IK87ISx67CU7J207Jik66Gc7KeB7IqkIOycoOyDgeymneyekCDsi6Tqtozso7wg7LKt7JW9IOydvOuwmOqzteuqqA==",
+          "views": 29697,
+          "answers": 6,
+          "askedAt": "2016.11.22"
+        },
+        {
+          "title": "주식 삼성바이오로직스 신주인수권/청약 관....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=415870417&answerNo=1&qb=7IK87ISx67CU7J207Jik66Gc7KeB7IqkIOycoOyDgeymneyekCDsi6Tqtozso7wg7LKt7JW9IOydvOuwmOqzteuqqA==",
+          "views": 400,
+          "answers": 1,
+          "askedAt": "2022.03.28"
+        }
+      ]
+    },
+    {
+      "id": "e43030879ef2418e",
+      "urls": [
+        "https://maruara-story.tistory.com/entry/%EC%8B%9C%EB%A6%AC-AI-%ED%95%9C%EA%B5%AD%EC%96%B4-%EC%A7%80%EC%9B%90-%EC%95%B1%EC%8A%A4%ED%86%A0%EC%96%B4-18-%EC%8B%AC%EC%82%AC-%EA%B8%B0%EC%A4%80-%EC%B4%9D%EC%A0%95%EB%A6%AC"
+      ],
+      "guide": {
+        "direction": "시리 AI 한국어가 지금 베타인지 정식인지, 바로 쓸 수 있는지 대기명단부터 신청해야 하는지가 가장 막히는 지점이다. 고수 글 제목은 앱스토어 18+ 심사기준까지 묶어 지원 상태·사용법·끄는 법 같은 구체 행동은 흐려진다. 지원 상태·기기별 사용법·대기명단 신청 순서·끄는 법을 표로 정리해 끝내준다.",
+        "searchTargets": [
+          "시리 ai 한국어 사용하는 법",
+          "시리 ai 베타",
+          "시리 ai 대기명단",
+          "시리 AI 끄는 방법"
+        ],
+        "mustInclude": [
+          "시리 AI 한국어 지원이 베타인지 정식인지 상태 구분 (확인 필요: 애플 공식 발표)",
+          "한국어로 시리 AI 쓰는 법(기기·OS 버전·언어 설정 단계) (확인 필요: 애플 지원 문서)",
+          "대기명단(waitlist) 신청 방법과 순서 (확인 필요: 애플 공식 안내)",
+          "시리 AI 끄는 방법(설정 경로) (확인 필요: 애플 지원 문서)",
+          "앱스토어 18+ 심사기준과 시리 AI 한국어 지원의 관련성 (확인 필요: 원문 기사)"
+        ],
+        "mustAvoid": [
+          "시리 AI 한국어 지원을 다른 AI 비서(챗GPT 등) 출시 소식과 혼동해 다루는 것",
+          "앱스토어 18+ 심사기준을 시리 AI와 무관한 일반 성인 콘텐츠 규제로 확대 해석",
+          "베타 단계인데 정식 출시된 것처럼 단정해서 쓰는 것"
+        ],
+        "checkBefore": [
+          "시리 AI 한국어 지원이 베타/정식 중 어느 단계인지 애플 공식 발표나 보도자료로 확인",
+          "앱스토어 18+ 심사기준 변경 내용은 애플 개발자 가이드라인 원문으로 확인",
+          "대기명단 신청 경로는 애플 공식 지원 문서로 확인"
+        ],
+        "solves": [
+          "시리 ai 한국어 언제 되나 → 베타/정식 여부와 지원 시작 시점 정리",
+          "시리 ai 한국어 사용하는 법을 모르겠다 → 언어 설정부터 켜는 단계별 안내",
+          "시리 ai 끄는 방법을 모르겠다 → 설정 경로 안내"
+        ],
+        "actionTitles": [
+          "시리 AI 한국어 사용하는 법, 대기명단 신청까지 총정리",
+          "시리 AI 한국어 베타 지금 쓰는 법과 끄는 방법 정리",
+          "시리 AI 한국어 지원 상태 확인하고 설정 켜는 법 정리"
+        ]
+      },
+      "at": "2026-11-11T02:25:53.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "표현의 자유",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80101&docId=495646170&answerNo=18&qb=7Iuc66asIGFpIO2VnOq1reyWtCDslbHsiqTthqDslrQg7Ius7IKs",
+          "views": 20954,
+          "answers": 18,
+          "askedAt": "2026.11.08"
+        }
+      ]
+    },
+    {
+      "id": "828100370f26935c",
+      "urls": [
+        "https://gilwon.tistory.com/525"
+      ],
+      "guide": {
+        "direction": "AI 코디 앱이 소지하지 않은 옷을 추천해 실제로 입을 수 없는 코디를 받는 문제를 짚는다. 고수 글 제목은 '소지한 옷부터 표시하라'는 방향만 던지고 어떤 앱에서 그 설정을 어떻게 켜는지는 다루지 않는다. 이 글은 환절기 겉옷·면접 복장처럼 소지 여부가 갈리는 상황별 체크리스트와 앱별 설정 순서로 끝낸다.",
+        "searchTargets": [
+          "ai 코디니",
+          "ai 코딩 앱"
+        ],
+        "mustInclude": [
+          "코디니 등 AI 코디 앱의 '내 옷장(소지 아이템) 등록' 기능 여부와 사용법 (확인 필요: 앱 공식 가이드)",
+          "환절기 겉옷 선택 체크리스트: 기온별 청자켓·니트 등 소지 여부 기준 정리",
+          "면접 복장 코디 기준: 학교 마크 가리기 등 단정함 조건 정리",
+          "AI가 소지 아이템만 추천 vs 쇼핑몰 연계 추천, 앱별 비교표"
+        ],
+        "mustAvoid": [
+          "AI 코디 추천 이미지의 저작권·소송 전략을 법률 조언처럼 단정적으로 쓰지 않기",
+          "ai 코딩(프로그래밍) 교육 콘텐츠와 혼동되는 제목·키워드 사용 주의"
+        ],
+        "checkBefore": [
+          "코디니 등 실제 앱에 '내 옷장 등록' 기능이 있는지 — 앱스토어·공식 사용 가이드",
+          "AI 이미지 저작권 관련 내용은 법률 전문가 공식 답변으로 재확인"
+        ],
+        "solves": [
+          "AI가 없는 옷을 추천해서 못 입는 문제 → 내 옷장 등록 후 추천받는 설정법 안내",
+          "환절기에 겉옷 뭘 입을지 모르겠다 → 기온별 겉옷 체크리스트 제공",
+          "면접 복장 코디가 헷갈린다 → 단정한 조합 기준 정리"
+        ],
+        "actionTitles": [
+          "AI 코디니 내 옷장 등록하는 법, 없는 옷 추천 받지 않기",
+          "ai 코디 앱 비교, 내가 가진 옷만 추천받는 설정 확인하기",
+          "환절기 겉옷 코디 체크리스트, AI 추천 전에 먼저 확인할 것"
+        ]
+      },
+      "at": "2026-11-11T02:25:53.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "이제 날씨가 가을이에요.",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=815&docId=495173127&answerNo=3&qb=YWkg7L2U65SUIOyYt+ydhCDstpTsspzrsJvsp4Ag7JWK7Jy866Ck66m0",
+          "views": 162,
+          "answers": 6,
+          "askedAt": "2026.09.15"
+        },
+        {
+          "title": "고등학교 면접 전형 면접 코디는 무엇을 입고....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110408&docId=495140550&answerNo=1&qb=YWkg7L2U65SUIOyYt+ydhCDstpTsspzrsJvsp4Ag7JWK7Jy866Ck66m0",
+          "views": 142,
+          "answers": 1,
+          "askedAt": "2026.09.13"
+        },
+        {
+          "title": "지금 날씨 겉옷",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=815&docId=489744049&answerNo=4&qb=YWkg7L2U65SUIOyYt+ydhCDstpTsspzrsJvsp4Ag7JWK7Jy866Ck66m0",
+          "views": 125,
+          "answers": 7,
+          "askedAt": "2025.10.24"
+        }
+      ]
+    },
+    {
+      "id": "393bffa1b1823291",
+      "urls": [
+        "https://tali.kr/screenshot-afterlife-index-test"
+      ],
+      "guide": {
+        "direction": "캡처만 하고 다시 안 보는 화면을 스스로 자각시키는 테스트형 콘텐츠로, 저장은 하지만 다시 찾아보지 않는 심리를 짚는다. 기존 제목은 재미 요소만 던지고 저장해둔 캡처·메시지를 실제로 다시 찾는 방법까지는 안 알려준다. 이 글은 유형별 테스트와 함께 실종 문자 캡처처럼 저장한 것을 다시 찾는 법을 더해 끝까지 읽히게 한다.",
+        "searchTargets": [
+          "실종문자 다시보는법",
+          "다시 보는 드라마"
+        ],
+        "mustInclude": [
+          "'사후세계 지수' 테스트 문항 수와 점수 구간표 (확인 필요: 원문 테스트)",
+          "캡처만 하고 다시 안 보는 이유에 대한 실제 통계·설문 (확인 필요: 어디서)",
+          "실종문자 등 알림 캡처를 사진함에서 다시 찾는 구체적 방법",
+          "저장만 해두고 안 보는 콘텐츠 유형 비교표(캡처·드라마·문자 등)"
+        ],
+        "mustAvoid": [
+          "피카소 작품세계·표현의 자유 등 무관한 지식인 질문 내용을 섞지 않기",
+          "불법 다시보기 사이트 링크나 저작권 침해 소지 있는 안내 넣지 않기"
+        ],
+        "checkBefore": [
+          "'스크린샷 사후세계 지수' 테스트의 공식 문항·결과 유형 원문 확인",
+          "실종문자(안전안내문자 등) 캡처를 다시 찾는 방법이 실제 안내와 맞는지 확인"
+        ],
+        "solves": [
+          "캡처한 사진을 저장만 하고 다시 안 본다 → 유형 테스트로 내 습관 자각, 정리 팁 제공",
+          "실종문자 같은 알림 캡처를 나중에 못 찾는다 → 사진함에서 다시 찾는 법 안내",
+          "저장만 해두고 안 보는 콘텐츠가 많다 → 캡처·드라마 등 유형별 정리로 비교"
+        ],
+        "actionTitles": [
+          "스크린샷 사후세계 지수 테스트로 내 캡처 유형 확인하기",
+          "실종문자 다시보는법, 캡처 사진함에서 찾는 방법 정리",
+          "저장만 하고 안 보는 콘텐츠 테스트, 내 습관 체크하기"
+        ]
+      },
+      "at": "2026-11-11T02:25:53.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "표현의 자유",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80101&docId=495646170&answerNo=18&qb=64uk7IucIOuztOuKlCDthYzsiqTtirgg7Iqk7YGs66aw7IO3IOyCrO2bhOyEuOqzhA==",
+          "views": 20955,
+          "answers": 18,
+          "askedAt": "2026.11.08"
+        },
+        {
+          "title": "피카소의 작품세계와 작품 질문",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=312&docId=126983039&answerNo=1&qb=64uk7IucIOuztOuKlCDthYzsiqTtirgg7Iqk7YGs66aw7IO3IOyCrO2bhOyEuOqzhA==",
+          "views": 7486,
+          "answers": 1,
+          "askedAt": "2011.08.17"
+        },
+        {
+          "title": "피카소의 작품세계",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=130105&docId=126968870&answerNo=1&qb=64uk7IucIOuztOuKlCDthYzsiqTtirgg7Iqk7YGs66aw7IO3IOyCrO2bhOyEuOqzhA==",
+          "views": 4649,
+          "answers": 1,
+          "askedAt": "2011.08.17"
+        }
+      ]
+    },
+    {
+      "id": "76388e0d7425e724",
+      "urls": [
+        "https://zipbid.tistory.com/entry/%EC%A0%84%EB%82%A8%EA%B4%91%EC%A3%BC-%EC%97%90%EB%84%88%EC%A7%80%EA%B4%80%EB%A6%AC%EA%B8%B0%EB%8A%A5%EC%82%AC-%EB%AA%A8%EC%A7%91-%EC%B4%88%EB%B3%B4-%EA%B0%80%EB%8A%A5-%EC%99%84%EC%A0%84%EC%A0%95%EB%A6%AC-11-11",
+        "https://zipbid.tistory.com/entry/%EB%8C%80%EC%A0%84-%EC%97%90%EB%84%88%EC%A7%80%EA%B4%80%EB%A6%AC%EA%B8%B0%EB%8A%A5%EC%82%AC-%EA%B5%AC%EC%9D%B8-%EC%A7%80%EC%97%AD%EB%B3%84-%EC%99%84%EC%A0%84%EC%A0%95%EB%A6%AC-11-11"
+      ],
+      "guide": {
+        "direction": "전남·광주 지역에서 보일러·가스·열처리기능사 학원을 찾는 지식인 질문이 많아, '에너지관리기능사' 모집 공고를 보고도 자격 요건을 헷갈려 하는 지점을 짚는다. 고수 글(전남광주·대전 지역별 완전정리)은 지역별 모집 여부만 다루고 명칭 변경 배경이나 초보자 지원 조건까지는 안 풀어준다. 이 글은 모집 조건표와 초보자 지원 순서 체크리스트로 지원 여부를 바로 판단하게 끝낸다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "모집 지역: 전남·광주 (게시일 11/11, 마감일 확인 필요)",
+          "'초보 가능' 조건: 경력·자격증 요건 구체적 기준 (확인 필요: 모집 공고 원문)",
+          "보일러기능사→에너지관리기능사 명칭 변경 배경 (확인 필요: 한국산업인력공단)",
+          "인근 지역(대전) 모집 공고와 조건 비교"
+        ],
+        "mustAvoid": [
+          "가스기능사·보일러기능사·열처리기능사 등 유사 자격증 요건을 에너지관리기능사와 뒤섞지 않기",
+          "전남광주 모집 공고와 대전 모집 공고의 날짜·조건을 혼동하지 않기",
+          "특정 학원·업체를 사실 확인 없이 광고처럼 추천하지 않기"
+        ],
+        "checkBefore": [
+          "모집 지역·날짜·'초보 가능' 조건이 실제 공고 원문과 일치하는지 채용 사이트에서 확인",
+          "'보일러기능사'의 '에너지관리기능사' 명칭 변경 시점과 사실 여부를 Q-net(한국산업인력공단) 공식 자료로 확인"
+        ],
+        "solves": [
+          "전남·광주에서 보일러기능사·가스기능사 배울 학원이 어디인지 모르겠다 → 지역별 모집·학원 정보 정리",
+          "자격증 없이도 에너지관리기능사 관련 일을 시작할 수 있는지 궁금하다 → '초보 가능' 조건 구체적으로 정리",
+          "보일러기능사와 에너지관리기능사가 같은 건지 헷갈린다 → 명칭 변경 배경 정리 (확인 필요)"
+        ],
+        "actionTitles": [
+          "전남광주 에너지관리기능사 모집 조건, 초보 지원 가능 확인",
+          "보일러기능사→에너지관리기능사 명칭 변경 확인하는 법"
+        ]
+      },
+      "at": "2026-11-11T02:25:53.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "한국의 경치,풍경,수도,날씨,음식",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=130102&docId=38661068&answerNo=1&qb=7KCE64Ko6rSR7KO8IOyXkOuEiOyngOq0gOumrOq4sOuKpeyCrCDstIjrs7Qg7JmE7KCE7KCV66as",
+          "views": 79708,
+          "answers": 10,
+          "askedAt": "2008.01.25"
+        },
+        {
+          "title": "날씨와 관련된 생활조사 (3가지)",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=130102&docId=36617564&answerNo=7&qb=7KCE64Ko6rSR7KO8IOyXkOuEiOyngOq0gOumrOq4sOuKpeyCrCDstIjrs7Qg7JmE7KCE7KCV66as",
+          "views": 51240,
+          "answers": 9,
+          "askedAt": "2008.07.15"
+        },
+        {
+          "title": "전남에 고압가스기능사 학원이 어디에 있을....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40609&docId=69773199&answerNo=1&qb=7KCE64Ko6rSR7KO8IOyXkOuEiOyngOq0gOumrOq4sOuKpeyCrCDstIjrs7Qg7JmE7KCE7KCV66as",
+          "views": 2936,
+          "answers": 1,
+          "askedAt": "2011.03.15"
+        }
+      ]
+    },
+    {
+      "id": "bbdf09bed37bfe91",
+      "urls": [
+        "https://zipbid.tistory.com/entry/%EC%A0%84%EB%B6%81-%EC%97%90%EB%84%88%EC%A7%80%EA%B4%80%EB%A6%AC%EA%B8%B0%EB%8A%A5%EC%82%AC-%EC%9D%BC%EC%9E%90%EB%A6%AC-%EC%A7%80%EC%97%AD%EB%B3%84-%EC%B5%9C%EC%8B%A0-%EC%B1%84%EC%9A%A9-11-11",
+        "https://zipbid.tistory.com/entry/%EB%B6%80%EC%82%B0-%EC%97%90%EB%84%88%EC%A7%80%EA%B4%80%EB%A6%AC%EA%B8%B0%EB%8A%A5%EC%82%AC-%EC%9D%BC%EC%9E%90%EB%A6%AC-%EC%A0%95%EA%B7%9C%EC%A7%81-%EC%B1%84%EC%9A%A9-%EC%B4%9D%EB%A7%9D%EB%9D%BC-11-11"
+      ],
+      "guide": {
+        "direction": "전북 에너지관리기능사로 검색하는 사람은 군산·전주·익산 등 어느 지역에 어떤 업체가 모집 중인지, 경력 없이도 지원되는지를 알고 싶어 한다. 기존 고수 블로그 제목은 '지역별 최신 채용'이라고만 하고 실제 업체명·지역·지원자격을 표로 보여주지 않는다. 이 글은 지역별 업체명·직종·지원자격·접수기한을 표로 정리해 끝까지 읽게 한다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "전북 내 지역(군산·전주·익산 등)별 업체명·직종 표 (확인 필요: 워크넷 채용공고)",
+          "지원자격(경력무관·고졸 이상 등) 명시 (확인 필요: 공고 원문)",
+          "접수기한·채용시까지 여부 명시 (확인 필요: 공고 원문)",
+          "해냄기업주식회사(전북 군산) 등 사례 인용 시 출처·모집여부 재확인 (확인 필요: 지식인 인용 공고 원출처)"
+        ],
+        "mustAvoid": [
+          "대선후보 공약·문재인 등 정치 이슈를 섞어 쓰지 않기 — 채용 정보와 무관해 신뢰도 떨어짐",
+          "2013년 등 오래된 채용공고를 현재 모집 중인 것처럼 쓰지 않기",
+          "에너지관리기능사와 가스기능사·전기기능사 등 다른 자격증을 혼동하지 않기"
+        ],
+        "checkBefore": [
+          "워크넷·잡코리아에서 전북 지역 에너지관리기능사 채용공고가 실제로 열려 있는지 확인",
+          "인용하는 업체(해냄기업주식회사 등)의 공고가 현재도 유효한지 원문에서 확인"
+        ],
+        "solves": [
+          "전북 어디에 에너지관리기능사 채용이 있는지 모름 → 지역별 업체·직종 표로 정리 (확인 필요: 워크넷)",
+          "경력 없어도 지원 가능한지 헷갈림 → 업체별 지원자격을 항목으로 구분 표기"
+        ],
+        "actionTitles": [
+          "전북 에너지관리기능사 채용 지역별로 확인하는 법",
+          "전북 에너지관리기능사 일자리 지원자격 바로 확인",
+          "전북 에너지관리기능사 채용 업체·지역 한눈에 비교"
+        ]
+      },
+      "at": "2026-11-11T02:25:53.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "문재인 욕 먹는 이유, 현재 대선후보들 공약",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60701&docId=411364762&answerNo=3&qb=7KCE67aBIOyXkOuEiOyngOq0gOumrOq4sOuKpeyCrCDsnbzsnpDrpqwg7KeA7Jet67OEIOyxhOyaqQ==",
+          "views": 31911,
+          "answers": 7,
+          "askedAt": "2022.02.04"
+        },
+        {
+          "title": "전기기능사,특수용접기능사",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1118&docId=180052203&answerNo=1&qb=7KCE67aBIOyXkOuEiOyngOq0gOumrOq4sOuKpeyCrCDsnbzsnpDrpqwg7KeA7Jet67OEIOyxhOyaqQ==",
+          "views": 9635,
+          "answers": 2,
+          "askedAt": "2013.09.06"
+        },
+        {
+          "title": "이번 대통령 선거 공약들 어디서 볼",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60701&docId=411318542&answerNo=3&qb=7KCE67aBIOyXkOuEiOyngOq0gOumrOq4sOuKpeyCrCDsnbzsnpDrpqwg7KeA7Jet67OEIOyxhOyaqQ==",
+          "views": 7968,
+          "answers": 8,
+          "askedAt": "2022.02.04"
+        }
+      ]
+    },
+    {
+      "id": "44fe0b7ef0f19425",
+      "urls": [
+        "https://zipbid.tistory.com/entry/%EC%B6%A9%EB%82%A8-%EC%97%90%EB%84%88%EC%A7%80%EA%B4%80%EB%A6%AC%EA%B8%B0%EB%8A%A5%EC%82%AC-%EC%B1%84%EC%9A%A9-%EC%8B%9C%EA%B8%89-%EB%86%92%EC%9D%80-%EA%B3%B3-%EC%B6%94%EC%B2%9C-%EC%88%9C%EC%9C%84-11-11",
+        "https://zipbid.tistory.com/entry/%EC%9D%B8%EC%B2%9C-%EC%97%90%EB%84%88%EC%A7%80%EA%B4%80%EB%A6%AC%EA%B8%B0%EB%8A%A5%EC%82%AC-%EA%B5%AC%EC%A7%81-%EC%8B%9C%EA%B8%89-%EB%86%92%EC%9D%80-%EA%B3%B3-%EC%B5%9C%EC%8B%A0-%EC%B1%84%EC%9A%A9-11-11"
+      ],
+      "guide": {
+        "direction": "충남 에너지관리기능사로 검색하는 사람은 시설관리·보일러관리 쪽에서 기능사 자격만으로 취업이 되는지, 시급이 산업기사·기능장과 어떻게 다른지를 궁금해한다. '시급 높은 곳 추천 순위'라는 제목은 실제 시급 수치나 자격증 등급별 차이를 보여주지 않는다. 이 글은 기능사·산업기사·기능장의 업무범위를 비교하고 충남 지역 채용의 시급대를 정리해 끝까지 읽게 한다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "기능사·산업기사·기능장 등급별 업무범위·난이도 비교표 (확인 필요: 큐넷)",
+          "충남 지역 시설관리·보일러관리 채용의 실제 시급대 (확인 필요: 워크넷)",
+          "'추천 순위'라면 순위 기준(시급·복지·근무형태 등)을 명확히 밝히기"
+        ],
+        "mustAvoid": [
+          "에너지관리기능사와 가스기능사를 같은 자격증처럼 섞어 쓰지 않기",
+          "근거 없이 '시급 높은 곳' 순위를 단정하지 않기 — 출처 없는 순위는 신뢰도 하락",
+          "오래된 채용공고를 현재 모집 중인 것처럼 인용하지 않기"
+        ],
+        "checkBefore": [
+          "큐넷에서 기능사/산업기사/기능장의 응시자격·업무범위 차이 확인",
+          "워크넷에서 충남 지역 시설관리 관련 채용의 실제 시급 확인"
+        ],
+        "solves": [
+          "기능사만으로 시설관리직 취업되는지 헷갈림 → 자격 등급별 업무범위·우대조건 비교",
+          "시급 높은 곳이 어디인지 알 수 없음 → 충남 지역 채용의 시급대 정리 (확인 필요: 워크넷)"
+        ],
+        "actionTitles": [
+          "충남 에너지관리기능사 채용 시급 바로 비교하는 법",
+          "충남 에너지관리기능사 자격 등급별 차이 확인하기",
+          "충남 에너지관리기능사 채용 지역별 순위 확인"
+        ]
+      },
+      "at": "2026-11-11T02:25:53.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "날씨와 관련된 생활조사 (3가지)",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=130102&docId=36617564&answerNo=7&qb=7Lap64KoIOyXkOuEiOyngOq0gOumrOq4sOuKpeyCrCDssYTsmqkg7Iuc6riJIOuGkuydgA==",
+          "views": 51241,
+          "answers": 9,
+          "askedAt": "2008.07.15"
+        },
+        {
+          "title": "시설관리 [ 가스기능사 ,에너지관리기능사 ] ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1107&docId=341680159&answerNo=7&qb=7Lap64KoIOyXkOuEiOyngOq0gOumrOq4sOuKpeyCrCDssYTsmqkg7Iuc6riJIOuGkuydgA==",
+          "views": 8737,
+          "answers": 7,
+          "askedAt": "2022.03.31"
+        },
+        {
+          "title": "직장 상사가 에너지관리기능장을 갖고 계시....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1126&docId=417934562&answerNo=2&qb=7Lap64KoIOyXkOuEiOyngOq0gOumrOq4sOuKpeyCrCDssYTsmqkg7Iuc6riJIOuGkuydgA==",
+          "views": 4067,
+          "answers": 3,
+          "askedAt": "2022.07.21"
+        }
+      ]
+    },
+    {
+      "id": "87e3c25fc4e7e066",
+      "urls": [
+        "https://apt-view.com/%ed%99%95%ec%a0%95%ec%9d%bc%ec%9e%90-%ec%9d%b8%ed%84%b0%eb%84%b7-%ec%8b%a0%ec%b2%ad%eb%b0%a9%eb%b2%95-%ec%88%98%ec%88%98%eb%a3%8c-500%ec%9b%90%ec%97%90-pc%eb%a1%9c-5%eb%8b%a8%ea%b3%84-%ec%8b%a0/"
+      ],
+      "guide": {
+        "direction": "확정일자를 인터넷으로 신청하려는 사람은 인터넷등기소에서 신청 메뉴를 못 찾거나, 계약서 올릴 때 개인정보를 가려도 되는지, 주말에 신청하면 언제 처리되는지를 궁금해한다. '5단계로 신청하기'라는 제목은 수수료와 단계만 알려주고 메뉴 위치·주말 처리·다수 임차인 조회는 짚지 않는다. 이 글은 메뉴 경로를 단계별로 캡처하고 개인정보 마스킹, 주말 처리 기준, 임대인·임차인용 조회 차이까지 체크리스트로 끝낸다.",
+        "searchTargets": [
+          "확정일자 인터넷등기소",
+          "확정일자 인터넷 신청",
+          "확정일자 인터넷 조회",
+          "확정일자 인터넷 확인법"
+        ],
+        "mustInclude": [
+          "인터넷등기소(iros.go.kr) 내 확정일자 신청 메뉴 위치를 캡처로 안내 (확인 필요: 등기소 현재 화면)",
+          "신청 수수료 500원 명시",
+          "계약서 첨부 시 주민번호 등 개인정보를 가려도 된다는 점 안내",
+          "일요일·공휴일 신청 시 다음 업무일 처리된다는 점 명시",
+          "확정일자부여현황 조회의 임대인/임차인용 구분과, 임차인이 여럿이면 하나씩 조회해야 하는 한계 설명"
+        ],
+        "mustAvoid": [
+          "전입신고(정부24)와 확정일자 신청(인터넷등기소)을 같은 절차로 혼동하지 않기",
+          "모바일에서도 동일하게 가능하다고 단정하지 않기 (확인 필요: PC 전용 여부)",
+          "특정 임대인·임차인의 개인 사정을 추측해서 쓰지 않기"
+        ],
+        "checkBefore": [
+          "인터넷등기소 사이트에서 확정일자 신청 메뉴의 현재 경로와 명칭 확인",
+          "수수료 500원이 현재도 동일한지 등기소 공지에서 확인",
+          "주말·공휴일 신청 시 처리 기준이 바뀌었는지 재확인"
+        ],
+        "solves": [
+          "인터넷등기소에서 확정일자 신청 칸을 못 찾겠다 → 메뉴 경로를 단계별로 캡처해 안내",
+          "계약서에 개인정보를 가려도 되는지 모르겠다 → 마스킹 가능 여부와 범위 정리",
+          "임차인이 여러 명일 때 조회가 번거롭다 → 임대인/임차인용 조회 방법과 한계 설명"
+        ],
+        "actionTitles": [
+          "확정일자 인터넷 신청 메뉴 못 찾을 때 찾는 법",
+          "확정일자 인터넷등기소 조회·확인법 한번에 정리",
+          "확정일자 인터넷 신고 전입신고와 구분하는 법"
+        ]
+      },
+      "at": "2026-11-11T02:25:53.485Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "확정일자 인터넷 등기소",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60103&docId=491581851&answerNo=2&qb=7ZmV7KCV7J287J6Q7J247YSw64S3",
+          "views": 1398,
+          "answers": 2,
+          "askedAt": "2026.01.26"
+        },
+        {
+          "title": "확정일자 인터넷 등기소 계약서 첨부",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=4020202&docId=331899544&answerNo=1&qb=7ZmV7KCV7J287J6Q7J247YSw64S3",
+          "views": 790,
+          "answers": 2,
+          "askedAt": "2019.07.23"
+        },
+        {
+          "title": "전입신고, 확정일자??",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40202&docId=495734676&answerNo=3&qb=7ZmV7KCV7J287J6Q7J247YSw64S3",
+          "views": 323,
+          "answers": 3,
+          "askedAt": "2026.10.28"
+        }
+      ]
     }
   ],
   "misses": [
@@ -73967,6 +75137,10 @@
     {
       "id": "6f56a8c918242f41",
       "at": "2026-11-11T01:57:22.759Z"
+    },
+    {
+      "id": "251dd7333d5f4192",
+      "at": "2026-11-11T02:25:52.746Z"
     }
   ]
 }
