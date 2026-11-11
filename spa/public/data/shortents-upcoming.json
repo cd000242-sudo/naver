@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-11T22:04:48.505Z",
+ "builtAt": "2026-11-11T22:14:52.424Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 14,
+ "measured": 18,
  "candidates": [
   {
    "keyword": "유럽 학교 폭파 협박",
@@ -16,14 +16,14 @@
     "signal.bz"
    ],
    "articles90": 7,
-   "recent20": 2,
+   "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-11T20:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "유럽서 학교 7000곳 폭파 위협에 긴급 대피소동…허위로 드러나",
+     "title": "\"학교 7000곳 폭파 하겠다\" 협박에 학생들 긴급 대피…유럽서 허위 위협...",
      "press": "view.asiae.co.kr",
      "publishedAt": "2026-11-11T21:48:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/277/0005841437?sid=104"
@@ -39,6 +39,38 @@
      "press": "imnews.imbc.com",
      "publishedAt": "2026-11-11T21:19:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/214/0001535025?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "사고",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-11T21:03:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "GS건설 아파트 침해사고, 과기정통부 직권조사 착수... 피해 규모는?",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-11T22:04:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885198"
+    },
+    {
+     "title": "스마트폰 보고 걷다가 사고‥책임은 운전자만?",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-11T21:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001535040?sid=101"
+    },
+    {
+     "title": "[불안 커지는 대구 도시철도] 멈춤 사고 잇따르는 대구 3호선…승객 대...",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-11T21:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001039843?sid=102"
     }
    ]
   },
@@ -68,10 +100,10 @@
      "link": "https://www.ggilbo.com/news/articleView.html?idxno=1191795"
     },
     {
-     "title": "[오늘의 운세] 2026년 11월 12일 띠별 운세",
+     "title": "[오늘의 운세] 2026년 11월 12일 별자리 운세",
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-11T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006408523?sid=103"
+     "link": "https://n.news.naver.com/mnews/article/018/0006408524?sid=103"
     }
    ]
   },
@@ -80,13 +112,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 3,
+   "press": 4,
    "firstArticleAt": "2026-11-11T21:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "모레노호, 사우디전 대비 첫 전술훈련…'세트피스' 다듬기 주력",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-11T22:11:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/055/0001402401"
+    },
     {
      "title": "'원팀' 시험대 오른 모레노호…13일 사우디와 맞대결",
      "press": "newsis.com",
@@ -98,21 +136,15 @@
      "press": "bntnews.co.kr",
      "publishedAt": "2026-11-11T21:58:00.000Z",
      "link": "https://www.bntnews.co.kr/article/view/bnt202611120013"
-    },
-    {
-     "title": "모레노호, 사우디전 대비 첫 전술훈련…세트피스 훈련 집중",
-     "press": "thesportstimes.co.kr",
-     "publishedAt": "2026-11-11T21:14:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/472/0000042410"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 389,
-  "matched": 162,
-  "avgLeadMin": 989,
+  "flagged": 388,
+  "matched": 161,
+  "avgLeadMin": 995,
   "recent": [
    {
     "keyword": "철도노조 총파업 예고",
