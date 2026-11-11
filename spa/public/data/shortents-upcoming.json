@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-11T14:21:26.413Z",
+ "builtAt": "2026-11-11T14:31:32.444Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 14,
+ "measured": 13,
  "candidates": [
   {
    "keyword": "이재명 대통령 민주당 만찬",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 53,
+   "articles90": 44,
    "recent20": 3,
-   "press": 46,
-   "firstArticleAt": "2026-11-11T12:52:00.000Z",
+   "press": 41,
+   "firstArticleAt": "2026-11-11T13:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이 대통령, 김민석·한병도와 靑 만찬… \"당정 한마음 한뜻 움직여야\"",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-11T14:28:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261111500645"
+    },
     {
      "title": "李대통령, 與 지도부 만찬서 “당정 한마음 한뜻으로”",
      "press": "kmib.co.kr",
@@ -33,53 +39,15 @@
      "press": "kmib.co.kr",
      "publishedAt": "2026-11-11T14:15:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/005/0001884596?sid=100"
-    },
-    {
-     "title": "李대통령, 여당에 \"예산안 협조\" 주문…김민석 \"양극화 대책 필요\"",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-11T14:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000543127?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "최민희 하이에나 발언 사과",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-11T13:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'불륜 스캔들' 일파만파...'하이에나' 발언 후폭풍",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-11T13:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002431578?sid=104"
-    },
-    {
-     "title": "최민희 '하이에나 떼' 발언 논란…정점식 \"민주당 언론혐오증\"",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-11T13:12:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885183"
-    },
-    {
-     "title": "최민희, 취재진에 \"하이에나\"...논란 일자 사과",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-11T13:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002431570?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 411,
-  "matched": 174,
-  "avgLeadMin": 548,
+  "flagged": 408,
+  "matched": 173,
+  "avgLeadMin": 544,
   "recent": [
    {
     "keyword": "이 대통령 유튜브 소통",
