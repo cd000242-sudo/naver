@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-11T15:22:12.375Z",
+ "builtAt": "2026-11-11T15:32:16.028Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,10 +15,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
+   "articles90": 11,
    "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-11T13:53:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-11T14:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -48,10 +48,10 @@
     "signal.bz",
     "daum"
    ],
-   "articles90": 10,
+   "articles90": 7,
    "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-11T13:53:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-11T14:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -80,10 +80,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-11T13:54:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-11T14:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -113,7 +113,7 @@
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-11T14:29:00.000Z",
    "exclusive": false,
@@ -142,9 +142,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 399,
-  "matched": 169,
-  "avgLeadMin": 642,
+  "flagged": 398,
+  "matched": 168,
+  "avgLeadMin": 644,
   "recent": [
    {
     "keyword": "데블스플랜3",
