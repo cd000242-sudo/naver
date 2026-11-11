@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-11T13:51:08.843Z",
+ "builtAt": "2026-11-11T14:01:14.987Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 20,
  "candidates": [
   {
    "keyword": "이재명 대통령 민주당 만찬",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 52,
-   "recent20": 5,
-   "press": 45,
+   "articles90": 56,
+   "recent20": 6,
+   "press": 47,
    "firstArticleAt": "2026-11-11T12:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령, 김민석·한병도 만찬…\"당정, 한마음 한뜻 움직여야\"",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-11T13:48:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=902807"
+     "title": "이 대통령, 김민석·한병도와 만찬...\"당정 한마음 한뜻\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-11T13:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002431580?sid=100"
     },
     {
-     "title": "李대통령, 김민석·한병도 與 투톱과 3시간 만찬…\"한마음 한뜻으로\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-11T13:42:00.000Z",
-     "link": "https://www.ajunews.com/view/20261111223936599"
+     "title": "李 대통령 \"당정 한마음\" 강조…김민석에 힘 싣기(종합)",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-11T13:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009284384?sid=100"
     },
     {
-     "title": "李대통령, 與 투톱 만나 \"당정 한마음 한뜻으로 움직여야\"",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-11T13:40:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5082471"
+     "title": "[시사천국] \"민주당 종부세 논쟁은 가짜논점\"…진영논리 없는 부동산 격...",
+     "press": "news.cpbc.co.kr",
+     "publishedAt": "2026-11-11T13:52:00.000Z",
+     "link": "https://news.cpbc.co.kr/article/1176983?division=NAVER"
     }
    ]
   },
@@ -47,10 +47,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-11T12:28:00.000Z",
+   "articles90": 13,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-11T12:32:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -82,10 +82,16 @@
    "articles90": 8,
    "recent20": 1,
    "press": 8,
-   "firstArticleAt": "2026-11-11T12:28:00.000Z",
+   "firstArticleAt": "2026-11-11T12:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "전남광주 북구 아파트 화재…입주민 방화 혐의 입건",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-11T13:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016437000?sid=102"
+    },
     {
      "title": "전남광주 북구 아파트 화재…경비원 심정지 등 중상 3명·경상 11명(종합...",
      "press": "news1.kr",
@@ -97,38 +103,32 @@
      "press": "imnews.imbc.com",
      "publishedAt": "2026-11-11T13:20:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/214/0001534995?sid=102"
-    },
-    {
-     "title": "전남광주 도심 아파트 화재로 70대 경비원 심정지…경찰 \"방화 정황 수사...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-11T13:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005603005?sid=102"
     }
    ]
   },
   {
-   "keyword": "최민희 하이에나 사과",
+   "keyword": "최민희 하이에나 발언 사과",
    "sources": [
     "nate"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 4,
+   "press": 3,
    "firstArticleAt": "2026-11-11T12:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "'불륜 스캔들' 일파만파...'하이에나' 발언 후폭풍",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-11T13:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002431578?sid=104"
+    },
+    {
      "title": "최민희 '하이에나 떼' 발언 논란…정점식 \"민주당 언론혐오증\"",
      "press": "gokorea.kr",
      "publishedAt": "2026-11-11T13:12:00.000Z",
      "link": "https://www.gokorea.kr/news/articleView.html?idxno=885183"
-    },
-    {
-     "title": "[영상] 최민희 \"하이에나 떼들\" 사과...과거까지 줄소환",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-11T13:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002431573?sid=100"
     },
     {
      "title": "최민희, 취재진에 \"하이에나\"...논란 일자 사과",
@@ -144,10 +144,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-11T12:31:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-11T12:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -170,13 +170,45 @@
      "link": "https://n.news.naver.com/mnews/article/023/0004009068?sid=102"
     }
    ]
+  },
+  {
+   "keyword": "주차장",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-11T12:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "시흥시, 산업단지·주차장·자전거길에 태양광 확대",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-11T13:24:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=882430"
+    },
+    {
+     "title": "만취 운전하다 주차장 담벼락 들이받은 40대 검거",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-11T13:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002431574?sid=102"
+    },
+    {
+     "title": "[포토] 종로구, 신영동 공영주차장 준공",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-11T12:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006408460?sid=100"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 416,
-  "matched": 175,
-  "avgLeadMin": 438,
+  "flagged": 414,
+  "matched": 171,
+  "avgLeadMin": 427,
   "recent": [
    {
     "keyword": "출근길 바람에 체감온도 뚝",
