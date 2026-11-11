@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-11T23:45:32.460Z",
+ "builtAt": "2026-11-11T23:55:40.612Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 32,
-   "recent20": 8,
-   "press": 27,
-   "firstArticleAt": "2026-11-11T22:18:00.000Z",
+   "articles90": 37,
+   "recent20": 9,
+   "press": 31,
+   "firstArticleAt": "2026-11-11T22:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨 황 해임설에 엔비디아 시간외 8% 폭락… 삼성전자·SK하이닉스도 흔...",
+     "title": "\"젠슨 황 신뢰한다\"던 엔비디아, 해임 검토 착수...이사회 \"이르면 오늘...",
+     "press": "ziksir.com",
+     "publishedAt": "2026-11-11T23:52:00.000Z",
+     "link": "https://www.ziksir.com/news/articleView.html?idxno=152988"
+    },
+    {
+     "title": "엔비디아 이사회, 젠슨 황 해임 검토…\"이르면 오늘 회의\"",
      "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-11T23:44:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=503226"
+     "publishedAt": "2026-11-11T23:50:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=503224"
     },
     {
-     "title": "[젠슨황 스캔들] 헬스케어 직속 부사장과도 혼외 관계 의혹… 거취 '흔...",
-     "press": "financialpost.co.kr",
-     "publishedAt": "2026-11-11T23:42:00.000Z",
-     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=300294"
-    },
-    {
-     "title": "엔비디아 시간외서 8% 급락 … 젠슨 황 해임 검토 보도에 충격",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-11T23:38:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/12/2026111200022.html"
+     "title": "엔비디아, 젠슨 황 해임 준비까지…'AI 반도체' 시장 판도 달라지나",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-11T23:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014317157?sid=101"
     }
    ]
   },
@@ -47,69 +47,70 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 18,
-   "recent20": 5,
-   "press": 16,
-   "firstArticleAt": "2026-11-11T22:23:00.000Z",
+   "articles90": 20,
+   "recent20": 8,
+   "press": 18,
+   "firstArticleAt": "2026-11-11T22:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'공화 텃밭' 미시시피 상원 선거도 민주 승리…총 55석",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-11T23:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001977828?sid=104"
+     "title": "'딥 레드' 미시시피 반전…민주당 콜롬, 42년 만의 상원 탈환",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-11T23:52:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000081931"
     },
     {
-     "title": "美 민주, ‘딥레드’ 공화텃밭 미시시피 상원선거도 승리…총 55석",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-11T23:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003058675?sid=104"
+     "title": "美민주, '딥레드' 공화텃밭 미시시피 상원선거도 승리…총 55석",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-11T23:52:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2017549"
     },
     {
-     "title": "美민주, 공화텃밭 미시시피 상원선거도 승리…총 55석",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-11T23:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002722377?sid=104"
+     "title": "공화 텃밭 미시시피마저 뒤집혔다…민주 상원 55석",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-11T23:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005603111?sid=104"
     }
    ]
   },
   {
    "keyword": "크러쉬 조이 듀엣 공개",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "daum"
    ],
-   "articles90": 6,
+   "articles90": 8,
    "recent20": 3,
-   "press": 6,
+   "press": 8,
    "firstArticleAt": "2026-11-11T22:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "크러쉬♥조이, 열애 6년 만에 파격 행보…반려견 안고 '깜짝 듀엣'",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-11T23:49:00.000Z",
+     "link": "https://m.entertain.naver.com/article/477/0000638641"
+    },
+    {
+     "title": "크러쉬♥조이, 5년째 굳건한 애정…얼굴 없는 듀엣에도 “설렌다”",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-11T23:48:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005762513"
+    },
+    {
      "title": "조이♥크러쉬, 공개 열애 6년째 얼굴 가린 듀엣…반려견 품에 안고 ‘삐...",
      "press": "osen.co.kr",
      "publishedAt": "2026-11-11T23:43:00.000Z",
      "link": "https://m.entertain.naver.com/article/109/0005639084"
-    },
-    {
-     "title": "크러쉬·조이, '삐그덕' 라이브 영상 공개",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-11T23:30:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000081930"
-    },
-    {
-     "title": "크러쉬·조이, 공개 열애 6년 만에 달달한 듀엣 공개",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-11T23:27:00.000Z",
-     "link": "https://m.entertain.naver.com/article/629/0000551074"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 379,
+  "flagged": 378,
   "matched": 153,
   "avgLeadMin": 1000,
   "recent": [
