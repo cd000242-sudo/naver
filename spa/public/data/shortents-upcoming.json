@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-11T16:12:53.517Z",
+ "builtAt": "2026-11-11T16:22:57.566Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 18,
  "candidates": [
   {
    "keyword": "이란 지하 미사일 도시",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-11T14:43:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-11T14:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -47,10 +47,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-11T14:49:00.000Z",
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-11T14:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -71,70 +71,6 @@
      "press": "xportsnews.com",
      "publishedAt": "2026-11-11T14:55:00.000Z",
      "link": "https://m.entertain.naver.com/article/311/0002079623"
-    }
-   ]
-  },
-  {
-   "keyword": "COP31 기후위기 대응",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-11T14:45:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"미래세대 생존보다 무기에 더 관심\"…룰라, 기후위기 대응 촉구(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-11T15:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016437061?sid=104"
-    },
-    {
-     "title": "룰라 \"미래세대 생존보다 무기·관세에 더 관심\"...기후위기 대응 촉구",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-11T15:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002431602?sid=104"
-    },
-    {
-     "title": "“미래 세대, 생존보다 무기에 더 관심”…룰라, 기후위기 대응 촉구",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-11T14:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012292159?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "러 우크라 포로교환 합의",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-11T14:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "러·우크라, 대규모 포로 교환 합의… 영토·안전보장 등 핵심 이슈에선...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-11T15:36:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261112000003"
-    },
-    {
-     "title": "美·러·우크라 종전협상 종료…포로교환 합의에도 영토 문제 등 난항(종...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-11T14:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009284391?sid=104"
-    },
-    {
-     "title": "러, 돈바스 반환 요구…우크라 \"전선 동결·휴전\" 맞서 입장차",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-11T14:46:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=624594"
     }
    ]
   }
