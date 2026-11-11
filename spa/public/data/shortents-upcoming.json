@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-11T17:53:33.165Z",
+ "builtAt": "2026-11-11T18:03:36.030Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -9,45 +9,12 @@
   "minPress": 2
  },
  "measured": 10,
- "candidates": [
-  {
-   "keyword": "COP31 기후위기 대응",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-11T16:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "인천시, 튀르키예 COP31서 '2045 탄소중립' 전 세계 알려",
-     "press": "cstimes.com",
-     "publishedAt": "2026-11-11T17:10:00.000Z",
-     "link": "https://www.cstimes.com/news/articleView.html?idxno=727594"
-    },
-    {
-     "title": "[COP31]기후위기 논의한다더니..주요국 정상 줄줄이 불참",
-     "press": "4th.kr",
-     "publishedAt": "2026-11-11T17:08:00.000Z",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2121663"
-    },
-    {
-     "title": "기후총회서 세 과시한 이란… 페제시키안 “美·이스라엘, 기후위기 대...",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-11T16:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004009168?sid=104"
-    }
-   ]
-  }
- ],
+ "candidates": [],
  "hitRate": {
   "days": 7,
-  "flagged": 396,
-  "matched": 164,
-  "avgLeadMin": 649,
+  "flagged": 395,
+  "matched": 163,
+  "avgLeadMin": 651,
   "recent": [
    {
     "keyword": "데블스플랜3",
