@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-11T22:14:52.424Z",
+ "builtAt": "2026-11-11T22:25:00.433Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 18,
+ "measured": 15,
  "candidates": [
   {
    "keyword": "유럽 학교 폭파 협박",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-11T20:48:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-11T21:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -43,42 +43,9 @@
    ]
   },
   {
-   "keyword": "사고",
-   "sources": [
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-11T21:03:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "GS건설 아파트 침해사고, 과기정통부 직권조사 착수... 피해 규모는?",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-11T22:04:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885198"
-    },
-    {
-     "title": "스마트폰 보고 걷다가 사고‥책임은 운전자만?",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-11T21:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001535040?sid=101"
-    },
-    {
-     "title": "[불안 커지는 대구 도시철도] 멈춤 사고 잇따르는 대구 3호선…승객 대...",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-11T21:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001039843?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "2026년 11월 12일 운세",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 6,
    "recent20": 0,
@@ -106,45 +73,13 @@
      "link": "https://n.news.naver.com/mnews/article/018/0006408524?sid=103"
     }
    ]
-  },
-  {
-   "keyword": "사우디 훈련하는 축구",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 3,
-   "press": 4,
-   "firstArticleAt": "2026-11-11T21:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "모레노호, 사우디전 대비 첫 전술훈련…'세트피스' 다듬기 주력",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-11T22:11:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/055/0001402401"
-    },
-    {
-     "title": "'원팀' 시험대 오른 모레노호…13일 사우디와 맞대결",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-11T22:00:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/003/0014317070"
-    },
-    {
-     "title": "한국 축구대표팀, 사우디전 승리 전략은",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-11T21:58:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611120013"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 388,
-  "matched": 161,
-  "avgLeadMin": 995,
+  "flagged": 386,
+  "matched": 160,
+  "avgLeadMin": 1001,
   "recent": [
    {
     "keyword": "철도노조 총파업 예고",
