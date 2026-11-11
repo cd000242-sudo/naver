@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-11T16:43:09.534Z",
+ "builtAt": "2026-11-11T16:53:13.013Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,41 +8,8 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 19,
- "candidates": [
-  {
-   "keyword": "이란 지하 미사일 도시",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-11T15:19:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이란, 지하 '미사일 도시' 공개… 탄도미사일·발사 장비 배치",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-11T15:54:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3448016"
-    },
-    {
-     "title": "이란 혁명수비대, 첨단 무기 ‘미사일 도시’ 공개",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-11T15:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012292161?sid=104"
-    },
-    {
-     "title": "\"미 공습에도 끄떡없다\"...이란 '지하 미사일 도시' 공개",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-11T15:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002431606?sid=104"
-    }
-   ]
-  }
- ],
+ "measured": 10,
+ "candidates": [],
  "hitRate": {
   "days": 7,
   "flagged": 396,
