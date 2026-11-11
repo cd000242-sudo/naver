@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-11T15:42:19.771Z",
+ "builtAt": "2026-11-11T15:52:46.683Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 18,
  "candidates": [
   {
    "keyword": "러 우크라 포로교환 합의",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-11T14:20:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-11T14:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -47,10 +47,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-11T14:15:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-11T14:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -77,9 +77,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 398,
-  "matched": 168,
-  "avgLeadMin": 644,
+  "flagged": 397,
+  "matched": 167,
+  "avgLeadMin": 645,
   "recent": [
    {
     "keyword": "데블스플랜3",
