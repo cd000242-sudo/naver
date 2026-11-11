@@ -238,8 +238,10 @@ describe('범위 · 파일 크기 · 번들 등록', () => {
       expect(source).not.toMatch(/\(window as any\)\??\.(codexUserReferenceOptions|resolveCodexReferenceForCall|markImportedManuscript)/);
     }
   });
-  it('src/main.ts · contentGeneration.ts · analytics · 지문 핀 파일은 이 수정의 이름을 모른다', () => {
-    for (const file of ['src/main.ts', 'src/renderer/modules/contentGeneration.ts', 'src/contentQualityV3/candidateRuntimeFingerprint.ts', 'src/contentQualityV3/candidateRuntimeFingerprintPin.ts']) {
+  // The fingerprint list is not checked here: at release the new runtime files MUST be registered in it
+  // (contentQualityV3RuntimeFingerprint.test.ts enforces that), so it does carry these names.
+  it('src/main.ts · contentGeneration.ts 는 이 수정의 이름을 모른다', () => {
+    for (const file of ['src/main.ts', 'src/renderer/modules/contentGeneration.ts']) {
       expect(read(file)).not.toMatch(/importedManuscript|_importedAt|resolveCodexReferenceForCall|codexReferenceCentral/);
     }
   });
