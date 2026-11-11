@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-11T19:24:00.230Z",
+ "builtAt": "2026-11-11T19:34:03.077Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,8 +8,41 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 5,
- "candidates": [],
+ "measured": 10,
+ "candidates": [
+  {
+   "keyword": "트럼프 이란전쟁 종전",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-11T18:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프 \"이란 전쟁 곧 끝날 것\"…이란 \"제재 풀면 호르무즈 개방\"",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-11T19:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005841426?sid=104"
+    },
+    {
+     "title": "트럼프 \"이란전쟁 우리가 이겼다\"…이란 \"농축 우라늄, 한 톨도 못 넘겨...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-11T18:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005603021?sid=104"
+    },
+    {
+     "title": "트럼프 “이란전 곧 끝날 것”…이란 “7개 요구안 답하라”",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-11T18:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006408482?sid=104"
+    }
+   ]
+  }
+ ],
  "hitRate": {
   "days": 7,
   "flagged": 394,
