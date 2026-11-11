@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-11T14:51:44.780Z",
+ "builtAt": "2026-11-11T15:01:47.886Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,10 +15,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 19,
+   "articles90": 14,
    "recent20": 1,
-   "press": 18,
-   "firstArticleAt": "2026-11-11T13:22:00.000Z",
+   "press": 13,
+   "firstArticleAt": "2026-11-11T13:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -47,18 +47,18 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 4,
-   "press": 11,
+   "articles90": 13,
+   "recent20": 1,
+   "press": 12,
    "firstArticleAt": "2026-11-11T13:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "전남광주 도심 아파트 화재는 방화…40대 남성 입건",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-11T14:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014316911?sid=102"
+     "title": "광주 아파트서 방화 추정 화재로 14명 중경상",
+     "press": "kwangju.co.kr",
+     "publishedAt": "2026-11-11T14:52:00.000Z",
+     "link": "http://www.kwangju.co.kr/article.php?aid=1794408369805291006"
     },
     {
      "title": "전남광주 북구 아파트서 불‥주민 방화 혐의로 입건",
@@ -67,10 +67,10 @@
      "link": "https://n.news.naver.com/mnews/article/214/0001534999?sid=102"
     },
     {
-     "title": "21층 아파트서 화재…70대 경비원 심정지·6명 병원 이송",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-11T14:34:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=624592"
+     "title": "전남광주 도심 아파트 화재는 방화…40대 남성 입건",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-11T14:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014316911?sid=102"
     }
    ]
   }
