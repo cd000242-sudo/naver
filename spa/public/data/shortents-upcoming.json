@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-11T14:31:32.444Z",
+ "builtAt": "2026-11-11T14:41:39.818Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 13,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "이재명 대통령 민주당 만찬",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 44,
-   "recent20": 3,
-   "press": 41,
-   "firstArticleAt": "2026-11-11T13:04:00.000Z",
+   "articles90": 30,
+   "recent20": 1,
+   "press": 29,
+   "firstArticleAt": "2026-11-11T13:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -41,13 +41,77 @@
      "link": "https://n.news.naver.com/mnews/article/005/0001884596?sid=100"
     }
    ]
+  },
+  {
+   "keyword": "광주 아파트 화재",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 12,
+   "recent20": 6,
+   "press": 11,
+   "firstArticleAt": "2026-11-11T13:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "전남광주 도심 아파트 화재는 방화…40대 남성 입건",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-11T14:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014316911?sid=102"
+    },
+    {
+     "title": "21층 아파트서 화재…70대 경비원 심정지·6명 병원 이송",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-11T14:34:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=624592"
+    },
+    {
+     "title": "전남광주 북구 아파트 화재로 1명 심정지…입주민 '방화 혐의'",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-11T14:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001402358?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "최민희 하이에나 사과",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-11T13:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "사진기자들 ‘하이에나 떼’라는 최민희…“모욕” 비판에 “사과”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-11T14:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012292156?sid=100"
+    },
+    {
+     "title": "'불륜 스캔들' 일파만파...'하이에나' 발언 후폭풍",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-11T13:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002431578?sid=104"
+    },
+    {
+     "title": "최민희 '하이에나 떼' 발언 논란…정점식 \"민주당 언론혐오증\"",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-11T13:12:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885183"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 408,
-  "matched": 173,
-  "avgLeadMin": 544,
+  "flagged": 406,
+  "matched": 171,
+  "avgLeadMin": 548,
   "recent": [
    {
     "keyword": "이 대통령 유튜브 소통",
