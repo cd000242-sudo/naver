@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-11T22:35:05.904Z",
+ "builtAt": "2026-11-11T22:45:08.473Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 20,
  "candidates": [
+  {
+   "keyword": "반도체",
+   "sources": [
+    "google"
+   ],
+   "articles90": 18,
+   "recent20": 9,
+   "press": 15,
+   "firstArticleAt": "2026-11-11T22:06:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "뉴욕증시, AI 투자 기대감에 일제히 상승...나스닥 1.60%↑·반도체주 급...",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-11T22:42:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=72914"
+    },
+    {
+     "title": "대전시·지역 국회의원, 반도체·AI 등 국비 확보 공조",
+     "press": "tjb.co.kr",
+     "publishedAt": "2026-11-11T22:40:00.000Z",
+     "link": "https://www.tjb.co.kr/news05/bodo/view/id/105989"
+    },
+    {
+     "title": "HBM부터 AI 데이터센터까지… 美 반도체주 급등에 국내 수혜주도 들썩이...",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-11T22:36:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=503200"
+    }
+   ]
+  },
   {
    "keyword": "트럼프 이란전쟁 종전",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 4,
-   "press": 12,
-   "firstArticleAt": "2026-11-11T21:10:00.000Z",
+   "articles90": 14,
+   "recent20": 5,
+   "press": 13,
+   "firstArticleAt": "2026-11-11T21:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "트럼프 “이란 전쟁 곧 끝날 것…93% 아닌 완전한 승리 원한다”",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-11T22:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003564653?sid=104"
+     "title": "트럼프 \"전쟁 곧 끝나\" 거듭 자신…이란은 '협상 조건' 고수",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-11T22:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000520327?sid=104"
     },
     {
-     "title": "밴스, 이란 안보수장과 '직접 담판' 검토…종전협상 전면",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-11T22:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000543164?sid=104"
+     "title": "트럼프 \"이란전 곧 끝날 것…93% 아닌 완전한 승리 원해\"",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-11T22:40:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1320164&inflow=N"
     },
     {
-     "title": "밴스, 이란 강경파와 직접 담판 추진⋯종전 협상 돌파구 찾나",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-11T22:20:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2647090"
+     "title": "\"밴스, 이란 강경파 안보수장과 대면협상 검토...종전협상 전면에\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-11T22:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002431657?sid=104"
     }
    ]
   },
@@ -47,13 +79,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 7,
    "recent20": 4,
-   "press": 6,
+   "press": 7,
    "firstArticleAt": "2026-11-11T22:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "전세사기 피해자 480명 추가, 누적 4만2039명 ... 네명 중 셋은 40세 미만...",
+     "press": "queen.co.kr",
+     "publishedAt": "2026-11-11T22:36:00.000Z",
+     "link": "http://www.queen.co.kr/news/articleView.html?idxno=466182"
+    },
     {
      "title": "전세사기 피해자 480명 추가 인정…누적 4만2039명",
      "press": "ngonews.kr",
@@ -65,12 +103,6 @@
      "press": "dt.co.kr",
      "publishedAt": "2026-11-11T22:28:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/029/0003058659?sid=101"
-    },
-    {
-     "title": "국토부, 전세사기 피해자 480명 추가…누적 4만명 넘어",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-11T22:27:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000081898"
     }
    ]
   },
@@ -105,11 +137,75 @@
      "link": "https://n.news.naver.com/mnews/article/023/0004009182?sid=104"
     }
    ]
+  },
+  {
+   "keyword": "2026년 11월 12일 운세",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-11T21:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오늘의 운세] 2026년 11월 12일 띠별 운세",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-11T22:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003484785?sid=103"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 12일 (목) 띠별운세 '남은 힘을 한곳에 모으...",
+     "press": "dailypop.kr",
+     "publishedAt": "2026-11-11T21:40:00.000Z",
+     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103978"
+    },
+    {
+     "title": "[오늘의 운세] 12일 목요일 나의 운세는?",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-11T21:36:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1191795"
+    }
+   ]
+  },
+  {
+   "keyword": "김정은, 통천 주택구 시찰",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 2,
+   "firstArticleAt": "2026-11-11T21:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김정은, 동해안 해군기지 건설현장 시찰…“정해진 기간 내 완결”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-11T22:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012292222?sid=100"
+    },
+    {
+     "title": "김정은, 동해안 해군기지 건설현장 시찰…\"정해진 기간내 완결\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-11T21:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016437164?sid=100"
+    },
+    {
+     "title": "김정은, 새로 건설된 강원도 통천군 주택구 시찰",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-11T21:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016437155?sid=100"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 389,
+  "flagged": 391,
   "matched": 160,
   "avgLeadMin": 1001,
   "recent": [
