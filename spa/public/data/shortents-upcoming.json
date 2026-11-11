@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-11T23:25:26.827Z",
+ "builtAt": "2026-11-11T23:35:29.607Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,14 +8,98 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 9,
- "candidates": [],
+ "measured": 10,
+ "candidates": [
+  {
+   "keyword": "미국 상원 선거",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 16,
+   "recent20": 4,
+   "press": 15,
+   "firstArticleAt": "2026-11-11T22:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美민주당, 공화 텃밭 미시시피 상원도 탈환…최소 55석 확보",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-11T23:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009284641?sid=104"
+    },
+    {
+     "title": "美민주, '딥레드' 공화텃밭 미시시피 상원선거도 승리…총 55석(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-11T23:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016437239?sid=104"
+    },
+    {
+     "title": "CNN \"공화당 텃밭 미시시피 상원 선거도 민주당 승리 예상\"",
+     "press": "opinionnews.co.kr",
+     "publishedAt": "2026-11-11T23:20:00.000Z",
+     "link": "http://www.opinionnews.co.kr/news/articleView.html?idxno=146970"
+    }
+   ]
+  },
+  {
+   "keyword": "크러쉬 조이 듀엣 공개",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-11T22:15:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "크러쉬·조이, '삐그덕' 라이브 영상 공개",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-11T23:30:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000081930"
+    },
+    {
+     "title": "크러쉬·조이, 공개 열애 6년 만에 달달한 듀엣 공개",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-11T23:27:00.000Z",
+     "link": "https://m.entertain.naver.com/article/629/0000551074"
+    },
+    {
+     "title": "조이, 크러쉬 반려견 꼭 안고… 장기연애 커플의 깜짝 듀엣",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-11T23:25:00.000Z",
+     "link": "https://m.entertain.naver.com/article/469/0000965121"
+    }
+   ]
+  }
+ ],
  "hitRate": {
   "days": 7,
-  "flagged": 386,
-  "matched": 156,
-  "avgLeadMin": 955,
+  "flagged": 385,
+  "matched": 157,
+  "avgLeadMin": 992,
   "recent": [
+   {
+    "keyword": "뉴욕증시 급락",
+    "hitKeyword": "뉴욕증시 일제 상승",
+    "hitAt": "2026-11-12T08:30:00+09:00",
+    "leadMin": 8636
+   },
+   {
+    "keyword": "트럼프 이란전쟁 종전",
+    "hitKeyword": "트럼프 이란 전쟁",
+    "hitAt": "2026-11-12T08:30:00+09:00",
+    "leadMin": 55
+   },
+   {
+    "keyword": "트럼프 곧 끝날 것 93% 아닌 완전한",
+    "hitKeyword": "트럼프 이란 전쟁",
+    "hitAt": "2026-11-12T08:30:00+09:00",
+    "leadMin": 15
+   },
    {
     "keyword": "전세사기 피해자 추가 인정",
     "hitKeyword": "성범죄 피해자 살해",
@@ -57,24 +141,6 @@
     "hitKeyword": "유럽 학교 폭탄 협박",
     "hitAt": "2026-11-12T06:00:00+09:00",
     "leadMin": 8637
-   },
-   {
-    "keyword": "신세계 이석구 사장 선임",
-    "hitKeyword": "한국투자 신세계 하향",
-    "hitAt": "2026-11-12T06:00:00+09:00",
-    "leadMin": 8184
-   },
-   {
-    "keyword": "러 우크라 포로교환 합의",
-    "hitKeyword": "러 우크라 포로 교환",
-    "hitAt": "2026-11-12T06:00:00+09:00",
-    "leadMin": 348
-   },
-   {
-    "keyword": "이란 지하 미사일 도시",
-    "hitKeyword": "이란 지하 미사일 도시",
-    "hitAt": "2026-11-12T06:00:00+09:00",
-    "leadMin": 297
    }
   ]
  }
