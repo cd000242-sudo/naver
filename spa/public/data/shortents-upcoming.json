@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-11T14:01:14.987Z",
+ "builtAt": "2026-11-11T14:11:21.215Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 17,
  "candidates": [
   {
    "keyword": "이재명 대통령 민주당 만찬",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 56,
-   "recent20": 6,
-   "press": 47,
+   "articles90": 57,
+   "recent20": 5,
+   "press": 48,
    "firstArticleAt": "2026-11-11T12:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "李대통령, 여당에 \"예산안 협조\" 주문…김민석 \"양극화 대책 필요\"",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-11T14:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000543127?sid=101"
+    },
     {
      "title": "이 대통령, 김민석·한병도와 만찬...\"당정 한마음 한뜻\"",
      "press": "ytn.co.kr",
@@ -33,108 +39,38 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-11T13:54:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009284384?sid=100"
-    },
-    {
-     "title": "[시사천국] \"민주당 종부세 논쟁은 가짜논점\"…진영논리 없는 부동산 격...",
-     "press": "news.cpbc.co.kr",
-     "publishedAt": "2026-11-11T13:52:00.000Z",
-     "link": "https://news.cpbc.co.kr/article/1176983?division=NAVER"
     }
    ]
   },
   {
-   "keyword": "3연승 박철우 감독",
+   "keyword": "인천 공장 가스 누출",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 13,
+   "articles90": 14,
    "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-11T12:32:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'아라우조 부상' 우리카드, 대한항공 꺾고 개막 3연승…박철우 \"팀 배구...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-11T13:44:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16274261"
-    },
-    {
-     "title": "아라우조 부상에도 3연승…박철우 우리카드 감독 \"팀 배구 했다\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-11T13:32:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/001/0016436987"
-    },
-    {
-     "title": "'작년과는 다르다' 파죽의 3연승 우리카드, 박철우 감독 \"절실했던 승리...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-11T13:25:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/241/0003541292"
-    }
-   ]
-  },
-  {
-   "keyword": "광주 아파트 화재",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-11T12:55:00.000Z",
+   "press": 14,
+   "firstArticleAt": "2026-11-11T12:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "전남광주 북구 아파트 화재…입주민 방화 혐의 입건",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-11T13:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016437000?sid=102"
+     "title": "인천 남동공단서 염소가스 누출…5명 호흡곤란",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-11T14:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000925249?sid=102"
     },
     {
-     "title": "전남광주 북구 아파트 화재…경비원 심정지 등 중상 3명·경상 11명(종합...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-11T13:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009284381?sid=102"
+     "title": "인천 고잔동 가스 누출 신고…5명 연기 흡입",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-11T13:30:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1543471"
     },
     {
-     "title": "전남광주 북구 21층짜리 아파트서 불‥경비원 심정지",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-11T13:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001534995?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "최민희 하이에나 발언 사과",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-11T12:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'불륜 스캔들' 일파만파...'하이에나' 발언 후폭풍",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-11T13:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002431578?sid=104"
-    },
-    {
-     "title": "최민희 '하이에나 떼' 발언 논란…정점식 \"민주당 언론혐오증\"",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-11T13:12:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885183"
-    },
-    {
-     "title": "최민희, 취재진에 \"하이에나\"...논란 일자 사과",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-11T13:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002431570?sid=100"
+     "title": "인천 남동국가산단 공장서 염소가스 누출",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-11T13:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006408467?sid=102"
     }
    ]
   },
@@ -172,44 +108,75 @@
    ]
   },
   {
-   "keyword": "주차장",
+   "keyword": "최민희 하이에나 발언 사과",
    "sources": [
-    "google"
+    "signal.bz",
+    "nate"
    ],
    "articles90": 3,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-11T12:54:00.000Z",
+   "press": 2,
+   "firstArticleAt": "2026-11-11T13:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "시흥시, 산업단지·주차장·자전거길에 태양광 확대",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-11T13:24:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=882430"
-    },
-    {
-     "title": "만취 운전하다 주차장 담벼락 들이받은 40대 검거",
+     "title": "'불륜 스캔들' 일파만파...'하이에나' 발언 후폭풍",
      "press": "ytn.co.kr",
-     "publishedAt": "2026-11-11T13:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002431574?sid=102"
+     "publishedAt": "2026-11-11T13:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002431578?sid=104"
     },
     {
-     "title": "[포토] 종로구, 신영동 공영주차장 준공",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-11T12:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006408460?sid=100"
+     "title": "최민희 '하이에나 떼' 발언 논란…정점식 \"민주당 언론혐오증\"",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-11T13:12:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885183"
+    },
+    {
+     "title": "최민희, 취재진에 \"하이에나\"...논란 일자 사과",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-11T13:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002431570?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 414,
-  "matched": 171,
-  "avgLeadMin": 427,
+  "flagged": 411,
+  "matched": 174,
+  "avgLeadMin": 548,
   "recent": [
+   {
+    "keyword": "이 대통령 유튜브 소통",
+    "hitKeyword": "빠니보틀 유튜브 수익",
+    "hitAt": "2026-11-11T23:00:00+09:00",
+    "leadMin": 8640
+   },
+   {
+    "keyword": "법원, 쿠팡 과징금 정지",
+    "hitKeyword": "국고채 담합 과징금",
+    "hitAt": "2026-11-11T23:00:00+09:00",
+    "leadMin": 7643
+   },
+   {
+    "keyword": "쿠팡 과징금 정지",
+    "hitKeyword": "국고채 담합 과징금",
+    "hitAt": "2026-11-11T23:00:00+09:00",
+    "leadMin": 7613
+   },
+   {
+    "keyword": "3연승 박철우 감독",
+    "hitKeyword": "우리카드 개막 3연승",
+    "hitAt": "2026-11-11T23:00:00+09:00",
+    "leadMin": 19
+   },
+   {
+    "keyword": "광주 아파트 화재",
+    "hitKeyword": "서울 아파트 매물 증가",
+    "hitAt": "2026-11-11T23:00:00+09:00",
+    "leadMin": 19
+   },
    {
     "keyword": "출근길 바람에 체감온도 뚝",
     "hitKeyword": "분당 출근길 버스 사고",
@@ -239,36 +206,6 @@
     "hitKeyword": "쿠팡 과징금 효력정지",
     "hitAt": "2026-11-06T15:00:00+09:00",
     "leadMin": 1101
-   },
-   {
-    "keyword": "쿠팡 개인정보 유출 과징금",
-    "hitKeyword": "쿠팡 과징금 효력정지",
-    "hitAt": "2026-11-06T15:00:00+09:00",
-    "leadMin": 1071
-   },
-   {
-    "keyword": "쿠팡 과징금 효력 정지",
-    "hitKeyword": "쿠팡 과징금 효력정지",
-    "hitAt": "2026-11-06T15:00:00+09:00",
-    "leadMin": 14
-   },
-   {
-    "keyword": "열애 나나 탑 논란",
-    "hitKeyword": "나나 탑 열애 논란",
-    "hitAt": "2026-11-06T14:30:00+09:00",
-    "leadMin": 205
-   },
-   {
-    "keyword": "증시 급락 신용융자 면제",
-    "hitKeyword": "신용융자 담보비율 면제",
-    "hitAt": "2026-11-06T14:30:00+09:00",
-    "leadMin": 115
-   },
-   {
-    "keyword": "신용융자 담보비율 3개월 면제",
-    "hitKeyword": "신용융자 담보비율 면제",
-    "hitAt": "2026-11-06T14:30:00+09:00",
-    "leadMin": 54
    }
   ]
  }
