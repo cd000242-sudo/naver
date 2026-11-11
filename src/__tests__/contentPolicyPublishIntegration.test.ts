@@ -520,7 +520,11 @@ describe('content policy publish integration', () => {
 
     const tracked = loadPublishedPosts(userDataPath);
     expect(tracked).toHaveLength(1);
-    expect(tracked[0].keyword).toBe(payload.contentPolicyContext.input.primary_keyword);
+    // [2026-11-08] primary_keyword is no longer trusted (the publish boundary can rewrite it to the title);
+    // without a provenance claim the keyword stays empty and the post is index-only.
+    expect(payload.contentPolicyContext.input.primary_keyword).toBeTruthy();
+    expect(tracked[0].keyword).toBe('');
+    expect(tracked[0]).toMatchObject({ keywordSource: 'none', keywordKind: 'index-only' });
     expect(tracked[0].logNo).toBe('123456');
   });
 

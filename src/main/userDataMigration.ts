@@ -71,6 +71,7 @@ const TARGET_FILES = [
     'feature_flag_log.json',   // 학습/통계 데이터
     'blog-profiles.json',      // [2026-10-21] 블로그별 초기 설정
     'blog-performance-v1.json', // [2026-10-21] 블로그 글 성과 관측
+    'outcome-dataset-v1.json',  // [2026-11-08] 글 특징 + 노출 결과 데이터셋
 ];
 // ✅ [v2.9.3] 미러 대상 폴더 — 모든 사용자 데이터/세션/학습 (캐시만 제외)
 const TARGET_FOLDERS = [

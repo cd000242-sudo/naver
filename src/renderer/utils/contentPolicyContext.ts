@@ -18,12 +18,19 @@ export interface RendererContentPolicySource {
   blogId?: string;
   cta?: string;
   templateId?: string;
+  /**
+   * [2026-11-08] false = `keywords` only holds a fallback built from the title (generation may use it,
+   * exposure tracking must not). Omitted = the keywords are what the user supplied.
+   */
+  keywordsFromUserInput?: boolean;
 }
 
 export interface RendererContentPolicyContext {
   input: ContentPolicyInput;
   recentPostsSnapshot: RecentPostRecord[];
   recentPostsResult: RecentPostsLoadResult;
+  /** [2026-11-08] Raw claim of where the tracking keyword came from; main validates it (analytics/trackingKeyword.ts). */
+  trackingKeyword?: { value: string; source: 'user-input' | 'leword' | 'schedule-job' };
 }
 
 function text(value: unknown): string {
@@ -153,6 +160,31 @@ function normalizeSourceMaterials(structured: Record<string, any>): SourceMateri
   }).filter((source: SourceMaterial) => source.content || source.url);
 }
 
+/**
+ * [2026-11-08] Where does the keyword to track come from? The claim made at generation time (embedded in the
+ * structured content) wins; otherwise the first user keyword, unless it is just the title. A keyword picked from
+ * the LEWORD board is tagged on the field and only counts while the field still holds that exact value.
+ */
+function trackingClaimFromSource(
+  source: RendererContentPolicySource,
+  embedded: unknown,
+  keywords: string[],
+): RendererContentPolicyContext['trackingKeyword'] {
+  const bag = embedded && typeof embedded === 'object' ? embedded as Record<string, unknown> : {};
+  const embeddedValue = text(bag.value);
+  const embeddedSource = text(bag.source);
+  if (embeddedValue && (embeddedSource === 'user-input' || embeddedSource === 'leword' || embeddedSource === 'schedule-job')) {
+    return { value: embeddedValue, source: embeddedSource };
+  }
+  if (source.keywordsFromUserInput === false) return undefined;
+  const first = keywords[0] || '';
+  const squashed = (value: string) => value.replace(/\s+/g, '').toLowerCase();
+  if (!first || squashed(first) === squashed(String(source.title || ''))) return undefined;
+  const field = typeof document !== 'undefined' ? document.getElementById('unified-keywords') : null;
+  const fromLeword = field?.dataset?.keywordOrigin === 'leword' && field.dataset.keywordOriginValue === first;
+  return { value: first, source: fromLeword ? 'leword' : 'user-input' };
+}
+
 export function buildRendererContentPolicyContext(
   source: RendererContentPolicySource,
   storage: Storage = localStorage,
@@ -218,9 +250,11 @@ export function buildRendererContentPolicyContext(
     account_id: source.accountId?.trim() || text(embeddedInput.account_id) || undefined,
     blog_id: source.blogId?.trim() || text(embeddedInput.blog_id) || undefined,
   };
+  const trackingKeyword = trackingClaimFromSource(source, embeddedContext.trackingKeyword, keywords);
   return {
     input,
     recentPostsSnapshot: recent.posts,
     recentPostsResult: recent.result,
+    ...(trackingKeyword ? { trackingKeyword } : {}),
   };
 }

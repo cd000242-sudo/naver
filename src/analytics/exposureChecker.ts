@@ -64,9 +64,17 @@ export async function checkPostExposure(
   // 제목을 그대로 검색한 건 노출이 아니다 — 재는 순간 라벨을 붙여 둔다.
   const verdict = resolveSearchKeyword(keyword, options.title);
   const keywordKind = verdict.kind;
+  // [2026-11-08] A blank keyword (source 'none') is an index check by title; the verdict already names that term.
+  const searchTerm = String(keyword ?? '').trim() ? keyword : verdict.keyword;
+  if (!searchTerm) {
+    return {
+      checkedAt, searchedKeyword: '', position: null, hasSmartblock: false,
+      notes: '검색어·제목 없음 — 판정 불가', fetchSuccess: false, keywordKind,
+    };
+  }
 
   try {
-    const dynamicReport = await probeDynamicSerp(keyword, {
+    const dynamicReport = await probeDynamicSerp(searchTerm, {
       maxCards: options.maxCards ?? 30,
       timeout: options.timeout ?? 10000,
     });
@@ -74,7 +82,7 @@ export async function checkPostExposure(
     if (!dynamicReport.fetchSuccess) {
       return {
         checkedAt,
-        searchedKeyword: keyword,
+        searchedKeyword: searchTerm,
         position: null,
         hasSmartblock: false,
         notes: 'fetch 실패',
@@ -88,7 +96,7 @@ export async function checkPostExposure(
     if (dynamicReport.totalCards === 0) {
       return {
         checkedAt,
-        searchedKeyword: keyword,
+        searchedKeyword: searchTerm,
         position: null,
         hasSmartblock: dynamicReport.hasSmartblock,
         notes: '프로브 카드 0개 — 파싱 실패/차단, 판정 불가',
@@ -101,7 +109,7 @@ export async function checkPostExposure(
 
     return {
       checkedAt,
-      searchedKeyword: keyword,
+      searchedKeyword: searchTerm,
       position,
       hasSmartblock: dynamicReport.hasSmartblock,
       notes: position === null
@@ -113,7 +121,7 @@ export async function checkPostExposure(
   } catch (err) {
     return {
       checkedAt,
-      searchedKeyword: keyword,
+      searchedKeyword: searchTerm,
       position: null,
       hasSmartblock: false,
       notes: `오류: ${err instanceof Error ? err.message : String(err)}`,

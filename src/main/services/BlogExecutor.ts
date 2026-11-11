@@ -1161,6 +1161,7 @@ export async function runFullPostCycle(
                         payload: effectivePayload,
                         policyResult: preparedPolicy.policyResult,
                         publishedUrl: result.url,
+                        imageCount: processedImages.length,
                     });
                 }
                 if (policyRecordResult.advisoryReasons.length > 0) {

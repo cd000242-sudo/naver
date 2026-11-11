@@ -222,6 +222,10 @@ async function loadLewordBoard(): Promise<void> {
         const input = lewordById<HTMLInputElement>(LEWORD_IDS.keyword);
         if (!input) return;
         input.value = item.dataset.keyword || '';
+        // [2026-11-08] Remember the origin so exposure tracking can label this keyword "leword".
+        // It only counts while the field still holds exactly this value.
+        input.dataset.keywordOrigin = 'leword';
+        input.dataset.keywordOriginValue = input.value;
         input.dispatchEvent(new Event('input', { bubbles: true }));
         lewordSetListOpen(false);
         try { (window as any).toastManager?.success?.(`키워드 적용: ${input.value}`); } catch { /* ignore */ }

@@ -1,5 +1,7 @@
 import { ContentPolicyAuditStore } from './auditStore.js';
 import { ensureTrackedPublishedPost } from '../analytics/publishedPostTracker.js';
+import { finalizeTrackingKeyword } from '../analytics/trackingKeyword.js';
+import { imageCountFromPayload, recordPublicationOutcome } from '../analytics/outcomeRecorder.js';
 import { extractNaverBlogPostIdentity } from '../automation/publishOutcomeResolver.js';
 import { resolveScheduledPublishAt } from '../scheduler/appScheduleQueue.js';
 import { runContentPolicyPipeline } from './orchestrator.js';
@@ -31,6 +33,11 @@ export interface ContentPolicyPayloadContext {
   input: ContentPolicyInput;
   recentPostsSnapshot?: RecentPostRecord[];
   recentPostsResult?: RecentPostsLoadResult;
+  /**
+   * [2026-11-08] Raw claim { value, source } of where the tracking keyword came from (keyword field, LEWORD pick,
+   * scheduled job). Validated by analytics/trackingKeyword.ts at record time. Absent = no real keyword.
+   */
+  trackingKeyword?: unknown;
 }
 
 export type PublishFlow =
@@ -499,11 +506,14 @@ export async function recordContentPolicyPublication(input: {
   policyResult: ContentPolicyResult;
   publishedUrl?: string;
   publishedAt?: Date;
+  /** Images actually inserted into the post; falls back to the payload's image list. */
+  imageCount?: number;
 }): Promise<ContentPolicyRecordResult> {
   const publishedAt = input.publishedAt || new Date();
   const draft = draftFromPayload(input.payload);
   const publishedUrl = stringValue(input.publishedUrl);
   const identity = extractNaverBlogPostIdentity(publishedUrl);
+  const tracking = finalizeTrackingKeyword(input.payload.contentPolicyContext?.trackingKeyword, draft.title);
   const advisoryReasons: string[] = [];
   const quality = input.policyResult.quality_report;
   if (identity) {
@@ -521,7 +531,15 @@ export async function recordContentPolicyPublication(input: {
        * 잴 수 없으면 재지 않는다. 측정 불가를 성공으로 적으면 데이터가 아니라 잡음이 되고,
        * 잡음이 쌓이면 없는 것만 못하다.
        */
-      keyword: input.payload.contentPolicyContext?.input.primary_keyword || '',
+      /*
+       * [2026-11-08] primary_keyword is no longer trusted here: the publish boundary rewrites it to the title
+       * (or title tokens) when the keyword field was empty, so 122 of 153 recent posts were tracked as
+       * "keyword = title". Only the provenance claim carried from the keyword field / LEWORD pick / scheduled
+       * job counts; without one the keyword stays '' and the post is index-only (analytics/trackingKeyword.ts).
+       */
+      keyword: tracking.value ?? '',
+      keywordSource: tracking.source,
+      keywordKind: tracking.kind,
       mode: stringValue(input.payload.contentMode) || 'seo',
       blogId: identity.blogId,
       logNo: identity.logNo,
@@ -541,6 +559,25 @@ export async function recordContentPolicyPublication(input: {
       },
     });
     if (!tracked.ok) advisoryReasons.push('POLICY_EXPOSURE_QUEUE_WRITE_FAILED');
+    // [2026-11-08] Outcome dataset row (features at publish time). Never blocks or fails the publish record.
+    try {
+      await recordPublicationOutcome({
+        userDataPath: input.userDataPath,
+        accountId: input.accountId,
+        blogId: identity.blogId,
+        logNo: identity.logNo,
+        publishedAt: publishedAt.toISOString(),
+        mode: stringValue(input.payload.contentMode) || 'seo',
+        title: draft.title,
+        body: draft.body_markdown,
+        headings: draft.headings,
+        imageCount: input.imageCount ?? imageCountFromPayload(input.payload),
+        tracking,
+      });
+    } catch (error) {
+      console.warn(`[OutcomeDataset] 기록 실패: ${(error as Error).message}`);
+      advisoryReasons.push('OUTCOME_DATASET_WRITE_FAILED');
+    }
   } else {
     advisoryReasons.push('POLICY_EXPOSURE_TARGET_INVALID');
   }

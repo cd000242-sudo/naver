@@ -1911,7 +1911,10 @@ async function prepareSmartScheduledContent(
     throw new Error('SMART_SCHEDULER_GENERATED_DRAFT_INCOMPLETE');
   }
 
+  // [2026-11-08] Only the job's own keyword counts; the title fallback above is for generation, not tracking.
+  const smartKeyword = String(post.keyword || '').trim();
   const contentPolicyContext = {
+    trackingKeyword: smartKeyword ? { value: smartKeyword, source: 'schedule-job' } : undefined,
     input: {
       ...generationPolicy.input,
       recent_posts: undefined,
@@ -4880,6 +4883,7 @@ import { createLdbAutoDraftRunner, createLdbAutoDraftStatusStore, requestLdbAuto
 import { materializeLdbImages } from './main/ldb-images.js';
 import { createLdbDestinations, type LdbResolvedDestination } from './main/ldb-destinations.js';
 import { createDailyPublishingRuntime } from './main/services/dailyPublishingRuntime.js';
+import { trackingFactFromContentSource } from './analytics/trackingKeyword.js';
 import { createDailyPublishingIpc } from './main/ipc/dailyPublishingHandlers.js';
 import { discoverDailySources, expandDailyKeywords } from './main/services/dailyPublishingDiscovery.js';
 import { createUserDataLewordSource } from './main/services/dailyLewordSource.js';
@@ -5922,6 +5926,8 @@ const handleMultiAccountPublish = async (_event: Electron.IpcMainInvokeEvent, ac
             );
 
             resolvedContentPolicyContext = {
+              // [2026-11-08] keyword jobs carry their keyword; URL sources have none (never the title).
+              trackingKeyword: trackingFactFromContentSource(contentSource),
               input: {
                 ...multiPolicy.input,
                 recent_posts: undefined,
@@ -7106,6 +7112,8 @@ ipcMain.handle(
       );
 
       (content as any).contentPolicyContext = {
+        // [2026-11-08] keep the keyword provenance claim across the generation hop (renderer -> main -> renderer).
+        trackingKeyword: (payload.assembly as any).contentPolicyContext?.trackingKeyword,
         input: {
           ...generationPolicy.input,
           recent_posts: undefined,

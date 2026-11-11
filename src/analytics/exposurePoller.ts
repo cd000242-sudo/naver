@@ -21,6 +21,7 @@ import {
   type PublishedPost,
 } from './publishedPostTracker.js';
 import { checkBatchExposure } from './exposureChecker.js';
+import { recordOutcomeSearch } from './outcomeDataset.js';
 import { runExposureCrossChecks } from '../contentPolicy/exposureCrossChecker.js';
 import { processExposureMonitoring } from '../contentPolicy/exposureMonitoringService.js';
 import { PublicationStateStore } from '../contentPolicy/publicationStateStore.js';
@@ -57,7 +58,8 @@ export async function runExposurePollOnce(userDataPath: string): Promise<{
       }
 
       const batchInput = due
-        .filter((p) => p.keyword && p.blogId && p.logNo)
+        // A post with source 'none' has no keyword on purpose; it is index-checked by title (see checker).
+        .filter((p) => (p.keyword || p.keywordSource === 'none') && p.blogId && p.logNo)
         .map((p) => ({
           id: p.id,
           keyword: p.keyword,
@@ -94,6 +96,17 @@ export async function runExposurePollOnce(userDataPath: string): Promise<{
             keywordKind: r.result.keywordKind,
           } as PublishedPost['exposureChecks'] extends Array<infer C> | undefined ? C : never);
           if (!ok) throw new Error('LEGACY_EXPOSURE_RECORD_FAILED');
+
+          // [2026-11-08] Attach the same result to the outcome dataset row. A failed probe becomes "unknown"
+          // there, never "not ranked". A dataset problem must not turn into a monitoring failure.
+          await recordOutcomeSearch(userDataPath, {
+            blogId: trackedPost.blogId,
+            logNo: trackedPost.logNo,
+            hoursAfter: r.hoursAfter,
+            checkedAt: r.result.checkedAt,
+            position: r.result.position,
+            probeFailed: !r.result.fetchSuccess,
+          }).catch((error) => console.warn(`[ExposurePoller] outcome attach failed: ${(error as Error).message}`));
 
           const checks = await runExposureCrossChecks({
             articleId: trackedPost.id,

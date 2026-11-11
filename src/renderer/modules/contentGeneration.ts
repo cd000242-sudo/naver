@@ -1030,7 +1030,9 @@ export async function generateContentFromUrl(
 }
 
 // 키워드,제목으로 AI 글 생성하기
-export async function normalizeKeywordsForGeneration(title: string, rawKeywords: string): Promise<{ primaryKeyword: string; keywordList: string[]; changed: boolean; reason: string }> {
+// [2026-11-08] primaryFromInput = the primary came from the keyword field. false means it fell back to the title,
+//   which is fine for generation but must never be tracked as a real keyword (see analytics/trackingKeyword.ts).
+export async function normalizeKeywordsForGeneration(title: string, rawKeywords: string): Promise<{ primaryKeyword: string; keywordList: string[]; changed: boolean; reason: string; primaryFromInput: boolean }> {
   const raw = String(rawKeywords || '').trim();
   const normalized = raw
     .replace(/[\n\r]+/g, ',')
@@ -1076,7 +1078,7 @@ export async function normalizeKeywordsForGeneration(title: string, rawKeywords:
   if (!needsAutoPick || typeof (window.api as any)?.generateContent !== 'function') {
     const primary = heuristicPrimary();
     const list = dedupe([primary, ...candidates.slice(1, 6)].filter(Boolean));
-    return { primaryKeyword: primary, keywordList: list, changed: false, reason: primary ? 'heuristic' : 'empty' };
+    return { primaryKeyword: primary, keywordList: list, changed: false, reason: primary ? 'heuristic' : 'empty', primaryFromInput: candidates.length > 0 };
   }
 
   try {
@@ -1108,11 +1110,11 @@ Return ONLY valid JSON like:
     const listRaw = Array.isArray(parsed?.keywords) ? parsed.keywords.map((x: any) => String(x || '').trim()).filter(Boolean) : [];
     const primary = primaryRaw || heuristicPrimary();
     const list = dedupe([primary, ...listRaw].filter(Boolean)).slice(0, 6);
-    return { primaryKeyword: primary, keywordList: list, changed: true, reason: 'ai_select' };
+    return { primaryKeyword: primary, keywordList: list, changed: true, reason: 'ai_select', primaryFromInput: candidates.length > 0 };
   } catch {
     const primary = heuristicPrimary();
     const list = dedupe([primary, ...candidates.slice(1, 6)].filter(Boolean));
-    return { primaryKeyword: primary, keywordList: list, changed: true, reason: 'fallback' };
+    return { primaryKeyword: primary, keywordList: list, changed: true, reason: 'fallback', primaryFromInput: candidates.length > 0 };
   }
 }
 
@@ -1417,6 +1419,7 @@ export async function generateContentFromKeywords(
     title: manualTitleOverride || title || keywordList[0] || keywords,
     content: crawledText || '',
     keywords: keywordList,
+    keywordsFromUserInput: normalizedKeywords.primaryFromInput,
     businessInfo,
     contentMode,
   });

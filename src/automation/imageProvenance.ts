@@ -31,6 +31,12 @@ const AI_PROVIDER_PATTERNS = [
   'dropshot',
   'genspark', // [2026-10-10] 젠스파크 AI 생성 이미지
   'codex-image', // [2026-11-03] Codex 구독 이미지 (ChatGPT 구독 이미지 생성 도구)
+  // [2026-11-07 사장님] "AI 이미지로 반자동 발행했는데 이미지에 AI 활용 체크가 안 되어 있다".
+  //   원인: LDB(크롬 확장)에서 가져온 이미지는 전부 provider 'ldb-image-ultra'(ldbDraftImport) 인데 이 허용목록에 없어
+  //   "불명 이미지 → 마크 안 함" 으로 처리됐다. LDB 의 수집(실사진) 이미지는 가져올 때 provider 'collected' + isCollected 로 바뀌고
+  //   isAiGeneratedImage 가 isCollected 를 먼저 보므로, 이 패턴을 넣어도 실사진 오탐은 생기지 않는다.
+  'ldb-image-ultra',
+  'pollinations', // 나노 바나나 별칭 엔진(imageHelpers 의 이름 표 참고)
   'img2img',
   'ai-generated',
 ] as const;

@@ -54,6 +54,10 @@ describe('발행 기록 배선 핀', () => {
   });
 
   it('키워드가 없으면 빈 값으로 남긴다 — 측정 불가는 측정 불가로 적는다', () => {
-    expect(src('../contentPolicy/policyService.ts')).toMatch(/primary_keyword\b[^\n]*\|\|\s*''/);
+    // [2026-11-08] primary_keyword 는 더 이상 기록에 쓰지 않는다(발행 경계가 제목으로 덮어씀).
+    // 출처가 확인된 키워드만 쓰고, 없으면 ''.
+    const policy = src('../contentPolicy/policyService.ts');
+    expect(policy).toMatch(/keyword:\s*tracking\.value\s*\?\?\s*''/);
+    expect(live('../contentPolicy/policyService.ts', 'contentPolicyContext?.input.primary_keyword')).toBe(0);
   });
 });

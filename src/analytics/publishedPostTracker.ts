@@ -25,6 +25,13 @@ export interface PublishedPost {
   readonly logNo: string;
   readonly url: string;
   readonly title: string;
+  /**
+   * [2026-11-08] Where `keyword` came from. 'none' = no real keyword (keyword is '' — the title is never stored
+   * in this slot); such posts are still index-checked by title and counted as index-only, not ranking.
+   * Absent on rows written before this field existed.
+   */
+  readonly keywordSource?: 'user-input' | 'leword' | 'schedule-job' | 'none';
+  readonly keywordKind?: 'exposure' | 'index-only';
   // evaluator 결과 (qualityEvaluator)
   readonly evaluator: {
     readonly finalScore: number;
@@ -174,7 +181,10 @@ export function getPostsNeedingExposureCheck(
   const targetMs = hoursAfter * 60 * 60 * 1000;
   const toleranceMs = 6 * 60 * 60 * 1000; // ±6시간 윈도우
   return posts.filter(p => {
-    if (!String(p.keyword ?? '').trim()) return false;
+    // [2026-11-08] An explicit source 'none' post (keyword left empty on purpose) is still index-checked by title.
+    // Legacy blank rows (no keywordSource) stay unmeasured, as before.
+    const indexOnlyByTitle = p.keywordSource === 'none' && String(p.title ?? '').trim() !== '';
+    if (!String(p.keyword ?? '').trim() && !indexOnlyByTitle) return false;
     const publishedMs = new Date(p.publishedAt).getTime();
     if (isNaN(publishedMs)) return false;
     const elapsed = now - publishedMs;

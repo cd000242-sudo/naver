@@ -23,6 +23,8 @@ import {
   type PublishedPost,
 } from '../../analytics/publishedPostTracker.js';
 import { checkPostExposure, checkBatchExposure } from '../../analytics/exposureChecker.js';
+import { recordOutcomeSearch } from '../../analytics/outcomeDataset.js';
+import { finalizeTrackingKeyword } from '../../analytics/trackingKeyword.js';
 import { computeCalibration, type CalibrationResult } from '../../analytics/calibration.js';
 import { runExposureCrossChecks } from '../../contentPolicy/exposureCrossChecker.js';
 import { processExposureMonitoring } from '../../contentPolicy/exposureMonitoringService.js';
@@ -190,6 +192,7 @@ export function registerSerpProbeHandlers(): void {
   ipcMain.handle('publishedPost:track', async (_evt, req: {
     publishedAt?: string;
     keyword: string;
+    keywordSource?: string;
     mode: string;
     publishedUrl: string;
     title: string;
@@ -204,9 +207,13 @@ export function registerSerpProbeHandlers(): void {
       }
       const [, blogId, logNo] = m;
       const userDataPath = app.getPath('userData');
+      // [2026-11-08] Same rule as the main-process recorder: the title is never stored as the keyword.
+      const tracking = finalizeTrackingKeyword({ value: req.keyword, source: req.keywordSource || 'user-input' }, req.title);
       const result = trackPublishedPost(userDataPath, {
         publishedAt: req.publishedAt || new Date().toISOString(),
-        keyword: req.keyword,
+        keyword: tracking.value ?? '',
+        keywordSource: tracking.source,
+        keywordKind: tracking.kind,
         mode: req.mode,
         blogId,
         logNo,
@@ -235,7 +242,7 @@ export function registerSerpProbeHandlers(): void {
         return { ok: true, checked: 0, updated: 0 };
       }
       const targets = needCheck.map(p => ({
-        id: p.id, keyword: p.keyword, blogId: p.blogId, logNo: p.logNo, hoursAfter,
+        id: p.id, keyword: p.keyword, blogId: p.blogId, logNo: p.logNo, hoursAfter, title: p.title,
       }));
       const results = await checkBatchExposure(targets, { delayMs: req.delayMs ?? 1500 });
       let updated = 0;
@@ -251,6 +258,15 @@ export function registerSerpProbeHandlers(): void {
           notes: r.result.notes,
         });
         if (!recorded) throw new Error('LEGACY_EXPOSURE_RECORD_FAILED');
+        // [2026-11-08] Attach to the outcome dataset (probe failure = unknown). Never fails the manual check.
+        await recordOutcomeSearch(userDataPath, {
+          blogId: trackedPost.blogId,
+          logNo: trackedPost.logNo,
+          hoursAfter: r.hoursAfter,
+          checkedAt: r.result.checkedAt,
+          position: r.result.position,
+          probeFailed: !r.result.fetchSuccess,
+        }).catch((error) => console.warn(`[SerpProbe] outcome attach failed: ${(error as Error).message}`));
         const checks = await runExposureCrossChecks({
           articleId: trackedPost.id,
           title: trackedPost.title,
