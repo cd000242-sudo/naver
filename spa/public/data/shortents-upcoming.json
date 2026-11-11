@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-11T22:25:00.433Z",
+ "builtAt": "2026-11-11T22:35:05.904Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,76 +8,108 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 15,
+ "measured": 10,
  "candidates": [
   {
-   "keyword": "유럽 학교 폭파 협박",
+   "keyword": "트럼프 이란전쟁 종전",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 5,
+   "articles90": 13,
+   "recent20": 4,
+   "press": 12,
    "firstArticleAt": "2026-11-11T21:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"학교 7000곳 폭파 하겠다\" 협박에 학생들 긴급 대피…유럽서 허위 위협...",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-11T21:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005841437?sid=104"
+     "title": "트럼프 “이란 전쟁 곧 끝날 것…93% 아닌 완전한 승리 원한다”",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-11T22:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003564653?sid=104"
     },
     {
-     "title": "유럽 이번엔 학교 폭파 협박…이탈리아 등 대피 소동",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-11T21:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001977793?sid=104"
+     "title": "밴스, 이란 안보수장과 '직접 담판' 검토…종전협상 전면",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-11T22:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000543164?sid=104"
     },
     {
-     "title": "유럽 학교 7천 곳 폭파 위협‥이탈리아 등 대피 소동",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-11T21:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001535025?sid=104"
+     "title": "밴스, 이란 강경파와 직접 담판 추진⋯종전 협상 돌파구 찾나",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-11T22:20:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2647090"
     }
    ]
   },
   {
-   "keyword": "2026년 11월 12일 운세",
+   "keyword": "전세사기 피해자 추가 인정",
    "sources": [
     "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-11T21:00:00.000Z",
+   "recent20": 4,
+   "press": 6,
+   "firstArticleAt": "2026-11-11T22:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[오늘의 운세] 2026년 11월 12일 (목) 띠별운세 '남은 힘을 한곳에 모으...",
-     "press": "dailypop.kr",
-     "publishedAt": "2026-11-11T21:40:00.000Z",
-     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103978"
+     "title": "전세사기 피해자 480명 추가 인정…누적 4만2039명",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-11T22:28:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=242965"
     },
     {
-     "title": "[오늘의 운세] 12일 목요일 나의 운세는?",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-11T21:36:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1191795"
+     "title": "전세사기 피해자 누적 4만2039명…480명 추가 결정",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-11T22:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003058659?sid=101"
     },
     {
-     "title": "[오늘의 운세] 2026년 11월 12일 별자리 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-11T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006408524?sid=103"
+     "title": "국토부, 전세사기 피해자 480명 추가…누적 4만명 넘어",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-11T22:27:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000081898"
+    }
+   ]
+  },
+  {
+   "keyword": "러 우크라 포로교환 합의",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-11T21:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美·러·우크라 종전협상 빈손 종료…포로교환 합의에도 영토 문제 '평행...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-11T22:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003154164?sid=104"
+    },
+    {
+     "title": "러·우크라, 종전 협상서 최대 규모 포로 교환 합의…영토 문제는 평행...",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-11T22:02:00.000Z",
+     "link": "https://www.ajunews.com/view/20261112065843705"
+    },
+    {
+     "title": "러·우크라, 역대 최대 포로교환 합의... 영토·안보 입장은 ‘평행선’",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-11T21:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004009182?sid=104"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 386,
+  "flagged": 389,
   "matched": 160,
   "avgLeadMin": 1001,
   "recent": [
