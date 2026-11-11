@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-11T21:44:42.284Z",
+ "builtAt": "2026-11-11T21:54:45.688Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 13,
  "candidates": [
   {
    "keyword": "젠슨 황 스캔들 영향",
@@ -16,7 +16,7 @@
     "signal.bz"
    ],
    "articles90": 11,
-   "recent20": 4,
+   "recent20": 1,
    "press": 11,
    "firstArticleAt": "2026-11-11T20:44:00.000Z",
    "exclusive": false,
@@ -43,66 +43,34 @@
    ]
   },
   {
-   "keyword": "김민석 만찬 당정 한마음으로",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-11T20:19:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李 대통령 \"당정 한마음 한뜻으로\"…김민석 \"양극화 극복 필요\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-11T21:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000650504?sid=100"
-    },
-    {
-     "title": "이 대통령, 민주당 지도부와 3시간 만찬",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-11T21:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012292187?sid=100"
-    },
-    {
-     "title": "李대통령 “당정, 한마음 한뜻으로 움직여야” [청와대 24시]",
-     "press": "segye.com",
-     "publishedAt": "2026-11-11T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004174523?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "유럽 학교 폭파 협박",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 4,
+   "articles90": 7,
+   "recent20": 2,
+   "press": 6,
    "firstArticleAt": "2026-11-11T20:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "유럽서 학교 7000곳 폭파 위협에 긴급 대피소동…허위로 드러나",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-11T21:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005841437?sid=104"
+    },
+    {
+     "title": "유럽 이번엔 학교 폭파 협박…이탈리아 등 대피 소동",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-11T21:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001977793?sid=104"
+    },
+    {
      "title": "유럽 학교 7천 곳 폭파 위협‥이탈리아 등 대피 소동",
      "press": "imnews.imbc.com",
      "publishedAt": "2026-11-11T21:19:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/214/0001535025?sid=104"
-    },
-    {
-     "title": "“몰살시킬 것” 유럽 학교 7000곳 폭파 위협... 伊총리까지 협박",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-11T21:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004009181?sid=104"
-    },
-    {
-     "title": "유럽 학교 7천곳 폭파 협박‥학생 대피 소동",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-11T21:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001535020?sid=104"
     }
    ]
   },
@@ -131,19 +99,51 @@
      "link": "https://n.news.naver.com/mnews/article/422/0000925302?sid=104"
     },
     {
-     "title": "강경화 “핵잠 건조·원자력 협력 진전시 한미 안보협력 강화”",
-     "press": "kmib.co.kr",
+     "title": "강경화 “핵잠 건조·원자력 협력 진전되면 한미 안보협력 강화될 것”",
+     "press": "kukinews.com",
      "publishedAt": "2026-11-11T20:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001884660?sid=100"
+     "link": "https://www.kukinews.com/article/view/kuk202611120004"
+    }
+   ]
+  },
+  {
+   "keyword": "김민석 만찬 당정 한마음으로",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-11T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李 대통령 \"당정 한마음 한뜻으로\"…김민석 \"양극화 극복 필요\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-11T21:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000650504?sid=100"
+    },
+    {
+     "title": "이 대통령, 민주당 지도부와 3시간 만찬",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-11T21:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012292187?sid=100"
+    },
+    {
+     "title": "李대통령 “당정, 한마음 한뜻으로 움직여야” [청와대 24시]",
+     "press": "segye.com",
+     "publishedAt": "2026-11-11T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004174523?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 392,
-  "matched": 163,
-  "avgLeadMin": 926,
+  "flagged": 390,
+  "matched": 162,
+  "avgLeadMin": 932,
   "recent": [
    {
     "keyword": "날씨",
