@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-11T23:35:29.607Z",
+ "builtAt": "2026-11-11T23:45:32.460Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,50 +11,87 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "미국 상원 선거",
+   "keyword": "젠슨 황 해임 검토",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 16,
-   "recent20": 4,
-   "press": 15,
-   "firstArticleAt": "2026-11-11T22:08:00.000Z",
+   "articles90": 32,
+   "recent20": 8,
+   "press": 27,
+   "firstArticleAt": "2026-11-11T22:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美민주당, 공화 텃밭 미시시피 상원도 탈환…최소 55석 확보",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-11T23:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009284641?sid=104"
+     "title": "젠슨 황 해임설에 엔비디아 시간외 8% 폭락… 삼성전자·SK하이닉스도 흔...",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-11T23:44:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=503226"
     },
     {
-     "title": "美민주, '딥레드' 공화텃밭 미시시피 상원선거도 승리…총 55석(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-11T23:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016437239?sid=104"
+     "title": "[젠슨황 스캔들] 헬스케어 직속 부사장과도 혼외 관계 의혹… 거취 '흔...",
+     "press": "financialpost.co.kr",
+     "publishedAt": "2026-11-11T23:42:00.000Z",
+     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=300294"
     },
     {
-     "title": "CNN \"공화당 텃밭 미시시피 상원 선거도 민주당 승리 예상\"",
-     "press": "opinionnews.co.kr",
-     "publishedAt": "2026-11-11T23:20:00.000Z",
-     "link": "http://www.opinionnews.co.kr/news/articleView.html?idxno=146970"
+     "title": "엔비디아 시간외서 8% 급락 … 젠슨 황 해임 검토 보도에 충격",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-11T23:38:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/12/2026111200022.html"
+    }
+   ]
+  },
+  {
+   "keyword": "미국 상원 선거",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 18,
+   "recent20": 5,
+   "press": 16,
+   "firstArticleAt": "2026-11-11T22:23:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'공화 텃밭' 미시시피 상원 선거도 민주 승리…총 55석",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-11T23:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001977828?sid=104"
+    },
+    {
+     "title": "美 민주, ‘딥레드’ 공화텃밭 미시시피 상원선거도 승리…총 55석",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-11T23:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003058675?sid=104"
+    },
+    {
+     "title": "美민주, 공화텃밭 미시시피 상원선거도 승리…총 55석",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-11T23:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002722377?sid=104"
     }
    ]
   },
   {
    "keyword": "크러쉬 조이 듀엣 공개",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 6,
    "recent20": 3,
    "press": 6,
-   "firstArticleAt": "2026-11-11T22:15:00.000Z",
+   "firstArticleAt": "2026-11-11T22:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "조이♥크러쉬, 공개 열애 6년째 얼굴 가린 듀엣…반려견 품에 안고 ‘삐...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-11T23:43:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005639084"
+    },
     {
      "title": "크러쉬·조이, '삐그덕' 라이브 영상 공개",
      "press": "jnilbo.com",
@@ -66,21 +103,15 @@
      "press": "news.tf.co.kr",
      "publishedAt": "2026-11-11T23:27:00.000Z",
      "link": "https://m.entertain.naver.com/article/629/0000551074"
-    },
-    {
-     "title": "조이, 크러쉬 반려견 꼭 안고… 장기연애 커플의 깜짝 듀엣",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-11T23:25:00.000Z",
-     "link": "https://m.entertain.naver.com/article/469/0000965121"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 385,
-  "matched": 157,
-  "avgLeadMin": 992,
+  "flagged": 379,
+  "matched": 153,
+  "avgLeadMin": 1000,
   "recent": [
    {
     "keyword": "뉴욕증시 급락",
