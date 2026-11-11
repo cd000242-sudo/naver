@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-11T19:54:09.097Z",
+ "builtAt": "2026-11-11T20:04:11.805Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -10,6 +10,71 @@
  },
  "measured": 10,
  "candidates": [
+  {
+   "keyword": "수사",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 4,
+   "press": 4,
+   "firstArticleAt": "2026-11-11T19:00:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "법무부 “공소청 특활비 필요”… 기획처 “수사 비용 편성 불가”",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-11T20:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003698459?sid=100"
+    },
+    {
+     "title": "[단독] 각 경찰서에 '수사 회의' 도입…\"변호사·회계사 투입\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-11T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004208892?sid=102"
+    },
+    {
+     "title": "인천항 '다단계 부풀리기 전대' 의혹…해경, 전방위 수사",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-11T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004208896?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황 스캔들 논란",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 3,
+   "press": 4,
+   "firstArticleAt": "2026-11-11T19:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“10조원 엔비디아칩 中 밀반입”… ‘美안보 리스크’ 된 젠슨 황 스캔...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-11T20:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003698454?sid=104"
+    },
+    {
+     "title": "트럼프는 왜? 젠슨 황은 왜?…엔비디아 스캔들 따져보니",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-11T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002831799?sid=104"
+    },
+    {
+     "title": "'젠슨 황 스캔들' 앨리스 황, 10조원대 AI칩 중국 반입 의혹…엔비디아...",
+     "press": "geconomy.co.kr",
+     "publishedAt": "2026-11-11T20:00:00.000Z",
+     "link": "https://www.geconomy.co.kr/news/article.html?no=325583"
+    }
+   ]
+  },
   {
    "keyword": "트럼프 이란전쟁 종전",
    "sources": [
@@ -45,7 +110,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 393,
+  "flagged": 395,
   "matched": 160,
   "avgLeadMin": 661,
   "recent": [
