@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T21:11:00.286Z",
+ "builtAt": "2026-11-12T21:21:04.632Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 21,
+ "measured": 22,
  "candidates": [
   {
-   "keyword": "약국",
+   "keyword": "장동혁 조작 징계 의혹",
    "sources": [
-    "google"
+    "nate"
    ],
-   "articles90": 5,
-   "recent20": 5,
-   "press": 2,
-   "firstArticleAt": "2026-11-12T20:56:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-12T20:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "비대면 처방 약국 쏠림 막는다…조제건수 쿼터제 입법 추진",
-     "press": "dailypharm.com",
-     "publishedAt": "2026-11-12T21:02:00.000Z",
-     "link": "https://www.dailypharm.com/user/news/344523?REFERER=NP"
+     "title": "[뉴스 즉설]1년 남은 한동훈의 시간, 장동혁에 복당 막히면 신당 창당?",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-12T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000192287?sid=004"
     },
     {
-     "title": "감기약 100정 시대 '숨은 그림자'...약국의 경고",
-     "press": "kpanews.co.kr",
-     "publishedAt": "2026-11-12T20:56:00.000Z",
-     "link": "https://www.kpanews.co.kr/news/articleView.html?idxno=548842"
+     "title": "장동혁-윤리위원 갈등 격화…'조작징계' 공방에 국민의힘 전운 고조",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-12T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003154635?sid=100"
     },
     {
-     "title": "약국서 산 일반약, 선물로 배송…法 '무죄' 판결에 '의견 분분'",
-     "press": "kpanews.co.kr",
-     "publishedAt": "2026-11-12T20:56:00.000Z",
-     "link": "https://www.kpanews.co.kr/news/articleView.html?idxno=548773"
+     "title": "주도권 안 놓는다…장동혁, '비대위·조작징계' 주장 정면 돌파",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-12T20:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009286860?sid=100"
     }
    ]
   }
@@ -46,8 +46,8 @@
  "hitRate": {
   "days": 7,
   "flagged": 392,
-  "matched": 144,
-  "avgLeadMin": 723,
+  "matched": 143,
+  "avgLeadMin": 668,
   "recent": [
    {
     "keyword": "트럼프 이란전쟁 종전",
