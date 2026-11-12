@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T17:59:17.519Z",
+ "builtAt": "2026-11-12T18:09:24.324Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "젠슨 황, 엔비디아 CEO 사임",
@@ -16,30 +16,62 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 31,
-   "recent20": 9,
-   "press": 22,
-   "firstArticleAt": "2026-11-12T16:32:00.000Z",
+   "articles90": 27,
+   "recent20": 8,
+   "press": 18,
+   "firstArticleAt": "2026-11-12T16:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨황 퇴진으로 다음 달 예정된 'GTC DC' 행사 안갯속",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-12T17:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016439559?sid=104"
+     "title": "엔비디아 임시 CEO 긴급 메시시 발신 \"극도로 힘든 시기\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-12T18:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004209346?sid=104"
     },
     {
-     "title": "엔비디아 젠슨 황 결국 사임..스캔들 여파 33년만에 퇴장",
-     "press": "kdpress.co.kr",
-     "publishedAt": "2026-11-12T17:56:00.000Z",
-     "link": "https://www.kdpress.co.kr/news/articleView.html?idxno=209880"
+     "title": "트럼프, 엔비디아 CEO 후임으로 애플 팀 쿡 지목",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-12T18:04:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/437292"
     },
     {
-     "title": "엔비디아 임시CEO, 내부 혼란 수습…\"임직원이 회사의 가장 큰 힘\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-12T17:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009286819?sid=104"
+     "title": "엔비디아 임시 CEO \"극도로 어려운 시기\" 첫 메시지…경영진 소집도",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-12T18:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014319639?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "13일의 금요일",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 2,
+   "firstArticleAt": "2026-11-12T16:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[지지대] 13일의 금요일, 인류 멸망의 날",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-12T18:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000131874?sid=110"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 13일(음력 10월 5일) 금요일 구삼원 원장이 풀...",
+     "press": "joongdo.co.kr",
+     "publishedAt": "2026-11-12T16:52:00.000Z",
+     "link": "https://www.joongdo.co.kr/web/view.php?key=20261113010003787"
+    },
+    {
+     "title": "[카드뉴스로 읽는 오늘의 운세] 11월 13일(금요일) 춘강 구박사가 알려...",
+     "press": "joongdo.co.kr",
+     "publishedAt": "2026-11-12T16:44:00.000Z",
+     "link": "https://www.joongdo.co.kr/web/view.php?key=20261113010002949"
     }
    ]
   }
