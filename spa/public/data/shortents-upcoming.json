@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T17:28:54.759Z",
+ "builtAt": "2026-11-12T17:49:10.894Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -13,74 +13,42 @@
   {
    "keyword": "젠슨 황, 엔비디아 CEO 사임",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 36,
-   "recent20": 7,
-   "press": 26,
-   "firstArticleAt": "2026-11-12T16:00:00.000Z",
+   "articles90": 28,
+   "recent20": 4,
+   "press": 22,
+   "firstArticleAt": "2026-11-12T16:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨 황 퇴진에 엔비디아 시총 4조달러 붕괴",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-12T17:28:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261113500001"
+     "title": "'중국 스파이 불륜' 젠슨 황, 내주 미 의회 출석…트럼프까지 조사 확대",
+     "press": "4th.kr",
+     "publishedAt": "2026-11-12T17:48:00.000Z",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2121771"
     },
     {
-     "title": "[미국 특징주] 젠슨 황 스캔들, 법정 공방으로 번지나…증권사기·주주...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-12T17:24:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261113000010"
+     "title": "비트코인 8월 20일 이후 최저…황 사임 보도 속 7만1000달러 근접",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-12T17:46:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/437281"
     },
     {
-     "title": "엔비디아 창업 이후 최대 위기…젠슨 황 '혼외 관계' 의혹에 끝내 사임",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-12T17:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004209345?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "13일의 금요일",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-12T16:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오늘의 운세] 2026년 11월 13일(음력 10월 5일) 금요일 구삼원 원장이 풀...",
-     "press": "joongdo.co.kr",
-     "publishedAt": "2026-11-12T16:52:00.000Z",
-     "link": "https://www.joongdo.co.kr/web/view.php?key=20261113010003787"
-    },
-    {
-     "title": "[카드뉴스로 읽는 오늘의 운세] 11월 13일(금요일) 춘강 구박사가 알려...",
-     "press": "joongdo.co.kr",
-     "publishedAt": "2026-11-12T16:44:00.000Z",
-     "link": "https://www.joongdo.co.kr/web/view.php?key=20261113010002949"
-    },
-    {
-     "title": "11월 13일 금요일 띠별 오늘의 운세 \"포기했던 돈을 돌려 받는다\"",
-     "press": "econovill.com",
-     "publishedAt": "2026-11-12T16:04:00.000Z",
-     "link": "https://www.econovill.com/news/articleView.html?idxno=757089"
+     "title": "크레스 CFO, 엔비디아 임시 사령탑...\"젠슨 황의 핵심 파트너\"",
+     "press": "4th.kr",
+     "publishedAt": "2026-11-12T17:44:00.000Z",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2121770"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 393,
-  "matched": 142,
-  "avgLeadMin": 781,
+  "flagged": 392,
+  "matched": 141,
+  "avgLeadMin": 785,
   "recent": [
    {
     "keyword": "네이버 AI 에이전트 연내 출시 목표",
