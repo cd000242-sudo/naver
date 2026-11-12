@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T00:25:51.816Z",
+ "builtAt": "2026-11-12T00:35:55.939Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,38 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 14,
  "candidates": [
   {
-   "keyword": "네이버 3분기 매출 3조4724억",
+   "keyword": "젠슨 황 해임 추진",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 74,
-   "recent20": 13,
-   "press": 59,
-   "firstArticleAt": "2026-11-11T23:08:00.000Z",
+   "articles90": 57,
+   "recent20": 10,
+   "press": 50,
+   "firstArticleAt": "2026-11-11T23:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "네이버, 3Q 영업익 4513억원…AI 투자에 전년比 21%↓",
-     "press": "theviewers.co.kr",
-     "publishedAt": "2026-11-12T00:24:00.000Z",
-     "link": "https://theviewers.co.kr/View.aspx?No=4308983"
+     "title": "\"엔비디아 이사회, 젠슨 황 해임 준비…이르면 오늘 회의\"",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-12T00:32:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1543472"
     },
     {
-     "title": "네이버, 3분기 AI 투자로 영업이익 20.9% 감소…매출 3조4724억",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-12T00:24:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=902823"
+     "title": "‘젠슨 황 불륜女’ 입은 원피스 500만원 짜리?…앨리스 황 ‘명품 패션...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-12T00:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005762536?sid=104"
     },
     {
-     "title": "네이버, 물류 자회사 만든다…3분기 영업익 21% 감소",
-     "press": "thelec.kr",
-     "publishedAt": "2026-11-12T00:24:00.000Z",
-     "link": "https://www.thelec.kr/news/articleView.html?idxno=65315"
+     "title": "엔비디아 이사회, 젠슨 황 해임 검토…이르면 오늘 논의",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-12T00:30:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=172325"
     }
    ]
   },
@@ -47,30 +48,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 75,
-   "recent20": 10,
-   "press": 47,
+   "articles90": 79,
+   "recent20": 7,
+   "press": 49,
    "firstArticleAt": "2026-11-11T23:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "후원 받은 대표, 전 직장 동료가 회장 임추위원장…이러니 금융권 “부...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-12T00:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002722440?sid=101"
+    },
+    {
+     "title": "정진완 우리은행장, 1년 연임 유력…이르면 13일 결정",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-12T00:30:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4444343"
+    },
+    {
+     "title": "금융지주 회장 연임 문턱 높인다…두 번째 연임부터 주총 75% 찬성",
+     "press": "peoplewatch.co.kr",
+     "publishedAt": "2026-11-12T00:28:00.000Z",
+     "link": "https://www.peoplewatch.co.kr/article/view/ppw202611120004"
+    }
+   ]
+  },
+  {
+   "keyword": "임추위 전원 독립이사 구성",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 34,
+   "recent20": 6,
+   "press": 26,
+   "firstArticleAt": "2026-11-11T23:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "후원 받은 대표, 전 직장 동료가 회장 임추위원장…이러니 금융권 “부...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-12T00:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002722440?sid=101"
+    },
+    {
+     "title": "당정, 금융지주 CEO 연임 요건 강화…\"임추위 전원 독립이사로\"",
+     "press": "paxetv.com",
+     "publishedAt": "2026-11-12T00:28:00.000Z",
+     "link": "http://www.paxetv.com/news/articleView.html?idxno=286696"
+    },
+    {
      "title": "금융지주 회장 연임 문턱 높인다…독립이사 2명 반대에도 제동",
      "press": "hansbiz.co.kr",
      "publishedAt": "2026-11-12T00:24:00.000Z",
      "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=882531"
-    },
-    {
-     "title": "금융지주 회장 '셀프 연임' 막는다…3연임시 의결 문턱 높여",
-     "press": "news2day.co.kr",
-     "publishedAt": "2026-11-12T00:20:00.000Z",
-     "link": "https://www.news2day.co.kr/article/20261112500075"
-    },
-    {
-     "title": "\"3연임 막자\"던 당국, 결국 75%룰 택했다…지주 회장 연임 '주주 심판'으...",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-12T00:20:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1731331"
     }
    ]
   },
@@ -79,163 +112,326 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 24,
-   "recent20": 4,
-   "press": 19,
-   "firstArticleAt": "2026-11-11T23:02:00.000Z",
+   "articles90": 26,
+   "recent20": 7,
+   "press": 22,
+   "firstArticleAt": "2026-11-11T23:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美 민주, ‘공화 텃밭’ 미시시피 상원선거도 승리… 총 55석",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-12T00:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001204237?sid=104"
+     "title": "美민주당, '공화당 텃밭' 미시시피주 상원 의석도 따냈다",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-12T00:30:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261112000213"
     },
     {
-     "title": "콜롬, 미시시피 상원 접전 관련 취재진에 발언",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-12T00:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009284823?sid=104"
+     "title": "美 공화당 텃밭 미시시피서 44년 만에 민주당 승리…상원 55석 확보",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-12T00:30:00.000Z",
+     "link": "https://www.ajunews.com/view/20261112085607966"
     },
     {
-     "title": "콜롬, 미시시피 상원 선거 개표 진행 중 기자회견",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-12T00:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009284821?sid=104"
+     "title": "美공화 심장부마저 무너졌다…민주, 미시시피 44년 만에 탈환·상원 55석...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-12T00:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003154250?sid=104"
     }
    ]
   },
   {
-   "keyword": "나스닥 1.6% 상승",
+   "keyword": "db 하이텍",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-11T22:56:00.000Z",
+   "articles90": 23,
+   "recent20": 8,
+   "press": 21,
+   "firstArticleAt": "2026-11-11T23:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "코어위브 훈풍에 3대 지수 동반 상승 [뉴욕증시]",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-12T00:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/024/0000109571?sid=101"
+     "title": "DB하이텍, 3분기 영업익 900억…전력반도체 호조에 공장 ‘풀가동’",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-12T00:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004681316?sid=101"
     },
     {
-     "title": "엔비디아 급락에 나스닥100 선물 0.7% 하락…경쟁사 AMD는 4%대 상승",
+     "title": "DB하이텍, 고부가 반도체 수요 확대...3Q 영업익 900억",
+     "press": "livebiz.today",
+     "publishedAt": "2026-11-12T00:28:00.000Z",
+     "link": "https://www.livebiz.today/news/articleView.html?idxno=206428"
+    },
+    {
+     "title": "DB하이텍, 3분기 영업이익 900억…전년 대비 7% 증가",
      "press": "mt.co.kr",
-     "publishedAt": "2026-11-11T23:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005440034?sid=101"
+     "publishedAt": "2026-11-12T00:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005440065?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "금융회사 지배구조 개선 협의",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 26,
+   "recent20": 4,
+   "press": 18,
+   "firstArticleAt": "2026-11-11T23:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "금융회사 지배구조 개선방안 당정협의회",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-12T00:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005762542?sid=100"
     },
     {
-     "title": "코어위브 실적에 AI주 일제히 반등 … 나스닥 1.6% 상승",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-11T23:44:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/12/2026111200026.html"
+     "title": "[이슈 직썰] \"회장 셀프 연임 막는다\"…당정, 은행지주 지배구조 대수술",
+     "press": "ziksir.com",
+     "publishedAt": "2026-11-12T00:32:00.000Z",
+     "link": "https://www.ziksir.com/news/articleView.html?idxno=153001"
+    },
+    {
+     "title": "당정, 금융회사 CEO 연임 문턱 높인다",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-12T00:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000551105?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "미세먼지",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 27,
+   "recent20": 7,
+   "press": 15,
+   "firstArticleAt": "2026-11-11T23:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "계룡시 겨울 미세먼지 대응망 가동",
+     "press": "ccdailynews.com",
+     "publishedAt": "2026-11-12T00:32:00.000Z",
+     "link": "https://www.ccdailynews.com/news/articleView.html?idxno=2451015"
+    },
+    {
+     "title": "오늘 서울·경기 미세먼지 `나쁨`…서울 낮 최고 15도",
+     "press": "tbs.seoul.kr",
+     "publishedAt": "2026-11-12T00:29:00.000Z",
+     "link": "http://tbs.seoul.kr/news/newsView.do?typ_800=6&idx_800=3538734&seq_800=20531635"
+    },
+    {
+     "title": "\"출근길 마스크 꼭 챙겨요\"...서울·경기 미세먼지 '나쁨'",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-12T00:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001272495?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "클라라 예능 복귀",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 17,
+   "recent20": 5,
+   "press": 15,
+   "firstArticleAt": "2026-11-11T23:40:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이혼 클라라, '솔로라서2'로 9년 만에 국내 예능 복귀",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-12T00:34:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95057"
+    },
+    {
+     "title": "이혼한 클라라, 10년만 방송 복귀..‘솔로라서2’ 합류[공식]",
+     "press": "heraldmuse.com",
+     "publishedAt": "2026-11-12T00:32:00.000Z",
+     "link": "https://m.entertain.naver.com/article/112/0003812995"
+    },
+    {
+     "title": "클라라, '솔로라서2' 출연…10년 만의 한국 예능",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-12T00:24:00.000Z",
+     "link": "https://m.entertain.naver.com/article/629/0000551103"
+    }
+   ]
+  },
+  {
+   "keyword": "마운자로",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 10,
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-11T23:19:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "위고비·마운자로 해외 처방분 반입 허용…'스시자로' 수요 변수",
+     "press": "ftoday.co.kr",
+     "publishedAt": "2026-11-12T00:30:00.000Z",
+     "link": "http://www.ftoday.co.kr/news/articleView.html?idxno=369509"
+    },
+    {
+     "title": "日서 구매한 마운자로, 오늘부터 석달치까지 국내 반입 가능",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-12T00:14:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/12/2026111200040.html"
+    },
+    {
+     "title": "“일본 다녀오면 항공권값 빠진다?”…오늘부터 마운자로 들고 입국 가...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-11T23:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/117/0004124346?sid=102"
     }
    ]
   },
   {
    "keyword": "출근하는 이용철 후보자",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 21,
-   "recent20": 1,
-   "press": 5,
+   "articles90": 23,
+   "recent20": 3,
+   "press": 7,
    "firstArticleAt": "2026-11-11T23:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "청문회 준비단 출근하는 이용철 법무부 장관 후보자 [TF사진관]",
+     "title": "이용철 후보자, 오늘도 '공소취소' 질문에 \"지금은 답변 부적절\"",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-12T00:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000520359?sid=102"
+    },
+    {
+     "title": "이용철 ‘공소취소 지휘’ 즉답 회피…‘5.18 보상금 신청’엔 묵묵부답",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-12T00:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012292301?sid=102"
+    },
+    {
+     "title": "또 말 아낀 이용철 \"공소취소 지휘, 지금 답변 부적절\" [TF사진관]",
      "press": "news.tf.co.kr",
      "publishedAt": "2026-11-12T00:21:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/629/0000551095?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "맨유 캐릭 경질 포체티노 유력",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-11T23:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "오히려 좋아! 포체티노 맨유로 보내는 미국축구협회, 후임 감독으로 '명...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-11T23:41:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/076/0004466017"
     },
     {
-     "title": "이용철 \"공소취소, 예단 따른 질문\"...또 말 아껴",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-12T00:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002431683?sid=102"
-    },
-    {
-     "title": "이용철 \"지금은 답변 부적절\"…공소취소 나흘째 모호한 입장",
+     "title": "맨유, 캐릭 감독 곧 경질 전망…후임은 '손흥민 스승' 포체티노 가닥",
      "press": "news1.kr",
-     "publishedAt": "2026-11-11T23:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009284732?sid=102"
+     "publishedAt": "2026-11-11T23:38:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/421/0009284676"
+    },
+    {
+     "title": "‘캐릭 경질 임박’ 맨유, 포체티노와 구두 합의 도달",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-11T23:35:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/144/0001149355"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 368,
-  "matched": 142,
-  "avgLeadMin": 1023,
+  "flagged": 371,
+  "matched": 151,
+  "avgLeadMin": 1524,
   "recent": [
    {
-    "keyword": "반도체",
-    "hitKeyword": "반도체 한국 대미 흑자",
-    "hitAt": "2026-11-12T09:00:00+09:00",
-    "leadMin": 75
+    "keyword": "에코프로비엠 3분기 영업익 120억 감소",
+    "hitKeyword": "네이버 3분기 실적",
+    "hitAt": "2026-11-12T09:30:00+09:00",
+    "leadMin": 9958
    },
    {
-    "keyword": "젠슨 황 해임 검토",
-    "hitKeyword": "젠슨 황 해임 추진",
-    "hitAt": "2026-11-12T09:00:00+09:00",
-    "leadMin": 55
+    "keyword": "LG화학 3분기 영업익 5612억",
+    "hitKeyword": "네이버 3분기 실적",
+    "hitAt": "2026-11-12T09:30:00+09:00",
+    "leadMin": 9746
    },
    {
-    "keyword": "뉴욕증시 급락",
-    "hitKeyword": "뉴욕증시 일제 상승",
-    "hitAt": "2026-11-12T08:30:00+09:00",
-    "leadMin": 8636
+    "keyword": "LG화학 3분기 영업익 17%↓",
+    "hitKeyword": "네이버 3분기 실적",
+    "hitAt": "2026-11-12T09:30:00+09:00",
+    "leadMin": 9726
    },
    {
-    "keyword": "트럼프 이란전쟁 종전",
-    "hitKeyword": "트럼프 이란 전쟁",
-    "hitAt": "2026-11-12T08:30:00+09:00",
-    "leadMin": 55
+    "keyword": "인천 구월동 SUV 돌진",
+    "hitKeyword": "제네시스 2억원 SUV",
+    "hitAt": "2026-11-12T09:30:00+09:00",
+    "leadMin": 9716
    },
    {
-    "keyword": "트럼프 곧 끝날 것 93% 아닌 완전한",
-    "hitKeyword": "트럼프 이란 전쟁",
-    "hitAt": "2026-11-12T08:30:00+09:00",
-    "leadMin": 15
+    "keyword": "GS 3분기 실적",
+    "hitKeyword": "네이버 3분기 실적",
+    "hitAt": "2026-11-12T09:30:00+09:00",
+    "leadMin": 9656
    },
    {
-    "keyword": "전세사기 피해자 추가 인정",
-    "hitKeyword": "성범죄 피해자 살해",
-    "hitAt": "2026-11-12T08:00:00+09:00",
-    "leadMin": 25
+    "keyword": "넷마블 3분기 영업익 감소",
+    "hitKeyword": "네이버 3분기 실적",
+    "hitAt": "2026-11-12T09:30:00+09:00",
+    "leadMin": 9626
    },
    {
-    "keyword": "철도노조 총파업 예고",
-    "hitKeyword": "스페인 노동자 총파업",
-    "hitAt": "2026-11-12T07:00:00+09:00",
-    "leadMin": 9261
+    "keyword": "넷마블 3분기 영업익 44.6%↓",
+    "hitKeyword": "네이버 3분기 실적",
+    "hitAt": "2026-11-12T09:30:00+09:00",
+    "leadMin": 9542
    },
    {
-    "keyword": "경제",
-    "hitKeyword": "AI붐 경제 영향",
-    "hitAt": "2026-11-12T06:30:00+09:00",
-    "leadMin": 9536
+    "keyword": "롯데쇼핑 3분기 영업익 34.5% 증가",
+    "hitKeyword": "네이버 3분기 실적",
+    "hitAt": "2026-11-12T09:30:00+09:00",
+    "leadMin": 8606
    },
    {
-    "keyword": "2026년 11월 6일 운세",
-    "hitKeyword": "11월 12일 날씨",
-    "hitAt": "2026-11-12T06:30:00+09:00",
-    "leadMin": 8657
+    "keyword": "롯데쇼핑 3분기 34.5% 증가",
+    "hitKeyword": "네이버 3분기 실적",
+    "hitAt": "2026-11-12T09:30:00+09:00",
+    "leadMin": 8585
    },
    {
-    "keyword": "광주 아파트 화재",
-    "hitKeyword": "광주 아파트 화재",
-    "hitAt": "2026-11-12T06:30:00+09:00",
-    "leadMin": 408
+    "keyword": "네이버 3분기 영업익 20.9%↓",
+    "hitKeyword": "네이버 3분기 실적",
+    "hitAt": "2026-11-12T09:30:00+09:00",
+    "leadMin": 14
    }
   ]
  }
