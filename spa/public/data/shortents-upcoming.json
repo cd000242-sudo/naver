@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T01:36:25.277Z",
+ "builtAt": "2026-11-12T01:46:29.471Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,101 +8,101 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 14,
  "candidates": [
+  {
+   "keyword": "젠슨 황 해임 준비",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 78,
+   "recent20": 16,
+   "press": 63,
+   "firstArticleAt": "2026-11-12T00:26:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "엔비디아 젠슨 황 후임설 확산…팀 쿡까지 거론, SNS 달구는 차기 CEO 논...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-12T01:44:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=626075"
+    },
+    {
+     "title": "AI 황제에서 '불륜의 제왕'으로…젠슨 황, 엔비디아서 쫓겨나나",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-12T01:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000142107?sid=101"
+    },
+    {
+     "title": "CBS뉴스 \"엔비디아, 젠슨 황 해임 준비\"…트럼프 행정부도 인지, 미 의회...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-12T01:44:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=626076"
+    }
+   ]
+  },
   {
    "keyword": "아세안 APEC 참석",
    "sources": [
     "signal.bz"
    ],
    "articles90": 73,
-   "recent20": 16,
-   "press": 58,
-   "firstArticleAt": "2026-11-12T00:36:00.000Z",
+   "recent20": 13,
+   "press": 57,
+   "firstArticleAt": "2026-11-12T00:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "靑 “APEC 계기 북미접촉 가능성 작아…전후는 단정 어려워”",
-     "press": "kbmaeil.com",
-     "publishedAt": "2026-11-12T01:34:00.000Z",
-     "link": "https://www.kbmaeil.com/article/20261112500158"
+     "title": "이 대통령, 16∼19일 아세안·APEC 정상회의 참석",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-12T01:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000925390?sid=100"
     },
     {
-     "title": "李대통령, 16∼19일 아시아 정상외교 순방길... 필리핀 아세안·中 APEC 등...",
-     "press": "lawissue.co.kr",
-     "publishedAt": "2026-11-12T01:32:00.000Z",
-     "link": "https://www.lawissue.co.kr/view.php?ud=202611121029511135b3279dfb36_12"
+     "title": "靑 \"中APEC 계기 북미접촉 가능성 작아…그 전후는 단정 어려워\"",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-12T01:42:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/325055/?sc=Naver"
     },
     {
-     "title": "[속보]李대통령, 16∼19일 아세안·APEC 참석…필리핀·중국 순방",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-12T01:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000121162?sid=100"
+     "title": "靑 \"아세안·APEC 기간 북미 접촉 가능성 작아…전후는 배제 못 해\"",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-12T01:40:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=729045"
     }
    ]
   },
   {
-   "keyword": "LH 2조원 추가 투입",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 26,
-   "recent20": 3,
-   "press": 26,
-   "firstArticleAt": "2026-11-12T00:19:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[건설업계 동향] GS건설ㆍ남광토건ㆍLH (11.12)",
-     "press": "weeklytoday.com",
-     "publishedAt": "2026-11-12T01:28:00.000Z",
-     "link": "http://www.weeklytoday.com/news/articleView.html?idxno=801826"
-    },
-    {
-     "title": "LH, 신도시·용인 국가산단에 2조원 추가 투입",
-     "press": "srtimes.kr",
-     "publishedAt": "2026-11-12T01:26:00.000Z",
-     "link": "http://www.srtimes.kr/news/articleView.html?idxno=217397"
-    },
-    {
-     "title": "LH, 광명시흥·용인 반도체 산단에 2조 원 추가 투입…사업 속도",
-     "press": "iminju.net",
-     "publishedAt": "2026-11-12T01:24:00.000Z",
-     "link": "http://www.iminju.net/news/articleView.html?idxno=172333"
-    }
-   ]
-  },
-  {
-   "keyword": "임추위 전원 독립이사 구성",
+   "keyword": "네이버 AI 팩토리 2조원 계약",
    "sources": [
     "nate"
    ],
-   "articles90": 19,
-   "recent20": 6,
-   "press": 17,
-   "firstArticleAt": "2026-11-12T00:08:00.000Z",
+   "articles90": 63,
+   "recent20": 9,
+   "press": 56,
+   "firstArticleAt": "2026-11-12T00:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "당정 \"은행지주 CEO 연임 요건 강화… 임추위 4분의3, 주총 3분의2 찬성...",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-12T01:32:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261112500114"
+     "title": "[컨콜줍줍] 최수연 네이버 대표 “내년 상반기 AI팩토리 사업 매출 반영...",
+     "press": "dnews.co.kr",
+     "publishedAt": "2026-11-12T01:42:00.000Z",
+     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611121032115960747"
     },
     {
-     "title": "금융지주 CEO 연임 문턱 높인다…당정 \"임원추천위 전원 독립이사로 구...",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-12T01:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000965142?sid=100"
+     "title": "네이버 “美 AI 기업과 2조원 공급 계약…2028년 두자릿수 마진율 예상”...",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-12T01:38:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611120046"
     },
     {
-     "title": "[Invest]금융지주 회장 3연임에 '주총 75% 찬성' 필요…주주 독립이사 추...",
-     "press": "investchosun.com",
-     "publishedAt": "2026-11-12T01:24:00.000Z",
-     "link": "https://www.investchosun.com/site/data/html_dir/2026/11/12/2026111280047.html"
+     "title": "네이버, AI 팩토리 내년 흑자 자신..2028년 두 자릿수 마진 예고",
+     "press": "kpenews.com",
+     "publishedAt": "2026-11-12T01:36:00.000Z",
+     "link": "https://kpenews.com/View.aspx?No=4309083"
     }
    ]
   },
@@ -112,30 +112,62 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 16,
-   "recent20": 6,
-   "press": 16,
+   "articles90": 18,
+   "recent20": 7,
+   "press": 18,
    "firstArticleAt": "2026-11-12T00:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "이용철 “공소 취소, 지금은 답변 부적절”… ‘5.18 보상금 신청 이유...",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-12T01:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001204278?sid=102"
+    },
+    {
+     "title": "\"공소취소, 답변 부적절\"…또 말 아낀 이용철",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-12T01:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000925383?sid=102"
+    },
+    {
      "title": "이용철, 李 사건 공소취소 지휘 여부 또 즉답 피해 … \"지금 답변 부적...",
      "press": "newdaily.co.kr",
      "publishedAt": "2026-11-12T01:34:00.000Z",
      "link": "https://www.newdaily.co.kr/site/data/html/2026/11/12/2026111200089.html"
+    }
+   ]
+  },
+  {
+   "keyword": "발언하는 장동혁 대표",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 25,
+   "recent20": 3,
+   "press": 15,
+   "firstArticleAt": "2026-11-12T00:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "장동혁 다시 ‘리더십 시험대’…안에선 징계 논란, 밖에선 吳·韓 신경...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-12T01:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002722517?sid=100"
     },
     {
-     "title": "이용철 공소취소 여지 둔 李재판 5건...3건은 취소 가능",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-12T01:30:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/325048/?sc=Naver"
+     "title": "[포토] 발언하는 장동혁 대표",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-12T01:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005841687?sid=100"
     },
     {
-     "title": "국힘, '3무(無)' 이용철 지명 철회 촉구…\"전문성·독립성·도덕성 결여...",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-12T01:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004209004?sid=100"
+     "title": "장동혁 \"피고인 이재명, 자기 손으로 공소장 찢기 전 재판 재개해야\"",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-12T01:32:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1136926"
     }
    ]
   },
@@ -144,13 +176,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 16,
+   "articles90": 17,
    "recent20": 1,
-   "press": 12,
+   "press": 13,
    "firstArticleAt": "2026-11-12T00:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "美민주당, 공화당 '텃밭' 미시시피 상원 탈환",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-12T01:36:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3749708"
+    },
     {
      "title": "공화 텃밭 미시시피 상원 민주당 승리, 55석 확보…알래스카만 남았다",
      "press": "joongang.co.kr",
@@ -162,25 +200,18 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-12T01:11:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014317557?sid=104"
-    },
-    {
-     "title": "엔비디아 리더십 불확실성에 미국 규제 변수까지... 삼전·SK하닉 '이중...",
-     "press": "lawtv.kr",
-     "publishedAt": "2026-11-12T01:08:00.000Z",
-     "link": "https://www.lawtv.kr/news/articleView.html?idxno=61395"
     }
    ]
   },
   {
-   "keyword": "금융회사 지배구조 개선 협의회",
+   "keyword": "금융회사 지배구조 개선 당정협의",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 11,
-   "recent20": 3,
-   "press": 11,
-   "firstArticleAt": "2026-11-12T00:12:00.000Z",
+   "articles90": 10,
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-12T00:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -203,11 +234,43 @@
      "link": "https://www.m-i.kr/news/articleView.html?idxno=2017597"
     }
    ]
+  },
+  {
+   "keyword": "조희대 대법원장",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 12,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-12T00:21:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "與 \"한덕수 석방 가능성은 조희대 책임…의도적 재판 지연 중단하라\"(종...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-12T01:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014317641?sid=100"
+    },
+    {
+     "title": "혁신당 \"한덕수 석방 전 즉각 대법원장 탄핵해야\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-12T01:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002431738?sid=100"
+    },
+    {
+     "title": "혁신당 “조희대 즉각 탄핵하자…민주당은 시늉만 해”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-12T01:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012292379?sid=100"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 382,
+  "flagged": 386,
   "matched": 158,
   "avgLeadMin": 1447,
   "recent": [
