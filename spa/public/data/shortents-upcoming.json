@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T12:15:51.159Z",
+ "builtAt": "2026-11-12T12:25:54.455Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,12 +11,45 @@
  "measured": 23,
  "candidates": [
   {
+   "keyword": "김민석 최민희 감찰 지시",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 51,
+   "recent20": 20,
+   "press": 43,
+   "firstArticleAt": "2026-11-12T11:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "민주, '최민희 언행' 논란에 윤리감찰단 조사 지시",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-12T12:20:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3750555"
+    },
+    {
+     "title": "김민석, 최민희 언행 논란에 감찰조사 지시…\"심각하게 인식\"",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-12T12:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005842024?sid=100"
+    },
+    {
+     "title": "최민희, 잇따른 '언행 논란'…김민석, 감찰 조사 지시",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-12T12:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001977971?sid=102"
+    }
+   ]
+  },
+  {
    "keyword": "젠슨 황 해임 위기",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
    "articles90": 10,
-   "recent20": 4,
+   "recent20": 1,
    "press": 10,
    "firstArticleAt": "2026-11-12T10:58:00.000Z",
    "exclusive": false,
@@ -39,70 +72,6 @@
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-12T12:01:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012292847?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "천안서 발달장애 어머니",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-12T10:57:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "천안서 발달장애 10대 사망…학대 정황 발견, 母 긴급체포",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-12T11:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005353380?sid=102"
-    },
-    {
-     "title": "\"발달장애 아들 사망에 엄마 긴급체포\"…'결박 의혹' 수사",
-     "press": "tjb.co.kr",
-     "publishedAt": "2026-11-12T11:52:00.000Z",
-     "link": "https://www.tjb.co.kr/news05/bodo/view/id/106023"
-    },
-    {
-     "title": "\"아들이 숨을 안 쉰다\"…집 안에 묶여 있던 발달장애 10대 사망",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-12T11:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006409150?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "김승원 브로커 징역 4년 구형",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 3,
-   "press": 7,
-   "firstArticleAt": "2026-11-12T10:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "공소청, '김승원 청탁의혹' 브로커에 징역 4년 구형",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-12T12:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000925639?sid=102"
-    },
-    {
-     "title": "공소청, '김승원 청탁 의혹' 브로커 징역 4년 구형",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-12T12:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003154615?sid=102"
-    },
-    {
-     "title": "공소청, '김승원 후원금 청탁 의혹' 제넨셀 설립자에 징역 6개월 구형",
-     "press": "daily.hankooki.com",
-     "publishedAt": "2026-11-12T12:02:00.000Z",
-     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1424733"
     }
    ]
   },
@@ -139,12 +108,44 @@
    ]
   },
   {
+   "keyword": "김승원 브로커 징역 4년 구형",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-12T11:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "공소청, '김승원 청탁의혹' 브로커에 징역 4년 구형",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-12T12:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000925639?sid=102"
+    },
+    {
+     "title": "공소청, '김승원 청탁 의혹' 브로커 징역 4년 구형",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-12T12:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003154615?sid=102"
+    },
+    {
+     "title": "공소청, '김승원 후원금 청탁 의혹' 제넨셀 설립자에 징역 6개월 구형",
+     "press": "daily.hankooki.com",
+     "publishedAt": "2026-11-12T12:02:00.000Z",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1424733"
+    }
+   ]
+  },
+  {
    "keyword": "조희대",
    "sources": [
     "google"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 1,
    "press": 6,
    "firstArticleAt": "2026-11-12T10:58:00.000Z",
    "exclusive": false,
@@ -169,11 +170,75 @@
      "link": "https://n.news.naver.com/mnews/article/028/0002831985?sid=100"
     }
    ]
+  },
+  {
+   "keyword": "진, 96억 빌딩 매입",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T11:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "방탄소년단 진, 한남동 대로변 96억 상가 건물주 됐다…시세차익 82억 이...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-12T12:23:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000489854"
+    },
+    {
+     "title": "BTS 진, 한남동 빌딩 96억에 매입…건물 이름은 ‘지니’",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-12T12:17:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003541538"
+    },
+    {
+     "title": "BTS 진, 한남동 96억 꼬마빌딩 첫 매입… 건물명은 '지니'→한남 큰손 등...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-12T11:39:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001408105"
+    }
+   ]
+  },
+  {
+   "keyword": "부동산",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-12T11:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김민석 “부동산 기조, 일관돼야”…종부세 ‘정부안 유지’에 무게",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-12T12:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003482441?sid=100"
+    },
+    {
+     "title": "알스퀘어, 카드매출 데이터로 건물·매장 경쟁력 분석…상업용 부동산 ...",
+     "press": "venturesquare.net",
+     "publishedAt": "2026-11-12T11:08:00.000Z",
+     "link": "https://www.venturesquare.net/1127940/"
+    },
+    {
+     "title": "與 지도부, '종부세 14억' 선 그었지만… 수도권 의원들 \"문제는 부동산...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-12T11:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000965309?sid=100"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 386,
+  "flagged": 388,
   "matched": 137,
   "avgLeadMin": 850,
   "recent": [
