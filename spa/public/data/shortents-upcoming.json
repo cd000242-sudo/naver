@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T19:50:12.964Z",
+ "builtAt": "2026-11-12T20:00:16.908Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,30 +16,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 26,
+   "articles90": 30,
    "recent20": 8,
-   "press": 18,
-   "firstArticleAt": "2026-11-12T18:21:00.000Z",
+   "press": 20,
+   "firstArticleAt": "2026-11-12T18:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨 황, 엔비디아 CEO 사임…주가 14% 급락·후임 선정 착수",
-     "press": "aitimes.com",
-     "publishedAt": "2026-11-12T19:48:00.000Z",
-     "link": "https://www.aitimes.com/news/articleView.html?idxno=217348"
+     "title": "로이터 \"젠슨 황, 엔비디아 또 다른 직원과 세 번째 불륜 있었다\"",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-12T19:56:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261112001495"
     },
     {
-     "title": "'잡스 없는 애플' 닮은 엔비디아…젠슨 황의 빈자리, 얼마나 클까",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-12T19:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000142174?sid=101"
+     "title": "[美증시 특징주] 엔비디아, '대체불가' 젠슨황 퇴진에 또 폭락…경영 불...",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-12T19:54:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1137192"
     },
     {
-     "title": "엔비디아에 안보 우선 주문…물레나르, 수출통제 입법 촉구",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-12T19:42:00.000Z",
-     "link": "https://www.tokenpost.kr/news/policy/437335"
+     "title": "임시 CEO는 크레스…엔비디아 정식 후임, 예측시장 1위는?",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-12T19:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006409188?sid=101"
     }
    ]
   },
@@ -50,7 +50,7 @@
     "google"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-12T18:47:00.000Z",
    "exclusive": false,
