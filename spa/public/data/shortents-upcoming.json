@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T23:21:55.760Z",
+ "builtAt": "2026-11-12T23:32:01.029Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,62 @@
    "sources": [
     "nate"
    ],
-   "articles90": 14,
-   "recent20": 4,
-   "press": 13,
-   "firstArticleAt": "2026-11-12T21:52:00.000Z",
+   "articles90": 16,
+   "recent20": 6,
+   "press": 15,
+   "firstArticleAt": "2026-11-12T22:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[뉴욕채권] 국채가 급락…'이란 기대↓' 유가 급등에 10년물 5%대 안착",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-12T23:20:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4444544"
+     "title": "트럼프 \"이란과 합의 필요 없다\" 한마디에…국제유가 3% 넘게 급등",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-12T23:30:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=67657"
     },
     {
-     "title": "트럼프 \"이란 합의 필요 없다\"...'협상론' 밴스에 제동",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-12T23:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432221?sid=104"
+     "title": "트럼프 \"이란과 협상 불필요\"…밴스에 '민주당 부패 척결' 전념 지시",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-12T23:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009286995?sid=104"
     },
     {
-     "title": "트럼프 \"이란과 합의 필요없다...그런 시대는 지나\"",
-     "press": "opinionnews.co.kr",
+     "title": "트럼프 “이란과 합의 필요 없다···밴스, 다른 임무 집중해야”",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-12T23:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003482471?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "하나·부산은행 상반기 1위",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 11,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-12T22:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "하나·부산은행, 금융위 상반기 기술금융 평가서 1위",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-12T23:22:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/325175/?sc=Naver"
+    },
+    {
+     "title": "상반기 기술금융 평가 1위 하나은행…기업은행 2위",
+     "press": "newsway.co.kr",
+     "publishedAt": "2026-11-12T23:18:00.000Z",
+     "link": "https://www.newsway.co.kr/news/view?ud=2026111308115796498"
+    },
+    {
+     "title": "상반기 기술금융 평가서 하나은행 1위...기업은행·부산은행도 두각",
+     "press": "m-economynews.com",
      "publishedAt": "2026-11-12T23:08:00.000Z",
-     "link": "http://www.opinionnews.co.kr/news/articleView.html?idxno=147018"
+     "link": "https://www.m-economynews.com/news/article.html?no=72961"
     }
    ]
   },
@@ -47,30 +79,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 12,
+   "articles90": 11,
    "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-12T21:54:00.000Z",
+   "press": 11,
+   "firstArticleAt": "2026-11-12T22:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[뉴욕증시] 젠슨 황 퇴진에 하락…나스닥 0.4%↓",
+     "press": "segyebiz.com",
+     "publishedAt": "2026-11-12T23:30:00.000Z",
+     "link": "http://www.segyebiz.com/newsView/20261113503246?OutUrl=naver"
+    },
+    {
+     "title": "젠슨 황 전격 사임·유가 급등에 나스닥 0.39%↓ [뉴욕증시]",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-12T23:26:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2018093"
+    },
     {
      "title": "뉴욕증시, 3대 지수 하락…젠슨 황 사임에 엔비디아 약세",
      "press": "issuenbiz.com",
      "publishedAt": "2026-11-12T23:06:00.000Z",
      "link": "http://www.issuenbiz.com/news/articleView.html?idxno=81550"
-    },
-    {
-     "title": "[뉴욕증시] 나스닥, 젠슨 황 사임 충격에 0.39%↓…금리·유가 상승도 영...",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-12T23:04:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5082966"
-    },
-    {
-     "title": "젠슨 황 퇴진에 뉴욕증시 하락‥나스닥 0.4%↓",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-12T22:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001535353?sid=101"
     }
    ]
   },
@@ -80,7 +112,7 @@
     "nate"
    ],
    "articles90": 11,
-   "recent20": 3,
+   "recent20": 1,
    "press": 10,
    "firstArticleAt": "2026-11-12T22:07:00.000Z",
    "exclusive": false,
@@ -107,66 +139,66 @@
    ]
   },
   {
-   "keyword": "하나·부산은행 상반기 1위",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 10,
-   "firstArticleAt": "2026-11-12T22:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "상반기 기술금융 평가 1위 하나은행…기업은행 2위",
-     "press": "newsway.co.kr",
-     "publishedAt": "2026-11-12T23:18:00.000Z",
-     "link": "https://www.newsway.co.kr/news/view?ud=2026111308115796498"
-    },
-    {
-     "title": "상반기 기술금융 평가서 하나은행 1위...기업은행·부산은행도 두각",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-12T23:08:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=72961"
-    },
-    {
-     "title": "하나은행 신용대출·투자공급액 탁월…기술금융 평가 1위",
-     "press": "mbnmoney.mbn.co.kr",
-     "publishedAt": "2026-11-12T23:06:00.000Z",
-     "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005961355"
-    }
-   ]
-  },
-  {
    "keyword": "10월 수출물량 증가",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 9,
    "recent20": 3,
-   "press": 7,
+   "press": 9,
    "firstArticleAt": "2026-11-12T22:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "환율·유가 하락에 수입물가 1.8%↓…수출물량은 역대 최대 증가",
+     "press": "youthdaily.co.kr",
+     "publishedAt": "2026-11-12T23:30:00.000Z",
+     "link": "https://www.youthdaily.co.kr/news/article.html?no=229785"
+    },
+    {
+     "title": "10월 수출물가 0.7%↑…반도체 호조에 석 달 만에 반등",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-12T23:26:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=624961"
+    },
+    {
      "title": "10월 수출물가 0.7% 상승…반도체 가격 오름세에 반등",
      "press": "financialpost.co.kr",
      "publishedAt": "2026-11-12T23:18:00.000Z",
      "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=300635"
+    }
+   ]
+  },
+  {
+   "keyword": "리센느, 악성 게시물 고소 완료",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 4,
+   "press": 8,
+   "firstArticleAt": "2026-11-12T22:34:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "리센느 측, 악성 게시물 작성자 형사 고소… \"모든 수단 동원해 대응\"",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-12T23:31:00.000Z",
+     "link": "https://m.entertain.naver.com/article/469/0000965360"
     },
     {
-     "title": "10월 수입물가 1.8% 하락 전환...환율·유가 하락 영",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-12T23:04:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=72960"
+     "title": "리센느, 악성 게시물 법적 대응…\"1차 형사 고소 완료\"",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-12T23:27:00.000Z",
+     "link": "https://m.entertain.naver.com/article/629/0000551509"
     },
     {
-     "title": "유가·환율 동반 하락에 10월 수입물가 1.8%↓…한 달 만에 하락 전환",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-12T23:02:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4444540"
+     "title": "리센느, 악플러에 칼 빼들었다“1차 형사 고소…초범·반성문도 선처 없...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-12T23:25:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001147152"
     }
    ]
   },
@@ -176,61 +208,61 @@
     "signal.bz"
    ],
    "articles90": 7,
-   "recent20": 2,
+   "recent20": 3,
    "press": 7,
-   "firstArticleAt": "2026-11-12T21:56:00.000Z",
+   "firstArticleAt": "2026-11-12T22:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "젠슨 황, 33년 만에 엔비디아서 퇴장…AI업계 충격파",
+     "press": "choicenews.co.kr",
+     "publishedAt": "2026-11-12T23:26:00.000Z",
+     "link": "http://www.choicenews.co.kr/news/articleView.html?idxno=173154"
+    },
+    {
+     "title": "[로드픽] 젠슨 황 퇴진 후폭풍…엔비디아 여진, 한국 AI 생태계도 \"흔들...",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-12T23:22:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=67654"
+    },
     {
      "title": "젠슨 황 사퇴 후폭풍…엔비디아 주가 4.3% 하락, 삼성전자·SK하이닉스 ...",
      "press": "segye.com",
      "publishedAt": "2026-11-12T23:20:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/022/0004174845?sid=101"
-    },
-    {
-     "title": "젠슨 황 사임 후폭풍…환율도 1340원대 재진입 시도[외환브리핑]",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-12T23:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006409253?sid=101"
-    },
-    {
-     "title": "[뉴스타트] 두 번 불륜에 쫓겨난 젠슨 황...엔비디아 넘어 AI 산업에 충...",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-12T22:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432207?sid=101"
     }
    ]
   },
   {
-   "keyword": "리센느, 악성 게시물 고소 완료",
+   "keyword": "김서아 기쁨조 후보",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 5,
-   "recent20": 2,
+   "articles90": 6,
+   "recent20": 0,
    "press": 5,
-   "firstArticleAt": "2026-11-12T22:34:00.000Z",
-   "exclusive": true,
+   "firstArticleAt": "2026-11-12T22:04:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "리센느, 악플러 칼 뽑았다 \"반성문 제출해도 처벌, 선처 없다\"(공식)",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-12T23:18:00.000Z",
-     "link": "http://www.joynews24.com/view/2025783"
+     "title": "11세부터 '기쁨조' 후보…북한 무용수 출신 김서아의 고백",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-12T23:00:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=624945"
     },
     {
-     "title": "리센느, 쏟아지는 악플 루머에 칼빼들었다 “악질 범죄 형사고소 완료”",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-12T23:12:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001187019"
-    },
-    {
-     "title": "리센느, 악플러에 초강수…“반성문 제출해도 선처 없다”",
-     "press": "sports.donga.com",
+     "title": "탈북 유튜버 김서아, 기쁨조 최종 후보까지 올랐다…“3명 중 2명 탈락”",
+     "press": "segye.com",
      "publishedAt": "2026-11-12T22:57:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001304574"
+     "link": "https://m.entertain.naver.com/article/022/0004174843"
+    },
+    {
+     "title": "탈북미녀 김서아 \"북한서 17세까지 기쁨조 후보\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-12T22:19:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014319762"
     }
    ]
   },
@@ -240,7 +272,7 @@
     "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-12T22:32:00.000Z",
    "exclusive": false,
@@ -267,44 +299,12 @@
    ]
   },
   {
-   "keyword": "김서아 기쁨조 후보 고백",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T22:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "11세부터 '기쁨조' 후보…북한 무용수 출신 김서아의 고백",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-12T23:00:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=624945"
-    },
-    {
-     "title": "탈북 유튜버 김서아, 기쁨조 최종 후보까지 올랐다…“3명 중 2명 탈락”",
-     "press": "segye.com",
-     "publishedAt": "2026-11-12T22:57:00.000Z",
-     "link": "https://m.entertain.naver.com/article/022/0004174843"
-    },
-    {
-     "title": "'탈북 미녀' 김서아 \"11세에 기쁨조 후보 뽑혀 17세까지 불려 다녔다\" [...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-12T22:13:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004124633"
-    }
-   ]
-  },
-  {
    "keyword": "이세창, 급성 맹장염으로 긴급 수술",
    "sources": [
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-12T22:06:00.000Z",
    "exclusive": false,
@@ -333,7 +333,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 415,
+  "flagged": 416,
   "matched": 150,
   "avgLeadMin": 661,
   "recent": [
