@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T19:09:48.909Z",
+ "builtAt": "2026-11-12T19:19:52.608Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,19 +15,13 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-12T17:42:00.000Z",
+   "articles90": 11,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-12T17:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "연방하원, 젠슨황 퇴진에도 의회증언 추진…\"안나오면 소환장\"",
-     "press": "radiokorea.com",
-     "publishedAt": "2026-11-12T18:56:00.000Z",
-     "link": "https://www.radiokorea.com/news/article.php?uid=509458"
-    },
     {
      "title": "젠슨 황, 결국 불명예 퇴진...두 번 불륜에 33년 만에 쫓겨나",
      "press": "ytn.co.kr",
@@ -35,10 +29,48 @@
      "link": "https://n.news.naver.com/mnews/article/052/0002432178?sid=104"
     },
     {
+     "title": "연방하원, 젠슨황 퇴진에도 의회증언 추진…\"안나오면 소환장\"",
+     "press": "radiokorea.com",
+     "publishedAt": "2026-11-12T18:56:00.000Z",
+     "link": "https://www.radiokorea.com/news/article.php?uid=509458"
+    },
+    {
      "title": "미 하원, 젠슨 황 퇴진에도 의회 증언 추진…“안 나오면 소환장”",
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-12T18:41:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012293046?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "공장",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T18:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'Made in Germany' 보기 쉽지 않다...벤츠, 독일 공장 폐쇄 검토",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-12T18:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000543390?sid=104"
+    },
+    {
+     "title": "벤츠도 독일 공장 폐쇄 검토...\"국내 투자 중단\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-12T18:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432176?sid=104"
+    },
+    {
+     "title": "폭스바겐 이어 벤츠도 “독일 내 공장 폐쇄 검토”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-12T18:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012293047?sid=104"
     }
    ]
   },
@@ -77,7 +109,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 393,
+  "flagged": 394,
   "matched": 141,
   "avgLeadMin": 785,
   "recent": [
