@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T08:44:05.431Z",
+ "builtAt": "2026-11-12T08:54:08.944Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,25 +8,57 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 24,
  "candidates": [
+  {
+   "keyword": "발언하는 이재명 대통령",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 37,
+   "recent20": 9,
+   "press": 31,
+   "firstArticleAt": "2026-11-12T07:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[뉴스클레임 사설] 급락장 '저평가' 외치는 대통령, 손실 책임 누가 지나",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-12T08:52:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082467"
+    },
+    {
+     "title": "이하늘 \"이재명 정부 꼭 성공하길, 망하기 바란 적 無\" [MHN:픽]",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-12T08:44:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000489833"
+    },
+    {
+     "title": "민주 “이수정, 이 대통령 두 아들에 사과하라”",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-12T08:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002831942?sid=100"
+    }
+   ]
+  },
   {
    "keyword": "한전 3분기 실적",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 37,
-   "recent20": 9,
-   "press": 35,
-   "firstArticleAt": "2026-11-12T07:15:00.000Z",
+   "articles90": 32,
+   "recent20": 6,
+   "press": 30,
+   "firstArticleAt": "2026-11-12T07:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한국전력 3분기 영업이익 71% 급감",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-12T08:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005762995?sid=101"
+     "title": "한전 3분기 영업익, 71% ‘뚝’…중동전쟁發 연료비 상승 에도 요금 동결...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-12T08:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002722796?sid=101"
     },
     {
      "title": "중동전쟁 여파에 한전 3분기 영업익 70% 뚝…송전망 투자 빨간불",
@@ -35,42 +67,10 @@
      "link": "https://n.news.naver.com/mnews/article/011/0004681588?sid=101"
     },
     {
-     "title": "한전, 3분기 영업익 71% 급감…연료비 상승에 수익성 악화",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-12T08:38:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2018024"
-    }
-   ]
-  },
-  {
-   "keyword": "발언하는 이재명 대통령",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 39,
-   "recent20": 11,
-   "press": 30,
-   "firstArticleAt": "2026-11-12T07:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령 \"자본시장 여전히 저평가…장기투자·주주환원 개혁 속도내야...",
-     "press": "polinews.co.kr",
-     "publishedAt": "2026-11-12T08:41:00.000Z",
-     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=748345"
-    },
-    {
-     "title": "[퇴근길 정치 픽] \"다음주 삼성전자 면접본다\" 이재명·이재용 웃음짓게...",
-     "press": "newspim.com",
+     "title": "한국전력 3분기 영업이익 71% 급감",
+     "press": "mk.co.kr",
      "publishedAt": "2026-11-12T08:40:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261112001429"
-    },
-    {
-     "title": "'지방소비세 단계적 확대' 보고에…李대통령 \"지방재정 자율성 높여야\"...",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-12T08:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005841972?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/009/0005762995?sid=101"
     }
    ]
   },
@@ -79,30 +79,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 24,
-   "recent20": 1,
-   "press": 21,
-   "firstArticleAt": "2026-11-12T07:21:00.000Z",
+   "articles90": 26,
+   "recent20": 4,
+   "press": 23,
+   "firstArticleAt": "2026-11-12T07:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"재미없을 수 있겠나\"…5년 만에 만난 김윤석→구교환, 제대로 맞붙은 ...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-12T08:42:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000784192"
+     "title": "김윤석X구교환 콤비의 연기 차력쇼…홍의정 감독 '폭설' [종합]",
+     "press": "digitalchosun.dizzo.com",
+     "publishedAt": "2026-11-12T08:46:00.000Z",
+     "link": "http://digitalchosun.dizzo.com/site/data/html_dir/2026/11/12/2026111280213.html"
     },
     {
-     "title": "‘폭설’ 김윤석·구교환, 연기부터 서사까지 빈틈없다…밀도 높은 미스...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-12T08:24:00.000Z",
-     "link": "https://m.entertain.naver.com/article/119/0003154571"
+     "title": "\"구교환에게 짜릿한 전율\"vs \"김윤석 선배와 매순간이 감탄\" 김윤석·구...",
+     "press": "sports.hankooki.com",
+     "publishedAt": "2026-11-12T08:46:00.000Z",
+     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6943457"
     },
     {
-     "title": "'이옥섭과 결혼' 구교환, 유부남 공개 후 첫 영화 '폭설'...개인사 언급...",
-     "press": "starnewsk.com",
-     "publishedAt": "2026-11-12T08:12:00.000Z",
-     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60960"
+     "title": "전율 느낀 김윤석, 매 순간 감탄한 구교환… 유머·긴장 넘나드는 '폭설...",
+     "press": "sisaweek.com",
+     "publishedAt": "2026-11-12T08:44:00.000Z",
+     "link": "https://www.sisaweek.com/news/articleView.html?idxno=238952"
     }
    ]
   },
@@ -111,24 +111,24 @@
    "sources": [
     "nate"
    ],
-   "articles90": 19,
-   "recent20": 4,
+   "articles90": 18,
+   "recent20": 2,
    "press": 18,
-   "firstArticleAt": "2026-11-12T07:19:00.000Z",
+   "firstArticleAt": "2026-11-12T07:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[뉴스클레임 사설] 급락장 '저평가' 외치는 대통령, 손실 책임 누가 지나",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-12T08:52:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082467"
+    },
     {
      "title": "李대통령 \"자본시장 여전히 저평가…장기투자·주주환원 개혁 속도내야...",
      "press": "polinews.co.kr",
      "publishedAt": "2026-11-12T08:41:00.000Z",
      "link": "https://www.polinews.co.kr/news/articleView.html?idxno=748345"
-    },
-    {
-     "title": "李대통령 “국내 자본시장, 여전히 저평가된 매력적 투자 대상”",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-12T08:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003564816?sid=100"
     },
     {
      "title": "이 대통령 “국내 자본시장 저평가…기업가치 제고·코스닥 육성 속도”",
@@ -139,28 +139,28 @@
    ]
   },
   {
-   "keyword": "한국, APBC 첫 경기서 호주에 패배",
+   "keyword": "한국 야구, 호주에 7-8 패배",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 19,
-   "recent20": 3,
-   "press": 18,
-   "firstArticleAt": "2026-11-12T07:16:00.000Z",
+   "articles90": 17,
+   "recent20": 2,
+   "press": 17,
+   "firstArticleAt": "2026-11-12T07:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "6회 대역전극도 소용없었다…한국 야구, 호주에 충격패",
+     "press": "jndn.com",
+     "publishedAt": "2026-11-12T08:44:00.000Z",
+     "link": "http://www.jndn.com/article.php?aid=1794472901442955010"
+    },
     {
      "title": "마운드 경험부족-2루수 부재 우려가 현실로...한국 야구, APBC 첫판부터 ...",
      "press": "spochoo.com",
      "publishedAt": "2026-11-12T08:35:00.000Z",
      "link": "https://m.sports.naver.com/kbaseball/article/529/0000079247"
-    },
-    {
-     "title": "야구 대표팀, APBC 개막전서 호주에 충격 재역전패 7-8",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-12T08:32:00.000Z",
-     "link": "https://www.insight.co.kr/news/581829"
     },
     {
      "title": "6회 대역전에도 지키지 못했다…한국, 호주에 7대 8 재역전패",
@@ -171,34 +171,66 @@
    ]
   },
   {
-   "keyword": "젠슨 황 불륜 논란",
+   "keyword": "오산 원룸 시신 발견",
    "sources": [
     "signal.bz"
    ],
    "articles90": 16,
-   "recent20": 3,
-   "press": 14,
-   "firstArticleAt": "2026-11-12T07:16:00.000Z",
+   "recent20": 6,
+   "press": 16,
+   "firstArticleAt": "2026-11-12T07:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "오산 원룸서 30대 남성 시신…대형 비닐 봉투 안에서 발견",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-12T08:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002722795?sid=102"
+    },
+    {
+     "title": "수일째 연락 끊긴 30대 男, 원룸서 대형봉투 싸인 시신으로 발견",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-12T08:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005440530?sid=102"
+    },
+    {
+     "title": "오산 원룸서 대형 비닐봉투에 담긴 30대 남성 시신 발견…경찰 수사",
+     "press": "pressian.com",
+     "publishedAt": "2026-11-12T08:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/002/0002465623?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황 불륜 논란",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 15,
+   "recent20": 3,
+   "press": 15,
+   "firstArticleAt": "2026-11-12T07:25:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'시총 충격' 엔비디아 딜레마…젠슨 황 해임? “1조달러가 걸렸다”",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-12T08:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003485205?sid=104"
+    },
+    {
+     "title": "젠슨황 스캔들에 中 외교부 \"간첩 서사 중단하라\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-12T08:50:00.000Z",
+     "link": "https://www.ajunews.com/view/20261112174733425"
+    },
     {
      "title": "사내 불륜까지 터지자 … 황 신뢰했던 이사회도 돌아서",
      "press": "mk.co.kr",
      "publishedAt": "2026-11-12T08:37:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/009/0005762985?sid=104"
-    },
-    {
-     "title": "흔들리는 젠슨 황, 33년 만에 퇴진 위기…“국내 기업 오히려 기회될 수...",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-12T08:34:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611120179"
-    },
-    {
-     "title": "‘AI 황제’ 젠슨 황, 해임 절차 돌입…삼성·SK, 엔비디아와 ‘AI 칩 동...",
-     "press": "ceoscoredaily.com",
-     "publishedAt": "2026-11-12T08:32:00.000Z",
-     "link": "https://www.ceoscoredaily.com/page/view/2026111212414225562"
     }
    ]
   },
@@ -207,62 +239,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 29,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-12T07:16:00.000Z",
+   "articles90": 30,
+   "recent20": 4,
+   "press": 14,
+   "firstArticleAt": "2026-11-12T07:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"기소 송치율 4.9%·미숙련 인력 80%···건보공단 특사경 도입 즉각 철...",
-     "press": "doctorstimes.com",
-     "publishedAt": "2026-11-12T08:26:00.000Z",
-     "link": "http://www.doctorstimes.com/news/articleView.html?idxno=241053"
+     "title": "국민건강보험공단 특별사법경찰 반대 궐기대회",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-12T08:52:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3750394"
     },
     {
-     "title": "국민의힘, 의협 궐기대회 참석…“건보공단 특사경 법안 저지 함께할 것...",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-12T08:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003058860?sid=100"
+     "title": "건보공단 특사경 반대 궐기대회",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-12T08:50:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3750392"
     },
     {
-     "title": "건보공단 특사경 반대시위 하는 김승수 의협 총무이사",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-12T08:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016439209?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "오산 원룸 시신 발견",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 12,
-   "recent20": 5,
-   "press": 12,
-   "firstArticleAt": "2026-11-12T07:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "오산 원룸서 비닐 싸인 30대 시신 발견... 경찰 수사 중",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-12T08:42:00.000Z",
-     "link": "https://www.insight.co.kr/news/581825"
-    },
-    {
-     "title": "\"연락이 안 돼요\" 원룸 문 열었더니…대형 비닐봉투 속 30대 시신",
-     "press": "weekly.chosun.com",
-     "publishedAt": "2026-11-12T08:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/053/0000062995?sid=102"
-    },
-    {
-     "title": "오산 원룸서 남성 시신 발견...\"비닐 봉투에 담겨\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-12T08:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002431991?sid=102"
+     "title": "의협 \"건보공단 강제수사권 안 된다\" … 장동혁 \"법안 저지 힘쓸 것\"",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-12T08:50:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/12/2026111200379.html"
     }
    ]
   },
@@ -272,7 +272,7 @@
     "signal.bz"
    ],
    "articles90": 12,
-   "recent20": 2,
+   "recent20": 1,
    "press": 11,
    "firstArticleAt": "2026-11-12T07:25:00.000Z",
    "exclusive": false,
@@ -303,10 +303,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 1,
+   "articles90": 6,
+   "recent20": 0,
    "press": 6,
-   "firstArticleAt": "2026-11-12T07:16:00.000Z",
+   "firstArticleAt": "2026-11-12T07:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -335,30 +335,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 16,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T07:17:00.000Z",
+   "articles90": 17,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-12T07:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "정점식, 정순택 대주교 예방...\"세계청년대회 전폭 지원\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-12T08:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002431999?sid=100"
+    },
+    {
+     "title": "정순택 대주교 \"서울 WYD, 종교·여야 넘어 온 국민 힘 모아야\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-12T08:48:00.000Z",
+     "link": "https://www.ajunews.com/view/20261112173201375"
+    },
     {
      "title": "정점식, 정순택 서울대교구장 대주교 예방",
      "press": "newspim.com",
      "publishedAt": "2026-11-12T08:05:00.000Z",
      "link": "https://www.newspim.com/news/view/20261112001392"
-    },
-    {
-     "title": "정점식 원내대표, 정순택 대주교 예방… 세계청년대회 예산 지원 약속",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-12T08:04:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261112001390"
-    },
-    {
-     "title": "국민의힘, 정순택 대주교 예방",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-12T08:04:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261112001391"
     }
    ]
   },
