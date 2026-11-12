@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T20:10:27.700Z",
+ "builtAt": "2026-11-12T20:20:33.469Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,30 +16,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 34,
-   "recent20": 11,
-   "press": 22,
-   "firstArticleAt": "2026-11-12T18:41:00.000Z",
+   "articles90": 38,
+   "recent20": 13,
+   "press": 25,
+   "firstArticleAt": "2026-11-12T18:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨 황 사임에 엔비디아 4%대 하락…외국인, 삼성전자 7449억 사고 SK하...",
-     "press": "greened.kr",
-     "publishedAt": "2026-11-12T20:07:00.000Z",
-     "link": "https://www.greened.kr/news/articleView.html?idxno=354572"
+     "title": "'AI 제국' 이끈 젠슨 황 퇴장…엔비디아 후계자 찾기 돌입",
+     "press": "straightnews.co.kr",
+     "publishedAt": "2026-11-12T20:16:00.000Z",
+     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=315276"
     },
     {
-     "title": "트럼프 \"젠슨 황 이을 사람은 애플 팀 쿡\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-12T20:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000925683?sid=104"
+     "title": "[속보] 사임한 젠슨 황, 세 번째 불륜 의혹까지…또 다른 엔비디아 직원",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-12T20:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002832028?sid=104"
     },
     {
-     "title": "젠슨 황, 엔비디아 CEO사임…CFO가 임시경영",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-12T20:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000925681?sid=104"
+     "title": "내쫓긴 젠슨황…美거대기업 일군 창업자 '파문' 흑역사 반복",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-12T20:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016439576?sid=104"
     }
    ]
   },
@@ -49,30 +49,62 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 7,
-   "recent20": 3,
-   "press": 7,
-   "firstArticleAt": "2026-11-12T18:47:00.000Z",
+   "articles90": 8,
+   "recent20": 4,
+   "press": 8,
+   "firstArticleAt": "2026-11-12T18:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "경산 박스 공장에서 큰 불…인명피해 없어",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-12T20:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000925695?sid=102"
+    },
+    {
+     "title": "충남 202조 투자 '말이 아닌 착공으로'…삼성 아산공장 인허가 10개월→...",
+     "press": "greened.kr",
+     "publishedAt": "2026-11-12T20:10:00.000Z",
+     "link": "https://www.greened.kr/news/articleView.html?idxno=354563"
+    },
     {
      "title": "美의회 초당적 ‘칩 통제’ 꺼냈다… 삼전닉스 中공장 영향권",
      "press": "seoul.co.kr",
      "publishedAt": "2026-11-12T20:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/081/0003698914?sid=101"
-    },
-    {
-     "title": "반도체 팔던 한국, ‘AI 공장주’로…해외 수요 잡는다",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-12T20:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009286852?sid=105"
-    },
+    }
+   ]
+  },
+  {
+   "keyword": "전기",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T19:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
     {
      "title": "물·전기 끌어와도 \"지을 사람이 없어\"...반도체 공장 건설 '비상'",
      "press": "mt.co.kr",
      "publishedAt": "2026-11-12T20:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/008/0005440622?sid=101"
+    },
+    {
+     "title": "AI 전력 수요 LNG로 대응…골든타임 내 짓느냐가 관건[대한민국 전기국...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-12T20:00:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2647093"
+    },
+    {
+     "title": "李대통령 “신속한 투자 실행 감사” 이재용 “대한민국 도약 전기”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-12T19:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003762245?sid=100"
     }
    ]
   },
@@ -82,10 +114,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 3,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T18:48:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-12T19:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -112,7 +144,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 393,
+  "flagged": 394,
   "matched": 140,
   "avgLeadMin": 790,
   "recent": [
