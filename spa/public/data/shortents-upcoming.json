@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T13:06:11.820Z",
+ "builtAt": "2026-11-12T13:16:17.086Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,13 +16,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 75,
-   "recent20": 9,
-   "press": 58,
-   "firstArticleAt": "2026-11-12T11:38:00.000Z",
+   "articles90": 63,
+   "recent20": 8,
+   "press": 53,
+   "firstArticleAt": "2026-11-12T11:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "최민희 \"李 대통령도 尹 탄핵 반대\" 발언 파장 … 김민석, 崔 감찰조사 ...",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-12T13:10:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/12/2026111200417.html"
+    },
     {
      "title": "김민석, '언행 논란' 최민희 감찰조사 지시",
      "press": "yonhapnewstv.co.kr",
@@ -34,12 +40,70 @@
      "press": "news.jtbc.co.kr",
      "publishedAt": "2026-11-12T13:04:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/437/0000520512?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "소노 역전승",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 10,
+   "recent20": 0,
+   "press": 9,
+   "firstArticleAt": "2026-11-12T12:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이정현 31점 폭발…고양 소노, 대구 가스공사에 1점 차 역전승",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-12T12:36:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16275198"
     },
     {
-     "title": "김민석, 최민희 윤리감찰 지시…\"최근 언행 논란 심각하게 인식\"",
-     "press": "mt.co.kr",
+     "title": "[AI상보] '하이퍼 가드' 이정현 31점, 소노 가스공사에 88-87 대역전극",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-12T12:31:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261112001485"
+    },
+    {
+     "title": "'이정현 31점' 소노, 한국가스공사에 88-87 역전승…2연승",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-12T12:22:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/421/0009286768"
+    }
+   ]
+  },
+  {
+   "keyword": "최성훈 개그맨",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 7,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-12T12:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'특종세상' 개그맨 최성훈, 연이은 사업 실패 후 시골에서 유튜브하는 ...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-12T13:12:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16275232"
+    },
+    {
+     "title": "\"미치고 홀렸다\" 톱개그맨의 몰락..사업 실패에 뇌경색 덮친 '사라진 26...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-12T13:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004466318"
+    },
+    {
+     "title": "개그맨 최성훈, 잘나가다 잠적한 이유 \"노래방 사업 때문..자연스럽게 ...",
+     "press": "starnewskorea.com",
      "publishedAt": "2026-11-12T13:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005440578?sid=100"
+     "link": "https://m.entertain.naver.com/article/108/0003487034"
     }
    ]
   },
@@ -48,11 +112,11 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
+   "articles90": 5,
    "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-12T11:41:00.000Z",
-   "exclusive": true,
+   "press": 5,
+   "firstArticleAt": "2026-11-12T12:02:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
@@ -76,46 +140,14 @@
    ]
   },
   {
-   "keyword": "이정현 31점 소노 역전승",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-12T12:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이정현 31점 폭발…고양 소노, 대구 가스공사에 1점 차 역전승",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-12T12:36:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16275198"
-    },
-    {
-     "title": "[AI상보] '하이퍼 가드' 이정현 31점, 소노 가스공사에 88-87 대역전극",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-12T12:31:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261112001485"
-    },
-    {
-     "title": "이정현·오브라이언트 59점 합작…소노, 가스공사에 짜릿한 1점차 역전...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-12T12:22:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/076/0004466308"
-    }
-   ]
-  },
-  {
    "keyword": "조희대",
    "sources": [
     "google"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-12T11:46:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T12:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -126,7 +158,7 @@
      "link": "https://www.polinews.co.kr/news/articleView.html?idxno=748367"
     },
     {
-     "title": "법원행정처장, 여당 내 '한덕수 석방시 조희대 탄핵' 주장에 \"부적절\"",
+     "title": "법원행정처장, 여당 내 '한덕수 석방 시 조희대 탄핵' 주장에 \"부적절\"",
      "press": "hankookilbo.com",
      "publishedAt": "2026-11-12T12:29:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/469/0000965315?sid=102"
@@ -136,102 +168,6 @@
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-12T12:06:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/055/0001402651?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "최성훈 개그맨",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T12:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "개그맨 최성훈, 잘나가다 잠적한 이유 \"노래방 사업 때문..자연스럽게 ...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-12T13:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003487034"
-    },
-    {
-     "title": "개그맨 최성훈 \"뇌경색으로 쓰러져, 건강 망가지며 대상포진·당뇨 생겨...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-12T12:49:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003487033"
-    },
-    {
-     "title": "헬기 타고 행사 누볐던 개그맨 최성훈, 20년 공백 깬 근황",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-12T12:18:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3750554"
-    }
-   ]
-  },
-  {
-   "keyword": "부동산",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T12:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김포시, 안전전세 관리단과 부동산 중개 현장 방문",
-     "press": "cnbnews.com",
-     "publishedAt": "2026-11-12T12:40:00.000Z",
-     "link": "https://www.cnbnews.com/news/articleView.html?idxno=1023626"
-    },
-    {
-     "title": "빌사부, 내달 5일 '부동산 창업 아카데미'",
-     "press": "idaegu.co.kr",
-     "publishedAt": "2026-11-12T12:34:00.000Z",
-     "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=565218"
-    },
-    {
-     "title": "한국부동산원, 전국 아파트 매매가 0.07% 상승…수도권·서울 동반 오름...",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-12T12:32:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3750566"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황 해임 위기 논의",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T11:44:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"엔비디아 이사회 젠슨 황 해임 논의\"...외부 CEO 영입설도",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-12T12:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432102?sid=104"
-    },
-    {
-     "title": "엔비디아 이사회 긴급 회의…젠슨 황 결국 ‘해임 수순’?",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-12T12:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012292847?sid=104"
-    },
-    {
-     "title": "엔비디아 CEO, 외도 인정 3일 만에 해임 위기...이사회 논의 예정",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-12T11:44:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3750515"
     }
    ]
   },
@@ -266,46 +202,13 @@
      "link": "https://m.entertain.naver.com/article/609/0001186970"
     }
    ]
-  },
-  {
-   "keyword": "공항철도 파업",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-12T11:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "공항철도 노조 13일 하루 경고파업 예고",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-12T12:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012292860?sid=102"
-    },
-    {
-     "title": "공항철도 13일 하루 경고파업…출퇴근 시간대 운행 시간은?",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-12T12:04:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3750533"
-    },
-    {
-     "title": "공항철도 노조, 13일 경고파업 예고…개통 후 첫 파업 가능성",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-12T11:38:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3750512"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 386,
-  "matched": 139,
-  "avgLeadMin": 844,
+  "flagged": 383,
+  "matched": 138,
+  "avgLeadMin": 850,
   "recent": [
    {
     "keyword": "사고",
