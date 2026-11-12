@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T04:12:03.927Z",
+ "builtAt": "2026-11-12T04:22:07.435Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 9,
+ "measured": 8,
  "candidates": [
   {
    "keyword": "이재명 메가 프로젝트 점검회의",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 20,
-   "recent20": 2,
-   "press": 19,
-   "firstArticleAt": "2026-11-12T02:44:00.000Z",
+   "articles90": 19,
+   "recent20": 5,
+   "press": 18,
+   "firstArticleAt": "2026-11-12T02:53:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "[종합] 이재용 만난 이 대통령 \"과감한 투자 감사\"…지방 메가프로젝트...",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-12T04:08:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101135"
+     "title": "李대통령 \"메가프로젝트, '모두의 성장'으로 완성되도록 정책 역량 집중...",
+     "press": "goodkyung.com",
+     "publishedAt": "2026-11-12T04:20:00.000Z",
+     "link": "https://www.goodkyung.com/news/articleView.html?idxno=293389"
     },
     {
-     "title": "이 대통령 “메가프로젝트, 생산시설 지방 확장 넘어 ‘모두의 성장’으...",
-     "press": "naeil.com",
-     "publishedAt": "2026-11-12T04:04:00.000Z",
-     "link": "https://www.naeil.com/news/read/608578?ref=naver"
+     "title": "李대통령·이재용 회장, 충청 메가프로젝트 첫 삽...\"국가 도약 전기 마...",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-12T04:18:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=563318"
     },
     {
-     "title": "3대 메가, 충청서 본격 시동…李대통령·이재용 나란히 '첫 삽'",
-     "press": "chungnamilbo.co.kr",
-     "publishedAt": "2026-11-12T03:50:00.000Z",
-     "link": "http://www.chungnamilbo.co.kr/news/articleView.html?idxno=920436"
+     "title": "이재명 대통령, 삼성 온양캠퍼스에서 충청 메가 프로젝트 '대박 투자 성...",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-12T04:12:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885289"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 20,
-   "recent20": 0,
-   "press": 19,
-   "firstArticleAt": "2026-11-12T02:46:00.000Z",
+   "articles90": 14,
+   "recent20": 1,
+   "press": 13,
+   "firstArticleAt": "2026-11-12T02:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[속보]‘10대 살인’ 50대 남성 흉기 미리 구입…피해여성 조건만남 절...",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-12T04:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000161070?sid=102"
+    },
     {
      "title": "아들 성범죄 피해자 찾아가 살해한 50대…경찰, 구속영장 신청",
      "press": "segyebiz.com",
@@ -65,12 +71,6 @@
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-12T03:42:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012292485?sid=102"
-    },
-    {
-     "title": "'성북구 청소년 살해' 50대, 진술 거부…프로파일러 투입",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-12T03:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000142118?sid=102"
     }
    ]
   },
@@ -79,30 +79,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 85,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-12T03:16:00.000Z",
+   "articles90": 58,
+   "recent20": 23,
+   "press": 10,
+   "firstArticleAt": "2026-11-12T03:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이부진·블핑 지수, 디올 CEO 학위수여식서 '우정 패션' 눈길",
+     "title": "이부진 사장에게 축하 받는 델핀 아르노 CEO",
      "press": "news1.kr",
-     "publishedAt": "2026-11-12T04:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009285589?sid=101"
+     "publishedAt": "2026-11-12T04:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009285648?sid=101"
     },
     {
-     "title": "[포토] 디올 CEO의 이대 박사학위 수여식에 참석한 엠버서더 지수",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-12T04:06:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3448131"
+     "title": "기념촬영하는 델핀 아르노 CEO",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-12T04:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009285647?sid=101"
     },
     {
-     "title": "[SHOT+] 크리스찬 디올 CEO, 이대 명예박사 수여식",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-12T03:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006408840?sid=102"
+     "title": "학위 수여받는 델핀 아르노 디올 CEO",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-12T04:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009285646?sid=101"
     }
    ]
   },
@@ -111,10 +111,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T02:44:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-12T02:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -174,9 +174,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 355,
-  "matched": 144,
-  "avgLeadMin": 1554,
+  "flagged": 354,
+  "matched": 143,
+  "avgLeadMin": 1564,
   "recent": [
    {
     "keyword": "김건희 집사 무죄 확정",
