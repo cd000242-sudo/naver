@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T21:00:56.115Z",
+ "builtAt": "2026-11-12T21:11:00.286Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,79 +8,83 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 21,
  "candidates": [
   {
-   "keyword": "젠슨 황, 엔비디아 CEO 사임",
+   "keyword": "약국",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 58,
-   "recent20": 18,
-   "press": 39,
-   "firstArticleAt": "2026-11-12T19:32:00.000Z",
+   "articles90": 5,
+   "recent20": 5,
+   "press": 2,
+   "firstArticleAt": "2026-11-12T20:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[젠슨 황 스캔들] '치맥·삼겹살' 젠슨 황 해임설…韓 총수 네트워크 비...",
-     "press": "it.chosun.com",
-     "publishedAt": "2026-11-12T21:00:00.000Z",
-     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000000873"
+     "title": "비대면 처방 약국 쏠림 막는다…조제건수 쿼터제 입법 추진",
+     "press": "dailypharm.com",
+     "publishedAt": "2026-11-12T21:02:00.000Z",
+     "link": "https://www.dailypharm.com/user/news/344523?REFERER=NP"
     },
     {
-     "title": "젠슨 황, 세 번째 불륜 의혹…엔비디아 여직원과 추가 내연설",
-     "press": "news.mtn.co.kr",
-     "publishedAt": "2026-11-12T20:58:00.000Z",
-     "link": "https://news.mtn.co.kr/article/2026111305575487984"
+     "title": "감기약 100정 시대 '숨은 그림자'...약국의 경고",
+     "press": "kpanews.co.kr",
+     "publishedAt": "2026-11-12T20:56:00.000Z",
+     "link": "https://www.kpanews.co.kr/news/articleView.html?idxno=548842"
     },
     {
-     "title": "‘포스트 젠슨 황’ 시대, 반도체 패권 어디로…삼성·SK하이닉스에 기...",
-     "press": "kor.theasian.asia",
-     "publishedAt": "2026-11-12T20:58:00.000Z",
-     "link": "http://kor.theasian.asia/archives/421616"
-    }
-   ]
-  },
-  {
-   "keyword": "김민석 최민희 감찰 지시",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T19:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김민석, ‘李대통령 尹탄핵반대’ 발언 논란 최민희 ‘윤리감찰’ 지시...",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-12T20:20:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611130004"
-    },
-    {
-     "title": "최민희 “李대통령도 尹 탄핵 반대”… 김민석, 崔 윤리감찰 조사 지시",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-12T20:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003698920?sid=100"
-    },
-    {
-     "title": "이번엔 \"이 대통령, 윤 탄핵 반대\"...민주, 최민희 감찰 착수",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-12T19:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432182?sid=100"
+     "title": "약국서 산 일반약, 선물로 배송…法 '무죄' 판결에 '의견 분분'",
+     "press": "kpanews.co.kr",
+     "publishedAt": "2026-11-12T20:56:00.000Z",
+     "link": "https://www.kpanews.co.kr/news/articleView.html?idxno=548773"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 394,
-  "matched": 140,
-  "avgLeadMin": 790,
+  "flagged": 392,
+  "matched": 144,
+  "avgLeadMin": 723,
   "recent": [
+   {
+    "keyword": "트럼프 이란전쟁 종전",
+    "hitKeyword": "트럼프 특사 종전 협상",
+    "hitAt": "2026-11-13T06:00:00+09:00",
+    "leadMin": 887
+   },
+   {
+    "keyword": "젠슨 황, 엔비디아 CEO 사임",
+    "hitKeyword": "엔비디아 주가 급락",
+    "hitAt": "2026-11-13T06:00:00+09:00",
+    "leadMin": 353
+   },
+   {
+    "keyword": "젠슨 황 엔비디아 사임",
+    "hitKeyword": "엔비디아 주가 급락",
+    "hitAt": "2026-11-13T06:00:00+09:00",
+    "leadMin": 322
+   },
+   {
+    "keyword": "젠슨 황 엔비디아 CEO 사임",
+    "hitKeyword": "엔비디아 주가 급락",
+    "hitAt": "2026-11-13T06:00:00+09:00",
+    "leadMin": 312
+   },
+   {
+    "keyword": "성북 10대 살해 구속영장",
+    "hitKeyword": "성북구 10대 여성 살해",
+    "hitAt": "2026-11-13T06:00:00+09:00",
+    "leadMin": 292
+   },
+   {
+    "keyword": "젠슨 황, 엔비디아 CEO 퇴진",
+    "hitKeyword": "엔비디아 주가 급락",
+    "hitAt": "2026-11-13T06:00:00+09:00",
+    "leadMin": 110
+   },
    {
     "keyword": "네이버 AI 에이전트 연내 출시 목표",
     "hitKeyword": "네이버 AI팩토리 계약",
@@ -104,42 +108,6 @@
     "hitKeyword": "네이버 AI팩토리 계약",
     "hitAt": "2026-11-13T00:00:00+09:00",
     "leadMin": 708
-   },
-   {
-    "keyword": "공항철도 파업",
-    "hitKeyword": "공항철도 경고파업",
-    "hitAt": "2026-11-13T00:00:00+09:00",
-    "leadMin": 134
-   },
-   {
-    "keyword": "방화",
-    "hitKeyword": "경비원 심정지 아파트 방화",
-    "hitAt": "2026-11-12T23:00:00+09:00",
-    "leadMin": 346
-   },
-   {
-    "keyword": "최성훈 개그맨",
-    "hitKeyword": "개그맨 최성훈",
-    "hitAt": "2026-11-12T23:00:00+09:00",
-    "leadMin": 54
-   },
-   {
-    "keyword": "공격하는 현대캐피탈 레오",
-    "hitKeyword": "현대캐피탈 3연승",
-    "hitAt": "2026-11-12T22:30:00+09:00",
-    "leadMin": 44
-   },
-   {
-    "keyword": "맨유, 캐릭 경질 결정",
-    "hitKeyword": "맨유 캐릭 감독 경질",
-    "hitAt": "2026-11-12T22:30:00+09:00",
-    "leadMin": 24
-   },
-   {
-    "keyword": "사고",
-    "hitKeyword": "곽선영 엘리베이터 사고",
-    "hitAt": "2026-11-12T22:00:00+09:00",
-    "leadMin": 885
    }
   ]
  }
