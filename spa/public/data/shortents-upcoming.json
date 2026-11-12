@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T05:12:24.727Z",
+ "builtAt": "2026-11-12T05:22:28.299Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 13,
+ "measured": 9,
  "candidates": [
   {
-   "keyword": "델핀 아르노 디올 CEO 학위 수여",
+   "keyword": "델핀 아르노 CEO 학위 수여",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 42,
-   "recent20": 10,
+   "articles90": 39,
+   "recent20": 4,
    "press": 16,
-   "firstArticleAt": "2026-11-12T04:16:00.000Z",
+   "firstArticleAt": "2026-11-12T04:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "디올 CEO 박사학위에 재계 총수 총출동…이부진·신동빈·정의선의 서로...",
+     "press": "peoplewatch.co.kr",
+     "publishedAt": "2026-11-12T05:18:00.000Z",
+     "link": "https://www.peoplewatch.co.kr/article/view/ppw202611120013"
+    },
+    {
+     "title": "'디올CEO' 학위수여식에 '정의선·신동빈·이부진' 등 재계 총수 총출동",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-12T05:14:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=902883"
+    },
     {
      "title": "재킷도 가방도 디올…이부진, 디올 CEO 학위식서도 빛난 '패션 경영'",
      "press": "newspim.com",
      "publishedAt": "2026-11-12T05:05:00.000Z",
      "link": "https://www.newspim.com/news/view/20261112000822"
-    },
-    {
-     "title": "아르노 학위수여식에 재계 총수 집결…이부진, 디올백 들고 레드카펫",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-12T05:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000551293?sid=101"
-    },
-    {
-     "title": "이부진은 ‘3년 전 그 재킷’, 지수는 ‘레이디 디올’… 디올 패션도 ...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-12T05:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001204328?sid=101"
     }
    ]
   },
   {
-   "keyword": "반도체 유가 민간소비 영향",
+   "keyword": "반도체 호황과 유가가 소비에 미치는 영향",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 13,
-   "recent20": 3,
+   "recent20": 4,
    "press": 13,
-   "firstArticleAt": "2026-11-12T03:46:00.000Z",
+   "firstArticleAt": "2026-11-12T04:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "반도체 호황에도 더딘 소비…고유가에 증가율 0.4%P↓",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-12T05:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004681446?sid=101"
+    },
+    {
+     "title": "[그래픽] 반도체·유가 민간소비 영향",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-12T05:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016438452?sid=101"
+    },
     {
      "title": "내년부터 지갑 열린다…KDI \"반도체 호황 효과, 파급에 시차 있어\"",
      "press": "newsworks.co.kr",
      "publishedAt": "2026-11-12T05:06:00.000Z",
      "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=902877"
-    },
-    {
-     "title": "반도체 초호황에도 소비 회복 ‘제자리’…고유가 충격도 묵직",
-     "press": "asiatime.co.kr",
-     "publishedAt": "2026-11-12T05:04:00.000Z",
-     "link": "https://www.asiatime.co.kr/article/20261112500302"
-    },
-    {
-     "title": "반도체 호황에도 소비 회복 더뎌…KDI \"유가 충격이 먼저 작용\"",
-     "press": "ziksir.com",
-     "publishedAt": "2026-11-12T04:58:00.000Z",
-     "link": "https://www.ziksir.com/news/articleView.html?idxno=153062"
     }
    ]
   },
@@ -79,30 +79,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
+   "articles90": 14,
    "recent20": 6,
-   "press": 11,
-   "firstArticleAt": "2026-11-12T03:52:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-12T04:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "인텔, 韓에 '맞춤형 반도체' 협력 제안…\"한국은 역량과 수요가 만나는...",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-12T05:10:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=202611121330463717139bf6e4b2_1"
-    },
-    {
-     "title": "[인텔 AI 서밋] \"AI 추론은 시스템 경쟁\"...인텔, CPU·GPU·가속기 조합...",
+     "title": "[인텔 AI 서밋] \"한국 AI 혁신, 더 큰 시장으로 확장할 것\"",
      "press": "techm.kr",
-     "publishedAt": "2026-11-12T05:08:00.000Z",
-     "link": "https://www.techm.kr/news/articleView.html?idxno=157275"
+     "publishedAt": "2026-11-12T05:20:00.000Z",
+     "link": "https://www.techm.kr/news/articleView.html?idxno=157276"
     },
     {
-     "title": "[ER현장] 인텔, 한국 AI 산업계에 '러브콜'…협력 체계 'K-AI 풀스택 얼라...",
-     "press": "econovill.com",
-     "publishedAt": "2026-11-12T05:04:00.000Z",
-     "link": "https://www.econovill.com/news/articleView.html?idxno=756990"
+     "title": "[현장] 인텔 “세계 AI, 韓 칩 생태계 의존”",
+     "press": "ekn.kr",
+     "publishedAt": "2026-11-12T05:18:00.000Z",
+     "link": "https://www.ekn.kr/web/view.php?key=20261112020388781"
+    },
+    {
+     "title": "인텔 \"한국 23개사와 손잡고 AI 주권 강화…세계 시장 진출 지원\"",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-12T05:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001074487?sid=105"
     }
    ]
   },
@@ -112,93 +112,29 @@
     "signal.bz"
    ],
    "articles90": 9,
-   "recent20": 1,
+   "recent20": 3,
    "press": 9,
-   "firstArticleAt": "2026-11-12T03:47:00.000Z",
+   "firstArticleAt": "2026-11-12T04:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "31점짜리 보안을 100점으로…특검, 중앙선관위 압수수색",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-12T05:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001884738?sid=102"
+    },
+    {
+     "title": "임태희 전 경기도교육감, 선관위 특검에 “경기도 모든 지역 조사해야“",
+     "press": "kgnews.co.kr",
+     "publishedAt": "2026-11-12T05:20:00.000Z",
+     "link": "https://www.kgnews.co.kr/news/article.html?no=919322"
+    },
     {
      "title": "31점을 100점으로…'보안점검 점수조작' 중앙선관위 압수수색",
      "press": "kbsm.net",
      "publishedAt": "2026-11-12T05:04:00.000Z",
      "link": "https://www.kbsm.net/news/view.php?idx=541502"
-    },
-    {
-     "title": "특검, '보안점검 문서 허위 작성' 중앙선관위 압수수색",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-12T04:40:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1543516"
-    },
-    {
-     "title": "특검팀, 선관위 보안 실태 점검 문서 허위 작성 정황 포착···압수수색...",
-     "press": "ngonews.kr",
-     "publishedAt": "2026-11-12T04:30:00.000Z",
-     "link": "https://www.ngonews.kr/news/articleView.html?idxno=242999"
-    }
-   ]
-  },
-  {
-   "keyword": "삼성, 호주리그 파견",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-12T04:12:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "프로야구 삼성, 호주 브리즈번 밴디츠에 배찬승 등 3명 파견",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-12T05:07:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/001/0016438413"
-    },
-    {
-     "title": "[공식] 배찬승-김백산-김현준, 호주리그 파견…삼성 “따뜻한 곳에서 경...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-12T04:47:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/468/0001280501"
-    },
-    {
-     "title": "삼성 라이온즈, 호주 리그에 배찬승·김백산·김현준 파견",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-12T04:46:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/088/0001039922"
-    }
-   ]
-  },
-  {
-   "keyword": "홍콩익스프레스 팝업 행사",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 16,
-   "recent20": 8,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T04:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "성수동에 팝업 여는 홍콩익스프레스…국내 LCC와 경쟁 자신감",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-12T05:03:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261112000794"
-    },
-    {
-     "title": "홍콩익스프레스, 韓 노선 성장세 토대로 시장 공략 나선다… 항공편 확...",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-12T05:00:00.000Z",
-     "link": "https://www.viva100.com/article/20261112500736"
-    },
-    {
-     "title": "성수에서 느끼는 홍콩… 홍콩익스프레스, 국내 첫 브랜드 팝업 오픈",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-12T04:53:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261112000877"
     }
    ]
   }
