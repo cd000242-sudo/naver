@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T16:28:21.749Z",
+ "builtAt": "2026-11-12T16:38:29.441Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,35 @@
  "measured": 26,
  "candidates": [
   {
-   "keyword": "젠슨 황 엔비디아 CEO 사임",
+   "keyword": "젠슨 황, 엔비디아 CEO 사임",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 73,
-   "recent20": 6,
-   "press": 48,
-   "firstArticleAt": "2026-11-12T14:59:00.000Z",
+   "articles90": 66,
+   "recent20": 9,
+   "press": 42,
+   "firstArticleAt": "2026-11-12T15:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨 황 엔비디아 CEO 사퇴...33년 경영 체제 막 내려",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-12T16:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432155?sid=104"
+     "title": "젠슨 황, 잇단 불륜 의혹에 엔비디아 CEO 전격 사임",
+     "press": "cwn.kr",
+     "publishedAt": "2026-11-12T16:36:00.000Z",
+     "link": "https://www.cwn.kr/news/articleView.html?idxno=61692"
     },
     {
-     "title": "엔비디아, 젠슨 황 CEO 즉각 사임 발표…33년 만에 퇴진·주가 13% 급락 ...",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-12T16:22:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261113010005034"
+     "title": "트럼프 “젠슨황 자리, 애플 팀쿡이 이어받아야”…엔비디아 새CEO 추천",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-12T16:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003698900?sid=104"
     },
     {
-     "title": "엔비디아 ‘임시 선장' 크레스는 누구? ‘25년 재무통’",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-12T16:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001884878?sid=101"
+     "title": "젠슨황 엔비디아 CEO 퇴진…불륜 파문에 33년만에 쫓겨나(종합2보)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-12T16:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016439550?sid=104"
     }
    ]
   },
@@ -48,10 +49,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 8,
+   "articles90": 7,
    "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-12T15:08:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-12T15:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -78,12 +79,13 @@
   {
    "keyword": "축구 대표팀 사우디 평가전",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-12T15:02:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-12T15:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -108,44 +110,13 @@
    ]
   },
   {
-   "keyword": "13일의 금요일",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T15:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "11월 13일 금요일 띠별 오늘의 운세 \"포기했던 돈을 돌려 받는다\"",
-     "press": "econovill.com",
-     "publishedAt": "2026-11-12T16:04:00.000Z",
-     "link": "https://www.econovill.com/news/articleView.html?idxno=757089"
-    },
-    {
-     "title": "[오늘의 띠별 운세] 2026년 11월 13일 금요일",
-     "press": "ppss.kr",
-     "publishedAt": "2026-11-12T15:28:00.000Z",
-     "link": "https://www.ppss.kr/news/articleView.html?idxno=320750"
-    },
-    {
-     "title": "[한 컷 만화로 보는 오늘의 띠별 운세] 2026년 11월 13일 금요일",
-     "press": "joongdo.co.kr",
-     "publishedAt": "2026-11-12T15:00:00.000Z",
-     "link": "https://www.joongdo.co.kr/web/view.php?key=20261112010004278"
-    }
-   ]
-  },
-  {
    "keyword": "amd 주가",
    "sources": [
+    "signal.bz",
     "google"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-12T15:53:00.000Z",
    "exclusive": false,
@@ -172,22 +143,22 @@
    ]
   },
   {
-   "keyword": "성북 10대 살해 구속영장",
+   "keyword": "50대 남성 구속영장 청구",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-12T15:05:00.000Z",
+   "firstArticleAt": "2026-11-12T15:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘피해 여성과 숙박업소 동반 입실?’…아들 성폭력 피해여성 살해한 5...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-12T16:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002832460?sid=102"
+     "title": "50대 남성에 살해된 15세 소녀…성매매·절도 강요에 쉼터선 실종 신고",
+     "press": "weekly.chosun.com",
+     "publishedAt": "2026-11-12T16:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/053/0000063006?sid=102"
     },
     {
      "title": "여전히 입 다문 살인 피의자…구속영장 청구",
@@ -196,42 +167,10 @@
      "link": "https://n.news.naver.com/mnews/article/055/0001402686?sid=102"
     },
     {
-     "title": "아들 아니라 전 아내 때문이었나…15세 피해자 살해동기 미스터리",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-12T15:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003564892?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "젠틀몬스터",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T15:17:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "젠틀몬스터, 삼성·구글 협업 AI 안경 12월 10일 출시…가격 65만~70만원...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-12T15:56:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16275329"
-    },
-    {
-     "title": "젠틀몬스터, 삼성·구글 AI 결합한 스마트안경 16종 공개⋯65만원부터",
-     "press": "autodaily.co.kr",
-     "publishedAt": "2026-11-12T15:40:00.000Z",
-     "link": "https://www.autodaily.co.kr/news/articleView.html?idxno=602056"
-    },
-    {
-     "title": "[르포]\"내 눈이 AI 눈으로 확장됐네요\"…젠틀몬스터 안경에 들어온 제미...",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-12T15:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005842030?sid=104"
+     "title": "공소청, 10대 살해 50대 남성 구속영장 청구",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-12T15:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000925668?sid=102"
     }
    ]
   }
