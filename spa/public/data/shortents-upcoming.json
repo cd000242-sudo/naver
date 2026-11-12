@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T03:41:50.574Z",
+ "builtAt": "2026-11-12T03:51:53.715Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,70 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 18,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "메가프로젝트 이재명 대통령",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 67,
-   "recent20": 7,
-   "press": 46,
-   "firstArticleAt": "2026-11-12T02:18:00.000Z",
+   "articles90": 57,
+   "recent20": 5,
+   "press": 42,
+   "firstArticleAt": "2026-11-12T02:22:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "3대 메가, 충청서 본격 시동…李대통령·이재용 나란히 '첫 삽'",
+     "press": "chungnamilbo.co.kr",
+     "publishedAt": "2026-11-12T03:50:00.000Z",
+     "link": "http://www.chungnamilbo.co.kr/news/articleView.html?idxno=920436"
+    },
+    {
+     "title": "李대통령·이재용 '충청 반도체 굴기' 시동…46조원 HBM 거점 '첫삽'",
+     "press": "straightnews.co.kr",
+     "publishedAt": "2026-11-12T03:48:00.000Z",
+     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=315233"
+    },
     {
      "title": "李 대통령 \"충청권 메가프로젝트, 112개 기업 23조 원 추가 투자 예정\" ...",
      "press": "daejonilbo.com",
      "publishedAt": "2026-11-12T03:41:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/656/0000192203?sid=100"
-    },
-    {
-     "title": "이재명 대통령, 삼성 온양캠퍼스 현장 찾아...충청권 메가프로젝트 직접...",
-     "press": "digitaltoday.co.kr",
-     "publishedAt": "2026-11-12T03:36:00.000Z",
-     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=714889"
-    },
-    {
-     "title": "이 대통령, 충청권 메가프로젝트 착공식 참석...다음 주 순방",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-12T03:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002431831?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "미래에셋 3분기 손실",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 26,
-   "recent20": 1,
-   "press": 25,
-   "firstArticleAt": "2026-11-12T02:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "미래에셋증권, 3분기 순손실 4056억원... 자사주 6500만주 소각 예정",
-     "press": "newslock.co.kr",
-     "publishedAt": "2026-11-12T03:26:00.000Z",
-     "link": "http://www.newslock.co.kr/news/articleView.html?idxno=139946"
-    },
-    {
-     "title": "[MD포커스] 스페이스X 손실에 적자 낸 미래에셋증권…박현주 글로벌 전...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-12T03:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/117/0004124423?sid=103"
-    },
-    {
-     "title": "미래에셋증권, 실적은 키우고 자사주는 덜어내고…6500만주 소각 추진",
-     "press": "the-pr.co.kr",
-     "publishedAt": "2026-11-12T03:08:00.000Z",
-     "link": "https://www.the-pr.co.kr/news/articleView.html?idxno=63295"
     }
    ]
   },
@@ -80,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 26,
-   "recent20": 4,
+   "articles90": 25,
+   "recent20": 2,
    "press": 23,
-   "firstArticleAt": "2026-11-12T02:14:00.000Z",
+   "firstArticleAt": "2026-11-12T02:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "아들 성범죄 피해자 찾아가 살해한 50대…경찰, 구속영장 신청",
+     "press": "segyebiz.com",
+     "publishedAt": "2026-11-12T03:46:00.000Z",
+     "link": "http://www.segyebiz.com/newsView/20261112509318?OutUrl=naver"
+    },
     {
      "title": "'성북구 청소년 살해' 50대, 진술 거부…프로파일러 투입",
      "press": "sisajournal.com",
@@ -98,92 +71,27 @@
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-12T03:31:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/079/0004209071?sid=102"
-    },
-    {
-     "title": "성북구 '아들 성범죄 피해자' 살해…50대 구속영장 신청",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-12T03:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001402513?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "성유리 남편 무죄 확정",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 20,
-   "recent20": 0,
-   "press": 20,
-   "firstArticleAt": "2026-11-12T02:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "성유리 남편, 20억 코인사기 무죄…핑클 완전체 컴백 날개[SC이슈]",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-12T03:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004466102"
-    },
-    {
-     "title": "성유리 남편 안성현, 대법원서 무죄 확정…징역 4년 6개월→무죄 반전",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-12T02:54:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16274658"
-    },
-    {
-     "title": "'성유리 남편' 안성현 씨 무죄 확정…오늘(12일) 대법원서 전해진 소식",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-12T02:48:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1174026"
-    }
-   ]
-  },
-  {
-   "keyword": "김건희 집사게이트 IMS모빌리티 대표 무죄",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 13,
-   "recent20": 0,
-   "press": 13,
-   "firstArticleAt": "2026-11-12T02:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'집사 게이트' IMS모빌리티 대표, 대법서 무죄·공소기각 확정",
-     "press": "todaykorea.co.kr",
-     "publishedAt": "2026-11-12T02:58:00.000Z",
-     "link": "https://www.todaykorea.co.kr/news/articleView.html?idxno=408539"
-    },
-    {
-     "title": "'김건희 집사게이트' 조영탁 IMS모빌리티 대표, 대법원에서 무죄 확정",
-     "press": "ngonews.kr",
-     "publishedAt": "2026-11-12T02:44:00.000Z",
-     "link": "https://www.ngonews.kr/news/articleView.html?idxno=242993"
-    },
-    {
-     "title": "‘집사게이트’ 조영탁 IMS모빌리티 대표 무죄·공소기각 확정",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-12T02:34:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2647347"
     }
    ]
   },
   {
    "keyword": "델핀 아르노 학위 수여식 참석",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 59,
+   "articles90": 58,
    "recent20": 11,
    "press": 12,
-   "firstArticleAt": "2026-11-12T02:14:00.000Z",
+   "firstArticleAt": "2026-11-12T02:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[포토] 블랙핑크 지수, 디올 CEO 학위수여식 참석",
+     "press": "heraldmuse.com",
+     "publishedAt": "2026-11-12T03:48:00.000Z",
+     "link": "https://m.entertain.naver.com/article/112/0003813025"
+    },
     {
      "title": "[헤럴드pic] 디올 CEO 학위수여식에 재계 총수들 집결",
      "press": "biz.heraldcorp.com",
@@ -195,45 +103,102 @@
      "press": "newspim.com",
      "publishedAt": "2026-11-12T03:38:00.000Z",
      "link": "https://www.newspim.com/news/view/20261112000770"
+    }
+   ]
+  },
+  {
+   "keyword": "김건희 집사게이트 IMS모빌리티 대표 무죄",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 9,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-12T02:28:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘김건희 집사게이트’ IMS 대표 무죄 확정…대법 “특검 수사대상 아니...",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-12T03:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003564727?sid=102"
     },
     {
-     "title": "[포토] 델핀 아르노 디올 CEO 명예 박사학위 수여식",
-     "press": "biz.newdaily.co.kr",
-     "publishedAt": "2026-11-12T03:38:00.000Z",
-     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/12/2026111200195.html"
+     "title": "'집사 게이트' IMS모빌리티 대표, 대법서 무죄·공소기각 확정",
+     "press": "todaykorea.co.kr",
+     "publishedAt": "2026-11-12T02:58:00.000Z",
+     "link": "https://www.todaykorea.co.kr/news/articleView.html?idxno=408539"
+    },
+    {
+     "title": "'김건희 집사게이트' 조영탁 IMS모빌리티 대표, 대법원에서 무죄 확정",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-12T02:44:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=242993"
     }
    ]
   },
   {
    "keyword": "특검, 중앙선관위 압수수색",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 7,
-   "recent20": 0,
+   "recent20": 2,
    "press": 7,
-   "firstArticleAt": "2026-11-12T02:16:00.000Z",
+   "firstArticleAt": "2026-11-12T02:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "선관위 특검, 과천 중앙선관위 압수수색 … 보안실태 부실 점검 정황 포...",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-12T03:50:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/12/2026111200164.html"
+    },
+    {
+     "title": "특검, ‘보안점검 문서 허위작성’ 중앙선관위·용역업체 압수수색",
+     "press": "segye.com",
+     "publishedAt": "2026-11-12T03:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004174623?sid=102"
+    },
     {
      "title": "31점을 100점으로…'보안점검 점수조작' 중앙선관위 압수수색(종합)",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-12T03:07:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016438203?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "정부 양극화 대응 TF",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T02:39:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“노인빈곤율 OECD 평균 2.7배”… 정부 ‘양극화 TF’ 가동",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-12T03:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000131749?sid=101"
     },
     {
-     "title": "특검, 중앙선관위 ‘보안실태 점검문서 허위 작성’ 정황 포착",
-     "press": "munhwa.com",
+     "title": "양극화 TF 첫 회의…12월 성장전략에 대책 담는다",
+     "press": "biz.sbs.co.kr",
      "publishedAt": "2026-11-12T03:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002832350?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/374/0000543267?sid=101"
     },
     {
-     "title": "선관위 특검, '보안점검 문서 허위작성' 중앙선관위 등 압수수색",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-12T02:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000925433?sid=102"
+     "title": "정부, ‘양극화 대응 TF’ 총괄반 1차 회의…“모두의 성장으로 대전환...",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-12T02:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003058745?sid=101"
     }
    ]
   },
@@ -269,45 +234,13 @@
      "link": "http://www.seouleconews.com/news/articleView.html?idxno=94971"
     }
    ]
-  },
-  {
-   "keyword": "정부 양극화 대응 TF",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T02:39:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "양극화 TF 첫 회의…12월 성장전략에 대책 담는다",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-12T03:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000543267?sid=101"
-    },
-    {
-     "title": "정부, ‘양극화 대응 TF’ 총괄반 1차 회의…“모두의 성장으로 대전환...",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-12T02:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003058745?sid=101"
-    },
-    {
-     "title": "‘양극화 대응’ 범부처 TF 가동…조선업 원·하청 상생협약 추진",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-12T02:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002722615?sid=101"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 364,
-  "matched": 145,
-  "avgLeadMin": 1547,
+  "flagged": 359,
+  "matched": 144,
+  "avgLeadMin": 1557,
   "recent": [
    {
     "keyword": "층간소음 기준 강화",
