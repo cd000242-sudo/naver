@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T21:31:07.612Z",
+ "builtAt": "2026-11-12T21:41:11.335Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,47 +8,161 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
+ "measured": 25,
  "candidates": [
   {
-   "keyword": "장동혁 조작 징계 의혹",
+   "keyword": "10월 수출물량 증가",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T20:03:00.000Z",
+   "articles90": 24,
+   "recent20": 1,
+   "press": 24,
+   "firstArticleAt": "2026-11-12T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "장동혁-윤리위원 갈등 격화…'조작징계' 공방에 국민의힘 전운 고조",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-12T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003154635?sid=100"
+     "title": "환율·유가 동반 하락에…10월 수입물가 하락 전환",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-12T21:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000925724?sid=101"
     },
     {
-     "title": "[뉴스 즉설]1년 남은 한동훈의 시간, 장동혁에 복당 막히면 신당 창당?",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-12T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000192287?sid=004"
+     "title": "수출물량 증가율 ‘역대 최고’…소득교역조건 상승률도 74.6% 최대",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-12T21:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002393961?sid=101"
     },
     {
-     "title": "주도권 안 놓는다…장동혁, '비대위·조작징계' 주장 정면 돌파",
+     "title": "10월 수출물량지수 역대 최대‥\"AI 인프라 관련 품목 증가\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-12T21:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001535309?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "물류",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-12T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "국토부, 물류기업 10곳·기술기업 23곳 협업 지원… AI·로봇 도입 논의",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-12T21:02:00.000Z",
+     "link": "https://www.ajunews.com/view/20261112145221395"
+    },
+    {
+     "title": "국토부, 물류·기술기업 '협업의 장' 연다…1대1 매칭도",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-12T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016439595?sid=101"
+    },
+    {
+     "title": "국토부, 물류와 기술이 만나는 ‘상생 밋업’ 개최",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-12T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002722849?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "박정성 통상교섭본부장 유럽의회",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 17,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "EU 역내산 우대에 韓기업 불이익 우려…통상본부장, 업계와 유럽의회 접...",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-12T21:02:00.000Z",
+     "link": "https://www.ajunews.com/view/20261112185814599"
+    },
+    {
+     "title": "박정성 통상교섭본부장, 옌스 가이어 유럽의회 의원 면담",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-12T21:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016439609?sid=100"
+    },
+    {
+     "title": "카밀라 가시우크-피호비치 유럽의회 의원 만난 박정성 통상교섭본부장",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-12T21:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016439620?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "축구 대표팀, 사우디 평가전",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-12T20:45:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "축구 국가대표 평가전, 13일 오후 11시 일정",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-12T21:28:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611130006"
+    },
+    {
+     "title": "불화설 속 다시 모인 韓 축구, 원팀 증명해야 할 중동 2연전",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-12T21:01:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/079/0004209361"
+    },
+    {
+     "title": "갈등 딛고 '원팀'된 모레노호, 오늘 사우디전…韓 반등 신호탄 쏠까",
      "press": "news1.kr",
-     "publishedAt": "2026-11-12T20:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009286860?sid=100"
+     "publishedAt": "2026-11-12T20:45:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/421/0009286866"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 392,
-  "matched": 143,
-  "avgLeadMin": 668,
+  "flagged": 396,
+  "matched": 146,
+  "avgLeadMin": 662,
   "recent": [
+   {
+    "keyword": "천안서 발달장애 어머니",
+    "hitKeyword": "발달장애 10대 사망",
+    "hitAt": "2026-11-13T06:30:00+09:00",
+    "leadMin": 564
+   },
+   {
+    "keyword": "2200만원 절도 장난",
+    "hitKeyword": "김승우 2200만원 피소",
+    "hitAt": "2026-11-13T06:30:00+09:00",
+    "leadMin": 403
+   },
+   {
+    "keyword": "공장",
+    "hitKeyword": "삼성 반도체 공장 건설",
+    "hitAt": "2026-11-13T06:30:00+09:00",
+    "leadMin": 130
+   },
    {
     "keyword": "트럼프 이란전쟁 종전",
     "hitKeyword": "트럼프 특사 종전 협상",
@@ -90,24 +204,6 @@
     "hitKeyword": "네이버 AI팩토리 계약",
     "hitAt": "2026-11-13T00:00:00+09:00",
     "leadMin": 834
-   },
-   {
-    "keyword": "네이버 AI 팩토리 2조원 계약",
-    "hitKeyword": "네이버 AI팩토리 계약",
-    "hitAt": "2026-11-13T00:00:00+09:00",
-    "leadMin": 794
-   },
-   {
-    "keyword": "네이버 AI 계약 2조원",
-    "hitKeyword": "네이버 AI팩토리 계약",
-    "hitAt": "2026-11-13T00:00:00+09:00",
-    "leadMin": 739
-   },
-   {
-    "keyword": "네이버 AI 계약 소식",
-    "hitKeyword": "네이버 AI팩토리 계약",
-    "hitAt": "2026-11-13T00:00:00+09:00",
-    "leadMin": 708
    }
   ]
  }
