@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T15:47:51.588Z",
+ "builtAt": "2026-11-12T15:57:56.838Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,38 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "젠슨 황 엔비디아 CEO 사임",
    "sources": [
-    "nate"
+    "nate",
+    "daum"
    ],
    "articles90": 94,
-   "recent20": 12,
-   "press": 67,
-   "firstArticleAt": "2026-11-12T14:40:00.000Z",
+   "recent20": 19,
+   "press": 64,
+   "firstArticleAt": "2026-11-12T14:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"엔비디아 성장 이어갈 수 있나\"…월가, 줄줄이 목표가 낮춰",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-12T15:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005353417?sid=104"
+     "title": "'불륜 인정' 젠슨 황, 결국 엔비디아 떠난다…창업 33년만 사임 [MD이슈...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-12T15:57:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004124598"
     },
     {
-     "title": "트럼프 \"젠슨 황이 사임했으니 대신할 사람은 애플의 팀 쿡뿐\"(상보)",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-12T15:46:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4444512"
+     "title": "젠슨 황 '임시 후임' 크레스는 누구…엔비디아 성장 함께한 '재무 전문...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-12T15:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009286814?sid=104"
     },
     {
-     "title": "젠슨황 없는 'AI중앙은행' 엔비디아 최대위기…AI산업 대혼돈 예고(종합...",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-12T15:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016439542?sid=104"
+     "title": "엔비디아 프리마켓 낙폭 12%…젠슨 황 즉시 사임",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-12T15:56:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/437239"
     }
    ]
   },
@@ -48,30 +49,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
+   "articles90": 9,
+   "recent20": 2,
+   "press": 9,
    "firstArticleAt": "2026-11-12T14:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "최민희 “李대통령 尹 탄핵 반대했다” 靑 “사실무근, 유감”",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-12T15:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004009381?sid=100"
+    },
+    {
+     "title": "김민석, 최민희 윤리감찰 지시…\"언행 논란 객관적 확인 필요\"",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-12T15:48:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=624927"
+    },
+    {
      "title": "靑 \"강한 유감\"…김민석, 잇단 '언행 논란' 최민희 감찰 지시",
      "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-12T15:24:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/422/0000925669?sid=100"
-    },
-    {
-     "title": "\"하이에나\" 이어 \"이 대통령이 尹 탄핵 반대\"…김민석, 최민희 감찰 지...",
-     "press": "kado.net",
-     "publishedAt": "2026-11-12T15:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000211151?sid=100"
-    },
-    {
-     "title": "최민희 “李, 尹탄핵 반대” 발언 파장… 김민석, 당 윤리감찰단에 조사...",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-12T15:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001884853?sid=100"
     }
    ]
   },
@@ -81,12 +82,18 @@
     "google"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 2,
    "press": 5,
-   "firstArticleAt": "2026-11-12T14:20:00.000Z",
+   "firstArticleAt": "2026-11-12T14:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "젠틀몬스터, 삼성·구글 협업 AI 안경 12월 10일 출시…가격 65만~70만원...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-12T15:56:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16275329"
+    },
     {
      "title": "젠틀몬스터, 삼성·구글 AI 결합한 스마트안경 16종 공개⋯65만원부터",
      "press": "autodaily.co.kr",
@@ -98,12 +105,6 @@
      "press": "view.asiae.co.kr",
      "publishedAt": "2026-11-12T15:17:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/277/0005842030?sid=104"
-    },
-    {
-     "title": "젠틀몬스터 인텔리전트 아이웨어, 직접 써보니 '이것'이 가장 놀라웠다",
-     "press": "harpersbazaar.co.kr",
-     "publishedAt": "2026-11-12T14:40:00.000Z",
-     "link": "https://www.harpersbazaar.co.kr/article/1912981"
     }
    ]
   }
