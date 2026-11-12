@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-11T22:14:52.424Z",
+ "builtAt": "2026-11-12T05:12:24.727Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,203 +8,266 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 18,
+ "measured": 13,
  "candidates": [
   {
-   "keyword": "유럽 학교 폭파 협박",
+   "keyword": "델핀 아르노 디올 CEO 학위 수여",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 42,
+   "recent20": 10,
+   "press": 16,
+   "firstArticleAt": "2026-11-12T04:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "재킷도 가방도 디올…이부진, 디올 CEO 학위식서도 빛난 '패션 경영'",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-12T05:05:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261112000822"
+    },
+    {
+     "title": "아르노 학위수여식에 재계 총수 집결…이부진, 디올백 들고 레드카펫",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-12T05:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000551293?sid=101"
+    },
+    {
+     "title": "이부진은 ‘3년 전 그 재킷’, 지수는 ‘레이디 디올’… 디올 패션도 ...",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-12T05:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001204328?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "반도체 유가 민간소비 영향",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 13,
+   "recent20": 3,
+   "press": 13,
+   "firstArticleAt": "2026-11-12T03:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "내년부터 지갑 열린다…KDI \"반도체 호황 효과, 파급에 시차 있어\"",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-12T05:06:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=902877"
+    },
+    {
+     "title": "반도체 초호황에도 소비 회복 ‘제자리’…고유가 충격도 묵직",
+     "press": "asiatime.co.kr",
+     "publishedAt": "2026-11-12T05:04:00.000Z",
+     "link": "https://www.asiatime.co.kr/article/20261112500302"
+    },
+    {
+     "title": "반도체 호황에도 소비 회복 더뎌…KDI \"유가 충격이 먼저 작용\"",
+     "press": "ziksir.com",
+     "publishedAt": "2026-11-12T04:58:00.000Z",
+     "link": "https://www.ziksir.com/news/articleView.html?idxno=153062"
+    }
+   ]
+  },
+  {
+   "keyword": "2026 인텔 AI 서울",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-11T20:48:00.000Z",
+   "articles90": 12,
+   "recent20": 6,
+   "press": 11,
+   "firstArticleAt": "2026-11-12T03:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"학교 7000곳 폭파 하겠다\" 협박에 학생들 긴급 대피…유럽서 허위 위협...",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-11T21:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005841437?sid=104"
+     "title": "인텔, 韓에 '맞춤형 반도체' 협력 제안…\"한국은 역량과 수요가 만나는...",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-12T05:10:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=202611121330463717139bf6e4b2_1"
     },
     {
-     "title": "유럽 이번엔 학교 폭파 협박…이탈리아 등 대피 소동",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-11T21:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001977793?sid=104"
+     "title": "[인텔 AI 서밋] \"AI 추론은 시스템 경쟁\"...인텔, CPU·GPU·가속기 조합...",
+     "press": "techm.kr",
+     "publishedAt": "2026-11-12T05:08:00.000Z",
+     "link": "https://www.techm.kr/news/articleView.html?idxno=157275"
     },
     {
-     "title": "유럽 학교 7천 곳 폭파 위협‥이탈리아 등 대피 소동",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-11T21:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001535025?sid=104"
+     "title": "[ER현장] 인텔, 한국 AI 산업계에 '러브콜'…협력 체계 'K-AI 풀스택 얼라...",
+     "press": "econovill.com",
+     "publishedAt": "2026-11-12T05:04:00.000Z",
+     "link": "https://www.econovill.com/news/articleView.html?idxno=756990"
     }
    ]
   },
   {
-   "keyword": "사고",
+   "keyword": "선관위 특검 압수수색",
    "sources": [
-    "google"
+    "signal.bz"
+   ],
+   "articles90": 9,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-12T03:47:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "31점을 100점으로…'보안점검 점수조작' 중앙선관위 압수수색",
+     "press": "kbsm.net",
+     "publishedAt": "2026-11-12T05:04:00.000Z",
+     "link": "https://www.kbsm.net/news/view.php?idx=541502"
+    },
+    {
+     "title": "특검, '보안점검 문서 허위 작성' 중앙선관위 압수수색",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-12T04:40:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1543516"
+    },
+    {
+     "title": "특검팀, 선관위 보안 실태 점검 문서 허위 작성 정황 포착···압수수색...",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-12T04:30:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=242999"
+    }
+   ]
+  },
+  {
+   "keyword": "삼성, 호주리그 파견",
+   "sources": [
+    "nate"
    ],
    "articles90": 6,
    "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-11T21:03:00.000Z",
-   "exclusive": false,
+   "press": 6,
+   "firstArticleAt": "2026-11-12T04:12:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "GS건설 아파트 침해사고, 과기정통부 직권조사 착수... 피해 규모는?",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-11T22:04:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885198"
+     "title": "프로야구 삼성, 호주 브리즈번 밴디츠에 배찬승 등 3명 파견",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-12T05:07:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/001/0016438413"
     },
     {
-     "title": "스마트폰 보고 걷다가 사고‥책임은 운전자만?",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-11T21:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001535040?sid=101"
+     "title": "[공식] 배찬승-김백산-김현준, 호주리그 파견…삼성 “따뜻한 곳에서 경...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-12T04:47:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/468/0001280501"
     },
     {
-     "title": "[불안 커지는 대구 도시철도] 멈춤 사고 잇따르는 대구 3호선…승객 대...",
+     "title": "삼성 라이온즈, 호주 리그에 배찬승·김백산·김현준 파견",
      "press": "imaeil.com",
-     "publishedAt": "2026-11-11T21:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001039843?sid=102"
+     "publishedAt": "2026-11-12T04:46:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/088/0001039922"
     }
    ]
   },
   {
-   "keyword": "2026년 11월 12일 운세",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-11T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오늘의 운세] 2026년 11월 12일 (목) 띠별운세 '남은 힘을 한곳에 모으...",
-     "press": "dailypop.kr",
-     "publishedAt": "2026-11-11T21:40:00.000Z",
-     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103978"
-    },
-    {
-     "title": "[오늘의 운세] 12일 목요일 나의 운세는?",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-11T21:36:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1191795"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 12일 별자리 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-11T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006408524?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "사우디 훈련하는 축구",
+   "keyword": "홍콩익스프레스 팝업 행사",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 3,
+   "articles90": 16,
+   "recent20": 8,
    "press": 4,
-   "firstArticleAt": "2026-11-11T21:14:00.000Z",
+   "firstArticleAt": "2026-11-12T04:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "모레노호, 사우디전 대비 첫 전술훈련…'세트피스' 다듬기 주력",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-11T22:11:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/055/0001402401"
+     "title": "성수동에 팝업 여는 홍콩익스프레스…국내 LCC와 경쟁 자신감",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-12T05:03:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261112000794"
     },
     {
-     "title": "'원팀' 시험대 오른 모레노호…13일 사우디와 맞대결",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-11T22:00:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/003/0014317070"
+     "title": "홍콩익스프레스, 韓 노선 성장세 토대로 시장 공략 나선다… 항공편 확...",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-12T05:00:00.000Z",
+     "link": "https://www.viva100.com/article/20261112500736"
     },
     {
-     "title": "한국 축구대표팀, 사우디전 승리 전략은",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-11T21:58:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611120013"
+     "title": "성수에서 느끼는 홍콩… 홍콩익스프레스, 국내 첫 브랜드 팝업 오픈",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-12T04:53:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261112000877"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 388,
-  "matched": 161,
-  "avgLeadMin": 995,
+  "flagged": 345,
+  "matched": 137,
+  "avgLeadMin": 1557,
   "recent": [
    {
-    "keyword": "철도노조 총파업 예고",
-    "hitKeyword": "스페인 노동자 총파업",
-    "hitAt": "2026-11-12T07:00:00+09:00",
-    "leadMin": 9261
+    "keyword": "젠슨 황 불륜 스캔들",
+    "hitKeyword": "젠슨 황 불륜 해임 위기",
+    "hitAt": "2026-11-12T14:00:00+09:00",
+    "leadMin": 506
    },
    {
-    "keyword": "날씨",
-    "hitKeyword": "11월 12일 날씨",
-    "hitAt": "2026-11-12T06:30:00+09:00",
-    "leadMin": 9998
+    "keyword": "젠슨 황 불륜 의혹 확산",
+    "hitKeyword": "젠슨 황 불륜 해임 위기",
+    "hitAt": "2026-11-12T14:00:00+09:00",
+    "leadMin": 139
    },
    {
-    "keyword": "경제",
-    "hitKeyword": "AI붐 경제 영향",
-    "hitAt": "2026-11-12T06:30:00+09:00",
-    "leadMin": 9536
+    "keyword": "젠슨 황 해임 위기",
+    "hitKeyword": "젠슨 황 불륜 해임 위기",
+    "hitAt": "2026-11-12T14:00:00+09:00",
+    "leadMin": 18
    },
    {
-    "keyword": "2026년 11월 6일 운세",
-    "hitKeyword": "11월 12일 날씨",
-    "hitAt": "2026-11-12T06:30:00+09:00",
-    "leadMin": 8657
+    "keyword": "김건희 집사 무죄 확정",
+    "hitKeyword": "성유리 남편 무죄 확정",
+    "hitAt": "2026-11-12T13:00:00+09:00",
+    "leadMin": 58
    },
    {
-    "keyword": "광주 아파트 화재",
-    "hitKeyword": "광주 아파트 화재",
-    "hitAt": "2026-11-12T06:30:00+09:00",
-    "leadMin": 408
+    "keyword": "성유리 남편 무죄 확정",
+    "hitKeyword": "성유리 남편 무죄 확정",
+    "hitAt": "2026-11-12T13:00:00+09:00",
+    "leadMin": 18
    },
    {
-    "keyword": "트럼프 이란전쟁 종전",
-    "hitKeyword": "트럼프 이란 전쟁",
-    "hitAt": "2026-11-12T06:30:00+09:00",
-    "leadMin": 146
+    "keyword": "울산 김현석 감독 올 시즌 종료",
+    "hitKeyword": "김현석 울산 결별",
+    "hitAt": "2026-11-12T12:30:00+09:00",
+    "leadMin": 28
    },
    {
-    "keyword": "유럽 여객기 폭탄 위협",
-    "hitKeyword": "유럽 학교 폭탄 협박",
-    "hitAt": "2026-11-12T06:00:00+09:00",
-    "leadMin": 8637
+    "keyword": "크러쉬 조이",
+    "hitKeyword": "크러쉬 조이 듀엣",
+    "hitAt": "2026-11-12T12:00:00+09:00",
+    "leadMin": 647
    },
    {
-    "keyword": "신세계 이석구 사장 선임",
-    "hitKeyword": "한국투자 신세계 하향",
-    "hitAt": "2026-11-12T06:00:00+09:00",
-    "leadMin": 8184
+    "keyword": "크러쉬 조이 듀엣 공개",
+    "hitKeyword": "크러쉬 조이 듀엣",
+    "hitAt": "2026-11-12T12:00:00+09:00",
+    "leadMin": 205
    },
    {
-    "keyword": "러 우크라 포로교환 합의",
-    "hitKeyword": "러 우크라 포로 교환",
-    "hitAt": "2026-11-12T06:00:00+09:00",
-    "leadMin": 348
+    "keyword": "젠슨 황 해임 준비",
+    "hitKeyword": "젠슨 황 해임 추진",
+    "hitAt": "2026-11-12T12:00:00+09:00",
+    "leadMin": 74
    },
    {
-    "keyword": "이란 지하 미사일 도시",
-    "hitKeyword": "이란 지하 미사일 도시",
-    "hitAt": "2026-11-12T06:00:00+09:00",
-    "leadMin": 297
+    "keyword": "손흥민 김민재 공동 입장문",
+    "hitKeyword": "손흥민 대표팀 불화설 해명",
+    "hitAt": "2026-11-12T11:30:00+09:00",
+    "leadMin": 13
    }
   ]
  }
