@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T11:25:30.340Z",
+ "builtAt": "2026-11-12T11:35:35.992Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,10 +16,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 14,
+   "articles90": 11,
    "recent20": 2,
-   "press": 14,
-   "firstArticleAt": "2026-11-12T09:56:00.000Z",
+   "press": 11,
+   "firstArticleAt": "2026-11-12T10:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -44,66 +44,34 @@
    ]
   },
   {
-   "keyword": "캐릭",
+   "keyword": "50대 남성 구속영장 청구",
    "sources": [
-    "google"
+    "nate"
    ],
    "articles90": 9,
-   "recent20": 2,
+   "recent20": 4,
    "press": 8,
-   "firstArticleAt": "2026-11-12T09:58:00.000Z",
+   "firstArticleAt": "2026-11-12T10:09:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "[오피셜] 맨유, 결국 캐릭 잘랐다! 훈련 끝났는데 \"당신 해고야\" 통보.....",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-12T11:08:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/108/0003487022"
+     "title": "성북구 15살 소녀 살해 50대 남 구속영장 청구…피의자 가족범죄 관계 ...",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-12T11:30:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1543563"
     },
     {
-     "title": "'EPL 18위' 맨유, 결국 캐릭 감독 경질…\"변화 필요\"",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-12T11:06:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109877682462"
-    },
-    {
-     "title": "'오피셜' 공식발표 떴다! 맨유, '레전드' 마이클 캐릭 감독 경질...\"후임...",
-     "press": null,
-     "publishedAt": "2026-11-12T11:03:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/216/0000143711"
-    }
-   ]
-  },
-  {
-   "keyword": "성북 10대 살해 구속영장",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 3,
-   "press": 7,
-   "firstArticleAt": "2026-11-12T10:09:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "10대 소녀 살해한 50대 남성, 이틀째 묵비권…구속영장 청구",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-12T11:24:00.000Z",
-     "link": "https://www.ajunews.com/view/20261112201726634"
+     "title": "[단독] 전 연인 두 차례 구속영장...사흘 만에 숨진 채 발견",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-12T11:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432076?sid=102"
     },
     {
      "title": "10대 소녀 살해한 50대 남성에 구속영장 청구…여전히 진술 거부",
      "press": "view.asiae.co.kr",
      "publishedAt": "2026-11-12T11:24:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/277/0005842015?sid=102"
-    },
-    {
-     "title": "아들의 성범죄 피해자 살해한 아버지, 단순 범죄? \"청소년 둘러싼 성인...",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-12T11:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002465653?sid=102"
     }
    ]
   },
@@ -112,10 +80,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-12T09:57:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-12T10:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -140,35 +108,34 @@
    ]
   },
   {
-   "keyword": "김지호 잘츠부르크 이적",
+   "keyword": "부동산",
    "sources": [
-    "signal.bz",
-    "nate"
+    "google"
    ],
-   "articles90": 3,
+   "articles90": 6,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T10:01:00.000Z",
-   "exclusive": true,
+   "press": 6,
+   "firstArticleAt": "2026-11-12T10:08:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'대전 유스' 출신 2009년생 김지호, 레드불 잘츠부르크 이적...2027년 여름...",
-     "press": "maniareport.com",
-     "publishedAt": "2026-11-12T10:55:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/425/0000214896"
+     "title": "알스퀘어, 카드매출 데이터로 건물·매장 경쟁력 분석…상업용 부동산 ...",
+     "press": "venturesquare.net",
+     "publishedAt": "2026-11-12T11:08:00.000Z",
+     "link": "https://www.venturesquare.net/1127940/"
     },
     {
-     "title": "대전 유스 출신 김지호, 오스트리아 잘츠부르크 입단",
-     "press": "stnsports.co.kr",
-     "publishedAt": "2026-11-12T10:44:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/450/0000155462"
+     "title": "與 지도부, '종부세 14억' 선 그었지만… 수도권 의원들 \"문제는 부동산...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-12T11:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000965309?sid=100"
     },
     {
-     "title": "[공식발표] 황희찬 후배 생긴다! '대전 성골' 김지호, 17살에 韓 유럽파...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-12T10:01:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/109/0005639486"
+     "title": "김해시, 공인중개사 200여 명 대상 부동산 거래사고 예방 교육",
+     "press": "newstown.co.kr",
+     "publishedAt": "2026-11-12T10:28:00.000Z",
+     "link": "http://www.newstown.co.kr/news/articleView.html?idxno=721739"
     }
    ]
   }
@@ -176,9 +143,45 @@
  "hitRate": {
   "days": 7,
   "flagged": 390,
-  "matched": 128,
-  "avgLeadMin": 975,
+  "matched": 134,
+  "avgLeadMin": 935,
   "recent": [
+   {
+    "keyword": "한국 야구, 호주에 7-8 패배",
+    "hitKeyword": "한국 야구 호주전 패배",
+    "hitAt": "2026-11-12T20:30:00+09:00",
+    "leadMin": 176
+   },
+   {
+    "keyword": "여자축구, LA 올림픽 B조 대결",
+    "hitKeyword": "여자축구 B조 확정",
+    "hitAt": "2026-11-12T20:30:00+09:00",
+    "leadMin": 126
+   },
+   {
+    "keyword": "여자축구, LA올림픽 예선 B조",
+    "hitKeyword": "여자축구 B조 확정",
+    "hitAt": "2026-11-12T20:30:00+09:00",
+    "leadMin": 105
+   },
+   {
+    "keyword": "여자축구 LA 올림픽 최종예선 B조",
+    "hitKeyword": "여자축구 B조 확정",
+    "hitAt": "2026-11-12T20:30:00+09:00",
+    "leadMin": 65
+   },
+   {
+    "keyword": "여자축구, LA 올림픽 최종예선 B조",
+    "hitKeyword": "여자축구 B조 확정",
+    "hitAt": "2026-11-12T20:30:00+09:00",
+    "leadMin": 25
+   },
+   {
+    "keyword": "캐릭",
+    "hitKeyword": "맨유 캐릭 감독 경질",
+    "hitAt": "2026-11-12T20:30:00+09:00",
+    "leadMin": 15
+   },
    {
     "keyword": "반도체 유가 민간소비 영향",
     "hitKeyword": "삼성 SK 반도체 인력 부족",
@@ -202,42 +205,6 @@
     "hitKeyword": "젠슨 황 해임 착수",
     "hitAt": "2026-11-12T20:00:00+09:00",
     "leadMin": 96
-   },
-   {
-    "keyword": "젠슨 황 해임 논의",
-    "hitKeyword": "젠슨 황 해임 착수",
-    "hitAt": "2026-11-12T20:00:00+09:00",
-    "leadMin": 75
-   },
-   {
-    "keyword": "젠슨 황 엔비디아 위기",
-    "hitKeyword": "엔비디아 정보수집 의혹",
-    "hitAt": "2026-11-12T19:30:00+09:00",
-    "leadMin": 146
-   },
-   {
-    "keyword": "한국, APBC 첫 경기서 호주에 패배",
-    "hitKeyword": "APBC 한국 호주",
-    "hitAt": "2026-11-12T19:00:00+09:00",
-    "leadMin": 76
-   },
-   {
-    "keyword": "오산 원룸 시신 발견",
-    "hitKeyword": "오산 원룸 시신 발견",
-    "hitAt": "2026-11-12T18:30:00+09:00",
-    "leadMin": 86
-   },
-   {
-    "keyword": "젠슨 황 해임 위기 및 스캔들",
-    "hitKeyword": "젠슨 황 불륜 스캔들",
-    "hitAt": "2026-11-12T18:30:00+09:00",
-    "leadMin": 46
-   },
-   {
-    "keyword": "젠슨 황 불륜 논란",
-    "hitKeyword": "젠슨 황 불륜",
-    "hitAt": "2026-11-12T18:00:00+09:00",
-    "leadMin": 36
    }
   ]
  }
