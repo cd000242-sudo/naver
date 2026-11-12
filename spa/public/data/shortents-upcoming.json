@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-11T23:55:40.612Z",
+ "builtAt": "2026-11-12T00:05:44.001Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,34 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "젠슨 황 해임 검토",
+   "keyword": "금융지주 회장 연임",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 37,
+   "articles90": 65,
    "recent20": 9,
-   "press": 31,
-   "firstArticleAt": "2026-11-11T22:44:00.000Z",
+   "press": 40,
+   "firstArticleAt": "2026-11-11T23:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"젠슨 황 신뢰한다\"던 엔비디아, 해임 검토 착수...이사회 \"이르면 오늘...",
-     "press": "ziksir.com",
-     "publishedAt": "2026-11-11T23:52:00.000Z",
-     "link": "https://www.ziksir.com/news/articleView.html?idxno=152988"
+     "title": "금융위, 금융사 지배구조 개편…CEO 셀프 연임 차단 추진",
+     "press": "digitaltoday.co.kr",
+     "publishedAt": "2026-11-12T00:04:00.000Z",
+     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=714778"
     },
     {
-     "title": "엔비디아 이사회, 젠슨 황 해임 검토…\"이르면 오늘 회의\"",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-11T23:50:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=503224"
+     "title": "금융지주 회장 '셀프 연임' 안 된다…3연임시 주총 75% 찬성해야",
+     "press": "daily.hankooki.com",
+     "publishedAt": "2026-11-11T23:56:00.000Z",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1424326"
     },
     {
-     "title": "엔비디아, 젠슨 황 해임 준비까지…'AI 반도체' 시장 판도 달라지나",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-11T23:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014317157?sid=101"
+     "title": "금융지주 회장 연임 특혜·이사회 견제 부실 적발",
+     "press": "cstimes.com",
+     "publishedAt": "2026-11-11T23:54:00.000Z",
+     "link": "https://www.cstimes.com/news/articleView.html?idxno=727613"
     }
    ]
   },
@@ -47,73 +47,150 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 20,
-   "recent20": 8,
-   "press": 18,
-   "firstArticleAt": "2026-11-11T22:33:00.000Z",
+   "articles90": 24,
+   "recent20": 9,
+   "press": 21,
+   "firstArticleAt": "2026-11-11T22:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'딥 레드' 미시시피 반전…민주당 콜롬, 42년 만의 상원 탈환",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-11T23:52:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000081931"
+     "title": "미국 민주, 공화 텃밭 미시시피 상원선거도 승리…총 55석",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-12T00:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012292291?sid=104"
     },
     {
-     "title": "美민주, '딥레드' 공화텃밭 미시시피 상원선거도 승리…총 55석",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-11T23:52:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2017549"
+     "title": "‘공화 텃밭’ 미시시피마저 민주당 품으로⋯상원 55석 확보",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-12T00:02:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2647163"
     },
     {
-     "title": "공화 텃밭 미시시피마저 뒤집혔다…민주 상원 55석",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-11T23:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005603111?sid=104"
+     "title": "美민주, 공화 텃밭 미시시피 상원도 탈환… 최소 55석",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-12T00:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000965126?sid=104"
     }
    ]
   },
   {
-   "keyword": "크러쉬 조이 듀엣 공개",
+   "keyword": "나스닥 1.6% 상승",
    "sources": [
     "signal.bz",
-    "daum"
+    "nate"
    ],
-   "articles90": 8,
-   "recent20": 3,
-   "press": 8,
-   "firstArticleAt": "2026-11-11T22:50:00.000Z",
+   "articles90": 16,
+   "recent20": 1,
+   "press": 16,
+   "firstArticleAt": "2026-11-11T22:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "크러쉬♥조이, 열애 6년 만에 파격 행보…반려견 안고 '깜짝 듀엣'",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-11T23:49:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000638641"
+     "title": "엔비디아 급락에 나스닥100 선물 0.7% 하락…경쟁사 AMD는 4%대 상승",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-11T23:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005440034?sid=101"
     },
     {
-     "title": "크러쉬♥조이, 5년째 굳건한 애정…얼굴 없는 듀엣에도 “설렌다”",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-11T23:48:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005762513"
+     "title": "코어위브 실적에 AI주 일제히 반등 … 나스닥 1.6% 상승",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-11T23:44:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/12/2026111200026.html"
     },
     {
-     "title": "조이♥크러쉬, 공개 열애 6년째 얼굴 가린 듀엣…반려견 품에 안고 ‘삐...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-11T23:43:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005639084"
+     "title": "[뉴욕증시] 코어위브 호실적에 상승 마감…나스닥 1.6%↑",
+     "press": "segyebiz.com",
+     "publishedAt": "2026-11-11T23:38:00.000Z",
+     "link": "http://www.segyebiz.com/newsView/20261112502954?OutUrl=naver"
+    }
+   ]
+  },
+  {
+   "keyword": "광주 아파트 방화 심정지",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-11T22:37:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "전남광주 아파트 방화 혐의 40대 입건…경비원 심정지 이송",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-11T23:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001884672?sid=102"
+    },
+    {
+     "title": "어머니 사는 아파트에 불지른 40대 패륜...애먼 70대 경비원 '심정지'",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-11T23:10:00.000Z",
+     "link": "https://www.insight.co.kr/news/581668"
+    },
+    {
+     "title": "'14명 중경상' 전남광주 북구 아파트 화재 방화 정황…40대 입건",
+     "press": "namdonews.com",
+     "publishedAt": "2026-11-11T23:04:00.000Z",
+     "link": "https://www.namdonews.com/news/articleView.html?idxno=929014"
+    }
+   ]
+  },
+  {
+   "keyword": "김정은 주택구 시찰",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-11T22:43:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김정은, 동해안 해군기지 건설현장서 “국가안전·해상주권보위 직결 핵...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-12T00:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002722404?sid=100"
+    },
+    {
+     "title": "[포토] 김정은, 새로 건설된 강원도 통천군 주택구 시찰",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-11T23:56:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/325040/?sc=Naver"
+    },
+    {
+     "title": "김정은, 동해안 해군기지 건설현장 시찰…“정해진 기간 내 완결”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-11T22:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012292222?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 378,
-  "matched": 153,
-  "avgLeadMin": 1000,
+  "flagged": 373,
+  "matched": 148,
+  "avgLeadMin": 1001,
   "recent": [
+   {
+    "keyword": "반도체",
+    "hitKeyword": "반도체 한국 대미 흑자",
+    "hitAt": "2026-11-12T09:00:00+09:00",
+    "leadMin": 75
+   },
+   {
+    "keyword": "젠슨 황 해임 검토",
+    "hitKeyword": "젠슨 황 해임 추진",
+    "hitAt": "2026-11-12T09:00:00+09:00",
+    "leadMin": 55
+   },
    {
     "keyword": "뉴욕증시 급락",
     "hitKeyword": "뉴욕증시 일제 상승",
@@ -161,18 +238,6 @@
     "hitKeyword": "광주 아파트 화재",
     "hitAt": "2026-11-12T06:30:00+09:00",
     "leadMin": 408
-   },
-   {
-    "keyword": "트럼프 이란전쟁 종전",
-    "hitKeyword": "트럼프 이란 전쟁",
-    "hitAt": "2026-11-12T06:30:00+09:00",
-    "leadMin": 146
-   },
-   {
-    "keyword": "유럽 여객기 폭탄 위협",
-    "hitKeyword": "유럽 학교 폭탄 협박",
-    "hitAt": "2026-11-12T06:00:00+09:00",
-    "leadMin": 8637
    }
   ]
  }
