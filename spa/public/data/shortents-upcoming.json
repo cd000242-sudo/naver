@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T03:31:46.261Z",
+ "builtAt": "2026-11-12T03:41:50.574Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,146 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 18,
  "candidates": [
+  {
+   "keyword": "메가프로젝트 이재명 대통령",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 67,
+   "recent20": 7,
+   "press": 46,
+   "firstArticleAt": "2026-11-12T02:18:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李 대통령 \"충청권 메가프로젝트, 112개 기업 23조 원 추가 투자 예정\" ...",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-12T03:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000192203?sid=100"
+    },
+    {
+     "title": "이재명 대통령, 삼성 온양캠퍼스 현장 찾아...충청권 메가프로젝트 직접...",
+     "press": "digitaltoday.co.kr",
+     "publishedAt": "2026-11-12T03:36:00.000Z",
+     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=714889"
+    },
+    {
+     "title": "이 대통령, 충청권 메가프로젝트 착공식 참석...다음 주 순방",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-12T03:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002431831?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "미래에셋 3분기 손실",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 26,
+   "recent20": 1,
+   "press": 25,
+   "firstArticleAt": "2026-11-12T02:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "미래에셋증권, 3분기 순손실 4056억원... 자사주 6500만주 소각 예정",
+     "press": "newslock.co.kr",
+     "publishedAt": "2026-11-12T03:26:00.000Z",
+     "link": "http://www.newslock.co.kr/news/articleView.html?idxno=139946"
+    },
+    {
+     "title": "[MD포커스] 스페이스X 손실에 적자 낸 미래에셋증권…박현주 글로벌 전...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-12T03:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/117/0004124423?sid=103"
+    },
+    {
+     "title": "미래에셋증권, 실적은 키우고 자사주는 덜어내고…6500만주 소각 추진",
+     "press": "the-pr.co.kr",
+     "publishedAt": "2026-11-12T03:08:00.000Z",
+     "link": "https://www.the-pr.co.kr/news/articleView.html?idxno=63295"
+    }
+   ]
+  },
+  {
+   "keyword": "성북구 10대 살해 구속영장",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 26,
+   "recent20": 4,
+   "press": 23,
+   "firstArticleAt": "2026-11-12T02:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'성북구 청소년 살해' 50대, 진술 거부…프로파일러 투입",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-12T03:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000142118?sid=102"
+    },
+    {
+     "title": "경찰, '성북구 15세 소녀 살해' 50대 남성 구속영장 신청",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-12T03:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004209071?sid=102"
+    },
+    {
+     "title": "성북구 '아들 성범죄 피해자' 살해…50대 구속영장 신청",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-12T03:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001402513?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "성유리 남편 무죄 확정",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 20,
+   "recent20": 0,
+   "press": 20,
+   "firstArticleAt": "2026-11-12T02:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "성유리 남편, 20억 코인사기 무죄…핑클 완전체 컴백 날개[SC이슈]",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-12T03:01:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004466102"
+    },
+    {
+     "title": "성유리 남편 안성현, 대법원서 무죄 확정…징역 4년 6개월→무죄 반전",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-12T02:54:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16274658"
+    },
+    {
+     "title": "'성유리 남편' 안성현 씨 무죄 확정…오늘(12일) 대법원서 전해진 소식",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-12T02:48:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1174026"
+    }
+   ]
+  },
   {
    "keyword": "김건희 집사게이트 IMS모빌리티 대표 무죄",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 17,
+   "articles90": 13,
    "recent20": 0,
-   "press": 17,
-   "firstArticleAt": "2026-11-12T02:06:00.000Z",
+   "press": 13,
+   "firstArticleAt": "2026-11-12T02:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -43,130 +172,101 @@
    ]
   },
   {
-   "keyword": "젠슨 황 불륜 의혹 확산",
+   "keyword": "델핀 아르노 학위 수여식 참석",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 13,
-   "recent20": 0,
-   "press": 13,
-   "firstArticleAt": "2026-11-12T02:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“모두가 조롱하더니”…6개월 전 '젠슨 황 불륜' 경고한 30대 투자자는",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-12T03:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003484960?sid=104"
-    },
-    {
-     "title": "젠슨황 해임 착수… “부사장과도 불륜”",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-12T03:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002832344?sid=104"
-    },
-    {
-     "title": "“젠슨 황 없는 엔비디아는?”…머스크 영입설에 금융위기 우려까지 [이...",
-     "press": "ekn.kr",
-     "publishedAt": "2026-11-12T02:54:00.000Z",
-     "link": "https://www.ekn.kr/web/view.php?key=20261112026038671"
-    }
-   ]
-  },
-  {
-   "keyword": "이재명 메가프로젝트 회의 발언",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 20,
-   "recent20": 1,
+   "articles90": 59,
+   "recent20": 11,
    "press": 12,
-   "firstArticleAt": "2026-11-12T02:16:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이 대통령 \"메가프로젝트 속도전 넘어 전격전…기업에 힘 보탤 것\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-12T03:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001402514?sid=100"
-    },
-    {
-     "title": "이 대통령, 충청권 메가프로젝트 착공식 참석...“4개월 만에 현실로”",
-     "press": "vop.co.kr",
-     "publishedAt": "2026-11-12T03:04:00.000Z",
-     "link": "https://vop.co.kr/A00001697572.html"
-    },
-    {
-     "title": "李대통령 \"충청 메가프로젝트, 지역과 국민 함께 성장하는 균형발전으로...",
-     "press": "jeonmae.co.kr",
-     "publishedAt": "2026-11-12T02:36:00.000Z",
-     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1311253"
-    }
-   ]
-  },
-  {
-   "keyword": "군부대 상비약 허용",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-12T02:05:00.000Z",
+   "firstArticleAt": "2026-11-12T02:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "약국 없는 군부대·공항서 안전상비약 취급 추진",
-     "press": "medipana.com",
-     "publishedAt": "2026-11-12T03:24:00.000Z",
-     "link": "https://www.medipana.com/news/articleView.html?idxno=421650"
+     "title": "[헤럴드pic] 디올 CEO 학위수여식에 재계 총수들 집결",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-12T03:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002722651?sid=101"
     },
     {
-     "title": "군부대·지방공항 '안전상비약' 접근성 높인다…복지부 개정안 예고",
-     "press": "docdocdoc.co.kr",
-     "publishedAt": "2026-11-12T03:14:00.000Z",
-     "link": "http://www.docdocdoc.co.kr/news/articleView.html?idxno=3044514"
+     "title": "디올 CEO 학위 수여식 박수치는 이부진-정의선-신동빈-신유열",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-12T03:38:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261112000770"
     },
     {
-     "title": "군부대·지방공항 의약품 이용 문턱 낮춘다",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-12T03:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000142116?sid=103"
+     "title": "[포토] 델핀 아르노 디올 CEO 명예 박사학위 수여식",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-12T03:38:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/12/2026111200195.html"
     }
    ]
   },
   {
-   "keyword": "같은 목표 향해 나아갈 동료",
+   "keyword": "특검, 중앙선관위 압수수색",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-12T02:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "31점을 100점으로…'보안점검 점수조작' 중앙선관위 압수수색(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-12T03:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016438203?sid=102"
+    },
+    {
+     "title": "특검, 중앙선관위 ‘보안실태 점검문서 허위 작성’ 정황 포착",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-12T03:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002832350?sid=102"
+    },
+    {
+     "title": "선관위 특검, '보안점검 문서 허위작성' 중앙선관위 등 압수수색",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-12T02:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000925433?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "sk그룹",
+   "sources": [
+    "signal.bz",
+    "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-12T02:26:00.000Z",
+   "firstArticleAt": "2026-11-12T02:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"같은 목표 향해 가는 동료\"…손흥민-96라인, '불화설' 일축",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-12T03:22:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/325072/?sc=Naver"
+     "title": "SK그룹 편입 아이에스시, 송도에 반도체 공장 증설…2028년 가동",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-12T03:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005603317?sid=102"
     },
     {
-     "title": "‘92 VS 96 내분 없다’ 국대 불화설에 “같은 목표 향해 나아갈 동료”",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-12T02:39:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/382/0001304422"
+     "title": "SK그룹, 오늘부터 3일간 CEO 세미나…계열사 간 'AI 시너지' 집중 논의",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-12T02:48:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=902867"
     },
     {
-     "title": "손흥민-황희찬 등 불화설 진화 “은퇴요구 사실 아냐…같은 목표로 가는...",
-     "press": "donga.com",
-     "publishedAt": "2026-11-12T02:26:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/020/0003761978"
+     "title": "SK그룹, AI 투자 넘어 수익 창출로…CEO 50여명 머리 맞댄다",
+     "press": "seouleconews.com",
+     "publishedAt": "2026-11-12T02:38:00.000Z",
+     "link": "http://www.seouleconews.com/news/articleView.html?idxno=94971"
     }
    ]
   },
@@ -205,10 +305,22 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 361,
-  "matched": 144,
-  "avgLeadMin": 1493,
+  "flagged": 364,
+  "matched": 145,
+  "avgLeadMin": 1547,
   "recent": [
+   {
+    "keyword": "층간소음 기준 강화",
+    "hitKeyword": "층간소음 신고 구조",
+    "hitAt": "2026-11-12T12:30:00+09:00",
+    "leadMin": 9997
+   },
+   {
+    "keyword": "울산 김현석 감독 올 시즌 종료",
+    "hitKeyword": "김현석 울산 결별",
+    "hitAt": "2026-11-12T12:30:00+09:00",
+    "leadMin": 28
+   },
    {
     "keyword": "크러쉬 조이",
     "hitKeyword": "크러쉬 조이 듀엣",
@@ -256,18 +368,6 @@
     "hitKeyword": "우스만 메랍 폭행",
     "hitAt": "2026-11-12T11:00:00+09:00",
     "leadMin": 3
-   },
-   {
-    "keyword": "이재명 대통령 민주당 만찬",
-    "hitKeyword": "미국 민주당 미시시피 승리",
-    "hitAt": "2026-11-12T10:30:00+09:00",
-    "leadMin": 709
-   },
-   {
-    "keyword": "수사",
-    "hitKeyword": "성북구 살인 사건 수사",
-    "hitAt": "2026-11-12T10:30:00+09:00",
-    "leadMin": 326
    }
   ]
  }
