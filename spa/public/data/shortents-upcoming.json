@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T23:32:01.029Z",
+ "builtAt": "2026-11-12T23:42:06.133Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,84 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 19,
  "candidates": [
-  {
-   "keyword": "트럼프, 이란 합의 필요없다",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 16,
-   "recent20": 6,
-   "press": 15,
-   "firstArticleAt": "2026-11-12T22:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "트럼프 \"이란과 합의 필요 없다\" 한마디에…국제유가 3% 넘게 급등",
-     "press": "newsroad.co.kr",
-     "publishedAt": "2026-11-12T23:30:00.000Z",
-     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=67657"
-    },
-    {
-     "title": "트럼프 \"이란과 협상 불필요\"…밴스에 '민주당 부패 척결' 전념 지시",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-12T23:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009286995?sid=104"
-    },
-    {
-     "title": "트럼프 “이란과 합의 필요 없다···밴스, 다른 임무 집중해야”",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-12T23:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003482471?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "하나·부산은행 상반기 1위",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-12T22:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "하나·부산은행, 금융위 상반기 기술금융 평가서 1위",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-12T23:22:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/325175/?sc=Naver"
-    },
-    {
-     "title": "상반기 기술금융 평가 1위 하나은행…기업은행 2위",
-     "press": "newsway.co.kr",
-     "publishedAt": "2026-11-12T23:18:00.000Z",
-     "link": "https://www.newsway.co.kr/news/view?ud=2026111308115796498"
-    },
-    {
-     "title": "상반기 기술금융 평가서 하나은행 1위...기업은행·부산은행도 두각",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-12T23:08:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=72961"
-    }
-   ]
-  },
   {
    "keyword": "나스닥 지수",
    "sources": [
     "google"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 11,
+   "articles90": 12,
+   "recent20": 3,
+   "press": 12,
    "firstArticleAt": "2026-11-12T22:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[해외시황] 뉴욕증시, 젠슨 황 사임·유가 급등에 '하락'…나스닥 0.39%↓",
+     "press": "newsprime.co.kr",
+     "publishedAt": "2026-11-12T23:34:00.000Z",
+     "link": "http://www.newsprime.co.kr/news/article.html?no=754816"
+    },
     {
      "title": "[뉴욕증시] 젠슨 황 퇴진에 하락…나스닥 0.4%↓",
      "press": "segyebiz.com",
@@ -97,38 +39,65 @@
      "press": "m-i.kr",
      "publishedAt": "2026-11-12T23:26:00.000Z",
      "link": "https://www.m-i.kr/news/articleView.html?idxno=2018093"
+    }
+   ]
+  },
+  {
+   "keyword": "세무사 AI안경 의혹에",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 11,
+   "recent20": 5,
+   "press": 10,
+   "firstArticleAt": "2026-11-12T22:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "리트 첫 만점자 “수능 국어 생중계로 풀겠다”… ‘AI 안경’ 의혹 대...",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-12T23:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001204485?sid=102"
     },
     {
-     "title": "뉴욕증시, 3대 지수 하락…젠슨 황 사임에 엔비디아 약세",
-     "press": "issuenbiz.com",
-     "publishedAt": "2026-11-12T23:06:00.000Z",
-     "link": "http://www.issuenbiz.com/news/articleView.html?idxno=81550"
+     "title": "'AI 안경' 의혹 확산에…LEET 만점자 \"수능 라이브로 풀겠다\"",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-12T23:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005353457?sid=102"
+    },
+    {
+     "title": "세무사 수석 합격자 'AI 안경' 의혹…국세청·공단 사실관계 조사",
+     "press": "ekoreanews.co.kr",
+     "publishedAt": "2026-11-12T23:34:00.000Z",
+     "link": "https://www.ekoreanews.co.kr/news/articleView.html?idxno=89184"
     }
    ]
   },
   {
    "keyword": "박수홍 98억 선고",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 11,
+   "articles90": 10,
    "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-12T22:07:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-12T22:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "진짜 길었다… 박수홍, 드디어 '친형 부부'와의 5년 싸움 끝이 보인다",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-12T23:34:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1174238"
+    },
     {
      "title": "박수홍, 친형 부부 상대 ‘98억 손배소’ 오늘 1심 선고",
      "press": "mk.co.kr",
      "publishedAt": "2026-11-12T23:13:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/009/0005763111?sid=102"
-    },
-    {
-     "title": "박수홍 친형 부부, 오늘(13일) 98억 손배소 선고…핵심 쟁점은",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-12T23:08:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16275409"
     },
     {
      "title": "박수홍, 친형 부부 '98억 손배소' 오늘 선고…5년 공방 끝날까",
@@ -139,130 +108,34 @@
    ]
   },
   {
-   "keyword": "10월 수출물량 증가",
+   "keyword": "영화",
    "sources": [
-    "signal.bz"
-   ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-12T22:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "환율·유가 하락에 수입물가 1.8%↓…수출물량은 역대 최대 증가",
-     "press": "youthdaily.co.kr",
-     "publishedAt": "2026-11-12T23:30:00.000Z",
-     "link": "https://www.youthdaily.co.kr/news/article.html?no=229785"
-    },
-    {
-     "title": "10월 수출물가 0.7%↑…반도체 호조에 석 달 만에 반등",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-12T23:26:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=624961"
-    },
-    {
-     "title": "10월 수출물가 0.7% 상승…반도체 가격 오름세에 반등",
-     "press": "financialpost.co.kr",
-     "publishedAt": "2026-11-12T23:18:00.000Z",
-     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=300635"
-    }
-   ]
-  },
-  {
-   "keyword": "리센느, 악성 게시물 고소 완료",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 4,
-   "press": 8,
-   "firstArticleAt": "2026-11-12T22:34:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "리센느 측, 악성 게시물 작성자 형사 고소… \"모든 수단 동원해 대응\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-12T23:31:00.000Z",
-     "link": "https://m.entertain.naver.com/article/469/0000965360"
-    },
-    {
-     "title": "리센느, 악성 게시물 법적 대응…\"1차 형사 고소 완료\"",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-12T23:27:00.000Z",
-     "link": "https://m.entertain.naver.com/article/629/0000551509"
-    },
-    {
-     "title": "리센느, 악플러에 칼 빼들었다“1차 형사 고소…초범·반성문도 선처 없...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-12T23:25:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001147152"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황 사임 후폭풍",
-   "sources": [
-    "signal.bz"
+    "google"
    ],
    "articles90": 7,
-   "recent20": 3,
+   "recent20": 4,
    "press": 7,
-   "firstArticleAt": "2026-11-12T22:04:00.000Z",
+   "firstArticleAt": "2026-11-12T22:50:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "젠슨 황, 33년 만에 엔비디아서 퇴장…AI업계 충격파",
-     "press": "choicenews.co.kr",
-     "publishedAt": "2026-11-12T23:26:00.000Z",
-     "link": "http://www.choicenews.co.kr/news/articleView.html?idxno=173154"
+     "title": "영화 '취권'서 성룡과 맞붙었던 한국 배우…오늘 전해진 안타까운 소식",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-12T23:40:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1174241"
     },
     {
-     "title": "[로드픽] 젠슨 황 퇴진 후폭풍…엔비디아 여진, 한국 AI 생태계도 \"흔들...",
-     "press": "newsroad.co.kr",
-     "publishedAt": "2026-11-12T23:22:00.000Z",
-     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=67654"
+     "title": "2023년 정부 예산 삭감 '서울독립영화제'...연상호→변우석, 영화계 연대...",
+     "press": "nc.press",
+     "publishedAt": "2026-11-12T23:38:00.000Z",
+     "link": "https://www.nc.press/news/articleView.html?idxno=630882"
     },
     {
-     "title": "젠슨 황 사퇴 후폭풍…엔비디아 주가 4.3% 하락, 삼성전자·SK하이닉스 ...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-12T23:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004174845?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "김서아 기쁨조 후보",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-12T22:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "11세부터 '기쁨조' 후보…북한 무용수 출신 김서아의 고백",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-12T23:00:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=624945"
-    },
-    {
-     "title": "탈북 유튜버 김서아, 기쁨조 최종 후보까지 올랐다…“3명 중 2명 탈락”",
-     "press": "segye.com",
-     "publishedAt": "2026-11-12T22:57:00.000Z",
-     "link": "https://m.entertain.naver.com/article/022/0004174843"
-    },
-    {
-     "title": "탈북미녀 김서아 \"북한서 17세까지 기쁨조 후보\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T22:19:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014319762"
+     "title": "영화 '여전히 찬란하게', 조계종 전국 1만 석 규모 릴레이 응원 시사회...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-12T23:38:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16275459"
     }
    ]
   },
@@ -272,7 +145,7 @@
     "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-12T22:32:00.000Z",
    "exclusive": false,
@@ -299,44 +172,82 @@
    ]
   },
   {
-   "keyword": "이세창, 급성 맹장염으로 긴급 수술",
+   "keyword": "김서아 기쁨조 후보",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T22:06:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-12T22:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이세창, 급성 맹장염으로 긴급 수술 받아",
+     "title": "11세부터 '기쁨조' 후보…북한 무용수 출신 김서아의 고백",
      "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-12T23:06:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=624950"
+     "publishedAt": "2026-11-12T23:00:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=624945"
     },
     {
-     "title": "이세창, '재혼♥ 정하나'도 없는데…급성맹장염 긴급 수술",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-12T22:28:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004466356"
+     "title": "탈북 유튜버 김서아, 기쁨조 최종 후보까지 올랐다…“3명 중 2명 탈락”",
+     "press": "segye.com",
+     "publishedAt": "2026-11-12T22:57:00.000Z",
+     "link": "https://m.entertain.naver.com/article/022/0004174843"
     },
     {
-     "title": "이세창, 119 신고→급성맹장염 수술 영상 남겼다 “죽다가 살았네”",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-12T22:06:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001187013"
+     "title": "탈북미녀 김서아 \"북한서 17세까지 기쁨조 후보\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-12T22:19:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014319762"
+    }
+   ]
+  },
+  {
+   "keyword": "박정성 통상교섭본부장 면담",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 3,
+   "press": 2,
+   "firstArticleAt": "2026-11-12T22:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "박정성 통상교섭본부장, 유럽의회 국제통상위원장 면담",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-12T23:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014319828?sid=100"
+    },
+    {
+     "title": "면담하는 박정성 통상교섭본부장",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-12T23:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014319820?sid=100"
+    },
+    {
+     "title": "박정성 통상교섭본부장, 유럽의회 의원 면담",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-12T23:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014319816?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 416,
-  "matched": 150,
-  "avgLeadMin": 661,
+  "flagged": 414,
+  "matched": 146,
+  "avgLeadMin": 618,
   "recent": [
+   {
+    "keyword": "트럼프, 이란 합의 필요없다",
+    "hitKeyword": "트럼프 이란 강경 선회",
+    "hitAt": "2026-11-13T08:30:00+09:00",
+    "leadMin": 8
+   },
    {
     "keyword": "이정현 31점 소노 역전승",
     "hitKeyword": "이탈리아 프랑스 역전승",
@@ -390,12 +301,6 @@
     "hitKeyword": "김승우 2200만원 피소",
     "hitAt": "2026-11-13T06:30:00+09:00",
     "leadMin": 403
-   },
-   {
-    "keyword": "공장",
-    "hitKeyword": "삼성 반도체 공장 건설",
-    "hitAt": "2026-11-13T06:30:00+09:00",
-    "leadMin": 130
    }
   ]
  }
