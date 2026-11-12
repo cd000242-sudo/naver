@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T06:22:55.423Z",
+ "builtAt": "2026-11-12T06:33:01.522Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,126 +15,95 @@
    "sources": [
     "daum"
    ],
-   "articles90": 63,
-   "recent20": 20,
-   "press": 55,
-   "firstArticleAt": "2026-11-12T04:57:00.000Z",
+   "articles90": 62,
+   "recent20": 17,
+   "press": 56,
+   "firstArticleAt": "2026-11-12T05:15:00.000Z",
    "exclusive": true,
    "capped": true,
    "samples": [
     {
-     "title": "충남도, '3력·광속 행정' 통했다…삼성전자 아산사업장 착공 속도",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-12T06:22:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3750064"
+     "title": "충청권 메가프로젝트 아산서 첫 공사…삼성, HBM 후공정 확충",
+     "press": "pointe.co.kr",
+     "publishedAt": "2026-11-12T06:32:00.000Z",
+     "link": "https://www.pointe.co.kr/news/articleView.html?idxno=87646"
     },
     {
-     "title": "삼성전자, 6조원 규모 HBM 패키징 팹 착공…충청권 투자 본격화",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-12T06:20:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1731451"
+     "title": "정부 '3대 메가프로젝트' 충남서 첫 삽…아산서 착공식",
+     "press": "news.lghellovision.net",
+     "publishedAt": "2026-11-12T06:30:00.000Z",
+     "link": "http://news.lghellovision.net/news/articleView.html?idxno=562094"
     },
     {
-     "title": "‘첫 삽’ 뜬 메가프로젝트…이 대통령 “충청 넘어 호남·영남도 빠르...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-12T06:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003482284?sid=100"
+     "title": "충남, 삼성전자 아산사업장 인허가 80일로 단축…충청권 메가프로젝트 ...",
+     "press": "newsprime.co.kr",
+     "publishedAt": "2026-11-12T06:30:00.000Z",
+     "link": "http://www.newsprime.co.kr/news/article.html?no=754757"
     }
    ]
   },
   {
-   "keyword": "고려아연 영풍 MBK 의결권 제한 취소",
+   "keyword": "고려아연",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 33,
-   "recent20": 7,
-   "press": 32,
-   "firstArticleAt": "2026-11-12T05:02:00.000Z",
+   "articles90": 38,
+   "recent20": 6,
+   "press": 35,
+   "firstArticleAt": "2026-11-12T05:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "법원 \"고려아연의 영풍·MBK 의결권 제한은 위법\"...지난해 주총 결의 취...",
+     "press": "opinionnews.co.kr",
+     "publishedAt": "2026-11-12T06:32:00.000Z",
+     "link": "http://www.opinionnews.co.kr/news/articleView.html?idxno=146999"
+    },
+    {
+     "title": "[사회공헌 Pick] 헥토그룹·효성·고려아연, 걷기 기부와 배리어프리 문...",
+     "press": "lcnews.co.kr",
+     "publishedAt": "2026-11-12T06:30:00.000Z",
+     "link": "https://www.lcnews.co.kr/news/articleView.html?idxno=211251"
+    },
+    {
+     "title": "영풍·MBK, 고려아연 상대 정기주총 결의 취소소송 1심 승소",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-12T06:28:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2647477"
+    }
+   ]
+  },
+  {
+   "keyword": "영풍·MBK 주총 결의 취소",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 31,
+   "recent20": 4,
+   "press": 29,
+   "firstArticleAt": "2026-11-12T05:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "법원 \"고려아연의 영풍·MBK 의결권 제한은 위법\"...지난해 주총 결의 취...",
+     "press": "opinionnews.co.kr",
+     "publishedAt": "2026-11-12T06:32:00.000Z",
+     "link": "http://www.opinionnews.co.kr/news/articleView.html?idxno=146999"
+    },
+    {
+     "title": "영풍·MBK, 고려아연 상대 정기주총 결의 취소소송 1심 승소",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-12T06:28:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2647477"
+    },
     {
      "title": "法 “고려아연, 영풍·MBK 의결권 제한한 주총 결의 취소해야”",
      "press": "sedaily.com",
      "publishedAt": "2026-11-12T06:21:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/011/0004681488?sid=102"
-    },
-    {
-     "title": "법원 고려아연 작년 정기주총 결의 취소 판결, \"경영권 방어 위해 상호...",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-12T06:14:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=451844"
-    },
-    {
-     "title": "法 \"고려아연, 의결권 제한 주총 결의 취소해야\"...영풍·MBK 1심 승소",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-12T06:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005603454?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "서울 아파트값 92주 상승",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 31,
-   "recent20": 3,
-   "press": 23,
-   "firstArticleAt": "2026-11-12T05:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "성동·강동구 집값 오름세 '제동'…서울 아파트값은 92주째↑",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-12T06:18:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5082819"
-    },
-    {
-     "title": "서울 집값 92주 연속 상승 … 노도강, 매매·전세 모두 '초강세'",
-     "press": "biz.newdaily.co.kr",
-     "publishedAt": "2026-11-12T06:14:00.000Z",
-     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/12/2026111200257.html"
-    },
-    {
-     "title": "서울 아파트값 92주 연속 올랐다…강남발 약세, 성동·강동으로 번져",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-12T06:08:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/325109/?sc=Naver"
-    }
-   ]
-  },
-  {
-   "keyword": "성동 강동 집값 하락 전환",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 25,
-   "recent20": 4,
-   "press": 22,
-   "firstArticleAt": "2026-11-12T05:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "강남발 집값 약세, 한강벨트로 번져…중하위권 상승세 지속",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-12T06:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000142143?sid=101"
-    },
-    {
-     "title": "성동·강동구 집값 오름세 '제동'…서울 아파트값은 92주째↑",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-12T06:18:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5082819"
-    },
-    {
-     "title": "서울 집값 92주 연속 상승 … 노도강, 매매·전세 모두 '초강세'",
-     "press": "biz.newdaily.co.kr",
-     "publishedAt": "2026-11-12T06:14:00.000Z",
-     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/12/2026111200257.html"
     }
    ]
   },
@@ -144,75 +113,74 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 35,
-   "recent20": 7,
-   "press": 19,
-   "firstArticleAt": "2026-11-12T04:54:00.000Z",
+   "articles90": 41,
+   "recent20": 12,
+   "press": 18,
+   "firstArticleAt": "2026-11-12T05:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "크리스찬 디올 CEO, 이화여대서 명예 경영학박사 학위 받아",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-12T06:22:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=624818"
+     "title": "델핀 아르노 이화여대 명예박사…재계 총수들도 한자리에",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-12T06:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004681500?sid=101"
     },
     {
-     "title": "아르노 디올 CEO, 이대 명예박사 됐다…정의선·신동빈·이부진 참석",
-     "press": "cstimes.com",
-     "publishedAt": "2026-11-12T06:20:00.000Z",
-     "link": "https://www.cstimes.com/news/articleView.html?idxno=727717"
+     "title": "이부진·정의선·신동빈도 ‘짝짝짝’…디올 CEO 학위 수여식에 재계 총...",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-12T06:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003058806?sid=101"
     },
     {
-     "title": "이부진·블랙핑크 지수, 디올 CEO 학위수여식서 ‘우정 디올패션’",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-12T06:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003564763?sid=101"
+     "title": "디올 CEO 명예박사 수여식에 재계 총수 집결…이부진과 각별한 친분도",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-12T06:30:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261112500363"
     }
    ]
   },
   {
-   "keyword": "방한 외국인 관광객 2000만명",
+   "keyword": "서울 아파트값 92주 상승",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 23,
-   "recent20": 3,
-   "press": 18,
-   "firstArticleAt": "2026-11-12T04:55:00.000Z",
+   "articles90": 15,
+   "recent20": 4,
+   "press": 15,
+   "firstArticleAt": "2026-11-12T05:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한국 관광 새 역사…외국인 관광객 2000만명 돌파",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-12T06:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003058799?sid=101"
+     "title": "서울 아파트값 92주 연속 상승했지만…성동·강동도 하락 전환",
+     "press": "seouleconews.com",
+     "publishedAt": "2026-11-12T06:30:00.000Z",
+     "link": "http://www.seouleconews.com/news/articleView.html?idxno=94982"
     },
     {
-     "title": "연간 방한객 사상 최초 2천만명 넘어서…문체부 \"관광대국 출발점\"",
-     "press": "kbsm.net",
-     "publishedAt": "2026-11-12T06:08:00.000Z",
-     "link": "https://www.kbsm.net/news/view.php?idx=541536"
+     "title": "강남 아파트값 하락세 확산…성동·강동도 하락 전환",
+     "press": "mediaus.co.kr",
+     "publishedAt": "2026-11-12T06:24:00.000Z",
+     "link": "https://www.mediaus.co.kr/news/articleView.html?idxno=318965"
     },
     {
-     "title": "연간 방한객 2000만명 첫 돌파...문체부 \"K컬처·범정부 협력 성과\"",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-12T06:06:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=563395"
+     "title": "성동·강동구 집값 오름세 '제동'…서울 아파트값은 92주째↑",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-12T06:18:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5082819"
     }
    ]
   },
   {
    "keyword": "스타벅스",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 16,
-   "recent20": 1,
-   "press": 16,
-   "firstArticleAt": "2026-11-12T05:00:00.000Z",
+   "articles90": 14,
+   "recent20": 0,
+   "press": 14,
+   "firstArticleAt": "2026-11-12T05:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -237,49 +205,120 @@
    ]
   },
   {
-   "keyword": "국가 사이버복원력 TF",
+   "keyword": "KBS 대하사극 문무",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 15,
-   "recent20": 1,
-   "press": 15,
-   "firstArticleAt": "2026-11-12T05:00:00.000Z",
+   "articles90": 21,
+   "recent20": 9,
+   "press": 13,
+   "firstArticleAt": "2026-11-12T05:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"해킹당해도 국가 기능은 지속\"... 국가 사이버복원력 범정부 TF 출범",
-     "press": "boannews.com",
-     "publishedAt": "2026-11-12T06:08:00.000Z",
-     "link": "https://www.boannews.com/news/articleView.html?idxno=147225"
+     "title": "300억 대작 ‘문무’, “제대로 구현…볼거리·감동 선사할 것”",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-12T06:31:00.000Z",
+     "link": "https://m.entertain.naver.com/article/021/0002832400"
     },
     {
-     "title": "세계 연이은 ‘AI 해킹’에…국가AI전략위, ‘사이버복원력 TF’ 출범",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-12T05:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003564750?sid=105"
+     "title": "\"갈등 만연한 시대, 화합의 메시지 전달\"…'문무' 대하사극 존재 이유 증...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-12T06:26:00.000Z",
+     "link": "https://m.entertain.naver.com/article/119/0003154492"
     },
     {
-     "title": "AI 공격으로부터 국민 일상 지킨다…국가AI전략위, '국가 사이버복원력...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-12T05:02:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2647261"
+     "title": "‘고려거란전쟁’ 다음은 ‘문무’…KBS, 300억 대하사극으로 승부수[SS...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-12T06:25:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001280591"
+    }
+   ]
+  },
+  {
+   "keyword": "성동 강동 집값 하락 전환",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 13,
+   "recent20": 4,
+   "press": 12,
+   "firstArticleAt": "2026-11-12T05:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "국토장관 \"강남3구 집값 하락세에 외곽 상승폭 둔화...금리 오르면 더 떨...",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-12T06:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005440373?sid=102"
+    },
+    {
+     "title": "강남발 집값 약세, 한강벨트로 번져…중하위권 상승세 지속",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-12T06:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000142143?sid=101"
+    },
+    {
+     "title": "성동·강동구 집값 오름세 '제동'…서울 아파트값은 92주째↑",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-12T06:18:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5082819"
+    }
+   ]
+  },
+  {
+   "keyword": "김주원 투런포",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 11,
+   "recent20": 0,
+   "press": 9,
+   "firstArticleAt": "2026-11-12T05:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'0-4→6-4' 김주원 대형 투런포부터 김휘집 싹쓸이까지…대역전 드라마...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-12T05:45:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/241/0003541429"
+    },
+    {
+     "title": "대표팀 첫 홈런의 주인공은 김주원, 답답한 흐름 깬 한방···6회말 0-4→...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-12T05:39:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/144/0001149447"
+    },
+    {
+     "title": "[APBC] '답답했던 타선 깨운 한 방' 김주원, 호주전 '추격 신호탄' 투런...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-12T05:38:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261112000954"
     }
    ]
   },
   {
    "keyword": "현대엔지니어링",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 10,
+   "articles90": 8,
    "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-12T04:56:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-12T05:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "현대엔지니어링, 조경 디자인 공모전 연이어 수상",
+     "press": "cnbnews.com",
+     "publishedAt": "2026-11-12T06:28:00.000Z",
+     "link": "https://www.cnbnews.com/news/articleView.html?idxno=1023536"
+    },
     {
      "title": "현대엔지니어링, 조경 특화 상품 디자인 공모전 수상",
      "press": "newspost.kr",
@@ -291,76 +330,102 @@
      "press": "asiatime.co.kr",
      "publishedAt": "2026-11-12T05:50:00.000Z",
      "link": "https://www.asiatime.co.kr/article/20261112500273"
-    },
-    {
-     "title": "현대엔지니어링, 조경·색채 디자인 잇단 수상… 주거공간 경쟁력 입증",
-     "press": "koreaittimes.com",
-     "publishedAt": "2026-11-12T05:50:00.000Z",
-     "link": "https://www.koreaittimes.com/news/articleView.html?idxno=159102"
     }
    ]
   },
   {
-   "keyword": "김휘집 역전 2루타",
+   "keyword": "장기 이식",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 15,
-   "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-12T05:15:00.000Z",
+   "articles90": 7,
+   "recent20": 4,
+   "press": 7,
+   "firstArticleAt": "2026-11-12T05:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김휘집 실책→'36구' 박정민 결국 무너졌다…호주에 8회 동점 허용[APBC]",
-     "press": "sports.hankooki.com",
-     "publishedAt": "2026-11-12T05:54:00.000Z",
-     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6943404"
+     "title": "\"장기기증자, 의사상자 수준으로 예우해야\"…부산서 한일 장기기증 국제...",
+     "press": "srtimes.kr",
+     "publishedAt": "2026-11-12T06:32:00.000Z",
+     "link": "http://www.srtimes.kr/news/articleView.html?idxno=217440"
     },
     {
-     "title": "'0-4→6-4' 김주원 대형 투런포부터 김휘집 싹쓸이까지…대역전 드라마...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-12T05:45:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/241/0003541429"
+     "title": "폐 이식 기다리다 떠난 아내…남편은 장기기증으로 3명 살려",
+     "press": "beyondpost.co.kr",
+     "publishedAt": "2026-11-12T06:30:00.000Z",
+     "link": "http://www.beyondpost.co.kr/view.php?ud=20261112152742420746a9e4dd7f_30"
     },
     {
-     "title": "김주원, 투런 홈런으로 한국 첫 득점…호주전 6-4 역전 이끌어",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-12T05:38:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=624809"
+     "title": "폐 이식 못 받아 먼저 떠난 아내… 남편은 3명에 새 삶 주고 하늘로",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-12T06:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000965229?sid=102"
     }
    ]
   },
   {
-   "keyword": "KBS 대하사극 문무",
+   "keyword": "홍콩익스프레스 팝업 개막",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 4,
+   "press": 6,
+   "firstArticleAt": "2026-11-12T05:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "도심에서 만나는 홍콩…홍콩익스프레스, 체험형 팝업 오픈",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-12T06:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003482288?sid=103"
+    },
+    {
+     "title": "\"한국 여행객 잡겠다\"…홍콩익스프레스, 국내 시장 공략 본격화",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-12T06:28:00.000Z",
+     "link": "https://www.ajunews.com/view/20261112144714357"
+    },
+    {
+     "title": "[포토] 성수동에 펼쳐진 홍콩 여행…홍콩익스프레스 첫 팝업",
+     "press": "news2day.co.kr",
+     "publishedAt": "2026-11-12T06:26:00.000Z",
+     "link": "https://www.news2day.co.kr/article/20261112500287"
+    }
+   ]
+  },
+  {
+   "keyword": "오세훈 대학생 주거안정 논의",
    "sources": [
     "daum"
    ],
-   "articles90": 16,
-   "recent20": 8,
-   "press": 9,
-   "firstArticleAt": "2026-11-12T05:06:00.000Z",
+   "articles90": 7,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-12T05:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "300억 투입한 KBS ‘문무’, 전투신에 AI까지… “역사 고증 문제없다”...",
-     "press": "isplus.com",
+     "title": "오세훈, 청년 주거비 부담 낮춘다…내년 하반기 '관리비' 지원 추진",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-12T06:32:00.000Z",
+     "link": "https://www.ajunews.com/view/20261112152734645"
+    },
+    {
+     "title": "대학생 만난 오세훈 시장…“관리비 지원·청년 주택 공급 속도”",
+     "press": "seoul.co.kr",
      "publishedAt": "2026-11-12T06:20:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003541457"
+     "link": "https://n.news.naver.com/mnews/article/081/0003698755?sid=100"
     },
     {
-     "title": "‘문무’ 장혁 “쟁쟁한 선배들이 연기한 연개소문, 부담됐다”",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-12T06:16:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001304468"
-    },
-    {
-     "title": "‘문무’ CP “모든 건 사료 기반, 역사 고증 문제 생기지 않도록 노력...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-12T06:16:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005762789"
+     "title": "오세훈 서울시장, 대학생과 주거안정 논의",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-12T06:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004209163?sid=102"
     }
    ]
   },
@@ -369,10 +434,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 9,
+   "articles90": 6,
    "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-12T04:54:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-12T05:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -402,10 +467,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 29,
-   "recent20": 3,
-   "press": 6,
-   "firstArticleAt": "2026-11-12T04:56:00.000Z",
+   "articles90": 18,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-12T05:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -430,72 +495,9 @@
    ]
   },
   {
-   "keyword": "홍콩익스프레스 팝업 개막",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-12T05:03:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "홍콩익스프레스, 성수동서 국내 첫 소비자 팝업…올해 한국 노선 이용객...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-12T06:16:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1174108"
-    },
-    {
-     "title": "한국 노선 탑승객 100만명 넘었다…홍콩익스프레스, 성수동에 첫 팝업",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-12T05:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009286101?sid=103"
-    },
-    {
-     "title": "[현장] 홍콩익스프레스, 내년 항공기 8대 도입…한국 시장 공략 가속",
-     "press": "news2day.co.kr",
-     "publishedAt": "2026-11-12T05:48:00.000Z",
-     "link": "https://www.news2day.co.kr/article/20261112500239"
-    }
-   ]
-  },
-  {
-   "keyword": "트럼프 이란전쟁 종전",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T05:43:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"밴스, 종전 위해 이란 안보수장과 직접 회담 검토\"",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-12T06:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005841872?sid=104"
-    },
-    {
-     "title": "[이슈] 트럼프 \"전쟁 곧 끝난다\" vs 이란, 지하 미사일 기지 공개 \"핵물...",
-     "press": "polinews.co.kr",
-     "publishedAt": "2026-11-12T06:06:00.000Z",
-     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=748333"
-    },
-    {
-     "title": "미·러·우, 9개월 만의 평화협상서 종전 돌파구 못 찾아",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-12T06:00:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3448121"
-    }
-   ]
-  },
-  {
    "keyword": "스테픈 커리",
    "sources": [
+    "signal.bz",
     "google"
    ],
    "articles90": 5,
@@ -509,7 +511,7 @@
      "title": "'커리 부상 이탈' NBA 골든스테이트, 휴스턴에 져 8연승 마감",
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-12T06:18:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/055/0001402558"
+     "link": "https://m.sports.naver.com/basketball/article/055/0001402558"
     },
     {
      "title": "커리, 복부 통증으로 이탈…골든스테이트, 연승 행진 8연승으로 마감",
@@ -528,15 +530,22 @@
   {
    "keyword": "에이티즈 산 꿈같은 나날 보내는 중",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
    "firstArticleAt": "2026-11-12T05:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "에이티즈 산 “배드 이후 꿈같은 나날 보내는 중”",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-12T06:30:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611120230"
+    },
     {
      "title": "에이티즈 산 \"'배드' 인기, 꿈같은 나날 보내는 중\"",
      "press": "spotvnews.co.kr",
@@ -548,53 +557,79 @@
      "press": "sports.khan.co.kr",
      "publishedAt": "2026-11-12T06:00:00.000Z",
      "link": "https://m.entertain.naver.com/article/144/0001149453"
-    },
-    {
-     "title": "'대세' 에이티즈 산 \"꿈같은 나날 보내는 중, 혼신의 힘 갈아넣겠다\"",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-12T05:50:00.000Z",
-     "link": "http://www.joynews24.com/view/2025540"
     }
    ]
   },
   {
-   "keyword": "장기 이식",
+   "keyword": "전세사기 피해자 추가 인정",
    "sources": [
-    "google"
+    "signal.bz"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T05:05:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T05:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "장기 부족 속 이식 기회 넓힌다…12년 연구로 배정 기준 검증",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-12T05:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003485066?sid=105"
+     "title": "충청권 전세사기 피해자 누적 6천220명…대전 4천611명",
+     "press": "jbnews.com",
+     "publishedAt": "2026-11-12T06:32:00.000Z",
+     "link": "https://www.jbnews.com/news/articleView.html?idxno=1515817"
     },
     {
-     "title": "이식 못 받고 아내 보냈던 남편, 그 마음 알기에…장기기증으로 3명에 ...",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-12T05:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002831884?sid=102"
+     "title": "전세사기 공포 누그러질까…'최소보장제' 첫발",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-12T05:40:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000082154"
     },
     {
-     "title": "경북대병원, 이식 전 거부반응 검사 간소화…진료에 적용",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T05:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014318452?sid=102"
+     "title": "전세사기 피해자 480명 추가 인정…누적 4만2천 명 넘어",
+     "press": "tjb.co.kr",
+     "publishedAt": "2026-11-12T05:34:00.000Z",
+     "link": "https://www.tjb.co.kr/news05/bodo/view/id/106012"
+    }
+   ]
+  },
+  {
+   "keyword": "국가 사이버복원력 TF",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-12T05:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "AI 사이버공격에도 국가 기능 지킨다…정부, 복구 중심 보안체계 구축 ...",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-12T06:24:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=847129"
+    },
+    {
+     "title": "\"해킹당해도 국가 기능은 지속\"... 국가 사이버복원력 범정부 TF 출범",
+     "press": "boannews.com",
+     "publishedAt": "2026-11-12T06:08:00.000Z",
+     "link": "https://www.boannews.com/news/articleView.html?idxno=147225"
+    },
+    {
+     "title": "세계 연이은 ‘AI 해킹’에…국가AI전략위, ‘사이버복원력 TF’ 출범",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-12T05:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003564750?sid=105"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 361,
-  "matched": 132,
-  "avgLeadMin": 1531,
+  "flagged": 363,
+  "matched": 130,
+  "avgLeadMin": 1480,
   "recent": [
    {
     "keyword": "젠슨 황 스캔들 영향",
