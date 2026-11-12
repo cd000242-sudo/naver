@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T18:49:37.204Z",
+ "builtAt": "2026-11-12T18:59:44.101Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,13 +15,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 25,
-   "recent20": 6,
-   "press": 15,
-   "firstArticleAt": "2026-11-12T17:21:00.000Z",
+   "articles90": 23,
+   "recent20": 3,
+   "press": 14,
+   "firstArticleAt": "2026-11-12T17:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "젠슨 황, 결국 불명예 퇴진...두 번 불륜에 33년 만에 쫓겨나",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-12T18:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432178?sid=104"
+    },
     {
      "title": "미 하원, 젠슨 황 퇴진에도 의회 증언 추진…“안 나오면 소환장”",
      "press": "news.kbs.co.kr",
@@ -33,12 +39,6 @@
      "press": "radiokorea.com",
      "publishedAt": "2026-11-12T18:40:00.000Z",
      "link": "https://www.radiokorea.com/news/article.php?uid=509457"
-    },
-    {
-     "title": "'AI제국 황제' 젠슨황의 가속 몰락…스캔들 시인 나흘만에 축출",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-12T18:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016439564?sid=104"
     }
    ]
   }
