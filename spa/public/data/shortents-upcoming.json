@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T22:21:26.789Z",
+ "builtAt": "2026-11-12T22:31:29.833Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 33,
-   "recent20": 8,
-   "press": 30,
-   "firstArticleAt": "2026-11-12T20:52:00.000Z",
+   "articles90": 36,
+   "recent20": 7,
+   "press": 32,
+   "firstArticleAt": "2026-11-12T21:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'젠슨 황 퇴진 쇼크'에 美기술주 약세…AMD·브로드컴은 5%대 급등",
-     "press": "getnews.co.kr",
-     "publishedAt": "2026-11-12T22:16:00.000Z",
-     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=887030"
+     "title": "젠슨 황 퇴진에 엔비디아 4% 급락 … AMD·브로드컴은 5%대 상승",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-12T22:28:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/13/2026111300016.html"
     },
     {
-     "title": "젠슨 황, 엔비디아 CEO 사임…한국과 깐부동맹 불투명",
-     "press": "econovill.com",
-     "publishedAt": "2026-11-12T22:14:00.000Z",
-     "link": "https://www.econovill.com/news/articleView.html?idxno=757069"
+     "title": "젠슨 황 퇴진에 출렁인 뉴욕증시…엔비디아 급락 뒤 낙폭 줄여",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-12T22:28:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=243083"
     },
     {
-     "title": "젠슨 황 사임 충격 AI주 '휘청'…AMD·브로드컴 5%대 급등",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-12T22:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000543415?sid=104"
+     "title": "젠슨 황 퇴진·유가 급등에 뉴욕증시 하락…엔비디아 4.3%↓(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-12T22:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016439669?sid=104"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 25,
+   "articles90": 14,
    "recent20": 1,
-   "press": 25,
-   "firstArticleAt": "2026-11-12T21:00:00.000Z",
+   "press": 14,
+   "firstArticleAt": "2026-11-12T21:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "환율·유가 동반 하락에 10월 수입물가 1.8%↓...수출물가 0.7%↑",
+     "press": "tfmedia.co.kr",
+     "publishedAt": "2026-11-12T22:22:00.000Z",
+     "link": "https://www.tfmedia.co.kr/news/article.html?no=208861"
+    },
     {
      "title": "10월 수입물가지수 1.8%↓…환율·유가 하락 영향",
      "press": "gukjenews.com",
@@ -65,12 +71,6 @@
      "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-12T21:36:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/422/0000925724?sid=101"
-    },
-    {
-     "title": "수출물량 증가율 ‘역대 최고’…소득교역조건 상승률도 74.6% 최대",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-12T21:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002393961?sid=101"
     }
    ]
   },
@@ -79,30 +79,94 @@
    "sources": [
     "nate"
    ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-12T21:00:00.000Z",
+   "articles90": 12,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-12T21:03:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
+    {
+     "title": "【오늘의 법조】 2026년 11월 13일",
+     "press": "lawtimes.co.kr",
+     "publishedAt": "2026-11-12T22:30:00.000Z",
+     "link": "https://www.lawtimes.co.kr/news/articleView.html?idxno=229323"
+    },
+    {
+     "title": "하나은행, 은행 브랜드평판 2026년 11월...1위",
+     "press": "beyondpost.co.kr",
+     "publishedAt": "2026-11-12T22:28:00.000Z",
+     "link": "http://www.beyondpost.co.kr/view.php?ud=20261113072417761646a9e4dd7f_30"
+    },
     {
      "title": "[오늘의 주요일정·13일] 윤호중 장관 산악구조, 산불대응 지원 시스템...",
      "press": "safetimes.co.kr",
      "publishedAt": "2026-11-12T22:04:00.000Z",
      "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247459"
+    }
+   ]
+  },
+  {
+   "keyword": "사고",
+   "sources": [
+    "google"
+   ],
+   "articles90": 9,
+   "recent20": 3,
+   "press": 9,
+   "firstArticleAt": "2026-11-12T21:31:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "좌초하는 한솔제지 한경록號, 사망사고·가격담합에 실적하락까지",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-12T22:30:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=882618"
     },
     {
-     "title": "[오늘의 국회일정](13일·금)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-12T22:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016439657?sid=100"
+     "title": "뉴욕 브루클린서 3층짜리 아파트 붕괴 사고···어린이 2명 포함 8명 사...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-12T22:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003482465?sid=104"
     },
     {
-     "title": "2026년 11월 13일 전체뉴스",
-     "press": "btnnews.tv",
-     "publishedAt": "2026-11-12T22:00:00.000Z",
-     "link": "https://www.btnnews.tv/news/articleView.html?idxno=92418"
+     "title": "“1년 동안 혼자 5547건이나”...서울시, 119 상습 신고자 5명 형사고발",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-12T22:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000131882?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "이세창, 급성 맹장염 수술",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-12T21:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이세창, '재혼♥ 정하나'도 없는데…급성맹장염 긴급 수술",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-12T22:28:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004466356"
+    },
+    {
+     "title": "이세창, 119 신고→급성맹장염 수술 영상 남겼다 “죽다가 살았네”",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-12T22:06:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001187013"
+    },
+    {
+     "title": "이세창, 급성맹장염 긴급 수술…\"죽다가 살았네\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-12T21:47:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014319741"
     }
    ]
   },
@@ -112,7 +176,7 @@
     "daum"
    ],
    "articles90": 5,
-   "recent20": 3,
+   "recent20": 1,
    "press": 5,
    "firstArticleAt": "2026-11-12T21:05:00.000Z",
    "exclusive": false,
@@ -135,134 +199,6 @@
      "press": "enews.imbc.com",
      "publishedAt": "2026-11-12T22:05:00.000Z",
      "link": "https://m.entertain.naver.com/article/408/0000327770"
-    }
-   ]
-  },
-  {
-   "keyword": "이세창, 급성 맹장염 수술",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-12T21:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이세창, 119 신고→급성맹장염 수술 영상 남겼다 “죽다가 살았네”",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-12T22:06:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001187013"
-    },
-    {
-     "title": "이세창, 급성맹장염 긴급 수술…\"죽다가 살았네\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T21:47:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014319741"
-    },
-    {
-     "title": "재혼 이세창, 죽다 살아-급성 맹장염 긴급 수술",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-12T21:42:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95129"
-    }
-   ]
-  },
-  {
-   "keyword": "박정성 통상교섭본부장 유럽의회 면담",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 14,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-12T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "EU 역내산 우대에 韓기업 불이익 우려…통상본부장, 업계와 유럽의회 접...",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-12T21:02:00.000Z",
-     "link": "https://www.ajunews.com/view/20261112185814599"
-    },
-    {
-     "title": "박정성 통상교섭본부장, 아담 야루바스 유럽의회 의원과 면담",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-12T21:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016439629?sid=100"
-    },
-    {
-     "title": "박정성 통상교섭본부장, 유럽의회 내수시장·소비자보호위원회 위원장...",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-12T21:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016439606?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "관광객",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"나오라 했더니 노려봐\"…제주 출입 금지 구역 들어간 中 관광객들",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-12T21:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005440657?sid=102"
-    },
-    {
-     "title": "“첫 한국 여행, 무지했다”…‘여성 신체 몰카’ 中 관광객, 선처 호소",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-12T21:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005763092?sid=102"
-    },
-    {
-     "title": "“일본서 이러면 17만원 냅니다” 관광객들 때문에 골머리 앓던 도쿄…...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-12T21:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004681718?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "물건 이호선 긴급",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T20:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"바로 이혼해!\"…물건 던지며 욕설→'아비규환 부부싸움'에 이호선 긴급...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-12T21:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004124622"
-    },
-    {
-     "title": "이호선 5시간 상담 안 통했다…기준 아내 울분 폭발에 부부 격리 사태(...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-12T21:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001186998"
-    },
-    {
-     "title": "이혼 요구하다 물건 투척까지…이호선, 퇴근 미루고 긴급 출동",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-12T20:56:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005440637"
     }
    ]
   }
