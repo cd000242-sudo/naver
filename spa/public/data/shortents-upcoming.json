@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T03:01:31.529Z",
+ "builtAt": "2026-11-12T03:11:35.071Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,154 +8,20 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 10,
  "candidates": [
   {
-   "keyword": "네이버 AI 계약 2조원",
+   "keyword": "김건희 집사게이트 IMS모빌리티 대표 무죄",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 46,
-   "recent20": 3,
-   "press": 43,
-   "firstArticleAt": "2026-11-12T01:32:00.000Z",
+   "articles90": 20,
+   "recent20": 1,
+   "press": 18,
+   "firstArticleAt": "2026-11-12T01:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "[분석] 네이버·카카오 3분기 성적표 ··· 사업별 경쟁력은?",
-     "press": "datasom.co.kr",
-     "publishedAt": "2026-11-12T03:00:00.000Z",
-     "link": "https://www.datasom.co.kr/news/articleView.html?idxno=210770"
-    },
-    {
-     "title": "네이버, 물류 전문 자회사 설립… 쿠팡과 정면승부",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-12T02:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002832317?sid=101"
-    },
-    {
-     "title": "네이버, 3분기 AI 사업 성과 가시화…AI 팩토리·커머스 경쟁력 강화",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-12T02:50:00.000Z",
-     "link": "https://www.ajunews.com/view/20261112114536777"
-    }
-   ]
-  },
-  {
-   "keyword": "메가프로젝트 이재명 대통령",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 59,
-   "recent20": 14,
-   "press": 40,
-   "firstArticleAt": "2026-11-12T02:12:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이 대통령 “메가프로젝트 속도전 넘어 전격전…예정된 투자 제때 진행...",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-12T02:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012292452?sid=100"
-    },
-    {
-     "title": "李대통령 \"충청권 메가프로젝트, 112개 기업 23조6000억원 추가 투자\"",
-     "press": "weekly.chosun.com",
-     "publishedAt": "2026-11-12T02:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/053/0000062986?sid=100"
-    },
-    {
-     "title": "李대통령 국정 지지율, 2%p↓…부정 평가 47%",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-12T02:54:00.000Z",
-     "link": "https://www.ajunews.com/view/20261112113904751"
-    }
-   ]
-  },
-  {
-   "keyword": "16~19일 아세안 APEC 참석",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 31,
-   "recent20": 2,
-   "press": 30,
-   "firstArticleAt": "2026-11-12T01:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이 대통령, 16~19일 아세안·APEC 참석",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-12T02:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000925426?sid=100"
-    },
-    {
-     "title": "李대통령, 16~19일 필리핀·중국 순방…아세안·APEC 참석",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-12T02:42:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611120062"
-    },
-    {
-     "title": "아세안 이어 APEC…李, 다자외교 나선다",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-12T02:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002722617?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "선관위 특검 압수수색",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 29,
-   "recent20": 5,
-   "press": 23,
-   "firstArticleAt": "2026-11-12T01:36:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "선관위 특검, '보안점검 문서 허위작성' 중앙선관위 등 압수수색",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-12T02:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000925433?sid=102"
-    },
-    {
-     "title": "[단독] \"선관위, 보안점수 100점으로 조작\"...국정원도 지적",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-12T02:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002431813?sid=102"
-    },
-    {
-     "title": "특검 '보안점검 문서 조작' 중앙선관위 압수수색",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-12T02:46:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3448112"
-    }
-   ]
-  },
-  {
-   "keyword": "김건희 집사 무죄 확정",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 23,
-   "recent20": 3,
-   "press": 21,
-   "firstArticleAt": "2026-11-12T01:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'김건희 집사게이트' 조영탁 대표 무죄·공소기각 확정",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-12T02:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000925432?sid=102"
-    },
     {
      "title": "'집사 게이트' IMS모빌리티 대표, 대법서 무죄·공소기각 확정",
      "press": "todaykorea.co.kr",
@@ -167,71 +33,76 @@
      "press": "ngonews.kr",
      "publishedAt": "2026-11-12T02:44:00.000Z",
      "link": "https://www.ngonews.kr/news/articleView.html?idxno=242993"
+    },
+    {
+     "title": "‘집사게이트’ 조영탁 IMS모빌리티 대표 무죄·공소기각 확정",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-12T02:34:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2647347"
     }
    ]
   },
   {
-   "keyword": "교사",
+   "keyword": "젠슨 황 불륜 의혹 확산",
    "sources": [
-    "signal.bz",
-    "google"
+    "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 2,
-   "press": 14,
-   "firstArticleAt": "2026-11-12T01:50:00.000Z",
+   "articles90": 18,
+   "recent20": 3,
+   "press": 17,
+   "firstArticleAt": "2026-11-12T01:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "전북교사노조 \"'공직선거법 위반 혐의' 정재석 위원장, 불기소해야\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-12T02:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009285480?sid=102"
+     "title": "“모두가 조롱하더니”…6개월 전 '젠슨 황 불륜' 경고한 30대 투자자는",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-12T03:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003484960?sid=104"
     },
     {
-     "title": "강원랜드사회공헌재단, 16년 이어온 학교사회복지사업 성과 공유",
+     "title": "젠슨황 해임 착수… “부사장과도 불륜”",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-12T03:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002832344?sid=104"
+    },
+    {
+     "title": "“젠슨 황 없는 엔비디아는?”…머스크 영입설에 금융위기 우려까지 [이...",
      "press": "ekn.kr",
-     "publishedAt": "2026-11-12T02:44:00.000Z",
-     "link": "https://www.ekn.kr/web/view.php?key=20261112026248764"
-    },
-    {
-     "title": "전남광주특별시교육청, 퇴직 교사 기증기록물전 개최",
-     "press": "thefairnews.co.kr",
-     "publishedAt": "2026-11-12T02:38:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=93938"
+     "publishedAt": "2026-11-12T02:54:00.000Z",
+     "link": "https://www.ekn.kr/web/view.php?key=20261112026038671"
     }
    ]
   },
   {
-   "keyword": "jyp",
+   "keyword": "이재명 메가프로젝트 회의 발언",
    "sources": [
-    "google"
+    "signal.bz"
    ],
-   "articles90": 10,
+   "articles90": 20,
    "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-12T01:34:00.000Z",
-   "exclusive": false,
+   "press": 12,
+   "firstArticleAt": "2026-11-12T01:51:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "JYP, 스키즈 월드 투어로 3분기 어닝 서프라이즈 21% 폭등",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-12T02:48:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000052365"
+     "title": "이 대통령, 충청권 메가프로젝트 착공식 참석...“4개월 만에 현실로”",
+     "press": "vop.co.kr",
+     "publishedAt": "2026-11-12T03:04:00.000Z",
+     "link": "https://vop.co.kr/A00001697572.html"
     },
     {
-     "title": "스키즈에 오블루 더했더니 난리났다…JYP엔터, 주가 20% 급등",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-12T02:21:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000784115"
+     "title": "李대통령 \"충청 메가프로젝트, 지역과 국민 함께 성장하는 균형발전으로...",
+     "press": "jeonmae.co.kr",
+     "publishedAt": "2026-11-12T02:36:00.000Z",
+     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1311253"
     },
     {
-     "title": "[특징주] JYP엔터, 3분기 역대 최대 분기 매출에 19% '껑충'",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-12T02:02:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=902851"
+     "title": "李대통령 \"충청권 메가프로젝트, 23.6조원 추가 투자…112개 기업 참여\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-12T02:34:00.000Z",
+     "link": "https://www.ajunews.com/view/20261112112806724"
     }
    ]
   },
@@ -240,13 +111,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
    "firstArticleAt": "2026-11-12T01:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "양극화 TF 첫 회의…12월 성장전략에 대책 담는다",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-12T03:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000543267?sid=101"
+    },
     {
      "title": "정부, ‘양극화 대응 TF’ 총괄반 1차 회의…“모두의 성장으로 대전환...",
      "press": "dt.co.kr",
@@ -258,86 +135,130 @@
      "press": "biz.heraldcorp.com",
      "publishedAt": "2026-11-12T02:39:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/016/0002722615?sid=101"
-    },
-    {
-     "title": "정부, 양극화 대응 TF 가동…노동·산업·지역 등 5대 분야 격차 해소",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-12T01:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003484912?sid=100"
     }
    ]
   },
   {
-   "keyword": "발언하는 한병도 원내대표",
+   "keyword": "군부대 상비약 허용",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T01:36:00.000Z",
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-12T01:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "민주당 한병도 \"당청 간 엇박자 없어, 더 나은 민생 위해 긴밀히 협력\"",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-12T02:34:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=451818"
+     "title": "군부대·지방공항 의약품 이용 문턱 낮춘다",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-12T03:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000142116?sid=103"
     },
     {
-     "title": "한병도 “국힘 내부서 12·3 사과 논쟁 볼썽 사나워...기가 찰 노릇”",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-12T01:40:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1136935"
+     "title": "근처에 약국 없는 군부대·공항, 상비약 접근성 높인다",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-12T02:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001402493?sid=102"
     },
     {
-     "title": "한병도 “당청 엇박자 없다…더 나은 민생 위해 긴밀히 협력”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-12T01:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003761965?sid=100"
+     "title": "군부대·중소공항 안전상비약 허용 추진",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-12T02:05:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000082061"
     }
    ]
   },
   {
-   "keyword": "울산 김현석 감독 올 시즌 종료",
+   "keyword": "같은 목표 향해 나아갈 동료",
    "sources": [
-    "nate"
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T01:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘92 VS 96 내분 없다’ 국대 불화설에 “같은 목표 향해 나아갈 동료”",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-12T02:39:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/382/0001304422"
+    },
+    {
+     "title": "손흥민-황희찬 등 불화설 진화 “은퇴요구 사실 아냐…같은 목표로 가는...",
+     "press": "donga.com",
+     "publishedAt": "2026-11-12T02:26:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/020/0003761978"
+    },
+    {
+     "title": "손흥민·김민재 등 입장문... \"같은 목표 향해 나아갈 동료\"",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-12T02:01:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/047/0002535574"
+    }
+   ]
+  },
+  {
+   "keyword": "네이버 AI 계약 소식",
+   "sources": [
+    "signal.bz"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-12T01:33:00.000Z",
-   "exclusive": true,
+   "firstArticleAt": "2026-11-12T01:45:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[공식발표] 휘청이던 친정 살린 김현석 감독…울산과 '아름다운 작별'",
-     "press": "fourfourtwo.co.kr",
-     "publishedAt": "2026-11-12T02:21:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/411/0000089865"
+     "title": "\"탐색부터 예약·결제까지\"... 네이버, 개인형 AI 에이전트 앱 연내 출시",
+     "press": "tjb.co.kr",
+     "publishedAt": "2026-11-12T02:24:00.000Z",
+     "link": "https://www.tjb.co.kr/news05/bodo/view/id/106010"
     },
     {
-     "title": "[오피셜] 돌아온 이유도 울산, 떠나는 이유도 울산…'미스터 울산' 김현...",
-     "press": "mhnse.com",
+     "title": "네이버, 검색부터 예약·결제까지 AI가 대신 수행…올해 앱 출시",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-12T02:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000925405?sid=101"
+    },
+    {
+     "title": "네이버, 검색부터 예약·결제까지 AI가 대신…연내 앱 출시",
+     "press": "yna.co.kr",
      "publishedAt": "2026-11-12T01:45:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/445/0000489687"
-    },
-    {
-     "title": "‘K리그1 2위인데’ 울산, 김현석 감독과 올 시즌 끝으로 결별",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-12T01:33:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/119/0003154314"
+     "link": "https://n.news.naver.com/mnews/article/001/0016437788?sid=105"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 369,
-  "matched": 143,
-  "avgLeadMin": 1500,
+  "flagged": 368,
+  "matched": 144,
+  "avgLeadMin": 1493,
   "recent": [
+   {
+    "keyword": "크러쉬 조이",
+    "hitKeyword": "크러쉬 조이 듀엣",
+    "hitAt": "2026-11-12T12:00:00+09:00",
+    "leadMin": 647
+   },
+   {
+    "keyword": "크러쉬 조이 듀엣 공개",
+    "hitKeyword": "크러쉬 조이 듀엣",
+    "hitAt": "2026-11-12T12:00:00+09:00",
+    "leadMin": 205
+   },
+   {
+    "keyword": "젠슨 황 해임 준비",
+    "hitKeyword": "젠슨 황 해임 추진",
+    "hitAt": "2026-11-12T12:00:00+09:00",
+    "leadMin": 74
+   },
    {
     "keyword": "손흥민 김민재 공동 입장문",
     "hitKeyword": "손흥민 대표팀 불화설 해명",
@@ -379,24 +300,6 @@
     "hitKeyword": "성북구 살인 사건 수사",
     "hitAt": "2026-11-12T10:30:00+09:00",
     "leadMin": 326
-   },
-   {
-    "keyword": "손흥민 공동 입장문 발표",
-    "hitKeyword": "손흥민 96라인 의기투합",
-    "hitAt": "2026-11-12T10:30:00+09:00",
-    "leadMin": 14
-   },
-   {
-    "keyword": "강동원 김고은 부부 출연",
-    "hitKeyword": "강동원 김고은 혼 제작",
-    "hitAt": "2026-11-12T10:30:00+09:00",
-    "leadMin": 14
-   },
-   {
-    "keyword": "손흥민 공동 입장문",
-    "hitKeyword": "손흥민 96라인 의기투합",
-    "hitAt": "2026-11-12T10:30:00+09:00",
-    "leadMin": 4
    }
   ]
  }
