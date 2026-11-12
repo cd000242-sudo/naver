@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T19:19:52.608Z",
+ "builtAt": "2026-11-12T19:29:56.003Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "젠슨 황, 엔비디아 CEO 퇴진",
+   "keyword": "젠슨 황, 엔비디아 CEO 사임",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-12T17:52:00.000Z",
+   "articles90": 22,
+   "recent20": 7,
+   "press": 14,
+   "firstArticleAt": "2026-11-12T18:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨 황, 결국 불명예 퇴진...두 번 불륜에 33년 만에 쫓겨나",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-12T18:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432178?sid=104"
+     "title": "엔비디아($NVDA) 새 경영진, 직원들에 감사·신뢰 메시지",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-12T19:28:00.000Z",
+     "link": "https://www.tokenpost.kr/news/ai/437327"
     },
     {
-     "title": "연방하원, 젠슨황 퇴진에도 의회증언 추진…\"안나오면 소환장\"",
-     "press": "radiokorea.com",
-     "publishedAt": "2026-11-12T18:56:00.000Z",
-     "link": "https://www.radiokorea.com/news/article.php?uid=509458"
+     "title": "트럼프 \"젠슨 황 후임은 팀 쿡\"…엔비디아 차기 CEO 공개 추천",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-12T19:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005842036?sid=101"
     },
     {
-     "title": "미 하원, 젠슨 황 퇴진에도 의회 증언 추진…“안 나오면 소환장”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-12T18:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012293046?sid=104"
+     "title": "트럼프 \"젠슨 황 자리 이을 사람은 팀 쿡뿐…전설이 전설 대체해야\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-12T19:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005440614?sid=101"
     }
    ]
   },
@@ -80,7 +80,7 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-12T18:02:00.000Z",
    "exclusive": false,
