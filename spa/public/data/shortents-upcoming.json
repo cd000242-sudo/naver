@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T02:51:26.133Z",
+ "builtAt": "2026-11-12T03:01:31.529Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 20,
  "candidates": [
   {
    "keyword": "네이버 AI 계약 2조원",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 51,
-   "recent20": 6,
-   "press": 48,
-   "firstArticleAt": "2026-11-12T01:22:00.000Z",
+   "articles90": 46,
+   "recent20": 3,
+   "press": 43,
+   "firstArticleAt": "2026-11-12T01:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[분석] 네이버·카카오 3분기 성적표 ··· 사업별 경쟁력은?",
+     "press": "datasom.co.kr",
+     "publishedAt": "2026-11-12T03:00:00.000Z",
+     "link": "https://www.datasom.co.kr/news/articleView.html?idxno=210770"
+    },
+    {
+     "title": "네이버, 물류 전문 자회사 설립… 쿠팡과 정면승부",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-12T02:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002832317?sid=101"
+    },
     {
      "title": "네이버, 3분기 AI 사업 성과 가시화…AI 팩토리·커머스 경쟁력 강화",
      "press": "ajunews.com",
      "publishedAt": "2026-11-12T02:50:00.000Z",
      "link": "https://www.ajunews.com/view/20261112114536777"
+    }
+   ]
+  },
+  {
+   "keyword": "메가프로젝트 이재명 대통령",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 59,
+   "recent20": 14,
+   "press": 40,
+   "firstArticleAt": "2026-11-12T02:12:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이 대통령 “메가프로젝트 속도전 넘어 전격전…예정된 투자 제때 진행...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-12T02:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012292452?sid=100"
     },
     {
-     "title": "네이버, 美 AI 추론기업과 2조원 공급계약…AI 팩토리 초기 고객 확보",
-     "press": "sateconomy.co.kr",
-     "publishedAt": "2026-11-12T02:40:00.000Z",
-     "link": "https://sateconomy.co.kr/news/view/1065580090724030"
+     "title": "李대통령 \"충청권 메가프로젝트, 112개 기업 23조6000억원 추가 투자\"",
+     "press": "weekly.chosun.com",
+     "publishedAt": "2026-11-12T02:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/053/0000062986?sid=100"
     },
     {
-     "title": "네이버, 매출 6분기째 신기록에도 영업익 21%↓…AI 팩토리로 반전(종합...",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-12T02:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006408782?sid=105"
+     "title": "李대통령 국정 지지율, 2%p↓…부정 평가 47%",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-12T02:54:00.000Z",
+     "link": "https://www.ajunews.com/view/20261112113904751"
     }
    ]
   },
@@ -47,10 +79,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 39,
-   "recent20": 5,
-   "press": 38,
-   "firstArticleAt": "2026-11-12T01:22:00.000Z",
+   "articles90": 31,
+   "recent20": 2,
+   "press": 30,
+   "firstArticleAt": "2026-11-12T01:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,98 +107,131 @@
    ]
   },
   {
-   "keyword": "충청권 메가프로젝트 착공식",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 45,
-   "recent20": 11,
-   "press": 33,
-   "firstArticleAt": "2026-11-12T01:55:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "아산시, 충청권 메가프로젝트 착공식 개최",
-     "press": "todayenergy.kr",
-     "publishedAt": "2026-11-12T02:50:00.000Z",
-     "link": "https://www.todayenergy.kr/news/articleView.html?idxno=305451"
-    },
-    {
-     "title": "李대통령·삼성 이재용 두달 반 만에 재회…‘140조 충청 메가프로젝트...",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-12T02:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000131739?sid=100"
-    },
-    {
-     "title": "李대통령 \"충청권 112개 기업 23.6조 추가 투자…지역 생태계 확산\"",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-12T02:48:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=902866"
-    }
-   ]
-  },
-  {
    "keyword": "선관위 특검 압수수색",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 35,
-   "recent20": 3,
-   "press": 26,
-   "firstArticleAt": "2026-11-12T01:22:00.000Z",
+   "articles90": 29,
+   "recent20": 5,
+   "press": 23,
+   "firstArticleAt": "2026-11-12T01:36:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "선관위 특검, '보안점검 문서 허위작성' 중앙선관위 등 압수수색",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-12T02:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000925433?sid=102"
+    },
+    {
+     "title": "[단독] \"선관위, 보안점수 100점으로 조작\"...국정원도 지적",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-12T02:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002431813?sid=102"
+    },
     {
      "title": "특검 '보안점검 문서 조작' 중앙선관위 압수수색",
      "press": "newscj.com",
      "publishedAt": "2026-11-12T02:46:00.000Z",
      "link": "https://www.newscj.com/news/articleView.html?idxno=3448112"
-    },
-    {
-     "title": "임태희 전 교육감 “선관위 특검, 선거 개표 조사 경기도 전 지역으로 ...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-12T02:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002722628?sid=100"
-    },
-    {
-     "title": "특검, ‘보안점검 문서 허위작성’ 중앙선관위·용역업체 압수수색",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-12T02:42:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611120089"
     }
    ]
   },
   {
-   "keyword": "김건희 집사게이트 IMS모빌리티 대표 무죄",
+   "keyword": "김건희 집사 무죄 확정",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 20,
-   "recent20": 2,
-   "press": 17,
+   "articles90": 23,
+   "recent20": 3,
+   "press": 21,
    "firstArticleAt": "2026-11-12T01:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "'김건희 집사게이트' 조영탁 대표 무죄·공소기각 확정",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-12T02:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000925432?sid=102"
+    },
+    {
+     "title": "'집사 게이트' IMS모빌리티 대표, 대법서 무죄·공소기각 확정",
+     "press": "todaykorea.co.kr",
+     "publishedAt": "2026-11-12T02:58:00.000Z",
+     "link": "https://www.todaykorea.co.kr/news/articleView.html?idxno=408539"
+    },
+    {
      "title": "'김건희 집사게이트' 조영탁 IMS모빌리티 대표, 대법원에서 무죄 확정",
      "press": "ngonews.kr",
      "publishedAt": "2026-11-12T02:44:00.000Z",
      "link": "https://www.ngonews.kr/news/articleView.html?idxno=242993"
+    }
+   ]
+  },
+  {
+   "keyword": "교사",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 15,
+   "recent20": 2,
+   "press": 14,
+   "firstArticleAt": "2026-11-12T01:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "전북교사노조 \"'공직선거법 위반 혐의' 정재석 위원장, 불기소해야\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-12T02:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009285480?sid=102"
     },
     {
-     "title": "‘집사게이트’ 조영탁 IMS모빌리티 대표 무죄·공소기각 확정",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-12T02:34:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2647347"
+     "title": "강원랜드사회공헌재단, 16년 이어온 학교사회복지사업 성과 공유",
+     "press": "ekn.kr",
+     "publishedAt": "2026-11-12T02:44:00.000Z",
+     "link": "https://www.ekn.kr/web/view.php?key=20261112026248764"
     },
     {
-     "title": "'집사게이트' IMS모빌리티 대표 무죄·공소기각 확정",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-12T02:30:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1543492"
+     "title": "전남광주특별시교육청, 퇴직 교사 기증기록물전 개최",
+     "press": "thefairnews.co.kr",
+     "publishedAt": "2026-11-12T02:38:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=93938"
+    }
+   ]
+  },
+  {
+   "keyword": "jyp",
+   "sources": [
+    "google"
+   ],
+   "articles90": 10,
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-12T01:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "JYP, 스키즈 월드 투어로 3분기 어닝 서프라이즈 21% 폭등",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-12T02:48:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000052365"
+    },
+    {
+     "title": "스키즈에 오블루 더했더니 난리났다…JYP엔터, 주가 20% 급등",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-12T02:21:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000784115"
+    },
+    {
+     "title": "[특징주] JYP엔터, 3분기 역대 최대 분기 매출에 19% '껑충'",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-12T02:02:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=902851"
     }
    ]
   },
@@ -178,10 +243,16 @@
    "articles90": 6,
    "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-12T01:22:00.000Z",
+   "firstArticleAt": "2026-11-12T01:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "정부, ‘양극화 대응 TF’ 총괄반 1차 회의…“모두의 성장으로 대전환...",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-12T02:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003058745?sid=101"
+    },
     {
      "title": "‘양극화 대응’ 범부처 TF 가동…조선업 원·하청 상생협약 추진",
      "press": "biz.heraldcorp.com",
@@ -193,21 +264,79 @@
      "press": "etnews.com",
      "publishedAt": "2026-11-12T01:57:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/030/0003484912?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "발언하는 한병도 원내대표",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-12T01:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "민주당 한병도 \"당청 간 엇박자 없어, 더 나은 민생 위해 긴밀히 협력\"",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-12T02:34:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=451818"
     },
     {
-     "title": "정부, 양극화 대응 TF 본격 가동…5대 분야 과제 발굴 착수",
-     "press": "newsfc.co.kr",
-     "publishedAt": "2026-11-12T01:54:00.000Z",
-     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82410"
+     "title": "한병도 “국힘 내부서 12·3 사과 논쟁 볼썽 사나워...기가 찰 노릇”",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-12T01:40:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1136935"
+    },
+    {
+     "title": "한병도 “당청 엇박자 없다…더 나은 민생 위해 긴밀히 협력”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-12T01:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003761965?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "울산 김현석 감독 올 시즌 종료",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-12T01:33:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[공식발표] 휘청이던 친정 살린 김현석 감독…울산과 '아름다운 작별'",
+     "press": "fourfourtwo.co.kr",
+     "publishedAt": "2026-11-12T02:21:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/411/0000089865"
+    },
+    {
+     "title": "[오피셜] 돌아온 이유도 울산, 떠나는 이유도 울산…'미스터 울산' 김현...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-12T01:45:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/445/0000489687"
+    },
+    {
+     "title": "‘K리그1 2위인데’ 울산, 김현석 감독과 올 시즌 끝으로 결별",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-12T01:33:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/119/0003154314"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 368,
-  "matched": 144,
-  "avgLeadMin": 1489,
+  "flagged": 369,
+  "matched": 143,
+  "avgLeadMin": 1500,
   "recent": [
    {
     "keyword": "손흥민 김민재 공동 입장문",
