@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T15:07:17.824Z",
+ "builtAt": "2026-11-12T15:17:31.495Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 98,
-   "recent20": 39,
-   "press": 73,
-   "firstArticleAt": "2026-11-12T14:20:00.000Z",
-   "exclusive": true,
-   "capped": true,
+   "articles90": 94,
+   "recent20": 30,
+   "press": 72,
+   "firstArticleAt": "2026-11-12T14:28:00.000Z",
+   "exclusive": false,
+   "capped": false,
    "samples": [
     {
-     "title": "엔비디아 장전 11% 하락…젠슨 황 CEO 사임 발표",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-12T15:04:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/437207"
+     "title": "'젠슨 황 사임 충격' 엔비디아 주가 급락…시총 4조달러 붕괴",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-12T15:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004209343?sid=104"
     },
     {
-     "title": "'불륜' 젠슨 황 사임, AI산업 대혼란 … 삼전닉스 HBM 공급도 차질 빚나",
-     "press": "biz.newdaily.co.kr",
-     "publishedAt": "2026-11-12T15:04:00.000Z",
-     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/13/2026111300001.html"
+     "title": "막 내린 '젠슨 황 시대'...엔비디아 주가 10%대 급락",
+     "press": "ntoday.co.kr",
+     "publishedAt": "2026-11-12T15:16:00.000Z",
+     "link": "https://www.ntoday.co.kr/news/articleView.html?idxno=130827"
     },
     {
-     "title": "[사설] 젠슨 황 불명예 퇴진…680조 협력 후폭풍 차단해야",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-12T15:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004681683?sid=110"
+     "title": "‘유퀴즈 사랑꾼의 추락’ 젠슨 황, 엔비디아 CEO 전격 사임",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-12T15:16:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001280683"
     }
    ]
   },
@@ -47,30 +47,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 1,
+   "articles90": 10,
+   "recent20": 2,
    "press": 9,
-   "firstArticleAt": "2026-11-12T13:44:00.000Z",
+   "firstArticleAt": "2026-11-12T13:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "최민희 “李, 尹탄핵 반대” 발언 파장… 김민석, 당 윤리감찰단에 조사...",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-12T15:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001884853?sid=100"
+    },
+    {
+     "title": "“최민희 ‘대통령도 윤 탄핵 반대’ 발언”…여당, 감찰 착수",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-12T15:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003564897?sid=100"
+    },
     {
      "title": "신천지 갈등 속 尹탄핵발언 논란 '최민희 감찰'…與계파 대립 새국면",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-12T14:48:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016439516?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "학대",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T13:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "원주종합사회복지관 노인학대 예방교육",
+     "press": "kado.net",
+     "publishedAt": "2026-11-12T15:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000211095?sid=102"
     },
     {
-     "title": "김민석, 최민희는 즉시 감찰…'신천지 3자 연합' 증거 없었다는 자신의...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-12T14:42:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16275290"
+     "title": "'아동학대' 고소에 결국?…민속촌 '귀신 참교육' 15일 종료",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-12T14:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001040062?sid=102"
     },
     {
-     "title": "김민석, '언행 논란' 최민희 감찰조사 지시…\"심각 인식\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-12T14:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001402678?sid=100"
+     "title": "“아들이 숨을 쉬지 않는다”⋯숨진 중증 발달장애 10대 몸에서 학대 정...",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-12T14:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001230599?sid=102"
     }
    ]
   },
@@ -107,41 +139,41 @@
    ]
   },
   {
-   "keyword": "학대",
+   "keyword": "amd 주가",
    "sources": [
     "google"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-12T13:56:00.000Z",
+   "firstArticleAt": "2026-11-12T14:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'아동학대' 고소에 결국?…민속촌 '귀신 참교육' 15일 종료",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-12T14:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001040062?sid=102"
+     "title": "젠슨 황 사임 발표 후 엔비디아 주가 10.4% 급락…나스닥 선물도 흔들, ...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-12T14:22:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16275282"
     },
     {
-     "title": "“아들이 숨을 쉬지 않는다”⋯숨진 중증 발달장애 10대 몸에서 학대 정...",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-12T14:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001230599?sid=102"
+     "title": "뉴욕증시 개장 전 특징주...엔비디아 10% 급락·AMD 상승",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-12T14:10:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261112001498"
     },
     {
-     "title": "김해 초등생 동물학대 의혹 조사 착수",
-     "press": "gnmaeil.com",
-     "publishedAt": "2026-11-12T13:56:00.000Z",
-     "link": "http://www.gnmaeil.com/news/articleView.html?idxno=598604"
+     "title": "젠슨 황 결국 축출, 엔비디아 주가 14% 폭락…여성 CFO가 임시 사령탑",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-12T14:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003058903?sid=101"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 388,
+  "flagged": 389,
   "matched": 144,
   "avgLeadMin": 775,
   "recent": [
