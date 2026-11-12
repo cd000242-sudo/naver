@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T11:45:40.255Z",
+ "builtAt": "2026-11-12T11:55:43.906Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
+ "measured": 21,
  "candidates": [
   {
    "keyword": "북한 G7 비핵화 반발",
    "sources": [
     "nate"
    ],
-   "articles90": 9,
+   "articles90": 8,
    "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-12T10:22:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-12T10:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -50,21 +50,21 @@
    "articles90": 7,
    "recent20": 1,
    "press": 7,
-   "firstArticleAt": "2026-11-12T10:25:00.000Z",
+   "firstArticleAt": "2026-11-12T10:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "10대 소녀 살해한 50대 구속 기로…이틀째 진술 거부",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-12T11:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001977970?sid=102"
+    },
     {
      "title": "성북구 15살 소녀 살해 50대 남 구속영장 청구…피의자 가족범죄 관계 ...",
      "press": "obsnews.co.kr",
      "publishedAt": "2026-11-12T11:30:00.000Z",
      "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1543563"
-    },
-    {
-     "title": "10대 소녀 살해한 50대 남성, 이틀째 묵비권…구속영장 청구",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-12T11:24:00.000Z",
-     "link": "https://www.ajunews.com/view/20261112201726634"
     },
     {
      "title": "10대 소녀 살해한 50대 남성에 구속영장 청구…여전히 진술 거부",
@@ -112,13 +112,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-12T10:20:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T10:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "코인마켓 거래소 ‘플라이빗’서 40명 개인정보 유출… 그룹웨어 통해 ...",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-12T11:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001204451?sid=101"
+    },
     {
      "title": "'또 그룹웨어 해킹' 플라이빗 고객정보 유출",
      "press": "safetimes.co.kr",
@@ -130,12 +136,6 @@
      "press": "newsway.co.kr",
      "publishedAt": "2026-11-12T11:00:00.000Z",
      "link": "https://www.newsway.co.kr/news/view?ud=2026111219564317964"
-    },
-    {
-     "title": "중소 코인거래소 플라이빗도 해킹…고객 40명 정보 유출",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-12T10:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005440557?sid=101"
     }
    ]
   },
@@ -144,10 +144,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 5,
+   "articles90": 3,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-12T10:19:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-12T10:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
