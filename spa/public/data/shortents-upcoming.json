@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T22:41:36.633Z",
+ "builtAt": "2026-11-12T22:51:39.881Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,12 +15,12 @@
    "sources": [
     "google"
    ],
-   "articles90": 10,
-   "recent20": 5,
-   "press": 10,
-   "firstArticleAt": "2026-11-12T21:44:00.000Z",
+   "articles90": 8,
+   "recent20": 3,
+   "press": 8,
+   "firstArticleAt": "2026-11-12T22:11:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
      "title": "줄리엔강, 결혼 2년 만에 큰 사고 \"우리에게 이런 일이\"..결혼반지 분실",
@@ -35,42 +35,10 @@
      "link": "https://www.gukjenews.com/news/articleView.html?idxno=3750715"
     },
     {
-     "title": "곽선영, 아들과 엘리베이터 추락 사고… \"119 구조요청 하고 음악 틀어...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-12T22:31:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000489882"
-    }
-   ]
-  },
-  {
-   "keyword": "10월 수출물량 증가",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-12T21:17:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "원·달러 환율·국제 유가 하락에…10월 수입물가 1.8%↓",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T22:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014319773?sid=101"
-    },
-    {
-     "title": "환율·유가 동반 하락에 10월 수입물가 1.8%↓...수출물가 0.7%↑",
-     "press": "tfmedia.co.kr",
-     "publishedAt": "2026-11-12T22:22:00.000Z",
-     "link": "https://www.tfmedia.co.kr/news/article.html?no=208861"
-    },
-    {
-     "title": "10월 수입물가지수 1.8%↓…환율·유가 하락 영향",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-12T22:06:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3750693"
+     "title": "“브레이크 안 들었다”…같은 버스회사, 약 1년 전에도 사고 있었다",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-12T22:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012293104?sid=102"
     }
    ]
   },
@@ -80,7 +48,7 @@
     "nate"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 1,
    "press": 6,
    "firstArticleAt": "2026-11-12T21:28:00.000Z",
    "exclusive": false,
@@ -111,10 +79,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 8,
+   "articles90": 7,
    "recent20": 0,
    "press": 6,
-   "firstArticleAt": "2026-11-12T21:14:00.000Z",
+   "firstArticleAt": "2026-11-12T21:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -139,14 +107,46 @@
    ]
   },
   {
+   "keyword": "10월 수출물량 증가",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T21:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "원·달러 환율·국제 유가 하락에…10월 수입물가 1.8%↓",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-12T22:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014319773?sid=101"
+    },
+    {
+     "title": "환율·유가 동반 하락에 10월 수입물가 1.8%↓...수출물가 0.7%↑",
+     "press": "tfmedia.co.kr",
+     "publishedAt": "2026-11-12T22:22:00.000Z",
+     "link": "https://www.tfmedia.co.kr/news/article.html?no=208861"
+    },
+    {
+     "title": "10월 수입물가지수 1.8%↓…환율·유가 하락 영향",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-12T22:06:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3750693"
+    }
+   ]
+  },
+  {
    "keyword": "이세창, 급성 맹장염 수술",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-12T21:17:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T21:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -171,14 +171,46 @@
    ]
   },
   {
+   "keyword": "2026년 11월 13일 운세",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-12T21:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오늘의 운세] 2026년 11월 13일 금요일 띠별 운세… 양띠·개띠·돼지띠...",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-12T22:44:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082487"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 13일 (금) 띠별운세 '수고한 나를 다독이자'",
+     "press": "dailypop.kr",
+     "publishedAt": "2026-11-12T21:40:00.000Z",
+     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103979"
+    },
+    {
+     "title": "[오늘의 운세] 13일 금요일 나의 운세는?",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-12T21:36:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1191796"
+    }
+   ]
+  },
+  {
    "keyword": "성북 10대 살해 구속영장",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T21:20:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-12T21:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -208,7 +240,7 @@
     "nate"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-12T21:35:00.000Z",
    "exclusive": false,
@@ -238,8 +270,8 @@
  "hitRate": {
   "days": 7,
   "flagged": 406,
-  "matched": 149,
-  "avgLeadMin": 658,
+  "matched": 148,
+  "avgLeadMin": 662,
   "recent": [
    {
     "keyword": "황정리 별세",
