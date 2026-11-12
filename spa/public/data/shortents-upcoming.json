@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T21:51:15.625Z",
+ "builtAt": "2026-11-12T22:01:19.151Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,15 +8,47 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 26,
  "candidates": [
+  {
+   "keyword": "젠슨 황 사임 충격",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 28,
+   "recent20": 9,
+   "press": 26,
+   "firstArticleAt": "2026-11-12T20:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "엔비디아, 젠슨 황 사임 충격…장중 시총 801조원 증발",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-12T22:00:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=781271"
+    },
+    {
+     "title": "[증시전략] 젠슨 황, 사실상 해임…엔비디아 주가 한때 14% 급락",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-12T21:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000543412?sid=104"
+    },
+    {
+     "title": "[뉴욕증시] 젠슨 황 사임 충격 나스닥 100.09P 하락...AMD·브로드컴 5%대...",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-12T21:56:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=202611130651588714e250e8e188_1"
+    }
+   ]
+  },
   {
    "keyword": "10월 수출물량 증가",
    "sources": [
     "signal.bz"
    ],
    "articles90": 24,
-   "recent20": 1,
+   "recent20": 0,
    "press": 24,
    "firstArticleAt": "2026-11-12T21:00:00.000Z",
    "exclusive": false,
@@ -29,27 +61,59 @@
      "link": "https://n.news.naver.com/mnews/article/422/0000925724?sid=101"
     },
     {
-     "title": "10월 수출물량지수 역대 최대‥\"AI 인프라 관련 품목 증가\"",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-12T21:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001535309?sid=101"
-    },
-    {
      "title": "수출물량 증가율 ‘역대 최고’…소득교역조건 상승률도 74.6% 최대",
      "press": "joseilbo.com",
      "publishedAt": "2026-11-12T21:21:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/123/0002393961?sid=101"
+    },
+    {
+     "title": "10월 수출물량지수 역대 최대‥\"AI 인프라 관련 품목 증가\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-12T21:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001535309?sid=101"
     }
    ]
   },
   {
-   "keyword": "박정성 통상교섭본부장 유럽의회",
+   "keyword": "김민석 최민희 감찰 지시",
    "sources": [
     "nate"
    ],
-   "articles90": 17,
+   "articles90": 6,
    "recent20": 0,
-   "press": 4,
+   "press": 6,
+   "firstArticleAt": "2026-11-12T21:03:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "최민희 \"李, 尹 탄핵 반대\" 발언…김민석, 윤리 감찰 지시",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-12T21:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000650737?sid=100"
+    },
+    {
+     "title": "'하이에나' 이어 '李 대통령도 尹 탄핵 반대'…김민석, 최민희 감찰조사...",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-12T21:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002393964?sid=100"
+    },
+    {
+     "title": "김민석, '잇단 언행 논란' 최민희 감찰조사 지시",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-12T21:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001402713?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "박정성 통상교섭본부장 유럽의회 면담",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 14,
+   "recent20": 0,
+   "press": 5,
    "firstArticleAt": "2026-11-12T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
@@ -61,55 +125,55 @@
      "link": "https://www.ajunews.com/view/20261112185814599"
     },
     {
-     "title": "박정성 통상교섭본부장, 유럽의회 내수시장·소비자보호위원회 위원장...",
+     "title": "박정성 통상교섭본부장, 아담 야루바스 유럽의회 의원과 면담",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-12T21:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016439606?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/001/0016439627?sid=100"
     },
     {
-     "title": "아담 야루바스 유럽의회 의원 만난 박정성 통상교섭본부장",
+     "title": "박정성 통상교섭본부장, 마르틴 호이시크 유럽의회 의원과 면담",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-12T21:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016439630?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/001/0016439631?sid=100"
     }
    ]
   },
   {
-   "keyword": "축구 대표팀, 사우디 평가전",
+   "keyword": "물건 이호선 긴급",
    "sources": [
     "nate"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-12T20:45:00.000Z",
+   "firstArticleAt": "2026-11-12T20:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "축구 국가대표 평가전, 13일 오후 11시 일정",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-12T21:28:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611130006"
+     "title": "\"바로 이혼해!\"…물건 던지며 욕설→'아비규환 부부싸움'에 이호선 긴급...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-12T21:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004124622"
     },
     {
-     "title": "불화설 속 다시 모인 韓 축구, 원팀 증명해야 할 중동 2연전",
-     "press": "nocutnews.co.kr",
+     "title": "이호선 5시간 상담 안 통했다…기준 아내 울분 폭발에 부부 격리 사태(...",
+     "press": "newsen.com",
      "publishedAt": "2026-11-12T21:01:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/079/0004209361"
+     "link": "https://m.entertain.naver.com/article/609/0001186998"
     },
     {
-     "title": "갈등 딛고 '원팀'된 모레노호, 오늘 사우디전…韓 반등 신호탄 쏠까",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-12T20:45:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/421/0009286866"
+     "title": "이혼 요구하다 물건 투척까지…이호선, 퇴근 미루고 긴급 출동",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-12T20:56:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005440637"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 396,
+  "flagged": 398,
   "matched": 146,
   "avgLeadMin": 662,
   "recent": [
