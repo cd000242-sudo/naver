@@ -1,12 +1,12 @@
 {
-  "publishedAt": "2026-11-12T03:41:02.337Z",
+  "publishedAt": "2026-11-12T09:43:13.360Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 193,
+    "candidates": 240,
     "niche": 0,
-    "preemption": 4,
+    "preemption": 9,
     "pending": 0
   },
   "freeSample": {
@@ -175,39 +175,39 @@
       ],
       "trend": {
         "series": [
-          0,
-          9,
-          37,
+          5,
           22,
-          33,
-          10,
-          10,
-          19,
           13,
-          25,
+          19,
+          6,
+          6,
+          11,
+          8,
           15,
           9,
+          5,
           0,
-          30,
-          22,
-          27,
-          24,
-          10,
-          10,
+          18,
+          13,
+          16,
+          14,
+          6,
+          6,
           0,
+          18,
           30,
-          51,
-          58,
-          30,
-          43,
-          24,
-          21,
-          58,
+          34,
+          18,
+          25,
+          14,
+          12,
+          34,
+          59,
           100
         ],
         "label": "🚀 떡상",
         "recommendation": "지금 당장 작성! 3일 내 급증 포착 → 선점 시 상위 노출 확률 매우 높음",
-        "measuredAt": "2026-11-11T22:16:52.258Z"
+        "measuredAt": "2026-11-12T09:43:13.968Z"
       },
       "kinCount": 0,
       "kinTop": null,
@@ -219,6 +219,578 @@
     }
   ],
   "observations": [
+    {
+      "keyword": "바이트댄스 문톤",
+      "issue": "바이트댄스",
+      "topic": "바이트댄스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 68,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "rising",
+      "isHot": true,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 68",
+        "선점 후보 — 경쟁 문서 68건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "바이트댄스가 메타 '뮤즈' 대항마 AI 에이전트·비서 출격을 예고했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-12T09:39:29.490Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "바이트댄스 씨댄스",
+      "issue": "바이트댄스",
+      "topic": "바이트댄스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 133,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "rising",
+      "isHot": true,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 133",
+        "선점 후보 — 경쟁 문서 133건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "바이트댄스가 메타 '뮤즈' 대항마 AI 에이전트·비서 출격을 예고했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-12T09:39:29.490Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "e-민즈 국내 도입",
+      "issue": "e-민즈",
+      "topic": "e-민즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "한국 적용 궁금",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 26,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 26",
+        "선점 후보 — 경쟁 문서 26건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 한국 적용 궁금"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "메타가 AI 데이터 처리를 최대 45배 빠르게 하는 'e-민즈'를 공개했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "home": {
+          "text": "e-민즈 국내 도입 날짜 나왔다길래 장바구니부터 다시 열어봤는데요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-12T09:39:29.490Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "e-민즈 메타",
+      "issue": "e-민즈",
+      "topic": "e-민즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 25,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 25",
+        "선점 후보 — 경쟁 문서 25건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "메타가 AI 데이터 처리를 최대 45배 빠르게 하는 'e-민즈'를 공개했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "e-민즈 메타, AI 데이터 처리 45배 가속 성능 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "e-민즈 메타가 AI 처리 45배라는데 많이들 놓치는 부분이 있더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-12T09:39:29.490Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "e-민즈 출시일",
+      "issue": "e-민즈",
+      "topic": "e-민즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "공개 다음 적용 시점",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 38,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 38",
+        "선점 후보 — 경쟁 문서 38건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 공개 다음 적용 시점"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "메타가 AI 데이터 처리를 최대 45배 빠르게 하는 'e-민즈'를 공개했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "e-민즈 출시일 메타 AI 처리 45배 성능 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "e-민즈 출시일 기다리다 메타 발표 영상을 몇 번씩 다시 돌려봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-12T09:39:29.490Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "e-민즈 성능",
+      "issue": "e-민즈",
+      "topic": "e-민즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 37,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 37",
+        "선점 후보 — 경쟁 문서 37건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "메타가 AI 데이터 처리를 최대 45배 빠르게 하는 'e-민즈'를 공개했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "e-민즈 성능 메타 AI 데이터 처리 45배 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "e-민즈 성능 메타가 45배라고 공개했는데 의외로 여기서 갈리네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-12T09:39:29.490Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "김승우 입장문",
+      "issue": "김승우",
+      "topic": "김승우",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "장난 해명 이후 반응",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 32,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 32",
+        "선점 후보 — 경쟁 문서 32건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 장난 해명 이후 반응"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "배우 김승우가 2200만원 절도 혐의로 피소됐다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "김승우 입장문 2200만원 절도 피소 해명 요약",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "김승우 입장문 올라오고 나서 근황을 찾아봤는데 예상과 좀 다르더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "김승우 근황",
+          "searchVolume": 20,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "김승우 근황",
+          "searchVolume": 20,
+          "documentCount": 1513,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-12T09:39:29.490Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "e-민즈 사용법",
+      "issue": "e-민즈",
+      "topic": "e-민즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 173,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 173",
+        "선점 후보 — 경쟁 문서 173건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "메타가 AI 데이터 처리를 최대 45배 빠르게 하는 'e-민즈'를 공개했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "e-민즈 사용법 단계별 방법",
+          "frame": "howto",
+          "basis": "검색 질문 'e-민즈 사용법' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+        },
+        "home": {
+          "text": "e-민즈 사용법 처음엔 헤맸는데 이 메뉴부터 눌러보니 달라지더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-12T09:39:29.490Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "e-민즈 활용",
+      "issue": "e-민즈",
+      "topic": "e-민즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 209,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 209",
+        "선점 후보 — 경쟁 문서 209건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "메타가 AI 데이터 처리를 최대 45배 빠르게 하는 'e-민즈'를 공개했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "e-민즈 활용, 메타 AI 데이터 45배 처리 실제 적용",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "e-민즈 활용 메타 AI 데이터가 45배 빨라진다는데 어디서 갈리나",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-12T09:39:29.490Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "소프트뱅크 키디 차이",
       "issue": "소프트뱅크",
@@ -291,7 +863,8 @@
       "monetize": null,
       "measuredAt": "2026-11-12T03:38:41.913Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "문샷 쿠션 단종",
@@ -395,7 +968,8 @@
       "monetize": null,
       "measuredAt": "2026-11-12T03:38:41.913Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "제미나이 디시전 1",
@@ -457,7 +1031,8 @@
       "monetize": null,
       "measuredAt": "2026-11-12T03:38:41.913Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "문샷 챌린지 뜻",
@@ -575,7 +1150,8 @@
       },
       "measuredAt": "2026-11-12T03:38:41.913Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "이재아 플루트",
@@ -1733,30 +2309,30 @@
   "rejectedCount": 0,
   "issues": [
     {
-      "issue": "이재명 메가프로젝트 회의",
+      "issue": "한전 3분기 실적",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "충청권 메가프로젝트 착공식에 이재용과 나란히 첫 삽을 떠서",
+      "why": "3분기 영업익 71% 급감으로 전기요금 인상 압박이 커졌다.",
       "headlines": [
         {
-          "title": "충청권 메가프로젝트 첫 삽…이 대통령 “지역·국민 삶 바꾸는 모두의...",
-          "press": "news.kbs.co.kr",
-          "publishedAt": "2026-11-12T03:03:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/056/0012292460?sid=100"
-        },
-        {
-          "title": "李대통령 \"메가프로젝트 속도전 넘어 전격전…기업에 힘 보탤것\"",
+          "title": "한전 3분기 영업익 71% 급감…전기요금 인상 압박 커지나(종합)",
           "press": "yna.co.kr",
-          "publishedAt": "2026-11-12T02:36:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016438073?sid=100"
+          "publishedAt": "2026-11-12T08:10:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016439241?sid=101"
         },
         {
-          "title": "李대통령, 이재용 회장과 메가프로젝트 나란히 첫 삽…\"모두의 성장 완...",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-11-12T01:43:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005440158?sid=100"
+          "title": "한전 3분기 영업익 71% 급감…전기요금 인상 압박 커지나",
+          "press": "biz.sbs.co.kr",
+          "publishedAt": "2026-11-12T08:12:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/374/0000543350?sid=101"
+        },
+        {
+          "title": "중동 전쟁 충격 본격 반영… 한전 영업이익 71% 급감",
+          "press": "chosun.com",
+          "publishedAt": "2026-11-12T07:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0004009272?sid=101"
         }
       ],
       "concentrated": [],
@@ -1764,453 +2340,87 @@
       "rowCount": 0
     },
     {
-      "issue": "김건희 집사게이트 IMS모빌리티",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "IMS모빌리티 조영탁 대표가 무죄·공소기각을 확정받아서",
-      "headlines": [
-        {
-          "title": "'김건희 집사 게이트' IMS모빌리티 대표 무죄·공소기각 확정",
-          "press": "nocutnews.co.kr",
-          "publishedAt": "2026-11-12T02:07:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/079/0004209038?sid=102"
-        },
-        {
-          "title": "'김건희 집사 게이트' IMS모빌리티 대표 등 무죄·공소기각 확정",
-          "press": "imnews.imbc.com",
-          "publishedAt": "2026-11-12T02:15:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/214/0001535126?sid=102"
-        },
-        {
-          "title": "대법 ‘김건희 집사 게이트’ 조영탁 IMS 대표 무죄·공소기각 확정",
-          "press": "khan.co.kr",
-          "publishedAt": "2026-11-12T02:28:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/032/0003482236?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "김건희",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "젠슨 황 불륜",
+      "issue": "김승우",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "stable",
       "isHot": true,
-      "why": "NYT가 엔비디아 임원과의 혼외관계를 추가 폭로해서",
+      "why": "배우 김승우가 2200만원 절도 혐의로 피소됐다.",
       "headlines": [
         {
-          "title": "젠슨황 '사내불륜' 추가 폭로…NYT \"엔비디아 임원과 혼외관계\"(종합)",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-12T01:53:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016437851?sid=104"
-        },
-        {
-          "title": "젠슨 황 '사내불륜' 추가 폭로…\"직원들도 알았다\"",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-11-12T02:08:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/055/0001402488?sid=104"
-        },
-        {
-          "title": "젠슨 황 사내 불륜 의혹은 누구?…의료·바이오 AI 키운 핵심 임원",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-12T03:03:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014318169?sid=104"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "강동원 김고은 부부",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "넷플릭스 '혼: 삼각의 시간'에서 부부役 출연이 확정돼서",
-      "headlines": [
-        {
-          "title": "강동원·김고은 부부된다…넷플릭스 '혼' 주인공 확정",
-          "press": "news1.kr",
-          "publishedAt": "2026-11-12T03:19:00.000Z",
-          "link": "https://m.entertain.naver.com/article/421/0009285570"
-        },
-        {
-          "title": "넷플릭스 '혼', 강동원·김고은 부부로 만난다",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-11-12T00:47:00.000Z",
-          "link": "https://m.entertain.naver.com/article/018/0006408650"
-        },
-        {
-          "title": "강동원♥김고은 원수 집안인데 부부 된다…넷플릭스 ‘혼’ 제작 확정",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-11-12T00:39:00.000Z",
-          "link": "https://m.entertain.naver.com/article/009/0005762545"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "강동원",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "강동원 김고은",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "네이버 AI 계약",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "AI팩토리 2조 계약 확보했으나 3분기 영업익 21% 감소해서",
-      "headlines": [
-        {
-          "title": "네이버, 투자 영향으로 3분기 영업익 감소…AI 팩토리 사업 가속",
-          "press": "economist.co.kr",
-          "publishedAt": "2026-11-12T01:13:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/243/0000105548?sid=105"
-        },
-        {
-          "title": "네이버 최수연 “AI 팩토리 ‘2조 계약’ 확보…내년 상반기 매출 본격...",
-          "press": "sedaily.com",
-          "publishedAt": "2026-11-12T00:23:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/011/0004681313?sid=105"
-        },
-        {
-          "title": "'역대 최대매출' 네이버, AI 투자에 영업익 21% 감소…\"AI·커머스 성장...",
+          "title": "\"장난이었다\" 해명에도…김승우, 2200만원 절도 혐의 피소",
           "press": "hankyung.com",
-          "publishedAt": "2026-11-12T00:22:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005353053?sid=105"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "이슬람 혁명 수비대",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "혁명수비대가 지하 '미사일 도시'를 공개해서",
-      "headlines": [
-        {
-          "title": "이란 혁명수비대, 첨단 무기 가득 '지하 미사일 도시' 공개",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-11T14:21:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016437008?sid=104"
+          "publishedAt": "2026-11-12T08:50:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005353323?sid=102"
         },
         {
-          "title": "‘이란군 끝장냈다’는 트럼프…혁명수비대 지하 ‘미사일 도시’ 공개",
-          "press": "hani.co.kr",
-          "publishedAt": "2026-11-11T09:36:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/028/0002831760?sid=104"
+          "title": "배우 김승우 2200만원 절도 혐의로 고소당해...경찰 수사 중",
+          "press": "chosun.com",
+          "publishedAt": "2026-11-12T08:14:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0004009291?sid=102"
         },
         {
-          "title": "프랑스 “냉장고 해킹, 이란 혁명수비대 소행”",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-11-10T01:28:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/024/0000109523?sid=101"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "군부대 상비약 허용",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "약국 없는 군부대·공항서 안전상비약 취급이 허용돼서",
-      "headlines": [
-        {
-          "title": "약국 없는 군부대·공항서 상비약 취급 허용…군무원도 군의관 직접 조...",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-11-12T01:33:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005440146?sid=101"
-        },
-        {
-          "title": "근처에 약국 없는 군부대·공항, 상비약 접근성 높인다",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-12T02:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016437899?sid=102"
-        },
-        {
-          "title": "약국 없는 군부대·공항서 상비약 산다…의약품 접근성 확대",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-11-12T01:27:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005841678?sid=101"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "천무 다연장로켓",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "한화에어로가 美 해상에서 천무 사격시험을 할 예정이라서",
-      "headlines": [
-        {
-          "title": "[영상] 다연장로켓 '천무' 美서 해상사격시험 예정…해양 방산사업 확장",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-10T06:52:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016433943?sid=100"
-        },
-        {
-          "title": "“한국 ‘천무’에 시장 뺏기는 美 하이마스”…유럽에서도 안 밀리는 ...",
-          "press": "nownews.seoul.co.kr",
-          "publishedAt": "2026-11-11T11:32:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/081/0003698429?sid=104"
-        },
-        {
-          "title": "한화에어로, 美 해상서 '천무' 쏜다",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-11-09T02:03:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005839906?sid=101"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "정부 양극화 대응",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "정부가 양극화 대응 TF를 가동해 5대 분야 과제 발굴에 착수해서",
-      "headlines": [
-        {
-          "title": "정부, 양극화 대응 TF 본격 가동…5대 분야 과제 발굴 착수",
-          "press": "nocutnews.co.kr",
-          "publishedAt": "2026-11-12T00:39:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/079/0004208958?sid=101"
-        },
-        {
-          "title": "정부, 양극화 대응 총괄반 첫 회의…내년 성장전략에 핵심과제 반영",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-11-12T00:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005841558?sid=101"
-        },
-        {
-          "title": "정부, 양극화 대응 TF 가동…5대 분야 격차 완화책 연내 마련",
-          "press": "news1.kr",
-          "publishedAt": "2026-11-12T00:48:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009284949?sid=101"
+          "title": "[단독] 술자리 중 지갑에서 쓱? 배우 김승우 ‘절도 혐의’ 피소",
+          "press": "ilyo.co.kr",
+          "publishedAt": "2026-11-12T05:48:00.000Z",
+          "link": "https://ilyo.co.kr/?ac=article_view&entry_id=513574"
         }
       ],
       "concentrated": [
         {
-          "keyword": "정부",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "같은 목표 향해",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "손흥민과 96라인이 갈등설에 공동 입장문을 내서",
-      "headlines": [
-        {
-          "title": "\"같은 목표 향하는 동료\"…손흥민·96라인, 공동 입장문",
-          "press": "mbn.mk.co.kr",
-          "publishedAt": "2026-11-12T00:34:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/057/0001977844?sid=102"
-        },
-        {
-          "title": "손흥민·96라인 갈등 일단락 “은퇴 요구 사실 아냐…같은 목표로 가는...",
-          "press": "donga.com",
-          "publishedAt": "2026-11-12T01:12:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/020/0003761961?sid=102"
-        },
-        {
-          "title": "손흥민·김민재 등 입장문... \"같은 목표 향해 나아갈 동료\"",
-          "press": "ohmynews.com",
-          "publishedAt": "2026-11-12T02:01:00.000Z",
-          "link": "https://m.sports.naver.com/kfootball/article/047/0002535574"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "같은",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "하이드로젠",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "dead",
-      "isHot": false,
-      "why": "현대차그룹이 월드 하이드로젠 엑스포 2026에서 대상을 수상해서",
-      "headlines": [
-        {
-          "title": "현대차, 월드 하이드로젠 엑스포 2026서 ‘베스트 픽(대상)’ 수상",
-          "press": "busan.com",
-          "publishedAt": "2026-11-11T23:19:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/082/0001406789?sid=101"
-        },
-        {
-          "title": "구글, 차세대 경량 모델 '하이드로젠' 테스트…출시 임박 관측",
-          "press": "aitimes.com",
-          "publishedAt": "2026-11-12T03:24:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=217308"
-        },
-        {
-          "title": "현대차그룹, 월드 하이드로젠 엑스포서 수소 기술·사업 역량 선보여",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-11-08T01:23:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005839517?sid=103"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "월드 하이드로젠 엑스포",
+          "keyword": "김승우 농구",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "하이드로젠 수소",
+          "keyword": "김승우 배우",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "하이드로젠 파워",
+          "keyword": "연세대 김승우",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "하이드로젠 뜻",
+          "keyword": "김남주 김승우",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "하이드로젠 물",
+          "keyword": "농구 김승우",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "하이드로젠 연료",
+          "keyword": "배우 김승우",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "하이드로젠엑스포2026",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "구글",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "구글이 제미나이 4 카본과 알파게놈 2를 공개해서",
-      "headlines": [
-        {
-          "title": "지시 한 번에 AI가 에펠탑 건설 재현…구글, '제미나이 4 카본' 공개",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-11T07:25:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014316473?sid=105"
-        },
-        {
-          "title": "구글 딥마인드, 질병 원인 찾는 AI '알파게놈 2' 공개",
-          "press": "zdnet.co.kr",
-          "publishedAt": "2026-11-12T00:47:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/092/0002444965?sid=105"
-        },
-        {
-          "title": "\"엔비디아 이사회, 젠슨 황 해임 준비\"…시간외 주가 8% 급락",
-          "press": "hankyung.com",
-          "publishedAt": "2026-11-11T23:08:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005353013?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "구글 제미나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 번역기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 영국",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 클래스룸",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 재팬",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 원",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 킵",
+          "keyword": "김승우 김남주",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [
         {
-          "keyword": "구글 주가",
-          "reason": "신모델 주가 영향",
+          "keyword": "김승우 입장문",
+          "reason": "장난 해명 이후 반응",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "김승우 경찰 조사",
+          "reason": "수사 진행 상황",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "김승우 활동 중단",
+          "reason": "피소 여파",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -2219,40 +2429,35 @@
       "rowCount": 0
     },
     {
-      "issue": "제미나이 디시전 1",
+      "issue": "젠슨 황 해임",
       "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "구글이 질문 1000개를 동시 처리하는 제미나이 디시전 1을 출시해서",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "불륜 폭로 속 엔비디아 이사회가 젠슨 황 해임을 논의한다.",
       "headlines": [
         {
-          "title": "구글, 판단 전용 AI '제미나이 디시전 1' 출시...질문 1000개 동시 처리",
-          "press": "aitimes.com",
-          "publishedAt": "2026-11-12T03:08:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=217307"
+          "title": "젠슨 황 후계자로 애플 스루지 거론…CFO가 임시수장 맡을 듯",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-12T05:16:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016438451?sid=104"
         },
         {
-          "title": "AI, \"1000개 질문을 0.25초 안에 판단한다!\"...구글 '제미나이 디시전 1'...",
-          "press": "aitimes.kr",
-          "publishedAt": "2026-11-12T01:12:00.000Z",
-          "link": "https://www.aitimes.kr/news/articleView.html?idxno=42704"
+          "title": "젠슨 황 해임 기로…30년 함께한 엔비디아 이사진 선택 주목",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-12T05:25:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014318544?sid=104"
         },
         {
-          "title": "구글, 최대 1000개 질문 한 번에 판별하는 제미나이 API 공개",
-          "press": "tokenpost.kr",
-          "publishedAt": "2026-11-11T20:44:00.000Z",
-          "link": "https://www.tokenpost.kr/news/ai/436777"
+          "title": "머스크, '해임 위기' 젠슨 황 영입 요청에 \"영광일 것\"",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-11-12T03:04:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/055/0001402507?sid=104"
         }
       ],
       "concentrated": [
         {
-          "keyword": "제미나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 제미나이",
+          "keyword": "젠슨황",
           "searchVolume": null,
           "origin": "autocomplete"
         }
@@ -2261,45 +2466,437 @@
       "rowCount": 0
     },
     {
-      "issue": "제미나이 로보틱스 2.5",
+      "issue": "충청권 메가프로젝트 추가",
       "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "dead",
-      "isHot": false,
-      "why": "구글이 피지컬 AI 특화 제미나이 로보틱스 2.5를 공개해서",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "충청권 메가프로젝트에 112개 기업 23.6조원 추가 투자가 예정됐다.",
       "headlines": [
         {
-          "title": "구글, 최상위 AI '제미나이4 카본' 일반공개…로보틱스 2.5 첫선",
+          "title": "李대통령 \"메가프로젝트 속도전 넘어 전격전…기업에 힘 보탤것\"",
           "press": "yna.co.kr",
-          "publishedAt": "2026-11-11T02:13:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016435286?sid=104"
+          "publishedAt": "2026-11-12T02:36:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016438073?sid=100"
         },
         {
-          "title": "구글, 피지컬 AI 특화 '제미나이 로보틱스 2.5' 공개…'카본' 세계 출시",
-          "press": "etnews.com",
-          "publishedAt": "2026-11-11T00:20:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/030/0003484344?sid=105"
+          "title": "李대통령 \"메가, 속도전 넘어 전격전\"…삼성, 충청권에 144조 투자",
+          "press": "fnnews.com",
+          "publishedAt": "2026-11-12T06:23:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/014/0005603468?sid=100"
         },
         {
-          "title": "구글, '제미나이 로보틱스 2.5' 공개…리본 묶고 액체 옮긴다",
-          "press": "joseilbo.com",
-          "publishedAt": "2026-11-11T01:09:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/123/0002393797?sid=104"
+          "title": "메가프로젝트 첫발 뗀 삼성…'아산 온양' HBM 패키징 거점으로",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-11-12T04:57:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005440282?sid=101"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "폭설 김윤석 구교환",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "영화 '폭설'에서 김윤석이 구교환 연기에 짜릿한 전율을 느꼈다고 밝혔다.",
+      "headlines": [
+        {
+          "title": "'폭설' 김윤석 \"구교환 눈빛 통해 짜릿한 전율 느껴\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-12T08:00:00.000Z",
+          "link": "https://m.entertain.naver.com/article/003/0014319324"
+        },
+        {
+          "title": "“짜릿한 전율”...김윤석 구교환의 ‘폭설’ [현장 LIVE]",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-11-12T07:33:00.000Z",
+          "link": "https://m.entertain.naver.com/article/009/0005762875"
+        },
+        {
+          "title": "'폭설' 김윤석 \"에겐남 구교환 연기에 짜릿한 전율\"",
+          "press": "news.jtbc.co.kr",
+          "publishedAt": "2026-11-12T08:10:00.000Z",
+          "link": "https://m.entertain.naver.com/article/437/0000520443"
         }
       ],
       "concentrated": [
         {
-          "keyword": "제미나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 제미나이",
+          "keyword": "폭설",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "이부진",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "이부진이 디올 CEO 아르노 학위수여식에 재계 총수들과 참석했다.",
+      "headlines": [
+        {
+          "title": "정의선·신동빈·이부진… ‘디올 CEO’ 학위식에 재계 거물 총출동",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-11-12T04:25:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001204316?sid=101"
+        },
+        {
+          "title": "디올 옷에 가방까지...이부진, ‘30년지기’ CEO 축하 자리 끝까지 지켰...",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-11-12T03:31:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005762670?sid=103"
+        },
+        {
+          "title": "“손하트 날린 이부진”…디올 CEO 학위 수여식에 재계 총출동",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-11-12T04:32:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006408856?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "이부진 유전병",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이부진 가방",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이부진 임우재",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이부진 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이부진 임동현",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이부진 자녀",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이부진 옷",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼성 이부진",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "이부진 디올백",
+          "reason": "든 가방 정체",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "이부진 재킷",
+          "reason": "3년전 그 옷",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "이부진 패션 브랜드",
+          "reason": "착장 브랜드 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "고려아연 주총 결의",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "법원이 고려아연 주총 결의를 취소하자 고려아연이 즉시 항소했다.",
+      "headlines": [
+        {
+          "title": "고려아연, 주총결의 취소소송 1심에 즉시 항소…\"대법원 판례·판단에 반...",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-12T07:51:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014319296?sid=101"
+        },
+        {
+          "title": "'경영권 보루' 뚫린 최윤범…이사회 역전되나",
+          "press": "hankyung.com",
+          "publishedAt": "2026-11-12T08:48:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005353320?sid=101"
+        },
+        {
+          "title": "영풍·MBK, 고려아연 상대 정기주총 결의 취소소송 승소",
+          "press": "nocutnews.co.kr",
+          "publishedAt": "2026-11-12T06:01:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/079/0004209147?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "고려아연",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "건보공단 특사경 반대",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "건보공단 특사경 도입에 의료계가 수사권 남용이라며 반발했다.",
+      "headlines": [
+        {
+          "title": "\"민간 직원에 강제수사권? 권한 남용\"…'건보공단 특사경'에 의협 반발",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-11-12T07:09:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005440421?sid=103"
+        },
+        {
+          "title": "건보공단 특사경 추진…의료계 \"진료 위축 우려\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-12T05:49:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014318686?sid=102"
+        },
+        {
+          "title": "건보공단 특사경 도입 논쟁 가열…\"재정누수차단\" vs \"수사권남용\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-12T05:50:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016438599?sid=102"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "남대문 스카프 아저씨!",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "남대문 스카프 아저씨 온라인몰에 11만명이 몰려 열자마자 품절됐다.",
+      "headlines": [
+        {
+          "title": "남대문 스카프 아저씨, 온라인 판매 시작하자마자 품절",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-11-12T07:28:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001204394?sid=102"
+        },
+        {
+          "title": "또 일낸 ‘남대문 스카프 아저씨’…온라인몰 열자마자 품절",
+          "press": "kmib.co.kr",
+          "publishedAt": "2026-11-12T07:21:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/005/0001884766?sid=102"
+        },
+        {
+          "title": "'남대문 스카프 아저씨' 또 일냈다…온라인 매장도 품절 대란",
+          "press": "news.tvchosun.com",
+          "publishedAt": "2026-11-12T04:51:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/448/0000650610?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "남대문스카프",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "남대문",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "스카프 아저씨 온라인몰",
+          "reason": "접속 주소 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "한국",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "한국 게임이 9년 만에 세계 1위에 올랐다.",
+      "headlines": [
+        {
+          "title": "\"처음엔 혹평 쏟아졌는데\"…9년 만에 세계 1위 찍은 '한국 게임'",
+          "press": "hankyung.com",
+          "publishedAt": "2026-11-12T01:39:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005353093?sid=105"
+        },
+        {
+          "title": "여성 노려 불법촬영 27차례 해놓고…\"한국 처음이라 몰랐다\"",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-11-12T05:10:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/055/0001402540?sid=102"
+        },
+        {
+          "title": "92·96라인 갈등 씻고 한국축구 '원팀' 다짐",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-11-12T08:23:00.000Z",
+          "link": "https://m.sports.naver.com/kfootball/article/009/0005762933"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "한국 축구 일정",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "한국 a매치",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "한국 키링",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "한국 드라마",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "한국 날씨",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "한국 축구",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "한국 추석",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "한국 추석 2026",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "한국 게임주",
+          "reason": "관련 종목 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "한국 게임 역대",
+          "reason": "과거 흥행작 비교",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "한국 게임 전망",
+          "reason": "1위 이후 지속성",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "e-민즈",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "메타가 AI 데이터 처리를 최대 45배 빠르게 하는 'e-민즈'를 공개했다.",
+      "headlines": [
+        {
+          "title": "메타, AI 데이터 처리 최대 45배 빠르게 하는 'e-민즈' 공개",
+          "press": "aitimes.com",
+          "publishedAt": "2026-11-12T09:02:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=217327"
+        },
+        {
+          "title": "[브리프]넥슨 넷마블 크래프톤 엔씨소프트 스마일게이트 카카오게임즈...",
+          "press": "biztribune.co.kr",
+          "publishedAt": "2025-03-14T14:14:00.000Z",
+          "link": "http://www.biztribune.co.kr/news/articleView.html?idxno=330989"
+        },
+        {
+          "title": "'아웃소싱 네트워크' e비즈 토대 .. '메타 캐피털리즘'",
+          "press": null,
+          "publishedAt": "2001-01-10T08:15:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0000322922?sid=102"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [
+        {
+          "keyword": "e-민즈 출시일",
+          "reason": "공개 다음 적용 시점",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "e-민즈 국내 도입",
+          "reason": "한국 적용 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "e-민즈 활용 분야",
+          "reason": "어디 쓰이나",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "e-민즈 경쟁 기술",
+          "reason": "유사 솔루션 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
       "rowCount": 0
     },
     {
@@ -2308,7 +2905,7 @@
       "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "햇빛 아래서도 선명한 AR 안경이 개발돼 상용화에 다가서서",
+      "why": "메타가 햇빛 아래서도 선명한 AR 안경을 개발해 상용화에 근접했다.",
       "headlines": [
         {
           "title": "햇빛 아래서도 선명한 AR 안경 개발…상용화 한 걸음",
@@ -2366,28 +2963,529 @@
           "origin": "autocomplete"
         },
         {
-          "keyword": "메타(주)",
+          "keyword": "메타 글래스",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [
         {
-          "keyword": "메타 글라스 비교",
-          "reason": "경쟁 제품 관심",
+          "keyword": "메타 안경 출시일",
+          "reason": "상용화 시점 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "메타 안경 성능",
+          "reason": "실사용 체감",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
           "keyword": "메타 주가",
-          "reason": "신기술 주가 반응",
+          "reason": "신기술 반영",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "메타 안경 체험",
+          "reason": "직접 사용 후기",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         }
       ],
       "rowCount": 0
+    },
+    {
+      "issue": "AI",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "세무사 시험 수석 합격자에게 'AI 안경' 부정행위 의혹이 제기됐다.",
+      "headlines": [
+        {
+          "title": "평균 30점 과목서 100점? 세무사 시험에 ‘AI 안경’ 의혹",
+          "press": "chosun.com",
+          "publishedAt": "2026-11-12T07:41:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0004009285?sid=105"
+        },
+        {
+          "title": "세무사 수석 합격자 AI 안경 의혹‥산업인력공단 \"확인 중\"",
+          "press": "imnews.imbc.com",
+          "publishedAt": "2026-11-12T07:08:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/214/0001535200?sid=102"
+        },
+        {
+          "title": "젠슨 황 사내 불륜 의혹은 누구?…의료·바이오 AI 키운 핵심 임원",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-12T03:03:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014318169?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "ai 판독기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "AI 안경",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ai 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ai 이미지 생성",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ai 대화",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ai 종류",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ai 검사기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "클로드 ai",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "AI 안경 작동",
+          "reason": "어떻게 커닝했나",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "AI 안경 적발",
+          "reason": "적발 경위 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "순천 외식업 소상공인",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "순천시가 외식업 소상공인에게 AI 활용 메뉴개발·마케팅 교육을 제공한다.",
+      "headlines": [
+        {
+          "title": "순천 외식업 소상공인, AI로 메뉴개발·마케팅 배운다",
+          "press": "aitimes.com",
+          "publishedAt": "2026-11-12T08:20:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=217340"
+        },
+        {
+          "title": "순천시, 소상공인 AI 인재양성 나서..순천제일대 등과 MOU",
+          "press": "kpenews.com",
+          "publishedAt": "2026-11-12T03:58:00.000Z",
+          "link": "https://kpenews.com/View.aspx?No=4309571"
+        },
+        {
+          "title": "순천시, 외식업 소상공인 'AI 활용 실전 특강' 교육생 모집",
+          "press": "jeonmae.co.kr",
+          "publishedAt": "2026-10-12T04:32:00.000Z",
+          "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1300387"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "순천",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "제미나이 라이브",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "제미나이 라이브가 애플 카플레이를 지원해 차량서 음성 AI 대화를 제공한다.",
+      "headlines": [
+        {
+          "title": "제미나이 라이브, 애플 카플레이 지원…차량서 음성 AI 대화 지원",
+          "press": "kbench.com",
+          "publishedAt": "2026-11-12T06:44:00.000Z",
+          "link": "https://kbench.com/?q=node/283296"
+        },
+        {
+          "title": "구글, 애플 카플레이에 '제미나이 라이브' 출시…챗GPT와 경쟁",
+          "press": "aitimes.com",
+          "publishedAt": "2026-11-12T08:20:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=217334"
+        },
+        {
+          "title": "제미나이, 애플 카플레이 도입…차 안 대화가 아이폰 기록으로 이어진다",
+          "press": "coinreaders.com",
+          "publishedAt": "2026-11-12T02:42:00.000Z",
+          "link": "http://coinreaders.com/269555"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "제미나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "제미나이 라이브 사용법",
+          "reason": "출시 뒤 설정 방법",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "구글",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "구글 딥마인드가 질병 원인을 찾는 AI '알파게놈 2'를 공개했다.",
+      "headlines": [
+        {
+          "title": "구글 딥마인드, 질병 원인 찾는 AI '알파게놈 2' 공개",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-11-12T00:47:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002444965?sid=105"
+        },
+        {
+          "title": "지시 한 번에 AI가 에펠탑 건설 재현…구글, '제미나이 4 카본' 공개",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-11T07:25:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014316473?sid=105"
+        },
+        {
+          "title": "구글, DNA분석 '알파게놈2' 공개…세포별 변이 정밀 예측",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-11T22:04:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016437177?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "구글 제미나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 번역기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 영국",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 클래스룸",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 재팬",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 원",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 킵",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "구글 주가",
+          "reason": "AI 공개 영향",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "바이트댄스",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "rising",
+      "isHot": true,
+      "why": "바이트댄스가 메타 '뮤즈' 대항마 AI 에이전트·비서 출격을 예고했다.",
+      "headlines": [
+        {
+          "title": "[AI는 지금] 틱톡 만든 中 바이트댄스, '뮤즈' 대항마 예고",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-11-12T01:34:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002444993?sid=105"
+        },
+        {
+          "title": "화웨이도 AI폰 출시…자체 칩·OS로 바이트댄스와 한판승부",
+          "press": "sedaily.com",
+          "publishedAt": "2026-11-12T08:17:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/011/0004681567?sid=104"
+        },
+        {
+          "title": "바이트댄스, 오픈AI 추격에 최소 3년 전망…'뮤즈' 유사 AI 에이전트 준...",
+          "press": "aitimes.com",
+          "publishedAt": "2026-11-12T08:34:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=217337"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "바이트댄스 주식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "바이트댄스 ai",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "바이트댄스 본사",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "바이트댄스 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "바이트댄스 코리아",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "바이트댄스 시댄스",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "바이트댄스 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "바이트댄스 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "바이트댄스 AI 출시",
+          "reason": "예고 뒤 출시 시점",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "바이트댄스 상장",
+          "reason": "IPO 여부 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "바이트댄스 주가",
+          "reason": "신제품 영향",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "뮤즈 대항마",
+          "reason": "대항마 성능 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "바이트댄스 화웨이",
+          "reason": "칩·OS 협업 구도",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "카카오벤처스",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "dead",
+      "isHot": false,
+      "why": "카카오벤처스가 美 힉스필드와 손잡고 스타트업 AI 콘텐츠 제작을 지원한다.",
+      "headlines": [
+        {
+          "title": "카카오벤처스, 스타트업 AI 영상 제작 지원에 美 힉스필드와 '맞손'",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-12T07:59:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014319319?sid=105"
+        },
+        {
+          "title": "카카오벤처스-힉스필드, 초기 스타트업 AI 기반 콘텐츠 제작 지원",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-11-12T00:25:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002444955?sid=105"
+        },
+        {
+          "title": "스타트업 AI 콘텐츠 제작 돕는다…카카오벤처스, 힉스필드와 맞손",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-11-12T01:41:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005762596?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "카카오벤처스 인턴",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "카카오벤처스 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "카카오벤처스 인턴 후기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "카카오벤처스 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "카카오벤처스 투자팀 인턴",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "카카오벤처스 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "카카오벤처스 면접",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "카카오벤처스 블로그",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "카카오벤처스 지원 대상",
+          "reason": "대상 조건 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "카카오벤처스 투자 스타트업",
+          "reason": "포트폴리오 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "제미나이 디시전 1",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "구글이 질문 1000개를 동시 처리하는 제미나이 디시전 1을 출시해서",
+      "headlines": [
+        {
+          "title": "구글, 판단 전용 AI '제미나이 디시전 1' 출시...질문 1000개 동시 처리",
+          "press": "aitimes.com",
+          "publishedAt": "2026-11-12T03:08:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=217307"
+        },
+        {
+          "title": "AI, \"1000개 질문을 0.25초 안에 판단한다!\"...구글 '제미나이 디시전 1'...",
+          "press": "aitimes.kr",
+          "publishedAt": "2026-11-12T01:12:00.000Z",
+          "link": "https://www.aitimes.kr/news/articleView.html?idxno=42704"
+        },
+        {
+          "title": "구글, 최대 1000개 질문 한 번에 판별하는 제미나이 API 공개",
+          "press": "tokenpost.kr",
+          "publishedAt": "2026-11-11T20:44:00.000Z",
+          "link": "https://www.tokenpost.kr/news/ai/436777"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "제미나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 제미나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "문샷",
@@ -2495,101 +3593,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
-    },
-    {
-      "issue": "TSMC",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "TSMC가 10월 매출 사상 최대를 기록하고 오픈AI·앤트로픽에 투자해서",
-      "headlines": [
-        {
-          "title": "\"몸값 1873조\"…챗GPT 라이벌 IPO에 TSMC 6690억 베팅",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-11-11T20:12:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006408501?sid=105"
-        },
-        {
-          "title": "반도체 장기호황 확신?… TSMC 55조 베팅, 삼전닉스 미소",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-11-11T18:50:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005439920?sid=101"
-        },
-        {
-          "title": "TSMC, 10월 매출도 60% 급증…사상 최대치",
-          "press": "hankyung.com",
-          "publishedAt": "2026-11-10T10:08:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005352482?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "tsmc 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "TSMC 메모리",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "대만 tsmc",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "TSMC ADR 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "tsmc 시총",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "tsmc 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "젠슨황 tsmc",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "tsmc 회장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "TSMC 실적 전망",
-          "reason": "4분기 기대감",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "TSMC 증설",
-          "reason": "투자 확대 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "TSMC 수혜주",
-          "reason": "관련주 탐색",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "소프트뱅크",
@@ -2690,7 +3695,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "고우림 김연아 주접",
