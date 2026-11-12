@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T06:33:01.522Z",
+ "builtAt": "2026-11-12T06:43:05.428Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,85 +8,58 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 29,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "충청권 메가프로젝트 착공",
+   "keyword": "진에어 통합 출범",
    "sources": [
     "daum"
    ],
-   "articles90": 62,
-   "recent20": 17,
-   "press": 56,
-   "firstArticleAt": "2026-11-12T05:15:00.000Z",
-   "exclusive": true,
-   "capped": true,
-   "samples": [
-    {
-     "title": "충청권 메가프로젝트 아산서 첫 공사…삼성, HBM 후공정 확충",
-     "press": "pointe.co.kr",
-     "publishedAt": "2026-11-12T06:32:00.000Z",
-     "link": "https://www.pointe.co.kr/news/articleView.html?idxno=87646"
-    },
-    {
-     "title": "정부 '3대 메가프로젝트' 충남서 첫 삽…아산서 착공식",
-     "press": "news.lghellovision.net",
-     "publishedAt": "2026-11-12T06:30:00.000Z",
-     "link": "http://news.lghellovision.net/news/articleView.html?idxno=562094"
-    },
-    {
-     "title": "충남, 삼성전자 아산사업장 인허가 80일로 단축…충청권 메가프로젝트 ...",
-     "press": "newsprime.co.kr",
-     "publishedAt": "2026-11-12T06:30:00.000Z",
-     "link": "http://www.newsprime.co.kr/news/article.html?no=754757"
-    }
-   ]
-  },
-  {
-   "keyword": "고려아연",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 38,
-   "recent20": 6,
-   "press": 35,
-   "firstArticleAt": "2026-11-12T05:06:00.000Z",
+   "articles90": 47,
+   "recent20": 5,
+   "press": 43,
+   "firstArticleAt": "2026-11-12T05:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "법원 \"고려아연의 영풍·MBK 의결권 제한은 위법\"...지난해 주총 결의 취...",
-     "press": "opinionnews.co.kr",
-     "publishedAt": "2026-11-12T06:32:00.000Z",
-     "link": "http://www.opinionnews.co.kr/news/articleView.html?idxno=146999"
+     "title": "[Invest]정부, 진에어·에어서울·에어부산 합병 조건부 인가…내년 3월...",
+     "press": "investchosun.com",
+     "publishedAt": "2026-11-12T06:42:00.000Z",
+     "link": "https://www.investchosun.com/site/data/html_dir/2026/11/12/2026111280155.html"
     },
     {
-     "title": "[사회공헌 Pick] 헥토그룹·효성·고려아연, 걷기 기부와 배리어프리 문...",
-     "press": "lcnews.co.kr",
-     "publishedAt": "2026-11-12T06:30:00.000Z",
-     "link": "https://www.lcnews.co.kr/news/articleView.html?idxno=211251"
+     "title": "한진 LCC 3사 합병 승인…내년 3월 '통합 진에어' 출범",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-12T06:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000142145?sid=101"
     },
     {
-     "title": "영풍·MBK, 고려아연 상대 정기주총 결의 취소소송 1심 승소",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-12T06:28:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2647477"
+     "title": "\"통합 LCC 본사 부산으로\" 부산시의회, 행감장서 피켓 내걸어",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-12T06:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001977897?sid=102"
     }
    ]
   },
   {
    "keyword": "영풍·MBK 주총 결의 취소",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 31,
-   "recent20": 4,
-   "press": 29,
-   "firstArticleAt": "2026-11-12T05:06:00.000Z",
+   "articles90": 27,
+   "recent20": 3,
+   "press": 26,
+   "firstArticleAt": "2026-11-12T05:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "고려아연 '의결권 제한' 주총 무효 판결…영풍·MBK 1심 승소",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-12T06:42:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=902910"
+    },
     {
      "title": "법원 \"고려아연의 영풍·MBK 의결권 제한은 위법\"...지난해 주총 결의 취...",
      "press": "opinionnews.co.kr",
@@ -98,55 +71,80 @@
      "press": "etoday.co.kr",
      "publishedAt": "2026-11-12T06:28:00.000Z",
      "link": "https://www.etoday.co.kr/news/view/2647477"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황 해임 우려",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 30,
+   "recent20": 4,
+   "press": 24,
+   "firstArticleAt": "2026-11-12T05:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "젠슨 황, 추가 불륜 의혹에 해임 무게…향후 파장은?",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-12T06:42:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261112500380"
     },
     {
-     "title": "法 “고려아연, 영풍·MBK 의결권 제한한 주총 결의 취소해야”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-12T06:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004681488?sid=102"
+     "title": "젠슨 황 쫓겨나면 AI산업 대혼란…순환거래 위축에 규제 강화 우려",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-12T06:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001402563?sid=104"
+    },
+    {
+     "title": "젠슨 황 해임설에 흔들…'전강후약' 코스피 사흘 만에 하락",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-12T06:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000543310?sid=101"
     }
    ]
   },
   {
    "keyword": "델핀 아르노 박사 수여식",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 41,
+   "articles90": 43,
    "recent20": 12,
-   "press": 18,
-   "firstArticleAt": "2026-11-12T05:04:00.000Z",
+   "press": 19,
+   "firstArticleAt": "2026-11-12T05:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "델핀 아르노 이화여대 명예박사…재계 총수들도 한자리에",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-12T06:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004681500?sid=101"
+     "title": "소감 말하는 델핀 아르노 크리스찬 디올 CEO",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-12T06:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016438928?sid=101"
     },
     {
-     "title": "이부진·정의선·신동빈도 ‘짝짝짝’…디올 CEO 학위 수여식에 재계 총...",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-12T06:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003058806?sid=101"
+     "title": "아르노 학위수여식 재계 총수 집결…이부진, 3년 전 '그 재킷' 또 입었다",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-12T06:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001272551?sid=101"
     },
     {
-     "title": "디올 CEO 명예박사 수여식에 재계 총수 집결…이부진과 각별한 친분도",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-12T06:30:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261112500363"
+     "title": "지수, 디올 CEO 학위수여식 참석…'리사와 N차 열애설' 프레데릭 누나",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-12T06:36:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000784160"
     }
    ]
   },
   {
-   "keyword": "서울 아파트값 92주 상승",
+   "keyword": "서울 아파트값 92주 연속 상승",
    "sources": [
     "nate"
    ],
    "articles90": 15,
-   "recent20": 4,
+   "recent20": 2,
    "press": 15,
    "firstArticleAt": "2026-11-12T05:14:00.000Z",
    "exclusive": false,
@@ -205,98 +203,34 @@
    ]
   },
   {
-   "keyword": "KBS 대하사극 문무",
+   "keyword": "오세훈 서울시장과 대학생들",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 21,
-   "recent20": 9,
-   "press": 13,
-   "firstArticleAt": "2026-11-12T05:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "300억 대작 ‘문무’, “제대로 구현…볼거리·감동 선사할 것”",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-12T06:31:00.000Z",
-     "link": "https://m.entertain.naver.com/article/021/0002832400"
-    },
-    {
-     "title": "\"갈등 만연한 시대, 화합의 메시지 전달\"…'문무' 대하사극 존재 이유 증...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-12T06:26:00.000Z",
-     "link": "https://m.entertain.naver.com/article/119/0003154492"
-    },
-    {
-     "title": "‘고려거란전쟁’ 다음은 ‘문무’…KBS, 300억 대하사극으로 승부수[SS...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-12T06:25:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001280591"
-    }
-   ]
-  },
-  {
-   "keyword": "성동 강동 집값 하락 전환",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 13,
-   "recent20": 4,
-   "press": 12,
-   "firstArticleAt": "2026-11-12T05:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "국토장관 \"강남3구 집값 하락세에 외곽 상승폭 둔화...금리 오르면 더 떨...",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-12T06:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005440373?sid=102"
-    },
-    {
-     "title": "강남발 집값 약세, 한강벨트로 번져…중하위권 상승세 지속",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-12T06:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000142143?sid=101"
-    },
-    {
-     "title": "성동·강동구 집값 오름세 '제동'…서울 아파트값은 92주째↑",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-12T06:18:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5082819"
-    }
-   ]
-  },
-  {
-   "keyword": "김주원 투런포",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 11,
-   "recent20": 0,
+   "articles90": 35,
+   "recent20": 1,
    "press": 9,
-   "firstArticleAt": "2026-11-12T05:04:00.000Z",
+   "firstArticleAt": "2026-11-12T05:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'0-4→6-4' 김주원 대형 투런포부터 김휘집 싹쓸이까지…대역전 드라마...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-12T05:45:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/241/0003541429"
+     "title": "오세훈, 청년 주거비 부담 낮춘다…내년 하반기 '관리비' 지원 추진",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-12T06:32:00.000Z",
+     "link": "https://www.ajunews.com/view/20261112152734645"
     },
     {
-     "title": "대표팀 첫 홈런의 주인공은 김주원, 답답한 흐름 깬 한방···6회말 0-4→...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-12T05:39:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/144/0001149447"
+     "title": "대학생 만난 오세훈 시장…“관리비 지원·청년 주택 공급 속도”",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-12T06:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003698755?sid=100"
     },
     {
-     "title": "[APBC] '답답했던 타선 깨운 한 방' 김주원, 호주전 '추격 신호탄' 투런...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-12T05:38:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261112000954"
+     "title": "오세훈 서울시장, '대학생 주거안정' 라운드테이블",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-12T06:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004209165?sid=102"
     }
    ]
   },
@@ -307,12 +241,18 @@
     "google"
    ],
    "articles90": 8,
-   "recent20": 1,
+   "recent20": 2,
    "press": 8,
-   "firstArticleAt": "2026-11-12T05:08:00.000Z",
+   "firstArticleAt": "2026-11-12T05:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "현대엔지니어링, K디자인어워드·대한민국색채대상 잇따라 수상...2관왕...",
+     "press": "popcornnews.net",
+     "publishedAt": "2026-11-12T06:36:00.000Z",
+     "link": "http://www.popcornnews.net/news/articleView.html?idxno=139852"
+    },
     {
      "title": "현대엔지니어링, 조경 디자인 공모전 연이어 수상",
      "press": "cnbnews.com",
@@ -324,12 +264,6 @@
      "press": "newspost.kr",
      "publishedAt": "2026-11-12T06:04:00.000Z",
      "link": "https://www.newspost.kr/news/articleView.html?idxno=227324"
-    },
-    {
-     "title": "현대엔지니어링, 8개월 영업정지 '철퇴'…미래 일감·차입금 상환 '비상...",
-     "press": "asiatime.co.kr",
-     "publishedAt": "2026-11-12T05:50:00.000Z",
-     "link": "https://www.asiatime.co.kr/article/20261112500273"
     }
    ]
   },
@@ -338,10 +272,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 4,
-   "press": 7,
-   "firstArticleAt": "2026-11-12T05:05:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-12T05:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -366,114 +300,23 @@
    ]
   },
   {
-   "keyword": "홍콩익스프레스 팝업 개막",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 4,
-   "press": 6,
-   "firstArticleAt": "2026-11-12T05:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "도심에서 만나는 홍콩…홍콩익스프레스, 체험형 팝업 오픈",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-12T06:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003482288?sid=103"
-    },
-    {
-     "title": "\"한국 여행객 잡겠다\"…홍콩익스프레스, 국내 시장 공략 본격화",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-12T06:28:00.000Z",
-     "link": "https://www.ajunews.com/view/20261112144714357"
-    },
-    {
-     "title": "[포토] 성수동에 펼쳐진 홍콩 여행…홍콩익스프레스 첫 팝업",
-     "press": "news2day.co.kr",
-     "publishedAt": "2026-11-12T06:26:00.000Z",
-     "link": "https://www.news2day.co.kr/article/20261112500287"
-    }
-   ]
-  },
-  {
-   "keyword": "오세훈 대학생 주거안정 논의",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 7,
-   "recent20": 3,
-   "press": 6,
-   "firstArticleAt": "2026-11-12T05:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "오세훈, 청년 주거비 부담 낮춘다…내년 하반기 '관리비' 지원 추진",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-12T06:32:00.000Z",
-     "link": "https://www.ajunews.com/view/20261112152734645"
-    },
-    {
-     "title": "대학생 만난 오세훈 시장…“관리비 지원·청년 주택 공급 속도”",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-12T06:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003698755?sid=100"
-    },
-    {
-     "title": "오세훈 서울시장, 대학생과 주거안정 논의",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-12T06:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004209163?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "지지율 2%P 하락",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-12T05:05:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "20%마저 붕괴 위기 … 30대 李 지지율 34%p 급락, 20대도 휘청 [고용·주...",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-12T05:30:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/12/2026111200233.html"
-    },
-    {
-     "title": "李 대통령 지지율 '44%'…2주 전보다 2%p 하락 [NBS]",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-12T05:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005353170?sid=100"
-    },
-    {
-     "title": "李대통령 지지율, 2주전보다 2%p 하락한 44%···부정평가 47%[NBS]",
-     "press": "smartbizn.com",
-     "publishedAt": "2026-11-12T05:26:00.000Z",
-     "link": "https://www.smartbizn.com/news/articleView.html?idxno=159246"
-    }
-   ]
-  },
-  {
    "keyword": "신장식 최인호 정무수석",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 18,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-12T05:12:00.000Z",
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-12T05:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "신임 정무수석 만난 조국혁신당 “당-정-청 엇박자 안돼”…합당 논의는...",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-12T06:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003058808?sid=100"
+    },
     {
      "title": "신장식 “종부세 엇박자 우려”…최인호 “정부 입장 후퇴 없다”",
      "press": "seoul.co.kr",
@@ -485,53 +328,77 @@
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-12T06:18:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002431903?sid=100"
-    },
-    {
-     "title": "신장식 \"당·정·청 엇박자 걱정\"…최인호 \"부동산 입장 후퇴 없어\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T06:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014318809?sid=100"
     }
    ]
   },
   {
-   "keyword": "스테픈 커리",
+   "keyword": "곽선영, 아들과 엘리베이터 추락 사고",
    "sources": [
-    "signal.bz",
-    "google"
+    "nate"
    ],
-   "articles90": 5,
+   "articles90": 6,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T05:11:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-12T05:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'커리 부상 이탈' NBA 골든스테이트, 휴스턴에 져 8연승 마감",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-12T06:18:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/055/0001402558"
+     "title": "곽선영, 아들과 엘리베이터 추락 사고 당했다…\"7층서 4층까지 떨어져\"...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-12T06:34:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000784159"
     },
     {
-     "title": "커리, 복부 통증으로 이탈…골든스테이트, 연승 행진 8연승으로 마감",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-12T05:56:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/079/0004209139"
+     "title": "곽선영 “과거 어린 아들과 엘리베이터 7층에서 4층 추락사고 경험” (...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-12T06:12:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001149460"
     },
     {
-     "title": "'커리 부상 악재' NBA 골든스테이트, 휴스턴에 덜미…8연승 마감",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-12T05:33:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/001/0016438527"
+     "title": "곽선영, 子와 엘리베이터 추락 사고…7층→4층 뚝 \"슬로모션 남아 생생...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-12T06:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001408057"
+    }
+   ]
+  },
+  {
+   "keyword": "국가 사이버복원력 TF",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T05:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "해킹에도 일상 멈추지 않도록…국가AI전략위, 사이버복원력 강화",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-12T06:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003698765?sid=101"
+    },
+    {
+     "title": "AI 사이버공격에도 국가 기능 지킨다…정부, 복구 중심 보안체계 구축 ...",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-12T06:24:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=847129"
+    },
+    {
+     "title": "\"해킹당해도 국가 기능은 지속\"... 국가 사이버복원력 범정부 TF 출범",
+     "press": "boannews.com",
+     "publishedAt": "2026-11-12T06:08:00.000Z",
+     "link": "https://www.boannews.com/news/articleView.html?idxno=147225"
     }
    ]
   },
   {
    "keyword": "에이티즈 산 꿈같은 나날 보내는 중",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 4,
    "recent20": 1,
@@ -593,34 +460,35 @@
    ]
   },
   {
-   "keyword": "국가 사이버복원력 TF",
+   "keyword": "스테픈 커리",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T05:42:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T05:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "AI 사이버공격에도 국가 기능 지킨다…정부, 복구 중심 보안체계 구축 ...",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-12T06:24:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=847129"
+     "title": "'커리 부상 이탈' NBA 골든스테이트, 휴스턴에 져 8연승 마감",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-12T06:18:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/055/0001402558"
     },
     {
-     "title": "\"해킹당해도 국가 기능은 지속\"... 국가 사이버복원력 범정부 TF 출범",
-     "press": "boannews.com",
-     "publishedAt": "2026-11-12T06:08:00.000Z",
-     "link": "https://www.boannews.com/news/articleView.html?idxno=147225"
+     "title": "커리, 복부 통증으로 이탈…골든스테이트, 연승 행진 8연승으로 마감",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-12T05:56:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/079/0004209139"
     },
     {
-     "title": "세계 연이은 ‘AI 해킹’에…국가AI전략위, ‘사이버복원력 TF’ 출범",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-12T05:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003564750?sid=105"
+     "title": "'커리 부상 악재' NBA 골든스테이트, 휴스턴에 덜미…8연승 마감",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-12T05:33:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/001/0016438527"
     }
    ]
   }
@@ -628,9 +496,33 @@
  "hitRate": {
   "days": 7,
   "flagged": 363,
-  "matched": 130,
-  "avgLeadMin": 1480,
+  "matched": 131,
+  "avgLeadMin": 1397,
   "recent": [
+   {
+    "keyword": "외국인",
+    "hitKeyword": "SSG 외국인 투수 영입",
+    "hitAt": "2026-11-12T15:30:00+09:00",
+    "leadMin": 9801
+   },
+   {
+    "keyword": "남대문 스카프 아저씨",
+    "hitKeyword": "남대문 스카프 아저씨 온라인몰",
+    "hitAt": "2026-11-12T15:30:00+09:00",
+    "leadMin": 88
+   },
+   {
+    "keyword": "방한 외국인 관광객 2000만명",
+    "hitKeyword": "SSG 외국인 투수 영입",
+    "hitAt": "2026-11-12T15:30:00+09:00",
+    "leadMin": 57
+   },
+   {
+    "keyword": "고려아연 영풍 MBK 의결권 제한 취소",
+    "hitKeyword": "고려아연 의결권 제한 취소",
+    "hitAt": "2026-11-12T15:30:00+09:00",
+    "leadMin": 27
+   },
    {
     "keyword": "젠슨 황 스캔들 영향",
     "hitKeyword": "젠슨 황 불륜 스캔들",
@@ -666,30 +558,6 @@
     "hitKeyword": "젠슨 황 불륜 해임 위기",
     "hitAt": "2026-11-12T14:00:00+09:00",
     "leadMin": 139
-   },
-   {
-    "keyword": "젠슨 황 해임 위기",
-    "hitKeyword": "젠슨 황 불륜 해임 위기",
-    "hitAt": "2026-11-12T14:00:00+09:00",
-    "leadMin": 18
-   },
-   {
-    "keyword": "김건희 집사 무죄 확정",
-    "hitKeyword": "성유리 남편 무죄 확정",
-    "hitAt": "2026-11-12T13:00:00+09:00",
-    "leadMin": 58
-   },
-   {
-    "keyword": "성유리 남편 무죄 확정",
-    "hitKeyword": "성유리 남편 무죄 확정",
-    "hitAt": "2026-11-12T13:00:00+09:00",
-    "leadMin": 18
-   },
-   {
-    "keyword": "울산 김현석 감독 올 시즌 종료",
-    "hitKeyword": "김현석 울산 결별",
-    "hitAt": "2026-11-12T12:30:00+09:00",
-    "leadMin": 28
    }
   ]
  }
