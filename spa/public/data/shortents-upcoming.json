@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T15:17:31.495Z",
+ "builtAt": "2026-11-12T15:27:35.881Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "젠슨 황, 엔비디아 CEO 사임",
@@ -16,29 +16,29 @@
     "signal.bz"
    ],
    "articles90": 94,
-   "recent20": 30,
-   "press": 72,
-   "firstArticleAt": "2026-11-12T14:28:00.000Z",
+   "recent20": 24,
+   "press": 69,
+   "firstArticleAt": "2026-11-12T14:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'젠슨 황 사임 충격' 엔비디아 주가 급락…시총 4조달러 붕괴",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-12T15:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004209343?sid=104"
+     "title": "엔비디아 차기 CEO 찾는 작업 쉽지 않은 이유",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-12T15:26:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=2026111300231859449a1f309431_1"
     },
     {
-     "title": "막 내린 '젠슨 황 시대'...엔비디아 주가 10%대 급락",
-     "press": "ntoday.co.kr",
-     "publishedAt": "2026-11-12T15:16:00.000Z",
-     "link": "https://www.ntoday.co.kr/news/articleView.html?idxno=130827"
+     "title": "[뉴욕증시]젠슨 황 사임 여파로 AI 관련주 약세…일제히 하락",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-12T15:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005842031?sid=101"
     },
     {
-     "title": "‘유퀴즈 사랑꾼의 추락’ 젠슨 황, 엔비디아 CEO 전격 사임",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-12T15:16:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001280683"
+     "title": "\"中 스파이 연루·혼외 관계 의혹 여파\"…젠슨 황 엔비디아 CEO \"퇴진\"",
+     "press": "youthdaily.co.kr",
+     "publishedAt": "2026-11-12T15:24:00.000Z",
+     "link": "https://www.youthdaily.co.kr/news/article.html?no=229783"
     }
    ]
   },
@@ -48,61 +48,29 @@
     "signal.bz"
    ],
    "articles90": 10,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-12T13:48:00.000Z",
+   "recent20": 4,
+   "press": 10,
+   "firstArticleAt": "2026-11-12T13:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "靑 \"강한 유감\"…김민석, 잇단 '언행 논란' 최민희 감찰 지시",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-12T15:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000925669?sid=100"
+    },
+    {
+     "title": "\"하이에나\" 이어 \"이 대통령이 尹 탄핵 반대\"…김민석, 최민희 감찰 지...",
+     "press": "kado.net",
+     "publishedAt": "2026-11-12T15:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000211151?sid=100"
+    },
     {
      "title": "최민희 “李, 尹탄핵 반대” 발언 파장… 김민석, 당 윤리감찰단에 조사...",
      "press": "kmib.co.kr",
      "publishedAt": "2026-11-12T15:13:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/005/0001884853?sid=100"
-    },
-    {
-     "title": "“최민희 ‘대통령도 윤 탄핵 반대’ 발언”…여당, 감찰 착수",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-12T15:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003564897?sid=100"
-    },
-    {
-     "title": "신천지 갈등 속 尹탄핵발언 논란 '최민희 감찰'…與계파 대립 새국면",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-12T14:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016439516?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "학대",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T13:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "원주종합사회복지관 노인학대 예방교육",
-     "press": "kado.net",
-     "publishedAt": "2026-11-12T15:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000211095?sid=102"
-    },
-    {
-     "title": "'아동학대' 고소에 결국?…민속촌 '귀신 참교육' 15일 종료",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-12T14:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001040062?sid=102"
-    },
-    {
-     "title": "“아들이 숨을 쉬지 않는다”⋯숨진 중증 발달장애 10대 몸에서 학대 정...",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-12T14:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001230599?sid=102"
     }
    ]
   },
@@ -112,12 +80,18 @@
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-12T13:49:00.000Z",
+   "firstArticleAt": "2026-11-12T14:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김승우, 지인 현금 2200만원 가져간 혐의로 고소당해…경찰 수사 중",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-12T15:16:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=624921"
+    },
     {
      "title": "‘2200만원→3000만원→3억’…김승우 절도 의혹, 결국 ‘돈의 성격’ 싸...",
      "press": "sportsseoul.com",
@@ -129,12 +103,6 @@
      "press": "osen.co.kr",
      "publishedAt": "2026-11-12T14:02:00.000Z",
      "link": "https://m.entertain.naver.com/article/109/0005639615"
-    },
-    {
-     "title": "'피소' 김승우, 5년 전 유흥주점서 무슨 일 있었나..2200만원 절도 두고...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-12T13:49:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003487038"
     }
    ]
   },
@@ -157,25 +125,57 @@
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16275282"
     },
     {
-     "title": "뉴욕증시 개장 전 특징주...엔비디아 10% 급락·AMD 상승",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-12T14:10:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261112001498"
-    },
-    {
      "title": "젠슨 황 결국 축출, 엔비디아 주가 14% 폭락…여성 CFO가 임시 사령탑",
      "press": "dt.co.kr",
      "publishedAt": "2026-11-12T14:10:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/029/0003058903?sid=101"
+    },
+    {
+     "title": "뉴욕증시 개장 전 특징주...엔비디아 10% 급락·AMD 상승",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-12T14:10:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261112001498"
+    }
+   ]
+  },
+  {
+   "keyword": "학대",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-12T14:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "원주종합사회복지관 노인학대 예방교육",
+     "press": "kado.net",
+     "publishedAt": "2026-11-12T15:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000211095?sid=102"
+    },
+    {
+     "title": "'아동학대' 고소에 결국?…민속촌 '귀신 참교육' 15일 종료",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-12T14:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001040062?sid=102"
+    },
+    {
+     "title": "“아들이 숨을 쉬지 않는다”⋯숨진 중증 발달장애 10대 몸에서 학대 정...",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-12T14:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001230599?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 389,
-  "matched": 144,
-  "avgLeadMin": 775,
+  "flagged": 388,
+  "matched": 143,
+  "avgLeadMin": 778,
   "recent": [
    {
     "keyword": "네이버 AI 에이전트 연내 출시 목표",
