@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T23:42:06.133Z",
+ "builtAt": "2026-11-12T23:52:10.617Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 12,
+   "articles90": 13,
    "recent20": 3,
-   "press": 12,
-   "firstArticleAt": "2026-11-12T22:20:00.000Z",
+   "press": 13,
+   "firstArticleAt": "2026-11-12T22:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "젠슨 황 떠난 날, 엔비디아 두 자릿수 급락 출발…뉴욕증시 3대 지수 하...",
+     "press": "newstopkorea.com",
+     "publishedAt": "2026-11-12T23:50:00.000Z",
+     "link": "https://www.newstopkorea.com/news/articleView.html?idxno=49014"
+    },
+    {
+     "title": "[마켓무버]뉴욕증시, 젠슨 황 사임 충격에 3대 지수 하락…유가·금리 상...",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-12T23:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006409287?sid=101"
+    },
     {
      "title": "[해외시황] 뉴욕증시, 젠슨 황 사임·유가 급등에 '하락'…나스닥 0.39%↓",
      "press": "newsprime.co.kr",
      "publishedAt": "2026-11-12T23:34:00.000Z",
      "link": "http://www.newsprime.co.kr/news/article.html?no=754816"
-    },
-    {
-     "title": "[뉴욕증시] 젠슨 황 퇴진에 하락…나스닥 0.4%↓",
-     "press": "segyebiz.com",
-     "publishedAt": "2026-11-12T23:30:00.000Z",
-     "link": "http://www.segyebiz.com/newsView/20261113503246?OutUrl=naver"
-    },
-    {
-     "title": "젠슨 황 전격 사임·유가 급등에 나스닥 0.39%↓ [뉴욕증시]",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-12T23:26:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2018093"
     }
    ]
   },
@@ -48,12 +48,18 @@
     "nate"
    ],
    "articles90": 11,
-   "recent20": 5,
+   "recent20": 4,
    "press": 10,
-   "firstArticleAt": "2026-11-12T22:20:00.000Z",
+   "firstArticleAt": "2026-11-12T22:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"이게 수석과 차석의 차이?\" 세무사 합격자 책 사진에 '갑론을박'",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-12T23:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005842117?sid=102"
+    },
     {
      "title": "리트 첫 만점자 “수능 국어 생중계로 풀겠다”… ‘AI 안경’ 의혹 대...",
      "press": "biz.chosun.com",
@@ -65,12 +71,6 @@
      "press": "hankyung.com",
      "publishedAt": "2026-11-12T23:37:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/015/0005353457?sid=102"
-    },
-    {
-     "title": "세무사 수석 합격자 'AI 안경' 의혹…국세청·공단 사실관계 조사",
-     "press": "ekoreanews.co.kr",
-     "publishedAt": "2026-11-12T23:34:00.000Z",
-     "link": "https://www.ekoreanews.co.kr/news/articleView.html?idxno=89184"
     }
    ]
   },
@@ -112,10 +112,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 7,
-   "recent20": 4,
-   "press": 7,
-   "firstArticleAt": "2026-11-12T22:50:00.000Z",
+   "articles90": 5,
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-12T23:08:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
@@ -172,75 +172,43 @@
    ]
   },
   {
-   "keyword": "김서아 기쁨조 후보",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T22:13:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "11세부터 '기쁨조' 후보…북한 무용수 출신 김서아의 고백",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-12T23:00:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=624945"
-    },
-    {
-     "title": "탈북 유튜버 김서아, 기쁨조 최종 후보까지 올랐다…“3명 중 2명 탈락”",
-     "press": "segye.com",
-     "publishedAt": "2026-11-12T22:57:00.000Z",
-     "link": "https://m.entertain.naver.com/article/022/0004174843"
-    },
-    {
-     "title": "탈북미녀 김서아 \"북한서 17세까지 기쁨조 후보\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T22:19:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014319762"
-    }
-   ]
-  },
-  {
    "keyword": "박정성 통상교섭본부장 면담",
    "sources": [
     "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 3,
+   "recent20": 0,
    "press": 2,
    "firstArticleAt": "2026-11-12T22:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "박정성 통상교섭본부장, 유럽의회 의원 면담",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-12T23:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014319816?sid=100"
+    },
+    {
      "title": "박정성 통상교섭본부장, 유럽의회 국제통상위원장 면담",
      "press": "newsis.com",
      "publishedAt": "2026-11-12T23:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014319828?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/003/0014319817?sid=100"
     },
     {
      "title": "면담하는 박정성 통상교섭본부장",
      "press": "newsis.com",
      "publishedAt": "2026-11-12T23:32:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014319820?sid=100"
-    },
-    {
-     "title": "박정성 통상교섭본부장, 유럽의회 의원 면담",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T23:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014319816?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 414,
-  "matched": 146,
-  "avgLeadMin": 618,
+  "flagged": 413,
+  "matched": 145,
+  "avgLeadMin": 620,
   "recent": [
    {
     "keyword": "트럼프, 이란 합의 필요없다",
