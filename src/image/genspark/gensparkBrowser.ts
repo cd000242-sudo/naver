@@ -12,6 +12,11 @@ import {
   trackGensparkContext,
   untrackGensparkContext,
 } from './gensparkSession.js';
+import {
+  isBrowserProfileInUseError,
+  isBrowserProfileOwnedByRunningBrowser,
+  isProfileBusyAfterLaunchFailure,
+} from '../browserProfileLock.js';
 
 export type GensparkHideMode = 'offscreen' | 'headless';
 
@@ -32,8 +37,7 @@ export function getGensparkProfileDir(): string {
 
 /** 크롬 프로필 잠김(다른 크롬이 같은 프로필을 사용 중) 오류인가 */
 export function isGensparkProfileLockError(error: unknown): boolean {
-  const message = error instanceof Error ? error.message : String(error ?? '');
-  return /(?:ProcessSingleton|SingletonLock|user data directory[^\n]*(?:already\s+)?in use|profile(?: directory)?[^\n]*(?:in use|locked))/i.test(message);
+  return isBrowserProfileInUseError(error);
 }
 
 function sanitize(error: unknown): string {
@@ -71,6 +75,8 @@ export async function launchGensparkBrowser(options: GensparkLaunchOptions = {})
   }
   const profileDir = getGensparkProfileDir();
   fs.mkdirSync(profileDir, { recursive: true });
+  // A running browser owns the profile (read from the lock file on disk): do not start another one, it only adds blank tabs.
+  if (await isBrowserProfileOwnedByRunningBrowser(profileDir)) throw new GensparkError(GENSPARK_PROFILE_IN_USE);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let chromium: any;
@@ -125,10 +131,10 @@ export async function launchGensparkBrowser(options: GensparkLaunchOptions = {})
     } catch (error) {
       lastError = error;
       // 잠긴 프로필은 다른 채널로도 열리지 않는다 — 빈 창만 늘어나므로 즉시 중단.
-      if (isGensparkProfileLockError(error)) break;
+      if (isProfileBusyAfterLaunchFailure(error, profileDir)) break;
     }
   }
-  if (isGensparkProfileLockError(lastError)) {
+  if (isProfileBusyAfterLaunchFailure(lastError, profileDir)) {
     throw new GensparkError(GENSPARK_PROFILE_IN_USE);
   }
   const detail = sanitize(lastError);

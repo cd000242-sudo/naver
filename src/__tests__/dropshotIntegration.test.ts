@@ -205,7 +205,8 @@ describe('Dropshot capture result detection', () => {
     expect(code).toMatch(/srcset/);
     expect(code).toMatch(/backgroundImage/);
     expect(code).toMatch(/canvas/);
-    expect(code).toMatch(/blob:/);
+    // Download and ranking moved to dropshotResultImage.ts (proxy-address support); blob: sources are still handled there.
+    expect(read('image/dropshotResultImage.ts')).toMatch(/blob:/);
   });
 
   it('uses a settled baseline and one strict rendered-result detector', () => {

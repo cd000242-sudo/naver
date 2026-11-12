@@ -31,6 +31,7 @@ import {
   tryBeginDropshotCheck,
   tryBeginDropshotLogin,
 } from './dropshotSession.js';
+import { detectDropshotLogin } from './dropshotLoginWatch.js';
 
 let _loginPromise: Promise<DropshotLoginStatus> | null = null;
 let _checkPromise: Promise<DropshotLoginStatus> | null = null;
@@ -209,7 +210,7 @@ async function dropshotLoginInternal(
         }
         page = await selectDropshotPage(ctx);
 
-        const tokenReady = await isLoggedIn(page);
+        const tokenReady = await detectDropshotLogin(ctx, page, { isLoggedIn, navigateToBoard: navigateToDropshotBoard, onLog });
         if (tokenReady) {
           detected = true;
           // Hide and adopt the exact context that received the OAuth tokens

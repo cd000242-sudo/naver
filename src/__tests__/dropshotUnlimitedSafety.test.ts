@@ -77,7 +77,8 @@ describe('Dropshot unlimited mode safety', () => {
     expect(initialControls).toBeGreaterThan(initialWorkspace);
     expect(initialCache).toBeGreaterThan(initialControls);
 
-    const visibleAuth = coreCode.indexOf('if (await isLoggedIn(page))', initialCache);
+    // The visible-login check is isLoggedIn plus the session-based detection for a tab that stays on the sign-in page.
+    const visibleAuth = coreCode.indexOf('if (await detectDropshotLogin(context, page,', initialCache);
     const visibleMinimize = coreCode.indexOf('await minimizeDropshotWindow(page, onLog)', visibleAuth);
     const visibleCache = coreCode.indexOf('setCached(context, page)', visibleMinimize);
     const visibleWorkspace = coreCode.indexOf('await openDropshotImageWorkspace(page, onLog)', visibleCache);

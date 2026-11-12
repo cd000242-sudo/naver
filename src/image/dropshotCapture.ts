@@ -26,6 +26,7 @@ import {
   PROMPT_SELECTOR,
   type DropshotResult,
 } from './dropshotCore.js';
+import { pickDropshotResultDataUrl } from './dropshotResultImage.js';
 
 const BOARD_URL =
   'https://aistudio.dropshot.io/ko/workspace/board?panel=image&imageModelName=google/nano-banana-pro';
@@ -288,7 +289,9 @@ async function collectStableDropshotCandidateKeys(page: any): Promise<string[]> 
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function readFirstNewDropshotImageDataUrl(page: any, beforeKeys: string[]): Promise<string | null> {
-  return await page.evaluate(async (before: string[]) => {
+  // The page only lists the visible picture sources. Ranking, the already-seen check and the download
+  // (proxy / blob / data addresses) run on the Node side, see dropshotResultImage.ts.
+  const listed = await page.evaluate(() => {
     type Candidate = {
       key: string;
       src: string;
@@ -297,7 +300,6 @@ async function readFirstNewDropshotImageDataUrl(page: any, beforeKeys: string[])
       height: number;
     };
 
-    const beforeSet = new Set(before);
     const candidates: Candidate[] = [];
     const minWidth = 200;
     const minHeight = 120;
@@ -386,45 +388,9 @@ async function readFirstNewDropshotImageDataUrl(page: any, beforeKeys: string[])
       }
     });
 
-    const score = (candidate: Candidate): number => {
-      const source = candidate.src.toLowerCase();
-      let value = candidate.width * candidate.height;
-      if (source.startsWith('data:image/')) value += 1_000_000;
-      if (source.startsWith('blob:')) value += 900_000;
-      if (source.includes('cdn.aistudio.dropshot.io')) value += 800_000;
-      if (candidate.kind === 'canvas') value += 700_000;
-      return value;
-    };
-
-    const ordered = candidates
-      .filter((candidate) => !beforeSet.has(candidate.key) && !beforeSet.has(candidate.src))
-      .sort((a, b) => score(b) - score(a));
-
-    const toDataUrl = async (src: string): Promise<string | null> => {
-      if (src.startsWith('data:image/')) return src;
-      if (!src.startsWith('blob:') && !/^https?:\/\//i.test(src)) return null;
-      try {
-        const response = await fetch(src);
-        if (!response.ok) return null;
-        const blob = await response.blob();
-        if (!blob.type.startsWith('image/')) return null;
-        return await new Promise<string>((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onloadend = () => resolve(reader.result as string);
-          reader.onerror = () => reject(new Error('blob read failed'));
-          reader.readAsDataURL(blob);
-        });
-      } catch {
-        return null;
-      }
-    };
-
-    for (const candidate of ordered) {
-      const dataUrl = await toDataUrl(candidate.src);
-      if (dataUrl) return dataUrl;
-    }
-    return null;
-  }, beforeKeys);
+    return candidates;
+  });
+  return await pickDropshotResultDataUrl(page, listed, beforeKeys);
 }
 
 /** Low-level image generation (single prompt, single attempt chain). */
@@ -548,10 +514,10 @@ async function makeDropshotImageInternal(
         const clicked = await clickGenerate(page);
         if (!clicked) await page.keyboard.press('Enter');
 
-        // 5. Wait for a newly rendered large result image (max 90 seconds)
+        // 5. Wait for a newly rendered large result image (max 360 s; the same request took 36-179 s on 2026-11-12)
         const startTs = Date.now();
         let foundDataUrl: string | null = null;
-        while (Date.now() - startTs < 90_000) {
+        while (Date.now() - startTs < 360_000) {
           if (wasAborted()) return await stopAbortedGeneration();
           await new Promise((r) => setTimeout(r, 2000));
           if (wasAborted()) return await stopAbortedGeneration();
@@ -576,7 +542,7 @@ async function makeDropshotImageInternal(
           return { ok: true, dataUrl: foundDataUrl };
         }
 
-        lastError = '90초 내 결과 이미지 미발견';
+        lastError = '360초 내 결과 이미지 미발견';
         onLog?.(
           `[리더스 나노바나나] ${lastError} (시도 ${attempt})`,
         );

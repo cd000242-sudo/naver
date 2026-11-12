@@ -23,6 +23,7 @@ import {
   getCachedPage,
   setCached,
 } from './dropshotSession.js';
+import { detectDropshotLogin } from './dropshotLoginWatch.js';
 
 export {
   buildDropshotPrompt,
@@ -182,7 +183,7 @@ async function _ensurePageInternal(onLog?: (m: string) => void): Promise<any> {
         }
         page = await selectDropshotPage(context);
 
-        if (await isLoggedIn(page)) {
+        if (await detectDropshotLogin(context, page, { isLoggedIn, navigateToBoard: navigateToDropshotBoard, onLog })) {
           // Keep the authenticated profile owner alive and hidden. A close →
           // immediate reopen races Chrome's SingletonLock/profile flush and can
           // repeatedly flash about:blank windows for every image in the batch.

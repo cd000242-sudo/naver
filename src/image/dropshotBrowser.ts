@@ -18,6 +18,7 @@ import {
 } from './dropshotSession.js';
 import { sanitizeUserVisibleError } from '../runtime/userVisibleError.js';
 import { detectDropshotSubscriptionPrompt, stepDropshotCountDown } from './dropshotControlsDom.js';
+import * as profileLock from './browserProfileLock.js';
 
 export const BOARD_URL =
   'https://aistudio.dropshot.io/ko/workspace/board?panel=image&imageModelName=google/nano-banana-pro';
@@ -123,10 +124,7 @@ export function sanitizeDropshotErrorMessage(error: unknown, maxLength = 180): s
   return sanitizeUserVisibleError(error).slice(0, safeLength);
 }
 
-export function isDropshotProfileLockError(error: unknown): boolean {
-  const message = error instanceof Error ? error.message : String(error ?? '');
-  return /(?:ProcessSingleton|SingletonLock|user data directory[^\n]*(?:already\s+)?in use|profile(?: directory)?[^\n]*(?:in use|locked))/i.test(message);
-}
+export function isDropshotProfileLockError(error: unknown): boolean { return profileLock.isBrowserProfileInUseError(error); }
 
 function isDropshotTargetClosedError(error: unknown): boolean {
   const message = error instanceof Error ? error.message : String(error ?? '');
@@ -375,6 +373,7 @@ export async function launchBrowser(
   }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let chromium: any;
+  await profileLock.throwIfBrowserProfileOwned(profileDir, profileLock.DROPSHOT_PROFILE_IN_USE_MESSAGE);
   try {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     chromium = (await import('patchright' as any)).chromium;
@@ -442,14 +441,15 @@ export async function launchBrowser(
       lastLaunchError = error;
       // A locked persistent profile cannot succeed with another browser
       // channel. Retrying would only flash more transient blank windows.
-      if (isDropshotProfileLockError(error)) break;
+      if (profileLock.isProfileBusyAfterLaunchFailure(error, profileDir)) break;
       // try next channel
     }
   }
-  const detail = sanitizeDropshotErrorMessage(lastLaunchError);
+  const detail = sanitizeDropshotErrorMessage(profileLock.summarizeBrowserLaunchError(lastLaunchError));
+  console.warn('[리더스 나노바나나] 브라우저 실행 실패 원문:', profileLock.launchErrorLogText(lastLaunchError));
   throw new Error(
-    isDropshotProfileLockError(lastLaunchError)
-      ? 'DROPSHOT_BROWSER_LAUNCH_FAILED: 이전 리더스 나노바나나 자동화 창이 아직 종료되지 않았습니다. 잠시 후 다시 시도해주세요.'
+    profileLock.isProfileBusyAfterLaunchFailure(lastLaunchError, profileDir)
+      ? profileLock.DROPSHOT_PROFILE_IN_USE_MESSAGE
       : `DROPSHOT_BROWSER_LAUNCH_FAILED: Chrome/Edge/Chromium 실행 실패${detail ? ` (${detail})` : ''}`,
   );
 }
