@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T22:01:19.151Z",
+ "builtAt": "2026-11-12T22:11:22.945Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,38 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "젠슨 황 사임 충격",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 28,
-   "recent20": 9,
-   "press": 26,
-   "firstArticleAt": "2026-11-12T20:40:00.000Z",
+   "articles90": 32,
+   "recent20": 11,
+   "press": 31,
+   "firstArticleAt": "2026-11-12T20:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "엔비디아, 젠슨 황 사임 충격…장중 시총 801조원 증발",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-12T22:00:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=781271"
+     "title": "[젠슨 황 리스크] 사임 소식에 엔비디아 '충격'…직원들 눈물, 본사 앞엔...",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-12T22:08:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1731507"
     },
     {
-     "title": "[증시전략] 젠슨 황, 사실상 해임…엔비디아 주가 한때 14% 급락",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-12T21:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000543412?sid=104"
+     "title": "'젠슨 황 사임'에 출렁인 뉴욕증시…엔비디아 4%대 하락, 경쟁사는 5%대...",
+     "press": "ziksir.com",
+     "publishedAt": "2026-11-12T22:06:00.000Z",
+     "link": "https://www.ziksir.com/news/articleView.html?idxno=153168"
     },
     {
-     "title": "[뉴욕증시] 젠슨 황 사임 충격 나스닥 100.09P 하락...AMD·브로드컴 5%대...",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-12T21:56:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=202611130651588714e250e8e188_1"
+     "title": "미국증시, 젠슨 황 사임·국채금리 5% 돌파에 하락…엔비디아 4.34%↓ 브...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-12T22:06:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16275371"
     }
    ]
   },
@@ -47,24 +48,24 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 24,
-   "recent20": 0,
-   "press": 24,
+   "articles90": 25,
+   "recent20": 1,
+   "press": 25,
    "firstArticleAt": "2026-11-12T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "10월 수입물가지수 1.8%↓…환율·유가 하락 영향",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-12T22:06:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3750693"
+    },
+    {
      "title": "환율·유가 동반 하락에…10월 수입물가 하락 전환",
      "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-12T21:36:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/422/0000925724?sid=101"
-    },
-    {
-     "title": "수출물량 증가율 ‘역대 최고’…소득교역조건 상승률도 74.6% 최대",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-12T21:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002393961?sid=101"
     },
     {
      "title": "10월 수출물량지수 역대 최대‥\"AI 인프라 관련 품목 증가\"",
@@ -79,13 +80,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
    "firstArticleAt": "2026-11-12T21:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "최민희, '하이에나' 이어 '李, 尹 탄핵 반대'...김민석, 감찰조사 지시",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-12T22:02:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/325166/?sc=Naver"
+    },
     {
      "title": "최민희 \"李, 尹 탄핵 반대\" 발언…김민석, 윤리 감찰 지시",
      "press": "news.tvchosun.com",
@@ -97,18 +104,45 @@
      "press": "joseilbo.com",
      "publishedAt": "2026-11-12T21:36:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/123/0002393964?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "이세창 급성 맹장염",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-12T21:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이세창, 119 신고→급성맹장염 수술 영상 남겼다 “죽다가 살았네”",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-12T22:06:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001187013"
     },
     {
-     "title": "김민석, '잇단 언행 논란' 최민희 감찰조사 지시",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-12T21:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001402713?sid=100"
+     "title": "이세창, 급성맹장염 긴급 수술…\"죽다가 살았네\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-12T21:47:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014319741"
+    },
+    {
+     "title": "재혼 이세창, 죽다 살아-급성 맹장염 긴급 수술",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-12T21:42:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95129"
     }
    ]
   },
   {
    "keyword": "박정성 통상교섭본부장 유럽의회 면담",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 14,
@@ -128,19 +162,84 @@
      "title": "박정성 통상교섭본부장, 아담 야루바스 유럽의회 의원과 면담",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-12T21:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016439627?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/001/0016439629?sid=100"
     },
     {
-     "title": "박정성 통상교섭본부장, 마르틴 호이시크 유럽의회 의원과 면담",
+     "title": "박정성 통상교섭본부장, 유럽의회 내수시장·소비자보호위원회 위원장...",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-12T21:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016439631?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/001/0016439606?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "황정리 별세",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T21:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'취권' 성룡 맞수 '발차기 제왕' 황정리, 81세로 영면",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-12T22:08:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95135"
+    },
+    {
+     "title": "황정리 81세에 별세, 성룡과 호흡 맞춘 액션 영화계 거장",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-12T22:05:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000327770"
+    },
+    {
+     "title": "'취권'서 성룡과 맞붙은 원로 액션배우 황정리 별세…향년 81세",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-12T21:15:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002080024"
+    }
+   ]
+  },
+  {
+   "keyword": "김서아 부모님 사망 소식",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-12T20:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "탈북미녀 김서아, 추방된 부모 사망 소식에 오열",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-12T22:07:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014319759"
+    },
+    {
+     "title": "탈북 미녀 김서아, 11살부터 기쁨조 후보 발탁돼",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-12T22:04:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95134"
+    },
+    {
+     "title": "북한 기쁨조 탈락한 김서아, 남편 덕 탈북→부모 추방 당해 사망에 눈물...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-12T20:52:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001186985"
     }
    ]
   },
   {
    "keyword": "물건 이호선 긴급",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 3,
@@ -169,14 +268,58 @@
      "link": "https://m.entertain.naver.com/article/008/0005440637"
     }
    ]
+  },
+  {
+   "keyword": "솔비 이규한 동반 예능",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-12T21:00:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "솔비♥이규한, 예능에서 프리-허니문-日 여행",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-12T21:50:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95131"
+    },
+    {
+     "title": "[단독] “결혼 전 마지막 검증?”… 솔비♥이규한, ‘끼리끼리2’ 사상...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-12T21:20:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003541563"
+    },
+    {
+     "title": "[단독] 솔비♥이규한, 결혼 발표 후 첫 동반 예능... ‘끼리끼리’서 日...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-12T21:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003541561"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 398,
-  "matched": 146,
-  "avgLeadMin": 662,
+  "flagged": 402,
+  "matched": 148,
+  "avgLeadMin": 664,
   "recent": [
+   {
+    "keyword": "성동 강동 집값 하락 전환",
+    "hitKeyword": "한강벨트 집값 하락",
+    "hitAt": "2026-11-13T07:00:00+09:00",
+    "leadMin": 937
+   },
+   {
+    "keyword": "한강 벨트",
+    "hitKeyword": "한강벨트 집값 하락",
+    "hitAt": "2026-11-13T07:00:00+09:00",
+    "leadMin": 715
+   },
    {
     "keyword": "천안서 발달장애 어머니",
     "hitKeyword": "발달장애 10대 사망",
@@ -224,18 +367,6 @@
     "hitKeyword": "성북구 10대 여성 살해",
     "hitAt": "2026-11-13T06:00:00+09:00",
     "leadMin": 292
-   },
-   {
-    "keyword": "젠슨 황, 엔비디아 CEO 퇴진",
-    "hitKeyword": "엔비디아 주가 급락",
-    "hitAt": "2026-11-13T06:00:00+09:00",
-    "leadMin": 110
-   },
-   {
-    "keyword": "네이버 AI 에이전트 연내 출시 목표",
-    "hitKeyword": "네이버 AI팩토리 계약",
-    "hitAt": "2026-11-13T00:00:00+09:00",
-    "leadMin": 834
    }
   ]
  }
