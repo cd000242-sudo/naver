@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T09:54:42.377Z",
+ "builtAt": "2026-11-12T10:04:47.287Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,149 +8,90 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 25,
  "candidates": [
+  {
+   "keyword": "김승원 브로커 4년 구형",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 30,
+   "recent20": 9,
+   "press": 28,
+   "firstArticleAt": "2026-11-12T08:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'김승원 신약 청탁 의혹' 브로커 징역 4년 구형… 뇌물공여약속 등 혐의",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-12T10:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000965305?sid=102"
+    },
+    {
+     "title": "공소청, '김승원 청탁의혹' 브로커에 징역 4년·제넨셀 설립자는 징역 ...",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-12T09:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001535230?sid=102"
+    },
+    {
+     "title": "공소청, '김승원 청탁의혹' 브로커에 징역 4년 구형",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-12T09:54:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/325148/?sc=Naver"
+    }
+   ]
+  },
   {
    "keyword": "젠슨 황 해임 논의",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 33,
-   "recent20": 3,
+   "articles90": 34,
+   "recent20": 5,
    "press": 27,
-   "firstArticleAt": "2026-11-12T08:30:00.000Z",
+   "firstArticleAt": "2026-11-12T08:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"엔비디아 이사회 젠슨 황 해임 논의\"...외부 CEO 영입설도",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-12T09:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432056?sid=104"
+     "title": "“사내 임원과도 혼외 관계”… 해임 위기에 선 ‘AI 황제’",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-12T10:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001884820?sid=104"
     },
     {
-     "title": "“젠슨 황 해임, 애플의 잡스 해고처럼 어리석다”",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-12T09:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002832438?sid=104"
+     "title": "젠슨황 거취 불확실해 엔비디아 '휘청'…美증시 선물도 끌어내려",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-12T10:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006409121?sid=101"
     },
     {
-     "title": "젠슨 황 해임 위기 [젠슨 황 스캔들 파장 확산]",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-12T09:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005603649?sid=105"
+     "title": "젠슨 황 '또 다른 불륜' 보도 나오자 엔비디아 이사회, 해임 수순…트럼...",
+     "press": "pressian.com",
+     "publishedAt": "2026-11-12T10:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/002/0002465648?sid=104"
     }
    ]
   },
   {
-   "keyword": "고려아연 주총 결의 취소",
+   "keyword": "성북 10대 살해 구속영장",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 27,
-   "recent20": 3,
-   "press": 26,
-   "firstArticleAt": "2026-11-12T08:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "고려아연 주총 결의 취소 1심 판결…경영권 분쟁 새 국면",
-     "press": "iusm.co.kr",
-     "publishedAt": "2026-11-12T09:50:00.000Z",
-     "link": "https://www.iusm.co.kr/news/articleView.html?idxno=1070480"
-    },
-    {
-     "title": "고려아연 상호주 의결권 제한, 가처분·본안 판단 엇갈려…항소심 간다",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-12T09:40:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=315272"
-    },
-    {
-     "title": "法 \"고려아연, 영풍·MBK 의결권 제한 부당\"",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-12T09:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005603648?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "브로커 징역 4년 구형",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 28,
-   "recent20": 8,
-   "press": 25,
-   "firstArticleAt": "2026-11-12T08:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "공소청, '김승원 신약 의혹' 브로커 징역 4년 구형…혐의 부인하며 울먹",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-12T09:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000551476?sid=102"
-    },
-    {
-     "title": "공소청, '김승원 신약 청탁 의혹' 브로커 양모 씨에 징역 4년 구형",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-12T09:50:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261112001458"
-    },
-    {
-     "title": "‘김승원 청탁 의혹’ 브로커에 징역형 구형…양모씨 “삶이 부서졌다...",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-12T09:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003564834?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "펄어비스 3분기 매출 증가",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 18,
-   "recent20": 3,
-   "press": 18,
-   "firstArticleAt": "2026-11-12T08:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "펄어비스, 3분기 영업익 207억원…전년비 8.8%↓",
-     "press": "economist.co.kr",
-     "publishedAt": "2026-11-12T09:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/243/0000105608?sid=105"
-    },
-    {
-     "title": "주요 게임사 3분기 실적 발표…넥슨만 웃었다",
-     "press": "sisafocus.co.kr",
-     "publishedAt": "2026-11-12T09:52:00.000Z",
-     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367541"
-    },
-    {
-     "title": "펄어비스, '붉은사막' 질주 후 숨고르기…3분기 영업익 69% 감소",
-     "press": "bloter.net",
-     "publishedAt": "2026-11-12T09:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/293/0000093178?sid=105"
-    }
-   ]
-  },
-  {
-   "keyword": "50대 남성 구속영장",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 21,
+   "articles90": 22,
    "recent20": 2,
-   "press": 18,
-   "firstArticleAt": "2026-11-12T08:53:00.000Z",
-   "exclusive": false,
+   "press": 19,
+   "firstArticleAt": "2026-11-12T08:44:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "[속보] 공소청, ‘아들 성범죄’ 피해자 살해 남성 구속영장 청구",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-12T09:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001884811?sid=102"
+    },
     {
      "title": "'성북구 10대 살해' 50대에 구속영장 청구…범행 전 도구 구입",
      "press": "newspim.com",
@@ -162,24 +103,50 @@
      "press": "news.tf.co.kr",
      "publishedAt": "2026-11-12T09:37:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/629/0000551473?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "펄어비스 3분기 매출 증가",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 15,
+   "recent20": 3,
+   "press": 15,
+   "firstArticleAt": "2026-11-12T08:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "펄어비스, 3Q 매출 증가·영업익 감소",
+     "press": "kfenews.co.kr",
+     "publishedAt": "2026-11-12T09:56:00.000Z",
+     "link": "https://www.kfenews.co.kr/news/articleView.html?idxno=668025"
     },
     {
-     "title": "[속보] 공소청, 성북구서 10대 여성 살해한 50대 남성 구속영장 청구",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-12T09:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001535222?sid=102"
+     "title": "주요 게임사 3분기 실적 발표…넥슨만 웃었다",
+     "press": "sisafocus.co.kr",
+     "publishedAt": "2026-11-12T09:52:00.000Z",
+     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367541"
+    },
+    {
+     "title": "펄어비스, 3분기 영업익 207억원…전년비 8.8%↓",
+     "press": "economist.co.kr",
+     "publishedAt": "2026-11-12T09:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/243/0000105608?sid=105"
     }
    ]
   },
   {
    "keyword": "여자축구, LA올림픽 예선 B조",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 3,
-   "press": 13,
-   "firstArticleAt": "2026-11-12T08:30:00.000Z",
+   "articles90": 10,
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-12T08:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -204,7 +171,71 @@
    ]
   },
   {
-   "keyword": "정점식, 정순택 대주교 예방",
+   "keyword": "이재명 지방재정 자율성",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 9,
+   "recent20": 0,
+   "press": 9,
+   "firstArticleAt": "2026-11-12T08:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李대통령 \"지방재정 운용 너무 경직…재량·자율성 확대해야\"",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-12T09:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000142163?sid=100"
+    },
+    {
+     "title": "[종합] 李대통령 \"아끼면 아낀 대로 쓸 수 있게\"…지방재정 자율성 확대...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-12T09:20:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261112001451"
+    },
+    {
+     "title": "이 대통령 \"지방재정 자율성 높여야…실용적·현실적 개선 필요\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-12T09:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001402622?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "플라이빗 해킹 정보유출",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-12T08:47:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "코인마켓 거래소 ‘플라이빗’ 해킹…고객 40명 개인정보 유출",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-12T09:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012292702?sid=101"
+    },
+    {
+     "title": "플라이빗도 해킹···고객 40명 정보 유출",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-12T09:34:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=882842"
+    },
+    {
+     "title": "코인마켓 거래소 '플라이빗' 해킹…고객 40명 정보 유출",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-12T09:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005841991?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "정점식 정순택 대주교",
    "sources": [
     "nate"
    ],
@@ -268,45 +299,83 @@
    ]
   },
   {
-   "keyword": "가상자산업권 보안 대책회의",
+   "keyword": "한강 벨트",
    "sources": [
     "signal.bz",
-    "nate"
+    "google"
    ],
-   "articles90": 4,
+   "articles90": 5,
    "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-12T08:28:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-12T08:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "가상자산 거래소 보안 강화… 해킹 의심만으로 입출금 막는다",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-12T08:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000192247?sid=101"
+     "title": "강남발 집값 약세 한강벨트로…성동·강동 하락 전환",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-12T09:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000925596?sid=101"
     },
     {
-     "title": "가상자산업권 보안대책회의하는 신진창 금융위 부위원장",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T08:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014319436?sid=100"
+     "title": "稅부담·고금리 파고…성동·강동도 8개월만에 하락 전환 [한강벨트로 ...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-12T09:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004681649?sid=101"
     },
     {
-     "title": "가상자산업권 보안대책회의",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T08:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014319420?sid=100"
+     "title": "서울 아파트값 상승세 '주춤'…강남 이어 한강벨트도 하락 전환",
+     "press": "youthdaily.co.kr",
+     "publishedAt": "2026-11-12T09:26:00.000Z",
+     "link": "https://www.youthdaily.co.kr/news/article.html?no=229779"
+    }
+   ]
+  },
+  {
+   "keyword": "폭설 김윤석 연기 호흡",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T08:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"구교환에게 짜릿한 전율\"vs \"김윤석 선배와 매순간이 감탄\" 김윤석·구...",
+     "press": "sports.hankooki.com",
+     "publishedAt": "2026-11-12T08:46:00.000Z",
+     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6943457"
+    },
+    {
+     "title": "김윤석X구교환 콤비의 연기 차력쇼…홍의정 감독 '폭설' [종합]",
+     "press": "digitalchosun.dizzo.com",
+     "publishedAt": "2026-11-12T08:46:00.000Z",
+     "link": "http://digitalchosun.dizzo.com/site/data/html_dir/2026/11/12/2026111280213.html"
+    },
+    {
+     "title": "전율 느낀 김윤석, 매 순간 감탄한 구교환… 유머·긴장 넘나드는 '폭설...",
+     "press": "sisaweek.com",
+     "publishedAt": "2026-11-12T08:44:00.000Z",
+     "link": "https://www.sisaweek.com/news/articleView.html?idxno=238952"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 389,
-  "matched": 129,
-  "avgLeadMin": 1050,
+  "flagged": 396,
+  "matched": 130,
+  "avgLeadMin": 1042,
   "recent": [
+   {
+    "keyword": "한국, APBC 첫 경기서 호주에 패배",
+    "hitKeyword": "APBC 한국 호주",
+    "hitAt": "2026-11-12T19:00:00+09:00",
+    "leadMin": 76
+   },
    {
     "keyword": "오산 원룸 시신 발견",
     "hitKeyword": "오산 원룸 시신 발견",
@@ -360,12 +429,6 @@
     "hitKeyword": "이부진 디올 CEO 학위식",
     "hitAt": "2026-11-12T16:30:00+09:00",
     "leadMin": 198
-   },
-   {
-    "keyword": "델핀 아르노 CEO 학위 수여",
-    "hitKeyword": "이부진 디올 CEO 학위식",
-    "hitAt": "2026-11-12T16:30:00+09:00",
-    "leadMin": 168
    }
   ]
  }
