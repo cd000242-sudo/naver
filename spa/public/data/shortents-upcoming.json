@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T04:52:17.086Z",
+ "builtAt": "2026-11-12T05:02:21.250Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -13,32 +13,33 @@
   {
    "keyword": "젠슨 황 해임 위기",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 23,
+   "articles90": 25,
    "recent20": 5,
-   "press": 20,
-   "firstArticleAt": "2026-11-12T03:26:00.000Z",
+   "press": 21,
+   "firstArticleAt": "2026-11-12T03:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[젠슨 황 스캔들] \"젠슨 황, 내가 데려오겠다\"… 일론 머스크, 영입 의사...",
-     "press": "it.chosun.com",
-     "publishedAt": "2026-11-12T04:46:00.000Z",
-     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000000872"
+     "title": "젠슨 황 엔비디아 CEO 해임 위기 직면…경영 리스크 확산",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-12T04:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003485002?sid=105"
     },
     {
-     "title": "젠슨 황, 불륜 시인 1년 전 '성추문 전문' 해결사 고용",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-12T04:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006408863?sid=101"
+     "title": "젠슨 황 엔비디아 최고경영자의 몰락···해임 위기에 추가 불륜설 제...",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-12T04:52:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=243001"
     },
     {
-     "title": "젠슨 황 해임 위기…AI시장 지각변동",
-     "press": "smedaily.co.kr",
-     "publishedAt": "2026-11-12T04:42:00.000Z",
-     "link": "http://www.smedaily.co.kr/news/articleView.html?idxno=366080"
+     "title": "엔비디아 위기에...AMD·브로드컴, 반사이익 가능할까",
+     "press": "opinionnews.co.kr",
+     "publishedAt": "2026-11-12T04:52:00.000Z",
+     "link": "http://www.opinionnews.co.kr/news/articleView.html?idxno=146991"
     }
    ]
   },
@@ -47,13 +48,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 21,
-   "recent20": 7,
-   "press": 19,
-   "firstArticleAt": "2026-11-12T03:25:00.000Z",
+   "articles90": 19,
+   "recent20": 2,
+   "press": 17,
+   "firstArticleAt": "2026-11-12T03:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이 대통령 \"대기업 투자, 지역 中企 성장으로 이어져야… 지역 중기 신...",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-12T04:58:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261112500218"
+    },
     {
      "title": "李대통령 지지율 44%... \"SNS 직접 소통 줄여야\" 51% [NBS]",
      "press": "insight.co.kr",
@@ -65,45 +72,38 @@
      "press": "shinailbo.co.kr",
      "publishedAt": "2026-11-12T04:42:00.000Z",
      "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5082729"
-    },
-    {
-     "title": "李대통령 “메가프로젝트 속도전 넘어 전격전...지역경제 활성화 본격화...",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-12T04:40:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=72928"
     }
    ]
   },
   {
-   "keyword": "델핀 아르노 CEO 학위 수여",
+   "keyword": "델핀 아르노 디올 CEO 학위 수여",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 35,
-   "recent20": 4,
-   "press": 11,
-   "firstArticleAt": "2026-11-12T04:08:00.000Z",
+   "articles90": 40,
+   "recent20": 13,
+   "press": 15,
+   "firstArticleAt": "2026-11-12T04:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'손하트' 이부진, '기부' 정의선 재벌들 학위식 보러 '우르르'...누구길...",
-     "press": "economist.co.kr",
-     "publishedAt": "2026-11-12T04:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/243/0000105577?sid=101"
+     "title": "디올 CEO \"한국은 중요한 시장\"…이부진과 '손 하트'",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-12T05:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000925470?sid=101"
     },
     {
-     "title": "[현장] 이부진·델핀 아르노 '팔짱에 ♥'…정의선·신동빈·신유열도 한...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T04:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014318356?sid=101"
+     "title": "디올 회장, 이부진 사장과 '손하트'…현대차·롯데 회장까지 이대 모였...",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-12T04:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005353153?sid=101"
     },
     {
-     "title": "이화여대 명예박사 된 델핀 아르노…재계 총수들도 한자리에",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-12T04:46:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611120112"
+     "title": "디올 CEO 학위 수여식 참석한 재계 총수들",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-12T04:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009285760?sid=101"
     }
    ]
   },
@@ -113,44 +113,83 @@
     "signal.bz"
    ],
    "articles90": 11,
-   "recent20": 3,
+   "recent20": 4,
    "press": 11,
-   "firstArticleAt": "2026-11-12T03:23:00.000Z",
+   "firstArticleAt": "2026-11-12T03:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "경찰, '10대 소녀 살해' 50대 구속영장 신청…계획범죄 정황",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-12T04:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000551287?sid=102"
+    },
+    {
+     "title": "'성북구 10대 살해' 피해자 쉼터, 성착취 피해 정황 알고 있었다",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-12T04:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009285757?sid=102"
+    },
     {
      "title": "인천서 과도 산 뒤 성북구서 살해했다…10대 여성 살해 피의자 계획범행...",
      "press": "biz.heraldcorp.com",
      "publishedAt": "2026-11-12T04:45:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/016/0002722666?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "ssg 랜더스",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 6,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-12T03:44:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[공식발표]'아빌라-리차드슨 원투펀치' SSG 100만불짜리 157km 투수 영입...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-12T05:00:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/076/0004466124"
     },
     {
-     "title": "경찰, 성북구서 10대 살해한 50대 남성 구속영장 신청",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-12T04:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000650608?sid=102"
+     "title": "[오피셜] SSG, 157㎞ 파이어볼러 품에 안았다… 아빌라 2년 310만 달러-리...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-12T04:58:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/477/0000638695"
     },
     {
-     "title": "10대 소녀 살해한 50대 남성 긴급체포",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-12T04:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000367270?sid=115"
+     "title": "SSG, 김민식 등 선수 5명과 결별…코치 4명도 재계약 불가",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-12T04:52:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=781147"
     }
    ]
   },
   {
    "keyword": "2026 인텔 AI 서밋",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
    "articles90": 7,
-   "recent20": 1,
+   "recent20": 2,
    "press": 6,
-   "firstArticleAt": "2026-11-12T03:24:00.000Z",
+   "firstArticleAt": "2026-11-12T03:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[현장] 인텔, 에이전틱 AI 인프라에 제온과 차세대 GPU 조합 제시",
+     "press": "gamevu.co.kr",
+     "publishedAt": "2026-11-12T04:54:00.000Z",
+     "link": "https://www.gamevu.co.kr/news/articleView.html?idxno=62235"
+    },
     {
      "title": "인텔, 韓 기업과 AI 생태계 구축…'K-AI 풀스택 얼라이언스' 출범",
      "press": "etnews.com",
@@ -162,45 +201,38 @@
      "press": "biz.newdaily.co.kr",
      "publishedAt": "2026-11-12T04:30:00.000Z",
      "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/12/2026111200209.html"
-    },
-    {
-     "title": "인텔, 삼성전자·SK하이닉스 등 국내 52개 기업과 AI 협력 확대…23개사...",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-12T04:24:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=563320"
     }
    ]
   },
   {
-   "keyword": "ssg 랜더스",
+   "keyword": "남대문 스카프 아저씨",
    "sources": [
-    "signal.bz",
-    "google"
+    "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T03:28:00.000Z",
+   "articles90": 3,
+   "recent20": 3,
+   "press": 3,
+   "firstArticleAt": "2026-11-12T04:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'통합우승 2회' 베테랑 포수 김민식, SSG와 결별...코칭스태프 4명도 떠...",
-     "press": "maniareport.com",
-     "publishedAt": "2026-11-12T04:19:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/425/0000214870"
+     "title": "'남대문 스카프 아저씨' 또 일냈다…온라인 매장도 품절 대란",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-12T04:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000650610?sid=102"
     },
     {
-     "title": "[오피셜] '2회 우승 포수' 김민식, 결국 친정팀 SSG서 방출... '미완의 거...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-12T04:01:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/108/0003486878"
+     "title": "“이게 뭔 일이여”…남대문 스카프 아저씨, 온라인몰 열자 벌어진 일",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-12T04:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006408864?sid=102"
     },
     {
-     "title": "SSG, '우승 포수' 김민식에 재계약 불가 통보…류효승·길지석은 은퇴",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T03:44:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/003/0014318259"
+     "title": "남대문 스카프 아저씨, 또 대박…온라인몰 열자마자 '품절 대란'",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-12T04:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000520401?sid=102"
     }
    ]
   }
@@ -208,8 +240,8 @@
  "hitRate": {
   "days": 7,
   "flagged": 346,
-  "matched": 135,
-  "avgLeadMin": 1649,
+  "matched": 134,
+  "avgLeadMin": 1587,
   "recent": [
    {
     "keyword": "김건희 집사 무죄 확정",
@@ -222,12 +254,6 @@
     "hitKeyword": "성유리 남편 무죄 확정",
     "hitAt": "2026-11-12T13:00:00+09:00",
     "leadMin": 18
-   },
-   {
-    "keyword": "층간소음 기준 강화",
-    "hitKeyword": "층간소음 신고 구조",
-    "hitAt": "2026-11-12T12:30:00+09:00",
-    "leadMin": 9997
    },
    {
     "keyword": "울산 김현석 감독 올 시즌 종료",
@@ -270,6 +296,12 @@
     "hitKeyword": "클라라 예능 복귀",
     "hitAt": "2026-11-12T11:00:00+09:00",
     "leadMin": 84
+   },
+   {
+    "keyword": "클라라 10년 만에 예능 복귀",
+    "hitKeyword": "클라라 예능 복귀",
+    "hitAt": "2026-11-12T11:00:00+09:00",
+    "leadMin": 74
    }
   ]
  }
