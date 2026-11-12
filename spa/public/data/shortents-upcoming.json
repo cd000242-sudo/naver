@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T02:21:04.277Z",
+ "builtAt": "2026-11-12T02:31:17.291Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,30 +16,30 @@
     "signal.bz",
     "daum"
    ],
-   "articles90": 82,
-   "recent20": 18,
-   "press": 66,
-   "firstArticleAt": "2026-11-12T00:52:00.000Z",
+   "articles90": 80,
+   "recent20": 19,
+   "press": 62,
+   "firstArticleAt": "2026-11-12T01:02:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "\"젠슨 황도 하는데, 연락 안 되면 100%\"…불륜 사건 5만번 접했다는 변호...",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-12T02:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001074435?sid=102"
+     "title": "젠슨 황, '불륜 사과' 사흘 만에 직속 부사장과도 혼외 관계 의혹…해임...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-12T02:26:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005639156"
     },
     {
-     "title": "엔비디아 이사회, '사내 불륜' 추가 폭로 젠슨 황 해임 수순… 후임 CEO...",
-     "press": "sisunnews.co.kr",
-     "publishedAt": "2026-11-12T02:20:00.000Z",
-     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=249560"
+     "title": "'CEO 해임설' 엔비디아 급락…삼성전자·SK하이닉스 파장은? [뉴스큐]",
+     "press": "newsq.co.kr",
+     "publishedAt": "2026-11-12T02:24:00.000Z",
+     "link": "https://www.newsq.co.kr/news/articleView.html?idxno=500860"
     },
     {
-     "title": "'AI 중앙은행 총재' 젠슨황의 퇴장...생태계에 짙은 먹구름",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-12T02:18:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261112000567"
+     "title": "엔비디아, 젠슨 황 해임 추진…AI 반도체 시장 충격(종합)",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-12T02:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005841753?sid=101"
     }
    ]
   },
@@ -48,95 +48,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 69,
-   "recent20": 11,
-   "press": 63,
-   "firstArticleAt": "2026-11-12T00:56:00.000Z",
+   "articles90": 66,
+   "recent20": 9,
+   "press": 62,
+   "firstArticleAt": "2026-11-12T01:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령, 16~19일 필리핀·중국 순방…\"李, 아세안·APEC 정상회의서 여...",
-     "press": "polinews.co.kr",
-     "publishedAt": "2026-11-12T02:19:00.000Z",
-     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=748311"
+     "title": "이재명 대통령, 16일 아세안·APEC 순방길 오른다",
+     "press": "goodmorningcc.com",
+     "publishedAt": "2026-11-12T02:26:00.000Z",
+     "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=455697"
     },
     {
-     "title": "청와대 \"중국 APEC 계기 북미 접촉 가능성 작아…그 전후는 단정 어려워...",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-12T02:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001402494?sid=100"
+     "title": "이재명 대통령, 오늘 마닐라서 한-아세안 정상회의 참석…협력 방안 논...",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-12T02:26:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3749734"
     },
     {
-     "title": "이 대통령, 16~19일 아세안·APEC 순방...AI·공급망 협력 강화",
-     "press": "enewstoday.co.kr",
-     "publishedAt": "2026-11-12T02:14:00.000Z",
-     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2491587"
+     "title": "靑 \"中 APEC 러시아 참석 인사 가늠 어려워…러측과 필요한 소통 중\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-12T02:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000650587?sid=100"
     }
    ]
   },
   {
    "keyword": "네이버 AI 팩토리 2조원 계약",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 52,
-   "recent20": 9,
-   "press": 46,
-   "firstArticleAt": "2026-11-12T00:58:00.000Z",
+   "articles90": 56,
+   "recent20": 11,
+   "press": 49,
+   "firstArticleAt": "2026-11-12T01:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "네이버, AI 팩토리 수익화 시동…2조 계약·10곳 이상 추가 협상 [종합]",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-12T02:16:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2647286"
+     "title": "네이버, 새 AI 에이전트 연내 출시",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-12T02:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002722589?sid=105"
     },
     {
-     "title": "[컨센셔스쇼크] 네이버, 영업익 2분기 연속 하락…\"AI 팩토리·에이전트...",
-     "press": "megaeconomy.co.kr",
-     "publishedAt": "2026-11-12T02:14:00.000Z",
-     "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065575896399243"
+     "title": "네이버, AI 컴퓨팅 시장에 2조 원 승부수…글로벌 기업 고객 확보하며 ...",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-12T02:26:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=847115"
     },
     {
-     "title": "네이버, 매출 3조4700억에도 영업익 21% 감소···AI 투자 부담 커졌다",
-     "press": "enewstoday.co.kr",
-     "publishedAt": "2026-11-12T02:14:00.000Z",
-     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2491498"
-    }
-   ]
-  },
-  {
-   "keyword": "손흥민 김민재 공동 입장문",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 38,
-   "recent20": 4,
-   "press": 38,
-   "firstArticleAt": "2026-11-12T00:53:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "96라인 은퇴 없다, 손흥민과 갈등설도 '끝'!…이보다 깔끔할 수 없는 '고...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-12T02:15:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/076/0004466070"
-    },
-    {
-     "title": "\"국대 은퇴 걸고 요구한 적 없다\"…손흥민·김민재 등 '92·96라인' 공동...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-12T02:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005603275?sid=102"
-    },
-    {
-     "title": "축구 국가대표 손흥민·이재성·김민재·황인범·황희찬 입장문 발표",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-12T02:10:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611120180"
+     "title": "[기업실적]네이버, 3Q 실적 하락…영업이익 전년比 20.9%↓",
+     "press": "nspna.com",
+     "publishedAt": "2026-11-12T02:26:00.000Z",
+     "link": "https://www.nspna.com/news/?mode=view&newsid=835786"
     }
    ]
   },
@@ -144,48 +111,86 @@
    "keyword": "충청권 메가프로젝트 착공식",
    "sources": [
     "signal.bz",
-    "nate"
+    "nate",
+    "daum"
    ],
-   "articles90": 48,
-   "recent20": 20,
-   "press": 33,
-   "firstArticleAt": "2026-11-12T01:46:00.000Z",
+   "articles90": 47,
+   "recent20": 19,
+   "press": 32,
+   "firstArticleAt": "2026-11-12T01:49:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령 '지방 메가프로젝트' 속도전…반도체·AI 투자로 지역 성장 견...",
-     "press": "ziksir.com",
-     "publishedAt": "2026-11-12T02:20:00.000Z",
-     "link": "https://www.ziksir.com/news/articleView.html?idxno=153028"
+     "title": "이 대통령, 충청권 메가프로젝트 착공식 참석...\"모두의 성장 역량 집중...",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-12T02:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002431787?sid=100"
     },
     {
-     "title": "李 \"메가프로젝트, 지역·국민 삶 바꾸는 '모두의 성장'으로 완성\"",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-12T02:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001074436?sid=100"
+     "title": "李대통령 “충청권 메가프로젝트에 반도체·바이오 등 23조6000억 추가 투...",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-12T02:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004009233?sid=100"
     },
     {
-     "title": "李 대통령 \"메가프로젝트, 지역 중소·스타트업 성장으로 이어져야\"",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-12T02:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000551208?sid=100"
+     "title": "李 “메가프로젝트, 중소·협력업체 기술 투자에 ‘불씨’... 매우 긍정...",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-12T02:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001204298?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "선관위 특검 압수수색",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 41,
+   "recent20": 5,
+   "press": 29,
+   "firstArticleAt": "2026-11-12T01:13:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "임태희 전 교육감 선관위 특검에 '경기도 전 지역 조사' 촉구",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-12T02:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016438005?sid=102"
+    },
+    {
+     "title": "개표 오류 확인하려면 80억?… 임태희 “특검, 전 지역 조사해야”",
+     "press": "asiatime.co.kr",
+     "publishedAt": "2026-11-12T02:22:00.000Z",
+     "link": "https://www.asiatime.co.kr/article/20261112500125"
+    },
+    {
+     "title": "부실 점검을 철저히 한 것처럼…선관위 특검, 보안 문서 작성 경위 수사",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-12T02:22:00.000Z",
+     "link": "https://www.ajunews.com/view/20261112110305580"
     }
    ]
   },
   {
    "keyword": "출근하는 이용철 후보자",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 17,
    "recent20": 3,
    "press": 17,
-   "firstArticleAt": "2026-11-12T01:00:00.000Z",
+   "firstArticleAt": "2026-11-12T01:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "국민의힘, 이용철 낙마 압박…\"공소취소 없다 말 못 하면 부적격\"",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-12T02:24:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=729049"
+    },
     {
      "title": "변협, 이용철 과거 변론 논란에 \"변호사 개인 자질까지 문제 삼아선 안...",
      "press": "ajunews.com",
@@ -197,12 +202,6 @@
      "press": "dailian.co.kr",
      "publishedAt": "2026-11-12T02:14:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/119/0003154351?sid=102"
-    },
-    {
-     "title": "이용철, 공소취소 질문에 \"예단\"…특검·5·18 보상금엔 침묵",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-12T02:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000551196?sid=102"
     }
    ]
   },
@@ -212,7 +211,7 @@
     "signal.bz"
    ],
    "articles90": 16,
-   "recent20": 3,
+   "recent20": 1,
    "press": 16,
    "firstArticleAt": "2026-11-12T01:14:00.000Z",
    "exclusive": true,
@@ -244,30 +243,30 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 12,
-   "recent20": 3,
-   "press": 12,
-   "firstArticleAt": "2026-11-12T01:28:00.000Z",
+   "articles90": 16,
+   "recent20": 6,
+   "press": 15,
+   "firstArticleAt": "2026-11-12T01:30:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "학교 영양교사·영양사, 친환경농산물 산지서 생산자 고충 체험",
-     "press": "youngnong.co.kr",
-     "publishedAt": "2026-11-12T02:12:00.000Z",
-     "link": "https://www.youngnong.co.kr/news/articleView.html?idxno=71848"
+     "title": "세종 유치원 교사 피해 논란…교원단체 \"교육당국이 직접 나서야\"",
+     "press": "newswhoplus.com",
+     "publishedAt": "2026-11-12T02:30:00.000Z",
+     "link": "https://www.newswhoplus.com/news/articleView.html?idxno=74173"
     },
     {
-     "title": "부산교육청, 유치원 수업혁신 교사 14명 시상…우수사례 현장 확산",
-     "press": "kpinews.kr",
-     "publishedAt": "2026-11-12T02:07:00.000Z",
-     "link": "https://www.kpinews.kr/newsView/1065578301909323"
+     "title": "퇴직교사 70년 기록, 전남광주 교육의 역사를 쓰다",
+     "press": "mhns.co.kr",
+     "publishedAt": "2026-11-12T02:28:00.000Z",
+     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=768774"
     },
     {
-     "title": "성범죄·절도교사·살인까지...15세 피해자 둘러싼 충격적 관계 [이슈톺...",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-12T02:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002431774?sid=102"
+     "title": "경남교육청, 2027학년도 유·초·특수 교사 임용 1차 시험 종료",
+     "press": "mhns.co.kr",
+     "publishedAt": "2026-11-12T02:28:00.000Z",
+     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=768775"
     }
    ]
   },
@@ -276,10 +275,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-12T00:55:00.000Z",
+   "articles90": 9,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-12T01:04:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -306,9 +305,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 380,
-  "matched": 154,
-  "avgLeadMin": 1478,
+  "flagged": 374,
+  "matched": 151,
+  "avgLeadMin": 1502,
   "recent": [
    {
     "keyword": "db 하이텍",
