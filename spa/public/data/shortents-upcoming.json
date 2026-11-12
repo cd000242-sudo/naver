@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T01:26:20.854Z",
+ "builtAt": "2026-11-12T01:36:25.277Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 18,
+ "measured": 10,
  "candidates": [
-  {
-   "keyword": "손흥민 공동 입장문",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 69,
-   "recent20": 12,
-   "press": 62,
-   "firstArticleAt": "2026-11-12T00:00:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[전문] 손흥민·이재성·황희찬·황인범·김민재 공동입장문...\"개인 갈...",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-12T01:24:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=563273"
-    },
-    {
-     "title": "\"96 은퇴설 사실 아냐\" 손흥민·이재성·김민재·황인범·황희찬 입장문...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-12T01:23:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/311/0002079699"
-    },
-    {
-     "title": "'내분설 논란' 축구대표팀 92·96라인, 공동 입장문…\"팬들께 죄송\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-12T01:22:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/422/0000925377"
-    }
-   ]
-  },
   {
    "keyword": "아세안 APEC 참석",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 71,
-   "recent20": 21,
-   "press": 53,
-   "firstArticleAt": "2026-11-12T00:34:00.000Z",
+   "articles90": 73,
+   "recent20": 16,
+   "press": 58,
+   "firstArticleAt": "2026-11-12T00:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "靑 \"中APEC 계기 북미접촉 가능성 작아…그 전후는 단정 어려워\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-12T01:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016437717?sid=100"
+     "title": "靑 “APEC 계기 북미접촉 가능성 작아…전후는 단정 어려워”",
+     "press": "kbmaeil.com",
+     "publishedAt": "2026-11-12T01:34:00.000Z",
+     "link": "https://www.kbmaeil.com/article/20261112500158"
     },
     {
-     "title": "이재명 대통령, 아세안·APEC 순방…시진핑 주최 만찬 참석",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-12T01:22:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4118156"
+     "title": "李대통령, 16∼19일 아시아 정상외교 순방길... 필리핀 아세안·中 APEC 등...",
+     "press": "lawissue.co.kr",
+     "publishedAt": "2026-11-12T01:32:00.000Z",
+     "link": "https://www.lawissue.co.kr/view.php?ud=202611121029511135b3279dfb36_12"
     },
     {
-     "title": "李, 16~19일 아세안·APEC 순방…한반도평화 지지 당부",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-12T01:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004208995?sid=100"
+     "title": "[속보]李대통령, 16∼19일 아세안·APEC 참석…필리핀·중국 순방",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-12T01:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000121162?sid=100"
     }
    ]
   },
@@ -79,95 +47,95 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 27,
-   "recent20": 4,
-   "press": 27,
-   "firstArticleAt": "2026-11-11T23:58:00.000Z",
+   "articles90": 26,
+   "recent20": 3,
+   "press": 26,
+   "firstArticleAt": "2026-11-12T00:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[건설업계 동향] GS건설ㆍ남광토건ㆍLH (11.12)",
+     "press": "weeklytoday.com",
+     "publishedAt": "2026-11-12T01:28:00.000Z",
+     "link": "http://www.weeklytoday.com/news/articleView.html?idxno=801826"
+    },
+    {
+     "title": "LH, 신도시·용인 국가산단에 2조원 추가 투입",
+     "press": "srtimes.kr",
+     "publishedAt": "2026-11-12T01:26:00.000Z",
+     "link": "http://www.srtimes.kr/news/articleView.html?idxno=217397"
+    },
     {
      "title": "LH, 광명시흥·용인 반도체 산단에 2조 원 추가 투입…사업 속도",
      "press": "iminju.net",
      "publishedAt": "2026-11-12T01:24:00.000Z",
      "link": "http://www.iminju.net/news/articleView.html?idxno=172333"
-    },
-    {
-     "title": "LH, 광명시흥신도시·용인반도체에 2조 더 투입…사업 '속도전'",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T01:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014317571?sid=101"
-    },
-    {
-     "title": "LH, 광명시흥 주택지구·용인반도체 국가산단에 2조 추가 투자…보상·조...",
-     "press": "sisacast.kr",
-     "publishedAt": "2026-11-12T01:10:00.000Z",
-     "link": "http://www.sisacast.kr/news/articleView.html?idxno=101862"
     }
    ]
   },
   {
-   "keyword": "강동원 김고은 혼 제작 확정",
+   "keyword": "임추위 전원 독립이사 구성",
    "sources": [
     "nate"
    ],
-   "articles90": 25,
-   "recent20": 3,
-   "press": 25,
-   "firstArticleAt": "2026-11-12T00:07:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "강동원♥김고은, 부부 됐다…100년 원수 집안의 강제 혼인 ('혼: 삼각의...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-12T01:21:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000784101"
-    },
-    {
-     "title": "강동원·김고은, '눈물의 여왕' 작가 만났다..사극 '혼' 첫 호흡 [공식]",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-12T01:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005639121"
-    },
-    {
-     "title": "강동원·김고은의 운명적 만남…넷플릭스 판타지 사극 ‘혼: 삼각의 시...",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-12T01:10:00.000Z",
-     "link": "https://www.viva100.com/article/20261112500352"
-    }
-   ]
-  },
-  {
-   "keyword": "폭발",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 17,
-   "recent20": 3,
+   "articles90": 19,
+   "recent20": 6,
    "press": 17,
-   "firstArticleAt": "2026-11-12T00:14:00.000Z",
+   "firstArticleAt": "2026-11-12T00:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "대구 아파트 세대 내 보일러실서 폭발 사고 발생",
-     "press": "segye.com",
+     "title": "당정 \"은행지주 CEO 연임 요건 강화… 임추위 4분의3, 주총 3분의2 찬성...",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-12T01:32:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261112500114"
+    },
+    {
+     "title": "금융지주 CEO 연임 문턱 높인다…당정 \"임원추천위 전원 독립이사로 구...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-12T01:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000965142?sid=100"
+    },
+    {
+     "title": "[Invest]금융지주 회장 3연임에 '주총 75% 찬성' 필요…주주 독립이사 추...",
+     "press": "investchosun.com",
      "publishedAt": "2026-11-12T01:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004174577?sid=102"
+     "link": "https://www.investchosun.com/site/data/html_dir/2026/11/12/2026111280047.html"
+    }
+   ]
+  },
+  {
+   "keyword": "출근하는 이용철 후보자",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 16,
+   "recent20": 6,
+   "press": 16,
+   "firstArticleAt": "2026-11-12T00:21:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이용철, 李 사건 공소취소 지휘 여부 또 즉답 피해 … \"지금 답변 부적...",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-12T01:34:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/12/2026111200089.html"
     },
     {
-     "title": "“진짜 ‘LOVE, LOVE, LOVE’ 였네”… 젠슨 황 또 불륜설에 ‘밈’ 폭발",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-12T01:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001204264?sid=102"
+     "title": "이용철 공소취소 여지 둔 李재판 5건...3건은 취소 가능",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-12T01:30:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/325048/?sc=Naver"
     },
     {
-     "title": "대구 아파트 보일러실서 폭발…원인 조사",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-12T01:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012292360?sid=102"
+     "title": "국힘, '3무(無)' 이용철 지명 철회 촉구…\"전문성·독립성·도덕성 결여...",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-12T01:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004209004?sid=100"
     }
    ]
   },
@@ -176,13 +144,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 21,
-   "recent20": 2,
-   "press": 17,
-   "firstArticleAt": "2026-11-11T23:58:00.000Z",
+   "articles90": 16,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-12T00:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "공화 텃밭 미시시피 상원 민주당 승리, 55석 확보…알래스카만 남았다",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-12T01:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003564680?sid=104"
+    },
     {
      "title": "美 민주당, 미시시피서 40여년 만에 승리…상원 55석 확보",
      "press": "newsis.com",
@@ -194,237 +168,39 @@
      "press": "lawtv.kr",
      "publishedAt": "2026-11-12T01:08:00.000Z",
      "link": "https://www.lawtv.kr/news/articleView.html?idxno=61395"
-    },
-    {
-     "title": "노예제·인종차별 깊은 미시시피…146년만에 흑인 상원의원 탄생",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-12T01:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009285022?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "임추위 전원 독립이사 구성",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 18,
-   "recent20": 6,
-   "press": 16,
-   "firstArticleAt": "2026-11-12T00:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[Invest]금융지주 회장 3연임에 '주총 75% 찬성' 필요…주주 독립이사 추...",
-     "press": "investchosun.com",
-     "publishedAt": "2026-11-12T01:24:00.000Z",
-     "link": "https://www.investchosun.com/site/data/html_dir/2026/11/12/2026111280047.html"
-    },
-    {
-     "title": "은행회장, 연임할수록 의결 까다롭게…임추위전원 독립이사로",
-     "press": "seouleconews.com",
-     "publishedAt": "2026-11-12T01:20:00.000Z",
-     "link": "http://www.seouleconews.com/news/articleView.html?idxno=94960"
-    },
-    {
-     "title": "당정, 금융지주 CEO 연임 요건 강화...임추위 전원 독립이사로 구성",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-12T01:20:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1136921"
-    }
-   ]
-  },
-  {
-   "keyword": "발언하는 장동혁 대표",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 22,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-12T00:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "장동혁 \"이용철, 李대통령과 정신적 쌍둥이\"",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-12T01:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006408676?sid=100"
-    },
-    {
-     "title": "장동혁 \"민주당도 李 부동산 세금 폭탄에 반기\"…정책 전환 촉구",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-12T00:56:00.000Z",
-     "link": "https://www.ajunews.com/view/20261112093311205"
-    },
-    {
-     "title": "발언하는 장동혁 국민의힘 대표",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-12T00:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005762556?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "출근하는 이용철 후보자",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 14,
-   "recent20": 4,
-   "press": 12,
-   "firstArticleAt": "2026-11-11T23:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"지금 답변 부적절\"…이용철, '李 공소취소' 나흘째 모호한 입장",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-12T01:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001039870?sid=100"
-    },
-    {
-     "title": "국민의힘, 이용철 법무부 장관 후보자 지명 철회 촉구···\"공직자 기본...",
-     "press": "ngonews.kr",
-     "publishedAt": "2026-11-12T01:16:00.000Z",
-     "link": "https://www.ngonews.kr/news/articleView.html?idxno=242981"
-    },
-    {
-     "title": "정점식 \"이용철, 공소취소 없다 안 하면 부적격…언어적 밑장 빼기\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-12T01:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009285040?sid=100"
     }
    ]
   },
   {
    "keyword": "금융회사 지배구조 개선 협의회",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 14,
+   "articles90": 11,
    "recent20": 3,
    "press": 11,
-   "firstArticleAt": "2026-11-12T00:00:00.000Z",
+   "firstArticleAt": "2026-11-12T00:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "당정, 금융지주 지배구조 손본다…CEO 3연임 금지 대신 요건 강화 방향",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-12T01:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003058710?sid=100"
+    },
+    {
+     "title": "은행지주 '셀프 연임' 정조준… 당정 '지배구조 개선방안' 발표",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-12T01:26:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3448063"
+    },
     {
      "title": "금융지주 CEO 2회 이상 연임 땐 주총 의결권 75% 얻어야… 지배구조 개선...",
      "press": "m-i.kr",
      "publishedAt": "2026-11-12T01:24:00.000Z",
      "link": "https://www.m-i.kr/news/articleView.html?idxno=2017597"
-    },
-    {
-     "title": "'셀프 연임' 막고 주주 권한 강화…당정, 금융지주 지배구조 손질",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-12T01:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004208993?sid=100"
-    },
-    {
-     "title": "금융지주 지배구조 개선안 발표...3연임 금지 빼고 주총 75% 찬성으로",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-12T01:08:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=624720"
-    }
-   ]
-  },
-  {
-   "keyword": "양극화 총괄반 첫 회의",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-12T00:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "정부 '양극화 대응 TF' 본격 가동…5대 분야 작업반 매주 회의",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-12T00:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001039863?sid=101"
-    },
-    {
-     "title": "정부, 양극화 대응 TF 본격 가동…5대 분야 과제 발굴 착수",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-12T00:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004208958?sid=101"
-    },
-    {
-     "title": "범정부 '양극화 대응 TF' 본격 가동…\"지역 간 격차 등 완화\"",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-12T00:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000161059?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "필수의약품 국내 생산",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-11T23:59:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "식약처, 필수 항암·항생제 3품목 국내 생산…연내 공급 추진",
-     "press": "medipana.com",
-     "publishedAt": "2026-11-12T01:10:00.000Z",
-     "link": "https://www.medipana.com/news/articleView.html?idxno=421630"
-    },
-    {
-     "title": "수급난 겪던 필수 항암·항생제, 국내 제약사가 만든다…식약처 '주문제...",
-     "press": "widedaily.com",
-     "publishedAt": "2026-11-12T01:08:00.000Z",
-     "link": "https://www.widedaily.com/news/articleView.html?idxno=303468"
-    },
-    {
-     "title": "'공급불안' 항암제·항생제 3종 국내 주문 제조…연내 공급한다",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-12T01:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009285015?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "조희대 대법원장 출근합니다.",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T00:21:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "조희대 대법원장 출근",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T00:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014317418?sid=102"
-    },
-    {
-     "title": "출근하는 조희대 대법원장",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T00:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014317419?sid=102"
-    },
-    {
-     "title": "서초동 출근하는 조희대 대법원장",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-12T00:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009284874?sid=102"
     }
    ]
   }
@@ -432,9 +208,45 @@
  "hitRate": {
   "days": 7,
   "flagged": 382,
-  "matched": 152,
-  "avgLeadMin": 1498,
+  "matched": 158,
+  "avgLeadMin": 1447,
   "recent": [
+   {
+    "keyword": "이재명 대통령 민주당 만찬",
+    "hitKeyword": "미국 민주당 미시시피 승리",
+    "hitAt": "2026-11-12T10:30:00+09:00",
+    "leadMin": 709
+   },
+   {
+    "keyword": "수사",
+    "hitKeyword": "성북구 살인 사건 수사",
+    "hitAt": "2026-11-12T10:30:00+09:00",
+    "leadMin": 326
+   },
+   {
+    "keyword": "손흥민 공동 입장문 발표",
+    "hitKeyword": "손흥민 96라인 의기투합",
+    "hitAt": "2026-11-12T10:30:00+09:00",
+    "leadMin": 14
+   },
+   {
+    "keyword": "강동원 김고은 부부 출연",
+    "hitKeyword": "강동원 김고은 혼 제작",
+    "hitAt": "2026-11-12T10:30:00+09:00",
+    "leadMin": 14
+   },
+   {
+    "keyword": "손흥민 공동 입장문",
+    "hitKeyword": "손흥민 96라인 의기투합",
+    "hitAt": "2026-11-12T10:30:00+09:00",
+    "leadMin": 4
+   },
+   {
+    "keyword": "강동원 김고은 혼 제작 확정",
+    "hitKeyword": "강동원 김고은 혼 제작",
+    "hitAt": "2026-11-12T10:30:00+09:00",
+    "leadMin": 4
+   },
    {
     "keyword": "금융지주 회장 연임",
     "hitKeyword": "금융지주 회장 문턱 상향",
@@ -458,42 +270,6 @@
     "hitKeyword": "포체티노 맨유 협상",
     "hitAt": "2026-11-12T10:00:00+09:00",
     "leadMin": 24
-   },
-   {
-    "keyword": "에코프로비엠 3분기 영업익 120억 감소",
-    "hitKeyword": "네이버 3분기 실적",
-    "hitAt": "2026-11-12T09:30:00+09:00",
-    "leadMin": 9958
-   },
-   {
-    "keyword": "LG화학 3분기 영업익 5612억",
-    "hitKeyword": "네이버 3분기 실적",
-    "hitAt": "2026-11-12T09:30:00+09:00",
-    "leadMin": 9746
-   },
-   {
-    "keyword": "LG화학 3분기 영업익 17%↓",
-    "hitKeyword": "네이버 3분기 실적",
-    "hitAt": "2026-11-12T09:30:00+09:00",
-    "leadMin": 9726
-   },
-   {
-    "keyword": "인천 구월동 SUV 돌진",
-    "hitKeyword": "제네시스 2억원 SUV",
-    "hitAt": "2026-11-12T09:30:00+09:00",
-    "leadMin": 9716
-   },
-   {
-    "keyword": "GS 3분기 실적",
-    "hitKeyword": "네이버 3분기 실적",
-    "hitAt": "2026-11-12T09:30:00+09:00",
-    "leadMin": 9656
-   },
-   {
-    "keyword": "넷마블 3분기 영업익 감소",
-    "hitKeyword": "네이버 3분기 실적",
-    "hitAt": "2026-11-12T09:30:00+09:00",
-    "leadMin": 9626
    }
   ]
  }
