@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T13:26:21.261Z",
+ "builtAt": "2026-11-12T13:36:25.938Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "김민석 최민희 감찰 지시",
@@ -16,13 +16,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 52,
-   "recent20": 3,
-   "press": 48,
-   "firstArticleAt": "2026-11-12T11:58:00.000Z",
+   "articles90": 44,
+   "recent20": 2,
+   "press": 42,
+   "firstArticleAt": "2026-11-12T12:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "최민희 \"李대통령도 尹 탄핵 반대\"…靑 즉각 반박에 김민석 감찰 지시",
+     "press": "weekly.chosun.com",
+     "publishedAt": "2026-11-12T13:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/053/0000063003?sid=100"
+    },
     {
      "title": "'이 대통령도 윤 탄핵 반대' 최민희에 김민석, 감찰조사 지시…최민희 ...",
      "press": "news.jtbc.co.kr",
@@ -34,44 +40,39 @@
      "press": "joongboo.com",
      "publishedAt": "2026-11-12T13:16:00.000Z",
      "link": "https://www.joongboo.com/news/articleView.html?idxno=363742406"
-    },
-    {
-     "title": "최민희 \"李 대통령도 尹 탄핵 반대\" 발언 파장 … 김민석, 崔 감찰조사 ...",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-12T13:10:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/12/2026111200417.html"
     }
    ]
   },
   {
    "keyword": "CEO의 젠슨 황",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 28,
-   "recent20": 1,
-   "press": 19,
-   "firstArticleAt": "2026-11-12T11:59:00.000Z",
+   "articles90": 24,
+   "recent20": 4,
+   "press": 17,
+   "firstArticleAt": "2026-11-12T12:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"사과도 했는데\"...'젠슨 황의 고향' 타이완의 딜레마",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-12T13:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432109?sid=104"
+     "title": "젠슨 황 해임 위기에 엔비디아 장전 8% 폭락",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-12T13:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005603700?sid=101"
     },
     {
-     "title": "\"젠슨 황 없으면 어쩌나\"…대만 반도체 업계도 긴장한 이유",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-12T13:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005353389?sid=104"
+     "title": "젠슨 황 볼키스 날…앨리스의 ‘디올 원피스’ 화제",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-12T13:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002832452?sid=104"
     },
     {
-     "title": "\"엔비디아 이사회 젠슨 황 해임 논의\"...외부 CEO 영입설도",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-12T12:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432102?sid=104"
+     "title": "젠슨 황 물러나면 中 웃는다?…엔비디아 시총 400조원 증발, 국민연금 어...",
+     "press": "nownews.seoul.co.kr",
+     "publishedAt": "2026-11-12T13:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003698891?sid=104"
     }
    ]
   },
@@ -81,7 +82,7 @@
     "daum"
    ],
    "articles90": 7,
-   "recent20": 2,
+   "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-12T12:08:00.000Z",
    "exclusive": false,
@@ -108,66 +109,34 @@
    ]
   },
   {
-   "keyword": "맨유, 캐릭 경질 결정",
+   "keyword": "곽선영 서류 탈락 담당자",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-12T12:02:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-12T12:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[오피셜] 맨유, 캐릭 감독 경질 “변화가 필요했다”",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-12T13:00:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/144/0001149543"
+     "title": "곽선영, 서류 탈락했는데 담당자 착각으로 합격+데뷔 “저한테는 은인”...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-12T13:28:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001186980"
     },
     {
-     "title": "맨유, 캐릭과 결별... 후임에 포체티노 유력",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-12T12:28:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/469/0000965314"
+     "title": "곽선영, 서류 탈락→담당자 착각으로 합격 통보…\"인생 바꾼 은인\"",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-12T12:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004466315"
     },
     {
-     "title": "[오피셜] 맨유가 결국 버렸다...'10경기 1승' 레전드 캐릭 감독 경질→훈...",
-     "press": "fourfourtwo.co.kr",
-     "publishedAt": "2026-11-12T12:25:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/411/0000089882"
-    }
-   ]
-  },
-  {
-   "keyword": "조희대",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T12:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[이슈] 與 \"내란세력 부활\" 조희대 탄핵론 재점화… '20일 구속만료' 한...",
-     "press": "polinews.co.kr",
-     "publishedAt": "2026-11-12T12:50:00.000Z",
-     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=748367"
-    },
-    {
-     "title": "법원행정처장, 여당 내 '한덕수 석방 시 조희대 탄핵' 주장에 \"부적절\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-12T12:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000965315?sid=102"
-    },
-    {
-     "title": "\"한덕수 풀어줄 결심\"…조희대 탄핵 재가동?",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-12T12:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001402651?sid=100"
+     "title": "곽선영, 경력 없어 서류 탈락했는데…담당자 실수로 '인생 역전' (거장항...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-12T12:44:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002079982"
     }
    ]
   }
@@ -175,9 +144,21 @@
  "hitRate": {
   "days": 7,
   "flagged": 383,
-  "matched": 138,
-  "avgLeadMin": 850,
+  "matched": 140,
+  "avgLeadMin": 838,
   "recent": [
+   {
+    "keyword": "공격하는 현대캐피탈 레오",
+    "hitKeyword": "현대캐피탈 3연승",
+    "hitAt": "2026-11-12T22:30:00+09:00",
+    "leadMin": 44
+   },
+   {
+    "keyword": "맨유, 캐릭 경질 결정",
+    "hitKeyword": "맨유 캐릭 감독 경질",
+    "hitAt": "2026-11-12T22:30:00+09:00",
+    "leadMin": 24
+   },
    {
     "keyword": "사고",
     "hitKeyword": "곽선영 엘리베이터 사고",
@@ -225,18 +206,6 @@
     "hitKeyword": "삼성 온양 메가프로젝트",
     "hitAt": "2026-11-12T21:00:00+09:00",
     "leadMin": 528
-   },
-   {
-    "keyword": "200만달러",
-    "hitKeyword": "오스틴 200만 달러 재계약",
-    "hitAt": "2026-11-12T21:00:00+09:00",
-    "leadMin": 377
-   },
-   {
-    "keyword": "충청권 메가프로젝트 착공",
-    "hitKeyword": "삼성 온양 메가프로젝트",
-    "hitAt": "2026-11-12T21:00:00+09:00",
-    "leadMin": 337
    }
   ]
  }
