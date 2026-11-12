@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T17:08:48.224Z",
+ "builtAt": "2026-11-12T17:18:51.497Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,63 +15,62 @@
    "sources": [
     "nate"
    ],
-   "articles90": 47,
-   "recent20": 6,
-   "press": 30,
-   "firstArticleAt": "2026-11-12T15:40:00.000Z",
+   "articles90": 43,
+   "recent20": 8,
+   "press": 28,
+   "firstArticleAt": "2026-11-12T15:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "엔비디아 구원투수에 CFO 크레스 선임…시총 4조달러 붕괴",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-12T17:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005842034?sid=101"
+     "title": "젠슨 황 엔비디아 CEO 사퇴...트럼프 \"애플 팀 쿡 이어받아야\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-12T17:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432165?sid=104"
     },
     {
-     "title": "젠슨 황, 엔비디아 CEO 사임… 주가는 장 초반 13% 급락",
-     "press": "dkilbo.com",
-     "publishedAt": "2026-11-12T17:04:00.000Z",
-     "link": "https://www.dkilbo.com/news/articleView.html?idxno=560642"
+     "title": "트럼프 \"젠슨 황 후임은 팀 쿡\"…엔비디아 CEO 공개 추천",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-12T17:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005603710?sid=104"
     },
     {
-     "title": "젠슨 황 퇴진에 엔비디아 임시 CEO 첫 메시지…“극도로 힘든 시기”",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-12T17:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003564923?sid=104"
+     "title": "\"젠슨 황, 추수감사절 전 美 의회 출석 합의…날짜 조율 중\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-12T17:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014319635?sid=104"
     }
    ]
   },
   {
-   "keyword": "김민석 최민희 감찰 지시",
+   "keyword": "amd 주가",
    "sources": [
-    "signal.bz",
-    "nate"
+    "google"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T15:48:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T15:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이번엔 \"이 대통령, 윤 탄핵 반대\"...민주, 최민희 감찰 착수",
+     "title": "젠슨 황 해임으로 누가 이득보나…브로드컴·AMD 주가 급등",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-12T17:02:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4444516"
+    },
+    {
+     "title": "엔비디아, 젠슨 황 CEO 즉각 사임 발표…33년 만에 퇴진·주가 13% 급락 ...",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-12T16:22:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261113010005034"
+    },
+    {
+     "title": "'젠슨황 충격'에 미 기술주 휘청...AMD·브로드컴 반사이익 기대",
      "press": "ytn.co.kr",
-     "publishedAt": "2026-11-12T16:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432154?sid=100"
-    },
-    {
-     "title": "최민희 “李대통령 尹 탄핵 반대했다” 靑 “사실무근, 유감”",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-12T15:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004009381?sid=100"
-    },
-    {
-     "title": "김민석, 최민희 윤리감찰 지시…\"언행 논란 객관적 확인 필요\"",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-12T15:48:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=624927"
+     "publishedAt": "2026-11-12T16:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432150?sid=104"
     }
    ]
   },
@@ -82,7 +81,7 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 2,
    "firstArticleAt": "2026-11-12T16:04:00.000Z",
    "exclusive": false,
