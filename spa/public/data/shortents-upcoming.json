@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T10:14:54.128Z",
+ "builtAt": "2026-11-12T10:24:57.469Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,60 +11,28 @@
  "measured": 25,
  "candidates": [
   {
-   "keyword": "젠슨 황 해임 논의",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 29,
-   "recent20": 8,
-   "press": 25,
-   "firstArticleAt": "2026-11-12T08:45:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'젠슨 황 없는 엔비디아' 현실 되나…엔비디아 이사회, 젠슨 황 해임 돌...",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-12T10:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001977939?sid=101"
-    },
-    {
-     "title": "젠슨 황 운명 곧 결론…엔비디아 긴급 이사회",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-12T10:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000367316?sid=104"
-    },
-    {
-     "title": "젠슨 황 'OUT'… AI 방향타 흔들",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-12T10:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003058891?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "김승원 브로커 4년 구형",
+   "keyword": "김승원 브로커 징역 4년",
    "sources": [
     "nate"
    ],
    "articles90": 26,
-   "recent20": 7,
-   "press": 25,
-   "firstArticleAt": "2026-11-12T08:52:00.000Z",
+   "recent20": 5,
+   "press": 26,
+   "firstArticleAt": "2026-11-12T08:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "공소청, '김승원 신약청탁 의혹' 브로커에 징역 4년 구형",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-12T10:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004209305?sid=102"
+    },
     {
      "title": "'김승원 청탁 의혹' 브로커에 징역 4년 구형…제넨셀 설립자는 6개월",
      "press": "ajunews.com",
      "publishedAt": "2026-11-12T10:14:00.000Z",
      "link": "https://www.ajunews.com/view/20261112190727603"
-    },
-    {
-     "title": "'김승원 신약 청탁 의혹' 브로커 징역 4년 구형…\"뇌물 약속 없었다\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-12T10:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005440551?sid=102"
     },
     {
      "title": "'김승원 의혹' 브로커 \"일상 무너져\" 법정서 눈물…징역 4년 구형",
@@ -75,22 +43,54 @@
    ]
   },
   {
-   "keyword": "성북 10대 살해 구속영장",
+   "keyword": "젠슨 황 해임 논의",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 21,
-   "recent20": 0,
-   "press": 18,
-   "firstArticleAt": "2026-11-12T08:52:00.000Z",
+   "articles90": 26,
+   "recent20": 1,
+   "press": 22,
+   "firstArticleAt": "2026-11-12T08:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] 공소청, ‘아들 성범죄’ 피해자 살해 남성 구속영장 청구",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-12T09:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001884811?sid=102"
+     "title": "'젠슨 황 없는 엔비디아' 현실 되나…엔비디아 이사회, 젠슨 황 해임 돌...",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-12T10:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001977939?sid=101"
+    },
+    {
+     "title": "젠슨 황 'OUT'… AI 방향타 흔들",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-12T10:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003058891?sid=101"
+    },
+    {
+     "title": "젠슨 황 운명 곧 결론…엔비디아 긴급 이사회",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-12T10:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000367316?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "50대 남성 구속영장",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 22,
+   "recent20": 1,
+   "press": 19,
+   "firstArticleAt": "2026-11-12T08:57:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘성매매 강요’ 전처 수사하자 범행?… 10대 살해범 구속영장 청구",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-12T10:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012292723?sid=102"
     },
     {
      "title": "'성북구 10대 살해' 50대에 구속영장 청구…범행 전 도구 구입",
@@ -111,10 +111,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 1,
-   "press": 14,
-   "firstArticleAt": "2026-11-12T08:48:00.000Z",
+   "articles90": 12,
+   "recent20": 0,
+   "press": 12,
+   "firstArticleAt": "2026-11-12T08:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -143,62 +143,94 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-12T08:47:00.000Z",
+   "articles90": 10,
+   "recent20": 3,
+   "press": 10,
+   "firstArticleAt": "2026-11-12T09:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "코인마켓 거래소 플라이빗도 해킹...고객 40명 정보유출",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-12T10:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004681656?sid=101"
+    },
+    {
+     "title": "플라이빗도 '다우오피스'로 뚫렸다…빗썸·한양증권 이어 세번째 해킹",
+     "press": "dnews.co.kr",
+     "publishedAt": "2026-11-12T10:20:00.000Z",
+     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611121913548980896"
+    },
     {
      "title": "코인마켓 거래소도 뚫렸다…고객 40명 개인정보 유출",
      "press": "wowtv.co.kr",
      "publishedAt": "2026-11-12T10:09:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/215/0001272587?sid=101"
-    },
-    {
-     "title": "코인마켓 거래소 ‘플라이빗’ 해킹…고객 40명 개인정보 유출",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-12T09:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012292702?sid=101"
-    },
-    {
-     "title": "플라이빗도 해킹···고객 40명 정보 유출",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-12T09:34:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=882842"
     }
    ]
   },
   {
-   "keyword": "여자축구, LA올림픽 예선 B조",
+   "keyword": "젠슨 황 관련 소식",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
    "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-12T08:46:00.000Z",
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-12T09:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "북한·중국 다 넘어야 하다니...'죽음의 조' 한국 여자축구 LA 올림픽 B조...",
-     "press": "fourfourtwo.co.kr",
-     "publishedAt": "2026-11-12T09:50:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/411/0000089879"
+     "title": "[뉴스추적] 전 세계 사랑받던 CEO의 몰락…머스크 \"젠슨 황 영입하면 영...",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-12T10:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001977942?sid=101"
     },
     {
-     "title": "'첫 올림픽 본선 도전' 한국 여자 축구, 북한·중국·필리핀과 최종예선...",
-     "press": "maniareport.com",
+     "title": "젠슨황 거취 불확실해 엔비디아 '휘청'…美증시 선물도 끌어내려",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-12T10:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006409121?sid=101"
+    },
+    {
+     "title": "젠슨 황 '또 다른 불륜' 보도 나오자 엔비디아 이사회, 해임 수순…트럼...",
+     "press": "pressian.com",
+     "publishedAt": "2026-11-12T10:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/002/0002465648?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "김지호 잘츠부르크 이적",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-12T09:08:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[공식발표] 황희찬 후배 생긴다! '대전 성골' 김지호, 17살에 韓 유럽파...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-12T10:01:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/109/0005639486"
+    },
+    {
+     "title": "대전 '성골 유스' 김지호, 오스트리아 잘츠부르크 이적",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-12T09:43:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/421/0009286696"
+    },
+    {
+     "title": "[오피셜] 바이에른 뮌헨 이어 잘츠부르크까지…대전 유스 출신 김지호,...",
+     "press": "mhnse.com",
      "publishedAt": "2026-11-12T09:42:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/425/0000214892"
-    },
-    {
-     "title": "한국 여자축구, LA 올림픽 최종예선서 북한·중국·필리핀과 B조",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-12T09:38:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/214/0001535226"
+     "link": "https://m.sports.naver.com/wfootball/article/445/0000489843"
     }
    ]
   },
@@ -235,66 +267,34 @@
    ]
   },
   {
-   "keyword": "방화",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-12T09:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "전남광주 아파트 방화 40대 \"극단적 선택하려 불 질러\"",
-     "press": "namdonews.com",
-     "publishedAt": "2026-11-12T10:06:00.000Z",
-     "link": "https://www.namdonews.com/news/articleView.html?idxno=929135"
-    },
-    {
-     "title": "광주 북구 아파트 방화 40대 입주민 입건",
-     "press": "jndn.com",
-     "publishedAt": "2026-11-12T09:20:00.000Z",
-     "link": "http://www.jndn.com/article.php?aid=1794475023443011005"
-    },
-    {
-     "title": "아파트 방화 40대 긴급체포…\"우울증에 목숨 끊으려 했다\" 진술(종합)",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-12T09:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004209287?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "정점식 정순택 대주교",
+   "keyword": "여자축구 LA 올림픽 최종예선 B조",
    "sources": [
     "nate"
    ],
-   "articles90": 5,
+   "articles90": 6,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-12T08:48:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-12T08:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "정점식, 정순택 대주교 예방…\"세계청년대회 전폭 지원\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-12T09:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001402627?sid=100"
+     "title": "북한·중국 다 넘어야 하다니...'죽음의 조' 한국 여자축구 LA 올림픽 B조...",
+     "press": "fourfourtwo.co.kr",
+     "publishedAt": "2026-11-12T09:50:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/411/0000089879"
     },
     {
-     "title": "정점식, 정순택 대주교 예방…“여야 함께 세계청년대회 준비”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-12T09:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012292680?sid=100"
+     "title": "'첫 올림픽 본선 도전' 한국 여자 축구, 북한·중국·필리핀과 최종예선...",
+     "press": "maniareport.com",
+     "publishedAt": "2026-11-12T09:42:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/425/0000214892"
     },
     {
-     "title": "국힘 정점식, 정순택 대주교 예방…\"서울 WYD 예산 확보 위해 노력\"",
-     "press": "news.cpbc.co.kr",
-     "publishedAt": "2026-11-12T08:54:00.000Z",
-     "link": "https://news.cpbc.co.kr/article/1176996?division=NAVER"
+     "title": "한국 여자축구, LA 올림픽 최종예선서 북한·중국·필리핀과 B조",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-12T09:38:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/214/0001535226"
     }
    ]
   },
@@ -334,7 +334,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 390,
+  "flagged": 393,
   "matched": 127,
   "avgLeadMin": 1057,
   "recent": [
