@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T05:32:32.745Z",
+ "builtAt": "2026-11-12T05:42:35.651Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,101 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 14,
+ "measured": 29,
  "candidates": [
   {
-   "keyword": "지지율 44%로 하락",
+   "keyword": "엔비디아, 젠슨 황 해임 논의",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 16,
-   "recent20": 5,
-   "press": 16,
-   "firstArticleAt": "2026-11-12T04:18:00.000Z",
+   "articles90": 57,
+   "recent20": 14,
+   "press": 44,
+   "firstArticleAt": "2026-11-12T04:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "20%마저 붕괴 위기 … 30대 李 지지율 34%p 급락, 20대도 휘청 [고용·주...",
-     "press": "newdaily.co.kr",
+     "title": "엔비디아 수장 바뀌나? 젠슨 황 CEO 해임 검토설 확산",
+     "press": "kbench.com",
+     "publishedAt": "2026-11-12T05:40:00.000Z",
+     "link": "https://kbench.com/?q=node/283293"
+    },
+    {
+     "title": "SK그룹, 최태원 사장단 총집결..엔비디아 쇼크·AI·리밸런싱 점검",
+     "press": "kpenews.com",
+     "publishedAt": "2026-11-12T05:38:00.000Z",
+     "link": "https://kpenews.com/View.aspx?No=4309677"
+    },
+    {
+     "title": "젠슨 황 '불륜 퇴출' 임박…임시 CEO 콜레트 크레스 CFO 부상",
+     "press": "4th.kr",
+     "publishedAt": "2026-11-12T05:38:00.000Z",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2121727"
+    }
+   ]
+  },
+  {
+   "keyword": "델핀 아르노 CEO 학위 수여식",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 47,
+   "recent20": 11,
+   "press": 19,
+   "firstArticleAt": "2026-11-12T04:19:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "디올 CEO 학위식에 재계 거물 집결…정의선·신동빈·이부진 한자리에",
+     "press": "news.mtn.co.kr",
+     "publishedAt": "2026-11-12T05:34:00.000Z",
+     "link": "https://news.mtn.co.kr/article/2026111214292227414"
+    },
+    {
+     "title": "디올 CEO 학위 수여식에 재계 한자리에",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-12T05:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014318599?sid=101"
+    },
+    {
+     "title": "디올 CEO 학위 수여식에 재계 총출동",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-12T05:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014318606?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "서울 아파트값 92주 상승",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 23,
+   "recent20": 4,
+   "press": 16,
+   "firstArticleAt": "2026-11-12T05:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "서울 아파트값 92주 연속 상승… 성동·강동구 하락 전환",
+     "press": "donga.com",
+     "publishedAt": "2026-11-12T05:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003762016?sid=101"
+    },
+    {
+     "title": "서울 아파트값 92주 연속 상승…강남3구는 최대 14주째 하락",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-12T05:32:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=172366"
+    },
+    {
+     "title": "[속보] 서울 집값 92주째 상승…강남3구 하락세, 성동·강동으로 번졌다",
+     "press": "mk.co.kr",
      "publishedAt": "2026-11-12T05:30:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/12/2026111200233.html"
-    },
-    {
-     "title": "李 대통령 지지율 '44%'…2주 전보다 2%p 하락 [NBS]",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-12T05:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005353170?sid=100"
-    },
-    {
-     "title": "李대통령 지지율, 2주전보다 2%p 하락한 44%···부정평가 47%[NBS]",
-     "press": "smartbizn.com",
-     "publishedAt": "2026-11-12T05:26:00.000Z",
-     "link": "https://www.smartbizn.com/news/articleView.html?idxno=159246"
+     "link": "https://n.news.naver.com/mnews/article/009/0005762732?sid=101"
     }
    ]
   },
@@ -47,30 +111,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 4,
-   "press": 14,
-   "firstArticleAt": "2026-11-12T04:06:00.000Z",
+   "articles90": 16,
+   "recent20": 3,
+   "press": 16,
+   "firstArticleAt": "2026-11-12T04:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "외국인 관광객 사상 최초 연 2000만명 돌파…문체부 \"관광대국 출발점\"",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-12T05:34:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/325097/?sc=Naver"
+    },
+    {
+     "title": "K-컬처 열풍 타고 방한 외국인 관광객 2천만 명 돌파…관광 소비 47.7% 급...",
+     "press": "issuenbiz.com",
+     "publishedAt": "2026-11-12T05:32:00.000Z",
+     "link": "http://www.issuenbiz.com/news/articleView.html?idxno=81530"
+    },
     {
      "title": "[N포커스] 외국인 관광객 2000만 시대…두 배 성장까지의 굴곡",
      "press": "nc.press",
      "publishedAt": "2026-11-12T05:24:00.000Z",
      "link": "https://www.nc.press/news/articleView.html?idxno=630835"
-    },
-    {
-     "title": "한국 찾은 외국인 관광객 사상 첫 2000만명 돌파…관광 소비 47.7% 급증",
-     "press": "abcn.kr",
-     "publishedAt": "2026-11-12T05:20:00.000Z",
-     "link": "https://www.abcn.kr/news/articleView.html?idxno=94429"
-    },
-    {
-     "title": "방한객 사상 첫 2000만 돌파…\"14년 만에 두 배\" 관광 새 역사",
-     "press": "korea.kr",
-     "publishedAt": "2026-11-12T05:16:00.000Z",
-     "link": "https://www.korea.kr/news/policyNewsView.do?newsId=148975576&call_from=naver_news"
     }
    ]
   },
@@ -107,47 +171,78 @@
    ]
   },
   {
-   "keyword": "오브더블루 1월 11일 데뷔",
+   "keyword": "스타벅스",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 11,
+   "articles90": 13,
    "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-12T04:07:00.000Z",
+   "press": 13,
+   "firstArticleAt": "2026-11-12T04:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "JYP 신인 보이그룹 오브더블루, 내년 1월11일 정식 데뷔",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-12T05:23:00.000Z",
-     "link": "https://m.entertain.naver.com/article/396/0000760751"
+     "title": "선열의 숭고한 뜻 잇는다.. 스타벅스, 독립유공자 후손에 장학금 지원",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-12T05:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005603395?sid=101"
     },
     {
-     "title": "'JYP 새 보이그룹' 오브더블루, 내년 1월 11일 데뷔 확정",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-12T05:18:00.000Z",
-     "link": "http://www.joynews24.com/view/2025508"
+     "title": "[똑똑한소비] 스타벅스, 다이닝브랜즈그룹, 파리바게뜨, 맥도날드, 교촌...",
+     "press": "ekn.kr",
+     "publishedAt": "2026-11-12T05:30:00.000Z",
+     "link": "https://www.ekn.kr/web/view.php?key=20261112021298851"
     },
     {
-     "title": "오브더블루, 데뷔 전부터 승부수 띄운다",
-     "press": "atstar1.com",
-     "publishedAt": "2026-11-12T05:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/415/0000053738"
+     "title": "스타벅스, 12년째 독립유공자 후손 지원…누적 장학금 11억원",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-12T05:22:00.000Z",
+     "link": "https://www.ajunews.com/view/20261112141717161"
+    }
+   ]
+  },
+  {
+   "keyword": "최민희 하이에나 고발",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 10,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-12T04:19:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'하이에나 떼' 발언 최민희…사진기자협회, 경찰 고발",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-12T05:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001977892?sid=100"
+    },
+    {
+     "title": "최민희, 기자들 ‘하이에나 떼’ 표현 재차 사과…사진기자협회 16일 고...",
+     "press": "news2day.co.kr",
+     "publishedAt": "2026-11-12T05:28:00.000Z",
+     "link": "https://www.news2day.co.kr/article/20261112500199"
+    },
+    {
+     "title": "'하이에나 떼들' 최민희 경찰에 고발",
+     "press": "thereport.co.kr",
+     "publishedAt": "2026-11-12T05:20:00.000Z",
+     "link": "https://www.thereport.co.kr/news/articleView.html?idxno=93299"
     }
    ]
   },
   {
    "keyword": "정동영 장관 발언 사과 요구",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 3,
-   "press": 10,
-   "firstArticleAt": "2026-11-12T04:03:00.000Z",
+   "articles90": 10,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-12T04:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -164,7 +259,7 @@
      "link": "https://n.news.naver.com/mnews/article/003/0014318525?sid=100"
     },
     {
-     "title": "\"北동영 장관\" 한 마디에 아수라장… '탈북민' 명칭 두고 조롱 오간 국회...",
+     "title": "\"北동영 장관\" 한마디에 아수라장… '탈북민' 명칭 두고 조롱 오간 국회...",
      "press": "hankookilbo.com",
      "publishedAt": "2026-11-12T05:13:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/469/0000965191?sid=100"
@@ -172,15 +267,78 @@
    ]
   },
   {
-   "keyword": "삼성, 호주리그 파견",
+   "keyword": "200만달러",
    "sources": [
-    "signal.bz",
-    "nate"
+    "google"
    ],
    "articles90": 7,
-   "recent20": 1,
+   "recent20": 3,
    "press": 7,
-   "firstArticleAt": "2026-11-12T04:12:00.000Z",
+   "firstArticleAt": "2026-11-12T04:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[야구] LG 오스틴, 외국인 타자 역대 최고 연봉 재계약… 1년 200만 달러",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-12T05:40:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3448170"
+    },
+    {
+     "title": "LG 오스틴, 외국인 타자 최초 연봉 200만 달러 돌파...KBO 역대 최고 대...",
+     "press": "ppss.kr",
+     "publishedAt": "2026-11-12T05:25:00.000Z",
+     "link": "https://www.ppss.kr/news/articleView.html?idxno=320628"
+    },
+    {
+     "title": "LG 오스틴, 역대 외국인 타자 '최고 연봉' … 200만 달러",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-12T05:24:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/12/2026111200238.html"
+    }
+   ]
+  },
+  {
+   "keyword": "투런 홈런 김주원",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 10,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-12T05:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[APBC] '답답했던 타선 깨운 한 방' 김주원, 호주전 '추격 신호탄' 투런...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-12T05:38:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261112000954"
+    },
+    {
+     "title": "김주원, 투런 홈런으로 한국 첫 득점…호주전 6-4 역전 이끌어",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-12T05:38:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=624809"
+    },
+    {
+     "title": "한국 부활! 김지찬 2루타→김주원 투런포→김휘집 만루 싹쓸이+박재현 ...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-12T05:24:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/477/0000638709"
+    }
+   ]
+  },
+  {
+   "keyword": "삼성, 호주리그 파견",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-12T04:14:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -211,7 +369,7 @@
     "google"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-12T04:14:00.000Z",
    "exclusive": false,
@@ -230,47 +388,111 @@
      "link": "https://n.news.naver.com/mnews/article/003/0014318452?sid=102"
     },
     {
-     "title": "“기다리는 마음 알기에”…뇌사 판정 아버지 장기기증 결심한 자녀들의...",
-     "press": "nongmin.com",
+     "title": "한일 양국 국민 “장기 기증자 예우하는 제도 필요”",
+     "press": "busan.com",
      "publishedAt": "2026-11-12T04:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/662/0000108290?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/082/0001406843?sid=102"
     }
    ]
   },
   {
-   "keyword": "2026 인텔 AI 서밋 개최",
+   "keyword": "홍콩익스프레스 팝업 개최",
    "sources": [
     "nate"
    ],
-   "articles90": 5,
-   "recent20": 1,
+   "articles90": 11,
+   "recent20": 2,
    "press": 5,
-   "firstArticleAt": "2026-11-12T04:10:00.000Z",
+   "firstArticleAt": "2026-11-12T04:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[현장] \"韓 반도체와 힘 모을 것\"…인텔, 국내서 AI 생태계 확대 나선다",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T05:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014318550?sid=101"
+     "title": "자넷 마오 홍콩익스프레스 CEO \"치열한 韓 LCC 경쟁…가성비·노선망으로...",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-12T05:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002248299?sid=101"
     },
     {
-     "title": "[ER현장] 인텔, 한국 AI 산업계에 '러브콜'…협력 체계 'K-AI 풀스택 얼라...",
-     "press": "econovill.com",
-     "publishedAt": "2026-11-12T05:04:00.000Z",
-     "link": "https://www.econovill.com/news/articleView.html?idxno=756990"
+     "title": "통합 LCC 출범 앞두고 외항사도 참전…홍콩익스프레스, 한국 공략 속도",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-12T05:36:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1320217&inflow=N"
     },
     {
-     "title": "인텔, 韓 기업과 AI 생태계 구축…'K-AI 풀스택 얼라이언스' 출범",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-12T04:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003484999?sid=105"
+     "title": "성수동에 팝업 여는 홍콩익스프레스…국내 LCC와 경쟁 자신감",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-12T05:03:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261112000794"
     }
    ]
   },
   {
-   "keyword": "수능 대박 기원",
+   "keyword": "신장식 최인호 정무수석",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 25,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-12T04:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "신장식 \"여당 쪽 엇박자 걱정\"…최인호 \"부동산 정책 후퇴 없다\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-12T05:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009285916?sid=100"
+    },
+    {
+     "title": "대화하는 신장식 대표·최인호 정무수석",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-12T05:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009285861?sid=100"
+    },
+    {
+     "title": "인사말하는 최인호 정무수석",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-12T05:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009285862?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "이유리, 사귀기 전 결혼 결심",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-12T04:31:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이유리 \"♥남편과 사귀기 전 결혼 결심\" (편스토랑)",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-12T05:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000327679"
+    },
+    {
+     "title": "'편스토랑' 이유리 “남편과 사귀기도 전에 결혼하자고 했다”",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-12T05:08:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2647429"
+    },
+    {
+     "title": "이유리, 남편과 사귀기도 전 결혼 결심…“내가 먼저 말했다” (편스토...",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-12T04:31:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001304432"
+    }
+   ]
+  },
+  {
+   "keyword": "수능 대박 기원해요!",
    "sources": [
     "nate"
    ],
@@ -282,12 +504,6 @@
    "capped": false,
    "samples": [
     {
-     "title": "'수능 대박' 선배 응원하는 후배",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-12T04:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009285749?sid=102"
-    },
-    {
      "title": "수능 대박 기원하는 '수능 부적'",
      "press": "news1.kr",
      "publishedAt": "2026-11-12T04:51:00.000Z",
@@ -298,16 +514,34 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-12T04:51:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009285744?sid=102"
+    },
+    {
+     "title": "'수능 대박' 선배 응원하는 후배",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-12T04:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009285749?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 349,
+  "flagged": 356,
   "matched": 135,
-  "avgLeadMin": 1579,
+  "avgLeadMin": 1580,
   "recent": [
+   {
+    "keyword": "젠슨 황 스캔들 논란",
+    "hitKeyword": "젠슨 황 불륜설 논란",
+    "hitAt": "2026-11-12T14:30:00+09:00",
+    "leadMin": 566
+   },
+   {
+    "keyword": "ssg 랜더스",
+    "hitKeyword": "김민식 SSG 결별",
+    "hitAt": "2026-11-12T14:30:00+09:00",
+    "leadMin": 48
+   },
    {
     "keyword": "젠슨 황 불륜 스캔들",
     "hitKeyword": "젠슨 황 불륜 해임 위기",
@@ -355,18 +589,6 @@
     "hitKeyword": "크러쉬 조이 듀엣",
     "hitAt": "2026-11-12T12:00:00+09:00",
     "leadMin": 205
-   },
-   {
-    "keyword": "젠슨 황 해임 준비",
-    "hitKeyword": "젠슨 황 해임 추진",
-    "hitAt": "2026-11-12T12:00:00+09:00",
-    "leadMin": 74
-   },
-   {
-    "keyword": "손흥민 김민재 공동 입장문",
-    "hitKeyword": "손흥민 대표팀 불화설 해명",
-    "hitAt": "2026-11-12T11:30:00+09:00",
-    "leadMin": 13
    }
   ]
  }
