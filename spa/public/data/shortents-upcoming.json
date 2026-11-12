@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T02:06:42.692Z",
+ "builtAt": "2026-11-12T02:16:46.048Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 14,
  "candidates": [
   {
    "keyword": "아세안 APEC 참석",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 77,
-   "recent20": 10,
-   "press": 64,
-   "firstArticleAt": "2026-11-12T00:41:00.000Z",
+   "articles90": 75,
+   "recent20": 11,
+   "press": 65,
+   "firstArticleAt": "2026-11-12T00:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李, 아세안·APEC 참석차 필리핀·중국 방문…“북·미대화 없을 듯”",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-12T01:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003564689?sid=100"
+     "title": "이 대통령, 16~19일 아세안·APEC 순방...AI·공급망 협력 강화",
+     "press": "enewstoday.co.kr",
+     "publishedAt": "2026-11-12T02:14:00.000Z",
+     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2491587"
     },
     {
-     "title": "이 대통령, 16~19일 아세안·APEC 정상회의 참석",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-12T01:57:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000082049"
+     "title": "李 대통령, 16~19일 아세안·APEC 순방…시진핑과 만남 주목",
+     "press": "industrynews.co.kr",
+     "publishedAt": "2026-11-12T02:12:00.000Z",
+     "link": "https://www.industrynews.co.kr/news/articleView.html?idxno=89408"
     },
     {
-     "title": "靑 “APEC 계기 북미 접촉 가능성 작아”…미·중·러 회동 가능성도 주...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-12T01:56:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2647291"
+     "title": "이 대통령 아세안·APEC 정상회의 참석… ‘조작기소 특검법’ 총리가 ...",
+     "press": "busan.com",
+     "publishedAt": "2026-11-12T02:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001406829?sid=100"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 80,
-   "recent20": 17,
-   "press": 62,
-   "firstArticleAt": "2026-11-12T00:44:00.000Z",
+   "articles90": 81,
+   "recent20": 18,
+   "press": 64,
+   "firstArticleAt": "2026-11-12T00:50:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "젠슨 황 없는 엔비디아는?…월가 \"주가 20% 조정 가능\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-12T02:04:00.000Z",
-     "link": "https://www.ajunews.com/view/20261112105641569"
+     "title": "'젠슨 황 없는' 엔비디아 가능성 변수로...한국 반도체 기업들 셈법은",
+     "press": "opinionnews.co.kr",
+     "publishedAt": "2026-11-12T02:16:00.000Z",
+     "link": "http://www.opinionnews.co.kr/news/articleView.html?idxno=146972"
     },
     {
-     "title": "‘불륜’ 젠슨황 해임 위기...\"엔비디아 이사회 후임 CEO 찾는 중\"",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-12T02:04:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/325061/?sc=Naver"
+     "title": "젠슨 황 '사내 불륜' 상대 킴벌리 파월은 누구?…남편 있는 48세 여성 임...",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-12T02:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000650585?sid=104"
     },
     {
-     "title": "엔비디아, 황 CEO 해임 준비 보도에 시간외 8.6% 급락",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-12T02:02:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=781096"
+     "title": "젠슨 황, 유부녀 임원과도 사내불륜?…엔비디아 이사회, 오늘 해임하나",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-12T02:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003564698?sid=104"
     }
    ]
   },
@@ -80,30 +80,62 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 60,
-   "recent20": 18,
-   "press": 51,
-   "firstArticleAt": "2026-11-12T00:37:00.000Z",
+   "articles90": 54,
+   "recent20": 12,
+   "press": 46,
+   "firstArticleAt": "2026-11-12T00:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[컨콜] 네이버 AI 팩토리, 2조원 첫 계약…2027년부터 이익 기여",
-     "press": "itdaily.kr",
-     "publishedAt": "2026-11-12T02:04:00.000Z",
-     "link": "https://www.itdaily.kr/news/articleView.html?idxno=242870"
+     "title": "네이버, 매출 3조4700억에도 영업익 21% 감소···AI 투자 부담 커졌다",
+     "press": "enewstoday.co.kr",
+     "publishedAt": "2026-11-12T02:14:00.000Z",
+     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2491498"
     },
     {
-     "title": "네이버 최수연 \"2030년까지 물류부문 1조 투자 필요해\"",
-     "press": "smartbizn.com",
-     "publishedAt": "2026-11-12T02:04:00.000Z",
-     "link": "https://www.smartbizn.com/news/articleView.html?idxno=159197"
+     "title": "[컨센셔스쇼크] 네이버, 영업익 2분기 연속 하락…\"AI 팩토리·에이전트...",
+     "press": "megaeconomy.co.kr",
+     "publishedAt": "2026-11-12T02:14:00.000Z",
+     "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065575896399243"
     },
     {
-     "title": "[Invest]네이버, 본업 수익성 악화했는데…AI 반등은 2028년에나 기대",
-     "press": "investchosun.com",
-     "publishedAt": "2026-11-12T02:02:00.000Z",
-     "link": "https://www.investchosun.com/site/data/html_dir/2026/11/12/2026111280065.html"
+     "title": "네이버 \"구매·예약 돕는 '개인형 AI 에이전트 앱' 연내 출시…광고 과...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-12T02:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003154348?sid=105"
+    }
+   ]
+  },
+  {
+   "keyword": "손흥민 김민재 공동 입장문",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 42,
+   "recent20": 7,
+   "press": 41,
+   "firstArticleAt": "2026-11-12T00:48:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "96라인 은퇴 없다, 손흥민과 갈등설도 '끝'!…이보다 깔끔할 수 없는 '고...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-12T02:15:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/076/0004466070"
+    },
+    {
+     "title": "\"국대 은퇴 걸고 요구한 적 없다\"…손흥민·김민재 등 '92·96라인' 공동...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-12T02:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005603275?sid=102"
+    },
+    {
+     "title": "축구 국가대표 손흥민·이재성·김민재·황인범·황희찬 입장문 발표",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-12T02:10:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611120180"
     }
    ]
   },
@@ -114,30 +146,30 @@
     "nate",
     "daum"
    ],
-   "articles90": 50,
-   "recent20": 30,
-   "press": 32,
-   "firstArticleAt": "2026-11-12T01:30:00.000Z",
+   "articles90": 45,
+   "recent20": 13,
+   "press": 30,
+   "firstArticleAt": "2026-11-12T01:39:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "李 “충청권 392조 투자에 23.6조 추가…112개 기업 동참”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-12T02:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004681374?sid=100"
+     "title": "전영현 삼성전자 부회장 \"충청권에 144조원 투자…글로벌 첨단 패키징 ...",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-12T02:14:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101134"
     },
     {
-     "title": "李 대통령 \"메가프로젝트로 국민 모두의 성장 이뤄낼 것\"",
-     "press": "wolyo.co.kr",
-     "publishedAt": "2026-11-12T02:04:00.000Z",
-     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=320391"
+     "title": "李 \"충청권 메가프로젝트 본격 착공…대체불가 대한민국 디딤돌 될 터\"",
+     "press": "newsprime.co.kr",
+     "publishedAt": "2026-11-12T02:14:00.000Z",
+     "link": "http://www.newsprime.co.kr/news/article.html?no=754695"
     },
     {
-     "title": "전영현 \"충청권, 최첨단 반도체 패키징 메카로\"… 온양캠퍼스 5라인 착...",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-12T02:02:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3448082"
+     "title": "HBM 착공식서 李대통령, 이재용 모두 웃음 터진 이유는",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-12T02:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004009227?sid=101"
     }
    ]
   },
@@ -146,63 +178,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 31,
-   "recent20": 7,
-   "press": 24,
+   "articles90": 36,
+   "recent20": 6,
+   "press": 27,
    "firstArticleAt": "2026-11-12T01:13:00.000Z",
-   "exclusive": false,
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] 특검, '부실한 보안점검·허위 문서 작성' 중앙선관위 압수수색",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-12T01:58:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3448080"
+     "title": "[단독] 특검, 선관위 보안점검 결과 '점수 손질' 정황 포착…중앙선관위...",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-12T02:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000650581?sid=102"
     },
     {
-     "title": "임태희 전 교육감 \"이태한 특검, 경기도교육감 선거 핵심 의혹 조사해야...",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-12T01:54:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3448077"
+     "title": "특검, '허위 보안문서' 의혹 중앙선관위 서버 압수수색",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-12T02:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000551194?sid=102"
     },
     {
-     "title": "개표상황표 은닉·위조 의혹…임태희 \"특검, 경기도 전부 조사해야\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T01:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014317742?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "출근하는 이용철 후보자",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 17,
-   "recent20": 1,
-   "press": 17,
-   "firstArticleAt": "2026-11-12T00:37:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "장동혁 \"李 재판 재개해야\"…정점식 \"이용철, 공소취소 입장 밝혀라\"",
-     "press": "iminju.net",
-     "publishedAt": "2026-11-12T01:50:00.000Z",
-     "link": "http://www.iminju.net/news/articleView.html?idxno=172335"
-    },
-    {
-     "title": "“공소취소는 예단” 또 말 아낀 이용철...특검 앞두고 모호한 태도",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-12T01:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003564686?sid=102"
-    },
-    {
-     "title": "이용철 “공소 취소, 지금은 답변 부적절”… ‘5.18 보상금 신청 이유...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-12T01:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001204278?sid=102"
+     "title": "중앙선관위, 보안 점검에서도 허위 공문서 작성 정황… 선관위 특검 압...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-12T02:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000965163?sid=102"
     }
    ]
   },
@@ -211,13 +210,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 4,
-   "press": 15,
+   "articles90": 16,
+   "recent20": 3,
+   "press": 16,
    "firstArticleAt": "2026-11-12T01:14:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "박상원 금보원장, 정보유출 사과했지만... 구체 설명없이 1분여 만에 퇴...",
+     "press": "thelec.kr",
+     "publishedAt": "2026-11-12T02:14:00.000Z",
+     "link": "https://www.thelec.kr/news/articleView.html?idxno=65331"
+    },
     {
      "title": "금융보안원도 정보 유출…박상원 원장 대국민 사과",
      "press": "cstimes.com",
@@ -229,12 +234,72 @@
      "press": "news2day.co.kr",
      "publishedAt": "2026-11-12T02:02:00.000Z",
      "link": "https://www.news2day.co.kr/article/20261112500164"
+    }
+   ]
+  },
+  {
+   "keyword": "출근하는 이용철 후보자",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 16,
+   "recent20": 2,
+   "press": 16,
+   "firstArticleAt": "2026-11-12T01:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'5·18 보상금 의혹' 이용철, 논란에 묵묵부답…'자질 논란' 도마 위",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-12T02:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003154351?sid=102"
     },
     {
-     "title": "박상원 금융보안원장, 정보유출 사고 공식 사과…\"전산시스템 전수점검...",
+     "title": "이용철, 공소취소 질문에 \"예단\"…특검·5·18 보상금엔 침묵",
      "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-12T01:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000551170?sid=101"
+     "publishedAt": "2026-11-12T02:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000551196?sid=102"
+    },
+    {
+     "title": "장동혁 \"李 재판 재개해야\"…정점식 \"이용철, 공소취소 입장 밝혀라\"",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-12T01:50:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=172335"
+    }
+   ]
+  },
+  {
+   "keyword": "교사",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 15,
+   "recent20": 5,
+   "press": 15,
+   "firstArticleAt": "2026-11-12T01:00:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "학교 영양교사·영양사, 친환경농산물 산지서 생산자 고충 체험",
+     "press": "youngnong.co.kr",
+     "publishedAt": "2026-11-12T02:12:00.000Z",
+     "link": "https://www.youngnong.co.kr/news/articleView.html?idxno=71848"
+    },
+    {
+     "title": "부산교육청, 유치원 수업혁신 교사 14명 시상…우수사례 현장 확산",
+     "press": "kpinews.kr",
+     "publishedAt": "2026-11-12T02:07:00.000Z",
+     "link": "https://www.kpinews.kr/newsView/1065578301909323"
+    },
+    {
+     "title": "성범죄·절도교사·살인까지...15세 피해자 둘러싼 충격적 관계 [이슈톺...",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-12T02:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002431774?sid=102"
     }
    ]
   },
@@ -243,13 +308,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 17,
+   "articles90": 14,
    "recent20": 2,
-   "press": 15,
-   "firstArticleAt": "2026-11-12T00:37:00.000Z",
+   "press": 13,
+   "firstArticleAt": "2026-11-12T00:47:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "강동원·김고은 혼인...'폭싹 속았수다' 감독 X '눈물의 여왕' 작가 만남...",
+     "press": "nc.press",
+     "publishedAt": "2026-11-12T02:07:00.000Z",
+     "link": "https://www.nc.press/news/articleView.html?idxno=630816"
+    },
     {
      "title": "강동원·김고은, 100년 원수 집안 부부로…넷플릭스 '혼: 삼각의 시간' ...",
      "press": "ajunews.com",
@@ -261,54 +332,47 @@
      "press": "tvreport.co.kr",
      "publishedAt": "2026-11-12T01:56:00.000Z",
      "link": "https://m.entertain.naver.com/article/213/0001408014"
-    },
-    {
-     "title": "강동원♥김고은, 부부호흡 맞춘다...김원석·박지은 신작 넷플릭스 ‘혼...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-12T01:40:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001147045"
     }
    ]
   },
   {
-   "keyword": "교사",
+   "keyword": "김진표, 독일에서 총격 목격",
    "sources": [
-    "signal.bz",
-    "google"
+    "nate"
    ],
-   "articles90": 13,
-   "recent20": 3,
-   "press": 13,
-   "firstArticleAt": "2026-11-12T00:40:00.000Z",
+   "articles90": 3,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-12T01:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "전남광주교육청, 퇴직교사들의 따뜻한 기록 나눔 특별전",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-12T02:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/468/0001280461?sid=102"
+     "title": "\"호텔서 총성 4발, 화장실 문 잠그고 숨어\"…독일 간 김진표 '공포의 시...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-12T01:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009285165?sid=102"
     },
     {
-     "title": "경남 유·초·특수교사 임용 1차 시험 응시율 90.2%",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-12T01:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004209029?sid=102"
+     "title": "김진표, 독일 총격 사건 현장에 있었다…“4발 총성에 화장실로 대피”",
+     "press": "segye.com",
+     "publishedAt": "2026-11-12T01:16:00.000Z",
+     "link": "https://m.entertain.naver.com/article/022/0004174573"
     },
     {
-     "title": "강원랜드사회공헌재단, 2026 학교사회복지사업 성과공유회 개최",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-12T01:50:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2647296"
+     "title": "\"탕! 탕!\" 김진표, 독일 호텔 투숙 중 총격전 목격…살인자는 옆 방",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-12T01:14:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009285063"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 393,
-  "matched": 162,
-  "avgLeadMin": 1413,
+  "flagged": 380,
+  "matched": 154,
+  "avgLeadMin": 1478,
   "recent": [
    {
     "keyword": "db 하이텍",
