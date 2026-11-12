@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T13:46:30.003Z",
+ "builtAt": "2026-11-12T13:56:39.260Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 21,
  "candidates": [
   {
    "keyword": "김민석 최민희 감찰 지시",
@@ -17,30 +17,30 @@
     "nate",
     "daum"
    ],
-   "articles90": 29,
-   "recent20": 2,
-   "press": 27,
-   "firstArticleAt": "2026-11-12T12:18:00.000Z",
+   "articles90": 27,
+   "recent20": 3,
+   "press": 24,
+   "firstArticleAt": "2026-11-12T12:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[투나잇이슈] 김민석·정청래 갈등에 최민희 감찰지시까지…與 내홍",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-12T13:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000925651?sid=100"
+    },
+    {
+     "title": "“李 대통령 ‘尹 탄핵 반대’” 최민희 발언, 청와대 공개 반박",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-12T13:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001884836?sid=100"
+    },
     {
      "title": "'하이에나' 이어 '이 대통령의 윤석열 탄핵 반대' 까지…민주당, 최민희...",
      "press": "wolyo.co.kr",
      "publishedAt": "2026-11-12T13:44:00.000Z",
      "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=320434"
-    },
-    {
-     "title": "최민희 \"李대통령도 尹 탄핵 반대\"…靑 즉각 반박에 김민석 감찰 지시",
-     "press": "weekly.chosun.com",
-     "publishedAt": "2026-11-12T13:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/053/0000063003?sid=100"
-    },
-    {
-     "title": "'이 대통령도 윤 탄핵 반대' 최민희에 김민석, 감찰조사 지시…최민희 ...",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-12T13:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000520513?sid=100"
     }
    ]
   },
@@ -49,30 +49,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 23,
+   "articles90": 27,
    "recent20": 6,
-   "press": 17,
+   "press": 19,
    "firstArticleAt": "2026-11-12T12:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[시사천국] 젠슨 황 스캔들 왜 지금인가…미 권력투쟁과 반도체 의혹",
-     "press": "news.cpbc.co.kr",
-     "publishedAt": "2026-11-12T13:44:00.000Z",
-     "link": "https://news.cpbc.co.kr/article/1177001?division=NAVER"
+     "title": "[속보] 젠슨황, 엔비디아 CEO 사퇴 <로이터>",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-12T13:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016439475?sid=104"
     },
     {
-     "title": "젠슨 황의 엔비디아, '세계 최고 직장'서도 자취 감췄다…3년 연속 선정...",
-     "press": "newsway.co.kr",
-     "publishedAt": "2026-11-12T13:38:00.000Z",
-     "link": "https://www.newsway.co.kr/news/view?ud=2026111222342257219"
-    },
-    {
-     "title": "젠슨 황 해임 위기에 엔비디아 장전 8% 폭락",
+     "title": "[속보] 젠슨 황 엔비디아 CEO 사임 결정",
      "press": "fnnews.com",
-     "publishedAt": "2026-11-12T13:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005603700?sid=101"
+     "publishedAt": "2026-11-12T13:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005603702?sid=101"
+    },
+    {
+     "title": "[속보] 엔비디아, 젠슨 황 CEO 교체…임시 CEO에 콜레트 크레스 CFO",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-12T13:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014319587?sid=104"
     }
    ]
   },
@@ -82,7 +82,7 @@
     "nate"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-12T12:34:00.000Z",
    "exclusive": false,
@@ -109,14 +109,78 @@
    ]
   },
   {
+   "keyword": "곽선영 서류 탈락 합격",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T12:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "곽선영, 서류 탈락했는데 담당자 착각으로 합격+데뷔 “저한테는 은인”...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-12T13:28:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001186980"
+    },
+    {
+     "title": "\"원래 서류 탈락이었다\"…'거장항준' 곽선영, 서류 탈락이 무대 선 이유",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-12T13:20:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16275240"
+    },
+    {
+     "title": "곽선영, 서류 탈락→담당자 착각으로 합격 통보…\"인생 바꾼 은인\"",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-12T12:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004466315"
+    }
+   ]
+  },
+  {
+   "keyword": "폭설",
+   "sources": [
+    "google"
+   ],
+   "articles90": 20,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-12T12:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'폭설' 구교환→노윤서, 겨울 감성 물씬 '연기 신'들의 VIP 시사회 [K직캠...",
+     "press": "starnewsk.com",
+     "publishedAt": "2026-11-12T13:36:00.000Z",
+     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60973"
+    },
+    {
+     "title": "[포토] 이도아, '독보적인 아우라'(폭설 VIP 시사회)",
+     "press": "newsfreezone.co.kr",
+     "publishedAt": "2026-11-12T13:08:00.000Z",
+     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=719128"
+    },
+    {
+     "title": "[포토] 이도아, '매력적인 단발'(폭설 VIP 시사회)",
+     "press": "newsfreezone.co.kr",
+     "publishedAt": "2026-11-12T13:04:00.000Z",
+     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=719127"
+    }
+   ]
+  },
+  {
    "keyword": "최성훈 개그맨",
    "sources": [
     "daum"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T12:18:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-12T12:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -143,7 +207,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 382,
+  "flagged": 384,
   "matched": 140,
   "avgLeadMin": 838,
   "recent": [
