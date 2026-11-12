@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T08:03:46.230Z",
+ "builtAt": "2026-11-12T08:13:49.754Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,29 +16,29 @@
     "nate"
    ],
    "articles90": 94,
-   "recent20": 23,
+   "recent20": 19,
    "press": 59,
-   "firstArticleAt": "2026-11-12T06:46:00.000Z",
+   "firstArticleAt": "2026-11-12T06:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼성증권, 3분기 순익 27.7% 감소…WM·IB 성장에 누적 실적은 ‘호조’",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-12T08:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/117/0004124522?sid=103"
+     "title": "한화생명, 보험손익 개선에 3분기 누계 순익 전년比 12.6%↑",
+     "press": "weekly.hankooki.com",
+     "publishedAt": "2026-11-12T08:12:00.000Z",
+     "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7193659"
     },
     {
-     "title": "메리츠증권, 3분기 누적 순익 12% 성장",
-     "press": "press9.kr",
-     "publishedAt": "2026-11-12T08:02:00.000Z",
-     "link": "http://www.press9.kr/news/articleView.html?idxno=86204"
+     "title": "한화생명, 3분기 누적 순익 8656억…보험손익 176% 증가",
+     "press": "newstopkorea.com",
+     "publishedAt": "2026-11-12T08:10:00.000Z",
+     "link": "https://www.newstopkorea.com/news/articleView.html?idxno=49001"
     },
     {
-     "title": "한화투자증권, 3분기 누적 순익 577억…WM·홀세일 선방",
-     "press": "popcornnews.net",
-     "publishedAt": "2026-11-12T08:00:00.000Z",
-     "link": "http://www.popcornnews.net/news/articleView.html?idxno=139880"
+     "title": "한화손보, 3분기 순익 961억원...보험손익 2배 늘었다",
+     "press": "asiaa.co.kr",
+     "publishedAt": "2026-11-12T08:08:00.000Z",
+     "link": "https://www.asiaa.co.kr/news/articleView.html?idxno=270870"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 40,
-   "recent20": 10,
-   "press": 33,
-   "firstArticleAt": "2026-11-12T06:34:00.000Z",
+   "articles90": 37,
+   "recent20": 7,
+   "press": 31,
+   "firstArticleAt": "2026-11-12T06:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'첩첩산중' 코스피, 젠슨 황 해임설·옵션만기 '이중고'에 3일 만에 하락",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-12T08:02:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2647518"
+     "title": "'불륜 스캔들' 젠슨 황 해임 위기…이사회, 거취 논의 중",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-12T08:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001402594?sid=104"
     },
     {
-     "title": "'엔비디아는 위기인데'‥인텔, 韓기업과 AI 동맹 출범",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-12T08:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005841959?sid=101"
+     "title": "엔비디아 젠슨 황 해임 수순 밟나…이사회, 차기 CEO 물색 본격화",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-12T08:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003482341?sid=105"
     },
     {
-     "title": "‘젠슨 황 스캔들’ 조사, 한인 전 연방검사가 맡는다",
-     "press": "koreatimes.com",
-     "publishedAt": "2026-11-12T08:00:00.000Z",
-     "link": "https://www.koreatimes.com/article/11631181?utm_source=naver"
+     "title": "젠슨 황 퇴출되면 AI 산업 대혼란?…삼성전자·SK하이닉스 HBM4 공급망도...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-12T08:04:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16274997"
     }
    ]
   },
@@ -79,30 +79,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 29,
-   "recent20": 9,
-   "press": 25,
-   "firstArticleAt": "2026-11-12T06:36:00.000Z",
+   "articles90": 28,
+   "recent20": 6,
+   "press": 24,
+   "firstArticleAt": "2026-11-12T06:46:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "김승우, 절도 피소에 방역법도 위반했나···집합금지 때 유흥업소 의...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-12T08:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001149492"
+     "title": "김승우 절도 피소에 '우리동네 건강왕' 비상…\"진행 여부 확인 중\"",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-12T08:12:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16275008"
     },
     {
-     "title": "김승우, 지인 현금 2200만원 절도 혐의 피소…양측 진실 공방",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-12T08:00:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261112001355"
+     "title": "장난으로 2천만 원 슬쩍? 김승우, 절도 혐의로 피소",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-12T08:12:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001280640"
     },
     {
-     "title": "김승우, 유흥주점서 '현금 2200만 원 절도' 피소 여파…새 MC 맡은 '건강...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-12T07:54:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005639433"
+     "title": "김승우 절도 혐의 피소…\"술자리 장난, 이미 변제했다\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-12T08:03:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014319338"
     }
    ]
   },
@@ -111,10 +111,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 39,
-   "recent20": 3,
-   "press": 17,
-   "firstArticleAt": "2026-11-12T06:35:00.000Z",
+   "articles90": 36,
+   "recent20": 1,
+   "press": 16,
+   "firstArticleAt": "2026-11-12T06:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -144,18 +144,12 @@
     "signal.bz"
    ],
    "articles90": 14,
-   "recent20": 2,
+   "recent20": 0,
    "press": 14,
    "firstArticleAt": "2026-11-12T07:00:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
-    {
-     "title": "정부, CPTPP 농업 분야 민관협의체 구성…“가입 전제 아닌 원점 소통”",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-12T07:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003698812?sid=101"
-    },
     {
      "title": "농식품부, CPTPP 대응 민관협의체 가동…“가입 절차와 무관”",
      "press": "etnews.com",
@@ -163,10 +157,16 @@
      "link": "https://n.news.naver.com/mnews/article/030/0003485178?sid=101"
     },
     {
-     "title": "CPTPP 농업 영향 따진다⋯정부·농업계 민관협의체 가동",
-     "press": "etoday.co.kr",
+     "title": "정부, CPTPP 농업 분야 민관협의체 구성…“가입 전제 아닌 원점 소통”",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-12T07:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003698812?sid=101"
+    },
+    {
+     "title": "농식품부, CPTPP 대응 민관협의체 구성…농업계 의견 수렴",
+     "press": "ajunews.com",
      "publishedAt": "2026-11-12T07:02:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2647290"
+     "link": "https://www.ajunews.com/view/20261112091014044"
     }
    ]
   },
@@ -178,10 +178,16 @@
    "articles90": 15,
    "recent20": 1,
    "press": 13,
-   "firstArticleAt": "2026-11-12T06:41:00.000Z",
+   "firstArticleAt": "2026-11-12T06:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "李대통령 방중 앞두고 한중 외교장관 회담…서해 구조물·북핵 논의 주...",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-12T08:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000650669?sid=100"
+    },
     {
      "title": "13일 베이징서 한중 외교장관회담…양자관계·한반도 정세 논의",
      "press": "yonhapnewstv.co.kr",
@@ -193,44 +199,6 @@
      "press": "yna.co.kr",
      "publishedAt": "2026-11-12T07:43:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016439174?sid=100"
-    },
-    {
-     "title": "조현, 내일 베이징서 왕이와 회담…정상회담 의제 조율 주목",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-12T07:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001402587?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "오산 원룸 시신 발견",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 13,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-12T06:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "오산 원룸서 대형 봉투에 담긴 30대 남성 시신 발견",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-12T07:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001977914?sid=102"
-    },
-    {
-     "title": "경기 오산 원룸서 30대 남자 시신 담긴 대형봉투 발견",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-12T07:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003698804?sid=102"
-    },
-    {
-     "title": "오산시 한 원룸서, 비닐 봉투에 담긴 30대 남성 시신 발견",
-     "press": "kihoilbo.co.kr",
-     "publishedAt": "2026-11-12T07:34:00.000Z",
-     "link": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3040801"
     }
    ]
   },
@@ -239,62 +207,62 @@
    "sources": [
     "nate"
    ],
-   "articles90": 11,
-   "recent20": 4,
-   "press": 10,
+   "articles90": 14,
+   "recent20": 6,
+   "press": 12,
    "firstArticleAt": "2026-11-12T07:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"브로맨스 1등\"·\"짜릿 전율\"…'폭설' 김윤석·구교환, 팽팽한 연기 앙상...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-12T07:59:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009286573"
-    },
-    {
-     "title": "김윤석·구교환, 고립된 기차역서 터진 '폭설' 연기 시너지…\"케미 1등은...",
+     "title": "'이옥섭과 결혼' 구교환, 유부남 공개 후 첫 영화 '폭설'...개인사 언급...",
      "press": "starnewsk.com",
-     "publishedAt": "2026-11-12T07:56:00.000Z",
-     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60959"
+     "publishedAt": "2026-11-12T08:12:00.000Z",
+     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60960"
     },
     {
-     "title": "[Y현장] '폭설' 김윤석 \"구교환, 심장에 비수 꽂는 눈빛…브로맨스 호흡...",
-     "press": "star.ytn.co.kr",
-     "publishedAt": "2026-11-12T07:56:00.000Z",
-     "link": "https://m.entertain.naver.com/article/052/0002431970"
+     "title": "[종합] 김윤석·구교환의 밀실 서스펜스…'폭설' 위기의 韓영화 구할까",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-12T08:10:00.000Z",
+     "link": "https://www.ajunews.com/view/20261112170319259"
+    },
+    {
+     "title": "김윤석 \"에겐남 구교환, 감당할 수 없는 힘 있더라…브로맨스 1등\" ('폭...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-12T08:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001408071"
     }
    ]
   },
   {
-   "keyword": "스타벅스",
+   "keyword": "오산 원룸 시신 발견",
    "sources": [
-    "google"
+    "signal.bz"
    ],
-   "articles90": 10,
+   "articles90": 12,
    "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-12T06:44:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-12T06:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "스타벅스, 독립유공자 후손 50명에 장학금 1억원 전달…12년간 11억원 지...",
-     "press": "kdfnews.com",
-     "publishedAt": "2026-11-12T08:00:00.000Z",
-     "link": "http://www.kdfnews.com/news/articleView.html?idxno=190842"
+     "title": "[속보] \"연락 안 돼\" 사라진 동료…30대男, 230L 봉투에 숨진 채 발견",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-12T08:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001272567?sid=102"
     },
     {
-     "title": "스타벅스, 순국선열의 날 맞아 독립유공자 후손 50명에 장학금 1억 원",
-     "press": "tournews21.com",
-     "publishedAt": "2026-11-12T07:46:00.000Z",
-     "link": "https://www.tournews21.com/news/articleView.html?idxno=148245"
+     "title": "[속보] 오산시 한 원룸서, 비닐 봉투 담긴 30대 남성 시신 발견",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-12T08:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000131820?sid=102"
     },
     {
-     "title": "현대카드, 스타벅스·무신사 떠난 PLCC... 대한항공 12월 계약 만료",
-     "press": "pressman.kr",
-     "publishedAt": "2026-11-12T07:28:00.000Z",
-     "link": "https://www.pressman.kr/news/articleView.html?idxno=104432"
+     "title": "오산 원룸서 대형 봉투에 담긴 30대 남성 시신 발견",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-12T07:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001977914?sid=102"
     }
    ]
   },
@@ -303,10 +271,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 9,
-   "recent20": 4,
-   "press": 9,
-   "firstArticleAt": "2026-11-12T06:36:00.000Z",
+   "articles90": 8,
+   "recent20": 3,
+   "press": 8,
+   "firstArticleAt": "2026-11-12T06:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -335,13 +303,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-12T06:35:00.000Z",
+   "articles90": 6,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-12T07:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "韓 방문 외국인 관광객, 사상 첫 2천만 명 돌파...K-관광 새 역사",
+     "press": "starnewsk.com",
+     "publishedAt": "2026-11-12T08:12:00.000Z",
+     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60961"
+    },
     {
      "title": "[모멘트] 연간 방한객 사상 최초 2천만명 돌파",
      "press": "yna.co.kr",
@@ -353,12 +327,6 @@
      "press": "yna.co.kr",
      "publishedAt": "2026-11-12T07:30:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016439124?sid=103"
-    },
-    {
-     "title": "\"한국 찾은 외국인 2천만 명 시대!\"…14년 만에 두 배, 관광소비도 47.7%...",
-     "press": "tournews21.com",
-     "publishedAt": "2026-11-12T07:26:00.000Z",
-     "link": "https://www.tournews21.com/news/articleView.html?idxno=148261"
     }
    ]
   },
@@ -396,43 +364,43 @@
    ]
   },
   {
-   "keyword": "에이티즈 산 배드 이후 꿈같은 나날",
+   "keyword": "방화",
    "sources": [
-    "nate"
+    "google"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-12T06:38:00.000Z",
+   "firstArticleAt": "2026-11-12T06:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'초고속 컴백' 에이티즈, 'BAD' 흥행에 입 열었다…\"흔들림 없이 더 위로...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-12T07:45:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000784176"
+     "title": "방글라데시서 ‘하시나 귀국 요구’ 시위 격화···나흘 새 방화 41건·...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-12T07:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003482317?sid=104"
     },
     {
-     "title": "‘배드’로 얻은 관심을 공연장까지…에이티즈의 다음 선택 ‘업’ [현...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-12T06:42:00.000Z",
-     "link": "https://m.entertain.naver.com/article/119/0003154508"
+     "title": "주민 대피 돕다 쓰러진 70대 경비원 중태…광주 아파트 방화범 긴급체포",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-12T07:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000551382?sid=102"
     },
     {
-     "title": "에이티즈가 증명한 중소돌의 기적 \"누구든 해낼 수 있다\" [종합]",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-12T06:40:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000052455"
+     "title": "인천 송도 영어유치원 방화 60대 남성 영장심사…구속 갈림길",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-12T06:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000925514?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 371,
-  "matched": 132,
-  "avgLeadMin": 1245,
+  "flagged": 365,
+  "matched": 127,
+  "avgLeadMin": 1210,
   "recent": [
    {
     "keyword": "CEO 임추위 전원 독립이사로",
