@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T15:27:35.881Z",
+ "builtAt": "2026-11-12T15:37:39.911Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,49 +8,51 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "젠슨 황, 엔비디아 CEO 사임",
+   "keyword": "젠슨 황 엔비디아 사임",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 94,
-   "recent20": 24,
-   "press": 69,
-   "firstArticleAt": "2026-11-12T14:34:00.000Z",
+   "articles90": 89,
+   "recent20": 9,
+   "press": 67,
+   "firstArticleAt": "2026-11-12T14:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "엔비디아 차기 CEO 찾는 작업 쉽지 않은 이유",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-12T15:26:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=2026111300231859449a1f309431_1"
+     "title": "[젠슨 황 리스크] 엔비디아, 젠슨 황 33년 만에 전격 퇴진…크레스 임시...",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-12T15:34:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1731503"
     },
     {
-     "title": "[뉴욕증시]젠슨 황 사임 여파로 AI 관련주 약세…일제히 하락",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-12T15:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005842031?sid=101"
+     "title": "33년 만에 엔비디아 떠나는 젠슨 황…콜레트 크레스 임시 CEO 선임",
+     "press": "cnet.co.kr",
+     "publishedAt": "2026-11-12T15:30:00.000Z",
+     "link": "https://www.cnet.co.kr/view/?no=20261113002605"
     },
     {
-     "title": "\"中 스파이 연루·혼외 관계 의혹 여파\"…젠슨 황 엔비디아 CEO \"퇴진\"",
-     "press": "youthdaily.co.kr",
-     "publishedAt": "2026-11-12T15:24:00.000Z",
-     "link": "https://www.youthdaily.co.kr/news/article.html?no=229783"
+     "title": "美 뉴욕증시, 젠슨 황 엔비디아 CEO 사임 속 혼조세 출발",
+     "press": "segye.com",
+     "publishedAt": "2026-11-12T15:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004174783?sid=104"
     }
    ]
   },
   {
-   "keyword": "최민희 감찰 지시",
+   "keyword": "김민석 최민희 감찰 지시",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 10,
-   "recent20": 4,
-   "press": 10,
-   "firstArticleAt": "2026-11-12T13:58:00.000Z",
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-12T14:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,40 +77,41 @@
    ]
   },
   {
-   "keyword": "2200만원 절도 장난",
+   "keyword": "젠틀몬스터",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T14:02:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T14:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김승우, 지인 현금 2200만원 가져간 혐의로 고소당해…경찰 수사 중",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-12T15:16:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=624921"
+     "title": "[르포]\"내 눈이 AI 눈으로 확장됐네요\"…젠틀몬스터 안경에 들어온 제미...",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-12T15:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005842030?sid=104"
     },
     {
-     "title": "‘2200만원→3000만원→3억’…김승우 절도 의혹, 결국 ‘돈의 성격’ 싸...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-12T14:27:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001280681"
+     "title": "젠틀몬스터 인텔리전트 아이웨어, 직접 써보니 '이것'이 가장 놀라웠다",
+     "press": "harpersbazaar.co.kr",
+     "publishedAt": "2026-11-12T14:40:00.000Z",
+     "link": "https://www.harpersbazaar.co.kr/article/1912981"
     },
     {
-     "title": "'절도 의혹'에 김승우 입장 팽팽..엇갈린 주장 속 진실은? 일단 '중립' 기...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-12T14:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005639615"
+     "title": "삼성전자, 구글·젠틀몬스터·워비파커와 협업한 인텔리전트 아이웨어 ...",
+     "press": "betanews.net",
+     "publishedAt": "2026-11-12T14:34:00.000Z",
+     "link": "https://www.betanews.net/article/view/beta202611120227"
     }
    ]
   },
   {
    "keyword": "amd 주가",
    "sources": [
+    "signal.bz",
     "google"
    ],
    "articles90": 3,
@@ -137,43 +140,11 @@
      "link": "https://www.newspim.com/news/view/20261112001498"
     }
    ]
-  },
-  {
-   "keyword": "학대",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T14:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "원주종합사회복지관 노인학대 예방교육",
-     "press": "kado.net",
-     "publishedAt": "2026-11-12T15:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000211095?sid=102"
-    },
-    {
-     "title": "'아동학대' 고소에 결국?…민속촌 '귀신 참교육' 15일 종료",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-12T14:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001040062?sid=102"
-    },
-    {
-     "title": "“아들이 숨을 쉬지 않는다”⋯숨진 중증 발달장애 10대 몸에서 학대 정...",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-12T14:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001230599?sid=102"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 388,
+  "flagged": 390,
   "matched": 143,
   "avgLeadMin": 778,
   "recent": [
