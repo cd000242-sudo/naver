@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T18:09:24.324Z",
+ "builtAt": "2026-11-12T18:19:27.440Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -17,12 +17,18 @@
     "nate"
    ],
    "articles90": 27,
-   "recent20": 8,
-   "press": 18,
-   "firstArticleAt": "2026-11-12T16:44:00.000Z",
+   "recent20": 4,
+   "press": 17,
+   "firstArticleAt": "2026-11-12T16:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "트럼프 \"엔비디아 후임 CEO는 팀 쿡뿐…전설이 전설을 잇는다\"",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-12T18:11:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261113000013"
+    },
     {
      "title": "엔비디아 임시 CEO 긴급 메시시 발신 \"극도로 힘든 시기\"",
      "press": "nocutnews.co.kr",
@@ -34,44 +40,6 @@
      "press": "tokenpost.kr",
      "publishedAt": "2026-11-12T18:04:00.000Z",
      "link": "https://www.tokenpost.kr/news/breaking/437292"
-    },
-    {
-     "title": "엔비디아 임시 CEO \"극도로 어려운 시기\" 첫 메시지…경영진 소집도",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T18:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014319639?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "13일의 금요일",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 2,
-   "firstArticleAt": "2026-11-12T16:44:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[지지대] 13일의 금요일, 인류 멸망의 날",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-12T18:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000131874?sid=110"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 13일(음력 10월 5일) 금요일 구삼원 원장이 풀...",
-     "press": "joongdo.co.kr",
-     "publishedAt": "2026-11-12T16:52:00.000Z",
-     "link": "https://www.joongdo.co.kr/web/view.php?key=20261113010003787"
-    },
-    {
-     "title": "[카드뉴스로 읽는 오늘의 운세] 11월 13일(금요일) 춘강 구박사가 알려...",
-     "press": "joongdo.co.kr",
-     "publishedAt": "2026-11-12T16:44:00.000Z",
-     "link": "https://www.joongdo.co.kr/web/view.php?key=20261113010002949"
     }
    ]
   }
