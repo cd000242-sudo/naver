@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T13:16:17.086Z",
+ "builtAt": "2026-11-12T13:26:21.261Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 22,
  "candidates": [
   {
    "keyword": "김민석 최민희 감찰 지시",
@@ -16,62 +16,62 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 63,
-   "recent20": 8,
-   "press": 53,
-   "firstArticleAt": "2026-11-12T11:47:00.000Z",
+   "articles90": 52,
+   "recent20": 3,
+   "press": 48,
+   "firstArticleAt": "2026-11-12T11:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'이 대통령도 윤 탄핵 반대' 최민희에 김민석, 감찰조사 지시…최민희 ...",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-12T13:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000520513?sid=100"
+    },
+    {
+     "title": "與 김민석, '언행 논란' 최민희 최고위원 감찰조사 지시",
+     "press": "joongboo.com",
+     "publishedAt": "2026-11-12T13:16:00.000Z",
+     "link": "https://www.joongboo.com/news/articleView.html?idxno=363742406"
+    },
     {
      "title": "최민희 \"李 대통령도 尹 탄핵 반대\" 발언 파장 … 김민석, 崔 감찰조사 ...",
      "press": "newdaily.co.kr",
      "publishedAt": "2026-11-12T13:10:00.000Z",
      "link": "https://www.newdaily.co.kr/site/data/html/2026/11/12/2026111200417.html"
-    },
-    {
-     "title": "김민석, '언행 논란' 최민희 감찰조사 지시",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-12T13:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000925649?sid=100"
-    },
-    {
-     "title": "김민석, 최민희 감찰 지시… \"이 대통령이 윤 탄핵 반대\" 발언 논란",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-12T13:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000520512?sid=100"
     }
    ]
   },
   {
-   "keyword": "소노 역전승",
+   "keyword": "CEO의 젠슨 황",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 10,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-12T12:02:00.000Z",
+   "articles90": 28,
+   "recent20": 1,
+   "press": 19,
+   "firstArticleAt": "2026-11-12T11:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이정현 31점 폭발…고양 소노, 대구 가스공사에 1점 차 역전승",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-12T12:36:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16275198"
+     "title": "\"사과도 했는데\"...'젠슨 황의 고향' 타이완의 딜레마",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-12T13:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432109?sid=104"
     },
     {
-     "title": "[AI상보] '하이퍼 가드' 이정현 31점, 소노 가스공사에 88-87 대역전극",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-12T12:31:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261112001485"
+     "title": "\"젠슨 황 없으면 어쩌나\"…대만 반도체 업계도 긴장한 이유",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-12T13:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005353389?sid=104"
     },
     {
-     "title": "'이정현 31점' 소노, 한국가스공사에 88-87 역전승…2연승",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-12T12:22:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/421/0009286768"
+     "title": "\"엔비디아 이사회 젠슨 황 해임 논의\"...외부 CEO 영입설도",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-12T12:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432102?sid=104"
     }
    ]
   },
@@ -81,7 +81,7 @@
     "daum"
    ],
    "articles90": 7,
-   "recent20": 3,
+   "recent20": 2,
    "press": 6,
    "firstArticleAt": "2026-11-12T12:08:00.000Z",
    "exclusive": false,
@@ -113,7 +113,7 @@
     "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-12T12:02:00.000Z",
    "exclusive": false,
@@ -168,38 +168,6 @@
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-12T12:06:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/055/0001402651?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "이유리, 에이티즈 산 팬심 고백",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T12:03:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘47세’ 이유리, 에이티즈 산 향한 팬심 고백 “만나고 싶다” (편스토...",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-12T12:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000327750"
-    },
-    {
-     "title": "이유리, 에이티즈 최산에 푹 빠져 \"이모랑 챌린지 하자..보고 싶다\" 러브...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-12T12:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003487029"
-    },
-    {
-     "title": "‘띠동갑 목사♥’ 이유리도 북부대공 앓이, 에이티즈 산에 “이모랑 같...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-12T12:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001186970"
     }
    ]
   }
