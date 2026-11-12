@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T10:55:16.077Z",
+ "builtAt": "2026-11-12T11:05:20.976Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 22,
  "candidates": [
   {
-   "keyword": "김승원 브로커 징역 4년",
+   "keyword": "김승원 브로커 징역 4년 구형",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 23,
-   "recent20": 2,
-   "press": 23,
-   "firstArticleAt": "2026-11-12T09:33:00.000Z",
+   "articles90": 20,
+   "recent20": 1,
+   "press": 20,
+   "firstArticleAt": "2026-11-12T09:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -43,34 +43,66 @@
    ]
   },
   {
-   "keyword": "성북 10대 살해 구속영장",
+   "keyword": "고객 정보 유출",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 8,
-   "recent20": 0,
+   "articles90": 10,
+   "recent20": 1,
    "press": 8,
-   "firstArticleAt": "2026-11-12T09:30:00.000Z",
+   "firstArticleAt": "2026-11-12T09:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[뉴스추적] '성북 살인' 가해자 사실혼 여성도 조사…남은 의문점은",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-12T10:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001977950?sid=102"
+     "title": "코인마켓 거래소 '플라이빗' 해킹…고객 40명 개인정보 유출",
+     "press": "newsway.co.kr",
+     "publishedAt": "2026-11-12T11:00:00.000Z",
+     "link": "https://www.newsway.co.kr/news/view?ud=2026111219564317964"
     },
     {
-     "title": "공소청, ‘성북구 10대 살해’ 50대 남성 구속영장 청구",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-12T10:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004009302?sid=102"
+     "title": "중소 코인거래소 플라이빗도 해킹…고객 40명 정보 유출",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-12T10:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005440557?sid=101"
     },
     {
-     "title": "‘성매매 강요’ 전처 수사하자 범행?… 10대 살해범 구속영장 청구",
+     "title": "일본, 중소기업 개인정보 유출 확산",
      "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-12T10:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012292723?sid=102"
+     "publishedAt": "2026-11-12T10:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012292759?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "50대 남성 구속영장 청구",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 3,
+   "press": 7,
+   "firstArticleAt": "2026-11-12T09:37:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "10대 소녀 살해한 50대 남성 여전히 진술 거부…구속영장 청구(종합2보)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-12T11:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016439393?sid=102"
+    },
+    {
+     "title": "'소녀 살해' 50대 계속 진술거부...공소청, 구속영장 청구",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-12T11:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432071?sid=102"
+    },
+    {
+     "title": "공소청, ‘15세 소녀 살해’ 50대 남성 구속영장 청구…사전 범행 준비...",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-12T10:50:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611120198"
     }
    ]
   },
@@ -82,10 +114,16 @@
    "articles90": 6,
    "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-12T09:34:00.000Z",
+   "firstArticleAt": "2026-11-12T09:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "코인마켓 거래소 '플라이빗' 해킹…고객 40명 개인정보 유출",
+     "press": "newsway.co.kr",
+     "publishedAt": "2026-11-12T11:00:00.000Z",
+     "link": "https://www.newsway.co.kr/news/view?ud=2026111219564317964"
+    },
     {
      "title": "중소 코인거래소 플라이빗도 해킹…고객 40명 정보 유출",
      "press": "mt.co.kr",
@@ -97,76 +135,6 @@
      "press": "sedaily.com",
      "publishedAt": "2026-11-12T10:23:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/011/0004681656?sid=101"
-    },
-    {
-     "title": "플라이빗도 '다우오피스'로 뚫렸다…빗썸·한양증권 이어 세번째 해킹",
-     "press": "dnews.co.kr",
-     "publishedAt": "2026-11-12T10:20:00.000Z",
-     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611121913548980896"
-    }
-   ]
-  },
-  {
-   "keyword": "50대 남성 구속청구",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-12T09:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "공소청, ‘15세 소녀 살해’ 50대 남성 구속영장 청구…사전 범행 준비...",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-12T10:50:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611120198"
-    },
-    {
-     "title": "공소청, ‘성북구 10대 살해’ 50대 남성 구속영장 청구",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-12T10:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004009302?sid=102"
-    },
-    {
-     "title": "'성북구 10대 살해' 50대에 구속영장 청구…범행 전 도구 구입",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-12T09:46:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261112001454"
-    }
-   ]
-  },
-  {
-   "keyword": "고객 카드번호 유출",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-12T09:33:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "일본 ‘무인양품’ 해킹에 뚫렸다… 고객 신용카드번호 109만 건 유출",
-     "press": "segyebiz.com",
-     "publishedAt": "2026-11-12T09:44:00.000Z",
-     "link": "http://www.segyebiz.com/newsView/20261112517730?OutUrl=naver"
-    },
-    {
-     "title": "日 무인양품도 해킹…고객 신용카드 번호 109만건 유출",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-12T09:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005841997?sid=104"
-    },
-    {
-     "title": "15억 과징금에도 또 뚫린 SPC…섹타나인, 이번엔 결제정보 유출",
-     "press": "geconomy.co.kr",
-     "publishedAt": "2026-11-12T09:40:00.000Z",
-     "link": "https://www.geconomy.co.kr/news/article.html?no=325621"
     }
    ]
   },
@@ -176,13 +144,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 5,
    "recent20": 1,
-   "press": 4,
+   "press": 5,
    "firstArticleAt": "2026-11-12T09:42:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "'대전 유스' 출신 2009년생 김지호, 레드불 잘츠부르크 이적...2027년 여름...",
+     "press": "maniareport.com",
+     "publishedAt": "2026-11-12T10:55:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/425/0000214896"
+    },
     {
      "title": "대전 유스 출신 김지호, 오스트리아 잘츠부르크 입단",
      "press": "stnsports.co.kr",
@@ -194,49 +168,11 @@
      "press": "osen.co.kr",
      "publishedAt": "2026-11-12T10:01:00.000Z",
      "link": "https://m.sports.naver.com/wfootball/article/109/0005639486"
-    },
-    {
-     "title": "대전 '성골 유스' 김지호, 오스트리아 잘츠부르크 이적",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-12T09:43:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/421/0009286696"
     }
    ]
   },
   {
-   "keyword": "아시아나항공 3분기 영업손실",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T09:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[3Q실적] 아시아나항공 영업손실 1790억원…여객 날았지만 화물은 추락",
-     "press": "financialpost.co.kr",
-     "publishedAt": "2026-11-12T10:42:00.000Z",
-     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=300610"
-    },
-    {
-     "title": "아시아나항공, 3분기 별도 매출 소폭 상승... 영업손실은 확대",
-     "press": "popcornnews.net",
-     "publishedAt": "2026-11-12T10:00:00.000Z",
-     "link": "http://www.popcornnews.net/news/articleView.html?idxno=139898"
-    },
-    {
-     "title": "아시아나항공, 3분기 영업손실 1790억원 … 통합 대한항공 출범 준비 속...",
-     "press": "biz.newdaily.co.kr",
-     "publishedAt": "2026-11-12T09:36:00.000Z",
-     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/12/2026111200390.html"
-    }
-   ]
-  },
-  {
-   "keyword": "박희승 조희대 탄핵 요구",
+   "keyword": "박희승 조희대 탄핵 발언",
    "sources": [
     "daum"
    ],
@@ -248,16 +184,16 @@
    "capped": false,
    "samples": [
     {
+     "title": "'조희대 탄핵' 외침에 \"미쳤나 진짜, 후진국\"…민주당 의원 누구",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-12T10:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001040056?sid=100"
+    },
+    {
      "title": "한덕수 구속 만료 임박에 조희대 탄핵론 재점화…민주당 내부서도 엇갈...",
      "press": "ppss.kr",
      "publishedAt": "2026-11-12T10:44:00.000Z",
      "link": "https://www.ppss.kr/news/articleView.html?idxno=320740"
-    },
-    {
-     "title": "한덕수 석방 우려에 정치권 술렁…민주당 사법부 압박, 혁신당 탄핵 촉...",
-     "press": "newswhoplus.com",
-     "publishedAt": "2026-11-12T10:16:00.000Z",
-     "link": "https://www.newswhoplus.com/news/articleView.html?idxno=74249"
     },
     {
      "title": "민주 박희승 \"후진국에서 하는 짓\"…'曺탄핵 요구' 지지자와 설전",
@@ -268,9 +204,9 @@
    ]
   },
   {
-   "keyword": "여자축구 LA 올림픽 최종예선 B조",
+   "keyword": "여자축구, LA 올림픽 최종예선 B조",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
    "articles90": 3,
    "recent20": 0,
@@ -298,47 +234,44 @@
      "link": "https://m.sports.naver.com/kfootball/article/214/0001535226"
     }
    ]
-  },
-  {
-   "keyword": "한강 벨트",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T09:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "강남발 집값 약세 한강벨트로…성동·강동 하락 전환",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-12T09:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000925596?sid=101"
-    },
-    {
-     "title": "稅부담·고금리 파고…성동·강동도 8개월만에 하락 전환 [한강벨트로 ...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-12T09:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004681649?sid=101"
-    },
-    {
-     "title": "서울 아파트값 상승세 '주춤'…강남 이어 한강벨트도 하락 전환",
-     "press": "youthdaily.co.kr",
-     "publishedAt": "2026-11-12T09:26:00.000Z",
-     "link": "https://www.youthdaily.co.kr/news/article.html?no=229779"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 389,
-  "matched": 125,
-  "avgLeadMin": 1069,
+  "flagged": 394,
+  "matched": 130,
+  "avgLeadMin": 1036,
   "recent": [
+   {
+    "keyword": "반도체 유가 민간소비 영향",
+    "hitKeyword": "삼성 SK 반도체 인력 부족",
+    "hitAt": "2026-11-12T20:00:00+09:00",
+    "leadMin": 348
+   },
+   {
+    "keyword": "반도체 호황과 유가가 소비에 미치는 영향",
+    "hitKeyword": "삼성 SK 반도체 인력 부족",
+    "hitAt": "2026-11-12T20:00:00+09:00",
+    "leadMin": 338
+   },
+   {
+    "keyword": "젠슨 황 해임 위기",
+    "hitKeyword": "젠슨 황 해임 착수",
+    "hitAt": "2026-11-12T20:00:00+09:00",
+    "leadMin": 116
+   },
+   {
+    "keyword": "젠슨 황 해임 검토 중",
+    "hitKeyword": "젠슨 황 해임 착수",
+    "hitAt": "2026-11-12T20:00:00+09:00",
+    "leadMin": 96
+   },
+   {
+    "keyword": "젠슨 황 해임 논의",
+    "hitKeyword": "젠슨 황 해임 착수",
+    "hitAt": "2026-11-12T20:00:00+09:00",
+    "leadMin": 75
+   },
    {
     "keyword": "젠슨 황 엔비디아 위기",
     "hitKeyword": "엔비디아 정보수집 의혹",
@@ -368,36 +301,6 @@
     "hitKeyword": "젠슨 황 불륜",
     "hitAt": "2026-11-12T18:00:00+09:00",
     "leadMin": 36
-   },
-   {
-    "keyword": "최초 2천만 외국인 관광객",
-    "hitKeyword": "한국 방문 외국인 2000만",
-    "hitAt": "2026-11-12T17:30:00+09:00",
-    "leadMin": 87
-   },
-   {
-    "keyword": "외국인 2천만명 돌파",
-    "hitKeyword": "한국 방문 외국인 2000만",
-    "hitAt": "2026-11-12T17:30:00+09:00",
-    "leadMin": 67
-   },
-   {
-    "keyword": "김승우 유흥주점 절도 혐의 피소",
-    "hitKeyword": "김승우 절도 피소",
-    "hitAt": "2026-11-12T17:30:00+09:00",
-    "leadMin": 26
-   },
-   {
-    "keyword": "외국인 2천만명 방문",
-    "hitKeyword": "한국 방문 외국인 2000만",
-    "hitAt": "2026-11-12T17:30:00+09:00",
-    "leadMin": 26
-   },
-   {
-    "keyword": "CEO 임추위 전원 독립이사로",
-    "hitKeyword": "이부진 디올 CEO 학위식",
-    "hitAt": "2026-11-12T16:30:00+09:00",
-    "leadMin": 374
    }
   ]
  }
