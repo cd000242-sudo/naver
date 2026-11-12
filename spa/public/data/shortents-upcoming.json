@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T10:24:57.469Z",
+ "builtAt": "2026-11-12T10:35:02.941Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,27 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "김승원 브로커 징역 4년",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 26,
-   "recent20": 5,
-   "press": 26,
-   "firstArticleAt": "2026-11-12T08:59:00.000Z",
+   "articles90": 24,
+   "recent20": 1,
+   "press": 24,
+   "firstArticleAt": "2026-11-12T09:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "공소청, '김승원 청탁 의혹' 브로커에 징역 4년 구형…제넨셀 설립자는...",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-12T10:32:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=202611121920203680139bf6e4b2_1"
+    },
     {
      "title": "공소청, '김승원 신약청탁 의혹' 브로커에 징역 4년 구형",
      "press": "nocutnews.co.kr",
@@ -33,108 +40,38 @@
      "press": "ajunews.com",
      "publishedAt": "2026-11-12T10:14:00.000Z",
      "link": "https://www.ajunews.com/view/20261112190727603"
-    },
-    {
-     "title": "'김승원 의혹' 브로커 \"일상 무너져\" 법정서 눈물…징역 4년 구형",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T10:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014319527?sid=102"
     }
    ]
   },
   {
-   "keyword": "젠슨 황 해임 논의",
+   "keyword": "성북 10대 살해 구속영장",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 26,
-   "recent20": 1,
-   "press": 22,
-   "firstArticleAt": "2026-11-12T08:55:00.000Z",
+   "articles90": 17,
+   "recent20": 2,
+   "press": 14,
+   "firstArticleAt": "2026-11-12T09:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'젠슨 황 없는 엔비디아' 현실 되나…엔비디아 이사회, 젠슨 황 해임 돌...",
+     "title": "[뉴스추적] '성북 살인' 가해자 사실혼 여성도 조사…남은 의문점은",
      "press": "mbn.co.kr",
-     "publishedAt": "2026-11-12T10:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001977939?sid=101"
+     "publishedAt": "2026-11-12T10:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001977950?sid=102"
     },
     {
-     "title": "젠슨 황 'OUT'… AI 방향타 흔들",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-12T10:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003058891?sid=101"
+     "title": "공소청, ‘성북구 10대 살해’ 50대 남성 구속영장 청구",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-12T10:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004009302?sid=102"
     },
-    {
-     "title": "젠슨 황 운명 곧 결론…엔비디아 긴급 이사회",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-12T10:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000367316?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "50대 남성 구속영장",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 22,
-   "recent20": 1,
-   "press": 19,
-   "firstArticleAt": "2026-11-12T08:57:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
     {
      "title": "‘성매매 강요’ 전처 수사하자 범행?… 10대 살해범 구속영장 청구",
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-12T10:09:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012292723?sid=102"
-    },
-    {
-     "title": "'성북구 10대 살해' 50대에 구속영장 청구…범행 전 도구 구입",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-12T09:46:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261112001454"
-    },
-    {
-     "title": "공소청, '10대 소녀 살해' 50대 구속영장 청구",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-12T09:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000551473?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "펄어비스 3분기 매출 증가",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 12,
-   "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-12T08:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "펄어비스, 3Q 매출 증가·영업익 감소",
-     "press": "kfenews.co.kr",
-     "publishedAt": "2026-11-12T09:56:00.000Z",
-     "link": "https://www.kfenews.co.kr/news/articleView.html?idxno=668025"
-    },
-    {
-     "title": "펄어비스, 3분기 영업익 207억원…전년비 8.8%↓",
-     "press": "economist.co.kr",
-     "publishedAt": "2026-11-12T09:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/243/0000105608?sid=105"
-    },
-    {
-     "title": "주요 게임사 3분기 실적 발표…넥슨만 웃었다",
-     "press": "sisafocus.co.kr",
-     "publishedAt": "2026-11-12T09:52:00.000Z",
-     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367541"
     }
    ]
   },
@@ -143,10 +80,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 10,
-   "firstArticleAt": "2026-11-12T09:00:00.000Z",
+   "articles90": 9,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-12T09:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -176,7 +113,7 @@
     "nate"
    ],
    "articles90": 8,
-   "recent20": 1,
+   "recent20": 0,
    "press": 7,
    "firstArticleAt": "2026-11-12T09:08:00.000Z",
    "exclusive": false,
@@ -205,6 +142,7 @@
   {
    "keyword": "김지호 잘츠부르크 이적",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 7,
@@ -235,46 +173,15 @@
    ]
   },
   {
-   "keyword": "이재명 지방재정 자율성",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-12T08:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령 \"지방재정 운용 너무 경직…재량·자율성 확대해야\"",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-12T09:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000142163?sid=100"
-    },
-    {
-     "title": "[종합] 李대통령 \"아끼면 아낀 대로 쓸 수 있게\"…지방재정 자율성 확대...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-12T09:20:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261112001451"
-    },
-    {
-     "title": "이 대통령 \"지방재정 자율성 높여야…실용적·현실적 개선 필요\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-12T09:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001402622?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "여자축구 LA 올림픽 최종예선 B조",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 6,
+   "articles90": 4,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-12T08:55:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-12T09:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -295,6 +202,38 @@
      "press": "imnews.imbc.com",
      "publishedAt": "2026-11-12T09:38:00.000Z",
      "link": "https://m.sports.naver.com/kfootball/article/214/0001535226"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 지방재정 자율성",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T09:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李대통령 \"지방재정 운용 너무 경직…재량·자율성 확대해야\"",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-12T09:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000142163?sid=100"
+    },
+    {
+     "title": "[종합] 李대통령 \"아끼면 아낀 대로 쓸 수 있게\"…지방재정 자율성 확대...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-12T09:20:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261112001451"
+    },
+    {
+     "title": "이 대통령 \"지방재정 자율성 높여야…실용적·현실적 개선 필요\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-12T09:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001402622?sid=100"
     }
    ]
   },
@@ -334,10 +273,16 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 393,
-  "matched": 127,
-  "avgLeadMin": 1057,
+  "flagged": 386,
+  "matched": 125,
+  "avgLeadMin": 1069,
   "recent": [
+   {
+    "keyword": "젠슨 황 엔비디아 위기",
+    "hitKeyword": "엔비디아 정보수집 의혹",
+    "hitAt": "2026-11-12T19:30:00+09:00",
+    "leadMin": 146
+   },
    {
     "keyword": "한국, APBC 첫 경기서 호주에 패배",
     "hitKeyword": "APBC 한국 호주",
@@ -391,12 +336,6 @@
     "hitKeyword": "이부진 디올 CEO 학위식",
     "hitAt": "2026-11-12T16:30:00+09:00",
     "leadMin": 374
-   },
-   {
-    "keyword": "델핀 아르노 CEO",
-    "hitKeyword": "이부진 디올 CEO 학위식",
-    "hitAt": "2026-11-12T16:30:00+09:00",
-    "leadMin": 198
    }
   ]
  }
