@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T22:31:29.833Z",
+ "builtAt": "2026-11-12T22:41:36.633Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 22,
  "candidates": [
   {
-   "keyword": "젠슨 황 사임 충격",
+   "keyword": "사고",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 36,
-   "recent20": 7,
-   "press": 32,
-   "firstArticleAt": "2026-11-12T21:02:00.000Z",
+   "articles90": 10,
+   "recent20": 5,
+   "press": 10,
+   "firstArticleAt": "2026-11-12T21:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨 황 퇴진에 엔비디아 4% 급락 … AMD·브로드컴은 5%대 상승",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-12T22:28:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/13/2026111300016.html"
+     "title": "줄리엔강, 결혼 2년 만에 큰 사고 \"우리에게 이런 일이\"..결혼반지 분실",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-12T22:39:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003487064"
     },
     {
-     "title": "젠슨 황 퇴진에 출렁인 뉴욕증시…엔비디아 급락 뒤 낙폭 줄여",
-     "press": "ngonews.kr",
-     "publishedAt": "2026-11-12T22:28:00.000Z",
-     "link": "https://www.ngonews.kr/news/articleView.html?idxno=243083"
+     "title": "서울시, 119에 8710건 반복 신고한 5명 형사고발…소방당국 '엄정 대응'",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-12T22:38:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3750715"
     },
     {
-     "title": "젠슨 황 퇴진·유가 급등에 뉴욕증시 하락…엔비디아 4.3%↓(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-12T22:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016439669?sid=104"
+     "title": "곽선영, 아들과 엘리베이터 추락 사고… \"119 구조요청 하고 음악 틀어...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-12T22:31:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000489882"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 1,
-   "press": 14,
-   "firstArticleAt": "2026-11-12T21:02:00.000Z",
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-12T21:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "원·달러 환율·국제 유가 하락에…10월 수입물가 1.8%↓",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-12T22:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014319773?sid=101"
+    },
     {
      "title": "환율·유가 동반 하락에 10월 수입물가 1.8%↓...수출물가 0.7%↑",
      "press": "tfmedia.co.kr",
@@ -65,88 +71,82 @@
      "press": "gukjenews.com",
      "publishedAt": "2026-11-12T22:06:00.000Z",
      "link": "https://www.gukjenews.com/news/articleView.html?idxno=3750693"
-    },
-    {
-     "title": "환율·유가 동반 하락에…10월 수입물가 하락 전환",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-12T21:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000925724?sid=101"
     }
    ]
   },
   {
-   "keyword": "2026년 13일",
+   "keyword": "축구 대표팀, 사우디 평가전",
    "sources": [
     "nate"
    ],
-   "articles90": 12,
+   "articles90": 6,
    "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-12T21:03:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "【오늘의 법조】 2026년 11월 13일",
-     "press": "lawtimes.co.kr",
-     "publishedAt": "2026-11-12T22:30:00.000Z",
-     "link": "https://www.lawtimes.co.kr/news/articleView.html?idxno=229323"
-    },
-    {
-     "title": "하나은행, 은행 브랜드평판 2026년 11월...1위",
-     "press": "beyondpost.co.kr",
-     "publishedAt": "2026-11-12T22:28:00.000Z",
-     "link": "http://www.beyondpost.co.kr/view.php?ud=20261113072417761646a9e4dd7f_30"
-    },
-    {
-     "title": "[오늘의 주요일정·13일] 윤호중 장관 산악구조, 산불대응 지원 시스템...",
-     "press": "safetimes.co.kr",
-     "publishedAt": "2026-11-12T22:04:00.000Z",
-     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247459"
-    }
-   ]
-  },
-  {
-   "keyword": "사고",
-   "sources": [
-    "google"
-   ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-12T21:31:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-12T21:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "좌초하는 한솔제지 한경록號, 사망사고·가격담합에 실적하락까지",
-     "press": "hansbiz.co.kr",
+     "title": "오늘 밤 사우디전…'전화위복' 노린다!",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-12T22:33:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/055/0001402725"
+    },
+    {
+     "title": "오늘 '한국 사우디' 축구 중계 채널, 긴급 변경",
+     "press": "wikitree.co.kr",
      "publishedAt": "2026-11-12T22:30:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=882618"
+     "link": "https://www.wikitree.co.kr/articles/1173325"
     },
     {
-     "title": "뉴욕 브루클린서 3층짜리 아파트 붕괴 사고···어린이 2명 포함 8명 사...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-12T22:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003482465?sid=104"
+     "title": "불화설 털어낸 손흥민, 사우디 상대로 '60호골' 도전[주목! 이 종목]",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-12T22:00:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/003/0014319746"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황 사임 후폭풍",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-12T21:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[뉴스타트] 두 번 불륜에 쫓겨난 젠슨 황...엔비디아 넘어 AI 산업에 충...",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-12T22:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432207?sid=101"
     },
     {
-     "title": "“1년 동안 혼자 5547건이나”...서울시, 119 상습 신고자 5명 형사고발",
-     "press": "kyeonggi.com",
+     "title": "엔비디아 시총, 장중 801조원 증발…젠슨 황 퇴진 후폭풍",
+     "press": "joongang.co.kr",
      "publishedAt": "2026-11-12T22:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000131882?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/025/0003564942?sid=101"
+    },
+    {
+     "title": "'세 번째 불륜 의혹' 또?…젠슨 황 퇴장에도 파문 안 끝났다",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-12T22:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000142175?sid=101"
     }
    ]
   },
   {
    "keyword": "이세창, 급성 맹장염 수술",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-12T21:06:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-12T21:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -171,44 +171,88 @@
    ]
   },
   {
-   "keyword": "황정리 별세",
+   "keyword": "성북 10대 살해 구속영장",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-12T21:05:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T21:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'취권' 성룡과 활약한 무술배우 황정리 별세..향년 81세",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-12T22:19:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004466352"
+     "title": "도와달라 신고하고 쉼터까지 갔는데...막지 못한 10대 피해자의 죽음",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-12T22:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005763102?sid=102"
     },
     {
-     "title": "'취권' 성룡 맞수 '발차기 제왕' 황정리, 81세로 영면",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-12T22:08:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95135"
+     "title": "성북구 10대 살해‥\"가해자 연인이 가스라이팅\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-12T21:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001535310?sid=102"
     },
     {
-     "title": "황정리 81세에 별세, 성룡과 호흡 맞춘 액션 영화계 거장",
-     "press": "enews.imbc.com",
+     "title": "‘성매매 강요’ 전처 수사하자 범행?…10대 살해범 구속 심사",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-12T21:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012293076?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "사귀기 전에 결혼하자고",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-12T21:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“사귀기도 전에 청혼”…이유리, 12살 연상 목사 남편 당황시킨 직진 ...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-12T22:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001280697"
+    },
+    {
+     "title": "'12세 연상♥목사 남편'에 사귀기前 청혼…이유리 \"놀라서 돌려보내\"",
+     "press": "osen.co.kr",
      "publishedAt": "2026-11-12T22:05:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000327770"
+     "link": "https://m.entertain.naver.com/article/109/0005639655"
+    },
+    {
+     "title": "그네 타다 \"결혼하고 싶다\"…이유리, 12살 연상 남편에게 사귀기도 전에...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-12T21:35:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004124625"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 405,
-  "matched": 148,
-  "avgLeadMin": 664,
+  "flagged": 406,
+  "matched": 149,
+  "avgLeadMin": 658,
   "recent": [
+   {
+    "keyword": "황정리 별세",
+    "hitKeyword": "황정리 별세",
+    "hitAt": "2026-11-13T07:30:00+09:00",
+    "leadMin": 19
+   },
+   {
+    "keyword": "관광객",
+    "hitKeyword": "도쿄 관광객 과태료",
+    "hitAt": "2026-11-13T07:30:00+09:00",
+    "leadMin": 9
+   },
    {
     "keyword": "성동 강동 집값 하락 전환",
     "hitKeyword": "한강벨트 집값 하락",
@@ -256,18 +300,6 @@
     "hitKeyword": "엔비디아 주가 급락",
     "hitAt": "2026-11-13T06:00:00+09:00",
     "leadMin": 322
-   },
-   {
-    "keyword": "젠슨 황 엔비디아 CEO 사임",
-    "hitKeyword": "엔비디아 주가 급락",
-    "hitAt": "2026-11-13T06:00:00+09:00",
-    "leadMin": 312
-   },
-   {
-    "keyword": "성북 10대 살해 구속영장",
-    "hitKeyword": "성북구 10대 여성 살해",
-    "hitAt": "2026-11-13T06:00:00+09:00",
-    "leadMin": 292
    }
   ]
  }
