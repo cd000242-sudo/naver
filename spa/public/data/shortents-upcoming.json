@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T20:30:37.127Z",
+ "builtAt": "2026-11-12T20:40:40.820Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "젠슨 황, 엔비디아 CEO 사임",
@@ -16,95 +16,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 40,
-   "recent20": 5,
-   "press": 25,
-   "firstArticleAt": "2026-11-12T19:03:00.000Z",
+   "articles90": 44,
+   "recent20": 8,
+   "press": 26,
+   "firstArticleAt": "2026-11-12T19:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"불륜 스캔들 끝이 없네\"…젠슨 황, 사임 후 세 번째 불륜 의혹",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-12T20:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009286857?sid=104"
+     "title": "젠슨 황 사임 후폭풍…백악관, 상무장관 경질 논의",
+     "press": "aitimes.com",
+     "publishedAt": "2026-11-12T20:36:00.000Z",
+     "link": "https://www.aitimes.com/news/articleView.html?idxno=217349"
     },
     {
-     "title": "젠슨 황, 다음주 美의회 조사 출석…\"안 나오면 강제소환\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-12T20:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005440628?sid=104"
+     "title": "[핫이슈] 엔비디아 시총 807조 증발…'록스타 창업자' 사임이 드러낸 승...",
+     "press": "the-today.com",
+     "publishedAt": "2026-11-12T20:36:00.000Z",
+     "link": "https://www.the-today.com/news/articleView.html?idxno=93489"
     },
     {
-     "title": "젠슨황 없는 엔비디아, 사도 될까…“칩 경쟁력 여전” vs “매수 기회인...",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-12T20:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006409198?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "공장",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-12T19:33:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"AI 에이전트 중심 공장 재설계하라\"… 바이두, 기업용 신제품 대거 공...",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-12T20:26:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=2026111219260112730c8c1c064d_1"
-    },
-    {
-     "title": "경산 박스 공장에서 큰 불…인명피해 없어",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-12T20:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000925695?sid=102"
-    },
-    {
-     "title": "충남 202조 투자 '말이 아닌 착공으로'…삼성 아산공장 인허가 10개월→...",
-     "press": "greened.kr",
-     "publishedAt": "2026-11-12T20:10:00.000Z",
-     "link": "https://www.greened.kr/news/articleView.html?idxno=354563"
-    }
-   ]
-  },
-  {
-   "keyword": "김민석 최민희 감찰 지시",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T19:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김민석, ‘李대통령 尹탄핵반대’ 발언 논란 최민희 ‘윤리감찰’ 지시...",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-12T20:20:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611130004"
-    },
-    {
-     "title": "최민희 “李대통령도 尹 탄핵 반대”… 김민석, 崔 윤리감찰 조사 지시",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-12T20:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003698920?sid=100"
-    },
-    {
-     "title": "이번엔 \"이 대통령, 윤 탄핵 반대\"...민주, 최민희 감찰 착수",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-12T19:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432182?sid=100"
+     "title": "엔비디아 새 CEO \"고객·협력사 약속 지킬 것\" AI 생태계 혼란 최소화",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-12T20:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005353420?sid=104"
     }
    ]
   },
@@ -137,6 +72,39 @@
      "press": "mt.co.kr",
      "publishedAt": "2026-11-12T20:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/008/0005440622?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "김민석 최민희 감찰 지시",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T19:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김민석, ‘李대통령 尹탄핵반대’ 발언 논란 최민희 ‘윤리감찰’ 지시...",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-12T20:20:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611130004"
+    },
+    {
+     "title": "최민희 “李대통령도 尹 탄핵 반대”… 김민석, 崔 윤리감찰 조사 지시",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-12T20:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003698920?sid=100"
+    },
+    {
+     "title": "이번엔 \"이 대통령, 윤 탄핵 반대\"...민주, 최민희 감찰 착수",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-12T19:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432182?sid=100"
     }
    ]
   }
