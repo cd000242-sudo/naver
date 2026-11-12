@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T10:45:09.134Z",
+ "builtAt": "2026-11-12T10:55:16.077Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,12 +16,18 @@
     "signal.bz"
    ],
    "articles90": 23,
-   "recent20": 3,
+   "recent20": 2,
    "press": 23,
-   "firstArticleAt": "2026-11-12T09:23:00.000Z",
+   "firstArticleAt": "2026-11-12T09:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'김승원 임상시험 청탁 의혹' 브로커에 징역 4년 구형… 제넨셀 설립자...",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-12T10:50:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3448298"
+    },
     {
      "title": "공소청, ‘김승원 청탁 의혹’ 브로커 양씨에 징역 4년 구형",
      "press": "segye.com",
@@ -33,44 +39,6 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-12T10:34:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009286726?sid=102"
-    },
-    {
-     "title": "공소청, '김승원 청탁 의혹' 브로커에 징역 4년 구형…제넨셀 설립자는...",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-12T10:32:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=202611121920203680139bf6e4b2_1"
-    }
-   ]
-  },
-  {
-   "keyword": "김윤석 폭설",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 37,
-   "recent20": 22,
-   "press": 12,
-   "firstArticleAt": "2026-11-12T10:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'폭설' 녹인 김윤석X구교환 뜨거운 우정…\"브로맨스 1등\" [스타 더하기]",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-12T10:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005440558?sid=103"
-    },
-    {
-     "title": "박수영-노윤서-홍의정-구교환-김윤석 '폭설 곧 개봉'[엑's HD포토]",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-12T10:42:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002079946"
-    },
-    {
-     "title": "[HD포토] 전소영, '폭설 속 인형 비주얼' (폭설 VIP 시사회)",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-12T10:40:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16275110"
     }
    ]
   },
@@ -79,10 +47,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-12T09:17:00.000Z",
+   "articles90": 8,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-12T09:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -111,10 +79,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
+   "articles90": 6,
    "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-12T09:16:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-12T09:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -143,13 +111,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-12T09:17:00.000Z",
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-12T09:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "공소청, ‘15세 소녀 살해’ 50대 남성 구속영장 청구…사전 범행 준비...",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-12T10:50:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611120198"
+    },
     {
      "title": "공소청, ‘성북구 10대 살해’ 50대 남성 구속영장 청구",
      "press": "chosun.com",
@@ -161,77 +135,6 @@
      "press": "newspim.com",
      "publishedAt": "2026-11-12T09:46:00.000Z",
      "link": "https://www.newspim.com/news/view/20261112001454"
-    },
-    {
-     "title": "공소청, '10대 소녀 살해' 50대 구속영장 청구",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-12T09:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000551473?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "김지호 잘츠부르크 이적",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-12T09:18:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "대전 유스 출신 김지호, 오스트리아 잘츠부르크 입단",
-     "press": "stnsports.co.kr",
-     "publishedAt": "2026-11-12T10:44:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/450/0000155462"
-    },
-    {
-     "title": "[공식발표] 황희찬 후배 생긴다! '대전 성골' 김지호, 17살에 韓 유럽파...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-12T10:01:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/109/0005639486"
-    },
-    {
-     "title": "대전 '성골 유스' 김지호, 오스트리아 잘츠부르크 이적",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-12T09:43:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/421/0009286696"
-    }
-   ]
-  },
-  {
-   "keyword": "박희승 조희대 탄핵 요구",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-12T09:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한덕수 구속 만료 임박에 조희대 탄핵론 재점화…민주당 내부서도 엇갈...",
-     "press": "ppss.kr",
-     "publishedAt": "2026-11-12T10:44:00.000Z",
-     "link": "https://www.ppss.kr/news/articleView.html?idxno=320740"
-    },
-    {
-     "title": "한덕수 석방 우려에 정치권 술렁…민주당 사법부 압박, 혁신당 탄핵 촉...",
-     "press": "newswhoplus.com",
-     "publishedAt": "2026-11-12T10:16:00.000Z",
-     "link": "https://www.newswhoplus.com/news/articleView.html?idxno=74249"
-    },
-    {
-     "title": "민주 박희승 \"후진국에서 하는 짓\"…'曺탄핵 요구' 지지자와 설전",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-12T09:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000925602?sid=100"
     }
    ]
   },
@@ -268,66 +171,35 @@
    ]
   },
   {
-   "keyword": "이재명 지방재정 자율성",
+   "keyword": "김지호 잘츠부르크 이적",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
    "articles90": 4,
    "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-12T09:16:00.000Z",
-   "exclusive": false,
+   "firstArticleAt": "2026-11-12T09:42:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "\"지방재정 자율성 높여 기업유치\"",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-12T10:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005763050?sid=101"
+     "title": "대전 유스 출신 김지호, 오스트리아 잘츠부르크 입단",
+     "press": "stnsports.co.kr",
+     "publishedAt": "2026-11-12T10:44:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/450/0000155462"
     },
     {
-     "title": "李대통령 \"지방재정 운용 너무 경직…재량·자율성 확대해야\"",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-12T09:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000142163?sid=100"
+     "title": "[공식발표] 황희찬 후배 생긴다! '대전 성골' 김지호, 17살에 韓 유럽파...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-12T10:01:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/109/0005639486"
     },
     {
-     "title": "[종합] 李대통령 \"아끼면 아낀 대로 쓸 수 있게\"…지방재정 자율성 확대...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-12T09:20:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261112001451"
-    }
-   ]
-  },
-  {
-   "keyword": "여자축구 LA 올림픽 최종예선 B조",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T09:25:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "북한·중국 다 넘어야 하다니...'죽음의 조' 한국 여자축구 LA 올림픽 B조...",
-     "press": "fourfourtwo.co.kr",
-     "publishedAt": "2026-11-12T09:50:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/411/0000089879"
-    },
-    {
-     "title": "'첫 올림픽 본선 도전' 한국 여자 축구, 북한·중국·필리핀과 최종예선...",
-     "press": "maniareport.com",
-     "publishedAt": "2026-11-12T09:42:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/425/0000214892"
-    },
-    {
-     "title": "한국 여자축구, LA 올림픽 최종예선서 북한·중국·필리핀과 B조",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-12T09:38:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/214/0001535226"
+     "title": "대전 '성골 유스' 김지호, 오스트리아 잘츠부르크 이적",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-12T09:43:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/421/0009286696"
     }
    ]
   },
@@ -360,6 +232,70 @@
      "press": "biz.newdaily.co.kr",
      "publishedAt": "2026-11-12T09:36:00.000Z",
      "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/12/2026111200390.html"
+    }
+   ]
+  },
+  {
+   "keyword": "박희승 조희대 탄핵 요구",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-12T09:49:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한덕수 구속 만료 임박에 조희대 탄핵론 재점화…민주당 내부서도 엇갈...",
+     "press": "ppss.kr",
+     "publishedAt": "2026-11-12T10:44:00.000Z",
+     "link": "https://www.ppss.kr/news/articleView.html?idxno=320740"
+    },
+    {
+     "title": "한덕수 석방 우려에 정치권 술렁…민주당 사법부 압박, 혁신당 탄핵 촉...",
+     "press": "newswhoplus.com",
+     "publishedAt": "2026-11-12T10:16:00.000Z",
+     "link": "https://www.newswhoplus.com/news/articleView.html?idxno=74249"
+    },
+    {
+     "title": "민주 박희승 \"후진국에서 하는 짓\"…'曺탄핵 요구' 지지자와 설전",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-12T09:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000925602?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "여자축구 LA 올림픽 최종예선 B조",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-12T09:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "북한·중국 다 넘어야 하다니...'죽음의 조' 한국 여자축구 LA 올림픽 B조...",
+     "press": "fourfourtwo.co.kr",
+     "publishedAt": "2026-11-12T09:50:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/411/0000089879"
+    },
+    {
+     "title": "'첫 올림픽 본선 도전' 한국 여자 축구, 북한·중국·필리핀과 최종예선...",
+     "press": "maniareport.com",
+     "publishedAt": "2026-11-12T09:42:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/425/0000214892"
+    },
+    {
+     "title": "한국 여자축구, LA 올림픽 최종예선서 북한·중국·필리핀과 B조",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-12T09:38:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/214/0001535226"
     }
    ]
   },
@@ -399,7 +335,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 391,
+  "flagged": 389,
   "matched": 125,
   "avgLeadMin": 1069,
   "recent": [
