@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T13:56:39.260Z",
+ "builtAt": "2026-11-12T14:06:42.868Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,71 +8,38 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 21,
+ "measured": 22,
  "candidates": [
   {
    "keyword": "김민석 최민희 감찰 지시",
    "sources": [
     "signal.bz",
-    "nate",
     "daum"
    ],
-   "articles90": 27,
-   "recent20": 3,
-   "press": 24,
-   "firstArticleAt": "2026-11-12T12:28:00.000Z",
+   "articles90": 23,
+   "recent20": 4,
+   "press": 20,
+   "firstArticleAt": "2026-11-12T12:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "민주, ‘대통령 탄핵 반대 전언·기자 비하’ 최민희 윤리감찰 착수",
+     "press": "news-s.kr",
+     "publishedAt": "2026-11-12T14:02:00.000Z",
+     "link": "https://news-s.kr/view.html?id=L261112225646975c"
+    },
+    {
+     "title": "\"李, 尹탄핵 반대\" 최민희에 청와대·與 일제히 강경대응",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-12T13:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005763078?sid=100"
+    },
     {
      "title": "[투나잇이슈] 김민석·정청래 갈등에 최민희 감찰지시까지…與 내홍",
      "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-12T13:49:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/422/0000925651?sid=100"
-    },
-    {
-     "title": "“李 대통령 ‘尹 탄핵 반대’” 최민희 발언, 청와대 공개 반박",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-12T13:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001884836?sid=100"
-    },
-    {
-     "title": "'하이에나' 이어 '이 대통령의 윤석열 탄핵 반대' 까지…민주당, 최민희...",
-     "press": "wolyo.co.kr",
-     "publishedAt": "2026-11-12T13:44:00.000Z",
-     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=320434"
-    }
-   ]
-  },
-  {
-   "keyword": "CEO의 젠슨 황",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 27,
-   "recent20": 6,
-   "press": 19,
-   "firstArticleAt": "2026-11-12T12:27:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[속보] 젠슨황, 엔비디아 CEO 사퇴 <로이터>",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-12T13:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016439475?sid=104"
-    },
-    {
-     "title": "[속보] 젠슨 황 엔비디아 CEO 사임 결정",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-12T13:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005603702?sid=101"
-    },
-    {
-     "title": "[속보] 엔비디아, 젠슨 황 CEO 교체…임시 CEO에 콜레트 크레스 CFO",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T13:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014319587?sid=104"
     }
    ]
   },
@@ -82,12 +49,18 @@
     "nate"
    ],
    "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-12T12:34:00.000Z",
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-12T12:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[포커스] 젠슨 황 '해임 위기'...'사내 불륜' 추가 폭로",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-12T13:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432122?sid=104"
+    },
     {
      "title": "젠슨 황 해임 위기에 엔비디아 장전 8% 폭락",
      "press": "fnnews.com",
@@ -99,56 +72,51 @@
      "press": "munhwa.com",
      "publishedAt": "2026-11-12T13:33:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/021/0002832452?sid=104"
-    },
-    {
-     "title": "\"젠슨 황 없으면 어쩌나\"…대만 반도체 업계도 긴장한 이유",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-12T13:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005353389?sid=104"
     }
    ]
   },
   {
-   "keyword": "곽선영 서류 탈락 합격",
+   "keyword": "스타실드 속도 제한",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
    "articles90": 4,
    "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-12T12:44:00.000Z",
+   "firstArticleAt": "2026-11-12T12:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "곽선영, 서류 탈락했는데 담당자 착각으로 합격+데뷔 “저한테는 은인”...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-12T13:28:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001186980"
+     "title": "젤렌스키 \"스타실드 또 속도 제한…러 드론 요격 어려워\"",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-12T13:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000192284?sid=104"
     },
     {
-     "title": "\"원래 서류 탈락이었다\"…'거장항준' 곽선영, 서류 탈락이 무대 선 이유",
-     "press": "topstarnews.net",
+     "title": "젤렌스키 \"머스크 스타실드 또 속도 제한…우연한 오류 아냐\"",
+     "press": "newsis.com",
      "publishedAt": "2026-11-12T13:20:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16275240"
+     "link": "https://n.news.naver.com/mnews/article/003/0014319576?sid=104"
     },
     {
-     "title": "곽선영, 서류 탈락→담당자 착각으로 합격 통보…\"인생 바꾼 은인\"",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-12T12:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004466315"
+     "title": "젤렌스키 \"스타실드 속도제한 체계적\"…시속 161km 넘으면 접속 끊겨",
+     "press": "coinreaders.com",
+     "publishedAt": "2026-11-12T12:42:00.000Z",
+     "link": "http://coinreaders.com/269689"
     }
    ]
   },
   {
    "keyword": "폭설",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 20,
+   "articles90": 12,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T12:27:00.000Z",
+   "press": 2,
+   "firstArticleAt": "2026-11-12T12:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -171,46 +139,26 @@
      "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=719127"
     }
    ]
-  },
-  {
-   "keyword": "최성훈 개그맨",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T12:49:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'특종세상' 개그맨 최성훈, 연이은 사업 실패 후 시골에서 유튜브하는 ...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-12T13:12:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16275232"
-    },
-    {
-     "title": "\"미치고 홀렸다\" 톱개그맨의 몰락..사업 실패에 뇌경색 덮친 '사라진 26...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-12T13:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004466318"
-    },
-    {
-     "title": "개그맨 최성훈, 잘나가다 잠적한 이유 \"노래방 사업 때문..자연스럽게 ...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-12T13:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003487034"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 384,
+  "flagged": 383,
   "matched": 140,
-  "avgLeadMin": 838,
+  "avgLeadMin": 775,
   "recent": [
+   {
+    "keyword": "방화",
+    "hitKeyword": "경비원 심정지 아파트 방화",
+    "hitAt": "2026-11-12T23:00:00+09:00",
+    "leadMin": 346
+   },
+   {
+    "keyword": "최성훈 개그맨",
+    "hitKeyword": "개그맨 최성훈",
+    "hitAt": "2026-11-12T23:00:00+09:00",
+    "leadMin": 54
+   },
    {
     "keyword": "공격하는 현대캐피탈 레오",
     "hitKeyword": "현대캐피탈 3연승",
@@ -258,18 +206,6 @@
     "hitKeyword": "삼성 온양 메가프로젝트",
     "hitAt": "2026-11-12T21:00:00+09:00",
     "leadMin": 593
-   },
-   {
-    "keyword": "메가프로젝트 이재명 대통령",
-    "hitKeyword": "삼성 온양 메가프로젝트",
-    "hitAt": "2026-11-12T21:00:00+09:00",
-    "leadMin": 538
-   },
-   {
-    "keyword": "이재명 메가프로젝트 회의 발언",
-    "hitKeyword": "삼성 온양 메가프로젝트",
-    "hitAt": "2026-11-12T21:00:00+09:00",
-    "leadMin": 528
    }
   ]
  }
