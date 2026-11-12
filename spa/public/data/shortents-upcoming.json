@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T18:39:33.956Z",
+ "builtAt": "2026-11-12T18:49:37.204Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,38 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "젠슨 황, 엔비디아 CEO 사임",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 24,
-   "recent20": 5,
-   "press": 16,
-   "firstArticleAt": "2026-11-12T17:12:00.000Z",
+   "articles90": 25,
+   "recent20": 6,
+   "press": 15,
+   "firstArticleAt": "2026-11-12T17:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "유럽증시, 엔비디아 충격에도 실적이 떠받치며 강보합… 독일은 이틀 연...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-12T18:38:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261113000014"
-    },
-    {
-     "title": "젠슨황 결국 CEO 사임, 사실상의 해임",
-     "press": "viewsnnews.com",
-     "publishedAt": "2026-11-12T18:32:00.000Z",
-     "link": "https://www.viewsnnews.com/article?q=239665"
-    },
-    {
-     "title": "“젠슨 황, 충격적 몰락”…외신들 ‘미국 CEO 스캔들’ 재조명",
+     "title": "미 하원, 젠슨 황 퇴진에도 의회 증언 추진…“안 나오면 소환장”",
      "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-12T18:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012293045?sid=104"
+     "publishedAt": "2026-11-12T18:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012293046?sid=104"
+    },
+    {
+     "title": "엔비디아 주가 장 초반 13% 폭락…젠슨 황 CEO 사임 충격",
+     "press": "radiokorea.com",
+     "publishedAt": "2026-11-12T18:40:00.000Z",
+     "link": "https://www.radiokorea.com/news/article.php?uid=509457"
+    },
+    {
+     "title": "'AI제국 황제' 젠슨황의 가속 몰락…스캔들 시인 나흘만에 축출",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-12T18:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016439564?sid=104"
     }
    ]
   }
