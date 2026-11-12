@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T17:18:51.497Z",
+ "builtAt": "2026-11-12T17:28:54.759Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "젠슨 황, 엔비디아 CEO 사임",
    "sources": [
     "nate"
    ],
-   "articles90": 43,
-   "recent20": 8,
-   "press": 28,
-   "firstArticleAt": "2026-11-12T15:49:00.000Z",
+   "articles90": 36,
+   "recent20": 7,
+   "press": 26,
+   "firstArticleAt": "2026-11-12T16:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨 황 엔비디아 CEO 사퇴...트럼프 \"애플 팀 쿡 이어받아야\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-12T17:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432165?sid=104"
+     "title": "젠슨 황 퇴진에 엔비디아 시총 4조달러 붕괴",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-12T17:28:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261113500001"
     },
     {
-     "title": "트럼프 \"젠슨 황 후임은 팀 쿡\"…엔비디아 CEO 공개 추천",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-12T17:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005603710?sid=104"
+     "title": "[미국 특징주] 젠슨 황 스캔들, 법정 공방으로 번지나…증권사기·주주...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-12T17:24:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261113000010"
     },
     {
-     "title": "\"젠슨 황, 추수감사절 전 美 의회 출석 합의…날짜 조율 중\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T17:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014319635?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "amd 주가",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T15:53:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "젠슨 황 해임으로 누가 이득보나…브로드컴·AMD 주가 급등",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-12T17:02:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4444516"
-    },
-    {
-     "title": "엔비디아, 젠슨 황 CEO 즉각 사임 발표…33년 만에 퇴진·주가 13% 급락 ...",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-12T16:22:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261113010005034"
-    },
-    {
-     "title": "'젠슨황 충격'에 미 기술주 휘청...AMD·브로드컴 반사이익 기대",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-12T16:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432150?sid=104"
+     "title": "엔비디아 창업 이후 최대 위기…젠슨 황 '혼외 관계' 의혹에 끝내 사임",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-12T17:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004209345?sid=104"
     }
    ]
   },
