@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T06:02:46.890Z",
+ "builtAt": "2026-11-12T06:12:50.827Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 29,
  "candidates": [
   {
    "keyword": "서울 집값 상승",
    "sources": [
     "daum"
    ],
-   "articles90": 50,
-   "recent20": 13,
+   "articles90": 52,
+   "recent20": 7,
    "press": 40,
    "firstArticleAt": "2026-11-12T04:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "홍지선 국토장관 “재초환, 집값 안정 효과 있지만 재산권 침해도…종합...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-12T06:08:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2647470"
+    },
+    {
+     "title": "홍지선 국토장관 \"재초환, 집값 안정 효과 있지만 재산권 침해도 검토해...",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-12T06:04:00.000Z",
+     "link": "https://www.ajunews.com/view/20261112150001436"
+    },
+    {
      "title": "\"강남만 떨어지는 줄 알았는데\"…'이 동네'마저 집값 꺾였다",
      "press": "hankyung.com",
      "publishedAt": "2026-11-12T05:59:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/015/0005353182?sid=101"
-    },
-    {
-     "title": "서울 집값 오름폭 정체에도 92주째 상승···경기남부 상승세 확대",
-     "press": "whitepaper.co.kr",
-     "publishedAt": "2026-11-12T05:58:00.000Z",
-     "link": "http://www.whitepaper.co.kr/news/articleView.html?idxno=268709"
-    },
-    {
-     "title": "홍지선 국토장관 \"매물 쌓이고 거래 줄어…집값 하락기 진입 신호\"",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-12T05:56:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261112010004797"
     }
    ]
   },
@@ -48,30 +48,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 26,
-   "recent20": 8,
-   "press": 25,
+   "articles90": 30,
+   "recent20": 6,
+   "press": 29,
    "firstArticleAt": "2026-11-12T05:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "영풍·MBK, 고려아연 상대 정기주총 결의 취소소송 승소",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-12T06:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004209147?sid=102"
+     "title": "법원 “고려아연, 영풍·MBK 의결권 제한 결의 취소”",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-12T06:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003058793?sid=101"
     },
     {
-     "title": "법원 \"영풍·MBK 의결권 제한 못해\"... 고려아연 정기주총 결의 취소 판...",
-     "press": "lawtv.kr",
-     "publishedAt": "2026-11-12T05:58:00.000Z",
-     "link": "https://www.lawtv.kr/news/articleView.html?idxno=61401"
+     "title": "법원 \"고려아연, 영풍·MBK 의결권 제한 부당\"… 주총 결의 취소 판결",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-12T06:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000965219?sid=102"
     },
     {
-     "title": "고려아연, 영풍 의결권 제한 제동…주총 결의 취소 판결",
-     "press": "daily.hankooki.com",
-     "publishedAt": "2026-11-12T05:48:00.000Z",
-     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1424533"
+     "title": "법원 \"고려아연, 영풍·MBK 의결권 제한한 주총 결의 취소해야\" … 최윤...",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-12T06:08:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/12/2026111200270.html"
     }
    ]
   },
@@ -80,30 +80,62 @@
    "sources": [
     "nate"
    ],
-   "articles90": 27,
-   "recent20": 4,
+   "articles90": 26,
+   "recent20": 3,
    "press": 23,
-   "firstArticleAt": "2026-11-12T04:36:00.000Z",
+   "firstArticleAt": "2026-11-12T04:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[셀럽의 한 수] 'AI 황제' 젠슨 황의 추락, 삼전닉스 오히려 호재?",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-12T06:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000543302?sid=101"
+    },
+    {
+     "title": "[월드아이] 불륜 탓에 퇴출 위기 몰린 'AI 제국 지휘자' 젠슨 황",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-12T06:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001074530?sid=104"
+    },
     {
      "title": "'해임 위기' 젠슨 황 후계자 후보는…아내 로리도 거론",
      "press": "newsis.com",
      "publishedAt": "2026-11-12T06:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014318740?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "방한 외국인 관광객 2000만명",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 23,
+   "recent20": 5,
+   "press": 18,
+   "firstArticleAt": "2026-11-12T04:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "연간 방한객 사상 최초 2천만명 넘어서…문체부 \"관광대국 출발점\"",
+     "press": "kbsm.net",
+     "publishedAt": "2026-11-12T06:08:00.000Z",
+     "link": "https://www.kbsm.net/news/view.php?idx=541536"
     },
     {
-     "title": "추가 불륜 의혹에 잰슨 황 퇴진 위기…벼랑 끝 'AI 황태자'",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-12T05:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001164134?sid=101"
+     "title": "연간 방한객 2000만명 첫 돌파...문체부 \"K컬처·범정부 협력 성과\"",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-12T06:06:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=563395"
     },
     {
-     "title": "위기의 엔비디아",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-12T05:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009286051?sid=101"
+     "title": "방한 외국인 관광객 사상 첫 2000만 명 돌파... 14년 만에 2배로",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-12T06:02:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=882702"
     }
    ]
   },
@@ -113,13 +145,19 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 18,
-   "recent20": 8,
-   "press": 18,
-   "firstArticleAt": "2026-11-12T04:36:00.000Z",
+   "articles90": 17,
+   "recent20": 6,
+   "press": 17,
+   "firstArticleAt": "2026-11-12T04:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "스타벅스, 순국선열의 날 앞두고 독립유공자 후손 50명에 장학금 1억원...",
+     "press": "ftoday.co.kr",
+     "publishedAt": "2026-11-12T06:04:00.000Z",
+     "link": "http://www.ftoday.co.kr/news/articleView.html?idxno=369558"
+    },
     {
      "title": "‘2분기 연속 영업손실’ 스타벅스의 굴욕…배당 잔치 영향은",
      "press": "topdaily.kr",
@@ -131,44 +169,6 @@
      "press": "econovill.com",
      "publishedAt": "2026-11-12T06:00:00.000Z",
      "link": "https://www.econovill.com/news/articleView.html?idxno=757017"
-    },
-    {
-     "title": "스타벅스, 순국선열의 날 앞두고 독립유공자 후손에 장학금 전달",
-     "press": "newspost.kr",
-     "publishedAt": "2026-11-12T05:56:00.000Z",
-     "link": "https://www.newspost.kr/news/articleView.html?idxno=227328"
-    }
-   ]
-  },
-  {
-   "keyword": "방한 외국인 관광객 2000만명",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 23,
-   "recent20": 11,
-   "press": 17,
-   "firstArticleAt": "2026-11-12T04:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "방한객 사상 첫 2000만 명 돌파…1000만 명 달성 14년 만",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T05:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014318733?sid=101"
-    },
-    {
-     "title": "방한 외국인 관광객 사상 첫 2000만 명 돌파",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-12T05:54:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261112010004834"
-    },
-    {
-     "title": "방한 외국인 2000만명 시대…3000만명 향해 도약",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-12T05:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009286069?sid=102"
     }
    ]
   },
@@ -178,30 +178,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 32,
-   "recent20": 3,
-   "press": 15,
+   "articles90": 34,
+   "recent20": 4,
+   "press": 17,
    "firstArticleAt": "2026-11-12T04:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "디올 CEO 韓서 명예박사...이부진과 '30년 인연'도 주목",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-12T05:58:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=315243"
+     "title": "[포토종합] 이대서 명예박사 받는 '디올 CEO'… 수여식에 재계 총수 총출...",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-12T06:10:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3447797"
+    },
+    {
+     "title": "삼성,현대,롯데家 총출동…디올 CEO 이대 명예박사 수여",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-12T06:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005440335?sid=101"
     },
     {
      "title": "이부진과 '손하트'…디올 아르노 학위식에 재계 한자리",
      "press": "newsprime.co.kr",
      "publishedAt": "2026-11-12T05:58:00.000Z",
      "link": "http://www.newsprime.co.kr/news/article.html?no=754742"
-    },
-    {
-     "title": "정의선·신동빈·이부진 한자리에…델핀 아르노 디올CEO '명예박사' 학위...",
-     "press": "daily.hankooki.com",
-     "publishedAt": "2026-11-12T05:50:00.000Z",
-     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1424526"
     }
    ]
   },
@@ -210,13 +210,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 0,
-   "press": 15,
+   "articles90": 16,
+   "recent20": 1,
+   "press": 16,
    "firstArticleAt": "2026-11-12T04:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"해킹당해도 국가 기능은 지속\"... 국가 사이버복원력 범정부 TF 출범",
+     "press": "boannews.com",
+     "publishedAt": "2026-11-12T06:08:00.000Z",
+     "link": "https://www.boannews.com/news/articleView.html?idxno=147225"
+    },
     {
      "title": "세계 연이은 ‘AI 해킹’에…국가AI전략위, ‘사이버복원력 TF’ 출범",
      "press": "joongang.co.kr",
@@ -224,16 +230,10 @@
      "link": "https://n.news.naver.com/mnews/article/025/0003564750?sid=105"
     },
     {
-     "title": "국가AI전략위, 사이버복원 강화 TF 출범…강화 전략안 마련한다",
-     "press": "ajunews.com",
+     "title": "AI 공격으로부터 국민 일상 지킨다…국가AI전략위, '국가 사이버복원력...",
+     "press": "etoday.co.kr",
      "publishedAt": "2026-11-12T05:02:00.000Z",
-     "link": "https://www.ajunews.com/view/20261112092830166"
-    },
-    {
-     "title": "국가AI전략위, AI 해킹 대응 '사이버복원력 TF' 출범…2027년 1분기 전략...",
-     "press": "news.mtn.co.kr",
-     "publishedAt": "2026-11-12T05:02:00.000Z",
-     "link": "https://news.mtn.co.kr/article/2026111210113033214"
+     "link": "https://www.etoday.co.kr/news/view/2647261"
     }
    ]
   },
@@ -242,10 +242,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 12,
+   "articles90": 11,
    "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-12T04:38:00.000Z",
+   "press": 11,
+   "firstArticleAt": "2026-11-12T04:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -276,7 +276,7 @@
     "nate"
    ],
    "articles90": 15,
-   "recent20": 2,
+   "recent20": 1,
    "press": 10,
    "firstArticleAt": "2026-11-12T05:15:00.000Z",
    "exclusive": false,
@@ -307,10 +307,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-12T04:38:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-12T05:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -335,45 +335,13 @@
    ]
   },
   {
-   "keyword": "200만달러",
-   "sources": [
-    "google"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-12T04:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[야구] LG 오스틴, 외국인 타자 역대 최고 연봉 재계약… 1년 200만 달러",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-12T05:40:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3448170"
-    },
-    {
-     "title": "LG 오스틴, 외국인 타자 최초 연봉 200만 달러 돌파...KBO 역대 최고 대...",
-     "press": "ppss.kr",
-     "publishedAt": "2026-11-12T05:25:00.000Z",
-     "link": "https://www.ppss.kr/news/articleView.html?idxno=320628"
-    },
-    {
-     "title": "LG 오스틴, 역대 외국인 타자 '최고 연봉' … 200만 달러",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-12T05:24:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/12/2026111200238.html"
-    }
-   ]
-  },
-  {
    "keyword": "홍콩익스프레스 팝업 개최",
    "sources": [
     "signal.bz",
     "nate"
    ],
    "articles90": 8,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-12T04:43:00.000Z",
    "exclusive": false,
@@ -432,13 +400,77 @@
    ]
   },
   {
+   "keyword": "장례",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 4,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T05:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "가스공사, 대구 장례식장에 다회용기 도입…2개월간 시범 운영",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-12T06:06:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=2026111214041269891d2373fc0f_1"
+    },
+    {
+     "title": "가스公, 장례식장 다회용기 확산…친환경 장례문화 선도",
+     "press": "e2news.com",
+     "publishedAt": "2026-11-12T06:00:00.000Z",
+     "link": "http://www.e2news.com/news/articleView.html?idxno=336055"
+    },
+    {
+     "title": "가스공사, 장례식장 일회용품 줄인다",
+     "press": "enewstoday.co.kr",
+     "publishedAt": "2026-11-12T05:57:00.000Z",
+     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2491694"
+    }
+   ]
+  },
+  {
+   "keyword": "트럼프 이란전쟁 종전",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 3,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T05:43:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"밴스, 종전 위해 이란 안보수장과 직접 회담 검토\"",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-12T06:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005841872?sid=104"
+    },
+    {
+     "title": "[이슈] 트럼프 \"전쟁 곧 끝난다\" vs 이란, 지하 미사일 기지 공개 \"핵물...",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-12T06:06:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=748333"
+    },
+    {
+     "title": "미·러·우, 9개월 만의 평화협상서 종전 돌파구 못 찾아",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-12T06:00:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3448121"
+    }
+   ]
+  },
+  {
    "keyword": "신장식 최인호 정무수석",
    "sources": [
     "signal.bz",
     "nate"
    ],
    "articles90": 26,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-12T04:56:00.000Z",
    "exclusive": false,
@@ -465,44 +497,12 @@
    ]
   },
   {
-   "keyword": "장례",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 3,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T05:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "가스公, 장례식장 다회용기 확산…친환경 장례문화 선도",
-     "press": "e2news.com",
-     "publishedAt": "2026-11-12T06:00:00.000Z",
-     "link": "http://www.e2news.com/news/articleView.html?idxno=336055"
-    },
-    {
-     "title": "가스공사, 장례식장 일회용품 줄인다",
-     "press": "enewstoday.co.kr",
-     "publishedAt": "2026-11-12T05:57:00.000Z",
-     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2491694"
-    },
-    {
-     "title": "대구파티마병원, 지역 민간종합병원 최초 장례식장 다회용기 도입 '첫 ...",
-     "press": "eroun.net",
-     "publishedAt": "2026-11-12T05:54:00.000Z",
-     "link": "https://www.eroun.net/news/articleView.html?idxno=95287"
-    }
-   ]
-  },
-  {
    "keyword": "장기 이식",
    "sources": [
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-12T05:05:00.000Z",
    "exclusive": false,
@@ -531,10 +531,22 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 358,
-  "matched": 133,
-  "avgLeadMin": 1600,
+  "flagged": 355,
+  "matched": 132,
+  "avgLeadMin": 1531,
   "recent": [
+   {
+    "keyword": "젠슨 황 스캔들 영향",
+    "hitKeyword": "젠슨 황 불륜 스캔들",
+    "hitAt": "2026-11-12T15:00:00+09:00",
+    "leadMin": 515
+   },
+   {
+    "keyword": "성북구 10대 살해 구속영장",
+    "hitKeyword": "성북구 10대 여성 살해",
+    "hitAt": "2026-11-12T15:00:00+09:00",
+    "leadMin": 138
+   },
    {
     "keyword": "젠슨 황 스캔들 논란",
     "hitKeyword": "젠슨 황 불륜설 논란",
@@ -582,18 +594,6 @@
     "hitKeyword": "김현석 울산 결별",
     "hitAt": "2026-11-12T12:30:00+09:00",
     "leadMin": 28
-   },
-   {
-    "keyword": "크러쉬 조이",
-    "hitKeyword": "크러쉬 조이 듀엣",
-    "hitAt": "2026-11-12T12:00:00+09:00",
-    "leadMin": 647
-   },
-   {
-    "keyword": "크러쉬 조이 듀엣 공개",
-    "hitKeyword": "크러쉬 조이 듀엣",
-    "hitAt": "2026-11-12T12:00:00+09:00",
-    "leadMin": 205
    }
   ]
  }
