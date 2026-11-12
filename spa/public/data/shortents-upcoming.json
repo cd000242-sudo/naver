@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T01:46:29.471Z",
+ "builtAt": "2026-11-12T01:56:35.806Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 14,
+ "measured": 19,
  "candidates": [
-  {
-   "keyword": "젠슨 황 해임 준비",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 78,
-   "recent20": 16,
-   "press": 63,
-   "firstArticleAt": "2026-11-12T00:26:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "엔비디아 젠슨 황 후임설 확산…팀 쿡까지 거론, SNS 달구는 차기 CEO 논...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-12T01:44:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=626075"
-    },
-    {
-     "title": "AI 황제에서 '불륜의 제왕'으로…젠슨 황, 엔비디아서 쫓겨나나",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-12T01:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000142107?sid=101"
-    },
-    {
-     "title": "CBS뉴스 \"엔비디아, 젠슨 황 해임 준비\"…트럼프 행정부도 인지, 미 의회...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-12T01:44:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=626076"
-    }
-   ]
-  },
   {
    "keyword": "아세안 APEC 참석",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 73,
-   "recent20": 13,
-   "press": 57,
-   "firstArticleAt": "2026-11-12T00:40:00.000Z",
+   "articles90": 78,
+   "recent20": 14,
+   "press": 64,
+   "firstArticleAt": "2026-11-12T00:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이 대통령, 16∼19일 아세안·APEC 정상회의 참석",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-12T01:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000925390?sid=100"
+     "title": "청와대 \"이재명 대통령, 16∼19일 필리핀 아세안·중국 선전 APEC 참석\"",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-12T01:56:00.000Z",
+     "link": "http://www.breaknews.com/1250443"
     },
     {
-     "title": "靑 \"中APEC 계기 북미접촉 가능성 작아…그 전후는 단정 어려워\"",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-12T01:42:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/325055/?sc=Naver"
+     "title": "李대통령, 16~19일 아세안·APEC 순방…경제·평화외교 총력",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-12T01:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000131726?sid=100"
     },
     {
-     "title": "靑 \"아세안·APEC 기간 북미 접촉 가능성 작아…전후는 배제 못 해\"",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-12T01:40:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=729045"
+     "title": "靑 \"APEC 계기 북미 접촉 가능성 작다 … 핵보유국 인정? 생각치 않는 영...",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-12T01:54:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/12/2026111200117.html"
     }
    ]
   },
@@ -79,30 +47,62 @@
    "sources": [
     "nate"
    ],
-   "articles90": 63,
-   "recent20": 9,
-   "press": 56,
-   "firstArticleAt": "2026-11-12T00:18:00.000Z",
+   "articles90": 62,
+   "recent20": 12,
+   "press": 52,
+   "firstArticleAt": "2026-11-12T00:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[컨콜줍줍] 최수연 네이버 대표 “내년 상반기 AI팩토리 사업 매출 반영...",
-     "press": "dnews.co.kr",
-     "publishedAt": "2026-11-12T01:42:00.000Z",
-     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611121032115960747"
+     "title": "네이버 3분기 영업이익 4513억원…작년 동기 比 20.9%↓",
+     "press": "industrynews.co.kr",
+     "publishedAt": "2026-11-12T01:54:00.000Z",
+     "link": "https://www.industrynews.co.kr/news/articleView.html?idxno=89379"
     },
     {
-     "title": "네이버 “美 AI 기업과 2조원 공급 계약…2028년 두자릿수 마진율 예상”...",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-12T01:38:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611120046"
+     "title": "네이버, 3분기 영업익 전년 比 20.9% 감소… \"AI 투자 성과는 내년부터\"",
+     "press": "asiatime.co.kr",
+     "publishedAt": "2026-11-12T01:52:00.000Z",
+     "link": "https://www.asiatime.co.kr/article/20261112500101"
     },
     {
-     "title": "네이버, AI 팩토리 내년 흑자 자신..2028년 두 자릿수 마진 예고",
-     "press": "kpenews.com",
-     "publishedAt": "2026-11-12T01:36:00.000Z",
-     "link": "https://kpenews.com/View.aspx?No=4309083"
+     "title": "\"AI 팩토리 2조원 계약은 5년치 매출\" [네이버 컨콜]",
+     "press": "it.chosun.com",
+     "publishedAt": "2026-11-12T01:52:00.000Z",
+     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000000856"
+    }
+   ]
+  },
+  {
+   "keyword": "산",
+   "sources": [
+    "google"
+   ],
+   "articles90": 22,
+   "recent20": 5,
+   "press": 22,
+   "firstArticleAt": "2026-11-12T00:56:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "에어비앤비, 에이티즈 산과 함께한 '웰컴투 할미우드' 비하인드 컷 추가...",
+     "press": "betanews.net",
+     "publishedAt": "2026-11-12T01:46:00.000Z",
+     "link": "https://www.betanews.net/article/view/beta202611120099"
+    },
+    {
+     "title": "고대 이집트 무덤의 가짜 문, 망자와 산 자의 경계",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-12T01:46:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=403957"
+    },
+    {
+     "title": "세종시'숲가꾸기 부산물 땔감'51가구에 전달",
+     "press": "ccreview.co.kr",
+     "publishedAt": "2026-11-12T01:40:00.000Z",
+     "link": "https://www.ccreview.co.kr/news/articleView.html?idxno=362472"
     }
    ]
   },
@@ -113,61 +113,61 @@
     "nate"
    ],
    "articles90": 18,
-   "recent20": 7,
+   "recent20": 3,
    "press": 18,
-   "firstArticleAt": "2026-11-12T00:21:00.000Z",
+   "firstArticleAt": "2026-11-12T00:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "장동혁 \"李 재판 재개해야\"…정점식 \"이용철, 공소취소 입장 밝혀라\"",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-12T01:50:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=172335"
+    },
+    {
+     "title": "“공소취소는 예단” 또 말 아낀 이용철...특검 앞두고 모호한 태도",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-12T01:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003564686?sid=102"
+    },
     {
      "title": "이용철 “공소 취소, 지금은 답변 부적절”… ‘5.18 보상금 신청 이유...",
      "press": "biz.chosun.com",
      "publishedAt": "2026-11-12T01:40:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/366/0001204278?sid=102"
-    },
-    {
-     "title": "\"공소취소, 답변 부적절\"…또 말 아낀 이용철",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-12T01:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000925383?sid=102"
-    },
-    {
-     "title": "이용철, 李 사건 공소취소 지휘 여부 또 즉답 피해 … \"지금 답변 부적...",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-12T01:34:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/12/2026111200089.html"
     }
    ]
   },
   {
-   "keyword": "발언하는 장동혁 대표",
+   "keyword": "폭발",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 25,
-   "recent20": 3,
-   "press": 15,
-   "firstArticleAt": "2026-11-12T00:24:00.000Z",
+   "articles90": 18,
+   "recent20": 2,
+   "press": 17,
+   "firstArticleAt": "2026-11-12T00:30:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "장동혁 다시 ‘리더십 시험대’…안에선 징계 논란, 밖에선 吳·韓 신경...",
-     "press": "biz.heraldcorp.com",
+     "title": "\"스파이님! 저도 있어요\"...젠슨 황 스캔들 패러디 폭발",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-12T01:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002431751?sid=103"
+    },
+    {
+     "title": "김윤석, 30살 연하 서기에 팬심 폭발... \"골 넣는 영상 열 번씩 본다\"",
+     "press": "insight.co.kr",
      "publishedAt": "2026-11-12T01:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002722517?sid=100"
+     "link": "https://www.insight.co.kr/news/581690"
     },
     {
-     "title": "[포토] 발언하는 장동혁 대표",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-12T01:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005841687?sid=100"
-    },
-    {
-     "title": "장동혁 \"피고인 이재명, 자기 손으로 공소장 찢기 전 재판 재개해야\"",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-12T01:32:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1136926"
+     "title": "‘재혼 황후’ 신민아, 도파민 폭발 명대사 모음",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-12T01:26:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611120173"
     }
    ]
   },
@@ -176,101 +176,133 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 17,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-12T00:22:00.000Z",
+   "articles90": 16,
+   "recent20": 2,
+   "press": 14,
+   "firstArticleAt": "2026-11-12T00:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "美 민주당, 대선 때 트럼프 압승 미시시피 상원도 승리",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-12T01:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004209022?sid=104"
+    },
+    {
+     "title": "피와 눈물이 새겨진 그 땅… KKK의 무대서 146년 만에 흑인 상원의원",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-12T01:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004009218?sid=104"
+    },
     {
      "title": "美민주당, 공화당 '텃밭' 미시시피 상원 탈환",
      "press": "gukjenews.com",
      "publishedAt": "2026-11-12T01:36:00.000Z",
      "link": "https://www.gukjenews.com/news/articleView.html?idxno=3749708"
-    },
-    {
-     "title": "공화 텃밭 미시시피 상원 민주당 승리, 55석 확보…알래스카만 남았다",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-12T01:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003564680?sid=104"
-    },
-    {
-     "title": "美 민주당, 미시시피서 40여년 만에 승리…상원 55석 확보",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T01:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014317557?sid=104"
     }
    ]
   },
   {
-   "keyword": "금융회사 지배구조 개선 당정협의",
+   "keyword": "클라라 예능 복귀",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 10,
+   "articles90": 12,
    "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-12T00:30:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-12T00:32:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "클라라, 10년 만에 국내 예능 복귀…'솔로라서2' MC 합류",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-12T01:48:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014317728"
+    },
+    {
+     "title": "클라라, 이혼 후 중국 생활 공개…10년 만에 국내 예능 복귀",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-12T01:29:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005440142"
+    },
+    {
+     "title": "[공식]클라라, 10년 만 韓 예능 복귀..조윤희와 '돌싱 라이프' 공개(솔로...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-12T01:27:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004466058"
+    }
+   ]
+  },
+  {
+   "keyword": "금융회사 지배구조 개선 협의회",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 11,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-12T00:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "은행지주 셀프 연임 빗장 걸었다…당정, 참호구축ㆍ지배구조 '수술'",
+     "press": "ftoday.co.kr",
+     "publishedAt": "2026-11-12T01:52:00.000Z",
+     "link": "http://www.ftoday.co.kr/news/articleView.html?idxno=369519"
+    },
+    {
+     "title": "당정, 금융지주 지배구조 개선 방안 추진… \"CEO 연임요건 강화 임원추...",
+     "press": "lawissue.co.kr",
+     "publishedAt": "2026-11-12T01:46:00.000Z",
+     "link": "https://www.lawissue.co.kr/view.php?ud=202611121043503322b3279dfb36_12"
+    },
     {
      "title": "당정, 금융지주 지배구조 손본다…CEO 3연임 금지 대신 요건 강화 방향",
      "press": "dt.co.kr",
      "publishedAt": "2026-11-12T01:28:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/029/0003058710?sid=100"
-    },
-    {
-     "title": "은행지주 '셀프 연임' 정조준… 당정 '지배구조 개선방안' 발표",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-12T01:26:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3448063"
-    },
-    {
-     "title": "금융지주 CEO 2회 이상 연임 땐 주총 의결권 75% 얻어야… 지배구조 개선...",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-12T01:24:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2017597"
     }
    ]
   },
   {
-   "keyword": "조희대 대법원장",
+   "keyword": "메랍",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-12T00:21:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T00:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "與 \"한덕수 석방 가능성은 조희대 책임…의도적 재판 지연 중단하라\"(종...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T01:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014317641?sid=100"
+     "title": "얼굴에 피 흘린 전 UFC 챔프 메랍, \"호텔 로비서 집단폭행 당했다\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-12T01:52:00.000Z",
+     "link": "https://www.ajunews.com/view/20261112104416530"
     },
     {
-     "title": "혁신당 \"한덕수 석방 전 즉각 대법원장 탄핵해야\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-12T01:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002431738?sid=100"
+     "title": "\"UFC 전 챔프가 '집단 린치' 당했다\"...메랍, 호텔서 피투성이",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-12T01:04:00.000Z",
+     "link": "https://www.insight.co.kr/news/581701"
     },
     {
-     "title": "혁신당 “조희대 즉각 탄핵하자…민주당은 시늉만 해”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-12T01:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012292379?sid=100"
+     "title": "우스만 누르마고메도프, 호텔서 메랍 드발리쉬빌리 폭행…격투기계 발...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-12T01:00:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/241/0003541345"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 386,
+  "flagged": 388,
   "matched": 158,
   "avgLeadMin": 1447,
   "recent": [
