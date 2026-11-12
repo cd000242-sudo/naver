@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T12:05:47.795Z",
+ "builtAt": "2026-11-12T12:15:51.159Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "젠슨 황 해임 위기",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-12T10:45:00.000Z",
+   "articles90": 10,
+   "recent20": 4,
+   "press": 10,
+   "firstArticleAt": "2026-11-12T10:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "젠슨 황 퇴진 위기에 대만 반도체 공급망 긴장…\"증설 속도 늦어질 수도...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-12T12:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009286765?sid=101"
+    },
     {
      "title": "젠슨 황 해임 위기에 AI업계 '비상'… 투자 위축·규제 강화 우려",
      "press": "newscj.com",
@@ -29,16 +35,10 @@
      "link": "https://www.newscj.com/news/articleView.html?idxno=3448306"
     },
     {
-     "title": "HBM-자율차-로봇-AI팩토리…깐부 기업들 ‘젠슨 황 스캔들’ 주시",
-     "press": "donga.com",
-     "publishedAt": "2026-11-12T11:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003762130?sid=101"
-    },
-    {
-     "title": "젠슨 황 해임 위기·미국 규제 강화 움직임에 삼전닉스 초긴장 [앵커리...",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-12T11:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432081?sid=104"
+     "title": "엔비디아 이사회 긴급 회의…젠슨 황 결국 ‘해임 수순’?",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-12T12:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012292847?sid=104"
     }
    ]
   },
@@ -48,7 +48,7 @@
     "nate"
    ],
    "articles90": 9,
-   "recent20": 3,
+   "recent20": 0,
    "press": 9,
    "firstArticleAt": "2026-11-12T10:57:00.000Z",
    "exclusive": false,
@@ -61,7 +61,7 @@
      "link": "https://n.news.naver.com/mnews/article/015/0005353380?sid=102"
     },
     {
-     "title": "(R)\"발달장애 아들 사망에 엄마 긴급체포\"…'결박 의혹' 수사",
+     "title": "\"발달장애 아들 사망에 엄마 긴급체포\"…'결박 의혹' 수사",
      "press": "tjb.co.kr",
      "publishedAt": "2026-11-12T11:52:00.000Z",
      "link": "https://www.tjb.co.kr/news05/bodo/view/id/106023"
@@ -75,66 +75,34 @@
    ]
   },
   {
-   "keyword": "조희대",
-   "sources": [
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-12T10:44:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "법원행정처장, ‘한덕수 석방시 조희대 탄핵’ 與 주장에 “부적절”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-12T12:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003762131?sid=102"
-    },
-    {
-     "title": "법원행정처장, ‘한덕수 석방시 조희대 탄핵’ 주장에 “부적절”",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-12T11:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002831985?sid=100"
-    },
-    {
-     "title": "한덕수가 되살린 '조희대 국조' 카드…'탄핵' 직행할 수도",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-12T11:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000520486?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "김승원 브로커 징역 4년 구형",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-12T10:42:00.000Z",
+   "articles90": 7,
+   "recent20": 3,
+   "press": 7,
+   "firstArticleAt": "2026-11-12T10:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "공소청, '김승원 청탁의혹' 브로커에 징역 4년 구형",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-12T12:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000925639?sid=102"
+    },
+    {
+     "title": "공소청, '김승원 청탁 의혹' 브로커 징역 4년 구형",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-12T12:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003154615?sid=102"
+    },
     {
      "title": "공소청, '김승원 후원금 청탁 의혹' 제넨셀 설립자에 징역 6개월 구형",
      "press": "daily.hankooki.com",
      "publishedAt": "2026-11-12T12:02:00.000Z",
      "link": "https://daily.hankooki.com/news/articleView.html?idxno=1424733"
-    },
-    {
-     "title": "檢 '김승원 신약 청탁' 브로커에 징역 4년 구형…6억원 추징 요청",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-12T11:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005603694?sid=102"
-    },
-    {
-     "title": "공소청, '김승원 청탁의혹' 브로커에 징역 4년 구형(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-12T11:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016439397?sid=102"
     }
    ]
   },
@@ -143,13 +111,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 7,
    "recent20": 1,
-   "press": 6,
+   "press": 7,
    "firstArticleAt": "2026-11-12T11:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "‘성북 살인’ 50대, 흉기 미리 준비…연루자도 있나",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-12T12:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003482434?sid=102"
+    },
     {
      "title": "10대 소녀 살해한 50대 구속 기로…이틀째 진술 거부",
      "press": "mbn.mk.co.kr",
@@ -161,21 +135,47 @@
      "press": "obsnews.co.kr",
      "publishedAt": "2026-11-12T11:30:00.000Z",
      "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1543563"
+    }
+   ]
+  },
+  {
+   "keyword": "조희대",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-12T10:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"한덕수 풀어줄 결심\"…조희대 탄핵 재가동?",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-12T12:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001402651?sid=100"
     },
     {
-     "title": "10대 소녀 살해한 50대 남성, 이틀째 묵비권…구속영장 청구",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-12T11:24:00.000Z",
-     "link": "https://www.ajunews.com/view/20261112201726634"
+     "title": "법원행정처장, ‘한덕수 석방시 조희대 탄핵’ 與 주장에 “부적절”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-12T12:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003762131?sid=102"
+    },
+    {
+     "title": "법원행정처장, ‘한덕수 석방시 조희대 탄핵’ 주장에 “부적절”",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-12T11:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002831985?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 391,
-  "matched": 139,
-  "avgLeadMin": 846,
+  "flagged": 386,
+  "matched": 137,
+  "avgLeadMin": 850,
   "recent": [
    {
     "keyword": "충청권 메가프로젝트 착공식",
