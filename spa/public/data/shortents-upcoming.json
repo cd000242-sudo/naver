@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T12:35:59.323Z",
+ "builtAt": "2026-11-12T12:46:02.837Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,43 +16,74 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 60,
-   "recent20": 10,
-   "press": 51,
+   "articles90": 65,
+   "recent20": 8,
+   "press": 54,
    "firstArticleAt": "2026-11-12T11:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김민석, '친청' 최민희 감찰조사 지시…\"언행 논란 심각 인식\"",
+     "title": "최민희, 이번엔 \"李대통령도 처음엔 尹 탄핵 반대\" 주장했다 철회",
+     "press": "pressian.com",
+     "publishedAt": "2026-11-12T12:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/002/0002465661?sid=100"
+    },
+    {
+     "title": "[속보] 김민석, 최민희 감찰 지시…'하이에나 떼'·'李, 尹탄핵 반대' 발...",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-12T12:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001272599?sid=100"
+    },
+    {
+     "title": "김민석, ‘언행 논란’ 최민희 ‘윤리 감찰’ 지시",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-12T12:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012292871?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "성북 10대 살해 구속영장",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-12T11:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'10대 소녀 살해' 50대 남성 이틀째 진술 거부…구속영장 청구",
      "press": "slist.kr",
-     "publishedAt": "2026-11-12T12:34:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=781242"
+     "publishedAt": "2026-11-12T12:44:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=781246"
     },
     {
-     "title": "김민석, 최민희 '잇단 언행 논란'에 윤리감찰 지시",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-12T12:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000551477?sid=100"
+     "title": "여전히 입 다문 살인 피의자…구속영장 청구",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-12T12:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001402670?sid=102"
     },
     {
-     "title": "김민석, ‘언행 논란’ 최민희 감찰 지시…\"심각하게 인식\"",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-12T12:30:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2647625"
+     "title": "‘성매매 강요’ 전처 수사하자 범행?…10대 살해범 구속영장 청구",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-12T12:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012292862?sid=102"
     }
    ]
   },
   {
    "keyword": "젠슨 황 해임 위기",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 10,
+   "articles90": 9,
    "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-12T11:15:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-12T11:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -77,34 +108,34 @@
    ]
   },
   {
-   "keyword": "성북 10대 살해 구속영장",
+   "keyword": "공격하는 현대캐피탈 레오",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 7,
-   "recent20": 1,
+   "articles90": 10,
+   "recent20": 4,
    "press": 7,
-   "firstArticleAt": "2026-11-12T11:08:00.000Z",
-   "exclusive": false,
+   "firstArticleAt": "2026-11-12T12:03:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "‘성매매 강요’ 전처 수사하자 범행?…10대 살해범 구속영장 청구",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-12T12:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012292862?sid=102"
+     "title": "‘장추안·레오 52득점’ 현대캐피탈, OK저축은행 꺾고 ‘3연승+선두 도...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-12T12:45:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/144/0001149540"
     },
     {
-     "title": "‘성북 살인’ 50대, 흉기 미리 준비…연루자도 있나",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-12T12:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003482434?sid=102"
+     "title": "[프로배구] '장추안·레오 52점 합작' 현대캐피탈, OK저축 꺾고 3연승",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-12T12:36:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261112001488"
     },
     {
-     "title": "10대 소녀 살해한 50대 구속 기로…이틀째 진술 거부",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-12T11:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001977970?sid=102"
+     "title": "'장추안-레오 52점 합작' 현대캐피탈, 3연승 타고 선두 도약",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-12T12:34:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/018/0006409155"
     }
    ]
   },
@@ -113,10 +144,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-12T11:14:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-12T11:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -133,7 +164,7 @@
      "link": "https://n.news.naver.com/mnews/article/055/0001402651?sid=100"
     },
     {
-     "title": "법원행정처장, ‘한덕수 석방시 조희대 탄핵’ 與 주장에 “부적절”",
+     "title": "한덕수 석방이 조희대 탄핵 사유?…법원행정처장 “부적절”",
      "press": "donga.com",
      "publishedAt": "2026-11-12T12:01:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/020/0003762131?sid=102"
@@ -141,34 +172,66 @@
    ]
   },
   {
-   "keyword": "김승원 징역 4년 구형",
+   "keyword": "부동산",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-12T11:22:00.000Z",
+   "articles90": 4,
+   "recent20": 3,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T12:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "공소청, '김승원 청탁 의혹' 브로커 징역 4년 구형",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-12T12:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003154615?sid=102"
+     "title": "김포시, 안전전세 관리단과 부동산 중개 현장 방문",
+     "press": "cnbnews.com",
+     "publishedAt": "2026-11-12T12:40:00.000Z",
+     "link": "https://www.cnbnews.com/news/articleView.html?idxno=1023626"
     },
     {
-     "title": "공소청, '김승원 청탁의혹' 브로커에 징역 4년 구형",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-12T12:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000925639?sid=102"
+     "title": "빌사부, 내달 5일 '부동산 창업 아카데미'",
+     "press": "idaegu.co.kr",
+     "publishedAt": "2026-11-12T12:34:00.000Z",
+     "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=565218"
     },
     {
-     "title": "공소청, '김승원 후원금 청탁 의혹' 제넨셀 설립자에 징역 6개월 구형",
-     "press": "daily.hankooki.com",
-     "publishedAt": "2026-11-12T12:02:00.000Z",
-     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1424733"
+     "title": "한국부동산원, 전국 아파트 매매가 0.07% 상승…수도권·서울 동반 오름...",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-12T12:32:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3750566"
+    }
+   ]
+  },
+  {
+   "keyword": "공항철도 파업",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-12T11:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "공항철도 노조 13일 하루 경고파업 예고",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-12T12:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012292860?sid=102"
+    },
+    {
+     "title": "공항철도 13일 하루 경고파업…출퇴근 시간대 운행 시간은?",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-12T12:04:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3750533"
+    },
+    {
+     "title": "공항철도 노조, 13일 경고파업 예고…개통 후 첫 파업 가능성",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-12T11:38:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3750512"
     }
    ]
   },
@@ -177,10 +240,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T11:16:00.000Z",
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-12T11:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -201,38 +264,6 @@
      "press": "tvreport.co.kr",
      "publishedAt": "2026-11-12T11:39:00.000Z",
      "link": "https://m.entertain.naver.com/article/213/0001408105"
-    }
-   ]
-  },
-  {
-   "keyword": "부동산",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T11:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "빌사부, 내달 5일 '부동산 창업 아카데미'",
-     "press": "idaegu.co.kr",
-     "publishedAt": "2026-11-12T12:34:00.000Z",
-     "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=565218"
-    },
-    {
-     "title": "한국부동산원, 전국 아파트 매매가 0.07% 상승…수도권·서울 동반 오름...",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-12T12:32:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3750566"
-    },
-    {
-     "title": "김민석 “부동산 기조, 일관돼야”…종부세 ‘정부안 유지’에 무게",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-12T12:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003482441?sid=100"
     }
    ]
   }
