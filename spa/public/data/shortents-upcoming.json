@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T13:36:25.938Z",
+ "builtAt": "2026-11-12T13:46:30.003Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,21 +8,28 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 20,
  "candidates": [
   {
    "keyword": "김민석 최민희 감찰 지시",
    "sources": [
     "signal.bz",
-    "nate"
+    "nate",
+    "daum"
    ],
-   "articles90": 44,
+   "articles90": 29,
    "recent20": 2,
-   "press": 42,
-   "firstArticleAt": "2026-11-12T12:08:00.000Z",
+   "press": 27,
+   "firstArticleAt": "2026-11-12T12:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'하이에나' 이어 '이 대통령의 윤석열 탄핵 반대' 까지…민주당, 최민희...",
+     "press": "wolyo.co.kr",
+     "publishedAt": "2026-11-12T13:44:00.000Z",
+     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=320434"
+    },
     {
      "title": "최민희 \"李대통령도 尹 탄핵 반대\"…靑 즉각 반박에 김민석 감찰 지시",
      "press": "weekly.chosun.com",
@@ -34,25 +41,50 @@
      "press": "news.jtbc.co.kr",
      "publishedAt": "2026-11-12T13:22:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/437/0000520513?sid=100"
-    },
-    {
-     "title": "與 김민석, '언행 논란' 최민희 최고위원 감찰조사 지시",
-     "press": "joongboo.com",
-     "publishedAt": "2026-11-12T13:16:00.000Z",
-     "link": "https://www.joongboo.com/news/articleView.html?idxno=363742406"
     }
    ]
   },
   {
    "keyword": "CEO의 젠슨 황",
    "sources": [
-    "signal.bz",
+    "signal.bz"
+   ],
+   "articles90": 23,
+   "recent20": 6,
+   "press": 17,
+   "firstArticleAt": "2026-11-12T12:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[시사천국] 젠슨 황 스캔들 왜 지금인가…미 권력투쟁과 반도체 의혹",
+     "press": "news.cpbc.co.kr",
+     "publishedAt": "2026-11-12T13:44:00.000Z",
+     "link": "https://news.cpbc.co.kr/article/1177001?division=NAVER"
+    },
+    {
+     "title": "젠슨 황의 엔비디아, '세계 최고 직장'서도 자취 감췄다…3년 연속 선정...",
+     "press": "newsway.co.kr",
+     "publishedAt": "2026-11-12T13:38:00.000Z",
+     "link": "https://www.newsway.co.kr/news/view?ud=2026111222342257219"
+    },
+    {
+     "title": "젠슨 황 해임 위기에 엔비디아 장전 8% 폭락",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-12T13:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005603700?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황 해임 위기",
+   "sources": [
     "nate"
    ],
-   "articles90": 24,
-   "recent20": 4,
-   "press": 17,
-   "firstArticleAt": "2026-11-12T12:09:00.000Z",
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-12T12:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -69,10 +101,10 @@
      "link": "https://n.news.naver.com/mnews/article/021/0002832452?sid=104"
     },
     {
-     "title": "젠슨 황 물러나면 中 웃는다?…엔비디아 시총 400조원 증발, 국민연금 어...",
-     "press": "nownews.seoul.co.kr",
-     "publishedAt": "2026-11-12T13:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003698891?sid=104"
+     "title": "\"젠슨 황 없으면 어쩌나\"…대만 반도체 업계도 긴장한 이유",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-12T13:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005353389?sid=104"
     }
    ]
   },
@@ -81,10 +113,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 7,
+   "articles90": 5,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-12T12:08:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-12T12:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,43 +139,11 @@
      "link": "https://m.entertain.naver.com/article/108/0003487034"
     }
    ]
-  },
-  {
-   "keyword": "곽선영 서류 탈락 담당자",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T12:44:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "곽선영, 서류 탈락했는데 담당자 착각으로 합격+데뷔 “저한테는 은인”...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-12T13:28:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001186980"
-    },
-    {
-     "title": "곽선영, 서류 탈락→담당자 착각으로 합격 통보…\"인생 바꾼 은인\"",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-12T12:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004466315"
-    },
-    {
-     "title": "곽선영, 경력 없어 서류 탈락했는데…담당자 실수로 '인생 역전' (거장항...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-12T12:44:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002079982"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 383,
+  "flagged": 382,
   "matched": 140,
   "avgLeadMin": 838,
   "recent": [
