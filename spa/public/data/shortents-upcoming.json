@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T03:51:53.715Z",
+ "builtAt": "2026-11-12T04:01:57.955Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,13 +15,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 57,
-   "recent20": 5,
-   "press": 42,
-   "firstArticleAt": "2026-11-12T02:22:00.000Z",
+   "articles90": 45,
+   "recent20": 3,
+   "press": 35,
+   "firstArticleAt": "2026-11-12T02:32:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "李 대통령 \"대기업 투자, 지역 중소기업 성장으로 이어져야\"",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-12T03:54:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=172358"
+    },
     {
      "title": "3대 메가, 충청서 본격 시동…李대통령·이재용 나란히 '첫 삽'",
      "press": "chungnamilbo.co.kr",
@@ -33,12 +39,6 @@
      "press": "straightnews.co.kr",
      "publishedAt": "2026-11-12T03:48:00.000Z",
      "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=315233"
-    },
-    {
-     "title": "李 대통령 \"충청권 메가프로젝트, 112개 기업 23조 원 추가 투자 예정\" ...",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-12T03:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000192203?sid=100"
     }
    ]
   },
@@ -49,8 +49,8 @@
    ],
    "articles90": 25,
    "recent20": 2,
-   "press": 23,
-   "firstArticleAt": "2026-11-12T02:24:00.000Z",
+   "press": 22,
+   "firstArticleAt": "2026-11-12T02:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -61,16 +61,16 @@
      "link": "http://www.segyebiz.com/newsView/20261112509318?OutUrl=naver"
     },
     {
+     "title": "성북구 ‘10대 살해’ 범행 동기 오리무중…프로파일러 투입 [뉴스in뉴스...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-12T03:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012292485?sid=102"
+    },
+    {
      "title": "'성북구 청소년 살해' 50대, 진술 거부…프로파일러 투입",
      "press": "sisajournal.com",
      "publishedAt": "2026-11-12T03:33:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/586/0000142118?sid=102"
-    },
-    {
-     "title": "경찰, '성북구 15세 소녀 살해' 50대 남성 구속영장 신청",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-12T03:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004209071?sid=102"
     }
    ]
   },
@@ -79,13 +79,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 58,
-   "recent20": 11,
+   "articles90": 47,
+   "recent20": 2,
    "press": 12,
-   "firstArticleAt": "2026-11-12T02:25:00.000Z",
+   "firstArticleAt": "2026-11-12T02:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[SHOT+] 크리스찬 디올 CEO, 이대 명예박사 수여식",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-12T03:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006408840?sid=102"
+    },
     {
      "title": "[포토] 블랙핑크 지수, 디올 CEO 학위수여식 참석",
      "press": "heraldmuse.com",
@@ -97,44 +103,6 @@
      "press": "biz.heraldcorp.com",
      "publishedAt": "2026-11-12T03:39:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/016/0002722651?sid=101"
-    },
-    {
-     "title": "디올 CEO 학위 수여식 박수치는 이부진-정의선-신동빈-신유열",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-12T03:38:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261112000770"
-    }
-   ]
-  },
-  {
-   "keyword": "김건희 집사게이트 IMS모빌리티 대표 무죄",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-12T02:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘김건희 집사게이트’ IMS 대표 무죄 확정…대법 “특검 수사대상 아니...",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-12T03:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003564727?sid=102"
-    },
-    {
-     "title": "'집사 게이트' IMS모빌리티 대표, 대법서 무죄·공소기각 확정",
-     "press": "todaykorea.co.kr",
-     "publishedAt": "2026-11-12T02:58:00.000Z",
-     "link": "https://www.todaykorea.co.kr/news/articleView.html?idxno=408539"
-    },
-    {
-     "title": "'김건희 집사게이트' 조영탁 IMS모빌리티 대표, 대법원에서 무죄 확정",
-     "press": "ngonews.kr",
-     "publishedAt": "2026-11-12T02:44:00.000Z",
-     "link": "https://www.ngonews.kr/news/articleView.html?idxno=242993"
     }
    ]
   },
@@ -143,10 +111,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-12T02:22:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-12T02:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -167,6 +135,38 @@
      "press": "yna.co.kr",
      "publishedAt": "2026-11-12T03:07:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016438203?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "김건희 집사게이트 IMS모빌리티 대표 무죄",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T02:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘김건희 집사게이트’ IMS 대표 무죄 확정…대법 “특검 수사대상 아니...",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-12T03:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003564727?sid=102"
+    },
+    {
+     "title": "'집사 게이트' IMS모빌리티 대표, 대법서 무죄·공소기각 확정",
+     "press": "todaykorea.co.kr",
+     "publishedAt": "2026-11-12T02:58:00.000Z",
+     "link": "https://www.todaykorea.co.kr/news/articleView.html?idxno=408539"
+    },
+    {
+     "title": "'김건희 집사게이트' 조영탁 IMS모빌리티 대표, 대법원에서 무죄 확정",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-12T02:44:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=242993"
     }
    ]
   },
@@ -238,9 +238,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 359,
-  "matched": 144,
-  "avgLeadMin": 1557,
+  "flagged": 357,
+  "matched": 143,
+  "avgLeadMin": 1567,
   "recent": [
    {
     "keyword": "층간소음 기준 강화",
