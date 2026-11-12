@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T08:54:08.944Z",
+ "builtAt": "2026-11-12T09:04:14.072Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,145 +8,145 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 22,
  "candidates": [
   {
-   "keyword": "발언하는 이재명 대통령",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 37,
-   "recent20": 9,
-   "press": 31,
-   "firstArticleAt": "2026-11-12T07:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[뉴스클레임 사설] 급락장 '저평가' 외치는 대통령, 손실 책임 누가 지나",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-12T08:52:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082467"
-    },
-    {
-     "title": "이하늘 \"이재명 정부 꼭 성공하길, 망하기 바란 적 無\" [MHN:픽]",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-12T08:44:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000489833"
-    },
-    {
-     "title": "민주 “이수정, 이 대통령 두 아들에 사과하라”",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-12T08:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002831942?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "한전 3분기 실적",
+   "keyword": "고려아연 주총 결의 취소",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 32,
-   "recent20": 6,
-   "press": 30,
-   "firstArticleAt": "2026-11-12T07:26:00.000Z",
+   "articles90": 57,
+   "recent20": 7,
+   "press": 52,
+   "firstArticleAt": "2026-11-12T07:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한전 3분기 영업익, 71% ‘뚝’…중동전쟁發 연료비 상승 에도 요금 동결...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-12T08:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002722796?sid=101"
+     "title": "법원, 고려아연 2025년 정기주총 결의 취소 판결…\"경영권 방어용 상호...",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-12T08:58:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=503524"
     },
     {
-     "title": "중동전쟁 여파에 한전 3분기 영업익 70% 뚝…송전망 투자 빨간불",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-12T08:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004681588?sid=101"
+     "title": "고려아연, '주총 결의 취소' 판결에 \"항소할 것\"…영풍은 \"판결 환영\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-12T08:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000925578?sid=101"
     },
     {
-     "title": "한국전력 3분기 영업이익 71% 급감",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-12T08:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005762995?sid=101"
+     "title": "고려아연 \"1심 판결, 대법원 판단과 배치…항소할 것\"",
+     "press": "daily.hankooki.com",
+     "publishedAt": "2026-11-12T08:58:00.000Z",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1424704"
     }
    ]
   },
   {
-   "keyword": "폭설 김윤석 구교환 짜릿한 전율",
+   "keyword": "한화생명, 3분기 순익 8656억↑",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 27,
+   "recent20": 4,
+   "press": 27,
+   "firstArticleAt": "2026-11-12T07:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한화생명 3분기 누적 순익 8656억… 신계약 CSM 40% 증가",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-12T09:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000965290?sid=101"
+    },
+    {
+     "title": "[Invest]한화생명, 3분기 누적 순익 8656억…자회사 호조로 적자 방어",
+     "press": "investchosun.com",
+     "publishedAt": "2026-11-12T09:02:00.000Z",
+     "link": "https://www.investchosun.com/site/data/html_dir/2026/11/12/2026111280220.html"
+    },
+    {
+     "title": "한화생명, 3분기 누적 순익 8656억, 작년 동기比 12.6%↑",
+     "press": "sentv.co.kr",
+     "publishedAt": "2026-11-12T09:00:00.000Z",
+     "link": "https://www.sentv.co.kr/article/view/sentv202611120204"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황 해임 위기",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 29,
+   "recent20": 5,
+   "press": 24,
+   "firstArticleAt": "2026-11-12T07:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "젠슨 황 해임 추진에 '깐부 동맹'도 변수…한국 영향은",
+     "press": "mbnmoney.mbn.co.kr",
+     "publishedAt": "2026-11-12T09:00:00.000Z",
+     "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005961203"
+    },
+    {
+     "title": "[젠슨 황 리스크] 'AI 황제'의 추락, 글로벌 AI 생태계 지각변동",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-12T08:58:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1731488"
+    },
+    {
+     "title": "사내 불륜·美 정계 압박에…\"젠슨 황 믿는다\"던 이사회도 돌아서",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-12T08:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005353330?sid=105"
+    }
+   ]
+  },
+  {
+   "keyword": "충청권 메가프로젝트 추가 투자",
    "sources": [
     "signal.bz"
    ],
    "articles90": 26,
-   "recent20": 4,
-   "press": 23,
-   "firstArticleAt": "2026-11-12T07:26:00.000Z",
+   "recent20": 5,
+   "press": 24,
+   "firstArticleAt": "2026-11-12T07:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김윤석X구교환 콤비의 연기 차력쇼…홍의정 감독 '폭설' [종합]",
-     "press": "digitalchosun.dizzo.com",
-     "publishedAt": "2026-11-12T08:46:00.000Z",
-     "link": "http://digitalchosun.dizzo.com/site/data/html_dir/2026/11/12/2026111280213.html"
+     "title": "삼성전기, AI 반도체 패키지기판 생산거점 확충 세종에 4조3000억 투자…",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-12T09:02:00.000Z",
+     "link": "http://www.breaknews.com/1250645"
     },
     {
-     "title": "\"구교환에게 짜릿한 전율\"vs \"김윤석 선배와 매순간이 감탄\" 김윤석·구...",
-     "press": "sports.hankooki.com",
-     "publishedAt": "2026-11-12T08:46:00.000Z",
-     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6943457"
+     "title": "이 대통령 “메가프로젝트 속도전 넘어 전격전…변화 가시화”",
+     "press": "jndn.com",
+     "publishedAt": "2026-11-12T08:56:00.000Z",
+     "link": "http://www.jndn.com/article.php?aid=1794473596442981093"
     },
     {
-     "title": "전율 느낀 김윤석, 매 순간 감탄한 구교환… 유머·긴장 넘나드는 '폭설...",
-     "press": "sisaweek.com",
-     "publishedAt": "2026-11-12T08:44:00.000Z",
-     "link": "https://www.sisaweek.com/news/articleView.html?idxno=238952"
+     "title": "李 \"40조 추가 투자…아산을 HBM 심장으로\"",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-12T08:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005353324?sid=100"
     }
    ]
   },
   {
-   "keyword": "자본시장 저평가 대상",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 18,
-   "recent20": 2,
-   "press": 18,
-   "firstArticleAt": "2026-11-12T07:29:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[뉴스클레임 사설] 급락장 '저평가' 외치는 대통령, 손실 책임 누가 지나",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-12T08:52:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082467"
-    },
-    {
-     "title": "李대통령 \"자본시장 여전히 저평가…장기투자·주주환원 개혁 속도내야...",
-     "press": "polinews.co.kr",
-     "publishedAt": "2026-11-12T08:41:00.000Z",
-     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=748345"
-    },
-    {
-     "title": "이 대통령 “국내 자본시장 저평가…기업가치 제고·코스닥 육성 속도”",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-12T08:28:00.000Z",
-     "link": "https://www.viva100.com/article/20261112501361"
-    }
-   ]
-  },
-  {
-   "keyword": "한국 야구, 호주에 7-8 패배",
+   "keyword": "한국, APBC 첫 경기서 호주에 패배",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 17,
-   "recent20": 2,
-   "press": 17,
-   "firstArticleAt": "2026-11-12T07:28:00.000Z",
+   "articles90": 11,
+   "recent20": 0,
+   "press": 11,
+   "firstArticleAt": "2026-11-12T07:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -163,89 +163,31 @@
      "link": "https://m.sports.naver.com/kbaseball/article/529/0000079247"
     },
     {
-     "title": "6회 대역전에도 지키지 못했다…한국, 호주에 7대 8 재역전패",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-12T08:28:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/005/0001884787"
-    }
-   ]
-  },
-  {
-   "keyword": "오산 원룸 시신 발견",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 16,
-   "recent20": 6,
-   "press": 16,
-   "firstArticleAt": "2026-11-12T07:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "오산 원룸서 30대 남성 시신…대형 비닐 봉투 안에서 발견",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-12T08:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002722795?sid=102"
-    },
-    {
-     "title": "수일째 연락 끊긴 30대 男, 원룸서 대형봉투 싸인 시신으로 발견",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-12T08:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005440530?sid=102"
-    },
-    {
-     "title": "오산 원룸서 대형 비닐봉투에 담긴 30대 남성 시신 발견…경찰 수사",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-12T08:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002465623?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황 불륜 논란",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 15,
-   "recent20": 3,
-   "press": 15,
-   "firstArticleAt": "2026-11-12T07:25:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'시총 충격' 엔비디아 딜레마…젠슨 황 해임? “1조달러가 걸렸다”",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-12T08:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003485205?sid=104"
-    },
-    {
-     "title": "젠슨황 스캔들에 中 외교부 \"간첩 서사 중단하라\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-12T08:50:00.000Z",
-     "link": "https://www.ajunews.com/view/20261112174733425"
-    },
-    {
-     "title": "사내 불륜까지 터지자 … 황 신뢰했던 이사회도 돌아서",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-12T08:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005762985?sid=104"
+     "title": "야구 대표팀, APBC 개막전서 호주에 충격 재역전패 7-8",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-12T08:32:00.000Z",
+     "link": "https://www.insight.co.kr/news/581829"
     }
    ]
   },
   {
    "keyword": "건보공단 특사경 반대",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 30,
-   "recent20": 4,
-   "press": 14,
-   "firstArticleAt": "2026-11-12T07:25:00.000Z",
+   "articles90": 11,
+   "recent20": 5,
+   "press": 9,
+   "firstArticleAt": "2026-11-12T07:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "국민의힘, 의협과 '건보공단 특사경 도입' 법안 저지 공동 대응",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-12T09:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432003?sid=100"
+    },
     {
      "title": "국민건강보험공단 특별사법경찰 반대 궐기대회",
      "press": "gukjenews.com",
@@ -257,91 +199,27 @@
      "press": "gukjenews.com",
      "publishedAt": "2026-11-12T08:50:00.000Z",
      "link": "https://www.gukjenews.com/news/articleView.html?idxno=3750392"
-    },
-    {
-     "title": "의협 \"건보공단 강제수사권 안 된다\" … 장동혁 \"법안 저지 힘쓸 것\"",
-     "press": "biz.newdaily.co.kr",
-     "publishedAt": "2026-11-12T08:50:00.000Z",
-     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/12/2026111200379.html"
     }
    ]
   },
   {
-   "keyword": "조현 장관 방중 회담",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-12T07:25:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "조현·中왕이, APEC 앞두고 대좌…북미 대화 '北의중' 공유 주목",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-12T08:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009286660?sid=104"
-    },
-    {
-     "title": "조현, 13일 베이징서 왕이와 회담…정상회담 의제 조율 관심",
-     "press": "kbsm.net",
-     "publishedAt": "2026-11-12T08:32:00.000Z",
-     "link": "https://www.kbsm.net/news/view.php?idx=541572"
-    },
-    {
-     "title": "中 \"조현 장관 방중 중요하게 여겨\"…미중러 회담엔 \"관계국과 소통\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-12T08:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005440505?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황 해임 위기 및 스캔들",
+   "keyword": "정점식, 정순택 대주교 예방",
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-12T07:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "흔들리는 젠슨 황, 33년 만에 퇴진 위기…“국내 기업 오히려 기회될 수...",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-12T08:34:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611120179"
-    },
-    {
-     "title": "'첩첩산중' 코스피, 젠슨 황 해임설·옵션만기 '이중고'에 3일 만에 하락",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-12T08:02:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2647518"
-    },
-    {
-     "title": "'젠슨 황 해임 위기'에 발목 잡힌 코스피… 사흘 만에 약세 전환 5,342 마...",
-     "press": "fntoday.co.kr",
-     "publishedAt": "2026-11-12T07:58:00.000Z",
-     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=398004"
-    }
-   ]
-  },
-  {
-   "keyword": "정점식 원내대표 정순택",
-   "sources": [
-    "signal.bz"
-   ],
    "articles90": 17,
-   "recent20": 2,
-   "press": 5,
+   "recent20": 3,
+   "press": 6,
    "firstArticleAt": "2026-11-12T07:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "국힘 정점식, 정순택 대주교 예방…\"서울 WYD 예산 확보 위해 노력\"",
+     "press": "news.cpbc.co.kr",
+     "publishedAt": "2026-11-12T08:54:00.000Z",
+     "link": "https://news.cpbc.co.kr/article/1176996?division=NAVER"
+    },
     {
      "title": "정점식, 정순택 대주교 예방...\"세계청년대회 전폭 지원\"",
      "press": "ytn.co.kr",
@@ -353,12 +231,70 @@
      "press": "ajunews.com",
      "publishedAt": "2026-11-12T08:48:00.000Z",
      "link": "https://www.ajunews.com/view/20261112173201375"
+    }
+   ]
+  },
+  {
+   "keyword": "폭설 김윤석 구교환 연기 케미",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-12T07:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"구교환에게 짜릿한 전율\"vs \"김윤석 선배와 매순간이 감탄\" 김윤석·구...",
+     "press": "sports.hankooki.com",
+     "publishedAt": "2026-11-12T08:46:00.000Z",
+     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6943457"
     },
     {
-     "title": "정점식, 정순택 서울대교구장 대주교 예방",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-12T08:05:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261112001392"
+     "title": "김윤석X구교환 콤비의 연기 차력쇼…홍의정 감독 '폭설' [종합]",
+     "press": "digitalchosun.dizzo.com",
+     "publishedAt": "2026-11-12T08:46:00.000Z",
+     "link": "http://digitalchosun.dizzo.com/site/data/html_dir/2026/11/12/2026111280213.html"
+    },
+    {
+     "title": "김윤석·구교환, 고립된 기차역서 터진 '폭설' 연기 시너지…\"케미 1등은...",
+     "press": "starnewsk.com",
+     "publishedAt": "2026-11-12T07:56:00.000Z",
+     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60959"
+    }
+   ]
+  },
+  {
+   "keyword": "김정은 시찰",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T07:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "국정원 “김정은, 북미 대화 의중 中에 전달 추정…중립적으로 봐야”",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-12T08:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006409085?sid=100"
+    },
+    {
+     "title": "北해군 강화 속도전 … 김정은 \"동해기지, 반드시 기한내 완료\"",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-12T08:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005763023?sid=100"
+    },
+    {
+     "title": "北김정은, 동해안 해군기지 시찰…\"정해진 기간 내 완공\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-12T08:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000650672?sid=100"
     }
    ]
   },
@@ -367,13 +303,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
    "firstArticleAt": "2026-11-12T07:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "민주 박희승 \"법관 탄핵은 후진국에서나\"...혁신당 \"사죄하라\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-12T08:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432002?sid=100"
+    },
     {
      "title": "\"조희대 탄핵!\" 시민에게…민주당 박희승 \"미쳤나, 후진국에서나 하는 ...",
      "press": "news.jtbc.co.kr",
@@ -385,22 +327,54 @@
      "press": "jjan.kr",
      "publishedAt": "2026-11-12T07:56:00.000Z",
      "link": "https://www.jjan.kr/article/20261112500392"
+    }
+   ]
+  },
+  {
+   "keyword": "김현석",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-12T08:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "2번이나 응답한 '미스터 울산' 김현석, 이별도 아름답다…친정팀 '장기...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-12T09:00:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/311/0002079909"
     },
     {
-     "title": "박희승 국회의원, 2026 국정감사 친환경 베스트의원 선정…산자중기위 ...",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-12T07:54:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3750277"
+     "title": "울산 김현석 감독, 올 시즌 끝으로 물러나",
+     "press": "usmbc.co.kr",
+     "publishedAt": "2026-11-12T08:18:00.000Z",
+     "link": "https://www.usmbc.co.kr/NewsArticle/873030"
+    },
+    {
+     "title": "[K리그1 포인트] '낭만 품은 상남자' 김현석 감독, 처음부터 끝까지 자존...",
+     "press": "interfootball.co.kr",
+     "publishedAt": "2026-11-12T08:05:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/413/0000226488"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 376,
-  "matched": 131,
-  "avgLeadMin": 1175,
+  "flagged": 384,
+  "matched": 132,
+  "avgLeadMin": 1166,
   "recent": [
+   {
+    "keyword": "젠슨 황 불륜 논란",
+    "hitKeyword": "젠슨 황 불륜",
+    "hitAt": "2026-11-12T18:00:00+09:00",
+    "leadMin": 36
+   },
    {
     "keyword": "최초 2천만 외국인 관광객",
     "hitKeyword": "한국 방문 외국인 2000만",
@@ -454,12 +428,6 @@
     "hitKeyword": "삼성 호주리그 파견",
     "hitAt": "2026-11-12T16:30:00+09:00",
     "leadMin": 138
-   },
-   {
-    "keyword": "엔비디아, 젠슨 황 해임 논의",
-    "hitKeyword": "젠슨 황 해임 가능성",
-    "hitAt": "2026-11-12T16:30:00+09:00",
-    "leadMin": 107
    }
   ]
  }
