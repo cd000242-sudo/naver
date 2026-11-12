@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T09:14:22.591Z",
+ "builtAt": "2026-11-12T09:24:29.726Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,38 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "고려아연 주총 결의 취소",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 50,
-   "recent20": 7,
-   "press": 48,
-   "firstArticleAt": "2026-11-12T07:46:00.000Z",
+   "articles90": 43,
+   "recent20": 6,
+   "press": 41,
+   "firstArticleAt": "2026-11-12T07:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "법원, \"최대주주 영풍의 의결권 제한한 고려아연 25년 주주총회 결의 취...",
-     "press": "livesnews.com",
-     "publishedAt": "2026-11-12T09:12:00.000Z",
-     "link": "https://www.livesnews.com/news/article.html?no=65938"
+     "title": "'의결권 제한' 주총 무효 판결에...고려아연 \"항소\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-12T09:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432037?sid=101"
     },
     {
-     "title": "영풍·MBK, 고려아연 주총 결의 취소소송 승소…법원 \"의결권 제한 부당...",
-     "press": "wikileaks-kr.org",
-     "publishedAt": "2026-11-12T09:06:00.000Z",
-     "link": "https://www.wikileaks-kr.org/news/articleView.html?idxno=194584"
+     "title": "법원 “고려아연, 영풍·MBK 의결권 제한한 주주총회 결의 취소해야”",
+     "press": "segye.com",
+     "publishedAt": "2026-11-12T09:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004174731?sid=102"
     },
     {
-     "title": "고려아연, '주총 결의 취소' 판결에 \"항소할 것\"…영풍은 \"판결 환영\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-12T08:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000925578?sid=101"
+     "title": "'판 뒤집어졌다' 영풍의 반격 시작…법원 \"고려아연, '의결권 제한' 주총...",
+     "press": "financialpost.co.kr",
+     "publishedAt": "2026-11-12T09:18:00.000Z",
+     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=300600"
     }
    ]
   },
@@ -47,10 +48,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 26,
-   "recent20": 2,
-   "press": 25,
-   "firstArticleAt": "2026-11-12T07:45:00.000Z",
+   "articles90": 24,
+   "recent20": 1,
+   "press": 23,
+   "firstArticleAt": "2026-11-12T07:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,46 +76,14 @@
    ]
   },
   {
-   "keyword": "젠슨 황 해임 위기",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 26,
-   "recent20": 7,
-   "press": 23,
-   "firstArticleAt": "2026-11-12T07:45:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "젠슨 황 위기…삼성·SK HBM 배분 바뀔까",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-12T09:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000543371?sid=101"
-    },
-    {
-     "title": "독이 된 ‘33년 원톱 체제’… 잇단 불륜 사태로 시총 곤두박질 [젠슨 황...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-12T09:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004174717?sid=104"
-    },
-    {
-     "title": "스캔들 덮친 스캔들… 해임 기로에 선 젠슨 황",
-     "press": "segye.com",
-     "publishedAt": "2026-11-12T09:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004174714?sid=104"
-    }
-   ]
-  },
-  {
    "keyword": "충청권 메가프로젝트 추가 투자",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 25,
-   "recent20": 3,
-   "press": 23,
-   "firstArticleAt": "2026-11-12T07:48:00.000Z",
+   "articles90": 22,
+   "recent20": 0,
+   "press": 20,
+   "firstArticleAt": "2026-11-12T07:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -139,14 +108,110 @@
    ]
   },
   {
+   "keyword": "브로커 양씨 징역 4년 구형",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 14,
+   "recent20": 5,
+   "press": 14,
+   "firstArticleAt": "2026-11-12T08:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[속보] ‘김승원 신약 청탁의혹’ 양모씨에 징역 4년 구형",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-12T09:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001884799?sid=102"
+    },
+    {
+     "title": "공소청, '김승원 청탁의혹' 브로커에 징역 4년 구형",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-12T09:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016439355?sid=102"
+    },
+    {
+     "title": "[속보] ‘김승원 청탁의혹’ 브로커 양모씨에 징역 4년 구형",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-12T09:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000131840?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "청탁 의혹 공판",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 13,
+   "recent20": 4,
+   "press": 13,
+   "firstArticleAt": "2026-11-12T08:39:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "공소청, '김승원 청탁의혹' 브로커에 징역 4년 구형",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-12T09:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016439355?sid=102"
+    },
+    {
+     "title": "[속보] ‘김승원 청탁의혹’ 브로커 양모씨에 징역 4년 구형",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-12T09:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000131840?sid=102"
+    },
+    {
+     "title": "‘김승원 신약 청탁 의혹’ 브로커 양모씨에 징역 4년 구형",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-12T09:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004009298?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황 해임 검토 중",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 11,
+   "recent20": 3,
+   "press": 10,
+   "firstArticleAt": "2026-11-12T08:33:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "젠슨이 곧 엔비디아인데…기술·인맥·투자 삼각축 흔들리나",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-12T09:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004681643?sid=104"
+    },
+    {
+     "title": "젠슨 황 퇴진 가능성에 촉각… “단기 불확실성, 중장기 흐름은 불변”",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-12T09:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003698845?sid=101"
+    },
+    {
+     "title": "스캔들 덮친 스캔들… 해임 기로에 선 젠슨 황",
+     "press": "segye.com",
+     "publishedAt": "2026-11-12T09:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004174714?sid=104"
+    }
+   ]
+  },
+  {
    "keyword": "건보공단 특사경 반대",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-12T07:46:00.000Z",
+   "articles90": 10,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-12T07:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -171,46 +236,14 @@
    ]
   },
   {
-   "keyword": "에버랜드",
-   "sources": [
-    "google"
-   ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-12T07:48:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "삼성, KS 우승 공약 진짜 실현한다…에버랜드에 팬 2000명 초청, 공식 우...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-12T09:04:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/477/0000638774"
-    },
-    {
-     "title": "루후슈 판다→퍼레이드→뿌빠밴드까지...11월 에버랜드 알차게 즐기는 ...",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-12T09:04:00.000Z",
-     "link": "https://www.insight.co.kr/news/581821"
-    },
-    {
-     "title": "'천 명에 천 명 더!' 삼성 우승 공약 마침내 지킨다, 에버랜드에서 'V9' ...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-12T09:03:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/241/0003541485"
-    }
-   ]
-  },
-  {
    "keyword": "한국, APBC 첫 경기서 호주에 패배",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
+   "articles90": 9,
    "recent20": 1,
    "press": 9,
-   "firstArticleAt": "2026-11-12T07:45:00.000Z",
+   "firstArticleAt": "2026-11-12T08:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -235,17 +268,151 @@
    ]
   },
   {
-   "keyword": "정점식, 정순택 대주교 예방",
+   "keyword": "여자축구, LA 올림픽 B조 대결",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 0,
+   "press": 9,
+   "firstArticleAt": "2026-11-12T07:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "여자축구, LA 올림픽 최종예선서 북한·중국·필리핀과 B조",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-12T09:03:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/003/0014319483"
+    },
+    {
+     "title": "여자축구, 올림픽 예선서 북한과 한 조…내년 평양 원정 예정",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-12T08:55:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/417/0001164187"
+    },
+    {
+     "title": "한국 여자축구, LA 올림픽 최종예선서 북한과 맞대결",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-12T08:54:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/422/0000925577"
+    }
+   ]
+  },
+  {
+   "keyword": "에버랜드",
+   "sources": [
+    "google"
+   ],
+   "articles90": 9,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-12T07:57:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "에버랜드, 삼성라이온즈 팬 2000명 무료 초대",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-12T09:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005603605?sid=101"
+    },
+    {
+     "title": "삼성, KS 우승 공약 진짜 실현한다…에버랜드에 팬 2000명 초청, 공식 우...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-12T09:04:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/477/0000638774"
+    },
+    {
+     "title": "루후슈 판다→퍼레이드→뿌빠밴드까지...11월 에버랜드 알차게 즐기는 ...",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-12T09:04:00.000Z",
+     "link": "https://www.insight.co.kr/news/581821"
+    }
+   ]
+  },
+  {
+   "keyword": "가상자산업권 보안 대책회의",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 25,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-12T07:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "가상자산 거래소 보안 강화… 해킹 의심만으로 입출금 막는다",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-12T08:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000192247?sid=101"
+    },
+    {
+     "title": "가상자산업권 보안대책회의하는 신진창 금융위 부위원장",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-12T08:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014319436?sid=100"
+    },
+    {
+     "title": "가상자산업권 보안대책회의",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-12T08:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014319420?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "박희승",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-12T07:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "박희승 ‘조희대 탄핵’ 주장에 “미쳤나, 후진국에서나 하는 일”",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-12T09:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001884797?sid=102"
+    },
+    {
+     "title": "‘조희대 탄핵’ 시민들에, ‘판사 출신’ 민주 박희승 “법관 탄핵 후...",
+     "press": "weekly.khan.co.kr",
+     "publishedAt": "2026-11-12T09:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/033/0000053333?sid=100"
+    },
+    {
+     "title": "與박희승 \"후진국에서 하는 짓\"…'曺탄핵 요구' 지지자와 설전(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-12T09:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016439336?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "정점식-정순택 대주교 예방",
    "sources": [
     "nate"
    ],
    "articles90": 13,
-   "recent20": 0,
+   "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-12T07:46:00.000Z",
+   "firstArticleAt": "2026-11-12T07:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "정점식, 정순택 대주교 예방…“여야 함께 세계청년대회 준비”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-12T09:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012292680?sid=100"
+    },
     {
      "title": "국힘 정점식, 정순택 대주교 예방…\"서울 WYD 예산 확보 위해 노력\"",
      "press": "news.cpbc.co.kr",
@@ -257,108 +424,6 @@
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-12T08:51:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002431999?sid=100"
-    },
-    {
-     "title": "정순택 대주교 \"서울 WYD, 종교·여야 넘어 온 국민 힘 모아야\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-12T08:48:00.000Z",
-     "link": "https://www.ajunews.com/view/20261112173201375"
-    }
-   ]
-  },
-  {
-   "keyword": "박희승",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-12T07:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "與박희승 \"후진국에서 하는 짓\"…'曺탄핵 요구' 지지자와 설전(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-12T09:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016439336?sid=100"
-    },
-    {
-     "title": "민주 박희승 \"법관 탄핵은 후진국에서나\"...혁신당 \"사죄하라\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-12T08:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432002?sid=100"
-    },
-    {
-     "title": "\"조희대 탄핵!\" 시민에게…민주당 박희승 \"미쳤나, 후진국에서나 하는 ...",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-12T08:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000520447?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "김정은 시찰",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T08:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김정은, 동해 해군기지 건설 박차 지시...핵 억제력 확대 노리나",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-12T09:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432011?sid=100"
-    },
-    {
-     "title": "국정원 “김정은, 북미 대화 의중 中에 전달 추정…중립적으로 봐야”",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-12T08:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006409085?sid=100"
-    },
-    {
-     "title": "北해군 강화 속도전 … 김정은 \"동해기지, 반드시 기한내 완료\"",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-12T08:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005763023?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "폭설 김윤석 구교환 연기 케미",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T07:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"구교환에게 짜릿한 전율\"vs \"김윤석 선배와 매순간이 감탄\" 김윤석·구...",
-     "press": "sports.hankooki.com",
-     "publishedAt": "2026-11-12T08:46:00.000Z",
-     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6943457"
-    },
-    {
-     "title": "김윤석X구교환 콤비의 연기 차력쇼…홍의정 감독 '폭설' [종합]",
-     "press": "digitalchosun.dizzo.com",
-     "publishedAt": "2026-11-12T08:46:00.000Z",
-     "link": "http://digitalchosun.dizzo.com/site/data/html_dir/2026/11/12/2026111280213.html"
-    },
-    {
-     "title": "김윤석·구교환, 고립된 기차역서 터진 '폭설' 연기 시너지…\"케미 1등은...",
-     "press": "starnewsk.com",
-     "publishedAt": "2026-11-12T07:56:00.000Z",
-     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60959"
     }
    ]
   },
@@ -367,37 +432,37 @@
    "sources": [
     "google"
    ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
+   "articles90": 5,
+   "recent20": 3,
+   "press": 5,
    "firstArticleAt": "2026-11-12T08:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "광주 북구 아파트 방화 40대 입주민 입건",
+     "press": "jndn.com",
+     "publishedAt": "2026-11-12T09:20:00.000Z",
+     "link": "http://www.jndn.com/article.php?aid=1794475023443011005"
+    },
+    {
+     "title": "아파트 방화 40대 긴급체포…\"우울증에 목숨 끊으려 했다\" 진술(종합)",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-12T09:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004209287?sid=102"
+    },
+    {
      "title": "‘경비원 중태·13명 부상’ 광주 아파트 방화범…“극단 선택하려 불 ...",
      "press": "seoul.co.kr",
      "publishedAt": "2026-11-12T09:09:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/081/0003698847?sid=102"
-    },
-    {
-     "title": "광주 아파트 방화한 40대, 범행 이유가…\"극단적 선택 충동에\"",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-12T09:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001977927?sid=102"
-    },
-    {
-     "title": "'경비원 중태·13명 부상' 아파트 방화범 \"죽고 싶어서\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-12T08:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016439289?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 384,
+  "flagged": 390,
   "matched": 132,
   "avgLeadMin": 1166,
   "recent": [
