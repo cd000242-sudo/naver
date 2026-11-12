@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T07:33:30.277Z",
+ "builtAt": "2026-11-12T07:43:36.758Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,145 +8,49 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
+ "measured": 20,
  "candidates": [
   {
-   "keyword": "충청권 메가프로젝트 착공",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 53,
-   "recent20": 15,
-   "press": 48,
-   "firstArticleAt": "2026-11-12T06:10:00.000Z",
-   "exclusive": true,
-   "capped": true,
-   "samples": [
-    {
-     "title": "충남도 신속 행정 지원으로 삼성전자 아산사업장 조기 착공",
-     "press": "ngetnews.com",
-     "publishedAt": "2026-11-12T07:32:00.000Z",
-     "link": "https://www.ngetnews.com/news/articleView.html?idxno=555850"
-    },
-    {
-     "title": "삼성, 충청권에 144兆 투입…이재용 \"또 한 번의 도약 약속\"",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-12T07:28:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2017939"
-    },
-    {
-     "title": "삼성 113조 투자 실행 본격화, 아산서 충청권 메가프로젝트 착공식 개최",
-     "press": "dtnews24.com",
-     "publishedAt": "2026-11-12T07:26:00.000Z",
-     "link": "http://www.dtnews24.com/news/articleView.html?idxno=817140"
-    }
-   ]
-  },
-  {
-   "keyword": "hmm",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 51,
-   "recent20": 11,
-   "press": 46,
-   "firstArticleAt": "2026-11-12T06:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[마켓포인트] HMM, 3분기 영업이익 1조3947억원…영업이익률 34%로 글로벌...",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-12T07:30:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=503490"
-    },
-    {
-     "title": "HMM, 3분기 영업이익급증…애프터마켓 2만1150원, 실적 발표에 주가 촉각",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-12T07:30:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=626240"
-    },
-    {
-     "title": "HMM, 3Q 매출액 4조1271억...전년동기比 52%↑",
-     "press": "thevaluenews.co.kr",
-     "publishedAt": "2026-11-12T07:30:00.000Z",
-     "link": "http://www.thevaluenews.co.kr/news/view.php?idx=203247"
-    }
-   ]
-  },
-  {
-   "keyword": "에이티즈 업",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 100,
-   "recent20": 1,
-   "press": 36,
-   "firstArticleAt": "2026-11-12T06:12:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "에이티즈, 8주년 맞아 새로운 도약 예고…올해 세 번 컴백 다짐",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-12T07:26:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=624838"
-    },
-    {
-     "title": "에이티즈, '배드' 흥행 잇는다…신곡 '업'으로 또 한 번 도약",
-     "press": "mhns.co.kr",
-     "publishedAt": "2026-11-12T07:12:00.000Z",
-     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=768857"
-    },
-    {
-     "title": "에이티즈 종호, 훈훈함 가득",
-     "press": "sports.hankooki.com",
-     "publishedAt": "2026-11-12T07:12:00.000Z",
-     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6943441"
-    }
-   ]
-  },
-  {
-   "keyword": "한전 3분기 실적",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 23,
-   "recent20": 12,
-   "press": 23,
-   "firstArticleAt": "2026-11-12T06:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한전, 3분기 영업익 1조6442억원… 연료비 상승에 수익성 악화",
-     "press": "the-biz.co.kr",
-     "publishedAt": "2026-11-12T07:32:00.000Z",
-     "link": "http://www.the-biz.co.kr/news/articleView.html?idxno=731275"
-    },
-    {
-     "title": "요금은 묶고 빚은 쌓이고…한전·가스공사 '동결 청구서'",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-12T07:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001272556?sid=101"
-    },
-    {
-     "title": "한국전력 3분기 영업이익 70% 급감…국제 연료비 급등 영향",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-12T07:28:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=624839"
-    }
-   ]
-  },
-  {
-   "keyword": "건보공단 특사경 반대",
+   "keyword": "3분기 순익 급증",
    "sources": [
     "nate"
    ],
-   "articles90": 52,
-   "recent20": 25,
-   "press": 21,
-   "firstArticleAt": "2026-11-12T06:08:00.000Z",
+   "articles90": 30,
+   "recent20": 8,
+   "press": 25,
+   "firstArticleAt": "2026-11-12T06:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한화생명, 3분기 누적 순익 8656억원…전년比 12.6%↑",
+     "press": "cstimes.com",
+     "publishedAt": "2026-11-12T07:40:00.000Z",
+     "link": "https://www.cstimes.com/news/articleView.html?idxno=727730"
+    },
+    {
+     "title": "한화생명, 3분기 순익 8656억 전년비 12.6%↑..투자손익은 적자전환",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-12T07:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005440467?sid=101"
+    },
+    {
+     "title": "DB손보, 보험영업 체질 개선…3분기 순익 35% 증가",
+     "press": "ntoday.co.kr",
+     "publishedAt": "2026-11-12T07:36:00.000Z",
+     "link": "https://www.ntoday.co.kr/news/articleView.html?idxno=130814"
+    }
+   ]
+  },
+  {
+   "keyword": "건보공단 특사경 반대 궐기대회",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 50,
+   "recent20": 20,
+   "press": 19,
+   "firstArticleAt": "2026-11-12T06:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -157,16 +61,16 @@
      "link": "https://www.newspim.com/news/view/20261112001327"
     },
     {
-     "title": "건보공단 특사경 법안에 의료계 반발 \"권한 남용 커\"",
-     "press": "newstomato.com",
+     "title": "\"14만 의사 끝까지 항쟁\"…의협, 건보공단 특사경 철회 촉구",
+     "press": "dailian.co.kr",
      "publishedAt": "2026-11-12T07:30:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1320267&inflow=N"
+     "link": "https://n.news.naver.com/mnews/article/119/0003154541?sid=103"
     },
     {
-     "title": "장동혁 대표, 건보공단 특사경 반대 궐기대회 인사말",
+     "title": "건보공단특사경 통과반대 청원서 전달받는 장동혁 대표",
      "press": "newspim.com",
      "publishedAt": "2026-11-12T07:30:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261112001329"
+     "link": "https://www.newspim.com/news/view/20261112001326"
     }
    ]
   },
@@ -175,13 +79,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 18,
-   "recent20": 3,
-   "press": 17,
-   "firstArticleAt": "2026-11-12T06:06:00.000Z",
+   "articles90": 16,
+   "recent20": 4,
+   "press": 15,
+   "firstArticleAt": "2026-11-12T06:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "조현, 내일 베이징서 왕이와 회담…정상회담 의제 조율 주목",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-12T07:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001402587?sid=100"
+    },
     {
      "title": "조현, 13일 中서 왕이와 회담…APEC 한중 정상회담 논의(종합2보)",
      "press": "news1.kr",
@@ -193,12 +103,6 @@
      "press": "asiatoday.co.kr",
      "publishedAt": "2026-11-12T07:26:00.000Z",
      "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261112010004889"
-    },
-    {
-     "title": "한중 외교장관 내일 베이징 회담...APEC 앞두고 한반도 정세 논의",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-12T07:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000520434?sid=100"
     }
    ]
   },
@@ -221,29 +125,93 @@
      "link": "https://www.etoday.co.kr/news/view/2647290"
     },
     {
-     "title": "정부, CPTPP 농업 영향 논의할 민관협의체 가동…“가입 전제 아냐”",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-12T07:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006408978?sid=101"
-    },
-    {
      "title": "농식품부, CPTPP 대응 민관협의체 구성…농업계 의견 수렴",
      "press": "ajunews.com",
      "publishedAt": "2026-11-12T07:02:00.000Z",
      "link": "https://www.ajunews.com/view/20261112091014044"
+    },
+    {
+     "title": "정부, CPTPP 농업 영향 논의할 민관협의체 가동…“가입 전제 아냐”",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-12T07:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006408978?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "에이티즈 산 꿈 같은 나날 보내고 있다",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 10,
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-12T06:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'중소돌 기적' 에이티즈, '배드' 대중성 품고 '업'…'빌보드 200' 4번째 정...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-12T07:39:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014319252"
+    },
+    {
+     "title": "에이티즈, '배드' 흥행 잇는다…신곡 '업'으로 또 한 번 도약",
+     "press": "mhns.co.kr",
+     "publishedAt": "2026-11-12T07:12:00.000Z",
+     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=768857"
+    },
+    {
+     "title": "에이티즈, '배드' 인기 잇는다…\"가장 높은 곳 그 이상까지\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-12T07:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/001/0016439039"
+    }
+   ]
+  },
+  {
+   "keyword": "에버랜드",
+   "sources": [
+    "google"
+   ],
+   "articles90": 10,
+   "recent20": 0,
+   "press": 10,
+   "firstArticleAt": "2026-11-12T06:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "강민호 '에버랜드 데이트' 우승 공약 지킨다…삼성라이온즈 팬 2000명 초...",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-12T07:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005841939?sid=101"
+    },
+    {
+     "title": "\"삼성 우승하면 에버랜드 가자~\" 강민호 약속 현실로... 팬 2000명 무료 ...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-12T07:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000965252?sid=101"
+    },
+    {
+     "title": "에버랜드, 삼성라이온즈 한국시리즈 우승 기념 행사 개최… 일정·참여...",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-12T07:12:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1192926"
     }
    ]
   },
   {
    "keyword": "외국인 2천만명 돌파",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 3,
-   "press": 11,
-   "firstArticleAt": "2026-11-12T06:05:00.000Z",
+   "articles90": 12,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-12T06:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -268,110 +236,14 @@
    ]
   },
   {
-   "keyword": "스타벅스",
-   "sources": [
-    "google"
-   ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-12T06:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "현대카드, 스타벅스·무신사 떠난 PLCC... 대한항공 12월 계약 만료",
-     "press": "pressman.kr",
-     "publishedAt": "2026-11-12T07:28:00.000Z",
-     "link": "https://www.pressman.kr/news/articleView.html?idxno=104432"
-    },
-    {
-     "title": "스타벅스, 독립유공자 후손 대학생 50명에 장학금 총 1억원",
-     "press": "donga.com",
-     "publishedAt": "2026-11-12T07:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003762070?sid=101"
-    },
-    {
-     "title": "스타벅스, 독립유공자 후손 대학생 50명에 장학금 1억원 전달",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-12T07:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/117/0004124509?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "장기 이식",
-   "sources": [
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 3,
-   "press": 8,
-   "firstArticleAt": "2026-11-12T06:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[365굿피플] 이식 기다리던 아내 떠나보낸 60대...장기 기증으로 3명 살...",
-     "press": "interview365.com",
-     "publishedAt": "2026-11-12T07:30:00.000Z",
-     "link": "http://www.interview365.com/news/articleView.html?idxno=112355"
-    },
-    {
-     "title": "이식 못 받은 아내 떠난 지 8개월…남편은 3명 살리고 곁으로",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-12T07:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001977909?sid=102"
-    },
-    {
-     "title": "경북대병원 이식검사 기술 혁신… 전혈만으로 거부반응 위험 가린다",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-12T07:16:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082409"
-    }
-   ]
-  },
-  {
-   "keyword": "KBS 사장 문무 정치인들 많이 봤으면",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-12T06:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[뮤즈현장] “분열 NO, 정치인들 많이 봤으면” KBS 사장, ‘문무’ 300억...",
-     "press": "heraldmuse.com",
-     "publishedAt": "2026-11-12T07:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/112/0003813076"
-    },
-    {
-     "title": "KBS 대하 사극 '문무' 300억 대작의 이유 있는 자신감(종합)",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-12T07:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009286423"
-    },
-    {
-     "title": "KBS 박장범 사장 \"수신료의 가치, '문무' 통해 결실 맺어\" [MD현장]",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-12T06:45:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004124497"
-    }
-   ]
-  },
-  {
    "keyword": "현대엔지니어링",
    "sources": [
     "google"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-12T06:04:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-12T06:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -396,43 +268,43 @@
    ]
   },
   {
-   "keyword": "뜨거운 안녕",
+   "keyword": "박희승",
    "sources": [
-    "daum"
+    "google"
    ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T06:10:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T06:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이이담, 카페 알바생인 줄 알았는데 뜨거운 반전..얼굴 또 갈아 끼웠다...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-12T07:15:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005639405"
+     "title": "'조희대 탄핵 요구' 강성 지지자에…與박희승 \"후진국에서나 하는 일\"",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-12T07:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006408984?sid=100"
     },
     {
-     "title": "'뜨거운 안녕' 이이담, 카페 알바생에서 수상한 인물로 정체 드러났다",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-12T07:04:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16274898"
+     "title": "‘조희대 탄핵’ 강성 지지층에…與박희승 “후진국에서나 하는 일”",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-12T06:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004009269?sid=100"
     },
     {
-     "title": "'보스의 노골적 취향'→'뜨거운 안녕', 다시 돌아온 수목극 어땠나[셀럽...",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-12T06:10:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1794458062530770006"
+     "title": "조국혁신당 \"與박희승, 조희대 탄핵 요구하는 시민들 '미친 사람' 취급...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-12T06:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014319011?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 367,
-  "matched": 138,
-  "avgLeadMin": 1330,
+  "flagged": 368,
+  "matched": 135,
+  "avgLeadMin": 1220,
   "recent": [
    {
     "keyword": "CEO 임추위 전원 독립이사로",
