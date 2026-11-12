@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T15:57:56.838Z",
+ "builtAt": "2026-11-12T16:08:00.626Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,51 +8,49 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 9,
  "candidates": [
   {
    "keyword": "젠슨 황 엔비디아 CEO 사임",
    "sources": [
-    "nate",
-    "daum"
+    "signal.bz"
    ],
    "articles90": 94,
-   "recent20": 19,
+   "recent20": 17,
    "press": 64,
-   "firstArticleAt": "2026-11-12T14:44:00.000Z",
+   "firstArticleAt": "2026-11-12T14:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'불륜 인정' 젠슨 황, 결국 엔비디아 떠난다…창업 33년만 사임 [MD이슈...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-12T15:57:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004124598"
+     "title": "젠슨 황 엔비디아 CEO 사임...CFO가 임시 경영",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-12T16:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432147?sid=104"
     },
     {
-     "title": "젠슨 황 '임시 후임' 크레스는 누구…엔비디아 성장 함께한 '재무 전문...",
+     "title": "트럼프 “젠슨 황 자리 이을 단 한 사람, 애플 ‘팀 쿡’뿐”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-12T16:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012293038?sid=104"
+    },
+    {
+     "title": "트럼프 \"젠슨 황 대신할 사람은 팀 쿡뿐…전설이 전설 대체\"",
      "press": "news1.kr",
-     "publishedAt": "2026-11-12T15:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009286814?sid=104"
-    },
-    {
-     "title": "엔비디아 프리마켓 낙폭 12%…젠슨 황 즉시 사임",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-12T15:56:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/437239"
+     "publishedAt": "2026-11-12T16:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009286815?sid=104"
     }
    ]
   },
   {
    "keyword": "김민석 최민희 감찰 지시",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 9,
-   "recent20": 2,
+   "recent20": 1,
    "press": 9,
-   "firstArticleAt": "2026-11-12T14:36:00.000Z",
+   "firstArticleAt": "2026-11-12T14:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -79,12 +77,12 @@
   {
    "keyword": "젠틀몬스터",
    "sources": [
-    "google"
+    "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-12T14:34:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T14:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,11 +105,43 @@
      "link": "https://n.news.naver.com/mnews/article/277/0005842030?sid=104"
     }
    ]
+  },
+  {
+   "keyword": "성북 10대 살해 구속영장",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-12T15:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘피해 여성과 숙박업소 동반 입실?’…아들 성폭력 피해여성 살해한 5...",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-12T16:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002832460?sid=102"
+    },
+    {
+     "title": "여전히 입 다문 살인 피의자…구속영장 청구",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-12T15:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001402686?sid=102"
+    },
+    {
+     "title": "아들 아니라 전 아내 때문이었나…15세 피해자 살해동기 미스터리",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-12T15:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003564892?sid=102"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 391,
+  "flagged": 392,
   "matched": 143,
   "avgLeadMin": 778,
   "recent": [
