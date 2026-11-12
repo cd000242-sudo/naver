@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T16:08:00.626Z",
+ "builtAt": "2026-11-12T16:18:18.040Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,49 +8,82 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 9,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "젠슨 황 엔비디아 CEO 사임",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 94,
-   "recent20": 17,
-   "press": 64,
-   "firstArticleAt": "2026-11-12T14:46:00.000Z",
+   "articles90": 92,
+   "recent20": 12,
+   "press": 60,
+   "firstArticleAt": "2026-11-12T14:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨 황 엔비디아 CEO 사임...CFO가 임시 경영",
+     "title": "엔비디아 ‘임시 선장' 크레스는 누구? ‘25년 재무통’",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-12T16:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001884878?sid=101"
+    },
+    {
+     "title": "퇴장한 '깐부' 젠슨 황…삼성·SK·현대차 '엔비디아 동맹' 안갯속",
+     "press": "ntoday.co.kr",
+     "publishedAt": "2026-11-12T16:16:00.000Z",
+     "link": "https://www.ntoday.co.kr/news/articleView.html?idxno=130831"
+    },
+    {
+     "title": "'젠슨황 충격'에 미 기술주 휘청...AMD·브로드컴 반사이익 기대",
      "press": "ytn.co.kr",
-     "publishedAt": "2026-11-12T16:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432147?sid=104"
+     "publishedAt": "2026-11-12T16:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432150?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "축구 대표팀 사우디 평가전",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-12T14:49:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "내분 확인된 축구 대표팀, 입장문 발표로 ‘원팀’ 될까",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-12T15:42:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/023/0004009359"
     },
     {
-     "title": "트럼프 “젠슨 황 자리 이을 단 한 사람, 애플 ‘팀 쿡’뿐”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-12T16:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012293038?sid=104"
+     "title": "손흥민, '대표팀 불화설' 공동 입장문 낸 이유⋯\"쉽지 않은 시간 보냈다...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-12T15:42:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2647636"
     },
     {
-     "title": "트럼프 \"젠슨 황 대신할 사람은 팀 쿡뿐…전설이 전설 대체\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-12T16:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009286815?sid=104"
+     "title": "A매치 평가전 축구 중계 일정 : 사우디전",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-12T15:22:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611120252"
     }
    ]
   },
   {
    "keyword": "김민석 최민희 감찰 지시",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-12T14:42:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-12T15:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,34 +108,34 @@
    ]
   },
   {
-   "keyword": "젠틀몬스터",
+   "keyword": "13일의 금요일",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 4,
+   "articles90": 5,
    "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-12T14:40:00.000Z",
+   "firstArticleAt": "2026-11-12T15:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠틀몬스터, 삼성·구글 협업 AI 안경 12월 10일 출시…가격 65만~70만원...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-12T15:56:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16275329"
+     "title": "11월 13일 금요일 띠별 오늘의 운세 \"포기했던 돈을 돌려 받는다\"",
+     "press": "econovill.com",
+     "publishedAt": "2026-11-12T16:04:00.000Z",
+     "link": "https://www.econovill.com/news/articleView.html?idxno=757089"
     },
     {
-     "title": "젠틀몬스터, 삼성·구글 AI 결합한 스마트안경 16종 공개⋯65만원부터",
-     "press": "autodaily.co.kr",
-     "publishedAt": "2026-11-12T15:40:00.000Z",
-     "link": "https://www.autodaily.co.kr/news/articleView.html?idxno=602056"
+     "title": "[오늘의 띠별 운세] 2026년 11월 13일 금요일",
+     "press": "ppss.kr",
+     "publishedAt": "2026-11-12T15:28:00.000Z",
+     "link": "https://www.ppss.kr/news/articleView.html?idxno=320750"
     },
     {
-     "title": "[르포]\"내 눈이 AI 눈으로 확장됐네요\"…젠틀몬스터 안경에 들어온 제미...",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-12T15:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005842030?sid=104"
+     "title": "[아침을 여는 명언 캘리] 2026년 11월 13일 금요일",
+     "press": "joongdo.co.kr",
+     "publishedAt": "2026-11-12T15:00:00.000Z",
+     "link": "https://www.joongdo.co.kr/web/view.php?key=20261113010002166"
     }
    ]
   },
@@ -137,13 +170,45 @@
      "link": "https://n.news.naver.com/mnews/article/025/0003564892?sid=102"
     }
    ]
+  },
+  {
+   "keyword": "젠틀몬스터",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-12T15:17:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "젠틀몬스터, 삼성·구글 협업 AI 안경 12월 10일 출시…가격 65만~70만원...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-12T15:56:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16275329"
+    },
+    {
+     "title": "젠틀몬스터, 삼성·구글 AI 결합한 스마트안경 16종 공개⋯65만원부터",
+     "press": "autodaily.co.kr",
+     "publishedAt": "2026-11-12T15:40:00.000Z",
+     "link": "https://www.autodaily.co.kr/news/articleView.html?idxno=602056"
+    },
+    {
+     "title": "[르포]\"내 눈이 AI 눈으로 확장됐네요\"…젠틀몬스터 안경에 들어온 제미...",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-12T15:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005842030?sid=104"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 392,
-  "matched": 143,
-  "avgLeadMin": 778,
+  "flagged": 393,
+  "matched": 142,
+  "avgLeadMin": 781,
   "recent": [
    {
     "keyword": "네이버 AI 에이전트 연내 출시 목표",
