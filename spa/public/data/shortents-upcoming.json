@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T07:53:42.218Z",
+ "builtAt": "2026-11-12T08:03:46.230Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,52 +8,122 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 19,
+ "measured": 25,
  "candidates": [
   {
-   "keyword": "3분기 순익 급증",
+   "keyword": "3분기 누적 순익",
    "sources": [
     "nate"
    ],
-   "articles90": 34,
-   "recent20": 10,
-   "press": 28,
-   "firstArticleAt": "2026-11-12T06:32:00.000Z",
+   "articles90": 94,
+   "recent20": 23,
+   "press": 59,
+   "firstArticleAt": "2026-11-12T06:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한화손보, 3분기 누적 순익 3,114억…전년 比 5.8%↑",
-     "press": "fins.co.kr",
-     "publishedAt": "2026-11-12T07:52:00.000Z",
-     "link": "http://www.fins.co.kr/news/articleView.html?idxno=110543"
+     "title": "삼성증권, 3분기 순익 27.7% 감소…WM·IB 성장에 누적 실적은 ‘호조’",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-12T08:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/117/0004124522?sid=103"
     },
     {
-     "title": "DB손보, 3분기 순익 4440억 35.3%↑…장기보험 호조·車보험 흑자",
-     "press": "4th.kr",
-     "publishedAt": "2026-11-12T07:52:00.000Z",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2121749"
+     "title": "메리츠증권, 3분기 누적 순익 12% 성장",
+     "press": "press9.kr",
+     "publishedAt": "2026-11-12T08:02:00.000Z",
+     "link": "http://www.press9.kr/news/articleView.html?idxno=86204"
     },
     {
-     "title": "삼성증권, 3분기 순익 3528억…전분기 대비 27.7% 감소",
-     "press": "ftoday.co.kr",
-     "publishedAt": "2026-11-12T07:52:00.000Z",
-     "link": "http://www.ftoday.co.kr/news/articleView.html?idxno=369585"
+     "title": "한화투자증권, 3분기 누적 순익 577억…WM·홀세일 선방",
+     "press": "popcornnews.net",
+     "publishedAt": "2026-11-12T08:00:00.000Z",
+     "link": "http://www.popcornnews.net/news/articleView.html?idxno=139880"
     }
    ]
   },
   {
-   "keyword": "건보공단 특사경 반대 궐기대회",
+   "keyword": "젠슨 황 엔비디아 위기",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 49,
-   "recent20": 2,
-   "press": 18,
-   "firstArticleAt": "2026-11-12T06:27:00.000Z",
+   "articles90": 40,
+   "recent20": 10,
+   "press": 33,
+   "firstArticleAt": "2026-11-12T06:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'첩첩산중' 코스피, 젠슨 황 해임설·옵션만기 '이중고'에 3일 만에 하락",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-12T08:02:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2647518"
+    },
+    {
+     "title": "'엔비디아는 위기인데'‥인텔, 韓기업과 AI 동맹 출범",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-12T08:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005841959?sid=101"
+    },
+    {
+     "title": "‘젠슨 황 스캔들’ 조사, 한인 전 연방검사가 맡는다",
+     "press": "koreatimes.com",
+     "publishedAt": "2026-11-12T08:00:00.000Z",
+     "link": "https://www.koreatimes.com/article/11631181?utm_source=naver"
+    }
+   ]
+  },
+  {
+   "keyword": "김승우 유흥주점 절도 혐의 피소",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 29,
+   "recent20": 9,
+   "press": 25,
+   "firstArticleAt": "2026-11-12T06:36:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김승우, 절도 피소에 방역법도 위반했나···집합금지 때 유흥업소 의...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-12T08:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001149492"
+    },
+    {
+     "title": "김승우, 지인 현금 2200만원 절도 혐의 피소…양측 진실 공방",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-12T08:00:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261112001355"
+    },
+    {
+     "title": "김승우, 유흥주점서 '현금 2200만 원 절도' 피소 여파…새 MC 맡은 '건강...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-12T07:54:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005639433"
+    }
+   ]
+  },
+  {
+   "keyword": "건보공단 특사경 반대 대회",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 39,
+   "recent20": 3,
+   "press": 17,
+   "firstArticleAt": "2026-11-12T06:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "행동에 나선 의사들…\"초헌법적 특사경법 철회까지 투쟁\"",
+     "press": "doctorsnews.co.kr",
+     "publishedAt": "2026-11-12T07:56:00.000Z",
+     "link": "http://www.doctorsnews.co.kr/news/articleView.html?idxno=167284"
+    },
     {
      "title": "\"의사 잡는 공단 특사경\"…의협, 국회 앞 전면전 선포",
      "press": "bokuennews.com",
@@ -65,12 +135,6 @@
      "press": "doctorstimes.com",
      "publishedAt": "2026-11-12T07:46:00.000Z",
      "link": "http://www.doctorstimes.com/news/articleView.html?idxno=241050"
-    },
-    {
-     "title": "건보공단 특사경 반대 궐기대회 참석한 장동혁 대표",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-12T07:30:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261112001327"
     }
    ]
   },
@@ -111,13 +175,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 16,
+   "articles90": 15,
    "recent20": 1,
-   "press": 14,
-   "firstArticleAt": "2026-11-12T06:32:00.000Z",
+   "press": 13,
+   "firstArticleAt": "2026-11-12T06:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "13일 베이징서 한중 외교장관회담…양자관계·한반도 정세 논의",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-12T07:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000925548?sid=100"
+    },
     {
      "title": "韓中외교장관, 내일 베이징서 회담…양자관계·한반도 정세 논의(종합2...",
      "press": "yna.co.kr",
@@ -129,12 +199,70 @@
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-12T07:33:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/055/0001402587?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "오산 원룸 시신 발견",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 13,
+   "recent20": 1,
+   "press": 13,
+   "firstArticleAt": "2026-11-12T06:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "오산 원룸서 대형 봉투에 담긴 30대 남성 시신 발견",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-12T07:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001977914?sid=102"
     },
     {
-     "title": "조현, 13일 中서 왕이와 회담…APEC 한중 정상회담 논의(종합2보)",
+     "title": "경기 오산 원룸서 30대 남자 시신 담긴 대형봉투 발견",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-12T07:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003698804?sid=102"
+    },
+    {
+     "title": "오산시 한 원룸서, 비닐 봉투에 담긴 30대 남성 시신 발견",
+     "press": "kihoilbo.co.kr",
+     "publishedAt": "2026-11-12T07:34:00.000Z",
+     "link": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3040801"
+    }
+   ]
+  },
+  {
+   "keyword": "폭설 김윤석 구교환, 짜릿한 전율의 브로맨스",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 11,
+   "recent20": 4,
+   "press": 10,
+   "firstArticleAt": "2026-11-12T07:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"브로맨스 1등\"·\"짜릿 전율\"…'폭설' 김윤석·구교환, 팽팽한 연기 앙상...",
      "press": "news1.kr",
-     "publishedAt": "2026-11-12T07:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009286492?sid=104"
+     "publishedAt": "2026-11-12T07:59:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009286573"
+    },
+    {
+     "title": "김윤석·구교환, 고립된 기차역서 터진 '폭설' 연기 시너지…\"케미 1등은...",
+     "press": "starnewsk.com",
+     "publishedAt": "2026-11-12T07:56:00.000Z",
+     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60959"
+    },
+    {
+     "title": "[Y현장] '폭설' 김윤석 \"구교환, 심장에 비수 꽂는 눈빛…브로맨스 호흡...",
+     "press": "star.ytn.co.kr",
+     "publishedAt": "2026-11-12T07:56:00.000Z",
+     "link": "https://m.entertain.naver.com/article/052/0002431970"
     }
    ]
   },
@@ -143,13 +271,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
+   "articles90": 10,
+   "recent20": 2,
+   "press": 10,
    "firstArticleAt": "2026-11-12T06:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "스타벅스, 독립유공자 후손 50명에 장학금 1억원 전달…12년간 11억원 지...",
+     "press": "kdfnews.com",
+     "publishedAt": "2026-11-12T08:00:00.000Z",
+     "link": "http://www.kdfnews.com/news/articleView.html?idxno=190842"
+    },
     {
      "title": "스타벅스, 순국선열의 날 맞아 독립유공자 후손 50명에 장학금 1억 원",
      "press": "tournews21.com",
@@ -161,12 +295,6 @@
      "press": "pressman.kr",
      "publishedAt": "2026-11-12T07:28:00.000Z",
      "link": "https://www.pressman.kr/news/articleView.html?idxno=104432"
-    },
-    {
-     "title": "스타벅스, 독립유공자 후손 대학생 50명에 장학금 총 1억원",
-     "press": "donga.com",
-     "publishedAt": "2026-11-12T07:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003762070?sid=101"
     }
    ]
   },
@@ -175,45 +303,51 @@
    "sources": [
     "google"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-12T06:28:00.000Z",
+   "articles90": 9,
+   "recent20": 4,
+   "press": 9,
+   "firstArticleAt": "2026-11-12T06:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[건설 브리핑] 현대건설·DL이앤씨·현대엔지니어링·LH",
-     "press": "niceeconomy.co.kr",
-     "publishedAt": "2026-11-12T07:44:00.000Z",
-     "link": "https://www.niceeconomy.co.kr/news/articleView.html?idxno=91801"
+     "title": "현대엔지니어링, 조경 특화상품으로 디자인상 잇따라 수상",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-12T08:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005440484?sid=101"
     },
     {
-     "title": "현대엔지니어링, K-디자인 어워드 최고상…색채대상까지 2관왕",
-     "press": "thefirstmedia.net",
-     "publishedAt": "2026-11-12T07:06:00.000Z",
-     "link": "http://www.thefirstmedia.net/news/articleView.html?idxno=213491"
+     "title": "[채널Who] 현대엔지니어링 '영업정지 8개월' 제재 효과 있을까, '실효성...",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-12T08:00:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=451875"
     },
     {
-     "title": "현대건설, 잇단 중대재해에 ESG 등급 하락…현대엔지니어링도 영업정지",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-12T06:54:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=315251"
+     "title": "[어워드 Pick] 현대엔지니어링·태광산업·한전KDN, 조경 어워드와 산업...",
+     "press": "lcnews.co.kr",
+     "publishedAt": "2026-11-12T07:58:00.000Z",
+     "link": "https://www.lcnews.co.kr/news/articleView.html?idxno=211304"
     }
    ]
   },
   {
-   "keyword": "외국인 2천만명 돌파",
+   "keyword": "외국인 2천만명 방문",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 10,
-   "recent20": 0,
+   "articles90": 9,
+   "recent20": 1,
    "press": 7,
-   "firstArticleAt": "2026-11-12T06:26:00.000Z",
+   "firstArticleAt": "2026-11-12T06:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[모멘트] 연간 방한객 사상 최초 2천만명 돌파",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-12T07:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016439191?sid=103"
+    },
     {
      "title": "[그래픽] 방한 외국인 관광객 추이",
      "press": "yna.co.kr",
@@ -225,84 +359,78 @@
      "press": "tournews21.com",
      "publishedAt": "2026-11-12T07:26:00.000Z",
      "link": "https://www.tournews21.com/news/articleView.html?idxno=148261"
-    },
-    {
-     "title": "방한 외국인 관광객 첫 2천만명 돌파…14년 만에 두 배",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-12T07:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003482318?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "에이티즈 산 꿈 같은 나날 보내고 있다",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-12T06:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'중소돌 기적' 에이티즈, '배드' 대중성 품고 '업'…'빌보드 200' 4번째 정...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T07:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014319252"
-    },
-    {
-     "title": "에이티즈, '배드' 흥행 잇는다…신곡 '업'으로 또 한 번 도약",
-     "press": "mhns.co.kr",
-     "publishedAt": "2026-11-12T07:12:00.000Z",
-     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=768857"
-    },
-    {
-     "title": "에이티즈, '배드' 인기 잇는다…\"가장 높은 곳 그 이상까지\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-12T07:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/001/0016439039"
     }
    ]
   },
   {
    "keyword": "박희승",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
    "firstArticleAt": "2026-11-12T06:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "박희승 의원, ‘조희대 대법원장’ 탄핵 관련 발언 ‘논란’",
+     "press": "jjan.kr",
+     "publishedAt": "2026-11-12T07:56:00.000Z",
+     "link": "https://www.jjan.kr/article/20261112500392"
+    },
+    {
+     "title": "박희승 국회의원, 2026 국정감사 친환경 베스트의원 선정…산자중기위 ...",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-12T07:54:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3750277"
+    },
+    {
      "title": "'조희대 탄핵 요구' 강성 지지자에…與박희승 \"후진국에서나 하는 일\"",
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-12T07:07:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006408984?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "에이티즈 산 배드 이후 꿈같은 나날",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T06:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'초고속 컴백' 에이티즈, 'BAD' 흥행에 입 열었다…\"흔들림 없이 더 위로...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-12T07:45:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000784176"
     },
     {
-     "title": "‘조희대 탄핵’ 강성 지지층에…與박희승 “후진국에서나 하는 일”",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-12T06:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004009269?sid=100"
+     "title": "‘배드’로 얻은 관심을 공연장까지…에이티즈의 다음 선택 ‘업’ [현...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-12T06:42:00.000Z",
+     "link": "https://m.entertain.naver.com/article/119/0003154508"
     },
     {
-     "title": "조국혁신당 \"與박희승, 조희대 탄핵 요구하는 시민들 '미친 사람' 취급...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T06:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014319011?sid=100"
+     "title": "에이티즈가 증명한 중소돌의 기적 \"누구든 해낼 수 있다\" [종합]",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-12T06:40:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000052455"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 364,
+  "flagged": 371,
   "matched": 132,
   "avgLeadMin": 1245,
   "recent": [
