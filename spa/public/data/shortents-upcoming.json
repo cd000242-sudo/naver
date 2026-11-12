@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T22:51:39.881Z",
+ "builtAt": "2026-11-12T23:01:45.422Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,98 +11,66 @@
  "measured": 22,
  "candidates": [
   {
-   "keyword": "사고",
-   "sources": [
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 3,
-   "press": 8,
-   "firstArticleAt": "2026-11-12T22:11:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "줄리엔강, 결혼 2년 만에 큰 사고 \"우리에게 이런 일이\"..결혼반지 분실",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-12T22:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003487064"
-    },
-    {
-     "title": "서울시, 119에 8710건 반복 신고한 5명 형사고발…소방당국 '엄정 대응'",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-12T22:38:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3750715"
-    },
-    {
-     "title": "“브레이크 안 들었다”…같은 버스회사, 약 1년 전에도 사고 있었다",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-12T22:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012293104?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "축구 대표팀, 사우디 평가전",
+   "keyword": "젠슨 황 사임 여파",
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-12T21:28:00.000Z",
+   "articles90": 43,
+   "recent20": 7,
+   "press": 35,
+   "firstArticleAt": "2026-11-12T21:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "오늘 밤 사우디전…'전화위복' 노린다!",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-12T22:33:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/055/0001402725"
-    },
-    {
-     "title": "오늘 '한국 사우디' 축구 중계 채널, 긴급 변경",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-12T22:30:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1173325"
-    },
-    {
-     "title": "불화설 털어낸 손흥민, 사우디 상대로 '60호골' 도전[주목! 이 종목]",
+     "title": "젠슨 황 떠난 엔비디아, 장중 시총 801조원 날아갔다",
      "press": "newsis.com",
-     "publishedAt": "2026-11-12T22:00:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/003/0014319746"
+     "publishedAt": "2026-11-12T22:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014319786?sid=104"
+    },
+    {
+     "title": "뉴욕증시, 젠슨황 사임·유가상승에 하락 마감",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-12T22:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000543428?sid=104"
+    },
+    {
+     "title": "\"젠슨 황 퇴진 충격에 유가 급등까지\"…뉴욕증시 하락·엔비디아 4.3%↓",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-12T22:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000121240?sid=104"
     }
    ]
   },
   {
-   "keyword": "젠슨 황 사임 후폭풍",
+   "keyword": "박수홍 5년만 결론",
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-12T21:28:00.000Z",
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-12T22:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[뉴스타트] 두 번 불륜에 쫓겨난 젠슨 황...엔비디아 넘어 AI 산업에 충...",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-12T22:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432207?sid=101"
+     "title": "박수홍 친형 부부 98억 손배소, 오늘(13일) 선고",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-12T22:54:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1794523757530808006"
     },
     {
-     "title": "엔비디아 시총, 장중 801조원 증발…젠슨 황 퇴진 후폭풍",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-12T22:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003564942?sid=101"
+     "title": "박수홍, 친형 부부 상대 98억 손해배상 청구 소송 오늘(13일) 선고",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-12T22:50:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000052494"
     },
     {
-     "title": "'세 번째 불륜 의혹' 또?…젠슨 황 퇴장에도 파문 안 끝났다",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-12T22:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000142175?sid=101"
+     "title": "‘친족상도례’ 흔든 박수홍, 친형 98억 소송 오늘(13일) 선고",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-12T22:38:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001147149"
     }
    ]
   },
@@ -111,13 +79,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 5,
    "recent20": 1,
-   "press": 4,
+   "press": 5,
    "firstArticleAt": "2026-11-12T21:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "유가 하락에 수입물가 1.8%↓…수출물량 증가율은 역대 최고",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-12T23:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005763108?sid=101"
+    },
     {
      "title": "원·달러 환율·국제 유가 하락에…10월 수입물가 1.8%↓",
      "press": "newsis.com",
@@ -129,12 +103,38 @@
      "press": "tfmedia.co.kr",
      "publishedAt": "2026-11-12T22:22:00.000Z",
      "link": "https://www.tfmedia.co.kr/news/article.html?no=208861"
+    }
+   ]
+  },
+  {
+   "keyword": "2026년 11월 13일 운세",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T21:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오늘의 띠별 운세] 2026년 11월 13일 금요일",
+     "press": "mhns.co.kr",
+     "publishedAt": "2026-11-12T22:52:00.000Z",
+     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=768903"
     },
     {
-     "title": "10월 수입물가지수 1.8%↓…환율·유가 하락 영향",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-12T22:06:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3750693"
+     "title": "[오늘의 운세] 2026년 11월 13일 금요일 띠별 운세… 양띠·개띠·돼지띠...",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-12T22:44:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082487"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 13일 (금) 띠별운세 '수고한 나를 다독이자'",
+     "press": "dailypop.kr",
+     "publishedAt": "2026-11-12T21:40:00.000Z",
+     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103979"
     }
    ]
   },
@@ -169,107 +169,11 @@
      "link": "https://m.entertain.naver.com/article/003/0014319741"
     }
    ]
-  },
-  {
-   "keyword": "2026년 11월 13일 운세",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T21:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오늘의 운세] 2026년 11월 13일 금요일 띠별 운세… 양띠·개띠·돼지띠...",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-12T22:44:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082487"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 13일 (금) 띠별운세 '수고한 나를 다독이자'",
-     "press": "dailypop.kr",
-     "publishedAt": "2026-11-12T21:40:00.000Z",
-     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103979"
-    },
-    {
-     "title": "[오늘의 운세] 13일 금요일 나의 운세는?",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-12T21:36:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1191796"
-    }
-   ]
-  },
-  {
-   "keyword": "성북 10대 살해 구속영장",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T21:23:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "도와달라 신고하고 쉼터까지 갔는데...막지 못한 10대 피해자의 죽음",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-12T22:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005763102?sid=102"
-    },
-    {
-     "title": "성북구 10대 살해‥\"가해자 연인이 가스라이팅\"",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-12T21:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001535310?sid=102"
-    },
-    {
-     "title": "‘성매매 강요’ 전처 수사하자 범행?…10대 살해범 구속 심사",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-12T21:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012293076?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "사귀기 전에 결혼하자고",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T21:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“사귀기도 전에 청혼”…이유리, 12살 연상 목사 남편 당황시킨 직진 ...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-12T22:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001280697"
-    },
-    {
-     "title": "'12세 연상♥목사 남편'에 사귀기前 청혼…이유리 \"놀라서 돌려보내\"",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-12T22:05:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005639655"
-    },
-    {
-     "title": "그네 타다 \"결혼하고 싶다\"…이유리, 12살 연상 남편에게 사귀기도 전에...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-12T21:35:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004124625"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 406,
+  "flagged": 408,
   "matched": 148,
   "avgLeadMin": 662,
   "recent": [
