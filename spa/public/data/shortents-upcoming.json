@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T18:29:30.549Z",
+ "builtAt": "2026-11-12T18:39:33.956Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "젠슨 황, 엔비디아 CEO 사임",
@@ -16,30 +16,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 27,
-   "recent20": 3,
-   "press": 17,
-   "firstArticleAt": "2026-11-12T17:02:00.000Z",
+   "articles90": 24,
+   "recent20": 5,
+   "press": 16,
+   "firstArticleAt": "2026-11-12T17:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨 황, 엔비디아 CEO 사임…불륜 스캔들로 33년만 불명예 퇴진(종합2보...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T18:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014319640?sid=104"
-    },
-    {
-     "title": "젠슨 황 엔비디아 CEO 사퇴...트럼프 \"애플 팀 쿡 이어받아야\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-12T18:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432171?sid=104"
-    },
-    {
-     "title": "트럼프 \"엔비디아 후임 CEO는 팀 쿡뿐…전설이 전설을 잇는다\"",
+     "title": "유럽증시, 엔비디아 충격에도 실적이 떠받치며 강보합… 독일은 이틀 연...",
      "press": "newspim.com",
-     "publishedAt": "2026-11-12T18:11:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261113000013"
+     "publishedAt": "2026-11-12T18:38:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261113000014"
+    },
+    {
+     "title": "젠슨황 결국 CEO 사임, 사실상의 해임",
+     "press": "viewsnnews.com",
+     "publishedAt": "2026-11-12T18:32:00.000Z",
+     "link": "https://www.viewsnnews.com/article?q=239665"
+    },
+    {
+     "title": "“젠슨 황, 충격적 몰락”…외신들 ‘미국 CEO 스캔들’ 재조명",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-12T18:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012293045?sid=104"
     }
    ]
   }
