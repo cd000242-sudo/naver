@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T01:06:08.749Z",
+ "builtAt": "2026-11-12T01:16:11.990Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,101 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 14,
  "candidates": [
   {
    "keyword": "아세안 APEC 참석",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 51,
-   "recent20": 21,
-   "press": 40,
+   "articles90": 64,
+   "recent20": 23,
+   "press": 49,
    "firstArticleAt": "2026-11-12T00:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령, 16~19일 필리핀 아세안·中 AEPC 정상회의 참석",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-12T01:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003154291?sid=100"
+     "title": "李대통령, 16~19일 아세안·APEC 정상회의 참석…중국·필리핀 순방",
+     "press": "jeonmae.co.kr",
+     "publishedAt": "2026-11-12T01:14:00.000Z",
+     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1311137"
     },
     {
-     "title": "[속보] 李대통령, 16~19일 필리핀 아세안·中 APEC 정상회의 참석",
-     "press": "segye.com",
-     "publishedAt": "2026-11-12T01:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004174570?sid=100"
+     "title": "李대통령, 16~19일 아세안·APEC 순방…靑 \"북미 접촉 가능성 적다\"",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-12T01:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005603214?sid=100"
     },
     {
-     "title": "李대통령, 16∼19일 아세안·APEC 정상회의 참석",
-     "press": "viewsnnews.com",
-     "publishedAt": "2026-11-12T01:02:00.000Z",
-     "link": "https://www.viewsnnews.com/article?q=239646"
+     "title": "이 대통령, 16∼19일 필리핀 아세안·中 APEC 정상회의 참석",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-12T01:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000161061?sid=100"
     }
    ]
   },
   {
-   "keyword": "네이버 AI 에이전트 연내 출시 목표",
+   "keyword": "손흥민 공동 입장문 발표",
    "sources": [
     "nate"
    ],
-   "articles90": 24,
-   "recent20": 5,
-   "press": 23,
-   "firstArticleAt": "2026-11-11T23:38:00.000Z",
+   "articles90": 49,
+   "recent20": 7,
+   "press": 43,
+   "firstArticleAt": "2026-11-12T00:00:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[전문]축구대표팀 손흥민·이재성·김민재·황인범·황희찬 입장문",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-12T01:10:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/003/0014317556"
+    },
+    {
+     "title": "손흥민·김민재 등 5인 공동 입장문…\"같은 목표 향해 나아갈 동료\"",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-12T01:07:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/629/0000551138"
+    },
+    {
+     "title": "‘92라인’ 손흥민·이재성 ‘96라인’ 황희찬·황인범·김민재 “특정...",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-12T01:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001230347?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "CEO 임추위 전원 독립이사로",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 32,
+   "recent20": 7,
+   "press": 30,
+   "firstArticleAt": "2026-11-11T23:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "네이버, \"연내 개인화 AI에이전트 앱 출시\"...검색·광고 수익화도 박차",
-     "press": "techm.kr",
-     "publishedAt": "2026-11-12T01:04:00.000Z",
-     "link": "https://www.techm.kr/news/articleView.html?idxno=157242"
+     "title": "당정, 은행지주 회장 연임 문턱 높인다···임추위 전원 독립이사로",
+     "press": "seoulfn.com",
+     "publishedAt": "2026-11-12T01:13:00.000Z",
+     "link": "https://www.seoulfn.com/news/articleView.html?idxno=642590"
     },
     {
-     "title": "네이버, AI 투자에 영업익 21% ↓…美 AI 기업과 2조원 공급 계약",
-     "press": "epnc.co.kr",
-     "publishedAt": "2026-11-12T01:04:00.000Z",
-     "link": "https://www.epnc.co.kr/news/articleView.html?idxno=409651"
+     "title": "은행지주 회장 연임 '허들' 높인다…임추위는 전원 독립이사로, 3연임은...",
+     "press": "nextdaily.co.kr",
+     "publishedAt": "2026-11-12T01:10:00.000Z",
+     "link": "https://www.nextdaily.co.kr/news/articleView.html?idxno=254815"
     },
     {
-     "title": "[컨콜] 네이버 \"연내 '개인형 AI 에이전트' 앱 출시할 것\"",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-12T01:04:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3448055"
+     "title": "은행지주 CEO ‘셀프 연임’에 제동…3연임 땐 주총 75% 찬성해야 [종합...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-12T01:08:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2647247"
     }
    ]
   },
@@ -79,30 +111,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 22,
-   "recent20": 5,
-   "press": 22,
+   "articles90": 26,
+   "recent20": 6,
+   "press": 26,
    "firstArticleAt": "2026-11-11T23:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "LH, 광명시흥·용인 반도체 국가산단에 2조원 수혈",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-12T01:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002722486?sid=101"
+     "title": "LH, 광명시흥신도시·용인반도체에 2조 더 투입…사업 '속도전'",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-12T01:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014317571?sid=101"
     },
     {
-     "title": "LH, 광명시흥·용인반도체에 2조원 더 붓는다…'속도전' 돌입",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-12T00:58:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1320175&inflow=N"
+     "title": "LH, 광명시흥 주택지구·용인반도체 국가산단에 2조 추가 투자…보상·조...",
+     "press": "sisacast.kr",
+     "publishedAt": "2026-11-12T01:10:00.000Z",
+     "link": "http://www.sisacast.kr/news/articleView.html?idxno=101862"
     },
     {
-     "title": "[부동산 나들이] '3분기 거래금액 27%↓'·LH '용인반도체 등 2조 추가 투...",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-12T00:54:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=902824"
+     "title": "LH, 광명시흥·용인 반도체 단지에 2조원 추가 투입…보상 절차 조기 완...",
+     "press": "businessplus.kr",
+     "publishedAt": "2026-11-12T01:08:00.000Z",
+     "link": "https://www.businessplus.kr/news/articleView.html?idxno=119723"
+    }
+   ]
+  },
+  {
+   "keyword": "네이버 AI 에이전트 연내 출시 목표",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 25,
+   "recent20": 6,
+   "press": 24,
+   "firstArticleAt": "2026-11-11T23:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "네이버, AI 투자에 이익 뚝…배송 키워 쿠팡 고객 잡는다",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-12T01:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000543205?sid=101"
+    },
+    {
+     "title": "네이버, 3분기 매출 3.5조 돌파…AI 투자 증가로 영업익 20.9%↓",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-12T01:14:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101125"
+    },
+    {
+     "title": "네이버, 3분기 매출 3조4724억원…영업이익 20.9% 감소",
+     "press": "cnbizm.com",
+     "publishedAt": "2026-11-12T01:08:00.000Z",
+     "link": "https://www.cnbizm.com/news/articleView.html?idxno=321182"
     }
    ]
   },
@@ -111,30 +175,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 26,
+   "articles90": 25,
    "recent20": 4,
-   "press": 22,
-   "firstArticleAt": "2026-11-11T23:38:00.000Z",
+   "press": 21,
+   "firstArticleAt": "2026-11-11T23:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "美 민주당, 미시시피서 40여년 만에 승리…상원 55석 확보",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-12T01:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014317557?sid=104"
+    },
+    {
+     "title": "엔비디아 리더십 불확실성에 미국 규제 변수까지... 삼전·SK하닉 '이중...",
+     "press": "lawtv.kr",
+     "publishedAt": "2026-11-12T01:08:00.000Z",
+     "link": "https://www.lawtv.kr/news/articleView.html?idxno=61395"
+    },
     {
      "title": "노예제·인종차별 깊은 미시시피…146년만에 흑인 상원의원 탄생",
      "press": "news1.kr",
      "publishedAt": "2026-11-12T01:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009285022?sid=104"
-    },
-    {
-     "title": "KKK 활동 무대서 흑인 상원의원 탄생…美 미시시피 150년 만의 이변",
-     "press": "weekly.chosun.com",
-     "publishedAt": "2026-11-12T01:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/053/0000062980?sid=104"
-    },
-    {
-     "title": "미 민주, 공화텃밭 미시시피 상원 선거도 승리…총 55석 확보",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-12T00:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001402460?sid=104"
     }
    ]
   },
@@ -145,12 +209,18 @@
     "google"
    ],
    "articles90": 18,
-   "recent20": 4,
+   "recent20": 3,
    "press": 18,
-   "firstArticleAt": "2026-11-11T23:45:00.000Z",
+   "firstArticleAt": "2026-11-11T23:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "대구 아파트 보일러실서 폭발…원인 조사",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-12T01:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012292360?sid=102"
+    },
     {
      "title": "'신랑수업2' 조준현, 소이원 '공주 안기' 한 채 산길 질주 '테토력 폭발...",
      "press": "megaeconomy.co.kr",
@@ -162,12 +232,6 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-12T01:03:00.000Z",
      "link": "https://m.sports.naver.com/basketball/article/421/0009285029"
-    },
-    {
-     "title": "대구 아파트 보일러실 추정 폭발… 놀란 80대 여성 병원 이송",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T00:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014317482?sid=102"
     }
    ]
   },
@@ -177,30 +241,62 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 27,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-11T23:38:00.000Z",
+   "articles90": 23,
+   "recent20": 3,
+   "press": 11,
+   "firstArticleAt": "2026-11-11T23:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "정점식 \"이용철, 공소취소 없다 안 하면 부적격…언어적 밑장 빼기\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-12T01:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009285040?sid=100"
+    },
+    {
+     "title": "[법줘] 이용철 후보 \"진상규명 우선\"...공소취소 여지 남겼나",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-12T01:08:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4117932"
+    },
     {
      "title": "이용철 법무장관 후보, 청문 준비 본격화...공소취소 논란 계속",
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-12T01:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002431720?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "필수의약품 국내 생산",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 3,
+   "press": 8,
+   "firstArticleAt": "2026-11-11T23:59:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "식약처, 필수 항암·항생제 3품목 국내 생산…연내 공급 추진",
+     "press": "medipana.com",
+     "publishedAt": "2026-11-12T01:10:00.000Z",
+     "link": "https://www.medipana.com/news/articleView.html?idxno=421630"
     },
     {
-     "title": "이용철 “공소취소 지휘, 예단에 따른 질문…답변 적절하지 않아”",
-     "press": "segye.com",
-     "publishedAt": "2026-11-12T00:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004174562?sid=102"
+     "title": "수급난 겪던 필수 항암·항생제, 국내 제약사가 만든다…식약처 '주문제...",
+     "press": "widedaily.com",
+     "publishedAt": "2026-11-12T01:08:00.000Z",
+     "link": "https://www.widedaily.com/news/articleView.html?idxno=303468"
     },
     {
-     "title": "이용철 \"공소취소 질문, 예단 따른 것\"…검사 반발·5·18엔 묵묵부답",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-12T00:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000650549?sid=102"
+     "title": "'공급불안' 항암제·항생제 3종 국내 주문 제조…연내 공급한다",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-12T01:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009285015?sid=103"
     }
    ]
   },
@@ -210,12 +306,18 @@
     "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 0,
+   "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-11T23:43:00.000Z",
+   "firstArticleAt": "2026-11-11T23:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'셀프 연임' 막고 주주 권한 강화…당정, 금융지주 지배구조 손질",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-12T01:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004208993?sid=100"
+    },
     {
      "title": "[지배구조 개혁] \"하필 인사철에\"…회장·행장 교체 앞두고 '좌불안석'",
      "press": "news.einfomax.co.kr",
@@ -227,19 +329,45 @@
      "press": "news.tf.co.kr",
      "publishedAt": "2026-11-12T00:21:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/629/0000551096?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "강동원 김고은 부부 출연",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-12T00:10:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "강동원·김고은, 백년 원수 부부로…'혼: 삼각의 시간' 제작 확정",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-12T00:46:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1136873"
     },
     {
-     "title": "금융위, 금융사 지배구조 개편…CEO 셀프 연임 차단 추진",
-     "press": "digitaltoday.co.kr",
-     "publishedAt": "2026-11-12T00:04:00.000Z",
-     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=714778"
+     "title": "넷플릭스, '혼: 삼각의 시간' 제작 확정…강동원·김고은 출연",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-12T00:32:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=781058"
+    },
+    {
+     "title": "강동원·김고은, 박지은 작가 '혼: 삼각의 시간' 출연 공식화",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-12T00:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/437/0000520354"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 373,
+  "flagged": 377,
   "matched": 152,
   "avgLeadMin": 1498,
   "recent": [
