@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T14:47:08.267Z",
+ "builtAt": "2026-11-12T15:07:17.824Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,58 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 26,
  "candidates": [
+  {
+   "keyword": "젠슨 황, 엔비디아 CEO 사임",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 98,
+   "recent20": 39,
+   "press": 73,
+   "firstArticleAt": "2026-11-12T14:20:00.000Z",
+   "exclusive": true,
+   "capped": true,
+   "samples": [
+    {
+     "title": "엔비디아 장전 11% 하락…젠슨 황 CEO 사임 발표",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-12T15:04:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/437207"
+    },
+    {
+     "title": "'불륜' 젠슨 황 사임, AI산업 대혼란 … 삼전닉스 HBM 공급도 차질 빚나",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-12T15:04:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/13/2026111300001.html"
+    },
+    {
+     "title": "[사설] 젠슨 황 불명예 퇴진…680조 협력 후폭풍 차단해야",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-12T15:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004681683?sid=110"
+    }
+   ]
+  },
   {
    "keyword": "최민희 감찰 지시",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-12T13:22:00.000Z",
+   "articles90": 9,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-12T13:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "신천지 갈등 속 尹탄핵발언 논란 '최민희 감찰'…與계파 대립 새국면",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-12T14:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016439516?sid=100"
+    },
     {
      "title": "김민석, 최민희는 즉시 감찰…'신천지 3자 연합' 증거 없었다는 자신의...",
      "press": "topstarnews.net",
@@ -33,24 +71,18 @@
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-12T14:36:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/055/0001402678?sid=100"
-    },
-    {
-     "title": "최민희 '이 대통령, 尹 탄핵 반대' 발언 일파만파…靑 반박에 당 감찰까...",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-12T14:08:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=729219"
     }
    ]
   },
   {
    "keyword": "2200만원 절도 장난",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 3,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-12T13:18:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-12T13:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,44 +107,74 @@
    ]
   },
   {
-   "keyword": "장동혁 한동훈 복당",
+   "keyword": "학대",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T13:36:00.000Z",
-   "exclusive": true,
+   "press": 3,
+   "firstArticleAt": "2026-11-12T13:56:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[단독] \"외부 개입 있었다\" 장동혁 정조준...'조작 징계 의혹' 일파만파",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-12T14:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432134?sid=100"
+     "title": "'아동학대' 고소에 결국?…민속촌 '귀신 참교육' 15일 종료",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-12T14:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001040062?sid=102"
     },
     {
-     "title": "\"장동혁, 韓 징계 조작 의혹 해명해야\"",
+     "title": "“아들이 숨을 쉬지 않는다”⋯숨진 중증 발달장애 10대 몸에서 학대 정...",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-12T14:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001230599?sid=102"
+    },
+    {
+     "title": "김해 초등생 동물학대 의혹 조사 착수",
      "press": "gnmaeil.com",
      "publishedAt": "2026-11-12T13:56:00.000Z",
-     "link": "http://www.gnmaeil.com/news/articleView.html?idxno=598599"
-    },
-    {
-     "title": "[사설] 이번엔 ‘조작 징계’ 의혹, 장동혁 체제 민심 얻겠나",
-     "press": "segye.com",
-     "publishedAt": "2026-11-12T13:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004174777?sid=110"
+     "link": "http://www.gnmaeil.com/news/articleView.html?idxno=598604"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 387,
-  "matched": 139,
-  "avgLeadMin": 780,
+  "flagged": 388,
+  "matched": 144,
+  "avgLeadMin": 775,
   "recent": [
+   {
+    "keyword": "네이버 AI 에이전트 연내 출시 목표",
+    "hitKeyword": "네이버 AI팩토리 계약",
+    "hitAt": "2026-11-13T00:00:00+09:00",
+    "leadMin": 834
+   },
+   {
+    "keyword": "네이버 AI 팩토리 2조원 계약",
+    "hitKeyword": "네이버 AI팩토리 계약",
+    "hitAt": "2026-11-13T00:00:00+09:00",
+    "leadMin": 794
+   },
+   {
+    "keyword": "네이버 AI 계약 2조원",
+    "hitKeyword": "네이버 AI팩토리 계약",
+    "hitAt": "2026-11-13T00:00:00+09:00",
+    "leadMin": 739
+   },
+   {
+    "keyword": "네이버 AI 계약 소식",
+    "hitKeyword": "네이버 AI팩토리 계약",
+    "hitAt": "2026-11-13T00:00:00+09:00",
+    "leadMin": 708
+   },
+   {
+    "keyword": "공항철도 파업",
+    "hitKeyword": "공항철도 경고파업",
+    "hitAt": "2026-11-13T00:00:00+09:00",
+    "leadMin": 134
+   },
    {
     "keyword": "방화",
     "hitKeyword": "경비원 심정지 아파트 방화",
@@ -142,36 +204,6 @@
     "hitKeyword": "곽선영 엘리베이터 사고",
     "hitAt": "2026-11-12T22:00:00+09:00",
     "leadMin": 885
-   },
-   {
-    "keyword": "곽선영, 아들과 엘리베이터 추락 사고",
-    "hitKeyword": "곽선영 엘리베이터 사고",
-    "hitAt": "2026-11-12T22:00:00+09:00",
-    "leadMin": 377
-   },
-   {
-    "keyword": "성북 10대 살해 구속영장",
-    "hitKeyword": "성북구 10대 살해",
-    "hitAt": "2026-11-12T22:00:00+09:00",
-    "leadMin": 175
-   },
-   {
-    "keyword": "이유리, 사귀기 전 결혼 결심",
-    "hitKeyword": "편스토랑 이유리",
-    "hitAt": "2026-11-12T21:30:00+09:00",
-    "leadMin": 407
-   },
-   {
-    "keyword": "이재용 투자 결정",
-    "hitKeyword": "이재용 이건희",
-    "hitAt": "2026-11-12T21:30:00+09:00",
-    "leadMin": 236
-   },
-   {
-    "keyword": "충청권 메가프로젝트 착공식",
-    "hitKeyword": "삼성 온양 메가프로젝트",
-    "hitAt": "2026-11-12T21:00:00+09:00",
-    "leadMin": 593
    }
   ]
  }
