@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T18:59:44.101Z",
+ "builtAt": "2026-11-12T19:09:48.909Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 25,
  "candidates": [
   {
-   "keyword": "젠슨 황, 엔비디아 CEO 사임",
+   "keyword": "젠슨 황, 엔비디아 CEO 퇴진",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 23,
-   "recent20": 3,
-   "press": 14,
-   "firstArticleAt": "2026-11-12T17:31:00.000Z",
+   "articles90": 12,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-12T17:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "연방하원, 젠슨황 퇴진에도 의회증언 추진…\"안나오면 소환장\"",
+     "press": "radiokorea.com",
+     "publishedAt": "2026-11-12T18:56:00.000Z",
+     "link": "https://www.radiokorea.com/news/article.php?uid=509458"
+    },
     {
      "title": "젠슨 황, 결국 불명예 퇴진...두 번 불륜에 33년 만에 쫓겨나",
      "press": "ytn.co.kr",
@@ -33,19 +39,45 @@
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-12T18:41:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012293046?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "13일의 금요일",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-12T18:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[재미로 보는 오늘의 운세] 11월 13일 (금요일) 66년생, 송사에 연루되면...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-12T19:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004174784?sid=103"
     },
     {
-     "title": "엔비디아 주가 장 초반 13% 폭락…젠슨 황 CEO 사임 충격",
-     "press": "radiokorea.com",
-     "publishedAt": "2026-11-12T18:40:00.000Z",
-     "link": "https://www.radiokorea.com/news/article.php?uid=509457"
+     "title": "[지윤철학원의 오늘의 운세] 2026년 11월 13일 금요일 띠별 운세",
+     "press": "news2day.co.kr",
+     "publishedAt": "2026-11-12T18:34:00.000Z",
+     "link": "https://www.news2day.co.kr/article/20261112500056"
+    },
+    {
+     "title": "[지지대] 13일의 금요일, 인류 멸망의 날",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-12T18:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000131874?sid=110"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 392,
+  "flagged": 393,
   "matched": 141,
   "avgLeadMin": 785,
   "recent": [
