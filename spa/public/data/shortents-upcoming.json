@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T23:01:45.422Z",
+ "builtAt": "2026-11-12T23:11:52.603Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,31 +8,63 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "젠슨 황 사임 여파",
    "sources": [
     "nate"
    ],
-   "articles90": 43,
-   "recent20": 7,
+   "articles90": 44,
+   "recent20": 8,
    "press": 35,
-   "firstArticleAt": "2026-11-12T21:34:00.000Z",
+   "firstArticleAt": "2026-11-12T21:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨 황 떠난 엔비디아, 장중 시총 801조원 날아갔다",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T22:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014319786?sid=104"
+     "title": "젠슨 황 사임 후폭풍…환율도 1340원대 재진입 시도[외환브리핑]",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-12T23:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006409253?sid=101"
     },
     {
-     "title": "뉴욕증시, 젠슨황 사임·유가상승에 하락 마감",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-12T22:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000543428?sid=104"
+     "title": "[마켓뷰] '젠슨 황 퇴진' 파장 어디까지? 코스피 영향 주시",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-12T23:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016439693?sid=101"
+    },
+    {
+     "title": "[속보] 美증시 젠슨황 사임·국제유가 상승 '겹악재'에도 … 삼전닉스 프...",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-12T23:02:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/13/2026111300020.html"
+    }
+   ]
+  },
+  {
+   "keyword": "AMD 브로드컴 급등",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 30,
+   "recent20": 3,
+   "press": 27,
+   "firstArticleAt": "2026-11-12T21:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "젠슨 황 퇴진 충격에 美기술주 약세…AMD·브로드컴은 5%대 상승",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-12T22:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004209372?sid=104"
+    },
+    {
+     "title": "뉴욕증시, 엔비디아 CEO 사임에 기술주 '휘청'···국제유가 3% 급등까지",
+     "press": "smartbizn.com",
+     "publishedAt": "2026-11-12T22:54:00.000Z",
+     "link": "https://www.smartbizn.com/news/articleView.html?idxno=159321"
     },
     {
      "title": "\"젠슨 황 퇴진 충격에 유가 급등까지\"…뉴욕증시 하락·엔비디아 4.3%↓",
@@ -43,17 +75,87 @@
    ]
   },
   {
+   "keyword": "나스닥 지수",
+   "sources": [
+    "google"
+   ],
+   "articles90": 17,
+   "recent20": 3,
+   "press": 17,
+   "firstArticleAt": "2026-11-12T21:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "뉴욕증시, 3대 지수 하락…젠슨 황 사임에 엔비디아 약세",
+     "press": "issuenbiz.com",
+     "publishedAt": "2026-11-12T23:06:00.000Z",
+     "link": "http://www.issuenbiz.com/news/articleView.html?idxno=81550"
+    },
+    {
+     "title": "[뉴욕증시] 나스닥, 젠슨 황 사임 충격에 0.39%↓…금리·유가 상승도 영...",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-12T23:04:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5082966"
+    },
+    {
+     "title": "젠슨 황 퇴진에 뉴욕증시 하락‥나스닥 0.4%↓",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-12T22:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001535353?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "10월 수출물량 증가",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 6,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-12T22:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "10월 수입물가 1.8% 하락 전환...환율·유가 하락 영",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-12T23:04:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=72960"
+    },
+    {
+     "title": "유가·환율 동반 하락에 10월 수입물가 1.8%↓…한 달 만에 하락 전환",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-12T23:02:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4444540"
+    },
+    {
+     "title": "유가 하락에 수입물가 1.8%↓…수출물량 증가율은 역대 최고",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-12T23:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005763108?sid=101"
+    }
+   ]
+  },
+  {
    "keyword": "박수홍 5년만 결론",
    "sources": [
     "nate"
    ],
-   "articles90": 5,
+   "articles90": 6,
    "recent20": 2,
-   "press": 5,
+   "press": 6,
    "firstArticleAt": "2026-11-12T22:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "박수홍 친형 부부, 오늘(13일) 98억 손배소 선고…핵심 쟁점은",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-12T23:08:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16275409"
+    },
     {
      "title": "박수홍 친형 부부 98억 손배소, 오늘(13일) 선고",
      "press": "celuvmedia.com",
@@ -65,91 +167,27 @@
      "press": "tvdaily.co.kr",
      "publishedAt": "2026-11-12T22:50:00.000Z",
      "link": "https://m.entertain.naver.com/article/440/0000052494"
-    },
-    {
-     "title": "‘친족상도례’ 흔든 박수홍, 친형 98억 소송 오늘(13일) 선고",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-12T22:38:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001147149"
     }
    ]
   },
   {
-   "keyword": "10월 수출물량 증가",
+   "keyword": "이세창, 급성 맹장염으로 긴급 수술",
    "sources": [
     "signal.bz"
    ],
    "articles90": 5,
    "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-12T21:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "유가 하락에 수입물가 1.8%↓…수출물량 증가율은 역대 최고",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-12T23:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005763108?sid=101"
-    },
-    {
-     "title": "원·달러 환율·국제 유가 하락에…10월 수입물가 1.8%↓",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T22:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014319773?sid=101"
-    },
-    {
-     "title": "환율·유가 동반 하락에 10월 수입물가 1.8%↓...수출물가 0.7%↑",
-     "press": "tfmedia.co.kr",
-     "publishedAt": "2026-11-12T22:22:00.000Z",
-     "link": "https://www.tfmedia.co.kr/news/article.html?no=208861"
-    }
-   ]
-  },
-  {
-   "keyword": "2026년 11월 13일 운세",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T21:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오늘의 띠별 운세] 2026년 11월 13일 금요일",
-     "press": "mhns.co.kr",
-     "publishedAt": "2026-11-12T22:52:00.000Z",
-     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=768903"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 13일 금요일 띠별 운세… 양띠·개띠·돼지띠...",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-12T22:44:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082487"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 13일 (금) 띠별운세 '수고한 나를 다독이자'",
-     "press": "dailypop.kr",
-     "publishedAt": "2026-11-12T21:40:00.000Z",
-     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103979"
-    }
-   ]
-  },
-  {
-   "keyword": "이세창, 급성 맹장염 수술",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
    "firstArticleAt": "2026-11-12T21:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이세창, 급성 맹장염으로 긴급 수술 받아",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-12T23:06:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=624950"
+    },
     {
      "title": "이세창, '재혼♥ 정하나'도 없는데…급성맹장염 긴급 수술",
      "press": "sportschosun.com",
@@ -161,22 +199,130 @@
      "press": "newsen.com",
      "publishedAt": "2026-11-12T22:06:00.000Z",
      "link": "https://m.entertain.naver.com/article/609/0001187013"
+    }
+   ]
+  },
+  {
+   "keyword": "김서아 기쁨조 후보 고백",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T22:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "11세부터 '기쁨조' 후보…북한 무용수 출신 김서아의 고백",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-12T23:00:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=624945"
     },
     {
-     "title": "이세창, 급성맹장염 긴급 수술…\"죽다가 살았네\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T21:47:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014319741"
+     "title": "탈북 유튜버 김서아, 기쁨조 최종 후보까지 올랐다…“3명 중 2명 탈락”",
+     "press": "segye.com",
+     "publishedAt": "2026-11-12T22:57:00.000Z",
+     "link": "https://m.entertain.naver.com/article/022/0004174843"
+    },
+    {
+     "title": "'탈북 미녀' 김서아 \"11세에 기쁨조 후보 뽑혀 17세까지 불려 다녔다\" [...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-12T22:13:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004124633"
+    }
+   ]
+  },
+  {
+   "keyword": "2026년 11월 13일 운세",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-12T22:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[11월 13일 오늘의 별자리 운세] 서두르지 말고 배려가 필요한 하루다",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-12T23:10:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95146"
+    },
+    {
+     "title": "[오늘의 띠별 운세] 2026년 11월 13일 금요일",
+     "press": "mhns.co.kr",
+     "publishedAt": "2026-11-12T22:52:00.000Z",
+     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=768903"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 13일 금요일 띠별 운세… 양띠·개띠·돼지띠...",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-12T22:44:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082487"
+    }
+   ]
+  },
+  {
+   "keyword": "후티 사우디 송유관 공격",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-12T22:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“패트리엇 미사일 대신 이집트 군대 깔았다”…후티에 떠는 사우디의 ...",
+     "press": "nownews.seoul.co.kr",
+     "publishedAt": "2026-11-12T23:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003699002?sid=104"
+    },
+    {
+     "title": "후티 “사우디 동서 송유관·얀부 석유시설 공격해”",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-12T22:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003482469?sid=104"
+    },
+    {
+     "title": "후티 반군 \"드론으로 사우디 송유관·미사일로 석유 시설 타격 성공\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-12T22:32:00.000Z",
+     "link": "https://www.ajunews.com/view/20261113072811861"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 408,
-  "matched": 148,
-  "avgLeadMin": 662,
+  "flagged": 411,
+  "matched": 150,
+  "avgLeadMin": 661,
   "recent": [
+   {
+    "keyword": "이정현 31점 소노 역전승",
+    "hitKeyword": "이탈리아 프랑스 역전승",
+    "hitAt": "2026-11-13T08:00:00+09:00",
+    "leadMin": 594
+   },
+   {
+    "keyword": "소노 역전승",
+    "hitKeyword": "이탈리아 프랑스 역전승",
+    "hitAt": "2026-11-13T08:00:00+09:00",
+    "leadMin": 584
+   },
+   {
+    "keyword": "성북 10대 살해 구속영장",
+    "hitKeyword": "발달장애 10대 사망",
+    "hitAt": "2026-11-13T08:00:00+09:00",
+    "leadMin": 18
+   },
    {
     "keyword": "황정리 별세",
     "hitKeyword": "황정리 별세",
@@ -218,24 +364,6 @@
     "hitKeyword": "삼성 반도체 공장 건설",
     "hitAt": "2026-11-13T06:30:00+09:00",
     "leadMin": 130
-   },
-   {
-    "keyword": "트럼프 이란전쟁 종전",
-    "hitKeyword": "트럼프 특사 종전 협상",
-    "hitAt": "2026-11-13T06:00:00+09:00",
-    "leadMin": 887
-   },
-   {
-    "keyword": "젠슨 황, 엔비디아 CEO 사임",
-    "hitKeyword": "엔비디아 주가 급락",
-    "hitAt": "2026-11-13T06:00:00+09:00",
-    "leadMin": 353
-   },
-   {
-    "keyword": "젠슨 황 엔비디아 사임",
-    "hitKeyword": "엔비디아 주가 급락",
-    "hitAt": "2026-11-13T06:00:00+09:00",
-    "leadMin": 322
    }
   ]
  }
