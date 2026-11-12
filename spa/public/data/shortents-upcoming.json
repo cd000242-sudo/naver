@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T11:05:20.976Z",
+ "builtAt": "2026-11-12T11:15:25.694Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "김승원 브로커 징역 4년 구형",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 20,
-   "recent20": 1,
-   "press": 20,
-   "firstArticleAt": "2026-11-12T09:38:00.000Z",
+   "articles90": 18,
+   "recent20": 0,
+   "press": 18,
+   "firstArticleAt": "2026-11-12T09:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -43,49 +43,55 @@
    ]
   },
   {
-   "keyword": "고객 정보 유출",
+   "keyword": "캐릭",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 10,
-   "recent20": 1,
+   "articles90": 9,
+   "recent20": 6,
    "press": 8,
-   "firstArticleAt": "2026-11-12T09:37:00.000Z",
-   "exclusive": false,
+   "firstArticleAt": "2026-11-12T09:58:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "코인마켓 거래소 '플라이빗' 해킹…고객 40명 개인정보 유출",
-     "press": "newsway.co.kr",
-     "publishedAt": "2026-11-12T11:00:00.000Z",
-     "link": "https://www.newsway.co.kr/news/view?ud=2026111219564317964"
+     "title": "[오피셜] 맨유, 결국 캐릭 잘랐다! 훈련 끝났는데 \"당신 해고야\" 통보.....",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-12T11:08:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/108/0003487022"
     },
     {
-     "title": "중소 코인거래소 플라이빗도 해킹…고객 40명 정보 유출",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-12T10:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005440557?sid=101"
+     "title": "'EPL 18위' 맨유, 결국 캐릭 감독 경질…\"변화 필요\"",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-12T11:06:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109877682462"
     },
     {
-     "title": "일본, 중소기업 개인정보 유출 확산",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-12T10:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012292759?sid=104"
+     "title": "'오피셜' 공식발표 떴다! 맨유, '레전드' 마이클 캐릭 감독 경질...\"후임...",
+     "press": null,
+     "publishedAt": "2026-11-12T11:03:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/216/0000143711"
     }
    ]
   },
   {
-   "keyword": "50대 남성 구속영장 청구",
+   "keyword": "성북 10대 살해 구속영장",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 7,
-   "recent20": 3,
+   "recent20": 2,
    "press": 7,
-   "firstArticleAt": "2026-11-12T09:37:00.000Z",
+   "firstArticleAt": "2026-11-12T09:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "아들의 성범죄 피해자 살해한 아버지, 단순 범죄? \"청소년 둘러싼 성인...",
+     "press": "pressian.com",
+     "publishedAt": "2026-11-12T11:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/002/0002465653?sid=102"
+    },
     {
      "title": "10대 소녀 살해한 50대 남성 여전히 진술 거부…구속영장 청구(종합2보)",
      "press": "yna.co.kr",
@@ -93,16 +99,10 @@
      "link": "https://n.news.naver.com/mnews/article/001/0016439393?sid=102"
     },
     {
-     "title": "'소녀 살해' 50대 계속 진술거부...공소청, 구속영장 청구",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-12T11:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432071?sid=102"
-    },
-    {
-     "title": "공소청, ‘15세 소녀 살해’ 50대 남성 구속영장 청구…사전 범행 준비...",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-12T10:50:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611120198"
+     "title": "[뉴스추적] '성북 살인' 가해자 사실혼 여성도 조사…남은 의문점은",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-12T10:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001977950?sid=102"
     }
    ]
   },
@@ -139,35 +139,34 @@
    ]
   },
   {
-   "keyword": "김지호 잘츠부르크 이적",
+   "keyword": "고객 정보 유출",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 5,
+   "articles90": 6,
    "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-12T09:42:00.000Z",
-   "exclusive": true,
+   "firstArticleAt": "2026-11-12T09:57:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'대전 유스' 출신 2009년생 김지호, 레드불 잘츠부르크 이적...2027년 여름...",
-     "press": "maniareport.com",
-     "publishedAt": "2026-11-12T10:55:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/425/0000214896"
+     "title": "코인마켓 거래소 '플라이빗' 해킹…고객 40명 개인정보 유출",
+     "press": "newsway.co.kr",
+     "publishedAt": "2026-11-12T11:00:00.000Z",
+     "link": "https://www.newsway.co.kr/news/view?ud=2026111219564317964"
     },
     {
-     "title": "대전 유스 출신 김지호, 오스트리아 잘츠부르크 입단",
-     "press": "stnsports.co.kr",
-     "publishedAt": "2026-11-12T10:44:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/450/0000155462"
+     "title": "중소 코인거래소 플라이빗도 해킹…고객 40명 정보 유출",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-12T10:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005440557?sid=101"
     },
     {
-     "title": "[공식발표] 황희찬 후배 생긴다! '대전 성골' 김지호, 17살에 韓 유럽파...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-12T10:01:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/109/0005639486"
+     "title": "일본, 중소기업 개인정보 유출 확산",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-12T10:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012292759?sid=104"
     }
    ]
   },
@@ -184,7 +183,7 @@
    "capped": false,
    "samples": [
     {
-     "title": "'조희대 탄핵' 외침에 \"미쳤나 진짜, 후진국\"…민주당 의원 누구",
+     "title": "'조희대 탄핵' 외침에 \"미쳤나 진짜\"…민주당 의원 누구",
      "press": "imaeil.com",
      "publishedAt": "2026-11-12T10:58:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/088/0001040056?sid=100"
@@ -204,43 +203,44 @@
    ]
   },
   {
-   "keyword": "여자축구, LA 올림픽 최종예선 B조",
+   "keyword": "김지호 잘츠부르크 이적",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-12T09:38:00.000Z",
-   "exclusive": false,
+   "firstArticleAt": "2026-11-12T10:01:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "북한·중국 다 넘어야 하다니...'죽음의 조' 한국 여자축구 LA 올림픽 B조...",
-     "press": "fourfourtwo.co.kr",
-     "publishedAt": "2026-11-12T09:50:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/411/0000089879"
-    },
-    {
-     "title": "'첫 올림픽 본선 도전' 한국 여자 축구, 북한·중국·필리핀과 최종예선...",
+     "title": "'대전 유스' 출신 2009년생 김지호, 레드불 잘츠부르크 이적...2027년 여름...",
      "press": "maniareport.com",
-     "publishedAt": "2026-11-12T09:42:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/425/0000214892"
+     "publishedAt": "2026-11-12T10:55:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/425/0000214896"
     },
     {
-     "title": "한국 여자축구, LA 올림픽 최종예선서 북한·중국·필리핀과 B조",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-12T09:38:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/214/0001535226"
+     "title": "대전 유스 출신 김지호, 오스트리아 잘츠부르크 입단",
+     "press": "stnsports.co.kr",
+     "publishedAt": "2026-11-12T10:44:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/450/0000155462"
+    },
+    {
+     "title": "[공식발표] 황희찬 후배 생긴다! '대전 성골' 김지호, 17살에 韓 유럽파...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-12T10:01:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/109/0005639486"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 394,
-  "matched": 130,
-  "avgLeadMin": 1036,
+  "flagged": 390,
+  "matched": 128,
+  "avgLeadMin": 975,
   "recent": [
    {
     "keyword": "반도체 유가 민간소비 영향",
