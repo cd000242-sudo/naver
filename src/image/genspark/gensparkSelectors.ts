@@ -71,6 +71,8 @@ export interface GensparkMenuModelItem {
   creditFree: boolean;
   needsInput: boolean;
   isNew: boolean;
+  /** [2026-11-12] 이름 뒤 글자의 크레딧 배수(예: '1×'; 할인 배지가 있으면 마지막 값). 못 읽으면 필드 없음 */
+  creditMultiplier?: string;
 }
 export interface GensparkSettingOption { label: string; selected: boolean }
 export interface GensparkSettingsMenu { ratios: GensparkSettingOption[]; counts: GensparkSettingOption[] }
@@ -102,11 +104,13 @@ export function readGensparkModelMenu(): GensparkMenuModelItem[] {
       const label = isNew ? lines[1] || '' : lines[0];
       if (!label) continue;
       const all = lines.join('\n');
+      const multipliers = lines.slice(isNew ? 2 : 1).join(' ').match(/\d+(?:\.\d+)?\s*×/g);
       out.push({
         label,
         creditFree: all.includes('No credit cost'),
         needsInput: all.includes('이 모델은 입력 이미지가 필요합니다'),
         isNew,
+        ...(multipliers ? { creditMultiplier: multipliers[multipliers.length - 1].replace(/\s+/g, '') } : {}),
       });
     }
   }
@@ -214,7 +218,7 @@ export function readGensparkPageSignals(): GensparkPageSignals {
   const url = String(location.href || '');
   const hasComposer = !!document.querySelector('textarea.search-input');
   const challengeWords = ['사람인지 확인', 'Verify you are human', 'Just a moment', 'captcha', '보안 확인'];
-  const rateWords = ['너무 많은 요청', 'Too many requests', 'rate limit', '요청 한도'];
+  const rateWords =['너무 많은 요청', 'Too many requests', 'rate limit', '요청 한도', '서버가 과부하', 'server is overloaded'];
   const failWords = ['생성에 실패', 'Generation failed', 'Something went wrong', '오류가 발생'];
   const loginWords = ['로그인', 'Sign in', 'Log in'];
 

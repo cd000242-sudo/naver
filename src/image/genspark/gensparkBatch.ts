@@ -93,7 +93,6 @@ export async function runGensparkBatch(
   const results: Array<GensparkDownloadResult | undefined> = new Array(total).fill(undefined);
   const failures: GensparkBatchFailure[] = [];
   const attempts = new Map<number, number>();
-  const maxRetry = gensparkRetryCount(options);
   const queue: number[] = requests.map((_, i) => i); // requests 배열 위치
   let inflight: InFlight[] = [];
   let concurrency = Math.max(1, Math.floor(options.concurrency) || 1);
@@ -116,6 +115,7 @@ export async function runGensparkBatch(
       concurrency = next;
     }
     const used = attempts.get(position) ?? 0;
+    const maxRetry = gensparkRetryCount(options); // 실패하는 순간의 메뉴 표시를 본다(첫 전송 뒤에야 알 수 있음)
     if (used <= maxRetry - 1 && maxRetry > 0) {
       attempts.set(position, used + 1);
       deps.log(`[젠스파크] ${req.index + 1}번 실패 → 같은 모델로 다시 보냅니다. (${used + 1}/${maxRetry}) · ${toFailure(req.index, error).message}`);

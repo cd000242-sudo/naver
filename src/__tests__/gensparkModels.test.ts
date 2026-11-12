@@ -20,11 +20,12 @@ import {
 } from '../image/genspark/gensparkErrors';
 
 describe('gensparkModels', () => {
-  it('모델 15개: 무료 8 / 크레딧 차감 7', () => {
+  // [2026-11-12 실측] 젠스파크 모델 메뉴의 모든 모델에 크레딧 배수가 붙고 'No credit cost' 는 없다 — 앱 표에 무제한 모델이 없다.
+  //   예전 단언은 "무료 8 / 크레딧 차감 7" 이었다(무제한 8개를 정답으로 고정).
+  it('모델 15개: 앱 표에 무제한 모델은 없다(전부 크레딧 차감)', () => {
     const list = gensparkListModels();
     expect(list).toHaveLength(15);
-    expect(list.filter((m) => m.creditFree)).toHaveLength(8);
-    expect(list.filter((m) => !m.creditFree)).toHaveLength(7);
+    expect(list.filter((m) => m.creditFree)).toHaveLength(0);
   });
 
   it('id·메뉴 글자가 겹치지 않는다', () => {
@@ -36,7 +37,7 @@ describe('gensparkModels', () => {
   it('기본 모델은 GPT Image 2.5', () => {
     expect(GENSPARK_DEFAULT_MODEL_ID).toBe('gpt-image-2.5');
     expect(gensparkDefaultModel().menuLabel).toBe('GPT Image 2.5');
-    expect(gensparkDefaultModel().creditFree).toBe(true);
+    expect(gensparkDefaultModel().creditFree).toBe(false);
   });
 
   it('한글을 직접 그리는 모델은 5개뿐(10/10 실측: Flash Lite 포함)', () => {
@@ -52,8 +53,8 @@ describe('gensparkModels', () => {
   it('메뉴 글자는 정확 일치: GPT Image 2 ≠ 2.5, Ideogram V4 ≠ V4.5', () => {
     expect(gensparkFindModelByMenuLabel('GPT Image 2')?.id).toBe('gpt-image-2');
     expect(gensparkFindModelByMenuLabel('GPT Image 2.5')?.id).toBe('gpt-image-2.5');
-    expect(gensparkFindModelByMenuLabel('Ideogram V4')?.creditFree).toBe(true);
-    expect(gensparkFindModelByMenuLabel('Ideogram V4.5')?.creditFree).toBe(false);
+    expect(gensparkFindModelByMenuLabel('Ideogram V4')?.id).toBe('ideogram-v4');
+    expect(gensparkFindModelByMenuLabel('Ideogram V4.5')?.id).toBe('ideogram-v4.5');
     expect(gensparkFindModelByMenuLabel('GPT Image')).toBeNull();
     expect(gensparkFindModelByMenuLabel('모델 자동 선택')).toBeNull();
     expect(gensparkFindModelByMenuLabel(undefined)).toBeNull();
@@ -65,9 +66,13 @@ describe('gensparkModels', () => {
     }
   });
 
-  it('크레딧 모델만 (크레딧 차감) 표시가 붙는다', () => {
-    expect(gensparkModelDisplayLabel(gensparkFindModelById('gpt-image-2.5')!)).toBe('GPT Image 2.5');
+  // [2026-11-12] 예전: 크레딧 모델만 '(크레딧 차감)' — 나머지 8개는 접미사가 없어 무제한처럼 보였다. 지금은 모델 구분 없이 같은 안내.
+  it('모든 모델에 같은 (크레딧 차감) 안내가 붙는다 — 무제한처럼 보이는 모델이 없다', () => {
+    expect(gensparkModelDisplayLabel(gensparkFindModelById('gpt-image-2.5')!)).toBe('GPT Image 2.5 (크레딧 차감)');
     expect(gensparkModelDisplayLabel(gensparkFindModelById('nano-banana-pro')!)).toBe('Nano Banana Pro (크레딧 차감)');
+    for (const m of gensparkListModels()) {
+      expect(gensparkModelDisplayLabel(m), m.id).toBe(`${m.menuLabel} (크레딧 차감)`);
+    }
   });
 
   it('id 조회: 없으면 null', () => {

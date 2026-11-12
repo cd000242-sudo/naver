@@ -90,21 +90,20 @@ describe('젠스파크 모델 select (실제 함수 실행)', () => {
     (window as any).api = { saveConfig: vi.fn().mockResolvedValue({}) };
   });
 
-  it('15개 옵션을 채우고 크레딧 모델에는 라벨이 붙으며 기본은 GPT Image 2.5', () => {
+  // [2026-11-12] 젠스파크에 무제한 모델이 없다 — 라벨·확인창은 모델 구분 없이 15개 전부 같다(예전: 크레딧 7개만).
+  it('15개 옵션을 채우고 전부 같은 (크레딧 차감) 라벨이 붙으며 기본은 GPT Image 2.5', () => {
     gsPopulateModelSelect('m1');
     const sel = document.getElementById('m1') as HTMLSelectElement;
     expect(sel.options.length).toBe(15);
     expect(sel.value).toBe('gpt-image-2.5');
-    const credit = gensparkListModels().filter((m) => !m.creditFree);
-    expect(credit.length).toBeGreaterThan(0);
     const labels = Array.from(sel.options).map((o) => o.textContent || '');
-    expect(labels.filter((l) => l.endsWith(' (크레딧 차감)')).length).toBe(credit.length);
+    expect(labels.filter((l) => l.endsWith(' (크레딧 차감)')).length).toBe(15);
   });
 
-  it('크레딧 모델을 고를 때 확인창 거절하면 이전 값 유지·저장 안 함', () => {
+  it('모델을 고를 때 확인창 거절하면 이전 값 유지·저장 안 함', () => {
     gsBindModelSelect('m1');
     const sel = document.getElementById('m1') as HTMLSelectElement;
-    const credit = gensparkListModels().find((m) => !m.creditFree)!;
+    const credit = gensparkListModels().find((m) => m.id !== 'gpt-image-2.5')!;
     window.confirm = vi.fn(() => false);
     sel.value = credit.id;
     sel.dispatchEvent(new Event('change'));
@@ -118,7 +117,7 @@ describe('젠스파크 모델 select (실제 함수 실행)', () => {
     gsBindModelSelect('m1');
     gsBindModelSelect('m2');
     const sel = document.getElementById('m1') as HTMLSelectElement;
-    const credit = gensparkListModels().find((m) => !m.creditFree)!;
+    const credit = gensparkListModels().find((m) => m.id !== 'gpt-image-2.5')!;
     window.confirm = vi.fn(() => true);
     sel.value = credit.id;
     sel.dispatchEvent(new Event('change'));
@@ -127,16 +126,18 @@ describe('젠스파크 모델 select (실제 함수 실행)', () => {
     expect(gsGetSavedModelId()).toBe(credit.id);
   });
 
-  it('크레딧이 없는 모델은 확인창 없이 바로 저장한다', () => {
+  // [2026-11-12] 예전 단언은 "크레딧이 없는 모델은 확인창 없이 저장"이었다 — 그런 모델이 표에 없어졌다(무제한 표시 없음).
+  //   `if (!free) return;` 으로 빈 시험이 되지 않게, 어느 모델이든 같은 확인창을 거친다는 것을 단언한다.
+  it('어느 모델을 고르든 같은 확인창을 거친다(무제한처럼 확인 없이 저장되는 모델이 없다)', () => {
     gsBindModelSelect('m1');
     const sel = document.getElementById('m1') as HTMLSelectElement;
-    const free = gensparkListModels().find((m) => m.creditFree && m.id !== 'gpt-image-2.5');
-    if (!free) return;
     window.confirm = vi.fn(() => false);
-    sel.value = free.id;
-    sel.dispatchEvent(new Event('change'));
-    expect(window.confirm).not.toHaveBeenCalled();
-    expect((window as any).api.saveConfig).toHaveBeenCalledWith({ gensparkImageModel: free.id });
+    for (const m of gensparkListModels().filter((x) => x.id !== 'gpt-image-2.5')) {
+      sel.value = m.id;
+      sel.dispatchEvent(new Event('change'));
+    }
+    expect(window.confirm).toHaveBeenCalledTimes(14);
+    expect((window as any).api.saveConfig).not.toHaveBeenCalled();
   });
 
   it('서브모달용 행 HTML 에 로그인·확인·모델 요소가 있다', () => {

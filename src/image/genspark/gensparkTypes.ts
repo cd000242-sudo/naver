@@ -75,8 +75,11 @@ export interface GensparkBatchOptions {
   jobDeadlineMs: number;
   /** 작업 주소를 돌며 확인하는 간격(기본 3초) */
   pollIntervalMs: number;
-  /** 고른 모델이 무제한(No credit cost)인가 — 재시도 횟수를 정한다 */
-  modelCreditFree: boolean;
+  /**
+   * 젠스파크 메뉴가 고른 모델을 무제한('No credit cost')으로 보여 줬는가 — 재시도 횟수를 정한다.
+   * [2026-11-12] 앱 표가 아니라 실제 메뉴 표시를 따른다. 메뉴는 첫 전송에서야 읽히므로 함수면 실패할 때마다 그 시점 값을 쓴다.
+   */
+  modelCreditFree: boolean | (() => boolean);
   /** 재시도 횟수: 무료 모델만 1회, 크레딧 모델은 0회(크레딧 중복 소모 방지) */
   retry: { freeModel: number; creditModel: number };
 }
@@ -91,7 +94,8 @@ export const GENSPARK_DEFAULT_BATCH_OPTIONS: Readonly<Omit<GensparkBatchOptions,
 
 /** 이 배치에서 항목당 허용되는 재시도 횟수. */
 export function gensparkRetryCount(options: Pick<GensparkBatchOptions, 'modelCreditFree' | 'retry'>): number {
-  return options.modelCreditFree ? options.retry.freeModel : options.retry.creditModel;
+  const free = typeof options.modelCreditFree === 'function' ? options.modelCreditFree() : options.modelCreditFree;
+  return free ? options.retry.freeModel : options.retry.creditModel;
 }
 
 /** 항목 하나의 결과(성공이면 image, 실패면 errorCode+message). */

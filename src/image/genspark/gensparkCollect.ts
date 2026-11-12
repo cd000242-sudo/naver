@@ -15,6 +15,7 @@ import {
 import type { GensparkCollectResult, GensparkGeneratedImage, GensparkJob, GensparkPageLike } from './gensparkTypes';
 
 const MIN_IMAGE_BYTES = 1024;
+const REFUSAL_RECHECK_MS = 8_000;
 
 export interface GensparkCollectDeps {
   sleep(ms: number): Promise<void>;
@@ -45,9 +46,11 @@ export async function fetchGensparkImageBytes(url: string): Promise<{
  * [2026-10-10 실측] 작업 화면 하나는 데이터 요청 30여 개(3.2MB)라 바쁜 PC 에선 열기만 30초+였다. 결과는 /api/project?id= 하나에
  *   있다(0.5초): 갤러리 assets_gallery[].generated_asset_uri, 그림 작업 media_task_results[].status/url. data.status 는 대화 단계라
  *   시작하자마자 FINISHED 이므로 보지 않는다. 화면에 보이는 그림 주소만 쓴다(url_nowatermark 는 쓰지 않음).
+ *   [2026-11-12] 이미지가 없고 마지막 글이 도우미의 거절("서버가 과부하 상태입니다. 나중에 다시 시도해 주세요.")이면 refusal 로 돌려준다
+ *   (Orbit 3.8.771 실측: 전송 4초 뒤 유일한 답). 도우미 글에서만 읽으므로 사용자 프롬프트·최근 항목 제목과 섞이지 않는다.
  *   page.evaluate 로 직렬화되므로 자기완결. 같은 출처(쿠키) 화면에서만 부른다.
  */
-export async function fetchGensparkProjectResult(jobId: string): Promise<{ ok: boolean; images: string[]; failed: boolean }> {
+export async function fetchGensparkProjectResult(jobId: string): Promise<{ ok: boolean; images: string[]; failed: boolean; refusal?: string }> {
   try {
     const res = await fetch('/api/project?id=' + encodeURIComponent(jobId), { credentials: 'include' });
     if (!res.ok) return { ok: false, images: [], failed: false };
@@ -70,6 +73,12 @@ export async function fetchGensparkProjectResult(jobId: string): Promise<{ ok: b
         if (/success/i.test(status)) add(result.url);
       }
     }
+    const messages = Array.isArray(state.messages) ? state.messages : [];
+    const last = messages[messages.length - 1];
+    const said = last && last.role === 'assistant' ? String(last.content || '').replace(/\s+/g, ' ').trim() : '';
+    if (images.length === 0 && said && /과부하|나중에 다시 시도|overloaded|try again later/i.test(said)) {
+      return { ok: true, images, failed, refusal: said.slice(0, 160) };
+    }
     return { ok: true, images, failed };
   } catch {
     return { ok: false, images: [], failed: false };
@@ -90,12 +99,19 @@ export async function checkGensparkJob(
   const sleep = deps?.sleep ?? ((ms: number) => new Promise<void>((r) => setTimeout(r, ms)));
   // 1) 가벼운 확인 — 작업 화면을 열지 않고 결과 데이터만 묻는다. 못 하면(형식 변경·로그인 풀림) 아래 화면 확인으로.
   if (String(page.url() || '').startsWith(GENSPARK_ORIGIN)) {
-    const light = await page.evaluate(fetchGensparkProjectResult, job.jobId).catch(() => null);
+    let light = await page.evaluate(fetchGensparkProjectResult, job.jobId).catch(() => null);
+    if (light && light.ok && light.refusal && !light.failed) {
+      // [2026-11-12] 거절 글은 확정이지만, 실패로 끝내기 전에 한 번 더 읽는다(Orbit 과 같은 8초 — 이미지가 뒤늦게 붙는 경우 대비).
+      await sleep(REFUSAL_RECHECK_MS);
+      const again = await page.evaluate(fetchGensparkProjectResult, job.jobId).catch(() => null);
+      if (again && again.ok) light = again;
+    }
     if (light && light.ok) {
       const fresh = light.images.filter((u) => !seenUrls.has(u));
       if (fresh.length > 0) return { status: 'done', imageUrl: fresh[0] };
       if (light.images.length > 0) return { status: 'failed', reason: `${GENSPARK_DUPLICATE_IMAGE}: 이미 받은 이미지 주소만 보임` };
       if (light.failed) return { status: 'failed', reason: `${GENSPARK_JOB_FAILED}: 그림 작업 실패 표시` };
+      if (light.refusal) return { status: 'failed', reason: `${GENSPARK_RATE_LIMITED}: 서버 과부하 거절 — "${light.refusal}"` };
       return { status: 'pending' };
     }
   }

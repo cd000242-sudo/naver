@@ -7,7 +7,11 @@ export interface GensparkModelEntry {
   readonly id: string;
   /** 젠스파크 모델 메뉴의 글자 그대로(정확 일치로 찾는다) */
   readonly menuLabel: string;
-  /** true = 'No credit cost'(무제한), false = 크레딧 차감 */
+  /**
+   * 앱 표의 크레딧 표기. [2026-11-12 실측] 젠스파크 모델 메뉴의 모든 모델에 크레딧 배수가 붙고 'No credit cost' 가 없어
+   * 표의 15개 모두 false(크레딧 차감)다 — 화면 라벨·확인창·안내가 모델 구분 없이 같다. 실제 무제한 여부는 표가 아니라
+   * 실행 때 메뉴(gensparkSelectors.readGensparkModelMenu)에서 읽는다(재시도 규칙).
+   */
   readonly creditFree: boolean;
   /** 이미지 안에 한글을 직접 그려 주는 모델 */
   readonly drawsKorean: boolean;
@@ -29,16 +33,15 @@ function gensparkMakeModel(
 }
 
 const GENSPARK_MODELS: readonly GensparkModelEntry[] = Object.freeze([
-  // 무료(무제한) 8개
-  gensparkMakeModel('gpt-image-2.5', 'GPT Image 2.5', true, true),
-  gensparkMakeModel('gpt-image-2', 'GPT Image 2', true, true),
-  gensparkMakeModel('nano-banana-2-flash-lite', 'Nano Banana 2 Flash Lite', true, true),
-  gensparkMakeModel('seedream-v5-lite', 'Bytedance Seedream v5 Lite', true),
-  gensparkMakeModel('z-image-turbo', 'Z-Image Turbo', true),
-  gensparkMakeModel('krea-2-turbo', 'Krea 2 Turbo', true),
-  gensparkMakeModel('recraft-v4.1', 'Recraft V4.1', true),
-  gensparkMakeModel('ideogram-v4', 'Ideogram V4', true),
-  // 크레딧 차감 7개
+  // [2026-11-12] 예전엔 앞 8개를 "무료(무제한)"로 표시했다 — 메뉴에 무제한 표시가 없어져 15개 전부 크레딧 차감(false)이다.
+  gensparkMakeModel('gpt-image-2.5', 'GPT Image 2.5', false, true),
+  gensparkMakeModel('gpt-image-2', 'GPT Image 2', false, true),
+  gensparkMakeModel('nano-banana-2-flash-lite', 'Nano Banana 2 Flash Lite', false, true),
+  gensparkMakeModel('seedream-v5-lite', 'Bytedance Seedream v5 Lite', false),
+  gensparkMakeModel('z-image-turbo', 'Z-Image Turbo', false),
+  gensparkMakeModel('krea-2-turbo', 'Krea 2 Turbo', false),
+  gensparkMakeModel('recraft-v4.1', 'Recraft V4.1', false),
+  gensparkMakeModel('ideogram-v4', 'Ideogram V4', false),
   gensparkMakeModel('nano-banana-2.1', 'Nano Banana 2.1', false, true, true),
   gensparkMakeModel('nano-banana-pro', 'Nano Banana Pro', false, true),
   gensparkMakeModel('seedream-5.0-pro', 'Bytedance Seedream 5.0 Pro', false),

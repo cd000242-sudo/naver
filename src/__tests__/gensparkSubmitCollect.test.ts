@@ -58,10 +58,13 @@ describe('submitGensparkPrompt', () => {
     expect(await codeOf(submitGensparkPrompt(page, req, model('gpt-image-2'), deps))).toBe('GENSPARK_MODEL_NOT_FOUND');
   });
 
-  it('크레딧 표시가 앱 표와 다르면 GENSPARK_MODEL_CREDIT_CHANGED 로 멈춘다', async () => {
+  // [2026-11-12] 예전: 앱 표와 다르면 GENSPARK_MODEL_CREDIT_CHANGED 로 멈춘다. 젠스파크가 모든 모델에 크레딧 배수를 붙이면서
+  //   그 단언이 "무제한 표의 모델은 늘 실패"를 정답으로 고정했다 — 사장님 결정(Orbit 처럼 진행)으로 멈추지 않고 모델을 고른다.
+  it('크레딧 표시가 앱 표와 달라도 멈추지 않고 모델을 고른다', async () => {
     const { state, page, deps } = setup({ menuItems: [menu('Nano Banana Pro', true)] });
-    expect(await codeOf(submitGensparkPrompt(page, req, model('nano-banana-pro'), deps))).toBe('GENSPARK_MODEL_CREDIT_CHANGED');
-    expect(state.selected).toBe('GPT Image 2.5');
+    expect(await codeOf(submitGensparkPrompt(page, req, model('nano-banana-pro'), deps))).toBe('NO_ERROR');
+    expect(state.selected).toBe('Nano Banana Pro');
+    expect(state.sendClicked).toBe(true);
   });
 
   it('줄바꿈을 공백으로 바꿔 insertText 로 넣는다 (Enter 전송 위험 없음)', async () => {

@@ -13,9 +13,10 @@ import {
   readGensparkSettingsMenu,
 } from '../image/genspark/gensparkSelectors';
 import { fetchGensparkImageBytes, fetchGensparkProjectResult } from '../image/genspark/gensparkCollect';
+import { readGensparkNotice } from '../image/genspark/gensparkNotice';
 import type { GensparkPageLike } from '../image/genspark/gensparkTypes';
 
-export interface FakeMenuItem { label: string; creditFree: boolean; needsInput: boolean; isNew: boolean }
+export interface FakeMenuItem { label: string; creditFree: boolean; needsInput: boolean; isNew: boolean; creditMultiplier?: string }
 export interface FakeOpt { label: string; selected: boolean }
 
 export interface FakeState {
@@ -47,8 +48,10 @@ export interface FakeState {
   jobImagesAfterReads: number;
   /** 앞으로 goto 를 몇 번 실패시킬지(바쁜 PC 에서 화면 열기 시간 초과 흉내) */
   gotoFails: number;
-  /** /api/project 가벼운 확인 결과(기본 ok:false → 작업 화면을 여는 기존 경로) */
-  projectResult: { ok: boolean; images: string[]; failed: boolean };
+  /** /api/project 가벼운 확인 결과(기본 ok:false → 작업 화면을 여는 기존 경로). refusal = 젠스파크가 요청을 받지 않는다고 답한 글 */
+  projectResult: { ok: boolean; images: string[]; failed: boolean; refusal?: string };
+  /** [2026-11-12 실측] 화면을 덮는 안내 창(.mar-backdrop). visible 이면 '나중에' 단추 말고는 어떤 누름도 배경이 가로챈다 */
+  notice: { visible: boolean; hasLater: boolean };
 }
 
 export function newFakeState(): FakeState {
@@ -75,6 +78,7 @@ export function newFakeState(): FakeState {
     jobImagesAfterReads: 0,
     gotoFails: 0,
     projectResult: { ok: false, images: [], failed: false },
+    notice: { visible: false, hasLater: true },
   };
 }
 
@@ -147,11 +151,17 @@ export function createFakePage(state: FakeState): FakePage {
       if (fn === locateGensparkPoint) return locate(arg as never);
       if (fn === fetchGensparkImageBytes) return state.fetchResult;
       if (fn === fetchGensparkProjectResult) return state.projectResult;
+      if (fn === readGensparkNotice) {
+        const later = state.notice.visible && state.notice.hasLater ? point('noticeLater', () => { state.notice.visible = false; }) : null;
+        return { visible: state.notice.visible, later };
+      }
       throw new Error('가짜 page: 모르는 evaluate 함수');
     }) as GensparkPageLike['evaluate'],
     mouse: {
       async click(x) {
         const t = targets[x];
+        // 안내 창이 떠 있으면 배경이 누름을 가로챈다(오류 없이 조용히 무시) — 2026-11-12 실측 흉내
+        if (state.notice.visible && t.name !== 'noticeLater') { calls.clicks.push(`blocked:${t.name}`); return; }
         calls.clicks.push(t.name);
         t.run();
       },
@@ -168,6 +178,7 @@ export function createFakePage(state: FakeState): FakePage {
         calls.keys.push(key);
         if (key === 'Control+A') selectAll = true;
         if (key === 'Backspace' && selectAll) { state.composerValue = ''; selectAll = false; }
+        if (key === 'Escape') state.notice.visible = false;
         if (key === 'Escape' && !state.escapeIgnored) { state.menuOpen = false; state.settingsOpen = false; }
       },
     },

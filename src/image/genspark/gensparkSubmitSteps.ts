@@ -15,12 +15,12 @@ import {
 import type { GensparkMenuModelItem, GensparkPointRequest } from './gensparkSelectors';
 import {
   GENSPARK_COMPOSER_NOT_FOUND,
-  GENSPARK_MODEL_CREDIT_CHANGED,
   GENSPARK_MODEL_NOT_FOUND,
   GENSPARK_SETTINGS_NOT_FOUND,
   GENSPARK_SUBMIT_FAILED,
   GensparkError,
 } from './gensparkErrors';
+import { gensparkDismissNotice } from './gensparkNotice';
 import type { GensparkModelEntry } from './gensparkModels';
 import type { GensparkPageLike } from './gensparkTypes';
 
@@ -34,6 +34,8 @@ export interface GensparkSubmitDeps {
   log(message: string): void;
   /** 전송 뒤 작업 주소가 나타날 때까지 기다리는 한도(기본 20초) */
   jobUrlWaitMs?: number;
+  /** [2026-11-12] 모델 메뉴를 열어 고른 모델의 항목을 읽었을 때 알린다 — 재시도 규칙이 앱 표가 아니라 실제 메뉴 표시를 보게 한다 */
+  onModelMenuEntry?(entry: GensparkMenuModelItem): void;
 }
 
 /** 값을 얻을 때까지 intervalMs 마다 확인. 시간이 지나면 null. */
@@ -52,15 +54,22 @@ export async function gensparkWaitFor<T>(
   }
 }
 
-/** 메뉴 항목의 비교·기록용 요약(이름 + 무제한 배지). */
+/** 메뉴 항목의 비교용 요약(이름 + 무제한 배지 + 크레딧 배수). 배지·배수가 늦게 그려져도 안정된 내용만 쓰게 한다. */
 function gensparkMenuSnapshot(items: GensparkMenuModelItem[]): string {
-  return items.map((m) => `${m.label}${m.creditFree ? '(무제한)' : ''}`).join(', ');
+  return items.map((m) => `${m.label}${m.creditFree ? '(무제한)' : ''}${m.creditMultiplier ? ` ${m.creditMultiplier}` : ''}`).join(', ');
+}
+
+/** 메뉴가 보여 주는 크레딧 표시를 로그 한 줄로. 배수를 못 읽으면 그 부분만 생략한다. */
+export function gensparkCreditNote(entry: GensparkMenuModelItem): string {
+  if (entry.creditFree) return `[젠스파크] "${entry.label}" 는 메뉴에 'No credit cost'(무제한)로 표시됩니다.`;
+  const multiplier = entry.creditMultiplier ? `크레딧 배수 ${entry.creditMultiplier} 로 표시됩니다 — ` : '';
+  return `[젠스파크] "${entry.label}" 는 ${multiplier}요금제에 따라 크레딧이 차감됩니다.`;
 }
 
 /**
  * 모델 메뉴를 "두 번 연속 같은 내용"으로 읽을 때까지 기다린다. 끝내 비어 있으면 null.
  * [2026-10-11 실측] 항목이 하나라도 보이면 바로 읽던 탓에 'No credit cost' 배지가 아직 안 그려진 순간을 읽어
- *   무제한 모델을 크레딧 차감으로 오판(GENSPARK_MODEL_CREDIT_CHANGED)했다 — 37초 뒤 같은 모델이 그대로 성공.
+ *   무제한 모델을 크레딧 차감으로 오판했다 — 37초 뒤 같은 모델이 그대로 성공.
  */
 export async function gensparkReadSettledMenu(
   page: GensparkPageLike,
@@ -76,19 +85,6 @@ export async function gensparkReadSettledMenu(
     previous = snapshot;
     return settled ? items : null;
   });
-}
-
-/** 크레딧 표시가 앱 표와 다를 때, 배지가 늦게 붙는 경우를 대비해 최대 3초 더 읽어 같아지는지 본다. */
-async function gensparkCreditSettles(
-  page: GensparkPageLike,
-  model: GensparkModelEntry,
-  deps: Pick<GensparkSubmitDeps, 'now' | 'sleep'>,
-): Promise<boolean> {
-  const agreed = await gensparkWaitFor(deps, 3_000, 500, async () => {
-    const again = (await page.evaluate(readGensparkModelMenu)).find((m) => m.label === model.menuLabel);
-    return again && again.creditFree === model.creditFree ? true : null;
-  });
-  return agreed === true;
 }
 
 /** 동작 사이 0.4~0.9초 무작위 간격. */
@@ -130,6 +126,7 @@ export async function gensparkEnsureModel(
   const selected = await page.evaluate(readGensparkSelectedModel);
   if (selected === model.menuLabel) return;
 
+  await gensparkDismissNotice(page, deps);
   if (!(await clickPoint(page, { selector: GENSPARK_SELECTORS.modelButton }))) {
     throw new GensparkError(GENSPARK_MODEL_NOT_FOUND, '모델 버튼을 찾지 못함');
   }
@@ -141,14 +138,9 @@ export async function gensparkEnsureModel(
     await gensparkCloseMenu(page);
     throw new GensparkError(GENSPARK_MODEL_NOT_FOUND, model.menuLabel);
   }
-  if (entry.creditFree !== model.creditFree && !(await gensparkCreditSettles(page, model, deps))) {
-    deps.log(`[젠스파크] 모델 메뉴(크레딧 불일치 확정): ${gensparkMenuSnapshot(await page.evaluate(readGensparkModelMenu))}`);
-    await gensparkCloseMenu(page);
-    throw new GensparkError(
-      GENSPARK_MODEL_CREDIT_CHANGED,
-      `${model.menuLabel}: 앱 표 ${model.creditFree ? '무제한' : '크레딧 차감'} / 젠스파크 ${entry.creditFree ? '무제한' : '크레딧 차감'}`,
-    );
-  }
+  // [2026-11-12] 메뉴의 크레딧 표시가 앱 표와 달라도 멈추지 않는다(사장님 결정) — 로그 한 줄로 알리고 재시도 규칙에 넘긴다.
+  deps.log(gensparkCreditNote(entry));
+  deps.onModelMenuEntry?.(entry);
   const clicked = await clickPoint(page, {
     selector: GENSPARK_SELECTORS.modelItem,
     label: model.menuLabel,
@@ -188,6 +180,7 @@ export async function gensparkEnsureSettings(
   }
   const scope = GENSPARK_SELECTORS.menuRoot;
   for (let attempt = 0; attempt < 4; attempt++) {
+    await gensparkDismissNotice(page, deps);
     const menu = await openSettingsMenu(page, deps);
     const ratioOption = menu.ratios.find((o) => o.label === ratio);
     const countOption = menu.counts.find((o) => o.label === '1');
@@ -229,6 +222,7 @@ export async function gensparkFillComposer(
   if (!expected) throw new GensparkError(GENSPARK_SUBMIT_FAILED, '프롬프트가 비어 있음');
   let lastSeen = '';
   for (let attempt = 0; attempt < 2; attempt++) {
+    await gensparkDismissNotice(page, deps);
     if (!(await clickPoint(page, { selector: GENSPARK_SELECTORS.composer }))) {
       throw new GensparkError(GENSPARK_COMPOSER_NOT_FOUND);
     }
@@ -247,8 +241,9 @@ export async function gensparkFillComposer(
   throw new GensparkError(GENSPARK_COMPOSER_NOT_FOUND, `입력한 글이 입력창 값과 다름 (${lastSeen})`);
 }
 
-/** 전송 버튼을 마우스로 누른다. 주 셀렉터가 없으면 대체 셀렉터를 차례로. */
-export async function gensparkClickSend(page: GensparkPageLike): Promise<void> {
+/** 전송 버튼을 마우스로 누른다. 주 셀렉터가 없으면 대체 셀렉터를 차례로. 안내 창이 덮고 있으면 먼저 닫는다(좌표 클릭은 가려져도 오류가 없다). */
+export async function gensparkClickSend(page: GensparkPageLike, deps: GensparkSubmitDeps): Promise<void> {
+  await gensparkDismissNotice(page, deps);
   const reqs = [GENSPARK_SELECTORS.sendButton, ...GENSPARK_SELECTORS.sendButtonFallbacks].map((selector) => ({ selector }));
   if (!(await clickFirstOf(page, reqs))) throw new GensparkError(GENSPARK_SUBMIT_FAILED, '전송 버튼을 찾지 못함');
 }

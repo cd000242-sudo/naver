@@ -61,7 +61,7 @@ export async function submitGensparkPrompt(
   await gensparkEnsureSettings(page, req.ratio, deps);
   await gensparkPause(deps);
   await gensparkFillComposer(page, req.prompt, deps);
-  await gensparkClickSend(page);
+  await gensparkClickSend(page, deps);
 
   const waitMs = deps.jobUrlWaitMs ?? DEFAULT_JOB_URL_WAIT_MS;
   const jobId = await gensparkWaitFor(deps, waitMs, JOB_URL_POLL_MS, async () => gensparkExtractJobId(page.url()));

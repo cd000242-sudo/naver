@@ -28,6 +28,7 @@ const sleep = (ms: number): Promise<void> => new Promise<void>((resolve) => setT
 function createEngine(page: GensparkPageLike, model: GensparkModelEntry, epoch: number): GensparkEngineHandle {
   const seenJobIds = new Set<string>();
   const seenUrls = new Set<string>();
+  let menuCreditFree = false; // 메뉴를 열어 읽은 고른 모델의 'No credit cost' 표시(못 읽었으면 false)
   const guard = (): void => {
     // 중지(epoch 변경)가 들어오면 새 작업을 보내지 않고 ABORTED 로 멈춘다
     if (isGensparkGenerationAborted(epoch)) throw new GensparkError(GENSPARK_ABORTED);
@@ -41,8 +42,10 @@ function createEngine(page: GensparkPageLike, model: GensparkModelEntry, epoch: 
         random: () => Math.random(),
         seenJobIds,
         log: (m) => console.log(m),
+        onModelMenuEntry: (entry) => { menuCreditFree = entry.creditFree; },
       });
     },
+    menuCreditFree: () => menuCreditFree,
     check: async (job) => {
       guard();
       return checkGensparkJob(page, job, seenUrls, { sleep });

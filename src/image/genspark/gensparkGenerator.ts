@@ -29,6 +29,11 @@ export interface GensparkEngineHandle {
   check(job: GensparkJob): Promise<GensparkCollectResult>;
   /** 작업 페이지 안에서 이미지를 받아 온다(로그인 쿠키가 필요해서 페이지 안 fetch). */
   fetchImage(job: GensparkJob, imageUrl: string): Promise<{ buffer: Buffer; mimeType?: string }>;
+  /**
+   * [2026-11-12] 이번 세션에서 젠스파크 모델 메뉴가 고른 모델을 'No credit cost'(무제한)로 보여 줬는가.
+   * 메뉴를 읽지 못했거나(이미 선택돼 열지 않음) 배수만 보였으면 false — 같은 요청을 다시 보내지 않는다(크레딧 이중 차감 방지).
+   */
+  menuCreditFree?(): boolean;
 }
 
 export interface GensparkRuntime {
@@ -72,9 +77,8 @@ export async function generateWithGenspark(
   const config = (await loadConfig()) as unknown as Record<string, unknown>;
   const model = resolveModel(config?.gensparkImageModel);
   const log = (m: string): void => console.log(m);
-  if (!model.creditFree) {
-    log(`[젠스파크] 경고: "${model.menuLabel}" 모델은 크레딧이 차감됩니다. 실패해도 같은 요청을 다시 보내지 않습니다.`);
-  }
+  // [2026-11-12] 젠스파크에 무제한 모델이 없다 — 모델 구분 없이 같은 안내. 크레딧 모델 규칙(재전송 없음)이 기본이다.
+  log(`[젠스파크] 안내: "${model.menuLabel}" 은(는) 요금제에 따라 크레딧이 차감됩니다. 실패해도 같은 요청은 다시 보내지 않습니다(메뉴가 'No credit cost' 로 보여 준 경우만 1회).`);
 
   const requests: GensparkSubmitRequest[] = items.map((item, index) => ({
     index,
@@ -145,7 +149,7 @@ export async function generateWithGenspark(
     return runGensparkBatch(
       requests,
       deps,
-      { ...GENSPARK_DEFAULT_BATCH_OPTIONS, modelCreditFree: model.creditFree },
+      { ...GENSPARK_DEFAULT_BATCH_OPTIONS, modelCreditFree: () => engine.menuCreditFree?.() === true },
       () => emitPreviewInOrder(false),
     );
   });
