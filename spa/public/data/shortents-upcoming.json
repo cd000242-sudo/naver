@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T05:22:28.299Z",
+ "builtAt": "2026-11-12T05:32:32.745Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,142 +8,305 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 9,
+ "measured": 14,
  "candidates": [
   {
-   "keyword": "델핀 아르노 CEO 학위 수여",
+   "keyword": "지지율 44%로 하락",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 39,
-   "recent20": 4,
+   "articles90": 16,
+   "recent20": 5,
    "press": 16,
-   "firstArticleAt": "2026-11-12T04:17:00.000Z",
+   "firstArticleAt": "2026-11-12T04:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "디올 CEO 박사학위에 재계 총수 총출동…이부진·신동빈·정의선의 서로...",
-     "press": "peoplewatch.co.kr",
-     "publishedAt": "2026-11-12T05:18:00.000Z",
-     "link": "https://www.peoplewatch.co.kr/article/view/ppw202611120013"
+     "title": "20%마저 붕괴 위기 … 30대 李 지지율 34%p 급락, 20대도 휘청 [고용·주...",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-12T05:30:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/12/2026111200233.html"
     },
     {
-     "title": "'디올CEO' 학위수여식에 '정의선·신동빈·이부진' 등 재계 총수 총출동",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-12T05:14:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=902883"
+     "title": "李 대통령 지지율 '44%'…2주 전보다 2%p 하락 [NBS]",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-12T05:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005353170?sid=100"
     },
     {
-     "title": "재킷도 가방도 디올…이부진, 디올 CEO 학위식서도 빛난 '패션 경영'",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-12T05:05:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261112000822"
+     "title": "李대통령 지지율, 2주전보다 2%p 하락한 44%···부정평가 47%[NBS]",
+     "press": "smartbizn.com",
+     "publishedAt": "2026-11-12T05:26:00.000Z",
+     "link": "https://www.smartbizn.com/news/articleView.html?idxno=159246"
     }
    ]
   },
   {
-   "keyword": "반도체 호황과 유가가 소비에 미치는 영향",
+   "keyword": "방한 외국인 관광객 2000만명",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
+   "articles90": 15,
    "recent20": 4,
-   "press": 13,
-   "firstArticleAt": "2026-11-12T04:02:00.000Z",
+   "press": 14,
+   "firstArticleAt": "2026-11-12T04:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "반도체 호황에도 더딘 소비…고유가에 증가율 0.4%P↓",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-12T05:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004681446?sid=101"
+     "title": "[N포커스] 외국인 관광객 2000만 시대…두 배 성장까지의 굴곡",
+     "press": "nc.press",
+     "publishedAt": "2026-11-12T05:24:00.000Z",
+     "link": "https://www.nc.press/news/articleView.html?idxno=630835"
     },
     {
-     "title": "[그래픽] 반도체·유가 민간소비 영향",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-12T05:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016438452?sid=101"
+     "title": "한국 찾은 외국인 관광객 사상 첫 2000만명 돌파…관광 소비 47.7% 급증",
+     "press": "abcn.kr",
+     "publishedAt": "2026-11-12T05:20:00.000Z",
+     "link": "https://www.abcn.kr/news/articleView.html?idxno=94429"
     },
     {
-     "title": "내년부터 지갑 열린다…KDI \"반도체 호황 효과, 파급에 시차 있어\"",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-12T05:06:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=902877"
+     "title": "방한객 사상 첫 2000만 돌파…\"14년 만에 두 배\" 관광 새 역사",
+     "press": "korea.kr",
+     "publishedAt": "2026-11-12T05:16:00.000Z",
+     "link": "https://www.korea.kr/news/policyNewsView.do?newsId=148975576&call_from=naver_news"
     }
    ]
   },
   {
-   "keyword": "2026 인텔 AI 서울",
+   "keyword": "국가 사이버복원력 TF",
    "sources": [
     "signal.bz"
    ],
    "articles90": 14,
-   "recent20": 6,
-   "press": 12,
-   "firstArticleAt": "2026-11-12T04:09:00.000Z",
+   "recent20": 0,
+   "press": 14,
+   "firstArticleAt": "2026-11-12T04:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[인텔 AI 서밋] \"한국 AI 혁신, 더 큰 시장으로 확장할 것\"",
-     "press": "techm.kr",
-     "publishedAt": "2026-11-12T05:20:00.000Z",
-     "link": "https://www.techm.kr/news/articleView.html?idxno=157276"
+     "title": "AI 공격으로부터 국민 일상 지킨다…국가AI전략위, '국가 사이버복원력...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-12T05:02:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2647261"
     },
     {
-     "title": "[현장] 인텔 “세계 AI, 韓 칩 생태계 의존”",
-     "press": "ekn.kr",
-     "publishedAt": "2026-11-12T05:18:00.000Z",
-     "link": "https://www.ekn.kr/web/view.php?key=20261112020388781"
+     "title": "국가AI전략위, 사이버복원 강화 TF 출범…강화 전략안 마련한다",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-12T05:02:00.000Z",
+     "link": "https://www.ajunews.com/view/20261112092830166"
     },
     {
-     "title": "인텔 \"한국 23개사와 손잡고 AI 주권 강화…세계 시장 진출 지원\"",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-12T05:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001074487?sid=105"
+     "title": "국가AI전략위, AI 해킹 대응 '사이버복원력 TF' 출범…2027년 1분기 전략...",
+     "press": "news.mtn.co.kr",
+     "publishedAt": "2026-11-12T05:02:00.000Z",
+     "link": "https://news.mtn.co.kr/article/2026111210113033214"
     }
    ]
   },
   {
-   "keyword": "선관위 특검 압수수색",
+   "keyword": "오브더블루 1월 11일 데뷔",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 9,
+   "articles90": 11,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-12T04:07:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "JYP 신인 보이그룹 오브더블루, 내년 1월11일 정식 데뷔",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-12T05:23:00.000Z",
+     "link": "https://m.entertain.naver.com/article/396/0000760751"
+    },
+    {
+     "title": "'JYP 새 보이그룹' 오브더블루, 내년 1월 11일 데뷔 확정",
+     "press": "joynews24.com",
+     "publishedAt": "2026-11-12T05:18:00.000Z",
+     "link": "http://www.joynews24.com/view/2025508"
+    },
+    {
+     "title": "오브더블루, 데뷔 전부터 승부수 띄운다",
+     "press": "atstar1.com",
+     "publishedAt": "2026-11-12T05:03:00.000Z",
+     "link": "https://m.entertain.naver.com/article/415/0000053738"
+    }
+   ]
+  },
+  {
+   "keyword": "정동영 장관 발언 사과 요구",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 12,
    "recent20": 3,
-   "press": 9,
+   "press": 10,
+   "firstArticleAt": "2026-11-12T04:03:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "박충권, 정동영에 “북동영”…여야 고성에 “탈충권” 항의도",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-12T05:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002831881?sid=100"
+    },
+    {
+     "title": "국힘 박충권, 정동영에 \"北동영 장관님\"…與 \"'脫충권' 불러도 되나\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-12T05:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014318525?sid=100"
+    },
+    {
+     "title": "\"北동영 장관\" 한 마디에 아수라장… '탈북민' 명칭 두고 조롱 오간 국회...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-12T05:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000965191?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "삼성, 호주리그 파견",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-12T04:12:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "삼성 라이온즈, 호주 ABL 브리즈번 밴디츠에 배찬승 등 3명 파견",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-12T05:20:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16274752"
+    },
+    {
+     "title": "프로야구 삼성, 호주 브리즈번 밴디츠에 배찬승 등 3명 파견",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-12T05:07:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/001/0016438413"
+    },
+    {
+     "title": "[공식] 배찬승-김백산-김현준, 호주리그 파견…삼성 “따뜻한 곳에서 경...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-12T04:47:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/468/0001280501"
+    }
+   ]
+  },
+  {
+   "keyword": "장기 이식",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-12T04:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "폐 이식 못 받고 떠난 아내…남편은 장기기증으로 3명 살렸다",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-12T05:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002831884?sid=102"
+    },
+    {
+     "title": "경북대병원, 이식 전 거부반응 검사 간소화…진료에 적용",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-12T05:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014318452?sid=102"
+    },
+    {
+     "title": "“기다리는 마음 알기에”…뇌사 판정 아버지 장기기증 결심한 자녀들의...",
+     "press": "nongmin.com",
+     "publishedAt": "2026-11-12T04:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/662/0000108290?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "2026 인텔 AI 서밋 개최",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
    "firstArticleAt": "2026-11-12T04:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "31점짜리 보안을 100점으로…특검, 중앙선관위 압수수색",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-12T05:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001884738?sid=102"
+     "title": "[현장] \"韓 반도체와 힘 모을 것\"…인텔, 국내서 AI 생태계 확대 나선다",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-12T05:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014318550?sid=101"
     },
     {
-     "title": "임태희 전 경기도교육감, 선관위 특검에 “경기도 모든 지역 조사해야“",
-     "press": "kgnews.co.kr",
-     "publishedAt": "2026-11-12T05:20:00.000Z",
-     "link": "https://www.kgnews.co.kr/news/article.html?no=919322"
-    },
-    {
-     "title": "31점을 100점으로…'보안점검 점수조작' 중앙선관위 압수수색",
-     "press": "kbsm.net",
+     "title": "[ER현장] 인텔, 한국 AI 산업계에 '러브콜'…협력 체계 'K-AI 풀스택 얼라...",
+     "press": "econovill.com",
      "publishedAt": "2026-11-12T05:04:00.000Z",
-     "link": "https://www.kbsm.net/news/view.php?idx=541502"
+     "link": "https://www.econovill.com/news/articleView.html?idxno=756990"
+    },
+    {
+     "title": "인텔, 韓 기업과 AI 생태계 구축…'K-AI 풀스택 얼라이언스' 출범",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-12T04:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003484999?sid=105"
+    }
+   ]
+  },
+  {
+   "keyword": "수능 대박 기원",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-12T04:47:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'수능 대박' 선배 응원하는 후배",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-12T04:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009285749?sid=102"
+    },
+    {
+     "title": "수능 대박 기원하는 '수능 부적'",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-12T04:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009285746?sid=102"
+    },
+    {
+     "title": "스마일! 스마일! 수능 대박!",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-12T04:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009285744?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 345,
-  "matched": 137,
-  "avgLeadMin": 1557,
+  "flagged": 349,
+  "matched": 135,
+  "avgLeadMin": 1579,
   "recent": [
    {
     "keyword": "젠슨 황 불륜 스캔들",
