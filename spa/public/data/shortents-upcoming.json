@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T11:35:35.992Z",
+ "builtAt": "2026-11-12T11:45:40.255Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,21 +8,91 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 22,
  "candidates": [
+  {
+   "keyword": "북한 G7 비핵화 반발",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-12T10:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "北 \"G7은 존재가치 상실 정치집단\" ..비핵화 요구에 반발",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-12T11:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005603692?sid=100"
+    },
+    {
+     "title": "北외무상 \"핵보유 의지 절대불변\"…G7 '北비핵화' 성명 반발",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-12T11:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000192277?sid=104"
+    },
+    {
+     "title": "최선희, G7 '완전한 비핵화' 성명 반발…\"핵 보유 입장 절대불변\"",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-12T10:52:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5082947"
+    }
+   ]
+  },
+  {
+   "keyword": "성북 10대 살해 구속영장",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-12T10:25:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "성북구 15살 소녀 살해 50대 남 구속영장 청구…피의자 가족범죄 관계 ...",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-12T11:30:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1543563"
+    },
+    {
+     "title": "10대 소녀 살해한 50대 남성, 이틀째 묵비권…구속영장 청구",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-12T11:24:00.000Z",
+     "link": "https://www.ajunews.com/view/20261112201726634"
+    },
+    {
+     "title": "10대 소녀 살해한 50대 남성에 구속영장 청구…여전히 진술 거부",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-12T11:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005842015?sid=102"
+    }
+   ]
+  },
   {
    "keyword": "김승원 브로커 징역 4년 구형",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-12T10:07:00.000Z",
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-12T10:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "檢 '김승원 신약 청탁' 브로커에 징역 4년 구형…6억원 추징 요청",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-12T11:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005603694?sid=102"
+    },
     {
      "title": "공소청, '김승원 청탁의혹' 브로커에 징역 4년 구형(종합)",
      "press": "yna.co.kr",
@@ -34,44 +104,6 @@
      "press": "ngonews.kr",
      "publishedAt": "2026-11-12T11:22:00.000Z",
      "link": "https://www.ngonews.kr/news/articleView.html?idxno=243045"
-    },
-    {
-     "title": "'김승원 임상시험 청탁 의혹' 브로커에 징역 4년 구형… 제넨셀 설립자...",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-12T10:50:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3448298"
-    }
-   ]
-  },
-  {
-   "keyword": "50대 남성 구속영장 청구",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 4,
-   "press": 8,
-   "firstArticleAt": "2026-11-12T10:09:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "성북구 15살 소녀 살해 50대 남 구속영장 청구…피의자 가족범죄 관계 ...",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-12T11:30:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1543563"
-    },
-    {
-     "title": "[단독] 전 연인 두 차례 구속영장...사흘 만에 숨진 채 발견",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-12T11:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432076?sid=102"
-    },
-    {
-     "title": "10대 소녀 살해한 50대 남성에 구속영장 청구…여전히 진술 거부",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-12T11:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005842015?sid=102"
     }
    ]
   },
@@ -80,10 +112,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-12T10:09:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-12T10:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -112,10 +144,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-12T10:08:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-12T10:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -142,9 +174,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 390,
-  "matched": 134,
-  "avgLeadMin": 935,
+  "flagged": 389,
+  "matched": 132,
+  "avgLeadMin": 870,
   "recent": [
    {
     "keyword": "한국 야구, 호주에 7-8 패배",
