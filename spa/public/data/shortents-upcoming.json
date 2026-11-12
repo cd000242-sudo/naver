@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T02:31:17.291Z",
+ "builtAt": "2026-11-12T02:41:22.436Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,133 +11,98 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "젠슨 황 해임 준비",
-   "sources": [
-    "signal.bz",
-    "daum"
-   ],
-   "articles90": 80,
-   "recent20": 19,
-   "press": 62,
-   "firstArticleAt": "2026-11-12T01:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "젠슨 황, '불륜 사과' 사흘 만에 직속 부사장과도 혼외 관계 의혹…해임...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-12T02:26:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005639156"
-    },
-    {
-     "title": "'CEO 해임설' 엔비디아 급락…삼성전자·SK하이닉스 파장은? [뉴스큐]",
-     "press": "newsq.co.kr",
-     "publishedAt": "2026-11-12T02:24:00.000Z",
-     "link": "https://www.newsq.co.kr/news/articleView.html?idxno=500860"
-    },
-    {
-     "title": "엔비디아, 젠슨 황 해임 추진…AI 반도체 시장 충격(종합)",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-12T02:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005841753?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "아세안 APEC 참석",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 66,
-   "recent20": 9,
-   "press": 62,
-   "firstArticleAt": "2026-11-12T01:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이재명 대통령, 16일 아세안·APEC 순방길 오른다",
-     "press": "goodmorningcc.com",
-     "publishedAt": "2026-11-12T02:26:00.000Z",
-     "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=455697"
-    },
-    {
-     "title": "이재명 대통령, 오늘 마닐라서 한-아세안 정상회의 참석…협력 방안 논...",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-12T02:26:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3749734"
-    },
-    {
-     "title": "靑 \"中 APEC 러시아 참석 인사 가늠 어려워…러측과 필요한 소통 중\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-12T02:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000650587?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "네이버 AI 팩토리 2조원 계약",
+   "keyword": "네이버 AI 계약 2조원",
    "sources": [
     "signal.bz"
    ],
    "articles90": 56,
-   "recent20": 11,
-   "press": 49,
-   "firstArticleAt": "2026-11-12T01:03:00.000Z",
+   "recent20": 13,
+   "press": 52,
+   "firstArticleAt": "2026-11-12T01:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "네이버, 새 AI 에이전트 연내 출시",
+     "title": "네이버, 매출 6분기째 신기록에도 영업익 21%↓…AI 팩토리로 반전(종합...",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-12T02:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006408782?sid=105"
+    },
+    {
+     "title": "네이버, 美 AI 추론기업과 2조원 공급계약…AI 팩토리 초기 고객 확보",
+     "press": "sateconomy.co.kr",
+     "publishedAt": "2026-11-12T02:40:00.000Z",
+     "link": "https://sateconomy.co.kr/news/view/1065580090724030"
+    },
+    {
+     "title": "네이버, AI 팩토리 내년 흑자 전망…플랫폼 이익률은 25% 유지 목표",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-12T02:38:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1731393"
+    }
+   ]
+  },
+  {
+   "keyword": "16~19일 아세안 APEC 참석",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 49,
+   "recent20": 7,
+   "press": 48,
+   "firstArticleAt": "2026-11-12T01:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "아세안 이어 APEC…李, 다자외교 나선다",
      "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-12T02:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002722589?sid=105"
+     "publishedAt": "2026-11-12T02:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002722617?sid=100"
     },
     {
-     "title": "네이버, AI 컴퓨팅 시장에 2조 원 승부수…글로벌 기업 고객 확보하며 ...",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-12T02:26:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=847115"
+     "title": "靑 \"中 APEC서 북미대화 개연성 크지 않아... 전후로는 단정 어렵다\"",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-12T02:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000965170?sid=100"
     },
     {
-     "title": "[기업실적]네이버, 3Q 실적 하락…영업이익 전년比 20.9%↓",
-     "press": "nspna.com",
-     "publishedAt": "2026-11-12T02:26:00.000Z",
-     "link": "https://www.nspna.com/news/?mode=view&newsid=835786"
+     "title": "[종합] 李대통령 아세안·APEC 순방…靑 \"북미 접촉 개연성 크지 않아\"",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-12T02:32:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261112000635"
     }
    ]
   },
   {
    "keyword": "충청권 메가프로젝트 착공식",
    "sources": [
-    "signal.bz",
-    "nate",
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 47,
-   "recent20": 19,
-   "press": 32,
-   "firstArticleAt": "2026-11-12T01:49:00.000Z",
+   "articles90": 44,
+   "recent20": 10,
+   "press": 31,
+   "firstArticleAt": "2026-11-12T01:52:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "이 대통령, 충청권 메가프로젝트 착공식 참석...\"모두의 성장 역량 집중...",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-12T02:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002431787?sid=100"
+     "title": "李대통령 \"충청 메가프로젝트, 지역과 국민 함께 성장하는 균형발전으로...",
+     "press": "jeonmae.co.kr",
+     "publishedAt": "2026-11-12T02:36:00.000Z",
+     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1311253"
     },
     {
-     "title": "李대통령 “충청권 메가프로젝트에 반도체·바이오 등 23조6000억 추가 투...",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-12T02:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004009233?sid=100"
+     "title": "李대통령 \"메가프로젝트 속도전 넘어 전격전…기업에 힘 보탤것\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-12T02:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016438073?sid=100"
     },
     {
-     "title": "李 “메가프로젝트, 중소·협력업체 기술 투자에 ‘불씨’... 매우 긍정...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-12T02:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001204298?sid=100"
+     "title": "충청권 메가프로젝트 첫발… 이재명 대통령 \"끝까지 책임지겠다\"",
+     "press": "sisaweek.com",
+     "publishedAt": "2026-11-12T02:36:00.000Z",
+     "link": "https://www.sisaweek.com/news/articleView.html?idxno=238938"
     }
    ]
   },
@@ -147,7 +112,7 @@
     "signal.bz"
    ],
    "articles90": 41,
-   "recent20": 5,
+   "recent20": 4,
    "press": 29,
    "firstArticleAt": "2026-11-12T01:13:00.000Z",
    "exclusive": true,
@@ -160,80 +125,80 @@
      "link": "https://n.news.naver.com/mnews/article/001/0016438005?sid=102"
     },
     {
-     "title": "개표 오류 확인하려면 80억?… 임태희 “특검, 전 지역 조사해야”",
-     "press": "asiatime.co.kr",
-     "publishedAt": "2026-11-12T02:22:00.000Z",
-     "link": "https://www.asiatime.co.kr/article/20261112500125"
-    },
-    {
      "title": "부실 점검을 철저히 한 것처럼…선관위 특검, 보안 문서 작성 경위 수사",
      "press": "ajunews.com",
      "publishedAt": "2026-11-12T02:22:00.000Z",
      "link": "https://www.ajunews.com/view/20261112110305580"
+    },
+    {
+     "title": "\"벽돌투표지 정체 밝혀야\" 임태희, 선관위 특검에 수사 요청",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-12T02:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005440210?sid=102"
     }
    ]
   },
   {
-   "keyword": "출근하는 이용철 후보자",
+   "keyword": "젠슨 황 불륜 의혹 확산",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 17,
-   "recent20": 3,
-   "press": 17,
-   "firstArticleAt": "2026-11-12T01:08:00.000Z",
+   "articles90": 26,
+   "recent20": 5,
+   "press": 23,
+   "firstArticleAt": "2026-11-12T01:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국민의힘, 이용철 낙마 압박…\"공소취소 없다 말 못 하면 부적격\"",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-12T02:24:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=729049"
+     "title": "젠슨 황, 사내 추가 불륜설에 엔비디아 이사회 해임 준비설",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-12T02:38:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95084"
     },
     {
-     "title": "변협, 이용철 과거 변론 논란에 \"변호사 개인 자질까지 문제 삼아선 안...",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-12T02:20:00.000Z",
-     "link": "https://www.ajunews.com/view/20261112102929490"
+     "title": "젠슨 황 불륜 상대 '앨리스 황' 어디 갔나 했더니…블룸버그 \"베이징 체...",
+     "press": "weekly.chosun.com",
+     "publishedAt": "2026-11-12T02:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/053/0000062985?sid=104"
     },
     {
-     "title": "'5·18 보상금 의혹' 이용철, 논란에 묵묵부답…'자질 논란' 도마 위",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-12T02:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003154351?sid=102"
+     "title": "[속보] '젠슨 황 불륜 상대' 의혹 앨리스 황, 중국 베이징 체류설",
+     "press": "kado.net",
+     "publishedAt": "2026-11-12T02:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000210916?sid=104"
     }
    ]
   },
   {
-   "keyword": "금융보안원 정보유출 사과",
+   "keyword": "김건희 집사게이트 IMS모빌리티 대표 무죄",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 16,
-   "recent20": 1,
+   "articles90": 19,
+   "recent20": 6,
    "press": 16,
-   "firstArticleAt": "2026-11-12T01:14:00.000Z",
-   "exclusive": true,
+   "firstArticleAt": "2026-11-12T01:38:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "박상원 금보원장, 정보유출 사과했지만... 구체 설명없이 1분여 만에 퇴...",
-     "press": "thelec.kr",
-     "publishedAt": "2026-11-12T02:14:00.000Z",
-     "link": "https://www.thelec.kr/news/articleView.html?idxno=65331"
+     "title": "‘집사게이트’ 조영탁 IMS모빌리티 대표 무죄·공소기각 확정",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-12T02:34:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2647347"
     },
     {
-     "title": "금융보안원도 정보 유출…박상원 원장 대국민 사과",
-     "press": "cstimes.com",
-     "publishedAt": "2026-11-12T02:04:00.000Z",
-     "link": "https://www.cstimes.com/news/articleView.html?idxno=727655"
+     "title": "'집사게이트' IMS모빌리티 대표 무죄·공소기각 확정",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-12T02:30:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1543492"
     },
     {
-     "title": "박상원 금융보안원장 해킹 사태에 대국민 사과…\"심려 끼쳐 송구\"",
-     "press": "news2day.co.kr",
-     "publishedAt": "2026-11-12T02:02:00.000Z",
-     "link": "https://www.news2day.co.kr/article/20261112500164"
+     "title": "'집사 게이트' IMS모빌리티 대표, 무죄·공소기각 확정",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-12T02:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002431789?sid=102"
     }
    ]
   },
@@ -243,24 +208,24 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 16,
+   "articles90": 14,
    "recent20": 6,
-   "press": 15,
-   "firstArticleAt": "2026-11-12T01:30:00.000Z",
+   "press": 13,
+   "firstArticleAt": "2026-11-12T01:40:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
+    {
+     "title": "전남광주특별시교육청, 퇴직 교사 기증기록물전 개최",
+     "press": "thefairnews.co.kr",
+     "publishedAt": "2026-11-12T02:38:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=93938"
+    },
     {
      "title": "세종 유치원 교사 피해 논란…교원단체 \"교육당국이 직접 나서야\"",
      "press": "newswhoplus.com",
      "publishedAt": "2026-11-12T02:30:00.000Z",
      "link": "https://www.newswhoplus.com/news/articleView.html?idxno=74173"
-    },
-    {
-     "title": "퇴직교사 70년 기록, 전남광주 교육의 역사를 쓰다",
-     "press": "mhns.co.kr",
-     "publishedAt": "2026-11-12T02:28:00.000Z",
-     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=768774"
     },
     {
      "title": "경남교육청, 2027학년도 유·초·특수 교사 임용 1차 시험 종료",
@@ -271,44 +236,50 @@
    ]
   },
   {
-   "keyword": "강동원·김고은, 혼: 삼각의 시간",
+   "keyword": "정부 양극화 대응 TF",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-12T01:04:00.000Z",
-   "exclusive": true,
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-12T01:22:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "강동원·김고은 혼인...'폭싹 속았수다' 감독 X '눈물의 여왕' 작가 만남...",
-     "press": "nc.press",
-     "publishedAt": "2026-11-12T02:07:00.000Z",
-     "link": "https://www.nc.press/news/articleView.html?idxno=630816"
+     "title": "‘양극화 대응’ 범부처 TF 가동…조선업 원·하청 상생협약 추진",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-12T02:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002722615?sid=101"
     },
     {
-     "title": "강동원·김고은, 100년 원수 집안 부부로…넷플릭스 '혼: 삼각의 시간' ...",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-12T01:58:00.000Z",
-     "link": "https://www.ajunews.com/view/20261112105435560"
+     "title": "정부, 양극화 대응 TF 가동…노동·산업·지역 등 5대 분야 격차 해소",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-12T01:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003484912?sid=100"
     },
     {
-     "title": "강동원, '10살 연하' 김고은과 부부로 만난다…넷플릭스 '혼: 삼각의 시...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-12T01:56:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001408014"
+     "title": "정부, 양극화 대응 TF 본격 가동…5대 분야 과제 발굴 착수",
+     "press": "newsfc.co.kr",
+     "publishedAt": "2026-11-12T01:54:00.000Z",
+     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82410"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 374,
-  "matched": 151,
-  "avgLeadMin": 1502,
+  "flagged": 375,
+  "matched": 148,
+  "avgLeadMin": 1460,
   "recent": [
+   {
+    "keyword": "손흥민 김민재 공동 입장문",
+    "hitKeyword": "손흥민 대표팀 불화설 해명",
+    "hitAt": "2026-11-12T11:30:00+09:00",
+    "leadMin": 13
+   },
    {
     "keyword": "db 하이텍",
     "hitKeyword": "DB하이텍 3분기 실적",
@@ -360,12 +331,6 @@
    {
     "keyword": "손흥민 공동 입장문",
     "hitKeyword": "손흥민 96라인 의기투합",
-    "hitAt": "2026-11-12T10:30:00+09:00",
-    "leadMin": 4
-   },
-   {
-    "keyword": "강동원 김고은 혼 제작 확정",
-    "hitKeyword": "강동원 김고은 혼 제작",
     "hitAt": "2026-11-12T10:30:00+09:00",
     "leadMin": 4
    }
