@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T12:56:06.275Z",
+ "builtAt": "2026-11-12T13:06:11.820Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "김민석 최민희 감찰 지시",
@@ -16,126 +16,94 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 67,
-   "recent20": 6,
-   "press": 56,
+   "articles90": 75,
+   "recent20": 9,
+   "press": 58,
    "firstArticleAt": "2026-11-12T11:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김민석, 최민희 긴급 감찰조사 지시… “최근 언행 심각하게 인식”",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-12T12:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003698888?sid=100"
+     "title": "김민석, '언행 논란' 최민희 감찰조사 지시",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-12T13:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000925649?sid=100"
     },
     {
-     "title": "“李도 尹탄핵 반대” 최민희 발언에 靑 “강한 유감” 與 “감찰”",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-12T12:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003564848?sid=100"
+     "title": "김민석, 최민희 감찰 지시… \"이 대통령이 윤 탄핵 반대\" 발언 논란",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-12T13:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000520512?sid=100"
     },
     {
-     "title": "김민석, 최민희 감찰조사 지시...\"언행 논란 심각하게 인식\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-12T12:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432101?sid=100"
+     "title": "김민석, 최민희 윤리감찰 지시…\"최근 언행 논란 심각하게 인식\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-12T13:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005440578?sid=100"
     }
    ]
   },
   {
-   "keyword": "젠슨 황 해임 위기",
+   "keyword": "맨유, 캐릭 경질 결정",
    "sources": [
     "signal.bz"
    ],
    "articles90": 8,
    "recent20": 1,
    "press": 8,
-   "firstArticleAt": "2026-11-12T11:44:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[전북만평-정윤성] 세계는 ‘젠슨 황’…국내는?",
-     "press": "jjan.kr",
-     "publishedAt": "2026-11-12T12:54:00.000Z",
-     "link": "https://www.jjan.kr/article/20261112500539"
-    },
-    {
-     "title": "젠슨 황 해임 위기…韓 반도체 산업 '비상'",
-     "press": "idaegu.co.kr",
-     "publishedAt": "2026-11-12T12:34:00.000Z",
-     "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=565253"
-    },
-    {
-     "title": "젠슨 황 퇴진 위기에 대만 반도체 공급망 긴장…\"증설 속도 늦어질 수도...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-12T12:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009286765?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "공격하는 현대캐피탈 레오",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-12T12:03:00.000Z",
+   "firstArticleAt": "2026-11-12T11:41:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "‘장추안·레오 52득점’ 현대캐피탈, OK저축은행 꺾고 ‘3연승+선두 도...",
+     "title": "[오피셜] 맨유, 캐릭 감독 경질 “변화가 필요했다”",
      "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-12T12:45:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/144/0001149540"
+     "publishedAt": "2026-11-12T13:00:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/144/0001149543"
     },
     {
-     "title": "[프로배구] '장추안·레오 52점 합작' 현대캐피탈, OK저축 꺾고 3연승",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-12T12:36:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261112001488"
+     "title": "맨유, 캐릭과 결별... 후임에 포체티노 유력",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-12T12:28:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/469/0000965314"
     },
     {
-     "title": "현대캐피탈, OK저축은행 꺾고 3연승…남자부 단독 1위 도약",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-12T12:34:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16275193"
+     "title": "[오피셜] 맨유가 결국 버렸다...'10경기 1승' 레전드 캐릭 감독 경질→훈...",
+     "press": "fourfourtwo.co.kr",
+     "publishedAt": "2026-11-12T12:25:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/411/0000089882"
     }
    ]
   },
   {
-   "keyword": "성북 10대 살해 구속영장",
+   "keyword": "이정현 31점 소노 역전승",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-12T11:30:00.000Z",
+   "articles90": 9,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-12T12:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'10대 소녀 살해' 50대 남성 이틀째 진술 거부…구속영장 청구",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-12T12:44:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=781246"
-    },
-    {
-     "title": "여전히 입 다문 살인 피의자…구속영장 청구",
-     "press": "news.sbs.co.kr",
+     "title": "이정현 31점 폭발…고양 소노, 대구 가스공사에 1점 차 역전승",
+     "press": "topstarnews.net",
      "publishedAt": "2026-11-12T12:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001402670?sid=102"
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16275198"
     },
     {
-     "title": "‘성매매 강요’ 전처 수사하자 범행?…10대 살해범 구속영장 청구",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-12T12:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012292862?sid=102"
+     "title": "[AI상보] '하이퍼 가드' 이정현 31점, 소노 가스공사에 88-87 대역전극",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-12T12:31:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261112001485"
+    },
+    {
+     "title": "이정현·오브라이언트 59점 합작…소노, 가스공사에 짜릿한 1점차 역전...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-12T12:22:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/076/0004466308"
     }
    ]
   },
@@ -172,12 +140,44 @@
    ]
   },
   {
+   "keyword": "최성훈 개그맨",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T12:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "개그맨 최성훈, 잘나가다 잠적한 이유 \"노래방 사업 때문..자연스럽게 ...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-12T13:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003487034"
+    },
+    {
+     "title": "개그맨 최성훈 \"뇌경색으로 쓰러져, 건강 망가지며 대상포진·당뇨 생겨...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-12T12:49:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003487033"
+    },
+    {
+     "title": "헬기 타고 행사 누볐던 개그맨 최성훈, 20년 공백 깬 근황",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-12T12:18:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3750554"
+    }
+   ]
+  },
+  {
    "keyword": "부동산",
    "sources": [
     "google"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-12T12:14:00.000Z",
    "exclusive": false,
@@ -204,40 +204,73 @@
    ]
   },
   {
-   "keyword": "진, 96억 빌딩 매입",
+   "keyword": "젠슨 황 해임 위기 논의",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-12T11:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"엔비디아 이사회 젠슨 황 해임 논의\"...외부 CEO 영입설도",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-12T12:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432102?sid=104"
+    },
+    {
+     "title": "엔비디아 이사회 긴급 회의…젠슨 황 결국 ‘해임 수순’?",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-12T12:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012292847?sid=104"
+    },
+    {
+     "title": "엔비디아 CEO, 외도 인정 3일 만에 해임 위기...이사회 논의 예정",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-12T11:44:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3750515"
+    }
+   ]
+  },
+  {
+   "keyword": "이유리, 에이티즈 산 팬심 고백",
    "sources": [
     "nate"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-12T11:39:00.000Z",
+   "firstArticleAt": "2026-11-12T12:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "방탄소년단 진, 한남동 대로변 96억 상가 건물주 됐다…시세차익 82억 이...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-12T12:23:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000489854"
-    },
-    {
-     "title": "BTS 진, 한남동 빌딩 96억에 매입…건물 이름은 ‘지니’",
-     "press": "isplus.com",
+     "title": "‘47세’ 이유리, 에이티즈 산 향한 팬심 고백 “만나고 싶다” (편스토...",
+     "press": "enews.imbc.com",
      "publishedAt": "2026-11-12T12:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003541538"
+     "link": "https://m.entertain.naver.com/article/408/0000327750"
     },
     {
-     "title": "BTS 진, 한남동 96억 꼬마빌딩 첫 매입… 건물명은 '지니'→한남 큰손 등...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-12T11:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001408105"
+     "title": "이유리, 에이티즈 최산에 푹 빠져 \"이모랑 챌린지 하자..보고 싶다\" 러브...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-12T12:17:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003487029"
+    },
+    {
+     "title": "‘띠동갑 목사♥’ 이유리도 북부대공 앓이, 에이티즈 산에 “이모랑 같...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-12T12:03:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001186970"
     }
    ]
   },
   {
    "keyword": "공항철도 파업",
    "sources": [
+    "signal.bz",
     "google"
    ],
    "articles90": 3,
@@ -270,10 +303,28 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 382,
-  "matched": 136,
-  "avgLeadMin": 852,
+  "flagged": 386,
+  "matched": 139,
+  "avgLeadMin": 844,
   "recent": [
+   {
+    "keyword": "사고",
+    "hitKeyword": "곽선영 엘리베이터 사고",
+    "hitAt": "2026-11-12T22:00:00+09:00",
+    "leadMin": 885
+   },
+   {
+    "keyword": "곽선영, 아들과 엘리베이터 추락 사고",
+    "hitKeyword": "곽선영 엘리베이터 사고",
+    "hitAt": "2026-11-12T22:00:00+09:00",
+    "leadMin": 377
+   },
+   {
+    "keyword": "성북 10대 살해 구속영장",
+    "hitKeyword": "성북구 10대 살해",
+    "hitAt": "2026-11-12T22:00:00+09:00",
+    "leadMin": 175
+   },
    {
     "keyword": "이유리, 사귀기 전 결혼 결심",
     "hitKeyword": "편스토랑 이유리",
@@ -315,24 +366,6 @@
     "hitKeyword": "삼성 온양 메가프로젝트",
     "hitAt": "2026-11-12T21:00:00+09:00",
     "leadMin": 337
-   },
-   {
-    "keyword": "충청권 메가프로젝트 추가 투자",
-    "hitKeyword": "삼성 온양 메가프로젝트",
-    "hitAt": "2026-11-12T21:00:00+09:00",
-    "leadMin": 176
-   },
-   {
-    "keyword": "김지호 잘츠부르크 이적",
-    "hitKeyword": "김지호 유럽 진출",
-    "hitAt": "2026-11-12T21:00:00+09:00",
-    "leadMin": 95
-   },
-   {
-    "keyword": "한국 야구, 호주에 7-8 패배",
-    "hitKeyword": "한국 야구 호주전 패배",
-    "hitAt": "2026-11-12T20:30:00+09:00",
-    "leadMin": 176
    }
   ]
  }
