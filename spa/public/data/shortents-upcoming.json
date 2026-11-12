@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T16:48:32.957Z",
+ "builtAt": "2026-11-12T16:58:44.372Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 51,
-   "recent20": 8,
-   "press": 34,
-   "firstArticleAt": "2026-11-12T15:23:00.000Z",
+   "articles90": 47,
+   "recent20": 4,
+   "press": 31,
+   "firstArticleAt": "2026-11-12T15:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "33년 만에 막 내린 젠슨 황 시대…엔비디아 경영 시험대",
+     "press": "bloter.net",
+     "publishedAt": "2026-11-12T16:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/293/0000093182?sid=101"
+    },
+    {
+     "title": "\"젠슨 황 프리미엄 사라졌다\"…엔비디아 13% 급락 출발·시총 4조 달러 ...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-12T16:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009286816?sid=104"
+    },
     {
      "title": "엔비디아 첫 이사회 의장에 하비 존스…실리콘밸리 원로경영인",
      "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-12T16:44:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/422/0000925671?sid=104"
-    },
-    {
-     "title": "젠슨 황, 엔비디아와 33년 만 결별…불륜 의혹 속 불명예 퇴진(종합)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T16:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014319633?sid=104"
-    },
-    {
-     "title": "트럼프 “젠슨황 자리, 애플 팀쿡이 이어받아야”…엔비디아 새CEO 추천",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-12T16:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003698900?sid=104"
     }
    ]
   },
@@ -48,10 +48,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 5,
+   "articles90": 3,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-12T15:20:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-12T15:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -72,70 +72,6 @@
      "press": "mdtoday.co.kr",
      "publishedAt": "2026-11-12T15:48:00.000Z",
      "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=624927"
-    }
-   ]
-  },
-  {
-   "keyword": "축구 대표팀 사우디 평가전",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T15:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "내분 확인된 축구 대표팀, 입장문 발표로 ‘원팀’ 될까",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-12T15:42:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/023/0004009359"
-    },
-    {
-     "title": "손흥민, '대표팀 불화설' 공동 입장문 낸 이유⋯\"쉽지 않은 시간 보냈다...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-12T15:42:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2647636"
-    },
-    {
-     "title": "A매치 평가전 축구 중계 일정 : 사우디전",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-12T15:22:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611120252"
-    }
-   ]
-  },
-  {
-   "keyword": "13일의 금요일",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T15:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[카드뉴스로 읽는 오늘의 운세] 11월 13일(금요일) 춘강 구박사가 알려...",
-     "press": "joongdo.co.kr",
-     "publishedAt": "2026-11-12T16:44:00.000Z",
-     "link": "https://www.joongdo.co.kr/web/view.php?key=20261113010002949"
-    },
-    {
-     "title": "11월 13일 금요일 띠별 오늘의 운세 \"포기했던 돈을 돌려 받는다\"",
-     "press": "econovill.com",
-     "publishedAt": "2026-11-12T16:04:00.000Z",
-     "link": "https://www.econovill.com/news/articleView.html?idxno=757089"
-    },
-    {
-     "title": "[오늘의 띠별 운세] 2026년 11월 13일 금요일",
-     "press": "ppss.kr",
-     "publishedAt": "2026-11-12T15:28:00.000Z",
-     "link": "https://www.ppss.kr/news/articleView.html?idxno=320750"
     }
    ]
   },
@@ -169,6 +105,38 @@
      "press": "yna.co.kr",
      "publishedAt": "2026-11-12T15:53:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016439546?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "13일의 금요일",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 2,
+   "firstArticleAt": "2026-11-12T16:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오늘의 운세] 2026년 11월 13일(음력 10월 5일) 금요일 구삼원 원장이 풀...",
+     "press": "joongdo.co.kr",
+     "publishedAt": "2026-11-12T16:52:00.000Z",
+     "link": "https://www.joongdo.co.kr/web/view.php?key=20261113010003787"
+    },
+    {
+     "title": "[카드뉴스로 읽는 오늘의 운세] 11월 13일(금요일) 춘강 구박사가 알려...",
+     "press": "joongdo.co.kr",
+     "publishedAt": "2026-11-12T16:44:00.000Z",
+     "link": "https://www.joongdo.co.kr/web/view.php?key=20261113010002949"
+    },
+    {
+     "title": "11월 13일 금요일 띠별 오늘의 운세 \"포기했던 돈을 돌려 받는다\"",
+     "press": "econovill.com",
+     "publishedAt": "2026-11-12T16:04:00.000Z",
+     "link": "https://www.econovill.com/news/articleView.html?idxno=757089"
     }
    ]
   }
