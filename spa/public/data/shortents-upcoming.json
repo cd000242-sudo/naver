@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T09:34:34.481Z",
+ "builtAt": "2026-11-12T09:44:38.179Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,384 +16,158 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 34,
-   "recent20": 4,
-   "press": 33,
-   "firstArticleAt": "2026-11-12T08:06:00.000Z",
+   "articles90": 31,
+   "recent20": 2,
+   "press": 30,
+   "firstArticleAt": "2026-11-12T08:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "고려아연 상호주 의결권 제한, 가처분·본안 판단 엇갈려…항소심 간다",
+     "press": "straightnews.co.kr",
+     "publishedAt": "2026-11-12T09:40:00.000Z",
+     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=315272"
+    },
+    {
+     "title": "法 \"고려아연, 영풍·MBK 의결권 제한 부당\"",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-12T09:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005603648?sid=102"
+    },
     {
      "title": "'의결권 제한' 주총 무효 판결에...고려아연 \"항소\"",
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-12T09:21:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002432037?sid=101"
-    },
-    {
-     "title": "법원 “고려아연, 영풍·MBK 의결권 제한한 주주총회 결의 취소해야”",
-     "press": "segye.com",
-     "publishedAt": "2026-11-12T09:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004174731?sid=102"
-    },
-    {
-     "title": "'판 뒤집어졌다' 영풍의 반격 시작…법원 \"고려아연, '의결권 제한' 주총...",
-     "press": "financialpost.co.kr",
-     "publishedAt": "2026-11-12T09:18:00.000Z",
-     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=300600"
     }
    ]
   },
   {
-   "keyword": "충청권 메가프로젝트 착공",
+   "keyword": "젠슨 황 해임 논의",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 34,
-   "recent20": 4,
-   "press": 31,
-   "firstArticleAt": "2026-11-12T08:06:00.000Z",
+   "articles90": 35,
+   "recent20": 6,
+   "press": 27,
+   "firstArticleAt": "2026-11-12T08:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이재용 \"온양, HBM 거점으로\"… 삼성, 충청권에 144조 투입 [3대 메가프로...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-12T09:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005603636?sid=100"
+     "title": "“젠슨 황 해임, 애플의 잡스 해고처럼 어리석다”",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-12T09:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002832438?sid=104"
     },
     {
-     "title": "메가프로젝트 첫삽…\"전력·용수 확실히 책임질것\" [3대 메가프로젝트 ...",
+     "title": "젠슨 황 해임 위기 [젠슨 황 스캔들 파장 확산]",
      "press": "fnnews.com",
-     "publishedAt": "2026-11-12T09:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005603629?sid=100"
+     "publishedAt": "2026-11-12T09:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005603649?sid=105"
     },
     {
-     "title": "메가프로젝트 충청서 '첫 삽'…\"전격전으로\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-12T09:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000925588?sid=100"
+     "title": "젠슨 황 논란 확산일로…삼성전자·SK하이닉스, 실적 변수",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-12T09:34:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261112001134"
     }
    ]
   },
   {
-   "keyword": "한전 3분기 실적",
+   "keyword": "50대 남성 구속영장",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 23,
+   "articles90": 21,
+   "recent20": 3,
+   "press": 18,
+   "firstArticleAt": "2026-11-12T08:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "공소청, '10대 소녀 살해' 50대 구속영장 청구",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-12T09:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000551473?sid=102"
+    },
+    {
+     "title": "[속보] 공소청, 성북구서 10대 여성 살해한 50대 남성 구속영장 청구",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-12T09:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001535222?sid=102"
+    },
+    {
+     "title": "아들 성범죄 피해자 살해 혐의…50대 남성에 구속영장 청구",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-12T09:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005440546?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "펄어비스 3분기 매출 증가",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 18,
+   "recent20": 3,
+   "press": 18,
+   "firstArticleAt": "2026-11-12T08:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "펄어비스, '붉은사막' 질주 후 숨고르기…3분기 영업익 69% 감소",
+     "press": "bloter.net",
+     "publishedAt": "2026-11-12T09:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/293/0000093178?sid=105"
+    },
+    {
+     "title": "펄어비스, 3분기 매출 1015억원…전년 대비 18% 증가",
+     "press": "kdfnews.com",
+     "publishedAt": "2026-11-12T09:32:00.000Z",
+     "link": "http://www.kdfnews.com/news/articleView.html?idxno=190858"
+    },
+    {
+     "title": "[3분기 실적] K-게임 원화 강세에 희비…엔씨·펄어비스 '질주'",
+     "press": "4th.kr",
+     "publishedAt": "2026-11-12T09:30:00.000Z",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2121126"
+    }
+   ]
+  },
+  {
+   "keyword": "여자축구, LA올림픽 예선 B조",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 16,
    "recent20": 2,
-   "press": 22,
-   "firstArticleAt": "2026-11-12T08:07:00.000Z",
+   "press": 16,
+   "firstArticleAt": "2026-11-12T08:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한전, 3분기 누적 영업이익 6조5569억원…전년 대비 43.2% 감소",
-     "press": "lawissue.co.kr",
-     "publishedAt": "2026-11-12T09:32:00.000Z",
-     "link": "https://www.lawissue.co.kr/view.php?ud=202611121831258338f4ab64559d_12"
+     "title": "'첫 올림픽 본선 도전' 한국 여자 축구, 북한·중국·필리핀과 최종예선...",
+     "press": "maniareport.com",
+     "publishedAt": "2026-11-12T09:42:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/425/0000214892"
     },
     {
-     "title": "한전, 3분기 연결 누적 영업익 6조5569억...전년比 43.2%↓",
-     "press": "popcornnews.net",
-     "publishedAt": "2026-11-12T09:32:00.000Z",
-     "link": "http://www.popcornnews.net/news/articleView.html?idxno=139892"
+     "title": "한국 여자축구, LA 올림픽 최종예선서 북한·중국·필리핀과 B조",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-12T09:38:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/214/0001535226"
     },
-    {
-     "title": "한전 3분기 영업익 71% 급감…“중동 전쟁 영향 본격 반영”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-12T09:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012292671?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "청탁 의혹 공판",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 17,
-   "recent20": 3,
-   "press": 17,
-   "firstArticleAt": "2026-11-12T08:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'김승원 청탁의혹' 브로커, 징역 4년 구형…\"부당 청탁 없었다\" 울먹",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-12T09:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006409114?sid=102"
-    },
-    {
-     "title": "[속보] ‘김승원 신약 청탁의혹’ 양모씨에 징역 4년 구형",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-12T09:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001884799?sid=102"
-    },
-    {
-     "title": "공소청, '김승원 청탁의혹' 브로커에 징역 4년 구형",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-12T09:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016439355?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "브로커 양씨 징역 4년 구형",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 17,
-   "recent20": 3,
-   "press": 17,
-   "firstArticleAt": "2026-11-12T08:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'김승원 청탁의혹' 브로커, 징역 4년 구형…\"부당 청탁 없었다\" 울먹",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-12T09:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006409114?sid=102"
-    },
-    {
-     "title": "[속보] ‘김승원 신약 청탁의혹’ 양모씨에 징역 4년 구형",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-12T09:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001884799?sid=102"
-    },
-    {
-     "title": "공소청, '김승원 청탁의혹' 브로커에 징역 4년 구형",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-12T09:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016439355?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황 해임 검토 중",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 13,
-   "recent20": 3,
-   "press": 11,
-   "firstArticleAt": "2026-11-12T08:33:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "젠슨 황 해임 위기에 ‘AI 제국’ 흔들…후계 불안에 미중 관계까지 파...",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-12T09:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002831951?sid=104"
-    },
-    {
-     "title": "“젠슨 황 불륜녀, 남편이 ‘오작교’…불륜 알고도 자랑하고 다녔다”",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-12T09:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003698852?sid=104"
-    },
-    {
-     "title": "젠슨이 곧 엔비디아인데…기술·인맥·투자 삼각축 흔들리나",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-12T09:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004681643?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "북한 한국 핵잠 반발",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-12T08:11:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "북, '장보고 N' 핵잠 겨냥…\"힘 시위로 위협 억제할 것\"",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-12T09:24:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1320329&inflow=N"
-    },
-    {
-     "title": "북한, 한국 핵추진잠수함 계획에 강력 반발…군사 대응 시사",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-12T09:02:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=624866"
-    },
-    {
-     "title": "북, 한국형 핵잠 추진에 \"적들의 위협, 행동으로 억제해나갈 것\"",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-12T08:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001977922?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "에버랜드",
-   "sources": [
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-12T08:10:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "에버랜드, 삼성라이온즈 팬 2000명 무료 초대",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-12T09:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005603605?sid=101"
-    },
-    {
-     "title": "루후슈 판다→퍼레이드→뿌빠밴드까지...11월 에버랜드 알차게 즐기는 ...",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-12T09:04:00.000Z",
-     "link": "https://www.insight.co.kr/news/581821"
-    },
-    {
-     "title": "삼성, KS 우승 공약 진짜 실현한다…에버랜드에 팬 2000명 초청, 공식 우...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-12T09:04:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/477/0000638774"
-    }
-   ]
-  },
-  {
-   "keyword": "여자축구, LA 올림픽 B조 대결",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-12T08:09:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
     {
      "title": "여자축구, LA 올림픽 최종예선서 북한·중국·필리핀과 B조",
      "press": "newsis.com",
      "publishedAt": "2026-11-12T09:03:00.000Z",
      "link": "https://m.sports.naver.com/kfootball/article/003/0014319483"
-    },
-    {
-     "title": "여자축구, 올림픽 예선서 북한과 한 조…내년 평양 원정 예정",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-12T08:55:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/417/0001164187"
-    },
-    {
-     "title": "한국 여자축구, LA 올림픽 최종예선서 북한과 맞대결",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-12T08:54:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/422/0000925577"
-    }
-   ]
-  },
-  {
-   "keyword": "이재용 투자 결정",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-12T08:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[반도체 392조 충청권 투자] 평택서 만들고 온양서 쌓는다…삼성, AI 반...",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-12T09:02:00.000Z",
-     "link": "https://www.ajunews.com/view/20261112144107316"
-    },
-    {
-     "title": "[퇴근길 정치 픽] \"다음주 삼성전자 면접본다\" 이재명·이재용 웃음짓게...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-12T08:40:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261112001429"
-    },
-    {
-     "title": "이재용 “40년 전 민둥산이었던 곳…AI 반도체 심장으로 변모”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-12T08:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004681581?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "박희승",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-12T08:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "박희승 ‘조희대 탄핵’ 주장에 “미쳤나, 후진국에서나 하는 일”",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-12T09:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001884797?sid=102"
-    },
-    {
-     "title": "‘판사 출신’ 민주 박희승 “법관 탄핵 후진국에서 하는 일”",
-     "press": "weekly.khan.co.kr",
-     "publishedAt": "2026-11-12T09:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/033/0000053333?sid=100"
-    },
-    {
-     "title": "與박희승 \"후진국에서 하는 짓\"…'曺탄핵 요구' 지지자와 설전(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-12T09:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016439336?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "정점식-정순택 대주교 예방",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-12T08:05:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "정점식, 정순택 대주교 예방…“여야 함께 세계청년대회 준비”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-12T09:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012292680?sid=100"
-    },
-    {
-     "title": "국힘 정점식, 정순택 대주교 예방…\"서울 WYD 예산 확보 위해 노력\"",
-     "press": "news.cpbc.co.kr",
-     "publishedAt": "2026-11-12T08:54:00.000Z",
-     "link": "https://news.cpbc.co.kr/article/1176996?division=NAVER"
-    },
-    {
-     "title": "정점식, 정순택 대주교 예방...\"세계청년대회 전폭 지원\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-12T08:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002431999?sid=100"
     }
    ]
   },
@@ -403,7 +177,7 @@
     "google"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-12T08:36:00.000Z",
    "exclusive": false,
@@ -430,15 +204,47 @@
    ]
   },
   {
+   "keyword": "정점식, 정순택 대주교 예방",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T08:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정점식, 정순택 대주교 예방…“여야 함께 세계청년대회 준비”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-12T09:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012292680?sid=100"
+    },
+    {
+     "title": "국힘 정점식, 정순택 대주교 예방…\"서울 WYD 예산 확보 위해 노력\"",
+     "press": "news.cpbc.co.kr",
+     "publishedAt": "2026-11-12T08:54:00.000Z",
+     "link": "https://news.cpbc.co.kr/article/1176996?division=NAVER"
+    },
+    {
+     "title": "정점식, 정순택 대주교 예방...\"세계청년대회 전폭 지원\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-12T08:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002431999?sid=100"
+    }
+   ]
+  },
+  {
    "keyword": "가상자산업권 보안 대책회의",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 9,
+   "articles90": 5,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T08:08:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-12T08:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -461,13 +267,45 @@
      "link": "https://n.news.naver.com/mnews/article/003/0014319420?sid=100"
     }
    ]
+  },
+  {
+   "keyword": "폭설 김윤석 구교환 전율 주목",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-12T08:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "전율 느낀 김윤석, 매 순간 감탄한 구교환… 유머·긴장 넘나드는 '폭설...",
+     "press": "sisaweek.com",
+     "publishedAt": "2026-11-12T08:44:00.000Z",
+     "link": "https://www.sisaweek.com/news/articleView.html?idxno=238952"
+    },
+    {
+     "title": "‘폭설’ 김윤석·구교환, 연기부터 서사까지 빈틈없다…밀도 높은 미스...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-12T08:24:00.000Z",
+     "link": "https://m.entertain.naver.com/article/119/0003154571"
+    },
+    {
+     "title": "[종합] \"결론없이 기승전\"…'폭설' 김윤석x구교환 보여준 인간군상",
+     "press": "maxmovie.com",
+     "publishedAt": "2026-11-12T08:20:00.000Z",
+     "link": "https://www.maxmovie.com/news/articleView.html?idxno=502948"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 387,
-  "matched": 131,
-  "avgLeadMin": 1103,
+  "flagged": 389,
+  "matched": 129,
+  "avgLeadMin": 1050,
   "recent": [
    {
     "keyword": "오산 원룸 시신 발견",
