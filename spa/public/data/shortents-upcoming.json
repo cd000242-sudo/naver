@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T20:40:40.820Z",
+ "builtAt": "2026-11-12T20:50:45.852Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "젠슨 황, 엔비디아 CEO 사임",
@@ -16,62 +16,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 44,
-   "recent20": 8,
-   "press": 26,
-   "firstArticleAt": "2026-11-12T19:11:00.000Z",
+   "articles90": 51,
+   "recent20": 14,
+   "press": 32,
+   "firstArticleAt": "2026-11-12T19:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨 황 사임 후폭풍…백악관, 상무장관 경질 논의",
-     "press": "aitimes.com",
-     "publishedAt": "2026-11-12T20:36:00.000Z",
-     "link": "https://www.aitimes.com/news/articleView.html?idxno=217349"
+     "title": "비트코인 7만1000달러대 추락…엔비디아 쇼크에 동반 급락",
+     "press": "digitaltoday.co.kr",
+     "publishedAt": "2026-11-12T20:50:00.000Z",
+     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=715130"
     },
     {
-     "title": "[핫이슈] 엔비디아 시총 807조 증발…'록스타 창업자' 사임이 드러낸 승...",
-     "press": "the-today.com",
-     "publishedAt": "2026-11-12T20:36:00.000Z",
-     "link": "https://www.the-today.com/news/articleView.html?idxno=93489"
+     "title": "젠슨 황, 사임 후 세 번째 불륜 의혹 떴다…이번에도 회사 직원",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-12T20:48:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1174227"
     },
     {
-     "title": "엔비디아 새 CEO \"고객·협력사 약속 지킬 것\" AI 생태계 혼란 최소화",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-12T20:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005353420?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "전기",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T19:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "캐나다 총리, 방중서 중국 전기차 생산 논의…조기 현지 생산은 유보",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-12T20:28:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=2026111305213996292bd56fbc3c_1"
-    },
-    {
-     "title": "AI 전력 수요 LNG로 대응…골든타임 내 짓느냐가 관건[대한민국 전기국...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-12T20:00:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2647093"
-    },
-    {
-     "title": "물·전기 끌어와도 \"지을 사람이 없어\"...반도체 공장 건설 '비상'",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-12T20:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005440622?sid=101"
+     "title": "젠슨황 세번째 불륜스캔들…“또다른 여직원과도 내연관계”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-12T20:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002722845?sid=104"
     }
    ]
   },
@@ -101,10 +69,42 @@
      "link": "https://n.news.naver.com/mnews/article/081/0003698920?sid=100"
     },
     {
-     "title": "이번엔 \"이 대통령, 윤 탄핵 반대\"...민주, 최민희 감찰 착수",
-     "press": "ytn.co.kr",
+     "title": "'하이에나' 이어 대통령 발언 논란까지…최민희, 민주당 최고위원 윤리...",
+     "press": "greened.kr",
      "publishedAt": "2026-11-12T19:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432182?sid=100"
+     "link": "https://www.greened.kr/news/articleView.html?idxno=354571"
+    }
+   ]
+  },
+  {
+   "keyword": "전기",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T19:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "캐나다 총리, 방중서 중국 전기차 생산 논의…조기 현지 생산은 유보",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-12T20:28:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=2026111305213996292bd56fbc3c_1"
+    },
+    {
+     "title": "물·전기 끌어와도 \"지을 사람이 없어\"...반도체 공장 건설 '비상'",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-12T20:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005440622?sid=101"
+    },
+    {
+     "title": "AI 전력 수요 LNG로 대응…골든타임 내 짓느냐가 관건[대한민국 전기국...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-12T20:00:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2647093"
     }
    ]
   }
