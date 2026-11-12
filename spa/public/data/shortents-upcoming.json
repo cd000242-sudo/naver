@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T02:41:22.436Z",
+ "builtAt": "2026-11-12T02:51:26.133Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,18 +15,18 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 56,
-   "recent20": 13,
-   "press": 52,
-   "firstArticleAt": "2026-11-12T01:13:00.000Z",
+   "articles90": 51,
+   "recent20": 6,
+   "press": 48,
+   "firstArticleAt": "2026-11-12T01:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "네이버, 매출 6분기째 신기록에도 영업익 21%↓…AI 팩토리로 반전(종합...",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-12T02:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006408782?sid=105"
+     "title": "네이버, 3분기 AI 사업 성과 가시화…AI 팩토리·커머스 경쟁력 강화",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-12T02:50:00.000Z",
+     "link": "https://www.ajunews.com/view/20261112114536777"
     },
     {
      "title": "네이버, 美 AI 추론기업과 2조원 공급계약…AI 팩토리 초기 고객 확보",
@@ -35,10 +35,10 @@
      "link": "https://sateconomy.co.kr/news/view/1065580090724030"
     },
     {
-     "title": "네이버, AI 팩토리 내년 흑자 전망…플랫폼 이익률은 25% 유지 목표",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-12T02:38:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1731393"
+     "title": "네이버, 매출 6분기째 신기록에도 영업익 21%↓…AI 팩토리로 반전(종합...",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-12T02:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006408782?sid=105"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 49,
-   "recent20": 7,
-   "press": 48,
-   "firstArticleAt": "2026-11-12T01:12:00.000Z",
+   "articles90": 39,
+   "recent20": 5,
+   "press": 38,
+   "firstArticleAt": "2026-11-12T01:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이 대통령, 16~19일 아세안·APEC 참석",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-12T02:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000925426?sid=100"
+    },
+    {
+     "title": "李대통령, 16~19일 필리핀·중국 순방…아세안·APEC 참석",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-12T02:42:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611120062"
+    },
     {
      "title": "아세안 이어 APEC…李, 다자외교 나선다",
      "press": "biz.heraldcorp.com",
      "publishedAt": "2026-11-12T02:40:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/016/0002722617?sid=100"
-    },
-    {
-     "title": "靑 \"中 APEC서 북미대화 개연성 크지 않아... 전후로는 단정 어렵다\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-12T02:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000965170?sid=100"
-    },
-    {
-     "title": "[종합] 李대통령 아세안·APEC 순방…靑 \"북미 접촉 개연성 크지 않아\"",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-12T02:32:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261112000635"
     }
    ]
   },
@@ -79,30 +79,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 44,
-   "recent20": 10,
-   "press": 31,
-   "firstArticleAt": "2026-11-12T01:52:00.000Z",
+   "articles90": 45,
+   "recent20": 11,
+   "press": 33,
+   "firstArticleAt": "2026-11-12T01:55:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령 \"충청 메가프로젝트, 지역과 국민 함께 성장하는 균형발전으로...",
-     "press": "jeonmae.co.kr",
-     "publishedAt": "2026-11-12T02:36:00.000Z",
-     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1311253"
+     "title": "아산시, 충청권 메가프로젝트 착공식 개최",
+     "press": "todayenergy.kr",
+     "publishedAt": "2026-11-12T02:50:00.000Z",
+     "link": "https://www.todayenergy.kr/news/articleView.html?idxno=305451"
     },
     {
-     "title": "李대통령 \"메가프로젝트 속도전 넘어 전격전…기업에 힘 보탤것\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-12T02:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016438073?sid=100"
+     "title": "李대통령·삼성 이재용 두달 반 만에 재회…‘140조 충청 메가프로젝트...",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-12T02:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000131739?sid=100"
     },
     {
-     "title": "충청권 메가프로젝트 첫발… 이재명 대통령 \"끝까지 책임지겠다\"",
-     "press": "sisaweek.com",
-     "publishedAt": "2026-11-12T02:36:00.000Z",
-     "link": "https://www.sisaweek.com/news/articleView.html?idxno=238938"
+     "title": "李대통령 \"충청권 112개 기업 23.6조 추가 투자…지역 생태계 확산\"",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-12T02:48:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=902866"
     }
    ]
   },
@@ -111,62 +111,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 41,
-   "recent20": 4,
-   "press": 29,
-   "firstArticleAt": "2026-11-12T01:13:00.000Z",
+   "articles90": 35,
+   "recent20": 3,
+   "press": 26,
+   "firstArticleAt": "2026-11-12T01:22:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "임태희 전 교육감 선관위 특검에 '경기도 전 지역 조사' 촉구",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-12T02:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016438005?sid=102"
+     "title": "특검 '보안점검 문서 조작' 중앙선관위 압수수색",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-12T02:46:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3448112"
     },
     {
-     "title": "부실 점검을 철저히 한 것처럼…선관위 특검, 보안 문서 작성 경위 수사",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-12T02:22:00.000Z",
-     "link": "https://www.ajunews.com/view/20261112110305580"
+     "title": "임태희 전 교육감 “선관위 특검, 선거 개표 조사 경기도 전 지역으로 ...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-12T02:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002722628?sid=100"
     },
     {
-     "title": "\"벽돌투표지 정체 밝혀야\" 임태희, 선관위 특검에 수사 요청",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-12T02:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005440210?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황 불륜 의혹 확산",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 26,
-   "recent20": 5,
-   "press": 23,
-   "firstArticleAt": "2026-11-12T01:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "젠슨 황, 사내 추가 불륜설에 엔비디아 이사회 해임 준비설",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-12T02:38:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95084"
-    },
-    {
-     "title": "젠슨 황 불륜 상대 '앨리스 황' 어디 갔나 했더니…블룸버그 \"베이징 체...",
-     "press": "weekly.chosun.com",
-     "publishedAt": "2026-11-12T02:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/053/0000062985?sid=104"
-    },
-    {
-     "title": "[속보] '젠슨 황 불륜 상대' 의혹 앨리스 황, 중국 베이징 체류설",
-     "press": "kado.net",
-     "publishedAt": "2026-11-12T02:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000210916?sid=104"
+     "title": "특검, ‘보안점검 문서 허위작성’ 중앙선관위·용역업체 압수수색",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-12T02:42:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611120089"
     }
    ]
   },
@@ -175,13 +143,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 19,
-   "recent20": 6,
-   "press": 16,
+   "articles90": 20,
+   "recent20": 2,
+   "press": 17,
    "firstArticleAt": "2026-11-12T01:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'김건희 집사게이트' 조영탁 IMS모빌리티 대표, 대법원에서 무죄 확정",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-12T02:44:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=242993"
+    },
     {
      "title": "‘집사게이트’ 조영탁 IMS모빌리티 대표 무죄·공소기각 확정",
      "press": "etoday.co.kr",
@@ -193,45 +167,6 @@
      "press": "obsnews.co.kr",
      "publishedAt": "2026-11-12T02:30:00.000Z",
      "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1543492"
-    },
-    {
-     "title": "'집사 게이트' IMS모빌리티 대표, 무죄·공소기각 확정",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-12T02:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002431789?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "교사",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 14,
-   "recent20": 6,
-   "press": 13,
-   "firstArticleAt": "2026-11-12T01:40:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "전남광주특별시교육청, 퇴직 교사 기증기록물전 개최",
-     "press": "thefairnews.co.kr",
-     "publishedAt": "2026-11-12T02:38:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=93938"
-    },
-    {
-     "title": "세종 유치원 교사 피해 논란…교원단체 \"교육당국이 직접 나서야\"",
-     "press": "newswhoplus.com",
-     "publishedAt": "2026-11-12T02:30:00.000Z",
-     "link": "https://www.newswhoplus.com/news/articleView.html?idxno=74173"
-    },
-    {
-     "title": "경남교육청, 2027학년도 유·초·특수 교사 임용 1차 시험 종료",
-     "press": "mhns.co.kr",
-     "publishedAt": "2026-11-12T02:28:00.000Z",
-     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=768775"
     }
    ]
   },
@@ -270,9 +205,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 375,
-  "matched": 148,
-  "avgLeadMin": 1460,
+  "flagged": 368,
+  "matched": 144,
+  "avgLeadMin": 1489,
   "recent": [
    {
     "keyword": "손흥민 김민재 공동 입장문",
