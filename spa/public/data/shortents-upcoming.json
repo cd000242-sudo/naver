@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T00:45:59.273Z",
+ "builtAt": "2026-11-12T00:56:03.333Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 14,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "금융지주 회장 연임",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 87,
-   "recent20": 12,
-   "press": 56,
-   "firstArticleAt": "2026-11-11T23:22:00.000Z",
+   "articles90": 89,
+   "recent20": 11,
+   "press": 58,
+   "firstArticleAt": "2026-11-11T23:30:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "‘철옹성’ 금융지주 회장 연임 구조 깬다…75% 룰 통할까",
-     "press": "tfmedia.co.kr",
-     "publishedAt": "2026-11-12T00:44:00.000Z",
-     "link": "https://www.tfmedia.co.kr/news/article.html?no=208837"
+     "title": "금융지주 회장 연임 문턱 높인다…3연임부터 주총 75% 찬성 필요",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-12T00:54:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=503275"
     },
     {
-     "title": "금융지주 회장 연임 더 까다롭게…'셀프 연임' 차단·이사회 견제 강화",
-     "press": "iminju.net",
-     "publishedAt": "2026-11-12T00:42:00.000Z",
-     "link": "http://www.iminju.net/news/articleView.html?idxno=172328"
+     "title": "규정 바꾸고 측근 앉히고‥금융지주 회장 '셀프 연임' 실태 확인",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-12T00:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001535096?sid=101"
     },
     {
-     "title": "당정 “금융지주 회장 연임 문턱 높인다…임추위 전원 독립이사로”",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-12T00:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001204244?sid=100"
+     "title": "금융지주 '회장님 챙기기' 도마…연 7억원에 내규 변경까지",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-12T00:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000142099?sid=101"
     }
    ]
   },
@@ -48,62 +48,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 56,
+   "articles90": 44,
    "recent20": 8,
-   "press": 51,
-   "firstArticleAt": "2026-11-11T23:16:00.000Z",
+   "press": 41,
+   "firstArticleAt": "2026-11-11T23:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "WSJ \"엔비디아, 젠슨 황 CEO 해임 추진\"… NYT \"회사 임원과도 불륜\"",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-12T00:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002393886?sid=104"
+     "title": "엔비디아 이사회, 젠슨 황 거취 논의… WSJ \"해임 준비 수순\"",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-12T00:52:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3448039"
     },
     {
-     "title": "[디지털포스트 모닝픽] 젠슨 황, 해임?… 추가 불륜 의혹에 발칵",
-     "press": "ilovepc.co.kr",
-     "publishedAt": "2026-11-12T00:42:00.000Z",
-     "link": "https://www.ilovepc.co.kr/news/articleView.html?idxno=61308"
+     "title": "엔비디아, 젠슨황 해임 추진…사내 불륜 추가 폭로",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-12T00:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000925357?sid=104"
     },
     {
-     "title": "젠슨 황 '해임설' 삼전닉스 출렁…반도체 투심 '냉각'[핫종목]",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-12T00:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009284922?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "임추위 전원 독립이사로 구성",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 30,
-   "recent20": 7,
-   "press": 24,
-   "firstArticleAt": "2026-11-11T23:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "당정 “금융지주 회장 연임 문턱 높인다…임추위 전원 독립이사로”",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-12T00:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001204244?sid=100"
-    },
-    {
-     "title": "당정, 은행지주CEO 연임요건 강화…“임원추천위 전원 독립이사로”",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-12T00:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000131712?sid=100"
-    },
-    {
-     "title": "당정 \"은행지주 CEO 연임 요건 강화키로…임원추천위 전원 독립이사로\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T00:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014317390?sid=100"
+     "title": "[로드픽] 젠슨 황 스캔들, 엔비디아 넘어 美 AI 안보 \"흔들\"…이사회 해...",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-12T00:48:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=67587"
     }
    ]
   },
@@ -112,43 +80,74 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 27,
-   "recent20": 6,
+   "articles90": 26,
+   "recent20": 3,
    "press": 22,
-   "firstArticleAt": "2026-11-11T23:19:00.000Z",
+   "firstArticleAt": "2026-11-11T23:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "미 민주, 공화텃밭 미시시피 상원 선거도 승리…총 55석 확보",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-12T00:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001402460?sid=104"
+    },
+    {
+     "title": "미 공화당 의원, 밴스 부통령에 \"선거 패배 유대인 탓으로 돌려\"…2028년...",
+     "press": "fntoday.co.kr",
+     "publishedAt": "2026-11-12T00:50:00.000Z",
+     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=397783"
+    },
     {
      "title": "[속보]미 미시시피주 상원의원 민주당 당선은 1982년 후 처음 --CNN. NBC",
      "press": "newsis.com",
      "publishedAt": "2026-11-12T00:42:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014317406?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "클라라 10년 만에 예능 복귀",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 21,
+   "recent20": 5,
+   "press": 19,
+   "firstArticleAt": "2026-11-11T23:40:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'이혼→중국서 활약' 클라라, 10년 만에 韓 예능 복귀…'솔로라서2' 출연...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-12T00:54:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000489666"
     },
     {
-     "title": "선거 참패 트럼프, 4연임 순항 시진핑 만남 준비...루비오, 왕이와 통화",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-12T00:36:00.000Z",
-     "link": "https://www.ajunews.com/view/20261112092836173"
+     "title": "'이혼' 클라라, 10년만 한국 예능 복귀…中 솔로 라이프 대방출 [솔로라...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-12T00:51:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004124377"
     },
     {
-     "title": "美 공화당 텃밭 미시시피서 44년 만에 민주당 승리…상원 55석 확보",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-12T00:30:00.000Z",
-     "link": "https://www.ajunews.com/view/20261112085607966"
+     "title": "‘대륙 퀸’ 클라라, ‘솔로라서2’로 돌아온다",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-12T00:50:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611120153"
     }
    ]
   },
   {
    "keyword": "미세먼지",
    "sources": [
-    "signal.bz",
-    "google"
+    "signal.bz"
    ],
-   "articles90": 27,
-   "recent20": 5,
-   "press": 15,
-   "firstArticleAt": "2026-11-11T23:25:00.000Z",
+   "articles90": 26,
+   "recent20": 2,
+   "press": 14,
+   "firstArticleAt": "2026-11-11T23:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -173,78 +172,14 @@
    ]
   },
   {
-   "keyword": "클라라 10년 만에 예능 복귀",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 17,
-   "recent20": 2,
-   "press": 15,
-   "firstArticleAt": "2026-11-11T23:40:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘원조 몸짱’ 클라라, 10년만에 한국 예능 복귀…‘솔로라서2’ 합류",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-12T00:40:00.000Z",
-     "link": "https://m.entertain.naver.com/article/016/0002722448"
-    },
-    {
-     "title": "이혼한 클라라, 10년만 방송 복귀..‘솔로라서2’ 합류[공식]",
-     "press": "heraldmuse.com",
-     "publishedAt": "2026-11-12T00:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/112/0003812995"
-    },
-    {
-     "title": "클라라, '솔로라서2' 출연…10년 만의 한국 예능",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-12T00:24:00.000Z",
-     "link": "https://m.entertain.naver.com/article/629/0000551103"
-    }
-   ]
-  },
-  {
-   "keyword": "금융회사 지배구조 개선 논의",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 20,
-   "recent20": 0,
-   "press": 14,
-   "firstArticleAt": "2026-11-11T23:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "발언하는 이억원 위원장과 논의하는 유동수-박상혁 의원 [포토]",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-12T00:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000551096?sid=100"
-    },
-    {
-     "title": "금융위, 금융사 지배구조 개편…CEO 셀프 연임 차단 추진",
-     "press": "digitaltoday.co.kr",
-     "publishedAt": "2026-11-12T00:04:00.000Z",
-     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=714778"
-    },
-    {
-     "title": "당정 \"금융지주 선진 지배구조 위해 CEO 연임요건 강화\"",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-11T23:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001535074?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "출근하는 이용철 후보자",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 25,
-   "recent20": 4,
-   "press": 9,
+   "articles90": 26,
+   "recent20": 3,
+   "press": 10,
    "firstArticleAt": "2026-11-11T23:38:00.000Z",
    "exclusive": false,
    "capped": false,
@@ -256,48 +191,16 @@
      "link": "https://n.news.naver.com/mnews/article/022/0004174562?sid=102"
     },
     {
+     "title": "이용철 \"공소취소 질문, 예단 따른 것\"…검사 반발·5·18엔 묵묵부답",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-12T00:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000650549?sid=102"
+    },
+    {
      "title": "이용철 재임 성남산업진흥재단 건물서 '이석기 지지' 행사 개최…'혁명...",
      "press": "dailian.co.kr",
      "publishedAt": "2026-11-12T00:37:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/119/0003154265?sid=102"
-    },
-    {
-     "title": "이용철 후보자, 오늘도 '공소취소' 질문에 \"지금은 답변 부적절\"",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-12T00:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000520359?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "183CM 시절 4대천왕이었다",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-11T23:23:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'나혼산' 구성환, '4대 천왕' 시절 소환... \"고교 시절 '183cm·78kg' 인기...",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-12T00:30:00.000Z",
-     "link": "https://www.insight.co.kr/news/581682"
-    },
-    {
-     "title": "구성환, 고교 시절 '4대천왕' 이었다…\"키 183cm·78kg\" (나혼산)",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-12T00:09:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000327625"
-    },
-    {
-     "title": "구성환, 24kg 찌고 사라진 턱선..\"고교시절 183cm 78kg\" 동창회 앞 폭풍 ...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-11T23:23:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004466013"
     }
    ]
   },
@@ -336,9 +239,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 370,
-  "matched": 149,
-  "avgLeadMin": 1527,
+  "flagged": 369,
+  "matched": 148,
+  "avgLeadMin": 1537,
   "recent": [
    {
     "keyword": "에코프로비엠 3분기 영업익 120억 감소",
