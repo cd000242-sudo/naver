@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T14:16:48.836Z",
+ "builtAt": "2026-11-12T14:26:52.626Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,18 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "김민석 최민희 감찰 지시",
    "sources": [
-    "signal.bz",
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 19,
-   "recent20": 3,
-   "press": 16,
-   "firstArticleAt": "2026-11-12T12:53:00.000Z",
+   "articles90": 17,
+   "recent20": 1,
+   "press": 14,
+   "firstArticleAt": "2026-11-12T12:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -48,13 +47,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 6,
-   "recent20": 5,
-   "press": 6,
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
    "firstArticleAt": "2026-11-12T13:56:00.000Z",
-   "exclusive": false,
+   "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "젠슨황 엔비디아 CEO 공식 사임…CFO 크레스 임시경영",
+     "press": "kdfnews.com",
+     "publishedAt": "2026-11-12T14:20:00.000Z",
+     "link": "http://www.kdfnews.com/news/articleView.html?idxno=190864"
+    },
     {
      "title": "젠슨황 엔비디아 CEO 사임, CFO가 임시 경영",
      "press": "kookje.co.kr",
@@ -66,76 +71,6 @@
      "press": "yna.co.kr",
      "publishedAt": "2026-11-12T14:06:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016439480?sid=104"
-    },
-    {
-     "title": "[속보] 젠슨황, 엔비디아 CEO 사퇴…中 간첩과 불륜 파문 속 불명예 퇴진",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-12T14:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003698893?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황 해임 위기",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-12T12:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[포커스] 젠슨 황 '해임 위기'...'사내 불륜' 추가 폭로",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-12T13:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432122?sid=104"
-    },
-    {
-     "title": "젠슨 황 해임 위기에 엔비디아 장전 8% 폭락",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-12T13:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005603700?sid=101"
-    },
-    {
-     "title": "젠슨 황 볼키스 날…앨리스의 ‘디올 원피스’ 화제",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-12T13:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002832452?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "박희승 조희대 탄핵",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T12:55:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "與박희승 \"'조희대 탄핵해야' 시민에 제 답변 부적절…정중히 사과\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T14:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014319594?sid=100"
-    },
-    {
-     "title": "與박희승 \"후진국에서 하는 짓\"…'曺탄핵 요구' 지지자와 설전(종합2보...",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-12T13:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016439467?sid=100"
-    },
-    {
-     "title": "與 박희승\"법관 탄핵은 후진국에서나\" 지지자와 설전",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-12T12:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000965317?sid=100"
     }
    ]
   },
@@ -145,10 +80,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 8,
+   "articles90": 4,
    "recent20": 0,
    "press": 2,
-   "firstArticleAt": "2026-11-12T12:48:00.000Z",
+   "firstArticleAt": "2026-11-12T13:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
