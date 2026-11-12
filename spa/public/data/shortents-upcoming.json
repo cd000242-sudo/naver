@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T04:22:07.435Z",
+ "builtAt": "2026-11-12T04:32:10.870Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,13 +15,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 19,
-   "recent20": 5,
-   "press": 18,
-   "firstArticleAt": "2026-11-12T02:53:00.000Z",
+   "articles90": 17,
+   "recent20": 3,
+   "press": 17,
+   "firstArticleAt": "2026-11-12T03:03:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "'첫 삽' 뜬 대통령의 미소... 충청권 메가프로젝트 출발",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-12T04:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002535606?sid=100"
+    },
     {
      "title": "李대통령 \"메가프로젝트, '모두의 성장'으로 완성되도록 정책 역량 집중...",
      "press": "goodkyung.com",
@@ -33,44 +39,6 @@
      "press": "joongangenews.com",
      "publishedAt": "2026-11-12T04:18:00.000Z",
      "link": "https://www.joongangenews.com/news/articleView.html?idxno=563318"
-    },
-    {
-     "title": "이재명 대통령, 삼성 온양캠퍼스에서 충청 메가 프로젝트 '대박 투자 성...",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-12T04:12:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885289"
-    }
-   ]
-  },
-  {
-   "keyword": "성북구 10대 살해 구속영장",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 14,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-12T02:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[속보]‘10대 살인’ 50대 남성 흉기 미리 구입…피해여성 조건만남 절...",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-12T04:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000161070?sid=102"
-    },
-    {
-     "title": "아들 성범죄 피해자 찾아가 살해한 50대…경찰, 구속영장 신청",
-     "press": "segyebiz.com",
-     "publishedAt": "2026-11-12T03:46:00.000Z",
-     "link": "http://www.segyebiz.com/newsView/20261112509318?OutUrl=naver"
-    },
-    {
-     "title": "성북구 ‘10대 살해’ 범행 동기 오리무중…프로파일러 투입 [뉴스in뉴스...",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-12T03:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012292485?sid=102"
     }
    ]
   },
@@ -79,62 +47,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 58,
-   "recent20": 23,
-   "press": 10,
-   "firstArticleAt": "2026-11-12T03:32:00.000Z",
+   "articles90": 37,
+   "recent20": 32,
+   "press": 11,
+   "firstArticleAt": "2026-11-12T03:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이부진 사장에게 축하 받는 델핀 아르노 CEO",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-12T04:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009285648?sid=101"
+     "title": "'30년 지기' 이부진과 손하트한 디올 CEO... 이대 명예박사 학위 수여식...",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-12T04:30:00.000Z",
+     "link": "https://www.insight.co.kr/news/581737"
     },
     {
-     "title": "기념촬영하는 델핀 아르노 CEO",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-12T04:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009285647?sid=101"
+     "title": "[포토] 디올 CEO 명예박사 수여식 참석한 블랙핑크 지수",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-12T04:29:00.000Z",
+     "link": "https://m.entertain.naver.com/article/015/0005353139"
     },
     {
-     "title": "학위 수여받는 델핀 아르노 디올 CEO",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-12T04:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009285646?sid=101"
+     "title": "[르포]이부진의 '손하트'…정의선·신동빈 등 재계 총출동한 '디올 CEO'",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-12T04:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005841808?sid=101"
     }
    ]
   },
   {
-   "keyword": "김건희 집사게이트 IMS모빌리티 대표 무죄",
+   "keyword": "성북구 10대 살해 구속영장",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T02:58:00.000Z",
+   "articles90": 11,
+   "recent20": 3,
+   "press": 10,
+   "firstArticleAt": "2026-11-12T03:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'김건희 집사 게이트' 조영탁, 무죄 확정",
-     "press": "naeil.com",
-     "publishedAt": "2026-11-12T04:06:00.000Z",
-     "link": "https://www.naeil.com/news/read/608596?ref=naver"
+     "title": "10대 피해자 살해 혐의 50대, 흉기 사전 구매 정황...경찰 구속영장 신청",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-12T04:28:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=563322"
     },
     {
-     "title": "‘김건희 집사게이트’ IMS 대표 무죄 확정…대법 “특검 수사대상 아니...",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-12T03:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003564727?sid=102"
+     "title": "경찰, 10대 여성 살해 50대 구속영장 신청…계획범죄 정황",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-12T04:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006408855?sid=102"
     },
     {
-     "title": "'집사 게이트' IMS모빌리티 대표, 대법서 무죄·공소기각 확정",
-     "press": "todaykorea.co.kr",
-     "publishedAt": "2026-11-12T02:58:00.000Z",
-     "link": "https://www.todaykorea.co.kr/news/articleView.html?idxno=408539"
+     "title": "[속보]‘10대 살인’ 50대 남성 흉기 미리 구입…피해여성 조건만남 절...",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-12T04:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000161070?sid=102"
     }
    ]
   },
@@ -145,7 +113,7 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-12T03:04:00.000Z",
    "exclusive": false,
@@ -174,9 +142,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 354,
-  "matched": 143,
-  "avgLeadMin": 1564,
+  "flagged": 350,
+  "matched": 141,
+  "avgLeadMin": 1582,
   "recent": [
    {
     "keyword": "김건희 집사 무죄 확정",
