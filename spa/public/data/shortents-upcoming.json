@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T12:46:02.837Z",
+ "builtAt": "2026-11-12T12:56:06.275Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "김민석 최민희 감찰 지시",
@@ -16,30 +16,94 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 65,
-   "recent20": 8,
-   "press": 54,
-   "firstArticleAt": "2026-11-12T11:18:00.000Z",
+   "articles90": 67,
+   "recent20": 6,
+   "press": 56,
+   "firstArticleAt": "2026-11-12T11:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "최민희, 이번엔 \"李대통령도 처음엔 尹 탄핵 반대\" 주장했다 철회",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-12T12:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002465661?sid=100"
+     "title": "김민석, 최민희 긴급 감찰조사 지시… “최근 언행 심각하게 인식”",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-12T12:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003698888?sid=100"
     },
     {
-     "title": "[속보] 김민석, 최민희 감찰 지시…'하이에나 떼'·'李, 尹탄핵 반대' 발...",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-12T12:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001272599?sid=100"
+     "title": "“李도 尹탄핵 반대” 최민희 발언에 靑 “강한 유감” 與 “감찰”",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-12T12:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003564848?sid=100"
     },
     {
-     "title": "김민석, ‘언행 논란’ 최민희 ‘윤리 감찰’ 지시",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-12T12:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012292871?sid=100"
+     "title": "김민석, 최민희 감찰조사 지시...\"언행 논란 심각하게 인식\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-12T12:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432101?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황 해임 위기",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-12T11:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[전북만평-정윤성] 세계는 ‘젠슨 황’…국내는?",
+     "press": "jjan.kr",
+     "publishedAt": "2026-11-12T12:54:00.000Z",
+     "link": "https://www.jjan.kr/article/20261112500539"
+    },
+    {
+     "title": "젠슨 황 해임 위기…韓 반도체 산업 '비상'",
+     "press": "idaegu.co.kr",
+     "publishedAt": "2026-11-12T12:34:00.000Z",
+     "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=565253"
+    },
+    {
+     "title": "젠슨 황 퇴진 위기에 대만 반도체 공급망 긴장…\"증설 속도 늦어질 수도...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-12T12:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009286765?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "공격하는 현대캐피탈 레오",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 10,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-12T12:03:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘장추안·레오 52득점’ 현대캐피탈, OK저축은행 꺾고 ‘3연승+선두 도...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-12T12:45:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/144/0001149540"
+    },
+    {
+     "title": "[프로배구] '장추안·레오 52점 합작' 현대캐피탈, OK저축 꺾고 3연승",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-12T12:36:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261112001488"
+    },
+    {
+     "title": "현대캐피탈, OK저축은행 꺾고 3연승…남자부 단독 1위 도약",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-12T12:34:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16275193"
     }
    ]
   },
@@ -48,10 +112,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-12T11:24:00.000Z",
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-12T11:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -76,70 +140,6 @@
    ]
   },
   {
-   "keyword": "젠슨 황 해임 위기",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-12T11:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "젠슨 황 해임 위기…韓 반도체 산업 '비상'",
-     "press": "idaegu.co.kr",
-     "publishedAt": "2026-11-12T12:34:00.000Z",
-     "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=565253"
-    },
-    {
-     "title": "젠슨 황 퇴진 위기에 대만 반도체 공급망 긴장…\"증설 속도 늦어질 수도...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-12T12:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009286765?sid=101"
-    },
-    {
-     "title": "젠슨 황 해임 위기에 AI업계 '비상'… 투자 위축·규제 강화 우려",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-12T12:02:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3448306"
-    }
-   ]
-  },
-  {
-   "keyword": "공격하는 현대캐피탈 레오",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 10,
-   "recent20": 4,
-   "press": 7,
-   "firstArticleAt": "2026-11-12T12:03:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘장추안·레오 52득점’ 현대캐피탈, OK저축은행 꺾고 ‘3연승+선두 도...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-12T12:45:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/144/0001149540"
-    },
-    {
-     "title": "[프로배구] '장추안·레오 52점 합작' 현대캐피탈, OK저축 꺾고 3연승",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-12T12:36:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261112001488"
-    },
-    {
-     "title": "'장추안-레오 52점 합작' 현대캐피탈, 3연승 타고 선두 도약",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-12T12:34:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/018/0006409155"
-    }
-   ]
-  },
-  {
    "keyword": "조희대",
    "sources": [
     "google"
@@ -147,10 +147,16 @@
    "articles90": 5,
    "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-12T11:21:00.000Z",
+   "firstArticleAt": "2026-11-12T11:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[이슈] 與 \"내란세력 부활\" 조희대 탄핵론 재점화… '20일 구속만료' 한...",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-12T12:50:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=748367"
+    },
     {
      "title": "법원행정처장, 여당 내 '한덕수 석방시 조희대 탄핵' 주장에 \"부적절\"",
      "press": "hankookilbo.com",
@@ -162,12 +168,6 @@
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-12T12:06:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/055/0001402651?sid=100"
-    },
-    {
-     "title": "한덕수 석방이 조희대 탄핵 사유?…법원행정처장 “부적절”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-12T12:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003762131?sid=102"
     }
    ]
   },
@@ -177,7 +177,7 @@
     "google"
    ],
    "articles90": 4,
-   "recent20": 3,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-12T12:14:00.000Z",
    "exclusive": false,
@@ -200,38 +200,6 @@
      "press": "gukjenews.com",
      "publishedAt": "2026-11-12T12:32:00.000Z",
      "link": "https://www.gukjenews.com/news/articleView.html?idxno=3750566"
-    }
-   ]
-  },
-  {
-   "keyword": "공항철도 파업",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T11:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "공항철도 노조 13일 하루 경고파업 예고",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-12T12:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012292860?sid=102"
-    },
-    {
-     "title": "공항철도 13일 하루 경고파업…출퇴근 시간대 운행 시간은?",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-12T12:04:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3750533"
-    },
-    {
-     "title": "공항철도 노조, 13일 경고파업 예고…개통 후 첫 파업 가능성",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-12T11:38:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3750512"
     }
    ]
   },
@@ -266,13 +234,45 @@
      "link": "https://m.entertain.naver.com/article/213/0001408105"
     }
    ]
+  },
+  {
+   "keyword": "공항철도 파업",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-12T11:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "공항철도 노조 13일 하루 경고파업 예고",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-12T12:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012292860?sid=102"
+    },
+    {
+     "title": "공항철도 13일 하루 경고파업…출퇴근 시간대 운행 시간은?",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-12T12:04:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3750533"
+    },
+    {
+     "title": "공항철도 노조, 13일 경고파업 예고…개통 후 첫 파업 가능성",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-12T11:38:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3750512"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 384,
-  "matched": 137,
-  "avgLeadMin": 846,
+  "flagged": 382,
+  "matched": 136,
+  "avgLeadMin": 852,
   "recent": [
    {
     "keyword": "이유리, 사귀기 전 결혼 결심",
