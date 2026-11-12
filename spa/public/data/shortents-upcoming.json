@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T03:21:38.225Z",
+ "builtAt": "2026-11-12T03:31:46.261Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 9,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "김건희 집사게이트 IMS모빌리티 대표 무죄",
@@ -48,7 +48,7 @@
     "signal.bz"
    ],
    "articles90": 13,
-   "recent20": 2,
+   "recent20": 0,
    "press": 13,
    "firstArticleAt": "2026-11-12T02:06:00.000Z",
    "exclusive": false,
@@ -79,13 +79,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 19,
+   "articles90": 20,
    "recent20": 1,
-   "press": 11,
+   "press": 12,
    "firstArticleAt": "2026-11-12T02:16:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "이 대통령 \"메가프로젝트 속도전 넘어 전격전…기업에 힘 보탤 것\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-12T03:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001402514?sid=100"
+    },
     {
      "title": "이 대통령, 충청권 메가프로젝트 착공식 참석...“4개월 만에 현실로”",
      "press": "vop.co.kr",
@@ -97,12 +103,6 @@
      "press": "jeonmae.co.kr",
      "publishedAt": "2026-11-12T02:36:00.000Z",
      "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1311253"
-    },
-    {
-     "title": "李대통령 \"충청권 메가프로젝트, 23.6조원 추가 투자…112개 기업 참여\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-12T02:34:00.000Z",
-     "link": "https://www.ajunews.com/view/20261112112806724"
     }
    ]
   },
@@ -111,13 +111,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-12T01:58:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-12T02:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "약국 없는 군부대·공항서 안전상비약 취급 추진",
+     "press": "medipana.com",
+     "publishedAt": "2026-11-12T03:24:00.000Z",
+     "link": "https://www.medipana.com/news/articleView.html?idxno=421650"
+    },
     {
      "title": "군부대·지방공항 '안전상비약' 접근성 높인다…복지부 개정안 예고",
      "press": "docdocdoc.co.kr",
@@ -129,12 +135,6 @@
      "press": "sisajournal.com",
      "publishedAt": "2026-11-12T03:05:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/586/0000142116?sid=103"
-    },
-    {
-     "title": "근처에 약국 없는 군부대·공항, 상비약 접근성 높인다",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-12T02:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001402493?sid=102"
     }
    ]
   },
@@ -144,12 +144,18 @@
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-12T02:01:00.000Z",
+   "firstArticleAt": "2026-11-12T02:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"같은 목표 향해 가는 동료\"…손흥민-96라인, '불화설' 일축",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-12T03:22:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/325072/?sc=Naver"
+    },
     {
      "title": "‘92 VS 96 내분 없다’ 국대 불화설에 “같은 목표 향해 나아갈 동료”",
      "press": "sports.donga.com",
@@ -161,19 +167,45 @@
      "press": "donga.com",
      "publishedAt": "2026-11-12T02:26:00.000Z",
      "link": "https://m.sports.naver.com/kfootball/article/020/0003761978"
+    }
+   ]
+  },
+  {
+   "keyword": "정부 양극화 대응 TF",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-12T02:39:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "양극화 TF 첫 회의…12월 성장전략에 대책 담는다",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-12T03:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000543267?sid=101"
     },
     {
-     "title": "손흥민·김민재 등 입장문... \"같은 목표 향해 나아갈 동료\"",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-12T02:01:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/047/0002535574"
+     "title": "정부, ‘양극화 대응 TF’ 총괄반 1차 회의…“모두의 성장으로 대전환...",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-12T02:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003058745?sid=101"
+    },
+    {
+     "title": "‘양극화 대응’ 범부처 TF 가동…조선업 원·하청 상생협약 추진",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-12T02:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002722615?sid=101"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 364,
+  "flagged": 361,
   "matched": 144,
   "avgLeadMin": 1493,
   "recent": [
