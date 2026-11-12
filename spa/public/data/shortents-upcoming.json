@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T16:18:18.040Z",
+ "builtAt": "2026-11-12T16:28:21.749Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,63 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 92,
-   "recent20": 12,
-   "press": 60,
-   "firstArticleAt": "2026-11-12T14:49:00.000Z",
+   "articles90": 73,
+   "recent20": 6,
+   "press": 48,
+   "firstArticleAt": "2026-11-12T14:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "젠슨 황 엔비디아 CEO 사퇴...33년 경영 체제 막 내려",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-12T16:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432155?sid=104"
+    },
+    {
+     "title": "엔비디아, 젠슨 황 CEO 즉각 사임 발표…33년 만에 퇴진·주가 13% 급락 ...",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-12T16:22:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261113010005034"
+    },
     {
      "title": "엔비디아 ‘임시 선장' 크레스는 누구? ‘25년 재무통’",
      "press": "kmib.co.kr",
      "publishedAt": "2026-11-12T16:17:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/005/0001884878?sid=101"
-    },
+    }
+   ]
+  },
+  {
+   "keyword": "김민석 최민희 감찰 지시",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-12T15:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
     {
-     "title": "퇴장한 '깐부' 젠슨 황…삼성·SK·현대차 '엔비디아 동맹' 안갯속",
-     "press": "ntoday.co.kr",
-     "publishedAt": "2026-11-12T16:16:00.000Z",
-     "link": "https://www.ntoday.co.kr/news/articleView.html?idxno=130831"
-    },
-    {
-     "title": "'젠슨황 충격'에 미 기술주 휘청...AMD·브로드컴 반사이익 기대",
+     "title": "이번엔 \"이 대통령, 윤 탄핵 반대\"...민주, 최민희 감찰 착수",
      "press": "ytn.co.kr",
-     "publishedAt": "2026-11-12T16:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432150?sid=104"
+     "publishedAt": "2026-11-12T16:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432154?sid=100"
+    },
+    {
+     "title": "최민희 “李대통령 尹 탄핵 반대했다” 靑 “사실무근, 유감”",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-12T15:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004009381?sid=100"
+    },
+    {
+     "title": "김민석, 최민희 윤리감찰 지시…\"언행 논란 객관적 확인 필요\"",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-12T15:48:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=624927"
     }
    ]
   },
@@ -47,10 +80,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 9,
+   "articles90": 7,
    "recent20": 0,
    "press": 7,
-   "firstArticleAt": "2026-11-12T14:49:00.000Z",
+   "firstArticleAt": "2026-11-12T15:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,45 +108,12 @@
    ]
   },
   {
-   "keyword": "김민석 최민희 감찰 지시",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-12T15:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "최민희 “李대통령 尹 탄핵 반대했다” 靑 “사실무근, 유감”",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-12T15:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004009381?sid=100"
-    },
-    {
-     "title": "김민석, 최민희 윤리감찰 지시…\"언행 논란 객관적 확인 필요\"",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-12T15:48:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=624927"
-    },
-    {
-     "title": "靑 \"강한 유감\"…김민석, 잇단 '언행 논란' 최민희 감찰 지시",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-12T15:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000925669?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "13일의 금요일",
    "sources": [
     "google"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-12T15:00:00.000Z",
    "exclusive": false,
@@ -132,10 +132,42 @@
      "link": "https://www.ppss.kr/news/articleView.html?idxno=320750"
     },
     {
-     "title": "[아침을 여는 명언 캘리] 2026년 11월 13일 금요일",
+     "title": "[한 컷 만화로 보는 오늘의 띠별 운세] 2026년 11월 13일 금요일",
      "press": "joongdo.co.kr",
      "publishedAt": "2026-11-12T15:00:00.000Z",
-     "link": "https://www.joongdo.co.kr/web/view.php?key=20261113010002166"
+     "link": "https://www.joongdo.co.kr/web/view.php?key=20261112010004278"
+    }
+   ]
+  },
+  {
+   "keyword": "amd 주가",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-12T15:53:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "엔비디아, 젠슨 황 CEO 즉각 사임 발표…33년 만에 퇴진·주가 13% 급락 ...",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-12T16:22:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261113010005034"
+    },
+    {
+     "title": "'젠슨황 충격'에 미 기술주 휘청...AMD·브로드컴 반사이익 기대",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-12T16:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432150?sid=104"
+    },
+    {
+     "title": "'젠슨황 충격'에 美기술주 휘청…AMD·브로드컴은 반사이익 기대",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-12T15:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016439546?sid=104"
     }
    ]
   },
@@ -145,7 +177,7 @@
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-12T15:05:00.000Z",
    "exclusive": false,
