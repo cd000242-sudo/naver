@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T08:13:49.754Z",
+ "builtAt": "2026-11-12T08:23:53.810Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,34 @@
  "measured": 25,
  "candidates": [
   {
-   "keyword": "3분기 누적 순익",
+   "keyword": "한전 3분기 실적",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 94,
-   "recent20": 19,
-   "press": 59,
-   "firstArticleAt": "2026-11-12T06:53:00.000Z",
+   "articles90": 40,
+   "recent20": 10,
+   "press": 39,
+   "firstArticleAt": "2026-11-12T06:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한화생명, 보험손익 개선에 3분기 누계 순익 전년比 12.6%↑",
-     "press": "weekly.hankooki.com",
+     "title": "한전, 3분기 누적 영업익 6.6조원…\"국가 전력망 적기 확충 총력\"",
+     "press": "econovill.com",
+     "publishedAt": "2026-11-12T08:20:00.000Z",
+     "link": "https://www.econovill.com/news/articleView.html?idxno=757049"
+    },
+    {
+     "title": "한전, 3분기 영업이익 43.2% 감소",
+     "press": "todayenergy.kr",
+     "publishedAt": "2026-11-12T08:14:00.000Z",
+     "link": "https://www.todayenergy.kr/news/articleView.html?idxno=305483"
+    },
+    {
+     "title": "한전 3분기 영업익 71% 급감…전기요금 인상 압박 커지나",
+     "press": "biz.sbs.co.kr",
      "publishedAt": "2026-11-12T08:12:00.000Z",
-     "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7193659"
-    },
-    {
-     "title": "한화생명, 3분기 누적 순익 8656억…보험손익 176% 증가",
-     "press": "newstopkorea.com",
-     "publishedAt": "2026-11-12T08:10:00.000Z",
-     "link": "https://www.newstopkorea.com/news/articleView.html?idxno=49001"
-    },
-    {
-     "title": "한화손보, 3분기 순익 961억원...보험손익 2배 늘었다",
-     "press": "asiaa.co.kr",
-     "publishedAt": "2026-11-12T08:08:00.000Z",
-     "link": "https://www.asiaa.co.kr/news/articleView.html?idxno=270870"
+     "link": "https://n.news.naver.com/mnews/article/374/0000543350?sid=101"
     }
    ]
   },
@@ -48,169 +48,41 @@
     "signal.bz"
    ],
    "articles90": 37,
-   "recent20": 7,
-   "press": 31,
-   "firstArticleAt": "2026-11-12T06:46:00.000Z",
+   "recent20": 5,
+   "press": 29,
+   "firstArticleAt": "2026-11-12T06:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "젠슨 황 해임 위기에 스타트업 희비…피지컬AI ‘불안’ NPU ‘기대’",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-12T08:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004681571?sid=105"
+    },
+    {
+     "title": "젠슨황 후임 누가 될까…공동 CEO론에 리사 수·팀 쿡까지 거론",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-12T08:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006409038?sid=101"
+    },
     {
      "title": "'불륜 스캔들' 젠슨 황 해임 위기…이사회, 거취 논의 중",
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-12T08:07:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/055/0001402594?sid=104"
-    },
-    {
-     "title": "엔비디아 젠슨 황 해임 수순 밟나…이사회, 차기 CEO 물색 본격화",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-12T08:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003482341?sid=105"
-    },
-    {
-     "title": "젠슨 황 퇴출되면 AI 산업 대혼란?…삼성전자·SK하이닉스 HBM4 공급망도...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-12T08:04:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16274997"
     }
    ]
   },
   {
-   "keyword": "김승우 유흥주점 절도 혐의 피소",
+   "keyword": "폭설 김윤석 구교환 짜릿한 전율",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 28,
-   "recent20": 6,
+   "articles90": 31,
+   "recent20": 4,
    "press": 24,
-   "firstArticleAt": "2026-11-12T06:46:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김승우 절도 피소에 '우리동네 건강왕' 비상…\"진행 여부 확인 중\"",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-12T08:12:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16275008"
-    },
-    {
-     "title": "장난으로 2천만 원 슬쩍? 김승우, 절도 혐의로 피소",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-12T08:12:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001280640"
-    },
-    {
-     "title": "김승우 절도 혐의 피소…\"술자리 장난, 이미 변제했다\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T08:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014319338"
-    }
-   ]
-  },
-  {
-   "keyword": "건보공단 특사경 반대 대회",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 36,
-   "recent20": 1,
-   "press": 16,
-   "firstArticleAt": "2026-11-12T06:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "행동에 나선 의사들…\"초헌법적 특사경법 철회까지 투쟁\"",
-     "press": "doctorsnews.co.kr",
-     "publishedAt": "2026-11-12T07:56:00.000Z",
-     "link": "http://www.doctorsnews.co.kr/news/articleView.html?idxno=167284"
-    },
-    {
-     "title": "\"의사 잡는 공단 특사경\"…의협, 국회 앞 전면전 선포",
-     "press": "bokuennews.com",
-     "publishedAt": "2026-11-12T07:50:00.000Z",
-     "link": "http://www.bokuennews.com/news/article.html?no=287090"
-    },
-    {
-     "title": "황규석 서울시의사회장 \"건보공단 특사경법 강행시 폐지까지 결사항전...",
-     "press": "doctorstimes.com",
-     "publishedAt": "2026-11-12T07:46:00.000Z",
-     "link": "http://www.doctorstimes.com/news/articleView.html?idxno=241050"
-    }
-   ]
-  },
-  {
-   "keyword": "CPTPP 농업 협의체",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 14,
-   "recent20": 0,
-   "press": 14,
-   "firstArticleAt": "2026-11-12T07:00:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "농식품부, CPTPP 대응 민관협의체 가동…“가입 절차와 무관”",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-12T07:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003485178?sid=101"
-    },
-    {
-     "title": "정부, CPTPP 농업 분야 민관협의체 구성…“가입 전제 아닌 원점 소통”",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-12T07:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003698812?sid=101"
-    },
-    {
-     "title": "농식품부, CPTPP 대응 민관협의체 구성…농업계 의견 수렴",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-12T07:02:00.000Z",
-     "link": "https://www.ajunews.com/view/20261112091014044"
-    }
-   ]
-  },
-  {
-   "keyword": "조현 장관 방중 회담",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 15,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-12T06:51:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령 방중 앞두고 한중 외교장관 회담…서해 구조물·북핵 논의 주...",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-12T08:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000650669?sid=100"
-    },
-    {
-     "title": "13일 베이징서 한중 외교장관회담…양자관계·한반도 정세 논의",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-12T07:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000925548?sid=100"
-    },
-    {
-     "title": "韓中외교장관, 내일 베이징서 회담…양자관계·한반도 정세 논의(종합2...",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-12T07:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016439174?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "폭설 김윤석 구교환, 짜릿한 전율의 브로맨스",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 14,
-   "recent20": 6,
-   "press": 12,
-   "firstArticleAt": "2026-11-12T07:00:00.000Z",
+   "firstArticleAt": "2026-11-12T06:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -227,10 +99,170 @@
      "link": "https://www.ajunews.com/view/20261112170319259"
     },
     {
-     "title": "김윤석 \"에겐남 구교환, 감당할 수 없는 힘 있더라…브로맨스 1등\" ('폭...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-12T08:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001408071"
+     "title": "'폭설' 김윤석 \"에겐남 구교환 연기에 짜릿한 전율\"",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-12T08:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/437/0000520443"
+    }
+   ]
+  },
+  {
+   "keyword": "김승우 유흥주점 절도 혐의 피소",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 24,
+   "recent20": 3,
+   "press": 20,
+   "firstArticleAt": "2026-11-12T06:58:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김승우, 유흥업소서 2200만원 절도 혐의 피소…“장난으로 가져갔다 돌...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-12T08:19:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001147106"
+    },
+    {
+     "title": "김승우 절도 피소에 '우리동네 건강왕' 비상…\"진행 여부 확인 중\"",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-12T08:12:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16275008"
+    },
+    {
+     "title": "장난으로 2천만 원 슬쩍? 김승우, 절도 혐의로 피소",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-12T08:12:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001280640"
+    }
+   ]
+  },
+  {
+   "keyword": "건보공단 특사경 반대",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 36,
+   "recent20": 0,
+   "press": 16,
+   "firstArticleAt": "2026-11-12T06:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "건보공단 특사경 반대시위 하는 김승수 의협 총무이사",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-12T08:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016439209?sid=102"
+    },
+    {
+     "title": "행동에 나선 의사들…\"초헌법적 특사경법 철회까지 투쟁\"",
+     "press": "doctorsnews.co.kr",
+     "publishedAt": "2026-11-12T07:56:00.000Z",
+     "link": "http://www.doctorsnews.co.kr/news/articleView.html?idxno=167284"
+    },
+    {
+     "title": "\"의사 잡는 공단 특사경\"…의협, 국회 앞 전면전 선포",
+     "press": "bokuennews.com",
+     "publishedAt": "2026-11-12T07:50:00.000Z",
+     "link": "http://www.bokuennews.com/news/article.html?no=287090"
+    }
+   ]
+  },
+  {
+   "keyword": "CPTPP 농업 협의체",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 15,
+   "recent20": 1,
+   "press": 15,
+   "firstArticleAt": "2026-11-12T07:00:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "농식품부 CPTPP 대응 민관협의체 구성, \"가입 절차 개시 의미 아냐\"",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-12T08:22:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=451890"
+    },
+    {
+     "title": "정부, CPTPP 농업 분야 민관협의체 구성…“가입 전제 아닌 원점 소통”",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-12T07:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003698812?sid=101"
+    },
+    {
+     "title": "농식품부, CPTPP 대응 민관협의체 가동…“가입 절차와 무관”",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-12T07:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003485178?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황 불륜 논란",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 16,
+   "recent20": 4,
+   "press": 14,
+   "firstArticleAt": "2026-11-12T06:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“남편의 큰 그림?”…젠슨 황에 앨리스 황 소개한 사람 정체",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-12T08:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000131824?sid=104"
+    },
+    {
+     "title": "알고도 빗장 풀었나…'AI 황제' 젠슨 황 불륜 스캔들, 트럼프 정부에 불...",
+     "press": "ilyo.co.kr",
+     "publishedAt": "2026-11-12T08:22:00.000Z",
+     "link": "https://ilyo.co.kr/?ac=article_view&entry_id=513583"
+    },
+    {
+     "title": "로리 황에게 '김치 싸대기' 맞은 젠슨 황…온라인서 조롱 확산 [영상]",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-12T08:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005353252?sid=105"
+    }
+   ]
+  },
+  {
+   "keyword": "조현 장관 방중 회담",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 14,
+   "recent20": 3,
+   "press": 13,
+   "firstArticleAt": "2026-11-12T07:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "中 \"조현 장관 방중 중요하게 여겨\"…미중러 회담엔 \"관계국과 소통\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-12T08:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005440505?sid=104"
+    },
+    {
+     "title": "조현, 13일 베이징서 왕이 만난다…한중·한반도 정세 논의",
+     "press": "segye.com",
+     "publishedAt": "2026-11-12T08:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004174701?sid=100"
+    },
+    {
+     "title": "李대통령 방중 앞두고 한중 외교장관 회담…서해 구조물·북핵 논의 주...",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-12T08:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000650669?sid=100"
     }
    ]
   },
@@ -239,13 +271,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-12T06:47:00.000Z",
+   "articles90": 11,
+   "recent20": 3,
+   "press": 11,
+   "firstArticleAt": "2026-11-12T06:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "오산 원룸서 비닐 속 30대 남성 시신 나와…직장동료가 신고",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-12T08:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000520448?sid=102"
+    },
     {
      "title": "[속보] \"연락 안 돼\" 사라진 동료…30대男, 230L 봉투에 숨진 채 발견",
      "press": "wowtv.co.kr",
@@ -257,12 +295,6 @@
      "press": "kyeonggi.com",
      "publishedAt": "2026-11-12T08:10:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/666/0000131820?sid=102"
-    },
-    {
-     "title": "오산 원룸서 대형 봉투에 담긴 30대 남성 시신 발견",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-12T07:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001977914?sid=102"
     }
    ]
   },
@@ -271,24 +303,24 @@
    "sources": [
     "google"
    ],
-   "articles90": 8,
-   "recent20": 3,
-   "press": 8,
-   "firstArticleAt": "2026-11-12T06:44:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-12T06:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "현대엔지니어링, 조경 특화상품으로 디자인상 잇따라 수상",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-12T08:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005440484?sid=101"
-    },
     {
      "title": "[채널Who] 현대엔지니어링 '영업정지 8개월' 제재 효과 있을까, '실효성...",
      "press": "businesspost.co.kr",
      "publishedAt": "2026-11-12T08:00:00.000Z",
      "link": "https://www.businesspost.co.kr/BP?command=article_view&num=451875"
+    },
+    {
+     "title": "현대엔지니어링, 조경 특화상품으로 디자인상 잇따라 수상",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-12T08:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005440484?sid=101"
     },
     {
      "title": "[어워드 Pick] 현대엔지니어링·태광산업·한전KDN, 조경 어워드와 산업...",
@@ -299,17 +331,55 @@
    ]
   },
   {
-   "keyword": "외국인 2천만명 방문",
+   "keyword": "정점식 원내대표 정순택",
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-12T07:01:00.000Z",
+   "articles90": 16,
+   "recent20": 3,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T07:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "정점식, 정순택 서울대교구장 대주교 예방",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-12T08:05:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261112001392"
+    },
+    {
+     "title": "정점식 원내대표, 정순택 대주교 예방… 세계청년대회 예산 지원 약속",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-12T08:04:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261112001390"
+    },
+    {
+     "title": "국민의힘, 정순택 대주교 예방",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-12T08:04:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261112001391"
+    }
+   ]
+  },
+  {
+   "keyword": "사상 최초 2천만명",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T07:23:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "방한 외국인 관광객 사상 최초로 2천만 명 돌파",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-12T08:18:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261112001413"
+    },
     {
      "title": "韓 방문 외국인 관광객, 사상 첫 2천만 명 돌파...K-관광 새 역사",
      "press": "starnewsk.com",
@@ -321,12 +391,6 @@
      "press": "yna.co.kr",
      "publishedAt": "2026-11-12T07:56:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016439191?sid=103"
-    },
-    {
-     "title": "[그래픽] 방한 외국인 관광객 추이",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-12T07:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016439124?sid=103"
     }
    ]
   },
@@ -336,13 +400,19 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-12T06:46:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T07:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"조희대 탄핵!\" 시민에게…민주당 박희승 \"미쳤나, 후진국에서나 하는 ...",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-12T08:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000520447?sid=100"
+    },
     {
      "title": "박희승 의원, ‘조희대 대법원장’ 탄핵 관련 발언 ‘논란’",
      "press": "jjan.kr",
@@ -354,51 +424,45 @@
      "press": "gukjenews.com",
      "publishedAt": "2026-11-12T07:54:00.000Z",
      "link": "https://www.gukjenews.com/news/articleView.html?idxno=3750277"
-    },
-    {
-     "title": "'조희대 탄핵 요구' 강성 지지자에…與박희승 \"후진국에서나 하는 일\"",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-12T07:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006408984?sid=100"
     }
    ]
   },
   {
-   "keyword": "방화",
+   "keyword": "한성숙 총리 간담회 참석",
    "sources": [
-    "google"
+    "nate"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T06:46:00.000Z",
+   "articles90": 8,
+   "recent20": 3,
+   "press": 3,
+   "firstArticleAt": "2026-11-12T06:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "방글라데시서 ‘하시나 귀국 요구’ 시위 격화···나흘 새 방화 41건·...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-12T07:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003482317?sid=104"
+     "title": "대전 온 한성숙 총리 \"충청 경제발전 위해 규제완화 속도낼 것\"",
+     "press": "goodmorningcc.com",
+     "publishedAt": "2026-11-12T08:22:00.000Z",
+     "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=455727"
     },
     {
-     "title": "주민 대피 돕다 쓰러진 70대 경비원 중태…광주 아파트 방화범 긴급체포",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-12T07:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000551382?sid=102"
+     "title": "충청권 기업 규제 애로 쏟아져…한성숙 총리 \"개선 일정 구체화\"",
+     "press": "cctoday.co.kr",
+     "publishedAt": "2026-11-12T08:16:00.000Z",
+     "link": "https://www.cctoday.co.kr/news/articleView.html?idxno=2240167"
     },
     {
-     "title": "인천 송도 영어유치원 방화 60대 남성 영장심사…구속 갈림길",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-12T06:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000925514?sid=102"
+     "title": "韓총리 \"규제 처리 속도 높여야…언제까지 풀릴지 일정도 제시\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-12T08:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009286592?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 365,
+  "flagged": 369,
   "matched": 127,
   "avgLeadMin": 1210,
   "recent": [
