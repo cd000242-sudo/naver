@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T00:15:46.853Z",
+ "builtAt": "2026-11-12T00:25:51.816Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,66 +11,66 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "금융지주 회장 연임",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 72,
-   "recent20": 9,
-   "press": 45,
-   "firstArticleAt": "2026-11-11T23:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "금융지주 회장 3연임 길 열어둔 당정…'장기 집권' 막을 주총 문턱 높인...",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-12T00:14:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4444329"
-    },
-    {
-     "title": "금융지주 회장 '장기 집권' 문턱 높인다…당정, 지배구조 개선 구체화",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-12T00:12:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=315190"
-    },
-    {
-     "title": "금융지주 회장 '셀프 연임' 막는다",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-12T00:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002535544?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "네이버 3분기 영업익 20.9%↓",
+   "keyword": "네이버 3분기 매출 3조4724억",
    "sources": [
     "nate"
    ],
-   "articles90": 50,
-   "recent20": 9,
-   "press": 43,
+   "articles90": 74,
+   "recent20": 13,
+   "press": 59,
    "firstArticleAt": "2026-11-11T23:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“배송은 남의 손에” 옛말…네이버, 물류 자회사 세워 쿠팡 추격",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-12T00:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002248199?sid=101"
+     "title": "네이버, 3Q 영업익 4513억원…AI 투자에 전년比 21%↓",
+     "press": "theviewers.co.kr",
+     "publishedAt": "2026-11-12T00:24:00.000Z",
+     "link": "https://theviewers.co.kr/View.aspx?No=4308983"
     },
     {
-     "title": "네이버, 3분기 영업익 4513억원…전년比 20.9% 감소",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-12T00:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000551088?sid=105"
+     "title": "네이버, 3분기 AI 투자로 영업이익 20.9% 감소…매출 3조4724억",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-12T00:24:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=902823"
     },
     {
-     "title": "네이버, AI 투자 늘린 여파…3분기 영업익 20.9%↓",
-     "press": "dealsite.co.kr",
-     "publishedAt": "2026-11-12T00:12:00.000Z",
-     "link": "https://dealsite.co.kr/articles/172610"
+     "title": "네이버, 물류 자회사 만든다…3분기 영업익 21% 감소",
+     "press": "thelec.kr",
+     "publishedAt": "2026-11-12T00:24:00.000Z",
+     "link": "https://www.thelec.kr/news/articleView.html?idxno=65315"
+    }
+   ]
+  },
+  {
+   "keyword": "금융지주 회장 연임",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 75,
+   "recent20": 10,
+   "press": 47,
+   "firstArticleAt": "2026-11-11T23:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "금융지주 회장 연임 문턱 높인다…독립이사 2명 반대에도 제동",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-12T00:24:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=882531"
+    },
+    {
+     "title": "금융지주 회장 '셀프 연임' 막는다…3연임시 의결 문턱 높여",
+     "press": "news2day.co.kr",
+     "publishedAt": "2026-11-12T00:20:00.000Z",
+     "link": "https://www.news2day.co.kr/article/20261112500075"
+    },
+    {
+     "title": "\"3연임 막자\"던 당국, 결국 75%룰 택했다…지주 회장 연임 '주주 심판'으...",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-12T00:20:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1731331"
     }
    ]
   },
@@ -79,62 +79,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 23,
-   "recent20": 6,
-   "press": 21,
-   "firstArticleAt": "2026-11-11T22:53:00.000Z",
+   "articles90": 24,
+   "recent20": 4,
+   "press": 19,
+   "firstArticleAt": "2026-11-11T23:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "미시시피에서도 40여년 만에 민주당 상원의원 탄생…민주 상원 최소 55석...",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-12T00:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001884674?sid=104"
+     "title": "美 민주, ‘공화 텃밭’ 미시시피 상원선거도 승리… 총 55석",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-12T00:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001204237?sid=104"
     },
     {
-     "title": "미국 민주, 공화 텃밭 미시시피 상원선거도 승리…총 55석",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-12T00:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012292291?sid=104"
+     "title": "콜롬, 미시시피 상원 접전 관련 취재진에 발언",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-12T00:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009284823?sid=104"
     },
     {
-     "title": "‘공화 텃밭’ 미시시피마저 민주당 품으로⋯상원 55석 확보",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-12T00:02:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2647163"
-    }
-   ]
-  },
-  {
-   "keyword": "금융회사 지배구조 개선방안",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 32,
-   "recent20": 7,
-   "press": 16,
-   "firstArticleAt": "2026-11-11T23:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "금융지주 회장 '장기 집권' 문턱 높인다…당정, 지배구조 개선 구체화",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-12T00:12:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=315190"
-    },
-    {
-     "title": "금융위, 금융사 지배구조 개편…CEO 셀프 연임 차단 추진",
-     "press": "digitaltoday.co.kr",
-     "publishedAt": "2026-11-12T00:04:00.000Z",
-     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=714778"
-    },
-    {
-     "title": "금융회사 지배구조 개선방안 당정협의 참석하는 이억원-이찬진",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T00:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014317249?sid=100"
+     "title": "콜롬, 미시시피 상원 선거 개표 진행 중 기자회견",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-12T00:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009284821?sid=104"
     }
    ]
   },
@@ -143,10 +111,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
+   "articles90": 9,
    "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-11T22:46:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-11T22:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -169,13 +137,45 @@
      "link": "https://www.newdaily.co.kr/site/data/html/2026/11/12/2026111200026.html"
     }
    ]
+  },
+  {
+   "keyword": "출근하는 이용철 후보자",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 21,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-11T23:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "청문회 준비단 출근하는 이용철 법무부 장관 후보자 [TF사진관]",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-12T00:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000551095?sid=102"
+    },
+    {
+     "title": "이용철 \"공소취소, 예단 따른 질문\"...또 말 아껴",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-12T00:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002431683?sid=102"
+    },
+    {
+     "title": "이용철 \"지금은 답변 부적절\"…공소취소 나흘째 모호한 입장",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-11T23:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009284732?sid=102"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 373,
-  "matched": 147,
-  "avgLeadMin": 1007,
+  "flagged": 368,
+  "matched": 142,
+  "avgLeadMin": 1023,
   "recent": [
    {
     "keyword": "반도체",
