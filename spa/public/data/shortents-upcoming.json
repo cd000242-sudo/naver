@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T16:38:29.441Z",
+ "builtAt": "2026-11-12T16:48:32.957Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,38 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "젠슨 황, 엔비디아 CEO 사임",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 66,
-   "recent20": 9,
-   "press": 42,
-   "firstArticleAt": "2026-11-12T15:09:00.000Z",
+   "articles90": 51,
+   "recent20": 8,
+   "press": 34,
+   "firstArticleAt": "2026-11-12T15:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨 황, 잇단 불륜 의혹에 엔비디아 CEO 전격 사임",
-     "press": "cwn.kr",
-     "publishedAt": "2026-11-12T16:36:00.000Z",
-     "link": "https://www.cwn.kr/news/articleView.html?idxno=61692"
+     "title": "엔비디아 첫 이사회 의장에 하비 존스…실리콘밸리 원로경영인",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-12T16:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000925671?sid=104"
+    },
+    {
+     "title": "젠슨 황, 엔비디아와 33년 만 결별…불륜 의혹 속 불명예 퇴진(종합)",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-12T16:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014319633?sid=104"
     },
     {
      "title": "트럼프 “젠슨황 자리, 애플 팀쿡이 이어받아야”…엔비디아 새CEO 추천",
      "press": "seoul.co.kr",
      "publishedAt": "2026-11-12T16:36:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/081/0003698900?sid=104"
-    },
-    {
-     "title": "젠슨황 엔비디아 CEO 퇴진…불륜 파문에 33년만에 쫓겨나(종합2보)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-12T16:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016439550?sid=104"
     }
    ]
   },
@@ -49,10 +48,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 7,
+   "articles90": 5,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-12T15:10:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-12T15:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -79,13 +78,12 @@
   {
    "keyword": "축구 대표팀 사우디 평가전",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 4,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-12T15:10:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-12T15:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -110,13 +108,45 @@
    ]
   },
   {
+   "keyword": "13일의 금요일",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-12T15:28:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[카드뉴스로 읽는 오늘의 운세] 11월 13일(금요일) 춘강 구박사가 알려...",
+     "press": "joongdo.co.kr",
+     "publishedAt": "2026-11-12T16:44:00.000Z",
+     "link": "https://www.joongdo.co.kr/web/view.php?key=20261113010002949"
+    },
+    {
+     "title": "11월 13일 금요일 띠별 오늘의 운세 \"포기했던 돈을 돌려 받는다\"",
+     "press": "econovill.com",
+     "publishedAt": "2026-11-12T16:04:00.000Z",
+     "link": "https://www.econovill.com/news/articleView.html?idxno=757089"
+    },
+    {
+     "title": "[오늘의 띠별 운세] 2026년 11월 13일 금요일",
+     "press": "ppss.kr",
+     "publishedAt": "2026-11-12T15:28:00.000Z",
+     "link": "https://www.ppss.kr/news/articleView.html?idxno=320750"
+    }
+   ]
+  },
+  {
    "keyword": "amd 주가",
    "sources": [
     "signal.bz",
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-12T15:53:00.000Z",
    "exclusive": false,
@@ -139,38 +169,6 @@
      "press": "yna.co.kr",
      "publishedAt": "2026-11-12T15:53:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016439546?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "50대 남성 구속영장 청구",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T15:15:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "50대 남성에 살해된 15세 소녀…성매매·절도 강요에 쉼터선 실종 신고",
-     "press": "weekly.chosun.com",
-     "publishedAt": "2026-11-12T16:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/053/0000063006?sid=102"
-    },
-    {
-     "title": "여전히 입 다문 살인 피의자…구속영장 청구",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-12T15:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001402686?sid=102"
-    },
-    {
-     "title": "공소청, 10대 살해 50대 남성 구속영장 청구",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-12T15:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000925668?sid=102"
     }
    ]
   }
