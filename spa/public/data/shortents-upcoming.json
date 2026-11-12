@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T14:37:03.214Z",
+ "builtAt": "2026-11-12T14:47:08.267Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,79 +8,110 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 25,
  "candidates": [
   {
-   "keyword": "최민희 언행 논란 감찰 지시",
+   "keyword": "최민희 감찰 지시",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-12T13:10:00.000Z",
+   "articles90": 10,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-12T13:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김민석, 최민희는 즉시 감찰…'신천지 3자 연합' 증거 없었다는 자신의...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-12T14:42:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16275290"
+    },
+    {
+     "title": "김민석, '언행 논란' 최민희 감찰조사 지시…\"심각 인식\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-12T14:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001402678?sid=100"
+    },
     {
      "title": "최민희 '이 대통령, 尹 탄핵 반대' 발언 일파만파…靑 반박에 당 감찰까...",
      "press": "hidomin.com",
      "publishedAt": "2026-11-12T14:08:00.000Z",
      "link": "https://www.hidomin.com/news/articleView.html?idxno=729219"
-    },
-    {
-     "title": "민주, ‘대통령 탄핵 반대 전언·기자 비하’ 최민희 윤리감찰 착수",
-     "press": "news-s.kr",
-     "publishedAt": "2026-11-12T14:02:00.000Z",
-     "link": "https://news-s.kr/view.html?id=L261112225646975c"
-    },
-    {
-     "title": "\"李, 尹탄핵 반대\" 최민희에 청와대·與 일제히 강경대응",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-12T13:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005763078?sid=100"
     }
    ]
   },
   {
-   "keyword": "최성훈 사업실패",
+   "keyword": "2200만원 절도 장난",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 3,
+   "articles90": 5,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T13:11:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-12T13:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "최성훈 \"전성기, 돈 무서운 줄 몰랐다...연이은 사업실패 속 사람에 상처...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-12T14:07:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001408117"
+     "title": "‘2200만원→3000만원→3억’…김승우 절도 의혹, 결국 ‘돈의 성격’ 싸...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-12T14:27:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001280681"
     },
     {
-     "title": "'특종세상' 개그맨 최성훈, 연이은 사업 실패 후 시골에서 유튜브하는 ...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-12T13:12:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16275232"
+     "title": "'절도 의혹'에 김승우 입장 팽팽..엇갈린 주장 속 진실은? 일단 '중립' 기...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-12T14:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005639615"
     },
     {
-     "title": "\"미치고 홀렸다\" 톱개그맨의 몰락..사업 실패에 뇌경색 덮친 '사라진 26...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-12T13:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004466318"
+     "title": "'피소' 김승우, 5년 전 유흥주점서 무슨 일 있었나..2200만원 절도 두고...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-12T13:49:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003487038"
+    }
+   ]
+  },
+  {
+   "keyword": "장동혁 한동훈 복당",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T13:36:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[단독] \"외부 개입 있었다\" 장동혁 정조준...'조작 징계 의혹' 일파만파",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-12T14:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432134?sid=100"
+    },
+    {
+     "title": "\"장동혁, 韓 징계 조작 의혹 해명해야\"",
+     "press": "gnmaeil.com",
+     "publishedAt": "2026-11-12T13:56:00.000Z",
+     "link": "http://www.gnmaeil.com/news/articleView.html?idxno=598599"
+    },
+    {
+     "title": "[사설] 이번엔 ‘조작 징계’ 의혹, 장동혁 체제 민심 얻겠나",
+     "press": "segye.com",
+     "publishedAt": "2026-11-12T13:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004174777?sid=110"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 386,
-  "matched": 140,
-  "avgLeadMin": 775,
+  "flagged": 387,
+  "matched": 139,
+  "avgLeadMin": 780,
   "recent": [
    {
     "keyword": "방화",
