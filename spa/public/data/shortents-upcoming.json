@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T03:11:35.071Z",
+ "builtAt": "2026-11-12T03:21:38.225Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 9,
  "candidates": [
   {
    "keyword": "김건희 집사게이트 IMS모빌리티 대표 무죄",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 20,
-   "recent20": 1,
-   "press": 18,
-   "firstArticleAt": "2026-11-12T01:42:00.000Z",
+   "articles90": 17,
+   "recent20": 0,
+   "press": 17,
+   "firstArticleAt": "2026-11-12T02:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -47,10 +47,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 18,
-   "recent20": 3,
-   "press": 17,
-   "firstArticleAt": "2026-11-12T01:42:00.000Z",
+   "articles90": 13,
+   "recent20": 2,
+   "press": 13,
+   "firstArticleAt": "2026-11-12T02:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -79,10 +79,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 20,
+   "articles90": 19,
    "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-12T01:51:00.000Z",
+   "press": 11,
+   "firstArticleAt": "2026-11-12T02:16:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -107,49 +107,23 @@
    ]
   },
   {
-   "keyword": "정부 양극화 대응 TF",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-12T01:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "양극화 TF 첫 회의…12월 성장전략에 대책 담는다",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-12T03:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000543267?sid=101"
-    },
-    {
-     "title": "정부, ‘양극화 대응 TF’ 총괄반 1차 회의…“모두의 성장으로 대전환...",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-12T02:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003058745?sid=101"
-    },
-    {
-     "title": "‘양극화 대응’ 범부처 TF 가동…조선업 원·하청 상생협약 추진",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-12T02:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002722615?sid=101"
-    }
-   ]
-  },
-  {
    "keyword": "군부대 상비약 허용",
    "sources": [
     "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 2,
    "press": 6,
-   "firstArticleAt": "2026-11-12T01:46:00.000Z",
+   "firstArticleAt": "2026-11-12T01:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "군부대·지방공항 '안전상비약' 접근성 높인다…복지부 개정안 예고",
+     "press": "docdocdoc.co.kr",
+     "publishedAt": "2026-11-12T03:14:00.000Z",
+     "link": "http://www.docdocdoc.co.kr/news/articleView.html?idxno=3044514"
+    },
     {
      "title": "군부대·지방공항 의약품 이용 문턱 낮춘다",
      "press": "sisajournal.com",
@@ -161,12 +135,6 @@
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-12T02:17:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/055/0001402493?sid=102"
-    },
-    {
-     "title": "군부대·중소공항 안전상비약 허용 추진",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-12T02:05:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000082061"
     }
    ]
   },
@@ -175,10 +143,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T01:42:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-12T02:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -201,43 +169,11 @@
      "link": "https://m.sports.naver.com/kfootball/article/047/0002535574"
     }
    ]
-  },
-  {
-   "keyword": "네이버 AI 계약 소식",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T01:45:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"탐색부터 예약·결제까지\"... 네이버, 개인형 AI 에이전트 앱 연내 출시",
-     "press": "tjb.co.kr",
-     "publishedAt": "2026-11-12T02:24:00.000Z",
-     "link": "https://www.tjb.co.kr/news05/bodo/view/id/106010"
-    },
-    {
-     "title": "네이버, 검색부터 예약·결제까지 AI가 대신 수행…올해 앱 출시",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-12T02:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000925405?sid=101"
-    },
-    {
-     "title": "네이버, 검색부터 예약·결제까지 AI가 대신…연내 앱 출시",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-12T01:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016437788?sid=105"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 368,
+  "flagged": 364,
   "matched": 144,
   "avgLeadMin": 1493,
   "recent": [
