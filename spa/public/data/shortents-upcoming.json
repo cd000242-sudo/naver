@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T21:21:04.632Z",
+ "builtAt": "2026-11-12T21:31:07.612Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,24 +15,24 @@
    "sources": [
     "nate"
    ],
-   "articles90": 6,
+   "articles90": 4,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-12T20:00:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-12T20:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "[뉴스 즉설]1년 남은 한동훈의 시간, 장동혁에 복당 막히면 신당 창당?",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-12T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000192287?sid=004"
-    },
     {
      "title": "장동혁-윤리위원 갈등 격화…'조작징계' 공방에 국민의힘 전운 고조",
      "press": "dailian.co.kr",
      "publishedAt": "2026-11-12T21:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/119/0003154635?sid=100"
+    },
+    {
+     "title": "[뉴스 즉설]1년 남은 한동훈의 시간, 장동혁에 복당 막히면 신당 창당?",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-12T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000192287?sid=004"
     },
     {
      "title": "주도권 안 놓는다…장동혁, '비대위·조작징계' 주장 정면 돌파",
