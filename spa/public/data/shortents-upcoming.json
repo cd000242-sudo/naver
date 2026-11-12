@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T20:00:16.908Z",
+ "builtAt": "2026-11-12T20:10:27.700Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,30 +16,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 30,
-   "recent20": 8,
-   "press": 20,
-   "firstArticleAt": "2026-11-12T18:31:00.000Z",
+   "articles90": 34,
+   "recent20": 11,
+   "press": 22,
+   "firstArticleAt": "2026-11-12T18:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "로이터 \"젠슨 황, 엔비디아 또 다른 직원과 세 번째 불륜 있었다\"",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-12T19:56:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261112001495"
+     "title": "젠슨 황 사임에 엔비디아 4%대 하락…외국인, 삼성전자 7449억 사고 SK하...",
+     "press": "greened.kr",
+     "publishedAt": "2026-11-12T20:07:00.000Z",
+     "link": "https://www.greened.kr/news/articleView.html?idxno=354572"
     },
     {
-     "title": "[美증시 특징주] 엔비디아, '대체불가' 젠슨황 퇴진에 또 폭락…경영 불...",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-12T19:54:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1137192"
+     "title": "트럼프 \"젠슨 황 이을 사람은 애플 팀 쿡\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-12T20:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000925683?sid=104"
     },
     {
-     "title": "임시 CEO는 크레스…엔비디아 정식 후임, 예측시장 1위는?",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-12T19:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006409188?sid=101"
+     "title": "젠슨 황, 엔비디아 CEO사임…CFO가 임시경영",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-12T20:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000925681?sid=104"
     }
    ]
   },
@@ -49,94 +49,63 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
+   "articles90": 7,
+   "recent20": 3,
+   "press": 7,
    "firstArticleAt": "2026-11-12T18:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "햇빛-바람으로 공장 돌린다… 빛그린산단, RE100 산단 추진",
-     "press": "donga.com",
-     "publishedAt": "2026-11-12T19:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003762210?sid=102"
+     "title": "美의회 초당적 ‘칩 통제’ 꺼냈다… 삼전닉스 中공장 영향권",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-12T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003698914?sid=101"
     },
     {
-     "title": "'Made in Germany' 보기 쉽지 않다...벤츠, 독일 공장 폐쇄 검토",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-12T18:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000543390?sid=104"
+     "title": "반도체 팔던 한국, ‘AI 공장주’로…해외 수요 잡는다",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-12T20:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009286852?sid=105"
     },
     {
-     "title": "벤츠도 독일 공장 폐쇄 검토...\"국내 투자 중단\"",
+     "title": "물·전기 끌어와도 \"지을 사람이 없어\"...반도체 공장 건설 '비상'",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-12T20:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005440622?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "김민석 최민희 감찰 지시",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 3,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T18:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "최민희 “李대통령도 尹 탄핵 반대”… 김민석, 崔 윤리감찰 조사 지시",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-12T20:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003698920?sid=100"
+    },
+    {
+     "title": "'하이에나' 이어 대통령 발언 논란까지…최민희, 민주당 최고위원 윤리...",
+     "press": "greened.kr",
+     "publishedAt": "2026-11-12T19:58:00.000Z",
+     "link": "https://www.greened.kr/news/articleView.html?idxno=354571"
+    },
+    {
+     "title": "이번엔 \"이 대통령, 윤 탄핵 반대\"...민주, 최민희 감찰 착수",
      "press": "ytn.co.kr",
-     "publishedAt": "2026-11-12T18:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432176?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "후티 사우디 송유관 공격",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T18:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "예멘 후티 반군 \"사우디 동서 송유관·아람코 등 공격\" 주장",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T19:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014319646?sid=104"
-    },
-    {
-     "title": "후티 반군 \"사우디 동서 송유관·얀부 석유시설 타격\"",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-12T19:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001535293?sid=104"
-    },
-    {
-     "title": "후티 반군 \"사우디 동서 송유관·얀부 석유시설 타격\"(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-12T18:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016439563?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "13일의 금요일",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T18:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오늘의 주요일정]제주(11월13일 금요일)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T19:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014319644?sid=102"
-    },
-    {
-     "title": "[재미로 보는 오늘의 운세] 11월 13일 (금요일) 66년생, 송사에 연루되면...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-12T19:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004174784?sid=103"
-    },
-    {
-     "title": "[지윤철학원의 오늘의 운세] 2026년 11월 13일 금요일 띠별 운세",
-     "press": "news2day.co.kr",
-     "publishedAt": "2026-11-12T18:34:00.000Z",
-     "link": "https://www.news2day.co.kr/article/20261112500056"
+     "publishedAt": "2026-11-12T19:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432182?sid=100"
     }
    ]
   }
