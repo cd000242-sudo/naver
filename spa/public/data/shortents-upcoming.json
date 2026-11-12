@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T08:34:01.003Z",
+ "builtAt": "2026-11-12T08:44:05.431Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,134 +8,197 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 25,
  "candidates": [
-  {
-   "keyword": "김윤석 구교환 폭설",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 97,
-   "recent20": 7,
-   "press": 34,
-   "firstArticleAt": "2026-11-12T07:09:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"오늘은 너의 날\"…구교환, 김윤석 한마디에 감동한 이유 ('폭설')",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-12T08:27:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000784190"
-    },
-    {
-     "title": "'폭설' 곧 개봉, 기대해주세요![엑's HD포토]",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-12T08:25:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002079901"
-    },
-    {
-     "title": "구교환-홍의정-김윤석 '겨울엔 영화 폭설'[엑's HD포토]",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-12T08:24:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002079900"
-    }
-   ]
-  },
   {
    "keyword": "한전 3분기 실적",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 33,
-   "recent20": 4,
-   "press": 32,
-   "firstArticleAt": "2026-11-12T07:09:00.000Z",
+   "articles90": 37,
+   "recent20": 9,
+   "press": 35,
+   "firstArticleAt": "2026-11-12T07:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한전, 3분기 누적 영업이익 6조5569억원...1조9000억원 재무개선 성과",
-     "press": "news2day.co.kr",
-     "publishedAt": "2026-11-12T08:32:00.000Z",
-     "link": "https://www.news2day.co.kr/article/20261112500386"
+     "title": "한국전력 3분기 영업이익 71% 급감",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-12T08:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005762995?sid=101"
     },
     {
-     "title": "한전, 3분기 영업익 70.9% 급감...중동발 연료비 부담에 실적 '직격탄'",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-12T08:26:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=563475"
+     "title": "중동전쟁 여파에 한전 3분기 영업익 70% 뚝…송전망 투자 빨간불",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-12T08:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004681588?sid=101"
     },
     {
-     "title": "한전, 3Q 영업이익 6.5兆···연료비 상승 영향에도 흑자 유지",
-     "press": "seoulfn.com",
-     "publishedAt": "2026-11-12T08:25:00.000Z",
-     "link": "https://www.seoulfn.com/news/articleView.html?idxno=642696"
+     "title": "한전, 3분기 영업익 71% 급감…연료비 상승에 수익성 악화",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-12T08:38:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2018024"
     }
    ]
   },
   {
-   "keyword": "한국 야구, 호주에 7-8 패배",
+   "keyword": "발언하는 이재명 대통령",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 24,
-   "recent20": 3,
-   "press": 23,
-   "firstArticleAt": "2026-11-12T07:05:00.000Z",
+   "articles90": 39,
+   "recent20": 11,
+   "press": 30,
+   "firstArticleAt": "2026-11-12T07:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "李대통령 \"자본시장 여전히 저평가…장기투자·주주환원 개혁 속도내야...",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-12T08:41:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=748345"
+    },
+    {
+     "title": "[퇴근길 정치 픽] \"다음주 삼성전자 면접본다\" 이재명·이재용 웃음짓게...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-12T08:40:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261112001429"
+    },
+    {
+     "title": "'지방소비세 단계적 확대' 보고에…李대통령 \"지방재정 자율성 높여야\"...",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-12T08:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005841972?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "폭설 김윤석 구교환 짜릿한 전율",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 24,
+   "recent20": 1,
+   "press": 21,
+   "firstArticleAt": "2026-11-12T07:21:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"재미없을 수 있겠나\"…5년 만에 만난 김윤석→구교환, 제대로 맞붙은 ...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-12T08:42:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000784192"
+    },
+    {
+     "title": "‘폭설’ 김윤석·구교환, 연기부터 서사까지 빈틈없다…밀도 높은 미스...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-12T08:24:00.000Z",
+     "link": "https://m.entertain.naver.com/article/119/0003154571"
+    },
+    {
+     "title": "'이옥섭과 결혼' 구교환, 유부남 공개 후 첫 영화 '폭설'...개인사 언급...",
+     "press": "starnewsk.com",
+     "publishedAt": "2026-11-12T08:12:00.000Z",
+     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60960"
+    }
+   ]
+  },
+  {
+   "keyword": "자본시장 저평가 대상",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 19,
+   "recent20": 4,
+   "press": 18,
+   "firstArticleAt": "2026-11-12T07:19:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李대통령 \"자본시장 여전히 저평가…장기투자·주주환원 개혁 속도내야...",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-12T08:41:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=748345"
+    },
+    {
+     "title": "李대통령 “국내 자본시장, 여전히 저평가된 매력적 투자 대상”",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-12T08:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003564816?sid=100"
+    },
+    {
+     "title": "이 대통령 “국내 자본시장 저평가…기업가치 제고·코스닥 육성 속도”",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-12T08:28:00.000Z",
+     "link": "https://www.viva100.com/article/20261112501361"
+    }
+   ]
+  },
+  {
+   "keyword": "한국, APBC 첫 경기서 호주에 패배",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 19,
+   "recent20": 3,
+   "press": 18,
+   "firstArticleAt": "2026-11-12T07:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "마운드 경험부족-2루수 부재 우려가 현실로...한국 야구, APBC 첫판부터 ...",
+     "press": "spochoo.com",
+     "publishedAt": "2026-11-12T08:35:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/529/0000079247"
+    },
+    {
+     "title": "야구 대표팀, APBC 개막전서 호주에 충격 재역전패 7-8",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-12T08:32:00.000Z",
+     "link": "https://www.insight.co.kr/news/581829"
+    },
     {
      "title": "6회 대역전에도 지키지 못했다…한국, 호주에 7대 8 재역전패",
      "press": "kmib.co.kr",
      "publishedAt": "2026-11-12T08:28:00.000Z",
      "link": "https://m.sports.naver.com/kbaseball/article/005/0001884787"
-    },
-    {
-     "title": "[2026 APBC] 한국, 호주에 7-8 충격적 역전패…불펜 난조, 결승 진출에 빨...",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-12T08:22:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1137150"
-    },
-    {
-     "title": "역전에도 불구, 마무리 실패…한국 야구대표팀 호주에 7-8 패배",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-12T08:18:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=624853"
     }
    ]
   },
   {
-   "keyword": "제주 감귤 첫 수출",
+   "keyword": "젠슨 황 불륜 논란",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 19,
-   "recent20": 0,
-   "press": 19,
-   "firstArticleAt": "2026-11-12T07:24:00.000Z",
+   "articles90": 16,
+   "recent20": 3,
+   "press": 14,
+   "firstArticleAt": "2026-11-12T07:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "제주 감귤, 우즈베키스탄 첫 수출",
-     "press": "bokuennews.com",
-     "publishedAt": "2026-11-12T08:10:00.000Z",
-     "link": "http://www.bokuennews.com/news/article.html?no=287097"
+     "title": "사내 불륜까지 터지자 … 황 신뢰했던 이사회도 돌아서",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-12T08:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005762985?sid=104"
     },
     {
-     "title": "제주 감귤, 우즈베키스탄 첫 수출…중앙아시아 판로 확대",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-12T08:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006409031?sid=101"
+     "title": "흔들리는 젠슨 황, 33년 만에 퇴진 위기…“국내 기업 오히려 기회될 수...",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-12T08:34:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611120179"
     },
     {
-     "title": "제주 감귤, 우즈베키스탄 첫 수출… 중앙아시아 시장 진출 본격화",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-12T08:02:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1136952"
+     "title": "‘AI 황제’ 젠슨 황, 해임 절차 돌입…삼성·SK, 엔비디아와 ‘AI 칩 동...",
+     "press": "ceoscoredaily.com",
+     "publishedAt": "2026-11-12T08:32:00.000Z",
+     "link": "https://www.ceoscoredaily.com/page/view/2026111212414225562"
     }
    ]
   },
@@ -144,10 +207,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 33,
-   "recent20": 2,
-   "press": 15,
-   "firstArticleAt": "2026-11-12T07:06:00.000Z",
+   "articles90": 29,
+   "recent20": 1,
+   "press": 13,
+   "firstArticleAt": "2026-11-12T07:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -176,63 +239,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
+   "articles90": 12,
    "recent20": 5,
-   "press": 13,
-   "firstArticleAt": "2026-11-12T07:07:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-12T07:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"수일째 연락 안돼\"…원룸 대형봉투서 발견된 30대",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-12T08:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005353279?sid=102"
+     "title": "오산 원룸서 비닐 싸인 30대 시신 발견... 경찰 수사 중",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-12T08:42:00.000Z",
+     "link": "https://www.insight.co.kr/news/581825"
+    },
+    {
+     "title": "\"연락이 안 돼요\" 원룸 문 열었더니…대형 비닐봉투 속 30대 시신",
+     "press": "weekly.chosun.com",
+     "publishedAt": "2026-11-12T08:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/053/0000062995?sid=102"
     },
     {
      "title": "오산 원룸서 남성 시신 발견...\"비닐 봉투에 담겨\"",
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-12T08:29:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002431991?sid=102"
-    },
-    {
-     "title": "[속보]오산 원룸서 대형 비닐봉투 속 30대男 시신 발견",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-12T08:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002832431?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황 불륜 논란",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 15,
-   "recent20": 4,
-   "press": 13,
-   "firstArticleAt": "2026-11-12T07:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘AI 황제’ 젠슨 황, 해임 절차 돌입…삼성·SK, 엔비디아와 ‘AI 칩 동...",
-     "press": "ceoscoredaily.com",
-     "publishedAt": "2026-11-12T08:32:00.000Z",
-     "link": "https://www.ceoscoredaily.com/page/view/2026111212414225562"
-    },
-    {
-     "title": "“남편의 큰 그림?”…젠슨 황에 앨리스 황 소개한 사람 정체",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-12T08:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000131824?sid=104"
-    },
-    {
-     "title": "알고도 빗장 풀었나…'AI 황제' 젠슨 황 불륜 스캔들, 트럼프 정부에 불...",
-     "press": "ilyo.co.kr",
-     "publishedAt": "2026-11-12T08:22:00.000Z",
-     "link": "https://ilyo.co.kr/?ac=article_view&entry_id=513583"
     }
    ]
   },
@@ -242,12 +272,18 @@
     "signal.bz"
    ],
    "articles90": 12,
-   "recent20": 3,
-   "press": 12,
-   "firstArticleAt": "2026-11-12T07:08:00.000Z",
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-12T07:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "조현·中왕이, APEC 앞두고 대좌…북미 대화 '北의중' 공유 주목",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-12T08:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009286660?sid=104"
+    },
     {
      "title": "조현, 13일 베이징서 왕이와 회담…정상회담 의제 조율 관심",
      "press": "kbsm.net",
@@ -259,148 +295,45 @@
      "press": "mt.co.kr",
      "publishedAt": "2026-11-12T08:20:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/008/0005440505?sid=104"
-    },
-    {
-     "title": "조현, 13일 베이징서 왕이 만난다…한중·한반도 정세 논의",
-     "press": "segye.com",
-     "publishedAt": "2026-11-12T08:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004174701?sid=100"
     }
    ]
   },
   {
-   "keyword": "이재용 투자 결정",
+   "keyword": "젠슨 황 해임 위기 및 스캔들",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 11,
+   "articles90": 7,
    "recent20": 1,
-   "press": 11,
+   "press": 6,
    "firstArticleAt": "2026-11-12T07:16:00.000Z",
-   "exclusive": true,
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "충청권 '메가프로젝트' 닻 올렸다…이재명 대통령·이재용 회장 동행",
-     "press": "youthdaily.co.kr",
-     "publishedAt": "2026-11-12T08:20:00.000Z",
-     "link": "https://www.youthdaily.co.kr/news/article.html?no=229775"
+     "title": "흔들리는 젠슨 황, 33년 만에 퇴진 위기…“국내 기업 오히려 기회될 수...",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-12T08:34:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611120179"
     },
     {
-     "title": "삼성 113조 투자 ‘첫 삽’…이 대통령·이재용, 아산서 첨단산업 도약...",
-     "press": "segye.com",
+     "title": "'첩첩산중' 코스피, 젠슨 황 해임설·옵션만기 '이중고'에 3일 만에 하락",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-12T08:02:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2647518"
+    },
+    {
+     "title": "'젠슨 황 해임 위기'에 발목 잡힌 코스피… 사흘 만에 약세 전환 5,342 마...",
+     "press": "fntoday.co.kr",
      "publishedAt": "2026-11-12T07:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004174695?sid=101"
-    },
-    {
-     "title": "'400조 투자' 충청권 메가프로젝트 삼성전자가 첫 테이프 끊었다 : 이재...",
-     "press": "huffingtonpost.kr",
-     "publishedAt": "2026-11-12T07:56:00.000Z",
-     "link": "https://www.huffingtonpost.kr/article/262035"
-    }
-   ]
-  },
-  {
-   "keyword": "한성숙 총리 간담회 참석",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 3,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T08:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "韓총리 \"체감 성과 연결되도록 규제 합리화 더욱 속도내야\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-12T08:32:00.000Z",
-     "link": "https://www.ajunews.com/view/20261112172644367"
-    },
-    {
-     "title": "대전 온 한성숙 총리 \"충청 경제발전 위해 규제완화 속도낼 것\"",
-     "press": "goodmorningcc.com",
-     "publishedAt": "2026-11-12T08:22:00.000Z",
-     "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=455727"
-    },
-    {
-     "title": "충청권 기업 규제 애로 쏟아져…한성숙 총리 \"개선 일정 구체화\"",
-     "press": "cctoday.co.kr",
-     "publishedAt": "2026-11-12T08:16:00.000Z",
-     "link": "https://www.cctoday.co.kr/news/articleView.html?idxno=2240167"
-    }
-   ]
-  },
-  {
-   "keyword": "사상 최초 2천만명",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T07:23:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "방한 외국인 관광객 사상 최초로 2천만 명 돌파",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-12T08:18:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261112001413"
-    },
-    {
-     "title": "韓 방문 외국인 관광객, 사상 첫 2천만 명 돌파...K-관광 새 역사",
-     "press": "starnewsk.com",
-     "publishedAt": "2026-11-12T08:12:00.000Z",
-     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60961"
-    },
-    {
-     "title": "[모멘트] 연간 방한객 사상 최초 2천만명 돌파",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-12T07:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016439191?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "뜨거운 안녕",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T07:15:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "강훈, 방송국 회식서 PD 갑질에 분노 (뜨거운 안녕)",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-12T08:21:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001304516"
-    },
-    {
-     "title": "'뜨거운 안녕' 이이담, 새 얼굴 갈아 끼운 반전⋯호기심 유발자",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-12T08:12:00.000Z",
-     "link": "http://www.joynews24.com/view/2025681"
-    },
-    {
-     "title": "이이담, ‘뜨거운 안녕’서 반전 정체 공개",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-12T08:00:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611120258"
+     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=398004"
     }
    ]
   },
   {
    "keyword": "정점식 원내대표 정순택",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 16,
    "recent20": 0,
@@ -434,10 +367,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T07:07:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-12T07:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -464,7 +397,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 373,
+  "flagged": 376,
   "matched": 131,
   "avgLeadMin": 1175,
   "recent": [
