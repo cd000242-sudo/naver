@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T15:37:39.911Z",
+ "builtAt": "2026-11-12T15:47:51.588Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,38 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
   {
-   "keyword": "젠슨 황 엔비디아 사임",
+   "keyword": "젠슨 황 엔비디아 CEO 사임",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 89,
-   "recent20": 9,
+   "articles90": 94,
+   "recent20": 12,
    "press": 67,
-   "firstArticleAt": "2026-11-12T14:39:00.000Z",
+   "firstArticleAt": "2026-11-12T14:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[젠슨 황 리스크] 엔비디아, 젠슨 황 33년 만에 전격 퇴진…크레스 임시...",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-12T15:34:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1731503"
+     "title": "\"엔비디아 성장 이어갈 수 있나\"…월가, 줄줄이 목표가 낮춰",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-12T15:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005353417?sid=104"
     },
     {
-     "title": "33년 만에 엔비디아 떠나는 젠슨 황…콜레트 크레스 임시 CEO 선임",
-     "press": "cnet.co.kr",
-     "publishedAt": "2026-11-12T15:30:00.000Z",
-     "link": "https://www.cnet.co.kr/view/?no=20261113002605"
+     "title": "트럼프 \"젠슨 황이 사임했으니 대신할 사람은 애플의 팀 쿡뿐\"(상보)",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-12T15:46:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4444512"
     },
     {
-     "title": "美 뉴욕증시, 젠슨 황 엔비디아 CEO 사임 속 혼조세 출발",
-     "press": "segye.com",
-     "publishedAt": "2026-11-12T15:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004174783?sid=104"
+     "title": "젠슨황 없는 'AI중앙은행' 엔비디아 최대위기…AI산업 대혼돈 예고(종합...",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-12T15:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016439542?sid=104"
     }
    ]
   },
@@ -49,10 +48,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-12T14:08:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-12T14:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -81,13 +80,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
    "firstArticleAt": "2026-11-12T14:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "젠틀몬스터, 삼성·구글 AI 결합한 스마트안경 16종 공개⋯65만원부터",
+     "press": "autodaily.co.kr",
+     "publishedAt": "2026-11-12T15:40:00.000Z",
+     "link": "https://www.autodaily.co.kr/news/articleView.html?idxno=602056"
+    },
     {
      "title": "[르포]\"내 눈이 AI 눈으로 확장됐네요\"…젠틀몬스터 안경에 들어온 제미...",
      "press": "view.asiae.co.kr",
@@ -99,52 +104,13 @@
      "press": "harpersbazaar.co.kr",
      "publishedAt": "2026-11-12T14:40:00.000Z",
      "link": "https://www.harpersbazaar.co.kr/article/1912981"
-    },
-    {
-     "title": "삼성전자, 구글·젠틀몬스터·워비파커와 협업한 인텔리전트 아이웨어 ...",
-     "press": "betanews.net",
-     "publishedAt": "2026-11-12T14:34:00.000Z",
-     "link": "https://www.betanews.net/article/view/beta202611120227"
-    }
-   ]
-  },
-  {
-   "keyword": "amd 주가",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T14:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "젠슨 황 사임 발표 후 엔비디아 주가 10.4% 급락…나스닥 선물도 흔들, ...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-12T14:22:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16275282"
-    },
-    {
-     "title": "젠슨 황 결국 축출, 엔비디아 주가 14% 폭락…여성 CFO가 임시 사령탑",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-12T14:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003058903?sid=101"
-    },
-    {
-     "title": "뉴욕증시 개장 전 특징주...엔비디아 10% 급락·AMD 상승",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-12T14:10:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261112001498"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 390,
+  "flagged": 391,
   "matched": 143,
   "avgLeadMin": 778,
   "recent": [
