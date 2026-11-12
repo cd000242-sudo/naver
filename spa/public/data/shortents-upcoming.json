@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T14:26:52.626Z",
+ "builtAt": "2026-11-12T14:37:03.214Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,18 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 23,
  "candidates": [
   {
-   "keyword": "김민석 최민희 감찰 지시",
+   "keyword": "최민희 언행 논란 감찰 지시",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 17,
-   "recent20": 1,
-   "press": 14,
-   "firstArticleAt": "2026-11-12T12:57:00.000Z",
+   "articles90": 9,
+   "recent20": 0,
+   "press": 9,
+   "firstArticleAt": "2026-11-12T13:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -43,74 +44,41 @@
    ]
   },
   {
-   "keyword": "젠슨황 사임",
+   "keyword": "최성훈 사업실패",
    "sources": [
     "daum"
    ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-12T13:56:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "젠슨황 엔비디아 CEO 공식 사임…CFO 크레스 임시경영",
-     "press": "kdfnews.com",
-     "publishedAt": "2026-11-12T14:20:00.000Z",
-     "link": "http://www.kdfnews.com/news/articleView.html?idxno=190864"
-    },
-    {
-     "title": "젠슨황 엔비디아 CEO 사임, CFO가 임시 경영",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-12T14:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000161162?sid=101"
-    },
-    {
-     "title": "'中 스파이 스캔들' 젠슨황 엔비디아 CEO 사임…CFO가 임시경영",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-12T14:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016439480?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "폭설",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-12T13:00:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-12T13:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'폭설' 구교환→노윤서, 겨울 감성 물씬 '연기 신'들의 VIP 시사회 [K직캠...",
-     "press": "starnewsk.com",
-     "publishedAt": "2026-11-12T13:36:00.000Z",
-     "link": "http://www.starnewsk.com/news/articleView.html?idxno=60973"
+     "title": "최성훈 \"전성기, 돈 무서운 줄 몰랐다...연이은 사업실패 속 사람에 상처...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-12T14:07:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001408117"
     },
     {
-     "title": "[포토] 이도아, '독보적인 아우라'(폭설 VIP 시사회)",
-     "press": "newsfreezone.co.kr",
-     "publishedAt": "2026-11-12T13:08:00.000Z",
-     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=719128"
+     "title": "'특종세상' 개그맨 최성훈, 연이은 사업 실패 후 시골에서 유튜브하는 ...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-12T13:12:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16275232"
     },
     {
-     "title": "[포토] 이도아, '매력적인 단발'(폭설 VIP 시사회)",
-     "press": "newsfreezone.co.kr",
-     "publishedAt": "2026-11-12T13:04:00.000Z",
-     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=719127"
+     "title": "\"미치고 홀렸다\" 톱개그맨의 몰락..사업 실패에 뇌경색 덮친 '사라진 26...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-12T13:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004466318"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 384,
+  "flagged": 386,
   "matched": 140,
   "avgLeadMin": 775,
   "recent": [
