@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T11:55:43.906Z",
+ "builtAt": "2026-11-12T12:05:47.795Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,133 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 21,
+ "measured": 22,
  "candidates": [
   {
-   "keyword": "북한 G7 비핵화 반발",
+   "keyword": "젠슨 황 해임 위기",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-12T10:31:00.000Z",
+   "articles90": 9,
+   "recent20": 3,
+   "press": 9,
+   "firstArticleAt": "2026-11-12T10:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "北 \"G7은 존재가치 상실 정치집단\" ..비핵화 요구에 반발",
+     "title": "젠슨 황 해임 위기에 AI업계 '비상'… 투자 위축·규제 강화 우려",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-12T12:02:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3448306"
+    },
+    {
+     "title": "HBM-자율차-로봇-AI팩토리…깐부 기업들 ‘젠슨 황 스캔들’ 주시",
+     "press": "donga.com",
+     "publishedAt": "2026-11-12T11:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003762130?sid=101"
+    },
+    {
+     "title": "젠슨 황 해임 위기·미국 규제 강화 움직임에 삼전닉스 초긴장 [앵커리...",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-12T11:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432081?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "천안서 발달장애 어머니",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 3,
+   "press": 9,
+   "firstArticleAt": "2026-11-12T10:57:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "천안서 발달장애 10대 사망…학대 정황 발견, 母 긴급체포",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-12T11:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005353380?sid=102"
+    },
+    {
+     "title": "(R)\"발달장애 아들 사망에 엄마 긴급체포\"…'결박 의혹' 수사",
+     "press": "tjb.co.kr",
+     "publishedAt": "2026-11-12T11:52:00.000Z",
+     "link": "https://www.tjb.co.kr/news05/bodo/view/id/106023"
+    },
+    {
+     "title": "\"아들이 숨을 안 쉰다\"…집 안에 묶여 있던 발달장애 10대 사망",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-12T11:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006409150?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "조희대",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-12T10:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "법원행정처장, ‘한덕수 석방시 조희대 탄핵’ 與 주장에 “부적절”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-12T12:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003762131?sid=102"
+    },
+    {
+     "title": "법원행정처장, ‘한덕수 석방시 조희대 탄핵’ 주장에 “부적절”",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-12T11:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002831985?sid=100"
+    },
+    {
+     "title": "한덕수가 되살린 '조희대 국조' 카드…'탄핵' 직행할 수도",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-12T11:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000520486?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "김승원 브로커 징역 4년 구형",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-12T10:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "공소청, '김승원 후원금 청탁 의혹' 제넨셀 설립자에 징역 6개월 구형",
+     "press": "daily.hankooki.com",
+     "publishedAt": "2026-11-12T12:02:00.000Z",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1424733"
+    },
+    {
+     "title": "檢 '김승원 신약 청탁' 브로커에 징역 4년 구형…6억원 추징 요청",
      "press": "fnnews.com",
-     "publishedAt": "2026-11-12T11:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005603692?sid=100"
+     "publishedAt": "2026-11-12T11:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005603694?sid=102"
     },
     {
-     "title": "北외무상 \"핵보유 의지 절대불변\"…G7 '北비핵화' 성명 반발",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-12T11:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000192277?sid=104"
-    },
-    {
-     "title": "최선희, G7 '완전한 비핵화' 성명 반발…\"핵 보유 입장 절대불변\"",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-12T10:52:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5082947"
+     "title": "공소청, '김승원 청탁의혹' 브로커에 징역 4년 구형(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-12T11:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016439397?sid=102"
     }
    ]
   },
@@ -47,10 +143,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-12T10:33:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-12T11:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -67,117 +163,62 @@
      "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1543563"
     },
     {
-     "title": "10대 소녀 살해한 50대 남성에 구속영장 청구…여전히 진술 거부",
-     "press": "view.asiae.co.kr",
+     "title": "10대 소녀 살해한 50대 남성, 이틀째 묵비권…구속영장 청구",
+     "press": "ajunews.com",
      "publishedAt": "2026-11-12T11:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005842015?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "김승원 브로커 징역 4년 구형",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-12T10:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "檢 '김승원 신약 청탁' 브로커에 징역 4년 구형…6억원 추징 요청",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-12T11:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005603694?sid=102"
-    },
-    {
-     "title": "공소청, '김승원 청탁의혹' 브로커에 징역 4년 구형(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-12T11:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016439397?sid=102"
-    },
-    {
-     "title": "공소청, '김승원 청탁 의혹' 연루 제넨셀 설립자와 브로커 모두 징역형...",
-     "press": "ngonews.kr",
-     "publishedAt": "2026-11-12T11:22:00.000Z",
-     "link": "https://www.ngonews.kr/news/articleView.html?idxno=243045"
-    }
-   ]
-  },
-  {
-   "keyword": "플라이빗 해킹 정보유출",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T10:43:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "코인마켓 거래소 ‘플라이빗’서 40명 개인정보 유출… 그룹웨어 통해 ...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-12T11:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001204451?sid=101"
-    },
-    {
-     "title": "'또 그룹웨어 해킹' 플라이빗 고객정보 유출",
-     "press": "safetimes.co.kr",
-     "publishedAt": "2026-11-12T11:16:00.000Z",
-     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247458"
-    },
-    {
-     "title": "코인마켓 거래소 '플라이빗' 해킹…고객 40명 개인정보 유출",
-     "press": "newsway.co.kr",
-     "publishedAt": "2026-11-12T11:00:00.000Z",
-     "link": "https://www.newsway.co.kr/news/view?ud=2026111219564317964"
-    }
-   ]
-  },
-  {
-   "keyword": "부동산",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T10:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "알스퀘어, 카드매출 데이터로 건물·매장 경쟁력 분석…상업용 부동산 ...",
-     "press": "venturesquare.net",
-     "publishedAt": "2026-11-12T11:08:00.000Z",
-     "link": "https://www.venturesquare.net/1127940/"
-    },
-    {
-     "title": "與 지도부, '종부세 14억' 선 그었지만… 수도권 의원들 \"문제는 부동산...",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-12T11:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000965309?sid=100"
-    },
-    {
-     "title": "김해시, 공인중개사 200여 명 대상 부동산 거래사고 예방 교육",
-     "press": "newstown.co.kr",
-     "publishedAt": "2026-11-12T10:28:00.000Z",
-     "link": "http://www.newstown.co.kr/news/articleView.html?idxno=721739"
+     "link": "https://www.ajunews.com/view/20261112201726634"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 389,
-  "matched": 132,
-  "avgLeadMin": 870,
+  "flagged": 391,
+  "matched": 139,
+  "avgLeadMin": 846,
   "recent": [
+   {
+    "keyword": "충청권 메가프로젝트 착공식",
+    "hitKeyword": "삼성 온양 메가프로젝트",
+    "hitAt": "2026-11-12T21:00:00+09:00",
+    "leadMin": 593
+   },
+   {
+    "keyword": "메가프로젝트 이재명 대통령",
+    "hitKeyword": "삼성 온양 메가프로젝트",
+    "hitAt": "2026-11-12T21:00:00+09:00",
+    "leadMin": 538
+   },
+   {
+    "keyword": "이재명 메가프로젝트 회의 발언",
+    "hitKeyword": "삼성 온양 메가프로젝트",
+    "hitAt": "2026-11-12T21:00:00+09:00",
+    "leadMin": 528
+   },
+   {
+    "keyword": "200만달러",
+    "hitKeyword": "오스틴 200만 달러 재계약",
+    "hitAt": "2026-11-12T21:00:00+09:00",
+    "leadMin": 377
+   },
+   {
+    "keyword": "충청권 메가프로젝트 착공",
+    "hitKeyword": "삼성 온양 메가프로젝트",
+    "hitAt": "2026-11-12T21:00:00+09:00",
+    "leadMin": 337
+   },
+   {
+    "keyword": "충청권 메가프로젝트 추가 투자",
+    "hitKeyword": "삼성 온양 메가프로젝트",
+    "hitAt": "2026-11-12T21:00:00+09:00",
+    "leadMin": 176
+   },
+   {
+    "keyword": "김지호 잘츠부르크 이적",
+    "hitKeyword": "김지호 유럽 진출",
+    "hitAt": "2026-11-12T21:00:00+09:00",
+    "leadMin": 95
+   },
    {
     "keyword": "한국 야구, 호주에 7-8 패배",
     "hitKeyword": "한국 야구 호주전 패배",
@@ -195,48 +236,6 @@
     "hitKeyword": "여자축구 B조 확정",
     "hitAt": "2026-11-12T20:30:00+09:00",
     "leadMin": 105
-   },
-   {
-    "keyword": "여자축구 LA 올림픽 최종예선 B조",
-    "hitKeyword": "여자축구 B조 확정",
-    "hitAt": "2026-11-12T20:30:00+09:00",
-    "leadMin": 65
-   },
-   {
-    "keyword": "여자축구, LA 올림픽 최종예선 B조",
-    "hitKeyword": "여자축구 B조 확정",
-    "hitAt": "2026-11-12T20:30:00+09:00",
-    "leadMin": 25
-   },
-   {
-    "keyword": "캐릭",
-    "hitKeyword": "맨유 캐릭 감독 경질",
-    "hitAt": "2026-11-12T20:30:00+09:00",
-    "leadMin": 15
-   },
-   {
-    "keyword": "반도체 유가 민간소비 영향",
-    "hitKeyword": "삼성 SK 반도체 인력 부족",
-    "hitAt": "2026-11-12T20:00:00+09:00",
-    "leadMin": 348
-   },
-   {
-    "keyword": "반도체 호황과 유가가 소비에 미치는 영향",
-    "hitKeyword": "삼성 SK 반도체 인력 부족",
-    "hitAt": "2026-11-12T20:00:00+09:00",
-    "leadMin": 338
-   },
-   {
-    "keyword": "젠슨 황 해임 위기",
-    "hitKeyword": "젠슨 황 해임 착수",
-    "hitAt": "2026-11-12T20:00:00+09:00",
-    "leadMin": 116
-   },
-   {
-    "keyword": "젠슨 황 해임 검토 중",
-    "hitKeyword": "젠슨 황 해임 착수",
-    "hitAt": "2026-11-12T20:00:00+09:00",
-    "leadMin": 96
    }
   ]
  }
