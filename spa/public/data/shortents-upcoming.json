@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T21:19:16.851Z",
+ "builtAt": "2026-11-13T21:29:20.055Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,17 +11,87 @@
  "measured": 25,
  "candidates": [
   {
+   "keyword": "젠슨 황 퇴진하나",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 10,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-13T20:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[속보] 엔비디아, 젠슨 황 스캔들 여파 지속 '2.01%↓'…뉴욕증시 혼조 ...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-13T21:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003155060?sid=104"
+    },
+    {
+     "title": "FT “엔비디아 이사회, 젠슨 황 후임으로 Arm CEO 접촉”",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-13T21:22:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2648129"
+    },
+    {
+     "title": "“가죽재킷에 13억 쓴 낙찰자는 무슨 죄”…젠슨 황 스캔들에 프리미엄...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-13T21:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004682098?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "전국 흐리고 최대",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-13T20:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오늘 날씨] 전국 대부분 가을비-제주 최대 60㎜⋯한낮 15도 안팎 포근",
+     "press": "econonews.co.kr",
+     "publishedAt": "2026-11-13T21:26:00.000Z",
+     "link": "http://www.econonews.co.kr/news/articleView.html?idxno=447174"
+    },
+    {
+     "title": "[날씨] 전국 흐리고 밤까지 비…제주·남부 5㎜~최대 50㎜",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-13T21:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001402956?sid=103"
+    },
+    {
+     "title": "[날씨] 전국 흐리고 대부분 비…제주 이틀간 최대 50㎜",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-13T21:22:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=781587"
+    }
+   ]
+  },
+  {
    "keyword": "모레노호 사우디에 2-3 패배",
    "sources": [
     "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 2,
    "press": 4,
-   "firstArticleAt": "2026-11-13T19:57:00.000Z",
+   "firstArticleAt": "2026-11-13T20:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "사우디에 무너진 모레노호… 42년 만의 3실점",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-13T21:20:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3448641"
+    },
     {
      "title": "내분 풀고 경기는 못 푼 모레노호…사우디에 42년만에 3실점 패배",
      "press": "seoul.co.kr",
@@ -33,12 +103,6 @@
      "press": "interfootball.co.kr",
      "publishedAt": "2026-11-13T20:55:00.000Z",
      "link": "https://m.sports.naver.com/kfootball/article/413/0000226563"
-    },
-    {
-     "title": "'공격도 따로, 수비도 따로' 이게 원팀인가 모레노호, 선수들 간격 벌어...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-13T20:23:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/109/0005640127"
     }
    ]
   },
@@ -48,7 +112,7 @@
     "nate"
    ],
    "articles90": 4,
-   "recent20": 3,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-13T20:00:00.000Z",
    "exclusive": false,
@@ -81,7 +145,7 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-13T20:01:00.000Z",
    "exclusive": false,
@@ -110,7 +174,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 431,
+  "flagged": 433,
   "matched": 180,
   "avgLeadMin": 365,
   "recent": [
