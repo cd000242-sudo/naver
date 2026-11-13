@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T16:17:19.815Z",
+ "builtAt": "2026-11-13T16:27:27.145Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "젠슨 황과 엔비디아",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 34,
-   "recent20": 5,
+   "articles90": 33,
+   "recent20": 2,
    "press": 20,
-   "firstArticleAt": "2026-11-13T14:48:00.000Z",
+   "firstArticleAt": "2026-11-13T15:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -48,10 +48,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 18,
+   "articles90": 13,
    "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-13T14:48:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-13T15:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -76,44 +76,12 @@
    ]
   },
   {
-   "keyword": "조현 한반도 평화 공동이익",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 10,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-13T14:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "조현 \"한반도 문제는 한국의 사활적 이익\"...中 건설적 역할 당부",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-13T15:27:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261114000004"
-    },
-    {
-     "title": "조현, 중국에 '한반도 문제' 역할 당부…왕이 \"정책 변함없어\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-13T15:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926042?sid=100"
-    },
-    {
-     "title": "APEC 앞두고 한중외교장관 회담…조현 \"中 한반도 건설적 역할\" 당부",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-13T15:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014321699?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "나혼자산다 박지현",
    "sources": [
     "daum"
    ],
    "articles90": 11,
-   "recent20": 2,
+   "recent20": 0,
    "press": 8,
    "firstArticleAt": "2026-11-13T15:14:00.000Z",
    "exclusive": false,
@@ -144,13 +112,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 8,
    "recent20": 1,
-   "press": 6,
+   "press": 7,
    "firstArticleAt": "2026-11-13T15:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "미국 10월 도매 물가 전년보다 6.5%↑...4년 만에 최고",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-13T16:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432660?sid=104"
+    },
     {
      "title": "미 10월 도매물가 전년 대비 6.5% 상승…4년만에 최고",
      "press": "yonhapnewstv.co.kr",
@@ -162,44 +136,39 @@
      "press": "news.einfomax.co.kr",
      "publishedAt": "2026-11-13T15:56:00.000Z",
      "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4444738"
-    },
-    {
-     "title": "美 10월 생산자물가지수 0.3% 상승…시장 전망치 하회(상보)",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-13T15:40:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4444737"
     }
    ]
   },
   {
-   "keyword": "한중 외교장관 회담",
+   "keyword": "조현 한반도 평화 공동이익",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 4,
+   "articles90": 8,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-13T14:48:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-13T14:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "조현 \"한반도 문제는 한국의 사활적 이익\"...中 건설적 역할 당부",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-13T15:27:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261114000004"
+    },
+    {
+     "title": "조현, 중국에 '한반도 문제' 역할 당부…왕이 \"정책 변함없어\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-13T15:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926042?sid=100"
+    },
     {
      "title": "APEC 앞두고 한중외교장관 회담…조현 \"中 한반도 건설적 역할\" 당부",
      "press": "newsis.com",
      "publishedAt": "2026-11-13T15:14:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014321699?sid=100"
-    },
-    {
-     "title": "韓은 '한반도 비핵화'·中은 '하나의 중국'…한중 외교장관 온도차(종합...",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-13T15:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006409712?sid=100"
-    },
-    {
-     "title": "조현 장관 한반도 평화는 한중 공동이익 주장",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-13T14:52:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261113010005346"
     }
    ]
   },
