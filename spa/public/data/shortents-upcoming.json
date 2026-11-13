@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T23:30:11.613Z",
+ "builtAt": "2026-11-13T23:40:18.105Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,49 +8,18 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
-  {
-   "keyword": "미국 전역 중단",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 30,
-   "recent20": 9,
-   "press": 26,
-   "firstArticleAt": "2026-11-13T22:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "(2보)美 전역 항공기 이륙 중단…8000편 지연·400편 결항",
-     "press": "kbmaeil.com",
-     "publishedAt": "2026-11-13T23:28:00.000Z",
-     "link": "https://www.kbmaeil.com/article/20261114500028"
-    },
-    {
-     "title": "[속보] 미국 전역 항공기 이륙 전면 중단…관제 통신 장애에 초유의 사...",
-     "press": "pointe.co.kr",
-     "publishedAt": "2026-11-13T23:28:00.000Z",
-     "link": "https://www.pointe.co.kr/news/articleView.html?idxno=87767"
-    },
-    {
-     "title": "美전역 항공기 운항 ‘올스톱’...“사이버 공격 아닌 통신 장애”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-13T23:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004682119?sid=104"
-    }
-   ]
-  },
   {
    "keyword": "집",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 19,
-   "recent20": 2,
-   "press": 16,
-   "firstArticleAt": "2026-11-13T22:05:00.000Z",
+   "articles90": 16,
+   "recent20": 0,
+   "press": 14,
+   "firstArticleAt": "2026-11-13T22:19:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
@@ -77,45 +46,109 @@
   {
    "keyword": "날씨",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 15,
-   "recent20": 2,
+   "articles90": 19,
+   "recent20": 6,
    "press": 13,
-   "firstArticleAt": "2026-11-13T22:02:00.000Z",
+   "firstArticleAt": "2026-11-13T22:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[수도권 날씨예보] 밤까지 비…15일 낮 최고 20도 '포근'",
+     "title": "[대전·세종·충남 날씨예보] 14일 밤까지 비 최대 30㎜",
      "press": "thefairnews.co.kr",
-     "publishedAt": "2026-11-13T23:26:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94171"
+     "publishedAt": "2026-11-13T23:38:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94174"
     },
     {
-     "title": "[부산·울산·경남 날씨예보] 15일 새벽까지 비 최대 30㎜…16일 강풍·풍...",
+     "title": "[제주도 날씨예보] 15일 아침까지 최대 50㎜ 비…산간도로 짙은 안개",
      "press": "thefairnews.co.kr",
+     "publishedAt": "2026-11-13T23:34:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94173"
+    },
+    {
+     "title": "[오늘 날씨] 전국 대부분 비…제주 최고 50mm, 모레 강원산지 1~5cm 눈",
+     "press": "mhns.co.kr",
+     "publishedAt": "2026-11-13T23:34:00.000Z",
+     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=769084"
+    }
+   ]
+  },
+  {
+   "keyword": "유람선-화물선 충돌",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 8,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-13T22:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“살기 위해 난간 기어 넘었다”…美, 미시시피강서 유람선·화물선 충...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-13T23:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002723347?sid=104"
+    },
+    {
+     "title": "미국 미시시피강서 선박 충돌…승객 129명 태운 여객선 옆으로 누웠다",
+     "press": "hani.co.kr",
      "publishedAt": "2026-11-13T23:18:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94170"
+     "link": "https://n.news.naver.com/mnews/article/028/0002832184?sid=104"
     },
     {
-     "title": "[전국 지역별 오늘의 날씨 및 주말날씨]오늘 전국 비, 모레 동해안 중심...",
-     "press": "economytalk.kr",
-     "publishedAt": "2026-11-13T23:04:00.000Z",
-     "link": "http://www.economytalk.kr/news/articleView.html?idxno=425319"
+     "title": "미국 미시시피강서 유람선-화물선 충돌…승객 129명 구조 진행",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-13T23:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000161209?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "트럼프 전작권 전환",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-13T22:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"전작권 전환이 미군 철수 계기 될 수도\"…미 전문가들 우려",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-13T23:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000121331?sid=102"
+    },
+    {
+     "title": "브룩스 前사령관 \"전작권 당장 전환? 시험도 안 보고 졸업하는 격\"…강...",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-13T23:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001040191?sid=104"
+    },
+    {
+     "title": "\"트럼프에 전작권 전환은 주한미군 철수 명분\"…워싱턴서 제기된 우려",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-13T23:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002394035?sid=104"
     }
    ]
   },
   {
    "keyword": "돈",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 7,
+   "articles90": 5,
    "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-13T22:01:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-13T22:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -140,82 +173,23 @@
    ]
   },
   {
-   "keyword": "모레노호 사우디에 2-3 패배",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-13T22:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한국, 사우디에도 졌다…오현규·이재성 골에도 21년 만에 충격패, 순흥...",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-13T23:04:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1137481"
-    },
-    {
-     "title": "화합 다짐한 모레노호, 수비는 흔들렸다… 사우디에 21년 만에 패배",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-13T22:58:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/469/0000965523"
-    },
-    {
-     "title": "모레노호, 사우디전서 42년 만의 3실점 패배...\"입장문 약속은 어디갔나...",
-     "press": "kbsm.net",
-     "publishedAt": "2026-11-13T22:58:00.000Z",
-     "link": "https://www.kbsm.net/news/view.php?idx=541660"
-    }
-   ]
-  },
-  {
-   "keyword": "2026년 11월 14일 운세",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 3,
-   "press": 4,
-   "firstArticleAt": "2026-11-13T22:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "오늘의 별자리 운세 11월 14일 토요일",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-13T23:28:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=404832"
-    },
-    {
-     "title": "[오늘의 운세] 띠별 운세 11월 14일",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-13T23:26:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=404831"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 14일 띠별 운세",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-13T23:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003485522?sid=103"
-    }
-   ]
-  },
-  {
    "keyword": "주한 미군의 철수",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 1,
-   "press": 3,
+   "press": 4,
    "firstArticleAt": "2026-11-13T22:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"전작권 전환이 미군 철수 계기 될 수도\"…미 전문가들 우려",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-13T23:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000121331?sid=102"
+    },
     {
      "title": "\"트럼프에 전작권 전환은 주한미군 철수 명분\"…워싱턴서 제기된 우려",
      "press": "joseilbo.com",
@@ -227,22 +201,87 @@
      "press": "munhwa.com",
      "publishedAt": "2026-11-13T23:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/021/0002832717?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "faa",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-13T22:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "USA FAA GROUNDSTOP",
+     "press": null,
+     "publishedAt": "2026-11-13T23:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/091/0010368434?sid=104"
     },
     {
-     "title": "美전문가들 \"트럼프, 전작권 전환을 주한미군 철수 수단으로 봐\"",
-     "press": "tfmedia.co.kr",
-     "publishedAt": "2026-11-13T22:44:00.000Z",
-     "link": "https://www.tfmedia.co.kr/news/article.html?no=208882"
+     "title": "美 하늘길 멈췄다…FAA \"항공로 관제센터 통신 장애\", 사이버공격 배제...",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-13T23:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002248531?sid=105"
+    },
+    {
+     "title": "epaselect USA FAA GROUNDSTOP",
+     "press": null,
+     "publishedAt": "2026-11-13T23:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/091/0010368422?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황 없는 엔비디아 위기",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-13T22:57:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프 뜻 따랐다는 러트닉…엔비디아 스캔들에 '경질' 위기",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-13T23:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005353790?sid=104"
+    },
+    {
+     "title": "젠슨 황의 외도가 부른 ‘테일 리스크’, 조작기소 특검법이 그런 위험...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-13T23:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005763591?sid=101"
+    },
+    {
+     "title": "트럼프가 시켰다는 러트닉…젠슨 황 비호 의혹에 '경질론' 비상",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-13T22:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000543619?sid=104"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 446,
-  "matched": 186,
-  "avgLeadMin": 359,
+  "flagged": 450,
+  "matched": 187,
+  "avgLeadMin": 357,
   "recent": [
+   {
+    "keyword": "美항공청 항공편 이륙 중단",
+    "hitKeyword": "미국 공항 이륙 중단",
+    "hitAt": "2026-11-14T08:30:00+09:00",
+    "leadMin": 60
+   },
    {
     "keyword": "미국 항공 운항 중단",
     "hitKeyword": "미국항공청 운항 중단",
@@ -294,12 +333,6 @@
    {
     "keyword": "구성환 4대",
     "hitKeyword": "구성환 고교 4대천왕",
-    "hitAt": "2026-11-14T06:00:00+09:00",
-    "leadMin": 343
-   },
-   {
-    "keyword": "젠슨 황 퇴진 엔비디아 위기",
-    "hitKeyword": "엔비디아 투자 경고",
     "hitAt": "2026-11-14T06:00:00+09:00",
     "leadMin": 343
    }
