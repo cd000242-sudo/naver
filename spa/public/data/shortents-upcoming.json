@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T02:43:50.820Z",
+ "builtAt": "2026-11-13T15:06:28.950Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,268 +8,330 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 24,
  "candidates": [
   {
-   "keyword": "젠슨 황 퇴진 엔비디아 충격",
+   "keyword": "미국 10월 생산자물가",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 26,
-   "recent20": 9,
-   "press": 22,
-   "firstArticleAt": "2026-11-13T01:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘AI중앙은행’ 휘청·순환거래 위축·규제강화 겹악재…AI 대혼란 [퇴진...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-13T02:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002723109?sid=104"
-    },
-    {
-     "title": "'240조 약속 어쩌나'…젠슨황 퇴진에 AI 산업 '초비상', 깐부동맹 초긴장",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-13T02:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000543484?sid=101"
-    },
-    {
-     "title": "엔비디아 주가 급락에 美 개미·서학개미 나란히 ‘줍줍’",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-13T02:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002723103?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "자본시장 간담회 이재명 발언",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 26,
-   "recent20": 3,
-   "press": 16,
-   "firstArticleAt": "2026-11-13T01:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘빨간 넥타이’로 거래소 찾은 李…“자본시장 정상화 의심할 여지 없...",
-     "press": "news2day.co.kr",
-     "publishedAt": "2026-11-13T02:40:00.000Z",
-     "link": "https://www.news2day.co.kr/article/20261113500137"
-    },
-    {
-     "title": "李대통령 \"자본시장 개혁 의지 시험대…정상화는 정부의 확고한 목표\"",
-     "press": "efnews.co.kr",
-     "publishedAt": "2026-11-13T02:38:00.000Z",
-     "link": "http://www.efnews.co.kr/news/articleView.html?idxno=133938"
-    },
-    {
-     "title": "李 대통령 \"중수청에 자본시장 불공정행위 엄정 단속 별도 지시\"",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-13T02:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001074821?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "박재상 퓨처스 감독 선임",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 14,
-   "recent20": 3,
-   "press": 14,
-   "firstArticleAt": "2026-11-13T01:15:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "SSG, 박재상 신임 퓨처스팀 감독 선임",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-13T02:42:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/382/0001304636"
-    },
-    {
-     "title": "SSG, 신임 퓨처스 감독으로 박재상 선임",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-13T02:30:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/055/0001402802"
-    },
-    {
-     "title": "SSG, 박재상 육성군 총괄 코치 퓨처스 신임 감독으로 선임",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-13T02:24:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1137303"
-    }
-   ]
-  },
-  {
-   "keyword": "김민석 최고위 참석",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 22,
-   "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-13T01:19:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "친청계, 공개 최고위 불참하고 기자회견…\"감찰 대상은 김민석 대표\"",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-13T02:36:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261113500054"
-    },
-    {
-     "title": "친청계, 최고위 집단 불참 … 별도 회견 열고 \"김민석 감찰하라\"",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-13T02:26:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/13/2026111300115.html"
-    },
-    {
-     "title": "'최고위 불참' 친청계 \"반분신 의혹, 정청래 표적…감찰 대상은 김민석...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-13T02:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009287653?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "ICAO 항공안전평가",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 10,
-   "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-13T02:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "ICAO 항공안전평가 12월 2일 시작…범정부 총력 대응 나서",
-     "press": "bizwork.co.kr",
-     "publishedAt": "2026-11-13T02:12:00.000Z",
-     "link": "https://www.bizwork.co.kr/news/articleView.html?idxno=420808"
-    },
-    {
-     "title": "정부, 12월 ICAO 항공안전평가 대응…공항 안전감독 전담조직 추진",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-13T02:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005440764?sid=101"
-    },
-    {
-     "title": "정부, 내달 ICAO 항공안전평가 앞두고 범정부 합동점검",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-13T02:02:00.000Z",
-     "link": "https://www.ajunews.com/view/20261113085223995"
-    }
-   ]
-  },
-  {
-   "keyword": "송혜교·공유 12월 11일 공개",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 8,
+   "articles90": 16,
    "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-13T01:14:00.000Z",
+   "press": 15,
+   "firstArticleAt": "2026-11-13T13:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "송혜교·공유·김설현·차승원 ‘천천히 강렬하게’, 베일 벗었다… 티...",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-13T02:26:00.000Z",
-     "link": "https://www.viva100.com/article/20261113500297"
+     "title": "美 10월 도매물가 전달 대비 3.0%↑…시장 예상치 밑돌아",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-13T15:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005440993?sid=101"
     },
     {
-     "title": "송혜교·공유 '천천히 강렬하게', 22부작 3주간 나눠 공개",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-13T01:36:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2647813"
+     "title": "미국증시, 물가 둔화에도 나스닥 하락…엔비디아·SK하이닉스 약세, 다...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-13T14:44:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16276154"
     },
     {
-     "title": "'천천히 강렬하게', 12월 11일부터 3주 간 파트별 공개…분할 이유는?",
-     "press": "star.ytn.co.kr",
-     "publishedAt": "2026-11-13T01:34:00.000Z",
-     "link": "https://m.entertain.naver.com/article/052/0002432289"
+     "title": "미 10월 생산자물가 1년 새 6.5% 상승, 2022년 11월 이후 최고",
+     "press": "radiokorea.com",
+     "publishedAt": "2026-11-13T14:40:00.000Z",
+     "link": "https://www.radiokorea.com/news/article.php?uid=509485"
+    }
+   ]
+  },
+  {
+   "keyword": "손흥민 사우디전 96라인",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 15,
+   "recent20": 1,
+   "press": 14,
+   "firstArticleAt": "2026-11-13T13:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'황희찬 패스→손흥민 슈팅' 아쉽게 빗나갔다...'불화설' 뒤로하고 사우...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-13T14:55:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/109/0005640080"
+    },
+    {
+     "title": "'불화설' 축구대표팀, 오늘 밤 사우디전...손흥민 \"경기력으로 보답\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-13T14:32:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/052/0002432638"
+    },
+    {
+     "title": "손흥민과 96라인 '3인방', 전원 선발 출격…불화설 털어내고 승리 따낼...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-13T14:30:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/311/0002080327"
+    }
+   ]
+  },
+  {
+   "keyword": "조현 한반도 평화 공동 이익 강조",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 11,
+   "recent20": 5,
+   "press": 11,
+   "firstArticleAt": "2026-11-13T13:53:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "조현 “한반도 평화는 공동이익”… 왕이 “한·중 관계 정상궤도”",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-13T14:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001885031?sid=100"
+    },
+    {
+     "title": "조현 장관 한반도 평화는 한중 공동이익 주장",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-13T14:52:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261113010005346"
+    },
+    {
+     "title": "APEC 앞두고 한·중 외교장관 회담…조현 \"한반도 평화는 한중 공동이익...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-13T14:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004175006?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "한중 외교장관 회담",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-13T14:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "조현 장관 한반도 평화는 한중 공동이익 주장",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-13T14:52:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261113010005346"
+    },
+    {
+     "title": "APEC 앞두고 한·중 외교장관 회담…조현 \"한반도 평화는 한중 공동이익...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-13T14:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004175006?sid=100"
+    },
+    {
+     "title": "APEC 앞두고 만난 한중 외교장관…조현 \"한반도 평화는 양국 공동 이익...",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-13T14:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004209736?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황 불륜 논란",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-13T13:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[김대호 인물] 젠슨황 그 다음 \"팀 쿡\" ... 트럼프 톱픽 엔비디아 소방수",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-13T14:56:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=202611130836033376906806b77b_1"
+    },
+    {
+     "title": "러트닉 美 상무, '젠슨 황 스캔들' 상원 자진 출석…엔비디아 中 수출 통...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-13T14:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005604134?sid=104"
+    },
+    {
+     "title": "러트닉 미 상무, 의회에서 젠슨 황 스캔들 증언한다",
+     "press": "segye.com",
+     "publishedAt": "2026-11-13T14:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004175005?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "ppi",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-13T13:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美 PPI 전월 대비 0.3% 상승…예상치 밑돌아",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-13T14:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004682079?sid=104"
+    },
+    {
+     "title": "미국 10월 PPI 0.3% 상승, 시장 예상치 0.4% 하회",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-13T13:56:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/437914"
+    },
+    {
+     "title": "미 10월 PPI 전년 동월 대비 6.5% 상승…베센트 “근원물가 통제 가능”",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-13T13:50:00.000Z",
+     "link": "https://www.tokenpost.kr/news/economy/437910"
+    }
+   ]
+  },
+  {
+   "keyword": "IBK기업은행 4연승 질주",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-13T14:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "IBK기업은행, 프로배구 개막 4연승 질주",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-13T14:37:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/052/0002432642"
+    },
+    {
+     "title": "IBK, 흥국생명에 3-0 완승…4연승 질주",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-13T14:22:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/422/0000926033"
+    },
+    {
+     "title": "IBK, 흥국생명 완파하고 개막 4연승 질주…남자부 KB는 개막 4연패 수렁",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-13T14:10:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109893460356"
+    }
+   ]
+  },
+  {
+   "keyword": "엔비디아 GPU 26만장 공급",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-13T14:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "HBM 공급 SK하이닉스·삼성전자 '촉각'…",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-13T15:00:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082656"
+    },
+    {
+     "title": "'젠슨 황 없는 엔비디아' 긴급 대응…정부 \"엔비디아, GPU 26만 장 공급 ...",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-13T14:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000121324?sid=101"
+    },
+    {
+     "title": "‘엔비디아 생태계’ 발들인 한국 기업들 영향은?",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-13T14:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012293798?sid=101"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 447,
-  "matched": 143,
-  "avgLeadMin": 459,
+  "flagged": 408,
+  "matched": 171,
+  "avgLeadMin": 369,
   "recent": [
    {
-    "keyword": "트럼프, 이란 합의 불필요",
-    "hitKeyword": "트럼프 이란 선회",
-    "hitAt": "2026-11-13T11:00:00+09:00",
-    "leadMin": 108
+    "keyword": "송혜교·공유 12월 11일 공개",
+    "hitKeyword": "송혜교 공유 천천히 강렬하게",
+    "hitAt": "2026-11-14T00:00:00+09:00",
+    "leadMin": 777
    },
    {
-    "keyword": "안경 벗은 이재용",
-    "hitKeyword": "이재용 안경 벗은 모습",
-    "hitAt": "2026-11-13T11:00:00+09:00",
-    "leadMin": 27
+    "keyword": "금융보안원 정보유출 사과",
+    "hitKeyword": "모두의 창업 정보유출",
+    "hitAt": "2026-11-13T22:30:00+09:00",
+    "leadMin": 2123
    },
    {
-    "keyword": "이유리, 에이티즈 산 팬심 고백",
-    "hitKeyword": "이유리 12살 연상 목사",
-    "hitAt": "2026-11-13T10:30:00+09:00",
-    "leadMin": 744
+    "keyword": "50대 남성 구속영장",
+    "hitKeyword": "성북 소녀 살해 50대 구속",
+    "hitAt": "2026-11-13T22:30:00+09:00",
+    "leadMin": 1665
    },
    {
-    "keyword": "김서아 부모님 사망 소식",
-    "hitKeyword": "김서아 기쁨조 후보",
-    "hitAt": "2026-11-13T10:30:00+09:00",
-    "leadMin": 199
+    "keyword": "플라이빗 해킹 정보유출",
+    "hitKeyword": "모두의 창업 정보유출",
+    "hitAt": "2026-11-13T22:30:00+09:00",
+    "leadMin": 1645
    },
    {
-    "keyword": "김서아 기쁨조 후보 고백",
-    "hitKeyword": "김서아 기쁨조 후보",
-    "hitAt": "2026-11-13T10:30:00+09:00",
-    "leadMin": 138
+    "keyword": "50대 남성 구속청구",
+    "hitKeyword": "성북 소녀 살해 50대 구속",
+    "hitAt": "2026-11-13T22:30:00+09:00",
+    "leadMin": 1605
    },
    {
-    "keyword": "김서아 기쁨조 후보",
-    "hitKeyword": "김서아 기쁨조 후보",
-    "hitAt": "2026-11-13T10:30:00+09:00",
-    "leadMin": 118
+    "keyword": "50대 남성 구속영장 청구",
+    "hitKeyword": "성북 소녀 살해 50대 구속",
+    "hitAt": "2026-11-13T22:30:00+09:00",
+    "leadMin": 1585
    },
    {
-    "keyword": "젠슨 황 퇴진 영향은?",
-    "hitKeyword": "젠슨 황 엔비디아 퇴진",
-    "hitAt": "2026-11-13T10:30:00+09:00",
-    "leadMin": 47
+    "keyword": "세브란스 50대 송치",
+    "hitKeyword": "성북 소녀 살해 50대 구속",
+    "hitAt": "2026-11-13T22:30:00+09:00",
+    "leadMin": 767
    },
    {
-    "keyword": "80대 남편 아내 살해 체포",
-    "hitKeyword": "80대 남성 아내 살해 자수",
-    "hitAt": "2026-11-13T10:30:00+09:00",
-    "leadMin": 27
+    "keyword": "50대 남성 구속심사 포기",
+    "hitKeyword": "성북 소녀 살해 50대 구속",
+    "hitAt": "2026-11-13T22:30:00+09:00",
+    "leadMin": 656
    },
    {
-    "keyword": "마이크로소프트 365 장애 발생",
-    "hitKeyword": "MS 365 전 세계 먹통",
-    "hitAt": "2026-11-13T10:30:00+09:00",
-    "leadMin": 7
+    "keyword": "사우디 훈련하는 축구",
+    "hitKeyword": "한국 사우디 축구 평가전",
+    "hitAt": "2026-11-13T22:00:00+09:00",
+    "leadMin": 2335
    },
    {
-    "keyword": "양천구 남편 아내 살해",
-    "hitKeyword": "80대 남성 아내 살해 자수",
-    "hitAt": "2026-11-13T10:30:00+09:00",
-    "leadMin": 7
+    "keyword": "강동원·김고은, 혼: 삼각의 시간",
+    "hitKeyword": "강동원 혼 삼각의 시간",
+    "hitAt": "2026-11-13T22:00:00+09:00",
+    "leadMin": 2093
    }
   ]
  }
