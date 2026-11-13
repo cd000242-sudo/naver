@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T20:48:59.987Z",
+ "builtAt": "2026-11-13T20:59:05.762Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -9,10 +9,75 @@
   "minPress": 2
  },
  "measured": 29,
- "candidates": [],
+ "candidates": [
+  {
+   "keyword": "모레노호, 사우디에 2-3 패배",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-13T19:57:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[IN POINT] 이강인은 왼발 크로스만 올리는 선수가 아닌데...모레노호만...",
+     "press": "interfootball.co.kr",
+     "publishedAt": "2026-11-13T20:55:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/413/0000226563"
+    },
+    {
+     "title": "'공격도 따로, 수비도 따로' 이게 원팀인가 모레노호, 선수들 간격 벌어...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-13T20:23:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/109/0005640127"
+    },
+    {
+     "title": "92·96라인 함께 뛰었지만…韓, 사우디에 42년 만의 3실점하며 완패",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-13T19:57:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/011/0004682092"
+    }
+   ]
+  },
+  {
+   "keyword": "이란",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-13T19:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美 “바레인 향하던 이란 드론 2대 격추”…레이더 타격 주장 부인",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-13T20:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006409722?sid=104"
+    },
+    {
+     "title": "청해부대 작전구역 확대…한미 간극 좁히고 이란 반발 넘을까",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-13T20:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004209755?sid=100"
+    },
+    {
+     "title": "\"이스라엘 모사드 국장, CIA국장 만난다\"…이란 공격 부추기나",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-13T19:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001402951?sid=104"
+    }
+   ]
+  }
+ ],
  "hitRate": {
   "days": 7,
-  "flagged": 428,
+  "flagged": 429,
   "matched": 171,
   "avgLeadMin": 369,
   "recent": [
