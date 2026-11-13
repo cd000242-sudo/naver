@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T00:02:14.938Z",
+ "builtAt": "2026-11-13T00:12:18.772Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 31,
+   "articles90": 36,
    "recent20": 9,
-   "press": 31,
-   "firstArticleAt": "2026-11-12T22:34:00.000Z",
+   "press": 36,
+   "firstArticleAt": "2026-11-12T22:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "메뉴 번역·회의 요약까지…삼성전자, 인텔리전트 아이웨어 공개",
-     "press": "ziksir.com",
-     "publishedAt": "2026-11-12T23:58:00.000Z",
-     "link": "https://www.ziksir.com/news/articleView.html?idxno=153175"
+     "title": "제미나이 탑재 '인텔리전트 아이웨어' 30종 공개",
+     "press": "cstimes.com",
+     "publishedAt": "2026-11-13T00:10:00.000Z",
+     "link": "https://www.cstimes.com/news/articleView.html?idxno=727809"
     },
     {
-     "title": "젠틀몬스터, 스마트 아이웨어 12월 한미 동시 출시…국내 출고가 65만원...",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-12T23:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002248385?sid=105"
+     "title": "삼성전자 '인텔리전트 아이웨어' 공개…12월 10일 정식 출시",
+     "press": "wolyo.co.kr",
+     "publishedAt": "2026-11-13T00:08:00.000Z",
+     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=320438"
     },
     {
-     "title": "삼성전자, 제미나이 탑재 AI 안경 공개…내달 국내 출시",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-12T23:52:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2018120"
+     "title": "삼성전자, 구글·젠틀몬스터와 AI 안경 공개…30종 라인업 선봬",
+     "press": "thetracker.co.kr",
+     "publishedAt": "2026-11-13T00:06:00.000Z",
+     "link": "https://thetracker.co.kr/View.aspx?No=4310734"
     }
    ]
   },
@@ -48,7 +48,7 @@
     "nate"
    ],
    "articles90": 13,
-   "recent20": 3,
+   "recent20": 2,
    "press": 12,
    "firstArticleAt": "2026-11-12T23:12:00.000Z",
    "exclusive": true,
@@ -75,34 +75,34 @@
    ]
   },
   {
-   "keyword": "세무사 AI안경 의혹에",
+   "keyword": "세브란스 흉기 난동",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 13,
+   "articles90": 8,
    "recent20": 3,
-   "press": 11,
-   "firstArticleAt": "2026-11-12T22:38:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-12T23:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "세무사 이어 관세사 시험도 AI 안경 의혹…\"생동차 합격자 올해만 10명\"",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-13T00:00:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261113010005060"
+     "title": "경찰, '세브란스 병원 흉기난동' 50대 여성 송치",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-13T00:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000925752?sid=102"
     },
     {
-     "title": "시험 잘 보면 다 'AI 안경'탓?…LEET 만점자 \"수능 국어 생중계로 풀겠다...",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-12T23:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000650781?sid=102"
+     "title": "'세브란스병원 흉기난동' 50대 여성 공소청 송치",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-13T00:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000161169?sid=102"
     },
     {
-     "title": "\"이게 수석과 차석의 차이?\" 세무사 합격자 책 사진에 '갑론을박'",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-12T23:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005842117?sid=102"
+     "title": "경찰, ‘신촌 세브란스병원 흉기난동’ 50대 여성 공소청 송치",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-12T23:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001884940?sid=102"
     }
    ]
   },
@@ -111,10 +111,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
+   "articles90": 8,
    "recent20": 0,
    "press": 8,
-   "firstArticleAt": "2026-11-12T22:38:00.000Z",
+   "firstArticleAt": "2026-11-12T22:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -139,49 +139,23 @@
    ]
   },
   {
-   "keyword": "영화",
-   "sources": [
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-12T23:08:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "[회고 영화관] '집아죽', 사랑의 역설 [유진모 칼럼]",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-12T23:52:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95148"
-    },
-    {
-     "title": "영화 '취권'서 성룡과 맞붙었던 한국 배우…오늘 전해진 안타까운 소식",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-12T23:40:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1174241"
-    },
-    {
-     "title": "영화 '여전히 찬란하게', 조계종 전국 1만 석 규모 릴레이 응원 시사회...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-12T23:38:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16275459"
-    }
-   ]
-  },
-  {
    "keyword": "메가성장특위 예산안 간담회",
    "sources": [
     "nate"
    ],
-   "articles90": 32,
-   "recent20": 14,
-   "press": 5,
+   "articles90": 33,
+   "recent20": 1,
+   "press": 6,
    "firstArticleAt": "2026-11-12T23:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "與메가성장특위 \"초광역특구법 연내 처리…혁신경제 엔진 만들 것\"",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-13T00:04:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5083001"
+    },
     {
      "title": "[포토] 메가성장특위 예산안 설명 간담회",
      "press": "view.asiae.co.kr",
@@ -193,86 +167,124 @@
      "press": "view.asiae.co.kr",
      "publishedAt": "2026-11-12T23:48:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/277/0005842112?sid=100"
-    },
-    {
-     "title": "'메가성장특위 예산안 파이팅!'",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-12T23:46:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261113000151"
     }
    ]
   },
   {
-   "keyword": "박정성 통상교섭본부장 면담",
+   "keyword": "영화",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 5,
+   "articles90": 6,
    "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T22:48:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-12T23:23:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "박정성 통상본부장 \"잘 키운 15살 FTA 부각해 EU 무역장벽 대응\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-13T00:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016439791?sid=104"
+     "title": "효성, 배리어프리영화 10년째 지원…영화 2편 제작 참여",
+     "press": "handmk.com",
+     "publishedAt": "2026-11-13T00:06:00.000Z",
+     "link": "https://www.handmk.com/news/articleView.html?idxno=45036"
     },
     {
-     "title": "박정성 통상교섭본부장, 유럽의회 의원 면담",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T23:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014319816?sid=100"
+     "title": "[회고 영화관] '집아죽', 사랑의 역설 [유진모 칼럼]",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-12T23:52:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95148"
     },
     {
-     "title": "박정성 통상교섭본부장, 유럽의회 국제통상위원장 면담",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T23:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014319828?sid=100"
+     "title": "영화 '취권'서 성룡과 맞붙었던 한국 배우…오늘 전해진 안타까운 소식",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-12T23:40:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1174241"
     }
    ]
   },
   {
-   "keyword": "후티 사우디 송유관 공격",
+   "keyword": "미세먼지",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-12T22:50:00.000Z",
+   "articles90": 9,
+   "recent20": 6,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T23:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[국제유가] 중동 에너지 시설 공격에 급등",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-12T23:20:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5082978"
+     "title": "초미세먼지로 뒤덮인 노들섬",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-13T00:05:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261113000215"
     },
     {
-     "title": "“패트리엇 미사일 대신 이집트 군대 깔았다”…후티에 떠는 사우디의 ...",
-     "press": "nownews.seoul.co.kr",
-     "publishedAt": "2026-11-12T23:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003699002?sid=104"
+     "title": "미세먼지에 갇힌 한강다리",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-13T00:04:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261113000213"
     },
     {
-     "title": "후티 “사우디 동서 송유관·얀부 석유시설 공격해”",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-12T22:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003482469?sid=104"
+     "title": "서울상공 뒤덮은 미세먼지",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-13T00:04:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261113000212"
+    }
+   ]
+  },
+  {
+   "keyword": "트럼프, 이란 합의 불필요",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-12T23:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[국제금융 브리핑] 트럼프 “이란 합의 불필요”·젠슨 황 사임...브렌트...",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-13T00:02:00.000Z",
+     "link": "https://www.tokenpost.kr/news/economy/437451"
+    },
+    {
+     "title": "트럼프 \"이란과 합의 불필요\"에 국제유가 급등…브렌트유 3.3% ↑",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-12T23:42:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1543619"
+    },
+    {
+     "title": "트럼프 \"이란과 협상 불필요\"…밴스에 '민주당 부패 척결' 전념 지시",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-12T23:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009286995?sid=104"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 416,
+  "flagged": 413,
   "matched": 145,
-  "avgLeadMin": 620,
+  "avgLeadMin": 566,
   "recent": [
+   {
+    "keyword": "사고",
+    "hitKeyword": "김포 스쿨존 차량 사고",
+    "hitAt": "2026-11-13T09:00:00+09:00",
+    "leadMin": 89
+   },
+   {
+    "keyword": "세무사 AI안경 의혹에",
+    "hitKeyword": "세무사 AI 안경 의혹",
+    "hitAt": "2026-11-13T09:00:00+09:00",
+    "leadMin": 18
+   },
    {
     "keyword": "트럼프, 이란 합의 필요없다",
     "hitKeyword": "트럼프 이란 강경 선회",
@@ -320,18 +332,6 @@
     "hitKeyword": "한강벨트 집값 하락",
     "hitAt": "2026-11-13T07:00:00+09:00",
     "leadMin": 715
-   },
-   {
-    "keyword": "천안서 발달장애 어머니",
-    "hitKeyword": "발달장애 10대 사망",
-    "hitAt": "2026-11-13T06:30:00+09:00",
-    "leadMin": 564
-   },
-   {
-    "keyword": "2200만원 절도 장난",
-    "hitKeyword": "김승우 2200만원 피소",
-    "hitAt": "2026-11-13T06:30:00+09:00",
-    "leadMin": 403
    }
   ]
  }
