@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T16:07:13.649Z",
+ "builtAt": "2026-11-13T16:17:19.815Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 28,
  "candidates": [
   {
    "keyword": "젠슨 황과 엔비디아",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 33,
-   "recent20": 7,
-   "press": 19,
-   "firstArticleAt": "2026-11-13T14:42:00.000Z",
+   "articles90": 34,
+   "recent20": 5,
+   "press": 20,
+   "firstArticleAt": "2026-11-13T14:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[젠슨 황 불륜 스캔들] 33년 일군 엔비디아 떠난 테크 거물의 몰락…\"어...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-13T16:00:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=626663"
+     "title": "[사설] 젠슨 황 퇴진, AI 산업 불확실성 대비해야",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-13T16:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001885045?sid=110"
     },
     {
-     "title": "젠슨 황 떠난 엔비디아… 리더십 공백에 '흔들'",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-13T16:00:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3448635"
+     "title": "젠슨 황 끌어낸 엔비디아 법무총괄, 美의회서 '판도라 상자' 여나",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-13T16:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009288653?sid=104"
     },
     {
-     "title": "美재무, 엔비디아 칩 유출 의혹에 상무부 대응 공개지적",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-13T15:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014321709?sid=104"
+     "title": "뉴욕 증시, PPI 4년 만에 최고 수준 상승에 혼조 출발...엔비디아 3% 넘게...",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-13T16:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432656?sid=104"
     }
    ]
   },
@@ -48,10 +48,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 23,
+   "articles90": 18,
    "recent20": 0,
-   "press": 13,
-   "firstArticleAt": "2026-11-13T14:39:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-13T14:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -80,10 +80,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
+   "articles90": 10,
    "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-13T14:39:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-13T14:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -144,10 +144,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-13T14:40:00.000Z",
+   "articles90": 7,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-13T15:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -176,10 +176,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 4,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-13T14:39:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-13T14:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -209,10 +209,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-13T14:44:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-13T15:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -233,38 +233,6 @@
      "press": "medicaltimes.com",
      "publishedAt": "2026-11-13T15:10:00.000Z",
      "link": "https://www.medicaltimes.com/Main/News/NewsView.html?ID=1171840&ref=naverpc"
-    }
-   ]
-  },
-  {
-   "keyword": "모두의 창업 개인정보 유출",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-13T14:44:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "중기부 '모두의 창업'이 '모두의 유출'로…5000명 털려 모집 미뤘는데 또...",
-     "press": "pennmike.com",
-     "publishedAt": "2026-11-13T16:00:00.000Z",
-     "link": "https://www.pennmike.com/news/articleView.html?idxno=131817"
-    },
-    {
-     "title": "[사실은 이렇습니다] 민간 AI 솔루션 기업 A사 개인정보 유출...유출 대...",
-     "press": "korea.kr",
-     "publishedAt": "2026-11-13T15:17:00.000Z",
-     "link": "https://www.korea.kr/briefing/actuallyView.do?newsId=148975732&call_from=naver_news"
-    },
-    {
-     "title": "중기부 '모두의 창업' 개인정보 유출...1차 사고 5개월 만",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-13T14:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000520693?sid=101"
     }
    ]
   }
