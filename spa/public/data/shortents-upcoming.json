@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T22:19:36.798Z",
+ "builtAt": "2026-11-13T22:29:41.457Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,14 +11,47 @@
  "measured": 24,
  "candidates": [
   {
+   "keyword": "美항공청 항공편 이륙 중단",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 14,
+   "recent20": 2,
+   "press": 12,
+   "firstArticleAt": "2026-11-13T21:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美항공기 이륙 '올스톱' 9·11 이후 두 번째…7000편 지연·결항(종합)",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-13T22:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009288747?sid=104"
+    },
+    {
+     "title": "美 연방항공청, 전역 공항에 항공기 운항 중단 지시… 이례적 조치",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-13T22:10:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3448646"
+    },
+    {
+     "title": "美전역 항공기 이륙 중단…교통장관 \"관제센터 통신문제\"(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-13T22:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016441594?sid=104"
+    }
+   ]
+  },
+  {
    "keyword": "모레노호, 사우디에 2-3 패배",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 9,
-   "recent20": 4,
-   "press": 8,
-   "firstArticleAt": "2026-11-13T20:55:00.000Z",
+   "articles90": 8,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-13T21:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -29,10 +62,10 @@
      "link": "https://www.slist.kr/news/articleView.html?idxno=781595"
     },
     {
-     "title": "'사우디 속도조차 버겁다' 모레노호 고질병 된 템포 문제… 우루과이·...",
-     "press": "footballist.co.kr",
+     "title": "'계약 만료 임박' 모레노, 아시안컵 연기에 사우디전 패배까지…끊임없...",
+     "press": "sports.hankooki.com",
      "publishedAt": "2026-11-13T22:00:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/436/0000114852"
+     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6943535"
     },
     {
      "title": "패배 속 빛난 황희찬의 81분…'불화설·무득점' 딛고 모레노호 공격 활...",
@@ -81,23 +114,23 @@
     "daum"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-13T21:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[천지일보 이슈종합] 엔비디아 시총·범LG가 3세 구본현 구속·MS 서비스...",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-13T22:00:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3448638"
-    },
-    {
      "title": "재벌집 3세가 대체 왜…8년 해외도피 끝에 캄보디아서 잡힌 이 남자",
      "press": "mk.co.kr",
      "publishedAt": "2026-11-13T22:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/009/0005763577?sid=102"
+    },
+    {
+     "title": "[천지일보 이슈종합] 엔비디아 시총·범LG가 3세 구본현 구속·MS 서비스...",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-13T22:00:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3448638"
     },
     {
      "title": "‘주가조작’ 범LG가 3세 구본현, 해외 도피 8년 만에 검거",
@@ -106,11 +139,43 @@
      "link": "https://n.news.naver.com/mnews/article/056/0012293852?sid=102"
     }
    ]
+  },
+  {
+   "keyword": "미국 10월 생산자물가",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 2,
+   "firstArticleAt": "2026-11-13T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "4년 만에 가장 뜨거운 미국 물가…한국 증시 외국인 수급 흔드나",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-13T22:28:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=504024"
+    },
+    {
+     "title": "젠슨 황 여파 지속...미국증시 나스닥 '하락'",
+     "press": "choicenews.co.kr",
+     "publishedAt": "2026-11-13T21:52:00.000Z",
+     "link": "http://www.choicenews.co.kr/news/articleView.html?idxno=173179"
+    },
+    {
+     "title": "美 10월 PPI '고공행진'...달러 강세, 엔화환율은 '소폭 상승'",
+     "press": "choicenews.co.kr",
+     "publishedAt": "2026-11-13T21:00:00.000Z",
+     "link": "http://www.choicenews.co.kr/news/articleView.html?idxno=173178"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 435,
+  "flagged": 436,
   "matched": 183,
   "avgLeadMin": 363,
   "recent": [
