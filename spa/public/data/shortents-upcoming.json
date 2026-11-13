@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T23:40:18.105Z",
+ "builtAt": "2026-11-13T23:50:26.954Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,18 +11,88 @@
  "measured": 27,
  "candidates": [
   {
+   "keyword": "롤드컵 결승전 서울 개최",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 14,
+   "recent20": 4,
+   "press": 12,
+   "firstArticleAt": "2026-11-13T23:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "2027 LoL 월드 챔피언십, 서울 창동서 결승…일본도 공동개최",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-13T23:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016441642?sid=105"
+    },
+    {
+     "title": "2027년 '롤드컵' 韓日 공동 개최…결승 무대는 서울 아레나",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-13T23:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002248538?sid=105"
+    },
+    {
+     "title": "2027 롤드컵, 일본 나고야서 스위스 스테이지… 결승은 창동 서울 아레...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-13T23:44:00.000Z",
+     "link": "https://m.sports.naver.com/esports/article/311/0002080402"
+    }
+   ]
+  },
+  {
+   "keyword": "날씨",
+   "sources": [
+    "google"
+   ],
+   "articles90": 18,
+   "recent20": 3,
+   "press": 12,
+   "firstArticleAt": "2026-11-13T22:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[대전·세종·충남 날씨예보] 14일 밤까지 비 최대 30㎜",
+     "press": "thefairnews.co.kr",
+     "publishedAt": "2026-11-13T23:38:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94174"
+    },
+    {
+     "title": "[오늘 날씨] 전국 대부분 비…제주 최고 50mm, 모레 강원산지 1~5cm 눈",
+     "press": "mhns.co.kr",
+     "publishedAt": "2026-11-13T23:34:00.000Z",
+     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=769084"
+    },
+    {
+     "title": "[제주도 날씨예보] 15일 아침까지 최대 50㎜ 비…산간도로 짙은 안개",
+     "press": "thefairnews.co.kr",
+     "publishedAt": "2026-11-13T23:34:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94173"
+    }
+   ]
+  },
+  {
    "keyword": "집",
    "sources": [
     "signal.bz",
     "google"
    ],
-   "articles90": 16,
-   "recent20": 0,
-   "press": 14,
-   "firstArticleAt": "2026-11-13T22:19:00.000Z",
+   "articles90": 13,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-13T22:32:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
+    {
+     "title": "문지애♥전종환 \"아들, 수학 시험 27점에 온 집안 비상…결국 3등 들어\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-13T23:41:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009288787"
+    },
     {
      "title": "[윤준의 부동산수첩] 집값 안정인가, 거래 정지인가",
      "press": "nbntv.kr",
@@ -34,49 +104,43 @@
      "press": "kookje.co.kr",
      "publishedAt": "2026-11-13T23:18:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/658/0000161210?sid=102"
-    },
-    {
-     "title": "환희, 母 집 거실 난장판 만들었다…“나 쫓겨나는 거 아니야?”",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-13T23:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001304737"
     }
    ]
   },
   {
-   "keyword": "날씨",
+   "keyword": "사우디에 21년 패배",
    "sources": [
-    "google"
+    "nate"
    ],
-   "articles90": 19,
-   "recent20": 6,
-   "press": 13,
-   "firstArticleAt": "2026-11-13T22:13:00.000Z",
+   "articles90": 11,
+   "recent20": 4,
+   "press": 11,
+   "firstArticleAt": "2026-11-13T22:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[대전·세종·충남 날씨예보] 14일 밤까지 비 최대 30㎜",
-     "press": "thefairnews.co.kr",
-     "publishedAt": "2026-11-13T23:38:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94174"
+     "title": "사우디에 42년 만의 3실점·일본에 5대9 밀려···축구·야구 나란히 패...",
+     "press": "globale.co.kr",
+     "publishedAt": "2026-11-13T23:46:00.000Z",
+     "link": "https://www.globale.co.kr/news/articleView.html?idxno=41643"
     },
     {
-     "title": "[제주도 날씨예보] 15일 아침까지 최대 50㎜ 비…산간도로 짙은 안개",
-     "press": "thefairnews.co.kr",
-     "publishedAt": "2026-11-13T23:34:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94173"
+     "title": "두 번 따라붙고도 무너진 한국…사우디에 2-3 석패, 수비 불안에 발목",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-13T23:46:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=847251"
     },
     {
-     "title": "[오늘 날씨] 전국 대부분 비…제주 최고 50mm, 모레 강원산지 1~5cm 눈",
-     "press": "mhns.co.kr",
-     "publishedAt": "2026-11-13T23:34:00.000Z",
-     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=769084"
+     "title": "축구 대표팀, 화합 외쳤지만 수비 불안에 발목… 사우디에 2대3 패배",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-13T23:36:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/421/0009288775"
     }
    ]
   },
   {
-   "keyword": "유람선-화물선 충돌",
+   "keyword": "유람선 화물선 충돌",
    "sources": [
     "daum"
    ],
@@ -108,17 +172,23 @@
    ]
   },
   {
-   "keyword": "트럼프 전작권 전환",
+   "keyword": "트럼프 전작권 주한미군 철수",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 2,
-   "press": 7,
+   "press": 6,
    "firstArticleAt": "2026-11-13T22:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“트럼프, 한국서 미군 빼려 하나”…전작권 전환에 美전문가들 경고",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-13T23:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003699359?sid=104"
+    },
     {
      "title": "\"전작권 전환이 미군 철수 계기 될 수도\"…미 전문가들 우려",
      "press": "ikbc.co.kr",
@@ -130,12 +200,38 @@
      "press": "imaeil.com",
      "publishedAt": "2026-11-13T23:22:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/088/0001040191?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황 없는 엔비디아 위기",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-13T22:57:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "젠슨황 퇴진에 금융사 이탈 움직임...670조원 AI 금융 구상 '휘청'",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-13T23:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005604181?sid=101"
     },
     {
-     "title": "\"트럼프에 전작권 전환은 주한미군 철수 명분\"…워싱턴서 제기된 우려",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-13T23:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394035?sid=104"
+     "title": "트럼프 뜻 따랐다는 러트닉…엔비디아 스캔들에 '경질' 위기",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-13T23:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005353790?sid=104"
+    },
+    {
+     "title": "젠슨 황의 외도가 부른 ‘테일 리스크’, 조작기소 특검법이 그런 위험...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-13T23:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005763591?sid=101"
     }
    ]
   },
@@ -145,10 +241,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-13T22:12:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-13T22:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -173,49 +269,23 @@
    ]
   },
   {
-   "keyword": "주한 미군의 철수",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-13T22:44:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"전작권 전환이 미군 철수 계기 될 수도\"…미 전문가들 우려",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-13T23:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000121331?sid=102"
-    },
-    {
-     "title": "\"트럼프에 전작권 전환은 주한미군 철수 명분\"…워싱턴서 제기된 우려",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-13T23:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394035?sid=104"
-    },
-    {
-     "title": "前 주한미군사령관, ‘전작권 당장 전환 가능’ 강신철에 “매우 실망스...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-13T23:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002832717?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "faa",
    "sources": [
     "google"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 2,
    "press": 3,
-   "firstArticleAt": "2026-11-13T22:12:00.000Z",
+   "firstArticleAt": "2026-11-13T22:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "마이크로소프트($MSFT), FAA 지상 정지 연관성 낮다고 밝혀",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-13T23:40:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/438116"
+    },
     {
      "title": "USA FAA GROUNDSTOP",
      "press": null,
@@ -227,52 +297,13 @@
      "press": "ddaily.co.kr",
      "publishedAt": "2026-11-13T23:09:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/138/0002248531?sid=105"
-    },
-    {
-     "title": "epaselect USA FAA GROUNDSTOP",
-     "press": null,
-     "publishedAt": "2026-11-13T23:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/091/0010368422?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황 없는 엔비디아 위기",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-13T22:57:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "트럼프 뜻 따랐다는 러트닉…엔비디아 스캔들에 '경질' 위기",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-13T23:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005353790?sid=104"
-    },
-    {
-     "title": "젠슨 황의 외도가 부른 ‘테일 리스크’, 조작기소 특검법이 그런 위험...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-13T23:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005763591?sid=101"
-    },
-    {
-     "title": "트럼프가 시켰다는 러트닉…젠슨 황 비호 의혹에 '경질론' 비상",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-13T22:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000543619?sid=104"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 450,
+  "flagged": 454,
   "matched": 187,
   "avgLeadMin": 357,
   "recent": [
