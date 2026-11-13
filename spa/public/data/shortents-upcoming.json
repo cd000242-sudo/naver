@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T01:33:09.867Z",
+ "builtAt": "2026-11-13T01:43:14.132Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,162 +11,131 @@
  "measured": 22,
  "candidates": [
   {
-   "keyword": "은행연합회장 후보 6명 확정",
+   "keyword": "젠슨 황 CEO 사임",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 76,
+   "recent20": 32,
+   "press": 58,
+   "firstArticleAt": "2026-11-13T01:00:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "\"20대 때는 민낯, 수수한 옷차림\"…젠슨 황 불륜女, 과거 파묘돼",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-13T01:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006409384?sid=104"
+    },
+    {
+     "title": "'세번째 불륜' 젠슨 황 퇴진에 AI칩 독주 '흔들'···'쿠다 방어선' 새 ...",
+     "press": "newsfreezone.co.kr",
+     "publishedAt": "2026-11-13T01:40:00.000Z",
+     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=719199"
+    },
+    {
+     "title": "젠슨 황, 사임 후 3번째 불륜 의혹…\"또 다른 엔비디아 직원과도 내연관...",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-13T01:38:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261113010005126"
+    }
+   ]
+  },
+  {
+   "keyword": "차기 회장 후보 6명 윤종규 포함",
    "sources": [
     "nate"
    ],
-   "articles90": 68,
-   "recent20": 12,
-   "press": 67,
-   "firstArticleAt": "2026-11-13T00:04:00.000Z",
+   "articles90": 50,
+   "recent20": 5,
+   "press": 49,
+   "firstArticleAt": "2026-11-13T00:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "차기 은행연합회장 레이스 6파전 압축…'민간 5명 vs 관료 1명' 구도 형...",
+     "press": "widedaily.com",
+     "publishedAt": "2026-11-13T01:36:00.000Z",
+     "link": "https://www.widedaily.com/news/articleView.html?idxno=303657"
+    },
+    {
+     "title": "차기 은행연합회장은 누구...회장 후보군 6명 압축",
+     "press": "seouleconews.com",
+     "publishedAt": "2026-11-13T01:32:00.000Z",
+     "link": "http://www.seouleconews.com/news/articleView.html?idxno=94994"
+    },
     {
      "title": "은행연합회장 후보 6명 압축…손병환·윤종규 등 이름 올려",
      "press": "businessplus.kr",
      "publishedAt": "2026-11-13T01:32:00.000Z",
      "link": "https://www.businessplus.kr/news/articleView.html?idxno=119826"
-    },
-    {
-     "title": "차기 은행연합회장 후보군 윤종규·윤종원 등 6인 선정",
-     "press": "asiatime.co.kr",
-     "publishedAt": "2026-11-13T01:30:00.000Z",
-     "link": "https://www.asiatime.co.kr/article/20261113500093"
-    },
-    {
-     "title": "은행연합회장 후보 6명 압축...민간 5명·관료 1명 경쟁",
-     "press": "youthdaily.co.kr",
-     "publishedAt": "2026-11-13T01:24:00.000Z",
-     "link": "https://www.youthdaily.co.kr/news/article.html?no=229796"
     }
    ]
   },
   {
-   "keyword": "젠슨 황 CEO 사임",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 78,
-   "recent20": 47,
-   "press": 56,
-   "firstArticleAt": "2026-11-13T00:57:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "젠슨 황 내쫓은 엔비디아 주가 향방은…월가 \"그래도 사라\"",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-13T01:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000551584?sid=101"
-    },
-    {
-     "title": "\"젠슨 황 없는 엔비디아 상상 못 해\"…직원들 눈물, 본사 앞엔 꽃다발",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-13T01:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014320244?sid=104"
-    },
-    {
-     "title": "젠슨 황, 불륜으로 얼마를 날렸나…일주일 간 22조원 '증발'",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-13T01:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000142195?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "KB캐피탈 개인정보 유출",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 41,
-   "recent20": 14,
-   "press": 41,
-   "firstArticleAt": "2026-11-13T00:12:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "KB캐피탈 직원용 시스템 해킹…약 1800명 개인정보 유출",
-     "press": "econovill.com",
-     "publishedAt": "2026-11-13T01:30:00.000Z",
-     "link": "https://www.econovill.com/news/articleView.html?idxno=757133"
-    },
-    {
-     "title": "KB캐피탈 해킹 공격…고객·임직원 1800명 정보 유출",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-13T01:30:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/325202/?sc=Naver"
-    },
-    {
-     "title": "KB캐피탈, 해킹에 개인정보 1811명 유출…고객·협력사 정보 노출",
-     "press": "ezyeconomy.com",
-     "publishedAt": "2026-11-13T01:30:00.000Z",
-     "link": "https://www.ezyeconomy.com/news/articleView.html?idxno=241817"
-    }
-   ]
-  },
-  {
-   "keyword": "삼성전자 AI 아이웨어 공개",
+   "keyword": "자본시장 정책 간담회",
    "sources": [
     "nate"
    ],
-   "articles90": 34,
-   "recent20": 2,
-   "press": 34,
-   "firstArticleAt": "2026-11-13T00:05:00.000Z",
+   "articles90": 39,
+   "recent20": 22,
+   "press": 28,
+   "firstArticleAt": "2026-11-13T01:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼성, 구글 AI 품은 스마트 안경 공개···65만원부터 판매",
-     "press": "enewstoday.co.kr",
-     "publishedAt": "2026-11-13T01:20:00.000Z",
-     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2492124"
+     "title": "이재명 대통령 \"자본시장 '비정상의 정상화' 확고…신뢰 회복 중요성 강...",
+     "press": "ppss.kr",
+     "publishedAt": "2026-11-13T01:41:00.000Z",
+     "link": "https://www.ppss.kr/news/articleView.html?idxno=320811"
     },
     {
-     "title": "삼성전자, 구글·젠틀몬스터와 손잡고 AI 안경 공개…내달 국내 출시",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-13T01:18:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=503663"
+     "title": "李 “정부·與, 노력했지만 여전히 부족…자본시장 신뢰 회복에 집중”",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-13T01:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003485358?sid=100"
     },
     {
-     "title": "삼성전자, 구글·젠틀몬스터·워비파커와 AI 안경 30종 공개…내달 10일...",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-13T01:12:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=315288"
+     "title": "이재명 대통령 “자본시장 정상화, 확고한 정책 방향” [마켓시그널]",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-13T01:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004681825?sid=101"
     }
    ]
   },
   {
-   "keyword": "이 대통령 태국 필리핀 회담",
+   "keyword": "원내대책회의 정점식 원내대표",
    "sources": [
-    "daum"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 23,
-   "recent20": 0,
+   "articles90": 43,
+   "recent20": 10,
    "press": 23,
-   "firstArticleAt": "2026-11-13T00:18:00.000Z",
+   "firstArticleAt": "2026-11-13T00:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "정상외교 넘어 실질 성과로…이 대통령 아세안·APEC 순방의 과제",
-     "press": "newswhoplus.com",
-     "publishedAt": "2026-11-13T01:00:00.000Z",
-     "link": "https://www.newswhoplus.com/news/articleView.html?idxno=74280"
+     "title": "정점식 \"허수아비 '명픽' 김민석 대표 신세 처량\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-13T01:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001402788?sid=100"
     },
     {
-     "title": "李 대통령, 16일 태국·필리핀 정상과 회담…18일 中 교민 간담회",
-     "press": "iminju.net",
-     "publishedAt": "2026-11-13T00:56:00.000Z",
-     "link": "http://www.iminju.net/news/articleView.html?idxno=172410"
+     "title": "국민의힘 정점식 \"'대통령 탈옥 맞춤형' 이용철, 절대로 법무부 장관 해...",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-13T01:40:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1543643"
     },
     {
-     "title": "이재명 대통령, 아세안과 APEC 정상회의 참석…태국·필리핀 정상과 회...",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-13T00:52:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885392"
+     "title": "정점식 \"더불어민주당의 종부세 반란쇼, 4일천하로 끝나\"",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-13T01:38:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3448410"
     }
    ]
   },
@@ -203,113 +172,14 @@
    ]
   },
   {
-   "keyword": "원내대책회의 정점식 원내대표",
+   "keyword": "월급방위대 TF 가동",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 36,
-   "recent20": 3,
-   "press": 19,
-   "firstArticleAt": "2026-11-13T00:17:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "정점식 “민주당 종부세 반란 쇼, 4일 천하…전월세난 대책 내놔야”",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-13T01:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003485336?sid=100"
-    },
-    {
-     "title": "정점식 \"민주당·청와대, 전월세 대란 타개할 대책 내놔야\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-13T01:20:00.000Z",
-     "link": "https://www.ajunews.com/view/20261113101548323"
-    },
-    {
-     "title": "[포토] 원내대책회의 발언하는 정점식 원내대표",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-13T01:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001074782?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "한국전력",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 20,
-   "recent20": 2,
-   "press": 19,
-   "firstArticleAt": "2026-11-13T00:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "DS투자증권, 한국전력 목표가 3만1000원으로 하향...영업익 전망치 낮춰",
-     "press": "ppss.kr",
-     "publishedAt": "2026-11-13T01:20:00.000Z",
-     "link": "https://www.ppss.kr/news/articleView.html?idxno=320768"
-    },
-    {
-     "title": "한국전력, 전력망 짓는 속도 2배 빨라졌다···입지선정 100건 달성",
-     "press": "paxetv.com",
-     "publishedAt": "2026-11-13T01:14:00.000Z",
-     "link": "http://www.paxetv.com/news/articleView.html?idxno=286860"
-    },
-    {
-     "title": "한국전력 2950원 급락 2만7700원…3분기 영업이익 71% 감소, 시장 기대치...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-13T01:12:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=626499"
-    }
-   ]
-  },
-  {
-   "keyword": "최혜진 9언더파 선두",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 13,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-13T00:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이번에는 우승의 한 풀까…최혜진, LPGA투어 디 안니카 1R 9언더파 선두",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-13T01:14:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/448/0000650790"
-    },
-    {
-     "title": "최혜진, 안니카 드리븐 1라운드 공동 선두 출발…윤이나 공동 5위",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-13T01:12:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1137271"
-    },
-    {
-     "title": "최혜진, LPGA 디 안니카 첫날 9언더파 공동 선두-생애 첫 우승 향해 순항",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-13T01:04:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95149"
-    }
-   ]
-  },
-  {
-   "keyword": "월급방위대 TF 킥오프",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 12,
+   "articles90": 11,
    "recent20": 1,
    "press": 11,
-   "firstArticleAt": "2026-11-13T00:07:00.000Z",
+   "firstArticleAt": "2026-11-13T00:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -334,66 +204,98 @@
    ]
   },
   {
+   "keyword": "최혜진 9언더파 선두",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 10,
+   "recent20": 0,
+   "press": 10,
+   "firstArticleAt": "2026-11-13T00:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이번에는 우승의 한 풀까…최혜진, LPGA투어 디 안니카 1R 9언더파 선두",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-13T01:14:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/448/0000650790"
+    },
+    {
+     "title": "최혜진, 안니카 드리븐 1라운드 공동 선두 출발…윤이나 공동 5위",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-13T01:12:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1137271"
+    },
+    {
+     "title": "최혜진, LPGA 디 안니카 첫날 9언더파 공동 선두-생애 첫 우승 향해 순항",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-13T01:04:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95149"
+    }
+   ]
+  },
+  {
    "keyword": "김영훈",
    "sources": [
     "google"
    ],
-   "articles90": 24,
-   "recent20": 14,
+   "articles90": 29,
+   "recent20": 10,
    "press": 7,
    "firstArticleAt": "2026-11-13T00:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김영훈 고용노동부 장관, 반도체 산업 근로시간제도 간담회",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-13T01:25:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261113000403"
+     "title": "반도체 산업 근로시간제도 의견 청취하는 김영훈 장관",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-13T01:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014320265?sid=100"
     },
     {
-     "title": "반도체 산업 간담회서 발언하는 김영훈 장관",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-13T01:24:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261113000397"
+     "title": "반도체 산업 근로시간제도 운영실태 듣는 김영훈 노동부 장관",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-13T01:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014320268?sid=100"
     },
     {
-     "title": "모두발언하는 김영훈 고용노동부 장관",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-13T01:24:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261113000396"
+     "title": "반도체 산업 근로시간제도 간담회장 향하는 김영훈 장관",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-13T01:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014320255?sid=100"
     }
    ]
   },
   {
-   "keyword": "안경 벗은 이재용",
+   "keyword": "CL, 더블랙레이블 전속계약 11월 신곡",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-13T00:04:00.000Z",
-   "exclusive": false,
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-13T00:33:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "\"이건희 회장 살아돌아온 줄\"... 안경 벗고 나타난 이재용 회장 화제",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-13T01:24:00.000Z",
-     "link": "https://www.insight.co.kr/news/581880"
+     "title": "YG 떠난 지 7년…씨엘, 테디와 다시 손잡았다·11월 신곡 발표",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-13T01:30:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2647804"
     },
     {
-     "title": "“이건희 회장인 줄 알고 놀랐다” 안경 벗은 이재용, 선친과 ‘판박이...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-13T01:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002722990?sid=101"
+     "title": "CL 더블랙레이블 갔다 \"테디와의 두터운 신뢰 바탕…11월 신곡 발표\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-13T01:13:00.000Z",
+     "link": "https://m.entertain.naver.com/article/079/0004209426"
     },
     {
-     "title": "[위클리오늘] 안경 벗은 이재용, 온라인서 화제…\"이건희 회장 판박이네...",
-     "press": "weeklytoday.com",
-     "publishedAt": "2026-11-13T00:44:00.000Z",
-     "link": "http://www.weeklytoday.com/news/articleView.html?idxno=801944"
+     "title": "CL, 더블랙레이블과 전속계약 체결…11월 신곡 발매 예고",
+     "press": "stardailynews.co.kr",
+     "publishedAt": "2026-11-13T00:54:00.000Z",
+     "link": "https://www.stardailynews.co.kr/news/articleView.html?idxno=602115"
     }
    ]
   },
@@ -403,13 +305,19 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 4,
+   "articles90": 5,
    "recent20": 2,
-   "press": 4,
+   "press": 5,
    "firstArticleAt": "2026-11-13T00:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "벤츠, 폭스바겐 이어 독일 공장 폐쇄 검토…中 매출 감소 여파(종합)",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-13T01:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005842230?sid=104"
+    },
     {
      "title": "현대차·기아·벤츠·BMW 등 전기차 13종 모인 성수동",
      "press": "zdnet.co.kr",
@@ -421,12 +329,6 @@
      "press": "autodaily.co.kr",
      "publishedAt": "2026-11-13T01:22:00.000Z",
      "link": "https://www.autodaily.co.kr/news/articleView.html?idxno=602063"
-    },
-    {
-     "title": "벤츠, 수익성 악화에 獨 신규투자 전면 중단…공장 폐쇄도 검토",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-13T01:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009287289?sid=104"
     }
    ]
   },
@@ -435,10 +337,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-13T00:07:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-13T00:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -461,46 +363,13 @@
      "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1543635"
     }
    ]
-  },
-  {
-   "keyword": "CL, 테디 품으로 전속계약",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-13T00:15:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "CL, 테디 품으로…더블랙레이블 전속계약 체결·이달 신곡 예고",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-13T01:26:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=625017"
-    },
-    {
-     "title": "씨엘, 7년 만에 새 둥지 ‘테디 품으로’…더블랙레이블 전속계약, “이...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-13T00:33:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001280719"
-    },
-    {
-     "title": "씨엘, 테디 '더블랙레이블' 품으로…이달 중 신곡",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-13T00:15:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014319933"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
   "flagged": 429,
-  "matched": 146,
-  "avgLeadMin": 452,
+  "matched": 145,
+  "avgLeadMin": 454,
   "recent": [
    {
     "keyword": "이유리, 에이티즈 산 팬심 고백",
