@@ -26,7 +26,7 @@ test('legacy topics show actual counts and incomplete thirty target without inve
   assert.equal(summary.total, 10);
   assert.equal(summary.target, 30);
   assert.equal(summary.shortfall, 20);
-  assert.equal(model.summarizePickTopic({rows: []}, 1).target, 30);
+  assert.equal(model.summarizePickTopic({rows: []}, 1).target, 100);
 });
 
 test('new and old rows do not receive repeat claims; repeated rows get KST last appearance', () => {
@@ -38,5 +38,15 @@ test('new and old rows do not receive repeat claims; repeated rows get KST last 
 
 test('invalid targets and seasonal markers cannot inflate display claims', () => {
   const summary = model.summarizePickTopic({rows: [{ratio:0.3,seasonPeakMonth:99},{ratio:2,seasonPeakMonth:10}], targetCount:-1, shortfall:999}, 1, NaN);
-  assert.deepEqual(summary, {total:2,target:30,shortfall:28,golden:1,seasonal:0,general:1});
+  assert.deepEqual(summary, {total:2,target:100,shortfall:98,golden:1,seasonal:0,general:1});
+});
+
+test('one hundred measured rows remain visible without changing the free preview or order', () => {
+  const hundred = Array.from({length:100}, (_, index) => ({keyword:`추천 ${index+1}`,ratio:index < 40 ? 2 : 0.5}));
+  const visible = model.visiblePickRows(hundred, true);
+  assert.deepEqual(visible, hundred);
+  assert.notEqual(visible, hundred);
+  assert.deepEqual(model.visiblePickRows(hundred, false), hundred.slice(0,3));
+  assert.deepEqual(model.summarizePickTopic({rows:hundred},1), {total:100,target:100,shortfall:0,golden:40,seasonal:0,general:60});
+  assert.equal(model.summarizePickTopic({rows:hundred.slice(0,30),targetCount:30},1,100).target,30);
 });
