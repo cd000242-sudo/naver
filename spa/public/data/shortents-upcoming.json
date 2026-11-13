@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T21:49:27.193Z",
+ "builtAt": "2026-11-13T21:59:30.393Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 29,
  "candidates": [
   {
    "keyword": "젠슨 황 퇴진하나",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 5,
-   "press": 11,
-   "firstArticleAt": "2026-11-13T20:20:00.000Z",
+   "articles90": 15,
+   "recent20": 8,
+   "press": 13,
+   "firstArticleAt": "2026-11-13T20:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "엔비디아 후계 구도 요동…젠슨 황 후임에 Arm 하스 급부상",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-13T21:48:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101258"
+     "title": "젠슨 황 떠나자 670조원 AI 금융구상도 흔들",
+     "press": "kbmaeil.com",
+     "publishedAt": "2026-11-13T21:58:00.000Z",
+     "link": "https://www.kbmaeil.com/article/20261114500020"
     },
     {
-     "title": "[월드 프리즘] 젠슨 황 떠난 엔비디아, AI '돈줄' 마르나… 흔들리는 거...",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-13T21:46:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101254"
+     "title": "[뉴욕증시] 젠슨 황 스캔들 여파 지속…혼조 마감",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-13T21:56:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4444749"
     },
     {
-     "title": "젠슨황 퇴진에 670조원 AI 금융구상 '흔들'…금융사 이탈 움직임",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-13T21:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016441578?sid=104"
+     "title": "젠슨 황 여파 지속...미국증시 나스닥 '하락'",
+     "press": "choicenews.co.kr",
+     "publishedAt": "2026-11-13T21:52:00.000Z",
+     "link": "http://www.choicenews.co.kr/news/articleView.html?idxno=173179"
     }
    ]
   },
@@ -50,10 +50,16 @@
    "articles90": 5,
    "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-13T20:23:00.000Z",
+   "firstArticleAt": "2026-11-13T20:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "모레노호, 사우디전서 42년만 3실점 패배...오현규·이재성 골맛",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-13T21:56:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=781588"
+    },
     {
      "title": "'사우디전 충격패' 모레노호, 마지막 카타르전서 반등할까",
      "press": "news1.kr",
@@ -65,12 +71,6 @@
      "press": "newscj.com",
      "publishedAt": "2026-11-13T21:20:00.000Z",
      "link": "https://www.newscj.com/news/articleView.html?idxno=3448641"
-    },
-    {
-     "title": "내분 풀고 경기는 못 푼 모레노호…사우디에 42년만에 3실점 패배",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-13T21:12:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/081/0003699352"
     }
    ]
   },
@@ -81,7 +81,7 @@
     "nate"
    ],
    "articles90": 5,
-   "recent20": 2,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-13T21:00:00.000Z",
    "exclusive": false,
@@ -100,10 +100,10 @@
      "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=67723"
     },
     {
-     "title": "[오늘의 운세] 2026년 11월 14일 띠별 운세",
+     "title": "[오늘의 운세] 2026년 11월 14일 별자리 운세",
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-13T21:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006409734?sid=103"
+     "link": "https://n.news.naver.com/mnews/article/018/0006409735?sid=103"
     }
    ]
   }
