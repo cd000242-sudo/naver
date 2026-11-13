@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T17:27:53.581Z",
+ "builtAt": "2026-11-13T17:37:58.792Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,18 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "모레노호, 사우디에 2-3 패배",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 38,
-   "recent20": 1,
-   "press": 31,
-   "firstArticleAt": "2026-11-13T15:59:00.000Z",
+   "articles90": 37,
+   "recent20": 0,
+   "press": 30,
+   "firstArticleAt": "2026-11-13T16:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -45,6 +46,7 @@
   {
    "keyword": "젠슨 황과 엔비디아 위기",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 4,
@@ -71,38 +73,6 @@
      "press": "joongang.co.kr",
      "publishedAt": "2026-11-13T16:40:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/353/0000057268?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "미국 10월 생산자물가",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-13T16:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "뉴욕증시, 10월 PPI 둔화 속 장 초반 혼조세",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-13T16:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001204711?sid=101"
-    },
-    {
-     "title": "미국 10월 도매 물가 전년보다 6.5%↑...4년 만에 최고",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-13T16:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432660?sid=104"
-    },
-    {
-     "title": "미 10월 도매물가 전년 대비 6.5% 상승…4년만에 최고",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-13T16:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926044?sid=104"
     }
    ]
   }
