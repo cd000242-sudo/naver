@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T21:09:09.750Z",
+ "builtAt": "2026-11-13T21:19:16.851Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,8 +8,40 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 25,
  "candidates": [
+  {
+   "keyword": "모레노호 사우디에 2-3 패배",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-13T19:57:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "내분 풀고 경기는 못 푼 모레노호…사우디에 42년만에 3실점 패배",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-13T21:12:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/081/0003699352"
+    },
+    {
+     "title": "[IN POINT] 이강인은 왼발 크로스만 올리는 선수가 아닌데...모레노호만...",
+     "press": "interfootball.co.kr",
+     "publishedAt": "2026-11-13T20:55:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/413/0000226563"
+    },
+    {
+     "title": "'공격도 따로, 수비도 따로' 이게 원팀인가 모레노호, 선수들 간격 벌어...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-13T20:23:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/109/0005640127"
+    }
+   ]
+  },
   {
    "keyword": "2026년 11월 14일 운세",
    "sources": [
@@ -39,38 +71,6 @@
      "press": "asiatoday.co.kr",
      "publishedAt": "2026-11-13T21:00:00.000Z",
      "link": "https://www.asiatoday.co.kr/kn/view.php?key=20260914001435471"
-    }
-   ]
-  },
-  {
-   "keyword": "모레노호 사우디에 2-3 패배",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-13T19:57:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[IN POINT] 이강인은 왼발 크로스만 올리는 선수가 아닌데...모레노호만...",
-     "press": "interfootball.co.kr",
-     "publishedAt": "2026-11-13T20:55:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/413/0000226563"
-    },
-    {
-     "title": "'공격도 따로, 수비도 따로' 이게 원팀인가 모레노호, 선수들 간격 벌어...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-13T20:23:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/109/0005640127"
-    },
-    {
-     "title": "92·96라인 함께 뛰었지만…韓, 사우디에 42년 만의 3실점하며 완패",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-13T19:57:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/011/0004682092"
     }
    ]
   },
