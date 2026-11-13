@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-13T20:42:33.677Z",
+  "generatedAt": "2026-11-13T20:57:06.693Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -6736,73 +6736,6 @@
           "views": 214,
           "answers": 1,
           "askedAt": "2020.10.18"
-        }
-      ]
-    },
-    {
-      "id": "c60c6b3ec53a42ab",
-      "urls": [
-        "https://best79s.com/entry/2027-%EA%B5%AD%EA%B0%80%EA%B3%B5%EB%AC%B4%EC%9B%90-%EC%8B%9C%ED%97%98%EC%9D%BC%EC%A0%95-%EC%B4%9D%EC%A0%95%EB%A6%AC-5%C2%B77%C2%B79%EA%B8%89-%EA%B3%B5%EC%B1%84%C2%B7PSAT-%EA%B8%B0%EB%B3%B8%C2%B7%EC%8B%AC%ED%99%94-%EC%8B%9C%ED%97%98%EC%9D%BC%C2%B7%EC%9B%90%EC%84%9C%EC%A0%91%EC%88%98",
-        "https://piwpiw.tistory.com/entry/2027-%EA%B3%B5%EB%AC%B4%EC%9B%90-%EC%8B%9C%ED%97%98-%EC%9D%BC%EC%A0%95-PSAT-2%EC%9B%94-27%EC%9D%BC%C2%B79%EA%B8%89-3%EC%9B%94-27%EC%9D%BC"
-      ],
-      "guide": {
-        "direction": "9급 공무원 시험공부, 공무원시험공부고민 같은 질문은 날짜보다 원서접수부터 PSAT·필기까지 전체 준비 캘린더가 없어 막힌다. 고수 제목은 PSAT·9급 날짜만 던지고 직렬별 원서접수 기간과 지방직 응시지역별 신분증 인정 기준은 안 짚는다. 5·7·9급 시험일·원서접수 D-day표와 지방직 신분증 확인 체크리스트를 함께 주면 추가 검색 없이 끝낸다.",
-        "searchTargets": [
-          "공무원시험종류",
-          "지방직공무원시험",
-          "공무원시험개편",
-          "공무원시험과목"
-        ],
-        "mustInclude": [
-          "5·7·9급 공채 및 PSAT 기본·심화 시행일자 표 (확인 필요: 인사혁신처 공고)",
-          "직렬별 원서접수 시작·마감일 (확인 필요: 사이버국가고시센터)",
-          "지방직 응시지역(시·도) 시행기관별 신분증 인정 기준 차이",
-          "PSAT 기본·심화 응시 대상 직렬 구분(5급 vs 7급) (확인 필요: 인사혁신처)",
-          "국가직과 지방직 시험일 비교표"
-        ],
-        "mustAvoid": [
-          "공고 전인 2027년 일정을 확정 날짜처럼 못박아 쓰기",
-          "국가직과 지방직 시험일정을 한 표에 섞어 혼동 주기",
-          "한능검 등 가산 자격시험을 본 시험일정처럼 서술"
-        ],
-        "checkBefore": [
-          "2027년 공고 실제 발표 여부 — 인사혁신처·사이버국가고시센터",
-          "PSAT 기본/심화가 5급·7급 중 어디 해당하는지 — 인사혁신처 공고문",
-          "지방직 시행기관별 신분증 인정 기준 — 해당 시·도 공고"
-        ],
-        "solves": [
-          "9급 공무원 시험공부, 몇 번에 붙나 → 직렬별 시험일부터 역산한 준비 캘린더로 공백을 없앤다",
-          "지방공무원 시험 신분증 인정 → 응시 지역별 시행기관 확인 필요성을 표로 짚어준다",
-          "공무원시험 몇 월 혼란 → 5·7·9급 PSAT 기본·심화 날짜를 한 표로 구분해준다"
-        ],
-        "actionTitles": [
-          "2027 지방직공무원시험 일정·신분증 확인하는 법"
-        ]
-      },
-      "at": "2026-11-09T20:33:46.901Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "9급 공무원 시험공부",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40601&docId=495323945&answerNo=4&qb=6rO166y07JuQ7Iuc7ZeY",
-          "views": 678,
-          "answers": 4,
-          "askedAt": "2026.10.31"
-        },
-        {
-          "title": "공무원시험!",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40601&docId=495383504&answerNo=6&qb=6rO166y07JuQ7Iuc7ZeY",
-          "views": 482,
-          "answers": 6,
-          "askedAt": "2026.10.31"
-        },
-        {
-          "title": "공무원시험공부고민",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40601&docId=494964598&answerNo=6&qb=6rO166y07JuQ7Iuc7ZeY",
-          "views": 389,
-          "answers": 6,
-          "askedAt": "2026.10.31"
         }
       ]
     },
@@ -14003,73 +13936,6 @@
       "at": "2026-11-11T11:55:55.031Z",
       "rules": "2026-10-20-solve",
       "provider": "claude"
-    },
-    {
-      "id": "c8c3216accbea676",
-      "urls": [
-        "https://sweetonion1005.tistory.com/entry/%EB%A9%94%EA%B0%80%EC%8A%A4%ED%84%B0%EB%94%94-%ED%99%98%EA%B8%89-%EC%8B%A0%EC%B2%AD-%EB%B0%A9%EB%B2%95-%ED%95%84%EC%88%98-%EC%84%9C%EB%A5%98-%ED%99%98%EA%B8%89-%EA%B8%B0%EC%A4%80-2026-%EC%99%84%EB%B2%BD-%EA%B0%80%EC%9D%B4%EB%93%9C"
-      ],
-      "guide": {
-        "direction": "메가스터디 환급조건은 과목별 정답 일치 여부나 완강률처럼 세부 기준이 갈려 질문자들이 탈락 사유를 못 가려낸다. 기존 가이드 제목은 신청 방법만 다뤄 계좌 명의 오탈자 같은 실제 탈락 원인은 비워뒀다. 이 글은 환급형별 조건표와 서류·계좌 체크리스트로 탈락 없이 신청을 끝내게 한다.",
-        "searchTargets": [
-          "메가스터디 환급 기준",
-          "메가스터디 환급 방법",
-          "메가스터디 환급 계좌",
-          "메가스터디 환급 신청"
-        ],
-        "mustInclude": [
-          "과목별 찍은 답이 정답과 정확히 일치해야 하는지 여부(오차 시 제외 가능성)",
-          "수강 완료율 기준과 100% 미달 시 환급 가능 여부(확인 필요: 공식 환급 규정)",
-          "환급 계좌 명의 오탈자 등 탈락 빈발 원인과 서류 제출 주의사항",
-          "환급형은 미션 실패 시 환급만 안 될 뿐 수강 자체엔 불이익 없음",
-          "환급금·환급 대학 기준은 가입한 상품별로 다르니 상품별 규정 확인 필요"
-        ],
-        "mustAvoid": [
-          "환급 대학 리스트(2027·2028 등)를 확정 수치로 단정해 제시",
-          "특정 합격자 후기를 사생활 추측처럼 다루기",
-          "환급형과 일반 수강형 조건을 뒤섞어 혼동시키는 서술"
-        ],
-        "checkBefore": [
-          "메가스터디 공식 홈페이지의 올해(2026) 환급 규정·환급 대학 공지",
-          "가입 상품별 환급 조건 페이지에서 완강률·정답 일치 기준 확인"
-        ],
-        "solves": [
-          "메가스터디 환급조건 질문 → 과목별 정답 일치, 완강률 기준을 조건표로 정리",
-          "메가스터디 환급 계좌 문제 → 명의 오탈자 등 서류 제출 시 체크리스트 제공",
-          "메가스터디 환급형 질문 → 미션 실패 시 불이익 여부를 명확히 정리"
-        ],
-        "actionTitles": [
-          "메가스터디 환급 신청 방법, 서류 준비부터 계좌 등록까지",
-          "메가스터디 환급 기준 확인하는 법, 탈락 사유 체크리스트",
-          "메가스터디 환급형 미션 실패하면? 환급 계좌 등록 주의사항"
-        ]
-      },
-      "at": "2026-11-11T11:55:55.031Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "메가스터디 환급조건",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110409&docId=470600432&answerNo=1&qb=66mU6rCA7Iqk7YSw65SU7ZmY6riJ",
-          "views": 827,
-          "answers": 1,
-          "askedAt": "2024.06.04"
-        },
-        {
-          "title": "메가스터디 환급조건",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110408&docId=491709242&answerNo=2&qb=66mU6rCA7Iqk7YSw65SU7ZmY6riJ",
-          "views": 515,
-          "answers": 3,
-          "askedAt": "2026.02.10"
-        },
-        {
-          "title": "메가스터디 환급 관련",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=11003&docId=492890150&answerNo=2&qb=66mU6rCA7Iqk7YSw65SU7ZmY6riJ",
-          "views": 251,
-          "answers": 2,
-          "askedAt": "2026.07.29"
-        }
-      ]
     },
     {
       "id": "6087adc1065ca964",
@@ -66825,6 +66691,854 @@
           "askedAt": "2023.12.23"
         }
       ]
+    },
+    {
+      "id": "38120fd3ba93cd12",
+      "urls": [
+        "https://economyfactory.com/hope-savings-account/",
+        "https://www.primusy.com/feeds/7030139580924516029/comments/default",
+        "https://jio-chol.tistory.com/376",
+        "https://yjfreelifestyle.tistory.com/entry/%ED%9D%AC%EB%A7%9D%EC%A0%80%EC%B6%95%EA%B3%84%EC%A2%8C1-%EC%8B%A0%EC%B2%AD-%EC%A1%B0%EA%B1%B4-%EB%B0%8F-%EC%A0%95%EB%B6%80%EC%A7%80%EC%9B%90%EA%B8%88-%EC%B4%9D%EC%A0%95%EB%A6%AC-%EC%9B%94-10%EB%A7%8C%EC%9B%90-%EC%A0%80%EC%B6%95%ED%95%98%EB%A9%B4-%EC%A0%95%EB%B6%80%EA%B0%80-%EC%9B%94-30%EB%A7%8C%EC%9B%90-%EC%A0%81%EB%A6%BD",
+        "https://infomanager.kr/hope-savings-account/",
+        "https://sooahealth.com/entry/%ED%9D%AC%EB%A7%9D%EC%A0%80%EC%B6%95%EA%B3%84%EC%A2%8C-%EC%8B%A0%EC%B2%AD-%EC%A1%B0%EA%B1%B4%EA%B3%BC-%EC%A7%80%EC%9B%90%EA%B8%88-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0"
+      ],
+      "guide": {
+        "direction": "탈수급 후에도 지원금을 받는지, Ⅱ유형을 중도해지하면 지원금이 사라지는지 궁금해 검색하는 사람이 많다. 고수 글들은 신청조건과 1440만원이라는 숫자는 반복하지만 탈수급·중도해지 시 실제로 얼마가 사라지는지는 안 보여준다. 이 글은 1·2유형 연차별 적립표와 중도해지·탈수급 시 손실 규모를 수치로 비교해 신청 전 끝까지 확인하게 한다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "1440만원이 쌓이는 월별 적립 계산식(저축액+정부지원금, 1·2유형 비교)",
+          "Ⅱ유형 중도해지 시 정부지원금 상실 여부와 기준(지식인 답변 근거)",
+          "탈수급 후에도 지원금이 유지되는 조건(지식인 질문 기준)",
+          "근로소득장려금 연차별(1년차·2년차·3년차) 지급 구조표",
+          "자산형성지원콜센터(15로 시작) 문의 안내 (확인 필요: 복지로 공식 번호)"
+        ],
+        "mustAvoid": [
+          "1·2유형 지원 조건을 하나로 뭉쳐 설명해 독자가 자기 유형을 못 찾게 하는 것",
+          "작년 지원금액을 2026년 수치처럼 섞어 쓰는 것",
+          "중도해지 불이익을 생략하고 신청만 독려하는 것"
+        ],
+        "checkBefore": [
+          "보건복지부 복지로(bokjiro) 공식 희망저축계좌 공고문에서 2026년 지원금·조건 확인",
+          "자산형성지원콜센터 공식 번호와 운영시간 확인"
+        ],
+        "solves": [
+          "탈수급해도 지원금 받는지 모르는 문제 → 유형별 탈수급 시 지원금 유지 기준표 제공",
+          "중도해지하면 얼마나 손해인지 모르는 문제 → 해지 시점별 수령액 비교표 제공",
+          "1440만원이 어떻게 모이는지 모르는 문제 → 1·2유형 연차별 적립 계산식 제공"
+        ],
+        "actionTitles": [
+          "희망저축계좌 신청조건 확인하고 1440만원 받는 법",
+          "희망저축계좌Ⅱ 중도해지하면 지원금 얼마나 손실인지 계산하기",
+          "희망저축계좌 탈수급 후에도 지원금 유지되는지 확인법"
+        ]
+      },
+      "at": "2026-11-13T20:54:58.060Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "희망저축계좌1 유형 탈수급하더라도 지원금....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100101&docId=474241595&answerNo=1&qb=7Z2s66ed7KCA7LaV6rOE7KKMMSDsoJXrtoDsp4Dsm5DquIgg7KCA7LaVIOygleu2gCDsoIHrpr0=",
+          "views": 2976,
+          "answers": 3,
+          "askedAt": "2024.08.22"
+        },
+        {
+          "title": "희망저축계좌 II, 근로소득장려금 어떻게 달....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60804&docId=491858389&answerNo=2&qb=7Z2s66ed7KCA7LaV6rOE7KKMMSDsoJXrtoDsp4Dsm5DquIgg7KCA7LaVIOygleu2gCDsoIHrpr0=",
+          "views": 276,
+          "answers": 10,
+          "askedAt": "2026.02.09"
+        },
+        {
+          "title": "희망저축계좌 II, 중도 해지하면 정부 지원금 ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=61401&docId=491914118&answerNo=2&qb=7Z2s66ed7KCA7LaV6rOE7KKMMSDsoJXrtoDsp4Dsm5DquIgg7KCA7LaVIOygleu2gCDsoIHrpr0=",
+          "views": 166,
+          "answers": 6,
+          "askedAt": "2026.02.12"
+        }
+      ]
+    },
+    {
+      "id": "e81b5d6202424f6c",
+      "urls": [
+        "https://info-idea114.co.kr/entry/%EC%A7%84%EC%95%88-%EA%B0%80%EB%B3%BC%EB%A7%8C%ED%95%9C%EA%B3%B3-%EB%B2%A0%EC%8A%A4%ED%8A%B810",
+        "https://info-idea114.co.kr/entry/%EB%B6%80%EC%97%AC-%EA%B0%80%EB%B3%BC%EB%A7%8C%ED%95%9C%EA%B3%B3-%EB%B2%A0%EC%8A%A4%ED%8A%B810",
+        "https://info-idea114.co.kr/entry/%EC%97%AC%EC%A3%BC-%EA%B0%80%EB%B3%BC%EB%A7%8C%ED%95%9C%EA%B3%B3-%EB%B2%A0%EC%8A%A4%ED%8A%B810-%EC%B4%9D%EC%A0%95%EB%A6%AC-1",
+        "https://info-idea114.co.kr/entry/%EA%B3%A0%ED%9D%A5-%EA%B0%80%EB%B3%BC%EB%A7%8C%ED%95%9C%EA%B3%B3-%EB%B2%A0%EC%8A%A4%ED%8A%B810",
+        "https://health11nfo.tistory.com/1579",
+        "https://nitrogen.zncloud.pw/entry/11%EC%9B%94-%EA%B5%AD%EB%82%B4%EC%97%AC%ED%96%89%EC%A7%80-%EB%B2%A0%EC%8A%A4%ED%8A%B8-10-%EC%B6%94%EC%B2%9C"
+      ],
+      "guide": {
+        "direction": "서산 가볼만한곳을 검색하는 사람은 태안·당진과 묶어 하루에 도는 동선과, 아기랑 가기 좋은지 가을에 갈만한지를 구체적으로 궁금해한다. 고수 글들은 베스트10 나열에 그쳐 계절·동반자별로 어디가 맞는지 구분해주지 않는다. 이 글은 가을·아기랑·카페·절 테마로 묶고 해미읍성·버드랜드 등 지식인에 나온 장소를 동선 순서로 정리해 코스까지 끝내게 한다.",
+        "searchTargets": [
+          "서산 가볼만한곳 추천",
+          "서산 가볼만한곳 아기랑",
+          "서산 가볼만한곳 가을",
+          "서산 가볼만한곳 카페"
+        ],
+        "mustInclude": [
+          "서산 버드랜드 주소(충남 서산시 부석면 천수만로 655-73, 지식인 답변 기준)",
+          "서산 해미읍성 주소(충남 서산시 해미면 남문2로 143, 지식인 답변 기준)",
+          "서산 동부시장·호수공원(호공) 등 지식인에 언급된 명소",
+          "가을·아기랑·카페·절 테마별 추천 구분표",
+          "서산-태안-당진 이동 순서 (확인 필요: 지도 서비스 거리·시간)"
+        ],
+        "mustAvoid": [
+          "태안·당진 명소를 서산 명소처럼 섞어 쓰는 것",
+          "가을·11월용이라면서 여름 전용 해수욕장을 그대로 추천하는 것",
+          "번화가·술집 정보를 아기동반 추천과 구분없이 나열하는 것"
+        ],
+        "checkBefore": [
+          "서산시 문화관광 공식 홈페이지에서 버드랜드·해미읍성 휴무일·운영시간 확인",
+          "최신 지도 서비스로 서산-태안-당진 실제 이동 동선 확인"
+        ],
+        "solves": [
+          "서산에 뭐가 있는지 모르는 문제 → 테마별(가을/아기랑/카페/절) 장소 정리표 제공",
+          "서산·태안·당진을 어떻게 묶을지 모르는 문제 → 동선 순서 제시",
+          "번화가·술집만 나오고 가족여행지는 안 나오는 문제 → 구분된 리스트 제공"
+        ],
+        "actionTitles": [
+          "서산 가볼만한곳 아기랑 가기 좋은 곳 바로 확인하기",
+          "서산 태안 당진 가볼만한곳 동선 한번에 정리하는 법"
+        ]
+      },
+      "at": "2026-11-13T20:54:58.060Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "서산에 여행가려고 하는데 서산에가볼만한 ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=12150511&docId=167746799&answerNo=2&qb=7ISc7IKw6rCA67O866eM7ZWc6rOz",
+          "views": 27737,
+          "answers": 5,
+          "askedAt": "2013.02.21"
+        },
+        {
+          "title": "서산 가볼만한곳이랑 번화가",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=121505&docId=351543483&answerNo=2&qb=7ISc7IKw6rCA67O866eM7ZWc6rOz",
+          "views": 13663,
+          "answers": 2,
+          "askedAt": "2020.03.31"
+        },
+        {
+          "title": "혼자 국내여행지 추천",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=90109&docId=472034388&answerNo=13&qb=7ISc7IKw6rCA67O866eM7ZWc6rOz",
+          "views": 1783,
+          "answers": 14,
+          "askedAt": "2026.11.07"
+        }
+      ]
+    },
+    {
+      "id": "b2de3823addf5669",
+      "urls": [
+        "https://uknowlaw.com/nps-own-pension-survivor-benefit-choice/",
+        "https://blogger00220.tistory.com/entry/%EC%97%B0%EA%B8%88%C2%B7%EB%85%B8%ED%9B%84%EC%A4%80%EB%B9%84-47%ED%8E%B8-%EB%B6%80%EB%B6%80-%EA%B5%AD%EB%AF%BC%EC%97%B0%EA%B8%88-%ED%95%9C-%EB%AA%85-%EB%AA%B0%EC%95%84%EC%A3%BC%EA%B8%B0-vs-%EA%B0%81%EC%9E%90-%EA%B0%80%EC%9E%85-%EB%B0%B0%EC%9A%B0%EC%9E%90-%EC%82%AC%EB%A7%9D-%EC%8B%9C-%ED%84%B0%EC%A7%80%EB%8A%94-%EC%9C%A0%EC%A1%B1%EC%97%B0%EA%B8%88-%EC%A4%91%EB%B3%B5%EA%B8%89%EC%97%AC-%EC%A1%B0%EC%A0%95%EC%9D%98-%EC%B6%A9%EA%B2%A9%EC%A0%81-%EC%A7%84%EC%8B%A4%EA%B3%BC-%EC%B5%9C%EC%A0%81%ED%99%94-%EC%A0%84%EB%9E%B5",
+        "https://seniorguides.tistory.com/88"
+      ],
+      "guide": {
+        "direction": "배우자가 죽으면 내 국민연금과 유족연금을 둘 다 받는지, 재혼하면 유족연금이 끊기는지 헷갈려 검색한다. 고수 글은 '중복급여 조정'이라는 용어만 던지고 실제로 본인연금과 유족연금 중 얼마씩 받는지 계산은 안 보여준다. 이 글은 중복조정 비율과 재혼 시 소멸·정지 구분을 표로 정리해 선택을 끝내게 한다.",
+        "searchTargets": [
+          "배우자 사망시 국민연금",
+          "국민연금 배우자 사망",
+          "배우자 사망 후 국민연금",
+          "배우자 사망 연금"
+        ],
+        "mustInclude": [
+          "본인 국민연금+유족연금 중복수급 시 조정 비율 (확인 필요: 국민연금공단 공식 고시)",
+          "재혼 시 유족연금 수급권 '소멸'과 일시 '정지'의 차이 설명",
+          "사실혼 배우자는 법정상속인이 아니라 상속권이 없다는 점 (지식인 답변 기준)",
+          "유족연금 선택 신청 절차 (확인 필요: 국민연금공단 지사·EDI)"
+        ],
+        "mustAvoid": [
+          "유족연금과 상속재산(상속세 공제 등)을 같은 제도처럼 섞어 설명하는 것",
+          "사실혼과 법률혼 배우자의 수급권 차이를 구분 없이 쓰는 것"
+        ],
+        "checkBefore": [
+          "국민연금공단 공식 안내에서 2026년 기준 중복급여 조정 비율 확인",
+          "국민연금공단 상담센터(1355)에서 재혼 시 소멸·정지 처리 기준 확인"
+        ],
+        "solves": [
+          "유족연금과 내 연금 둘 다 받는지 모르는 문제 → 중복조정 비율 설명으로 해결",
+          "재혼하면 유족연금이 끊기는지 헷갈리는 문제 → 소멸·정지 구분표로 해결",
+          "사실혼 배우자라 상속·연금을 받을 수 있는지 모르는 문제 → 수급 자격 조건 정리로 해결"
+        ],
+        "actionTitles": [
+          "배우자 사망시 국민연금과 유족연금 중복수급 확인하기",
+          "배우자 사망 후 국민연금 받는 법 순서대로 정리하기"
+        ]
+      },
+      "at": "2026-11-13T20:54:58.060Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "배우자 사망 임대농지 관련 경영체등록 변경....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60103&docId=495579129&answerNo=1&qb=67Cw7Jqw7J6Q7IKs66ed",
+          "views": 86,
+          "answers": 3,
+          "askedAt": "2026.10.16"
+        },
+        {
+          "title": "배우자사망후현금인출문의합니다",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60220&docId=491086059&answerNo=4&qb=67Cw7Jqw7J6Q7IKs66ed",
+          "views": 1001,
+          "answers": 4,
+          "askedAt": "2026.11.08"
+        },
+        {
+          "title": "배우자 사망 후 상속재산 10억 미만 관련 질문....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40303&docId=495638857&answerNo=3&qb=67Cw7Jqw7J6Q7IKs66ed",
+          "views": 245,
+          "answers": 5,
+          "askedAt": "2026.10.21"
+        }
+      ]
+    },
+    {
+      "id": "6bd6bb202825336e",
+      "urls": [
+        "https://ace3.jspeopleone.com/entry/%EC%97%B0%EB%A7%90%EC%A0%95%EC%82%B0-%EA%B2%BD%EC%A0%95%EC%B2%AD%EA%B5%AC-%EB%B0%A9%EB%B2%95-5%EB%85%84-%EA%B8%B0%ED%95%9C-%EA%B3%84%EC%82%B0%EA%B3%BC-%EB%86%93%EC%B9%9C-%EC%9D%98%EB%A3%8C%EB%B9%84-%ED%99%98%EA%B8%89-%EC%98%88%EC%8B%9C",
+        "https://sweetonion1005.tistory.com/entry/%EB%A9%94%EA%B0%80%EC%8A%A4%ED%84%B0%EB%94%94-%ED%99%98%EA%B8%89-%EC%A1%B0%EA%B1%B4-2026-%ED%99%98%EA%B8%89%EC%9C%A8-%EB%B3%80%ED%99%94-%EC%8B%A0%EC%B2%AD-%EA%B8%B0%ED%95%9C-%EC%99%84%EB%B2%BD-%EC%A0%95%EB%A6%AC"
+      ],
+      "guide": {
+        "direction": "메가스터디 환급조건은 과목별 정답 일치, 수강완료율, 계좌 명의 오탈자 등 상품마다 달라 검색자가 가장 헷갈려하는 지점이다. 고수 블로그 제목은 '환급율 변화·신청기한' 같은 거시적 정리에 그쳐 지식인에 실제로 올라오는 오탈자·완료율 기준·미션 실패시 불이익 여부는 짚지 못한다. 상품별 환급 조건표와 서류 체크리스트, 신청 순서를 함께 정리하면 독자가 이 글만으로 신청까지 끝낼 수 있다.",
+        "searchTargets": [
+          "메가스터디 환급 기준",
+          "메가스터디 환급 방법",
+          "메가스터디 환급 신청",
+          "메가스터디 환급형"
+        ],
+        "mustInclude": [
+          "계좌 명의 오탈자로 환급 탈락하는 서류 제출 주의사항",
+          "상품별 환급 조건 구분표(정답 일치형 vs 수강완료율형)",
+          "환급형 미션 실패 시 수강 불이익은 없고 환급만 제외된다는 점",
+          "환급 대상 대학 리스트는 연도별로 바뀌므로 확정 단정 금지(확인 필요: 메가스터디 공식 공지)"
+        ],
+        "mustAvoid": [
+          "특정 합격자 개인 후기를 전체 환급조건처럼 일반화하지 말 것",
+          "연도별로 바뀌는 환급 대상 대학 리스트를 확정 사실처럼 쓰지 말 것(확인 필요)"
+        ],
+        "checkBefore": [
+          "상품별 환급 조건·완료율 기준은 메가스터디 공식 홈페이지 공지에서 확인",
+          "환급 대상 대학 리스트는 연도별 공지로 바뀌므로 최신 공지 재확인"
+        ],
+        "solves": [
+          "환급조건이 정답 일치인지 완료율인지 헷갈림 → 상품별 조건 구분표 제공",
+          "계좌 명의 오탈자로 탈락 → 서류 제출 체크리스트 정리",
+          "환급형 미션 실패시 불이익 있는지 궁금 → 수강 불이익 없음, 환급만 제외됨을 명시"
+        ],
+        "actionTitles": [
+          "메가스터디 환급 신청 방법, 계좌 명의 오탈자부터 확인",
+          "메가스터디 환급 기준 정리, 환급형 조건표로 한눈에 확인",
+          "메가스터디 환급 대학 리스트 확인 전 꼭 봐야 할 조건"
+        ]
+      },
+      "at": "2026-11-13T20:54:58.060Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "메가스터디 환급조건",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110409&docId=470600432&answerNo=1&qb=66mU6rCA7Iqk7YSw65SU7ZmY6riJ",
+          "views": 829,
+          "answers": 1,
+          "askedAt": "2024.06.04"
+        },
+        {
+          "title": "메가스터디 환급조건",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110408&docId=491709242&answerNo=2&qb=66mU6rCA7Iqk7YSw65SU7ZmY6riJ",
+          "views": 520,
+          "answers": 3,
+          "askedAt": "2026.02.10"
+        },
+        {
+          "title": "메가스터디 환급 관련",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=11003&docId=492890150&answerNo=2&qb=66mU6rCA7Iqk7YSw65SU7ZmY6riJ",
+          "views": 256,
+          "answers": 2,
+          "askedAt": "2026.07.29"
+        }
+      ]
+    },
+    {
+      "id": "3c0ff3b8da34fc31",
+      "urls": [
+        "https://nav0120.tistory.com/entry/%EC%A1%B4%EC%9E%AC%EC%9D%98-%ED%98%95%EC%8B%9D-%EB%B0%A9%ED%98%84%EC%84%9D-%ED%83%80%EC%9D%B8%EC%9D%98-%EA%B8%B0%EC%96%B5%EC%9D%84-%EC%9D%B4%ED%95%B4%ED%95%A0-%EB%95%8C-%EB%B9%84%EB%A1%9C%EC%86%8C-%EC%99%84%EC%84%B1%EB%90%98%EB%8A%94-%EC%9D%B8%EA%B0%84%EC%9D%98-%EC%A1%B4%EC%9E%AC"
+      ],
+      "guide": {
+        "direction": "독자는 '방현석 존재의 형식'이 어떤 내용인지, 제목이 뜻하는 '존재의 형식'이 무엇인지 궁금해 검색한다. 고수 블로그는 제목만 공유해 줄거리나 주제 요약이 비어 있는 경우가 많다. 줄거리 요약과 작가 소개, 핵심 주제(타인의 기억 이해)를 스포일러 경고와 함께 정리하면 검색이 끝난다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "소설의 핵심 주제: 타인의 기억을 이해해야 완성되는 존재(확인 필요: 책 소개)",
+          "작가 방현석의 약력과 대표작(확인 필요: 공식 작가 소개)"
+        ],
+        "mustAvoid": [
+          "하이데거 등 '존재' 개념을 다루는 다른 철학서와 혼동하지 말 것"
+        ],
+        "checkBefore": [
+          "작가 방현석의 약력은 공식 작가 프로필에서 확인"
+        ],
+        "solves": [
+          "존재의 형식이 무슨 내용인지 모름 → 스포일러 경고 포함 줄거리 요약 제공",
+          "작가 방현석이 누구인지 궁금 → 약력·대표작 정리(확인 필요)"
+        ],
+        "actionTitles": [
+          "방현석 존재의 형식 줄거리 확인, 스포일러 주의 요약",
+          "존재의 형식 서평 보기 전 작가 방현석 약력부터 확인",
+          "방현석 존재의 형식 핵심 주제, 한 줄로 정리해 확인하기"
+        ]
+      },
+      "at": "2026-11-13T20:54:58.060Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "486a106d8f7e8e2f",
+      "urls": [
+        "https://sweetonion1005.tistory.com/entry/%EC%9D%BC%EC%83%81%EC%83%9D%ED%99%9C%EB%B0%B0%EC%83%81%EC%B1%85%EC%9E%84%EB%B3%B4%ED%97%98%EC%9C%BC%EB%A1%9C-%EB%88%84%EC%88%98-%ED%94%BC%ED%95%B4-%EB%B3%B4%EC%83%81%EB%B0%9B%EA%B8%B0-%EB%B3%B4%EC%9E%A5-%EB%B2%94%EC%9C%84-%EC%B2%AD%EA%B5%AC-%EC%A0%88%EC%B0%A8"
+      ],
+      "guide": {
+        "direction": "검색자는 누수가 났을 때 '우리집 자체 피해는 왜 안 되는지', '면책기간·자기부담금이 얼마인지', '배우자 명의 보험으로도 받을 수 있는지'에서 막힌다. 고수 블로그 제목은 '보장범위·청구절차'로 뭉뚱그려 이 구체 수치와 가족특약 여부를 짚지 못한다. 보장 대상표, 면책기간·자기부담금 기준, 청구 서류 순서를 정리하면 독자가 바로 청구를 시작할 수 있다.",
+        "searchTargets": [
+          "일상생활배상책임보험 누수 면책기간",
+          "일상생활배상책임보험 누수 보상 범위",
+          "일상생활배상책임보험 누수 우리집",
+          "일상생활배상책임보험 누수 자기부담금"
+        ],
+        "mustInclude": [
+          "우리집 자체 피해는 일상배상책임 대상이 아니며 별도 담보 필요(확인 필요: 가입 상품)",
+          "배우자 등 가족 명의 보험으로도 가족일배책 특약으로 청구 가능",
+          "단독·다가구 주택은 주인세대와 세입자 피해 보장 여부가 다름",
+          "면책기간·자기부담금 수치는 보험사·상품별로 다름(확인 필요: 약관)"
+        ],
+        "mustAvoid": [
+          "보험사마다 다른 면책기간·자기부담금을 하나의 수치처럼 단정하지 말 것",
+          "일상배상책임보험을 화재보험·주택종합보험과 혼동하지 말 것",
+          "계약자 주민번호 등 개인정보를 요구하는 출처 불명 링크 안내 금지"
+        ],
+        "checkBefore": [
+          "가입한 보험사의 면책기간·자기부담금은 약관이나 고객센터에서 확인",
+          "우리집 자체 피해 보장 여부는 가입 상품의 특약 구성에 따라 보험사에 확인"
+        ],
+        "solves": [
+          "우리집 피해는 왜 보상 안 되냐 → 일상배상책임과 별도 담보의 역할 구분 설명",
+          "배우자 명의 보험으로 내가 보상받을 수 있나 → 가족일배책 특약 보장 범위 정리",
+          "다가구 주택 세입자 피해 보상 여부 → 주인세대·세입자 구분 기준 정리"
+        ],
+        "actionTitles": [
+          "일상생활배상책임보험 누수 보상 범위, 우리집 피해 확인법",
+          "일상생활배상책임보험 누수 면책기간·자기부담금 비교하기",
+          "일상생활배상책임보험 누수 청구 전 보장 범위 꼭 확인하기"
+        ]
+      },
+      "at": "2026-11-13T20:54:58.060Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "일상배상책임보험으 누수 보상범위 문의",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80902&docId=495033886&answerNo=1&qb=7J287IOB7IOd7Zmc67Cw7IOB7LGF7J6E67O07ZeYIOuIhOyImCDtlLztlbQg67O07IOB67Cb6riwIOuztOyepQ==",
+          "views": 454,
+          "answers": 3,
+          "askedAt": "2026.09.04"
+        },
+        {
+          "title": "일상생활배상책임보험 주소이전 누수",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=4010302&docId=495492471&answerNo=8&qb=7J287IOB7IOd7Zmc67Cw7IOB7LGF7J6E67O07ZeYIOuIhOyImCDtlLztlbQg67O07IOB67Cb6riwIOuztOyepQ==",
+          "views": 294,
+          "answers": 9,
+          "askedAt": "2026.11.02"
+        },
+        {
+          "title": "아파트 누수 일상배상책임 배우자 명의 보험....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=401030203&docId=495148570&answerNo=4&qb=7J287IOB7IOd7Zmc67Cw7IOB7LGF7J6E67O07ZeYIOuIhOyImCDtlLztlbQg67O07IOB67Cb6riwIOuztOyepQ==",
+          "views": 261,
+          "answers": 7,
+          "askedAt": "2026.09.14"
+        }
+      ]
+    },
+    {
+      "id": "21a39c3eeac9a821",
+      "urls": [
+        "https://shinnaburo.tistory.com/entry/alice-huang-china-intelligence-ai-chip-2026"
+      ],
+      "guide": {
+        "direction": "검색자는 '앨리스 황이 누구인지', '국가안전부 공작원'이라는 표현이 사실인지가 궁금해 들어온다. 고수 글은 제목만 그대로 옮겨 의혹의 출처·경위와 중국이 주시하는 근거를 구체적으로 풀지 않았다. 이 글은 보도 출처와 의혹 내용을 '확정 사실'과 '미확인 보도'로 구분해 정리해 혼란을 끝낸다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "앨리스 황(Alice Huang)이 누구이며 젠슨 황과의 관계 (확인 필요: 원문 보도)",
+          "'중국 국가안전부 공작원' 의혹을 처음 제기한 매체와 시점 (확인 필요: 원문 기사)",
+          "중국이 이 인물을 주시한다고 전해지는 근거 (확인 필요: 원문 기사)",
+          "엔비디아·젠슨 황 측 또는 중국 측의 공식 반응 여부 (확인 필요)"
+        ],
+        "mustAvoid": [
+          "앨리스 황의 사생활·가족관계를 근거 없이 추측하기"
+        ],
+        "checkBefore": [
+          "엔비디아 또는 젠슨 황 관련 공식 채널의 반응 여부 확인"
+        ],
+        "solves": [
+          "앨리스 황이 누구인지 몰라 궁금 → 보도된 신원·관계 정리",
+          "'국가안전부 공작원'이 사실인지 궁금 → 출처와 확인 여부를 구분해 제시",
+          "중국이 왜 주시하는지 몰라 → 보도된 배경과 근거 정리"
+        ],
+        "actionTitles": [
+          "젠슨 황 여자친구 앨리스 황 신원, 보도 내용 확인하기",
+          "중국이 앨리스 황 주시하는 이유 보도 근거 확인하기"
+        ]
+      },
+      "at": "2026-11-13T20:54:58.060Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "f88261473a504b74",
+      "urls": [
+        "https://ghostweb.tistory.com/2532"
+      ],
+      "guide": {
+        "direction": "검색자는 '릴리 돌파재료가 뭔지', '최적 파티 조합이 뭔지', '언제 픽업되는지'가 궁금해 들어온다. 고수 글 제목은 회절·권총·스킬·공명체인만 나열해 재료 수량표와 추천 조합이 빠져 있다. 이 글은 돌파재료 표, 추천 파티, 픽업 일정을 한 번에 정리해 검색을 끝낸다.",
+        "searchTargets": [
+          "명조 릴리 재료",
+          "명조 릴리 돌파",
+          "명조 릴리 파티",
+          "명조 릴리 픽업"
+        ],
+        "mustInclude": [
+          "릴리 속성(회절)과 무기(권총) 기본 정보",
+          "돌파·상승 재료 종류와 수량표 (확인 필요: 공식 홈페이지/나무위키)",
+          "추천 파티 조합과 이유 (확인 필요: 공식 패치노트/나무위키)",
+          "릴리 출시일·픽업 일정 (확인 필요: 공식 공지)",
+          "공명 체인 효과 요약"
+        ],
+        "mustAvoid": [
+          "출시일·픽업 일정을 비공식 루머로 단정해서 쓰기"
+        ],
+        "checkBefore": [
+          "게임 공식 홈페이지·공식 SNS에서 릴리 출시일·픽업 일정 확인",
+          "나무위키 또는 패치노트에서 돌파재료 수량 확인"
+        ],
+        "solves": [
+          "릴리 돌파재료 뭐 필요한지 몰라 → 재료 수량표 정리",
+          "릴리랑 어떤 캐릭터 조합이 좋은지 몰라 → 추천 파티 조합 제시",
+          "릴리 언제 나오는지 몰라 → 출시일·픽업 일정 정리"
+        ],
+        "actionTitles": [
+          "명조 릴리 돌파재료 수량 확인하고 미리 파밍하기",
+          "명조 릴리 최적 파티 조합 비교, 조합 짜는 법",
+          "명조 릴리 출시일·픽업 일정 확인하기"
+        ]
+      },
+      "at": "2026-11-13T20:54:58.060Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "6d3922a09f16a30c",
+      "urls": [
+        "https://somibool.com/entry/MBTI%EC%99%80-%EC%9C%84%EB%A1%9C-ENFJ-%EC%9C%A0%ED%98%95-%E2%80%93-16%ED%8E%B8",
+        "https://somibool.com/entry/MBTI%EC%99%80-%EA%B1%B1%EC%A0%95-ISTP-%EC%9C%A0%ED%98%95-%E2%80%93-6%ED%8E%B8",
+        "https://somibool.com/entry/MBTI%EC%99%80-%EC%9C%84%EB%A1%9C-ESFJ-%EC%9C%A0%ED%98%95-%E2%80%93-15%ED%8E%B8",
+        "https://somibool.com/entry/MBTI%EC%99%80-%EA%B1%B1%EC%A0%95-ISFJ-%EC%9C%A0%ED%98%95-%E2%80%93-5%ED%8E%B8",
+        "https://somibool.com/entry/MBTI%EC%99%80-%EC%9C%84%EB%A1%9C-ESTJ-%EC%9C%A0%ED%98%95-%E2%80%93-14%ED%8E%B8",
+        "https://somibool.com/entry/MBTI%EC%99%80-%EA%B1%B1%EC%A0%95-ISTJ-%EC%9C%A0%ED%98%95-%E2%80%93-4%ED%8E%B8"
+      ],
+      "guide": {
+        "direction": "ENFJ는 일반적인 위로가 와닿지 않아 자기 유형에 맞는 위로 문장을 찾는다. 고수 블로그 제목은 유형별 위로·걱정 시리즈를 나열만 하고 16편의 실제 내용이나 전체 목차는 보여주지 않는다. 이 글은 ENFJ 16편 핵심 문장과 시리즈 전체 목차·이전편 링크를 한 번에 정리해 바로 확인하게 한다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "ENFJ(사회운동가형) 성격 특징 요약과 위로 포인트 정리",
+          "위로 16편이라는 회차 번호와 시리즈 내 순서 명시",
+          "위로·걱정 전체 시리즈 목차표(유형별 편수 포함)",
+          "이전편(ESFJ 15편)·다음편 링크, 원문 출처(확인 필요: 연재처)"
+        ],
+        "mustAvoid": [
+          "ENFJ와 다른 유형(ESFJ·ESTJ 등) 특징을 섞어서 혼동하는 서술",
+          "MBTI 유형을 근거로 성격을 단정적으로 일반화하는 표현"
+        ],
+        "checkBefore": [
+          "이 '위로·걱정' 시리즈의 연재처와 16편이 전체 중 몇 번째인지 원문에서 확인"
+        ],
+        "solves": [
+          "ENFJ인데 일반적 위로가 와닿지 않는다 → 유형 특징에 맞춘 위로 문장 16편 핵심 정리",
+          "시리즈를 어디서 순서대로 보는지 모른다 → 위로·걱정 전체 목차와 편별 링크 정리"
+        ],
+        "actionTitles": [
+          "ENFJ 위로 16편 핵심 정리, 시리즈 목차 한눈에 확인",
+          "ENFJ 유형 위로 문장 모음, 16편만 확인하기"
+        ]
+      },
+      "at": "2026-11-13T20:54:58.060Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "mbti 유형별 성격",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1111&docId=404956219&answerNo=1&qb=bWJ0aSDsnITroZwgZW5maiDsnKDtmJU=",
+          "views": 23096,
+          "answers": 1,
+          "askedAt": "2021.11.13"
+        },
+        {
+          "title": "MBTI 애인이 바람피는 걸 목격했을 때 유형별",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1111&docId=401716618&answerNo=2&qb=bWJ0aSDsnITroZwgZW5maiDsnKDtmJU=",
+          "views": 4958,
+          "answers": 2,
+          "askedAt": "2021.10.04"
+        },
+        {
+          "title": "MBTI 유형별 추천 직업, 진짜 맞을까요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=31501&docId=491581289&answerNo=3&qb=bWJ0aSDsnITroZwgZW5maiDsnKDtmJU=",
+          "views": 467,
+          "answers": 7,
+          "askedAt": "2026.01.26"
+        }
+      ]
+    },
+    {
+      "id": "ebbd0e55c18cadf0",
+      "urls": [
+        "https://sanche.co.kr/conflict-style-test/"
+      ],
+      "guide": {
+        "direction": "갈등 상황에서 본인이 정면 대화형·숨 고르기형·조율형·배려형 중 어디에 속하는지 빠르게 알고 싶은 사람들이 8문항 자가진단을 찾는다. 고수 블로그 제목은 '질문 8개'라고만 적고 실제 문항이나 유형별 결과 설명은 보여주지 않는다. 이 글은 8개 질문 전체와 4가지 유형별 결과 설명·판정 기준을 한 번에 제공해 테스트를 끝내게 한다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "질문 8개 전체 문항과 선택지 그대로 제시",
+          "4가지 유형(정면 대화형·숨 고르기형·조율형·배려형)별 결과 설명",
+          "유형 판정 기준(응답 조합에 따른 점수/분류표)",
+          "유형별 장단점과 갈등 상황 대처 팁 요약"
+        ],
+        "mustAvoid": [
+          "MBTI·애니어그램 등 다른 성격유형 테스트와 결과를 섞어 설명",
+          "테스트 결과를 전문 심리상담 진단처럼 단정적으로 말하기"
+        ],
+        "checkBefore": [
+          "이 테스트의 원문 출처와 8문항의 정확한 문구·선택지를 원문에서 확인"
+        ],
+        "solves": [
+          "내가 갈등에서 어떤 스타일인지 모른다 → 8문항 질문과 즉시 판정 가능한 기준표 제공",
+          "유형 이름만 알고 뭘 해야 할지 모른다 → 유형별 장단점과 대처 팁까지 정리"
+        ],
+        "actionTitles": [
+          "갈등 대처 스타일 테스트 질문 8개로 바로 확인하기"
+        ]
+      },
+      "at": "2026-11-13T20:54:58.060Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "6학년2학기중간고사",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=11&docId=62865436&answerNo=31&qb=6rCI65OxIOyKpO2DgOydvCDthYzsiqTtirgg7KeI66y4IOyVjOyVhOuztA==",
+          "views": 8866,
+          "answers": 27,
+          "askedAt": "2008.04.05"
+        },
+        {
+          "title": "엠비씨 100분토론 471회 대본이요ㅠ.ㅠ",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=30103&docId=118183863&answerNo=1&qb=6rCI65OxIOyKpO2DgOydvCDthYzsiqTtirgg7KeI66y4IOyVjOyVhOuztA==",
+          "views": 8839,
+          "answers": 1,
+          "askedAt": "2010.10.23"
+        },
+        {
+          "title": "6학년2학기 사회 요점 정리",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110207&docId=29354933&answerNo=4&qb=6rCI65OxIOyKpO2DgOydvCDthYzsiqTtirgg7KeI66y4IOyVjOyVhOuztA==",
+          "views": 7523,
+          "answers": 7,
+          "askedAt": "2007.11.29"
+        }
+      ]
+    },
+    {
+      "id": "d0201a19e7060c37",
+      "urls": [
+        "https://sanche.co.kr/color-flood-puzzle-game/"
+      ],
+      "guide": {
+        "direction": "왼쪽 위 칸에서 색을 바꿔 전체를 채우는 무료 퍼즐 게임의 난이도 3단계에서 막혀 공략 순서를 찾는 사람들이 있다. 고수 블로그 제목은 게임 소개만 하고 3단계를 몇 번의 색 변경으로 깨는지는 보여주지 않는다. 이 글은 3단계 공략을 단계별 색 변경 순서와 최소 이동 횟수로 정리해 바로 깨게 한다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "조작법(왼쪽 위 칸 클릭으로 색 변경, 전체 한 색 채우기 목표) 설명",
+          "난이도 3단계라는 표시와 칸 수·색 종류 수(확인 필요: 실제 게임 화면)",
+          "3단계 공략 순서를 단계별 색 변경 리스트로 제시",
+          "무료 플레이 가능 여부와 접속 방법(확인 필요: 제공 사이트/앱)"
+        ],
+        "mustAvoid": [
+          "액션퍼즐패밀리·스도쿠 등 비슷한 다른 퍼즐 게임과 혼동",
+          "실제 게임 화면 확인 없이 추측으로 공략 순서를 지어내기"
+        ],
+        "checkBefore": [
+          "게임의 정확한 이름과 제공 사이트, 난이도 3단계의 실제 칸 수/색 수를 원문에서 확인"
+        ],
+        "solves": [
+          "3단계에서 계속 막힌다 → 단계별 색 변경 순서를 최소 이동 횟수로 정리",
+          "이 게임이 뭔지, 무료인지 모른다 → 게임 소개와 플레이 방법 정리"
+        ],
+        "actionTitles": [
+          "색 채우기 퍼즐 게임 난이도 3단계, 공략 순서 확인",
+          "색 채우기 퍼즐 3단계 공략법, 지금 바로 확인하기"
+        ]
+      },
+      "at": "2026-11-13T20:54:58.060Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "고전 문학 추천해주세요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=307&docId=475623673&answerNo=16&qb=7LGE7Jqw6riwIO2NvOymkCDqsozsnoQg7Jm87Kq9IOyDieydhA==",
+          "views": 228718,
+          "answers": 17,
+          "askedAt": "2026.11.06"
+        },
+        {
+          "title": "액션퍼즐패밀리 미션",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=208&docId=68212835&answerNo=18&qb=7LGE7Jqw6riwIO2NvOymkCDqsozsnoQg7Jm87Kq9IOyDieydhA==",
+          "views": 55160,
+          "answers": 8,
+          "askedAt": "2008.08.31"
+        },
+        {
+          "title": "액션퍼즐패밀리3 옷,별,아이탬",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=208&docId=70210402&answerNo=4&qb=7LGE7Jqw6riwIO2NvOymkCDqsozsnoQg7Jm87Kq9IOyDieydhA==",
+          "views": 54250,
+          "answers": 2,
+          "askedAt": "2009.11.06"
+        }
+      ]
+    },
+    {
+      "id": "650eee9c1c3e13b1",
+      "urls": [
+        "https://sanche.co.kr/base64-encoder-decoder/"
+      ],
+      "guide": {
+        "direction": "검색자는 한글이 포함된 문자열을 Base64로 바꾸면 깨지거나, URL에 넣었을 때 +·/·= 때문에 오류가 나는 지점에서 막힌다. 고수 블로그 제목은 'UTF-8·URL-safe 변환'을 언급만 하고 왜 깨지는지, 입력값이 어떻게 바뀌는지 과정을 안 보여준다. 이 글은 원문 → UTF-8 바이트 → Base64 → URL-safe 변환까지 단계별로 보여주고 바로 입력해보게 해서 끝낸다.",
+        "searchTargets": [
+          "base64 변환기"
+        ],
+        "mustInclude": [
+          "일반 Base64와 URL-safe Base64의 문자 차이(+,/,= vs -,_)",
+          "한글(멀티바이트) 문자열이 깨지는 원인 = UTF-8 바이트 변환 누락",
+          "텍스트 입력 변환과 파일 업로드 변환의 결과물 차이",
+          "인코딩 ↔ 디코딩 왕복 시 원문이 그대로 복원되는지 확인하는 방법"
+        ],
+        "mustAvoid": [
+          "비밀번호·주민번호 등 민감정보를 Base64로 '암호화'한다고 오해시키는 서술(Base64는 인코딩일 뿐 암호화 아님)",
+          "사운드카드·드라이버 설치 같은 지식인 검색 노출용 무관 내용 섞어 쓰기"
+        ],
+        "checkBefore": [
+          "RFC 4648 URL-safe Base64 알파벳 정의(공식 표준 문서)",
+          "브라우저 btoa/atob가 한글(멀티바이트)에서 바로 실패하는지 실제 동작 확인"
+        ],
+        "solves": [
+          "한글 문자열 Base64 변환하면 깨져요 → UTF-8 바이트로 먼저 바꾼 뒤 인코딩하는 순서 제공",
+          "URL에 Base64 값 넣으면 오류나요 → URL-safe 변환(+,/→-,_) 결과를 바로 비교해서 보여줌"
+        ],
+        "actionTitles": [
+          "Base64 변환기로 한글 UTF-8 인코딩·디코딩 하는 법",
+          "URL-safe Base64 변환, 깨짐 없이 바로 하는 법",
+          "한글 파일 Base64 인코딩, 변환기로 즉시 확인하기"
+        ]
+      },
+      "at": "2026-11-13T20:54:58.060Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "제 컴퓨터에 맞는 사운드카드를 알려주세요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10206&docId=70943652&answerNo=2&qb=YmFzZTY0IOuzgO2ZmOq4sCDtlZzquIAgdXRmIOusuOyekOyXtA==",
+          "views": 78958,
+          "answers": 2,
+          "askedAt": "2008.03.20"
+        },
+        {
+          "title": "win xp 팁좀 알려주세요 ...",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10301&docId=64535403&answerNo=3&qb=YmFzZTY0IOuzgO2ZmOq4sCDtlZzquIAgdXRmIOusuOyekOyXtA==",
+          "views": 76693,
+          "answers": 3,
+          "askedAt": "2004.05.27"
+        },
+        {
+          "title": "os깔고나서 또 뭘 깔아야 하나요~ 내공20",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10301&docId=64639104&answerNo=5&qb=YmFzZTY0IOuzgO2ZmOq4sCDtlZzquIAgdXRmIOusuOyekOyXtA==",
+          "views": 25279,
+          "answers": 2,
+          "askedAt": "2004.08.13"
+        }
+      ]
+    },
+    {
+      "id": "e65556bd2b0fa071",
+      "urls": [
+        "https://sanche.co.kr/blood-type-inheritance-calculator/"
+      ],
+      "guide": {
+        "direction": "검색자는 '부모가 둘 다 일반 혈액형인데 나는 Rh-다', '부모 혈액형표에 내 혈액형이 안 나온다'는 지점에서 막힌다(지식인 다수 질문). 고수 블로그 제목은 계산기 기능만 소개하고 AO·BO 같은 숨겨진 유전자형 조합표까지는 안 보여준다. 이 글은 부모 ABO·Rh 유전자형 조합별로 나올 수 있는 자녀 혈액형과 확률을 표로 한 번에 보여줘서 끝낸다.",
+        "searchTargets": [
+          "혈액형 유전 확률",
+          "혈액형 유전자형",
+          "혈액형 유전법칙",
+          "혈액형 유전 표"
+        ],
+        "mustInclude": [
+          "ABO 유전자형 조합표(AA·AO·BB·BO·AB·OO)와 겉으로 보이는 혈액형 매칭",
+          "Rh- 자녀가 나오려면 부모 둘 다 Rh- 유전자를 하나씩 가지고 있어야 한다는 원리",
+          "부모가 각각 A형(AO)·B형(BO)일 때 나올 수 있는 자녀 혈액형 전체 목록",
+          "겉보기 혈액형만으로는 유전자형(AO인지 AA인지)을 알 수 없다는 한계"
+        ],
+        "mustAvoid": [
+          "이 계산기를 친자 확인·부정 의심 판단 용도로 쓰라고 암시하는 서술",
+          "cis-AB, Rh null 등 극히 드문 변이 혈액형을 일반 법칙처럼 섞어 설명하기"
+        ],
+        "checkBefore": [
+          "ABO·Rh 유전 법칙(멘델 유전) 공식 의학·생물 교과 자료로 교차 확인"
+        ],
+        "solves": [
+          "부모 혈액형으로 내 혈액형이 안 나와요 → 숨은 유전자형(AO·BO) 조합표로 가능한 경우 전부 보여줌",
+          "부모 둘 다 일반형인데 저는 Rh- → 양쪽 부모의 잠재 Rh- 유전자 보유 가능성으로 설명"
+        ],
+        "actionTitles": [
+          "혈액형 유전확률 계산기로 자녀 혈액형 바로 확인하기",
+          "혈액형 유전법칙, 부모 혈액형 넣고 계산하는 법"
+        ]
+      },
+      "at": "2026-11-13T20:54:58.060Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "혈액형 중에 ABO말고 더 있는데 다른 혈액형들....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1116&docId=142767889&answerNo=3&qb=7ZiI7JWh7ZiVIOycoOyghCDrtoDrqqggYWJvIHJo",
+          "views": 2702,
+          "answers": 5,
+          "askedAt": "2012.01.03"
+        },
+        {
+          "title": "부모님이 일반혈액형인데 저는 rh -형입니다",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=708&docId=22514007&answerNo=3&qb=7ZiI7JWh7ZiVIOycoOyghCDrtoDrqqggYWJvIHJo",
+          "views": 2318,
+          "answers": 2,
+          "askedAt": "2006.01.18"
+        },
+        {
+          "title": "ABO혈액형에 대한질문입니다 급해요!!!!!!!!!!!!",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1116&docId=66048273&answerNo=1&qb=7ZiI7JWh7ZiVIOycoOyghCDrtoDrqqggYWJvIHJo",
+          "views": 1211,
+          "answers": 1,
+          "askedAt": "2009.03.22"
+        }
+      ]
+    },
+    {
+      "id": "d07b7d0db3e8baa7",
+      "urls": [
+        "https://sanche.co.kr/realtor-exam-score-calculator/"
+      ],
+      "guide": {
+        "direction": "검색자는 '가채점을 어떻게 하는지', '가채점과 실제 발표 점수가 왜 다른지' 지점에서 막힌다. 고수 블로그 제목은 계산기 존재만 알리고 과목별 과락 기준과 점수 차이가 생기는 이유를 명확히 안 짚는다. 이 글은 맞힌 문항 수를 입력하면 과목별 점수·과락 여부·평균 60점 합격 판정까지 1차·2차 순서대로 바로 끝낸다.",
+        "searchTargets": [
+          "공인중개사 가채점",
+          "공인중개사 가채점 방법",
+          "공인중개사 가채점 확인 방법",
+          "공인중개사 가채점 점수차이"
+        ],
+        "mustInclude": [
+          "과목별 40점 미만 과락 기준과 전과목 평균 60점 이상 합격 기준",
+          "1차·2차 시험 과목 구성과 각 시험별 과락·합격 판정 분리 설명",
+          "가채점과 실제 발표 점수가 달라지는 원인(복수정답 인정, 이의신청 반영)",
+          "2026년 시험 시행일·정답 공개 일정(확인 필요: 한국산업인력공단 Q-Net 공고)"
+        ],
+        "mustAvoid": [
+          "확정되지 않은 2026년 합격선·합격률을 단정적으로 서술하기",
+          "이전 연도 합격 기준·통계를 2026년 기준인 것처럼 혼동해서 쓰기"
+        ],
+        "checkBefore": [
+          "2026년 공인중개사 시험 과목별 배점·과락 기준 공식 공고(Q-Net) 확인",
+          "가채점 정답 발표 및 이의신청 일정 공식 공지 확인"
+        ],
+        "solves": [
+          "가채점 어떻게 하나요 → 맞힌 문항 수만 입력하면 과목별 점수 자동 계산",
+          "가채점 점수랑 실제 발표 점수가 달라요 → 복수정답·이의신청 반영 가능성으로 차이 원인 설명",
+          "과락인지 모르겠어요 → 과목별 40점 미만 여부를 자동으로 바로 판정"
+        ],
+        "actionTitles": [
+          "공인중개사 가채점 방법, 맞힌 문항수로 점수 계산하기",
+          "공인중개사 가채점 점수차이 나는 이유와 확인 방법",
+          "공인중개사 가채점으로 과락·합격 여부 바로 확인하기"
+        ]
+      },
+      "at": "2026-11-13T20:54:58.060Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "ad5ccf5f766e856b",
+      "urls": [
+        "https://sanche.co.kr/icy-road-braking-distance-calculator/"
+      ],
+      "guide": {
+        "direction": "검색자는 '내 속도로 빙판길에서 멈추는 데 몇 m가 필요한지'를 구체적 숫자로 알고 싶어 지식인에 타이어·사고 사례를 올리지만 답은 못 얻는다. 고수 블로그 제목은 '몇 배인지'까지만 말하고 실제 정지거리 m 수치와 차종별 비교표는 비워둔다. 이 글은 속도(30·60·80·100km/h)별 마른 노면·빙판길 정지거리를 승용차·화물차·버스로 나눠 표로 끝낸다.",
+        "searchTargets": [
+          "빙판길 제동거리"
+        ],
+        "mustInclude": [
+          "속도별(30·60·80·100km/h) 마른 노면 vs 빙판길 정지거리 비교표",
+          "승용차·화물차·버스 차종별 제동거리 차이 수치",
+          "빙판길 제동거리가 마른 노면의 몇 배인지 배율",
+          "공주거리+실제 제동거리 합산 전체 정지거리 개념 설명",
+          "(확인 필요: 도로교통공단·교통안전공단) 빙판길 마찰계수 공식 수치"
+        ],
+        "mustAvoid": [
+          "지식인에 올라온 특정 블랙박스 사고 사례를 실제 영상처럼 재구성·과장",
+          "특정 타이어 브랜드 성능 비교로 흘러 광고 글처럼 보이는 것",
+          "빗길 제동거리와 빙판길 제동거리를 같은 수치로 혼동해 서술"
+        ],
+        "checkBefore": [
+          "제동거리 계산 공식과 마찰계수 수치를 도로교통공단·교통안전공단 공식 자료에서 확인",
+          "차종별(승용차·화물차·버스) 제동거리 차이가 공식 자료 기준인지 확인"
+        ],
+        "solves": [
+          "최고속도·접지력 질문 → 빙판길에서 속도별 정지거리가 몇 배 늘어나는지 표로 제시",
+          "짧은 거리 제동 질문(20~30% 관련) → 공주거리와 제동거리를 나눠 정확한 비율로 설명",
+          "블랙박스 사고 질문 → 생각했던 것보다 제동거리가 긴 이유를 속도별 수치로 설명"
+        ],
+        "actionTitles": [
+          "빙판길 제동거리 계산, 내 속도로 직접 확인하는 법",
+          "빙판길 정지거리 조회: 마른 노면과 몇 배 차이인지 비교",
+          "승용차·화물차·버스 빙판길 제동거리 한눈에 비교하기"
+        ]
+      },
+      "at": "2026-11-13T20:54:58.060Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "타이어에 관해서",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=8110301&docId=431890862&answerNo=1&qb=67mZ7YyQ6ri4IOygnOuPmeqxsOumrCDsho3rj4Trs4Qg7KCV7KeA6rGw66asIOuniOuluA==",
+          "views": 15884,
+          "answers": 1,
+          "askedAt": "2022.11.03"
+        },
+        {
+          "title": "첫차를 구매하려는데요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=8110201&docId=113208007&answerNo=1&qb=67mZ7YyQ6ri4IOygnOuPmeqxsOumrCDsho3rj4Trs4Qg7KCV7KeA6rGw66asIOuniOuluA==",
+          "views": 6217,
+          "answers": 3,
+          "askedAt": "2010.07.14"
+        },
+        {
+          "title": "제가 얼마 전 앞차를 박았는데, 블랙박스 영....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=811&docId=320315642&answerNo=1&qb=67mZ7YyQ6ri4IOygnOuPmeqxsOumrCDsho3rj4Trs4Qg7KCV7KeA6rGw66asIOuniOuluA==",
+          "views": 156,
+          "answers": 1,
+          "askedAt": "2019.02.03"
+        }
+      ]
     }
   ],
   "misses": [
@@ -66883,6 +67597,10 @@
     {
       "id": "203a2f12a391145a",
       "at": "2026-11-13T20:29:29.208Z"
+    },
+    {
+      "id": "656eee6299beace4",
+      "at": "2026-11-13T20:54:57.366Z"
     }
   ]
 }
