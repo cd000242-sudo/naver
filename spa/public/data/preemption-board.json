@@ -31285,7 +31285,12 @@
    "effectiveVolume": 1060,
    "peakConfidence": "",
    "preemptRank": 2,
-   "carried": true
+   "carried": true,
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-11-13T04:59:30.030Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
+   }
   },
   {
    "serpSections": [
@@ -36080,6 +36085,11 @@
     "tier": "none",
     "pc": 70,
     "mobile": 70
+   },
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-11-13T04:59:17.391Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
   {
@@ -36601,7 +36611,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-12T03:17:51.927Z",
+    "checkedAt": "2026-11-13T04:59:15.586Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -40754,7 +40764,12 @@
    "effectiveVolume": 700,
    "peakConfidence": "",
    "preemptRank": 2,
-   "carried": true
+   "carried": true,
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-11-13T04:59:22.778Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
+   }
   },
   {
    "serpSections": [
@@ -40964,7 +40979,12 @@
    "effectiveVolume": 700,
    "peakConfidence": "",
    "preemptRank": 2,
-   "carried": true
+   "carried": true,
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-11-13T04:59:33.579Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
+   }
   },
   {
    "serpSections": [
@@ -50780,7 +50800,12 @@
    "effectiveVolume": 550,
    "peakConfidence": "",
    "preemptRank": 2,
-   "carried": true
+   "carried": true,
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-11-13T04:59:28.180Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
+   }
   },
   {
    "serpSections": [
@@ -54912,7 +54937,12 @@
    "effectiveVolume": 500,
    "peakConfidence": "",
    "preemptRank": 2,
-   "carried": true
+   "carried": true,
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-11-13T04:59:19.170Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
+   }
   },
   {
    "serpSections": [
@@ -81809,7 +81839,12 @@
    "peakConfidence": "1년치만 봄",
    "effectiveVolume": 1060,
    "preemptRank": 3,
-   "carried": true
+   "carried": true,
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-11-13T04:59:34.470Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
+   }
   },
   {
    "serpSections": [
@@ -100225,7 +100260,12 @@
    "effectiveVolume": 570,
    "peakConfidence": "",
    "preemptRank": 3,
-   "carried": true
+   "carried": true,
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-11-13T04:59:26.396Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
+   }
   },
   {
    "serpSections": [
@@ -102903,7 +102943,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-12T03:17:52.808Z",
+    "checkedAt": "2026-11-13T04:59:16.459Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -112018,5 +112058,5 @@
    ]
   }
  ],
- "revalidatedAt": "2026-11-12T03:18:16.555Z"
+ "revalidatedAt": "2026-11-13T04:59:34.470Z"
 }
