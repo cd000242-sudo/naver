@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T15:46:54.533Z",
+ "builtAt": "2026-11-13T15:57:07.761Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,62 @@
    "sources": [
     "nate"
    ],
-   "articles90": 31,
-   "recent20": 4,
-   "press": 20,
-   "firstArticleAt": "2026-11-13T14:22:00.000Z",
+   "articles90": 35,
+   "recent20": 9,
+   "press": 23,
+   "firstArticleAt": "2026-11-13T14:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨황 퇴진 직전 \"어찌 되든 상관없다\"…33년 경영 막 내린 순간",
+     "title": "\"젠슨 황 내연녀, 中 반도체 공작팀 요원\" 의혹 제기",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-13T15:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004209739?sid=104"
+    },
+    {
+     "title": "젠슨황 전 엔비디아 CEO 연인 관련 기업, 딥시크에 비밀 투자 의혹",
      "press": "kjdaily.com",
-     "publishedAt": "2026-11-13T15:46:00.000Z",
-     "link": "http://www.kjdaily.com/article.php?aid=1794584529692170276"
+     "publishedAt": "2026-11-13T15:54:00.000Z",
+     "link": "http://www.kjdaily.com/article.php?aid=1794585143692185276"
     },
     {
-     "title": "엔비디아 주가 고점 대비 30% 빠져… 코스피도 하락",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-13T15:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004009597?sid=101"
+     "title": "[기자수첩] 젠슨 황의 퇴장, 한국 AI의 불안한 미래",
+     "press": "kfenews.co.kr",
+     "publishedAt": "2026-11-13T15:54:00.000Z",
+     "link": "https://www.kfenews.co.kr/news/articleView.html?idxno=668120"
+    }
+   ]
+  },
+  {
+   "keyword": "구성환",
+   "sources": [
+    "google"
+   ],
+   "articles90": 26,
+   "recent20": 1,
+   "press": 14,
+   "firstArticleAt": "2026-11-13T14:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "구성환, '미혼' 첫사랑과 재회 \"40세까지 혼자면 나랑 결혼하자\"('나혼산...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-13T15:44:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004466518"
     },
     {
-     "title": "엔비디아, 굿즈 없애며 ‘젠슨 황 지우기’… 트럼프 “차기 CEO에 팀 쿡...",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-13T15:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004009596?sid=105"
+     "title": "구성환, 자기가 찬 전여친에 \"마흔까지 미혼이면 우리 둘이 결혼하자\"",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-13T15:35:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005640091"
+    },
+    {
+     "title": "구성환, 50일 사귄 전여친 재회…\"마흔까지 결혼 안 했으면 하자고\" ('나...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-13T15:26:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001408247"
     }
    ]
   },
@@ -47,10 +79,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 15,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-13T14:25:00.000Z",
+   "articles90": 14,
+   "recent20": 0,
+   "press": 12,
+   "firstArticleAt": "2026-11-13T14:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,14 +107,14 @@
    ]
   },
   {
-   "keyword": "조현 한중 외교장관 회담",
+   "keyword": "조현 중국 역할 당부",
    "sources": [
     "daum"
    ],
-   "articles90": 14,
-   "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-13T14:25:00.000Z",
+   "articles90": 10,
+   "recent20": 0,
+   "press": 9,
+   "firstArticleAt": "2026-11-13T14:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -103,38 +135,6 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-13T15:14:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014321699?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "미국 10월 생산자물가",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-13T14:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美 10월 생산자물가지수 0.3% 상승…시장 전망치 하회(상보)",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-13T15:40:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4444737"
-    },
-    {
-     "title": "美 10월 도매물가 전년 대비 6.5%↑…약 4년만에 최고(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-13T15:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016441406?sid=104"
-    },
-    {
-     "title": "美 10월 도매물가 전년 대비 6.5%↑…2022년 11월 이후 최고",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-13T15:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000543608?sid=104"
     }
    ]
   },
@@ -144,7 +144,7 @@
     "daum"
    ],
    "articles90": 9,
-   "recent20": 7,
+   "recent20": 3,
    "press": 7,
    "firstArticleAt": "2026-11-13T15:14:00.000Z",
    "exclusive": false,
@@ -171,35 +171,66 @@
    ]
   },
   {
-   "keyword": "대한민국",
+   "keyword": "미국 10월 생산자물가",
    "sources": [
-    "signal.bz",
-    "google"
+    "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 8,
    "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-13T14:18:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-13T14:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한전KDN, 대한민국소통어워즈 3개 부문 석권 및 'AI브랜드대상' 수상",
-     "press": "cstimes.com",
-     "publishedAt": "2026-11-13T15:44:00.000Z",
-     "link": "https://www.cstimes.com/news/articleView.html?idxno=727924"
+     "title": "美 10월 생산자물가 상승률 4년 만에 최고…시장 예상은 하회(종합)",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-13T15:56:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4444738"
     },
     {
-     "title": "‘월아산 숲속의 진주’ 대한민국 조경대상 대통령상",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-13T15:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004009554?sid=102"
+     "title": "美 10월 생산자물가지수 0.3% 상승…시장 전망치 하회(상보)",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-13T15:40:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4444737"
     },
     {
-     "title": "골드만비뇨의학과 국제학회 참가...대한민국 수술 노하우 공유",
-     "press": "medicaltimes.com",
-     "publishedAt": "2026-11-13T15:10:00.000Z",
-     "link": "https://www.medicaltimes.com/Main/News/NewsView.html?ID=1171840&ref=naverpc"
+     "title": "美 10월 도매물가 전년 대비 6.5%↑…약 4년만에 최고(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-13T15:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016441406?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "한중 외교장관 회담",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-13T14:39:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "APEC 앞두고 한중외교장관 회담…조현 \"中 한반도 건설적 역할\" 당부",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-13T15:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014321699?sid=100"
+    },
+    {
+     "title": "韓은 '한반도 비핵화'·中은 '하나의 중국'…한중 외교장관 온도차(종합...",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-13T15:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006409712?sid=100"
+    },
+    {
+     "title": "조현 장관 한반도 평화는 한중 공동이익 주장",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-13T14:52:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261113010005346"
     }
    ]
   },
@@ -236,34 +267,35 @@
    ]
   },
   {
-   "keyword": "구성환 전여친 재회",
+   "keyword": "대한민국",
    "sources": [
-    "daum"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-13T15:02:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-13T14:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "구성환, '미혼' 첫사랑과 재회 \"40세까지 혼자면 나랑 결혼하자\"('나혼산...",
-     "press": "sportschosun.com",
+     "title": "한전KDN, 대한민국소통어워즈 3개 부문 석권 및 'AI브랜드대상' 수상",
+     "press": "cstimes.com",
      "publishedAt": "2026-11-13T15:44:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004466518"
+     "link": "https://www.cstimes.com/news/articleView.html?idxno=727924"
     },
     {
-     "title": "구성환, 50일 사귄 전여친 재회…\"마흔까지 결혼 안 했으면 하자고\" ('나...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-13T15:26:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001408247"
+     "title": "‘월아산 숲속의 진주’ 대한민국 조경대상 대통령상",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-13T15:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004009554?sid=102"
     },
     {
-     "title": "구성환, 전여친과 재회 \"결혼 약속도..20대 때 맨날 전화\" [나혼산][별별...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-13T15:15:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003487223"
+     "title": "골드만비뇨의학과 국제학회 참가...대한민국 수술 노하우 공유",
+     "press": "medicaltimes.com",
+     "publishedAt": "2026-11-13T15:10:00.000Z",
+     "link": "https://www.medicaltimes.com/Main/News/NewsView.html?ID=1171840&ref=naverpc"
     }
    ]
   },
@@ -303,7 +335,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 421,
+  "flagged": 423,
   "matched": 171,
   "avgLeadMin": 369,
   "recent": [
