@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-12T23:52:10.617Z",
+ "builtAt": "2026-11-13T00:02:14.938Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 19,
+ "measured": 22,
  "candidates": [
   {
-   "keyword": "나스닥 지수",
+   "keyword": "구글 젠틀몬스터 안경 공개",
    "sources": [
-    "google"
+    "nate"
    ],
-   "articles90": 13,
-   "recent20": 3,
-   "press": 13,
-   "firstArticleAt": "2026-11-12T22:29:00.000Z",
+   "articles90": 31,
+   "recent20": 9,
+   "press": 31,
+   "firstArticleAt": "2026-11-12T22:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨 황 떠난 날, 엔비디아 두 자릿수 급락 출발…뉴욕증시 3대 지수 하...",
-     "press": "newstopkorea.com",
-     "publishedAt": "2026-11-12T23:50:00.000Z",
-     "link": "https://www.newstopkorea.com/news/articleView.html?idxno=49014"
+     "title": "메뉴 번역·회의 요약까지…삼성전자, 인텔리전트 아이웨어 공개",
+     "press": "ziksir.com",
+     "publishedAt": "2026-11-12T23:58:00.000Z",
+     "link": "https://www.ziksir.com/news/articleView.html?idxno=153175"
     },
     {
-     "title": "[마켓무버]뉴욕증시, 젠슨 황 사임 충격에 3대 지수 하락…유가·금리 상...",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-12T23:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006409287?sid=101"
+     "title": "젠틀몬스터, 스마트 아이웨어 12월 한미 동시 출시…국내 출고가 65만원...",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-12T23:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002248385?sid=105"
     },
     {
-     "title": "[해외시황] 뉴욕증시, 젠슨 황 사임·유가 급등에 '하락'…나스닥 0.39%↓",
-     "press": "newsprime.co.kr",
-     "publishedAt": "2026-11-12T23:34:00.000Z",
-     "link": "http://www.newsprime.co.kr/news/article.html?no=754816"
+     "title": "삼성전자, 제미나이 탑재 AI 안경 공개…내달 국내 출시",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-12T23:52:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2018120"
+    }
+   ]
+  },
+  {
+   "keyword": "CL, 테디 품으로 계약",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 13,
+   "recent20": 3,
+   "press": 12,
+   "firstArticleAt": "2026-11-12T23:12:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "투애니원 CL, 테디 품에 안겼다…11월 신곡 발매",
+     "press": "atstar1.com",
+     "publishedAt": "2026-11-13T00:01:00.000Z",
+     "link": "https://m.entertain.naver.com/article/415/0000053757"
+    },
+    {
+     "title": "CL, 테디 품으로…더블랙레이블 전속계약",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-12T23:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/629/0000551519"
+    },
+    {
+     "title": "투애니원 씨엘, 테디家 더블랙레이블과 계약..박보검과 한솥밥 [공식]",
+     "press": "ize.co.kr",
+     "publishedAt": "2026-11-12T23:45:00.000Z",
+     "link": "https://m.entertain.naver.com/article/465/0000020956"
     }
    ]
   },
@@ -47,43 +79,42 @@
    "sources": [
     "nate"
    ],
-   "articles90": 11,
-   "recent20": 4,
-   "press": 10,
+   "articles90": 13,
+   "recent20": 3,
+   "press": 11,
    "firstArticleAt": "2026-11-12T22:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "세무사 이어 관세사 시험도 AI 안경 의혹…\"생동차 합격자 올해만 10명\"",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-13T00:00:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261113010005060"
+    },
+    {
+     "title": "시험 잘 보면 다 'AI 안경'탓?…LEET 만점자 \"수능 국어 생중계로 풀겠다...",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-12T23:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000650781?sid=102"
+    },
+    {
      "title": "\"이게 수석과 차석의 차이?\" 세무사 합격자 책 사진에 '갑론을박'",
      "press": "view.asiae.co.kr",
      "publishedAt": "2026-11-12T23:50:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/277/0005842117?sid=102"
-    },
-    {
-     "title": "리트 첫 만점자 “수능 국어 생중계로 풀겠다”… ‘AI 안경’ 의혹 대...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-12T23:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001204485?sid=102"
-    },
-    {
-     "title": "'AI 안경' 의혹 확산에…LEET 만점자 \"수능 라이브로 풀겠다\"",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-12T23:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005353457?sid=102"
     }
    ]
   },
   {
    "keyword": "박수홍 98억 선고",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-12T22:30:00.000Z",
+   "articles90": 9,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-12T22:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -112,24 +143,24 @@
    "sources": [
     "google"
    ],
-   "articles90": 5,
-   "recent20": 3,
-   "press": 5,
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
    "firstArticleAt": "2026-11-12T23:08:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
+     "title": "[회고 영화관] '집아죽', 사랑의 역설 [유진모 칼럼]",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-12T23:52:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95148"
+    },
+    {
      "title": "영화 '취권'서 성룡과 맞붙었던 한국 배우…오늘 전해진 안타까운 소식",
      "press": "wikitree.co.kr",
      "publishedAt": "2026-11-12T23:40:00.000Z",
      "link": "https://www.wikitree.co.kr/articles/1174241"
-    },
-    {
-     "title": "2023년 정부 예산 삭감 '서울독립영화제'...연상호→변우석, 영화계 연대...",
-     "press": "nc.press",
-     "publishedAt": "2026-11-12T23:38:00.000Z",
-     "link": "https://www.nc.press/news/articleView.html?idxno=630882"
     },
     {
      "title": "영화 '여전히 찬란하게', 조계종 전국 1만 석 규모 릴레이 응원 시사회...",
@@ -140,14 +171,78 @@
    ]
   },
   {
+   "keyword": "메가성장특위 예산안 간담회",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 32,
+   "recent20": 14,
+   "press": 5,
+   "firstArticleAt": "2026-11-12T23:31:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[포토] 메가성장특위 예산안 설명 간담회",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-12T23:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005842123?sid=100"
+    },
+    {
+     "title": "[포토] 이광재 위원장, 메가성장특위 예산안 설명회 참석",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-12T23:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005842112?sid=100"
+    },
+    {
+     "title": "'메가성장특위 예산안 파이팅!'",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-12T23:46:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261113000151"
+    }
+   ]
+  },
+  {
+   "keyword": "박정성 통상교섭본부장 면담",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-12T22:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "박정성 통상본부장 \"잘 키운 15살 FTA 부각해 EU 무역장벽 대응\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-13T00:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016439791?sid=104"
+    },
+    {
+     "title": "박정성 통상교섭본부장, 유럽의회 의원 면담",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-12T23:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014319816?sid=100"
+    },
+    {
+     "title": "박정성 통상교섭본부장, 유럽의회 국제통상위원장 면담",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-12T23:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014319828?sid=100"
+    }
+   ]
+  },
+  {
    "keyword": "후티 사우디 송유관 공격",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T22:32:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-12T22:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -170,43 +265,11 @@
      "link": "https://n.news.naver.com/mnews/article/032/0003482469?sid=104"
     }
    ]
-  },
-  {
-   "keyword": "박정성 통상교섭본부장 면담",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-12T22:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "박정성 통상교섭본부장, 유럽의회 의원 면담",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T23:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014319816?sid=100"
-    },
-    {
-     "title": "박정성 통상교섭본부장, 유럽의회 국제통상위원장 면담",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T23:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014319817?sid=100"
-    },
-    {
-     "title": "면담하는 박정성 통상교섭본부장",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-12T23:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014319820?sid=100"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 413,
+  "flagged": 416,
   "matched": 145,
   "avgLeadMin": 620,
   "recent": [
