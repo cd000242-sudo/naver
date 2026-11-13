@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T15:57:07.761Z",
+ "builtAt": "2026-11-13T16:07:13.649Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -13,44 +13,45 @@
   {
    "keyword": "젠슨 황과 엔비디아",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 35,
-   "recent20": 9,
-   "press": 23,
-   "firstArticleAt": "2026-11-13T14:28:00.000Z",
+   "articles90": 33,
+   "recent20": 7,
+   "press": 19,
+   "firstArticleAt": "2026-11-13T14:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"젠슨 황 내연녀, 中 반도체 공작팀 요원\" 의혹 제기",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-13T15:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004209739?sid=104"
+     "title": "[젠슨 황 불륜 스캔들] 33년 일군 엔비디아 떠난 테크 거물의 몰락…\"어...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-13T16:00:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=626663"
     },
     {
-     "title": "젠슨황 전 엔비디아 CEO 연인 관련 기업, 딥시크에 비밀 투자 의혹",
-     "press": "kjdaily.com",
-     "publishedAt": "2026-11-13T15:54:00.000Z",
-     "link": "http://www.kjdaily.com/article.php?aid=1794585143692185276"
+     "title": "젠슨 황 떠난 엔비디아… 리더십 공백에 '흔들'",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-13T16:00:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3448635"
     },
     {
-     "title": "[기자수첩] 젠슨 황의 퇴장, 한국 AI의 불안한 미래",
-     "press": "kfenews.co.kr",
-     "publishedAt": "2026-11-13T15:54:00.000Z",
-     "link": "https://www.kfenews.co.kr/news/articleView.html?idxno=668120"
+     "title": "美재무, 엔비디아 칩 유출 의혹에 상무부 대응 공개지적",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-13T15:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014321709?sid=104"
     }
    ]
   },
   {
    "keyword": "구성환",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 26,
-   "recent20": 1,
-   "press": 14,
-   "firstArticleAt": "2026-11-13T14:32:00.000Z",
+   "articles90": 23,
+   "recent20": 0,
+   "press": 13,
+   "firstArticleAt": "2026-11-13T14:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -77,7 +78,7 @@
   {
    "keyword": "조현 한반도 평화 공동이익",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 14,
    "recent20": 0,
@@ -107,66 +108,34 @@
    ]
   },
   {
-   "keyword": "조현 중국 역할 당부",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 10,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-13T14:39:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "조현 \"한반도 문제는 한국의 사활적 이익\"...中 건설적 역할 당부",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-13T15:27:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261114000004"
-    },
-    {
-     "title": "조현, 중국에 '한반도 문제' 역할 당부…왕이 \"정책 변함없어\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-13T15:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926042?sid=100"
-    },
-    {
-     "title": "APEC 앞두고 한중외교장관 회담…조현 \"中 한반도 건설적 역할\" 당부",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-13T15:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014321699?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "나혼자산다 박지현",
    "sources": [
     "daum"
    ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 7,
+   "articles90": 11,
+   "recent20": 2,
+   "press": 8,
    "firstArticleAt": "2026-11-13T15:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "박지현, '행사프린스'가 일주일 동안 모텔에?...\"아예 집 못 들어가\" (나...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-13T16:06:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002080345"
+    },
+    {
+     "title": "투바투 연준, 다음주 '나 혼자 산다' 출연 예고",
+     "press": "enter.etoday.co.kr",
+     "publishedAt": "2026-11-13T16:00:00.000Z",
+     "link": "https://enter.etoday.co.kr/news/view/305215"
+    },
+    {
      "title": "'행사 프린스' 박지현, 하루에 행사만 2개..\"일주일 넘게 모텔 생활\" [나...",
      "press": "starnewskorea.com",
      "publishedAt": "2026-11-13T15:43:00.000Z",
      "link": "https://m.entertain.naver.com/article/108/0003487225"
-    },
-    {
-     "title": "'나 혼자 산다' 박지현, 광안리 펍에서 혼술+피자 먹방",
-     "press": "enter.etoday.co.kr",
-     "publishedAt": "2026-11-13T15:42:00.000Z",
-     "link": "https://enter.etoday.co.kr/news/view/305205"
-    },
-    {
-     "title": "박지현, '모텔 프린스' 등극... \"진짜 호텔보다 모텔이 좋아\" ('나혼산')",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-13T15:38:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000490094"
     }
    ]
   },
@@ -175,13 +144,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
+   "articles90": 9,
    "recent20": 2,
-   "press": 7,
+   "press": 8,
    "firstArticleAt": "2026-11-13T14:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "미 10월 도매물가 전년 대비 6.5% 상승…4년만에 최고",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-13T16:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926044?sid=104"
+    },
     {
      "title": "美 10월 생산자물가 상승률 4년 만에 최고…시장 예상은 하회(종합)",
      "press": "news.einfomax.co.kr",
@@ -193,12 +168,6 @@
      "press": "news.einfomax.co.kr",
      "publishedAt": "2026-11-13T15:40:00.000Z",
      "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4444737"
-    },
-    {
-     "title": "美 10월 도매물가 전년 대비 6.5%↑…약 4년만에 최고(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-13T15:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016441406?sid=104"
     }
    ]
   },
@@ -235,45 +204,13 @@
    ]
   },
   {
-   "keyword": "젠슨 황 퇴진 후 엔비디아는?",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-13T14:31:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "젠슨황 퇴진 직전 \"어찌 되든 상관없다\"…33년 경영 막 내린 순간",
-     "press": "kjdaily.com",
-     "publishedAt": "2026-11-13T15:46:00.000Z",
-     "link": "http://www.kjdaily.com/article.php?aid=1794584529692170276"
-    },
-    {
-     "title": "\"진짜 보스를 돌려달라\"…젠슨 황 퇴진 후폭풍에 흔들리는 엔비디아",
-     "press": "news-s.kr",
-     "publishedAt": "2026-11-13T15:20:00.000Z",
-     "link": "https://news-s.kr/view.html?id=L261114001349ddd7"
-    },
-    {
-     "title": "[사설] 젠슨 황 쇼크… AI 지각 변동과 미중 경쟁 속 기회 잡길",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-13T15:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000965500?sid=110"
-    }
-   ]
-  },
-  {
    "keyword": "대한민국",
    "sources": [
     "signal.bz",
     "google"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-13T14:44:00.000Z",
    "exclusive": false,
@@ -302,16 +239,21 @@
   {
    "keyword": "모두의 창업 개인정보 유출",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-13T14:30:00.000Z",
+   "firstArticleAt": "2026-11-13T14:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "중기부 '모두의 창업'이 '모두의 유출'로…5000명 털려 모집 미뤘는데 또...",
+     "press": "pennmike.com",
+     "publishedAt": "2026-11-13T16:00:00.000Z",
+     "link": "https://www.pennmike.com/news/articleView.html?idxno=131817"
+    },
     {
      "title": "[사실은 이렇습니다] 민간 AI 솔루션 기업 A사 개인정보 유출...유출 대...",
      "press": "korea.kr",
@@ -323,12 +265,6 @@
      "press": "news.jtbc.co.kr",
      "publishedAt": "2026-11-13T14:44:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/437/0000520693?sid=101"
-    },
-    {
-     "title": "중기부 2차 '모두의창업' 5개월 만에 또 개인정보 뚫렸다",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-13T14:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005604136?sid=101"
     }
    ]
   }
