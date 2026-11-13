@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T02:13:28.249Z",
+ "builtAt": "2026-11-13T02:23:33.183Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "친청계 최고위원들 최고위 불참",
+   "keyword": "자본시장 정책 간담회",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 41,
-   "recent20": 17,
-   "press": 32,
+   "articles90": 38,
+   "recent20": 8,
+   "press": 31,
+   "firstArticleAt": "2026-11-13T01:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李 대통령, 자본시장 정상화 의지 재확인… 불공정 거래 근절 강조",
+     "press": "jeonmae.co.kr",
+     "publishedAt": "2026-11-13T02:16:00.000Z",
+     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1311629"
+    },
+    {
+     "title": "자본시장 정책 간담회, 경청하는 이재명 대통령",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-13T02:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014320444?sid=100"
+    },
+    {
+     "title": "자본시장 정책 간담회, 발언하는 이재명 대통령",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-13T02:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014320443?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "원내대책회의 정점식 원내대표",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 37,
+   "recent20": 4,
+   "press": 24,
    "firstArticleAt": "2026-11-13T00:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "민주, 최민희 윤리감찰 놓고 지도부 충돌...친청계 최고위 집단 불참",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-13T02:12:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1137295"
+     "title": "정점식, 김민석 겨냥 \"허수아비 '명픽' 당대표 신세...처량할 따름\" [TF사...",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-13T02:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000551629?sid=100"
     },
     {
-     "title": "\"사과하라·자중하라\"....친명계, 최고위 불참 친청계 향해 정조준",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-13T02:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006409407?sid=100"
+     "title": "정점식 “하자투성이 법무장관 지명… 이용철, 사퇴하라”",
+     "press": "segye.com",
+     "publishedAt": "2026-11-13T02:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004174890?sid=100"
     },
     {
-     "title": "최고위 불참하고 소통관 기자회견 갖는 친청계 최고위원들",
+     "title": "국민의힘, 원내대책회의",
      "press": "mk.co.kr",
-     "publishedAt": "2026-11-13T02:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005763242?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "이재명 자본시장 간담회",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 41,
-   "recent20": 11,
-   "press": 32,
-   "firstArticleAt": "2026-11-13T01:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"자본시장 개혁의 출발점은 신뢰\"..李대통령, 불공정 단속·부실기업 퇴...",
-     "press": "kpenews.com",
-     "publishedAt": "2026-11-13T02:12:00.000Z",
-     "link": "https://kpenews.com/View.aspx?No=4310940"
-    },
-    {
-     "title": "李대통령 “자본시장 개혁 시험대…부실·저성장 기업 신속 퇴출”",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-13T02:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005842283?sid=100"
-    },
-    {
-     "title": "李대통령 \"자본시장 핵심과제는 신뢰…정상화 의지 확고\"",
-     "press": "seouleconews.com",
-     "publishedAt": "2026-11-13T02:06:00.000Z",
-     "link": "http://www.seouleconews.com/news/articleView.html?idxno=94997"
+     "publishedAt": "2026-11-13T02:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005763251?sid=100"
     }
    ]
   },
@@ -79,10 +79,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 29,
-   "recent20": 4,
-   "press": 29,
-   "firstArticleAt": "2026-11-13T00:45:00.000Z",
+   "articles90": 24,
+   "recent20": 3,
+   "press": 24,
+   "firstArticleAt": "2026-11-13T01:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -93,48 +93,177 @@
      "link": "https://n.news.naver.com/mnews/article/082/0001407000?sid=100"
     },
     {
-     "title": "오세훈 “李, 조작기소 특검법 거부해야…안 하면 국민심판 시작될 것”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-13T02:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004681845?sid=100"
-    },
-    {
      "title": "오세훈 \"이 대통령, 국무회의 참석해 특검법 거부하라… 돌이킬 수 없을...",
      "press": "newscj.com",
      "publishedAt": "2026-11-13T02:06:00.000Z",
      "link": "https://www.newscj.com/news/articleView.html?idxno=3448426"
+    },
+    {
+     "title": "오세훈 “李, 조작기소 특검법 거부해야…안 하면 국민심판 시작될 것”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-13T02:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004681845?sid=100"
     }
    ]
   },
   {
-   "keyword": "원내대책회의 정점식 원내대표",
+   "keyword": "50대 10대 여성 살해",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 37,
-   "recent20": 11,
-   "press": 25,
-   "firstArticleAt": "2026-11-13T00:46:00.000Z",
+   "articles90": 18,
+   "recent20": 4,
+   "press": 18,
+   "firstArticleAt": "2026-11-13T01:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "원내대책회의에서 발언하는 정점식 원내대표",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-13T02:02:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261113000581"
+     "title": "‘성북구 10대 살해’ 50대 남성, 구속영장 심사 불출석",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-13T02:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004009442?sid=102"
     },
     {
-     "title": "정점식 원내대표, 원내대책회의 발언",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-13T02:01:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261113000575"
+     "title": "‘성북구 10대 살해’ 50대 남성, 구속 심사 출석 포기",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-13T02:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003482497?sid=102"
     },
     {
-     "title": "국민의힘 원내대책회의",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-13T02:01:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261113000577"
+     "title": "‘성북 10대 소녀 살인’ 50대, 구속 심사 포기",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-13T02:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000367381?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "박재상 퓨처스 감독 선임",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 15,
+   "recent20": 2,
+   "press": 15,
+   "firstArticleAt": "2026-11-13T01:00:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "SSG, '원클럽맨' 박재상 퓨처스 감독 선임…\"육성 시스템 완성 기대\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-13T02:16:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/003/0014320442"
+    },
+    {
+     "title": "[오피셜]하루 펑고 1000개, '악마의 숫자' 견뎌낸 박재상...기대되는 SSG...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-13T02:10:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/445/0000489979"
+    },
+    {
+     "title": "SSG, 박재상 신임 퓨처스 감독 선임…'육성 관리자' 역할 수행",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-13T01:52:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/421/0009287556"
+    }
+   ]
+  },
+  {
+   "keyword": "HJ중공업 3분기 영업익 1554억",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 15,
+   "recent20": 1,
+   "press": 15,
+   "firstArticleAt": "2026-11-13T00:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "HJ중공업, 조선업 타고 '실적 잭팟'…영업익 9배 뛰고 매출 2조 돌파",
+     "press": "megaeconomy.co.kr",
+     "publishedAt": "2026-11-13T02:08:00.000Z",
+     "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065578516534335"
+    },
+    {
+     "title": "HJ중공업, 3분기 누적 영업익 1554억원...전년비 8배 증가",
+     "press": "newspost.kr",
+     "publishedAt": "2026-11-13T02:00:00.000Z",
+     "link": "https://www.newspost.kr/news/articleView.html?idxno=227363"
+    },
+    {
+     "title": "HJ중공업, 3분기 누적 영업익 1554억… 지난해보다 8배 급증",
+     "press": "daily.hankooki.com",
+     "publishedAt": "2026-11-13T01:52:00.000Z",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1424876"
+    }
+   ]
+  },
+  {
+   "keyword": "김민석 최고위 참석",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 21,
+   "recent20": 6,
+   "press": 13,
+   "firstArticleAt": "2026-11-13T00:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "與 \"최민희 '李대통령 尹탄핵 반대' 발언, 중대 사안\"…친청계 최고위 ...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-13T02:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014320450?sid=100"
+    },
+    {
+     "title": "최고위원 3명 불참한 민주당 최고위…“자중 부탁드린다” [지금뉴스]",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-13T02:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012293306?sid=121"
+    },
+    {
+     "title": "\"사과하라·자중하라\"....친명계, 최고위 불참 친청계 향해 정조준",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-13T02:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006409407?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "평가",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 12,
+   "recent20": 12,
+   "press": 12,
+   "firstArticleAt": "2026-11-13T02:18:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "BNK금융그룹 ESG 평가 5년 연속 통합 A",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-13T02:22:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082515"
+    },
+    {
+     "title": "HL만도, 동반성장지수 평가서 2년 연속 최우수 등급",
+     "press": "hinews.co.kr",
+     "publishedAt": "2026-11-13T02:22:00.000Z",
+     "link": "https://www.hinews.co.kr/view.php?ud=2026111311164777764860f00ac1_48"
+    },
+    {
+     "title": "BNK금융, ESG 평가 5년 연속 A등급…부산·경남은행 지배구조 개선",
+     "press": "e-science.co.kr",
+     "publishedAt": "2026-11-13T02:22:00.000Z",
+     "link": "https://www.e-science.co.kr/news/articleView.html?idxno=139730"
     }
    ]
   },
@@ -143,10 +272,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 13,
+   "articles90": 11,
    "recent20": 0,
-   "press": 13,
-   "firstArticleAt": "2026-11-13T00:51:00.000Z",
+   "press": 11,
+   "firstArticleAt": "2026-11-13T00:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -171,35 +300,34 @@
    ]
   },
   {
-   "keyword": "평가",
+   "keyword": "뜨거운 안녕",
    "sources": [
-    "signal.bz",
-    "google"
+    "daum"
    ],
-   "articles90": 10,
-   "recent20": 10,
-   "press": 10,
-   "firstArticleAt": "2026-11-13T02:08:00.000Z",
-   "exclusive": false,
-   "capped": true,
+   "articles90": 11,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-13T01:06:00.000Z",
+   "exclusive": true,
+   "capped": false,
    "samples": [
     {
-     "title": "ICAO 항공안전평가 12월 2일 시작…범정부 총력 대응 나서",
-     "press": "bizwork.co.kr",
-     "publishedAt": "2026-11-13T02:12:00.000Z",
-     "link": "https://www.bizwork.co.kr/news/articleView.html?idxno=420808"
+     "title": "의사에서 PD로… 권승우, ‘뜨거운 안녕’도 존재감 폭발",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-13T02:16:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001149628"
     },
     {
-     "title": "한난, 올해 ESG 평가 '상장공기업 최고등급' 달성",
-     "press": "e2news.com",
-     "publishedAt": "2026-11-13T02:12:00.000Z",
-     "link": "http://www.e2news.com/news/articleView.html?idxno=336083"
+     "title": "문희, ‘뜨거운 안녕’서 조현철과 10년 차 커플 호흡",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-13T02:00:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611130173"
     },
     {
-     "title": "삼성바이오로직스, ESG 평가 A+로 한 단계 상승",
-     "press": "digitalchosun.dizzo.com",
-     "publishedAt": "2026-11-13T02:12:00.000Z",
-     "link": "http://digitalchosun.dizzo.com/site/data/html_dir/2026/11/13/2026111380051.html"
+     "title": "'닥터X' 마성규 맞아? 권승우, '뜨거운 안녕'에선 현실 타협 없는 PD",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-13T01:56:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009287569"
     }
    ]
   },
@@ -209,7 +337,7 @@
     "signal.bz"
    ],
    "articles90": 8,
-   "recent20": 1,
+   "recent20": 0,
    "press": 8,
    "firstArticleAt": "2026-11-13T00:56:00.000Z",
    "exclusive": false,
@@ -236,44 +364,12 @@
    ]
   },
   {
-   "keyword": "아웃룩 메일",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 7,
-   "firstArticleAt": "2026-11-13T00:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "정상 업무 메일까지 막은 마이크로소프트의 이메일 인증 오류",
-     "press": "itworld.co.kr",
-     "publishedAt": "2026-11-13T02:12:00.000Z",
-     "link": "https://www.itworld.co.kr/article/4248207/마이크로소프트의-이메일-보안-기능이-정상적인-업.html"
-    },
-    {
-     "title": "“내 메일 왜 안 열려”···알고보니 대규모 서비스 장애 발생한 MS",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-13T02:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005763233?sid=101"
-    },
-    {
-     "title": "“강제로 월급루팡 중”…아웃룩·팀즈·MS365 먹통에 전세계 업무마비",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-13T01:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005763216?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "메르세데스-벤츠",
    "sources": [
     "google"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 1,
    "press": 6,
    "firstArticleAt": "2026-11-13T01:00:00.000Z",
    "exclusive": false,
@@ -300,14 +396,14 @@
    ]
   },
   {
-   "keyword": "월급방위대 킥오프 회의",
+   "keyword": "월급방위대 TF 킥오프 개최",
    "sources": [
     "nate"
    ],
-   "articles90": 5,
+   "articles90": 3,
    "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-13T00:56:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-13T01:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -318,81 +414,16 @@
      "link": "https://n.news.naver.com/mnews/article/016/0002723031?sid=101"
     },
     {
-     "title": "월급방위대 본격 가동…월세·근로장려금 늘리고 돌봄·자산형성 지원",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-13T01:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006409394?sid=101"
-    },
-    {
      "title": "정부, 월세 세액공제 확대·부양가족 소득요건 완화 추진…'월급방위대...",
      "press": "sejungilbo.com",
      "publishedAt": "2026-11-13T01:24:00.000Z",
      "link": "https://www.sejungilbo.com/news/articleView.html?idxno=61095"
-    }
-   ]
-  },
-  {
-   "keyword": "두산에너빌리티",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-13T01:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "남부발전, 두산에너빌리티와 발전기 모니터링 시스템(B-EYES) 실증",
-     "press": "zdnet.co.kr",
-     "publishedAt": "2026-11-13T01:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/092/0002445166?sid=105"
     },
     {
-     "title": "“예측 정비 체계 고도화”…남부발전, 두산에너빌리티와 국산 발전기 ...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-13T01:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005763211?sid=101"
-    },
-    {
-     "title": "남부발전, 두산에너빌리티와 발전기 디지털 정비 체계 구축",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-13T01:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005353521?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "80대 남편 아내 살해",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-13T00:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "양천구 빌라서 80대 남편이 아내 살해…\"내가 범인이다\" 자수",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-13T02:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000520568?sid=102"
-    },
-    {
-     "title": "[속보] 서울 양천구서 80대 남편이 70대 아내 살해⋯현행범 체포",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-13T01:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001074798?sid=102"
-    },
-    {
-     "title": "양천구 아내 살해 80대, 과거 가정폭력 신고 있었다",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-13T00:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005842190?sid=102"
+     "title": "‘월급방위대 TF’ 첫발… 직장인 생활비 줄이는 방안 모색",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-13T01:02:00.000Z",
+     "link": "https://www.viva100.com/article/20261113500211"
     }
    ]
   },
@@ -431,7 +462,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 437,
+  "flagged": 442,
   "matched": 144,
   "avgLeadMin": 456,
   "recent": [
