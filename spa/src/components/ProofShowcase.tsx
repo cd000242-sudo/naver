@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { light, lightRadius, motion, type } from '../styles/tokens';
 
 type ProofItem = {
     src: string;
@@ -99,12 +100,6 @@ export default function ProofShowcase({ className = '', compact = false, variant
         return (
             <section className={`proof-carousel${compact ? ' proof-showcase-compact' : ''}${className ? ` ${className}` : ''}`} aria-label="애드센스와 네이버 성과 자동 슬라이드">
                 <div className="proof-carousel-stage">
-                    <div className="proof-carousel-summary">
-                        <span>{activeProof.metric}</span>
-                        <strong>{activeProof.title}</strong>
-                        <small>{activeProof.desc}</small>
-                    </div>
-
                     <div className="proof-carousel-image-shell" aria-live="polite">
                         <img
                             key={`${activeProof.src}-${activeIndex}`}
@@ -114,6 +109,12 @@ export default function ProofShowcase({ className = '', compact = false, variant
                             decoding="async"
                             className="proof-carousel-image active"
                         />
+                    </div>
+
+                    <div className="proof-carousel-summary">
+                        <span>{activeProof.metric}</span>
+                        <strong>{activeProof.title}</strong>
+                        <small>{activeProof.desc}</small>
                     </div>
 
                     <div className="proof-carousel-dots" aria-label="성과 이미지 선택">
@@ -133,85 +134,25 @@ export default function ProofShowcase({ className = '', compact = false, variant
                 <style>{`
                     .proof-carousel {
                         width: 100%;
-                        min-height: 680px;
                         margin: 0;
-                        padding: 18px;
-                        border: 1px solid rgba(255,255,255,0.12);
-                        border-radius: 8px;
-                        background:
-                            linear-gradient(180deg, rgba(9,15,25,0.94), rgba(5,9,16,0.90)),
-                            radial-gradient(circle at 22% 8%, rgba(68,215,182,0.13), transparent 32%);
-                        box-shadow: 0 24px 76px rgba(0,0,0,0.34);
+                        padding: 16px;
+                        border: 1px solid ${light.line};
+                        border-radius: ${lightRadius.panel}px;
+                        background: ${light.surface};
+                        box-shadow: ${light.shadowSm};
                         overflow: hidden;
                     }
 
-                    .proof-carousel-stage {
-                        position: relative;
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: flex-end;
-                        min-height: 640px;
-                        border-radius: 8px;
-                        border: 1px solid rgba(255,255,255,0.10);
-                        background:
-                            linear-gradient(180deg, rgba(11,19,31,0.72), rgba(6,10,18,0.92)),
-                            radial-gradient(circle at 50% 38%, rgba(56,189,248,0.11), transparent 45%);
-                        overflow: hidden;
-                    }
+                    .proof-carousel-stage { display: flex; flex-direction: column; gap: 16px; }
 
-                    .proof-carousel-stage::before {
-                        content: '';
-                        position: absolute;
-                        inset: 0;
-                        background:
-                            linear-gradient(180deg, rgba(0,0,0,0.20), transparent 28%, rgba(0,0,0,0.34)),
-                            radial-gradient(circle at 12% 18%, rgba(255,215,0,0.13), transparent 10%);
-                        pointer-events: none;
-                        z-index: 1;
-                    }
-
-                    .proof-carousel-summary {
-                        position: absolute;
-                        left: 18px;
-                        right: 18px;
-                        top: 18px;
-                        z-index: 3;
-                        display: grid;
-                        gap: 8px;
-                        padding: 17px 18px;
-                        border: 1px solid rgba(255,255,255,0.12);
-                        border-radius: 8px;
-                        background: linear-gradient(180deg, rgba(12,19,31,0.94), rgba(7,12,20,0.88));
-                        box-shadow: 0 16px 42px rgba(0,0,0,0.28);
-                    }
-
-                    .proof-carousel-summary span {
-                        color: #ffd84d;
-                        font-size: 12px;
-                        font-weight: 950;
-                        letter-spacing: 0;
-                    }
-
-                    .proof-carousel-summary strong {
-                        color: #fff;
-                        font-size: clamp(20px, 2.4vw, 28px);
-                        line-height: 1.18;
-                        font-weight: 950;
-                        letter-spacing: 0;
-                    }
-
-                    .proof-carousel-summary small {
-                        color: rgba(226,232,240,0.78);
-                        font-size: 13px;
-                        line-height: 1.55;
-                    }
-
+                    /* The proof image is the real material here: it comes first, the caption sits under it. */
                     .proof-carousel-image-shell {
                         position: relative;
-                        z-index: 2;
                         width: 100%;
                         height: 500px;
-                        margin: 118px auto 42px;
+                        border-radius: ${lightRadius.card}px;
+                        background: ${light.raised};
+                        overflow: hidden;
                     }
 
                     .proof-carousel-image {
@@ -219,115 +160,56 @@ export default function ProofShowcase({ className = '', compact = false, variant
                         inset: 0;
                         width: 100%;
                         height: 100%;
-                        padding: 18px;
+                        padding: 16px;
                         object-fit: contain;
                         object-position: center;
-                        opacity: 0;
-                        transform: translateX(16px) scale(0.985);
-                        transition: opacity 420ms ease, transform 420ms ease;
-                        filter: drop-shadow(0 22px 34px rgba(0,0,0,0.34));
                     }
 
-                    .proof-carousel-image.active {
-                        opacity: 1;
-                        transform: translateX(0) scale(1);
+                    .proof-carousel-summary { display: grid; align-content: start; gap: 4px; min-height: 88px; padding: 0 8px; }
+                    .proof-carousel-summary span { color: ${light.textMuted}; font-size: ${type.meta}px; font-weight: 500; }
+                    .proof-carousel-summary strong {
+                        color: ${light.text};
+                        font-size: ${type.h3}px;
+                        line-height: 1.3;
+                        font-weight: 600;
+                        font-variant-numeric: tabular-nums;
                     }
+                    .proof-carousel-summary small { color: ${light.textSecondary}; font-size: ${type.small}px; line-height: 1.55; }
 
-                    .proof-carousel-dots {
-                        position: absolute;
-                        left: 0;
-                        right: 0;
-                        bottom: 17px;
-                        z-index: 4;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        gap: 8px;
-                    }
-
+                    .proof-carousel-dots { display: flex; justify-content: center; align-items: center; }
                     .proof-carousel-dots button {
-                        width: 10px;
-                        height: 10px;
+                        position: relative;
+                        width: 32px;
+                        height: 32px;
                         padding: 0;
                         border: 0;
-                        border-radius: 999px;
-                        background: rgba(255,255,255,0.34);
+                        border-radius: ${lightRadius.control}px;
+                        background: transparent;
                         cursor: pointer;
-                        transition: width 180ms ease, background 180ms ease;
                     }
-
-                    .proof-carousel-dots button.active {
-                        width: 38px;
-                        background: #ffd84d;
+                    .proof-carousel-dots button::before {
+                        content: '';
+                        position: absolute;
+                        left: 12px;
+                        top: 12px;
+                        width: 8px;
+                        height: 8px;
+                        border-radius: 50%;
+                        background: ${light.lineStrong};
+                        transition: background ${motion.fast} ${motion.ease};
                     }
+                    .proof-carousel-dots button.active::before { background: ${light.accent}; }
+                    .proof-carousel-dots button:focus-visible { outline: 2px solid ${light.accentInk}; outline-offset: -2px; }
 
                     @media (max-width: 900px) {
-                        .proof-carousel {
-                            min-height: 600px;
-                            padding: 14px;
-                        }
-
-                        .proof-carousel-stage {
-                            min-height: 570px;
-                        }
-
-                        .proof-carousel-image-shell {
-                            height: 420px;
-                            margin-top: 126px;
-                        }
+                        .proof-carousel-image-shell { height: 420px; }
                     }
 
                     @media (max-width: 640px) {
-                        .proof-carousel {
-                            min-height: 500px;
-                            padding: 10px;
-                            border-radius: 12px;
-                        }
-
-                        .proof-carousel-stage {
-                            min-height: 470px;
-                        }
-
-                        .proof-carousel-summary {
-                            left: 10px;
-                            top: 10px;
-                            width: calc(100% - 20px);
-                            padding: 12px;
-                            gap: 4px;
-                        }
-
-                        .proof-carousel-summary strong {
-                            font-size: 16px;
-                            line-height: 1.3;
-                        }
-
-                        .proof-carousel-summary small {
-                            font-size: 11px;
-                        }
-
-                        .proof-carousel-image-shell {
-                            height: 300px;
-                            margin-top: 126px;
-                            border-radius: 10px;
-                        }
-
-                        .proof-carousel-image {
-                            padding: 10px;
-                        }
-
-                        .proof-carousel-dots {
-                            bottom: 16px;
-                            gap: 6px;
-                        }
-
-                        .proof-carousel-dots button {
-                            width: 8px;
-                            height: 8px;
-                        }
-
-                        .proof-carousel-dots button.active {
-                            width: 28px;
-                        }
+                        .proof-carousel { padding: 12px; }
+                        .proof-carousel-image-shell { height: 300px; }
+                        .proof-carousel-image { padding: 8px; }
+                        .proof-carousel-summary strong { font-size: ${type.lead}px; }
                     }
                 `}</style>
             </section>
@@ -337,7 +219,7 @@ export default function ProofShowcase({ className = '', compact = false, variant
     return (
         <section className={`proof-showcase${compact ? ' proof-showcase-compact' : ''}${className ? ` ${className}` : ''}`} aria-label="애드센스와 네이버 성과 인증">
             <div className="proof-showcase-copy">
-                <span>PROOF</span>
+                <span>성과 인증</span>
                 <h3>성과 화면까지 같이 보면 구매 판단이 빨라집니다</h3>
                 <p>
                     애드센스 예상 수익과 기존 네이버 성과를 한 화면에 붙여, 자동화가 단순 기능이 아니라
@@ -384,234 +266,115 @@ export default function ProofShowcase({ className = '', compact = false, variant
                 .proof-showcase {
                     width: 100%;
                     margin: 0 auto;
-                    padding: clamp(22px, 3vw, 34px);
-                    border: 1px solid rgba(255,255,255,0.12);
-                    border-radius: 8px;
-                    background:
-                        linear-gradient(180deg, rgba(10,17,28,0.92), rgba(6,10,18,0.86)),
-                        radial-gradient(circle at 15% 0%, rgba(68,215,182,0.12), transparent 34%);
-                    box-shadow: 0 24px 80px rgba(0,0,0,0.30);
+                    padding: clamp(24px, 3vw, 32px);
+                    border: 1px solid ${light.line};
+                    border-radius: ${lightRadius.panel}px;
+                    background: ${light.surface};
+                    box-shadow: ${light.shadowSm};
                     overflow: hidden;
                 }
 
-                .proof-showcase-copy {
-                    max-width: 760px;
-                    margin-bottom: 22px;
-                }
-
-                .proof-showcase-copy span {
-                    display: inline-flex;
-                    align-items: center;
-                    min-height: 28px;
-                    padding: 5px 13px;
-                    border-radius: 999px;
-                    border: 1px solid rgba(68,215,182,0.36);
-                    background: rgba(68,215,182,0.13);
-                    color: #84f2d7;
-                    font-size: 12px;
-                    font-weight: 950;
-                    letter-spacing: 0;
-                    margin-bottom: 14px;
-                }
-
+                .proof-showcase-copy { max-width: 760px; margin-bottom: 24px; }
+                .proof-showcase-copy span { display: block; margin-bottom: 8px; color: ${light.accentInk}; font-size: ${type.meta}px; font-weight: 600; }
                 .proof-showcase-copy h3 {
                     margin: 0 0 12px;
-                    color: #fff;
-                    font-size: clamp(26px, 3.2vw, 42px);
-                    line-height: 1.18;
-                    font-weight: 950;
-                    letter-spacing: 0;
+                    color: ${light.text};
+                    font-size: ${type.h2}px;
+                    line-height: 1.3;
+                    font-weight: 600;
                 }
-
-                .proof-showcase-copy p {
-                    margin: 0;
-                    color: rgba(226,232,240,0.78);
-                    font-size: 15px;
-                    line-height: 1.8;
-                }
+                .proof-showcase-copy p { margin: 0; color: ${light.textSecondary}; font-size: ${type.body}px; line-height: 1.7; }
 
                 .proof-showcase-layout {
                     display: grid;
                     grid-template-columns: minmax(0, 1.12fr) minmax(300px, 0.88fr);
-                    gap: 12px;
+                    gap: 16px;
                     align-items: stretch;
                 }
 
+                /* The screenshots stay as they are; only the frame and the caption under them are quiet. */
                 .proof-feature-card,
                 .proof-mini-card,
                 .proof-naver-card {
                     min-width: 0;
                     margin: 0;
-                    border: 1px solid rgba(255,255,255,0.12);
-                    border-radius: 8px;
-                    background: rgba(12,18,28,0.72);
+                    border: 1px solid ${light.line};
+                    border-radius: ${lightRadius.card}px;
+                    background: ${light.surface};
                     overflow: hidden;
-                    box-shadow: 0 18px 48px rgba(0,0,0,0.20);
                 }
 
-                .proof-feature-card {
-                    grid-row: span 2;
-                }
+                .proof-feature-card { grid-row: span 2; }
 
-                .proof-feature-card img {
+                .proof-feature-card img,
+                .proof-mini-card img,
+                .proof-naver-card img {
                     width: 100%;
-                    height: clamp(260px, 30vw, 360px);
                     display: block;
                     object-fit: cover;
                     object-position: center;
-                    background: #0b1220;
+                    background: ${light.raised};
+                    border-bottom: 1px solid ${light.line};
                 }
+                .proof-feature-card img { height: clamp(260px, 30vw, 360px); }
+                .proof-mini-card img { height: 126px; }
+                .proof-naver-card img { height: 180px; padding: 8px; object-fit: contain; object-position: center top; }
 
                 .proof-feature-card figcaption,
                 .proof-mini-card figcaption,
-                .proof-naver-card figcaption {
-                    display: grid;
-                    gap: 5px;
-                    padding: 13px 15px 15px;
-                }
+                .proof-naver-card figcaption { display: grid; gap: 4px; padding: 12px 16px 16px; }
 
                 .proof-feature-card span,
-                .proof-naver-card span {
-                    color: #5eead4;
-                    font-size: 12px;
-                    font-weight: 950;
-                }
+                .proof-naver-card span { color: ${light.textMuted}; font-size: ${type.meta}px; font-weight: 500; }
 
-                .proof-feature-card strong {
-                    color: #fff;
-                    font-size: 20px;
-                    font-weight: 950;
-                    line-height: 1.25;
-                }
-
-                .proof-feature-card small,
-                .proof-mini-card small {
-                    color: rgba(203,213,225,0.70);
-                    font-size: 13px;
-                    line-height: 1.55;
-                }
-
-                .proof-mini-grid {
-                    display: grid;
-                    grid-template-columns: repeat(2, minmax(0, 1fr));
-                    gap: 12px;
-                }
-
-                .proof-mini-card img {
-                    width: 100%;
-                    height: 126px;
-                    display: block;
-                    object-fit: cover;
-                    object-position: center;
-                    background: #0b1220;
-                }
-
+                .proof-feature-card strong,
                 .proof-mini-card strong,
                 .proof-naver-card strong {
-                    color: #fff;
-                    font-size: 14px;
-                    font-weight: 950;
+                    color: ${light.text};
+                    font-size: ${type.body}px;
+                    font-weight: 600;
                     line-height: 1.35;
+                    font-variant-numeric: tabular-nums;
                 }
+                .proof-feature-card strong { font-size: ${type.lead}px; }
+
+                .proof-feature-card small,
+                .proof-mini-card small { color: ${light.textSecondary}; font-size: ${type.small}px; line-height: 1.55; }
+
+                .proof-mini-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 
                 .proof-naver-row {
                     grid-column: 1 / -1;
                     display: grid;
                     grid-template-columns: repeat(3, minmax(0, 1fr));
-                    gap: 12px;
+                    gap: 16px;
                 }
 
-                .proof-naver-card img {
-                    width: 100%;
-                    height: 180px;
-                    display: block;
-                    object-fit: contain;
-                    object-position: center top;
-                    padding: 10px;
-                    background: rgba(0,0,0,0.24);
-                }
-
-                .proof-showcase-compact {
-                    padding: 22px;
-                }
-
-                .proof-showcase-compact .proof-showcase-layout {
-                    grid-template-columns: 1fr;
-                }
-
-                .proof-showcase-compact .proof-feature-card {
-                    grid-row: auto;
-                }
-
-                .proof-showcase-compact .proof-feature-card img {
-                    height: 218px;
-                }
-
-                .proof-showcase-compact .proof-mini-grid {
-                    grid-template-columns: repeat(2, minmax(0, 1fr));
-                }
-
-                .proof-showcase-compact .proof-naver-row {
-                    grid-template-columns: 1fr;
-                }
-
-                .proof-showcase-compact .proof-naver-card img {
-                    height: 136px;
-                }
-
-                .proof-showcase-compact .proof-showcase-copy h3 {
-                    font-size: clamp(23px, 2.4vw, 30px);
-                }
+                .proof-showcase-compact { padding: 24px; }
+                .proof-showcase-compact .proof-showcase-layout { grid-template-columns: 1fr; }
+                .proof-showcase-compact .proof-feature-card { grid-row: auto; }
+                .proof-showcase-compact .proof-feature-card img { height: 218px; }
+                .proof-showcase-compact .proof-mini-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+                .proof-showcase-compact .proof-naver-row { grid-template-columns: 1fr; }
+                .proof-showcase-compact .proof-naver-card img { height: 136px; }
+                .proof-showcase-compact .proof-showcase-copy h3 { font-size: ${type.h3}px; }
 
                 @media (max-width: 900px) {
                     .proof-showcase-layout,
                     .proof-mini-grid,
                     .proof-naver-row,
-                    .proof-showcase-compact .proof-mini-grid {
-                        grid-template-columns: 1fr;
-                    }
-
-                    .proof-feature-card {
-                        grid-row: auto;
-                    }
-
-                    .proof-feature-card img {
-                        height: auto;
-                        max-height: 360px;
-                    }
+                    .proof-showcase-compact .proof-mini-grid { grid-template-columns: 1fr; }
+                    .proof-feature-card { grid-row: auto; }
+                    .proof-feature-card img { height: auto; max-height: 360px; }
                 }
 
                 @media (max-width: 640px) {
-                    .proof-showcase {
-                        padding: 18px 14px;
-                        border-radius: 12px;
-                    }
-
-                    .proof-showcase-copy h3 {
-                        font-size: 27px;
-                        line-height: 1.25;
-                    }
-
-                    .proof-showcase-copy p {
-                        font-size: 14px;
-                        line-height: 1.65;
-                    }
-
-                    .proof-feature-card figcaption {
-                        padding: 14px;
-                    }
-
-                    .proof-feature-card strong {
-                        font-size: 18px;
-                    }
-
+                    .proof-showcase { padding: 16px; }
+                    .proof-showcase-copy h3 { font-size: ${type.h3}px; }
                     .proof-feature-card img,
+                    .proof-mini-card img,
                     .proof-naver-card img,
-                    .proof-showcase-compact .proof-naver-card img {
-                        max-height: 260px;
-                        object-fit: contain;
-                        background: #08111c;
-                    }
+                    .proof-showcase-compact .proof-naver-card img { height: auto; max-height: 260px; object-fit: contain; }
                 }
             `}</style>
         </section>

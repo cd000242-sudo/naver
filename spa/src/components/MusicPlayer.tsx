@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { fetchSiteContent } from '../lib/siteOps';
-import { gradient, onGold } from '../styles/tokens';
+import { light, lightRadius, motion, type } from '../styles/tokens';
+import { ShellIcon } from './ShellIcons';
 
 declare global {
     interface Window {
@@ -324,18 +325,18 @@ function MusicPlayer({ hidden = false }: { hidden?: boolean } = {}) {
     return (
         <>
             <style>{`
+                .lp-music-player button:hover { border-color: ${light.lineStrong} !important; }
+                .lp-music-player button:focus-visible { outline: 2px solid ${light.text}; outline-offset: 2px; }
                 @media (max-width: 768px) {
-                    .lp-music-player { right: 12px !important; bottom: 186px !important; }
+                    .lp-music-player { right: 12px !important; }
                     .lp-music-button {
-                        width: 46px !important;
-                        min-width: 46px !important;
-                        height: 46px !important;
+                        width: 44px !important;
+                        min-width: 44px !important;
                         padding: 0 !important;
-                        border-radius: 50% !important;
                         justify-content: center !important;
                         gap: 0 !important;
                     }
-                    .lp-music-button span:last-child { display: none !important; }
+                    .lp-music-button .lp-music-label { display: none !important; }
                 }
             `}</style>
             <div ref={hostRef} style={{ position: 'fixed', top: -9999, left: -9999, width: 1, height: 1, opacity: 0, pointerEvents: 'none' }} />
@@ -354,10 +355,12 @@ function MusicPlayer({ hidden = false }: { hidden?: boolean } = {}) {
                 style={{
                     display: hidden ? 'none' : 'flex',
                     position: 'fixed',
-                    bottom: 200,
+                    // Fourth slot of the floating stack (FloatStack: 20 + 3 * 52).
+                    bottom: 'calc(176px + env(safe-area-inset-bottom, 0px))',
                     right: 24,
                     zIndex: 10000,
-                    flexDirection: 'column',
+                    // The panel opens to the left of the button so it never covers the stack above it.
+                    flexDirection: 'row',
                     alignItems: 'flex-end',
                     gap: 8,
                     pointerEvents: 'none',
@@ -365,79 +368,99 @@ function MusicPlayer({ hidden = false }: { hidden?: boolean } = {}) {
             >
                 {expanded && (
                     <div style={{
-                        background: 'rgba(18,18,26,0.95)',
-                        backdropFilter: 'blur(20px)',
-                        border: '1px solid rgba(255,215,0,0.2)',
-                        borderRadius: 16,
+                        background: light.surface,
+                        border: `1px solid ${light.line}`,
+                        borderRadius: lightRadius.card,
                         padding: 16,
                         width: 240,
                         pointerEvents: 'auto',
-                        boxShadow: '0 20px 60px rgba(0,0,0,0.4)',
+                        boxShadow: light.shadowFloat,
                     }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-                            <div style={{ fontSize: 11, color: '#ffd700', fontWeight: 800, letterSpacing: 0 }}>재생 목록</div>
-                            <button onClick={() => setExpanded(false)} style={{ background: 'transparent', border: 'none', color: '#a0a0b0', cursor: 'pointer', fontSize: 16 }}>x</button>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+                            <div style={{ fontSize: type.small, color: light.text, fontWeight: 600 }}>재생 목록</div>
+                            <button
+                                type="button"
+                                onClick={() => setExpanded(false)}
+                                aria-label="재생 목록 닫기"
+                                style={{
+                                    display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                                    width: 44, height: 44, margin: '-8px -8px -8px 0', padding: 0,
+                                    background: 'transparent', border: '1px solid transparent', borderRadius: lightRadius.control,
+                                    color: light.textSecondary, cursor: 'pointer',
+                                }}
+                            >
+                                <ShellIcon name="close" />
+                            </button>
                         </div>
-                        <div style={{ background: 'rgba(255,215,0,0.06)', borderRadius: 10, padding: 10, marginBottom: 12 }}>
-                            <div style={{ fontSize: 10, color: '#a0a0b0', marginBottom: 2 }}>지금 재생</div>
-                            <div style={{ fontSize: 13, fontWeight: 700, color: '#fff', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{trackTitle}</div>
+                        <div style={{ background: light.raised, borderRadius: lightRadius.control, padding: 12, marginBottom: 12 }}>
+                            <div style={{ fontSize: type.meta, color: light.textMuted, marginBottom: 4 }}>지금 재생</div>
+                            <div style={{ fontSize: type.small, fontWeight: 500, color: light.text, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{trackTitle}</div>
                         </div>
-                        <button onClick={toggle} style={{
+                        <button type="button" onClick={toggle} style={{
                             width: '100%',
-                            padding: 10,
-                            borderRadius: 10,
-                            background: gradient.goldBright,
-                            color: onGold.black,
-                            fontWeight: 800,
-                            fontSize: 14,
-                            border: 'none',
+                            minHeight: 44,
+                            padding: '0 16px',
+                            borderRadius: lightRadius.control,
+                            background: light.btn,
+                            color: light.onBtn,
+                            fontWeight: 600,
+                            fontSize: type.small,
+                            border: '1px solid transparent',
                             cursor: 'pointer',
                         }}>
                             {isPlaying ? '일시정지' : '재생'}
                         </button>
-                        <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.5)', textAlign: 'center', marginTop: 8 }}>관리자 사이트 편집에서 음악을 바꿀 수 있습니다.</div>
+                        <div style={{ fontSize: type.meta, color: light.textMuted, textAlign: 'center', marginTop: 8 }}>관리자 사이트 편집에서 음악을 바꿀 수 있습니다.</div>
                     </div>
                 )}
                 <button
+                    type="button"
                     className="lp-music-button"
                     onClick={() => {
                         setExpanded((value) => !value);
                         if (!isPlaying) toggle();
                     }}
                     title="음악 플레이어"
+                    aria-label={isPlaying ? '음악 플레이어, 재생 중' : '음악 플레이어'}
+                    aria-expanded={expanded}
                     /*
-                     * 알약형 그라데이션을 걷어냈다(사장님 2026-08-20 "고급지고 사각형으로
-                     * 깔끔하게"). 어두운 유리판 + 금색 실선 하나, 글자는 한 줄.
-                     * 상태는 색이 아니라 왼쪽 표시자로 말한다 — 재생 중이면 금색이 켜진다.
+                     * Light surface with one quiet line, like the other floating buttons.
+                     * State is told by the small mark on the right, not by the button colour:
+                     * gold while playing, neutral when stopped.
                      */
                     style={{
                         pointerEvents: 'auto',
-                        background: 'rgba(16,17,22,0.92)',
-                        border: '1px solid rgba(255,215,0,0.28)',
-                        backdropFilter: 'blur(16px)',
-                        borderRadius: 10,
-                        padding: '9px 14px',
-                        color: 'rgba(255,255,255,0.92)',
+                        boxSizing: 'border-box',
+                        height: 44,
+                        minWidth: 160,
+                        background: light.surface,
+                        border: `1px solid ${light.line}`,
+                        borderRadius: lightRadius.control,
+                        padding: '0 16px',
+                        color: light.text,
                         cursor: 'pointer',
                         display: 'flex',
                         alignItems: 'center',
-                        gap: 10,
-                        fontWeight: 600,
-                        fontSize: 12.5,
-                        letterSpacing: '0.01em',
-                        boxShadow: '0 8px 28px rgba(0,0,0,0.42)',
+                        gap: 8,
+                        fontWeight: 500,
+                        fontSize: type.small,
+                        lineHeight: 1.2,
+                        whiteSpace: 'nowrap',
+                        boxShadow: light.shadowFloat,
+                        transition: `border-color ${motion.fast} ${motion.ease}`,
                     }}
                 >
+                    <ShellIcon name="music" />
+                    <span className="lp-music-label">{isPlaying ? '음악 재생 중' : '음악'}</span>
                     <span
                         aria-hidden="true"
+                        className="lp-music-label"
                         style={{
-                            width: 6, height: 6, borderRadius: 2, flex: 'none',
-                            background: isPlaying ? '#ffd700' : 'rgba(255,255,255,0.28)',
-                            boxShadow: isPlaying ? '0 0 8px rgba(255,215,0,0.7)' : 'none',
-                            transition: 'background .2s, box-shadow .2s',
+                            width: 8, height: 8, borderRadius: 2, flex: 'none', marginLeft: 'auto',
+                            background: isPlaying ? light.accent : light.lineStrong,
+                            transition: `background-color ${motion.fast} ${motion.ease}`,
                         }}
                     />
-                    <span>{isPlaying ? '음악 재생 중' : '음악'}</span>
                 </button>
             </div>
         </>

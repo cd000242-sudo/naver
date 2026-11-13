@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import SplitWords from '../components/motion/SplitWords';
 import { Link } from 'react-router-dom';
-import ParticlesCanvas from '../components/ParticlesCanvas';
 import ChatbotTiles from '../components/chatbots/ChatbotTiles';
 import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
+import { color, light, lightRadius, motion, type as typeScale } from '../styles/tokens';
 
 const FLOWS = [
     ['글쓰기 준비', '주제와 키워드 선택 → 대상 독자와 글의 목적 정리'],
@@ -37,19 +38,17 @@ function ChatbotsPage() {
 
     return (
         <>
-            <ParticlesCanvas />
             <main className="chatbots-page">
                 <section className="chatbots-hero">
                     <div className="chatbots-wrap chatbots-hero-grid">
                         <div>
-                            <span className="chatbots-kicker">FREE CHATBOT · PROMPT</span>
-                            <h1>무료 챗봇·프롬프트</h1>
+                            <h1><SplitWords text="무료 챗봇·프롬프트" /></h1>
                             <p>
                                 글쓰기를 도와줄 무료 챗봇과 프롬프트를 모았습니다.
                                 아래 버튼을 누르면 바로 열립니다.
                             </p>
                             <div className="chatbots-actions">
-                                <a className="chatbots-btn primary" href="#chatbots-list">챗봇 바로가기</a>
+                                <a className="chatbots-btn primary lp-sheen" href="#chatbots-list">챗봇 바로가기</a>
                                 <Link className="chatbots-btn secondary" to="/pricing">자동화 툴 보기</Link>
                             </div>
                         </div>
@@ -65,10 +64,9 @@ function ChatbotsPage() {
                     </div>
                 </section>
 
-                <section id="chatbots-list" className="chatbots-section dark">
+                <section id="chatbots-list" className="chatbots-section">
                     <div className="chatbots-wrap">
                         <div className="chatbots-section-head fade-in">
-                            <span className="chatbots-kicker">FREE TOOLS</span>
                             <h2>바로 쓰는 무료 챗봇·프롬프트</h2>
                             <p>버튼을 누르면 새 창에서 열립니다.</p>
                         </div>
@@ -79,10 +77,9 @@ function ChatbotsPage() {
                     </div>
                 </section>
 
-                <section className="chatbots-section light">
+                <section className="chatbots-section">
                     <div className="chatbots-wrap">
                         <div className="chatbots-section-head fade-in">
-                            <span className="chatbots-kicker">RECOMMENDED FLOW</span>
                             <h2>이 순서대로 쓰면 더 편합니다</h2>
                             <p>처음 쓰는 분들도 목적에 맞게 바로 시작할 수 있도록 추천 흐름을 정리했습니다.</p>
                         </div>
@@ -97,10 +94,9 @@ function ChatbotsPage() {
                     </div>
                 </section>
 
-                <section className="chatbots-section light">
+                <section className="chatbots-section">
                     <div className="chatbots-wrap">
                         <div className="chatbots-section-head fade-in">
-                            <span className="chatbots-kicker">SAFE USE</span>
                             <h2>답변은 그대로 쓰기보다 한 번 더 확인하세요</h2>
                             <p>제미나이 챗봇은 글쓰기 보조 도구입니다. 승인, 노출, 수익을 보장하지 않으며 최종 판단과 수정은 사용자에게 있습니다.</p>
                         </div>
@@ -123,184 +119,120 @@ function ChatbotsPage() {
 
                 <section className="chatbots-final">
                     <div className="chatbots-wrap">
-                        <span className="chatbots-kicker">SPECIAL EVENT</span>
-                        <h2>LEWORD 키워드 마스터와 네이버 자동화 툴도 함께 써보세요</h2>
-                        <p>챗봇으로 초안을 잡고, Leaders Pro 자동화 툴로 키워드 발굴과 발행 흐름을 더 빠르게 이어갈 수 있습니다.</p>
-                        <div className="chatbots-actions center">
-                            <Link className="chatbots-btn primary" to="/products">제품정보 보기</Link>
-                            <Link className="chatbots-btn secondary" to="/download">다운로드</Link>
+                        <div className="chatbots-final-panel">
+                            <h2>LEWORD 키워드 마스터와 네이버 자동화 툴도 함께 써보세요</h2>
+                            <p>챗봇으로 초안을 잡고, Leaders Pro 자동화 툴로 키워드 발굴과 발행 흐름을 더 빠르게 이어갈 수 있습니다.</p>
+                            <div className="chatbots-actions">
+                                <Link className="chatbots-btn solid" to="/products">제품 정보 보기</Link>
+                                <Link className="chatbots-btn secondary" to="/download">다운로드</Link>
+                            </div>
                         </div>
                     </div>
                 </section>
             </main>
 
             <style>{`
+                /* Chatbots page, light theme. Values come from styles/tokens (light, type, lightRadius, motion).
+                   Tile markup lives in components/chatbots; the lock form styles itself there. */
                 .chatbots-page {
                     position: relative;
                     z-index: 1;
-                    color: #f8fafc;
-                    background: rgba(5, 8, 12, 0.58);
+                    color: ${light.text};
                 }
-
-                .hub-grid {
-                    display: grid;
-                    /* [2026-11-07] Three buttons side by side on wide screens so all show at once. */
-                    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                    gap: 22px;
-                    max-width: 1080px;
-                    margin: 0 auto;
-                }
-                .hub-tile {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: flex-start;
-                    gap: 10px;
-                    padding: 30px 30px 26px;
-                    background: rgba(255, 255, 255, 0.04);
-                    border: 1px solid rgba(255, 255, 255, 0.10);
-                    border-radius: 18px;
-                    text-align: left;
-                    text-decoration: none;
-                    color: inherit;
-                    cursor: pointer;
-                    font: inherit;
-                    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-                }
-                .hub-tile:hover {
-                    transform: translateY(-4px);
-                    border-color: rgba(244, 201, 93, 0.45);
-                    box-shadow: 0 14px 44px rgba(0, 0, 0, 0.45);
-                }
-                .hub-tile-top {
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    width: 100%;
-                }
-                .hub-emoji { font-size: 2.1rem; line-height: 1; }
-                .hub-badge {
-                    padding: 5px 12px;
-                    border-radius: 999px;
-                    font-size: 0.75rem;
-                    font-weight: 800;
-                    color: #f4c95d;
-                    background: rgba(244, 201, 93, 0.12);
-                    border: 1px solid rgba(244, 201, 93, 0.35);
-                }
-                .hub-badge.purple { color: #c4b5fd; background: rgba(139, 92, 246, 0.14); border-color: rgba(167, 139, 250, 0.4); }
-                .hub-tile h3 { margin: 6px 0 0; font-size: 1.3rem; font-weight: 800; color: #f8fafc; }
-                .hub-tile p { margin: 0; color: rgba(255, 255, 255, 0.72); font-size: 0.92rem; line-height: 1.65; }
-                .hub-cta { margin-top: 10px; color: #f4c95d; font-weight: 800; font-size: 0.92rem; }
 
                 .chatbots-wrap {
-                    width: min(1180px, calc(100% - 48px));
+                    width: min(1152px, calc(100% - 48px));
                     margin: 0 auto;
                 }
 
                 .chatbots-hero {
-                    /* [2026-11-07] Compact hero so the tool buttons show on the first screen. */
-                    min-height: auto;
-                    display: flex;
-                    align-items: center;
-                    padding: 104px 0 44px;
-                    background: linear-gradient(135deg, rgba(8, 13, 18, 0.88), rgba(17, 54, 67, 0.80) 54%, rgba(55, 43, 17, 0.76));
-                    border-bottom: 1px solid rgba(255,255,255,0.10);
+                    padding: 120px 0 40px;
                 }
 
                 .chatbots-hero-grid {
                     display: grid;
-                    grid-template-columns: minmax(0, 0.98fr) minmax(360px, 0.82fr);
-                    gap: 46px;
-                    align-items: center;
-                }
-
-                .chatbots-kicker {
-                    display: inline-flex;
-                    align-items: center;
-                    min-height: 28px;
-                    padding: 5px 12px;
-                    border: 1px solid rgba(244, 201, 93, 0.45);
-                    border-radius: 8px;
-                    background: rgba(244, 201, 93, 0.10);
-                    color: #f4c95d;
-                    font-size: 12px;
-                    font-weight: 900;
-                    letter-spacing: 0;
+                    grid-template-columns: minmax(0, 1fr) minmax(320px, 440px);
+                    gap: 48px;
+                    align-items: start;
                 }
 
                 .chatbots-hero h1 {
-                    margin: 18px 0;
-                    font-size: 52px;
-                    line-height: 1.1;
+                    margin: 0 0 12px;
+                    font-size: ${typeScale.h1}px;
+                    line-height: 1.2;
+                    font-weight: 700;
                     letter-spacing: 0;
+                    color: ${light.text};
                 }
 
                 .chatbots-hero p,
                 .chatbots-section-head p,
                 .chatbots-final p {
-                    color: rgba(255,255,255,0.76);
-                    font-size: 17px;
-                    line-height: 1.75;
+                    margin: 0;
+                    color: ${light.textSecondary};
+                    font-size: ${typeScale.body}px;
+                    line-height: 1.7;
+                    word-break: keep-all;
                 }
 
                 .chatbots-actions {
                     display: flex;
                     gap: 12px;
                     flex-wrap: wrap;
-                    margin-top: 30px;
-                }
-
-                .chatbots-actions.center {
-                    justify-content: center;
+                    margin-top: 24px;
                 }
 
                 .chatbots-btn {
                     display: inline-flex;
                     align-items: center;
                     justify-content: center;
-                    min-height: 46px;
-                    padding: 12px 20px;
-                    border-radius: 8px;
-                    font-size: 15px;
-                    font-weight: 900;
+                    min-height: 48px;
+                    padding: 12px 24px;
+                    border-radius: ${lightRadius.control}px;
+                    border: 1px solid transparent;
+                    font-size: ${typeScale.body}px;
+                    font-weight: 600;
                     text-decoration: none;
-                    transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+                    transition: background-color ${motion.fast} ${motion.ease}, border-color ${motion.fast} ${motion.ease};
                 }
 
-                .chatbots-btn:hover {
-                    transform: translateY(-2px);
-                }
-
+                /* The one gold fill on this page. */
                 .chatbots-btn.primary {
-                    border: 1px solid rgba(244, 201, 93, 0.7);
-                    background: #f4c95d;
-                    color: #071018;
+                    background: ${light.accent};
+                    color: ${light.onAccent};
+                }
+
+                .chatbots-btn.solid {
+                    background: ${light.btn};
+                    color: ${light.onBtn};
                 }
 
                 .chatbots-btn.secondary {
-                    border: 1px solid rgba(255,255,255,0.20);
-                    background: rgba(255,255,255,0.08);
-                    color: #ffffff;
+                    border-color: ${light.lineStrong};
+                    background: ${light.surface};
+                    color: ${light.text};
+                }
+
+                .chatbots-btn.secondary:hover {
+                    background: ${light.raised};
                 }
 
                 .chatbots-notice {
                     padding: 24px;
-                    border: 1px solid rgba(255,255,255,0.14);
-                    border-radius: 8px;
-                    background: rgba(8, 13, 18, 0.72);
-                    box-shadow: 0 24px 70px rgba(0,0,0,0.32);
-                    backdrop-filter: blur(12px);
+                    border: 1px solid ${light.line};
+                    border-radius: ${lightRadius.card}px;
+                    background: ${light.surface};
                 }
 
                 .chatbots-notice b {
                     display: block;
-                    font-size: 20px;
-                    margin-bottom: 16px;
-                    color: #ffffff;
+                    margin-bottom: 12px;
+                    font-size: ${typeScale.body}px;
+                    font-weight: 600;
+                    color: ${light.text};
                 }
 
-                .chatbots-notice ul,
-                .chatbot-card ul {
+                .chatbots-notice ul {
                     list-style: none;
                     padding: 0;
                     margin: 0;
@@ -308,11 +240,16 @@ function ChatbotsPage() {
 
                 .chatbots-notice li {
                     position: relative;
-                    padding-left: 18px;
-                    color: rgba(255,255,255,0.72);
-                    font-size: 14px;
+                    padding-left: 16px;
+                    margin-bottom: 8px;
+                    color: ${light.textSecondary};
+                    font-size: ${typeScale.small}px;
                     line-height: 1.7;
-                    margin-bottom: 10px;
+                    word-break: keep-all;
+                }
+
+                .chatbots-notice li:last-child {
+                    margin-bottom: 0;
                 }
 
                 .chatbots-notice li::before {
@@ -320,147 +257,244 @@ function ChatbotsPage() {
                     position: absolute;
                     left: 0;
                     top: 11px;
-                    width: 6px;
-                    height: 6px;
+                    width: 4px;
+                    height: 4px;
                     border-radius: 50%;
-                    background: #44d7b6;
+                    background: ${light.textMuted};
                 }
 
                 .chatbots-section {
-                    padding: 86px 0;
+                    padding: 48px 0;
                 }
 
                 #chatbots-list {
-                    padding-top: 44px;
-                }
-
-                #chatbots-list .chatbots-section-head {
-                    margin-bottom: 24px;
-                }
-
-                .chatbots-section.light {
-                    background: rgba(248, 250, 252, 0.96);
-                    color: #0f172a;
-                }
-
-                .chatbots-section.dark {
-                    background: rgba(7, 16, 24, 0.94);
-                    color: #f8fafc;
+                    padding-top: 24px;
+                    scroll-margin-top: 80px;
                 }
 
                 .chatbots-section-head {
-                    text-align: center;
                     max-width: 760px;
-                    margin: 0 auto 42px;
+                    margin: 0 0 24px;
                 }
 
                 .chatbots-section-head h2,
                 .chatbots-final h2 {
-                    margin: 14px 0 12px;
-                    font-size: 38px;
-                    line-height: 1.2;
+                    margin: 0 0 8px;
+                    font-size: ${typeScale.h2}px;
+                    line-height: 1.3;
+                    font-weight: 600;
                     letter-spacing: 0;
+                    color: ${light.text};
+                    word-break: keep-all;
                 }
 
-                .chatbots-section.light .chatbots-section-head p,
-                .chatbots-section.light .flow-card p,
-                .chatbots-section.light .guide-panel p {
-                    color: #526173;
-                }
-
-                .flow-grid,
-                .guide-panel {
+                /* ── Tiles (markup in components/chatbots) ── */
+                .hub-grid {
                     display: grid;
-                    grid-template-columns: repeat(3, 1fr);
-                    gap: 18px;
+                    /* [2026-11-07] Three buttons side by side on wide screens so all show at once. */
+                    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                    gap: 16px;
                 }
 
-                .flow-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-
-                .flow-card,
-                .guide-panel > div {
-                    min-height: 180px;
+                .hub-tile {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 8px;
                     padding: 24px;
-                    border-radius: 8px;
-                    border: 1px solid rgba(15, 23, 42, 0.10);
-                    background: #ffffff;
-                    box-shadow: 0 14px 40px rgba(15, 23, 42, 0.08);
+                    background: ${light.surface};
+                    border: 1px solid ${light.line};
+                    border-radius: ${lightRadius.card}px;
+                    box-shadow: ${light.shadowSm};
+                    text-align: left;
+                    text-decoration: none;
+                    color: inherit;
+                    cursor: pointer;
+                    font: inherit;
+                    transition: border-color ${motion.fast} ${motion.ease};
+                }
+
+                .hub-tile:hover {
+                    border-color: ${light.lineStrong};
+                }
+
+                .hub-tile-top {
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
+                    margin-bottom: 4px;
+                }
+
+                /* Category colour survives as one small dot. Text, face and border stay neutral. */
+                .hub-badge {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 8px;
+                    padding: 4px 12px;
+                    border-radius: ${lightRadius.pill}px;
+                    border: 1px solid ${light.line};
+                    background: ${light.raised};
+                    color: ${light.textSecondary};
+                    font-size: ${typeScale.meta}px;
+                    font-weight: 500;
+                }
+
+                .hub-badge::before {
+                    content: "";
+                    width: 8px;
+                    height: 8px;
+                    border-radius: 50%;
+                    background: ${light.accent};
+                }
+
+                .hub-badge.purple::before { background: ${color.purpleDeep}; }
+
+                .hub-tile h3 {
+                    margin: 0;
+                    font-size: ${typeScale.lead}px;
+                    line-height: 1.4;
+                    font-weight: 600;
+                    color: ${light.text};
+                }
+
+                .hub-tile p {
+                    margin: 0;
+                    color: ${light.textSecondary};
+                    font-size: ${typeScale.small}px;
+                    line-height: 1.7;
+                    word-break: keep-all;
+                }
+
+                .hub-cta {
+                    margin-top: auto;
+                    padding-top: 12px;
+                    color: ${light.accentInk};
+                    font-size: ${typeScale.small}px;
+                    font-weight: 600;
+                }
+
+                /* ── Recommended flow, safe use ── */
+                .flow-grid {
+                    display: grid;
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                    gap: 16px;
+                }
+
+                .flow-card {
+                    padding: 24px;
+                    border-radius: ${lightRadius.card}px;
+                    border: 1px solid ${light.line};
+                    background: ${light.surface};
                 }
 
                 .flow-card strong,
                 .guide-panel b {
                     display: block;
-                    font-size: 20px;
-                    color: #0f172a;
-                    margin-bottom: 10px;
+                    margin-bottom: 8px;
+                    font-size: ${typeScale.lead}px;
+                    font-weight: 600;
+                    color: ${light.text};
                 }
 
                 .flow-card p,
                 .guide-panel p {
-                    font-size: 14px;
-                    line-height: 1.75;
+                    margin: 0;
+                    color: ${light.textSecondary};
+                    font-size: ${typeScale.small}px;
+                    line-height: 1.7;
+                    word-break: keep-all;
+                }
+
+                /* One panel, three columns split by quiet rules. */
+                .guide-panel {
+                    display: grid;
+                    grid-template-columns: repeat(3, minmax(0, 1fr));
+                    border-radius: ${lightRadius.card}px;
+                    border: 1px solid ${light.line};
+                    background: ${light.surface};
+                }
+
+                .guide-panel > div {
+                    padding: 24px;
+                    border-left: 1px solid ${light.line};
+                }
+
+                .guide-panel > div:first-child {
+                    border-left: none;
                 }
 
                 .chatbots-final {
-                    padding: 84px 0 96px;
-                    text-align: center;
-                    background: linear-gradient(135deg, rgba(6, 95, 70, 0.94), rgba(10, 16, 24, 0.96) 58%, rgba(87, 66, 18, 0.90));
-                    border-top: 1px solid rgba(255,255,255,0.10);
+                    padding: 16px 0 96px;
                 }
 
-                .chatbots-final .chatbots-wrap {
-                    max-width: 780px;
+                .chatbots-final-panel {
+                    padding: 40px;
+                    border-radius: ${lightRadius.panel}px;
+                    border: 1px solid ${light.line};
+                    background: ${light.raised};
+                }
+
+                .chatbots-final-panel h2,
+                .chatbots-final-panel p {
+                    max-width: 760px;
                 }
 
                 @media (max-width: 980px) {
-                    .chatbots-hero-grid,
-                    .flow-grid,
-                    .guide-panel {
-                        grid-template-columns: 1fr 1fr;
-                    }
-
                     .chatbots-hero-grid {
-                        align-items: stretch;
+                        grid-template-columns: 1fr;
+                        gap: 32px;
                     }
                 }
 
                 @media (max-width: 640px) {
                     .chatbots-wrap {
-                        width: min(100% - 28px, 1180px);
+                        width: min(100% - 32px, 1152px);
                     }
 
                     .chatbots-hero {
-                        min-height: auto;
-                        padding: 96px 0 48px;
+                        padding: 96px 0 32px;
                     }
 
-                    .chatbots-hero-grid,
+                    .chatbots-hero h1 {
+                        font-size: ${typeScale.h1Mobile}px;
+                    }
+
+                    .chatbots-section {
+                        padding: 32px 0;
+                    }
+
+                    #chatbots-list {
+                        padding-top: 16px;
+                    }
+
+                    .chatbots-section-head h2,
+                    .chatbots-final h2 {
+                        font-size: ${typeScale.h3}px;
+                    }
+
                     .flow-grid,
                     .guide-panel {
                         grid-template-columns: 1fr;
                     }
 
-                    .chatbots-hero h1 {
-                        font-size: 36px;
+                    .guide-panel > div {
+                        border-left: none;
+                        border-top: 1px solid ${light.line};
                     }
 
-                    .chatbots-section {
-                        padding: 62px 0;
+                    .guide-panel > div:first-child {
+                        border-top: none;
                     }
 
-                    .chatbots-section-head h2,
-                    .chatbots-final h2 {
-                        font-size: 28px;
+                    .chatbots-final {
+                        padding: 8px 0 64px;
                     }
 
-                    .chatbots-hero p,
-                    .chatbots-section-head p,
-                    .chatbots-final p {
-                        font-size: 15px;
+                    .chatbots-final-panel {
+                        padding: 24px;
                     }
 
-                    .chatbots-actions,
-                    .chatbots-actions.center {
+                    .chatbots-actions {
                         display: grid;
                         grid-template-columns: 1fr;
                     }

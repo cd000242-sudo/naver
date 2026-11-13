@@ -1,3 +1,5 @@
+import { light, lightRadius, type } from '../styles/tokens';
+
 /**
  * 새 소식 배지. 개수가 있으면 숫자(9개 초과는 9+), 개수를 모르면 N 을 띄운다.
  * 어디에 붙어도 레이아웃을 밀지 않도록 inline-flex + 고정 높이를 쓴다.
@@ -15,7 +17,8 @@ function NewBadge({ count = 0, force = false, size = 'sm', title }: NewBadgeProp
     if (!visible) return null;
 
     const label = count > 0 ? (count > 9 ? '9+' : String(count)) : 'N';
-    const dim = size === 'md' ? 20 : 17;
+    // 13px is the smallest text on the site, so the badge is at least 20px tall.
+    const dim = size === 'md' ? 22 : 20;
     const accessible = title || (count > 0 ? `새 소식 ${count}건` : '새 소식 있음');
 
     return (
@@ -29,16 +32,15 @@ function NewBadge({ count = 0, force = false, size = 'sm', title }: NewBadgeProp
                 justifyContent: 'center',
                 minWidth: dim,
                 height: dim,
-                padding: '0 5px',
+                padding: '0 6px',
                 marginLeft: 6,
-                borderRadius: 999,
-                background: 'linear-gradient(135deg,#ff4d6d,#e11d48)',
-                color: '#fff',
-                fontSize: size === 'md' ? 12 : 11,
-                fontWeight: 800,
+                borderRadius: lightRadius.pill,
+                background: light.btn,
+                color: light.onBtn,
+                fontSize: type.meta,
+                fontWeight: 600,
                 lineHeight: 1,
-                letterSpacing: '-0.02em',
-                boxShadow: '0 2px 8px rgba(225,29,72,0.45)',
+                fontVariantNumeric: 'tabular-nums',
                 verticalAlign: 'middle',
             }}
         >

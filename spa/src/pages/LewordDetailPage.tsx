@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import SplitWords from '../components/motion/SplitWords';
 import ProductPageStyles from '../components/products/ProductPageStyles';
 import {
     AdsenseVsPanel, CloseBand, CompareBars, FaqList, FeatureBand, HeroActions, PriceBlock, ProofStrip, ReviewQuotes, useProduct,
@@ -84,7 +85,7 @@ function LewordDetailPage() {
         ['사기 전에 써 볼 수 있나요?', '네. 로그인하지 않아도 황금키워드 상위 5건과 실검 틈새 3건을 볼 수 있습니다. 나머지 탭은 이용권이 있어야 열립니다.'],
         ['글도 써 주나요?', '아니요. LEWORD는 무엇을 쓸지 찾고 설계하는 도구입니다. 글 쓰기와 발행은 Better Life Naver(네이버) · Leadernam Orbit(워드프레스 · 티스토리 · 블로그스팟)이 맡습니다.'],
         ['숫자는 어디서 오나요?', '검색량은 네이버 검색광고 조회값, 문서수는 블로그 검색결과, 1페이지 자리는 검색결과를 직접 열어 확인한 값입니다. 예상 수익이나 노출 확률 같은 추정치는 보여 드리지 않습니다.'],
-        ['요금은 어떻게 되나요?', `월 ${won(monthly)}원(부가세 포함 · 30일마다 자동결제) 또는 1년 이용권이 있습니다. 영구제는 판매하지 않습니다 — 매일 새로 재는 도구라 수집 비용이 매달 나가기 때문입니다.`],
+        ['요금은 어떻게 되나요?', `월 ${won(monthly)}원(부가세 포함 · 30일마다 자동결제) 또는 1년 이용권이 있습니다. 영구제는 판매하지 않습니다. 매일 새로 재는 도구라 수집 비용이 매달 나가기 때문입니다.`],
         ['여러 곳에서 동시에 쓸 수 있나요?', '한 계정은 사이트 1곳과 PC 앱 1곳에서 동시에 쓸 수 있습니다. 먼저 쓰고 있는 쪽이 우선입니다.'],
     ];
 
@@ -95,7 +96,7 @@ function LewordDetailPage() {
                 <div className="pp-wrap">
                     <div className="pp-hero-grid">
                         <div>
-                            <h1>고수 블로그보다<br />한 수 위의 제목,<br /><em>오늘 바로</em></h1>
+                            <h1><SplitWords text="고수 블로그보다" /><br /><SplitWords text="한 수 위의 제목," offset={2} /><br /><em><SplitWords text="오늘 바로" offset={6} /></em></h1>
                             <p className="pp-hero-sub">실제로 재서 찾은 키워드와,<br />고수 제목을 넘는 제목만 남깁니다</p>
                             <HeroActions primary={{ to: '/leword', label: '맛보기 시작' }} secondary={{ to: '/pricing', label: `월 ${won(monthly)}원으로 시작` }} />
                         </div>

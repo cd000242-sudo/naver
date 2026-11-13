@@ -1,11 +1,17 @@
 import AppBriefTitles from '../components/AppBriefTitles';
-import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from 'react';
+import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from 'react';
+import { ShellIcon } from '../components/ShellIcons';
 import { Link } from 'react-router-dom';
 import HomeOperationsBoard from '../components/HomeOperationsBoard';
-import ParticlesCanvas from '../components/ParticlesCanvas';
 import SourceBriefModal from '../components/SourceBriefModal';
 import SourceBriefModalStyles from '../components/SourceBriefModalStyles';
+import AmbientGlow from '../components/motion/AmbientGlow';
+import CountUp from '../components/motion/CountUp';
+import KeywordMarquee, { type MarqueeItem } from '../components/motion/KeywordMarquee';
+import { useReveal } from '../components/motion/Reveal';
+import { useSlidingIndicator } from '../components/motion/useSlidingIndicator';
 import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
+import { light, lightRadius, motion, type as typeScale } from '../styles/tokens';
 import { fetchHotKeywords, fetchIssueBrief, fetchRealtimeIssues, type HotLaneItem } from '../lib/keywordApi';
 import {
     SOURCE_SEARCH_PATHS,
@@ -1140,14 +1146,13 @@ const ANALYZE_STEPS = ['기사 수집', '사실 정리', '제목·주제 도출'
 
 function SourceInsightLoading({ keyword, accent, step }: { keyword: string; accent: string; step: number }) {
     return (
-        <aside className="source-insight-panel source-insight-loading" style={{ borderColor: accent + '66' }}>
-            <span className="source-insight-gear" style={{ borderTopColor: accent }} aria-hidden="true" />
+        <aside className="source-insight-panel source-insight-loading">
             <strong>{keyword}</strong>
             <p>분석 중입니다</p>
             <ol className="source-insight-steps">
                 {ANALYZE_STEPS.map((label, index) => (
                     <li key={label} className={index <= step ? 'done' : undefined}>
-                        <span style={index <= step ? { color: accent } : undefined}>
+                        <span>
                             {index < step ? '완료' : index === step ? '진행' : '대기'}
                         </span>
                         {label}
@@ -1186,6 +1191,9 @@ function SourceSignalInsight(props: { lane: SourceLane; item: SourceSignal | nul
 }
 
 function SourceSignalInsightPanel({ lane, item, items, onOpen }: { lane: SourceLane; item: SourceSignal | null; items: SourceSignal[]; onOpen?: () => void }) {
+    // Source articles start folded. This panel remounts on every keyword change, so a new keyword is folded again.
+    const [sourcesOpen, setSourcesOpen] = useState(false);
+    const sourcesId = useId();
     if (!item) {
         return (
             <aside className="source-insight-panel source-insight-panel-empty">
@@ -1229,13 +1237,13 @@ function SourceSignalInsightPanel({ lane, item, items, onOpen }: { lane: SourceL
     // 근거다. 빈 마인드맵을 만들지 않고, 수집 원본과 순위를 정직하게 보여준다.
     if (briefFacts.length === 0) {
         return (
-            <aside className="source-insight-panel source-insight-panel-empty" style={{ borderColor: lane.accent + '66' }}>
-                <span style={{ color: lane.accent, fontSize: 12, fontWeight: 900 }}>직접 수집 확인 · {lane.label} {rank}위</span>
+            <aside className="source-insight-panel source-insight-panel-empty">
+                <span>직접 수집 확인 · {lane.label} {rank}위</span>
                 <strong>{keyword}</strong>
                 <p>{lane.label} 원본 실시간 목록에서 직접 수집한 검색 신호입니다. 관련 보도는 자동 매칭될 때만 기사 브리프로 함께 표시합니다.</p>
                 <AppBriefTitles key={keyword} keyword={keyword} fallback={briefTitles} />
                 <div className="source-insight-actions">
-                    <a href={searchUrl} target="_blank" rel="noreferrer" style={{ color: lane.accent, fontSize: 12, fontWeight: 900 }}>원본에서 검색</a>
+                    <a href={searchUrl} target="_blank" rel="noreferrer">원본에서 검색</a>
                     {onOpen ? <button type="button" className="source-insight-open" onClick={onOpen}>크게 보기</button> : null}
                 </div>
             </aside>
@@ -1243,10 +1251,10 @@ function SourceSignalInsightPanel({ lane, item, items, onOpen }: { lane: SourceL
     }
 
     return (
-        <aside className="source-insight-panel source-insight-panel-rich" style={{ borderColor: lane.accent + '66' }}>
+        <aside className="source-insight-panel source-insight-panel-rich">
             <div className="source-insight-head">
                 <div>
-                    <span style={{ color: lane.accent }}>선택 키워드 기사 브리프</span>
+                    <span>선택 키워드 기사 브리프</span>
                     <strong>{keyword}</strong>
                 </div>
                 <div className="source-insight-actions">
@@ -1296,7 +1304,19 @@ function SourceSignalInsightPanel({ lane, item, items, onOpen }: { lane: SourceL
                       기사에서 그대로 가져온 것이고, 발행 경과를 같이 적는다.
                     */}
                     {briefLinks.length > 0 && (
-                        <ul className="source-brief-sources">
+                        <button
+                            type="button"
+                            className="source-brief-toggle"
+                            aria-expanded={sourcesOpen}
+                            aria-controls={sourcesId}
+                            onClick={() => setSourcesOpen((open) => !open)}
+                        >
+                            출처 {briefLinks.length}건 {sourcesOpen ? '접기' : '보기'}
+                            <ShellIcon name="chevronDown" size={16} />
+                        </button>
+                    )}
+                    {briefLinks.length > 0 && sourcesOpen && (
+                        <ul className="source-brief-sources" id={sourcesId}>
                             {briefLinks.map((link) => (
                                 <li key={link.url}>
                                     <a href={link.url} target="_blank" rel="noreferrer">
@@ -1399,7 +1419,6 @@ function IndexPage() {
     /** 카드를 누르면 중앙 모달로 크게 펼친다. 우측 패널은 그대로 요약을 유지한다. */
     const [briefModalKeyword, setBriefModalKeyword] = useState('');
     const [siteContent, setSiteContent] = useState<SiteContent | null>(null);
-    const [decorationsReady, setDecorationsReady] = useState(false);
 
     // SEO meta (페이지 진입 시 document.title 변경)
     useEffect(() => {
@@ -1482,9 +1501,8 @@ function IndexPage() {
         };
     }, []);
 
-    useEffect(() => runAfterFirstPaint(() => setDecorationsReady(true), 1700), []);
-
-    const liveStatusLabel = liveState.status === 'ready' ? 'LIVE' : liveState.status === 'error' ? 'FAST FALLBACK' : 'LOADING';
+    // The title already says "실시간"; only the non-ready states need a word.
+    const liveStatusLabel = liveState.status === 'ready' ? '' : liveState.status === 'error' ? '저장된 목록 표시 중' : '불러오는 중';
     const activeSourceLane = liveState.lanes.find((lane) => lane.id === activeSourceLaneId)
         || liveState.lanes[0]
         || { ...SOURCE_LANE_CONFIGS[0], items: [] };
@@ -1603,27 +1621,31 @@ function IndexPage() {
         selectSourceLane(nextLaneId);
         window.requestAnimationFrame(() => document.getElementById(`home-live-source-tab-${nextLaneId}`)?.focus());
     };
-    const homeBgImage = siteContent?.theme?.productsBgImage || siteContent?.theme?.pricingBgImage || '';
-
-    useEffect(() => {
-        const bg = cssBackgroundUrl(homeBgImage);
-        if (!bg) return;
-        const previousBackground = document.body.style.background;
-        const previousAttachment = document.body.style.backgroundAttachment;
-        document.body.style.background =
-            `linear-gradient(180deg, rgba(10,10,15,0.10) 0%, rgba(10,10,15,0.25) 50%, rgba(10,10,15,0.45) 100%), url("${bg}") center top / cover no-repeat, var(--bg-dark)`;
-        document.body.style.backgroundAttachment = 'scroll';
-        return () => {
-            document.body.style.background = previousBackground;
-            document.body.style.backgroundAttachment = previousAttachment;
-        };
-    }, [homeBgImage]);
-
+    // Motion pass (2026-11): one ribbon of real live keywords, a gliding tab marker, staged rows.
+    const marqueeItems = useMemo<MarqueeItem[]>(() => {
+        const seen = new Set<string>();
+        const out: MarqueeItem[] = [];
+        for (const lane of liveState.lanes) {
+            for (const item of lane.items) {
+                const label = cleanLiveText(item.keyword || item.title, '');
+                if (!label || seen.has(label)) continue;
+                seen.add(label);
+                out.push({ key: `${lane.id}-${label}`, label, href: item.articleUrl || buildSourceSearchUrl(lane.id, label) });
+                if (out.length >= 24) return out;
+            }
+        }
+        return out;
+    }, [liveState.lanes]);
+    const sourceTabsRef = useRef<HTMLDivElement>(null);
+    const sourceListRef = useRef<HTMLDivElement>(null);
+    const actionStripRef = useRef<HTMLDivElement>(null);
+    const sourceInkStyle = useSlidingIndicator(sourceTabsRef, '.hero-source-tab.active', activeSourceLane.id);
+    useReveal(sourceListRef, { stagger: true });
+    useReveal(actionStripRef, { stagger: true });
     return (
         <>
-            {decorationsReady && <ParticlesCanvas />}
-
             <SourceBriefModalStyles />
+            <AmbientGlow />
             {briefModalItem && (
                 <SourceBriefModal
                     lane={activeSourceLane}
@@ -1632,14 +1654,22 @@ function IndexPage() {
                 />
             )}
 
-            <HomeOperationsBoard managedProofs={siteContent?.hero?.proofs || []} realtimePanel={(
+            <HomeOperationsBoard
+                managedProofs={siteContent?.hero?.proofs || []}
+                ribbon={(
+                    // The one keyword ribbon on the page: under the first screen, right above the live board.
+                    <section className="home-marquee-wrap" aria-label="지금 뜨는 검색어">
+                        <KeywordMarquee items={marqueeItems} title="지금 뜨는 검색어" />
+                    </section>
+                )}
+                realtimePanel={(
                     <div className="hero-realtime-board" aria-label="실시간 검색어">
                         <div className="hero-realtime-head">
-                            <span>{liveStatusLabel}</span>
-                            <strong>실시간 검색어</strong>
+                            <h3>실시간 검색어</h3>
+                            {liveStatusLabel ? <span>{liveStatusLabel}</span> : null}
                             <small>{liveUpdatedAt}</small>
                         </div>
-                        <div className="hero-source-tabs" role="tablist" aria-label="홈 실시간 소스 선택">
+                        <div ref={sourceTabsRef} className="hero-source-tabs" role="tablist" aria-label="홈 실시간 소스 선택">
                             {liveState.lanes.map((lane) => {
                                 const isActive = lane.id === activeSourceLane.id;
                                 return (
@@ -1654,24 +1684,21 @@ function IndexPage() {
                                         className={`hero-source-tab${isActive ? ' active' : ''}`}
                                         onClick={() => selectSourceLane(lane.id)}
                                         onKeyDown={(event) => handleSourceTabKeyDown(event, lane.id)}
-                                        style={{ borderColor: isActive ? lane.accent : 'rgba(255,255,255,0.13)', color: isActive ? '#061018' : 'rgba(255,255,255,0.74)', background: isActive ? lane.accent : 'rgba(255,255,255,0.045)' }}
                                     >
-                                        <span style={{ background: isActive ? '#061018' : lane.accent }} />
                                         <strong>{lane.label}</strong>
                                         <small>{lane.items.length}</small>
                                     </button>
                                 );
                             })}
+                            <span className="lp-tab-ink" style={sourceInkStyle} aria-hidden="true" />
                         </div>
                         <div
                             id="home-live-source-panel"
                             className="hero-source-panel"
                             role="tabpanel"
                             aria-labelledby={`home-live-source-tab-${activeSourceLane.id}`}
-                            style={{ borderColor: activeSourceLane.accent + '66', background: 'linear-gradient(135deg, ' + activeSourceLane.accent + '16, rgba(255,255,255,0.035))' }}
                         >
                             <div className="hero-source-panel-head">
-                                <span style={{ background: activeSourceLane.accent }} />
                                 <div>
                                     <strong>{activeSourceLane.label}</strong>
                                     <p>{activeSourceLane.description}</p>
@@ -1685,7 +1712,7 @@ function IndexPage() {
                             </div>
                             <div className="hero-source-body">
                                 <div className="hero-source-list-shell">
-                                    <div className="hero-source-list">
+                                    <div ref={sourceListRef} className="hero-source-list">
                                     {activeSourceItems.length === 0 ? (
                                         <article className="hero-source-empty">
                                             <strong>원본 수집 중</strong>
@@ -1706,7 +1733,7 @@ function IndexPage() {
                                         );
                                         const description = firstSentenceOnly(ownDescription || firstFact);
                                         return (
-                                            <article key={item.id || `${activeSourceLane.id}-hero-${keyword}-${index}`} className={`hero-source-row${activeSourceInsightItem === item ? ' active' : ''}`}>
+                                            <article key={item.id || `${activeSourceLane.id}-hero-${keyword}-${index}`} className={`hero-source-row${rawActiveInsightItem === item ? ' active' : ''}`}>
                                                 <button
                                                     type="button"
                                                     className="hero-source-row-main"
@@ -1749,13 +1776,13 @@ function IndexPage() {
                                                             href={buildSourceSearchUrl('naver', win.keyword)}
                                                             target="_blank"
                                                             rel="noreferrer"
-                                                            title={`블로그탭 상위 ${win.sampledTitles}개 중 제목으로 정면 대응한 글 ${win.exactTitleHits}건 — 자리가 비어 있다`}
+                                                            title={`블로그탭 상위 ${win.sampledTitles}개 중 제목으로 정면 대응한 글 ${win.exactTitleHits}건, 자리가 비어 있다`}
                                                         >
                                                             <b>로직을 이기는 키워드</b>
                                                             <span>{win.keyword}</span>
                                                             <small>
-                                                                {win.searchVolume != null ? `검색량 ${win.searchVolume.toLocaleString()}` : '검색량 —'}
-                                                                {win.documentCount != null ? ` · 문서수 ${win.documentCount.toLocaleString()}` : ''}
+                                                                {win.searchVolume != null ? <>검색량 <CountUp value={win.searchVolume} /></> : '검색량 미확인'}
+                                                                {win.documentCount != null ? <> · 문서수 <CountUp value={win.documentCount} /></> : ''}
                                                                 {` · 상위 ${win.sampledTitles} 정면글 ${win.exactTitleHits}건`}
                                                             </small>
                                                         </a>
@@ -1765,12 +1792,8 @@ function IndexPage() {
                                         );
                                     })}
                                     </div>
-                                    {activeSourceItems.length > 5 && (
-                                        <span className="hero-source-scroll-hint" aria-hidden="true">
-                                            <span />
-                                        </span>
-                                    )}
                                 </div>
+                                <div className="hero-source-insight-cell">
                                 <SourceSignalInsight
                                     lane={activeSourceLane}
                                     item={activeSourceInsightItem}
@@ -1782,20 +1805,21 @@ function IndexPage() {
                                         setBriefModalKeyword(cleanLiveText(target.keyword || target.title, activeSourceLane.label));
                                     }}
                                 />
+                                </div>
                             </div>
                         </div>
                     </div>
             )} />
 
             {/* ═══ HOME QUICK ACTIONS ═══ */}
-            <section className="home-cta-dock" aria-label={'\ud648 \ube60\ub978 \uc774\ub3d9'}>
-                <div className="hero-action-strip">
+            <section className="home-cta-dock" aria-label="홈 빠른 이동">
+                <div ref={actionStripRef} className="hero-action-strip">
                     {[
-                        { to: '/leword', label: '\ud669\uae08\ud0a4\uc6cc\ub4dc \ubcf4\ub7ec\uac00\uae30', desc: '\uc2e4\uc2dc\uac04 \ud669\uae08\ud0a4\uc6cc\ub4dc\ub97c \ubc14\ub85c \ud655\uc778', tone: 'gold' },
-                        { to: '/chatbots', label: '\ubb34\ub8cc \ucc57\ubd07 \uc0ac\uc6a9\ud558\ub7ec\uac00\uae30', desc: '\uc9c8\ubb38\ud558\uace0 \uc544\uc774\ub514\uc5b4 \ubc14\ub85c \ubc1b\uae30', tone: 'cyan' },
-                        { to: '/pricing', label: '\uc790\ub3d9\ud654 \uad6c\ub9e4\ud558\ub7ec\uac00\uae30', desc: '\ubc1c\ud589 \uc790\ub3d9\ud654\ub97c \ubc14\ub85c \uc2dc\uc791', tone: 'green' },
-                    ].map((action, index) => (
-                        <Link key={action.to} to={action.to} className={`hero-action-button ${action.tone}`} style={{ animationDelay: `${index * 0.14}s` }}>
+                        { to: '/leword', label: '황금키워드 보러 가기', desc: '실시간 황금키워드를 바로 확인', primary: true },
+                        { to: '/chatbots', label: '무료 챗봇 사용하러 가기', desc: '질문하고 아이디어 바로 받기', primary: false },
+                        { to: '/pricing', label: '자동화 구매하러 가기', desc: '발행 자동화를 바로 시작', primary: false },
+                    ].map((action) => (
+                        <Link key={action.to} to={action.to} className={`hero-action-button${action.primary ? ' primary lp-sheen' : ''}`}>
                             <strong>{action.label}</strong>
                             <span>{action.desc}</span>
                         </Link>
@@ -1812,53 +1836,52 @@ function IndexPage() {
                     grid-template-rows: auto auto minmax(0, 1fr);
                     gap: 16px;
                     margin: 0;
-                    padding: 18px;
-                    border-radius: 8px;
-                    border: 1px solid rgba(255,255,255,0.14);
-                    background: rgba(8,15,24,0.62);
-                    backdrop-filter: blur(16px);
-                    box-shadow: 0 24px 70px rgba(0,0,0,0.22);
+                    padding: 20px;
+                    border-radius: ${lightRadius.panel}px;
+                    border: 1px solid ${light.line};
+                    background: ${light.surface};
+                    color: ${light.text};
                 }
 
                 .hero-realtime-head {
                     display: flex;
-                    align-items: center;
-                    gap: 10px;
+                    flex-wrap: wrap;
+                    align-items: baseline;
+                    gap: 4px 12px;
                     min-width: 0;
                 }
 
-                .hero-realtime-head span {
-                    flex: 0 0 auto;
-                    padding: 6px 10px;
-                    border-radius: 999px;
-                    background: rgba(68,215,182,0.14);
-                    color: #44d7b6;
-                    font-size: 13px;
-                    font-weight: 900;
-                    letter-spacing: 0.08em;
+                .hero-realtime-head h3 {
+                    margin: 0;
+                    color: ${light.text};
+                    font-size: ${typeScale.h3}px;
+                    font-weight: 600;
+                    line-height: 1.3;
                 }
 
-                .hero-realtime-head strong {
-                    color: #fff;
-                    font-size: 19px;
-                    font-weight: 900;
+                .hero-realtime-head span {
+                    color: ${light.textMuted};
+                    font-size: ${typeScale.meta}px;
+                    font-weight: 500;
                 }
 
                 .hero-realtime-head small {
                     margin-left: auto;
-                    color: rgba(255,255,255,0.58);
-                    font-size: 14px;
-                    font-weight: 700;
+                    color: ${light.textMuted};
+                    font-size: ${typeScale.meta}px;
+                    font-weight: 400;
+                    font-variant-numeric: tabular-nums;
                     white-space: nowrap;
                 }
 
                 .hero-source-tabs {
+                    position: relative;
                     display: flex;
                     flex-wrap: nowrap;
                     align-items: center;
-                    gap: 7px;
+                    gap: 8px;
                     overflow-x: auto;
-                    padding-bottom: 2px;
+                    padding-bottom: 4px;
                     scrollbar-width: none;
                 }
 
@@ -1867,45 +1890,53 @@ function IndexPage() {
                 }
 
                 .hero-source-tab {
-                    min-height: 48px;
+                    min-height: 44px;
                     flex: 0 0 auto;
                     display: inline-flex;
                     align-items: center;
-                    gap: 7px;
-                    padding: 10px 13px;
-                    border: 1px solid rgba(255,255,255,0.13);
-                    border-radius: 999px;
+                    gap: 8px;
+                    padding: 0 16px;
+                    border: 1px solid ${light.line};
+                    border-radius: ${lightRadius.control}px;
+                    background: ${light.surface};
+                    color: ${light.textSecondary};
                     font: inherit;
                     cursor: pointer;
-                    transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+                    transition: background-color ${motion.fast} ${motion.ease}, border-color ${motion.fast} ${motion.ease}, color ${motion.fast} ${motion.ease};
                 }
 
-                .hero-source-tab:hover,
+                .hero-source-tab:hover {
+                    border-color: ${light.lineStrong};
+                    color: ${light.text};
+                }
+
                 .hero-source-tab.active {
-                    transform: translateY(-1px);
+                    border-color: ${light.btn};
+                    background: ${light.btn};
+                    color: ${light.onBtn};
                 }
 
-                .hero-source-tab span {
-                    width: 8px;
-                    height: 8px;
-                    border-radius: 50%;
-                    flex: 0 0 auto;
+                .hero-source-tab:focus-visible {
+                    outline: 2px solid ${light.text};
+                    outline-offset: 2px;
                 }
 
                 .hero-source-tab strong {
-                    font-size: 14px;
-                    font-weight: 900;
+                    font-size: ${typeScale.small}px;
+                    font-weight: 500;
                     white-space: nowrap;
                 }
 
+                .hero-source-tab.active strong {
+                    font-weight: 600;
+                }
+
                 .hero-source-tab small {
-                    min-width: 18px;
-                    padding: 2px 5px;
-                    border-radius: 999px;
-                    background: rgba(255,255,255,0.16);
-                    font-size: 13px;
-                    font-weight: 900;
-                    text-align: center;
+                    color: inherit;
+                    opacity: 0.72;
+                    font-size: ${typeScale.meta}px;
+                    font-weight: 400;
+                    font-variant-numeric: tabular-nums;
                 }
 
                 .hero-source-panel {
@@ -1914,87 +1945,60 @@ function IndexPage() {
                     display: grid;
                     grid-template-rows: auto minmax(0, 1fr);
                     align-content: start;
-                    gap: 12px;
-                    padding: 14px;
-                    border: 1px solid rgba(255,255,255,0.12);
-                    border-radius: 8px;
+                    border: 1px solid ${light.line};
+                    border-radius: ${lightRadius.card}px;
+                    background: ${light.surface};
                     overflow: hidden;
                 }
 
                 .hero-source-panel-head {
-                    display: grid;
-                    grid-template-columns: 12px minmax(0, 1fr) auto;
-                    align-items: center;
-                    gap: 10px;
-                    padding-bottom: 10px;
-                    border-bottom: 1px solid rgba(255,255,255,0.10);
+                    display: flex;
+                    align-items: baseline;
+                    gap: 12px;
+                    padding: 16px 20px;
+                    border-bottom: 1px solid ${light.line};
                 }
 
-                .hero-source-panel-head > span {
-                    width: 9px;
-                    height: 9px;
-                    border-radius: 50%;
+                .hero-source-panel-head > div {
+                    flex: 1 1 auto;
+                    min-width: 0;
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-items: baseline;
+                    gap: 4px 12px;
                 }
 
                 .hero-source-panel-head strong {
-                    display: block;
-                    color: #fff;
-                    font-size: 17px;
-                    font-weight: 900;
+                    color: ${light.text};
+                    font-size: ${typeScale.body}px;
+                    font-weight: 600;
                 }
 
                 .hero-source-panel-head p {
-                    margin: 3px 0 0;
-                    color: rgba(255,255,255,0.60);
-                    font-size: 14px;
+                    margin: 0;
+                    color: ${light.textSecondary};
+                    font-size: ${typeScale.small}px;
                     line-height: 1.5;
                 }
 
                 .hero-source-panel-head small {
-                    color: rgba(255,255,255,0.62);
-                    font-size: 14px;
-                    font-weight: 900;
+                    flex: 0 0 auto;
+                    color: ${light.textMuted};
+                    font-size: ${typeScale.meta}px;
+                    font-weight: 400;
+                    font-variant-numeric: tabular-nums;
                     white-space: nowrap;
                 }
 
                 .hero-source-list {
-                    display: grid;
-                    align-content: start;
-                    gap: 7px;
+                    display: block;
                     height: 100%;
                     max-height: 100%;
                     min-height: 0;
                     overflow-y: auto;
                     overscroll-behavior: contain;
-                    padding-right: 10px;
-                    scrollbar-gutter: stable;
                     scrollbar-width: thin;
-                    scrollbar-color: rgba(68,215,182,0.95) rgba(255,255,255,0.12);
-                }
-
-                .hero-source-list::-webkit-scrollbar,
-                .source-insight-panel::-webkit-scrollbar {
-                    width: 11px;
-                }
-
-                .hero-source-list::-webkit-scrollbar-track,
-                .source-insight-panel::-webkit-scrollbar-track {
-                    border-radius: 999px;
-                    background: rgba(255,255,255,0.12);
-                    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
-                }
-
-                .hero-source-list::-webkit-scrollbar-thumb,
-                .source-insight-panel::-webkit-scrollbar-thumb {
-                    border: 2px solid rgba(13,28,42,0.96);
-                    border-radius: 999px;
-                    background: linear-gradient(180deg, #44d7b6, #2f8cff);
-                    box-shadow: 0 0 14px rgba(68,215,182,0.38);
-                }
-
-                .hero-source-list::-webkit-scrollbar-thumb:hover,
-                .source-insight-panel::-webkit-scrollbar-thumb:hover {
-                    background: linear-gradient(180deg, #65ffd9, #59a8ff);
+                    scrollbar-color: ${light.lineStrong} transparent;
                 }
 
                 .hero-source-list-shell {
@@ -2004,83 +2008,60 @@ function IndexPage() {
                     min-height: 0;
                 }
 
-                .hero-source-scroll-hint {
-                    position: absolute;
-                    top: 8px;
-                    right: 2px;
-                    bottom: 8px;
-                    width: 12px;
-                    border-radius: 999px;
-                    border: 1px solid rgba(255,255,255,0.16);
-                    background: rgba(255,255,255,0.13);
-                    box-shadow: inset 0 0 0 1px rgba(6,13,22,0.68), 0 0 18px rgba(68,215,182,0.20);
-                    pointer-events: none;
-                    z-index: 3;
-                }
-
-                .hero-source-scroll-hint span {
-                    position: absolute;
-                    left: 2px;
-                    right: 2px;
-                    top: 8px;
-                    height: 34%;
-                    border-radius: 999px;
-                    background: linear-gradient(180deg, #65ffd9, #2f8cff);
-                    box-shadow: 0 0 12px rgba(68,215,182,0.50);
-                    animation: sourceScrollHint 2.8s ease-in-out infinite;
-                }
-
-                @keyframes sourceScrollHint {
-                    0%, 100% { transform: translateY(0); }
-                    50% { transform: translateY(18px); }
-                }
-
                 .hero-source-empty {
                     min-height: 96px;
                     display: grid;
                     align-content: center;
-                    gap: 6px;
-                    padding: 16px;
-                    border-radius: 8px;
-                    border: 1px dashed rgba(255,255,255,0.16);
-                    background: rgba(255,255,255,0.035);
+                    gap: 4px;
+                    padding: 20px;
                 }
 
                 .hero-source-empty strong {
-                    color: #fff;
-                    font-size: 15px;
-                    font-weight: 900;
+                    color: ${light.text};
+                    font-size: ${typeScale.body}px;
+                    font-weight: 600;
                 }
 
                 .hero-source-empty p {
                     margin: 0;
-                    color: rgba(255,255,255,0.58);
-                    font-size: 12px;
-                    line-height: 1.45;
+                    color: ${light.textSecondary};
+                    font-size: ${typeScale.small}px;
+                    line-height: 1.5;
                 }
 
+                /* One list, hairline rows. The selected row carries the only gold line. */
                 .hero-source-row {
-                    min-height: 60px;
+                    min-height: 56px;
                     display: grid;
-                    grid-template-columns: minmax(0, 1fr) 54px;
+                    grid-template-columns: minmax(0, 1fr) auto;
                     align-items: center;
-                    gap: 6px;
-                    padding: 0;
-                    border-radius: 8px;
-                    border: 1px solid rgba(255,255,255,0.08);
-                    background: rgba(255,255,255,0.045);
-                    overflow: hidden;
+                    border-bottom: 1px solid ${light.line};
+                    color: inherit;
+                    transition: background-color ${motion.fast} ${motion.ease};
+                }
+
+                .hero-source-row:last-child {
+                    border-bottom: 0;
+                }
+
+                .hero-source-row:hover {
+                    background: ${light.raised};
+                }
+
+                .hero-source-row.active {
+                    background: ${light.raised};
+                    box-shadow: inset 3px 0 0 ${light.accent};
                 }
 
                 .hero-source-row-main {
                     min-width: 0;
                     width: 100%;
-                    height: 100%;
+                    min-height: 56px;
                     display: grid;
-                    grid-template-columns: 30px minmax(0, 1fr) auto;
+                    grid-template-columns: 28px minmax(0, 1fr) auto;
                     align-items: center;
-                    gap: 9px;
-                    padding: 7px 8px 7px 10px;
+                    gap: 12px;
+                    padding: 8px 12px 8px 20px;
                     border: 0;
                     background: transparent;
                     color: inherit;
@@ -2089,28 +2070,36 @@ function IndexPage() {
                     cursor: pointer;
                 }
 
+                .hero-source-row-main:focus-visible,
+                .hero-source-row-search:focus-visible,
+                .hero-source-row-win:focus-visible {
+                    outline: 2px solid ${light.text};
+                    outline-offset: -2px;
+                }
+
                 .hero-source-row-main > span {
-                    width: 26px;
-                    height: 26px;
-                    border-radius: 999px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    background: rgba(255,255,255,0.10);
-                    color: #fff;
-                    font-size: 13px;
-                    font-weight: 900;
+                    color: ${light.textMuted};
+                    font-size: ${typeScale.small}px;
+                    font-weight: 500;
+                    font-variant-numeric: tabular-nums;
+                    line-height: 24px;
+                    text-align: right;
                 }
 
                 .hero-source-row strong {
                     display: block;
                     min-width: 0;
-                    color: #fff;
-                    font-size: 16px;
+                    color: ${light.text};
+                    font-size: ${typeScale.body}px;
+                    font-weight: 500;
                     line-height: 1.4;
                     overflow: hidden;
                     text-overflow: ellipsis;
                     white-space: nowrap;
+                }
+
+                .hero-source-row.active strong {
+                    font-weight: 600;
                 }
 
                 /*
@@ -2119,9 +2108,9 @@ function IndexPage() {
                  * 들어오는 건 첫 문장 하나라 두 줄이면 대개 다 들어간다.
                  */
                 .hero-source-row p {
-                    margin: 3px 0 0;
-                    color: rgba(255,255,255,0.58);
-                    font-size: 13.5px;
+                    margin: 4px 0 0;
+                    color: ${light.textSecondary};
+                    font-size: ${typeScale.small}px;
                     line-height: 1.5;
                     word-break: keep-all;
                     display: -webkit-box;
@@ -2131,9 +2120,10 @@ function IndexPage() {
                 }
 
                 .hero-source-row-main > small {
-                    color: rgba(255,255,255,0.56);
-                    font-size: 13px;
-                    font-weight: 900;
+                    color: ${light.textMuted};
+                    font-size: ${typeScale.meta}px;
+                    font-weight: 400;
+                    font-variant-numeric: tabular-nums;
                     white-space: nowrap;
                 }
 
@@ -2147,250 +2137,201 @@ function IndexPage() {
                     display: flex;
                     flex-wrap: wrap;
                     align-items: baseline;
-                    gap: 6px;
-                    margin: 0 10px 9px 10px;
-                    padding: 7px 10px;
-                    border-radius: 7px;
-                    border: 1px solid rgba(68,215,182,0.34);
-                    background: rgba(68,215,182,0.08);
+                    gap: 4px 8px;
+                    margin: 0 12px 12px 20px;
+                    padding: 8px 12px;
+                    border-radius: ${lightRadius.control}px;
+                    background: ${light.accentSoft};
                     text-decoration: none;
                 }
                 .hero-source-row-win b {
-                    font-size: 10.5px;
-                    font-weight: 900;
-                    color: #44d7b6;
-                    letter-spacing: -0.2px;
+                    font-size: ${typeScale.meta}px;
+                    font-weight: 500;
+                    color: ${light.textSecondary};
                 }
                 .hero-source-row-win span {
-                    font-size: 13px;
-                    font-weight: 800;
-                    color: rgba(255,255,255,0.94);
+                    font-size: ${typeScale.small}px;
+                    font-weight: 600;
+                    color: ${light.text};
                     word-break: keep-all;
                 }
                 .hero-source-row-win small {
-                    font-size: 11px;
-                    color: rgba(255,255,255,0.62);
+                    font-size: ${typeScale.meta}px;
+                    font-variant-numeric: tabular-nums;
+                    color: ${light.textSecondary};
                 }
-                .hero-source-row-win:hover { background: rgba(68,215,182,0.14); }
+                .hero-source-row-win:hover span { text-decoration: underline; text-underline-offset: 3px; }
                 .hero-source-row-search {
-                    width: 48px;
-                    min-height: 48px;
+                    min-width: 44px;
+                    min-height: 44px;
                     display: inline-flex;
                     align-items: center;
                     justify-content: center;
-                    margin-right: 6px;
-                    border-radius: 999px;
-                    border: 1px solid rgba(255,255,255,0.14);
-                    color: rgba(255,255,255,0.74);
+                    margin-right: 12px;
+                    padding: 0 12px;
+                    border-radius: ${lightRadius.control}px;
+                    border: 1px solid ${light.line};
+                    background: ${light.surface};
+                    color: ${light.textSecondary};
                     text-decoration: none;
-                    font-size: 14px;
-                    font-weight: 900;
+                    font-size: ${typeScale.small}px;
+                    font-weight: 500;
+                    transition: border-color ${motion.fast} ${motion.ease}, color ${motion.fast} ${motion.ease};
+                }
+                .hero-source-row-search:hover {
+                    border-color: ${light.lineStrong};
+                    color: ${light.text};
                 }
 
-                .hero-source-body,
-                .home-source-body {
+                .hero-source-body {
                     display: grid;
-                    grid-template-columns: minmax(330px, 0.82fr) minmax(0, 1.18fr);
-                    gap: 12px;
-                    align-items: start;
+                    grid-template-columns: minmax(320px, 0.82fr) minmax(0, 1.18fr);
+                    align-items: stretch;
                     min-height: 0;
                     height: 100%;
                 }
 
-                /*
-                 * 애드센스 자동광고가 이 2열 그리드 안에 광고를 꽂으면 세 번째
-                 * 그리드 아이템이 되어 열이 밀린다 — 광고가 1열, 목록이 2열,
-                 * 마인드맵은 화면 밖으로 빠진다. 실제로 그렇게 깨진 화면이 나왔다.
-                 * 보드는 조작하는 영역이라 광고를 넣을 자리가 아니므로 여기서만 뺀다.
-                 * (근본 차단은 애드센스 콘솔의 게재위치 제외로 해야 한다)
-                 */
                 /* 이슈 브리프 — 기사에서 확인된 실제 정황 */
                 .source-brief {
-                    border: 1px solid rgba(255,255,255,0.10);
-                    border-radius: 12px;
-                    background: rgba(255,255,255,0.035);
-                    padding: 12px 14px;
-                    margin-bottom: 12px;
+                    border: 1px solid ${light.line};
+                    border-radius: ${lightRadius.control}px;
+                    background: ${light.surface};
+                    padding: 16px;
                 }
                 .source-brief-head {
                     display: flex;
                     align-items: baseline;
                     gap: 8px;
-                    margin-bottom: 10px;
+                    margin-bottom: 12px;
                     flex-wrap: wrap;
                 }
                 .source-brief-head strong {
-                    font-size: 13px;
-                    font-weight: 800;
-                    color: #f7fbff;
+                    font-size: ${typeScale.body}px;
+                    font-weight: 600;
+                    color: ${light.text};
                 }
                 .source-brief-head small {
-                    font-size: 11px;
-                    color: rgba(255,255,255,0.52);
+                    font-size: ${typeScale.meta}px;
+                    color: ${light.textMuted};
                 }
                 /* 사진이 판의 주인공 — 전폭으로 크게(2026-09-06 "크게보기 안 눌러도 크게"). */
                 .source-brief-body {
                     display: flex;
                     flex-direction: column;
-                    gap: 10px;
+                    gap: 12px;
                 }
                 .source-brief-photo {
                     width: 100%;
                     max-height: 200px;
                     object-fit: cover;
                     object-position: top;
-                    border-radius: 10px;
-                    background: rgba(255,255,255,0.06);
+                    border-radius: 4px;
+                    background: ${light.raised};
                 }
                 .source-brief-facts {
                     list-style: none;
                     margin: 0;
                     padding: 0;
                     display: grid;
-                    gap: 7px;
+                    gap: 8px;
                     min-width: 0;
                 }
                 .source-brief-facts li {
-                    font-size: 12.5px;
-                    line-height: 1.62;
-                    color: rgba(255,255,255,0.86);
-                    padding-left: 11px;
+                    font-size: ${typeScale.small}px;
+                    line-height: 1.6;
+                    color: ${light.text};
+                    padding-left: 16px;
                     position: relative;
+                    overflow-wrap: anywhere;
                 }
                 .source-brief-facts li::before {
                     content: '';
                     position: absolute;
-                    left: 0;
-                    top: 8px;
+                    left: 4px;
+                    top: 10px;
                     width: 4px;
                     height: 4px;
                     border-radius: 50%;
-                    background: rgba(68,215,182,0.85);
+                    background: ${light.textMuted};
                 }
-                .source-insight-actions {
-                    display: flex;
-                    align-items: center;
-                    gap: 8px;
-                    justify-self: start;
+                /* Source list toggle: one 44px control, folded by default. */
+                .source-brief-toggle {
+                    display: inline-flex; align-items: center; gap: 4px;
+                    min-height: 44px; margin-top: 16px; padding: 0 16px;
+                    border: 1px solid ${light.line}; border-radius: ${lightRadius.control}px;
+                    background: ${light.surface}; color: ${light.text};
+                    font: inherit; font-size: ${typeScale.small}px; font-weight: 500; cursor: pointer;
+                    transition: background-color ${motion.fast} ${motion.ease}, border-color ${motion.fast} ${motion.ease};
                 }
-                .source-insight-open {
-                    border: 1px solid rgba(68,215,182,0.45);
-                    background: rgba(68,215,182,0.10);
-                    color: #44d7b6;
-                    border-radius: 999px;
-                    padding: 5px 11px;
-                    font-size: 12px;
-                    font-weight: 900;
-                    cursor: pointer;
-                }
-                .source-insight-open:hover { background: rgba(68,215,182,0.18); }
+                .source-brief-toggle:hover { background: ${light.raised}; border-color: ${light.lineStrong}; }
+                .source-brief-toggle:focus-visible { outline: 2px solid ${light.text}; outline-offset: 2px; }
+                .source-brief-toggle svg { transition: transform ${motion.fast} ${motion.ease}; }
+                .source-brief-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
                 /* 출처마다 그 기사의 요약 한 문장 — 매체명·발행 경과·문장이 한 덩어리다. */
                 .source-brief-sources {
                     list-style: none;
-                    margin: 11px 0 0;
-                    padding: 10px 0 0;
-                    border-top: 1px solid rgba(255,255,255,0.08);
+                    margin: 16px 0 0;
+                    padding: 16px 0 0;
+                    border-top: 1px solid ${light.line};
                     display: grid;
-                    gap: 9px;
+                    gap: 12px;
                 }
                 .source-brief-sources a {
                     display: inline-flex;
+                    flex-wrap: wrap;
                     align-items: baseline;
-                    gap: 7px;
+                    gap: 4px 8px;
                     text-decoration: none;
                 }
                 .source-brief-sources b {
-                    font-size: 12px;
-                    font-weight: 800;
-                    color: #63efd0;
+                    font-size: ${typeScale.small}px;
+                    font-weight: 600;
+                    color: ${light.text};
+                    text-decoration: underline;
+                    text-decoration-color: ${light.lineStrong};
+                    text-underline-offset: 3px;
+                }
+                .source-brief-sources a:hover b {
+                    text-decoration-color: ${light.text};
                 }
                 .source-brief-sources small {
-                    font-size: 11px;
-                    color: rgba(255,255,255,0.45);
+                    font-size: ${typeScale.meta}px;
+                    color: ${light.textMuted};
                     font-variant-numeric: tabular-nums;
                 }
                 .source-brief-sources p {
-                    margin: 3px 0 0;
-                    font-size: 12px;
+                    margin: 4px 0 0;
+                    font-size: ${typeScale.small}px;
                     line-height: 1.6;
-                    color: rgba(255,255,255,0.72);
+                    color: ${light.textSecondary};
                 }
                 .source-brief-links {
                     display: flex;
                     align-items: center;
                     gap: 8px;
                     flex-wrap: wrap;
-                    margin-top: 11px;
-                    padding-top: 10px;
-                    border-top: 1px solid rgba(255,255,255,0.08);
+                    margin-top: 16px;
+                    padding-top: 16px;
+                    border-top: 1px solid ${light.line};
                 }
                 .source-brief-links span {
-                    font-size: 11px;
-                    font-weight: 800;
-                    color: rgba(255,255,255,0.5);
+                    font-size: ${typeScale.meta}px;
+                    font-weight: 500;
+                    color: ${light.textMuted};
                 }
                 .source-brief-links a {
-                    font-size: 11.5px;
-                    font-weight: 700;
-                    color: #63efd0;
-                    border: 1px solid rgba(68,215,182,0.34);
-                    border-radius: 999px;
-                    padding: 3px 10px;
+                    font-size: ${typeScale.meta}px;
+                    font-weight: 500;
+                    color: ${light.textSecondary};
+                    border: 1px solid ${light.line};
+                    border-radius: ${lightRadius.pill}px;
+                    padding: 4px 12px;
                     text-decoration: none;
+                    transition: border-color ${motion.fast} ${motion.ease}, color ${motion.fast} ${motion.ease};
                 }
-
-                /* 분석 중 — 톱니 회전 + 진행 단계 */
-                .source-insight-loading {
-                    display: grid;
-                    place-content: center;
-                    justify-items: center;
-                    gap: 8px;
-                    text-align: center;
-                    min-height: 220px;
-                    padding: 24px;
-                }
-                .source-insight-gear {
-                    width: 34px;
-                    height: 34px;
-                    border-radius: 50%;
-                    border: 3px solid rgba(255,255,255,0.14);
-                    border-top-color: #44d7b6;
-                    animation: sourceGearSpin 0.8s linear infinite;
-                }
-                @keyframes sourceGearSpin { to { transform: rotate(360deg); } }
-                @media (prefers-reduced-motion: reduce) {
-                    .source-insight-gear { animation: none; }
-                }
-                .source-insight-loading strong {
-                    font-size: 15px;
-                    font-weight: 800;
-                    color: #f7fbff;
-                }
-                .source-insight-loading p {
-                    margin: 0;
-                    font-size: 12px;
-                    color: rgba(255,255,255,0.55);
-                }
-                .source-insight-steps {
-                    list-style: none;
-                    margin: 6px 0 0;
-                    padding: 0;
-                    display: grid;
-                    gap: 5px;
-                    font-size: 12px;
-                }
-                .source-insight-steps li {
-                    display: flex;
-                    gap: 8px;
-                    align-items: center;
-                    color: rgba(255,255,255,0.38);
-                }
-                .source-insight-steps li.done { color: rgba(255,255,255,0.86); }
-                .source-insight-steps li span {
-                    font-size: 10px;
-                    font-weight: 800;
-                    min-width: 26px;
-                    text-align: right;
+                .source-brief-links a:hover {
+                    border-color: ${light.lineStrong};
+                    color: ${light.text};
                 }
 
                 /* 이렇게 쓰세요 — 주제·제목 가이드 */
@@ -2470,93 +2411,115 @@ function IndexPage() {
                     display: none !important;
                 }
 
-                .hero-source-row,
-                .home-source-row {
-                    color: inherit;
-                    text-decoration: none;
-                    cursor: pointer;
-                    transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
-                }
-
-                .hero-source-row:hover,
-                .hero-source-row.active,
-                .home-source-row:hover,
-                .home-source-row.active {
-                    transform: translateY(-1px);
-                    border-color: rgba(255,255,255,0.24);
-                    background: rgba(255,255,255,0.085);
-                }
-
                 .source-insight-panel {
                     min-width: 0;
                     height: 100%;
                     min-height: 0;
                     overflow-y: auto;
                     overscroll-behavior: contain;
-                    scrollbar-gutter: stable;
                     scrollbar-width: thin;
-                    scrollbar-color: rgba(68,215,182,0.95) rgba(255,255,255,0.12);
+                    scrollbar-color: ${light.lineStrong} transparent;
                     display: grid;
-                    gap: 10px;
-                    padding: 12px;
-                    border-radius: 8px;
-                    border: 1px solid rgba(255,255,255,0.14);
-                    background: rgba(5,10,18,0.35);
+                    align-content: start;
+                    gap: 16px;
+                    padding: 20px;
+                    border-left: 1px solid ${light.line};
+                    background: ${light.raised};
                 }
 
                 .source-insight-panel-empty {
                     min-height: 180px;
                     align-content: center;
-                    border-style: dashed;
                 }
 
-                .source-insight-panel-empty strong {
-                    color: #fff;
-                    font-size: 15px;
-                    font-weight: 900;
+                /*
+                 * The ranked list on the left sets the height of the board. The brief fills its cell
+                 * and scrolls inside it, so both columns end on the same line and opening the sources
+                 * never makes the board taller. (Stacked layout below 640px: natural height.)
+                 */
+                .hero-source-insight-cell { position: relative; min-width: 0; min-height: 420px; }
+                .hero-source-insight-cell > .source-insight-panel { position: absolute; inset: 0; height: auto; min-height: 0; }
+
+                .source-insight-panel-empty > span {
+                    color: ${light.textMuted};
+                    font-size: ${typeScale.meta}px;
+                    font-weight: 500;
+                    font-variant-numeric: tabular-nums;
                 }
 
-                .source-insight-panel-empty p {
+                .source-insight-panel-empty > strong {
+                    color: ${light.text};
+                    font-size: ${typeScale.lead}px;
+                    font-weight: 600;
+                    line-height: 1.35;
+                }
+
+                .source-insight-panel-empty > p {
                     margin: 0;
-                    color: rgba(255,255,255,0.58);
-                    font-size: 12px;
-                    line-height: 1.45;
+                    color: ${light.textSecondary};
+                    font-size: ${typeScale.small}px;
+                    line-height: 1.6;
                 }
 
                 .source-insight-head {
                     display: flex;
-                    align-items: start;
+                    align-items: flex-start;
                     justify-content: space-between;
-                    gap: 10px;
+                    gap: 12px;
                 }
 
                 .source-insight-head span {
                     display: block;
-                    font-size: 11px;
-                    font-weight: 900;
+                    color: ${light.textMuted};
+                    font-size: ${typeScale.meta}px;
+                    font-weight: 500;
                 }
 
                 .source-insight-head strong {
                     display: block;
-                    max-width: 310px;
-                    margin-top: 3px;
-                    color: #fff;
-                    font-size: 15px;
-                    font-weight: 900;
-                    line-height: 1.25;
-                    max-height: 38px;
-                    overflow: hidden;
+                    margin-top: 4px;
+                    color: ${light.text};
+                    font-size: ${typeScale.lead}px;
+                    font-weight: 600;
+                    line-height: 1.35;
                 }
 
-                .source-insight-head a {
+                .source-insight-actions {
                     flex: 0 0 auto;
-                    padding: 6px 9px;
-                    border-radius: 999px;
-                    border: 1px solid rgba(255,255,255,0.16);
-                    color: rgba(255,255,255,0.84);
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    justify-self: start;
+                }
+
+                .source-insight-actions a,
+                .source-insight-open {
+                    min-height: 44px;
+                    display: inline-flex;
+                    align-items: center;
+                    padding: 0 16px;
+                    border: 1px solid ${light.line};
+                    border-radius: ${lightRadius.control}px;
+                    background: ${light.surface};
+                    color: ${light.text};
+                    font: inherit;
+                    font-size: ${typeScale.small}px;
+                    font-weight: 500;
                     text-decoration: none;
-                    font-size: 11px;
-                    font-weight: 900;
+                    white-space: nowrap;
+                    cursor: pointer;
+                    transition: border-color ${motion.fast} ${motion.ease};
+                }
+
+                .source-insight-actions a:hover,
+                .source-insight-open:hover {
+                    border-color: ${light.lineStrong};
+                }
+
+                .source-insight-actions a:focus-visible,
+                .source-insight-open:focus-visible {
+                    outline: 2px solid ${light.text};
+                    outline-offset: 2px;
                 }
 
                 /*
@@ -2566,15 +2529,58 @@ function IndexPage() {
                  */
                 .source-insight-desc {
                     margin: 0;
-                    color: rgba(255,255,255,0.62);
-                    font-size: 11px;
-                    line-height: 1.5;
+                    color: ${light.textSecondary};
+                    font-size: ${typeScale.small}px;
+                    line-height: 1.6;
                     word-break: keep-all;
                 }
 
                 .source-insight-panel-rich {
                     align-content: start;
                 }
+
+                /* Brief switch-over: the three steps tell the progress, no spinner. */
+                .source-insight-loading {
+                    place-content: center;
+                    justify-items: center;
+                    gap: 8px;
+                    text-align: center;
+                    min-height: 220px;
+                    padding: 24px;
+                }
+                .source-insight-loading strong {
+                    font-size: ${typeScale.lead}px;
+                    font-weight: 600;
+                    color: ${light.text};
+                }
+                .source-insight-loading p {
+                    margin: 0;
+                    font-size: ${typeScale.small}px;
+                    color: ${light.textSecondary};
+                }
+                .source-insight-steps {
+                    list-style: none;
+                    margin: 8px 0 0;
+                    padding: 0;
+                    display: grid;
+                    gap: 4px;
+                    font-size: ${typeScale.small}px;
+                    text-align: left;
+                }
+                .source-insight-steps li {
+                    display: flex;
+                    gap: 8px;
+                    align-items: baseline;
+                    color: ${light.textMuted};
+                }
+                .source-insight-steps li.done { color: ${light.text}; }
+                .source-insight-steps li span {
+                    min-width: 32px;
+                    font-size: ${typeScale.meta}px;
+                    font-weight: 500;
+                    text-align: right;
+                }
+                .source-insight-steps li.done span { color: ${light.positive}; }
 
                 .source-strategy-grid {
                     min-height: 0;
@@ -2795,8 +2801,7 @@ function IndexPage() {
                 }
 
                 .source-mindmap-branch a:hover,
-                .source-expansion-chips a:hover,
-                .source-insight-head a:hover {
+                .source-expansion-chips a:hover {
                     color: #fff;
                     border-color: rgba(255,255,255,0.28);
                 }
@@ -2905,125 +2910,104 @@ function IndexPage() {
                     z-index: 30;
                     margin-top: 8px;
                     padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
-                    background: linear-gradient(180deg, rgba(6,11,19,0) 0%, rgba(6,11,19,0.88) 26%, rgba(6,11,19,0.97) 100%);
-                    backdrop-filter: blur(12px);
-                    border-top: 1px solid rgba(255,255,255,0.10);
+                    background: ${light.page};
+                    border-top: 1px solid ${light.line};
                 }
                 .hero-action-strip {
                     width: 100%;
+                    max-width: 1100px;
                     margin: 0 auto;
                     display: grid;
                     grid-template-columns: repeat(3, minmax(0, 1fr));
                     gap: 12px;
                 }
-                .home-cta-dock .hero-action-strip { max-width: 1100px; }
                 @media (max-width: 1150px) {
                     /* keep the CTA row clear of the fixed FloatStack buttons at the right edge */
                     .home-cta-dock { padding-right: 64px; }
                 }
-                .home-cta-dock .hero-action-button {
-                    min-height: 0;
-                    padding: 11px 16px;
-                    gap: 3px;
-                    animation: none;
-                    box-shadow: 0 10px 26px rgba(0,0,0,0.45);
-                }
-                .home-cta-dock .hero-action-button::before { animation: none; }
-                @media (max-width: 640px) {
-                    /* right padding clears the fixed FloatStack chat FAB (bottom-right) */
-                    .home-cta-dock { padding: 9px 56px 9px 10px; padding-bottom: calc(9px + env(safe-area-inset-bottom, 0px)); }
-                    /* keep the 3-across row; a generic mobile .hero-action-strip rule would otherwise stack it */
-                    .home-cta-dock .hero-action-strip { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
-                    .home-cta-dock .hero-action-button {
-                        width: auto;
-                        min-height: 0;
-                        justify-self: stretch;
-                        padding: 10px 6px;
-                        text-align: center;
-                        justify-items: center;
-                    }
-                    .home-cta-dock .hero-action-button span { display: none; }
-                    .home-cta-dock .hero-action-button strong { font-size: 13px; line-height: 1.25; }
-                }
 
+                /* Three buttons, one shape: a single gold primary and two quiet ones. */
                 .hero-action-button {
-                    position: relative;
-                    min-height: 82px;
+                    min-height: 56px;
                     display: grid;
                     align-content: center;
-                    gap: 7px;
-                    padding: 16px 18px;
-                    border-radius: 8px;
-                    border: 3px solid rgba(255,255,255,0.30);
-                    background: linear-gradient(135deg, rgba(1,5,10,0.98), rgba(10,18,30,0.96));
-                    color: #fff;
+                    gap: 4px;
+                    padding: 8px 20px;
+                    border-radius: ${lightRadius.control}px;
+                    border: 1px solid ${light.line};
+                    background: ${light.surface};
+                    color: ${light.text};
                     text-decoration: none;
                     text-align: left;
-                    overflow: hidden;
-                    box-shadow: 0 24px 58px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.12);
-                    animation: heroActionPulse 2.7s ease-in-out infinite;
-                    transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
-                }
-
-                .hero-action-button::before {
-                    content: '';
-                    position: absolute;
-                    inset: -2px;
-                    background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,0.18) 45%, transparent 62%);
-                    transform: translateX(-120%);
-                    animation: heroActionShine 3.6s ease-in-out infinite;
-                    pointer-events: none;
+                    transition: background-color ${motion.fast} ${motion.ease}, border-color ${motion.fast} ${motion.ease};
                 }
 
                 .hero-action-button:hover {
-                    transform: translateY(-3px) scale(1.015);
-                    border-color: rgba(255,255,255,0.52);
-                    box-shadow: 0 30px 68px rgba(0,0,0,0.62), 0 0 34px rgba(225,177,44,0.24);
+                    border-color: ${light.lineStrong};
+                    background: ${light.raised};
                 }
 
-                .hero-action-button strong,
-                .hero-action-button span {
-                    position: relative;
-                    z-index: 1;
+                .hero-action-button:focus-visible {
+                    outline: 2px solid ${light.text};
+                    outline-offset: 2px;
                 }
 
                 .hero-action-button strong {
-                    color: #fff;
-                    font-size: 17px;
-                    font-weight: 950;
-                    line-height: 1.28;
+                    color: inherit;
+                    font-size: ${typeScale.small}px;
+                    font-weight: 600;
+                    line-height: 1.3;
                 }
 
                 .hero-action-button span {
-                    color: rgba(255,255,255,0.70);
-                    font-size: 14px;
-                    font-weight: 800;
-                    line-height: 1.35;
+                    color: ${light.textSecondary};
+                    font-size: ${typeScale.meta}px;
+                    font-weight: 400;
+                    line-height: 1.4;
                 }
 
-                .hero-action-button.gold {
-                    border-color: rgba(225,177,44,0.95);
-                    box-shadow: 0 24px 58px rgba(0,0,0,0.55), 0 0 34px rgba(225,177,44,0.34);
+                .hero-action-button.primary,
+                .hero-action-button.primary:hover {
+                    border-color: ${light.accent};
+                    background: ${light.accent};
+                    color: ${light.onAccent};
                 }
 
-                .hero-action-button.cyan {
-                    border-color: rgba(64,210,255,0.88);
-                    box-shadow: 0 24px 58px rgba(0,0,0,0.55), 0 0 34px rgba(64,210,255,0.26);
+                .hero-action-button.primary:hover {
+                    box-shadow: ${light.shadowFloat};
                 }
 
-                .hero-action-button.green {
-                    border-color: rgba(68,215,182,0.88);
-                    box-shadow: 0 24px 58px rgba(0,0,0,0.55), 0 0 34px rgba(68,215,182,0.26);
+                /* Motion pass: lift on hover, press on click (transform/shadow only). */
+                .hero-action-button {
+                    transition-property: background-color, border-color, color, box-shadow, transform;
+                    transition-duration: 200ms;
+                    transition-timing-function: ${motion.ease};
+                }
+                .hero-action-button:hover { transform: translateY(-2px); box-shadow: ${light.shadowFloat}; }
+                .hero-action-button:active { transform: scale(0.98); }
+                .home-marquee-wrap { position: relative; z-index: 2; margin: 0 0 16px; }
+                .home-marquee-wrap:empty { display: none; }
+                @media (max-width: 720px) { .home-marquee-wrap { margin-bottom: 12px; } }
+                @media (prefers-reduced-motion: reduce) {
+                    .hero-action-button:hover, .hero-action-button:active { transform: none; }
                 }
 
-                @keyframes heroActionPulse {
-                    0%, 100% { transform: translateY(0); filter: brightness(1); }
-                    50% { transform: translateY(-2px); filter: brightness(1.16); }
+                .hero-action-button.primary span {
+                    color: ${light.onAccent};
                 }
 
-                @keyframes heroActionShine {
-                    0%, 38% { transform: translateX(-120%); }
-                    62%, 100% { transform: translateX(120%); }
+                @media (max-width: 640px) {
+                    /* right padding clears the fixed FloatStack chat FAB (bottom-right) */
+                    .home-cta-dock { padding: 8px 56px 8px 12px; padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px)); }
+                    .hero-action-strip { gap: 8px; }
+                    .hero-action-button {
+                        min-height: 48px;
+                        padding: 4px 8px;
+                        text-align: center;
+                        justify-items: center;
+                    }
+                    .hero-action-button span { display: none; }
+                    .hero-action-button strong { font-size: ${typeScale.meta}px; text-wrap: balance; }
                 }
 
 
@@ -3450,24 +3434,23 @@ function IndexPage() {
                         height: auto;
                         padding: 12px;
                         gap: 12px;
-                        background: rgba(8,15,24,0.78);
-                    }
-
-                    .hero-realtime-head {
-                        align-items: flex-start;
-                        flex-direction: column;
-                        gap: 8px;
                     }
 
                     .hero-realtime-head small {
                         margin-left: 0;
+                        white-space: normal;
                     }
 
                     .hero-source-panel {
                         min-height: 0;
-                        padding: 12px;
                         height: auto;
                         overflow: visible;
+                    }
+
+                    .hero-source-panel-head {
+                        flex-wrap: wrap;
+                        gap: 4px 12px;
+                        padding: 12px 16px;
                     }
 
                     .hero-source-body {
@@ -3476,89 +3459,54 @@ function IndexPage() {
                     }
 
                     .hero-source-list {
-                        max-height: 310px;
+                        max-height: 312px;
                     }
 
+                    .hero-source-insight-cell { min-height: 0; }
+                    .hero-source-insight-cell > .source-insight-panel { position: static; }
                     .source-insight-panel {
-                        display: grid;
                         height: auto;
                         max-height: none;
                         overflow: visible;
-                        padding: 12px;
+                        padding: 16px;
+                        border-left: 0;
+                        border-top: 1px solid ${light.line};
                     }
 
                     .source-insight-head {
                         display: grid;
-                        gap: 8px;
+                        gap: 12px;
                     }
 
-                    .source-insight-head strong {
-                        max-width: none;
-                        max-height: none;
-                        font-size: 16px;
-                    }
-
-                    .source-insight-head a {
-                        justify-self: start;
-                        min-height: 34px;
-                        display: inline-flex;
-                        align-items: center;
-                    }
-
-                    .source-insight-desc {
-                        -webkit-line-clamp: unset;
-                        font-size: 12px;
+                    .source-insight-actions {
+                        flex-wrap: wrap;
                     }
 
                     .source-strategy-grid {
                         grid-template-columns: 1fr;
                     }
 
-                    .hero-action-strip {
-                        grid-template-columns: 1fr;
-                        margin: 0 auto;
-                        gap: 10px;
-                    }
-
-                    .hero-action-button {
-                        width: 100%;
-                        justify-self: start;
-                        min-height: 72px;
-                        padding: 14px 18px;
-                    }
-
-                    .hero-action-button strong {
-                        font-size: 18px;
-                    }
-
-                    .hero-source-panel-head {
-                        grid-template-columns: 12px minmax(0, 1fr);
-                    }
-
-                    .hero-source-panel-head small {
-                        grid-column: 2;
-                    }
-
                     .hero-source-row {
-                        grid-template-columns: minmax(0, 1fr) 42px;
                         align-items: start;
                         min-height: 64px;
                     }
 
-                    .hero-source-row-main {
-                        grid-template-columns: 28px minmax(0, 1fr);
+                    .hero-source-row .hero-source-row-main {
+                        grid-template-columns: 28px minmax(0, 1fr) auto;
                         align-items: start;
+                        padding: 12px 8px 12px 16px;
                     }
 
                     .hero-source-row-main > small {
-                        grid-column: 2;
-                        justify-self: start;
+                        line-height: 24px;
                     }
 
                     .hero-source-row-search {
-                        width: 48px;
-                        min-height: 48px;
-                        margin: 8px 5px 0 0;
+                        margin: 8px 12px 0 0;
+                    }
+
+                    .hero-source-row-win {
+                        margin: 0 12px 12px 16px;
                     }
 
                     .hero-source-row strong,
@@ -3647,42 +3595,17 @@ function IndexPage() {
                 }
 
                 @media (max-width: 420px) {
-                    .hero-source-tabs,
                     .home-source-tabs {
                         gap: 6px;
                     }
 
                     .hero-source-tab {
-                        min-height: 48px;
-                        padding: 9px 11px;
-                    }
-
-                    .hero-source-row {
-                        grid-template-columns: 1fr;
-                    }
-
-                    .hero-source-row-search {
-                        justify-self: start;
-                        margin: 8px 0 0;
-                        width: auto;
-                        min-width: 48px;
                         padding: 0 12px;
                     }
 
                     .home-live-status,
                     .home-live-metrics {
                         grid-template-columns: 1fr;
-                    }
-
-                    .hero-action-button strong {
-                        font-size: 16px;
-                    }
-                }
-
-                @media (prefers-reduced-motion: reduce) {
-                    .hero-action-button,
-                    .hero-action-button::before {
-                        animation: none;
                     }
                 }
             `}</style>

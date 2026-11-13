@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import {
     fetchCommunityIncomeProofs,
     fetchHomeKeywordBriefing,
+    fetchKeywordBriefingSeed,
     fetchHomeNotices,
     managedHomeProofsToIncomeProofs,
     type CommunityIncomeProof,
@@ -16,9 +17,16 @@ import NewBadge from './NewBadge';
 import TrendSparkline from './leword/TrendSparkline';
 import { fetchKeywordTrend } from '../lib/keywordApi';
 import { useNoticeAlerts } from '../lib/useNoticeAlerts';
+import { light, lightRadius, motion, type } from '../styles/tokens';
+import SplitWords from './motion/SplitWords';
+import CountUp from './motion/CountUp';
+import { useReveal } from './motion/Reveal';
+import LiveKeywordStack from './home/LiveKeywordStack';
+import { readCachedHomeBriefing, writeCachedHomeBriefing } from '../lib/homeBriefingCache';
 
 const numberFormatter = new Intl.NumberFormat('ko-KR');
-const decimalFormatter = new Intl.NumberFormat('ko-KR', { maximumFractionDigits: 2 });
+// Opportunity index is shown with exactly one decimal everywhere on the board (874.0 / 290.0 / 149.6). Display only.
+const decimalFormatter = new Intl.NumberFormat('ko-KR', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 
 type HomeOperationsTab = 'notice' | 'realtime' | 'income';
 
@@ -28,8 +36,8 @@ type HomeOperationsTab = 'notice' | 'realtime' | 'income';
 const BRIEFING_PAGE_PATH = '/briefing';
 
 const HOME_OPS_TAB_ORDER: HomeOperationsTab[] = ['realtime', 'notice', 'income'];
-const HOME_OPS_TAB_META: Record<HomeOperationsTab, { label: string; desc: string; accent?: string }> = {
-    realtime: { label: '실시간 검색어', desc: '네이버·뉴스 등 현재 흐름을 참고용으로 확인', accent: '#44d7b6' },
+const HOME_OPS_TAB_META: Record<HomeOperationsTab, { label: string; desc: string }> = {
+    realtime: { label: '실시간 검색어', desc: '네이버·뉴스 등 현재 흐름을 참고용으로 확인' },
     notice: { label: '공지사항', desc: '최신 공지를 접고 펼쳐 확인' },
     income: { label: '수익 인증', desc: '승인된 수익·실제 운영 성과 자료만 표시' },
 };
@@ -44,6 +52,8 @@ type HomeManagedProof = {
 
 interface HomeOperationsBoardProps {
     realtimePanel?: ReactNode;
+    /** One line shown between the first screen and the board (the home keyword ribbon). */
+    ribbon?: ReactNode;
     managedProofs?: HomeManagedProof[];
     /** true 면 부방장 브리핑 본문만 렌더한다(전용 페이지용). 탭·헤더·다른 패널은 그리지 않는다. */
     briefingOnly?: boolean;
@@ -61,11 +71,11 @@ function formatDate(value: string): string {
 
 function noticeBadge(badge: string): { label: string; color: string } {
     const normalized = badge.toLocaleLowerCase();
-    if (normalized.includes('important') || normalized.includes('중요')) return { label: '중요', color: '#ff7a90' };
-    if (normalized.includes('update') || normalized.includes('업데이트')) return { label: '업데이트', color: '#69b7ff' };
-    if (normalized.includes('event') || normalized.includes('이벤트')) return { label: '이벤트', color: '#c995ff' };
-    if (normalized.includes('tip') || normalized.includes('안내')) return { label: '안내', color: '#44d7b6' };
-    return { label: '공지', color: '#f4c95d' };
+    if (normalized.includes('important') || normalized.includes('중요')) return { label: '중요', color: light.negative };
+    if (normalized.includes('update') || normalized.includes('업데이트')) return { label: '업데이트', color: light.textSecondary };
+    if (normalized.includes('event') || normalized.includes('이벤트')) return { label: '이벤트', color: light.textSecondary };
+    if (normalized.includes('tip') || normalized.includes('안내')) return { label: '안내', color: light.textSecondary };
+    return { label: '공지', color: light.textSecondary };
 }
 
 function uniqueKeywordCount(rows: HomeKeywordRow[]): number {
@@ -148,7 +158,7 @@ function CopyKeywordButton({ text, label = '복사', ariaLabel }: { text: string
             onClick={onCopy}
             aria-label={ariaLabel || `${text} 복사`}
         >
-            {state === 'copied' ? '복사됨 ✓' : state === 'failed' ? '복사 실패' : label}
+            {state === 'copied' ? '복사됨' : state === 'failed' ? '복사 실패' : label}
         </button>
     );
 }
@@ -188,7 +198,7 @@ function NoticeCard({ notice, index, open, onToggle }: {
                     onClick={onToggle}
                 >
                     <span className="home-ops-notice-meta">
-                        <span className="home-ops-notice-badge" style={{ color: badge.color, borderColor: `${badge.color}55`, background: `${badge.color}16` }}>{badge.label}</span>
+                        <span className="home-ops-notice-badge" style={{ color: badge.color }}>{badge.label}</span>
                         <time dateTime={notice.date}>{formatDate(notice.date)}</time>
                         <span className="home-ops-notice-indicator" aria-hidden="true">{open ? '−' : '+'}</span>
                     </span>
@@ -287,7 +297,8 @@ function KeywordChart({ rows }: { rows: HomeKeywordRow[] }) {
                             </strong>
                             <small>
                                 <KeywordSearchLink row={row} provider="daum" className="home-ops-opportunity-link">
-                                    {decimalFormatter.format(row.opportunity)}
+                                    {/* Counts in tenths so the one-decimal figure lands on exactly the same text as the static format. */}
+                                    <CountUp value={Math.round(row.opportunity * 10)} format={(n) => decimalFormatter.format(n / 10)} reserve />
                                 </KeywordSearchLink>
                             </small>
                             <CopyKeywordButton text={row.keyword} />
@@ -295,7 +306,7 @@ function KeywordChart({ rows }: { rows: HomeKeywordRow[] }) {
                         <div className="home-ops-chart-track" aria-hidden="true">
                             <span style={{ width: `${width}%` }} />
                         </div>
-                        <small>검색량 {numberFormatter.format(row.searchVolume)}</small>
+                        <small>검색량<b>{numberFormatter.format(row.searchVolume)}</b></small>
                     </div>
                 );
             })}
@@ -316,7 +327,7 @@ function TrendModal({ state, onClose }: {
             <div className="home-ops-trend-modal" onClick={(event) => event.stopPropagation()}>
                 <div className="home-ops-trend-head">
                     <strong>{state.keyword}</strong>
-                    <button type="button" onClick={onClose} aria-label="닫기">✕</button>
+                    <button type="button" onClick={onClose} aria-label="닫기"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true"><path d="M4 4l10 10M14 4L4 14" /></svg></button>
                 </div>
                 {state.status === 'loading' && <p className="home-ops-trend-note">데이터랩 30일 실측을 불러오는 중…</p>}
                 {state.status === 'ready' && state.series && <TrendSparkline series={state.series} height={90} />}
@@ -353,7 +364,7 @@ function KeywordTable({ rows }: { rows: HomeKeywordRow[] }) {
             <div className="home-ops-copy-all-bar">
                 <CopyKeywordButton
                     text={rows.map((row) => row.keyword).join(String.fromCharCode(10))}
-                    label={`📋 전체 ${rows.length}개 복사`}
+                    label={`전체 ${rows.length}개 복사`}
                     ariaLabel={`부방장 키워드 ${rows.length}개 전체 복사`}
                 />
             </div>
@@ -361,7 +372,7 @@ function KeywordTable({ rows }: { rows: HomeKeywordRow[] }) {
                 <caption className="home-ops-sr-only">부방장 황금키워드 전체 {rows.length}행</caption>
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">순위</th>
                         <th scope="col">키워드</th>
                         <th scope="col">검색량</th>
                         <th scope="col">블로그 문서수</th>
@@ -406,7 +417,7 @@ function KeywordTable({ rows }: { rows: HomeKeywordRow[] }) {
                                     className="home-ops-trend-btn"
                                     onClick={() => openTrend(row.keyword)}
                                     title="최근 30일 검색 추이(데이터랩 실측)"
-                                >📈 추이</button>
+                                >추이</button>
                                 <KeywordSearchLinks row={row} />
                             </td>
                         </tr>
@@ -424,7 +435,7 @@ function KeywordMobileCards({ rows }: { rows: HomeKeywordRow[] }) {
             {rows.map((row, index) => (
                 <article className="home-ops-keyword-card" key={`mobile-${index}-${row.keyword}-${row.documentCount}`}>
                     <div className="home-ops-keyword-card-head">
-                        <span>#{index + 1}</span>
+                        <span>{index + 1}</span>
                         <strong>
                             <KeywordSearchLink row={row} provider="naver" className="home-ops-keyword-link">
                                 {row.keyword}
@@ -456,19 +467,25 @@ function KeywordMobileCards({ rows }: { rows: HomeKeywordRow[] }) {
     );
 }
 
-function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly = false }: HomeOperationsBoardProps) {
+function HomeOperationsBoard({ realtimePanel, ribbon, managedProofs = [], briefingOnly = false }: HomeOperationsBoardProps) {
     const [notices, setNotices] = useState<HomeNotice[]>([]);
     const [openNoticeId, setOpenNoticeId] = useState<string | null>(null);
     const [incomeResult, setIncomeResult] = useState<CommunityIncomeProofResult | null>(null);
-    const [briefingResult, setBriefingResult] = useState<HomeKeywordBriefingResult | null>(null);
+    // The briefing from the previous visit is drawn at once; the live answer replaces it quietly.
+    const [cachedBriefing] = useState(readCachedHomeBriefing);
+    const [briefingResult, setBriefingResult] = useState<HomeKeywordBriefingResult | null>(cachedBriefing);
     const [activeTab, setActiveTab] = useState<HomeOperationsTab>('realtime');
     // 공지 배지는 모달·네비바와 같은 스토어를 본다(카운트가 어긋나지 않게).
     const { unseen: unseenNotices, markAllSeen: markNoticeAlertsSeen } = useNoticeAlerts();
     const unseenNoticeCount = unseenNotices.length;
     const [noticeLoading, setNoticeLoading] = useState(true);
     const [incomeLoading, setIncomeLoading] = useState(true);
-    const [briefingLoading, setBriefingLoading] = useState(true);
+    const [briefingLoading, setBriefingLoading] = useState(cachedBriefing === null);
     const sidenavRef = useRef<HTMLDivElement>(null);
+    const layoutRef = useRef<HTMLDivElement>(null);
+    const introCardsRef = useRef<HTMLDivElement>(null);
+    useReveal(layoutRef, { stagger: true });
+    useReveal(introCardsRef, { stagger: true });
 
     // On mobile the side-nav collapses to a horizontal scroll row; keep the
     // active tab centered in view. Scrolls only the nav container, never the page.
@@ -501,8 +518,31 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
             .catch(() => { if (active) setIncomeResult({ items: [], source: 'unavailable' }); })
             .finally(() => { if (active) setIncomeLoading(false); });
 
+        /*
+         * The reviewed copy (site content, Apps Script) can take seconds to answer. Waiting for it
+         * left the first screen's card stack empty. So the published snapshot file, which ships with
+         * the site, is the first picture on a first visit; the reviewed copy replaces it when it lands.
+         */
+        let settled = false;
+        fetchKeywordBriefingSeed()
+            .then((seed) => {
+                if (!active || settled || !seed || seed.rows.length === 0) return;
+                setBriefingResult((current) => current ?? { briefing: seed, source: 'seed' });
+                setBriefingLoading(false);
+            })
+            .catch(() => undefined);
+
         fetchHomeKeywordBriefing()
-            .then((latestBriefing) => { if (active) setBriefingResult(latestBriefing); })
+            .then((latestBriefing) => {
+                settled = true;
+                if (!active || !latestBriefing) return;
+                writeCachedHomeBriefing(latestBriefing);
+                setBriefingResult((current) => (
+                    current && current.source === latestBriefing.source && current.briefing.snapshotId === latestBriefing.briefing.snapshotId
+                        ? current
+                        : latestBriefing
+                ));
+            })
             .catch(() => undefined)
             .finally(() => { if (active) setBriefingLoading(false); });
         return () => { active = false; };
@@ -541,104 +581,77 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                     position: relative;
                     z-index: 2;
                     max-width: 1412px;
-                    margin: 0 auto 46px;
-                    padding: 92px 24px 0;
+                    margin: 0 auto 48px;
+                    padding: 112px 24px 0;
+                    color: ${light.text};
                     word-break: keep-all;
                     overflow-wrap: break-word;
                 }
-                .home-ops-header { margin-bottom: 20px; }
-                /* 처음 온 사람이 이 사이트가 뭘 하는 곳인지 3초 안에 알 수 있게 하는 소개 문단.
-                   홈 배경이 밝은 사진이라 반투명 판을 깔지 않으면 본문이 배경에 묻힌다. */
-                .home-ops-intro-wrap {
-                    /* 아래 보드와 폭을 맞춘다 — 좁게 두면 넓은 보드 위에 쪽지처럼 떠 보인다. */
-                    margin-top: 12px;
-                    padding: 16px 18px;
-                    border-radius: 14px;
-                    border: 1px solid rgba(255, 255, 255, .12);
-                    background: rgba(8, 12, 20, .58);
-                    backdrop-filter: blur(6px);
-                }
-                .home-ops-intro {
-                    margin: 0;
-                    font-size: 15px;
-                    line-height: 1.7;
-                    color: rgba(255, 255, 255, .88);
-                }
-                .home-ops-intro strong { color: #fff; font-weight: 800; }
-                .home-ops-intro-cards {
+                .home-ops a:focus-visible,
+                .home-ops button:focus-visible,
+                .home-ops-table-shell:focus-visible { outline: 2px solid ${light.accentInk}; outline-offset: 2px; }
+                /* First screen: headline, intro and two buttons on the left, the three products as one list on the right. */
+                .home-ops-header {
                     display: grid;
-                    grid-template-columns: repeat(3, minmax(0, 1fr));
-                    gap: 12px;
-                    margin-top: 14px;
+                    grid-template-columns: minmax(0, 1.15fr) minmax(320px, .85fr);
+                    gap: 24px 64px;
+                    align-items: end;
+                    margin-bottom: 32px;
                 }
-                .home-ops-intro-card {
-                    display: block;
-                    padding: 14px 16px;
-                    border-radius: 12px;
-                    border: 1px solid rgba(255, 255, 255, .12);
-                    background: rgba(255, 255, 255, .04);
-                    text-decoration: none;
-                    transition: border-color .16s ease, background .16s ease, transform .16s ease;
+                .home-ops-title-short { display: none; }
+                .home-ops-header h1 {
+                    margin: 0 0 16px;
+                    color: ${light.text};
+                    font-size: ${type.h1}px;
+                    font-weight: 700;
+                    line-height: 1.2;
+                    letter-spacing: -0.02em;
+                    text-wrap: balance;
                 }
-                .home-ops-intro-card:hover { transform: translateY(-1px); }
-                .home-ops-intro-card strong { display: block; margin-bottom: 5px; font-size: 15px; }
-                .home-ops-intro-card span { font-size: 13px; line-height: 1.55; color: rgba(255, 255, 255, .74); }
-                /* 제품별 대표 색상 — LEWORD 파랑 / Better Life Naver 초록 / Leaders Orbit 주황. */
-                .home-ops-intro-card--blue {
-                    border-color: rgba(74, 158, 255, .5);
-                    background: linear-gradient(135deg, rgba(74, 158, 255, .16), rgba(74, 158, 255, .05));
-                }
-                .home-ops-intro-card--blue:hover { border-color: rgba(74, 158, 255, .95); box-shadow: 0 8px 22px rgba(74, 158, 255, .18); }
-                .home-ops-intro-card--blue strong { color: #6db2ff; }
-                .home-ops-intro-card--green {
-                    border-color: rgba(68, 215, 182, .5);
-                    background: linear-gradient(135deg, rgba(68, 215, 182, .16), rgba(68, 215, 182, .05));
-                }
-                .home-ops-intro-card--green:hover { border-color: rgba(68, 215, 182, .95); box-shadow: 0 8px 22px rgba(68, 215, 182, .18); }
-                .home-ops-intro-card--green strong { color: #56e6c8; }
-                .home-ops-intro-card--orange {
-                    border-color: rgba(255, 159, 67, .5);
-                    background: linear-gradient(135deg, rgba(255, 159, 67, .16), rgba(255, 159, 67, .05));
-                }
-                .home-ops-intro-card--orange:hover { border-color: rgba(255, 159, 67, .95); box-shadow: 0 8px 22px rgba(255, 159, 67, .2); }
-                .home-ops-intro-card--orange strong { color: #ffb066; }
-                @media (max-width: 720px) {
-                    .home-ops-intro-wrap { padding: 13px 14px; }
-                    .home-ops-intro { font-size: 14px; }
-                    .home-ops-intro-cards { grid-template-columns: 1fr; gap: 8px; }
-                }
-                .home-ops-kicker {
+                .home-ops-intro { max-width: 60ch; margin: 0; font-size: ${type.body}px; line-height: 1.7; color: ${light.textSecondary}; }
+                .home-ops-intro strong { color: ${light.text}; font-weight: 600; }
+                .home-ops-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+                .home-ops-cta {
                     display: inline-flex;
                     align-items: center;
-                    min-height: 32px;
-                    padding: 6px 12px;
-                    border: 1px solid rgba(68,215,182,0.36);
-                    border-radius: 999px;
-                    background: rgba(68,215,182,0.11);
-                    color: #63efd0;
-                    font-size: 13px;
-                    font-weight: 900;
-                    letter-spacing: 1.2px;
+                    justify-content: center;
+                    min-height: 48px;
+                    padding: 0 24px;
+                    border: 1px solid ${light.accent};
+                    border-radius: ${lightRadius.control}px;
+                    background: ${light.accent};
+                    color: ${light.onAccent};
+                    font-size: ${type.body}px;
+                    font-weight: 600;
+                    text-decoration: none;
+                    transition: background ${motion.fast} ${motion.ease}, border-color ${motion.fast} ${motion.ease};
                 }
-                .home-ops-header h2 {
-                    margin: 12px 0 8px;
-                    color: #fff;
-                    font-size: clamp(31px, 4vw, 48px);
-                    line-height: 1.18;
+                .home-ops-cta:hover { border-color: ${light.accentInk}; }
+                .home-ops-cta-quiet { border-color: ${light.line}; background: ${light.surface}; color: ${light.text}; }
+                .home-ops-cta-quiet:hover { border-color: ${light.lineStrong}; background: ${light.raised}; }
+                .home-ops-intro-cards { border-top: 1px solid ${light.line}; }
+                .home-ops-intro-card {
+                    display: grid;
+                    grid-template-columns: 168px minmax(0, 1fr) auto;
+                    align-items: baseline;
+                    gap: 4px 16px;
+                    min-height: 56px;
+                    padding: 16px 8px;
+                    border-bottom: 1px solid ${light.line};
+                    text-decoration: none;
+                    transition: background ${motion.fast} ${motion.ease};
                 }
-                .home-ops-header p {
-                    max-width: 850px;
-                    margin: 0;
-                    color: rgba(235,242,250,0.74);
-                    font-size: 17px;
-                    line-height: 1.75;
-                }
+                .home-ops-intro-card:hover { background: ${light.surface}; }
+                .home-ops-intro-card strong { color: ${light.text}; font-size: ${type.body}px; font-weight: 600; }
+                .home-ops-intro-card span { font-size: ${type.small}px; line-height: 1.55; color: ${light.textSecondary}; }
+                .home-ops-intro-card i { color: ${light.textMuted}; font-style: normal; }
+                .home-ops-kicker { display: block; color: ${light.accentInk}; font-size: ${type.meta}px; font-weight: 600; }
                 .home-ops-panel {
                     min-width: 0;
-                    border: 1px solid rgba(255,255,255,0.14);
-                    border-radius: 14px;
-                    background: linear-gradient(180deg, rgba(14,23,36,0.95), rgba(6,11,19,0.96));
-                    box-shadow: 0 26px 70px rgba(0,0,0,0.28);
+                    border: 1px solid ${light.line};
+                    border-radius: ${lightRadius.panel}px;
+                    background: ${light.surface};
+                    box-shadow: ${light.shadowSm};
                     overflow: hidden;
                 }
                 .home-ops-panel-head {
@@ -646,107 +659,87 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                     align-items: center;
                     justify-content: space-between;
                     gap: 16px;
-                    padding: 20px 22px;
-                    border-bottom: 1px solid rgba(255,255,255,0.10);
+                    padding: 12px 24px;
+                    border-bottom: 1px solid ${light.line};
                 }
-                .home-ops-panel-head strong { color: #fff; font-size: 20px; font-weight: 900; }
-                /* 제목을 뺀 얇은 머리 — 출처 한 줄과 링크만 담는다(2026-09-10). */
-                .home-ops-panel-head-slim { padding-top: 10px; padding-bottom: 10px; align-items: center; }
-                .home-ops-panel-hint { margin: 0 0 4px; padding: 0 20px; color: rgba(235,242,250,0.6); font-size: 14px; }
-                /* 안 읽은 공지 한 줄 — 다 읽으면 사라진다. */
-                .home-ops-notice-flash {
-                    display: flex; align-items: center; gap: 10px; width: 100%; margin: 0 0 14px;
-                    padding: 12px 16px; border-radius: 14px; cursor: pointer; text-align: left;
-                    background: rgba(68,215,182,0.1); border: 1px solid rgba(68,215,182,0.32); color: #eaf4ff;
-                    font: inherit;
-                }
-                .home-ops-notice-flash:hover { background: rgba(68,215,182,0.16); }
-                .home-ops-notice-flash .flash-tag {
-                    flex: none; padding: 3px 9px; border-radius: 999px; font-size: 12px; font-weight: 900;
-                    background: #44d7b6; color: #04241d;
-                }
-                .home-ops-notice-flash .flash-title {
-                    flex: 1 1 auto; min-width: 0; font-size: 15px; font-weight: 700;
-                    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-                }
-                .home-ops-notice-flash .flash-more { flex: none; font-size: 13px; color: rgba(235,242,250,0.66); }
-                .home-ops-notice-flash .flash-go { flex: none; font-size: 13px; font-weight: 700; color: #44d7b6; }
-                @media (max-width: 720px) {
-                    .home-ops-notice-flash { flex-wrap: wrap; }
-                    .home-ops-notice-flash .flash-title { white-space: normal; flex-basis: 100%; }
-                }
-                .home-ops-panel-head small { color: rgba(235,242,250,0.72); font-size: 16px; line-height: 1.55; }
-                .home-ops-panel-head a {
+                .home-ops-panel-hint { margin: 0; padding: 16px 24px 0; color: ${light.textSecondary}; font-size: ${type.small}px; }
+                .home-ops-panel-head small { color: ${light.textSecondary}; font-size: ${type.small}px; line-height: 1.55; }
+                .home-ops-panel-head a,
+                .home-ops-income-copy a {
                     flex: 0 0 auto;
-                    color: #f4c95d;
-                    font-size: 16px;
-                    font-weight: 850;
+                    display: inline-flex;
+                    align-items: center;
+                    min-height: 44px;
+                    color: ${light.accentInk};
+                    font-size: ${type.small}px;
+                    font-weight: 600;
                     text-decoration: none;
                 }
+                .home-ops-panel-head a:hover,
+                .home-ops-income-copy a:hover { text-decoration: underline; }
                 .home-ops-notices {
                     display: grid;
-                    gap: 10px;
+                    gap: 8px;
                     max-height: 640px;
-                    padding: 12px;
+                    padding: 16px;
                     overflow-y: auto;
                     scrollbar-gutter: stable;
                 }
                 .home-ops-notice {
                     min-width: 0;
-                    border: 1px solid rgba(255,255,255,0.10);
-                    border-radius: 10px;
-                    background: rgba(255,255,255,0.04);
+                    border: 1px solid ${light.line};
+                    border-radius: ${lightRadius.control}px;
+                    background: ${light.surface};
                     overflow: hidden;
                 }
-                .home-ops-notice.open {
-                    border-color: rgba(244,201,93,0.30);
-                    background: linear-gradient(135deg, rgba(244,201,93,0.10), rgba(68,215,182,0.055));
-                }
+                .home-ops-notice.open { border-color: ${light.lineStrong}; background: ${light.raised}; }
                 .home-ops-notice h3 { margin: 0; }
                 .home-ops-notice-toggle {
                     display: block;
                     width: 100%;
                     min-height: 48px;
-                    padding: 18px;
+                    padding: 16px;
                     border: 0;
                     background: transparent;
                     color: inherit;
                     font: inherit;
+                    font-weight: 400;
                     text-align: left;
                 }
-                .home-ops-notice-toggle:focus-visible { outline: 3px solid rgba(68,215,182,0.62); outline-offset: -3px; }
+                .home-ops-notice-toggle:focus-visible { outline-offset: -2px; }
                 .home-ops-notice-meta {
                     display: flex;
                     align-items: center;
-                    gap: 10px;
-                    margin-bottom: 12px;
+                    gap: 8px;
+                    margin-bottom: 8px;
                 }
                 .home-ops-notice-badge {
-                    padding: 4px 8px;
-                    border: 1px solid;
-                    border-radius: 999px;
-                    font-size: 16px;
-                    font-weight: 900;
+                    padding: 2px 8px;
+                    border: 1px solid ${light.line};
+                    border-radius: ${lightRadius.pill}px;
+                    background: ${light.surface};
+                    font-size: ${type.meta}px;
+                    font-weight: 600;
                 }
-                .home-ops-notice-meta time { color: rgba(235,242,250,0.72); font-size: 16px; }
-                .home-ops-notice-indicator { margin-left: auto; color: #f4c95d; font-size: 24px; font-weight: 900; line-height: 1; }
-                .home-ops-notice-title { display: block; color: #f7fbff; font-size: 19px; font-weight: 900; line-height: 1.5; }
+                .home-ops-notice-meta time { color: ${light.textMuted}; font-size: ${type.meta}px; font-variant-numeric: tabular-nums; }
+                .home-ops-notice-indicator { margin-left: auto; color: ${light.textMuted}; font-size: ${type.lead}px; line-height: 1; }
+                .home-ops-notice-title { display: block; color: ${light.text}; font-size: ${type.body}px; font-weight: 600; line-height: 1.5; }
                 .home-ops-notice-summary {
                     display: block;
-                    margin-top: 7px;
-                    color: rgba(235,242,250,0.72);
-                    font-size: 16px;
+                    margin-top: 4px;
+                    color: ${light.textSecondary};
+                    font-size: ${type.small}px;
                     line-height: 1.65;
                 }
                 .home-ops-notice-detail {
-                    padding: 0 18px 20px;
-                    border-top: 1px solid rgba(255,255,255,0.08);
+                    padding: 0 16px 16px;
+                    border-top: 1px solid ${light.line};
                 }
                 .home-ops-notice-detail p {
-                    margin: 18px 0 0;
-                    color: rgba(245,249,253,0.82);
-                    font-size: 17px;
-                    line-height: 1.8;
+                    margin: 16px 0 0;
+                    color: ${light.text};
+                    font-size: ${type.body}px;
+                    line-height: 1.75;
                     white-space: pre-line;
                 }
                 .home-ops-income-list {
@@ -760,16 +753,9 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                     flex-direction: column;
                     min-width: 0;
                     overflow: hidden;
-                    border: 1px solid rgba(255,255,255,0.13);
-                    border-radius: 14px;
-                    background: linear-gradient(180deg, rgba(255,255,255,0.075), rgba(255,255,255,0.028));
-                    box-shadow: 0 12px 30px rgba(0,0,0,0.17);
-                    transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease;
-                }
-                .home-ops-income-card:hover {
-                    transform: translateY(-3px);
-                    border-color: rgba(68,215,182,0.55);
-                    box-shadow: 0 18px 36px rgba(0,0,0,0.27);
+                    border: 1px solid ${light.line};
+                    border-radius: ${lightRadius.card}px;
+                    background: ${light.surface};
                 }
                 .home-ops-income-visual {
                     aspect-ratio: 4 / 3;
@@ -778,31 +764,33 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                     align-items: center;
                     justify-content: center;
                     overflow: hidden;
-                    background: linear-gradient(145deg, rgba(68,215,182,0.17), rgba(244,201,93,0.13));
-                    border-bottom: 1px solid rgba(255,255,255,0.09);
+                    background: ${light.raised};
+                    border-bottom: 1px solid ${light.line};
                 }
                 .home-ops-income-visual img,
                 .home-ops-income-visual video { width: 100%; height: 100%; min-height: 190px; object-fit: contain; display: block; }
-                .home-ops-income-visual > strong { padding: 10px; color: #f4c95d; font-size: 20px; line-height: 1.35; text-align: center; }
                 .home-ops-income-copy { display: flex; flex: 1; flex-direction: column; min-width: 0; padding: 16px; }
-                .home-ops-income-copy > span { color: #63efd0; font-size: 13px; font-weight: 900; letter-spacing: .02em; }
-                .home-ops-income-copy h3 { margin: 6px 0 8px; color: #fff; font-size: 19px; line-height: 1.35; }
+                .home-ops-income-copy > span { color: ${light.textMuted}; font-size: ${type.meta}px; font-weight: 500; }
+                .home-ops-income-copy h3 {
+                    margin: 4px 0 8px; color: ${light.text}; font-size: ${type.lead}px; font-weight: 600;
+                    line-height: 1.35; font-variant-numeric: tabular-nums;
+                }
                 .home-ops-income-copy p {
                     display: -webkit-box;
-                    margin: 0 0 9px;
+                    margin: 0 0 8px;
                     overflow: hidden;
-                    color: rgba(235,242,250,0.74);
-                    font-size: 14px;
-                    line-height: 1.62;
+                    color: ${light.textSecondary};
+                    font-size: ${type.small}px;
+                    line-height: 1.6;
                     -webkit-box-orient: vertical;
                     -webkit-line-clamp: 2;
                 }
-                .home-ops-income-copy small { display: block; color: rgba(235,242,250,0.67); font-size: 16px; line-height: 1.5; }
-                .home-ops-income-copy a { display: inline-block; margin-top: auto; padding-top: 12px; color: #f4c95d; font-size: 14px; font-weight: 850; text-decoration: none; }
+                .home-ops-income-copy small { display: block; color: ${light.textMuted}; font-size: ${type.meta}px; line-height: 1.5; }
+                .home-ops-income-copy a { align-self: flex-start; margin-top: auto; }
                 .home-ops-empty {
-                    padding: 34px 22px;
-                    color: rgba(235,242,250,0.68);
-                    font-size: 16px;
+                    padding: 32px 24px;
+                    color: ${light.textSecondary};
+                    font-size: ${type.small}px;
                     line-height: 1.65;
                     text-align: center;
                 }
@@ -812,48 +800,20 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                     gap: 16px;
                     align-items: start;
                 }
-                /* 전용 페이지에서는 사이드탭을 렌더하지 않는다. 이때 2열 그리드를 그대로 두면
-                   본문이 사이드탭 자리(250px)로 밀려 들어가 글자가 세로로 쪼개진다. */
+                /* The briefing page renders no side tabs; a two-column grid there would squeeze the body
+                   into the 250px tab column. */
                 .home-ops-layout.briefing-only { grid-template-columns: minmax(0, 1fr); }
-                /* 무료 선정 황금키워드는 이 사이트의 대표 콘텐츠라 다른 항목과 확실히 구분한다. */
-                .home-ops-tab-featured {
-                    position: relative;
-                    text-decoration: none;
-                    border-color: rgba(244, 201, 93, .55);
-                    background: linear-gradient(135deg, rgba(244, 201, 93, .16), rgba(244, 201, 93, .05));
-                    box-shadow: 0 6px 20px rgba(244, 201, 93, .12);
-                }
-                .home-ops-tab-featured:hover {
-                    border-color: rgba(244, 201, 93, .9);
-                    box-shadow: 0 10px 26px rgba(244, 201, 93, .22);
-                }
-                .home-ops-tab-featured strong { color: #f4c95d; }
-                .home-ops-featured-flag {
-                    display: inline-block;
-                    align-self: flex-start;
-                    margin-bottom: 6px;
-                    padding: 2px 8px;
-                    border-radius: 999px;
-                    font-size: 10px;
-                    font-weight: 900;
-                    letter-spacing: .04em;
-                    color: #1b1405;
-                    background: #f4c95d;
-                }
-                .home-ops-tab-issue { text-decoration: none; border-color: rgba(255, 77, 77, .45); }
-                .home-ops-tab-issue:hover { border-color: rgba(255, 77, 77, .9); }
-                .home-ops-tab-issue strong { color: #ff4d4d; }
-                .home-ops-issue-flag { color: #fff; background: #ff4d4d; }
                 .home-ops-sidenav {
                     position: sticky;
                     top: 80px;
                     display: flex;
                     flex-direction: column;
-                    gap: 8px;
+                    gap: 4px;
                     padding: 8px;
-                    border: 1px solid rgba(255,255,255,0.13);
-                    border-radius: 14px;
-                    background: rgba(5,11,18,0.84);
+                    border: 1px solid ${light.line};
+                    border-radius: ${lightRadius.card}px;
+                    background: ${light.surface};
+                    box-shadow: ${light.shadowSm};
                 }
                 .home-ops-sidenav .home-ops-tab { width: 100%; }
                 .home-ops-content { min-width: 0; }
@@ -862,298 +822,252 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                     display: grid;
                     align-content: center;
                     gap: 4px;
-                    padding: 10px 16px;
+                    padding: 12px 16px;
                     border: 1px solid transparent;
-                    border-radius: 10px;
+                    border-radius: ${lightRadius.control}px;
                     background: transparent;
-                    color: rgba(235,242,250,0.70);
+                    color: ${light.textSecondary};
                     font: inherit;
                     text-align: left;
+                    text-decoration: none;
                     cursor: pointer;
+                    transition: background ${motion.fast} ${motion.ease}, border-color ${motion.fast} ${motion.ease};
                 }
-                .home-ops-tab strong { font-size: 18px; line-height: 1.35; }
-                .home-ops-tab small { font-size: 14px; line-height: 1.45; }
-                .home-ops-tab.active {
-                    border-color: rgba(244,201,93,0.48);
-                    background: linear-gradient(135deg, rgba(244,201,93,0.18), rgba(68,215,182,0.10));
-                    color: #fff;
-                    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
-                }
-                .home-ops-tab:focus-visible { outline: 3px solid rgba(68,215,182,0.55); outline-offset: 2px; }
+                .home-ops-tab:hover { background: ${light.raised}; }
+                .home-ops-tab strong { color: ${light.text}; font-size: ${type.body}px; font-weight: 600; line-height: 1.35; }
+                .home-ops-tab small { font-size: ${type.small}px; line-height: 1.5; }
+                /* Only the selected tab carries the accent. */
+                .home-ops-tab.active { border-color: ${light.accentLine}; background: ${light.accentSoft}; }
+                .home-ops-tab-flag { color: ${light.textMuted}; font-size: ${type.meta}px; font-weight: 500; }
+                .home-ops-tab-featured .home-ops-tab-flag { color: ${light.accentInk}; }
                 .home-ops-brief-head {
                     display: flex;
                     align-items: flex-start;
                     justify-content: space-between;
-                    gap: 18px;
+                    gap: 16px;
                     padding: 24px;
-                    border-bottom: 1px solid rgba(255,255,255,0.10);
+                    border-bottom: 1px solid ${light.line};
                 }
-                .home-ops-brief-head h3 { margin: 9px 0 7px; color: #fff; font-size: clamp(25px, 3vw, 34px); line-height: 1.3; }
-                .home-ops-brief-head p { margin: 0; color: rgba(235,242,250,0.70); font-size: 15px; line-height: 1.65; }
+                .home-ops-brief-head h3 { margin: 8px 0; color: ${light.text}; font-size: ${type.h2}px; font-weight: 600; line-height: 1.3; }
+                .home-ops-brief-head p { margin: 0; color: ${light.textMuted}; font-size: ${type.meta}px; line-height: 1.65; }
+                .home-ops-brief-head p.home-ops-brief-lead {
+                    margin: 0 0 8px; max-width: 56ch; color: ${light.textSecondary};
+                    font-size: ${type.body}px; line-height: 1.6; text-wrap: balance;
+                }
                 .home-ops-fixed-badge {
                     flex: 0 0 auto;
                     display: grid;
                     gap: 4px;
                     min-width: 170px;
-                    padding: 12px 14px;
-                    border: 1px solid rgba(244,201,93,0.36);
-                    border-radius: 10px;
-                    background: rgba(244,201,93,0.10);
+                    padding: 12px 16px;
+                    border: 1px solid ${light.line};
+                    border-radius: ${lightRadius.control}px;
+                    background: ${light.raised};
                     text-align: right;
                 }
-                .home-ops-fixed-badge strong { color: #f4c95d; font-size: 14px; }
-                .home-ops-fixed-badge span { color: rgba(235,242,250,0.64); font-size: 13px; }
-                /* 자리 — 경쟁 글 수 하나로만 나눈다. 색은 신호이지 장식이 아니다. */
-                .home-ops-seat { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; font-size: 12.5px; }
-                .home-ops-seat i { width: 6px; height: 6px; border-radius: 50%; flex: none; }
-                .home-ops-seat.tone-open { color: #2fd39a; } .home-ops-seat.tone-open i { background: #2fd39a; }
-                .home-ops-seat.tone-easy { color: rgba(235,242,250,.85); } .home-ops-seat.tone-easy i { background: #2fd39a; opacity: .6; }
-                .home-ops-seat.tone-busy { color: #d9b23c; } .home-ops-seat.tone-busy i { background: #c9a227; }
-                .home-ops-seat.tone-full { color: rgba(235,242,250,.5); } .home-ops-seat.tone-full i { background: rgba(235,242,250,.45); }
-                .home-ops-brief-lead {
-                    margin: 0 0 10px !important; color: #eaf1fa !important;
-                    font-size: 17px !important; line-height: 1.6 !important; max-width: 56ch; text-wrap: balance;
-                }
-                /* 오늘 고른 셋 — 균등 3칸이 아니다. 셋의 무게가 다르므로 하나를 앞세운다. */
+                .home-ops-fixed-badge strong { color: ${light.text}; font-size: ${type.small}px; font-weight: 600; }
+                .home-ops-fixed-badge span { color: ${light.textMuted}; font-size: ${type.meta}px; }
+                /* Seat: split by competing-post count only. The dot is a signal, the text stays neutral. */
+                .home-ops-seat { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; font-size: ${type.meta}px; color: ${light.textSecondary}; }
+                .home-ops-seat i,
+                .home-ops-pick-tag i { width: 8px; height: 8px; border-radius: 50%; flex: none; background: ${light.lineStrong}; }
+                .home-ops-seat.tone-open { color: ${light.positive}; }
+                .home-ops-seat.tone-open i, .home-ops-seat.tone-easy i, .home-ops-pick-tag i.tone-open { background: ${light.positive}; }
+                .home-ops-seat.tone-easy i { opacity: .5; }
+                .home-ops-seat.tone-busy i, .home-ops-pick-tag i.tone-busy { background: ${light.accent}; }
+                .home-ops-seat.tone-full { color: ${light.textMuted}; }
+                /* Today's three picks: not three equal cells. One leads because the three do not weigh the same. */
                 .home-ops-picks {
                     display: grid; grid-template-columns: 1.45fr 1fr; gap: 1px;
-                    background: rgba(255,255,255,.08); border-top: 1px solid rgba(255,255,255,.08);
-                    border-bottom: 1px solid rgba(255,255,255,.08);
+                    background: ${light.line}; border-bottom: 1px solid ${light.line};
                 }
-                .home-ops-pick-side { display: grid; grid-template-rows: 1fr 1fr; gap: 1px; background: rgba(255,255,255,.08); }
-                .home-ops-pick { background: rgba(10,16,24,.55); padding: 20px 22px; display: flex; flex-direction: column; }
-                .home-ops-pick-lead { padding: 26px 28px; }
+                .home-ops-pick-side { display: grid; grid-template-rows: 1fr 1fr; gap: 1px; background: ${light.line}; }
+                .home-ops-pick { background: ${light.surface}; padding: 20px 24px; display: flex; flex-direction: column; }
+                .home-ops-pick-lead { padding: 24px; }
                 .home-ops-pick-tag {
-                    display: inline-flex; align-items: center; gap: 7px; margin-bottom: 12px;
-                    font-size: 11.5px; letter-spacing: .04em; color: rgba(235,242,250,.62);
+                    display: inline-flex; align-items: center; gap: 8px; margin-bottom: 12px;
+                    font-size: ${type.meta}px; color: ${light.textMuted};
                 }
-                .home-ops-pick-tag i { width: 6px; height: 6px; border-radius: 50%; flex: none; }
-                .home-ops-pick-tag i.tone-open { background: #2fd39a; }
-                .home-ops-pick-tag i.tone-busy { background: #c9a227; }
                 .home-ops-pick-kw {
-                    margin: 0 0 10px; color: #fff; font-size: 17px; font-weight: 600;
-                    letter-spacing: -.015em; line-height: 1.35; text-wrap: balance;
+                    margin: 0 0 12px; color: ${light.text}; font-size: ${type.body}px; font-weight: 600;
+                    letter-spacing: -.01em; line-height: 1.35; text-wrap: balance;
                 }
-                .home-ops-pick-lead .home-ops-pick-kw { font-size: 23px; margin-bottom: 14px; }
-                .home-ops-pick-say { margin: 0; color: rgba(235,242,250,.78); font-size: 13.5px; line-height: 1.6; }
-                .home-ops-pick-say b { color: #2fd39a; font-weight: 600; }
+                .home-ops-pick-lead .home-ops-pick-kw { font-size: ${type.h3}px; }
+                .home-ops-pick-say { margin: 0 0 16px; color: ${light.textSecondary}; font-size: ${type.small}px; line-height: 1.6; }
+                .home-ops-pick-say b { color: ${light.positive}; font-weight: 600; }
                 .home-ops-pick-figs {
-                    display: flex; gap: 22px; margin-top: auto; padding-top: 14px;
-                    border-top: 1px solid rgba(255,255,255,.07);
+                    display: flex; gap: 24px; margin-top: auto; padding-top: 16px;
+                    border-top: 1px solid ${light.line};
                 }
-                .home-ops-pick-lead .home-ops-pick-figs { gap: 26px; padding-top: 16px; }
-                .home-ops-pick-figs span { display: block; margin-bottom: 3px; font-size: 11px; color: rgba(235,242,250,.55); letter-spacing: .03em; }
+                .home-ops-pick-figs span { display: block; margin-bottom: 4px; font-size: ${type.meta}px; color: ${light.textMuted}; }
                 .home-ops-pick-figs b {
-                    display: block; color: #fff; font-size: 15px; font-weight: 500;
-                    font-variant-numeric: tabular-nums; letter-spacing: -.02em;
+                    display: block; color: ${light.text}; font-size: ${type.body}px; font-weight: 500;
+                    font-variant-numeric: tabular-nums; letter-spacing: -.01em;
                 }
-                .home-ops-pick-lead .home-ops-pick-figs b { font-size: 20px; }
-                .home-ops-pick-figs b.tone-open-text { color: #2fd39a; }
-                .home-ops-metrics {
-                    display: grid;
-                    grid-template-columns: repeat(4, minmax(0, 1fr));
-                    gap: 10px;
-                    padding: 18px 22px 0;
-                }
-                .home-ops-metric {
-                    padding: 14px;
-                    border: 1px solid rgba(255,255,255,0.09);
-                    border-radius: 9px;
-                    background: rgba(255,255,255,0.04);
-                }
-                .home-ops-metric strong { display: block; color: #fff; font-size: 22px; }
-                .home-ops-metric span { display: block; margin-top: 5px; color: rgba(235,242,250,0.62); font-size: 13px; line-height: 1.4; }
-                .home-ops-chart-wrap { padding: 22px 24px 24px; }
+                .home-ops-pick-lead .home-ops-pick-figs b { font-size: ${type.lead}px; }
+                .home-ops-pick-figs b.tone-open-text { color: ${light.positive}; }
+                .home-ops-chart-wrap { padding: 24px; }
                 .home-ops-subhead {
                     display: flex;
                     justify-content: space-between;
+                    align-items: baseline;
                     gap: 16px;
                     margin-bottom: 16px;
-                    color: rgba(235,242,250,0.68);
-                    font-size: 14px;
+                    color: ${light.textMuted};
+                    font-size: ${type.meta}px;
                     line-height: 1.5;
                 }
-                .home-ops-subhead strong { color: #fff; font-size: 17px; }
-                .home-ops-chart { display: grid; gap: 14px; }
-                .home-ops-chart-row { display: grid; grid-template-columns: minmax(0, 1fr) 128px; gap: 7px 14px; }
-                .home-ops-chart-label { display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; gap: 9px; align-items: center; }
-                .home-ops-chart-label > span { color: #f4c95d; font-size: 14px; font-weight: 900; }
-                .home-ops-chart-label strong { overflow: hidden; color: #eef5fb; font-size: 16px; line-height: 1.45; text-overflow: ellipsis; white-space: nowrap; }
-                .home-ops-chart-label small { color: #44d7b6; font-size: 14px; font-weight: 900; }
-                .home-ops-chart-track { grid-column: 1; height: 9px; overflow: hidden; border-radius: 999px; background: rgba(255,255,255,0.08); }
-                .home-ops-chart-track span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #44d7b6, #f4c95d); }
-                .home-ops-chart-row > small { grid-column: 2; grid-row: 1 / span 2; align-self: center; color: rgba(235,242,250,0.64); font-size: 13px; text-align: right; white-space: nowrap; }
-                .home-ops-trend-btn {
-                    margin-right: 8px; padding: 4px 10px; border-radius: 999px;
-                    border: 1px solid rgba(105,183,255,.4); background: rgba(105,183,255,.1);
-                    color: #69b7ff; font-size: 12px; font-weight: 800; cursor: pointer;
-                }
-                .home-ops-trend-btn:hover { background: rgba(105,183,255,.2); }
-                .home-ops-trend-overlay {
-                    position: fixed; inset: 0; z-index: 1200; display: flex; align-items: center; justify-content: center;
-                    background: rgba(4,8,14,.72); backdrop-filter: blur(6px); padding: 20px;
-                }
-                .home-ops-trend-modal {
-                    width: min(440px, 100%); background: #0d1420; border: 1px solid rgba(105,183,255,.3);
-                    border-radius: 16px; padding: 18px 20px; box-shadow: 0 24px 60px rgba(0,0,0,.5);
-                }
-                .home-ops-trend-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-                .home-ops-trend-head strong { font-size: 17px; color: #fff; }
-                .home-ops-trend-head button { background: transparent; border: none; color: rgba(255,255,255,.6); font-size: 16px; cursor: pointer; }
-                .home-ops-trend-note { margin: 8px 0; font-size: 13px; color: rgba(235,242,250,.7); line-height: 1.5; }
-                .home-ops-trend-src { margin: 10px 0 0; font-size: 11px; color: rgba(235,242,250,.4); }
-                /* 스파크라인은 leword 탭 스타일 시트에 있던 것 — 홈에는 안 실려 여기 복제한다. */
-                .home-ops-trend-modal .lw-spark { display: flex; flex-direction: column; gap: 4px; padding: 8px 10px; border: 1px solid rgba(255,255,255,.08); border-radius: 10px; background: rgba(255,255,255,.02); }
-                .home-ops-trend-modal .lw-spark svg { width: 100%; height: 90px; display: block; }
-                .home-ops-trend-modal .lw-spark-foot { display: flex; gap: 8px; font-size: 11px; color: rgba(235,242,250,.5); }
-                .home-ops-trend-modal .lw-spark-foot em { font-style: normal; color: rgba(235,242,250,.75); font-weight: 700; }
-                .home-ops-trend-modal .lw-spark-foot .lw-spark-hot { color: #2ecc71; font-weight: 800; }
-                .home-ops-table-title {
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    gap: 18px;
-                    padding: 20px 24px 13px;
-                    border-top: 1px solid rgba(255,255,255,0.09);
-                }
-                .home-ops-table-title strong { color: #fff; font-size: 18px; }
-                .home-ops-table-title span { max-width: 720px; color: rgba(235,242,250,0.60); font-size: 13px; line-height: 1.55; text-align: right; }
-                .home-ops-table-shell {
-                    max-height: none;
-                    margin: 0 16px 20px;
-                    overflow: auto;
-                    border: 1px solid rgba(255,255,255,0.10);
-                    border-radius: 10px;
-                    outline: none;
-                    scrollbar-gutter: stable;
-                }
-                .home-ops-table-shell:focus { border-color: rgba(68,215,182,0.68); box-shadow: 0 0 0 3px rgba(68,215,182,0.11); }
-                .home-ops-table { width: 100%; min-width: 980px; border-collapse: collapse; font-variant-numeric: tabular-nums; }
-                .home-ops-table th, .home-ops-table td { padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,0.07); }
-                .home-ops-table thead th {
-                    position: sticky;
-                    top: 0;
-                    z-index: 1;
-                    background: #111d2c;
-                    color: rgba(235,242,250,0.78);
-                    font-size: 15px;
-                    font-weight: 900;
-                    text-align: right;
-                    white-space: nowrap;
-                }
-                .home-ops-table thead th:nth-child(2) { text-align: left; }
-                .home-ops-table tbody td { color: rgba(235,242,250,0.76); font-size: 16px; text-align: right; white-space: nowrap; }
-                .home-ops-table tbody th { color: #f3f8fc; font-size: 16px; font-weight: 780; line-height: 1.5; text-align: left; white-space: nowrap; }
-                .home-ops-table tbody td:first-child { width: 44px; color: rgba(235,242,250,0.50); }
-                .home-ops-table tbody td.home-ops-opportunity-cell { color: #58e8c8; font-weight: 900; }
-                .home-ops-table tbody td.home-ops-search-cell { min-width: 178px; text-align: left; }
-                .home-ops-table tbody tr:hover { background: rgba(68,215,182,0.055); }
-                .home-ops-keyword-link,
-                .home-ops-opportunity-link {
-                    color: inherit;
-                    text-decoration: none;
-                    border-bottom: 1px solid rgba(244,201,93,0.42);
-                    transition: color .16s ease, border-color .16s ease, background .16s ease;
-                }
-                .home-ops-keyword-link:hover,
-                .home-ops-keyword-link:focus-visible {
-                    color: #f4c95d;
-                    border-color: rgba(244,201,93,0.92);
-                    outline: none;
-                }
-                .home-ops-opportunity-link {
-                    color: #58e8c8;
-                    border-color: rgba(88,232,200,0.44);
-                    font-weight: 950;
-                }
-                .home-ops-opportunity-link:hover,
-                .home-ops-opportunity-link:focus-visible {
-                    color: #9dffe8;
-                    border-color: rgba(157,255,232,0.92);
-                    outline: none;
-                }
-                .home-ops-copy-btn {
-                    display: inline-flex;
-                    align-items: center;
-                    min-height: 26px;
-                    margin-left: 6px;
-                    border: 1px solid rgba(245,197,66,.34);
-                    border-radius: 999px;
-                    background: rgba(245,197,66,.08);
-                    color: #f5c542;
-                    padding: 3px 9px;
-                    font-size: 11px;
-                    font-weight: 900;
-                    cursor: pointer;
-                }
-                .home-ops-copy-btn:disabled { opacity: .7; }
-                .home-ops-copy-all-bar {
-                    display: flex;
-                    justify-content: flex-end;
-                    margin-bottom: 8px;
-                }
-                .home-ops-search-links {
-                    display: flex;
-                    flex-wrap: wrap;
-                    gap: 7px;
-                    justify-content: flex-start;
-                    align-items: center;
-                }
+                .home-ops-subhead strong { color: ${light.text}; font-size: ${type.body}px; font-weight: 600; }
+                .home-ops-chart { display: grid; gap: 12px; font-variant-numeric: tabular-nums; }
+                .home-ops-chart-row { display: grid; grid-template-columns: minmax(0, 1fr) 128px; gap: 8px 16px; }
+                .home-ops-chart-label { display: grid; grid-template-columns: 24px minmax(0, 1fr) auto auto; gap: 8px; align-items: center; min-height: 36px; }
+                .home-ops-chart-label > span { color: ${light.textMuted}; font-size: ${type.small}px; text-align: right; }
+                .home-ops-chart-label strong { overflow: hidden; color: ${light.text}; font-size: ${type.body}px; font-weight: 500; line-height: 1.45; text-overflow: ellipsis; white-space: nowrap; }
+                .home-ops-chart-label small { color: ${light.text}; font-size: ${type.small}px; font-weight: 600; }
+                .home-ops-chart-track { grid-column: 1; height: 8px; overflow: hidden; border-radius: ${lightRadius.pill}px; background: ${light.line}; }
+                .home-ops-chart-track span { display: block; height: 100%; border-radius: inherit; background: ${light.accent}; }
+                .home-ops-chart-row > small { grid-column: 2; grid-row: 1 / span 2; align-self: center; color: ${light.textMuted}; font-size: ${type.meta}px; text-align: right; white-space: nowrap; }
+                .home-ops-chart-row > small b { margin-left: 4px; color: ${light.text}; font-size: ${type.small}px; font-weight: 500; }
+                /* Row actions (copy, trend, search links) share one quiet control shape. */
+                .home-ops-trend-btn,
+                .home-ops-copy-btn,
                 .home-ops-search-links a {
                     display: inline-flex;
                     align-items: center;
                     justify-content: center;
-                    min-height: 34px;
-                    padding: 0 11px;
-                    border: 1px solid rgba(244,201,93,0.36);
-                    border-radius: 999px;
-                    background: rgba(244,201,93,0.09);
-                    color: #ffe6a6;
-                    font-size: 14px;
-                    font-weight: 900;
+                    min-height: 36px;
+                    padding: 0 12px;
+                    border: 1px solid ${light.line};
+                    border-radius: ${lightRadius.control}px;
+                    background: ${light.surface};
+                    color: ${light.textSecondary};
+                    font: inherit;
+                    font-size: ${type.meta}px;
+                    font-weight: 500;
                     text-decoration: none;
                     white-space: nowrap;
+                    cursor: pointer;
+                    transition: background ${motion.fast} ${motion.ease}, border-color ${motion.fast} ${motion.ease}, color ${motion.fast} ${motion.ease};
                 }
-                .home-ops-search-links a:hover,
-                .home-ops-search-links a:focus-visible {
-                    border-color: rgba(244,201,93,0.80);
-                    background: rgba(244,201,93,0.18);
-                    color: #fff2c8;
-                    outline: none;
+                .home-ops-trend-btn:hover,
+                .home-ops-copy-btn:hover,
+                .home-ops-search-links a:hover { border-color: ${light.lineStrong}; background: ${light.raised}; color: ${light.text}; }
+                .home-ops-trend-btn { margin-right: 8px; }
+                .home-ops-copy-btn { margin-left: 8px; }
+                .home-ops-copy-btn:disabled { opacity: .7; }
+                .home-ops-trend-overlay {
+                    position: fixed; inset: 0; z-index: 1200; display: flex; align-items: center; justify-content: center;
+                    background: rgba(20, 24, 28, 0.45); padding: 20px;
                 }
+                .home-ops-trend-modal {
+                    width: min(440px, 100%); background: ${light.surface}; border: 1px solid ${light.line};
+                    border-radius: ${lightRadius.panel}px; padding: 20px 24px; box-shadow: ${light.shadowFloat};
+                }
+                .home-ops-trend-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 12px; }
+                .home-ops-trend-head strong { font-size: ${type.lead}px; font-weight: 600; color: ${light.text}; }
+                .home-ops-trend-head button {
+                    flex: none; display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px;
+                    background: ${light.surface}; border: 1px solid ${light.line}; border-radius: ${lightRadius.control}px;
+                    color: ${light.text}; cursor: pointer;
+                }
+                .home-ops-trend-head button:hover { background: ${light.raised}; }
+                .home-ops-trend-note { margin: 8px 0; font-size: ${type.small}px; color: ${light.textSecondary}; line-height: 1.6; }
+                .home-ops-trend-src { margin: 12px 0 0; font-size: ${type.meta}px; color: ${light.textMuted}; }
+                /* The sparkline rules live in the leword tab sheet, which the home page does not load. */
+                .home-ops-trend-modal .lw-spark { display: flex; flex-direction: column; gap: 4px; padding: 8px 12px; border: 1px solid ${light.line}; border-radius: ${lightRadius.control}px; background: ${light.raised}; }
+                .home-ops-trend-modal .lw-spark svg { width: 100%; height: 90px; display: block; }
+                .home-ops-trend-modal .lw-spark-foot { display: flex; gap: 8px; font-size: ${type.meta}px; color: ${light.textMuted}; font-variant-numeric: tabular-nums; }
+                .home-ops-trend-modal .lw-spark-foot em { font-style: normal; color: ${light.textSecondary}; font-weight: 600; }
+                .home-ops-trend-modal .lw-spark-foot .lw-spark-hot { color: ${light.positive}; font-weight: 600; }
+                .home-ops-table-title {
+                    display: flex;
+                    align-items: baseline;
+                    justify-content: space-between;
+                    gap: 16px;
+                    padding: 20px 24px 12px;
+                    border-top: 1px solid ${light.line};
+                }
+                .home-ops-table-title strong { color: ${light.text}; font-size: ${type.body}px; font-weight: 600; }
+                .home-ops-table-title span { max-width: 720px; color: ${light.textMuted}; font-size: ${type.meta}px; line-height: 1.55; text-align: right; }
+                .home-ops-table-shell {
+                    max-height: none;
+                    margin: 0 16px 20px;
+                    overflow: auto;
+                    border: 1px solid ${light.line};
+                    border-radius: ${lightRadius.control}px;
+                    scrollbar-gutter: stable;
+                }
+                .home-ops-table { width: 100%; min-width: 980px; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+                .home-ops-table th, .home-ops-table td { height: 48px; padding: 4px 16px; border-bottom: 1px solid ${light.line}; }
+                .home-ops-table tbody tr:last-child th, .home-ops-table tbody tr:last-child td { border-bottom: 0; }
+                .home-ops-table thead th {
+                    position: sticky;
+                    top: 0;
+                    z-index: 1;
+                    background: ${light.raised};
+                    color: ${light.textMuted};
+                    font-size: ${type.meta}px;
+                    font-weight: 500;
+                    text-align: right;
+                    white-space: nowrap;
+                }
+                .home-ops-table thead th:nth-child(2),
+                .home-ops-table thead th:nth-child(5),
+                .home-ops-table thead th:nth-child(7) { text-align: left; }
+                .home-ops-table tbody td { color: ${light.text}; font-size: ${type.small}px; text-align: right; white-space: nowrap; }
+                .home-ops-table tbody th { color: ${light.text}; font-size: ${type.body}px; font-weight: 500; line-height: 1.5; text-align: left; white-space: nowrap; }
+                .home-ops-table tbody td:first-child { width: 44px; color: ${light.textMuted}; }
+                .home-ops-table tbody td:nth-child(5) { text-align: left; }
+                .home-ops-table tbody td.home-ops-opportunity-cell { font-weight: 600; }
+                .home-ops-table tbody td.home-ops-search-cell { min-width: 178px; text-align: left; }
+                .home-ops-table tbody tr:hover { background: ${light.raised}; }
+                .home-ops-keyword-link,
+                .home-ops-opportunity-link {
+                    color: inherit;
+                    text-decoration: none;
+                    border-bottom: 1px solid ${light.lineStrong};
+                    transition: color ${motion.fast} ${motion.ease}, border-color ${motion.fast} ${motion.ease};
+                }
+                span.home-ops-keyword-link { border-bottom: 0; }
+                a.home-ops-keyword-link:hover,
+                .home-ops-opportunity-link:hover { color: ${light.accentInk}; border-color: ${light.accentInk}; }
+                .home-ops-copy-all-bar { display: flex; justify-content: flex-end; padding: 8px; border-bottom: 1px solid ${light.line}; }
+                .home-ops-search-links {
+                    display: inline-flex;
+                    gap: 8px;
+                    justify-content: flex-start;
+                    align-items: center;
+                }
+                .home-ops-search-links .home-ops-copy-btn { margin-left: 0; }
                 .home-ops-search-links.compact {
-                    padding: 12px 14px 14px;
-                    border-top: 1px solid rgba(255,255,255,0.07);
+                    display: flex;
+                    flex-wrap: wrap;
+                    padding: 12px 16px 16px;
+                    border-top: 1px solid ${light.line};
                 }
-                .home-ops-search-links.compact a {
-                    flex: 1 1 86px;
-                    min-height: 40px;
-                    font-size: 15px;
-                }
+                .home-ops-search-links.compact a,
+                .home-ops-search-links.compact .home-ops-copy-btn { flex: 1 1 0; min-width: 0; min-height: 44px; padding: 0 4px; font-size: ${type.small}px; }
                 .home-ops-keyword-cards { display: none; }
                 .home-ops-keyword-card {
-                    border: 1px solid rgba(255,255,255,0.10);
-                    border-radius: 10px;
-                    background: rgba(255,255,255,0.045);
+                    border: 1px solid ${light.line};
+                    border-radius: ${lightRadius.card}px;
+                    background: ${light.surface};
                     overflow: hidden;
                 }
                 .home-ops-keyword-card-head {
                     display: grid;
-                    grid-template-columns: 42px minmax(0, 1fr);
-                    gap: 10px;
-                    align-items: start;
-                    padding: 14px;
-                    border-bottom: 1px solid rgba(255,255,255,0.07);
+                    grid-template-columns: 32px minmax(0, 1fr);
+                    gap: 8px;
+                    align-items: baseline;
+                    padding: 16px;
+                    border-bottom: 1px solid ${light.line};
                 }
-                .home-ops-keyword-card-head span {
-                    color: #f4c95d;
-                    font-size: 15px;
-                    font-weight: 900;
-                }
+                .home-ops-keyword-card-head span { color: ${light.textMuted}; font-size: ${type.small}px; font-variant-numeric: tabular-nums; }
                 .home-ops-keyword-card-head strong {
                     min-width: 0;
-                    color: #f7fbff;
-                    font-size: 18px;
+                    color: ${light.text};
+                    font-size: ${type.body}px;
+                    font-weight: 600;
                     line-height: 1.45;
                     overflow-wrap: anywhere;
                 }
@@ -1162,29 +1076,20 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                     grid-template-columns: repeat(3, minmax(0, 1fr));
                     gap: 1px;
                     margin: 0;
-                    background: rgba(255,255,255,0.06);
+                    background: ${light.line};
                 }
-                .home-ops-keyword-card dl div {
-                    min-width: 0;
-                    padding: 12px 10px;
-                    background: rgba(8,14,24,0.94);
-                }
-                .home-ops-keyword-card dt {
-                    margin: 0 0 5px;
-                    color: rgba(235,242,250,0.62);
-                    font-size: 13px;
-                    font-weight: 800;
-                }
+                .home-ops-keyword-card dl div { min-width: 0; padding: 12px 16px; background: ${light.surface}; text-align: right; }
+                .home-ops-keyword-card dt { margin: 0 0 4px; color: ${light.textMuted}; font-size: ${type.meta}px; }
                 .home-ops-keyword-card dd {
                     margin: 0;
-                    color: #fff;
-                    font-size: 16px;
-                    font-weight: 900;
+                    color: ${light.text};
+                    font-size: ${type.body}px;
+                    font-weight: 500;
                     line-height: 1.35;
+                    font-variant-numeric: tabular-nums;
                     word-break: break-word;
                 }
-                .home-ops-keyword-card dl div:last-child dd { color: #58e8c8; }
-                .home-ops-realtime-panel { padding: 18px; }
+                .home-ops-realtime-panel { padding: 16px; }
                 .home-ops-sr-only {
                     position: absolute;
                     width: 1px;
@@ -1204,6 +1109,27 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                     border: 0;
                     background: transparent;
                     box-shadow: none;
+                    backdrop-filter: none;
+                }
+                /* Motion pass (2026-11): hover lift and press, transform/shadow only. */
+                .home-ops-header { align-items: center; }
+                .home-ops-hero-side { display: grid; gap: 24px; min-width: 0; }
+                .home-ops-cta,
+                .home-ops-intro-card,
+                .home-ops-sidenav .home-ops-tab {
+                    transition-property: background-color, border-color, color, box-shadow, transform;
+                    transition-duration: 200ms;
+                    transition-timing-function: ${motion.ease};
+                }
+                .home-ops-cta:hover,
+                .home-ops-intro-card:hover,
+                .home-ops-sidenav .home-ops-tab:hover { transform: translateY(-2px); box-shadow: ${light.shadowFloat}; }
+                .home-ops-cta:active,
+                .home-ops-intro-card:active,
+                .home-ops-sidenav .home-ops-tab:active { transform: scale(0.98); }
+                @media (prefers-reduced-motion: reduce) {
+                    .home-ops-cta:hover, .home-ops-intro-card:hover, .home-ops-sidenav .home-ops-tab:hover,
+                    .home-ops-cta:active, .home-ops-intro-card:active, .home-ops-sidenav .home-ops-tab:active { transform: none; }
                 }
                 @media (max-width: 960px) {
                     .home-ops-realtime-panel .hero-realtime-board { min-height: 0; }
@@ -1214,40 +1140,45 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                         overflow-x: auto;
                         -webkit-overflow-scrolling: touch;
                     }
-                    .home-ops-sidenav .home-ops-tab { flex: 0 0 auto; min-width: 200px; }
+                    .home-ops-sidenav .home-ops-tab { flex: 0 0 auto; width: 216px; }
+                    .home-ops-header { grid-template-columns: minmax(0, 1fr); }
                 }
                 @media (max-width: 720px) {
-                    .home-ops { padding: 82px 12px 0; margin-bottom: 34px; }
-                    .home-ops-header h2 { font-size: clamp(29px, 9vw, 40px); }
-                    .home-ops-header p { font-size: 16px; }
-                    .home-ops-panel-head { align-items: flex-start; padding: 18px 16px; }
-                    .home-ops-notice-toggle { padding: 16px; }
-                    .home-ops-notice-detail { padding: 0 16px 18px; }
+                    .home-ops { padding: 96px 16px 0; margin-bottom: 32px; }
+                    .home-ops-header h1 { font-size: ${type.h1Mobile}px; }
+                    .home-ops-title-full { display: none; }
+                    .home-ops-title-short { display: inline; }
+                    .home-ops-brief-head h3 { font-size: ${type.h3}px; }
+                    .home-ops-cta { flex: 1 1 auto; padding: 0 16px; }
+                    .home-ops-intro-card { grid-template-columns: minmax(0, 1fr) auto; }
+                    .home-ops-intro-card span { grid-column: 1; grid-row: 2; }
+                    .home-ops-intro-card i { grid-column: 2; grid-row: 1 / span 2; align-self: center; }
+                    .home-ops-panel-head { padding: 12px 16px; }
+                    .home-ops-panel-hint { padding: 16px 16px 0; }
+                    .home-ops-notices { padding: 12px; }
                     .home-ops-income-list { grid-template-columns: 1fr; padding: 12px; }
                     .home-ops-income-visual,
                     .home-ops-income-visual img,
                     .home-ops-income-visual video { min-height: 210px; max-height: 420px; }
-                    .home-ops-tab { min-height: 60px; }
-                    .home-ops-brief-head { align-items: flex-start; flex-direction: column; padding: 20px 16px; }
+                    .home-ops-brief-head { flex-direction: column; padding: 20px 16px; }
                     .home-ops-fixed-badge { width: 100%; box-sizing: border-box; text-align: left; }
-                    .home-ops-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 14px 12px 0; }
                     .home-ops-picks { grid-template-columns: 1fr; }
-                    .home-ops-pick-lead { padding: 20px 16px; }
-                    .home-ops-pick { padding: 18px 16px; }
-                    .home-ops-pick-lead .home-ops-pick-kw { font-size: 20px; }
-                    .home-ops-chart-wrap { padding: 20px 14px; }
-                    .home-ops-subhead { align-items: flex-start; flex-direction: column; }
+                    .home-ops-pick, .home-ops-pick-lead { padding: 20px 16px; }
+                    .home-ops-pick-lead .home-ops-pick-kw { font-size: ${type.lead}px; }
+                    .home-ops-chart-wrap { padding: 20px 16px; }
+                    .home-ops-subhead { flex-direction: column; gap: 4px; }
                     .home-ops-chart-row { grid-template-columns: minmax(0, 1fr); }
-                    .home-ops-chart-label { grid-template-columns: 24px minmax(0, 1fr); }
+                    .home-ops-chart-label { grid-template-columns: 24px minmax(0, 1fr) auto; }
                     .home-ops-chart-label strong { white-space: normal; }
-                    .home-ops-chart-label small { grid-column: 2; }
+                    .home-ops-chart-label small { grid-column: 2; grid-row: 2; }
+                    .home-ops-chart-label .home-ops-copy-btn { grid-column: 3; grid-row: 1; min-height: 44px; }
                     .home-ops-chart-track { grid-column: 1 / -1; }
                     .home-ops-chart-row > small { grid-column: 1 / -1; grid-row: auto; text-align: left; }
-                    .home-ops-table-title { align-items: flex-start; flex-direction: column; padding: 18px 14px 12px; }
+                    .home-ops-table-title { flex-direction: column; gap: 4px; padding: 20px 16px 12px; }
                     .home-ops-table-title span { text-align: left; }
                     .home-ops-table-shell { display: none; }
-                    .home-ops-keyword-cards { display: grid; gap: 10px; padding: 0 10px 16px; }
-                    .home-ops-realtime-panel { padding: 10px; }
+                    .home-ops-keyword-cards { display: grid; gap: 8px; padding: 0 12px 16px; }
+                    .home-ops-realtime-panel { padding: 8px; }
                     .home-ops-realtime-panel .hero-source-tabs,
                     .home-ops-realtime-panel .hero-source-body,
                     .home-ops-realtime-panel .source-strategy-grid { grid-template-columns: minmax(0, 1fr) !important; }
@@ -1263,67 +1194,68 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
 
             {!briefingOnly && (
                 <header className="home-ops-header">
-                    <span className="home-ops-kicker">WELCOME</span>
-                    <h2 id="home-ops-title">블로그로 수익을 내는 데 필요한 것들을 한곳에 모았습니다</h2>
-                    <div className="home-ops-intro-wrap">
+                    <div>
+                        <h1 id="home-ops-title">
+                            <span className="home-ops-title-full"><SplitWords text="블로그로 수익을 내는 데 필요한 것들을 한곳에 모았습니다" /></span>
+                            {/* Shorter wording on phones so the headline stays within two lines. */}
+                            <span className="home-ops-title-short"><SplitWords text="블로그 수익 도구를 한곳에 모았습니다" /></span>
+                        </h1>
                         <p className="home-ops-intro">
                             리더스프로는 <strong>키워드 발굴부터 글쓰기·발행까지</strong> 블로그 운영에 필요한 도구를 만듭니다.
                             아래 <strong>무료 선정 황금키워드</strong>와 <strong>실시간 검색어</strong>는 회원가입 없이 그냥 보셔도 됩니다.
                         </p>
-                        <div className="home-ops-intro-cards">
-                            <a className="home-ops-intro-card home-ops-intro-card--blue" href="/leword">
-                                <strong>LEWORD</strong>
-                                <span>황금키워드 찾기 프로그램</span>
-                            </a>
-                            <a className="home-ops-intro-card home-ops-intro-card--green" href="/detail">
-                                <strong>Better Life Naver</strong>
-                                <span>네이버 자동화 프로그램</span>
-                            </a>
-                            <a className="home-ops-intro-card home-ops-intro-card--orange" href="/orbit">
-                                <strong>Leaders Orbit</strong>
-                                <span>워드프레스·티스토리·블로그스팟 자동화 및 외부유입 전용 프로그램</span>
-                            </a>
+                        <div className="home-ops-actions">
+                            <a className="home-ops-cta lp-sheen" href="/leword">황금키워드 보러 가기</a>
+                            <Link className="home-ops-cta home-ops-cta-quiet" to="/products">제품 보기</Link>
                         </div>
+                    </div>
+                    <div className="home-ops-hero-side">
+                    {/* Hold the deck's height while the briefing loads so the first screen does not jump. */}
+                    {chartRows.length === 0 && briefingLoading && <div className="lks-reserve" aria-hidden="true" />}
+                    {chartRows.length > 0 && (
+                        <LiveKeywordStack
+                            rows={chartRows}
+                            href={BRIEFING_PAGE_PATH}
+                            caption={`${formatDate(briefing?.publishedAt || '')} 검토본`}
+                        />
+                    )}
+                    <div ref={introCardsRef} className="home-ops-intro-cards">
+                        <a className="home-ops-intro-card" href="/leword">
+                            <strong>LEWORD</strong>
+                            <span>황금키워드 찾기 프로그램</span>
+                            <i aria-hidden="true">→</i>
+                        </a>
+                        <a className="home-ops-intro-card" href="/detail">
+                            <strong>Better Life Naver</strong>
+                            <span>네이버 자동화 프로그램</span>
+                            <i aria-hidden="true">→</i>
+                        </a>
+                        <a className="home-ops-intro-card" href="/orbit">
+                            <strong>Leaders Orbit</strong>
+                            <span>워드프레스·티스토리·블로그스팟 자동화 및 외부유입 전용 프로그램</span>
+                            <i aria-hidden="true">→</i>
+                        </a>
+                    </div>
                     </div>
                 </header>
             )}
 
-            {/*
-              * 안 읽은 공지 한 줄(2026-09-10, 사장님 "공지사항은 중요한데 여기 놔둬도 되나 싶은데").
-              * 공지 전체는 탭에 두는 게 맞다 — 목록이 길고 접었다 펴야 한다.
-              * 다만 **안 읽은 것이 있을 때만** 맨 위에 한 줄로 띄운다. 눌러야 보이는 자리에만 두면
-              * 중요한 공지가 안 읽힌 채로 지나간다. 다 읽었으면 이 줄은 아예 없다 — 늘 붙어 있는 띠가 아니다.
-              */}
-            {!briefingOnly && unseenNoticeCount > 0 && unseenNotices[0] && (
-                <button
-                    type="button"
-                    className="home-ops-notice-flash"
-                    onClick={() => {
-                        setActiveTab('notice');
-                        setOpenNoticeId(unseenNotices[0].id || null);
-                    }}
-                >
-                    <span className="flash-tag">새 공지</span>
-                    <span className="flash-title">{unseenNotices[0].title}</span>
-                    {unseenNoticeCount > 1 && <span className="flash-more">외 {unseenNoticeCount - 1}건</span>}
-                    <span className="flash-go">보기 →</span>
-                </button>
-            )}
+            {!briefingOnly && ribbon}
 
-            <div className={`home-ops-layout${briefingOnly ? ' briefing-only' : ''}`}>
+            <div ref={layoutRef} className={`home-ops-layout${briefingOnly ? ' briefing-only' : ''}`}>
                 {!briefingOnly && (
                 <div ref={sidenavRef} className="home-ops-sidenav" role="tablist" aria-label="홈 보기 선택" aria-orientation="vertical">
                     {/* react-router Link 가 아니라 일반 <a> 다. 클라이언트 라우팅은 AdSense 가
                         새 페이지로 인식하지 않아 전면광고가 뜨지 않는다. 실제 페이지 로드가
                         일어나야 광고 자리가 생긴다(정적 /briefing 페이지를 빌드에서 생성해 둔다). */}
                     <a className="home-ops-tab home-ops-tab-featured" href={BRIEFING_PAGE_PATH}>
-                        <span className="home-ops-featured-flag">오늘 무료 공개</span>
+                        <span className="home-ops-tab-flag">오늘 무료 공개</span>
                         <strong>무료 선정 황금키워드</strong>
                         <small>검색은 많은데 아직 글이 적은 키워드만 골랐습니다. 지금 바로 확인 →</small>
                     </a>
                     {/* 실검 틈새키워드 — 하루 3회 CI 가 정적으로 발행하는 보드(/leword?tab=issue). 황금키워드와 같은 이유로 일반 <a> 다. */}
                     <a className="home-ops-tab home-ops-tab-issue" href="/leword?tab=issue">
-                        <span className="home-ops-featured-flag home-ops-issue-flag">하루 3번 갱신</span>
+                        <span className="home-ops-tab-flag">하루 3번 갱신</span>
                         <strong>실검 틈새키워드</strong>
                         <small>지금 뜨는 실시간 이슈에서 검색은 있는데 글이 적은 키워드만 골랐습니다 →</small>
                     </a>
@@ -1341,7 +1273,7 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                             onClick={() => setActiveTab(tab)}
                             onKeyDown={(event) => handleTabKeyDown(event, tab)}
                         >
-                            <strong style={HOME_OPS_TAB_META[tab].accent ? { color: HOME_OPS_TAB_META[tab].accent } : undefined}>
+                            <strong>
                                 {HOME_OPS_TAB_META[tab].label}
                                 {tab === 'notice' && <NewBadge count={unseenNoticeCount} />}
                             </strong>
@@ -1391,9 +1323,9 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                             <>
                                 <div className="home-ops-brief-head">
                                     <div>
-                                        <span className="home-ops-kicker">DEPUTY GOLDEN KEYWORDS</span>
+                                        <span className="home-ops-kicker">부방장 황금키워드</span>
                                         <h3>{briefing.title}</h3>
-                                        <p className="home-ops-brief-lead">사람은 많이 찾는데 글은 적은 말을 골라 뒀습니다. 경쟁 글이 몇 개인지 먼저 보세요 — 그 숫자가 작을수록 지금 들어갈 자리가 있습니다.</p>
+                                        <p className="home-ops-brief-lead">사람은 많이 찾는데 글은 적은 말을 골라 뒀습니다. 경쟁 글이 몇 개인지 먼저 보세요. 그 숫자가 작을수록 지금 들어갈 자리가 있습니다.</p>
                                         <p>{briefing.author} 제공 · {formatDate(briefing.publishedAt)} 검토본 · 키워드 {briefing.rows.length}개 · 원본 이미지 {briefing.sourceImages.length}장 추적 정보 기록</p>
                                     </div>
                                     <div className="home-ops-fixed-badge">
@@ -1410,9 +1342,9 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                                                 {numberFormatter.format(picks.lead.searchVolume)}명이 찾는 말인데 지금 올라온 글은 <b>{numberFormatter.format(picks.lead.documentCount)}개</b>입니다.
                                             </p>
                                             <div className="home-ops-pick-figs">
-                                                <div><span>한 달 검색</span><b>{numberFormatter.format(picks.lead.searchVolume)}</b></div>
-                                                <div><span>경쟁 글</span><b className="tone-open-text">{numberFormatter.format(picks.lead.documentCount)}</b></div>
-                                                <div><span>한 글자리당 사람</span><b>{numberFormatter.format(sharePerPost(picks.lead))}</b></div>
+                                                <div><span>한 달 검색</span><b><CountUp value={picks.lead.searchVolume} /></b></div>
+                                                <div><span>경쟁 글</span><b className="tone-open-text"><CountUp value={picks.lead.documentCount} /></b></div>
+                                                <div><span>한 글자리당 사람</span><b><CountUp value={sharePerPost(picks.lead)} /></b></div>
                                             </div>
                                         </div>
                                     )}
@@ -1422,8 +1354,8 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                                                 <span className="home-ops-pick-tag"><i className="tone-open" />글이 아직 한 자릿수</span>
                                                 <p className="home-ops-pick-kw">{picks.small.keyword}</p>
                                                 <div className="home-ops-pick-figs">
-                                                    <div><span>한 달 검색</span><b>{numberFormatter.format(picks.small.searchVolume)}</b></div>
-                                                    <div><span>경쟁 글</span><b className="tone-open-text">{numberFormatter.format(picks.small.documentCount)}</b></div>
+                                                    <div><span>한 달 검색</span><b><CountUp value={picks.small.searchVolume} /></b></div>
+                                                    <div><span>경쟁 글</span><b className="tone-open-text"><CountUp value={picks.small.documentCount} /></b></div>
                                                 </div>
                                             </div>
                                         )}
@@ -1432,8 +1364,8 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                                                 <span className="home-ops-pick-tag"><i className="tone-busy" />사람이 가장 몰리는 말</span>
                                                 <p className="home-ops-pick-kw">{picks.big.keyword}</p>
                                                 <div className="home-ops-pick-figs">
-                                                    <div><span>한 달 검색</span><b>{numberFormatter.format(picks.big.searchVolume)}</b></div>
-                                                    <div><span>경쟁 글</span><b>{numberFormatter.format(picks.big.documentCount)}</b></div>
+                                                    <div><span>한 달 검색</span><b><CountUp value={picks.big.searchVolume} /></b></div>
+                                                    <div><span>경쟁 글</span><b><CountUp value={picks.big.documentCount} /></b></div>
                                                 </div>
                                             </div>
                                         )}

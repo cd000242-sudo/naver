@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import SplitWords from '../components/motion/SplitWords';
 import ProductPageStyles from '../components/products/ProductPageStyles';
 import {
     CloseBand, FaqList, FeatureBand, HeroActions, PriceBlock, ProofStrip, ReviewQuotes, VsPanel, useProduct,
@@ -94,7 +95,7 @@ function DetailPage() {
                 <div className="pp-wrap">
                     <div className="pp-hero-grid">
                         <div>
-                            <h1>쓰고, 꾸미고, 올리는 일을<br /><em>키워드 하나로</em></h1>
+                            <h1><SplitWords text="쓰고, 꾸미고, 올리는 일을" /><br /><em><SplitWords text="키워드 하나로" offset={4} /></em></h1>
                             <p className="pp-hero-sub">제목과 본문, 이미지, 표, 해시태그까지 채워 네이버 블로그에 예약 발행합니다</p>
                             <HeroActions primary={{ to: '/download', label: '30일 무료 체험' }} secondary={{ to: '/pricing', label: startLabel }} />
                         </div>

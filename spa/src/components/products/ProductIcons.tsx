@@ -1,6 +1,6 @@
-/** 제품 페이지 아이콘 — 한 가지 선 굵기(1.8)로 직접 그린 SVG. 이모지 · 기호를 아이콘 대신 쓰지 않는다. */
+/** 제품 페이지 아이콘 — 한 가지 선 굵기(1.5)로 직접 그린 SVG. 이모지 · 기호를 아이콘 대신 쓰지 않는다. */
 type IconProps = { className?: string };
-const base = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const, 'aria-hidden': true };
+const base = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.5, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const, 'aria-hidden': true };
 
 export const ArrowRight = ({ className }: IconProps) => (
     <svg viewBox="0 0 24 24" className={className} {...base}><path d="M5 12h14M13 6l6 6-6 6" /></svg>

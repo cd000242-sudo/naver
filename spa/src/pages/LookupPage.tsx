@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
-import { color, gradient, onGold, radius } from '../styles/tokens';
+import { useEffect, useRef, useState } from 'react';
+import SplitWords from '../components/motion/SplitWords';
+import { light, lightRadius, motion, type } from '../styles/tokens';
 import PurchaseNextSteps from '../components/store/PurchaseNextSteps';
 
 /**
@@ -52,8 +53,8 @@ async function copyText(text: string) {
     try {
         await navigator.clipboard.writeText(text);
         const tooltip = document.createElement('div');
-        tooltip.textContent = '✅ 복사됨!';
-        tooltip.style.cssText = 'position:fixed;top:20px;left:50%;transform:translateX(-50%);background:' + gradient.goldBright + ';color:' + color.bgDark + ';padding:8px 20px;border-radius:100px;font-size:13px;font-weight:600;z-index:9999;';
+        tooltip.textContent = '복사됨!';
+        tooltip.style.cssText = 'position:fixed;top:20px;left:50%;transform:translateX(-50%);background:' + light.btn + ';color:' + light.onBtn + ';padding:8px 20px;border-radius:' + lightRadius.control + 'px;font-size:' + type.small + 'px;font-weight:500;z-index:9999;';
         document.body.appendChild(tooltip);
         window.setTimeout(() => tooltip.remove(), 1500);
     } catch {
@@ -165,7 +166,7 @@ function LookupPage() {
             const result = await callGAS('cancel-subscription', { email: email.trim(), licenseCode: sub.licenseCode });
             setCancellingCode(null);
             if (result?.ok) {
-                setNotice(`✅ ${result.message || '구독이 해지되었습니다.'}`);
+                setNotice(`${result.message || '구독이 해지되었습니다.'}`);
                 // 상태 갱신: 해당 구독 cancelled 로
                 setSubscriptions((prev) => prev ? prev.map((s) =>
                     s.licenseCode === sub.licenseCode ? { ...s, status: 'cancelled' } : s
@@ -200,39 +201,51 @@ function LookupPage() {
         }
     };
 
-    const activeTabStyle: React.CSSProperties = { flex: 1, padding: 10, background: 'rgba(201,168,76,0.1)', border: '1px solid rgba(201,168,76,0.3)', borderRadius: 8, color: '#FFD700', fontWeight: 600, fontSize: 13, cursor: 'pointer', transition: 'all 0.2s' };
-    const inactiveTabStyle: React.CSSProperties = { flex: 1, padding: 10, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 8, color: 'rgba(255,255,255,0.6)', fontWeight: 500, fontSize: 13, cursor: 'pointer', transition: 'all 0.2s' };
+    const tabBase: React.CSSProperties = { flex: 1, minHeight: 44, padding: '0 12px', borderRadius: lightRadius.control, fontSize: type.small, cursor: 'pointer', transition: `background-color ${motion.fast} ${motion.ease}, border-color ${motion.fast} ${motion.ease}, color ${motion.fast} ${motion.ease}` };
+    const activeTabStyle: React.CSSProperties = { ...tabBase, background: light.accentSoft, border: `1px solid ${light.accent}`, color: light.text, fontWeight: 600 };
+    const inactiveTabStyle: React.CSSProperties = { ...tabBase, background: light.surface, border: `1px solid ${light.line}`, color: light.textSecondary, fontWeight: 500 };
 
-    const inputStyle: React.CSSProperties = { width: '100%', padding: '14px 16px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.10)', borderRadius: 10, color: '#fff', fontSize: 14, marginBottom: 12, outline: 'none' };
-    const btnStyle: React.CSSProperties = { width: '100%', padding: 14, background: gradient.goldBright, color: onGold.black, border: 'none', borderRadius: radius.md, fontSize: 15, fontWeight: 700, cursor: 'pointer' };
+    const labelStyle: React.CSSProperties = { display: 'block', marginBottom: 8, color: light.text, fontSize: type.small, fontWeight: 500 };
+    const inputStyle: React.CSSProperties = { width: '100%', minHeight: 48, padding: '0 16px', background: light.surface, border: `1px solid ${light.lineStrong}`, borderRadius: lightRadius.control, color: light.text, fontSize: type.body, fontFamily: 'inherit', marginBottom: 16 };
+    const btnStyle: React.CSSProperties = { width: '100%', minHeight: 48, padding: '0 16px', background: light.accent, color: light.onAccent, border: 'none', borderRadius: lightRadius.control, fontSize: type.body, fontWeight: 600, cursor: 'pointer' };
+    const softBox: React.CSSProperties = { background: light.raised, border: `1px solid ${light.line}`, borderRadius: lightRadius.card };
+    const inkLink: React.CSSProperties = { color: light.accentInk, textDecoration: 'underline', textUnderlineOffset: 3 };
 
     return (
-        <div style={{ maxWidth: 520, margin: '0 auto', padding: '140px 20px 80px', position: 'relative', zIndex: 1 }}>
-            <div style={{ background: 'rgba(18,18,26,0.7)', backdropFilter: 'blur(20px)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 20, padding: 32 }}>
+        <div data-lookup-form style={{ maxWidth: 520, margin: '0 auto', padding: '144px 20px 80px', position: 'relative', zIndex: 1 }}>
+            {/* Focus ring, placeholder colour and the loading spinner cannot be written inline. */}
+            <style>{`[data-lookup-form] input::placeholder{color:${light.textMuted}}
+[data-lookup-form] :focus-visible{outline:2px solid ${light.text};outline-offset:2px}
+@keyframes spin{to{transform:rotate(360deg)}}`}</style>
+            <div style={{ background: light.surface, border: `1px solid ${light.line}`, borderRadius: lightRadius.panel, padding: 'clamp(24px, 4vw, 32px)', boxShadow: light.shadowSm, color: light.text }}>
                 <div style={{ textAlign: 'center', marginBottom: 24 }}>
-                    <div style={{ fontSize: 40, marginBottom: 8 }}>🔍</div>
-                    <h2 style={{ fontSize: 24, fontWeight: 800, marginBottom: 6 }}>주문 조회</h2>
-                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 14, lineHeight: 1.6 }}>구매 시 입력한 이메일 또는 주문번호로<br />라이선스 코드를 확인하세요.</p>
+                    <h1 style={{ fontSize: type.h2, fontWeight: 700, lineHeight: 1.25, marginBottom: 8, color: light.text }}><SplitWords text="주문 조회" /></h1>
+                    <p style={{ color: light.textSecondary, fontSize: type.small, lineHeight: 1.6 }}>구매 시 입력한 이메일 또는 주문번호로<br />라이선스 코드를 확인하세요.</p>
                 </div>
 
                 <div style={{ display: 'flex', gap: 8, marginBottom: 20 }}>
-                    <button onClick={() => onTab('email')} style={tab === 'email' ? activeTabStyle : inactiveTabStyle}>📧 이메일로 조회</button>
-                    <button onClick={() => onTab('order')} style={tab === 'order' ? activeTabStyle : inactiveTabStyle}>📋 주문번호로 조회</button>
+                    <button onClick={() => onTab('email')} style={tab === 'email' ? activeTabStyle : inactiveTabStyle}>이메일로 조회</button>
+                    <button onClick={() => onTab('order')} style={tab === 'order' ? activeTabStyle : inactiveTabStyle}>주문번호로 조회</button>
                 </div>
 
                 {tab === 'email' && (
                     <div>
+                        <label htmlFor="lookup-email" style={labelStyle}>구매 시 입력한 이메일 주소</label>
                         <input
+                            id="lookup-email"
                             ref={emailInputRef}
                             type="email"
                             value={email}
                             onChange={(e) => { setEmail(e.target.value); setCodeSent(false); setAuthCode(''); }}
                             onKeyDown={(e) => { if (e.key === 'Enter' && !codeSent) requestLookupCode(); }}
-                            placeholder="구매 시 입력한 이메일 주소"
+                            placeholder="example@email.com"
                             style={inputStyle}
                         />
                         {codeSent && (
+                            <>
+                            <label htmlFor="lookup-auth-code" style={labelStyle}>메일로 받은 6자리 인증번호</label>
                             <input
+                                id="lookup-auth-code"
                                 type="text"
                                 inputMode="numeric"
                                 autoComplete="one-time-code"
@@ -240,49 +253,50 @@ function LookupPage() {
                                 value={authCode}
                                 onChange={(e) => setAuthCode(e.target.value.replace(/\D/g, ''))}
                                 onKeyDown={(e) => { if (e.key === 'Enter') lookupByEmail(); }}
-                                placeholder="메일로 받은 6자리 인증번호"
-                                style={inputStyle}
+                                style={{ ...inputStyle, fontVariantNumeric: 'tabular-nums' }}
                             />
+                            </>
                         )}
                         {codeSent
-                            ? <button onClick={lookupByEmail} disabled={loading} style={btnStyle}>{loading ? '조회 중...' : '확인하고 조회'}</button>
-                            : <button onClick={requestLookupCode} disabled={loading} style={btnStyle}>{loading ? '보내는 중...' : '인증번호 받기'}</button>}
+                            ? <button onClick={lookupByEmail} disabled={loading} className="lp-lift lp-sheen" style={btnStyle}>{loading ? '조회 중...' : '확인하고 조회'}</button>
+                            : <button onClick={requestLookupCode} disabled={loading} className="lp-lift lp-sheen" style={btnStyle}>{loading ? '보내는 중...' : '인증번호 받기'}</button>}
                         {codeSent && (
-                            <button onClick={requestLookupCode} disabled={loading} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.55)', fontSize: 13, marginTop: 10, cursor: 'pointer', width: '100%' }}>인증번호 다시 받기</button>
+                            <button onClick={requestLookupCode} disabled={loading} style={{ background: 'none', border: 'none', color: light.textSecondary, fontSize: type.small, minHeight: 44, marginTop: 8, cursor: 'pointer', width: '100%', textDecoration: 'underline', textUnderlineOffset: 3 }}>인증번호 다시 받기</button>
                         )}
                     </div>
                 )}
 
                 {tab === 'order' && (
                     <div>
+                        <label htmlFor="lookup-order-id" style={labelStyle}>주문번호</label>
                         <input
+                            id="lookup-order-id"
                             type="text"
                             value={orderId}
                             onChange={(e) => setOrderId(e.target.value)}
                             onKeyDown={(e) => { if (e.key === 'Enter') lookupByOrderId(); }}
-                            placeholder="주문번호 (예: LP-1234567890-ABCDEF)"
+                            placeholder="예: LP-1234567890-ABCDEF"
                             style={inputStyle}
                         />
-                        <button onClick={lookupByOrderId} disabled={loading} style={btnStyle}>{loading ? '조회 중...' : '조회하기'}</button>
+                        <button onClick={lookupByOrderId} disabled={loading} className="lp-lift lp-sheen" style={btnStyle}>{loading ? '조회 중...' : '조회하기'}</button>
                     </div>
                 )}
 
                 {loading && (
-                    <div style={{ textAlign: 'center', padding: '30px 0' }}>
-                        <div style={{ width: 32, height: 32, border: '3px solid rgba(255,215,0,0.2)', borderTopColor: '#FFD700', borderRadius: '50%', animation: 'spin 0.8s linear infinite', margin: '0 auto' }} />
-                        <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', marginTop: 12 }}>조회 중...</p>
-                        <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
+                    <div style={{ textAlign: 'center', padding: '32px 0' }}>
+                        <div style={{ width: 32, height: 32, border: `3px solid ${light.line}`, borderTopColor: light.text, borderRadius: '50%', animation: 'spin 0.8s linear infinite', margin: '0 auto' }} />
+                        <p style={{ fontSize: type.small, color: light.textSecondary, marginTop: 12 }}>조회 중...</p>
                     </div>
                 )}
 
                 {orders && orders.length === 0 && (
-                    <div style={{ marginTop: 20, padding: 20, background: 'rgba(255,200,76,0.06)', border: '1px solid rgba(255,200,76,0.15)', borderRadius: 10, textAlign: 'center' }}>
-                        <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.6)' }}>주문 내역이 없습니다.</p>
+                    <div style={{ ...softBox, marginTop: 20, padding: 20, textAlign: 'center' }}>
+                        <p style={{ fontSize: type.small, color: light.textSecondary }}>주문 내역이 없습니다.</p>
                     </div>
                 )}
 
                 {orders && orders.length > 0 && orders.map((order, i) => (
-                    <div key={i} style={{ marginTop: i === 0 ? 20 : 12, padding: 16, background: 'rgba(255,215,0,0.05)', border: '1px solid rgba(255,215,0,0.18)', borderRadius: 12 }}>
+                    <div key={i} style={{ ...softBox, marginTop: i === 0 ? 20 : 12, padding: 16 }}>
                         <ResultRow label="상품" value={order.product || '—'} />
                         <ResultRow label="라이선스 코드" value={order.code || '—'} mono copy onCopy={() => order.code && copyText(order.code)} />
                         <ResultRow label="주문번호" value={order.orderId || '—'} small />
@@ -294,44 +308,45 @@ function LookupPage() {
                 {/* 정기구독 섹션 — 해지 버튼 포함 */}
                 {subscriptions && subscriptions.length > 0 && (
                     <div style={{ marginTop: 24 }}>
-                        <div style={{ fontSize: 13, color: '#FFD700', fontWeight: 700, letterSpacing: 0.5, marginBottom: 10 }}>📅 정기구독</div>
+                        <h2 style={{ fontSize: type.body, color: light.text, fontWeight: 600 }}>정기구독</h2>
                         {subscriptions.map((sub) => {
                             const isActive = sub.status === 'active';
                             const isCancelled = sub.status === 'cancelled';
                             const isExpired = sub.status === 'expired';
                             const nextDate = (sub.nextPaymentDate || '').split('T')[0];
                             const cancelDate = (sub.cancelledAt || '').split('T')[0];
-                            const accent = isActive ? '#44d7b6' : isCancelled ? '#FFA500' : '#ff5c75';
+                            // Colour carries meaning only: active = positive, expired = negative, everything else neutral.
+                            const accent = isActive ? light.positive : isExpired ? light.negative : light.textSecondary;
                             // 'paid' — 1년권 · 영구제는 한 번만 결제하고 끝난다(2026-10-07, 자동결제 없음).
                             const statusLabel = isActive ? '활성' : isCancelled ? `해지됨 (${nextDate}까지 사용 가능)` : isExpired ? '만료' : sub.status === 'paid' ? '결제 완료 (자동결제 없음)' : sub.status;
                             return (
-                                <div key={sub.licenseCode} style={{ marginTop: 12, padding: 16, background: 'rgba(255,255,255,0.04)', border: `1px solid ${accent}33`, borderRadius: 12 }}>
+                                <div key={sub.licenseCode} style={{ ...softBox, marginTop: 12, padding: 16 }}>
                                     <ResultRow label="상품" value={sub.productName} />
                                     <ResultRow label="라이선스 코드" value={sub.licenseCode || '—'} mono copy onCopy={() => sub.licenseCode && copyText(sub.licenseCode)} />
                                     <ResultRow label="결제 금액" value={sub.amount ? `${sub.amount.toLocaleString()}원` : '—'} />
                                     {sub.licenseCode && <PurchaseNextSteps product={sub.productName || ''} compact />}
                                     <ResultRow label={isActive ? '다음 결제일' : isCancelled ? '서비스 종료일' : '결제 예정일'} value={nextDate || '—'} />
-                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0' }}>
-                                        <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)' }}>상태</span>
-                                        <span style={{ fontSize: 13, color: accent, fontWeight: 700 }}>● {statusLabel}</span>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12, padding: '12px 0' }}>
+                                        <span style={{ fontSize: type.meta, color: light.textSecondary, flexShrink: 0 }}>상태</span>
+                                        <span style={{ fontSize: type.small, color: accent, fontWeight: 600, textAlign: 'right' }}>● {statusLabel}</span>
                                     </div>
                                     {isCancelled && cancelDate && (
-                                        <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', textAlign: 'right' }}>해지일: {cancelDate}</div>
+                                        <div style={{ fontSize: type.meta, color: light.textMuted, textAlign: 'right', fontVariantNumeric: 'tabular-nums' }}>해지일: {cancelDate}</div>
                                     )}
                                     {isActive && (
                                         <button
                                             onClick={() => cancelSubscription(sub)}
                                             disabled={cancellingCode === sub.licenseCode}
                                             style={{
-                                                width: '100%', marginTop: 10, padding: 10,
-                                                background: cancellingCode === sub.licenseCode ? 'rgba(255,255,255,0.06)' : 'rgba(255,92,117,0.12)',
-                                                border: '1px solid rgba(255,92,117,0.35)',
-                                                color: cancellingCode === sub.licenseCode ? 'rgba(255,255,255,0.4)' : '#ff5c75',
-                                                borderRadius: 8, fontSize: 13, fontWeight: 700,
+                                                width: '100%', minHeight: 44, marginTop: 12, padding: '0 16px',
+                                                background: cancellingCode === sub.licenseCode ? light.raised : light.surface,
+                                                border: `1px solid ${light.lineStrong}`,
+                                                color: cancellingCode === sub.licenseCode ? light.textMuted : light.negative,
+                                                borderRadius: lightRadius.control, fontSize: type.small, fontWeight: 600,
                                                 cursor: cancellingCode === sub.licenseCode ? 'not-allowed' : 'pointer',
                                             }}
                                         >
-                                            {cancellingCode === sub.licenseCode ? '해지 처리 중...' : '🛑 정기결제 해지'}
+                                            {cancellingCode === sub.licenseCode ? '해지 처리 중...' : '정기결제 해지'}
                                         </button>
                                     )}
                                 </div>
@@ -341,26 +356,26 @@ function LookupPage() {
                 )}
 
                 {notice && (
-                    <div style={{ marginTop: 20, padding: 14, background: 'rgba(68,215,182,0.08)', border: '1px solid rgba(68,215,182,0.3)', borderRadius: 10, textAlign: 'center', fontSize: 13, color: '#44d7b6', fontWeight: 600 }}>
+                    <div role="status" style={{ marginTop: 20, padding: '12px 16px', background: light.positiveSoft, borderRadius: lightRadius.control, textAlign: 'center', fontSize: type.small, color: light.positive, fontWeight: 500 }}>
                         {notice}
                     </div>
                 )}
 
                 {error && (
-                    <div style={{ marginTop: 20, padding: 16, background: 'rgba(255,92,117,0.06)', border: '1px solid rgba(255,92,117,0.15)', borderRadius: 10, textAlign: 'center' }}>
-                        <p style={{ fontSize: 14, color: '#ff5c75', fontWeight: 600, marginBottom: 4 }}>{error.title}</p>
-                        <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)' }}>{error.message}</p>
+                    <div role="alert" style={{ marginTop: 20, padding: 16, background: light.negativeSoft, borderRadius: lightRadius.control, textAlign: 'center' }}>
+                        <p style={{ fontSize: type.small, color: light.negative, fontWeight: 600, marginBottom: 4 }}>{error.title}</p>
+                        <p style={{ fontSize: type.small, color: light.text }}>{error.message}</p>
                     </div>
                 )}
             </div>
 
-            <div style={{ marginTop: 20, textAlign: 'center', fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>
+            <div style={{ marginTop: 20, textAlign: 'center', fontSize: type.meta, color: light.textMuted, lineHeight: 1.7 }}>
                 {/* 링크가 카카오 오픈채팅인데 앵커 텍스트가 이메일이라 어디로 가는지 어긋났다.
                     조회 실패한 구매자의 마지막 안내 지점이라 둘 다 명확히 준다. */}
                 조회가 되지 않으시면{' '}
-                <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener noreferrer" style={{ color: '#FFD700' }}>카카오톡 1:1 문의</a>
+                <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener noreferrer" style={inkLink}>카카오톡 1:1 문의</a>
                 {' '}또는{' '}
-                <a href="mailto:tjdgus24280@naver.com" style={{ color: '#FFD700' }}>tjdgus24280@naver.com</a>
+                <a href="mailto:tjdgus24280@naver.com" style={inkLink}>tjdgus24280@naver.com</a>
                 으로 연락해주세요.
             </div>
         </div>
@@ -369,17 +384,21 @@ function LookupPage() {
 
 function ResultRow({ label, value, mono, copy, onCopy, small, dim }: { label: string; value: string; mono?: boolean; copy?: boolean; onCopy?: () => void; small?: boolean; dim?: boolean; }) {
     return (
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-            <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', letterSpacing: 0.5 }}>{label}</span>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12, padding: '12px 0', borderBottom: `1px solid ${light.line}` }}>
+            <span style={{ fontSize: type.meta, color: light.textSecondary, flexShrink: 0 }}>{label}</span>
             <span
                 onClick={copy ? onCopy : undefined}
                 style={{
-                    fontSize: small ? 12 : 14,
+                    fontSize: small ? type.meta : type.small,
                     fontFamily: mono ? 'monospace' : 'inherit',
                     letterSpacing: mono ? 1 : 'normal',
-                    color: dim ? 'rgba(255,255,255,0.5)' : '#fff',
+                    color: dim ? light.textSecondary : light.text,
                     cursor: copy ? 'pointer' : 'default',
                     fontWeight: 500,
+                    fontVariantNumeric: 'tabular-nums',
+                    textAlign: 'right',
+                    overflowWrap: 'anywhere',
+                    minWidth: 0,
                 }}
                 title={copy ? '클릭하여 복사' : undefined}
             >{value}</span>

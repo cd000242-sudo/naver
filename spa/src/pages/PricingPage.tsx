@@ -2,9 +2,10 @@ import { Fragment, useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import ProofShowcase from '../components/ProofShowcase';
 import ProductStore, { type StorePick } from '../components/store/ProductStore';
+import StoreIcon from '../components/store/StoreIcons';
 import { getScheduledAmount, isNormalPricingActive, PRICING_SWITCH_AT_MS } from '../lib/pricingSchedule';
 import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
-import { gradient, onGold, whiteA } from '../styles/tokens';
+import { light, lightRadius, motion, type as typeScale } from '../styles/tokens';
 
 /**
  * 요금제 — 올인원 기간제 이용권.
@@ -51,7 +52,6 @@ const PLANS: Record<string, Plan[]> = {
             desc: '3개 앱을 한 번에 가볍게 시작',
             amount: 50000,
             amountCard: 55000,
-            eventLabel: '10월 1일부터 금액 인상 예정',
             period: '/ 월 (공급가)',
             features: ['Better Life Naver 이용', 'LEWORD 키워드 분석 이용', 'Leadernam Orbit 이용', '이메일 고객 지원'],
         },
@@ -60,7 +60,6 @@ const PLANS: Record<string, Plan[]> = {
             name: '올인원 3개월',
             desc: '블로그 자동화 흐름을 안정적으로 운영',
             amount: 150000,
-            eventLabel: '10월 1일부터 금액 인상 예정',
             period: '/ 3개월',
             monthly: '월 50,000원',
             features: ['Better Life Naver 이용', 'LEWORD 전체 기능 이용', 'Leadernam Orbit 이용', '우선 고객 지원'],
@@ -70,7 +69,6 @@ const PLANS: Record<string, Plan[]> = {
             name: '올인원 1년',
             desc: '가장 합리적인 전체 제품 기간권',
             amount: 500000,
-            eventLabel: '10월 1일부터 금액 인상 예정',
             period: '/ 년',
             monthly: '월 41,667원',
             badge: { text: '👑 BEST VALUE', type: 'best' },
@@ -81,7 +79,6 @@ const PLANS: Record<string, Plan[]> = {
             name: '올인원 영구제',
             desc: '한 번 구매로 장기 운영하는 영구 이용권',
             amount: 2000000,
-            eventLabel: '10월 1일부터 금액 인상 예정',
             period: '영구 이용',
             badge: { text: '🌟 LIFETIME', type: 'lifetime' },
             features: ['3개 앱 모두 영구 이용', '영구제 전용 라이선스', '장기 운영자 우선 지원', '주요 업데이트 포함'],
@@ -370,7 +367,6 @@ function buildCustomerKey(email: string): string {
     const normalPricingActive = isNormalPricingActive(pricingNow);
     const activePlans = applyPlanOverrides(PLANS[tab], siteContent);
     const pricingPage = siteContent?.pricing?.page || {};
-    const pricingBgImage = siteContent?.theme?.pricingBgImage;
     const pricingTitle = normalPricingActive
         ? (pricingPage.titleNormal || '올인원 라이선스로 시작하세요')
         : (pricingPage.title || '지금 이벤트가로 이용하세요 — 10월 1일부터 금액이 인상될 예정입니다');
@@ -392,10 +388,12 @@ function buildCustomerKey(email: string): string {
                     {pricingEventTitle}
                 </div>
                 <div>{pricingEventDesc}</div>
-                <div style={{ marginTop: 4, color: '#fff7b0', fontSize: 15 }}>
-                    {/* 인상 폭·금액은 못 박지 않는다(사장님 2026-09-06). */}
-                    {pricingPage.eventLine || '10월 1일부터 금액 인상 예정'}
-                </div>
+                {/* The dated fallback ("10월 1일부터 금액 인상 예정") is gone: that date has passed. The line shows only when the admin sets one. */}
+                {pricingPage.eventLine && (
+                    <div style={{ marginTop: 4, color: '#fff7b0', fontSize: 15 }}>
+                        {pricingPage.eventLine}
+                    </div>
+                )}
             </div>
         </div>
     );
@@ -413,43 +411,44 @@ function buildCustomerKey(email: string): string {
                 onClick={() => setTrialPwOpen(false)}
                 style={{
                     position: 'fixed', inset: 0, zIndex: 2000,
-                    background: 'rgba(3,6,12,0.72)', backdropFilter: 'blur(4px)',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20,
+                    background: 'rgba(20, 24, 28, 0.45)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16,
                 }}
             >
                 <div
                     onClick={(e) => e.stopPropagation()}
                     style={{
-                        width: '100%', maxWidth: 420, borderRadius: 20, padding: '30px 26px 26px',
-                        background: 'linear-gradient(180deg, #141821, #0c0f16)',
-                        border: '1px solid rgba(255,255,255,0.12)', boxShadow: '0 30px 90px rgba(0,0,0,0.5)',
+                        width: '100%', maxWidth: 420, borderRadius: lightRadius.panel, padding: '32px 24px 24px',
+                        background: light.surface, color: light.text,
+                        border: `1px solid ${light.line}`, boxShadow: light.shadowFloat,
                         textAlign: 'center', position: 'relative',
                     }}
                 >
                     <button
                         type="button" aria-label="닫기" onClick={() => setTrialPwOpen(false)}
                         style={{
-                            position: 'absolute', top: 14, right: 16, background: 'none', border: 'none',
-                            color: 'rgba(255,255,255,0.55)', fontSize: 22, cursor: 'pointer', lineHeight: 1,
+                            position: 'absolute', top: 4, right: 4, width: 44, height: 44,
+                            display: 'grid', placeItems: 'center', padding: 0, background: 'none', border: 'none',
+                            borderRadius: lightRadius.control, color: light.textSecondary, cursor: 'pointer',
                         }}
-                    >×</button>
-                    <div style={{ fontSize: 13, fontWeight: 700, color: '#44d7b6', letterSpacing: '0.06em', marginBottom: 6 }}>무료 체험 다운로드 비밀번호</div>
-                    <h3 id="trial-pw-title" style={{ margin: '0 0 18px', fontSize: 16, fontWeight: 700, color: 'rgba(255,255,255,0.82)' }}>아래 비밀번호를 입력하면 바로 받으실 수 있습니다</h3>
+                    ><StoreIcon name="cross" size={20} /></button>
+                    <div style={{ fontSize: typeScale.meta, fontWeight: 500, color: light.textMuted, marginBottom: 8 }}>무료 체험 다운로드 비밀번호</div>
+                    <h3 id="trial-pw-title" style={{ margin: '0 0 20px', fontSize: typeScale.body, fontWeight: 600, lineHeight: 1.5, color: light.text, wordBreak: 'keep-all' }}>아래 비밀번호를 입력하면 바로 받으실 수 있습니다</h3>
                     <div style={{
-                        fontSize: 64, fontWeight: 900, letterSpacing: '0.12em', lineHeight: 1,
-                        color: '#FFD700', textShadow: '0 4px 24px rgba(255,215,0,0.35)', margin: '4px 0 10px',
+                        fontSize: typeScale.h1, fontWeight: 700, letterSpacing: '0.12em', lineHeight: 1.2,
+                        color: light.text, fontVariantNumeric: 'tabular-nums', margin: '4px 0 12px',
                     }}>1645</div>
-                    <div style={{ fontSize: 15, fontWeight: 700, color: 'rgba(255,255,255,0.9)', marginBottom: 22 }}>모든 비밀번호 동일합니다.</div>
+                    <div style={{ fontSize: typeScale.small, fontWeight: 500, color: light.textSecondary, marginBottom: 24 }}>모든 비밀번호 동일합니다</div>
                     <button
                         type="button"
                         onClick={() => { window.location.href = '/download'; }}
                         style={{
-                            width: '100%', padding: '14px 18px', borderRadius: 12, border: 'none', cursor: 'pointer',
-                            background: 'linear-gradient(135deg, #FF6B00, #FF9500)', color: '#fff',
-                            fontSize: 16, fontWeight: 800,
+                            width: '100%', minHeight: 48, padding: '0 16px', borderRadius: lightRadius.control, border: 'none', cursor: 'pointer',
+                            background: light.btn, color: light.onBtn, fontFamily: 'inherit',
+                            fontSize: typeScale.body, fontWeight: 600,
                         }}
-                    >🚀 다운로드 페이지로 이동</button>
-                    <p style={{ margin: '14px 0 0', fontSize: 12, color: 'rgba(255,255,255,0.5)', lineHeight: 1.6 }}>
+                    >다운로드 페이지로 이동</button>
+                    <p style={{ margin: '16px 0 0', fontSize: typeScale.meta, color: light.textMuted, lineHeight: 1.6 }}>
                         이메일 답장을 기다리지 않으셔도 됩니다. 위 비밀번호를 그대로 입력하세요.
                     </p>
                 </div>
@@ -458,14 +457,8 @@ function buildCustomerKey(email: string): string {
         <div style={{
             position: 'relative',
             zIndex: 1,
-            ...(pricingBgImage ? {
-                backgroundImage: `linear-gradient(rgba(5,8,12,0.34), rgba(5,8,12,0.50)), url(${pricingBgImage})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center top',
-                backgroundAttachment: 'fixed',
-            } : {}),
         }}>
-            <section className="pricing-page-shell" style={{ padding: '140px 20px 80px', maxWidth: 1320, margin: '0 auto' }}>
+            <section className="pricing-page-shell" style={{ padding: '120px 24px 96px', maxWidth: 1200, margin: '0 auto' }}>
 
                 {/*
                   * PRICING 인트로는 뺐다(사장님 2026-08-20 "가격표에 다 보이니까").
@@ -493,22 +486,24 @@ function buildCustomerKey(email: string): string {
                      * 오른쪽 값·담기 칸에 큰 빈자리가 생겼다. 두 칸 높이가
                      * 맞아야 카드가 균형을 잡는다.
                      */
-                    .purchase-video-rotor { display: flex; flex-direction: column; gap: 8px; }
+                    .purchase-video-rotor { display: flex; flex-direction: column; gap: 12px; }
                     .purchase-video-frame {
-                        border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,.1);
-                        background: #050812;
+                        border-radius: ${lightRadius.control}px; overflow: hidden; border: 1px solid ${light.line};
+                        background: ${light.raised};
                     }
-                    .purchase-video-frame video { width: 100%; display: block; max-height: 200px; object-fit: contain; background: #050812; }
+                    .purchase-video-frame video { width: 100%; display: block; max-height: 200px; object-fit: contain; background: ${light.raised}; }
                     .purchase-video-caption { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
-                    .purchase-video-caption b { color: #7dd3fc; font-size: 12px; font-weight: 900; }
-                    .purchase-video-caption span { color: rgba(255,255,255,.62); font-size: 12.5px; }
-                    .purchase-video-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+                    .purchase-video-caption b { color: ${light.text}; font-size: ${typeScale.small}px; font-weight: 600; }
+                    .purchase-video-caption span { color: ${light.textSecondary}; font-size: ${typeScale.small}px; }
+                    .purchase-video-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
                     .purchase-video-tabs button {
-                        padding: 4px 10px; border-radius: 999px; cursor: pointer;
-                        border: 1px solid rgba(255,255,255,.12); background: none;
-                        color: rgba(255,255,255,.55); font: inherit; font-size: 11.5px; font-weight: 800;
+                        min-height: 44px; padding: 0 16px; border-radius: ${lightRadius.pill}px; cursor: pointer;
+                        border: 1px solid ${light.line}; background: ${light.surface};
+                        color: ${light.textSecondary}; font: inherit; font-size: ${typeScale.small}px; font-weight: 500;
+                        transition: border-color ${motion.fast} ${motion.ease}, color ${motion.fast} ${motion.ease};
                     }
-                    .purchase-video-tabs button.on { border-color: rgba(56,189,248,.5); background: rgba(56,189,248,.14); color: #cfefff; }
+                    .purchase-video-tabs button:hover { color: ${light.text}; }
+                    .purchase-video-tabs button.on { border-color: ${light.text}; color: ${light.text}; font-weight: 600; }
 
                     .purchase-video-side {
                         border-radius: 18px;
@@ -737,7 +732,7 @@ function buildCustomerKey(email: string): string {
 
                     @media (max-width: 640px) {
                         .pricing-page-shell {
-                            padding: 104px 12px 54px !important;
+                            padding: 96px 16px 56px !important;
                         }
 
                         .purchase-proof-showcase {
@@ -819,8 +814,9 @@ function buildCustomerKey(email: string): string {
                   * 사진이라(계절 테마) 어두운 잉크가 그대로 얹히면 안 보인다
                   * (사장님 실측 2026-08-20 "배경이 밝은 색상인 걸 감안해서").
                   */}
-                <div style={{ background: 'rgba(8, 10, 16, 0.94)', backdropFilter: 'blur(18px)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 22, padding: 'clamp(20px, 4vw, 40px)', marginBottom: 28 }}>
+                <div>
                 <ProductStore
+                    headingLevel={1}
                     /*
                      * 증거를 진열대 **위**에 둔다(사장님 지시 2026-08-21 "먼저
                      * 보이게 하면 좋지 않니 · 한눈에 잘 보이면 좋겠어").
@@ -846,9 +842,9 @@ function buildCustomerKey(email: string): string {
                      */
                     trust={(
                         <div className="st-trust">
-                            <div><b>⭐ 4.9 / 5</b><span>실사용 후기 기반</span></div>
+                            <div><b><StoreIcon name="star" size={16} />4.9 / 5</b><span>실사용 후기 기반</span></div>
                             <div><b>2,847명</b><span>현재 활성 사용자</span></div>
-                            <div><b>🛡️ 7일 환불</b><span>미사용 시 전액 환불</span></div>
+                            <div><b><StoreIcon name="shield" size={16} />7일 환불</b><span>미사용 시 전액 환불</span></div>
                         </div>
                     )}
                     /*

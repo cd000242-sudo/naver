@@ -1,5 +1,8 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import SplitWords from '../components/motion/SplitWords';
 import { useParams } from 'react-router-dom';
+import { ShellIcon } from '../components/ShellIcons';
+import { light, lightRadius, motion, type } from '../styles/tokens';
 import { buildKeywordDetail, keywordSlug, isEvergreenKeyword } from '../lib/keywordDetailContent.mjs';
 
 type SeedRow = { keyword: string; searchVolume: number; documentCount: number; opportunity: number };
@@ -55,37 +58,54 @@ function KeywordDetailPage() {
     return (
         <section className="kw-detail" aria-labelledby="kw-detail-title">
             <style>{`
-                .kw-detail { padding: 104px 16px 56px; max-width: 880px; margin: 0 auto; }
+                /* Top padding clears the fixed nav bar (72px). */
+                .kw-detail { padding: 120px 16px 64px; max-width: 880px; margin: 0 auto; }
                 .kw-detail-panel {
-                    padding: 22px; border-radius: 16px;
-                    border: 1px solid rgba(255,255,255,.12);
-                    background: rgba(8,12,20,.62); backdrop-filter: blur(6px);
+                    padding: 32px; border-radius: ${lightRadius.panel}px;
+                    border: 1px solid ${light.line}; background: ${light.surface}; box-shadow: ${light.shadowSm};
                 }
-                .kw-detail h1 { font-size: 27px; line-height: 1.34; margin: 0 0 10px; }
-                .kw-detail h2 { font-size: 17px; margin: 26px 0 10px; color: #63efd0; }
-                .kw-detail p { margin: 0 0 10px; font-size: 15px; line-height: 1.75; color: rgba(255,255,255,.86); }
-                .kw-measured-at { font-size: 13px; color: rgba(255,255,255,.6); margin: 0 0 4px; }
-                .kw-metrics { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; margin: 16px 0 6px; }
-                .kw-metric { padding: 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.04); }
-                .kw-metric strong { display: block; font-size: 20px; font-weight: 900; }
-                .kw-metric span { font-size: 12px; opacity: .7; }
-                .kw-detail ol, .kw-detail ul { margin: 0; padding-left: 20px; }
-                .kw-detail li { margin-bottom: 8px; font-size: 15px; line-height: 1.7; color: rgba(255,255,255,.86); }
+                .kw-detail h1 {
+                    margin: 0 0 12px; color: ${light.text};
+                    font-size: ${type.h2}px; font-weight: 700; line-height: 1.3;
+                }
+                .kw-detail h2 {
+                    margin: 32px 0 12px; color: ${light.text};
+                    font-size: ${type.lead}px; font-weight: 600; line-height: 1.4;
+                }
+                .kw-detail p { margin: 0 0 12px; color: ${light.textSecondary}; font-size: ${type.body}px; line-height: 1.75; }
+                .kw-detail .kw-measured-at { margin: 0 0 4px; color: ${light.textMuted}; font-size: ${type.meta}px; }
+                .kw-metrics { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; margin: 16px 0 8px; }
+                .kw-metric {
+                    padding: 16px; border-radius: ${lightRadius.card}px;
+                    border: 1px solid ${light.line}; background: ${light.raised}; text-align: right;
+                }
+                .kw-metric strong {
+                    display: block; color: ${light.text};
+                    font-size: ${type.h2}px; font-weight: 600; line-height: 1.2; font-variant-numeric: tabular-nums;
+                }
+                .kw-metric span { display: block; margin-top: 4px; color: ${light.textMuted}; font-size: ${type.meta}px; line-height: 1.45; }
+                .kw-detail ol, .kw-detail ul { margin: 0; padding-left: 24px; }
+                .kw-detail li { margin-bottom: 8px; color: ${light.textSecondary}; font-size: ${type.body}px; line-height: 1.7; }
                 .kw-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
-                .kw-links a, .kw-back {
-                    display: inline-block; padding: 8px 14px; border-radius: 999px; font-size: 13px;
-                    font-weight: 700; text-decoration: none; border: 1px solid rgba(255,255,255,.18);
-                    color: rgba(255,255,255,.9);
+                .kw-links a, .kw-back, .kw-related a {
+                    display: inline-flex; align-items: center; gap: 4px;
+                    min-height: 44px; padding: 0 16px;
+                    border: 1px solid ${light.line}; border-radius: ${lightRadius.control}px;
+                    background: ${light.surface}; color: ${light.text};
+                    font-size: ${type.small}px; font-weight: 500; text-decoration: none;
+                    transition: background-color ${motion.fast} ${motion.ease}, border-color ${motion.fast} ${motion.ease};
                 }
-                .kw-links a:hover, .kw-back:hover { border-color: rgba(105,183,255,.6); }
+                .kw-links a:hover, .kw-back:hover, .kw-related a:hover { background: ${light.raised}; border-color: ${light.lineStrong}; }
+                .kw-links a:focus-visible, .kw-back:focus-visible, .kw-related a:focus-visible { outline: 2px solid ${light.text}; outline-offset: 2px; }
                 .kw-related { display: flex; flex-wrap: wrap; gap: 8px; }
-                .kw-related a { font-size: 13px; padding: 7px 12px; border-radius: 10px; text-decoration: none;
-                    border: 1px solid rgba(244,201,93,.35); background: rgba(244,201,93,.08); color: #f4c95d; }
-                .kw-back { margin-top: 22px; }
+                .kw-back { margin-top: 32px; }
                 @media (max-width: 720px) {
-                    .kw-detail { padding: 92px 12px 44px; }
-                    .kw-detail h1 { font-size: 22px; }
-                    .kw-metrics { grid-template-columns: 1fr; }
+                    .kw-detail { padding: 96px 16px 48px; }
+                    .kw-detail-panel { padding: 20px 16px; }
+                    .kw-metrics { grid-template-columns: 1fr; gap: 8px; }
+                    .kw-metric { display: flex; flex-direction: row-reverse; align-items: baseline; justify-content: space-between; gap: 12px; padding: 12px 16px; }
+                    .kw-metric strong { font-size: ${type.h3}px; }
+                    .kw-metric span { margin-top: 0; text-align: left; }
                 }
             `}</style>
 
@@ -93,11 +113,14 @@ function KeywordDetailPage() {
                 <div className="kw-detail-panel">
                     <h1 id="kw-detail-title">{loading ? '키워드를 불러오는 중입니다' : '키워드를 찾을 수 없습니다'}</h1>
                     <p>{loading ? '잠시만 기다려 주세요.' : '주소가 바뀌었거나 목록에서 내려간 키워드일 수 있습니다.'}</p>
-                    <a className="kw-back" href="/briefing">← 무료 선정 황금키워드 전체 보기</a>
+                    <a className="kw-back" href="/briefing">
+                        <ShellIcon name="chevronLeft" size={16} />
+                        무료 선정 황금키워드 전체 보기
+                    </a>
                 </div>
             ) : (
                 <article className="kw-detail-panel">
-                    <h1 id="kw-detail-title">{detail.keyword}</h1>
+                    <h1 id="kw-detail-title"><SplitWords text={detail.keyword} /></h1>
                     <p>{detail.meaning}</p>
 
                     {detail.measuredAt && (
@@ -146,7 +169,10 @@ function KeywordDetailPage() {
                         </>
                     )}
 
-                    <a className="kw-back" href="/briefing">← 무료 선정 황금키워드 전체 보기</a>
+                    <a className="kw-back" href="/briefing">
+                        <ShellIcon name="chevronLeft" size={16} />
+                        무료 선정 황금키워드 전체 보기
+                    </a>
                 </article>
             )}
         </section>

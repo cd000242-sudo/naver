@@ -1,328 +1,293 @@
+import { light, lightRadius, motion, type } from '../../styles/tokens';
+
 /**
- * 상점 스타일 — 어두운 진열장 위의 금.
+ * Store styles, light theme.
  *
- * 값이 카드에서 제일 먼저 눈에 들어와야 한다. 값도 본문과 같은 Pretendard 다 —
- * 모노스페이스를 걸면 Windows 에서 Consolas 로 떨어져 촌스럽다(사장님 지적).
- * 대신 tabular-nums 로 자릿수를 맞추고 금속 그라데이션만 입힌다. 화려함을 여러 군데
- * 뿌리면 어디를 봐야 할지 몰라 지금 가격표처럼 정신사나워진다.
+ * The price is the first thing to read on a card. It uses the body typeface with tabular-nums
+ * (a monospace stack falls back to Consolas on Windows). Gold is used as a fill in one place only:
+ * the "All in one" add button. Every other control is neutral.
  */
 function StoreStyles() {
+    const ease = `${motion.fast} ${motion.ease}`;
     return (
         <style>{`
             .st {
-                --st-line: rgba(255,255,255,.08);
-                --st-line-2: rgba(255,255,255,.15);
-                --st-card: #101319;
-                --st-card-2: #151922;
-                --st-ink: #f1f4f9;
-                --st-dim: rgba(241,244,249,.66);
-                --st-mute: #707888;
-                --st-gold: #f0b53f;
-                --st-gold-lit: #ffd88a;
+                --st-line: ${light.line};
+                --st-line-2: ${light.lineStrong};
+                --st-card: ${light.surface};
+                --st-raised: ${light.raised};
+                --st-ink: ${light.text};
+                --st-dim: ${light.textSecondary};
+                --st-mute: ${light.textMuted};
+                --st-gold-ink: ${light.accentInk};
                 color: var(--st-ink);
-                font-size: 15px;
+                font-size: ${type.small}px;
                 line-height: 1.65;
             }
             .st *, .st *::before, .st *::after { box-sizing: border-box; }
+            .st :focus-visible { outline: 2px solid ${light.text}; outline-offset: 2px; }
 
-            .st-head { text-align: center; margin-bottom: 28px; }
-            .st-kicker { margin: 0 0 10px; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #a97b1c; }
-            .st-head h2 {
-                margin: 0 0 10px; font-size: 34px; font-weight: 700; letter-spacing: -.032em; line-height: 1.22;
-                background: linear-gradient(176deg, #ffffff 24%, #cbb18a 100%);
-                -webkit-background-clip: text; background-clip: text; color: transparent;
+            .st-head { text-align: center; margin-bottom: 32px; }
+            .st-kicker { margin: 0 0 8px; font-size: ${type.meta}px; color: var(--st-mute); }
+            .st-head h1, .st-head h2 {
+                margin: 0 0 12px; font-size: ${type.h1}px; font-weight: 700; letter-spacing: -.02em; line-height: 1.25;
+                color: var(--st-ink);
             }
-            /*
-             * 한글은 낱말 안에서 끊으면 안 된다(사장님 지적 2026-08-23).
-             * 실측 스크린샷에서 "바로 보 / 입니다" 로 잘려 있었다 — 48ch 는
-             * 한글에 맞지 않는 단위라(0 자 너비 기준) 줄이 어중간하게 잘린다.
-             * keep-all 로 낱말을 지키고, balance 로 두 줄 길이를 고른다.
-             */
+            /* Korean must not break inside a word: keep-all keeps words whole, balance evens the two lines. */
             .st-sub {
-                margin: 0 auto; max-width: 36em; color: var(--st-dim); font-size: 14.5px;
+                margin: 0 auto; max-width: 36em; color: var(--st-dim); font-size: ${type.body}px;
                 word-break: keep-all; overflow-wrap: break-word; text-wrap: balance;
             }
-            .st-rule { display: block; width: 54px; height: 1px; margin: 18px auto 0; background: linear-gradient(90deg, transparent, var(--st-gold), transparent); }
 
-            .st-terms { display: inline-flex; margin-top: 22px; padding: 4px; border: 1px solid var(--st-line-2); border-radius: 14px; background: rgba(255,255,255,.03); gap: 3px; flex-wrap: wrap; justify-content: center; }
-            /*
-             * 알약 폭이 들쭉날쭉했다 — '1년' 만 안내말이 붙어 두 배로 넓었다.
-             * 최소 폭을 줘서 줄이 맞고, 안내말은 아래 줄로 내려 폭을 안 늘린다.
-             */
-            .st-terms button {
-                display: inline-flex; flex-direction: column; align-items: center; gap: 1px;
-                min-width: 86px; padding: 7px 16px; border: 0; border-radius: 11px; background: transparent;
-                color: var(--st-dim); font-family: inherit; font-size: 13px; cursor: pointer; white-space: nowrap;
-                line-height: 1.3;
+            .st-terms {
+                position: relative; display: inline-flex; margin-top: 24px; padding: 4px; gap: 4px; flex-wrap: wrap; justify-content: center;
+                border: 1px solid var(--st-line); border-radius: ${lightRadius.card}px; background: var(--st-raised);
             }
-            .st-terms button:hover { color: #fff; }
-            .st-terms button.on { background: linear-gradient(180deg, #f7c455, var(--st-gold)); color: #171003; font-weight: 700; box-shadow: 0 3px 14px rgba(240,181,63,.3); }
-            .st-terms em { font-style: normal; font-size: 10.5px; opacity: .72; margin: 0; }
+            /* A minimum width keeps the three segments even; the note sits on its own line. */
+            .st-terms button {
+                display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 0;
+                min-width: 96px; min-height: 48px; padding: 4px 16px; border: 0; border-radius: ${lightRadius.control}px;
+                background: transparent; color: var(--st-dim); font-family: inherit; font-size: ${type.small}px; font-weight: 500;
+                position: relative; z-index: 1; cursor: pointer; white-space: nowrap; line-height: 1.3;
+                transition: color ${ease};
+            }
+            .st-terms button:hover { color: var(--st-ink); }
+            /* The dark fill is the sliding .lp-seg-ink pill (motion.css), not the button itself. */
+            .st-terms button.on { color: ${light.onBtn}; font-weight: 600; }
+            .st-terms em { font-style: normal; font-size: ${type.meta}px; font-weight: 400; margin: 0; color: var(--st-mute); }
+            .st-terms button.on em { color: rgba(255, 255, 255, .82); }
 
-            /*
-             * 알림 바가 카드 폭 전체를 가로지르는데 내용은 가운데 한 줄뿐이라
-             * 양옆이 텅 비어 보였다. 내용 폭에 맞춰 줄이고 가운데 세운다.
-             */
             .st-dday {
                 display: flex; width: fit-content; max-width: 100%;
                 align-items: center; gap: 12px; flex-wrap: wrap; justify-content: center;
-                margin: 0 auto 20px; padding: 11px 20px; border-radius: 12px;
-                border: 1px solid rgba(251,113,133,.3);
-                background: linear-gradient(90deg, rgba(251,113,133,.1), rgba(240,181,63,.08));
-                font-size: 13.3px; color: var(--st-dim);
+                margin: 0 auto 20px; padding: 12px 20px; border-radius: ${lightRadius.control}px;
+                border: 1px solid var(--st-line); background: var(--st-card);
+                font-size: ${type.small}px; color: var(--st-dim);
             }
-            .st-dday b { color: #ffb3bf; }
-            .st-dday-tag { padding: 3px 10px; border-radius: 999px; background: rgba(251,113,133,.18); color: #ffb3bf; font-size: 11.5px; font-weight: 700; }
-            .st-dday-count { font-weight: 700; color: #ffb3bf; }
+            .st-dday b { color: var(--st-ink); font-weight: 600; }
+            .st-dday-tag { padding: 4px 12px; border-radius: ${lightRadius.pill}px; background: ${light.accentSoft}; color: var(--st-gold-ink); font-size: ${type.meta}px; font-weight: 600; }
+            .st-dday-count { font-weight: 600; color: var(--st-ink); font-variant-numeric: tabular-nums; }
 
-            /*
-             * auto-fit 은 넓은 화면에서 4번째 빈 트랙을 만들어 카드 셋이 왼쪽으로
-             * 쏠렸다(사장님 실측 2026-08-20). 열 수를 못박는다 — 한 줄에 셋.
-             */
-            .st-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+            /* The column count is fixed: auto-fit left an empty fourth track on wide screens. */
+            .st-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
             @media (max-width: 980px) { .st-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-            @media (max-width: 640px) { .st-grid { grid-template-columns: minmax(0, 1fr); } }
+            @media (max-width: 640px) { .st-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; } }
+            /* Two single-product cards: two columns, no empty third cell. */
+            .st-grid.st-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            @media (max-width: 640px) { .st-grid.st-grid-2 { grid-template-columns: minmax(0, 1fr); } }
 
             .st-card {
-                position: relative; border: 1px solid var(--st-line); border-radius: 17px; overflow: hidden;
-                background: linear-gradient(180deg, var(--st-card-2), var(--st-card) 46%);
+                position: relative; border: 1px solid var(--st-line); border-radius: ${lightRadius.card}px; overflow: hidden;
+                background: var(--st-card); box-shadow: ${light.shadowSm};
                 display: flex; flex-direction: column;
+                /* transform: the 2px hover lift shared with the home page (rule in motion.css). */
+                transition: border-color ${ease}, transform 240ms ${motion.ease};
             }
-            /* 유리판에 닿는 빛 한 줄. */
-            .st-card::before { content: ''; position: absolute; inset: 0 0 auto; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.22), transparent); }
-            .st-card.on { border-color: rgba(240,181,63,.5); box-shadow: 0 0 0 1px rgba(240,181,63,.2), 0 18px 44px rgba(0,0,0,.5); }
+            /* Selected state: one gold line. */
+            .st-card.on { border-color: ${light.accent}; box-shadow: 0 0 0 1px ${light.accent}; }
 
-            .st-shot { position: relative; aspect-ratio: 16 / 9.6; overflow: hidden; background: rgba(255,255,255,.04); }
+            .st-shot { position: relative; aspect-ratio: 16 / 9.6; overflow: hidden; background: var(--st-raised); border-bottom: 1px solid var(--st-line); }
             .st-shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
-            .st-shot-glyph { display: grid; place-items: center; width: 100%; height: 100%; font-size: 44px; opacity: .55; }
-            .st-shot::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 46%, var(--st-card-2)); }
+            .st-shot-glyph { display: grid; place-items: center; width: 100%; height: 100%; font-size: 44px; color: var(--st-mute); }
             .st-flag {
-                position: absolute; left: 13px; top: 13px; z-index: 2; padding: 3px 11px; border-radius: 999px;
-                font-size: 11px; font-weight: 700;
-                background: linear-gradient(180deg, #f7c455, var(--st-gold)); color: #171003;
-                box-shadow: 0 3px 12px rgba(240,181,63,.34);
+                position: absolute; left: 12px; top: 12px; z-index: 2; padding: 4px 12px; border-radius: ${lightRadius.pill}px;
+                font-size: ${type.meta}px; font-weight: 600;
+                background: var(--st-card); color: var(--st-ink); border: 1px solid var(--st-line);
             }
-            .st-flag-web { background: rgba(52,211,153,.9); color: #06241a; box-shadow: none; }
 
-            .st-body { padding: 8px 18px 19px; display: flex; flex-direction: column; flex: 1; }
-            .st-card h3 { margin: 0 0 2px; font-size: 17px; font-weight: 700; letter-spacing: -.014em; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-            .st-evt { font-style: normal; padding: 3px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 700; background: rgba(251,113,133,.16); color: #ffb3bf; border: 1px solid rgba(251,113,133,.3); }
-            .st-tag { margin: 0 0 10px; font-size: 12px; color: var(--st-mute); }
-            .st-what { margin: 0 0 15px; font-size: 13.2px; color: var(--st-dim); flex: 1; }
-            .st-incl { list-style: none; margin: 0 0 15px; padding: 0; display: flex; flex-wrap: wrap; gap: 7px; flex: 1; align-content: flex-start; }
-            .st-incl li { padding: 4px 11px; border-radius: 8px; background: rgba(255,255,255,.055); font-size: 12px; color: var(--st-dim); }
+            .st-body { padding: 20px; display: flex; flex-direction: column; flex: 1; }
+            .st-card h3 { margin: 0 0 4px; font-size: ${type.lead}px; font-weight: 600; letter-spacing: -.01em; line-height: 1.35; color: var(--st-ink); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+            .st-glyph { color: var(--st-mute); }
+            .st-evt { font-style: normal; padding: 4px 12px; border-radius: ${lightRadius.pill}px; font-size: ${type.meta}px; font-weight: 600; background: ${light.accentSoft}; color: var(--st-gold-ink); }
+            .st-tag { margin: 0 0 12px; font-size: ${type.meta}px; color: var(--st-mute); }
+            .st-what { margin: 0 0 16px; font-size: ${type.small}px; color: var(--st-dim); flex: 1; word-break: keep-all; overflow-wrap: break-word; }
+            .st-incl { list-style: none; margin: 0 0 16px; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; flex: 1; align-content: flex-start; }
+            .st-incl li { padding: 4px 12px; border-radius: ${lightRadius.pill}px; background: var(--st-raised); border: 1px solid var(--st-line); font-size: ${type.small}px; color: var(--st-dim); }
 
-            .st-price { display: flex; align-items: baseline; gap: 8px; border-top: 1px solid var(--st-line); padding-top: 13px; }
-            .st-price s { color: var(--st-mute); font-size: 12.5px; }
+            .st-price { display: flex; align-items: baseline; gap: 8px; border-top: 1px solid var(--st-line); padding-top: 16px; }
+            .st-price s { color: var(--st-mute); font-size: ${type.meta}px; font-variant-numeric: tabular-nums; }
             .st-price b {
-                font-size: 25px; font-weight: 700; letter-spacing: -.03em;
-                font-variant-numeric: tabular-nums;
-                background: linear-gradient(176deg, #ffffff 20%, var(--st-gold-lit) 100%);
-                -webkit-background-clip: text; background-clip: text; color: transparent;
+                font-size: ${type.h2}px; font-weight: 600; letter-spacing: -.02em; line-height: 1.2;
+                font-variant-numeric: tabular-nums; color: var(--st-ink);
             }
-            .st-price i { font-style: normal; font-size: 12.5px; color: var(--st-mute); }
-            /*
-             * 큰 자리를 하루 값에 내줬으니, 이 줄이 실제 청구액을 말한다.
-             * 작지만 흐리지 않게 — 숨기는 것이 아니라 위계를 바꾼 것이다.
-             */
+            .st-price i { font-style: normal; font-size: ${type.small}px; color: var(--st-mute); }
+            /* The big slot shows the per-day figure, so this line states what is actually charged. */
             .st-permo {
-                margin: 5px 0 0; min-height: 17px; font-size: 12.5px;
+                margin: 4px 0 0; min-height: 24px; font-size: ${type.small}px;
                 color: var(--st-dim); font-variant-numeric: tabular-nums;
             }
-            .st-permo strong { color: var(--st-ink); font-weight: 800; }
-            .st-permo s { margin-right: 5px; color: var(--st-mute); }
+            .st-permo strong { color: var(--st-ink); font-weight: 600; }
+            .st-permo s { margin-right: 4px; color: var(--st-mute); }
+            .st-fine { margin: 4px 0 0; font-size: ${type.small}px; line-height: 1.6; color: var(--st-dim); }
 
-            /*
-             * 담기 버튼은 **눌러야 할 것**이라 눈에 띄어야 한다(사장님 지적 2026-08-23
-             * "담기 버튼이 눈에 띄지 않네").
-             * 예전에는 거꾸로였다 — 기본이 rgba(255,255,255,.03) 로 거의 안 보이고,
-             * 이미 담은 것만 금색이었다. 눌러야 할 쪽이 흐리면 손이 안 간다.
-             * 기본을 금색으로 세우고, 담긴 뒤에는 테두리형으로 가라앉힌다 —
-             * 그건 이미 끝난 상태지 다시 누를 일이 아니다.
-             */
+            /* Add button: neutral dark fill on product cards, gold fill on the bundle only. */
             .st-buy {
-                margin-top: 14px; padding: 13px; border: 0; border-radius: 11px;
-                background: linear-gradient(180deg, #f7c455, var(--st-gold)); color: #171003;
-                font-family: inherit; font-size: 14.5px; font-weight: 800; cursor: pointer;
-                box-shadow: 0 8px 22px rgba(240,181,63,.28);
-                transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+                display: flex; align-items: center; justify-content: center; gap: 8px;
+                margin-top: 16px; min-height: 48px; padding: 0 16px; border: 1px solid ${light.btn}; border-radius: ${lightRadius.control}px;
+                background: ${light.btn}; color: ${light.onBtn};
+                font-family: inherit; font-size: ${type.body}px; font-weight: 600; cursor: pointer;
+                transition: background-color ${ease}, border-color ${ease}, color ${ease};
             }
-            .st-buy:hover { filter: brightness(1.06); box-shadow: 0 10px 28px rgba(240,181,63,.38); }
-            .st-buy:active { transform: translateY(1px); }
-            .st-buy:focus-visible { outline: 2px solid #ffd97a; outline-offset: 2px; }
-            /* 담긴 뒤 — 상태 표시라 조용하게. 다시 누르면 빼는 것이므로 눌리기는 한다. */
-            .st-buy.on {
-                background: rgba(52,211,153,.1); color: #6ee7b7; border: 1px solid rgba(52,211,153,.45);
-                padding: 12px; font-weight: 700; box-shadow: none;
-            }
-            .st-buy.on:hover { filter: none; background: rgba(52,211,153,.16); box-shadow: none; }
+            .st-buy:hover { background: #2b3036; border-color: #2b3036; }
+            .st-bundle .st-buy { background: ${light.accent}; border-color: ${light.accent}; color: ${light.onAccent}; }
+            .st-bundle .st-buy:hover { background: #e6a800; border-color: #e6a800; }
+            /* Already added: a quiet state. Pressing again removes it, so it stays a button. */
+            .st-buy.on, .st-bundle .st-buy.on { background: var(--st-card); color: var(--st-ink); border-color: ${light.accent}; }
+            .st-buy.on:hover, .st-bundle .st-buy.on:hover { background: var(--st-raised); border-color: ${light.accent}; }
 
-            /* 올인원은 줄 전체를 쓰고 가운데 선다(사장님 지정) — span 2 는 3열에서 왼쪽으로 쏠렸다. */
-            /*
-             * 올인원은 진열대의 얼굴이다 — 맨 앞, 전체 폭.
-             * 안에서 왼쪽은 발행 영상, 오른쪽은 값과 담기다. 값만 있는 카드보다
-             * 영상이 도는 카드가 먼저 눈에 들고, 올인원이 곧 전 제품이라
-             * 전 제품 영상이 놓일 자리도 여기다(사장님 지시 2026-08-21).
-             */
-            /*
-             * 성과 카드를 커뮤니티로 옮겨 왼쪽 칸이 비었다 — 올인원이 그만큼
-             * 넓게 선다(사장님 지시 2026-08-23 "올인원을 크게 볼 수 있게").
-             * 이제 한 칸이므로 안쪽은 영상과 값이 좌우로 나뉜다.
-             */
+            /* The bundle is the face of the shelf: first, full width, stacked (media, then price and button). */
             .st-bundle {
                 grid-column: 1 / -1;
-                width: 100%; margin: 0 0 8px;
+                width: 100%; margin: 0 0 4px;
                 display: grid; grid-template-columns: minmax(0, 1fr);
                 align-items: stretch;
-                border-color: rgba(240,181,63,.42);
-                background:
-                    radial-gradient(620px 300px at 10% 0%, rgba(240,181,63,.16), transparent 66%),
-                    linear-gradient(180deg, var(--st-card-2), var(--st-card) 55%);
             }
             .st-bundle-proof {
                 padding: 20px; border-right: 1px solid var(--st-line);
                 display: flex; align-items: center; min-width: 0;
             }
             .st-bundle-proof > * { width: 100%; }
-            /*
-             * 세로로 쌓는다(사장님 지시 2026-08-23 "이렇게 가로로 말고 / 영상 /
-             * 가격버튼 이런식으로"). 좌우로 나눴더니 한쪽이 길면 다른 쪽에
-             * 빈 구멍이 생겼다 — 위아래로 두면 그 문제가 원천적으로 없다.
-             */
-            .st-bundle .st-body { padding: 26px 28px; display: flex; flex-direction: column; gap: 16px; }
+            .st-bundle .st-body { padding: 24px; display: flex; flex-direction: column; gap: 16px; }
             .st-bundle .st-body > h3, .st-bundle .st-body > .st-tag { margin: 0; }
             .st-bundle .st-incl { margin: 0; }
             .st-bundle-media { margin: 0; }
-            /* 값·신뢰지표·담기는 한 덩어리로 — 영상 아래에 선다. */
             .st-bundle-side { display: flex; flex-direction: column; gap: 12px; }
             .st-bundle-side .st-price, .st-bundle-side .st-permo,
             .st-bundle-side .st-trust, .st-bundle-side .st-buy { margin: 0; }
             .st-plain-side { display: contents; }
 
-            /* [복구] 세로 배치로 바꾸면서 아래 규칙들을 통째로 지웠었다 —
-               신뢰지표가 한 줄로 뭉개져 "4.9 / 5실사용 후기 기반" 처럼 붙어 나왔다. */
             .st-trust {
                 display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
-                gap: 10px; margin: 0; padding: 14px 10px;
-                border-radius: 12px; background: rgba(255,255,255,.05);
+                gap: 8px; margin: 0; padding: 12px 8px;
+                border-radius: ${lightRadius.control}px; background: var(--st-raised);
             }
             .st-trust div { text-align: center; min-width: 0; }
-            .st-trust b { display: block; color: var(--st-ink); font-size: 14px; font-weight: 900; white-space: nowrap; }
-            .st-trust span { display: block; margin-top: 3px; color: var(--st-mute); font-size: 11px; }
-            @media (max-width: 400px) { .st-trust b { font-size: 12.5px; } }
-            .st-bundle h3 { font-size: 21px; }
-            .st-bundle .st-price b { font-size: 30px; }
-            /* 영상은 카드 폭을 다 쓰되 너무 커지지 않게. */
+            .st-trust b { display: flex; align-items: center; justify-content: center; gap: 4px; color: var(--st-ink); font-size: ${type.small}px; font-weight: 600; white-space: nowrap; font-variant-numeric: tabular-nums; }
+            .st-trust b svg { color: var(--st-mute); }
+            .st-trust span { display: block; margin-top: 4px; color: var(--st-mute); font-size: ${type.meta}px; line-height: 1.4; word-break: keep-all; }
+            .st-bundle h3 { font-size: ${type.h3}px; }
             .st-bundle-media .purchase-video-frame video { max-height: 340px; }
 
             .st-cart {
-                margin-top: 22px; border: 1px solid rgba(240,181,63,.3); border-radius: 15px;
-                background: linear-gradient(180deg, rgba(240,181,63,.09), rgba(240,181,63,.028));
-                padding: 16px 20px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+                margin-top: 24px; border: 1px solid var(--st-line); border-radius: ${lightRadius.card}px;
+                background: var(--st-card); box-shadow: ${light.shadowFloat};
+                padding: 16px 20px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
             }
-            .st-cart-items { display: flex; gap: 7px; flex-wrap: wrap; }
-            .st-cart-items span { padding: 5px 12px; border-radius: 999px; background: rgba(255,255,255,.06); font-size: 12.5px; }
-            .st-cart-items b { color: var(--st-mute); font-weight: 400; margin-left: 5px; }
+            .st-cart-items { display: flex; gap: 8px; flex-wrap: wrap; }
+            .st-cart-items span { padding: 4px 12px; border-radius: ${lightRadius.pill}px; background: var(--st-raised); border: 1px solid var(--st-line); font-size: ${type.small}px; color: var(--st-ink); }
+            .st-cart-items b { color: var(--st-mute); font-weight: 400; margin-left: 4px; }
             .st-cart-total { margin-left: auto; text-align: right; }
-            .st-cart-total em { display: block; font-style: normal; font-size: 11.5px; color: var(--st-mute); }
-            .st-cart-total strong { font-size: 24px; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+            .st-cart-total em { display: block; font-style: normal; font-size: ${type.meta}px; color: var(--st-mute); }
+            .st-cart-total strong { font-size: ${type.h3}px; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -.02em; color: var(--st-ink); }
             .st-cart-go {
-                padding: 13px 28px; border-radius: 11px; text-decoration: none; white-space: nowrap;
-                background: linear-gradient(180deg, #f7c455, var(--st-gold)); color: #171003;
-                font-size: 14.5px; font-weight: 700; box-shadow: 0 8px 26px rgba(240,181,63,.28);
+                display: inline-flex; align-items: center; justify-content: center;
+                min-height: 48px; padding: 0 28px; border: 0; border-radius: ${lightRadius.control}px; text-decoration: none; white-space: nowrap;
+                background: ${light.btn}; color: ${light.onBtn}; cursor: pointer; font-family: inherit;
+                font-size: ${type.body}px; font-weight: 600;
+                transition: background-color ${ease};
             }
+            .st-cart-go:hover { background: #2b3036; }
 
-            /*
-             * 좌측 액센트 바를 뺐다. 이미 금색을 값과 담기 버튼에 쓰고 있어
-             * 여기까지 칠하면 어디를 봐야 할지 모르게 된다. 테두리 하나로 두고
-             * 강조는 문장 안의 숫자에만 남긴다.
-             */
-            .st-cart-go { border: 0; cursor: pointer; font-family: inherit; }
+            .st-proof { margin: 0 0 24px; }
 
-            /* 증거 — 진열대 위. 값을 보기 전에 눈에 들어와야 한다. */
-            .st-proof { margin: 0 0 22px; }
-
-            /* 값을 본 뒤 남는 물음 — 진열대 아래. 조용히 있다가 필요할 때 열린다. */
-            .st-notes { margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--st-line); }
+            /* Questions that remain after seeing the price. Quiet until opened. */
+            .st-notes { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--st-line); }
             .st-faq { margin-bottom: 12px; }
             .st-faq summary {
-                cursor: pointer; padding: 10px 0; color: var(--st-ink);
-                font-size: 13.5px; font-weight: 800;
+                cursor: pointer; min-height: 44px; padding: 8px 0; color: var(--st-ink);
+                font-size: ${type.body}px; font-weight: 600;
             }
-            .st-faq summary:hover { color: var(--st-gold-lit); }
-            .st-faq > div { padding: 4px 0 6px; display: grid; gap: 12px; }
-            .st-faq p { margin: 0; color: var(--st-dim); font-size: 13px; line-height: 1.7; }
-            .st-faq b { color: var(--st-ink); font-weight: 800; }
-            .st-note-line { margin: 8px 0 0; color: var(--st-mute); font-size: 12.5px; line-height: 1.6; }
-            .st-note-line a { color: var(--st-gold-lit); text-decoration: none; font-weight: 700; }
-            .st-note-line a:hover { text-decoration: underline; }
+            .st-faq summary:hover { color: var(--st-dim); }
+            .st-faq > div { padding: 4px 0 8px; display: grid; gap: 16px; max-width: 46em; }
+            .st-faq p { margin: 0; color: var(--st-dim); font-size: ${type.small}px; line-height: 1.7; }
+            .st-faq b { color: var(--st-ink); font-weight: 600; }
+            .st-note-line { margin: 8px 0 0; color: var(--st-dim); font-size: ${type.small}px; line-height: 1.6; }
+            .st-note-line a { color: var(--st-gold-ink); text-decoration: underline; text-underline-offset: 3px; font-weight: 500; }
 
-            /* ── 결제수단 고르기 모달 ─────────────────────── */
+            /* ── Payment method dialog ─────────────────────── */
             .st-pay-backdrop {
                 position: fixed; inset: 0; z-index: 10000; display: grid; place-items: center;
-                background: rgba(4, 6, 12, .68); backdrop-filter: blur(6px); padding: 18px;
+                background: rgba(20, 24, 28, .45); padding: 16px;
             }
             .st-pay {
-                width: min(440px, 100%); border-radius: 18px; padding: 22px;
-                max-height: calc(100vh - 36px); max-height: calc(100dvh - 36px); overflow-y: auto; overscroll-behavior: contain;
-                background: #10131c; border: 1px solid rgba(255,255,255,.1);
-                box-shadow: 0 24px 70px rgba(0,0,0,.5);
+                width: min(460px, 100%); border-radius: ${lightRadius.panel}px; padding: 24px;
+                max-height: calc(100vh - 32px); max-height: calc(100dvh - 32px); overflow-y: auto; overscroll-behavior: contain;
+                background: var(--st-card); border: 1px solid var(--st-line);
+                box-shadow: ${light.shadowFloat};
             }
-            .st-pay-head { position: relative; margin-bottom: 16px; }
-            .st-pay-head b { display: block; color: #fff; font-size: 17px; font-weight: 900; }
-            .st-pay-head span { color: var(--st-dim); font-size: 13px; }
+            .st-pay-head { position: relative; margin-bottom: 16px; padding-right: 44px; }
+            .st-pay-head b { display: block; color: var(--st-ink); font-size: ${type.lead}px; font-weight: 600; }
+            .st-pay-head span { color: var(--st-dim); font-size: ${type.small}px; }
             .st-pay-close {
-                position: absolute; top: -4px; right: -4px; border: 0; background: none;
-                color: var(--st-dim); font-size: 15px; cursor: pointer; padding: 6px;
+                position: absolute; top: -8px; right: -8px; width: 44px; height: 44px;
+                display: grid; place-items: center; border: 0; border-radius: ${lightRadius.control}px; background: none;
+                color: var(--st-dim); cursor: pointer; padding: 0;
+                transition: background-color ${ease}, color ${ease};
             }
-            .st-pay-close:hover { color: #fff; }
-            /* 담은 내역 요약 — 얼마를 내는지가 창에서 바로 보여야 한다. */
+            .st-pay-close:hover { color: var(--st-ink); background: var(--st-raised); }
+            /* Order summary: the amount must be visible inside the dialog. */
             .st-pay-sum {
-                display: flex; align-items: baseline; justify-content: space-between; gap: 10px;
-                padding: 12px 14px; border-radius: 11px; margin-bottom: 14px;
-                background: rgba(255,255,255,.04);
+                display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+                padding: 12px 16px; border-radius: ${lightRadius.control}px; margin-bottom: 16px;
+                background: var(--st-raised);
             }
-            .st-pay-sum span { color: var(--st-dim); font-size: 12.5px; }
-            .st-pay-sum b { color: var(--st-gold-lit); font-size: 19px; font-weight: 900; font-variant-numeric: tabular-nums; }
+            .st-pay-sum span { color: var(--st-dim); font-size: ${type.small}px; }
+            .st-pay-sum b { color: var(--st-ink); font-size: ${type.h3}px; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
 
-            /* 라이선스를 받을 이메일 — 로그인이 없으니 이 칸이 유일한 통로다. */
-            .st-pay-mail { display: block; margin-bottom: 14px; }
-            .st-pay-mail > span { display: block; margin-bottom: 6px; color: var(--st-ink); font-size: 13px; font-weight: 800; }
+            /* The email that receives the licence. There is no login, so this is the only channel. */
+            .st-pay-mail { display: block; margin-bottom: 16px; }
+            .st-pay-mail > span { display: block; margin-bottom: 8px; color: var(--st-ink); font-size: ${type.small}px; font-weight: 600; }
             .st-pay-mail input {
-                width: 100%; box-sizing: border-box; padding: 12px 14px; border-radius: 10px;
-                border: 1px solid rgba(255,255,255,.14); background: rgba(0,0,0,.32);
-                color: var(--st-ink); font: inherit; font-size: 14px;
+                width: 100%; box-sizing: border-box; min-height: 48px; padding: 0 16px; border-radius: ${lightRadius.control}px;
+                border: 1px solid var(--st-line-2); background: var(--st-card);
+                color: var(--st-ink); font: inherit; font-size: ${type.body}px;
             }
-            .st-pay-mail input:focus { outline: 2px solid rgba(240,181,63,.5); outline-offset: 1px; }
-            .st-pay-mail input.warn { border-color: rgba(255,107,129,.6); }
+            .st-pay-mail input::placeholder { color: var(--st-mute); }
+            .st-pay-mail input:focus { outline: 2px solid ${light.text}; outline-offset: 1px; }
+            .st-pay-mail input.warn { border-color: ${light.negative}; }
             .st-pay-mail em {
-                display: block; margin-top: 6px; font-style: normal;
-                color: var(--st-dim); font-size: 11.5px; line-height: 1.55;
+                display: block; margin-top: 8px; font-style: normal;
+                color: var(--st-dim); font-size: ${type.meta}px; line-height: 1.55;
             }
-            .st-pay-mail input.warn + em { color: #ff8fa0; }
+            .st-pay-mail input.warn + em { color: ${light.negative}; }
 
-            .st-pay-foot { margin: 14px 0 0; color: var(--st-mute); font-size: 11.5px; line-height: 1.6; }
+            .st-pay-consent {
+                display: flex; gap: 12px; align-items: flex-start; margin: 16px 0; padding: 16px;
+                border-radius: ${lightRadius.control}px; background: var(--st-raised);
+                color: var(--st-ink); font-size: ${type.small}px; line-height: 1.7;
+            }
+            .st-pay-consent input { width: 20px; height: 20px; margin: 2px 0 0; flex-shrink: 0; accent-color: ${light.btn}; }
+            .st-pay-consent a { color: var(--st-gold-ink); text-decoration: underline; text-underline-offset: 3px; }
+            .st-pay-term { margin: 16px 0 0; color: var(--st-dim); font-size: ${type.small}px; line-height: 1.7; }
+            .st-pay-foot { margin: 12px 0 0; color: var(--st-mute); font-size: ${type.meta}px; line-height: 1.6; }
 
             .st-pay-opt {
-                display: flex; align-items: center; gap: 13px; width: 100%; box-sizing: border-box;
-                padding: 15px 16px; margin-top: 10px; border-radius: 13px; text-align: left;
-                border: 1px solid rgba(255,255,255,.11); background: rgba(255,255,255,.03);
-                color: inherit; text-decoration: none; cursor: pointer; font-family: inherit;
+                display: flex; align-items: center; gap: 12px; width: 100%; box-sizing: border-box;
+                min-height: 64px; padding: 12px 16px; margin-top: 8px; border-radius: ${lightRadius.control}px; text-align: left;
+                border: 1px solid var(--st-line-2); background: var(--st-card);
+                color: var(--st-ink); text-decoration: none; cursor: pointer; font-family: inherit;
+                transition: background-color ${ease}, border-color ${ease};
             }
-            .st-pay-opt:hover { border-color: rgba(240,181,63,.5); background: rgba(240,181,63,.06); }
-            .st-pay-ico { font-size: 22px; }
+            .st-pay-opt:hover { border-color: var(--st-ink); background: var(--st-raised); }
+            .st-pay-ico { display: grid; place-items: center; color: var(--st-dim); }
             .st-pay-body { flex: 1; min-width: 0; }
-            .st-pay-body b { display: block; color: #fff; font-size: 15px; font-weight: 800; }
-            .st-pay-body em { font-style: normal; color: var(--st-dim); font-size: 12.5px; line-height: 1.5; }
-            .st-pay-opt i { color: var(--st-gold-lit); font-style: normal; font-weight: 800; }
+            .st-pay-body b { display: block; color: var(--st-ink); font-size: ${type.body}px; font-weight: 600; }
+            .st-pay-body em { font-style: normal; color: var(--st-dim); font-size: ${type.meta}px; line-height: 1.5; font-variant-numeric: tabular-nums; }
+            .st-pay-opt i { display: grid; place-items: center; color: var(--st-mute); font-style: normal; }
 
-            .st-swap { margin-top: 13px; padding: 14px 17px; border: 1px solid rgba(240,181,63,.22); background: rgba(240,181,63,.05); border-radius: 12px; font-size: 13.6px; line-height: 1.62; color: var(--st-dim); }
-            .st-swap b { color: var(--st-gold-lit); }
-            .st-swap button { margin-left: 6px; padding: 0; border: 0; background: none; cursor: pointer; font-family: inherit; font-size: 13.6px; color: var(--st-gold-lit); border-bottom: 1px solid rgba(255,216,138,.45); }
+            .st-swap { margin-top: 12px; padding: 16px 20px; border: 1px solid var(--st-line); background: var(--st-raised); border-radius: ${lightRadius.control}px; font-size: ${type.small}px; line-height: 1.6; color: var(--st-dim); font-variant-numeric: tabular-nums; }
+            .st-swap b { color: var(--st-ink); font-weight: 600; }
+            .st-swap button { display: inline-flex; align-items: center; min-height: 44px; margin-left: 8px; padding: 0; border: 0; background: none; cursor: pointer; font-family: inherit; font-size: ${type.small}px; font-weight: 500; color: var(--st-gold-ink); text-decoration: underline; text-underline-offset: 3px; }
 
             @media (max-width: 720px) {
-                .st-head h2 { font-size: 26px; }
+                .st-head h1, .st-head h2 { font-size: ${type.h1Mobile}px; }
+                .st-sub { font-size: ${type.small}px; }
                 .st-cart-total { margin-left: 0; text-align: left; }
+                .st-cart-go { width: 100%; }
+            }
+            @media (max-width: 640px) {
+                .st-bundle .st-body { padding: 16px; }
+                .st-terms button { min-width: 88px; padding: 4px 12px; }
             }
         `}</style>
     );

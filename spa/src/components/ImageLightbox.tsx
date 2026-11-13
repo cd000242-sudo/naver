@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import { light, lightRadius, type } from '../styles/tokens';
 
 export type LightboxImage = {
     src: string;
@@ -49,93 +50,94 @@ function ImageLightbox({ image, onClose }: ImageLightboxProps) {
                     align-items: center;
                     justify-content: center;
                     padding: 28px;
-                    background: rgba(3, 7, 18, 0.82);
-                    backdrop-filter: blur(18px);
+                    /* The dark veil stays: it is there so the picture can be read. */
+                    background: rgba(20, 24, 28, 0.72);
                 }
                 .image-lightbox-panel {
                     position: relative;
                     width: min(1180px, 100%);
                     max-height: calc(100vh - 56px);
-                    padding: 18px;
-                    border: 1px solid rgba(255,255,255,0.18);
-                    border-radius: 14px;
-                    background: linear-gradient(180deg, rgba(15,23,42,0.96), rgba(4,8,18,0.98));
-                    box-shadow: 0 28px 100px rgba(0,0,0,0.55);
+                    padding: 16px;
+                    border: 1px solid ${light.line};
+                    border-radius: ${lightRadius.card}px;
+                    background: ${light.surface};
+                    box-shadow: ${light.shadowFloat};
                 }
                 .image-lightbox-scroll {
                     max-height: calc(100vh - 146px);
                     overflow: auto;
                     overscroll-behavior: contain;
-                    border-radius: 10px;
-                    background: #020617;
+                    border-radius: ${lightRadius.control}px;
+                    background: ${light.raised};
                     scrollbar-width: thin;
-                    scrollbar-color: rgba(244, 201, 93, 0.78) rgba(15, 23, 42, 0.92);
+                    scrollbar-color: ${light.lineStrong} ${light.raised};
                 }
                 .image-lightbox-scroll::-webkit-scrollbar {
                     width: 12px;
                     height: 12px;
                 }
                 .image-lightbox-scroll::-webkit-scrollbar-track {
-                    background: rgba(15, 23, 42, 0.92);
+                    background: ${light.raised};
                     border-radius: 999px;
                 }
                 .image-lightbox-scroll::-webkit-scrollbar-thumb {
-                    background: linear-gradient(180deg, rgba(244, 201, 93, 0.95), rgba(68, 215, 182, 0.85));
-                    border: 3px solid rgba(15, 23, 42, 0.92);
+                    background: ${light.lineStrong};
+                    border: 3px solid ${light.raised};
                     border-radius: 999px;
                 }
                 .image-lightbox-panel img {
                     display: block;
                     width: 100%;
                     height: auto;
-                    border-radius: 10px;
-                    background: #020617;
+                    border-radius: ${lightRadius.control}px;
+                    background: ${light.raised};
                 }
                 .image-lightbox-title {
-                    margin: 12px 48px 0 2px;
-                    color: #e5edf7;
-                    font-size: 15px;
-                    font-weight: 800;
+                    margin: 12px 56px 0 4px;
+                    color: ${light.text};
+                    font-size: ${type.small}px;
+                    font-weight: 600;
                     line-height: 1.45;
                 }
                 .image-lightbox-close {
                     position: absolute;
-                    top: 14px;
-                    right: 14px;
-                    width: 38px;
-                    height: 38px;
-                    border: 1px solid rgba(255,255,255,0.18);
-                    border-radius: 999px;
-                    background: rgba(15,23,42,0.82);
-                    color: #ffffff;
+                    top: 8px;
+                    right: 8px;
+                    width: 44px;
+                    height: 44px;
+                    padding: 0;
+                    border: 1px solid ${light.line};
+                    border-radius: ${lightRadius.control}px;
+                    background: ${light.surface};
+                    color: ${light.text};
                     cursor: pointer;
                     font-size: 24px;
                     line-height: 1;
                 }
                 .image-lightbox-close:hover {
-                    background: rgba(244, 201, 93, 0.22);
-                    border-color: rgba(244, 201, 93, 0.55);
+                    background: ${light.raised};
+                    border-color: ${light.lineStrong};
+                }
+                .image-lightbox-close:focus-visible {
+                    outline: 2px solid ${light.text};
+                    outline-offset: 2px;
                 }
                 @media (max-width: 640px) {
                     .image-lightbox-backdrop {
-                        padding: 14px;
+                        padding: 12px;
                     }
                     .image-lightbox-panel {
-                        padding: 10px;
-                        border-radius: 12px;
+                        padding: 8px;
                     }
                     .image-lightbox-scroll {
                         max-height: calc(100vh - 116px);
                     }
                     .image-lightbox-title {
-                        margin-right: 42px;
-                        font-size: 13px;
+                        font-size: ${type.meta}px;
                     }
                     .image-lightbox-close {
-                        width: 34px;
-                        height: 34px;
-                        top: 10px;
-                        right: 10px;
+                        top: 4px;
+                        right: 4px;
                     }
                 }
             `}</style>

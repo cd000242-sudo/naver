@@ -6,54 +6,57 @@
  * 스타일은 .pp 범위 안에만 둔다.
  */
 import { useState, type ReactNode } from 'react';
+import CountUp from '../motion/CountUp';
 import { TERMS, isTaxIncludedPrice, won, type Product } from '../../lib/productCatalog';
+import { light, lightRadius, motion, type } from '../../styles/tokens';
 
 export function ProductsExtrasStyles() {
+    const ease = `${motion.fast} ${motion.ease}`;
     return (
         <style>{`
 .pp-pb .pp-pb-frame { position:relative; }
 .pp-pb .pp-pb-frame > picture { display:block; }
-.pp-pb .pp-pb-frame > picture > img { display:block; width:100%; aspect-ratio:4 / 3; object-fit:cover; object-position:top center; background:#0d0d14; }
+.pp-pb .pp-pb-frame > picture > img { display:block; width:100%; aspect-ratio:4 / 3; object-fit:cover; object-position:top center; background:var(--pp-raised); }
 .pp-pb .pp-pb-frame > picture > img.left { object-position:left top; }
-.pp-pb-clip { position:absolute; right:14px; bottom:14px; width:30%; max-width:230px; display:block; border-radius:10px; border:1px solid var(--pp-line-strong); background:#000;
-  box-shadow:0 18px 40px -16px rgba(0,0,0,.95); }
+.pp-pb-clip { position:absolute; right:12px; bottom:12px; width:30%; max-width:230px; display:block; border-radius:${lightRadius.control}px; border:1px solid var(--pp-line); background:var(--pp-raised);
+  box-shadow:${light.shadowFloat}; }
 .pp-switch { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 24px; }
-.pp-switch button { font:inherit; cursor:pointer; min-height:40px; padding:7px 14px; border-radius:999px; border:1px solid var(--pp-line-strong); background:rgba(255,255,255,.03);
-  color:var(--pp-ink-2); font-size:14.5px; font-weight:600; transition:color .18s, border-color .18s, background .18s; }
-.pp-switch button:hover { color:var(--pp-ink); border-color:rgba(255,198,26,.45); }
-.pp-switch button[aria-pressed="true"] { color:var(--pp-gold); border-color:var(--pp-gold); background:rgba(255,198,26,.08); }
-.pp-band p.pp-pb-price { display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 18px; margin:0 0 24px; color:var(--pp-ink-2); font-size:16px; }
-.pp-pb-price b { color:var(--pp-ink); font-weight:800; }
-.pp-pb-price small { margin-left:6px; color:var(--pp-ink-3); font-size:13px; font-weight:600; }
-.pp-pb-price .pp-pb-vat { color:var(--pp-ink-3); font-size:13.5px; }
-.pp-pb-links { display:flex; flex-wrap:wrap; align-items:center; gap:10px 22px; }
-.pp-pb-links .pp-btn { min-height:52px; padding:0 22px; font-size:16.5px; }
-.pp-pb-link { display:inline-flex; align-items:center; gap:6px; color:var(--pp-gold); font-weight:700; font-size:16px; }
-.pp-pb-link svg { width:17px; height:17px; transition:transform .18s cubic-bezier(.2,.8,.2,1); }
-.pp-pb-link:hover svg { transform:translateX(3px); }
+.pp-switch button { font:inherit; cursor:pointer; min-height:44px; padding:4px 16px; border-radius:${lightRadius.pill}px; border:1px solid var(--pp-line); background:var(--pp-panel);
+  color:var(--pp-ink-2); font-size:${type.small}px; font-weight:500; transition:color ${ease}, border-color ${ease}, background-color ${ease}; }
+.pp-switch button:hover { color:var(--pp-ink); border-color:var(--pp-line-strong); }
+.pp-switch button[aria-pressed="true"] { color:var(--pp-gold); border-color:${light.accentLine}; background:${light.accentSoft}; font-weight:600; }
+.pp-band p.pp-pb-price { display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 16px; margin:0 0 24px; color:var(--pp-ink-2); font-size:${type.small}px; }
+.pp-pb-price b { color:var(--pp-ink); font-size:${type.body}px; font-weight:600; }
+.pp-pb-price small { margin-left:4px; color:var(--pp-ink-3); font-size:${type.meta}px; font-weight:400; }
+.pp-pb-price .pp-pb-vat { color:var(--pp-ink-3); font-size:${type.meta}px; }
+.pp-pb-links { display:flex; flex-wrap:wrap; align-items:center; gap:8px 24px; }
+.pp-pb-links .pp-btn { min-height:48px; padding:0 20px; }
+.pp-pb-link { display:inline-flex; align-items:center; gap:4px; min-height:44px; color:var(--pp-gold); font-weight:600; font-size:${type.small}px; }
+.pp-pb-link svg { width:16px; height:16px; transition:transform ${ease}; }
+.pp-pb-link:hover svg { transform:translateX(2px); }
 
-.pp-plist { margin:44px 0 0; padding:0; list-style:none; border:1px solid var(--pp-line-strong); border-radius:20px; overflow:hidden; }
-.pp-plist li { display:grid; grid-template-columns:minmax(0,1.4fr) repeat(3, minmax(0,1fr)); gap:16px; align-items:center; padding:24px 30px; border-top:1px solid var(--pp-line); }
+/* Price table: one thin line between rows, numbers right-aligned in their columns. */
+.pp-plist { margin:40px 0 0; padding:0; list-style:none; border:1px solid var(--pp-line); border-radius:${lightRadius.panel}px; background:var(--pp-panel); box-shadow:${light.shadowSm}; overflow:hidden; }
+.pp-plist li { display:grid; grid-template-columns:minmax(0,1.4fr) repeat(3, minmax(0,1fr)); gap:16px; align-items:center; padding:20px 32px; border-top:1px solid var(--pp-line); }
 .pp-plist li:first-child { border-top:0; }
-.pp-plist li.pp-plist-head { padding:14px 30px; background:rgba(255,255,255,.02); color:var(--pp-ink-3); font-size:14px; font-weight:700; }
-.pp-plist li.ours { background:rgba(255,198,26,.045); }
-.pp-plist-name b { display:block; font-size:19px; font-weight:800; letter-spacing:-.02em; }
+.pp-plist li.pp-plist-head { padding:12px 32px; background:var(--pp-raised); color:var(--pp-ink-3); font-size:${type.meta}px; font-weight:500; }
+.pp-plist li.pp-plist-head span + span { text-align:right; }
+.pp-plist li.ours { background:${light.accentSoft}; }
+.pp-plist-name b { display:block; font-size:${type.body}px; font-weight:600; letter-spacing:-.01em; }
 .pp-plist li.ours .pp-plist-name b { color:var(--pp-gold); }
-.pp-plist-name span { color:var(--pp-ink-3); font-size:14.5px; }
-.pp-plist-cell { font-size:19px; font-weight:800; letter-spacing:-.01em; }
-.pp-plist-cell small { display:block; margin-top:2px; color:var(--pp-ink-3); font-size:13px; font-weight:600; }
-.pp-plist-cell.none { color:var(--pp-ink-3); font-size:15px; font-weight:600; }
+.pp-plist-name span { color:var(--pp-ink-3); font-size:${type.small}px; }
+.pp-plist-cell { text-align:right; font-size:${type.body}px; font-weight:600; }
+.pp-plist-cell small { display:block; margin-top:4px; color:var(--pp-ink-3); font-size:${type.meta}px; font-weight:400; }
+.pp-plist-cell.none { color:var(--pp-ink-3); font-size:${type.small}px; font-weight:400; }
 .pp-plist-term { display:none; }
 
 @media (max-width: 720px) {
-  .pp-switch button { min-height:44px; }
-  .pp-pb-clip { right:10px; bottom:10px; width:34%; }
-  .pp-plist li { grid-template-columns:repeat(3, minmax(0,1fr)); gap:12px 10px; padding:20px 18px; align-items:start; }
+  .pp-pb-clip { right:8px; bottom:8px; width:34%; }
+  .pp-plist li { grid-template-columns:repeat(3, minmax(0,1fr)); gap:12px 8px; padding:20px 16px; align-items:start; }
   .pp-plist li.pp-plist-head { display:none; }
   .pp-plist-name { grid-column:1 / -1; }
-  .pp-plist-term { display:block; color:var(--pp-ink-3); font-size:12.5px; font-weight:600; }
-  .pp-plist-cell { font-size:15.5px; }
-  .pp-plist-cell.none { font-size:14px; }
+  .pp-plist-term { display:block; color:var(--pp-ink-3); font-size:${type.meta}px; font-weight:400; }
+  .pp-plist-cell { text-align:left; font-size:${type.small}px; }
 }
 `}</style>
     );
@@ -113,7 +116,7 @@ export function BandPrice({ product }: { product: Product }) {
         <p className="pp-pb-price pp-num">
             {cells.map(({ term, price }) => (
                 <span key={term.id}>
-                    {term.label} <b>{won(price)}원</b>
+                    {term.label} <b><CountUp value={price} format={won} reserve />원</b>
                     {isTaxIncludedPrice(product, term.id) && <small>부가세 포함</small>}
                 </span>
             ))}
@@ -141,7 +144,7 @@ export function PriceTable({ products }: { products: Product[] }) {
                         return (
                             <span key={term.id} className="pp-plist-cell">
                                 <span className="pp-plist-term">{term.label}</span>
-                                {won(price)}원
+                                <CountUp value={price} format={won} reserve />원
                                 {isTaxIncludedPrice(product, term.id) && <small>부가세 포함{product.id === 'leword' && term.id === 'monthly' ? ' · 30일 자동결제' : ''}</small>}
                             </span>
                         );

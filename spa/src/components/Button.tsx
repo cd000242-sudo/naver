@@ -1,6 +1,6 @@
 import type { CSSProperties, ReactNode, MouseEventHandler } from 'react';
 import { Link } from 'react-router-dom';
-import { color, gradient, onGold, radius, whiteA } from '../styles/tokens';
+import { light, lightRadius, motion, type } from '../styles/tokens';
 
 /**
  * 공용 버튼 — 사이트의 모든 CTA 가 같은 모양을 갖게 하는 한 곳.
@@ -52,44 +52,43 @@ type AnchorProps = CommonProps & {
 
 type Props = ButtonElementProps | LinkProps | AnchorProps;
 
-/** 크기 계단 — 기존 CTA 들이 실제로 쓰던 값에서 추린 3단계. */
+/** Size steps. Every size keeps the 44px touch height and the control radius (10). */
 const SIZES: Record<ButtonSize, CSSProperties> = {
-    sm: { padding: '10px 20px', fontSize: 14, borderRadius: radius.sm },
-    md: { padding: '12px 24px', fontSize: 15, borderRadius: radius.md },
-    lg: { padding: 18, fontSize: 16, borderRadius: radius.xl },
+    sm: { padding: '8px 16px', fontSize: type.small, borderRadius: lightRadius.control },
+    md: { padding: '12px 24px', fontSize: type.small, borderRadius: lightRadius.control },
+    lg: { padding: '16px 28px', fontSize: type.body, borderRadius: lightRadius.control },
 };
 
 /**
- * 주 버튼의 골드는 goldBright 하나로 모은다.
- * 사용처가 더 많고(10곳 vs 5곳), 결제·요금제처럼 실제로 돈이 오가는
- * 화면이 이미 이 갈래를 쓰고 있어서 바꿀 때 위험이 가장 작다.
+ * Light theme. The primary button is the one gold fill on a screen (dark text on it).
+ * Secondary is a white surface with a quiet line; ghost is text only.
  */
 const VARIANTS: Record<ButtonVariant, CSSProperties> = {
     primary: {
-        background: gradient.goldBright,
-        color: onGold.black,
-        border: 'none',
-        fontWeight: 800,
+        background: light.accent,
+        color: light.onAccent,
+        border: '1px solid transparent',
+        fontWeight: 600,
     },
     secondary: {
-        background: whiteA(0.05),
-        color: color.textPrimary,
-        border: `1px solid ${whiteA(0.12)}`,
-        fontWeight: 700,
+        background: light.surface,
+        color: light.text,
+        border: `1px solid ${light.lineStrong}`,
+        fontWeight: 600,
     },
     ghost: {
         background: 'transparent',
-        color: whiteA(0.7),
-        border: 'none',
-        fontWeight: 600,
+        color: light.textSecondary,
+        border: '1px solid transparent',
+        fontWeight: 500,
     },
 };
 
-/** 비활성 모양 — 결제·주문 버튼이 쓰던 값을 그대로 표준으로 삼는다. */
+/** Disabled look: a flat raised surface with muted text. */
 const DISABLED: CSSProperties = {
-    background: whiteA(0.08),
-    color: whiteA(0.4),
-    border: 'none',
+    background: light.raised,
+    color: light.textMuted,
+    border: `1px solid ${light.line}`,
     cursor: 'not-allowed',
 };
 
@@ -116,6 +115,8 @@ function Button(props: Props) {
         cursor: 'pointer',
         // 모바일 터치 타깃 최소 높이 — 접근성 기준(44px)에 맞춘다.
         minHeight: 44,
+        boxSizing: 'border-box',
+        transition: `background-color ${motion.fast} ${motion.ease}, border-color ${motion.fast} ${motion.ease}, color ${motion.fast} ${motion.ease}`,
         ...SIZES[size],
         ...VARIANTS[variant],
         ...(isDisabled ? DISABLED : null),
