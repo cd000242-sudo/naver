@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T20:59:05.762Z",
+ "builtAt": "2026-11-13T21:09:09.750Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,10 +8,42 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 29,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "모레노호, 사우디에 2-3 패배",
+   "keyword": "2026년 11월 14일 운세",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 3,
+   "press": 3,
+   "firstArticleAt": "2026-11-13T20:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오늘의 운세] 2026년 11월 14일 띠별 운세",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-13T21:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006409734?sid=103"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 14일 별자리 운세",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-13T21:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006409735?sid=103"
+    },
+    {
+     "title": "[백운산 오늘의 운세] 2026년 11월 14일",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-13T21:00:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20260914001435471"
+    }
+   ]
+  },
+  {
+   "keyword": "모레노호 사우디에 2-3 패배",
    "sources": [
     "signal.bz"
    ],
@@ -45,15 +77,22 @@
   {
    "keyword": "이란",
    "sources": [
+    "signal.bz",
     "google"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-13T19:35:00.000Z",
+   "firstArticleAt": "2026-11-13T20:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이란의 '제주도' 게슘, 전쟁통에 관광 초토화 [박종원의 그때 여기]",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-13T21:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005604160?sid=104"
+    },
     {
      "title": "美 “바레인 향하던 이란 드론 2대 격추”…레이더 타격 주장 부인",
      "press": "edaily.co.kr",
@@ -65,81 +104,75 @@
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-13T20:01:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/079/0004209755?sid=100"
-    },
-    {
-     "title": "\"이스라엘 모사드 국장, CIA국장 만난다\"…이란 공격 부추기나",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-13T19:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001402951?sid=104"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 429,
-  "matched": 171,
-  "avgLeadMin": 369,
+  "flagged": 431,
+  "matched": 180,
+  "avgLeadMin": 365,
   "recent": [
+   {
+    "keyword": "손흥민 사우디전 96라인",
+    "hitKeyword": "한국 축구 사우디전 패배",
+    "hitAt": "2026-11-14T06:00:00+09:00",
+    "leadMin": 354
+   },
+   {
+    "keyword": "엔비디아 GPU 26만장 공급",
+    "hitKeyword": "엔비디아 투자 경고",
+    "hitAt": "2026-11-14T06:00:00+09:00",
+    "leadMin": 354
+   },
+   {
+    "keyword": "구성환 4대",
+    "hitKeyword": "구성환 고교 4대천왕",
+    "hitAt": "2026-11-14T06:00:00+09:00",
+    "leadMin": 343
+   },
+   {
+    "keyword": "젠슨 황 퇴진 엔비디아 위기",
+    "hitKeyword": "엔비디아 투자 경고",
+    "hitAt": "2026-11-14T06:00:00+09:00",
+    "leadMin": 343
+   },
+   {
+    "keyword": "구성환 전여친 재회",
+    "hitKeyword": "구성환 고교 4대천왕",
+    "hitAt": "2026-11-14T06:00:00+09:00",
+    "leadMin": 323
+   },
+   {
+    "keyword": "젠슨 황과 엔비디아",
+    "hitKeyword": "엔비디아 투자 경고",
+    "hitAt": "2026-11-14T06:00:00+09:00",
+    "leadMin": 313
+   },
+   {
+    "keyword": "구성환",
+    "hitKeyword": "구성환 고교 4대천왕",
+    "hitAt": "2026-11-14T06:00:00+09:00",
+    "leadMin": 303
+   },
+   {
+    "keyword": "젠슨 황과 엔비디아 위기",
+    "hitKeyword": "엔비디아 투자 경고",
+    "hitAt": "2026-11-14T06:00:00+09:00",
+    "leadMin": 212
+   },
+   {
+    "keyword": "한국, 일본에 5-9 패배",
+    "hitKeyword": "한국 축구 사우디전 패배",
+    "hitAt": "2026-11-14T06:00:00+09:00",
+    "leadMin": 21
+   },
    {
     "keyword": "송혜교·공유 12월 11일 공개",
     "hitKeyword": "송혜교 공유 천천히 강렬하게",
     "hitAt": "2026-11-14T00:00:00+09:00",
     "leadMin": 777
-   },
-   {
-    "keyword": "금융보안원 정보유출 사과",
-    "hitKeyword": "모두의 창업 정보유출",
-    "hitAt": "2026-11-13T22:30:00+09:00",
-    "leadMin": 2123
-   },
-   {
-    "keyword": "50대 남성 구속영장",
-    "hitKeyword": "성북 소녀 살해 50대 구속",
-    "hitAt": "2026-11-13T22:30:00+09:00",
-    "leadMin": 1665
-   },
-   {
-    "keyword": "플라이빗 해킹 정보유출",
-    "hitKeyword": "모두의 창업 정보유출",
-    "hitAt": "2026-11-13T22:30:00+09:00",
-    "leadMin": 1645
-   },
-   {
-    "keyword": "50대 남성 구속청구",
-    "hitKeyword": "성북 소녀 살해 50대 구속",
-    "hitAt": "2026-11-13T22:30:00+09:00",
-    "leadMin": 1605
-   },
-   {
-    "keyword": "50대 남성 구속영장 청구",
-    "hitKeyword": "성북 소녀 살해 50대 구속",
-    "hitAt": "2026-11-13T22:30:00+09:00",
-    "leadMin": 1585
-   },
-   {
-    "keyword": "세브란스 50대 송치",
-    "hitKeyword": "성북 소녀 살해 50대 구속",
-    "hitAt": "2026-11-13T22:30:00+09:00",
-    "leadMin": 767
-   },
-   {
-    "keyword": "50대 남성 구속심사 포기",
-    "hitKeyword": "성북 소녀 살해 50대 구속",
-    "hitAt": "2026-11-13T22:30:00+09:00",
-    "leadMin": 656
-   },
-   {
-    "keyword": "사우디 훈련하는 축구",
-    "hitKeyword": "한국 사우디 축구 평가전",
-    "hitAt": "2026-11-13T22:00:00+09:00",
-    "leadMin": 2335
-   },
-   {
-    "keyword": "강동원·김고은, 혼: 삼각의 시간",
-    "hitKeyword": "강동원 혼 삼각의 시간",
-    "hitAt": "2026-11-13T22:00:00+09:00",
-    "leadMin": 2093
    }
   ]
  }
