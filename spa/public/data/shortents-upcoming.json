@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T23:20:08.409Z",
+ "builtAt": "2026-11-13T23:30:11.613Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "뉴욕증시 혼조",
+   "keyword": "미국 전역 중단",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 19,
-   "recent20": 1,
-   "press": 18,
-   "firstArticleAt": "2026-11-13T21:54:00.000Z",
+   "articles90": 30,
+   "recent20": 9,
+   "press": 26,
+   "firstArticleAt": "2026-11-13T22:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보]뉴욕증시 혼조 마감…다우 상승에도 나스닥 0.91% 하락, 엔비디아...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-13T23:06:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=626842"
+     "title": "(2보)美 전역 항공기 이륙 중단…8000편 지연·400편 결항",
+     "press": "kbmaeil.com",
+     "publishedAt": "2026-11-13T23:28:00.000Z",
+     "link": "https://www.kbmaeil.com/article/20261114500028"
     },
     {
-     "title": "뉴욕증시, 엔비디아 사태 확산·연준 AI 고평가 경고에 혼조 마감",
-     "press": "globale.co.kr",
-     "publishedAt": "2026-11-13T22:56:00.000Z",
-     "link": "https://www.globale.co.kr/news/articleView.html?idxno=41641"
+     "title": "[속보] 미국 전역 항공기 이륙 전면 중단…관제 통신 장애에 초유의 사...",
+     "press": "pointe.co.kr",
+     "publishedAt": "2026-11-13T23:28:00.000Z",
+     "link": "https://www.pointe.co.kr/news/articleView.html?idxno=87767"
     },
     {
-     "title": "뉴욕증시, 엔비디아 하락에 나스닥 0.91%↓ 혼조 마감",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-13T22:56:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000082579"
+     "title": "美전역 항공기 운항 ‘올스톱’...“사이버 공격 아닌 통신 장애”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-13T23:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004682119?sid=104"
     }
    ]
   },
   {
-   "keyword": "美전역 항공 중단",
+   "keyword": "집",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 17,
-   "recent20": 5,
-   "press": 14,
-   "firstArticleAt": "2026-11-13T21:53:00.000Z",
+   "articles90": 19,
+   "recent20": 2,
+   "press": 16,
+   "firstArticleAt": "2026-11-13T22:05:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "美 전역 항공기 이륙 전면 중단…관제센터 통신 장애에 7800편 지연",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-13T23:12:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2648135"
+     "title": "[윤준의 부동산수첩] 집값 안정인가, 거래 정지인가",
+     "press": "nbntv.kr",
+     "publishedAt": "2026-11-13T23:20:00.000Z",
+     "link": "https://www.nbntv.kr/news/articleView.html?idxno=341079"
     },
     {
-     "title": "美 하늘길 멈췄다…FAA \"항공로 관제센터 통신 장애\", 사이버공격 배제...",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-13T23:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002248531?sid=105"
+     "title": "형과 모친 용돈 문제로 다투다 말린 노모 폭행한 50대 집유",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-13T23:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000161210?sid=102"
     },
     {
-     "title": "美전역 항공기 이륙 중단…교통장관 “관제센터 통신 문제”",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-13T23:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003565123?sid=104"
+     "title": "환희, 母 집 거실 난장판 만들었다…“나 쫓겨나는 거 아니야?”",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-13T23:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001304737"
     }
    ]
   },
@@ -80,13 +80,19 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 14,
+   "articles90": 15,
    "recent20": 2,
    "press": 13,
    "firstArticleAt": "2026-11-13T22:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[수도권 날씨예보] 밤까지 비…15일 낮 최고 20도 '포근'",
+     "press": "thefairnews.co.kr",
+     "publishedAt": "2026-11-13T23:26:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94171"
+    },
     {
      "title": "[부산·울산·경남 날씨예보] 15일 새벽까지 비 최대 30㎜…16일 강풍·풍...",
      "press": "thefairnews.co.kr",
@@ -98,12 +104,38 @@
      "press": "economytalk.kr",
      "publishedAt": "2026-11-13T23:04:00.000Z",
      "link": "http://www.economytalk.kr/news/articleView.html?idxno=425319"
+    }
+   ]
+  },
+  {
+   "keyword": "돈",
+   "sources": [
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-13T22:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[TheTax]남편 사망 전→아들→이혼한 母계좌 이체된 돈…증여세 내라?",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-13T23:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005441035?sid=101"
     },
     {
-     "title": "11월 14일 토요일, 오늘의 날씨와 미세먼지 농도 [인포그래픽]",
-     "press": "sisunnews.co.kr",
-     "publishedAt": "2026-11-13T23:00:00.000Z",
-     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=249679"
+     "title": "\"나라에 돈 빌려줬더니 과징금 1.6조\"…증권가 '부글부글'[위클리IB]",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-13T23:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006409756?sid=101"
+    },
+    {
+     "title": "[알쏭달쏭Y] 신약 허가받는 데도 돈이 든다?…요상한 의약품 수수료의 ...",
+     "press": "theviewers.co.kr",
+     "publishedAt": "2026-11-13T23:02:00.000Z",
+     "link": "https://theviewers.co.kr/View.aspx?No=4309902"
     }
    ]
   },
@@ -112,10 +144,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-13T21:56:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-13T22:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -140,34 +172,34 @@
    ]
   },
   {
-   "keyword": "돈",
+   "keyword": "2026년 11월 14일 운세",
    "sources": [
-    "google"
+    "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-13T21:52:00.000Z",
+   "articles90": 5,
+   "recent20": 3,
+   "press": 4,
+   "firstArticleAt": "2026-11-13T22:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"나라에 돈 빌려줬더니 과징금 1.6조\"…증권가 '부글부글'[위클리IB]",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-13T23:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006409756?sid=101"
+     "title": "오늘의 별자리 운세 11월 14일 토요일",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-13T23:28:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=404832"
     },
     {
-     "title": "[알쏭달쏭Y] 신약 허가받는 데도 돈이 든다?…요상한 의약품 수수료의 ...",
-     "press": "theviewers.co.kr",
-     "publishedAt": "2026-11-13T23:02:00.000Z",
-     "link": "https://theviewers.co.kr/View.aspx?No=4309902"
+     "title": "[오늘의 운세] 띠별 운세 11월 14일",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-13T23:26:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=404831"
     },
     {
-     "title": "여전히 인텔보다 AMD를 좋아하는 이유 [돈 되는 해외 주식]",
-     "press": "magazine.hankyung.com",
-     "publishedAt": "2026-11-13T22:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/050/0000113235?sid=101"
+     "title": "[오늘의 운세] 2026년 11월 14일 띠별 운세",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-13T23:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003485522?sid=103"
     }
    ]
   },
@@ -177,10 +209,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-13T21:56:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-13T22:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -203,76 +235,11 @@
      "link": "https://www.tfmedia.co.kr/news/article.html?no=208882"
     }
    ]
-  },
-  {
-   "keyword": "2026년 11월 14일 운세",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-13T22:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오늘의 운세] 2026년 11월 14일 띠별 운세",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-13T23:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003485522?sid=103"
-    },
-    {
-     "title": "2026년 11월 14일, 오늘의 띠별 운세 [인포그래픽]",
-     "press": "sisunnews.co.kr",
-     "publishedAt": "2026-11-13T23:00:00.000Z",
-     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=249395"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 14일 토요일 띠별 운세… 쥐띠·닭띠·원숭이...",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-13T22:12:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082658"
-    }
-   ]
-  },
-  {
-   "keyword": "조현, 중국에 한반도 역할 당부",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-13T22:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "조현 “한반도 中건설적 역할”…왕이 “정책 변함없어”",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-13T23:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002832723?sid=100"
-    },
-    {
-     "title": "조현 “한반도 문제 건설적 역할 당부” 왕이 “한반도 정책 변함 없어...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-13T22:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003482609?sid=100"
-    },
-    {
-     "title": "조현·왕이, 베이징서 3시간 회담…“李대통령 방중 충분한 예우”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-13T22:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002723334?sid=100"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 444,
+  "flagged": 446,
   "matched": 186,
   "avgLeadMin": 359,
   "recent": [
