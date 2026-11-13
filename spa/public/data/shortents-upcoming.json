@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T22:49:49.727Z",
+ "builtAt": "2026-11-13T22:59:54.595Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 32,
-   "recent20": 6,
-   "press": 23,
-   "firstArticleAt": "2026-11-13T21:23:00.000Z",
+   "articles90": 31,
+   "recent20": 4,
+   "press": 24,
+   "firstArticleAt": "2026-11-13T21:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美 전역 항공기 이륙 중단…“관제센터 통신 문제”",
-     "press": "kbmaeil.com",
-     "publishedAt": "2026-11-13T22:40:00.000Z",
-     "link": "https://www.kbmaeil.com/article/20261114500025"
+     "title": "美 관제 통신장애에 전국 공항 이륙 중단…\"공격 징후는 없어\"(상보)",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-13T22:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006409754?sid=104"
     },
     {
-     "title": "미국 항공기 7천편 운항 중단 사태…통신 장애로 모든 항공기 이륙 중단",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-13T22:39:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000082575"
+     "title": "美전역 항공기 이륙 중단…7800편 지연, 350편 결항",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-13T22:52:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=781601"
     },
     {
-     "title": "美, '항공기 올스톱'에 \"공격 징후 없지만 사이버 공격 배제 안 해\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-13T22:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009288752?sid=104"
+     "title": "미국 모든 공항에 이륙 금지 명령...수만 명 발 묶여",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-13T22:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432711?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "날씨",
+   "sources": [
+    "google"
+   ],
+   "articles90": 13,
+   "recent20": 4,
+   "press": 12,
+   "firstArticleAt": "2026-11-13T21:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오늘 날씨] 대구·경북 가을비 '주륵주륵' 최대 30㎜...낮 최고 16도",
+     "press": "kbsm.net",
+     "publishedAt": "2026-11-13T22:58:00.000Z",
+     "link": "https://www.kbsm.net/news/view.php?idx=541657"
+    },
+    {
+     "title": "[오늘날씨] 전국 비, 제주 최대 50mm…월요일 강원 산지엔 눈 5cm",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-13T22:58:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885582"
+    },
+    {
+     "title": "[오늘날씨] 전국 흐리고 비…제주 최대 50㎜, 낮 최고 18도",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-13T22:54:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16276225"
     }
    ]
   },
@@ -47,30 +79,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-13T21:20:00.000Z",
+   "articles90": 9,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-13T21:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "화합 다짐한 모레노호, 수비는 흔들렸다… 사우디에 21년 만에 패배",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-13T22:58:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/469/0000965523"
+    },
+    {
+     "title": "모레노호, 사우디전서 42년 만의 3실점 패배...\"입장문 약속은 어디갔나...",
+     "press": "kbsm.net",
+     "publishedAt": "2026-11-13T22:58:00.000Z",
+     "link": "https://www.kbsm.net/news/view.php?idx=541660"
+    },
     {
      "title": "모레노호, 사우디전서 42년 만에 3실점 충격패",
      "press": "imnews.imbc.com",
      "publishedAt": "2026-11-13T22:19:00.000Z",
      "link": "https://m.sports.naver.com/kfootball/article/214/0001535573"
+    }
+   ]
+  },
+  {
+   "keyword": "주한 미군의 철수",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-13T21:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美전문가들 \"트럼프, 전작권 전환을 주한미군 철수 수단으로 봐\"",
+     "press": "tfmedia.co.kr",
+     "publishedAt": "2026-11-13T22:44:00.000Z",
+     "link": "https://www.tfmedia.co.kr/news/article.html?no=208882"
     },
     {
-     "title": "모레노호 '전술적 한계'...효과 없는 압박·정교함 없는 빌드업",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-13T22:18:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=781595"
+     "title": "빅터 차 \"트럼프, 전작권 전환을 주한미군 철수 기회로 봐\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-13T21:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009288729?sid=104"
     },
     {
-     "title": "'사우디 속도조차 버겁다' 모레노호 고질병 된 템포 문제… 우루과이·...",
-     "press": "footballist.co.kr",
-     "publishedAt": "2026-11-13T22:00:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/436/0000114852"
+     "title": "\"트럼프, 전작권 전환 주한미군 철수 수단으로 인식\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-13T21:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432693?sid=104"
     }
    ]
   },
@@ -110,7 +174,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 437,
+  "flagged": 439,
   "matched": 185,
   "avgLeadMin": 361,
   "recent": [
