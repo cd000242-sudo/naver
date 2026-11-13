@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T22:59:54.595Z",
+ "builtAt": "2026-11-13T23:10:04.107Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,84 +8,91 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 25,
  "candidates": [
-  {
-   "keyword": "미국 항공 운항 중단",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 31,
-   "recent20": 4,
-   "press": 24,
-   "firstArticleAt": "2026-11-13T21:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美 관제 통신장애에 전국 공항 이륙 중단…\"공격 징후는 없어\"(상보)",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-13T22:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006409754?sid=104"
-    },
-    {
-     "title": "美전역 항공기 이륙 중단…7800편 지연, 350편 결항",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-13T22:52:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=781601"
-    },
-    {
-     "title": "미국 모든 공항에 이륙 금지 명령...수만 명 발 묶여",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-13T22:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432711?sid=104"
-    }
-   ]
-  },
   {
    "keyword": "날씨",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 13,
-   "recent20": 4,
+   "articles90": 14,
+   "recent20": 6,
    "press": 12,
-   "firstArticleAt": "2026-11-13T21:30:00.000Z",
+   "firstArticleAt": "2026-11-13T21:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[오늘 날씨] 대구·경북 가을비 '주륵주륵' 최대 30㎜...낮 최고 16도",
-     "press": "kbsm.net",
-     "publishedAt": "2026-11-13T22:58:00.000Z",
-     "link": "https://www.kbsm.net/news/view.php?idx=541657"
+     "title": "[전국 지역별 오늘의 날씨 및 주말날씨]오늘 전국 비, 모레 동해안 중심...",
+     "press": "economytalk.kr",
+     "publishedAt": "2026-11-13T23:04:00.000Z",
+     "link": "http://www.economytalk.kr/news/articleView.html?idxno=425319"
+    },
+    {
+     "title": "11월 14일 토요일, 오늘의 날씨와 미세먼지 농도 [인포그래픽]",
+     "press": "sisunnews.co.kr",
+     "publishedAt": "2026-11-13T23:00:00.000Z",
+     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=249679"
     },
     {
      "title": "[오늘날씨] 전국 비, 제주 최대 50mm…월요일 강원 산지엔 눈 5cm",
      "press": "gokorea.kr",
      "publishedAt": "2026-11-13T22:58:00.000Z",
      "link": "https://www.gokorea.kr/news/articleView.html?idxno=885582"
-    },
-    {
-     "title": "[오늘날씨] 전국 흐리고 비…제주 최대 50㎜, 낮 최고 18도",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-13T22:54:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16276225"
     }
    ]
   },
   {
-   "keyword": "모레노호, 사우디에 2-3 패배",
+   "keyword": "美전역 항공 중단",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 15,
+   "recent20": 4,
+   "press": 12,
+   "firstArticleAt": "2026-11-13T21:53:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美 하늘길 멈췄다…FAA \"항공로 관제센터 통신 장애\", 사이버공격 배제...",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-13T23:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002248531?sid=105"
+    },
+    {
+     "title": "美전역 항공기 운항중단 '올스톱' 사태…\"관제통신시스템 장애\"(종합2보...",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-13T23:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016441625?sid=104"
+    },
+    {
+     "title": "\"비행기 못 뜬다\"…美 전역 공항 마비에 승객들 '대혼란'",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-13T23:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001272737?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "모레노호 사우디에 2-3 패배",
    "sources": [
     "signal.bz"
    ],
    "articles90": 9,
-   "recent20": 2,
+   "recent20": 3,
    "press": 8,
-   "firstArticleAt": "2026-11-13T21:30:00.000Z",
+   "firstArticleAt": "2026-11-13T21:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "한국, 사우디에도 졌다…오현규·이재성 골에도 21년 만에 충격패, 순흥...",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-13T23:04:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1137481"
+    },
     {
      "title": "화합 다짐한 모레노호, 수비는 흔들렸다… 사우디에 21년 만에 패배",
      "press": "hankookilbo.com",
@@ -97,27 +104,60 @@
      "press": "kbsm.net",
      "publishedAt": "2026-11-13T22:58:00.000Z",
      "link": "https://www.kbsm.net/news/view.php?idx=541660"
+    }
+   ]
+  },
+  {
+   "keyword": "조현, 중국에 한반도 역할 당부",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-13T22:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "조현 “한반도 中건설적 역할”…왕이 “정책 변함없어”",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-13T23:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002832723?sid=100"
     },
     {
-     "title": "모레노호, 사우디전서 42년 만에 3실점 충격패",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-13T22:19:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/214/0001535573"
+     "title": "조현 “한반도 문제 건설적 역할 당부” 왕이 “한반도 정책 변함 없어...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-13T22:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003482609?sid=100"
+    },
+    {
+     "title": "조현·왕이, 베이징서 3시간 회담…“李대통령 방중 충분한 예우”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-13T22:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002723334?sid=100"
     }
    ]
   },
   {
    "keyword": "주한 미군의 철수",
    "sources": [
+    "signal.bz",
     "google"
    ],
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-13T21:32:00.000Z",
+   "firstArticleAt": "2026-11-13T21:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "前 주한미군사령관, ‘전작권 당장 전환 가능’ 강신철에 “매우 실망스...",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-13T23:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002832717?sid=100"
+    },
     {
      "title": "美전문가들 \"트럼프, 전작권 전환을 주한미군 철수 수단으로 봐\"",
      "press": "tfmedia.co.kr",
@@ -129,55 +169,54 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-13T21:56:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009288729?sid=104"
-    },
-    {
-     "title": "\"트럼프, 전작권 전환 주한미군 철수 수단으로 인식\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-13T21:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432693?sid=104"
     }
    ]
   },
   {
-   "keyword": "2026년 11월 14일 운세",
+   "keyword": "보안",
    "sources": [
-    "signal.bz",
-    "nate"
+    "google"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-13T21:30:00.000Z",
-   "exclusive": false,
+   "firstArticleAt": "2026-11-13T21:42:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "[오늘의 운세] 2026년 11월 14일 토요일 띠별 운세… 쥐띠·닭띠·원숭이...",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-13T22:12:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082658"
+     "title": "커지는 車 OLED 시장…삼성·LGD, '보안·SW 인증' 무장",
+     "press": "daily.hankooki.com",
+     "publishedAt": "2026-11-13T23:00:00.000Z",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1424780"
     },
     {
-     "title": "[오늘의 운세] 2026년 11월 14일 (토) 띠별운세 '몸을 따뜻하게 하자'",
-     "press": "dailypop.kr",
-     "publishedAt": "2026-11-13T21:40:00.000Z",
-     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103980"
+     "title": "금융보안원, 해킹 공격한 IP 246개 차단완료…국적은 한국",
+     "press": "tfmedia.co.kr",
+     "publishedAt": "2026-11-13T22:26:00.000Z",
+     "link": "https://www.tfmedia.co.kr/news/article.html?no=208881"
     },
     {
-     "title": "[AI] 오늘의 띠별 운세...2026.11.14(토요일)",
-     "press": "newsroad.co.kr",
-     "publishedAt": "2026-11-13T21:30:00.000Z",
-     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=67723"
+     "title": "[단독] 금융보안원 뚫린 이유…\"불편하다고 제한 풀어\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-13T21:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001402962?sid=101"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 439,
-  "matched": 185,
-  "avgLeadMin": 361,
+  "flagged": 442,
+  "matched": 186,
+  "avgLeadMin": 359,
   "recent": [
+   {
+    "keyword": "미국 항공 운항 중단",
+    "hitKeyword": "미국항공청 운항 중단",
+    "hitAt": "2026-11-14T08:00:00+09:00",
+    "leadMin": 20
+   },
    {
     "keyword": "모레노호, 사우디 2-3 패배",
     "hitKeyword": "한국 사우디 3실점 패배",
@@ -231,12 +270,6 @@
     "hitKeyword": "엔비디아 투자 경고",
     "hitAt": "2026-11-14T06:00:00+09:00",
     "leadMin": 343
-   },
-   {
-    "keyword": "구성환 전여친 재회",
-    "hitKeyword": "구성환 고교 4대천왕",
-    "hitAt": "2026-11-14T06:00:00+09:00",
-    "leadMin": 323
    }
   ]
  }
