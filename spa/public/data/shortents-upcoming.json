@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T01:23:03.883Z",
+ "builtAt": "2026-11-13T01:33:09.867Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,101 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 22,
  "candidates": [
   {
    "keyword": "은행연합회장 후보 6명 확정",
    "sources": [
     "nate"
    ],
-   "articles90": 78,
-   "recent20": 17,
-   "press": 76,
-   "firstArticleAt": "2026-11-12T23:54:00.000Z",
+   "articles90": 68,
+   "recent20": 12,
+   "press": 67,
+   "firstArticleAt": "2026-11-13T00:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "차기 은행연합회장 후보 윤종규·손병환 등 6명 확정",
-     "press": "opinionnews.co.kr",
-     "publishedAt": "2026-11-13T01:22:00.000Z",
-     "link": "http://www.opinionnews.co.kr/news/articleView.html?idxno=147027"
+     "title": "은행연합회장 후보 6명 압축…손병환·윤종규 등 이름 올려",
+     "press": "businessplus.kr",
+     "publishedAt": "2026-11-13T01:32:00.000Z",
+     "link": "https://www.businessplus.kr/news/articleView.html?idxno=119826"
     },
     {
-     "title": "차기 은행연합회장 후보 6명 압축···민간 5명·관료 1명",
-     "press": "smartbizn.com",
-     "publishedAt": "2026-11-13T01:22:00.000Z",
-     "link": "https://www.smartbizn.com/news/articleView.html?idxno=159340"
+     "title": "차기 은행연합회장 후보군 윤종규·윤종원 등 6인 선정",
+     "press": "asiatime.co.kr",
+     "publishedAt": "2026-11-13T01:30:00.000Z",
+     "link": "https://www.asiatime.co.kr/article/20261113500093"
     },
     {
-     "title": "은행연합회 회장 후보에 윤종규·박종복 등 6명 선정",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-13T01:20:00.000Z",
-     "link": "https://www.ajunews.com/view/20261113101255314"
+     "title": "은행연합회장 후보 6명 압축...민간 5명·관료 1명 경쟁",
+     "press": "youthdaily.co.kr",
+     "publishedAt": "2026-11-13T01:24:00.000Z",
+     "link": "https://www.youthdaily.co.kr/news/article.html?no=229796"
     }
    ]
   },
   {
-   "keyword": "젠슨 황 퇴진 영향은?",
+   "keyword": "젠슨 황 CEO 사임",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 51,
-   "recent20": 15,
-   "press": 39,
-   "firstArticleAt": "2026-11-13T00:00:00.000Z",
+   "articles90": 78,
+   "recent20": 47,
+   "press": 56,
+   "firstArticleAt": "2026-11-13T00:57:00.000Z",
    "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "젠슨 황 내쫓은 엔비디아 주가 향방은…월가 \"그래도 사라\"",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-13T01:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000551584?sid=101"
+    },
+    {
+     "title": "\"젠슨 황 없는 엔비디아 상상 못 해\"…직원들 눈물, 본사 앞엔 꽃다발",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-13T01:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014320244?sid=104"
+    },
+    {
+     "title": "젠슨 황, 불륜으로 얼마를 날렸나…일주일 간 22조원 '증발'",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-13T01:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000142195?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "KB캐피탈 개인정보 유출",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 41,
+   "recent20": 14,
+   "press": 41,
+   "firstArticleAt": "2026-11-13T00:12:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "트럼프는 팀 쿡 추천했지만…예측시장이 꼽은 '포스트 젠슨 황'은 따로...",
-     "press": "newsway.co.kr",
-     "publishedAt": "2026-11-13T01:22:00.000Z",
-     "link": "https://www.newsway.co.kr/news/view?ud=2026111310024079991"
+     "title": "KB캐피탈 직원용 시스템 해킹…약 1800명 개인정보 유출",
+     "press": "econovill.com",
+     "publishedAt": "2026-11-13T01:30:00.000Z",
+     "link": "https://www.econovill.com/news/articleView.html?idxno=757133"
     },
     {
-     "title": "[젠슨 황 퇴진]① 엔비디아 AI 생태계 지각변동…삼성·SK·현대차 촉각",
-     "press": "peoplewatch.co.kr",
-     "publishedAt": "2026-11-13T01:22:00.000Z",
-     "link": "https://www.peoplewatch.co.kr/article/view/ppw202611130005"
+     "title": "KB캐피탈 해킹 공격…고객·임직원 1800명 정보 유출",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-13T01:30:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/325202/?sc=Naver"
     },
     {
-     "title": "젠슨 황 퇴진·미 수출통제 ‘이중 악재’…엔비디아발 쇼크 오나",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-13T01:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004681812?sid=101"
+     "title": "KB캐피탈, 해킹에 개인정보 1811명 유출…고객·협력사 정보 노출",
+     "press": "ezyeconomy.com",
+     "publishedAt": "2026-11-13T01:30:00.000Z",
+     "link": "https://www.ezyeconomy.com/news/articleView.html?idxno=241817"
     }
    ]
   },
@@ -79,10 +111,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 38,
-   "recent20": 4,
-   "press": 38,
-   "firstArticleAt": "2026-11-12T23:54:00.000Z",
+   "articles90": 34,
+   "recent20": 2,
+   "press": 34,
+   "firstArticleAt": "2026-11-13T00:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -103,6 +135,38 @@
      "press": "straightnews.co.kr",
      "publishedAt": "2026-11-13T01:12:00.000Z",
      "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=315288"
+    }
+   ]
+  },
+  {
+   "keyword": "이 대통령 태국 필리핀 회담",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 23,
+   "recent20": 0,
+   "press": 23,
+   "firstArticleAt": "2026-11-13T00:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정상외교 넘어 실질 성과로…이 대통령 아세안·APEC 순방의 과제",
+     "press": "newswhoplus.com",
+     "publishedAt": "2026-11-13T01:00:00.000Z",
+     "link": "https://www.newswhoplus.com/news/articleView.html?idxno=74280"
+    },
+    {
+     "title": "李 대통령, 16일 태국·필리핀 정상과 회담…18일 中 교민 간담회",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-13T00:56:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=172410"
+    },
+    {
+     "title": "이재명 대통령, 아세안과 APEC 정상회의 참석…태국·필리핀 정상과 회...",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-13T00:52:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885392"
     }
    ]
   },
@@ -139,49 +203,24 @@
    ]
   },
   {
-   "keyword": "월급방위대 TF 회의",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 22,
-   "recent20": 0,
-   "press": 19,
-   "firstArticleAt": "2026-11-13T00:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘월급방위대 TF’ 첫발… 직장인 생활비 줄이는 방안 모색",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-13T01:02:00.000Z",
-     "link": "https://www.viva100.com/article/20261113500211"
-    },
-    {
-     "title": "가처분 소득 늘리는 방안은…정부 '월급방위대TF' 후속조치 논의",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-13T01:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001535374?sid=101"
-    },
-    {
-     "title": "'월급방위대 TF' 첫 회의, 세법개정안 과제 우선 논의",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-13T00:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002393981?sid=101"
-    }
-   ]
-  },
-  {
    "keyword": "원내대책회의 정점식 원내대표",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 35,
-   "recent20": 7,
-   "press": 18,
+   "articles90": 36,
+   "recent20": 3,
+   "press": 19,
    "firstArticleAt": "2026-11-13T00:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "정점식 “민주당 종부세 반란 쇼, 4일 천하…전월세난 대책 내놔야”",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-13T01:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003485336?sid=100"
+    },
     {
      "title": "정점식 \"민주당·청와대, 전월세 대란 타개할 대책 내놔야\"",
      "press": "ajunews.com",
@@ -193,24 +232,51 @@
      "press": "inews24.com",
      "publishedAt": "2026-11-13T01:18:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/031/0001074782?sid=100"
-    },
-    {
-     "title": "정점식 \"민주 '종부세 반란쇼' 4일천하...허수아비 명픽 김민석 처량\"",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-13T01:12:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1137259"
     }
    ]
   },
   {
-   "keyword": "최혜진, LPGA 9언더파 선두",
+   "keyword": "한국전력",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 15,
-   "recent20": 3,
-   "press": 14,
-   "firstArticleAt": "2026-11-12T23:55:00.000Z",
+   "articles90": 20,
+   "recent20": 2,
+   "press": 19,
+   "firstArticleAt": "2026-11-13T00:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "DS투자증권, 한국전력 목표가 3만1000원으로 하향...영업익 전망치 낮춰",
+     "press": "ppss.kr",
+     "publishedAt": "2026-11-13T01:20:00.000Z",
+     "link": "https://www.ppss.kr/news/articleView.html?idxno=320768"
+    },
+    {
+     "title": "한국전력, 전력망 짓는 속도 2배 빨라졌다···입지선정 100건 달성",
+     "press": "paxetv.com",
+     "publishedAt": "2026-11-13T01:14:00.000Z",
+     "link": "http://www.paxetv.com/news/articleView.html?idxno=286860"
+    },
+    {
+     "title": "한국전력 2950원 급락 2만7700원…3분기 영업이익 71% 감소, 시장 기대치...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-13T01:12:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=626499"
+    }
+   ]
+  },
+  {
+   "keyword": "최혜진 9언더파 선두",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 13,
+   "recent20": 1,
+   "press": 13,
+   "firstArticleAt": "2026-11-13T00:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -235,98 +301,132 @@
    ]
   },
   {
+   "keyword": "월급방위대 TF 킥오프",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 12,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-13T00:07:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정부, 월세 세액공제 확대·부양가족 소득요건 완화 추진…'월급방위대...",
+     "press": "sejungilbo.com",
+     "publishedAt": "2026-11-13T01:24:00.000Z",
+     "link": "https://www.sejungilbo.com/news/articleView.html?idxno=61095"
+    },
+    {
+     "title": "‘월급방위대 TF’ 첫발… 직장인 생활비 줄이는 방안 모색",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-13T01:02:00.000Z",
+     "link": "https://www.viva100.com/article/20261113500211"
+    },
+    {
+     "title": "'월급방위대 TF' 첫 회의, 세법개정안 과제 우선 논의",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-13T00:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002393981?sid=101"
+    }
+   ]
+  },
+  {
    "keyword": "김영훈",
    "sources": [
     "google"
    ],
-   "articles90": 13,
-   "recent20": 10,
-   "press": 6,
+   "articles90": 24,
+   "recent20": 14,
+   "press": 7,
    "firstArticleAt": "2026-11-13T00:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[포토] 반도체 기업 관계자들과 간담회하는 김영훈 장관",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-13T01:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005842222?sid=101"
+     "title": "김영훈 고용노동부 장관, 반도체 산업 근로시간제도 간담회",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-13T01:25:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261113000403"
     },
     {
-     "title": "[포토] 발언하는 김영훈 고용노동부 장관",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-13T01:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005842220?sid=101"
+     "title": "반도체 산업 간담회서 발언하는 김영훈 장관",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-13T01:24:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261113000397"
     },
     {
-     "title": "발언하는 김영훈 장관",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-13T01:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016440063?sid=105"
+     "title": "모두발언하는 김영훈 고용노동부 장관",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-13T01:24:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261113000396"
     }
    ]
   },
   {
-   "keyword": "마이크로소프트 365 장애 발생",
+   "keyword": "안경 벗은 이재용",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 5,
-   "recent20": 3,
-   "press": 5,
-   "firstArticleAt": "2026-11-13T00:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "MS 365 전 세계 대규모 먹통…아웃룩·팀즈·코파일럿 줄줄이 마비",
-     "press": "itdaily.kr",
-     "publishedAt": "2026-11-13T01:16:00.000Z",
-     "link": "https://www.itdaily.kr/news/articleView.html?idxno=242907"
-    },
-    {
-     "title": "“기업 이메일 먹통” 마이크로소프트 아웃룩·팀즈·MS365 전세계 서비...",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-13T01:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003564955?sid=105"
-    },
-    {
-     "title": "\"아웃룩 왜이래\" MS 365 멈췄다…전세계 이메일 끊기고 업무 마비",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-13T01:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001164236?sid=105"
-    }
-   ]
-  },
-  {
-   "keyword": "메가성장특위 예산안 간담회",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
+   "articles90": 6,
    "recent20": 2,
-   "press": 5,
+   "press": 6,
    "firstArticleAt": "2026-11-13T00:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "민주당 메가성장특위 \"메가특구법·관련 예산 연내 처리\"",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-13T01:10:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=882983"
+     "title": "\"이건희 회장 살아돌아온 줄\"... 안경 벗고 나타난 이재용 회장 화제",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-13T01:24:00.000Z",
+     "link": "https://www.insight.co.kr/news/581880"
     },
     {
-     "title": "與메가성장특위, 예산안 간담회 개최…\"전력 예산 중점 논의\"",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-13T01:06:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4444610"
+     "title": "“이건희 회장인 줄 알고 놀랐다” 안경 벗은 이재용, 선친과 ‘판박이...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-13T01:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002722990?sid=101"
     },
     {
-     "title": "민주당 메가성장특위 \"초광역특구법·예산 연내 처리\"",
-     "press": "financialreview.co.kr",
-     "publishedAt": "2026-11-13T00:56:00.000Z",
-     "link": "http://www.financialreview.co.kr/news/articleView.html?idxno=46282"
+     "title": "[위클리오늘] 안경 벗은 이재용, 온라인서 화제…\"이건희 회장 판박이네...",
+     "press": "weeklytoday.com",
+     "publishedAt": "2026-11-13T00:44:00.000Z",
+     "link": "http://www.weeklytoday.com/news/articleView.html?idxno=801944"
+    }
+   ]
+  },
+  {
+   "keyword": "메르세데스-벤츠",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-13T00:39:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "현대차·기아·벤츠·BMW 등 전기차 13종 모인 성수동",
+     "press": "zdnet.co.kr",
+     "publishedAt": "2026-11-13T01:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/092/0002445155?sid=103"
+    },
+    {
+     "title": "폭스바겐 이어 벤츠도 독일 공장 폐쇄 검토⋯\"인건비 동유럽 5배\"",
+     "press": "autodaily.co.kr",
+     "publishedAt": "2026-11-13T01:22:00.000Z",
+     "link": "https://www.autodaily.co.kr/news/articleView.html?idxno=602063"
+    },
+    {
+     "title": "벤츠, 수익성 악화에 獨 신규투자 전면 중단…공장 폐쇄도 검토",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-13T01:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009287289?sid=104"
     }
    ]
   },
@@ -335,13 +435,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-12T23:56:00.000Z",
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-13T00:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "경찰, 세브란스 병원 '흉기 난동' 50대 여성 구속 송치",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-13T01:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000650796?sid=102"
+    },
     {
      "title": "경찰, '세브란스 흉기난동' 50대 여성 공소청 송치",
      "press": "segyebiz.com",
@@ -353,59 +459,28 @@
      "press": "obsnews.co.kr",
      "publishedAt": "2026-11-13T00:42:00.000Z",
      "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1543635"
-    },
-    {
-     "title": "경찰, '세브란스 병원 흉기난동' 50대 여성 송치",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-13T00:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000925752?sid=102"
     }
    ]
   },
   {
-   "keyword": "양천구 남편 아내 살해",
+   "keyword": "CL, 테디 품으로 전속계약",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-13T00:12:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-13T00:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "양천구 아내 살해 80대, 과거 가정폭력 신고 있었다",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-13T00:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005842190?sid=102"
+     "title": "CL, 테디 품으로…더블랙레이블 전속계약 체결·이달 신곡 예고",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-13T01:26:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=625017"
     },
-    {
-     "title": "서울 양천구서 80대 남편이 아내 살해…\"내가 죽였다\" 신고",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-13T00:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000965366?sid=102"
-    },
-    {
-     "title": "\"내가 죽였다\"...70대 '조강지처 아내' 살해한 80대 남편",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-13T00:24:00.000Z",
-     "link": "https://www.insight.co.kr/news/581857"
-    }
-   ]
-  },
-  {
-   "keyword": "CL, 테디 품으로 계약",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T23:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
     {
      "title": "씨엘, 7년 만에 새 둥지 ‘테디 품으로’…더블랙레이블 전속계약, “이...",
      "press": "sportsseoul.com",
@@ -417,22 +492,64 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-13T00:15:00.000Z",
      "link": "https://m.entertain.naver.com/article/003/0014319933"
-    },
-    {
-     "title": "투애니원 CL, 테디 품에 안겼다…11월 신곡 발매",
-     "press": "atstar1.com",
-     "publishedAt": "2026-11-13T00:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/415/0000053757"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 425,
-  "matched": 140,
-  "avgLeadMin": 524,
+  "flagged": 429,
+  "matched": 146,
+  "avgLeadMin": 452,
   "recent": [
+   {
+    "keyword": "이유리, 에이티즈 산 팬심 고백",
+    "hitKeyword": "이유리 12살 연상 목사",
+    "hitAt": "2026-11-13T10:30:00+09:00",
+    "leadMin": 744
+   },
+   {
+    "keyword": "김서아 부모님 사망 소식",
+    "hitKeyword": "김서아 기쁨조 후보",
+    "hitAt": "2026-11-13T10:30:00+09:00",
+    "leadMin": 199
+   },
+   {
+    "keyword": "김서아 기쁨조 후보 고백",
+    "hitKeyword": "김서아 기쁨조 후보",
+    "hitAt": "2026-11-13T10:30:00+09:00",
+    "leadMin": 138
+   },
+   {
+    "keyword": "김서아 기쁨조 후보",
+    "hitKeyword": "김서아 기쁨조 후보",
+    "hitAt": "2026-11-13T10:30:00+09:00",
+    "leadMin": 118
+   },
+   {
+    "keyword": "젠슨 황 퇴진 영향은?",
+    "hitKeyword": "젠슨 황 엔비디아 퇴진",
+    "hitAt": "2026-11-13T10:30:00+09:00",
+    "leadMin": 47
+   },
+   {
+    "keyword": "80대 남편 아내 살해 체포",
+    "hitKeyword": "80대 남성 아내 살해 자수",
+    "hitAt": "2026-11-13T10:30:00+09:00",
+    "leadMin": 27
+   },
+   {
+    "keyword": "마이크로소프트 365 장애 발생",
+    "hitKeyword": "MS 365 전 세계 먹통",
+    "hitAt": "2026-11-13T10:30:00+09:00",
+    "leadMin": 7
+   },
+   {
+    "keyword": "양천구 남편 아내 살해",
+    "hitKeyword": "80대 남성 아내 살해 자수",
+    "hitAt": "2026-11-13T10:30:00+09:00",
+    "leadMin": 7
+   },
    {
     "keyword": "차기 회장 후보 6명 압축",
     "hitKeyword": "은행연합회 회장 후보",
@@ -444,54 +561,6 @@
     "hitKeyword": "젠슨황 불륜 사임",
     "hitAt": "2026-11-13T09:30:00+09:00",
     "leadMin": 613
-   },
-   {
-    "keyword": "사고",
-    "hitKeyword": "김포 스쿨존 차량 사고",
-    "hitAt": "2026-11-13T09:00:00+09:00",
-    "leadMin": 89
-   },
-   {
-    "keyword": "세무사 AI안경 의혹에",
-    "hitKeyword": "세무사 AI 안경 의혹",
-    "hitAt": "2026-11-13T09:00:00+09:00",
-    "leadMin": 18
-   },
-   {
-    "keyword": "트럼프, 이란 합의 필요없다",
-    "hitKeyword": "트럼프 이란 강경 선회",
-    "hitAt": "2026-11-13T08:30:00+09:00",
-    "leadMin": 8
-   },
-   {
-    "keyword": "이정현 31점 소노 역전승",
-    "hitKeyword": "이탈리아 프랑스 역전승",
-    "hitAt": "2026-11-13T08:00:00+09:00",
-    "leadMin": 594
-   },
-   {
-    "keyword": "소노 역전승",
-    "hitKeyword": "이탈리아 프랑스 역전승",
-    "hitAt": "2026-11-13T08:00:00+09:00",
-    "leadMin": 584
-   },
-   {
-    "keyword": "성북 10대 살해 구속영장",
-    "hitKeyword": "발달장애 10대 사망",
-    "hitAt": "2026-11-13T08:00:00+09:00",
-    "leadMin": 18
-   },
-   {
-    "keyword": "황정리 별세",
-    "hitKeyword": "황정리 별세",
-    "hitAt": "2026-11-13T07:30:00+09:00",
-    "leadMin": 19
-   },
-   {
-    "keyword": "관광객",
-    "hitKeyword": "도쿄 관광객 과태료",
-    "hitAt": "2026-11-13T07:30:00+09:00",
-    "leadMin": 9
    }
   ]
  }
