@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T17:58:05.346Z",
+ "builtAt": "2026-11-13T18:08:09.015Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 30,
  "candidates": [
   {
    "keyword": "모레노호, 사우디 2-3 패배",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 45,
+   "articles90": 25,
    "recent20": 1,
-   "press": 33,
-   "firstArticleAt": "2026-11-13T16:30:00.000Z",
+   "press": 22,
+   "firstArticleAt": "2026-11-13T16:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -39,38 +39,6 @@
      "press": "stnsports.co.kr",
      "publishedAt": "2026-11-13T17:16:00.000Z",
      "link": "https://m.sports.naver.com/kfootball/article/450/0000155495"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황과 엔비디아 위기",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-13T16:40:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "FT \"엔비디아, 차기 CEO 후보로 ARM 하스 접촉\"",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-13T17:47:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261114000017"
-    },
-    {
-     "title": "사령탑 잃은 위기의 엔비디아, 젠슨 황 후임으로 하스 암 CEO 접촉",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-13T17:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009288660?sid=104"
-    },
-    {
-     "title": "젠슨 황 후임, ‘재무통’ 크레스 vs ‘기술통’ 벅 거론",
-     "press": "donga.com",
-     "publishedAt": "2026-11-13T16:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003762432?sid=104"
     }
    ]
   }
