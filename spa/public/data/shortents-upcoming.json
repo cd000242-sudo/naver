@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T21:59:30.393Z",
+ "builtAt": "2026-11-13T22:09:33.400Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 29,
+ "measured": 24,
  "candidates": [
   {
-   "keyword": "젠슨 황 퇴진하나",
+   "keyword": "모레노호, 사우디에 2-3 패배",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 8,
-   "press": 13,
-   "firstArticleAt": "2026-11-13T20:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "젠슨 황 떠나자 670조원 AI 금융구상도 흔들",
-     "press": "kbmaeil.com",
-     "publishedAt": "2026-11-13T21:58:00.000Z",
-     "link": "https://www.kbmaeil.com/article/20261114500020"
-    },
-    {
-     "title": "[뉴욕증시] 젠슨 황 스캔들 여파 지속…혼조 마감",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-13T21:56:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4444749"
-    },
-    {
-     "title": "젠슨 황 여파 지속...미국증시 나스닥 '하락'",
-     "press": "choicenews.co.kr",
-     "publishedAt": "2026-11-13T21:52:00.000Z",
-     "link": "http://www.choicenews.co.kr/news/articleView.html?idxno=173179"
-    }
-   ]
-  },
-  {
-   "keyword": "모레노호 사우디 2-3 패배",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
+   "articles90": 8,
+   "recent20": 4,
+   "press": 8,
    "firstArticleAt": "2026-11-13T20:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "모레노호, 사우디전서 42년만 3실점 패배...오현규·이재성 골맛",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-13T21:56:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=781588"
+     "title": "'사우디 속도조차 버겁다' 모레노호 고질병 된 템포 문제… 우루과이·...",
+     "press": "footballist.co.kr",
+     "publishedAt": "2026-11-13T22:00:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/436/0000114852"
     },
     {
-     "title": "'사우디전 충격패' 모레노호, 마지막 카타르전서 반등할까",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-13T21:30:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/421/0009288726"
+     "title": "패배 속 빛난 황희찬의 81분…'불화설·무득점' 딛고 모레노호 공격 활...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-13T22:00:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/241/0003541702"
     },
     {
-     "title": "사우디에 무너진 모레노호… 42년 만의 3실점",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-13T21:20:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3448641"
+     "title": "'계약 만료 임박' 모레노, 아시안컵 연기에 사우디전 패배까지…끊임없...",
+     "press": "sports.hankooki.com",
+     "publishedAt": "2026-11-13T22:00:00.000Z",
+     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6943535"
     }
    ]
   },
@@ -81,7 +49,7 @@
     "nate"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-13T21:00:00.000Z",
    "exclusive": false,
@@ -100,17 +68,49 @@
      "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=67723"
     },
     {
-     "title": "[오늘의 운세] 2026년 11월 14일 별자리 운세",
+     "title": "[오늘의 운세] 2026년 11월 14일 띠별 운세",
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-13T21:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006409735?sid=103"
+     "link": "https://n.news.naver.com/mnews/article/018/0006409734?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "구본현 해외 도피 검거",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-13T21:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[천지일보 이슈종합] 엔비디아 시총·범LG가 3세 구본현 구속·MS 서비스...",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-13T22:00:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3448638"
+    },
+    {
+     "title": "재벌집 3세가 대체 왜…8년 해외도피 끝에 캄보디아서 잡힌 이 남자",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-13T22:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005763577?sid=102"
+    },
+    {
+     "title": "‘주가조작’ 범LG가 3세 구본현, 해외 도피 8년 만에 검거",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-13T21:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012293852?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 434,
+  "flagged": 435,
   "matched": 183,
   "avgLeadMin": 363,
   "recent": [
