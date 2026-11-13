@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T22:09:33.400Z",
+ "builtAt": "2026-11-13T22:19:36.798Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,13 +15,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
+   "articles90": 9,
    "recent20": 4,
    "press": 8,
    "firstArticleAt": "2026-11-13T20:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "모레노호 '전술적 한계'...효과 없는 압박·정교함 없는 빌드업",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-13T22:18:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=781595"
+    },
     {
      "title": "'사우디 속도조차 버겁다' 모레노호 고질병 된 템포 문제… 우루과이·...",
      "press": "footballist.co.kr",
@@ -33,12 +39,6 @@
      "press": "isplus.com",
      "publishedAt": "2026-11-13T22:00:00.000Z",
      "link": "https://m.sports.naver.com/kfootball/article/241/0003541702"
-    },
-    {
-     "title": "'계약 만료 임박' 모레노, 아시안컵 연기에 사우디전 패배까지…끊임없...",
-     "press": "sports.hankooki.com",
-     "publishedAt": "2026-11-13T22:00:00.000Z",
-     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6943535"
     }
    ]
   },
@@ -48,13 +48,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 4,
+   "articles90": 6,
+   "recent20": 1,
+   "press": 5,
    "firstArticleAt": "2026-11-13T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[오늘의 운세] 2026년 11월 14일 토요일 띠별 운세… 쥐띠·닭띠·원숭이...",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-13T22:12:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082658"
+    },
     {
      "title": "[오늘의 운세] 2026년 11월 14일 (토) 띠별운세 '몸을 따뜻하게 하자'",
      "press": "dailypop.kr",
@@ -66,12 +72,6 @@
      "press": "newsroad.co.kr",
      "publishedAt": "2026-11-13T21:30:00.000Z",
      "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=67723"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 14일 띠별 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-13T21:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006409734?sid=103"
     }
    ]
   },
