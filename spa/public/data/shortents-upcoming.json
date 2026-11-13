@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T15:16:34.632Z",
+ "builtAt": "2026-11-13T15:26:39.155Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,52 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 24,
  "candidates": [
   {
-   "keyword": "한국 야구",
-   "sources": [
-    "google"
-   ],
-   "articles90": 31,
-   "recent20": 4,
-   "press": 30,
-   "firstArticleAt": "2026-11-13T13:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "2026 APBC 야구 중계 일정…채널과 시간은",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-13T15:12:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611130251"
-    },
-    {
-     "title": "'또 졌다' 한국, 일본 도대체 언제 이기나…최원호 감독 \"그래도 수준급...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-13T15:02:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/109/0005640083"
-    },
-    {
-     "title": "'일본이 이겨야 日에 설욕한다' 2연패 韓 야구 기막힌 결승행 경우의 수...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-13T15:01:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/108/0003487221"
-    }
-   ]
-  },
-  {
-   "keyword": "조현 한반도 평화 공동 이익 강조",
+   "keyword": "조현의 한반도 공동이익",
    "sources": [
     "nate"
    ],
    "articles90": 15,
    "recent20": 5,
-   "press": 14,
-   "firstArticleAt": "2026-11-13T13:53:00.000Z",
+   "press": 13,
+   "firstArticleAt": "2026-11-13T14:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "조현, 중국에 '한반도 문제' 역할 당부…왕이 \"정책 변함없어\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-13T15:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926042?sid=100"
+    },
     {
      "title": "APEC 앞두고 한중외교장관 회담…조현 \"中 한반도 건설적 역할\" 당부",
      "press": "newsis.com",
@@ -61,16 +35,10 @@
      "link": "https://n.news.naver.com/mnews/article/003/0014321699?sid=100"
     },
     {
-     "title": "조현 \"한반도 中 건설적 역할\" 당부…왕이 \"정책 변함없다\"(종합2보)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-13T15:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016441389?sid=104"
-    },
-    {
-     "title": "조현 “한반도 문제 중국 건설적 역할 당부” 왕이 “한반도 정책 변함...",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-13T15:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002832172?sid=100"
+     "title": "조현 \"한반도 평화가 공동이익\"…왕이 \"관계개선 정상궤도\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-13T15:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926040?sid=104"
     }
    ]
   },
@@ -79,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
+   "articles90": 10,
    "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-13T13:47:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-13T14:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "금(금값, 금시세) 순금 한 돈 얼마?…미국 PPI 발표 이후 향방 '이목'",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-13T15:16:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=626660"
+    },
     {
      "title": "美 10월 도매물가 전달 대비 3.0%↑…시장 예상치 밑돌아",
      "press": "mt.co.kr",
@@ -97,76 +71,6 @@
      "press": "topstarnews.net",
      "publishedAt": "2026-11-13T14:44:00.000Z",
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16276154"
-    },
-    {
-     "title": "미 10월 생산자물가 1년 새 6.5% 상승, 2022년 11월 이후 최고",
-     "press": "radiokorea.com",
-     "publishedAt": "2026-11-13T14:40:00.000Z",
-     "link": "https://www.radiokorea.com/news/article.php?uid=509485"
-    }
-   ]
-  },
-  {
-   "keyword": "구성환 4대",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-13T14:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "구성환 전 여자친구 '나혼산'에 등장... 수제 케이크에 편지까지 선물",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-13T15:12:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000490092"
-    },
-    {
-     "title": "\"초콜릿에 러브레터 많이 받아\" 구성환, 4대 천왕 비주얼 공개 ('나혼산...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-13T15:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005640086"
-    },
-    {
-     "title": "'나 혼자 산다' 구성환, 첫사랑 이초희와 재회 포차 동창회",
-     "press": "enter.etoday.co.kr",
-     "publishedAt": "2026-11-13T14:54:00.000Z",
-     "link": "https://enter.etoday.co.kr/news/view/305204"
-    }
-   ]
-  },
-  {
-   "keyword": "손흥민 사우디전 96라인",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-13T13:49:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'황희찬 패스→손흥민 슈팅' 아쉽게 빗나갔다...'불화설' 뒤로하고 사우...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-13T14:55:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/109/0005640080"
-    },
-    {
-     "title": "'불화설' 축구대표팀, 오늘 밤 사우디전...손흥민 \"경기력으로 보답\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-13T14:32:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/052/0002432638"
-    },
-    {
-     "title": "손흥민과 96라인 '3인방', 전원 선발 출격…불화설 털어내고 승리 따낼...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-13T14:30:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/311/0002080327"
     }
    ]
   },
@@ -176,7 +80,7 @@
     "signal.bz"
    ],
    "articles90": 9,
-   "recent20": 2,
+   "recent20": 1,
    "press": 8,
    "firstArticleAt": "2026-11-13T14:00:00.000Z",
    "exclusive": false,
@@ -199,6 +103,70 @@
      "press": "asiatoday.co.kr",
      "publishedAt": "2026-11-13T14:52:00.000Z",
      "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261113010005346"
+    }
+   ]
+  },
+  {
+   "keyword": "3분기 매출 분석",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 3,
+   "press": 4,
+   "firstArticleAt": "2026-11-13T14:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[분석] 스페이스X·테슬라 합병 협상…'3조4천억 달러' 머스크 제국 탄생...",
+     "press": "thefairnews.co.kr",
+     "publishedAt": "2026-11-13T15:16:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94164"
+    },
+    {
+     "title": "네이버, 3분기 영업이익 21% 감소…AI 투자 성과가 반등 열쇠",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-13T15:16:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=503975"
+    },
+    {
+     "title": "엘앤에프, 3분기 적자 전환…재고손실 빼면 4분기 연속 흑자",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-13T15:16:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=503983"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황 퇴진 후 엔비디아는?",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-13T14:31:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"진짜 보스를 돌려달라\"…젠슨 황 퇴진 후폭풍에 흔들리는 엔비디아",
+     "press": "news-s.kr",
+     "publishedAt": "2026-11-13T15:20:00.000Z",
+     "link": "https://news-s.kr/view.html?id=L261114001349ddd7"
+    },
+    {
+     "title": "[사설] 젠슨 황 쇼크… AI 지각 변동과 미중 경쟁 속 기회 잡길",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-13T15:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000965500?sid=110"
+    },
+    {
+     "title": "[기업家] 엔비디아 ⑩ㅣ 젠슨 황 없는 엔비디아…리더십 공백에 AI 패권...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-13T15:00:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=626726"
     }
    ]
   },
@@ -267,34 +235,66 @@
    ]
   },
   {
-   "keyword": "젠슨 황 퇴진 엔비디아 위기",
+   "keyword": "나혼자산다 박지현",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 4,
-   "recent20": 3,
+   "articles90": 3,
+   "recent20": 2,
    "press": 3,
-   "firstArticleAt": "2026-11-13T13:49:00.000Z",
+   "firstArticleAt": "2026-11-13T14:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[젠슨 황 사임] 엔비디아 공급망 재편 속'평평해진 운동장'… 삼성·AMD ...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-13T15:10:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=626571"
+     "title": "'나혼산' 구성환, 친구들과 30년 우정 쌓아...박지현X코쿤, 대학가요제서...",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-13T15:20:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=781585"
     },
     {
-     "title": "[사설] 젠슨 황 쇼크… AI 지각 변동과 미중 경쟁 속 기회 잡길",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-13T15:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000965500?sid=110"
+     "title": "구성환 싱글 탈출? ‘前 여친’ 이초희 공개 (나혼자산다)",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-13T15:14:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000052601"
     },
     {
-     "title": "[기업家] 엔비디아 ⑩ㅣ 젠슨 황 없는 엔비디아…리더십 공백에 AI 패권...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-13T15:00:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=626726"
+     "title": "‘나혼산’ 박지현, 모텔 벗어나 혼술 도전 “가만히 있으면 바뀌는 게...",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-13T14:07:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000327862"
+    }
+   ]
+  },
+  {
+   "keyword": "대한민국",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-13T14:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "골드만비뇨의학과 국제학회 참가...대한민국 수술 노하우 공유",
+     "press": "medicaltimes.com",
+     "publishedAt": "2026-11-13T15:10:00.000Z",
+     "link": "https://www.medicaltimes.com/Main/News/NewsView.html?ID=1171840&ref=naverpc"
+    },
+    {
+     "title": "이재명, 범LG家 3세 구본현 검거에 \"새로운 대한민국선 법 지켜야\"",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-13T14:44:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3448625"
+    },
+    {
+     "title": "이 대통령, 주가조작 범LG가 검거에 \"새 대한민국선 법지켜야\"",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-13T14:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000520690?sid=102"
     }
    ]
   },
@@ -303,13 +303,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 5,
+   "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-13T13:48:00.000Z",
+   "firstArticleAt": "2026-11-13T14:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "금(금값, 금시세) 순금 한 돈 얼마?…미국 PPI 발표 이후 향방 '이목'",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-13T15:16:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=626660"
+    },
     {
      "title": "뉴욕증시, PPI 소화하며 혼조 출발",
      "press": "news.einfomax.co.kr",
@@ -321,19 +327,45 @@
      "press": "sedaily.com",
      "publishedAt": "2026-11-13T14:35:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/011/0004682079?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "엔비디아 GPU 26만장 공급",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-13T14:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "HBM 공급 SK하이닉스·삼성전자 '촉각'…",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-13T15:00:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082656"
     },
     {
-     "title": "미국 10월 PPI 0.3% 상승, 시장 예상치 0.4% 하회",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-13T13:56:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/437914"
+     "title": "'젠슨 황 없는 엔비디아' 긴급 대응…정부 \"엔비디아, GPU 26만 장 공급 ...",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-13T14:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000121324?sid=101"
+    },
+    {
+     "title": "‘엔비디아 생태계’ 발들인 한국 기업들 영향은?",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-13T14:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012293798?sid=101"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 411,
+  "flagged": 416,
   "matched": 171,
   "avgLeadMin": 369,
   "recent": [
