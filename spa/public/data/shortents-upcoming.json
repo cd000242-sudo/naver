@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T18:28:18.946Z",
+ "builtAt": "2026-11-13T18:38:23.796Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,35 @@
  "measured": 29,
  "candidates": [
   {
-   "keyword": "모레노호, 사우디 2-3 패배",
+   "keyword": "젠슨 황과 엔비디아 위기",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-13T16:59:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-13T17:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "왜 또 황희찬 뽑았냐고? 사우디전 한국 최고 '평점 8.0'... 1도움에 기회...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-13T17:49:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/108/0003487230"
+     "title": "\"엔비디아, 英 ARM CEO와 접촉\"…젠슨 황 후임 되나",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-13T18:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005604145?sid=101"
     },
     {
-     "title": "월드컵 악몽 또 반복한 김승규…5경기 7실점 모레노호의 무너진 뒷문",
+     "title": "FT \"엔비디아, 차기 CEO 후보로 ARM 하스 접촉\"",
      "press": "newspim.com",
-     "publishedAt": "2026-11-13T17:37:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261114000015"
+     "publishedAt": "2026-11-13T17:47:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261114000017"
     },
     {
-     "title": "골문에 구멍 났나... 한국, 사우디에 42년 만의 3실점, 2-3 패배",
-     "press": "stnsports.co.kr",
-     "publishedAt": "2026-11-13T17:16:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/450/0000155495"
+     "title": "사령탑 잃은 위기의 엔비디아, 젠슨 황 후임으로 하스 암 CEO 접촉",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-13T17:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009288660?sid=104"
     }
    ]
   }
