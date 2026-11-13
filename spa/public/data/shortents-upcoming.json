@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T00:12:18.772Z",
+ "builtAt": "2026-11-13T00:22:22.777Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,22 +11,54 @@
  "measured": 22,
  "candidates": [
   {
-   "keyword": "구글 젠틀몬스터 안경 공개",
+   "keyword": "CL 더블랙레이블과 전속계약",
    "sources": [
     "nate"
    ],
-   "articles90": 36,
-   "recent20": 9,
-   "press": 36,
-   "firstArticleAt": "2026-11-12T22:44:00.000Z",
+   "articles90": 25,
+   "recent20": 0,
+   "press": 24,
+   "firstArticleAt": "2026-11-12T23:06:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "투애니원 CL, 테디 품에 안겼다…11월 신곡 발매",
+     "press": "atstar1.com",
+     "publishedAt": "2026-11-13T00:01:00.000Z",
+     "link": "https://m.entertain.naver.com/article/415/0000053757"
+    },
+    {
+     "title": "CL, 테디 손 잡았다…더블랙레이블 전속계약 [공식]",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-12T23:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/015/0005353462"
+    },
+    {
+     "title": "CL, 테디 품으로…더블랙레이블 전속계약",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-12T23:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/629/0000551519"
+    }
+   ]
+  },
+  {
+   "keyword": "구글 젠틀몬스터 협업 아이웨어",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 18,
+   "recent20": 4,
+   "press": 18,
+   "firstArticleAt": "2026-11-12T23:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "제미나이 탑재 '인텔리전트 아이웨어' 30종 공개",
-     "press": "cstimes.com",
-     "publishedAt": "2026-11-13T00:10:00.000Z",
-     "link": "https://www.cstimes.com/news/articleView.html?idxno=727809"
+     "title": "삼성전자 구글·젠틀몬스터 협업 인텔리전트 아이웨어 공개",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-13T00:20:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082503"
     },
     {
      "title": "삼성전자 '인텔리전트 아이웨어' 공개…12월 10일 정식 출시",
@@ -43,34 +75,34 @@
    ]
   },
   {
-   "keyword": "CL, 테디 품으로 계약",
+   "keyword": "최혜진 공동 선두",
    "sources": [
     "nate"
    ],
-   "articles90": 13,
-   "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-12T23:12:00.000Z",
-   "exclusive": true,
+   "articles90": 15,
+   "recent20": 4,
+   "press": 13,
+   "firstArticleAt": "2026-11-12T22:53:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "투애니원 CL, 테디 품에 안겼다…11월 신곡 발매",
-     "press": "atstar1.com",
-     "publishedAt": "2026-11-13T00:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/415/0000053757"
+     "title": "최혜진, LPGA 투어 디안니카 1R '공동 선두' … 첫 우승 도전",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-13T00:20:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/13/2026111300042.html"
     },
     {
-     "title": "CL, 테디 품으로…더블랙레이블 전속계약",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-12T23:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/629/0000551519"
+     "title": "최혜진, LPGA 투어 디안니카 1R 9언더파 선두…첫 우승 재도전",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-13T00:09:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/055/0001402764"
     },
     {
-     "title": "투애니원 씨엘, 테디家 더블랙레이블과 계약..박보검과 한솥밥 [공식]",
-     "press": "ize.co.kr",
-     "publishedAt": "2026-11-12T23:45:00.000Z",
-     "link": "https://m.entertain.naver.com/article/465/0000020956"
+     "title": "최혜진, LPGA 투어 디 안니카 1라운드 9언더파 선두",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-13T00:06:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/421/0009287092"
     }
    ]
   },
@@ -80,7 +112,7 @@
     "signal.bz"
    ],
    "articles90": 8,
-   "recent20": 3,
+   "recent20": 1,
    "press": 8,
    "firstArticleAt": "2026-11-12T23:36:00.000Z",
    "exclusive": false,
@@ -107,14 +139,78 @@
    ]
   },
   {
+   "keyword": "영화",
+   "sources": [
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-12T23:23:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "'취권'서 성룡과 맞붙은 황정리, 자택서 쓰러져→81세로 별세…영화계 ...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-13T00:17:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001408137"
+    },
+    {
+     "title": "효성, 배리어프리영화 10년째 지원…영화 2편 제작 참여",
+     "press": "handmk.com",
+     "publishedAt": "2026-11-13T00:06:00.000Z",
+     "link": "https://www.handmk.com/news/articleView.html?idxno=45036"
+    },
+    {
+     "title": "[회고 영화관] '집아죽', 사랑의 역설 [유진모 칼럼]",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-12T23:52:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95148"
+    }
+   ]
+  },
+  {
+   "keyword": "출근하는 이용철 후보자",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 10,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-12T23:28:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이용철 후보자, '공소취소 지휘' 질문에 또 말 아껴",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-13T00:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432247?sid=102"
+    },
+    {
+     "title": "[포토] 사무실 출근하는 이용철 후보자",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-13T00:00:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/13/2026111300033.html"
+    },
+    {
+     "title": "이용철, 공소취소 지휘 질문에 \"청문회 때 잘 준비해서 답변하겠다\"",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-12T23:59:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261113000173"
+    }
+   ]
+  },
+  {
    "keyword": "박수홍 98억 선고",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
+   "articles90": 7,
    "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-12T22:50:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-12T22:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -131,10 +227,10 @@
      "link": "https://n.news.naver.com/mnews/article/009/0005763111?sid=102"
     },
     {
-     "title": "박수홍, 친형 부부 '98억 손배소' 오늘 선고…5년 공방 끝날까",
-     "press": "hankyung.com",
+     "title": "박수홍 친형 부부, 오늘(13일) 98억 손배소 선고…핵심 쟁점은",
+     "press": "topstarnews.net",
      "publishedAt": "2026-11-12T23:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005353447?sid=102"
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16275409"
     }
    ]
   },
@@ -171,44 +267,12 @@
    ]
   },
   {
-   "keyword": "영화",
-   "sources": [
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-12T23:23:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "효성, 배리어프리영화 10년째 지원…영화 2편 제작 참여",
-     "press": "handmk.com",
-     "publishedAt": "2026-11-13T00:06:00.000Z",
-     "link": "https://www.handmk.com/news/articleView.html?idxno=45036"
-    },
-    {
-     "title": "[회고 영화관] '집아죽', 사랑의 역설 [유진모 칼럼]",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-12T23:52:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95148"
-    },
-    {
-     "title": "영화 '취권'서 성룡과 맞붙었던 한국 배우…오늘 전해진 안타까운 소식",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-12T23:40:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1174241"
-    }
-   ]
-  },
-  {
    "keyword": "미세먼지",
    "sources": [
     "google"
    ],
    "articles90": 9,
-   "recent20": 6,
+   "recent20": 3,
    "press": 4,
    "firstArticleAt": "2026-11-12T23:32:00.000Z",
    "exclusive": false,
@@ -240,7 +304,7 @@
     "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-12T23:04:00.000Z",
    "exclusive": false,
@@ -269,9 +333,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 413,
-  "matched": 145,
-  "avgLeadMin": 566,
+  "flagged": 415,
+  "matched": 144,
+  "avgLeadMin": 569,
   "recent": [
    {
     "keyword": "사고",
