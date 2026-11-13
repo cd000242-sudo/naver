@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T15:36:43.959Z",
+ "builtAt": "2026-11-13T15:46:54.533Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,49 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 27,
  "candidates": [
   {
-   "keyword": "조현의 한반도 공동이익",
+   "keyword": "젠슨 황과 엔비디아",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 31,
+   "recent20": 4,
+   "press": 20,
+   "firstArticleAt": "2026-11-13T14:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "젠슨황 퇴진 직전 \"어찌 되든 상관없다\"…33년 경영 막 내린 순간",
+     "press": "kjdaily.com",
+     "publishedAt": "2026-11-13T15:46:00.000Z",
+     "link": "http://www.kjdaily.com/article.php?aid=1794584529692170276"
+    },
+    {
+     "title": "엔비디아 주가 고점 대비 30% 빠져… 코스피도 하락",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-13T15:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004009597?sid=101"
+    },
+    {
+     "title": "엔비디아, 굿즈 없애며 ‘젠슨 황 지우기’… 트럼프 “차기 CEO에 팀 쿡...",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-13T15:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004009596?sid=105"
+    }
+   ]
+  },
+  {
+   "keyword": "조현 한반도 평화 공동이익",
    "sources": [
     "nate"
    ],
    "articles90": 15,
-   "recent20": 2,
+   "recent20": 1,
    "press": 13,
-   "firstArticleAt": "2026-11-13T14:13:00.000Z",
+   "firstArticleAt": "2026-11-13T14:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -47,10 +79,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 15,
-   "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-13T14:13:00.000Z",
+   "articles90": 14,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-13T14:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -79,30 +111,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-13T14:15:00.000Z",
+   "articles90": 9,
+   "recent20": 3,
+   "press": 9,
+   "firstArticleAt": "2026-11-13T14:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "美 10월 생산자물가지수 0.3% 상승…시장 전망치 하회(상보)",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-13T15:40:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4444737"
+    },
+    {
+     "title": "美 10월 도매물가 전년 대비 6.5%↑…약 4년만에 최고(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-13T15:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016441406?sid=104"
+    },
     {
      "title": "美 10월 도매물가 전년 대비 6.5%↑…2022년 11월 이후 최고",
      "press": "biz.sbs.co.kr",
      "publishedAt": "2026-11-13T15:33:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/374/0000543608?sid=104"
-    },
-    {
-     "title": "금(금값, 금시세) 순금 한 돈 얼마?…미국 PPI 발표 이후 향방 '이목'",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-13T15:16:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=626660"
-    },
-    {
-     "title": "美 10월 도매물가 전달 대비 3.0%↑…시장 예상치 밑돌아",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-13T15:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005440993?sid=101"
     }
    ]
   },
@@ -111,95 +143,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 6,
-   "recent20": 4,
-   "press": 5,
-   "firstArticleAt": "2026-11-13T14:07:00.000Z",
+   "articles90": 9,
+   "recent20": 7,
+   "press": 7,
+   "firstArticleAt": "2026-11-13T15:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "박지현, 행사 휩쓸면서 여전한 모텔 사랑 “집 못 가고 일주일 숙박도”...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-13T15:35:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001187281"
+     "title": "'행사 프린스' 박지현, 하루에 행사만 2개..\"일주일 넘게 모텔 생활\" [나...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-13T15:43:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003487225"
     },
     {
-     "title": "박지현, 대학가요제서 분위기 띄워...퇴근도 미루고 코쿤 지켜보며 웃음",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-13T15:30:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=781586"
+     "title": "'나 혼자 산다' 박지현, 광안리 펍에서 혼술+피자 먹방",
+     "press": "enter.etoday.co.kr",
+     "publishedAt": "2026-11-13T15:42:00.000Z",
+     "link": "https://enter.etoday.co.kr/news/view/305205"
     },
     {
-     "title": "박지현, 코드쿤스트에 감동…'대학가요제'서 깜짝 만남",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-13T15:29:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009288649"
-    }
-   ]
-  },
-  {
-   "keyword": "3분기 매출 분석",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-13T14:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "하나증권 \"LG, 3분기 영업이익 21.8% 감소…주요 계열사 부진에 목표주 ...",
-     "press": "worktoday.co.kr",
-     "publishedAt": "2026-11-13T15:28:00.000Z",
-     "link": "http://www.worktoday.co.kr/news/articleView.html?idxno=92006"
-    },
-    {
-     "title": "네이버, 3분기 영업이익 21% 감소…AI 투자 성과가 반등 열쇠",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-13T15:16:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=503975"
-    },
-    {
-     "title": "[분석] 스페이스X·테슬라 합병 협상…'3조4천억 달러' 머스크 제국 탄생...",
-     "press": "thefairnews.co.kr",
-     "publishedAt": "2026-11-13T15:16:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94164"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황 퇴진 후 엔비디아는?",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-13T14:31:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"진짜 보스를 돌려달라\"…젠슨 황 퇴진 후폭풍에 흔들리는 엔비디아",
-     "press": "news-s.kr",
-     "publishedAt": "2026-11-13T15:20:00.000Z",
-     "link": "https://news-s.kr/view.html?id=L261114001349ddd7"
-    },
-    {
-     "title": "[사설] 젠슨 황 쇼크… AI 지각 변동과 미중 경쟁 속 기회 잡길",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-13T15:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000965500?sid=110"
-    },
-    {
-     "title": "[기업家] 엔비디아 ⑩ㅣ 젠슨 황 없는 엔비디아…리더십 공백에 AI 패권...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-13T15:00:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=626726"
+     "title": "박지현, '모텔 프린스' 등극... \"진짜 호텔보다 모텔이 좋아\" ('나혼산')",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-13T15:38:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000490094"
     }
    ]
   },
@@ -209,13 +176,19 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
    "firstArticleAt": "2026-11-13T14:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "한전KDN, 대한민국소통어워즈 3개 부문 석권 및 'AI브랜드대상' 수상",
+     "press": "cstimes.com",
+     "publishedAt": "2026-11-13T15:44:00.000Z",
+     "link": "https://www.cstimes.com/news/articleView.html?idxno=727924"
+    },
     {
      "title": "‘월아산 숲속의 진주’ 대한민국 조경대상 대통령상",
      "press": "chosun.com",
@@ -227,12 +200,38 @@
      "press": "medicaltimes.com",
      "publishedAt": "2026-11-13T15:10:00.000Z",
      "link": "https://www.medicaltimes.com/Main/News/NewsView.html?ID=1171840&ref=naverpc"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황 퇴진 후 엔비디아는?",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-13T14:31:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "젠슨황 퇴진 직전 \"어찌 되든 상관없다\"…33년 경영 막 내린 순간",
+     "press": "kjdaily.com",
+     "publishedAt": "2026-11-13T15:46:00.000Z",
+     "link": "http://www.kjdaily.com/article.php?aid=1794584529692170276"
     },
     {
-     "title": "이재명, 범LG家 3세 구본현 검거에 \"새로운 대한민국선 법 지켜야\"",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-13T14:44:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3448625"
+     "title": "\"진짜 보스를 돌려달라\"…젠슨 황 퇴진 후폭풍에 흔들리는 엔비디아",
+     "press": "news-s.kr",
+     "publishedAt": "2026-11-13T15:20:00.000Z",
+     "link": "https://news-s.kr/view.html?id=L261114001349ddd7"
+    },
+    {
+     "title": "[사설] 젠슨 황 쇼크… AI 지각 변동과 미중 경쟁 속 기회 잡길",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-13T15:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000965500?sid=110"
     }
    ]
   },
@@ -241,13 +240,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 4,
+   "articles90": 5,
    "recent20": 1,
-   "press": 4,
+   "press": 5,
    "firstArticleAt": "2026-11-13T15:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "구성환, '미혼' 첫사랑과 재회 \"40세까지 혼자면 나랑 결혼하자\"('나혼산...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-13T15:44:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004466518"
+    },
     {
      "title": "구성환, 50일 사귄 전여친 재회…\"마흔까지 결혼 안 했으면 하자고\" ('나...",
      "press": "tvreport.co.kr",
@@ -259,12 +264,6 @@
      "press": "starnewskorea.com",
      "publishedAt": "2026-11-13T15:15:00.000Z",
      "link": "https://m.entertain.naver.com/article/108/0003487223"
-    },
-    {
-     "title": "구성환, 50일 사귄 전여친 재회 “40살까지 미혼이면 결혼하자 플러팅”...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-13T15:12:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001187280"
     }
    ]
   },
@@ -275,7 +274,7 @@
     "nate"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-13T14:30:00.000Z",
    "exclusive": false,
@@ -300,75 +299,11 @@
      "link": "https://n.news.naver.com/mnews/article/014/0005604136?sid=101"
     }
    ]
-  },
-  {
-   "keyword": "IBK기업은행 4연승 질주",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-13T14:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "IBK기업은행, 프로배구 개막 4연승 질주",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-13T14:37:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/052/0002432642"
-    },
-    {
-     "title": "IBK, 흥국생명에 3-0 완승…4연승 질주",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-13T14:22:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/422/0000926033"
-    },
-    {
-     "title": "IBK, 흥국생명 완파하고 개막 4연승 질주…남자부 KB는 개막 4연패 수렁",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-13T14:10:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109893460356"
-    }
-   ]
-  },
-  {
-   "keyword": "ppi",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-13T14:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "금(금값, 금시세) 순금 한 돈 얼마?…미국 PPI 발표 이후 향방 '이목'",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-13T15:16:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=626660"
-    },
-    {
-     "title": "뉴욕증시, PPI 소화하며 혼조 출발",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-13T15:06:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4444736"
-    },
-    {
-     "title": "美 PPI 전월 대비 0.3% 상승…예상치 밑돌아",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-13T14:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004682079?sid=104"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 419,
+  "flagged": 421,
   "matched": 171,
   "avgLeadMin": 369,
   "recent": [
