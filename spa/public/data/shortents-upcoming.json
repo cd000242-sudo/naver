@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T18:48:27.774Z",
+ "builtAt": "2026-11-13T18:58:30.980Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -9,40 +9,7 @@
   "minPress": 2
  },
  "measured": 29,
- "candidates": [
-  {
-   "keyword": "젠슨 황과 엔비디아 위기",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-13T17:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"엔비디아, 英 ARM CEO와 접촉\"…젠슨 황 후임 되나",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-13T18:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005604145?sid=101"
-    },
-    {
-     "title": "FT \"엔비디아, 차기 CEO 후보로 ARM 하스 접촉\"",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-13T17:47:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261114000017"
-    },
-    {
-     "title": "사령탑 잃은 위기의 엔비디아, 젠슨 황 후임으로 하스 암 CEO 접촉",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-13T17:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009288660?sid=104"
-    }
-   ]
-  }
- ],
+ "candidates": [],
  "hitRate": {
   "days": 7,
   "flagged": 427,
