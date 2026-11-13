@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T15:26:39.155Z",
+ "builtAt": "2026-11-13T15:36:43.959Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "조현의 한반도 공동이익",
@@ -16,12 +16,18 @@
     "nate"
    ],
    "articles90": 15,
-   "recent20": 5,
+   "recent20": 2,
    "press": 13,
-   "firstArticleAt": "2026-11-13T14:00:00.000Z",
+   "firstArticleAt": "2026-11-13T14:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "조현 \"한반도 문제는 한국의 사활적 이익\"...中 건설적 역할 당부",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-13T15:27:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261114000004"
+    },
     {
      "title": "조현, 중국에 '한반도 문제' 역할 당부…왕이 \"정책 변함없어\"",
      "press": "yonhapnewstv.co.kr",
@@ -33,12 +39,38 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-13T15:14:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014321699?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "조현 한중 외교장관 회담",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 15,
+   "recent20": 2,
+   "press": 13,
+   "firstArticleAt": "2026-11-13T14:13:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "조현 \"한반도 문제는 한국의 사활적 이익\"...中 건설적 역할 당부",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-13T15:27:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261114000004"
     },
     {
-     "title": "조현 \"한반도 평화가 공동이익\"…왕이 \"관계개선 정상궤도\"",
+     "title": "조현, 중국에 '한반도 문제' 역할 당부…왕이 \"정책 변함없어\"",
      "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-13T15:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926040?sid=104"
+     "publishedAt": "2026-11-13T15:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926042?sid=100"
+    },
+    {
+     "title": "APEC 앞두고 한중외교장관 회담…조현 \"中 한반도 건설적 역할\" 당부",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-13T15:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014321699?sid=100"
     }
    ]
   },
@@ -47,13 +79,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
+   "articles90": 8,
    "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-13T14:02:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-13T14:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "美 10월 도매물가 전년 대비 6.5%↑…2022년 11월 이후 최고",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-13T15:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000543608?sid=104"
+    },
     {
      "title": "금(금값, 금시세) 순금 한 돈 얼마?…미국 PPI 발표 이후 향방 '이목'",
      "press": "cbci.co.kr",
@@ -65,44 +103,38 @@
      "press": "mt.co.kr",
      "publishedAt": "2026-11-13T15:01:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/008/0005440993?sid=101"
-    },
-    {
-     "title": "미국증시, 물가 둔화에도 나스닥 하락…엔비디아·SK하이닉스 약세, 다...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-13T14:44:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16276154"
     }
    ]
   },
   {
-   "keyword": "한중 외교장관 회담",
+   "keyword": "나혼자산다 박지현",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-13T14:00:00.000Z",
+   "articles90": 6,
+   "recent20": 4,
+   "press": 5,
+   "firstArticleAt": "2026-11-13T14:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "APEC 앞두고 한중외교장관 회담…조현 \"中 한반도 건설적 역할\" 당부",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-13T15:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014321699?sid=100"
+     "title": "박지현, 행사 휩쓸면서 여전한 모텔 사랑 “집 못 가고 일주일 숙박도”...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-13T15:35:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001187281"
     },
     {
-     "title": "韓은 '한반도 비핵화'·中은 '하나의 중국'…한중 외교장관 온도차(종합...",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-13T15:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006409712?sid=100"
+     "title": "박지현, 대학가요제서 분위기 띄워...퇴근도 미루고 코쿤 지켜보며 웃음",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-13T15:30:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=781586"
     },
     {
-     "title": "조현 장관 한반도 평화는 한중 공동이익 주장",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-13T14:52:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261113010005346"
+     "title": "박지현, 코드쿤스트에 감동…'대학가요제'서 깜짝 만남",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-13T15:29:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009288649"
     }
    ]
   },
@@ -111,18 +143,18 @@
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 3,
+   "articles90": 7,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-13T14:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[분석] 스페이스X·테슬라 합병 협상…'3조4천억 달러' 머스크 제국 탄생...",
-     "press": "thefairnews.co.kr",
-     "publishedAt": "2026-11-13T15:16:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94164"
+     "title": "하나증권 \"LG, 3분기 영업이익 21.8% 감소…주요 계열사 부진에 목표주 ...",
+     "press": "worktoday.co.kr",
+     "publishedAt": "2026-11-13T15:28:00.000Z",
+     "link": "http://www.worktoday.co.kr/news/articleView.html?idxno=92006"
     },
     {
      "title": "네이버, 3분기 영업이익 21% 감소…AI 투자 성과가 반등 열쇠",
@@ -131,20 +163,21 @@
      "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=503975"
     },
     {
-     "title": "엘앤에프, 3분기 적자 전환…재고손실 빼면 4분기 연속 흑자",
-     "press": "pinpointnews.co.kr",
+     "title": "[분석] 스페이스X·테슬라 합병 협상…'3조4천억 달러' 머스크 제국 탄생...",
+     "press": "thefairnews.co.kr",
      "publishedAt": "2026-11-13T15:16:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=503983"
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94164"
     }
    ]
   },
   {
    "keyword": "젠슨 황 퇴진 후 엔비디아는?",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-13T14:31:00.000Z",
    "exclusive": false,
@@ -171,34 +204,100 @@
    ]
   },
   {
-   "keyword": "젠슨 황 불륜 논란",
+   "keyword": "대한민국",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "google"
    ],
    "articles90": 4,
-   "recent20": 0,
+   "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-13T13:58:00.000Z",
+   "firstArticleAt": "2026-11-13T14:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[김대호 인물] 젠슨황 그 다음 \"팀 쿡\" ... 트럼프 톱픽 엔비디아 소방수",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-13T14:56:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=202611130836033376906806b77b_1"
+     "title": "‘월아산 숲속의 진주’ 대한민국 조경대상 대통령상",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-13T15:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004009554?sid=102"
     },
     {
-     "title": "러트닉 美 상무, '젠슨 황 스캔들' 상원 자진 출석…엔비디아 中 수출 통...",
+     "title": "골드만비뇨의학과 국제학회 참가...대한민국 수술 노하우 공유",
+     "press": "medicaltimes.com",
+     "publishedAt": "2026-11-13T15:10:00.000Z",
+     "link": "https://www.medicaltimes.com/Main/News/NewsView.html?ID=1171840&ref=naverpc"
+    },
+    {
+     "title": "이재명, 범LG家 3세 구본현 검거에 \"새로운 대한민국선 법 지켜야\"",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-13T14:44:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3448625"
+    }
+   ]
+  },
+  {
+   "keyword": "구성환 전여친 재회",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-13T15:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "구성환, 50일 사귄 전여친 재회…\"마흔까지 결혼 안 했으면 하자고\" ('나...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-13T15:26:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001408247"
+    },
+    {
+     "title": "구성환, 전여친과 재회 \"결혼 약속도..20대 때 맨날 전화\" [나혼산][별별...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-13T15:15:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003487223"
+    },
+    {
+     "title": "구성환, 50일 사귄 전여친 재회 “40살까지 미혼이면 결혼하자 플러팅”...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-13T15:12:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001187280"
+    }
+   ]
+  },
+  {
+   "keyword": "모두의 창업 개인정보 유출",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-13T14:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[사실은 이렇습니다] 민간 AI 솔루션 기업 A사 개인정보 유출...유출 대...",
+     "press": "korea.kr",
+     "publishedAt": "2026-11-13T15:17:00.000Z",
+     "link": "https://www.korea.kr/briefing/actuallyView.do?newsId=148975732&call_from=naver_news"
+    },
+    {
+     "title": "중기부 '모두의 창업' 개인정보 유출...1차 사고 5개월 만",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-13T14:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000520693?sid=101"
+    },
+    {
+     "title": "중기부 2차 '모두의창업' 5개월 만에 또 개인정보 뚫렸다",
      "press": "fnnews.com",
-     "publishedAt": "2026-11-13T14:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005604134?sid=104"
-    },
-    {
-     "title": "러트닉 미 상무, 의회에서 젠슨 황 스캔들 증언한다",
-     "press": "segye.com",
-     "publishedAt": "2026-11-13T14:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004175005?sid=104"
+     "publishedAt": "2026-11-13T14:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005604136?sid=101"
     }
    ]
   },
@@ -207,10 +306,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-13T14:04:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-13T14:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -235,76 +334,12 @@
    ]
   },
   {
-   "keyword": "나혼자산다 박지현",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-13T14:07:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'나혼산' 구성환, 친구들과 30년 우정 쌓아...박지현X코쿤, 대학가요제서...",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-13T15:20:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=781585"
-    },
-    {
-     "title": "구성환 싱글 탈출? ‘前 여친’ 이초희 공개 (나혼자산다)",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-13T15:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000052601"
-    },
-    {
-     "title": "‘나혼산’ 박지현, 모텔 벗어나 혼술 도전 “가만히 있으면 바뀌는 게...",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-13T14:07:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000327862"
-    }
-   ]
-  },
-  {
-   "keyword": "대한민국",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-13T14:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "골드만비뇨의학과 국제학회 참가...대한민국 수술 노하우 공유",
-     "press": "medicaltimes.com",
-     "publishedAt": "2026-11-13T15:10:00.000Z",
-     "link": "https://www.medicaltimes.com/Main/News/NewsView.html?ID=1171840&ref=naverpc"
-    },
-    {
-     "title": "이재명, 범LG家 3세 구본현 검거에 \"새로운 대한민국선 법 지켜야\"",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-13T14:44:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3448625"
-    },
-    {
-     "title": "이 대통령, 주가조작 범LG가 검거에 \"새 대한민국선 법지켜야\"",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-13T14:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000520690?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "ppi",
    "sources": [
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-13T14:35:00.000Z",
    "exclusive": false,
@@ -329,43 +364,11 @@
      "link": "https://n.news.naver.com/mnews/article/011/0004682079?sid=104"
     }
    ]
-  },
-  {
-   "keyword": "엔비디아 GPU 26만장 공급",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-13T14:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "HBM 공급 SK하이닉스·삼성전자 '촉각'…",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-13T15:00:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082656"
-    },
-    {
-     "title": "'젠슨 황 없는 엔비디아' 긴급 대응…정부 \"엔비디아, GPU 26만 장 공급 ...",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-13T14:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000121324?sid=101"
-    },
-    {
-     "title": "‘엔비디아 생태계’ 발들인 한국 기업들 영향은?",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-13T14:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012293798?sid=101"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 416,
+  "flagged": 419,
   "matched": 171,
   "avgLeadMin": 369,
   "recent": [
