@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T16:27:27.145Z",
+ "builtAt": "2026-11-13T16:37:30.922Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,47 +11,14 @@
  "measured": 27,
  "candidates": [
   {
-   "keyword": "젠슨 황과 엔비디아",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 33,
-   "recent20": 2,
-   "press": 20,
-   "firstArticleAt": "2026-11-13T15:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[사설] 젠슨 황 퇴진, AI 산업 불확실성 대비해야",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-13T16:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001885045?sid=110"
-    },
-    {
-     "title": "젠슨 황 끌어낸 엔비디아 법무총괄, 美의회서 '판도라 상자' 여나",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-13T16:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009288653?sid=104"
-    },
-    {
-     "title": "뉴욕 증시, PPI 4년 만에 최고 수준 상승에 혼조 출발...엔비디아 3% 넘게...",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-13T16:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432656?sid=104"
-    }
-   ]
-  },
-  {
    "keyword": "구성환",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 13,
+   "articles90": 11,
    "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-13T15:01:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-13T15:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -115,10 +82,16 @@
    "articles90": 8,
    "recent20": 1,
    "press": 7,
-   "firstArticleAt": "2026-11-13T15:01:00.000Z",
+   "firstArticleAt": "2026-11-13T15:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "뉴욕증시, 10월 PPI 둔화 속 장 초반 혼조세",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-13T16:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001204711?sid=101"
+    },
     {
      "title": "미국 10월 도매 물가 전년보다 6.5%↑...4년 만에 최고",
      "press": "ytn.co.kr",
@@ -130,12 +103,6 @@
      "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-13T16:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/422/0000926044?sid=104"
-    },
-    {
-     "title": "美 10월 생산자물가 상승률 4년 만에 최고…시장 예상은 하회(종합)",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-13T15:56:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4444738"
     }
    ]
   },
@@ -145,10 +112,42 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 8,
+   "articles90": 6,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-13T14:59:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-13T15:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "조현 \"한반도 문제는 한국의 사활적 이익\"...中 건설적 역할 당부",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-13T15:27:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261114000004"
+    },
+    {
+     "title": "조현, 중국에 '한반도 문제' 역할 당부…왕이 \"정책 변함없어\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-13T15:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926042?sid=100"
+    },
+    {
+     "title": "APEC 앞두고 한중외교장관 회담…조현 \"中 한반도 건설적 역할\" 당부",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-13T15:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014321699?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "조현 중국 역할 당부",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-13T15:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -178,13 +177,19 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
    "firstArticleAt": "2026-11-13T15:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "하림, '제11회 대한민국 범죄예방대상' 대통령 표창 수상",
+     "press": "amnews.co.kr",
+     "publishedAt": "2026-11-13T16:34:00.000Z",
+     "link": "http://www.amnews.co.kr/news/articleView.html?idxno=75624"
+    },
     {
      "title": "한전KDN, 대한민국소통어워즈 3개 부문 석권 및 'AI브랜드대상' 수상",
      "press": "cstimes.com",
@@ -196,12 +201,6 @@
      "press": "chosun.com",
      "publishedAt": "2026-11-13T15:35:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/023/0004009554?sid=102"
-    },
-    {
-     "title": "골드만비뇨의학과 국제학회 참가...대한민국 수술 노하우 공유",
-     "press": "medicaltimes.com",
-     "publishedAt": "2026-11-13T15:10:00.000Z",
-     "link": "https://www.medicaltimes.com/Main/News/NewsView.html?ID=1171840&ref=naverpc"
     }
    ]
   }
