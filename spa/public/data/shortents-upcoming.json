@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T16:57:39.739Z",
+ "builtAt": "2026-11-13T17:07:43.835Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,34 @@
  "measured": 28,
  "candidates": [
   {
-   "keyword": "나혼자산다 박지현",
+   "keyword": "오현규 동점골 폭발",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 9,
+   "articles90": 7,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-13T15:29:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-13T15:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "박지현, '행사프린스'가 일주일 동안 모텔에?...\"아예 집 못 들어가\" (나...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-13T16:06:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002080345"
+     "title": "'도하 참사' 모레노호, 오현규·이재성 득점포에도 21년 만에 사우디에...",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-13T16:34:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109894212612"
     },
     {
-     "title": "투바투 연준, 다음주 '나 혼자 산다' 출연 예고",
-     "press": "enter.etoday.co.kr",
+     "title": "오현규 동점골 9분 만에 연속 2실점…수비 무너진 한국, 사우디에 1-3 열...",
+     "press": "stoo.com",
      "publishedAt": "2026-11-13T16:00:00.000Z",
-     "link": "https://enter.etoday.co.kr/news/view/305215"
+     "link": "http://www.stoo.com/article.php?aid=109894065732"
     },
     {
-     "title": "'행사 프린스' 박지현, 하루에 행사만 2개..\"일주일 넘게 모텔 생활\" [나...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-13T15:43:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003487225"
+     "title": "기분 좋게 후반 열었다… 오현규, 사우디전 후반 2분 동점골 폭발",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-13T15:50:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/396/0000760875"
     }
    ]
   },
@@ -47,10 +47,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 5,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-13T15:33:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-13T15:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,18 +75,55 @@
    ]
   },
   {
-   "keyword": "대한민국",
+   "keyword": "나혼자산다 박지현",
    "sources": [
-    "signal.bz",
-    "google"
+    "daum"
    ],
-   "articles90": 3,
+   "articles90": 5,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-13T15:35:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-13T15:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "박지현, '행사프린스'가 일주일 동안 모텔에?...\"아예 집 못 들어가\" (나...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-13T16:06:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002080345"
+    },
+    {
+     "title": "투바투 연준, 다음주 '나 혼자 산다' 출연 예고",
+     "press": "enter.etoday.co.kr",
+     "publishedAt": "2026-11-13T16:00:00.000Z",
+     "link": "https://enter.etoday.co.kr/news/view/305215"
+    },
+    {
+     "title": "'행사 프린스' 박지현, 하루에 행사만 2개..\"일주일 넘게 모텔 생활\" [나...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-13T15:43:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003487225"
+    }
+   ]
+  },
+  {
+   "keyword": "대한민국",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-13T15:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'사우디전 3실점' 위기의 대한민국",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-13T17:01:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/001/0016441451"
+    },
     {
      "title": "하림, '제11회 대한민국 범죄예방대상' 대통령 표창 수상",
      "press": "amnews.co.kr",
@@ -98,19 +135,13 @@
      "press": "cstimes.com",
      "publishedAt": "2026-11-13T15:44:00.000Z",
      "link": "https://www.cstimes.com/news/articleView.html?idxno=727924"
-    },
-    {
-     "title": "‘월아산 숲속의 진주’ 대한민국 조경대상 대통령상",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-13T15:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004009554?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 423,
+  "flagged": 424,
   "matched": 171,
   "avgLeadMin": 369,
   "recent": [
