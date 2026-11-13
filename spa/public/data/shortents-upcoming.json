@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T23:10:04.107Z",
+ "builtAt": "2026-11-13T23:20:08.409Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,8 +8,72 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 27,
  "candidates": [
+  {
+   "keyword": "뉴욕증시 혼조",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 19,
+   "recent20": 1,
+   "press": 18,
+   "firstArticleAt": "2026-11-13T21:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[속보]뉴욕증시 혼조 마감…다우 상승에도 나스닥 0.91% 하락, 엔비디아...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-13T23:06:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=626842"
+    },
+    {
+     "title": "뉴욕증시, 엔비디아 사태 확산·연준 AI 고평가 경고에 혼조 마감",
+     "press": "globale.co.kr",
+     "publishedAt": "2026-11-13T22:56:00.000Z",
+     "link": "https://www.globale.co.kr/news/articleView.html?idxno=41641"
+    },
+    {
+     "title": "뉴욕증시, 엔비디아 하락에 나스닥 0.91%↓ 혼조 마감",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-13T22:56:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000082579"
+    }
+   ]
+  },
+  {
+   "keyword": "美전역 항공 중단",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 17,
+   "recent20": 5,
+   "press": 14,
+   "firstArticleAt": "2026-11-13T21:53:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美 전역 항공기 이륙 전면 중단…관제센터 통신 장애에 7800편 지연",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-13T23:12:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2648135"
+    },
+    {
+     "title": "美 하늘길 멈췄다…FAA \"항공로 관제센터 통신 장애\", 사이버공격 배제...",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-13T23:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002248531?sid=105"
+    },
+    {
+     "title": "美전역 항공기 이륙 중단…교통장관 “관제센터 통신 문제”",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-13T23:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003565123?sid=104"
+    }
+   ]
+  },
   {
    "keyword": "날씨",
    "sources": [
@@ -17,12 +81,18 @@
     "google"
    ],
    "articles90": 14,
-   "recent20": 6,
-   "press": 12,
-   "firstArticleAt": "2026-11-13T21:42:00.000Z",
+   "recent20": 2,
+   "press": 13,
+   "firstArticleAt": "2026-11-13T22:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[부산·울산·경남 날씨예보] 15일 새벽까지 비 최대 30㎜…16일 강풍·풍...",
+     "press": "thefairnews.co.kr",
+     "publishedAt": "2026-11-13T23:18:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94170"
+    },
     {
      "title": "[전국 지역별 오늘의 날씨 및 주말날씨]오늘 전국 비, 모레 동해안 중심...",
      "press": "economytalk.kr",
@@ -34,44 +104,6 @@
      "press": "sisunnews.co.kr",
      "publishedAt": "2026-11-13T23:00:00.000Z",
      "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=249679"
-    },
-    {
-     "title": "[오늘날씨] 전국 비, 제주 최대 50mm…월요일 강원 산지엔 눈 5cm",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-13T22:58:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885582"
-    }
-   ]
-  },
-  {
-   "keyword": "美전역 항공 중단",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 15,
-   "recent20": 4,
-   "press": 12,
-   "firstArticleAt": "2026-11-13T21:53:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美 하늘길 멈췄다…FAA \"항공로 관제센터 통신 장애\", 사이버공격 배제...",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-13T23:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002248531?sid=105"
-    },
-    {
-     "title": "美전역 항공기 운항중단 '올스톱' 사태…\"관제통신시스템 장애\"(종합2보...",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-13T23:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016441625?sid=104"
-    },
-    {
-     "title": "\"비행기 못 뜬다\"…美 전역 공항 마비에 승객들 '대혼란'",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-13T23:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001272737?sid=104"
     }
    ]
   },
@@ -81,7 +113,7 @@
     "signal.bz"
    ],
    "articles90": 9,
-   "recent20": 3,
+   "recent20": 1,
    "press": 8,
    "firstArticleAt": "2026-11-13T21:56:00.000Z",
    "exclusive": false,
@@ -108,12 +140,110 @@
    ]
   },
   {
+   "keyword": "돈",
+   "sources": [
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-13T21:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"나라에 돈 빌려줬더니 과징금 1.6조\"…증권가 '부글부글'[위클리IB]",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-13T23:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006409756?sid=101"
+    },
+    {
+     "title": "[알쏭달쏭Y] 신약 허가받는 데도 돈이 든다?…요상한 의약품 수수료의 ...",
+     "press": "theviewers.co.kr",
+     "publishedAt": "2026-11-13T23:02:00.000Z",
+     "link": "https://theviewers.co.kr/View.aspx?No=4309902"
+    },
+    {
+     "title": "여전히 인텔보다 AMD를 좋아하는 이유 [돈 되는 해외 주식]",
+     "press": "magazine.hankyung.com",
+     "publishedAt": "2026-11-13T22:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/050/0000113235?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "주한 미군의 철수",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-13T21:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"트럼프에 전작권 전환은 주한미군 철수 명분\"…워싱턴서 제기된 우려",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-13T23:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002394035?sid=104"
+    },
+    {
+     "title": "前 주한미군사령관, ‘전작권 당장 전환 가능’ 강신철에 “매우 실망스...",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-13T23:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002832717?sid=100"
+    },
+    {
+     "title": "美전문가들 \"트럼프, 전작권 전환을 주한미군 철수 수단으로 봐\"",
+     "press": "tfmedia.co.kr",
+     "publishedAt": "2026-11-13T22:44:00.000Z",
+     "link": "https://www.tfmedia.co.kr/news/article.html?no=208882"
+    }
+   ]
+  },
+  {
+   "keyword": "2026년 11월 14일 운세",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-13T22:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오늘의 운세] 2026년 11월 14일 띠별 운세",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-13T23:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003485522?sid=103"
+    },
+    {
+     "title": "2026년 11월 14일, 오늘의 띠별 운세 [인포그래픽]",
+     "press": "sisunnews.co.kr",
+     "publishedAt": "2026-11-13T23:00:00.000Z",
+     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=249395"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 14일 토요일 띠별 운세… 쥐띠·닭띠·원숭이...",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-13T22:12:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082658"
+    }
+   ]
+  },
+  {
    "keyword": "조현, 중국에 한반도 역할 당부",
    "sources": [
     "nate"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-13T22:06:00.000Z",
    "exclusive": false,
@@ -138,76 +268,11 @@
      "link": "https://n.news.naver.com/mnews/article/016/0002723334?sid=100"
     }
    ]
-  },
-  {
-   "keyword": "주한 미군의 철수",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-13T21:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "前 주한미군사령관, ‘전작권 당장 전환 가능’ 강신철에 “매우 실망스...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-13T23:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002832717?sid=100"
-    },
-    {
-     "title": "美전문가들 \"트럼프, 전작권 전환을 주한미군 철수 수단으로 봐\"",
-     "press": "tfmedia.co.kr",
-     "publishedAt": "2026-11-13T22:44:00.000Z",
-     "link": "https://www.tfmedia.co.kr/news/article.html?no=208882"
-    },
-    {
-     "title": "빅터 차 \"트럼프, 전작권 전환을 주한미군 철수 기회로 봐\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-13T21:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009288729?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "보안",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-13T21:42:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "커지는 車 OLED 시장…삼성·LGD, '보안·SW 인증' 무장",
-     "press": "daily.hankooki.com",
-     "publishedAt": "2026-11-13T23:00:00.000Z",
-     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1424780"
-    },
-    {
-     "title": "금융보안원, 해킹 공격한 IP 246개 차단완료…국적은 한국",
-     "press": "tfmedia.co.kr",
-     "publishedAt": "2026-11-13T22:26:00.000Z",
-     "link": "https://www.tfmedia.co.kr/news/article.html?no=208881"
-    },
-    {
-     "title": "[단독] 금융보안원 뚫린 이유…\"불편하다고 제한 풀어\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-13T21:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001402962?sid=101"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 442,
+  "flagged": 444,
   "matched": 186,
   "avgLeadMin": 359,
   "recent": [
