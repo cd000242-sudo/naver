@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T00:32:27.076Z",
+ "builtAt": "2026-11-13T00:42:36.178Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,52 +8,90 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 28,
  "candidates": [
   {
-   "keyword": "CL 더블랙레이블과 전속계약",
+   "keyword": "차기 회장 후보 6명 압축",
    "sources": [
     "nate"
    ],
-   "articles90": 25,
-   "recent20": 0,
-   "press": 24,
-   "firstArticleAt": "2026-11-12T23:06:00.000Z",
-   "exclusive": true,
+   "articles90": 40,
+   "recent20": 11,
+   "press": 37,
+   "firstArticleAt": "2026-11-12T23:42:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "투애니원 CL, 테디 품에 안겼다…11월 신곡 발매",
-     "press": "atstar1.com",
-     "publishedAt": "2026-11-13T00:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/415/0000053757"
+     "title": "차기 은행연합회장 후보군 6명 확정…윤종규·손병환·윤종원 등 포함돼",
+     "press": "consumernews.co.kr",
+     "publishedAt": "2026-11-13T00:38:00.000Z",
+     "link": "http://www.consumernews.co.kr/news/articleView.html?idxno=768215"
     },
     {
-     "title": "CL, 테디 품으로…더블랙레이블 전속계약",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-12T23:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/629/0000551519"
+     "title": "차기 은행연합회장 후보 6인 확정...민간 5명·관료 1명",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-13T00:38:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=882917"
     },
     {
-     "title": "CL, 테디 손 잡았다…더블랙레이블 전속계약 [공식]",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-12T23:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/015/0005353462"
+     "title": "윤종규 전 KB회장 복귀하나…은행연합회장 후보 6명 압축",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-13T00:34:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261113000245"
     }
    ]
   },
   {
-   "keyword": "구글 젠틀몬스터 협업 아이웨어",
+   "keyword": "젠슨 황 퇴진 영향은?",
    "sources": [
     "nate"
    ],
-   "articles90": 22,
-   "recent20": 6,
-   "press": 22,
-   "firstArticleAt": "2026-11-12T23:06:00.000Z",
+   "articles90": 48,
+   "recent20": 9,
+   "press": 37,
+   "firstArticleAt": "2026-11-12T23:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "젠슨 황 퇴진에 AI 밸류체인 흔들…국내 증시 후폭풍 촉각",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-13T00:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001040083?sid=101"
+    },
+    {
+     "title": "젠슨 황 퇴진, 엔비디아 후계 구도 안갯속···팀 쿡·리사 수 등 거론",
+     "press": "smartbizn.com",
+     "publishedAt": "2026-11-13T00:32:00.000Z",
+     "link": "https://www.smartbizn.com/news/articleView.html?idxno=159335"
+    },
+    {
+     "title": "AI 황금기에..'엔비디아 33년' 젠슨 황 퇴진",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-13T00:30:00.000Z",
+     "link": "http://www.breaknews.com/1250717"
+    }
+   ]
+  },
+  {
+   "keyword": "젠틀몬스터 아이웨어 공개",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 33,
+   "recent20": 7,
+   "press": 33,
+   "firstArticleAt": "2026-11-12T23:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "삼성전자, 구글과 손잡고 AI 안경 30종 공개…12월 10일 국내 상륙",
+     "press": "moneystorm.kr",
+     "publishedAt": "2026-11-13T00:29:00.000Z",
+     "link": "https://www.moneystorm.kr/news/articleView.html?idxno=8398"
+    },
     {
      "title": "\"안경 쓰고 통역·길 안내까지\"⋯삼성, 뉴욕서 '인텔리전트 아이웨어' 공...",
      "press": "inews24.com",
@@ -65,27 +103,187 @@
      "press": "wsobi.com",
      "publishedAt": "2026-11-13T00:28:00.000Z",
      "link": "http://www.wsobi.com/news/articleView.html?idxno=321680"
-    },
-    {
-     "title": "구글 AI 기반 인텔리전트 아이웨어 사전 예약 시작…기능·스타일 모두...",
-     "press": "epnc.co.kr",
-     "publishedAt": "2026-11-13T00:26:00.000Z",
-     "link": "https://www.epnc.co.kr/news/articleView.html?idxno=409727"
     }
    ]
   },
   {
-   "keyword": "최혜진 공동 선두",
+   "keyword": "CL 더블랙레이블과 전속계약",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 23,
+   "recent20": 3,
+   "press": 21,
+   "firstArticleAt": "2026-11-12T23:14:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "CL(씨엘), 더블랙레이블과 전속계약..11월 신곡 발매 ’기대감↑’",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-13T00:38:00.000Z",
+     "link": "http://www.breaknews.com/1250726"
+    },
+    {
+     "title": "CL, 더블랙레이블과 전속계약⋯테디 손잡고 11월 신곡 발표",
+     "press": "joynews24.com",
+     "publishedAt": "2026-11-13T00:36:00.000Z",
+     "link": "http://www.joynews24.com/view/2025819"
+    },
+    {
+     "title": "씨엘, 7년 만에 새 둥지 ‘테디 품으로’…더블랙레이블 전속계약, “이...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-13T00:33:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001280719"
+    }
+   ]
+  },
+  {
+   "keyword": "세브란스 50대 송치",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 19,
+   "recent20": 1,
+   "press": 19,
+   "firstArticleAt": "2026-11-12T23:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "세브란스 정신과 교수 흉기 피습 50대女 구속 송치",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-13T00:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005603809?sid=102"
+    },
+    {
+     "title": "'세브란스 의사 흉기 피습' 50대 여성 구속 송치 … '임세원법' 적용",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-13T00:22:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/13/2026111300041.html"
+    },
+    {
+     "title": "‘세브란스 의사 습격’ 50대 구속 송치…임세원법 등 적용",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-13T00:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002832036?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "한국전력",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 17,
+   "recent20": 7,
+   "press": 15,
+   "firstArticleAt": "2026-11-12T23:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한국전력 주가 급락, 3분기 실적 부진과 중동 전쟁의 여파",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-13T00:40:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885354"
+    },
+    {
+     "title": "한국전력, 영업이익 71% 급감에 장 초반 9%대 급락[특징주]",
+     "press": "newsway.co.kr",
+     "publishedAt": "2026-11-13T00:38:00.000Z",
+     "link": "https://www.newsway.co.kr/news/view?ud=2026111309323064535"
+    },
+    {
+     "title": "[특징주] 한국전력, 3분기 실적 부진에 9%대 급락",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-13T00:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001204517?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "월급방위대 TF 회의",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 19,
+   "recent20": 5,
+   "press": 15,
+   "firstArticleAt": "2026-11-13T00:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "직장인 유리지갑 지킨다…정부, 범부처 '월급방위대 TF' 본격 가동",
+     "press": "widedaily.com",
+     "publishedAt": "2026-11-13T00:38:00.000Z",
+     "link": "https://www.widedaily.com/news/articleView.html?idxno=303608"
+    },
+    {
+     "title": "월세 공제 늘리고 교통비 부담 낮추고…정부, ‘월급방위대’ TF 가동",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-13T00:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003154715?sid=101"
+    },
+    {
+     "title": "권대영 차관, 월급방위대 TF 킥오프 회의 주재",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-13T00:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016439903?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "가짜 3.3 기획감독",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 15,
+   "recent20": 3,
+   "press": 15,
+   "firstArticleAt": "2026-11-13T00:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "노동부, '가짜 3.3 계약'과 '사업장 쪼개기' 집중 단속 착수—160억 원 탈...",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-13T00:40:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885358"
+    },
+    {
+     "title": "고용노동부, '가짜 3.3 계약·사업장 쪼개기' 140여 곳 집중 감독",
+     "press": "idsn.co.kr",
+     "publishedAt": "2026-11-13T00:26:00.000Z",
+     "link": "https://idsn.co.kr/news/view/1065572635094026"
+    },
+    {
+     "title": "노동부, '가짜 3.3·사업장 쪼개기' 140여 곳 정조준…16일부터 두 달간...",
+     "press": "widedaily.com",
+     "publishedAt": "2026-11-13T00:24:00.000Z",
+     "link": "https://www.widedaily.com/news/articleView.html?idxno=303591"
+    }
+   ]
+  },
+  {
+   "keyword": "최혜진, LPGA 9언더파 선두",
    "sources": [
     "nate"
    ],
    "articles90": 14,
    "recent20": 2,
-   "press": 14,
-   "firstArticleAt": "2026-11-12T23:08:00.000Z",
+   "press": 13,
+   "firstArticleAt": "2026-11-12T23:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "최혜진 디 아니카 첫날 9언더파 공동 선두",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-13T00:32:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/016/0002722954"
+    },
     {
      "title": "최혜진, 디 안니카 드리븐 첫날 공동 선두",
      "press": "ytn.co.kr",
@@ -97,50 +295,77 @@
      "press": "newdaily.co.kr",
      "publishedAt": "2026-11-13T00:20:00.000Z",
      "link": "https://www.newdaily.co.kr/site/data/html/2026/11/13/2026111300042.html"
-    },
-    {
-     "title": "최혜진, LPGA 투어 디안니카 1R 9언더파 선두…첫 우승 재도전",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-13T00:09:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/055/0001402764"
     }
    ]
   },
   {
-   "keyword": "세브란스 흉기 난동",
+   "keyword": "CL, 테디 품으로 계약",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-12T23:36:00.000Z",
-   "exclusive": false,
+   "articles90": 14,
+   "recent20": 1,
+   "press": 13,
+   "firstArticleAt": "2026-11-12T23:14:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "경찰, '세브란스 병원 흉기난동' 50대 여성 송치",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-13T00:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000925752?sid=102"
+     "title": "씨엘, 7년 만에 새 둥지 ‘테디 품으로’…더블랙레이블 전속계약, “이...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-13T00:33:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001280719"
     },
     {
-     "title": "'세브란스병원 흉기난동' 50대 여성 공소청 송치",
-     "press": "kookje.co.kr",
+     "title": "씨엘, 테디 '더블랙레이블' 품으로…이달 중 신곡",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-13T00:15:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014319933"
+    },
+    {
+     "title": "투애니원 CL, 테디 품에 안겼다…11월 신곡 발매",
+     "press": "atstar1.com",
      "publishedAt": "2026-11-13T00:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000161169?sid=102"
+     "link": "https://m.entertain.naver.com/article/415/0000053757"
+    }
+   ]
+  },
+  {
+   "keyword": "영화",
+   "sources": [
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 5,
+   "press": 7,
+   "firstArticleAt": "2026-11-13T00:06:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "창원상공대상 시상…경영대상에 영화금속 최동윤·유니온 강신유 대표",
+     "press": "cnbnews.com",
+     "publishedAt": "2026-11-13T00:40:00.000Z",
+     "link": "https://www.cnbnews.com/news/articleView.html?idxno=1023656"
     },
     {
-     "title": "경찰, ‘신촌 세브란스병원 흉기난동’ 50대 여성 공소청 송치",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-12T23:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001884940?sid=102"
+     "title": "무술영화 전설 황정리, 12일 별세 \"독보적 발차기 영원히 기억될 것\"",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-13T00:34:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000052507"
+    },
+    {
+     "title": "영화 ‘폭설’ 등[Culture Pick]",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-13T00:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002832531?sid=103"
     }
    ]
   },
   {
    "keyword": "메가성장특위 예산안 간담회",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 34,
@@ -171,98 +396,66 @@
    ]
   },
   {
-   "keyword": "출근하는 이용철 후보자",
+   "keyword": "이재룡 뺑소니 첫 공판",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-12T23:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "음주 논란만 세 번째…'술타기 의혹' 이재룡, 오늘(13일) 법정 선다 [이...",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-13T00:41:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000052508"
+    },
+    {
+     "title": "음주운전 혐의 제외..'유호정 남편' 이재룡, 오늘(13일) 뺑소니·술타기...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-13T00:12:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003487089"
+    },
+    {
+     "title": "'뺑소니·술타기 의혹' 이재룡, 13일 첫 재판…음주운전 혐의 제외",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-12T23:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001164226?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "발언하는 정점식 원내대표",
    "sources": [
     "nate"
    ],
    "articles90": 11,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-12T23:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이용철 후보자, '공소취소 지휘' 질문에 또 말 아껴",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-13T00:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432247?sid=102"
-    },
-    {
-     "title": "이용철, 청문준비단 출근…'공소취소' 입장 주목",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-13T00:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432251?sid=100"
-    },
-    {
-     "title": "[포토] 사무실 출근하는 이용철 후보자",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-13T00:00:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/13/2026111300033.html"
-    }
-   ]
-  },
-  {
-   "keyword": "박수홍 98억 선고",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-12T23:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“98억 배상 하라”… 박수홍, 친형부부 상대 손배소 오늘 1심 선고",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-13T00:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002722952?sid=102"
-    },
-    {
-     "title": "\"98억 전부 물어내나\"…박수홍 친형 부부, 1심 손배소 오늘 선고",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-13T00:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000650785?sid=102"
-    },
-    {
-     "title": "진짜 길었다… 박수홍, 드디어 '친형 부부'와의 5년 싸움 끝이 보인다",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-12T23:34:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1174238"
-    }
-   ]
-  },
-  {
-   "keyword": "영화",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 2,
+   "recent20": 4,
    "press": 4,
-   "firstArticleAt": "2026-11-12T23:52:00.000Z",
+   "firstArticleAt": "2026-11-12T23:54:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "임영웅 영화 '아임 히어로 더 스타디움 2', 영시봉 상영회 개최→특전 ...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-13T00:24:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16275482"
+     "title": "정점식 국민의힘 원내대표, 원내대책회의 발언",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-13T00:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014319979?sid=100"
     },
     {
-     "title": "'취권'서 성룡과 맞붙은 황정리, 자택서 쓰러져→81세로 별세…영화계 ...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-13T00:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001408137"
+     "title": "원내대책회의 진행하는 국민의힘 정점식 원내대표",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-13T00:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016439872?sid=100"
     },
     {
-     "title": "효성, 배리어프리영화 10년째 지원…영화 2편 제작 참여",
-     "press": "handmk.com",
-     "publishedAt": "2026-11-13T00:06:00.000Z",
-     "link": "https://www.handmk.com/news/articleView.html?idxno=45036"
+     "title": "국민의힘 원내대책회의 발언하는 정점식 원내대표",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-13T00:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014319964?sid=100"
     }
    ]
   },
@@ -285,58 +478,64 @@
      "link": "https://www.newspim.com/news/view/20261113000215"
     },
     {
-     "title": "서울상공 뒤덮은 미세먼지",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-13T00:04:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261113000212"
-    },
-    {
      "title": "미세먼지에 갇힌 한강다리",
      "press": "newspim.com",
      "publishedAt": "2026-11-13T00:04:00.000Z",
      "link": "https://www.newspim.com/news/view/20261113000213"
+    },
+    {
+     "title": "서울상공 뒤덮은 미세먼지",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-13T00:04:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261113000212"
     }
    ]
   },
   {
-   "keyword": "트럼프, 이란 합의 불필요",
+   "keyword": "박수홍 친형 손배소 선고",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T23:04:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-12T23:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[국제금융 브리핑] 트럼프 “이란 합의 불필요”·젠슨 황 사임...브렌트...",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-13T00:02:00.000Z",
-     "link": "https://www.tokenpost.kr/news/economy/437451"
+     "title": "“98억 배상 하라”… 박수홍, 친형부부 상대 손배소 오늘 1심 선고",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-13T00:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002722952?sid=102"
     },
     {
-     "title": "트럼프 \"이란과 합의 불필요\"에 국제유가 급등…브렌트유 3.3% ↑",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-12T23:42:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1543619"
+     "title": "\"98억 전부 물어내나\"…박수홍 친형 부부, 1심 손배소 오늘 선고",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-13T00:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000650785?sid=102"
     },
     {
-     "title": "트럼프 \"이란과 협상 불필요\"…밴스에 '민주당 부패 척결' 전념 지시",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-12T23:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009286995?sid=104"
+     "title": "박수홍, 친형 부부 상대 ‘98억 손배소’ 오늘 1심 선고",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-12T23:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005763111?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 413,
-  "matched": 143,
-  "avgLeadMin": 572,
+  "flagged": 419,
+  "matched": 141,
+  "avgLeadMin": 582,
   "recent": [
+   {
+    "keyword": "젠슨황 사임",
+    "hitKeyword": "젠슨황 불륜 사임",
+    "hitAt": "2026-11-13T09:30:00+09:00",
+    "leadMin": 613
+   },
    {
     "keyword": "사고",
     "hitKeyword": "김포 스쿨존 차량 사고",
@@ -390,12 +589,6 @@
     "hitKeyword": "한강벨트 집값 하락",
     "hitAt": "2026-11-13T07:00:00+09:00",
     "leadMin": 937
-   },
-   {
-    "keyword": "한강 벨트",
-    "hitKeyword": "한강벨트 집값 하락",
-    "hitAt": "2026-11-13T07:00:00+09:00",
-    "leadMin": 715
    }
   ]
  }
