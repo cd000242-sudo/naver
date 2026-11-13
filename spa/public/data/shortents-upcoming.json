@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T16:37:30.922Z",
+ "builtAt": "2026-11-13T16:47:36.185Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,49 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 28,
  "candidates": [
-  {
-   "keyword": "구성환",
-   "sources": [
-    "google"
-   ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-13T15:11:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "구성환, '미혼' 첫사랑과 재회 \"40세까지 혼자면 나랑 결혼하자\"('나혼산...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-13T15:44:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004466518"
-    },
-    {
-     "title": "구성환, 자기가 찬 전여친에 \"마흔까지 미혼이면 우리 둘이 결혼하자\"",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-13T15:35:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005640091"
-    },
-    {
-     "title": "구성환, 50일 사귄 전여친 재회…\"마흔까지 결혼 안 했으면 하자고\" ('나...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-13T15:26:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001408247"
-    }
-   ]
-  },
   {
    "keyword": "나혼자산다 박지현",
    "sources": [
     "daum"
    ],
-   "articles90": 11,
+   "articles90": 10,
    "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-13T15:14:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-13T15:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -79,10 +47,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
+   "articles90": 7,
    "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-13T15:16:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-13T15:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,67 +75,34 @@
    ]
   },
   {
-   "keyword": "조현 한반도 평화 공동이익",
+   "keyword": "구성환",
    "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-13T15:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "조현 \"한반도 문제는 한국의 사활적 이익\"...中 건설적 역할 당부",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-13T15:27:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261114000004"
-    },
-    {
-     "title": "조현, 중국에 '한반도 문제' 역할 당부…왕이 \"정책 변함없어\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-13T15:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926042?sid=100"
-    },
-    {
-     "title": "APEC 앞두고 한중외교장관 회담…조현 \"中 한반도 건설적 역할\" 당부",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-13T15:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014321699?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "조현 중국 역할 당부",
-   "sources": [
-    "daum"
+    "google"
    ],
    "articles90": 5,
    "recent20": 0,
    "press": 5,
-   "firstArticleAt": "2026-11-13T15:08:00.000Z",
+   "firstArticleAt": "2026-11-13T15:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "조현 \"한반도 문제는 한국의 사활적 이익\"...中 건설적 역할 당부",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-13T15:27:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261114000004"
+     "title": "구성환, '미혼' 첫사랑과 재회 \"40세까지 혼자면 나랑 결혼하자\"('나혼산...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-13T15:44:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004466518"
     },
     {
-     "title": "조현, 중국에 '한반도 문제' 역할 당부…왕이 \"정책 변함없어\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-13T15:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926042?sid=100"
+     "title": "구성환, 자기가 찬 전여친에 \"마흔까지 미혼이면 우리 둘이 결혼하자\"",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-13T15:35:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005640091"
     },
     {
-     "title": "APEC 앞두고 한중외교장관 회담…조현 \"中 한반도 건설적 역할\" 당부",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-13T15:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014321699?sid=100"
+     "title": "구성환, 50일 사귄 전여친 재회…\"마흔까지 결혼 안 했으면 하자고\" ('나...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-13T15:26:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001408247"
     }
    ]
   },
@@ -177,10 +112,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-13T15:10:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-13T15:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -201,6 +136,38 @@
      "press": "chosun.com",
      "publishedAt": "2026-11-13T15:35:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/023/0004009554?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "조현 한반도 평화 공동이익",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-13T15:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "APEC 닷새 앞 방중 조현 “북미회담 가능성 있다”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-13T16:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003762401?sid=100"
+    },
+    {
+     "title": "조현 \"한반도 문제는 한국의 사활적 이익\"...中 건설적 역할 당부",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-13T15:27:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261114000004"
+    },
+    {
+     "title": "조현, 중국에 '한반도 문제' 역할 당부…왕이 \"정책 변함없어\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-13T15:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926042?sid=100"
     }
    ]
   }
