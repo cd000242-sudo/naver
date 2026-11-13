@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T00:52:42.058Z",
+ "builtAt": "2026-11-13T01:02:52.258Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,269 +15,243 @@
    "sources": [
     "daum"
    ],
-   "articles90": 68,
-   "recent20": 38,
-   "press": 58,
-   "firstArticleAt": "2026-11-13T00:23:00.000Z",
+   "articles90": 70,
+   "recent20": 51,
+   "press": 54,
+   "firstArticleAt": "2026-11-13T00:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨 황 퇴진에 엔비디아 219조원 금융 약정 주목…AI 투자 불안",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-13T00:52:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=2026111309485560739a1f309431_1"
+     "title": "엔비디아 사임 '충격' 털어냈나…코스피 5460선·코스닥 4%↑",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-13T01:02:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101200"
     },
     {
-     "title": "두 번의 불륜, 젠슨 황 33년 신화도 무너졌다... 엔비디아 최고 시험대",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-13T00:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002535695?sid=104"
+     "title": "[마켓펄스] '젠슨 황 사임' 충격 딛고 삼전닉스 반등...코스피 2%대 강세",
+     "press": "ntoday.co.kr",
+     "publishedAt": "2026-11-13T01:00:00.000Z",
+     "link": "https://www.ntoday.co.kr/news/articleView.html?idxno=130837"
     },
     {
-     "title": "엔비디아 젠슨 황 사임 파장…美 민주당, 러트닉 상무장관 조사 요구",
-     "press": "fntoday.co.kr",
-     "publishedAt": "2026-11-13T00:50:00.000Z",
-     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=398057"
+     "title": "젠슨 황 전 엔비디아 CEO, 불륜 상대 '중국 스파이' 확정 땐 최고 징역 ...",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-13T01:00:00.000Z",
+     "link": "https://www.insight.co.kr/news/581862"
     }
    ]
   },
   {
    "keyword": "차기 회장 후보 6명 압축",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 48,
-   "recent20": 11,
-   "press": 45,
+   "articles90": 54,
+   "recent20": 12,
+   "press": 50,
    "firstArticleAt": "2026-11-12T23:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"차기 은행연합회장 후보 6명 압축\"… 윤종규·박종복·윤종원 등 민관...",
-     "press": "fntoday.co.kr",
-     "publishedAt": "2026-11-13T00:50:00.000Z",
-     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=398076"
+     "title": "은행연합회장 후보군 6명 압축…윤종규·박종복 포함",
+     "press": "nspna.com",
+     "publishedAt": "2026-11-13T01:00:00.000Z",
+     "link": "https://www.nspna.com/news/?mode=view&newsid=836006"
     },
     {
-     "title": "차기 은행연합회장 6파전…김한조·박종복·손병환·윤종규·윤종원·이...",
-     "press": "press9.kr",
-     "publishedAt": "2026-11-13T00:48:00.000Z",
-     "link": "http://www.press9.kr/news/articleView.html?idxno=86233"
+     "title": "은행연합회 회장 후보 6명 확정…최종 1인 선출 앞둬",
+     "press": "whitepaper.co.kr",
+     "publishedAt": "2026-11-13T01:00:00.000Z",
+     "link": "http://www.whitepaper.co.kr/news/articleView.html?idxno=268735"
     },
     {
-     "title": "차기 은행연합회장 후보군 6명 압축···윤종규·손병환 등 포함",
-     "press": "koreastocknews.com",
-     "publishedAt": "2026-11-13T00:46:00.000Z",
-     "link": "http://www.koreastocknews.com/news/articleView.html?idxno=122253"
+     "title": "은행연합회장 후보 6명 압축…윤종규·손병환 등",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-13T01:00:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1731532"
     }
    ]
   },
   {
-   "keyword": "젠틀몬스터 아이웨어 공개",
+   "keyword": "삼성 AI 아이웨어 공개",
    "sources": [
     "nate"
    ],
-   "articles90": 39,
-   "recent20": 7,
-   "press": 39,
-   "firstArticleAt": "2026-11-12T23:24:00.000Z",
+   "articles90": 46,
+   "recent20": 10,
+   "press": 46,
+   "firstArticleAt": "2026-11-12T23:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼성전자, 인텔리전트 아이웨어 30종 공개…구글·젠틀몬스터·워비파커...",
-     "press": "paxetv.com",
-     "publishedAt": "2026-11-13T00:48:00.000Z",
-     "link": "http://www.paxetv.com/news/articleView.html?idxno=286846"
+     "title": "젠틀몬스터, 뉴욕서 '인텔리전트 아이웨어' 16종 첫 공개",
+     "press": "fashionbiz.co.kr",
+     "publishedAt": "2026-11-13T01:00:00.000Z",
+     "link": "https://www.fashionbiz.co.kr/article/231082"
     },
     {
-     "title": "삼성 인공지능 안경, 젠틀몬스터와 워비파커 디자인의 완벽한 만남",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-13T00:46:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885374"
+     "title": "삼성전자, AI 안경 시장 출사표…구글·젠틀몬스터와 손잡았다",
+     "press": "asiatime.co.kr",
+     "publishedAt": "2026-11-13T01:00:00.000Z",
+     "link": "https://www.asiatime.co.kr/article/20261113500075"
     },
     {
-     "title": "'AI 안경 시험 논란' 속 삼성전자, 30종 라인업 공개…제미나이와 함께...",
-     "press": "wikileaks-kr.org",
-     "publishedAt": "2026-11-13T00:44:00.000Z",
-     "link": "https://www.wikileaks-kr.org/news/articleView.html?idxno=194592"
+     "title": "삼성 AI 안경 vs 메타…성능 비슷한데 무엇이 다를까",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-13T00:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016439984?sid=105"
     }
    ]
   },
   {
    "keyword": "젠슨 황 퇴진 영향은?",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 48,
-   "recent20": 6,
+   "articles90": 50,
+   "recent20": 15,
    "press": 38,
-   "firstArticleAt": "2026-11-12T23:24:00.000Z",
+   "firstArticleAt": "2026-11-12T23:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨 황 퇴진에 엔비디아 219조원 금융 약정 주목…AI 투자 불안",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-13T00:52:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=2026111309485560739a1f309431_1"
+     "title": "\"양손으로 엔비디아 주식 사들인다\"…젠슨 황 충격, 주가 바닥 쳤나",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-13T01:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005440727?sid=101"
     },
     {
-     "title": "엔비디아 황제의 퇴진, 가족 권력 시대 끝? 내부 불만 폭발 가능성",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-13T00:50:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885388"
+     "title": "[머니톡스] 위험한 황제 젠슨 황…결국 기업의 운명은 CEO가 결정한다",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-13T00:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016440005?sid=101"
     },
     {
-     "title": "퇴진한 젠슨 황, 美의회 증언 수락…中 스파이 연루 의혹 해명하나",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-13T00:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005763150?sid=104"
+     "title": "美 하원, 젠슨 황 퇴진에도 의회 증언 추진… “불출석 땐 소환장”",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-13T00:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001204522?sid=104"
     }
    ]
   },
   {
-   "keyword": "세브란스 50대 송치",
+   "keyword": "이 대통령 자본시장 간담회",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 20,
-   "recent20": 1,
-   "press": 20,
-   "firstArticleAt": "2026-11-12T23:24:00.000Z",
+   "articles90": 44,
+   "recent20": 20,
+   "press": 28,
+   "firstArticleAt": "2026-11-13T00:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "신촌 세브란스병원 흉기 난동 50대 여성 공소청 송치",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-13T00:42:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1543635"
+     "title": "[속보] 李 대통령 \"자본시장 불공정행위 엄정단속\"",
+     "press": "news.mtn.co.kr",
+     "publishedAt": "2026-11-13T01:02:00.000Z",
+     "link": "https://news.mtn.co.kr/article/2026111309581282239"
     },
     {
-     "title": "세브란스 정신과 교수 흉기 피습 50대女 구속 송치",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-13T00:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005603809?sid=102"
+     "title": "‘빨간색 넥타이’ 맨 李대통령 “자본시장 신뢰 회복에 초점 두고 정책...",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-13T01:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001204528?sid=100"
     },
     {
-     "title": "'세브란스 의사 흉기 피습' 50대 여성 구속 송치 … '임세원법' 적용",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-13T00:22:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/13/2026111300041.html"
+     "title": "자본시장 정책 간담회에서 국기에 경례하는 이 대통령",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-13T01:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016440009?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 아세안 정상회담",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 20,
+   "recent20": 3,
+   "press": 20,
+   "firstArticleAt": "2026-11-13T00:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "아세안에서 APEC까지…국익 넓히는 실용외교",
+     "press": "korea.kr",
+     "publishedAt": "2026-11-13T01:00:00.000Z",
+     "link": "https://www.korea.kr/news/contributePolicyView.do?newsId=148975546&call_from=naver_news"
+    },
+    {
+     "title": "정상외교 넘어 실질 성과로…이 대통령 아세안·APEC 순방의 과제",
+     "press": "newswhoplus.com",
+     "publishedAt": "2026-11-13T01:00:00.000Z",
+     "link": "https://www.newswhoplus.com/news/articleView.html?idxno=74280"
+    },
+    {
+     "title": "이재명 대통령, 아세안과 APEC 정상회의 참석…태국·필리핀 정상과 회...",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-13T00:52:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885392"
     }
    ]
   },
   {
    "keyword": "월급방위대 TF 회의",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 20,
-   "recent20": 4,
-   "press": 16,
+   "articles90": 21,
+   "recent20": 3,
+   "press": 18,
    "firstArticleAt": "2026-11-13T00:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "가처분 소득 늘리는 방안은…정부 '월급방위대TF' 후속조치 논의",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-13T01:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001535374?sid=101"
+    },
+    {
+     "title": "'월급방위대 TF' 첫 회의, 세법개정안 과제 우선 논의",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-13T00:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002393981?sid=101"
+    },
     {
      "title": "정부, '월급방위대 TF' 가동…직장인 생활비·돌봄 부담 던다",
      "press": "news.tf.co.kr",
      "publishedAt": "2026-11-13T00:44:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/629/0000551538?sid=101"
-    },
-    {
-     "title": "직장인 유리지갑 지킨다…정부, 범부처 '월급방위대 TF' 본격 가동",
-     "press": "widedaily.com",
-     "publishedAt": "2026-11-13T00:38:00.000Z",
-     "link": "https://www.widedaily.com/news/articleView.html?idxno=303608"
-    },
-    {
-     "title": "월세 공제 늘리고 교통비 부담 낮추고…정부, ‘월급방위대’ TF 가동",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-13T00:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003154715?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "가짜 3.3 기획감독",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 16,
-   "recent20": 2,
-   "press": 16,
-   "firstArticleAt": "2026-11-13T00:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "사업장 쪼개고 가짜 3.3 계약…노동부, 140곳 기획감독",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-13T00:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000551540?sid=102"
-    },
-    {
-     "title": "노동부, '가짜 3.3 계약'과 '사업장 쪼개기' 집중 단속 착수—160억 원 탈...",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-13T00:40:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885358"
-    },
-    {
-     "title": "고용노동부, '가짜 3.3 계약·사업장 쪼개기' 140여 곳 집중 감독",
-     "press": "idsn.co.kr",
-     "publishedAt": "2026-11-13T00:26:00.000Z",
-     "link": "https://idsn.co.kr/news/view/1065572635094026"
-    }
-   ]
-  },
-  {
-   "keyword": "CL 더블랙레이블과 전속계약",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 16,
-   "recent20": 4,
-   "press": 15,
-   "firstArticleAt": "2026-11-12T23:28:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "2NE1 CL, 테디와 다시 손잡았다…더블랙레이블 전속계약 체결 [공식]",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-13T00:48:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000489947"
-    },
-    {
-     "title": "CL(씨엘), 더블랙레이블과 전속계약..11월 신곡 발매 ’기대감↑’",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-13T00:38:00.000Z",
-     "link": "http://www.breaknews.com/1250726"
-    },
-    {
-     "title": "CL, 더블랙레이블과 전속계약⋯테디 손잡고 11월 신곡 발표",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-13T00:36:00.000Z",
-     "link": "http://www.joynews24.com/view/2025819"
     }
    ]
   },
   {
    "keyword": "최혜진, LPGA 9언더파 선두",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 14,
+   "articles90": 15,
    "recent20": 1,
-   "press": 13,
+   "press": 14,
    "firstArticleAt": "2026-11-12T23:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이번엔 기필코… 최혜진, LPGA 디안니카 1R 선두",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-13T00:56:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2018144"
+    },
     {
      "title": "최혜진, LPGA 투어 첫 우승 재도전…디 안니카 9언더파 선두 출발",
      "press": "nocutnews.co.kr",
@@ -289,24 +263,82 @@
      "press": "biz.heraldcorp.com",
      "publishedAt": "2026-11-13T00:32:00.000Z",
      "link": "https://m.sports.naver.com/golf/article/016/0002722954"
+    }
+   ]
+  },
+  {
+   "keyword": "원내대책회의 정점식 원내대표",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 28,
+   "recent20": 7,
+   "press": 11,
+   "firstArticleAt": "2026-11-13T00:17:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정점식 \"김민석, 대통령 면전서 찍소리 못하는 허수아비\"",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-13T00:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000551547?sid=100"
     },
     {
-     "title": "최혜진, 디 안니카 드리븐 첫날 공동 선두",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-13T00:29:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/052/0002432254"
+     "title": "정점식 “이용철, ‘이재명 탈옥’ 맞춤형 장관 후보자…전문성·양심 ...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-13T00:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012293173?sid=100"
+    },
+    {
+     "title": "정점식 “민주당 종부세 반란쇼, 4일 천하…납세자 엄중 심판 받을 것”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-13T00:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004681793?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "세브란스 흉기 난동",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 9,
+   "recent20": 0,
+   "press": 9,
+   "firstArticleAt": "2026-11-12T23:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "신촌 세브란스병원 흉기 난동 50대 여성 공소청 송치",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-13T00:42:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1543635"
+    },
+    {
+     "title": "경찰, '세브란스 병원 흉기난동' 50대 여성 송치",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-13T00:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000925752?sid=102"
+    },
+    {
+     "title": "'세브란스병원 흉기난동' 50대 여성 공소청 송치",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-13T00:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000161169?sid=102"
     }
    ]
   },
   {
    "keyword": "CL, 테디 품으로 계약",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-12T23:28:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-12T23:34:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -331,99 +363,98 @@
    ]
   },
   {
-   "keyword": "메가성장특위 예산안 간담회",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 34,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-12T23:31:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "與메가성장특위 \"법·예산, 연내 통과되도록 …혁신 경제로 나아가야\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-13T00:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005440706?sid=100"
-    },
-    {
-     "title": "與메가성장특위 \"초광역특구법 연내 처리…혁신경제 엔진 만들 것\"",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-13T00:04:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5083001"
-    },
-    {
-     "title": "[포토] 메가성장특위 예산안 설명 간담회",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-12T23:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005842123?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "발언하는 정점식 원내대표",
+   "keyword": "80대 남편 아내 살해 체포",
    "sources": [
     "nate"
    ],
-   "articles90": 13,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-12T23:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "정점식 \"민주당, 4일천하 종부세 반란쇼…김민석 허수아비 신세 처량\"",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-13T00:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006409335?sid=100"
-    },
-    {
-     "title": "정점식 \"與 종부세 반란쇼 4일 천하로 끝…'명픽' 김민석 처량\"",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-13T00:46:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4444600"
-    },
-    {
-     "title": "정점식 국민의힘 원내대표, 원내대책회의 발언",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-13T00:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014319980?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "이재룡 뺑소니 첫 공판",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-12T23:27:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-13T00:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "음주 논란만 세 번째…'술타기 의혹' 이재룡, 오늘(13일) 법정 선다 [이...",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-13T00:41:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000052508"
+     "title": "양천구 아내 살해 80대, 과거 가정폭력 신고 있었다",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-13T00:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005842190?sid=102"
     },
     {
-     "title": "음주운전 혐의 제외..'유호정 남편' 이재룡, 오늘(13일) 뺑소니·술타기...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-13T00:12:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003487089"
+     "title": "서울 양천구서 80대 남편이 아내 살해…\"내가 죽였다\" 신고",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-13T00:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000965366?sid=102"
     },
     {
-     "title": "'뺑소니·술타기 의혹' 이재룡, 13일 첫 재판…음주운전 혐의 제외",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-12T23:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001164226?sid=102"
+     "title": "\"내가 죽였다\"...70대 '조강지처 아내' 살해한 80대 남편",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-13T00:24:00.000Z",
+     "link": "https://www.insight.co.kr/news/581857"
+    }
+   ]
+  },
+  {
+   "keyword": "씨엘, 테디 품 전속계약",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-12T23:34:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "씨엘, 7년 만에 새 둥지 ‘테디 품으로’…더블랙레이블 전속계약, “이...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-13T00:33:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001280719"
+    },
+    {
+     "title": "씨엘, 테디 '더블랙레이블' 품으로…이달 중 신곡",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-13T00:15:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014319933"
+    },
+    {
+     "title": "투애니원 CL, 테디 품에 안겼다…11월 신곡 발매",
+     "press": "atstar1.com",
+     "publishedAt": "2026-11-13T00:01:00.000Z",
+     "link": "https://m.entertain.naver.com/article/415/0000053757"
+    }
+   ]
+  },
+  {
+   "keyword": "김영훈",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-13T00:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김영훈 장관, 반도체 업계 의견 청취…\"지속적 혁신·좋은 일자리 달성...",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-13T00:54:00.000Z",
+     "link": "https://www.ajunews.com/view/20261113095042214"
+    },
+    {
+     "title": "김영훈, 삼성·SK 만나 반도체 근로시간 유연화 논의…메가특구 사회적...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-13T00:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002722951?sid=101"
+    },
+    {
+     "title": "김영훈, '주52시간 예외' 반도체 업계 의견 청취…\"좋은 일자리서 혁신...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-13T00:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014319978?sid=102"
     }
    ]
   },
@@ -432,10 +463,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 9,
+   "articles90": 8,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-12T23:32:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-12T23:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -446,23 +477,23 @@
      "link": "https://www.newspim.com/news/view/20261113000215"
     },
     {
-     "title": "서울상공 뒤덮은 미세먼지",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-13T00:04:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261113000212"
-    },
-    {
      "title": "미세먼지에 갇힌 한강다리",
      "press": "newspim.com",
      "publishedAt": "2026-11-13T00:04:00.000Z",
      "link": "https://www.newspim.com/news/view/20261113000213"
+    },
+    {
+     "title": "서울상공 뒤덮은 미세먼지",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-13T00:04:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261113000212"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 418,
+  "flagged": 425,
   "matched": 140,
   "avgLeadMin": 585,
   "recent": [
