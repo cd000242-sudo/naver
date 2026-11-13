@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T21:29:20.055Z",
+ "builtAt": "2026-11-13T21:39:23.244Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -13,12 +13,13 @@
   {
    "keyword": "젠슨 황 퇴진하나",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 10,
+   "articles90": 9,
    "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-13T20:01:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-13T20:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,17 +76,24 @@
    ]
   },
   {
-   "keyword": "모레노호 사우디에 2-3 패배",
+   "keyword": "모레노호 사우디 2-3 패배",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 4,
+   "articles90": 5,
    "recent20": 2,
-   "press": 4,
+   "press": 5,
    "firstArticleAt": "2026-11-13T20:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'사우디전 충격패' 모레노호, 마지막 카타르전서 반등할까",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-13T21:30:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/421/0009288726"
+    },
     {
      "title": "사우디에 무너진 모레노호… 42년 만의 3실점",
      "press": "newscj.com",
@@ -97,27 +105,28 @@
      "press": "seoul.co.kr",
      "publishedAt": "2026-11-13T21:12:00.000Z",
      "link": "https://m.sports.naver.com/kfootball/article/081/0003699352"
-    },
-    {
-     "title": "[IN POINT] 이강인은 왼발 크로스만 올리는 선수가 아닌데...모레노호만...",
-     "press": "interfootball.co.kr",
-     "publishedAt": "2026-11-13T20:55:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/413/0000226563"
     }
    ]
   },
   {
    "keyword": "2026년 11월 14일 운세",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 4,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-13T20:00:00.000Z",
+   "firstArticleAt": "2026-11-13T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[AI] 오늘의 띠별 운세...2026.11.14(토요일)",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-13T21:30:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=67723"
+    },
     {
      "title": "[오늘의 운세] 2026년 11월 14일 띠별 운세",
      "press": "edaily.co.kr",
@@ -129,55 +138,34 @@
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-13T21:05:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006409735?sid=103"
-    },
-    {
-     "title": "[백운산 오늘의 운세] 2026년 11월 14일",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-13T21:00:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20260914001435471"
-    }
-   ]
-  },
-  {
-   "keyword": "이란",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-13T20:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이란의 '제주도' 게슘, 전쟁통에 관광 초토화 [박종원의 그때 여기]",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-13T21:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005604160?sid=104"
-    },
-    {
-     "title": "美 “바레인 향하던 이란 드론 2대 격추”…레이더 타격 주장 부인",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-13T20:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006409722?sid=104"
-    },
-    {
-     "title": "청해부대 작전구역 확대…한미 간극 좁히고 이란 반발 넘을까",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-13T20:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004209755?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 433,
-  "matched": 180,
-  "avgLeadMin": 365,
+  "flagged": 434,
+  "matched": 183,
+  "avgLeadMin": 363,
   "recent": [
+   {
+    "keyword": "한국 야구",
+    "hitKeyword": "한국 야구 일본전 12연패",
+    "hitAt": "2026-11-14T06:30:00+09:00",
+    "leadMin": 373
+   },
+   {
+    "keyword": "모두의 창업 개인정보 유출",
+    "hitKeyword": "모두의 창업 정보 유출",
+    "hitAt": "2026-11-14T06:30:00+09:00",
+    "leadMin": 353
+   },
+   {
+    "keyword": "이란",
+    "hitKeyword": "이란 한국 청해부대 경고",
+    "hitAt": "2026-11-14T06:30:00+09:00",
+    "leadMin": 31
+   },
    {
     "keyword": "손흥민 사우디전 96라인",
     "hitKeyword": "한국 축구 사우디전 패배",
@@ -219,24 +207,6 @@
     "hitKeyword": "구성환 고교 4대천왕",
     "hitAt": "2026-11-14T06:00:00+09:00",
     "leadMin": 303
-   },
-   {
-    "keyword": "젠슨 황과 엔비디아 위기",
-    "hitKeyword": "엔비디아 투자 경고",
-    "hitAt": "2026-11-14T06:00:00+09:00",
-    "leadMin": 212
-   },
-   {
-    "keyword": "한국, 일본에 5-9 패배",
-    "hitKeyword": "한국 축구 사우디전 패배",
-    "hitAt": "2026-11-14T06:00:00+09:00",
-    "leadMin": 21
-   },
-   {
-    "keyword": "송혜교·공유 12월 11일 공개",
-    "hitKeyword": "송혜교 공유 천천히 강렬하게",
-    "hitAt": "2026-11-14T00:00:00+09:00",
-    "leadMin": 777
    }
   ]
  }
