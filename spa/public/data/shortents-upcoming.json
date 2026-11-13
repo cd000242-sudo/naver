@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T18:58:30.980Z",
+ "builtAt": "2026-11-13T20:38:56.184Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,11 +8,44 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 29,
- "candidates": [],
+ "measured": 27,
+ "candidates": [
+  {
+   "keyword": "한국, 일본에 5-9 패배",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-13T20:11:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한국 야구, 일본에 홈런 4방 맞고 5-9 패... APBC 2연패 최하위",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-13T20:36:00.000Z",
+     "link": "https://www.insight.co.kr/news/582037"
+    },
+    {
+     "title": "2경기 17실점, 동네야구 수준…한국야구의 씁쓸한 현실, 투수가 없다[초...",
+     "press": "sports.hankooki.com",
+     "publishedAt": "2026-11-13T20:30:00.000Z",
+     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6943524"
+    },
+    {
+     "title": "'또 경우의 수냐' 이번에는 일본 응원해야 한다? 한국, APBC 결승 진출 위...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-13T20:11:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/109/0005640125"
+    }
+   ]
+  }
+ ],
  "hitRate": {
   "days": 7,
-  "flagged": 427,
+  "flagged": 428,
   "matched": 171,
   "avgLeadMin": 369,
   "recent": [
