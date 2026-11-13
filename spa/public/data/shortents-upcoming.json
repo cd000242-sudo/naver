@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T21:39:23.244Z",
+ "builtAt": "2026-11-13T21:49:27.193Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,81 +8,47 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 28,
  "candidates": [
   {
    "keyword": "젠슨 황 퇴진하나",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 8,
+   "articles90": 14,
+   "recent20": 5,
+   "press": 11,
    "firstArticleAt": "2026-11-13T20:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] 엔비디아, 젠슨 황 스캔들 여파 지속 '2.01%↓'…뉴욕증시 혼조 ...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-13T21:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003155060?sid=104"
+     "title": "엔비디아 후계 구도 요동…젠슨 황 후임에 Arm 하스 급부상",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-13T21:48:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101258"
     },
     {
-     "title": "FT “엔비디아 이사회, 젠슨 황 후임으로 Arm CEO 접촉”",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-13T21:22:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2648129"
+     "title": "[월드 프리즘] 젠슨 황 떠난 엔비디아, AI '돈줄' 마르나… 흔들리는 거...",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-13T21:46:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101254"
     },
     {
-     "title": "“가죽재킷에 13억 쓴 낙찰자는 무슨 죄”…젠슨 황 스캔들에 프리미엄...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-13T21:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004682098?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "전국 흐리고 최대",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 3,
-   "press": 6,
-   "firstArticleAt": "2026-11-13T20:27:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오늘 날씨] 전국 대부분 가을비-제주 최대 60㎜⋯한낮 15도 안팎 포근",
-     "press": "econonews.co.kr",
-     "publishedAt": "2026-11-13T21:26:00.000Z",
-     "link": "http://www.econonews.co.kr/news/articleView.html?idxno=447174"
-    },
-    {
-     "title": "[날씨] 전국 흐리고 밤까지 비…제주·남부 5㎜~최대 50㎜",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-13T21:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001402956?sid=103"
-    },
-    {
-     "title": "[날씨] 전국 흐리고 대부분 비…제주 이틀간 최대 50㎜",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-13T21:22:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=781587"
+     "title": "젠슨황 퇴진에 670조원 AI 금융구상 '흔들'…금융사 이탈 움직임",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-13T21:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016441578?sid=104"
     }
    ]
   },
   {
    "keyword": "모레노호 사우디 2-3 패배",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 2,
+   "recent20": 1,
    "press": 5,
    "firstArticleAt": "2026-11-13T20:23:00.000Z",
    "exclusive": false,
@@ -114,13 +80,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 3,
+   "articles90": 5,
+   "recent20": 2,
+   "press": 4,
    "firstArticleAt": "2026-11-13T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[오늘의 운세] 2026년 11월 14일 (토) 띠별운세 '몸을 따뜻하게 하자'",
+     "press": "dailypop.kr",
+     "publishedAt": "2026-11-13T21:40:00.000Z",
+     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103980"
+    },
     {
      "title": "[AI] 오늘의 띠별 운세...2026.11.14(토요일)",
      "press": "newsroad.co.kr",
@@ -132,12 +104,6 @@
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-13T21:05:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006409734?sid=103"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 14일 별자리 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-13T21:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006409735?sid=103"
     }
    ]
   }
