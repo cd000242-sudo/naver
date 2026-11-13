@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T17:48:02.156Z",
+ "builtAt": "2026-11-13T17:58:05.346Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,13 +15,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 44,
+   "articles90": 45,
    "recent20": 1,
-   "press": 32,
+   "press": 33,
    "firstArticleAt": "2026-11-13T16:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "왜 또 황희찬 뽑았냐고? 사우디전 한국 최고 '평점 8.0'... 1도움에 기회...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-13T17:49:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/108/0003487230"
+    },
     {
      "title": "월드컵 악몽 또 반복한 김승규…5경기 7실점 모레노호의 무너진 뒷문",
      "press": "newspim.com",
@@ -33,12 +39,6 @@
      "press": "stnsports.co.kr",
      "publishedAt": "2026-11-13T17:16:00.000Z",
      "link": "https://m.sports.naver.com/kfootball/article/450/0000155495"
-    },
-    {
-     "title": "'원팀' 선언에도 무너진 수비…한국, 사우디에 42년 만의 3실점 패배",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-13T17:02:00.000Z",
-     "link": "https://www.ajunews.com/view/20261114015850962"
     }
    ]
   },
@@ -48,12 +48,18 @@
     "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 0,
+   "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-13T16:28:00.000Z",
+   "firstArticleAt": "2026-11-13T16:40:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "FT \"엔비디아, 차기 CEO 후보로 ARM 하스 접촉\"",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-13T17:47:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261114000017"
+    },
     {
      "title": "사령탑 잃은 위기의 엔비디아, 젠슨 황 후임으로 하스 암 CEO 접촉",
      "press": "news1.kr",
@@ -65,12 +71,6 @@
      "press": "donga.com",
      "publishedAt": "2026-11-13T16:42:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/020/0003762432?sid=104"
-    },
-    {
-     "title": "젠슨 황의 ‘성공 공식’ 이젠 숙제로 남아…“난 쓰레기” 자책",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-13T16:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/353/0000057268?sid=102"
     }
    ]
   }
