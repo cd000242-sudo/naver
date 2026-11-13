@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T15:06:28.950Z",
+ "builtAt": "2026-11-13T15:16:34.632Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,81 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 25,
  "candidates": [
+  {
+   "keyword": "한국 야구",
+   "sources": [
+    "google"
+   ],
+   "articles90": 31,
+   "recent20": 4,
+   "press": 30,
+   "firstArticleAt": "2026-11-13T13:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "2026 APBC 야구 중계 일정…채널과 시간은",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-13T15:12:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611130251"
+    },
+    {
+     "title": "'또 졌다' 한국, 일본 도대체 언제 이기나…최원호 감독 \"그래도 수준급...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-13T15:02:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/109/0005640083"
+    },
+    {
+     "title": "'일본이 이겨야 日에 설욕한다' 2연패 韓 야구 기막힌 결승행 경우의 수...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-13T15:01:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/108/0003487221"
+    }
+   ]
+  },
+  {
+   "keyword": "조현 한반도 평화 공동 이익 강조",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 15,
+   "recent20": 5,
+   "press": 14,
+   "firstArticleAt": "2026-11-13T13:53:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "APEC 앞두고 한중외교장관 회담…조현 \"中 한반도 건설적 역할\" 당부",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-13T15:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014321699?sid=100"
+    },
+    {
+     "title": "조현 \"한반도 中 건설적 역할\" 당부…왕이 \"정책 변함없다\"(종합2보)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-13T15:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016441389?sid=104"
+    },
+    {
+     "title": "조현 “한반도 문제 중국 건설적 역할 당부” 왕이 “한반도 정책 변함...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-13T15:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002832172?sid=100"
+    }
+   ]
+  },
   {
    "keyword": "미국 10월 생산자물가",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 16,
+   "articles90": 14,
    "recent20": 1,
-   "press": 15,
-   "firstArticleAt": "2026-11-13T13:38:00.000Z",
+   "press": 13,
+   "firstArticleAt": "2026-11-13T13:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -43,14 +107,46 @@
    ]
   },
   {
+   "keyword": "구성환 4대",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 11,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-13T14:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "구성환 전 여자친구 '나혼산'에 등장... 수제 케이크에 편지까지 선물",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-13T15:12:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000490092"
+    },
+    {
+     "title": "\"초콜릿에 러브레터 많이 받아\" 구성환, 4대 천왕 비주얼 공개 ('나혼산...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-13T15:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005640086"
+    },
+    {
+     "title": "'나 혼자 산다' 구성환, 첫사랑 이초희와 재회 포차 동창회",
+     "press": "enter.etoday.co.kr",
+     "publishedAt": "2026-11-13T14:54:00.000Z",
+     "link": "https://enter.etoday.co.kr/news/view/305204"
+    }
+   ]
+  },
+  {
    "keyword": "손흥민 사우디전 96라인",
    "sources": [
     "nate"
    ],
-   "articles90": 15,
-   "recent20": 1,
-   "press": 14,
-   "firstArticleAt": "2026-11-13T13:38:00.000Z",
+   "articles90": 11,
+   "recent20": 0,
+   "press": 10,
+   "firstArticleAt": "2026-11-13T13:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,66 +171,34 @@
    ]
   },
   {
-   "keyword": "조현 한반도 평화 공동 이익 강조",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 5,
-   "press": 11,
-   "firstArticleAt": "2026-11-13T13:53:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "조현 “한반도 평화는 공동이익”… 왕이 “한·중 관계 정상궤도”",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-13T14:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001885031?sid=100"
-    },
-    {
-     "title": "조현 장관 한반도 평화는 한중 공동이익 주장",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-13T14:52:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261113010005346"
-    },
-    {
-     "title": "APEC 앞두고 한·중 외교장관 회담…조현 \"한반도 평화는 한중 공동이익...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-13T14:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004175006?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "한중 외교장관 회담",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 9,
    "recent20": 2,
-   "press": 7,
+   "press": 8,
    "firstArticleAt": "2026-11-13T14:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "APEC 앞두고 한중외교장관 회담…조현 \"中 한반도 건설적 역할\" 당부",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-13T15:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014321699?sid=100"
+    },
+    {
+     "title": "韓은 '한반도 비핵화'·中은 '하나의 중국'…한중 외교장관 온도차(종합...",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-13T15:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006409712?sid=100"
+    },
+    {
      "title": "조현 장관 한반도 평화는 한중 공동이익 주장",
      "press": "asiatoday.co.kr",
      "publishedAt": "2026-11-13T14:52:00.000Z",
      "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261113010005346"
-    },
-    {
-     "title": "APEC 앞두고 한·중 외교장관 회담…조현 \"한반도 평화는 한중 공동이익...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-13T14:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004175006?sid=100"
-    },
-    {
-     "title": "APEC 앞두고 만난 한중 외교장관…조현 \"한반도 평화는 양국 공동 이익...",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-13T14:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004209736?sid=100"
     }
    ]
   },
@@ -143,10 +207,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 1,
+   "articles90": 4,
+   "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-13T13:44:00.000Z",
+   "firstArticleAt": "2026-11-13T13:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -167,38 +231,6 @@
      "press": "segye.com",
      "publishedAt": "2026-11-13T14:11:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/022/0004175005?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "ppi",
-   "sources": [
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-13T13:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美 PPI 전월 대비 0.3% 상승…예상치 밑돌아",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-13T14:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004682079?sid=104"
-    },
-    {
-     "title": "미국 10월 PPI 0.3% 상승, 시장 예상치 0.4% 하회",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-13T13:56:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/437914"
-    },
-    {
-     "title": "미 10월 PPI 전년 동월 대비 6.5% 상승…베센트 “근원물가 통제 가능”",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-13T13:50:00.000Z",
-     "link": "https://www.tokenpost.kr/news/economy/437910"
     }
    ]
   },
@@ -235,41 +267,73 @@
    ]
   },
   {
-   "keyword": "엔비디아 GPU 26만장 공급",
+   "keyword": "젠슨 황 퇴진 엔비디아 위기",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 3,
-   "recent20": 1,
+   "articles90": 4,
+   "recent20": 3,
    "press": 3,
-   "firstArticleAt": "2026-11-13T14:04:00.000Z",
+   "firstArticleAt": "2026-11-13T13:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "HBM 공급 SK하이닉스·삼성전자 '촉각'…",
-     "press": "newsclaim.co.kr",
+     "title": "[젠슨 황 사임] 엔비디아 공급망 재편 속'평평해진 운동장'… 삼성·AMD ...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-13T15:10:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=626571"
+    },
+    {
+     "title": "[사설] 젠슨 황 쇼크… AI 지각 변동과 미중 경쟁 속 기회 잡길",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-13T15:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000965500?sid=110"
+    },
+    {
+     "title": "[기업家] 엔비디아 ⑩ㅣ 젠슨 황 없는 엔비디아…리더십 공백에 AI 패권...",
+     "press": "cbci.co.kr",
      "publishedAt": "2026-11-13T15:00:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082656"
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=626726"
+    }
+   ]
+  },
+  {
+   "keyword": "ppi",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-13T13:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "뉴욕증시, PPI 소화하며 혼조 출발",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-13T15:06:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4444736"
     },
     {
-     "title": "'젠슨 황 없는 엔비디아' 긴급 대응…정부 \"엔비디아, GPU 26만 장 공급 ...",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-13T14:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000121324?sid=101"
+     "title": "美 PPI 전월 대비 0.3% 상승…예상치 밑돌아",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-13T14:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004682079?sid=104"
     },
     {
-     "title": "‘엔비디아 생태계’ 발들인 한국 기업들 영향은?",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-13T14:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012293798?sid=101"
+     "title": "미국 10월 PPI 0.3% 상승, 시장 예상치 0.4% 하회",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-13T13:56:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/437914"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 408,
+  "flagged": 411,
   "matched": 171,
   "avgLeadMin": 369,
   "recent": [
