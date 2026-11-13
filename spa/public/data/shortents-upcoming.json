@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T22:39:45.966Z",
+ "builtAt": "2026-11-13T22:49:49.727Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,43 +15,42 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 29,
+   "articles90": 32,
    "recent20": 6,
-   "press": 21,
+   "press": 23,
    "firstArticleAt": "2026-11-13T21:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "美 전역 항공기 이륙 중단…“관제센터 통신 문제”",
+     "press": "kbmaeil.com",
+     "publishedAt": "2026-11-13T22:40:00.000Z",
+     "link": "https://www.kbmaeil.com/article/20261114500025"
+    },
+    {
+     "title": "미국 항공기 7천편 운항 중단 사태…통신 장애로 모든 항공기 이륙 중단",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-13T22:39:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000082575"
+    },
+    {
      "title": "美, '항공기 올스톱'에 \"공격 징후 없지만 사이버 공격 배제 안 해\"",
      "press": "news1.kr",
      "publishedAt": "2026-11-13T22:37:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009288752?sid=104"
-    },
-    {
-     "title": "[1보] 미국 하늘길 통제... 연방항공청 안전상 이유로 항공기 이륙 중단...",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-13T22:36:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3751870"
-    },
-    {
-     "title": "美 전역 항공기 이륙 중단… 관제센터 통신 장애에 항공대란(종합)",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-13T22:32:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3448648"
     }
    ]
   },
   {
    "keyword": "모레노호, 사우디에 2-3 패배",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 9,
+   "articles90": 8,
    "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-13T21:12:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-13T21:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -68,10 +67,10 @@
      "link": "https://www.slist.kr/news/articleView.html?idxno=781595"
     },
     {
-     "title": "'계약 만료 임박' 모레노, 아시안컵 연기에 사우디전 패배까지…끊임없...",
-     "press": "sports.hankooki.com",
+     "title": "'사우디 속도조차 버겁다' 모레노호 고질병 된 템포 문제… 우루과이·...",
+     "press": "footballist.co.kr",
      "publishedAt": "2026-11-13T22:00:00.000Z",
-     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6943535"
+     "link": "https://m.sports.naver.com/kfootball/article/436/0000114852"
     }
    ]
   },
