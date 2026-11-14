@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T22:27:27.527Z",
+ "builtAt": "2026-11-14T22:37:32.219Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "2026년 11월 15일 운세",
+   "keyword": "미국 항공운항 정상화",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-14T21:00:00.000Z",
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-14T21:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[오늘의 띠별 운세] 2026년 11월 15일 일요일",
-     "press": "mhns.co.kr",
-     "publishedAt": "2026-11-14T22:12:00.000Z",
-     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=769125"
+     "title": "美 항공 전면 중단사태 여파 계속… FAA “15일까지 정상화”",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-14T22:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001204789?sid=104"
     },
     {
-     "title": "[오늘의 운세] 2026년 11월 15일 (일) 띠별운세 '한 템포 늦춰 쉬자'",
-     "press": "dailypop.kr",
-     "publishedAt": "2026-11-14T21:40:00.000Z",
-     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103981"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 15일 띠별 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-14T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006409878?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "아버지",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-14T20:59:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“전 재산을 OO에게” 치매 아버지 유언장 본 남매 충격",
+     "title": "[미국 전역 항공기 이륙 중단 여파 이틀째] 인천발 미국행 항공기엔 어...",
      "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-14T21:04:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1173180"
+     "publishedAt": "2026-11-14T22:22:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1174662"
     },
     {
-     "title": "아버지가 만든 '80% 문턱' 없애려는 아들⋯오스코텍 경영권 갈등 [어떻게...",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-14T21:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001075060?sid=101"
-    },
-    {
-     "title": "권영경 “아버지 암 투병 끝에 사망하자, 간병하던 엄마 바로 치매”(언...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-14T20:59:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001187560"
+     "title": "美 항공대란 이틀째⋯항공편 9천편 취소·지연, 15일 정상화 전망",
+     "press": "autodaily.co.kr",
+     "publishedAt": "2026-11-14T22:08:00.000Z",
+     "link": "https://www.autodaily.co.kr/news/articleView.html?idxno=602093"
     }
    ]
   },
@@ -80,30 +48,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 2,
-   "press": 2,
-   "firstArticleAt": "2026-11-14T20:58:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-14T22:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "진선규, '100일의 거짓말'서 총독부 폭발 배후 추적…김유정 향한 의심...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-14T22:34:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16276865"
+    },
+    {
+     "title": "'100일의 거짓말' 김유정, 박진영에 본명 들켰다...김현주는 '제거' 결단...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-14T22:33:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000784466"
+    },
     {
      "title": "김현주, 이무생과 키스 \"김유정 미국 보내 줘\"-'100일의 거짓말'",
      "press": "mediafine.co.kr",
      "publishedAt": "2026-11-14T22:14:00.000Z",
      "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95267"
-    },
-    {
-     "title": "송지효, 진선규와 첫 만남-강렬한 존재감-'100일의 거짓말'",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-14T22:10:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95266"
-    },
-    {
-     "title": "진선규, 김유정 밀정 정체 알고 체포하나‥박진영 충격 (100일의 거짓말...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-14T20:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001187558"
     }
    ]
   }
