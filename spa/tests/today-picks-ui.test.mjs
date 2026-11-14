@@ -45,6 +45,19 @@ test('free board still reveals exactly three rows and gates the remaining twenty
  assert.match(html,/27건 더/); assert.match(html,/LICENSE_REQUIRED/);
  assert.doesNotMatch(html,/>후보 4<\/a>/);
 });
+
+test('100-row edition renders all measured keywords and preserves the three-row preview',()=>{
+ const hundred=Array.from({length:100},(_,index)=>({...rows[index%rows.length],keyword:`추천 ${index+1}`}));
+ const edition={...data,keep:100,novelty:undefined,topics:[{topic:'경제',rows:hundred,targetCount:100}]};
+ const html=render(true,edition);
+ assert.equal((html.match(/href="https:\/\/search.naver.com/g)||[]).length,100);
+ assert.match(html,/전체 100개 \/ 목표 100개/);
+ assert.match(html,/주제별 100개 목표/);
+ assert.ok(html.indexOf('>추천 1</a>') < html.indexOf('>추천 100</a>'));
+ const locked=render(false,edition);
+ assert.equal((locked.match(/href="https:\/\/search.naver.com/g)||[]).length,3);
+ assert.match(locked,/97건 더/);
+});
 test('legacy edition has no invented freshness report and shows a real shortfall',()=>{
  const html=render(true,{...data,novelty:undefined,topics:[{topic:'경제',rows:rows.slice(0,10).map(({freshness,...row})=>row)}]});
  assert.match(html,/전체 10개 \/ 목표 30개 · 황금 10 · 시즌 앞 0 · 일반 0 · 목표보다 20개 적습니다/);

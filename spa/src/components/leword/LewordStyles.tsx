@@ -8,6 +8,10 @@
 function LewordStyles() {
     return (
         <style>{`
+            /* hidden creates a body scroll container and detaches sticky navigation
+             * from the document scroll. Clip horizontal overflow only on LEWORD. */
+            html:has(.lw-app), body:has(.lw-app) { overflow-x: clip; }
+
             .lw-app {
                 display: grid;
                 grid-template-columns: 248px minmax(0, 1fr);

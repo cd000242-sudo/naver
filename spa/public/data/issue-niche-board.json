@@ -1,69 +1,46 @@
 {
-  "publishedAt": "2026-11-12T03:41:02.337Z",
+  "publishedAt": "2026-11-13T21:58:03.013Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 193,
+    "candidates": 240,
     "niche": 0,
-    "preemption": 4,
+    "preemption": 2,
     "pending": 0
   },
   "freeSample": {
-    "day": "2026-11-12",
-    "keywords": [
-      "코어위브 종토방"
-    ]
+    "day": "2026-11-14",
+    "keywords": []
   },
-  "rows": [
+  "rows": [],
+  "observations": [
     {
-      "keyword": "코어위브 종토방",
-      "issue": "코어위브",
-      "topic": "코어위브",
-      "lane": "realtime",
+      "keyword": "노타 초봉",
+      "issue": "노타",
+      "topic": "노타",
+      "lane": "tech",
       "issueType": "fresh",
       "isDerived": true,
       "origin": "autocomplete",
       "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 0,
-        "sampledTitles": 10,
-        "topTitles": [
-          "코어위브 주가 흔들리는 이유, 11일 실적발표에서 뭘 봐야 할까",
-          "26.10.15 아이렌 삼십불 손절해야하나...",
-          "고아 취급 받는 아이렌 근황(-80%)",
-          "38만원 → 18만원대 삼성전자 주가, 반토막 뒤 60일의 기록 보니",
-          "쓰레기 주식 아이렌 2030년까지 살아남을까?",
-          "[1027] 외국인 수급 돌아서나? 앤트로픽 , 네이버 자금유치, SKT 앤트로픽 지분가치",
-          "코스피 반등 총정리, 사이드카부터 외국인까지",
-          "코어위브 실적발표 D-3, 채권값 폭락 사태 전망 총정리",
-          "어제 32% 폭락했는데 오늘 상한가? 엘리스·형지엘리트 급등…진짜 호재일까?",
-          "아이렌 전망 (들고갈까 말까 ..아이렌 종토방 기웃기웃)"
-        ],
-        "measuredAt": "2026-11-10T16:51:56.552Z"
-      },
-      "documentCount": 23,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 9,
       "documentCountMeasured": true,
-      "searchVolume": 480,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "rising",
-      "demandRatio": 1.582698149348226,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
       "issueStatus": "stable",
       "isHot": false,
       "frontalDocCount": 0,
       "freshFrontalCount": 0,
       "reasons": [
-        "검색량 480",
-        "문서수 23",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음",
-        "수요 상승중"
+        "문서수 9",
+        "선점 후보 — 경쟁 문서 9건, 수요 미검출"
       ],
       "evidence": [
         {
@@ -71,16 +48,117 @@
           "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
         },
         {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 480 실측 — 트래픽 하한 통과"
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "매출 성장 중인 반도체 AI기업 노타 입사 희망자가 초봉·연봉 등 처우를 확인하려는 검색",
+        "basis": "AI 추론 — 뉴스 헤드라인 6건 + 실측 확인된 확장어 5개"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "노타 초봉 신입 연봉과 채용 복지 조건 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "노타 초봉 궁금해서 보다가 노타 채용 공고에 눈이 더 오래 머물렀어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "노타 주가",
+          "searchVolume": 31490,
+          "frame": "generic"
         },
         {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.6배"
+          "keyword": "노타 채용",
+          "searchVolume": 100,
+          "frame": "generic"
         },
         {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+          "keyword": "노타 ai 채용",
+          "searchVolume": 30,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "노타 주가",
+          "searchVolume": 31490,
+          "documentCount": 12822,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "노타 채용",
+          "searchVolume": 100,
+          "documentCount": 680,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "노타 ai 채용",
+          "searchVolume": 30,
+          "documentCount": 560,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "노타 기업정보",
+          "searchVolume": 30,
+          "documentCount": 9700,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "노타 연봉",
+          "searchVolume": 20,
+          "documentCount": 260,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-13T21:55:50.803Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "앤트로픽 엔스로픽 차이",
+      "issue": "앤트로픽",
+      "topic": "앤트로픽",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 44,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 44",
+        "선점 후보 — 경쟁 문서 44건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
         },
         {
           "code": "empty-field",
@@ -88,7 +166,244 @@
         }
       ],
       "whySearch": {
-        "text": "내일 코어위브 실적 발표, AI 투자심리 반등 분수령",
+        "text": "AI 기업 앤트로픽 IPO 소식에 회사명 표기와 상장·청약 정보를 함께 확인하려는 검색",
+        "basis": "AI 추론 — 뉴스 헤드라인 6건 + 실측 확인된 확장어 8개"
+      },
+      "intentLabel": "구매 검토",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "앤트로픽 엔스로픽 차이와 상장 공모주 청약 경쟁률 6대 1",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "앤트로픽 엔스로픽 차이 많이들 헷갈리던데 상장 공모주랑 같이 봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "앤트로픽 상장",
+          "searchVolume": 29300,
+          "frame": "generic"
+        },
+        {
+          "keyword": "앤트로픽 상장일",
+          "searchVolume": 9050,
+          "frame": "generic"
+        },
+        {
+          "keyword": "앤트로픽 주가",
+          "searchVolume": 8080,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "앤트로픽 상장",
+          "searchVolume": 29300,
+          "documentCount": 39669,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "앤트로픽 상장일",
+          "searchVolume": 9050,
+          "documentCount": 32758,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "앤트로픽 주가",
+          "searchVolume": 8080,
+          "documentCount": 59060,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "앤트로픽 IPO",
+          "searchVolume": 4020,
+          "documentCount": 29527,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "앤트로픽 공모가",
+          "searchVolume": 260,
+          "documentCount": 11589,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "앤트로픽 공모주",
+          "searchVolume": 120,
+          "documentCount": 13193,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "앤트로픽 기업가치",
+          "searchVolume": 100,
+          "documentCount": 47012,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-13T21:55:50.803Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "바이트댄스 문톤",
+      "issue": "바이트댄스",
+      "topic": "바이트댄스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 68,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "rising",
+      "isHot": true,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 68",
+        "선점 후보 — 경쟁 문서 68건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "바이트댄스가 메타 '뮤즈'에 맞설 AI 에이전트를 예고해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-12T21:58:49.845Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
+    {
+      "keyword": "바이트댄스 씨댄스",
+      "issue": "바이트댄스",
+      "topic": "바이트댄스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 133,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "rising",
+      "isHot": true,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 133",
+        "선점 후보 — 경쟁 문서 133건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "바이트댄스가 메타 '뮤즈'에 맞설 AI 에이전트를 예고해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-12T21:58:49.845Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
+    {
+      "keyword": "e-민즈 메타",
+      "issue": "e-민즈",
+      "topic": "e-민즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 25,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 25",
+        "선점 후보 — 경쟁 문서 25건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "메타가 AI 데이터 처리를 45배 빠르게 하는 'e-민즈'를 공개해서",
         "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
       },
       "intentLabel": "분류 안 됨",
@@ -96,129 +411,997 @@
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "코어위브 종토방 실적발표 전 주가 전망 핵심 포인트",
+          "text": "e-민즈 메타, AI 데이터 처리 45배 빨라진 핵심",
           "frame": "ai",
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "코어위브 종토방에서 실적발표 앞두고 외국인 매수 얘기가 자주 나오네요",
+          "text": "e-민즈 메타가 AI 데이터 처리 45배라던데 의외로 조건이 붙더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-12T21:58:49.845Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
+    {
+      "keyword": "메타 e민즈",
+      "issue": "e-민즈",
+      "topic": "e-민즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 25,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 25",
+        "선점 후보 — 경쟁 문서 25건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "메타가 AI 데이터 처리를 45배 빠르게 하는 'e-민즈'를 공개해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "메타 e민즈, AI 데이터 처리 45배 빨라진 핵심 구조",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "메타 e민즈가 데이터 처리를 45배 빠르게 한다길래 뭔지 찾아봤네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-12T21:58:49.845Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
+    {
+      "keyword": "기현 발매곡",
+      "issue": "기현",
+      "topic": "기현",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 31,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 31",
+        "선점 후보 — 경쟁 문서 31건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "몬스타엑스 기현이 드라마 '뜨거운 안녕' 첫 OST를 발매해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "기현 발매곡 뜨거운 안녕 첫 OST 지금 12일 발매",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "기현 발매곡 이번에 처음 나온다길래 플레이 눌렀다가 한참 들었네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-12T21:58:49.845Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
+    {
+      "keyword": "e민즈 성능",
+      "issue": "e-민즈",
+      "topic": "e-민즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 37,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 37",
+        "선점 후보 — 경쟁 문서 37건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "메타가 AI 데이터 처리를 45배 빠르게 하는 'e-민즈'를 공개해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "e민즈 성능 메타 AI 데이터 처리 최대 45배 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "e민즈 성능이 45배라던데 메타가 슬쩍 넘어간 조건이 있더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-12T21:58:49.845Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
+    {
+      "keyword": "e민즈 45배",
+      "issue": "e-민즈",
+      "topic": "e-민즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 32,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 32",
+        "선점 후보 — 경쟁 문서 32건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "메타가 AI 데이터 처리를 45배 빠르게 하는 'e-민즈'를 공개해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "e민즈 45배 메타 AI 데이터처리 기술 뭐가 달라졌나",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "e민즈 45배가 정확히 뭔지 메타 발표 보고 많이들 헷갈리더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-12T21:58:49.845Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
+    {
+      "keyword": "e민즈 적용분야",
+      "issue": "e-민즈",
+      "topic": "e-민즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "어디 쓰이는지 궁금",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 45,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 45",
+        "선점 후보 — 경쟁 문서 45건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 어디 쓰이는지 궁금"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "메타가 AI 데이터 처리를 45배 빠르게 하는 'e-민즈'를 공개해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "e민즈 적용분야, AI 데이터 처리 45배 어디부터 쓰이나",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "e민즈 적용분야 찾다가 메타 45배라는 말에 눈이 갔네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-12T21:58:49.845Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
+    {
+      "keyword": "기현 borderline",
+      "issue": "기현",
+      "topic": "기현",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 140,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 3,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 140",
+        "선점 후보 — 경쟁 문서 140건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 3건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "몬스타엑스 기현이 드라마 '뜨거운 안녕' 첫 OST를 발매해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "기현 borderline 뜨거운 안녕 첫 OST 지금 12일 발매",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "기현 borderline 보러 왔다가 뜨거운 안녕 OST 지금만 계속 듣고 있어요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
       },
       "subKeywords": [
         {
-          "keyword": "코어위브 주가",
-          "searchVolume": 49030,
-          "frame": "generic"
-        },
-        {
-          "keyword": "코어위브 실적발표",
-          "searchVolume": 2990,
-          "frame": "generic"
-        },
-        {
-          "keyword": "코어위브 실적",
-          "searchVolume": 570,
+          "keyword": "기현 지금",
+          "searchVolume": 10,
           "frame": "generic"
         }
       ],
       "keywordPool": [
         {
-          "keyword": "코어위브 주가",
-          "searchVolume": 49030,
-          "documentCount": 37381,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "코어위브 실적발표",
-          "searchVolume": 2990,
-          "documentCount": 26145,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "코어위브 실적",
-          "searchVolume": 570,
-          "documentCount": 32979,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "코어위브 주식",
-          "searchVolume": 180,
-          "documentCount": 37346,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "코어위브 엔비디아",
-          "searchVolume": 140,
-          "documentCount": 30200,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "코어위브 주가전망",
-          "searchVolume": 50,
-          "documentCount": 34358,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "코어위브 목표주가",
+          "keyword": "기현 지금",
           "searchVolume": 10,
-          "documentCount": 14258,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "코어위브 상장",
-          "searchVolume": 10,
-          "documentCount": 13817,
+          "documentCount": 24717,
           "source": "ai-verified"
         }
       ],
-      "trend": {
-        "series": [
-          0,
-          9,
-          37,
-          22,
-          33,
-          10,
-          10,
-          19,
-          13,
-          25,
-          15,
-          9,
-          0,
-          30,
-          22,
-          27,
-          24,
-          10,
-          10,
-          0,
-          30,
-          51,
-          58,
-          30,
-          43,
-          24,
-          21,
-          58,
-          100
-        ],
-        "label": "🚀 떡상",
-        "recommendation": "지금 당장 작성! 3일 내 급증 포착 → 선점 시 상위 노출 확률 매우 높음",
-        "measuredAt": "2026-11-11T22:16:52.258Z"
-      },
+      "trend": null,
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-11-10T16:48:59.161Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
+      "measuredAt": "2026-11-12T21:58:49.845Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
       "carried": true
-    }
-  ],
-  "observations": [
+    },
+    {
+      "keyword": "e민즈 기술",
+      "issue": "e-민즈",
+      "topic": "e-민즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 183,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 183",
+        "선점 후보 — 경쟁 문서 183건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "메타가 AI 데이터 처리를 45배 빠르게 하는 'e-민즈'를 공개해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "e민즈 기술 메타 공개, AI 데이터 처리 45배 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "e민즈 기술로 데이터 처리가 45배 빨라진다는 메타 발표, 많이들 궁금해하더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-12T21:58:49.845Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
+    {
+      "keyword": "기현 록보컬",
+      "issue": "기현",
+      "topic": "기현",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 281,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 281",
+        "선점 후보 — 경쟁 문서 281건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "몬스타엑스 기현이 드라마 '뜨거운 안녕' 첫 OST를 발매해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "기현 록보컬 '지금' 뜨거운 안녕 첫 OST 발매일·가사",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "기현 록보컬로 뜨거운 안녕 첫 OST 지금 들어보니 생각보다 세더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 17,
+      "kinTop": [
+        {
+          "title": "기현 Youth 같은 노래 추천!",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=30213&docId=433096668&answerNo=5",
+          "views": 132,
+          "answers": 5
+        },
+        {
+          "title": "기현의 'So Good' 무대 연출, 기대했던 것과 달랐나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=3010201&docId=494286159&answerNo=1",
+          "views": 72,
+          "answers": 1
+        },
+        {
+          "title": "기현의 'So Good' 무대, 첫 공개 반응은 어땠나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=30202&docId=494286164&answerNo=1",
+          "views": 62,
+          "answers": 1
+        },
+        {
+          "title": "기현의 'So Good' 무대, 첫 방송 반응은 어땠나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=30205&docId=494286161&answerNo=1",
+          "views": 60,
+          "answers": 1
+        },
+        {
+          "title": "기현의 ‘So Good’ 무대, 첫 방송 반응은 어땠나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=9020402&docId=494286152&answerNo=1",
+          "views": 59,
+          "answers": 1
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-11-12T21:58:49.845Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
+    {
+      "keyword": "e-민즈 국내 도입",
+      "issue": "e-민즈",
+      "topic": "e-민즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "한국 적용 궁금",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 26,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 26",
+        "선점 후보 — 경쟁 문서 26건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 한국 적용 궁금"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "메타가 AI 데이터 처리를 최대 45배 빠르게 하는 'e-민즈'를 공개했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "home": {
+          "text": "e-민즈 국내 도입 날짜 나왔다길래 장바구니부터 다시 열어봤는데요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-12T09:39:29.490Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
+    {
+      "keyword": "e-민즈 출시일",
+      "issue": "e-민즈",
+      "topic": "e-민즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "공개 다음 적용 시점",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 38,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 38",
+        "선점 후보 — 경쟁 문서 38건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 공개 다음 적용 시점"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "메타가 AI 데이터 처리를 최대 45배 빠르게 하는 'e-민즈'를 공개했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "e-민즈 출시일 메타 AI 처리 45배 성능 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "e-민즈 출시일 기다리다 메타 발표 영상을 몇 번씩 다시 돌려봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-12T09:39:29.490Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
+    {
+      "keyword": "e-민즈 성능",
+      "issue": "e-민즈",
+      "topic": "e-민즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 37,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 37",
+        "선점 후보 — 경쟁 문서 37건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "메타가 AI 데이터 처리를 최대 45배 빠르게 하는 'e-민즈'를 공개했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "e-민즈 성능 메타 AI 데이터 처리 45배 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "e-민즈 성능 메타가 45배라고 공개했는데 의외로 여기서 갈리네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-12T09:39:29.490Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
+    {
+      "keyword": "김승우 입장문",
+      "issue": "김승우",
+      "topic": "김승우",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "장난 해명 이후 반응",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 32,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 32",
+        "선점 후보 — 경쟁 문서 32건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 장난 해명 이후 반응"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "배우 김승우가 2200만원 절도 혐의로 피소됐다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "김승우 입장문 2200만원 절도 피소 해명 요약",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "김승우 입장문 올라오고 나서 근황을 찾아봤는데 예상과 좀 다르더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "김승우 근황",
+          "searchVolume": 20,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "김승우 근황",
+          "searchVolume": 20,
+          "documentCount": 1513,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-12T09:39:29.490Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
+    {
+      "keyword": "e-민즈 사용법",
+      "issue": "e-민즈",
+      "topic": "e-민즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 173,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 173",
+        "선점 후보 — 경쟁 문서 173건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "메타가 AI 데이터 처리를 최대 45배 빠르게 하는 'e-민즈'를 공개했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "e-민즈 사용법 단계별 방법",
+          "frame": "howto",
+          "basis": "검색 질문 'e-민즈 사용법' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+        },
+        "home": {
+          "text": "e-민즈 사용법 처음엔 헤맸는데 이 메뉴부터 눌러보니 달라지더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-12T09:39:29.490Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
+    {
+      "keyword": "e-민즈 활용",
+      "issue": "e-민즈",
+      "topic": "e-민즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 209,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 209",
+        "선점 후보 — 경쟁 문서 209건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "메타가 AI 데이터 처리를 최대 45배 빠르게 하는 'e-민즈'를 공개했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "e-민즈 활용, 메타 AI 데이터 45배 처리 실제 적용",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "e-민즈 활용 메타 AI 데이터가 45배 빨라진다는데 어디서 갈리나",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-12T09:39:29.490Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
     {
       "keyword": "소프트뱅크 키디 차이",
       "issue": "소프트뱅크",
@@ -291,7 +1474,8 @@
       "monetize": null,
       "measuredAt": "2026-11-12T03:38:41.913Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "문샷 쿠션 단종",
@@ -395,7 +1579,8 @@
       "monetize": null,
       "measuredAt": "2026-11-12T03:38:41.913Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "제미나이 디시전 1",
@@ -457,7 +1642,8 @@
       "monetize": null,
       "measuredAt": "2026-11-12T03:38:41.913Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "문샷 챌린지 뜻",
@@ -575,7 +1761,8 @@
       },
       "measuredAt": "2026-11-12T03:38:41.913Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "이재아 플루트",
@@ -1118,1105 +2305,293 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "오픈ai 닷츠 후기",
-      "issue": "오픈AI",
-      "topic": "오픈AI",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 189,
-      "documentCountMeasured": true,
-      "searchVolume": 20,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 2,
-      "freshFrontalCount": 1,
-      "reasons": [
-        "검색량 20",
-        "문서수 189",
-        "선점 후보 — 경쟁 문서 189건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 2건 (최근 1건)"
-        }
-      ],
-      "whySearch": {
-        "text": "오픈AI가 3분기 매출 100억달러를 올리고 삼성에 AI 디바이스 협력을 제안해서",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "오픈ai 닷츠 후기, 삼성 AI 디바이스·챗GPT 기능 뭐가 다른지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "오픈ai 닷츠 후기 보려다 3분기 매출 숫자에 자꾸 눈이 가더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "오픈ai 3분기 매출",
-          "searchVolume": null,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": [
-        {
-          "title": "새로운 AI 에이전트 닷츠, 실제로 얼마나 효율적일까요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1122&docId=495387990&answerNo=0",
-          "views": 137,
-          "answers": null
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-11-11T09:58:28.501Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "이효정 춘향뎐",
-      "issue": "이효정",
-      "topic": "이효정",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 292,
-      "documentCountMeasured": true,
-      "searchVolume": 20,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "rising",
-      "isHot": true,
-      "frontalDocCount": 2,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 20",
-        "문서수 292",
-        "선점 후보 — 경쟁 문서 292건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 2건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "이효정이 아들 이유진 결혼 앞두고 정육식당을 열었다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "이효정 춘향뎐 아들 이유진 결혼 장동윤 동서 집안 배우 6명",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "이효정 춘향뎐 찾다가 아들 이유진이 장동윤이랑 동서라는 얘기에 멈췄네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "이효정 아들 이유진",
-          "searchVolume": 100,
-          "frame": "mistake"
-        },
-        {
-          "keyword": "이효정 정육식당",
-          "searchVolume": 810,
-          "frame": "generic"
-        },
-        {
-          "keyword": "이효정 나이",
-          "searchVolume": 220,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "이효정 정육식당",
-          "searchVolume": 810,
-          "documentCount": 141,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "이효정 나이",
-          "searchVolume": 220,
-          "documentCount": 3681,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "이효정 아들 이유진",
-          "searchVolume": 100,
-          "documentCount": 2963,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "이효정 아들 결혼",
-          "searchVolume": 40,
-          "documentCount": 3455,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "이효정 동생 이기영",
-          "searchVolume": 10,
-          "documentCount": 717,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 89,
-      "kinTop": [
-        {
-          "title": "춘향뎐 이효정은 왜 활동이 없나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=3031101&docId=203906374&answerNo=0",
-          "views": 787,
-          "answers": 1
-        },
-        {
-          "title": "춘향뎐영화",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=3031101&docId=349677098&answerNo=1",
-          "views": 243,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-11-11T01:03:37.449Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "이유진 (1977년)",
-      "issue": "이유진",
-      "topic": "이유진",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 8,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 8",
-        "선점 후보 — 경쟁 문서 8건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "이유진·차경은 결혼 앞두고 동상이몽2 합류, 상견례서 눈물",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "이유진 (1977년) 차경은과 11월 결혼·동상이몽2 상견례 눈물",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "이유진 (1977년) 차경은 상견례 그날 눈물까지 났던 게 좀 묘했더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "이유진 차경은",
-          "searchVolume": 13250,
-          "frame": "mistake"
-        },
-        {
-          "keyword": "이유진 상견례 눈물",
-          "searchVolume": 2460,
-          "frame": "mistake"
-        },
-        {
-          "keyword": "이유진 나혼자산다",
-          "searchVolume": 430,
-          "frame": "mistake"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "이유진 차경은",
-          "searchVolume": 13250,
-          "documentCount": 4737,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "이유진 상견례 눈물",
-          "searchVolume": 2460,
-          "documentCount": 581,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "이유진 나혼자산다",
-          "searchVolume": 430,
-          "documentCount": 7517,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "이유진 차경은 결혼",
-          "searchVolume": 150,
-          "documentCount": 4672,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "이유진 혼전임신",
-          "searchVolume": 50,
-          "documentCount": 685,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 7,
-      "kinTop": [
-        {
-          "title": "방송인 1978년생 장영란이나 슈퍼모델 출신인 1977년생 이유진....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40605&docId=423996040&answerNo=1",
-          "views": 321,
-          "answers": 1
-        },
-        {
-          "title": "77년생인 연예인 이유진씨가 미스코리아에 나갔다면?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=30104&docId=375014653&answerNo=0",
-          "views": 40,
-          "answers": null
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-11-10T16:48:59.161Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "곽명우 복귀 반응",
-      "issue": "곽명우",
-      "topic": "곽명우",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 29,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 29",
-        "선점 후보 — 경쟁 문서 29건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "1년 자격정지 곽명우, OK저축은행 복귀 결정",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "곽명우 복귀 반응 2년 만에 OK저축은행 V리그 복귀 논란 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "곽명우 복귀 반응 자격정지 풀리고 근황 찾아보다 세터 자리 얘기에 멈칫했네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "곽명우 근황",
-          "searchVolume": 20,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "곽명우 근황",
-          "searchVolume": 20,
-          "documentCount": 32,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-10T16:48:59.161Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "곽명우 자격정지",
-      "issue": "곽명우",
-      "topic": "곽명우",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 98,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 2,
-      "freshFrontalCount": 2,
-      "reasons": [
-        "문서수 98",
-        "선점 후보 — 경쟁 문서 98건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 2건 (최근 2건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "1년 자격정지 곽명우, OK저축은행 복귀 결정",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "곽명우 자격정지 1년 뒤 2년 만에 OK저축은행 복귀",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "곽명우 자격정지 1년 만에 복귀한다니까 배구팬들 말이 많더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-10T16:48:59.161Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "신현송 약력",
-      "issue": "신현송",
-      "topic": "신현송",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 179,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "declining",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 179",
-        "선점 후보 — 경쟁 문서 179건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "신현송, 비서구권 최초 BIS 지급결제위 의장 선임",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "신현송 약력 BIS CPMI 의장 선임, 학력부터 경력까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "신현송 약력 보다가 신현송 학력 어디까지 가나 싶어서 계속 읽었네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "신현송 프로필",
-          "searchVolume": 2560,
-          "frame": "generic"
-        },
-        {
-          "keyword": "신현송 한국은행",
-          "searchVolume": 10,
-          "frame": "generic"
-        },
-        {
-          "keyword": "신현송 학력",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "신현송 프로필",
-          "searchVolume": 2560,
-          "documentCount": 616,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "신현송 한국은행",
-          "searchVolume": 10,
-          "documentCount": 16901,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "신현송 학력",
-          "searchVolume": 10,
-          "documentCount": 442,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "신현송 나이",
-          "searchVolume": 10,
-          "documentCount": 405,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": [
-        {
-          "title": "신현송 신임 한국은행 총재 지명자가 노벨상 후보에 거론된 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=111001&docId=492776898&answerNo=4",
-          "views": 184,
-          "answers": 5
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-11-10T16:48:59.161Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
   "issues": [
     {
-      "issue": "이재명 메가프로젝트 회의",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "충청권 메가프로젝트 착공식에 이재용과 나란히 첫 삽을 떠서",
-      "headlines": [
-        {
-          "title": "충청권 메가프로젝트 첫 삽…이 대통령 “지역·국민 삶 바꾸는 모두의...",
-          "press": "news.kbs.co.kr",
-          "publishedAt": "2026-11-12T03:03:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/056/0012292460?sid=100"
-        },
-        {
-          "title": "李대통령 \"메가프로젝트 속도전 넘어 전격전…기업에 힘 보탤것\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-12T02:36:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016438073?sid=100"
-        },
-        {
-          "title": "李대통령, 이재용 회장과 메가프로젝트 나란히 첫 삽…\"모두의 성장 완...",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-11-12T01:43:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005440158?sid=100"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "김건희 집사게이트 IMS모빌리티",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "IMS모빌리티 조영탁 대표가 무죄·공소기각을 확정받아서",
-      "headlines": [
-        {
-          "title": "'김건희 집사 게이트' IMS모빌리티 대표 무죄·공소기각 확정",
-          "press": "nocutnews.co.kr",
-          "publishedAt": "2026-11-12T02:07:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/079/0004209038?sid=102"
-        },
-        {
-          "title": "'김건희 집사 게이트' IMS모빌리티 대표 등 무죄·공소기각 확정",
-          "press": "imnews.imbc.com",
-          "publishedAt": "2026-11-12T02:15:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/214/0001535126?sid=102"
-        },
-        {
-          "title": "대법 ‘김건희 집사 게이트’ 조영탁 IMS 대표 무죄·공소기각 확정",
-          "press": "khan.co.kr",
-          "publishedAt": "2026-11-12T02:28:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/032/0003482236?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "김건희",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "젠슨 황 불륜",
+      "issue": "기현",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "stable",
       "isHot": true,
-      "why": "NYT가 엔비디아 임원과의 혼외관계를 추가 폭로해서",
+      "why": "몬스타엑스 기현이 드라마 '뜨거운 안녕' 첫 OST를 발매해서",
       "headlines": [
         {
-          "title": "젠슨황 '사내불륜' 추가 폭로…NYT \"엔비디아 임원과 혼외관계\"(종합)",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-12T01:53:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016437851?sid=104"
+          "title": "몬스타엑스 기현, ‘뜨거운 안녕’ OST ‘지금’ 발매",
+          "press": "sports.khan.co.kr",
+          "publishedAt": "2026-11-12T11:39:00.000Z",
+          "link": "https://m.entertain.naver.com/article/144/0001149534"
         },
         {
-          "title": "젠슨 황 '사내불륜' 추가 폭로…\"직원들도 알았다\"",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-11-12T02:08:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/055/0001402488?sid=104"
+          "title": "몬스타엑스 기현, ‘뜨거운 안녕’ 첫 OST 주자",
+          "press": "bntnews.co.kr",
+          "publishedAt": "2026-11-12T01:22:00.000Z",
+          "link": "https://www.bntnews.co.kr/article/view/bnt202611120165"
         },
         {
-          "title": "젠슨 황 사내 불륜 의혹은 누구?…의료·바이오 AI 키운 핵심 임원",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-12T03:03:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014318169?sid=104"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "강동원 김고은 부부",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "넷플릭스 '혼: 삼각의 시간'에서 부부役 출연이 확정돼서",
-      "headlines": [
-        {
-          "title": "강동원·김고은 부부된다…넷플릭스 '혼' 주인공 확정",
-          "press": "news1.kr",
-          "publishedAt": "2026-11-12T03:19:00.000Z",
-          "link": "https://m.entertain.naver.com/article/421/0009285570"
-        },
-        {
-          "title": "넷플릭스 '혼', 강동원·김고은 부부로 만난다",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-11-12T00:47:00.000Z",
-          "link": "https://m.entertain.naver.com/article/018/0006408650"
-        },
-        {
-          "title": "강동원♥김고은 원수 집안인데 부부 된다…넷플릭스 ‘혼’ 제작 확정",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-11-12T00:39:00.000Z",
-          "link": "https://m.entertain.naver.com/article/009/0005762545"
+          "title": "몬스타엑스 기현, ‘뜨거운 안녕’ OST ‘지금’ 발매…파워풀한 록 보...",
+          "press": "sportsseoul.com",
+          "publishedAt": "2026-11-12T02:29:00.000Z",
+          "link": "https://m.entertain.naver.com/article/468/0001280470"
         }
       ],
       "concentrated": [
         {
-          "keyword": "강동원",
+          "keyword": "몬스타엑스 기현",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "강동원 김고은",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "네이버 AI 계약",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "AI팩토리 2조 계약 확보했으나 3분기 영업익 21% 감소해서",
-      "headlines": [
-        {
-          "title": "네이버, 투자 영향으로 3분기 영업익 감소…AI 팩토리 사업 가속",
-          "press": "economist.co.kr",
-          "publishedAt": "2026-11-12T01:13:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/243/0000105548?sid=105"
-        },
-        {
-          "title": "네이버 최수연 “AI 팩토리 ‘2조 계약’ 확보…내년 상반기 매출 본격...",
-          "press": "sedaily.com",
-          "publishedAt": "2026-11-12T00:23:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/011/0004681313?sid=105"
-        },
-        {
-          "title": "'역대 최대매출' 네이버, AI 투자에 영업익 21% 감소…\"AI·커머스 성장...",
-          "press": "hankyung.com",
-          "publishedAt": "2026-11-12T00:22:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005353053?sid=105"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "이슬람 혁명 수비대",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "혁명수비대가 지하 '미사일 도시'를 공개해서",
-      "headlines": [
-        {
-          "title": "이란 혁명수비대, 첨단 무기 가득 '지하 미사일 도시' 공개",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-11T14:21:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016437008?sid=104"
-        },
-        {
-          "title": "‘이란군 끝장냈다’는 트럼프…혁명수비대 지하 ‘미사일 도시’ 공개",
-          "press": "hani.co.kr",
-          "publishedAt": "2026-11-11T09:36:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/028/0002831760?sid=104"
-        },
-        {
-          "title": "프랑스 “냉장고 해킹, 이란 혁명수비대 소행”",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-11-10T01:28:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/024/0000109523?sid=101"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "군부대 상비약 허용",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "약국 없는 군부대·공항서 안전상비약 취급이 허용돼서",
-      "headlines": [
-        {
-          "title": "약국 없는 군부대·공항서 상비약 취급 허용…군무원도 군의관 직접 조...",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-11-12T01:33:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005440146?sid=101"
-        },
-        {
-          "title": "근처에 약국 없는 군부대·공항, 상비약 접근성 높인다",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-12T02:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016437899?sid=102"
-        },
-        {
-          "title": "약국 없는 군부대·공항서 상비약 산다…의약품 접근성 확대",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-11-12T01:27:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005841678?sid=101"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "천무 다연장로켓",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "한화에어로가 美 해상에서 천무 사격시험을 할 예정이라서",
-      "headlines": [
-        {
-          "title": "[영상] 다연장로켓 '천무' 美서 해상사격시험 예정…해양 방산사업 확장",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-10T06:52:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016433943?sid=100"
-        },
-        {
-          "title": "“한국 ‘천무’에 시장 뺏기는 美 하이마스”…유럽에서도 안 밀리는 ...",
-          "press": "nownews.seoul.co.kr",
-          "publishedAt": "2026-11-11T11:32:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/081/0003698429?sid=104"
-        },
-        {
-          "title": "한화에어로, 美 해상서 '천무' 쏜다",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-11-09T02:03:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005839906?sid=101"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "정부 양극화 대응",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "정부가 양극화 대응 TF를 가동해 5대 분야 과제 발굴에 착수해서",
-      "headlines": [
-        {
-          "title": "정부, 양극화 대응 TF 본격 가동…5대 분야 과제 발굴 착수",
-          "press": "nocutnews.co.kr",
-          "publishedAt": "2026-11-12T00:39:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/079/0004208958?sid=101"
-        },
-        {
-          "title": "정부, 양극화 대응 총괄반 첫 회의…내년 성장전략에 핵심과제 반영",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-11-12T00:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005841558?sid=101"
-        },
-        {
-          "title": "정부, 양극화 대응 TF 가동…5대 분야 격차 완화책 연내 마련",
-          "press": "news1.kr",
-          "publishedAt": "2026-11-12T00:48:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009284949?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "정부",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "같은 목표 향해",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "손흥민과 96라인이 갈등설에 공동 입장문을 내서",
-      "headlines": [
-        {
-          "title": "\"같은 목표 향하는 동료\"…손흥민·96라인, 공동 입장문",
-          "press": "mbn.mk.co.kr",
-          "publishedAt": "2026-11-12T00:34:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/057/0001977844?sid=102"
-        },
-        {
-          "title": "손흥민·96라인 갈등 일단락 “은퇴 요구 사실 아냐…같은 목표로 가는...",
-          "press": "donga.com",
-          "publishedAt": "2026-11-12T01:12:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/020/0003761961?sid=102"
-        },
-        {
-          "title": "손흥민·김민재 등 입장문... \"같은 목표 향해 나아갈 동료\"",
-          "press": "ohmynews.com",
-          "publishedAt": "2026-11-12T02:01:00.000Z",
-          "link": "https://m.sports.naver.com/kfootball/article/047/0002535574"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "같은",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "하이드로젠",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "dead",
-      "isHot": false,
-      "why": "현대차그룹이 월드 하이드로젠 엑스포 2026에서 대상을 수상해서",
-      "headlines": [
-        {
-          "title": "현대차, 월드 하이드로젠 엑스포 2026서 ‘베스트 픽(대상)’ 수상",
-          "press": "busan.com",
-          "publishedAt": "2026-11-11T23:19:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/082/0001406789?sid=101"
-        },
-        {
-          "title": "구글, 차세대 경량 모델 '하이드로젠' 테스트…출시 임박 관측",
-          "press": "aitimes.com",
-          "publishedAt": "2026-11-12T03:24:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=217308"
-        },
-        {
-          "title": "현대차그룹, 월드 하이드로젠 엑스포서 수소 기술·사업 역량 선보여",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-11-08T01:23:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005839517?sid=103"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "월드 하이드로젠 엑스포",
+          "keyword": "몬엑 기현",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "하이드로젠 수소",
+          "keyword": "사촌사이 기현",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "하이드로젠 파워",
+          "keyword": "기현 나무위키",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "하이드로젠 뜻",
+          "keyword": "기현 보나",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "하이드로젠 물",
+          "keyword": "기현 youth",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "하이드로젠 연료",
+          "keyword": "기현 so good",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "하이드로젠엑스포2026",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "구글",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "구글이 제미나이 4 카본과 알파게놈 2를 공개해서",
-      "headlines": [
-        {
-          "title": "지시 한 번에 AI가 에펠탑 건설 재현…구글, '제미나이 4 카본' 공개",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-11T07:25:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014316473?sid=105"
-        },
-        {
-          "title": "구글 딥마인드, 질병 원인 찾는 AI '알파게놈 2' 공개",
-          "press": "zdnet.co.kr",
-          "publishedAt": "2026-11-12T00:47:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/092/0002444965?sid=105"
-        },
-        {
-          "title": "\"엔비디아 이사회, 젠슨 황 해임 준비\"…시간외 주가 8% 급락",
-          "press": "hankyung.com",
-          "publishedAt": "2026-11-11T23:08:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005353013?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "구글 제미나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 번역기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 영국",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 클래스룸",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 재팬",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 원",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 킵",
+          "keyword": "기현 borderline",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [
         {
-          "keyword": "구글 주가",
-          "reason": "신모델 주가 영향",
+          "keyword": "기현 솔로 활동",
+          "reason": "개인 활동 주목",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
+    },
+    {
+      "issue": "e-민즈",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "메타가 AI 데이터 처리를 45배 빠르게 하는 'e-민즈'를 공개해서",
+      "headlines": [
+        {
+          "title": "메타, AI 데이터 처리 최대 45배 빠르게 하는 'e-민즈' 공개",
+          "press": "aitimes.com",
+          "publishedAt": "2026-11-12T09:02:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=217327"
+        },
+        {
+          "title": "[브리프]넥슨 넷마블 크래프톤 엔씨소프트 스마일게이트 카카오게임즈...",
+          "press": "biztribune.co.kr",
+          "publishedAt": "2025-03-14T14:14:00.000Z",
+          "link": "http://www.biztribune.co.kr/news/articleView.html?idxno=330989"
+        },
+        {
+          "title": "'아웃소싱 네트워크' e비즈 토대 .. '메타 캐피털리즘'",
+          "press": null,
+          "publishedAt": "2001-01-10T08:15:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0000322922?sid=102"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [
+        {
+          "keyword": "e민즈 적용분야",
+          "reason": "어디 쓰이는지 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0,
+      "carried": true
+    },
+    {
+      "issue": "바이트댄스",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "rising",
+      "isHot": true,
+      "why": "바이트댄스가 메타 '뮤즈'에 맞설 AI 에이전트를 예고해서",
+      "headlines": [
+        {
+          "title": "[AI는 지금] 틱톡 만든 中 바이트댄스, '뮤즈' 대항마 예고",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-11-12T01:34:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002444993?sid=105"
+        },
+        {
+          "title": "화웨이도 AI폰 출시…자체 칩·OS로 바이트댄스와 한판승부",
+          "press": "sedaily.com",
+          "publishedAt": "2026-11-12T08:17:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/011/0004681567?sid=104"
+        },
+        {
+          "title": "[유경동의 특허토커] AI 액션신 뒤 숨은 주역, 바이트댄스",
+          "press": "livebiz.today",
+          "publishedAt": "2026-11-12T21:06:00.000Z",
+          "link": "https://www.livebiz.today/news/articleView.html?idxno=206464"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "바이트댄스 주식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "바이트댄스 ai",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "바이트댄스 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "바이트댄스 본사",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "바이트댄스 코리아",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "바이트댄스 시댄스",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "바이트댄스 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "바이트댄스 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0,
+      "carried": true
+    },
+    {
+      "issue": "김승우",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "배우 김승우가 2200만원 절도 혐의로 피소됐다.",
+      "headlines": [
+        {
+          "title": "\"장난이었다\" 해명에도…김승우, 2200만원 절도 혐의 피소",
+          "press": "hankyung.com",
+          "publishedAt": "2026-11-12T08:50:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005353323?sid=102"
+        },
+        {
+          "title": "배우 김승우 2200만원 절도 혐의로 고소당해...경찰 수사 중",
+          "press": "chosun.com",
+          "publishedAt": "2026-11-12T08:14:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0004009291?sid=102"
+        },
+        {
+          "title": "[단독] 술자리 중 지갑에서 쓱? 배우 김승우 ‘절도 혐의’ 피소",
+          "press": "ilyo.co.kr",
+          "publishedAt": "2026-11-12T05:48:00.000Z",
+          "link": "https://ilyo.co.kr/?ac=article_view&entry_id=513574"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "김승우 농구",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김승우 배우",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "연세대 김승우",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김남주 김승우",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "농구 김승우",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "배우 김승우",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김승우 김남주",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "김승우 입장문",
+          "reason": "장난 해명 이후 반응",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "김승우 경찰 조사",
+          "reason": "수사 진행 상황",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "김승우 활동 중단",
+          "reason": "피소 여파",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "제미나이 디시전 1",
@@ -2258,136 +2633,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "제미나이 로보틱스 2.5",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "dead",
-      "isHot": false,
-      "why": "구글이 피지컬 AI 특화 제미나이 로보틱스 2.5를 공개해서",
-      "headlines": [
-        {
-          "title": "구글, 최상위 AI '제미나이4 카본' 일반공개…로보틱스 2.5 첫선",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-11T02:13:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016435286?sid=104"
-        },
-        {
-          "title": "구글, 피지컬 AI 특화 '제미나이 로보틱스 2.5' 공개…'카본' 세계 출시",
-          "press": "etnews.com",
-          "publishedAt": "2026-11-11T00:20:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/030/0003484344?sid=105"
-        },
-        {
-          "title": "구글, '제미나이 로보틱스 2.5' 공개…리본 묶고 액체 옮긴다",
-          "press": "joseilbo.com",
-          "publishedAt": "2026-11-11T01:09:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/123/0002393797?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "제미나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 제미나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "메타",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "햇빛 아래서도 선명한 AR 안경이 개발돼 상용화에 다가서서",
-      "headlines": [
-        {
-          "title": "햇빛 아래서도 선명한 AR 안경 개발…상용화 한 걸음",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-11T16:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016437066?sid=105"
-        },
-        {
-          "title": "메타, AI 인프라 수장 사임…후임에는 AWS 출신 선임",
-          "press": "biz.sbs.co.kr",
-          "publishedAt": "2026-11-11T20:54:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/374/0000543144?sid=104"
-        },
-        {
-          "title": "정점식 \"李대통령 '패가망신' 메타인지 상실…민주당 '패당'은 운명\"",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-11-11T01:43:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005439494?sid=100"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "메타 ai 글라스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메타 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메타 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메타 AI",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메타 뮤즈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메타 인스타",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메타 안경",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메타(주)",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "메타 글라스 비교",
-          "reason": "경쟁 제품 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "메타 주가",
-          "reason": "신기술 주가 반응",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "문샷",
@@ -2495,101 +2742,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
-    },
-    {
-      "issue": "TSMC",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "TSMC가 10월 매출 사상 최대를 기록하고 오픈AI·앤트로픽에 투자해서",
-      "headlines": [
-        {
-          "title": "\"몸값 1873조\"…챗GPT 라이벌 IPO에 TSMC 6690억 베팅",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-11-11T20:12:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006408501?sid=105"
-        },
-        {
-          "title": "반도체 장기호황 확신?… TSMC 55조 베팅, 삼전닉스 미소",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-11-11T18:50:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005439920?sid=101"
-        },
-        {
-          "title": "TSMC, 10월 매출도 60% 급증…사상 최대치",
-          "press": "hankyung.com",
-          "publishedAt": "2026-11-10T10:08:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005352482?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "tsmc 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "TSMC 메모리",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "대만 tsmc",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "TSMC ADR 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "tsmc 시총",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "tsmc 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "젠슨황 tsmc",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "tsmc 회장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "TSMC 실적 전망",
-          "reason": "4분기 기대감",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "TSMC 증설",
-          "reason": "투자 확대 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "TSMC 수혜주",
-          "reason": "관련주 탐색",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "소프트뱅크",
@@ -2690,7 +2844,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "고우림 김연아 주접",
@@ -2795,486 +2950,6 @@
       ],
       "nextWave": [],
       "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "오픈AI",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "오픈AI 3분기 매출 100억달러로 50% 성장했으나 적자는 확대",
-      "headlines": [
-        {
-          "title": "TSMC, 오픈AI·앤트로픽에 10억달러 투자…'AI 성장에 베팅'",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-11-11T07:43:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005439789?sid=104"
-        },
-        {
-          "title": "[뉴욕마감]AI 투자 우려 완화에 나스닥 1.6% 상승…코어위브 25% 폭등",
-          "press": "news1.kr",
-          "publishedAt": "2026-11-11T21:54:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009284521?sid=101"
-        },
-        {
-          "title": "TSMC, 앤트로픽·오픈AI에 각각 최대 5억달러 투자",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-11T04:58:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016435851?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "오픈ai 상장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 대표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 종류",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 순위",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 닷츠",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai ceo",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "오픈AI 상장일",
-          "reason": "IPO 시점 최대 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "이효정",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "이효정이 아들 이유진 결혼 앞두고 정육식당을 열었다.",
-      "headlines": [
-        {
-          "title": "이효정, 子 이유진 결혼 앞두고 겹경사..\"정육식당 오픈\" 파격 변신(동상...",
-          "press": "sportschosun.com",
-          "publishedAt": "2026-11-10T02:44:00.000Z",
-          "link": "https://m.entertain.naver.com/article/076/0004465329"
-        },
-        {
-          "title": "이효정 아들 이유진 \"배우 장동윤이 동서…평소 좋아했다\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-10T21:14:00.000Z",
-          "link": "https://m.entertain.naver.com/article/003/0014314373"
-        },
-        {
-          "title": "'동상이몽2' 이효정 \"집안 배우 6명, 아들 이유진과 장동윤 동서지간…...",
-          "press": "stoo.com",
-          "publishedAt": "2026-11-10T23:26:00.000Z",
-          "link": "http://www.stoo.com/article.php?aid=109833975401"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "이효정 배우",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이효정 식당",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이효정 이기영",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이효정 이유진",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이효정 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이효정 동생",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이기영 이효정",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "배우 이효정",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "이효정 정육식당 위치",
-          "reason": "가게 어디인지",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "이유진",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "이유진·차경은 결혼 앞두고 동상이몽2 합류, 상견례서 눈물",
-      "headlines": [
-        {
-          "title": "이유진♥차경은, 결혼 앞두고 '동상이몽2' 합류…상견례서 눈물 왜",
-          "press": "news1.kr",
-          "publishedAt": "2026-11-10T02:29:00.000Z",
-          "link": "https://m.entertain.naver.com/article/421/0009280788"
-        },
-        {
-          "title": "'나혼산'으로 뜬 이유진, '상견례 눈물 사태'는 '동상이몽2'서 공개",
-          "press": "starnewskorea.com",
-          "publishedAt": "2026-11-10T02:33:00.000Z",
-          "link": "https://m.entertain.naver.com/article/108/0003486277"
-        },
-        {
-          "title": "이효정, 子 이유진 결혼 앞두고 겹경사..\"정육식당 오픈\" 파격 변신(동상...",
-          "press": "sportschosun.com",
-          "publishedAt": "2026-11-10T02:44:00.000Z",
-          "link": "https://m.entertain.naver.com/article/076/0004465329"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "이유진 배우",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이유진 차경은",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이유진 아빠",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이유진 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이유진 농구",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이유진 국어",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "장동윤 이유진",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "배우 이유진",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "이유진 결혼식",
-          "reason": "11월 결혼 날짜 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "이유진 와이프",
-          "reason": "혼전임신 배우자 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "곽명우",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "1년 자격정지 곽명우, OK저축은행 복귀 결정",
-      "headlines": [
-        {
-          "title": "'1년 자격정지' 전 OK저축은행 세터 곽명우, 복귀 움직임",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-10T05:44:00.000Z",
-          "link": "https://m.sports.naver.com/volleyball/article/001/0016433555"
-        },
-        {
-          "title": "OK저축은행, 1년 자격정지 곽명우 복귀 결정…\"최후의 기회\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-10T09:19:00.000Z",
-          "link": "https://m.sports.naver.com/volleyball/article/003/0014314151"
-        },
-        {
-          "title": "'가정폭력·음주운전' 곽명우 현역 복귀…\"배구로 속죄\"",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-11-10T12:26:00.000Z",
-          "link": "https://m.sports.naver.com/volleyball/article/055/0001402083"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [
-        {
-          "keyword": "곽명우 경기",
-          "reason": "복귀 첫 출전 시점",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "곽명우 논란",
-          "reason": "복귀 여론 반발",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "곽명우 연봉",
-          "reason": "복귀 계약 조건",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "신현송",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "declining",
-      "isHot": true,
-      "why": "신현송, 비서구권 최초 BIS 지급결제위 의장 선임",
-      "headlines": [
-        {
-          "title": "신현송, 디지털 지급결제 '룰 메이커'로 나선다",
-          "press": "hankyung.com",
-          "publishedAt": "2026-11-10T10:31:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005352486?sid=101"
-        },
-        {
-          "title": "신현송, 첫 아시아인 CPMI 의장 선임⋯국제 금융규범 이끈다",
-          "press": "inews24.com",
-          "publishedAt": "2026-11-10T10:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/031/0001073905?sid=101"
-        },
-        {
-          "title": "美·유럽 전유물 깬 신현송…비서구권 ‘최초’ BIS CPM 의장 선임",
-          "press": "joseilbo.com",
-          "publishedAt": "2026-11-10T10:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/123/0002393761?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "신현송 금리",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "신현송 디시",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "신현송 약력",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "신현송 재산",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "신현송 총재",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "신현송 환율",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "신현송 금리인상",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "신현송 한국은행",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "신현송 역할",
-          "reason": "의장 권한·업무 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "신현송 경력",
-          "reason": "선임 배경 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "코어위브",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "내일 코어위브 실적 발표, AI 투자심리 반등 분수령",
-      "headlines": [
-        {
-          "title": "5200선 코스피 바닥 접근?…\"美 물가지수와 코어위브 실적 관건\"",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-11-10T08:30:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005439230?sid=101"
-        },
-        {
-          "title": "코어위브 실적에 쏠린 '눈'…AI 투자심리 반등 분수령 될까",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-10T01:41:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014312518?sid=101"
-        },
-        {
-          "title": "코스피, 4%대 상승 출발해 5200선 회복…양 시장 매수 사이드카 발동",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-11-10T00:25:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005761357?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "코어위브 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "코어위브 실적발표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "코어위브 사태",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "코어위브 실적",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "코어위브 실적발표일",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "코어위브 종토방",
-          "searchVolume": 480,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "코어위브 실적 전망",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "코어위브 토스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "코어위브 실적 결과",
-          "reason": "발표 후 수치 확인",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "코어위브 부채",
-          "reason": "재무 건전성 우려",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 1,
       "carried": true
     }
   ]

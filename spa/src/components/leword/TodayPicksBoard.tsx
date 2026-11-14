@@ -12,7 +12,7 @@ import { archiveDays } from '../../lib/todayPicksArchive.mjs';
  * 그 안에서 **주제별 서브-서브 탭**(주제 칩을 눌러 한 주제씩 본다). 사장님 2026-09-08.
  *
  * 데이터는 leword-app CI(today-picks.yml, 하루 3회 06:30·13:30·19:30 KST)가 씨앗 창고에서 주제별 후보를 넓게 뽑아
- * 블로그 문서수를 오픈 API로 실측하고 주제별 30개를 목표로 정적 JSON으로 발행한다.
+ * 블로그 문서수를 오픈 API로 실측하고 주제별 100개를 목표로 정적 JSON으로 발행한다.
  * 황금비 충족·계절 씨앗·일반 후보를 구분하며, 최근 노출 이력이 있는 키워드는 재추천으로 표시한다.
  * 황금 안에서는 네이버 광고 3위 입찰가가 높은(돈 되는) 순이다 — 입찰가도 CI 가 잰 실측이다.
  * 여기서는 읽기만 한다. 수치는 전부 실측이고 황금비는 그 나눗셈이다. 자리(SERP)는 안 쟀다.
@@ -136,9 +136,9 @@ export default function TodayPicksBoard({ onAnalyze, topic, onTopics, onTopicCha
             `${kst(data.builtAt)} 판`,
             `전체 ${num(total)}개 중 황금 ${num(golden)}개`,
             data.novelty ? `새 추천 ${num(data.novelty.newCount)} · 재추천 ${num(data.novelty.repeatedCount)}` : '',
-            `주제별 ${data.keep ?? 30}개 목표`,
+            `주제별 ${data.keep ?? 100}개 목표`,
         ].filter(Boolean).join(' · ')
-        : `주제별 30개 목표 · 황금 비율을 앞에 두고 추천`;
+        : `주제별 100개 목표 · 황금 비율을 앞에 두고 추천`;
     const freshness = judgeFreshness(ROUNDS, data?.builtAt ?? null, nowMs ?? Date.now());
 
     useEffect(() => {
