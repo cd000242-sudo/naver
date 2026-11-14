@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T00:20:49.259Z",
+ "builtAt": "2026-11-14T00:30:53.267Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 29,
+ "measured": 28,
  "candidates": [
   {
    "keyword": "미국 항공 운항 중단",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 38,
-   "recent20": 13,
-   "press": 34,
-   "firstArticleAt": "2026-11-13T22:52:00.000Z",
+   "articles90": 40,
+   "recent20": 12,
+   "press": 36,
+   "firstArticleAt": "2026-11-13T23:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美 전역 항공기 이륙 중단…관제 통신 시스템 장애에 무게(종합)",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-14T00:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001204737?sid=104"
+     "title": "미국 항공 관제통신 장애에 전국 공항 비상 … 이륙 전면 '중단'",
+     "press": "safetimes.co.kr",
+     "publishedAt": "2026-11-14T00:28:00.000Z",
+     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247495"
     },
     {
-     "title": "미 전역 항공기 운항 ‘올스톱’···“통신 장애 때문, 테러는 아니야...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-14T00:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003482621?sid=104"
+     "title": "美 항공기 '올스탑'에 대한항공도 운항 차질…\"필요 조치 예정\"",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-14T00:26:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4444774"
     },
     {
-     "title": "9·11 테러 이후 두 번째 전국 운항 마비…미 항공청 \"통신망 오류\"",
-     "press": "pointe.co.kr",
-     "publishedAt": "2026-11-14T00:16:00.000Z",
-     "link": "https://www.pointe.co.kr/news/articleView.html?idxno=87769"
+     "title": "미국 전역 항공기 운항 전면 중단...\"관제 통신 시스템 장애\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-14T00:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432724?sid=104"
     }
    ]
   },
@@ -47,62 +47,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 35,
+   "articles90": 37,
    "recent20": 10,
-   "press": 33,
-   "firstArticleAt": "2026-11-13T22:52:00.000Z",
+   "press": 35,
+   "firstArticleAt": "2026-11-13T23:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美 전역 항공기 이륙 중단…관제 통신 시스템 장애에 무게(종합)",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-14T00:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001204737?sid=104"
+     "title": "미국 항공 관제통신 장애에 전국 공항 비상 … 이륙 전면 '중단'",
+     "press": "safetimes.co.kr",
+     "publishedAt": "2026-11-14T00:28:00.000Z",
+     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247495"
     },
     {
-     "title": "미 전역 항공기 운항 ‘올스톱’···“통신 장애 때문, 테러는 아니야...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-14T00:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003482621?sid=104"
+     "title": "美 항공기 '올스탑'에 대한항공도 운항 차질…\"필요 조치 예정\"",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-14T00:26:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4444774"
     },
     {
-     "title": "美항공관제 장애에 유럽발 미국행 항공편 전면 중단",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-14T00:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016441667?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "롤드컵 결승 서울아레나 개최",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 20,
-   "recent20": 2,
-   "press": 19,
-   "firstArticleAt": "2026-11-13T23:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "내년 롤드컵 결승전 서울아레나 개최 확정…지역경제 활성화 기대",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-14T00:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003155084?sid=102"
-    },
-    {
-     "title": "2027 롤드컵 결승, 창동 서울아레나서 개최…11월 13일 예정",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-14T00:12:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3751901"
-    },
-    {
-     "title": "2027 롤드컵, 한일 공동 개최…결승은 서울서 열린다",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-13T23:58:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611140010"
+     "title": "미국 전역 항공기 운항 전면 중단...\"관제 통신 시스템 장애\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-14T00:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432724?sid=104"
     }
    ]
   },
@@ -111,13 +79,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-13T22:58:00.000Z",
+   "articles90": 11,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-13T23:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "한국 축구, 사우디에 21년 만에 무릎…우려 커지며 '빨간불'",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-14T00:27:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000082585"
+    },
     {
      "title": "한국 축구, 사우디에 2-3 패배…42년 만에 3실점",
      "press": "ikbc.co.kr",
@@ -129,44 +103,71 @@
      "press": "news.bbsi.co.kr",
      "publishedAt": "2026-11-13T23:54:00.000Z",
      "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4118541"
-    },
-    {
-     "title": "\"조현우는 대체 왜 안 쓰나?\"…김승규 또 치명적 실수, 한국 축구 21년 ...",
-     "press": "ftimes.kr",
-     "publishedAt": "2026-11-13T23:50:00.000Z",
-     "link": "https://www.ftimes.kr/news/articleView.html?idxno=41089"
     }
    ]
   },
   {
-   "keyword": "집",
+   "keyword": "100일의 거짓말",
    "sources": [
-    "google"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 10,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-13T23:03:00.000Z",
+   "articles90": 7,
+   "recent20": 4,
+   "press": 7,
+   "firstArticleAt": "2026-11-13T23:58:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "이지현, 아이들 위해 미용실 퇴사했더니 집이 전쟁터…“차라리 출근할...",
+     "title": "“너, 밀정이지?” 하더니…박진영, 김유정 진짜 이름 불렀다(100일의 거...",
      "press": "mk.co.kr",
-     "publishedAt": "2026-11-14T00:07:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001147223"
+     "publishedAt": "2026-11-14T00:21:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001147224"
     },
     {
-     "title": "용인 기후위기 적응 교육, 초등학교 135학급 모집…18일까지 신청",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-14T00:02:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3751882"
+     "title": "‘100일의 거짓말’ 박진영, 김유정 본명 '이가경' 불렀다",
+     "press": "enter.etoday.co.kr",
+     "publishedAt": "2026-11-14T00:16:00.000Z",
+     "link": "https://enter.etoday.co.kr/news/view/305221"
     },
     {
-     "title": "신선한 회에 든든한 곁들임..시아호횟집의 정성 담은 한 상",
-     "press": "idjnews.kr",
-     "publishedAt": "2026-11-14T00:00:00.000Z",
-     "link": "https://www.idjnews.kr/news/articleView.html?idxno=303958"
+     "title": "김유정♥박진영, '100일의 거짓말' 벗고..\"숨겨진 진실 마주\"",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-14T00:15:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003487265"
+    }
+   ]
+  },
+  {
+   "keyword": "트럼프 전작권 주한미군 철수",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-13T23:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美전문가들 \"트럼프, 전작권 전환을 주한미군 철수 수단으로 봐\"",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-14T00:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000543631?sid=104"
+    },
+    {
+     "title": "미 전문가들 \"트럼프, 전작권 전환을 주한미군 철수 기회로 봐\"",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-14T00:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000367479?sid=104"
+    },
+    {
+     "title": "“트럼프, 한국서 미군 빼려 하나”…전작권 전환에 美전문가들 경고",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-13T23:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003699359?sid=104"
     }
    ]
   },
@@ -176,7 +177,7 @@
     "signal.bz"
    ],
    "articles90": 7,
-   "recent20": 4,
+   "recent20": 0,
    "press": 7,
    "firstArticleAt": "2026-11-13T23:22:00.000Z",
    "exclusive": false,
@@ -203,35 +204,98 @@
    ]
   },
   {
-   "keyword": "100일의 거짓말",
+   "keyword": "젠슨 황과 러트닉 조사",
    "sources": [
-    "signal.bz",
     "nate"
    ],
    "articles90": 6,
-   "recent20": 5,
+   "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-13T23:58:00.000Z",
+   "firstArticleAt": "2026-11-13T23:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘100일의 거짓말’ 박진영, 김유정 본명 '이가경' 불렀다",
-     "press": "enter.etoday.co.kr",
-     "publishedAt": "2026-11-14T00:16:00.000Z",
-     "link": "https://enter.etoday.co.kr/news/view/305221"
+     "title": "엔비디아 파문 확산에 러트닉 美 상무장관 책임론 급부상",
+     "press": "fortunekorea.co.kr",
+     "publishedAt": "2026-11-14T00:30:00.000Z",
+     "link": "https://www.fortunekorea.co.kr/news/articleView.html?idxno=54761"
     },
     {
-     "title": "김유정♥박진영, '100일의 거짓말' 벗고..\"숨겨진 진실 마주\"",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-14T00:15:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003487265"
+     "title": "\"젠슨 황, 이르면 다음 주 의회 출석\"...러트닉 장관 거취에 '불똥'",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-13T23:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432717?sid=104"
     },
     {
-     "title": "'100일의 거짓말' 김유정·박진영, 토막촌에서 다시 마주친다",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-14T00:14:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16276280"
+     "title": "베선트, '엔비디아 칩 밀수' 의혹 러트닉 비판 \"매우 실망\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-13T23:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005441038?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "faa",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-13T23:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "USA FAA GROUNDSTOP",
+     "press": null,
+     "publishedAt": "2026-11-14T00:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/091/0010368438?sid=104"
+    },
+    {
+     "title": "Georgia vs UNC leads US searches while FAA tops Hacker News",
+     "press": "econotimes.com",
+     "publishedAt": "2026-11-14T00:24:00.000Z",
+     "link": "https://econotimes.com/Georgia-vs-UNC-leads-US-searches-while-FAA-tops-Hacker-News-1776499"
+    },
+    {
+     "title": "FAA, 통신 장애로 美 전역 지상 정지 발령…항공편 이륙 중단",
+     "press": "digitaltoday.co.kr",
+     "publishedAt": "2026-11-14T00:06:00.000Z",
+     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=715501"
+    }
+   ]
+  },
+  {
+   "keyword": "엔비디아 GPU 26만장 공급",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-13T23:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'AI 황제' 사라진 엔비디아…'깐부' 한국과 사업 변화 생기나",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-14T00:30:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/325241/?sc=Naver"
+    },
+    {
+     "title": "배경훈 “젠슨 황 떠나도 GPU 동맹 문제없어…26만장 공급 약속 유지”",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-14T00:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002248542?sid=105"
+    },
+    {
+     "title": "젠슨 황 사임에 정부 GPU 공급 점검…26만장 확보·협력 유지 총력",
+     "press": "ftoday.co.kr",
+     "publishedAt": "2026-11-13T23:34:00.000Z",
+     "link": "http://www.ftoday.co.kr/news/articleView.html?idxno=369727"
     }
    ]
   },
@@ -240,10 +304,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-13T22:59:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-13T23:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -264,134 +328,6 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-13T23:51:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014321833?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "돈",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-13T23:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "캐시워크 돈버는퀴즈 11월 14일 정답은?",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-14T00:16:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=626625"
-    },
-    {
-     "title": "버밍엄시티 지분 판 톰 브래디… 은퇴 후에도 돈방석 비결은",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-14T00:00:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/025/0003565129"
-    },
-    {
-     "title": "[TheTax]남편 사망 전→아들→이혼한 母계좌 이체된 돈…증여세 내라?",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-13T23:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005441035?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황과 러트닉 조사",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-13T22:57:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"젠슨 황, 이르면 다음 주 의회 출석\"...러트닉 장관 거취에 '불똥'",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-13T23:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432717?sid=104"
-    },
-    {
-     "title": "베선트, '엔비디아 칩 밀수' 의혹 러트닉 비판 \"매우 실망\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-13T23:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005441038?sid=104"
-    },
-    {
-     "title": "트럼프 뜻 따랐다는 러트닉…엔비디아 스캔들에 '경질' 위기",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-13T23:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005353790?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "트럼프 전작권 주한미군 철수",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-13T23:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“트럼프, 한국서 미군 빼려 하나”…전작권 전환에 美전문가들 경고",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-13T23:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003699359?sid=104"
-    },
-    {
-     "title": "\"전작권 전환이 미군 철수 계기 될 수도\"…미 전문가들 우려",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-13T23:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000121331?sid=102"
-    },
-    {
-     "title": "브룩스 前사령관 \"전작권 당장 전환? 시험도 안 보고 졸업하는 격\"…강...",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-13T23:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001040191?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "faa",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-13T23:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "FAA, 통신 장애로 美 전역 지상 정지 발령…항공편 이륙 중단",
-     "press": "digitaltoday.co.kr",
-     "publishedAt": "2026-11-14T00:06:00.000Z",
-     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=715501"
-    },
-    {
-     "title": "마이크로소프트($MSFT), FAA 지상 정지 연관성 낮다고 밝혀",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-13T23:40:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/438116"
-    },
-    {
-     "title": "USA FAA GROUNDSTOP",
-     "press": null,
-     "publishedAt": "2026-11-13T23:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/091/0010368434?sid=104"
     }
    ]
   },
@@ -430,7 +366,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 465,
+  "flagged": 466,
   "matched": 188,
   "avgLeadMin": 358,
   "recent": [
