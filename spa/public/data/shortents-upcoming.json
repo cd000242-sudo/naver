@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T18:15:39.385Z",
+ "builtAt": "2026-11-14T18:25:45.303Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,10 +15,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 6,
-   "recent20": 2,
+   "articles90": 4,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-14T16:50:00.000Z",
+   "firstArticleAt": "2026-11-14T17:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -41,11 +41,43 @@
      "link": "http://coinreaders.com/270313"
     }
    ]
+  },
+  {
+   "keyword": "머스크와 젠슨 황 없는 엔비디아",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-14T17:25:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "엔비디아 주요 투자자들, 이사회에 \"젠슨 황 복귀 옵션 검토해라\"",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-14T18:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005604247?sid=101"
+    },
+    {
+     "title": "머스크 \"젠슨 황 없는 엔비디아, 공급망 핵심 계약 잃을 것\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-14T17:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001403069?sid=104"
+    },
+    {
+     "title": "머스크, 젠슨 황 없는 엔비디아 경고…\"일부 거래 무산될 수도\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-14T17:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014322431?sid=104"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 495,
+  "flagged": 496,
   "matched": 230,
   "avgLeadMin": 490,
   "recent": [
