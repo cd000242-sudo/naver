@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T15:44:27.586Z",
+ "builtAt": "2026-11-14T15:54:33.418Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "채령",
@@ -16,10 +16,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-14T14:16:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-14T14:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -44,34 +44,34 @@
    ]
   },
   {
-   "keyword": "이탈리아 메타 과징금",
+   "keyword": "1250 회 로또",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-14T14:15:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-14T14:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이탈리아, ‘이용자 정보 무단 접근’ 메타에 과징금 1.1조 철퇴",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-14T14:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001204769?sid=104"
+     "title": "로또1등당첨지역 \"31억 서울 3곳\" 1250회 로또당첨번호조회",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-14T15:50:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3752187"
     },
     {
-     "title": "이탈리아, 메타에 1조 과징금...\"이용자 사진 무단 접근\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-14T14:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432925?sid=104"
+     "title": "로또 1250회 1등 당첨 판매점 9곳·2등 89곳…전국 복권 명당 주소 총정...",
+     "press": "econovill.com",
+     "publishedAt": "2026-11-14T15:24:00.000Z",
+     "link": "https://www.econovill.com/news/articleView.html?idxno=757263"
     },
     {
-     "title": "이탈리아, 메타에 1조 과징금…\"이용자 사진에 무단 접근\"",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-14T14:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000121381?sid=104"
+     "title": "로또 당첨번호 지역 1250회",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-14T15:02:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611140127"
     }
    ]
   },
@@ -110,7 +110,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 490,
+  "flagged": 491,
   "matched": 230,
   "avgLeadMin": 490,
   "recent": [
