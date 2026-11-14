@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T16:24:49.325Z",
+ "builtAt": "2026-11-14T16:34:52.620Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "우크라이나 나토 돈바스",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-14T14:58:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-14T15:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -39,102 +39,6 @@
      "press": "yna.co.kr",
      "publishedAt": "2026-11-14T15:33:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016442018?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황, 엔비디아 사태",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-14T15:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "젠슨 황 퇴진에 엔비디아 임원 명의 옹호 글 확산…실제 직원 확인, 게시...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-14T15:16:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=626975"
-    },
-    {
-     "title": "엔비디아 실적·앤트로픽 IPO, AI 투심 살릴까…코스피 5200~6000 [주간 증...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-14T15:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003155208?sid=101"
-    },
-    {
-     "title": "[비즈토크<하>] 中 스파이 불륜 스캔들에 젠슨 황 퇴진…국내 산업 후폭...",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-14T15:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000551942?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "1250 회 로또",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-14T15:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "로또1등당첨지역 \"31억 서울 3곳\" 1250회 로또당첨번호조회",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-14T15:50:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3752187"
-    },
-    {
-     "title": "로또 1250회 1등 당첨 판매점 9곳·2등 89곳…전국 복권 명당 주소 총정...",
-     "press": "econovill.com",
-     "publishedAt": "2026-11-14T15:24:00.000Z",
-     "link": "https://www.econovill.com/news/articleView.html?idxno=757263"
-    },
-    {
-     "title": "로또 당첨번호 지역 1250회",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-14T15:02:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611140127"
-    }
-   ]
-  },
-  {
-   "keyword": "채령",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-14T14:55:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "잇지 채령, 걸그룹 벗어나 솔로 활동 “단점이 뭐냐면” 바로 대답 못 했...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-14T15:29:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001187526"
-    },
-    {
-     "title": "박서진, 채령도 놀란 트로트계 슈스 스케일...\"팬카페 회원 수 임영웅 다...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-14T15:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002080681"
-    },
-    {
-     "title": "있지 채령, 그냥 안 먹었을 뿐인데..\"저도 성인 여자, 1인분 먹어요\"",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-14T14:55:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003487504"
     }
    ]
   }
