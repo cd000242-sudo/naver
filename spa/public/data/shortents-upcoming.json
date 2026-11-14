@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T00:51:05.350Z",
+ "builtAt": "2026-11-14T01:01:10.152Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,62 +15,94 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 46,
-   "recent20": 14,
-   "press": 41,
-   "firstArticleAt": "2026-11-13T23:24:00.000Z",
+   "articles90": 44,
+   "recent20": 13,
+   "press": 39,
+   "firstArticleAt": "2026-11-13T23:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美 관제통신 장애에 유럽발 미국행 항공편 중단…캐나다도 운항 관리",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-14T00:50:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000082588"
+     "title": "미 전역 항공기 운항 '올스톱'…\"관제통신시스템 장애\"",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-14T01:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001978170?sid=104"
     },
     {
-     "title": "미국 전역 항공기 이륙 전면 중단…유럽발 미국행 항공편도 멈춰",
-     "press": "kado.net",
-     "publishedAt": "2026-11-14T00:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000211216?sid=104"
+     "title": "미국 전역서 항공기 운항 중단…“관제센터 통신 문제”",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-14T00:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002832189?sid=104"
     },
     {
-     "title": "관제센터 통신문제로 美 전역 항공기 이륙 중단…“사이버 공격은 아닌...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-14T00:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002723370?sid=104"
+     "title": "미국 전역 항공기 이륙 중단…관제통신 장애에 7800편 지연",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-14T00:58:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611140014"
     }
    ]
   },
   {
-   "keyword": "골키퍼 12경기 출전 정지",
+   "keyword": "고경표 음주운전 사고",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 43,
+   "recent20": 26,
+   "press": 28,
+   "firstArticleAt": "2026-11-14T00:03:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "고경표, 만취 사고에 코로나 시절 BJ와 술자리 논란",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-14T01:00:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95239"
+    },
+    {
+     "title": "고경표, 새벽 만취 음주 사고…면허 취소 수준",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-14T01:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001040196?sid=102"
+    },
+    {
+     "title": "'음주운전 사고' 고경표 측 \"면허 취소 수치..잘못 인정, 깊이 반성\" (전...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-14T01:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005640172"
+    }
+   ]
+  },
+  {
+   "keyword": "최혜진, 디 안니카 공동 선두",
    "sources": [
     "nate"
    ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 10,
-   "firstArticleAt": "2026-11-13T23:22:00.000Z",
+   "articles90": 11,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-13T23:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'죽음 부른 니킥' GK 오워노, '최고 수위' 12경기 출전정지",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-14T00:48:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261114000033"
+     "title": "최혜진, LPGA 투어 디 안니카 2R도 공동 선두…첫 우승 도전",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-14T00:52:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109895174612"
     },
     {
-     "title": "스페인 축구계 충격, 골키퍼 충돌로 사망 사건 발생... 중징계와 형사 ...",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-14T00:36:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885586"
+     "title": "최혜진 안니카 드리븐 2라운드 공동 선두, 이틀 연속 선두 유지…윤이나...",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-14T00:46:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1137492"
     },
     {
-     "title": "아내도 보고 있었는데…니킥으로 공격수 숨지게 한 골키퍼, 결국",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-14T00:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005763608?sid=104"
+     "title": "‘4m 이글’ 최혜진, 디 안니카 2R도 공동 선두",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-14T00:32:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/016/0002723366"
     }
    ]
   },
@@ -82,27 +114,27 @@
    "articles90": 10,
    "recent20": 2,
    "press": 10,
-   "firstArticleAt": "2026-11-13T23:22:00.000Z",
+   "firstArticleAt": "2026-11-13T23:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"APEC서 19일 미중러 정상회담 가능성\"…북한 논의 주목",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-14T00:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000965530?sid=104"
+    },
+    {
+     "title": "APEC 계기 미중러 정상회담 19일 열려…북한 논의 가능성도",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-14T00:54:00.000Z",
+     "link": "https://www.ajunews.com/view/20261114092948026"
+    },
     {
      "title": "미중러 정상회담, 북한 비핵화와 핵군축의 향방은?",
      "press": "gokorea.kr",
      "publishedAt": "2026-11-14T00:38:00.000Z",
      "link": "https://www.gokorea.kr/news/articleView.html?idxno=885594"
-    },
-    {
-     "title": "\"APEC 계기 미중러 정상회담 19일 개최…북한 논의 가능성\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-14T00:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001402982?sid=104"
-    },
-    {
-     "title": "미중러 정상회담, 중국 APEC때 열려…핵무기 감축 논의",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-14T00:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000367480?sid=104"
     }
    ]
   },
@@ -139,34 +171,34 @@
    ]
   },
   {
-   "keyword": "트럼프 전작권 전환",
+   "keyword": "닥터X 김지원 16.1%",
    "sources": [
-    "daum"
+    "nate"
    ],
    "articles90": 7,
-   "recent20": 1,
+   "recent20": 0,
    "press": 7,
-   "firstArticleAt": "2026-11-13T23:22:00.000Z",
+   "firstArticleAt": "2026-11-13T23:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "트럼프의 한반도 전략, 전시작전권 전환이 미군 철수 신호탄 되나?",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-14T00:40:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885602"
+     "title": "오늘(14일) 최종회 앞둔 ‘닥터X’ 김지원, 악의 실체 전국환 수술 집도...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-14T00:39:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003541711"
     },
     {
-     "title": "美전문가들 \"트럼프, 전작권 전환을 주한미군 철수 수단으로 봐\"",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-14T00:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000543631?sid=104"
+     "title": "‘닥터X’ 김지원, 최종회 앞두고 16.1%…6주 연속 전 채널 1위 [시청률...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-14T00:36:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1794615909530861006"
     },
     {
-     "title": "미 전문가들 \"트럼프, 전작권 전환을 주한미군 철수 기회로 봐\"",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-14T00:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000367479?sid=104"
+     "title": "최종회 앞둔 '닥터X', 시청률 14% 기록",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-14T00:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/469/0000965528"
     }
    ]
   },
@@ -176,7 +208,7 @@
     "google"
    ],
    "articles90": 7,
-   "recent20": 2,
+   "recent20": 1,
    "press": 6,
    "firstArticleAt": "2026-11-13T23:51:00.000Z",
    "exclusive": false,
@@ -207,13 +239,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
    "firstArticleAt": "2026-11-13T23:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'젠슨 황 스캔들'에 하워드 러트닉 미 상무장관 사면초가...'경질론' 위...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-14T00:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005604195?sid=104"
+    },
     {
      "title": "엔비디아 파문 확산에 러트닉 美 상무장관 책임론 급부상",
      "press": "fortunekorea.co.kr",
@@ -225,49 +263,43 @@
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-13T23:43:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002432717?sid=104"
-    },
-    {
-     "title": "베선트, '엔비디아 칩 밀수' 의혹 러트닉 비판 \"매우 실망\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-13T23:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005441038?sid=104"
     }
    ]
   },
   {
-   "keyword": "김지원 수술, 이게 너의 지옥",
+   "keyword": "트럼프 전작권 주한미군 철수",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-14T00:06:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-13T23:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'닥터X' 악인 전국환, 수술 전 각성 엔딩…14.5% 기록 [N시청률]",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-14T00:37:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009288815"
+     "title": "트럼프의 한반도 전략, 전시작전권 전환이 미군 철수 신호탄 되나?",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-14T00:40:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885602"
     },
     {
-     "title": "‘닥터X’ 김지원, 마지막 수술 중 각성 ‘충격 엔딩’…시청률 14.5% [T...",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-14T00:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/396/0000760888"
+     "title": "美전문가들 \"트럼프, 전작권 전환을 주한미군 철수 수단으로 봐\"",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-14T00:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000543631?sid=104"
     },
     {
-     "title": "'닥터X' 김지원, 전국환 수술 \"이게 너의 지옥\"⋯최종화 앞두고 시청률...",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-14T00:06:00.000Z",
-     "link": "http://www.joynews24.com/view/2026177"
+     "title": "미 전문가들 \"트럼프, 전작권 전환을 주한미군 철수 기회로 봐\"",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-14T00:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000367479?sid=104"
     }
    ]
   },
   {
-   "keyword": "배나라♥한재아 결혼 뮤지컬 부부",
+   "keyword": "배나라, 오늘 결혼 뮤지컬 부부로",
    "sources": [
     "nate"
    ],
@@ -299,38 +331,6 @@
    ]
   },
   {
-   "keyword": "안경 부정행위 적발",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-13T23:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "AI 안경의 진화, 시험장 부정행위와 개인정보 침해 우려 증가",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-14T00:48:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885629"
-    },
-    {
-     "title": "세무사 시험에서도 AI안경 논란…진상 조사 착수",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-13T23:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926053?sid=102"
-    },
-    {
-     "title": "\"안경 부정행위\"...없는게 없는 '무도', 수능 앞두고 또 소환",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-13T23:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005441037"
-    }
-   ]
-  },
-  {
    "keyword": "김정관 장관, 체코 원전 화상 면담",
    "sources": [
     "nate"
@@ -349,23 +349,23 @@
      "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=883255"
     },
     {
-     "title": "김정관 장관, 체코 산업통상부 장관과 원전 관련 화상 면담",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-14T00:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009288798?sid=101"
-    },
-    {
      "title": "체코 산업통상부 장관과 화상 면담하는 김정관 장관",
      "press": "news1.kr",
      "publishedAt": "2026-11-14T00:05:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009288801?sid=101"
+    },
+    {
+     "title": "김정관 장관, 체코 산업통상부 장관과 원전 관련 화상 면담",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-14T00:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009288798?sid=101"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 472,
+  "flagged": 476,
   "matched": 191,
   "avgLeadMin": 369,
   "recent": [
