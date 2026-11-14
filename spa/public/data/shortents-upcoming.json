@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T22:07:18.583Z",
+ "builtAt": "2026-11-14T22:17:23.135Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,24 +15,24 @@
    "sources": [
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 3,
+   "articles90": 5,
+   "recent20": 1,
+   "press": 4,
    "firstArticleAt": "2026-11-14T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "[오늘의 띠별 운세] 2026년 11월 15일 일요일",
+     "press": "mhns.co.kr",
+     "publishedAt": "2026-11-14T22:12:00.000Z",
+     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=769125"
+    },
+    {
      "title": "[오늘의 운세] 2026년 11월 15일 (일) 띠별운세 '한 템포 늦춰 쉬자'",
      "press": "dailypop.kr",
      "publishedAt": "2026-11-14T21:40:00.000Z",
      "link": "http://www.dailypop.kr/news/articleView.html?idxno=103981"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 15일 띠별 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-14T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006409878?sid=103"
     },
     {
      "title": "[오늘의 운세] 2026년 11월 15일 별자리 운세",
@@ -73,11 +73,44 @@
      "link": "https://m.entertain.naver.com/article/609/0001187560"
     }
    ]
+  },
+  {
+   "keyword": "100일의 거짓말",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 2,
+   "firstArticleAt": "2026-11-14T20:57:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김현주, 이무생과 키스 \"김유정 미국 보내 줘\"-'100일의 거짓말'",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-14T22:14:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95267"
+    },
+    {
+     "title": "송지효, 진선규와 첫 만남-강렬한 존재감-'100일의 거짓말'",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-14T22:10:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95266"
+    },
+    {
+     "title": "진선규, 김유정 밀정 정체 알고 체포하나‥박진영 충격 (100일의 거짓말...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-14T20:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001187558"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 500,
+  "flagged": 501,
   "matched": 244,
   "avgLeadMin": 532,
   "recent": [
