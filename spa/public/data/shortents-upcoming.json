@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T16:44:55.928Z",
+ "builtAt": "2026-11-14T16:55:01.183Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,10 +15,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 16,
-   "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-14T15:16:00.000Z",
+   "articles90": 13,
+   "recent20": 0,
+   "press": 10,
+   "firstArticleAt": "2026-11-14T15:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -39,6 +39,38 @@
      "press": "tokenpost.kr",
      "publishedAt": "2026-11-14T16:22:00.000Z",
      "link": "https://www.tokenpost.kr/news/policy/438388"
+    }
+   ]
+  },
+  {
+   "keyword": "비트코인",
+   "sources": [
+    "google"
+   ],
+   "articles90": 8,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-14T15:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "비트코인, 85만5000개 마지막 이동 구간에 진입",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-14T16:50:00.000Z",
+     "link": "https://www.tokenpost.kr/news/cryptocurrency/438396"
+    },
+    {
+     "title": "비트코인 일주일 새 13.5% 하락…체크는 ‘가치 구간’ 평가",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-14T16:50:00.000Z",
+     "link": "https://www.tokenpost.kr/news/cryptocurrency/438397"
+    },
+    {
+     "title": "비트코인(BTC) 최대 보유자는 '아무도 아니다'…분실 물량 최대 18%",
+     "press": "coinreaders.com",
+     "publishedAt": "2026-11-14T16:12:00.000Z",
+     "link": "http://coinreaders.com/270311"
     }
    ]
   },
@@ -71,38 +103,6 @@
      "press": "fnnews.com",
      "publishedAt": "2026-11-14T15:44:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/014/0005604243?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "비트코인",
-   "sources": [
-    "google"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-14T15:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "비트코인(BTC) 최대 보유자는 '아무도 아니다'…분실 물량 최대 18%",
-     "press": "coinreaders.com",
-     "publishedAt": "2026-11-14T16:12:00.000Z",
-     "link": "http://coinreaders.com/270311"
-    },
-    {
-     "title": "국채 10년물 5.17%, 12월 인상 반영…비트코인 6만 5,000달러로 밀렸다",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-14T16:10:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1174652"
-    },
-    {
-     "title": "비트코인 손익지표 0.995, 7만달러 아래 거래",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-14T15:44:00.000Z",
-     "link": "https://www.tokenpost.kr/news/cryptocurrency/438374"
     }
    ]
   }
