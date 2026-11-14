@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T15:34:23.871Z",
+ "builtAt": "2026-11-14T15:44:27.586Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "채령",
@@ -76,9 +76,9 @@
    ]
   },
   {
-   "keyword": "예술가 집안 우무티",
+   "keyword": "우무티 예술가 집안",
    "sources": [
-    "nate"
+    "daum"
    ],
    "articles90": 3,
    "recent20": 0,
@@ -106,43 +106,11 @@
      "link": "https://m.entertain.naver.com/article/609/0001187518"
     }
    ]
-  },
-  {
-   "keyword": "하리수 김지선 남학생",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-14T14:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김지선, 하리수와 34년 전 인연 공개…\"그때는 숏컷의 남학생\" (동치미)",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-14T15:05:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002080680"
-    },
-    {
-     "title": "하리수 “고등학교 남학생 때 김지선 처음 만나” 깜짝 과거사 고백 (동...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-14T14:46:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001187519"
-    },
-    {
-     "title": "하리수, 깜짝 고백 \"김지선, 男 때부터 알고 지내\" ('동치미')",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-14T14:34:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005640688"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 489,
+  "flagged": 490,
   "matched": 230,
   "avgLeadMin": 490,
   "recent": [
