@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T19:06:00.871Z",
+ "builtAt": "2026-11-14T19:16:03.854Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -9,7 +9,40 @@
   "minPress": 2
  },
  "measured": 23,
- "candidates": [],
+ "candidates": [
+  {
+   "keyword": "비트코인",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 2,
+   "firstArticleAt": "2026-11-14T18:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "비트코인 고래 보유량 3만4000개 일주일 새 감소",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-14T19:12:00.000Z",
+     "link": "https://www.tokenpost.kr/news/cryptocurrency/438415"
+    },
+    {
+     "title": "비트코인, 생산자물가 급등에 6만 9,000달러 하회…코인베이스는 금리 ...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-14T19:10:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1174659"
+    },
+    {
+     "title": "텍사스 시·카운티마다 비트코인 1,000만 달러 투자 허용 법안…안전장...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-14T18:10:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1174658"
+    }
+   ]
+  }
+ ],
  "hitRate": {
   "days": 7,
   "flagged": 496,
