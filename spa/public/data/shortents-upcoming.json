@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T16:34:52.620Z",
+ "builtAt": "2026-11-14T16:44:55.928Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,58 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 24,
  "candidates": [
+  {
+   "keyword": "젠슨 황 엔비디아",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 16,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-14T15:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "엔비디아 주가 밸류에이션 2019년 이후 최저 수준으로 낮아져",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-14T16:30:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/438390"
+    },
+    {
+     "title": "머스크 “젠슨 황 부재에 엔비디아 공급망 핵심 계약 잃을 것”",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-14T16:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001204771?sid=104"
+    },
+    {
+     "title": "엔비디아 집단소송 기간 2024년 12월~2026년 11월로 확대",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-14T16:22:00.000Z",
+     "link": "https://www.tokenpost.kr/news/policy/438388"
+    }
+   ]
+  },
   {
    "keyword": "우크라이나 나토 돈바스",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
    "firstArticleAt": "2026-11-14T15:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "젤렌스키 “美, 종전 협상서 우크라 나토 가입 조건부 ‘돈바스 양도안...",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-14T16:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001204772?sid=104"
+    },
     {
      "title": "젤렌스키 \"미, '우크라 나토 가입 대가' 돈바스 양도 물어\"",
      "press": "imnews.imbc.com",
@@ -33,19 +71,45 @@
      "press": "fnnews.com",
      "publishedAt": "2026-11-14T15:44:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/014/0005604243?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "비트코인",
+   "sources": [
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-14T15:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "비트코인(BTC) 최대 보유자는 '아무도 아니다'…분실 물량 최대 18%",
+     "press": "coinreaders.com",
+     "publishedAt": "2026-11-14T16:12:00.000Z",
+     "link": "http://coinreaders.com/270311"
     },
     {
-     "title": "젤렌스키 \"美, '우크라 나토 가입 대가' 돈바스 양도안 질의\"(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-14T15:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016442018?sid=104"
+     "title": "국채 10년물 5.17%, 12월 인상 반영…비트코인 6만 5,000달러로 밀렸다",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-14T16:10:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1174652"
+    },
+    {
+     "title": "비트코인 손익지표 0.995, 7만달러 아래 거래",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-14T15:44:00.000Z",
+     "link": "https://www.tokenpost.kr/news/cryptocurrency/438374"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 493,
+  "flagged": 495,
   "matched": 230,
   "avgLeadMin": 490,
   "recent": [
