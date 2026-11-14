@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T01:21:20.934Z",
+ "builtAt": "2026-11-14T15:04:11.686Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,362 +8,203 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 23,
  "candidates": [
   {
-   "keyword": "고경표",
-   "sources": [
-    "google"
-   ],
-   "articles90": 100,
-   "recent20": 54,
-   "press": 54,
-   "firstArticleAt": "2026-11-14T00:25:00.000Z",
-   "exclusive": true,
-   "capped": true,
-   "samples": [
-    {
-     "title": "배우 고경표, 만취 음주운전 사고...면허 취소 수준",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-14T01:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000965533?sid=102"
-    },
-    {
-     "title": "고경표, 만취 운전하다 청소차 추돌…면허취소 수준 적발",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-14T01:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006409792?sid=102"
-    },
-    {
-     "title": "고경표, 만취 상태로 청소차 충돌 사고…면허 취소 수준",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-14T01:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003155088?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "미국 항공 운항 중단",
+   "keyword": "김도영 결승포 한국, APBC 결승행",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 58,
-   "recent20": 20,
-   "press": 50,
-   "firstArticleAt": "2026-11-14T00:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美전역 항공편 이륙 중단...관제통신 장애에 수천 편 차질",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-14T01:20:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=563811"
-    },
-    {
-     "title": "美 항공기 '올스탑'에 운항 차질…국토부 \"상황 모니터링중\"(종합)",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-14T01:18:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4444777"
-    },
-    {
-     "title": "美전역 항공편 중단에 대혼란…공항 북새통·하늘길 회항 속출",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-14T01:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016441690?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "미중러 정상회담",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 12,
-   "recent20": 2,
+   "articles90": 11,
+   "recent20": 1,
    "press": 11,
-   "firstArticleAt": "2026-11-13T23:59:00.000Z",
+   "firstArticleAt": "2026-11-14T13:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"APEC 계기 미중러 정상회담 19일 개최…성사 시 최초\"",
-     "press": "mbnmoney.mbn.co.kr",
-     "publishedAt": "2026-11-14T01:16:00.000Z",
-     "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005962152"
+     "title": "침묵 깬 김도영 결승포, 이로운 6이닝 역투, 최준용 무실점 구원까지…...",
+     "press": "spochoo.com",
+     "publishedAt": "2026-11-14T14:54:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/529/0000079262"
     },
     {
-     "title": "\"미중러 정상회담 19일 개최…北 논의 가능성\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-14T01:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926093?sid=104"
+     "title": "'김도영 결승포' 한국, 대만 꺾고 APBC 결승행...일본과 우승 다툼",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-14T14:28:00.000Z",
+     "link": "https://www.insight.co.kr/news/582075"
     },
     {
-     "title": "\"APEC서 19일 미중러 정상회담 가능성\"…북한 논의 주목",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-14T00:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000965530?sid=104"
+     "title": "김도영 결승포…한국, 대만 6-4 꺾고 APBC 결승행",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-14T14:25:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/658/0000161235"
     }
    ]
   },
   {
-   "keyword": "배나라♥한재아, 오늘 결혼",
+   "keyword": "이탈리아 메타 과징금",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 8,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-14T00:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "배나라·한재아, 오늘(14일) 결혼…뮤지컬 부부 탄생",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-14T01:19:00.000Z",
-     "link": "https://m.entertain.naver.com/article/437/0000520711"
-    },
-    {
-     "title": "‘뮤지컬 배우 커플’ 배나라♥한재아, 오늘(14일) 결혼",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-14T01:07:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001149756"
-    },
-    {
-     "title": "배우 부부 탄생했다…오늘(14일) 장가가는 '남자 연예인'",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-14T01:00:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1174548"
-    }
-   ]
-  },
-  {
-   "keyword": "최혜진 공동 선두 유지",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-14T00:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "최혜진, 이글 앞세워 LPGA 이틀 연속 공동 선두",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-14T01:12:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95241"
-    },
-    {
-     "title": "최혜진 안니카 드리븐 2라운드 공동 선두, 이틀 연속 선두 유지…윤이나...",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-14T00:46:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1137492"
-    },
-    {
-     "title": "윤이나, 안니카 대회 둘째날 6위…유해란은 31위 유지 [LPGA]",
-     "press": "golfhankook.hankooki.com",
-     "publishedAt": "2026-11-14T00:08:00.000Z",
-     "link": "https://golfhankook.hankooki.com/news/articleView.html?idxno=20022627"
-    }
-   ]
-  },
-  {
-   "keyword": "안도라 골키퍼 징계",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-14T00:05:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-14T13:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "스페인 축구계 충격, 골키퍼 충돌로 사망 사건 발생... 중징계와 형사 ...",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-14T00:36:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885586"
+     "title": "이탈리아, ‘이용자 정보 무단 접근’ 메타에 과징금 1.1조 철퇴",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-14T14:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001204769?sid=104"
     },
     {
-     "title": "아내도 보고 있었는데…니킥으로 공격수 숨지게 한 골키퍼, 결국",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-14T00:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005763608?sid=104"
+     "title": "이탈리아, 메타에 1조 과징금...\"이용자 사진 무단 접근\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-14T14:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432925?sid=104"
     },
     {
-     "title": "충돌로 상대선수 숨지게 한 골키퍼, 12경기 출전 정지…과실치사 적용 ...",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-14T00:09:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/422/0000926073"
+     "title": "이탈리아, 메타에 1조 과징금…\"이용자 사진에 무단 접근\"",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-14T14:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000121381?sid=104"
     }
    ]
   },
   {
-   "keyword": "세르비아",
+   "keyword": "엑스러브 우무티",
    "sources": [
     "daum"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-14T00:00:00.000Z",
+   "articles90": 9,
+   "recent20": 6,
+   "press": 7,
+   "firstArticleAt": "2026-11-14T14:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'사비호' 네덜란드, 그리스 7-0 완파…독일은 세르비아 3-1 제압",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-14T00:44:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/003/0014321876"
+     "title": "엑스러브 대표 \"모두 우무티 통해 나온다\"...멤버 선발부터 세계관까지",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-14T14:58:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=781773"
     },
     {
-     "title": "사비의 네덜란드, 그리스에 7-0...클롭의 독일, 세르비아에 3-1",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-14T00:35:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261114000031"
+     "title": "엑스러브 만든 우무티, 예술가 집안이었다 “조모, 예술대 미술과 교수...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-14T14:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005640691"
     },
     {
-     "title": "독일 축구 부활 신호탄…클롭호, 세르비아 꺾고 8강 도전",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-14T00:34:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000082587"
+     "title": "한소희, 이렇게 의리녀라니‥소속사 돈 걱정했는데 엑스러브 MV 무페이...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-14T14:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001187520"
     }
    ]
   },
   {
-   "keyword": "김지원 수술, 이게 너의 지옥",
+   "keyword": "채령",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-14T00:06:00.000Z",
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-14T14:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'닥터X' 악인 전국환, 수술 전 각성 엔딩…14.5% 기록 [N시청률]",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-14T00:37:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009288815"
+     "title": "있지 채령, 그냥 안 먹었을 뿐인데..\"저도 성인 여자, 1인분 먹어요\"",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-14T14:55:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003487504"
     },
     {
-     "title": "‘닥터X’ 김지원, 마지막 수술 중 각성 ‘충격 엔딩’…시청률 14.5% [T...",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-14T00:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/396/0000760888"
+     "title": "'살림남' 채령, 박서진 동생 폭행(?)에 충격⋯\"왜 그렇게 막 때리냐\"",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-14T14:48:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2648193"
     },
     {
-     "title": "'닥터X' 김지원, 전국환 수술 \"이게 너의 지옥\"⋯최종화 앞두고 시청률...",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-14T00:06:00.000Z",
-     "link": "http://www.joynews24.com/view/2026177"
-    }
-   ]
-  },
-  {
-   "keyword": "형이 노모 폭행한",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-13T23:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[속보] \"엄마 용돈 5만원 적다\" 형에게 따지려다…말린 노모 폭행한 50대...",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-14T00:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001272748?sid=102"
-    },
-    {
-     "title": "추석 용돈 5만원 적다며 형에 따지려다…말리는 노모 폭행",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-14T00:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006409781?sid=102"
-    },
-    {
-     "title": "“용돈 고작 5만원?” 형에게 따지려던 50대…말리던 80대 노모 폭행",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-13T23:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003059014?sid=102"
+     "title": "“혼자 빨리 준비해서 좋다” 솔로 데뷔 채령, 멤버들 없는 단점에 ‘침...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-14T14:43:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005763762"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 483,
-  "matched": 192,
-  "avgLeadMin": 367,
+  "flagged": 487,
+  "matched": 230,
+  "avgLeadMin": 490,
   "recent": [
    {
-    "keyword": "엔비디아 GPU 26만장 공급",
-    "hitKeyword": "엔비디아 CEO 후보 물색",
-    "hitAt": "2026-11-14T10:00:00+09:00",
-    "leadMin": 29
+    "keyword": "2026 인텔 AI 서밋",
+    "hitKeyword": "2026 멜론뮤직어워드",
+    "hitAt": "2026-11-15T00:00:00+09:00",
+    "leadMin": 3498
    },
    {
-    "keyword": "무인 항공기",
-    "hitKeyword": "미국 항공기 운항중단",
-    "hitAt": "2026-11-14T09:30:00+09:00",
-    "leadMin": 3065
+    "keyword": "2026 인텔 AI 서울",
+    "hitKeyword": "2026 멜론뮤직어워드",
+    "hitAt": "2026-11-15T00:00:00+09:00",
+    "leadMin": 3468
    },
    {
-    "keyword": "젠슨 황 없는 엔비디아 위기",
-    "hitKeyword": "서학개미 엔비디아 매수",
-    "hitAt": "2026-11-14T09:30:00+09:00",
-    "leadMin": 50
+    "keyword": "2026 인텔 AI 서밋 개최",
+    "hitKeyword": "2026 멜론뮤직어워드",
+    "hitAt": "2026-11-15T00:00:00+09:00",
+    "leadMin": 3447
    },
    {
-    "keyword": "항공기 이륙 중단",
-    "hitKeyword": "미국 항공기 운항중단",
-    "hitAt": "2026-11-14T09:30:00+09:00",
-    "leadMin": 19
+    "keyword": "보안",
+    "hitKeyword": "노란우산 보안 침해",
+    "hitAt": "2026-11-14T22:30:00+09:00",
+    "leadMin": 860
    },
    {
-    "keyword": "젠슨 황 퇴진 후 엔비디아는?",
-    "hitKeyword": "젠슨 황 퇴진 파장",
-    "hitAt": "2026-11-14T09:00:00+09:00",
-    "leadMin": 513
+    "keyword": "폭발",
+    "hitKeyword": "이현중 21점 폭발",
+    "hitAt": "2026-11-14T19:30:00+09:00",
+    "leadMin": 3444
    },
    {
-    "keyword": "美항공청 항공편 이륙 중단",
-    "hitKeyword": "미국 공항 이륙 중단",
-    "hitAt": "2026-11-14T08:30:00+09:00",
-    "leadMin": 60
+    "keyword": "트럼프 전작권 전환",
+    "hitKeyword": "트럼프 엔비디아 주식",
+    "hitAt": "2026-11-14T19:00:00+09:00",
+    "leadMin": 620
    },
    {
-    "keyword": "미국 항공 운항 중단",
-    "hitKeyword": "미국항공청 운항 중단",
-    "hitAt": "2026-11-14T08:00:00+09:00",
-    "leadMin": 20
+    "keyword": "트럼프 전작권 주한미군 철수",
+    "hitKeyword": "트럼프 엔비디아 주식",
+    "hitAt": "2026-11-14T19:00:00+09:00",
+    "leadMin": 610
    },
    {
-    "keyword": "모레노호, 사우디 2-3 패배",
-    "hitKeyword": "한국 사우디 3실점 패배",
-    "hitAt": "2026-11-14T07:30:00+09:00",
-    "leadMin": 282
+    "keyword": "모레노호, 사우디에 2-3 패배",
+    "hitKeyword": "모레노호 전술 보완점",
+    "hitAt": "2026-11-14T18:30:00+09:00",
+    "leadMin": 962
    },
    {
-    "keyword": "모레노호 사우디 2-3 패배",
-    "hitKeyword": "한국 사우디 3실점 패배",
-    "hitAt": "2026-11-14T07:30:00+09:00",
-    "leadMin": 51
+    "keyword": "모레노호 사우디에 2-3 패배",
+    "hitKeyword": "모레노호 전술 보완점",
+    "hitAt": "2026-11-14T18:30:00+09:00",
+    "leadMin": 741
    },
    {
-    "keyword": "한국 야구",
-    "hitKeyword": "한국 야구 일본전 12연패",
-    "hitAt": "2026-11-14T06:30:00+09:00",
-    "leadMin": 373
+    "keyword": "최민희 민주당 쇄신 촉구",
+    "hitKeyword": "미국 민주당 알래스카 주지사",
+    "hitAt": "2026-11-14T18:00:00+09:00",
+    "leadMin": 1867
    }
   ]
  }
