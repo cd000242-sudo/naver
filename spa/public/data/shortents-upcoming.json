@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T18:05:34.519Z",
+ "builtAt": "2026-11-14T18:15:39.385Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,13 +15,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 5,
-   "recent20": 1,
+   "articles90": 6,
+   "recent20": 2,
    "press": 3,
    "firstArticleAt": "2026-11-14T16:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "텍사스 시·카운티마다 비트코인 1,000만 달러 투자 허용 법안…안전장...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-14T18:10:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1174658"
+    },
     {
      "title": "비트코인, 1시간 새 1.24% 올라 6만6016달러",
      "press": "tokenpost.kr",
@@ -33,12 +39,6 @@
      "press": "coinreaders.com",
      "publishedAt": "2026-11-14T17:12:00.000Z",
      "link": "http://coinreaders.com/270313"
-    },
-    {
-     "title": "비트코인, 570억 달러 매입단가 구간 진입…ETF는 2주 23억 5,000만 달러 ...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-14T17:10:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1174656"
     }
    ]
   }
