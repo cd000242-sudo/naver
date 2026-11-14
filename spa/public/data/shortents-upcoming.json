@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T21:06:50.078Z",
+ "builtAt": "2026-11-14T21:16:53.950Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,72 +8,8 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 26,
  "candidates": [
-  {
-   "keyword": "blg",
-   "sources": [
-    "google"
-   ],
-   "articles90": 7,
-   "recent20": 4,
-   "press": 7,
-   "firstArticleAt": "2026-11-14T20:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "드래곤 4개 내주고도 뒤집었다⋯젠지, BLG 꺾고 월즈 결승 1세트 기선제...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-14T21:04:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2648195"
-    },
-    {
-     "title": "[롤드컵]젠지, BLG 상대로 1세트 승리…기선 제압",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-14T21:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014322473?sid=105"
-    },
-    {
-     "title": "젠지, 첫 장로 내주고도 역전…BLG에 롤드컵 결승 1세트 승리",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-14T20:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003155210?sid=105"
-    }
-   ]
-  },
-  {
-   "keyword": "미국 항공운항 정상화",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-14T19:39:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "미 항공대란 취소·지연 계속...미 당국 \"내일까지 정상화\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-14T20:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432961?sid=104"
-    },
-    {
-     "title": "미국 항공당국 “최악 지나가…항공운항 15일 완전 정상화”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-14T20:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012294063?sid=104"
-    },
-    {
-     "title": "미 항공 운항 중단 여파 계속…14일에도 4천 편 넘게 결항",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-14T19:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926218?sid=104"
-    }
-   ]
-  },
   {
    "keyword": "2026년 11월 15일 운세",
    "sources": [
@@ -105,11 +41,75 @@
      "link": "https://www.asiatoday.co.kr/kn/view.php?key=20260914001437328"
     }
    ]
+  },
+  {
+   "keyword": "아버지",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 3,
+   "press": 3,
+   "firstArticleAt": "2026-11-14T20:59:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“전 재산을 OO에게” 치매 아버지 유언장 본 남매 충격",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-14T21:04:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1173180"
+    },
+    {
+     "title": "아버지가 만든 '80% 문턱' 없애려는 아들⋯오스코텍 경영권 갈등 [어떻게...",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-14T21:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001075060?sid=101"
+    },
+    {
+     "title": "권영경 “아버지 암 투병 끝에 사망하자, 간병하던 엄마 바로 치매”(언...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-14T20:59:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001187560"
+    }
+   ]
+  },
+  {
+   "keyword": "미국 항공운항 정상화",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-14T19:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "미 항공대란 취소·지연 계속...미 당국 \"내일까지 정상화\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-14T20:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432961?sid=104"
+    },
+    {
+     "title": "미국 항공당국 “최악 지나가…항공운항 15일 완전 정상화”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-14T20:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012294063?sid=104"
+    },
+    {
+     "title": "미 항공 운항 중단 여파 계속…14일에도 4천 편 넘게 결항",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-14T19:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926218?sid=104"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 499,
+  "flagged": 500,
   "matched": 234,
   "avgLeadMin": 499,
   "recent": [
