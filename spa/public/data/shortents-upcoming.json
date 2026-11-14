@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T01:11:15.837Z",
+ "builtAt": "2026-11-14T01:21:20.934Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,130 +11,66 @@
  "measured": 27,
  "candidates": [
   {
+   "keyword": "고경표",
+   "sources": [
+    "google"
+   ],
+   "articles90": 100,
+   "recent20": 54,
+   "press": 54,
+   "firstArticleAt": "2026-11-14T00:25:00.000Z",
+   "exclusive": true,
+   "capped": true,
+   "samples": [
+    {
+     "title": "배우 고경표, 만취 음주운전 사고...면허 취소 수준",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-14T01:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000965533?sid=102"
+    },
+    {
+     "title": "고경표, 만취 운전하다 청소차 추돌…면허취소 수준 적발",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-14T01:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006409792?sid=102"
+    },
+    {
+     "title": "고경표, 만취 상태로 청소차 충돌 사고…면허 취소 수준",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-14T01:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003155088?sid=102"
+    }
+   ]
+  },
+  {
    "keyword": "미국 항공 운항 중단",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 49,
-   "recent20": 13,
-   "press": 43,
-   "firstArticleAt": "2026-11-13T23:44:00.000Z",
+   "articles90": 58,
+   "recent20": 20,
+   "press": 50,
+   "firstArticleAt": "2026-11-14T00:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美 전역 항공기 운항중단 올스톱…\"해킹 아닌 관제통신 장애\"",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-14T01:10:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=729282"
+     "title": "美전역 항공편 이륙 중단...관제통신 장애에 수천 편 차질",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-14T01:20:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=563811"
     },
     {
-     "title": "美전역 항공기 운항 '올스톱'...관제통신망 마비에 항공대란",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-14T01:10:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/325282/?sc=Naver"
+     "title": "美 항공기 '올스탑'에 운항 차질…국토부 \"상황 모니터링중\"(종합)",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-14T01:18:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4444777"
     },
     {
-     "title": "美전역 항공기 '올스톱'…\"통신시스템 장애\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-14T01:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926091?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "고경표 음주운전 사고",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 71,
-   "recent20": 42,
-   "press": 41,
-   "firstArticleAt": "2026-11-14T00:03:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "고경표, 음주사고 인정 \"내려지는 처분 받아들이겠다\"",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-14T01:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/629/0000551888"
-    },
-    {
-     "title": "고경표, 음주운전 교통사고…\"피해 회복에 책임 다할 것\"",
-     "press": "dispatch.co.kr",
-     "publishedAt": "2026-11-14T01:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/433/0000132292"
-    },
-    {
-     "title": "[공식] ‘만취 음주운전’ 고경표 측 “깊이 반성 중…책임 다할 것”",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-14T01:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001149757"
-    }
-   ]
-  },
-  {
-   "keyword": "美 항공기 이륙 중단",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 21,
-   "recent20": 6,
-   "press": 20,
-   "firstArticleAt": "2026-11-14T00:03:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美 전역 항공기 운항중단 올스톱…\"해킹 아닌 관제통신 장애\"",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-14T01:10:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=729282"
-    },
-    {
-     "title": "美전역 항공기 운항 '올스톱'...관제통신망 마비에 항공대란",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-14T01:10:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/325282/?sc=Naver"
-    },
-    {
-     "title": "美전역 항공기 '올스톱'…\"통신시스템 장애\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-14T01:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926091?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "최혜진, 디 안니카 공동 선두",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-13T23:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "초반 흔들려도 이글로 반등… 최혜진, LPGA 디 안니카 이틀째 공동 선두",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-14T01:02:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/396/0000760896"
-    },
-    {
-     "title": "최혜진, LPGA 투어 디 안니카 2R도 공동 선두…첫 우승 도전",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-14T00:52:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109895174612"
-    },
-    {
-     "title": "최혜진 안니카 드리븐 2라운드 공동 선두, 이틀 연속 선두 유지…윤이나...",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-14T00:46:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1137492"
+     "title": "美전역 항공편 중단에 대혼란…공항 북새통·하늘길 회항 속출",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-14T01:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016441690?sid=104"
     }
    ]
   },
@@ -143,30 +79,94 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
+   "articles90": 12,
    "recent20": 2,
-   "press": 10,
+   "press": 11,
    "firstArticleAt": "2026-11-13T23:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "\"APEC 계기 미중러 정상회담 19일 개최…성사 시 최초\"",
+     "press": "mbnmoney.mbn.co.kr",
+     "publishedAt": "2026-11-14T01:16:00.000Z",
+     "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005962152"
+    },
+    {
+     "title": "\"미중러 정상회담 19일 개최…北 논의 가능성\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-14T01:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926093?sid=104"
+    },
+    {
      "title": "\"APEC서 19일 미중러 정상회담 가능성\"…북한 논의 주목",
      "press": "hankookilbo.com",
      "publishedAt": "2026-11-14T00:56:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/469/0000965530?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "배나라♥한재아, 오늘 결혼",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-14T00:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "배나라·한재아, 오늘(14일) 결혼…뮤지컬 부부 탄생",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-14T01:19:00.000Z",
+     "link": "https://m.entertain.naver.com/article/437/0000520711"
     },
     {
-     "title": "APEC 계기 미중러 정상회담 19일 열려…북한 논의 가능성도",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-14T00:54:00.000Z",
-     "link": "https://www.ajunews.com/view/20261114092948026"
+     "title": "‘뮤지컬 배우 커플’ 배나라♥한재아, 오늘(14일) 결혼",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-14T01:07:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001149756"
     },
     {
-     "title": "미중러 정상회담, 북한 비핵화와 핵군축의 향방은?",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-14T00:38:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885594"
+     "title": "배우 부부 탄생했다…오늘(14일) 장가가는 '남자 연예인'",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-14T01:00:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1174548"
+    }
+   ]
+  },
+  {
+   "keyword": "최혜진 공동 선두 유지",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-14T00:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "최혜진, 이글 앞세워 LPGA 이틀 연속 공동 선두",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-14T01:12:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95241"
+    },
+    {
+     "title": "최혜진 안니카 드리븐 2라운드 공동 선두, 이틀 연속 선두 유지…윤이나...",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-14T00:46:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1137492"
+    },
+    {
+     "title": "윤이나, 안니카 대회 둘째날 6위…유해란은 31위 유지 [LPGA]",
+     "press": "golfhankook.hankooki.com",
+     "publishedAt": "2026-11-14T00:08:00.000Z",
+     "link": "https://golfhankook.hankooki.com/news/articleView.html?idxno=20022627"
     }
    ]
   },
@@ -175,10 +175,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-13T23:42:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-14T00:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -199,38 +199,6 @@
      "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-14T00:09:00.000Z",
      "link": "https://m.sports.naver.com/wfootball/article/422/0000926073"
-    }
-   ]
-  },
-  {
-   "keyword": "닥터X 김지원 16.1%",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-14T00:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "오늘(14일) 최종회 앞둔 ‘닥터X’ 김지원, 악의 실체 전국환 수술 집도...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-14T00:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003541711"
-    },
-    {
-     "title": "‘닥터X’ 김지원, 최종회 앞두고 16.1%…6주 연속 전 채널 1위 [시청률...",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-14T00:36:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1794615909530861006"
-    },
-    {
-     "title": "최종회 앞둔 '닥터X', 시청률 14% 기록",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-14T00:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/469/0000965528"
     }
    ]
   },
@@ -267,41 +235,73 @@
    ]
   },
   {
-   "keyword": "김정관 장관, 체코 원전 화상 면담",
+   "keyword": "김지원 수술, 이게 너의 지옥",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-14T00:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'닥터X' 악인 전국환, 수술 전 각성 엔딩…14.5% 기록 [N시청률]",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-14T00:37:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009288815"
+    },
+    {
+     "title": "‘닥터X’ 김지원, 마지막 수술 중 각성 ‘충격 엔딩’…시청률 14.5% [T...",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-14T00:14:00.000Z",
+     "link": "https://m.entertain.naver.com/article/396/0000760888"
+    },
+    {
+     "title": "'닥터X' 김지원, 전국환 수술 \"이게 너의 지옥\"⋯최종화 앞두고 시청률...",
+     "press": "joynews24.com",
+     "publishedAt": "2026-11-14T00:06:00.000Z",
+     "link": "http://www.joynews24.com/view/2026177"
+    }
+   ]
+  },
+  {
+   "keyword": "형이 노모 폭행한",
    "sources": [
     "nate"
    ],
    "articles90": 3,
    "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-14T00:05:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-13T23:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한·체코 산업장관, 두코바니 원전 이행 논의…연내 장관급 점검회의",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-14T00:16:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=883255"
+     "title": "[속보] \"엄마 용돈 5만원 적다\" 형에게 따지려다…말린 노모 폭행한 50대...",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-14T00:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001272748?sid=102"
     },
     {
-     "title": "체코 산업통상부 장관과 화상 면담하는 김정관 장관",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-14T00:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009288801?sid=101"
+     "title": "추석 용돈 5만원 적다며 형에 따지려다…말리는 노모 폭행",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-14T00:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006409781?sid=102"
     },
     {
-     "title": "김정관 장관, 체코 산업통상부 장관과 원전 관련 화상 면담",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-14T00:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009288798?sid=101"
+     "title": "“용돈 고작 5만원?” 형에게 따지려던 50대…말리던 80대 노모 폭행",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-13T23:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003059014?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 479,
+  "flagged": 483,
   "matched": 192,
   "avgLeadMin": 367,
   "recent": [
