@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T16:04:36.850Z",
+ "builtAt": "2026-11-14T16:14:42.139Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -10,38 +10,6 @@
  },
  "measured": 24,
  "candidates": [
-  {
-   "keyword": "채령",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-14T14:43:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "잇지 채령, 걸그룹 벗어나 솔로 활동 “단점이 뭐냐면” 바로 대답 못 했...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-14T15:29:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001187526"
-    },
-    {
-     "title": "박서진, 채령도 놀란 트로트계 슈스 스케일...\"팬카페 회원 수 임영웅 다...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-14T15:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002080681"
-    },
-    {
-     "title": "있지 채령, 그냥 안 먹었을 뿐인데..\"저도 성인 여자, 1인분 먹어요\"",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-14T14:55:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003487504"
-    }
-   ]
-  },
   {
    "keyword": "우크라이나 나토 돈바스",
    "sources": [
@@ -75,12 +43,44 @@
    ]
   },
   {
+   "keyword": "채령",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-14T14:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "잇지 채령, 걸그룹 벗어나 솔로 활동 “단점이 뭐냐면” 바로 대답 못 했...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-14T15:29:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001187526"
+    },
+    {
+     "title": "박서진, 채령도 놀란 트로트계 슈스 스케일...\"팬카페 회원 수 임영웅 다...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-14T15:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002080681"
+    },
+    {
+     "title": "있지 채령, 그냥 안 먹었을 뿐인데..\"저도 성인 여자, 1인분 먹어요\"",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-14T14:55:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003487504"
+    }
+   ]
+  },
+  {
    "keyword": "1250 회 로또",
    "sources": [
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-14T15:02:00.000Z",
    "exclusive": false,
