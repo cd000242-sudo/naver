@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T20:56:46.903Z",
+ "builtAt": "2026-11-14T21:06:50.078Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 4,
-   "recent20": 3,
-   "press": 4,
+   "articles90": 7,
+   "recent20": 4,
+   "press": 7,
    "firstArticleAt": "2026-11-14T20:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[롤드컵] BLG의 교과서 찢은 젠지, 한타로 결승 1세트 제압",
-     "press": "gamevu.co.kr",
-     "publishedAt": "2026-11-14T20:52:00.000Z",
-     "link": "https://www.gamevu.co.kr/news/articleView.html?idxno=62341"
+     "title": "드래곤 4개 내주고도 뒤집었다⋯젠지, BLG 꺾고 월즈 결승 1세트 기선제...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-14T21:04:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2648195"
     },
     {
-     "title": "“영혼·장로 다 내주고도 이겼다”…‘한타 괴물’ 젠지, BLG에 38분 대...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-14T20:39:00.000Z",
-     "link": "https://m.sports.naver.com/esports/article/468/0001280931"
+     "title": "[롤드컵]젠지, BLG 상대로 1세트 승리…기선 제압",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-14T21:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014322473?sid=105"
     },
     {
-     "title": "[롤드컵 결승] 정점의 한타력, 젠지 1세트 BLG 압도",
-     "press": "inven.co.kr",
-     "publishedAt": "2026-11-14T20:37:00.000Z",
-     "link": "https://m.sports.naver.com/esports/article/442/0000198855"
+     "title": "젠지, 첫 장로 내주고도 역전…BLG에 롤드컵 결승 1세트 승리",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-14T20:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003155210?sid=105"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
    "firstArticleAt": "2026-11-14T19:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "미 항공대란 취소·지연 계속...미 당국 \"내일까지 정상화\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-14T20:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432961?sid=104"
+    },
     {
      "title": "미국 항공당국 “최악 지나가…항공운항 15일 완전 정상화”",
      "press": "news.kbs.co.kr",
@@ -65,22 +71,72 @@
      "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-14T19:52:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/422/0000926218?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "2026년 11월 15일 운세",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 3,
+   "press": 3,
+   "firstArticleAt": "2026-11-14T20:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오늘의 운세] 2026년 11월 15일 별자리 운세",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-14T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006409879?sid=103"
     },
     {
-     "title": "미 항공당국 \"최악의 상황 지나가…항공운항 15일 완전 정상화\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-14T19:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001403072?sid=104"
+     "title": "[오늘의 운세] 2026년 11월 15일 띠별 운세",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-14T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006409878?sid=103"
+    },
+    {
+     "title": "[백운산 오늘의 운세] 2026년 11월 15일",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-14T21:00:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20260914001437328"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 498,
-  "matched": 230,
-  "avgLeadMin": 490,
+  "flagged": 499,
+  "matched": 234,
+  "avgLeadMin": 499,
   "recent": [
+   {
+    "keyword": "날씨",
+    "hitKeyword": "일요일 포근한 날씨",
+    "hitAt": "2026-11-15T06:00:00+09:00",
+    "leadMin": 1320
+   },
+   {
+    "keyword": "100일의 거짓말",
+    "hitKeyword": "100일의거짓말 이무생",
+    "hitAt": "2026-11-15T06:00:00+09:00",
+    "leadMin": 1239
+   },
+   {
+    "keyword": "김지원 수술, 이게 너의 지옥",
+    "hitKeyword": "닥터X 김지원 결말",
+    "hitAt": "2026-11-15T06:00:00+09:00",
+    "leadMin": 1219
+   },
+   {
+    "keyword": "엑스러브 우무티",
+    "hitKeyword": "엑스러브 전참시",
+    "hitAt": "2026-11-15T06:00:00+09:00",
+    "leadMin": 356
+   },
    {
     "keyword": "2026 인텔 AI 서밋",
     "hitKeyword": "2026 멜론뮤직어워드",
@@ -116,30 +172,6 @@
     "hitKeyword": "트럼프 엔비디아 주식",
     "hitAt": "2026-11-14T19:00:00+09:00",
     "leadMin": 620
-   },
-   {
-    "keyword": "트럼프 전작권 주한미군 철수",
-    "hitKeyword": "트럼프 엔비디아 주식",
-    "hitAt": "2026-11-14T19:00:00+09:00",
-    "leadMin": 610
-   },
-   {
-    "keyword": "모레노호, 사우디에 2-3 패배",
-    "hitKeyword": "모레노호 전술 보완점",
-    "hitAt": "2026-11-14T18:30:00+09:00",
-    "leadMin": 962
-   },
-   {
-    "keyword": "모레노호 사우디에 2-3 패배",
-    "hitKeyword": "모레노호 전술 보완점",
-    "hitAt": "2026-11-14T18:30:00+09:00",
-    "leadMin": 741
-   },
-   {
-    "keyword": "최민희 민주당 쇄신 촉구",
-    "hitKeyword": "미국 민주당 알래스카 주지사",
-    "hitAt": "2026-11-14T18:00:00+09:00",
-    "leadMin": 1867
    }
   ]
  }
