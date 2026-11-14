@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T21:26:58.211Z",
+ "builtAt": "2026-11-14T21:37:01.737Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,75 +8,44 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 24,
  "candidates": [
   {
-   "keyword": "2026년 11월 15일 운세",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-14T20:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오늘의 운세] 2026년 11월 15일 띠별 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-14T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006409878?sid=103"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 15일 별자리 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-14T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006409879?sid=103"
-    },
-    {
-     "title": "[백운산 오늘의 운세] 2026년 11월 15일",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-14T21:00:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20260914001437328"
-    }
-   ]
-  },
-  {
-   "keyword": "미중러 정상회담",
+   "keyword": "우크라이나 나토 돈바스",
    "sources": [
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-14T20:00:00.000Z",
+   "firstArticleAt": "2026-11-14T20:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "트럼프, 필리핀·중국 순방...당국자 “미북 정상회담 계획 없어”",
+     "title": "젤렌스키 \"미국이 나토 가입 대가로 돈바스 양도안 제시\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-14T21:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432966?sid=104"
+    },
+    {
+     "title": "젤렌스키, “미국, 우크라이나에 나토 가입 대가로 돈바스 양도안 제안...",
      "press": "voakorea.com",
-     "publishedAt": "2026-11-14T20:25:00.000Z",
-     "link": "https://www.voakorea.com/a/8223717.html"
+     "publishedAt": "2026-11-14T21:17:00.000Z",
+     "link": "https://www.voakorea.com/a/8223723.html"
     },
     {
-     "title": "미중러 정상, 19일 선전서 첫 3자 회담…김정은과 만남은 없어",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-14T20:14:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3752200"
-    },
-    {
-     "title": "이번 주 APEC…미중러 '핵군축'부터 트럼프·시진핑 'AI 패권'까지",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-14T20:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009289266?sid=104"
+     "title": "젤렌스키 \"美, '나토 가입 대신 돈바스서 철군' 첫 제안(종합)",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-14T20:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014322452?sid=104"
     }
    ]
   },
   {
    "keyword": "아버지",
    "sources": [
+    "signal.bz",
     "google"
    ],
    "articles90": 3,
@@ -105,14 +74,76 @@
      "link": "https://m.entertain.naver.com/article/609/0001187560"
     }
    ]
+  },
+  {
+   "keyword": "2026년 11월 15일 운세",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-14T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오늘의 운세] 2026년 11월 15일 별자리 운세",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-14T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006409879?sid=103"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 15일 띠별 운세",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-14T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006409878?sid=103"
+    },
+    {
+     "title": "[백운산 오늘의 운세] 2026년 11월 15일",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-14T21:00:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20260914001437328"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
   "flagged": 500,
-  "matched": 234,
-  "avgLeadMin": 499,
+  "matched": 239,
+  "avgLeadMin": 522,
   "recent": [
+   {
+    "keyword": "이재명 아세안 정상회담",
+    "hitKeyword": "미중러 정상회담",
+    "hitAt": "2026-11-15T06:30:00+09:00",
+    "leadMin": 2667
+   },
+   {
+    "keyword": "롤드컵 결승전 서울 개최",
+    "hitKeyword": "젠지 롤드컵 결승 1세트",
+    "hitAt": "2026-11-15T06:30:00+09:00",
+    "leadMin": 1300
+   },
+   {
+    "keyword": "2027 롤드컵 결승전",
+    "hitKeyword": "젠지 롤드컵 결승 1세트",
+    "hitAt": "2026-11-15T06:30:00+09:00",
+    "leadMin": 1279
+   },
+   {
+    "keyword": "미중러 정상회담",
+    "hitKeyword": "미중러 정상회담",
+    "hitAt": "2026-11-15T06:30:00+09:00",
+    "leadMin": 1279
+   },
+   {
+    "keyword": "롤드컵 결승 서울아레나 개최",
+    "hitKeyword": "젠지 롤드컵 결승 1세트",
+    "hitAt": "2026-11-15T06:30:00+09:00",
+    "leadMin": 1269
+   },
    {
     "keyword": "날씨",
     "hitKeyword": "일요일 포근한 날씨",
@@ -142,36 +173,6 @@
     "hitKeyword": "2026 멜론뮤직어워드",
     "hitAt": "2026-11-15T00:00:00+09:00",
     "leadMin": 3498
-   },
-   {
-    "keyword": "2026 인텔 AI 서울",
-    "hitKeyword": "2026 멜론뮤직어워드",
-    "hitAt": "2026-11-15T00:00:00+09:00",
-    "leadMin": 3468
-   },
-   {
-    "keyword": "2026 인텔 AI 서밋 개최",
-    "hitKeyword": "2026 멜론뮤직어워드",
-    "hitAt": "2026-11-15T00:00:00+09:00",
-    "leadMin": 3447
-   },
-   {
-    "keyword": "보안",
-    "hitKeyword": "노란우산 보안 침해",
-    "hitAt": "2026-11-14T22:30:00+09:00",
-    "leadMin": 860
-   },
-   {
-    "keyword": "폭발",
-    "hitKeyword": "이현중 21점 폭발",
-    "hitAt": "2026-11-14T19:30:00+09:00",
-    "leadMin": 3444
-   },
-   {
-    "keyword": "트럼프 전작권 전환",
-    "hitKeyword": "트럼프 엔비디아 주식",
-    "hitAt": "2026-11-14T19:00:00+09:00",
-    "leadMin": 620
    }
   ]
  }
