@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T23:17:44.685Z",
+ "builtAt": "2026-11-14T23:27:48.152Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "젠지 BLG 2세트",
    "sources": [
     "daum"
    ],
-   "articles90": 16,
-   "recent20": 6,
+   "articles90": 17,
+   "recent20": 5,
    "press": 11,
-   "firstArticleAt": "2026-11-14T21:56:00.000Z",
+   "firstArticleAt": "2026-11-14T22:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[롤드컵 브리핑] 매서운 BLG의 스노우볼...젠지, 한타 역전패로 3세트 내...",
+     "press": "techm.kr",
+     "publishedAt": "2026-11-14T23:20:00.000Z",
+     "link": "https://www.techm.kr/news/articleView.html?idxno=157359"
+    },
+    {
+     "title": "[롤드컵]젠지, BLG에 역전 허용…우승 도전 벼랑 끝",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-14T23:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014322529?sid=105"
+    },
     {
      "title": "'바이퍼' 탈리야 극복 못했다…젠지, 3세트 패하며 롤드컵 우승 좌절 위...",
      "press": "dailian.co.kr",
      "publishedAt": "2026-11-14T23:16:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/119/0003155223?sid=105"
-    },
-    {
-     "title": "[롤드컵 결승]젠지에게서 3세트 완승 거둔 BLG, 2:1 역전 만들고 매치 포...",
-     "press": "fomos.kr",
-     "publishedAt": "2026-11-14T23:09:00.000Z",
-     "link": "https://m.sports.naver.com/esports/article/236/0000258039"
-    },
-    {
-     "title": "한타에 무너진 젠지⋯BLG에 월즈 결승 3세트 내주며 1-2 역전 허용",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-14T23:08:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2648197"
     }
    ]
   },
@@ -48,30 +48,30 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 10,
-   "recent20": 5,
-   "press": 7,
+   "articles90": 12,
+   "recent20": 7,
+   "press": 8,
    "firstArticleAt": "2026-11-14T22:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "‘100일의 거짓말’ 전채널 동시간대 1위",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-14T23:26:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611150017"
+    },
+    {
+     "title": "김유정♥박진영, 서로 본명 불렀다…로맨스 눈빛 (100일의 거짓말)",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-14T23:22:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001304790"
+    },
+    {
      "title": "‘100일의 거짓말’ 박진영, 김유정 향한 진심 폭발…전 채널 시청률 1위",
      "press": "sports.khan.co.kr",
      "publishedAt": "2026-11-14T23:16:00.000Z",
      "link": "https://m.entertain.naver.com/article/144/0001149831"
-    },
-    {
-     "title": "'100일의 거짓말' 박진영, 김유정 밀정 정체 알고도 사랑 시작…시청률...",
-     "press": "ize.co.kr",
-     "publishedAt": "2026-11-14T23:15:00.000Z",
-     "link": "https://m.entertain.naver.com/article/465/0000020991"
-    },
-    {
-     "title": "‘100일의 거짓말’ 진선규, 김유정에 꽂혔다",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-14T23:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001149829"
     }
    ]
   },
@@ -81,7 +81,7 @@
     "signal.bz"
    ],
    "articles90": 7,
-   "recent20": 1,
+   "recent20": 0,
    "press": 7,
    "firstArticleAt": "2026-11-14T22:02:00.000Z",
    "exclusive": false,
@@ -112,13 +112,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 5,
+   "articles90": 6,
    "recent20": 1,
-   "press": 3,
+   "press": 4,
    "firstArticleAt": "2026-11-14T22:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[11월 15일 오늘의 별자리 운세] 성급한 변화보다 신중한 판단이 필요한...",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-14T23:20:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95282"
+    },
     {
      "title": "2026년 11월 15일, 오늘의 띠별 운세 [인포그래픽]",
      "press": "sisunnews.co.kr",
@@ -130,12 +136,6 @@
      "press": "topstarnews.net",
      "publishedAt": "2026-11-14T22:44:00.000Z",
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16276870"
-    },
-    {
-     "title": "[오늘의 띠별 운세] 11월 15일 나이별 총운…뜻보다 여건부터 맞춰야",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-14T22:42:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16276868"
     }
    ]
   },
