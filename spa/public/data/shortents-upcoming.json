@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T16:14:42.139Z",
+ "builtAt": "2026-11-14T16:24:49.325Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,7 +16,7 @@
     "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-14T14:58:00.000Z",
    "exclusive": false,
@@ -43,34 +43,34 @@
    ]
   },
   {
-   "keyword": "채령",
+   "keyword": "젠슨 황, 엔비디아 사태",
    "sources": [
-    "google"
+    "nate"
    ],
    "articles90": 4,
    "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-14T14:48:00.000Z",
+   "firstArticleAt": "2026-11-14T15:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "잇지 채령, 걸그룹 벗어나 솔로 활동 “단점이 뭐냐면” 바로 대답 못 했...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-14T15:29:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001187526"
+     "title": "젠슨 황 퇴진에 엔비디아 임원 명의 옹호 글 확산…실제 직원 확인, 게시...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-14T15:16:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=626975"
     },
     {
-     "title": "박서진, 채령도 놀란 트로트계 슈스 스케일...\"팬카페 회원 수 임영웅 다...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-14T15:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002080681"
+     "title": "엔비디아 실적·앤트로픽 IPO, AI 투심 살릴까…코스피 5200~6000 [주간 증...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-14T15:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003155208?sid=101"
     },
     {
-     "title": "있지 채령, 그냥 안 먹었을 뿐인데..\"저도 성인 여자, 1인분 먹어요\"",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-14T14:55:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003487504"
+     "title": "[비즈토크<하>] 中 스파이 불륜 스캔들에 젠슨 황 퇴진…국내 산업 후폭...",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-14T15:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000551942?sid=101"
     }
    ]
   },
@@ -105,11 +105,43 @@
      "link": "https://www.bntnews.co.kr/article/view/bnt202611140127"
     }
    ]
+  },
+  {
+   "keyword": "채령",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-14T14:55:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "잇지 채령, 걸그룹 벗어나 솔로 활동 “단점이 뭐냐면” 바로 대답 못 했...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-14T15:29:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001187526"
+    },
+    {
+     "title": "박서진, 채령도 놀란 트로트계 슈스 스케일...\"팬카페 회원 수 임영웅 다...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-14T15:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002080681"
+    },
+    {
+     "title": "있지 채령, 그냥 안 먹었을 뿐인데..\"저도 성인 여자, 1인분 먹어요\"",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-14T14:55:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003487504"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 492,
+  "flagged": 493,
   "matched": 230,
   "avgLeadMin": 490,
   "recent": [
