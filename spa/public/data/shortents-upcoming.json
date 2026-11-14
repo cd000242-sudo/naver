@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T19:46:11.954Z",
+ "builtAt": "2026-11-14T19:56:20.624Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,23 +16,23 @@
     "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 2,
    "press": 4,
    "firstArticleAt": "2026-11-14T18:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "미 항공 운항 중단 여파 계속…14일에도 4천 편 넘게 결항",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-14T19:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926218?sid=104"
+    },
+    {
      "title": "미 항공당국 \"최악의 상황 지나가…항공운항 15일 완전 정상화\"",
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-14T19:39:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/055/0001403072?sid=104"
-    },
-    {
-     "title": "美항공마비, 라우터·시공 오류 가능성…\"외주사 과실 조사·15일 정상화...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-14T19:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014322436?sid=104"
     },
     {
      "title": "미 항공당국 \"최악의 상황 지나가‥항공운항 15일 완전 정상화\"",
