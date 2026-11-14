@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T22:57:39.143Z",
+ "builtAt": "2026-11-14T23:07:42.091Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "젠지 BLG 2세트",
    "sources": [
     "daum"
    ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-14T21:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[롤드컵] '아뿔사 나피리-직스'...젠지, 中 BLG 공세에 밀려 결승 1-1 동...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-14T22:23:00.000Z",
-     "link": "https://m.sports.naver.com/esports/article/109/0005640728"
-    },
-    {
-     "title": "[롤드컵 브리핑] 53분 혈투 끝에 내준 2세트...젠지, 치열한 장기전 끝에...",
-     "press": "techm.kr",
-     "publishedAt": "2026-11-14T22:20:00.000Z",
-     "link": "https://www.techm.kr/news/articleView.html?idxno=157358"
-    },
-    {
-     "title": "[롤드컵]젠지, BLG에 2세트 내줘…승부 원점",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-14T22:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014322506?sid=105"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황 없는 엔비디아",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 8,
+   "articles90": 13,
+   "recent20": 3,
+   "press": 11,
    "firstArticleAt": "2026-11-14T21:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "엔비디아 투자자, 젠슨 황 복귀 요구 서한 전달… 온라인 청원도 열기",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-14T22:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001204791?sid=104"
+     "title": "“4킬 쓸어 담고도 무너졌다”…젠지, BLG에 3세트 역전패→롤드컵 우승...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-14T23:03:00.000Z",
+     "link": "https://m.sports.naver.com/esports/article/468/0001280939"
     },
     {
-     "title": "엔비디아 투자자, 젠슨황 복귀 요구 서한…\"AI산업 후퇴 우려\"",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-14T22:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005353875?sid=101"
+     "title": "[롤드컵 결승] 놀라운 BLG의 설계 능력... 3세트 따내고 2:1 리드",
+     "press": "inven.co.kr",
+     "publishedAt": "2026-11-14T23:02:00.000Z",
+     "link": "https://m.sports.naver.com/esports/article/442/0000198858"
     },
     {
-     "title": "“젠슨 황 복귀 시켜라”…주주 서한부터 온라인 청원까지 ‘시끌’",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-14T22:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003059073?sid=104"
+     "title": "'창단 첫 우승에 성큼' BLG, 3세트까지 승리하며 2-1 역전[2026 롤드컵 결...",
+     "press": "sports.hankooki.com",
+     "publishedAt": "2026-11-14T23:00:00.000Z",
+     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6943604"
     }
    ]
   },
@@ -79,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
    "firstArticleAt": "2026-11-14T22:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "미 항공기 운항 중단 후폭풍…5천여편 결항, 15일 밤 정상화 전망",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-14T22:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002832226?sid=104"
+    },
     {
      "title": "美 항공 전면 중단사태 여파 계속… FAA “15일까지 정상화”",
      "press": "biz.chosun.com",
@@ -97,12 +71,6 @@
      "press": "wikitree.co.kr",
      "publishedAt": "2026-11-14T22:22:00.000Z",
      "link": "https://www.wikitree.co.kr/articles/1174662"
-    },
-    {
-     "title": "美 항공대란 이틀째⋯항공편 9천편 취소·지연, 15일 정상화 전망",
-     "press": "autodaily.co.kr",
-     "publishedAt": "2026-11-14T22:08:00.000Z",
-     "link": "https://www.autodaily.co.kr/news/articleView.html?idxno=602093"
     }
    ]
   },
@@ -111,13 +79,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 5,
-   "recent20": 3,
-   "press": 3,
+   "articles90": 6,
+   "recent20": 1,
+   "press": 4,
    "firstArticleAt": "2026-11-14T21:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "2026년 11월 15일, 오늘의 띠별 운세 [인포그래픽]",
+     "press": "sisunnews.co.kr",
+     "publishedAt": "2026-11-14T23:00:00.000Z",
+     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=249397"
+    },
     {
      "title": "[오늘의 운세] 11월 15일 띠별 재물운…자금 이동과 집행 속도 차이",
      "press": "topstarnews.net",
@@ -129,12 +103,6 @@
      "press": "topstarnews.net",
      "publishedAt": "2026-11-14T22:42:00.000Z",
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16276868"
-    },
-    {
-     "title": "[오늘의 사주 일진 운세] 11월 15일 계사일…세밀함 살리고 지나친 간섭...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-14T22:38:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16276866"
     }
    ]
   },
@@ -142,11 +110,10 @@
    "keyword": "100일의 거짓말",
    "sources": [
     "signal.bz",
-    "nate",
     "google"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-14T22:10:00.000Z",
    "exclusive": false,
@@ -176,9 +143,15 @@
  "hitRate": {
   "days": 7,
   "flagged": 503,
-  "matched": 244,
-  "avgLeadMin": 532,
+  "matched": 245,
+  "avgLeadMin": 530,
   "recent": [
+   {
+    "keyword": "젠슨 황 없는 엔비디아",
+    "hitKeyword": "엔비디아 실적 발표",
+    "hitAt": "2026-11-15T08:00:00+09:00",
+    "leadMin": 12
+   },
    {
     "keyword": "서울 집값 상승",
     "hitKeyword": "경기남부 집값 상승",
@@ -232,12 +205,6 @@
     "hitKeyword": "미중러 정상회담",
     "hitAt": "2026-11-15T06:30:00+09:00",
     "leadMin": 1279
-   },
-   {
-    "keyword": "롤드컵 결승 서울아레나 개최",
-    "hitKeyword": "젠지 롤드컵 결승 1세트",
-    "hitAt": "2026-11-15T06:30:00+09:00",
-    "leadMin": 1269
    }
   ]
  }
