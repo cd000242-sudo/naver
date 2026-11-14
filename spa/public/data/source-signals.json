@@ -8,11 +8,73 @@
         {
           "id": "naver-1",
           "rank": 1,
-          "keyword": "고경표 음주운전 실망",
-          "title": "고경표 음주운전 실망",
-          "rawKeyword": "고경표 음주운전 실망",
+          "keyword": "엔비디아 젠슨 황 스캔들 여파 지속",
+          "title": "엔비디아 젠슨 황 스캔들 여파 지속",
+          "rawKeyword": "엔비디아 젠슨 황 스캔들 여파 지속",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 100,
+          "source": "naver",
+          "expansions": [
+            "엔비디아 젠슨황",
+            "엔비디아 주가",
+            "엔비디아 회장",
+            "엔비디아 실적발표",
+            "엔비디아 주식",
+            "엔비디아 그래픽카드",
+            "엔비디아 ai",
+            "엔비디아 시총"
+          ],
+          "expansionSeed": "엔비디아",
+          "insight": {
+            "titles": {
+              "seo": "엔비디아 젠슨 황 스캔들 여파 지속 최신 이슈와 핵심 내용 정리",
+              "home": "엔비디아 젠슨 황 스캔들 여파 지속, [속보] 엔비디아, 젠슨 황 스캔들 여파 지속 '2.01%↓'…뉴욕증시 혼조 마감 관련 확인할 점",
+              "topic": "엔비디아 젠슨 황 스캔들 여파 지속",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "미 뉴욕증시의 3대 지수가 혼조로 마감했다.13일(현지시간) 뉴욕증권거래소(NYSE)에서 다우존스30 산업평균지수는 전장보다 50.46포인트(0.10%) 오른 52,347.55에 마감했다.스탠더드앤드푸어스(SP) 500지수는 전장보다",
+                "sourceIndex": 0
+              },
+              {
+                "text": "S&P500 0.4%↓, 나스닥 0.9%↓…AI·반도체주 하락 AMD·브로드컴도 급락…미 국채 약세·달러화 강세 김연숙 특파원 = 13일(현지시간) 미국 뉴욕증시는 젠슨 황 엔비디아 전 최고경영자(CEO) 스캔들 의 여파 가 이어지면서 주요 지수가 혼조 마감했다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.dailian.co.kr/news/view/1714920/?sc=Naver",
+                "press": "데일리안"
+              },
+              {
+                "url": "https://www.yna.co.kr/view/AKR20261114009551072?input=1195m",
+                "press": "연합뉴스"
+              }
+            ],
+            "images": [
+              "https://cdnimage.dailian.co.kr/news/202611/news_1794605207329_1714920_m_1.jpg"
+            ],
+            "press": [
+              "데일리안",
+              "연합뉴스"
+            ],
+            "headlines": [
+              "[속보] 엔비디아, 젠슨 황 스캔들 여파 지속 '2.01%↓'…뉴욕증시 혼조 마감",
+              "뉴욕증시, 다우지수만 0.1% 상승… 엔비디아 2%↓, 하락 지속 (종합)"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-14T02:36:46.195Z"
+          }
+        },
+        {
+          "id": "naver-2",
+          "rank": 2,
+          "keyword": "고경표 만취 운전 사고로 신뢰 상실",
+          "title": "고경표 만취 운전 사고로 신뢰 상실",
+          "rawKeyword": "고경표 만취 운전 사고로 신뢰 상실",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 99,
           "source": "naver",
           "expansions": [
             "고경표 막국수",
@@ -24,116 +86,14 @@
             "고경표 노래",
             "놀면뭐하니 고경표"
           ],
-          "expansionSeed": "고경표",
-          "insight": {
-            "titles": {
-              "seo": "고경표 음주운전 실망 최신 이슈와 핵심 내용 정리",
-              "home": "고경표 음주운전 실망, 배우 고경표 음주운전 중 청소차 들이받아…\"깊이 반성\"(종합) 관련 확인할 점",
-              "topic": "고경표 음주운전 실망",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "(서울=연합뉴스) 정지수 고가혜 기자 = 배우 고경표씨가 술을 마신 채 운전하다 청소차를 들이받는 사고를 냈다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "씨엘엔컴퍼니는 “먼저 고경표 배우의 음주운전 사고로 피해를 입으신 분들께 깊이 사과드린다. 고경표 배우를 믿고 응원해 주신 모든 분께도 실망 과 심려를 끼쳐드려 진심으로 사과드린다”고 전했다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.yna.co.kr/view/AKR20261114025051004?input=1195m",
-                "press": "연합뉴스"
-              },
-              {
-                "url": "https://www.mk.co.kr/article/12208816",
-                "press": "매일경제"
-              }
-            ],
-            "images": [
-              "https://img3.yna.co.kr/photo/cms/2022/08/16/81/PCM20220816000081005_P4.jpg"
-            ],
-            "press": [
-              "연합뉴스",
-              "매일경제"
-            ],
-            "headlines": [
-              "배우 고경표 음주운전 중 청소차 들이받아…\"깊이 반성\"(종합)",
-              "고경표 소속사 “ 음주운전 사고, 실망 끼쳐 진심으로 사과”"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-14T02:09:16.433Z"
-          }
-        },
-        {
-          "id": "naver-2",
-          "rank": 2,
-          "keyword": "젠슨 황 스캔들 여파 계속",
-          "title": "젠슨 황 스캔들 여파 계속",
-          "rawKeyword": "젠슨 황 스캔들 여파 계속",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 99,
-          "source": "naver",
-          "expansions": [
-            "젠슨황",
-            "젠슨황 스파이",
-            "젠슨황 와이프",
-            "젠슨황 국적",
-            "젠슨황 여자",
-            "젠슨황 나무위키",
-            "젠슨 황 배우자",
-            "젠슨황 사주"
-          ],
-          "expansionSeed": "젠슨",
-          "insight": {
-            "titles": {
-              "seo": "젠슨 황 스캔들 여파 계속 최신 이슈와 핵심 내용 정리",
-              "home": "젠슨 황 스캔들 여파 계속, 뉴욕증시 혼조 마감…엔비디아 하락세 계속, 2%↓ 관련 확인할 점",
-              "topic": "젠슨 황 스캔들 여파 계속",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "김연숙 특파원 = 13일(현지시간) 미국 뉴욕증시는 젠슨 황 엔비디아 전 최고경영자(CEO) 스캔들 의 여파 가 이어지면서 주요 지수가 혼조 마감했다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "엔비디아의 젠슨 황 최고경영자(CEO)가 중국 스파이 연루 의혹 등 잇단 스캔들 에 휩싸인 가운데 12일(현지시간) 전격 퇴진했다. 노력을 계속 발전시켜 나갈 것\"이라고 밝혔다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.yna.co.kr/view/AKR20261114009500072?input=1195m",
-                "press": "연합뉴스"
-              },
-              {
-                "url": "https://www.yna.co.kr/view/AKR20261112185952071?input=1195m",
-                "press": "연합뉴스"
-              }
-            ],
-            "images": [
-              "https://img1.yna.co.kr/photo/reuters/2026/11/14/PRU20261114028601009_P4.jpg"
-            ],
-            "press": [
-              "연합뉴스"
-            ],
-            "headlines": [
-              "뉴욕증시 혼조 마감…엔비디아 하락세 계속, 2%↓",
-              "젠슨황 엔비디아 CEO 퇴진…불륜 파문에 33년만에 쫓겨나(종합2보)"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-14T02:09:16.433Z"
-          }
+          "expansionSeed": "고경표"
         },
         {
           "id": "naver-3",
           "rank": 3,
-          "keyword": "미국 전역 항공기 중단",
-          "title": "미국 전역 항공기 중단",
-          "rawKeyword": "미국 전역 항공기 중단",
+          "keyword": "미국 항공기 이륙 중단",
+          "title": "미국 항공기 이륙 중단",
+          "rawKeyword": "미국 항공기 이륙 중단",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 98,
           "source": "naver",
@@ -150,116 +110,54 @@
           "expansionSeed": "미국",
           "insight": {
             "titles": {
-              "seo": "미국 전역 항공기 중단 최신 이슈와 핵심 내용 정리",
-              "home": "미국 전역 항공기 중단, 美전역 항공기 이륙 ‘올스톱’... 통신 장애로 1만1000편 지연·결항 관련 확인할 점",
-              "topic": "미국 전역 항공기 중단",
+              "seo": "미국 항공기 이륙 중단 최신 이슈와 핵심 내용 정리",
+              "home": "미국 항공기 이륙 중단, 美전역 항공기 운항중단 '올스톱' 사태…\"관제통신시스템 장애\"(종합2보) 관련 확인할 점",
+              "topic": "미국 항공기 이륙 중단",
               "topicGroup": "네이버 실시간 검색어"
             },
             "facts": [
               {
-                "text": "박강현 기자입력 2026.11.14. 09:39업데이트 2026.11.14. 10:01013일 미국 수도 워싱턴 DC의 로널드 레이건 워싱턴 국립공항에서 항공기들이 이륙하지 못한 채 지상에 대기하고 있다.",
+                "text": "또 이륙 중단 시각 이후 이날 중 미국 공항에서 이륙 이 예정된 항공기 는 3만대다. 오후 5시 기준으로 미국 내 항공편 지연은 8천건이 넘었으며, 약 400편은 결항했다.",
                 "sourceIndex": 0
               },
               {
-                "text": "미국 항공교통관제센터의 통신장애로 미국 전역 공항에서 항공기 이륙이 중단 되면서 대한항공과 아시아나항공 일부 미국 노선 항공편이 결항됐다. 14일 항공업계에 따르면 대한항공은 이날 인천∼애틀랜타 노선(KE033·KE034편)을 결항 조치했다.",
+                "text": "뉴욕타임스(NYT)가 인용한 항공편 추적사이트에 따르면 현재 미국 으로 향하는 항공기 는 1천대 이상이며, 또 이륙 중단 시각 이후 이날 중 미국 공항에서 이륙 이 예정된 항공기 는 3만대입니다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.chosun.com/international/us/2026/11/14/JINR2EN5QRAOJJF3Z7RLIBFGZA/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
-                "press": "조선일보"
+                "url": "https://www.yna.co.kr/view/AKR20261114010352071?input=1195m",
+                "press": "연합뉴스"
               },
               {
-                "url": "https://www.yna.co.kr/view/AKR20261114026300003?input=1195m",
-                "press": "연합뉴스"
+                "url": "https://biz.sbs.co.kr/article_hub/20000346378?division=NAVER",
+                "press": "SBS Biz"
               }
             ],
             "images": [
-              "https://www.chosun.com/resizer/v2/3IYNAJLRAFNTDFCY6WCKWBELV4.jpg?auth=a714d48a3d827a6dba41a6da76dfac44ffa7aa3a8b1156ce4bc8bc02cc30a573&width=1200&height=630&smart=true"
+              "https://img7.yna.co.kr/photo/etc/epa/2026/11/14/PEP20261114093101009_P4.jpg"
             ],
             "press": [
-              "조선일보",
-              "연합뉴스"
+              "연합뉴스",
+              "SBS Biz"
             ],
             "headlines": [
-              "美전역 항공기 이륙 ‘올스톱’... 통신 장애로 1만1000편 지연·결항",
-              "미국 전역 이륙 중단 에 인천 출발 일부 항공편 결항"
+              "美전역 항공기 운항중단 '올스톱' 사태…\"관제통신시스템 장애\"(종합2보)",
+              "美전역 항공기 이륙 중단 …교통장관 \"관제센터 통신문제\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-14T02:09:16.433Z"
+            "collectedAt": "2026-11-14T02:36:46.195Z"
           }
         },
         {
           "id": "naver-4",
           "rank": 4,
-          "keyword": "최혜진 디 안니카 2R 공동 선두",
-          "title": "최혜진 디 안니카 2R 공동 선두",
-          "rawKeyword": "최혜진 디 안니카 2R 공동 선두",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 97,
-          "source": "naver",
-          "expansions": [
-            "최혜진프로",
-            "최혜진 작가",
-            "최혜진의 판소리 사랑",
-            "최혜진 기자",
-            "골프 최혜진",
-            "최혜진 우승",
-            "최혜진프로고향",
-            "선두바다낚시터"
-          ],
-          "expansionSeed": "최혜진",
-          "insight": {
-            "titles": {
-              "seo": "최혜진 디 안니카 2R 공동 선두 최신 이슈와 핵심 내용 정리",
-              "home": "최혜진 디 안니카 2R 공동 선두, 최혜진, 이글로 반등…LPGA 디 안니카 2R도 공동 선두 관련 확인할 점",
-              "topic": "최혜진 디 안니카 2R 공동 선두",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "윤이나는 공동 6위…코르다는 공동 9위 최혜진 이 미국여자프로골프(LPGA) 투어 디 안니카 드리븐 바이 게인브리지 앳 펠리컨(총상금 325만 달러) 둘째 날 이글로 반등에 성공하며 공동 선두 자리를 지켰다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "3줄 요약 ㆍ 최혜진 12언더파 128타로 이틀 연속 공동 선두 ㆍ2022년 LPGA 데뷔 후 첫 우승 도전 ㆍ윤이나 공동 6위·넬리 코르다",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.yna.co.kr/view/AKR20261114016500007?input=1195m",
-                "press": "연합뉴스"
-              },
-              {
-                "url": "https://www.chosun.com/sports/golf/2026/11/14/MPLNMZVMABELRIDMPJXKKGEWDA/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
-                "press": "조선일보"
-              }
-            ],
-            "images": [
-              "https://img0.yna.co.kr/photo/ap/2026/11/13/PAP20261113031401009_P4.jpg"
-            ],
-            "press": [
-              "연합뉴스",
-              "조선일보"
-            ],
-            "headlines": [
-              "최혜진, 이글로 반등…LPGA 디 안니카 2R도 공동 선두",
-              "최혜진 , 디 안니카 2R 도 공동 선두 … 첫 LPGA 우승 조준"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-14T02:09:16.433Z"
-          }
-        },
-        {
-          "id": "naver-5",
-          "rank": 5,
           "keyword": "미중러 정상회담",
           "title": "미중러 정상회담",
           "rawKeyword": "미중러 정상회담",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 96,
+          "priority": 97,
           "source": "naver",
           "expansions": [
             "미중러정상회담",
@@ -315,75 +213,199 @@
           }
         },
         {
-          "id": "naver-6",
-          "rank": 6,
-          "keyword": "법학적성시험",
-          "title": "법학적성시험",
-          "rawKeyword": "법학적성시험",
+          "id": "naver-5",
+          "rank": 5,
+          "keyword": "전국스포츠클럽 교류전 탁구대회",
+          "title": "전국스포츠클럽 교류전 탁구대회",
+          "rawKeyword": "전국스포츠클럽 교류전 탁구대회",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 95,
+          "priority": 96,
           "source": "naver",
           "expansions": [
-            "법학적성시험 기출",
-            "법학적성시험 기출문제",
-            "법학적성시험 과목",
-            "법학적성시험 2026",
-            "법학적성시험 해설",
-            "법학적성시험 합격",
-            "법학적성시험결과",
-            "법학적성시험 뜻"
+            "교류전류",
+            "교류전기",
+            "교류전압",
+            "교류전원",
+            "교류전자개폐기",
+            "교류전동기",
+            "교류전 뜻",
+            "교류전력"
           ],
-          "expansionSeed": "법학적성시험",
+          "expansionSeed": "교류전",
           "insight": {
             "titles": {
-              "seo": "법학적성시험 최신 이슈와 핵심 내용 정리",
-              "home": "법학적성시험, “스마트안경 못 잡은거 아니야?” 다른 자격시험까지 번진 불신 관련 확인할 점",
-              "topic": "법학적성시험",
+              "seo": "전국스포츠클럽 교류전 탁구대회 최신 이슈와 핵심 내용 정리",
+              "home": "전국스포츠클럽 교류전 탁구대회, 403 Forbidden 관련 확인할 점",
+              "topic": "전국스포츠클럽 교류전 탁구대회",
               "topicGroup": "네이버 실시간 검색어"
             },
             "facts": [
               {
-                "text": "원종빈 기자입력 2026.11.14. 00:35업데이트 2026.11.14. 07:17011일 서울 용산구 서울특별시교육청에서 열린 수능 스마트안경 전담 본부요원 연수에서 업체 관계자가 스마트안경을 착용하고 'AI 안경 부정행위 예방 가이드'를 읽고 있다.",
+                "text": "제4회 전국스포츠클럽 교류전 탁구대회 가 14일 오전 충청북도 제천체육관에서 열렸다.",
                 "sourceIndex": 0
               },
               {
-                "text": "올해 세무사 시험 수석 합격자의 ‘AI(인공지능) 안경’ 부정행위 의혹이 확산되면서 불똥이 튄 법학적성시험 (LEET·리트) 최초 만점자가 대학수학능력시험(수능) 국어 영역을 생중계로 풀겠다며 정면 돌파를 선언했다.",
+                "text": "▲ 농구 대회 에 참가한 유소년 선수들. 풋살 대회 '가 열려 유소년 선수 1300여 명이 기량을 겨룬다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.chosun.com/national/national_general/2026/11/14/AMH2KW5CZFD7XACR23ELRX5F6U/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
-                "press": "조선일보"
+                "url": "https://www.spotvnews.co.kr/news/articleView.html?idxno=1019790",
+                "press": "스포티비뉴스"
               },
               {
-                "url": "https://biz.heraldcorp.com/article/10936115?ref=naver",
-                "press": "헤럴드경제"
+                "url": "https://www.ccdailynews.com/news/articleView.html?idxno=2448213",
+                "press": "충청일보"
               }
             ],
             "images": [
-              "https://www.chosun.com/resizer/v2/GE3TGNBVMUZDMNZVHA3WCMRQGY.jpg?auth=c4780377a6a33afdc5a2b33a385827a342385cba17c178bfae54c022e9619c8a&width=1200&height=630&focal=1799,627"
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F477%2F2026%2F11%2F14%2F639051.jpg&type=fface200_200&expire=2&refresh=true"
             ],
             "press": [
-              "조선일보",
-              "헤럴드경제"
+              "스포티비뉴스",
+              "충청일보"
             ],
             "headlines": [
-              "“스마트안경 못 잡은거 아니야?” 다른 자격시험까지 번진 불신",
-              "‘AI 안경’ 불똥 튄 LEET 만점자 “수능 생중계로 풀겠다” 정면 돌파"
+              "403 Forbidden",
+              "11월, 제천서 축구· 탁구 ·농구 등 10개 대회 '개최'"
+            ],
+            "extraction": "search-card",
+            "collectedAt": "2026-11-14T02:36:46.195Z"
+          }
+        },
+        {
+          "id": "naver-6",
+          "rank": 6,
+          "keyword": "광진구",
+          "title": "광진구",
+          "rawKeyword": "광진구",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 95,
+          "source": "naver",
+          "expansions": [
+            "광진구청",
+            "광진구 날씨",
+            "광진구 맛집",
+            "광진구 아파트",
+            "광진구민체육센터",
+            "광진구 호텔",
+            "광진구부동산",
+            "광진구보건소"
+          ],
+          "expansionSeed": "광진구",
+          "insight": {
+            "titles": {
+              "seo": "광진구 최신 이슈와 핵심 내용 정리",
+              "home": "광진구, 광진구, 재개발·재건축 등 정비사업 75곳 추진…주택공급 속도 관련 확인할 점",
+              "topic": "광진구",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "광고 자양4동 A구역·광장동 극동 추진 중모아주택 1호 자양동 한양연립 준공도지난 7월부터 전담조직 신설해 사업 관리 광진구청 전경. 광진구 제공 [파이낸셜뉴스] 서울 광진구에서 신속통합기획을 중심으로 재개발·재건축에 속도를 내고 있다. 자양동과 광장동, 중곡동 일대 대규모 정비사업이 인허가 절차를 밟는 가운데 소규모주택정비사업에서도 입주가 시작되는 등 사업이 진전되고 있다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "서울 광진구 (구청장 김경호)는 오는 16∼18일 구청 대강당에서 '2026 광진건축+페스타'를 개최한다고 12일 밝혔다. 광진구 건축사회가 주최하는 이 행사는 건축과 도시가 지닌 문화적 가치를 나누고 건축 전문가와 구민이 소통하기 위해 마련됐다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.fnnews.com/news/202611131358410946",
+                "press": "파이낸셜뉴스"
+              },
+              {
+                "url": "https://www.yna.co.kr/view/AKR20261112126200004?input=1195m",
+                "press": "연합뉴스"
+              }
+            ],
+            "images": [
+              "https://image.fnnews.com/resource/media/image/2026/11/13/202611131402531711_e.jpg"
+            ],
+            "press": [
+              "파이낸셜뉴스",
+              "연합뉴스"
+            ],
+            "headlines": [
+              "광진구, 재개발·재건축 등 정비사업 75곳 추진…주택공급 속도",
+              "건축 전문가와 소통한다…16∼18일 '광진건축 +페스타'"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-14T02:09:16.433Z"
+            "collectedAt": "2026-11-14T02:36:46.195Z"
           }
         },
         {
           "id": "naver-7",
           "rank": 7,
+          "keyword": "기내식",
+          "title": "기내식",
+          "rawKeyword": "기내식",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 94,
+          "source": "naver",
+          "expansions": [
+            "대한항공 기내식",
+            "쯔양 기내식라면",
+            "제주항공 기내식",
+            "아시아나 기내식",
+            "진에어 기내식",
+            "비엣젯 기내식",
+            "타이항공 기내식",
+            "에어부산 기내식"
+          ],
+          "expansionSeed": "기내식",
+          "insight": {
+            "titles": {
+              "seo": "기내식 최신 이슈와 핵심 내용 정리",
+              "home": "기내식, 180도 좌석에 흑백셰프 기내식…‘제2 아시아나’ 노리는 신 항공사 관련 확인할 점",
+              "topic": "기내식",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "“원래 비즈니스석만 이용하는데, 좌석이 넓고 가격도 적당한 것 같아요.” 지난 9일 인천공항에서 중국 선전으로 가는 파라타항공의 첫 취항편에서 만난 중국인 신쉐(여·38)씨는 “피부 관리를 받으러 서울에 왔다가 선전으로 돌아가는 길”이라며 이렇게 말했다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "아시아나 공급社 게이트그룹 통합 대한항공과 협력하기로 계약조건 수정 공급량 유지전망 위약금 리스크 털고 연속성 선택 영업익 30% 알짜 기내식 시장 통합 대한항공 출범을 앞두고 기내식 공급체계가 결국 대한항공씨앤디서비스(KCND)와 게이트고메코리아(GGK)의 ‘듀얼체제’로 재편된다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.joongang.co.kr/article/25478234",
+                "press": "중앙일보"
+              },
+              {
+                "url": "https://www.mk.co.kr/article/12206273",
+                "press": "매일경제"
+              }
+            ],
+            "images": [
+              "https://pds.joongang.co.kr/news/FbMetaImage/202611/c671c471-a093-478a-b183-7e004f9a4bd5.jpg"
+            ],
+            "press": [
+              "중앙일보",
+              "매일경제"
+            ],
+            "headlines": [
+              "180도 좌석에 흑백셰프 기내식…‘제2 아시아나’ 노리는 신 항공사",
+              "[단독] 대한항공 ‘알짜’ 기내식 사업 결국 복수체제로...‘30년 계약’..."
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-14T02:36:46.195Z"
+          }
+        },
+        {
+          "id": "naver-8",
+          "rank": 8,
           "keyword": "미시시피강 유람선 충돌",
           "title": "미시시피강 유람선 충돌",
           "rawKeyword": "미시시피강 유람선 충돌",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 94,
+          "priority": 93,
           "source": "naver",
           "expansions": [
             "한강 유람선",
@@ -399,229 +421,167 @@
           "insight": {
             "titles": {
               "seo": "미시시피강 유람선 충돌 최신 이슈와 핵심 내용 정리",
-              "home": "미시시피강 유람선 충돌, 美미시시피강서 유람선-화물선 충돌…\"180명 전원 생존\"(종합) 관련 확인할 점",
+              "home": "미시시피강 유람선 충돌, 美 미시시피강서 유람선-화물선 충돌…승객 129명 구조 진행 관련 확인할 점",
               "topic": "미시시피강 유람선 충돌",
               "topicGroup": "네이버 실시간 검색어"
             },
             "facts": [
               {
-                "text": "",
+                "text": "이 사고로 유람선 이 옆으로 뒤집히며 물에 잠겼고, 승객들이 구명조끼를 입은 채 강 위에 떠 있는 모습도 포착됐다. 현재 미시시피강 수온은 섭씨 19도다.",
                 "sourceIndex": 0
               },
               {
-                "text": "CNN방송 등 외신과 연합뉴스에 따르면 13일(현지시간) 정오께 화물선 애틀랜틱 아스팔트호와 유람선 아메리칸 헤리티지호가 충돌 했다. 이 사고로 유람선 이 옆으로 뒤집히며 물에 잠겼고, 승객들이 구명조끼를 입은 채 강 위에 떠 있는 모습도 포착됐다.",
+                "text": "미국 미시시피강 에서 화물선과 유람선 이 충돌 하는 사고가 발생해 승객 구조 작업이 진행되고 있다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.yna.co.kr/view/AKR20261114012651075?input=1195m",
+                "url": "https://www.yna.co.kr/view/AKR20261114012600075?input=1195m",
                 "press": "연합뉴스"
               },
               {
-                "url": "https://biz.heraldcorp.com/article/10936854?ref=naver",
-                "press": "헤럴드경제"
-              }
-            ],
-            "images": [
-              "https://img7.yna.co.kr/photo/ap/2026/11/14/PAP20261114070201009_P4.jpg"
-            ],
-            "press": [
-              "연합뉴스",
-              "헤럴드경제"
-            ],
-            "headlines": [
-              "美미시시피강서 유람선-화물선 충돌…\"180명 전원 생존\"(종합)",
-              "“살기 위해 난간 기어 넘었다”…美, 미시시피강 서 유람선 ·화물선 충..."
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-14T01:09:18.568Z"
-          }
-        },
-        {
-          "id": "naver-8",
-          "rank": 8,
-          "keyword": "오워노 12경기 출전 정지",
-          "title": "오워노 12경기 출전 정지",
-          "rawKeyword": "오워노 12경기 출전 정지",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 93,
-          "source": "naver",
-          "expansions": [
-            "오워노 골키퍼",
-            "헤수스 오워노",
-            "골키퍼 오워노",
-            "해수스 오워노",
-            "오워노 나무위키",
-            "오워노와",
-            "축구선수 오워노",
-            "안도라 오워노"
-          ],
-          "expansionSeed": "오워노",
-          "insight": {
-            "titles": {
-              "seo": "오워노 12경기 출전 정지 최신 이슈와 핵심 내용 정리",
-              "home": "오워노 12경기 출전 정지, 충돌로 공격수 숨지게 한 스페인 프로축구 GK, 12경기 출전정지 관련 확인할 점",
-              "topic": "오워노 12경기 출전 정지",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "AFP 통신은 스페인축구협회(RFEF) 상벌위원회가 2부 리그 안도라 소속의 골키퍼 헤수스 오워노 (적도기니)에게 12경기 출전 정지 징계를 내렸다고 14일 보도했다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "이 매체는 징계 여부는 경기 상황과 여러 정황을 종합적으로 고려해 결정되겠지만, 오워노 가 가장 높은 수준의 징계를 받을 것으로 예상했다. 4 경기 에서 12경기 까지 출전 정지 처분을 내릴 수 있다고 보도했다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.yna.co.kr/view/AKR20261114021200007?input=1195m",
-                "press": "연합뉴스"
-              },
-              {
-                "url": "https://www.hani.co.kr/arti/international/international_general/1285978.html",
+                "url": "https://www.hani.co.kr/arti/international/america/1287306.html",
                 "press": "한겨레"
               }
             ],
             "images": [
-              "https://img9.yna.co.kr/photo/etc/af/2026/11/14/PAF20261114082001009_P4.jpg"
+              "https://img3.yna.co.kr/photo/ap/2026/11/14/PAP20261114091101009_P4.jpg"
             ],
             "press": [
               "연합뉴스",
               "한겨레"
             ],
             "headlines": [
-              "충돌로 공격수 숨지게 한 스페인 프로축구 GK, 12경기 출전정지",
-              "‘사망’ 공격수와 부딪힌 골키퍼 “내 인생 가장 힘든 나날”"
+              "美 미시시피강서 유람선-화물선 충돌…승객 129명 구조 진행",
+              "미국 미시시피강 서 선박 충돌 …승객 129명 태운 여객선 옆으로 누웠다"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-14T02:09:16.433Z"
+            "collectedAt": "2026-11-14T02:36:46.195Z"
           }
         },
         {
           "id": "naver-9",
           "rank": 9,
-          "keyword": "대탈출",
-          "title": "대탈출",
-          "rawKeyword": "대탈출",
+          "keyword": "고용노동부",
+          "title": "고용노동부",
+          "rawKeyword": "고용노동부",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 92,
           "source": "naver",
           "expansions": [
-            "대탈출 도시괴담",
-            "대탈출 시즌6",
-            "대탈출 시즌5",
-            "대탈출 더스토리",
-            "대탈출 더스토리2",
-            "대탈출1",
-            "대탈출 강호동",
-            "대탈출 시즌4"
+            "고용노동부 상담센터",
+            "고용노동부 전화번호",
+            "고용노동부 노동포털",
+            "고용노동부 신고",
+            "고용노동부 실업급여",
+            "고용노동부 HRD-Net",
+            "고용노동부 채용",
+            "고용노동부 장관"
           ],
-          "expansionSeed": "대탈출",
+          "expansionSeed": "고용노동부",
           "insight": {
             "titles": {
-              "seo": "대탈출 최신 이슈와 핵심 내용 정리",
-              "home": "대탈출, 고경표, 만취 운전 인정→사과...‘놀뭐’·‘보검매직컬2’·‘대탈출’ 날벼락 관련 확인할 점",
-              "topic": "대탈출",
+              "seo": "고용노동부 최신 이슈와 핵심 내용 정리",
+              "home": "고용노동부, 노사정, 초광역특구 '노동특례' 논의 물꼬…17일부터 본격화 관련 확인할 점",
+              "topic": "고용노동부",
               "topicGroup": "네이버 실시간 검색어"
             },
             "facts": [
               {
-                "text": "고경표가 14일 새벽 서울 마포구 동교동에서 음주운전으로 청소차 충돌 사고를 냈다. 혈중알코올농도는 면허취소 수준으로 확인됐다.",
+                "text": "고용노동부 는 이날 노사와 관계부처가 모두 참여하는 '초광역특구법 원포인트 사회적 대화' 제8차 실무협의체에서 이같은 내용이 오갔다고 밝혔다.",
                 "sourceIndex": 0
               },
               {
-                "text": "이에 ‘놀면 뭐하니?’, ‘보검 매직컬2’, ‘ 대탈출 ’ 등 출연작과 예정된 일정에도 줄줄이 비상이 걸렸다. 여기에 티빙 ‘ 대탈출 : 도시괴담’ 출연과 오는 21일 서울 성암아트홀에서 열리는 팬미팅까지 예정돼 있었다.",
+                "text": "권혜원 위원장을 비롯해 임은주 한국노총 정책1본부 총괄실장, 임영주 중소기업중앙회 인력정책실장, 하창용 고용노동부 청년고용정책관 등 노사정 및 공익위원들이 자리했다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.insight.co.kr/news/582048",
-                "press": "인사이트"
+                "url": "https://www.yna.co.kr/view/AKR20261113177600530?input=1195m",
+                "press": "연합뉴스"
               },
               {
-                "url": "https://www.mk.co.kr/article/12208809",
-                "press": "매일경제"
+                "url": "https://www.newsis.com/view/NISX20261113_0003867031",
+                "press": "뉴시스"
               }
             ],
             "images": [
-              "https://img.insight.co.kr/static/2026/11/14/1200/img_20261114101739_710fn8db.jpg"
+              "https://img5.yna.co.kr/photo/yna/YH/2026/11/05/PYH2026110516270001300_P4.jpg"
             ],
             "press": [
-              "인사이트",
-              "매일경제"
+              "연합뉴스",
+              "뉴시스"
             ],
             "headlines": [
-              "고경표, 만취 운전 인정→사과...‘놀뭐’·‘보검매직컬2’·‘대탈출’ 날벼락",
-              "고경표, 음주운전 사고에 ‘놀면 뭐하니?’·‘보검 매직컬2’·‘대탈..."
+              "노사정, 초광역특구 '노동특례' 논의 물꼬…17일부터 본격화",
+              "\"고졸이라 잡코리아 못 가\"…청년들 '알바몬' 전전하는 이유(종합)"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-14T02:09:16.433Z"
+            "collectedAt": "2026-11-14T02:36:46.195Z"
           }
         },
         {
           "id": "naver-10",
           "rank": 10,
-          "keyword": "이유진 차경은 결혼 임신",
-          "title": "이유진 차경은 결혼 임신",
-          "rawKeyword": "이유진 차경은 결혼 임신",
+          "keyword": "장동혁 암살 협박",
+          "title": "장동혁 암살 협박",
+          "rawKeyword": "장동혁 암살 협박",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 91,
           "source": "naver",
           "expansions": [
-            "이유진 차경은",
-            "이유진 배우",
-            "이유진 아빠",
-            "이유진 나무위키",
-            "장동윤 이유진",
-            "이유진 장동윤",
-            "배우 이유진",
-            "이유진 농구"
+            "장동혁임기",
+            "장동혁 녹취록",
+            "오세훈 장동혁",
+            "장동혁 욕",
+            "한동훈 장동혁",
+            "협박죄",
+            "협박죄 성립요건",
+            "협박 뜻"
           ],
-          "expansionSeed": "이유진",
+          "expansionSeed": "장동혁",
           "insight": {
             "titles": {
-              "seo": "이유진 차경은 결혼 임신 최신 이슈와 핵심 내용 정리",
-              "home": "이유진 차경은 결혼 임신, 이유진 ♥ 차경은 , 오늘 결혼 … 임신 겹경사 관련 확인할 점",
-              "topic": "이유진 차경은 결혼 임신",
+              "seo": "장동혁 암살 협박 최신 이슈와 핵심 내용 정리",
+              "home": "장동혁 암살 협박, \"장동혁 대표 암살하겠다\" 112에 문자 보낸 20대 입건 관련 확인할 점",
+              "topic": "장동혁 암살 협박",
               "topicGroup": "네이버 실시간 검색어"
             },
             "facts": [
               {
-                "text": "배우 이유진 (34)과 차경은 (본명 김경은·28)이 결혼 한다. 이유진 과 차경은 은 14일 서울 모처에서 결혼 식을 올린다.",
+                "text": "충남 태안경찰서는 국민의힘 장동혁 대표를 암살 하겠다는 협박 문자를 보낸 혐의( 협박 미수)로 20대 A씨를 입건해 조사 중이라고 14일 밝혔다. A씨는 전날 낮 12시 50분께 태안군 자신의 집에서 112에 \"국민의힘 장동혁 대표를 암살 하겠다\"는 내용의 문자메시지를 보낸 혐의를 받는다.",
                 "sourceIndex": 0
               },
               {
-                "text": "이유진 은 \"장동윤이 나의 형님이 되는 거다. 한편 이유진 , 차경은 은 결혼 소식과 함께 임신 사실을 전했다.",
+                "text": "▲ 충남 태안경찰서 국민의힘 장동혁 당대표를 암살 하겠다고 협박 한 남성이 경찰에 붙잡혔습니다. 충남 태안경찰서는 20대 남성 A 씨를 협박 미수 혐의로 검거했다고 오늘(13일) 밝혔습니다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.newsis.com/view/NISX20261114_0003867991",
-                "press": "뉴시스"
+                "url": "https://www.yna.co.kr/view/AKR20261114021800063?input=1195m",
+                "press": "연합뉴스"
               },
               {
-                "url": "http://enews.imbc.com/News/RetrieveNewsInfo/524364",
-                "press": "MBC연예"
+                "url": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008845478&plink=ORI&cooper=NAVER",
+                "press": "SBS"
               }
             ],
             "images": [
-              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F003%2F2026%2F11%2F14%2F14321888.jpg&type=fface200_200&expire=2&refresh=true"
+              "https://img4.yna.co.kr/photo/cms/2021/05/19/90/PCM20210519000090990_P4.jpg"
             ],
             "press": [
-              "뉴시스",
-              "MBC연예"
+              "연합뉴스",
+              "SBS"
             ],
             "headlines": [
-              "이유진 ♥ 차경은 , 오늘 결혼 … 임신 겹경사",
-              "이유진 , 동서가 장동윤…\"배우 집안 됐다\"(동상이몽2)"
+              "\"장동혁 대표 암살하겠다\" 112에 문자 보낸 20대 입건",
+              "[단독] \" 장동혁 암살 하겠다\" 협박 문자 보낸 20대 남성 현행범 체포"
             ],
-            "extraction": "search-card",
-            "collectedAt": "2026-11-14T02:09:16.433Z"
+            "extraction": "playwright",
+            "collectedAt": "2026-11-14T02:36:46.195Z"
           }
         }
       ]
@@ -633,196 +593,73 @@
         {
           "id": "daum-1",
           "rank": 1,
-          "keyword": "고경표 음주운전 사고",
-          "title": "고경표 음주운전 사고",
-          "rawKeyword": "고경표 음주운전 사고",
+          "keyword": "슬픈 열대",
+          "title": "슬픈 열대",
+          "rawKeyword": "슬픈 열대",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
           "priority": 100,
           "source": "daum",
           "expansions": [
-            "고경표 막국수",
-            "고경표 나무위키",
-            "고경표 류혜영",
-            "고경표 사랑했잖아",
-            "고경표 입금전",
-            "고경표 짤",
-            "고경표 노래",
-            "놀면뭐하니 고경표"
+            "슬픈 열대 영화",
+            "슬픈 열대 정보",
+            "영화 슬픈 열대",
+            "슬픈 열대 책",
+            "슬픈 열대 개봉일",
+            "슬픈 열대 ott",
+            "슬픈 열대 정보 출연진",
+            "슬픈 열대 포토"
           ],
-          "expansionSeed": "고경표",
+          "expansionSeed": "슬픈 열대",
           "insight": {
             "titles": {
-              "seo": "고경표 음주운전 사고 최신 이슈와 핵심 내용 정리",
-              "home": "고경표 음주운전 사고, [단독] 배우 고경표 음주사고…면허취소 만취상태 관련 확인할 점",
-              "topic": "고경표 음주운전 사고",
+              "seo": "슬픈 열대 최신 이슈와 핵심 내용 정리",
+              "home": "슬픈 열대, 403 Forbidden 관련 확인할 점",
+              "topic": "슬픈 열대",
               "topicGroup": "다음 실시간 검색어"
             },
             "facts": [
               {
-                "text": "배우 고경표씨가 만취 상태로 음주사고를 내 경찰 조사 중입니다. 경찰 등에 따르면 고씨는 오늘(14일) 오전 3시 반 쯤 서울 마포구 동교동에서 자신의 승용차를 운전하던 중 청소차를 들이받는 사고를 냈습니다.",
+                "text": "25일에는 박훈정 감독의 신작 ' 슬픈 열대 '가 관객을 만난다. '신세계', '마녀' 시리즈 등을 연출한 박훈정 감독의 액션 누아르로, 사부의 죽음 이후 그가 키워낸 킬러 조직 ' 슬픈 열대 '에서 형제처럼 자란 조직원들이 서로를 의심하며 복수를 다짐하는 이야기를 그린다.",
                 "sourceIndex": 0
               },
               {
-                "text": "14일 연합뉴스 보도에 따르면 고경표 는 이날 오전 3시 반쯤 서울 마포구 동교동에서 자신의 승용차를 운전 하던 중 청소차를 들이받는 사고 를 냈다. 음주 측정 결과 고경표 의 혈중알코올농도는 면허 취소 수치가 나왔다.",
+                "text": "박훈정 감독의 신작 < 슬픈 열대 >가 비정한 정글과 차가운 도시의 공간을 감각적으로 담아낸 미장센 스틸을 공개했다. 는 사부의 죽음 이후, 그가 키워낸 킬러 조직 ‘ 슬픈 열대 ’에서 형제처럼 자란 조직원들이 서로를 향한 의심 속에 피의 복수를 다짐하며 벌어지는 이야기.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "http://www.yonhapnewstv.co.kr/news/AKR20261114090256cw8",
-                "press": "연합뉴스TV"
+                "url": "https://www.spotvnews.co.kr/news/articleView.html?idxno=1019653",
+                "press": "스포티비뉴스"
               },
               {
-                "url": "https://www.starnewskorea.com/star/2026/11/14/2026111409234731782",
-                "press": "스타뉴스"
+                "url": "https://kstar.kbs.co.kr/list_view.html?idx=414328",
+                "press": "KBS 연예"
               }
             ],
             "images": [
-              "https://media.yonhapnewstv.co.kr/article/AKR/20261114/AKR20261114090256cw8_01_i.jpg"
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F477%2F2026%2F11%2F14%2F639020.jpg&type=fface200_200&expire=2&refresh=true"
             ],
             "press": [
-              "연합뉴스TV",
-              "스타뉴스"
+              "스포티비뉴스",
+              "KBS 연예"
             ],
             "headlines": [
-              "[단독] 배우 고경표 음주사고…면허취소 만취상태",
-              "[속보] '보검매직컬2' 고경표 , 음주운전"
+              "403 Forbidden",
+              "스타일리시한 복수극, 박훈정 감독 ' 슬픈 열대 '"
             ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-14T01:09:18.568Z"
+            "extraction": "search-card",
+            "collectedAt": "2026-11-14T02:36:46.195Z"
           }
         },
         {
           "id": "daum-2",
           "rank": 2,
-          "keyword": "세르비아",
-          "title": "세르비아",
-          "rawKeyword": "세르비아",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 99,
-          "source": "daum",
-          "expansions": [
-            "세르비아 위치",
-            "세르비아 수도",
-            "세르비아 여행",
-            "세르비아 독일",
-            "세르비안필름",
-            "세르비아어",
-            "세르비아 시간",
-            "세르비아 국기"
-          ],
-          "expansionSeed": "세르비아",
-          "insight": {
-            "titles": {
-              "seo": "세르비아 최신 이슈와 핵심 내용 정리",
-              "home": "세르비아, 클롭의 독일, 세르비아 3-1 제압…사비의 네덜란드는 7-0 대승 관련 확인할 점",
-              "topic": "세르비아",
-              "topicGroup": "다음 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "(서울=연합뉴스) 안홍석 기자 = 독일이 세르비아를 꺾고 유럽축구연맹(UEFA) 네이션스리그(UNL) 8강 진출 희망을 이어갔다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "낯익으면서 낯선 풍경의 나라, 세르비아 오늘(14일) 오전 09:40방송 KBS '걸어서 세계 속으로'에서는 957회 '발칸의 숨겨진 보석, 세르비아 ' 편이 방송된다. 이번 <걸어서 세계속으로〉에서는 유럽 남동부, 발칸반도의 중심에 있는 나라 세르비아 로 떠난다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.yna.co.kr/view/AKR20261114016200007?input=1195m",
-                "press": "연합뉴스"
-              },
-              {
-                "url": "http://www.queen.co.kr/news/articleView.html?idxno=466241",
-                "press": "Queen 이코노미퀸"
-              }
-            ],
-            "images": [
-              "https://img7.yna.co.kr/photo/ap/2026/11/14/PAP20261114083401009_P4.jpg"
-            ],
-            "press": [
-              "연합뉴스",
-              "Queen 이코노미퀸"
-            ],
-            "headlines": [
-              "클롭의 독일, 세르비아 3-1 제압…사비의 네덜란드는 7-0 대승",
-              "[걸어서 세계 속으로] 낯익으면서 낯선 풍경의 나라, 세르비아"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-14T01:09:18.568Z"
-          }
-        },
-        {
-          "id": "daum-3",
-          "rank": 3,
-          "keyword": "핑계고",
-          "title": "핑계고",
-          "rawKeyword": "핑계고",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 98,
-          "source": "daum",
-          "expansions": [
-            "핑계고 시상식",
-            "핑계고 갤러리",
-            "핑계고 송혜교",
-            "핑계고 나무위키",
-            "야구는 핑계고",
-            "서면 철판은 핑계고",
-            "송혜교 핑계고",
-            "핑계고 대상"
-          ],
-          "expansionSeed": "핑계고",
-          "insight": {
-            "titles": {
-              "seo": "핑계고 최신 이슈와 핵심 내용 정리",
-              "home": "핑계고, 유재석, 송혜교와 오랜 인연 \"시원시원한 매력 가져\"(핑계고) 관련 확인할 점",
-              "topic": "핑계고",
-              "topicGroup": "다음 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "배우 송혜교와 공유가 유재석의 유튜브 콘텐츠 '핑계고'에 동반 출연한다. 두 사람의 만남이 예고되면서 공개 전부터 뜨거운 관심이 쏠리고 있다. 13일 유튜브 채널 '뜬뜬' 측은 \"'유선배 복지 콘텐츠' 핑계고\"라는 제목으로 새로운 영상의 썸네일을 공개했다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "이날 영상에서 배우 공유는 송혜교와 자신의 MBTI가 같다며 성격에 관한 이야기를 나눴다. 공유는 송혜교에게 \"너는 네 자신을 안 좋아하지 않느냐.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.sportschosun.com/entertainment/2026-11-13/202611130100093230008762",
-                "press": "스포츠조선"
-              },
-              {
-                "url": "https://www.sportschosun.com/entertainment/2026-11-14/202611140100094300008856",
-                "press": "스포츠조선"
-              }
-            ],
-            "images": [
-              "https://www.sportschosun.com/article/html/2026/11/13/2026111301000932300087621_w.jpg"
-            ],
-            "press": [
-              "스포츠조선"
-            ],
-            "headlines": [
-              "유재석, 송혜교와 오랜 인연 \"시원시원한 매력 가져\"(핑계고)",
-              "송혜교 실제 성격, 남모를 속앓이...\"술 마시고 솔직해졌다가 이불킥\""
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-14T02:09:16.433Z"
-          }
-        },
-        {
-          "id": "daum-4",
-          "rank": 4,
           "keyword": "구성환 고교 4대 천왕",
           "title": "구성환 고교 4대 천왕",
           "rawKeyword": "구성환 고교 4대 천왕",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 97,
+          "priority": 99,
           "source": "daum",
           "expansions": [
             "구성환 돈까스",
@@ -875,6 +712,130 @@
             ],
             "extraction": "playwright",
             "collectedAt": "2026-11-14T02:09:16.433Z"
+          }
+        },
+        {
+          "id": "daum-3",
+          "rank": 3,
+          "keyword": "보스의 노골적 취향",
+          "title": "보스의 노골적 취향",
+          "rawKeyword": "보스의 노골적 취향",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 98,
+          "source": "daum",
+          "expansions": [
+            "보스의 노골적 취향 재방송",
+            "보스의 노골적 취향 등장인물",
+            "보스의 노골적 취향 나무위키",
+            "보스의 노골적 취향 원작",
+            "보스의 노골적 취향ott",
+            "보스의 노골적 취향 몇부작",
+            "보스의 노골적 취향 시청률",
+            "보스의 노골적 취향 편성표"
+          ],
+          "expansionSeed": "보스의 노골적 취향",
+          "insight": {
+            "titles": {
+              "seo": "보스의 노골적 취향 최신 이슈와 핵심 내용 정리",
+              "home": "보스의 노골적 취향, &lsquo;보스의 노골적 취향&rsquo; 일본 OTT 1위 관련 확인할 점",
+              "topic": "보스의 노골적 취향",
+              "topicGroup": "다음 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "TV ‘보스의 노골적 취향’ 일본 OTT 1위 서정민 기자 2026-11-14 08:37:33 MBN 수목드라마 ‘보스의 노골적 취향’이 첫 방송 이후 국내외 온라인동영상서비스(OTT)에서 순위권에 올랐다. 일본 레미노 한류·아시아 부문 1위를 기록한 데 이어 국내 웨이브와 넷플릭스에서도 각각 3위와 9위에 진입했다.지난 11일 첫 방송된 MBN ‘보스의 노골적 취향’은 성훈, 오세영, 이정신이 출연하는 로맨틱 코미디 드라마다. 방송 초반부터 국내외 OTT 플랫폼에서 성과를 내며 해외 시장으로 시청층을 넓히고 있다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "MBN 수목드라마 ' 보스의 노골적 취향 ' 2회에서 성훈과 오세영이 차 안에서 몸을 숨기다 눈을 맞추는 장면이 그려지며 설렘을 더했다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.bntnews.co.kr/article/view/bnt202611140057",
+                "press": "bnt뉴스"
+              },
+              {
+                "url": "https://www.topstarnews.net/news/articleView.html?idxno=16275398",
+                "press": "톱스타뉴스"
+              }
+            ],
+            "images": [
+              "https://www.bntnews.co.kr/data/bnt/image/2026/11/14/bnt202611140102.jpg"
+            ],
+            "press": [
+              "bnt뉴스",
+              "톱스타뉴스"
+            ],
+            "headlines": [
+              "&lsquo;보스의 노골적 취향&rsquo; 일본 OTT 1위",
+              "보스의 노골적 취향 성훈·오세영, 차 안 눈맞춤으로 설렘 고조"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-14T02:09:16.433Z"
+          }
+        },
+        {
+          "id": "daum-4",
+          "rank": 4,
+          "keyword": "미국 전역 항공기 이륙 중단",
+          "title": "미국 전역 항공기 이륙 중단",
+          "rawKeyword": "미국 전역 항공기 이륙 중단",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 97,
+          "source": "daum",
+          "expansions": [
+            "미국 환율",
+            "미국증시",
+            "미국시간",
+            "미국 중간선거",
+            "미국 이란 전쟁",
+            "미국구글",
+            "미국 이란",
+            "미국 금리"
+          ],
+          "expansionSeed": "미국",
+          "insight": {
+            "titles": {
+              "seo": "미국 전역 항공기 이륙 중단 최신 이슈와 핵심 내용 정리",
+              "home": "미국 전역 항공기 이륙 중단, 미국 전역 이륙 중단에 인천 출발 일부 항공편 결항 관련 확인할 점",
+              "topic": "미국 전역 항공기 이륙 중단",
+              "topicGroup": "다음 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "미국 항공교통관제센터의 통신장애로 미국 전역 공항에서 항공기 이륙 이 중단 되면서 대한항공과 아시아나항공 일부 미국 노선 항공편이 결항됐다. 14일 항공업계에 따르면 대한항공은 이날 인천∼애틀랜타 노선(KE033·KE034편)을 결항 조치했다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "FAA가 미국 전역 에서 항공편 이륙 중단 을 시행한 것은 2023년 1월 11일에도 있었다. 당시 계약업체 직원들이 조종사들과의 통신에 사용되는 경보 시스템 파일들을 실수로 삭제하면서 수천 편의 항공기 이착륙이 지연됐다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.yna.co.kr/view/AKR20261114026300003?input=1195m",
+                "press": "연합뉴스"
+              },
+              {
+                "url": "https://www.busan.com/view/busan/view.php?code=2026111408532460355",
+                "press": "부산일보"
+              }
+            ],
+            "images": [
+              "https://img8.yna.co.kr/photo/etc/epa/2026/11/14/PEP20261114106701009_P4.jpg"
+            ],
+            "press": [
+              "연합뉴스",
+              "부산일보"
+            ],
+            "headlines": [
+              "미국 전역 이륙 중단에 인천 출발 일부 항공편 결항",
+              "미국 전역 항공기 운항 전면 중단 …3만대 이륙 못해"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-14T02:36:46.195Z"
           }
         },
         {
@@ -942,11 +903,135 @@
         {
           "id": "daum-6",
           "rank": 6,
+          "keyword": "군산 불꽃축제",
+          "title": "군산 불꽃축제",
+          "rawKeyword": "군산 불꽃축제",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 95,
+          "source": "daum",
+          "expansions": [
+            "군산 불꽃축제 비",
+            "군산 불꽃축제 명당",
+            "군산 불꽃축제 위치",
+            "군산 불꽃축제 우천시",
+            "군산 불꽃축제 2026",
+            "군산 불꽃축제 주차",
+            "군산 불꽃축제 숙소",
+            "군산 불꽃축제 우천"
+          ],
+          "expansionSeed": "군산 불꽃축제",
+          "insight": {
+            "titles": {
+              "seo": "군산 불꽃축제 최신 이슈와 핵심 내용 정리",
+              "home": "군산 불꽃축제, \"철새도래지서 폭죽이라니\"…군산 불꽃축제에 환경단체 반발 관련 확인할 점",
+              "topic": "군산 불꽃축제",
+              "topicGroup": "다음 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "또 불꽃축제 비용 5억5천만원을 전액 부담하는 군산 CC 운영사인 군산 레져산업㈜에 대해서도 비판했다. 단체는 \"이 기업은 지난해 멸종위기 야생생물 1급인 수달이 서식하는 기업 소유 습지에 아파트 공사장의 잉여 토사를 반입해 불법 매립하다",
+                "sourceIndex": 0
+              },
+              {
+                "text": "그런데 전라북도 군산 시가 대규모 불꽃축제 를 열기로 해 논란입니다. ▶ 스탠딩 : 강세훈 / 기자 - \" 군산 시는 금강하구 바로 앞 광장에 1만 2천 석 규모의 관람석을 설치하고 내일 저녁 불꽃축제 를 개최할 예정입니다.\" 축제 비용은 5억 5천만 원.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.yna.co.kr/view/AKR20261113070300055?input=1195m",
+                "press": "연합뉴스"
+              },
+              {
+                "url": "http://www.mbn.co.kr/pages/news/newsView.php?news_seq_no=5230781",
+                "press": "MBN"
+              }
+            ],
+            "images": [
+              "https://img8.yna.co.kr/photo/cms/2022/09/16/64/PCM20220916000064062_P4.jpg"
+            ],
+            "press": [
+              "연합뉴스",
+              "MBN"
+            ],
+            "headlines": [
+              "\"철새도래지서 폭죽이라니\"…군산 불꽃축제에 환경단체 반발",
+              "\"멸종위기종도 있는데\"…철새도래지서 불꽃축제 논란"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-14T02:36:46.195Z"
+          }
+        },
+        {
+          "id": "daum-7",
+          "rank": 7,
+          "keyword": "고경표 음주운전 사고",
+          "title": "고경표 음주운전 사고",
+          "rawKeyword": "고경표 음주운전 사고",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 94,
+          "source": "daum",
+          "expansions": [
+            "고경표 막국수",
+            "고경표 나무위키",
+            "고경표 류혜영",
+            "고경표 사랑했잖아",
+            "고경표 입금전",
+            "고경표 짤",
+            "고경표 노래",
+            "놀면뭐하니 고경표"
+          ],
+          "expansionSeed": "고경표",
+          "insight": {
+            "titles": {
+              "seo": "고경표 음주운전 사고 최신 이슈와 핵심 내용 정리",
+              "home": "고경표 음주운전 사고, [단독] ’음주사고’ 배우 고경표, 혈중알코올농도는 0.150%…면허 취소 수준 관련 확인할 점",
+              "topic": "고경표 음주운전 사고",
+              "topicGroup": "다음 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "음주 사고를 낸 배우 고경표 씨의 사고 당시 혈중알코올농도는 0.150%의 만취 상태로 확인됐습니다. 서울 마포경찰서 등에 따르면 고씨는 오늘(14일) 오전 3시 반 쯤 서울 마포구 동교동에서 자신의 승용차를 운전하던 중 청소차를 들이받는 사고를 냈습니다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "사고 가 알려진 뒤 고씨의 소속사 씨엘엔컴퍼니는 공식 입장을 내고 \" 고경표 배우의 음주운전 사고 로 피해를 입으신 분들께 깊이 사과드린다\"며 \"믿고 응원해 주신 모든 분께도 실망과 심려를 끼쳐드려 진심으로 사과드린다\"고 밝혔다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "http://www.yonhapnewstv.co.kr/news/AKR20261114103004izv",
+                "press": "연합뉴스TV"
+              },
+              {
+                "url": "https://www.yna.co.kr/view/AKR20261114025051004?input=1195m",
+                "press": "연합뉴스"
+              }
+            ],
+            "images": [
+              "https://media.yonhapnewstv.co.kr/article/AKR/20261114/AKR20261114103004izv_01_i.jpg"
+            ],
+            "press": [
+              "연합뉴스TV",
+              "연합뉴스"
+            ],
+            "headlines": [
+              "[단독] ’음주사고’ 배우 고경표, 혈중알코올농도는 0.150%…면허 취소 수준",
+              "배우 고경표 음주운전 중 청소차 들이받아…\"깊이 반성\"(종합)"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-14T02:36:46.195Z"
+          }
+        },
+        {
+          "id": "daum-8",
+          "rank": 8,
           "keyword": "한국 축구 패배",
           "title": "한국 축구 패배",
           "rawKeyword": "한국 축구 패배",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 95,
+          "priority": 93,
           "source": "daum",
           "expansions": [
             "한국 축구 일정",
@@ -962,177 +1047,115 @@
           "insight": {
             "titles": {
               "seo": "한국 축구 패배 최신 이슈와 핵심 내용 정리",
-              "home": "한국 축구 패배, 403 Forbidden 관련 확인할 점",
+              "home": "한국 축구 패배, 손흥민 \"선수들에게 많이 미안\"…21년 만에 사우디에 '패배' 관련 확인할 점",
               "topic": "한국 축구 패배",
               "topicGroup": "다음 실시간 검색어"
             },
             "facts": [
               {
-                "text": "모레노호 태극전사들이 반목을 뒤로하고 나선 중동 원정 2연전의 첫 경기에서 사우디아라비아에 42년 만의 3실점 패배 를 당했다. 로베르트 모레노 감독이 지휘하는 한국 축구 대표팀은 14일 카타르 도하의 자심 빈 하마드 스타디움에서 열린 사우디아라비아와 평가전에서 2-3으로 졌다.",
+                "text": "21년 만에 한국 축구 대표팀이 11월 A매치 첫 경기에서 사우디아라비아에 패배 했다. 지난 13일( 한국 시각) 한국 은 카타르 도하의 자심 빈 하마드 스타디움에서 사우디아라비아에 2대3으로 패배 했다.",
                 "sourceIndex": 0
               },
               {
-                "text": "21년 만에 한국 축구 대표팀이 11월 A매치 첫 경기에서 사우디아라비아에 패배 했다. 지난 13일( 한국 시각) 한국 은 카타르 도하의 자심 빈 하마드 스타디움에서 사우디아라비아에 2대3으로 패배 했다.",
+                "text": "모레노호 태극전사들이 반목을 뒤로하고 나선 중동 원정 2연전의 첫 경기에서 사우디아라비아에 42년 만의 3실점 패배 를 당했다. 로베르트 모레노 감독이 지휘하는 한국 축구 대표팀은 14일 카타르 도하의 자심 빈 하마드 스타디움에서 열린 사우디아라비아와 평가전에서 2-3으로 졌다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
-              {
-                "url": "https://www.khan.co.kr/article/202611140155001",
-                "press": "경향신문"
-              },
               {
                 "url": "https://www.hankyung.com/article/2026111461837",
                 "press": "한국경제"
+              },
+              {
+                "url": "https://www.khan.co.kr/article/202611140155001",
+                "press": "경향신문"
               }
             ],
             "images": [
-              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F032%2F2026%2F11%2F14%2F3482596.jpg&type=fface200_200&expire=2&refresh=true"
-            ],
-            "press": [
-              "경향신문",
-              "한국경제"
-            ],
-            "headlines": [
-              "403 Forbidden",
-              "손흥민 \"선수들에게 많이 미안\"…21년 만에 사우디에 ' 패배 '"
-            ],
-            "extraction": "search-card",
-            "collectedAt": "2026-11-14T02:09:16.433Z"
-          }
-        },
-        {
-          "id": "daum-7",
-          "rank": 7,
-          "keyword": "아웃룩",
-          "title": "아웃룩",
-          "rawKeyword": "아웃룩",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 94,
-          "source": "daum",
-          "expansions": [
-            "아웃룩 메일",
-            "아웃룩 장애",
-            "아웃룩 오류",
-            "아웃룩 복구",
-            "ms 아웃룩",
-            "아웃룩 먹통",
-            "아웃룩 메일 회수",
-            "아웃룩 로그인"
-          ],
-          "expansionSeed": "아웃룩",
-          "insight": {
-            "titles": {
-              "seo": "아웃룩 최신 이슈와 핵심 내용 정리",
-              "home": "아웃룩, Attention Required! 관련 확인할 점",
-              "topic": "아웃룩",
-              "topicGroup": "다음 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "마이크로소프트(MS)의 업무용 서비스인 MS365와 아웃룩 , 팀즈에서 대규모 접속 장애가 발생했다. 아웃룩 과 팀즈, 인공지능(AI) 업무 도구 코파일럿뿐 아니라 문서 공유·협업과 데이터 분석 도구 등도 장애 대상으로 안내했다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "BBC 등에 따르면, 이번 접속 장애는 마이크로소프트의 이메일 서비스인 아웃룩 (Outlook)에 집중됐지만 팀스(Teams)와 AI 소프트웨어인 코파일럿(Copilot) 등 다른 서비스도 영향을 받았다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.hankyung.com/article/2026111358751",
-                "press": "한국경제"
-              },
-              {
-                "url": "https://www.news1.kr/world/usa-canada/6352656",
-                "press": "뉴스1"
-              }
-            ],
-            "images": [
-              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F015%2F2026%2F11%2F13%2F5353714.jpg&type=fface200_200&expire=2&refresh=true"
+              "https://img.hankyung.com/photo/202611/ZA.46419025.1.jpg"
             ],
             "press": [
               "한국경제",
-              "뉴스1"
+              "경향신문"
             ],
             "headlines": [
-              "Attention Required!",
-              "마이크로소프트 서비스 대규모 장애… 아웃룩 ·팀스 등 접속 차질"
-            ],
-            "extraction": "search-card",
-            "collectedAt": "2026-11-14T02:09:16.433Z"
-          }
-        },
-        {
-          "id": "daum-8",
-          "rank": 8,
-          "keyword": "대탈출",
-          "title": "대탈출",
-          "rawKeyword": "대탈출",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 93,
-          "source": "daum",
-          "expansions": [
-            "대탈출 도시괴담",
-            "대탈출 시즌6",
-            "대탈출 시즌5",
-            "대탈출 더스토리",
-            "대탈출 더스토리2",
-            "대탈출1",
-            "대탈출 강호동",
-            "대탈출 시즌4"
-          ],
-          "expansionSeed": "대탈출",
-          "insight": {
-            "titles": {
-              "seo": "대탈출 최신 이슈와 핵심 내용 정리",
-              "home": "대탈출, 고경표, 만취 운전 인정→사과...‘놀뭐’·‘보검매직컬2’·‘대탈출’ 날벼락 관련 확인할 점",
-              "topic": "대탈출",
-              "topicGroup": "다음 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "고경표가 14일 새벽 서울 마포구 동교동에서 음주운전으로 청소차 충돌 사고를 냈다. 혈중알코올농도는 면허취소 수준으로 확인됐다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "이에 ‘놀면 뭐하니?’, ‘보검 매직컬2’, ‘ 대탈출 ’ 등 출연작과 예정된 일정에도 줄줄이 비상이 걸렸다. 여기에 티빙 ‘ 대탈출 : 도시괴담’ 출연과 오는 21일 서울 성암아트홀에서 열리는 팬미팅까지 예정돼 있었다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.insight.co.kr/news/582048",
-                "press": "인사이트"
-              },
-              {
-                "url": "https://www.mk.co.kr/article/12208809",
-                "press": "매일경제"
-              }
-            ],
-            "images": [
-              "https://img.insight.co.kr/static/2026/11/14/1200/img_20261114101739_710fn8db.jpg"
-            ],
-            "press": [
-              "인사이트",
-              "매일경제"
-            ],
-            "headlines": [
-              "고경표, 만취 운전 인정→사과...‘놀뭐’·‘보검매직컬2’·‘대탈출’ 날벼락",
-              "고경표, 음주운전 사고에 ‘놀면 뭐하니?’·‘보검 매직컬2’·‘대탈..."
+              "손흥민 \"선수들에게 많이 미안\"…21년 만에 사우디에 '패배'",
+              "입장문에서 약속한 축구 는 없었다…모레노호, 사우디에 42년 만의 3실점..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-14T02:09:16.433Z"
+            "collectedAt": "2026-11-14T02:36:46.195Z"
           }
         },
         {
           "id": "daum-9",
           "rank": 9,
+          "keyword": "전지적 집착 시점",
+          "title": "전지적 집착 시점",
+          "rawKeyword": "전지적 집착 시점",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 92,
+          "source": "daum",
+          "expansions": [
+            "전지적 집착 시점 ott",
+            "전지적 집착 시점 김재서",
+            "전지적 집착 시점 나무위키",
+            "전지적 집착 시점 시청률",
+            "전지적 집착 시점 재방송",
+            "전지적 집착 시점 뜻",
+            "전지적 집착 시점 편성표",
+            "전지적 집착 시점 개발자"
+          ],
+          "expansionSeed": "전지적 집착 시점",
+          "insight": {
+            "titles": {
+              "seo": "전지적 집착 시점 최신 이슈와 핵심 내용 정리",
+              "home": "전지적 집착 시점, 전지적집착시점, 종이비행기 국가대표 3인방 관련 확인할 점",
+              "topic": "전지적 집착 시점",
+              "topicGroup": "다음 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "TV 전지적집착시점, 종이비행기 국가대표 3인방 서정민 기자 2026-11-14 09:09:15 ‘전지적 집착 시점’‘전지적 집착 시점’에 종이비행기 국가대표 이정욱, 김영준, 이승훈이 출연한다. 기네스 세계기록 보유자부터 세계대회 챔피언까지, 종이비행기를 직업으로 삼은 세 사람의 일상과 특별한 비행 기술이 공개된다. 자세히 알아보기뷰티 제품패션 아이템스타 스타일 자세히 알아보기셀럽 인터뷰부업 정보 찾기심리 테스트 하기 오는 15일 방송되는 MBC 예능 ‘전지적 집착 시점’ 2회에서는 11년째 종이비행기와 함께해 온 국가대표 3인방의 이야기가 그려진다.이정욱은 종이비행기 기네스 세계기록 보유자로, 김영준은 종이비행기를 70m 이상 날릴 수 있는 멀리 날리기 국가대표로 활동하고 있다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "MBC 예능 ' 전지적 집착 시점 '에 지금까지 먹은 라멘만 3,500그릇에 달한다는 웅성이 출연해 라멘에 집착한 일상을 공개한다. 라멘집 오픈런부터 라멘 관련 소품으로 가득한 집까지, 일상 전반을 지배하는 그의 라멘 사랑이 방송을 통해 드러난다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.bntnews.co.kr/article/view/bnt202611140078",
+                "press": "bnt뉴스"
+              },
+              {
+                "url": "https://www.topstarnews.net/news/articleView.html?idxno=16275499",
+                "press": "톱스타뉴스"
+              }
+            ],
+            "images": [
+              "https://www.bntnews.co.kr/data/bnt/image/2026/11/14/bnt202611140131.jpg"
+            ],
+            "press": [
+              "bnt뉴스",
+              "톱스타뉴스"
+            ],
+            "headlines": [
+              "전지적집착시점, 종이비행기 국가대표 3인방",
+              "MBC ' 전지적 집착 시점 ' 웅성, 라멘 3,500그릇 '라멘 괴인' 일상 공개"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-14T02:36:46.195Z"
+          }
+        },
+        {
+          "id": "daum-10",
+          "rank": 10,
           "keyword": "문무 드라마",
           "title": "문무",
           "rawKeyword": "문무",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 92,
+          "priority": 91,
           "source": "daum",
           "expansions": [
             "문무 드라마",
@@ -1188,68 +1211,6 @@
             "extraction": "playwright",
             "collectedAt": "2026-11-14T02:09:16.433Z"
           }
-        },
-        {
-          "id": "daum-10",
-          "rank": 10,
-          "keyword": "보스의 노골적 취향",
-          "title": "보스의 노골적 취향",
-          "rawKeyword": "보스의 노골적 취향",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 91,
-          "source": "daum",
-          "expansions": [
-            "보스의 노골적 취향 재방송",
-            "보스의 노골적 취향 등장인물",
-            "보스의 노골적 취향 나무위키",
-            "보스의 노골적 취향 원작",
-            "보스의 노골적 취향ott",
-            "보스의 노골적 취향 몇부작",
-            "보스의 노골적 취향 시청률",
-            "보스의 노골적 취향 편성표"
-          ],
-          "expansionSeed": "보스의 노골적 취향",
-          "insight": {
-            "titles": {
-              "seo": "보스의 노골적 취향 최신 이슈와 핵심 내용 정리",
-              "home": "보스의 노골적 취향, &lsquo;보스의 노골적 취향&rsquo; 일본 OTT 1위 관련 확인할 점",
-              "topic": "보스의 노골적 취향",
-              "topicGroup": "다음 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "TV ‘보스의 노골적 취향’ 일본 OTT 1위 서정민 기자 2026-11-14 08:37:33 MBN 수목드라마 ‘보스의 노골적 취향’이 첫 방송 이후 국내외 온라인동영상서비스(OTT)에서 순위권에 올랐다. 일본 레미노 한류·아시아 부문 1위를 기록한 데 이어 국내 웨이브와 넷플릭스에서도 각각 3위와 9위에 진입했다.지난 11일 첫 방송된 MBN ‘보스의 노골적 취향’은 성훈, 오세영, 이정신이 출연하는 로맨틱 코미디 드라마다. 방송 초반부터 국내외 OTT 플랫폼에서 성과를 내며 해외 시장으로 시청층을 넓히고 있다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "MBN 수목드라마 ' 보스의 노골적 취향 ' 2회에서 성훈과 오세영이 차 안에서 몸을 숨기다 눈을 맞추는 장면이 그려지며 설렘을 더했다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.bntnews.co.kr/article/view/bnt202611140057",
-                "press": "bnt뉴스"
-              },
-              {
-                "url": "https://www.topstarnews.net/news/articleView.html?idxno=16275398",
-                "press": "톱스타뉴스"
-              }
-            ],
-            "images": [
-              "https://www.bntnews.co.kr/data/bnt/image/2026/11/14/bnt202611140102.jpg"
-            ],
-            "press": [
-              "bnt뉴스",
-              "톱스타뉴스"
-            ],
-            "headlines": [
-              "&lsquo;보스의 노골적 취향&rsquo; 일본 OTT 1위",
-              "보스의 노골적 취향 성훈·오세영, 차 안 눈맞춤으로 설렘 고조"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-14T02:09:16.433Z"
-          }
         }
       ]
     },
@@ -1260,310 +1221,305 @@
         {
           "id": "nate-1",
           "rank": 1,
-          "keyword": "세르비아",
-          "title": "세르비아",
-          "rawKeyword": "세르비아",
+          "keyword": "고경표",
+          "title": "고경표",
+          "rawKeyword": "고경표",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 100,
           "source": "nate",
           "expansions": [
-            "세르비아 위치",
-            "세르비아 수도",
-            "세르비아 여행",
-            "세르비아 독일",
-            "세르비안필름",
-            "세르비아어",
-            "세르비아 시간",
-            "세르비아 국기"
+            "고경표 막국수",
+            "고경표 나무위키",
+            "고경표 류혜영",
+            "고경표 사랑했잖아",
+            "고경표 입금전",
+            "고경표 짤",
+            "고경표 노래",
+            "놀면뭐하니 고경표"
           ],
-          "expansionSeed": "세르비아",
+          "expansionSeed": "고경표",
           "insight": {
             "titles": {
-              "seo": "세르비아 최신 이슈와 핵심 내용 정리",
-              "home": "세르비아, 클롭의 독일, 세르비아 3-1 제압…사비의 네덜란드는 7-0 대승 관련 확인할 점",
-              "topic": "세르비아",
-              "topicGroup": "다음 실시간 검색어"
+              "seo": "고경표 최신 이슈와 핵심 내용 정리",
+              "home": "고경표, [단독] 배우 고경표 음주사고…면허취소 만취상태 관련 확인할 점",
+              "topic": "고경표",
+              "topicGroup": "네이트 실시간 검색어"
             },
             "facts": [
               {
-                "text": "(서울=연합뉴스) 안홍석 기자 = 독일이 세르비아를 꺾고 유럽축구연맹(UEFA) 네이션스리그(UNL) 8강 진출 희망을 이어갔다.",
+                "text": "배우 고경표씨가 만취 상태로 음주사고를 내 경찰 조사 중입니다. 경찰 등에 따르면 고씨는 오늘(14일) 오전 3시 반 쯤 서울 마포구 동교동에서 자신의 승용차를 운전하던 중 청소차를 들이받는 사고를 냈습니다.",
                 "sourceIndex": 0
               },
               {
-                "text": "낯익으면서 낯선 풍경의 나라, 세르비아 오늘(14일) 오전 09:40방송 KBS '걸어서 세계 속으로'에서는 957회 '발칸의 숨겨진 보석, 세르비아 ' 편이 방송된다. 이번 <걸어서 세계속으로〉에서는 유럽 남동부, 발칸반도의 중심에 있는 나라 세르비아 로 떠난다.",
+                "text": "면허취소 수준…\"향후 내려지는 처분 겸허히 받아들일 것\" 정지수 고가혜 기자 = 배우 고경표 씨가 술을 마신 채 운전하다",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.yna.co.kr/view/AKR20261114016200007?input=1195m",
-                "press": "연합뉴스"
+                "url": "http://www.yonhapnewstv.co.kr/news/AKR20261114090256cw8",
+                "press": "연합뉴스TV"
               },
               {
-                "url": "http://www.queen.co.kr/news/articleView.html?idxno=466241",
-                "press": "Queen 이코노미퀸"
+                "url": "https://www.yna.co.kr/view/AKR20261114025051004?input=1195m",
+                "press": "연합뉴스"
               }
             ],
             "images": [
-              "https://img7.yna.co.kr/photo/ap/2026/11/14/PAP20261114083401009_P4.jpg"
+              "https://media.yonhapnewstv.co.kr/article/AKR/20261114/AKR20261114090256cw8_01_i.jpg"
             ],
             "press": [
-              "연합뉴스",
-              "Queen 이코노미퀸"
+              "연합뉴스TV",
+              "연합뉴스"
             ],
             "headlines": [
-              "클롭의 독일, 세르비아 3-1 제압…사비의 네덜란드는 7-0 대승",
-              "[걸어서 세계 속으로] 낯익으면서 낯선 풍경의 나라, 세르비아"
+              "[단독] 배우 고경표 음주사고…면허취소 만취상태",
+              "배우 고경표 음주운전 중 청소차 들이받아…\"깊이 반성\"(종합)"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-14T01:09:18.568Z"
+            "collectedAt": "2026-11-14T02:36:46.195Z"
           }
         },
         {
           "id": "nate-2",
           "rank": 2,
-          "keyword": "이유진 오늘 결혼 이효정도",
-          "title": "이유진 오늘 결혼 이효정도",
-          "rawKeyword": "이유진 오늘 결혼 이효정도",
+          "keyword": "엔비디아 젠슨 황",
+          "title": "엔비디아 젠슨 황",
+          "rawKeyword": "엔비디아 젠슨 황",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 99,
           "source": "nate",
           "expansions": [
-            "이유진 차경은",
-            "이유진 배우",
-            "이유진 아빠",
-            "이유진 나무위키",
-            "장동윤 이유진",
-            "이유진 장동윤",
-            "배우 이유진",
-            "이유진 농구"
+            "엔비디아 젠슨황 지분",
+            "엔비디아 젠슨황 사임",
+            "엔비디아 젠슨황 해임",
+            "엔비디아 젠슨황"
           ],
-          "expansionSeed": "이유진",
+          "expansionSeed": "엔비디아 젠슨 황",
           "insight": {
             "titles": {
-              "seo": "이유진 오늘 결혼 이효정도 최신 이슈와 핵심 내용 정리",
-              "home": "이유진 오늘 결혼 이효정도, 살림 합친 이유진♥차경은, 오늘 결혼…혼전임신에 시아버지 이효정도 “며느리 만족” 관련 확인할 점",
-              "topic": "이유진 오늘 결혼 이효정도",
+              "seo": "엔비디아 젠슨 황 최신 이슈와 핵심 내용 정리",
+              "home": "엔비디아 젠슨 황, 엔비디아 임원들 연명했다는 '젠슨 황 복귀 촉구 서한'은 가짜 관련 확인할 점",
+              "topic": "엔비디아 젠슨 황",
               "topicGroup": "네이트 실시간 검색어"
             },
             "facts": [
               {
-                "text": "배우 이유진 , 차경은 부부가 결혼 한다. 이유진 과 차경은은 11월 14일 서울 모처에서 결혼 식을 올린다.",
+                "text": "해당 서한에서 '오픈AI'를 ' 엔비디아 '로, '샘 올트먼'을 ' 젠슨 황 '으로, '마이크로소프트'를 '일론 머스크'로 바꿨을 뿐 전체 내용은 사실상 동일하다. 엑스 시스템도 해당 문건을 포함한 게시물에 \"이와 같은 연명 서한이 있다는 보도는 없다\"는 배경 정보를 주석으로 표시하고 있다.",
                 "sourceIndex": 0
               },
               {
-                "text": "두 사람은 최근 결혼 소식과 함께 임신 소식까지 전하며 많은 축하를 받은 바 있다. 이날 방송에는 이유진 의 아버지인 배우 이효정도 등장했다.",
+                "text": "김연숙 특파원 = 13일(현지시간) 미국 뉴욕증시는 젠슨 황 엔비디아 전 최고경영자(CEO) 스캔들의 여파가 이어지면서 주요 지수가 혼조 마감했다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.newsen.com/news_view.php?uid=202611140811172110",
-                "press": "뉴스엔"
-              },
-              {
-                "url": "https://www.tvreport.co.kr/entertainment/article/1088477/",
-                "press": "TV리포트"
-              }
-            ],
-            "images": [
-              "https://photo.newsen.com/news_photo/2026/11/14/202611140811172110_1.jpg"
-            ],
-            "press": [
-              "뉴스엔",
-              "TV리포트"
-            ],
-            "headlines": [
-              "살림 합친 이유진♥차경은, 오늘 결혼…혼전임신에 시아버지 이효정도 “며느리 만족”",
-              "'11월 결혼 ' 이유진 , 예비 신부 ♥차경은에 \"김고은 닮았다\"…애정 가득..."
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-14T02:09:16.433Z"
-          }
-        },
-        {
-          "id": "nate-3",
-          "rank": 3,
-          "keyword": "정계성 김앤장 대표변호사",
-          "title": "정계성 김앤장 대표변호사",
-          "rawKeyword": "정계성 김앤장 대표변호사",
-          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
-          "priority": 98,
-          "source": "nate",
-          "expansions": [
-            "김앤장 대표변호사",
-            "김앤장 법률사무소",
-            "김앤장 변호사",
-            "김앤장내과",
-            "김앤장 수임료",
-            "김앤장 연봉",
-            "김앤장치과",
-            "김앤장 채용"
-          ],
-          "expansionSeed": "김앤장",
-          "insight": {
-            "titles": {
-              "seo": "정계성 김앤장 대표변호사 최신 이슈와 핵심 내용 정리",
-              "home": "정계성 김앤장 대표변호사, [로펌을만나다] 정계성 김앤장 대표 \"글로벌 이슈 다변화, 통합 지원필요\" 관련 확인할 점",
-              "topic": "정계성 김앤장 대표변호사",
-              "topicGroup": "네이트 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "정계성 대표 는 김앤장 이 앞으로도 지켜야 할 가치로 '조직 문화'를 꼽았다. 그러면서 \"앞으로 법률서비스에 AI 활용이 높아지더라도 결국 리걸 마인드를 갖춘 변호사 들이 경쟁력을 가질 것\"이라고 내다봤다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "김앤장 법률사무소 정계성 대표변호사 가 지난달 22일 서울 종로구 김앤장 법률사무소 사무실에서 연합뉴스와 인터뷰에 앞서 포즈를 취하고 있다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.yna.co.kr/view/AKR20261113173300004?input=1195m",
+                "url": "https://www.yna.co.kr/view/AKR20261114024400091?input=1195m",
                 "press": "연합뉴스"
               },
               {
-                "url": "https://www.yna.co.kr/view/PYH20261114025600013?input=1196m",
+                "url": "https://www.yna.co.kr/view/AKR20261114009500072?input=1195m",
                 "press": "연합뉴스"
               }
             ],
             "images": [
-              "https://img4.yna.co.kr/etc/inner/KR/2026/11/13/AKR20261113173300004_01_i_P4.jpg"
+              "https://img4.yna.co.kr/photo/reuters/2026/11/13/PRU20261113056001009_P4.jpg"
             ],
             "press": [
               "연합뉴스"
             ],
             "headlines": [
-              "[로펌을만나다] 정계성 김앤장 대표 \"글로벌 이슈 다변화, 통합 지원필요\"",
-              "포즈 취하는 정계성 김앤장 법률사무소 대표변호사"
+              "엔비디아 임원들 연명했다는 '젠슨 황 복귀 촉구 서한'은 가짜",
+              "뉴욕증시 혼조 마감… 엔비디아 하락세 계속, 2%↓"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-14T02:09:16.433Z"
+            "collectedAt": "2026-11-14T02:36:46.195Z"
+          }
+        },
+        {
+          "id": "nate-3",
+          "rank": 3,
+          "keyword": "전국스포츠클럽 교류전 탁구대회",
+          "title": "전국스포츠클럽 교류전 탁구대회",
+          "rawKeyword": "전국스포츠클럽 교류전 탁구대회",
+          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
+          "priority": 98,
+          "source": "nate",
+          "expansions": [
+            "교류전류",
+            "교류전기",
+            "교류전압",
+            "교류전원",
+            "교류전자개폐기",
+            "교류전동기",
+            "교류전 뜻",
+            "교류전력"
+          ],
+          "expansionSeed": "교류전",
+          "insight": {
+            "titles": {
+              "seo": "전국스포츠클럽 교류전 탁구대회 최신 이슈와 핵심 내용 정리",
+              "home": "전국스포츠클럽 교류전 탁구대회, 403 Forbidden 관련 확인할 점",
+              "topic": "전국스포츠클럽 교류전 탁구대회",
+              "topicGroup": "네이트 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "제4회 전국스포츠클럽 교류전 탁구대회 가 14일 오전 충청북도 제천체육관에서 열렸다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "▲ 농구 대회 에 참가한 유소년 선수들. 풋살 대회 '가 열려 유소년 선수 1300여 명이 기량을 겨룬다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.spotvnews.co.kr/news/articleView.html?idxno=1019790",
+                "press": "스포티비뉴스"
+              },
+              {
+                "url": "https://www.ccdailynews.com/news/articleView.html?idxno=2448213",
+                "press": "충청일보"
+              }
+            ],
+            "images": [
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F477%2F2026%2F11%2F14%2F639051.jpg&type=fface200_200&expire=2&refresh=true"
+            ],
+            "press": [
+              "스포티비뉴스",
+              "충청일보"
+            ],
+            "headlines": [
+              "403 Forbidden",
+              "11월, 제천서 축구· 탁구 ·농구 등 10개 대회 '개최'"
+            ],
+            "extraction": "search-card",
+            "collectedAt": "2026-11-14T02:36:46.195Z"
           }
         },
         {
           "id": "nate-4",
           "rank": 4,
-          "keyword": "동창에 20대 벌금형",
-          "title": "동창에 20대 벌금형",
-          "rawKeyword": "동창에 20대 벌금형",
+          "keyword": "전역 항공기 중단",
+          "title": "전역 항공기 중단",
+          "rawKeyword": "전역 항공기 중단",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 97,
           "source": "nate",
           "expansions": [
-            "벌금형 전과",
-            "벌금형 빨간줄",
-            "벌금형 전과 소멸",
-            "약식기소 벌금형",
-            "공무원 벌금형",
-            "벌금형 선고유예",
-            "벌금형 집행유예",
-            "벌금형 실효"
+            "전역일계산기",
+            "전역 뜻",
+            "제대 전역 차이",
+            "전역 선물",
+            "전역증",
+            "이재욱 전역",
+            "전역모",
+            "전역계산기"
           ],
-          "expansionSeed": "동창",
+          "expansionSeed": "전역",
           "insight": {
             "titles": {
-              "seo": "동창에 20대 벌금형 최신 이슈와 핵심 내용 정리",
-              "home": "동창에 20대 벌금형, 교류 없던 초교 동창에 \"좋아했어\"…수십차례 연락 20대 벌금형 관련 확인할 점",
-              "topic": "동창에 20대 벌금형",
+              "seo": "전역 항공기 중단 최신 이슈와 핵심 내용 정리",
+              "home": "전역 항공기 중단, 美전역 항공기 운항중단 '올스톱' 사태…\"관제통신시스템 장애\"(종합2보) 관련 확인할 점",
+              "topic": "전역 항공기 중단",
               "topicGroup": "네이트 실시간 검색어"
             },
             "facts": [
               {
-                "text": "(춘천=연합뉴스) 강태현 기자 = 초등학교 졸업 이후 교류가 없던 동창에게 호감을 표현하며 경찰의 경고에도 수십차례 연락한 20대가 처벌받았다.",
+                "text": "미국 전역 의 공항에서 13일 오후 4시께(미 동부시간 기준)부터 관제통신 시스템 장애로 추정되는 이유로 항공기 운항이 전면 중단 되는 사태가 발생했다. 미 연방항공청(FAA)은 \"이례적인 상황과 안전상의 이유\"를 들어 \"모든 공항에서 항공기 이륙이 중단 됐다\"고 발표했다.",
                 "sourceIndex": 0
               },
               {
-                "text": "카페에서 초등학교 동창 생의 신체 일부를 만지는 등 강제추행한 혐의를 받는 20대 남성이 항소심에서도 벌금형 을 선고받았다. 춘천지법 제1형사부(심현근 부장판사)는 강제추행 혐의로 기소된 A(20)씨의 항소심에서 벌금 300만원의 원심 판단을 유지했다.",
+                "text": "미국 전역 의 공항의 항공기 운항이 현지시간 13일 오후 전면 중단 됐습니다. 미 연방항공청은 \"이례적인 상황과 안전상의 이유로 모든 공항에서 항공기 이륙이 중단 됐다\"고 발표했습니다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.yna.co.kr/view/AKR20261114016300062?input=1195m",
+                "url": "https://www.yna.co.kr/view/AKR20261114010352071?input=1195m",
                 "press": "연합뉴스"
               },
               {
-                "url": "https://www.kwnews.co.kr/page/view/2025010513073469162",
-                "press": "강원일보"
+                "url": "https://imnews.imbc.com/news/2026/world/article/6865587_36925.html",
+                "press": "MBC"
               }
             ],
             "images": [
-              "https://img0.yna.co.kr/photo/cms/2025/12/16/22/PCM20251216000022990_P4.jpg"
+              "https://img7.yna.co.kr/photo/etc/epa/2026/11/14/PEP20261114093101009_P4.jpg"
             ],
             "press": [
               "연합뉴스",
-              "강원일보"
+              "MBC"
             ],
             "headlines": [
-              "교류 없던 초교 동창에 \"좋아했어\"…수십차례 연락 20대 벌금형",
-              "룸카페서 초등학교 동창 생 강제추행한 20대 남성 2심도 벌금형"
+              "美전역 항공기 운항중단 '올스톱' 사태…\"관제통신시스템 장애\"(종합2보)",
+              "미 전역 항공기 이륙 중단 ‥교통장관 \"관제센터 통신문제\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-14T02:09:16.433Z"
+            "collectedAt": "2026-11-14T02:36:46.195Z"
           }
         },
         {
           "id": "nate-5",
           "rank": 5,
-          "keyword": "노모 폭행한 50대",
-          "title": "노모 폭행한 50대",
-          "rawKeyword": "노모 폭행한 50대",
+          "keyword": "최혜진 디 안니카",
+          "title": "최혜진 디 안니카",
+          "rawKeyword": "최혜진 디 안니카",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 96,
           "source": "nate",
           "expansions": [
-            "노모어피자",
-            "노모 뜻",
-            "노모 히데오",
-            "슬립노모어",
-            "노모스",
-            "노모어",
-            "슬립노모어 서울",
-            "50대 여성 옷"
+            "최혜진프로",
+            "최혜진 작가",
+            "최혜진의 판소리 사랑",
+            "최혜진 기자",
+            "골프 최혜진",
+            "최혜진 우승",
+            "최혜진프로고향"
           ],
-          "expansionSeed": "노모",
+          "expansionSeed": "최혜진",
           "insight": {
             "titles": {
-              "seo": "노모 폭행한 50대 최신 이슈와 핵심 내용 정리",
-              "home": "노모 폭행한 50대, \"형이 준 추석 용돈 5만 원 적다\"…80대 노모 폭행한 50대 집유 관련 확인할 점",
-              "topic": "노모 폭행한 50대",
+              "seo": "최혜진 디 안니카 최신 이슈와 핵심 내용 정리",
+              "home": "최혜진 디 안니카, 최혜진, 이글로 반등…LPGA 디 안니카 2R도 공동 선두 관련 확인할 점",
+              "topic": "최혜진 디 안니카",
               "topicGroup": "네이트 실시간 검색어"
             },
             "facts": [
               {
-                "text": "모친이 말리자 수건 휘두르고 선풍기 던져 지난해 가족 폭행으로 기소유예…처벌 불원 등 참작 추석 용돈 5만 원이 적다며 친형에게 따지려다",
+                "text": "윤이나는 공동 6위…코르다는 공동 9위 최혜진 이 미국여자프로골프(LPGA) 투어 디 안니카 드리븐 바이 게인브리지 앳 펠리컨(총상금 325만 달러) 둘째 날 이글로 반등에 성공하며 공동 선두 자리를 지켰다.",
                 "sourceIndex": 0
               },
               {
-                "text": "추석 용돈으로 자신에게 5만원을 준 친형에게 항의하려다 이를 말리는 80대 어머니를 폭행한 50대 아들이 징역형 집행유예를 선고받았다.",
+                "text": "최혜진 이 미국여자프로골프(LPGA) 투어 디 안니카 드리븐 바이 게인브리지 앳 펠리컨(총상금 325만 달러) 첫날 공동 선두로 출발했다. 최혜진 은 13일(한국시간) 미국 플로리다주 벨에어의 펠리컨 골프 클럽(파70)에서 열린 대회 1라운드에서 보기 없이 버디 9개를 기록, 9언더파 61타를 적어냈다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.news1.kr/local/busan-gyeongnam/6353743",
-                "press": "뉴스1"
+                "url": "https://www.yna.co.kr/view/AKR20261114016500007?input=1195m",
+                "press": "연합뉴스"
               },
               {
-                "url": "https://www.mt.co.kr/society/2026/11/13/2026111317373747222",
-                "press": "머니투데이"
+                "url": "https://www.news1.kr/sports/golf/6352819",
+                "press": "뉴스1"
               }
             ],
             "images": [
-              "https://i3n.news1.kr/system/photos/2024/8/12/6822458/high.jpg"
+              "https://img0.yna.co.kr/photo/ap/2026/11/13/PAP20261113031401009_P4.jpg"
             ],
             "press": [
-              "뉴스1",
-              "머니투데이"
+              "연합뉴스",
+              "뉴스1"
             ],
             "headlines": [
-              "\"형이 준 추석 용돈 5만 원 적다\"…80대 노모 폭행한 50대 집유",
-              "\"용돈 5만원이 뭐냐\" 친형에 따지려다…말리는 노모 폭행한 50대"
+              "최혜진, 이글로 반등…LPGA 디 안니카 2R도 공동 선두",
+              "최혜진 , LPGA 투어 디 안니카 1라운드 9언더파 선두"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-14T02:09:16.433Z"
+            "collectedAt": "2026-11-14T02:36:46.195Z"
           }
         }
       ]
@@ -2056,7 +2012,7 @@
               "403 Forbidden"
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-14T02:09:16.433Z"
+            "collectedAt": "2026-11-14T02:36:46.195Z"
           }
         },
         {
@@ -2119,7 +2075,7 @@
               "[공식발표] ' 손흥민 선발 명단 제외 ' LAFC, 콜로라도전 'BEST 11' 공개!…..."
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-14T02:09:16.433Z"
+            "collectedAt": "2026-11-14T02:36:46.195Z"
           }
         },
         {
@@ -2331,7 +2287,7 @@
               "안세영이 돌아왔다! 압승, 쾌승!…유럽 최강자 블리치펠트 43분 만에 2-0 완파→세계선수권 8강행 성공"
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-14T02:09:16.433Z"
+            "collectedAt": "2026-11-14T02:36:46.195Z"
           }
         },
         {
@@ -3063,8 +3019,8 @@
             "놀면뭐하니 고경표"
           ],
           "expansionSeed": "고경표",
-          "ago": "41분 전",
-          "agoMinutes": 41,
+          "ago": "1시간 전",
+          "agoMinutes": 60,
           "publishedLabel": "2026-11-14T01:26:53.000Z",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111410022764392_1.jpg",
           "insight": {
@@ -3138,8 +3094,12 @@
                 "sourceIndex": 0
               },
               {
-                "text": "소속사 씨엘엔컴퍼니 관계자는 14일 오전 iMBC연예에 \"먼저 고경표 배우의 음주운전 사고로 피해를 입으신 분들께 깊이 사과 드린다. 고경표 는 경찰 조사를 마치고 귀가한 상태이며, 자신의 잘못 을 인정 하고 깊이 반성하고 있다고.",
+                "text": "(서울=연합뉴스) 정지수 고가혜 기자 = 배우 고경표씨가 술을 마신 채 운전하다 청소차를 들이받는 사고를 냈다.",
                 "sourceIndex": 1
+              },
+              {
+                "text": "배우의 음주운전 사고로 피해를 입으신 분들께 깊이 사과 드린다\"며 \"믿고 응원해 주신 모든 분께도 실망과 심려를 끼쳐드려 진심으로 사과 드린다\"고 밝혔습니다.",
+                "sourceIndex": 2
               }
             ],
             "links": [
@@ -3148,23 +3108,29 @@
                 "press": "스타뉴스"
               },
               {
-                "url": "http://enews.imbc.com/News/RetrieveNewsInfo/524756",
-                "press": "MBC연예"
+                "url": "https://www.yna.co.kr/view/AKR20261114025051004?input=1195m",
+                "press": "연합뉴스"
+              },
+              {
+                "url": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008845828&plink=ORI&cooper=NAVER",
+                "press": "SBS"
               }
             ],
             "images": [
-              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F408%2F2026%2F11%2F14%2F327867.jpg&type=fface200_200&expire=2&refresh=true"
+              "https://img3.yna.co.kr/photo/cms/2022/08/16/81/PCM20220816000081005_P4.jpg"
             ],
             "press": [
               "스타뉴스",
-              "MBC연예"
+              "연합뉴스",
+              "SBS"
             ],
             "headlines": [
               "고경표, '만취 음주운전' 공개 사과 \"잘못 인정\"",
-              "'만취 상태로 청소차 쾅' 고경표 측 \"심려 끼쳐 죄송…깊이 반성 중\" [공..."
+              "배우 고경표 음주운전 중 청소차 들이받아…\"깊이 반성\"(종합)",
+              "배우 고경표, 만취 음주운전 사고…\" 잘못 인정 , 깊이 반성\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-14T01:09:18.568Z"
+            "collectedAt": "2026-11-14T02:36:46.195Z"
           }
         },
         {
@@ -3206,11 +3172,11 @@
                 "sourceIndex": 0
               },
               {
-                "text": "배우 고경표가 만취 상태로 운전을 하다가 사고를 낸 것으로 전해졌다.",
+                "text": "(서울=연합뉴스) 정지수 고가혜 기자 = 배우 고경표씨가 술을 마신 채 운전하다 청소차를 들이받는 사고를 냈다.",
                 "sourceIndex": 1
               },
               {
-                "text": "이어 \" 고경표 는 오늘(14일) 새벽 음주 상태로 운전 하던 중 청소차와 충돌하는 사고를 냈으며, 음주 측정 결과 혈중알코올농도가 면허 취소 수치로 확인 됐다. 고경표 는 경찰 조사를 마치고 귀가한 상태\"이라며 \"자신의 잘못을 인정하고 깊이 반성하고 있다\"라고 전했다.",
+                "text": "고경표 소속사 씨엘엔컴퍼니는 ' 고경표 는 오늘 새벽 음주 상태로 운전 하던 중 청소차와 충돌하는 사고를 냈으며 음주 측정 결과 혈중알코올농도가 면허 취소 수치로 확인 됐다. 고경표 는 경찰 조사를 마치고 귀가한 상태며 자신의 잘못을 인정하고 깊이 반성하고 있다'고 고개를 숙였다.",
                 "sourceIndex": 2
               }
             ],
@@ -3220,28 +3186,29 @@
                 "press": "스타뉴스"
               },
               {
-                "url": "https://www.nocutnews.co.kr/news/6606891?utm_source=naver&utm_medium=article&utm_campaign=20261114095531",
-                "press": "노컷뉴스"
+                "url": "https://www.yna.co.kr/view/AKR20261114025051004?input=1195m",
+                "press": "연합뉴스"
               },
               {
-                "url": "https://www.starnewskorea.com/star/2026/11/14/2026111409574798693",
-                "press": "스타뉴스"
+                "url": "https://www.mydaily.co.kr/page/view/2026111411224496218",
+                "press": "마이데일리"
               }
             ],
             "images": [
-              "https://file2.nocutnews.co.kr/newsroom/image/2026/11/14/202611140952335081_0.jpg"
+              "https://img3.yna.co.kr/photo/cms/2022/08/16/81/PCM20220816000081005_P4.jpg"
             ],
             "press": [
               "스타뉴스",
-              "노컷뉴스"
+              "연합뉴스",
+              "마이데일리"
             ],
             "headlines": [
               "고경표 '만취 음주운전'..소속사는 \"확인 중\"",
-              "배우 고경표 만취 음주운전 사고 파문…\"면허취소 수준\"",
-              "[속보] 고경표 , '만취 음주운전' 공개 사과 \"잘못 인정\" [전문]"
+              "배우 고경표 음주운전 중 청소차 들이받아…\"깊이 반성\"(종합)",
+              "[단독] '만취 운전 사고' 고경표 , 다 음주 팬미팅 취소"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-14T01:09:18.568Z"
+            "collectedAt": "2026-11-14T02:36:46.195Z"
           }
         },
         {
@@ -3266,8 +3233,8 @@
             "부산음주운전변호사"
           ],
           "expansionSeed": "고경표",
-          "ago": "1시간 전",
-          "agoMinutes": 60,
+          "ago": "2시간 전",
+          "agoMinutes": 120,
           "publishedLabel": "2026-11-14T00:29:28.000Z",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111409234731782_1.jpg",
           "insight": {
@@ -3283,8 +3250,12 @@
                 "sourceIndex": 0
               },
               {
-                "text": "배우 고경표 가 음주운전 을 하다 교통사고를 내 경찰 조사를 받고 있다.",
+                "text": "(서울=연합뉴스) 정지수 고가혜 기자 = 배우 고경표씨가 술을 마신 채 운전하다 청소차를 들이받는 사고를 냈다.",
                 "sourceIndex": 1
+              },
+              {
+                "text": "배우 고경표 가 음주운전 을 하다 교통사고를 내 경찰 조사를 받고 있다.",
+                "sourceIndex": 2
               }
             ],
             "links": [
@@ -3293,23 +3264,29 @@
                 "press": "스타뉴스"
               },
               {
+                "url": "https://www.yna.co.kr/view/AKR20261114025051004?input=1195m",
+                "press": "연합뉴스"
+              },
+              {
                 "url": "https://www.mk.co.kr/article/12208807",
                 "press": "매일경제"
               }
             ],
             "images": [
-              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F009%2F2026%2F11%2F14%2F5763610.jpg&type=fface200_200&expire=2&refresh=true"
+              "https://img3.yna.co.kr/photo/cms/2022/08/16/81/PCM20220816000081005_P4.jpg"
             ],
             "press": [
               "스타뉴스",
+              "연합뉴스",
               "매일경제"
             ],
             "headlines": [
               "'보검매직컬2' 고경표, 음주운전",
+              "배우 고경표 음주운전 중 청소차 들이받아…\"깊이 반성\"(종합)",
               "고경표, 음주운전 사고…청소차 들이받아"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-14T01:09:18.568Z"
+            "collectedAt": "2026-11-14T02:36:46.195Z"
           }
         },
         {
@@ -3334,8 +3311,8 @@
             "나이스대국민"
           ],
           "expansionSeed": "전현무",
-          "ago": "1시간 전",
-          "agoMinutes": 60,
+          "ago": "2시간 전",
+          "agoMinutes": 120,
           "publishedLabel": "2026-11-14T00:23:45.000Z",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111409161383312_1.jpg",
           "insight": {
@@ -3377,7 +3354,7 @@
               "전현무, 결국 대국민 사과 …\" 당분간 DM 안 보겠다 \""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-14T01:09:18.568Z"
+            "collectedAt": "2026-11-14T02:36:46.195Z"
           }
         },
         {
@@ -3402,8 +3379,8 @@
             "100일상대여"
           ],
           "expansionSeed": "100일",
-          "ago": "1시간 전",
-          "agoMinutes": 60,
+          "ago": "2시간 전",
+          "agoMinutes": 120,
           "publishedLabel": "2026-11-14T00:15:36.000Z",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111409073222410_1.jpg",
           "insight": {
@@ -3445,7 +3422,7 @@
               "박진영, 김유정 정체 알았다..“만나서 반갑습니다, 이가경 씨” (‘100..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-14T01:09:18.568Z"
+            "collectedAt": "2026-11-14T02:36:46.195Z"
           }
         },
         {
@@ -3470,8 +3447,8 @@
             "미니소"
           ],
           "expansionSeed": "에이티즈",
-          "ago": "1시간 전",
-          "agoMinutes": 60,
+          "ago": "2시간 전",
+          "agoMinutes": 120,
           "publishedLabel": "2026-11-14T00:14:10.000Z",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111409110290069_1.jpg",
           "insight": {
@@ -3503,7 +3480,7 @@
               "에이티즈, 또 通했다! 미니 15집 국내외 차트 강타"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-14T01:09:18.568Z"
+            "collectedAt": "2026-11-14T02:36:46.195Z"
           }
         },
         {
@@ -3528,8 +3505,8 @@
             "공유 팬미팅"
           ],
           "expansionSeed": "팬미팅",
-          "ago": "1시간 전",
-          "agoMinutes": 60,
+          "ago": "2시간 전",
+          "agoMinutes": 120,
           "publishedLabel": "2026-11-14T00:10:28.000Z",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111409031955324_1.jpg",
           "insight": {
@@ -3571,7 +3548,7 @@
               "더보이즈 에릭, 오늘(14일) 은 '꽃보다 손영재' 보러 가는 날"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-14T01:09:18.568Z"
+            "collectedAt": "2026-11-14T02:36:46.195Z"
           }
         },
         {
@@ -3713,5 +3690,5 @@
       ]
     }
   ],
-  "updatedAt": "2026-11-14T02:11:28.399Z"
+  "updatedAt": "2026-11-14T02:37:59.012Z"
 }
