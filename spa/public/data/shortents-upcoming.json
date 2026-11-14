@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T17:45:23.241Z",
+ "builtAt": "2026-11-14T18:05:34.519Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,21 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 21,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "비트코인",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 4,
-   "recent20": 0,
+   "articles90": 5,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-14T16:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "비트코인, 1시간 새 1.24% 올라 6만6016달러",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-14T18:04:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/438410"
+    },
     {
      "title": "비트코인(BTC), 업계 2,429억 원 썼지만 민주당 석권…세일러 \"정치 초월...",
      "press": "coinreaders.com",
@@ -34,12 +39,6 @@
      "press": "wikitree.co.kr",
      "publishedAt": "2026-11-14T17:10:00.000Z",
      "link": "https://www.wikitree.co.kr/articles/1174656"
-    },
-    {
-     "title": "비트코인 일주일 새 13.5% 하락…체크는 ‘가치 구간’ 평가",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-14T16:50:00.000Z",
-     "link": "https://www.tokenpost.kr/news/cryptocurrency/438397"
     }
    ]
   }
