@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T22:37:32.219Z",
+ "builtAt": "2026-11-14T22:47:35.871Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,15 +8,47 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
+  {
+   "keyword": "젠슨 황 없는 엔비디아",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 3,
+   "press": 7,
+   "firstArticleAt": "2026-11-14T21:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "엔비디아 투자자, 젠슨황 복귀 요구 서한…\"AI산업 후퇴 우려\"",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-14T22:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005353875?sid=101"
+    },
+    {
+     "title": "“젠슨 황 복귀 시켜라”…주주 서한부터 온라인 청원까지 ‘시끌’",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-14T22:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003059073?sid=104"
+    },
+    {
+     "title": "젠슨황 복귀 요구 잇따라…투자자 이사회에 서한·온라인 청원도 열기",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-14T22:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000161236?sid=101"
+    }
+   ]
+  },
   {
    "keyword": "미국 항공운항 정상화",
    "sources": [
     "signal.bz"
    ],
    "articles90": 7,
-   "recent20": 2,
+   "recent20": 0,
    "press": 7,
    "firstArticleAt": "2026-11-14T21:23:00.000Z",
    "exclusive": false,
@@ -48,13 +80,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 2,
+   "articles90": 5,
+   "recent20": 3,
    "press": 3,
    "firstArticleAt": "2026-11-14T22:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "박진영, 김유정 향한 애틋한 진심 고백…정체 발각 최대 위기 ('100일의 ...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-14T22:41:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000784467"
+    },
     {
      "title": "진선규, '100일의 거짓말'서 총독부 폭발 배후 추적…김유정 향한 의심...",
      "press": "topstarnews.net",
@@ -66,19 +104,45 @@
      "press": "tenasia.co.kr",
      "publishedAt": "2026-11-14T22:33:00.000Z",
      "link": "https://m.entertain.naver.com/article/312/0000784466"
+    }
+   ]
+  },
+  {
+   "keyword": "2026년 11월 15일 운세",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 3,
+   "press": 3,
+   "firstArticleAt": "2026-11-14T21:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오늘의 운세] 11월 15일 띠별 재물운…자금 이동과 집행 속도 차이",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-14T22:44:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16276870"
     },
     {
-     "title": "김현주, 이무생과 키스 \"김유정 미국 보내 줘\"-'100일의 거짓말'",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-14T22:14:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95267"
+     "title": "[오늘의 띠별 운세] 11월 15일 나이별 총운…뜻보다 여건부터 맞춰야",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-14T22:42:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16276868"
+    },
+    {
+     "title": "[오늘의 사주 일진 운세] 11월 15일 계사일…세밀함 살리고 지나친 간섭...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-14T22:38:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16276866"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 501,
+  "flagged": 502,
   "matched": 244,
   "avgLeadMin": 532,
   "recent": [
