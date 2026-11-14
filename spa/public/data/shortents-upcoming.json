@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T15:54:33.418Z",
+ "builtAt": "2026-11-14T16:04:36.850Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,18 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "채령",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-14T14:25:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-14T14:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -44,14 +43,46 @@
    ]
   },
   {
-   "keyword": "1250 회 로또",
+   "keyword": "우크라이나 나토 돈바스",
    "sources": [
-    "google"
+    "signal.bz"
    ],
    "articles90": 4,
    "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-14T14:30:00.000Z",
+   "firstArticleAt": "2026-11-14T14:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "젤렌스키 \"미, '우크라 나토 가입 대가' 돈바스 양도 물어\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-14T15:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001535637?sid=104"
+    },
+    {
+     "title": "젤렌스키 \"美, 돈바스 양보하면 나토 가입 제안…안보 확실하면 국민투...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-14T15:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005604243?sid=104"
+    },
+    {
+     "title": "젤렌스키 \"美, '우크라 나토 가입 대가' 돈바스 양도안 질의\"(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-14T15:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016442018?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "1250 회 로또",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-14T15:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -74,43 +105,11 @@
      "link": "https://www.bntnews.co.kr/article/view/bnt202611140127"
     }
    ]
-  },
-  {
-   "keyword": "우무티 예술가 집안",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-14T14:39:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "젠더리스 아이돌, 알고 보니 예술가 집안이었다…\"할머니가 미술과 교수...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-14T15:05:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000784456"
-    },
-    {
-     "title": "엑스러브 만든 우무티, 예술가 집안이었다 “조모, 예술대 미술과 교수...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-14T14:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005640691"
-    },
-    {
-     "title": "엑스러브 만든 우무티, 명문 예술가 집안이었다 “조모 교수+조부 음악...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-14T14:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001187518"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 491,
+  "flagged": 492,
   "matched": 230,
   "avgLeadMin": 490,
   "recent": [
