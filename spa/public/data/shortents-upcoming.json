@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T19:56:20.624Z",
+ "builtAt": "2026-11-14T20:06:25.294Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,13 +15,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 6,
    "recent20": 2,
-   "press": 4,
+   "press": 5,
    "firstArticleAt": "2026-11-14T18:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "미국 항공당국 “최악 지나가…항공운항 15일 완전 정상화”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-14T20:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012294063?sid=104"
+    },
     {
      "title": "미 항공 운항 중단 여파 계속…14일에도 4천 편 넘게 결항",
      "press": "yonhapnewstv.co.kr",
@@ -33,12 +39,6 @@
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-14T19:39:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/055/0001403072?sid=104"
-    },
-    {
-     "title": "미 항공당국 \"최악의 상황 지나가‥항공운항 15일 완전 정상화\"",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-14T19:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001535641?sid=104"
     }
    ]
   }
