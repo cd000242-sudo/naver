@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T20:46:43.317Z",
+ "builtAt": "2026-11-14T20:56:46.903Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,13 +15,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 3,
-   "press": 3,
+   "press": 4,
    "firstArticleAt": "2026-11-14T20:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[롤드컵] BLG의 교과서 찢은 젠지, 한타로 결승 1세트 제압",
+     "press": "gamevu.co.kr",
+     "publishedAt": "2026-11-14T20:52:00.000Z",
+     "link": "https://www.gamevu.co.kr/news/articleView.html?idxno=62341"
+    },
     {
      "title": "“영혼·장로 다 내주고도 이겼다”…‘한타 괴물’ 젠지, BLG에 38분 대...",
      "press": "sportsseoul.com",
@@ -33,12 +39,6 @@
      "press": "inven.co.kr",
      "publishedAt": "2026-11-14T20:37:00.000Z",
      "link": "https://m.sports.naver.com/esports/article/442/0000198855"
-    },
-    {
-     "title": "'눈부신 한타' 젠지, BLG와의 2026 월즈 결승전 1세트 승리",
-     "press": "sports.hankooki.com",
-     "publishedAt": "2026-11-14T20:36:00.000Z",
-     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6943602"
     }
    ]
   },
