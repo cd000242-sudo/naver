@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T15:04:11.686Z",
+ "builtAt": "2026-11-14T15:14:15.888Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 22,
  "candidates": [
   {
    "keyword": "김도영 결승포 한국, APBC 결승행",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-14T13:38:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-14T13:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -47,10 +47,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
+   "articles90": 7,
    "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-14T13:39:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-14T13:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,50 +75,24 @@
    ]
   },
   {
-   "keyword": "엑스러브 우무티",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 9,
-   "recent20": 6,
-   "press": 7,
-   "firstArticleAt": "2026-11-14T14:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "엑스러브 대표 \"모두 우무티 통해 나온다\"...멤버 선발부터 세계관까지",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-14T14:58:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=781773"
-    },
-    {
-     "title": "엑스러브 만든 우무티, 예술가 집안이었다 “조모, 예술대 미술과 교수...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-14T14:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005640691"
-    },
-    {
-     "title": "한소희, 이렇게 의리녀라니‥소속사 돈 걱정했는데 엑스러브 MV 무페이...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-14T14:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001187520"
-    }
-   ]
-  },
-  {
    "keyword": "채령",
    "sources": [
     "signal.bz",
     "google"
    ],
-   "articles90": 6,
+   "articles90": 7,
    "recent20": 2,
    "press": 6,
    "firstArticleAt": "2026-11-14T14:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "박서진, 채령도 놀란 트로트계 슈스 스케일...\"팬카페 회원 수 임영웅 다...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-14T15:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002080681"
+    },
     {
      "title": "있지 채령, 그냥 안 먹었을 뿐인데..\"저도 성인 여자, 1인분 먹어요\"",
      "press": "starnewskorea.com",
@@ -130,12 +104,6 @@
      "press": "etoday.co.kr",
      "publishedAt": "2026-11-14T14:48:00.000Z",
      "link": "https://www.etoday.co.kr/news/view/2648193"
-    },
-    {
-     "title": "“혼자 빨리 준비해서 좋다” 솔로 데뷔 채령, 멤버들 없는 단점에 ‘침...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-14T14:43:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005763762"
     }
    ]
   }
