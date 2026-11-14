@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T00:00:32.834Z",
+ "builtAt": "2026-11-14T00:10:36.196Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,113 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 30,
  "candidates": [
   {
-   "keyword": "사우디에 21년 패배",
+   "keyword": "미국 항공 운항 중단",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 30,
+   "recent20": 6,
+   "press": 30,
+   "firstArticleAt": "2026-11-13T22:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美 전역, 관제 통신 장애로 항공기 운항중단",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-14T00:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004209773?sid=104"
+    },
+    {
+     "title": "美 전역 공항 항공기 이륙 '올스톱'…통신 장애에 1만1000편 운항 차질",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-14T00:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003485531?sid=104"
+    },
+    {
+     "title": "FAA, 통신 장애로 美 전역 지상 정지 발령…항공편 이륙 중단",
+     "press": "digitaltoday.co.kr",
+     "publishedAt": "2026-11-14T00:06:00.000Z",
+     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=715501"
+    }
+   ]
+  },
+  {
+   "keyword": "항공기 이륙 중단",
    "sources": [
     "nate"
    ],
-   "articles90": 14,
+   "articles90": 30,
    "recent20": 5,
-   "press": 14,
-   "firstArticleAt": "2026-11-13T22:33:00.000Z",
+   "press": 30,
+   "firstArticleAt": "2026-11-13T22:47:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美 전역, 관제 통신 장애로 항공기 운항중단",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-14T00:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004209773?sid=104"
+    },
+    {
+     "title": "美 전역 공항 항공기 이륙 '올스톱'…통신 장애에 1만1000편 운항 차질",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-14T00:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003485531?sid=104"
+    },
+    {
+     "title": "FAA, 통신 장애로 美 전역 지상 정지 발령…항공편 이륙 중단",
+     "press": "digitaltoday.co.kr",
+     "publishedAt": "2026-11-14T00:06:00.000Z",
+     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=715501"
+    }
+   ]
+  },
+  {
+   "keyword": "2027 롤드컵 결승전",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 17,
+   "recent20": 2,
+   "press": 15,
+   "firstArticleAt": "2026-11-13T23:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "2027 롤드컵, 한일 공동 개최…결승은 서울서 열린다",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-13T23:58:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611140010"
+    },
+    {
+     "title": "롤드컵 17년 역사상 첫 한일(韓日) 공동 개최… 2027 월즈 결승 피날레 ...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-13T23:55:00.000Z",
+     "link": "https://m.sports.naver.com/esports/article/109/0005640158"
+    },
+    {
+     "title": "내년 롤드컵 결승 서울서…4년 만에 귀환",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-13T23:50:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611140063"
+    }
+   ]
+  },
+  {
+   "keyword": "사우디에 21년 만에 패배",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 13,
+   "recent20": 2,
+   "press": 13,
+   "firstArticleAt": "2026-11-13T22:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -45,97 +141,64 @@
   {
    "keyword": "집",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 14,
-   "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-13T22:32:00.000Z",
+   "articles90": 12,
+   "recent20": 4,
+   "press": 11,
+   "firstArticleAt": "2026-11-13T23:00:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "어바인서 남의 집 현관문 발로 차고 도주…청소년 장난에 주민 불안",
-     "press": "radiokorea.com",
-     "publishedAt": "2026-11-13T23:50:00.000Z",
-     "link": "https://www.radiokorea.com/news/article.php?uid=509622"
+     "title": "이지현, 아이들 위해 미용실 퇴사했더니 집이 전쟁터…“차라리 출근할...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-14T00:07:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001147223"
     },
     {
-     "title": "문지애♥전종환 \"아들, 수학 시험 27점에 온 집안 비상…결국 3등 들어\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-13T23:41:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009288787"
+     "title": "용인 기후위기 적응 교육, 초등학교 135학급 모집…18일까지 신청",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-14T00:02:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3751882"
     },
     {
-     "title": "[윤준의 부동산수첩] 집값 안정인가, 거래 정지인가",
-     "press": "nbntv.kr",
-     "publishedAt": "2026-11-13T23:20:00.000Z",
-     "link": "https://www.nbntv.kr/news/articleView.html?idxno=341079"
+     "title": "플라트 키즈, 유치원 놀이로 본 5개 영역 발달 리포트 집으로 전한다",
+     "press": "geconomy.co.kr",
+     "publishedAt": "2026-11-14T00:00:00.000Z",
+     "link": "https://www.geconomy.co.kr/news/article.html?no=325640"
     }
    ]
   },
   {
-   "keyword": "날씨",
+   "keyword": "미중러 정상회담",
    "sources": [
-    "google"
+    "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-13T22:46:00.000Z",
+   "articles90": 7,
+   "recent20": 5,
+   "press": 7,
+   "firstArticleAt": "2026-11-13T23:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[날씨] 오늘(14일) 전국 가을비 밤까지… 제주 최대 50㎜, 내일 일요일은...",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-13T23:52:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082660"
+     "title": "미중러 세기의 3국 정상회담 19일 열리나…핵군축 협의 북한 논의 주목",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-14T00:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002832734?sid=100"
     },
     {
-     "title": "[대전·세종·충남 날씨예보] 14일 밤까지 비 최대 30㎜",
-     "press": "thefairnews.co.kr",
-     "publishedAt": "2026-11-13T23:38:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94174"
-    },
-    {
-     "title": "[제주도 날씨예보] 15일 아침까지 최대 50㎜ 비…산간도로 짙은 안개",
-     "press": "thefairnews.co.kr",
-     "publishedAt": "2026-11-13T23:34:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94173"
-    }
-   ]
-  },
-  {
-   "keyword": "유람선 화물선 충돌",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-13T22:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“살기 위해 난간 기어 넘었다”…美, 미시시피강서 유람선·화물선 충...",
+     "title": "트럼프·시진핑·푸틴, 19일 첫 3자 정상회담 전망…북한 문제도 논의하...",
      "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-13T23:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002723347?sid=104"
+     "publishedAt": "2026-11-14T00:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002723358?sid=104"
     },
     {
-     "title": "미국 미시시피강서 선박 충돌…승객 129명 태운 여객선 옆으로 누웠다",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-13T23:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002832184?sid=104"
-    },
-    {
-     "title": "미국 미시시피강서 유람선-화물선 충돌…승객 129명 구조 진행",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-13T23:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000161209?sid=104"
+     "title": "트럼프, 중간선거 참패 만회할 외교 성과 절실…미중 정상회담 주목",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-14T00:04:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=202611140901195276cd0bfacc1c_1"
     }
    ]
   },
@@ -145,7 +208,7 @@
     "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-13T22:44:00.000Z",
    "exclusive": false,
@@ -172,50 +235,55 @@
    ]
   },
   {
-   "keyword": "젠슨 황 없는 엔비디아 위기",
+   "keyword": "조현",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 4,
-   "recent20": 1,
+   "articles90": 5,
+   "recent20": 3,
    "press": 4,
-   "firstArticleAt": "2026-11-13T22:57:00.000Z",
+   "firstArticleAt": "2026-11-13T22:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨황 퇴진에 금융사 이탈 움직임...670조원 AI 금융 구상 '휘청'",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-13T23:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005604181?sid=101"
+     "title": "‘선전 APEC’ 앞 조현-왕이 회담 “이 대통령의 방중 환영, 충분한 예우...",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-14T00:06:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1137489"
     },
     {
-     "title": "트럼프 뜻 따랐다는 러트닉…엔비디아 스캔들에 '경질' 위기",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-13T23:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005353790?sid=104"
+     "title": "왕이 외교부장과 악수하는 조현 외교부 장관",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-13T23:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014321834?sid=104"
     },
     {
-     "title": "젠슨 황의 외도가 부른 ‘테일 리스크’, 조작기소 특검법이 그런 위험...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-13T23:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005763591?sid=101"
+     "title": "왕이 외교부장과 회담하는 조현 외교부 장관",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-13T23:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014321833?sid=104"
     }
    ]
   },
   {
    "keyword": "돈",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
    "firstArticleAt": "2026-11-13T23:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "버밍엄시티 지분 판 톰 브래디… 은퇴 후에도 돈방석 비결은",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-14T00:00:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/025/0003565129"
+    },
     {
      "title": "[TheTax]남편 사망 전→아들→이혼한 母계좌 이체된 돈…증여세 내라?",
      "press": "mt.co.kr",
@@ -227,12 +295,38 @@
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-13T23:05:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006409756?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "김정관 체코 원전",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-13T23:33:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "체코 산업통상부 장관과 화상 면담하는 김정관 장관",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-14T00:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009288801?sid=101"
     },
     {
-     "title": "[알쏭달쏭Y] 신약 허가받는 데도 돈이 든다?…요상한 의약품 수수료의 ...",
-     "press": "theviewers.co.kr",
-     "publishedAt": "2026-11-13T23:02:00.000Z",
-     "link": "https://theviewers.co.kr/View.aspx?No=4309902"
+     "title": "김정관 장관, 체코 산업통상부 장관과 원전 관련 화상 면담",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-14T00:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009288798?sid=101"
+    },
+    {
+     "title": "'두코바니 원전 정상 건설 위해 비상 관리 체제' 체코 측에 설명",
+     "press": "e-platform.net",
+     "publishedAt": "2026-11-13T23:50:00.000Z",
+     "link": "http://www.e-platform.net/news/articleView.html?idxno=106994"
     }
    ]
   },
@@ -241,13 +335,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 2,
+   "articles90": 5,
+   "recent20": 1,
+   "press": 3,
    "firstArticleAt": "2026-11-13T23:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "FAA, 통신 장애로 美 전역 지상 정지 발령…항공편 이륙 중단",
+     "press": "digitaltoday.co.kr",
+     "publishedAt": "2026-11-14T00:06:00.000Z",
+     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=715501"
+    },
     {
      "title": "마이크로소프트($MSFT), FAA 지상 정지 연관성 낮다고 밝혀",
      "press": "tokenpost.kr",
@@ -259,22 +359,22 @@
      "press": null,
      "publishedAt": "2026-11-13T23:38:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/091/0010368434?sid=104"
-    },
-    {
-     "title": "美 하늘길 멈췄다…FAA \"항공로 관제센터 통신 장애\", 사이버공격 배제...",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-13T23:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002248531?sid=105"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 454,
-  "matched": 187,
-  "avgLeadMin": 357,
+  "flagged": 461,
+  "matched": 188,
+  "avgLeadMin": 358,
   "recent": [
+   {
+    "keyword": "젠슨 황 퇴진 후 엔비디아는?",
+    "hitKeyword": "젠슨 황 퇴진 파장",
+    "hitAt": "2026-11-14T09:00:00+09:00",
+    "leadMin": 513
+   },
    {
     "keyword": "美항공청 항공편 이륙 중단",
     "hitKeyword": "미국 공항 이륙 중단",
@@ -328,12 +428,6 @@
     "hitKeyword": "엔비디아 투자 경고",
     "hitAt": "2026-11-14T06:00:00+09:00",
     "leadMin": 354
-   },
-   {
-    "keyword": "구성환 4대",
-    "hitKeyword": "구성환 고교 4대천왕",
-    "hitAt": "2026-11-14T06:00:00+09:00",
-    "leadMin": 343
    }
   ]
  }
