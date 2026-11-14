@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T19:16:03.854Z",
+ "builtAt": "2026-11-14T19:36:08.950Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,41 +11,41 @@
  "measured": 23,
  "candidates": [
   {
-   "keyword": "비트코인",
+   "keyword": "미국 항공운항 정상화",
    "sources": [
-    "google"
+    "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 2,
-   "press": 2,
-   "firstArticleAt": "2026-11-14T18:04:00.000Z",
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-14T18:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "비트코인 고래 보유량 3만4000개 일주일 새 감소",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-14T19:12:00.000Z",
-     "link": "https://www.tokenpost.kr/news/cryptocurrency/438415"
+     "title": "美항공마비, 라우터·시공 오류 가능성…\"외주사 과실 조사·15일 정상화...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-14T19:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014322436?sid=104"
     },
     {
-     "title": "비트코인, 생산자물가 급등에 6만 9,000달러 하회…코인베이스는 금리 ...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-14T19:10:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1174659"
+     "title": "미 항공당국 \"최악의 상황 지나가‥항공운항 15일 완전 정상화\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-14T19:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001535641?sid=104"
     },
     {
-     "title": "텍사스 시·카운티마다 비트코인 1,000만 달러 투자 허용 법안…안전장...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-14T18:10:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1174658"
+     "title": "미 항공당국 \"최악의 상황 지나...내일 완전 정상화\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-14T18:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432939?sid=104"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 496,
+  "flagged": 497,
   "matched": 230,
   "avgLeadMin": 490,
   "recent": [
