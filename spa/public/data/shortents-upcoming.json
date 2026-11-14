@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T17:05:08.289Z",
+ "builtAt": "2026-11-14T17:15:12.744Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,10 +15,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
+   "articles90": 12,
    "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-14T15:42:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-14T15:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -48,30 +48,30 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 5,
+   "articles90": 6,
    "recent20": 2,
    "press": 3,
-   "firstArticleAt": "2026-11-14T15:44:00.000Z",
+   "firstArticleAt": "2026-11-14T16:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "비트코인(BTC), 업계 2,429억 원 썼지만 민주당 석권…세일러 \"정치 초월...",
+     "press": "coinreaders.com",
+     "publishedAt": "2026-11-14T17:12:00.000Z",
+     "link": "http://coinreaders.com/270313"
+    },
+    {
+     "title": "비트코인, 570억 달러 매입단가 구간 진입…ETF는 2주 23억 5,000만 달러 ...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-14T17:10:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1174656"
+    },
     {
      "title": "비트코인 일주일 새 13.5% 하락…체크는 ‘가치 구간’ 평가",
      "press": "tokenpost.kr",
      "publishedAt": "2026-11-14T16:50:00.000Z",
      "link": "https://www.tokenpost.kr/news/cryptocurrency/438397"
-    },
-    {
-     "title": "비트코인, 85만5000개 마지막 이동 구간에 진입",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-14T16:50:00.000Z",
-     "link": "https://www.tokenpost.kr/news/cryptocurrency/438396"
-    },
-    {
-     "title": "비트코인(BTC) 최대 보유자는 '아무도 아니다'…분실 물량 최대 18%",
-     "press": "coinreaders.com",
-     "publishedAt": "2026-11-14T16:12:00.000Z",
-     "link": "http://coinreaders.com/270311"
     }
    ]
   },
@@ -104,38 +104,6 @@
      "press": "yna.co.kr",
      "publishedAt": "2026-11-14T16:08:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016442020?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "우크라이나 나토 돈바스",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-14T15:44:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "젤렌스키 “美, 종전 협상서 우크라 나토 가입 조건부 ‘돈바스 양도안...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-14T16:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001204772?sid=104"
-    },
-    {
-     "title": "젤렌스키 \"미, '우크라 나토 가입 대가' 돈바스 양도 물어\"",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-14T15:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001535637?sid=104"
-    },
-    {
-     "title": "젤렌스키 \"美, 돈바스 양보하면 나토 가입 제안…안보 확실하면 국민투...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-14T15:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005604243?sid=104"
     }
    ]
   }
