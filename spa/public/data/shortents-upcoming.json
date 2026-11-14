@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T00:41:01.446Z",
+ "builtAt": "2026-11-14T00:51:05.350Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 43,
-   "recent20": 11,
-   "press": 40,
-   "firstArticleAt": "2026-11-13T23:12:00.000Z",
+   "articles90": 46,
+   "recent20": 14,
+   "press": 41,
+   "firstArticleAt": "2026-11-13T23:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美 전역 항공기 이륙 전면 중단…관제통신망 마비에 항공대란",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-14T00:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004009619?sid=104"
+     "title": "美 관제통신 장애에 유럽발 미국행 항공편 중단…캐나다도 운항 관리",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-14T00:50:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000082588"
     },
     {
-     "title": "美 전역 항공기 운항 마비… \"관제통신 오류, 해킹 징후는 발견 안돼\"",
-     "press": "boannews.com",
-     "publishedAt": "2026-11-14T00:38:00.000Z",
-     "link": "https://www.boannews.com/news/articleView.html?idxno=147262"
+     "title": "미국 전역 항공기 이륙 전면 중단…유럽발 미국행 항공편도 멈춰",
+     "press": "kado.net",
+     "publishedAt": "2026-11-14T00:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000211216?sid=104"
     },
     {
-     "title": "미국 전역 항공편 중단, FAA 통신 장애로 여행객 발 묶여",
+     "title": "관제센터 통신문제로 美 전역 항공기 이륙 중단…“사이버 공격은 아닌...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-14T00:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002723370?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "골키퍼 12경기 출전 정지",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 10,
+   "recent20": 3,
+   "press": 10,
+   "firstArticleAt": "2026-11-13T23:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'죽음 부른 니킥' GK 오워노, '최고 수위' 12경기 출전정지",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-14T00:48:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261114000033"
+    },
+    {
+     "title": "스페인 축구계 충격, 골키퍼 충돌로 사망 사건 발생... 중징계와 형사 ...",
      "press": "gokorea.kr",
-     "publishedAt": "2026-11-14T00:38:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885590"
+     "publishedAt": "2026-11-14T00:36:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885586"
+    },
+    {
+     "title": "아내도 보고 있었는데…니킥으로 공격수 숨지게 한 골키퍼, 결국",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-14T00:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005763608?sid=104"
     }
    ]
   },
@@ -48,7 +80,7 @@
     "signal.bz"
    ],
    "articles90": 10,
-   "recent20": 3,
+   "recent20": 2,
    "press": 10,
    "firstArticleAt": "2026-11-13T23:22:00.000Z",
    "exclusive": false,
@@ -75,44 +107,12 @@
    ]
   },
   {
-   "keyword": "골키퍼 12경기 출전 정지",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-13T23:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "스페인 축구계 충격, 골키퍼 충돌로 사망 사건 발생... 중징계와 형사 ...",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-14T00:36:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885586"
-    },
-    {
-     "title": "아내도 보고 있었는데…니킥으로 공격수 숨지게 한 골키퍼, 결국",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-14T00:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005763608?sid=104"
-    },
-    {
-     "title": "충돌로 상대선수 숨지게 한 골키퍼, 12경기 출전 정지…과실치사 적용 ...",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-14T00:09:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/422/0000926073"
-    }
-   ]
-  },
-  {
    "keyword": "100일의 거짓말",
    "sources": [
     "signal.bz"
    ],
    "articles90": 8,
-   "recent20": 1,
+   "recent20": 0,
    "press": 8,
    "firstArticleAt": "2026-11-13T23:58:00.000Z",
    "exclusive": false,
@@ -139,14 +139,14 @@
    ]
   },
   {
-   "keyword": "트럼프 전작권 주한미군 철수",
+   "keyword": "트럼프 전작권 전환",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
    "articles90": 7,
-   "recent20": 2,
+   "recent20": 1,
    "press": 7,
-   "firstArticleAt": "2026-11-13T23:16:00.000Z",
+   "firstArticleAt": "2026-11-13T23:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -171,49 +171,23 @@
    ]
   },
   {
-   "keyword": "고경표 음주사고",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 6,
-   "recent20": 5,
-   "press": 6,
-   "firstArticleAt": "2026-11-14T00:03:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "고경표, 만취 운전 적발…첫 방송 앞둔 ‘보검 매직컬2’ 날벼락",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-14T00:38:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001280863"
-    },
-    {
-     "title": "[공식] 고경표 '만취 음주운전'..소속사는 \"확인 중\"",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-14T00:37:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003487268"
-    },
-    {
-     "title": "고경표, 만취 운전 중 청소차 충돌…면허 취소 수준에 경찰 조사",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-14T00:37:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000639034"
-    }
-   ]
-  },
-  {
    "keyword": "조현",
    "sources": [
     "google"
    ],
-   "articles90": 6,
+   "articles90": 7,
    "recent20": 2,
-   "press": 5,
+   "press": 6,
    "firstArticleAt": "2026-11-13T23:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "조현, 중국에 '한반도 문제' 건설적 역할 당부…왕이 \"정책 변함없어\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-14T00:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926086?sid=100"
+    },
     {
      "title": "조현, \"한반도 문제 건설적 역할 당부\"…왕이 \"정책 변함없다\"",
      "press": "hankookilbo.com",
@@ -225,12 +199,6 @@
      "press": "news.tf.co.kr",
      "publishedAt": "2026-11-14T00:31:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/629/0000551884?sid=100"
-    },
-    {
-     "title": "조현 \"한반도 평화 한중 공동 이익\"…中 왕이 \"건설적 역할 지속할 것\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-14T00:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005441046?sid=100"
     }
    ]
   },
@@ -239,10 +207,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-13T23:15:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-13T23:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -267,46 +235,14 @@
    ]
   },
   {
-   "keyword": "faa",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 3,
-   "press": 4,
-   "firstArticleAt": "2026-11-13T23:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "미국 전역 항공편 중단, FAA 통신 장애로 여행객 발 묶여",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-14T00:38:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885590"
-    },
-    {
-     "title": "USA FAA GROUNDSTOP",
-     "press": null,
-     "publishedAt": "2026-11-14T00:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/091/0010368438?sid=104"
-    },
-    {
-     "title": "Georgia vs UNC leads US searches while FAA tops Hacker News",
-     "press": "econotimes.com",
-     "publishedAt": "2026-11-14T00:24:00.000Z",
-     "link": "https://econotimes.com/Georgia-vs-UNC-leads-US-searches-while-FAA-tops-Hacker-News-1776499"
-    }
-   ]
-  },
-  {
    "keyword": "김지원 수술, 이게 너의 지옥",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-13T23:16:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-14T00:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -331,6 +267,70 @@
    ]
   },
   {
+   "keyword": "배나라♥한재아 결혼 뮤지컬 부부",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-13T23:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "배나라♥한재아, 오늘 결혼…뮤지컬이 이어준 인연",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-14T00:43:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014321874"
+    },
+    {
+     "title": "배나라♥한재아, 오늘(14일) 웨딩마치...뮤지컬이 맺어준 7년 사랑 결실",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-13T23:47:00.000Z",
+     "link": "https://m.entertain.naver.com/article/477/0000639030"
+    },
+    {
+     "title": "배나라♥한재아, 오늘(14일) 결혼…뮤지컬 동료에서 부부로 [엑's 투데이...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-13T23:35:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002080400"
+    }
+   ]
+  },
+  {
+   "keyword": "안경 부정행위 적발",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-13T23:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "AI 안경의 진화, 시험장 부정행위와 개인정보 침해 우려 증가",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-14T00:48:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885629"
+    },
+    {
+     "title": "세무사 시험에서도 AI안경 논란…진상 조사 착수",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-13T23:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926053?sid=102"
+    },
+    {
+     "title": "\"안경 부정행위\"...없는게 없는 '무도', 수능 앞두고 또 소환",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-13T23:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005441037"
+    }
+   ]
+  },
+  {
    "keyword": "김정관 장관, 체코 원전 화상 면담",
    "sources": [
     "nate"
@@ -349,55 +349,23 @@
      "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=883255"
     },
     {
-     "title": "체코 산업통상부 장관과 화상 면담하는 김정관 장관",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-14T00:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009288799?sid=101"
-    },
-    {
      "title": "김정관 장관, 체코 산업통상부 장관과 원전 관련 화상 면담",
      "press": "news1.kr",
      "publishedAt": "2026-11-14T00:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009288800?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "단풍",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-13T23:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[천영식의 유럽기행-스위스 그림젤패스] 신비한 풀잎 단풍의 매력...신이...",
-     "press": "pennmike.com",
-     "publishedAt": "2026-11-14T00:02:00.000Z",
-     "link": "https://www.pennmike.com/news/articleView.html?idxno=131781"
+     "link": "https://n.news.naver.com/mnews/article/421/0009288798?sid=101"
     },
     {
-     "title": "[요즘 북한은] 모란봉·용악산 단풍 절정…평양의 가을 풍경 외",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-13T23:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012293885?sid=100"
-    },
-    {
-     "title": "\"단풍길 감성 두배\"…르노 필랑트의 실력 '넉넉한 공간에 연비가 19㎞/ℓ...",
-     "press": "gpkorea.com",
-     "publishedAt": "2026-11-13T23:18:00.000Z",
-     "link": "https://www.gpkorea.com/news/articleView.html?idxno=148605"
+     "title": "체코 산업통상부 장관과 화상 면담하는 김정관 장관",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-14T00:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009288801?sid=101"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 471,
+  "flagged": 472,
   "matched": 191,
   "avgLeadMin": 369,
   "recent": [
