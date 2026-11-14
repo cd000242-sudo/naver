@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-14T18:55:19.617Z",
+  "generatedAt": "2026-11-14T19:09:33.641Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -15506,72 +15506,6 @@
           "views": 525,
           "answers": 5,
           "askedAt": "2026.10.27"
-        }
-      ]
-    },
-    {
-      "id": "d4758ed7b67a2dc4",
-      "urls": [
-        "https://vency.tistory.com/entry/%EC%9C%88%EB%8F%84%EC%9A%B011-%EB%B0%94%EC%9D%B4%EB%9F%AC%EC%8A%A4-%EB%B0%A9%EC%A7%80%EA%B0%80-%EA%BA%BC%EC%A0%B8-%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4-%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95-%EC%B4%9D%EC%A0%95%EB%A6%AC-%E2%80%94-Windows-%EB%B3%B4%EC%95%88-%EC%8B%A4%EC%8B%9C%EA%B0%84-%EB%B3%B4%ED%98%B8-%EC%BC%9C%EA%B8%B0%C2%B7%ED%83%80%EC%82%AC-%EB%B0%B1%EC%8B%A0-%EC%B6%A9%EB%8F%8C"
-      ],
-      "guide": {
-        "direction": "검색자는 \"바이러스 방지가 꺼져 있다\"는 경고를 켜고 싶은 쪽과, 반대로 검사가 자꾸 떠서 끄고 싶은 쪽(자동완성 '끄는법·감지 끄는법')으로 나뉘는데 고수 글 제목은 '켜기' 한쪽만 겨냥한다. 지식인에는 노턴 설치 후 충돌로 꺼짐, 서비스 수동 재시작이 필요하다는 구체 사례가 있다. 이 글은 '켜기'와 '끄기'를 상황별로 나눠 재시작 순서와 타사백신 충돌 체크리스트까지 줘서 양쪽 검색자를 한 글로 끝낸다.",
-        "searchTargets": [
-          "윈도우11 바이러스 끄는법",
-          "윈도우11 바이러스 검사방법",
-          "윈도우11 바이러스 감지 끄는법"
-        ],
-        "mustInclude": [
-          "Windows 보안 > 바이러스 및 위협 방지 > 설정 관리 > 실시간 보호 켜는 경로 단계별",
-          "노턴 등 타사 백신 설치 후 자동 꺼짐·충돌 해결 체크리스트 (지식인 사례 근거)",
-          "서비스 수동 재시작 순서(services.msc, Defender 관련 서비스)",
-          "스마트 앱 컨트롤 차단 해제 설정 위치 (확인 필요: 지식인 질문 원문 재확인)",
-          "'켜는법'과 '끄는법'을 의도별로 나눈 목차 구성"
-        ],
-        "mustAvoid": [
-          "노턴 등 특정 백신사를 저격하듯 비방하거나 모든 충돌을 한 제품 탓으로 일반화하는 서술",
-          "검사 끄는법을 레지스트리·그룹정책 영구 비활성화로 간단히 던져 보안 공백을 키우는 안내",
-          "'켜기'만 다루다 '끄는법' 검색 의도(자동완성 2건)를 놓치는 구성"
-        ],
-        "checkBefore": [
-          "Windows 보안 설정 메뉴 경로/명칭이 빌드 버전별로 다른지 Microsoft 공식 지원문서에서 확인",
-          "노턴 충돌 사례가 특정 버전에만 해당하는지 지식인 원문·커뮤니티에서 재확인"
-        ],
-        "solves": [
-          "바이러스 및 위협 방지가 꺼져 있다고 나오는데 안 켜진다 → 실시간 보호 켜는 경로와 서비스 재시작 순서 제시",
-          "노턴 설치 후 팝업·충돌로 꺼짐 → 타사 백신 충돌 해결 체크리스트 제공",
-          "바이러스 검사 알림이 자꾸 떠서 끄고 싶다 → '끄는법' 섹션으로 별도 안내"
-        ],
-        "actionTitles": [
-          "윈도우11 바이러스 방지 꺼짐 켜는법·끄는법 한번에 해결",
-          "윈도우11 바이러스 검사방법과 감지 끄는법 순서대로 정리",
-          "윈도우11 바이러스 방지 노턴 충돌까지 끄는법 해결하기"
-        ]
-      },
-      "at": "2026-11-12T12:18:46.154Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "윈도우11 스마트앱컨트롤 차단 해제 관련 문....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110&docId=493147617&answerNo=1&qb=7JyI64+E7JqwMTEg67CU7J2065+s7IqkIOuwqeyngCDqurzsoLgg7J6I7Iq164uI64uk",
-          "views": 4657,
-          "answers": 1,
-          "askedAt": "2026.04.27"
-        },
-        {
-          "title": "윈도우 11 바이러스 및 위협감지 설정이 안켜....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10301&docId=479111778&answerNo=1&qb=7JyI64+E7JqwMTEg67CU7J2065+s7IqkIOuwqeyngCDqurzsoLgg7J6I7Iq164uI64uk",
-          "views": 799,
-          "answers": 1,
-          "askedAt": "2024.12.15"
-        },
-        {
-          "title": "노트북 윈도우 11 질문",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10301&docId=484561874&answerNo=1&qb=7JyI64+E7JqwMTEg67CU7J2065+s7IqkIOuwqeyngCDqurzsoLgg7J6I7Iq164uI64uk",
-          "views": 547,
-          "answers": 1,
-          "askedAt": "2025.04.25"
         }
       ]
     },
