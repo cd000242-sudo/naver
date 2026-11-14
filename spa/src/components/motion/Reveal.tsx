@@ -1,6 +1,5 @@
 import { useLayoutEffect, useRef, type CSSProperties, type ReactNode, type RefObject } from 'react';
 import { prefersReducedMotion } from './useMotionHooks';
-import './motion.css';
 
 const STEP_MS = 50;
 const MAX_STAGGER = 10;

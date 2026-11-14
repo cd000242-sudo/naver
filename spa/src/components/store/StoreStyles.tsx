@@ -211,7 +211,7 @@ function StoreStyles() {
             }
             .st-pay {
                 width: min(460px, 100%); border-radius: ${lightRadius.panel}px; padding: 24px;
-                max-height: calc(100vh - 32px); max-height: calc(100dvh - 32px); overflow-y: auto; overscroll-behavior: contain;
+                max-height: calc(100vh - 32px); max-height: calc(100dvh - 36px); overflow-y: auto; overscroll-behavior: contain;
                 background: var(--st-card); border: 1px solid var(--st-line);
                 box-shadow: ${light.shadowFloat};
             }

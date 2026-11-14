@@ -1,6 +1,5 @@
 import { useRef, type CSSProperties } from 'react';
 import { useOnScreen } from './useMotionHooks';
-import './motion.css';
 
 export type MarqueeItem = { key: string; label: string; href: string };
 

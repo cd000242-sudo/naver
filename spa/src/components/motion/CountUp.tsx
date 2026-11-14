@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import { prefersReducedMotion, useInViewOnce } from './useMotionHooks';
-import './motion.css';
 
 const defaultFormatter = new Intl.NumberFormat('ko-KR');
 

@@ -1,5 +1,4 @@
 import { Fragment } from 'react';
-import './motion.css';
 
 /**
  * Headline that rises in word by word, once, on first paint (60ms between words).

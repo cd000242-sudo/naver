@@ -1,7 +1,6 @@
 import { useEffect, type RefObject } from 'react';
 import { prefersReducedMotion } from './useMotionHooks';
 import { REVEAL_ITEM_SELECTOR, REVEAL_SHOT_SELECTOR } from './revealTargets';
-import './motion.css';
 
 const STEP_MS = 50;
 const MAX_STEP = 8;

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { isNormalPricingActive, PRICING_SWITCH_AT_MS } from '../../lib/pricingSchedule';
 import { fetchSiteContent } from '../../lib/siteOps';
@@ -7,9 +7,8 @@ import {
     type Product, type TermId,
 } from '../../lib/productCatalog';
 import StoreIcon from './StoreIcons';
-import CountUp from '../motion/CountUp';
 import SplitWords from '../motion/SplitWords';
-import { useSlidingIndicator } from '../motion/useSlidingIndicator';
+import SlidingInk from '../motion/SlidingInk';
 import StoreStyles from './StoreStyles';
 
 /**
@@ -58,8 +57,6 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust, hea
     const Heading = headingLevel === 1 ? 'h1' : 'h2';
     const [term, setTerm] = useState<TermId>('monthly');
     // The dark pill behind the chosen term glides between the three segments (transform only).
-    const termsRef = useRef<HTMLDivElement>(null);
-    const termInkStyle = useSlidingIndicator(termsRef, 'button.on', term);
     const [cart, setCart] = useState<string[]>([]);
     const dday = daysToSwitch();
     const normalActive = isNormalPricingActive();
@@ -171,8 +168,8 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust, hea
                 <Heading><SplitWords text="필요한 것만 고르세요" /></Heading>
                 <p className="st-sub">하나만 써도 되고 묶어서 써도 됩니다. 담아 보시면 어느 쪽이 싼지 바로 보입니다.</p>
 
-                <div className="st-terms" role="group" aria-label="이용 기간" ref={termsRef}>
-                    <span className="lp-seg-ink" style={termInkStyle} aria-hidden="true" />
+                <div className="st-terms" role="group" aria-label="이용 기간">
+                    <SlidingInk className="lp-seg-ink" activeSelector="button.on" activeKey={term} />
                     {TERMS.map((item) => (
                         <button
                             key={item.id}
@@ -232,7 +229,7 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust, hea
 
                             <div className="st-body">
                                 <h3>
-                                    <span className="st-glyph" aria-hidden="true">{product.glyph}</span>
+                                    <span aria-hidden="true" style={{ color: product.accent }}>{product.glyph}</span>
                                     {product.name}
                                     {product.bundle && <em className="st-evt">특별 이벤트가</em>}
                                 </h3>
@@ -269,7 +266,7 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust, hea
                                     const termUnit = term === 'lifetime' ? '' : term === 'yearly' ? '년' : '월';
                                     if (isTaxIncludedPrice(product, term)) {
                                         return <>
-                                            <div className="st-price"><b><CountUp value={price} format={won} reserve /></b><i>원 / 월</i></div>
+                                            <div className="st-price"><b>{won(price)}</b><i>원 / 월</i></div>
                                             <p className="st-permo">부가세 포함 · 카드 30일마다 자동결제</p>
                                             <p className="st-fine">LEWORD는 개별 구독으로 결제합니다.</p>
                                             <p className="st-fine">계좌이체는 30일 이용 후 수동 갱신 · 자동출금 없음</p>
@@ -280,7 +277,7 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust, hea
                                             <>
                                                 <div className="st-price">
                                                     {!normalActive && normalPriceOf(price) > price && <s>{won(normalPriceOf(price))}</s>}
-                                                    <b><CountUp value={price} format={won} reserve /></b>
+                                                    <b>{won(price)}</b>
                                                     <i>원{termUnit ? ` / ${termUnit}` : ''}</i>
                                                 </div>
                                                 <p className="st-permo">
@@ -292,7 +289,7 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust, hea
                                     return (
                                         <>
                                             <div className="st-price">
-                                                <b><CountUp value={daily} format={won} reserve /></b>
+                                                <b>{won(daily)}</b>
                                                 <i>원 / 하루</i>
                                             </div>
                                             <p className="st-permo">

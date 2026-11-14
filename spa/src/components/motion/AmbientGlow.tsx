@@ -1,4 +1,3 @@
-import './motion.css';
 
 /**
  * One fixed, non-interactive layer of slow warm light behind the page content.
