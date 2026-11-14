@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T15:14:15.888Z",
+ "builtAt": "2026-11-14T15:24:20.596Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,50 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
+ "measured": 25,
  "candidates": [
+  {
+   "keyword": "채령",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-14T14:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "박서진, 채령도 놀란 트로트계 슈스 스케일...\"팬카페 회원 수 임영웅 다...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-14T15:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002080681"
+    },
+    {
+     "title": "있지 채령, 그냥 안 먹었을 뿐인데..\"저도 성인 여자, 1인분 먹어요\"",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-14T14:55:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003487504"
+    },
+    {
+     "title": "'살림남' 채령, 박서진 동생 폭행(?)에 충격⋯\"왜 그렇게 막 때리냐\"",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-14T14:48:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2648193"
+    }
+   ]
+  },
   {
    "keyword": "김도영 결승포 한국, APBC 결승행",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-14T13:47:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-14T13:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -47,10 +80,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 5,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-14T13:50:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-14T13:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,42 +108,41 @@
    ]
   },
   {
-   "keyword": "채령",
+   "keyword": "예술가 집안 우무티",
    "sources": [
-    "signal.bz",
-    "google"
+    "nate"
    ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-14T14:16:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-14T14:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "박서진, 채령도 놀란 트로트계 슈스 스케일...\"팬카페 회원 수 임영웅 다...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-14T15:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002080681"
+     "title": "젠더리스 아이돌, 알고 보니 예술가 집안이었다…\"할머니가 미술과 교수...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-14T15:05:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000784456"
     },
     {
-     "title": "있지 채령, 그냥 안 먹었을 뿐인데..\"저도 성인 여자, 1인분 먹어요\"",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-14T14:55:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003487504"
+     "title": "엑스러브 만든 우무티, 예술가 집안이었다 “조모, 예술대 미술과 교수...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-14T14:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005640691"
     },
     {
-     "title": "'살림남' 채령, 박서진 동생 폭행(?)에 충격⋯\"왜 그렇게 막 때리냐\"",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-14T14:48:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2648193"
+     "title": "엑스러브 만든 우무티, 명문 예술가 집안이었다 “조모 교수+조부 음악...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-14T14:39:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001187518"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 487,
+  "flagged": 488,
   "matched": 230,
   "avgLeadMin": 490,
   "recent": [
