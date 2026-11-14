@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T01:01:10.152Z",
+ "builtAt": "2026-11-14T01:11:15.837Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "미국 항공 운항 중단",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 44,
+   "articles90": 49,
    "recent20": 13,
-   "press": 39,
-   "firstArticleAt": "2026-11-13T23:36:00.000Z",
+   "press": 43,
+   "firstArticleAt": "2026-11-13T23:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "미 전역 항공기 운항 '올스톱'…\"관제통신시스템 장애\"",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-14T01:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001978170?sid=104"
+     "title": "美 전역 항공기 운항중단 올스톱…\"해킹 아닌 관제통신 장애\"",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-14T01:10:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=729282"
     },
     {
-     "title": "미국 전역서 항공기 운항 중단…“관제센터 통신 문제”",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-14T00:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002832189?sid=104"
+     "title": "美전역 항공기 운항 '올스톱'...관제통신망 마비에 항공대란",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-14T01:10:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/325282/?sc=Naver"
     },
     {
-     "title": "미국 전역 항공기 이륙 중단…관제통신 장애에 7800편 지연",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-14T00:58:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611140014"
+     "title": "美전역 항공기 '올스톱'…\"통신시스템 장애\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-14T01:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926091?sid=104"
     }
    ]
   },
@@ -47,30 +47,62 @@
    "sources": [
     "daum"
    ],
-   "articles90": 43,
-   "recent20": 26,
-   "press": 28,
+   "articles90": 71,
+   "recent20": 42,
+   "press": 41,
    "firstArticleAt": "2026-11-14T00:03:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "고경표, 만취 사고에 코로나 시절 BJ와 술자리 논란",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-14T01:00:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95239"
+     "title": "고경표, 음주사고 인정 \"내려지는 처분 받아들이겠다\"",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-14T01:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/629/0000551888"
     },
     {
-     "title": "고경표, 새벽 만취 음주 사고…면허 취소 수준",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-14T01:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001040196?sid=102"
+     "title": "고경표, 음주운전 교통사고…\"피해 회복에 책임 다할 것\"",
+     "press": "dispatch.co.kr",
+     "publishedAt": "2026-11-14T01:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/433/0000132292"
     },
     {
-     "title": "'음주운전 사고' 고경표 측 \"면허 취소 수치..잘못 인정, 깊이 반성\" (전...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-14T01:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005640172"
+     "title": "[공식] ‘만취 음주운전’ 고경표 측 “깊이 반성 중…책임 다할 것”",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-14T01:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001149757"
+    }
+   ]
+  },
+  {
+   "keyword": "美 항공기 이륙 중단",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 21,
+   "recent20": 6,
+   "press": 20,
+   "firstArticleAt": "2026-11-14T00:03:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美 전역 항공기 운항중단 올스톱…\"해킹 아닌 관제통신 장애\"",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-14T01:10:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=729282"
+    },
+    {
+     "title": "美전역 항공기 운항 '올스톱'...관제통신망 마비에 항공대란",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-14T01:10:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/325282/?sc=Naver"
+    },
+    {
+     "title": "美전역 항공기 '올스톱'…\"통신시스템 장애\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-14T01:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926091?sid=104"
     }
    ]
   },
@@ -79,13 +111,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 11,
+   "articles90": 12,
    "recent20": 2,
-   "press": 11,
+   "press": 12,
    "firstArticleAt": "2026-11-13T23:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "초반 흔들려도 이글로 반등… 최혜진, LPGA 디 안니카 이틀째 공동 선두",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-14T01:02:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/396/0000760896"
+    },
     {
      "title": "최혜진, LPGA 투어 디 안니카 2R도 공동 선두…첫 우승 도전",
      "press": "stoo.com",
@@ -97,12 +135,6 @@
      "press": "mediapen.com",
      "publishedAt": "2026-11-14T00:46:00.000Z",
      "link": "https://www.mediapen.com/news/view/1137492"
-    },
-    {
-     "title": "‘4m 이글’ 최혜진, 디 안니카 2R도 공동 선두",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-14T00:32:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/016/0002723366"
     }
    ]
   },
@@ -139,34 +171,34 @@
    ]
   },
   {
-   "keyword": "100일의 거짓말",
+   "keyword": "안도라 골키퍼 징계",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
+   "articles90": 5,
    "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-13T23:58:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-13T23:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[강대호의 대중문화 읽기] 이름 없는 이들의 역사 '100일의 거짓말'",
-     "press": "opinionnews.co.kr",
-     "publishedAt": "2026-11-14T00:30:00.000Z",
-     "link": "http://www.opinionnews.co.kr/news/articleView.html?idxno=147054"
+     "title": "스페인 축구계 충격, 골키퍼 충돌로 사망 사건 발생... 중징계와 형사 ...",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-14T00:36:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885586"
     },
     {
-     "title": "“너, 밀정이지?” 하더니…박진영, 김유정 진짜 이름 불렀다(100일의 거...",
+     "title": "아내도 보고 있었는데…니킥으로 공격수 숨지게 한 골키퍼, 결국",
      "press": "mk.co.kr",
-     "publishedAt": "2026-11-14T00:21:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001147224"
+     "publishedAt": "2026-11-14T00:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005763608?sid=104"
     },
     {
-     "title": "‘100일의 거짓말’ 박진영, 김유정 본명 '이가경' 불렀다",
-     "press": "enter.etoday.co.kr",
-     "publishedAt": "2026-11-14T00:16:00.000Z",
-     "link": "https://enter.etoday.co.kr/news/view/305221"
+     "title": "충돌로 상대선수 숨지게 한 골키퍼, 12경기 출전 정지…과실치사 적용 ...",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-14T00:09:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/422/0000926073"
     }
    ]
   },
@@ -175,10 +207,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 7,
+   "articles90": 5,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-13T23:35:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-14T00:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -203,130 +235,34 @@
    ]
   },
   {
-   "keyword": "조현",
+   "keyword": "세르비아",
    "sources": [
-    "google"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-13T23:51:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "조현, 중국에 '한반도 문제' 건설적 역할 당부…왕이 \"정책 변함없어\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-14T00:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926086?sid=100"
-    },
-    {
-     "title": "조현, \"한반도 문제 건설적 역할 당부\"…왕이 \"정책 변함없다\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-14T00:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000965529?sid=100"
-    },
-    {
-     "title": "APEC 앞두고 한중 외교회담…조현 \"한반도 평화, 양국 공동 이익\"",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-14T00:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000551884?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황과 러트닉 조사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-13T23:37:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'젠슨 황 스캔들'에 하워드 러트닉 미 상무장관 사면초가...'경질론' 위...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-14T00:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005604195?sid=104"
-    },
-    {
-     "title": "엔비디아 파문 확산에 러트닉 美 상무장관 책임론 급부상",
-     "press": "fortunekorea.co.kr",
-     "publishedAt": "2026-11-14T00:30:00.000Z",
-     "link": "https://www.fortunekorea.co.kr/news/articleView.html?idxno=54761"
-    },
-    {
-     "title": "\"젠슨 황, 이르면 다음 주 의회 출석\"...러트닉 장관 거취에 '불똥'",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-13T23:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432717?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "트럼프 전작권 주한미군 철수",
-   "sources": [
-    "signal.bz"
+    "daum"
    ],
    "articles90": 4,
    "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-13T23:46:00.000Z",
+   "firstArticleAt": "2026-11-14T00:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "트럼프의 한반도 전략, 전시작전권 전환이 미군 철수 신호탄 되나?",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-14T00:40:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885602"
-    },
-    {
-     "title": "美전문가들 \"트럼프, 전작권 전환을 주한미군 철수 수단으로 봐\"",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-14T00:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000543631?sid=104"
-    },
-    {
-     "title": "미 전문가들 \"트럼프, 전작권 전환을 주한미군 철수 기회로 봐\"",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-14T00:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000367479?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "배나라, 오늘 결혼 뮤지컬 부부로",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-13T23:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "배나라♥한재아, 오늘 결혼…뮤지컬이 이어준 인연",
+     "title": "'사비호' 네덜란드, 그리스 7-0 완파…독일은 세르비아 3-1 제압",
      "press": "newsis.com",
-     "publishedAt": "2026-11-14T00:43:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014321874"
+     "publishedAt": "2026-11-14T00:44:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/003/0014321876"
     },
     {
-     "title": "배나라♥한재아, 오늘(14일) 웨딩마치...뮤지컬이 맺어준 7년 사랑 결실",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-13T23:47:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000639030"
+     "title": "사비의 네덜란드, 그리스에 7-0...클롭의 독일, 세르비아에 3-1",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-14T00:35:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261114000031"
     },
     {
-     "title": "배나라♥한재아, 오늘(14일) 결혼…뮤지컬 동료에서 부부로 [엑's 투데이...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-13T23:35:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002080400"
+     "title": "독일 축구 부활 신호탄…클롭호, 세르비아 꺾고 8강 도전",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-14T00:34:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000082587"
     }
    ]
   },
@@ -335,10 +271,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-13T23:33:00.000Z",
+   "press": 2,
+   "firstArticleAt": "2026-11-14T00:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -365,10 +301,16 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 476,
-  "matched": 191,
-  "avgLeadMin": 369,
+  "flagged": 479,
+  "matched": 192,
+  "avgLeadMin": 367,
   "recent": [
+   {
+    "keyword": "엔비디아 GPU 26만장 공급",
+    "hitKeyword": "엔비디아 CEO 후보 물색",
+    "hitAt": "2026-11-14T10:00:00+09:00",
+    "leadMin": 29
+   },
    {
     "keyword": "무인 항공기",
     "hitKeyword": "미국 항공기 운항중단",
@@ -422,12 +364,6 @@
     "hitKeyword": "한국 야구 일본전 12연패",
     "hitAt": "2026-11-14T06:30:00+09:00",
     "leadMin": 373
-   },
-   {
-    "keyword": "모두의 창업 개인정보 유출",
-    "hitKeyword": "모두의 창업 정보 유출",
-    "hitAt": "2026-11-14T06:30:00+09:00",
-    "leadMin": 353
    }
   ]
  }
