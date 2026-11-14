@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T19:36:08.950Z",
+ "builtAt": "2026-11-14T19:46:11.954Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "미국 항공운항 정상화",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 5,
    "recent20": 1,
-   "press": 3,
+   "press": 4,
    "firstArticleAt": "2026-11-14T18:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "미 항공당국 \"최악의 상황 지나가…항공운항 15일 완전 정상화\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-14T19:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001403072?sid=104"
+    },
     {
      "title": "美항공마비, 라우터·시공 오류 가능성…\"외주사 과실 조사·15일 정상화...",
      "press": "newsis.com",
@@ -33,12 +39,6 @@
      "press": "imnews.imbc.com",
      "publishedAt": "2026-11-14T19:13:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/214/0001535641?sid=104"
-    },
-    {
-     "title": "미 항공당국 \"최악의 상황 지나...내일 완전 정상화\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-14T18:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432939?sid=104"
     }
    ]
   }
