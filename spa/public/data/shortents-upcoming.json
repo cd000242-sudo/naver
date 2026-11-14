@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-13T23:50:26.954Z",
+ "builtAt": "2026-11-14T00:00:32.834Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,66 +11,34 @@
  "measured": 27,
  "candidates": [
   {
-   "keyword": "롤드컵 결승전 서울 개최",
+   "keyword": "사우디에 21년 패배",
    "sources": [
-    "daum"
+    "nate"
    ],
    "articles90": 14,
-   "recent20": 4,
-   "press": 12,
-   "firstArticleAt": "2026-11-13T23:00:00.000Z",
+   "recent20": 5,
+   "press": 14,
+   "firstArticleAt": "2026-11-13T22:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "2027 LoL 월드 챔피언십, 서울 창동서 결승…일본도 공동개최",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-13T23:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016441642?sid=105"
+     "title": "한국 축구, 사우디에 2-3 패배…42년 만에 3실점",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-13T23:58:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/660/0000121332"
     },
     {
-     "title": "2027년 '롤드컵' 韓日 공동 개최…결승 무대는 서울 아레나",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-13T23:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002248538?sid=105"
+     "title": "축구대표팀, 사우디에 2-3 42년만에 3실점 굴욕…'갈등 봉합?'",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-13T23:54:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4118541"
     },
     {
-     "title": "2027 롤드컵, 일본 나고야서 스위스 스테이지… 결승은 창동 서울 아레...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-13T23:44:00.000Z",
-     "link": "https://m.sports.naver.com/esports/article/311/0002080402"
-    }
-   ]
-  },
-  {
-   "keyword": "날씨",
-   "sources": [
-    "google"
-   ],
-   "articles90": 18,
-   "recent20": 3,
-   "press": 12,
-   "firstArticleAt": "2026-11-13T22:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[대전·세종·충남 날씨예보] 14일 밤까지 비 최대 30㎜",
-     "press": "thefairnews.co.kr",
-     "publishedAt": "2026-11-13T23:38:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94174"
-    },
-    {
-     "title": "[오늘 날씨] 전국 대부분 비…제주 최고 50mm, 모레 강원산지 1~5cm 눈",
-     "press": "mhns.co.kr",
-     "publishedAt": "2026-11-13T23:34:00.000Z",
-     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=769084"
-    },
-    {
-     "title": "[제주도 날씨예보] 15일 아침까지 최대 50㎜ 비…산간도로 짙은 안개",
-     "press": "thefairnews.co.kr",
-     "publishedAt": "2026-11-13T23:34:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94173"
+     "title": "\"조현우는 대체 왜 안 쓰나?\"…김승규 또 치명적 실수, 한국 축구 21년 ...",
+     "press": "ftimes.kr",
+     "publishedAt": "2026-11-13T23:50:00.000Z",
+     "link": "https://www.ftimes.kr/news/articleView.html?idxno=41089"
     }
    ]
   },
@@ -80,13 +48,19 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 13,
-   "recent20": 1,
-   "press": 12,
+   "articles90": 14,
+   "recent20": 2,
+   "press": 13,
    "firstArticleAt": "2026-11-13T22:32:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
+    {
+     "title": "어바인서 남의 집 현관문 발로 차고 도주…청소년 장난에 주민 불안",
+     "press": "radiokorea.com",
+     "publishedAt": "2026-11-13T23:50:00.000Z",
+     "link": "https://www.radiokorea.com/news/article.php?uid=509622"
+    },
     {
      "title": "문지애♥전종환 \"아들, 수학 시험 27점에 온 집안 비상…결국 3등 들어\"",
      "press": "news1.kr",
@@ -98,44 +72,38 @@
      "press": "nbntv.kr",
      "publishedAt": "2026-11-13T23:20:00.000Z",
      "link": "https://www.nbntv.kr/news/articleView.html?idxno=341079"
-    },
-    {
-     "title": "형과 모친 용돈 문제로 다투다 말린 노모 폭행한 50대 집유",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-13T23:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000161210?sid=102"
     }
    ]
   },
   {
-   "keyword": "사우디에 21년 패배",
+   "keyword": "날씨",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 11,
-   "recent20": 4,
-   "press": 11,
-   "firstArticleAt": "2026-11-13T22:33:00.000Z",
+   "articles90": 15,
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-13T22:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "사우디에 42년 만의 3실점·일본에 5대9 밀려···축구·야구 나란히 패...",
-     "press": "globale.co.kr",
-     "publishedAt": "2026-11-13T23:46:00.000Z",
-     "link": "https://www.globale.co.kr/news/articleView.html?idxno=41643"
+     "title": "[날씨] 오늘(14일) 전국 가을비 밤까지… 제주 최대 50㎜, 내일 일요일은...",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-13T23:52:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082660"
     },
     {
-     "title": "두 번 따라붙고도 무너진 한국…사우디에 2-3 석패, 수비 불안에 발목",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-13T23:46:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=847251"
+     "title": "[대전·세종·충남 날씨예보] 14일 밤까지 비 최대 30㎜",
+     "press": "thefairnews.co.kr",
+     "publishedAt": "2026-11-13T23:38:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94174"
     },
     {
-     "title": "축구 대표팀, 화합 외쳤지만 수비 불안에 발목… 사우디에 2대3 패배",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-13T23:36:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/421/0009288775"
+     "title": "[제주도 날씨예보] 15일 아침까지 최대 50㎜ 비…산간도로 짙은 안개",
+     "press": "thefairnews.co.kr",
+     "publishedAt": "2026-11-13T23:34:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94173"
     }
    ]
   },
@@ -177,7 +145,7 @@
     "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 1,
    "press": 6,
    "firstArticleAt": "2026-11-13T22:44:00.000Z",
    "exclusive": false,
@@ -209,7 +177,7 @@
     "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-13T22:57:00.000Z",
    "exclusive": false,
@@ -241,10 +209,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-13T22:24:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-13T23:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -273,10 +241,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-13T22:26:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-13T23:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
