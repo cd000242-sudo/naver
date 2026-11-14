@@ -24018,6 +24018,11 @@
     "tier": "low",
     "pc": 100,
     "mobile": 300
+   },
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-11-14T02:39:59.180Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
   {
@@ -36611,7 +36616,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-13T04:59:15.586Z",
+    "checkedAt": "2026-11-14T02:39:38.447Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -88864,6 +88869,11 @@
     "tier": "low",
     "pc": 140,
     "mobile": 90
+   },
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-11-14T02:39:57.377Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
   {
@@ -102943,7 +102953,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-13T04:59:16.459Z",
+    "checkedAt": "2026-11-14T02:39:39.356Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -112058,5 +112068,5 @@
    ]
   }
  ],
- "revalidatedAt": "2026-11-13T04:59:34.470Z"
+ "revalidatedAt": "2026-11-14T02:39:59.180Z"
 }
