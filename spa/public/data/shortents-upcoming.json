@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T21:37:01.737Z",
+ "builtAt": "2026-11-14T21:47:10.203Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -10,6 +10,38 @@
  },
  "measured": 24,
  "candidates": [
+  {
+   "keyword": "2026년 11월 15일 운세",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-14T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오늘의 운세] 2026년 11월 15일 (일) 띠별운세 '한 템포 늦춰 쉬자'",
+     "press": "dailypop.kr",
+     "publishedAt": "2026-11-14T21:40:00.000Z",
+     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103981"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 15일 별자리 운세",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-14T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006409879?sid=103"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 15일 띠별 운세",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-14T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006409878?sid=103"
+    }
+   ]
+  },
   {
    "keyword": "우크라이나 나토 돈바스",
    "sources": [
@@ -72,38 +104,6 @@
      "press": "newsen.com",
      "publishedAt": "2026-11-14T20:59:00.000Z",
      "link": "https://m.entertain.naver.com/article/609/0001187560"
-    }
-   ]
-  },
-  {
-   "keyword": "2026년 11월 15일 운세",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-14T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오늘의 운세] 2026년 11월 15일 별자리 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-14T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006409879?sid=103"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 15일 띠별 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-14T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006409878?sid=103"
-    },
-    {
-     "title": "[백운산 오늘의 운세] 2026년 11월 15일",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-14T21:00:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20260914001437328"
     }
    ]
   }
