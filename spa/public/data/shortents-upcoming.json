@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T21:57:15.679Z",
+ "builtAt": "2026-11-14T22:07:18.583Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "2026년 11월 15일 운세",
@@ -16,7 +16,7 @@
     "nate"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-14T21:00:00.000Z",
    "exclusive": false,
@@ -45,7 +45,6 @@
   {
    "keyword": "아버지",
    "sources": [
-    "signal.bz",
     "google"
    ],
    "articles90": 3,
@@ -74,46 +73,44 @@
      "link": "https://m.entertain.naver.com/article/609/0001187560"
     }
    ]
-  },
-  {
-   "keyword": "우크라이나 나토 돈바스",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-14T20:31:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "젤렌스키 \"미국이 나토 가입 대가로 돈바스 양도안 제시\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-14T21:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432966?sid=104"
-    },
-    {
-     "title": "젤렌스키, “미국, 우크라이나에 나토 가입 대가로 돈바스 양도안 제안...",
-     "press": "voakorea.com",
-     "publishedAt": "2026-11-14T21:17:00.000Z",
-     "link": "https://www.voakorea.com/a/8223723.html"
-    },
-    {
-     "title": "젤렌스키 \"美, '나토 가입 대신 돈바스서 철군' 첫 제안\"(종합)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-14T20:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014322452?sid=104"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
   "flagged": 500,
-  "matched": 239,
-  "avgLeadMin": 522,
+  "matched": 244,
+  "avgLeadMin": 532,
   "recent": [
+   {
+    "keyword": "서울 집값 상승",
+    "hitKeyword": "경기남부 집값 상승",
+    "hitAt": "2026-11-15T07:00:00+09:00",
+    "leadMin": 3837
+   },
+   {
+    "keyword": "김도영 결승포 한국, APBC 결승행",
+    "hitKeyword": "김도영 메이저리그",
+    "hitAt": "2026-11-15T07:00:00+09:00",
+    "leadMin": 416
+   },
+   {
+    "keyword": "젠슨 황, 엔비디아 사태",
+    "hitKeyword": "트럼프 엔비디아 주식 매입",
+    "hitAt": "2026-11-15T07:00:00+09:00",
+    "leadMin": 335
+   },
+   {
+    "keyword": "젠슨 황 엔비디아",
+    "hitKeyword": "트럼프 엔비디아 주식 매입",
+    "hitAt": "2026-11-15T07:00:00+09:00",
+    "leadMin": 315
+   },
+   {
+    "keyword": "머스크와 젠슨 황 없는 엔비디아",
+    "hitKeyword": "트럼프 엔비디아 주식 매입",
+    "hitAt": "2026-11-15T07:00:00+09:00",
+    "leadMin": 214
+   },
    {
     "keyword": "이재명 아세안 정상회담",
     "hitKeyword": "미중러 정상회담",
@@ -143,36 +140,6 @@
     "hitKeyword": "젠지 롤드컵 결승 1세트",
     "hitAt": "2026-11-15T06:30:00+09:00",
     "leadMin": 1269
-   },
-   {
-    "keyword": "날씨",
-    "hitKeyword": "일요일 포근한 날씨",
-    "hitAt": "2026-11-15T06:00:00+09:00",
-    "leadMin": 1320
-   },
-   {
-    "keyword": "100일의 거짓말",
-    "hitKeyword": "100일의거짓말 이무생",
-    "hitAt": "2026-11-15T06:00:00+09:00",
-    "leadMin": 1239
-   },
-   {
-    "keyword": "김지원 수술, 이게 너의 지옥",
-    "hitKeyword": "닥터X 김지원 결말",
-    "hitAt": "2026-11-15T06:00:00+09:00",
-    "leadMin": 1219
-   },
-   {
-    "keyword": "엑스러브 우무티",
-    "hitKeyword": "엑스러브 전참시",
-    "hitAt": "2026-11-15T06:00:00+09:00",
-    "leadMin": 356
-   },
-   {
-    "keyword": "2026 인텔 AI 서밋",
-    "hitKeyword": "2026 멜론뮤직어워드",
-    "hitAt": "2026-11-15T00:00:00+09:00",
-    "leadMin": 3498
    }
   ]
  }
