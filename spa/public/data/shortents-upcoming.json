@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T23:07:42.091Z",
+ "builtAt": "2026-11-14T23:17:44.685Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,70 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "젠지 BLG 2세트",
    "sources": [
     "daum"
    ],
-   "articles90": 13,
-   "recent20": 3,
+   "articles90": 16,
+   "recent20": 6,
    "press": 11,
    "firstArticleAt": "2026-11-14T21:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“4킬 쓸어 담고도 무너졌다”…젠지, BLG에 3세트 역전패→롤드컵 우승...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-14T23:03:00.000Z",
-     "link": "https://m.sports.naver.com/esports/article/468/0001280939"
+     "title": "'바이퍼' 탈리야 극복 못했다…젠지, 3세트 패하며 롤드컵 우승 좌절 위...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-14T23:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003155223?sid=105"
     },
     {
-     "title": "[롤드컵 결승] 놀라운 BLG의 설계 능력... 3세트 따내고 2:1 리드",
-     "press": "inven.co.kr",
-     "publishedAt": "2026-11-14T23:02:00.000Z",
-     "link": "https://m.sports.naver.com/esports/article/442/0000198858"
+     "title": "[롤드컵 결승]젠지에게서 3세트 완승 거둔 BLG, 2:1 역전 만들고 매치 포...",
+     "press": "fomos.kr",
+     "publishedAt": "2026-11-14T23:09:00.000Z",
+     "link": "https://m.sports.naver.com/esports/article/236/0000258039"
     },
     {
-     "title": "'창단 첫 우승에 성큼' BLG, 3세트까지 승리하며 2-1 역전[2026 롤드컵 결...",
-     "press": "sports.hankooki.com",
-     "publishedAt": "2026-11-14T23:00:00.000Z",
-     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6943604"
+     "title": "한타에 무너진 젠지⋯BLG에 월즈 결승 3세트 내주며 1-2 역전 허용",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-14T23:08:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2648197"
+    }
+   ]
+  },
+  {
+   "keyword": "100일의 거짓말",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 10,
+   "recent20": 5,
+   "press": 7,
+   "firstArticleAt": "2026-11-14T22:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘100일의 거짓말’ 박진영, 김유정 향한 진심 폭발…전 채널 시청률 1위",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-14T23:16:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001149831"
+    },
+    {
+     "title": "'100일의 거짓말' 박진영, 김유정 밀정 정체 알고도 사랑 시작…시청률...",
+     "press": "ize.co.kr",
+     "publishedAt": "2026-11-14T23:15:00.000Z",
+     "link": "https://m.entertain.naver.com/article/465/0000020991"
+    },
+    {
+     "title": "‘100일의 거짓말’ 진선규, 김유정에 꽂혔다",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-14T23:14:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001149829"
     }
    ]
   },
@@ -55,7 +88,7 @@
    "capped": false,
    "samples": [
     {
-     "title": "미 항공기 운항 중단 후폭풍…5천여편 결항, 15일 밤 정상화 전망",
+     "title": "미 항공기 운항 중단 “시스템 과부하 때문”…15일 밤 정상화 전망",
      "press": "hani.co.kr",
      "publishedAt": "2026-11-14T22:58:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/028/0002832226?sid=104"
@@ -79,10 +112,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-14T21:40:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-14T22:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,42 +140,41 @@
    ]
   },
   {
-   "keyword": "100일의 거짓말",
+   "keyword": "31기 옥순 영호",
    "sources": [
-    "signal.bz",
-    "google"
+    "daum"
    ],
-   "articles90": 5,
-   "recent20": 0,
+   "articles90": 3,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-14T22:10:00.000Z",
-   "exclusive": false,
+   "firstArticleAt": "2026-11-14T21:58:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "박진영, 김유정 향한 애틋한 진심 고백…정체 발각 최대 위기 ('100일의 ...",
-     "press": "tenasia.co.kr",
+     "title": "‘나솔’ 31기 영호, 옥순과 결별 인정 “재회할 생각 없다” [전문]",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-14T23:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003541754"
+    },
+    {
+     "title": "31기 영호, 옥순과 공식 결별 인정 \"커플사진 유출? 나도 당황스럽지만...",
+     "press": "sportschosun.com",
      "publishedAt": "2026-11-14T22:41:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000784467"
+     "link": "https://m.entertain.naver.com/article/076/0004466704"
     },
     {
-     "title": "진선규, '100일의 거짓말'서 총독부 폭발 배후 추적…김유정 향한 의심...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-14T22:34:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16276865"
-    },
-    {
-     "title": "'100일의 거짓말' 김유정, 박진영에 본명 들켰다...김현주는 '제거' 결단...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-14T22:33:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000784466"
+     "title": "'사진 유출' 31기 옥순, 영호 재결합 재차 입 열었다 \"일과 연애중♥\"[스...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-14T21:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003487524"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 503,
+  "flagged": 504,
   "matched": 245,
   "avgLeadMin": 530,
   "recent": [
