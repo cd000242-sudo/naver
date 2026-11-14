@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T00:30:53.267Z",
+ "builtAt": "2026-11-14T00:41:01.446Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,110 +15,115 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 40,
-   "recent20": 12,
-   "press": 36,
-   "firstArticleAt": "2026-11-13T23:08:00.000Z",
+   "articles90": 43,
+   "recent20": 11,
+   "press": 40,
+   "firstArticleAt": "2026-11-13T23:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "미국 항공 관제통신 장애에 전국 공항 비상 … 이륙 전면 '중단'",
-     "press": "safetimes.co.kr",
-     "publishedAt": "2026-11-14T00:28:00.000Z",
-     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247495"
+     "title": "美 전역 항공기 이륙 전면 중단…관제통신망 마비에 항공대란",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-14T00:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004009619?sid=104"
     },
     {
-     "title": "美 항공기 '올스탑'에 대한항공도 운항 차질…\"필요 조치 예정\"",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-14T00:26:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4444774"
+     "title": "美 전역 항공기 운항 마비… \"관제통신 오류, 해킹 징후는 발견 안돼\"",
+     "press": "boannews.com",
+     "publishedAt": "2026-11-14T00:38:00.000Z",
+     "link": "https://www.boannews.com/news/articleView.html?idxno=147262"
     },
     {
-     "title": "미국 전역 항공기 운항 전면 중단...\"관제 통신 시스템 장애\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-14T00:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432724?sid=104"
+     "title": "미국 전역 항공편 중단, FAA 통신 장애로 여행객 발 묶여",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-14T00:38:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885590"
     }
    ]
   },
   {
-   "keyword": "항공기 이륙 중단",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 37,
-   "recent20": 10,
-   "press": 35,
-   "firstArticleAt": "2026-11-13T23:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "미국 항공 관제통신 장애에 전국 공항 비상 … 이륙 전면 '중단'",
-     "press": "safetimes.co.kr",
-     "publishedAt": "2026-11-14T00:28:00.000Z",
-     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247495"
-    },
-    {
-     "title": "美 항공기 '올스탑'에 대한항공도 운항 차질…\"필요 조치 예정\"",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-14T00:26:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4444774"
-    },
-    {
-     "title": "미국 전역 항공기 운항 전면 중단...\"관제 통신 시스템 장애\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-14T00:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432724?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "사우디에 21년 패배",
+   "keyword": "미중러 정상회담",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-13T23:04:00.000Z",
+   "articles90": 10,
+   "recent20": 3,
+   "press": 10,
+   "firstArticleAt": "2026-11-13T23:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한국 축구, 사우디에 21년 만에 무릎…우려 커지며 '빨간불'",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-14T00:27:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000082585"
+     "title": "미중러 정상회담, 북한 비핵화와 핵군축의 향방은?",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-14T00:38:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885594"
     },
     {
-     "title": "한국 축구, 사우디에 2-3 패배…42년 만에 3실점",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-13T23:58:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/660/0000121332"
+     "title": "\"APEC 계기 미중러 정상회담 19일 개최…북한 논의 가능성\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-14T00:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001402982?sid=104"
     },
     {
-     "title": "축구대표팀, 사우디에 2-3 42년만에 3실점 굴욕…'갈등 봉합?'",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-13T23:54:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4118541"
+     "title": "미중러 정상회담, 중국 APEC때 열려…핵무기 감축 논의",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-14T00:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000367480?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "골키퍼 12경기 출전 정지",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-13T23:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "스페인 축구계 충격, 골키퍼 충돌로 사망 사건 발생... 중징계와 형사 ...",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-14T00:36:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885586"
+    },
+    {
+     "title": "아내도 보고 있었는데…니킥으로 공격수 숨지게 한 골키퍼, 결국",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-14T00:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005763608?sid=104"
+    },
+    {
+     "title": "충돌로 상대선수 숨지게 한 골키퍼, 12경기 출전 정지…과실치사 적용 ...",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-14T00:09:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/422/0000926073"
     }
    ]
   },
   {
    "keyword": "100일의 거짓말",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 4,
-   "press": 7,
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
    "firstArticleAt": "2026-11-13T23:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[강대호의 대중문화 읽기] 이름 없는 이들의 역사 '100일의 거짓말'",
+     "press": "opinionnews.co.kr",
+     "publishedAt": "2026-11-14T00:30:00.000Z",
+     "link": "http://www.opinionnews.co.kr/news/articleView.html?idxno=147054"
+    },
     {
      "title": "“너, 밀정이지?” 하더니…박진영, 김유정 진짜 이름 불렀다(100일의 거...",
      "press": "mk.co.kr",
@@ -130,12 +135,6 @@
      "press": "enter.etoday.co.kr",
      "publishedAt": "2026-11-14T00:16:00.000Z",
      "link": "https://enter.etoday.co.kr/news/view/305221"
-    },
-    {
-     "title": "김유정♥박진영, '100일의 거짓말' 벗고..\"숨겨진 진실 마주\"",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-14T00:15:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003487265"
     }
    ]
   },
@@ -147,10 +146,16 @@
    "articles90": 7,
    "recent20": 2,
    "press": 7,
-   "firstArticleAt": "2026-11-13T23:02:00.000Z",
+   "firstArticleAt": "2026-11-13T23:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "트럼프의 한반도 전략, 전시작전권 전환이 미군 철수 신호탄 되나?",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-14T00:40:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885602"
+    },
     {
      "title": "美전문가들 \"트럼프, 전작권 전환을 주한미군 철수 수단으로 봐\"",
      "press": "biz.sbs.co.kr",
@@ -162,56 +167,82 @@
      "press": "ichannela.com",
      "publishedAt": "2026-11-14T00:19:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/449/0000367479?sid=104"
-    },
-    {
-     "title": "“트럼프, 한국서 미군 빼려 하나”…전작권 전환에 美전문가들 경고",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-13T23:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003699359?sid=104"
     }
    ]
   },
   {
-   "keyword": "미중러 정상회담",
+   "keyword": "고경표 음주사고",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-13T23:22:00.000Z",
+   "articles90": 6,
+   "recent20": 5,
+   "press": 6,
+   "firstArticleAt": "2026-11-14T00:03:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "고경표, 만취 운전 적발…첫 방송 앞둔 ‘보검 매직컬2’ 날벼락",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-14T00:38:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001280863"
+    },
+    {
+     "title": "[공식] 고경표 '만취 음주운전'..소속사는 \"확인 중\"",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-14T00:37:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003487268"
+    },
+    {
+     "title": "고경표, 만취 운전 중 청소차 충돌…면허 취소 수준에 경찰 조사",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-14T00:37:00.000Z",
+     "link": "https://m.entertain.naver.com/article/477/0000639034"
+    }
+   ]
+  },
+  {
+   "keyword": "조현",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-13T23:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "미중러 세기의 3국 정상회담 19일 열리나…핵군축 협의 북한 논의 주목",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-14T00:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002832734?sid=100"
+     "title": "조현, \"한반도 문제 건설적 역할 당부\"…왕이 \"정책 변함없다\"",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-14T00:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000965529?sid=100"
     },
     {
-     "title": "트럼프·시진핑·푸틴, 19일 첫 3자 정상회담 전망…북한 문제도 논의하...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-14T00:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002723358?sid=104"
+     "title": "APEC 앞두고 한중 외교회담…조현 \"한반도 평화, 양국 공동 이익\"",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-14T00:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000551884?sid=100"
     },
     {
-     "title": "트럼프, 중간선거 참패 만회할 외교 성과 절실…미중 정상회담 주목",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-14T00:04:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=202611140901195276cd0bfacc1c_1"
+     "title": "조현 \"한반도 평화 한중 공동 이익\"…中 왕이 \"건설적 역할 지속할 것\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-14T00:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005441046?sid=100"
     }
    ]
   },
   {
    "keyword": "젠슨 황과 러트닉 조사",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-13T23:10:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-13T23:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -240,13 +271,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 6,
-   "recent20": 2,
+   "articles90": 5,
+   "recent20": 3,
    "press": 4,
-   "firstArticleAt": "2026-11-13T23:08:00.000Z",
+   "firstArticleAt": "2026-11-13T23:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "미국 전역 항공편 중단, FAA 통신 장애로 여행객 발 묶여",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-14T00:38:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885590"
+    },
     {
      "title": "USA FAA GROUNDSTOP",
      "press": null,
@@ -258,118 +295,130 @@
      "press": "econotimes.com",
      "publishedAt": "2026-11-14T00:24:00.000Z",
      "link": "https://econotimes.com/Georgia-vs-UNC-leads-US-searches-while-FAA-tops-Hacker-News-1776499"
-    },
-    {
-     "title": "FAA, 통신 장애로 美 전역 지상 정지 발령…항공편 이륙 중단",
-     "press": "digitaltoday.co.kr",
-     "publishedAt": "2026-11-14T00:06:00.000Z",
-     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=715501"
     }
    ]
   },
   {
-   "keyword": "엔비디아 GPU 26만장 공급",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-13T23:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'AI 황제' 사라진 엔비디아…'깐부' 한국과 사업 변화 생기나",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-14T00:30:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/325241/?sc=Naver"
-    },
-    {
-     "title": "배경훈 “젠슨 황 떠나도 GPU 동맹 문제없어…26만장 공급 약속 유지”",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-14T00:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002248542?sid=105"
-    },
-    {
-     "title": "젠슨 황 사임에 정부 GPU 공급 점검…26만장 확보·협력 유지 총력",
-     "press": "ftoday.co.kr",
-     "publishedAt": "2026-11-13T23:34:00.000Z",
-     "link": "http://www.ftoday.co.kr/news/articleView.html?idxno=369727"
-    }
-   ]
-  },
-  {
-   "keyword": "조현",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-13T23:07:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "조현 \"한반도 평화 한중 공동 이익\"…中 왕이 \"건설적 역할 지속할 것\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-14T00:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005441046?sid=100"
-    },
-    {
-     "title": "‘선전 APEC’ 앞 조현-왕이 회담 “이 대통령의 방중 환영, 충분한 예우...",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-14T00:06:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1137489"
-    },
-    {
-     "title": "왕이 외교부장과 회담하는 조현 외교부 장관",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-13T23:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014321833?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "안경 부정행위 적발",
+   "keyword": "김지원 수술, 이게 너의 지옥",
    "sources": [
     "nate"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-13T23:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'닥터X' 악인 전국환, 수술 전 각성 엔딩…14.5% 기록 [N시청률]",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-14T00:37:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009288815"
+    },
+    {
+     "title": "‘닥터X’ 김지원, 마지막 수술 중 각성 ‘충격 엔딩’…시청률 14.5% [T...",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-14T00:14:00.000Z",
+     "link": "https://m.entertain.naver.com/article/396/0000760888"
+    },
+    {
+     "title": "'닥터X' 김지원, 전국환 수술 \"이게 너의 지옥\"⋯최종화 앞두고 시청률...",
+     "press": "joynews24.com",
+     "publishedAt": "2026-11-14T00:06:00.000Z",
+     "link": "http://www.joynews24.com/view/2026177"
+    }
+   ]
+  },
+  {
+   "keyword": "김정관 장관, 체코 원전 화상 면담",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-13T23:33:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한·체코 산업장관, 두코바니 원전 이행 논의…연내 장관급 점검회의",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-14T00:16:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=883255"
+    },
+    {
+     "title": "체코 산업통상부 장관과 화상 면담하는 김정관 장관",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-14T00:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009288799?sid=101"
+    },
+    {
+     "title": "김정관 장관, 체코 산업통상부 장관과 원전 관련 화상 면담",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-14T00:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009288800?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "단풍",
+   "sources": [
+    "google"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-13T23:04:00.000Z",
+   "firstArticleAt": "2026-11-13T23:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "세무사 시험에서도 AI안경 논란…진상 조사 착수",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-13T23:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926053?sid=102"
+     "title": "[천영식의 유럽기행-스위스 그림젤패스] 신비한 풀잎 단풍의 매력...신이...",
+     "press": "pennmike.com",
+     "publishedAt": "2026-11-14T00:02:00.000Z",
+     "link": "https://www.pennmike.com/news/articleView.html?idxno=131781"
     },
     {
-     "title": "\"안경 부정행위\"...없는게 없는 '무도', 수능 앞두고 또 소환",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-13T23:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005441037"
+     "title": "[요즘 북한은] 모란봉·용악산 단풍 절정…평양의 가을 풍경 외",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-13T23:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012293885?sid=100"
     },
     {
-     "title": "수능 코앞 ‘AI안경’ 의혹 확산에…정부 “부정행위 무관용”",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-13T23:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002832718?sid=100"
+     "title": "\"단풍길 감성 두배\"…르노 필랑트의 실력 '넉넉한 공간에 연비가 19㎞/ℓ...",
+     "press": "gpkorea.com",
+     "publishedAt": "2026-11-13T23:18:00.000Z",
+     "link": "https://www.gpkorea.com/news/articleView.html?idxno=148605"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 466,
-  "matched": 188,
-  "avgLeadMin": 358,
+  "flagged": 471,
+  "matched": 191,
+  "avgLeadMin": 369,
   "recent": [
+   {
+    "keyword": "무인 항공기",
+    "hitKeyword": "미국 항공기 운항중단",
+    "hitAt": "2026-11-14T09:30:00+09:00",
+    "leadMin": 3065
+   },
+   {
+    "keyword": "젠슨 황 없는 엔비디아 위기",
+    "hitKeyword": "서학개미 엔비디아 매수",
+    "hitAt": "2026-11-14T09:30:00+09:00",
+    "leadMin": 50
+   },
+   {
+    "keyword": "항공기 이륙 중단",
+    "hitKeyword": "미국 항공기 운항중단",
+    "hitAt": "2026-11-14T09:30:00+09:00",
+    "leadMin": 19
+   },
    {
     "keyword": "젠슨 황 퇴진 후 엔비디아는?",
     "hitKeyword": "젠슨 황 퇴진 파장",
@@ -411,24 +460,6 @@
     "hitKeyword": "모두의 창업 정보 유출",
     "hitAt": "2026-11-14T06:30:00+09:00",
     "leadMin": 353
-   },
-   {
-    "keyword": "이란",
-    "hitKeyword": "이란 한국 청해부대 경고",
-    "hitAt": "2026-11-14T06:30:00+09:00",
-    "leadMin": 31
-   },
-   {
-    "keyword": "손흥민 사우디전 96라인",
-    "hitKeyword": "한국 축구 사우디전 패배",
-    "hitAt": "2026-11-14T06:00:00+09:00",
-    "leadMin": 354
-   },
-   {
-    "keyword": "엔비디아 GPU 26만장 공급",
-    "hitKeyword": "엔비디아 투자 경고",
-    "hitAt": "2026-11-14T06:00:00+09:00",
-    "leadMin": 354
    }
   ]
  }
