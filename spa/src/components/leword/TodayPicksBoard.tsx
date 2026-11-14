@@ -159,7 +159,7 @@ export default function TodayPicksBoard({ onAnalyze, topic, onTopics, onTopicCha
                     ))}
                 </div>
             )}
-            {day && data && <p className="lw-note">{dayLabel} 판입니다 — 지난 날짜의 추천이라 지금 검색량 · 문서수와 다를 수 있습니다. 매일 판은 전날과 겹치지 않게 새 키워드로 바뀝니다.</p>}
+            {day && data && <p className="lw-note">{dayLabel} 판입니다 — 지난 날짜의 추천이라 지금 검색량 · 문서수와 다를 수 있습니다. 신규 황금을 우선하고, 부족하면 최근 추천을 재측정해 재추천으로 표시합니다.</p>}
 
             {!day && data && freshness.isLate && freshness.dueAt !== null && (
                 <p className="lw-note lw-note-limit" aria-label="회차 지연 안내">

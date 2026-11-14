@@ -79,6 +79,12 @@ test('sidebar badges use actual row counts while preserving golden detail',()=>{
  assert.match(page,/전체 \$\{topic\.rowCount\}개 · 황금 \$\{topic\.golden\}개/);
 });
 
+test('archive guidance describes remeasured backfill without promising no repeats',()=>{
+ const source=fs.readFileSync(new URL('../src/components/leword/TodayPicksBoard.tsx',import.meta.url),'utf8');
+ assert.match(source,/신규 황금을 우선하고, 부족하면 최근 추천을 재측정해 재추천으로 표시합니다/);
+ assert.doesNotMatch(source,/매일 판은 전날과 겹치지 않게 새 키워드로 바뀝니다/);
+});
+
 // 2026-10-20 사장님 "드롭다운 펼치면 연관 황금키워드도 같이 · 초황금키워드면 초황금키워드라고".
 test('초황금 행은 초황금 칩, 펼치면 연관 황금(초황금 표시 포함)이 보이고 로그인 전엔 연관을 숨긴다',()=>{
  const special=[{keyword:'절임배추',searchVolume:9000,documentCount:100,ratio:90,depth:2,comp:null,source:'hint',ultra:true,freshness:{status:'new'},related:[{keyword:'절임배추 20kg',searchVolume:3000,documentCount:200,ratio:15,ultra:true},{keyword:'절임배추 가격',searchVolume:800,documentCount:600,ratio:1.33,ultra:false}]},...rows.slice(1)];
