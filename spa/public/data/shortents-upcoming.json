@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T17:35:19.625Z",
+ "builtAt": "2026-11-14T17:45:23.241Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
+ "measured": 21,
  "candidates": [
   {
    "keyword": "비트코인",
@@ -16,10 +16,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 6,
+   "articles90": 4,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-14T16:10:00.000Z",
+   "firstArticleAt": "2026-11-14T16:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -40,38 +40,6 @@
      "press": "tokenpost.kr",
      "publishedAt": "2026-11-14T16:50:00.000Z",
      "link": "https://www.tokenpost.kr/news/cryptocurrency/438397"
-    }
-   ]
-  },
-  {
-   "keyword": "미중러 정상회담",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-14T16:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "러시아 \"19일 미중러 정상회담 개최\" 확인",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-14T16:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926214?sid=104"
-    },
-    {
-     "title": "러시아도 \"19일 미중러 정상회담 개최\" 확인",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-14T16:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001535639?sid=104"
-    },
-    {
-     "title": "美 이어 러도 \"19일 미중러 정상회담 개최\" 확인",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-14T16:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016442020?sid=104"
     }
    ]
   }
