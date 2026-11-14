@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T00:10:36.196Z",
+ "builtAt": "2026-11-14T00:20:49.259Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 30,
+ "measured": 29,
  "candidates": [
   {
    "keyword": "미국 항공 운항 중단",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 30,
-   "recent20": 6,
-   "press": 30,
+   "articles90": 38,
+   "recent20": 13,
+   "press": 34,
    "firstArticleAt": "2026-11-13T22:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美 전역, 관제 통신 장애로 항공기 운항중단",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-14T00:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004209773?sid=104"
+     "title": "美 전역 항공기 이륙 중단…관제 통신 시스템 장애에 무게(종합)",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-14T00:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001204737?sid=104"
     },
     {
-     "title": "美 전역 공항 항공기 이륙 '올스톱'…통신 장애에 1만1000편 운항 차질",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-14T00:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003485531?sid=104"
+     "title": "미 전역 항공기 운항 ‘올스톱’···“통신 장애 때문, 테러는 아니야...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-14T00:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003482621?sid=104"
     },
     {
-     "title": "FAA, 통신 장애로 美 전역 지상 정지 발령…항공편 이륙 중단",
-     "press": "digitaltoday.co.kr",
-     "publishedAt": "2026-11-14T00:06:00.000Z",
-     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=715501"
+     "title": "9·11 테러 이후 두 번째 전국 운항 마비…미 항공청 \"통신망 오류\"",
+     "press": "pointe.co.kr",
+     "publishedAt": "2026-11-14T00:16:00.000Z",
+     "link": "https://www.pointe.co.kr/news/articleView.html?idxno=87769"
     }
    ]
   },
@@ -47,74 +47,74 @@
    "sources": [
     "nate"
    ],
-   "articles90": 30,
-   "recent20": 5,
-   "press": 30,
-   "firstArticleAt": "2026-11-13T22:47:00.000Z",
+   "articles90": 35,
+   "recent20": 10,
+   "press": 33,
+   "firstArticleAt": "2026-11-13T22:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美 전역, 관제 통신 장애로 항공기 운항중단",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-14T00:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004209773?sid=104"
+     "title": "美 전역 항공기 이륙 중단…관제 통신 시스템 장애에 무게(종합)",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-14T00:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001204737?sid=104"
     },
     {
-     "title": "美 전역 공항 항공기 이륙 '올스톱'…통신 장애에 1만1000편 운항 차질",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-14T00:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003485531?sid=104"
+     "title": "미 전역 항공기 운항 ‘올스톱’···“통신 장애 때문, 테러는 아니야...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-14T00:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003482621?sid=104"
     },
     {
-     "title": "FAA, 통신 장애로 美 전역 지상 정지 발령…항공편 이륙 중단",
-     "press": "digitaltoday.co.kr",
-     "publishedAt": "2026-11-14T00:06:00.000Z",
-     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=715501"
+     "title": "美항공관제 장애에 유럽발 미국행 항공편 전면 중단",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-14T00:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016441667?sid=102"
     }
    ]
   },
   {
-   "keyword": "2027 롤드컵 결승전",
+   "keyword": "롤드컵 결승 서울아레나 개최",
    "sources": [
     "daum"
    ],
-   "articles90": 17,
+   "articles90": 20,
    "recent20": 2,
-   "press": 15,
+   "press": 19,
    "firstArticleAt": "2026-11-13T23:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "내년 롤드컵 결승전 서울아레나 개최 확정…지역경제 활성화 기대",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-14T00:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003155084?sid=102"
+    },
+    {
+     "title": "2027 롤드컵 결승, 창동 서울아레나서 개최…11월 13일 예정",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-14T00:12:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3751901"
+    },
+    {
      "title": "2027 롤드컵, 한일 공동 개최…결승은 서울서 열린다",
      "press": "kukinews.com",
      "publishedAt": "2026-11-13T23:58:00.000Z",
      "link": "https://www.kukinews.com/article/view/kuk202611140010"
-    },
-    {
-     "title": "롤드컵 17년 역사상 첫 한일(韓日) 공동 개최… 2027 월즈 결승 피날레 ...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-13T23:55:00.000Z",
-     "link": "https://m.sports.naver.com/esports/article/109/0005640158"
-    },
-    {
-     "title": "내년 롤드컵 결승 서울서…4년 만에 귀환",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-13T23:50:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611140063"
     }
    ]
   },
   {
-   "keyword": "사우디에 21년 만에 패배",
+   "keyword": "사우디에 21년 패배",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-13T22:51:00.000Z",
+   "articles90": 12,
+   "recent20": 0,
+   "press": 12,
+   "firstArticleAt": "2026-11-13T22:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -143,10 +143,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 12,
-   "recent20": 4,
-   "press": 11,
-   "firstArticleAt": "2026-11-13T23:00:00.000Z",
+   "articles90": 10,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-13T23:03:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
@@ -163,10 +163,10 @@
      "link": "https://www.gukjenews.com/news/articleView.html?idxno=3751882"
     },
     {
-     "title": "플라트 키즈, 유치원 놀이로 본 5개 영역 발달 리포트 집으로 전한다",
-     "press": "geconomy.co.kr",
+     "title": "신선한 회에 든든한 곁들임..시아호횟집의 정성 담은 한 상",
+     "press": "idjnews.kr",
      "publishedAt": "2026-11-14T00:00:00.000Z",
-     "link": "https://www.geconomy.co.kr/news/article.html?no=325640"
+     "link": "https://www.idjnews.kr/news/articleView.html?idxno=303958"
     }
    ]
   },
@@ -176,7 +176,7 @@
     "signal.bz"
    ],
    "articles90": 7,
-   "recent20": 5,
+   "recent20": 4,
    "press": 7,
    "firstArticleAt": "2026-11-13T23:22:00.000Z",
    "exclusive": false,
@@ -203,14 +203,143 @@
    ]
   },
   {
+   "keyword": "100일의 거짓말",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 5,
+   "press": 6,
+   "firstArticleAt": "2026-11-13T23:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘100일의 거짓말’ 박진영, 김유정 본명 '이가경' 불렀다",
+     "press": "enter.etoday.co.kr",
+     "publishedAt": "2026-11-14T00:16:00.000Z",
+     "link": "https://enter.etoday.co.kr/news/view/305221"
+    },
+    {
+     "title": "김유정♥박진영, '100일의 거짓말' 벗고..\"숨겨진 진실 마주\"",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-14T00:15:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003487265"
+    },
+    {
+     "title": "'100일의 거짓말' 김유정·박진영, 토막촌에서 다시 마주친다",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-14T00:14:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16276280"
+    }
+   ]
+  },
+  {
+   "keyword": "조현",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-13T22:59:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "조현 \"한반도 평화 한중 공동 이익\"…中 왕이 \"건설적 역할 지속할 것\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-14T00:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005441046?sid=100"
+    },
+    {
+     "title": "‘선전 APEC’ 앞 조현-왕이 회담 “이 대통령의 방중 환영, 충분한 예우...",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-14T00:06:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1137489"
+    },
+    {
+     "title": "왕이 외교부장과 회담하는 조현 외교부 장관",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-13T23:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014321833?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "돈",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-13T23:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "캐시워크 돈버는퀴즈 11월 14일 정답은?",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-14T00:16:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=626625"
+    },
+    {
+     "title": "버밍엄시티 지분 판 톰 브래디… 은퇴 후에도 돈방석 비결은",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-14T00:00:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/025/0003565129"
+    },
+    {
+     "title": "[TheTax]남편 사망 전→아들→이혼한 母계좌 이체된 돈…증여세 내라?",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-13T23:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005441035?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황과 러트닉 조사",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-13T22:57:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"젠슨 황, 이르면 다음 주 의회 출석\"...러트닉 장관 거취에 '불똥'",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-13T23:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432717?sid=104"
+    },
+    {
+     "title": "베선트, '엔비디아 칩 밀수' 의혹 러트닉 비판 \"매우 실망\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-13T23:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005441038?sid=104"
+    },
+    {
+     "title": "트럼프 뜻 따랐다는 러트닉…엔비디아 스캔들에 '경질' 위기",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-13T23:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005353790?sid=104"
+    }
+   ]
+  },
+  {
    "keyword": "트럼프 전작권 주한미군 철수",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-13T22:44:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-13T23:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -231,102 +360,6 @@
      "press": "imaeil.com",
      "publishedAt": "2026-11-13T23:22:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/088/0001040191?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "조현",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 3,
-   "press": 4,
-   "firstArticleAt": "2026-11-13T22:59:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘선전 APEC’ 앞 조현-왕이 회담 “이 대통령의 방중 환영, 충분한 예우...",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-14T00:06:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1137489"
-    },
-    {
-     "title": "왕이 외교부장과 악수하는 조현 외교부 장관",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-13T23:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014321834?sid=104"
-    },
-    {
-     "title": "왕이 외교부장과 회담하는 조현 외교부 장관",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-13T23:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014321833?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "돈",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-13T23:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "버밍엄시티 지분 판 톰 브래디… 은퇴 후에도 돈방석 비결은",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-14T00:00:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/025/0003565129"
-    },
-    {
-     "title": "[TheTax]남편 사망 전→아들→이혼한 母계좌 이체된 돈…증여세 내라?",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-13T23:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005441035?sid=101"
-    },
-    {
-     "title": "\"나라에 돈 빌려줬더니 과징금 1.6조\"…증권가 '부글부글'[위클리IB]",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-13T23:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006409756?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "김정관 체코 원전",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-13T23:33:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "체코 산업통상부 장관과 화상 면담하는 김정관 장관",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-14T00:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009288801?sid=101"
-    },
-    {
-     "title": "김정관 장관, 체코 산업통상부 장관과 원전 관련 화상 면담",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-14T00:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009288798?sid=101"
-    },
-    {
-     "title": "'두코바니 원전 정상 건설 위해 비상 관리 체제' 체코 측에 설명",
-     "press": "e-platform.net",
-     "publishedAt": "2026-11-13T23:50:00.000Z",
-     "link": "http://www.e-platform.net/news/articleView.html?idxno=106994"
     }
    ]
   },
@@ -361,11 +394,43 @@
      "link": "https://n.news.naver.com/mnews/article/091/0010368434?sid=104"
     }
    ]
+  },
+  {
+   "keyword": "안경 부정행위 적발",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-13T23:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "세무사 시험에서도 AI안경 논란…진상 조사 착수",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-13T23:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926053?sid=102"
+    },
+    {
+     "title": "\"안경 부정행위\"...없는게 없는 '무도', 수능 앞두고 또 소환",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-13T23:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005441037"
+    },
+    {
+     "title": "수능 코앞 ‘AI안경’ 의혹 확산에…정부 “부정행위 무관용”",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-13T23:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002832718?sid=100"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 461,
+  "flagged": 465,
   "matched": 188,
   "avgLeadMin": 358,
   "recent": [
