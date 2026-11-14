@@ -69,9 +69,9 @@ const POLICY_LABEL: Record<string, string> = {
 };
 
 const GROUPS = [
-    { id: 'NOW', label: '지금 답하면 유입', icon: '🔥', hint: '질문이 살아 있고 내 글이 해결책 — 오늘 답변 달 자리' },
-    { id: 'WATCH', label: '지켜볼 자리', icon: '🟡', hint: '관련은 있지만 긴급하지 않음 — 여유 있을 때' },
-    { id: 'SKIP', label: '건너뜀', icon: '⚫', hint: 'AI 가 걸러낸 자리 — 근거는 카드에 적혀 있습니다' },
+    { id: 'NOW', label: '지금 답하면 유입', dot: 'var(--lw-positive)', hint: '질문이 살아 있고 내 글이 해결책 — 오늘 답변 달 자리' },
+    { id: 'WATCH', label: '지켜볼 자리', dot: 'var(--lw-accent)', hint: '관련은 있지만 긴급하지 않음 — 여유 있을 때' },
+    { id: 'SKIP', label: '건너뜀', dot: 'var(--lw-text-muted)', hint: 'AI 가 걸러낸 자리 — 근거는 카드에 적혀 있습니다' },
 ] as const;
 
 function canonical(link: string): string {
@@ -376,7 +376,7 @@ function RadarTab({ initialUrl }: { initialUrl?: string } = {}) {
                 return (
                     <section key={group.id} className={`lw-panel lw-radar-group lw-radar-${group.id.toLowerCase()}`}>
                         <div className="lw-panel-head">
-                            <h2><span aria-hidden="true">{group.icon}</span> {group.label} <em>{list.length}</em></h2>
+                            <h2><span aria-hidden="true" style={{ display: 'inline-block', width: 8, height: 8, marginRight: 4, borderRadius: 999, background: group.dot, verticalAlign: 'middle' }} /> {group.label} <em>{list.length}</em></h2>
                             <span>{group.hint}</span>
                         </div>
                         {group.id === 'NOW' && list.length === 0 && (
@@ -427,7 +427,7 @@ function RadarTab({ initialUrl }: { initialUrl?: string } = {}) {
                                         </div>
                                         <div className="lw-radar-actions">
                                             {group.id !== 'SKIP' && (
-                                                <button type="button" className="pri" onClick={() => openAnswer(item)}>✏️ 답변 만들기</button>
+                                                <button type="button" className="pri" onClick={() => openAnswer(item)}>답변 만들기</button>
                                             )}
                                             <a href={item.link} target="_blank" rel="noreferrer noopener">원문 열기</a>
                                             {state === 'dismissed' ? (

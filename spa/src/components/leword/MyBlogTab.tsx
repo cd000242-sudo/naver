@@ -18,7 +18,7 @@ import PostAutopsyPanel from './PostAutopsyPanel';
 const TITLES_STORE_KEY = 'leaderspro.leword.myBlogTitles.v1';
 const AUDIT_STORE_KEY = 'leaderspro.leword.blogAudit.v1';
 const TITLE_LIMIT = 500;
-const MUTED = { opacity: 0.65 } as const;
+const MUTED = { color: 'var(--lw-text-muted)' } as const;
 const CHIP = { display: 'inline-block', margin: '0 6px 6px 0' } as const;
 
 type TitleStore = { url: string; checkedAt: string; posts: MyBlogPostTitle[] };

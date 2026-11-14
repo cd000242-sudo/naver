@@ -9,9 +9,9 @@ import { useState } from 'react';
 import { callWorkerRaw } from '../../../lib/keywordApi';
 import type { AdsenseCard } from '../../../lib/adsenseBenchmarkModel.mjs';
 
-const box: React.CSSProperties = { marginTop: 12, padding: '10px 12px', border: '1px solid rgba(148,163,184,.22)', borderRadius: 10, background: 'rgba(15,23,42,.45)' };
-const head: React.CSSProperties = { margin: '0 0 6px', fontSize: 12, fontWeight: 700, letterSpacing: '.2px' };
-const smallBtn: React.CSSProperties = { border: '1px solid #33415a', background: '#152035', color: '#cbd5e1', borderRadius: 7, padding: '3px 9px', fontSize: 11.5, cursor: 'pointer' };
+const box: React.CSSProperties = { marginTop: 12, padding: '12px 12px', border: '1px solid var(--lw-line)', borderRadius: 10, background: 'var(--lw-surface)' };
+const head: React.CSSProperties = { margin: '0 0 8px', fontSize: 13, fontWeight: 600, letterSpacing: '.2px' };
+const smallBtn: React.CSSProperties = { display: 'inline-flex', alignItems: 'center', minHeight: 44, border: '1px solid var(--lw-line)', background: 'var(--lw-surface)', color: 'var(--lw-text)', borderRadius: 10, padding: '0 12px', fontSize: 13, cursor: 'pointer' };
 
 function CopyButton({ text }: { text: string }) {
     const [done, setDone] = useState(false);
@@ -25,15 +25,15 @@ export function SolveBlock({ c }: { c: AdsenseCard }) {
     const titles = c.actionTitles || [];
     if (!solves.length && !titles.length) return null;
     return (
-        <div style={{ ...box, borderColor: 'rgba(74,222,128,.35)', background: 'rgba(20,83,45,.18)' }}>
+        <div style={{ ...box, borderColor: 'var(--lw-line)', background: 'var(--lw-surface)' }}>
             {solves.length > 0 && <>
-                <h4 style={{ ...head, color: '#86efac' }}>이 글이 해결할 문제</h4>
-                <ul style={{ margin: 0, paddingLeft: 18, fontSize: 13, color: '#dcfce7' }}>{solves.map((s) => <li key={s}>{s}</li>)}</ul>
+                <h4 style={{ ...head, color: 'var(--lw-positive)' }}>이 글이 해결할 문제</h4>
+                <ul style={{ margin: 0, paddingLeft: 20, fontSize: 13, color: 'var(--lw-text)' }}>{solves.map((s) => <li key={s}>{s}</li>)}</ul>
             </>}
             {titles.length > 0 && <>
-                <h4 style={{ ...head, color: '#fcd34d', marginTop: solves.length ? 10 : 0 }}>행동 키워드를 엮은 제목</h4>
-                <div style={{ display: 'grid', gap: 6 }}>
-                    {titles.map((t) => <div key={t} style={{ display: 'flex', alignItems: 'center', gap: 8 }}><p style={{ flex: 1, margin: 0, fontSize: 14, color: '#f8fafc' }}>{t}</p><CopyButton text={t} /></div>)}
+                <h4 style={{ ...head, color: 'var(--lw-accent-ink)', marginTop: solves.length ? 10 : 0 }}>행동 키워드를 엮은 제목</h4>
+                <div style={{ display: 'grid', gap: 8 }}>
+                    {titles.map((t) => <div key={t} style={{ display: 'flex', alignItems: 'center', gap: 8 }}><p style={{ flex: 1, margin: 0, fontSize: 15, color: 'var(--lw-text)' }}>{t}</p><CopyButton text={t} /></div>)}
                 </div>
             </>}
         </div>
@@ -46,12 +46,12 @@ export function KinBlock({ c }: { c: AdsenseCard }) {
     if (!qs.length) return null;
     return (
         <div style={box}>
-            <h4 style={{ ...head, color: '#7dd3fc' }}>지식인에서 실제로 묻는 것 <span style={{ fontWeight: 400, color: '#8d9db4' }}>· 이 질문을 풀어 주는 글이 검색에 남습니다</span></h4>
-            <ul style={{ margin: 0, paddingLeft: 18, fontSize: 13 }}>
+            <h4 style={{ ...head, color: 'var(--lw-text)' }}>지식인에서 실제로 묻는 것 <span style={{ fontWeight: 400, color: 'var(--lw-text-secondary)' }}>· 이 질문을 풀어 주는 글이 검색에 남습니다</span></h4>
+            <ul style={{ margin: 0, paddingLeft: 20, fontSize: 13 }}>
                 {qs.map((q) => (
                     <li key={q.link} style={{ marginBottom: 3 }}>
                         <a href={q.link} target="_blank" rel="noopener noreferrer">{q.title}</a>
-                        <span style={{ color: '#8d9db4', fontSize: 11.5 }}>{typeof q.views === 'number' ? ` · 조회 ${q.views.toLocaleString('ko-KR')}` : ''}{typeof q.answers === 'number' ? ` · 답변 ${q.answers}` : ''}{q.askedAt ? ` · ${q.askedAt}` : ''}</span>
+                        <span style={{ color: 'var(--lw-text-secondary)', fontSize: 13 }}>{typeof q.views === 'number' ? ` · 조회 ${q.views.toLocaleString('ko-KR')}` : ''}{typeof q.answers === 'number' ? ` · 답변 ${q.answers}` : ''}{q.askedAt ? ` · ${q.askedAt}` : ''}</span>
                     </li>
                 ))}
             </ul>
@@ -75,12 +75,12 @@ export function BenchmarkBlock({ c }: { c: AdsenseCard }) {
     const q = encodeURIComponent(query);
     return (
         <div style={box}>
-            <h4 style={{ ...head, color: '#c4b5fd' }}>벤치마킹할 곳 <span style={{ fontWeight: 400, color: '#8d9db4' }}>· 지금 「{query}」 상위에 있는 글</span></h4>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center' }}>
+            <h4 style={{ ...head, color: 'var(--lw-text-secondary)' }}>벤치마킹할 곳 <span style={{ fontWeight: 400, color: 'var(--lw-text-secondary)' }}>· 지금 「{query}」 상위에 있는 글</span></h4>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
                 {!posts && <button type="button" style={smallBtn} disabled={state === 'loading'} onClick={() => void load()}>{state === 'loading' ? '읽는 중…' : '네이버 블로그 상위 5개 보기'}</button>}
                 <a href={`https://www.google.com/search?q=${q}`} target="_blank" rel="noopener noreferrer" style={{ ...smallBtn, textDecoration: 'none' }}>구글 검색 결과</a>
                 <a href={`https://search.daum.net/search?w=fusion&col=blog&q=${q}`} target="_blank" rel="noopener noreferrer" style={{ ...smallBtn, textDecoration: 'none' }}>다음 블로그 결과</a>
-                {state === 'error' && <small style={{ color: '#fcd9aa' }}>상위 글을 읽지 못했습니다 — 잠시 뒤 다시 눌러 주세요</small>}
+                {state === 'error' && <small style={{ color: 'var(--lw-accent-ink)' }}>상위 글을 읽지 못했습니다 — 잠시 뒤 다시 눌러 주세요</small>}
             </div>
             {posts && (
                 <ol style={{ margin: '8px 0 0', paddingLeft: 20, fontSize: 13 }}>
@@ -96,7 +96,7 @@ export function DemandPending({ c }: { c: AdsenseCard }) {
     if (c.demand) return null;
     const measured = Boolean(c.metrics?.query);
     return (
-        <p style={{ margin: '2px 0 10px', fontSize: 12, color: '#8d9db4' }}>
+        <p style={{ margin: '2px 0 12px', fontSize: 13, color: 'var(--lw-text-secondary)' }}>
             {measured ? '검색 추이 그래프 준비 중 — 3시간마다 도는 회차가 데이터랩으로 재서 붙입니다.' : '대표 검색어를 아직 실측하지 않아 그래프가 없습니다 — 실측되면 다음 회차에 붙습니다.'}
         </p>
     );

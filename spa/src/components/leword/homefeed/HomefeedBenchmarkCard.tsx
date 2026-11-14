@@ -83,7 +83,7 @@ export default function HomefeedBenchmarkCard({candidate:c,evidence,enrich}:{can
   {/* 키워드 줄 = 노릴 검색어(2026-10-27 비평 3번) — 카드 keyword 는 기사 제목 조각(1,000장 중 975장)이라 검색량을 잴 수 없었다.
       작성 안내의 자동완성 검색어가 있을 때만 그리고, 수치는 검색어 덧붙이기(keyword-enrich)가 잰 실측만 쓴다. */}
   {searchQuery&&<div className="hfb-keyword"><span>노릴 검색어</span><strong>{searchQuery}</strong><span>월 검색량 <b>{metricText(enrich?.measure?.searchVolume)}</b></span><span>블로그 문서 <b>{metricText(enrich?.measure?.documentCount)}</b></span></div>}
-  {enrich?.demand?<><p style={{margin:'8px 0 0',fontSize:12,color:'#a8b6cb'}}>「{searchQuery}」 검색 추이</p><DemandBlock c={demandCard}/></>:<p style={{margin:'6px 0 0',fontSize:12,color:'#8d9db4'}}>{searchQuery?`「${searchQuery}」 검색 추이 그래프 준비 중 — 데이터랩으로 재서 붙입니다.`:'이 소재는 아직 노릴 검색어(자동완성)가 없어 검색 추이 그래프가 없습니다 — 홈판 반응(공감 · 댓글)으로 판단하세요.'}</p>}
+  {enrich?.demand?<><p style={{margin:'8px 0 0',fontSize:13,color:'var(--lw-text-secondary)'}}>「{searchQuery}」 검색 추이</p><DemandBlock c={demandCard}/></>:<p style={{margin:'8px 0 0',fontSize:13,color:'var(--lw-text-muted)'}}>{searchQuery?`「${searchQuery}」 검색 추이 그래프 준비 중 — 데이터랩으로 재서 붙입니다.`:'이 소재는 아직 노릴 검색어(자동완성)가 없어 검색 추이 그래프가 없습니다 — 홈판 반응(공감 · 댓글)으로 판단하세요.'}</p>}
   <p className="hfb-summary">{c.summary||'원문을 확인한 뒤 사건 내용을 정리해 주세요.'}</p>
   {c.summaryAttribution&&<p className="hfb-attribution">{c.summaryAttribution}</p>}
   <BenchmarkSources sources={c.sources} />

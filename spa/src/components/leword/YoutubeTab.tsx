@@ -262,6 +262,8 @@ function YoutubeTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
 
     return (
         <>
+            {/* Touch targets: every control on this tab is at least 44px tall (light pass 2026-11). */}
+            <style>{'.lw-yt-actions button, .lw-yt-write button, .lw-yt-chips button, .lw-yt-cats button, .lw-yt-forms button, .lw-yt-live-btn { min-height: 44px; }'}</style>
             <TabIntro
                 title="유튜브 급상승 → 네이버 빈자리"
                 desc="지금 유튜브에서 터지는 중인데 네이버엔 아직 글이 없는 검색어입니다. 영상 제목을 자른 게 아니라, 네이버 자동완성이 인정한 실제 검색어만 싣습니다."
@@ -323,7 +325,7 @@ function YoutubeTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                     </span>
                 )}
                 <button type="button" className="lw-yt-live-btn" onClick={() => { void refreshLive(); }} disabled={liveState === 'loading'}>
-                    {liveState === 'loading' ? '가져오는 중…' : '⚡ 지금 갱신'}
+                    {liveState === 'loading' ? '가져오는 중…' : '지금 갱신'}
                 </button>
             </div>
 
@@ -392,7 +394,7 @@ function YoutubeTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                         {row.video.thumbnail
                                             ? <img src={row.video.thumbnail} alt="" loading="lazy" referrerPolicy="no-referrer" />
                                             : <span className="lw-video-noimg" aria-hidden="true" />}
-                                        <span className="lw-yt-play" aria-hidden="true">▶</span>
+                                        <span className="lw-yt-play" aria-hidden="true" style={{ background: 'var(--lw-surface)', color: 'var(--lw-text)', boxShadow: 'var(--lw-shadow-float)' }}><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style={{ marginLeft: 2 }}><path d="M8 5v14l11-7z" /></svg></span>
                                     </button>
                                 )}
                             </div>

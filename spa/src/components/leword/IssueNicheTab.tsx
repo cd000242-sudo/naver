@@ -3,6 +3,7 @@ import { useEvidenceClock } from './useEvidenceClock';
 import { expireIssueBoard } from '../../lib/recommendationExpiry.mjs';
 import { TopicFilter } from './BoardFilters';
 import LicenseGate, { isUnlocked } from './LicenseGate';
+import Reveal from '../motion/Reveal';
 import { TabIntro } from './LewordShared';
 import { BoardFreshness } from './BoardFreshness';
 import { naverSearchUrl } from './preemptionMeta';
@@ -290,7 +291,7 @@ function IssueNicheTab({ onAnalyze, onPlan }: { onAnalyze?: (keyword: string) =>
             */}
             {live && (
                 <span className="lw-warn-tag" title={`${live.source} 목록 ${live.rank}위${live.ago ? ` (${live.ago} 진입)` : ''}`}>
-                    🔴 {live.source} {live.rank}위{live.ago ? ` · ${live.ago} 진입` : ''}
+                    <i aria-hidden="true" style={{ display: 'inline-block', width: 8, height: 8, marginRight: 4, borderRadius: 999, background: 'var(--lw-negative)', verticalAlign: 'middle' }} />{live.source} {live.rank}위{live.ago ? ` · ${live.ago} 진입` : ''}
                 </span>
             )}
             <span className="lw-trend-tag">
@@ -407,7 +408,7 @@ role="group" aria-label="판정">
                 )}
             </p>
 
-            {status === 'loading' && <div className="lw-note">실측 보드를 불러오는 중입니다…</div>}
+            {status === 'loading' && <><div className="lw-note">실측 보드를 불러오는 중입니다…</div><div className="lw-skel" aria-hidden="true"><i /><i /><i /></div></>}
             {status === 'error' && (
                 <div className="lw-note lw-note-error">
                     <strong>보드를 불러오지 못했습니다</strong>
@@ -437,7 +438,7 @@ role="group" aria-label="판정">
                                     boardLabel="실검 틈새키워드"
                                 />
                             )}
-                            <div className="lw-issue-flow-list">
+                            <Reveal stagger key={`flow|${lane}`} className="lw-issue-flow-list">
                                 {flowItems.map((issue) => (
                                     <IssueFlowBrief
                                         key={issue.issue}
@@ -448,7 +449,7 @@ role="group" aria-label="판정">
                                         onAnalyze={onAnalyze}
                                     />
                                 ))}
-                            </div>
+                            </Reveal>
                         </>
                     ) : (
                         <>
@@ -471,12 +472,12 @@ role="group" aria-label="판정">
                             )}
 
                             {unlocked && rows.length > 1 && (
-                                <div className="hfb-shuffle" style={{ display: 'flex', alignItems: 'center', gap: 10, margin: '4px 0 8px' }}>
+                                <div className="hfb-shuffle" style={{ display: 'flex', alignItems: 'center', gap: 12, margin: '4px 0 8px' }}>
                                     <button type="button" className="lw-picks-btn" onClick={() => reshuffle()}>순서 섞기</button>
-                                    <small style={{ color: '#9baac1', fontSize: 11 }}>지금 검색 관심이 뜨는 키워드가 먼저 · 같은 묶음 안은 매시 정각 새로 섞입니다</small>
+                                    <small style={{ color: 'var(--lw-text-muted)', fontSize: 13 }}>지금 검색 관심이 뜨는 키워드가 먼저 · 같은 묶음 안은 매시 정각 새로 섞입니다</small>
                                 </div>
                             )}
-                            <div className="lw-board-list">
+                            <Reveal stagger key={`${view}|${lane}`} className="lw-board-list">
                                 {rows.map((row, index) => {
                                     const freeNames = freeNamesOf(board);
                                     const locked = unlocked
@@ -509,7 +510,7 @@ role="group" aria-label="판정">
                                         </div>
                                     );
                                 })}
-                            </div>
+                            </Reveal>
 
                             {(() => {
                                 const chartRow = rows.find((row) => row.keyword === chartKeyword);

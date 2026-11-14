@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { light } from '../../styles/tokens';
 
 /**
  * 수요 그래프 — 네이버 데이터랩 24개월 실측 시계열을 그대로 그린다.
@@ -178,7 +179,7 @@ function DemandChartModal({ keyword, ranges, asOf, onClose }: {
                             <line
                                 x1={PAD.left} x2={W - PAD.right}
                                 y1={y(max * level)} y2={y(max * level)}
-                                stroke="rgba(255,255,255,0.09)" strokeWidth="1"
+                                stroke={light.line} strokeWidth="1"
                             />
                             <text x={PAD.left - 8} y={y(max * level) + 4} textAnchor="end" className="lw-chart-tick">
                                 {Math.round(max * level)}
@@ -186,11 +187,11 @@ function DemandChartModal({ keyword, ranges, asOf, onClose }: {
                         </g>
                     ))}
 
-                    <path d={area} fill="rgba(0,224,198,0.10)" />
-                    <path d={line} fill="none" stroke="#00e0c6" strokeWidth="2" strokeLinejoin="round" />
+                    <path d={area} fill={light.accentSoft} />
+                    <path d={line} fill="none" stroke={light.accentInk} strokeWidth="2" strokeLinejoin="round" />
 
                     {/* 정점 — 이야기의 핵심 한 점만 강조한다. */}
-                    <circle cx={x(peakIndex)} cy={y(points[peakIndex].ratio)} r="4" fill="#00e0c6" />
+                    <circle cx={x(peakIndex)} cy={y(points[peakIndex].ratio)} r="4" fill={light.accentInk} />
                     <text
                         x={x(peakIndex)}
                         y={y(points[peakIndex].ratio) - 10}
@@ -199,7 +200,7 @@ function DemandChartModal({ keyword, ranges, asOf, onClose }: {
                     >정점 {shortPeriod(points[peakIndex].period)}</text>
 
                     {/* 마지막 달 — "지금이 어디쯤인가" */}
-                    <circle cx={x(points.length - 1)} cy={y(last.ratio)} r="3.5" fill="#ffffff" />
+                    <circle cx={x(points.length - 1)} cy={y(last.ratio)} r="3.5" fill={light.text} />
 
                     {/* 호버 십자선 + 실측값 — 가리킨 그 점의 기간·상대값을 그대로 읽어 준다. */}
                     {hover >= 0 && (() => {
@@ -208,8 +209,8 @@ function DemandChartModal({ keyword, ranges, asOf, onClose }: {
                         const anchor = hover < points.length * 0.15 ? 'start' : hover > points.length * 0.85 ? 'end' : 'middle';
                         return (
                             <g>
-                                <line x1={hx} x2={hx} y1={PAD.top} y2={PAD.top + plotH} stroke="rgba(255,255,255,0.25)" strokeWidth="1" />
-                                <circle cx={hx} cy={y(pt.ratio)} r="4.5" fill="#0d1118" stroke="#00e0c6" strokeWidth="2" />
+                                <line x1={hx} x2={hx} y1={PAD.top} y2={PAD.top + plotH} stroke={light.lineStrong} strokeWidth="1" />
+                                <circle cx={hx} cy={y(pt.ratio)} r="4.5" fill={light.surface} stroke={light.accentInk} strokeWidth="2" />
                                 <text x={hx} y={PAD.top - 5} textAnchor={anchor} className="lw-chart-hover">
                                     {shortPeriod(pt.period)} · {Math.round(pt.ratio)}
                                 </text>

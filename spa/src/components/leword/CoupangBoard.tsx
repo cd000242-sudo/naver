@@ -9,7 +9,7 @@ import { assessCoupangDiscovery, compareCoupangDiscovery, coupangProductUrl } fr
 import CoupangDiscoveryBrief from './CoupangDiscoveryBrief';
 import { affiliateCategory, compareGolden, goldenOf, summarizeCategories } from '../../lib/affiliateGolden.mjs';
 import { enrichKey, loadKeywordEnrich, type KeywordEnrich } from '../../lib/keywordEnrich.mjs';
-import { AffiliateGoldenAids, CategoryChips, CategoryGoldenKeywords, GoldenRatioBadge, NonGoldenList } from './AffiliateGoldenParts';
+import { AffiliateGoldenAids, CategoryChips, CategoryGoldenKeywords, GoldenRatioBadge, NonGoldenList, RevealOl } from './AffiliateGoldenParts';
 import { loadCategoryGolden, mergeCategorySummary, type CategoryGolden } from '../../lib/affiliateCategoryGolden.mjs';
 
 /**
@@ -77,7 +77,7 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
     useEffect(() => { void load(); }, []);
     useEffect(() => { let alive = true; void loadKeywordEnrich().then((map) => { if (alive) setEnrich(map); }); return () => { alive = false; }; }, []);
 
-    if (state === 'loading') return <div className="lw-note">쿠팡 상품을 받아 수요·경쟁을 재는 중입니다…</div>;
+    if (state === 'loading') return <><div className="lw-note">쿠팡 상품을 받아 수요·경쟁을 재는 중입니다…</div><div className="lw-skel" aria-hidden="true"><i /><i /><i /></div></>;
     if (state === 'needs-keys') {
         return (
             <div className="lw-note lw-note-limit">
@@ -90,7 +90,7 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
         return (
             <div className="lw-note lw-note-error">
                 <strong>{message}</strong>
-                <button type="button" className="lw-mini" onClick={() => void load()}>다시 시도</button>
+                <button type="button" className="lw-mini" style={{ minHeight: 44 }} onClick={() => void load()}>다시 시도</button>
             </div>
         );
     }
@@ -132,15 +132,15 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
                                 {!discoveryMode && row.serpTop && row.serpTop.sampled > 0 && (() => {
                                     const exact = row.serpTop!.exact;
                                     const verdict = exact <= 2
-                                        ? { label: `상위 제목 정면 ${exact}개 · 본문 경쟁 별도 확인`, color: '#2ecc71', bg: 'rgba(46,204,113,.14)' }
+                                        ? { label: `상위 제목 정면 ${exact}개 · 본문 경쟁 별도 확인`, color: 'var(--lw-positive)', bg: 'var(--lw-positive-soft)' }
                                         : exact <= 5
-                                            ? { label: `경합 · 정면 ${exact}개`, color: '#f5a623', bg: 'rgba(245,166,35,.14)' }
-                                            : { label: `정면 제목 다수 · ${exact}개`, color: '#ff6b6b', bg: 'rgba(255,107,107,.14)' };
+                                            ? { label: `경합 · 정면 ${exact}개`, color: 'var(--lw-accent-ink)', bg: 'var(--lw-accent-soft)' }
+                                            : { label: `정면 제목 다수 · ${exact}개`, color: 'var(--lw-negative)', bg: 'var(--lw-negative-soft)' };
                                     return (
                                         <span style={{
                                             color: verdict.color, background: verdict.bg,
-                                            border: `1px solid ${verdict.color}44`, borderRadius: 999,
-                                            padding: '2px 10px', fontWeight: 700, fontSize: 12,
+                                            borderRadius: 999,
+                                            padding: '2px 8px', fontWeight: 600, fontSize: 13,
                                         }}>{verdict.label}</span>
                                     );
                                 })()}
@@ -152,7 +152,7 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
                                 <span className="lw-goldbox">
                                     {discovery.sourceLabel}
                                 </span>
-                                <span style={{ fontSize: 11 }}>{discovery.fresh ? '목록 관측' : '최근 목록 확인 필요'}
+                                <span style={{ fontSize: 13, color: 'var(--lw-text-muted)' }}>{discovery.fresh ? '목록 관측' : '최근 목록 확인 필요'}
                                     {row.measuredAt && Number.isFinite(Date.parse(row.measuredAt)) && ` · ${new Date(row.measuredAt).toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })}`}</span>
                             </div>
                             {productUrl ? <a className="lw-product-name" href={productUrl} target="_blank" rel="noreferrer">{row.name}</a>
@@ -160,19 +160,19 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
                             {discoveryMode && <CoupangDiscoveryBrief discovery={discovery} />}
                             {!discoveryMode && forged && (
                                 <div title={forged.basis} style={{ display: 'flex', alignItems: 'center', gap: 8, margin: '4px 0 2px', minWidth: 0 }}>
-                                    <span style={{ flexShrink: 0, padding: '1px 7px', borderRadius: 6, background: 'rgba(251,191,36,.14)', color: '#fbbf24', fontSize: 10, fontWeight: 800 }}>{forged.label}</span>
-                                    <em style={{ fontStyle: 'normal', fontWeight: 700, fontSize: 13, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{forged.text}</em>
+                                    <span style={{ flexShrink: 0, padding: '0 8px', borderRadius: 6, background: 'var(--lw-accent-soft)', color: 'var(--lw-accent-ink)', fontSize: 13, fontWeight: 600 }}>{forged.label}</span>
+                                    <em style={{ fontStyle: 'normal', fontWeight: 600, fontSize: 13, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{forged.text}</em>
                                     <button
                                         type="button"
-                                        className="lw-mini"
+                                        className="lw-mini" style={{ minHeight: 44 }}
                                         onClick={() => copyText(`title:${row.url}`, forged.text)}
                                     >{copiedKey === `title:${row.url}` ? '복사됨!' : '복사'}</button>
                                 </div>
                             )}
-                            {!discoveryMode && <p style={{ fontSize: 12, color: '#f5a623' }}>{assessment.reasons.map(recommendationReason).join(' ')}</p>}
+                            {!discoveryMode && <p style={{ fontSize: 13, color: 'var(--lw-accent-ink)' }}>{assessment.reasons.map(recommendationReason).join(' ')}</p>}
                             {discoveryMode && typeof row.price === 'number' && row.price > 0 && <p className="lw-product-price"><strong>{row.price.toLocaleString('ko-KR')}원</strong></p>}
                             <details open={discoveryMode ? undefined : true}>
-                            <summary style={{ cursor: 'pointer', marginTop: 6, fontSize: 12 }}>검색 유입 참고 수치 · 상품 발견 판정과 별개</summary>
+                            <summary style={{ cursor: 'pointer', marginTop: 8, fontSize: 13, color: 'var(--lw-text-secondary)', padding: '12px 0' }}>검색 유입 참고 수치 · 상품 발견 판정과 별개</summary>
                             <div className="lw-product-metrics">
                                 {typeof row.price === 'number' && row.price > 0 && (
                                     <span className="lw-product-price"><strong>{row.price.toLocaleString('ko-KR')}원</strong></span>
@@ -195,10 +195,10 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
                         </div>
                         <div className="lw-product-actions">
                             {/* 검색 분석은 서버에서 실제 측정한 동일 검색어로 연결한다. */}
-                            <button type="button" className="lw-act lw-act-blue" onClick={() => onAnalyze(row.keyword)}>LEWORD 키워드분석</button>
+                            <button type="button" className="lw-act lw-act-blue" style={{ minHeight: 44, display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => onAnalyze(row.keyword)}>LEWORD 키워드분석</button>
                             {lane === 'coupang' && (
                                 <a
-                                    className="lw-act lw-act-orange"
+                                    className="lw-act lw-act-orange" style={{ minHeight: 44, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                                     href={`https://www.coupang.com/np/search?q=${encodeURIComponent(row.keyword)}`}
                                     target="_blank"
                                     rel="noreferrer"
@@ -207,7 +207,7 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
                             {lane !== 'coupang' && (
                                 <button
                                     type="button"
-                                    className="lw-act lw-act-orange"
+                                    className="lw-act lw-act-orange" style={{ minHeight: 44, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                                     onClick={() => copyText(row.url, lane === 'toss' ? row.name : (row.keyword.split(/\s+/)[0] || row.keyword))}
                                 >
                                     {copiedKey === row.url ? '복사됨!' : (lane === 'toss' ? '상품명 복사' : '브랜드명 복사')}
@@ -215,16 +215,16 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
                             )}
                             {/* 정면 수치를 못 믿겠으면 직접 세어 보라 — 실측을 파는 보드는 검증 동선까지 줘야 한다. */}
                             <a
-                                className="lw-act lw-act-green"
+                                className="lw-act lw-act-green" style={{ minHeight: 44, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                                 href={`https://search.naver.com/search.naver?ssc=tab.blog.all&sm=tab_jum&query=${encodeURIComponent(row.keyword)}`}
                                 target="_blank"
                                 rel="noreferrer"
                             >네이버 검색분석</a>
                             {lane === 'coupang' && (
-                                <button type="button" className="lw-act lw-act-gold" disabled={!productUrl} onClick={() => void makeLink(row)}>
+                                <button type="button" className="lw-act lw-act-gold" style={{ minHeight: 44, display: 'flex', alignItems: 'center', justifyContent: 'center' }} disabled={!productUrl} onClick={() => void makeLink(row)}>
                                     {linkState?.key === row.url
                                         ? linkState.label
-                                        : (<>내 제휴링크 복사<span className="lw-act-sub">(API키 있어야됨)</span></>)}
+                                        : (<>내 제휴링크 복사<span className="lw-act-sub" style={{ minHeight: 44, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>(API키 있어야됨)</span></>)}
                                 </button>
                             )}
                             {lane === 'toss' && (
@@ -235,16 +235,16 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
                                  */
                                 <button
                                     type="button"
-                                    className="lw-act lw-act-gold"
+                                    className="lw-act lw-act-gold" style={{ minHeight: 44, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                                     onClick={() => copyText(`toss-issue:${row.url}`, row.name)}
                                 >
                                     {copiedKey === `toss-issue:${row.url}` ? '상품명 복사했습니다' : '토스 앱에서 발급'}
-                                    <span className="lw-act-sub">토스 앱 쇼핑 검색 → 상품 → 공유 → 쉐어링크 공유하기</span>
+                                    <span className="lw-act-sub" style={{ minHeight: 44, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>토스 앱 쇼핑 검색 → 상품 → 공유 → 쉐어링크 공유하기</span>
                                 </button>
                             )}
                             {lane === 'brandconnect' && (
-                                <a className="lw-act lw-act-gold" href="https://brandconnect.naver.com/" target="_blank" rel="noreferrer">
-                                    브랜드커넥트 콘솔<span className="lw-act-sub">브랜드명으로 캠페인 확인</span>
+                                <a className="lw-act lw-act-gold" style={{ minHeight: 44, display: 'flex', alignItems: 'center', justifyContent: 'center' }} href="https://brandconnect.naver.com/" target="_blank" rel="noreferrer">
+                                    브랜드커넥트 콘솔<span className="lw-act-sub" style={{ minHeight: 44, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>브랜드명으로 캠페인 확인</span>
                                 </a>
                             )}
                         </div>
@@ -285,9 +285,9 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
             <CategoryChips summary={categorySummary} value={activeCategory} total={inView.length} onChange={setCategory} />
             {/* 그룹 헤더는 뺐다(사장님: 정면 설명 빼고 다 없애). 판정은 카드 배지가 이미 말한다. */}
             {!discoveryMode && <CategoryGoldenKeywords category={activeCategory} byCategory={catGolden.byCategory} builtAt={catGolden.builtAt} onAnalyze={onAnalyze} productNames={all.map((e) => e.row.name)} />}
-            <ol className="lw-product-list">
+            <RevealOl key={`${discoveryMode}|${activeCategory}`} className="lw-product-list">
                 {visible.map((entry, index) => renderRow(entry, index + 1))}
-            </ol>
+            </RevealOl>
             <NonGoldenList rows={nonGolden.map(({ row, golden }) => ({ key: row.url, name: row.name, golden }))} />
         </>
     );

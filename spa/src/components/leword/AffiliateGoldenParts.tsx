@@ -11,24 +11,34 @@ import type { KeywordEnrich } from '../../lib/keywordEnrich.mjs';
 import type { AffiliateGolden as Golden, AffiliateCategorySummary } from '../../lib/affiliateGolden.mjs';
 import { categoryGoldenTop, matchOwnProduct, type CategoryGoldenKeyword } from '../../lib/affiliateCategoryGolden.mjs';
 import KeywordAids from './shared/KeywordAids';
+import { useRef, type ReactNode, type RefObject } from 'react';
+import { useReveal } from '../motion/Reveal';
 
 const fmt = (n: number | null) => (n === null ? '—' : n.toLocaleString('ko-KR'));
 const ratioText = (r: number) => r.toLocaleString('ko-KR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-const GRADE_COLOR: Record<string, string> = { S: '#2ecc71', A: '#4ade80', B: '#f5a623' };
+const GRADE_COLOR: Record<string, string> = { S: 'var(--lw-positive)', A: 'var(--lw-positive)', B: 'var(--lw-accent-ink)' };
+const GRADE_BG: Record<string, string> = { S: 'var(--lw-positive-soft)', A: 'var(--lw-positive-soft)', B: 'var(--lw-accent-soft)' };
 
 type CategorySummary = AffiliateCategorySummary & { keywords?: number };
+
+/** Product list that rises in item by item the first time it is seen (off under reduced motion). */
+export function RevealOl({ className, children }: { className: string; children: ReactNode }) {
+    const ref = useRef<HTMLOListElement>(null);
+    useReveal(ref as RefObject<HTMLElement>, { stagger: true });
+    return <ol ref={ref} className={className}>{children}</ol>;
+}
 
 export function CategoryChips({ summary, value, total, onChange }: { summary: CategorySummary[]; value: string; total: number; onChange: (category: string) => void }) {
     if (summary.length < 2) return null;
     const chip = (on: boolean) => ({
-        display: 'grid', gap: 2, textAlign: 'left' as const, padding: '7px 11px', borderRadius: 10, cursor: 'pointer',
-        border: `1px solid ${on ? '#fbbf24' : 'rgba(148,163,184,.25)'}`, background: on ? 'rgba(251,191,36,.12)' : 'rgba(15,23,42,.45)', color: '#e2e8f0',
+        display: 'grid', gap: 2, textAlign: 'left' as const, padding: '8px 12px', minHeight: 44, borderRadius: 10, cursor: 'pointer',
+        border: `1px solid ${on ? 'var(--lw-accent)' : 'var(--lw-line)'}`, background: on ? 'var(--lw-accent-soft)' : 'var(--lw-surface)', color: 'var(--lw-text)',
     });
     return (
-        <div role="group" aria-label="카테고리" style={{ display: 'flex', flexWrap: 'wrap', gap: 8, margin: '4px 0 14px' }}>
+        <div role="group" aria-label="카테고리" style={{ display: 'flex', flexWrap: 'wrap', gap: 8, margin: '4px 0 16px' }}>
             <button type="button" aria-pressed={value === '전체'} onClick={() => onChange('전체')} style={chip(value === '전체')}>
-                <strong style={{ fontSize: 13 }}>전체 <em style={{ fontStyle: 'normal', color: '#fbbf24' }}>{total}</em></strong>
-                <span style={{ fontSize: 11, color: '#94a3b8' }}>문서÷검색 낮은 순</span>
+                <strong style={{ fontSize: 13, fontWeight: 600 }}>전체 <em style={{ fontStyle: 'normal', color: 'var(--lw-accent-ink)' }}>{total}</em></strong>
+                <span style={{ fontSize: 13, color: 'var(--lw-text-secondary)' }}>문서÷검색 낮은 순</span>
             </button>
             {summary.map((s) => (
                 <button
@@ -39,8 +49,8 @@ export function CategoryChips({ summary, value, total, onChange }: { summary: Ca
                     title={s.top?.docRatio != null ? `${s.category} 1위 「${s.top.query}」 검색 ${fmt(s.top.volume)} / 문서 ${fmt(s.top.docs)}` : undefined}
                     style={chip(value === s.category)}
                 >
-                    <strong style={{ fontSize: 13 }}>{s.category} <em style={{ fontStyle: 'normal', color: '#fbbf24' }}>{s.keywords ? `검색어 ${s.keywords} · 상품 ${s.count}` : s.count}</em></strong>
-                    <span style={{ fontSize: 11, color: '#94a3b8', maxWidth: 170, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    <strong style={{ fontSize: 13, fontWeight: 600 }}>{s.category} <em style={{ fontStyle: 'normal', color: 'var(--lw-accent-ink)' }}>{s.keywords ? `검색어 ${s.keywords} · 상품 ${s.count}` : s.count}</em></strong>
+                    <span style={{ fontSize: 13, color: 'var(--lw-text-secondary)', maxWidth: 170, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                         {s.top?.docRatio != null ? `1위 ${s.top.query} · ${ratioText(s.top.docRatio)}` : '수치 미측정'}
                     </span>
                 </button>
@@ -51,11 +61,12 @@ export function CategoryChips({ summary, value, total, onChange }: { summary: Ca
 
 export function GoldenRatioBadge({ golden }: { golden: Golden }) {
     if (golden.docRatio === null) return null;
-    const color = golden.grade ? GRADE_COLOR[golden.grade] : '#aebccc';
+    const color = golden.grade ? GRADE_COLOR[golden.grade] : 'var(--lw-text-secondary)';
+    const bg = golden.grade ? GRADE_BG[golden.grade] : 'var(--lw-raised)';
     return (
         <span
             title={`「${golden.query}」 블로그 문서수 ÷ 월 검색량. 낮을수록 찾는 사람에 비해 글이 적습니다. S 0.3 미만(검색 500+) · A 0.7 미만 · B 1.0 미만(검색 100+).`}
-            style={{ color, background: `${color}1f`, border: `1px solid ${color}55`, borderRadius: 999, padding: '2px 9px', fontWeight: 900, fontSize: 11 }}
+            style={{ color, background: bg, borderRadius: 999, padding: '2px 8px', fontWeight: 600, fontSize: 13, fontVariantNumeric: 'tabular-nums' }}
         >
             {golden.grade ? `${golden.grade}등급 · ` : ''}문서÷검색 {ratioText(golden.docRatio)} · 검색 {fmt(golden.volume)} / 문서 {fmt(golden.docs)}
         </span>
@@ -69,11 +80,11 @@ export function GoldenRatioBadge({ golden }: { golden: Golden }) {
 export function NonGoldenList({ rows }: { rows: Array<{ key: string; name: string; golden: Golden }> }) {
     if (!rows.length) return null;
     return (
-        <details style={{ margin: '14px 0 0', padding: '10px 12px', border: '1px solid rgba(148,163,184,.22)', borderRadius: 10, background: 'rgba(15,23,42,.35)' }}>
-            <summary style={{ cursor: 'pointer', fontSize: 13, color: '#94a3b8' }}>
+        <details style={{ margin: '16px 0 0', padding: '0 12px', border: '1px solid var(--lw-line)', borderRadius: 10, background: 'var(--lw-raised)' }}>
+            <summary style={{ cursor: 'pointer', fontSize: 13, color: 'var(--lw-text-secondary)', padding: '12px 0' }}>
                 황금 아님 {rows.length}개 — 문서가 검색보다 많거나 검색량 100 미만 · 아직 안 잰 상품
             </summary>
-            <ul style={{ margin: '8px 0 0', paddingLeft: 18, display: 'grid', gap: 3, fontSize: 12.5, color: '#aebccc' }}>
+            <ul style={{ margin: '0 0 12px', paddingLeft: 20, display: 'grid', gap: 4, fontSize: 13, color: 'var(--lw-text-secondary)' }}>
                 {rows.map(({ key, name, golden }) => (
                     <li key={key}>
                         {name}
@@ -98,20 +109,20 @@ export function CategoryGoldenKeywords({ category, byCategory, builtAt, onAnalyz
     const rows = categoryGoldenTop(byCategory, category, category === '전체' ? 15 : 30);
     if (!rows.length) return null;
     const when = builtAt ? new Date(builtAt).toLocaleString('ko-KR', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : '';
-    const cell = { padding: '6px 8px', borderTop: '1px solid rgba(148,163,184,.15)', textAlign: 'right' as const, whiteSpace: 'nowrap' as const };
+    const cell = { padding: '8px', borderTop: '1px solid var(--lw-line)', textAlign: 'right' as const, whiteSpace: 'nowrap' as const };
     return (
-        <section aria-label="카테고리 황금 검색어" style={{ margin: '0 0 16px', padding: '12px 14px', border: '1px solid #b8962e', borderRadius: 14, background: 'rgba(15,23,42,.55)' }}>
-            <h3 style={{ margin: 0, fontSize: 15, color: '#fff7d1' }}>
+        <section aria-label="카테고리 황금 검색어" style={{ margin: '0 0 16px', padding: '16px', border: '1px solid var(--lw-line)', borderRadius: 14, background: 'var(--lw-surface)' }}>
+            <h3 style={{ margin: 0, fontSize: 15, fontWeight: 600, color: 'var(--lw-text)' }}>
                 {category === '전체' ? '카테고리별 황금 검색어' : `「${category}」 황금 검색어`}
-                <small style={{ marginLeft: 8, fontSize: 12, color: '#94a3b8', fontWeight: 500 }}>문서÷검색 낮은 순{when ? ` · ${when} 실측` : ''}</small>
+                <small style={{ marginLeft: 8, fontSize: 13, color: 'var(--lw-text-muted)', fontWeight: 500 }}>문서÷검색 낮은 순{when ? ` · ${when} 실측` : ''}</small>
             </h3>
-            <p style={{ margin: '4px 0 8px', fontSize: 12.5, color: '#b6c4d6' }}>
+            <p style={{ margin: '4px 0 8px', fontSize: 13, color: 'var(--lw-text-secondary)' }}>
                 카테고리 대표어의 연관 검색어 중 블로그 문서가 월 검색량보다 적은 말만 실었습니다. 이 말로 글을 쓰고 같은 카테고리의 제휴 상품을 본문에 거세요.
             </p>
             <div style={{ overflowX: 'auto' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13, color: '#e2e8f0' }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13, color: 'var(--lw-text)', fontVariantNumeric: 'tabular-nums' }}>
                     <thead>
-                        <tr style={{ color: '#94a3b8', fontSize: 11.5 }}>
+                        <tr style={{ color: 'var(--lw-text-muted)', fontSize: 13 }}>
                             <th style={{ ...cell, textAlign: 'left', borderTop: 'none' }}>등급</th>
                             <th style={{ ...cell, textAlign: 'left', borderTop: 'none' }}>검색어</th>
                             <th style={{ ...cell, borderTop: 'none' }}>월 검색</th>
@@ -123,21 +134,21 @@ export function CategoryGoldenKeywords({ category, byCategory, builtAt, onAnalyz
                     <tbody>
                         {rows.map((k) => (
                             <tr key={`${k.category}:${k.keyword}`}>
-                                <td style={{ ...cell, textAlign: 'left', color: k.grade ? GRADE_COLOR[k.grade] : '#aebccc', fontWeight: 900 }}>{k.grade}</td>
+                                <td style={{ ...cell, textAlign: 'left', color: k.grade ? GRADE_COLOR[k.grade] : 'var(--lw-text-secondary)', fontWeight: 600 }}>{k.grade}</td>
                                 <td style={{ ...cell, textAlign: 'left', whiteSpace: 'normal' }}>
                                     <strong>{k.keyword}</strong>
-                                    {category === '전체' && <span style={{ marginLeft: 6, fontSize: 11, color: '#94a3b8' }}>{k.category}</span>}
+                                    {category === '전체' && <span style={{ marginLeft: 8, fontSize: 13, color: 'var(--lw-text-muted)' }}>{k.category}</span>}
                                     {(() => {
                                         const own = matchOwnProduct(k.keyword, k.seed, productNames);
-                                        return own && <span title={`내 제휴 상품: ${own}`} style={{ marginLeft: 6, fontSize: 10.5, color: '#2ecc71', border: '1px solid #2ecc7155', borderRadius: 999, padding: '0 6px' }}>내 상품 검색어</span>;
+                                        return own && <span title={`내 제휴 상품: ${own}`} style={{ marginLeft: 8, fontSize: 13, color: 'var(--lw-positive)', background: 'var(--lw-positive-soft)', borderRadius: 999, padding: '0 8px' }}>내 상품 검색어</span>;
                                     })()}
                                 </td>
                                 <td style={cell}>{fmt(k.volume)}</td>
                                 <td style={cell}>{fmt(k.docs)}</td>
                                 <td style={cell}>{k.docRatio !== null ? ratioText(k.docRatio) : '—'}</td>
                                 <td style={{ ...cell, display: 'flex', gap: 6, justifyContent: 'flex-end' }}>
-                                    <button type="button" className="lw-mini" onClick={() => onAnalyze(k.keyword)}>분석</button>
-                                    <a className="lw-mini" href={`https://search.naver.com/search.naver?ssc=tab.blog.all&query=${encodeURIComponent(k.keyword)}`} target="_blank" rel="noreferrer">네이버</a>
+                                    <button type="button" className="lw-mini" style={{ minHeight: 44 }} onClick={() => onAnalyze(k.keyword)}>분석</button>
+                                    <a className="lw-mini" style={{ minHeight: 44, display: 'inline-flex', alignItems: 'center' }} href={`https://search.naver.com/search.naver?ssc=tab.blog.all&query=${encodeURIComponent(k.keyword)}`} target="_blank" rel="noreferrer">네이버</a>
                                 </td>
                             </tr>
                         ))}
@@ -172,15 +183,15 @@ export function AffiliateGoldenAids({ golden, enrich, facing, coupang = false }:
         ? '글 첫 부분에 "이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다." 문구를 눈에 띄게 넣고 링크를 다세요.'
         : '글 첫 부분에 대가성(제휴 수수료) 문구를 눈에 띄게 넣고 발급받은 링크를 다세요.');
     return (
-        <details open={Boolean(enrich?.demand)} style={{ gridColumn: '1 / -1', margin: '6px 0 0' }}>
-            <summary style={{ cursor: 'pointer', fontSize: 12.5, color: '#fcd34d', fontWeight: 700 }}>
+        <details open={Boolean(enrich?.demand)} style={{ gridColumn: '1 / -1', margin: '8px 0 0' }}>
+            <summary style={{ cursor: 'pointer', fontSize: 13, color: 'var(--lw-accent-ink)', fontWeight: 600, padding: '12px 0' }}>
                 「{golden.query}」 검색 추이 그래프 · 지금 이렇게 쓰세요
             </summary>
             <div style={{ marginTop: 8 }}>
                 {enrich
                     ? <KeywordAids query={golden.query} enrich={enrich} />
-                    : <p style={{ margin: '2px 0 8px', fontSize: 12, color: '#8d9db4' }}>이 검색어의 추이 그래프는 아직 없습니다 — 매일 도는 덧붙이기 회차가 데이터랩으로 재서 붙입니다.</p>}
-                <ol style={{ margin: '6px 0 0', paddingLeft: 20, display: 'grid', gap: 4, fontSize: 13, color: '#e2e8f0', lineHeight: 1.55 }}>
+                    : <p style={{ margin: '4px 0 8px', fontSize: 13, color: 'var(--lw-text-muted)' }}>이 검색어의 추이 그래프는 아직 없습니다 — 매일 도는 덧붙이기 회차가 데이터랩으로 재서 붙입니다.</p>}
+                <ol style={{ margin: '8px 0 0', paddingLeft: 20, display: 'grid', gap: 4, fontSize: 13, color: 'var(--lw-text)', lineHeight: 1.55 }}>
                     {steps.map((step) => <li key={step}>{step}</li>)}
                 </ol>
             </div>

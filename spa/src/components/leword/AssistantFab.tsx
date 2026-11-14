@@ -25,15 +25,15 @@ export default function AssistantFab({ open, busy, onToggle, docked = false }: {
             title="AI 비서 (어느 탭에서든)"
             style={{
                 ...(docked ? { position: 'relative' as const } : { position: 'fixed' as const, top: ASSIST_FAB_TOP, right: 16, zIndex: 10060 }),
-                display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 15px 6px 6px',
-                border: '1px solid transparent', borderRadius: 999,
-                background: 'linear-gradient(#10142a, #10142a) padding-box, linear-gradient(135deg, #fde68a, #f59e0b 45%, #a78bfa) border-box',
-                color: '#f8fafc', font: 'inherit', fontSize: 12.5, fontWeight: 700, letterSpacing: '0.02em', cursor: 'pointer',
-                boxShadow: hover ? '0 8px 30px rgba(250,204,21,0.28), 0 0 0 1px rgba(250,204,21,0.25)' : '0 6px 22px rgba(124,92,255,0.28)',
-                transition: 'box-shadow 160ms ease',
+                display: 'inline-flex', alignItems: 'center', gap: 8, minHeight: 44, padding: '0 16px 0 8px',
+                border: `1px solid ${hover ? 'var(--lw-line-strong)' : 'var(--lw-line)'}`, borderRadius: 999,
+                background: 'var(--lw-surface)',
+                color: 'var(--lw-text)', font: 'inherit', fontSize: 13, fontWeight: 600, cursor: 'pointer',
+                boxShadow: hover ? 'var(--lw-shadow-float)' : 'var(--lw-shadow-sm)',
+                transition: 'box-shadow 160ms ease, border-color 160ms ease',
             }}
         >
-            <span aria-hidden="true" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 24, height: 24, borderRadius: '50%', background: 'linear-gradient(135deg, #fde68a, #f59e0b)', color: '#1c1305', fontSize: 13 }}>✦</span>
+            <span aria-hidden="true" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 24, height: 24, borderRadius: '50%', background: 'var(--lw-accent)', color: 'var(--lw-on-accent)', fontSize: 13 }}>✦</span>
             <span>{label}</span>
         </button>
     );

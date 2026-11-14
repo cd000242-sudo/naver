@@ -19,7 +19,7 @@ function AffiliateTitles({ keyword, product, item, assessment, onAnalyze }: {
             </button>
             {open && <div style={{ padding: 12, fontSize: 13, lineHeight: 1.7 }}>
                 <p>{brief.warning}</p>
-                <p><strong>공략 검색어</strong> {brief.query}{onAnalyze && <button type="button" className="lw-mini" onClick={() => onAnalyze(brief.query)}>분석</button>}</p>
+                <p><strong>공략 검색어</strong> {brief.query}{onAnalyze && <button type="button" className="lw-mini" style={{ minHeight: 44 }} onClick={() => onAnalyze(brief.query)}>분석</button>}</p>
                 <ul>{brief.reasons.map((reason, i) => <li key={i}>{reason}</li>)}</ul>
                 <p><strong>{brief.title.label}</strong><br />{brief.title.text}</p>
                 <ol>{brief.sections.map(section => <li key={section}>{section}</li>)}</ol>

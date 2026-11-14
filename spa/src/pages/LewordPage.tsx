@@ -18,6 +18,7 @@ import SeasonalKeywordsBoard from '../components/leword/seasonal/SeasonalKeyword
 import KeysTab from '../components/leword/KeysTab';
 import KinGoldenTab from '../components/leword/KinGoldenTab';
 import LewordStyles from '../components/leword/LewordStyles';
+import LewordNavInk from '../components/leword/LewordNavInk';
 import MyBlogTab from '../components/leword/MyBlogTab';
 import RadarTab from '../components/leword/RadarTab';
 import RankTab from '../components/leword/RankTab';
@@ -43,7 +44,7 @@ const ASSIST_OPEN_KEY = 'leword.assist.open';
 
 const TABS = [
     { id: 'golden', label: '리더남 전용 황금키워드', short: '황금키워드', icon: '◆' },
-    { id: 'issue', label: '실검 틈새 및 숏텐츠', short: '실검·숏텐츠', icon: '⚡' },
+    { id: 'issue', label: '실검 틈새 및 숏텐츠', short: '실검·숏텐츠', icon: '↯' },
     // 홈판 신호(사장님 명령서 STORY RADAR v2.0, 2026-09-16) — 실검 틈새 바로 옆. 이용권 탭(맛보기 목록에 넣지 않는다).
     { id: 'homefeed', label: '리더남 홈판 추천 소재 · 제목', short: '홈판 추천', icon: '◉' },
     // 애드센스 고수 벤치마크(2026-10-07 사장님 "홈판 아래에") — 엑셀 고수 블로그 786곳 최근 7일 소재. 이용권 탭.
@@ -292,6 +293,7 @@ function LewordPage() {
                 )}
 
                 <nav className="lw-nav">
+                    <LewordNavInk activeSelector=".lw-navi.on:not(.lw-navi-sub)" activeKey={`${activeTab}|${picksTopics.length}|${picksFolded}`} />
                     {VISIBLE_TABS.map((tab) => (
                         <Fragment key={tab.id}>
                         <div className={tab.id === 'picks' ? `lw-navi-wrap${activeTab === 'picks' && picksTopics.length > 0 ? ' has-fold' : ''}` : undefined}>
@@ -315,7 +317,7 @@ function LewordPage() {
                               */}
                             <em className="lw-navi-full">{tab.label}</em>
                             <em className="lw-navi-short">{tab.short}</em>
-                            {!session && !GUEST_TABS.has(tab.id) && <b className="lw-navi-lock" aria-label="로그인 필요">🔒</b>}
+                            {!session && !GUEST_TABS.has(tab.id) && <b className="lw-navi-lock" aria-label="로그인 필요"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></svg></b>}
                         </button>
                         {tab.id === 'picks' && activeTab === 'picks' && picksTopics.length > 0 && (
                             <button
@@ -379,7 +381,7 @@ function LewordPage() {
                                 </span>
                             )}
                             {/* 2026-10-07 사장님 "리워드 사용법 노션 — 구매하면 이거 볼 수 있도록" — 로그인한 이용권 보유자에게만 */}
-                            <a className="lw-acct-btn" href={LEWORD_GUIDE_URL} target="_blank" rel="noreferrer">📘 사용법</a>
+                            <a className="lw-acct-btn" href={LEWORD_GUIDE_URL} target="_blank" rel="noreferrer">사용법</a>
                             <button
                                 type="button"
                                 className="lw-acct-btn"
@@ -388,7 +390,7 @@ function LewordPage() {
                         </>
                     ) : (
                         <>
-                            {kickNotice && <span className="lw-acct-meta" role="alert" style={{ color: '#fca5a5' }}>{kickNotice}</span>}
+                            {kickNotice && <span className="lw-acct-meta" role="alert" style={{ color: 'var(--lw-negative)' }}>{kickNotice}</span>}
                             <span className="lw-acct-meta">로그인하면 이용권에 맞는 기능과 글감이 열립니다 — 황금키워드·실검 맛보기는 먼저 이용할 수 있습니다.</span>
                             <button type="button" className="lw-acct-btn on" onClick={() => setAuthOpen(true)}>
                                 로그인 · 계정 만들기
@@ -421,6 +423,7 @@ function LewordPage() {
                     <AssistantPanel open={assistantOpen} tabId={activeTab} tabLabel={activeMeta.label} onClose={collapseAssistant} onBusyChange={setAssistantBusy} />
                 )}
 
+                <div className="lw-pane" key={activeTab}>
                 {lockedTab && (
                     <section className="lw-locked" aria-labelledby="lw-locked-title">
                         <h1 id="lw-locked-title">{activeMeta.label}</h1>
@@ -447,6 +450,7 @@ function LewordPage() {
                 {!lockedTab && activeTab === 'myblog' && <MyBlogTab />}
                 {!lockedTab && activeTab === 'rpm' && <RpmTab onRadar={sendToRadar} />}
                 {!lockedTab && activeTab === 'keys' && <KeysTab />}
+                </div>
             </section>
         </div>
     );

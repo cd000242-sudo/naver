@@ -10,6 +10,8 @@ import { loadAdvisorDaily } from '../../../lib/homefeedEvidenceLoad';
 import type { AdvisorDailyView } from '../../../lib/myBlogSync';
 import HomefeedBenchmarkCard from './HomefeedBenchmarkCard';
 import HomefeedBenchmarkStyles from './HomefeedBenchmarkStyles';
+import CountUp from '../../motion/CountUp';
+import Reveal from '../../motion/Reveal';
 import HomefeedTrendsPanel from './HomefeedTrendsPanel';
 import UpcomingTopicsPanel from './UpcomingTopicsPanel';
 import HomefeedSpeedPanel from './HomefeedSpeedPanel';
@@ -117,7 +119,7 @@ export default function HomefeedBenchmarkBoard() {
   <HomefeedBenchmarkStyles />
   <header className="hfb-header">
    <div><span className="hfb-eyebrow">BENCHMARK RADAR · 리더남의 채널 리스트</span><h2>리더남 홈판 추천 <span>소재 · 제목</span></h2><p>벤치마크 채널에서 최근 48시간 안에 나온 소재를 전부 모았습니다. 여러 채널이 함께 다룬 소재가 먼저 나옵니다.</p></div>
-   <div className="hfb-count"><strong>{view?.candidates.length ?? '—'}</strong><span>검토할 소재</span></div>
+   <div className="hfb-count"><strong>{view ? <CountUp value={view.candidates.length} format={String} /> : '—'}</strong><span>검토할 소재</span></div>
   </header>
   <div className="hfb-meta"><span>{view ? (livePending ? `정기 수집 ${benchmarkTime(view.generatedAt)} KST 판을 먼저 보여 드립니다 · 실시간 수집 중…` : liveAt && !liveFailed ? `실시간 수집 ${benchmarkTime(liveAt)} KST · 5분마다 다시 긁습니다` : `정기 수집 ${benchmarkTime(view.generatedAt)} KST · 실시간 수집에 실패해 마지막 정기 판을 보여 드립니다`) : '벤치마크 자료 연결 중'}</span><button type="button" onClick={()=>{void load(); loadAdvisor();}} disabled={loading || livePending}>{loading || livePending?'새로 긁는 중…':'지금 새로 긁기'}</button></div>
   {/* 미리 써 둘 소재(2026-10-11) — 경기 · 방송 일정의 '처음' 주목 인물. 판이 없으면 칸을 그리지 않는다 */}
@@ -127,6 +129,7 @@ export default function HomefeedBenchmarkBoard() {
   <BenchmarkHowTo kind="homefeed" />
   {error && <div className="hfb-alert" role="alert">{error}{view && ' 마지막으로 읽은 자료를 보여드립니다.'}</div>}
   {view?.stale && <div className="hfb-alert" role="status">최근 36시간 안에 확인된 자료가 아닙니다. 우선 추천 별을 내리고 시점 재검토로 표시했습니다.</div>}
+  {!view && loading && <div className="lw-skel" aria-hidden="true"><i /><i /><i /></div>}
   {!view && !loading && !error && <p className="hfb-empty">아직 공개된 벤치마크 자료가 없습니다.</p>}
   {view && <>
    <details className="hfb-coverage"><summary>출처 {healthy}/{view.sourceCount}곳 확인 · 게시물 {view.collectedPostCount.toLocaleString('ko-KR')}개 수집 <span>{healthy<view.sourceCount ? `· ${view.sourceCount-healthy}곳 확인 필요` : ''}</span><small>수집 상태 보기</small></summary>
@@ -142,7 +145,7 @@ export default function HomefeedBenchmarkBoard() {
    </div>
    <div className="hfb-shuffle"><button type="button" onClick={()=>{reshuffle();setLimit(12);}}>순서 섞기</button><small>매시 정각 새 순서로 섞입니다 · 실제 홈판 증거 · ★ 소재가 먼저</small></div>
    <p className="hfb-legend">★는 최근 이틀 안에 벤치마크 채널 두 곳 이상이 함께 다룬 소재입니다. 홈판 노출 확인과는 별개이며, 제목은 작성용 제안입니다. 방금 새로 잡힌 소재는 다음 정기 수집(매시) 때 홈판 제목이 붙습니다.</p>
-   <div className="hfb-list">{items.slice(0,limit).map(c=><HomefeedBenchmarkCard key={c.id} candidate={c} evidence={c.evidence} enrich={c.searchTargets[0]?enrich.get(enrichKey(c.searchTargets[0])):undefined}/>)}</div>
+   <Reveal stagger key={`${category}|${status}|${seed}`} className="hfb-list">{items.slice(0,limit).map(c=><HomefeedBenchmarkCard key={c.id} candidate={c} evidence={c.evidence} enrich={c.searchTargets[0]?enrich.get(enrichKey(c.searchTargets[0])):undefined}/>)}</Reveal>
    {items.length===0 && <div className="hfb-empty"><strong>이 조건에 맞는 소재가 없습니다.</strong><button type="button" onClick={()=>{setCategory('전체');setStatus('all');setQuery('');}}>전체 소재 보기</button></div>}
    {items.length>limit&&<button type="button" className="hfb-more" onClick={()=>setLimit(n=>n+12)}>소재 더 보기 · {Math.min(limit,items.length)}/{items.length}</button>}
   </>}

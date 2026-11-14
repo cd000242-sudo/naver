@@ -6,6 +6,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { withGuides } from '../../../lib/homefeedGuides.mjs';
 import HomefeedBenchmarkStyles from '../homefeed/HomefeedBenchmarkStyles';
+import CountUp from '../../motion/CountUp';
+import Reveal from '../../motion/Reveal';
 import { bridgeBenchmarkTitles } from '../../../lib/bridge';
 import { callWorkerRaw } from '../../../lib/keywordApi';
 import { adsenseCompetition, adsenseCategories, adsenseWritingAdvice, blogCount, filterAdsenseCards, ADSENSE_PLATFORMS, cardPlatforms, shuffleAdsenseCards, adsenseNowPicks, type AdsenseBoard, type AdsenseCard } from '../../../lib/adsenseBenchmarkModel.mjs';
@@ -68,7 +70,7 @@ function SearchTitles({ c }: { c: AdsenseCard }) {
                 </div>
             )}
             {shown.map((t, i) => (
-                <div key={t} className="hfb-title-row"><span>{i + 1}</span><p>{t}{edges[i] ? <span style={{ display: 'block', marginTop: 2, fontSize: 11.5, color: '#fcd34d' }}>↑ {edges[i]}</span> : null}</p><button type="button" onClick={() => void copy(t)}>{copied === t ? '복사됨' : '복사'}</button></div>
+                <div key={t} className="hfb-title-row"><span>{i + 1}</span><p>{t}{edges[i] ? <span style={{ display: 'block', marginTop: 2, fontSize: 13, color: 'var(--lw-accent-ink)' }}>↑ {edges[i]}</span> : null}</p><button type="button" onClick={() => void copy(t)}>{copied === t ? '복사됨' : '복사'}</button></div>
             ))}
             {titles.length > 5 && <button type="button" className="hfb-title-more" onClick={() => setOpen((v) => !v)} aria-expanded={open}>{open ? '접기' : `나머지 ${titles.length - 5}개 더 보기`}</button>}
         </div>
@@ -96,20 +98,20 @@ function PostOutline({ s }: { s: AdsenseCard['sources'][number] }) {
     const num = (v: number | undefined) => (typeof v === 'number' ? v.toLocaleString('ko-KR') : '—');
     return (
         <div style={{ margin: '2px 0 8px 34px' }}>
-            <button type="button" onClick={() => void toggle()} aria-expanded={open} style={{ background: 'transparent', border: '1px solid #33415a', color: '#9fb3cc', borderRadius: 7, padding: '3px 9px', fontSize: 12, cursor: 'pointer' }}>{open ? '글 구조 접기' : '글 구조 보기'}</button>
+            <button type="button" onClick={() => void toggle()} aria-expanded={open} style={{ display: 'inline-flex', alignItems: 'center', minHeight: 44, background: 'var(--lw-surface)', border: '1px solid var(--lw-line)', color: 'var(--lw-text)', borderRadius: 10, padding: '0 12px', fontSize: 13, cursor: 'pointer' }}>{open ? '글 구조 접기' : '글 구조 보기'}</button>
             {open && (
-                <div style={{ marginTop: 6, padding: '10px 12px', border: '1px solid #26324a', borderRadius: 10, background: 'rgba(15,23,42,0.55)', fontSize: 12.5, color: '#c7d2e0' }}>
+                <div style={{ marginTop: 8, padding: '12px', border: '1px solid var(--lw-line)', borderRadius: 10, background: 'var(--lw-raised)', fontSize: 13, color: 'var(--lw-text)' }}>
                     {loading && <p style={{ margin: 0 }}>글을 읽는 중…</p>}
-                    {!loading && o && !o.ok && <p role="status" style={{ margin: 0, color: '#fca5a5' }}>{o.error || '글을 받지 못했습니다'}</p>}
+                    {!loading && o && !o.ok && <p role="status" style={{ margin: 0, color: 'var(--lw-negative)' }}>{o.error || '글을 받지 못했습니다'}</p>}
                     {!loading && o?.ok && (
                         <>
-                            <p style={{ margin: '0 0 6px', color: '#e2e8f0' }}>
+                            <p style={{ margin: '0 0 8px', color: 'var(--lw-text)' }}>
                                 글자 <b>{num(o.chars)}</b> · 소제목 <b>{num(o.headings?.length)}</b> · 이미지 <b>{num(o.images)}</b> · 표 <b>{num(o.tables)}</b> · 목록 <b>{num(o.lists)}</b> · 본문 광고 자리 <b>{num(o.adSlots)}</b>
                             </p>
-                            {o.firstLines && <p style={{ margin: '0 0 6px', color: '#94a3b8' }}>첫 문단: {o.firstLines}…</p>}
+                            {o.firstLines && <p style={{ margin: '0 0 8px', color: 'var(--lw-text-secondary)' }}>첫 문단: {o.firstLines}…</p>}
                             {(o.headings?.length ?? 0) > 0
-                                ? <ol style={{ margin: 0, paddingLeft: 18 }}>{o.headings!.map((h, i) => <li key={`${i}-${h.text}`} style={{ marginLeft: (h.level - 2) * 14, color: h.level === 2 ? '#e2e8f0' : '#a8b6cb' }}>H{h.level} · {h.text}</li>)}</ol>
-                                : <p style={{ margin: 0, color: '#94a3b8' }}>소제목(H2~H4) 없이 쓴 글입니다.</p>}
+                                ? <ol style={{ margin: 0, paddingLeft: 18 }}>{o.headings!.map((h, i) => <li key={`${i}-${h.text}`} style={{ marginLeft: (h.level - 2) * 14, color: h.level === 2 ? 'var(--lw-text)' : 'var(--lw-text-secondary)' }}>H{h.level} · {h.text}</li>)}</ol>
+                                : <p style={{ margin: 0, color: 'var(--lw-text-secondary)' }}>소제목(H2~H4) 없이 쓴 글입니다.</p>}
                         </>
                     )}
                 </div>
@@ -118,21 +120,11 @@ function PostOutline({ s }: { s: AdsenseCard['sources'][number] }) {
     );
 }
 
-/* 애드센스 고수 벤치마크는 금색(2026-10-07 사장님) — 홈판과 같은 틀을 쓰되 이 화면만 브랜드 금색 #FFD700 → #FFA500 으로 덮는다. */
+/* AdSense board keeps its gold mark (owner, 2026-10-07): in the light pass that is the gold-ink accent word in the header title. */
 function AdsenseGoldStyles() {
     return (
         <style>{`
-.ads-gold .hfb-header{border-color:rgba(255,215,0,.45);background:radial-gradient(ellipse at 100% 0,rgba(255,165,0,.22),transparent 65%),linear-gradient(115deg,#3a2c05,#1a1a12 55%,#141b2b)}
-.ads-gold .hfb-eyebrow{color:#ffd700}
-.ads-gold .hfb-header h2 span{background:linear-gradient(135deg,#ffd700,#ffa500);-webkit-background-clip:text;background-clip:text;color:transparent}
-.ads-gold .hfb-count{color:#fcd34d}
-.ads-gold .hfb-count strong{color:#ffd700}
-.ads-gold .hfb-filter-row button[aria-pressed=true]{border-color:#e0b400;color:#fff7d1;background:#4a3a08}
-.ads-gold .hfb-categories button[aria-pressed=true]{color:#ffd700;border-color:#a88a1c;background:#3a300c}
-.ads-gold .hfb-more,.ads-gold .hfb-meta button,.ads-gold .hfb-empty button{color:#fff1b8;background:#2e2610;border-color:#8c7320}
-.ads-gold .hfb-card.recommended{border-color:#b8962e;box-shadow:inset 3px 0 #ffd700;background:radial-gradient(ellipse at 100% 0,rgba(255,215,0,.08),transparent 50%),linear-gradient(130deg,#1c2133,#111a2a)}
-.ads-gold .hfb-title-make{color:#2b1f00;background:linear-gradient(135deg,#ffd700,#ffa500)}
-.ads-gold .hfb-title-make:hover{background:#ffd700}
+.ads-gold .hfb-header h2 span{color:var(--lw-accent-ink)}
 `}</style>
     );
 }
@@ -147,14 +139,14 @@ export function AdsenseCardView({ c, now }: { c: AdsenseCard; now: number }) {
                 {c.recommended && <span className="hfb-star">★ 고수 {blogs}곳</span>}
                 {!c.recommended && blogs > 1 && <span className="hfb-category">고수 {blogs}곳</span>}
                 <span className="hfb-category">{c.category}</span>
-                {ADSENSE_PLATFORMS.filter((p) => cardPlatforms(c).has(p.key)).map((p) => <span key={p.key} style={{ color: '#cbd5e1', border: '1px solid #33415a', borderRadius: 5, padding: '1px 6px' }}>{p.label}</span>)}
+                {ADSENSE_PLATFORMS.filter((p) => cardPlatforms(c).has(p.key)).map((p) => <span key={p.key} style={{ color: 'var(--lw-text-secondary)', border: '1px solid var(--lw-line)', borderRadius: 6, padding: '0 8px' }}>{p.label}</span>)}
                 <span className="hfb-timing">발행 {day(c.publishedAt)}</span>
             </div>
             <h3>{c.metrics?.query || c.keyword}</h3>
-            <p style={{ color: '#a8b6cb', fontSize: 13, margin: '4px 0 10px' }}>{c.title}</p>
+            <p style={{ color: 'var(--lw-text-secondary)', fontSize: 13, margin: '4px 0 12px' }}>{c.title}</p>
             <DemandBlock c={c} />
             <DemandPending c={c} />
-            <div style={{ color: competition.tier === 0 ? '#a7f3d0' : competition.tier === 3 ? '#fca5a5' : '#cbd5e1', fontSize: 13, marginBottom: 8 }}>
+            <div style={{ color: competition.tier === 0 ? 'var(--lw-positive)' : competition.tier === 3 ? 'var(--lw-negative)' : 'var(--lw-text-secondary)', fontSize: 13, marginBottom: 8 }}>
                 <b>{competition.label}</b> · 문서/월 검색 {competition.ratio !== null ? `${competition.ratio.toLocaleString('ko-KR', { maximumFractionDigits: 2 })}배` : '미확인'} · 측정 {kst(c.metrics?.measuredAt)}
             </div>
             {/* 실측(2단계) — 대표 검색어(소재 낱말 후보의 정확 검색량 최대) · 블로그 문서수 · 파워링크 3위 입찰가. 없으면 '미측정'만. */}
@@ -186,7 +178,7 @@ export function AdsenseCardView({ c, now }: { c: AdsenseCard; now: number }) {
                         <div className="hfb-title-row">
                             <span>{s.grade || '—'}</span>
                             <p><a href={s.url} target="_blank" rel="noopener noreferrer">{s.title}</a></p>
-                            <small style={{ color: '#8d9db4' }}>{s.name} · {day(s.publishedAt)}</small>
+                            <small style={{ color: 'var(--lw-text-muted)' }}>{s.name} · {day(s.publishedAt)}</small>
                         </div>
                         <PostOutline s={s} />
                     </div>
@@ -252,11 +244,12 @@ export default function AdsenseBenchmarkBoard() {
                     <h2>애드센스 고수 <span>벤치마크</span></h2>
                     <p>애드센스로 수익을 내는 고수 블로그(워드프레스 · 티스토리 · 블로그스팟)가 최근 {board?.windowDays ?? 7}일 안에 쓴 글을 소재별로 모았습니다. 지금 검색 관심이 오르는 소재를 먼저, 그다음 검색량 대비 블로그 문서가 적은 순으로 보여 드립니다.</p>
                 </div>
-                <div className="hfb-count"><strong>{board ? cards.length : '—'}</strong><span>검토할 소재</span></div>
+                <div className="hfb-count"><strong>{board ? <CountUp value={cards.length} format={String} /> : '—'}</strong><span>검토할 소재</span></div>
             </header>
             <div className="hfb-meta"><span>{board ? `정기 수집 ${kst(board.generatedAt || board.attemptedAt)} KST · 3시간마다 다시 읽습니다` : loading ? '벤치마크 자료 연결 중' : ''}</span><button type="button" disabled={loading} onClick={() => setReloadKey((n) => n + 1)}>{loading ? '불러오는 중…' : '새로고침'}</button></div>
             {error && <div className="hfb-alert" role="alert">{error}</div>}
             {board?.status === 'stale' && <div className="hfb-alert" role="status">이번 수집에서 새 글을 받지 못해 마지막 판을 보여 드립니다.</div>}
+            {!board && loading && <div className="lw-skel" aria-hidden="true"><i /><i /><i /></div>}
             {!board && !loading && !error && <p className="hfb-empty">아직 공개된 애드센스 벤치마크 자료가 없습니다.</p>}
             {board && <>
                 <details className="hfb-coverage">
@@ -276,8 +269,8 @@ export default function AdsenseBenchmarkBoard() {
                             <span>질문형 <b>{shape.questionPct}%</b></span>
                             <span>괄호 <b>{shape.bracketPct}%</b></span>
                         </p>
-                        {advice.length > 0 && <ul style={{ margin: '8px 0 0', paddingLeft: 18, fontSize: 12.5, color: '#c4d5e5' }}>{advice.map((a) => <li key={a}>{a}</li>)}</ul>}
-                        {board.trends.categories.length > 0 && <p style={{ marginTop: 8, fontSize: 12, color: '#a8b6cb' }}>많이 쓴 분야: {board.trends.categories.slice(0, 6).map((c) => `${c.category} ${c.posts.toLocaleString('ko-KR')}글`).join(' · ')}</p>}
+                        {advice.length > 0 && <ul style={{ margin: '8px 0 0', paddingLeft: 18, fontSize: 13, color: 'var(--lw-text)' }}>{advice.map((a) => <li key={a}>{a}</li>)}</ul>}
+                        {board.trends.categories.length > 0 && <p style={{ marginTop: 8, fontSize: 13, color: 'var(--lw-text-secondary)' }}>많이 쓴 분야: {board.trends.categories.slice(0, 6).map((c) => `${c.category} ${c.posts.toLocaleString('ko-KR')}글`).join(' · ')}</p>}
                     </div>
                 )}
                 {hasPlatforms && (
@@ -286,7 +279,7 @@ export default function AdsenseBenchmarkBoard() {
                         <button type="button" aria-pressed={activePlatform === ''} onClick={() => { setPlatform(''); setLimit(24); }}>전체 플랫폼 <span>{cards.length}</span></button>
                     </div>
                 )}
-                {platformInfo && <p style={{ color: '#a8b6cb', fontSize: 12, margin: '6px 0 0' }}>{platformInfo.label} — {platformInfo.note}. 같은 소재를 여러 플랫폼 고수가 썼으면 각 탭에 함께 보입니다.</p>}
+                {platformInfo && <p style={{ color: 'var(--lw-text-secondary)', fontSize: 13, margin: '8px 0 0' }}>{platformInfo.label} — {platformInfo.note}. 같은 소재를 여러 플랫폼 고수가 썼으면 각 탭에 함께 보입니다.</p>}
                 <BenchmarkHowTo kind="adsense" />
                 <NowPicksPanel picks={picks} now={now} platformLabel={platformInfo?.label || '전체 플랫폼'} onPick={(q) => { setQuery(q); setMode('all'); setCategory(''); setLimit(24); }} />
                 <div className="hfb-filters">
@@ -295,7 +288,7 @@ export default function AdsenseBenchmarkBoard() {
                         <button type="button" aria-pressed={mode === 'low'} onClick={() => { setMode('low'); setLimit(24); }}>낮은 문서 경쟁 <span>{lowCount}</span></button>
                         <button type="button" aria-pressed={mode === 'star'} onClick={() => setMode('star')}>★ 고수 3곳 이상 <span>{inPlatform.filter((c) => c.recommended).length}</span></button>
                     </div>
-                    <p style={{ color: '#a8b6cb', fontSize: 12 }}>문서 경쟁 낮은 순 · 최근 7일 실측 · 월 검색 100 이상·문서/검색 1배 이하 우선 → 5배 이하 → 고경쟁. 같은 칸 안에서는 새로 뜬 · 지금 오르는 · 곧 시즌 소재가 먼저입니다. 미측정·0건·오래된 자료는 뒤에서 확인합니다.</p>
+                    <p style={{ color: 'var(--lw-text-secondary)', fontSize: 13 }}>문서 경쟁 낮은 순 · 최근 7일 실측 · 월 검색 100 이상·문서/검색 1배 이하 우선 → 5배 이하 → 고경쟁. 같은 칸 안에서는 새로 뜬 · 지금 오르는 · 곧 시즌 소재가 먼저입니다. 미측정·0건·오래된 자료는 뒤에서 확인합니다.</p>
                     <div className="hfb-shuffle"><button type="button" onClick={() => { reshuffle(); setLimit(24); }}>순서 섞기</button><small>매시 정각 새 순서로 섞입니다 · 실측 저경쟁(문서/검색 5배 이하) → 수요 적음·고경쟁 → 미측정 칸은 지키고, 같은 칸 안에서 지금 뜨는 소재가 먼저입니다</small>{query && <button type="button" onClick={() => setQuery('')}>검색어 지우기</button>}</div>
                     <div className="hfb-filter-bottom">
                         <div className="hfb-categories" role="group" aria-label="분야">
@@ -306,7 +299,7 @@ export default function AdsenseBenchmarkBoard() {
                     </div>
                 </div>
                 <p className="hfb-legend">★는 고수 3곳 이상 발행 근거이며 낮은 경쟁을 뜻하지 않습니다. 문서/검색은 네이버 지표로 구글 경쟁도나 애드센스 수익을 나타내지 않습니다. 원문 제목을 누르면 해당 글이 열립니다.</p>
-                <div className="hfb-list">{items.slice(0, limit).map((c) => <AdsenseCardView key={c.id} c={c} now={now} />)}</div>
+                <Reveal stagger key={`${activePlatform}|${mode}|${category}|${seed}`} className="hfb-list">{items.slice(0, limit).map((c) => <AdsenseCardView key={c.id} c={c} now={now} />)}</Reveal>
                 {items.length === 0 && <p className="hfb-empty">조건에 맞는 소재가 없습니다.</p>}
                 {items.length > limit && <button type="button" className="hfb-more" onClick={() => setLimit((n) => n + 24)}>소재 더 보기 · {Math.min(limit, items.length)}/{items.length}</button>}
             </>}

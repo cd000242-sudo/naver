@@ -1161,7 +1161,7 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                                     <section>
                                         <strong>판정</strong>
                                         <p className="lw-kg-work-body" style={{ maxHeight: 'none' }}>
-                                            <b style={{ color: '#ffa500' }}>{analyzeState.data.verdict}</b>
+                                            <b style={{ color: 'var(--lw-accent-ink)' }}>{analyzeState.data.verdict}</b>
                                             {analyzeState.data.targetKeyword && <> · 이 글이 노려야 할 검색어: <b>{analyzeState.data.targetKeyword}</b></>}
                                             {!analyzeState.data.contentRead && <><br /><small>본문을 가져오지 못해 제목·실측만으로 진단했습니다.</small></>}
                                         </p>
@@ -1222,7 +1222,7 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                                                                     type="button"
                                                                     className="lw-snip-open"
                                                                     onClick={() => { setSnippet(snip); setSnipMode(snip.text ? 'text' : 'html'); setCopied(false); }}
-                                                                >📋 붙여넣을 것 보기</button>
+                                                                >붙여넣을 것 보기</button>
                                                             ))}
                                                         </li>
                                                     );
@@ -1237,7 +1237,7 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                                                         type="button"
                                                         className="lw-snip-open"
                                                         onClick={() => { setSnippet(snip); setSnipMode(snip.text ? 'text' : 'html'); setCopied(false); }}
-                                                    >📋 {snip.label}</button>
+                                                    >{snip.label}</button>
                                                 ))}
                                         </section>
                                     )}

@@ -3,22 +3,23 @@
  * 판의 card.demand 는 앱 레포 adsense-benchmarks-trend.cjs 가 데이터랩 주별 실측으로 붙인다 — 여기서는 판정 · 사실 문장 · 26주 선만 그린다.
  * 예상 유입 · 확률 같은 추정치는 그리지 않는다(상대값 선과 잰 변화율뿐).
  */
+import { light } from '../../../styles/tokens';
 import { useRef, useState } from 'react';
 import { adsenseCompetition, blogCount, type AdsenseCard, type AdsenseDemand } from '../../../lib/adsenseBenchmarkModel.mjs';
 
 const TONE: Record<AdsenseDemand['verdict'], { fg: string; bg: string }> = {
-    new: { fg: '#3b0a24', bg: '#f9a8d4' },
-    rising: { fg: '#052e16', bg: '#4ade80' },
-    'season-soon': { fg: '#3b2a07', bg: '#fbbf24' },
-    steady: { fg: '#e2e8f0', bg: '#334155' },
-    cooling: { fg: '#ffe4e6', bg: '#9f1239' },
-    'past-peak': { fg: '#fee2e2', bg: '#7f1d1d' },
-    unknown: { fg: '#cbd5e1', bg: '#1e293b' },
+    new: { fg: light.accentInk, bg: light.accentSoft },
+    rising: { fg: light.positive, bg: light.positiveSoft },
+    'season-soon': { fg: light.accentInk, bg: light.accentSoft },
+    steady: { fg: light.textSecondary, bg: light.raised },
+    cooling: { fg: light.negative, bg: light.negativeSoft },
+    'past-peak': { fg: light.negative, bg: light.negativeSoft },
+    unknown: { fg: light.textMuted, bg: light.raised },
 };
 
 export function DemandChip({ demand }: { demand: AdsenseDemand }) {
     const tone = TONE[demand.verdict] || TONE.unknown;
-    return <span style={{ borderRadius: 5, padding: '2px 8px', fontWeight: 800, fontSize: 11, color: tone.fg, background: tone.bg }}>{demand.label}</span>;
+    return <span style={{ borderRadius: 5, padding: '2px 8px', fontWeight: 600, fontSize: 13, color: tone.fg, background: tone.bg }}>{demand.label}</span>;
 }
 
 /** 최근 26주 데이터랩 상대값 — 올리면 그 주의 값. */
@@ -31,7 +32,7 @@ export function DemandSpark({ series, verdict }: { series: number[]; verdict: Ad
     const step = (w - pad * 2) / (series.length - 1);
     const xy = series.map((v, i) => [pad + i * step, h - pad - (v / max) * (h - pad * 2)] as const);
     const line = xy.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(' ');
-    const stroke = verdict === 'new' ? '#f9a8d4' : verdict === 'rising' ? '#4ade80' : verdict === 'season-soon' ? '#fbbf24' : verdict === 'cooling' || verdict === 'past-peak' ? '#fb7185' : '#7c9cff';
+    const stroke = verdict === 'new' ? light.accentInk : verdict === 'rising' ? light.positive : verdict === 'season-soon' ? light.accentInk : verdict === 'cooling' || verdict === 'past-peak' ? light.negative : light.textMuted;
     const onMove = (e: React.MouseEvent<SVGSVGElement>) => {
         const r = ref.current?.getBoundingClientRect();
         if (!r || !r.width) return;
@@ -45,7 +46,7 @@ export function DemandSpark({ series, verdict }: { series: number[]; verdict: Ad
                 <polyline points={line} fill="none" stroke={stroke} strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" />
                 {hover >= 0 && <circle cx={xy[hover][0]} cy={xy[hover][1]} r={3.5} fill={stroke} />}
             </svg>
-            <small style={{ color: '#8d9db4', fontSize: 11 }}>{hover >= 0 ? `${weeksAgo === 0 ? '지난주' : `${weeksAgo + 1}주 전`} · 상대값 ${series[hover]}` : '최근 26주 검색 관심 · 데이터랩 실측(상대값)'}</small>
+            <small style={{ color: 'var(--lw-text-secondary)', fontSize: 13 }}>{hover >= 0 ? `${weeksAgo === 0 ? '지난주' : `${weeksAgo + 1}주 전`} · 상대값 ${series[hover]}` : '최근 26주 검색 관심 · 데이터랩 실측(상대값)'}</small>
         </div>
     );
 }
@@ -54,10 +55,10 @@ export function DemandSpark({ series, verdict }: { series: number[]; verdict: Ad
 export function DemandBlock({ c }: { c: AdsenseCard }) {
     if (!c.demand) return null;
     return (
-        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '8px 16px', margin: '2px 0 10px', padding: '9px 12px', border: '1px solid rgba(148,163,184,.22)', borderRadius: 10, background: 'rgba(15,23,42,.45)' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '8px 16px', margin: '2px 0 12px', padding: '8px 12px', border: '1px solid var(--lw-line)', borderRadius: 10, background: 'var(--lw-surface)' }}>
             <div style={{ display: 'grid', gap: 4, flex: '1 1 220px' }}>
-                <span style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12, color: '#a8b6cb' }}>지금 쓰면 트래픽 <DemandChip demand={c.demand} /></span>
-                <span style={{ fontSize: 13, color: '#e2e8f0' }}>{c.demand.fact}</span>
+                <span style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: 'var(--lw-text-secondary)' }}>지금 쓰면 트래픽 <DemandChip demand={c.demand} /></span>
+                <span style={{ fontSize: 13, color: 'var(--lw-text)' }}>{c.demand.fact}</span>
             </div>
             <DemandSpark series={c.demand.series} verdict={c.demand.verdict} />
         </div>
@@ -68,22 +69,22 @@ export function DemandBlock({ c }: { c: AdsenseCard }) {
 export function NowPicksPanel({ picks, now, onPick, platformLabel }: { picks: AdsenseCard[]; now: number; onPick: (query: string) => void; platformLabel: string }) {
     if (!picks.length) return null;
     return (
-        <section aria-label="지금 써야 할 키워드" style={{ margin: '6px 0 16px', padding: '16px 18px', border: '1px solid #b8962e', borderRadius: 16, background: 'radial-gradient(ellipse at 0 0,rgba(74,222,128,.10),transparent 60%),linear-gradient(130deg,#1c2133,#111a2a)' }}>
-            <h3 style={{ margin: 0, fontSize: 17, color: '#fff7d1', letterSpacing: '-.3px' }}>지금 써야 할 키워드 <small style={{ fontSize: 12, color: '#fcd34d', fontWeight: 500 }}>{platformLabel} · {picks.length}개</small></h3>
-            <p style={{ margin: '4px 0 12px', fontSize: 12.5, color: '#b6c4d6' }}>데이터랩 주별 실측으로 <b style={{ color: '#f9a8d4' }}>새로 검색되기 시작했거나</b> <b style={{ color: '#4ade80' }}>지금 검색 관심이 오르고 있거나</b> <b style={{ color: '#fbbf24' }}>작년 이맘때 곧 올랐던</b> 소재 중, 검색량 대비 블로그 문서가 적은 것만 골랐습니다.</p>
+        <section aria-label="지금 써야 할 키워드" style={{ margin: '8px 0 16px', padding: '16px 20px', border: '1px solid var(--lw-accent-line)', borderRadius: 18, background: 'transparent' }}>
+            <h3 style={{ margin: 0, fontSize: 17, color: 'var(--lw-text)', letterSpacing: '-.3px' }}>지금 써야 할 키워드 <small style={{ fontSize: 13, color: 'var(--lw-accent-ink)', fontWeight: 500 }}>{platformLabel} · {picks.length}개</small></h3>
+            <p style={{ margin: '4px 0 12px', fontSize: 13, color: 'var(--lw-text-secondary)' }}>데이터랩 주별 실측으로 <b style={{ color: 'var(--lw-text)' }}>새로 검색되기 시작했거나</b> <b style={{ color: 'var(--lw-positive)' }}>지금 검색 관심이 오르고 있거나</b> <b style={{ color: 'var(--lw-accent-ink)' }}>작년 이맘때 곧 올랐던</b> 소재 중, 검색량 대비 블로그 문서가 적은 것만 골랐습니다.</p>
             <div style={{ display: 'grid', gap: 8 }}>
                 {picks.map((c) => {
                     const comp = adsenseCompetition(c, now);
                     const m = c.metrics || ({} as AdsenseCard['metrics']);
                     return (
-                        <div key={c.id} style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '6px 14px', padding: '10px 12px', border: '1px solid rgba(148,163,184,.22)', borderRadius: 10, background: '#0d1728' }}>
+                        <div key={c.id} style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '8px 16px', padding: '12px 12px', border: '1px solid var(--lw-line)', borderRadius: 10, background: 'var(--lw-surface)' }}>
                             <div style={{ flex: '1 1 260px', display: 'grid', gap: 3 }}>
-                                <span style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}><strong style={{ fontSize: 15, color: '#f1f5f9' }}>{m.query || c.keyword}</strong>{c.demand && <DemandChip demand={c.demand} />}</span>
-                                {c.demand && <span style={{ fontSize: 12.5, color: '#d6e2f0' }}>{c.demand.fact}</span>}
-                                <span style={{ fontSize: 12, color: '#94a3b8' }}>월 검색 {typeof m.searchVolume === 'number' ? m.searchVolume.toLocaleString('ko-KR') : '—'} · 문서 {typeof m.documentCount === 'number' ? m.documentCount.toLocaleString('ko-KR') : '—'} · 문서/검색 {comp.ratio !== null ? `${comp.ratio.toLocaleString('ko-KR', { maximumFractionDigits: 2 })}배` : '—'} · 고수 {blogCount(c)}곳</span>
+                                <span style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}><strong style={{ fontSize: 15, color: 'var(--lw-text)' }}>{m.query || c.keyword}</strong>{c.demand && <DemandChip demand={c.demand} />}</span>
+                                {c.demand && <span style={{ fontSize: 13, color: 'var(--lw-text)' }}>{c.demand.fact}</span>}
+                                <span style={{ fontSize: 13, color: 'var(--lw-text-secondary)' }}>월 검색 {typeof m.searchVolume === 'number' ? m.searchVolume.toLocaleString('ko-KR') : '—'} · 문서 {typeof m.documentCount === 'number' ? m.documentCount.toLocaleString('ko-KR') : '—'} · 문서/검색 {comp.ratio !== null ? `${comp.ratio.toLocaleString('ko-KR', { maximumFractionDigits: 2 })}배` : '—'} · 고수 {blogCount(c)}곳</span>
                             </div>
                             {c.demand && <DemandSpark series={c.demand.series} verdict={c.demand.verdict} />}
-                            <button type="button" onClick={() => onPick(m.query || c.keyword)} style={{ border: '1px solid #8c7320', background: '#2e2610', color: '#fff1b8', borderRadius: 8, padding: '6px 12px', fontSize: 12 }}>이 소재 보기</button>
+                            <button type="button" onClick={() => onPick(m.query || c.keyword)} style={{ border: '1px solid var(--lw-accent-line)', background: 'var(--lw-surface)', color: 'var(--lw-text)', borderRadius: 10, padding: '8px 12px', fontSize: 13, minHeight: 44 }}>이 소재 보기</button>
                         </div>
                     );
                 })}

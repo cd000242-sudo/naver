@@ -8,7 +8,7 @@ import type { AdvisorDailyView } from '../../lib/myBlogSync';
  * 재료는 사용자 본인 앱이 잰 사실(앱이 켜져 있으면 앱에서, 아니면 비밀번호로 잠근 동기화본).
  * 확인된 사실만 적는다 — "제목 때문"처럼 증명 못 하는 원인은 쓰지 않는다. 판정 규칙은 lib/postAutopsy.mjs.
  */
-const MUTED = { opacity: 0.65 } as const;
+const MUTED = { color: 'var(--lw-text-muted)' } as const;
 const VERDICT_LABEL: Record<AutopsyVerdict, string> = {
     late: '같은 소재가 먼저 홈판에',
     outtitled: '같은 소재, 다른 글이 홈판에',

@@ -95,7 +95,7 @@ function IssueFlowBrief({ brief, rows, locked, onAnalyze, anchorId }: Props) {
 
             {hasWave && (
                 <div className={`lw-issue-flow-row lw-issue-flow-wave${locked ? ' locked' : ''}`}>
-                    <em>다음 물결 <small>에이전트 추론 — ✅ 틈새 · 🚩 선점 후보로 실측 통과</small></em>
+                    <em>다음 물결 <small>에이전트 추론 — 틈새 · 선점 후보로 실측 통과</small></em>
                     <div className="lw-issue-flow-chips">
                         {brief.nextWave.map((wave) => {
                             const verdict = verdictOf.get(wave.keyword.replace(/\s+/g, ''));
@@ -107,9 +107,9 @@ function IssueFlowBrief({ brief, rows, locked, onAnalyze, anchorId }: Props) {
                                     title={wave.reason}
                                     onClick={() => onAnalyze?.(wave.keyword)}
                                 >
-                                    🌊 {wave.keyword}
-                                    {verdict === 'niche' && <i>✅</i>}
-                                    {verdict === 'preemption' && <i>🚩</i>}
+                                    {wave.keyword}
+                                    {verdict === 'niche' && <i>틈새</i>}
+                                    {verdict === 'preemption' && <i>선점</i>}
                                     {typeof wave.searchVolume === 'number' && <b>{formatCount(wave.searchVolume)}</b>}
                                     <small>{wave.reason}</small>
                                 </button>
@@ -118,7 +118,7 @@ function IssueFlowBrief({ brief, rows, locked, onAnalyze, anchorId }: Props) {
                     </div>
                     {locked && (
                         <div className="lw-lock" aria-hidden="true">
-                            <span>🔒</span>
+                            <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></svg></span>
                         </div>
                     )}
                 </div>

@@ -38,10 +38,10 @@ export function DemandStep({ demand, fallback }: { demand?: AdsenseDemand; fallb
 export default function BenchmarkPlaybook({ steps }: { steps: PlaybookStep[] }) {
     if (!steps.length) return null;
     return (
-        <section aria-label="이 카드로 성과 내는 순서" style={{ marginTop: 14, padding: '12px 14px', border: '1px solid rgba(250,204,21,.35)', borderRadius: 12, background: 'rgba(66,52,10,.22)' }}>
-            <h4 style={{ margin: '0 0 8px', fontSize: 12.5, color: '#fde68a', fontWeight: 800 }}>이 카드로 성과 내는 순서</h4>
-            <ol style={{ margin: 0, paddingLeft: 20, display: 'grid', gap: 7, fontSize: 13, color: '#e2e8f0', lineHeight: 1.6 }}>
-                {steps.map((s) => <li key={s.label}><b style={{ color: '#fcd34d' }}>{s.label}</b> — {s.body}</li>)}
+        <section aria-label="이 카드로 성과 내는 순서" style={{ marginTop: 16, padding: '12px 16px', border: '1px solid var(--lw-line)', borderRadius: 14, background: 'var(--lw-raised)' }}>
+            <h4 style={{ margin: '0 0 8px', fontSize: 15, color: 'var(--lw-text)', fontWeight: 600 }}>이 카드로 성과 내는 순서</h4>
+            <ol style={{ margin: 0, paddingLeft: 20, display: 'grid', gap: 8, fontSize: 15, color: 'var(--lw-text-secondary)', lineHeight: 1.6 }}>
+                {steps.map((s) => <li key={s.label}><b style={{ color: 'var(--lw-text)', fontWeight: 600 }}>{s.label}</b> — {s.body}</li>)}
             </ol>
         </section>
     );
@@ -65,10 +65,10 @@ export function BenchmarkHowTo({ kind }: { kind: 'homefeed' | 'adsense' }) {
             ['발행 후', '[노출 추적에 등록]으로 순위를 지켜보고, 일주일 안에 안 오르면 제목의 행동 키워드를 자동완성 표현으로 바꿔 봅니다.'],
         ];
     return (
-        <details style={{ margin: '10px 0 14px', padding: '10px 14px', border: '1px solid rgba(250,204,21,.3)', borderRadius: 12, background: 'rgba(66,52,10,.18)' }}>
-            <summary style={{ cursor: 'pointer', color: '#fde68a', fontWeight: 700, fontSize: 13.5 }}>벤치마크를 성과로 바꾸는 순서 보기</summary>
-            <ol style={{ margin: '10px 0 0', paddingLeft: 20, display: 'grid', gap: 6, fontSize: 13, color: '#dbe4ef', lineHeight: 1.65 }}>
-                {steps.map(([label, text]) => <li key={label}><b style={{ color: '#fcd34d' }}>{label}</b> — {text}</li>)}
+        <details style={{ margin: '12px 0 16px', padding: '0 16px', border: '1px solid var(--lw-line)', borderRadius: 14, background: 'var(--lw-surface)' }}>
+            <summary style={{ cursor: 'pointer', padding: '12px 0', color: 'var(--lw-text)', fontWeight: 600, fontSize: 15 }}>벤치마크를 성과로 바꾸는 순서 보기</summary>
+            <ol style={{ margin: '0 0 12px', paddingLeft: 20, display: 'grid', gap: 8, fontSize: 15, color: 'var(--lw-text-secondary)', lineHeight: 1.65 }}>
+                {steps.map(([label, text]) => <li key={label}><b style={{ color: 'var(--lw-text)', fontWeight: 600 }}>{label}</b> — {text}</li>)}
             </ol>
         </details>
     );

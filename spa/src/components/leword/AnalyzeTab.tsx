@@ -373,6 +373,8 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
 
     return (
         <>
+            {/* Touch targets: every control on this tab is at least 44px tall (light pass 2026-11). */}
+            <style>{'.lw-dig, .lw-analyze-head-actions button, .lw-analyze-ideas-head button { min-height: 44px; }'}</style>
             <TabIntro
                 title="키워드 분석"
                 desc={mode === 'one'
