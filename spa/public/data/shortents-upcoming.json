@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T21:47:10.203Z",
+ "builtAt": "2026-11-14T21:57:15.679Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -29,48 +29,16 @@
      "link": "http://www.dailypop.kr/news/articleView.html?idxno=103981"
     },
     {
-     "title": "[오늘의 운세] 2026년 11월 15일 별자리 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-14T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006409879?sid=103"
-    },
-    {
      "title": "[오늘의 운세] 2026년 11월 15일 띠별 운세",
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-14T21:03:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006409878?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "우크라이나 나토 돈바스",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-14T20:31:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "젤렌스키 \"미국이 나토 가입 대가로 돈바스 양도안 제시\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-14T21:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002432966?sid=104"
     },
     {
-     "title": "젤렌스키, “미국, 우크라이나에 나토 가입 대가로 돈바스 양도안 제안...",
-     "press": "voakorea.com",
-     "publishedAt": "2026-11-14T21:17:00.000Z",
-     "link": "https://www.voakorea.com/a/8223723.html"
-    },
-    {
-     "title": "젤렌스키 \"美, '나토 가입 대신 돈바스서 철군' 첫 제안(종합)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-14T20:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014322452?sid=104"
+     "title": "[오늘의 운세] 2026년 11월 15일 별자리 운세",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-14T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006409879?sid=103"
     }
    ]
   },
@@ -104,6 +72,38 @@
      "press": "newsen.com",
      "publishedAt": "2026-11-14T20:59:00.000Z",
      "link": "https://m.entertain.naver.com/article/609/0001187560"
+    }
+   ]
+  },
+  {
+   "keyword": "우크라이나 나토 돈바스",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-14T20:31:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "젤렌스키 \"미국이 나토 가입 대가로 돈바스 양도안 제시\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-14T21:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002432966?sid=104"
+    },
+    {
+     "title": "젤렌스키, “미국, 우크라이나에 나토 가입 대가로 돈바스 양도안 제안...",
+     "press": "voakorea.com",
+     "publishedAt": "2026-11-14T21:17:00.000Z",
+     "link": "https://www.voakorea.com/a/8223723.html"
+    },
+    {
+     "title": "젤렌스키 \"美, '나토 가입 대신 돈바스서 철군' 첫 제안\"(종합)",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-14T20:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014322452?sid=104"
     }
    ]
   }
