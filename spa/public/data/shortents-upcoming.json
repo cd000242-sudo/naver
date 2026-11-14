@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T15:24:20.596Z",
+ "builtAt": "2026-11-14T15:34:23.871Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,13 +16,19 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 7,
+   "articles90": 8,
    "recent20": 1,
-   "press": 6,
+   "press": 7,
    "firstArticleAt": "2026-11-14T14:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "잇지 채령, 걸그룹 벗어나 솔로 활동 “단점이 뭐냐면” 바로 대답 못 했...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-14T15:29:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001187526"
+    },
     {
      "title": "박서진, 채령도 놀란 트로트계 슈스 스케일...\"팬카페 회원 수 임영웅 다...",
      "press": "xportsnews.com",
@@ -34,44 +40,6 @@
      "press": "starnewskorea.com",
      "publishedAt": "2026-11-14T14:55:00.000Z",
      "link": "https://m.entertain.naver.com/article/108/0003487504"
-    },
-    {
-     "title": "'살림남' 채령, 박서진 동생 폭행(?)에 충격⋯\"왜 그렇게 막 때리냐\"",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-14T14:48:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2648193"
-    }
-   ]
-  },
-  {
-   "keyword": "김도영 결승포 한국, APBC 결승행",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-14T13:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "침묵 깬 김도영 결승포, 이로운 6이닝 역투, 최준용 무실점 구원까지…...",
-     "press": "spochoo.com",
-     "publishedAt": "2026-11-14T14:54:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/529/0000079262"
-    },
-    {
-     "title": "'김도영 결승포' 한국, 대만 꺾고 APBC 결승행...일본과 우승 다툼",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-14T14:28:00.000Z",
-     "link": "https://www.insight.co.kr/news/582075"
-    },
-    {
-     "title": "김도영 결승포…한국, 대만 6-4 꺾고 APBC 결승행",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-14T14:25:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/658/0000161235"
     }
    ]
   },
@@ -80,10 +48,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 3,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-14T13:57:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-14T14:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -113,7 +81,7 @@
     "nate"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-14T14:39:00.000Z",
    "exclusive": false,
@@ -138,11 +106,43 @@
      "link": "https://m.entertain.naver.com/article/609/0001187518"
     }
    ]
+  },
+  {
+   "keyword": "하리수 김지선 남학생",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-14T14:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김지선, 하리수와 34년 전 인연 공개…\"그때는 숏컷의 남학생\" (동치미)",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-14T15:05:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002080680"
+    },
+    {
+     "title": "하리수 “고등학교 남학생 때 김지선 처음 만나” 깜짝 과거사 고백 (동...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-14T14:46:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001187519"
+    },
+    {
+     "title": "하리수, 깜짝 고백 \"김지선, 男 때부터 알고 지내\" ('동치미')",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-14T14:34:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005640688"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 488,
+  "flagged": 489,
   "matched": 230,
   "avgLeadMin": 490,
   "recent": [
