@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T17:25:16.225Z",
+ "builtAt": "2026-11-14T17:35:19.625Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,45 +11,13 @@
  "measured": 22,
  "candidates": [
   {
-   "keyword": "젠슨 황 엔비디아",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 10,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-14T15:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "엔비디아 시총 4조달러 붕괴…반도체 동반 약세 속 저평가론",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-14T17:02:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=2026111421030827649a1f309431_1"
-    },
-    {
-     "title": "젠슨 황 사임 후 ‘러트닉 경질론’ 확산…베선트도 공개 비판",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-14T17:02:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=2026111419315136309a1f309431_1"
-    },
-    {
-     "title": "젠슨 황 퇴진 후폭풍…엔비디아, 9억달러 보험에도 소송비 부담 우려",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-14T17:02:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=2026111421401482199a1f309431_1"
-    }
-   ]
-  },
-  {
    "keyword": "비트코인",
    "sources": [
     "signal.bz",
     "google"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-14T16:10:00.000Z",
    "exclusive": false,
@@ -68,10 +36,10 @@
      "link": "https://www.wikitree.co.kr/articles/1174656"
     },
     {
-     "title": "비트코인, 85만5000개 마지막 이동 구간에 진입",
+     "title": "비트코인 일주일 새 13.5% 하락…체크는 ‘가치 구간’ 평가",
      "press": "tokenpost.kr",
      "publishedAt": "2026-11-14T16:50:00.000Z",
-     "link": "https://www.tokenpost.kr/news/cryptocurrency/438396"
+     "link": "https://www.tokenpost.kr/news/cryptocurrency/438397"
     }
    ]
   },
