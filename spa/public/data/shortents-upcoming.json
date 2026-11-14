@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T16:55:01.183Z",
+ "builtAt": "2026-11-14T17:05:08.289Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,63 +8,64 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 22,
  "candidates": [
   {
    "keyword": "젠슨 황 엔비디아",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-14T15:32:00.000Z",
+   "articles90": 14,
+   "recent20": 3,
+   "press": 9,
+   "firstArticleAt": "2026-11-14T15:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "엔비디아 주가 밸류에이션 2019년 이후 최저 수준으로 낮아져",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-14T16:30:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/438390"
+     "title": "젠슨 황 퇴진 후폭풍…엔비디아, 9억달러 보험에도 소송비 부담 우려",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-14T17:02:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=2026111421401482199a1f309431_1"
     },
     {
-     "title": "머스크 “젠슨 황 부재에 엔비디아 공급망 핵심 계약 잃을 것”",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-14T16:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001204771?sid=104"
+     "title": "엔비디아 시총 4조달러 붕괴…반도체 동반 약세 속 저평가론",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-14T17:02:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=2026111421030827649a1f309431_1"
     },
     {
-     "title": "엔비디아 집단소송 기간 2024년 12월~2026년 11월로 확대",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-14T16:22:00.000Z",
-     "link": "https://www.tokenpost.kr/news/policy/438388"
+     "title": "젠슨 황 사임 후 ‘러트닉 경질론’ 확산…베선트도 공개 비판",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-14T17:02:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=2026111419315136309a1f309431_1"
     }
    ]
   },
   {
    "keyword": "비트코인",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 8,
+   "articles90": 5,
    "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-14T15:26:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-14T15:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "비트코인, 85만5000개 마지막 이동 구간에 진입",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-14T16:50:00.000Z",
-     "link": "https://www.tokenpost.kr/news/cryptocurrency/438396"
-    },
     {
      "title": "비트코인 일주일 새 13.5% 하락…체크는 ‘가치 구간’ 평가",
      "press": "tokenpost.kr",
      "publishedAt": "2026-11-14T16:50:00.000Z",
      "link": "https://www.tokenpost.kr/news/cryptocurrency/438397"
+    },
+    {
+     "title": "비트코인, 85만5000개 마지막 이동 구간에 진입",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-14T16:50:00.000Z",
+     "link": "https://www.tokenpost.kr/news/cryptocurrency/438396"
     },
     {
      "title": "비트코인(BTC) 최대 보유자는 '아무도 아니다'…분실 물량 최대 18%",
@@ -75,14 +76,46 @@
    ]
   },
   {
+   "keyword": "미중러 정상회담",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-14T16:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "러시아 \"19일 미중러 정상회담 개최\" 확인",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-14T16:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926214?sid=104"
+    },
+    {
+     "title": "러시아도 \"19일 미중러 정상회담 개최\" 확인",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-14T16:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001535639?sid=104"
+    },
+    {
+     "title": "美 이어 러도 \"19일 미중러 정상회담 개최\" 확인",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-14T16:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016442020?sid=104"
+    }
+   ]
+  },
+  {
    "keyword": "우크라이나 나토 돈바스",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-14T15:33:00.000Z",
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-14T15:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
