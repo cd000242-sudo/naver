@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T18:35:49.926Z",
+ "builtAt": "2026-11-14T18:45:53.204Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,16 +8,15 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "머스크와 젠슨 황 없는 엔비디아",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-14T17:25:00.000Z",
    "exclusive": false,
@@ -40,38 +39,6 @@
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-14T17:58:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/055/0001403069?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "비트코인",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-14T17:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "텍사스 시·카운티마다 비트코인 1,000만 달러 투자 허용 법안…안전장...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-14T18:10:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1174658"
-    },
-    {
-     "title": "비트코인, 1시간 새 1.24% 올라 6만6016달러",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-14T18:04:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/438410"
-    },
-    {
-     "title": "비트코인(BTC), 업계 2,429억 원 썼지만 민주당 석권…세일러 \"정치 초월...",
-     "press": "coinreaders.com",
-     "publishedAt": "2026-11-14T17:12:00.000Z",
-     "link": "http://coinreaders.com/270313"
     }
    ]
   }
