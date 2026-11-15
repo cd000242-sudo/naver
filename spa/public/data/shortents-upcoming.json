@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-15T21:43:41.050Z",
+ "builtAt": "2026-11-15T21:53:44.808Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 44,
-   "recent20": 12,
-   "press": 37,
-   "firstArticleAt": "2026-11-15T20:22:00.000Z",
+   "articles90": 45,
+   "recent20": 8,
+   "press": 38,
+   "firstArticleAt": "2026-11-15T20:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "젠슨 황 복귀 추진…美 정부는 반대",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-15T21:50:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611160013"
+    },
+    {
+     "title": "\"젠슨 황, 엔비디아 CEO 복귀 논의 중\" … 실리콘밸리, 백악관까지 설득...",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-15T21:48:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/16/2026111650008.html"
+    },
     {
      "title": "'전시 상황실' 꾸린 젠슨 황…사임 나흘 만에 복귀 움직임",
      "press": "news.jtbc.co.kr",
      "publishedAt": "2026-11-15T21:42:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/437/0000520833?sid=104"
-    },
-    {
-     "title": "젠슨 황 퇴진 충격에 흔들린 기술주… 피난처 애플·반도체 규제 불안 ...",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-15T21:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001272841?sid=101"
-    },
-    {
-     "title": "사임 나흘 만에 복귀설 솔솔…젠슨 황 위해 ‘작전실’ 꾸리고 백악관 ...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-15T21:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004682452?sid=104"
     }
    ]
   },
@@ -47,10 +47,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 8,
-   "firstArticleAt": "2026-11-15T20:18:00.000Z",
+   "articles90": 8,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-15T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -80,7 +80,7 @@
     "nate"
    ],
    "articles90": 7,
-   "recent20": 3,
+   "recent20": 2,
    "press": 6,
    "firstArticleAt": "2026-11-15T21:00:00.000Z",
    "exclusive": false,
@@ -107,44 +107,12 @@
    ]
   },
   {
-   "keyword": "이란",
-   "sources": [
-    "google"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-15T20:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[월드 프리즘] 트럼프, 밴스의 '이란 협상' 전격 제동… 2028년 대권 행보...",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-15T21:38:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101296"
-    },
-    {
-     "title": "이란, 바레인 미군기지 공격…후티 또 리야드·아덴 동시 압박",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-15T21:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012294270?sid=104"
-    },
-    {
-     "title": "협상도 공격도 없이…경제 제재로 이란 붕괴 기다리는 트럼프",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-15T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005604533?sid=104"
-    }
-   ]
-  },
-  {
    "keyword": "트럼프 바이든 탓",
    "sources": [
     "nate"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-15T20:52:00.000Z",
    "exclusive": false,
@@ -171,34 +139,34 @@
    ]
   },
   {
-   "keyword": "앨리스 황",
+   "keyword": "이란 미군기지 드론 공격",
    "sources": [
-    "google"
+    "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-15T20:22:00.000Z",
+   "firstArticleAt": "2026-11-15T20:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "메가스피드 \"앨리스황, 작년에 회사 떠나…우린 합법사업\" 주장",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-15T21:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016442918?sid=104"
+     "title": "이란, 바레인 미군기지 공격…후티 또 리야드·아덴 동시 압박",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-15T21:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012294270?sid=104"
     },
     {
-     "title": "메가스피드 \"앨리스 황, 지난해 8월 회사 떠나…회사와 무관\"",
+     "title": "이란, 두 달 만에 중동 미군기지 공격 재개",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-15T20:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926455?sid=104"
+    },
+    {
+     "title": "이란 혁명수비대 \"바레인 美 공군기지에 드론 공격 감행\"",
      "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-15T21:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000651198?sid=104"
-    },
-    {
-     "title": "‘젠슨 황 불륜’ 앨리스 황, 지난해 퇴사…메가스피드 “철저한 내부 ...",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-15T21:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003565384?sid=104"
+     "publishedAt": "2026-11-15T20:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000651192?sid=104"
     }
    ]
   },
@@ -208,7 +176,7 @@
     "google"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-15T21:00:00.000Z",
    "exclusive": false,
@@ -231,6 +199,38 @@
      "press": "etoday.co.kr",
      "publishedAt": "2026-11-15T21:02:00.000Z",
      "link": "https://www.etoday.co.kr/news/view/2648058"
+    }
+   ]
+  },
+  {
+   "keyword": "스페이스X 우주선 회수",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-15T21:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "로봇팔로 잡았다‥사상 첫 우주선 본체 회수",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-15T21:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001535759?sid=104"
+    },
+    {
+     "title": "우주선 본체 첫 회수…'로켓 재사용' 새 역사",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-15T21:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001403222?sid=104"
+    },
+    {
+     "title": "스페이스X, 사상 첫 우주선 상단부 회수 성공",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-15T21:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926464?sid=104"
     }
    ]
   }
