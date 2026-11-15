@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-15T16:21:18.802Z",
+ "builtAt": "2026-11-15T16:31:22.532Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -9,40 +9,7 @@
   "minPress": 2
  },
  "measured": 21,
- "candidates": [
-  {
-   "keyword": "젠슨 황 복귀 청원",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-15T15:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“젠슨 황 없인 안돼” vs “오만과 결별해야”… 엇갈린 실리콘밸리",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-15T15:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004009786?sid=105"
-    },
-    {
-     "title": "월가 큰손도 직원도 “젠슨 황 복귀시켜라”…온라인 청원 14만 돌파",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-15T15:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003565301?sid=101"
-    },
-    {
-     "title": "젠슨 황 사임 후폭풍…복귀 청원에 추가 폭로까지, 엔비디아 '술렁'",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-15T15:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000552053?sid=101"
-    }
-   ]
-  }
- ],
+ "candidates": [],
  "hitRate": {
   "days": 7,
   "flagged": 513,
