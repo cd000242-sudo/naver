@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-15T16:41:29.689Z",
+ "builtAt": "2026-11-15T16:51:33.230Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -9,10 +9,43 @@
   "minPress": 2
  },
  "measured": 25,
- "candidates": [],
+ "candidates": [
+  {
+   "keyword": "한국 야구, 일본에 또 준우승",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-15T15:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "또 일본에 막힌 한국 야구… APBC 3연속 준우승",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-15T16:48:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/005/0001885294"
+    },
+    {
+     "title": "슬픈 현실…야구·축구 모두 일본에게 상대도 안된다[초점]",
+     "press": "sports.hankooki.com",
+     "publishedAt": "2026-11-15T15:48:00.000Z",
+     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6943643"
+    },
+    {
+     "title": "5회 김건우 왜 안 바꿨나...'통한의 쐐기 3점포' 한국 야구, 일본전 13연...",
+     "press": "spochoo.com",
+     "publishedAt": "2026-11-15T15:27:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/529/0000079266"
+    }
+   ]
+  }
+ ],
  "hitRate": {
   "days": 7,
-  "flagged": 513,
+  "flagged": 514,
   "matched": 255,
   "avgLeadMin": 545,
   "recent": [
