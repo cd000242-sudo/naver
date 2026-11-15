@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-15T22:13:51.029Z",
+ "builtAt": "2026-11-15T22:23:54.308Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,34 @@
  "measured": 22,
  "candidates": [
   {
-   "keyword": "젠슨 황, 백악관 설득 중",
+   "keyword": "젠슨 황 백악관 설득 중",
    "sources": [
     "nate"
    ],
-   "articles90": 16,
-   "recent20": 3,
-   "press": 16,
+   "articles90": 18,
+   "recent20": 5,
+   "press": 18,
    "firstArticleAt": "2026-11-15T21:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "엔비디아 젠슨 황, 사임 나흘 만에 복귀 타진…머스크도 가세",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-15T22:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000552067?sid=104"
+     "title": "젠슨 황, 엔비디아 CEO 복귀 논의 중…머스크 이어 백악관 설득 시도",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-15T22:18:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=883445"
     },
     {
-     "title": "FT \"젠슨 황, 엔비디아 CEO 복귀 논의 중…백악관 설득 시도\"",
-     "press": "getnews.co.kr",
-     "publishedAt": "2026-11-15T22:06:00.000Z",
-     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=887243"
+     "title": "일론 머스크까지! 젠슨 황 전 엔비디아 CEO 복귀 움직임에 실리콘밸리 ...",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-15T22:16:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885754"
     },
     {
-     "title": "'반격' 젠슨 황, 워룸 꾸려 복귀 시동… 美 재무장관은 \"외부 수혈\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-15T22:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000965723?sid=104"
+     "title": "\"젠슨 황, 엔비디아 CEO 복귀 논의 중…백악관 설득 시도\"",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-15T22:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001164393?sid=101"
     }
    ]
   },
@@ -47,62 +47,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 4,
-   "press": 11,
+   "articles90": 15,
+   "recent20": 5,
+   "press": 14,
    "firstArticleAt": "2026-11-15T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"수능 연기 해달라\"…AI 부정행위 여파",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-15T22:08:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2648364"
+     "title": "수능 사흘 앞두고 AI 부정행위 비상... AI 기기 점검 절차 마련",
+     "press": "womennews.co.kr",
+     "publishedAt": "2026-11-15T22:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/310/0000141731?sid=102"
     },
     {
-     "title": "사흘 뒤 수능인데, 'AI 부정행위'에 초비상…커닝 못 막나?",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-15T22:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000543804?sid=101"
+     "title": "수능 D-3 부정행위 비상…청와대 긴급 대책 회의",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-15T22:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001978320?sid=100"
     },
     {
-     "title": "AI 활용 부정행위 전수조사…사흘 남은 수능 감독 어쩌나[오늘아침]",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-15T22:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004209965?sid=102"
+     "title": "[뉴스타트] 세무사 수석 만든 '단돈 11만 원 AI 커닝 세트' 파장...사흘 ...",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-15T22:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002433241?sid=102"
     }
    ]
   },
   {
-   "keyword": "이 대통령 아세안 순방",
+   "keyword": "김정은",
    "sources": [
-    "daum"
+    "google"
    ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-15T20:45:00.000Z",
+   "articles90": 9,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-15T21:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李 대통령, 필리핀 ASEAN-中선전 APEC 3박4일 순방",
-     "press": "financialpost.co.kr",
-     "publishedAt": "2026-11-15T22:06:00.000Z",
-     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=301033"
+     "title": "北 평양 청류원 휴식홀 선전…\"김정은의 인민 사랑 깃들어\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-15T22:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009290294?sid=100"
     },
     {
-     "title": "[AM-PM] 한 총리, AI 부정행위 대책 회의…李 아세안·APEC 순방 外",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-15T21:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926474?sid=102"
+     "title": "美국무 \"김정은, 정권 생존 원할뿐 팽창주의자 아냐\"",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-15T22:04:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=781984"
     },
     {
-     "title": "이 대통령, 오늘 아세안·APEC 순방 출국…다자외교 소화",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-15T21:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001403226?sid=100"
+     "title": "美국무 “김정은, 팽창주의자 아냐…정권 생존 원할 뿐”",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-15T21:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003059249?sid=104"
     }
    ]
   },
@@ -139,34 +139,34 @@
    ]
   },
   {
-   "keyword": "김광규 새집",
+   "keyword": "닥터X : 하얀 마피아의 시대",
    "sources": [
-    "daum"
+    "nate"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 3,
    "press": 3,
-   "firstArticleAt": "2026-11-15T20:50:00.000Z",
+   "firstArticleAt": "2026-11-15T22:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김광규, 서울 연희동 집공개‥임원희와 같은 아파트 옆동 ‘이웃사촌’...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-15T22:09:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001187863"
+     "title": "'닥터X' 김정영, 유미경으로 남긴 온기 \"함께한 모든 인연에 감사\"",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-15T22:20:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16277432"
     },
     {
-     "title": "임원희, 김광규 연희동 새 아파트에 \"연애하면 내게 걸려\"",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-15T21:32:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95316"
+     "title": "김정영, '닥터X' 종영 소회… \"함께해 소중한 시간이었다\" ('닥터X')",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-15T22:17:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000490527"
     },
     {
-     "title": "김광규, '연희동 새집' 어떻길래…'이웃사촌' 임원희도 감탄 \"우리 집과...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-15T20:50:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002080956"
+     "title": "‘닥터X’ 김정영, 종영 소감",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-15T22:16:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611160023"
     }
    ]
   },
@@ -238,7 +238,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 536,
+  "flagged": 539,
   "matched": 277,
   "avgLeadMin": 634,
   "recent": [
