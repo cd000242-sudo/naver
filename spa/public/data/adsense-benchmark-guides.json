@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-15T07:36:30.461Z",
+  "generatedAt": "2026-11-15T08:13:01.518Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -3918,47 +3918,6 @@
       ]
     },
     {
-      "id": "109e7d45a135b36c",
-      "urls": [
-        "https://kyunalid.tankyuro.com/entry/%EA%B8%B0%EC%B4%88%EC%97%B0%EA%B8%88-%EC%88%98%EA%B8%89%EC%9E%90%EA%B2%A9",
-        "https://dbswjd11.com/429"
-      ],
-      "guide": {
-        "direction": "나이·소득·재산 기준을 다 맞춰도 받을 수 있는지 헷갈리고, 모의계산을 어디서 어떻게 하는지 몰라 지식인에 묻는 사람이 많다. 기존 고수 글은 수급자격과 예상수령액을 언급하지만 재산(자동차·현금)·국민연금 연계 감액 등 세부 조건별 표는 제공하지 않았다. 이 글은 나이·소득인정액·재산 기준을 표로 정리하고 복지로 모의계산 순서를 안내해 바로 확인하게 한다.",
-        "searchTargets": [
-          "기초연금 수급자격 나이",
-          "기초연금 수급자격 재산",
-          "기초연금 수급자격 모의계산",
-          "기초연금 수급자격 계산"
-        ],
-        "mustInclude": [
-          "재산 기준(자동차·현금·토지 환산 방식) 정리표",
-          "국민연금 수급액과 연계된 기초연금 감액 규정",
-          "복지로 모의계산 이용 순서 안내"
-        ],
-        "mustAvoid": [
-          "기초연금과 국민연금을 같은 제도로 혼동해서 설명",
-          "2027년 변경 예정 내용을 확정된 사실처럼 단정"
-        ],
-        "checkBefore": [
-          "2027년 기초연금 수급자격 변경안 관련 공식 발표 여부 확인"
-        ],
-        "solves": [
-          "내가 기초연금 받을 수 있는지 헷갈림 → 나이+소득인정액+재산 기준 표로 정리",
-          "기초연금 수급자격 모의계산이 궁금 → 복지로 모의계산 이용 순서 안내",
-          "자동차·현금 재산 기준이 헷갈림 → 재산 환산 방식 설명"
-        ],
-        "actionTitles": [
-          "기초연금 수급자격 모의계산, 나이·재산 기준 확인하는 법",
-          "기초연금 수급자격 재산 기준, 자동차·현금 계산하는 법",
-          "2027년 기초연금 수급자격 변경 여부 확인하는 법"
-        ]
-      },
-      "at": "2026-11-10T04:07:00.894Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
-    },
-    {
       "id": "680af82efecc9b66",
       "urls": [
         "https://toeasywan.com/134",
@@ -5268,71 +5227,6 @@
           "views": 1884,
           "answers": 2,
           "askedAt": "2026.01.22"
-        }
-      ]
-    },
-    {
-      "id": "0d6c6fa7ae139355",
-      "urls": [
-        "https://avatar72.tistory.com/entry/%EC%BD%94%EB%8D%B1%EC%8A%A4-%EC%BD%94%EC%8A%A4%EB%8B%A5150-%EB%A0%88%EB%B2%84%EB%A6%AC%EC%A7%80-%EB%A7%A4%EC%88%98-%EC%A0%84-%ED%95%84%EC%88%98-%EA%B5%90%EC%9C%A1%EA%B3%BC-%EC%98%88%ED%83%81%EA%B8%88-%EA%B8%B0%EC%A4%80%EC%9D%80"
-      ],
-      "guide": {
-        "direction": "지식인 질문들은 코덱스 코스닥150 레버리지가 지수 변동의 몇 배를 추종하는지, 장기 보유 시 왜 손실이 커지는지에 머물러 있고 매수 전 교육·예탁금 절차는 다루지 않는다. 고수 블로그 제목은 '교육과 예탁금 기준은?'이라고 물음만 던지고 실제 신청 절차나 기준액은 채워주지 않는다. 이 글은 교육 이수 절차와 예탁금 기준을 단계별로 정리해 매수 전 준비를 끝내게 해 준다.",
-        "searchTargets": [
-          "코덱스 코스닥 150 레버리지 교육",
-          "코덱스 코스닥 150 레버리지 예탁금",
-          "코덱스 코스닥150 레버리지 소득세",
-          "코덱스 코스닥 150 레버리지 세금"
-        ],
-        "mustInclude": [
-          "매수 전 필수 교육 이수 방법·소요시간·유효기간(확인 필요: 금융투자협회/증권사 공지)",
-          "레버리지·인버스 ETF 전용 기본예탁금 기준액(확인 필요: 한국거래소/증권사 공식 공지)",
-          "코스닥150지수 1% 변동 시 일일 2배 추종 원리와 장기 보유 시 괴리 발생 이유",
-          "분배금·소득세 등 일반 ETF와 다른 과세 방식 비교"
-        ],
-        "mustAvoid": [
-          "교육·예탁금 요건을 코덱스(KODEX) 상품만의 특별 규정으로 설명해 다른 레버리지·인버스 ETF와 혼동시키는 것",
-          "일일 2배 추종을 누적 수익률도 2배로 오해하게 써서 장기 손실 위험을 생략하는 것"
-        ],
-        "checkBefore": [
-          "교육 이수 절차와 기본예탁금 기준액: 증권사 또는 한국거래소 공식 공지로 확인",
-          "분배금·소득세 과세 방식: 삼성자산운용 공식 상품설명서로 확인"
-        ],
-        "solves": [
-          "매수 전 교육·예탁금이 왜 필요한지 모름 → 이수 절차와 기준액을 단계별로 안내",
-          "지수 1% 변동이 레버리지로 정확히 2배인지 헷갈림 → 일일 추종과 장기 괴리 원리 설명",
-          "분배금·세금이 일반 주식과 어떻게 다른지 궁금 → ETF 특유 과세 방식 정리"
-        ],
-        "actionTitles": [
-          "코덱스 코스닥150 레버리지 매수 전 교육 신청하는 법",
-          "코덱스 코스닥 150 레버리지 예탁금 기준 확인하는 법",
-          "코덱스 코스닥150 레버리지 세금·분배금 미리 계산하기"
-        ]
-      },
-      "at": "2026-11-10T12:59:11.118Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "KODEX 코스닥 150이랑 KODEX 코스닥 150 레버리지....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=292311317&answerNo=1&qb=7L2U642x7IqkIOy9lOyKpOuLpTE1MCDroIjrsoTrpqzsp4Ag66ek7IiYIOq1kOycoQ==",
-          "views": 15290,
-          "answers": 1,
-          "askedAt": "2018.01.12"
-        },
-        {
-          "title": "코덱스 코스닥 150 레버리지 etf 관련 질문",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=297116026&answerNo=1&qb=7L2U642x7IqkIOy9lOyKpOuLpTE1MCDroIjrsoTrpqzsp4Ag66ek7IiYIOq1kOycoQ==",
-          "views": 12057,
-          "answers": 1,
-          "askedAt": "2018.03.13"
-        },
-        {
-          "title": "KODEX 코스닥 150 레버리지 어떻게 할까요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=332560128&answerNo=1&qb=7L2U642x7IqkIOy9lOyKpOuLpTE1MCDroIjrsoTrpqzsp4Ag66ek7IiYIOq1kOycoQ==",
-          "views": 8644,
-          "answers": 1,
-          "askedAt": "2019.08.02"
         }
       ]
     },
@@ -9187,74 +9081,6 @@
       ]
     },
     {
-      "id": "87d1bc3cec053898",
-      "urls": [
-        "https://flameleaf.tistory.com/entry/%EC%9B%94%EC%84%B8-%EC%84%B8%EC%95%A1%EA%B3%B5%EC%A0%9C-%EC%97%B0-75%EB%A7%8C%EC%9B%90-%ED%99%98%EA%B8%89%EB%B0%9B%EA%B8%B0-%EC%9E%90%EA%B2%A9%EC%9A%94%EA%B1%B4-%EC%B2%B4%ED%81%AC%EB%A6%AC%EC%8A%A4%ED%8A%B8",
-        "https://economicstory1.tistory.com/entry/%EC%9B%94%EC%84%B8-%EC%84%B8%EC%95%A1%EA%B3%B5%EC%A0%9C-2026-%EC%9B%94%EC%84%B8%EB%B3%84-%EA%B3%B5%EC%A0%9C%EC%95%A1-%EA%B3%84%EC%82%B0%EA%B3%BC-12%EC%9B%94-31%EC%9D%BC-%EC%A0%84-%EC%B2%B4%ED%81%AC%EB%A6%AC%EC%8A%A4%ED%8A%B8",
-        "https://flameleaf.tistory.com/entry/%EC%97%B0%EB%A7%90%EC%A0%95%EC%82%B0-%EC%9B%94%EC%84%B8-%EC%84%B8%EC%95%A1%EA%B3%B5%EC%A0%9C-%EB%8C%80%EC%83%81-%EC%A1%B0%EA%B1%B4-2026%EB%85%84-%EC%B5%9C%EB%8C%80-170%EB%A7%8C%EC%9B%90-%EB%B0%9B%EA%B8%B0",
-        "https://bangulnote.com/entry/monthly-rent-tax-credit-qa/"
-      ],
-      "guide": {
-        "direction": "검색자는 자녀 명의 계약이나 총급여 8천만원 초과 같은 애매한 자격요건에서 막혀 있고, 집주인 동의가 필요한지도 헷갈려 한다. 고수 블로그들은 연도별 공제액 계산에 집중해 놓친 해를 어떻게 돌려받는지(경정청구 절차)는 가볍게 다룬다. 자격요건 체크리스트와 경정청구 신청 순서를 함께 주면 이전에 못 받은 환급까지 한 글로 끝난다.",
-        "searchTargets": [
-          "월세 세액공제 조건",
-          "월세 세액공제 경정청구",
-          "월세 세액공제 신청",
-          "월세 세액공제 환급"
-        ],
-        "mustInclude": [
-          "세입자(자녀) 명의로 계약한 경우에도 공제 가능한 요건(지식인 사례)",
-          "세입자 월세 세액공제에는 집주인 동의가 필요 없다는 점(지식인 답변)",
-          "총급여 8천만원 초과 시 공제 적용 여부 기준",
-          "놓친 공제를 못 받았을 때 경정청구로 환급받는 절차",
-          "세무서 민원봉사실이나 소득세 창구에서 처리하는 방법(지식인 사례)"
-        ],
-        "mustAvoid": [
-          "전세자금대출 공제나 현금영수증 월세공제와 세액공제를 혼동시키는 것",
-          "집주인 동의가 필요하다고 잘못 단정하는 것"
-        ],
-        "checkBefore": [
-          "국세청 홈택스 연말정산 안내 및 세무서 민원봉사실 확인"
-        ],
-        "solves": [
-          "자녀 명의로 계약한 월세도 공제되나요? → 명의자 기준 자격요건 정리",
-          "놓친 해 공제를 못 받았는데 어떻게 하나요? → 경정청구 신청 절차 안내",
-          "총급여 8천만원 넘으면 공제 못 받나요? → 소득 기준 자격요건 명시"
-        ],
-        "actionTitles": [
-          "월세 세액공제 조건 확인하고 경정청구로 환급받기",
-          "월세 세액공제 신청 전 총급여 8천만원 기준 체크",
-          "월세 세액공제 환급, 놓친 해 경정청구 하는 법"
-        ]
-      },
-      "at": "2026-11-12T02:59:09.957Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "월세 세액공제 가능한지 궁금합니다",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40311&docId=494517065&answerNo=8&qb=7JuU7IS47IS47JWh6rO17KCc",
-          "views": 300,
-          "answers": 9,
-          "askedAt": "2026.11.03"
-        },
-        {
-          "title": "월세세액공제",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40311&docId=494923100&answerNo=6&qb=7JuU7IS47IS47JWh6rO17KCc",
-          "views": 222,
-          "answers": 6,
-          "askedAt": "2026.11.03"
-        },
-        {
-          "title": "월세 세액 공제를 신청할려고 합니다!!",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=4020202&docId=495427687&answerNo=7&qb=7JuU7IS47IS47JWh6rO17KCc",
-          "views": 209,
-          "answers": 7,
-          "askedAt": "2026.11.03"
-        }
-      ]
-    },
-    {
       "id": "4e84e194c0585076",
       "urls": [
         "https://benefitscoop.tistory.com/entry/%EA%B8%89%EB%9D%BD-%EB%92%A4-%EA%B8%89%EB%B0%98%EB%93%B1-%EC%98%A4%EB%8A%98-%EC%BD%94%EC%8A%A4%ED%94%BC%EA%B0%80-%EC%98%A4%EB%A5%B8-%EC%84%B8-%EA%B0%80%EC%A7%80-%EC%9D%B4%EC%9C%A0",
@@ -10535,54 +10361,6 @@
       ]
     },
     {
-      "id": "410b7a4f6d96cc3c",
-      "urls": [
-        "https://meccagym.tistory.com/3692",
-        "https://meccagym.tistory.com/3691",
-        "https://meccagym.tistory.com/3690",
-        "https://meccagym.tistory.com/3689",
-        "https://meccagym.tistory.com/3687",
-        "https://meccagym.tistory.com/3686"
-      ],
-      "guide": {
-        "direction": "검색자는 특정 운동 루틴보다 거제 헬스장의 1일권·PT 가격이 얼마인지, 추천할 만한 곳인지가 막힌 지점인데 고수 블로그 제목들은 등운동·하체운동 등 개별 운동만 다뤄 가격·이용조건을 답하지 않는다. 이 글은 메카짐의 공복 유산소 루틴을 보여주되 1일권·PT 가격과 소노캄 거제 헬스장과의 비교표로 검색을 끝낸다.",
-        "searchTargets": [
-          "거제 헬스장 1일권",
-          "거제 헬스장 pt 가격",
-          "소노캄 거제 헬스장",
-          "거제 헬스장 추천"
-        ],
-        "mustInclude": [
-          "옥포 메카짐 1일권/일일권 가격 (확인 필요: 메카짐 네이버 플레이스·공식 블로그)",
-          "메카짐 PT 가격대 (확인 필요: 메카짐 공식 채널)",
-          "메카짐 vs 소노캄 거제 헬스장 비교표 (이용조건·시설) (확인 필요)",
-          "공복 유산소 운동 종류(러닝·로잉머신·트레드밀) 순서와 방법"
-        ],
-        "mustAvoid": [
-          "소노캄 거제 헬스장(호텔 피트니스)과 일반 헬스장 메카짐을 같은 이용조건으로 혼동",
-          "PT 가격·일일권 가격을 추측해서 수치로 단정하기",
-          "공복 유산소 운동 효과를 과장된 다이어트 효과로 포장"
-        ],
-        "checkBefore": [
-          "메카짐 네이버 플레이스 또는 공식 블로그에서 1일권·PT 가격 확인",
-          "소노캄 거제 헬스장 외부인 이용 가능 여부·가격 확인"
-        ],
-        "solves": [
-          "거제 헬스장 1일권 가격을 몰라 못 감 → 메카짐 1일권 가격 정리(확인 필요)",
-          "소노캄 거제 헬스장과 일반 헬스장 비교가 안 됨 → 두 곳 비교표 제공",
-          "PT 가격이 공개 안 돼 비교 못함 → 메카짐 PT 가격대 정리(확인 필요)"
-        ],
-        "actionTitles": [
-          "거제 헬스장 1일권 가격, 옥포 메카짐으로 확인하기",
-          "소노캄 거제 헬스장 vs 메카짐 PT 가격 비교하기",
-          "거제 헬스장 추천 전 메카짐 공복 유산소 운동 확인"
-        ]
-      },
-      "at": "2026-11-12T02:59:09.957Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
-    },
-    {
       "id": "9b5365b10e4cbbbf",
       "urls": [
         "https://insight3429.tistory.com/entry/%EC%98%88%EC%88%98-vs-%EC%98%88%EC%88%98-%EA%B7%B8%EB%A6%AC%EC%8A%A4%EB%8F%84-%EA%B8%B0%EB%8F%84%ED%95%A0-%EB%95%8C-%ED%98%B8%EC%B9%AD%EC%9D%98-%EC%98%81%EC%A0%81-%EC%B0%A8%EC%9D%B4%EF%BD%9C%EA%B5%AC%EC%84%B8%EC%A3%BC%EC%9D%98-%EC%9D%B4%EB%A6%84%EC%97%90-%EB%8B%B4%EA%B8%B4-%EC%99%84%EC%84%B1%EC%9D%98-%EC%9D%98%EB%AF%B8"
@@ -11279,65 +11057,6 @@
           "views": 865,
           "answers": 7,
           "askedAt": "2026.10.24"
-        }
-      ]
-    },
-    {
-      "id": "f9670555199b90aa",
-      "urls": [
-        "https://limeade.kr/%ea%b3%a0%ec%9a%a924-%ed%99%88%ed%8e%98%ec%9d%b4%ec%a7%80-%eb%b0%94%eb%a1%9c%ea%b0%80%ea%b8%b0-www-work24-go-kr/",
-        "https://bussubway.tistory.com/811",
-        "https://doonamu.kr/%eb%b3%b4%ea%b1%b4%eb%b3%b5%ec%a7%80%eb%b6%80-%ed%99%88%ed%8e%98%ec%9d%b4%ec%a7%80-%eb%b0%94%eb%a1%9c%ea%b0%80%ea%b8%b0/"
-      ],
-      "guide": {
-        "direction": "검색자는 고용24 접속 후 실업급여·국민취업지원제도 신청 메뉴를 어디서 눌러야 하는지 막힌다(확인 필요: 고용24 공식 메뉴 구조). 같은 '홈페이지 바로가기' 묶음 글들은 주소만 안내하고 로그인 이후 경로를 짚지 않는다. 접속 주소·로그인 방법·주요 신청 메뉴 위치를 표로 정리하면 독자가 이 글에서 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "고용24 공식 주소(www.work24.go.kr)와 접속 경로",
-          "로그인 방식(간편인증/공동인증서 등) 단계(확인 필요: 공식 안내)",
-          "워크넷·고용보험 등 기존 서비스의 고용24 통합 여부(확인 필요: 시점/범위)"
-        ],
-        "mustAvoid": [
-          "용인시청·보건복지부 등 같은 '바로가기' 묶음 글의 다른 기관 내용과 섞어 쓰지 않기",
-          "통합 전 워크넷·고용보험 옛 주소를 현재 주소처럼 안내하지 않기(확인 필요)"
-        ],
-        "checkBefore": [
-          "고용24 공식 사이트에서 현재 로그인 방식·메뉴 구성 확인"
-        ],
-        "solves": [
-          "고용24 어디서 접속하는지 모름 → 공식 주소·접속 경로 제시(확인 필요)",
-          "로그인 후 신청 메뉴를 못 찾음 → 메뉴 위치 안내(확인 필요)"
-        ],
-        "actionTitles": [
-          "고용24 홈페이지 바로가기 주소와 로그인 방법 총정리",
-          "고용24에서 실업급여 신청 메뉴 위치 찾는 법 확인하기",
-          "고용24 워크넷·고용보험 통합 서비스 이용 방법 정리"
-        ]
-      },
-      "at": "2026-11-12T12:18:46.154Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "용인시를 상징하는 꽃, 나무, 새",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=13050302&docId=172952188&answerNo=1&qb=7Jqp7J247Iuc7LKtIHd3dyB5b25naW4gZ28ga3I=",
-          "views": 1622,
-          "answers": 2,
-          "askedAt": "2013.05.20"
-        },
-        {
-          "title": "용인시 에 대표 상징물 좀 알려주세요. 사진....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=120923&docId=239665635&answerNo=1&qb=7Jqp7J247Iuc7LKtIHd3dyB5b25naW4gZ28ga3I=",
-          "views": 1031,
-          "answers": 1,
-          "askedAt": "2015.11.30"
-        },
-        {
-          "title": "용인의 지리와 역사 지명유래 좀 알려주세요~",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1110&docId=250915070&answerNo=1&qb=7Jqp7J247Iuc7LKtIHd3dyB5b25naW4gZ28ga3I=",
-          "views": 881,
-          "answers": 1,
-          "askedAt": "2016.04.24"
         }
       ]
     },
@@ -12412,70 +12131,6 @@
           "views": 34557,
           "answers": 146,
           "askedAt": "2007.12.08"
-        }
-      ]
-    },
-    {
-      "id": "97c2f00954268042",
-      "urls": [
-        "https://trendsearch.tistory.com/entry/JYP-%EC%8B%A0%EC%9D%B8-%EC%98%A4%EB%B8%8C%EB%8D%94%EB%B8%94%EB%A3%A8-%EB%A9%A4%EB%B2%84%EB%8A%94-%EB%88%84%EA%B5%AC-%EB%8D%B0%EB%B7%94%EC%9D%BC-2027%EB%85%84-1%EC%9B%94-11%EC%9D%BC-%ED%99%95%EC%A0%95-%EC%84%A0%EA%B3%B5%EA%B0%9C%EA%B3%A1-%ED%92%8D%EC%84%A0%EC%9D%B8%EA%B0%84-%EA%B3%B5%EA%B0%9C"
-      ],
-      "guide": {
-        "direction": "오브더블루가 누구고 데뷔일이 맞는지 궁금해 jyp 신인아이돌을 검색하는 사람이 많다. 기존 글 제목은 멤버와 데뷔일을 언급하지만 멤버 명단과 선공개곡 공개 일정은 확정되지 않은 채로 남겨둔다. 이 글은 데뷔일 2027년 1월 11일과 선공개곡 풍선인간 공개 정보를 정리해 바로 확인하게 한다.",
-        "searchTargets": [
-          "jyp 신인아이돌",
-          "jyp 신인",
-          "jyp 신인 걸그룹 2027"
-        ],
-        "mustInclude": [
-          "오브더블루 멤버 명단과 프로필(확인 필요: JYP 공식 발표)",
-          "데뷔일 2027년 1월 11일 확정 일정",
-          "선공개곡 '풍선인간' 공개 날짜·플랫폼(확인 필요: 공식 발표)",
-          "그룹 성별(보이그룹/걸그룹) 구성(확인 필요: JYP 공식 공지)"
-        ],
-        "mustAvoid": [
-          "확인 안 된 멤버 명단을 단정적으로 쓰지 않기",
-          "다른 JYP 신인(기존 그룹·연습생)과 혼동하지 않기",
-          "멤버 사생활·연애 추측 금지"
-        ],
-        "checkBefore": [
-          "JYP엔터테인먼트 공식 SNS·보도자료에서 멤버·데뷔일 확정 여부 확인",
-          "음원 공개 플랫폼에서 '풍선인간' 공개 일정 확인"
-        ],
-        "solves": [
-          "jyp 신인아이돌이 누군지 몰라 검색 → 오브더블루 데뷔일·선공개곡 정리로 확인",
-          "jyp 신인 걸그룹 2027 검색해도 정보 부족 → 데뷔 일정표로 해결"
-        ],
-        "actionTitles": [
-          "JYP 신인 오브더블루 멤버 확인, 데뷔일 2027.1.11 정리",
-          "jyp 신인아이돌 오브더블루 데뷔일·선공개곡 확인하기",
-          "오브더블루 멤버는 누구? 데뷔 일정 한번에 확인하기"
-        ]
-      },
-      "at": "2026-11-12T12:18:46.154Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "빅뱅에 대해 자세히 알려주세용",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=302140101&docId=233684990&answerNo=1&qb=anlwIOyLoOyduCDsmKTruIzrjZTruJTro6gg66mk67KEIOuNsOu3lOydvA==",
-          "views": 51432,
-          "answers": 3,
-          "askedAt": "2015.09.05"
-        },
-        {
-          "title": "엔터테인먼트",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=3&docId=248481433&answerNo=1&qb=anlwIOyLoOyduCDsmKTruIzrjZTruJTro6gg66mk67KEIOuNsOu3lOydvA==",
-          "views": 45632,
-          "answers": 1,
-          "askedAt": "2016.03.21"
-        },
-        {
-          "title": "소속사 오디션",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=30104&docId=255790590&answerNo=2&qb=anlwIOyLoOyduCDsmKTruIzrjZTruJTro6gg66mk67KEIOuNsOu3lOydvA==",
-          "views": 36147,
-          "answers": 3,
-          "askedAt": "2016.07.06"
         }
       ]
     },
@@ -18541,68 +18196,6 @@
       "at": "2026-11-13T12:37:46.058Z",
       "rules": "2026-10-20-solve",
       "provider": "claude"
-    },
-    {
-      "id": "d84667d2c95ccffb",
-      "urls": [
-        "https://earnnomad.com/senior-jobs-recruit-timing-np-261113dp1/"
-      ],
-      "guide": {
-        "direction": "'노인 일자리 연말정산'을 검색하는 사람 일부는 연말 모집 공고 시기를, 일부는 받은 수당이 세금(연말정산)에 어떻게 잡히는지를 궁금해한다. 기존 글은 '공고 시기와 확인할 세 가지'까지만 짚고 정기모집 외 수시 추가모집 경로와 수당의 과세·연말정산 처리 여부는 다루지 않아 독자가 신청 시점과 세금 문제를 따로 또 검색해야 한다. 정기모집과 수시 추가모집 차이, 수행기관 상담 신청 순서, 수당의 연말정산 반영 여부를 한 글에서 정리해 끝맺는다.",
-        "searchTargets": [
-          "노인 일자리 연말정산"
-        ],
-        "mustInclude": [
-          "연말 정기모집 시기(확인 필요: 복지로·대한노인회 공지)",
-          "중도 포기자 발생 시 열리는 수시 추가모집 경로(지식인 사례)",
-          "대한노인회 등 수행기관 방문·상담 신청 순서(지식인 사례)",
-          "노인일자리 수당의 과세 여부와 연말정산 반영 여부(확인 필요: 국세청·수행기관 안내)"
-        ],
-        "mustAvoid": [
-          "노인일자리 수당을 일반 근로소득 연말정산과 동일하게 단정하기",
-          "경쟁률·선발 기준을 확인 없이 단정적으로 서술하기",
-          "정기모집 공고일을 예상치로 확정처럼 표기하기"
-        ],
-        "checkBefore": [
-          "2026년 노인일자리 정기모집 공고 일정 - 복지로·대한노인회 공식 공지",
-          "노인일자리 수당 과세·연말정산(소득공제) 처리 여부 - 국세청 또는 수행기관 안내"
-        ],
-        "solves": [
-          "노인일자리 연말정산 때 수당이 소득으로 잡히는지 몰라 불안함 → 수당 유형별 과세·비과세 여부 정리",
-          "정기모집을 놓치면 못 하는지 몰라 신청을 포기함 → 수시 추가모집 조건과 경로 안내",
-          "어느 기관에서 신청해야 하는지 몰라 헤맴 → 수행기관 상담 신청 순서 안내"
-        ],
-        "actionTitles": [
-          "노인 일자리 연말정산 수당 세금 처리 미리 확인",
-          "노인 일자리 연말정산 전 정기·수시모집 차이 확인"
-        ]
-      },
-      "at": "2026-11-13T12:37:46.058Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "이미 출간된 자기 소설 작품을 공모전에 낼 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=3070103&docId=112063738&answerNo=2&qb=64W47J247J287J6Q66asIOyXsOunkCDsl7Trpr3ri4jri6Qg66+466as",
-          "views": 37127,
-          "answers": 5,
-          "askedAt": "2010.06.22"
-        },
-        {
-          "title": "표현의 자유",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=80101&docId=495646170&answerNo=16&qb=64W47J247J287J6Q66asIOyXsOunkCDsl7Trpr3ri4jri6Qg66+466as",
-          "views": 22987,
-          "answers": 18,
-          "askedAt": "2026.11.07"
-        },
-        {
-          "title": "판타지소설추천",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=307&docId=72871899&answerNo=1&qb=64W47J247J287J6Q66asIOyXsOunkCDsl7Trpr3ri4jri6Qg66+466as",
-          "views": 1561,
-          "answers": 1,
-          "askedAt": "2009.04.11"
-        }
-      ]
     },
     {
       "id": "c7663693ceac115b",
