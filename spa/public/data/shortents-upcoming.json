@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-15T19:52:58.348Z",
+ "builtAt": "2026-11-15T20:03:03.238Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,42 +8,8 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
- "candidates": [
-  {
-   "keyword": "아파트",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-15T18:43:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "불난 아파트 19층부터 문두드려 대피 돕던 경비원 숨져",
-     "press": "donga.com",
-     "publishedAt": "2026-11-15T19:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003762601?sid=102"
-    },
-    {
-     "title": "한밤중 경북 포항 고층 아파트서 불‥25명 대피",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-15T19:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001535733?sid=102"
-    },
-    {
-     "title": "경북 경산 아파트에서 큰 불‥한때 대응 1단계 발령",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-15T19:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001535734?sid=102"
-    }
-   ]
-  }
- ],
+ "measured": 21,
+ "candidates": [],
  "hitRate": {
   "days": 7,
   "flagged": 516,
