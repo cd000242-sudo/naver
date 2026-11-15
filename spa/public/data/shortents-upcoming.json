@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-15T21:33:37.868Z",
+ "builtAt": "2026-11-15T21:43:41.050Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 22,
  "candidates": [
   {
-   "keyword": "세무사 수석",
+   "keyword": "젠슨 황 복귀 논의",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 14,
-   "recent20": 4,
-   "press": 12,
-   "firstArticleAt": "2026-11-15T20:07:00.000Z",
+   "articles90": 44,
+   "recent20": 12,
+   "press": 37,
+   "firstArticleAt": "2026-11-15T20:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "세무사 수석 합격자, 부정행위 인정·자수[간추린 주말 뉴스]",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-15T21:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014323468?sid=104"
+     "title": "'전시 상황실' 꾸린 젠슨 황…사임 나흘 만에 복귀 움직임",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-15T21:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000520833?sid=104"
     },
     {
-     "title": "세무사 수석 부정행위에 '너도 AI로?' 의심 확산…줄고발 우려도",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-15T21:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009290259?sid=102"
+     "title": "젠슨 황 퇴진 충격에 흔들린 기술주… 피난처 애플·반도체 규제 불안 ...",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-15T21:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001272841?sid=101"
     },
     {
-     "title": "세무사 수석의 AI 부정행위 자백…회계사 시험도 뚫렸다 논란 번져",
-     "press": "financialpost.co.kr",
-     "publishedAt": "2026-11-15T21:20:00.000Z",
-     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=300994"
-    }
-   ]
-  },
-  {
-   "keyword": "국토부 건설현장 안전점검",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 10,
-   "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-15T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "국토부, 한파·폭설 대비해 전국 건설현장 2946곳 안전점검",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-15T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006410177?sid=101"
-    },
-    {
-     "title": "국토부, 건설현장 2900곳 안전점검…사망사고 현장 특별관리",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-15T21:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000552065?sid=101"
-    },
-    {
-     "title": "국토부, 겨울철 대비 전국 건설현장 2946곳 안전점검",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-15T21:02:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2648039"
+     "title": "사임 나흘 만에 복귀설 솔솔…젠슨 황 위해 ‘작전실’ 꾸리고 백악관 ...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-15T21:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004682452?sid=104"
     }
    ]
   },
@@ -82,10 +50,16 @@
    "articles90": 9,
    "recent20": 3,
    "press": 8,
-   "firstArticleAt": "2026-11-15T20:05:00.000Z",
+   "firstArticleAt": "2026-11-15T20:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "수능 사흘 앞두고 터진 'AI 커닝'…시험장 감독체계 비상",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-15T21:40:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101297"
+    },
     {
      "title": "세무사 수석 합격자, 부정행위 인정·자수[간추린 주말 뉴스]",
      "press": "newsis.com",
@@ -97,12 +71,6 @@
      "press": "biz.heraldcorp.com",
      "publishedAt": "2026-11-15T21:26:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/016/0002723715?sid=102"
-    },
-    {
-     "title": "관세사·감평사·가스기사…잇단 의혹에 '전수 조사'",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-15T21:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001403216?sid=100"
     }
    ]
   },
@@ -111,62 +79,126 @@
    "sources": [
     "nate"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 4,
+   "articles90": 7,
+   "recent20": 3,
+   "press": 6,
    "firstArticleAt": "2026-11-15T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "[오늘의 운세] 2026년 11월 16일 (월) 띠별운세 '평소 리듬을 지키자'",
+     "press": "dailypop.kr",
+     "publishedAt": "2026-11-15T21:40:00.000Z",
+     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103982"
+    },
+    {
+     "title": "[오늘의 운세] 11월 16일 月(음력 10월 8일) 띠별 운세",
+     "press": "fntimes.com",
+     "publishedAt": "2026-11-15T21:40:00.000Z",
+     "link": "https://www.fntimes.com/html/view.php?ud=202611160638333851c1c16452b0_18"
+    },
+    {
      "title": "[AI] 오늘의 띠별 운세...2026.11.16(월요일)",
      "press": "newsroad.co.kr",
      "publishedAt": "2026-11-15T21:30:00.000Z",
      "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=67775"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 16일 별자리 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-15T21:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006410184?sid=103"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 16일 띠별 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-15T21:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006410183?sid=103"
     }
    ]
   },
   {
-   "keyword": "스페이스X 우주선 회수",
+   "keyword": "이란",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 4,
+   "articles90": 7,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-15T20:04:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-15T20:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "우주선 본체 첫 회수…'로켓 재사용' 새 역사",
-     "press": "news.sbs.co.kr",
+     "title": "[월드 프리즘] 트럼프, 밴스의 '이란 협상' 전격 제동… 2028년 대권 행보...",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-15T21:38:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101296"
+    },
+    {
+     "title": "이란, 바레인 미군기지 공격…후티 또 리야드·아덴 동시 압박",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-15T21:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012294270?sid=104"
+    },
+    {
+     "title": "협상도 공격도 없이…경제 제재로 이란 붕괴 기다리는 트럼프",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-15T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005604533?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "트럼프 바이든 탓",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-15T20:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"바이든 재앙\" 前정부 탓... 이틀만에 美항공사태 입 연 트럼프",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-15T21:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005604537?sid=104"
+    },
+    {
+     "title": "美 항공교통 마비에 트럼프 \"바이든 탓\"…민주당은 반발",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-15T21:20:00.000Z",
+     "link": "https://www.ajunews.com/view/20261116061616915"
+    },
+    {
+     "title": "'젠슨황 스캔들'에 트럼프 행정부 '흔들'…서로 '네 탓' 공방 [글로벌 뉴...",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-15T21:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000543788?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "앨리스 황",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-15T20:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "메가스피드 \"앨리스황, 작년에 회사 떠나…우린 합법사업\" 주장",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-15T21:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016442918?sid=104"
+    },
+    {
+     "title": "메가스피드 \"앨리스 황, 지난해 8월 회사 떠나…회사와 무관\"",
+     "press": "news.tvchosun.com",
      "publishedAt": "2026-11-15T21:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001403222?sid=104"
+     "link": "https://n.news.naver.com/mnews/article/448/0000651198?sid=104"
     },
     {
-     "title": "스페이스X, 사상 첫 우주선 상단부 회수 성공",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-15T21:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926464?sid=104"
-    },
-    {
-     "title": "“믿어지십니까? 그녀가 돌아왔어요!” 로봇 팔에 ‘착’…스페이스X, ...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-15T20:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004682430?sid=104"
+     "title": "‘젠슨 황 불륜’ 앨리스 황, 지난해 퇴사…메가스피드 “철저한 내부 ...",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-15T21:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003565384?sid=104"
     }
    ]
   },
@@ -201,107 +233,11 @@
      "link": "https://www.etoday.co.kr/news/view/2648058"
     }
    ]
-  },
-  {
-   "keyword": "코르티스 MMA 2026 대상",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-15T20:07:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "방탄소년단(BTS), MMA2026(2026 멜론뮤직어워드) 대상 2개 포함 6관왕…아...",
-     "press": "lecturernews.com",
-     "publishedAt": "2026-11-15T21:20:00.000Z",
-     "link": "https://www.lecturernews.com/news/articleView.html?idxno=213871"
-    },
-    {
-     "title": "BTS, 멜론뮤직어워드 6관왕…아이브·코르티스·에스파 대상",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-15T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005842813?sid=103"
-    },
-    {
-     "title": "‘MMA2026’ 아이브 5관왕",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-15T20:54:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611160003"
-    }
-   ]
-  },
-  {
-   "keyword": "이란",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-15T20:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "협상도 공격도 없이…경제 제재로 이란 붕괴 기다리는 트럼프",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-15T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005604533?sid=104"
-    },
-    {
-     "title": "이란, 두 달 만에 중동 미군기지 공격 재개",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-15T20:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926455?sid=104"
-    },
-    {
-     "title": "루비오, 이란 핵보유 반대하며 \"북한, 이란과 달라\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-15T20:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926454?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "트럼프 바이든 탓 항공대란",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-15T20:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "미국 항공 대란 여파 사흘째…정치권 ‘네 탓’ 공방",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-15T21:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012294267?sid=104"
-    },
-    {
-     "title": "미 항공대란 사흘째 혼란 여전...트럼프 \"바이든 정부 탓\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-15T20:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002433232?sid=104"
-    },
-    {
-     "title": "트럼프, 美 항공 마비사태 이틀 만에 첫 언급…“바이든 정부 탓”",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-15T20:12:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611160002"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 528,
+  "flagged": 531,
   "matched": 265,
   "avgLeadMin": 574,
   "recent": [
