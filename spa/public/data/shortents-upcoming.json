@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-15T18:22:14.369Z",
+ "builtAt": "2026-11-15T18:32:17.859Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -9,10 +9,44 @@
   "minPress": 2
  },
  "measured": 22,
- "candidates": [],
+ "candidates": [
+  {
+   "keyword": "아파트",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-15T17:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"은마 37억→31억, 잠실 42억→37억\"…호가 낮추는 서울 아파트, 거래는...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-15T18:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014323389?sid=101"
+    },
+    {
+     "title": "경북 경산시 백천동 아파트서 화재…7명 부상",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-15T18:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012294246?sid=102"
+    },
+    {
+     "title": "경북 경산시 백천동 아파트서 불...7명 부상",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-15T17:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002433217?sid=102"
+    }
+   ]
+  }
+ ],
  "hitRate": {
   "days": 7,
-  "flagged": 515,
+  "flagged": 516,
   "matched": 255,
   "avgLeadMin": 545,
   "recent": [
