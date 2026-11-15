@@ -65,7 +65,9 @@ export function buildFallbackQueryPlan(
       heading: h.title,
       koreanQuery: base,
       englishQuery: '',
-      fandomQuery: subject ? `${subject} 직찍` : '',
+      // "직찍" finds fan photos of a person. A subject with digits or Latin letters ("덴자 N8") is a product or model
+      // name, where it only brought unrelated results (2026-11-13 live run) — ask for plain photos instead.
+      fandomQuery: subject ? `${subject} ${/^[가-힣\s]+$/.test(subject) ? '직찍' : '사진'}` : '',
       eventQuery: '',
       broaderQuery: subject,
       recommendedImages: 1,

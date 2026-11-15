@@ -70,6 +70,14 @@ describe('issueHarness queryFanout fallback', () => {
     expect(q).not.toContain('진짜');
   });
 
+  // [2026-11-15] 실측: 자동차 글("덴자 N8 …")의 대체 검색어가 "덴자 N8 직찍"이었다. 직찍은 인물 팬 사진을 찾는 말이라
+  // 숫자·영문이 든 제품·모델 이름에는 붙이지 않는다.
+  it('buildFallbackQueryPlan은 제품·모델 이름에는 직찍 대신 사진을 붙인다', () => {
+    const plan = buildFallbackQueryPlan('덴자 N8 1,003km 주행거리 실체', [{ title: 'CLTC는 어떤 조건에서 재는 시험일까' }]);
+    expect(plan.querySets[0].fandomQuery).not.toContain('직찍');
+    expect(plan.querySets[0].fandomQuery).toBe(`${plan.mainSubject} 사진`);
+  });
+
   it('buildFallbackQueryPlan은 소제목 수만큼 쿼리셋을 만들고 직찍 변형을 포함한다', () => {
     const plan = buildFallbackQueryPlan('손흥민 이적설 총정리', [
       { title: '이적설의 시작' },

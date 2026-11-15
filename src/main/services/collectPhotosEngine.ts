@@ -1,6 +1,7 @@
 import type { GeneratedImage, GenerateImagesOptions, ImageRequestItem } from '../../image/types.js';
 import type { IssueCandidateImage, IssueHarnessScope } from '../../crawler/issueHarness/types.js';
 import { isVisionEngineUnavailableError } from '../../crawler/issueHarness/visionEngineError.js';
+import { isPhotoCheckMode, type PhotoCheckMode } from '../../crawler/issueHarness/photoCheckMode.js';
 import { COLLECT_CONSENT_REQUIRED_MESSAGE, COLLECT_PHOTOS_ENGINE, isImageCollectConsentValid } from '../../runtime/collectPhotosPolicy.js';
 import { dailyImageSourceTier } from './dailyImageSourcePolicy.js';
 import { collectDailyImages, createDailyCollectDeps, type DailyCollectDeps, type DailyCollectInput, type DailyCollectedImage } from './dailyImageCollect.js';
@@ -24,7 +25,7 @@ export const COLLECT_PHOTOS_SCOPE: IssueHarnessScope = { allowedSources: COLLECT
 
 export interface CollectPhotosRuntime {
   loadConsent(): Promise<unknown>;
-  buildDeps(context: { title: string; postId?: string; log: (message: string) => void; signal: AbortSignal }): DailyCollectDeps;
+  buildDeps(context: { title: string; postId?: string; log: (message: string) => void; signal: AbortSignal; photoCheckMode?: PhotoCheckMode }): DailyCollectDeps;
   collect(input: DailyCollectInput, deps: DailyCollectDeps): Promise<DailyCollectedImage[]>;
   readPreview(filePath: string): Promise<string>;
   log(message: string): void;
@@ -89,7 +90,11 @@ export async function generateCollectedPhotos(
   const abort = new AbortController();
   const watcher = setInterval(() => { if (options.stopCheck?.()) abort.abort(); }, 1000);
   try {
-    const deps = runtime.buildDeps({ title, postId: options.postId, log: runtime.log, signal: abort.signal });
+    // [2026-11-15] Only a mode the owner picked is passed on; without one the deps behave exactly as before.
+    const deps = runtime.buildDeps({
+      title, postId: options.postId, log: runtime.log, signal: abort.signal,
+      ...(isPhotoCheckMode(options.photoCheckMode) ? { photoCheckMode: options.photoCheckMode } : {}),
+    });
     let photos: DailyCollectedImage[];
     try {
       photos = await runtime.collect({

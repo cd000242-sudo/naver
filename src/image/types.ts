@@ -117,6 +117,11 @@ export interface GenerateImagesOptions {
   referenceImagePath?: string; // ✅ 전역 참조 이미지 경로 (모든 이미지에 공통 적용)
   isShoppingConnect?: boolean; // ✅ 쇼핑커넥트 모드 여부
   /**
+   * [2026-11-15] "관련 사진 찾기" only: how the found photos are checked on a re-run the owner chose after the check
+   * engine stopped. Absent = follow the text engine (unchanged). Other engines ignore it.
+   */
+  photoCheckMode?: import('../crawler/issueHarness/photoCheckMode.js').PhotoCheckMode;
+  /**
    * [2026-11-11] Codex subscription image only: the user's own reference photos (max 3), each marked person or product.
    * Paths must sit inside an app-managed image folder (same rule as the shopping reference). When present they are the
    * only references — the shopping representative photo is not mixed in. Other engines ignore it.

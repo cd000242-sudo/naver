@@ -17,7 +17,11 @@ import { routeTextToVision, isAgentTextProvider } from '../../runtime/modelRegis
 import { CLAUDE_MODELS, OPENAI_TEXT_MODELS } from '../../runtime/textModelConstants.js';
 import { GEMINI_TEXT_MODELS } from '../../runtime/geminiTextModelNormalization.js';
 
-export type VisionJudgeVendor = 'gemini' | 'openai' | 'claude' | 'agent-claude' | 'agent-codex';
+import { normalizePhotoCheckMode } from './photoCheckMode.js';
+
+export { isPhotoCheckMode, normalizePhotoCheckMode, type PhotoCheckMode } from './photoCheckMode.js';
+
+export type VisionJudgeVendor ='gemini' | 'openai' | 'claude' | 'agent-claude' | 'agent-codex';
 
 export interface IssueVisionRoute {
   vendor: VisionJudgeVendor;
@@ -87,6 +91,31 @@ export function cheapestVisionModelFor(vendor: 'gemini' | 'openai' | 'claude', f
   return fallback;
 }
 
+/** The subscription-CLI route (no API charge) for the given agent vendor. */
+function subscriptionVisionRoute(vendor: 'agent-claude' | 'agent-codex'): IssueVisionRoute {
+  return {
+    vendor,
+    model: vendor,
+    apiKey: '',
+    label: vendor === 'agent-codex' ? 'Codex 구독' : 'Claude 구독',
+    free: true,
+    fellBack: false,
+  };
+}
+
+/**
+ * [2026-11-15] Route for the check mode the owner picked when the collection was stopped and run again.
+ *   agent-claude / agent-codex — that subscription, whatever the text engine is.
+ *   caption — null: the collector falls to its free caption judgement.
+ *   selected (or anything unknown) — the text engine decides, as before.
+ */
+export function resolveVisionRouteForMode(mode: unknown, config: unknown): IssueVisionRoute | null {
+  const chosen = normalizePhotoCheckMode(mode);
+  if (chosen === 'agent-claude' || chosen === 'agent-codex') return subscriptionVisionRoute(chosen);
+  if (chosen === 'caption') return null;
+  return resolveIssueVisionRoute(config);
+}
+
 /**
  * 고른 글생성 엔진으로 수집기 Vision 경로를 정한다.
  * 쓸 수 없으면 null — 호출 측은 무료 캡션 게이트로 내려간다.
@@ -103,15 +132,7 @@ export function resolveIssueVisionRoute(config: unknown): IssueVisionRoute | nul
        */
       return null;
     }
-    const vendor = textEngine === 'agent-codex' ? 'agent-codex' : 'agent-claude';
-    return {
-      vendor,
-      model: vendor,
-      apiKey: '',
-      label: vendor === 'agent-codex' ? 'Codex 구독' : 'Claude 구독',
-      free: true,
-      fellBack: false,
-    };
+    return subscriptionVisionRoute(textEngine === 'agent-codex' ? 'agent-codex' : 'agent-claude');
   }
 
   const routed = routeTextToVision(textEngine);

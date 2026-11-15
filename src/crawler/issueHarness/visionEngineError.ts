@@ -31,6 +31,14 @@ export function isVisionEngineUnavailableError(error: unknown): error is VisionE
     || (error instanceof Error && error.name === 'VisionEngineUnavailableError');
 }
 
+/** Stable code plus the reason and vendor, so the screen can open its "how to check instead" window. */
+export const VISION_ENGINE_UNAVAILABLE_CODE = 'VISION_ENGINE_UNAVAILABLE';
+export function buildVisionUnavailableFields(error: VisionEngineUnavailableError): {
+  code: typeof VISION_ENGINE_UNAVAILABLE_CODE; visionUnavailable: { reason: VisionEngineProblem; vendor: VisionJudgeVendor };
+} {
+  return { code: VISION_ENGINE_UNAVAILABLE_CODE, visionUnavailable: { reason: error.reason, vendor: error.vendor } };
+}
+
 /** User-facing Korean text. Subscription engines suggest the other subscription; API engines point to settings. */
 export function buildVisionEngineUnavailableMessage(route: RouteInfo, reason: VisionEngineProblem): string {
   if (route.vendor === 'agent-claude' || route.vendor === 'agent-codex') {

@@ -15,6 +15,7 @@ import { attachImagePickerPreview } from './imagePickerPreview.js';
 import { gsPrefetchBatchProvider, gsPrefetchBodyIndexes, gsPrefetchLabel, gsPrefetchMatchImages } from '../../image/fullAuto/gensparkBodyPrefetch.js';
 import { codexUserReferenceOptions, describeCodexReferenceReflectionNow } from '../utils/codexReferenceImageList.js';
 import { refreshCodexReferenceImages, reportCodexReferenceFailure } from './codexReferenceImages.js';
+import { photoCheckRetryLoop } from './photoCheckChoice.js';
  
 
 // --- Global declarations (exposed by renderer.ts via window) ---
@@ -1688,12 +1689,19 @@ export function initHeadingImageGeneration(): void {
             : collectItems;
           appendLog(`📷 관련 사진 찾기: 소제목 ${collectItems.length}칸${collectThumbnailWithBody ? '과 썸네일' : ''}의 사진을 한 번에 찾습니다.`, 'images-log-output');
           collectItems.forEach((_item: any, i: number) => liveImagePreview.updateItem(i, 'generating'));
-          const collectResult = await generateImagesWithCostSafety({
+          const collectRequest = {
             provider: 'collect-photos',
             items: collectRequestItems,
             postTitle: blogTitle,
             isFullAuto: true,
-          });
+          };
+          // [2026-11-15] The photo-check engine could not run (limit / login): ask how to go on, then search again from the start.
+          //   "직접 고를게요" hands the failure back unchanged, so it stops right below as before.
+          const collectResult = await photoCheckRetryLoop(
+            await generateImagesWithCostSafety(collectRequest),
+            (mode) => generateImagesWithCostSafety({ ...collectRequest, photoCheckMode: mode }),
+            (message) => appendLog(message, 'images-log-output'),
+          );
           if (collectResult?.success === false) {
             collectItems.forEach((_item: any, i: number) => liveImagePreview.updateItem(i, 'failed'));
             throw new Error(String(collectResult.message || '관련 사진 찾기에 실패했습니다.'));

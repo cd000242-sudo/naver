@@ -3,7 +3,9 @@
 // Opus 토론 결론: zod 추가 의존 부담 < 자체 가드 함수
 // IPC 핸들러가 받는 payload를 화이트리스트 타입으로 강제
 
-export type ValidationResult<T> = { ok: true; value: T } | { ok: false; error: string };
+import { isPhotoCheckMode, normalizePhotoCheckMode, type PhotoCheckMode } from '../../crawler/issueHarness/photoCheckMode.js';
+
+export type ValidationResult<T> ={ ok: true; value: T } | { ok: false; error: string };
 
 export function isStr(v: unknown, max = 4096): v is string {
   return typeof v === 'string' && v.length <= max;
@@ -59,6 +61,8 @@ export function validateIssueCollectPayload(payload: unknown): ValidationResult<
   paidVisionCheck?: boolean;
   /** [2026-11-03] 'news' (default) = same scope as the 관련 사진 찾기 engine; 'wide' = every source as before. */
   breadth?: 'news' | 'wide';
+  /** [2026-11-15] How the photos are checked on a re-run the owner chose; 'selected' (default) follows the text engine. */
+  photoCheckMode: PhotoCheckMode;
 }> {
   if (!payload || typeof payload !== 'object') return { ok: false, error: 'payload는 object여야 합니다' };
   const p = payload as Record<string, unknown>;
@@ -89,6 +93,9 @@ export function validateIssueCollectPayload(payload: unknown): ValidationResult<
   if (p.paidVisionCheck !== undefined && p.paidVisionCheck !== null && typeof p.paidVisionCheck !== 'boolean') {
     return { ok: false, error: 'paidVisionCheck는 boolean이어야 합니다' };
   }
+  if (p.photoCheckMode !== undefined && p.photoCheckMode !== null && !isPhotoCheckMode(p.photoCheckMode)) {
+    return { ok: false, error: 'photoCheckMode는 selected, agent-claude, agent-codex, caption 중 하나여야 합니다' };
+  }
   return {
     ok: true,
     value: {
@@ -99,6 +106,7 @@ export function validateIssueCollectPayload(payload: unknown): ValidationResult<
       articleBody: (p.articleBody as string | undefined) ?? undefined,
       paidVisionCheck: p.paidVisionCheck === true,
       breadth: p.breadth === 'wide' ? 'wide' : 'news',
+      photoCheckMode: normalizePhotoCheckMode(p.photoCheckMode),
     },
   };
 }

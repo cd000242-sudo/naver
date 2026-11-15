@@ -5,6 +5,7 @@
 // Inline bundle = single scope → all top-level identifiers prefixed issueCollect*.
 
 import { ensureIssueCopyrightConsent, ensureIssueVisionChoice } from './issueCollectConsent.js';
+import { photoCheckRetryLoop } from './photoCheckChoice.js';
 import { ISSUE_COLLECT_TITLE_ONLY_HINT, issueCollectReadArticleBody, issueCollectReadIntro } from './issueCollectArticle.js';
 
 // Globals provided by other inlined modules (single-scope bundle).
@@ -142,7 +143,7 @@ export async function runIssueEndgameCollect(
 
     let result: any;
     try {
-        result = await (window as any).api.collectIssueImages({
+        const issueCollectPayload = {
             title: searchKeyword,
             headings: headingInputs,
             mainKeyword: searchKeyword,
@@ -150,7 +151,15 @@ export async function runIssueEndgameCollect(
             articleBody,
             paidVisionCheck: visionChoice.paid,
             breadth: issueCollectWide ? 'wide' : 'news',
-        });
+        };
+        result = await (window as any).api.collectIssueImages(issueCollectPayload);
+        // [2026-11-15] The photo-check engine could not run (limit / login): ask how to go on, then collect again from the start.
+        //   "직접 고를게요" hands the failure back unchanged, so it ends below exactly as before.
+        result = await photoCheckRetryLoop(
+            result,
+            (mode) => (window as any).api.collectIssueImages({ ...issueCollectPayload, photoCheckMode: mode }),
+            appendLogFn,
+        );
     } catch (ipcError: any) {
         // Thrown (not returned) failure — close the modal before rethrowing,
         // otherwise it stays stuck at the last percent.

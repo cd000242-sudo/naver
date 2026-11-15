@@ -8,8 +8,8 @@ import { ipcMain } from 'electron';
 import { loadConfig, applyConfigToEnv } from '../../configManager.js';
 import { ensureLicenseValid, enforceFreeTier } from '../utils/authUtils.js';
 import { validateIssueCollectPayload } from './validators.js';
-import { resolveIssueVisionRoute, resolveIssueVisionKey, type IssueVisionRoute } from '../../crawler/issueHarness/visionRoute.js';
-import { isVisionEngineUnavailableError } from '../../crawler/issueHarness/visionEngineError.js';
+import { resolveVisionRouteForMode, resolveIssueVisionKey, type IssueVisionRoute, type PhotoCheckMode } from '../../crawler/issueHarness/visionRoute.js';
+import { isVisionEngineUnavailableError, buildVisionUnavailableFields } from '../../crawler/issueHarness/visionEngineError.js';
 
 // 키 해석은 수집기 쪽 단일 구현(visionRoute)으로 옮겼다 — 기존 호출부/테스트를 위해 그대로 내보낸다.
 export { resolveIssueVisionKey };
@@ -22,16 +22,21 @@ import { buildIssueCollectSources } from '../services/issueCollectSources.js';
  * The search-plan text engine and the image check the collector uses — both on the engine the owner chose.
  * Paid (API key) vision runs only when this run asked for it; subscription routes cost nothing and stay on.
  */
-export function resolveIssueCollectRoutes(config: Awaited<ReturnType<typeof loadConfig>>, paidVisionCheck: boolean): {
+export function resolveIssueCollectRoutes(config: Awaited<ReturnType<typeof loadConfig>>, paidVisionCheck: boolean, photoCheckMode?: PhotoCheckMode): {
   planCaller?: IssuePlanCaller; planEngineLabel?: string; visionRoute: IssueVisionRoute | null; paidVisionDeclined: boolean;
 } {
-  const generator = resolveIssueTextGenerator(config);
+  // [2026-11-15] When the owner re-runs with the other subscription, the search plan goes with it: left on the
+  //   engine that just hit its limit it would fail and drop to the rough heuristic queries.
+  const generator = photoCheckMode === 'agent-claude' || photoCheckMode === 'agent-codex'
+    ? photoCheckMode
+    : resolveIssueTextGenerator(config);
   const textRoute = generator ? resolveSelectedEngineRoute(generator, config as unknown as Record<string, unknown>) : null;
   // 구독 CLI는 API 호출보다 훨씬 느리다 — 기다릴 수 있다고 알려 준다.
   const planCaller: IssuePlanCaller | undefined = textRoute
     ? (prompt: string) => textRoute.callModel(prompt, { maxTokens: 4096, timeoutMs: textRoute.subscription ? 300_000 : undefined })
     : undefined;
-  const resolved = resolveIssueVisionRoute(config);
+  // [2026-11-15] A re-run may carry the check way the owner picked; without it this is the text engine's route, as before.
+  const resolved = resolveVisionRouteForMode(photoCheckMode, config);
   const paidVisionDeclined = Boolean(resolved && !resolved.free && !paidVisionCheck);
   return { planCaller, planEngineLabel: textRoute?.engine, visionRoute: paidVisionDeclined ? null : resolved, paidVisionDeclined };
 }
@@ -64,7 +69,7 @@ export function registerIssueCollectHandlers(): void {
          * 유료(API 키) 비전 검사는 사용자가 이번 수집에서 켰을 때만 돈다. 구독(에이전트) 경로는 과금 0이라
          * 그대로. 안 켰으면 무료 캡션 판정 — 워터마크·구도는 못 보지만 한 푼도 들지 않는다.
          */
-        ({ planCaller, planEngineLabel, visionRoute, paidVisionDeclined } = resolveIssueCollectRoutes(config, v.value.paidVisionCheck === true));
+        ({ planCaller, planEngineLabel, visionRoute, paidVisionDeclined } = resolveIssueCollectRoutes(config, v.value.paidVisionCheck === true, v.value.photoCheckMode));
       } catch (e) {
         console.error('[Main] issue:collectImages - 설정 동기화 실패:', e);
       }
@@ -79,7 +84,9 @@ export function registerIssueCollectHandlers(): void {
         : '🧠 검색어 플랜: 휴리스틱(무료) — 고른 엔진으로 AI 플랜을 만들 수 없습니다.';
       console.log(`[Main] issue:collectImages — ${planNotice}`);
       const notice = !visionRoute
-        ? (paidVisionDeclined
+        ? (v.value.photoCheckMode === 'caption'
+          ? '🆓 무료 판정(사진 설명 글 기준)으로 진행합니다 — 워터마크·구도는 확인하지 못해 정확도가 낮습니다.'
+          : paidVisionDeclined
           ? '🆓 이미지 검사: 캡션 텍스트 판정(무료) — 유료 AI 검사는 수집 시작 창에서 켤 수 있습니다(워터마크·구도는 확인하지 못합니다).'
           : '⚠️ 고른 AI 엔진으로 이미지 검사를 할 수 없어 캡션 텍스트로만 판정합니다(무료) — 워터마크·구도는 확인하지 못합니다.')
         : visionRoute.free
@@ -125,7 +132,8 @@ export function registerIssueCollectHandlers(): void {
       //   never a "0 photos" success. The renderer shows `message` as the failure log.
       if (isVisionEngineUnavailableError(error)) {
         console.warn(`[Main] ⛔ issue:collectImages 멈춤 — 사진 검사 엔진 사용 불가(${error.reason}): ${error.message}`);
-        return { success: false, message: error.message, images: {}, candidates: {} };
+        // [2026-11-15] code + visionUnavailable let the screen offer "check another way" and run the collection again.
+        return { success: false, message: error.message, ...buildVisionUnavailableFields(error), images: {}, candidates: {} };
       }
       console.error('[Main] ❌ issue:collectImages 실패:', error);
       return { success: false, message: error?.message || 'unknown', images: {}, candidates: {} };
