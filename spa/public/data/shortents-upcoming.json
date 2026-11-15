@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-15T18:42:20.880Z",
+ "builtAt": "2026-11-15T18:52:25.305Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -17,12 +17,18 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-15T17:22:00.000Z",
+   "firstArticleAt": "2026-11-15T18:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "경북 포항 고층 아파트서 불...주민 25명 대피",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-15T18:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002433222?sid=102"
+    },
     {
      "title": "\"은마 37억→31억, 잠실 42억→37억\"…호가 낮추는 서울 아파트, 거래는...",
      "press": "newsis.com",
@@ -34,12 +40,6 @@
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-15T18:01:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012294246?sid=102"
-    },
-    {
-     "title": "경북 경산시 백천동 아파트서 불...7명 부상",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-15T17:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002433217?sid=102"
     }
    ]
   }
