@@ -87,17 +87,21 @@ describe('funnel: free watermark check and caption pre-filter', () => {
   beforeEach(() => { mocks.fetchCandidate.mockReset(); mocks.runVisionGate.mockClear(); });
   afterEach(() => vi.restoreAllMocks());
 
-  it('rejects suspected watermarks, counts them, and keeps their hash out of the registry', async () => {
+  it('rejects suspected watermarks, counts them, and keeps their hash out of the registries', async () => {
     const marked = await applyVariant(bases[0].buffer, WATERMARK_VARIANTS[0]);
     const a = cand('https://img.example.com/marked.jpg', '김연아 은퇴 기자회견');
     const b = cand('https://img.example.com/clean.jpg', '김연아 은퇴 기자회견 현장');
     mocks.fetchCandidate.mockImplementation(async (c: ReturnType<typeof cand>) =>
       (c.url.includes('marked') ? item(c, marked, 0n) : item(c, bases[1].buffer, 0xffffffffn)));
-    const opts = options();
+    // [2026-11-15] Downloading a photo no longer puts it on the post-wide list (only a photo really placed into a
+    //   heading does — see issueHarnessPlacedPhotoRegistry.test.ts). The heading-local list holds the clean one.
+    const headingRegistry = funnel.createPhashRegistry();
+    const opts = options({ headingPhashRegistry: headingRegistry });
     const result = await funnel.refineHeadingCandidates([a, b] as never, opts as never);
     expect(result.watermarkRejected).toBe(1);
     expect(result.clean.map((x) => x.candidate.url)).toEqual(['https://img.example.com/clean.jpg']);
-    expect(opts.phashRegistry.hashes).toEqual([0xffffffffn]);
+    expect(headingRegistry.hashes).toEqual([0xffffffffn]);
+    expect(opts.phashRegistry.hashes).toEqual([]);
   });
 
   it('does not download candidates that fail the strict caption gate (free mode)', async () => {

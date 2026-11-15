@@ -1155,7 +1155,10 @@ async function generateImagesWithCostSafetyInternal(options: any): Promise<any> 
         try {
           if (window.api && typeof (window.api as any).onImageGenerated === 'function') {
             cleanupImageListener = (window.api as any).onImageGenerated((data: { image: any; index: number; total: number }) => {
-              const { index, total, image } = data;
+              const { image } = data;
+              // [2026-11-15] A one-image call always reports 0 / 1, so drawing with the raw index repainted tile 1 with every new image.
+              // Move it to the slot the surrounding loop is filling, the same way the preview bridge does.
+              const { index, total } = resolveImagePreviewPosition(data.index, data.total);
               console.log(`[Renderer] 🖼️ 이미지 실시간 수신 (${index + 1}/${total}): ${image?.heading || '이미지'}`);
               // ProgressModal에 실시간 진행 메시지 표시
               try {
@@ -1192,7 +1195,7 @@ async function generateImagesWithCostSafetyInternal(options: any): Promise<any> 
                     `;
                   }
                   // 2) 첫 번째 완료 이미지 → 메인 미리보기 자동 표시
-                  if (liveSrc && index === 0) {
+                  if (liveSrc && data.index === 0) { // raw event index: the large preview keeps following the newest image
                     const mainContainer = document.getElementById('live-main-preview-container');
                     if (mainContainer) {
                       mainContainer.innerHTML = `<img src="${liveSrc}" alt="${image.heading || ''}">`;

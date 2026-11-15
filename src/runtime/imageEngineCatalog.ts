@@ -148,13 +148,13 @@ export const GENSPARK: ImageEngineSpec = {
 export const COLLECT_PHOTOS: ImageEngineSpec = {
   value: COLLECT_PHOTOS_ENGINE,
   label: COLLECT_PHOTOS_ENGINE_LABEL,
-  tagline: '소제목에 맞는 뉴스·기사 사진을 찾아 넣음 · 없으면 빈 칸 · 비용 0원 · 저작권 안내 동의 필요',
+  tagline: '소제목에 맞는 뉴스·웹 사진을 찾아 넣음 · 없으면 빈 칸 · 비용 0원 · 저작권 안내 동의 필요',
   model: 'collector/news-photos',
   forceModelKey: null,
   costKrw: 0,
   koreanText: false,
   icon: '📷',
-  freeTierNote: '이미지 생성이 아니라 웹에 공개된 뉴스·기사 사진을 수집합니다. 비용은 들지 않으며, 사진 사용에 대한 책임은 사용자에게 있습니다.',
+  freeTierNote: '이미지 생성이 아니라 뉴스·공식 사이트 등 웹에 공개된 사진을 수집합니다. 비용은 들지 않으며, 사진 사용에 대한 책임은 사용자에게 있습니다.',
 };
 
 /**

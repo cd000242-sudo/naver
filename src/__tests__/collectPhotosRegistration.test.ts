@@ -34,6 +34,16 @@ describe('관련 사진 찾기 - 화면/저장 등록', () => {
     expect(read('renderer/renderer.ts')).toContain("collectEngineWireSelect('image-source-select')");
   });
 
+  it('안내 버전을 올리면 옛 "동의했음" 브라우저 표식이 새 안내를 건너뛰게 하지 않는다', () => {
+    const notice = read('renderer/modules/issueCollectConsent.ts');
+    expect(notice).not.toContain("'issueCollectCopyrightConsentV1'");
+    expect(notice).toContain("'issueCollectCopyrightConsentV2'");
+    // The same notice also covers "넓게 찾기", so it must not claim those sources are always excluded.
+    expect(notice).toContain('뉴스·공식 사이트·일반 웹에 공개된 사진을 검색·수집합니다');
+    expect(notice).toContain("블로그·카페·커뮤니티·SNS 사진은 '넓게 찾기'를 켰을 때만 포함됩니다");
+    expect(notice).not.toContain('쇼핑몰 제외');
+  });
+
   it('풀오토 엔진 카드 모달의 확인 버튼은 저장 전에 동의를 거치고, 거절하면 저장 없이 돌아간다', () => {
     const settings = read('renderer/components/HeadingImageSettings.ts');
     expect(settings).toContain("from '../modules/imageCollectEngineConsent.js'");
@@ -85,10 +95,29 @@ describe('엔진 저장 경로 동의 확인 (카드 모달 / URL 수집)', () =
     const createElement = vi.fn(() => { throw new Error('동의 창이 뜨면 안 된다'); });
     vi.stubGlobal('document', { getElementById: () => null, createElement });
     vi.stubGlobal('localStorage', { getItem: () => null, setItem: () => undefined });
-    vi.stubGlobal('window', { api: { getConfig: async () => ({ imageCollectConsent: { version: 1, agreedAt: '2026-11-03T00:00:00Z' } }) } });
+    vi.stubGlobal('window', { api: { getConfig: async () => ({ imageCollectConsent: { version: IMAGE_COLLECT_CONSENT_VERSION, agreedAt: '2026-11-15T00:00:00Z' } }) } });
     const { ensureIssueCopyrightConsent } = await import('../renderer/modules/issueCollectConsent.js');
     await expect(ensureIssueCopyrightConsent()).resolves.toBe(true);
     expect(createElement).not.toHaveBeenCalled();
+  });
+
+  it('범위 변경 전(버전 1) 동의는 인정하지 않아 새 안내 창을 다시 띄운다', async () => {
+    vi.resetModules();
+    const createElement = vi.fn(() => { throw new Error('안내 창 요청됨'); });
+    vi.stubGlobal('document', { getElementById: () => null, createElement });
+    vi.stubGlobal('localStorage', { getItem: () => null, setItem: () => undefined });
+    vi.stubGlobal('window', { api: { getConfig: async () => ({ imageCollectConsent: { version: 1, agreedAt: '2026-11-03T00:00:00Z' } }) } });
+    const { ensureIssueCopyrightConsent } = await import('../renderer/modules/issueCollectConsent.js');
+    await expect(ensureIssueCopyrightConsent()).rejects.toThrow('안내 창 요청됨');
+    expect(createElement).toHaveBeenCalledTimes(1);
+  });
+
+  it('옛 "동의했음" 브라우저 표식(V1)만 남은 사용자도 새 안내를 건너뛰지 못한다', async () => {
+    vi.resetModules();
+    const store: Record<string, string> = { issueCollectCopyrightConsentV1: 'agreed' };
+    vi.stubGlobal('localStorage', { getItem: (key: string) => store[key] ?? null, setItem: () => undefined });
+    const { hasIssueCopyrightConsent } = await import('../renderer/modules/issueCollectConsent.js');
+    expect(hasIssueCopyrightConsent()).toBe(false);
   });
 
   it('진행 문구는 등록된 로그 전송기로도 나간다', async () => {

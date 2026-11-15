@@ -1,6 +1,6 @@
 import type { GeneratedImage, GenerateImagesOptions, ImageRequestItem } from '../../image/types.js';
 import type { IssueCandidateImage, IssueHarnessScope } from '../../crawler/issueHarness/types.js';
-import { isPressAgencyHost } from '../../crawler/issueHarness/pressHosts.js';
+import { isVisionEngineUnavailableError } from '../../crawler/issueHarness/visionEngineError.js';
 import { COLLECT_CONSENT_REQUIRED_MESSAGE, COLLECT_PHOTOS_ENGINE, isImageCollectConsentValid } from '../../runtime/collectPhotosPolicy.js';
 import { dailyImageSourceTier } from './dailyImageSourcePolicy.js';
 import { collectDailyImages, createDailyCollectDeps, type DailyCollectDeps, type DailyCollectInput, type DailyCollectedImage } from './dailyImageCollect.js';
@@ -11,16 +11,16 @@ import { createSiteNameResolver } from './collectPhotosSiteName.js';
  * The "관련 사진 찾기" image engine: instead of drawing an image it collects a real news/article photo per heading
  * with the same free collector the daily post uses (no paid vision, photos re-encoded as JPEG). A heading with no
  * suitable photo stays empty — no other engine is asked (no silent fallback) — and the log says how many were left.
- * Only news, official and press-agency pages count; community, SNS, shop and overseas image-search results do not.
+ * News, official and other public web pages count; blog, cafe, community, SNS and shop pages and overseas image search do not.
  */
 export const COLLECT_PHOTOS_SOURCES: readonly string[] = ['naver', 'naver-date', 'news-og', 'daum'];
 
-export function isNewsOrOfficialPhoto(candidate: IssueCandidateImage): boolean {
-  const tier = dailyImageSourceTier(candidate.pageUrl || candidate.url);
-  return tier <= 1 || (tier === 2 && isPressAgencyHost(candidate.pageUrl, candidate.url));
+/** Tier 0 (official), 1 (news) and 2 (unknown / image server) pass; only tier 3 (blog, cafe, community, SNS, shop) is refused. */
+export function isCollectablePhoto(candidate: IssueCandidateImage): boolean {
+  return dailyImageSourceTier(candidate.pageUrl || candidate.url) <= 2;
 }
 
-export const COLLECT_PHOTOS_SCOPE: IssueHarnessScope = { allowedSources: COLLECT_PHOTOS_SOURCES, candidateFilter: isNewsOrOfficialPhoto };
+export const COLLECT_PHOTOS_SCOPE: IssueHarnessScope = { allowedSources: COLLECT_PHOTOS_SOURCES, candidateFilter: isCollectablePhoto };
 
 export interface CollectPhotosRuntime {
   loadConsent(): Promise<unknown>;
@@ -90,11 +90,19 @@ export async function generateCollectedPhotos(
   const watcher = setInterval(() => { if (options.stopCheck?.()) abort.abort(); }, 1000);
   try {
     const deps = runtime.buildDeps({ title, postId: options.postId, log: runtime.log, signal: abort.signal });
-    const photos = await runtime.collect({
-      title, headings, slots, scope: { ownHeadingOnly: true },
-      ...(options.articleContext ? { intro: options.articleContext.slice(0, 1200) } : {}),
-      ...(Object.keys(headingBodies).length ? { headingBodies } : {}),
-    }, deps);
+    let photos: DailyCollectedImage[];
+    try {
+      photos = await runtime.collect({
+        title, headings, slots, scope: { ownHeadingOnly: true },
+        ...(options.articleContext ? { intro: options.articleContext.slice(0, 1200) } : {}),
+        ...(Object.keys(headingBodies).length ? { headingBodies } : {}),
+      }, deps);
+    } catch (error) {
+      // [2026-11-15] The picture check could not run (usage limit / login). That is a failure, not "no matching photo":
+      //   say so in the progress log and let the error reach the caller. No other way of judging is tried.
+      if (isVisionEngineUnavailableError(error)) runtime.log(`[이미지생성] ⛔ 관련 사진 찾기를 멈췄어요 — ${error.message}`);
+      throw error;
+    }
     const empty = slots.filter(slot => !photos.some(photo => photo.heading === slot.heading && photo.isThumbnail === slot.isThumbnail));
     runtime.log(`[이미지생성] 📷 관련 사진 찾기: ${slots.length}칸 중 ${photos.length}칸 채움${empty.length ? ` · ${empty.length}칸은 맞는 사진을 못 찾아 비워 둠 (${empty.map(slot => slot.heading).join(', ')})` : ''}`);
     const images: GeneratedImage[] = [];

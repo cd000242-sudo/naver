@@ -9,6 +9,7 @@ import { loadConfig, applyConfigToEnv } from '../../configManager.js';
 import { ensureLicenseValid, enforceFreeTier } from '../utils/authUtils.js';
 import { validateIssueCollectPayload } from './validators.js';
 import { resolveIssueVisionRoute, resolveIssueVisionKey, type IssueVisionRoute } from '../../crawler/issueHarness/visionRoute.js';
+import { isVisionEngineUnavailableError } from '../../crawler/issueHarness/visionEngineError.js';
 
 // 키 해석은 수집기 쪽 단일 구현(visionRoute)으로 옮겼다 — 기존 호출부/테스트를 위해 그대로 내보낸다.
 export { resolveIssueVisionKey };
@@ -101,7 +102,7 @@ export function registerIssueCollectHandlers(): void {
       const { collectIssueImages } = await import('../../crawler/issueHarness/harness.js');
       // [2026-11-03] Default = the 관련 사진 찾기 scope (news / official / press hosts); 'wide' keeps all nine sources.
       const wide = v.value.breadth === 'wide';
-      console.log(`[Main] issue:collectImages — 범위: ${wide ? '넓게(전체 소스)' : '뉴스·공식 사진'}`);
+      console.log(`[Main] issue:collectImages — 범위: ${wide ? '넓게(전체 소스)' : '뉴스·웹 사진'}`);
       const result = await collectIssueImages(v.value, {
         scope: wide ? undefined : COLLECT_PHOTOS_SCOPE,
         planCaller,
@@ -120,6 +121,12 @@ export function registerIssueCollectHandlers(): void {
       const sources = await buildIssueCollectSources(result.images, result.candidates).catch(() => ({}));
       return { success: true, ...result, sources };
     } catch (error: any) {
+      // [2026-11-15] The picture check could not run (usage limit / login). Report a failure with the reason —
+      //   never a "0 photos" success. The renderer shows `message` as the failure log.
+      if (isVisionEngineUnavailableError(error)) {
+        console.warn(`[Main] ⛔ issue:collectImages 멈춤 — 사진 검사 엔진 사용 불가(${error.reason}): ${error.message}`);
+        return { success: false, message: error.message, images: {}, candidates: {} };
+      }
       console.error('[Main] ❌ issue:collectImages 실패:', error);
       return { success: false, message: error?.message || 'unknown', images: {}, candidates: {} };
     }

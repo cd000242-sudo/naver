@@ -127,7 +127,7 @@ export async function runIssueEndgameCollect(
     try {
         progressModal?.show?.('🏆 이슈 끝판왕 이미지 수집', {
             icon: '🏆',
-            initialLog: `${headingTitles.length}개 소제목 · ${issueCollectWide ? '9개 소스 추적' : '뉴스·공식 사진 위주'} 수집을 시작합니다. (1~3분)`,
+            initialLog: `${headingTitles.length}개 소제목 · ${issueCollectWide ? '9개 소스 추적' : '뉴스·웹 사진 위주'} 수집을 시작합니다. (1~3분)`,
         });
         progressModal?.update?.(2, '🚀 수집 파이프라인 시동 중...');
         unsubscribeProgress = (window as any).api?.onIssueCollectProgress?.((info: any) => {

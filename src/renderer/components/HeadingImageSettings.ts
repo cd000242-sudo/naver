@@ -118,7 +118,7 @@ export const SOURCE_NAMES: Record<GlobalImageSource, string> = {
   'flow': '🍌 Flow (Nano Banana 2)',
   'dropshot': '🍌 리더스 나노바나나 무제한 (구독자 무제한 · 추가비용 0원)',
   'genspark': '✨ 젠스파크 (모델 선택 · 로그인 필요)',
-  'collect-photos': '📷 관련 사진 찾기 (뉴스·기사 사진 · 무료)',
+  'collect-photos': '📷 관련 사진 찾기 (뉴스·웹 사진 · 무료)',
   'codex-image': '🐙 Codex 구독 이미지 (GPT 이미지 · 별도 비용 없음)',
   'local-folder': '📂 내 폴더'
 };
@@ -994,7 +994,7 @@ export function createHeadingImageModal(): void {
           <label class="source-option" data-value="collect-photos" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #ecfdf5, #d1fae5); text-align: center; transition: all 0.2s; position: relative;">
             <div style="font-size: 1.5rem;">📷</div>
             <div style="font-size: 12px; font-weight: 600; color: #065f46;">관련 사진 찾기</div>
-            <div style="font-size: 10px; color: #047857;">뉴스·기사 사진 · 무료 · 없으면 빈 칸</div>
+            <div style="font-size: 10px; color: #047857;">뉴스·웹 사진 · 무료 · 없으면 빈 칸</div>
           </label>
           <label class="source-option" data-value="nano-banana-2" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #fef3c7, #fde68a); text-align: center; transition: all 0.2s;">
             <div style="font-size: 1.5rem;">🍌</div>

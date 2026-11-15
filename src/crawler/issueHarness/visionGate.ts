@@ -8,6 +8,7 @@
 
 import { toVisionJpegBase64, type FetchedCandidate } from './candidateFetcher.js';
 import { judgeImagesWithRoute } from './visionJudges.js';
+import { classifyVisionEngineFailure } from './visionEngineError.js';
 import type { IssueVisionRoute } from './visionRoute.js';
 
 const LOG = '[IssueVisionGate]';
@@ -152,6 +153,8 @@ async function judgeBatch(
  * - No usable route → the caller never gets here (free caption gate instead).
  * - Budget exhausted → remaining images are not inspected (not passed).
  * - A failed batch call rejects that batch (fail-closed, never fail-open).
+ * - Exception: a usage limit / lost login / refused key throws VisionEngineUnavailableError at the first failure
+ *   (the check cannot run at all — see visionEngineError.ts), so no further batch is sent.
  */
 export async function runVisionGate(
   items: FetchedCandidate[],
@@ -191,6 +194,13 @@ export async function runVisionGate(
         }
       });
     } catch (error) {
+      // A usage limit / lost login / refused key fails every remaining call the same way — stop now and say why
+      // instead of burning one call per batch and reporting "no matching photo".
+      const unavailable = classifyVisionEngineFailure(error, route);
+      if (unavailable) {
+        console.warn(`${LOG} ⛔ 검사 엔진 사용 불가 (${unavailable.reason}) — 수집을 멈춥니다: ${unavailable.message}`);
+        throw unavailable;
+      }
       console.warn(`${LOG} ⚠️ 배치 검사 실패 (fail-closed, ${batch.length}장 탈락): ${(error as Error).message}`);
     }
   }
