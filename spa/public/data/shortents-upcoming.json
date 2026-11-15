@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-15T15:20:52.080Z",
+ "builtAt": "2026-11-15T15:30:56.157Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,101 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 23,
  "candidates": [
   {
-   "keyword": "한국 야구 일본에 준우승",
+   "keyword": "일본 한국 야구",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 20,
-   "recent20": 1,
-   "press": 18,
-   "firstArticleAt": "2026-11-15T13:52:00.000Z",
+   "articles90": 19,
+   "recent20": 3,
+   "press": 17,
+   "firstArticleAt": "2026-11-15T14:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "일본에 11년째 패배, 우승컵 쳐다만 봤다",
+     "title": "일본도 잡을 수 있었다, 그런데 거기까지였다…20시간 날아가 고군분투...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-15T15:29:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/477/0000639218"
+    },
+    {
+     "title": "5회 김건우 왜 안 바꿨나...'통한의 쐐기 3점포' 한국 야구, 일본전 13연...",
+     "press": "spochoo.com",
+     "publishedAt": "2026-11-15T15:27:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/529/0000079266"
+    },
+    {
+     "title": "김도영·안현민도 넘지 못한 일본의 벽 [APBC]",
+     "press": "newsq.co.kr",
+     "publishedAt": "2026-11-15T15:18:00.000Z",
+     "link": "https://www.newsq.co.kr/news/articleView.html?idxno=500901"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황 복귀 청원",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-15T14:15:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "월가 큰손도 직원도 “젠슨 황 복귀시켜라”…온라인 청원 14만 돌파",
      "press": "joongang.co.kr",
-     "publishedAt": "2026-11-15T15:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003565320?sid=104"
+     "publishedAt": "2026-11-15T15:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003565301?sid=101"
     },
     {
-     "title": "\"한국, 굴욕의 일본전 13연패. 11년 동안 승리 없다\"...日 언론 신났네,...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-15T14:59:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/109/0005641176"
+     "title": "젠슨 황 사임 후폭풍…복귀 청원에 추가 폭로까지, 엔비디아 '술렁'",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-15T15:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000552053?sid=101"
     },
     {
-     "title": "'3년 연속 준우승' 최원호 감독 \"APBC서 젊은 투수들 국제 경쟁력 확인\"",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-15T14:52:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16277321"
+     "title": "[잡채기 칼럼] 젠슨 황 일어서나?",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-15T15:00:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082705"
+    }
+   ]
+  },
+  {
+   "keyword": "김민석 최민희 윤리심판원 이첩",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-15T14:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김민석 \"최민희, 윤리심판원에 이첩하라\", 징계 착수",
+     "press": "viewsnnews.com",
+     "publishedAt": "2026-11-15T14:48:00.000Z",
+     "link": "https://www.viewsnnews.com/article?q=239705"
+    },
+    {
+     "title": "이 대통령 \"등 뒤 화살\" 언급...'최민희 감찰' 윤리심판원 이첩",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-15T14:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002433189?sid=100"
+    },
+    {
+     "title": "'최민희 논란'에 더민초 긴급 소집…\"중징계 불가피\" vs \"신중론\" 속 추...",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-15T14:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000121431?sid=100"
     }
    ]
   },
@@ -47,10 +111,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-15T13:57:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-15T14:04:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -75,44 +139,12 @@
    ]
   },
   {
-   "keyword": "젠슨 황 복귀 청원 동참",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-15T14:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "월가 큰손도 직원도 “젠슨 황 복귀시켜라”…온라인 청원 14만 돌파",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-15T15:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003565301?sid=101"
-    },
-    {
-     "title": "젠슨 황 사임 후폭풍…복귀 청원에 추가 폭로까지, 엔비디아 '술렁'",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-15T15:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000552053?sid=101"
-    },
-    {
-     "title": "엔비디아 투자자·직원, 젠슨 황 복귀 요구…온라인 청원 14만명 넘어",
-     "press": "industrynews.co.kr",
-     "publishedAt": "2026-11-15T14:32:00.000Z",
-     "link": "https://www.industrynews.co.kr/news/articleView.html?idxno=89546"
-    }
-   ]
-  },
-  {
    "keyword": "수상함",
    "sources": [
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-15T14:24:00.000Z",
    "exclusive": false,
@@ -137,43 +169,11 @@
      "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=883443"
     }
    ]
-  },
-  {
-   "keyword": "김광규 28년만 자가 공개",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-15T14:11:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'전세사기 피해' 김광규, 28년 만에 서울 연희동 자가 마련",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-15T15:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014323357"
-    },
-    {
-     "title": "“아늑하네 부럽다” 김광규, 28년만 마련한 연희동 자가 공개 (‘미우...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-15T14:28:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005764099"
-    },
-    {
-     "title": "임원희도 놀란 김광규 새집..같은 아파트인데 분위기 딴판 \"리모델링 했...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-15T14:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004466901"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 510,
+  "flagged": 512,
   "matched": 255,
   "avgLeadMin": 545,
   "recent": [
