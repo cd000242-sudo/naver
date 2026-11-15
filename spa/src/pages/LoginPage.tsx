@@ -8,6 +8,7 @@ import { resetTabFrom } from '../lib/accountModel.mjs';
 import { loginCommunity } from '../lib/communityAuth';
 import { afterAuthPath, safeNextPath, signupPath, validateLogin } from '../lib/siteAuthModel.mjs';
 import { useSiteSession } from '../lib/useSiteSession';
+import { ShellIcon } from '../components/ShellIcons';
 
 const KAKAO_HELP_URL = 'https://open.kakao.com/o/sPcaslwh';
 
@@ -83,8 +84,8 @@ function LoginPage() {
                 <Link to={signupPath(next)}>처음이에요 · 회원가입</Link>
             </div>
             <div className="au-recover">
-                <button type="button" className="lp-btn lp-btn-line lp-btn-full" onClick={() => { setView('pwreset'); setError(''); }}>🔑 비밀번호 변경</button>
-                <button type="button" className="lp-btn lp-btn-line lp-btn-full" onClick={() => { setView('phone'); setError(''); }}>📱 본인인증</button>
+                <button type="button" className="lp-btn lp-btn-line lp-btn-full" onClick={() => { setView('pwreset'); setError(''); }}><ShellIcon name="key" size={18} />비밀번호 변경</button>
+                <button type="button" className="lp-btn lp-btn-line lp-btn-full" onClick={() => { setView('phone'); setError(''); }}><ShellIcon name="phone" size={18} />본인인증</button>
             </div>
             <p className="au-help">비밀번호 변경은 휴대폰 인증을 한 계정만 돼요. 안 되면 <a href={KAKAO_HELP_URL} target="_blank" rel="noopener noreferrer">카카오톡으로 문의</a>해 주세요.</p>
         </AuthShell>

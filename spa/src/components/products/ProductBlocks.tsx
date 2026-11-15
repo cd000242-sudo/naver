@@ -3,6 +3,7 @@
  * 가격 · 후기는 상점 · 후기 페이지와 같은 출처에서 읽는다(화면마다 숫자를 따로 적지 않는다).
  */
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
+import CountUp from '../motion/CountUp';
 import { Link } from 'react-router-dom';
 import { fetchSiteContent, EDGE_URL } from '../../lib/siteOps';
 import { applyStoreOverrides, isTaxIncludedPrice, productCardAmount, TERMS, won, type Product } from '../../lib/productCatalog';
@@ -15,7 +16,7 @@ export type Cta = { to: string; label: string };
 export function HeroActions({ primary, secondary }: { primary: Cta; secondary?: Cta }) {
     return (
         <div className="pp-actions">
-            <Link to={primary.to} className="pp-btn pp-btn-gold">{primary.label}<ArrowRight /></Link>
+            <Link to={primary.to} className="pp-btn pp-btn-gold lp-sheen">{primary.label}<ArrowRight /></Link>
             {secondary && <Link to={secondary.to} className="pp-btn pp-btn-line">{secondary.label}<ArrowRight /></Link>}
         </div>
     );
@@ -70,8 +71,8 @@ export function AdsenseVsPanel({ sample }: { sample: VsSample }) {
             label={`대표 검색어 ${sample.query} — 고수 블로그 제목과 LEWORD 제목 비교`}
             chip={<>
                 <span>{sample.query}</span><i aria-hidden />
-                <span>검색량 <b>{won(sample.searchVolume)}</b></span>
-                {sample.documentCount != null && <><i aria-hidden /><span>문서수 <b>{won(sample.documentCount)}</b></span></>}
+                <span>검색량 <b><CountUp value={sample.searchVolume} format={won} reserve /></b></span>
+                {sample.documentCount != null && <><i aria-hidden /><span>문서수 <b><CountUp value={sample.documentCount} format={won} reserve /></b></span></>}
                 <i aria-hidden /><span>실측</span>
             </>}
             theirsTitle={sample.sourceCount > sample.theirs.length ? `고수 글 ${sample.sourceCount}편 중 ${sample.theirs.length}편` : '고수 블로그 제목'}
@@ -154,7 +155,7 @@ export function PriceBlock({ product, cta }: { product: Product; cta: Cta }) {
                     return (
                         <div key={term.id}>
                             <small>{term.label}</small>
-                            <strong>{won(price)}<span>{unit}</span></strong>
+                            <strong><CountUp value={price} format={won} reserve /><span>{unit}</span></strong>
                             <p>{taxIncluded
                                 ? `부가세 포함${term.id === 'monthly' && product.id === 'leword' ? ' · 30일마다 자동결제' : ''}`
                                 : `부가세 별도 · 카드 결제 ${won(productCardAmount(product, term.id, price))}원`}</p>
@@ -163,7 +164,7 @@ export function PriceBlock({ product, cta }: { product: Product; cta: Cta }) {
                 })}
             </div>
             <div className="pp-price-cta">
-                <Link to={cta.to} className="pp-btn pp-btn-gold">{cta.label}<ArrowRight /></Link>
+                <Link to={cta.to} className="pp-btn pp-btn-gold lp-sheen">{cta.label}<ArrowRight /></Link>
                 <Link to="/bank-order" className="pp-btn pp-btn-line">계좌이체로 사기<ArrowRight /></Link>
             </div>
         </>

@@ -1,8 +1,8 @@
 import { useId, useState, type FormEvent } from 'react';
 import { decryptLink, ProtectedLinkError, type ProtectedLinkPayload } from '../../lib/protectedLink.mjs';
+import { light, lightRadius, type as typeScale } from '../../styles/tokens';
 
 type Props = {
-    emoji: string;
     badge: string;
     title: string;
     desc: string;
@@ -18,7 +18,7 @@ const MESSAGES: Record<string, string> = {
 const GENERIC_ERROR = '지금은 열 수 없습니다. 잠시 뒤 다시 시도해 주세요';
 
 /** Hub tile that opens a link in a new tab only after the visitor's password decrypts it in the browser. */
-export default function ProtectedLinkTile({ emoji, badge, title, desc, payload }: Props) {
+export default function ProtectedLinkTile({ badge, title, desc, payload }: Props) {
     const inputId = useId();
     const [password, setPassword] = useState('');
     const [busy, setBusy] = useState(false);
@@ -47,7 +47,6 @@ export default function ProtectedLinkTile({ emoji, badge, title, desc, payload }
     return (
         <div className="hub-tile hub-tile-locked fade-in">
             <div className="hub-tile-top">
-                <span className="hub-emoji">{emoji}</span>
                 <span className="hub-badge">{badge}</span>
             </div>
             <h3>{title}</h3>
@@ -79,30 +78,32 @@ export default function ProtectedLinkTile({ emoji, badge, title, desc, payload }
                 )}
             </form>
             <style>{`
-                .hub-tile-locked { cursor: default; }
-                .hub-tile-locked:hover { transform: none; }
-                .hub-lock-form { width: 100%; margin-top: 6px; }
+                /* Light theme. The page sheet (ChatbotsPage) is printed after this one, so rules that
+                   must beat .hub-tile there carry one more class. */
+                .hub-tile.hub-tile-locked { cursor: default; }
+                .hub-tile.hub-tile-locked:hover { border-color: ${light.line}; }
+                .hub-lock-form { width: 100%; margin-top: 8px; }
                 .hub-lock-label {
                     position: absolute; width: 1px; height: 1px; overflow: hidden;
                     clip: rect(0 0 0 0); white-space: nowrap;
                 }
-                .hub-lock-row { display: flex; gap: 10px; flex-wrap: wrap; }
+                .hub-lock-row { display: flex; gap: 8px; flex-wrap: wrap; }
                 .hub-lock-input {
-                    flex: 1 1 180px; min-width: 0; min-height: 48px; padding: 10px 14px;
-                    border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.28);
-                    background: rgba(255, 255, 255, 0.08); color: #f8fafc; font: inherit; font-size: 1rem;
+                    flex: 1 1 180px; min-width: 0; min-height: 48px; padding: 12px 16px;
+                    border-radius: ${lightRadius.control}px; border: 1px solid ${light.lineStrong};
+                    background: ${light.surface}; color: ${light.text}; font: inherit; font-size: ${typeScale.body}px;
                 }
-                .hub-lock-input::placeholder { color: rgba(255, 255, 255, 0.5); }
-                .hub-lock-input:focus-visible { outline: 2px solid #f4c95d; outline-offset: 2px; }
+                .hub-lock-input::placeholder { color: ${light.textMuted}; }
+                .hub-lock-input:focus-visible { outline: 2px solid ${light.accent}; outline-offset: 2px; }
                 .hub-lock-btn {
-                    min-height: 48px; padding: 10px 22px; border-radius: 10px; cursor: pointer;
-                    border: 1px solid rgba(244, 201, 93, 0.7); background: #f4c95d; color: #071018;
-                    font: inherit; font-weight: 800; font-size: 1rem;
+                    min-height: 48px; padding: 12px 24px; border-radius: ${lightRadius.control}px; cursor: pointer;
+                    border: 1px solid ${light.btn}; background: ${light.btn}; color: ${light.onBtn};
+                    font: inherit; font-weight: 600; font-size: ${typeScale.body}px;
                 }
                 .hub-lock-btn:disabled { opacity: 0.6; cursor: wait; }
-                .hub-tile .hub-lock-error { margin: 10px 0 0; min-height: 1.4em; color: #fca5a5; font-weight: 700; }
-                .hub-tile .hub-lock-ok { margin: 6px 0 0; color: #86efac; font-weight: 700; }
-                .hub-lock-ok a { color: #f4c95d; }
+                .hub-tile .hub-lock-error { margin: 8px 0 0; min-height: 1.4em; color: ${light.negative}; font-weight: 500; }
+                .hub-tile .hub-lock-ok { margin: 4px 0 0; color: ${light.positive}; font-weight: 500; }
+                .hub-lock-ok a { color: ${light.accentInk}; text-decoration: underline; }
             `}</style>
         </div>
     );

@@ -1,15 +1,17 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import LegalLayout from '../components/LegalLayout';
+import { light, lightRadius, type } from '../styles/tokens';
 
-const h2: React.CSSProperties = { fontSize: 20, fontWeight: 800, color: '#FFD700', margin: '32px 0 14px' };
-const h3: React.CSSProperties = { fontSize: 16, fontWeight: 700, color: '#FFA500', margin: '20px 0 10px' };
-const ul: React.CSSProperties = { paddingLeft: 22, margin: '0 0 16px' };
-const box: React.CSSProperties = { background: 'rgba(255,215,0,0.06)', border: '1px solid rgba(255,215,0,0.2)', borderRadius: 12, padding: 16, margin: '16px 0' };
-const okBox: React.CSSProperties = { ...box, background: 'rgba(68,215,182,0.08)', borderColor: 'rgba(68,215,182,0.28)', marginTop: 0 };
-const table: React.CSSProperties = { width: '100%', borderCollapse: 'collapse', margin: '12px 0 20px', fontSize: 14 };
-const th: React.CSSProperties = { background: 'rgba(255,215,0,0.08)', color: '#FFD700', padding: '10px 12px', textAlign: 'left', border: '1px solid rgba(255,255,255,0.08)', fontWeight: 700 };
-const td: React.CSSProperties = { padding: '10px 12px', border: '1px solid rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.8)' };
+const h2: React.CSSProperties = { fontSize: type.lead, fontWeight: 600, lineHeight: 1.4, color: light.text, margin: '32px 0 12px' };
+const h3: React.CSSProperties = { fontSize: type.body, fontWeight: 600, color: light.text, margin: '20px 0 8px' };
+const ul: React.CSSProperties = { paddingLeft: 24, margin: '0 0 16px' };
+const box: React.CSSProperties = { background: light.raised, border: `1px solid ${light.line}`, borderRadius: lightRadius.card, padding: 16, margin: '16px 0' };
+const okBox: React.CSSProperties = { ...box, marginTop: 0 };
+const link: React.CSSProperties = { color: light.accentInk, textDecoration: 'underline', textUnderlineOffset: 3, overflowWrap: 'anywhere' };
+const table: React.CSSProperties = { width: '100%', borderCollapse: 'collapse', margin: '12px 0 20px', fontSize: type.small };
+const th: React.CSSProperties = { background: light.raised, color: light.text, padding: 12, textAlign: 'left', border: `1px solid ${light.line}`, fontWeight: 600 };
+const td: React.CSSProperties = { padding: 12, border: `1px solid ${light.line}`, color: light.text };
 
 const CONTACT_EMAIL = 'tjdgus24280@naver.com';
 const KAKAO_URL = 'https://open.kakao.com/o/sPcaslwh';
@@ -25,7 +27,7 @@ function RefundPage() {
     return (
         <LegalLayout title="환불 및 취소 정책" effective="시행일: 2026년 8월 8일 (최종 수정)">
             <div style={okBox}>
-                <p style={{ margin: 0 }}><strong>🛡️ 7일 전액환불 보장:</strong> 라이선스 코드 발급 후 <strong>7일 이내</strong>, 프로그램에 <strong>한 번도 로그인·사용하지 않은 경우</strong> 결제 금액을 <strong>전액 환불</strong>해 드립니다. 구매가 망설여지신다면 <strong>무료 체험</strong>으로 먼저 확인해 보셔도 좋습니다.</p>
+                <p style={{ margin: 0 }}><strong>7일 전액환불 보장:</strong> 라이선스 코드 발급 후 <strong>7일 이내</strong>, 프로그램에 <strong>한 번도 로그인·사용하지 않은 경우</strong> 결제 금액을 <strong>전액 환불</strong>해 드립니다. 구매가 망설여지신다면 <strong>무료 체험</strong>으로 먼저 확인해 보셔도 좋습니다.</p>
             </div>
 
             <h2 style={h2}>제1조 (환불 정책 원칙)</h2>
@@ -56,8 +58,8 @@ function RefundPage() {
             <p>아래 어느 채널로든 신청하실 수 있습니다.</p>
             <h3 style={h3}>1단계: 환불 신청</h3>
             <div style={box}>
-                <p style={{ margin: 0 }}><strong>💬 카카오톡 1:1 상담:</strong> <a href={KAKAO_URL} target="_blank" rel="noopener noreferrer" style={{ color: '#FFD700' }}>{KAKAO_URL}</a> (가장 빠름)</p>
-                <p style={{ margin: '8px 0 0' }}><strong>📧 이메일 접수:</strong> {CONTACT_EMAIL}</p>
+                <p style={{ margin: 0 }}><strong>카카오톡 1:1 상담:</strong> <a href={KAKAO_URL} target="_blank" rel="noopener noreferrer" style={link}>{KAKAO_URL}</a> (가장 빠름)</p>
+                <p style={{ margin: '8px 0 0' }}><strong>이메일 접수:</strong> {CONTACT_EMAIL}</p>
                 <p style={{ margin: '8px 0 0' }}><strong>기재 사항:</strong> 주문번호, 구매자명, 결제 이메일</p>
             </div>
 
@@ -104,8 +106,8 @@ function RefundPage() {
 
             <div style={box}>
                 <p style={{ margin: 0 }}>
-                    <strong>💡 참고:</strong> 본 환불정책은{' '}
-                    <Link to="/terms" style={{ color: '#FFD700' }}>이용약관</Link>{' '}
+                    <strong>참고:</strong> 본 환불정책은{' '}
+                    <Link to="/terms" style={link}>이용약관</Link>{' '}
                     제4조(결제 및 환불)에 근거합니다. 궁금한 점은 언제든 카카오톡 1:1 상담으로 문의해 주세요.
                 </p>
             </div>

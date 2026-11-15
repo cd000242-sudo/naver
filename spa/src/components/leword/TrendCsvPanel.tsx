@@ -1,6 +1,7 @@
 import { useMemo, useRef, useState } from 'react';
 import { fetchKeywordDocs, fetchKeywordFrontal, fetchKeywordVolumes } from '../../lib/keywordApi';
 import { countFacing, parseTrendCsv, seatFromFacing, volumeKey, type TrendCsvRow, type TrendSeat } from '../../lib/trendCsv';
+import CountUp from '../motion/CountUp';
 
 /**
  * 트렌드 CSV 들이기 — 분석기 탭 안.
@@ -171,37 +172,43 @@ export default function TrendCsvPanel() {
                 .lw-csv button, .lw-csv select { font: inherit; }
                 .lw-csv-drop {
                     display: grid; place-items: center; gap: 10px; text-align: center;
-                    padding: 40px 20px; border: 1.5px dashed rgba(255,255,255,.18); border-radius: 14px;
-                    background: rgba(255,255,255,.02); transition: border-color .12s, background .12s;
+                    padding: 40px 20px; border: 1.5px dashed var(--lw-line-strong); border-radius: 14px;
+                    background: var(--lw-surface); color: var(--lw-text);
+                    transition: border-color var(--lw-fast) var(--lw-ease), background-color var(--lw-fast) var(--lw-ease);
                 }
-                .lw-csv-drop.over { border-color: #2fd39a; background: rgba(47,211,154,.06); }
-                .lw-csv-drop .big { font-size: 15px; font-weight: 700; }
-                .lw-csv-drop ol { margin: 0; padding: 0; list-style: none; display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; font-size: 12px; opacity: .62; }
-                .lw-csv-btn { padding: 9px 18px; border: 0; border-radius: 9px; background: #2fd39a; color: #05221a; font-weight: 700; cursor: pointer; }
+                .lw-csv-drop.over { border-color: var(--lw-accent); background: var(--lw-accent-soft); }
+                .lw-csv-drop .big { font-size: 17px; font-weight: 600; }
+                .lw-csv-drop ol { margin: 0; padding: 0; list-style: none; display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; font-size: 13px; color: var(--lw-text-secondary); }
+                .lw-csv-drop ol b { color: var(--lw-accent-ink); font-weight: 600; }
+                .lw-csv-btn { min-height: 44px; padding: 0 20px; border: 0; border-radius: 10px; background: var(--lw-accent); color: var(--lw-on-accent); font-size: 15px; font-weight: 600; cursor: pointer; }
                 .lw-csv-btn[disabled] { opacity: .55; cursor: default; }
-                .lw-csv-ghost { padding: 6px 12px; border: 1px solid rgba(255,255,255,.16); border-radius: 8px; background: transparent; color: inherit; cursor: pointer; font-size: 12.5px; }
-                .lw-csv-ghost.on { background: #2fd39a; color: #05221a; border-color: #2fd39a; font-weight: 700; }
+                .lw-csv-ghost { min-height: 44px; padding: 0 12px; border: 1px solid var(--lw-line); border-radius: 10px; background: var(--lw-surface); color: var(--lw-text-secondary); cursor: pointer; font-size: 13px; transition: background-color var(--lw-fast) var(--lw-ease), border-color var(--lw-fast) var(--lw-ease); }
+                .lw-csv-ghost.on { background: var(--lw-accent-soft); color: var(--lw-text); border-color: var(--lw-accent); font-weight: 600; }
                 .lw-csv-ghost[disabled] { opacity: .5; cursor: default; }
-                .lw-csv-tiles { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 10px; }
-                .lw-csv-tile { flex: 1 1 130px; padding: 10px 13px; border: 1px solid rgba(255,255,255,.1); border-radius: 11px; background: rgba(255,255,255,.03); }
-                .lw-csv-tile em { display: block; font-style: normal; font-size: 11px; opacity: .55; margin-bottom: 3px; }
-                .lw-csv-tile b { font-size: 19px; font-variant-numeric: tabular-nums; }
-                .lw-csv-tile.good b { color: #2fd39a; }
-                .lw-csv-bar { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: 0 0 10px; font-size: 12.5px; }
+                .lw-csv-bar select { min-height: 44px; padding: 0 12px; border: 1px solid var(--lw-line); border-radius: 10px; background: var(--lw-surface); color: var(--lw-text); font-size: 13px; }
+                .lw-csv-tiles { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 12px; }
+                .lw-csv-tile { flex: 1 1 130px; padding: 12px 16px; border: 1px solid var(--lw-line); border-radius: 14px; background: var(--lw-surface); color: var(--lw-text); }
+                .lw-csv-tile em { display: block; font-style: normal; font-size: 13px; color: var(--lw-text-muted); margin-bottom: 4px; }
+                .lw-csv-tile b { font-size: 20px; font-weight: 600; font-variant-numeric: tabular-nums; }
+                .lw-csv-tile.good b { color: var(--lw-positive); }
+                .lw-csv-bar { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: 0 0 12px; font-size: 13px; }
                 .lw-csv-bar .grow { flex: 1; }
-                .lw-csv-status { opacity: .72; font-variant-numeric: tabular-nums; }
-                .lw-csv-wrap { overflow-x: auto; max-height: 560px; overflow-y: auto; border: 1px solid rgba(255,255,255,.1); border-radius: 11px; }
-                .lw-csv table { width: 100%; border-collapse: collapse; font-size: 13px; }
-                .lw-csv th { position: sticky; top: 0; background: #16202e; text-align: left; font-size: 11.5px; font-weight: 500; opacity: .8; padding: 9px 10px; }
-                .lw-csv td { padding: 9px 10px; border-top: 1px solid rgba(255,255,255,.06); }
+                .lw-csv-status { color: var(--lw-text-secondary); font-size: 13px; font-variant-numeric: tabular-nums; }
+                .lw-csv-wrap { overflow-x: auto; max-height: 560px; overflow-y: auto; border: 1px solid var(--lw-line); border-radius: 14px; background: var(--lw-surface); }
+                .lw-csv table { width: 100%; border-collapse: collapse; font-size: 15px; color: var(--lw-text); }
+                .lw-csv th { position: sticky; top: 0; background: var(--lw-raised); text-align: left; font-size: 13px; font-weight: 500; color: var(--lw-text-muted); padding: 8px 12px; }
+                .lw-csv td { padding: 8px 12px; border-top: 1px solid var(--lw-line); }
+                .lw-csv td b { font-weight: 600; }
                 .lw-csv td.r, .lw-csv th.r { text-align: right; font-variant-numeric: tabular-nums; }
-                .lw-csv .seat { font-weight: 700; }
-                .lw-csv .seat.open { color: #2fd39a; }
-                .lw-csv .seat.semi { color: #d9b23c; }
-                .lw-csv .seat.locked { color: #e0706f; }
-                .lw-csv .seat.none { opacity: .45; font-weight: 400; }
-                .lw-csv .up { color: #2fd39a; }
-                .lw-csv .empty { padding: 18px; opacity: .55; font-size: 13px; text-align: center; }
+                .lw-csv td.sub { color: var(--lw-text-secondary); }
+                .lw-csv .seat { font-weight: 600; }
+                .lw-csv .seat.open { color: var(--lw-positive); }
+                .lw-csv .seat.semi { color: var(--lw-accent-ink); }
+                .lw-csv .seat.locked { color: var(--lw-negative); }
+                .lw-csv .seat.none { color: var(--lw-text-muted); font-weight: 400; }
+                .lw-csv .dim { color: var(--lw-text-muted); font-size: 13px; }
+                .lw-csv .up { color: var(--lw-positive); }
+                .lw-csv .empty { padding: 20px; color: var(--lw-text-muted); font-size: 13px; text-align: center; }
             `}</style>
 
             <input
@@ -237,7 +244,7 @@ export default function TrendCsvPanel() {
                     <button type="button" className="lw-csv-btn" disabled={busy} onClick={() => fileRef.current?.click()}>
                         {busy ? '재는 중…' : 'CSV 고르기'}
                     </button>
-                    <div style={{ fontSize: 12, opacity: .55, maxWidth: '52ch', lineHeight: 1.6 }}>
+                    <div style={{ fontSize: 13, color: 'var(--lw-text-muted)', maxWidth: '52ch', lineHeight: 1.6 }}>
                         네이버가 주제별로 알려 준 <b>내 유입 검색어</b>입니다. 넣으면 검색량·문서수를 재고,
                         글이 적은 것부터 블로그 탭 자리를 {SEAT_CAP}개까지 잽니다.
                         더 많이 재려면 앱에서 하세요 — 앱은 내 PC 브라우저로 재기 때문에 상한이 없습니다.
@@ -247,14 +254,14 @@ export default function TrendCsvPanel() {
             ) : (
                 <>
                     <div className="lw-csv-tiles">
-                        <div className="lw-csv-tile"><em>들인 검색어</em><b>{rows.length}</b></div>
-                        <div className="lw-csv-tile"><em>검색량 잰 것</em><b>{measuredVolume}</b></div>
+                        <div className="lw-csv-tile"><em>들인 검색어</em><b><CountUp value={rows.length} /></b></div>
+                        <div className="lw-csv-tile"><em>검색량 잰 것</em><b><CountUp value={measuredVolume} /></b></div>
                         <div className="lw-csv-tile">
                             <em>자리 잰 것</em>
-                            <b>{measuredSeat}</b>
-                            {pending > 0 && <span style={{ fontSize: 11, opacity: .5 }}> · {pending}개 남음</span>}
+                            <b><CountUp value={measuredSeat} /></b>
+                            {pending > 0 && <span className="dim"> · {pending}개 남음</span>}
                         </div>
-                        <div className="lw-csv-tile good"><em>지금 빈자리</em><b>{openSeats}</b></div>
+                        <div className="lw-csv-tile good"><em>지금 빈자리</em><b><CountUp value={openSeats} /></b></div>
                     </div>
 
                     <div className="lw-csv-bar">
@@ -297,8 +304,8 @@ export default function TrendCsvPanel() {
                                         return (
                                             <tr key={`${row.category}-${row.keyword}`}>
                                                 <td><b>{row.keyword}</b></td>
-                                                <td style={{ opacity: .7 }}>{row.category}</td>
-                                                <td className="r" style={{ opacity: .7 }}>
+                                                <td className="sub">{row.category}</td>
+                                                <td className="r sub">
                                                     {row.rank || '—'}
                                                     {row.change !== null && row.change > 0 ? <span className="up"> ▲{row.change}</span> : null}
                                                 </td>
@@ -306,7 +313,7 @@ export default function TrendCsvPanel() {
                                                 <td className="r">{num(row.documentCount)}</td>
                                                 <td>
                                                     <span className={`seat ${SEAT_CLASS[seat]}`}>{seat}</span>
-                                                    {row.facing !== null && <span style={{ opacity: .5, fontSize: 11.5 }}> · 정면 {row.facing}</span>}
+                                                    {row.facing !== null && <span className="dim"> · 정면 {row.facing}</span>}
                                                 </td>
                                             </tr>
                                         );

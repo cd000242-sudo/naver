@@ -6,13 +6,14 @@ import { formatKst, formatMinutes, judgeFreshness } from '../../lib/boardFreshne
 import { moneyTitle, won, type MoneyBid } from './moneyBid';
 import { FREE_PICK_ROWS, pickCountText, pickFreshnessLabel, summarizePickTopic, visiblePickRows } from '../../lib/todayPicksModel';
 import { archiveDays } from '../../lib/todayPicksArchive.mjs';
+import Reveal from '../motion/Reveal';
 
 /**
  * 오늘의 네이버 추천키워드 — 사이드 메뉴에서 실검 틈새키워드와 키워드 분석 **사이의 서브탭**,
  * 그 안에서 **주제별 서브-서브 탭**(주제 칩을 눌러 한 주제씩 본다). 사장님 2026-09-08.
  *
  * 데이터는 leword-app CI(today-picks.yml, 하루 3회 06:30·13:30·19:30 KST)가 씨앗 창고에서 주제별 후보를 넓게 뽑아
- * 블로그 문서수를 오픈 API로 실측하고 주제별 30개를 목표로 정적 JSON으로 발행한다.
+ * 블로그 문서수를 오픈 API로 실측하고 주제별 100개를 목표로 정적 JSON으로 발행한다.
  * 황금비 충족·계절 씨앗·일반 후보를 구분하며, 최근 노출 이력이 있는 키워드는 재추천으로 표시한다.
  * 황금 안에서는 네이버 광고 3위 입찰가가 높은(돈 되는) 순이다 — 입찰가도 CI 가 잰 실측이다.
  * 여기서는 읽기만 한다. 수치는 전부 실측이고 황금비는 그 나눗셈이다. 자리(SERP)는 안 쟀다.
@@ -136,9 +137,9 @@ export default function TodayPicksBoard({ onAnalyze, topic, onTopics, onTopicCha
             `${kst(data.builtAt)} 판`,
             `전체 ${num(total)}개 중 황금 ${num(golden)}개`,
             data.novelty ? `새 추천 ${num(data.novelty.newCount)} · 재추천 ${num(data.novelty.repeatedCount)}` : '',
-            `주제별 ${data.keep ?? 30}개 목표`,
+            `주제별 ${data.keep ?? 100}개 목표`,
         ].filter(Boolean).join(' · ')
-        : `주제별 30개 목표 · 황금 비율을 앞에 두고 추천`;
+        : `주제별 100개 목표 · 황금 비율을 앞에 두고 추천`;
     const freshness = judgeFreshness(ROUNDS, data?.builtAt ?? null, nowMs ?? Date.now());
 
     useEffect(() => {
@@ -153,13 +154,13 @@ export default function TodayPicksBoard({ onAnalyze, topic, onTopics, onTopicCha
 
             {pastDays.length > 0 && (
                 <div className="lw-picks-topics" role="tablist" aria-label="날짜">
-                    <button type="button" role="tab" aria-selected={!day} className={`lw-picks-topic-btn${!day ? ' is-active' : ''}`} onClick={() => setDay(null)}>오늘</button>
+                    <button type="button" role="tab" aria-selected={!day} className={`lw-picks-topic-btn${!day ? ' is-active' : ''}`} style={{ minHeight: 44 }} onClick={() => setDay(null)}>오늘</button>
                     {pastDays.map((item) => (
-                        <button key={item.day} type="button" role="tab" aria-selected={day === item.day} className={`lw-picks-topic-btn${day === item.day ? ' is-active' : ''}`} onClick={() => setDay(item.day)}>{item.label}</button>
+                        <button key={item.day} type="button" role="tab" aria-selected={day === item.day} className={`lw-picks-topic-btn${day === item.day ? ' is-active' : ''}`} style={{ minHeight: 44 }} onClick={() => setDay(item.day)}>{item.label}</button>
                     ))}
                 </div>
             )}
-            {day && data && <p className="lw-note">{dayLabel} 판입니다 — 지난 날짜의 추천이라 지금 검색량 · 문서수와 다를 수 있습니다. 매일 판은 전날과 겹치지 않게 새 키워드로 바뀝니다.</p>}
+            {day && data && <p className="lw-note">{dayLabel} 판입니다 — 지난 날짜의 추천이라 지금 검색량 · 문서수와 다를 수 있습니다. 신규 황금을 우선하고, 부족하면 최근 추천을 재측정해 재추천으로 표시합니다.</p>}
 
             {!day && data && freshness.isLate && freshness.dueAt !== null && (
                 <p className="lw-note lw-note-limit" aria-label="회차 지연 안내">
@@ -168,7 +169,7 @@ export default function TodayPicksBoard({ onAnalyze, topic, onTopics, onTopicCha
             )}
 
             {error && <p className="lw-note lw-note-error">추천키워드를 못 읽었습니다 — {error}</p>}
-            {!error && !data && <p className="lw-note">불러오는 중…</p>}
+            {!error && !data && <><p className="lw-note">불러오는 중…</p><div className="lw-skel" aria-hidden="true"><i /><i /><i /></div></>}
 
             {/* 모바일 전용 주제 칩 — PC 에서는 사이드 메뉴 하위 항목이 같은 역할이라 CSS 로 숨긴다. */}
             {onTopicChange && topics.length > 0 && (
@@ -179,7 +180,7 @@ export default function TodayPicksBoard({ onAnalyze, topic, onTopics, onTopicCha
                             type="button"
                             role="tab"
                             aria-selected={active?.topic === item.topic}
-                            className={`lw-picks-topic-btn${active?.topic === item.topic ? ' is-active' : ''}`}
+                            className={`lw-picks-topic-btn${active?.topic === item.topic ? ' is-active' : ''}`} style={{ minHeight: 44 }}
                             onClick={() => onTopicChange(item.topic)}
                         >
                             {item.topic}<b>{item.rows.length}</b>
@@ -194,7 +195,7 @@ export default function TodayPicksBoard({ onAnalyze, topic, onTopics, onTopicCha
                         <strong>{active.topic}</strong>
                         <span>{activeSummary && `${pickCountText(activeSummary)}${activeSummary.shortfall > 0 ? ` · 목표보다 ${activeSummary.shortfall}개 적습니다` : ''}`}</span>
                     </div>
-                    <div className="lw-picks-scroll">
+                    <Reveal key={`${day ?? 'today'}|${active.topic}`} className="lw-picks-scroll">
                         <table className="lw-picks-table">
                             <thead>
                                 <tr>
@@ -228,7 +229,7 @@ export default function TodayPicksBoard({ onAnalyze, topic, onTopics, onTopicCha
                                                                 <a href={naverSearchUrl(r.keyword)} target="_blank" rel="noreferrer">{r.keyword}</a>
                                                                 {r.ultra && <span className="lw-picks-chip lw-picks-ultra">초황금</span>}
                                                                 <span className="lw-picks-related-num">월 {num(r.searchVolume)} · 문서 {num(r.documentCount)} · 황금비 {ratioText(r.ratio)}</span>
-                                                                {onAnalyze && <button type="button" className="lw-picks-btn" onClick={() => onAnalyze(r.keyword)}>분석</button>}
+                                                                {onAnalyze && <button type="button" className="lw-picks-btn" style={{ minHeight: 44 }} onClick={() => onAnalyze(r.keyword)}>분석</button>}
                                                             </li>
                                                         ))}
                                                     </ul>
@@ -246,7 +247,7 @@ export default function TodayPicksBoard({ onAnalyze, topic, onTopics, onTopicCha
                                         <td className="lw-picks-src">{row.source ? (SOURCE_LABEL[row.source] ?? row.source) : '—'}</td>
                                         {onAnalyze && (
                                             <td>
-                                                <button type="button" className="lw-picks-btn" onClick={() => onAnalyze(row.keyword)}>
+                                                <button type="button" className="lw-picks-btn" style={{ minHeight: 44 }} onClick={() => onAnalyze(row.keyword)}>
                                                     분석
                                                 </button>
                                             </td>
@@ -258,7 +259,7 @@ export default function TodayPicksBoard({ onAnalyze, topic, onTopics, onTopicCha
                         {!unlocked && active.rows.length > FREE_PICK_ROWS && (
                             <p className="lw-picks-more">{active.rows.length - FREE_PICK_ROWS}건 더 — 로그인하면 보입니다</p>
                         )}
-                    </div>
+                    </Reveal>
                 </div>
             )}
 

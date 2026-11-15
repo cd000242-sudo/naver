@@ -38,10 +38,10 @@ export function DemandStep({ demand, fallback }: { demand?: AdsenseDemand; fallb
 export default function BenchmarkPlaybook({ steps }: { steps: PlaybookStep[] }) {
     if (!steps.length) return null;
     return (
-        <section aria-label="이 카드로 성과 내는 순서" style={{ marginTop: 14, padding: '12px 14px', border: '1px solid rgba(250,204,21,.35)', borderRadius: 12, background: 'rgba(66,52,10,.22)' }}>
-            <h4 style={{ margin: '0 0 8px', fontSize: 12.5, color: '#fde68a', fontWeight: 800 }}>이 카드로 성과 내는 순서</h4>
-            <ol style={{ margin: 0, paddingLeft: 20, display: 'grid', gap: 7, fontSize: 13, color: '#e2e8f0', lineHeight: 1.6 }}>
-                {steps.map((s) => <li key={s.label}><b style={{ color: '#fcd34d' }}>{s.label}</b> — {s.body}</li>)}
+        <section aria-label="이 카드로 성과 내는 순서" style={{ marginTop: 16, padding: '12px 16px', border: '1px solid var(--lw-line)', borderRadius: 14, background: 'var(--lw-raised)' }}>
+            <h4 style={{ margin: '0 0 8px', fontSize: 15, color: 'var(--lw-text)', fontWeight: 600 }}>이 카드로 성과 내는 순서</h4>
+            <ol style={{ margin: 0, paddingLeft: 20, display: 'grid', gap: 8, fontSize: 15, color: 'var(--lw-text-secondary)', lineHeight: 1.6 }}>
+                {steps.map((s) => <li key={s.label}><b style={{ color: 'var(--lw-text)', fontWeight: 600 }}>{s.label}</b> — {s.body}</li>)}
             </ol>
         </section>
     );
@@ -54,7 +54,7 @@ export function BenchmarkHowTo({ kind }: { kind: 'homefeed' | 'adsense' }) {
             ['고르기', '그래프 판정이 "새로 뜬 · 오르는 중"이거나 실제 홈판 노출 증거가 있는 카드를 먼저 고릅니다. 피크가 지난 소재는 넘깁니다.'],
             ['쓰기', '"이렇게 쓰세요"의 방향과 "반드시 들어갈 내용"을 그대로 소제목으로 씁니다. 원문 사실만, 사진은 직접 찍거나 재사용이 허락된 것만.'],
             ['제목', '후킹형 제목 중 내 글 내용과 맞는 하나를 고릅니다. 따옴표 인용은 원문에 실제로 있는 말인지 확인합니다.'],
-            ['발행 후', '카드의 [노출 추적에 등록]으로 키워드를 등록하고 24시간 안에 홈판 · 검색 노출을 확인합니다. 안 뜨면 같은 소재를 붙잡지 말고 다음 카드로 넘어갑니다.'],
+            ['발행 후', '홈판 노출은 내 블로그 통계 > 유입경로의 「네이버 메인_모바일_홈판」에서 확인합니다([노출 추적에 등록]은 검색 순위만 잽니다). 한두 편 안 떠도 같은 인물 · 사건을 이어서 써 보세요.'],
             ['다음 판단', '노출된 글의 소재 · 제목 모양을 기억해 두고, 같은 분야 카드를 우선 고릅니다 — 내 블로그 탭의 홈판 유입 기록이 쌓일수록 카드에 "내 블로그 홈판 유입" 배지가 붙습니다.'],
         ]
         : [
@@ -65,10 +65,10 @@ export function BenchmarkHowTo({ kind }: { kind: 'homefeed' | 'adsense' }) {
             ['발행 후', '[노출 추적에 등록]으로 순위를 지켜보고, 일주일 안에 안 오르면 제목의 행동 키워드를 자동완성 표현으로 바꿔 봅니다.'],
         ];
     return (
-        <details style={{ margin: '10px 0 14px', padding: '10px 14px', border: '1px solid rgba(250,204,21,.3)', borderRadius: 12, background: 'rgba(66,52,10,.18)' }}>
-            <summary style={{ cursor: 'pointer', color: '#fde68a', fontWeight: 700, fontSize: 13.5 }}>벤치마크를 성과로 바꾸는 순서 보기</summary>
-            <ol style={{ margin: '10px 0 0', paddingLeft: 20, display: 'grid', gap: 6, fontSize: 13, color: '#dbe4ef', lineHeight: 1.65 }}>
-                {steps.map(([label, text]) => <li key={label}><b style={{ color: '#fcd34d' }}>{label}</b> — {text}</li>)}
+        <details style={{ margin: '12px 0 16px', padding: '0 16px', border: '1px solid var(--lw-line)', borderRadius: 14, background: 'var(--lw-surface)' }}>
+            <summary style={{ cursor: 'pointer', padding: '12px 0', color: 'var(--lw-text)', fontWeight: 600, fontSize: 15 }}>벤치마크를 성과로 바꾸는 순서 보기</summary>
+            <ol style={{ margin: '0 0 12px', paddingLeft: 20, display: 'grid', gap: 8, fontSize: 15, color: 'var(--lw-text-secondary)', lineHeight: 1.65 }}>
+                {steps.map(([label, text]) => <li key={label}><b style={{ color: 'var(--lw-text)', fontWeight: 600 }}>{label}</b> — {text}</li>)}
             </ol>
         </details>
     );

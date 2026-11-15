@@ -1,10 +1,14 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import SplitWords from '../components/motion/SplitWords';
 import { useParams } from 'react-router-dom';
+import { ShellIcon } from '../components/ShellIcons';
+import { light, lightRadius, motion, type } from '../styles/tokens';
 
 type SeedRow = { keyword: string; searchVolume: number; documentCount: number; opportunity: number };
 
 const numberFormatter = new Intl.NumberFormat('ko-KR');
-const decimalFormatter = new Intl.NumberFormat('ko-KR', { maximumFractionDigits: 2 });
+// One notation for the opportunity index: always one decimal, so the column lines up.
+const decimalFormatter = new Intl.NumberFormat('ko-KR', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 
 /**
  * 날짜 아카이브 페이지 — 그날 브리핑 전체의 고정 기록.
@@ -46,23 +50,54 @@ function BriefingArchivePage() {
     return (
         <section className="briefing-archive" aria-labelledby="briefing-archive-title">
             <style>{`
-                .briefing-archive { padding: 104px 16px 56px; max-width: 1100px; margin: 0 auto; }
-                .briefing-archive-panel { padding: 22px; border-radius: 16px;
-                    border: 1px solid rgba(255,255,255,.12); background: rgba(8,12,20,.62); backdrop-filter: blur(6px); }
-                .briefing-archive h1 { font-size: 25px; margin: 0 0 8px; }
-                .briefing-archive p { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,.82); margin: 0 0 14px; }
-                .briefing-archive-table { width: 100%; border-collapse: collapse; }
-                .briefing-archive-table th, .briefing-archive-table td { padding: 9px 10px; font-size: 13px;
-                    border-bottom: 1px solid rgba(255,255,255,.08); text-align: left; }
-                .briefing-archive-table td { text-align: right; }
-                .briefing-archive-table th[scope="row"] { text-align: left; font-weight: 700; }
-                .briefing-archive-back { display: inline-block; margin-top: 20px; padding: 8px 14px; border-radius: 999px;
-                    font-size: 13px; font-weight: 700; text-decoration: none; border: 1px solid rgba(255,255,255,.18); }
-                @media (max-width: 720px) { .briefing-archive { padding: 92px 10px 44px; } }
+                /* Top padding clears the fixed nav bar (72px). */
+                .briefing-archive { padding: 120px 16px 64px; max-width: 1100px; margin: 0 auto; }
+                .briefing-archive-panel {
+                    padding: 32px; border-radius: ${lightRadius.panel}px;
+                    border: 1px solid ${light.line}; background: ${light.surface}; box-shadow: ${light.shadowSm};
+                }
+                .briefing-archive h1 {
+                    margin: 0 0 12px; color: ${light.text};
+                    font-size: ${type.h2}px; font-weight: 700; line-height: 1.3;
+                }
+                .briefing-archive p {
+                    margin: 0 0 24px; max-width: 720px; color: ${light.textSecondary};
+                    font-size: ${type.body}px; line-height: 1.7;
+                }
+                .briefing-archive-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+                .briefing-archive-table th, .briefing-archive-table td {
+                    padding: 12px; border-bottom: 1px solid ${light.line};
+                    color: ${light.text}; font-size: ${type.small}px; line-height: 1.45;
+                }
+                .briefing-archive-table thead th {
+                    color: ${light.textMuted}; font-size: ${type.meta}px; font-weight: 500;
+                    text-align: right; white-space: nowrap; border-bottom-color: ${light.lineStrong};
+                }
+                .briefing-archive-table thead th:first-child { text-align: left; }
+                .briefing-archive-table td { text-align: right; white-space: nowrap; }
+                .briefing-archive-table th[scope="row"] { text-align: left; font-weight: 500; }
+                .briefing-archive-table tbody tr:last-child th, .briefing-archive-table tbody tr:last-child td { border-bottom: 0; }
+                .briefing-archive-back {
+                    display: inline-flex; align-items: center; gap: 4px; margin-top: 24px;
+                    min-height: 44px; padding: 0 16px;
+                    border: 1px solid ${light.line}; border-radius: ${lightRadius.control}px;
+                    background: ${light.surface}; color: ${light.text};
+                    font-size: ${type.small}px; font-weight: 500; text-decoration: none;
+                    transition: background-color ${motion.fast} ${motion.ease}, border-color ${motion.fast} ${motion.ease};
+                }
+                .briefing-archive-back:hover { background: ${light.raised}; border-color: ${light.lineStrong}; }
+                .briefing-archive-back:focus-visible { outline: 2px solid ${light.text}; outline-offset: 2px; }
+                @media (max-width: 720px) {
+                    .briefing-archive { padding: 96px 16px 48px; }
+                    .briefing-archive-panel { padding: 20px 16px; }
+                    .briefing-archive-table th, .briefing-archive-table td { padding: 12px 4px; }
+                    .briefing-archive-table th[scope="row"], .briefing-archive-table thead th:first-child { padding-left: 0; }
+                    .briefing-archive-table td:last-child, .briefing-archive-table thead th:last-child { padding-right: 0; }
+                }
             `}</style>
 
             <div className="briefing-archive-panel">
-                <h1 id="briefing-archive-title">{date} 무료 선정 황금키워드</h1>
+                <h1 id="briefing-archive-title"><SplitWords text={`${date} 무료 선정 황금키워드`} /></h1>
                 {matchesDate ? (
                     <>
                         <p>{date} 기준으로 검토해 올린 무료 선정 황금키워드 {rows.length}개입니다. 이 페이지는 그날의 기록이라 이후에도 값이 바뀌지 않습니다. 기회지수는 검색량 ÷ (문서수 + 1) 로 계산합니다.</p>
@@ -85,7 +120,10 @@ function BriefingArchivePage() {
                 ) : (
                     <p>{loading ? '기록을 불러오는 중입니다.' : '이 날짜의 기록은 저장된 페이지에서 볼 수 있습니다. 오늘자 목록은 아래에서 확인하세요.'}</p>
                 )}
-                <a className="briefing-archive-back" href="/briefing">오늘의 무료 선정 황금키워드 →</a>
+                <a className="briefing-archive-back" href="/briefing">
+                    오늘의 무료 선정 황금키워드
+                    <ShellIcon name="chevronRight" size={16} />
+                </a>
             </div>
         </section>
     );

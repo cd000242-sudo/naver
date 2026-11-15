@@ -83,5 +83,53 @@ export const radius = {
     circle: '50%',
 } as const;
 
+/**
+ * Light theme (2026-11 site-wide switch). Values come from the agreed community mockup
+ * (light-page.css .lp tokens) so the whole site reads as one product.
+ * Rules: one neutral ramp, three text roles, one accent. Gold as a fill carries dark text;
+ * gold as text on a light surface uses accentInk (4.5:1 or better).
+ */
+export const light = {
+    page: '#f5f6f2',
+    surface: '#ffffff',
+    raised: '#f6f7f3',
+    line: '#e2e5df',
+    lineStrong: '#cfd4cc',
+    text: '#1c2024',
+    textSecondary: '#545b63',
+    textMuted: '#6a7179',
+    accent: '#f5b40a',
+    onAccent: '#1d1605',
+    accentInk: '#8a6a12',
+    accentSoft: '#fbf1d6',
+    accentLine: '#ead9a6',
+    positive: '#0f7d65',
+    positiveSoft: '#e3f4ef',
+    negative: '#c2412d',
+    negativeSoft: '#fbe9e5',
+    btn: '#1c2024',
+    onBtn: '#ffffff',
+    shadowSm: '0 1px 2px rgba(20, 24, 28, 0.05)',
+    shadowFloat: '0 1px 2px rgba(20, 24, 28, 0.05), 0 8px 24px rgba(20, 24, 28, 0.06)',
+} as const;
+
+/** Type scale (px). Body is 17 for senior readers; nothing in the interface goes below 13. */
+export const type = {
+    meta: 13,
+    small: 15,
+    body: 17,
+    lead: 20,
+    h3: 22,
+    h2: 30,
+    h1: 44,
+    h1Mobile: 32,
+} as const;
+
+/** Light-theme radius steps: controls, cards, panels. Pills only for chips and tags. */
+export const lightRadius = { control: 10, card: 14, panel: 18, pill: 999 } as const;
+
+/** One easing curve and two durations for the whole site. */
+export const motion = { ease: 'cubic-bezier(0.22, 1, 0.36, 1)', fast: '160ms', enter: '360ms' } as const;
+
 export type Radius = typeof radius;
 export type Color = typeof color;

@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import SplitWords from '../components/motion/SplitWords';
 import { Link } from 'react-router-dom';
 import ProductPageStyles from '../components/products/ProductPageStyles';
 import OrbitExtras from '../components/products/OrbitExtras';
@@ -116,7 +117,7 @@ function OrbitPage() {
                 <div className="pp-wrap">
                     <div className="pp-hero-grid">
                         <div>
-                            <h1>블로그마다<br />따로 하던 일,<br /><em>Orbit 한 번에</em></h1>
+                            <h1><SplitWords text="블로그마다" /><br /><SplitWords text="따로 하던 일," offset={1} /><br /><em><SplitWords text="Orbit 한 번에" offset={4} /></em></h1>
                             <p className="pp-hero-sub">워드프레스 · 티스토리 · 블로그스팟 발행부터 지난 글 정리, 외부 유입용 글까지 한 프로그램에서 합니다</p>
                             <HeroActions primary={{ to: '/download', label: '30일 무료 체험' }} secondary={{ to: '/pricing', label: `월 ${won(monthly)}원으로 시작` }} />
                         </div>

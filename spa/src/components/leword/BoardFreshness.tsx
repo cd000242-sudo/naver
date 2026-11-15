@@ -40,7 +40,7 @@ export function BoardFreshness({ cadence, rounds, days, lastBuiltAt, nowMs }: Bo
     const f = judgeFreshness(rounds, lastBuiltAt, now, days);
 
     return (
-        <div className={`lw-note lw-note-plain${f.isLate ? ' lw-note-limit' : ''}`} style={{ marginBottom: 14 }}>
+        <div className={`lw-note lw-note-plain${f.isLate ? ' lw-note-limit' : ''}`} style={{ marginBottom: 16 }}>
             <strong>언제 새로 올라오나요</strong>
             <p>
                 {cadence} 만듭니다
@@ -52,7 +52,7 @@ export function BoardFreshness({ cadence, rounds, days, lastBuiltAt, nowMs }: Bo
                     : ' 마지막 갱신 시각을 읽지 못했습니다.'}
             </p>
             {f.isLate && (
-                <p style={{ margin: '7px 0 0', color: 'rgba(245,197,24,.9)', fontSize: 13, lineHeight: 1.7 }}>
+                <p style={{ margin: '8px 0 0', color: 'var(--lw-accent-ink)', fontSize: 13, lineHeight: 1.7 }}>
                     예정보다 {formatMinutes(f.lateMinutes)} 늦고 있습니다.
                     {/*
                       * 많이 늦었는데 "보통 1~2시간 늦습니다" 라고 하면 숫자와 설명이 서로를 부정한다.

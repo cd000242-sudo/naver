@@ -10,12 +10,18 @@ import { loadAdvisorDaily } from '../../../lib/homefeedEvidenceLoad';
 import type { AdvisorDailyView } from '../../../lib/myBlogSync';
 import HomefeedBenchmarkCard from './HomefeedBenchmarkCard';
 import HomefeedBenchmarkStyles from './HomefeedBenchmarkStyles';
+import CountUp from '../../motion/CountUp';
+import Reveal from '../../motion/Reveal';
 import HomefeedTrendsPanel from './HomefeedTrendsPanel';
 import UpcomingTopicsPanel from './UpcomingTopicsPanel';
 import HomefeedSpeedPanel from './HomefeedSpeedPanel';
 // 그래프 · 활용 순서(2026-10-22) — 검색어 덧붙이기(/data/keyword-enrich.json)를 카드에 넘기고, 판 맨 위에 성과로 바꾸는 순서
 import { enrichKey, loadKeywordEnrich, type KeywordEnrich } from '../../../lib/keywordEnrich.mjs';
 import { BenchmarkHowTo } from '../shared/BenchmarkPlaybook';
+// Beginner order · today's 3 · written marks (2026-11-15) — rules are in beginnerRank.ts / writtenTopics.ts
+import { sortForBeginner, useBoardSort } from './beginnerRank';
+import { findFollowUp, isWrittenCard, pickToday, useWrittenTopics } from './writtenTopics';
+import HomefeedTodayPicks from './HomefeedTodayPicks';
 
 const FILTERS = [['all','전체'],['recommended','★ 우선 검토'],['review-now','지금 검토'],['verify','추가 확인'],['stale','시점 재검토']];
 const SOURCE_STATUS = {ok:'수집 확인',failed:'수집 실패',unavailable:'확인 못함'};
@@ -31,6 +37,7 @@ export default function HomefeedBenchmarkBoard() {
  const [query,setQuery] = useState('');
  const [now,setNow] = useState(Date.now());
  const [limit,setLimit] = useState(12);
+ const [sort,setSort]=useBoardSort();
  const [enrich,setEnrich] = useState<Map<string,KeywordEnrich>>(()=>new Map());
  useEffect(()=>{let alive=true;void loadKeywordEnrich().then(map=>{if(alive)setEnrich(map);});return()=>{alive=false;};},[]);
  const request = useRef<AbortController|null>(null);
@@ -93,7 +100,7 @@ export default function HomefeedBenchmarkBoard() {
   const timer=window.setInterval(()=>{setNow(Date.now());ticks+=1;if(ticks%5===0 && document.visibilityState==='visible') void load();},60_000);
   return ()=>{window.clearInterval(timer); const active=request.current;request.current=null;active?.abort();};
  },[load]);
- useEffect(()=>setLimit(12),[category,status,query]);
+ useEffect(()=>setLimit(12),[category,status,query,sort]);
  const view=useMemo(()=>data ? benchmarkView(data,now) : null,[data,now]);
  const [seed,reshuffle]=useShuffleSeed();
  const categories=useMemo(()=>['전체',...new Set(view?.candidates.map(c=>c.category)??[])],[view]);
@@ -106,20 +113,42 @@ export default function HomefeedBenchmarkBoard() {
   const rank=(c:typeof cards[number])=>c.evidence.homefeed?.kind==='same-post'?0:c.evidence.homefeed?1:c.evidence.mine?2:3;
   return shuffleWithinTiers(cards,(c)=>rank(c)*4+(c.recommended?0:2)+(c.status==='stale'?1:0),seed);
  },[view,advisor,seed]);
+ const written=useWrittenTopics();
+ const beginnerOrder=useMemo(()=>sortForBeginner(annotated),[annotated]);
+ const ordered=sort==='beginner'?beginnerOrder:annotated;
+ const picks=useMemo(()=>pickToday(beginnerOrder,written.list),[beginnerOrder,written.list]);
+ const followUp=useMemo(()=>view?findFollowUp(written.list,beginnerOrder,now):null,[view,written.list,beginnerOrder,now]);
+ const [pendingId,setPendingId]=useState<string|null>(null);
  const proofSummary=useMemo(()=>evidenceSummary(advisor?.daily??null),[advisor]);
  const proofText=useMemo(()=>describeEvidence(proofSummary,{homefeed:annotated.filter(c=>c.evidence.homefeed).length,mine:annotated.filter(c=>c.evidence.mine).length},advisor?.from),[proofSummary,annotated,advisor]);
  const items=useMemo(()=>{
-  if(status==='homefeed'||status==='mine') return filterBenchmarks(annotated.filter(c=>status==='homefeed'?c.evidence.homefeed:c.evidence.mine),{category,status:'all',query}) as typeof annotated;
-  return filterBenchmarks(annotated,{category,status,query}) as typeof annotated;
- },[annotated,category,status,query]);
+  if(status==='homefeed'||status==='mine') return filterBenchmarks(ordered.filter(c=>status==='homefeed'?c.evidence.homefeed:c.evidence.mine),{category,status:'all',query}) as typeof annotated;
+  return filterBenchmarks(ordered,{category,status,query}) as typeof annotated;
+ },[ordered,category,status,query]);
+ /* [안내 보기] — clear filters, show the card (raise the list limit if needed), then scroll to its "이렇게 쓰세요" block. */
+ const showCard=useCallback((id:string)=>{setCategory('전체');setStatus('all');setQuery('');setSort('beginner');setPendingId(id);},[setSort]);
+ useEffect(()=>{
+  if(!pendingId) return;
+  const index=items.findIndex(c=>c.id===pendingId);
+  if(index<0){setPendingId(null);return;}
+  if(index>=limit){setLimit(Math.ceil((index+1)/12)*12);return;}
+  const card=document.getElementById(`hfb-card-${pendingId}`);
+  if(!card) return;
+  const reduce=window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  (card.querySelector('.hfb-direction')??card).scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
+  card.focus({preventScroll:true});
+  setPendingId(null);
+ },[pendingId,items,limit]);
  const healthy=view?.sources.filter(s=>s.status==='ok').length??0;
  return <section className="hf-benchmark" aria-label="리더남 홈판 추천 소재 · 제목">
   <HomefeedBenchmarkStyles />
   <header className="hfb-header">
-   <div><span className="hfb-eyebrow">BENCHMARK RADAR · 리더남의 채널 리스트</span><h2>리더남 홈판 추천 <span>소재 · 제목</span></h2><p>벤치마크 채널에서 최근 48시간 안에 나온 소재를 전부 모았습니다. 여러 채널이 함께 다룬 소재가 먼저 나옵니다.</p></div>
-   <div className="hfb-count"><strong>{view?.candidates.length ?? '—'}</strong><span>검토할 소재</span></div>
+   <div><span className="hfb-eyebrow">BENCHMARK RADAR · 리더남의 채널 리스트</span><h2>리더남 홈판 추천 <span>소재 · 제목</span></h2><p>벤치마크 채널에서 최근 48시간 안에 나온 소재를 전부 모았습니다. {sort==='beginner'?'초보용 순서: 경쟁이 적고 작성 안내가 있는 소재가 먼저 나옵니다.':'여러 채널이 함께 다룬 소재가 먼저 나옵니다.'}</p></div>
+   <div className="hfb-count"><strong>{view ? <CountUp value={view.candidates.length} format={String} /> : '—'}</strong><span>검토할 소재</span></div>
   </header>
   <div className="hfb-meta"><span>{view ? (livePending ? `정기 수집 ${benchmarkTime(view.generatedAt)} KST 판을 먼저 보여 드립니다 · 실시간 수집 중…` : liveAt && !liveFailed ? `실시간 수집 ${benchmarkTime(liveAt)} KST · 5분마다 다시 긁습니다` : `정기 수집 ${benchmarkTime(view.generatedAt)} KST · 실시간 수집에 실패해 마지막 정기 판을 보여 드립니다`) : '벤치마크 자료 연결 중'}</span><button type="button" onClick={()=>{void load(); loadAdvisor();}} disabled={loading || livePending}>{loading || livePending?'새로 긁는 중…':'지금 새로 긁기'}</button></div>
+  {/* 오늘 쓸 3개(2026-11-15) — 초보용 순서 상위 3장 · 어제 쓴 소재 이어 쓰기 · 갱신 시각. 판이 없으면 그리지 않는다 */}
+  {view && <HomefeedTodayPicks picks={picks} followUp={followUp} generatedAt={view.generatedAt} now={now} onShow={showCard} />}
   {/* 미리 써 둘 소재(2026-10-11) — 경기 · 방송 일정의 '처음' 주목 인물. 판이 없으면 칸을 그리지 않는다 */}
   <UpcomingTopicsPanel />
   {/* 속도 실측(2026-11-02) — 앱 공개본의 newsBuckets · lead · 성적표. 새 필드가 없으면 칸을 그리지 않는다 */}
@@ -127,6 +156,7 @@ export default function HomefeedBenchmarkBoard() {
   <BenchmarkHowTo kind="homefeed" />
   {error && <div className="hfb-alert" role="alert">{error}{view && ' 마지막으로 읽은 자료를 보여드립니다.'}</div>}
   {view?.stale && <div className="hfb-alert" role="status">최근 36시간 안에 확인된 자료가 아닙니다. 우선 추천 별을 내리고 시점 재검토로 표시했습니다.</div>}
+  {!view && loading && <div className="lw-skel" aria-hidden="true"><i /><i /><i /></div>}
   {!view && !loading && !error && <p className="hfb-empty">아직 공개된 벤치마크 자료가 없습니다.</p>}
   {view && <>
    <details className="hfb-coverage"><summary>출처 {healthy}/{view.sourceCount}곳 확인 · 게시물 {view.collectedPostCount.toLocaleString('ko-KR')}개 수집 <span>{healthy<view.sourceCount ? `· ${view.sourceCount-healthy}곳 확인 필요` : ''}</span><small>수집 상태 보기</small></summary>
@@ -137,12 +167,13 @@ export default function HomefeedBenchmarkBoard() {
    {/* 오늘의 홈판 흐름(2026-10-06) — 수집기가 판에 실은 trends. 옛 판엔 없어서 그때는 안 그린다. */}
    {view.trends && <HomefeedTrendsPanel trends={view.trends} realTitles={advisor?.daily?.homefeedTitles ?? []} onPickCategory={(name)=>{ setCategory(name); setStatus('all'); setQuery(''); }} />}
    <div className="hfb-filters">
+    <div className="hfb-filter-row hfb-sort" role="group" aria-label="보는 순서"><span>보는 순서</span>{([['beginner','초보용'],['popular','전체 인기']] as const).map(([id,label])=><button type="button" key={id} aria-pressed={sort===id} onClick={()=>setSort(id)}>{label}</button>)}</div>
     <div className="hfb-filter-row" role="group" aria-label="검토 상태">{FILTERS.map(([id,label])=><button type="button" key={id} aria-pressed={status===id} onClick={()=>setStatus(id)}>{label} <span>{id==='all'?view.candidates.length:id==='recommended'?view.candidates.filter(c=>c.recommended).length:view.candidates.filter(c=>c.status===id).length}</span></button>)}{proofSummary&&PROOF_FILTERS.map(([id,label])=><button type="button" key={id} className="proof" aria-pressed={status===id} onClick={()=>setStatus(id)}>{label} <span>{annotated.filter(c=>id==='homefeed'?c.evidence.homefeed:c.evidence.mine).length}</span></button>)}</div>
     <div className="hfb-filter-bottom"><div className="hfb-categories" role="group" aria-label="분야">{categories.map(c=><button type="button" key={c} aria-pressed={category===c} onClick={()=>setCategory(c)}>{c}</button>)}</div><input type="search" aria-label="벤치마크 소재 검색" placeholder="키워드·이야기 검색" value={query} onChange={e=>setQuery(e.target.value)}/></div>
    </div>
-   <div className="hfb-shuffle"><button type="button" onClick={()=>{reshuffle();setLimit(12);}}>순서 섞기</button><small>매시 정각 새 순서로 섞입니다 · 실제 홈판 증거 · ★ 소재가 먼저</small></div>
+   <div className="hfb-shuffle"><button type="button" onClick={()=>{reshuffle();setLimit(12);}}>순서 섞기</button><small>{sort==='beginner'?'매시 정각 새 순서로 섞입니다 · 함께 쓴 채널이 적고 작성 안내가 있는 소재가 먼저':'매시 정각 새 순서로 섞입니다 · 실제 홈판 증거 · ★ 소재가 먼저'}</small></div>
    <p className="hfb-legend">★는 최근 이틀 안에 벤치마크 채널 두 곳 이상이 함께 다룬 소재입니다. 홈판 노출 확인과는 별개이며, 제목은 작성용 제안입니다. 방금 새로 잡힌 소재는 다음 정기 수집(매시) 때 홈판 제목이 붙습니다.</p>
-   <div className="hfb-list">{items.slice(0,limit).map(c=><HomefeedBenchmarkCard key={c.id} candidate={c} evidence={c.evidence} enrich={c.searchTargets[0]?enrich.get(enrichKey(c.searchTargets[0])):undefined}/>)}</div>
+   <Reveal stagger key={`${category}|${status}|${seed}`} className="hfb-list">{items.slice(0,limit).map(c=><HomefeedBenchmarkCard key={c.id} candidate={c} evidence={c.evidence} enrich={c.searchTargets[0]?enrich.get(enrichKey(c.searchTargets[0])):undefined} written={isWrittenCard(written.list,c)} onToggleWritten={()=>written.toggle(c)}/>)}</Reveal>
    {items.length===0 && <div className="hfb-empty"><strong>이 조건에 맞는 소재가 없습니다.</strong><button type="button" onClick={()=>{setCategory('전체');setStatus('all');setQuery('');}}>전체 소재 보기</button></div>}
    {items.length>limit&&<button type="button" className="hfb-more" onClick={()=>setLimit(n=>n+12)}>소재 더 보기 · {Math.min(limit,items.length)}/{items.length}</button>}
   </>}

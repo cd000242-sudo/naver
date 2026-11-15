@@ -873,7 +873,7 @@ export async function fetchCommunityIncomeProofs(
     }
 }
 
-async function fetchKeywordBriefingSeed(): Promise<HomeKeywordBriefing | null> {
+export async function fetchKeywordBriefingSeed(): Promise<HomeKeywordBriefing | null> {
     const controller = new AbortController();
     const timeout = window.setTimeout(() => controller.abort(), SITE_CONTENT_FETCH_TIMEOUT_MS);
     try {

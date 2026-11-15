@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useRef, useState, type ChangeEvent, type CSSProperties } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ChangeEvent, type CSSProperties } from 'react';
+import SplitWords from '../components/motion/SplitWords';
 import { mergeAdsenseProofs } from '../lib/adsenseProofs';
 import { isValidEmail, isValidPhone, maskContactText, maskEmail, maskPhone } from '../lib/privacy';
 import {
@@ -6,6 +7,7 @@ import {
     managedHomeProofsToIncomeProofs,
     type CommunityIncomeProof,
 } from '../lib/siteOps';
+import { light, lightRadius, type as typeScale } from '../styles/tokens';
 
 /**
  * 후기 페이지
@@ -64,6 +66,24 @@ function fmtDate(value?: string): string {
 
 /** 자세히 쓴 글을 가르는 기준. 이 아래는 짧은 한마디로 본다. */
 const LONG_REVIEW_CHARS = 300;
+
+/** Short reviews shown before [후기 더 보기]. The rest stay in the DOM, hidden. */
+const SHORTS_FIRST = 12;
+/** Lines of a short review shown before [더 보기]. */
+const CLAMP_LINES = 6;
+
+/** Second-rank button: white face, quiet line. */
+const quietButton: CSSProperties = {
+    display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+    minHeight: 48, padding: '12px 24px',
+    borderRadius: lightRadius.control, border: `1px solid ${light.lineStrong}`,
+    background: light.surface, color: light.text,
+    fontSize: typeScale.body, fontWeight: 500, cursor: 'pointer',
+};
+
+const fieldLabel: CSSProperties = {
+    display: 'block', fontSize: typeScale.small, fontWeight: 600, color: light.text, marginBottom: 8,
+};
 
 function pickAvatarGradient(name: string) {
     let h = 0;
@@ -145,6 +165,7 @@ function ReviewsPage() {
         [testimonials, featured],
     );
     const [loading, setLoading] = useState(true);
+    const [showAllShorts, setShowAllShorts] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
     const [author, setAuthor] = useState('');
     const [email, setEmail] = useState('');
@@ -236,13 +257,13 @@ function ReviewsPage() {
 
     const inputBase: CSSProperties = {
         width: '100%',
-        padding: '13px 14px',
-        background: '#0d121b',
-        border: '1px solid rgba(255,255,255,0.12)',
-        borderRadius: 8,
-        color: '#fff',
-        fontSize: 14,
-        outline: 'none',
+        minHeight: 48,
+        padding: '12px 16px',
+        background: light.surface,
+        border: `1px solid ${light.lineStrong}`,
+        borderRadius: lightRadius.control,
+        color: light.text,
+        fontSize: typeScale.body,
     };
 
     const closeModal = () => {
@@ -342,34 +363,26 @@ function ReviewsPage() {
 
     return (
         <div style={{ position: 'relative', zIndex: 1 }}>
-            {/*
-              * 후기는 자기 바닥을 직접 칠한다.
-              *
-              * 이 사이트 배경은 계절 테마 사진(밝은 하늘)이라, 어두운 글씨와 옅은
-              * 카드가 그대로 얹히면 읽히지 않는다(사장님 실측 2026-08-21).
-              * 상점(ProductStore)이 같은 이유로 자기 판을 칠하고 있다 — 같은 방식을 쓴다.
-              */}
-            <section className="reviews-page-shell" style={{ padding: '120px 20px 90px', maxWidth: 1200, margin: '0 auto' }}>
-              <div className="reviews-ink">
-                <div className="reviews-page-head" style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 20, marginBottom: 42, flexWrap: 'wrap' }}>
+            <section className="reviews-page-shell" style={{ padding: '120px 24px 96px', maxWidth: 1200, margin: '0 auto' }}>
+                <div className="reviews-page-head" style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 24, marginBottom: 64, flexWrap: 'wrap' }}>
                     <div>
-                        <span style={{ display: 'inline-flex', minHeight: 30, alignItems: 'center', padding: '6px 14px', background: 'rgba(68,215,182,0.10)', border: '1px solid rgba(68,215,182,0.28)', borderRadius: 8, color: '#44d7b6', fontSize: 12, fontWeight: 900, letterSpacing: 0, marginBottom: 16 }}>REVIEWS</span>
-                        <h1 style={{ fontSize: 'clamp(30px, 4vw, 46px)', fontWeight: 900, marginBottom: 12, letterSpacing: 0 }}>실제 사용자 후기</h1>
-                        <p style={{ color: 'rgba(255,255,255,0.66)', fontSize: 16, lineHeight: 1.7, margin: 0 }}>수익인증 이미지/동영상과 후기 글이 함께 등록된 실제 후기만 보여드립니다.</p>
+                        <h1 style={{ fontSize: typeScale.h1, lineHeight: 1.2, fontWeight: 700, margin: '0 0 12px', letterSpacing: 0, color: light.text }}><SplitWords text="실제 사용자 후기" /></h1>
+                        <p style={{ color: light.textSecondary, fontSize: typeScale.body, lineHeight: 1.7, margin: 0 }}>수익인증 이미지/동영상과 후기 글이 함께 등록된 실제 후기만 보여드립니다.</p>
                     </div>
                     <button
                         type="button"
+                        className="lp-lift lp-sheen"
                         onClick={() => { setModalOpen(true); setMsg(null); }}
                         style={{
-                            minHeight: 46,
-                            padding: '12px 20px',
-                            borderRadius: 8,
-                            border: '1px solid rgba(68,215,182,0.46)',
-                            background: '#16c47f',
-                            color: '#061018',
-                            fontWeight: 900,
+                            minHeight: 48,
+                            padding: '12px 24px',
+                            borderRadius: lightRadius.control,
+                            border: 'none',
+                            background: light.accent,
+                            color: light.onAccent,
+                            fontSize: typeScale.body,
+                            fontWeight: 600,
                             cursor: 'pointer',
-                            boxShadow: '0 14px 34px rgba(22,196,127,0.22)',
                         }}
                     >
                         후기 작성
@@ -417,30 +430,26 @@ function ReviewsPage() {
                         {/*
                           * 길이에 따라 자리가 다르다(사장님 선택 2026-08-21).
                           * 자세히 쓴 글은 읽히라고 쓴 것이라 앞에 넓게 두고 접지 않는다.
-                          * 짧은 한마디는 뒤에 격자로 — 높이는 글이 정한다. 25자짜리를
-                          * 500자짜리 높이에 맞추면 카드 아래가 통째로 빈다.
+                          * 짧은 한마디는 뒤에 두 줄 목록으로 — 높이는 글이 정한다.
                           */}
                         {featured.length > 0 && (
                             <>
                                 <div className="rv-sec">
                                     <h2>자세히 쓴 후기</h2>
-                                    <span>쓰는 데 몇 분씩 들인 글입니다 — 접지 않고 그대로 싣습니다</span>
+                                    <span>쓰는 데 몇 분씩 들인 글입니다. 접지 않고 그대로 싣습니다</span>
                                 </div>
                                 <div className="rv-feats">
                                     {featured.map((t, i) => (
-                                        <article className="rv-feat" key={`f-${t.author}-${i}`} style={{ ['--i' as string]: i }}>
-                                            <div className="rv-mark" aria-hidden="true">&ldquo;</div>
-                                            <div>
-                                                <div className="rv-feat-text">
-                                                    {toParas(t.text).map((para, k) => <p key={k}>{para}</p>)}
-                                                </div>
-                                                <footer>
-                                                    <span className="rv-who">{t.author}</span>
-                                                    <span className="rv-stars">{'★'.repeat(5)}</span>
-                                                    {t.role && <span className="rv-role">{t.role}</span>}
-                                                    <time>{fmtDate(t.timestamp)}</time>
-                                                </footer>
+                                        <article className="rv-feat" key={`f-${t.author}-${i}`}>
+                                            <div className="rv-feat-text">
+                                                {toParas(t.text).map((para, k) => <p key={k}>{para}</p>)}
                                             </div>
+                                            <footer>
+                                                <span className="rv-who">{t.author}</span>
+                                                <span className="rv-stars">{'★'.repeat(5)}</span>
+                                                {t.role && <span className="rv-role">{t.role}</span>}
+                                                <time>{fmtDate(t.timestamp)}</time>
+                                            </footer>
                                         </article>
                                     ))}
                                 </div>
@@ -455,151 +464,103 @@ function ReviewsPage() {
                                 </div>
                                 <div className="rv-grid">
                                     {shorts.map((t, i) => (
-                                        <article className="rv-card" key={`s-${t.author}-${i}`} style={{ ['--i' as string]: i }}>
-                                            <header>
-                                                <span className="rv-who">{t.author}</span>
-                                                <span className="rv-stars">{'★'.repeat(5)}</span>
-                                            </header>
-                                            <div className="rv-body">
-                                                {toParas(t.text).map((para, k) => <p key={k}>{para}</p>)}
-                                            </div>
-                                            {(t.image || t.role) && (
-                                                <footer>
-                                                    {t.role ? <span className="rv-role">{t.role}</span> : <span />}
-                                                    <time>{fmtDate(t.timestamp)}</time>
-                                                </footer>
-                                            )}
-                                        </article>
+                                        <ShortReview
+                                            key={`s-${t.author}-${i}`}
+                                            item={t}
+                                            hidden={!showAllShorts && i >= SHORTS_FIRST}
+                                        />
                                     ))}
                                 </div>
+                                {!showAllShorts && shorts.length > SHORTS_FIRST && (
+                                    <div style={{ display: 'flex', justifyContent: 'center', marginTop: 32 }}>
+                                        <button type="button" onClick={() => setShowAllShorts(true)} style={quietButton}>
+                                            후기 더 보기
+                                            <span style={{ color: light.textMuted, fontVariantNumeric: 'tabular-nums' }}>{shorts.length - SHORTS_FIRST}개</span>
+                                        </button>
+                                    </div>
+                                )}
                             </>
                         )}
                     </>
                 )}
-              </div>
             </section>
 
             <style>{`
-                /* ── 후기 판 ─────────────────────────────────────
-                   길이에 따라 자리가 다르다: 자세히 쓴 글은 앞에 넓게,
-                   짧은 한마디는 격자로. 높이는 글이 정한다 — 25자짜리를
-                   500자짜리 높이에 맞추면 카드 아래가 통째로 빈다. */
-                /* 후기 판의 바닥 — 밝은 배경 사진 위에서도 글이 읽히게. */
-                .reviews-ink {
-                    background: rgba(8, 10, 16, 0.94);
-                    backdrop-filter: blur(18px);
-                    border: 1px solid rgba(255,255,255,0.08);
-                    border-radius: 22px;
-                    padding: clamp(22px, 4vw, 40px);
-                }
-                .reviews-ink .reviews-page-head { margin-bottom: 32px; }
-
+                /* Reviews page. Detailed reviews run wide and unfolded; short ones sit in a
+                   two-column ruled list. Height follows the text. */
                 .rv-empty {
-                    padding: 44px 28px; border-radius: 14px; text-align: center;
-                    border: 1px solid rgba(255,255,255,.09); background: rgba(18,18,26,.76);
-                    color: rgba(255,255,255,.68); line-height: 1.7;
+                    padding: 40px 24px; border-radius: ${lightRadius.card}px; text-align: center;
+                    border: 1px solid ${light.line}; background: ${light.surface};
+                    color: ${light.textSecondary}; font-size: ${typeScale.body}px; line-height: 1.7;
                 }
-                .rv-empty h2 { margin: 0 0 10px; font-size: 22px; color: #fff; }
+                .rv-empty h2 { margin: 0 0 8px; font-size: ${typeScale.h3}px; font-weight: 600; color: ${light.text}; }
                 .rv-empty p { margin: 0; }
 
-                .rv-proofs { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; margin: 0 0 46px; }
-                .rv-proofs figure { margin: 0; border: 1px solid rgba(255,255,255,.09); border-radius: 14px; overflow: hidden; background: rgba(255,255,255,.03); }
-                /* 썸네일은 버튼이다 — 눌러서 원본 비율로 크게 본다. */
+                .rv-sec { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin: 0 0 20px; }
+                .rv-sec h2 { margin: 0; font-size: ${typeScale.h3}px; font-weight: 600; letter-spacing: 0; color: ${light.text}; }
+                .rv-sec span { color: ${light.textSecondary}; font-size: ${typeScale.small}px; }
+
+                .rv-proofs { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin: 0 0 64px; }
+                .rv-proofs figure { margin: 0; border: 1px solid ${light.line}; border-radius: ${lightRadius.card}px; overflow: hidden; background: ${light.surface}; }
+                /* The thumbnail is a button: it opens the picture at its own ratio. */
                 .rv-proof-open { display: block; width: 100%; padding: 0; margin: 0; border: none; background: none; cursor: zoom-in; }
-                .rv-proofs img { display: block; width: 100%; height: 170px; object-fit: cover; object-position: top; background: #0b1018; }
-                .rv-proofs figcaption { padding: 12px 14px 14px; }
-                .rv-proofs b { display: block; font-size: 14.5px; font-weight: 800; color: #eef4fb; }
-                .rv-proofs span { display: block; margin-top: 3px; font-size: 12.5px; color: rgba(255,255,255,.55); }
-                .rv-sec { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin: 0 0 18px; }
-                .rv-sec h2 { margin: 0; font-size: 19px; font-weight: 900; letter-spacing: -.01em; }
-                .rv-sec span { color: rgba(255,255,255,.45); font-size: 12.5px; }
+                .rv-proofs img { display: block; width: 100%; height: 170px; object-fit: cover; object-position: top; background: ${light.raised}; border-bottom: 1px solid ${light.line}; }
+                .rv-proofs figcaption { padding: 12px 16px 16px; }
+                .rv-proofs b { display: block; font-size: ${typeScale.small}px; font-weight: 600; color: ${light.text}; font-variant-numeric: tabular-nums; }
+                .rv-proofs span { display: block; margin-top: 4px; font-size: ${typeScale.meta}px; line-height: 1.6; color: ${light.textSecondary}; }
 
-                .rv-feats { display: grid; gap: 14px; margin-bottom: 46px; }
+                .rv-feats { margin-bottom: 64px; border-bottom: 1px solid ${light.line}; }
                 .rv-feat {
-                    display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 8px;
-                    padding: 22px 26px 20px; border-radius: 16px;
-                    border: 1px solid rgba(240,181,63,.2);
-                    background: linear-gradient(180deg, rgba(240,181,63,.05), transparent 42%), rgba(255,255,255,.03);
-                    opacity: 0; animation: rvUp 460ms cubic-bezier(.2,.8,.3,1) forwards;
-                    animation-delay: calc(.1s + var(--i) * .12s);
+                    display: grid; grid-template-columns: 200px minmax(0, 760px); column-gap: 40px;
+                    padding: 32px 0; border-top: 1px solid ${light.line};
                 }
-                .rv-mark { font-size: 42px; line-height: .9; color: #f0b53f; opacity: .42; font-family: Georgia, serif; }
-                .rv-feat-text p { margin: 0 0 9px; font-size: 15px; line-height: 1.85; color: #eef2f8; word-break: keep-all; }
+                .rv-feat-text { grid-column: 2; grid-row: 1; }
+                .rv-feat-text p { margin: 0 0 12px; font-size: ${typeScale.body}px; line-height: 1.8; color: ${light.text}; word-break: keep-all; overflow-wrap: anywhere; }
                 .rv-feat-text p:last-child { margin-bottom: 0; }
-                .rv-feat footer, .rv-card footer {
-                    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-                    margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.08);
+                .rv-feat footer {
+                    grid-column: 1; grid-row: 1;
+                    display: flex; flex-direction: column; align-items: flex-start; gap: 8px;
                 }
-                .rv-who { font-size: 13.5px; font-weight: 800; color: #eef2f8; }
-                .rv-stars { color: #f0b53f; font-size: 12.5px; letter-spacing: 1.5px; }
-                .rv-role {
-                    padding: 3px 9px; border-radius: 6px; font-size: 11px; font-weight: 800;
-                    background: rgba(240,181,63,.12); color: #ffd88a;
-                }
-                .rv-feat time, .rv-card time { margin-left: auto; color: rgba(255,255,255,.42); font-size: 11.5px; font-variant-numeric: tabular-nums; }
+                .rv-who { font-size: ${typeScale.small}px; font-weight: 600; color: ${light.text}; overflow-wrap: anywhere; }
+                .rv-stars { color: ${light.accentInk}; font-size: ${typeScale.meta}px; line-height: 1; letter-spacing: 2px; }
+                .rv-role { font-size: ${typeScale.meta}px; color: ${light.textSecondary}; }
+                .rv-feat time, .rv-card time { color: ${light.textMuted}; font-size: ${typeScale.meta}px; font-variant-numeric: tabular-nums; }
 
-                .rv-grid { columns: 3 300px; column-gap: 14px; }
-                .rv-card {
-                    break-inside: avoid; margin: 0 0 14px; padding: 16px 18px; border-radius: 13px;
-                    border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.03);
-                    opacity: 0; animation: rvUp 420ms cubic-bezier(.2,.8,.3,1) forwards;
-                    animation-delay: calc(.25s + var(--i) * .04s);
-                }
-                .rv-card header {
-                    display: flex; align-items: center; justify-content: space-between; gap: 10px;
-                    padding-bottom: 9px; margin-bottom: 11px; border-bottom: 1px solid rgba(255,255,255,.08);
-                }
-                .rv-card .rv-body p { margin: 0 0 6px; color: rgba(238,242,248,.78); font-size: 13px; line-height: 1.76; word-break: keep-all; }
+                .rv-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 64px; border-bottom: 1px solid ${light.line}; }
+                .rv-card { padding: 24px 0; border-top: 1px solid ${light.line}; }
+                .rv-card[hidden] { display: none; }
+                .rv-card header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+                .rv-card .rv-body p { margin: 0 0 8px; color: ${light.text}; font-size: ${typeScale.body}px; line-height: 1.75; word-break: keep-all; overflow-wrap: anywhere; }
                 .rv-card .rv-body p:last-child { margin-bottom: 0; }
-                .rv-card footer { margin-top: 11px; padding-top: 11px; }
-
-                @keyframes rvUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
-                @media (prefers-reduced-motion: reduce) {
-                    .rv-feat, .rv-card { animation: none; opacity: 1; transform: none; }
+                /* Folded by CSS only: every word stays in the page for readers and search. */
+                .rv-body.is-folded { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: ${CLAMP_LINES}; line-clamp: ${CLAMP_LINES}; overflow: hidden; }
+                .rv-card footer { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 12px; }
+                .rv-card footer time { margin-left: auto; }
+                .rv-more {
+                    display: inline-flex; align-items: center; min-height: 44px; margin-top: 4px; padding: 0;
+                    border: none; background: none; color: ${light.accentInk}; font-size: ${typeScale.small}px; font-weight: 500;
+                    text-decoration: underline; text-underline-offset: 4px; cursor: pointer;
                 }
-                @media (max-width: 560px) {
-                    .rv-feat { grid-template-columns: minmax(0, 1fr); padding: 20px; }
-                    .rv-mark { display: none; }
+
+                @media (max-width: 860px) {
+                    .rv-grid { grid-template-columns: minmax(0, 1fr); }
+                    .rv-feat { grid-template-columns: minmax(0, 1fr); row-gap: 20px; padding: 24px 0; }
+                    .rv-feat-text, .rv-feat footer { grid-column: 1; grid-row: auto; }
+                    .rv-feat footer { flex-direction: row; align-items: center; flex-wrap: wrap; gap: 12px; }
+                    .rv-feat footer time { margin-left: auto; }
                 }
 
                 @media (max-width: 640px) {
-                    .reviews-page-shell {
-                        padding: 104px 14px 64px !important;
-                    }
-
-                    .reviews-page-head {
-                        align-items: flex-start !important;
-                        margin-bottom: 26px !important;
-                    }
-
-                    .reviews-page-head h1 {
-                        font-size: 30px !important;
-                        line-height: 1.2 !important;
-                    }
-
-                    .reviews-page-head button {
-                        width: 100%;
-                    }
-
-                    .reviews-grid {
-                        grid-template-columns: 1fr !important;
-                        gap: 16px !important;
-                    }
-
-                    .review-card img,
-                    .review-card video {
-                        height: 190px !important;
-                    }
-
-                    .review-modal-panel {
-                        width: 100% !important;
-                        max-height: calc(100dvh - 20px) !important;
-                        border-radius: 10px !important;
-                    }
-
-                    .reviews-contact-grid {
-                        grid-template-columns: 1fr !important;
-                    }
+                    .reviews-page-shell { padding: 104px 16px 64px !important; }
+                    .reviews-page-head { align-items: flex-start !important; margin-bottom: 40px !important; }
+                    .reviews-page-head h1 { font-size: ${typeScale.h1Mobile}px !important; }
+                    .reviews-page-head button { width: 100%; }
+                    .rv-proofs { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-bottom: 48px; }
+                    .rv-proofs img { height: 132px; }
+                    .rv-proofs figcaption { padding: 12px; }
+                    .rv-feats { margin-bottom: 48px; }
+                    .review-modal-panel { width: 100% !important; max-height: calc(100dvh - 104px) !important; }
+                    .reviews-contact-grid { grid-template-columns: 1fr !important; }
                 }
             `}</style>
 
@@ -612,30 +573,32 @@ function ReviewsPage() {
                     style={{
                         position: 'fixed', inset: 0, zIndex: 10001,
                         display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-                        gap: 14, padding: 20,
-                        background: 'rgba(2, 6, 12, 0.88)', backdropFilter: 'blur(8px)',
+                        gap: 16, padding: 20,
+                        // The dark veil stays: it is there so the picture can be read.
+                        background: 'rgba(20, 24, 28, 0.72)',
                         cursor: 'zoom-out',
                     }}
                 >
                     <img
                         src={zoomProof.media}
                         alt={zoomProof.mediaName || zoomProof.amount}
-                        style={{ maxWidth: 'min(1100px, 94vw)', maxHeight: '82vh', objectFit: 'contain', borderRadius: 12, boxShadow: '0 30px 90px rgba(0,0,0,0.6)' }}
+                        style={{ maxWidth: 'min(1100px, 94vw)', maxHeight: '80vh', objectFit: 'contain', borderRadius: lightRadius.card, background: light.surface }}
                     />
-                    <div style={{ textAlign: 'center', color: '#fff' }}>
-                        <b style={{ fontSize: 16 }}>{zoomProof.amount}</b>
-                        <div style={{ marginTop: 3, fontSize: 13, color: 'rgba(255,255,255,0.62)' }}>{zoomProof.desc}</div>
+                    <div style={{ textAlign: 'center', color: light.onBtn }}>
+                        <b style={{ fontSize: typeScale.body, fontWeight: 600, fontVariantNumeric: 'tabular-nums' }}>{zoomProof.amount}</b>
+                        <div style={{ marginTop: 4, fontSize: typeScale.small, color: 'rgba(255, 255, 255, 0.82)' }}>{zoomProof.desc}</div>
                     </div>
                     <button
                         type="button"
                         aria-label="닫기"
                         onClick={() => setZoomProof(null)}
                         style={{
-                            position: 'absolute', top: 18, right: 22, background: 'rgba(255,255,255,0.08)',
-                            border: '1px solid rgba(255,255,255,0.2)', borderRadius: 10, color: '#fff',
-                            fontSize: 20, lineHeight: 1, padding: '8px 12px', cursor: 'pointer',
+                            position: 'absolute', top: 16, right: 16, width: 44, height: 44,
+                            display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                            background: light.surface, border: `1px solid ${light.line}`, borderRadius: lightRadius.control,
+                            color: light.text, cursor: 'pointer',
                         }}
-                    >×</button>
+                    ><CloseIcon /></button>
                 </div>
             )}
 
@@ -652,9 +615,9 @@ function ReviewsPage() {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        padding: 18,
-                        background: 'rgba(2, 6, 12, 0.78)',
-                        backdropFilter: 'blur(10px)',
+                        // Top padding clears the fixed navbar, which sits above this page's stacking context.
+                        padding: '88px 16px 16px',
+                        background: 'rgba(20, 24, 28, 0.5)',
                     }}
                 >
                     <div
@@ -662,75 +625,73 @@ function ReviewsPage() {
                         onClick={(event) => event.stopPropagation()}
                         style={{
                             width: 'min(620px, 100%)',
-                            maxHeight: 'calc(100vh - 36px)',
+                            maxHeight: 'calc(100vh - 104px)',
                             overflowY: 'auto',
-                            borderRadius: 12,
-                            border: '1px solid rgba(68,215,182,0.28)',
-                            background: '#101721',
-                            boxShadow: '0 30px 90px rgba(0,0,0,0.48)',
-                            color: '#fff',
+                            borderRadius: lightRadius.panel,
+                            border: `1px solid ${light.line}`,
+                            background: light.surface,
+                            boxShadow: light.shadowFloat,
+                            color: light.text,
                         }}
                     >
-                        <div style={{ padding: '26px 28px 18px', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', justifyContent: 'space-between', gap: 16, alignItems: 'flex-start' }}>
+                        <div style={{ padding: '24px 24px 20px', borderBottom: `1px solid ${light.line}`, display: 'flex', justifyContent: 'space-between', gap: 16, alignItems: 'flex-start' }}>
                             <div>
-                                <h2 style={{ margin: '0 0 8px', fontSize: 26, letterSpacing: 0 }}>후기 작성</h2>
-                                <p style={{ margin: 0, color: 'rgba(255,255,255,0.62)', lineHeight: 1.6 }}>무분별한 등록을 막기 위해 이메일과 휴대폰 번호를 함께 확인합니다.</p>
+                                <h2 style={{ margin: '0 0 8px', fontSize: typeScale.h3, fontWeight: 600, letterSpacing: 0 }}>후기 작성</h2>
+                                <p style={{ margin: 0, color: light.textSecondary, fontSize: typeScale.small, lineHeight: 1.6 }}>무분별한 등록을 막기 위해 이메일과 휴대폰 번호를 함께 확인합니다.</p>
                             </div>
-                            <button type="button" onClick={closeModal} style={{ width: 38, height: 38, borderRadius: 8, border: '1px solid rgba(255,255,255,0.12)', background: '#0b111a', color: '#fff', fontSize: 20, cursor: 'pointer' }}>x</button>
+                            <button
+                                type="button"
+                                aria-label="닫기"
+                                onClick={closeModal}
+                                style={{
+                                    flex: 'none', width: 44, height: 44, display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                                    borderRadius: lightRadius.control, border: `1px solid ${light.line}`, background: light.surface, color: light.text, cursor: 'pointer',
+                                }}
+                            ><CloseIcon /></button>
                         </div>
 
-                        <div style={{ padding: 28 }}>
-                            <label style={{ display: 'block', fontWeight: 900, marginBottom: 10 }}>수익인증 이미지/동영상</label>
+                        <div style={{ padding: 24 }}>
+                            <label style={fieldLabel}>수익인증 이미지/동영상</label>
                             <input ref={fileInputRef} type="file" accept="image/*,video/*" onChange={handleMediaChange} style={{ display: 'none' }} />
                             <button
                                 type="button"
                                 onClick={() => fileInputRef.current?.click()}
-                                style={{
-                                    width: '100%',
-                                    minHeight: 48,
-                                    borderRadius: 8,
-                                    border: '1px solid rgba(68,215,182,0.42)',
-                                    background: 'rgba(68,215,182,0.10)',
-                                    color: '#8ff5d4',
-                                    fontWeight: 900,
-                                    cursor: 'pointer',
-                                    marginBottom: 12,
-                                }}
+                                style={{ ...quietButton, width: '100%', marginBottom: 12 }}
                             >
                                 {proofMedia ? '파일 다시 선택하기' : '이미지 또는 동영상 선택하기'}
                             </button>
                             {proofMedia && (
-                                <div style={{ marginBottom: 18, border: '1px solid rgba(255,255,255,0.10)', borderRadius: 10, background: '#080d14', overflow: 'hidden' }}>
+                                <div style={{ marginBottom: 20, border: `1px solid ${light.line}`, borderRadius: lightRadius.control, background: light.raised, overflow: 'hidden' }}>
                                     {proofMediaType === 'video' ? (
                                         <video src={proofMedia} controls playsInline style={{ width: '100%', maxHeight: 300, display: 'block' }} />
                                     ) : (
                                         <img src={proofMedia} alt="선택한 수익인증 미리보기" style={{ width: '100%', maxHeight: 260, objectFit: 'contain', display: 'block' }} />
                                     )}
-                                    <div style={{ padding: '9px 12px', color: 'rgba(255,255,255,0.58)', fontSize: 12 }}>{proofMediaName}</div>
+                                    <div style={{ padding: '8px 12px', color: light.textMuted, fontSize: typeScale.meta, overflowWrap: 'anywhere' }}>{proofMediaName}</div>
                                 </div>
                             )}
 
-                            <div className="reviews-contact-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 12, marginBottom: 12 }}>
+                            <div className="reviews-contact-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 12, margin: '8px 0 12px' }}>
                                 <input type="text" placeholder="닉네임 선택" maxLength={20} value={author} onChange={(e) => setAuthor(e.target.value)} style={inputBase} />
                                 <input type="email" placeholder="이메일 필수, 공개 시 마스킹" value={email} onChange={(e) => setEmail(e.target.value)} style={inputBase} />
                             </div>
-                            <input type="tel" placeholder="휴대폰 번호 필수, 공개 시 010-****-**** 처리" value={phone} onChange={(e) => setPhone(e.target.value)} style={{ ...inputBase, marginBottom: 12 }} />
+                            <input type="tel" placeholder="휴대폰 번호 필수, 공개 시 010-****-**** 처리" value={phone} onChange={(e) => setPhone(e.target.value)} style={{ ...inputBase, marginBottom: 20 }} />
 
-                            <label style={{ display: 'block', fontWeight: 900, marginBottom: 10 }}>후기 글</label>
-                            <textarea rows={6} placeholder="사용 후 느낀 점, 수익 변화, 구매 전 고민이 해결된 지점을 적어주세요. 본문 속 이메일/폰번호는 자동으로 가려집니다." maxLength={800} value={reviewText} onChange={(e) => setReviewText(e.target.value)} style={{ ...inputBase, resize: 'vertical', fontFamily: 'inherit', lineHeight: 1.65, marginBottom: 14 }} />
+                            <label style={fieldLabel}>후기 글</label>
+                            <textarea rows={6} placeholder="사용 후 느낀 점, 수익 변화, 구매 전 고민이 해결된 지점을 적어주세요. 본문 속 이메일/폰번호는 자동으로 가려집니다." maxLength={800} value={reviewText} onChange={(e) => setReviewText(e.target.value)} style={{ ...inputBase, resize: 'vertical', fontFamily: 'inherit', lineHeight: 1.65, marginBottom: 16 }} />
 
                             <button
                                 onClick={submitReview}
                                 disabled={submitting}
                                 style={{
                                     width: '100%',
-                                    minHeight: 50,
-                                    borderRadius: 8,
+                                    minHeight: 48,
+                                    borderRadius: lightRadius.control,
                                     border: 'none',
-                                    background: submitting ? '#233044' : '#16c47f',
-                                    color: submitting ? 'rgba(255,255,255,0.5)' : '#061018',
-                                    fontSize: 15,
-                                    fontWeight: 900,
+                                    background: submitting ? light.raised : light.accent,
+                                    color: submitting ? light.textMuted : light.onAccent,
+                                    fontSize: typeScale.body,
+                                    fontWeight: 600,
                                     cursor: submitting ? 'not-allowed' : 'pointer',
                                 }}
                             >
@@ -739,14 +700,14 @@ function ReviewsPage() {
 
                             {msg && (
                                 <div style={{
-                                    marginTop: 14,
-                                    padding: 13,
-                                    borderRadius: 8,
-                                    fontSize: 13,
+                                    marginTop: 16,
+                                    padding: 12,
+                                    borderRadius: lightRadius.control,
+                                    fontSize: typeScale.small,
+                                    lineHeight: 1.6,
                                     textAlign: 'center',
-                                    background: msg.type === 'success' ? 'rgba(68,215,182,0.10)' : 'rgba(255,92,117,0.10)',
-                                    border: `1px solid ${msg.type === 'success' ? 'rgba(68,215,182,0.34)' : 'rgba(255,92,117,0.28)'}`,
-                                    color: msg.type === 'success' ? '#8ff5d4' : '#ff9aaa',
+                                    background: msg.type === 'success' ? light.positiveSoft : light.negativeSoft,
+                                    color: msg.type === 'success' ? light.positive : light.negative,
                                 }}>{msg.text}</div>
                             )}
                         </div>
@@ -754,6 +715,61 @@ function ReviewsPage() {
                 </div>
             )}
         </div>
+    );
+}
+
+/** Close mark for the two dialogs: 24 grid, stroke 1.5, follows the text colour. */
+function CloseIcon() {
+    return (
+        <svg aria-hidden="true" focusable="false" width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round">
+            <path d="M6 6l12 12M18 6 6 18" />
+        </svg>
+    );
+}
+
+/**
+ * One short review in the ruled list.
+ * Long text is folded with CSS line-clamp, so the whole review stays in the DOM;
+ * the toggle only appears when the text really overflows.
+ */
+function ShortReview({ item, hidden }: { item: Testimonial; hidden: boolean }) {
+    const bodyRef = useRef<HTMLDivElement | null>(null);
+    const [open, setOpen] = useState(false);
+    const [overflows, setOverflows] = useState(false);
+
+    useLayoutEffect(() => {
+        const el = bodyRef.current;
+        if (!el || open || hidden) return;
+        let active = true;
+        const measure = () => { if (active) setOverflows(el.scrollHeight > el.clientHeight + 2); };
+        measure();
+        // Web fonts can change the line count after the first paint.
+        document.fonts?.ready.then(measure).catch(() => undefined);
+        window.addEventListener('resize', measure);
+        return () => { active = false; window.removeEventListener('resize', measure); };
+    }, [open, hidden, item.text]);
+
+    return (
+        <article className="rv-card" hidden={hidden}>
+            <header>
+                <span className="rv-who">{item.author}</span>
+                <span className="rv-stars">{'★'.repeat(5)}</span>
+            </header>
+            <div ref={bodyRef} className={open ? 'rv-body' : 'rv-body is-folded'}>
+                {toParas(item.text).map((para, k) => <p key={k}>{para}</p>)}
+            </div>
+            {(overflows || open) && (
+                <button type="button" className="rv-more" aria-expanded={open} onClick={() => setOpen((v) => !v)}>
+                    {open ? '접기' : '더 보기'}
+                </button>
+            )}
+            {(item.image || item.role) && (
+                <footer>
+                    {item.role ? <span className="rv-role">{item.role}</span> : <span />}
+                    <time>{fmtDate(item.timestamp)}</time>
+                </footer>
+            )}
+        </article>
     );
 }
 

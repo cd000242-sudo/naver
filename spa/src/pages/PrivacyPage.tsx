@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import LegalLayout from '../components/LegalLayout';
+import { light, type } from '../styles/tokens';
 
-const h2: React.CSSProperties = { fontSize: 20, fontWeight: 800, color: '#FFD700', margin: '32px 0 14px' };
-const ul: React.CSSProperties = { paddingLeft: 22, margin: '0 0 16px' };
-const table: React.CSSProperties = { width: '100%', borderCollapse: 'collapse', margin: '12px 0 20px', fontSize: 14 };
-const th: React.CSSProperties = { background: 'rgba(255,215,0,0.08)', color: '#FFD700', padding: '10px 12px', textAlign: 'left', border: '1px solid rgba(255,255,255,0.08)', fontWeight: 700 };
-const td: React.CSSProperties = { padding: '10px 12px', border: '1px solid rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.8)' };
+const h2: React.CSSProperties = { fontSize: type.lead, fontWeight: 600, lineHeight: 1.4, color: light.text, margin: '32px 0 12px' };
+const ul: React.CSSProperties = { paddingLeft: 24, margin: '0 0 16px' };
+const table: React.CSSProperties = { width: '100%', borderCollapse: 'collapse', margin: '12px 0 20px', fontSize: type.small };
+const th: React.CSSProperties = { background: light.raised, color: light.text, padding: 12, textAlign: 'left', border: `1px solid ${light.line}`, fontWeight: 600 };
+const td: React.CSSProperties = { padding: 12, border: `1px solid ${light.line}`, color: light.text };
 
 /** 개인정보처리방침 — payment-page/privacy.html 마이그 */
 function PrivacyPage() {

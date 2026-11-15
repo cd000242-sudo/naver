@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, type ReactNode, type RefObject } from 'react';
+import { useReveal } from '../motion/Reveal';
 import { fetchKinQuestion, formatCount, searchKinQuestions, type KinPostIdea } from '../../lib/keywordApi';
 import { BRIDGE_OFFLINE_NOTE, bridgeFailureNote, bridgeKinAnswer, bridgePostIdeas, probeBridge, usablePostIdeas, type BridgeStatus } from '../../lib/bridge';
 import { loadUserKeys } from '../../lib/userKeys';
@@ -86,6 +87,13 @@ function loadLedger(): LedgerEntry[] {
     } catch {
         return [];
     }
+}
+
+/** Question list that rises in item by item the first time it is seen (off under reduced motion). */
+function RevealOl({ className, children }: { className: string; children: ReactNode }) {
+    const ref = useRef<HTMLOListElement>(null);
+    useReveal(ref as RefObject<HTMLElement>, { stagger: true });
+    return <ol ref={ref} className={className}>{children}</ol>;
 }
 
 function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) {
@@ -181,7 +189,7 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
         const picked = String(loadUserKeys().aiProvider || '');
         const via = ENGINE_LABEL[picked] ? `${ENGINE_LABEL[picked]}(으)로` : '내 PC 의 LEWORD 앱으로';
         if (bridgeState === 'probing' || bridgeState === null) return { ok: false, text: `${via} 생성합니다 — 앱 연동 확인 중…` };
-        if (agentReady) return { ok: true, text: `✅ ${via} 생성합니다 — 내 PC 의 앱 구독이라 추가 비용 없습니다.` };
+        if (agentReady) return { ok: true, text: `${via} 생성합니다 — 내 PC 의 앱 구독이라 추가 비용 없습니다.` };
         if (bridgeState.connected) return { ok: false, text: '앱은 켜져 있는데 로그인된 엔진이 없습니다 — 내 API 키 탭에서 쓸 엔진을 [연동]해 주세요.' };
         return { ok: false, text: BRIDGE_OFFLINE_NOTE };
     })();
@@ -370,7 +378,7 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
                 <div className="lw-note">키워드를 넣으면 그 주제의 지식인 질문을 찾아 조회수·답변수를 실측합니다.</div>
             )}
 
-            {status === 'loading' && <div className="lw-note">질문 실측을 불러오는 중입니다…</div>}
+            {status === 'loading' && <><div className="lw-note">질문 실측을 불러오는 중입니다…</div><div className="lw-skel" aria-hidden="true"><i /><i /><i /></div></>}
             {status === 'error' && (
                 <div className="lw-note lw-note-error">
                     <strong>아직 수집 전입니다</strong>
@@ -395,7 +403,7 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
             )}
 
             {(status === 'ready' || lane === 'worked' || lane === 'search') && laneItems.length > 0 && (
-                <ol className="lw-kg-list">
+                <RevealOl key={lane} className="lw-kg-list">
                     {laneItems.map((q, index) => (
                         <li key={q.link}>
                             <span className="lw-kg-rank">{q.rank ?? index + 1}</span>
@@ -425,14 +433,14 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
                             </div>
                             <span className="lw-kg-row-actions">
                                 {lane === 'worked' ? (
-                                    <button type="button" className="lw-kg-copy" onClick={() => forgetWorked(q.link)}>보관 해제</button>
+                                    <button type="button" className="lw-kg-copy" style={{ minHeight: 44 }} onClick={() => forgetWorked(q.link)}>보관 해제</button>
                                 ) : null}
-                                <button type="button" className="lw-kg-answer" onClick={() => openWork(q)}>
+                                <button type="button" className="lw-kg-answer" style={{ minHeight: 44 }} onClick={() => openWork(q)}>
                                     {workedIds.has(docIdOfLink(q.link)) ? '이어서 작업' : '답변 달기'}
                                 </button>
                                 <button
                                     type="button"
-                                    className="lw-kg-copy"
+                                    className="lw-kg-copy" style={{ minHeight: 44 }}
                                     onClick={() => {
                                         navigator.clipboard?.writeText(q.title);
                                         setCopied(q.link);
@@ -442,7 +450,7 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
                             </span>
                         </li>
                     ))}
-                </ol>
+                </RevealOl>
             )}
 
             {/* 답변 작업대 — 질문 전문 + AI 초안 + 10:1 링크 장부. 게시는 사용자가 직접. */}
@@ -542,7 +550,7 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
                             <section>
                                 <strong>이 질문으로 쓸 글감 — 키워드를 누르면 제목이 나옵니다</strong>
                                 {ideas.status === 'idle' && (
-                                    <button type="button" className="lw-mini" onClick={loadIdeas}>글감 뽑기</button>
+                                    <button type="button" className="lw-mini" style={{ minHeight: 44 }} onClick={loadIdeas}>글감 뽑기</button>
                                 )}
                                 {ideas.status === 'loading' && <p className="lw-kg-work-note">질문에서 검색어를 추론하는 중…</p>}
                                 {ideas.status === 'error' && (

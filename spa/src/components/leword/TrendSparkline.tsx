@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { light } from '../../styles/tokens';
 
 /**
  * 최근 30일 검색 추이 스파크라인 — 데이터랩 상대값 실측을 그대로 그린다.
@@ -77,7 +78,7 @@ function TrendSparkline({ series, label, height = 56, monthlyVolume = null }: {
                 <polyline
                     points={points}
                     fill="none"
-                    stroke={rising ? '#2ecc71' : '#7c9cff'}
+                    stroke={rising ? light.positive : light.textMuted}
                     strokeWidth="2"
                     strokeLinejoin="round"
                     strokeLinecap="round"
@@ -87,7 +88,7 @@ function TrendSparkline({ series, label, height = 56, monthlyVolume = null }: {
                         cx={coords[hover][0]}
                         cy={coords[hover][1]}
                         r="3.5"
-                        fill={rising ? '#2ecc71' : '#7c9cff'}
+                        fill={rising ? light.positive : light.textMuted}
                     />
                 )}
             </svg>

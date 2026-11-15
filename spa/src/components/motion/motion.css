@@ -1,0 +1,151 @@
+/*
+ * Shared motion primitives (2026-11 motion pass). Only transform and opacity animate.
+ * Colors mirror styles/tokens.ts `light` (page #f5f6f2, accent #f5b40a, accentInk #8a6a12).
+ * Everything here stops under prefers-reduced-motion (see the block at the end).
+ */
+
+.lp-sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.lp-count { font-variant-numeric: tabular-nums; }
+
+/* ── Scroll reveal (data-reveal set by useReveal) ───────────────────────────── */
+[data-reveal="pending"]:not([data-reveal-stagger]),
+[data-reveal="pending"][data-reveal-stagger] > * { opacity: 0; transform: translate3d(0, 12px, 0); }
+[data-reveal="shown"]:not([data-reveal-stagger]),
+[data-reveal="shown"][data-reveal-stagger] > * {
+    opacity: 1;
+    transform: none;
+    transition: opacity 560ms cubic-bezier(0.22, 1, 0.36, 1), transform 560ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: calc(var(--rv-i, 0) * 50ms);
+}
+
+/* ── Headline words ─────────────────────────────────────────────────────────── */
+.lp-word { display: inline-block; animation: lp-word-in 520ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes lp-word-in { from { opacity: 0; transform: translate3d(0, 0.45em, 0); } }
+
+/* ── Ambient warm light (one fixed layer) ───────────────────────────────────── */
+.lp-glow { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.lp-glow i { position: absolute; display: block; border-radius: 50%; will-change: transform; }
+.lp-glow-a {
+    width: 56vw; height: 56vw; top: -18vw; right: -12vw;
+    background: radial-gradient(circle at center, rgba(245, 180, 10, 0.16), rgba(245, 180, 10, 0) 62%);
+    animation: lp-drift-a 26s ease-in-out infinite alternate;
+}
+.lp-glow-b {
+    width: 48vw; height: 48vw; top: 20vh; left: -16vw;
+    background: radial-gradient(circle at center, rgba(234, 205, 140, 0.30), rgba(234, 205, 140, 0) 64%);
+    animation: lp-drift-b 30s ease-in-out infinite alternate;
+}
+.lp-glow-c {
+    width: 40vw; height: 40vw; bottom: -14vw; right: 18vw;
+    background: radial-gradient(circle at center, rgba(251, 225, 170, 0.34), rgba(251, 225, 170, 0) 64%);
+    animation: lp-drift-c 22s ease-in-out infinite alternate;
+}
+@keyframes lp-drift-a { to { transform: translate3d(-9vw, 7vh, 0) scale(1.08); } }
+@keyframes lp-drift-b { to { transform: translate3d(10vw, -6vh, 0) scale(0.94); } }
+@keyframes lp-drift-c { to { transform: translate3d(-7vw, -9vh, 0) scale(1.06); } }
+
+/* ── Keyword ribbon ─────────────────────────────────────────────────────────── */
+.lp-marquee {
+    display: flex; align-items: center; gap: 16px;
+    min-height: 56px; padding: 0 0 0 20px;
+    border: 1px solid #e2e5df; border-radius: 14px; background: #ffffff;
+    box-shadow: 0 1px 2px rgba(20, 24, 28, 0.05);
+    overflow: hidden;
+}
+.lp-marquee-title { flex: 0 0 auto; color: #8a6a12; font-size: 15px; font-weight: 600; white-space: nowrap; }
+.lp-marquee-viewport {
+    flex: 1 1 auto; min-width: 0; overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 40px, #000 calc(100% - 40px), transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 40px, #000 calc(100% - 40px), transparent);
+}
+.lp-marquee-track { display: flex; width: max-content; animation: lp-marquee var(--lp-marquee-dur, 40s) linear infinite; }
+.lp-marquee:hover .lp-marquee-track,
+.lp-marquee:focus-within .lp-marquee-track,
+.lp-marquee.is-offscreen .lp-marquee-track { animation-play-state: paused; }
+.lp-marquee-list { display: flex; gap: 8px; margin: 0; padding: 8px 8px 8px 0; list-style: none; }
+.lp-marquee-list a {
+    display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px;
+    border: 1px solid #e2e5df; border-radius: 999px; background: #f6f7f3;
+    color: #1c2024; font-size: 15px; text-decoration: none; white-space: nowrap;
+    transition: border-color 160ms cubic-bezier(0.22, 1, 0.36, 1), background-color 160ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.lp-marquee-list a:hover { border-color: #ead9a6; background: #fbf1d6; }
+.lp-marquee-list a:focus-visible { outline: 2px solid #8a6a12; outline-offset: 2px; }
+@keyframes lp-marquee { to { transform: translate3d(-50%, 0, 0); } }
+
+/* ── Sliding tab indicator ──────────────────────────────────────────────────── */
+.lp-tab-ink {
+    position: absolute; left: 0; bottom: 0; width: 100px; height: 3px;
+    border-radius: 2px; background: #f5b40a; transform-origin: 0 50%; pointer-events: none;
+    transition: transform 360ms cubic-bezier(0.22, 1, 0.36, 1), opacity 160ms ease;
+}
+
+/* ── Light sweep on the primary button (hover, once) ───────────────────────── */
+.lp-sheen { position: relative; overflow: hidden; isolation: isolate; }
+.lp-sheen::after {
+    content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 60%; z-index: -1;
+    background: linear-gradient(100deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.55) 50%, rgba(255, 255, 255, 0) 100%);
+    transform: translate3d(-120%, 0, 0) skewX(-12deg);
+    pointer-events: none;
+}
+.lp-sheen:hover::after { transform: translate3d(230%, 0, 0) skewX(-12deg); transition: transform 760ms cubic-bezier(0.22, 1, 0.36, 1); }
+
+/* ── Page-wide reveal (RevealScope.ts). Same pending/shown states as above; these only add
+      the capture variant and make the entry transition win over an element's own one. ───── */
+[data-rv-auto][data-reveal="shown"] {
+    transition: opacity 560ms cubic-bezier(0.22, 1, 0.36, 1), transform 560ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+    transition-delay: calc(var(--rv-i, 0) * 50ms) !important;
+}
+[data-rv-auto="shot"][data-reveal="pending"] { transform: translate3d(0, 28px, 0) scale(0.985); }
+[data-rv-auto="shot"][data-reveal="shown"] { transition-duration: 720ms !important; }
+
+/* ── Fixed-width counter: the final value holds the space, the live digits sit on top. ──── */
+.lp-count-fixed { display: inline-grid; justify-items: end; }
+.lp-count-fixed > :not(.lp-sr-only) { grid-area: 1 / 1; }
+.lp-count-ghost { visibility: hidden; }
+
+/* ── Sliding pill behind the active segment (pricing term switch) ───────────────────────── */
+.lp-seg-ink {
+    position: absolute; left: 0; top: 4px; bottom: 4px; width: 100px; border-radius: 10px;
+    background: #1c2024; transform-origin: 0 50%; pointer-events: none;
+    transition: transform 360ms cubic-bezier(0.22, 1, 0.36, 1), opacity 160ms ease;
+}
+
+/* ── Hover and press, same response as the home page: 2px lift, 0.98 on press. ─────────── */
+@media (prefers-reduced-motion: no-preference) {
+    .lp-lift, .pp-btn, .pp-proof a, .pp-companion a, .st-buy, .st-cart-go, .chatbots-btn,
+    .briefing-page-back, .briefing-archive-back, .legal-content a.legal-back {
+        transition: transform 160ms cubic-bezier(0.22, 1, 0.36, 1), background-color 160ms cubic-bezier(0.22, 1, 0.36, 1),
+            border-color 160ms cubic-bezier(0.22, 1, 0.36, 1), color 160ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+    }
+    .lp-lift:active, .pp-btn:active, .st-buy:active, .st-cart-go:active, .chatbots-btn:active,
+    .briefing-page-back:active, .briefing-archive-back:active, .legal-content a.legal-back:active { transform: scale(0.98); }
+    /* Captures and cards lift a little more slowly than buttons. */
+    .pp-shot, .st-card, .lp-lift-card { transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1), border-color 160ms cubic-bezier(0.22, 1, 0.36, 1); }
+}
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+    .lp-lift:hover, .pp-btn:hover, .pp-proof a:hover, .pp-companion a:hover, .st-buy:hover, .st-cart-go:hover, .chatbots-btn:hover,
+    .briefing-page-back:hover, .briefing-archive-back:hover, .legal-content a.legal-back:hover { transform: translate3d(0, -2px, 0); }
+    .lp-lift[disabled]:hover, .st-buy[disabled]:hover { transform: none; }
+    .pp-shot:hover { transform: translate3d(0, -3px, 0); }
+    .st-card:hover, .lp-lift-card:hover { transform: translate3d(0, -2px, 0); }
+}
+
+@media (max-width: 720px) {
+    .lp-glow-a { width: 90vw; height: 90vw; top: -30vw; right: -30vw; animation: none; }
+    .lp-glow-b { width: 80vw; height: 80vw; left: -36vw; animation: none; }
+    .lp-glow-c { display: none !important; }
+    .lp-marquee { padding-left: 16px; gap: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .lp-word, .lp-glow i, .lks-card, .lks-progress i { animation: none !important; }
+    .lp-marquee-track { animation: none; }
+    .lp-marquee-viewport { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
+    .lp-marquee-list[aria-hidden] { display: none; }
+    .lp-tab-ink, .lp-seg-ink, .lks-card { transition: none !important; }
+    .lp-sheen::after { display: none; }
+}

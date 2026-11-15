@@ -18,10 +18,10 @@ export default function KeywordAids({ query, enrich, variant = 'full' }: { query
     return (
         <div>
             {variant === 'issue'
-                ? demand && <p style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 8, margin: '8px 0 0', fontSize: 13, color: '#e2e8f0' }}><span style={{ fontSize: 12, color: '#a8b6cb' }}>지금 쓰면 트래픽</span><DemandChip demand={demand} />{demand.fact}</p>
+                ? demand && <p style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 8, margin: '8px 0 0', fontSize: 13, color: 'var(--lw-text)' }}><span style={{ fontSize: 13, color: 'var(--lw-text-secondary)' }}>지금 쓰면 트래픽</span><DemandChip demand={demand} />{demand.fact}</p>
                 : demand
                     ? <DemandBlock c={card} />
-                    : <p style={{ margin: '2px 0 6px', fontSize: 12, color: '#8d9db4' }}>검색 추이 그래프 준비 중 — 하루 세 번 도는 회차가 데이터랩으로 재서 붙입니다.</p>}
+                    : <p style={{ margin: '2px 0 8px', fontSize: 13, color: 'var(--lw-text-secondary)' }}>검색 추이 그래프 준비 중 — 하루 세 번 도는 회차가 데이터랩으로 재서 붙입니다.</p>}
             <SolveBlock c={card} />
             {variant !== 'issue' && <KinBlock c={card} />}
             <BenchmarkBlock c={card} />

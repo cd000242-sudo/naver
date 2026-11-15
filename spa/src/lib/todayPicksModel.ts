@@ -8,9 +8,9 @@ export function visiblePickRows<T>(rows: T[], unlocked: boolean): T[] {
     return unlocked ? [...rows] : rows.slice(0, FREE_PICK_ROWS);
 }
 
-export function summarizePickTopic(topic: PickCountTopic, minRatio = 1, fallbackTarget = 30): PickTopicSummary {
+export function summarizePickTopic(topic: PickCountTopic, minRatio = 1, fallbackTarget = 100): PickTopicSummary {
     const validTarget = (value: unknown): value is number => typeof value === 'number' && Number.isInteger(value) && value > 0;
-    const target = validTarget(topic.targetCount) ? topic.targetCount : validTarget(fallbackTarget) ? fallbackTarget : 30;
+    const target = validTarget(topic.targetCount) ? topic.targetCount : validTarget(fallbackTarget) ? fallbackTarget : 100;
     const golden = topic.rows.filter((row) => Number.isFinite(row.ratio) && row.ratio >= minRatio).length;
     const seasonal = topic.rows.filter((row) => !(Number.isFinite(row.ratio) && row.ratio >= minRatio)
         && Number.isInteger(row.seasonPeakMonth) && row.seasonPeakMonth! >= 1 && row.seasonPeakMonth! <= 12).length;

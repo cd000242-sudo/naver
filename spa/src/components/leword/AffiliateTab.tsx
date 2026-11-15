@@ -11,7 +11,7 @@ import { loadUserKeys } from '../../lib/userKeys';
 import { campaignFreshness } from '../../lib/affiliateFreshness.mjs';
 import { affiliateCategory, compareGolden, goldenOf, summarizeCategories } from '../../lib/affiliateGolden.mjs';
 import { enrichKey, loadKeywordEnrich, type KeywordEnrich } from '../../lib/keywordEnrich.mjs';
-import { AffiliateGoldenAids, CategoryChips, CategoryGoldenKeywords, GoldenRatioBadge, NonGoldenList } from './AffiliateGoldenParts';
+import { AffiliateGoldenAids, CategoryChips, CategoryGoldenKeywords, GoldenRatioBadge, NonGoldenList, RevealOl } from './AffiliateGoldenParts';
 import { loadCategoryGolden, mergeCategorySummary, type CategoryGolden } from '../../lib/affiliateCategoryGolden.mjs';
 
 /**
@@ -108,13 +108,13 @@ function seatBadge(item: CampaignItem) {
      */
     const measuredDemand = typeof item.needVolume === 'number' && item.needVolume > 0;
     if (!measuredDemand && (seat.verdict === '열림' || seat.verdict === '반열림')) {
-        return { label: `1페이지 ${where} · 정면 ${seat.facing} · 수요 미측정`, color: '#aebccc', bg: 'rgba(174,188,204,.12)' };
+        return { label: `1페이지 ${where} · 정면 ${seat.facing} · 수요 미측정`, color: 'var(--lw-text-secondary)', bg: 'var(--lw-raised)' };
     }
-    if (seat.verdict === '열림') return { label: `1페이지 자리 ${where} · 정면 ${seat.facing}`, color: '#2ecc71', bg: 'rgba(46,204,113,.14)' };
-    if (seat.verdict === '반열림') return { label: `1페이지 ${where} · 정면 ${seat.facing} · 경합`, color: '#f5a623', bg: 'rgba(245,166,35,.14)' };
-    if (seat.verdict === '카드답') return { label: '카드가 답하는 검색어 — 블로그 클릭 없음', color: '#ff6b6b', bg: 'rgba(255,107,107,.14)' };
-    if (seat.verdict === '잠김') return { label: `1페이지 잠김 · 정면 ${seat.facing}`, color: '#ff6b6b', bg: 'rgba(255,107,107,.14)' };
-    return { label: '자리 자료 부족', color: '#aebccc', bg: 'rgba(174,188,204,.12)' };
+    if (seat.verdict === '열림') return { label: `1페이지 자리 ${where} · 정면 ${seat.facing}`, color: 'var(--lw-positive)', bg: 'var(--lw-positive-soft)' };
+    if (seat.verdict === '반열림') return { label: `1페이지 ${where} · 정면 ${seat.facing} · 경합`, color: 'var(--lw-accent-ink)', bg: 'var(--lw-accent-soft)' };
+    if (seat.verdict === '카드답') return { label: '카드가 답하는 검색어 — 블로그 클릭 없음', color: 'var(--lw-negative)', bg: 'var(--lw-negative-soft)' };
+    if (seat.verdict === '잠김') return { label: `1페이지 잠김 · 정면 ${seat.facing}`, color: 'var(--lw-negative)', bg: 'var(--lw-negative-soft)' };
+    return { label: '자리 자료 부족', color: 'var(--lw-text-secondary)', bg: 'var(--lw-raised)' };
 }
 
 /*
@@ -127,9 +127,9 @@ function seatBadge(item: CampaignItem) {
 function verdictBadge(item: CampaignItem) {
     const top = item.serpTop;
     if (!top || !top.sampled) return null;
-    if (top.exact <= 2) return { label: `제목 정면 ${top.exact}개 · 본문 확인 필요`, color: '#2ecc71', bg: 'rgba(46,204,113,.14)' };
-    if (top.exact <= 5) return { label: `경합 · 정면 ${top.exact}개`, color: '#f5a623', bg: 'rgba(245,166,35,.14)' };
-    return { label: `포화 · 정면 ${top.exact}개`, color: '#ff6b6b', bg: 'rgba(255,107,107,.14)' };
+    if (top.exact <= 2) return { label: `제목 정면 ${top.exact}개 · 본문 확인 필요`, color: 'var(--lw-positive)', bg: 'var(--lw-positive-soft)' };
+    if (top.exact <= 5) return { label: `경합 · 정면 ${top.exact}개`, color: 'var(--lw-accent-ink)', bg: 'var(--lw-accent-soft)' };
+    return { label: `포화 · 정면 ${top.exact}개`, color: 'var(--lw-negative)', bg: 'var(--lw-negative-soft)' };
 }
 
 function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
@@ -284,7 +284,7 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                         )}
                     </p>
                     {(freshness.stale || freshness.failed) && (
-                        <p role="status" style={{ color: '#f5a623', margin: '0 0 16px', fontSize: 14 }}>
+                        <p role="status" style={{ color: 'var(--lw-accent-ink)', margin: '0 0 16px', fontSize: 15 }}>
                             {freshness.needsLogin ? '수집 계정의 로그인이 만료되어 갱신이 중단됐습니다.' : '최신 상품 목록이 아직 확인되지 않았습니다.'}
                             {' '}위 수집 시각의 마지막 확인 목록입니다. 판매 여부와 수수료는 제휴 콘솔에서 다시 확인해주세요.
                         </p>
@@ -296,11 +296,11 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                     )}
                     <CategoryChips summary={categorySummary} value={activeCategory} total={inView.length} onChange={setCategory} />
                     <CategoryGoldenKeywords category={activeCategory} byCategory={catGolden.byCategory} builtAt={catGolden.builtAt} onAnalyze={onAnalyze} productNames={(campaigns?.items || []).map((i) => i.name)} />
-                    <ol className="lw-product-list">
+                    <RevealOl key={`${active.label}|${activeCategory}`} className="lw-product-list">
                         {displayed.map(({ item, recommendation, golden }, index) => {
                             // 분석·검색은 니즈 검색어가 우선 — 상품명 검색어는 수요가 없다(실측 0~140).
                             const query = golden.golden ? golden.query : recommendation.demand.status === 'verified' ? recommendation.query : item.keyword || item.name;
-                            const badge = { label: recommendation.status === 'ready' ? '근거 통과 · 성과 보장 아님' : recommendation.status === 'excluded' ? '추천 제외 · 보관' : '추가 조사 필요', color: recommendation.status === 'ready' ? '#2ecc71' : '#f5a623', bg: 'rgba(245,166,35,.14)' };
+                            const badge = { label: recommendation.status === 'ready' ? '근거 통과 · 성과 보장 아님' : recommendation.status === 'excluded' ? '추천 제외 · 보관' : '추가 조사 필요', color: recommendation.status === 'ready' ? 'var(--lw-positive)' : 'var(--lw-accent-ink)', bg: recommendation.status === 'ready' ? 'var(--lw-positive-soft)' : 'var(--lw-accent-soft)' };
                             // 글 제목 1줄 — AI 추론 제목(스냅샷) 우선, 없으면 규칙 조립 폴백.
                             const titleLine = affiliateTitle(item);
                             return (
@@ -315,8 +315,8 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             {badge && (
                                                 <span style={{
                                                     color: badge.color, background: badge.bg,
-                                                    border: `1px solid ${badge.color}44`, borderRadius: 999,
-                                                    padding: '2px 8px', fontWeight: 900, fontSize: 10.5,
+                                                    borderRadius: 999,
+                                                    padding: '2px 8px', fontWeight: 600, fontSize: 13,
                                                 }}>{badge.label}</span>
                                             )}
                                             {seatBadge(item) && (
@@ -324,8 +324,8 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                                     title={`블로그탭 상위 ${item.seat?.sampled}개를 실제로 받아 잰 값 · 검색어 '${item.seat?.keyword}' · ${item.seat ? new Date(item.seat.measuredAt).toLocaleDateString('ko-KR') : ''}`}
                                                     style={{
                                                         color: seatBadge(item)?.color, background: seatBadge(item)?.bg,
-                                                        border: `1px solid ${seatBadge(item)?.color}44`, borderRadius: 999,
-                                                        padding: '2px 8px', fontWeight: 900, fontSize: 10.5,
+                                                        borderRadius: 999,
+                                                        padding: '2px 8px', fontWeight: 600, fontSize: 13,
                                                     }}
                                                 >{seatBadge(item)?.label}</span>
                                             )}
@@ -369,11 +369,11 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                         )}
                                         {titleLine && (
                                             <div title={titleLine.basis} style={{ display: 'flex', alignItems: 'center', gap: 8, margin: '4px 0 2px', minWidth: 0 }}>
-                                                <span style={{ flexShrink: 0, padding: '1px 7px', borderRadius: 6, background: 'rgba(251,191,36,.14)', color: '#fbbf24', fontSize: 10, fontWeight: 800 }}>{titleLine.label}</span>
-                                                <em style={{ fontStyle: 'normal', fontWeight: 700, fontSize: 13, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{titleLine.text}</em>
+                                                <span style={{ flexShrink: 0, padding: '0 8px', borderRadius: 6, background: 'var(--lw-accent-soft)', color: 'var(--lw-accent-ink)', fontSize: 13, fontWeight: 600 }}>{titleLine.label}</span>
+                                                <em style={{ fontStyle: 'normal', fontWeight: 600, fontSize: 13, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{titleLine.text}</em>
                                                 <button
                                                     type="button"
-                                                    className="lw-mini"
+                                                    className="lw-mini" style={{ minHeight: 44 }}
                                                     onClick={() => {
                                                         navigator.clipboard?.writeText(titleLine.text);
                                                         setCopied(`title:${item.url || item.name}`);
@@ -382,7 +382,7 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                                 >{copied === `title:${item.url || item.name}` ? '복사됨' : '복사'}</button>
                                             </div>
                                         )}
-                                        <p style={{ fontSize: 12, color: '#f5a623', lineHeight: 1.6 }}>{recommendation.reasons.map(recommendationReason).join(' ')}</p>
+                                        <p style={{ fontSize: 13, color: 'var(--lw-accent-ink)', lineHeight: 1.6 }}>{recommendation.reasons.map(recommendationReason).join(' ')}</p>
                                         <div className="lw-product-metrics">
                                             {typeof item.price === 'number' && item.price > 0 && (
                                                 <span className="lw-product-price"><strong>{item.price.toLocaleString('ko-KR')}원</strong></span>
@@ -429,9 +429,9 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                         </div>
                                     </div>
                                     <div className="lw-product-actions">
-                                        <button type="button" className="lw-act lw-act-blue" onClick={() => onAnalyze(query)}>LEWORD 키워드분석</button>
+                                        <button type="button" className="lw-act lw-act-blue" style={{ minHeight: 44, display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => onAnalyze(query)}>LEWORD 키워드분석</button>
                                         <a
-                                            className="lw-act lw-act-green"
+                                            className="lw-act lw-act-green" style={{ minHeight: 44, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                                             href={`https://search.naver.com/search.naver?ssc=tab.blog.all&sm=tab_jum&query=${encodeURIComponent(query)}`}
                                             target="_blank"
                                             rel="noreferrer"
@@ -439,7 +439,7 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                         {readyLink(item) ? (
                                             <button
                                                 type="button"
-                                                className="lw-act lw-act-gold"
+                                                className="lw-act lw-act-gold" style={{ minHeight: 44, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                                                 onClick={() => {
                                                     navigator.clipboard?.writeText(readyLink(item));
                                                     setCopied(item.productId || item.name);
@@ -447,7 +447,7 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                                 }}
                                             >
                                                 {copied === (item.productId || item.name) ? '복사했습니다' : '제휴링크 복사'}
-                                                <span className="lw-act-sub">
+                                                <span className="lw-act-sub" style={{ minHeight: 44, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                                     {item.reward || '이미 발급된 링크입니다'}
                                                 </span>
                                             </button>
@@ -460,7 +460,7 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                              * 같은 이름의 카드가 있고 카드마다 [링크 발급] 버튼이 있다.
                                              */
                                             <a
-                                                className="lw-act lw-act-gold"
+                                                className="lw-act lw-act-gold" style={{ minHeight: 44, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                                                 href="https://sharelink.toss.im/links/recommended-products"
                                                 target="_blank"
                                                 rel="noreferrer"
@@ -468,7 +468,7 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                                 onClick={() => navigator.clipboard?.writeText(item.name)}
                                             >
                                                 상품 조회에서 발급
-                                                <span className="lw-act-sub">
+                                                <span className="lw-act-sub" style={{ minHeight: 44, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                                     {item.inConsoleList
                                                         ? '이름 복사됨 — Ctrl+F 로 찾아 [링크 발급]'
                                                         : '이름 복사됨 — 목록에 없으면 토스 앱 공유로 발급'}
@@ -476,14 +476,14 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             </a>
                                         ) : (
                                             <a
-                                                className="lw-act lw-act-gold"
+                                                className="lw-act lw-act-gold" style={{ minHeight: 44, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                                                 href={consoleUrl()}
                                                 target="_blank"
                                                 rel="noreferrer"
                                                 onClick={() => navigator.clipboard?.writeText(item.name)}
                                             >
                                                 콘솔에서 발급받기
-                                                <span className="lw-act-sub">상품명 복사됨 — 검색창에 붙여넣기</span>
+                                                <span className="lw-act-sub" style={{ minHeight: 44, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>상품명 복사됨 — 검색창에 붙여넣기</span>
                                             </a>
                                         )}
                                     </div>
@@ -511,7 +511,7 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                 </li>
                             );
                         })}
-                    </ol>
+                    </RevealOl>
                     <NonGoldenList rows={nonGolden.map(({ item, golden }) => ({ key: item.url || item.name, name: item.name, golden }))} />
                 </>
             )}

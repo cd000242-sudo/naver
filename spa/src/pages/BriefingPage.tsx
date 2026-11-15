@@ -1,5 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect } from 'react';
+import SplitWords from '../components/motion/SplitWords';
 import HomeOperationsBoard from '../components/HomeOperationsBoard';
+import { ShellIcon } from '../components/ShellIcons';
+import { light, lightRadius, motion, type } from '../styles/tokens';
 
 /**
  * 무료 선정 황금키워드 전용 페이지.
@@ -21,34 +24,47 @@ function BriefingPage() {
     return (
         <section className="briefing-page" aria-labelledby="briefing-page-title">
             <style>{`
-                /* 상단 패딩은 고정 네비바 높이(72px)를 비켜야 제목이 가려지지 않는다. */
-                .briefing-page { padding: 104px 16px 56px; max-width: 1180px; margin: 0 auto; }
-                .briefing-page-head { margin-bottom: 18px; }
-                .briefing-page-kicker {
-                    display: inline-block; font-size: 12px; font-weight: 800; letter-spacing: .12em;
-                    color: #69b7ff; margin-bottom: 8px;
+                /* Top padding clears the fixed nav bar (72px) so the title is never covered. */
+                .briefing-page { padding: 120px 16px 64px; max-width: 1180px; margin: 0 auto; }
+                .briefing-page-head { margin-bottom: 24px; }
+                .briefing-page-head h1 {
+                    margin: 0 0 12px; color: ${light.text};
+                    font-size: clamp(${type.h1Mobile}px, 5vw, ${type.h1}px); font-weight: 700; line-height: 1.25;
                 }
-                .briefing-page-head h1 { font-size: 26px; line-height: 1.32; margin: 0 0 8px; }
-                .briefing-page-head p { margin: 0; font-size: 14px; line-height: 1.6; opacity: .82; }
+                .briefing-page-head p {
+                    margin: 0; max-width: 720px; color: ${light.textSecondary};
+                    font-size: ${type.body}px; line-height: 1.7;
+                }
                 .briefing-page-back {
-                    display: inline-flex; align-items: center; gap: 6px; margin-top: 14px;
-                    font-size: 13px; font-weight: 700; text-decoration: none;
-                    padding: 8px 14px; border-radius: 999px;
-                    border: 1px solid rgba(255, 255, 255, .18);
+                    display: inline-flex; align-items: center; gap: 4px; margin-top: 16px;
+                    min-height: 44px; padding: 0 16px;
+                    border: 1px solid ${light.line}; border-radius: ${lightRadius.control}px;
+                    background: ${light.surface}; color: ${light.text};
+                    font-size: ${type.small}px; font-weight: 500; text-decoration: none;
+                    transition: background-color ${motion.fast} ${motion.ease}, border-color ${motion.fast} ${motion.ease};
                 }
-                .briefing-page-back:hover { border-color: rgba(105, 183, 255, .55); }
+                .briefing-page-back:hover { background: ${light.raised}; border-color: ${light.lineStrong}; }
+                .briefing-page-back:focus-visible { outline: 2px solid ${light.text}; outline-offset: 2px; }
+                /* The shared board carries the home page's own top offset and side padding; this page already has both. */
+                .briefing-page .home-ops { margin-bottom: 0; padding: 0; }
+                /* Rank bars on this page: no track, a thin bar, gold for rank 1 only and neutral for the rest.
+                   Scoped here so the shared board itself stays untouched. */
+                .briefing-page .home-ops-chart-track { height: 4px; background: transparent; }
+                .briefing-page .home-ops-chart-track span { background: ${light.lineStrong}; }
+                .briefing-page .home-ops-chart-row:first-child .home-ops-chart-track span { background: ${light.accent}; }
                 @media (max-width: 720px) {
-                    .briefing-page { padding: 20px 10px 44px; }
-                    .briefing-page-head h1 { font-size: 21px; }
+                    .briefing-page { padding: 96px 16px 48px; }
                 }
             `}</style>
 
             <header className="briefing-page-head">
-                <span className="briefing-page-kicker">DEPUTY GOLDEN KEYWORDS</span>
-                <h1 id="briefing-page-title">무료 선정 황금키워드</h1>
+                <h1 id="briefing-page-title"><SplitWords text="무료 선정 황금키워드" /></h1>
                 <p>매일 검토해 올린 고정 키워드 전체 목록입니다. 실시간 값이 아니라 검토 시점의 고정 스냅샷이며, 기회지수는 검색량 ÷ (문서수 + 1) 로 계산합니다.</p>
-                {/* 돌아갈 때도 실제 페이지 로드로 둔다 — 홈 복귀 시에도 광고 자리가 생긴다. */}
-                <a className="briefing-page-back" href="/">← 홈으로 돌아가기</a>
+                {/* Going back is a real page load too, so the home page also gets an ad slot on return. */}
+                <a className="briefing-page-back" href="/">
+                    <ShellIcon name="chevronLeft" size={16} />
+                    홈으로 돌아가기
+                </a>
             </header>
 
             <HomeOperationsBoard briefingOnly />

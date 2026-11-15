@@ -6,6 +6,7 @@
  */
 import { Link } from 'react-router-dom';
 import { ArrowRight } from './ProductIcons';
+import { light, lightRadius, type } from '../../styles/tokens';
 
 const PROOF_SHOTS = [
     { src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_07-fast.jpg', alt: '네이버 블로그 통계 일간현황 — 방문횟수 9,177', caption: '방문횟수 9,177 · 블로그 통계 화면' },
@@ -16,21 +17,22 @@ const PROOF_SHOTS = [
 export function DetailExtrasStyles() {
     return (
         <style>{`
-.pp-proofs { margin-top:72px; padding-top:40px; border-top:1px solid var(--pp-line); }
-.pp-proofs h3 { margin:0 0 8px; font-size:24px; font-weight:800; letter-spacing:-.02em; }
-.pp-proofs > p { margin:0; color:var(--pp-ink-3); font-size:15px; }
-.pp-proofs-row { margin:28px 0 0; padding:0; list-style:none; display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:18px; }
-.pp-proofs-row figure { margin:0; border-radius:14px; overflow:hidden; border:1px solid var(--pp-line-strong); background:#0d0d14; }
-.pp-proofs-row img { display:block; width:100%; aspect-ratio:4 / 3; object-fit:cover; object-position:top; background:#f4f5f7; }
-.pp-proofs-row figcaption { padding:12px 16px; border-top:1px solid var(--pp-line); color:var(--pp-mint); font-size:14.5px; font-weight:700; font-variant-numeric:tabular-nums; }
-.pp-companion { margin-top:56px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:20px 32px; padding:28px 32px; border-radius:16px; border:1px solid var(--pp-line-strong); background:rgba(18,18,26,.6); }
-.pp-companion h3 { margin:0 0 6px; font-size:21px; font-weight:800; letter-spacing:-.02em; }
-.pp-companion p { margin:0; color:var(--pp-ink-2); font-size:16px; max-width:62ch; }
-.pp-companion a { display:inline-flex; align-items:center; gap:8px; color:var(--pp-gold); font-weight:800; white-space:nowrap; }
+.pp-proofs { margin-top:64px; padding-top:40px; border-top:1px solid var(--pp-line); }
+.pp-proofs h3 { margin:0 0 8px; font-size:${type.h3}px; font-weight:600; letter-spacing:-.02em; }
+.pp-proofs > p { margin:0; color:var(--pp-ink-2); font-size:${type.small}px; }
+.pp-proofs-row { margin:24px 0 0; padding:0; list-style:none; display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:16px; }
+.pp-proofs-row figure { margin:0; border-radius:${lightRadius.card}px; overflow:hidden; border:1px solid var(--pp-line); background:var(--pp-panel); box-shadow:${light.shadowSm}; }
+.pp-proofs-row img { display:block; width:100%; aspect-ratio:4 / 3; object-fit:cover; object-position:top; background:var(--pp-raised); }
+.pp-proofs-row figcaption { padding:12px 16px; border-top:1px solid var(--pp-line); color:var(--pp-ink); font-size:${type.small}px; font-weight:600; font-variant-numeric:tabular-nums; }
+.pp-companion { margin-top:48px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px 32px; padding:24px 32px; border-radius:${lightRadius.card}px; border:1px solid var(--pp-line); background:var(--pp-panel); }
+.pp-companion h3 { margin:0 0 4px; font-size:${type.lead}px; font-weight:600; letter-spacing:-.02em; }
+.pp-companion p { margin:0; color:var(--pp-ink-2); font-size:${type.small}px; max-width:62ch; }
+.pp-companion a { display:inline-flex; align-items:center; gap:8px; min-height:44px; color:var(--pp-gold); font-weight:600; white-space:nowrap; }
 .pp-companion a svg { width:18px; height:18px; }
 @media (max-width: 720px) {
+  .pp-proofs h3 { font-size:${type.lead}px; }
   .pp-proofs-row { grid-template-columns:1fr; }
-  .pp-companion { padding:22px 20px; }
+  .pp-companion { padding:20px; }
 }
 `}</style>
     );

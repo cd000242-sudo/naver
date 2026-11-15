@@ -26,10 +26,10 @@ function agoText(minutes: number): string {
 }
 
 const BADGE = {
-    new: { color: '#fecaca', bg: 'rgba(239,68,68,.18)', border: 'rgba(239,68,68,.5)' },
-    rising: { color: '#fde68a', bg: 'rgba(245,158,11,.16)', border: 'rgba(245,158,11,.5)' },
-    steady: { color: '#cbd5e1', bg: 'rgba(148,163,184,.12)', border: 'rgba(148,163,184,.35)' },
-    falling: { color: '#bfdbfe', bg: 'rgba(59,130,246,.14)', border: 'rgba(59,130,246,.45)' },
+    new: { color: 'var(--lw-negative)', bg: 'var(--lw-negative-soft)' },
+    rising: { color: 'var(--lw-accent-ink)', bg: 'var(--lw-accent-soft)' },
+    steady: { color: 'var(--lw-text-secondary)', bg: 'var(--lw-raised)' },
+    falling: { color: 'var(--lw-text-secondary)', bg: 'var(--lw-raised)' },
 } as const;
 
 export function badgeText(t: ShortentsTopic, nowMs: number): string {
@@ -60,20 +60,20 @@ export default function ShortentsRisingPanel({ onAnalyze }: { onAnalyze?: (keywo
     const groups = groupByCategory(data.topics);
     const activeCategory = category === '전체' || groups.some((g) => g.category === category) ? category : '전체';
     const shown = activeCategory === '전체' ? groups : groups.filter((g) => g.category === activeCategory);
-    const link = { color: '#93c5fd', fontSize: 12, textDecoration: 'none' } as const;
+    const link = { display: 'inline-flex', alignItems: 'center', minHeight: 44, padding: '0 4px', color: 'var(--lw-accent-ink)', fontSize: 13, textDecoration: 'underline', textUnderlineOffset: 3 } as const;
     const toggle = () => setOpen((v) => { writeOpen(!v); return !v; });
-    const chip = (on: boolean) => ({ padding: '3px 10px', borderRadius: 999, fontSize: 12, cursor: 'pointer', color: on ? '#1c1917' : '#e2e8f0', background: on ? '#fbbf24' : 'rgba(15,23,42,.6)', border: `1px solid ${on ? '#fbbf24' : 'rgba(148,163,184,.3)'}` });
+    const chip = (on: boolean) => ({ minHeight: 44, padding: '0 16px', borderRadius: 999, fontSize: 13, fontVariantNumeric: 'tabular-nums' as const, cursor: 'pointer', color: on ? 'var(--lw-text)' : 'var(--lw-text-secondary)', background: on ? 'var(--lw-accent-soft)' : 'var(--lw-surface)', border: `1px solid ${on ? 'var(--lw-accent)' : 'var(--lw-line)'}` });
     const renderTopic = (t: ShortentsTopic, i: number) => {
         const b = BADGE[t.status];
         return (
-            <li key={`${t.keyword}-${i}`} style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 8, padding: '7px 0', borderTop: i ? '1px solid rgba(148,163,184,.15)' : 'none', fontSize: 13, color: '#e2e8f0' }}>
-                <span style={{ padding: '2px 8px', borderRadius: 999, fontSize: 11.5, whiteSpace: 'nowrap', color: b.color, background: b.bg, border: `1px solid ${b.border}` }}>{badgeText(t, nowMs)}</span>
-                <strong style={{ color: '#fff' }}>{t.keyword}</strong>
-                {t.summary && <span style={{ flex: '1 1 220px', minWidth: 0, fontSize: 12.5, color: '#b6c4d6', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={t.summary}>{t.summary}</span>}
-                {t.docs != null && <span style={{ fontSize: 12, color: '#cbd5e1', whiteSpace: 'nowrap' }}>블로그 문서 {t.docs.toLocaleString('ko-KR')}개</span>}
+            <li key={`${t.keyword}-${i}`} style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 8, padding: '8px 0', borderTop: i ? '1px solid var(--lw-line)' : 'none', fontSize: 15, color: 'var(--lw-text)' }}>
+                <span style={{ padding: '4px 8px', borderRadius: 999, fontSize: 13, whiteSpace: 'nowrap', color: b.color, background: b.bg }}>{badgeText(t, nowMs)}</span>
+                <strong style={{ color: 'var(--lw-text)', fontWeight: 600 }}>{t.keyword}</strong>
+                {t.summary && <span style={{ flex: '1 1 220px', minWidth: 0, fontSize: 13, color: 'var(--lw-text-secondary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={t.summary}>{t.summary}</span>}
+                {t.docs != null && <span style={{ fontSize: 13, color: 'var(--lw-text-secondary)', whiteSpace: 'nowrap', fontVariantNumeric: 'tabular-nums' }}>블로그 문서 {t.docs.toLocaleString('ko-KR')}개</span>}
                 <span style={{ display: 'inline-flex', gap: 6, marginLeft: 'auto' }}>
-                    {onAnalyze && <button type="button" className="lw-mini" onClick={() => onAnalyze(t.keyword)}>LEWORD 분석</button>}
-                    <a className="lw-mini" href={`https://search.naver.com/search.naver?ssc=tab.blog.all&query=${encodeURIComponent(t.keyword)}`} target="_blank" rel="noreferrer">네이버 블로그 검색</a>
+                    {onAnalyze && <button type="button" className="lw-mini" style={{ minHeight: 44 }} onClick={() => onAnalyze(t.keyword)}>LEWORD 분석</button>}
+                    <a className="lw-mini" style={{ display: 'inline-flex', alignItems: 'center', minHeight: 44 }} href={`https://search.naver.com/search.naver?ssc=tab.blog.all&query=${encodeURIComponent(t.keyword)}`} target="_blank" rel="noreferrer">네이버 블로그 검색</a>
                     {t.articleUrl && <a style={link} href={t.articleUrl} target="_blank" rel="noreferrer">기사</a>}
                 </span>
             </li>
@@ -81,20 +81,20 @@ export default function ShortentsRisingPanel({ onAnalyze }: { onAnalyze?: (keywo
     };
 
     return (
-        <section aria-label="숏텐츠 급상승" style={{ margin: '0 0 16px', padding: '12px 14px', border: '1px solid #b8962e', borderRadius: 14, background: 'rgba(15,23,42,.55)' }}>
-            <button type="button" onClick={toggle} aria-expanded={open} style={{ display: 'flex', alignItems: 'center', gap: 8, width: '100%', padding: 0, border: 'none', background: 'none', cursor: 'pointer', textAlign: 'left' }}>
-                <span style={{ fontSize: 15, fontWeight: 700, color: '#fff7d1' }}>{open ? '▾' : '▸'} 숏텐츠 급상승</span>
-                <small style={{ fontSize: 12, color: '#94a3b8' }}>{published ? `${published} 발행 · ` : ''}30분마다 갱신 · {data.topics.length}개</small>
-                <span style={{ marginLeft: 'auto', fontSize: 12, color: '#93c5fd' }}>{open ? '접기' : '펼치기'}</span>
+        <section aria-label="숏텐츠 급상승" style={{ margin: '0 0 16px', padding: '12px 16px', border: '1px solid var(--lw-line)', borderRadius: 14, background: 'var(--lw-surface)', boxShadow: 'var(--lw-shadow-sm)' }}>
+            <button type="button" onClick={toggle} aria-expanded={open} style={{ display: 'flex', alignItems: 'center', gap: 8, width: '100%', minHeight: 44, padding: 0, border: 'none', background: 'none', cursor: 'pointer', textAlign: 'left' }}>
+                <span style={{ fontSize: 17, fontWeight: 600, color: 'var(--lw-text)' }}>{open ? '▾' : '▸'} 숏텐츠 급상승</span>
+                <small style={{ fontSize: 13, color: 'var(--lw-text-muted)' }}>{published ? `${published} 발행 · ` : ''}30분마다 갱신 · {data.topics.length}개</small>
+                <span style={{ marginLeft: 'auto', fontSize: 13, color: 'var(--lw-accent-ink)' }}>{open ? '접기' : '펼치기'}</span>
             </button>
             {fresh.stale && (
-                <p role="status" style={{ margin: '6px 0 0', fontSize: 12.5, color: '#fbbf24' }}>
+                <p role="status" style={{ margin: '4px 0 0', fontSize: 13, color: 'var(--lw-accent-ink)' }}>
                     앱이 꺼져 있어 {fresh.minutes == null ? '예전' : agoText(fresh.minutes)} 목록입니다 — LEWORD 앱이 켜져 있어야 30분마다 갱신됩니다
                 </p>
             )}
             {open && <>
                 {groups.length > 1 && (
-                    <div role="group" aria-label="숏텐츠 분야" style={{ display: 'flex', flexWrap: 'wrap', gap: 6, margin: '10px 0 2px' }}>
+                    <div role="group" aria-label="숏텐츠 분야" style={{ display: 'flex', flexWrap: 'wrap', gap: 8, margin: '8px 0 4px' }}>
                         <button type="button" aria-pressed={activeCategory === '전체'} style={chip(activeCategory === '전체')} onClick={() => setCategory('전체')}>전체 {data.topics.length}</button>
                         {groups.map((g) => (
                             <button key={g.category} type="button" aria-pressed={activeCategory === g.category} style={chip(activeCategory === g.category)} onClick={() => setCategory(g.category)}>{g.category} {g.topics.length}</button>
@@ -103,7 +103,7 @@ export default function ShortentsRisingPanel({ onAnalyze }: { onAnalyze?: (keywo
                 )}
                 {shown.map((g) => (
                     <details key={g.category} open style={{ marginTop: 8 }}>
-                        <summary style={{ cursor: 'pointer', fontSize: 13, fontWeight: 700, color: '#fcd34d' }}>{g.category} <span style={{ color: '#94a3b8', fontWeight: 500 }}>{g.topics.length}개</span></summary>
+                        <summary style={{ cursor: 'pointer', padding: '12px 0', fontSize: 15, fontWeight: 600, color: 'var(--lw-text)' }}>{g.category} <span style={{ color: 'var(--lw-text-muted)', fontWeight: 500, fontSize: 13 }}>{g.topics.length}개</span></summary>
                         <ol style={{ listStyle: 'none', margin: '4px 0 0', padding: 0 }}>
                             {g.topics.map(renderTopic)}
                         </ol>

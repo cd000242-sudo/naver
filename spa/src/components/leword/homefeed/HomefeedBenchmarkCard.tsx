@@ -63,7 +63,11 @@ function TitleList({titles:boardTitles,editorTitle,c}:{titles:string[];editorTit
 /*
  * 실측 홈판 증거(2026-10-01) — 어드바이저가 잰 실제 홈판 상위 · 내 블로그 홈판 유입과 맞댄 결과. 확률이 아니라 확인된 사실만 단다.
  */
-export default function HomefeedBenchmarkCard({candidate:c,evidence,enrich}:{candidate:BenchmarkCandidate;evidence?:HomefeedEvidence|null;enrich?:KeywordEnrich}) {
+/** [썼어요] mark (2026-11-15) — kept in this browser only; the board uses it for the next-day follow-up line. */
+function WrittenToggle({written,onToggle}:{written:boolean;onToggle:()=>void}) {
+ return <button type="button" className="hfb-written" aria-pressed={written} onClick={onToggle}>{written?'썼어요 표시됨':'썼어요'}</button>;
+}
+export default function HomefeedBenchmarkCard({candidate:c,evidence,enrich,written=false,onToggleWritten}:{candidate:BenchmarkCandidate;evidence?:HomefeedEvidence|null;enrich?:KeywordEnrich;written?:boolean;onToggleWritten?:()=>void}) {
  const proof=evidence?.homefeed;
  // 그래프 검색어 = 작성 안내의 노릴 검색어 첫 번째(카드 keyword 는 기사 제목 조각이라 데이터랩 기록이 없다 — 2026-10-22 실측)
  const searchQuery=c.searchTargets[0]||'';
@@ -73,17 +77,20 @@ export default function HomefeedBenchmarkCard({candidate:c,evidence,enrich}:{can
   {label:'지금 쓸지',body:<>{proof?<b>같은 소재가 실제 홈판 {proof.rank?`${proof.rank}위`:''}({monthDay(proof.day)})에 올랐습니다 — 이 흐름이 살아 있을 때 쓰세요. </b>:null}<DemandStep demand={enrich?.demand} fallback={`검색 추이 그래프 준비 중 — ${c.freshnessLabel||'작성 시점'}과 원문 반응(공감 · 댓글이 늘어나는지)으로 판단하세요.`}/></>},
   {label:'무엇을 쓸지',body:guideLine(c.writingDirection?<>{c.writingDirection.split(/(?<=[.다요])\s/)[0]}{c.mustInclude.length>0?` 아래 "반드시 들어갈 내용" ${c.mustInclude.length}가지를 소제목으로 쓰세요.`:''}</>:null)},
   {label:'제목',body:firstTitle?<>위 후킹형 제목 중 내 글과 맞는 하나를 고르세요(예: 「{firstTitle}」). 따옴표 인용은 원문에 실제로 있는 말인지 확인합니다.</>:<>회차가 제목을 짓는 중입니다 — [지금 제목 만들기]로 바로 받을 수 있습니다.</>},
-  // 2026-10-27 실측(25일 · 홈판 상위 70편): 18~03시 발행 0.45% vs 12~18시 0.11%, 상위 70편 중 46편이 발행 다음 날 잡혔다.
-  {label:'언제 올릴지',body:<>실측으로는 <b>저녁 6시~새벽 3시</b>에 발행한 글이 낮 12~6시 발행보다 약 4배 자주 홈판 상위에 올랐고, 대부분 <b>발행 다음 날</b> 잡혔습니다. 원글이 이미 하루를 넘겼다면 오늘 밤 안에 올리세요.</>},
-  {label:'발행 후',body:<><a href={trackUrl(searchQuery||c.keyword)}>노출 추적에 등록</a>하고 24시간 안에 홈판 · 검색 노출을 확인하세요. 안 뜨면 같은 소재를 붙잡지 말고 다음 카드로 넘어갑니다.</>},
+  // Two measurements disagree, so neither is stated as a rule (2026-11-15):
+  //   2026-10-27 (homefeed top 70 posts): 18~03h publishing 0.45% vs 12~18h 0.11%.
+  //   2026-11 operator's sports blog (96 posts): 18% of posts published 06~09h passed 30 homefeed views, 5% or less after 12h.
+  {label:'언제 올릴지',body:<>발행 시각 효과는 실측이 엇갈립니다 · 10/27 홈판 상위 70편은 <b>저녁 6시~새벽 3시</b>, 11월 운영자 스포츠 블로그 96편은 <b>아침 6~9시</b> 발행이 더 잘 떴어요.</>},
+  // Follow-up advice from the same 96-post measurement: a player's 6th post took off after five low ones.
+  {label:'발행 후',body:<>한두 편 안 떠도 같은 인물·사건을 이어서 써 보세요. 홈판 노출은 <b>내 블로그 통계 &gt; 유입경로</b>의 &lsquo;네이버 메인_모바일_홈판&rsquo;에서 확인합니다. <a href={trackUrl(searchQuery||c.keyword)}>노출 추적에 등록</a>은 검색 순위만 잽니다.</>},
  ];
- return <article className={`hfb-card ${c.recommended?'recommended':''}`}>
+ return <article id={`hfb-card-${c.id}`} tabIndex={-1} className={`hfb-card ${c.recommended?'recommended':''}`}>
   <div className="hfb-card-top"><span className={`hfb-status ${c.status}`}>{LABELS[c.status]}</span>{c.recommended&&<span className="hfb-star" aria-label="우선 검토 추천">★ 추천</span>}{proof&&<span className={`hfb-proof ${proof.kind}`}>{proof.kind==='same-post'?'이 글이 실제 홈판':'비슷한 소재가 실제 홈판'} {proof.rank?`${proof.rank}위`:''} · {monthDay(proof.day)}</span>}{evidence?.mine&&<span className="hfb-proof mine">내 블로그 홈판 유입 소재 · {evidence.mine.count.toLocaleString('ko-KR')}회</span>}<span className="hfb-category">{c.category}</span><span className="hfb-timing">{c.freshnessLabel||'작성 시점 확인 필요'}</span></div>
-  <div className="hfb-headline"><h3>{c.title||c.keyword}</h3><CopyHeadline text={c.title||c.keyword}/></div>
+  <div className="hfb-headline"><h3>{c.title||c.keyword}</h3><CopyHeadline text={c.title||c.keyword}/></div>{onToggleWritten&&<WrittenToggle written={written} onToggle={onToggleWritten}/>}
   {/* 키워드 줄 = 노릴 검색어(2026-10-27 비평 3번) — 카드 keyword 는 기사 제목 조각(1,000장 중 975장)이라 검색량을 잴 수 없었다.
       작성 안내의 자동완성 검색어가 있을 때만 그리고, 수치는 검색어 덧붙이기(keyword-enrich)가 잰 실측만 쓴다. */}
   {searchQuery&&<div className="hfb-keyword"><span>노릴 검색어</span><strong>{searchQuery}</strong><span>월 검색량 <b>{metricText(enrich?.measure?.searchVolume)}</b></span><span>블로그 문서 <b>{metricText(enrich?.measure?.documentCount)}</b></span></div>}
-  {enrich?.demand?<><p style={{margin:'8px 0 0',fontSize:12,color:'#a8b6cb'}}>「{searchQuery}」 검색 추이</p><DemandBlock c={demandCard}/></>:<p style={{margin:'6px 0 0',fontSize:12,color:'#8d9db4'}}>{searchQuery?`「${searchQuery}」 검색 추이 그래프 준비 중 — 데이터랩으로 재서 붙입니다.`:'이 소재는 아직 노릴 검색어(자동완성)가 없어 검색 추이 그래프가 없습니다 — 홈판 반응(공감 · 댓글)으로 판단하세요.'}</p>}
+  {enrich?.demand?<><p style={{margin:'8px 0 0',fontSize:13,color:'var(--lw-text-secondary)'}}>「{searchQuery}」 검색 추이</p><DemandBlock c={demandCard}/></>:<p style={{margin:'8px 0 0',fontSize:13,color:'var(--lw-text-muted)'}}>{searchQuery?`「${searchQuery}」 검색 추이 그래프 준비 중 — 데이터랩으로 재서 붙입니다.`:'이 소재는 아직 노릴 검색어(자동완성)가 없어 검색 추이 그래프가 없습니다 — 홈판 반응(공감 · 댓글)으로 판단하세요.'}</p>}
   <p className="hfb-summary">{c.summary||'원문을 확인한 뒤 사건 내용을 정리해 주세요.'}</p>
   {c.summaryAttribution&&<p className="hfb-attribution">{c.summaryAttribution}</p>}
   <BenchmarkSources sources={c.sources} />

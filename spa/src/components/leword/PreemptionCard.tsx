@@ -7,6 +7,7 @@ import { naverSearchUrl } from './preemptionMeta';
 import type { DemandPoint } from './DemandChartModal';
 import { BRIDGE_OFFLINE_NOTE, BRIDGE_OUTDATED_NOTE, type BridgeMindmap } from '../../lib/bridge';
 import { formatCount } from '../../lib/keywordApi';
+import CountUp from '../motion/CountUp';
 import { MONEY_TIER_LABEL, moneyAmountText, moneyLine, moneyTitle, type MoneyBid } from './moneyBid';
 
 /**
@@ -25,6 +26,10 @@ import { MONEY_TIER_LABEL, moneyAmountText, moneyLine, moneyTitle, type MoneyBid
  * "지금도 비어 있냐"는 물음에 사장님이 직접 판단할 수 있다.
  * 못 읽으면 빈 문자열 — 지어내지 않는다.
  */
+/** Measured count that counts up once on screen; copy and sorting keep reading the row itself. */
+const countUp = (value: number | null | undefined) => (typeof value === 'number' && Number.isFinite(value)
+    ? <CountUp value={value} format={formatCount} reserve /> : formatCount(value));
+
 function measuredAgo(iso: string): string {
     const t = Date.parse(iso);
     if (!Number.isFinite(t)) return '';
@@ -263,9 +268,9 @@ function PreemptionCard({
                           */}
                         <div title={row.searchVolumeLt10 ? '키워드도구 실측 — PC·모바일 한쪽 이상이 월 10회 미만' : undefined}>
                             <span>검색량</span>
-                            <strong>{row.searchVolume === null && row.searchVolumeLt10 ? '10 미만' : formatCount(row.searchVolume)}</strong>
+                            <strong>{row.searchVolume === null && row.searchVolumeLt10 ? '10 미만' : countUp(row.searchVolume)}</strong>
                         </div>
-                        <div><span>문서수</span><strong>{formatCount(row.documentCount)}</strong></div>
+                        <div><span>문서수</span><strong>{countUp(row.documentCount)}</strong></div>
                         {variant === 'issue' ? (
                             <>
                                 {/*
@@ -306,7 +311,7 @@ function PreemptionCard({
                             <>
                                 <div className={typeof row.serp?.adCount === 'number' && row.serp.adCount >= 5 ? 'money' : ''}>
                                     <span>광고수</span>
-                                    <strong>{typeof row.serp?.adCount === 'number' ? `${row.serp.adCount}개` : '—'}</strong>
+                                    <strong>{typeof row.serp?.adCount === 'number' ? <>{countUp(row.serp.adCount)}개</> : '—'}</strong>
                                 </div>
                                 {/*
                                   * null 은 '없음'이 아니다 — findOpenSlot 은 "훑은 자리가

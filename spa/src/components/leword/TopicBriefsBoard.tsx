@@ -10,6 +10,7 @@ import './TopicBriefsBoard.css';
 // 검색어 덧붙이기(2026-10-20 사장님 "오늘의 글감도 마찬가지") — 그래프 · 지식인 · 해결할 문제 · 행동 제목 · 벤치마킹, 지금 뜨는 글감 먼저
 import { enrichKey, isHotEnrich, loadKeywordEnrich, type KeywordEnrich } from '../../lib/keywordEnrich.mjs';
 import KeywordAids from './shared/KeywordAids';
+import Reveal from '../motion/Reveal';
 
 type RoundSlot = '아침' | '오후' | '저녁';
 // day 는 7일 창고(2026-09-29)부터 적힌다. 없으면 builtAt 의 KST 날짜로 읽는다.
@@ -118,12 +119,12 @@ export function TopicBriefsContent({ data, error = '', onAnalyze, sourceNotice, 
         <header className="tb-toolbar"><div><span className="tb-brand">LEWORD BRIEF</span><h2>오늘의 글감 <b>{data ? all.length : '—'}</b></h2></div><p>키워드부터 제목·작성 방향·이미지 출처까지</p></header>
         {sourceNotice && <div className="tb-source-notice" role="status">{sourceNotice}</div>}
         <details className="tb-freshness"><summary>{latestBuiltAt ? `최근 공개 · ${kst(latestBuiltAt)}` : '갱신 일정 확인'} · 갱신 일정·상태</summary><BoardFreshness cadence="매일 아침·낮·저녁 세 번" rounds={[{hour:4,minute:23,label:'아침'},{hour:10,minute:23,label:'오후'},{hour:16,minute:23,label:'저녁'}]} lastBuiltAt={latestBuiltAt} /></details>
-        {error && <p className="lw-note lw-note-error">{error}</p>}{!error && !data && <p className="lw-note">불러오는 중…</p>}
+        {error && <p className="lw-note lw-note-error">{error}</p>}{!error && !data && <><p className="lw-note">불러오는 중…</p><div className="lw-skel" aria-hidden="true"><i /><i /><i /></div></>}
         {latestBuiltAt && kstDay(latestBuiltAt) !== kstDay(new Date().toISOString()) && <p className="lw-note">최근 공개 회차는 {kst(latestBuiltAt)}입니다. 작성 전 일정과 조건을 다시 확인하세요.</p>}
         {rounds.length > 0 && <div className="tb-rounds" aria-label="회차 선택"><button type="button" aria-pressed={!activeRound} className={`tb-round${!activeRound?' is-active':''}`} onClick={()=>showRound(null)}><strong>전체 누적</strong><span>{shelfItems.length}건 · {dayCount > 1 ? `최근 ${shelfDays}일 ${dayCount}일치` : `최근 ${shelfDays}일 · 오늘 회차만`}</span></button>{(['아침','오후','저녁'] as const).map(name => {const round=latestRounds.find(item=>item.slot===name);return <button type="button" key={name} disabled={!round} aria-pressed={activeRound?.slot===name} className={`tb-round${activeRound?.slot===name?' is-active':''}`} onClick={()=>showRound(name)}><strong>{name}</strong><span>{round?`${round.items.length}건 · ${kst(round.builtAt)}`:`${SLOT_TIME[name]} 예정`}</span></button>;})}</div>}
         {data && <div className="tb-preference"><label>먼저 볼 분야 <select aria-label="먼저 볼 분야" value={activePreference} onChange={event => choosePreference(event.target.value)}><option value={FINANCIAL_FIRST}>지원금·비즈니스·경제 우선</option><option value={ORIGINAL_ORDER}>전체 분야</option>{fields.filter(name => name !== '전체').map(name => <option key={name} value={name}>{name}</option>)}</select></label><small>공개된 글감의 표시 순서만 바뀝니다. 다른 분야도 함께 볼 수 있습니다. 같은 묶음 안은 매시 정각 새로 섞입니다.</small>{unlocked && <button type="button" className="tb-shuffle" onClick={() => { reshuffle(); setShown(PAGE_SIZE); }}>순서 섞기</button>}</div>}
         {data && <div className="tb-fields" aria-label="분야 선택"><strong>{filtered.length} / {all.length}개</strong>{fields.map(name=><button type="button" key={name} aria-pressed={activeField===name} className={`tb-field${activeField===name?' is-active':''}`} onClick={()=>showField(name)}>{name}<b>{name==='전체'?all.length:all.filter(brief=>brief.field===name).length}</b></button>)}</div>}
-        <div className="tb-list">{visible.map(({ brief, key })=><BriefCard key={key} brief={brief} onAnalyze={onAnalyze} enrich={enrichOf(brief)} />)}</div>
+        <Reveal stagger key={`${activeRound?.slot ?? 'all'}|${activeField}|${activePreference}`} className="tb-list">{visible.map(({ brief, key })=><BriefCard key={key} brief={brief} onAnalyze={onAnalyze} enrich={enrichOf(brief)} />)}</Reveal>
         {remaining > 0 && <button type="button" className="lw-picks-btn tb-more" onClick={()=>setShown(value=>value+PAGE_SIZE)}>더 보기 · 남은 {remaining}개</button>}
         {data && !error && !filtered.length && <p className="tb-empty">이 회차에 공개된 글감이 없습니다.</p>}
         {data && !unlocked && filtered.length>FREE_BRIEFS && <LicenseGate onUnlock={()=>setUnlocked(isUnlocked())} remaining={filtered.length-FREE_BRIEFS} freeRows={FREE_BRIEFS} boardLabel="오늘의 글감" />}

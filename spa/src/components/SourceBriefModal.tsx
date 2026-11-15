@@ -142,17 +142,16 @@ function SourceBriefModal({ lane, item, onClose }: Props) {
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="brief-modal-keyword"
-                style={{ borderColor: lane.accent + '55' }}
             >
                 <header className="brief-modal-head">
                     <div>
-                        <span className="brief-modal-lane" style={{ color: lane.accent, borderColor: lane.accent + '55' }}>
-                            {lane.label} {rank}위{item.ago ? ` · ${item.ago}` : ''}
+                        <span className="brief-modal-lane">
+                            <i style={{ background: lane.accent }} />{lane.label} {rank}위{item.ago ? ` · ${item.ago}` : ''}
                         </span>
                         <h2 id="brief-modal-keyword">{keyword}</h2>
                         <p>{description}</p>
                     </div>
-                    <button ref={closeButtonRef} type="button" onClick={onClose} aria-label="닫기">✕</button>
+                    <button ref={closeButtonRef} type="button" onClick={onClose} aria-label="닫기"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true"><path d="M4 4l10 10M14 4L4 14" /></svg></button>
                 </header>
 
                 <div className="brief-modal-body">
@@ -160,7 +159,7 @@ function SourceBriefModal({ lane, item, onClose }: Props) {
                         <section className="brief-modal-facts" aria-label={`${keyword} 관련 보도 사진`}>
                             <div className="brief-modal-section-head">
                                 <strong>무슨 일이 있었나</strong>
-                                <small>{freshness || '기사 대표 사진 — 원본 그대로'}</small>
+                                <small>{freshness || '기사 대표 사진 · 원본 그대로'}</small>
                             </div>
                             {/*
                               사진이 이 칸의 주인공이다(사장님 2026-09-06 "이미지 안 짤리게").
@@ -211,7 +210,7 @@ function SourceBriefModal({ lane, item, onClose }: Props) {
                         {flow && (
                             <section className="brief-modal-flow" aria-label={`${keyword} 이슈 흐름`}>
                                 <div className="brief-modal-section-head">
-                                    <strong>이슈 흐름 — 왜 뜨나 · 몰린 말 · 다음 물결</strong>
+                                    <strong>이슈 흐름: 왜 뜨나 · 몰린 말 · 다음 물결</strong>
                                     <small>{flowSource || '실검 틈새 회차 실측'}</small>
                                 </div>
                                 <p className="brief-modal-flow-issue">
@@ -251,12 +250,12 @@ function SourceBriefModal({ lane, item, onClose }: Props) {
                                 )}
                                 {waveAll.length > 0 && (
                                     <div className="brief-modal-flow-row">
-                                        <em className="brief-modal-intent-label">다음 물결 <small>에이전트 추론 — 먼저 잡아 둘 말</small></em>
+                                        <em className="brief-modal-intent-label">다음 물결 <small>에이전트 추론 · 먼저 잡아 둘 말</small></em>
                                         <ul className="brief-modal-flow-wave">
                                             {wave.map((next) => (
                                                 <li key={next.keyword}>
                                                     <a href={buildSourceSearchUrl(lane.id, next.keyword)} target="_blank" rel="noreferrer">
-                                                        🌊 {next.keyword}
+                                                        {next.keyword}
                                                         {typeof next.searchVolume === 'number' && <b>{formatCount(next.searchVolume)}</b>}
                                                     </a>
                                                     <span>{next.reason}</span>
@@ -295,11 +294,11 @@ function SourceBriefModal({ lane, item, onClose }: Props) {
                                             <li key={link.url}>
                                                 <a href={link.url} target="_blank" rel="noreferrer">
                                                     {link.press || '기사 원문'}
-                                                    {linkAgo && <small style={{ marginLeft: 6, opacity: 0.6 }}>{linkAgo}</small>}
+                                                    {linkAgo && <small>{linkAgo}</small>}
                                                 </a>
                                                 {/* 그 기사에서 그대로 가져온 요약 한 문장(2026-09-06 "출처에 요약문이 있어야"). */}
                                                 {link.summary && (
-                                                    <p style={{ margin: '3px 0 0', fontSize: 12.5, lineHeight: 1.62, color: 'rgba(255,255,255,0.68)' }}>
+                                                    <p>
                                                         {link.summary}
                                                     </p>
                                                 )}
@@ -338,7 +337,7 @@ function SourceBriefModal({ lane, item, onClose }: Props) {
                         {expansions.length > 0 && (
                             <section aria-label={`${keyword} 함께 검색되는 말`}>
                                 <div className="brief-modal-section-head">
-                                    <strong>함께 검색되는 말 — 검색의도별</strong>
+                                    <strong>함께 검색되는 말 · 검색의도별</strong>
                                     <small>네이버 자동완성 실측</small>
                                 </div>
                                 {groupByIntent(expansions, (expansion) => expansion, keyword).map((bucket) => (
@@ -363,7 +362,7 @@ function SourceBriefModal({ lane, item, onClose }: Props) {
 
                 <footer className="brief-modal-foot">
                     {articleUrl && (
-                        <a href={articleUrl} target="_blank" rel="noreferrer" style={{ background: lane.accent }}>
+                        <a href={articleUrl} target="_blank" rel="noreferrer" className="primary">
                             원문 기사 보러가기
                         </a>
                     )}
@@ -371,7 +370,7 @@ function SourceBriefModal({ lane, item, onClose }: Props) {
                         href={searchUrl}
                         target="_blank"
                         rel="noreferrer"
-                        style={articleUrl ? undefined : { background: lane.accent }}
+                        className={articleUrl ? undefined : 'primary'}
                     >
                         {lane.label} 원본에서 검색
                     </a>

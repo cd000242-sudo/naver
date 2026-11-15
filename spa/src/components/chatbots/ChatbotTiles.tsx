@@ -42,7 +42,6 @@ export default function ChatbotTiles({ chatbots }: Props) {
         <>
             <a className="hub-tile fade-in" href={gemini.url} target="_blank" rel="noopener noreferrer">
                 <div className="hub-tile-top">
-                    <span className="hub-emoji">✨</span>
                     <span className="hub-badge purple">{gemini.badge}</span>
                 </div>
                 <h3>{gemini.title}</h3>
@@ -52,7 +51,6 @@ export default function ChatbotTiles({ chatbots }: Props) {
 
             <a className="hub-tile fade-in" href={naverFree.url} target="_blank" rel="noopener noreferrer">
                 <div className="hub-tile-top">
-                    <span className="hub-emoji">📝</span>
                     <span className="hub-badge">{naverFree.badge}</span>
                 </div>
                 <h3>{naverFree.title}</h3>
@@ -61,7 +59,6 @@ export default function ChatbotTiles({ chatbots }: Props) {
             </a>
 
             <ProtectedLinkTile
-                emoji="🔒"
                 badge="비밀번호"
                 title={locked.title}
                 desc={locked.desc}

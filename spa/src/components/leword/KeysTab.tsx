@@ -127,10 +127,10 @@ function KeysTab() {
             setSyncRekey(false);
             setSyncInfo(keySyncInfo());
             setKeys(loadUserKeys());
-            setSyncNote(outcome === 'pulled' ? '✅ 동기화 켜짐 — 다른 기기의 키를 가져와 채웠습니다.'
-                : outcome === 'pushed' ? '✅ 동기화 켜짐 — 이 브라우저의 키를 올렸습니다. 다른 기기는 로그인하면(또는 [다른 기기 키 가져오기]) 내려옵니다.'
+            setSyncNote(outcome === 'pulled' ? '동기화 켜짐 — 다른 기기의 키를 가져와 채웠습니다.'
+                : outcome === 'pushed' ? '동기화 켜짐 — 이 브라우저의 키를 올렸습니다. 다른 기기는 로그인하면(또는 [다른 기기 키 가져오기]) 내려옵니다.'
                     : outcome === 'wrong-password' ? '동기화는 켰지만 다른 기기가 올린 키를 이 비밀번호로 풀지 못했습니다 — 두 기기에서 같은 비밀번호로 켜야 합니다.'
-                        : outcome === 'nothing' ? '✅ 동기화 켜짐 — 아직 다른 기기에서 올린 키가 없고 이 기기에도 키가 없습니다. 키가 있는 기기에서 먼저 켜 주세요.'
+                        : outcome === 'nothing' ? '동기화 켜짐 — 아직 다른 기기에서 올린 키가 없고 이 기기에도 키가 없습니다. 키가 있는 기기에서 먼저 켜 주세요.'
                             : '이 브라우저는 동기화를 지원하지 않습니다(WebCrypto 없음).');
         } finally { setSyncBusy(false); }
     };
@@ -142,7 +142,7 @@ function KeysTab() {
             const r = await pullUserKeys({ waitMs: 60_000, onWait: (ms) => setSyncNote(`다른 기기가 올린 키를 받는 중… ${Math.round(ms / 1000)}초 (서버 반영을 기다리는 중, 최대 1분)`) });
             setKeys(loadUserKeys());
             const when = r.savedAt ? new Date(r.savedAt).toLocaleString('ko-KR', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : '';
-            setSyncNote(r.status === 'merged' ? `✅ 가져왔습니다 — 빈 칸 ${r.filled}개를 채웠습니다${when ? ` (다른 기기 업로드 ${when})` : ''}.`
+            setSyncNote(r.status === 'merged' ? `가져왔습니다 — 빈 칸 ${r.filled}개를 채웠습니다${when ? ` (다른 기기 업로드 ${when})` : ''}.`
                 : r.status === 'wrong-password' ? `다른 기기가 올린 키는 있는데(${when}) 이 기기의 동기화 비밀번호가 달라 풀지 못했습니다. 로그아웃 후 다시 로그인하거나, 두 기기에서 같은 비밀번호로 [동기화 켜기]를 다시 하세요.`
                     : r.status === 'none' ? '다른 기기에서 올린 키가 아직 없습니다. 키가 들어 있는 기기(PC)의 내 API 키에서 [동기화 켜기] 또는 [지금 올리기]를 누른 뒤, 1분쯤 지나 다시 눌러 주세요.'
                         : '가져오지 못했습니다. 잠시 뒤 다시 시도해 주세요.');
@@ -154,7 +154,7 @@ function KeysTab() {
             const r = await pushUserKeysDetailed();
             setSyncNote(!r.ok ? '올리지 못했습니다. 잠시 뒤 다시 시도해 주세요.'
                 : r.count === 0 ? '이 브라우저에 저장된 키가 없어 올릴 게 없습니다 — 아래 칸에 키를 넣고 저장부터 해 주세요.'
-                    : `✅ 키 ${r.count}개를 올렸습니다 (동기화 ID ${r.slotId}) — 다른 기기의 동기화 ID 가 같아야 내려옵니다.`);
+                    : `키 ${r.count}개를 올렸습니다 (동기화 ID ${r.slotId}) — 다른 기기의 동기화 ID 가 같아야 내려옵니다.`);
         } finally { setSyncBusy(false); }
     };
     /* 켜져 있어도 비밀번호를 다시 넣어 주소를 다시 맞춘다 — 두 기기의 동기화 ID 가 다를 때의 해법. */
@@ -167,7 +167,7 @@ function KeysTab() {
             if (r.status !== 'synced') { setSyncNote(r.status === 'outdated' ? BRIDGE_OUTDATED_NOTE : '이 PC 에서 LEWORD 앱을 켠 뒤 다시 눌러 주세요 — 키는 같은 PC 의 앱과 맞춥니다.'); return; }
             setKeys(loadUserKeys());
             setSyncNote(r.toSite + r.toApp > 0
-                ? `✅ 앱과 맞췄습니다 — 앱 → 사이트 ${r.toSite}개 · 사이트 → 앱 ${r.toApp}개${syncInfo.enabled ? ' (다른 기기로도 올라갑니다)' : ''}.`
+                ? `앱과 맞췄습니다 — 앱 → 사이트 ${r.toSite}개 · 사이트 → 앱 ${r.toApp}개${syncInfo.enabled ? ' (다른 기기로도 올라갑니다)' : ''}.`
                 : '앱과 사이트의 키가 이미 같습니다.');
         } finally { setSyncBusy(false); }
     };
@@ -283,6 +283,8 @@ function KeysTab() {
 
     return (
         <>
+            {/* Touch targets: every control on this tab is at least 44px tall (light pass 2026-11). */}
+            <style>{'.lw-keys-sync-form .lw-mini, .lw-engine-actions .lw-mini, .lw-usage-head button, .lw-agents-head button, .lw-key-actions button, .lw-mini-ghost { min-height: 44px; } .lw-step-cta { display: inline-flex; align-items: center; min-height: 44px; }'}</style>
             <TabIntro
                 title="내 API 키"
                 desc="자기 키를 넣으면 자기 쿼터로 조회하므로 무료 횟수 제한이 없습니다. 넣지 않아도 무료 조회는 그대로 됩니다."
@@ -363,11 +365,11 @@ function KeysTab() {
                     <li className={bridgeReady ? 'done' : 'now'}>
                         <b>LEWORD 앱을 켭니다.</b>{' '}
                         {bridgeReady
-                            ? <span className="lw-step-ok">✅ 앱이 켜져 있습니다</span>
+                            ? <span className="lw-step-ok">앱이 켜져 있습니다</span>
                             : (
                                 <>
                                     앱이 CLI 설치·로그인을 대신 해 주고, 생성도 이 PC 의 구독으로 대신 돌려 줍니다.{' '}
-                                    <a className="lw-step-cta" href="/download">⬇ LEWORD 받기</a>
+                                    <a className="lw-step-cta" href="/download">LEWORD 받기</a>
                                     <em>사이트의 AI(답변·글감·마인드맵·글 진단·레이더)는 앱을 거쳐서만 돕니다 — 앱이 꺼져 있으면 AI 부분만 멈추고, 검색량·문서수 같은 실측은 그대로 됩니다.</em>
                                 </>
                             )}
@@ -375,7 +377,7 @@ function KeysTab() {
                     <li className={bridgeReady && !anyAgentReady ? 'now' : (anyAgentReady ? 'done' : '')}>
                         <b>앱에서 쓸 엔진에 로그인합니다.</b>{' '}
                         {anyAgentReady
-                            ? <span className="lw-step-ok">✅ {readyAgentLabels.join(' · ')} 로그인됨</span>
+                            ? <span className="lw-step-ok">{readyAgentLabels.join(' · ')} 로그인됨</span>
                             : '앱을 켜고 이 화면의 [연동]을 누르면 그 CLI 를 설치하고 로그인 창을 열어 줍니다. 구독 로그인이 그 PC 안에서만 끝나는 방식이라 웹에서는 못 엽니다.'}
                         <em>구독이 있어야 합니다 — 클로드 Max/Pro · 챗지피티 Plus/Pro · 구글 · SuperGrok. 무료 계정은 CLI 로그인이 막힙니다.</em>
                     </li>
@@ -387,7 +389,7 @@ function KeysTab() {
                     <li className={activeProvider ? 'done' : ''}>
                         <b>쓸 엔진에서 [사용].</b>{' '}
                         {activeProvider
-                            ? <span className="lw-step-ok">✅ {AGENT_CHAIN.find((item) => item.id === activeProvider)?.label} 사용 중</span>
+                            ? <span className="lw-step-ok">{AGENT_CHAIN.find((item) => item.id === activeProvider)?.label} 사용 중</span>
                             : '오늘의 글감은 고른 엔진을 우선 시도하고, 실패하면 사용 가능한 다른 엔진으로 이어갑니다.'}
                     </li>
                 </ol>
@@ -399,7 +401,7 @@ function KeysTab() {
 
                 <p role="status" aria-live="polite" className="lw-card-note" style={{ marginBottom: 12 }}>
                     {boardPreferenceNote(boardPreference)}<br />
-                    <small>이 설정은 이 PC 앱의 글감 생성에 적용됩니다. 사이트 공용 서버의 예약 생성 설정은 별도입니다.</small>
+                    <small style={{ fontSize: 13 }}>이 설정은 이 PC 앱의 글감 생성에 적용됩니다. 사이트 공용 서버의 예약 생성 설정은 별도입니다.</small>
                 </p>
 
                 <div className="lw-engines-list">
@@ -412,7 +414,7 @@ function KeysTab() {
                          * 앱에 로그인돼 있고 앱이 켜져 있어야 돈다.
                          */
                         const state = agent?.available
-                            ? '✅ 앱에 연동 — 앱을 켜 두면 됩니다'
+                            ? '앱에 연동 — 앱을 켜 두면 됩니다'
                             : agent?.installed ? '앱: 로그인 필요' : '앱에서 연동';
                         const active = activeProvider === item.id;
                         return (
@@ -481,7 +483,7 @@ function KeysTab() {
                     {usage.state === 'done' && (usage.rows || []).map((row) => (
                         <div className="lw-usage-row" key={row.provider}>
                             <span className="lw-usage-label">{USAGE_LABEL[row.provider] || row.provider}</span>
-                            <span style={{ flex: 1, minWidth: 0, color: 'rgba(235,242,250,.82)' }}>
+                            <span style={{ flex: 1, minWidth: 0, color: 'var(--lw-text-secondary)' }}>
                                 최근 5시간 <b>{row.window5h}회</b> · 24시간 <b>{row.day}회</b> (5시간 중 실패 {row.failed5h}회)
                             </span>
                             <span className="lw-usage-reset">{resetInText(row.resetAt)}</span>

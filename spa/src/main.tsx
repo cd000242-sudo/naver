@@ -5,6 +5,7 @@ import App from './App';
 import AppErrorBoundary from './components/AppErrorBoundary';
 import { installChunkRecovery } from './lib/chunkRecovery.mjs';
 import './styles/global.css';
+import './components/motion/motion.css';
 import { startVersionWatch } from './lib/versionWatch';
 import { purgeLegacyClaudeState } from './lib/userKeys';
 import { startBoardPreferenceSync } from './lib/boardPreferences';

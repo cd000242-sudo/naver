@@ -1,19 +1,21 @@
 /* Leaders Pro SPA — 글로벌 스타일 + CSS variables (기존 style.css 호환) */
 :root {
-    --gold-primary: #c9a84c;
-    --gold-light: #d4a012;
-    --gold-dark: #b8860b;
-    --bg-dark: #0a0a0f;
-    --bg-card: rgba(18, 18, 26, 0.6);
-    --bg-glass: rgba(255, 255, 255, 0.04);
-    --bg-section: #0d0d14;
-    --border-glass: rgba(255, 255, 255, 0.08);
-    --border-gold: rgba(201, 168, 76, 0.4);
-    --text-primary: #ffffff;
-    --text-secondary: rgba(255, 255, 255, 0.7);
-    --text-muted: rgba(255, 255, 255, 0.4);
-    --radius-lg: 16px;
-    --radius-md: 12px;
+    /* Light theme (2026-11). The old variable names stay so existing rules keep working;
+       their values now come from the light ramp in tokens.ts. */
+    --gold-primary: #8a6a12;
+    --gold-light: #f5b40a;
+    --gold-dark: #8a6a12;
+    --bg-dark: #f5f6f2;
+    --bg-card: #ffffff;
+    --bg-glass: #ffffff;
+    --bg-section: #f6f7f3;
+    --border-glass: #e2e5df;
+    --border-gold: #ead9a6;
+    --text-primary: #1c2024;
+    --text-secondary: #545b63;
+    --text-muted: #6a7179;
+    --radius-lg: 18px;
+    --radius-md: 14px;
     --radius-sm: 10px;
 }
 
@@ -26,14 +28,11 @@ html, body {
 html { scroll-padding-top: 82px; }
 body {
     font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
-    /* hero-beach-bg-fast.jpg — 원본 PNG 대신 가벼운 파생본을 우선 사용. */
-    background:
-        linear-gradient(180deg, rgba(10,10,15,0.10) 0%, rgba(10,10,15,0.25) 50%, rgba(10,10,15,0.45) 100%),
-        url('/images/hero-beach-bg-fast.jpg') center top / cover no-repeat,
-        var(--bg-dark);
-    background-attachment: scroll;
+    background: var(--bg-dark);
     color: var(--text-primary);
-    line-height: 1.7;
+    font-size: 17px;
+    line-height: 1.6;
+    word-break: keep-all;
     -webkit-font-smoothing: antialiased;
 }
 #root { min-height: 100vh; }
@@ -97,12 +96,6 @@ button { cursor: pointer; font-family: inherit; }
 
 @media (max-width: 768px) {
     html { scroll-padding-top: 76px; }
-
-    body {
-        background-position: center top;
-        background-size: cover;
-        background-attachment: scroll;
-    }
 
     .product-showcase-grid {
         grid-template-columns: minmax(0, 1fr) !important;

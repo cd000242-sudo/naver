@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import LegalLayout from '../components/LegalLayout';
+import { light, type } from '../styles/tokens';
 
-const h2: React.CSSProperties = { fontSize: 20, fontWeight: 800, color: '#FFD700', margin: '32px 0 14px' };
-const ul: React.CSSProperties = { paddingLeft: 22, margin: '0 0 16px' };
+const h2: React.CSSProperties = { fontSize: type.lead, fontWeight: 600, lineHeight: 1.4, color: light.text, margin: '32px 0 12px' };
+const ul: React.CSSProperties = { paddingLeft: 24, margin: '0 0 16px' };
 
 /** 이용약관 — payment-page/terms.html 마이그 */
 function TermsPage() {

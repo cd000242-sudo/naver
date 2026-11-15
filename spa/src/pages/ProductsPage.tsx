@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import SplitWords from '../components/motion/SplitWords';
 import { Link } from 'react-router-dom';
 import ProductPageStyles from '../components/products/ProductPageStyles';
 import { CloseBand, FaqList, HeroActions, ProofStrip, ReviewQuotes, VsPanel } from '../components/products/ProductBlocks';
@@ -130,7 +131,7 @@ function ProductsPage() {
                 <div className="pp-wrap">
                     <div className="pp-hero-grid">
                         <div>
-                            <h1>찾고, 쓰고, 올리는<br /><em>블로그로 버는 데<br />필요한 도구</em></h1>
+                            <h1><SplitWords text="찾고, 쓰고, 올리는" /><br /><em><SplitWords text="블로그로 버는 데" offset={3} /><br /><SplitWords text="필요한 도구" offset={6} /></em></h1>
                             <p className="pp-hero-sub">키워드를 찾는 LEWORD, 네이버에 올리는 Better Life Naver, 워드프레스 · 티스토리 · 블로그스팟을 맡는 Orbit. 필요한 것만 하나씩 사도 됩니다.</p>
                             <HeroActions primary={{ to: '/pricing', label: '상점에서 고르기' }} secondary={{ to: '/leword', label: 'LEWORD 맛보기' }} />
                         </div>
@@ -217,7 +218,7 @@ function ProductsPage() {
                     <PriceTable products={sellable} />
                     <p className="pp-source">‘부가세 포함’ 표시가 없는 값은 모두 부가세 별도입니다. 값은 상점과 같은 곳에서 읽어 옵니다.</p>
                     <div className="pp-price-cta">
-                        <Link to="/pricing" className="pp-btn pp-btn-gold">상점에서 고르기<ArrowRight /></Link>
+                        <Link to="/pricing" className="pp-btn pp-btn-gold lp-sheen">상점에서 고르기<ArrowRight /></Link>
                         <Link to="/bank-order" className="pp-btn pp-btn-line">계좌이체로 사기<ArrowRight /></Link>
                     </div>
                 </div>

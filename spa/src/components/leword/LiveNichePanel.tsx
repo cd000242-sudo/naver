@@ -109,26 +109,29 @@ export default function LiveNichePanel({ items }: { items: Array<{ rank: number;
     return (
         <section className="lw-livenc" aria-labelledby="lw-livenc-title">
             <style>{`
-                .lw-livenc { margin: 12px 0 16px; border: 1px solid rgba(255,255,255,.1); border-radius: 12px; padding: 13px 15px; background: rgba(255,255,255,.03); }
-                .lw-livenc-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-                .lw-livenc-head h3 { margin: 0; font-size: 15px; }
-                .lw-livenc-btn { padding: 7px 13px; border: 0; border-radius: 8px; background: #2fd39a; color: #05221a; font: inherit; font-weight: 700; cursor: pointer; }
+                .lw-livenc { margin: 12px 0 16px; border: 1px solid var(--lw-line); border-radius: 14px; padding: 16px; background: var(--lw-surface); color: var(--lw-text); box-shadow: var(--lw-shadow-sm); }
+                .lw-livenc-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+                .lw-livenc-head h3 { margin: 0; font-size: 17px; font-weight: 600; color: var(--lw-text); }
+                .lw-livenc-btn { min-height: 44px; padding: 0 16px; border: 0; border-radius: 10px; background: var(--lw-btn); color: var(--lw-on-btn); font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; transition: opacity var(--lw-fast) var(--lw-ease); }
                 .lw-livenc-btn[disabled] { opacity: .55; cursor: default; }
-                .lw-livenc-status { font-size: 12.5px; opacity: .75; font-variant-numeric: tabular-nums; }
-                .lw-livenc-note { margin: 6px 0 0; font-size: 12px; opacity: .6; line-height: 1.6; }
-                .lw-livenc table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
-                .lw-livenc th { text-align: left; font-size: 11.5px; font-weight: 500; opacity: .7; padding: 7px 9px; border-bottom: 1px solid rgba(255,255,255,.1); }
-                .lw-livenc td { padding: 8px 9px; border-top: 1px solid rgba(255,255,255,.06); }
+                .lw-livenc-status { font-size: 13px; color: var(--lw-text-secondary); font-variant-numeric: tabular-nums; }
+                .lw-livenc-note { margin: 8px 0 0; font-size: 13px; color: var(--lw-text-muted); line-height: 1.6; }
+                .lw-livenc-note b { color: var(--lw-text-secondary); font-weight: 600; }
+                .lw-livenc table { width: 100%; border-collapse: collapse; font-size: 15px; margin-top: 12px; }
+                .lw-livenc th { text-align: left; font-size: 13px; font-weight: 500; color: var(--lw-text-muted); padding: 8px; border-bottom: 1px solid var(--lw-line); }
+                .lw-livenc td { padding: 8px; border-top: 1px solid var(--lw-line); }
+                .lw-livenc td b { font-weight: 600; }
                 .lw-livenc td.r, .lw-livenc th.r { text-align: right; font-variant-numeric: tabular-nums; }
-                .lw-livenc .seat { font-weight: 700; }
-                .lw-livenc .seat.open { color: #2fd39a; }
-                .lw-livenc .seat.semi { color: #d9b23c; }
-                .lw-livenc .seat.locked { color: #e0706f; }
-                .lw-livenc .seat.none { opacity: .45; font-weight: 400; }
+                .lw-livenc .seat { font-weight: 600; }
+                .lw-livenc .seat.open { color: var(--lw-positive); }
+                .lw-livenc .seat.semi { color: var(--lw-accent-ink); }
+                .lw-livenc .seat.locked { color: var(--lw-negative); }
+                .lw-livenc .seat.none { color: var(--lw-text-muted); font-weight: 400; }
+                .lw-livenc .dim { color: var(--lw-text-muted); font-size: 13px; }
             `}</style>
 
             <div className="lw-livenc-head">
-                <h3 id="lw-livenc-title">⚡ 지금 실시간 바로 재기</h3>
+                <h3 id="lw-livenc-title">지금 실시간 바로 재기</h3>
                 <span style={{ flex: 1 }} />
                 <span className="lw-livenc-status">
                     {status || `위 목록 ${targets.length}개를 이 자리에서 잽니다.`}
@@ -161,13 +164,13 @@ export default function LiveNichePanel({ items }: { items: Array<{ rank: number;
                             const seat = seatFromFacing(row.facing);
                             return (
                                 <tr key={row.keyword}>
-                                    <td className="r" style={{ opacity: .6 }}>{row.rank}</td>
+                                    <td className="r dim">{row.rank}</td>
                                     <td><b>{row.keyword}</b></td>
                                     <td className="r">{num(row.searchVolume)}</td>
                                     <td className="r">{num(row.documentCount)}</td>
                                     <td>
                                         <span className={`seat ${SEAT_CLASS[seat]}`}>{seat}</span>
-                                        {row.facing !== null && <span style={{ opacity: .5, fontSize: 11.5 }}> · 정면 {row.facing}</span>}
+                                        {row.facing !== null && <span className="dim"> · 정면 {row.facing}</span>}
                                     </td>
                                 </tr>
                             );

@@ -181,8 +181,8 @@ function LewordAuth({ onDone, onCancel }: { onDone: (session: LewordSession) => 
               문자로 본인을 확인한다 — 그래서 본인인증이 먼저다.
             */}
             <div className="lw-auth-tools">
-                <button type="button" onClick={() => { setView('phone'); setError(''); }}>📱 본인인증</button>
-                <button type="button" onClick={() => { setView('pwreset'); setError(''); }}>🔑 비밀번호 변경</button>
+                <button type="button" onClick={() => { setView('phone'); setError(''); }}>본인인증</button>
+                <button type="button" onClick={() => { setView('pwreset'); setError(''); }}>비밀번호 변경</button>
             </div>
 
             {onCancel && (
@@ -233,7 +233,7 @@ function PhoneVerifyPanel({ defaultUserId, onBack }: { defaultUserId: string; on
         setBusy(false);
         if (!result.ok) { setMsg({ text: result.message || '인증번호 발송에 실패했습니다.', ok: false }); return; }
         setSent(true);
-        setMsg({ text: '📩 인증번호를 보냈습니다 — 문자로 받은 6자리를 입력하세요.', ok: true });
+        setMsg({ text: '인증번호를 보냈습니다 — 문자로 받은 6자리를 입력하세요.', ok: true });
     };
     const confirm = async () => {
         if (busy) return;
@@ -244,7 +244,7 @@ function PhoneVerifyPanel({ defaultUserId, onBack }: { defaultUserId: string; on
         setBusy(false);
         if (!result.ok) { setMsg({ text: result.message || '본인인증에 실패했습니다.', ok: false }); return; }
         setDone(true);
-        setMsg({ text: '✅ 본인인증이 완료되었습니다. 이제 이 번호로 비밀번호를 변경할 수 있습니다.', ok: true });
+        setMsg({ text: '본인인증이 완료되었습니다. 이제 이 번호로 비밀번호를 변경할 수 있습니다.', ok: true });
     };
 
     return (
@@ -263,7 +263,7 @@ function PhoneVerifyPanel({ defaultUserId, onBack }: { defaultUserId: string; on
                         <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} autoComplete="tel" inputMode="numeric" placeholder="01012345678" />
                     </label>
                     <button type="button" className="lw-auth-cta" onClick={sendCode} disabled={busy}>
-                        {busy && !sent ? '보내는 중…' : sent ? '📩 인증번호 다시 받기' : '📩 인증번호 받기'}
+                        {busy && !sent ? '보내는 중…' : sent ? '인증번호 다시 받기' : '인증번호 받기'}
                     </button>
                     {sent && (
                         <>
@@ -271,7 +271,7 @@ function PhoneVerifyPanel({ defaultUserId, onBack }: { defaultUserId: string; on
                                 <input value={code} onChange={(e) => setCode(e.target.value)} inputMode="numeric" maxLength={6} placeholder="6자리" />
                             </label>
                             <button type="button" className="lw-auth-cta gold" onClick={confirm} disabled={busy}>
-                                {busy ? '확인 중…' : '✅ 본인인증 완료'}
+                                {busy ? '확인 중…' : '본인인증 완료'}
                             </button>
                         </>
                     )}
@@ -303,7 +303,7 @@ function PasswordResetPanel({ defaultUserId, onBack }: { defaultUserId: string; 
         setBusy(false);
         if (!result.ok) { setMsg({ text: result.message || '인증번호 발송에 실패했습니다.', ok: false }); return; }
         setSent(true);
-        setMsg({ text: '📩 인증번호를 보냈습니다 — 문자로 받은 6자리와 새 비밀번호를 입력하세요.', ok: true });
+        setMsg({ text: '인증번호를 보냈습니다 — 문자로 받은 6자리와 새 비밀번호를 입력하세요.', ok: true });
     };
     const confirm = async () => {
         if (busy) return;
@@ -315,7 +315,7 @@ function PasswordResetPanel({ defaultUserId, onBack }: { defaultUserId: string; 
         setBusy(false);
         if (!result.ok) { setMsg({ text: result.message || '비밀번호 변경에 실패했습니다.', ok: false }); return; }
         setDone(true);
-        setMsg({ text: '✅ 비밀번호를 변경했습니다. 새 비밀번호로 로그인해 주세요.', ok: true });
+        setMsg({ text: '비밀번호를 변경했습니다. 새 비밀번호로 로그인해 주세요.', ok: true });
     };
 
     return (
@@ -331,7 +331,7 @@ function PasswordResetPanel({ defaultUserId, onBack }: { defaultUserId: string; 
                         <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} autoComplete="tel" inputMode="numeric" placeholder="01012345678" />
                     </label>
                     <button type="button" className="lw-auth-cta" onClick={sendCode} disabled={busy}>
-                        {busy && !sent ? '보내는 중…' : sent ? '📩 인증번호 다시 받기' : '📩 인증번호 받기'}
+                        {busy && !sent ? '보내는 중…' : sent ? '인증번호 다시 받기' : '인증번호 받기'}
                     </button>
                     {sent && (
                         <>
@@ -342,7 +342,7 @@ function PasswordResetPanel({ defaultUserId, onBack }: { defaultUserId: string; 
                                 <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} autoComplete="new-password" placeholder="4자 이상" />
                             </label>
                             <button type="button" className="lw-auth-cta gold" onClick={confirm} disabled={busy}>
-                                {busy ? '변경 중…' : '✅ 비밀번호 변경'}
+                                {busy ? '변경 중…' : '비밀번호 변경'}
                             </button>
                         </>
                     )}

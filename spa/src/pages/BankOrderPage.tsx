@@ -1,11 +1,13 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import SplitWords from '../components/motion/SplitWords';
 import { useSearchParams } from 'react-router-dom';
 import { getScheduledAmount, isNormalPricingActive, PRICING_SWITCH_AT_MS } from '../lib/pricingSchedule';
 import { applyStoreOverrides, isTaxIncludedPrice, normalPriceOf, TERMS, won, type Product, type TermId } from '../lib/productCatalog';
 import { fetchSiteContent } from '../lib/siteOps';
 import { purchaseGuide } from '../lib/purchaseGuide.mjs';
 import PurchaseNextSteps from '../components/store/PurchaseNextSteps';
-import { color, gradient, onGold, whiteA } from '../styles/tokens';
+import { ShellIcon } from '../components/ShellIcons';
+import { light, lightRadius, motion, type } from '../styles/tokens';
 
 /**
  * 계좌이체 결제 — payment-page/bank-order.html 마이그.
@@ -21,10 +23,10 @@ const ALL_PRODUCTS: Record<string, ProductOption[]> = {
     naver: [
         // [2026-08-21] 하루 환산 첫 자리(사장님 지시) — 실청구액은 price 로 그대로 노출.
         // [2026-09-06] 즉시 조정(1년 50만·영구 200만) + 10월 1일 자동 2배 폐기 — 인상 예고는 금액 없이.
-        { id: 'all-in-one-monthly', name: 'All in one 1개월', price: 50000, period: '하루 1,667원꼴 · 10월 1일부터 금액 인상 예정' },
-        { id: 'all-in-one-quarterly', name: 'All in one 3개월', price: 150000, period: '하루 1,667원꼴 (월 50,000원) · 10월 1일부터 금액 인상 예정' },
-        { id: 'all-in-one-yearly', name: 'All in one 1년', price: 500000, period: '하루 1,370원꼴 (월 41,667원) · 10월 1일부터 금액 인상 예정' },
-        { id: 'all-in-one-lifetime', name: 'All in one 영구제', price: 2000000, period: '영구 이용 · 10월 1일부터 금액 인상 예정' },
+        { id: 'all-in-one-monthly', name: 'All in one 1개월', price: 50000, period: '하루 1,667원꼴' },
+        { id: 'all-in-one-quarterly', name: 'All in one 3개월', price: 150000, period: '하루 1,667원꼴 (월 50,000원)' },
+        { id: 'all-in-one-yearly', name: 'All in one 1년', price: 500000, period: '하루 1,370원꼴 (월 41,667원)' },
+        { id: 'all-in-one-lifetime', name: 'All in one 영구제', price: 2000000, period: '영구 이용' },
     ],
 };
 
@@ -106,8 +108,8 @@ function BankOrderPage() {
     const [submitting, setSubmitting] = useState(false);
     const [result, setResult] = useState<ResultInfo | null>(null);
     const [pricingNow, setPricingNow] = useState(() => Date.now());
-    const [copyLabel, setCopyLabel] = useState('📋 복사');
-    const [licCopyLabel, setLicCopyLabel] = useState('📋 복사');
+    const [copyLabel, setCopyLabel] = useState('복사');
+    const [licCopyLabel, setLicCopyLabel] = useState('복사');
     const [shake, setShake] = useState<'name' | 'email' | null>(null);
     const pollingRef = useRef<number | null>(null);
     /*
@@ -202,15 +204,15 @@ function BankOrderPage() {
 
     const onCopyAccount = () => {
         navigator.clipboard.writeText('1000-1770-4358').then(() => {
-            setCopyLabel('✅ 복사됨');
-            window.setTimeout(() => setCopyLabel('📋 복사'), 2000);
+            setCopyLabel('복사됨');
+            window.setTimeout(() => setCopyLabel('복사'), 2000);
         });
     };
 
     const onCopyLicense = (code: string) => {
         navigator.clipboard.writeText(code).then(() => {
-            setLicCopyLabel('✅ 복사됨');
-            window.setTimeout(() => setLicCopyLabel('📋 복사'), 1500);
+            setLicCopyLabel('복사됨');
+            window.setTimeout(() => setLicCopyLabel('복사'), 1500);
         });
     };
 
@@ -255,33 +257,33 @@ function BankOrderPage() {
 
     // ─── 주문 화면 ───
     const products = ALL_PRODUCTS[tab];
-    const inputBase: React.CSSProperties = { width: '100%', padding: '14px 16px', background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(201,168,76,0.18)', borderRadius: 10, color: '#fff', fontSize: 14, outline: 'none' };
 
     return (
-        <div style={{ maxWidth: 720, margin: '0 auto', padding: '140px 20px 80px', position: 'relative', zIndex: 1 }}>
-            <div style={{ background: 'rgba(18,18,26,0.7)', backdropFilter: 'blur(20px)', border: '1px solid rgba(201,168,76,0.18)', borderRadius: 24, padding: 'clamp(24px, 4vw, 40px)' }}>
+        <div data-order-form style={{ ...pageWrap, maxWidth: 720 }}>
+            <style>{formCss}</style>
+            <div style={panel}>
                 <div style={{ textAlign: 'center', marginBottom: 32 }}>
-                    <h1 style={{ fontSize: 'clamp(24px, 4vw, 32px)', fontWeight: 900, marginBottom: 8, background: gradient.goldBright, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>💰 계좌이체 결제</h1>
-                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 14 }}>{cartOrder ? '주문 확인 → 정보 입력 → 입금 → 라이선스 발급' : 'All in one 기간권 선택 → 정보 입력 → 입금 → 라이선스 발급'}</p>
+                    <h1 style={pageTitle}><SplitWords text="계좌이체 결제" /></h1>
+                    <p style={{ color: light.textSecondary, fontSize: type.small }}>{cartOrder ? '주문 확인 → 정보 입력 → 입금 → 라이선스 발급' : 'All in one 기간권 선택 → 정보 입력 → 입금 → 라이선스 발급'}</p>
                 </div>
 
                 {/* Step 1 — 상점에서 담아왔으면 다시 고르게 하지 않는다. 주문 내역만 보여 준다. */}
                 {cartOrder ? (
                     <Step n={1} label="주문 내역">
-                        <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(201,168,76,0.25)', borderRadius: 12, padding: '16px 18px' }}>
+                        <div style={{ ...softBox, padding: '16px 20px' }}>
                             {cartOrder.names.map((item) => (
-                                <div key={item} style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 0', fontSize: 14, color: 'rgba(255,255,255,0.85)' }}>
+                                <div key={item} style={{ display: 'flex', justifyContent: 'space-between', padding: '4px 0', fontSize: type.small, color: light.text }}>
                                     <span>{item}</span>
                                 </div>
                             ))}
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginTop: 10, paddingTop: 12, borderTop: '1px solid rgba(201,168,76,0.2)' }}>
-                                <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)' }}>합계 ({cartOrder.taxNote})</span>
-                                <strong style={{ fontSize: 22, fontWeight: 800, color: '#FFD700' }}>{won(cartOrder.amount)}원</strong>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 12, marginTop: 12, paddingTop: 12, borderTop: `1px solid ${light.line}` }}>
+                                <span style={{ fontSize: type.meta, color: light.textSecondary }}>합계 ({cartOrder.taxNote})</span>
+                                <strong style={{ fontSize: type.h3, fontWeight: 600, color: light.text, fontVariantNumeric: 'tabular-nums', whiteSpace: 'nowrap' }}>{won(cartOrder.amount)}원</strong>
                             </div>
                         </div>
-                        {cartOrder.monthly && <p style={{ margin: '14px 0 0', padding: '12px 14px', borderRadius: 10, background: 'rgba(201,168,76,0.10)', color: '#f8e9b0', fontSize: 13, lineHeight: 1.7 }}>월 이용권 · 30일 이용 후 수동 갱신<br />계좌이체는 자동출금되지 않습니다. 계속 이용하려면 매 회차 직접 주문·입금해 주세요. 입금 확인 후 새 이용권을 발급합니다.</p>}
-                        <p style={{ margin: '10px 0 0', fontSize: 12.5, color: 'rgba(255,255,255,0.5)' }}>
-                            제품을 바꾸시려면 <a href="/pricing" style={{ color: '#FFD700' }}>가격표로 돌아가기 →</a>
+                        {cartOrder.monthly && <p style={{ margin: '12px 0 0', padding: '12px 16px', borderRadius: lightRadius.control, background: light.raised, border: `1px solid ${light.line}`, color: light.textSecondary, fontSize: type.small, lineHeight: 1.7 }}>월 이용권 · 30일 이용 후 수동 갱신<br />계좌이체는 자동출금되지 않습니다. 계속 이용하려면 매 회차 직접 주문·입금해 주세요. 입금 확인 후 새 이용권을 발급합니다.</p>}
+                        <p style={{ margin: '12px 0 0', fontSize: type.small, color: light.textSecondary }}>
+                            제품을 바꾸시려면 <a href="/pricing" style={inkLink}>가격표로 돌아가기 →</a>
                         </p>
                     </Step>
                 ) : (
@@ -292,12 +294,12 @@ function BankOrderPage() {
                                 key={k}
                                 onClick={() => onSelectTab(k)}
                                 style={{
-                                    padding: '10px 20px', borderRadius: 10,
-                                    background: tab === k ? gradient.goldBright : whiteA(0.05),
-                                    color: tab === k ? onGold.black : color.textPrimary,
-                                    border: '1px solid rgba(201,168,76,0.3)',
-                                    fontWeight: tab === k ? 800 : 500,
-                                    cursor: 'pointer', fontSize: 14,
+                                    minHeight: 44, padding: '0 20px', borderRadius: lightRadius.control,
+                                    background: tab === k ? light.accentSoft : light.surface,
+                                    color: tab === k ? light.text : light.textSecondary,
+                                    border: `1px solid ${tab === k ? light.accent : light.line}`,
+                                    fontWeight: tab === k ? 600 : 500,
+                                    cursor: 'pointer', fontSize: type.small,
                                 }}
                             >{PRODUCT_LABELS[k]}</button>
                         ))}
@@ -310,15 +312,15 @@ function BankOrderPage() {
                                     key={p.id}
                                     onClick={() => onSelectProduct(p)}
                                     style={{
-                                        padding: 16, borderRadius: 12, cursor: 'pointer',
-                                        background: sel ? 'rgba(201,168,76,0.15)' : 'rgba(0,0,0,0.3)',
-                                        border: sel ? '2px solid #FFD700' : '1px solid rgba(255,255,255,0.08)',
-                                        textAlign: 'center', transition: 'all 0.2s',
+                                        padding: 16, borderRadius: lightRadius.card, cursor: 'pointer',
+                                        background: sel ? light.accentSoft : light.surface,
+                                        border: `1px solid ${sel ? light.accent : light.line}`,
+                                        textAlign: 'center', transition: quietTransition,
                                     }}
                                 >
-                                    <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.7)', marginBottom: 6 }}>{p.name}</div>
-                                    <div style={{ fontSize: 18, fontWeight: 800, color: '#FFD700' }}>{fmt(productPrice(p, pricingNow))}원</div>
-                                    <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', marginTop: 4 }}>{productPeriod(p, pricingNow)}</div>
+                                    <div style={{ fontSize: type.small, color: light.textSecondary, marginBottom: 8 }}>{p.name}</div>
+                                    <div style={{ fontSize: type.lead, fontWeight: 600, color: light.text, fontVariantNumeric: 'tabular-nums' }}>{fmt(productPrice(p, pricingNow))}원</div>
+                                    <div style={{ fontSize: type.meta, color: light.textMuted, marginTop: 4 }}>{productPeriod(p, pricingNow)}</div>
                                 </div>
                             );
                         })}
@@ -328,38 +330,39 @@ function BankOrderPage() {
 
                 {/* Step 2 */}
                 <Step n={2} label="정보 입력">
-                    <div style={{ marginBottom: 14 }}>
-                        <label style={{ display: 'block', marginBottom: 6, color: 'rgba(255,255,255,0.7)', fontSize: 13 }}>입금자명 (실명)</label>
+                    <div style={{ marginBottom: 16 }}>
+                        <label htmlFor="bank-order-name" style={fieldLabel}>입금자명 (실명)</label>
                         <input
+                            id="bank-order-name"
                             type="text"
                             value={name}
                             maxLength={20}
                             placeholder="홍길동"
                             onChange={(e) => setName(e.target.value)}
-                            style={{ ...inputBase, ...(shake === 'name' ? { animation: 'shake 0.4s' } : {}) }}
+                            style={{ ...inputBase, ...(shake === 'name' ? inputShake : {}) }}
                         />
                     </div>
                     <div>
-                        <label style={{ display: 'block', marginBottom: 6, color: 'rgba(255,255,255,0.7)', fontSize: 13 }}>이메일 (라이선스 코드 수신)</label>
+                        <label htmlFor="bank-order-email" style={fieldLabel}>이메일 (라이선스 코드 수신)</label>
                         <input
+                            id="bank-order-email"
                             type="email"
                             value={email}
                             placeholder="example@email.com"
                             onChange={(e) => setEmail(e.target.value)}
-                            style={{ ...inputBase, ...(shake === 'email' ? { animation: 'shake 0.4s' } : {}) }}
+                            style={{ ...inputBase, ...(shake === 'email' ? inputShake : {}) }}
                         />
                     </div>
-                    <style>{`@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}`}</style>
                 </Step>
 
                 {/* Step 3 */}
                 <Step n={3} label="입금 계좌 안내">
-                    <div style={{ background: 'rgba(201,168,76,0.06)', border: '1px solid rgba(201,168,76,0.2)', borderRadius: 14, padding: 20 }}>
-                        <h4 style={{ marginBottom: 14, fontSize: 15, color: '#FFD700' }}>💰 아래 계좌로 입금해주세요</h4>
+                    <div style={{ ...softBox, padding: 20 }}>
+                        <h3 style={boxTitle}>아래 계좌로 입금해주세요</h3>
                         <BankRow label="은행" value="토스뱅크" />
-                        <BankRow label="계좌번호" value={<>1000-1770-4358 <span onClick={onCopyAccount} style={{ marginLeft: 8, color: '#FFD700', cursor: 'pointer', fontSize: 12, fontWeight: 600 }}>{copyLabel}</span></>} />
+                        <BankRow label="계좌번호" value={<>1000-1770-4358 <span onClick={onCopyAccount} style={copyChip}>{copyLabel}</span></>} />
                         <BankRow label="예금주" value="박성현" />
-                        <BankRow label="입금 금액" value={selected ? <strong style={{ color: '#FFD700' }}>{fmt(productPrice(selected, pricingNow))}원</strong> : '기간권을 선택해주세요'} />
+                        <BankRow label="입금 금액" value={selected ? <strong style={{ color: light.text, fontWeight: 600 }}>{fmt(productPrice(selected, pricingNow))}원</strong> : '기간권을 선택해주세요'} />
                     </div>
                 </Step>
 
@@ -367,32 +370,51 @@ function BankOrderPage() {
                     onClick={submitOrder}
                     disabled={!selected || submitting}
                     style={{
-                        width: '100%', padding: '18px', marginTop: 24,
-                        background: selected && !submitting ? gradient.goldBright : whiteA(0.08),
-                        color: selected && !submitting ? onGold.black : whiteA(0.4),
-                        border: 'none', borderRadius: 14,
-                        fontSize: 16, fontWeight: 800,
+                        width: '100%', minHeight: 56, padding: '12px 16px', marginTop: 8,
+                        background: selected && !submitting ? light.accent : light.raised,
+                        color: selected && !submitting ? light.onAccent : light.textMuted,
+                        border: `1px solid ${selected && !submitting ? light.accent : light.line}`,
+                        borderRadius: lightRadius.control,
+                        fontSize: type.body, fontWeight: 600,
                         cursor: selected && !submitting ? 'pointer' : 'not-allowed',
                     }}
                 >
                     {submitting ? '접수 중...' : selected ? `${fmt(productPrice(selected, pricingNow))}원 주문 접수하기` : '기간권을 선택해주세요'}
                 </button>
 
-                <div style={{ marginTop: 18, textAlign: 'center', fontSize: 12, color: 'rgba(255,255,255,0.5)', lineHeight: 1.7 }}>
+                <div style={{ marginTop: 16, textAlign: 'center', fontSize: type.meta, color: light.textMuted, lineHeight: 1.7 }}>
                     주문 접수 후 입금이 확인되면 라이선스 코드가 이메일로 발송됩니다.<br />
-                    결제 진행 시 <a href="/terms" style={{ color: '#FFD700' }}>이용약관</a> 및 <a href="/privacy" style={{ color: '#FFD700' }}>개인정보처리방침</a>에 동의하는 것으로 간주됩니다.
+                    결제 진행 시 <a href="/terms" style={inkLink}>이용약관</a> 및 <a href="/privacy" style={inkLink}>개인정보처리방침</a>에 동의하는 것으로 간주됩니다.
                 </div>
             </div>
         </div>
     );
 }
 
+// Light-theme styles shared by the order form and the result view. Plain objects, no CSS classes.
+const pageWrap: React.CSSProperties = { margin: '0 auto', padding: '144px 20px 80px', position: 'relative', zIndex: 1 };
+const panel: React.CSSProperties = { background: light.surface, border: `1px solid ${light.line}`, borderRadius: lightRadius.panel, padding: 'clamp(24px, 4vw, 40px)', boxShadow: light.shadowSm, color: light.text };
+const pageTitle: React.CSSProperties = { fontSize: type.h2, fontWeight: 700, lineHeight: 1.25, marginBottom: 8, color: light.text };
+const softBox: React.CSSProperties = { background: light.raised, border: `1px solid ${light.line}`, borderRadius: lightRadius.card };
+const boxTitle: React.CSSProperties = { marginBottom: 8, fontSize: type.body, fontWeight: 600, color: light.text };
+const inkLink: React.CSSProperties = { color: light.accentInk, textDecoration: 'underline', textUnderlineOffset: 3 };
+const fieldLabel: React.CSSProperties = { display: 'block', marginBottom: 8, color: light.text, fontSize: type.small, fontWeight: 500 };
+// Border longhands on purpose: the error state swaps borderColor only.
+const inputBase: React.CSSProperties = { width: '100%', minHeight: 48, padding: '0 16px', background: light.surface, borderWidth: 1, borderStyle: 'solid', borderColor: light.lineStrong, borderRadius: lightRadius.control, color: light.text, fontSize: type.body, fontFamily: 'inherit' };
+const inputShake: React.CSSProperties = { animation: 'shake 0.4s', borderColor: light.negative };
+const copyChip: React.CSSProperties = { display: 'inline-block', marginLeft: 8, padding: '4px 12px', background: light.surface, border: `1px solid ${light.lineStrong}`, borderRadius: lightRadius.control, color: light.text, cursor: 'pointer', fontSize: type.meta, fontWeight: 500 };
+const quietTransition = `background-color ${motion.fast} ${motion.ease}, border-color ${motion.fast} ${motion.ease}`;
+// Focus ring and placeholder colour cannot be written inline, so they live in one scoped rule set.
+const formCss = `@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+[data-order-form] input::placeholder{color:${light.textMuted}}
+[data-order-form] :focus-visible{outline:2px solid ${light.text};outline-offset:2px}`;
+
 function Step({ n, label, children }: { n: number; label: string; children: React.ReactNode }) {
     return (
-        <div style={{ marginBottom: 28 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
-                <div style={{ width: 28, height: 28, borderRadius: '50%', background: gradient.goldBright, color: onGold.black, fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14 }}>{n}</div>
-                <div style={{ fontSize: 16, fontWeight: 700 }}>{label}</div>
+        <div data-rv style={{ marginBottom: 32 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+                <div style={{ width: 28, height: 28, flexShrink: 0, borderRadius: '50%', background: light.raised, border: `1px solid ${light.lineStrong}`, color: light.text, fontWeight: 600, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: type.small, fontVariantNumeric: 'tabular-nums' }}>{n}</div>
+                <h2 style={{ fontSize: type.lead, fontWeight: 600, color: light.text }}>{label}</h2>
             </div>
             {children}
         </div>
@@ -401,9 +423,20 @@ function Step({ n, label, children }: { n: number; label: string; children: Reac
 
 function BankRow({ label, value }: { label: string; value: React.ReactNode }) {
     return (
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0', borderBottom: '1px solid rgba(255,255,255,0.05)', fontSize: 14 }}>
-            <span style={{ color: 'rgba(255,255,255,0.6)' }}>{label}</span>
-            <span style={{ color: '#fff', fontWeight: 500 }}>{value}</span>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12, padding: '12px 0', borderBottom: `1px solid ${light.line}`, fontSize: type.small }}>
+            <span style={{ color: light.textSecondary, flexShrink: 0 }}>{label}</span>
+            <span style={{ color: light.text, fontWeight: 500, fontVariantNumeric: 'tabular-nums', textAlign: 'right' }}>{value}</span>
+        </div>
+    );
+}
+
+/** Status mark for the result view: a check for received/issued, a cross for rejected. */
+function StatusMark({ rejected }: { rejected: boolean }) {
+    return (
+        <div aria-hidden="true" style={{ width: 48, height: 48, margin: '0 auto 16px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: rejected ? light.negativeSoft : light.positiveSoft, color: rejected ? light.negative : light.positive }}>
+            <svg width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+                {rejected ? <path d="M7 7l10 10M17 7 7 17" /> : <path d="m6 12.5 4 4 8-9" />}
+            </svg>
         </div>
     );
 }
@@ -412,31 +445,32 @@ function ResultView({ info, copyLicense, licCopyLabel }: { info: ResultInfo; cop
     const { status, code, orderId, amount } = info;
 
     return (
-        <div style={{ maxWidth: 600, margin: '0 auto', padding: '140px 20px 80px', position: 'relative', zIndex: 1 }}>
-            <div style={{ background: 'rgba(18,18,26,0.7)', backdropFilter: 'blur(20px)', border: '1px solid rgba(201,168,76,0.18)', borderRadius: 24, padding: 'clamp(28px, 4vw, 40px)', textAlign: 'center' }}>
-                <div style={{ fontSize: 56, marginBottom: 12 }}>{status === 'approved' ? '🎉' : status === 'rejected' ? '❌' : '✅'}</div>
-                <div style={{ fontSize: 22, fontWeight: 800, marginBottom: 12 }}>
+        <div data-order-form style={{ ...pageWrap, maxWidth: 600 }}>
+            <style>{formCss}</style>
+            <div style={{ ...panel, textAlign: 'center' }}>
+                <StatusMark rejected={status === 'rejected'} />
+                <h1 style={{ fontSize: type.h3, fontWeight: 700, lineHeight: 1.35, marginBottom: 12, color: light.text }}>
                     {status === 'approved' && '라이선스가 발급되었습니다!'}
                     {status === 'rejected' && '주문이 거절되었습니다'}
                     {status === 'pending' && '주문이 접수되었습니다!'}
-                </div>
-                <div style={{ color: 'rgba(255,255,255,0.65)', fontSize: 14, lineHeight: 1.8 }}>
+                </h1>
+                <div style={{ color: light.textSecondary, fontSize: type.body, lineHeight: 1.7 }}>
                     {status === 'approved' && <>아래 All in one 라이선스 코드를 사용해주세요.<br />이메일로도 발송되었습니다.</>}
                     {status === 'rejected' && '문의 사항이 있으시면 아래 연락처로 연락주세요.'}
-                    {status === 'pending' && <>아래 계좌로 입금해주세요.<br />입금 확인 후 <strong>라이선스 코드</strong>가 이메일로 발송됩니다.<br /><span style={{ display: 'inline-block', marginTop: 8, color: '#c9a84c', fontSize: 13 }}>📡 이 페이지는 자동으로 상태가 갱신됩니다.</span></>}
+                    {status === 'pending' && <>아래 계좌로 입금해주세요.<br />입금 확인 후 <strong>라이선스 코드</strong>가 이메일로 발송됩니다.<br /><span style={{ display: 'inline-block', marginTop: 8, color: light.textMuted, fontSize: type.meta }}>이 페이지는 자동으로 상태가 갱신됩니다.</span></>}
                 </div>
-                <div style={{ marginTop: 18, color: 'rgba(255,255,255,0.55)', fontSize: 13 }}>주문번호: <strong style={{ color: '#FFD700' }}>{orderId}</strong></div>
+                <div style={{ marginTop: 16, color: light.textSecondary, fontSize: type.small }}>주문번호: <strong style={{ color: light.text, fontWeight: 600, fontVariantNumeric: 'tabular-nums' }}>{orderId}</strong></div>
 
                 {status === 'pending' && (
-                    <div style={{ background: 'rgba(201,168,76,0.06)', border: '1px solid rgba(201,168,76,0.2)', borderRadius: 14, padding: 20, marginTop: 20, textAlign: 'left' }}>
-                        <h4 style={{ marginBottom: 14, fontSize: 15, color: '#FFD700' }}>💰 입금 계좌</h4>
+                    <div style={{ ...softBox, padding: 20, marginTop: 20, textAlign: 'left' }}>
+                        <h2 style={boxTitle}>입금 계좌</h2>
                         <BankRow label="은행" value="토스뱅크" />
                         <BankRow label="계좌번호" value="1000-1770-4358" />
                         <BankRow label="예금주" value="박성현" />
                         {amount && <BankRow label="입금 금액" value={`${fmt(amount)}원`} />}
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 0 0', marginTop: 14, borderTop: '1px solid rgba(201,168,76,0.2)' }}>
-                            <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: 14 }}>상태</span>
-                            <span style={{ color: '#ffc107', fontSize: 14, fontWeight: 600 }}>⏳ 입금 확인 대기 중</span>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12, padding: '12px 0 0' }}>
+                            <span style={{ color: light.textSecondary, fontSize: type.small }}>상태</span>
+                            <span style={{ color: light.accentInk, fontSize: type.small, fontWeight: 600 }}>입금 확인 대기 중</span>
                         </div>
                         {/*
                           * 입금 확인은 사람이 한다 — 관리자에게 메일이 가고, 확인을 누르면
@@ -444,29 +478,28 @@ function ResultView({ info, copyLicense, licCopyLabel }: { info: ResultInfo; cop
                           * 안 되지" 가 되므로(사장님 2026-08-20), 기다리지 않아도 되는
                           * 길(1:1 오픈채팅)을 바로 준다. 주소는 우하단 문의 버튼과 같은 방이다.
                           */}
-                        <div style={{ marginTop: 14, padding: '12px 14px', background: 'rgba(254,229,0,0.07)', border: '1px solid rgba(254,229,0,0.25)', borderRadius: 10, fontSize: 13, lineHeight: 1.6, color: 'rgba(255,255,255,0.78)' }}>
+                        <div style={{ marginTop: 16, padding: '12px 16px', background: light.surface, border: `1px solid ${light.line}`, borderRadius: lightRadius.control, fontSize: type.small, lineHeight: 1.6, color: light.textSecondary }}>
                             입금 확인은 관리자에게 알림이 간 뒤 처리됩니다 — <strong>시간이 조금 걸릴 수 있습니다.</strong><br />
                             급하시면 입금 내역을 캡처해서 1:1 오픈채팅으로 바로 주시면 됩니다.
                             <a
                                 href="https://open.kakao.com/o/sPcaslwh"
                                 target="_blank"
                                 rel="noopener"
-                                style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginTop: 10, padding: '9px 16px', background: '#fee500', color: '#1a0a10', borderRadius: 9, fontSize: 13, fontWeight: 800, textDecoration: 'none' }}
-                            >💬 1:1 오픈채팅 바로가기</a>
+                                style={{ display: 'flex', width: 'fit-content', alignItems: 'center', gap: 8, minHeight: 44, marginTop: 12, padding: '0 16px', background: light.btn, color: light.onBtn, borderRadius: lightRadius.control, fontSize: type.small, fontWeight: 600, textDecoration: 'none' }}
+                            ><ShellIcon name="chat" size={16} />1:1 오픈채팅 바로가기</a>
                         </div>
                     </div>
                 )}
 
                 {status === 'approved' && code && (
-                    <div style={{ background: 'linear-gradient(135deg, rgba(68,215,182,0.08), rgba(201,168,76,0.08))', border: '1px solid rgba(68,215,182,0.4)', borderRadius: 14, padding: 24, marginTop: 18, textAlign: 'left' }}>
-                        <div style={{ fontSize: 36, textAlign: 'center', marginBottom: 8 }}>🎉</div>
-                        <div style={{ textAlign: 'center', color: '#44d7b6', fontSize: 18, fontWeight: 800, marginBottom: 16 }}>라이선스 발급 완료</div>
-                        <div style={{ color: 'rgba(255,255,255,0.55)', fontSize: 12, marginBottom: 6 }}>{purchaseGuide(info.product || '').codeLabel}</div>
+                    <div style={{ ...softBox, padding: 24, marginTop: 20, textAlign: 'left' }}>
+                        <h2 style={{ textAlign: 'center', color: light.positive, fontSize: type.lead, fontWeight: 600, marginBottom: 16 }}>라이선스 발급 완료</h2>
+                        <div style={{ color: light.textSecondary, fontSize: type.meta, marginBottom: 8 }}>{purchaseGuide(info.product || '').codeLabel}</div>
                         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-                            <input readOnly value={code} style={{ flex: 1, background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(201,168,76,0.3)', borderRadius: 10, padding: '14px 16px', color: '#c9a84c', fontFamily: 'monospace', fontSize: 16, fontWeight: 800, letterSpacing: 0.5 }} />
-                            <button onClick={() => copyLicense(code)} style={{ background: gradient.goldBright, color: onGold.black, border: 'none', borderRadius: 10, padding: '14px 18px', fontWeight: 800, cursor: 'pointer', fontSize: 14, whiteSpace: 'nowrap' }}>{licCopyLabel}</button>
+                            <input readOnly value={code} style={{ ...inputBase, flex: 1, minWidth: 0, fontFamily: 'monospace', fontWeight: 600, letterSpacing: 0.5 }} />
+                            <button onClick={() => copyLicense(code)} style={{ minHeight: 48, padding: '0 20px', background: light.accent, color: light.onAccent, border: 'none', borderRadius: lightRadius.control, fontWeight: 600, cursor: 'pointer', fontSize: type.small, whiteSpace: 'nowrap' }}>{licCopyLabel}</button>
                         </div>
-                        <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: 12, marginTop: 14, lineHeight: 1.6 }}>
+                        <div style={{ color: light.textSecondary, fontSize: type.small, marginTop: 16, lineHeight: 1.6 }}>
                             이 코드는 입력하신 이메일로도 발송되었습니다.<br />
                             {purchaseGuide(info.product || '').usage}
                         </div>
@@ -476,20 +509,19 @@ function ResultView({ info, copyLicense, licCopyLabel }: { info: ResultInfo; cop
                 )}
 
                 {status === 'rejected' && (
-                    <div style={{ background: 'rgba(233,94,44,0.08)', border: '1px solid rgba(233,94,44,0.4)', borderRadius: 14, padding: 24, marginTop: 18, textAlign: 'center' }}>
-                        <div style={{ fontSize: 36, marginBottom: 8 }}>❌</div>
-                        <div style={{ color: '#e95e2c', fontSize: 17, fontWeight: 800, marginBottom: 8 }}>주문이 거절되었습니다</div>
-                        <div style={{ color: 'rgba(255,255,255,0.55)', fontSize: 13, lineHeight: 1.6 }}>
+                    <div style={{ ...softBox, padding: 24, marginTop: 20, textAlign: 'center' }}>
+                        <h2 style={{ color: light.negative, fontSize: type.body, fontWeight: 600, marginBottom: 8 }}>주문이 거절되었습니다</h2>
+                        <div style={{ color: light.textSecondary, fontSize: type.small, lineHeight: 1.6 }}>
                             입금 확인이 되지 않았거나 다른 사유로 거절 처리되었습니다.<br />
-                            문의: <a href="mailto:tjdgus24280@naver.com" style={{ color: '#c9a84c' }}>tjdgus24280@naver.com</a>
+                            문의: <a href="mailto:tjdgus24280@naver.com" style={inkLink}>tjdgus24280@naver.com</a>
                         </div>
                     </div>
                 )}
 
-                <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 13, marginTop: 20 }}>
-                    문의: <a href="mailto:tjdgus24280@naver.com" style={{ color: '#c9a84c' }}>tjdgus24280@naver.com</a>
+                <p style={{ color: light.textMuted, fontSize: type.meta, marginTop: 20 }}>
+                    문의: <a href="mailto:tjdgus24280@naver.com" style={inkLink}>tjdgus24280@naver.com</a>
                     {' | '}
-                    <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener noreferrer" style={{ color: '#FEE500' }}>카카오톡 1:1 문의</a>
+                    <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener noreferrer" style={inkLink}>카카오톡 1:1 문의</a>
                 </p>
             </div>
         </div>

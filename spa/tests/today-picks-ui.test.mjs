@@ -45,6 +45,19 @@ test('free board still reveals exactly three rows and gates the remaining twenty
  assert.match(html,/27건 더/); assert.match(html,/LICENSE_REQUIRED/);
  assert.doesNotMatch(html,/>후보 4<\/a>/);
 });
+
+test('100-row edition renders all measured keywords and preserves the three-row preview',()=>{
+ const hundred=Array.from({length:100},(_,index)=>({...rows[index%rows.length],keyword:`추천 ${index+1}`}));
+ const edition={...data,keep:100,novelty:undefined,topics:[{topic:'경제',rows:hundred,targetCount:100}]};
+ const html=render(true,edition);
+ assert.equal((html.match(/href="https:\/\/search.naver.com/g)||[]).length,100);
+ assert.match(html,/전체 100개 \/ 목표 100개/);
+ assert.match(html,/주제별 100개 목표/);
+ assert.ok(html.indexOf('>추천 1</a>') < html.indexOf('>추천 100</a>'));
+ const locked=render(false,edition);
+ assert.equal((locked.match(/href="https:\/\/search.naver.com/g)||[]).length,3);
+ assert.match(locked,/97건 더/);
+});
 test('legacy edition has no invented freshness report and shows a real shortfall',()=>{
  const html=render(true,{...data,novelty:undefined,topics:[{topic:'경제',rows:rows.slice(0,10).map(({freshness,...row})=>row)}]});
  assert.match(html,/전체 10개 \/ 목표 30개 · 황금 10 · 시즌 앞 0 · 일반 0 · 목표보다 20개 적습니다/);
@@ -64,6 +77,12 @@ test('sidebar badges use actual row counts while preserving golden detail',()=>{
  const page=fs.readFileSync(new URL('../src/pages/LewordPage.tsx',import.meta.url),'utf8');
  assert.match(page,/className="lw-navi-count"[^\n]+\{topic\.rowCount\}/);
  assert.match(page,/전체 \$\{topic\.rowCount\}개 · 황금 \$\{topic\.golden\}개/);
+});
+
+test('archive guidance describes remeasured backfill without promising no repeats',()=>{
+ const source=fs.readFileSync(new URL('../src/components/leword/TodayPicksBoard.tsx',import.meta.url),'utf8');
+ assert.match(source,/신규 황금을 우선하고, 부족하면 최근 추천을 재측정해 재추천으로 표시합니다/);
+ assert.doesNotMatch(source,/매일 판은 전날과 겹치지 않게 새 키워드로 바뀝니다/);
 });
 
 // 2026-10-20 사장님 "드롭다운 펼치면 연관 황금키워드도 같이 · 초황금키워드면 초황금키워드라고".
