@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-15T22:34:00.298Z",
+ "builtAt": "2026-11-15T22:44:05.545Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,70 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
+ "measured": 20,
  "candidates": [
-  {
-   "keyword": "ai 안경",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 35,
-   "recent20": 11,
-   "press": 32,
-   "firstArticleAt": "2026-11-15T21:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "수능 D-3 'AI안경' 비상…오늘 국회서 현안보고",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-15T22:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001978325?sid=102"
-    },
-    {
-     "title": "정부, 국가자격시험 'AI 부정' 전수조사…세무사 수석 합격 취소할 듯",
-     "press": "tfmedia.co.kr",
-     "publishedAt": "2026-11-15T22:32:00.000Z",
-     "link": "https://www.tfmedia.co.kr/news/article.html?no=208907"
-    },
-    {
-     "title": "[AI핫이슈] K빅테크 '퍼스널 AI 에이전트' 레이스 가세...젠슨 황 사태 ...",
-     "press": "digitaltoday.co.kr",
-     "publishedAt": "2026-11-15T22:30:00.000Z",
-     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=715555"
-    }
-   ]
-  },
   {
    "keyword": "젠슨 황 백악관 설득 중",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 18,
    "recent20": 4,
    "press": 18,
-   "firstArticleAt": "2026-11-15T21:09:00.000Z",
+   "firstArticleAt": "2026-11-15T21:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“젠슨 황, 엔비디아 최고경영자 복귀 검토…백악관 지지 확보 계획”",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-15T22:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002832350?sid=104"
+    },
+    {
+     "title": "\"젠슨 황, CEO 복귀 논의 중…백악관 설득 시도\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-15T22:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926477?sid=104"
+    },
     {
      "title": "[속보]'나, 돌아갈래' 젠슨 황, 복귀 시나리오 진행 중, 가능성은?",
      "press": "kookje.co.kr",
      "publishedAt": "2026-11-15T22:31:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/658/0000161341?sid=104"
-    },
-    {
-     "title": "FT “젠슨 황, 엔비디아 CEO 복귀 논의 중…백악관 설득 시도”",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-15T22:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003485818?sid=105"
-    },
-    {
-     "title": "젠슨 황, 엔비디아 CEO 복귀 논의 중…머스크 이어 백악관 설득 시도",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-15T22:18:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=883445"
     }
    ]
   },
@@ -81,10 +48,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 10,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-15T21:08:00.000Z",
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-15T21:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -109,17 +76,23 @@
    ]
   },
   {
-   "keyword": "운세",
+   "keyword": "2026년 11월 16일 운세",
    "sources": [
-    "google"
+    "nate"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-15T21:05:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-15T21:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[오늘의 띠별 운세] 2026년 11월 16일 월요일",
+     "press": "mhns.co.kr",
+     "publishedAt": "2026-11-15T22:34:00.000Z",
+     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=769164"
+    },
     {
      "title": "[오늘의 운세] 11월 16일 月(음력 10월 8일) 띠별 운세",
      "press": "fntimes.com",
@@ -131,51 +104,77 @@
      "press": "dailypop.kr",
      "publishedAt": "2026-11-15T21:40:00.000Z",
      "link": "http://www.dailypop.kr/news/articleView.html?idxno=103982"
-    },
-    {
-     "title": "[AI] 오늘의 띠별 운세...2026.11.16(월요일)",
-     "press": "newsroad.co.kr",
-     "publishedAt": "2026-11-15T21:30:00.000Z",
-     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=67775"
     }
    ]
   },
   {
-   "keyword": "사랑이 온다",
+   "keyword": "비와 김태희 아침 감동",
    "sources": [
     "nate"
    ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-15T22:04:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-15T21:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘사랑이 온다’ 고윤, 예측 불가한 악역의 얼굴 완성",
-     "press": "swtvnews.com",
-     "publishedAt": "2026-11-15T22:18:00.000Z",
-     "link": "https://swtvnews.com/news/newsview.php?ncode=1065564909443204"
+     "title": "47세 성시경, 3세 어린 비♥김태희에 “상대적 박탈감”…“그것도 보통...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-15T22:32:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001147401"
     },
     {
-     "title": "고윤, 한규림 향한 서늘한 협박…폭력 행사 후 제압된 최후 ('사랑이 온...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-15T22:09:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000490523"
+     "title": "비, ♥김태희와 사는 기분 이 정도라니…\"아침에 눈뜨면 감동\"",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-15T21:47:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004125337"
     },
     {
-     "title": "‘사랑이 온다’ 고윤, 악행 폭주",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-15T22:04:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611160017"
+     "title": "비, ♥김태희와 결혼 생활 자랑에 성시경 한숨 \"상대적 박탈감 느껴\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-15T21:37:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005441378"
+    }
+   ]
+  },
+  {
+   "keyword": "최혜진 골프선수",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-15T21:31:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "최혜진, LPGA 투어 디 안니카 단독 2위…개인통산 10번째 준우승(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-15T22:33:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/001/0016442951"
+    },
+    {
+     "title": "최혜진, LPGA 디 안니카 또 아쉬운 준우승…통산 10번째 2위",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-15T22:24:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16277436"
+    },
+    {
+     "title": "최혜진, 또 2위…우승 없이 열 번째 준우승",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-15T21:32:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/025/0003565385"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 541,
+  "flagged": 544,
   "matched": 281,
   "avgLeadMin": 626,
   "recent": [
