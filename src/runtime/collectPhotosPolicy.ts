@@ -1,14 +1,15 @@
 /**
  * "관련 사진 찾기" image engine: identity, label and the copyright-consent contract.
  *
- * The engine collects real news/article photos instead of generating images. The user's agreement is stored in the
+ * The engine collects real news and public web photos instead of generating images. The user's agreement is stored in the
  * main config as `imageCollectConsent` so unattended flows (continuous, multi-account, daily) can read it in main.
  * Raising IMAGE_COLLECT_CONSENT_VERSION makes every user agree again. The renderer keeps its own copy of the version
  * (it cannot import this file into the inline bundle); a test pins the two together.
  */
 export const COLLECT_PHOTOS_ENGINE = 'collect-photos';
-export const COLLECT_PHOTOS_ENGINE_LABEL = '관련 사진 찾기 (뉴스·기사 사진 · 무료)';
-export const IMAGE_COLLECT_CONSENT_VERSION = 1;
+export const COLLECT_PHOTOS_ENGINE_LABEL = '관련 사진 찾기 (뉴스·웹 사진 · 무료)';
+/** 2 = notice widened to news, official and other public web photos (blog, cafe, community, SNS, shop excluded). */
+export const IMAGE_COLLECT_CONSENT_VERSION = 2;
 
 export interface ImageCollectConsent {
   readonly version: number;

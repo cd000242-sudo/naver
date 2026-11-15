@@ -4,7 +4,7 @@
 // NOTE: inline bundle = single scope. Every top-level identifier here is
 // prefixed with issueConsent* to avoid collisions (see memory: identifier clash).
 
-const ISSUE_CONSENT_STORAGE_KEY = 'issueCollectCopyrightConsentV1';
+const ISSUE_CONSENT_STORAGE_KEY = 'issueCollectCopyrightConsentV2';
 const ISSUE_CONSENT_OVERLAY_ID = 'issue-consent-overlay';
 
 export function hasIssueCopyrightConsent(): boolean {
@@ -17,9 +17,10 @@ export function hasIssueCopyrightConsent(): boolean {
 
 /**
  * [2026-11-03] The "관련 사진 찾기" engine stores its agreement (same notice text) in the main config. Honour it here so
- * the URL / issue collection paths do not ask a second time. Version 1 = the notice below; a newer notice raises it.
+ * the URL / issue collection paths do not ask a second time. Version 2 = the notice below (scope widened to public web
+ * photos); a newer notice raises it, and the localStorage key above is bumped with it so old agreements ask again.
  */
-const ISSUE_CONSENT_CONFIG_MIN_VERSION = 1;
+const ISSUE_CONSENT_CONFIG_MIN_VERSION = 2;
 async function issueConsentRecordedInConfig(): Promise<boolean> {
     try {
         const record = (await (window as any).api?.getConfig?.())?.imageCollectConsent;
@@ -41,7 +42,8 @@ function issueConsentBuildOverlay(): HTMLDivElement {
     <div class="nv-modal nv-modal--warn">
       <div class="nv-modal__title">⚠️ 이슈 이미지 수집 — 저작권 안내</div>
       <div class="nv-modal__text">
-        이 기능은 웹에 공개된 이미지를 검색·수집합니다.<br>
+        이 기능은 뉴스·공식 사이트·일반 웹에 공개된 사진을 검색·수집합니다.<br>
+        블로그·카페·커뮤니티·SNS 사진은 '넓게 찾기'를 켰을 때만 포함됩니다.<br>
         <b>워터마크가 없는 이미지라도 저작권이 있을 수 있으며,
         수집한 이미지의 사용에 대한 모든 법적 책임은 사용자 본인에게 있습니다.</b><br>
         본 기능은 사용자의 편의를 위한 도구일 뿐, 이미지 사용 권한을 부여하지 않습니다.

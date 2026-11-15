@@ -7,7 +7,7 @@ import { ensureIssueCopyrightConsent, hasIssueCopyrightConsent } from './issueCo
 
 export const COLLECT_ENGINE_VALUE = 'collect-photos';
 /** Mirrors IMAGE_COLLECT_CONSENT_VERSION in runtime/collectPhotosPolicy (a test pins the two). */
-const COLLECT_ENGINE_CONSENT_VERSION = 1;
+const COLLECT_ENGINE_CONSENT_VERSION = 2;
 const COLLECT_ENGINE_PASSED_FLAG = '__collectEngineConsentPassed';
 
 export function collectEngineConsentRecorded(value: unknown): boolean {

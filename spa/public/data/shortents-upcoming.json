@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T23:27:48.152Z",
+ "builtAt": "2026-11-15T17:01:39.872Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,235 +8,73 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
- "candidates": [
-  {
-   "keyword": "젠지 BLG 2세트",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 17,
-   "recent20": 5,
-   "press": 11,
-   "firstArticleAt": "2026-11-14T22:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[롤드컵 브리핑] 매서운 BLG의 스노우볼...젠지, 한타 역전패로 3세트 내...",
-     "press": "techm.kr",
-     "publishedAt": "2026-11-14T23:20:00.000Z",
-     "link": "https://www.techm.kr/news/articleView.html?idxno=157359"
-    },
-    {
-     "title": "[롤드컵]젠지, BLG에 역전 허용…우승 도전 벼랑 끝",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-14T23:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014322529?sid=105"
-    },
-    {
-     "title": "'바이퍼' 탈리야 극복 못했다…젠지, 3세트 패하며 롤드컵 우승 좌절 위...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-14T23:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003155223?sid=105"
-    }
-   ]
-  },
-  {
-   "keyword": "100일의 거짓말",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 12,
-   "recent20": 7,
-   "press": 8,
-   "firstArticleAt": "2026-11-14T22:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘100일의 거짓말’ 전채널 동시간대 1위",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-14T23:26:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611150017"
-    },
-    {
-     "title": "김유정♥박진영, 서로 본명 불렀다…로맨스 눈빛 (100일의 거짓말)",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-14T23:22:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001304790"
-    },
-    {
-     "title": "‘100일의 거짓말’ 박진영, 김유정 향한 진심 폭발…전 채널 시청률 1위",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-14T23:16:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001149831"
-    }
-   ]
-  },
-  {
-   "keyword": "미국 항공운항 정상화",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-14T22:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "미 항공기 운항 중단 “시스템 과부하 때문”…15일 밤 정상화 전망",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-14T22:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002832226?sid=104"
-    },
-    {
-     "title": "美 항공 전면 중단사태 여파 계속… FAA “15일까지 정상화”",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-14T22:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001204789?sid=104"
-    },
-    {
-     "title": "[미국 전역 항공기 이륙 중단 여파 이틀째] 인천발 미국행 항공기엔 어...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-14T22:22:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1174662"
-    }
-   ]
-  },
-  {
-   "keyword": "2026년 11월 15일 운세",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-14T22:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[11월 15일 오늘의 별자리 운세] 성급한 변화보다 신중한 판단이 필요한...",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-14T23:20:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95282"
-    },
-    {
-     "title": "2026년 11월 15일, 오늘의 띠별 운세 [인포그래픽]",
-     "press": "sisunnews.co.kr",
-     "publishedAt": "2026-11-14T23:00:00.000Z",
-     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=249397"
-    },
-    {
-     "title": "[오늘의 운세] 11월 15일 띠별 재물운…자금 이동과 집행 속도 차이",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-14T22:44:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16276870"
-    }
-   ]
-  },
-  {
-   "keyword": "31기 옥순 영호",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-14T21:58:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘나솔’ 31기 영호, 옥순과 결별 인정 “재회할 생각 없다” [전문]",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-14T23:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003541754"
-    },
-    {
-     "title": "31기 영호, 옥순과 공식 결별 인정 \"커플사진 유출? 나도 당황스럽지만...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-14T22:41:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004466704"
-    },
-    {
-     "title": "'사진 유출' 31기 옥순, 영호 재결합 재차 입 열었다 \"일과 연애중♥\"[스...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-14T21:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003487524"
-    }
-   ]
-  }
- ],
+ "measured": 21,
+ "candidates": [],
  "hitRate": {
   "days": 7,
-  "flagged": 504,
-  "matched": 245,
-  "avgLeadMin": 530,
+  "flagged": 514,
+  "matched": 255,
+  "avgLeadMin": 545,
   "recent": [
    {
-    "keyword": "젠슨 황 없는 엔비디아",
-    "hitKeyword": "엔비디아 실적 발표",
-    "hitAt": "2026-11-15T08:00:00+09:00",
-    "leadMin": 12
+    "keyword": "우크라이나 나토 돈바스",
+    "hitKeyword": "돈바스 철수 나토 연계",
+    "hitAt": "2026-11-15T18:00:00+09:00",
+    "leadMin": 1015
    },
    {
-    "keyword": "서울 집값 상승",
-    "hitKeyword": "경기남부 집값 상승",
-    "hitAt": "2026-11-15T07:00:00+09:00",
-    "leadMin": 3837
+    "keyword": "예술가 집안 우무티",
+    "hitKeyword": "엑스러브 리더 우무티",
+    "hitAt": "2026-11-15T17:30:00+09:00",
+    "leadMin": 1026
    },
    {
-    "keyword": "김도영 결승포 한국, APBC 결승행",
-    "hitKeyword": "김도영 메이저리그",
-    "hitAt": "2026-11-15T07:00:00+09:00",
-    "leadMin": 416
+    "keyword": "우무티 예술가 집안",
+    "hitKeyword": "엑스러브 리더 우무티",
+    "hitAt": "2026-11-15T17:30:00+09:00",
+    "leadMin": 1006
    },
    {
-    "keyword": "젠슨 황, 엔비디아 사태",
-    "hitKeyword": "트럼프 엔비디아 주식 매입",
-    "hitAt": "2026-11-15T07:00:00+09:00",
-    "leadMin": 335
+    "keyword": "비트코인",
+    "hitKeyword": "비트코인 9000만원 붕괴",
+    "hitAt": "2026-11-15T12:30:00+09:00",
+    "leadMin": 645
    },
    {
-    "keyword": "젠슨 황 엔비디아",
-    "hitKeyword": "트럼프 엔비디아 주식 매입",
-    "hitAt": "2026-11-15T07:00:00+09:00",
-    "leadMin": 315
+    "keyword": "북한 한국 핵잠 반발",
+    "hitKeyword": "한국 서버 북한 해킹",
+    "hitAt": "2026-11-15T10:30:00+09:00",
+    "leadMin": 3835
    },
    {
-    "keyword": "머스크와 젠슨 황 없는 엔비디아",
-    "hitKeyword": "트럼프 엔비디아 주식 매입",
-    "hitAt": "2026-11-15T07:00:00+09:00",
-    "leadMin": 214
+    "keyword": "31기 옥순 영호",
+    "hitKeyword": "영호 옥순 공식 결별",
+    "hitAt": "2026-11-15T09:00:00+09:00",
+    "leadMin": 42
    },
    {
-    "keyword": "이재명 아세안 정상회담",
-    "hitKeyword": "미중러 정상회담",
-    "hitAt": "2026-11-15T06:30:00+09:00",
-    "leadMin": 2667
+    "keyword": "안경 부정행위 적발",
+    "hitKeyword": "세무사 시험 부정행위 의혹",
+    "hitAt": "2026-11-15T08:30:00+09:00",
+    "leadMin": 1389
    },
    {
-    "keyword": "롤드컵 결승전 서울 개최",
-    "hitKeyword": "젠지 롤드컵 결승 1세트",
-    "hitAt": "2026-11-15T06:30:00+09:00",
-    "leadMin": 1300
+    "keyword": "blg",
+    "hitKeyword": "젠지 BLG 53분 혈투",
+    "hitAt": "2026-11-15T08:30:00+09:00",
+    "leadMin": 163
    },
    {
-    "keyword": "2027 롤드컵 결승전",
-    "hitKeyword": "젠지 롤드컵 결승 1세트",
-    "hitAt": "2026-11-15T06:30:00+09:00",
-    "leadMin": 1279
+    "keyword": "100일의 거짓말",
+    "hitKeyword": "100일의 거짓말 이가경",
+    "hitAt": "2026-11-15T08:30:00+09:00",
+    "leadMin": 73
    },
    {
-    "keyword": "미중러 정상회담",
-    "hitKeyword": "미중러 정상회담",
-    "hitAt": "2026-11-15T06:30:00+09:00",
-    "leadMin": 1279
+    "keyword": "젠지 BLG 2세트",
+    "hitKeyword": "젠지 BLG 53분 혈투",
+    "hitAt": "2026-11-15T08:30:00+09:00",
+    "leadMin": 32
    }
   ]
  }

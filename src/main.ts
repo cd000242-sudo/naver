@@ -72,6 +72,8 @@ import cron from 'node-cron';
 import { NaverBlogAutomation, RunOptions, type PublishMode, type AutomationImage } from './naverBlogAutomation.js';
 import { generateImages, resetAllImageState, abortImageGeneration, applyKoreanTextOverlayIfNeeded } from './imageGenerator.js';
 import { generateImagesWithThumbnailDirector } from './image/director/thumbnailDirectorGate.js';
+import { isVisionEngineUnavailableError, buildVisionUnavailableFields } from './crawler/issueHarness/visionEngineError.js';
+import { normalizePhotoCheckMode } from './crawler/issueHarness/photoCheckMode.js';
 import { runWithSquareImageTarget } from './image/squareImageTarget.js';
 import { deduplicateSourceImagesByContent } from './image/sourceImageDeduplicator.js';
 import { getImageErrorMessage, isMappableImageTransportError } from './image/imageErrorMessages.js';
@@ -3926,6 +3928,9 @@ ipcMain.handle(
     expectedCount?: number;
     /** [SPEC-NAVER-IMAGE-2026 FINAL §1] The mode left some sections out on purpose. */
     filteredByMode?: boolean;
+    /** [2026-11-15] Set when the picture check stopped (usage limit / login): the screen offers another way to check. */
+    code?: string;
+    visionUnavailable?: { reason: 'rate_limit' | 'login'; vendor: string };
   }> => {
     // ✅ [리팩토링] 통합 검증 함수 사용
     const check = await validateLicenseAndQuota('media', 1);
@@ -4134,6 +4139,8 @@ ipcMain.handle(
       const imageOptions: GenerateImagesOptions = {
         ...options,
         imageFallbackPolicy: options.imageFallbackPolicy || 'engine-only',
+        // [2026-11-15] 관련 사진 찾기 re-run: only one of the four known check modes passes; anything else means "selected".
+        photoCheckMode: normalizePhotoCheckMode(options.photoCheckMode),
       };
       // [SPEC-NAVER-IMAGE-2026] A lone thumbnail goes through the director (real photo first; one image by
       //   default, candidates + one judge call only in high-quality mode); everything else passes through.
@@ -4174,6 +4181,12 @@ ipcMain.handle(
       }
       return { success: true, images, expectedCount: requiredGeneratedImageCount, filteredByMode };
     } catch (error) {
+      // [2026-11-15] The picture check could not run (usage limit / login): answer with the owner's message plus a stable
+      //   code and the reason, so the screen can offer "check another way" — never the generic transport-error text.
+      if (isVisionEngineUnavailableError(error)) {
+        console.warn(`[Main] ⛔ automation:generateImages 멈춤 — 사진 검사 엔진 사용 불가(${error.reason}): ${error.message}`);
+        return { success: false, message: error.message, ...buildVisionUnavailableFields(error) };
+      }
       const raw = (error as Error).message ?? '이미지 생성 중 오류가 발생했습니다.';
       // [2026-09-08] axios 원문("Request failed with status code 429")이 그대로 화면에 나가
       //   사용자가 할당량 문제인 줄 몰랐다(실측 콘솔 로그). HTTP 상태·쿼터 신호가 분명할 때만

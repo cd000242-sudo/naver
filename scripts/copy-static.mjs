@@ -625,6 +625,7 @@ try {
     'multiAccountManager.js',
     // ✅ [이슈 끝판왕 수집] 저작권 동의 모달 + 수집 모드 (headingImageGen보다 먼저 로드 — declare 참조)
     'issueCollectConsent.js',
+    'photoCheckChoice.js',      // [2026-11-15] photo-check choice window + retry loop (issueCollectMode / headingImageGen use it)
     'issueCollectArticle.js',   // [2026-11-03] intro + whole article body for the plan model (before issueCollectMode)
     'issueCollectMode.js',
     // ✅ [공식문서 캡처] 경제·지원금 글 공식 페이지 캡처 모드

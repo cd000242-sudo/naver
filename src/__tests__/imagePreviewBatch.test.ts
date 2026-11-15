@@ -65,6 +65,18 @@ describe('배선: 브리지가 자리를 옮기고, 프롬프트대로 루프가
     expect(src).toMatch(/const \{ index, total \} = resolveImagePreviewPosition\(data\.index, data\.total\);/u);
   });
 
+  // [2026-11-15 사장님] "3번 이미지가 1번 미리보기 칸에도 똑같이 뜬다" — 유료 엔진용 수신부가 한 장짜리 호출의
+  // 번호(늘 0)를 그대로 써서 새 그림마다 1번 칸을 덮어 그렸다. 9/02 수정이 브리지만 고치고 이 수신부를 빠뜨렸다.
+  it('유료 엔진 수신부도 자리를 옮긴 뒤에 미리보기 칸을 그린다', () => {
+    const src = read('renderer/modules/costAndAutoGen.ts');
+    expect(src).not.toMatch(/const \{ index, total, image \} = data;/u);
+    expect((src.match(/resolveImagePreviewPosition\(data\.index, data\.total\)/gu) ?? []).length).toBeGreaterThanOrEqual(2);
+    const listener = src.slice(src.indexOf('cleanupImageListener = (window.api as any).onImageGenerated('));
+    const gridAt = listener.indexOf('.live-grid-item[data-index=');
+    expect(gridAt).toBeGreaterThan(0);
+    expect(listener.slice(0, gridAt)).toMatch(/resolveImagePreviewPosition\(data\.index, data\.total\)/u);
+  });
+
   it('headingImageGen 루프가 begin → slot → end 를 부른다', () => {
     const src = read('renderer/modules/headingImageGen.ts');
     expect(src).toMatch(/beginImagePreviewBatch\(emptyHeadings\.length\)/u);

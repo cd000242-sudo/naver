@@ -32,6 +32,15 @@ export function isPerceptualDuplicate(registry: PhashRegistry, dhash: bigint): b
   return registry.hashes.some((seen) => hammingDistance(seen, dhash) <= PHASH_DUP_DISTANCE);
 }
 
+/**
+ * [2026-11-15] The post-wide list holds only photos that were really placed into a heading slot. Registering at
+ * download time (the old behaviour) threw away photos an earlier heading downloaded but never used: 2 of 2, then
+ * 8 of 9 candidates of the next heading were rejected as "perceptual duplicates" in the live run.
+ */
+export function registerPlacedPhotos(registry: PhashRegistry, placed: readonly FetchedCandidate[]): void {
+  for (const item of placed) registry.hashes.push(item.dhash);
+}
+
 /** Higher = more likely to be a clean original photo for issue content. */
 const SOURCE_WEIGHT: Record<string, number> = {
   'news-og': 3,
@@ -95,7 +104,13 @@ export interface FunnelOptions {
   /** 고른 글생성 엔진이 정한 비전 경로. 없으면 무료 캡션 게이트로 내려간다. */
   visionRoute?: IssueVisionRoute | null;
   visionBudget: VisionGateBudget;
+  /** Post-wide list of photos already PLACED in earlier headings. The funnel only reads it (registerPlacedPhotos writes). */
   phashRegistry: PhashRegistry;
+  /**
+   * Photos this funnel already downloaded for the CURRENT heading (across its tier rounds). The funnel writes it, so
+   * the same photo reposted by another source is not downloaded-and-judged twice. A fresh one is made per call when absent.
+   */
+  headingPhashRegistry?: PhashRegistry;
   /** Stop once this many clean images survive (default 6). */
   cleanTarget?: number;
   /** 관련성 판정 기준 (주체·소제목). 없으면 Vision 게이트가 전량 탈락시킨다. */
@@ -133,6 +148,7 @@ export async function refineHeadingCandidates(
 
   const validated: FetchedCandidate[] = [];
   const attemptedUrls: string[] = [];
+  const seenInHeading = options.headingPhashRegistry ?? createPhashRegistry();
   let fetched = 0;
   let duplicates = 0;
   let watermarkRejected = 0;
@@ -147,7 +163,7 @@ export async function refineHeadingCandidates(
     fetched++;
     const item = await fetchAndValidateCandidate(candidate);
     if (!item) continue;
-    if (isPerceptualDuplicate(options.phashRegistry, item.dhash)) {
+    if (isPerceptualDuplicate(options.phashRegistry, item.dhash) || isPerceptualDuplicate(seenInHeading, item.dhash)) {
       duplicates++;
       console.log(`${LOG} ♻️ 지각 중복 제외: ${item.candidate.url.slice(0, 70)}`);
       continue;
@@ -161,7 +177,8 @@ export async function refineHeadingCandidates(
       );
       continue;
     }
-    options.phashRegistry.hashes.push(item.dhash);
+    // Heading-local only: whether this photo ends up in a slot is decided after the vision gate, by the caller.
+    seenInHeading.hashes.push(item.dhash);
     validated.push(item);
   }
 

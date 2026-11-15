@@ -8,7 +8,7 @@
 
 import { runPlanStage } from './planStage.js';
 import { filterIssueCandidates } from './urlPolicy.js';
-import { createPhashRegistry, passesScope, refineHeadingCandidates, scopeSteps, type FunnelOptions } from './funnel.js';
+import { createPhashRegistry, passesScope, refineHeadingCandidates, registerPlacedPhotos, scopeSteps, type FunnelOptions } from './funnel.js';
 import type { FetchedCandidate } from './candidateFetcher.js';
 import { filterByCaptionEvidence } from './captionRelevanceGate.js';
 import { createVisionBudget } from './visionGate.js';
@@ -113,6 +113,8 @@ async function collectCleanForHeading(
 ): Promise<{ clean: FetchedCandidate[]; poolSize: number; duplicates: number; visionUsed: boolean; watermarkRejected: number }> {
   const seenQueries = new Set<string>();
   const attempted = new Set<string>();
+  // Photos downloaded for THIS heading (all tier rounds + the broad fallback). Post-wide duplicates are only the placed ones.
+  const headingPhashRegistry = createPhashRegistry();
   const pool: IssueCandidateImage[] = [];
   const clean: FetchedCandidate[] = [];
   let duplicates = 0;
@@ -132,6 +134,7 @@ async function collectCleanForHeading(
     if (fresh.length > 0) {
       const refined = await refineHeadingCandidates(fresh, {
         ...funnelOptions,
+        headingPhashRegistry,
         cleanTarget: Math.max(1, target - clean.length),
       });
       refined.attemptedUrls.forEach((u) => attempted.add(u));
@@ -151,7 +154,7 @@ async function collectCleanForHeading(
       .filter((c) => !attempted.has(c.url) && passesScope(c, scope));
     const wide = filterByCaptionEvidence(found, funnelOptions.subjectContext, funnelOptions.sceneTerms);
     if (wide.length > 0) {
-      const refined = await refineHeadingCandidates(wide, { ...funnelOptions, cleanTarget: target });
+      const refined = await refineHeadingCandidates(wide, { ...funnelOptions, headingPhashRegistry, cleanTarget: target });
       clean.push(...refined.clean);
       duplicates += refined.duplicates;
       watermarkRejected += refined.watermarkRejected;
@@ -239,16 +242,15 @@ export async function collectIssueImages(
     watermarkRejectedTotal += refined.watermarkRejected;
     visionUsedAny = visionUsedAny || refined.visionUsed;
 
-    const cleanCandidates = refined.clean
-      .filter((item) => !globallyUsed.has(item.candidate.url))
-      .map((item) => ({
-        ...item.candidate,
-        width: item.width,
-        height: item.height,
-      }));
+    const unused = refined.clean.filter((item) => !globallyUsed.has(item.candidate.url));
+    const toCandidate = (item: FetchedCandidate) => ({ ...item.candidate, width: item.width, height: item.height });
+    const cleanCandidates = unused.map(toCandidate);
     // AI 권장 수(기본 1)만큼 배치 — 상한은 perHeadingTarget (위에서 계산된 targetForHeading).
-    const placed = cleanCandidates.slice(0, targetForHeading);
-    placed.forEach((c) => globallyUsed.add(c.url));
+    const placedItems = unused.slice(0, targetForHeading);
+    const placed = placedItems.map(toCandidate);
+    placedItems.forEach((item) => globallyUsed.add(item.candidate.url));
+    // [2026-11-15] Only photos really placed block later headings; downloaded-but-unused ones stay available.
+    registerPlacedPhotos(phashRegistry, placedItems);
 
     images[qs.heading] = placed.map((c) => c.url);
     candidates[qs.heading] = cleanCandidates;

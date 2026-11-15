@@ -3,7 +3,7 @@ import {
   buildImageCollectConsent, COLLECT_CONSENT_REQUIRED_MESSAGE, IMAGE_COLLECT_CONSENT_VERSION, isImageCollectConsentValid,
 } from '../runtime/collectPhotosPolicy.js';
 import {
-  COLLECT_PHOTOS_SCOPE, generateCollectedPhotos, isNewsOrOfficialPhoto, type CollectPhotosRuntime,
+  COLLECT_PHOTOS_SCOPE, generateCollectedPhotos, isCollectablePhoto, type CollectPhotosRuntime,
 } from '../main/services/collectPhotosEngine.js';
 import { collectDailyImages, type DailyCollectDeps } from '../main/services/dailyImageCollect.js';
 import { createSiteNameResolver, extractOgSiteName } from '../main/services/collectPhotosSiteName.js';
@@ -44,6 +44,13 @@ describe('관련 사진 찾기 - 엔진 등록과 동의 계약', () => {
     expect(isImageCollectConsentValid({ version: IMAGE_COLLECT_CONSENT_VERSION - 1, agreedAt: '2026-11-03' })).toBe(false);
     expect(isImageCollectConsentValid({ version: IMAGE_COLLECT_CONSENT_VERSION })).toBe(false);
     expect(isImageCollectConsentValid(good)).toBe(true);
+  });
+
+  it('수집 범위가 넓어져 안내 버전이 2다: 버전 1 동의는 무효, 버전 2는 유효', () => {
+    expect(IMAGE_COLLECT_CONSENT_VERSION).toBe(2);
+    expect(isImageCollectConsentValid({ version: 1, agreedAt: '2026-11-03T00:00:00Z' })).toBe(false);
+    expect(isImageCollectConsentValid({ version: 2, agreedAt: '2026-11-15T00:00:00Z' })).toBe(true);
+    expect(good.version).toBe(2);
   });
 
   it('실사진은 AI 생성으로 판정되지 않는다 (엔진 값도 AI 허용 목록에 없다)', () => {
@@ -105,14 +112,19 @@ describe('generateCollectedPhotos', () => {
 });
 
 describe('수집 범위', () => {
-  it('뉴스, 공식, 통신사 출처만 통과하고 블로그, 커뮤니티, 모르는 호스트는 거른다', () => {
-    const pass = (url: string, pageUrl?: string) => isNewsOrOfficialPhoto({ url, pageUrl, sourceName: 'x', query: 'q' });
+  it('뉴스, 공식, 모르는 호스트는 통과하고 블로그, 카페, 커뮤니티, SNS, 쇼핑몰만 거른다', () => {
+    const pass = (url: string, pageUrl?: string) => isCollectablePhoto({ url, pageUrl, sourceName: 'x', query: 'q' });
     expect(pass('https://img.hankyung.com/a.jpg', 'https://www.hankyung.com/article/1')).toBe(true);
     expect(pass('https://imgnews.pstatic.net/image/001/a.jpg')).toBe(true);
     expect(pass('https://photo.xportsnews.com/a.jpg')).toBe(true);
     expect(pass('https://blogfiles.pstatic.net/a.jpg')).toBe(false);
     expect(pass('https://img.dcinside.com/a.jpg', 'https://gall.dcinside.com/1')).toBe(false);
-    expect(pass('https://example.org/a.jpg')).toBe(false);
+    expect(pass('https://example.org/a.jpg')).toBe(true);
+    expect(pass('https://www.byd.com/kr/news/x.jpg')).toBe(true);
+    expect(pass('https://www.byd.com/kr/news/x.jpg', 'https://www.byd.com/kr/news')).toBe(true);
+    for (const blocked of ['https://blog.naver.com/a/1', 'https://cafe.naver.com/a/1', 'https://www.instagram.com/p/1',
+      'https://www.coupang.com/vp/products/1', 'https://post-phinf.pstatic.net/a.jpg']) expect(pass(blocked)).toBe(false);
+    expect(pass('https://cdn.example.com/a.jpg', 'https://blog.naver.com/a/1')).toBe(false);
     const allowed = COLLECT_PHOTOS_SCOPE.allowedSources || [];
     for (const excluded of ['reddit', 'dcinside', 'yandex', 'duckduckgo', 'google', 'youtube']) expect(allowed).not.toContain(excluded);
   });

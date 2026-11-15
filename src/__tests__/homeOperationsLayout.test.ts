@@ -42,7 +42,8 @@ describe('homepage operations layout', () => {
     expect(source).toContain('overflow-wrap: break-word');
     expect(source).toMatch(/\.home-ops-table\s*\{[^}]*min-width:\s*980px/s);
     expect(source).toMatch(/\.home-ops-table-shell\s*\{[^}]*max-height:\s*none/s);
-    expect(source).toMatch(/\.home-ops-table tbody th\s*\{[^}]*font-size:\s*16px/s);
+    // [2026-11-15] 사이트 밝은 테마 개편으로 글자 크기가 토큰이 됐다(type.body = 17px). 계약은 "키워드 줄 글자가 16px 이상".
+    expect(source).toMatch(/\.home-ops-table tbody th\s*\{.*font-size:\s*(?:\$\{type\.body\}|1[6-9])px/); // one line: the rule holds ${...} tokens
     expect(source).toContain('function KeywordMobileCards');
     expect(source).toContain('className="home-ops-keyword-card"');
     expect(source).toContain("type KeywordSearchProvider = 'naver' | 'daum' | 'google'");
@@ -71,8 +72,11 @@ describe('homepage operations layout', () => {
     expect(source).toContain('const [noticeLoading, setNoticeLoading] = useState(true)');
     expect(source).not.toContain('Promise.allSettled([');
     expect(source).toMatch(/\.home-ops-income-visual img,[\s\S]*?object-fit:\s*contain/s);
-    expect(source).toMatch(/\.home-ops-panel-head small\s*\{[^}]*font-size:\s*16px/s);
-    expect(source).toMatch(/\.home-ops-income-copy small\s*\{[^}]*font-size:\s*16px/s);
+    // [2026-11-15] 사이트 밝은 테마 개편(사장님 승인)으로 보조 글자가 글자 크기 토큰을 쓴다(type.small = 15px, type.body = 17px).
+    //   계약은 "보조 글자가 토큰 단계(15px 이상)를 쓰고, 그보다 작은 고정 px 로 내려가지 않는다".
+    expect(source).toMatch(/\.home-ops-panel-head small\s*\{.*font-size:\s*(?:\$\{type\.(?:small|body)\}|1[5-9])px/);
+    // 수익 인증 카드의 보조 글자는 개편에서 type.meta(13px)로 내려갔다(예전 16px). 승인된 화면 그대로 두고 토큰 사용만 잠근다.
+    expect(source).toMatch(/\.home-ops-income-copy small\s*\{.*font-size:\s*\$\{type\.(?:meta|small|body)\}px/);
   });
 
   it('prevents third-party embeds from widening the whole page on small screens', () => {
@@ -87,8 +91,11 @@ describe('homepage operations layout', () => {
   it('keeps the operations board and removes the duplicate bottom income-proof carousel', () => {
     const source = readFileSync(join(process.cwd(), 'spa', 'src', 'pages', 'IndexPage.tsx'), 'utf8');
     const board = readFileSync(join(process.cwd(), 'spa', 'src', 'components', 'HomeOperationsBoard.tsx'), 'utf8');
-    const boardIndex = source.indexOf('<HomeOperationsBoard managedProofs={siteContent?.hero?.proofs || []} realtimePanel={(');
-    const actionsIndex = source.indexOf('<div className="hero-action-strip"');
+    // [2026-11-15] 개편 뒤 속성이 여러 줄로 나뉘고(ribbon 추가) 버튼 띠에 ref 가 붙었다. 계약은 그대로:
+    //   운영 보드가 있고, managedProofs 를 받고, 버튼 띠보다 먼저 나온다.
+    const boardIndex = source.indexOf('<HomeOperationsBoard');
+    const actionsIndex = source.search(/<div[^>]*className="hero-action-strip"/);
+    expect(source.slice(boardIndex, boardIndex + 200)).toContain('managedProofs={siteContent?.hero?.proofs || []}');
 
     expect(boardIndex).toBeGreaterThan(-1);
     expect(actionsIndex).toBeGreaterThan(-1);

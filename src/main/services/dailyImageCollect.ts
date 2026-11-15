@@ -2,6 +2,7 @@ import type { IssueCandidateImage, IssueCollectPayload, IssueHarnessScope } from
 import { hammingDistance } from '../../crawler/issueHarness/candidateFetcher.js';
 import { dailyImageSourceTier } from './dailyImageSourcePolicy.js';
 import type { DailyRefillItem } from './dailyImageRefill.js';
+import type { PhotoCheckMode } from '../../crawler/issueHarness/photoCheckMode.js';
 
 /**
  * Real-photo slots for a daily post (2026-10-29 사장님 "수집이 실패하지 않게 — 면책 동의했으면 그 사람 책임").
@@ -52,7 +53,11 @@ function hostOf(url: string | undefined): string {
  * run cannot ask, and collecting must not cost the owner money. Photos are re-encoded as JPEG because the
  * Naver editor rejects some formats the web serves (.avif was refused in the 10-24 diagnostic report).
  */
-export function createDailyCollectDeps(context: { title: string; postId?: string; log?: (message: string) => void; signal?: AbortSignal; scope?: IssueHarnessScope }): DailyCollectDeps {
+export function createDailyCollectDeps(context: {
+  title: string; postId?: string; log?: (message: string) => void; signal?: AbortSignal; scope?: IssueHarnessScope;
+  /** [2026-11-15] Set only by a re-run the owner chose ("관련 사진 찾기"); the daily post never sets it. */
+  photoCheckMode?: PhotoCheckMode;
+}): DailyCollectDeps {
   return {
     log: context.log, signal: context.signal,
     async collect(payload) {
@@ -61,7 +66,8 @@ export function createDailyCollectDeps(context: { title: string; postId?: string
       const { collectIssueImages } = await import('../../crawler/issueHarness/harness.js');
       const config = await loadConfig();
       applyConfigToEnv(config);
-      const { planCaller, planEngineLabel, visionRoute } = resolveIssueCollectRoutes(config, false);
+      const { planCaller, planEngineLabel, visionRoute } = resolveIssueCollectRoutes(config, false, context.photoCheckMode);
+      if (context.photoCheckMode === 'caption') context.log?.('🆓 무료 판정(사진 설명 글 기준)으로 진행합니다 — 워터마크·구도는 확인하지 못해 정확도가 낮습니다.');
       return collectIssueImages(payload, { planCaller, planEngineLabel, visionRoute, log: context.log, ...(context.scope ? { scope: context.scope } : {}) });
     },
     async fetch(candidate) {

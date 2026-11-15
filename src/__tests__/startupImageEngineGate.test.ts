@@ -43,7 +43,7 @@ function mountDom(): HTMLSelectElement {
       <option value="openai-image" data-price="gpt-image | ₩18/장" selected>덕테이프 · OpenAI</option>
       <option value="flow" data-price="Google Flow | 로그인 필요">Google Flow</option>
       <option value="codex-image" data-price="ChatGPT 구독 이미지 | Codex 연결 필요">Codex 구독 이미지 (GPT 이미지 · 별도 비용 없음)</option>
-      <option value="collect-photos" data-price="무료 · 저작권 안내 동의 필요">관련 사진 찾기 (뉴스·기사 사진 · 무료)</option>
+      <option value="collect-photos" data-price="무료 · 저작권 안내 동의 필요">관련 사진 찾기 (뉴스·웹 사진 · 무료)</option>
     </select>`;
   const select = document.getElementById('image-source-select') as HTMLSelectElement;
   // Same wiring the app has: consent capture gate first, then the image tab's save path.
@@ -86,7 +86,7 @@ describe('이미지 엔진 선택지 = #image-source-select', () => {
   it('옵션의 값·제목·가격 안내를 그대로 읽는다', () => {
     const options = startupImageCollectOptions();
     expect(options.map((o) => o.value)).toEqual(['nano-banana-2', 'openai-image', 'flow', 'codex-image', 'collect-photos']);
-    expect(options[4]).toEqual({ value: 'collect-photos', title: '관련 사진 찾기 (뉴스·기사 사진 · 무료)', price: '무료 · 저작권 안내 동의 필요' });
+    expect(options[4]).toEqual({ value: 'collect-photos', title: '관련 사진 찾기 (뉴스·웹 사진 · 무료)', price: '무료 · 저작권 안내 동의 필요' });
   });
 
   it('창에는 그 옵션이 모두 라디오로 나온다 (collect-photos 포함)', () => {
@@ -213,7 +213,7 @@ describe('확정 — 이미지 탭 저장 경로를 탄다', () => {
   });
 
   it('이미 동의 기록이 있으면 모달 없이 바로 저장된다', async () => {
-    config.imageCollectConsent = { version: 1, agreedAt: '2026-11-03T00:00:00.000Z' };
+    config.imageCollectConsent = { version: 2, agreedAt: '2026-11-15T00:00:00.000Z' };
     const done = showStartupEngineGate('gemini-3.6-flash');
     pickImage('collect-photos');
     confirmBtn().click();
