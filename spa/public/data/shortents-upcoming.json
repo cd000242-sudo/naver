@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-15T20:33:14.545Z",
+ "builtAt": "2026-11-15T20:43:18.367Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 21,
  "candidates": [
   {
    "keyword": "이란 미군기지 드론 공격",
@@ -39,38 +39,6 @@
      "press": "biz.sbs.co.kr",
      "publishedAt": "2026-11-15T19:24:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/374/0000543772?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "아파트",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-15T19:13:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김광규, 송도 떠나 연희동 새 아파트 공개..결혼·여자친구 의심(미우새...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-15T20:20:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003487717"
-    },
-    {
-     "title": "불난 아파트 19층부터 문두드려 대피 돕던 경비원 숨져",
-     "press": "donga.com",
-     "publishedAt": "2026-11-15T19:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003762601?sid=102"
-    },
-    {
-     "title": "경북 경산 아파트에서 큰 불‥한때 대응 1단계 발령",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-15T19:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001535734?sid=102"
     }
    ]
   }
