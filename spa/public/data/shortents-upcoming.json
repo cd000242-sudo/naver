@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-15T20:03:03.238Z",
+ "builtAt": "2026-11-15T20:13:07.133Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -9,10 +9,43 @@
   "minPress": 2
  },
  "measured": 21,
- "candidates": [],
+ "candidates": [
+  {
+   "keyword": "부고",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 2,
+   "firstArticleAt": "2026-11-15T19:33:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[부고]",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-15T20:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003699566?sid=102"
+    },
+    {
+     "title": "[부고]진형구 前대전고검장",
+     "press": "donga.com",
+     "publishedAt": "2026-11-15T19:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003762651?sid=102"
+    },
+    {
+     "title": "[부고]김순애 별세 外",
+     "press": "donga.com",
+     "publishedAt": "2026-11-15T19:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003762650?sid=102"
+    }
+   ]
+  }
+ ],
  "hitRate": {
   "days": 7,
-  "flagged": 516,
+  "flagged": 517,
   "matched": 255,
   "avgLeadMin": 545,
   "recent": [
