@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-15T23:04:14.532Z",
+ "builtAt": "2026-11-15T23:14:19.966Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 17,
-   "recent20": 4,
-   "press": 17,
-   "firstArticleAt": "2026-11-15T21:40:00.000Z",
+   "articles90": 18,
+   "recent20": 6,
+   "press": 18,
+   "firstArticleAt": "2026-11-15T22:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“현행 시험 제도 수명 다했나”···세무사 AI 부정행위 '일파만파'",
-     "press": "mdilbo.com",
-     "publishedAt": "2026-11-15T23:02:00.000Z",
-     "link": "http://www.mdilbo.com/detail/0kIA7d/760574"
+     "title": "청와대, 국가자격시험 AI 부정행위 전수 조사…수능 앞두고 긴급회의",
+     "press": "cstimes.com",
+     "publishedAt": "2026-11-15T23:12:00.000Z",
+     "link": "https://www.cstimes.com/news/articleView.html?idxno=727972"
+    },
+    {
+     "title": "수능 사흘 앞두고 번진 AI 안경 등 커닝 불안...수능 연기 주장도",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-15T23:04:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3752749"
     },
     {
      "title": "\"AI 안경만 잡으면 끝?\" 초소형 카메라에 등장에 수능 앞두고 부정행위...",
      "press": "smartbizn.com",
      "publishedAt": "2026-11-15T23:02:00.000Z",
      "link": "https://www.smartbizn.com/news/articleView.html?idxno=159488"
-    },
-    {
-     "title": "세무사 시험 수석 'AI 커닝' 파문...정부, 올해 국가자격시험 전수조사",
-     "press": "monthly.chosun.com",
-     "publishedAt": "2026-11-15T23:00:00.000Z",
-     "link": "https://monthly.chosun.com/news/articleView.html?idxno=71969"
     }
    ]
   },
@@ -48,30 +48,62 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
+   "articles90": 11,
+   "recent20": 3,
+   "press": 10,
    "firstArticleAt": "2026-11-15T21:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "미국 사흘째 항공대란…트럼프-민주당 '네 탓 공방'",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-15T22:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001978334?sid=104"
+     "title": "트럼프·민주, '항공기 이륙 중단 사태' 네 탓 공방",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-15T23:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001978340?sid=104"
     },
     {
-     "title": "트럼프, 항공대란 이틀 만에 바이든 탓…의회에 예산 촉구",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-15T22:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000367604?sid=104"
+     "title": "[뉴스 속 경제] 물러난 젠슨 황‥인공지능 생태계·트럼프 흔들까?",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-15T23:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001535782?sid=101"
     },
     {
-     "title": "미 항공대란 이틀 만에 입 연 트럼프, “바이든 정부 탓”",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-15T22:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003482844?sid=104"
+     "title": "미 항공대란 결항·지연 사흘째 ...트럼프 ·민주당 '네 탓' 공방",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-15T22:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002433249?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "신인감독 김연경 시즌2",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-15T22:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'신인감독 김연경2' 6주 연속 2054 시청률 1위…최고 6.5% 자체 최고치",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-15T23:06:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16277462"
+    },
+    {
+     "title": "'신인감독 김연경2' 한송희 시즌아웃·김윤아 영입⋯채선아·이호빈 맞...",
+     "press": "joynews24.com",
+     "publishedAt": "2026-11-15T23:06:00.000Z",
+     "link": "http://www.joynews24.com/view/2026370"
+    },
+    {
+     "title": "'신인감독 김연경2' 5%대 시청률 유지…6주 연속 일요일 예능 1위[시청률...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-15T22:58:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1794783250530919010"
     }
    ]
   },
@@ -80,10 +112,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-15T21:36:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-15T22:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -112,10 +144,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 6,
+   "articles90": 4,
    "recent20": 3,
-   "press": 5,
-   "firstArticleAt": "2026-11-15T21:40:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-15T22:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -140,34 +172,34 @@
    ]
   },
   {
-   "keyword": "신인감독 김연경 시즌2",
+   "keyword": "스페이스X 우주선 회수",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 3,
+   "recent20": 2,
    "press": 3,
-   "firstArticleAt": "2026-11-15T22:48:00.000Z",
+   "firstArticleAt": "2026-11-15T21:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'신인감독 김연경2' 5%대 시청률 유지…6주 연속 일요일 예능 1위[시청률...",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-15T22:58:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1794783250530919010"
+     "title": "[미국 특징주] 스페이스X 스타십 2단부 첫 회수...완전 재사용 성큼",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-15T23:05:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261116000049"
     },
     {
-     "title": "'신인감독 김연경2' 시청률 5%...윤영인·이예은 백어택 성공→김윤하 ...",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-15T22:50:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=782017"
+     "title": "스페이스X 목표가 800달러 vs 10달러 극과 극…모건스탠리는 300달러 고수",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-15T23:04:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=202611160759501862e250e8e188_1"
     },
     {
-     "title": "‘신인감독 김연경2’ 6주 연속 1위",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-15T22:48:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611160059"
+     "title": "로봇팔로 잡았다‥사상 첫 우주선 본체 회수",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-15T21:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001535759?sid=104"
     }
    ]
   },
