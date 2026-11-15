@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-15T15:10:47.912Z",
+ "builtAt": "2026-11-15T15:20:52.080Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,14 +11,14 @@
  "measured": 24,
  "candidates": [
   {
-   "keyword": "일본 한국 야구",
+   "keyword": "한국 야구 일본에 준우승",
    "sources": [
-    "google"
+    "nate"
    ],
-   "articles90": 26,
-   "recent20": 3,
-   "press": 24,
-   "firstArticleAt": "2026-11-15T13:41:00.000Z",
+   "articles90": 20,
+   "recent20": 1,
+   "press": 18,
+   "firstArticleAt": "2026-11-15T13:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -29,16 +29,16 @@
      "link": "https://n.news.naver.com/mnews/article/025/0003565320?sid=104"
     },
     {
-     "title": "‘호주 유니폼’ 한국인…아버지는 전 LG 야구선수",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-15T15:02:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/025/0003565334"
-    },
-    {
      "title": "\"한국, 굴욕의 일본전 13연패. 11년 동안 승리 없다\"...日 언론 신났네,...",
      "press": "osen.co.kr",
      "publishedAt": "2026-11-15T14:59:00.000Z",
      "link": "https://m.sports.naver.com/kbaseball/article/109/0005641176"
+    },
+    {
+     "title": "'3년 연속 준우승' 최원호 감독 \"APBC서 젊은 투수들 국제 경쟁력 확인\"",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-15T14:52:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16277321"
     }
    ]
   },
@@ -87,16 +87,16 @@
    "capped": false,
    "samples": [
     {
-     "title": "젠슨 황 사임 후폭풍…복귀 청원에 추가 폭로까지, 엔비디아 '술렁'",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-15T15:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000552053?sid=101"
-    },
-    {
      "title": "월가 큰손도 직원도 “젠슨 황 복귀시켜라”…온라인 청원 14만 돌파",
      "press": "joongang.co.kr",
      "publishedAt": "2026-11-15T15:01:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/025/0003565301?sid=101"
+    },
+    {
+     "title": "젠슨 황 사임 후폭풍…복귀 청원에 추가 폭로까지, 엔비디아 '술렁'",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-15T15:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000552053?sid=101"
     },
     {
      "title": "엔비디아 투자자·직원, 젠슨 황 복귀 요구…온라인 청원 14만명 넘어",
@@ -112,11 +112,11 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-15T14:24:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
      "title": "선수 친 HD현대·안두릴, 한·미 합작 첫 무인수상함 띄웠다",
@@ -144,7 +144,7 @@
     "nate"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-15T14:11:00.000Z",
    "exclusive": false,
@@ -173,7 +173,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 509,
+  "flagged": 510,
   "matched": 255,
   "avgLeadMin": 545,
   "recent": [
