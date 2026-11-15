@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-15T22:23:54.308Z",
+ "builtAt": "2026-11-15T22:34:00.298Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,81 +11,89 @@
  "measured": 22,
  "candidates": [
   {
-   "keyword": "젠슨 황 백악관 설득 중",
+   "keyword": "ai 안경",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 18,
-   "recent20": 5,
-   "press": 18,
-   "firstArticleAt": "2026-11-15T21:02:00.000Z",
+   "articles90": 35,
+   "recent20": 11,
+   "press": 32,
+   "firstArticleAt": "2026-11-15T21:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "수능 D-3 'AI안경' 비상…오늘 국회서 현안보고",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-15T22:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001978325?sid=102"
+    },
+    {
+     "title": "정부, 국가자격시험 'AI 부정' 전수조사…세무사 수석 합격 취소할 듯",
+     "press": "tfmedia.co.kr",
+     "publishedAt": "2026-11-15T22:32:00.000Z",
+     "link": "https://www.tfmedia.co.kr/news/article.html?no=208907"
+    },
+    {
+     "title": "[AI핫이슈] K빅테크 '퍼스널 AI 에이전트' 레이스 가세...젠슨 황 사태 ...",
+     "press": "digitaltoday.co.kr",
+     "publishedAt": "2026-11-15T22:30:00.000Z",
+     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=715555"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황 백악관 설득 중",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 18,
+   "recent20": 4,
+   "press": 18,
+   "firstArticleAt": "2026-11-15T21:09:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[속보]'나, 돌아갈래' 젠슨 황, 복귀 시나리오 진행 중, 가능성은?",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-15T22:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000161341?sid=104"
+    },
+    {
+     "title": "FT “젠슨 황, 엔비디아 CEO 복귀 논의 중…백악관 설득 시도”",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-15T22:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003485818?sid=105"
+    },
     {
      "title": "젠슨 황, 엔비디아 CEO 복귀 논의 중…머스크 이어 백악관 설득 시도",
      "press": "hansbiz.co.kr",
      "publishedAt": "2026-11-15T22:18:00.000Z",
      "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=883445"
-    },
-    {
-     "title": "일론 머스크까지! 젠슨 황 전 엔비디아 CEO 복귀 움직임에 실리콘밸리 ...",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-15T22:16:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885754"
-    },
-    {
-     "title": "\"젠슨 황, 엔비디아 CEO 복귀 논의 중…백악관 설득 시도\"",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-15T22:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001164393?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "청와대 AI 부정행위 전수조사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 15,
-   "recent20": 5,
-   "press": 14,
-   "firstArticleAt": "2026-11-15T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "수능 사흘 앞두고 AI 부정행위 비상... AI 기기 점검 절차 마련",
-     "press": "womennews.co.kr",
-     "publishedAt": "2026-11-15T22:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/310/0000141731?sid=102"
-    },
-    {
-     "title": "수능 D-3 부정행위 비상…청와대 긴급 대책 회의",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-15T22:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001978320?sid=100"
-    },
-    {
-     "title": "[뉴스타트] 세무사 수석 만든 '단돈 11만 원 AI 커닝 세트' 파장...사흘 ...",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-15T22:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002433241?sid=102"
     }
    ]
   },
   {
    "keyword": "김정은",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 9,
+   "articles90": 10,
    "recent20": 2,
-   "press": 9,
+   "press": 10,
    "firstArticleAt": "2026-11-15T21:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "무당 노슬비 “김정은 2년 안에 안 죽으면 천만원 기부” 예언",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-15T22:29:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001187865"
+    },
     {
      "title": "北 평양 청류원 휴식홀 선전…\"김정은의 인민 사랑 깃들어\"",
      "press": "news1.kr",
@@ -97,12 +105,6 @@
      "press": "slist.kr",
      "publishedAt": "2026-11-15T22:04:00.000Z",
      "link": "https://www.slist.kr/news/articleView.html?idxno=781984"
-    },
-    {
-     "title": "美국무 “김정은, 팽창주의자 아냐…정권 생존 원할 뿐”",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-15T21:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003059249?sid=104"
     }
    ]
   },
@@ -111,10 +113,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 10,
+   "articles90": 6,
    "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-15T21:00:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-15T21:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -139,109 +141,68 @@
    ]
   },
   {
-   "keyword": "닥터X : 하얀 마피아의 시대",
+   "keyword": "사랑이 온다",
    "sources": [
     "nate"
    ],
    "articles90": 3,
-   "recent20": 3,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-15T22:16:00.000Z",
+   "firstArticleAt": "2026-11-15T22:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'닥터X' 김정영, 유미경으로 남긴 온기 \"함께한 모든 인연에 감사\"",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-15T22:20:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16277432"
+     "title": "‘사랑이 온다’ 고윤, 예측 불가한 악역의 얼굴 완성",
+     "press": "swtvnews.com",
+     "publishedAt": "2026-11-15T22:18:00.000Z",
+     "link": "https://swtvnews.com/news/newsview.php?ncode=1065564909443204"
     },
     {
-     "title": "김정영, '닥터X' 종영 소회… \"함께해 소중한 시간이었다\" ('닥터X')",
+     "title": "고윤, 한규림 향한 서늘한 협박…폭력 행사 후 제압된 최후 ('사랑이 온...",
      "press": "mhnse.com",
-     "publishedAt": "2026-11-15T22:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000490527"
+     "publishedAt": "2026-11-15T22:09:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000490523"
     },
     {
-     "title": "‘닥터X’ 김정영, 종영 소감",
+     "title": "‘사랑이 온다’ 고윤, 악행 폭주",
      "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-15T22:16:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611160023"
-    }
-   ]
-  },
-  {
-   "keyword": "스페이스X 우주선 회수",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-15T21:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "로봇팔로 잡았다‥사상 첫 우주선 본체 회수",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-15T21:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001535759?sid=104"
-    },
-    {
-     "title": "우주선 본체 첫 회수…'로켓 재사용' 새 역사",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-15T21:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001403222?sid=104"
-    },
-    {
-     "title": "스페이스X, 사상 첫 우주선 상단부 회수 성공",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-15T21:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926464?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "김유정 100일 거짓말",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-15T21:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "박진영, 동생과 김유정 사이에서 총 겨눠-구국단 최악의 위기",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-15T21:48:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95319"
-    },
-    {
-     "title": "‘100일의 거짓말’ 송지효 두 딸 위기‥박진영, 김유정에 총 겨눴다 [어...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-15T21:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001187856"
-    },
-    {
-     "title": "‘100일의 거짓말’ 이무생, 김현주 살리고 죽음 맞나 ‘불길’",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-15T21:07:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001187853"
+     "publishedAt": "2026-11-15T22:04:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611160017"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 539,
-  "matched": 277,
-  "avgLeadMin": 634,
+  "flagged": 541,
+  "matched": 281,
+  "avgLeadMin": 626,
   "recent": [
+   {
+    "keyword": "청와대 AI 부정행위 전수조사",
+    "hitKeyword": "세무사 시험 AI 부정행위",
+    "hitAt": "2026-11-16T07:30:00+09:00",
+    "leadMin": 87
+   },
+   {
+    "keyword": "세무사 수석",
+    "hitKeyword": "세무사 시험 AI 부정행위",
+    "hitAt": "2026-11-16T07:30:00+09:00",
+    "leadMin": 56
+   },
+   {
+    "keyword": "김유정 100일 거짓말",
+    "hitKeyword": "100일의 거짓말 12회",
+    "hitAt": "2026-11-16T07:30:00+09:00",
+    "leadMin": 26
+   },
+   {
+    "keyword": "닥터X : 하얀 마피아의 시대",
+    "hitKeyword": "닥터X 최종회",
+    "hitAt": "2026-11-16T07:30:00+09:00",
+    "leadMin": 6
+   },
    {
     "keyword": "2026년 11월 12일 운세",
     "hitKeyword": "앤트로픽 11월 상장",
@@ -277,30 +238,6 @@
     "hitKeyword": "앤트로픽 11월 상장",
     "hitAt": "2026-11-16T07:00:00+09:00",
     "leadMin": 1493
-   },
-   {
-    "keyword": "2026년 11월 16일 운세",
-    "hitKeyword": "앤트로픽 11월 상장",
-    "hitAt": "2026-11-16T07:00:00+09:00",
-    "leadMin": 36
-   },
-   {
-    "keyword": "코르티스 MMA 2026 대상",
-    "hitKeyword": "MMA 2026 대상",
-    "hitAt": "2026-11-16T07:00:00+09:00",
-    "leadMin": 26
-   },
-   {
-    "keyword": "이란",
-    "hitKeyword": "트럼프 이란 제재",
-    "hitAt": "2026-11-16T07:00:00+09:00",
-    "leadMin": 26
-   },
-   {
-    "keyword": "트럼프 바이든 탓 항공대란",
-    "hitKeyword": "트럼프 이란 제재",
-    "hitAt": "2026-11-16T07:00:00+09:00",
-    "leadMin": 26
    }
   ]
  }
