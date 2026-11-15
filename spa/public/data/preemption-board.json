@@ -10189,7 +10189,7 @@
    "carried": true,
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-10-27T01:35:44.291Z",
+    "checkedAt": "2026-11-15T02:09:11.174Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -36616,7 +36616,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-14T02:39:38.447Z",
+    "checkedAt": "2026-11-15T02:08:59.477Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -99182,6 +99182,11 @@
     "tier": "none",
     "pc": 70,
     "mobile": 70
+   },
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-11-15T02:09:10.277Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
   {
@@ -102953,7 +102958,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-14T02:39:39.356Z",
+    "checkedAt": "2026-11-15T02:09:00.373Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -112068,5 +112073,5 @@
    ]
   }
  ],
- "revalidatedAt": "2026-11-14T02:39:59.180Z"
+ "revalidatedAt": "2026-11-15T02:09:11.174Z"
 }
