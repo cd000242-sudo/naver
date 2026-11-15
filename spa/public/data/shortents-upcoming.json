@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-15T15:40:59.351Z",
+ "builtAt": "2026-11-15T15:51:02.727Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -17,12 +17,18 @@
     "nate"
    ],
    "articles90": 5,
-   "recent20": 0,
+   "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-15T14:15:00.000Z",
+   "firstArticleAt": "2026-11-15T14:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“젠슨 황 없인 안돼” vs “오만과 결별해야”… 엇갈린 실리콘밸리",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-15T15:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004009786?sid=105"
+    },
     {
      "title": "월가 큰손도 직원도 “젠슨 황 복귀시켜라”…온라인 청원 14만 돌파",
      "press": "joongang.co.kr",
@@ -34,12 +40,6 @@
      "press": "news.tf.co.kr",
      "publishedAt": "2026-11-15T15:01:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/629/0000552053?sid=101"
-    },
-    {
-     "title": "[잡채기 칼럼] 젠슨 황 일어서나?",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-15T15:00:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082705"
     }
    ]
   },
@@ -48,24 +48,24 @@
    "sources": [
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-15T14:13:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-15T14:24:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
-    {
-     "title": "변요한·티파니 영, 결혼 후 첫 공식 석상...\"아내 너무 사랑스러워\"",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-15T15:34:00.000Z",
-     "link": "https://www.insight.co.kr/news/582135"
-    },
     {
      "title": "변요한♥티파니, 결혼 후 첫 공식석상서 애정표현 제대로.. \"아내 너무 ...",
      "press": "tvreport.co.kr",
      "publishedAt": "2026-11-15T15:34:00.000Z",
      "link": "https://m.entertain.naver.com/article/213/0001408396"
+    },
+    {
+     "title": "변요한·티파니 영, 결혼 후 첫 공식 석상...\"아내 너무 사랑스러워\"",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-15T15:34:00.000Z",
+     "link": "https://www.insight.co.kr/news/582135"
     },
     {
      "title": "\"너무 사랑스러워\" 변요한·티파니 영, 시상식서 달달 부부 케미(2026 MMA...",
@@ -80,13 +80,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-15T14:12:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-15T14:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“李가 尹탄핵 반대” “통일교, 김민석 밀어”… 내분 불붙인 최민희 ...",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-15T15:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004009789?sid=100"
+    },
     {
      "title": "김민석 \"최민희, 윤리심판원에 이첩하라\", 징계 착수",
      "press": "viewsnnews.com",
@@ -98,12 +104,6 @@
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-15T14:23:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002433189?sid=100"
-    },
-    {
-     "title": "'최민희 논란'에 더민초 긴급 소집…\"중징계 불가피\" vs \"신중론\" 속 추...",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-15T14:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000121431?sid=100"
     }
    ]
   },
@@ -136,38 +136,6 @@
      "press": "hansbiz.co.kr",
      "publishedAt": "2026-11-15T14:24:00.000Z",
      "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=883443"
-    }
-   ]
-  },
-  {
-   "keyword": "김광규 연희동 아파트",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-15T14:11:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'전세사기 피해' 김광규, 28년 만에 서울 연희동 자가 마련",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-15T15:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014323357"
-    },
-    {
-     "title": "“아늑하네 부럽다” 김광규, 28년만 마련한 연희동 자가 공개 (‘미우...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-15T14:28:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005764099"
-    },
-    {
-     "title": "임원희도 놀란 김광규 새집..같은 아파트인데 분위기 딴판 \"리모델링 했...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-15T14:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004466901"
     }
    ]
   }
