@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-15T20:23:10.496Z",
+ "builtAt": "2026-11-15T20:33:14.545Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,8 +8,40 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
+ "measured": 23,
  "candidates": [
+  {
+   "keyword": "이란 미군기지 드론 공격",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-15T19:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이란 혁명수비대 \"바레인 美 공군기지에 드론 공격 감행\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-15T20:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000651192?sid=104"
+    },
+    {
+     "title": "이란, 두 달 만에 중동 미군 공격...호르무즈 유조선 또 기뢰 충돌",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-15T20:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002433229?sid=104"
+    },
+    {
+     "title": "美 공격 재개한 이란 \"바레인 내 미군기지 공격\"",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-15T19:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000543772?sid=101"
+    }
+   ]
+  },
   {
    "keyword": "아파트",
    "sources": [
@@ -35,49 +67,17 @@
      "link": "https://n.news.naver.com/mnews/article/020/0003762601?sid=102"
     },
     {
-     "title": "한밤중 경북 포항 고층 아파트서 불‥25명 대피",
+     "title": "경북 경산 아파트에서 큰 불‥한때 대응 1단계 발령",
      "press": "imnews.imbc.com",
      "publishedAt": "2026-11-15T19:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001535733?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "부고",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 2,
-   "firstArticleAt": "2026-11-15T19:33:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[부고]",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-15T20:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003699566?sid=102"
-    },
-    {
-     "title": "[부고]진형구 前대전고검장",
-     "press": "donga.com",
-     "publishedAt": "2026-11-15T19:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003762651?sid=102"
-    },
-    {
-     "title": "[부고]김순애 별세 外",
-     "press": "donga.com",
-     "publishedAt": "2026-11-15T19:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003762650?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/214/0001535734?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 517,
+  "flagged": 518,
   "matched": 255,
   "avgLeadMin": 545,
   "recent": [
