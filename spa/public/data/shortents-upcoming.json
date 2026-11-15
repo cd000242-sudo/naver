@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-15T22:54:09.709Z",
+ "builtAt": "2026-11-15T23:04:14.532Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,117 +8,91 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 21,
+ "measured": 22,
  "candidates": [
   {
-   "keyword": "메가스피드 앨리스 황",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 18,
-   "recent20": 6,
-   "press": 18,
-   "firstArticleAt": "2026-11-15T21:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘앨리스 황 스파이 의혹’에 입 연 메가스피드…“우리는 현재 그녀와...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-15T22:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002832970?sid=104"
-    },
-    {
-     "title": "메가스피드 “앨리스 황, 지난해 8월 퇴사…현재 회사와 무관”",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-15T22:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003485825?sid=105"
-    },
-    {
-     "title": "'젠슨 황 스캔들' 앨리스 황, 지난해 퇴사…메가스피드 자체 조사 착수",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-15T22:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001164399?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황 백악관 설득 중",
+   "keyword": "청와대 AI 부정행위 전수조사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 16,
-   "recent20": 5,
-   "press": 16,
-   "firstArticleAt": "2026-11-15T21:33:00.000Z",
+   "articles90": 17,
+   "recent20": 4,
+   "press": 17,
+   "firstArticleAt": "2026-11-15T21:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "사퇴 나흘 만에 복귀 시도?…젠슨 황, 엔비디아 복귀 위해 백악관 설득...",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-15T22:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000121435?sid=104"
+     "title": "“현행 시험 제도 수명 다했나”···세무사 AI 부정행위 '일파만파'",
+     "press": "mdilbo.com",
+     "publishedAt": "2026-11-15T23:02:00.000Z",
+     "link": "http://www.mdilbo.com/detail/0kIA7d/760574"
     },
     {
-     "title": "\"엔비디아 CEO는 백악관이 정하나\"…젠슨 황 복귀전서 드러난 美 '전략기...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-15T22:50:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16277446"
+     "title": "\"AI 안경만 잡으면 끝?\" 초소형 카메라에 등장에 수능 앞두고 부정행위...",
+     "press": "smartbizn.com",
+     "publishedAt": "2026-11-15T23:02:00.000Z",
+     "link": "https://www.smartbizn.com/news/articleView.html?idxno=159488"
     },
     {
-     "title": "[비즈 나우] 젠슨황, 복귀 시도?…월가도 '휘청'",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-15T22:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000543814?sid=104"
+     "title": "세무사 시험 수석 'AI 커닝' 파문...정부, 올해 국가자격시험 전수조사",
+     "press": "monthly.chosun.com",
+     "publishedAt": "2026-11-15T23:00:00.000Z",
+     "link": "https://monthly.chosun.com/news/articleView.html?idxno=71969"
     }
    ]
   },
   {
-   "keyword": "이 대통령 아세안 순방",
+   "keyword": "트럼프 바이든 탓",
    "sources": [
-    "daum"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 11,
-   "recent20": 4,
-   "press": 9,
-   "firstArticleAt": "2026-11-15T21:32:00.000Z",
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-15T21:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이 대통령, 필리핀·중국 순방...아세안·APEC 참석",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-15T22:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000543818?sid=101"
+     "title": "미국 사흘째 항공대란…트럼프-민주당 '네 탓 공방'",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-15T22:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001978334?sid=104"
     },
     {
-     "title": "李대통령, 아세안 정상회의·APEC 3박4일 순방",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-15T22:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000543816?sid=101"
+     "title": "트럼프, 항공대란 이틀 만에 바이든 탓…의회에 예산 촉구",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-15T22:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000367604?sid=104"
     },
     {
-     "title": "李대통령, 오늘 아세안·APEC 정상회의 참석차 출국",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-15T22:48:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611160013"
+     "title": "미 항공대란 이틀 만에 입 연 트럼프, “바이든 정부 탓”",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-15T22:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003482844?sid=104"
     }
    ]
   },
   {
    "keyword": "김정은",
    "sources": [
-    "signal.bz",
     "google"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 2,
    "press": 6,
-   "firstArticleAt": "2026-11-15T21:30:00.000Z",
+   "firstArticleAt": "2026-11-15T21:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“김정은 2년 안에 사망, 틀리면 천만원 준다”…‘무속인’ 노슬비, 충...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-15T23:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005764121?sid=103"
+    },
     {
      "title": "루비오 “김정은은 팽창주의자 아냐, 정권 생존만 원해”…이란과 구분",
      "press": "khan.co.kr",
@@ -130,86 +104,157 @@
      "press": "newsen.com",
      "publishedAt": "2026-11-15T22:29:00.000Z",
      "link": "https://m.entertain.naver.com/article/609/0001187865"
-    },
-    {
-     "title": "北 평양 청류원 휴식홀 선전…\"김정은의 인민 사랑 깃들어\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-15T22:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009290294?sid=100"
     }
    ]
   },
   {
-   "keyword": "2026년 11월 16일 운세",
+   "keyword": "운세",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-15T21:30:00.000Z",
+   "articles90": 6,
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-15T21:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[오늘의 띠별 운세] 2026년 11월 16일 월요일",
-     "press": "mhns.co.kr",
-     "publishedAt": "2026-11-15T22:34:00.000Z",
-     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=769164"
+     "title": "11월 셋째 주 별자리 운세",
+     "press": "wkorea.com",
+     "publishedAt": "2026-11-15T23:02:00.000Z",
+     "link": "https://www.wkorea.com/2026/11/16/11%ec%9b%94-%ec%85%8b%ec%a7%b8-%ec%a3%bc-%eb%b3%84%ec%9e%90%eb%a6%ac-%ec%9a%b4%ec%84%b8-8/?utm_source=naver&utm_medium=partnership"
     },
     {
-     "title": "[오늘의 운세] 2026년 11월 16일 (월) 띠별운세 '평소 리듬을 지키자'",
-     "press": "dailypop.kr",
-     "publishedAt": "2026-11-15T21:40:00.000Z",
-     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103982"
+     "title": "이번 주 별자리운세 '11월 16일~11월 22일' [인포그래픽]",
+     "press": "sisunnews.co.kr",
+     "publishedAt": "2026-11-15T23:00:00.000Z",
+     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=248481"
     },
     {
-     "title": "[오늘의 운세] 11월 16일 月(음력 10월 8일) 띠별 운세",
-     "press": "fntimes.com",
-     "publishedAt": "2026-11-15T21:40:00.000Z",
-     "link": "https://www.fntimes.com/html/view.php?ud=202611160638333851c1c16452b0_18"
+     "title": "2026년 11월 16일, 오늘의 띠별 운세 [인포그래픽]",
+     "press": "sisunnews.co.kr",
+     "publishedAt": "2026-11-15T23:00:00.000Z",
+     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=249117"
     }
    ]
   },
   {
-   "keyword": "비와 김태희 아침 감동",
+   "keyword": "신인감독 김연경 시즌2",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-15T21:26:00.000Z",
+   "articles90": 3,
+   "recent20": 3,
+   "press": 3,
+   "firstArticleAt": "2026-11-15T22:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "47세 성시경, 3세 어린 비♥김태희에 “상대적 박탈감”…“그것도 보통...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-15T22:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001147401"
+     "title": "'신인감독 김연경2' 5%대 시청률 유지…6주 연속 일요일 예능 1위[시청률...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-15T22:58:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1794783250530919010"
     },
     {
-     "title": "비, ♥김태희와 사는 기분 이 정도라니…\"아침에 눈뜨면 감동\"",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-15T21:47:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004125337"
+     "title": "'신인감독 김연경2' 시청률 5%...윤영인·이예은 백어택 성공→김윤하 ...",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-15T22:50:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=782017"
     },
     {
-     "title": "비, ♥김태희와 결혼 생활 자랑에 성시경 한숨 \"상대적 박탈감 느껴\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-15T21:37:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005441378"
+     "title": "‘신인감독 김연경2’ 6주 연속 1위",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-15T22:48:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611160059"
+    }
+   ]
+  },
+  {
+   "keyword": "해리 케인",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-15T22:09:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "케인·콘사·화이트 연속골…잉글랜드, 스페인 3-2 제압",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-15T22:58:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=782020"
+    },
+    {
+     "title": "'발롱도르' 케인이 무적함대 격침 … 스페인 '44G' 무패 행진 좌절",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-15T22:26:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/16/2026111650014.html"
+    },
+    {
+     "title": "‘발롱 케인의’ 잉글랜드, ‘무적함대’ 스페인 격파→‘UNL 조 1위로 ...",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-15T22:09:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/382/0001304924"
+    }
+   ]
+  },
+  {
+   "keyword": "리트 만점자 인터뷰",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-15T22:15:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'눈물' 미미미누, '리트 만점' 이진우 수능 라이브 거절…시험지 수정 ...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-15T22:39:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002080966"
+    },
+    {
+     "title": "리트 만점자 인터뷰 회자…미미미누 표정 '압권'",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-15T22:24:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014323493"
+    },
+    {
+     "title": "\"수능 8등급→리트 만점\"…리트 최초 만점자에 쏠린 눈",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-15T22:15:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014323490"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 545,
-  "matched": 281,
-  "avgLeadMin": 626,
+  "flagged": 550,
+  "matched": 283,
+  "avgLeadMin": 622,
   "recent": [
+   {
+    "keyword": "이란 미군기지 드론 공격",
+    "hitKeyword": "이란 미군 공격 재개",
+    "hitAt": "2026-11-16T08:00:00+09:00",
+    "leadMin": 147
+   },
+   {
+    "keyword": "최혜진 골프선수",
+    "hitKeyword": "최혜진 LPGA 준우승",
+    "hitAt": "2026-11-16T08:00:00+09:00",
+    "leadMin": 16
+   },
    {
     "keyword": "청와대 AI 부정행위 전수조사",
     "hitKeyword": "세무사 시험 AI 부정행위",
@@ -257,18 +302,6 @@
     "hitKeyword": "앤트로픽 11월 상장",
     "hitAt": "2026-11-16T07:00:00+09:00",
     "leadMin": 4097
-   },
-   {
-    "keyword": "2026년 11월 14일 운세",
-    "hitKeyword": "앤트로픽 11월 상장",
-    "hitAt": "2026-11-16T07:00:00+09:00",
-    "leadMin": 2931
-   },
-   {
-    "keyword": "2026년 11월 15일 운세",
-    "hitKeyword": "앤트로픽 11월 상장",
-    "hitAt": "2026-11-16T07:00:00+09:00",
-    "leadMin": 1493
    }
   ]
  }
