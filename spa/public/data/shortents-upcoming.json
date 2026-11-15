@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-15T23:34:29.649Z",
+ "builtAt": "2026-11-15T23:44:33.425Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,225 +16,158 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 48,
-   "recent20": 4,
-   "press": 45,
-   "firstArticleAt": "2026-11-15T22:06:00.000Z",
+   "articles90": 47,
+   "recent20": 7,
+   "press": 42,
+   "firstArticleAt": "2026-11-15T22:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "박현주 미래에셋 회장, 젠슨 황 복귀 청원 동참…글로벌 CEO들도 가세",
-     "press": "econovill.com",
-     "publishedAt": "2026-11-15T23:32:00.000Z",
-     "link": "https://www.econovill.com/news/articleView.html?idxno=757317"
+     "title": "\"젠슨황, 복귀 논의중\"…미 항공대란 여파 사흘째",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-15T23:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926487?sid=104"
     },
     {
-     "title": "\"젠슨 황, 엔비디아 CEO 복귀 모색·백악관 지지 확보 시도\"...온라인 청...",
-     "press": "livebiz.today",
-     "publishedAt": "2026-11-15T23:30:00.000Z",
-     "link": "https://www.livebiz.today/news/articleView.html?idxno=206532"
+     "title": "사임 나흘 만에 복귀 움직임…'전시 상황실' 꾸린 실리콘밸리",
+     "press": "weekly.chosun.com",
+     "publishedAt": "2026-11-15T23:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/053/0000063080?sid=104"
     },
     {
-     "title": "젠슨 황 복귀 추진…엔비디아 경영 혼란 가중",
-     "press": "asiatime.co.kr",
-     "publishedAt": "2026-11-15T23:28:00.000Z",
-     "link": "https://www.asiatime.co.kr/article/20261116500024"
+     "title": "\"떠난 젠슨 황 다시 불러오자\"…엔비디아 복귀 작전 시작됐다",
+     "press": "digitaltoday.co.kr",
+     "publishedAt": "2026-11-15T23:36:00.000Z",
+     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=715564"
     }
    ]
   },
   {
-   "keyword": "ai 안경",
+   "keyword": "미미미누, AI 부정행위 대책",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 51,
-   "recent20": 12,
-   "press": 43,
-   "firstArticleAt": "2026-11-15T22:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "최교진 교육장관, 수능 시험장 점검…\"AI 안경 부정행위 무관용\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-15T23:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009290350?sid=102"
-    },
-    {
-     "title": "세무사 시험 AI 부정행위 자수에 수능 수험생도 불안…미미미누 \"구체적...",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-15T23:32:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261116010005761"
-    },
-    {
-     "title": "[앵커:뷰] 'AI 안경' 직접 써보니…수능 어쩌나?",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-15T23:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001978347?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "미미미누 수능 연기 촉구",
-   "sources": [
-    "signal.bz",
-    "nate",
-    "daum"
-   ],
-   "articles90": 16,
-   "recent20": 4,
-   "press": 16,
+   "articles90": 23,
+   "recent20": 7,
+   "press": 23,
    "firstArticleAt": "2026-11-15T22:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "세무사 시험 AI 부정행위 자수에 수능 수험생도 불안…미미미누 \"구체적...",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-15T23:32:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261116010005761"
+     "title": "\"AI 부정행위 막아야\"… 미미미누, 수능 연기 검토 주장",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-15T23:38:00.000Z",
+     "link": "https://m.entertain.naver.com/article/469/0000965728"
     },
     {
-     "title": "수능 문답지, 전국 배부…AI 부정행위 여파에 ‘연기’ 주장도",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-15T23:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001885331?sid=102"
+     "title": "미미미누, AI 부정행위 사태에 '수능 연기' 검토 촉구",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-15T23:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926486?sid=102"
     },
     {
-     "title": "“수능 연기 검토 해야”…200만 입시 유튜버 미미미누, AI 커닝 사태에...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-15T23:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005764131?sid=102"
+     "title": "입시 유튜버 미미미누, 수능 연기 주장⋯\"AI 기능으로 문제 풀어, 윤리성...",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-15T23:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001075158?sid=102"
     }
    ]
   },
   {
-   "keyword": "청와대 AI 부정행위 전수조사",
+   "keyword": "집",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 16,
-   "recent20": 1,
-   "press": 16,
-   "firstArticleAt": "2026-11-15T22:08:00.000Z",
+   "articles90": 18,
+   "recent20": 5,
+   "press": 17,
+   "firstArticleAt": "2026-11-15T22:40:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "\"부정행위, 11만원이면 된다\" 쌀알 이어폰에 초소형 카메라…시험장 비...",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-15T23:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005842875?sid=102"
+     "title": "\"집 가서 이불킥\" 송혜교 전남친 소환한 공유…유재석도 눈치챘나",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-15T23:37:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005441406"
     },
     {
-     "title": "청와대, 국가자격시험 AI 부정행위 전수 조사…수능 앞두고 긴급회의",
-     "press": "cstimes.com",
-     "publishedAt": "2026-11-15T23:12:00.000Z",
-     "link": "https://www.cstimes.com/news/articleView.html?idxno=727972"
+     "title": "대한노인회 용인시 처인구지회,'기로문학' 제2집 발간, 1500권 펴내 전국...",
+     "press": "100ssd.co.kr",
+     "publishedAt": "2026-11-15T23:34:00.000Z",
+     "link": "https://www.100ssd.co.kr/news/articleView.html?idxno=214507"
     },
     {
-     "title": "수능 사흘 앞두고 번진 AI 안경 등 커닝 불안...수능 연기 주장도",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-15T23:04:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3752749"
+     "title": "서리풀1지구 1만8500가구 중 79% 임대주택…주민들 \"내 집 마련 기회 줄...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-15T23:32:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2648402"
     }
    ]
   },
   {
    "keyword": "김유정 100일의 거짓말",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 18,
-   "recent20": 10,
-   "press": 13,
+   "articles90": 22,
+   "recent20": 6,
+   "press": 16,
    "firstArticleAt": "2026-11-15T22:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "박진영, 김유정 향해 총 겨눴다..'100일의 거짓말' 시청률 10.4%",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-15T23:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003487753"
+     "title": "박진영, 결국 ♥김유정에게 총 겨눴다…관저 폭발 사고에 관계 급변 ('1...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-15T23:40:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000784591"
     },
     {
-     "title": "‘100일의 거짓말’ 12회 시청률 10.4%…관저 폭발에 다시 두 자릿수",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-15T23:28:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2648399"
+     "title": "‘100일의 거짓말’ 김유정·박진영, 애틋함은 어디로... 충격의 총구 엔...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-15T23:40:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003541876"
     },
     {
-     "title": "[TV핫스팟] ‘100일의 거짓말’ 김유정·박진영, 폭탄 작전 중 균열…총...",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-15T23:24:00.000Z",
-     "link": "https://m.entertain.naver.com/article/396/0000761032"
+     "title": "김유정 또 해냈다…‘100일의 거짓말’ 2주 연속 시청률 10%대 ‘동시간...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-15T23:40:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005641229"
     }
    ]
   },
   {
-   "keyword": "앨리스 황 퇴사",
+   "keyword": "방탄소년단 MMA2026 6관왕 행복",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-15T22:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“앨리스 황, 지난해 퇴사”…메가스피드, 중국 반도체 우회 수출 의혹...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-15T23:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005764130?sid=101"
-    },
-    {
-     "title": "메가스피드, “앨리스 황, 지난해 퇴사…합법 사업해” 주장",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-15T23:20:00.000Z",
-     "link": "https://www.viva100.com/article/20261116500055"
-    },
-    {
-     "title": "메가스피드, 앨리스 황과 현재 무관…\"합법적 사업\" 강조",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-15T23:16:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=625371"
-    }
-   ]
-  },
-  {
-   "keyword": "이 대통령 아세안 순방",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 11,
+   "articles90": 13,
    "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-15T22:06:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-15T22:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이재명 대통령, 아세안 정상회의 참석차 오늘 출국…3박 4일 다자외교 돌...",
-     "press": "geconomy.co.kr",
-     "publishedAt": "2026-11-15T23:22:00.000Z",
-     "link": "https://www.geconomy.co.kr/news/article.html?no=325691"
+     "title": "방탄소년단, MMA2026 대상 2개·6관왕…에스파·아이브·코르티스도 대상",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-15T23:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005604568?sid=103"
     },
     {
-     "title": "이재명 대통령, 오늘 전용기 타고 출국…3박 4일간 필리핀·중국으로",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-15T23:22:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1174865"
+     "title": "방탄소년단, 'MMA 2026' 대상 포함 6관왕..\"다시 공연할 수 있어 행복\"",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-15T23:28:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005641228"
     },
     {
-     "title": "이 대통령, 아세안·APEC 순방 출국…공급망·한반도 외교 시동",
-     "press": "ziksir.com",
-     "publishedAt": "2026-11-15T23:00:00.000Z",
-     "link": "https://www.ziksir.com/news/articleView.html?idxno=153359"
+     "title": "“역시 BTS” 방탄소년단, ‘MMA2026’ 6관왕…대상 2개 품었다",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-15T23:17:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001147404"
     }
    ]
   },
@@ -243,13 +176,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 7,
-   "recent20": 3,
-   "press": 6,
+   "articles90": 8,
+   "recent20": 4,
+   "press": 7,
    "firstArticleAt": "2026-11-15T22:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"김정은 2년 내 사망\"...MZ무당 노슬비, 1000만원 걸었다",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-15T23:37:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004466948"
+    },
     {
      "title": "무속인 노슬비 \"김정은 2년 안에 사망, 틀리면 1000만원\"",
      "press": "mt.co.kr",
@@ -261,44 +200,38 @@
      "press": "jasm.co.kr",
      "publishedAt": "2026-11-15T23:26:00.000Z",
      "link": "https://www.jasm.co.kr/news/view/325385/?sc=Naver"
-    },
-    {
-     "title": "美국무 \"北김정은, 그저 생존이 목적…팽창주의 이란 핵과 달라\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-15T23:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009290342?sid=104"
     }
    ]
   },
   {
-   "keyword": "김자옥 폐암 투병 별세",
+   "keyword": "잉글랜드 스페인 제압 1위로!",
    "sources": [
     "nate"
    ],
    "articles90": 6,
    "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-15T22:20:00.000Z",
+   "firstArticleAt": "2026-11-15T22:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김자옥 별세 12년…2014년 폐암 합병증으로 63세에 떠나",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-15T23:24:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=625376"
+     "title": "야말도 케인 앞에선 속수무책 마드리드 대참사!…잉글랜드, 스페인 43경...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-15T23:27:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/477/0000639233"
     },
     {
-     "title": "고 김자옥, 오늘(16일) 12주기…여전히 그리운 ‘공주님’",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-15T23:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005764125"
+     "title": "잉글랜드, 스페인 3대 2 제압…43경기 무패행진도 끝내",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-15T23:19:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/055/0001403257"
     },
     {
-     "title": "김자옥, 어느덧 12주기…여전히 그리운 얼굴",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-15T23:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014323509"
+     "title": "잉글랜드, 스페인 3-2 격파…43경기 무패 저지하고 네이션스리그 8강 조...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-15T23:04:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16277458"
     }
    ]
   },
@@ -308,7 +241,7 @@
     "nate"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-15T22:48:00.000Z",
    "exclusive": false,
@@ -321,24 +254,55 @@
      "link": "http://www.stoo.com/article.php?aid=109926375983"
     },
     {
-     "title": "'신인감독 김연경2' 6주 연속 2054 시청률 1위…최고 6.5% 자체 최고치",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-15T23:06:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16277462"
-    },
-    {
      "title": "'신인감독 김연경2' 한송희 시즌아웃·김윤아 영입⋯채선아·이호빈 맞...",
      "press": "joynews24.com",
      "publishedAt": "2026-11-15T23:06:00.000Z",
      "link": "http://www.joynews24.com/view/2026370"
+    },
+    {
+     "title": "'신인감독 김연경2' 6주 연속 2054 시청률 1위…최고 6.5% 자체 최고치",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-15T23:06:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16277462"
+    }
+   ]
+  },
+  {
+   "keyword": "사랑이 온다",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-15T22:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘사랑이 온다’ 배윤규, 누나에 화해",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-15T23:36:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611160108"
+    },
+    {
+     "title": "'사랑이 온다' 윤유선, 억눌렀던 분노와 설움 폭발한 열연",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-15T23:36:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16277498"
+    },
+    {
+     "title": "‘사랑이 온다’ 시청률 15.9% 日 전체 프로그램 1위",
+     "press": "enter.etoday.co.kr",
+     "publishedAt": "2026-11-15T23:30:00.000Z",
+     "link": "https://enter.etoday.co.kr/news/view/305318"
     }
    ]
   },
   {
    "keyword": "국토부 건설현장 안전점검",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 5,
    "recent20": 2,
@@ -368,98 +332,34 @@
    ]
   },
   {
-   "keyword": "사랑이 온다",
+   "keyword": "이란 미군기지 드론 공격",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 3,
    "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-15T22:09:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘사랑이 온다’ 시청률 15.9% 日 전체 프로그램 1위",
-     "press": "enter.etoday.co.kr",
-     "publishedAt": "2026-11-15T23:30:00.000Z",
-     "link": "https://enter.etoday.co.kr/news/view/305318"
-    },
-    {
-     "title": "‘사랑이 온다’ 윤유선, 분노 폭발",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-15T23:04:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611160068"
-    },
-    {
-     "title": "‘사랑이 온다’ 고윤, 광기를 보다",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-15T22:50:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001149965"
-    }
-   ]
-  },
-  {
-   "keyword": "운세",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-15T22:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "2026년 11월 16일 오늘의 운세 및 띠별 운세",
-     "press": "newstnt.com",
-     "publishedAt": "2026-11-15T23:30:00.000Z",
-     "link": "https://www.newstnt.com/news/articleView.html?idxno=727850"
-    },
-    {
-     "title": "11월 셋째 주 별자리 운세",
-     "press": "wkorea.com",
-     "publishedAt": "2026-11-15T23:02:00.000Z",
-     "link": "https://www.wkorea.com/2026/11/16/11%ec%9b%94-%ec%85%8b%ec%a7%b8-%ec%a3%bc-%eb%b3%84%ec%9e%90%eb%a6%ac-%ec%9a%b4%ec%84%b8-8/?utm_source=naver&utm_medium=partnership"
-    },
-    {
-     "title": "이번 주 별자리운세 '11월 16일~11월 22일' [인포그래픽]",
-     "press": "sisunnews.co.kr",
-     "publishedAt": "2026-11-15T23:00:00.000Z",
-     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=248481"
-    }
-   ]
-  },
-  {
-   "keyword": "리트 만점자 인터뷰",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-15T22:15:00.000Z",
+   "firstArticleAt": "2026-11-15T22:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“수능 국어 7등급→서울대 치대”… 리트 만점자 인터뷰 눈길",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-15T23:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001885328?sid=102"
+     "title": "이란은 바레인 치고 후티는 예멘군 반격 격퇴…중동 긴장 고조",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-15T23:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009290355?sid=104"
     },
     {
-     "title": "'눈물' 미미미누, '리트 만점' 이진우 수능 라이브 거절…시험지 수정 ...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-15T22:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002080966"
+     "title": "홍해 길목서 후퇴한 친사우디군…이란은 바레인에 드론 공격",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-15T22:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006410218?sid=104"
     },
     {
-     "title": "리트 만점자 인터뷰 회자…미미미누 표정 '압권'",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-15T22:24:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014323493"
+     "title": "이란, 바레인 미군기지 사흘 새 두 차례 드론 공격… 트럼프 “합의 필...",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-15T22:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001204925?sid=104"
     }
    ]
   },
@@ -498,7 +398,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 555,
+  "flagged": 559,
   "matched": 287,
   "avgLeadMin": 667,
   "recent": [
