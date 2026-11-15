@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-15T17:02:12.233Z",
+  "generatedAt": "2026-11-15T17:25:00.878Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -10653,67 +10653,6 @@
           "views": 70,
           "answers": 3,
           "askedAt": "2026.10.23"
-        }
-      ]
-    },
-    {
-      "id": "bc00fea300418711",
-      "urls": [
-        "https://jackti.tistory.com/3447",
-        "https://cc.productinsight.kr/92"
-      ],
-      "guide": {
-        "direction": "검색자는 하수급인에게 직접 돈을 지급받으면 원사업자의 채무가 자동으로 없어지는지, 하도급법과 건산법 중 어느 쪽 기준이 우선하는지에서 막힌다. 고수 글은 판례를 나열만 하고 '언제 소멸이 성립되는지'를 체크리스트로 정리하지 못했다. 직접지급 요건표와 소멸 시점 판단 기준을 체크리스트로 주면 글에서 답이 끝난다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "하도급법 14조 직접지급 조항 요건 정리",
-          "건산법상 직접지급 규정과 하도급법의 충돌 지점",
-          "채무소멸을 다룬 대법원 판례(확인 필요: 사건번호·선고일, 종합법률정보)",
-          "직접지급 시 채무소멸 성립 체크리스트"
-        ],
-        "mustAvoid": [
-          "특정 판례의 당사자·금액을 사실처럼 단정해 서술하기",
-          "부동산 경매 나의사건검색 등 무관한 절차를 직접지급 채무소멸 주제와 섞기"
-        ],
-        "checkBefore": [
-          "국가법령정보센터에서 하도급법 14조·건설산업기본법 직접지급 조문 원문 확인",
-          "대법원 종합법률정보에서 관련 판례 사건번호와 판시 요지 확인"
-        ],
-        "solves": [
-          "직접지급 받으면 원사업자 빚이 없어지는지 모름 → 요건 체크리스트로 정리",
-          "하도급법과 건산법 중 뭐가 우선하는지 혼란 → 충돌 지점과 판례 기준 설명",
-          "채무소멸 시점을 언제로 봐야 하는지 모름 → 판례 기준 체크리스트 제공"
-        ],
-        "actionTitles": [
-          "직접지급 채무소멸 성립 조건, 하도급법 건산법 비교",
-          "하도급법 직접지급 요건과 채무소멸 판례 확인법",
-          "건설 직접지급 받았다면 채무소멸 여부 체크하기"
-        ]
-      },
-      "at": "2026-11-12T20:54:58.082Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "대법원 나의사건 검색에서 유체동산경매 조....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60211&docId=200750400&answerNo=1&qb=64yA67KV7JuQIOu2gOuPmeyCsOqyveunpOyCrOqxtOqygOyDiQ==",
-          "views": 10176,
-          "answers": 1,
-          "askedAt": "2014.06.25"
-        },
-        {
-          "title": "대법원경매정보로 경매 물건 검색 시 효과적....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40204&docId=488783657&answerNo=1&qb=64yA67KV7JuQIOu2gOuPmeyCsOqyveunpOyCrOqxtOqygOyDiQ==",
-          "views": 338,
-          "answers": 2,
-          "askedAt": "2025.09.12"
-        },
-        {
-          "title": "부동산임의경매 매각기일을 앞당겨 달라는 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40204&docId=495442669&answerNo=1&qb=64yA67KV7JuQIOu2gOuPmeyCsOqyveunpOyCrOqxtOqygOyDiQ==",
-          "views": 292,
-          "answers": 9,
-          "askedAt": "2026.10.06"
         }
       ]
     },
