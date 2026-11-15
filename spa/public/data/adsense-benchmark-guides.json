@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-15T23:36:35.911Z",
+  "generatedAt": "2026-11-15T23:51:58.227Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -7899,71 +7899,6 @@
           "views": 579,
           "answers": 11,
           "askedAt": "2026.10.24"
-        }
-      ]
-    },
-    {
-      "id": "6f641d5af1ce23a4",
-      "urls": [
-        "https://www.keetip.com/3801",
-        "https://beyond-the-story.tistory.com/entry/%EC%9C%88%EB%8F%84%EC%9A%B0-11-%EC%82%AC%EC%9A%A9%EC%9E%90-%EA%B3%84%EC%A0%95-%EC%B6%94%EA%B0%80-%EB%B0%A9%EB%B2%95%EF%BD%9C%EA%B0%9C%EC%9D%B8-%ED%8C%8C%EC%9D%BC%C2%B7%EC%84%A4%EC%A0%95-%EB%B6%84%EB%A6%AC%ED%95%98%EA%B8%B0"
-      ],
-      "guide": {
-        "direction": "검색자는 '계정 추가는 했는데 관리자 권한이 안 먹힌다', '표준 계정 파일이 삭제가 안 된다'처럼 추가 다음 단계에서 막힌다. 고수 글 제목은 '추가 방법'까지만 다루고 삭제·컨트롤·전환처럼 추가 이후 상황은 비워둔다. 관리자/표준 계정 권한 차이표와 netplwiz 단축 경로, 삭제 안 될 때 점검 순서를 한 장에 정리하면 끝난다.",
-        "searchTargets": [
-          "윈도우 사용자 계정 추가",
-          "윈도우 사용자 계정 삭제",
-          "윈도우 사용자 계정 컨트롤",
-          "윈도우 사용자 전환"
-        ],
-        "mustInclude": [
-          "netplwiz 실행 명령으로 바로 사용자 계정 관리창 여는 경로",
-          "윈마크 오른클릭 > 컴퓨터관리 > 사용자추가 메뉴 경로",
-          "관리자 계정과 표준 계정의 삭제 권한 차이",
-          "계정은 한 번에 1개만 활성화되어 메모리·성능에 영향 없다는 점",
-          "삭제가 안 될 때 윈도우 손상 여부를 의심해볼 신호"
-        ],
-        "mustAvoid": [
-          "계정 비밀번호 우회·크랙 방법처럼 보안 취약점을 만드는 내용",
-          "윈도우 7/8/10/11 버전별 메뉴 경로를 섞어서 틀린 위치로 안내"
-        ],
-        "checkBefore": [
-          "netplwiz 명령이 현재 윈도우 11 최신 버전에서도 동일하게 동작하는지 마이크로소프트 공식 지원문서로 확인"
-        ],
-        "solves": [
-          "관리자 계정에서 표준 계정 파일 삭제가 안 됨 → 권한 구조와 윈도우 손상 가능성 구분법 제시",
-          "계정 추가 후 로그인 안 됨 → 계정 삭제 후 재생성하는 순서 제시",
-          "여러 계정 쓰면 메모리 영향 있는지 궁금 → 동시 1계정만 활성화돼 영향 없다는 점 정리"
-        ],
-        "actionTitles": [
-          "윈도우 사용자 계정 추가하는 법, netplwiz로 바로 해결",
-          "윈도우 사용자 계정 삭제 안 될 때 확인 순서 정리"
-        ]
-      },
-      "at": "2026-11-12T12:18:46.154Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "윈도우 10 사용자 계정 추가 할 때",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10301&docId=338939299&answerNo=1&qb=7JyI64+E7JqwIOyCrOyaqeyekCDqs4TsoJUg7LaU6rCAIOuwqeuyleqwnOyduA==",
-          "views": 2927,
-          "answers": 1,
-          "askedAt": "2019.10.25"
-        },
-        {
-          "title": "윈도우 사용자 계정추가했는데 계정유형",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10301&docId=236478676&answerNo=1&qb=7JyI64+E7JqwIOyCrOyaqeyekCDqs4TsoJUg7LaU6rCAIOuwqeuyleqwnOyduA==",
-          "views": 1376,
-          "answers": 1,
-          "askedAt": "2015.10.15"
-        },
-        {
-          "title": "윈도우 사용자 계정을 관리자 권한으로 추가....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10301&docId=197335618&answerNo=1&qb=7JyI64+E7JqwIOyCrOyaqeyekCDqs4TsoJUg7LaU6rCAIOuwqeuyleqwnOyduA==",
-          "views": 1083,
-          "answers": 1,
-          "askedAt": "2014.05.09"
         }
       ]
     },
