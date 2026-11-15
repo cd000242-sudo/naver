@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-15T23:14:19.966Z",
+ "builtAt": "2026-11-15T23:24:24.590Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
+ "measured": 21,
  "candidates": [
   {
    "keyword": "청와대 AI 부정행위 전수조사",
@@ -16,7 +16,7 @@
     "signal.bz"
    ],
    "articles90": 18,
-   "recent20": 6,
+   "recent20": 1,
    "press": 18,
    "firstArticleAt": "2026-11-15T22:00:00.000Z",
    "exclusive": false,
@@ -35,26 +35,31 @@
      "link": "https://www.gukjenews.com/news/articleView.html?idxno=3752749"
     },
     {
-     "title": "\"AI 안경만 잡으면 끝?\" 초소형 카메라에 등장에 수능 앞두고 부정행위...",
-     "press": "smartbizn.com",
+     "title": "“현행 시험 제도 수명 다했나”···세무사 AI 부정행위 '일파만파'",
+     "press": "mdilbo.com",
      "publishedAt": "2026-11-15T23:02:00.000Z",
-     "link": "https://www.smartbizn.com/news/articleView.html?idxno=159488"
+     "link": "http://www.mdilbo.com/detail/0kIA7d/760574"
     }
    ]
   },
   {
    "keyword": "트럼프 바이든 탓",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 3,
-   "press": 10,
+   "articles90": 12,
+   "recent20": 2,
+   "press": 11,
    "firstArticleAt": "2026-11-15T21:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "9·11 이후 최장 항공 마비…트럼프 \"바이든 정부 탓\"",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-15T23:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000520845?sid=104"
+    },
     {
      "title": "트럼프·민주, '항공기 이륙 중단 사태' 네 탓 공방",
      "press": "mbn.mk.co.kr",
@@ -66,12 +71,6 @@
      "press": "imnews.imbc.com",
      "publishedAt": "2026-11-15T23:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/214/0001535782?sid=101"
-    },
-    {
-     "title": "미 항공대란 결항·지연 사흘째 ...트럼프 ·민주당 '네 탓' 공방",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-15T22:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002433249?sid=104"
     }
    ]
   },
@@ -80,13 +79,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 5,
+   "articles90": 6,
    "recent20": 3,
-   "press": 5,
+   "press": 6,
    "firstArticleAt": "2026-11-15T22:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'신인감독 김연경2' 윤영인X츠바키, 승부수 통했다…최고 시청률 6.5%",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-15T23:22:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109926375983"
+    },
     {
      "title": "'신인감독 김연경2' 6주 연속 2054 시청률 1위…최고 6.5% 자체 최고치",
      "press": "topstarnews.net",
@@ -98,12 +103,38 @@
      "press": "joynews24.com",
      "publishedAt": "2026-11-15T23:06:00.000Z",
      "link": "http://www.joynews24.com/view/2026370"
+    }
+   ]
+  },
+  {
+   "keyword": "김자옥 폐암 투병 별세",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-15T22:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "고 김자옥, 오늘(16일) 12주기…여전히 그리운 ‘공주님’",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-15T23:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005764125"
     },
     {
-     "title": "'신인감독 김연경2' 5%대 시청률 유지…6주 연속 일요일 예능 1위[시청률...",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-15T22:58:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1794783250530919010"
+     "title": "김자옥, 어느덧 12주기…여전히 그리운 얼굴",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-15T23:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014323509"
+    },
+    {
+     "title": "故 김자옥 어느덧 12주기, 폐암 투병 끝 별세…영원한 '공주'",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-15T22:44:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009290308"
     }
    ]
   },
@@ -113,7 +144,7 @@
     "google"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-15T22:04:00.000Z",
    "exclusive": false,
@@ -140,12 +171,108 @@
    ]
   },
   {
+   "keyword": "사랑이 온다",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-15T22:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘사랑이 온다’ 윤유선, 분노 폭발",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-15T23:04:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611160068"
+    },
+    {
+     "title": "‘사랑이 온다’ 고윤, 광기를 보다",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-15T22:50:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001149965"
+    },
+    {
+     "title": "‘사랑이 온다’ 고윤, 예측 불가한 악역의 얼굴 완성",
+     "press": "swtvnews.com",
+     "publishedAt": "2026-11-15T22:18:00.000Z",
+     "link": "https://swtvnews.com/news/newsview.php?ncode=1065564909443204"
+    }
+   ]
+  },
+  {
+   "keyword": "스페이스X 우주선 회수",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-15T23:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "스페이스X, 사상 첫 '우주선 본체 회수'…로켓 완전 재사용 목표에 성큼",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-15T23:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000651222?sid=004"
+    },
+    {
+     "title": "[미국 특징주] 스페이스X 스타십 2단부 첫 회수...완전 재사용 성큼",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-15T23:05:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261116000049"
+    },
+    {
+     "title": "스페이스X 목표가 800달러 vs 10달러 극과 극…모건스탠리는 300달러 고수",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-15T23:04:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=202611160759501862e250e8e188_1"
+    }
+   ]
+  },
+  {
+   "keyword": "국토부 건설현장 안전점검",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-15T22:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한파·폭설 앞두고 건설현장 2900곳 안전점검…사망사고 건설사 특별점...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-15T23:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005604558?sid=101"
+    },
+    {
+     "title": "“겨울철 안전사고 원천 차단” 국토부, 전국 건설현장 2,946곳 대대적 안...",
+     "press": "dailyt.co.kr",
+     "publishedAt": "2026-11-15T22:52:00.000Z",
+     "link": "https://www.dailyt.co.kr/newsView/dlt202611160002"
+    },
+    {
+     "title": "국토부, 전국 건설현장 2964곳 동절기 안전점검",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-15T22:24:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611160011"
+    }
+   ]
+  },
+  {
    "keyword": "운세",
    "sources": [
     "google"
    ],
    "articles90": 4,
-   "recent20": 3,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-15T22:34:00.000Z",
    "exclusive": false,
@@ -158,48 +285,16 @@
      "link": "https://www.wkorea.com/2026/11/16/11%ec%9b%94-%ec%85%8b%ec%a7%b8-%ec%a3%bc-%eb%b3%84%ec%9e%90%eb%a6%ac-%ec%9a%b4%ec%84%b8-8/?utm_source=naver&utm_medium=partnership"
     },
     {
-     "title": "이번 주 별자리운세 '11월 16일~11월 22일' [인포그래픽]",
-     "press": "sisunnews.co.kr",
-     "publishedAt": "2026-11-15T23:00:00.000Z",
-     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=248481"
-    },
-    {
      "title": "2026년 11월 16일, 오늘의 띠별 운세 [인포그래픽]",
      "press": "sisunnews.co.kr",
      "publishedAt": "2026-11-15T23:00:00.000Z",
      "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=249117"
-    }
-   ]
-  },
-  {
-   "keyword": "스페이스X 우주선 회수",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-15T21:49:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[미국 특징주] 스페이스X 스타십 2단부 첫 회수...완전 재사용 성큼",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-15T23:05:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261116000049"
     },
     {
-     "title": "스페이스X 목표가 800달러 vs 10달러 극과 극…모건스탠리는 300달러 고수",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-15T23:04:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=202611160759501862e250e8e188_1"
-    },
-    {
-     "title": "로봇팔로 잡았다‥사상 첫 우주선 본체 회수",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-15T21:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001535759?sid=104"
+     "title": "이번 주 별자리운세 '11월 16일~11월 22일' [인포그래픽]",
+     "press": "sisunnews.co.kr",
+     "publishedAt": "2026-11-15T23:00:00.000Z",
+     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=248481"
     }
    ]
   },
@@ -210,7 +305,7 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-15T22:09:00.000Z",
    "exclusive": false,
@@ -235,43 +330,11 @@
      "link": "https://m.sports.naver.com/wfootball/article/382/0001304924"
     }
    ]
-  },
-  {
-   "keyword": "리트 만점자 인터뷰",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-15T22:15:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'눈물' 미미미누, '리트 만점' 이진우 수능 라이브 거절…시험지 수정 ...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-15T22:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002080966"
-    },
-    {
-     "title": "리트 만점자 인터뷰 회자…미미미누 표정 '압권'",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-15T22:24:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014323493"
-    },
-    {
-     "title": "\"수능 8등급→리트 만점\"…리트 최초 만점자에 쏠린 눈",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-15T22:15:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014323490"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 550,
+  "flagged": 551,
   "matched": 283,
   "avgLeadMin": 622,
   "recent": [
