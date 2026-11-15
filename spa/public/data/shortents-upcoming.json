@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-15T17:31:51.097Z",
+ "builtAt": "2026-11-15T17:41:54.157Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,11 +8,12 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "AI 국가자격시험 전수조사",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 3,
