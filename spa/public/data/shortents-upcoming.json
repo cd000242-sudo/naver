@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-15T20:53:22.236Z",
+ "builtAt": "2026-11-15T21:03:25.496Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,81 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 21,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "이란 미군기지 드론 공격",
+   "keyword": "청와대 AI 부정행위 전수조사",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 11,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-15T20:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[출근길 브리핑-11월 16일] 세무사 수석 AI 부정행위 자수·李 개혁 메시...",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-15T21:00:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903132"
+    },
+    {
+     "title": "사흘 뒤 수능인데…'AI 커닝' 실토에 정부·업계 초비상",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-15T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014323428?sid=102"
+    },
+    {
+     "title": "청와대 \"국가자격시험 AI 부정행위 의심 사례 전수조사\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-15T20:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926441?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "스페이스X 우주선 회수",
    "sources": [
     "signal.bz"
    ],
    "articles90": 4,
    "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-15T19:24:00.000Z",
+   "firstArticleAt": "2026-11-15T19:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "스페이스X, 사상 첫 우주선 상단부 회수 성공",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-15T21:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926464?sid=104"
+    },
+    {
+     "title": "“믿어지십니까? 그녀가 돌아왔어요!” 로봇 팔에 ‘착’…스페이스X, ...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-15T20:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004682430?sid=104"
+    },
+    {
+     "title": "‘스타십 2단 회수’… 세계 첫 기록",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-15T20:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003699575?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "이란 미군기지 드론 공격",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-15T20:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -45,10 +109,52 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 518,
-  "matched": 255,
-  "avgLeadMin": 545,
+  "flagged": 520,
+  "matched": 262,
+  "avgLeadMin": 539,
   "recent": [
+   {
+    "keyword": "일본 한국 야구",
+    "hitKeyword": "한국 야구 13연패",
+    "hitAt": "2026-11-16T06:00:00+09:00",
+    "leadMin": 359
+   },
+   {
+    "keyword": "젠슨 황 복귀 청원 동참",
+    "hitKeyword": "젠슨 황 복귀 청원",
+    "hitAt": "2026-11-16T06:00:00+09:00",
+    "leadMin": 349
+   },
+   {
+    "keyword": "한국 야구 일본에 준우승",
+    "hitKeyword": "한국 야구 13연패",
+    "hitAt": "2026-11-16T06:00:00+09:00",
+    "leadMin": 339
+   },
+   {
+    "keyword": "젠슨 황 복귀 청원",
+    "hitKeyword": "젠슨 황 복귀 청원",
+    "hitAt": "2026-11-16T06:00:00+09:00",
+    "leadMin": 329
+   },
+   {
+    "keyword": "김광규 연희동 아파트",
+    "hitKeyword": "서울 아파트 매물 증가",
+    "hitAt": "2026-11-16T06:00:00+09:00",
+    "leadMin": 319
+   },
+   {
+    "keyword": "한국 야구, 일본에 또 준우승",
+    "hitKeyword": "한국 야구 13연패",
+    "hitAt": "2026-11-16T06:00:00+09:00",
+    "leadMin": 248
+   },
+   {
+    "keyword": "아파트",
+    "hitKeyword": "서울 아파트 매물 증가",
+    "hitAt": "2026-11-16T06:00:00+09:00",
+    "leadMin": 148
+   },
    {
     "keyword": "우크라이나 나토 돈바스",
     "hitKeyword": "돈바스 철수 나토 연계",
@@ -66,48 +172,6 @@
     "hitKeyword": "엑스러브 리더 우무티",
     "hitAt": "2026-11-15T17:30:00+09:00",
     "leadMin": 1006
-   },
-   {
-    "keyword": "비트코인",
-    "hitKeyword": "비트코인 9000만원 붕괴",
-    "hitAt": "2026-11-15T12:30:00+09:00",
-    "leadMin": 645
-   },
-   {
-    "keyword": "북한 한국 핵잠 반발",
-    "hitKeyword": "한국 서버 북한 해킹",
-    "hitAt": "2026-11-15T10:30:00+09:00",
-    "leadMin": 3835
-   },
-   {
-    "keyword": "31기 옥순 영호",
-    "hitKeyword": "영호 옥순 공식 결별",
-    "hitAt": "2026-11-15T09:00:00+09:00",
-    "leadMin": 42
-   },
-   {
-    "keyword": "안경 부정행위 적발",
-    "hitKeyword": "세무사 시험 부정행위 의혹",
-    "hitAt": "2026-11-15T08:30:00+09:00",
-    "leadMin": 1389
-   },
-   {
-    "keyword": "blg",
-    "hitKeyword": "젠지 BLG 53분 혈투",
-    "hitAt": "2026-11-15T08:30:00+09:00",
-    "leadMin": 163
-   },
-   {
-    "keyword": "100일의 거짓말",
-    "hitKeyword": "100일의 거짓말 이가경",
-    "hitAt": "2026-11-15T08:30:00+09:00",
-    "leadMin": 73
-   },
-   {
-    "keyword": "젠지 BLG 2세트",
-    "hitKeyword": "젠지 BLG 53분 혈투",
-    "hitAt": "2026-11-15T08:30:00+09:00",
-    "leadMin": 32
    }
   ]
  }
