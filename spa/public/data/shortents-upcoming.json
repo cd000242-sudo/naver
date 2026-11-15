@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-15T22:03:48.139Z",
+ "builtAt": "2026-11-15T22:13:51.029Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,62 +15,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 17,
+   "articles90": 16,
    "recent20": 3,
-   "press": 17,
-   "firstArticleAt": "2026-11-15T20:34:00.000Z",
+   "press": 16,
+   "firstArticleAt": "2026-11-15T21:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "엔비디아 젠슨 황, 사임 나흘 만에 복귀 타진…머스크도 가세",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-15T22:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000552067?sid=104"
+    },
+    {
+     "title": "FT \"젠슨 황, 엔비디아 CEO 복귀 논의 중…백악관 설득 시도\"",
+     "press": "getnews.co.kr",
+     "publishedAt": "2026-11-15T22:06:00.000Z",
+     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=887243"
+    },
     {
      "title": "'반격' 젠슨 황, 워룸 꾸려 복귀 시동… 美 재무장관은 \"외부 수혈\"",
      "press": "hankookilbo.com",
      "publishedAt": "2026-11-15T22:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/469/0000965723?sid=104"
-    },
-    {
-     "title": "젠슨 황 복귀 추진…美 정부는 반대",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-15T21:50:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611160013"
-    },
-    {
-     "title": "\"젠슨 황, 엔비디아 CEO 복귀 논의 중\" … 실리콘밸리, 백악관까지 설득...",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-15T21:48:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/16/2026111650008.html"
-    }
-   ]
-  },
-  {
-   "keyword": "세무사 수석",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 17,
-   "recent20": 3,
-   "press": 16,
-   "firstArticleAt": "2026-11-15T20:44:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[천지일보 이슈종합] 세무사 수석 합격자 AI 부정행위 시인·라우터 과부...",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-15T22:02:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3448908"
-    },
-    {
-     "title": "결국 ‘AI 컨닝’ 고백한 수석…시험공화국의 그늘을 보다[점선면]",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-15T22:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003482840?sid=102"
-    },
-    {
-     "title": "“성실하게 공부한 나는 뭐가 되나”…AI에 뚫린 세무사 시험, 수능 불안...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-15T21:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005764110?sid=100"
     }
    ]
   },
@@ -79,95 +47,126 @@
    "sources": [
     "signal.bz"
    ],
+   "articles90": 12,
+   "recent20": 4,
+   "press": 11,
+   "firstArticleAt": "2026-11-15T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"수능 연기 해달라\"…AI 부정행위 여파",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-15T22:08:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2648364"
+    },
+    {
+     "title": "사흘 뒤 수능인데, 'AI 부정행위'에 초비상…커닝 못 막나?",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-15T22:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000543804?sid=101"
+    },
+    {
+     "title": "AI 활용 부정행위 전수조사…사흘 남은 수능 감독 어쩌나[오늘아침]",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-15T22:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004209965?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "이 대통령 아세안 순방",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 11,
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-15T20:45:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李 대통령, 필리핀 ASEAN-中선전 APEC 3박4일 순방",
+     "press": "financialpost.co.kr",
+     "publishedAt": "2026-11-15T22:06:00.000Z",
+     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=301033"
+    },
+    {
+     "title": "[AM-PM] 한 총리, AI 부정행위 대책 회의…李 아세안·APEC 순방 外",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-15T21:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926474?sid=102"
+    },
+    {
+     "title": "이 대통령, 오늘 아세안·APEC 순방 출국…다자외교 소화",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-15T21:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001403226?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "운세",
+   "sources": [
+    "google"
+   ],
    "articles90": 10,
-   "recent20": 2,
+   "recent20": 0,
    "press": 9,
    "firstArticleAt": "2026-11-15T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "AI 활용 부정행위 전수조사…사흘 남은 수능 감독 어쩌나[오늘아침]",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-15T22:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004209965?sid=102"
-    },
-    {
-     "title": "결국 ‘AI 컨닝’ 고백한 수석…시험공화국의 그늘을 보다[점선면]",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-15T22:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003482840?sid=102"
-    },
-    {
-     "title": "수능 사흘 앞두고 터진 'AI 커닝'…시험장 감독체계 비상",
-     "press": "newsian.co.kr",
+     "title": "[오늘의 운세] 11월 16일 月(음력 10월 8일) 띠별 운세",
+     "press": "fntimes.com",
      "publishedAt": "2026-11-15T21:40:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101297"
+     "link": "https://www.fntimes.com/html/view.php?ud=202611160638333851c1c16452b0_18"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 16일 (월) 띠별운세 '평소 리듬을 지키자'",
+     "press": "dailypop.kr",
+     "publishedAt": "2026-11-15T21:40:00.000Z",
+     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103982"
+    },
+    {
+     "title": "[AI] 오늘의 띠별 운세...2026.11.16(월요일)",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-15T21:30:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=67775"
     }
    ]
   },
   {
-   "keyword": "삼전닉스",
+   "keyword": "김광규 새집",
    "sources": [
-    "google"
+    "daum"
    ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-15T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "마통 잔액, 4년3개월 만에 최대 수준...고스란히 삼전닉스 빚투 外 [한강...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-15T22:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004175389?sid=101"
-    },
-    {
-     "title": "“삼전닉스 오를까 내릴까”…엔비디아 실적·앤트로픽 상장 변수 [잇슈...",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-15T21:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012294284?sid=101"
-    },
-    {
-     "title": "\"지금 팔면 후회?\"…삼전닉스 반등 확률 90% 분석 나왔다 [투자톡]",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-15T21:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005354080?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "김유정 100일 거짓말",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 5,
+   "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-15T20:40:00.000Z",
+   "firstArticleAt": "2026-11-15T20:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "박진영, 동생과 김유정 사이에서 총 겨눠-구국단 최악의 위기",
+     "title": "김광규, 서울 연희동 집공개‥임원희와 같은 아파트 옆동 ‘이웃사촌’...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-15T22:09:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001187863"
+    },
+    {
+     "title": "임원희, 김광규 연희동 새 아파트에 \"연애하면 내게 걸려\"",
      "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-15T21:48:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95319"
+     "publishedAt": "2026-11-15T21:32:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95316"
     },
     {
-     "title": "‘100일의 거짓말’ 송지효 두 딸 위기‥박진영, 김유정에 총 겨눴다 [어...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-15T21:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001187856"
-    },
-    {
-     "title": "‘100일의 거짓말’ 이무생, 김현주 살리고 죽음 맞나 ‘불길’",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-15T21:07:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001187853"
+     "title": "김광규, '연희동 새집' 어떻길래…'이웃사촌' 임원희도 감탄 \"우리 집과...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-15T20:50:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002080956"
     }
    ]
   },
@@ -177,7 +176,7 @@
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-15T21:01:00.000Z",
    "exclusive": false,
@@ -202,11 +201,44 @@
      "link": "https://n.news.naver.com/mnews/article/422/0000926464?sid=104"
     }
    ]
+  },
+  {
+   "keyword": "김유정 100일 거짓말",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-15T21:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "박진영, 동생과 김유정 사이에서 총 겨눠-구국단 최악의 위기",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-15T21:48:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95319"
+    },
+    {
+     "title": "‘100일의 거짓말’ 송지효 두 딸 위기‥박진영, 김유정에 총 겨눴다 [어...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-15T21:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001187856"
+    },
+    {
+     "title": "‘100일의 거짓말’ 이무생, 김현주 살리고 죽음 맞나 ‘불길’",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-15T21:07:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001187853"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 533,
+  "flagged": 536,
   "matched": 277,
   "avgLeadMin": 634,
   "recent": [
