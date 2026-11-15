@@ -1,10 +1,11 @@
 /* Compatibility layer for the legacy screens (design B shell).
    The old screens were written for a dark page. Their stylesheet now uses theme tokens; this file only covers
-   hard-coded status colours set by inline styles / scripts, so they stay readable on the light surface. */
-:root[data-theme="light"] :is([style*="color:#44d7b6"], [style*="color: #44d7b6"], [style*="color: rgb(68, 215, 182)"], [style*="color:#6ee7b7"]) { color: var(--ok-text); }
-:root[data-theme="light"] :is([style*="color:#ef4444"], [style*="color: #ff3b5c"], [style*="color:#ff3b5c"], [style*="color:#ff6b6b"], [style*="color:#fca5a5"], [style*="color: rgb(245, 87, 108)"], [style*="color: rgb(254, 202, 202)"], [style*="color:#ff9eaa"]) { color: var(--danger); }
-:root[data-theme="light"] :is([style*="color:#f59e0b"], [style*="color: #f5c842"], [style*="color:#ffcf70"], [style*="color:#ffb84a"]) { color: var(--warn); }
-:root[data-theme="light"] :is([style*="color:#ffd700"], [style*="color: rgb(203, 213, 225)"]) { color: var(--muted); }
+   hard-coded status colours set by inline styles / scripts, so they stay readable on the light surface.
+   The colour rules need !important: an inline style otherwise wins over any stylesheet rule. */
+:root[data-theme="light"] :is([style*="color:#44d7b6"], [style*="color: #44d7b6"], [style*="color: rgb(68, 215, 182)"], [style*="color:#6ee7b7"]):not(.dark-scope *):not(.cms-preview-pane *):not(.cms-live-preview *) { color: var(--ok-text) !important; }
+:root[data-theme="light"] :is([style*="color:#ef4444"], [style*="color: #ff3b5c"], [style*="color:#ff3b5c"], [style*="color:#ff6b6b"], [style*="color:#fca5a5"], [style*="color: rgb(245, 87, 108)"], [style*="color: rgb(254, 202, 202)"], [style*="color:#ff9eaa"]):not(.dark-scope *):not(.cms-preview-pane *):not(.cms-live-preview *) { color: var(--danger) !important; }
+:root[data-theme="light"] :is([style*="color:#f59e0b"], [style*="color: #f5c842"], [style*="color:#ffcf70"], [style*="color:#ffb84a"]):not(.dark-scope *):not(.cms-preview-pane *):not(.cms-live-preview *) { color: var(--warn) !important; }
+:root[data-theme="light"] :is([style*="color:#ffd700"], [style*="color: rgb(203, 213, 225)"]):not(.dark-scope *):not(.cms-preview-pane *):not(.cms-live-preview *) { color: var(--muted) !important; }
 :root[data-theme="light"] .cms-small-action,
 :root[data-theme="light"] .cms-media-tools button,
 :root[data-theme="light"] .cms-proof-edit-actions button { color: var(--brand); }
@@ -18,7 +19,7 @@
 :root[data-theme="light"] .platform-leword { color: var(--violet); }
 :root[data-theme="light"] .trial-export-box textarea { background: var(--surface-2); }
 
-/* The site preview panes stay dark in both themes: give their text the dark colour too. */
+/* The site preview panes follow the page theme (light like the deployed site); admin-editor.css draws them. */
 .cms-preview-pane, .cms-live-preview { color: var(--text); }
 
 /* Lists coming from loadLeadsAdmin() / loadCodes() draw inline-styled tables: let them breathe on phones. */

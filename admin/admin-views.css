@@ -1,0 +1,86 @@
+/* Views added in the admin unslop pass: first-screen to-do boxes, the "바로 처리" list, the merged approvals
+   screen and the phone tab bar. Uses only the tokens from shell-theme.css. */
+
+/* ===== to-do boxes (first screen) ===== */
+.todo { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 24px; }
+.todo-tile { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 4px 12px; width: 100%; min-height: 128px; padding: 20px; border: 1px solid var(--line); border-radius: var(--r-card); background: var(--surface); box-shadow: var(--shadow-sm); color: var(--text); text-align: left; cursor: pointer; transition: border-color var(--fast) var(--ease); }
+.todo-tile:hover { border-color: var(--line-strong); }
+.todo-tile.has-work { border-color: var(--accent-line); }
+.todo-t { grid-column: 1; display: grid; gap: 4px; min-width: 0; }
+.todo-t b { font-size: 17px; font-weight: 600; }
+.todo-t small { font-size: 13px; color: var(--faint); }
+.todo-tile em { grid-column: 1; grid-row: 1; font-style: normal; font-size: 30px; font-weight: 700; line-height: 1.2; font-variant-numeric: tabular-nums; color: var(--text); }
+.todo-tile em small { font-size: 17px; font-weight: 500; margin-left: 2px; }
+.todo-tile.is-zero em { color: var(--faint); }
+.todo-tile em.is-failed { color: var(--faint); }
+.todo-go { grid-column: 2; grid-row: 1 / span 2; align-self: center; font-size: 15px; font-weight: 500; color: var(--accent-ink); white-space: nowrap; }
+.todo-tile.is-zero .todo-go { color: var(--faint); }
+
+/* ===== approval / deposit rows (shared by the first screen and the approvals screen) ===== */
+.q-list { list-style: none; }
+.q-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 16px; align-items: center; padding: 16px 20px; border-top: 1px solid var(--line); transition: opacity var(--fast) var(--ease); }
+.q-row:first-child { border-top: 0; }
+.q-row.is-busy { opacity: .5; pointer-events: none; }
+.q-main { min-width: 0; display: grid; gap: 4px; }
+.q-top { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; min-width: 0; }
+.q-kind { font-size: 13px; font-weight: 500; color: var(--muted); padding: 2px 8px; border-radius: 999px; background: var(--raised); border: 1px solid var(--line); white-space: nowrap; }
+.q-title { font-size: 17px; font-weight: 600; min-width: 0; }
+.q-meta { font-size: 13px; color: var(--faint); font-variant-numeric: tabular-nums; }
+.q-body { font-size: 15px; color: var(--muted); white-space: pre-wrap; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.q-row.is-open .q-body { -webkit-line-clamp: unset; display: block; }
+.q-status { font-size: 13px; font-weight: 500; white-space: nowrap; }
+.q-status.st-pending { color: var(--accent-ink); }
+.q-status.st-approved { color: var(--positive); }
+.q-status.st-rejected { color: var(--negative); }
+.q-acts { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+.q-acts .btn { min-width: 72px; }
+.q-more { display: flex; gap: 8px; flex-wrap: wrap; margin-left: -8px; }
+.q-link { min-height: 44px; min-width: 44px; padding: 0 8px; border: 0; background: none; color: var(--muted); font-size: 15px; font-weight: 500; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.q-link:hover { color: var(--text); }
+.q-foot { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; padding: 12px 20px; border-top: 1px solid var(--line); }
+.q-empty { padding: 32px 20px; text-align: center; color: var(--faint); font-size: 15px; }
+.q-sub { padding: 12px 20px 4px; font-size: 13px; font-weight: 500; color: var(--faint); border-top: 1px solid var(--line); }
+.q-sub:first-child { border-top: 0; }
+.fade-in { animation: adminFade var(--fast) var(--ease); }
+@keyframes adminFade { from { opacity: 0; } to { opacity: 1; } }
+
+/* ===== approvals screen ===== */
+.ap-bar { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 16px; }
+.seg { display: inline-flex; gap: 4px; padding: 4px; border-radius: var(--r-card); background: var(--raised); border: 1px solid var(--line); max-width: 100%; overflow-x: auto; scrollbar-width: none; }
+.seg button { min-height: 44px; padding: 0 16px; border: 0; border-radius: var(--r-control); background: none; color: var(--muted); font-size: 15px; font-weight: 500; white-space: nowrap; cursor: pointer; transition: background-color var(--fast) var(--ease), color var(--fast) var(--ease); }
+.seg button[aria-pressed="true"] { background: var(--surface); color: var(--text); font-weight: 600; box-shadow: var(--shadow-sm); }
+.seg button b { font-weight: 600; font-variant-numeric: tabular-nums; margin-left: 4px; }
+.ap-status { display: flex; gap: 8px; flex-wrap: wrap; }
+.ap-status .chip[aria-pressed="true"] { border-color: var(--accent-ink); background: var(--accent-soft); color: var(--text); font-weight: 600; }
+.ap-tools { margin-top: 24px; color: var(--faint); font-size: 15px; }
+.ap-tools > summary { min-height: 44px; display: inline-flex; align-items: center; gap: 8px; padding: 0 12px; border: 1px solid var(--line-strong); border-radius: var(--r-control); background: var(--surface); cursor: pointer; color: var(--text); font-weight: 500; list-style: none; }
+.ap-tools > summary::-webkit-details-marker { display: none; }
+.ap-tools > summary::after { content: ""; width: 7px; height: 7px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: translateY(-2px) rotate(45deg); }
+.ap-tools[open] > summary::after { transform: translateY(2px) rotate(-135deg); }
+.ap-tools-body { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; padding-top: 8px; }
+
+/* ===== phone tab bar ===== */
+.tabbar { display: none; }
+@media (max-width: 960px) {
+  .tabbar { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; background: var(--surface); border-top: 1px solid var(--line); padding: 4px 4px calc(4px + env(safe-area-inset-bottom)); }
+  .tab-btn { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: 56px; border: 0; border-radius: var(--r-control); background: none; color: var(--faint); font-size: 13px; font-weight: 500; cursor: pointer; }
+  .tab-btn .ic { width: 22px; height: 22px; }
+  .tab-btn.active { color: var(--text); font-weight: 600; }
+  .tab-btn.active::before { content: ""; position: absolute; top: 0; left: 30%; right: 30%; height: 3px; border-radius: 0 0 2px 2px; background: var(--accent-fill); }
+  .tab-btn .nav-badge { position: absolute; top: 4px; left: 50%; margin-left: 6px; min-width: 20px; height: 20px; font-size: 13px; padding: 0 6px; }
+}
+@media (max-width: 640px) {
+  .q-row { grid-template-columns: 1fr; padding: 16px; }
+  .q-acts { justify-content: flex-start; }
+  .q-acts .btn { flex: 1 1 0; }
+  .q-foot { padding: 12px 16px; }
+  .todo { gap: 8px; margin-bottom: 16px; }
+  .todo-tile { min-height: 104px; padding: 12px; align-content: start; }
+  .todo-t b { font-size: 15px; }
+  .todo-t small, .todo-go { display: none; }
+  .topbar #theme-btn { margin-left: auto; }
+  .topbar .who { margin-left: 0; }
+  .ap-bar { gap: 8px; }
+  .seg { width: 100%; }
+  .seg button { flex: 1 0 auto; padding: 0 12px; }
+}

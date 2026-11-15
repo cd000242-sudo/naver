@@ -101,14 +101,33 @@
         ];
     }
 
+    /** Used codes (any type) whose expiry falls between now and now + days, split into trial and paid. */
+    function licensesExpiring(codes, now, days) {
+        if (!Array.isArray(codes)) return null;
+        const from = now.getTime();
+        const to = from + (days || 3) * DAY_MS;
+        const out = { trial: 0, paid: 0 };
+        codes.forEach((c) => {
+            if (!c || c.used !== true) return;
+            const d = toDate(c.expiresAt);
+            if (!d || d.getTime() <= from || d.getTime() > to) return;
+            if (/^TRIAL/i.test(String(c.type || ''))) out.trial += 1; else out.paid += 1;
+        });
+        return out;
+    }
+
+    const shownCount = (n) => (n === null ? '-' : String(n));
+
     function buildTodo(src, now) {
+        const parts = ['reviews', 'income', 'tips'].map((k) => pendingCount(src[k]));
+        const anyApproval = parts.some((p) => p !== null);
+        const approvals = anyApproval ? parts.reduce((sum, p) => sum + (p || 0), 0) : null;
+        const expiring = licensesExpiring(src.codes, now, 3);
         const make = (key, tab, title, hint, count) => ({ key, tab, title, hint, ok: count !== null, count: count === null ? 0 : count });
         return [
-            make('bank', 'bank', '계좌이체 입금 확인', '입금을 확인하고 코드를 보내 주세요', pendingCount(src.bank)),
-            make('reviews', 'reviews', '후기 승인', '승인 기다리는 후기', pendingCount(src.reviews)),
-            make('income', 'income', '수익 인증 승인', '승인 기다리는 수익 인증', pendingCount(src.income)),
-            make('tips', 'tips', '활용 팁 승인', '승인 기다리는 활용 팁', pendingCount(src.tips)),
-            make('trialEnd', 'licenses', '체험 만료 예정', '3일 안에 끝나는 체험 코드', trialExpiring(src.codes, now, 3)),
+            make('approvals', 'approvals', '승인 대기', '후기 ' + shownCount(parts[0]) + ' · 수익 인증 ' + shownCount(parts[1]) + ' · 팁 ' + shownCount(parts[2]), approvals),
+            make('bank', 'bank', '입금 확인 대기', '계좌이체 주문', pendingCount(src.bank)),
+            make('expiring', 'licenses', '만료 임박', expiring ? '3일 안 · 체험 ' + expiring.trial + ' · 유료 ' + expiring.paid : '3일 안', expiring ? expiring.trial + expiring.paid : null),
         ];
     }
 
@@ -143,10 +162,12 @@
 
     function renderTodo(todo) {
         return '<ul class="todo">' + todo.map((t) => {
-            const num = t.ok ? `<em>${escapeHtml(t.count)}건</em>` : '<em class="is-failed">-</em>';
+            const num = t.ok ? `<em>${escapeHtml(t.count)}<small>건</small></em>` : '<em class="is-failed">-</em>';
             const hint = t.ok ? t.hint : FAIL_TEXT;
-            return `<li><button type="button" class="todo-tile${t.ok && t.count === 0 ? ' is-zero' : ''}" data-go="${escapeHtml(t.tab)}">`
-                + `${num}<span class="todo-t"><b>${escapeHtml(t.title)}</b><small>${escapeHtml(hint)}</small></span><span class="arrow" aria-hidden="true">→</span></button></li>`;
+            const state = t.ok && t.count === 0 ? ' is-zero' : (t.ok ? ' has-work' : '');
+            const go = t.ok && t.count > 0 ? '처리하기' : '보기';
+            return `<li><button type="button" class="todo-tile${state}" data-go="${escapeHtml(t.tab)}">`
+                + `${num}<span class="todo-t"><b>${escapeHtml(t.title)}</b><small>${escapeHtml(hint)}</small></span><span class="todo-go">${go}</span></button></li>`;
         }).join('') + '</ul>';
     }
 
@@ -167,7 +188,7 @@
     }
 
     return Object.freeze({
-        escapeHtml, formatWon, kstDateKey, pendingCount, registeredOn, trialExpiring, ordersByDay,
+        escapeHtml, formatWon, kstDateKey, pendingCount, registeredOn, trialExpiring, licensesExpiring, ordersByDay,
         summarize, renderKpis, renderTodo, renderBars, renderRecent,
     });
 });

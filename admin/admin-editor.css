@@ -1,0 +1,91 @@
+/* Site editor (사이트 편집), LEWORD settings and the keyword briefing editor on the light admin.
+   Fixes the dark leftovers of the inline legacy styles and draws the preview pane with the values of the
+   deployed light site (spa/src/styles/tokens.ts `light`): warm page, white cards, one gold, no photo hero.
+   Editing flow, ids and save requests are untouched; this file only restyles. */
+
+/* ===== editor shell ===== */
+.editor-card { background: var(--surface); border-color: var(--line); border-radius: var(--r-card); }
+#tab-editor .editor-card h4, #tab-leword-settings .editor-card h4 { font-weight: 600; }
+.editor-section-title { font-weight: 600; }
+.editor-help, #tab-editor .editor-help { color: var(--muted); font-size: 15px; }
+.editor-mini-card { background: var(--surface); border-color: var(--line); }
+.editor-mini-card h5 { color: var(--text); font-size: 17px; font-weight: 600; }
+.editor-card textarea { font-size: 15px; background: var(--surface); border-color: var(--line-strong); }
+.editor-card input, .editor-card select { background: var(--surface); border-color: var(--line-strong); color: var(--text); }
+#tab-editor .editor-subtab { font-weight: 500; }
+#tab-editor .editor-subtab.active { font-weight: 600; }
+.structured-content-nav button { border-color: var(--line); background: var(--surface); transition: border-color var(--fast) var(--ease), background-color var(--fast) var(--ease); }
+.structured-content-nav button:hover, .structured-content-nav button:focus-visible, .structured-content-nav button[aria-current="page"] { transform: none; border-color: var(--accent-ink); background: var(--accent-soft); }
+.structured-content-nav strong { font-weight: 600; }
+.structured-content-nav span { color: var(--muted); }
+.structured-row-actions button[data-structured-row-action="delete"],
+.keyword-row-actions button[data-keyword-action="delete"] { color: var(--negative); }
+.keyword-row-issue { color: var(--negative); }
+.download-inline-upload span { font-size: 13px; }
+.download-inline-upload span.error { color: var(--negative); }
+.download-inline-upload span.ready { color: var(--positive); }
+
+/* ===== region editor (home areas, proof cards) ===== */
+.cms-region-block { background: var(--surface); border-color: var(--line); }
+.cms-region-block.active { border-color: var(--accent-ink); box-shadow: var(--shadow-sm); }
+.cms-region-block p { color: var(--muted); }
+.cms-proof-edit-card { background: var(--surface); border-color: var(--line); }
+.cms-proof-edit-card.active { border-color: var(--accent-ink); background: var(--accent-soft); }
+#tab-editor .cms-proof-edit-head { color: var(--text); font-weight: 600; }
+#tab-editor .cms-proof-edit-head button { min-width: 44px; padding: 0 12px; border: 1px solid var(--line-strong); border-radius: var(--r-control); background: var(--surface); color: var(--negative); font-weight: 500; cursor: pointer; }
+#tab-editor .cms-media-tools button, #tab-editor .cms-small-action, #tab-editor .cms-proof-edit-actions button { border-color: var(--line-strong); background: var(--surface); color: var(--text); font-weight: 500; }
+.cms-thumb { background: var(--raised); color: var(--muted); font-size: 13px; }
+.cms-skin-option { font-weight: 600; }
+.cms-skin-option.active { outline-color: var(--accent-fill); border-color: var(--accent-fill); }
+
+/* ===== keyword briefing table (was a dark sheet on the light page) ===== */
+.keyword-briefing-table-shell { background: var(--surface); border-color: var(--line); }
+.keyword-briefing-edit-table th { background: var(--raised); color: var(--muted); font-weight: 500; }
+.keyword-briefing-edit-table input { background: var(--surface); border-color: var(--line-strong); }
+.keyword-briefing-edit-table tr.needs-review { background: var(--negative-soft); }
+.keyword-opportunity-value { color: var(--positive); font-weight: 600; font-variant-numeric: tabular-nums; }
+.keyword-chart-value { color: var(--positive); font-variant-numeric: tabular-nums; }
+.keyword-chart-bar i { background: var(--accent-fill) !important; }
+#keyword-briefing-revision { border-color: var(--line-strong) !important; color: var(--muted) !important; font-weight: 500 !important; font-size: 13px !important; }
+#keyword-briefing-save-bar-fill, #admin-ai-progress-bar { background: var(--accent-fill) !important; }
+#keyword-briefing-save-spinner { border-top-color: var(--accent-ink) !important; }
+[style*="border:1px solid rgba(68,215,182,.22)"] { border-color: var(--line) !important; background: var(--surface) !important; }
+
+/* ===== site preview pane: the deployed light site ===== */
+.cms-preview-pane { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-panel); box-shadow: var(--shadow-sm); color: var(--text); }
+.cms-preview-head h3 { font-size: 17px; font-weight: 600; }
+.cms-preview-head p { color: var(--muted); font-size: 13px; }
+#tab-editor .cms-preview-tabs button { min-width: 44px; padding: 0 12px; border: 1px solid var(--line-strong); border-radius: 999px; background: var(--surface); color: var(--muted); font-size: 15px; font-weight: 500; }
+#tab-editor .cms-preview-tabs button.active { background: var(--btn); border-color: var(--btn); color: var(--on-btn); font-weight: 600; }
+.cms-live-preview { background: var(--page); border: 1px solid var(--line); border-radius: var(--r-card); }
+.cms-preview-hero { background: var(--page) !important; min-height: 0; padding: 32px 24px; }
+.cms-preview-hero::before { display: none; }
+.cms-preview-kicker { padding: 0; border: 0; color: var(--accent-ink); font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+.cms-preview-title { color: var(--text); font-size: 30px; font-weight: 700; line-height: 1.25; }
+.cms-preview-desc { color: var(--muted); font-size: 15px; }
+.cms-preview-benefit { background: var(--accent-fill); color: var(--on-accent); border-radius: var(--r-control); font-weight: 600; font-size: 15px; }
+.cms-preview-card { background: var(--surface); border-color: var(--line); border-radius: var(--r-card); box-shadow: var(--shadow-sm); }
+.cms-preview-card img { border-color: var(--line); background: var(--raised); }
+.cms-preview-card h4 { color: var(--text); font-size: 15px; font-weight: 600; }
+.cms-preview-card p { color: var(--muted); font-size: 13px; }
+.cms-preview-pill { border-color: var(--line-strong); color: var(--muted); font-size: 13px; font-weight: 500; }
+.cms-preview-frame { background: var(--page); border-color: var(--line); }
+.cms-preview-realhint { color: var(--faint); font-size: 13px; }
+.cms-preview-area:hover, .cms-preview-area.active { outline-color: var(--accent-fill); box-shadow: none; }
+.cms-preview-card.cms-preview-area:hover { transform: none; }
+
+/* ===== LEWORD settings (moved out of the editor by installLewordSettingsPanel) ===== */
+#tab-leword-settings [data-agent-card] { background: var(--surface) !important; border-color: var(--line) !important; }
+#tab-leword-settings [data-agent-card="codex"] { opacity: 1 !important; }
+#tab-leword-settings [data-agent-card="codex"] > div:first-child > span { background: var(--raised) !important; color: var(--muted) !important; }
+#admin-ai-connect-guide { background: var(--accent-soft) !important; border-color: var(--accent-line) !important; }
+#admin-ai-connect-cmd { background: var(--surface) !important; border: 1px solid var(--line); color: var(--text); }
+#tab-leword-settings .btn { font-size: 15px !important; padding: 0 16px !important; }
+
+/* ===== chatbot tiles editor headings ===== */
+.cb-tile h5 { font-weight: 600; }
+
+@media (max-width: 640px) {
+  .cms-preview-title { font-size: 22px; }
+  .cms-preview-hero { padding: 24px 16px; }
+}
