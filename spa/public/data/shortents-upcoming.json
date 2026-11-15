@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-15T17:41:54.157Z",
+ "builtAt": "2026-11-15T18:01:59.560Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,42 +8,8 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
- "candidates": [
-  {
-   "keyword": "AI 국가자격시험 전수조사",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-15T16:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "청와대 \"AI 부정행위 전수조사\"...여야, 대책마련 촉구",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-15T17:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002433215?sid=100"
-    },
-    {
-     "title": "\"2년 공부해 겨우 1차 붙었는데 누군 AI로 100점\"…수험생들 분통",
-     "press": "weekly.chosun.com",
-     "publishedAt": "2026-11-15T16:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/053/0000063077?sid=102"
-    },
-    {
-     "title": "[사설] 세무사 시험 AI 부정행위… 수능에선 원천 차단해야",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-15T16:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001885285?sid=110"
-    }
-   ]
-  }
- ],
+ "measured": 22,
+ "candidates": [],
  "hitRate": {
   "days": 7,
   "flagged": 515,
