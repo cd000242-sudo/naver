@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-15T20:13:07.133Z",
+ "builtAt": "2026-11-15T20:23:10.496Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,8 +8,40 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 21,
+ "measured": 22,
  "candidates": [
+  {
+   "keyword": "아파트",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-15T19:13:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김광규, 송도 떠나 연희동 새 아파트 공개..결혼·여자친구 의심(미우새...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-15T20:20:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003487717"
+    },
+    {
+     "title": "불난 아파트 19층부터 문두드려 대피 돕던 경비원 숨져",
+     "press": "donga.com",
+     "publishedAt": "2026-11-15T19:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003762601?sid=102"
+    },
+    {
+     "title": "한밤중 경북 포항 고층 아파트서 불‥25명 대피",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-15T19:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001535733?sid=102"
+    }
+   ]
+  },
   {
    "keyword": "부고",
    "sources": [
