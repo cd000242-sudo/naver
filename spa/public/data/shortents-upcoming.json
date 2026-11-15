@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-15T21:13:28.539Z",
+ "builtAt": "2026-11-15T21:23:33.906Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "청와대 AI 부정행위 전수조사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 4,
-   "press": 10,
+   "articles90": 14,
+   "recent20": 3,
+   "press": 11,
    "firstArticleAt": "2026-11-15T20:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "관세사·감평사·가스기사…잇단 의혹에 '전수 조사'",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-15T21:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001403216?sid=100"
+    },
     {
      "title": "청와대 “수능서 AI 기기 점검·전담 인력 배치”…긴급 회의 소집",
      "press": "news.kbs.co.kr",
@@ -33,12 +39,38 @@
      "press": "imnews.imbc.com",
      "publishedAt": "2026-11-15T21:06:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/214/0001535737?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "2026년 11월 16일 운세",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-15T20:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오늘의 운세] 2026년 11월 16일 별자리 운세",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-15T21:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006410184?sid=103"
     },
     {
-     "title": "[출근길 브리핑-11월 16일] 세무사 수석 AI 부정행위 자수·李 개혁 메시...",
-     "press": "newsworks.co.kr",
+     "title": "[오늘의 운세] 2026년 11월 16일 띠별 운세",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-15T21:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006410183?sid=103"
+    },
+    {
+     "title": "[백운산 오늘의 운세] 2026년 11월 16일",
+     "press": "asiatoday.co.kr",
      "publishedAt": "2026-11-15T21:00:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903132"
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20260915001334595"
     }
    ]
   },
@@ -48,7 +80,7 @@
     "google"
    ],
    "articles90": 4,
-   "recent20": 3,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-15T20:02:00.000Z",
    "exclusive": false,
@@ -71,38 +103,6 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-15T21:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009290226?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "스페이스X 우주선 회수",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-15T20:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "스페이스X, 사상 첫 우주선 상단부 회수 성공",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-15T21:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926464?sid=104"
-    },
-    {
-     "title": "“믿어지십니까? 그녀가 돌아왔어요!” 로봇 팔에 ‘착’…스페이스X, ...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-15T20:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004682430?sid=104"
-    },
-    {
-     "title": "‘스타십 2단 회수’… 세계 첫 기록",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-15T20:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003699575?sid=101"
     }
    ]
   },
@@ -139,10 +139,41 @@
    ]
   },
   {
+   "keyword": "스페이스X 우주선 회수",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-15T20:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "스페이스X, 사상 첫 우주선 상단부 회수 성공",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-15T21:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926464?sid=104"
+    },
+    {
+     "title": "“믿어지십니까? 그녀가 돌아왔어요!” 로봇 팔에 ‘착’…스페이스X, ...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-15T20:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004682430?sid=104"
+    },
+    {
+     "title": "‘스타십 2단 회수’… 세계 첫 기록",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-15T20:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003699575?sid=101"
+    }
+   ]
+  },
+  {
    "keyword": "김유정 100일의 거짓말",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 4,
    "recent20": 3,
@@ -174,7 +205,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 522,
+  "flagged": 523,
   "matched": 262,
   "avgLeadMin": 539,
   "recent": [
