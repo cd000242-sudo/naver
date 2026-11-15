@@ -8,134 +8,377 @@
         {
           "id": "naver-1",
           "rank": 1,
-          "keyword": "라자루스 한국 서버 공격",
-          "title": "라자루스 한국 서버 공격",
-          "rawKeyword": "라자루스 한국 서버 공격",
+          "keyword": "청와대 AI 부정행위 전수조사",
+          "title": "청와대 AI 부정행위 전수조사",
+          "rawKeyword": "청와대 AI 부정행위 전수조사",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 100,
           "source": "naver",
           "expansions": [
-            "라자루스 북한",
-            "라자루스 뜻",
-            "라자루스 증후군",
-            "라자루스 프로젝트",
-            "북한 라자루스",
-            "라자루스 영화",
-            "라자루스 징후",
-            "라자루스 나무위키"
+            "청와대 개방 예약",
+            "청와대 국민청원",
+            "청와대 사랑채",
+            "광주 청와대",
+            "청와대 위치",
+            "청와대 관람",
+            "청와대 부대변인",
+            "청와대 술"
           ],
-          "expansionSeed": "라자루스",
+          "expansionSeed": "청와대",
           "insight": {
             "titles": {
-              "seo": "라자루스 한국 서버 공격 최신 이슈와 핵심 내용 정리",
-              "home": "라자루스 한국 서버 공격, 北 라자루스, 한국 서버 30곳 공격 표적 정황 관련 확인할 점",
-              "topic": "라자루스 한국 서버 공격",
+              "seo": "청와대 AI 부정행위 전수조사 최신 이슈와 핵심 내용 정리",
+              "home": "청와대 AI 부정행위 전수조사, 靑 \"국가자격시험 전체 AI활용 부정행위 의심 사례 전수조사\" 관련 확인할 점",
+              "topic": "청와대 AI 부정행위 전수조사",
               "topicGroup": "네이버 실시간 검색어"
             },
             "facts": [
               {
-                "text": "북한 연계 해킹조직 라자루스가 한국 서버 30곳을 공격 표적으로 삼은 정황이 제기됐다. 해커들은 웹 서버에 사용되는 프로그래밍 언어 PHP의 보안 취약점을 악용하고, 인공지능(AI)으로 공격 기법을 선별해 침투를 시도한 것으로 분석됐다. 15일 정보통신기술(ICT) 업계에 따르면 글로벌 사이버 위협 인텔리전스 기업 사이퍼마는 지난달 29일 공개한 ‘PHP2Shell 공격 관련 위협 분석 보고서’에서 북한 연계 해커들의 공격 표적과 활동 정황을 공개했다.",
+                "text": "청와대 는 이날 회의에서 국가자격시험 전체에 대해 AI 활용 부정행위 의심 사례를 전수 조사 하기로 했다.",
                 "sourceIndex": 0
               },
               {
-                "text": "글로벌 보안기업 사이퍼마가 이달 초 발표한 보고서에 따르면, 라자루스 공격 자는 지난달 25일부터 닷새간 한국 소재 서버 와 도메인 30곳을 포함해 국내외 서버 561대를 공격 한 것으로 드러났습니다. 사이퍼마는 해커들이 정부기관과 금융기관 등 주요",
+                "text": "청와대 가 15일 세무사 시험 수석 합격자 한모씨가 인공지능( AI )을 활용한 부정행위 를 자백한 것과 관련해 긴급대책회의를 열고 국가자격시험 전체에 대해 AI 활용 부정행위 의심 사례를 전수 조사 하기로 했다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.segye.com/newsView/20261115504256?OutUrl=naver",
-                "press": "세계일보"
+                "url": "https://www.yna.co.kr/view/AKR20261115040900001?input=1195m",
+                "press": "연합뉴스"
               },
               {
-                "url": "https://imnews.imbc.com/replay/2026/nw1200/article/6865762_36967.html",
-                "press": "MBC"
+                "url": "https://weekly.khan.co.kr/article/202611151818011",
+                "press": "주간경향"
               }
             ],
             "images": [
-              "https://www.segye.com/content/image/2026/11/15/20261115504388.jpg"
+              "https://img2.yna.co.kr/photo/cms/2026/05/06/63/PCM20260506000063990_P4.jpg"
             ],
             "press": [
-              "세계일보",
-              "MBC"
+              "연합뉴스",
+              "주간경향"
             ],
             "headlines": [
-              "北 라자루스, 한국 서버 30곳 공격 표적 정황",
-              "\"북한 라자루스 , 국내 서버 30곳 노렸다\""
+              "靑 \"국가자격시험 전체 AI활용 부정행위 의심 사례 전수조사\"",
+              "청와대 “국가자격시험 ‘ AI 부정행위 ’ 의심 사례 전수조사 ”"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
           "id": "naver-2",
           "rank": 2,
-          "keyword": "세무사 수석 부정행위 확산",
-          "title": "세무사 수석 부정행위 확산",
-          "rawKeyword": "세무사 수석 부정행위 확산",
+          "keyword": "김유정 100일 거짓말",
+          "title": "김유정 100일 거짓말",
+          "rawKeyword": "김유정 100일 거짓말",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 99,
           "source": "naver",
           "expansions": [
-            "세무사 수석",
-            "세무사 수석 ai",
-            "63회 세무사 수석",
-            "세무사시험 수석",
-            "세무사1차",
-            "세무사난이도",
-            "세무사원서접수",
-            "세무사영어"
+            "김유정 100일의 거짓말",
+            "김유정 100일의 거짓말 옷"
           ],
-          "expansionSeed": "세무사",
+          "expansionSeed": "김유정 100일 거짓말",
           "insight": {
             "titles": {
-              "seo": "세무사 수석 부정행위 확산 최신 이슈와 핵심 내용 정리",
-              "home": "세무사 수석 부정행위 확산, 세무사 수석합격자, AI 부정행위 시인…경찰에 자수 관련 확인할 점",
-              "topic": "세무사 수석 부정행위 확산",
+              "seo": "김유정 100일 거짓말 최신 이슈와 핵심 내용 정리",
+              "home": "김유정 100일 거짓말, 403 Forbidden 관련 확인할 점",
+              "topic": "김유정 100일 거짓말",
               "topicGroup": "네이버 실시간 검색어"
             },
             "facts": [
               {
-                "text": "고득점으로 부정행위 의혹이 제기된 올해 세무사 시험 수석 합격자가 인공지능(AI)을 이용한 부정행위 를 시인하고 경찰에 자수했다. 자신을 수석 합격자로 소개하면서 공개한 시험 점수가 이례적으로 높다는 지적이 온라인 커뮤니티에서 제기되면서 논란이 확산 했다.",
+                "text": "배우 진선규가 tvN 드라마 ‘ 100일 의 거짓말 ’에서 총독부 폭발 사건의 단서를 추적하며 김유정 을 향한 의심을 키웠다. 딸과의 대화에서는 과거의 기억을 떠올렸고, 김승억(이기영)과의 대면에서는 팽팽한 신경전을 벌였다.",
                 "sourceIndex": 0
               },
               {
-                "text": "고득점으로 부정행위 의혹이 제기된 올해 세무사 시험 수석 합격자가 인공지능(AI)을 이용한 부정행위 를 시인하고 경찰에 자수했다. 자신을 수석 합격자로 소개하면서 공개한 시험 점수가 이례적으로 높다는 지적이 온라인 커뮤니티에서 제기되면서 논란이 확산 했다.",
+                "text": "15일 방송되는 tvN 토일드라마 ‘ 100일 의 거짓말 ’ 12회에서는 새로운 작전을 준비하는 이가경( 김유정 )과 서로 다른 속내를 숨긴 채 마주한 유소란(김현주), 유필립(이무생), 사토 신이치(진선규)의 모습을 그려진다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.yna.co.kr/view/AKR20261115016200530?input=1195m",
-                "press": "연합뉴스"
+                "url": "https://sports.khan.co.kr/article/202611150813003?pt=nv",
+                "press": "스포츠경향"
               },
               {
-                "url": "https://www.yna.co.kr/view/AKR20261115016251530?input=1195m",
-                "press": "연합뉴스"
+                "url": "https://isplus.com/article/view/isp202611150050",
+                "press": "일간스포츠"
               }
             ],
             "images": [
-              "https://img4.yna.co.kr/photo/yna/YH/2026/11/15/PYH2026111503010000401_P4.jpg"
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F144%2F2026%2F11%2F15%2F1149829.jpg&type=fface200_200&expire=2&refresh=true"
             ],
             "press": [
-              "연합뉴스"
+              "스포츠경향",
+              "일간스포츠"
             ],
             "headlines": [
-              "세무사 수석합격자, AI 부정행위 시인…경찰에 자수",
-              "세무사 수석 합격자, AI 부정행위 시인…\"회계사 시험서도\"(종합)"
+              "403 Forbidden",
+              "‘ 100일 의 거짓말 ’ 김유정 , 새로운 판 짠다…제작진 “두 개 작전 맞물..."
             ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-15T15:09:30.544Z"
+            "extraction": "search-card",
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
           "id": "naver-3",
           "rank": 3,
-          "keyword": "고경표 음주운전 사과 및 활동 중단",
-          "title": "고경표 음주운전 사과 및 활동 중단",
-          "rawKeyword": "고경표 음주운전 사과 및 활동 중단",
+          "keyword": "이란 미군기지 드론 공격",
+          "title": "이란 미군기지 드론 공격",
+          "rawKeyword": "이란 미군기지 드론 공격",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 98,
+          "source": "naver",
+          "expansions": [
+            "이란 공격",
+            "미국 이란 전쟁",
+            "미국 이란 협상",
+            "이란 미국",
+            "이란 전쟁",
+            "미국 이란 종전",
+            "미국 이란",
+            "이란 속보"
+          ],
+          "expansionSeed": "이란",
+          "insight": {
+            "titles": {
+              "seo": "이란 미군기지 드론 공격 최신 이슈와 핵심 내용 정리",
+              "home": "이란 미군기지 드론 공격, 이란 위력 과시…두달만에 중동 美기지 타격 재개 관련 확인할 점",
+              "topic": "이란 미군기지 드론 공격",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "(서울=연합뉴스) 김승욱 기자 = 이란이 9월초 이후 2개월여 만에 걸프 국가 내 미국 군사 시설에 대한 공격을 재개하고 있다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "이번 공습은 지난 13일 이란 이 바레인 내 미군 조기경보 레이더 기지 를 공격 했다고 주장한 지 이틀 만에 벌어진 추가 도발이다. 당시 미 중부사령부(CENTCOM)는 이란 이 발사한 자폭 드론 2기를 격추했으며 인명이나 시설 피해는 전혀 없었다고 반박한 바 있다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.yna.co.kr/view/AKR20261115029300009?input=1195m",
+                "press": "연합뉴스"
+              },
+              {
+                "url": "https://www.edaily.co.kr/News/Read?newsId=02013926645646048&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+                "press": "이데일리"
+              }
+            ],
+            "images": [
+              "https://img5.yna.co.kr/photo/etc/epa/2026/11/13/PEP20261113053301009_P4.jpg"
+            ],
+            "press": [
+              "연합뉴스",
+              "이데일리"
+            ],
+            "headlines": [
+              "이란 위력 과시…두달만에 중동 美기지 타격 재개",
+              "이란 , 두 달 만에 바레인 주둔 미군 기지 공습 재개"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-15T16:09:13.733Z"
+          }
+        },
+        {
+          "id": "naver-4",
+          "rank": 4,
+          "keyword": "젠슨 황 복귀 청원",
+          "title": "젠슨 황 복귀 청원",
+          "rawKeyword": "젠슨 황 복귀 청원",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 97,
+          "source": "naver",
+          "expansions": [
+            "젠슨황",
+            "젠슨황 스파이",
+            "젠슨황 와이프",
+            "젠슨황 국적",
+            "젠슨황 여자",
+            "젠슨황 나무위키",
+            "젠슨 황 배우자",
+            "젠슨황 사임"
+          ],
+          "expansionSeed": "젠슨",
+          "insight": {
+            "titles": {
+              "seo": "젠슨 황 복귀 청원 최신 이슈와 핵심 내용 정리",
+              "home": "젠슨 황 복귀 청원, 엔비디아 투자자, 젠슨황 복귀 요구 서한…온라인 청원도 열기 관련 확인할 점",
+              "topic": "젠슨 황 복귀 청원",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "(샌프란시스코=연합뉴스) 권영전 특파원 = 엔비디아의 주요",
+                "sourceIndex": 0
+              },
+              {
+                "text": "15일 금융투자업계에 따르면 박 회장은 황 전 CEO를 복귀 시켜야 한다는 온라인 청원 인 '스탠드 위드 젠슨 '에 참여했다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.yna.co.kr/view/AKR20261115002300091?input=1195m",
+                "press": "연합뉴스"
+              },
+              {
+                "url": "https://www.newsis.com/view/NISX20261115_0003868744",
+                "press": "뉴시스"
+              }
+            ],
+            "images": [
+              "https://img8.yna.co.kr/photo/reuters/2026/11/14/PRU20261114206301009_P4.jpg"
+            ],
+            "press": [
+              "연합뉴스",
+              "뉴시스"
+            ],
+            "headlines": [
+              "엔비디아 투자자, 젠슨황 복귀 요구 서한…온라인 청원도 열기",
+              "박현주 미래에셋 회장, ' 젠슨 황 복귀 청원 ' 동참"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-15T16:09:13.733Z"
+          }
+        },
+        {
+          "id": "naver-5",
+          "rank": 5,
+          "keyword": "한국 야구 APBC 준우승",
+          "title": "한국 야구 APBC 준우승",
+          "rawKeyword": "한국 야구 APBC 준우승",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 96,
+          "source": "naver",
+          "expansions": [
+            "한국시리즈",
+            "한국금거래소",
+            "한국 사우디",
+            "한국 축구 일정",
+            "한국 축구",
+            "한국시간",
+            "한국장학재단",
+            "한국사능력검정"
+          ],
+          "expansionSeed": "한국",
+          "insight": {
+            "titles": {
+              "seo": "한국 야구 APBC 준우승 최신 이슈와 핵심 내용 정리",
+              "home": "한국 야구 APBC 준우승, 또 일본에 무너진 한국 야구…APBC 3연속 준우승 관련 확인할 점",
+              "topic": "한국 야구 APBC 준우승",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "한국 야구 대표팀이 일본에 막혀 아시아프로 야구 챔피언십( APBC ) 첫 우승 도전에 실패했다. 한국 은 준우승 상금 1000만엔(약 8090만원)을 받는다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "한국 은 15일 일본 도쿄돔에서 열린 2026 아시아프로 야구 챔피언십( APBC ) 일본과 결승에서 1-5로 패했다. 이번 대회 일본전에서 모두 지면서 2017년, 2023년에 이어 다시 준우승 에 머물렀다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.hankyung.com/article/2026111577027",
+                "press": "한국경제"
+              },
+              {
+                "url": "https://www.hani.co.kr/arti/international/international_general/1287457.html",
+                "press": "한겨레"
+              }
+            ],
+            "images": [
+              "https://img.hankyung.com/photo/202611/ZK.46430977.1.jpg"
+            ],
+            "press": [
+              "한국경제",
+              "한겨레"
+            ],
+            "headlines": [
+              "또 일본에 무너진 한국 야구…APBC 3연속 준우승",
+              "한국 , 부끄러운 ‘ 준우승 ’… APBC 결승전 일본에 1-5 패"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-15T16:09:13.733Z"
+          }
+        },
+        {
+          "id": "naver-6",
+          "rank": 6,
+          "keyword": "스페이스X 우주선 회수",
+          "title": "스페이스X 우주선 회수",
+          "rawKeyword": "스페이스X 우주선 회수",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 95,
+          "source": "naver",
+          "expansions": [
+            "우주선 카라반",
+            "우주선 그림",
+            "레고 우주선",
+            "우주선 치발기",
+            "우주선 영어로",
+            "우주선 레고",
+            "우주선 장난감",
+            "스타워즈 우주선"
+          ],
+          "expansionSeed": "우주선",
+          "insight": {
+            "titles": {
+              "seo": "스페이스X 우주선 회수 최신 이슈와 핵심 내용 정리",
+              "home": "스페이스X 우주선 회수, 스페이스X, 사상 첫 우주선 본체 회수…완전재사용 로켓 예고 관련 확인할 점",
+              "topic": "스페이스X 우주선 회수",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "(샌프란시스코=연합뉴스) 권영전 특파원 = 일론 머스크의 우주기업 스페이스X가 사상 처음으로 우주선의 상단 선체 회수에 성공했다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "구름을 뚫고 내려온 길이 52m의 우주선 이 엔진을 켜고 수직으로 자세를 바꿨다. 발사탑에 달린 두 로봇팔이 기체를 공중에서 받아냈다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.yna.co.kr/view/AKR20261115010500091?input=1195m",
+                "press": "연합뉴스"
+              },
+              {
+                "url": "https://nownews.seoul.co.kr/news/newsView.php?id=20261115601004&wlog_tag3=naver",
+                "press": "서울신문"
+              }
+            ],
+            "images": [
+              "https://img4.yna.co.kr/photo/ap/2026/11/15/PAP20261115087501009_P4.jpg"
+            ],
+            "press": [
+              "연합뉴스",
+              "서울신문"
+            ],
+            "headlines": [
+              "스페이스X, 사상 첫 우주선 본체 회수…완전재사용 로켓 예고",
+              "[포착] 로봇팔이 52m 우주선 받아냈다… 스페이스X , 스타십 첫 공중 회수 ..."
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-15T16:09:13.733Z"
+          }
+        },
+        {
+          "id": "naver-7",
+          "rank": 7,
+          "keyword": "고경표 활동 중단",
+          "title": "고경표 활동 중단",
+          "rawKeyword": "고경표 활동 중단",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 94,
           "source": "naver",
           "expansions": [
             "고경표 나무위키",
@@ -150,149 +393,149 @@
           "expansionSeed": "고경표",
           "insight": {
             "titles": {
-              "seo": "고경표 음주운전 사과 및 활동 중단 최신 이슈와 핵심 내용 정리",
-              "home": "고경표 음주운전 사과 및 활동 중단, [속보]'음주운전' 고경표, 직접 입 열었다 \"주머니에 넣은 것은 키\" 모든 활동 중단 [전문] 관련 확인할 점",
-              "topic": "고경표 음주운전 사과 및 활동 중단",
+              "seo": "고경표 활동 중단 최신 이슈와 핵심 내용 정리",
+              "home": "고경표 활동 중단, '음주운전' 고경표 \"전적으로 제 잘못…활동 중단\" 관련 확인할 점",
+              "topic": "고경표 활동 중단",
               "topicGroup": "네이버 실시간 검색어"
             },
             "facts": [
               {
-                "text": "배우 고경표가 음주운전으로 청소차를 들이받는 사고를 낸 사실을 인정하고 고개를 숙였다. 사고 당시 혈중알코올농도가 면허취소 수준이었던 가운데, CCTV 영상에서 포착된 행동에 대해서도 직접 해명했다. 고경표는 15일 자신의 SNS를 통해 장문의 사과문을 게재했다.",
+                "text": "(서울=연합뉴스) 조윤희 기자 = 배우 고경표가 음주운전 사고를 낸 데 대해 사과와 함께 활동 중단을 선언했다.",
                 "sourceIndex": 0
               },
               {
-                "text": "배우 고경표 가 만취 상태로 음주운전 사고를 낸지 하루 만에 직접 사과 문을 게재하고 활동 중단 을 선언했다. 도로교통법상 음주운전 혐의로 경찰 조사를 받았다.",
+                "text": "음주운전 사고를 낸 배우 고경표 가 예정된 활동 을 모두 중단 하겠다고 밝혔습니다. 고경표 는 15일 자신의 사회관계망서비스(SNS)에 '죄송합니다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.sportschosun.com/entertainment/2026-11-15/202611150100100850009349",
-                "press": "스포츠조선"
+                "url": "https://www.yna.co.kr/view/AKR20261115044500005?input=1195m",
+                "press": "연합뉴스"
               },
               {
-                "url": "https://www.sportsseoul.com/news/read/1649870?ref=naver",
-                "press": "스포츠서울"
+                "url": "https://news.jtbc.co.kr/article/NB12328178?influxDiv=NAVER",
+                "press": "JTBC"
               }
             ],
             "images": [
-              "https://www.sportschosun.com/article/html/2026/11/15/2026111501001008500093491.jpg"
+              "https://img3.yna.co.kr/photo/cms/2022/08/16/81/PCM20220816000081005_P4.jpg"
             ],
             "press": [
-              "스포츠조선",
-              "스포츠서울"
+              "연합뉴스",
+              "JTBC"
             ],
             "headlines": [
-              "[속보]'음주운전' 고경표, 직접 입 열었다 \"주머니에 넣은 것은 키\" 모든 활동 중단 [전문]",
-              "[전문] 고경표 , 11번 고개 숙였다… 사과 문 발표 “모든 활동 중단 ”"
+              "'음주운전' 고경표 \"전적으로 제 잘못…활동 중단\"",
+              "'음주운전 사고' 고경표 \" 활동 중단 ...경찰 조사 성실히 응할 것\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T15:09:30.544Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
-          "id": "naver-4",
-          "rank": 4,
-          "keyword": "김유정의 100일 거짓말",
-          "title": "김유정의 100일 거짓말",
-          "rawKeyword": "김유정의 100일 거짓말",
+          "id": "naver-8",
+          "rank": 8,
+          "keyword": "스포츠조선",
+          "title": "스포츠조선",
+          "rawKeyword": "스포츠조선",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 97,
+          "priority": 93,
           "source": "naver",
           "expansions": [
-            "100일의 거짓말",
-            "100일의 거짓말 원작",
-            "100일의 거짓말 ost",
-            "100일의 거짓말 작가",
-            "100일 거짓말",
-            "100일의 거짓말 ott",
-            "거짓말 영화",
-            "영화 거짓말"
+            "스포츠조선 신문 사는법",
+            "스포츠조선 신문",
+            "스포츠조선 운세",
+            "스포츠조선 무료만화",
+            "스포츠조선 지면",
+            "스포츠조선 구독",
+            "스포츠조선달리고",
+            "스포츠조선 야구"
           ],
-          "expansionSeed": "김유정",
+          "expansionSeed": "스포츠조선",
           "insight": {
             "titles": {
-              "seo": "김유정의 100일 거짓말 최신 이슈와 핵심 내용 정리",
-              "home": "김유정의 100일 거짓말, 403 Forbidden 관련 확인할 점",
-              "topic": "김유정의 100일 거짓말",
+              "seo": "스포츠조선 최신 이슈와 핵심 내용 정리",
+              "home": "스포츠조선, [인사] 스포츠조선 관련 확인할 점",
+              "topic": "스포츠조선",
               "topicGroup": "네이버 실시간 검색어"
             },
             "facts": [
               {
-                "text": "배우 진선규가 tvN 드라마 ‘ 100일 의 거짓말 ’에서 총독부 폭발 사건의 단서를 추적하며 김유정 을 향한 의심을 키웠다. 딸과의 대화에서는 과거의 기억을 떠올렸고, 김승억(이기영)과의 대면에서는 팽팽한 신경전을 벌였다.",
+                "text": "",
                 "sourceIndex": 0
               },
               {
-                "text": "15일 방송되는 tvN 토일드라마 ‘ 100일 의 거짓말 ’(극본 류보리, 연출 유인식·김윤진) 12회에서는 조선총독부와 사토 신이치의 관저를 잇는 기송관을 활용한 폭탄 작전이 펼쳐진다. 앞서 이가경( 김유정 분)과 김태웅(박진영 분)은 서로의 진짜 이름을 부르며 감춰왔던 마음을 확인했다.",
+                "text": "[인사] 스포츠조선",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://sports.khan.co.kr/article/202611150813003?pt=nv",
-                "press": "스포츠경향"
+                "url": "https://www.yna.co.kr/view/AKR20261112074200505?input=1195m",
+                "press": "연합뉴스"
               },
               {
-                "url": "https://sports.donga.com/ent/article/all/20261115/135025743/1",
-                "press": "스포츠동아"
+                "url": "https://www.joongang.co.kr/article/25478144",
+                "press": "중앙일보"
               }
             ],
             "images": [
-              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F144%2F2026%2F11%2F15%2F1149829.jpg&type=fface200_200&expire=2&refresh=true"
+              "https://r.yna.co.kr/global/home/v01/img/yonhapnews_logo_1200x800_kr01.jpg"
             ],
             "press": [
-              "스포츠경향",
-              "스포츠동아"
+              "연합뉴스",
+              "중앙일보"
             ],
             "headlines": [
-              "403 Forbidden",
-              "김유정 , 진선규 관저 노린다…폭탄 작전 디데이 ( 100일 의 거짓말 )"
+              "[인사] 스포츠조선",
+              "[인사] 스포츠조선"
             ],
-            "extraction": "search-card",
-            "collectedAt": "2026-11-15T15:09:30.544Z"
+            "extraction": "playwright",
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
-          "id": "naver-5",
-          "rank": 5,
-          "keyword": "80대 남성 아내 살해 자수",
-          "title": "80대 남성 아내 살해 자수",
-          "rawKeyword": "80대 남성 아내 살해 자수",
+          "id": "naver-9",
+          "rank": 9,
+          "keyword": "아내 살해 후 자수한 80대 구속",
+          "title": "아내 살해 후 자수한 80대 구속",
+          "rawKeyword": "아내 살해 후 자수한 80대 구속",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 96,
+          "priority": 92,
           "source": "naver",
           "expansions": [
-            "80대 할머니 선물",
-            "80대 할머니 옷",
-            "80대 선물",
-            "80대 할머니 패딩",
-            "80대만달러",
-            "80대 영양제",
-            "80대 여배우",
-            "자수도안"
+            "살해당하는꿈",
+            "15살 살해",
+            "10대 살해",
+            "10대여성살해",
+            "50대 10대 살해",
+            "성북구 10대 살해",
+            "성북구 살해",
+            "피해자 살해"
           ],
-          "expansionSeed": "80대",
+          "expansionSeed": "살해",
           "insight": {
             "titles": {
-              "seo": "80대 남성 아내 살해 자수 최신 이슈와 핵심 내용 정리",
-              "home": "80대 남성 아내 살해 자수, 양천구서 ‘아내 살해 뒤 자수’ 80대 남성 구속 관련 확인할 점",
-              "topic": "80대 남성 아내 살해 자수",
+              "seo": "아내 살해 후 자수한 80대 구속 최신 이슈와 핵심 내용 정리",
+              "home": "아내 살해 후 자수한 80대 구속, 아내 살해하고 \"내가 범인\" 자수한 80대 남성 구속(종합) 관련 확인할 점",
+              "topic": "아내 살해 후 자수한 80대 구속",
               "topicGroup": "네이버 실시간 검색어"
             },
             "facts": [
               {
-                "text": "아내를 살해한 뒤 경찰에 자수한 80대 남성이 구속됐다. 서울남부지법 김한성 부장판사는 15일 살인 혐의를 받는 80대 강모씨에 대한 구속영장을 발부했다. 강씨는 13일 오전 2시쯤 서울 양천구 신월동의 한 다세대주택에서 70대 아내의 목을 졸라 숨지게 한 혐의를 받는다.",
+                "text": "아내 를 살해 한 뒤 \"내가 범인\"이라며 경찰에 자수한 80대 남성이 구속 됐다. 보고 구속 영장을 발부했다.",
                 "sourceIndex": 0
               },
               {
-                "text": "자신의 70대 아내 를 살해 한 후 자수 한 80대 남성 이 경찰에 체포됐다. 13일 경찰 등에 따르면 서울 양천경찰서는 살인 혐의로 80대 남성 A씨를 현행범으로 체포해 조사하고 있다고 밝혔다.",
+                "text": "자신의 70대 아내 를 살해 한 후 자수한 80대 남성이 경찰에 체포됐다. 경찰은 A씨를 상대로 구체적인 범행 경위를 조사하고 있다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.segye.com/newsView/20261115509308?OutUrl=naver",
-                "press": "세계일보"
+                "url": "https://www.news1.kr/society/court-prosecution/6354510",
+                "press": "뉴스1"
               },
               {
                 "url": "https://www.dailian.co.kr/news/view/1714624/?sc=Naver",
@@ -300,90 +543,28 @@
               }
             ],
             "images": [
-              "https://www.segye.com/content/image/2026/11/15/20261115509754.jpg"
+              "https://i3n.news1.kr/system/photos/2023/1/12/5786720/high.jpg"
             ],
             "press": [
-              "세계일보",
+              "뉴스1",
               "데일리안"
             ],
             "headlines": [
-              "양천구서 ‘아내 살해 뒤 자수’ 80대 남성 구속",
-              "서울 양천구 주택서 70대 아내 살해 후 자수 한 80대 남성 체포"
+              "아내 살해하고 \"내가 범인\" 자수한 80대 남성 구속(종합)",
+              "서울 양천구 주택서 70대 아내 살해 후 자수한 80대 남성 체포"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T15:09:30.544Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
-          "id": "naver-6",
-          "rank": 6,
-          "keyword": "이란 미사일 보유",
-          "title": "이란 미사일 보유",
-          "rawKeyword": "이란 미사일 보유",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 95,
-          "source": "naver",
-          "expansions": [
-            "미국 이란 전쟁",
-            "미국 이란 협상",
-            "이란 미국",
-            "이란 전쟁",
-            "미국 이란 종전",
-            "미국 이란",
-            "이란 속보",
-            "이란 종전"
-          ],
-          "expansionSeed": "이란",
-          "insight": {
-            "titles": {
-              "seo": "이란 미사일 보유 최신 이슈와 핵심 내용 정리",
-              "home": "이란 미사일 보유, 트럼프 '궤멸' 주장에도…美, 이란 미사일 보유량 2천500기 추정 관련 확인할 점",
-              "topic": "이란 미사일 보유",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "보도에 따르면 도널드 트럼프 미 행정부의 정보기관들은 현재 이란 의 미사일 보유 량을 1천500∼2천500기로 추산한다. 이는 전면전이 재개될 경우 이란 이 미국이나 중동 내 미국의 동맹국을 공격할 군사적 역량을 갖췄다는 것을 뜻한다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "월스트리트저널(WSJ)은 정보기관 관계자를 인용해 이란 이 최대 2500개 미사일 을 보유 하고 있다고 추정했다. 이는 그간 이란 의 군사력이 궤멸됐다고 자랑해 온 도널드 트럼프 미국 대통령을 비롯한 현 미국 정부의 대외 발언과 배치된다고 WSJ는 지적했다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.yna.co.kr/view/AKR20261115042800009?input=1195m",
-                "press": "연합뉴스"
-              },
-              {
-                "url": "https://www.sedaily.com/article/20114577?ref=naver",
-                "press": "서울경제"
-              }
-            ],
-            "images": [
-              "https://img7.yna.co.kr/photo/ap/2026/11/10/PAP20261110061001009_P4.jpg"
-            ],
-            "press": [
-              "연합뉴스",
-              "서울경제"
-            ],
-            "headlines": [
-              "트럼프 '궤멸' 주장에도…美, 이란 미사일 보유량 2천500기 추정",
-              "이란 , 두달만에 중동 美 기지 공격 재개...“전면전 재개 대응도 가능한..."
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
-          }
-        },
-        {
-          "id": "naver-7",
-          "rank": 7,
+          "id": "naver-10",
+          "rank": 10,
           "keyword": "입양조건",
           "title": "입양",
           "rawKeyword": "입양",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 94,
+          "priority": 91,
           "source": "naver",
           "expansions": [
             "입양조건",
@@ -437,192 +618,6 @@
             "extraction": "playwright",
             "collectedAt": "2026-11-15T15:09:30.544Z"
           }
-        },
-        {
-          "id": "naver-8",
-          "rank": 8,
-          "keyword": "퇴직금",
-          "title": "퇴직금",
-          "rawKeyword": "퇴직금",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 93,
-          "source": "naver",
-          "expansions": [
-            "퇴직금계산기",
-            "퇴직금 지급기준",
-            "퇴직금 계산",
-            "퇴직금 지급일",
-            "퇴직금 중간정산",
-            "퇴직금 수령방법",
-            "퇴직금 세금",
-            "퇴직금 irp"
-          ],
-          "expansionSeed": "퇴직금",
-          "insight": {
-            "titles": {
-              "seo": "퇴직금 최신 이슈와 핵심 내용 정리",
-              "home": "퇴직금, '사장님 퇴직금' 노란우산 뚫렸나…\"개인정보유출 의심\" 관련 확인할 점",
-              "topic": "퇴직금",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "중소기업중앙회(중기중앙회)는 14일 \"노란우산 홈페이지에 대한 외부의 비정상적인 접근이 있었다\"며 \"노란우산 일부 고객 개인정보의 제3자 조회 의심 정황을 확인했다\"고 밝혔다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "‘사장님 퇴직금 ’ 노란우산의 개인정보 유출 가능성이 대두됐다. 2007년 출범한 노란우산은 소기업·소상공인이 폐업이나 노령 등 경제적 위기에 대비해 퇴직금 을 마련할 수 있도록 지원하는 공제 제도다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.newsis.com/view/NISX20261114_0003868158",
-                "press": "뉴시스"
-              },
-              {
-                "url": "https://economist.co.kr/article/view/ecn202611140009",
-                "press": "이코노미스트"
-              }
-            ],
-            "images": [
-              "https://img1.newsis.com/2025/05/08/NISI20250508_0001836630_web.jpg"
-            ],
-            "press": [
-              "뉴시스",
-              "이코노미스트"
-            ],
-            "headlines": [
-              "'사장님 퇴직금' 노란우산 뚫렸나…\"개인정보유출 의심\"",
-              "'모두의 창업' 이어 '사장님 퇴직금 ' 노란우산도 개인정보 뚫렸다"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-15T15:09:30.544Z"
-          }
-        },
-        {
-          "id": "naver-9",
-          "rank": 9,
-          "keyword": "변요한 티파니 너무 사랑스러워",
-          "title": "변요한 티파니 너무 사랑스러워",
-          "rawKeyword": "변요한 티파니 너무 사랑스러워",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 92,
-          "source": "naver",
-          "expansions": [
-            "변요한 티파니",
-            "티파니 변요한",
-            "변요한 타짜",
-            "변요한 수염",
-            "변요한 영화",
-            "변요한 패딩",
-            "타짜 변요한",
-            "변요한 나무위키"
-          ],
-          "expansionSeed": "변요한",
-          "insight": {
-            "titles": {
-              "seo": "변요한 티파니 너무 사랑스러워 최신 이슈와 핵심 내용 정리",
-              "home": "변요한 티파니 너무 사랑스러워, '신혼' 변요한♥티파니, 첫 동반 공식석상..팔짱 끼고 \"너무 사랑스러워\" 관련 확인할 점",
-              "topic": "변요한 티파니 너무 사랑스러워",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "배우 변요한과 티파니 영이 결혼 후 처음으로 공식석상에 동반 등장해 다정한 신혼부부의 면모를 드러냈다. 15일 오후 서울 구로구 고척스카이돔에서는 '2026 멜론뮤직어워드'(이하 'MMA 2026')가 열렸다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "이를 지켜보던 유재석은 ‘동작그만’의 실루엣에 웃음이 터진 채 “그림자인데도 하체가 너무 짧다”라고 지적해 그의 멘탈을 흔든다. 뽐냈던 ‘ 사랑 을 그대 품 안에’가 등장한다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.sportschosun.com/entertainment/2026-11-15/202611150100101260009373",
-                "press": "스포츠조선"
-              },
-              {
-                "url": "https://www.tenasia.co.kr/article/2026101777364",
-                "press": "텐아시아"
-              }
-            ],
-            "images": [
-              "https://www.sportschosun.com/article/html/2026/11/15/2026111501001012600093731.jpg"
-            ],
-            "press": [
-              "스포츠조선",
-              "텐아시아"
-            ],
-            "headlines": [
-              "'신혼' 변요한♥티파니, 첫 동반 공식석상..팔짱 끼고 \"너무 사랑스러워\"",
-              "' 티파니 ♥' 변요한 이냐 곽범이냐…유재석도 아리송 \"어디서 봤는데\" ('놀..."
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-15T15:09:30.544Z"
-          }
-        },
-        {
-          "id": "naver-10",
-          "rank": 10,
-          "keyword": "미미미누",
-          "title": "미미미누",
-          "rawKeyword": "미미미누",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 91,
-          "source": "naver",
-          "expansions": [
-            "미미미누 나무위키",
-            "미미미누 5수",
-            "미미미누 은방울",
-            "미미미누 영양제",
-            "미미미누 젤리",
-            "은방울 미미미누",
-            "미미미누 고등학교",
-            "미미미누 대학"
-          ],
-          "expansionSeed": "미미미누",
-          "insight": {
-            "titles": {
-              "seo": "미미미누 최신 이슈와 핵심 내용 정리",
-              "home": "미미미누, 긴장한 미미미누 관련 확인할 점",
-              "topic": "미미미누",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "MC 미미미누 가 15일 서울 구로구 고척스카이돔에서 열린 ‘2026 멜론뮤직어워드(MMA2026)’ 레드카펫 행사에 참석해 본격적인 진행을 앞두고 긴장한 표정을 짓고 있다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "크리에이터 미미미누 가 14일 오후 서울 구로구 고척스카이돔에서 열린 2026 멜론뮤직어워드(MMA2026) 레드카펫에서 인사말을 하고 있다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.news1.kr/photos/8215004",
-                "press": "뉴스1"
-              },
-              {
-                "url": "https://www.newsis.com/view/NISI20261114_0021532582",
-                "press": "뉴시스"
-              }
-            ],
-            "images": [
-              "https://image.news1.kr/system/photos/2026/11/15/8215004/high.jpg"
-            ],
-            "press": [
-              "뉴스1",
-              "뉴시스"
-            ],
-            "headlines": [
-              "긴장한 미미미누",
-              "인사말 하는 미미미누"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-15T15:09:30.544Z"
-          }
         }
       ]
     },
@@ -633,37 +628,37 @@
         {
           "id": "daum-1",
           "rank": 1,
-          "keyword": "강미나 13kg 감량",
-          "title": "강미나 13kg 감량",
-          "rawKeyword": "강미나 13kg 감량",
+          "keyword": "강미나 전현무 일본 여행",
+          "title": "강미나 전현무 일본 여행",
+          "rawKeyword": "강미나 전현무 일본 여행",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
           "priority": 100,
           "source": "daum",
           "expansions": [
-            "13kg 감량",
             "강미나 아이오아이",
             "강미나 나무위키",
             "기안84 강미나",
             "강미나 기안84",
             "강미나 단발",
             "아이오아이 강미나",
-            "강미나 다이어트"
+            "강미나 다이어트",
+            "하율리 강미나"
           ],
           "expansionSeed": "강미나",
           "insight": {
             "titles": {
-              "seo": "강미나 13kg 감량 최신 이슈와 핵심 내용 정리",
-              "home": "강미나 13kg 감량, 강미나 , 한 달 만에 13kg 감량 …이준 “겉만 멀쩡했다” 관련 확인할 점",
-              "topic": "강미나 13kg 감량",
+              "seo": "강미나 전현무 일본 여행 최신 이슈와 핵심 내용 정리",
+              "home": "강미나 전현무 일본 여행, 강미나, 한 달 만에 13kg 감량…이준 “겉만 멀쩡했다” 관련 확인할 점",
+              "topic": "강미나 전현무 일본 여행",
               "topicGroup": "다음 실시간 검색어"
             },
             "facts": [
               {
-                "text": "가수 겸 배우 강미나 가 한 달 만에 13kg 을 감량 했던 사연을 공개한다. 15일 오후 10시 30분 방송되는 MBN ‘디스이즈 현무로드’에서는 전현무, 이준, 강미나 가 일본 오카야마현 구라시키로 여행을 떠난다.",
+                "text": "15일 오후 10시 30분 방송되는 MBN ‘디스이즈 현무로드’에서는 전현무 , 이준, 강미나 가 일본 오카야마현 구라시키로 여행 을 떠난다. 전현무 는 강미나 에게 과거 “다이어트할 거예요”라고 말했던 인터뷰를 언급한다.",
                 "sourceIndex": 0
               },
               {
-                "text": "강미나 가 한 달 만에 13kg 을 감량 했던 과거를 털어놓으며 다이어트 비화를 공개한다. 15일(오늘) 밤 10시 30분 방송되는 MBN ‘디스이즈 현무로드’ 9회에서는 전현무, 이준, 강미나 가 일본 오카야마현 구라시키를 찾아 소도시 여행을 즐기는 모습이 그려진다.",
+                "text": "15일 오후 10시30분 방송되는 MBN 예능 프로그램 '디스이즈 현무로드'에서는 전현무 , 이준, 강미나 가 일본 오카야마현 구라시키를 여행 하는 모습이 그려진다. 이날 세 사람은 33년 전통의 철판구이 전문점을 찾아 오카야마 특산물인 치아규 코스를 맛본다.",
                 "sourceIndex": 1
               }
             ],
@@ -673,208 +668,33 @@
                 "press": "스포츠동아"
               },
               {
-                "url": "https://sports.khan.co.kr/article/202611151057003?pt=nv",
-                "press": "스포츠경향"
+                "url": "https://www.newsis.com/view/NISX20261115_0003868368",
+                "press": "뉴시스"
               }
             ],
             "images": [
-              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F382%2F2026%2F11%2F15%2F1304803.jpg&type=fface200_200&expire=2&refresh=true"
+              "https://dimg.donga.com/wps/SPORTS/IMAGE/2026/11/15/135024874.1.jpg"
             ],
             "press": [
               "스포츠동아",
-              "스포츠경향"
+              "뉴시스"
             ],
             "headlines": [
-              "강미나 , 한 달 만에 13kg 감량 …이준 “겉만 멀쩡했다”",
-              "강미나 “한 달에 13kg 감량 ” 고백에…이준 “가죽만 멀쩡해”"
+              "강미나, 한 달 만에 13kg 감량…이준 “겉만 멀쩡했다”",
+              "강미나 , 한 달 만에 13㎏ 감량 고백…비법은?"
             ],
-            "extraction": "search-card",
-            "collectedAt": "2026-11-15T15:09:30.544Z"
+            "extraction": "playwright",
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
           "id": "daum-2",
           "rank": 2,
-          "keyword": "츠바키 배구",
-          "title": "츠바키 배구",
-          "rawKeyword": "츠바키 배구",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 99,
-          "source": "daum",
-          "expansions": [
-            "츠바키 배구 키",
-            "츠바키 배구 나무위키",
-            "츠바키 배구 신장",
-            "츠바키 배구국적"
-          ],
-          "expansionSeed": "츠바키 배구",
-          "insight": {
-            "titles": {
-              "seo": "츠바키 배구 최신 이슈와 핵심 내용 정리",
-              "home": "츠바키 배구, 김연경, ‘옌쿠시’ 이어 츠바키·윤영인 새 콤비 완성 (신인감독 김연경2) 관련 확인할 점",
-              "topic": "츠바키 배구",
-              "topicGroup": "다음 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "[동아닷컴 홍세영 기자] 김연경 감독이 2연승을 달린 ‘필승 원더독스’의 선발 조합에 변화를 준다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "MBC '신인감독 김연경2' 김연경 감독이 이끄는 '필승 원더독스'가 실업 배구 전통의 강호 포항시체육회를 상대로 연승 행진에 도전한다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://sports.donga.com/ent/article/all/20261115/135026272/1",
-                "press": "스포츠동아"
-              },
-              {
-                "url": "https://www.gukjenews.com/news/articleView.html?idxno=3752543",
-                "press": "국제뉴스"
-              }
-            ],
-            "images": [
-              "https://dimg.donga.com/wps/SPORTS/IMAGE/2026/11/15/135026263.1.jpg"
-            ],
-            "press": [
-              "스포츠동아",
-              "국제뉴스"
-            ],
-            "headlines": [
-              "김연경, ‘옌쿠시’ 이어 츠바키·윤영인 새 콤비 완성 (신인감독 김연경2)",
-              "'신인감독 김연경2' 포항시체육회 상대 세터 츠바키 ·윤영인 가동"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
-          }
-        },
-        {
-          "id": "daum-3",
-          "rank": 3,
-          "keyword": "한국 야구 준우승",
-          "title": "한국 야구 준우승",
-          "rawKeyword": "한국 야구 준우승",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 98,
-          "source": "daum",
-          "expansions": [
-            "한국야구 준우승"
-          ],
-          "expansionSeed": "한국 야구 준우승",
-          "insight": {
-            "titles": {
-              "seo": "한국 야구 준우승 최신 이슈와 핵심 내용 정리",
-              "home": "한국 야구 준우승, 또 일본에 무너진 한국 야구…APBC 3연속 준우승 관련 확인할 점",
-              "topic": "한국 야구 준우승",
-              "topicGroup": "다음 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "한국 야구 대표팀이 일본에 막혀 아시아프로 야구 챔피언십(APBC) 첫 우승 도전에 실패했다. 한국 은 준우승 상금 1000만엔(약 8090만원)을 받는다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "한국 은 15일 일본 도쿄돔에서 열린 2026 아시아프로 야구 챔피언십(APBC) 일본과 결승에서 1-5로 패했다. 이번 대회 일본전에서 모두 지면서 2017년, 2023년에 이어 다시 준우승 에 머물렀다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.hankyung.com/article/2026111577027",
-                "press": "한국경제"
-              },
-              {
-                "url": "https://www.hani.co.kr/arti/international/international_general/1287457.html",
-                "press": "한겨레"
-              }
-            ],
-            "images": [
-              "https://img.hankyung.com/photo/202611/ZK.46430977.1.jpg"
-            ],
-            "press": [
-              "한국경제",
-              "한겨레"
-            ],
-            "headlines": [
-              "또 일본에 무너진 한국 야구…APBC 3연속 준우승",
-              "한국 야구 , 다카하시 공략 실패…한일전 13연패·APBC 준우승"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
-          }
-        },
-        {
-          "id": "daum-4",
-          "rank": 4,
-          "keyword": "장혜진 가수",
-          "title": "장혜진 가수",
-          "rawKeyword": "장혜진 가수",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 97,
-          "source": "daum",
-          "expansions": [
-            "장혜진 가수",
-            "가수 장혜진",
-            "장혜진 배우",
-            "장혜진 노래",
-            "장혜진 1994",
-            "배우 장혜진",
-            "장혜진 콘서트",
-            "윤민수 장혜진"
-          ],
-          "expansionSeed": "장혜진",
-          "insight": {
-            "titles": {
-              "seo": "장혜진 가수 최신 이슈와 핵심 내용 정리",
-              "home": "장혜진 가수, 가수 린, 단독 콘서트 ‘HOME’ 성황리 개최… ‘OST 퀸’의 명품 보컬 저력 입증 관련 확인할 점",
-              "topic": "장혜진 가수",
-              "topicGroup": "다음 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "[CBC뉴스]가수 린이 서울 한전아트센터에서 개최한 단독 콘서트 ‘HOME’을 성황리에 마무리했다.‘가을의 한가운데, 오래 잊히지 않는 목소리와 다정한 선율이 머무는 곳’이라는 주제로 열린 이번 공연에서 린은 ‘이별살이’, ‘...사랑했잖아...’, ‘My Destiny’, ‘시간을 거슬러’ 등 히트곡과 OST 무대를 선보였다.특히 린은 장혜진의 ‘아름다운 날들’, 임영웅의 ‘다시 만날 수 있을까’, 재즈 곡 ‘Fly Me To The Moon’ 등 다양한 장르의 명곡을 자신만의 감성으로 재해석해 깊은 여운을 남겼다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "린은 가수 장혜진 의 대표곡으로 25년 넘게 사랑받아온 '아름다운 날들'을 자신의 공연에서 부를 예정이라고 밝혔다. 발라드와 트로트를 넘나들며 폭넓은 음악적 색깔을 보여준 린이 원곡과는 또 다른 감성으로 명곡을 어떻게 풀어낼지 관심이 쏠린다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.cbci.co.kr/news/articleView.html?idxno=627046",
-                "press": "CBC뉴스"
-              },
-              {
-                "url": "http://enews.imbc.com/News/RetrieveNewsInfo/524261",
-                "press": "MBC연예"
-              }
-            ],
-            "images": [
-              "https://www.cbci.co.kr/news/thumbnail/202611/627046_430919_2249_v150.jpg"
-            ],
-            "press": [
-              "CBC뉴스",
-              "MBC연예"
-            ],
-            "headlines": [
-              "가수 린, 단독 콘서트 ‘HOME’ 성황리 개최… ‘OST 퀸’의 명품 보컬 저력 입증",
-              "린, '미우새'서 단독 콘서트 깜짝 스포… 장혜진 '아름다운 날들' 부른다"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-15T15:09:30.544Z"
-          }
-        },
-        {
-          "id": "daum-5",
-          "rank": 5,
           "keyword": "윤영인 새 콤비",
           "title": "윤영인 새 콤비",
           "rawKeyword": "윤영인 새 콤비",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 96,
+          "priority": 99,
           "source": "daum",
           "expansions": [
             "윤영인 배구",
@@ -890,13 +710,13 @@
           "insight": {
             "titles": {
               "seo": "윤영인 새 콤비 최신 이슈와 핵심 내용 정리",
-              "home": "윤영인 새 콤비, 김연경, ‘옌쿠시’ 이어 츠바키· 윤영인 새 콤비 완성 (신인감독 김연... 관련 확인할 점",
+              "home": "윤영인 새 콤비, 김연경, ‘옌쿠시’ 이어 츠바키·윤영인 새 콤비 완성 (신인감독 김연경2) 관련 확인할 점",
               "topic": "윤영인 새 콤비",
               "topicGroup": "다음 실시간 검색어"
             },
             "facts": [
               {
-                "text": "앞선 흥국생명전에서 이예은과 인쿠시가 호흡을 맞춘 ‘옌쿠시’ 조합이 주목받았다면, 이번에는 세터 츠바키와 아포짓 스파이커 윤영인 이 새로운 콤비 로 나선다. 세터의 토스와 공격수의 타이밍이 중요한 만큼 츠바키와 윤영인 의 호흡이 원더독스의 공격력에 어떤 변화를 가져올지가 관건이다.",
+                "text": "[동아닷컴 홍세영 기자] 김연경 감독이 2연승을 달린 ‘필승 원더독스’의 선발 조합에 변화를 준다.",
                 "sourceIndex": 0
               },
               {
@@ -915,28 +735,28 @@
               }
             ],
             "images": [
-              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F382%2F2026%2F11%2F15%2F1304864.jpg&type=fface200_200&expire=2&refresh=true"
+              "https://dimg.donga.com/wps/SPORTS/IMAGE/2026/11/15/135026263.1.jpg"
             ],
             "press": [
               "스포츠동아",
               "비즈엔터"
             ],
             "headlines": [
-              "김연경, ‘옌쿠시’ 이어 츠바키· 윤영인 새 콤비 완성 (신인감독 김연...",
+              "김연경, ‘옌쿠시’ 이어 츠바키·윤영인 새 콤비 완성 (신인감독 김연경2)",
               "'신인감독 김연경2' 김윤하· 윤영인 ·츠바키·인쿠시 vs 박현주·박경현..."
             ],
-            "extraction": "search-card",
-            "collectedAt": "2026-11-15T15:09:30.544Z"
+            "extraction": "playwright",
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
-          "id": "daum-6",
-          "rank": 6,
+          "id": "daum-3",
+          "rank": 3,
           "keyword": "진형구 별세",
           "title": "진형구 별세",
           "rawKeyword": "진형구 별세",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 95,
+          "priority": 98,
           "source": "daum",
           "expansions": [
             "별세 뜻",
@@ -992,250 +812,430 @@
           }
         },
         {
-          "id": "daum-7",
-          "rank": 7,
-          "keyword": "세무사 수석",
-          "title": "세무사 수석",
-          "rawKeyword": "세무사 수석",
+          "id": "daum-4",
+          "rank": 4,
+          "keyword": "박현주 젠슨 황 복귀 청원",
+          "title": "박현주 젠슨 황 복귀 청원",
+          "rawKeyword": "박현주 젠슨 황 복귀 청원",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 94,
+          "priority": 97,
           "source": "daum",
           "expansions": [
-            "63회 세무사 수석",
-            "세무사 수석 ai",
-            "세무사 수석 블로그",
-            "세무사 수석 합격 수기",
-            "세무사 수석 합격",
-            "세무사 수석 한원석",
-            "세무사 수석 합격자",
-            "세무사 수석 ai안경"
+            "미래에셋 박현주",
+            "박현주 배구선수",
+            "배구 박현주",
+            "청원hub",
+            "국민청원",
+            "청원 hub 위치",
+            "청원고",
+            "청원경찰"
           ],
-          "expansionSeed": "세무사 수석",
+          "expansionSeed": "박현주",
           "insight": {
             "titles": {
-              "seo": "세무사 수석 최신 이슈와 핵심 내용 정리",
-              "home": "세무사 수석, [단독] 금감원 “AI 부정행위 세무사 수석, 회계사 1차 시험 불합격” 관련 확인할 점",
-              "topic": "세무사 수석",
+              "seo": "박현주 젠슨 황 복귀 청원 최신 이슈와 핵심 내용 정리",
+              "home": "박현주 젠슨 황 복귀 청원, 박현주 미래에셋 회장, 젠슨 황 복귀 온라인 청원 동참 관련 확인할 점",
+              "topic": "박현주 젠슨 황 복귀 청원",
               "topicGroup": "다음 실시간 검색어"
             },
             "facts": [
               {
-                "text": "금융감독원은 15일 인공지능(AI)을 활용한 부정행위를 인정한 세무사 시험 수석 합격자 A씨가 공인회계사 1차 시험에는 불합격한 것으로 확인됐다고 밝혔다.",
+                "text": "박현주 미래에셋그룹 회장이 젠슨 황 엔비디아 전 최고경영자(CEO)의 복귀를 촉구하는 온라인 청원에 참여했다. 미래에셋그룹은 엔비디아 주식을 고유계정으로 보유하고 있지는 않지만, 고객과 투자자 보호 차원에서 청원 취지에 동의했다는 입장이다.",
                 "sourceIndex": 0
               },
               {
-                "text": "한국 세무사 회가 15일 초소형카메라와 생성형 인공지능(AI)를 활용한 부정행위를 시인한 올해 세무사 시험 수석 합격자 한원석씨에 대한 합격 무효를 정부에 공식 요구했다.",
+                "text": "온라인에서 젠슨 황 복귀 청원 에 이름을 올렸다. 이 청원 에는 머스크 CEO와 팀 스위니 에픽게임즈 CEO, 게리 탄 Y콤비네이터 CEO 등이 서명했다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.kmib.co.kr/article/20261115500345",
-                "press": "국민일보"
+                "url": "https://www.munhwa.com/article/11631413?ref=naver",
+                "press": "문화일보"
               },
               {
-                "url": "https://www.kmib.co.kr/article/20261115500451",
-                "press": "국민일보"
+                "url": "https://www.hankyung.com/article/2026111575541",
+                "press": "한국경제"
               }
             ],
             "images": [
-              "https://3f3bm4nnaefgwrtq8izg16625.edge.naverncp.com/data2/content/image/2026/11/15/.cache/512/20261115500344.jpg"
+              "https://wimg.munhwa.com/news/cms/2026/11/15/news-p.v1.20261115.fe50f7cf8b04422583952f7dee4c575b_R.png"
             ],
             "press": [
-              "국민일보"
+              "문화일보",
+              "한국경제"
             ],
             "headlines": [
-              "[단독] 금감원 “AI 부정행위 세무사 수석, 회계사 1차 시험 불합격”",
-              "[단독] 세무사 회 “부정행위자 합격 무효 요구…기준 미달시 수습 교육..."
+              "박현주 미래에셋 회장, 젠슨 황 복귀 온라인 청원 동참",
+              "\"AI금융 무산·피지컬 AI 후퇴 위기\"…' 젠슨 황 복귀 론' 확산"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T15:09:30.544Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
+          }
+        },
+        {
+          "id": "daum-5",
+          "rank": 5,
+          "keyword": "에이티즈 우영",
+          "title": "에이티즈 우영",
+          "rawKeyword": "에이티즈 우영",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 96,
+          "source": "daum",
+          "expansions": [
+            "에이티즈 우영 나무위키",
+            "에이티즈 우영 과사",
+            "에이티즈 우영 아빠",
+            "에이티즈 우영 배경화면",
+            "에이티즈 우영 mbti",
+            "에이티즈 우영 군대",
+            "에이티즈 우영 타투",
+            "에이티즈 우영 사주"
+          ],
+          "expansionSeed": "에이티즈 우영",
+          "insight": {
+            "titles": {
+              "seo": "에이티즈 우영 최신 이슈와 핵심 내용 정리",
+              "home": "에이티즈 우영, 지수, 에이티즈 산vs우영 보더니 “블랙핑크도 저래” (냉부) 관련 확인할 점",
+              "topic": "에이티즈 우영",
+              "topicGroup": "다음 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "[동아닷컴 홍세영 기자] 블랙핑크 지수가 에이티즈 산, 우영과 함께 ‘가슴 춤’ 챌린지에 도전한다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "그룹 에이티즈 멤버 홍중과 우영 이 40도에 달하는 고열로 '아는 형님' 녹화에 불참했다. 14일 방송된 JTBC 예능 프로그램 '아는 형님'에는 그룹 에이티즈 가 출연한 가운데 멤버 홍중과 우영 은 불참했다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://sports.donga.com/ent/article/all/20261115/135025052/1",
+                "press": "스포츠동아"
+              },
+              {
+                "url": "https://www.xportsnews.com/article/2219617",
+                "press": "엑스포츠뉴스"
+              }
+            ],
+            "images": [
+              "https://dimg.donga.com/wps/SPORTS/IMAGE/2026/11/15/135025048.1.jpg"
+            ],
+            "press": [
+              "스포츠동아",
+              "엑스포츠뉴스"
+            ],
+            "headlines": [
+              "지수, 에이티즈 산vs우영 보더니 “블랙핑크도 저래” (냉부)",
+              "에이티즈 홍중· 우영 , 고열로 '아형' 불참…산 \"열이 40도더라\""
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-15T16:09:13.733Z"
+          }
+        },
+        {
+          "id": "daum-6",
+          "rank": 6,
+          "keyword": "박보영 동안 미모",
+          "title": "박보영 동안 미모",
+          "rawKeyword": "박보영 동안 미모",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 95,
+          "source": "daum",
+          "expansions": [
+            "박보영 박진영",
+            "박보영 손석구",
+            "박보영 나무위키",
+            "손석구 박보영",
+            "박보영 좌파",
+            "박보영 드라마",
+            "박보영 최우식",
+            "박보영 김영광"
+          ],
+          "expansionSeed": "박보영",
+          "insight": {
+            "titles": {
+              "seo": "박보영 동안 미모 최신 이슈와 핵심 내용 정리",
+              "home": "박보영 동안 미모, '36세' 박보영, 나이 거꾸로 먹나 관련 확인할 점",
+              "topic": "박보영 동안 미모",
+              "topicGroup": "다음 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "[서울=뉴시스] 배우 박보영이 여행 중인 근황을 공개했다.(사진=SNS 캡처) 2026.11.15. photo@newsis.com *재판매 및 DB 금지[서울=뉴시스] 남정현 기자 = 배우 박보영이 해외 여행 중인 근황을 전했다. 박보영은 15일 자신의 소셜미디어에 \"가을여행\"이라는 글과 함께 여러 장의 사진을 공개했다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "배우 박보영 이 미국 뉴욕 여행 중 화장기 없는 민낯에도 눈부신 '방부제 동안 미모 '를 자랑해 팬심을 설레게 했다. 15일 박보영 은 자신의 SNS를 통해 \"in new york\"이라는 짧은 글과 함께 여러 장의 사진을 게재했다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.newsis.com/view/NISX20261115_0003868773",
+                "press": "뉴시스"
+              },
+              {
+                "url": "https://www.sportschosun.com/entertainment/2026-11-15/202611150100101030009361",
+                "press": "스포츠조선"
+              }
+            ],
+            "images": [
+              "https://img1.newsis.com/2026/11/15/NISI20261115_0002292529_web.jpg"
+            ],
+            "press": [
+              "뉴시스",
+              "스포츠조선"
+            ],
+            "headlines": [
+              "'36세' 박보영, 나이 거꾸로 먹나",
+              "박보영 , 어떻게 화장 지우니 더 예뻐지지...\"왜 안 늙지?\" 팬들도 감탄"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-15T16:09:13.733Z"
+          }
+        },
+        {
+          "id": "daum-7",
+          "rank": 7,
+          "keyword": "최원호 감독 3연속 준우승",
+          "title": "최원호 감독 3연속 준우승",
+          "rawKeyword": "최원호 감독 3연속 준우승",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 94,
+          "source": "daum",
+          "expansions": [
+            "최원호 감독",
+            "최원호 나무위키",
+            "최원호병원",
+            "최원호호",
+            "최원호 한화",
+            "야구 최원호",
+            "최원호 경질",
+            "kt 준우승"
+          ],
+          "expansionSeed": "최원호",
+          "insight": {
+            "titles": {
+              "seo": "최원호 감독 3연속 준우승 최신 이슈와 핵심 내용 정리",
+              "home": "최원호 감독 3연속 준우승, 또 일본에 무너진 한국 야구…APBC 3연속 준우승 관련 확인할 점",
+              "topic": "최원호 감독 3연속 준우승",
+              "topicGroup": "다음 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "최원호 감독 이 지휘하는 대표팀은 15일 일본 도쿄돔에서 치른 2026 APBC 결승에서 일본에 1-5로 졌다. 한국의 마지막 승리는 2015년 프리미어12 준결승에서 거둔 4- 3 승리다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "아시아프로야구챔피언십(APBC)에서 3회 연속 준우승 에 그친 최원호 한국 야구 대표팀 감독 이 일본 선발 투수의 구위와 제구를 높이 평가했다. 한국은 15일 일본 도쿄돔에서 열린 2026 APBC 결승에서 일본에 1-5로 졌다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.hankyung.com/article/2026111577027",
+                "press": "한국경제"
+              },
+              {
+                "url": "https://www.newsis.com/view/NISX20261115_0003868812",
+                "press": "뉴시스"
+              }
+            ],
+            "images": [
+              "https://img.hankyung.com/photo/202611/ZK.46430977.1.jpg"
+            ],
+            "press": [
+              "한국경제",
+              "뉴시스"
+            ],
+            "headlines": [
+              "또 일본에 무너진 한국 야구…APBC 3연속 준우승",
+              "APBC 3연속 준우승 … 최원호 감독 \"日 선발의 변화구 완성도 높았다\""
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
           "id": "daum-8",
           "rank": 8,
-          "keyword": "디스이즈 현무로드",
-          "title": "디스이즈 현무로드",
-          "rawKeyword": "디스이즈 현무로드",
+          "keyword": "코르티스 MMA 2026 대상",
+          "title": "코르티스 MMA 2026 대상",
+          "rawKeyword": "코르티스 MMA 2026 대상",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
           "priority": 93,
           "source": "daum",
           "expansions": [
-            "디스이즈 현무로드 재방송",
-            "디스이즈 현무로드 캐나다",
-            "디스이즈 현무로드 다낭",
-            "디스이즈 현무로드편성표",
-            "디스이즈 현무로드 1회",
-            "디스이즈 현무로드 다낭 해산물",
-            "디스이즈 현무로드 다낭 숙소",
-            "디스이즈 현무로드 다시보기"
+            "코르티스 건호",
+            "코르티스 주훈",
+            "코르티스 성현",
+            "코르티스 redred",
+            "코르티스 나무위키",
+            "코르티스 제임스",
+            "코르티스 마틴",
+            "코르티스 엄성현"
           ],
-          "expansionSeed": "디스이즈 현무로드",
+          "expansionSeed": "코르티스",
           "insight": {
             "titles": {
-              "seo": "디스이즈 현무로드 최신 이슈와 핵심 내용 정리",
-              "home": "디스이즈 현무로드, '디스이즈 현무로드' 강미나, \"한 달 만에 13kg 감량 관련 확인할 점",
-              "topic": "디스이즈 현무로드",
+              "seo": "코르티스 MMA 2026 대상 최신 이슈와 핵심 내용 정리",
+              "home": "코르티스 MMA 2026 대상, BTS·코르티스·아이브, ‘MMA 2026’ 둘째 날 대상 영예…안유진 ‘울컥’ [종합] - 스타투데이 관련 확인할 점",
+              "topic": "코르티스 MMA 2026 대상",
               "topicGroup": "다음 실시간 검색어"
             },
             "facts": [
               {
-                "text": "전현무, 이준, 강미나가 일본 오카야마현 구라시키를 배경으로 유쾌한 소도시 여행의 매력을 선사한다.15일 방송되는 MBN 리얼 발품 로드 트립 '디스이즈 현무로드' 제9회에서는 전현무, 이준, 강미나가 오카야마의 숨은 명소와 맛집을 찾아 떠나는 모습이 그려진다.이날 세 사람은 33년 전통의 철판구이 전문점을 방문해 오카야마 특산물인 '치아규' 코스 요리를 즐긴다.",
+                "text": "그룹 방탄소년단, 코르티스 , 아이브가 ‘ MMA 2026 ’ 둘째 날 대상 의 영예를 안았다. 15일 오후 6시 서울 구로구 고척스카이돔에서는 지난 14일에 이어 ‘ 2026 멜론뮤직어워드( 2026 MELON MUSIC AWARDS, 이하 MMA 2026 )’ DAY2가 진행됐다.",
                 "sourceIndex": 0
               },
               {
-                "text": "' 디스이즈 현무로드 ' 강미나가 다이어트 비화를 밝힌다. 15일(오늘) 밤 10시 30분 방송되는 리얼 발품 로드 트립 MBN ' 디스이즈 현무로드 ' 9회에서는 전현무-이준-강미나가 일본 오카야마현 구라시키에서 '소도시 여행'의 매력을 즐기는 모습이 펼쳐진다.",
+                "text": "글로벌 슈퍼 그룹 '방탄소년단(BTS)'과 신인류 그룹 ' 코르티스 (CORTIS)', 4세대 대표 걸그룹들인 '아이브(IVE)'와 '에스파(aespa)'가 ' 2026 멜론뮤직어워드( MMA2026 )' 대상 을 나눠 가졌다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.gukjenews.com/news/articleView.html?idxno=3752594",
-                "press": "국제뉴스"
+                "url": "https://www.mk.co.kr/article/12209527",
+                "press": "매일경제"
               },
               {
-                "url": "https://www.sportschosun.com/entertainment/2026-11-15/202611150100097450009098",
-                "press": "스포츠조선"
+                "url": "https://www.newsis.com/view/NISX20261115_0003868822",
+                "press": "뉴시스"
               }
             ],
             "images": [
-              "https://cdn.gukjenews.com/news/thumbnail/202611/3752594_3934862_3757_v150.jpg"
+              "https://pimg.mk.co.kr/news/cms/202611/15/news-p.v1.20261115.6ae861f7a7634792a554c4883ef3392a_R.jpg"
             ],
             "press": [
-              "국제뉴스",
-              "스포츠조선"
+              "매일경제",
+              "뉴시스"
             ],
             "headlines": [
-              "'디스이즈 현무로드' 강미나, \"한 달 만에 13kg 감량",
-              "이게 가능해? 강미나, 한달 만에 13kg 뺐다..다이어트법 솔직 고백( 현무 ..."
+              "BTS·코르티스·아이브, ‘MMA 2026’ 둘째 날 대상 영예…안유진 ‘울컥’ [종합] - 스타투데이",
+              "방탄소년단, ' MMA 2026 ' 대상 포함 6관왕… 코르티스 ·아이브·에스파도 ..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T15:09:30.544Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
           "id": "daum-9",
           "rank": 9,
-          "keyword": "김광규 연희동 자가 공개",
-          "title": "김광규 연희동 자가 공개",
-          "rawKeyword": "김광규 연희동 자가 공개",
+          "keyword": "김다솔 정관장 입단",
+          "title": "김다솔 정관장 입단",
+          "rawKeyword": "김다솔 정관장 입단",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
           "priority": 92,
           "source": "daum",
           "expansions": [
-            "김광규 연희동",
-            "김광규 나무위키",
-            "김광규 국수집",
-            "김광규 송도집",
-            "김광규 리즈",
-            "김광규 집",
-            "김광규 잔치국수",
-            "김광규 이사"
+            "배구 김다솔",
+            "김다솔 배구",
+            "김다솔 배정대",
+            "김다솔 인스타",
+            "배정대 김다솔",
+            "배구 김다솔 인스타",
+            "원더독스 김다솔",
+            "김다솔 나무위키"
           ],
-          "expansionSeed": "김광규",
+          "expansionSeed": "김다솔",
           "insight": {
             "titles": {
-              "seo": "김광규 연희동 자가 공개 최신 이슈와 핵심 내용 정리",
-              "home": "김광규 연희동 자가 공개, '송도 50평家 떠난' 김광규, 28년 만 서울에 자가 마련..연희동家 최초공개(미우새) 관련 확인할 점",
-              "topic": "김광규 연희동 자가 공개",
+              "seo": "김다솔 정관장 입단 최신 이슈와 핵심 내용 정리",
+              "home": "김다솔 정관장 입단, [단독] ‘신인감독 김연경’ 또 프로 배출…세터 김다솔 정관장행 관련 확인할 점",
+              "topic": "김다솔 정관장 입단",
               "topicGroup": "다음 실시간 검색어"
             },
             "facts": [
               {
-                "text": "배우 김광규가 서울 연희동 자가를 공개한다. 15일 방송되는 SBS '미운 우리 새끼'(이하 '미우새')에서는 최근 28년 만에 서울집 자가를 샀다고 밝혀 화제를 모은 '60세 미혼남' 김광규의 연희동 'NEW 하우스'가 최초 공개된다.",
+                "text": "‘신인 감독 김연경’이 또다시 프로 선수를 배출했다. 세터 김다솔(29)이 여자배구 정관장에 입단한다. 김다솔은 정관장과 입단 계약에 합의했다.",
                 "sourceIndex": 0
               },
               {
-                "text": "배우 김광규 가 인천 송도에서 서울 연희동 으로 이사했다. 15일 방송되는 SBS '미운 우리 새끼'에서는 최근 28년 만에 서울 자가 를 사며 화제를 모은 김광규 가 새집을 공개 한다.",
+                "text": "정관장 은 최근 자유계약선수 신분인 김다솔 (29)과 입단 에 합의했다. 김다솔 은 2014년 수련선수로 흥국생명 핑크스파이더스에 지명되면서 프로 생활을 시작했다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.sportschosun.com/entertainment/2026-11-15/202611150100097590009107",
-                "press": "스포츠조선"
+                "url": "https://www.joongang.co.kr/article/25478667",
+                "press": "중앙일보"
               },
               {
-                "url": "https://www.newsis.com/view/NISX20261115_0003868378",
-                "press": "뉴시스"
+                "url": "https://www.sportschosun.com/volleyball/2026-11-15/202611150100101450009388",
+                "press": "스포츠조선"
               }
             ],
             "images": [
-              "https://www.sportschosun.com/article/html/2026/11/15/2026111501000975900091071_w.jpg"
+              "https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/202611/15/8000499b-ac91-4d6c-91ec-2ff3c707e02e.jpg"
             ],
             "press": [
-              "스포츠조선",
-              "뉴시스"
+              "중앙일보",
+              "스포츠조선"
             ],
             "headlines": [
-              "'송도 50평家 떠난' 김광규, 28년 만 서울에 자가 마련..연희동家 최초공개(미우새)",
-              "김광규 , 성공했네…서울 연희동 자가 로 입성"
+              "[단독] ‘신인감독 김연경’ 또 프로 배출…세터 김다솔 정관장행",
+              "'김연경 PICK' 제대로였네…세터 간절했던 정관장 , 또 한 번 '원더독스'..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T15:09:30.544Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
           "id": "daum-10",
           "rank": 10,
-          "keyword": "한동훈 장인상",
-          "title": "한동훈 장인상",
-          "rawKeyword": "한동훈 장인상",
+          "keyword": "김광규 연희동 아파트",
+          "title": "김광규 연희동 아파트",
+          "rawKeyword": "김광규 연희동 아파트",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
           "priority": 91,
           "source": "daum",
           "expansions": [
-            "한동훈 지지율",
-            "한동훈 복당",
-            "한동훈 자녀",
-            "한동훈프로필",
-            "한동훈 창당",
-            "한동훈팬카페",
-            "한동훈 오세훈",
-            "한동훈 징계"
+            "김광규 연희동 아파트 어디"
           ],
-          "expansionSeed": "한동훈",
+          "expansionSeed": "김광규 연희동 아파트",
           "insight": {
             "titles": {
-              "seo": "한동훈 장인상 최신 이슈와 핵심 내용 정리",
-              "home": "한동훈 장인상, '조폐공사 파업유도' 진형구 前고검장 별세…한동훈 장인상 관련 확인할 점",
-              "topic": "한동훈 장인상",
+              "seo": "김광규 연희동 아파트 최신 이슈와 핵심 내용 정리",
+              "home": "김광규 연희동 아파트, 김광규, 송도 아파트 팔았다…연희동 자가 입성 (미우새) 관련 확인할 점",
+              "topic": "김광규 연희동 아파트",
               "topicGroup": "다음 실시간 검색어"
             },
             "facts": [
               {
-                "text": "진 전 고검장은 무소속 한동훈 의원의 장인이다. 유족으로는 부인 최영옥 씨와 아들 진동균 전 검사, 딸 진민정·진은정 변호사, 사위 한동훈 의원 등이 있다.",
+                "text": "[동아닷컴 홍세영 기자] 배우 김광규가 28년 만에 마련한 서울 자가 아파트를 공개한다.",
                 "sourceIndex": 0
               },
               {
-                "text": "▲ 진형구(전 대전고검장)씨 별세, 한동훈 (국회의원)씨 장인상 = 15일, 서울성모병원 장례식장 31호(※ 조문은 16일 오후 2시부터 가능), 발인 18일 오전 8시 30분.",
+                "text": "‘미운 우리 새끼’ 김광규 연희동 아파트 , 새 집(미우새) 오늘(15일) 방송되는 SBS ‘미운 우리 새끼’(이하 ‘미우새’)에서는 최근 28년 만에 서울집 자가를 샀다고 밝혀 화제를 모은 ‘60세 미혼남’ 김광규의 연희동의 아파트, ‘NEW 하우스’가 최초 공개된다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.pressian.com/pages/articles/2026111514465571829?utm_source=naver&utm_medium=search",
-                "press": "프레시안"
+                "url": "https://sports.donga.com/ent/article/all/20261115/135025005/1",
+                "press": "스포츠동아"
               },
               {
-                "url": "https://www.yna.co.kr/view/AKR20261115022500001?input=1195m",
-                "press": "연합뉴스"
+                "url": "https://www.bntnews.co.kr/article/view/bnt202611150037",
+                "press": "bnt뉴스"
               }
             ],
             "images": [
-              "https://cdn.pressian.com/_resources/10/2026/11/15/2026111514412302334_x.jpg"
+              "https://dimg.donga.com/wps/SPORTS/IMAGE/2026/11/15/135025002.1.jpg"
             ],
             "press": [
-              "프레시안",
-              "연합뉴스"
+              "스포츠동아",
+              "bnt뉴스"
             ],
             "headlines": [
-              "'조폐공사 파업유도' 진형구 前고검장 별세…한동훈 장인상",
-              "[부고] 한동훈 (국회의원)씨 장인상"
+              "김광규, 송도 아파트 팔았다…연희동 자가 입성 (미우새)",
+              "‘미운우리새끼’ 김광규 연희동 아파트 , 새 집(미우새)"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T15:09:30.544Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         }
       ]
@@ -1247,258 +1247,11 @@
         {
           "id": "nate-1",
           "rank": 1,
-          "keyword": "세무사 수석 부정행위",
-          "title": "세무사 수석 부정행위",
-          "rawKeyword": "세무사 수석 부정행위",
+          "keyword": "젠슨 황 청원",
+          "title": "젠슨 황 청원",
+          "rawKeyword": "젠슨 황 청원",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 100,
-          "source": "nate",
-          "expansions": [
-            "세무사 부정행위",
-            "세무사 수석",
-            "세무사 수석 ai",
-            "63회 세무사 수석",
-            "세무사시험 수석",
-            "세무사1차",
-            "세무사난이도",
-            "세무사원서접수"
-          ],
-          "expansionSeed": "세무사",
-          "insight": {
-            "titles": {
-              "seo": "세무사 수석 부정행위 최신 이슈와 핵심 내용 정리",
-              "home": "세무사 수석 부정행위, [단독] 금감원 “AI 부정행위 세무사 수석, 회계사 1차 시험 불합격” 관련 확인할 점",
-              "topic": "세무사 수석 부정행위",
-              "topicGroup": "네이트 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "금융감독원은 15일 인공지능(AI)을 활용한 부정행위를 인정한 세무사 시험 수석 합격자 A씨가 공인회계사 1차 시험에는 불합격한 것으로 확인됐다고 밝혔다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "한국 세무사 회가 15일 초소형카메라와 생성형 인공지능(AI)를 활용한 부정행위 를 시인한 올해 세무사 시험 수석 합격자 한원석씨에 대한 합격 무효를 정부에 공식 요구했다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.kmib.co.kr/article/20261115500345",
-                "press": "국민일보"
-              },
-              {
-                "url": "https://www.kmib.co.kr/article/20261115500451",
-                "press": "국민일보"
-              }
-            ],
-            "images": [
-              "https://3f3bm4nnaefgwrtq8izg16625.edge.naverncp.com/data2/content/image/2026/11/15/.cache/512/20261115500344.jpg"
-            ],
-            "press": [
-              "국민일보"
-            ],
-            "headlines": [
-              "[단독] 금감원 “AI 부정행위 세무사 수석, 회계사 1차 시험 불합격”",
-              "[단독] 세무사 회 “ 부정행위 자 합격 무효 요구…기준 미달시 수습 교육..."
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-15T15:09:30.544Z"
-          }
-        },
-        {
-          "id": "nate-2",
-          "rank": 2,
-          "keyword": "100일의 거짓말",
-          "title": "100일의 거짓말",
-          "rawKeyword": "100일의 거짓말",
-          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
-          "priority": 99,
-          "source": "nate",
-          "expansions": [
-            "100일의 거짓말 몇부작",
-            "100일의 거짓말 나무위키",
-            "100일의 거짓말 시청률",
-            "100일의 거짓말 등장인물",
-            "100일의 거짓말 재방송",
-            "100일의 거짓말 원작",
-            "100일의 거짓말 작가",
-            "100일의 거짓말 ott"
-          ],
-          "expansionSeed": "100일의 거짓말",
-          "insight": {
-            "titles": {
-              "seo": "100일의 거짓말 최신 이슈와 핵심 내용 정리",
-              "home": "100일의 거짓말, '100일의 거짓말' 김현주♥이무생 서로 통했다..입맞춤 포스터까지 관련 확인할 점",
-              "topic": "100일의 거짓말",
-              "topicGroup": "네이트 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "배우 김현주와 이무생이 서로의 진심을 전한 가운데, 진선규의 위험한 초대가 어떤 파국을 일으킬지 관심이 쏠린다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "배우 진선규가 tvN 드라마 ‘ 100일의 거짓말 ’에서 총독부 폭발 사건의 단서를 추적하며 김유정을 향한 의심을 키웠다. 딸과의 대화에서는 과거의 기억을 떠올렸고, 김승억(이기영)과의 대면에서는 팽팽한 신경전을 벌였다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.sportschosun.com/entertainment/2026-11-15/202611150100099030009207",
-                "press": "스포츠조선"
-              },
-              {
-                "url": "https://sports.khan.co.kr/article/202611150813003?pt=nv",
-                "press": "스포츠경향"
-              }
-            ],
-            "images": [
-              "https://www.sportschosun.com/article/html/2026/11/15/2026111501000990300092071_w.jpg"
-            ],
-            "press": [
-              "스포츠조선",
-              "스포츠경향"
-            ],
-            "headlines": [
-              "'100일의 거짓말' 김현주♥이무생 서로 통했다..입맞춤 포스터까지",
-              "‘ 100일의 거짓말 ’ 진선규, 김유정에 꽂혔다"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
-          }
-        },
-        {
-          "id": "nate-3",
-          "rank": 3,
-          "keyword": "한동훈 진형구 별세",
-          "title": "한동훈 진형구 별세",
-          "rawKeyword": "한동훈 진형구 별세",
-          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
-          "priority": 98,
-          "source": "nate",
-          "expansions": [
-            "한동훈 지지율",
-            "한동훈 복당",
-            "한동훈 자녀",
-            "한동훈프로필",
-            "한동훈 창당",
-            "한동훈팬카페",
-            "한동훈 오세훈",
-            "한동훈 징계"
-          ],
-          "expansionSeed": "한동훈",
-          "insight": {
-            "titles": {
-              "seo": "한동훈 진형구 별세 최신 이슈와 핵심 내용 정리",
-              "home": "한동훈 진형구 별세, '한동훈 장인' 진형구 전 대전고검장 별세…향년 81세 관련 확인할 점",
-              "topic": "한동훈 진형구 별세",
-              "topicGroup": "네이트 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "(서울=연합뉴스) 최윤선 기자 = 무소속 한동훈 의원 장인인 진형구 전 대전고검장이 15일 별세했다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "한동훈 무소속 의원의 장인인 진형구 (사진) 전 대전고검장이 15일 별세 했다. 진 전 고검장은 경기도 광주 출신으로 경복고와 서울대 전기공학과를 졸업했다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.yna.co.kr/view/AKR20261115026100004?input=1195m",
-                "press": "연합뉴스"
-              },
-              {
-                "url": "https://www.joongang.co.kr/article/25478828",
-                "press": "중앙일보"
-              }
-            ],
-            "images": [
-              "https://img6.yna.co.kr/photo/cms/2009/06/08/02/C0A8CA3D00000121BFC327E400001DD7_P4.jpeg"
-            ],
-            "press": [
-              "연합뉴스",
-              "중앙일보"
-            ],
-            "headlines": [
-              "'한동훈 장인' 진형구 전 대전고검장 별세…향년 81세",
-              "한동훈 장인 진형구 전 고검장 별세"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-15T15:09:30.544Z"
-          }
-        },
-        {
-          "id": "nate-4",
-          "rank": 4,
-          "keyword": "전월세 물가 3년",
-          "title": "전월세 물가 3년",
-          "rawKeyword": "전월세 물가 3년",
-          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
-          "priority": 97,
-          "source": "nate",
-          "expansions": [
-            "전월세 전환율",
-            "전월세보증금대출",
-            "전월세 계산기",
-            "전월세신고",
-            "전월세 임대차 신고",
-            "전월세대출",
-            "청년전월세대출",
-            "전월세 안심신탁"
-          ],
-          "expansionSeed": "전월세",
-          "insight": {
-            "titles": {
-              "seo": "전월세 물가 3년 최신 이슈와 핵심 내용 정리",
-              "home": "전월세 물가 3년, 전월세, 3년10개월 만에 최대 상승‥넉달 째 상승폭 확대 관련 확인할 점",
-              "topic": "전월세 물가 3년",
-              "topicGroup": "네이트 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "지난달 전월세 물가가 3년 10개월 만에 가장 큰 폭으로 상승했습니다. 국가데이터처 조사 결과, 지난달 전월세 소비자물가지수는 1년 전보다",
-                "sourceIndex": 0
-              },
-              {
-                "text": "지난달 전월세 물가 상승률은 3년 10개월 만에 최고 수준을 기록했고 전세자금대출 금리도 연 4%대 중반으로 높아졌다. 보증금 마련을 위한 대출액이 6년 전보다",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://imnews.imbc.com/news/2026/econo/article/6865789_36932.html",
-                "press": "MBC"
-              },
-              {
-                "url": "https://www.news1.kr/economy/trend/6354215",
-                "press": "뉴스1"
-              }
-            ],
-            "images": [
-              "https://image.imnews.imbc.com/news/2026/econo/article/__icsFiles/afieldfile/2026/11/15/yh_20261115-13.jpg"
-            ],
-            "press": [
-              "MBC",
-              "뉴스1"
-            ],
-            "headlines": [
-              "전월세, 3년10개월 만에 최대 상승‥넉달 째 상승폭 확대",
-              "전월세 상승률 3년 10개월 만에 최고…대출금리도 올라 '이중고'"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-15T15:09:30.544Z"
-          }
-        },
-        {
-          "id": "nate-5",
-          "rank": 5,
-          "keyword": "젠슨 복귀 청원",
-          "title": "젠슨 복귀 청원",
-          "rawKeyword": "젠슨 복귀 청원",
-          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
-          "priority": 96,
           "source": "nate",
           "expansions": [
             "젠슨황",
@@ -1513,9 +1266,9 @@
           "expansionSeed": "젠슨",
           "insight": {
             "titles": {
-              "seo": "젠슨 복귀 청원 최신 이슈와 핵심 내용 정리",
-              "home": "젠슨 복귀 청원, 엔비디아 투자자, 젠슨황 복귀 요구 서한…온라인 청원도 열기 관련 확인할 점",
-              "topic": "젠슨 복귀 청원",
+              "seo": "젠슨 황 청원 최신 이슈와 핵심 내용 정리",
+              "home": "젠슨 황 청원, 엔비디아 투자자, 젠슨황 복귀 요구 서한…온라인 청원도 열기 관련 확인할 점",
+              "topic": "젠슨 황 청원",
               "topicGroup": "네이트 실시간 검색어"
             },
             "facts": [
@@ -1524,7 +1277,7 @@
                 "sourceIndex": 0
               },
               {
-                "text": "15일 금융투자업계에 따르면 박 회장은 황 전 CEO를 복귀 시켜야 한다는 온라인 청원 인 '스탠드 위드 젠슨 '에 참여했다.",
+                "text": "15일 금융투자업계에 따르면 박 회장은 황 전 CEO를 복귀시켜야 한다는 온라인 청원 인 '스탠드 위드 젠슨 '에 참여했다.",
                 "sourceIndex": 1
               }
             ],
@@ -1550,7 +1303,257 @@
               "박현주 미래에셋 회장, ' 젠슨 황 복귀 청원 ' 동참"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T15:09:30.544Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
+          }
+        },
+        {
+          "id": "nate-2",
+          "rank": 2,
+          "keyword": "문무 드라마",
+          "title": "문무",
+          "rawKeyword": "문무",
+          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
+          "priority": 99,
+          "source": "nate",
+          "expansions": [
+            "문무 드라마",
+            "문무대왕",
+            "문무 등장인물",
+            "문무왕",
+            "문무 몇부작",
+            "경주 문무대왕릉",
+            "문무 ott",
+            "문무 출연진"
+          ],
+          "expansionSeed": "문무",
+          "insight": {
+            "titles": {
+              "seo": "문무 드라마 제작비 300억 투입한 KBS 대하극, 출연진은",
+              "home": "문무 드라마, 300억 들인 KBS 대하극 출연진에서 의외로 눈에 띈 배우",
+              "topic": "문무 드라마",
+              "topicGroup": "네이트 실시간 검색어",
+              "summary": "KBS가 약 300억원을 투입한 대하드라마 '문무'를 선보인다. 이현욱이 제작발표회에 참석했다.",
+              "aiTitled": true
+            },
+            "facts": [
+              {
+                "text": "KBS 2TV 대하 드라마 ‘ 문무 ’가 첫 방송에서 신라와 고구려의 정치적 갈등을 그렸다. 김춘추와 김법민 부자의 갈등, 연개소문의 반역이 맞물리며 삼국의 정세를 둘러싼 이야기가 시작됐다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "기자 = KBS 2TV 새 대하 드라마 ' 문무 '가 4%대 시청률로 출발했다. 15일 시청률 조사회사 닐슨코리아에 따르면 전날 방영된 ' 문무 ' 1회 시청률은 4.7%(전국 기준)로 집계됐다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://sports.khan.co.kr/article/202611150957003?pt=nv",
+                "press": "스포츠경향"
+              },
+              {
+                "url": "https://www.yna.co.kr/view/AKR20261115017900005?input=1195m",
+                "press": "연합뉴스"
+              }
+            ],
+            "images": [
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F144%2F2026%2F11%2F15%2F1149848.jpg&type=fface200_200&expire=2&refresh=true"
+            ],
+            "press": [
+              "스포츠경향",
+              "연합뉴스"
+            ],
+            "headlines": [
+              "403 Forbidden",
+              "삼국 갈등 속 격변의 서막…KBS 대하 드라마 ' 문무 ' 4.7% 출발"
+            ],
+            "extraction": "search-card",
+            "collectedAt": "2026-11-15T16:09:13.733Z"
+          }
+        },
+        {
+          "id": "nate-3",
+          "rank": 3,
+          "keyword": "국가자격시험 부정행위 전수조사",
+          "title": "국가자격시험 부정행위 전수조사",
+          "rawKeyword": "국가자격시험 부정행위 전수조사",
+          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
+          "priority": 98,
+          "source": "nate",
+          "expansions": [
+            "ts국가자격시험",
+            "부산국가자격시험장",
+            "서울국가자격시험장",
+            "대전국가자격시험장",
+            "인천국가자격시험장",
+            "서울남부국가자격시험장",
+            "서울동부국가자격시험장",
+            "서울서부국가자격시험장"
+          ],
+          "expansionSeed": "국가자격시험",
+          "insight": {
+            "titles": {
+              "seo": "국가자격시험 부정행위 전수조사 최신 이슈와 핵심 내용 정리",
+              "home": "국가자격시험 부정행위 전수조사, 靑 \"국가자격시험 전체 AI활용 부정행위 의심 사례 전수조사\" 관련 확인할 점",
+              "topic": "국가자격시험 부정행위 전수조사",
+              "topicGroup": "네이트 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "청와대는 이날 회의에서 국가자격시험 전체에 대해 AI 활용 부정행위 의심 사례를 전수 조사 하기로 했다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "청와대는 15일 “모든 국가자격시험 의 인공지능(AI) 활용 부정행위 의심 사례를 전수 조사 할 것”이라고 밝혔다. 이날 청와대는 하준경 정책실장 주재로 ‘AI 활용 부정 시험 확산 방지 긴급대책회의’를 개최했다고 밝혔다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.yna.co.kr/view/AKR20261115040900001?input=1195m",
+                "press": "연합뉴스"
+              },
+              {
+                "url": "https://biz.chosun.com/policy/politics/president_office/2026/11/15/OJUWNTSRZFHIZN5NU7WZD7LKK4/?utm_source=naver&utm_medium=original&utm_campaign=biz",
+                "press": "조선비즈"
+              }
+            ],
+            "images": [
+              "https://img2.yna.co.kr/photo/cms/2026/05/06/63/PCM20260506000063990_P4.jpg"
+            ],
+            "press": [
+              "연합뉴스",
+              "조선비즈"
+            ],
+            "headlines": [
+              "靑 \"국가자격시험 전체 AI활용 부정행위 의심 사례 전수조사\"",
+              "靑 “모든 국가자격시험 AI 활용 부정행위 의심사례 전수조사 ”"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-15T16:09:13.733Z"
+          }
+        },
+        {
+          "id": "nate-4",
+          "rank": 4,
+          "keyword": "고경표 활동 중단",
+          "title": "고경표 활동 중단",
+          "rawKeyword": "고경표 활동 중단",
+          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
+          "priority": 97,
+          "source": "nate",
+          "expansions": [
+            "고경표 나무위키",
+            "고경표 막국수",
+            "놀면뭐하니 고경표",
+            "고경표 차",
+            "고경표 사랑했잖아",
+            "고경표 입금전",
+            "고경표 사주",
+            "고경표갤러리"
+          ],
+          "expansionSeed": "고경표",
+          "insight": {
+            "titles": {
+              "seo": "고경표 활동 중단 최신 이슈와 핵심 내용 정리",
+              "home": "고경표 활동 중단, '음주운전' 고경표 \"전적으로 제 잘못…활동 중단\" 관련 확인할 점",
+              "topic": "고경표 활동 중단",
+              "topicGroup": "네이트 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "(서울=연합뉴스) 조윤희 기자 = 배우 고경표가 음주운전 사고를 낸 데 대해 사과와 함께 활동 중단을 선언했다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "음주운전 사고를 낸 배우 고경표 가 예정된 활동 을 모두 중단 하겠다고 밝혔습니다. 고경표 는 15일 자신의 사회관계망서비스(SNS)에 '죄송합니다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.yna.co.kr/view/AKR20261115044500005?input=1195m",
+                "press": "연합뉴스"
+              },
+              {
+                "url": "https://news.jtbc.co.kr/article/NB12328178?influxDiv=NAVER",
+                "press": "JTBC"
+              }
+            ],
+            "images": [
+              "https://img3.yna.co.kr/photo/cms/2022/08/16/81/PCM20220816000081005_P4.jpg"
+            ],
+            "press": [
+              "연합뉴스",
+              "JTBC"
+            ],
+            "headlines": [
+              "'음주운전' 고경표 \"전적으로 제 잘못…활동 중단\"",
+              "'음주운전 사고' 고경표 \" 활동 중단 ...경찰 조사 성실히 응할 것\""
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-15T16:09:13.733Z"
+          }
+        },
+        {
+          "id": "nate-5",
+          "rank": 5,
+          "keyword": "김민석 최민희 윤리심판원",
+          "title": "김민석 최민희 윤리심판원",
+          "rawKeyword": "김민석 최민희 윤리심판원",
+          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
+          "priority": 96,
+          "source": "nate",
+          "expansions": [
+            "멜로망스 김민석",
+            "김민석 국무총리",
+            "김민석 신천지",
+            "김민석 배우",
+            "김민석 두산",
+            "김민석 태극기",
+            "김민석 김우석",
+            "김민석 뇌출혈"
+          ],
+          "expansionSeed": "김민석",
+          "insight": {
+            "titles": {
+              "seo": "김민석 최민희 윤리심판원 최신 이슈와 핵심 내용 정리",
+              "home": "김민석 최민희 윤리심판원, 김민석, '최민희 발언 논란' 윤리심판원 이첩 지시…징계 수순 관련 확인할 점",
+              "topic": "김민석 최민희 윤리심판원",
+              "topicGroup": "네이트 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "(서울=연합뉴스) 안정훈 기자 = 더불어민주당 김민석 대표는 15일 당 최고위원인 최민희 의원의 언행 논란에 대해 윤리심판원 이첩을 지시했다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "민주당은 이날 오후 공지를 내고 \" 김민석 당대표는 최민희 최고위원에 대한 윤리 감찰단의 감찰 조사 결과를 보고받고, 중앙당 윤리심판원 으로 이첩을 지시했다\"고 밝혔다. 앞서 최 최고위원이 지난달 지역구 당원들과의 비공개 간담회에서 '이재명 대통령도 윤석열 전 대통령 탄핵에 반대했었다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.yna.co.kr/view/AKR20261115044451001?input=1195m",
+                "press": "연합뉴스"
+              },
+              {
+                "url": "https://www.newsis.com/view/NISX20261115_0003868803",
+                "press": "뉴시스"
+              }
+            ],
+            "images": [
+              "https://img2.yna.co.kr/photo/yna/YH/2026/11/06/PYH2026110604050001300_P4.jpg"
+            ],
+            "press": [
+              "연합뉴스",
+              "뉴시스"
+            ],
+            "headlines": [
+              "김민석, '최민희 발언 논란' 윤리심판원 이첩 지시…징계 수순",
+              "김민석 , 최민희 감찰 윤리심판원 이첩…친청계 \"金 징계청원도 접수\"(종..."
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         }
       ]
@@ -1620,7 +1623,7 @@
               "“ 전세사기 보증금 3분의1은 구제” 13일부터 ‘최소보장제’ 시행 [부..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
@@ -1682,7 +1685,7 @@
               "[2026 국감] ' 책무구조도 ' 도입후 금융사고 203건… 제재 '0건'"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
@@ -1744,7 +1747,7 @@
               "韓 수출 93% 급증 이끈 글로벌 AI 투자…\"꺼지면 침체 못막아\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
@@ -1806,7 +1809,7 @@
               "LH 임대주택 150만호 돌파…하자관리·화재안전 대책 강화"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
@@ -1868,7 +1871,7 @@
               "한은 총재 \" 금리 동결은 '호미질'의 결실…긴축기조 이어간다\"(종합)"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         }
       ]
@@ -1927,7 +1930,7 @@
               "'강정호도 아니라는데' 키움은 또 틀렸고 NC는 옳았다...데이비슨, 확실히 하락세, 키움 2용타 완전 실패"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
@@ -1990,7 +1993,7 @@
               "'韓 수비 에이스 ' 김민재 미쳤다 , 독일 생활 마침표 찍고 EPL 입성할까....."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
@@ -2043,7 +2046,7 @@
               "403 Forbidden"
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-15T15:09:30.544Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
@@ -2106,7 +2109,7 @@
               "[공식발표] ' 손흥민 선발 명단 제외 ' LAFC, 콜로라도전 'BEST 11' 공개!…..."
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-15T15:09:30.544Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
@@ -2159,7 +2162,7 @@
               "\"와, 대박이다!\" 7번 물려준 그리즈만도 환호성...'데뷔전 데뷔골' 이강인 '후계자 자격' 완벽 증명"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
@@ -2212,7 +2215,7 @@
               "'와' 한국 야구 대박 터지나! 17억 이도류 유망주 156km '쾅'→2이닝 4K 무실점 호투...\"정말 인상적\" 美 극찬 이어져"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
@@ -2265,7 +2268,7 @@
               "[오피셜] 이럴수가, 배지환 ML 생존 벼랑 끝 몰렸다! 30개 구단 모두 외면…웨이버 통과→트리플A 이관 \"FA 선택할 듯\" 美 전망"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
@@ -2318,7 +2321,7 @@
               "안세영이 돌아왔다! 압승, 쾌승!…유럽 최강자 블리치펠트 43분 만에 2-0 완파→세계선수권 8강행 성공"
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-15T15:09:30.544Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
@@ -2373,7 +2376,7 @@
               "[오피셜] '충격' 아슬아슬했던 전북현대 끝내 무너졌다...디펜딩 챔피언 코리아컵 16강 탈락, K3 당진 '자이언트 킬링' 성공→8개 팀 생존"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
@@ -2436,7 +2439,7 @@
               "\"여전히 토트넘 이 그리워요\"... 떠난 지 1년 반, 하지만 여전히 토트넘 이..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         }
       ]
@@ -2480,7 +2483,7 @@
                 "sourceIndex": 0
               },
               {
-                "text": "박성민 국회의원(울산 중구·국민의힘)은 아이돌봄서비스 품질을 직접 확인할 수 있도록 하는 '아이돌봄 지원법 일부개정법률안'을 대표 발의했다고 13일 밝혔다. 아이돌봄서비스 는 양육 공백이 발생한 가정 12세 이하 아동을 대상으로 아이돌봄사가 찾아가 돌봄 서비스를 제공하는 사업이다.",
+                "text": "▲ 국민의힘 박성민(울산 중구·사진) 의원부모가 아이돌봄서비스 의 품질과 안전성을 직접 확인해 안심하고 이용할 수 있도록 하는 법 개정이 추진된다. 국민의힘 박성민(울산 중구·사진) 의원은 이 같은 내용을 주요",
                 "sourceIndex": 1
               }
             ],
@@ -2490,8 +2493,8 @@
                 "press": "매일신문"
               },
               {
-                "url": "https://www.yna.co.kr/view/AKR20261113133700057?input=1195m",
-                "press": "연합뉴스"
+                "url": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1072579",
+                "press": "경상일보"
               }
             ],
             "images": [
@@ -2499,14 +2502,14 @@
             ],
             "press": [
               "매일신문",
-              "연합뉴스"
+              "경상일보"
             ],
             "headlines": [
               "박성민 의원 , 부모 알 권리 강화한 '아이돌봄 지원법 개정안' 대표발의",
-              "박성민 의원, ' 아이돌봄서비스 품질 공개' 법률개정안 발의"
+              "아이돌봄서비스 내용, 정기평가·공개 의무화"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
@@ -2565,7 +2568,7 @@
               "경북도의회 문화 환경위, 행정사무감사서 도정 전반 송곳 검증…“예산..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
@@ -2620,7 +2623,7 @@
               "복지부-23개 장애인 단체, 정책 현안 논의를 위한 대규모 소통의 장 마련"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
@@ -2674,7 +2677,7 @@
               "서영석 의원, 의료급여 수급권자 장기 요양비 국가 80% 부담 법안 발의"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
@@ -2733,7 +2736,7 @@
               "전북 첫 발달 장애인 특화사업장 '가치만드소' 익산에 개소"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
@@ -2758,7 +2761,7 @@
             },
             "facts": [
               {
-                "text": "질병청 '만성질환 예방관리 유공 포상·콘퍼런스'만성질환, 국내 사망원인 상위 10개 중 대다수 [서울=뉴시스] 정병혁 기자 = 서울의 한 대학병원에서 환자가 보호자와 함께 이동하고 있다. jhope@newsis.com[세종=뉴시스] 강진아 기자 = 암(악성신생물)과 심장질환, 뇌혈관질환 등 만성질환이 국내 사망원인 상위 10개 항목의 대다수를 차지하는 것으로 나타났다. 만성질환 진료비는 전체 진료비의 84.5%에 달했다.",
+                "text": "이에 질병청은 현재 전국 226개 시군구 중 19개(8%)에서 운영되는 고혈압 · 당뇨병 등록관리사업 의 운영체계를 개편해 지역 간 건강관리 서비스 격차를 해소할 계획이다. 기존 30세 이상 고혈압·당뇨병 환자 중심의 관리 대상을 전 연령 및 다른 질환까지 확대할 예정이다.",
                 "sourceIndex": 0
               },
               {
@@ -2788,7 +2791,7 @@
               "고당 사업 의료비 지원 전액 삭감…66만명 등록관리 '흔들'"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
@@ -2840,7 +2843,7 @@
               "포항·서산, 고용위기 선제대응지역 지정 1년 연장"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
@@ -2902,7 +2905,7 @@
               "겨울철 에너지 취약계층 연 51만4000원 지원 …경로당 난방비 월 40만원"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
@@ -2922,43 +2925,43 @@
           "insight": {
             "titles": {
               "seo": "시간제보육 지원 최신 이슈와 핵심 내용 정리",
-              "home": "시간제보육 지원, 잠시만 기다리십시오… 관련 확인할 점",
+              "home": "시간제보육 지원, 이제성 의원, '용인형 365 열린 시간제 어린이집' 제안…주말·야간 돌봄 공백 해소 관련 확인할 점",
               "topic": "시간제보육 지원",
               "topicGroup": "정책 실시간 검색어"
             },
             "facts": [
               {
-                "text": "열린 시간제 어린이집' 우수 사례를 소개했다.",
+                "text": "이 의원은 기존 시립어린이집과 육아종합 지원 센터를 활용하되, 전담 교사의 근무 환경과 야간 안전 대책도 함께 준비해야 한다고 덧붙였다.",
                 "sourceIndex": 0
               },
               {
-                "text": "365일 24시간 시간제 보육 도입, 구슬모음어린이집 등 어린이집 간 협력 모델 운영, 다함께돌봄센터 및 연장 보육 간식비 지원 등 돌봄 공백 해소를 위한 다양한 프로그램이 이번 평가에서 높은 평가를 받았다.",
+                "text": "열린 시간제 어린이집' 우수 사례를 소개했다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.fnnews.com/news/202611131624171390",
-                "press": "파이낸셜뉴스"
+                "url": "https://www.gukjenews.com/news/articleView.html?idxno=3752556",
+                "press": "국제뉴스"
               },
               {
-                "url": "http://www.gndomin.com/news/articleView.html?idxno=496783",
-                "press": "경남도민신문"
+                "url": "https://www.fnnews.com/news/202611131624171390",
+                "press": "파이낸셜뉴스"
               }
             ],
             "images": [
-              "https://www.fnnews.com/favicon.ico"
+              "https://cdn.gukjenews.com/news/thumbnail/202611/3752556_3934823_1944_v150.jpg"
             ],
             "press": [
-              "파이낸셜뉴스",
-              "경남도민신문"
+              "국제뉴스",
+              "파이낸셜뉴스"
             ],
             "headlines": [
-              "잠시만 기다리십시오…",
-              "진주시 역사공간과 보육 정책으로 도시 경쟁력 높인다"
+              "이제성 의원, '용인형 365 열린 시간제 어린이집' 제안…주말·야간 돌봄 공백 해소",
+              "이제성 용인시의원, '용인형 365 열린 시간제 어린이집' 도입 제안"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
@@ -3020,7 +3023,7 @@
               "씨 마른 강남권 분양 에…서울 1순위 청약자 4년 만에 최저"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         }
       ]
@@ -3032,11 +3035,69 @@
         {
           "id": "issue-1",
           "rank": 1,
+          "keyword": "\"올해 안 될 수밖에 없다\"..고경표, 음주운전 한 달 전 비비 발언 재조명",
+          "title": "\"올해 안 될 수밖에 없다\"..고경표, 음주운전 한 달 전 비비 발언 재조명",
+          "rawKeyword": "\"올해 안 될 수밖에 없다\"..고경표, 음주운전 한 달 전 비비 발언 재조명",
+          "description": "스타뉴스 최신 기사 · \"올해 안 될 수밖에 없다\"..고경표, 음주운전 한 달 전 비비 발언 재조명",
+          "priority": 100,
+          "source": "issue",
+          "officialUrl": "https://www.starnewskorea.com/star/2026/11/16/2026111523595041345",
+          "sourceLabel": "스타뉴스",
+          "expansions": [
+            "에뛰드 재조명",
+            "재조명 뜻",
+            "재조명하다",
+            "재조명하다 뜻",
+            "재조명 재창조",
+            "수밖에",
+            "사랑할수밖에",
+            "비밀일수밖에"
+          ],
+          "expansionSeed": "올해",
+          "ago": "46분 전",
+          "agoMinutes": 46,
+          "publishedLabel": "2026-11-15T15:22:06.000Z",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111523595041345_1.jpg",
+          "insight": {
+            "titles": {
+              "seo": "\"올해 안 될 수밖에 없다\"..고경표, 음주운전 한 달 전 비비 발언 재조명 최신 이슈와 핵심 내용 정리",
+              "home": "\"올해 안 될 수밖에 없다\"..고경표, 음주운전 한 달 전 비비 발언 재조명, \"올해 안 될 수밖에 없다\"..고경표, 음주운전 한 달 전 비비 발언 재조명 관련 확인할 점",
+              "topic": "\"올해 안 될 수밖에 없다\"..고경표, 음주운전 한 달 전 비비 발언 재조명",
+              "topicGroup": "이슈 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "스타뉴스 최신 기사 · \"올해 안 될 수밖에 없다\"..고경표, 음주운전 한 달 전 비비 발언 재조명",
+                "sourceIndex": 0
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.starnewskorea.com/star/2026/11/16/2026111523595041345",
+                "press": "스타뉴스"
+              }
+            ],
+            "images": [
+              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111523595041345_1.jpg"
+            ],
+            "press": [
+              "스타뉴스"
+            ],
+            "headlines": [
+              "\"올해 안 될 수밖에 없다\"..고경표, 음주운전 한 달 전 비비 발언 재조명"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-15T16:09:13.733Z"
+          }
+        },
+        {
+          "id": "issue-2",
+          "rank": 2,
           "keyword": "김진표, 강도에 흉기 피습 고백 \"칼 맞은 적 있어\"..경호원까지 대동",
           "title": "김진표, 강도에 흉기 피습 고백 \"칼 맞은 적 있어\"..경호원까지 대동",
           "rawKeyword": "김진표, 강도에 흉기 피습 고백 \"칼 맞은 적 있어\"..경호원까지 대동",
           "description": "스타뉴스 최신 기사 · 김진표, 강도에 흉기 피습 고백 \"칼 맞은 적 있어\"..경호원까지 대동",
-          "priority": 100,
+          "priority": 99,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/star/2026/11/15/2026111523182456506",
           "sourceLabel": "스타뉴스",
@@ -3087,13 +3148,13 @@
           }
         },
         {
-          "id": "issue-2",
-          "rank": 2,
+          "id": "issue-3",
+          "rank": 3,
           "keyword": "허경환, 숨겨둔 여친 있나..설운도 \"결혼식만 안 했지 여자 있다\"",
           "title": "허경환, 숨겨둔 여친 있나..설운도 \"결혼식만 안 했지 여자 있다\"",
           "rawKeyword": "허경환, 숨겨둔 여친 있나..설운도 \"결혼식만 안 했지 여자 있다\"",
           "description": "스타뉴스 최신 기사 · 허경환, 숨겨둔 여친 있나..설운도 \"결혼식만 안 했지 여자 있다\"",
-          "priority": 99,
+          "priority": 98,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/broadcast-show/2026/11/15/2026111522070841761",
           "sourceLabel": "스타뉴스",
@@ -3140,17 +3201,17 @@
               "허경환, 숨겨둔 여친 있나..설운도 \"결혼식만 안 했지 여자 있다\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
-          "id": "issue-3",
-          "rank": 3,
+          "id": "issue-4",
+          "rank": 4,
           "keyword": "비, ♥김태희와 결혼 10년차에도 \"아침에 감동..이래도 예쁘구나\"",
           "title": "비, ♥김태희와 결혼 10년차에도 \"아침에 감동..이래도 예쁘구나\"",
           "rawKeyword": "비, ♥김태희와 결혼 10년차에도 \"아침에 감동..이래도 예쁘구나\"",
           "description": "스타뉴스 최신 기사 · 비, ♥김태희와 결혼 10년차에도 \"아침에 감동..이래도 예쁘구나\"",
-          "priority": 98,
+          "priority": 97,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/broadcast-show/2026/11/15/2026111522250113127",
           "sourceLabel": "스타뉴스",
@@ -3179,35 +3240,45 @@
               {
                 "text": "스타뉴스 최신 기사 · 비, ♥김태희와 결혼 10년차에도 \"아침에 감동..이래도 예쁘구나\"",
                 "sourceIndex": 0
+              },
+              {
+                "text": "이날 비는 \"사랑하는 사람과 결혼 했고 아침에 눈 떠도 '와 이래도 예쁘구나 하는 감동 이 있다\"라고 말했다. 가수 겸 배우 비의 끝없는 ' 김태희 ' 자랑에 성시경이 연신 부러워했다.",
+                "sourceIndex": 1
               }
             ],
             "links": [
               {
                 "url": "https://www.starnewskorea.com/broadcast-show/2026/11/15/2026111522250113127",
                 "press": "스타뉴스"
+              },
+              {
+                "url": "https://www.spotvnews.co.kr/news/articleView.html?idxno=1019976",
+                "press": "스포티비뉴스"
               }
             ],
             "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111522250113127_1.jpg"
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F477%2F2026%2F11%2F15%2F639216.jpg&type=fface200_200&expire=2&refresh=true"
             ],
             "press": [
-              "스타뉴스"
+              "스타뉴스",
+              "스포티비뉴스"
             ],
             "headlines": [
-              "비, ♥김태희와 결혼 10년차에도 \"아침에 감동..이래도 예쁘구나\""
+              "비, ♥김태희와 결혼 10년차에도 \"아침에 감동..이래도 예쁘구나\"",
+              "\" 아침에 눈 뜰 때마다 ♥김태희 얼굴에 감동 \" 비, 결혼 10년차에도 '사랑..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
-          "id": "issue-4",
-          "rank": 4,
+          "id": "issue-5",
+          "rank": 5,
           "keyword": "남진, 아내에게 꽉 잡혀 산다..\"집안 편하려면 그렇게 살아야\"",
           "title": "남진, 아내에게 꽉 잡혀 산다..\"집안 편하려면 그렇게 살아야\"",
           "rawKeyword": "남진, 아내에게 꽉 잡혀 산다..\"집안 편하려면 그렇게 살아야\"",
           "description": "스타뉴스 최신 기사 · 남진, 아내에게 꽉 잡혀 산다..\"집안 편하려면 그렇게 살아야\"",
-          "priority": 97,
+          "priority": 96,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/broadcast-show/2026/11/15/2026111521215514394",
           "sourceLabel": "스타뉴스",
@@ -3254,17 +3325,17 @@
               "남진, 아내에게 꽉 잡혀 산다..\"집안 편하려면 그렇게 살아야\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
-          "id": "issue-5",
-          "rank": 5,
+          "id": "issue-6",
+          "rank": 6,
           "keyword": "지수, 블랙핑크 10년 우정 비결 밝혔다 \"대놓고 이상하다 해\"",
           "title": "지수, 블랙핑크 10년 우정 비결 밝혔다 \"대놓고 이상하다 해\"",
           "rawKeyword": "지수, 블랙핑크 10년 우정 비결 밝혔다 \"대놓고 이상하다 해\"",
           "description": "스타뉴스 최신 기사 · 지수, 블랙핑크 10년 우정 비결 밝혔다 \"대놓고 이상하다 해\"",
-          "priority": 96,
+          "priority": 95,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/broadcast-show/2026/11/15/2026111521474013404",
           "sourceLabel": "스타뉴스",
@@ -3311,17 +3382,17 @@
               "지수, 블랙핑크 10년 우정 비결 밝혔다 \"대놓고 이상하다 해\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
-          "id": "issue-6",
-          "rank": 6,
+          "id": "issue-7",
+          "rank": 7,
           "keyword": "에이티즈 최산, 과거 사진 공개에 술렁 \"14kg 벌크업 위해 6끼 먹어\"",
           "title": "에이티즈 최산, 과거 사진 공개에 술렁 \"14kg 벌크업 위해 6끼 먹어\"",
           "rawKeyword": "에이티즈 최산, 과거 사진 공개에 술렁 \"14kg 벌크업 위해 6끼 먹어\"",
           "description": "스타뉴스 최신 기사 · 에이티즈 최산, 과거 사진 공개에 술렁 \"14kg 벌크업 위해 6끼 먹어\"",
-          "priority": 95,
+          "priority": 94,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/broadcast-show/2026/11/15/2026111521302167542",
           "sourceLabel": "스타뉴스",
@@ -3368,17 +3439,17 @@
               "에이티즈 최산, 과거 사진 공개에 술렁 \"14kg 벌크업 위해 6끼 먹어\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
-          "id": "issue-7",
-          "rank": 7,
+          "id": "issue-8",
+          "rank": 8,
           "keyword": "변요한♥티파니 부부, 시상하랬더니 애정행각 \"너무 사랑스러워\"",
           "title": "변요한♥티파니 부부, 시상하랬더니 애정행각 \"너무 사랑스러워\"",
           "rawKeyword": "변요한♥티파니 부부, 시상하랬더니 애정행각 \"너무 사랑스러워\"",
           "description": "스타뉴스 최신 기사 · 변요한♥티파니 부부, 시상하랬더니 애정행각 \"너무 사랑스러워\"",
-          "priority": 94,
+          "priority": 93,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/star/2026/11/15/2026111521114318392",
           "sourceLabel": "스타뉴스",
@@ -3435,17 +3506,17 @@
               "“ 너무 사랑스러워 서”… 변요한 · 티파니 영 부부, 시상하랬더니 애정 행..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
-          "id": "issue-8",
-          "rank": 8,
+          "id": "issue-9",
+          "rank": 9,
           "keyword": "'비혼주의' 김완선, 26세 연하 안효섭에 반했다..\"결혼하자면 당장\"",
           "title": "'비혼주의' 김완선, 26세 연하 안효섭에 반했다..\"결혼하자면 당장\"",
           "rawKeyword": "'비혼주의' 김완선, 26세 연하 안효섭에 반했다..\"결혼하자면 당장\"",
           "description": "스타뉴스 최신 기사 · '비혼주의' 김완선, 26세 연하 안효섭에 반했다..\"결혼하자면 당장\"",
-          "priority": 93,
+          "priority": 92,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/broadcast-show/2026/11/15/2026111520521424686",
           "sourceLabel": "스타뉴스",
@@ -3492,17 +3563,17 @@
               "'비혼주의' 김완선, 26세 연하 안효섭에 반했다..\"결혼하자면 당장\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         },
         {
-          "id": "issue-9",
-          "rank": 9,
+          "id": "issue-10",
+          "rank": 10,
           "keyword": "\"모든 책임질 것\" 고경표, 만취 운전으로 민폐 전락..하루만 사과→활동 올스톱",
           "title": "\"모든 책임질 것\" 고경표, 만취 운전으로 민폐 전락..하루만 사과→활동 올스톱",
           "rawKeyword": "\"모든 책임질 것\" 고경표, 만취 운전으로 민폐 전락..하루만 사과→활동 올스톱",
           "description": "스타뉴스 최신 기사 · \"모든 책임질 것\" 고경표, 만취 운전으로 민폐 전락..하루만 사과→활동 올스톱",
-          "priority": 92,
+          "priority": 91,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/star/2026/11/15/2026111520350940950",
           "sourceLabel": "스타뉴스",
@@ -3549,68 +3620,11 @@
               "\"모든 책임질 것\" 고경표, 만취 운전으로 민폐 전락..하루만 사과→활동 올스톱"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
-          }
-        },
-        {
-          "id": "issue-10",
-          "rank": 10,
-          "keyword": "윤후 \"'아빠 어디가' 시절 흑역사..짜파게티 먹방도 기억 안 나\"",
-          "title": "윤후 \"'아빠 어디가' 시절 흑역사..짜파게티 먹방도 기억 안 나\"",
-          "rawKeyword": "윤후 \"'아빠 어디가' 시절 흑역사..짜파게티 먹방도 기억 안 나\"",
-          "description": "스타뉴스 최신 기사 · 윤후 \"'아빠 어디가' 시절 흑역사..짜파게티 먹방도 기억 안 나\"",
-          "priority": 91,
-          "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/star/2026/11/15/2026111520252666894",
-          "sourceLabel": "스타뉴스",
-          "expansions": [
-            "윤후 최유빈",
-            "윤후 나무위키",
-            "윤후 아빠",
-            "윤후 좋을텐데",
-            "윤후 차",
-            "최유빈 윤후",
-            "기억의밤",
-            "기억을 걷는 시간"
-          ],
-          "expansionSeed": "윤후",
-          "ago": "2026.11.15 ・ 20:39",
-          "publishedLabel": "2026-11-15T11:39:36.000Z",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111520252666894_1.jpg",
-          "insight": {
-            "titles": {
-              "seo": "윤후 \"'아빠 어디가' 시절 흑역사..짜파게티 먹방도 기억 안 나\" 최신 이슈와 핵심 내용 정리",
-              "home": "윤후 \"'아빠 어디가' 시절 흑역사..짜파게티 먹방도 기억 안 나\", 윤후 \"'아빠 어디가' 시절 흑역사..짜파게티 먹방도 기억 안 나\" 관련 확인할 점",
-              "topic": "윤후 \"'아빠 어디가' 시절 흑역사..짜파게티 먹방도 기억 안 나\"",
-              "topicGroup": "이슈 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "스타뉴스 최신 기사 · 윤후 \"'아빠 어디가' 시절 흑역사..짜파게티 먹방도 기억 안 나\"",
-                "sourceIndex": 0
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.starnewskorea.com/star/2026/11/15/2026111520252666894",
-                "press": "스타뉴스"
-              }
-            ],
-            "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111520252666894_1.jpg"
-            ],
-            "press": [
-              "스타뉴스"
-            ],
-            "headlines": [
-              "윤후 \"'아빠 어디가' 시절 흑역사..짜파게티 먹방도 기억 안 나\""
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-15T14:14:07.838Z"
+            "collectedAt": "2026-11-15T16:09:13.733Z"
           }
         }
       ]
     }
   ],
-  "updatedAt": "2026-11-15T15:10:41.549Z"
+  "updatedAt": "2026-11-15T16:11:39.140Z"
 }
