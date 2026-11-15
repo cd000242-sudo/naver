@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-15T20:43:18.367Z",
+ "builtAt": "2026-11-15T20:53:22.236Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,13 +15,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
    "firstArticleAt": "2026-11-15T19:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이란, 두 달 만에 중동 미군기지 공격 재개",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-15T20:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926455?sid=104"
+    },
     {
      "title": "이란 혁명수비대 \"바레인 美 공군기지에 드론 공격 감행\"",
      "press": "news.tvchosun.com",
@@ -33,12 +39,6 @@
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-15T20:26:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002433229?sid=104"
-    },
-    {
-     "title": "美 공격 재개한 이란 \"바레인 내 미군기지 공격\"",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-15T19:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000543772?sid=101"
     }
    ]
   }
