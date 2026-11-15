@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-15T21:53:44.808Z",
+ "builtAt": "2026-11-15T22:03:48.139Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,17 +11,23 @@
  "measured": 22,
  "candidates": [
   {
-   "keyword": "젠슨 황 복귀 논의",
+   "keyword": "젠슨 황, 백악관 설득 중",
    "sources": [
     "nate"
    ],
-   "articles90": 45,
-   "recent20": 8,
-   "press": 38,
+   "articles90": 17,
+   "recent20": 3,
+   "press": 17,
    "firstArticleAt": "2026-11-15T20:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'반격' 젠슨 황, 워룸 꾸려 복귀 시동… 美 재무장관은 \"외부 수혈\"",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-15T22:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000965723?sid=104"
+    },
     {
      "title": "젠슨 황 복귀 추진…美 정부는 반대",
      "press": "bntnews.co.kr",
@@ -33,12 +39,38 @@
      "press": "newdaily.co.kr",
      "publishedAt": "2026-11-15T21:48:00.000Z",
      "link": "https://www.newdaily.co.kr/site/data/html/2026/11/16/2026111650008.html"
+    }
+   ]
+  },
+  {
+   "keyword": "세무사 수석",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 17,
+   "recent20": 3,
+   "press": 16,
+   "firstArticleAt": "2026-11-15T20:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[천지일보 이슈종합] 세무사 수석 합격자 AI 부정행위 시인·라우터 과부...",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-15T22:02:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3448908"
     },
     {
-     "title": "'전시 상황실' 꾸린 젠슨 황…사임 나흘 만에 복귀 움직임",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-15T21:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000520833?sid=104"
+     "title": "결국 ‘AI 컨닝’ 고백한 수석…시험공화국의 그늘을 보다[점선면]",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-15T22:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003482840?sid=102"
+    },
+    {
+     "title": "“성실하게 공부한 나는 뭐가 되나”…AI에 뚫린 세무사 시험, 수능 불안...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-15T21:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005764110?sid=100"
     }
    ]
   },
@@ -47,126 +79,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 7,
+   "articles90": 10,
+   "recent20": 2,
+   "press": 9,
    "firstArticleAt": "2026-11-15T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "AI 활용 부정행위 전수조사…사흘 남은 수능 감독 어쩌나[오늘아침]",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-15T22:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004209965?sid=102"
+    },
+    {
+     "title": "결국 ‘AI 컨닝’ 고백한 수석…시험공화국의 그늘을 보다[점선면]",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-15T22:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003482840?sid=102"
+    },
     {
      "title": "수능 사흘 앞두고 터진 'AI 커닝'…시험장 감독체계 비상",
      "press": "newsian.co.kr",
      "publishedAt": "2026-11-15T21:40:00.000Z",
      "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101297"
-    },
-    {
-     "title": "세무사 수석 합격자, 부정행위 인정·자수[간추린 주말 뉴스]",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-15T21:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014323468?sid=104"
-    },
-    {
-     "title": "“이미 AI 안경으로 합격한 사람 있다”…‘공부의 신’ 강성태, 수능 앞...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-15T21:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002723715?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "2026년 11월 16일 운세",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-15T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오늘의 운세] 2026년 11월 16일 (월) 띠별운세 '평소 리듬을 지키자'",
-     "press": "dailypop.kr",
-     "publishedAt": "2026-11-15T21:40:00.000Z",
-     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103982"
-    },
-    {
-     "title": "[오늘의 운세] 11월 16일 月(음력 10월 8일) 띠별 운세",
-     "press": "fntimes.com",
-     "publishedAt": "2026-11-15T21:40:00.000Z",
-     "link": "https://www.fntimes.com/html/view.php?ud=202611160638333851c1c16452b0_18"
-    },
-    {
-     "title": "[AI] 오늘의 띠별 운세...2026.11.16(월요일)",
-     "press": "newsroad.co.kr",
-     "publishedAt": "2026-11-15T21:30:00.000Z",
-     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=67775"
-    }
-   ]
-  },
-  {
-   "keyword": "트럼프 바이든 탓",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-15T20:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"바이든 재앙\" 前정부 탓... 이틀만에 美항공사태 입 연 트럼프",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-15T21:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005604537?sid=104"
-    },
-    {
-     "title": "美 항공교통 마비에 트럼프 \"바이든 탓\"…민주당은 반발",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-15T21:20:00.000Z",
-     "link": "https://www.ajunews.com/view/20261116061616915"
-    },
-    {
-     "title": "'젠슨황 스캔들'에 트럼프 행정부 '흔들'…서로 '네 탓' 공방 [글로벌 뉴...",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-15T21:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000543788?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "이란 미군기지 드론 공격",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-15T20:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이란, 바레인 미군기지 공격…후티 또 리야드·아덴 동시 압박",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-15T21:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012294270?sid=104"
-    },
-    {
-     "title": "이란, 두 달 만에 중동 미군기지 공격 재개",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-15T20:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926455?sid=104"
-    },
-    {
-     "title": "이란 혁명수비대 \"바레인 美 공군기지에 드론 공격 감행\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-15T20:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000651192?sid=104"
     }
    ]
   },
@@ -175,30 +111,63 @@
    "sources": [
     "google"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
+   "articles90": 6,
+   "recent20": 2,
+   "press": 5,
    "firstArticleAt": "2026-11-15T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "마통 잔액, 4년3개월 만에 최대 수준...고스란히 삼전닉스 빚투 外 [한강...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-15T22:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004175389?sid=101"
+    },
+    {
+     "title": "“삼전닉스 오를까 내릴까”…엔비디아 실적·앤트로픽 상장 변수 [잇슈...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-15T21:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012294284?sid=101"
+    },
+    {
      "title": "\"지금 팔면 후회?\"…삼전닉스 반등 확률 90% 분석 나왔다 [투자톡]",
      "press": "hankyung.com",
      "publishedAt": "2026-11-15T21:31:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/015/0005354080?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "김유정 100일 거짓말",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-15T20:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "박진영, 동생과 김유정 사이에서 총 겨눠-구국단 최악의 위기",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-15T21:48:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95319"
     },
     {
-     "title": "‘빚투’ 삼전닉스에 쏠려… 신용융자 잔고 7조 달해",
-     "press": "segye.com",
-     "publishedAt": "2026-11-15T21:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004175377?sid=101"
+     "title": "‘100일의 거짓말’ 송지효 두 딸 위기‥박진영, 김유정에 총 겨눴다 [어...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-15T21:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001187856"
     },
     {
-     "title": "[주간수급리포트] 개인은 ‘삼전닉스’ 팔고⋯외인은 삼성전자, 기관은...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-15T21:02:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2648058"
+     "title": "‘100일의 거짓말’ 이무생, 김현주 살리고 죽음 맞나 ‘불길’",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-15T21:07:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001187853"
     }
    ]
   },
@@ -237,69 +206,69 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 531,
-  "matched": 265,
-  "avgLeadMin": 574,
+  "flagged": 533,
+  "matched": 277,
+  "avgLeadMin": 634,
   "recent": [
    {
-    "keyword": "아세안 APEC 참석",
-    "hitKeyword": "중국 APEC 경비",
-    "hitAt": "2026-11-16T06:30:00+09:00",
-    "leadMin": 5544
+    "keyword": "2026년 11월 12일 운세",
+    "hitKeyword": "앤트로픽 11월 상장",
+    "hitAt": "2026-11-16T07:00:00+09:00",
+    "leadMin": 5755
    },
    {
-    "keyword": "16~19일 아세안 APEC 참석",
-    "hitKeyword": "중국 APEC 경비",
-    "hitAt": "2026-11-16T06:30:00+09:00",
-    "leadMin": 5449
+    "keyword": "젠슨 황 해임 위기 논의",
+    "hitKeyword": "젠슨 황 CEO 복귀 논의",
+    "hitAt": "2026-11-16T07:00:00+09:00",
+    "leadMin": 4854
    },
    {
-    "keyword": "김유정 100일의 거짓말",
-    "hitKeyword": "100일의 거짓말 김현주",
-    "hitAt": "2026-11-16T06:30:00+09:00",
-    "leadMin": 17
+    "keyword": "2026년 11월 13일 운세",
+    "hitKeyword": "앤트로픽 11월 상장",
+    "hitAt": "2026-11-16T07:00:00+09:00",
+    "leadMin": 4268
    },
    {
-    "keyword": "일본 한국 야구",
-    "hitKeyword": "한국 야구 13연패",
-    "hitAt": "2026-11-16T06:00:00+09:00",
-    "leadMin": 359
+    "keyword": "CL, 더블랙레이블 전속계약 11월 신곡",
+    "hitKeyword": "앤트로픽 11월 상장",
+    "hitAt": "2026-11-16T07:00:00+09:00",
+    "leadMin": 4097
    },
    {
-    "keyword": "젠슨 황 복귀 청원 동참",
-    "hitKeyword": "젠슨 황 복귀 청원",
-    "hitAt": "2026-11-16T06:00:00+09:00",
-    "leadMin": 349
+    "keyword": "2026년 11월 14일 운세",
+    "hitKeyword": "앤트로픽 11월 상장",
+    "hitAt": "2026-11-16T07:00:00+09:00",
+    "leadMin": 2931
    },
    {
-    "keyword": "한국 야구 일본에 준우승",
-    "hitKeyword": "한국 야구 13연패",
-    "hitAt": "2026-11-16T06:00:00+09:00",
-    "leadMin": 339
+    "keyword": "2026년 11월 15일 운세",
+    "hitKeyword": "앤트로픽 11월 상장",
+    "hitAt": "2026-11-16T07:00:00+09:00",
+    "leadMin": 1493
    },
    {
-    "keyword": "젠슨 황 복귀 청원",
-    "hitKeyword": "젠슨 황 복귀 청원",
-    "hitAt": "2026-11-16T06:00:00+09:00",
-    "leadMin": 329
+    "keyword": "2026년 11월 16일 운세",
+    "hitKeyword": "앤트로픽 11월 상장",
+    "hitAt": "2026-11-16T07:00:00+09:00",
+    "leadMin": 36
    },
    {
-    "keyword": "김광규 연희동 아파트",
-    "hitKeyword": "서울 아파트 매물 증가",
-    "hitAt": "2026-11-16T06:00:00+09:00",
-    "leadMin": 319
+    "keyword": "코르티스 MMA 2026 대상",
+    "hitKeyword": "MMA 2026 대상",
+    "hitAt": "2026-11-16T07:00:00+09:00",
+    "leadMin": 26
    },
    {
-    "keyword": "한국 야구, 일본에 또 준우승",
-    "hitKeyword": "한국 야구 13연패",
-    "hitAt": "2026-11-16T06:00:00+09:00",
-    "leadMin": 248
+    "keyword": "이란",
+    "hitKeyword": "트럼프 이란 제재",
+    "hitAt": "2026-11-16T07:00:00+09:00",
+    "leadMin": 26
    },
    {
-    "keyword": "아파트",
-    "hitKeyword": "서울 아파트 매물 증가",
-    "hitAt": "2026-11-16T06:00:00+09:00",
-    "leadMin": 148
+    "keyword": "트럼프 바이든 탓 항공대란",
+    "hitKeyword": "트럼프 이란 제재",
+    "hitAt": "2026-11-16T07:00:00+09:00",
+    "leadMin": 26
    }
   ]
  }
