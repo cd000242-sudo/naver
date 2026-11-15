@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-15T16:11:14.388Z",
+ "builtAt": "2026-11-15T16:21:18.802Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 21,
  "candidates": [
   {
    "keyword": "젠슨 황 복귀 청원",
@@ -29,48 +29,16 @@
      "link": "https://n.news.naver.com/mnews/article/023/0004009786?sid=105"
     },
     {
-     "title": "젠슨 황 사임 후폭풍…복귀 청원에 추가 폭로까지, 엔비디아 '술렁'",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-15T15:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000552053?sid=101"
-    },
-    {
      "title": "월가 큰손도 직원도 “젠슨 황 복귀시켜라”…온라인 청원 14만 돌파",
      "press": "joongang.co.kr",
      "publishedAt": "2026-11-15T15:01:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/025/0003565301?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "김민석 최민희 윤리심판원 이첩",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-15T14:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "최민희 징계 심판대 올린 김민석…친청계는 '김민석 징계' 맞불",
-     "press": "weekly.chosun.com",
-     "publishedAt": "2026-11-15T16:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/053/0000063075?sid=100"
     },
     {
-     "title": "“李가 尹탄핵 반대” “통일교, 김민석 밀어”… 내분 불붙인 최민희 ...",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-15T15:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004009789?sid=100"
-    },
-    {
-     "title": "김민석 \"최민희, 윤리심판원에 이첩하라\", 징계 착수",
-     "press": "viewsnnews.com",
-     "publishedAt": "2026-11-15T14:48:00.000Z",
-     "link": "https://www.viewsnnews.com/article?q=239705"
+     "title": "젠슨 황 사임 후폭풍…복귀 청원에 추가 폭로까지, 엔비디아 '술렁'",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-15T15:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000552053?sid=101"
     }
    ]
   }
