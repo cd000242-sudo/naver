@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-15T23:24:24.590Z",
+ "builtAt": "2026-11-15T23:34:29.649Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,125 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 21,
+ "measured": 26,
  "candidates": [
+  {
+   "keyword": "젠슨 황 CEO 복귀 논의",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 48,
+   "recent20": 4,
+   "press": 45,
+   "firstArticleAt": "2026-11-15T22:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "박현주 미래에셋 회장, 젠슨 황 복귀 청원 동참…글로벌 CEO들도 가세",
+     "press": "econovill.com",
+     "publishedAt": "2026-11-15T23:32:00.000Z",
+     "link": "https://www.econovill.com/news/articleView.html?idxno=757317"
+    },
+    {
+     "title": "\"젠슨 황, 엔비디아 CEO 복귀 모색·백악관 지지 확보 시도\"...온라인 청...",
+     "press": "livebiz.today",
+     "publishedAt": "2026-11-15T23:30:00.000Z",
+     "link": "https://www.livebiz.today/news/articleView.html?idxno=206532"
+    },
+    {
+     "title": "젠슨 황 복귀 추진…엔비디아 경영 혼란 가중",
+     "press": "asiatime.co.kr",
+     "publishedAt": "2026-11-15T23:28:00.000Z",
+     "link": "https://www.asiatime.co.kr/article/20261116500024"
+    }
+   ]
+  },
+  {
+   "keyword": "ai 안경",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 51,
+   "recent20": 12,
+   "press": 43,
+   "firstArticleAt": "2026-11-15T22:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "최교진 교육장관, 수능 시험장 점검…\"AI 안경 부정행위 무관용\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-15T23:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009290350?sid=102"
+    },
+    {
+     "title": "세무사 시험 AI 부정행위 자수에 수능 수험생도 불안…미미미누 \"구체적...",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-15T23:32:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261116010005761"
+    },
+    {
+     "title": "[앵커:뷰] 'AI 안경' 직접 써보니…수능 어쩌나?",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-15T23:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001978347?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "미미미누 수능 연기 촉구",
+   "sources": [
+    "signal.bz",
+    "nate",
+    "daum"
+   ],
+   "articles90": 16,
+   "recent20": 4,
+   "press": 16,
+   "firstArticleAt": "2026-11-15T22:23:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "세무사 시험 AI 부정행위 자수에 수능 수험생도 불안…미미미누 \"구체적...",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-15T23:32:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261116010005761"
+    },
+    {
+     "title": "수능 문답지, 전국 배부…AI 부정행위 여파에 ‘연기’ 주장도",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-15T23:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001885331?sid=102"
+    },
+    {
+     "title": "“수능 연기 검토 해야”…200만 입시 유튜버 미미미누, AI 커닝 사태에...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-15T23:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005764131?sid=102"
+    }
+   ]
+  },
   {
    "keyword": "청와대 AI 부정행위 전수조사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 18,
+   "articles90": 16,
    "recent20": 1,
-   "press": 18,
-   "firstArticleAt": "2026-11-15T22:00:00.000Z",
+   "press": 16,
+   "firstArticleAt": "2026-11-15T22:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"부정행위, 11만원이면 된다\" 쌀알 이어폰에 초소형 카메라…시험장 비...",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-15T23:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005842875?sid=102"
+    },
     {
      "title": "청와대, 국가자격시험 AI 부정행위 전수 조사…수능 앞두고 긴급회의",
      "press": "cstimes.com",
@@ -33,44 +138,167 @@
      "press": "gukjenews.com",
      "publishedAt": "2026-11-15T23:04:00.000Z",
      "link": "https://www.gukjenews.com/news/articleView.html?idxno=3752749"
-    },
-    {
-     "title": "“현행 시험 제도 수명 다했나”···세무사 AI 부정행위 '일파만파'",
-     "press": "mdilbo.com",
-     "publishedAt": "2026-11-15T23:02:00.000Z",
-     "link": "http://www.mdilbo.com/detail/0kIA7d/760574"
     }
    ]
   },
   {
-   "keyword": "트럼프 바이든 탓",
+   "keyword": "김유정 100일의 거짓말",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-15T21:56:00.000Z",
+   "articles90": 18,
+   "recent20": 10,
+   "press": 13,
+   "firstArticleAt": "2026-11-15T22:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "9·11 이후 최장 항공 마비…트럼프 \"바이든 정부 탓\"",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-15T23:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000520845?sid=104"
+     "title": "박진영, 김유정 향해 총 겨눴다..'100일의 거짓말' 시청률 10.4%",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-15T23:32:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003487753"
     },
     {
-     "title": "트럼프·민주, '항공기 이륙 중단 사태' 네 탓 공방",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-15T23:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001978340?sid=104"
+     "title": "‘100일의 거짓말’ 12회 시청률 10.4%…관저 폭발에 다시 두 자릿수",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-15T23:28:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2648399"
     },
     {
-     "title": "[뉴스 속 경제] 물러난 젠슨 황‥인공지능 생태계·트럼프 흔들까?",
-     "press": "imnews.imbc.com",
+     "title": "[TV핫스팟] ‘100일의 거짓말’ 김유정·박진영, 폭탄 작전 중 균열…총...",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-15T23:24:00.000Z",
+     "link": "https://m.entertain.naver.com/article/396/0000761032"
+    }
+   ]
+  },
+  {
+   "keyword": "앨리스 황 퇴사",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 9,
+   "recent20": 3,
+   "press": 9,
+   "firstArticleAt": "2026-11-15T22:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“앨리스 황, 지난해 퇴사”…메가스피드, 중국 반도체 우회 수출 의혹...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-15T23:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005764130?sid=101"
+    },
+    {
+     "title": "메가스피드, “앨리스 황, 지난해 퇴사…합법 사업해” 주장",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-15T23:20:00.000Z",
+     "link": "https://www.viva100.com/article/20261116500055"
+    },
+    {
+     "title": "메가스피드, 앨리스 황과 현재 무관…\"합법적 사업\" 강조",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-15T23:16:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=625371"
+    }
+   ]
+  },
+  {
+   "keyword": "이 대통령 아세안 순방",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 11,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-15T22:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이재명 대통령, 아세안 정상회의 참석차 오늘 출국…3박 4일 다자외교 돌...",
+     "press": "geconomy.co.kr",
+     "publishedAt": "2026-11-15T23:22:00.000Z",
+     "link": "https://www.geconomy.co.kr/news/article.html?no=325691"
+    },
+    {
+     "title": "이재명 대통령, 오늘 전용기 타고 출국…3박 4일간 필리핀·중국으로",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-15T23:22:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1174865"
+    },
+    {
+     "title": "이 대통령, 아세안·APEC 순방 출국…공급망·한반도 외교 시동",
+     "press": "ziksir.com",
      "publishedAt": "2026-11-15T23:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001535782?sid=101"
+     "link": "https://www.ziksir.com/news/articleView.html?idxno=153359"
+    }
+   ]
+  },
+  {
+   "keyword": "김정은",
+   "sources": [
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-15T22:19:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "무속인 노슬비 \"김정은 2년 안에 사망, 틀리면 1000만원\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-15T23:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005441400?sid=102"
+    },
+    {
+     "title": "美국무, 김정은 거론하며 \"정권 생존 원할 뿐 팽창주의자 아냐\"",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-15T23:26:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/325385/?sc=Naver"
+    },
+    {
+     "title": "美국무 \"北김정은, 그저 생존이 목적…팽창주의 이란 핵과 달라\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-15T23:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009290342?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "김자옥 폐암 투병 별세",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-15T22:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김자옥 별세 12년…2014년 폐암 합병증으로 63세에 떠나",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-15T23:24:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=625376"
+    },
+    {
+     "title": "고 김자옥, 오늘(16일) 12주기…여전히 그리운 ‘공주님’",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-15T23:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005764125"
+    },
+    {
+     "title": "김자옥, 어느덧 12주기…여전히 그리운 얼굴",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-15T23:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014323509"
     }
    ]
   },
@@ -80,7 +308,7 @@
     "nate"
    ],
    "articles90": 6,
-   "recent20": 3,
+   "recent20": 1,
    "press": 6,
    "firstArticleAt": "2026-11-15T22:48:00.000Z",
    "exclusive": false,
@@ -107,66 +335,35 @@
    ]
   },
   {
-   "keyword": "김자옥 폐암 투병 별세",
+   "keyword": "국토부 건설현장 안전점검",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 2,
    "press": 5,
-   "firstArticleAt": "2026-11-15T22:20:00.000Z",
+   "firstArticleAt": "2026-11-15T22:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "고 김자옥, 오늘(16일) 12주기…여전히 그리운 ‘공주님’",
-     "press": "mk.co.kr",
+     "title": "국토부, 겨울철 건설현장 2900곳 안전점검",
+     "press": "issuenbiz.com",
+     "publishedAt": "2026-11-15T23:30:00.000Z",
+     "link": "http://www.issuenbiz.com/news/articleView.html?idxno=81607"
+    },
+    {
+     "title": "국토부, 한파 대비 겨울철 3000여 건설현장 안전점검 나서",
+     "press": "financialpost.co.kr",
+     "publishedAt": "2026-11-15T23:30:00.000Z",
+     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=301047"
+    },
+    {
+     "title": "한파·폭설 앞두고 건설현장 2900곳 안전점검…사망사고 건설사 특별점...",
+     "press": "fnnews.com",
      "publishedAt": "2026-11-15T23:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005764125"
-    },
-    {
-     "title": "김자옥, 어느덧 12주기…여전히 그리운 얼굴",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-15T23:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014323509"
-    },
-    {
-     "title": "故 김자옥 어느덧 12주기, 폐암 투병 끝 별세…영원한 '공주'",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-15T22:44:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009290308"
-    }
-   ]
-  },
-  {
-   "keyword": "김정은",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-15T22:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“김정은 2년 안에 사망, 틀리면 천만원 준다”…‘무속인’ 노슬비, 충...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-15T23:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005764121?sid=103"
-    },
-    {
-     "title": "루비오 “김정은은 팽창주의자 아냐, 정권 생존만 원해”…이란과 구분",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-15T22:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003482847?sid=100"
-    },
-    {
-     "title": "무당 노슬비 “김정은 2년 안에 안 죽으면 천만원 기부” 예언",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-15T22:29:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001187865"
+     "link": "https://n.news.naver.com/mnews/article/014/0005604558?sid=101"
     }
    ]
   },
@@ -176,12 +373,18 @@
     "nate"
    ],
    "articles90": 5,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-15T22:04:00.000Z",
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-15T22:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "‘사랑이 온다’ 시청률 15.9% 日 전체 프로그램 1위",
+     "press": "enter.etoday.co.kr",
+     "publishedAt": "2026-11-15T23:30:00.000Z",
+     "link": "https://enter.etoday.co.kr/news/view/305318"
+    },
     {
      "title": "‘사랑이 온다’ 윤유선, 분노 폭발",
      "press": "bntnews.co.kr",
@@ -193,12 +396,70 @@
      "press": "sports.khan.co.kr",
      "publishedAt": "2026-11-15T22:50:00.000Z",
      "link": "https://m.entertain.naver.com/article/144/0001149965"
+    }
+   ]
+  },
+  {
+   "keyword": "운세",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-15T22:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "2026년 11월 16일 오늘의 운세 및 띠별 운세",
+     "press": "newstnt.com",
+     "publishedAt": "2026-11-15T23:30:00.000Z",
+     "link": "https://www.newstnt.com/news/articleView.html?idxno=727850"
     },
     {
-     "title": "‘사랑이 온다’ 고윤, 예측 불가한 악역의 얼굴 완성",
-     "press": "swtvnews.com",
-     "publishedAt": "2026-11-15T22:18:00.000Z",
-     "link": "https://swtvnews.com/news/newsview.php?ncode=1065564909443204"
+     "title": "11월 셋째 주 별자리 운세",
+     "press": "wkorea.com",
+     "publishedAt": "2026-11-15T23:02:00.000Z",
+     "link": "https://www.wkorea.com/2026/11/16/11%ec%9b%94-%ec%85%8b%ec%a7%b8-%ec%a3%bc-%eb%b3%84%ec%9e%90%eb%a6%ac-%ec%9a%b4%ec%84%b8-8/?utm_source=naver&utm_medium=partnership"
+    },
+    {
+     "title": "이번 주 별자리운세 '11월 16일~11월 22일' [인포그래픽]",
+     "press": "sisunnews.co.kr",
+     "publishedAt": "2026-11-15T23:00:00.000Z",
+     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=248481"
+    }
+   ]
+  },
+  {
+   "keyword": "리트 만점자 인터뷰",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-15T22:15:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“수능 국어 7등급→서울대 치대”… 리트 만점자 인터뷰 눈길",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-15T23:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001885328?sid=102"
+    },
+    {
+     "title": "'눈물' 미미미누, '리트 만점' 이진우 수능 라이브 거절…시험지 수정 ...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-15T22:39:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002080966"
+    },
+    {
+     "title": "리트 만점자 인터뷰 회자…미미미누 표정 '압권'",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-15T22:24:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014323493"
     }
    ]
   },
@@ -208,7 +469,7 @@
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-15T23:04:00.000Z",
    "exclusive": false,
@@ -218,7 +479,7 @@
      "title": "스페이스X, 사상 첫 '우주선 본체 회수'…로켓 완전 재사용 목표에 성큼",
      "press": "news.tvchosun.com",
      "publishedAt": "2026-11-15T23:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000651222?sid=004"
+     "link": "https://n.news.naver.com/mnews/article/448/0000651222?sid=101"
     },
     {
      "title": "[미국 특징주] 스페이스X 스타십 2단부 첫 회수...완전 재사용 성큼",
@@ -233,111 +494,38 @@
      "link": "https://www.g-enews.com/view.php?ud=202611160759501862e250e8e188_1"
     }
    ]
-  },
-  {
-   "keyword": "국토부 건설현장 안전점검",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-15T22:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한파·폭설 앞두고 건설현장 2900곳 안전점검…사망사고 건설사 특별점...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-15T23:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005604558?sid=101"
-    },
-    {
-     "title": "“겨울철 안전사고 원천 차단” 국토부, 전국 건설현장 2,946곳 대대적 안...",
-     "press": "dailyt.co.kr",
-     "publishedAt": "2026-11-15T22:52:00.000Z",
-     "link": "https://www.dailyt.co.kr/newsView/dlt202611160002"
-    },
-    {
-     "title": "국토부, 전국 건설현장 2964곳 동절기 안전점검",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-15T22:24:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611160011"
-    }
-   ]
-  },
-  {
-   "keyword": "운세",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-15T22:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "11월 셋째 주 별자리 운세",
-     "press": "wkorea.com",
-     "publishedAt": "2026-11-15T23:02:00.000Z",
-     "link": "https://www.wkorea.com/2026/11/16/11%ec%9b%94-%ec%85%8b%ec%a7%b8-%ec%a3%bc-%eb%b3%84%ec%9e%90%eb%a6%ac-%ec%9a%b4%ec%84%b8-8/?utm_source=naver&utm_medium=partnership"
-    },
-    {
-     "title": "2026년 11월 16일, 오늘의 띠별 운세 [인포그래픽]",
-     "press": "sisunnews.co.kr",
-     "publishedAt": "2026-11-15T23:00:00.000Z",
-     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=249117"
-    },
-    {
-     "title": "이번 주 별자리운세 '11월 16일~11월 22일' [인포그래픽]",
-     "press": "sisunnews.co.kr",
-     "publishedAt": "2026-11-15T23:00:00.000Z",
-     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=248481"
-    }
-   ]
-  },
-  {
-   "keyword": "해리 케인",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-15T22:09:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "케인·콘사·화이트 연속골…잉글랜드, 스페인 3-2 제압",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-15T22:58:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=782020"
-    },
-    {
-     "title": "'발롱도르' 케인이 무적함대 격침 … 스페인 '44G' 무패 행진 좌절",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-15T22:26:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/16/2026111650014.html"
-    },
-    {
-     "title": "‘발롱 케인의’ 잉글랜드, ‘무적함대’ 스페인 격파→‘UNL 조 1위로 ...",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-15T22:09:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/382/0001304924"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 551,
-  "matched": 283,
-  "avgLeadMin": 622,
+  "flagged": 555,
+  "matched": 287,
+  "avgLeadMin": 667,
   "recent": [
+   {
+    "keyword": "서울 아파트값 92주 상승",
+    "hitKeyword": "서울 월세 상승 압박",
+    "hitAt": "2026-11-16T08:30:00+09:00",
+    "leadMin": 5387
+   },
+   {
+    "keyword": "서울 아파트값 92주 연속 상승",
+    "hitKeyword": "서울 월세 상승 압박",
+    "hitAt": "2026-11-16T08:30:00+09:00",
+    "leadMin": 5327
+   },
+   {
+    "keyword": "젠슨 황과 러트닉 조사",
+    "hitKeyword": "러트닉 반도체 규제 완화",
+    "hitAt": "2026-11-16T08:30:00+09:00",
+    "leadMin": 2829
+   },
+   {
+    "keyword": "이탈리아 메타 과징금",
+    "hitKeyword": "금융권 과징금 계산",
+    "hitAt": "2026-11-16T08:30:00+09:00",
+    "leadMin": 1946
+   },
    {
     "keyword": "이란 미군기지 드론 공격",
     "hitKeyword": "이란 미군 공격 재개",
@@ -373,30 +561,6 @@
     "hitKeyword": "닥터X 최종회",
     "hitAt": "2026-11-16T07:30:00+09:00",
     "leadMin": 6
-   },
-   {
-    "keyword": "2026년 11월 12일 운세",
-    "hitKeyword": "앤트로픽 11월 상장",
-    "hitAt": "2026-11-16T07:00:00+09:00",
-    "leadMin": 5755
-   },
-   {
-    "keyword": "젠슨 황 해임 위기 논의",
-    "hitKeyword": "젠슨 황 CEO 복귀 논의",
-    "hitAt": "2026-11-16T07:00:00+09:00",
-    "leadMin": 4854
-   },
-   {
-    "keyword": "2026년 11월 13일 운세",
-    "hitKeyword": "앤트로픽 11월 상장",
-    "hitAt": "2026-11-16T07:00:00+09:00",
-    "leadMin": 4268
-   },
-   {
-    "keyword": "CL, 더블랙레이블 전속계약 11월 신곡",
-    "hitKeyword": "앤트로픽 11월 상장",
-    "hitAt": "2026-11-16T07:00:00+09:00",
-    "leadMin": 4097
    }
   ]
  }
