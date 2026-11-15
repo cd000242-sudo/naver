@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-15T21:03:25.496Z",
+ "builtAt": "2026-11-15T21:13:28.539Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "청와대 AI 부정행위 전수조사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 8,
+   "articles90": 13,
+   "recent20": 4,
+   "press": 10,
    "firstArticleAt": "2026-11-15T20:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "청와대 “수능서 AI 기기 점검·전담 인력 배치”…긴급 회의 소집",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-15T21:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012294260?sid=100"
+    },
+    {
+     "title": "수능 코앞 'AI 커닝' 쇼크‥청와대 \"전수조사\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-15T21:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001535737?sid=102"
+    },
+    {
      "title": "[출근길 브리핑-11월 16일] 세무사 수석 AI 부정행위 자수·李 개혁 메시...",
      "press": "newsworks.co.kr",
      "publishedAt": "2026-11-15T21:00:00.000Z",
      "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903132"
+    }
+   ]
+  },
+  {
+   "keyword": "삼전닉스",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 3,
+   "press": 4,
+   "firstArticleAt": "2026-11-15T20:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘빚투’ 삼전닉스에 쏠려… 신용융자 잔고 7조 달해",
+     "press": "segye.com",
+     "publishedAt": "2026-11-15T21:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004175377?sid=101"
     },
     {
-     "title": "사흘 뒤 수능인데…'AI 커닝' 실토에 정부·업계 초비상",
-     "press": "newsis.com",
+     "title": "[주간수급리포트] 개인은 ‘삼전닉스’ 팔고⋯외인은 삼성전자, 기관은...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-15T21:02:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2648058"
+    },
+    {
+     "title": "엔비디아 실적 때마다 오른 삼전닉스…젠슨 황 없는 '콘콜' 첫 시험대",
+     "press": "news1.kr",
      "publishedAt": "2026-11-15T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014323428?sid=102"
-    },
-    {
-     "title": "청와대 \"국가자격시험 AI 부정행위 의심 사례 전수조사\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-15T20:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926441?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/421/0009290226?sid=101"
     }
    ]
   },
@@ -47,10 +79,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-15T19:42:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-15T20:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -80,7 +112,7 @@
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-15T20:26:00.000Z",
    "exclusive": false,
@@ -105,11 +137,44 @@
      "link": "https://n.news.naver.com/mnews/article/052/0002433229?sid=104"
     }
    ]
+  },
+  {
+   "keyword": "김유정 100일의 거짓말",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 3,
+   "press": 2,
+   "firstArticleAt": "2026-11-15T20:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘100일의 거짓말’ 송지효 두 딸 위기‥박진영, 김유정에 총 겨눴다 [어...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-15T21:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001187856"
+    },
+    {
+     "title": "‘100일의 거짓말’ 이무생, 김현주 살리고 죽음 맞나 ‘불길’",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-15T21:07:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001187853"
+    },
+    {
+     "title": "진선규, 송지효 딸 김유정 알아보나 “똑같은 눈을 가졌군” (100일의 거...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-15T21:06:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001187852"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 520,
+  "flagged": 522,
   "matched": 262,
   "avgLeadMin": 539,
   "recent": [
