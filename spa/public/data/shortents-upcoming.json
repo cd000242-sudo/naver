@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T15:44:35.871Z",
+ "builtAt": "2026-11-16T15:54:42.033Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,34 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "삼척 화물선 표류 구조",
+   "keyword": "수능 AI 부정행위 대책 마련 필요해",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 4,
+   "articles90": 8,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-16T14:24:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-16T14:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼척 앞바다 표류 화물선 선원 16명 전원 구조…해경, 동해항까지 예인",
+     "title": "한성숙, 수능 스마트기기 부정행위 무관용…와이파이 차단 검토",
      "press": "gukjenews.com",
-     "publishedAt": "2026-11-16T15:08:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3754015"
+     "publishedAt": "2026-11-16T15:20:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3754029"
     },
     {
-     "title": "풍랑 속 표류 화물선 선원 16명 전원 구조… 해경, 9시간 예인",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-16T14:42:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3449255"
+     "title": "수능 'AI 컨닝' 비상… 감독관 부담, 수험생에 고스란히…",
+     "press": "gjdream.com",
+     "publishedAt": "2026-11-16T15:10:00.000Z",
+     "link": "http://www.gjdream.com/news/articleView.html?idxno=674385"
     },
     {
-     "title": "발전기 배전반 화재로 화물선 표류...16명 전원 구조",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-16T14:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002433735?sid=102"
+     "title": "박지현 \"AI 안경 부정행위, 변형카메라 관리법 진작 만들었다면\"…국회...",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-16T15:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001040636?sid=100"
     }
    ]
   },
@@ -73,11 +73,43 @@
      "link": "https://www.dailysecu.com/news/articleView.html?idxno=209553"
     }
    ]
+  },
+  {
+   "keyword": "삼척 화물선 표류 구조",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-16T14:37:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "삼척 앞바다 표류 화물선 선원 16명 전원 구조…해경, 동해항까지 예인",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-16T15:08:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3754015"
+    },
+    {
+     "title": "풍랑 속 표류 화물선 선원 16명 전원 구조… 해경, 9시간 예인",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-16T14:42:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3449255"
+    },
+    {
+     "title": "발전기 배전반 화재로 화물선 표류...16명 전원 구조",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-16T14:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002433735?sid=102"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 727,
+  "flagged": 728,
   "matched": 392,
   "avgLeadMin": 819,
   "recent": [
