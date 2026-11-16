@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T16:34:54.990Z",
+ "builtAt": "2026-11-16T16:44:58.306Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -17,7 +17,7 @@
     "google"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-16T15:38:00.000Z",
    "exclusive": true,
@@ -40,38 +40,6 @@
      "press": "hankookilbo.com",
      "publishedAt": "2026-11-16T16:12:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/469/0000965946?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "이 대통령 AI 문화 이니셔티브 제안",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-16T15:09:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이 대통령, 3박 4일 순방 돌입...\"아세안 AI·문화 이니셔티브\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-16T15:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002433751?sid=100"
-    },
-    {
-     "title": "이 대통령 “한·아세안 AI 동행” 새 협력 구상 띄웠다",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-16T15:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003565659?sid=100"
-    },
-    {
-     "title": "이 대통령 \"한·아세안 'AI·문화산업 이니셔티브' 제안\"",
-     "press": "kado.net",
-     "publishedAt": "2026-11-16T15:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000211679?sid=100"
     }
    ]
   }
