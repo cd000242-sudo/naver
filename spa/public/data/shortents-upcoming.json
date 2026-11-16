@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T10:40:42.975Z",
+ "builtAt": "2026-11-16T10:50:54.797Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 18,
  "candidates": [
   {
    "keyword": "AI 안경 부정행위 적발",
    "sources": [
     "nate"
    ],
-   "articles90": 65,
-   "recent20": 5,
-   "press": 41,
-   "firstArticleAt": "2026-11-16T09:12:00.000Z",
+   "articles90": 62,
+   "recent20": 11,
+   "press": 42,
+   "firstArticleAt": "2026-11-16T09:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "AI 부정행위 진화하는데…시험 감독관은 ‘일당제 외부 인력’",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-16T10:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002832490?sid=102"
+     "title": "한국거래소 6월 신입사원 채용 시험서도 스마트안경 적발",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-16T10:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001535926?sid=101"
     },
     {
-     "title": "거래소, 신입 채용시험서 스마트안경 부정행위 적발",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-16T10:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926746?sid=101"
+     "title": "스마트안경 전담 감독관 배치에도 AI 부정행위 차단 '역부족'…시험 감...",
+     "press": "joongdo.co.kr",
+     "publishedAt": "2026-11-16T10:44:00.000Z",
+     "link": "https://www.joongdo.co.kr/web/view.php?key=20261116010005445"
     },
     {
-     "title": "최산, 수능 앞두고 ‘AI 부정행위’ 언급…“어른이 애들 힘들게 하지 ...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-16T10:31:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001281297"
+     "title": "[경인 Pick] ‘AI 커닝’ 논란에 국가자격 시험 신뢰 위기",
+     "press": "kyeongin.com",
+     "publishedAt": "2026-11-16T10:44:00.000Z",
+     "link": "https://www.kyeongin.com/article/1774858"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 45,
-   "recent20": 2,
-   "press": 34,
-   "firstArticleAt": "2026-11-16T09:12:00.000Z",
+   "articles90": 39,
+   "recent20": 3,
+   "press": 30,
+   "firstArticleAt": "2026-11-16T09:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "빗썸, 3분기 적자전환…매출 전년비 70%↓",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-16T10:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005441953?sid=101"
+    },
     {
      "title": "클로봇, 3분기 영업 손실 21억원⋯전년 동기 대비 적자 전환",
      "press": "inews24.com",
@@ -65,12 +71,6 @@
      "press": "greened.kr",
      "publishedAt": "2026-11-16T10:38:00.000Z",
      "link": "https://www.greened.kr/news/articleView.html?idxno=354754"
-    },
-    {
-     "title": "코인 거래 한파에 빗썸·두나무 나란히 적자 전환…매출 60%대 급감",
-     "press": "fntimes.com",
-     "publishedAt": "2026-11-16T10:12:00.000Z",
-     "link": "https://www.fntimes.com/html/view.php?ud=2026111619063891422a735e27af_18"
     }
    ]
   },
@@ -79,37 +79,69 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 22,
-   "recent20": 5,
-   "press": 20,
-   "firstArticleAt": "2026-11-16T09:11:00.000Z",
+   "articles90": 23,
+   "recent20": 8,
+   "press": 21,
+   "firstArticleAt": "2026-11-16T09:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령 \"韓·아세안 AI 동행…핵심광물 공급망 협력 강화\"",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-16T10:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005354510?sid=100"
+     "title": "李, 아세안에 AI·문화산업 동맹 제안…“교역 3000억弗 추진”",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-16T10:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000161430?sid=100"
     },
     {
-     "title": "'다자외교 슈퍼위크' 첫날…이 대통령 \"아세안, 한반도 평화 파트너\"",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-16T10:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000520992?sid=100"
+     "title": "李대통령 “한-아세안 교역 3000억달러 시대”…AI·문화 협력 확대도 제...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-16T10:48:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2648869"
     },
     {
-     "title": "李대통령, 한-아세안 정상회의…'문화 창조산업 이니셔티브' 제안",
-     "press": "shinailbo.co.kr",
+     "title": "이 대통령 \"한·아세안 교역 3천억 달러 시대\"…AI·문화 협력 제안",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-16T10:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001978468?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황 복귀 움직임",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-16T10:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "스파이 의혹 벗어도 엔비디아 복귀 어렵다?…젠슨 황 운명 가를 핵심 쟁...",
+     "press": "digitaltoday.co.kr",
      "publishedAt": "2026-11-16T10:36:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5084084"
+     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=715708"
+    },
+    {
+     "title": "젠슨 황, 나흘 만에 복귀 움직임…'백악관 설득' 전시 상황실 꾸려",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-16T10:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001978459?sid=102"
+    },
+    {
+     "title": "“젠슨 황, 돌아와야” vs “오만한 인물”",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-16T10:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000367686?sid=104"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 697,
+  "flagged": 698,
   "matched": 374,
   "avgLeadMin": 797,
   "recent": [
