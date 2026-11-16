@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T11:41:51.806Z",
+ "builtAt": "2026-11-16T11:51:56.642Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 14,
  "candidates": [
   {
    "keyword": "한-메콩 정상회의에서 이 대통령",
@@ -16,29 +16,29 @@
     "nate"
    ],
    "articles90": 33,
-   "recent20": 7,
-   "press": 29,
-   "firstArticleAt": "2026-11-16T10:13:00.000Z",
+   "recent20": 5,
+   "press": 30,
+   "firstArticleAt": "2026-11-16T10:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한·메콩, 핵심 광물 협력 확대…이 대통령 \"관계 도약 변곡점\"",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-16T11:34:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1320682&inflow=N"
+     "title": "한·메콩 정상회의 6년 만에 재개…李 \"협력 지평 넓힐 것\"",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-16T11:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000192601?sid=100"
     },
     {
-     "title": "이 대통령 \"한·아세안 AI 동행·문화창조산업 이니셔티브 제안\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-16T11:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000965933?sid=100"
+     "title": "이 대통령, 다자외교 재시동…아세안에 'AI·문화 동행' 제안",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-16T11:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926758?sid=161"
     },
     {
-     "title": "李대통령 \"韓, 메콩 발전 함께할 파트너…선진국 성장 경험 나누려\"",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-16T11:30:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5084087"
+     "title": "이 대통령 메콩 국가에 \"원조 '받던' 나라서 '하는' 나라 경험 나눌것\"",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-16T11:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000521011?sid=104"
     }
    ]
   },
@@ -80,12 +80,18 @@
     "nate"
    ],
    "articles90": 5,
-   "recent20": 0,
+   "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-16T10:18:00.000Z",
+   "firstArticleAt": "2026-11-16T10:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "블랙핑크, YG 전속계약 명단서 ‘실종’…YG “그룹 활동 논의 중”",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-16T11:41:00.000Z",
+     "link": "https://m.entertain.naver.com/article/396/0000761102"
+    },
     {
      "title": "블랙핑크, YG 전속계약 명단서 사라졌다…팬 멤버십 판매도 중단",
      "press": "tenasia.co.kr",
@@ -97,52 +103,77 @@
      "press": "mt.co.kr",
      "publishedAt": "2026-11-16T11:03:00.000Z",
      "link": "https://m.entertain.naver.com/article/008/0005441959"
-    },
-    {
-     "title": "블랙핑크 10주년에 결별설, YG 전속계약 명단서 빠져‥입장 들어보니 [공...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-16T10:42:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001188030"
     }
    ]
   },
   {
-   "keyword": "결승전",
+   "keyword": "보안",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-16T10:18:00.000Z",
+   "articles90": 5,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-16T10:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "日 상대 홈런 쳤는데 결승전 불발이라니…대표팀 캡틴의 한탄, \"아무것...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-16T10:47:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/076/0004467149"
+     "title": "'모두의 창업' 참여 기업 보안 심사 강화에도 \"기준 부실\"",
+     "press": "safetimes.co.kr",
+     "publishedAt": "2026-11-16T11:44:00.000Z",
+     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247558"
     },
     {
-     "title": "극장에서 즐기는 ‘에픽세븐’ e스포츠…’E7WC 2026' 결승전 예매 시작",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-16T10:46:00.000Z",
-     "link": "https://m.sports.naver.com/esports/article/311/0002081168"
+     "title": "라이터, 보안 사고 조사로 모든 출금·풀 생성 일시 중단",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-16T11:38:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/439067"
     },
     {
-     "title": "스마일게이트 '에픽세븐' 세계 결승전, 28일 잠실서 개최…예매 시작",
-     "press": "onews.tv",
-     "publishedAt": "2026-11-16T10:18:00.000Z",
-     "link": "https://www.onews.tv/news/articleView.html?idxno=291794"
+     "title": "UPA-남부경찰서, 울산항 보안 강화 합동훈련",
+     "press": "ujeil.com",
+     "publishedAt": "2026-11-16T11:26:00.000Z",
+     "link": "http://www.ujeil.com/news/articleView.html?idxno=395343"
+    }
+   ]
+  },
+  {
+   "keyword": "이호선 모친상 조의금 기부",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-16T10:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이호선 교수, '유퀴즈' 상금 이어 모친상 조의금도 기부",
+     "press": "kizmom.com",
+     "publishedAt": "2026-11-16T10:42:00.000Z",
+     "link": "https://www.kizmom.com/news/articleView.html?idxno=114001"
+    },
+    {
+     "title": "이호선 교수, 조의금 '1억'..기부 소식보다 놀라운 금액 [스타이슈]",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-16T10:33:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003487885"
+    },
+    {
+     "title": "상담전문가 이호선 교수, 모친상 조의금 1억90만원 기부",
+     "press": "donga.com",
+     "publishedAt": "2026-11-16T10:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003762834?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 707,
+  "flagged": 709,
   "matched": 379,
   "avgLeadMin": 801,
   "recent": [
