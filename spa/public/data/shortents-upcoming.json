@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T21:45:37.628Z",
+ "builtAt": "2026-11-16T21:55:40.928Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "트럼프 김정은 만남 가능성",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
+   "articles90": 16,
    "recent20": 3,
-   "press": 14,
+   "press": 15,
    "firstArticleAt": "2026-11-16T20:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "트럼프 \"중국서 김정은 만날 수도…金 방중 시진핑에 달려\"",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-16T21:48:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=782288"
+    },
     {
      "title": "트럼프, 중간선거 참패 후 아시아 순방… 외교로 존재감 과시하나",
      "press": "chosun.com",
@@ -33,44 +39,6 @@
      "press": "inews24.com",
      "publishedAt": "2026-11-16T21:37:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/031/0001075569?sid=104"
-    },
-    {
-     "title": "외교 성과 절실한 트럼프 \"중국에서 김정은 만날 수도\" '깜짝' 언급",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-16T21:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004210429?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "음주 운전",
-   "sources": [
-    "google"
-   ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-16T20:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "연예계 음주운전 파문 속…신동엽 \"술 마시려고 택시 탔냐\" 확인 ('짠한...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-16T21:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000784764"
-    },
-    {
-     "title": "전북도청 7급 공무원 음주운전하다 택시 충돌…면허 취소 수치",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-16T21:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002466147?sid=102"
-    },
-    {
-     "title": "“이 대통령도 음주하는데” 고경표 편들기, 우리 아닙니다…팬덤 “악...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-16T21:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001188079"
     }
    ]
   },
@@ -79,10 +47,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
+   "articles90": 7,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-16T20:44:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-16T20:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,50 +75,24 @@
    ]
   },
   {
-   "keyword": "2026년 11월 운세",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-16T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오늘의 띠별 운세] 2026년 11월 17일 화요일",
-     "press": "mhns.co.kr",
-     "publishedAt": "2026-11-16T21:38:00.000Z",
-     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=769342"
-    },
-    {
-     "title": "[오늘의 운세] 17일 화요일 나의 운세는?",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-16T21:26:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1193279"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 17일 별자리 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-16T21:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006410787?sid=103"
-    }
-   ]
-  },
-  {
    "keyword": "연금",
    "sources": [
     "signal.bz",
     "google"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 3,
+   "articles90": 5,
+   "recent20": 1,
+   "press": 4,
    "firstArticleAt": "2026-11-16T20:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "내 퇴직연금 '원리금 보장형'인데 손실 났다고? 이유는",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-16T21:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005843412?sid=101"
+    },
     {
      "title": "‘투자하는 연금’ 이끄는 미래에셋證…적립금 압도적 1위·ETF 25조원 [퇴...",
      "press": "etoday.co.kr",
@@ -162,76 +104,6 @@
      "press": "etoday.co.kr",
      "publishedAt": "2026-11-16T21:02:00.000Z",
      "link": "https://www.etoday.co.kr/news/view/2648751"
-    },
-    {
-     "title": "국민연금 빠진 기금운용평가 개편…연기금 코스닥 비중 '3%대' 그쳐",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-16T21:00:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261116000561"
-    }
-   ]
-  },
-  {
-   "keyword": "제니, 그래미 2개 후보",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-16T20:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'그래미 2개 후보' 제니 '드라큘라', 빌보드 '핫 100' 3위 수성…25주째...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-16T21:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014326003"
-    },
-    {
-     "title": "제니, 그래미서 '올해의 레코드' 등 2개 부문 후보",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-16T20:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926818?sid=103"
-    },
-    {
-     "title": "로제 이어 제니도 간다, 브루노·테일러 잡고 美 그래미 정조준…‘드라...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-16T20:24:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001188058"
-    }
-   ]
-  },
-  {
-   "keyword": "우리은행",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-16T20:55:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'이이지마 사키 22점 활약' 하나은행, 우리은행에 68-67 승리로 시즌 첫...",
-     "press": "thesportstimes.co.kr",
-     "publishedAt": "2026-11-16T21:20:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/472/0000042488"
-    },
-    {
-     "title": "어린이·청소년과 '내일을 그리다'…우리은행, 제29회 '우리 아트콘' 본...",
-     "press": "thepublic.kr",
-     "publishedAt": "2026-11-16T21:04:00.000Z",
-     "link": "https://www.thepublic.kr/news/articleView.html?idxno=327005"
-    },
-    {
-     "title": "하나은행, 우리은행 68-67 꺾고 개막 4연패 뒤 첫 승...이이지마 22점 8리...",
-     "press": "maniareport.com",
-     "publishedAt": "2026-11-16T20:55:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/425/0000215044"
     }
    ]
   }
