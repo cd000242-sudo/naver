@@ -123,7 +123,8 @@ describe('admin homepage operations access', () => {
   it('provides an obvious home-operations entry and a direct keyword editor shortcut', () => {
     const admin = readFileSync(join(process.cwd(), 'admin', 'index.html'), 'utf8');
 
-    expect(admin).toContain('<span>홈 운영</span>');
+    // [2026-11-16] Admin unslop renamed the 홈 운영 menu (data-tab="notices") to 공지·키워드.
+    expect(admin).toContain('<span>공지·키워드</span>');
     expect(admin).toContain('id="home-ops-open-keyword-briefing"');
     expect(admin).toContain('function openKeywordBriefingEditor()');
     expect(admin).toContain('부방장 황금키워드 수정');

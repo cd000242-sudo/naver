@@ -93,9 +93,12 @@ describe('admin shell tools - summarize', () => {
     expect(k.revenue).toMatchObject({ ok: true, value: '₩379,000' });
     expect(k.revenue.sub).toContain('₩2,318,000');
     const t = Object.fromEntries(s.todo.map((x: any) => [x.key, x]));
-    expect([t.bank.count, t.reviews.count, t.income.count, t.tips.count, t.trialEnd.count]).toEqual([2, 2, 3, 1, 1]);
+    // [2026-11-16] Admin unslop: reviews/income/tips merged into one approvals tile, expiring covers trial + paid.
+    expect([t.approvals.count, t.bank.count, t.expiring.count]).toEqual([6, 2, 1]);
+    expect(t.approvals.hint).toBe('후기 2 · 수익 인증 3 · 팁 1');
+    expect(t.approvals.tab).toBe('approvals');
     expect(t.bank.tab).toBe('bank');
-    expect(t.trialEnd.tab).toBe('licenses');
+    expect(t.expiring.tab).toBe('licenses');
     expect(s.recent.items).toHaveLength(5);
     expect(s.bars.ok).toBe(true);
   });
@@ -110,7 +113,7 @@ describe('admin shell tools - summarize', () => {
     expect(k.trials.ok).toBe(true);
     const t = Object.fromEntries(s.todo.map((x: any) => [x.key, x]));
     expect(t.bank.ok).toBe(false);
-    expect(t.reviews.ok).toBe(true);
+    expect(t.approvals.ok).toBe(true);
     expect(tools.renderKpis(s.kpis)).toContain('불러오지 못했습니다');
     expect(tools.renderTodo(s.todo)).toContain('불러오지 못했습니다');
   });
@@ -126,7 +129,7 @@ describe('admin shell tools - rendering', () => {
   });
   it('makes todo tiles navigable through data-go', () => {
     const html = tools.renderTodo(tools.summarize(full(), NOW).todo);
-    for (const tab of ['bank', 'reviews', 'income', 'tips', 'licenses']) expect(html).toContain(`data-go="${tab}"`);
+    for (const tab of ['approvals', 'bank', 'licenses']) expect(html).toContain(`data-go="${tab}"`);
   });
   it('shows an honest empty state when there are no recent orders', () => {
     expect(tools.renderRecent({ ok: true, items: [] })).toContain('주문이 없습니다');

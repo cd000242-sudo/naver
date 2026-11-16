@@ -12,12 +12,13 @@ const navTabs = [...html.matchAll(/class="nav-item[^"]*"[^>]*\sdata-tab="([^"]+)
 
 describe('admin shell - menu mapping (nothing from the old admin may disappear)', () => {
   it('offers the agreed menu in the agreed order', () => {
+    // [2026-11-16] Admin unslop (eb0eb488a): approvals merged into one screen, menu regrouped. Old tabs all kept.
     expect(navTabs).toEqual([
       'dashboard',
-      'notices', 'editor', 'reviews', 'income', 'tips',
-      'analytics', 'orders', 'bank',
-      'licenses', 'trial', 'leads',
-      'leword-settings',
+      'approvals', 'bank', 'orders', 'licenses', 'trial',
+      'notices', 'editor',
+      'analytics', 'leads', 'leword-settings',
+      'reviews', 'income', 'tips',
     ]);
   });
 
