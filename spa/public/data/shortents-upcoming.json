@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T05:02:04.339Z",
+ "builtAt": "2026-11-16T05:12:07.891Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,70 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 15,
  "candidates": [
   {
-   "keyword": "발언하는 김민석 대표",
+   "keyword": "JTBC 올림픽 중계권 해지",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 24,
-   "recent20": 4,
-   "press": 13,
-   "firstArticleAt": "2026-11-16T03:38:00.000Z",
+   "articles90": 16,
+   "recent20": 3,
+   "press": 16,
+   "firstArticleAt": "2026-11-16T03:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "최민희, '녹취록 파문' 거듭 사과…김민석 \"당헌·당규 따라 조치\"",
-     "press": "iminju.net",
-     "publishedAt": "2026-11-16T04:56:00.000Z",
-     "link": "http://www.iminju.net/news/articleView.html?idxno=172518"
+     "title": "JTBC, 올림픽 중계권 포기…\"사업 지속 어려워\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-16T05:05:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014324771"
     },
     {
-     "title": "\"김민석, 정말 통합 위해 애썼나\" 한민수 공개저격…최민희는 90도 사과",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-16T04:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005354236?sid=100"
+     "title": "JTBC, 올림픽 중계권 계약 해지…\"재무 불확실성 제거\"",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-16T05:03:00.000Z",
+     "link": "https://m.entertain.naver.com/article/119/0003155695"
     },
     {
-     "title": "김민석, 최민희 발언 논란에 \"정치 별개 윤리 문제 판단 이뤄질 것\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-16T04:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001403336?sid=100"
+     "title": "JTBC, 올림픽 중계권 포기…IOC와 계약해지 [시그널]",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-16T04:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004682640?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "개헌",
+   "sources": [
+    "google"
+   ],
+   "articles90": 16,
+   "recent20": 4,
+   "press": 14,
+   "firstArticleAt": "2026-11-16T03:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "국힘 \"趙의장 개헌론, 국면 전환용…이번 정부서 개헌없다\"(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-16T05:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016444086?sid=100"
+    },
+    {
+     "title": "조정식 \"개헌 특위서 '현직 대통령에 연임 미적용' 명시할수도\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-16T05:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000651318?sid=100"
+    },
+    {
+     "title": "국민의힘 “이재명 정부서 개헌 없다”… 조정식 의장에 사퇴 요구",
+     "press": "mediawatch.kr",
+     "publishedAt": "2026-11-16T05:02:00.000Z",
+     "link": "https://www.mediawatch.kr/news/article.html?no=261750"
     }
    ]
   },
@@ -47,13 +80,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
+   "articles90": 14,
    "recent20": 2,
-   "press": 13,
+   "press": 14,
    "firstArticleAt": "2026-11-16T04:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "행정기관 업무용 이메일 해킹‥300여개 계정에 비정상 접속 확인",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-16T05:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001535855?sid=102"
+    },
     {
      "title": "행정기관 이메일 계정 300여 개 해킹…정부, 합동점검 나서",
      "press": "nocutnews.co.kr",
@@ -65,12 +104,38 @@
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-16T04:47:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/055/0001403332?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "발언하는 김민석 대표",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 24,
+   "recent20": 2,
+   "press": 13,
+   "firstArticleAt": "2026-11-16T03:43:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김민석, 최민희 발언 논란에 \"정치와 별개로 윤리 판단\"",
+     "press": "goodnews1.com",
+     "publishedAt": "2026-11-16T05:06:00.000Z",
+     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466245"
     },
     {
-     "title": "행정기관 업무용 이메일 해킹…300여 개 계정 접속 개인정보 유출",
-     "press": "public25.com",
-     "publishedAt": "2026-11-16T04:42:00.000Z",
-     "link": "https://www.public25.com/news/articleView.html?idxno=58548"
+     "title": "최민희, '녹취록 파문' 거듭 사과…김민석 \"당헌·당규 따라 조치\"",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-16T04:56:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=172518"
+    },
+    {
+     "title": "\"김민석, 정말 통합 위해 애썼나\" 한민수 공개저격…최민희는 90도 사과",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-16T04:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005354236?sid=100"
     }
    ]
   },
@@ -79,13 +144,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 2,
-   "press": 10,
+   "articles90": 11,
+   "recent20": 3,
+   "press": 11,
    "firstArticleAt": "2026-11-16T03:46:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "주지훈, 주식 평가액 34억 급감했는데…16년 소속사와 결별→독자 회사...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-16T05:03:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004467027"
+    },
     {
      "title": "주지훈, 블리츠웨이와 전속계약 종료..“독자 회사 설립 준비”",
      "press": "breaknews.com",
@@ -97,12 +168,6 @@
      "press": "sportsworldi.com",
      "publishedAt": "2026-11-16T04:55:00.000Z",
      "link": "https://m.entertain.naver.com/article/396/0000761052"
-    },
-    {
-     "title": "\"48억이 16억으로\"…16년 인연 끝내는 주지훈 결국 회사 떠난다",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-16T04:22:00.000Z",
-     "link": "https://m.entertain.naver.com/article/015/0005354225"
     }
    ]
   },
@@ -112,23 +177,23 @@
     "signal.bz"
    ],
    "articles90": 9,
-   "recent20": 1,
+   "recent20": 2,
    "press": 9,
-   "firstArticleAt": "2026-11-16T03:40:00.000Z",
+   "firstArticleAt": "2026-11-16T03:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "韓·日 정상, 17일 마닐라서 회담…中·日 회담은 불발될 듯",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-16T05:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004210179?sid=104"
+    },
     {
      "title": "李대통령, 마닐라 도착…아세안·APEC 연쇄 정상외교 돌입",
      "press": "sedaily.com",
      "publishedAt": "2026-11-16T04:55:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/011/0004682639?sid=100"
-    },
-    {
-     "title": "日 \"다카이치, 17일 마닐라서 이 대통령과 양자 회담\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-16T04:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926605?sid=104"
     },
     {
      "title": "日다카이치, 17일 필리핀서 李대통령과 정상회담",
@@ -139,34 +204,66 @@
    ]
   },
   {
+   "keyword": "임현주 MBC 퇴사",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-16T03:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "임현주 아나운서, 13년 8개월 만에 MBC 퇴사",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-16T05:10:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16277807"
+    },
+    {
+     "title": "임현주, MBC 퇴사…\"미지의 가능성 탐험해보자 결심\"",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-16T04:51:00.000Z",
+     "link": "https://m.entertain.naver.com/article/417/0001164450"
+    },
+    {
+     "title": "임현주 아나, 13년만에 MBC 퇴사 \"회사 밖 세상 탐험해보겠다\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-16T04:49:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009291451"
+    }
+   ]
+  },
+  {
    "keyword": "독립유공자 유해봉환식",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 26,
-   "recent20": 3,
-   "press": 6,
+   "articles90": 28,
+   "recent20": 2,
+   "press": 7,
    "firstArticleAt": "2026-11-16T03:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "韓총리 \"이역만리 독립유공자 마지막 한 분까지 고국으로 모실 것\"",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-16T05:10:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4444967"
+    },
+    {
+     "title": "[포토] 고국 품으로 돌아온 독립유공자 호시한·이괄 지사",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-16T05:06:00.000Z",
+     "link": "https://www.ajunews.com/view/20261116140123259"
+    },
+    {
      "title": "[포토] 한성숙 총리, 독립유공자 유해봉환식서 건국훈장 헌정",
      "press": "ajunews.com",
      "publishedAt": "2026-11-16T04:52:00.000Z",
      "link": "https://www.ajunews.com/view/20261116134456179"
-    },
-    {
-     "title": "[포토] 국외 안장 독립유공자 호시한·이괄 지사 유해봉환식",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-16T04:46:00.000Z",
-     "link": "https://www.ajunews.com/view/20261116134308170"
-    },
-    {
-     "title": "[포토] 독립유공자 호시한·이괄 지사 유해봉환식",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-16T04:44:00.000Z",
-     "link": "https://www.ajunews.com/view/20261116133903153"
     }
    ]
   },
@@ -175,13 +272,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 5,
+   "articles90": 7,
+   "recent20": 2,
+   "press": 6,
    "firstArticleAt": "2026-11-16T03:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "수능 코앞인데 'AI 커닝' 비상…수능 부정행위 대책 고심",
+     "press": "goodnews1.com",
+     "publishedAt": "2026-11-16T05:06:00.000Z",
+     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466246"
+    },
     {
      "title": "현직 강사 \"경찰대 시험, AI 부정행위 강하게 의심\" 일파만파",
      "press": "wikitree.co.kr",
@@ -193,12 +296,6 @@
      "press": "sisajournal.com",
      "publishedAt": "2026-11-16T04:18:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/586/0000142353?sid=102"
-    },
-    {
-     "title": "'수능 AI 부정행위 대책' 고심하는 최교진 교육부 장관",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-16T04:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004210155?sid=100"
     }
    ]
   },
@@ -216,6 +313,12 @@
    "capped": false,
    "samples": [
     {
+     "title": "[포토] '화학물질저감 우수제품', 더 안전한 선택!",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-16T04:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003486041?sid=100"
+    },
+    {
      "title": "[포토] 화학안전주간 맞아 '화학물질저감 우수제품' 한자리에",
      "press": "etnews.com",
      "publishedAt": "2026-11-16T04:42:00.000Z",
@@ -226,22 +329,40 @@
      "press": "etnews.com",
      "publishedAt": "2026-11-16T04:42:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/030/0003486043?sid=100"
-    },
-    {
-     "title": "[포토] '화학물질저감 우수제품', 더 안전한 선택!",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-16T04:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003486041?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 619,
-  "matched": 332,
-  "avgLeadMin": 834,
+  "flagged": 621,
+  "matched": 336,
+  "avgLeadMin": 859,
   "recent": [
+   {
+    "keyword": "양극화 총괄반 첫 회의",
+    "hitKeyword": "주택자산 양극화 심화",
+    "hitAt": "2026-11-16T14:00:00+09:00",
+    "leadMin": 5974
+   },
+   {
+    "keyword": "정부 양극화 대응 TF",
+    "hitKeyword": "주택자산 양극화 심화",
+    "hitAt": "2026-11-16T14:00:00+09:00",
+    "leadMin": 5899
+   },
+   {
+    "keyword": "FA 선수 22명 명단",
+    "hitKeyword": "KBO FA 22명 공시",
+    "hitAt": "2026-11-16T14:00:00+09:00",
+    "leadMin": 89
+   },
+   {
+    "keyword": "FA 승인 22명",
+    "hitKeyword": "KBO FA 22명 공시",
+    "hitAt": "2026-11-16T14:00:00+09:00",
+    "leadMin": 38
+   },
    {
     "keyword": "모친상 조의금 기부",
     "hitKeyword": "이호선 조의금 전액 기부",
@@ -277,30 +398,6 @@
     "hitKeyword": "AI 수능 부정행위",
     "hitAt": "2026-11-16T13:00:00+09:00",
     "leadMin": 69
-   },
-   {
-    "keyword": "수능 연기와 AI 대책 필요",
-    "hitKeyword": "AI 수능 부정행위",
-    "hitAt": "2026-11-16T13:00:00+09:00",
-    "leadMin": 59
-   },
-   {
-    "keyword": "임현주 MBC 퇴사",
-    "hitKeyword": "임현주 MBC 퇴사",
-    "hitAt": "2026-11-16T13:00:00+09:00",
-    "leadMin": 59
-   },
-   {
-    "keyword": "수능 AI 부정행위 심각",
-    "hitKeyword": "AI 수능 부정행위",
-    "hitAt": "2026-11-16T13:00:00+09:00",
-    "leadMin": 18
-   },
-   {
-    "keyword": "폭설 김윤석 구교환, 짜릿한 전율의 브로맨스",
-    "hitKeyword": "폭설 김윤석 구교환",
-    "hitAt": "2026-11-16T12:30:00+09:00",
-    "leadMin": 5486
    }
   ]
  }
