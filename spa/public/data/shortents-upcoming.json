@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T03:31:27.251Z",
+ "builtAt": "2026-11-16T03:41:31.436Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,49 +8,49 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 14,
  "candidates": [
   {
-   "keyword": "SKT-효성 AI센터 구축",
+   "keyword": "JTBC 올림픽 중계권 해지",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 60,
-   "recent20": 1,
-   "press": 54,
-   "firstArticleAt": "2026-11-16T02:02:00.000Z",
-   "exclusive": false,
+   "articles90": 39,
+   "recent20": 3,
+   "press": 34,
+   "firstArticleAt": "2026-11-16T02:12:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "SKT·효성重, AI 전력 인프라 동맹",
-     "press": "00news.co.kr",
-     "publishedAt": "2026-11-16T03:16:00.000Z",
-     "link": "http://www.00news.co.kr/news/articleView.html?idxno=108066"
+     "title": "JTBC, IOC 올림픽 중계권 계약 해지..\"불확실성 해소\"",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-16T03:40:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109928516025"
     },
     {
-     "title": "SKT-효성중공업, GW급 AIDC 구축 사업 동맹…글로벌 시장 공략",
-     "press": "it-b.co.kr",
-     "publishedAt": "2026-11-16T03:10:00.000Z",
-     "link": "https://www.it-b.co.kr/news/articleView.html?idxno=90700"
+     "title": "JTBC, IOC와 올림픽 중계권 계약 해지 “재무적 불확실성 해소”",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-16T03:40:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1794800060530930006"
     },
     {
-     "title": "SK텔레콤·효성중공업, GW급 AI 데이터센터 구축 협력…전력 인프라 공동...",
-     "press": "webeconomy.co.kr",
-     "publishedAt": "2026-11-16T03:02:00.000Z",
-     "link": "https://www.webeconomy.co.kr/news/articleView.html?idxno=2376594"
+     "title": "‘기업회생 절차’ JTBC, IOC와 올림픽 중계권 계약 전격 해지",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-16T03:38:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001281192"
     }
    ]
   },
   {
    "keyword": "조정식 국회의장 공동위원장",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 53,
-   "recent20": 3,
-   "press": 36,
-   "firstArticleAt": "2026-11-16T02:02:00.000Z",
+   "articles90": 42,
+   "recent20": 1,
+   "press": 27,
+   "firstArticleAt": "2026-11-16T02:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,78 +75,14 @@
    ]
   },
   {
-   "keyword": "수능 AI 부정행위 대책 필요",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 54,
-   "recent20": 8,
-   "press": 33,
-   "firstArticleAt": "2026-11-16T02:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"이번 수능도 뚫린다\"…강성태 경고→유대종·미미미누 연기 촉구, 교육...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-16T03:21:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001408435"
-    },
-    {
-     "title": "\"수능 '전파차단' 불가…시험장 신체수색, 입실시간 한계\"[일문일답]",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-16T03:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014324526?sid=102"
-    },
-    {
-     "title": "교육부 \"수능 연기 어려워…전파 차단 과기부와 협의해 17일 발표\"",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-16T03:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000543913?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "JTBC 올림픽 중계권 해지",
+   "keyword": "19일 대법 선고",
    "sources": [
     "nate"
    ],
-   "articles90": 36,
-   "recent20": 3,
-   "press": 31,
-   "firstArticleAt": "2026-11-16T02:12:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘기업회생 절차’ JTBC, 2032년까지 사인한 올림픽 중계권 계약 해지",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-16T03:21:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/144/0001150035"
-    },
-    {
-     "title": "'매각 추진' JTBC, IOC와 올림픽 중계권 계약 해지",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-16T03:19:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/214/0001535839"
-    },
-    {
-     "title": "회생절차 밟는 JTBC \"올림픽 중계권 계약 해지\"",
-     "press": "mediaus.co.kr",
-     "publishedAt": "2026-11-16T03:18:00.000Z",
-     "link": "https://www.mediaus.co.kr/news/articleView.html?idxno=319013"
-    }
-   ]
-  },
-  {
-   "keyword": "대법, 한덕수 내란 19일 선고",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 34,
-   "recent20": 3,
-   "press": 27,
-   "firstArticleAt": "2026-11-16T02:02:00.000Z",
+   "articles90": 24,
+   "recent20": 2,
+   "press": 20,
+   "firstArticleAt": "2026-11-16T02:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -171,169 +107,41 @@
    ]
   },
   {
-   "keyword": "FA 선수 22명 명단",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 22,
-   "recent20": 2,
-   "press": 21,
-   "firstArticleAt": "2026-11-16T02:14:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "프로야구 FA 22명 공시… 원태인·구자욱 시장에 나온다",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-16T03:14:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3449018"
-    },
-    {
-     "title": "원태인·구자욱 포함 프로야구 FA 22명 공시",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-16T03:13:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/088/0001040473"
-    },
-    {
-     "title": "[공식발표]'3수, 4수 선택이라니' FA 신청서 제출 안한 6명의 선수들, 대...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-16T03:07:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/076/0004467007"
-    }
-   ]
-  },
-  {
-   "keyword": "우주",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 13,
-   "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-16T02:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "위성기업 실무 역량 강화…우주청, 시스템엔지니어링 현장 교육",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-16T03:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003155655?sid=105"
-    },
-    {
-     "title": "우주청, 민간 위성기업 대상 맞춤형 '시스템엔지니어링 교육' 실시",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-16T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003485993?sid=105"
-    },
-    {
-     "title": "우주청, 민간 위성기업 현장 맞춤형 교육…내년엔 대학까지 확대",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-16T03:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014324424?sid=103"
-    }
-   ]
-  },
-  {
    "keyword": "미중러 정상회담",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-16T02:03:00.000Z",
+   "articles90": 11,
+   "recent20": 3,
+   "press": 7,
+   "firstArticleAt": "2026-11-16T02:18:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "미중러 3국 정상회담에 촉각…외교부 \"제2 얄타회담 안돼\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-16T03:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014324535?sid=100"
+    },
+    {
+     "title": "통일부 \"北조용원 방러, 미중러 회담 직전 고위급 교류…동향 주시\"",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-16T03:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005843154?sid=100"
+    },
     {
      "title": "中, APEC 앞두고 '아태공동체' 부각…미중러회담서 외교력 과시?",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-16T03:29:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016443804?sid=104"
-    },
-    {
-     "title": "중국도 미중러 정상회담 개최 공식 발표…“19일 선전”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-16T03:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012294550?sid=104"
-    },
-    {
-     "title": "'아세안 순방' 李대통령, 내일 한일 정상회담…동북아 정세 논의",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-16T03:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016443761?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "김유정의 100일 거짓말",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-16T02:11:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘100일의 거짓말’ 김유정, 엔딩 장악한 열연",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-16T02:44:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611160192"
-    },
-    {
-     "title": "'100일의 거짓말' 진선규, 김현주·이무생과 숨 막히는 대립",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-16T02:38:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16277697"
-    },
-    {
-     "title": "'100일의 거짓말' 김유정, 총구 앞 얼어붙은 엔딩",
-     "press": "atstar1.com",
-     "publishedAt": "2026-11-16T02:38:00.000Z",
-     "link": "https://m.entertain.naver.com/article/415/0000053840"
-    }
-   ]
-  },
-  {
-   "keyword": "이재명",
-   "sources": [
-    "google"
-   ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-16T02:40:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "이재명 대통령 지지율 36.4%…전주보다 0.5%p 상승",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-16T03:20:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3753059"
-    },
-    {
-     "title": "장동혁 “‘조작기소 특검법’이 ‘이재명 탈옥법’…한성숙, 탈옥죄 수...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-16T03:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001205062?sid=100"
-    },
-    {
-     "title": "국힘, 2주째 청와대 앞 최고위… “이재명 탈옥법 통과땐 국무위원도 공...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-16T03:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002833108?sid=100"
     }
    ]
   },
   {
    "keyword": "청주시",
    "sources": [
+    "signal.bz",
     "google"
    ],
    "articles90": 7,
@@ -350,58 +158,58 @@
      "link": "https://n.news.naver.com/mnews/article/001/0016443775?sid=102"
     },
     {
-     "title": "이장섭 청주시장, 오창 후기리 소각장 환경영향평가 재평가 협의 주문",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-16T02:45:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261116000651"
-    },
-    {
      "title": "충북 노동단체, 청주시장 고발…\"수거 차량 발판 위험 외면\"",
      "press": "newsis.com",
      "publishedAt": "2026-11-16T02:45:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014324357?sid=102"
+    },
+    {
+     "title": "이장섭 청주시장, 오창 후기리 소각장 환경영향평가 재평가 협의 주문",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-16T02:45:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261116000651"
     }
    ]
   },
   {
-   "keyword": "하이에나 표현 최민희 의원 고소",
+   "keyword": "수능 AI 부정행위 심각",
    "sources": [
     "nate"
    ],
    "articles90": 4,
    "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-16T02:02:00.000Z",
+   "firstArticleAt": "2026-11-16T02:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘하이에나 떼’ 발언 결국 경찰로… 사진기자 10명, 최민희 모욕 혐의...",
-     "press": "mediawatch.kr",
-     "publishedAt": "2026-11-16T03:04:00.000Z",
-     "link": "https://www.mediawatch.kr/news/article.html?no=261748"
+     "title": "\"수능 감독관 혼자 AI 안경 가려내나\" 현장 판별 부담 '우려'",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-16T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014324449?sid=102"
     },
     {
-     "title": "한국사진기자협회, \"하이에나 떼들\" 최민희 의원 모욕죄 고소",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-16T02:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004210112?sid=102"
+     "title": "'AI 커닝' 사태에 불붙는 '수능 연기론'…교육부 \"검토하고 있지 않다\"",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-16T02:26:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903176"
     },
     {
-     "title": "사진기자협회, “하이에나 떼들” 최민희 경찰 고소…모욕죄 성립 주장",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-16T02:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005764272?sid=102"
+     "title": "\"'AI 반칙' 못 막으면 사회 신뢰 무너진다\" 신문들, 경고음",
+     "press": "journalist.or.kr",
+     "publishedAt": "2026-11-16T02:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/127/0000040062?sid=102"
     }
    ]
   },
   {
-   "keyword": "화학물질저감 우수제품 전시",
+   "keyword": "화학물질저감 제품 전시",
    "sources": [
     "nate"
    ],
    "articles90": 16,
-   "recent20": 4,
+   "recent20": 2,
    "press": 3,
    "firstArticleAt": "2026-11-16T02:20:00.000Z",
    "exclusive": false,
@@ -430,69 +238,69 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 596,
-  "matched": 313,
-  "avgLeadMin": 745,
+  "flagged": 599,
+  "matched": 323,
+  "avgLeadMin": 855,
   "recent": [
    {
-    "keyword": "물건 이호선 긴급",
-    "hitKeyword": "이호선 조의금 기부",
-    "hitAt": "2026-11-16T12:00:00+09:00",
-    "leadMin": 4619
+    "keyword": "폭설 김윤석 구교환, 짜릿한 전율의 브로맨스",
+    "hitKeyword": "폭설 김윤석 구교환",
+    "hitAt": "2026-11-16T12:30:00+09:00",
+    "leadMin": 5486
    },
    {
-    "keyword": "이현중",
-    "hitKeyword": "이현중 G리그 역전승",
-    "hitAt": "2026-11-16T12:00:00+09:00",
-    "leadMin": 29
+    "keyword": "폭설 김윤석 구교환 짜릿한 전율",
+    "hitKeyword": "폭설 김윤석 구교환",
+    "hitAt": "2026-11-16T12:30:00+09:00",
+    "leadMin": 5466
    },
    {
-    "keyword": "박혜연",
-    "hitKeyword": "김승수 박혜연 고백",
-    "hitAt": "2026-11-16T12:00:00+09:00",
-    "leadMin": 29
+    "keyword": "김윤석 구교환 폭설",
+    "hitKeyword": "폭설 김윤석 구교환",
+    "hitAt": "2026-11-16T12:30:00+09:00",
+    "leadMin": 5456
    },
    {
-    "keyword": "서울중수청 명륜당 압수수색",
-    "hitKeyword": "명륜당 본사 압수수색",
-    "hitAt": "2026-11-16T12:00:00+09:00",
-    "leadMin": 19
+    "keyword": "폭설 김윤석 구교환 연기 케미",
+    "hitKeyword": "폭설 김윤석 구교환",
+    "hitAt": "2026-11-16T12:30:00+09:00",
+    "leadMin": 5426
    },
    {
-    "keyword": "이호선, 모친상 조의금 기부",
-    "hitKeyword": "이호선 조의금 기부",
-    "hitAt": "2026-11-16T12:00:00+09:00",
-    "leadMin": 19
+    "keyword": "폭설 김윤석 구교환 전율 주목",
+    "hitKeyword": "폭설 김윤석 구교환",
+    "hitAt": "2026-11-16T12:30:00+09:00",
+    "leadMin": 5385
    },
    {
-    "keyword": "명륜당 압수수색",
-    "hitKeyword": "명륜당 본사 압수수색",
-    "hitAt": "2026-11-16T12:00:00+09:00",
-    "leadMin": 9
+    "keyword": "폭설 김윤석 연기 호흡",
+    "hitKeyword": "폭설 김윤석 구교환",
+    "hitAt": "2026-11-16T12:30:00+09:00",
+    "leadMin": 5365
    },
    {
-    "keyword": "김정은, 통천 주택구 시찰",
-    "hitKeyword": "김정은 사망 예언",
-    "hitAt": "2026-11-16T11:30:00+09:00",
-    "leadMin": 5985
+    "keyword": "김윤석 폭설",
+    "hitKeyword": "폭설 김윤석 구교환",
+    "hitAt": "2026-11-16T12:30:00+09:00",
+    "leadMin": 5325
    },
    {
-    "keyword": "김정은 통천군 주택구 시찰",
-    "hitKeyword": "김정은 사망 예언",
-    "hitAt": "2026-11-16T11:30:00+09:00",
-    "leadMin": 5955
+    "keyword": "폭설",
+    "hitKeyword": "폭설 김윤석 구교환",
+    "hitAt": "2026-11-16T12:30:00+09:00",
+    "leadMin": 5133
    },
    {
-    "keyword": "김정은 주택구 시찰",
-    "hitKeyword": "김정은 사망 예언",
-    "hitAt": "2026-11-16T11:30:00+09:00",
-    "leadMin": 5904
+    "keyword": "김유정의 100일 거짓말",
+    "hitKeyword": "100일의 거짓말 심리전",
+    "hitAt": "2026-11-16T12:30:00+09:00",
+    "leadMin": 59
    },
    {
-    "keyword": "김정은 시찰",
-    "hitKeyword": "김정은 사망 예언",
-    "hitAt": "2026-11-16T11:30:00+09:00",
-    "leadMin": 5366
+    "keyword": "김유정 100일 거짓말",
+    "hitKeyword": "100일의 거짓말 심리전",
+    "hitAt": "2026-11-16T12:30:00+09:00",
+    "leadMin": 49
    }
   ]
  }
