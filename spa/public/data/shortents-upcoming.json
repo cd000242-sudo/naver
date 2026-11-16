@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T12:02:00.050Z",
+ "builtAt": "2026-11-16T12:12:04.038Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,38 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 4,
  "candidates": [
   {
-   "keyword": "이 대통령, 한-메콩 회의 개최",
+   "keyword": "보안",
    "sources": [
-    "nate"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-16T10:44:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-16T11:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한·메콩 정상회의 6년 만에 재개…李 \"협력 지평 넓힐 것\"",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-16T11:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000192601?sid=100"
+     "title": "김석준 교육감, 부산 도착 수능 문답지 봉인 해제·보안 점검",
+     "press": "pointe.co.kr",
+     "publishedAt": "2026-11-16T12:02:00.000Z",
+     "link": "https://www.pointe.co.kr/news/articleView.html?idxno=87864"
     },
     {
-     "title": "이 대통령 메콩 국가에 \"원조 '받던' 나라서 '하는' 나라 경험 나눌것\"",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-16T11:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000521011?sid=104"
+     "title": "'모두의 창업' 참여 기업 보안 심사 강화에도 \"기준 부실\"",
+     "press": "safetimes.co.kr",
+     "publishedAt": "2026-11-16T11:44:00.000Z",
+     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247558"
     },
     {
-     "title": "李대통령 \"韓, 메콩 발전 함께할 파트너…선진국 성장 경험 나누려\"",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-16T11:30:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5084087"
-    }
-   ]
-  },
-  {
-   "keyword": "씨엘, 박봄 건강 언급",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-16T11:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "2NE1 씨엘, 박봄 언급 \"언니 건강이 우선\"",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-16T11:36:00.000Z",
-     "link": "https://m.entertain.naver.com/article/437/0000521004"
-    },
-    {
-     "title": "씨엘, 활동중단 박봄 언급..\"테디와 2NE1 신곡 준비했지만..언니 건강이...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-16T11:27:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005641437"
-    },
-    {
-     "title": "'2NE1' 씨엘, 박봄 건강 상태 언급… 무슨 일?",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-16T11:04:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1193552"
+     "title": "라이터, 보안 사고 조사로 모든 출금·풀 생성 일시 중단",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-16T11:38:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/439067"
     }
    ]
   }
@@ -78,9 +47,57 @@
  "hitRate": {
   "days": 7,
   "flagged": 711,
-  "matched": 379,
-  "avgLeadMin": 801,
+  "matched": 387,
+  "avgLeadMin": 824,
   "recent": [
+   {
+    "keyword": "CL 더블랙레이블과 전속계약",
+    "hitKeyword": "블랙핑크 YG 전속계약 제외",
+    "hitAt": "2026-11-16T21:00:00+09:00",
+    "leadMin": 5018
+   },
+   {
+    "keyword": "씨엘, 테디 품 전속계약",
+    "hitKeyword": "블랙핑크 YG 전속계약 제외",
+    "hitAt": "2026-11-16T21:00:00+09:00",
+    "leadMin": 4977
+   },
+   {
+    "keyword": "CL, 테디 품으로 전속계약",
+    "hitKeyword": "블랙핑크 YG 전속계약 제외",
+    "hitAt": "2026-11-16T21:00:00+09:00",
+    "leadMin": 4947
+   },
+   {
+    "keyword": "귀국하는 최원호 감독님",
+    "hitKeyword": "최원호 감독 한일전 사과",
+    "hitAt": "2026-11-16T21:00:00+09:00",
+    "leadMin": 216
+   },
+   {
+    "keyword": "블랙핑크 YG 전속계약 명단",
+    "hitKeyword": "블랙핑크 YG 전속계약 제외",
+    "hitAt": "2026-11-16T21:00:00+09:00",
+    "leadMin": 196
+   },
+   {
+    "keyword": "블랙핑크 YG 계약 논의 중",
+    "hitKeyword": "블랙핑크 YG 전속계약 제외",
+    "hitAt": "2026-11-16T21:00:00+09:00",
+    "leadMin": 39
+   },
+   {
+    "keyword": "블랙핑크 YG 명단 제외",
+    "hitKeyword": "블랙핑크 YG 전속계약 제외",
+    "hitAt": "2026-11-16T21:00:00+09:00",
+    "leadMin": 18
+   },
+   {
+    "keyword": "이호선 모친상 조의금 기부",
+    "hitKeyword": "이호선 조의금 기부",
+    "hitAt": "2026-11-16T21:00:00+09:00",
+    "leadMin": 8
+   },
    {
     "keyword": "김유정 100일 거짓말",
     "hitKeyword": "젠슨 황 불륜 거짓말",
@@ -92,54 +109,6 @@
     "hitKeyword": "초소형 카메라 부정행위",
     "hitAt": "2026-11-16T20:30:00+09:00",
     "leadMin": 19
-   },
-   {
-    "keyword": "AI 부정행위 대책 필요",
-    "hitKeyword": "초소형 카메라 부정행위",
-    "hitAt": "2026-11-16T20:30:00+09:00",
-    "leadMin": 9
-   },
-   {
-    "keyword": "전기",
-    "hitKeyword": "젠슨 황 전기작가 폭로",
-    "hitAt": "2026-11-16T20:00:00+09:00",
-    "leadMin": 5199
-   },
-   {
-    "keyword": "AI 안경 부정행위 적발",
-    "hitKeyword": "AI 커닝 적발",
-    "hitAt": "2026-11-16T20:00:00+09:00",
-    "leadMin": 19
-   },
-   {
-    "keyword": "sk그룹",
-    "hitKeyword": "SK그룹 시총",
-    "hitAt": "2026-11-16T19:30:00+09:00",
-    "leadMin": 6168
-   },
-   {
-    "keyword": "한화",
-    "hitKeyword": "한화 롯데 미야자키 경기",
-    "hitAt": "2026-11-16T19:30:00+09:00",
-    "leadMin": 348
-   },
-   {
-    "keyword": "민희진 배임 혐의 송치",
-    "hitKeyword": "민희진 배임 혐의 송치",
-    "hitAt": "2026-11-16T19:30:00+09:00",
-    "leadMin": 126
-   },
-   {
-    "keyword": "APBC 마치고 귀국하는",
-    "hitKeyword": "APBC 준우승 한일전",
-    "hitAt": "2026-11-16T19:30:00+09:00",
-    "leadMin": 80
-   },
-   {
-    "keyword": "민희진, 뉴진스 배임 송치",
-    "hitKeyword": "민희진 배임 혐의 송치",
-    "hitAt": "2026-11-16T19:30:00+09:00",
-    "leadMin": 60
    }
   ]
  }
