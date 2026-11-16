@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T08:13:43.740Z",
+ "builtAt": "2026-11-16T08:23:54.824Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,70 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 13,
+ "measured": 18,
  "candidates": [
-  {
-   "keyword": "3분기 매출 성장",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 86,
-   "recent20": 45,
-   "press": 60,
-   "firstArticleAt": "2026-11-16T07:38:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "\"中9.3%·러47.9% 성장에\" 오리온, 3Q영업익 1509억·전년比9.4%↑",
-     "press": "catchnews.kr",
-     "publishedAt": "2026-11-16T08:11:00.000Z",
-     "link": "https://www.catchnews.kr/news/articleView.html?idxno=130579"
-    },
-    {
-     "title": "네오티스, 3분기 누적 영업익 108억…전년比 93%↑",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-16T08:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005843322?sid=101"
-    },
-    {
-     "title": "오리온, 3분기 영업익 1509억원 전년비 9.4%↑…\"글로벌 수요 증가\"",
-     "press": "newspost.kr",
-     "publishedAt": "2026-11-16T08:10:00.000Z",
-     "link": "https://www.newspost.kr/news/articleView.html?idxno=227451"
-    }
-   ]
-  },
   {
    "keyword": "신유열 사장 승진",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 63,
-   "recent20": 6,
-   "press": 58,
-   "firstArticleAt": "2026-11-16T06:44:00.000Z",
+   "articles90": 59,
+   "recent20": 7,
+   "press": 54,
+   "firstArticleAt": "2026-11-16T06:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "신유열 전면에 세운 롯데…젊은 피 수혈·성과주의 인사(종합)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-16T08:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014325538?sid=101"
+     "title": "롯데 3세 신유열 경영 전면에… 지주사 사장 승진해 전략 총괄",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-16T08:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000965902?sid=101"
     },
     {
-     "title": "롯데 신유열 사장 승진…야심작 '바이오'는 아직 적자",
-     "press": "youthdaily.co.kr",
-     "publishedAt": "2026-11-16T08:08:00.000Z",
-     "link": "https://www.youthdaily.co.kr/news/article.html?no=229913"
+     "title": "신유열 사장 앞세운 롯데…'젊은 피' 수혈로 미래 성장 가속",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-16T08:16:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2648863"
     },
     {
-     "title": "'안정' 택한 롯데...신동빈 장남 신유열 사장, 그룹 전략 총괄 맡았다",
-     "press": "newsway.co.kr",
-     "publishedAt": "2026-11-16T08:08:00.000Z",
-     "link": "https://www.newsway.co.kr/news/view?ud=2026111617002423998"
+     "title": "“신유열 사장 승진” 롯데, 2027년 정기 임원인사 단행",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-16T08:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/382/0001305095?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "민희진 배임 혐의 송치",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 33,
+   "recent20": 12,
+   "press": 31,
+   "firstArticleAt": "2026-11-16T06:58:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "경찰, ‘뉴진스 계약해지 개입 의혹’ 민희진 배임 혐의로 송치",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-16T08:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001205175?sid=102"
+    },
+    {
+     "title": "민희진, 업무상 배임 혐의 송치..뉴진스 계약해지 관여 의혹",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-16T08:22:00.000Z",
+     "link": "http://www.breaknews.com/1251305"
+    },
+    {
+     "title": "민희진, 뉴진스 어도어 계약 해지에 영향 미쳤나…배임 혐의 송치 [MK★...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-16T08:21:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001147448"
     }
    ]
   },
@@ -80,13 +79,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 16,
-   "recent20": 3,
-   "press": 15,
+   "articles90": 17,
+   "recent20": 2,
+   "press": 16,
    "firstArticleAt": "2026-11-16T07:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "정승제, AI 커닝에 “항공 보안 준하는 입실 검사해야”",
+     "press": "weekly.khan.co.kr",
+     "publishedAt": "2026-11-16T08:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/033/0000053425?sid=102"
+    },
     {
      "title": "수능 사흘 앞 'AI 부정행위' 비상…현장 혼선·제도적 한계 도마 위",
      "press": "news.mtn.co.kr",
@@ -98,12 +103,134 @@
      "press": "jibs.co.kr",
      "publishedAt": "2026-11-16T08:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/661/0000086672?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "귀국하는 최원호 감독님",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 19,
+   "recent20": 5,
+   "press": 8,
+   "firstArticleAt": "2026-11-16T07:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "APBC 준우승 귀국한 최원호 \"일본전 꼭 이기고 싶었는데…죄송하다\"",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-16T08:22:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16277920"
     },
     {
-     "title": "첨단 커닝은 '초고속'인데 대책은 '걸음마'…AI의 습격",
-     "press": "newsgn.com",
-     "publishedAt": "2026-11-16T07:54:00.000Z",
-     "link": "https://www.newsgn.com/news/articleView.html?idxno=585994"
+     "title": "APBC 마친 최원호 감독",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-16T08:13:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/003/0014325553"
+    },
+    {
+     "title": "APBC 마치고 귀국해 인터뷰 하는 최원호 감독",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-16T08:13:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/003/0014325559"
+    }
+   ]
+  },
+  {
+   "keyword": "검사",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-16T08:00:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "전남광주 유통·학교급식 수산물 830건 방사능 검사…전부 '이상 없음'",
+     "press": "aitimes.com",
+     "publishedAt": "2026-11-16T08:22:00.000Z",
+     "link": "https://www.aitimes.com/news/articleView.html?idxno=217464"
+    },
+    {
+     "title": "정승제, AI 커닝에 “항공 보안 준하는 입실 검사해야”",
+     "press": "weekly.khan.co.kr",
+     "publishedAt": "2026-11-16T08:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/033/0000053425?sid=102"
+    },
+    {
+     "title": "경기도, PRRS 양성농가 147곳 확인… 검사 기반 맞춤형 백신 36만여 두분...",
+     "press": "lawissue.co.kr",
+     "publishedAt": "2026-11-16T08:10:00.000Z",
+     "link": "https://www.lawissue.co.kr/view.php?ud=202611161402416892d94aa4ada6_12"
+    }
+   ]
+  },
+  {
+   "keyword": "뉴스",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 6,
+   "press": 4,
+   "firstArticleAt": "2026-11-16T08:14:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "[포토뉴스] 을지대의료원, 창립 70주년 기념 '제5회 국제간호학술대회'...",
+     "press": "daily.hankooki.com",
+     "publishedAt": "2026-11-16T08:22:00.000Z",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1425617"
+    },
+    {
+     "title": "[포토뉴스] 논산계룡산림조합, 2027논산세계딸기산업엑스포 입장권 3600...",
+     "press": "daily.hankooki.com",
+     "publishedAt": "2026-11-16T08:22:00.000Z",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1425625"
+    },
+    {
+     "title": "[포토뉴스] 대전시의회 조성칠 의장, \"대전의 재생에너지 연구개발 위상...",
+     "press": "daily.hankooki.com",
+     "publishedAt": "2026-11-16T08:20:00.000Z",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1425616"
+    }
+   ]
+  },
+  {
+   "keyword": "한일 정상회담 마닐라",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 4,
+   "press": 4,
+   "firstArticleAt": "2026-11-16T08:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘아세안 순방’ 이재명 대통령, 내일 한일 정상회담…다카이치 총리와...",
+     "press": "kgnews.co.kr",
+     "publishedAt": "2026-11-16T08:18:00.000Z",
+     "link": "https://www.kgnews.co.kr/news/article.html?no=919818"
+    },
+    {
+     "title": "李대통령·다카이치, 17일 마닐라서 양자회담…미중러 앞 한일 공조",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-16T08:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005605004?sid=100"
+    },
+    {
+     "title": "아세안 협력 나선 한일…대중 외교는 '온도차'",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-16T08:12:00.000Z",
+     "link": "https://www.ajunews.com/view/20261116152902619"
     }
    ]
   },
@@ -112,24 +239,24 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-16T06:50:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-16T07:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "노후 침목·열차 제동장치 교체… 반복되는 철도사고 막는다",
-     "press": "sisunnews.co.kr",
-     "publishedAt": "2026-11-16T08:04:00.000Z",
-     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=249829"
-    },
     {
      "title": "인천교통공사, 대학수학능력시험 특별수송 종합안전대책 시행",
      "press": "jasm.co.kr",
      "publishedAt": "2026-11-16T08:04:00.000Z",
      "link": "https://www.jasm.co.kr/news/view/325471/?sc=Naver"
+    },
+    {
+     "title": "노후 침목·열차 제동장치 교체… 반복되는 철도사고 막는다",
+     "press": "sisunnews.co.kr",
+     "publishedAt": "2026-11-16T08:04:00.000Z",
+     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=249829"
     },
     {
      "title": "인천교통공사, 2027학년도 대학수학능력시험 특별수송 종합안전대책 시...",
@@ -140,45 +267,76 @@
    ]
   },
   {
-   "keyword": "뉴스",
+   "keyword": "야구 코치",
    "sources": [
     "google"
    ],
    "articles90": 4,
-   "recent20": 4,
+   "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-16T08:07:00.000Z",
+   "firstArticleAt": "2026-11-16T06:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[금융 HOT 뉴스] 은행 탄력점포 991개인데…일반 고객 이용은 '제한적'",
-     "press": "bizwnews.com",
-     "publishedAt": "2026-11-16T08:12:00.000Z",
-     "link": "http://www.bizwnews.com/news/articleView.html?idxno=152023"
+     "title": "프로야구 FA 시장 열린다...승인 선수 22명 명단 공개",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-16T08:20:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/410/0001147447"
     },
     {
-     "title": "[포토뉴스]한국다문화청소년협회 원주지회 물품 후원",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-16T08:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001231182?sid=102"
+     "title": "김우빈, 해체 위기 야구부 맡자 “이건 진짜 아니지” (기프트)",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-16T07:37:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001305084"
     },
     {
-     "title": "르세라핌, 눈빛만으로 느껴지는 설렘아우라 (입국)[뉴스엔TV]",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-16T08:09:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001188003"
+     "title": "전대영 전 대덕대 야구부 감독 별세…빙그레 창단 멤버",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-16T07:32:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=625538"
+    }
+   ]
+  },
+  {
+   "keyword": "테슬라 사이버캡 판매",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 2,
+   "firstArticleAt": "2026-11-16T07:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[쇼츠] '사이버캡' 일반고객 판매…4천만원에 구독료 40만원",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-16T08:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016444826?sid=104"
+    },
+    {
+     "title": "[영상] 테슬라 '사이버캡' 일반고객에도 판다…4천만원에 구독료 40만원",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-16T07:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016444714?sid=104"
+    },
+    {
+     "title": "테슬라, 운전대 없는 '사이버캡' 개인 판매...운행 지역은 제한",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-16T07:24:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2019206"
     }
    ]
   },
   {
    "keyword": "이재명 재판취소 저지 회의",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 1,
    "press": 2,
    "firstArticleAt": "2026-11-16T07:40:00.000Z",
    "exclusive": false,
@@ -207,7 +365,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 670,
+  "flagged": 674,
   "matched": 360,
   "avgLeadMin": 808,
   "recent": [
