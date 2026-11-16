@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T16:14:48.390Z",
+ "builtAt": "2026-11-16T16:24:51.898Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,14 +11,14 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "수능 AI 부정행위 대책 필요",
+   "keyword": "수능 AI 부정행위 대책 마련 필요해",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-16T14:49:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-16T15:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -29,16 +29,16 @@
      "link": "https://m.entertain.naver.com/article/109/0005641510"
     },
     {
-     "title": "'AI 부정' 수능 비상…'와이파이 차단'이 대책인가",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-16T15:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001403457?sid=102"
+     "title": "한성숙, 수능 스마트기기 부정행위 무관용…와이파이 차단 검토",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-16T15:20:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3754029"
     },
     {
-     "title": "[사설] 수능 ‘AI 커닝’, 감독관이 적극 개입할 수 있게 재량권 줘야",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-16T15:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004009947?sid=110"
+     "title": "수능 'AI 컨닝' 비상… 감독관 부담, 수험생에 고스란히…",
+     "press": "gjdream.com",
+     "publishedAt": "2026-11-16T15:10:00.000Z",
+     "link": "http://www.gjdream.com/news/articleView.html?idxno=674385"
     }
    ]
   },
@@ -68,10 +68,10 @@
      "link": "https://m.entertain.naver.com/article/440/0000052917"
     },
     {
-     "title": "임바다·허채민, 故 김주혁 추억 담긴 '세월이 가면'으로 149표…세미파...",
-     "press": "celuvmedia.com",
+     "title": "문근영·차태현, 방송 중 눈물 펑펑..故김주혁 향한 그리움 “들을 때마...",
+     "press": "osen.co.kr",
      "publishedAt": "2026-11-16T15:10:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1794841780530992010"
+     "link": "https://m.entertain.naver.com/article/109/0005641501"
     }
    ]
   }
