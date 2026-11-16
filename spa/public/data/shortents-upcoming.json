@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T13:02:35.406Z",
+ "builtAt": "2026-11-16T13:12:39.628Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,50 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 9,
  "candidates": [
-  {
-   "keyword": "고경표 팬미팅 취소",
-   "sources": [
-    "signal.bz",
-    "daum"
-   ],
-   "articles90": 25,
-   "recent20": 3,
-   "press": 25,
-   "firstArticleAt": "2026-11-16T11:43:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘음주운전’ 고경표, 결국 팬미팅 취소…“실망 안겨드려 사과”",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-16T12:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003565583?sid=102"
-    },
-    {
-     "title": "[공식] '음주운전' 고경표 팬미팅, 결국 취소 \"전액 환불 처리\" (전문)",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-16T12:54:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002081192"
-    },
-    {
-     "title": "'음주운전' 고경표, 팬미팅도 취소…\"실망 안겨드려 죄송\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-16T12:53:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014325843"
-    }
-   ]
-  },
   {
    "keyword": "서울광장 성탄트리 점등",
    "sources": [
     "nate"
    ],
-   "articles90": 26,
+   "articles90": 20,
    "recent20": 1,
    "press": 8,
-   "firstArticleAt": "2026-11-16T11:34:00.000Z",
+   "firstArticleAt": "2026-11-16T11:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -72,6 +39,38 @@
      "press": "newdaily.co.kr",
      "publishedAt": "2026-11-16T12:34:00.000Z",
      "link": "https://www.newdaily.co.kr/site/data/html/2026/11/16/2026111650380.html"
+    }
+   ]
+  },
+  {
+   "keyword": "SK, 현대모비스 제압하며 연패 탈출!",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-16T11:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘연패 탈출’ 전희철 SK 감독 “오늘은 나무랄 데 없는 경기…선수들 ...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-16T12:47:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/144/0001150121"
+    },
+    {
+     "title": "[프로농구] '워니 28점 12리바운드' SK, 현대모비스 잡고 2연패 탈출",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-16T12:19:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261116001392"
+    },
+    {
+     "title": "자밀 워니 28점 폭발…서울 SK, 현대모비스 92-76 제압하며 2연패 탈출",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-16T12:10:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16278077"
     }
    ]
   },
@@ -111,10 +110,16 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 718,
-  "matched": 387,
-  "avgLeadMin": 824,
+  "flagged": 719,
+  "matched": 388,
+  "avgLeadMin": 822,
   "recent": [
+   {
+    "keyword": "이지영 AI 부정행위 대책",
+    "hitKeyword": "초소형 카메라 부정행위",
+    "hitAt": "2026-11-16T22:00:00+09:00",
+    "leadMin": 18
+   },
    {
     "keyword": "CL 더블랙레이블과 전속계약",
     "hitKeyword": "블랙핑크 YG 전속계약 제외",
@@ -168,12 +173,6 @@
     "hitKeyword": "젠슨 황 불륜 거짓말",
     "hitAt": "2026-11-16T20:30:00+09:00",
     "leadMin": 176
-   },
-   {
-    "keyword": "AI 부정행위 우려가 커지고 있어",
-    "hitKeyword": "초소형 카메라 부정행위",
-    "hitAt": "2026-11-16T20:30:00+09:00",
-    "leadMin": 19
    }
   ]
  }
