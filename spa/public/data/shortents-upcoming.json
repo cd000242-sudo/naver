@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T17:55:22.551Z",
+ "builtAt": "2026-11-16T20:15:10.326Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,44 +8,108 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 18,
+ "measured": 10,
  "candidates": [
   {
-   "keyword": "AI 부정행위 논란",
+   "keyword": "젠슨 황 복귀 논의",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-16T16:32:00.000Z",
+   "articles90": 16,
+   "recent20": 4,
+   "press": 14,
+   "firstArticleAt": "2026-11-16T18:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘AI커닝’에 외신 “경쟁 치열한 한국, 국가시험 신뢰 흔들”",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-16T16:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003565665?sid=104"
+     "title": "엔비디아 이사회, 젠슨 황 복귀 선 긋고 조사 집중",
+     "press": "financialpost.co.kr",
+     "publishedAt": "2026-11-16T20:14:00.000Z",
+     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=301320"
     },
     {
-     "title": "세무사 시험 수석 합격자의 AI 부정행위, 감독관 2명도 사후 점검도 놓...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-16T16:40:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1175138"
+     "title": "트럼프 \"앨리스 황, 中 스파이 확실치 않아\"…젠슨 황 복귀론에 힘실어",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-16T20:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005442016?sid=104"
     },
     {
-     "title": "나무가 주가 30% 급등 상한가…AI 스마트 안경 관련주 강세",
-     "press": "kjdaily.com",
-     "publishedAt": "2026-11-16T16:32:00.000Z",
-     "link": "http://www.kjdaily.com/article.php?aid=1794846613692571276"
+     "title": "“검은 재킷 복귀”… 워룸 움직인다",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-16T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003699992?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "트럼프, 김정은 만날 수도",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 10,
+   "recent20": 3,
+   "press": 10,
+   "firstArticleAt": "2026-11-16T18:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프, 아시아순방 나서며 “중국서 김정은 만날 수도…시진핑에 달려...",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-16T20:14:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611170006"
+    },
+    {
+     "title": "트럼프 \"김정은 만날 수도\"…젠슨 황 복귀 언급",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-16T20:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926804?sid=104"
+    },
+    {
+     "title": "주말새 상황 급변했나… 트럼프 “중국서 김정은 만날 수 있다”",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-16T20:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001885570?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "제니, 그래미 후보 2개 부문",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-16T18:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "제니, 그래미 ‘올해의 레코드’ 후보…아이브·키키도 첫 입성",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-16T20:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/396/0000761121"
+    },
+    {
+     "title": "블랙핑크 제니, 미 그래미 본상 '올해의 레코드' 포함 2개 부문 후보",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-16T19:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001403478?sid=103"
+    },
+    {
+     "title": "제니, '드라큘라'로 첫 그래미 후보…'올해의 레코드' 등 2개 부문 올라",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-16T18:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003155876?sid=104"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 733,
+  "flagged": 736,
   "matched": 392,
   "avgLeadMin": 819,
   "recent": [
