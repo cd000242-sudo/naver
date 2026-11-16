@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T22:35:56.370Z",
+ "builtAt": "2026-11-16T22:45:59.230Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,14 +11,45 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "2026년 17일",
+   "keyword": "젠슨 황 복귀 논의 없어",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 10,
-   "recent20": 1,
+   "articles90": 12,
+   "recent20": 2,
    "press": 10,
+   "firstArticleAt": "2026-11-16T21:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프 “젠슨황 불륜녀 中스파이 아닐 수도…아무도 증명 못해”",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-16T22:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001885582?sid=104"
+    },
+    {
+     "title": "방중 앞둔 트럼프 “앨리스 황, 스파이 증거 없어···중국 자극 원치 ...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-16T22:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003483098?sid=104"
+    },
+    {
+     "title": "트럼프 “젠슨 황 복귀 나쁜 생각 아냐”…앨리스 황 스파이 의혹에는 ...",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-16T22:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000132371?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "2026년 17일",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 9,
+   "recent20": 1,
+   "press": 9,
    "firstArticleAt": "2026-11-16T21:26:00.000Z",
    "exclusive": false,
    "capped": false,
@@ -30,29 +61,28 @@
      "link": "https://www.lawtimes.co.kr/news/articleView.html?idxno=229501"
     },
     {
-     "title": "[오늘의 운세] 2026년 11월 17일 화요일 띠별 운세… 말띠 '대길', 토끼·...",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-16T22:06:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082951"
-    },
-    {
      "title": "[오늘의 주요일정·17일] 최교진 장관 학생자살 원인분석 전문가 간담회",
      "press": "safetimes.co.kr",
      "publishedAt": "2026-11-16T22:06:00.000Z",
      "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247540"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 17일 화요일 띠별 운세… 말띠 '대길', 토끼·...",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-16T22:06:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082951"
     }
    ]
   },
   {
    "keyword": "수능 AI 커닝 우려",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 11,
+   "articles90": 10,
    "recent20": 1,
    "press": 8,
-   "firstArticleAt": "2026-11-16T21:15:00.000Z",
+   "firstArticleAt": "2026-11-16T21:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -79,16 +109,21 @@
   {
    "keyword": "카타르전 앞두고 훈련하는 대표팀",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 8,
    "recent20": 1,
    "press": 7,
-   "firstArticleAt": "2026-11-16T21:14:00.000Z",
+   "firstArticleAt": "2026-11-16T21:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“결코 좋은 상황은 아니다”…황인범, 카타르전 앞두고 ‘소신 발언’...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-16T22:36:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1175152"
+    },
     {
      "title": "임시 감독 체제에 소신 밝힌 황인범…“대표팀에 긍정적이지 않다”",
      "press": "sedaily.com",
@@ -100,60 +135,27 @@
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-16T22:04:00.000Z",
      "link": "https://m.sports.naver.com/kfootball/article/055/0001403495"
-    },
-    {
-     "title": "‘골든보이’ 이강인은 17일 카타르전에서도 오른쪽 측면 미드필더로? ...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-16T22:02:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/022/0004175727"
-    }
-   ]
-  },
-  {
-   "keyword": "김유정 100일 거짓말",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-16T21:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김유정, 11월 드라마 배우 브랜드평판 1위…박진영·신민아 2·3위",
-     "press": "gpkorea.com",
-     "publishedAt": "2026-11-16T22:32:00.000Z",
-     "link": "https://www.gpkorea.com/news/articleView.html?idxno=148679"
-    },
-    {
-     "title": "1위 김유정, 2위 박진영, 3위 신민아",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-16T22:21:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003487975"
-    },
-    {
-     "title": "김유정·박진영·신민아...'100일의 거짓말'·'재혼 황후' 드라마 배우 ...",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-16T22:04:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=782297"
     }
    ]
   },
   {
    "keyword": "아리바이오",
    "sources": [
-    "signal.bz",
-    "google"
+    "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 1,
+   "articles90": 6,
+   "recent20": 2,
    "press": 5,
    "firstArticleAt": "2026-11-16T21:36:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "아리바이오, '먹는 치매약' 3상서 단독요법 통계적 유의성 확인",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-16T22:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005442060?sid=101"
+    },
     {
      "title": "아리바이오 치매약 'AR1001' 3상 단독투여군서 유의성 확보…전체군선 ...",
      "press": "sentv.co.kr",
@@ -165,19 +167,13 @@
      "press": "mt.co.kr",
      "publishedAt": "2026-11-16T22:07:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/008/0005442053?sid=101"
-    },
-    {
-     "title": "아리바이오 먹는 치매약, 임상 3상 1차 목표 달성…전체 환자군선 효과...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-16T21:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001205240?sid=101"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 768,
+  "flagged": 769,
   "matched": 441,
   "avgLeadMin": 893,
   "recent": [
