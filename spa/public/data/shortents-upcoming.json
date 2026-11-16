@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T10:50:54.797Z",
+ "builtAt": "2026-11-16T11:01:09.265Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 18,
+ "measured": 10,
  "candidates": [
-  {
-   "keyword": "AI 안경 부정행위 적발",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 62,
-   "recent20": 11,
-   "press": 42,
-   "firstArticleAt": "2026-11-16T09:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한국거래소 6월 신입사원 채용 시험서도 스마트안경 적발",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-16T10:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001535926?sid=101"
-    },
-    {
-     "title": "스마트안경 전담 감독관 배치에도 AI 부정행위 차단 '역부족'…시험 감...",
-     "press": "joongdo.co.kr",
-     "publishedAt": "2026-11-16T10:44:00.000Z",
-     "link": "https://www.joongdo.co.kr/web/view.php?key=20261116010005445"
-    },
-    {
-     "title": "[경인 Pick] ‘AI 커닝’ 논란에 국가자격 시험 신뢰 위기",
-     "press": "kyeongin.com",
-     "publishedAt": "2026-11-16T10:44:00.000Z",
-     "link": "https://www.kyeongin.com/article/1774858"
-    }
-   ]
-  },
   {
    "keyword": "3분기 적자 전환",
    "sources": [
     "nate"
    ],
-   "articles90": 39,
+   "articles90": 33,
    "recent20": 3,
-   "press": 30,
-   "firstArticleAt": "2026-11-16T09:22:00.000Z",
+   "press": 28,
+   "firstArticleAt": "2026-11-16T09:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "두나무, 3분기 매출 60.7% 급감…영업손실 35억원으로 적자전환",
+     "press": "venturesquare.net",
+     "publishedAt": "2026-11-16T10:58:00.000Z",
+     "link": "https://www.venturesquare.net/1129057/"
+    },
+    {
+     "title": "한국맥널티 3분기 매출 15% 증가, 영업 흑자 전환",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-16T10:56:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=406045"
+    },
     {
      "title": "빗썸, 3분기 적자전환…매출 전년비 70%↓",
      "press": "mt.co.kr",
      "publishedAt": "2026-11-16T10:47:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/008/0005441953?sid=101"
-    },
-    {
-     "title": "클로봇, 3분기 영업 손실 21억원⋯전년 동기 대비 적자 전환",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-16T10:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001075549?sid=101"
-    },
-    {
-     "title": "상반기 잘나가던 초대형 IB, 3분기 급제동…미래·KB 적자 전환, NH·삼성...",
-     "press": "greened.kr",
-     "publishedAt": "2026-11-16T10:38:00.000Z",
-     "link": "https://www.greened.kr/news/articleView.html?idxno=354754"
     }
    ]
   },
@@ -79,62 +47,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 23,
-   "recent20": 8,
-   "press": 21,
-   "firstArticleAt": "2026-11-16T09:24:00.000Z",
+   "articles90": 22,
+   "recent20": 4,
+   "press": 22,
+   "firstArticleAt": "2026-11-16T09:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "李대통령 \"한-아세안, AI·문화창조산업 이니셔티브 제안\"(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-16T10:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016445040?sid=100"
+    },
+    {
+     "title": "이 대통령, 3박 4일 순방 돌입...\"아세안 AI·문화 이니셔티브\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-16T10:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002433651?sid=100"
+    },
     {
      "title": "李, 아세안에 AI·문화산업 동맹 제안…“교역 3000억弗 추진”",
      "press": "kookje.co.kr",
      "publishedAt": "2026-11-16T10:49:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/658/0000161430?sid=100"
-    },
-    {
-     "title": "李대통령 “한-아세안 교역 3000억달러 시대”…AI·문화 협력 확대도 제...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-16T10:48:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2648869"
-    },
-    {
-     "title": "이 대통령 \"한·아세안 교역 3천억 달러 시대\"…AI·문화 협력 제안",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-16T10:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001978468?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황 복귀 움직임",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-16T10:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "스파이 의혹 벗어도 엔비디아 복귀 어렵다?…젠슨 황 운명 가를 핵심 쟁...",
-     "press": "digitaltoday.co.kr",
-     "publishedAt": "2026-11-16T10:36:00.000Z",
-     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=715708"
-    },
-    {
-     "title": "젠슨 황, 나흘 만에 복귀 움직임…'백악관 설득' 전시 상황실 꾸려",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-16T10:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001978459?sid=102"
-    },
-    {
-     "title": "“젠슨 황, 돌아와야” vs “오만한 인물”",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-16T10:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000367686?sid=104"
     }
    ]
   }
