@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T20:15:10.326Z",
+ "builtAt": "2026-11-16T20:25:13.863Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 16,
+   "articles90": 18,
    "recent20": 4,
-   "press": 14,
+   "press": 16,
    "firstArticleAt": "2026-11-16T18:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "젠슨황, 돌아올까?… “엔비디아 이사회, 복귀 논의 전혀 없다”",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-16T20:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001885574?sid=104"
+    },
+    {
+     "title": "\"엔비디아 이사회, 젠슨황 복귀 고려 안 해\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-16T20:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926814?sid=104"
+    },
+    {
      "title": "엔비디아 이사회, 젠슨 황 복귀 선 긋고 조사 집중",
      "press": "financialpost.co.kr",
      "publishedAt": "2026-11-16T20:14:00.000Z",
      "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=301320"
-    },
-    {
-     "title": "트럼프 \"앨리스 황, 中 스파이 확실치 않아\"…젠슨 황 복귀론에 힘실어",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-16T20:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005442016?sid=104"
-    },
-    {
-     "title": "“검은 재킷 복귀”… 워룸 움직인다",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-16T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003699992?sid=104"
     }
    ]
   },
@@ -48,12 +48,18 @@
     "signal.bz"
    ],
    "articles90": 10,
-   "recent20": 3,
-   "press": 10,
-   "firstArticleAt": "2026-11-16T18:54:00.000Z",
+   "recent20": 4,
+   "press": 9,
+   "firstArticleAt": "2026-11-16T19:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "트럼프 \"김정은 만날 수도\"…젠슨 황 복귀설도 언급",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-16T20:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926811?sid=104"
+    },
     {
      "title": "트럼프, 아시아순방 나서며 “중국서 김정은 만날 수도…시진핑에 달려...",
      "press": "kukinews.com",
@@ -65,12 +71,6 @@
      "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-16T20:11:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/422/0000926804?sid=104"
-    },
-    {
-     "title": "주말새 상황 급변했나… 트럼프 “중국서 김정은 만날 수 있다”",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-16T20:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001885570?sid=104"
     }
    ]
   },
@@ -79,30 +79,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
    "firstArticleAt": "2026-11-16T18:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "제니, 그래미서 '올해의 레코드' 등 2개 부문 후보",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-16T20:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926818?sid=103"
+    },
+    {
+     "title": "로제 이어 제니도 간다, 브루노·테일러 잡고 美 그래미 정조준…‘드라...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-16T20:24:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001188058"
+    },
+    {
      "title": "제니, 그래미 ‘올해의 레코드’ 후보…아이브·키키도 첫 입성",
      "press": "sportsworldi.com",
      "publishedAt": "2026-11-16T20:02:00.000Z",
      "link": "https://m.entertain.naver.com/article/396/0000761121"
-    },
-    {
-     "title": "블랙핑크 제니, 미 그래미 본상 '올해의 레코드' 포함 2개 부문 후보",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-16T19:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001403478?sid=103"
-    },
-    {
-     "title": "제니, '드라큘라'로 첫 그래미 후보…'올해의 레코드' 등 2개 부문 올라",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-16T18:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003155876?sid=104"
     }
    ]
   }
