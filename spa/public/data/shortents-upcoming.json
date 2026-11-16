@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T22:25:50.131Z",
+ "builtAt": "2026-11-16T22:35:56.370Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,113 +8,84 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 21,
+ "measured": 10,
  "candidates": [
   {
-   "keyword": "뉴욕증시 하락",
+   "keyword": "2026년 17일",
    "sources": [
-    "daum"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 53,
-   "recent20": 15,
-   "press": 44,
-   "firstArticleAt": "2026-11-16T21:01:00.000Z",
+   "articles90": 10,
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-16T21:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[오늘의 증시]엔비디아 4%대 급락에 美 AI주 '와르르'…코스피 하락 출발...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-16T22:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014326038?sid=101"
+     "title": "【오늘의 법조】 2026년 11월 17일",
+     "press": "lawtimes.co.kr",
+     "publishedAt": "2026-11-16T22:30:00.000Z",
+     "link": "https://www.lawtimes.co.kr/news/articleView.html?idxno=229501"
     },
     {
-     "title": "젠슨 황 사임 여파 계속, 뉴욕증시 일제히 하락…엔비디아 4.1%↓",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-16T22:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001164542?sid=101"
-    },
-    {
-     "title": "중국에 데이터센터 차단…젠슨황 여파 증시 하락",
-     "press": "koreareport.co.kr",
-     "publishedAt": "2026-11-16T22:20:00.000Z",
-     "link": "https://www.koreareport.co.kr/news/articleView.html?idxno=54810"
-    }
-   ]
-  },
-  {
-   "keyword": "엔비디아 실적발표",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 41,
-   "recent20": 12,
-   "press": 33,
-   "firstArticleAt": "2026-11-16T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "엔비디아 쇼크 불똥 튄 양자 컴퓨팅주 '털썩'…아이온큐 8%·퀀티넘 10% 폭...",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-16T22:24:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=202611170719482782e250e8e188_1"
-    },
-    {
-     "title": "[오늘의 증시]엔비디아 4%대 급락에 美 AI주 '와르르'…코스피 하락 출발...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-16T22:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014326038?sid=101"
-    },
-    {
-     "title": "젠슨 황 원하는 엔비디아 팬들…당장 CEO 복귀 어려운 이유",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-16T22:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009292645?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "미국 AI반도체 중국 차단",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 20,
-   "recent20": 3,
-   "press": 18,
-   "firstArticleAt": "2026-11-16T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "중국에 데이터센터 차단…젠슨황 여파 증시 하락",
-     "press": "koreareport.co.kr",
-     "publishedAt": "2026-11-16T22:20:00.000Z",
-     "link": "https://www.koreareport.co.kr/news/articleView.html?idxno=54810"
-    },
-    {
-     "title": "앤트로픽 IPO, 중국 자본 막혔다 \"AI 기업 상장에도 안보 잣대\"",
-     "press": "econovill.com",
-     "publishedAt": "2026-11-16T22:12:00.000Z",
-     "link": "https://www.econovill.com/news/articleView.html?idxno=757465"
-    },
-    {
-     "title": "美 상무부, 中 기업 AI 반도체 우회로 차단...규제 본격화 신호탄-[굿모...",
-     "press": "wowtv.co.kr",
+     "title": "[오늘의 운세] 2026년 11월 17일 화요일 띠별 운세… 말띠 '대길', 토끼·...",
+     "press": "newsclaim.co.kr",
      "publishedAt": "2026-11-16T22:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001272977?sid=101"
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082951"
+    },
+    {
+     "title": "[오늘의 주요일정·17일] 최교진 장관 학생자살 원인분석 전문가 간담회",
+     "press": "safetimes.co.kr",
+     "publishedAt": "2026-11-16T22:06:00.000Z",
+     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247540"
+    }
+   ]
+  },
+  {
+   "keyword": "수능 AI 커닝 우려",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 11,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-16T21:15:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[손병관의 뉴스프레소] 수능장 와이파이 꺼도 LTE·5G는 된다…구멍 난...",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-16T22:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002536065?sid=102"
+    },
+    {
+     "title": "'AI 커닝 패키지' 등장, SNS로 사용법 확산…정부 '유통' 차단 나서",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-16T22:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005354573?sid=100"
+    },
+    {
+     "title": "[천지일보 이슈종합] 수능 부정행위·AI 커닝·미중러 정상회담·서울 전...",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-16T22:02:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3449264"
     }
    ]
   },
   {
    "keyword": "카타르전 앞두고 훈련하는 대표팀",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 9,
+   "articles90": 8,
    "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-16T21:03:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-16T21:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -139,49 +110,23 @@
    ]
   },
   {
-   "keyword": "이정현 12월 결혼",
+   "keyword": "김유정 100일 거짓말",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 4,
-   "recent20": 3,
-   "press": 4,
-   "firstArticleAt": "2026-11-16T21:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘미스터 션샤인’ 이정현, 12월 결혼 깜짝 발표…“배우 은퇴 고민에 ...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-16T22:21:00.000Z",
-     "link": "https://m.entertain.naver.com/article/022/0004175731"
-    },
-    {
-     "title": "결혼하려 대기업 원서 낸 이정현, 자격증 22개…12월 장가",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-16T22:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001147472"
-    },
-    {
-     "title": "\"스피커 설치한다\"…'미스터 션샤인' 이정현, 내달 결혼 앞두고 알바 뛰...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-16T22:06:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004125633"
-    }
-   ]
-  },
-  {
-   "keyword": "100일 거짓말 김유정",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
    "firstArticleAt": "2026-11-16T21:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김유정, 11월 드라마 배우 브랜드평판 1위…박진영·신민아 2·3위",
+     "press": "gpkorea.com",
+     "publishedAt": "2026-11-16T22:32:00.000Z",
+     "link": "https://www.gpkorea.com/news/articleView.html?idxno=148679"
+    },
     {
      "title": "1위 김유정, 2위 박진영, 3위 신민아",
      "press": "starnewskorea.com",
@@ -193,27 +138,28 @@
      "press": "slist.kr",
      "publishedAt": "2026-11-16T22:04:00.000Z",
      "link": "https://www.slist.kr/news/articleView.html?idxno=782297"
-    },
-    {
-     "title": "치이카와·머무르·사랑이온다·100일의 거짓말·닥터X, 1위 [한눈에 보...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-16T22:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009292596"
     }
    ]
   },
   {
    "keyword": "아리바이오",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 4,
+   "articles90": 5,
    "recent20": 1,
-   "press": 4,
+   "press": 5,
    "firstArticleAt": "2026-11-16T21:36:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "아리바이오 치매약 'AR1001' 3상 단독투여군서 유의성 확보…전체군선 ...",
+     "press": "sentv.co.kr",
+     "publishedAt": "2026-11-16T22:28:00.000Z",
+     "link": "https://www.sentv.co.kr/article/view/sentv202611170009"
+    },
     {
      "title": "[속보]아리바이오, '먹는 치매약' 임상3상서 단독투여군 1차지표 충족",
      "press": "mt.co.kr",
@@ -225,54 +171,40 @@
      "press": "biz.chosun.com",
      "publishedAt": "2026-11-16T21:52:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/366/0001205240?sid=101"
-    },
-    {
-     "title": "아리바이오 '먹는 치매약' 글로벌 3상 1차 목표 달성…\"기존 약 미복용...",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-16T21:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005843409?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "물류",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-16T21:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한국폴리텍대학 영남융합기술캠퍼스, 일본 글로벌 물류기업 NX그룹과 산...",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-16T21:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001040647?sid=102"
-    },
-    {
-     "title": "\"지역사회 나눔과 상생 실천\" 코레일유통물류, '경북도지사 표창' 수상",
-     "press": "cstimes.com",
-     "publishedAt": "2026-11-16T21:30:00.000Z",
-     "link": "https://www.cstimes.com/news/articleView.html?idxno=728149"
-    },
-    {
-     "title": "테크노밸리도, 물류단지도 무산…구리 건원, 1.4만가구 아파트촌 되나 ...",
-     "press": "realty.chosun.com",
-     "publishedAt": "2026-11-16T21:02:00.000Z",
-     "link": "https://realty.chosun.com/site/data/html_dir/2026/11/16/2026111601697.html"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 765,
-  "matched": 437,
-  "avgLeadMin": 898,
+  "flagged": 768,
+  "matched": 441,
+  "avgLeadMin": 893,
   "recent": [
+   {
+    "keyword": "앨리스 황",
+    "hitKeyword": "앨리스황 스파이 의혹",
+    "hitAt": "2026-11-17T07:30:00+09:00",
+    "leadMin": 1486
+   },
+   {
+    "keyword": "미중러 정상회담",
+    "hitKeyword": "미중러 우크라이나 논의",
+    "hitAt": "2026-11-17T07:30:00+09:00",
+    "leadMin": 54
+   },
+   {
+    "keyword": "제니, 그래미 2개 후보",
+    "hitKeyword": "제니 그래미 본상 후보",
+    "hitAt": "2026-11-17T07:30:00+09:00",
+    "leadMin": 54
+   },
+   {
+    "keyword": "엔비디아 실적발표",
+    "hitKeyword": "엔비디아 주가 급락",
+    "hitAt": "2026-11-17T07:30:00+09:00",
+    "leadMin": 4
+   },
    {
     "keyword": "무허가 유흥업소 운영하다",
     "hitKeyword": "넷플릭스 출연자 유흥업소",
@@ -308,30 +240,6 @@
     "hitKeyword": "트럼프 김정은 중국 회담",
     "hitAt": "2026-11-17T07:00:00+09:00",
     "leadMin": 55
-   },
-   {
-    "keyword": "음주 운전",
-    "hitKeyword": "고경표 음주운전 팬미팅 취소",
-    "hitAt": "2026-11-17T07:00:00+09:00",
-    "leadMin": 55
-   },
-   {
-    "keyword": "트럼프 김정은 만남 가능",
-    "hitKeyword": "트럼프 김정은 중국 회담",
-    "hitAt": "2026-11-17T07:00:00+09:00",
-    "leadMin": 34
-   },
-   {
-    "keyword": "수능",
-    "hitKeyword": "수능 AI 부정행위 확산",
-    "hitAt": "2026-11-17T07:00:00+09:00",
-    "leadMin": 24
-   },
-   {
-    "keyword": "트럼프 김정은 만남 가능성",
-    "hitKeyword": "트럼프 김정은 중국 회담",
-    "hitAt": "2026-11-17T07:00:00+09:00",
-    "leadMin": 24
    }
   ]
  }
