@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T15:54:42.033Z",
+ "builtAt": "2026-11-16T16:04:45.540Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 8,
  "candidates": [
   {
    "keyword": "수능 AI 부정행위 대책 마련 필요해",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 6,
+   "articles90": 9,
+   "recent20": 1,
+   "press": 7,
    "firstArticleAt": "2026-11-16T14:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"수험생들의 공포 극심해\" 이지영, AI 부정행위 비상대책 촉구",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-16T16:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005641510"
+    },
     {
      "title": "한성숙, 수능 스마트기기 부정행위 무관용…와이파이 차단 검토",
      "press": "gukjenews.com",
@@ -33,12 +39,39 @@
      "press": "gjdream.com",
      "publishedAt": "2026-11-16T15:10:00.000Z",
      "link": "http://www.gjdream.com/news/articleView.html?idxno=674385"
+    }
+   ]
+  },
+  {
+   "keyword": "김주혁",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-16T15:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "문근영&차태현, 故 김주혁 생각에 오열...임바다X허채민, 149표로 1위",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-16T15:14:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=782271"
     },
     {
-     "title": "박지현 \"AI 안경 부정행위, 변형카메라 관리법 진작 만들었다면\"…국회...",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-16T15:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001040636?sid=100"
+     "title": "“故 김주혁 추억”…임바다X허채민, 문근영 울린 까닭 (‘우발라2’) [...",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-16T15:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000052917"
+    },
+    {
+     "title": "문근영·차태현, 방송 중 눈물 펑펑..故김주혁 향한 그리움 “들을 때마...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-16T15:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005641501"
     }
    ]
   },
@@ -73,43 +106,11 @@
      "link": "https://www.dailysecu.com/news/articleView.html?idxno=209553"
     }
    ]
-  },
-  {
-   "keyword": "삼척 화물선 표류 구조",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-16T14:37:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "삼척 앞바다 표류 화물선 선원 16명 전원 구조…해경, 동해항까지 예인",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-16T15:08:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3754015"
-    },
-    {
-     "title": "풍랑 속 표류 화물선 선원 16명 전원 구조… 해경, 9시간 예인",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-16T14:42:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3449255"
-    },
-    {
-     "title": "발전기 배전반 화재로 화물선 표류...16명 전원 구조",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-16T14:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002433735?sid=102"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 728,
+  "flagged": 729,
   "matched": 392,
   "avgLeadMin": 819,
   "recent": [
