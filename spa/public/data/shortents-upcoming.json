@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T09:19:51.224Z",
+ "builtAt": "2026-11-16T09:29:55.585Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,82 +11,55 @@
  "measured": 18,
  "candidates": [
   {
-   "keyword": "3분기 누적 매출",
+   "keyword": "이재명 한-아세안 정상회의",
    "sources": [
     "nate"
    ],
-   "articles90": 84,
-   "recent20": 68,
-   "press": 55,
-   "firstArticleAt": "2026-11-16T08:56:00.000Z",
+   "articles90": 63,
+   "recent20": 7,
+   "press": 52,
+   "firstArticleAt": "2026-11-16T08:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "차이커뮤니케이션, 광고대행 매출·이익 27%대 성장…AI·커머스·웰니스...",
-     "press": "thedailypost.kr",
-     "publishedAt": "2026-11-16T09:18:00.000Z",
-     "link": "https://www.thedailypost.kr/news/articleView.html?idxno=116953"
+     "title": "李대통령 “한-아세안 행동 파트너”…AI·문화산업 이니셔티브 제안",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-16T09:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001885457?sid=100"
     },
     {
-     "title": "바이오니아, 3분기 누적 매출 2612억원···신약 R&D 투자 확대",
-     "press": "hellodd.com",
-     "publishedAt": "2026-11-16T09:16:00.000Z",
-     "link": "http://www.hellodd.com/news/articleView.html?idxno=113893"
+     "title": "李 \"韓-아세안 AI·문화창조 협력\"…트럼프, 내일 마닐라로",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-16T09:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000544058?sid=101"
     },
-    {
-     "title": "비씨카드, 3분기 순이익 328억원…전년비 23.4% 감소",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-16T09:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014325719?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "이재명 한-아세안 발언",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 56,
-   "recent20": 10,
-   "press": 43,
-   "firstArticleAt": "2026-11-16T08:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
     {
      "title": "李대통령 “한-아세안, AI·문화창조산업 이니셔티브 제안”",
      "press": "kwnews.co.kr",
      "publishedAt": "2026-11-16T09:15:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/087/0001231209?sid=100"
-    },
-    {
-     "title": "“한·아세안 AI·문화 이니셔티브 제안”",
-     "press": "kookbang.dema.mil.kr",
-     "publishedAt": "2026-11-16T09:12:00.000Z",
-     "link": "https://kookbang.dema.mil.kr/newsWeb/20261117/18/ATCE_CTGR_0010010000/view.do"
-    },
-    {
-     "title": "李 대통령, 한-아세안 AI 동맹 제안문화창조산업 이니셔티브도 제시",
-     "press": "goodnews1.com",
-     "publishedAt": "2026-11-16T09:12:00.000Z",
-     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466272"
     }
    ]
   },
   {
-   "keyword": "민희진 배임 혐의 송치",
+   "keyword": "민희진, 뉴진스 배임 송치",
    "sources": [
-    "nate",
-    "daum"
+    "nate"
    ],
    "articles90": 51,
-   "recent20": 13,
+   "recent20": 6,
    "press": 42,
-   "firstArticleAt": "2026-11-16T07:57:00.000Z",
+   "firstArticleAt": "2026-11-16T08:00:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "민희진 측, 업무상 배임 혐의 송치에 입장…\"뉴진스 계약 해지 유도한 ...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-16T09:20:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16277945"
+    },
     {
      "title": "민희진, '업무상배임' 혐의 송치에 \"공식 통지 전 보도 납득불가\"",
      "press": "slist.kr",
@@ -98,24 +71,50 @@
      "press": "newdaily.co.kr",
      "publishedAt": "2026-11-16T09:16:00.000Z",
      "link": "https://www.newdaily.co.kr/site/data/html/2026/11/16/2026111650359.html"
-    },
-    {
-     "title": "민희진, 배임 혐의 송치…\"뉴진스 계약 해지 개입 안 해\" 반박",
-     "press": "star.ytn.co.kr",
-     "publishedAt": "2026-11-16T09:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/052/0002433621"
     }
    ]
   },
   {
-   "keyword": "이 대통령, 이용철 후보 인사청문 재가",
+   "keyword": "3분기 영업손실 419억",
    "sources": [
     "nate"
    ],
-   "articles90": 26,
-   "recent20": 1,
-   "press": 26,
-   "firstArticleAt": "2026-11-16T07:50:00.000Z",
+   "articles90": 28,
+   "recent20": 2,
+   "press": 28,
+   "firstArticleAt": "2026-11-16T08:28:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트리니티항공, 3분기 영업손실 419억원…적자 축소",
+     "press": "dnews.co.kr",
+     "publishedAt": "2026-11-16T09:20:00.000Z",
+     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611161807598950330"
+    },
+    {
+     "title": "트리니티 3Q 영업손실 419억, 절반 '뚝'…노선 효율화·리브랜딩 효과",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-16T09:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009292332?sid=101"
+    },
+    {
+     "title": "트리니티항공, 외형 키우고 적자 줄였다…3분기 매출 5336억원",
+     "press": "econovill.com",
+     "publishedAt": "2026-11-16T09:08:00.000Z",
+     "link": "https://www.econovill.com/news/articleView.html?idxno=757452"
+    }
+   ]
+  },
+  {
+   "keyword": "이용철 인사청문요청안 재가",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 23,
+   "recent20": 0,
+   "press": 23,
+   "firstArticleAt": "2026-11-16T08:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -126,28 +125,61 @@
      "link": "https://n.news.naver.com/mnews/article/448/0000651402?sid=100"
     },
     {
-     "title": "이재명 대통령 \"한국과 아세안 협력 더욱 강화해야\"",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-16T08:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001040610?sid=100"
-    },
-    {
      "title": "李, 이용철·안덕수 인사청문요청안 재가…국회 검증 본격화",
      "press": "inews24.com",
      "publishedAt": "2026-11-16T08:53:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/031/0001075505?sid=100"
+    },
+    {
+     "title": "이용철·안덕수 국회 인사청문 절차 돌입…경력·도덕성 검증 본격화",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-16T08:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000121504?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "AI 커닝 대책 마련 필요",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 11,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-16T08:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "여야, 교육위서 'AI수능커닝' 한목소리 우려…\"육안식별 되겠나\"",
+     "press": "namdonews.com",
+     "publishedAt": "2026-11-16T09:12:00.000Z",
+     "link": "https://www.namdonews.com/news/articleView.html?idxno=929377"
+    },
+    {
+     "title": "\"내 노력은…\" 수능 앞두고 AI 불안에 수험생·교사 부담",
+     "press": "domin.co.kr",
+     "publishedAt": "2026-11-16T09:08:00.000Z",
+     "link": "http://www.domin.co.kr/news/articleView.html?idxno=1575719"
+    },
+    {
+     "title": "수능 'AI 커닝' 비상에...정부 \"스마트기기 반납·와이파이 차단\"",
+     "press": "newstree.kr",
+     "publishedAt": "2026-11-16T09:08:00.000Z",
+     "link": "https://www.newstree.kr/newsView/ntr202611160021"
     }
    ]
   },
   {
    "keyword": "오세훈 시장, 한동훈 조문",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 19,
+   "articles90": 18,
    "recent20": 1,
    "press": 7,
-   "firstArticleAt": "2026-11-16T07:52:00.000Z",
+   "firstArticleAt": "2026-11-16T08:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -177,7 +209,7 @@
     "signal.bz"
    ],
    "articles90": 7,
-   "recent20": 1,
+   "recent20": 0,
    "press": 7,
    "firstArticleAt": "2026-11-16T08:05:00.000Z",
    "exclusive": false,
@@ -206,13 +238,12 @@
   {
    "keyword": "APBC 마치고 귀국하는",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 42,
+   "articles90": 26,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-16T07:50:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-16T08:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -267,11 +298,43 @@
      "link": "https://n.news.naver.com/mnews/article/081/0003699904?sid=100"
     }
    ]
+  },
+  {
+   "keyword": "김유정 100일 거짓말",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-16T08:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'100일의 거짓말' 김현주, 진정한 사랑꾼",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-16T09:22:00.000Z",
+     "link": "https://m.entertain.naver.com/article/437/0000520966"
+    },
+    {
+     "title": "박진영 “‘100일의 거짓말’ 결말 다 아는데 시청자로서 즐기는중”[화...",
+     "press": "heraldmuse.com",
+     "publishedAt": "2026-11-16T08:44:00.000Z",
+     "link": "https://m.entertain.naver.com/article/112/0003813464"
+    },
+    {
+     "title": "[Opinion] 그마저도 사랑이기에 - 드라마 '100일의 거짓말' [드라마/예능...",
+     "press": "artinsight.co.kr",
+     "publishedAt": "2026-11-16T08:30:00.000Z",
+     "link": "https://www.artinsight.co.kr/news/view.php?no=83333"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 685,
+  "flagged": 690,
   "matched": 364,
   "avgLeadMin": 800,
   "recent": [
