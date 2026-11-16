@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T04:01:39.925Z",
+ "builtAt": "2026-11-16T04:11:45.333Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 16,
+ "measured": 17,
  "candidates": [
   {
    "keyword": "JTBC 올림픽 중계권 해지",
@@ -16,126 +16,126 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 30,
-   "recent20": 4,
-   "press": 27,
-   "firstArticleAt": "2026-11-16T02:32:00.000Z",
+   "articles90": 22,
+   "recent20": 3,
+   "press": 22,
+   "firstArticleAt": "2026-11-16T02:43:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "JTBC, 올림픽 중계권 결국 포기…재무 부담에 IOC와 계약 해지",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-16T04:02:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=625468"
+    },
+    {
+     "title": "JTBC, 올림픽 중계권 계약 해지",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-16T04:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003699737?sid=103"
+    },
     {
      "title": "JTBC, 올림픽 중계권 결국 포기 \"2028 LA올림픽 등 중계권 새 주인 찾아...",
      "press": "imaeil.com",
      "publishedAt": "2026-11-16T03:52:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/088/0001040476?sid=101"
-    },
-    {
-     "title": "JTBC-IOC 올림픽 중계권 계약 해지 \"재무적 불확실성 제거…안정적 경영...",
-     "press": "swtvnews.com",
-     "publishedAt": "2026-11-16T03:50:00.000Z",
-     "link": "https://swtvnews.com/news/newsview.php?ncode=1065584473104652"
-    },
-    {
-     "title": "회생 절차 밟는 JTBC, 결국 계약 해지 수순…\"올림픽 중계 사업 지속 어...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-16T03:46:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001408441"
     }
    ]
   },
   {
-   "keyword": "조정식 국회의장 공동위원장",
+   "keyword": "19일 대법 선고",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 31,
+   "articles90": 18,
    "recent20": 4,
-   "press": 17,
-   "firstArticleAt": "2026-11-16T02:34:00.000Z",
+   "press": 14,
+   "firstArticleAt": "2026-11-16T02:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "대법, 한덕수 ‘내란 사건’ 19일 선고",
+     "press": "naeil.com",
+     "publishedAt": "2026-11-16T04:06:00.000Z",
+     "link": "https://www.naeil.com/news/read/608928?ref=naver"
+    },
+    {
+     "title": "與, 한덕수 선고기일 지정에 \"만시지탄\"…정청래는 \"조희대 탄핵\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-16T03:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005441635?sid=100"
+    },
+    {
+     "title": "김민석, 한덕수 선고 예고에 \"만시지탄…대법 재판 지연 반성해야\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-16T03:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005441634?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "조정식 공동위원장 발표",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 11,
+   "recent20": 4,
+   "press": 10,
+   "firstArticleAt": "2026-11-16T02:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "국힘 \"이번 정부서 개헌 없다\"…조정식 국회의장 사퇴 촉구",
+     "press": "kado.net",
+     "publishedAt": "2026-11-16T04:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000211501?sid=100"
+    },
+    {
+     "title": "조정식 \"내년이 개헌 적기\"…野 \"이번 정부서 개헌 없다\"",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-16T04:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005354220?sid=100"
+    },
     {
      "title": "장동혁 \"조정식, 개헌까지 '李 탈옥' 도구로…뭘 내놓든 안 속아\"",
      "press": "mt.co.kr",
      "publishedAt": "2026-11-16T03:53:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/008/0005441633?sid=100"
-    },
-    {
-     "title": "조정식, 김형오·정세균 앞세워 개헌 시동... 국힘 “李 탈옥 도구”",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-16T03:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003565457?sid=100"
-    },
-    {
-     "title": "[포토] 회견장 입장하는 조정식 국회의장",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-16T03:52:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/16/2026111650183.html"
     }
    ]
   },
   {
-   "keyword": "우주",
-   "sources": [
-    "google"
-   ],
-   "articles90": 11,
-   "recent20": 3,
-   "press": 11,
-   "firstArticleAt": "2026-11-16T02:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "우주과학열차, 출입 제한된 나로우주센터 문 연다 [PS]",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-16T03:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/382/0001305023?sid=103"
-    },
-    {
-     "title": "고흥군, 우주선철도 국가계획 반영 총력…서울서 필요성 강조",
-     "press": "thefairnews.co.kr",
-     "publishedAt": "2026-11-16T03:50:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94326"
-    },
-    {
-     "title": "아마존 우주통신 위성 40기 ‘미아’ 됐다…스타링크 추격 차질",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-16T03:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003482901?sid=105"
-    }
-   ]
-  },
-  {
-   "keyword": "대법 19일 선고 해당 사건",
+   "keyword": "미중러 정상회담",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 1,
+   "articles90": 8,
+   "recent20": 2,
    "press": 7,
-   "firstArticleAt": "2026-11-16T02:38:00.000Z",
-   "exclusive": false,
+   "firstArticleAt": "2026-11-16T02:58:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "'12·3 계엄은 내란인가' 대법 첫 판단에 주목…19일 한덕수 선고",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-16T03:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016443819?sid=102"
+     "title": "미중러, 한국 없는 테이블에 '한반도' 올리나…북핵 뒷전 우려",
+     "press": "konas.net",
+     "publishedAt": "2026-11-16T04:08:00.000Z",
+     "link": "https://www.konas.net/article/article.asp?idx=64792"
     },
     {
-     "title": "'내란 가담' 한덕수 19일 대법 선고...김건희 '3대 의혹'도",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-16T03:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002433412?sid=102"
+     "title": "미중러 정상회담 앞두고 '제2의 얄타회담' 우려… 한국 패싱 경계",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-16T04:06:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3449025"
     },
     {
-     "title": "한덕수 19일 최종 선고…재판 지연 논란 속 대법 판단 주목",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-16T03:24:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=315425"
+     "title": "미중러 3국 정상회담에 촉각…외교부 \"제2 얄타회담 안돼\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-16T03:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014324535?sid=100"
     }
    ]
   },
@@ -145,11 +145,11 @@
     "google"
    ],
    "articles90": 7,
-   "recent20": 1,
+   "recent20": 0,
    "press": 7,
    "firstArticleAt": "2026-11-16T03:01:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
      "title": "[포토] ‘이재명, 윤석열 탄핵 반대’ 발언 최민희, 최고위서 사과",
@@ -172,173 +172,144 @@
    ]
   },
   {
-   "keyword": "임현주 MBC 퇴사",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-16T02:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "둘째 출산 임현주 아나, MBC 복직 아닌 퇴사 알렸다 “마음이 이끄는 대...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-16T03:48:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001187937"
-    },
-    {
-     "title": "임현주 아나운서, 13년 만 MBC 퇴사...“좀 더 재밌게 사는 게 희망사항...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-16T03:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003541933"
-    },
-    {
-     "title": "\"배우 세상으로 가나\"…임현주 아나, 새 프로필 공개하더니→13년 만 MB...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-16T02:59:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001408433"
-    }
-   ]
-  },
-  {
-   "keyword": "미중러 정상회담",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-16T02:37:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "미중러 3국 정상회담에 촉각…외교부 \"제2 얄타회담 안돼\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-16T03:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014324535?sid=100"
-    },
-    {
-     "title": "통일부 \"北조용원 방러, 미중러 회담 직전 고위급 교류…동향 주시\"",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-16T03:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005843154?sid=100"
-    },
-    {
-     "title": "中, APEC 앞두고 '아태공동체' 부각…미중러회담서 외교력 과시?",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-16T03:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016443804?sid=104"
-    }
-   ]
-  },
-  {
    "keyword": "청주시",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 5,
+   "articles90": 9,
+   "recent20": 3,
+   "press": 6,
    "firstArticleAt": "2026-11-16T02:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "비정규직노조, '환경미화원 사망사고' 청주시장 중처법 고발",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-16T03:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016443775?sid=102"
+     "title": "청주시, 역사문화 스탬프투어 운영 ··· 참가자 100명 모집",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-16T04:08:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1193382"
     },
     {
-     "title": "충북 노동단체, 청주시장 고발…\"수거 차량 발판 위험 외면\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-16T02:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014324357?sid=102"
+     "title": "청주시, 하수도를 에너지·물 생산 자원순환 기반시설로 전환",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-16T04:08:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1193383"
     },
     {
-     "title": "이장섭 청주시장, 오창 후기리 소각장 환경영향평가 재평가 협의 주문",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-16T02:45:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261116000651"
+     "title": "청주시, 지역경제 이끌 유망중소기업 발굴 나선다",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-16T04:08:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1193386"
     }
    ]
   },
   {
-   "keyword": "연지 강동연 결혼",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-16T02:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'투수'와 사랑에 빠진 女스타들…박소영·지안·연지, 야구선수와 백년...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-16T03:29:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000490661"
-    },
-    {
-     "title": "걸그룹♥야구선수 부부 탄생…'귓방망이' 배드키즈 연지, 강동연과 12월...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-16T03:21:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000639277"
-    },
-    {
-     "title": "배드키즈 출신 연지, 전 야구선수 강동연과 12월 결혼…'솔로지옥' 강소...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-16T02:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002081009"
-    }
-   ]
-  },
-  {
-   "keyword": "화학물질저감 우수제품 전시",
+   "keyword": "종이팩 분리배출 의무화",
    "sources": [
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-16T02:46:00.000Z",
+   "articles90": 25,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-16T02:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[포토]화학안전주간…'화우품' 전시",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-16T03:56:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261116010005942"
+     "title": "종이팩 분리배출 의무화 확대 요구 기자회견",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-16T03:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016443817?sid=102"
     },
     {
-     "title": "[포토]화학물질저감 우수제품 살피는 금한승 차관",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-16T03:52:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261116010005940"
+     "title": "종이팩 분리배출 의무화 확대 퍼포먼스",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-16T03:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016443803?sid=102"
     },
     {
-     "title": "[포토] 한자리에 모인 화학물질저감 우수제품",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-16T03:22:00.000Z",
-     "link": "https://www.ajunews.com/view/20261116121841067"
+     "title": "공동주택 종이팩 분리배출 의무화 환영…\"집 앞에서 편리하게 배출\"",
+     "press": "kpinews.kr",
+     "publishedAt": "2026-11-16T03:06:00.000Z",
+     "link": "https://www.kpinews.kr/newsView/1065581790655501"
+    }
+   ]
+  },
+  {
+   "keyword": "담합",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-16T03:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "삼성·SK하이닉스 HBM 전환이 담합?…美법원도 인정한 '합리적 경영 판단...",
+     "press": "e-science.co.kr",
+     "publishedAt": "2026-11-16T04:10:00.000Z",
+     "link": "https://www.e-science.co.kr/news/articleView.html?idxno=139847"
+    },
+    {
+     "title": "HD현대오일뱅크, 3조원대 흑자 잔치 뒤 '4년간 가격 담합' 혐의…무너진...",
+     "press": "upkoreanews.kr",
+     "publishedAt": "2026-11-16T03:31:00.000Z",
+     "link": "https://www.upkoreanews.kr/news/articleView.html?idxno=101178"
+    },
+    {
+     "title": "삼성전자·SK하이닉스·마이크론 D램 담합 의혹 소송 이어진다",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-16T03:14:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/438843"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 601,
-  "matched": 323,
-  "avgLeadMin": 855,
+  "flagged": 604,
+  "matched": 329,
+  "avgLeadMin": 841,
   "recent": [
+   {
+    "keyword": "2027 수능 문답지 배부",
+    "hitKeyword": "2027 KBO FA 시장",
+    "hitAt": "2026-11-16T13:00:00+09:00",
+    "leadMin": 89
+   },
+   {
+    "keyword": "2027 수능 문답지 배부 시작",
+    "hitKeyword": "2027 KBO FA 시장",
+    "hitAt": "2026-11-16T13:00:00+09:00",
+    "leadMin": 79
+   },
+   {
+    "keyword": "수능 AI 부정행위 대책 필요",
+    "hitKeyword": "AI 수능 부정행위",
+    "hitAt": "2026-11-16T13:00:00+09:00",
+    "leadMin": 69
+   },
+   {
+    "keyword": "수능 연기와 AI 대책 필요",
+    "hitKeyword": "AI 수능 부정행위",
+    "hitAt": "2026-11-16T13:00:00+09:00",
+    "leadMin": 59
+   },
+   {
+    "keyword": "임현주 MBC 퇴사",
+    "hitKeyword": "임현주 MBC 퇴사",
+    "hitAt": "2026-11-16T13:00:00+09:00",
+    "leadMin": 59
+   },
+   {
+    "keyword": "수능 AI 부정행위 심각",
+    "hitKeyword": "AI 수능 부정행위",
+    "hitAt": "2026-11-16T13:00:00+09:00",
+    "leadMin": 18
+   },
    {
     "keyword": "폭설 김윤석 구교환, 짜릿한 전율의 브로맨스",
     "hitKeyword": "폭설 김윤석 구교환",
@@ -362,42 +333,6 @@
     "hitKeyword": "폭설 김윤석 구교환",
     "hitAt": "2026-11-16T12:30:00+09:00",
     "leadMin": 5426
-   },
-   {
-    "keyword": "폭설 김윤석 구교환 전율 주목",
-    "hitKeyword": "폭설 김윤석 구교환",
-    "hitAt": "2026-11-16T12:30:00+09:00",
-    "leadMin": 5385
-   },
-   {
-    "keyword": "폭설 김윤석 연기 호흡",
-    "hitKeyword": "폭설 김윤석 구교환",
-    "hitAt": "2026-11-16T12:30:00+09:00",
-    "leadMin": 5365
-   },
-   {
-    "keyword": "김윤석 폭설",
-    "hitKeyword": "폭설 김윤석 구교환",
-    "hitAt": "2026-11-16T12:30:00+09:00",
-    "leadMin": 5325
-   },
-   {
-    "keyword": "폭설",
-    "hitKeyword": "폭설 김윤석 구교환",
-    "hitAt": "2026-11-16T12:30:00+09:00",
-    "leadMin": 5133
-   },
-   {
-    "keyword": "김유정의 100일 거짓말",
-    "hitKeyword": "100일의 거짓말 심리전",
-    "hitAt": "2026-11-16T12:30:00+09:00",
-    "leadMin": 59
-   },
-   {
-    "keyword": "김유정 100일 거짓말",
-    "hitKeyword": "100일의 거짓말 심리전",
-    "hitAt": "2026-11-16T12:30:00+09:00",
-    "leadMin": 49
    }
   ]
  }
