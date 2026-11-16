@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T06:52:57.150Z",
+ "builtAt": "2026-11-16T07:03:00.683Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,102 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 14,
+ "measured": 10,
  "candidates": [
   {
-   "keyword": "체포",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 28,
-   "recent20": 9,
-   "press": 24,
-   "firstArticleAt": "2026-11-16T05:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "학원 여자화장실서 불법촬영 10대 남학생 체포",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-16T06:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014325248?sid=102"
-    },
-    {
-     "title": "'불량연애2' 출연자 앗슨, 무허가 유흥업소 운영 혐의로 체포[셀럽이슈...",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-16T06:48:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1794808741530940008"
-    },
-    {
-     "title": "\"파리 시위에 총 쏘러 가고 싶었다\"…스페인 20대 '네오나치' 체포",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-16T06:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009291865?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "고경표 음주치상 혐의",
+   "keyword": "서울 집값 둔화",
    "sources": [
     "nate"
    ],
-   "articles90": 15,
-   "recent20": 2,
-   "press": 14,
-   "firstArticleAt": "2026-11-16T05:27:00.000Z",
+   "articles90": 16,
+   "recent20": 0,
+   "press": 16,
+   "firstArticleAt": "2026-11-16T05:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "고경표, 음주운전 사고 영상 확보됐다…치상 혐의 검토→소환 조사 임박",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-16T06:49:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001408468"
+     "title": "“경기도로 밀려나는 것도 이젠 무섭네”…지난달 집값 상승률 서울 앞...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-16T06:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005764411?sid=101"
     },
     {
-     "title": "‘음주운전’ 고경표, 경찰 소환조사 예정…치상 혐의 적용 검토",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-16T06:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000367656?sid=102"
+     "title": "[속보] 수원 영통·화성 동탄 ‘날았다’…경기 집값 상승률, 서울 앞질...",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-16T06:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000132278?sid=101"
     },
     {
-     "title": "'음주운전' 고경표, 경찰 소환조사 예정…\"교특법상 치상 혐의 검토 중...",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-16T06:30:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1794809593530942006"
-    }
-   ]
-  },
-  {
-   "keyword": "대법, 한덕수 선고 19일",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 13,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-16T05:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "與 법사위 “한덕수 선고기일, 국민 저항 의식했나…결과 중요”",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-16T06:40:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2648780"
-    },
-    {
-     "title": "한덕수 내란 재판 최종 결론 임박…대법, 19일 상고심 선고",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-16T06:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003155733?sid=102"
-    },
-    {
-     "title": "대법, 오는 19일 한덕수 내란 선고‥김건희 선고도",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-16T06:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001535873?sid=102"
+     "title": "경기 집값 상승률 서울 앞질러…서울 평균 전세가 5억 돌파",
+     "press": "donga.com",
+     "publishedAt": "2026-11-16T06:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003762768?sid=101"
     }
    ]
   },
@@ -113,7 +48,7 @@
     "signal.bz"
    ],
    "articles90": 11,
-   "recent20": 3,
+   "recent20": 0,
    "press": 11,
    "firstArticleAt": "2026-11-16T05:44:00.000Z",
    "exclusive": false,
@@ -140,14 +75,47 @@
    ]
   },
   {
-   "keyword": "이재명 재판취소 저지특위",
+   "keyword": "음주운전 고경표 소환 예정",
    "sources": [
     "nate"
    ],
-   "articles90": 20,
-   "recent20": 3,
+   "articles90": 10,
+   "recent20": 1,
    "press": 10,
-   "firstArticleAt": "2026-11-16T05:24:00.000Z",
+   "firstArticleAt": "2026-11-16T05:41:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "고경표, 음주운전 사고 영상 확보됐다…치상 혐의 검토→소환 조사 임박",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-16T06:49:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001408468"
+    },
+    {
+     "title": "‘음주운전’ 고경표, 경찰 소환조사 예정…치상 혐의 적용 검토",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-16T06:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000367656?sid=102"
+    },
+    {
+     "title": "'음주운전' 고경표, 경찰 소환조사 예정…\"교특법상 치상 혐의 검토 중...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-16T06:30:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1794809593530942006"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 재판취소 저지 회의",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 18,
+   "recent20": 0,
+   "press": 10,
+   "firstArticleAt": "2026-11-16T05:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -172,78 +140,47 @@
    ]
   },
   {
-   "keyword": "항공 승무원",
+   "keyword": "신세계",
    "sources": [
+    "signal.bz",
     "google"
    ],
    "articles90": 9,
    "recent20": 1,
    "press": 9,
-   "firstArticleAt": "2026-11-16T05:28:00.000Z",
+   "firstArticleAt": "2026-11-16T05:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "조종사 서열 갈등 넘겼다...대한항공, 3년치 임단협 '잠정합의'",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-16T06:46:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=883729"
+     "title": "\"지갑 닫은 외국인·환율 직격탄 신세계, 백화점 성장 모멘텀 '빨간불'\"",
+     "press": "newsquest.co.kr",
+     "publishedAt": "2026-11-16T06:48:00.000Z",
+     "link": "https://www.newsquest.co.kr/news/articleView.html?idxno=305130"
     },
     {
-     "title": "청주대 항공서비스학과, 항공안전 훈련",
-     "press": "dynews.co.kr",
-     "publishedAt": "2026-11-16T06:32:00.000Z",
-     "link": "https://www.dynews.co.kr/news/articleView.html?idxno=874239"
+     "title": "크리스마스 소품부터 타로까지…대전신세계 '홀리데이 마켓'",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-16T06:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004210275?sid=102"
     },
     {
-     "title": "미국 항공 대란 여파 사흘째…정치권 ‘네 탓’ 공방",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-16T06:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012294650?sid=104"
+     "title": "신세계백화점, 겨울 비·눈 대비 기능성 의류 팝업 확대",
+     "press": "ziksir.com",
+     "publishedAt": "2026-11-16T06:30:00.000Z",
+     "link": "https://www.ziksir.com/news/articleView.html?idxno=153491"
     }
    ]
   },
   {
-   "keyword": "테슬라 사이버캡 판매",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-16T05:29:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "테슬라, 자율주행 로보택시 '사이버캡' 일반 개인 판매 들어갔다",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-16T06:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005604941?sid=101"
-    },
-    {
-     "title": "테슬라, 운전대·페달 없는 자율주행차 '사이버캡' 일반판매 개시",
-     "press": "newsfc.co.kr",
-     "publishedAt": "2026-11-16T06:32:00.000Z",
-     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82508"
-    },
-    {
-     "title": "테슬라, 완전자율주행 '사이버캡' 주문 접수... 실제 운행까진 인증절차...",
-     "press": "lawtv.kr",
-     "publishedAt": "2026-11-16T05:58:00.000Z",
-     "link": "https://www.lawtv.kr/news/articleView.html?idxno=61426"
-    }
-   ]
-  },
-  {
-   "keyword": "김정관 장관 회의 주재",
+   "keyword": "김정관 장관 전략회의",
    "sources": [
     "nate"
    ],
-   "articles90": 14,
+   "articles90": 16,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-16T05:40:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-16T05:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -268,41 +205,41 @@
    ]
   },
   {
-   "keyword": "배재대",
+   "keyword": "테슬라 사이버캡 판매",
    "sources": [
-    "google"
+    "signal.bz"
    ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-16T05:58:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-16T05:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "배재대 '간호의 미래와 혁신 포럼'…의료정책 변화 공유",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-16T06:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014325177?sid=102"
+     "title": "테슬라, 자율주행 로보택시 '사이버캡' 일반 개인 판매 들어갔다",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-16T06:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005604941?sid=101"
     },
     {
-     "title": "배재대 간호학과, 18일 '간호의 미래와 혁신 포럼' 개최",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-16T06:02:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1193451"
+     "title": "테슬라, 운전대·페달 없는 자율주행차 '사이버캡' 일반판매 개시",
+     "press": "newsfc.co.kr",
+     "publishedAt": "2026-11-16T06:32:00.000Z",
+     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82508"
     },
     {
-     "title": "배재대, 대전·충남 간호대생 대상 '간호의 미래와 혁신 포럼'",
-     "press": "ccnnews.co.kr",
+     "title": "테슬라, 완전자율주행 '사이버캡' 주문 접수... 실제 운행까진 인증절차...",
+     "press": "lawtv.kr",
      "publishedAt": "2026-11-16T05:58:00.000Z",
-     "link": "http://www.ccnnews.co.kr/news/articleView.html?idxno=417820"
+     "link": "https://www.lawtv.kr/news/articleView.html?idxno=61426"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 650,
+  "flagged": 655,
   "matched": 345,
   "avgLeadMin": 839,
   "recent": [
