@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T06:22:44.177Z",
+ "builtAt": "2026-11-16T06:32:47.386Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,244 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 14,
+ "measured": 10,
  "candidates": [
+  {
+   "keyword": "체포",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 22,
+   "recent20": 3,
+   "press": 19,
+   "firstArticleAt": "2026-11-16T05:08:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'불량연애2' 앗슨, 무허가 유흥업소 운영 혐의로 체포…현금 1억 5천만 ...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-16T06:19:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001408465"
+    },
+    {
+     "title": "‘불량연애2’ 출연 인플루언서, 경찰 체포…무허가 유흥업소 운영 혐의",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-16T06:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005764396?sid=102"
+    },
+    {
+     "title": "무허가 접대업소 운영 혐의…'불량 연애' 인기 출연자, 일본서 체포",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-16T06:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926637?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "대법, 한덕수 선고 19일",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 17,
+   "recent20": 3,
+   "press": 15,
+   "firstArticleAt": "2026-11-16T05:03:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한덕수 내란 재판 최종 결론 임박…대법, 19일 상고심 선고",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-16T06:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003155733?sid=102"
+    },
+    {
+     "title": "대법, 오는 19일 한덕수 내란 선고‥김건희 선고도",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-16T06:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001535873?sid=102"
+    },
+    {
+     "title": "예산·입법 대치 속 한덕수·김건희 선고…19일 정국 분수령",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-16T06:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005441727?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "한일 정상회담 마닐라",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 12,
+   "recent20": 2,
+   "press": 12,
+   "firstArticleAt": "2026-11-16T05:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李 대통령, 17일 다카이치 총리와 마닐라 정상회담…에너지 공조 주목",
+     "press": "news.mtn.co.kr",
+     "publishedAt": "2026-11-16T06:26:00.000Z",
+     "link": "https://news.mtn.co.kr/article/2026111615174645776"
+    },
+    {
+     "title": "韓·日, 17일 필리핀서 정상회담...경제·안보 협력 논의",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-16T06:14:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=73113"
+    },
+    {
+     "title": "한일 만나고 중국과도 마주 앉나…이재명 대통령, 아세안·APEC 외교 승부...",
+     "press": "incheonilbo.com",
+     "publishedAt": "2026-11-16T06:10:00.000Z",
+     "link": "https://www.incheonilbo.com/news/articleView.html?idxno=1336909"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 재판 취소 저지 특위",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 20,
+   "recent20": 9,
+   "press": 10,
+   "firstArticleAt": "2026-11-16T05:19:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "국힘 특위, 수원고법에 \"이화영 재심 요청 기각해야\" 의견서",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-16T06:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016444406?sid=100"
+    },
+    {
+     "title": "국힘 '재판취소 저지' 특위 \"이화영 '탈옥' 방지 의견서 공소청 제출\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-16T06:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001535875?sid=100"
+    },
+    {
+     "title": "이재명 대통령 재판취소 저지특위 전체회의 발언하는 주진우 위원장",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-16T06:23:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261116001029"
+    }
+   ]
+  },
+  {
+   "keyword": "김유정 100일 거짓말",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-16T05:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김유정·박진영, 이름 부르던 사이에서 총구 대치까지…‘100일의 거짓말...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-16T06:23:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005641314"
+    },
+    {
+     "title": "김유정, 박진영이 총 겨누자 충격…시청률 10.4%→동시간대 1위 ('100일의...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-16T06:17:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000784693"
+    },
+    {
+     "title": "이선, 독립운동부터 로맨스까지... ‘100일의 거짓말’ 신스틸러",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-16T05:49:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003541959"
+    }
+   ]
+  },
+  {
+   "keyword": "최교진 장관 질의 답변",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-16T05:21:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“수능 AI 부정행위 적발 가능해?” 묻자... 교육장관 “난 못할 것 같다...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-16T06:24:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1175023"
+    },
+    {
+     "title": "교육부 장관 “수능시간 일부 전파 차단 검토…수능 연기는 어려워”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-16T06:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012294606?sid=102"
+    },
+    {
+     "title": "답변하는 최교진 교육부 장관",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-16T05:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014324994?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "테슬라 사이버캡 판매",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-16T05:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "테슬라, 운전대·페달 없는 자율주행차 '사이버캡' 일반판매 개시",
+     "press": "newsfc.co.kr",
+     "publishedAt": "2026-11-16T06:32:00.000Z",
+     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82508"
+    },
+    {
+     "title": "테슬라, 완전자율주행 '사이버캡' 주문 접수... 실제 운행까진 인증절차...",
+     "press": "lawtv.kr",
+     "publishedAt": "2026-11-16T05:58:00.000Z",
+     "link": "https://www.lawtv.kr/news/articleView.html?idxno=61426"
+    },
+    {
+     "title": "테슬라, 운전대 없는 자율주행차 '사이버캡' 일반 판매 시작",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-16T05:42:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95387"
+    }
+   ]
+  },
   {
    "keyword": "철도 안전 종합대책",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 17,
+   "articles90": 3,
    "recent20": 0,
-   "press": 17,
-   "firstArticleAt": "2026-11-16T04:57:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-16T05:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -41,236 +268,11 @@
      "link": "https://n.news.naver.com/mnews/article/079/0004210181?sid=101"
     }
    ]
-  },
-  {
-   "keyword": "대법, 한덕수 선고 19일",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 17,
-   "recent20": 2,
-   "press": 15,
-   "firstArticleAt": "2026-11-16T04:53:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "예산·입법 대치 속 한덕수·김건희 선고…19일 정국 분수령",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-16T06:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005441727?sid=100"
-    },
-    {
-     "title": "법사위, 내년도 예산안 의결·한덕수 재판 긴급질의...국힘 “사법부 압...",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-16T06:08:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=73111"
-    },
-    {
-     "title": "與, 대법원 심리지연 '난타'…大法 \"졸속으로 재판할 수 없어\"",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-16T05:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001075356?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "한일 정상회담 마닐라",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 12,
-   "recent20": 3,
-   "press": 12,
-   "firstArticleAt": "2026-11-16T04:55:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "韓·日, 17일 필리핀서 정상회담...경제·안보 협력 논의",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-16T06:14:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=73113"
-    },
-    {
-     "title": "한일 만나고 중국과도 마주 앉나…이재명 대통령, 아세안·APEC 외교 승부...",
-     "press": "incheonilbo.com",
-     "publishedAt": "2026-11-16T06:10:00.000Z",
-     "link": "https://www.incheonilbo.com/news/articleView.html?idxno=1336909"
-    },
-    {
-     "title": "‘강대국 담판’ 앞에 만나는 李·다카이치…한일 공조 해법 찾나(종합...",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-16T06:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006410507?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "대한민국",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 16,
-   "recent20": 16,
-   "press": 10,
-   "firstArticleAt": "2026-11-16T06:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "2026 대한민국 인구포럼",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-16T06:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004210256?sid=102"
-    },
-    {
-     "title": "'2026 대한민국 인구포럼'",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-16T06:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004210254?sid=102"
-    },
-    {
-     "title": "CBS 나이영 사장, '2026 대한민국 인구포럼' 개회사",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-16T06:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004210253?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "이재명 재판 취소 저지 특위",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 13,
-   "recent20": 4,
-   "press": 8,
-   "firstArticleAt": "2026-11-16T05:19:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[일요서울TV] '이재명 탈옥 막으려면 이화영부터' 행동에 나선 주진우",
-     "press": "ilyoseoul.co.kr",
-     "publishedAt": "2026-11-16T06:20:00.000Z",
-     "link": "https://www.ilyoseoul.co.kr/news/articleView.html?idxno=525160"
-    },
-    {
-     "title": "구호 외치는 이 대통령 재판취소 저지특위",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-16T06:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014325047?sid=100"
-    },
-    {
-     "title": "이재명 대통령 재판취소 저지특위 전체회의",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-16T06:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014325048?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "김유정 100일의 거짓말",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-16T04:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김유정, 박진영이 총 겨누자 충격…시청률 10.4%→동시간대 1위 ('100일의...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-16T06:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000784693"
-    },
-    {
-     "title": "이선, 독립운동부터 로맨스까지... ‘100일의 거짓말’ 신스틸러",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-16T05:49:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003541959"
-    },
-    {
-     "title": "'100일의 거짓말' 이무생, 오랜 순애보 안방극장 울렸다",
-     "press": "enter.etoday.co.kr",
-     "publishedAt": "2026-11-16T05:16:00.000Z",
-     "link": "https://enter.etoday.co.kr/news/view/305350"
-    }
-   ]
-  },
-  {
-   "keyword": "최교진 장관 질의 답변",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-16T05:21:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "교육부 장관 “수능시간 일부 전파 차단 검토…수능 연기는 어려워”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-16T06:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012294606?sid=102"
-    },
-    {
-     "title": "답변하는 최교진 교육부 장관",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-16T05:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014324994?sid=100"
-    },
-    {
-     "title": "의원 질의 답변하는 최교진 교육부 장관",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-16T05:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014324988?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "테슬라 사이버캡 판매",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-16T05:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "테슬라, 완전자율주행 '사이버캡' 주문 접수... 실제 운행까진 인증절차...",
-     "press": "lawtv.kr",
-     "publishedAt": "2026-11-16T05:58:00.000Z",
-     "link": "https://www.lawtv.kr/news/articleView.html?idxno=61426"
-    },
-    {
-     "title": "차는 팔지만 운행은 통제…테슬라 사이버캡의 ‘두 얼굴’",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-16T05:42:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1320560&inflow=N"
-    },
-    {
-     "title": "테슬라, 운전대 없는 자율주행차 '사이버캡' 일반 판매 시작",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-16T05:42:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95387"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 643,
+  "flagged": 645,
   "matched": 342,
   "avgLeadMin": 846,
   "recent": [
