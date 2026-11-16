@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T22:05:43.770Z",
+ "builtAt": "2026-11-16T22:15:46.969Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 18,
+   "articles90": 19,
    "recent20": 4,
-   "press": 16,
-   "firstArticleAt": "2026-11-16T20:42:00.000Z",
+   "press": 17,
+   "firstArticleAt": "2026-11-16T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "앤트로픽 IPO, 중국 자본 막혔다 \"AI 기업 상장에도 안보 잣대\"",
+     "press": "econovill.com",
+     "publishedAt": "2026-11-16T22:12:00.000Z",
+     "link": "https://www.econovill.com/news/articleView.html?idxno=757465"
+    },
+    {
+     "title": "美 상무부, 中 기업 AI 반도체 우회로 차단...규제 본격화 신호탄-[굿모...",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-16T22:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001272977?sid=101"
+    },
     {
      "title": "美, 중국의 해외 GPU 우회 이용 차단…동남아 4개국·브라질 수출 규제 ...",
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-16T22:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006410796?sid=105"
-    },
-    {
-     "title": "트럼프 \"젠슨 황 불륜녀 스파이 아닐 수도… 중국 자극 원치 않아\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-16T21:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000965970?sid=104"
-    },
-    {
-     "title": "[뉴욕증시] 엔비디아 쇼크·AI반도체주 급락…나스닥 2.49% ↓",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-16T21:52:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/325495/?sc=Naver"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 7,
+   "articles90": 8,
    "recent20": 4,
-   "press": 6,
+   "press": 7,
    "firstArticleAt": "2026-11-16T21:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "황인범 소신 발언 \"임시 감독 체제, 대표팀에 긍정적이지 않다\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-16T22:04:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/055/0001403495"
+    },
     {
      "title": "‘골든보이’ 이강인은 17일 카타르전에서도 오른쪽 측면 미드필더로? ...",
      "press": "segye.com",
@@ -65,51 +71,45 @@
      "press": "slist.kr",
      "publishedAt": "2026-11-16T21:58:00.000Z",
      "link": "https://www.slist.kr/news/articleView.html?idxno=782291"
-    },
-    {
-     "title": "모레노, 카타르전 선발진 로테이션 예고…\"새 얼굴 나온다\"",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-16T21:56:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=782290"
     }
    ]
   },
   {
-   "keyword": "100일 거짓말 김유정",
+   "keyword": "2026년 11월 17일 운세",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 3,
-   "recent20": 3,
-   "press": 3,
-   "firstArticleAt": "2026-11-16T21:52:00.000Z",
+   "articles90": 7,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-16T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김유정·박진영·신민아...'100일의 거짓말'·'재혼 황후' 드라마 배우 ...",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-16T22:04:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=782297"
+     "title": "[오늘의 운세] 2026년 11월 17일 화요일 띠별 운세… 말띠 '대길', 토끼·...",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-16T22:06:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082951"
     },
     {
-     "title": "치이카와·머무르·사랑이온다·100일의 거짓말·닥터X, 1위 [한눈에 보...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-16T22:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009292596"
+     "title": "[오늘의 띠별 운세] 2026년 11월 17일 화요일",
+     "press": "mhns.co.kr",
+     "publishedAt": "2026-11-16T21:38:00.000Z",
+     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=769342"
     },
     {
-     "title": "김유정, 11월 드라마 배우 브랜드평판 1위…박진영·신민아 추격",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-16T21:52:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=504776"
+     "title": "[오늘의 운세] 17일 화요일 나의 운세는?",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-16T21:26:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1193279"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 761,
+  "flagged": 762,
   "matched": 437,
   "avgLeadMin": 898,
   "recent": [
