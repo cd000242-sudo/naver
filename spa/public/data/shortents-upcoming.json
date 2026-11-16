@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T14:03:04.939Z",
+ "builtAt": "2026-11-16T14:13:11.897Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 18,
+ "measured": 14,
  "candidates": [
   {
    "keyword": "수능 AI 부정행위 논란",
@@ -17,28 +17,28 @@
    ],
    "articles90": 20,
    "recent20": 4,
-   "press": 14,
-   "firstArticleAt": "2026-11-16T12:39:00.000Z",
+   "press": 15,
+   "firstArticleAt": "2026-11-16T12:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"믿으라고? 다 카메라 보고 수능 칠 판\"…초소형 카메라 품절사태, 점입...",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-16T14:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001040634?sid=102"
+    },
+    {
+     "title": "편입도 AI 부정행위?…기출 30문항을 ‘찍은 듯’ 배점까지 복기 “사람...",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-16T14:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002833206?sid=102"
+    },
     {
      "title": "'흙수저→100억 연봉' 이지영, AI 커닝 논란에 분통 \"노력한 만큼 보상받...",
      "press": "sportschosun.com",
      "publishedAt": "2026-11-16T13:56:00.000Z",
      "link": "https://m.entertain.naver.com/article/076/0004467192"
-    },
-    {
-     "title": "[사설] 교육부 ‘AI커닝’ 비상, 수능관리에 조직 명운 걸어야",
-     "press": "segye.com",
-     "publishedAt": "2026-11-16T13:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004175654?sid=110"
-    },
-    {
-     "title": "LEET 만점자에 커지는 의혹의 시선...과거 수능성적표에 개명 후 이름?",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-16T13:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003155869?sid=102"
     }
    ]
   },
@@ -47,10 +47,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-16T12:35:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-16T12:46:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
