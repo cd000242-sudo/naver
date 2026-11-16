@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T16:24:51.898Z",
+ "builtAt": "2026-11-16T16:34:54.990Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,74 +11,74 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "수능 AI 부정행위 대책 마련 필요해",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-16T15:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"수험생들의 공포 극심해\" 이지영, AI 부정행위 비상대책 촉구",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-16T16:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005641510"
-    },
-    {
-     "title": "한성숙, 수능 스마트기기 부정행위 무관용…와이파이 차단 검토",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-16T15:20:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3754029"
-    },
-    {
-     "title": "수능 'AI 컨닝' 비상… 감독관 부담, 수험생에 고스란히…",
-     "press": "gjdream.com",
-     "publishedAt": "2026-11-16T15:10:00.000Z",
-     "link": "http://www.gjdream.com/news/articleView.html?idxno=674385"
-    }
-   ]
-  },
-  {
-   "keyword": "김주혁",
+   "keyword": "로버트 패틴슨",
    "sources": [
     "signal.bz",
     "google"
    ],
    "articles90": 6,
-   "recent20": 0,
+   "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-16T15:00:00.000Z",
+   "firstArticleAt": "2026-11-16T15:38:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "로버트 패틴슨, 새 제임스 본드 낙점",
+     "press": "segye.com",
+     "publishedAt": "2026-11-16T16:16:00.000Z",
+     "link": "https://m.entertain.naver.com/article/022/0004175673"
+    },
+    {
+     "title": "'트와일라잇' 로버트 패틴슨, 차기 제임스 본드 공식 확정…새로운 제작...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-16T16:12:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16278212"
+    },
+    {
+     "title": "로버트 패틴슨, 다니엘 크레이그 이어 7대 제임스 본드로 선정",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-16T16:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000965946?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "이 대통령 AI 문화 이니셔티브 제안",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-16T15:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "문근영&차태현, 故 김주혁 생각에 오열...임바다X허채민, 149표로 1위",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-16T15:14:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=782271"
+     "title": "이 대통령, 3박 4일 순방 돌입...\"아세안 AI·문화 이니셔티브\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-16T15:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002433751?sid=100"
     },
     {
-     "title": "“故 김주혁 추억”…임바다X허채민, 문근영 울린 까닭 (‘우발라2’) [...",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-16T15:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000052917"
+     "title": "이 대통령 “한·아세안 AI 동행” 새 협력 구상 띄웠다",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-16T15:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003565659?sid=100"
     },
     {
-     "title": "문근영·차태현, 방송 중 눈물 펑펑..故김주혁 향한 그리움 “들을 때마...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-16T15:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005641501"
+     "title": "이 대통령 \"한·아세안 'AI·문화산업 이니셔티브' 제안\"",
+     "press": "kado.net",
+     "publishedAt": "2026-11-16T15:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000211679?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 730,
+  "flagged": 732,
   "matched": 392,
   "avgLeadMin": 819,
   "recent": [
