@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T15:34:32.639Z",
+ "builtAt": "2026-11-16T15:44:35.871Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,10 +15,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-16T14:11:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-16T14:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -39,38 +39,6 @@
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-16T14:37:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002433735?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "발언하는 이재명 대통령",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-16T14:13:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이 대통령 \"한·아세안 'AI·문화산업 이니셔티브' 제안\"",
-     "press": "kado.net",
-     "publishedAt": "2026-11-16T15:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000211679?sid=100"
-    },
-    {
-     "title": "'아세안 순방' 이대통령, 오늘 한일 정상회담",
-     "press": "ksilbo.co.kr",
-     "publishedAt": "2026-11-16T15:04:00.000Z",
-     "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1072708"
-    },
-    {
-     "title": "李대통령, 아세안에 'AI 동행' 이니셔티브 제안…태국과 CEPA 속도(종합)",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-16T15:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003155871?sid=100"
     }
    ]
   },
