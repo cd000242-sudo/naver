@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T12:12:04.038Z",
+ "builtAt": "2026-11-16T12:22:12.064Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,8 +8,40 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 4,
+ "measured": 10,
  "candidates": [
+  {
+   "keyword": "한-메콩 정상회의 이 대통령",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 25,
+   "recent20": 2,
+   "press": 23,
+   "firstArticleAt": "2026-11-16T10:55:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李대통령 “메콩 핵심광물·韓 기술 결합”…6년 만에 한-메콩 정상회의...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-16T12:12:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2648927"
+    },
+    {
+     "title": "이 대통령, 아세안에 “AI·문화 이니셔티브” 제안",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-16T12:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003483072?sid=100"
+    },
+    {
+     "title": "李 대통령, 필리핀과 정상회담 … 조선·방산·인프라 협력 심화",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-16T12:02:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/16/2026111650378.html"
+    }
+   ]
+  },
   {
    "keyword": "보안",
    "sources": [
@@ -17,7 +49,7 @@
     "google"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-16T11:25:00.000Z",
    "exclusive": false,
@@ -42,11 +74,76 @@
      "link": "https://www.tokenpost.kr/news/breaking/439067"
     }
    ]
+  },
+  {
+   "keyword": "젠슨 황 복귀 움직임",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-16T11:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "측근·실리콘밸리 인사들 ‘젠슨 황 복귀 작전’",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-16T12:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003483070?sid=104"
+    },
+    {
+     "title": "사직서에 잉크도 안 말랐는데‥\"젠슨 황 복귀 논의 '워룸' 꾸려\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-16T11:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001535942?sid=104"
+    },
+    {
+     "title": "젠슨 황 사임 사흘 만 복귀 타진... 정가는 반대",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-16T11:00:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=883901"
+    }
+   ]
+  },
+  {
+   "keyword": "나솔",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-16T11:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'나솔' 14기 현숙, 결혼 예고하더니 시드니行…여름인 줄 알았는데 \"서울...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-16T11:31:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000784740"
+    },
+    {
+     "title": "'나솔' 32기 영숙, 결별후 의미심장한 근황…\"결국 함께 살아가야\"",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-16T11:01:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000784737"
+    },
+    {
+     "title": "'나솔' 28기 광수, 정희 결별 후 외로워…\"빼빼로 줄 사람 없어\" 착잡",
+     "press": "atstar1.com",
+     "publishedAt": "2026-11-16T11:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/415/0000053869"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 711,
+  "flagged": 713,
   "matched": 387,
   "avgLeadMin": 824,
   "recent": [
