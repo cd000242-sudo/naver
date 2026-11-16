@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T06:42:54.069Z",
+ "builtAt": "2026-11-16T06:52:57.150Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 18,
+ "measured": 14,
  "candidates": [
   {
    "keyword": "체포",
@@ -16,30 +16,62 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 24,
-   "recent20": 4,
-   "press": 22,
-   "firstArticleAt": "2026-11-16T05:16:00.000Z",
+   "articles90": 28,
+   "recent20": 9,
+   "press": 24,
+   "firstArticleAt": "2026-11-16T05:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "오키나와 미군 또 물의…외출·음주 통제에도 공군 병장 공연음란 체포",
-     "press": "ppss.kr",
-     "publishedAt": "2026-11-16T06:39:00.000Z",
-     "link": "https://www.ppss.kr/news/articleView.html?idxno=321121"
+     "title": "학원 여자화장실서 불법촬영 10대 남학생 체포",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-16T06:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014325248?sid=102"
     },
     {
-     "title": "'불량연애2' 앗슨, 무허가 유흥업소 운영 혐의로 체포",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-16T06:36:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000052889"
+     "title": "'불량연애2' 출연자 앗슨, 무허가 유흥업소 운영 혐의로 체포[셀럽이슈...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-16T06:48:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1794808741530940008"
     },
     {
-     "title": "‘연프’ 출연 80만 인플루언서 무허가접대업 체포",
-     "press": "munhwa.com",
+     "title": "\"파리 시위에 총 쏘러 가고 싶었다\"…스페인 20대 '네오나치' 체포",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-16T06:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009291865?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "고경표 음주치상 혐의",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 15,
+   "recent20": 2,
+   "press": 14,
+   "firstArticleAt": "2026-11-16T05:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "고경표, 음주운전 사고 영상 확보됐다…치상 혐의 검토→소환 조사 임박",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-16T06:49:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001408468"
+    },
+    {
+     "title": "‘음주운전’ 고경표, 경찰 소환조사 예정…치상 혐의 적용 검토",
+     "press": "ichannela.com",
      "publishedAt": "2026-11-16T06:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002833142?sid=104"
+     "link": "https://n.news.naver.com/mnews/article/449/0000367656?sid=102"
+    },
+    {
+     "title": "'음주운전' 고경표, 경찰 소환조사 예정…\"교특법상 치상 혐의 검토 중...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-16T06:30:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1794809593530942006"
     }
    ]
   },
@@ -48,10 +80,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 2,
-   "press": 14,
-   "firstArticleAt": "2026-11-16T05:16:00.000Z",
+   "articles90": 13,
+   "recent20": 1,
+   "press": 13,
+   "firstArticleAt": "2026-11-16T05:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -76,49 +108,23 @@
    ]
   },
   {
-   "keyword": "고경표 음주치상 혐의",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 14,
-   "recent20": 2,
-   "press": 14,
-   "firstArticleAt": "2026-11-16T05:27:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘음주운전’ 고경표, 경찰 소환조사 예정…치상 혐의 적용 검토",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-16T06:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000367656?sid=102"
-    },
-    {
-     "title": "'음주운전' 고경표, 경찰 소환조사 예정…\"교특법상 치상 혐의 검토 중...",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-16T06:30:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1794809593530942006"
-    },
-    {
-     "title": "‘음주 운전’ 고경표, 활동 중단 발표 하루 만에…경찰 소환 예정 “치...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-16T06:15:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001187973"
-    }
-   ]
-  },
-  {
    "keyword": "한일 정상회담 마닐라",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
+   "articles90": 11,
    "recent20": 3,
-   "press": 13,
-   "firstArticleAt": "2026-11-16T05:17:00.000Z",
+   "press": 11,
+   "firstArticleAt": "2026-11-16T05:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "필리핀 향한 日다카이치 \"李대통령과 정상회담 예정\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-16T06:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014325198?sid=104"
+    },
     {
      "title": "李 대통령, 오늘 한일 정상회담…'제2의 얄타' 우려 속 외교전",
      "press": "newsgn.com",
@@ -130,76 +136,6 @@
      "press": "newsworks.co.kr",
      "publishedAt": "2026-11-16T06:36:00.000Z",
      "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903230"
-    },
-    {
-     "title": "李 대통령, 17일 다카이치 총리와 마닐라 정상회담…에너지 공조 주목",
-     "press": "news.mtn.co.kr",
-     "publishedAt": "2026-11-16T06:26:00.000Z",
-     "link": "https://news.mtn.co.kr/article/2026111615174645776"
-    }
-   ]
-  },
-  {
-   "keyword": "신용한 충북지사",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 13,
-   "recent20": 3,
-   "press": 13,
-   "firstArticleAt": "2026-11-16T05:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "신용한 지사, 국회 국비 확보-시장형 공공기관 이전 총력 대응 주문",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-16T06:38:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3753396"
-    },
-    {
-     "title": "대포폰으로 ‘불법 선거운동’ 혐의…신용한 충북지사 송치",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-16T06:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002832419?sid=102"
-    },
-    {
-     "title": "'차명폰 문자 발송 의혹' 신용한 지사 등 22명 공소청 송치",
-     "press": "inews365.com",
-     "publishedAt": "2026-11-16T06:24:00.000Z",
-     "link": "https://www.inews365.com/news/article.html?no=943822"
-    }
-   ]
-  },
-  {
-   "keyword": "삼성sdi",
-   "sources": [
-    "google"
-   ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-16T05:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "삼성SDI, 미국 주피터파워에 3년간 16GWh LFP 배터리 공급…수조원 수주",
-     "press": "socialvalue.kr",
-     "publishedAt": "2026-11-16T06:30:00.000Z",
-     "link": "https://www.socialvalue.kr/news/view/1065594428993152"
-    },
-    {
-     "title": "삼성SDI, 북미 ESS 시장 뚫었다…수조원대 LFP 공급",
-     "press": "financialpost.co.kr",
-     "publishedAt": "2026-11-16T06:24:00.000Z",
-     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=301208"
-    },
-    {
-     "title": "삼성SDI, 美 주피터파워와 16GWh LFP 배터리 공급계약…2029년 납품",
-     "press": "sateconomy.co.kr",
-     "publishedAt": "2026-11-16T06:10:00.000Z",
-     "link": "https://sateconomy.co.kr/news/view/1065592555005942"
     }
    ]
   },
@@ -208,10 +144,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 21,
-   "recent20": 10,
-   "press": 11,
-   "firstArticleAt": "2026-11-16T05:19:00.000Z",
+   "articles90": 20,
+   "recent20": 3,
+   "press": 10,
+   "firstArticleAt": "2026-11-16T05:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -240,13 +176,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 10,
+   "articles90": 9,
    "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-16T05:16:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-16T05:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "조종사 서열 갈등 넘겼다...대한항공, 3년치 임단협 '잠정합의'",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-16T06:46:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=883729"
+    },
     {
      "title": "청주대 항공서비스학과, 항공안전 훈련",
      "press": "dynews.co.kr",
@@ -254,16 +196,10 @@
      "link": "https://www.dynews.co.kr/news/articleView.html?idxno=874239"
     },
     {
-     "title": "[기획] 조원태의 6년 승부수…통합 대한항공 출범 한달 앞두고 '총력전...",
-     "press": "newsinside.kr",
-     "publishedAt": "2026-11-16T06:10:00.000Z",
-     "link": "https://www.newsinside.kr/news/articleView.html?idxno=5049482"
-    },
-    {
-     "title": "출범 한 달 앞둔 통합 대한항공..OZ 탈퇴 5시간 뒤 KE로 일원화",
-     "press": "kpenews.com",
-     "publishedAt": "2026-11-16T06:00:00.000Z",
-     "link": "https://kpenews.com/View.aspx?No=4314479"
+     "title": "미국 항공 대란 여파 사흘째…정치권 ‘네 탓’ 공방",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-16T06:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012294650?sid=104"
     }
    ]
   },
@@ -272,10 +208,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-16T05:14:00.000Z",
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-16T05:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -312,12 +248,6 @@
    "capped": false,
    "samples": [
     {
-     "title": "핵심광물 민관 전략회의",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-16T06:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009291755?sid=101"
-    },
-    {
      "title": "김정관 장관, 핵심광물 민관 전략회의",
      "press": "news1.kr",
      "publishedAt": "2026-11-16T06:16:00.000Z",
@@ -328,6 +258,12 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-16T06:16:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009291756?sid=101"
+    },
+    {
+     "title": "김정관 산업장관 주재 '핵심광물 민관 전략회의'",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-16T06:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009291757?sid=101"
     }
    ]
   },
