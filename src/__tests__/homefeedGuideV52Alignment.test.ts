@@ -47,6 +47,11 @@ describe('homefeed base.prompt carries the guide rules', () => {
     expect(base).toMatch(/비하·조롱, 외모 낙인[^\n]*투자 권유[^\n]*제목에 쓰지 않는다/);
   });
 
+  // [2026-11-17] guide rule that was still missing: a bare number in a title says nothing.
+  it('title rules: a number in the title names what it counts', () => {
+    expect(base).toMatch(/제목의 숫자에는 무엇의 숫자인지 대상을 붙인다/);
+  });
+
   it('heading count is 4~6 and the old 3~7 wording is gone', () => {
     expect(base).toContain('소제목은 4~6개를 기본으로 하고 10자 이내를 권장한다');
     expect(base).not.toMatch(/3~7개/);

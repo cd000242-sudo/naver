@@ -281,7 +281,8 @@ describe('Content Quality V3 evidence attestation', () => {
         //   contentJsonPromptFormat · quality90Gate · humanlikeEval)로 재계산. 런타임 지문은 여기에 더해
         //   contentGenerator · contentVoiceProfile · content/homefeedPlainRegister(신규)도 함께 바뀜
         // [2026-11-16] 홈판 주제 장치 블록(9개 주제, content/homefeedTopicCraft) 배선 — promptLoader 로 재계산
-        'eefc12636a02b741aaf03115c6e5880b07a7e24ef06fe0981974727a4bd43c94',
+        // [2026-11-17] 홈판 제목 규칙 한 줄(숫자에는 대상을 붙인다) — homefeed/base.prompt 로 재계산
+        '8355979c00a9186feb5dfd082e1689af31424c68ef9af5ae0315e0c269bf36dc',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 
