@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T02:30:56.313Z",
+ "builtAt": "2026-11-16T02:41:00.327Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,101 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 16,
+ "measured": 20,
  "candidates": [
   {
    "keyword": "대법, 한덕수 내란 선고",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 69,
-   "recent20": 9,
-   "press": 57,
+   "articles90": 72,
+   "recent20": 7,
+   "press": 56,
    "firstArticleAt": "2026-11-16T01:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "'김건희 3대 의혹' 19일 대법 선고... 항소심 징역 4년",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-16T02:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005604772?sid=102"
+    },
+    {
+     "title": "대법, 한덕수 상고심 19일 선고…구속 만료 하루 전 매듭",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-16T02:34:00.000Z",
+     "link": "https://www.ajunews.com/view/20261116111941923"
+    },
+    {
      "title": "비판여론 못 버텼나…대법, '한덕수 내란 재판' 구속 만료 하루 전 선고...",
      "press": "pressian.com",
      "publishedAt": "2026-11-16T02:27:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/002/0002465988?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "서울중수청 명륜당 압수수색",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 51,
+   "recent20": 3,
+   "press": 51,
+   "firstArticleAt": "2026-11-16T01:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "서울중수청, ‘명륜진사갈비’ 운영 명륜당 압수수색",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-16T02:34:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=73094"
     },
     {
-     "title": "대법, 한덕수 내란중요임무 19일 선고…구속만료 하루 전",
-     "press": "news.tvchosun.com",
+     "title": "명륜진사갈비 본사 압수수색…'회장 일가 대부업체 부당지원' 혐의",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-16T02:34:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1731799"
+    },
+    {
+     "title": "서울중수청 첫 압수수색…명륜당 '회장 일가 대부업체 지원' 의혹",
+     "press": "cstimes.com",
      "publishedAt": "2026-11-16T02:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000651305?sid=102"
+     "link": "https://www.cstimes.com/news/articleView.html?idxno=728011"
+    }
+   ]
+  },
+  {
+   "keyword": "조정식 국회의장 공동위원장",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 69,
+   "recent20": 16,
+   "press": 44,
+   "firstArticleAt": "2026-11-16T01:25:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "개헌 관련 기자회견 들어서는 조정식 국회의장",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-16T02:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009291027?sid=100"
     },
     {
-     "title": "한덕수·김건희, 19일 '운명의 날'…대법 상고심 선고",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-16T02:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000142334?sid=102"
+     "title": "취재진 질문 받는 조정식 국회의장",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-16T02:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009291030?sid=100"
+    },
+    {
+     "title": "조정식 국회의장, 헌법개정자문위원회 공동위원장 발표",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-16T02:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009291033?sid=100"
     }
    ]
   },
@@ -47,105 +111,169 @@
    "sources": [
     "google"
    ],
-   "articles90": 23,
-   "recent20": 16,
-   "press": 21,
-   "firstArticleAt": "2026-11-16T02:03:00.000Z",
+   "articles90": 19,
+   "recent20": 10,
+   "press": 18,
+   "firstArticleAt": "2026-11-16T02:14:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "동부교육지원청, 서울교육 AI 활용 공모전 개최…우수작 10편 선정",
-     "press": "news.unn.net",
-     "publishedAt": "2026-11-16T02:28:00.000Z",
-     "link": "https://news.unn.net/news/articleView.html?idxno=600664"
+     "title": "LH, 남양주왕숙 등 10개 블록 9065호 민간참여사업 공모",
+     "press": "newslock.co.kr",
+     "publishedAt": "2026-11-16T02:38:00.000Z",
+     "link": "http://www.newslock.co.kr/news/articleView.html?idxno=140137"
     },
     {
-     "title": "대구행복진흥원 꼼지락발전소 '봉우리', 청소년자원봉사 공모전 장관상...",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-16T02:28:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4118772"
+     "title": "삼성바이오로직스, 2조 6650억 원 규모 유상증자 일반공모 청약 마감",
+     "press": "nbntv.co.kr",
+     "publishedAt": "2026-11-16T02:38:00.000Z",
+     "link": "https://www.nbntv.co.kr/news/articleView.html?idxno=4027497"
     },
     {
-     "title": "내 아이디어가 실제 복지 사업으로…사랑의열매, 공모전 개최",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-16T02:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002723972?sid=103"
+     "title": "LH, 연말까지 9000가구 민간참여사업 공모…사업기간 단축 평가 신설",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-16T02:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004682606?sid=101"
     }
    ]
   },
   {
-   "keyword": "김유정의 100일 거짓말",
+   "keyword": "미중러 정상회담",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
+   "articles90": 22,
+   "recent20": 3,
+   "press": 18,
+   "firstArticleAt": "2026-11-16T01:12:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "통일부, 북 조용원 방러에 \"미중러 회담 직전 고위급 교류…동향 주시\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-16T02:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014324337?sid=100"
+    },
+    {
+     "title": "미·중·러, 19일 선전서 첫 3자 정상 회담…국제현안 논의",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-16T02:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004210108?sid=104"
+    },
+    {
+     "title": "통일부 “북한 조용원, 미중러회담 앞두고 방러…관련 동향 주시”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-16T02:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012294507?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "이호선, 모친상 조의금 기부",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 17,
    "recent20": 4,
-   "press": 9,
-   "firstArticleAt": "2026-11-16T01:04:00.000Z",
+   "press": 17,
+   "firstArticleAt": "2026-11-16T01:15:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'모친상' 이호선, 조의금 1억 90만 원 전액 기부…\"사랑밖에는 답이 없다...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-16T02:35:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001408427"
+    },
+    {
+     "title": "'이혼숙려캠프' 이호선, 모친상 조의금 1억 90만 원 기부",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-16T02:34:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95365"
+    },
+    {
+     "title": "이호선, 모친상 조의금 1억90만원 전액 기부…“사랑밖에는 답이 없다”...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-16T02:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004175457?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "최민희 의원 하이에나 고소",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 26,
+   "recent20": 1,
+   "press": 17,
+   "firstArticleAt": "2026-11-16T01:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "한국사진기자협회, \"하이에나 떼들\" 최민희 의원 모욕죄 고소",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-16T02:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004210112?sid=102"
+    },
+    {
+     "title": "사진기자협회, “하이에나 떼들” 최민희 경찰 고소…모욕죄 성립 주장",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-16T02:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005764272?sid=102"
+    },
+    {
+     "title": "한국사진기자협회, ‘하이에나 떼 발언’ 최민희 모욕죄로 고소",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-16T02:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002832376?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "김유정 100일 거짓말",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 12,
+   "recent20": 4,
+   "press": 11,
+   "firstArticleAt": "2026-11-16T01:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'100일의 거짓말' 김유정, 총구 앞 얼어붙은 엔딩",
+     "press": "atstar1.com",
+     "publishedAt": "2026-11-16T02:38:00.000Z",
+     "link": "https://m.entertain.naver.com/article/415/0000053840"
+    },
+    {
+     "title": "'100일의 거짓말' 진선규, 김현주·이무생과 숨 막히는 대립",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-16T02:38:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16277697"
+    },
     {
      "title": "‘100일의 거짓말’ 김유정, '강단↔불안' 감정의 온도차 빛난 열연",
      "press": "swtvnews.com",
      "publishedAt": "2026-11-16T02:30:00.000Z",
      "link": "https://www.swtvnews.com/news/newsview.php?ncode=1065577880655662"
-    },
-    {
-     "title": "'100일의 거짓말' 김유정, 감정의 온도차 열연...일품 연기",
-     "press": "ize.co.kr",
-     "publishedAt": "2026-11-16T02:18:00.000Z",
-     "link": "https://m.entertain.naver.com/article/465/0000021027"
-    },
-    {
-     "title": "시청자 소름 추측 떴다…'100일의 거짓말' 정무총감이 히데오를 입양한...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-16T02:16:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1174927"
     }
    ]
   },
   {
-   "keyword": "조작기소 특검법 거부권",
+   "keyword": "2027 수능 문답지 배부 시작",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-16T01:07:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[포토] '조작기소 특검법 거부권 행사 촉구' 국민의힘 현장 최고위",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-16T02:18:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3448998"
-    },
-    {
-     "title": "[포토] 청와대 앞 조작기소 특검법 반대하는 국민의힘",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-16T02:16:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3448997"
-    },
-    {
-     "title": "[포토] 국민의힘 '조작기소 특검법' 거부권 행사 촉구",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-16T02:14:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3448992"
-    }
-   ]
-  },
-  {
-   "keyword": "2027 수능 문답지 배부",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 9,
+   "articles90": 7,
    "recent20": 0,
-   "press": 9,
+   "press": 7,
    "firstArticleAt": "2026-11-16T01:12:00.000Z",
    "exclusive": false,
    "capped": false,
@@ -171,66 +299,67 @@
    ]
   },
   {
-   "keyword": "이재명 부부 필리핀 출국",
+   "keyword": "무역",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-16T01:32:00.000Z",
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-16T01:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이재명 대통령 부부, 아세안·APEC 참석... 3박 4일 순방",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-16T02:22:00.000Z",
-     "link": "https://www.insight.co.kr/news/582199"
+     "title": "폴레드, 세계 최대 무역박람회 '캔톤페어' 참가…유럽·중동 이어 글로...",
+     "press": "e2news.com",
+     "publishedAt": "2026-11-16T02:40:00.000Z",
+     "link": "http://www.e2news.com/news/articleView.html?idxno=336148"
     },
     {
-     "title": "李대통령, 필리핀으로 출국…3박 4일 아세안·APEC 정상회의",
-     "press": "namdonews.com",
-     "publishedAt": "2026-11-16T02:08:00.000Z",
-     "link": "https://www.namdonews.com/news/articleView.html?idxno=929327"
+     "title": "카카오게임즈 '아키에이지 S', PC 전용 수동 전투부터 무역·하우징까지...",
+     "press": "gamechosun.co.kr",
+     "publishedAt": "2026-11-16T02:34:00.000Z",
+     "link": "https://www.gamechosun.co.kr/webzine/article/view.php?no=227668"
     },
     {
-     "title": "이 대통령, 아세안·APEC 정상회의 참석차 출국…3박 4일 다자외교",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-16T01:50:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=729507"
+     "title": "\"엔비디아 칩 막으면 美中 무역전쟁\"…1년 휴전 깨질까",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-16T02:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006410377?sid=101"
     }
    ]
   },
   {
-   "keyword": "진형구 별세",
+   "keyword": "10월 ICT 수출",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-16T01:05:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-16T01:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘한동훈 의원 장인’ 진형구 전 대전고검장 별세",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-16T02:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002723958?sid=100"
+     "title": "ICT 수출 두 달째 700억달러대…반도체 259%↑",
+     "press": "mbnmoney.mbn.co.kr",
+     "publishedAt": "2026-11-16T02:14:00.000Z",
+     "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005962566"
     },
     {
-     "title": "한동훈 의원 장인 진형구 전 대전고검장 별세-향년 81세",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-16T01:56:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95352"
+     "title": "10월 정보통신 수출 703억 달러…전년 대비 202% 급증, 역대 최대 성장률",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-16T02:00:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4118701"
     },
     {
-     "title": "한동훈 의원 장인상…진형구 전 대전고검장 별세",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-16T01:30:00.000Z",
-     "link": "https://www.ajunews.com/view/20261116100945557"
+     "title": "10월 ICT 수출 703.5억 달러로 전년비 202.0% 증가… 반도체·서버용 SSD ...",
+     "press": "mtnews.net",
+     "publishedAt": "2026-11-16T01:46:00.000Z",
+     "link": "https://www.mtnews.net/news/articleView.html?idxno=26545"
     }
    ]
   },
@@ -269,7 +398,6 @@
   {
    "keyword": "박혜연",
    "sources": [
-    "signal.bz",
     "google"
    ],
    "articles90": 3,
@@ -302,10 +430,46 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 568,
-  "matched": 301,
-  "avgLeadMin": 680,
+  "flagged": 577,
+  "matched": 307,
+  "avgLeadMin": 744,
   "recent": [
+   {
+    "keyword": "김정은, 통천 주택구 시찰",
+    "hitKeyword": "김정은 사망 예언",
+    "hitAt": "2026-11-16T11:30:00+09:00",
+    "leadMin": 5985
+   },
+   {
+    "keyword": "김정은 통천군 주택구 시찰",
+    "hitKeyword": "김정은 사망 예언",
+    "hitAt": "2026-11-16T11:30:00+09:00",
+    "leadMin": 5955
+   },
+   {
+    "keyword": "김정은 주택구 시찰",
+    "hitKeyword": "김정은 사망 예언",
+    "hitAt": "2026-11-16T11:30:00+09:00",
+    "leadMin": 5904
+   },
+   {
+    "keyword": "김정은 시찰",
+    "hitKeyword": "김정은 사망 예언",
+    "hitAt": "2026-11-16T11:30:00+09:00",
+    "leadMin": 5366
+   },
+   {
+    "keyword": "김정은",
+    "hitKeyword": "김정은 사망 예언",
+    "hitAt": "2026-11-16T11:30:00+09:00",
+    "leadMin": 246
+   },
+   {
+    "keyword": "김자옥 폐암 투병 별세",
+    "hitKeyword": "전대영 암 투병 별세",
+    "hitAt": "2026-11-16T11:30:00+09:00",
+    "leadMin": 186
+   },
    {
     "keyword": "선관위 특검 압수수색",
     "hitKeyword": "명륜당 압수수색",
@@ -329,42 +493,6 @@
     "hitKeyword": "김광규 연희동 자가",
     "hitAt": "2026-11-16T09:30:00+09:00",
     "leadMin": 559
-   },
-   {
-    "keyword": "김광규 새집",
-    "hitKeyword": "김광규 연희동 자가",
-    "hitAt": "2026-11-16T09:30:00+09:00",
-    "leadMin": 136
-   },
-   {
-    "keyword": "청와대 AI 부정행위 전수조사",
-    "hitKeyword": "수능 AI 부정행위",
-    "hitAt": "2026-11-16T09:30:00+09:00",
-    "leadMin": 86
-   },
-   {
-    "keyword": "리트 만점자 인터뷰",
-    "hitKeyword": "리트 만점자 인터뷰",
-    "hitAt": "2026-11-16T09:30:00+09:00",
-    "leadMin": 86
-   },
-   {
-    "keyword": "김유정 100일의 거짓말",
-    "hitKeyword": "100일의 거짓말 폭발",
-    "hitAt": "2026-11-16T09:30:00+09:00",
-    "leadMin": 56
-   },
-   {
-    "keyword": "잉글랜드 스페인 제압 1위로!",
-    "hitKeyword": "잉글랜드 스페인 승리",
-    "hitAt": "2026-11-16T09:30:00+09:00",
-    "leadMin": 45
-   },
-   {
-    "keyword": "메가스피드 앨리스 황",
-    "hitKeyword": "메가스피드 선긋기",
-    "hitAt": "2026-11-16T09:00:00+09:00",
-    "leadMin": 66
    }
   ]
  }
