@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T05:42:24.197Z",
+ "builtAt": "2026-11-16T05:52:29.408Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 14,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "행정기관 이메일 해킹",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 17,
-   "recent20": 2,
-   "press": 17,
+   "articles90": 18,
+   "recent20": 1,
+   "press": 18,
    "firstArticleAt": "2026-11-16T04:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "행정업무용 이메일 해킹에 정부 합동점검… 300여개 계정 비정상 접속",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-16T05:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000132263?sid=102"
+    },
     {
      "title": "일부 지자체 행정업무 이메일 해킹…계정 300여개 비정상 접속",
      "press": "view.asiae.co.kr",
@@ -33,12 +39,6 @@
      "press": "zdnet.co.kr",
      "publishedAt": "2026-11-16T05:26:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/092/0002445463?sid=105"
-    },
-    {
-     "title": "행정기관 업무용 이메일 300여개 노출…해킹 경로 추적",
-     "press": "cwn.kr",
-     "publishedAt": "2026-11-16T05:22:00.000Z",
-     "link": "https://www.cwn.kr/news/articleView.html?idxno=61870"
     }
    ]
   },
@@ -48,30 +48,30 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 14,
+   "articles90": 16,
    "recent20": 3,
-   "press": 14,
+   "press": 16,
    "firstArticleAt": "2026-11-16T04:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "개인정보 유출 막지 못한 조폐공사…보안 부실 책임론 거세",
+     "press": "dynews.co.kr",
+     "publishedAt": "2026-11-16T05:50:00.000Z",
+     "link": "https://www.dynews.co.kr/news/articleView.html?idxno=874153"
+    },
+    {
+     "title": "대구참여연대, '개인정보 대량 유출' 티빙 상대 집단소송 제기",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-16T05:44:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4118815"
+    },
+    {
      "title": "조폐공사 “지역화폐 시스템 개인정보 유출, 금융권 유출과 유사”",
      "press": "kmib.co.kr",
      "publishedAt": "2026-11-16T05:35:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/005/0001885399?sid=102"
-    },
-    {
-     "title": "아마데우스 해킹으로 국내 여행사 개인정보 유출 확산 우려↑",
-     "press": "newsfc.co.kr",
-     "publishedAt": "2026-11-16T05:28:00.000Z",
-     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82501"
-    },
-    {
-     "title": "강원대 산학협력단 연구시스템 해킹 피해...개인정보 유출",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-16T05:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002433453?sid=102"
     }
    ]
   },
@@ -80,10 +80,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 13,
-   "recent20": 3,
-   "press": 13,
-   "firstArticleAt": "2026-11-16T04:16:00.000Z",
+   "articles90": 12,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-16T04:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -112,30 +112,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-16T04:21:00.000Z",
+   "articles90": 10,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-16T04:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "한일 정상, 17일 마닐라서 회담…경제·안보 협력 논의 전망",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-16T05:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005604892?sid=104"
+    },
+    {
+     "title": "경주·안동 이어 마닐라로…이 대통령, 한일 셔틀외교 가속",
+     "press": "kbmaeil.com",
+     "publishedAt": "2026-11-16T05:44:00.000Z",
+     "link": "https://www.kbmaeil.com/article/20261116500428"
+    },
     {
      "title": "李대통령, 필리핀 마닐라 도착…아세안·APEC 순방 일정 돌입",
      "press": "ajunews.com",
      "publishedAt": "2026-11-16T05:20:00.000Z",
      "link": "https://www.ajunews.com/view/20261116141635320"
-    },
-    {
-     "title": "韓日 정상, 17일 마닐라서 양자 회담… 안동 회담 후 6개월 만에 대면",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-16T05:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001205083?sid=104"
-    },
-    {
-     "title": "李대통령, 필리핀 마닐라 도착…아세안 정상회의 일정 시작",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-16T05:17:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261116000834"
     }
    ]
   },
@@ -148,10 +148,16 @@
    "articles90": 7,
    "recent20": 2,
    "press": 7,
-   "firstArticleAt": "2026-11-16T04:22:00.000Z",
+   "firstArticleAt": "2026-11-16T04:55:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "주지훈, 16년 인연과 결별…現 소속사 떠나 새 회사 설립 (공식)",
+     "press": "heraldmuse.com",
+     "publishedAt": "2026-11-16T05:45:00.000Z",
+     "link": "https://m.entertain.naver.com/article/112/0003813440"
+    },
     {
      "title": "주지훈, 소속사 떠난다…홀로서기 구상 중→'16년 인연'도 마침표",
      "press": "tvreport.co.kr",
@@ -163,12 +169,6 @@
      "press": "sportsseoul.com",
      "publishedAt": "2026-11-16T05:32:00.000Z",
      "link": "https://m.entertain.naver.com/article/468/0001281219"
-    },
-    {
-     "title": "'재혼 황후' 주지훈, 16년 동행 마침표-1인 기획사 설립",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-16T05:12:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95384"
     }
    ]
   },
@@ -177,10 +177,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 14,
+   "articles90": 12,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-16T04:19:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-16T04:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -209,10 +209,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 20,
+   "articles90": 6,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-16T04:14:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-16T04:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -233,38 +233,6 @@
      "press": "ajunews.com",
      "publishedAt": "2026-11-16T04:52:00.000Z",
      "link": "https://www.ajunews.com/view/20261116134456179"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황 복귀가 신중하다.",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-16T04:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[미국 빅테크]엔비디아 직원들・일런 머스크 ‚젠슨 황 CEO 복귀 시켜 달...",
-     "press": "greened.kr",
-     "publishedAt": "2026-11-16T05:26:00.000Z",
-     "link": "https://www.greened.kr/news/articleView.html?idxno=354678"
-    },
-    {
-     "title": "사흘 만에 '젠슨 황 복귀설'…6% 빠진 엔비디아 반등할까",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-16T04:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000552297?sid=101"
-    },
-    {
-     "title": "'젠슨황 해임' 여파에 흔들리는 코스피",
-     "press": "smedaily.co.kr",
-     "publishedAt": "2026-11-16T04:46:00.000Z",
-     "link": "http://www.smedaily.co.kr/news/articleView.html?idxno=366194"
     }
    ]
   }
