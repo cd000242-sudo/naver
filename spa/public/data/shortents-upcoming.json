@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T05:52:29.408Z",
+ "builtAt": "2026-11-16T06:02:34.722Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,82 +11,120 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "행정기관 이메일 해킹",
+   "keyword": "신유열 사장 승진",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 18,
-   "recent20": 1,
-   "press": 18,
-   "firstArticleAt": "2026-11-16T04:30:00.000Z",
+   "articles90": 71,
+   "recent20": 39,
+   "press": 67,
+   "firstArticleAt": "2026-11-16T05:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "행정업무용 이메일 해킹에 정부 합동점검… 300여개 계정 비정상 접속",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-16T05:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000132263?sid=102"
+     "title": "롯데 '3세 체제' 시동...신유열 사장 승진에 경영전략실 신설 등 지배구...",
+     "press": "opinionnews.co.kr",
+     "publishedAt": "2026-11-16T06:00:00.000Z",
+     "link": "http://www.opinionnews.co.kr/news/articleView.html?idxno=147132"
     },
     {
-     "title": "일부 지자체 행정업무 이메일 해킹…계정 300여개 비정상 접속",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-16T05:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005843208?sid=102"
+     "title": "'롯데 3세' 신유열, 입사 6년 만에 사장 승진…신설 '경영전략실' 총괄",
+     "press": "socialvalue.kr",
+     "publishedAt": "2026-11-16T06:00:00.000Z",
+     "link": "https://www.socialvalue.kr/news/view/1065592373820913"
     },
     {
-     "title": "행정기관 업무용 이메일 해킹…공무원 계정 300여개 비정상 접속",
-     "press": "zdnet.co.kr",
-     "publishedAt": "2026-11-16T05:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/092/0002445463?sid=105"
+     "title": "롯데, 신유열 사장 승진…경영전략실 신설·계열사 경영체제 개편",
+     "press": "sisafocus.co.kr",
+     "publishedAt": "2026-11-16T06:00:00.000Z",
+     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367654"
     }
    ]
   },
   {
-   "keyword": "개인정보",
+   "keyword": "철도 안전 종합대책",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 17,
+   "recent20": 0,
+   "press": 17,
+   "firstArticleAt": "2026-11-16T04:57:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "대구시 수능일 수험생 안전한 교통수송 지원",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-16T05:18:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082838"
+    },
+    {
+     "title": "국토부, 관계기관과 철도사고·운행장애 재발방지대책 점검",
+     "press": "bizwork.co.kr",
+     "publishedAt": "2026-11-16T05:10:00.000Z",
+     "link": "https://www.bizwork.co.kr/news/articleView.html?idxno=420865"
+    },
+    {
+     "title": "\"철도사고 줄어도 고장 반복\"…KTX 비상제동 부품 교체주기 단축",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-16T05:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004210181?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "대한민국",
    "sources": [
     "signal.bz",
     "google"
    ],
-   "articles90": 16,
-   "recent20": 3,
-   "press": 16,
-   "firstArticleAt": "2026-11-16T04:34:00.000Z",
+   "articles90": 14,
+   "recent20": 11,
+   "press": 13,
+   "firstArticleAt": "2026-11-16T05:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "개인정보 유출 막지 못한 조폐공사…보안 부실 책임론 거세",
-     "press": "dynews.co.kr",
-     "publishedAt": "2026-11-16T05:50:00.000Z",
-     "link": "https://www.dynews.co.kr/news/articleView.html?idxno=874153"
+     "title": "[게시판] 아동권리보장원, 대한민국소통어워즈 2개 부문 대상",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-16T05:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016444279?sid=102"
     },
     {
-     "title": "대구참여연대, '개인정보 대량 유출' 티빙 상대 집단소송 제기",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-16T05:44:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4118815"
+     "title": "세무법인 한림, ‘2026 대한민국 중소‧중견기업 혁신대상’ 중소벤처기...",
+     "press": "siminilbo.co.kr",
+     "publishedAt": "2026-11-16T05:56:00.000Z",
+     "link": "https://www.siminilbo.co.kr/news/newsview.php?ncode=1160286888485283"
     },
     {
-     "title": "조폐공사 “지역화폐 시스템 개인정보 유출, 금융권 유출과 유사”",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-16T05:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001885399?sid=102"
+     "title": "극동대 봉준호 교수, 2026 대한민국 조리대상 수상",
+     "press": "inews365.com",
+     "publishedAt": "2026-11-16T05:54:00.000Z",
+     "link": "https://www.inews365.com/news/article.html?no=943821"
     }
    ]
   },
   {
-   "keyword": "최예나 표절 스타일리스트",
+   "keyword": "최예나 의혹에 스타일리스트",
    "sources": [
     "nate"
    ],
-   "articles90": 12,
+   "articles90": 13,
    "recent20": 1,
-   "press": 12,
+   "press": 13,
    "firstArticleAt": "2026-11-16T04:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "최예나 스타일리스트, 표절 의혹에 억울함 토로…“카피로 단정돼 속상...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-16T05:51:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003541961"
+    },
     {
      "title": "최예나, 사브리나 카펜터 표절 의혹에 결국 해명…스타일리스트 \"카피 ...",
      "press": "mydaily.co.kr",
@@ -98,12 +136,6 @@
      "press": "news.jtbc.co.kr",
      "publishedAt": "2026-11-16T05:32:00.000Z",
      "link": "https://m.entertain.naver.com/article/437/0000520909"
-    },
-    {
-     "title": "최예나 의상 표절 의혹에… 스타일리스트 \"과정 빠진 채 카피 단정 아쉬...",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-16T05:28:00.000Z",
-     "link": "https://m.entertain.naver.com/article/469/0000965820"
     }
    ]
   },
@@ -112,13 +144,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 2,
-   "press": 10,
+   "articles90": 11,
+   "recent20": 3,
+   "press": 11,
    "firstArticleAt": "2026-11-16T04:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "다카이치·이재명, 17일 마닐라서 정상회담…중일회담은 불발 가능성",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-16T05:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003059373?sid=104"
+    },
     {
      "title": "한일 정상, 17일 마닐라서 회담…경제·안보 협력 논의 전망",
      "press": "fnnews.com",
@@ -130,116 +168,45 @@
      "press": "kbmaeil.com",
      "publishedAt": "2026-11-16T05:44:00.000Z",
      "link": "https://www.kbmaeil.com/article/20261116500428"
-    },
-    {
-     "title": "李대통령, 필리핀 마닐라 도착…아세안·APEC 순방 일정 돌입",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-16T05:20:00.000Z",
-     "link": "https://www.ajunews.com/view/20261116141635320"
     }
    ]
   },
   {
-   "keyword": "주지훈 독자 회사 설립",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-16T04:55:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "주지훈, 16년 인연과 결별…現 소속사 떠나 새 회사 설립 (공식)",
-     "press": "heraldmuse.com",
-     "publishedAt": "2026-11-16T05:45:00.000Z",
-     "link": "https://m.entertain.naver.com/article/112/0003813440"
-    },
-    {
-     "title": "주지훈, 소속사 떠난다…홀로서기 구상 중→'16년 인연'도 마침표",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-16T05:38:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001408458"
-    },
-    {
-     "title": "주지훈, 16년 인연 끝·홀로서기 시작…블리츠웨이와 결별 [공식]",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-16T05:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001281219"
-    }
-   ]
-  },
-  {
-   "keyword": "호시한·이괄 지사 유해봉환",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 12,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-16T04:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[포토] 고국 품으로 돌아온 독립유공자 호시한·이괄 지사",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-16T05:06:00.000Z",
-     "link": "https://www.ajunews.com/view/20261116140123259"
-    },
-    {
-     "title": "[포토] 한성숙 총리, 독립유공자 유해봉환식서 건국훈장 헌정",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-16T04:52:00.000Z",
-     "link": "https://www.ajunews.com/view/20261116134456179"
-    },
-    {
-     "title": "호시한 지사 후손과 인사하는 한성숙 총리",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-16T04:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016443954?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "독립유공자 유해봉환식",
+   "keyword": "테슬라 사이버캡 판매",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-16T04:29:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-16T05:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "韓총리 \"이역만리 독립유공자 마지막 한 분까지 고국으로 모실 것\"",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-16T05:10:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4444967"
+     "title": "테슬라, 완전자율주행 '사이버캡' 주문 접수... 실제 운행까진 인증절차...",
+     "press": "lawtv.kr",
+     "publishedAt": "2026-11-16T05:58:00.000Z",
+     "link": "https://www.lawtv.kr/news/articleView.html?idxno=61426"
     },
     {
-     "title": "[포토] 고국 품으로 돌아온 독립유공자 호시한·이괄 지사",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-16T05:06:00.000Z",
-     "link": "https://www.ajunews.com/view/20261116140123259"
+     "title": "테슬라, 운전대 없는 자율주행차 '사이버캡' 일반 판매 시작",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-16T05:42:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95387"
     },
     {
-     "title": "[포토] 한성숙 총리, 독립유공자 유해봉환식서 건국훈장 헌정",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-16T04:52:00.000Z",
-     "link": "https://www.ajunews.com/view/20261116134456179"
+     "title": "차는 팔지만 운행은 통제…테슬라 사이버캡의 ‘두 얼굴’",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-16T05:42:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1320560&inflow=N"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 630,
+  "flagged": 634,
   "matched": 340,
   "avgLeadMin": 851,
   "recent": [
