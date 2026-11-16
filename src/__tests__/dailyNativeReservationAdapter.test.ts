@@ -73,7 +73,11 @@ describe('daily native reservation DOM adapter (isolated intercepted browser)', 
     [{ changedList: true }, 'CHANGED'],
   ] as const)('fails closed for %j', async (options, error) => {
     await withPage(options, async page => {
-      const adapter = createDailyNativeReservationAdapter({ timeoutMs: 300 });
+      // [2026-11-16] 300ms is right only when the expected result IS the timeout (UNOBSERVED). Cases that must
+      // detect something (AMBIGUOUS / CHANGED) reload the page; on a loaded release-gate PC that took longer than
+      // 300ms and the adapter reported its own timeout instead (v2.11.394 gate). Detection returns as soon as it
+      // sees the state, so a wider budget does not slow the passing path.
+      const adapter = createDailyNativeReservationAdapter({ timeoutMs: error === 'UNOBSERVED' ? 300 : 3000 });
       await adapter.open(page, request);
       await expect(adapter.read(page, request)).rejects.toThrow(error);
       expect(await page.evaluate(() => (window as any).forbiddenPublish)).toBe(false);
