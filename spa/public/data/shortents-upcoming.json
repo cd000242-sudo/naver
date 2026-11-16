@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T07:43:22.276Z",
+ "builtAt": "2026-11-16T07:53:30.514Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 18,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "수능 와이파이 차단",
@@ -16,30 +16,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 77,
-   "recent20": 17,
-   "press": 65,
-   "firstArticleAt": "2026-11-16T06:14:00.000Z",
+   "articles90": 67,
+   "recent20": 16,
+   "press": 57,
+   "firstArticleAt": "2026-11-16T06:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "정부, 수능 시험장 스마트기기 반납·와이파이 차단 추진",
-     "press": "weekly.hankooki.com",
-     "publishedAt": "2026-11-16T07:42:00.000Z",
-     "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7194145"
+     "title": "정부, 수능 스마트기기 반납·공공 와이파이 차단 나선다",
+     "press": "kbsm.net",
+     "publishedAt": "2026-11-16T07:50:00.000Z",
+     "link": "https://www.kbsm.net/news/view.php?idx=541981"
     },
     {
-     "title": "\"통신 차단 추진\" 발언 잠시 뒤 \"불가능\"... 좌충우돌 교육부",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-16T07:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002536016?sid=102"
+     "title": "정부, 수능시험장 반경 50m 공공Wifi 끄기로…무선망 대책은?",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-16T07:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005441833?sid=105"
     },
     {
-     "title": "'스마트기기 잡아라' 수능 사흘 앞두고 막바지 점검 [TF사진관]",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-16T07:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000552432?sid=102"
+     "title": "\"수능은 새로운 출발선\"…강원 곳곳 수능 분위기 고조",
+     "press": "kado.net",
+     "publishedAt": "2026-11-16T07:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000211552?sid=102"
     }
    ]
   },
@@ -51,10 +51,16 @@
    "articles90": 13,
    "recent20": 2,
    "press": 13,
-   "firstArticleAt": "2026-11-16T06:16:00.000Z",
+   "firstArticleAt": "2026-11-16T06:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "잠시 맡긴 반려견 도살해 개소주로…70대 남성 등 입건",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-16T07:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001885441?sid=102"
+    },
     {
      "title": "지인이 맡긴 반려견 '개소주'로 만든 70대, 경찰조사서 \"나한테 준 줄\"",
      "press": "busan.com",
@@ -66,12 +72,6 @@
      "press": "hankookilbo.com",
      "publishedAt": "2026-11-16T07:24:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/469/0000965880?sid=102"
-    },
-    {
-     "title": "지인이 맡긴 반려견 ‘X소주’로 만든 70대·건강원 업주 입건",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-16T07:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000132293?sid=102"
     }
    ]
   },
@@ -81,13 +81,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 10,
+   "articles90": 9,
    "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-16T06:17:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-16T06:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'100일의 거짓말' 코우리 유카, 박진영 약혼에 오열…김유정 대신해 체...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-16T07:49:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002081089"
+    },
     {
      "title": "박진영 화보 “‘100일의 거짓말’, 결말까지 다 아는데도 매주 본방 챙...",
      "press": "breaknews.com",
@@ -99,44 +105,6 @@
      "press": "ize.co.kr",
      "publishedAt": "2026-11-16T07:36:00.000Z",
      "link": "https://m.entertain.naver.com/article/465/0000021034"
-    },
-    {
-     "title": "'100일의 거짓말' 코우리 유카, 김유정 덫에 걸려 피습 '충격'",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-16T07:26:00.000Z",
-     "link": "http://www.joynews24.com/view/2026748"
-    }
-   ]
-  },
-  {
-   "keyword": "신세계",
-   "sources": [
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-16T06:19:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[인사키워드] 신세계 경영지원총괄 맡은 최택원…정용진 '책임경영' 힘...",
-     "press": "srtimes.kr",
-     "publishedAt": "2026-11-16T07:38:00.000Z",
-     "link": "http://www.srtimes.kr/news/articleView.html?idxno=217385"
-    },
-    {
-     "title": "대전신세계, '신세계 홀리데이 마켓' 운영",
-     "press": "ccnnews.co.kr",
-     "publishedAt": "2026-11-16T07:08:00.000Z",
-     "link": "http://www.ccnnews.co.kr/news/articleView.html?idxno=417828"
-    },
-    {
-     "title": "\"지갑 닫은 외국인·환율 직격탄, 신세계 '백화점'이 안 움직이면 '주가...",
-     "press": "newsquest.co.kr",
-     "publishedAt": "2026-11-16T06:48:00.000Z",
-     "link": "https://www.newsquest.co.kr/news/articleView.html?idxno=305130"
     }
    ]
   },
@@ -145,10 +113,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 12,
+   "articles90": 5,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-16T06:20:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-16T06:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -173,14 +141,46 @@
    ]
   },
   {
+   "keyword": "테슬라 사이버캡 판매",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-16T06:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[영상] 테슬라 '사이버캡' 일반고객에도 판다…4천만원에 구독료 40만원",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-16T07:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016444714?sid=104"
+    },
+    {
+     "title": "테슬라, 운전대 없는 '사이버캡' 개인 판매...운행 지역은 제한",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-16T07:24:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2019206"
+    },
+    {
+     "title": "테슬라, 자율주행 로보택시 '사이버캡' 일반 개인 판매 들어갔다",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-16T06:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005604941?sid=101"
+    }
+   ]
+  },
+  {
    "keyword": "한일 정상회담 마닐라",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-16T06:14:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-16T06:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -205,66 +205,34 @@
    ]
   },
   {
-   "keyword": "테슬라 사이버캡 판매",
+   "keyword": "철도 안전 종합대책",
    "sources": [
     "signal.bz"
    ],
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-16T06:32:00.000Z",
+   "firstArticleAt": "2026-11-16T06:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "테슬라, 운전대 없는 '사이버캡' 개인 판매...운행 지역은 제한",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-16T07:24:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2019206"
+     "title": "인천교통공사, 2027학년도 대학수학능력시험 특별수송 종합안전대책 시...",
+     "press": "kgnews.co.kr",
+     "publishedAt": "2026-11-16T07:44:00.000Z",
+     "link": "https://www.kgnews.co.kr/news/article.html?no=919648"
     },
     {
-     "title": "테슬라, 자율주행 로보택시 '사이버캡' 일반 개인 판매 들어갔다",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-16T06:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005604941?sid=101"
+     "title": "국토부, 반복되는 철도사고 예방 위해 안전대책 이행 점검",
+     "press": "idsn.co.kr",
+     "publishedAt": "2026-11-16T07:04:00.000Z",
+     "link": "https://idsn.co.kr/news/view/1065596395501604"
     },
     {
-     "title": "테슬라, 운전대·페달 없는 자율주행차 '사이버캡' 일반판매 개시",
-     "press": "newsfc.co.kr",
-     "publishedAt": "2026-11-16T06:32:00.000Z",
-     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82508"
-    }
-   ]
-  },
-  {
-   "keyword": "서수남 딸 사망",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-16T06:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "서수남 큰딸, 미국서 사망…\"공항서 유골함 받아와\"",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-16T07:38:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004125533"
-    },
-    {
-     "title": "17억 빚 남기고 떠난 아내, 혼자 키운 딸은 유골함으로…서수남의 눈물...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-16T06:34:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000490860"
-    },
-    {
-     "title": "\"딸 유골함 안고…차라리 내가 죽는 게 낫겠다 싶더라\" 서수남의 눈물",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-16T06:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005604928?sid=102"
+     "title": "KTX 제동장치·노후 침목 정비로 철도사고 '예방'",
+     "press": "safetimes.co.kr",
+     "publishedAt": "2026-11-16T06:50:00.000Z",
+     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247535"
     }
    ]
   }
