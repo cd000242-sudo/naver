@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T03:51:34.538Z",
+ "builtAt": "2026-11-16T04:01:39.925Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,21 +8,27 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 16,
  "candidates": [
   {
    "keyword": "JTBC 올림픽 중계권 해지",
    "sources": [
     "signal.bz",
-    "daum"
+    "nate"
    ],
-   "articles90": 31,
-   "recent20": 6,
-   "press": 28,
-   "firstArticleAt": "2026-11-16T02:26:00.000Z",
+   "articles90": 30,
+   "recent20": 4,
+   "press": 27,
+   "firstArticleAt": "2026-11-16T02:32:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "JTBC, 올림픽 중계권 결국 포기 \"2028 LA올림픽 등 중계권 새 주인 찾아...",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-16T03:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001040476?sid=101"
+    },
     {
      "title": "JTBC-IOC 올림픽 중계권 계약 해지 \"재무적 불확실성 제거…안정적 경영...",
      "press": "swtvnews.com",
@@ -34,12 +40,6 @@
      "press": "tvreport.co.kr",
      "publishedAt": "2026-11-16T03:46:00.000Z",
      "link": "https://m.entertain.naver.com/article/213/0001408441"
-    },
-    {
-     "title": "JTBC, 올림픽 중계 안 한다…“IOC 중계권 계약 해지”",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-16T03:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001885380?sid=103"
     }
    ]
   },
@@ -48,30 +48,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 34,
-   "recent20": 1,
-   "press": 21,
-   "firstArticleAt": "2026-11-16T02:23:00.000Z",
+   "articles90": 31,
+   "recent20": 4,
+   "press": 17,
+   "firstArticleAt": "2026-11-16T02:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[포토] 조정식 국회의장 헌법개정자문위원회 공동위원장 발표 기자회견",
+     "title": "장동혁 \"조정식, 개헌까지 '李 탈옥' 도구로…뭘 내놓든 안 속아\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-16T03:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005441633?sid=100"
+    },
+    {
+     "title": "조정식, 김형오·정세균 앞세워 개헌 시동... 국힘 “李 탈옥 도구”",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-16T03:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003565457?sid=100"
+    },
+    {
+     "title": "[포토] 회견장 입장하는 조정식 국회의장",
      "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-16T03:46:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/16/2026111650176.html"
+     "publishedAt": "2026-11-16T03:52:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/16/2026111650183.html"
+    }
+   ]
+  },
+  {
+   "keyword": "우주",
+   "sources": [
+    "google"
+   ],
+   "articles90": 11,
+   "recent20": 3,
+   "press": 11,
+   "firstArticleAt": "2026-11-16T02:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "우주과학열차, 출입 제한된 나로우주센터 문 연다 [PS]",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-16T03:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/382/0001305023?sid=103"
     },
     {
-     "title": "「M포토」 조정식 의장, 헌법개정자문위원회 공동위원장 발표 기자회견",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-16T03:22:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=73102"
+     "title": "고흥군, 우주선철도 국가계획 반영 총력…서울서 필요성 강조",
+     "press": "thefairnews.co.kr",
+     "publishedAt": "2026-11-16T03:50:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94326"
     },
     {
-     "title": "[포토] 개헌 준비 나서는 조정식 국회의장...“내년이 적기”",
-     "press": "ilyosisa.co.kr",
-     "publishedAt": "2026-11-16T03:16:00.000Z",
-     "link": "https://www.ilyosisa.co.kr/news/article.html?no=258988"
+     "title": "아마존 우주통신 위성 40기 ‘미아’ 됐다…스타링크 추격 차질",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-16T03:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003482901?sid=105"
     }
    ]
   },
@@ -80,10 +112,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
+   "articles90": 7,
    "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-16T02:24:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-16T02:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -108,14 +140,78 @@
    ]
   },
   {
+   "keyword": "이재명",
+   "sources": [
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-16T03:01:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "[포토] ‘이재명, 윤석열 탄핵 반대’ 발언 최민희, 최고위서 사과",
+     "press": "ilyosisa.co.kr",
+     "publishedAt": "2026-11-16T03:44:00.000Z",
+     "link": "https://www.ilyosisa.co.kr/news/article.html?no=258989"
+    },
+    {
+     "title": "이재명·다카이치 17일 마닐라 회담…안보·에너지 공조 다진다",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-16T03:40:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=202611161232588728e7e8286d56_1"
+    },
+    {
+     "title": "[이재명 직무평가] 지지율 36.4% 소폭 반등...박스권 횡보",
+     "press": "00news.co.kr",
+     "publishedAt": "2026-11-16T03:32:00.000Z",
+     "link": "http://www.00news.co.kr/news/articleView.html?idxno=108073"
+    }
+   ]
+  },
+  {
+   "keyword": "임현주 MBC 퇴사",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-16T02:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "둘째 출산 임현주 아나, MBC 복직 아닌 퇴사 알렸다 “마음이 이끄는 대...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-16T03:48:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001187937"
+    },
+    {
+     "title": "임현주 아나운서, 13년 만 MBC 퇴사...“좀 더 재밌게 사는 게 희망사항...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-16T03:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003541933"
+    },
+    {
+     "title": "\"배우 세상으로 가나\"…임현주 아나, 새 프로필 공개하더니→13년 만 MB...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-16T02:59:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001408433"
+    }
+   ]
+  },
+  {
    "keyword": "미중러 정상회담",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-16T02:25:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-16T02:37:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -145,10 +241,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 0,
    "press": 5,
-   "firstArticleAt": "2026-11-16T02:27:00.000Z",
+   "firstArticleAt": "2026-11-16T02:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -171,11 +267,75 @@
      "link": "https://www.newspim.com/news/view/20261116000651"
     }
    ]
+  },
+  {
+   "keyword": "연지 강동연 결혼",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-16T02:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'투수'와 사랑에 빠진 女스타들…박소영·지안·연지, 야구선수와 백년...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-16T03:29:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000490661"
+    },
+    {
+     "title": "걸그룹♥야구선수 부부 탄생…'귓방망이' 배드키즈 연지, 강동연과 12월...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-16T03:21:00.000Z",
+     "link": "https://m.entertain.naver.com/article/477/0000639277"
+    },
+    {
+     "title": "배드키즈 출신 연지, 전 야구선수 강동연과 12월 결혼…'솔로지옥' 강소...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-16T02:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002081009"
+    }
+   ]
+  },
+  {
+   "keyword": "화학물질저감 우수제품 전시",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 12,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-16T02:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[포토]화학안전주간…'화우품' 전시",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-16T03:56:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261116010005942"
+    },
+    {
+     "title": "[포토]화학물질저감 우수제품 살피는 금한승 차관",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-16T03:52:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261116010005940"
+    },
+    {
+     "title": "[포토] 한자리에 모인 화학물질저감 우수제품",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-16T03:22:00.000Z",
+     "link": "https://www.ajunews.com/view/20261116121841067"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 600,
+  "flagged": 601,
   "matched": 323,
   "avgLeadMin": 855,
   "recent": [
