@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T22:15:46.969Z",
+ "builtAt": "2026-11-16T22:25:50.131Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,90 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 21,
  "candidates": [
+  {
+   "keyword": "뉴욕증시 하락",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 53,
+   "recent20": 15,
+   "press": 44,
+   "firstArticleAt": "2026-11-16T21:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오늘의 증시]엔비디아 4%대 급락에 美 AI주 '와르르'…코스피 하락 출발...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-16T22:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014326038?sid=101"
+    },
+    {
+     "title": "젠슨 황 사임 여파 계속, 뉴욕증시 일제히 하락…엔비디아 4.1%↓",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-16T22:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001164542?sid=101"
+    },
+    {
+     "title": "중국에 데이터센터 차단…젠슨황 여파 증시 하락",
+     "press": "koreareport.co.kr",
+     "publishedAt": "2026-11-16T22:20:00.000Z",
+     "link": "https://www.koreareport.co.kr/news/articleView.html?idxno=54810"
+    }
+   ]
+  },
+  {
+   "keyword": "엔비디아 실적발표",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 41,
+   "recent20": 12,
+   "press": 33,
+   "firstArticleAt": "2026-11-16T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "엔비디아 쇼크 불똥 튄 양자 컴퓨팅주 '털썩'…아이온큐 8%·퀀티넘 10% 폭...",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-16T22:24:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=202611170719482782e250e8e188_1"
+    },
+    {
+     "title": "[오늘의 증시]엔비디아 4%대 급락에 美 AI주 '와르르'…코스피 하락 출발...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-16T22:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014326038?sid=101"
+    },
+    {
+     "title": "젠슨 황 원하는 엔비디아 팬들…당장 CEO 복귀 어려운 이유",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-16T22:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009292645?sid=101"
+    }
+   ]
+  },
   {
    "keyword": "미국 AI반도체 중국 차단",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 19,
-   "recent20": 4,
-   "press": 17,
+   "articles90": 20,
+   "recent20": 3,
+   "press": 18,
    "firstArticleAt": "2026-11-16T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "중국에 데이터센터 차단…젠슨황 여파 증시 하락",
+     "press": "koreareport.co.kr",
+     "publishedAt": "2026-11-16T22:20:00.000Z",
+     "link": "https://www.koreareport.co.kr/news/articleView.html?idxno=54810"
+    },
     {
      "title": "앤트로픽 IPO, 중국 자본 막혔다 \"AI 기업 상장에도 안보 잣대\"",
      "press": "econovill.com",
@@ -33,12 +103,6 @@
      "press": "wowtv.co.kr",
      "publishedAt": "2026-11-16T22:06:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/215/0001272977?sid=101"
-    },
-    {
-     "title": "美, 중국의 해외 GPU 우회 이용 차단…동남아 4개국·브라질 수출 규제 ...",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-16T22:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006410796?sid=105"
     }
    ]
   },
@@ -47,13 +111,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 8,
-   "recent20": 4,
-   "press": 7,
+   "articles90": 9,
+   "recent20": 1,
+   "press": 8,
    "firstArticleAt": "2026-11-16T21:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "임시 감독 체제에 소신 밝힌 황인범…“대표팀에 긍정적이지 않다”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-16T22:18:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/011/0004682928"
+    },
     {
      "title": "황인범 소신 발언 \"임시 감독 체제, 대표팀에 긍정적이지 않다\"",
      "press": "news.sbs.co.kr",
@@ -65,51 +135,141 @@
      "press": "segye.com",
      "publishedAt": "2026-11-16T22:02:00.000Z",
      "link": "https://m.sports.naver.com/kfootball/article/022/0004175727"
-    },
-    {
-     "title": "황인범 \"임시감독 체제, 대표팀에 긍정적이지 않다\"",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-16T21:58:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=782291"
     }
    ]
   },
   {
-   "keyword": "2026년 11월 17일 운세",
+   "keyword": "이정현 12월 결혼",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-16T21:00:00.000Z",
+   "articles90": 4,
+   "recent20": 3,
+   "press": 4,
+   "firstArticleAt": "2026-11-16T21:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[오늘의 운세] 2026년 11월 17일 화요일 띠별 운세… 말띠 '대길', 토끼·...",
-     "press": "newsclaim.co.kr",
+     "title": "‘미스터 션샤인’ 이정현, 12월 결혼 깜짝 발표…“배우 은퇴 고민에 ...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-16T22:21:00.000Z",
+     "link": "https://m.entertain.naver.com/article/022/0004175731"
+    },
+    {
+     "title": "결혼하려 대기업 원서 낸 이정현, 자격증 22개…12월 장가",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-16T22:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001147472"
+    },
+    {
+     "title": "\"스피커 설치한다\"…'미스터 션샤인' 이정현, 내달 결혼 앞두고 알바 뛰...",
+     "press": "mydaily.co.kr",
      "publishedAt": "2026-11-16T22:06:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082951"
+     "link": "https://m.entertain.naver.com/article/117/0004125633"
+    }
+   ]
+  },
+  {
+   "keyword": "100일 거짓말 김유정",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-16T21:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "1위 김유정, 2위 박진영, 3위 신민아",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-16T22:21:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003487975"
     },
     {
-     "title": "[오늘의 띠별 운세] 2026년 11월 17일 화요일",
-     "press": "mhns.co.kr",
-     "publishedAt": "2026-11-16T21:38:00.000Z",
-     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=769342"
+     "title": "김유정·박진영·신민아...'100일의 거짓말'·'재혼 황후' 드라마 배우 ...",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-16T22:04:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=782297"
     },
     {
-     "title": "[오늘의 운세] 17일 화요일 나의 운세는?",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-16T21:26:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1193279"
+     "title": "치이카와·머무르·사랑이온다·100일의 거짓말·닥터X, 1위 [한눈에 보...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-16T22:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009292596"
+    }
+   ]
+  },
+  {
+   "keyword": "아리바이오",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-16T21:36:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[속보]아리바이오, '먹는 치매약' 임상3상서 단독투여군 1차지표 충족",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-16T22:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005442053?sid=101"
+    },
+    {
+     "title": "아리바이오 먹는 치매약, 임상 3상 1차 목표 달성…전체 환자군선 효과...",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-16T21:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001205240?sid=101"
+    },
+    {
+     "title": "아리바이오 '먹는 치매약' 글로벌 3상 1차 목표 달성…\"기존 약 미복용...",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-16T21:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005843409?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "물류",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-16T21:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한국폴리텍대학 영남융합기술캠퍼스, 일본 글로벌 물류기업 NX그룹과 산...",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-16T21:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001040647?sid=102"
+    },
+    {
+     "title": "\"지역사회 나눔과 상생 실천\" 코레일유통물류, '경북도지사 표창' 수상",
+     "press": "cstimes.com",
+     "publishedAt": "2026-11-16T21:30:00.000Z",
+     "link": "https://www.cstimes.com/news/articleView.html?idxno=728149"
+    },
+    {
+     "title": "테크노밸리도, 물류단지도 무산…구리 건원, 1.4만가구 아파트촌 되나 ...",
+     "press": "realty.chosun.com",
+     "publishedAt": "2026-11-16T21:02:00.000Z",
+     "link": "https://realty.chosun.com/site/data/html_dir/2026/11/16/2026111601697.html"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 762,
+  "flagged": 765,
   "matched": 437,
   "avgLeadMin": 898,
   "recent": [
