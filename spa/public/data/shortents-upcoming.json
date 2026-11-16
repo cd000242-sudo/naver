@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T20:25:13.863Z",
+ "builtAt": "2026-11-16T20:35:16.675Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,52 +8,27 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 14,
  "candidates": [
   {
-   "keyword": "젠슨 황 복귀 논의",
+   "keyword": "트럼프 중국서 김정은 만날 수도",
    "sources": [
-    "signal.bz"
-   ],
-   "articles90": 18,
-   "recent20": 4,
-   "press": 16,
-   "firstArticleAt": "2026-11-16T18:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "젠슨황, 돌아올까?… “엔비디아 이사회, 복귀 논의 전혀 없다”",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-16T20:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001885574?sid=104"
-    },
-    {
-     "title": "\"엔비디아 이사회, 젠슨황 복귀 고려 안 해\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-16T20:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926814?sid=104"
-    },
-    {
-     "title": "엔비디아 이사회, 젠슨 황 복귀 선 긋고 조사 집중",
-     "press": "financialpost.co.kr",
-     "publishedAt": "2026-11-16T20:14:00.000Z",
-     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=301320"
-    }
-   ]
-  },
-  {
-   "keyword": "트럼프, 김정은 만날 수도",
-   "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
    "articles90": 10,
-   "recent20": 4,
+   "recent20": 2,
    "press": 9,
-   "firstArticleAt": "2026-11-16T19:05:00.000Z",
+   "firstArticleAt": "2026-11-16T19:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "크렘린 \"김정은, 중국서 열리는 APEC에 오면 푸틴과 회담 가능\"",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-16T20:29:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261117000010"
+    },
     {
      "title": "트럼프 \"김정은 만날 수도\"…젠슨 황 복귀설도 언급",
      "press": "yonhapnewstv.co.kr",
@@ -65,24 +40,51 @@
      "press": "kukinews.com",
      "publishedAt": "2026-11-16T20:14:00.000Z",
      "link": "https://www.kukinews.com/article/view/kuk202611170006"
-    },
-    {
-     "title": "트럼프 \"김정은 만날 수도\"…젠슨 황 복귀 언급",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-16T20:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926804?sid=104"
     }
    ]
   },
   {
-   "keyword": "제니, 그래미 후보 2개 부문",
+   "keyword": "AI 커닝 국가시험",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 13,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-16T19:31:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[사설] 수능 연기론까지 번진 AI 커닝, 후폭풍 없게 철저 대비를",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-16T20:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003700076?sid=110"
+    },
+    {
+     "title": "[사설] 국가시험에 대한 불신 확산, 불안 잠재울 근본적 대책은",
+     "press": "busan.com",
+     "publishedAt": "2026-11-16T20:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001407472?sid=110"
+    },
+    {
+     "title": "[사설] AI 커닝에 국가 시험 신뢰 '흔들', 운영 전반 개선해야",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-16T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006410765?sid=110"
+    }
+   ]
+  },
+  {
+   "keyword": "제니 그래미 후보",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 4,
    "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-16T18:58:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-16T19:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -105,11 +107,76 @@
      "link": "https://m.entertain.naver.com/article/396/0000761121"
     }
    ]
+  },
+  {
+   "keyword": "젠슨 황 복귀 검토 안 해",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-16T19:31:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[핫이슈] 엔비디아 이사회 \"젠슨 황 복귀 검토 안 해\"…삼성전자·SK하이...",
+     "press": "the-today.com",
+     "publishedAt": "2026-11-16T20:28:00.000Z",
+     "link": "https://www.the-today.com/news/articleView.html?idxno=93687"
+    },
+    {
+     "title": "CNBC \"엔비디아 이사회, 젠슨 황 CEO 복귀 검토 안 해\"",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-16T19:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005843399?sid=104"
+    },
+    {
+     "title": "\"엔비디아 이사회, 젠슨 황 복귀 논의 안해…조사에 집중\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-16T19:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014325929?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "수능 스마트기기 반납",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-16T19:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "수능 못 미룬다…교육장관, 부정행위 \"운명 걸고 막겠다\"",
+     "press": "thescoop.co.kr",
+     "publishedAt": "2026-11-16T20:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/665/0000008582?sid=102"
+    },
+    {
+     "title": "전파 차단 “없던 일로”… 수능은 “예정대로”",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-16T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003699982?sid=102"
+    },
+    {
+     "title": "이틀 뒤면 수능인데… 데이터 통신망 차단-신체수색 쉽지않아",
+     "press": "donga.com",
+     "publishedAt": "2026-11-16T19:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003762964?sid=102"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 736,
+  "flagged": 741,
   "matched": 392,
   "avgLeadMin": 819,
   "recent": [
