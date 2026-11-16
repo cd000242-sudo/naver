@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T23:16:07.539Z",
+ "builtAt": "2026-11-16T23:26:11.476Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,27 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 14,
+ "measured": 21,
  "candidates": [
   {
-   "keyword": "러 군용기 KADIZ 진입 전투기 출격",
+   "keyword": "러 군용기 KADIZ 진입",
    "sources": [
-    "nate"
+    "nate",
+    "daum"
    ],
-   "articles90": 21,
+   "articles90": 35,
    "recent20": 2,
-   "press": 21,
-   "firstArticleAt": "2026-11-16T22:09:00.000Z",
+   "press": 33,
+   "firstArticleAt": "2026-11-16T22:05:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "러 군용기, 동해 KADIZ 진입 후 이탈… 합참 “軍 전투기 대응”",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-16T23:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001205249?sid=100"
+    },
     {
      "title": "[속보]\"러 군용기, 17일 새벽 카디즈 진입 후 이탈\"...軍 전투기 대응",
      "press": "ikbc.co.kr",
@@ -33,12 +40,6 @@
      "press": "ngonews.kr",
      "publishedAt": "2026-11-16T23:02:00.000Z",
      "link": "https://www.ngonews.kr/news/articleView.html?idxno=243344"
-    },
-    {
-     "title": "미·중·러 정상회담·한일 회담 앞두고…러 군용기, 석 달 만에 또 KADI...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-16T22:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005605241?sid=100"
     }
    ]
   },
@@ -48,30 +49,30 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 20,
-   "recent20": 6,
-   "press": 16,
+   "articles90": 24,
+   "recent20": 4,
+   "press": 18,
    "firstArticleAt": "2026-11-16T21:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[오늘날씨] 아침엔 다소 '포근'⋯오후부터는 전국적으로 비 쏟아진다",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-16T23:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001075587?sid=103"
+     "title": "[날씨] 오후부터 전국 비…수능일 목요일 영하권 추위",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-16T23:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001978508?sid=102"
     },
     {
-     "title": "[날씨] 전국 온화하지만 오후부터 비…수능일 기온 '뚝'",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-16T23:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926862?sid=103"
+     "title": "[전국 지역별 오늘의 날씨 및 내일날씨]오늘 오후~밤 전국 비, 내일 오후...",
+     "press": "economytalk.kr",
+     "publishedAt": "2026-11-16T23:16:00.000Z",
+     "link": "http://www.economytalk.kr/news/articleView.html?idxno=425358"
     },
     {
-     "title": "[출근길인터뷰] 쌀쌀해진 날씨…매트 한 장으로 집에서 운동",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-16T23:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926861?sid=102"
+     "title": "[날씨] 로봇 '앨리스 M1'이 전하는 오늘…\"전국 비, 내일부터 추워져\"",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-16T23:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000521033?sid=103"
     }
    ]
   },
@@ -80,40 +81,40 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 4,
-   "press": 15,
-   "firstArticleAt": "2026-11-16T21:50:00.000Z",
+   "articles90": 16,
+   "recent20": 3,
+   "press": 16,
+   "firstArticleAt": "2026-11-16T22:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "제니, 美 그래미 '올해의 레코드' 등 2개 부문 후보..첫 수상 도전 [핫피...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-16T23:25:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005641530"
+    },
+    {
+     "title": "제니, 그래미 '올해의 레코드' 등 2개 부문 후보…아이브·키키도 노미네...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-16T23:16:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261117000070"
+    },
     {
      "title": "제니, '드라큘라'로 그래미 어워즈 2개 부문 후보",
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-16T23:08:00.000Z",
      "link": "https://m.entertain.naver.com/article/055/0001403513"
-    },
-    {
-     "title": "블랙핑크 제니, 美 그래미 '올해의 레코드' 등 2개 부문 후보",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-16T23:06:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261117010006249"
-    },
-    {
-     "title": "[키워드 NOW] 그래미상 후보",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-16T23:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000651478?sid=103"
     }
    ]
   },
   {
-   "keyword": "레이미 PGA 오스틴",
+   "keyword": "레이미 PGA 오스틴 우승",
    "sources": [
     "nate"
    ],
    "articles90": 13,
-   "recent20": 3,
+   "recent20": 2,
    "press": 13,
    "firstArticleAt": "2026-11-16T22:01:00.000Z",
    "exclusive": false,
@@ -140,73 +141,138 @@
    ]
   },
   {
-   "keyword": "로버트 패틴슨 007 발탁",
+   "keyword": "젠슨 황 복귀 논의 없어",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 2,
+   "articles90": 8,
+   "recent20": 3,
    "press": 7,
-   "firstArticleAt": "2026-11-16T22:10:00.000Z",
+   "firstArticleAt": "2026-11-16T21:58:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[김대호 인물] 젠슨황 복귀 \"없다\" 엔비디아 이사회 공식입장",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-16T23:22:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=202611170817113438906806b77b_1"
+    },
+    {
+     "title": "“엔비디아 이사회, 젠슨 황 복귀 논의한 적 없어···안보의혹 조사 집...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-16T23:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003483103?sid=104"
+    },
+    {
+     "title": "트럼프 \"앨리스 황, 중국 스파이 아닐 수도\"…젠슨 황 스캔들 선 긋기",
+     "press": "kado.net",
+     "publishedAt": "2026-11-16T23:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000211690?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "로버트 패틴슨, 007 주인공 됐다",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 3,
+   "press": 4,
+   "firstArticleAt": "2026-11-16T22:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "로버트 패틴슨, 차기 007 주인공 확정…아마존 체제서 본드 시리즈 새 출...",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-16T23:24:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=847443"
+    },
+    {
+     "title": "로버트 패틴슨, 새 제임스 본드 확정…아마존 시대 첫 007 주인공 낙점",
+     "press": "digitaltoday.co.kr",
+     "publishedAt": "2026-11-16T23:18:00.000Z",
+     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=715891"
+    },
     {
      "title": "로버트 패틴슨, 제임스 본드 된다…‘007’시리즈 발탁",
      "press": "sports.khan.co.kr",
      "publishedAt": "2026-11-16T23:07:00.000Z",
      "link": "https://m.entertain.naver.com/article/144/0001150177"
-    },
-    {
-     "title": "봉준호·놀란의 로버트 패틴슨, 드니 빌뇌브의 '제임스 본드' 된다",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-16T23:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005442064?sid=104"
-    },
-    {
-     "title": "로버트 패틴슨, 차기 제임스 본드 낙점…역대 7번째 '007'",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-16T22:56:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014326054"
     }
    ]
   },
   {
-   "keyword": "젠슨 황 복귀 논의 없어",
+   "keyword": "이정현 12월 결혼",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-16T21:50:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-16T22:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "트럼프 “젠슨황 불륜녀 中스파이 아닐 수도…아무도 증명 못해”",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-16T22:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001885582?sid=104"
+     "title": "이정현 \"12월 장가갑니다\" 녹화장 발칵",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-16T23:12:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95420"
     },
     {
-     "title": "방중 앞둔 트럼프 “앨리스 황, 스파이 증거 없어···중국 자극 원치 ...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-16T22:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003483098?sid=104"
+     "title": "‘미스터 션샤인’ 이정현, 12월 결혼 깜짝 발표…“배우 은퇴 고민에 ...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-16T22:21:00.000Z",
+     "link": "https://m.entertain.naver.com/article/022/0004175731"
     },
     {
-     "title": "트럼프 “젠슨 황 복귀 나쁜 생각 아냐”…앨리스 황 스파이 의혹에는 ...",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-16T22:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000132371?sid=104"
+     "title": "결혼하려 대기업 원서 낸 이정현, 자격증 22개…12월 장가",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-16T22:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001147472"
+    }
+   ]
+  },
+  {
+   "keyword": "나의 유죄인간",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 3,
+   "press": 3,
+   "firstArticleAt": "2026-11-16T23:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "임시완♥설인아, 드디어 핑크빛 로맨스 시작…‘나의 유죄인간’ 시청...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-16T23:24:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001150182"
+    },
+    {
+     "title": "임시완, 파혼 선언…설인아와 쌍방 '유죄인간' 확정",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-16T23:22:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000328176"
+    },
+    {
+     "title": "‘나의 유죄인간’ 임시완, 파혼 선언",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-16T23:10:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611170020"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 774,
+  "flagged": 778,
   "matched": 444,
   "avgLeadMin": 891,
   "recent": [
