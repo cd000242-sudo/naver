@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T11:11:13.240Z",
+ "builtAt": "2026-11-16T11:41:51.806Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,77 +11,159 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "AI 부정행위 우려가 커지고 있어",
+   "keyword": "한-메콩 정상회의에서 이 대통령",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-16T09:47:00.000Z",
+   "articles90": 33,
+   "recent20": 7,
+   "press": 29,
+   "firstArticleAt": "2026-11-16T10:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "수능 코앞인데…AI 부정행위 대응 꼬인 교육부",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-16T10:46:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2648917"
+     "title": "한·메콩, 핵심 광물 협력 확대…이 대통령 \"관계 도약 변곡점\"",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-16T11:34:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1320682&inflow=N"
     },
     {
-     "title": "수능 앞 'AI 부정' 논란…\"연기\" 주장까지",
-     "press": "news.ebs.co.kr",
-     "publishedAt": "2026-11-16T10:12:00.000Z",
-     "link": "http://news.ebs.co.kr/ebsnews/allView/60790287/N"
+     "title": "이 대통령 \"한·아세안 AI 동행·문화창조산업 이니셔티브 제안\"",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-16T11:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000965933?sid=100"
     },
     {
-     "title": "“수능도 진작 뚫렸다”…강성태, ‘AI 안경 사태’에 충격 주장",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-16T10:12:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001281292"
+     "title": "李대통령 \"韓, 메콩 발전 함께할 파트너…선진국 성장 경험 나누려\"",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-16T11:30:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5084087"
     }
    ]
   },
   {
-   "keyword": "빙부상",
+   "keyword": "젠슨 황 복귀 움직임",
    "sources": [
-    "signal.bz",
-    "google"
+    "nate"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-16T10:06:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-16T10:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "친한계 총출동…한동훈 빙부상 빈소 찾은 여야 거물들",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-16T10:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005354515?sid=100"
+     "title": "사직서에 잉크도 안 말랐는데‥\"젠슨 황 복귀 논의 '워룸' 꾸려\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-16T11:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001535942?sid=104"
     },
     {
-     "title": "한동훈 빙부상 조문한 오세훈 “오늘은 드릴 말씀이 없습니다” [현장영...",
-     "press": "ichannela.com",
+     "title": "젠슨 황 사임 사흘 만 복귀 타진... 정가는 반대",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-16T11:00:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=883901"
+    },
+    {
+     "title": "실리콘밸리 총동원 '젠슨 황 어게인'…백악관 내부 심상찮다",
+     "press": "news.jtbc.co.kr",
      "publishedAt": "2026-11-16T10:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000367705?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/437/0000520998?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "블랙핑크 YG 명단 제외",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-16T10:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "블랙핑크, YG 전속계약 명단서 사라졌다…팬 멤버십 판매도 중단",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-16T11:13:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000784738"
     },
     {
-     "title": "한동훈 빙부상에 친한계 집결…오세훈·김문수 등도 조문",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-16T10:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014325771?sid=100"
+     "title": "\"블랙핑크 완전체 이제 못 보나\"…YG 명단서 그룹명 사라져",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-16T11:03:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005441959"
+    },
+    {
+     "title": "블랙핑크 10주년에 결별설, YG 전속계약 명단서 빠져‥입장 들어보니 [공...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-16T10:42:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001188030"
+    }
+   ]
+  },
+  {
+   "keyword": "결승전",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-16T10:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "日 상대 홈런 쳤는데 결승전 불발이라니…대표팀 캡틴의 한탄, \"아무것...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-16T10:47:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/076/0004467149"
+    },
+    {
+     "title": "극장에서 즐기는 ‘에픽세븐’ e스포츠…’E7WC 2026' 결승전 예매 시작",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-16T10:46:00.000Z",
+     "link": "https://m.sports.naver.com/esports/article/311/0002081168"
+    },
+    {
+     "title": "스마일게이트 '에픽세븐' 세계 결승전, 28일 잠실서 개최…예매 시작",
+     "press": "onews.tv",
+     "publishedAt": "2026-11-16T10:18:00.000Z",
+     "link": "https://www.onews.tv/news/articleView.html?idxno=291794"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 700,
-  "matched": 376,
-  "avgLeadMin": 807,
+  "flagged": 707,
+  "matched": 379,
+  "avgLeadMin": 801,
   "recent": [
+   {
+    "keyword": "김유정 100일 거짓말",
+    "hitKeyword": "젠슨 황 불륜 거짓말",
+    "hitAt": "2026-11-16T20:30:00+09:00",
+    "leadMin": 176
+   },
+   {
+    "keyword": "AI 부정행위 우려가 커지고 있어",
+    "hitKeyword": "초소형 카메라 부정행위",
+    "hitAt": "2026-11-16T20:30:00+09:00",
+    "leadMin": 19
+   },
+   {
+    "keyword": "AI 부정행위 대책 필요",
+    "hitKeyword": "초소형 카메라 부정행위",
+    "hitAt": "2026-11-16T20:30:00+09:00",
+    "leadMin": 9
+   },
    {
     "keyword": "전기",
     "hitKeyword": "젠슨 황 전기작가 폭로",
@@ -123,24 +205,6 @@
     "hitKeyword": "민희진 배임 혐의 송치",
     "hitAt": "2026-11-16T19:30:00+09:00",
     "leadMin": 60
-   },
-   {
-    "keyword": "민희진, 뉴진스 계약 해지 부인",
-    "hitKeyword": "민희진 배임 혐의 송치",
-    "hitAt": "2026-11-16T19:30:00+09:00",
-    "leadMin": 20
-   },
-   {
-    "keyword": "APBC 후 귀국하는 선수들",
-    "hitKeyword": "APBC 준우승 한일전",
-    "hitAt": "2026-11-16T19:30:00+09:00",
-    "leadMin": 10
-   },
-   {
-    "keyword": "AI 커닝",
-    "hitKeyword": "AI 커닝 해외 처벌",
-    "hitAt": "2026-11-16T18:30:00+09:00",
-    "leadMin": 127
    }
   ]
  }
