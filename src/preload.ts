@@ -788,6 +788,7 @@ contextBridge.exposeInMainWorld('api', {
   trackPublishedPost: async (req: {
     publishedAt?: string;
     keyword: string;
+    keywordSource?: string;
     mode: string;
     publishedUrl: string;
     title: string;

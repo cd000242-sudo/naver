@@ -63,7 +63,7 @@ async function main() {
     console.log(`  ${key.padEnd(14)} ${String(s.since0916[key]).padStart(4)}편  ${pct(s.since0916[key], s.since0916.total)}`);
   }
   console.log('\n[키워드 출처 기록 keywordSource]');
-  for (const key of ['user-input', 'leword', 'schedule-job', 'none', 'not-recorded']) {
+  for (const key of ['user-input', 'leword', 'schedule-job', 'auto-volume', 'auto-model', 'none', 'not-recorded']) {
     console.log(`  ${key.padEnd(13)} ${String(s.keywordSource[key]).padStart(4)}편`);
   }
   const c = s.calibration;

@@ -30,7 +30,7 @@ export interface RendererContentPolicyContext {
   recentPostsSnapshot: RecentPostRecord[];
   recentPostsResult: RecentPostsLoadResult;
   /** [2026-11-08] Raw claim of where the tracking keyword came from; main validates it (analytics/trackingKeyword.ts). */
-  trackingKeyword?: { value: string; source: 'user-input' | 'leword' | 'schedule-job' };
+  trackingKeyword?: { value: string; source: 'user-input' | 'leword' | 'schedule-job' | 'auto-volume' | 'auto-model' };
 }
 
 function text(value: unknown): string {
@@ -176,10 +176,17 @@ function trackingClaimFromSource(
   if (embeddedValue && (embeddedSource === 'user-input' || embeddedSource === 'leword' || embeddedSource === 'schedule-job')) {
     return { value: embeddedValue, source: embeddedSource };
   }
-  if (source.keywordsFromUserInput === false) return undefined;
+  // [2026-11-17] auto-volume / auto-model: the generator's own URL-mode pick, attached by main when nothing else
+  //   existed at generation time. A keyword the person typed afterwards still wins over it.
+  const autoClaim = embeddedValue && (embeddedSource === 'auto-volume' || embeddedSource === 'auto-model')
+    ? { value: embeddedValue, source: embeddedSource } as const
+    : undefined;
+  if (source.keywordsFromUserInput === false) return autoClaim;
   const first = keywords[0] || '';
   const squashed = (value: string) => value.replace(/\s+/g, '').toLowerCase();
-  if (!first || squashed(first) === squashed(String(source.title || ''))) return undefined;
+  if (!first || squashed(first) === squashed(String(source.title || ''))) return autoClaim;
+  // structuredContent.keywords[0] can be the auto pick itself (URL mode) — keep its auto label then.
+  if (autoClaim && squashed(first) === squashed(autoClaim.value)) return autoClaim;
   const field = typeof document !== 'undefined' ? document.getElementById('unified-keywords') : null;
   const fromLeword = field?.dataset?.keywordOrigin === 'leword' && field.dataset.keywordOriginValue === first;
   return { value: first, source: fromLeword ? 'leword' : 'user-input' };

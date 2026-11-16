@@ -6227,6 +6227,9 @@ async function ensureUrlModePrimaryKeyword(source: ContentSource): Promise<void>
     metadata.keywords = [pick.keyword, ...pick.candidates.filter((c) => c !== pick.keyword)];
     // [2026-09-22 audit item 22] candidates are LLM-inferred (volume-checked only for the main pick).
     (metadata as any).keywordOrigin = (metadata as any).keywordOrigin || 'url-mode-llm';
+    // [2026-11-17] Kept for exposure tracking: with an empty keyword field this pick is the only real search keyword.
+    //   Stored on the run, not on `source`: the source object is copied several times before and after this point.
+    withActiveRun((run) => run.updateMeta({ extra: { ...(run.meta.extra || {}), urlKeywordPick: { keyword: pick.keyword, decidedBy: pick.decidedBy } } }));
     console.log(
       `[UrlKeyword] 핵심 키워드 확정: "${pick.keyword}" (${pick.decidedBy}, ${pick.reason}) `
       + `· 후보 ${pick.candidates.join(' / ')}`,
@@ -9509,7 +9512,10 @@ export async function generateStructuredContent(
     });
     // [2026-11-04 Release C1] Post-processing may have cloned the article; put the harmony record back (no-op when flag OFF).
     restoreAgentHarmony(seoReview.content, run);
-    return attachGenerationIntegrity(seoReview.content, run, { sourceBased, selectedProvider, pipeline, qualityLoop: looped.summary });
+    const finished = attachGenerationIntegrity(seoReview.content, run, { sourceBased, selectedProvider, pipeline, qualityLoop: looped.summary });
+    // [2026-11-17] The URL-mode keyword pick travels on the result so callers can track exposure with it.
+    const urlKeywordPick = (run.meta.extra as any)?.urlKeywordPick;
+    return urlKeywordPick ? Object.assign(finished, { autoKeywordPick: urlKeywordPick }) : finished;
   } catch (error) {
     run.finish({ publishDecision: 'GENERATION_FAILED', extra: { ...(run.meta.extra || {}), error: String((error as Error)?.message || error).slice(0, 500) } });
     throw error;

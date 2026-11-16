@@ -21,7 +21,7 @@ import { isExposureMeasurement, looksLikeSentence } from './searchKeyword.js';
 
 export type KeywordFieldLabel = 'real' | 'blank' | 'same-as-title' | 'sentence-like';
 export type PostMeasurementLabel = 'exposure' | 'index-only' | 'unknown';
-export type KeywordSourceLabel = 'user-input' | 'leword' | 'schedule-job' | 'none' | 'not-recorded';
+export type KeywordSourceLabel = 'user-input' | 'leword' | 'schedule-job' | 'auto-volume' | 'auto-model' | 'none' | 'not-recorded';
 
 export interface BaselineSummary {
   readonly total: number;
@@ -63,7 +63,7 @@ export function summarizeBaseline(posts: readonly PublishedPost[]): BaselineSumm
   const keywordField = emptyFieldCounts();
   const since0916 = { total: 0, ...emptyFieldCounts() };
   const keywordSource: Record<KeywordSourceLabel, number> = {
-    'user-input': 0, leword: 0, 'schedule-job': 0, none: 0, 'not-recorded': 0,
+    'user-input': 0, leword: 0, 'schedule-job': 0, 'auto-volume': 0, 'auto-model': 0, none: 0, 'not-recorded': 0,
   };
 
   for (const post of posts) {
@@ -76,7 +76,7 @@ export function summarizeBaseline(posts: readonly PublishedPost[]): BaselineSumm
     }
     const source = (post as { keywordSource?: unknown }).keywordSource;
     const key: KeywordSourceLabel = source === 'user-input' || source === 'leword'
-      || source === 'schedule-job' || source === 'none' ? source : 'not-recorded';
+      || source === 'schedule-job' || source === 'auto-volume' || source === 'auto-model' || source === 'none' ? source : 'not-recorded';
     keywordSource[key] += 1;
   }
 

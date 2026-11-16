@@ -1532,6 +1532,7 @@ if (typeof window !== 'undefined' && window.api) {
               (window as any).api.trackPublishedPost({
                 publishedAt: new Date().toISOString(),
                 keyword: _last.keyword || '',
+                ...(_last.keywordSource ? { keywordSource: _last.keywordSource } : {}),
                 mode: _last.mode || 'seo',
                 publishedUrl: status.url,
                 title: _last.title || title,
@@ -1961,8 +1962,26 @@ function resolveTrackingKeyword(content: any): string {
   const fromInput = String(
     (document.getElementById('unified-keywords') as HTMLInputElement | null)?.value || '',
   ).split(',')[0].trim();
-  if (fromInput) return fromInput;
+  // [2026-11-17] A field that only repeats the title is not a keyword — same rule as the main recorder.
+  const squashed = (value: unknown) => String(value ?? '').replace(/\s+/g, '').toLowerCase();
+  if (fromInput && squashed(fromInput) !== squashed(content?.selectedTitle)) return fromInput;
+  // Empty field: the generator's own pick (attached by main with its source label) comes first.
+  const auto = resolveAutoTrackingClaim(content);
+  if (auto) return auto.value;
   return String(content?.primaryKeyword || content?.keyword || '').trim();
+}
+
+/** The auto keyword claim main embedded in the generated content, if any (analytics/trackingKeyword.ts). */
+function resolveAutoTrackingClaim(content: any): { value: string; source: 'auto-volume' | 'auto-model' } | null {
+  const claim = content?.contentPolicyContext?.trackingKeyword;
+  const value = String(claim?.value || '').trim();
+  return value && (claim.source === 'auto-volume' || claim.source === 'auto-model') ? { value, source: claim.source } : null;
+}
+
+/** Source label for the keyword resolveTrackingKeyword returned; undefined keeps main's default (user-input). */
+function resolveTrackingKeywordSource(content: any, keyword: string): 'auto-volume' | 'auto-model' | undefined {
+  const auto = resolveAutoTrackingClaim(content);
+  return auto && auto.value === keyword ? auto.source : undefined;
 }
 
   // ✅ [v2.10.185 Phase 3.5] SERP 실측 비교 버튼 활성화 + 데이터 동봉
@@ -1970,10 +1989,12 @@ function resolveTrackingKeyword(content: any): string {
   try {
     const _serpBtn = document.getElementById('serp-benchmark-btn') as HTMLButtonElement | null;
     if (_serpBtn && content?.bodyPlain && content.bodyPlain.length >= 100) {
+      const _trackingKeyword = resolveTrackingKeyword(content);
       (window as any).__lastGeneratedContent = {
         body: content.bodyPlain,
         title: content.selectedTitle || '',
-        keyword: resolveTrackingKeyword(content),
+        keyword: _trackingKeyword,
+        keywordSource: resolveTrackingKeywordSource(content, _trackingKeyword),
         mode: (content as any).contentMode || 'seo',
         autoSerpResult: (content.quality as any)?.serpBenchmark || null,
       };

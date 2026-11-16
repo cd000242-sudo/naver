@@ -30,7 +30,7 @@ export interface PublishedPost {
    * in this slot); such posts are still index-checked by title and counted as index-only, not ranking.
    * Absent on rows written before this field existed.
    */
-  readonly keywordSource?: 'user-input' | 'leword' | 'schedule-job' | 'none';
+  readonly keywordSource?: 'user-input' | 'leword' | 'schedule-job' | 'auto-volume' | 'auto-model' | 'none';
   readonly keywordKind?: 'exposure' | 'index-only';
   // evaluator 결과 (qualityEvaluator)
   readonly evaluator: {

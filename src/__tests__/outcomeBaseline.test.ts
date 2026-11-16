@@ -88,7 +88,7 @@ describe('summarizeBaseline — label counts', () => {
       post('2', { keywordSource: 'none' } as Partial<PublishedPost>),
       post('3'),
     ]);
-    expect(s.keywordSource).toEqual({ 'user-input': 1, leword: 0, 'schedule-job': 0, none: 1, 'not-recorded': 1 });
+    expect(s.keywordSource).toEqual({ 'user-input': 1, leword: 0, 'schedule-job': 0, 'auto-volume': 0, 'auto-model': 0, none: 1, 'not-recorded': 1 });
   });
 
   it('reconciles with the calibration split (usable answers = exposed + not exposed)', () => {

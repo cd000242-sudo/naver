@@ -4897,7 +4897,7 @@ import { createLdbAutoDraftRunner, createLdbAutoDraftStatusStore, requestLdbAuto
 import { materializeLdbImages } from './main/ldb-images.js';
 import { createLdbDestinations, type LdbResolvedDestination } from './main/ldb-destinations.js';
 import { createDailyPublishingRuntime } from './main/services/dailyPublishingRuntime.js';
-import { trackingFactFromContentSource } from './analytics/trackingKeyword.js';
+import { trackingFactFromContentSource, trackingFactFromKeywordPick } from './analytics/trackingKeyword.js';
 import { createDailyPublishingIpc } from './main/ipc/dailyPublishingHandlers.js';
 import { discoverDailySources, expandDailyKeywords } from './main/services/dailyPublishingDiscovery.js';
 import { createUserDataLewordSource } from './main/services/dailyLewordSource.js';
@@ -5960,7 +5960,7 @@ const handleMultiAccountPublish = async (_event: Electron.IpcMainInvokeEvent, ac
 
             resolvedContentPolicyContext = {
               // [2026-11-08] keyword jobs carry their keyword; URL sources have none (never the title).
-              trackingKeyword: trackingFactFromContentSource(contentSource),
+              trackingKeyword: trackingFactFromContentSource(contentSource) ?? trackingFactFromKeywordPick((generated as any)?.autoKeywordPick),
               input: {
                 ...multiPolicy.input,
                 recent_posts: undefined,
@@ -7128,8 +7128,15 @@ ipcMain.handle(
           ? `[AgentHarmony] 조화 모드 켜짐 — 이번 ${harmonyModeLabel(String(contentMode || ''))} 글은 에이전트가 한 세션 안에서 제목 비교 · 자기점검 · 보완 보고까지 합니다.`
           : `[AgentHarmony] 조화 모드 설정은 켜져 있지만 이번 글에는 적용하지 않습니다(모드 ${String(contentMode || '-')} · 엔진 ${String(provider || '-')} — 사진 모드를 뺀 글쓰기 모드 + Claude Code/Codex 에서만).`);
       }
+      // [2026-11-17] Remember the generator's URL-mode keyword pick from whatever it returned (review may call it more than once).
+      let manualAutoKeywordPick: unknown;
+      const generateOnceTracked = async (generationSource: any) => {
+        const generated = await generateOnce(generationSource);
+        manualAutoKeywordPick = (generated as any)?.autoKeywordPick ?? manualAutoKeywordPick;
+        return generated;
+      };
       const manualReviewed = await generateWithHomefeedReview({
-        contentMode: String(contentMode || ''), source: source as any, generate: generateOnce, signal: genSignal,
+        contentMode: String(contentMode || ''), source: source as any, generate: generateOnceTracked, signal: genSignal,
         blogProfile: manualProfileEditorial,
         createCaller: async () => {
           try { return await createDailyEditorialCaller(String(provider || ''), (await loadConfig()) as any, genSignal); } catch { return null; }
@@ -7146,7 +7153,9 @@ ipcMain.handle(
 
       (content as any).contentPolicyContext = {
         // [2026-11-08] keep the keyword provenance claim across the generation hop (renderer -> main -> renderer).
-        trackingKeyword: (payload.assembly as any).contentPolicyContext?.trackingKeyword,
+        // [2026-11-17] no typed/LEWORD keyword -> fall back to the generator's own URL-mode pick (own source label).
+        trackingKeyword: (payload.assembly as any).contentPolicyContext?.trackingKeyword
+          ?? trackingFactFromKeywordPick(manualAutoKeywordPick),
         input: {
           ...generationPolicy.input,
           recent_posts: undefined,

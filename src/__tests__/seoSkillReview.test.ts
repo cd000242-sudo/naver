@@ -176,7 +176,7 @@ describe('wiring in generateStructuredContent', () => {
     expect(src.split("import('./content/seoSkill/seoSkillReview.js')")).toHaveLength(2);
     const loop = src.indexOf('const looped = await maybeRunQualityLoop(');
     const review = src.indexOf('const seoReview = await runSeoSkillReview(');
-    const integrity = src.indexOf('return attachGenerationIntegrity(seoReview.content');
+    const integrity = src.indexOf('attachGenerationIntegrity(seoReview.content'); // [2026-11-17] result is now kept in a variable first
     expect(loop).toBeGreaterThan(-1);
     expect(review).toBeGreaterThan(loop);
     expect(integrity).toBeGreaterThan(review);

@@ -11,11 +11,19 @@
  * Anything else is source "none" and kind "index-only": we still check that the post is indexed, but it is
  * never counted as a ranking measurement and the title is never stored in the keyword slot.
  *
+ * [2026-11-17] Two automatic origins, used only when none of the three above exists (168 of 273 posts had an
+ * empty keyword field and could not be measured):
+ *   auto-volume  — the generator's URL-mode pick, chosen by Naver monthly search volume (people do search it)
+ *   auto-model   — the same pick when no volume was available (model's first candidate, unverified)
+ * They are stored under their own label so a report can always separate them from a typed keyword.
+ * auto-model is always index-only: nobody has shown that anyone searches it, so a miss must not count as
+ * "not exposed" in the calibration.
+ *
  * Pure module (no fs, no electron). The renderer only attaches a raw "fact"; main validates it here.
  */
 import { resolveSearchKeyword } from './searchKeyword.js';
 
-export type KeywordSource = 'user-input' | 'leword' | 'schedule-job' | 'none';
+export type KeywordSource = 'user-input' | 'leword' | 'schedule-job' | 'auto-volume' | 'auto-model' | 'none';
 export type OutcomeKeywordKind = 'exposure' | 'index-only';
 
 /** What travels in `contentPolicyContext.trackingKeyword` — a raw claim, validated by main. */
@@ -36,7 +44,7 @@ export const NO_TRACKING_KEYWORD: TrackingKeyword = Object.freeze({
   kind: 'index-only',
 });
 
-const REAL_SOURCES: ReadonlySet<string> = new Set(['user-input', 'leword', 'schedule-job']);
+const REAL_SOURCES: ReadonlySet<string> = new Set(['user-input', 'leword', 'schedule-job', 'auto-volume', 'auto-model']);
 const MAX_KEYWORD_CHARS = 100;
 const squash = (value: unknown): string => String(value ?? '').replace(/\s+/g, '').toLowerCase();
 
@@ -64,6 +72,17 @@ export function trackingFactFromContentSource(source: unknown): TrackingKeywordF
 }
 
 /**
+ * Keyword claim from the generator's own URL-mode pick (`source.metadata.keywordPick`).
+ * Callers use it only as a fallback: a typed, LEWORD or job keyword always wins.
+ */
+export function trackingFactFromKeywordPick(pick: unknown): TrackingKeywordFact | undefined {
+  const bag = (pick && typeof pick === 'object' ? pick : {}) as { keyword?: unknown; decidedBy?: unknown };
+  const source = bag.decidedBy === 'search-volume' ? 'auto-volume' : bag.decidedBy === 'llm-first' ? 'auto-model' : null;
+  if (!source) return undefined;
+  return parseTrackingKeywordFact({ value: bag.keyword, source }) ?? undefined;
+}
+
+/**
  * Turn a claim + the final title into the record that is stored.
  * A keyword equal to the title is the title passed off as a keyword → none.
  * A sentence-like keyword (too long / punctuation) stays visible but is index-only,
@@ -78,6 +97,6 @@ export function finalizeTrackingKeyword(fact: unknown, title: unknown): Tracking
   return {
     value: parsed.value,
     source: parsed.source,
-    kind: verdict.kind === 'exposure' ? 'exposure' : 'index-only',
+    kind: verdict.kind === 'exposure' && parsed.source !== 'auto-model' ? 'exposure' : 'index-only',
   };
 }
