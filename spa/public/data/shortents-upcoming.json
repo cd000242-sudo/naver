@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T11:01:09.265Z",
+ "builtAt": "2026-11-16T11:11:13.240Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,76 +11,89 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "3분기 적자 전환",
+   "keyword": "AI 부정행위 우려가 커지고 있어",
    "sources": [
     "nate"
    ],
-   "articles90": 33,
-   "recent20": 3,
-   "press": 28,
-   "firstArticleAt": "2026-11-16T09:32:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-16T09:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "두나무, 3분기 매출 60.7% 급감…영업손실 35억원으로 적자전환",
-     "press": "venturesquare.net",
-     "publishedAt": "2026-11-16T10:58:00.000Z",
-     "link": "https://www.venturesquare.net/1129057/"
+     "title": "수능 코앞인데…AI 부정행위 대응 꼬인 교육부",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-16T10:46:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2648917"
     },
     {
-     "title": "한국맥널티 3분기 매출 15% 증가, 영업 흑자 전환",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-16T10:56:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=406045"
+     "title": "수능 앞 'AI 부정' 논란…\"연기\" 주장까지",
+     "press": "news.ebs.co.kr",
+     "publishedAt": "2026-11-16T10:12:00.000Z",
+     "link": "http://news.ebs.co.kr/ebsnews/allView/60790287/N"
     },
     {
-     "title": "빗썸, 3분기 적자전환…매출 전년비 70%↓",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-16T10:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005441953?sid=101"
+     "title": "“수능도 진작 뚫렸다”…강성태, ‘AI 안경 사태’에 충격 주장",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-16T10:12:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001281292"
     }
    ]
   },
   {
-   "keyword": "이재명 한-아세안 정상회의",
+   "keyword": "빙부상",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 22,
-   "recent20": 4,
-   "press": 22,
-   "firstArticleAt": "2026-11-16T09:32:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-16T10:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령 \"한-아세안, AI·문화창조산업 이니셔티브 제안\"(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-16T10:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016445040?sid=100"
+     "title": "친한계 총출동…한동훈 빙부상 빈소 찾은 여야 거물들",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-16T10:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005354515?sid=100"
     },
     {
-     "title": "이 대통령, 3박 4일 순방 돌입...\"아세안 AI·문화 이니셔티브\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-16T10:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002433651?sid=100"
+     "title": "한동훈 빙부상 조문한 오세훈 “오늘은 드릴 말씀이 없습니다” [현장영...",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-16T10:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000367705?sid=100"
     },
     {
-     "title": "李, 아세안에 AI·문화산업 동맹 제안…“교역 3000억弗 추진”",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-16T10:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000161430?sid=100"
+     "title": "한동훈 빙부상에 친한계 집결…오세훈·김문수 등도 조문",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-16T10:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014325771?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 698,
-  "matched": 374,
-  "avgLeadMin": 797,
+  "flagged": 700,
+  "matched": 376,
+  "avgLeadMin": 807,
   "recent": [
+   {
+    "keyword": "전기",
+    "hitKeyword": "젠슨 황 전기작가 폭로",
+    "hitAt": "2026-11-16T20:00:00+09:00",
+    "leadMin": 5199
+   },
+   {
+    "keyword": "AI 안경 부정행위 적발",
+    "hitKeyword": "AI 커닝 적발",
+    "hitAt": "2026-11-16T20:00:00+09:00",
+    "leadMin": 19
+   },
    {
     "keyword": "sk그룹",
     "hitKeyword": "SK그룹 시총",
@@ -128,18 +141,6 @@
     "hitKeyword": "AI 커닝 해외 처벌",
     "hitAt": "2026-11-16T18:30:00+09:00",
     "leadMin": 127
-   },
-   {
-    "keyword": "AI 커닝 대책 혼란",
-    "hitKeyword": "AI 커닝 해외 처벌",
-    "hitAt": "2026-11-16T18:30:00+09:00",
-    "leadMin": 86
-   },
-   {
-    "keyword": "AI 커닝 대책 마련 필요",
-    "hitKeyword": "AI 커닝 해외 처벌",
-    "hitAt": "2026-11-16T18:30:00+09:00",
-    "leadMin": 0
    }
   ]
  }
