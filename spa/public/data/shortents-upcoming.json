@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T16:44:58.306Z",
+ "builtAt": "2026-11-16T16:55:01.886Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -40,6 +40,38 @@
      "press": "hankookilbo.com",
      "publishedAt": "2026-11-16T16:12:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/469/0000965946?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황 복귀 움직임",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-16T15:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프 \"나쁜 생각 아니다\"..젠슨 황 엔비디아 복귀 지지",
+     "press": "4th.kr",
+     "publishedAt": "2026-11-16T16:54:00.000Z",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2122005"
+    },
+    {
+     "title": "\"젠슨 황 돌려달라\" 커지는 투자자 목소리…악재 겹친 인텔[박신영의 개...",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-16T16:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005354554?sid=104"
+    },
+    {
+     "title": "트럼프 \"젠슨 황 복귀 반대 안해…큰 교훈 얻었을 것\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-16T15:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014325916?sid=104"
     }
    ]
   }
