@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T05:32:20.149Z",
+ "builtAt": "2026-11-16T05:42:24.197Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,44 +11,12 @@
  "measured": 14,
  "candidates": [
   {
-   "keyword": "수능 AI 부정행위 대책",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 83,
-   "recent20": 39,
-   "press": 61,
-   "firstArticleAt": "2026-11-16T04:51:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘AI 수능 부정 우려’…최교진 \"내일 대책 발표\"",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-16T05:30:00.000Z",
-     "link": "https://www.viva100.com/article/20261116500790"
-    },
-    {
-     "title": "교총 \"교육당국, 육안 위주 대책 그쳐...전파차단 등 신속 도입해야\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-16T05:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005441693?sid=102"
-    },
-    {
-     "title": "전한길 \"AI 부정행위, 공정성의 붕괴…수능 코앞 사후약방문\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-16T05:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014324871?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "행정기관 이메일 해킹",
    "sources": [
     "signal.bz"
    ],
    "articles90": 17,
-   "recent20": 5,
+   "recent20": 2,
    "press": 17,
    "firstArticleAt": "2026-11-16T04:30:00.000Z",
    "exclusive": false,
@@ -75,66 +43,67 @@
    ]
   },
   {
-   "keyword": "JTBC 올림픽 중계권 해지",
+   "keyword": "개인정보",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 16,
-   "recent20": 5,
-   "press": 16,
-   "firstArticleAt": "2026-11-16T04:14:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "JTBC, 올림픽 중계권 계약 해지...\"재무 불확실성 해소\" [공식]",
-     "press": "starnewsk.com",
-     "publishedAt": "2026-11-16T05:26:00.000Z",
-     "link": "http://www.starnewsk.com/news/articleView.html?idxno=61050"
-    },
-    {
-     "title": "JTBC, 올림픽 중계 손 뗐다…\"IOC 중계권 계약 해지\"",
-     "press": "dispatch.co.kr",
-     "publishedAt": "2026-11-16T05:19:00.000Z",
-     "link": "https://m.entertain.naver.com/article/433/0000132324"
-    },
-    {
-     "title": "'매각 추진' JTBC, IOC 중계권 포기…\"회생 절차로 중계 사업 지속 어려...",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-16T05:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001403343?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "김민석 대표 발언",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 19,
-   "recent20": 5,
+   "articles90": 14,
+   "recent20": 3,
    "press": 14,
-   "firstArticleAt": "2026-11-16T04:11:00.000Z",
+   "firstArticleAt": "2026-11-16T04:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김민석 \"AI 악용 시험 부정행위 응시 제한, 5년→10년으로 제재 강화\"",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-16T05:29:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261116000867"
+     "title": "조폐공사 “지역화폐 시스템 개인정보 유출, 금융권 유출과 유사”",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-16T05:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001885399?sid=102"
     },
     {
-     "title": "발언하는 김민석 대표",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-16T05:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004210193?sid=100"
+     "title": "아마데우스 해킹으로 국내 여행사 개인정보 유출 확산 우려↑",
+     "press": "newsfc.co.kr",
+     "publishedAt": "2026-11-16T05:28:00.000Z",
+     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82501"
     },
     {
-     "title": "전국직능대표자회의 발대식 참석한 김민석 대표",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-16T05:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004210194?sid=100"
+     "title": "강원대 산학협력단 연구시스템 해킹 피해...개인정보 유출",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-16T05:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002433453?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "최예나 표절 스타일리스트",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 13,
+   "recent20": 3,
+   "press": 13,
+   "firstArticleAt": "2026-11-16T04:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "최예나, 사브리나 카펜터 표절 의혹에 결국 해명…스타일리스트 \"카피 ...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-16T05:40:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004125479"
+    },
+    {
+     "title": "최예나 의상 표절 의혹에 스타일리스트 직접 해명 \"카피 단정 속상해\"",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-16T05:32:00.000Z",
+     "link": "https://m.entertain.naver.com/article/437/0000520909"
+    },
+    {
+     "title": "최예나 의상 표절 의혹에… 스타일리스트 \"과정 빠진 채 카피 단정 아쉬...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-16T05:28:00.000Z",
+     "link": "https://m.entertain.naver.com/article/469/0000965820"
     }
    ]
   },
@@ -143,10 +112,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 10,
-   "firstArticleAt": "2026-11-16T04:04:00.000Z",
+   "articles90": 9,
+   "recent20": 0,
+   "press": 9,
+   "firstArticleAt": "2026-11-16T04:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -171,34 +140,67 @@
    ]
   },
   {
-   "keyword": "주지훈, 독자 회사 설립",
+   "keyword": "주지훈 독자 회사 설립",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
    "articles90": 7,
-   "recent20": 0,
+   "recent20": 2,
    "press": 7,
-   "firstArticleAt": "2026-11-16T04:05:00.000Z",
-   "exclusive": false,
+   "firstArticleAt": "2026-11-16T04:22:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "주지훈, 소속사 떠난다…홀로서기 구상 중→'16년 인연'도 마침표",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-16T05:38:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001408458"
+    },
+    {
+     "title": "주지훈, 16년 인연 끝·홀로서기 시작…블리츠웨이와 결별 [공식]",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-16T05:32:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001281219"
+    },
     {
      "title": "'재혼 황후' 주지훈, 16년 동행 마침표-1인 기획사 설립",
      "press": "mediafine.co.kr",
      "publishedAt": "2026-11-16T05:12:00.000Z",
      "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95384"
+    }
+   ]
+  },
+  {
+   "keyword": "호시한·이괄 지사 유해봉환",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 14,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-16T04:19:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[포토] 고국 품으로 돌아온 독립유공자 호시한·이괄 지사",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-16T05:06:00.000Z",
+     "link": "https://www.ajunews.com/view/20261116140123259"
     },
     {
-     "title": "주지훈, 주식 평가액 34억 급감했는데…16년 소속사와 결별→독자 회사...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-16T05:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004467027"
+     "title": "[포토] 한성숙 총리, 독립유공자 유해봉환식서 건국훈장 헌정",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-16T04:52:00.000Z",
+     "link": "https://www.ajunews.com/view/20261116134456179"
     },
     {
-     "title": "주지훈, 블리츠웨이와 전속계약 종료..“독자 회사 설립 준비”",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-16T04:58:00.000Z",
-     "link": "http://www.breaknews.com/1251209"
+     "title": "호시한 지사 후손과 인사하는 한성숙 총리",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-16T04:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016443954?sid=100"
     }
    ]
   },
@@ -235,76 +237,68 @@
    ]
   },
   {
-   "keyword": "화학물질저감 우수제품 전시",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 10,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-16T04:19:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[포토] 2026년 화학물질저감 우수제품",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-16T05:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003059363?sid=101"
-    },
-    {
-     "title": "[포토] ‘화학물질저감 우수제품’ 선정 제품들",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-16T05:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003059364?sid=101"
-    },
-    {
-     "title": "[포토] 화학물질저감 우수제품 살펴보는 금한승 1차관",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-16T05:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003059360?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "호시한 이괄 영현 봉송",
+   "keyword": "젠슨 황 복귀가 신중하다.",
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-16T04:19:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-16T04:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "호시한ㆍ이괄 지사 영현 봉송, 목례하는 한성숙 총리",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-16T04:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016443936?sid=100"
+     "title": "[미국 빅테크]엔비디아 직원들・일런 머스크 ‚젠슨 황 CEO 복귀 시켜 달...",
+     "press": "greened.kr",
+     "publishedAt": "2026-11-16T05:26:00.000Z",
+     "link": "https://www.greened.kr/news/articleView.html?idxno=354678"
     },
     {
-     "title": "순국선열의 날 앞두고 호시한·이괄 지사 유해 봉환",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-16T04:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001885390?sid=102"
+     "title": "사흘 만에 '젠슨 황 복귀설'…6% 빠진 엔비디아 반등할까",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-16T04:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000552297?sid=101"
     },
     {
-     "title": "호시한ㆍ이괄 지사 영현 봉송 따르는 한성숙 총리",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-16T04:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016443917?sid=100"
+     "title": "'젠슨황 해임' 여파에 흔들리는 코스피",
+     "press": "smedaily.co.kr",
+     "publishedAt": "2026-11-16T04:46:00.000Z",
+     "link": "http://www.smedaily.co.kr/news/articleView.html?idxno=366194"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 625,
-  "matched": 336,
-  "avgLeadMin": 859,
+  "flagged": 630,
+  "matched": 340,
+  "avgLeadMin": 851,
   "recent": [
+   {
+    "keyword": "ai 안경",
+    "hitKeyword": "AI 커닝 안경 시험장",
+    "hitAt": "2026-11-16T14:30:00+09:00",
+    "leadMin": 416
+   },
+   {
+    "keyword": "수능 AI 부정행위 대책 필요",
+    "hitKeyword": "수능 부정행위 경찰 수사",
+    "hitAt": "2026-11-16T14:30:00+09:00",
+    "leadMin": 48
+   },
+   {
+    "keyword": "수능 AI 부정행위 대책 고심",
+    "hitKeyword": "수능 부정행위 경찰 수사",
+    "hitAt": "2026-11-16T14:30:00+09:00",
+    "leadMin": 28
+   },
+   {
+    "keyword": "수능 AI 부정행위 대책",
+    "hitKeyword": "수능 부정행위 경찰 수사",
+    "hitAt": "2026-11-16T14:30:00+09:00",
+    "leadMin": 8
+   },
    {
     "keyword": "양극화 총괄반 첫 회의",
     "hitKeyword": "주택자산 양극화 심화",
@@ -340,30 +334,6 @@
     "hitKeyword": "JTBC 올림픽 중계권",
     "hitAt": "2026-11-16T13:30:00+09:00",
     "leadMin": 59
-   },
-   {
-    "keyword": "연지 강동연 결혼",
-    "hitKeyword": "연지 강동연 결혼",
-    "hitAt": "2026-11-16T13:30:00+09:00",
-    "leadMin": 28
-   },
-   {
-    "keyword": "2027 수능 문답지 배부",
-    "hitKeyword": "2027 KBO FA 시장",
-    "hitAt": "2026-11-16T13:00:00+09:00",
-    "leadMin": 89
-   },
-   {
-    "keyword": "2027 수능 문답지 배부 시작",
-    "hitKeyword": "2027 KBO FA 시장",
-    "hitAt": "2026-11-16T13:00:00+09:00",
-    "leadMin": 79
-   },
-   {
-    "keyword": "수능 AI 부정행위 대책 필요",
-    "hitKeyword": "AI 수능 부정행위",
-    "hitAt": "2026-11-16T13:00:00+09:00",
-    "leadMin": 69
    }
   ]
  }
