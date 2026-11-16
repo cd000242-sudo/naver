@@ -6239,6 +6239,37 @@ async function ensureUrlModePrimaryKeyword(source: ContentSource): Promise<void>
   }
 }
 
+/**
+ * [2026-11-17] Search keyword for EXPOSURE TRACKING ONLY, for posts made without a URL and without a typed
+ * keyword (title-only posts, scheduled posts). Called by main after generation; the result is never fed back
+ * into the prompt. Returns null unless a candidate has measured search volume (content/trackingKeywordPick.ts).
+ */
+export async function resolveTrackingKeywordPick(
+  source: ContentSource,
+  generated: unknown,
+): Promise<{ keyword: string; decidedBy: 'search-volume' } | null> {
+  try {
+    const { pickTrackingOnlyKeyword, trackingPickText } = await import('./content/trackingKeywordPick.js');
+    const { createNaverVolumeLookup } = await import('./content/urlModeKeywordResolve.js');
+    const lookupVolume = await createNaverVolumeLookup();
+    if (!lookupVolume) return null;
+    const route = await resolveSideTaskRoute(source, 'url-keyword', 'utility');
+    if (!route) return null;
+    const title = String((generated as { selectedTitle?: unknown } | null)?.selectedTitle || source.title || '').trim();
+    const pick = await pickTrackingOnlyKeyword(trackingPickText(source, generated), title, {
+      inferCandidates: route.callModel,
+      lookupVolume,
+    });
+    console.log(pick
+      ? `[TrackingKeyword] 노출 측정용 검색어: "${pick.keyword}" (검색량 확인)`
+      : '[TrackingKeyword] 검색량이 확인된 검색어 없음 — 제목으로 색인만 확인');
+    return pick;
+  } catch (error) {
+    console.warn('[TrackingKeyword] 검색어 선정 실패 — 색인 확인만:', (error as Error)?.message);
+    return null;
+  }
+}
+
 async function generateStructuredContentInternal(
   source: ContentSource,
   options: GenerateOptions = {},

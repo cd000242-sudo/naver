@@ -13,11 +13,12 @@
  *
  * [2026-11-17] Two automatic origins, used only when none of the three above exists (168 of 273 posts had an
  * empty keyword field and could not be measured):
- *   auto-volume  — the generator's URL-mode pick, chosen by Naver monthly search volume (people do search it)
- *   auto-model   — the same pick when no volume was available (model's first candidate, unverified)
- * They are stored under their own label so a report can always separate them from a typed keyword.
- * auto-model is always index-only: nobody has shown that anyone searches it, so a miss must not count as
- * "not exposed" in the calibration.
+ *   auto-volume  — a keyword the app picked from the text, chosen by Naver monthly search volume (people do
+ *                  search it). URL mode: the generator's own pick. Title-only / scheduled posts: a
+ *                  tracking-only pick made after generation (content/trackingKeywordPick.ts).
+ *   auto-model   — a pick with no measured volume. No longer produced: such a post stays "none" so the
+ *                  tracker still index-checks it by its title. The label is only kept readable.
+ * auto-volume is stored under its own label so a report can always separate it from a typed keyword.
  *
  * Pure module (no fs, no electron). The renderer only attaches a raw "fact"; main validates it here.
  */
@@ -72,14 +73,13 @@ export function trackingFactFromContentSource(source: unknown): TrackingKeywordF
 }
 
 /**
- * Keyword claim from the generator's own URL-mode pick (`source.metadata.keywordPick`).
+ * Keyword claim from an automatic pick (the generator's URL-mode pick, or the tracking-only pick).
  * Callers use it only as a fallback: a typed, LEWORD or job keyword always wins.
  */
 export function trackingFactFromKeywordPick(pick: unknown): TrackingKeywordFact | undefined {
   const bag = (pick && typeof pick === 'object' ? pick : {}) as { keyword?: unknown; decidedBy?: unknown };
-  const source = bag.decidedBy === 'search-volume' ? 'auto-volume' : bag.decidedBy === 'llm-first' ? 'auto-model' : null;
-  if (!source) return undefined;
-  return parseTrackingKeywordFact({ value: bag.keyword, source }) ?? undefined;
+  if (bag.decidedBy !== 'search-volume') return undefined;
+  return parseTrackingKeywordFact({ value: bag.keyword, source: 'auto-volume' }) ?? undefined;
 }
 
 /**

@@ -35,11 +35,11 @@ const build = (over: Record<string, unknown> = {}) => buildRendererContentPolicy
 beforeEach(() => { document.body.innerHTML = '<input id="unified-keywords" />'; });
 
 describe('trackingFactFromKeywordPick', () => {
-  it('labels a volume-checked pick auto-volume and a model-only pick auto-model', () => {
+  it('labels a volume-checked pick auto-volume; a model-only pick is no claim at all', () => {
     expect(trackingFactFromKeywordPick({ keyword: '제네시스 생산 중단', decidedBy: 'search-volume' }))
       .toEqual({ value: '제네시스 생산 중단', source: 'auto-volume' });
-    expect(trackingFactFromKeywordPick({ keyword: '제네시스 생산 중단', decidedBy: 'llm-first' }))
-      .toEqual({ value: '제네시스 생산 중단', source: 'auto-model' });
+    // Unverified: the post stays "none" and is index-checked by its title instead.
+    expect(trackingFactFromKeywordPick({ keyword: '제네시스 생산 중단', decidedBy: 'llm-first' })).toBeUndefined();
   });
 
   it('returns nothing when there is no pick', () => {
@@ -123,7 +123,7 @@ describe('wiring', () => {
     expect(main).toMatch(/contentPolicyContext\?\.trackingKeyword\s*\r?\n\s*\?\?\s*trackingFactFromKeywordPick\(manualAutoKeywordPick\)/);
     expect(main).toMatch(/manualAutoKeywordPick = \(generated as any\)\?\.autoKeywordPick \?\? manualAutoKeywordPick/);
     expect(main).toMatch(/generate:\s*generateOnceTracked/);
-    expect(main).toMatch(/trackingFactFromContentSource\(contentSource\)\s*\?\?\s*trackingFactFromKeywordPick\(\(generated as any\)\?\.autoKeywordPick\)/);
+    expect(main).toMatch(/trackingKeyword:\s*dailyJobKeywordFact \?\? trackingFactFromKeywordPick\(dailyAutoKeywordPick\)/);
     expect(main).not.toMatch(/metadata\?\.keywordPick/);
   });
 

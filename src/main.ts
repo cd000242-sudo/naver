@@ -87,7 +87,7 @@ import type { GenerateImagesOptions, GeneratedImage } from './imageGenerator.js'
 import { getDailyLimit, getTodayCount, incrementTodayCount, setDailyLimit } from './postLimitManager.js';
 // ✅ [v2.10.301] 다중계정 봇감지 백오프 + 계정별 로그인 시차 — 10팀 검증에서 botBackoff dead code 발견
 import { isAccountBackedOff, getBotBackoff, computeLoginStaggerDelayMs } from './utils/botBackoff.js';
-import { generateStructuredContent, removeOrdinalHeadingLabelsFromBody } from './contentGenerator.js';
+import { generateStructuredContent, removeOrdinalHeadingLabelsFromBody, resolveTrackingKeywordPick } from './contentGenerator.js';
 import {
   describeLicenseNetworkFailure,
   classifyLicenseNetworkFailure,
@@ -1916,7 +1916,10 @@ async function prepareSmartScheduledContent(
   // [2026-11-08] Only the job's own keyword counts; the title fallback above is for generation, not tracking.
   const smartKeyword = String(post.keyword || '').trim();
   const contentPolicyContext = {
-    trackingKeyword: smartKeyword ? { value: smartKeyword, source: 'schedule-job' } : undefined,
+    // [2026-11-17] A scheduled post with no keyword of its own gets a tracking-only pick (never the title).
+    trackingKeyword: smartKeyword
+      ? { value: smartKeyword, source: 'schedule-job' }
+      : trackingFactFromKeywordPick(await resolveTrackingKeywordPick(source, generated)),
     input: {
       ...generationPolicy.input,
       recent_posts: undefined,
@@ -5958,9 +5961,17 @@ const handleMultiAccountPublish = async (_event: Electron.IpcMainInvokeEvent, ac
               contentQualityV3PublicationTicket,
             );
 
+            // [2026-11-17] Keyword jobs carry their keyword. Otherwise use the generator's URL-mode pick; when the
+            //   generator did not try at all (not URL mode), make a tracking-only pick. Never the title.
+            const dailyJobKeywordFact = trackingFactFromContentSource(contentSource);
+            let dailyAutoKeywordPick: unknown;
+            if (!dailyJobKeywordFact) {
+              dailyAutoKeywordPick = (generated as any)?.autoKeywordPick !== undefined
+                ? (generated as any).autoKeywordPick
+                : await resolveTrackingKeywordPick(source as any, generated);
+            }
             resolvedContentPolicyContext = {
-              // [2026-11-08] keyword jobs carry their keyword; URL sources have none (never the title).
-              trackingKeyword: trackingFactFromContentSource(contentSource) ?? trackingFactFromKeywordPick((generated as any)?.autoKeywordPick),
+              trackingKeyword: dailyJobKeywordFact ?? trackingFactFromKeywordPick(dailyAutoKeywordPick),
               input: {
                 ...multiPolicy.input,
                 recent_posts: undefined,
@@ -7151,6 +7162,10 @@ ipcMain.handle(
         contentQualityV3PublicationTicket,
       );
 
+      // [2026-11-17] Title-only post (no typed keyword, no URL-mode pick): pick a search keyword for exposure tracking only.
+      if (!(payload.assembly as any).contentPolicyContext?.trackingKeyword && manualAutoKeywordPick === undefined) {
+        manualAutoKeywordPick = await resolveTrackingKeywordPick(source as any, content);
+      }
       (content as any).contentPolicyContext = {
         // [2026-11-08] keep the keyword provenance claim across the generation hop (renderer -> main -> renderer).
         // [2026-11-17] no typed/LEWORD keyword -> fall back to the generator's own URL-mode pick (own source label).
