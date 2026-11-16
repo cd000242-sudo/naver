@@ -28,6 +28,7 @@ import {
   buildPlainRegisterFinalBlock, PLAIN_CORE_ENDINGS, PLAIN_HUMAN_RHYTHM_RULE, PLAIN_MODE_VOICE_LINES,
   PLAIN_TONE_OVERRIDE_LINES, resolveHomefeedPlainKind, type HomefeedPlainKind,
 } from './content/homefeedPlainRegister.js';
+import { buildHomefeedCraftBlock, resolveHomefeedCraftTopic, type HomefeedCraftTopic } from './content/homefeedTopicCraft.js';
 
 // 프롬프트 디렉토리 경로 (개발/프로덕션 환경 모두 지원)
 function getPromptsDir(): string {
@@ -175,6 +176,11 @@ export function resolveCategory(categoryHint?: string): PromptCategory {
   }
 
   return 'general';
+}
+
+/** Homefeed topic that gets a block of positive writing devices (content/homefeedTopicCraft). Null = none. */
+export function resolveHomefeedCraft(mode?: string, categoryHint?: string): HomefeedCraftTopic | null {
+  return resolveHomefeedCraftTopic(mode, resolveCategory(categoryHint), categoryHint);
 }
 
 /** Homefeed topics written in plain endings (guide v5.2): entertainment, sports, IT, cars. Null = polite register. */
@@ -1561,6 +1567,12 @@ ${numbered}
 → 지정된 줄 앞에 임의 문장을 추가하지 마라.
 → 이 줄들은 사용자의 1차 경험 데이터이므로 QUMA/DIA+가 신뢰하는 신호다.
 `;
+  }
+
+  // Topic devices ("write it like this") sit near the end so they are read after the long shared rules.
+  const craftTopic = resolveHomefeedCraft(mode, categoryHint);
+  if (craftTopic) {
+    finalPrompt += `\n\n${buildHomefeedCraftBlock(craftTopic)}\n`;
   }
 
   // Last on purpose: static prompt files above still carry polite-register sentences (shared with other

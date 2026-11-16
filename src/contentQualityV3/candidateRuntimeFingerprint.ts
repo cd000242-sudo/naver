@@ -242,6 +242,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/content/homefeedTitleGate.ts',
   'src/content/homefeedTitleHookFloor.ts',
   'src/content/homefeedTitleQuoteUse.ts',
+  'src/content/homefeedTopicCraft.ts',
   'src/content/internalLinkManager.ts',
   'src/content/issueDisciplineAudit.ts',
   'src/content/issueDisciplineRules.ts',

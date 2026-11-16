@@ -280,7 +280,8 @@ describe('Content Quality V3 evidence attestation', () => {
         // [2026-11-16] 홈판 평서체 주제(연예·스포츠·IT·자동차) 분기 — 베이스라인 대상 4개(promptLoader ·
         //   contentJsonPromptFormat · quality90Gate · humanlikeEval)로 재계산. 런타임 지문은 여기에 더해
         //   contentGenerator · contentVoiceProfile · content/homefeedPlainRegister(신규)도 함께 바뀜
-        'e7ce3d378c7b86c4e3ce3e53ba30531e00ed44cec35532ad5003c17ba2f6e8c5',
+        // [2026-11-16] 홈판 주제 장치 블록(9개 주제, content/homefeedTopicCraft) 배선 — promptLoader 로 재계산
+        'eefc12636a02b741aaf03115c6e5880b07a7e24ef06fe0981974727a4bd43c94',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 
