@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T13:42:51.079Z",
+ "builtAt": "2026-11-16T13:52:59.822Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -9,40 +9,7 @@
   "minPress": 2
  },
  "measured": 10,
- "candidates": [
-  {
-   "keyword": "수능 AI 부정행위 논란",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 25,
-   "recent20": 2,
-   "press": 19,
-   "firstArticleAt": "2026-11-16T12:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“개명했다고 했는데”…LEET 만점자 공개한 수능 성적표엔 왜 현재 이...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-16T13:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005764625?sid=102"
-    },
-    {
-     "title": "AI 부정행위 잡을 수 있겠냐는 질문에, 교육부 장관 \"나이가 많아서...\"",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-16T13:28:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1175104"
-    },
-    {
-     "title": "수능 AI 부정행위 막을 수 있을까",
-     "press": "mhj21.com",
-     "publishedAt": "2026-11-16T13:22:00.000Z",
-     "link": "https://www.mhj21.com/news/articleView.html?idxno=254829"
-    }
-   ]
-  }
- ],
+ "candidates": [],
  "hitRate": {
   "days": 7,
   "flagged": 721,
