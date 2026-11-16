@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T23:06:04.973Z",
+ "builtAt": "2026-11-16T23:16:07.539Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,21 +8,59 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 14,
  "candidates": [
+  {
+   "keyword": "러 군용기 KADIZ 진입 전투기 출격",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 21,
+   "recent20": 2,
+   "press": 21,
+   "firstArticleAt": "2026-11-16T22:09:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[속보]\"러 군용기, 17일 새벽 카디즈 진입 후 이탈\"...軍 전투기 대응",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-16T23:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000121531?sid=102"
+    },
+    {
+     "title": "러시아 군용기 여러 대 동해 KADIZ 진입…공군 전투기 출격 대응",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-16T23:02:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=243344"
+    },
+    {
+     "title": "미·중·러 정상회담·한일 회담 앞두고…러 군용기, 석 달 만에 또 KADI...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-16T22:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005605241?sid=100"
+    }
+   ]
+  },
   {
    "keyword": "날씨",
    "sources": [
     "signal.bz",
     "google"
    ],
-   "articles90": 21,
+   "articles90": 20,
    "recent20": 6,
-   "press": 17,
-   "firstArticleAt": "2026-11-16T21:38:00.000Z",
+   "press": 16,
+   "firstArticleAt": "2026-11-16T21:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[오늘날씨] 아침엔 다소 '포근'⋯오후부터는 전국적으로 비 쏟아진다",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-16T23:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001075587?sid=103"
+    },
     {
      "title": "[날씨] 전국 온화하지만 오후부터 비…수능일 기온 '뚝'",
      "press": "yonhapnewstv.co.kr",
@@ -34,12 +72,6 @@
      "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-16T23:03:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/422/0000926861?sid=102"
-    },
-    {
-     "title": "[굿모닝 날씨]오전 동해안 중심 비...저녁부터 대구경북 확대돼",
-     "press": "tbc.co.kr",
-     "publishedAt": "2026-11-16T23:00:00.000Z",
-     "link": "https://www.tbc.co.kr/news/view?pno=20261117073257AE08652&id=213432"
     }
    ]
   },
@@ -48,30 +80,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 12,
+   "articles90": 15,
+   "recent20": 4,
+   "press": 15,
    "firstArticleAt": "2026-11-16T21:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "제니, 데뷔 10년 만에 첫 그래미 후보…아이브·키키, ‘아시안 팝’",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-16T22:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002724280?sid=103"
+     "title": "제니, '드라큘라'로 그래미 어워즈 2개 부문 후보",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-16T23:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/055/0001403513"
     },
     {
-     "title": "제니, 美 그래미 '올해의 레코드' 노미네이트…아이브·키키도 후보",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-16T22:56:00.000Z",
-     "link": "https://www.ajunews.com/view/20261117075200813"
+     "title": "블랙핑크 제니, 美 그래미 '올해의 레코드' 등 2개 부문 후보",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-16T23:06:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261117010006249"
     },
     {
-     "title": "블핑 제니, '그래미' 본상 후보 첫 경험… 테일러 스위프트·브루노 마스...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-16T22:46:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004125638"
+     "title": "[키워드 NOW] 그래미상 후보",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-16T23:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000651478?sid=103"
     }
    ]
   },
@@ -80,30 +112,62 @@
    "sources": [
     "nate"
    ],
-   "articles90": 11,
+   "articles90": 13,
    "recent20": 3,
-   "press": 11,
+   "press": 13,
    "firstArticleAt": "2026-11-16T22:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "채드 레이미, 오스틴 챔피언십 제패…135경기 만에 PGA 투어 통산 2승째",
+     "press": "dailysportshankook.co.kr",
+     "publishedAt": "2026-11-16T23:14:00.000Z",
+     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435592"
+    },
+    {
+     "title": "'20언더파' 레이미, PGA투어 오스틴 챔피언십 제패",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-16T23:08:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2019349"
+    },
+    {
      "title": "폭우 순연 변수 뚫고 135경기 만에 정상 복귀…레이미, 오스틴 챔피언십...",
      "press": "isplus.com",
      "publishedAt": "2026-11-16T23:00:00.000Z",
      "link": "https://m.sports.naver.com/golf/article/241/0003542046"
+    }
+   ]
+  },
+  {
+   "keyword": "로버트 패틴슨 007 발탁",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-16T22:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "로버트 패틴슨, 제임스 본드 된다…‘007’시리즈 발탁",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-16T23:07:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001150177"
     },
     {
-     "title": "[PGA] 오스틴 챔피언십 최종순위…채드 레이미 우승",
-     "press": "golfhankook.hankooki.com",
-     "publishedAt": "2026-11-16T22:54:00.000Z",
-     "link": "https://golfhankook.hankooki.com/news/articleView.html?idxno=20022671"
+     "title": "봉준호·놀란의 로버트 패틴슨, 드니 빌뇌브의 '제임스 본드' 된다",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-16T23:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005442064?sid=104"
     },
     {
-     "title": "레이미, PGA투어 오스틴 챔피언십 우승",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-16T22:48:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/081/0003700092"
+     "title": "로버트 패틴슨, 차기 제임스 본드 낙점…역대 7번째 '007'",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-16T22:56:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014326054"
     }
    ]
   },
@@ -138,76 +202,11 @@
      "link": "https://n.news.naver.com/mnews/article/666/0000132371?sid=104"
     }
    ]
-  },
-  {
-   "keyword": "로버트 패틴슨 007 발탁",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-16T22:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "로버트 패틴슨, 차기 제임스 본드 낙점…역대 7번째 '007'",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-16T22:56:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014326054"
-    },
-    {
-     "title": "배트맨이 007 된다…로버트 패틴슨, 새 제임스 본드 발탁",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-16T22:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005764656?sid=104"
-    },
-    {
-     "title": "‘트와일라잇’ 로버트 패틴슨, 제7대 제임스 본드 낙점",
-     "press": "donga.com",
-     "publishedAt": "2026-11-16T22:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003762988?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "2026년 11월 17일 운세",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-16T21:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "2026년 11월 17일, 오늘의 띠별 운세 [인포그래픽]",
-     "press": "sisunnews.co.kr",
-     "publishedAt": "2026-11-16T23:00:00.000Z",
-     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=249194"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 17일 화요일 띠별 운세… 말띠 '대길', 토끼·...",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-16T22:06:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082951"
-    },
-    {
-     "title": "[오늘의 띠별 운세] 2026년 11월 17일 화요일",
-     "press": "mhns.co.kr",
-     "publishedAt": "2026-11-16T21:38:00.000Z",
-     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=769342"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 773,
+  "flagged": 774,
   "matched": 444,
   "avgLeadMin": 891,
   "recent": [
