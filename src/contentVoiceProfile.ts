@@ -7,6 +7,8 @@
  * 생성 프롬프트에 주입한다. 사람은 글마다 목소리가 조금씩 다르다 — 그걸 흉내
  * 내는 게 아니라 구조적으로 만든다.
  */
+import { PLAIN_VOICE_PROFILE_ENDING_LINE } from './content/homefeedPlainRegister.js';
+
 export interface VoiceProfile {
   /** 이번 글의 구어 종결 비중(%) — 15~35 사이 */
   casualShare: number;
@@ -64,7 +66,17 @@ export function sampleVoiceProfile(rng: () => number = Math.random): VoiceProfil
   };
 }
 
-export function buildVoiceProfileBlock(profile: VoiceProfile): string {
+/** plainRegister: homefeed topics written in plain endings (see content/homefeedPlainRegister). */
+export function buildVoiceProfileBlock(profile: VoiceProfile, options: { plainRegister?: boolean } = {}): string {
+  if (options.plainRegister) {
+    return `[VOICE PROFILE — 이 글만의 목소리 (매 글 달라짐)]
+이 글의 화자는 아래 습관을 가진 실제 사람이다. 규칙이 아니라 성격이므로 티 내지 말고 배어들게 하라.
+${PLAIN_VOICE_PROFILE_ENDING_LINE}
+- 이 글의 연결어 취향: ${profile.connectorTaste.join(', ')} — 접속사가 필요할 때 이쪽을 우선한다. "또한/그리고/하지만"만 반복하지 않는다.
+- 문단 리듬: ${profile.rhythm}
+- 이 글쓴이의 습관: ${profile.quirk}
+- 다른 글에서 쓰던 습관을 이 글에 복사하지 않는다. 위 프로필이 이 글의 전부다.`;
+  }
   return `[VOICE PROFILE — 이 글만의 목소리 (매 글 달라짐)]
 이 글의 화자는 아래 습관을 가진 실제 사람이다. 규칙이 아니라 성격이므로 티 내지 말고 배어들게 하라.
 - 종결어미 비율: 격식(합니다체) 소량, 해요체가 기본, 구어 종결(잖아요·거든요·더라구요류)을 전체의 약 ${profile.casualShare}% 섞는다. 같은 어미 3연속 금지.

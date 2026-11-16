@@ -14,8 +14,8 @@
     },
     {
       "path": "src/content/evaluators/humanlikeEval.ts",
-      "sha256": "64a5bee0b5cb9fcc8dbc27629a000aa947b310f9b52e0e91151f8734d858a981",
-      "bytes": 15340
+      "sha256": "8653f1bf613a0c43e233a5573741a7710a77ea709145f79c79ab339a056b70ed",
+      "bytes": 15519
     },
     {
       "path": "src/content/evaluators/safetyEval.ts",
@@ -29,8 +29,8 @@
     },
     {
       "path": "src/content/quality90Gate.ts",
-      "sha256": "3ddddded90a7199ad7880e5dce52819c28518785d40e558926c6eb0ddd6f8288",
-      "bytes": 8214
+      "sha256": "69f868165237e3b6d4f1639599c98d3751914f8e73c4387f80f5363e33a80497",
+      "bytes": 9215
     },
     {
       "path": "src/content/qualityEvaluator.ts",
@@ -39,13 +39,13 @@
     },
     {
       "path": "src/contentJsonPromptFormat.ts",
-      "sha256": "dc0d7e7c6fa1ded23851567bee20a86edfa6fb89db67d2f6b882850a76a8b357",
-      "bytes": 47377
+      "sha256": "c0fe3db46d19e364742550ff7532176489f7e8bd570ac0dc0bb143f45b5fef48",
+      "bytes": 47561
     },
     {
       "path": "src/promptLoader.ts",
-      "sha256": "68289c2112951c51fd122411886062ff8e75efeab83f0ffe2139239e8b0b8c99",
-      "bytes": 102736
+      "sha256": "aae31de5812a330bd10556063b04f425ad7c839329f6c061fca1fb29e7b72ff5",
+      "bytes": 105364
     },
     {
       "path": "src/prompts/affiliate/chain/editor.prompt",
@@ -554,7 +554,7 @@
     }
   ],
   "metadata": {
-    "repositoryHead": "fb5674b2e3494b38a6af980fe2f427cbbe0c2363",
+    "repositoryHead": "e99994cf6903efaaabba9256ba499e351489bdee",
     "nodeVersion": "v20.20.2",
     "platform": "win32"
   }

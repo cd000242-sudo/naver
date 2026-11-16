@@ -129,7 +129,8 @@ describe('contentGenerator 배선 — 소비자는 쇼핑 관통 patch 슬롯(�
     expect(src).toMatch(/const _reviewVoicePatch = Boolean\(_reviewVoiceDirective\);/);
     expect(src).toMatch(/const _allowGatePatch = allowPaidPostGenerationRepair \|\| \(allowThroughlineRepair && \(_throughlinePatch \|\| _reviewVoicePatch\)\);/);
     expect(src).toMatch(/_gateResult\.decision === 'patch' \|\| _humanFloorMiss \|\| _quality90HardMiss \|\| _throughlinePatch \|\| _reviewVoicePatch/);
-    expect(src).toMatch(/const _patchDirective = \[_throughlineDirective, _reviewVoiceDirective, _quality90Assessment\?\.directive \|\| _gateResult\?\.retryDirective \|\| ''\]\.filter\(Boolean\)\.join\('\\n'\)/);
+    // [2026-11-16] The evaluator fallback now passes through plainRegisterRetryDirective (plain-register homefeed topics).
+    expect(src).toMatch(/const _patchDirective = \[_throughlineDirective, _reviewVoiceDirective, _quality90Assessment\?\.directive \|\| plainRegisterRetryDirective\(source, _modeForGate, _gateResult\?\.retryDirective\)\]\.filter\(Boolean\)\.join\('\\n'\)/);
   });
   it('patch 뒤에 다시 감사해 남은 위반을 로그로 남긴다(두 번째 patch 는 없다)', () => {
     expect(src).toMatch(/\[ReviewVoice\] patch 후/);

@@ -22,6 +22,9 @@ import type { SubScore, EvaluationInput } from '../qualityEvaluator';
 import { auditAffiliateAuthenticity } from '../affiliateAuthenticity';
 import { auditEvidenceIntegrity } from '../evidenceIntegrity';
 
+/** Exported so the quality gate can swap it for plain-register posts (see content/homefeedPlainRegister). */
+export const ENDING_VARIETY_SUGGESTION = '"~요/~네요/~답니다/~거든요/~죠/~잖아요" 같은 다양한 어미 혼합';
+
 const SELF_CORRECTION = ['아 근데', '사실은', '근데 다시', '솔직히', '막상', '의외로', '처음엔', '그런데 보니', '알고보니', '생각해보니'];
 const INFORMAL = ['좀', '막', '되게', '엄청', '정말', '진짜', '완전', '대박', '제일', '꽤'];
 // ✅ [v2.10.182 Phase 2.5.2] 2026 네이버 통합탭 누락 회피 — AI 도입부 클리셰 차단 강화
@@ -181,7 +184,7 @@ export function evaluateHumanlike(input: EvaluationInput): SubScore {
     else {
       endingScore = 4;
       issues.push(`어미 다양성 ${(diversityRatio * 100).toFixed(0)}% — AI 같은 균일성 (연속 ${maxConsecutive}회)`);
-      suggestions.push('"~요/~네요/~답니다/~거든요/~죠/~잖아요" 같은 다양한 어미 혼합');
+      suggestions.push(ENDING_VARIETY_SUGGESTION);
     }
     details.endingDiversity = endingScore;
     total += endingScore;

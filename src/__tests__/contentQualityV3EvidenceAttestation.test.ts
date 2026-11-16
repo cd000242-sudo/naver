@@ -277,7 +277,10 @@ describe('Content Quality V3 evidence attestation', () => {
         // [2026-11-16] 홈판 지침 v5.2 1단계 — 홈판 프롬프트 7종 + 소제목 4~6개 정책 + 스포츠 배선으로 재계산
         //   (homefeed/base·health·it·living·fashion·entertainment·sports · headings-homefeed · promptLoader · contentJsonPromptFormat)
         //   + 제목 길이 33~42 → 25~40(홈판·제목 전용 프롬프트·점수기)
-        '695d7dfbcf13bd6728ebff98e147ef64d4e37b6d33b0d5421c4d9f1884876bbb',
+        // [2026-11-16] 홈판 평서체 주제(연예·스포츠·IT·자동차) 분기 — 베이스라인 대상 4개(promptLoader ·
+        //   contentJsonPromptFormat · quality90Gate · humanlikeEval)로 재계산. 런타임 지문은 여기에 더해
+        //   contentGenerator · contentVoiceProfile · content/homefeedPlainRegister(신규)도 함께 바뀜
+        'e7ce3d378c7b86c4e3ce3e53ba30531e00ed44cec35532ad5003c17ba2f6e8c5',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 

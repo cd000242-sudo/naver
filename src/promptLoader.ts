@@ -24,6 +24,10 @@ import { buildNeoHookPromptBlock } from './content/neoHookTitles.js';
 import { excludedBusinessAngleIds, type BusinessIndustry } from './content/businessIndustryDetector.js';
 import { skipsIncidentOverlays } from './content/issueOverlayGate.js';
 import { resolveHeadingCountRange } from './content/headingCountPolicy.js';
+import {
+  buildPlainRegisterFinalBlock, PLAIN_CORE_ENDINGS, PLAIN_HUMAN_RHYTHM_RULE, PLAIN_MODE_VOICE_LINES,
+  PLAIN_TONE_OVERRIDE_LINES, resolveHomefeedPlainKind, type HomefeedPlainKind,
+} from './content/homefeedPlainRegister.js';
 
 // 프롬프트 디렉토리 경로 (개발/프로덕션 환경 모두 지원)
 function getPromptsDir(): string {
@@ -171,6 +175,11 @@ export function resolveCategory(categoryHint?: string): PromptCategory {
   }
 
   return 'general';
+}
+
+/** Homefeed topics written in plain endings (guide v5.2): entertainment, sports, IT, cars. Null = polite register. */
+export function resolveHomefeedPlainRegister(mode?: string, categoryHint?: string): HomefeedPlainKind | null {
+  return resolveHomefeedPlainKind(mode, resolveCategory(categoryHint), categoryHint);
 }
 
 /**
@@ -739,7 +748,7 @@ export const TONE_PERSONAS: Record<string, { label: string; persona: string; for
   },
 };
 
-function getToneInstruction(toneStyle?: string): string {
+function getToneInstruction(toneStyle?: string, plainRegister: boolean = false): string {
   const ts = String(toneStyle || '').toLowerCase().trim();
   if (!ts) return '';
   const baseTone = TONE_PERSONAS[ts];
@@ -748,7 +757,7 @@ function getToneInstruction(toneStyle?: string): string {
     ...baseTone,
     rule: `${baseTone.rule}\n\n■ 근거 제한 (페르소나보다 우선):\n- 톤 설명의 경력·가족·직업·사용 경험·관람 경험은 문체 참고일 뿐 작성자 사실이 아니다.\n- 사용자 입력에 실제 근거가 없으면 "제가 직접", "저희 집", "수백 개를 봤다", "몇 년째 썼다" 같은 화자 설정을 만들지 않는다.`,
   };
-  const humanRhythmRule = [
+  const humanRhythmRule = plainRegister ? PLAIN_HUMAN_RHYTHM_RULE : [
     '■ 사람 말투 리듬:',
     '- 모든 글톤은 존댓말 기반이다. 평어 단정형(~다/~이다/~한다) 남발은 AI 보고서처럼 보이므로 본문 종결어미로 쓰지 않는다.',
     '- 한 단락 안에서 톤에 맞게 ~요체 대화형 + ~입니다/~합니다 정중 설명형 + 질문형 + 짧은 판단형을 섞어 사람 호흡을 만든다.',
@@ -908,10 +917,27 @@ export const MODE_VOICE_GUIDES: Record<PromptMode, string> = {
  * [v1.7.0] 노출 모드별 voice guide를 프롬프트 블록으로 반환
  * buildFullPrompt에서 [STYLE OVERRIDE] 위에 주입됨
  */
-export function getModeVoiceGuide(mode?: PromptMode): string {
+const HOMEFEED_POLITE_VOICE_LINES = `■ 홈판에 유리한 말투:
+  - 기본은 낮은 존댓말. ~해요/~네요/~죠/~입니다를 자연스럽게 섞는다.
+  - ~거든요/~잖아요/~더라고요는 글 전체의 양념이다. 같은 어미가 후렴처럼 반복되면 홈판에서도 AI 티가 난다.
+  - 한 문단은 한 판단만 담고, 완성된 생각 뒤에는 모바일에서 숨 쉴 수 있게 공백을 둔다.`;
+const HOMEFEED_POLITE_TONE_OVERRIDE_LINES = `■ 톤 오버라이드: 사용자 톤이 professional/formal/expert_review이어도
+  홈판은 자동으로 낮은 존댓말과 모바일 피드 리듬으로 완화한다. 단, 전문성/근거는 버리지 않는다.`;
+
+export function getModeVoiceGuide(mode?: PromptMode, plainRegister: boolean = false): string {
   if (!mode) return '';
-  const guide = MODE_VOICE_GUIDES[mode];
+  let guide = MODE_VOICE_GUIDES[mode];
   if (!guide) return '';
+  if (plainRegister && mode === 'homefeed') {
+    // If someone rewords the polite lines this swap becomes a no-op. Do not fail a user's generation for it:
+    // the final plain-register block still decides the endings, and homefeedPlainRegister.test.ts catches the drift.
+    if (!guide.includes(HOMEFEED_POLITE_VOICE_LINES) || !guide.includes(HOMEFEED_POLITE_TONE_OVERRIDE_LINES)) {
+      console.warn('[PromptLoader] homefeed MODE VOICE polite-register lines changed; plain-register swap skipped');
+    }
+    guide = guide
+      .replace(HOMEFEED_POLITE_VOICE_LINES, PLAIN_MODE_VOICE_LINES)
+      .replace(HOMEFEED_POLITE_TONE_OVERRIDE_LINES, PLAIN_TONE_OVERRIDE_LINES);
+  }
   return `\n\n═══════════════════════════════════════════\n${guide}═══════════════════════════════════════════\n`;
 }
 
@@ -970,7 +996,7 @@ export const DEFAULT_IDENTITY: BloggerIdentity = {
  * 필수 3필드 + 자동 추출 5필드 + 신뢰 4요소를 LLM이 내면화하도록 구성
  * 글에 직접 인용 금지 지시 포함 (인용되면 AI티 되므로)
  */
-export function buildIdentityBlock(identity?: BloggerIdentity, mode?: PromptMode): string {
+export function buildIdentityBlock(identity?: BloggerIdentity, mode?: PromptMode, plainRegister: boolean = false): string {
   const id = identity || DEFAULT_IDENTITY;
   // [2026-09-22 P1 프롬프트 다이어트] 구매자 신뢰 원칙은 리뷰·제휴·비즈니스 글의 규칙이다 — SEO/홈판 정보글에
   //   조건 없이 들어가던 5줄(공정위 고지·비교 대상·단점 명시)을 해당 모드에서만 넣는다.
@@ -987,7 +1013,7 @@ export function buildIdentityBlock(identity?: BloggerIdentity, mode?: PromptMode
 `
     : '';
 
-  const endingsStr = id.coreEndings
+  const endingsStr = (plainRegister ? PLAIN_CORE_ENDINGS : id.coreEndings)
     .map(e => e.ending)
     .join(' / ');
 
@@ -1344,13 +1370,15 @@ export function buildFullPrompt(
   const basePrompt = buildSystemPromptFromHint(mode, categoryHint, { primaryKeyword: issueGateKeyword || primaryKeyword });
 
   // 2. 말투(Tone) 보정 프롬프트 추가 (가장 강력하게 작용하도록 상단 배치 고려 가능하나, 보통 뒤에 붙여도 됨)
-  const tonePrompt = getToneInstruction(toneStyle);
+  // [2026-11-16] Homefeed guide v5.2: entertainment/sports/IT/car posts are written in plain endings.
+  const plainKind = resolveHomefeedPlainRegister(mode, categoryHint);
+  const tonePrompt = getToneInstruction(toneStyle, plainKind !== null);
 
   // ✅ [v1.7.0] 노출 모드별 Voice Guide — SEO/홈판/트래픽헌터/제휴/비즈니스 별 글 구조+어미 규칙
-  const modeVoiceGuide = getModeVoiceGuide(mode);
+  const modeVoiceGuide = getModeVoiceGuide(mode, plainKind !== null);
 
   // ✅ [v1.8.0 LDF] Blogger Identity Core — 언어 DNA 페르소나
-  const identityBlock = buildIdentityBlock(bloggerIdentity, mode);
+  const identityBlock = buildIdentityBlock(bloggerIdentity, mode, plainKind !== null);
 
   // ✅ [v2.4.0 Prompt Diet] base.prompt 중복 외부 가이드 제거 (ctrCombat/Precision)
   // ✅ [v2.6.0 Neo-Hook] 제목 후킹만큼은 base.prompt에 **없는 신박 레이어**이므로 주입
@@ -1533,6 +1561,12 @@ ${numbered}
 → 지정된 줄 앞에 임의 문장을 추가하지 마라.
 → 이 줄들은 사용자의 1차 경험 데이터이므로 QUMA/DIA+가 신뢰하는 신호다.
 `;
+  }
+
+  // Last on purpose: static prompt files above still carry polite-register sentences (shared with other
+  // topics and modes); the final block tells the model which rule wins for this post.
+  if (plainKind) {
+    finalPrompt += `\n\n${buildPlainRegisterFinalBlock(plainKind)}\n`;
   }
 
   return finalPrompt;

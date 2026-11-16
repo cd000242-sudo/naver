@@ -202,7 +202,8 @@ describe('contentGenerator 배선 — 소비자는 기존 재생성/patch 뿐', 
   });
   it('patch 조건에 _throughlinePatch 가 들어가고 지시가 함께 넘어간다', () => {
     expect(src).toMatch(/_gateResult\.decision === 'patch' \|\| _humanFloorMiss \|\| _quality90HardMiss \|\| _throughlinePatch/);
-    expect(src).toMatch(/const _patchDirective = \[_throughlineDirective, _reviewVoiceDirective, _quality90Assessment\?\.directive \|\| _gateResult\?\.retryDirective \|\| ''\]\.filter\(Boolean\)\.join\('\\n'\)/);
+    // [2026-11-16] The evaluator fallback now passes through plainRegisterRetryDirective (plain-register homefeed topics).
+    expect(src).toMatch(/const _patchDirective = \[_throughlineDirective, _reviewVoiceDirective, _quality90Assessment\?\.directive \|\| plainRegisterRetryDirective\(source, _modeForGate, _gateResult\?\.retryDirective\)\]\.filter\(Boolean\)\.join\('\\n'\)/);
     expect(src).toMatch(/selfCritiqueAndRewrite\(\s*optimized\.bodyPlain,\s*_patchPersona,[^;]*_patchDirective,\s*_patchConclusion \|\| undefined,/);
   });
   /**

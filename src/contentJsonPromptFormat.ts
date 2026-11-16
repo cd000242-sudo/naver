@@ -48,6 +48,8 @@ export interface ContentJsonOutputFormatOptions {
   subKeywords: string;
   metrics?: { searchVolume?: number; documentCount?: number };
   minChars?: number;
+  /** Homefeed topic written in plain endings — the caller decides (it holds the resolved category hint). */
+  plainRegister?: boolean;
 }
 
 /*
@@ -399,6 +401,7 @@ export function buildContentJsonOutputFormat(options: ContentJsonOutputFormatOpt
     subKeywords,
     metrics,
     minChars,
+    plainRegister = false,
   } = options;
 
   const isHomefeed = mode === 'homefeed';
@@ -492,7 +495,7 @@ imagePrompt 규칙: 각 소제목 본문 문맥과 일치하는 구체적 한국
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 [원본 텍스트]
-${structureDirective}${buildBusinessAngleBlock(contentMode, source)}${buildVoiceProfileBlock(sampleVoiceProfile())}
+${structureDirective}${buildBusinessAngleBlock(contentMode, source)}${buildVoiceProfileBlock(sampleVoiceProfile(), { plainRegister })}
 ${buildPreviousTitlesBlock(source, contentMode)}${contentMode === 'business' ? buildBusinessInfoBlock(source.businessInfo, { title, primaryKeyword }) : ''}${buildCustomPromptBlock(source)}
 ══════════════════════════════════════════
 🎯 [필수 키워드 정보 — 제목/소제목 작성에 반드시 반영]

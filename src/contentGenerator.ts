@@ -62,7 +62,7 @@ import { optimizeContentForNaver, optimizeHtmlForNaver, analyzeNaverScore, reset
 import { analyzeContentBySemantic, isLlmRubricEnabled } from './contentSemanticScoring.js';
 import { buildPersonaCard } from './authgrDefense.js';
 import { selfCritiqueAndRewrite, isSelfCritiqueEnabled } from './contentSelfCritique.js';
-import { buildSystemPromptFromHint, buildFullPrompt, loadShoppingPrompt, getGeoOverlayPrompt, resolveCategory, HOMEFEED_ISSUE_STORY_CATEGORIES, loadPromptFile, type PromptMode } from './promptLoader.js';
+import { buildSystemPromptFromHint, buildFullPrompt, loadShoppingPrompt, getGeoOverlayPrompt, resolveCategory, resolveHomefeedPlainRegister, HOMEFEED_ISSUE_STORY_CATEGORIES, loadPromptFile, type PromptMode } from './promptLoader.js';
 import { resolveHomefeedIssueHint } from './content/homefeedIssueHint.js';
 import { computeHomefeedTitleQuoteIssues } from './content/homefeedTitleQuoteUse.js';
 import { computeHomefeedTitleGateIssues, judgeTitleReplacement } from './content/homefeedTitleGate.js';
@@ -78,6 +78,7 @@ import { appendPublicInfoFactTable, shouldRequireFactTable } from './content/pub
 import {
   assessQuality90Gate,
   isQuality90Mode,
+  toPlainRegisterDirective,
 } from './content/quality90Gate.js';
 import {
   auditAffiliateAuthenticity,
@@ -1402,6 +1403,30 @@ JSON:
 
 // [Phase 3-9/v2.10.147] evaluateTitleQuality -> contentTitleEvaluator.ts
 
+/**
+ * Category hint exactly as the main prompt builder resolves it: an unselected homefeed post is upgraded
+ * from its material. Side paths (intro rewrite, quality gate) must use this so the register stays the same.
+ */
+function resolvePromptCategoryHint(source: ContentSource, mode: string | undefined): string | undefined {
+  const raw = source.categoryHint as string | undefined;
+  return resolveHomefeedIssueHint(
+    mode,
+    raw,
+    resolveCategory(raw) === 'general',
+    `${source.title || ''}\n${source.rawText?.trim() || ''}`,
+  ).hint;
+}
+
+function isPlainRegisterPost(source: ContentSource, mode: string | undefined): boolean {
+  return resolveHomefeedPlainRegister(mode, resolvePromptCategoryHint(source, mode)) !== null;
+}
+
+/** The evaluator's own retry directive, with polite-ending advice swapped out for plain-register posts. */
+function plainRegisterRetryDirective(source: ContentSource, mode: string | undefined, directive: string | null | undefined): string {
+  const text = directive || '';
+  return text && isPlainRegisterPost(source, mode) ? toPlainRegisterDirective(text) : text;
+}
+
 async function generateHomefeedIntroOnlyPatch(
   source: ContentSource,
   current: StructuredContent,
@@ -1410,7 +1435,7 @@ async function generateHomefeedIntroOnlyPatch(
   issues: readonly string[] = [],
   readerSituation: string = '',
 ): Promise<{ introduction?: string } | null> {
-  const categoryHint = source.categoryHint as string | undefined;
+  const categoryHint = resolvePromptCategoryHint(source, 'homefeed');
   const systemPrompt = buildFullPrompt('homefeed', categoryHint, false, undefined, undefined, (source as any).hookHint, buildRecentWinnersBlock(source), undefined, undefined, (source as any).structureGuideBlock);
   const selectedTitle = String(current?.selectedTitle || '').trim();
 
@@ -1426,7 +1451,7 @@ ${schema}
 - 정확히 3줄
 - 첫 문장 15~25자 이내
 - 배경 설명/요약/정리 금지
-- 문체: 사용자 설정 글톤 어미 적용 (기본: 자연스러운 구어체)
+- 문체: ${resolveHomefeedPlainRegister('homefeed', categoryHint) ? '평서체(~다/~했다/~보인다). 존댓말 종결 금지 — 본문과 같은 말투' : '사용자 설정 글톤 어미 적용 (기본: 자연스러운 구어체)'}
 - ⚠️ 서브키워드 1개 이상 도입부에 자연스럽게 포함
 - 첫 문장은 독자가 겪는 구체 상황으로 시작한다(처음·헷갈·고민·~할 때·~하면). 둘째 문장에 이 글에서 얻을 기준·차이·확인 항목을 말한다.
 ${issues.length > 0 ? `- 고칠 점(게이트 지적):\n${issues.map((issue) => `  · ${issue}`).join('\n')}` : ''}
@@ -3262,6 +3287,8 @@ export function buildModeBasedPrompt(
     subKeywords,
     metrics,
     minChars,
+    // Same variable the system prompt is built with (contentMode), so both halves agree.
+    plainRegister: resolveHomefeedPlainRegister(contentMode, categoryHint) !== null,
   });
 
   let finalContract = '';
@@ -8501,7 +8528,7 @@ async function generateStructuredContentInternal(
           if (_gateResult.safetyScore.issues.length > 0) {
             console.log(`[QualityGate] safety issues: ${_gateResult.safetyScore.issues.slice(0, 2).join(' / ')}`);
           }
-          _quality90Assessment = assessQuality90Gate(_gateResult, _modeForGate);
+          _quality90Assessment = assessQuality90Gate(_gateResult, _modeForGate, { plainRegister: isPlainRegisterPost(source, _modeForGate) });
           if (_quality90Assessment.miss) {
             console.warn(`[QualityGate90] 🚧 자동 발행 하한 미달 — ${_quality90Assessment.blockingReasons.join(', ')}`);
           } else if (_quality90Assessment.nearTargetAccepted) {
@@ -8640,7 +8667,7 @@ async function generateStructuredContentInternal(
           _qualityGateRetryUsed = true;
           const _gateDirective = _quality90Assessment?.miss
             ? _quality90Assessment.directive
-            : (_gateResult.retryDirective || '');
+            : plainRegisterRetryDirective(source, _modeForGate, _gateResult.retryDirective);
           const _trigger = _quality90Assessment?.miss
             ? `QualityGate90 ${_quality90Assessment.reasons.join(', ')}`
             : (_gateResult.safetyScore.score < 50
@@ -8669,7 +8696,7 @@ async function generateStructuredContentInternal(
         // [2026-09-06 R0] 결론도 patch 대상 — 게이트 지시가 결론을 짚어도 고칠 수 있게 함께 넘기고 갈라 받는다.
         const _patchConclusion = String(optimized.conclusion || '').trim();
         // [R3] 관통 지시가 있으면 게이트 지시 앞에 둔다 — 결론 복귀가 먼저, 점수 항목은 그 다음.
-        const _patchDirective = [_throughlineDirective, _reviewVoiceDirective, _quality90Assessment?.directive || _gateResult?.retryDirective || ''].filter(Boolean).join('\n');
+        const _patchDirective = [_throughlineDirective, _reviewVoiceDirective, _quality90Assessment?.directive || plainRegisterRetryDirective(source, _modeForGate, _gateResult?.retryDirective)].filter(Boolean).join('\n');
         const _throughlinePatchLabel = [
           _throughlinePatch ? `흐름 관통 실패(${_throughline?.breakAt})` : '',
           _reviewVoicePatch ? `쇼핑 화자 위반(${_reviewVoice?.issues.map((i) => i.code).join(',')})` : '',
@@ -8747,7 +8774,7 @@ async function generateStructuredContentInternal(
                   aiExperienceOptIn: source.aiExperienceGeneration === true,
                   sourceIsUrl: !!(source as any).url || source.sourceType === 'naver_news' || source.sourceType === 'daum_news',
                 });
-                _quality90Assessment = assessQuality90Gate(_gateResult, _modeForGate);
+                _quality90Assessment = assessQuality90Gate(_gateResult, _modeForGate, { plainRegister: isPlainRegisterPost(source, _modeForGate) });
                 console.log(`[QualityGate90] patch 후 재평가: mode=${_gateResult.modeScore.score}/100 · final=${_gateResult.finalScore}/100 · human=${_gateResult.humanlikeScore.score}/100 · miss=${_quality90Assessment.miss}`);
               } catch (recheckErr) {
                 console.warn('[QualityGate90] patch 후 재평가 실패:', (recheckErr as Error)?.message);

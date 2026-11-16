@@ -83,7 +83,8 @@ describe('human voice palette (구어체 개방)', () => {
   it('보이스 프로필이 생성 프롬프트(user 파트 랜덤 구역)에 주입된다', () => {
     const jsonFormat = read('contentJsonPromptFormat.ts');
     // 캐시 무효화 전례(v1.4.18) 때문에 랜덤 블록은 구조 지시문과 같은 구역에만 둔다
-    expect(jsonFormat).toContain('buildVoiceProfileBlock(sampleVoiceProfile())');
+    // [2026-11-16] plain-register topics pass an option; the profile is still sampled per post.
+    expect(jsonFormat).toContain('buildVoiceProfileBlock(sampleVoiceProfile(), { plainRegister })');
     const loader = read('promptLoader.ts');
     expect(loader).not.toContain('buildVoiceProfileBlock');
   });

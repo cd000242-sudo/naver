@@ -1,4 +1,6 @@
 import type { EvaluationResult, Mode } from './qualityEvaluator';
+import { ENDING_VARIETY_SUGGESTION } from './evaluators/humanlikeEval.js';
+import { PLAIN_ENDING_VARIETY_SUGGESTION, PLAIN_REGEN_ENDING_DIRECTIVE } from './homefeedPlainRegister.js';
 
 export const QUALITY90_TARGET_SCORE = 90;
 export const QUALITY90_FALLBACK_MIN_SCORE = 80;
@@ -94,10 +96,17 @@ function buildScoreReason(label: string, score: number): string | null {
     : null;
 }
 
+/** Evaluator directives suggest polite endings; a plain-register post must not be rewritten toward them. */
+export function toPlainRegisterDirective(text: string): string {
+  return text.split(ENDING_VARIETY_SUGGESTION).join(PLAIN_ENDING_VARIETY_SUGGESTION);
+}
+
 export function assessQuality90Gate(
   result: Pick<EvaluationResult, 'modeScore' | 'humanlikeScore' | 'safetyScore' | 'finalScore' | 'decision' | 'retryDirective'>,
   mode: string,
+  options: { plainRegister?: boolean } = {},
 ): Quality90GateAssessment {
+  const plainRegister = options.plainRegister === true;
   if (!isQuality90Mode(mode)) {
     return {
       enabled: false,
@@ -148,7 +157,8 @@ export function assessQuality90Gate(
     ...result.modeScore.suggestions.slice(0, 3),
     ...result.humanlikeScore.suggestions.slice(0, HUMANLIKE_90_MODES.has(mode as Mode) ? 3 : 1),
     ...result.safetyScore.suggestions.slice(0, 2),
-  ];
+  // A plain-register post must not be regenerated toward polite endings.
+  ].map((suggestion) => (plainRegister && suggestion === ENDING_VARIETY_SUGGESTION ? PLAIN_ENDING_VARIETY_SUGGESTION : suggestion));
 
   const directive = passed
     ? ''
@@ -167,10 +177,14 @@ export function assessQuality90Gate(
           '- 제공된 실제 사실과 후기 범위 밖의 직접 사용 경험, 성능 단정, 사회적 반응은 만들지 않기',
         ] : []),
         '- 독자가 바로 저장하거나 인용할 수 있는 결론, 기준, 예외, 체크리스트, 표/FAQ를 자연스럽게 포함',
-        '- AI 보고체, 일반론, 딱딱한 ~다 종결을 줄이고 실제 사람이 설명하는 문장 흐름으로 수정',
+        plainRegister
+          ? `- AI 보고체, 일반론을 줄이고 실제 사람이 말하는 문장 흐름으로 수정. ${PLAIN_REGEN_ENDING_DIRECTIVE}`
+          : '- AI 보고체, 일반론, 딱딱한 ~다 종결을 줄이고 실제 사람이 설명하는 문장 흐름으로 수정',
         issueLines.length > 0 ? `\n우선 해결할 문제:\n${issueLines.map((issue) => `- ${issue}`).join('\n')}` : '',
         suggestionLines.length > 0 ? `\n구체 개선 지시:\n${suggestionLines.map((suggestion) => `- ${suggestion}`).join('\n')}` : '',
-        result.retryDirective ? `\n기존 QualityGate 지시:\n${result.retryDirective}` : '',
+        result.retryDirective
+          ? `\n기존 QualityGate 지시:\n${plainRegister ? toPlainRegisterDirective(result.retryDirective) : result.retryDirective}`
+          : '',
       ].filter(Boolean).join('\n');
 
   return {
