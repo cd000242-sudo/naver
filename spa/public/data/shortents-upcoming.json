@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T02:41:00.327Z",
+ "builtAt": "2026-11-16T02:51:03.382Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,90 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 14,
  "candidates": [
+  {
+   "keyword": "수능 AI 부정행위 대책 필요",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 67,
+   "recent20": 14,
+   "press": 47,
+   "firstArticleAt": "2026-11-16T01:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“AI 부정 대책있나, 수능 연기해야” 미미미누 작심 발언",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-16T02:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002833066?sid=102"
+    },
+    {
+     "title": "수능 D-3 'AI 커닝'에 불신 확산…중국은 '전파차단', 인도는 '알몸시험...",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-16T02:46:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903186"
+    },
+    {
+     "title": "수능 앞두고 'AI 커닝' 비상…정치권, 가중처벌·연기론 확산",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-16T02:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004210122?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "조정식 국회의장 공동위원장",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 74,
+   "recent20": 19,
+   "press": 45,
+   "firstArticleAt": "2026-11-16T01:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "조정식, 내년 개헌 로드맵 구체화…국힘 \"이번 정부선 개헌 없다\"",
+     "press": "straightnews.co.kr",
+     "publishedAt": "2026-11-16T02:48:00.000Z",
+     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=315421"
+    },
+    {
+     "title": "국회의장, 野 합의 없이 '개헌 자문위' 출범 … 위원장에 정세균-김형오",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-16T02:46:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/16/2026111650151.html"
+    },
+    {
+     "title": "조정식 국회의장, 헌법개정자문위원회 공동위원장에 김형오·정세균 전...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-16T02:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009291038?sid=100"
+    }
+   ]
+  },
   {
    "keyword": "대법, 한덕수 내란 선고",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 72,
-   "recent20": 7,
-   "press": 56,
-   "firstArticleAt": "2026-11-16T01:12:00.000Z",
+   "articles90": 54,
+   "recent20": 3,
+   "press": 44,
+   "firstArticleAt": "2026-11-16T01:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "대법, 한덕수 내란사건 19일 선고",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-16T02:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002724015?sid=102"
+    },
     {
      "title": "'김건희 3대 의혹' 19일 대법 선고... 항소심 징역 4년",
      "press": "fnnews.com",
@@ -33,108 +103,38 @@
      "press": "ajunews.com",
      "publishedAt": "2026-11-16T02:34:00.000Z",
      "link": "https://www.ajunews.com/view/20261116111941923"
-    },
-    {
-     "title": "비판여론 못 버텼나…대법, '한덕수 내란 재판' 구속 만료 하루 전 선고...",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-16T02:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002465988?sid=102"
     }
    ]
   },
   {
-   "keyword": "서울중수청 명륜당 압수수색",
+   "keyword": "명륜당 압수수색",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 51,
-   "recent20": 3,
-   "press": 51,
-   "firstArticleAt": "2026-11-16T01:12:00.000Z",
+   "articles90": 40,
+   "recent20": 4,
+   "press": 40,
+   "firstArticleAt": "2026-11-16T01:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "서울중수청, ‘명륜진사갈비’ 운영 명륜당 압수수색",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-16T02:34:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=73094"
+     "title": "서울중수청, '연 18% 고금리 대출' 명륜진사갈비 본사 압수수색",
+     "press": "sateconomy.co.kr",
+     "publishedAt": "2026-11-16T02:50:00.000Z",
+     "link": "https://sateconomy.co.kr/news/view/1065580461622995"
+    },
+    {
+     "title": "중수청, 명륜당 본사·회장 자택 등 26곳 압수수색…첫 공정거래법 수사",
+     "press": "donga.com",
+     "publishedAt": "2026-11-16T02:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003762724?sid=102"
     },
     {
      "title": "명륜진사갈비 본사 압수수색…'회장 일가 대부업체 부당지원' 혐의",
      "press": "ebn.co.kr",
      "publishedAt": "2026-11-16T02:34:00.000Z",
      "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1731799"
-    },
-    {
-     "title": "서울중수청 첫 압수수색…명륜당 '회장 일가 대부업체 지원' 의혹",
-     "press": "cstimes.com",
-     "publishedAt": "2026-11-16T02:26:00.000Z",
-     "link": "https://www.cstimes.com/news/articleView.html?idxno=728011"
-    }
-   ]
-  },
-  {
-   "keyword": "조정식 국회의장 공동위원장",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 69,
-   "recent20": 16,
-   "press": 44,
-   "firstArticleAt": "2026-11-16T01:25:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "개헌 관련 기자회견 들어서는 조정식 국회의장",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-16T02:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009291027?sid=100"
-    },
-    {
-     "title": "취재진 질문 받는 조정식 국회의장",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-16T02:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009291030?sid=100"
-    },
-    {
-     "title": "조정식 국회의장, 헌법개정자문위원회 공동위원장 발표",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-16T02:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009291033?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "공모",
-   "sources": [
-    "google"
-   ],
-   "articles90": 19,
-   "recent20": 10,
-   "press": 18,
-   "firstArticleAt": "2026-11-16T02:14:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "LH, 남양주왕숙 등 10개 블록 9065호 민간참여사업 공모",
-     "press": "newslock.co.kr",
-     "publishedAt": "2026-11-16T02:38:00.000Z",
-     "link": "http://www.newslock.co.kr/news/articleView.html?idxno=140137"
-    },
-    {
-     "title": "삼성바이오로직스, 2조 6650억 원 규모 유상증자 일반공모 청약 마감",
-     "press": "nbntv.co.kr",
-     "publishedAt": "2026-11-16T02:38:00.000Z",
-     "link": "https://www.nbntv.co.kr/news/articleView.html?idxno=4027497"
-    },
-    {
-     "title": "LH, 연말까지 9000가구 민간참여사업 공모…사업기간 단축 평가 신설",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-16T02:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004682606?sid=101"
     }
    ]
   },
@@ -143,10 +143,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 22,
-   "recent20": 3,
-   "press": 18,
-   "firstArticleAt": "2026-11-16T01:12:00.000Z",
+   "articles90": 16,
+   "recent20": 1,
+   "press": 14,
+   "firstArticleAt": "2026-11-16T01:25:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -167,134 +167,6 @@
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-16T02:25:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012294507?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "이호선, 모친상 조의금 기부",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 17,
-   "recent20": 4,
-   "press": 17,
-   "firstArticleAt": "2026-11-16T01:15:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'모친상' 이호선, 조의금 1억 90만 원 전액 기부…\"사랑밖에는 답이 없다...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-16T02:35:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001408427"
-    },
-    {
-     "title": "'이혼숙려캠프' 이호선, 모친상 조의금 1억 90만 원 기부",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-16T02:34:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95365"
-    },
-    {
-     "title": "이호선, 모친상 조의금 1억90만원 전액 기부…“사랑밖에는 답이 없다”...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-16T02:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004175457?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "최민희 의원 하이에나 고소",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 26,
-   "recent20": 1,
-   "press": 17,
-   "firstArticleAt": "2026-11-16T01:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한국사진기자협회, \"하이에나 떼들\" 최민희 의원 모욕죄 고소",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-16T02:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004210112?sid=102"
-    },
-    {
-     "title": "사진기자협회, “하이에나 떼들” 최민희 경찰 고소…모욕죄 성립 주장",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-16T02:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005764272?sid=102"
-    },
-    {
-     "title": "한국사진기자협회, ‘하이에나 떼 발언’ 최민희 모욕죄로 고소",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-16T02:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002832376?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "김유정 100일 거짓말",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 12,
-   "recent20": 4,
-   "press": 11,
-   "firstArticleAt": "2026-11-16T01:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'100일의 거짓말' 김유정, 총구 앞 얼어붙은 엔딩",
-     "press": "atstar1.com",
-     "publishedAt": "2026-11-16T02:38:00.000Z",
-     "link": "https://m.entertain.naver.com/article/415/0000053840"
-    },
-    {
-     "title": "'100일의 거짓말' 진선규, 김현주·이무생과 숨 막히는 대립",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-16T02:38:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16277697"
-    },
-    {
-     "title": "‘100일의 거짓말’ 김유정, '강단↔불안' 감정의 온도차 빛난 열연",
-     "press": "swtvnews.com",
-     "publishedAt": "2026-11-16T02:30:00.000Z",
-     "link": "https://www.swtvnews.com/news/newsview.php?ncode=1065577880655662"
-    }
-   ]
-  },
-  {
-   "keyword": "2027 수능 문답지 배부 시작",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-16T01:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "수능 문답지 전국 시험지구에 배부 시작",
-     "press": "namdonews.com",
-     "publishedAt": "2026-11-16T02:08:00.000Z",
-     "link": "https://www.namdonews.com/news/articleView.html?idxno=929324"
-    },
-    {
-     "title": "코앞으로 다가온 수능… 2027학년도 수능 문답지 배부 시작",
-     "press": "edu.chosun.com",
-     "publishedAt": "2026-11-16T01:56:00.000Z",
-     "link": "https://edu.chosun.com/site/data/html_dir/2026/11/16/2026111680046.html"
-    },
-    {
-     "title": "수능 문제지·답안지, 전국 85개 시험지구 배부 시작",
-     "press": "tbs.seoul.kr",
-     "publishedAt": "2026-11-16T01:44:00.000Z",
-     "link": "http://tbs.seoul.kr/news/newsView.do?typ_800=6&idx_800=3538771&seq_800=20531672"
     }
    ]
   },
@@ -332,6 +204,38 @@
    ]
   },
   {
+   "keyword": "2027 수능 문답지 배부 시작",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-16T01:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "수능 문제지·답안지, 전국 85개 시험지구 배부 시작",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-16T02:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002433386?sid=102"
+    },
+    {
+     "title": "수능 문답지 전국 시험지구에 배부 시작",
+     "press": "namdonews.com",
+     "publishedAt": "2026-11-16T02:08:00.000Z",
+     "link": "https://www.namdonews.com/news/articleView.html?idxno=929324"
+    },
+    {
+     "title": "코앞으로 다가온 수능… 2027학년도 수능 문답지 배부 시작",
+     "press": "edu.chosun.com",
+     "publishedAt": "2026-11-16T01:56:00.000Z",
+     "link": "https://edu.chosun.com/site/data/html_dir/2026/11/16/2026111680046.html"
+    }
+   ]
+  },
+  {
    "keyword": "10월 ICT 수출",
    "sources": [
     "signal.bz"
@@ -362,75 +266,11 @@
      "link": "https://www.mtnews.net/news/articleView.html?idxno=26545"
     }
    ]
-  },
-  {
-   "keyword": "이현중",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-16T01:21:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이현중, 진짜 NBA 진출하나…3점슛 6개+25득점→또 G리그 '커리어 하이'",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-16T02:24:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/445/0000490634"
-    },
-    {
-     "title": "'크레이지 모드' 4Q를 지배한 이현중, 3점슛 6개 포함 25P 7R 4A 기록하며...",
-     "press": "rookie.co.kr",
-     "publishedAt": "2026-11-16T01:32:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/398/0000105311"
-    },
-    {
-     "title": "‘4쿼터에만 3점 5방·16점 대폭발’ 이현중, 25점 맹폭으로 립시티 연장...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-16T01:25:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/241/0003541906"
-    }
-   ]
-  },
-  {
-   "keyword": "박혜연",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-16T01:31:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "양정아와는 달랐다‥김승수, 16세 연하 박혜연에 진심 “전 안 돼요?”...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-16T01:56:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001187912"
-    },
-    {
-     "title": "\"전 안돼요?\" 김승수, 53세에 전한 핑크빛 소식..♥박혜연과 커플 탄생하...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-16T01:36:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005641256"
-    },
-    {
-     "title": "배우♥아나운서 부부 탄생하나…김승수, '14살 연하' 박혜연에 \"전 안 돼...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-16T01:31:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000784621"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 577,
+  "flagged": 579,
   "matched": 307,
   "avgLeadMin": 744,
   "recent": [
