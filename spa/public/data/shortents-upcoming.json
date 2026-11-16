@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T14:53:51.004Z",
+ "builtAt": "2026-11-16T15:03:59.066Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,34 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "AI 안경 수능 부정 우려",
+   "keyword": "AI 안경 수능 논란",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 2,
+   "articles90": 11,
+   "recent20": 6,
    "press": 11,
-   "firstArticleAt": "2026-11-16T13:28:00.000Z",
+   "firstArticleAt": "2026-11-16T13:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“수능 미루는 게 답 아닐까”…일타강사 조정식, 작심하고 꺼낸 말",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-16T14:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006410750?sid=102"
+     "title": "CNN·FT도 주목한 한국 수능…AI 부정행위에 안경까지 검사",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-16T15:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005605179?sid=104"
     },
     {
-     "title": "수능 D-3, AI 부정행위 막아야…제주 시험장마다 전담인력 배치",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-16T14:36:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3753988"
+     "title": "[사설] '나는 AI커닝, 기는 정부' 수능대책 완벽한가",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-16T15:02:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261116010006122"
     },
     {
-     "title": "수능 D-3, 경찰 'AI 부정행위' 전면전…장비 판매자도 수사",
-     "press": "weekly.chosun.com",
-     "publishedAt": "2026-11-16T14:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/053/0000063093?sid=102"
+     "title": "'부정행위 도구' 오명 쓸라…스마트안경 제조사 부담 ↑",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-16T15:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000552522?sid=105"
     }
    ]
   },
@@ -48,7 +48,7 @@
     "signal.bz"
    ],
    "articles90": 9,
-   "recent20": 2,
+   "recent20": 0,
    "press": 9,
    "firstArticleAt": "2026-11-16T13:39:00.000Z",
    "exclusive": false,
@@ -80,7 +80,7 @@
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-16T13:56:00.000Z",
    "exclusive": false,
@@ -109,10 +109,16 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 726,
-  "matched": 391,
-  "avgLeadMin": 820,
+  "flagged": 727,
+  "matched": 392,
+  "avgLeadMin": 819,
   "recent": [
+   {
+    "keyword": "서수남 딸 사망",
+    "hitKeyword": "서수남 딸 사망 고백",
+    "hitAt": "2026-11-17T00:00:00+09:00",
+    "leadMin": 437
+   },
    {
     "keyword": "은행",
     "hitKeyword": "하나은행 우리은행 승리",
@@ -166,12 +172,6 @@
     "hitKeyword": "블랙핑크 YG 전속계약 제외",
     "hitAt": "2026-11-16T21:00:00+09:00",
     "leadMin": 196
-   },
-   {
-    "keyword": "블랙핑크 YG 계약 논의 중",
-    "hitKeyword": "블랙핑크 YG 전속계약 제외",
-    "hitAt": "2026-11-16T21:00:00+09:00",
-    "leadMin": 39
    }
   ]
  }
