@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T04:31:53.329Z",
+ "builtAt": "2026-11-16T04:41:57.069Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,197 +8,199 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 14,
+ "measured": 18,
  "candidates": [
   {
-   "keyword": "JTBC 올림픽 중계권 해지",
+   "keyword": "수능 AI 부정행위 대책 필요",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 19,
-   "recent20": 4,
-   "press": 19,
-   "firstArticleAt": "2026-11-16T03:06:00.000Z",
+   "articles90": 43,
+   "recent20": 15,
+   "press": 35,
+   "firstArticleAt": "2026-11-16T03:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "JTBC, 올림픽 중계권 계약 해지…\"사업 지속 어려워\"",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-16T04:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001978401?sid=102"
+     "title": "수능 D-3…AI 부정행위 차단 '총력'…교육부 \"수능 연기, 없다\"",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-16T04:40:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261116010005970"
     },
     {
-     "title": "'기업회생' JTBC, 재정 압박에 결국 IOC 올림픽 중계권 계약 해지",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-16T04:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000121470?sid=101"
+     "title": "\"난 수도권 의대 진학했다\"…AI 부정행위 고백 글에 수험가 술렁",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-16T04:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005604816?sid=102"
     },
     {
-     "title": "[오피셜] JTBC, 올림픽 중계권 계약 해지…2028 LA 대회부터 안 한다→\"재...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-16T04:19:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/311/0002081028"
+     "title": "野, 'AI 커닝' 논란에 수능 연기 제안 ... \"수능 줄소송 이어질 수도\"",
+     "press": "queen.co.kr",
+     "publishedAt": "2026-11-16T04:36:00.000Z",
+     "link": "http://www.queen.co.kr/news/articleView.html?idxno=466374"
     }
    ]
   },
   {
-   "keyword": "한덕수 19일 선고",
+   "keyword": "한덕수 내란 선고",
    "sources": [
-    "nate"
+    "signal.bz",
+    "daum"
    ],
    "articles90": 25,
-   "recent20": 2,
+   "recent20": 3,
    "press": 18,
-   "firstArticleAt": "2026-11-16T03:05:00.000Z",
+   "firstArticleAt": "2026-11-16T03:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "대법원, 한덕수 내란중요임무 혐의 19일 선고",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-16T04:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000367637?sid=115"
+     "title": "대법, 19일 한덕수 내란 사건 선고 … 김건희 '3대 의혹'도 결론",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-16T04:40:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/16/2026111650201.html"
     },
     {
-     "title": "대법원, 19일 한덕수 내란중요임무종사 혐의 선고…김건희 선고도(종합...",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-16T04:18:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/325430/?sc=Naver"
+     "title": "한덕수 파기환송 묻자…법원행정처장 \"법리 따라 판단\"",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-16T04:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000142356?sid=102"
     },
     {
-     "title": "[사설] 한덕수 선고 확정한 대법원, 재판 지연 책임은 남는다",
+     "title": "법원행정처장 \"한덕수·김건희 상고심, 대법관 전원 충분히 숙의…법리...",
      "press": "jnilbo.com",
-     "publishedAt": "2026-11-16T04:09:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000083131"
+     "publishedAt": "2026-11-16T04:30:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000083140"
     }
    ]
   },
   {
-   "keyword": "SKT 효성 AI 센터 구축",
+   "keyword": "한화",
    "sources": [
-    "nate"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 17,
-   "recent20": 3,
-   "press": 17,
-   "firstArticleAt": "2026-11-16T03:02:00.000Z",
+   "articles90": 16,
+   "recent20": 7,
+   "press": 15,
+   "firstArticleAt": "2026-11-16T03:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[뉴스워커_효성중공업] SK텔레콤 AI 데이터센터에 345kV 전력설비 공급…...",
-     "press": "newsworker.co.kr",
-     "publishedAt": "2026-11-16T04:28:00.000Z",
-     "link": "https://www.newsworker.co.kr/news/articleView.html?idxno=514256"
+     "title": "김동선 한화비전, 45조원 AI 영상분석 시장 정조준",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-16T04:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/117/0004125458?sid=105"
     },
     {
-     "title": "SKT·효성중공업, AI 데이터센터 전력 동맹…변압기 확보부터 직류배전...",
-     "press": "s-journal.co.kr",
-     "publishedAt": "2026-11-16T04:20:00.000Z",
-     "link": "https://www.s-journal.co.kr/news/articleView.html?idxno=45339"
+     "title": "한화금융, 뉴욕서 글로벌 금융인재 육성…북미 대학생 750명 참여",
+     "press": "megaeconomy.co.kr",
+     "publishedAt": "2026-11-16T04:36:00.000Z",
+     "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065587222740812"
     },
     {
-     "title": "SKT·효성중공업, AI 데이터센터 전력 인프라 확보 및 차세대 기술 협력",
-     "press": "cstimes.com",
-     "publishedAt": "2026-11-16T04:12:00.000Z",
-     "link": "https://www.cstimes.com/news/articleView.html?idxno=728036"
+     "title": "[카드] 한화투자증권, 연금상담센터 개설…고객 혜택 마련",
+     "press": "newsprime.co.kr",
+     "publishedAt": "2026-11-16T04:32:00.000Z",
+     "link": "http://www.newsprime.co.kr/news/article.html?no=755064"
     }
    ]
   },
   {
    "keyword": "발언하는 김민석 대표",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 24,
-   "recent20": 3,
-   "press": 12,
+   "articles90": 28,
+   "recent20": 6,
+   "press": 13,
    "firstArticleAt": "2026-11-16T03:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"최민희 엄정 판단\" vs \"김민석, 역지사지\"…면전서 싸우는 민주당",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-16T04:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000142355?sid=100"
+     "title": "고개숙인 최민희, 90도 사과했지만...친청계 \"김민석 징계청원도 처리하...",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-16T04:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005441649?sid=100"
     },
     {
-     "title": "김민석, 최민희 발언 논란에 \"윤리심판원 독립적 판단\"…당내 갈등 확산",
-     "press": "ppss.kr",
-     "publishedAt": "2026-11-16T04:17:00.000Z",
-     "link": "https://www.ppss.kr/news/articleView.html?idxno=321171"
+     "title": "한민수 최고위원 발언 듣는 김민석 대표",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-16T04:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014324682?sid=100"
     },
     {
-     "title": "김민석, AI 부정행위에 \"최대 10년 응시 제한 검토\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-16T04:12:00.000Z",
-     "link": "https://www.ajunews.com/view/20261116101451603"
+     "title": "발언하는 김민석 더불어민주당 대표",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-16T04:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014324683?sid=100"
     }
    ]
   },
   {
-   "keyword": "FA 승인 22명",
+   "keyword": "주지훈, 독자 회사 설립",
    "sources": [
     "nate"
    ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-16T03:07:00.000Z",
+   "articles90": 12,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-16T03:13:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "최대어 '구자욱' 포함 FA 22명 공시 … 17일부터 계약",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-16T04:18:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/16/2026111650191.html"
+     "title": "\"새 회사 차린다\"…'블리츠웨이 주주' 주지훈, 16년 인연 마침표",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-16T04:22:00.000Z",
+     "link": "https://m.entertain.naver.com/article/015/0005354225"
     },
     {
-     "title": "보상선수 없는 C등급...첫 FA 김호령, 시장 평가 받는다",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-16T04:16:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/660/0000121469"
+     "title": "주지훈, 블리츠웨이엔터와 16년 동행 마무리…독자 회사 설립 준비",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-16T04:09:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001305026"
     },
     {
-     "title": "“1~2년 안에 이런 FA 선수 없다”…구자욱·원태인 쟁탈전 시작",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-16T04:12:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/028/0002832398"
+     "title": "주지훈, 독자 회사 설립…블리츠웨이 떠난다",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-16T04:05:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000052866"
     }
    ]
   },
   {
-   "keyword": "조정식 공동위원장 발표",
+   "keyword": "개헌",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-16T03:06:00.000Z",
+   "articles90": 12,
+   "recent20": 4,
+   "press": 11,
+   "firstArticleAt": "2026-11-16T03:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국힘 \"이번 정부서 개헌 없다\"…조정식 국회의장 사퇴 촉구",
-     "press": "kado.net",
-     "publishedAt": "2026-11-16T04:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000211501?sid=100"
+     "title": "\"자다가 봉창 두드리는 소리\" 국힘, 국회의장 개헌 회견 맹비난",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-16T04:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005604818?sid=100"
     },
     {
-     "title": "조정식 \"내년이 개헌 적기\"…野 \"이번 정부서 개헌 없다\"",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-16T04:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005354220?sid=100"
+     "title": "개헌 관련 기자회견하는 조정식 국회의장",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-16T04:36:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3753178"
     },
     {
-     "title": "장동혁 \"조정식, 개헌까지 '李 탈옥' 도구로…뭘 내놓든 안 속아\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-16T03:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005441633?sid=100"
+     "title": "정점식, 조정식 개헌론에 \"이번 정부에서 개헌은 없다\"",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-16T04:36:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261116500230"
     }
    ]
   },
@@ -207,40 +209,72 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-16T03:04:00.000Z",
+   "articles90": 9,
+   "recent20": 3,
+   "press": 8,
+   "firstArticleAt": "2026-11-16T03:20:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "중국도 시진핑·트럼프·푸틴 19일 선전 정상회담 공식 발표",
+     "press": "tbs.seoul.kr",
+     "publishedAt": "2026-11-16T04:38:00.000Z",
+     "link": "http://tbs.seoul.kr/news/newsView.do?typ_800=4&idx_800=3538775&seq_800=20531676"
+    },
+    {
+     "title": "미중러, 한국 없이 한반도 논의하나…'제2의 얄타' 우려",
+     "press": "goodnews1.com",
+     "publishedAt": "2026-11-16T04:36:00.000Z",
+     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466239"
+    },
     {
      "title": "중국, APEC 앞두고 ‘아태공동체’ 부각…미중러회담서 외교력 과시?",
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-16T04:27:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012294570?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "화학물질저감 우수제품 전시",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-16T03:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[헤럴드포토]GCN녹색소비자연대, ‘화학물질저감 우수제품’ 전시 개최",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-16T04:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002724052?sid=102"
     },
     {
-     "title": "미중러, 한국 없는 테이블에 '한반도' 올리나…북핵 뒷전 우려",
-     "press": "konas.net",
-     "publishedAt": "2026-11-16T04:08:00.000Z",
-     "link": "https://www.konas.net/article/article.asp?idx=64792"
+     "title": "생활 속 화학물질 줄인다…화학물질저감 우수제품 98개 한자리에",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-16T04:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004682626?sid=102"
     },
     {
-     "title": "미중러 정상회담 앞두고 '제2의 얄타회담' 우려… 한국 패싱 경계",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-16T04:06:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3449025"
+     "title": "덜 유해하게, 더 안전하게…화학물질저감 우수제품 한눈에",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-16T04:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004682625?sid=102"
     }
    ]
   },
   {
    "keyword": "화학물질 저감 제품 소개",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 3,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-16T03:22:00.000Z",
    "exclusive": false,
@@ -269,10 +303,28 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 611,
-  "matched": 329,
-  "avgLeadMin": 841,
+  "flagged": 615,
+  "matched": 332,
+  "avgLeadMin": 834,
   "recent": [
+   {
+    "keyword": "모친상 조의금 기부",
+    "hitKeyword": "이호선 조의금 전액 기부",
+    "hitAt": "2026-11-16T13:30:00+09:00",
+    "leadMin": 89
+   },
+   {
+    "keyword": "JTBC 올림픽 중계권 해지",
+    "hitKeyword": "JTBC 올림픽 중계권",
+    "hitAt": "2026-11-16T13:30:00+09:00",
+    "leadMin": 59
+   },
+   {
+    "keyword": "연지 강동연 결혼",
+    "hitKeyword": "연지 강동연 결혼",
+    "hitAt": "2026-11-16T13:30:00+09:00",
+    "leadMin": 28
+   },
    {
     "keyword": "2027 수능 문답지 배부",
     "hitKeyword": "2027 KBO FA 시장",
@@ -314,24 +366,6 @@
     "hitKeyword": "폭설 김윤석 구교환",
     "hitAt": "2026-11-16T12:30:00+09:00",
     "leadMin": 5486
-   },
-   {
-    "keyword": "폭설 김윤석 구교환 짜릿한 전율",
-    "hitKeyword": "폭설 김윤석 구교환",
-    "hitAt": "2026-11-16T12:30:00+09:00",
-    "leadMin": 5466
-   },
-   {
-    "keyword": "김윤석 구교환 폭설",
-    "hitKeyword": "폭설 김윤석 구교환",
-    "hitAt": "2026-11-16T12:30:00+09:00",
-    "leadMin": 5456
-   },
-   {
-    "keyword": "폭설 김윤석 구교환 연기 케미",
-    "hitKeyword": "폭설 김윤석 구교환",
-    "hitAt": "2026-11-16T12:30:00+09:00",
-    "leadMin": 5426
    }
   ]
  }
