@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T12:22:12.064Z",
+ "builtAt": "2026-11-16T13:22:43.966Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,145 +8,20 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
- "candidates": [
-  {
-   "keyword": "한-메콩 정상회의 이 대통령",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 25,
-   "recent20": 2,
-   "press": 23,
-   "firstArticleAt": "2026-11-16T10:55:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령 “메콩 핵심광물·韓 기술 결합”…6년 만에 한-메콩 정상회의...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-16T12:12:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2648927"
-    },
-    {
-     "title": "이 대통령, 아세안에 “AI·문화 이니셔티브” 제안",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-16T12:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003483072?sid=100"
-    },
-    {
-     "title": "李 대통령, 필리핀과 정상회담 … 조선·방산·인프라 협력 심화",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-16T12:02:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/16/2026111650378.html"
-    }
-   ]
-  },
-  {
-   "keyword": "보안",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-16T11:25:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김석준 교육감, 부산 도착 수능 문답지 봉인 해제·보안 점검",
-     "press": "pointe.co.kr",
-     "publishedAt": "2026-11-16T12:02:00.000Z",
-     "link": "https://www.pointe.co.kr/news/articleView.html?idxno=87864"
-    },
-    {
-     "title": "'모두의 창업' 참여 기업 보안 심사 강화에도 \"기준 부실\"",
-     "press": "safetimes.co.kr",
-     "publishedAt": "2026-11-16T11:44:00.000Z",
-     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247558"
-    },
-    {
-     "title": "라이터, 보안 사고 조사로 모든 출금·풀 생성 일시 중단",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-16T11:38:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/439067"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황 복귀 움직임",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-16T11:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "측근·실리콘밸리 인사들 ‘젠슨 황 복귀 작전’",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-16T12:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003483070?sid=104"
-    },
-    {
-     "title": "사직서에 잉크도 안 말랐는데‥\"젠슨 황 복귀 논의 '워룸' 꾸려\"",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-16T11:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001535942?sid=104"
-    },
-    {
-     "title": "젠슨 황 사임 사흘 만 복귀 타진... 정가는 반대",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-16T11:00:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=883901"
-    }
-   ]
-  },
-  {
-   "keyword": "나솔",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-16T11:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'나솔' 14기 현숙, 결혼 예고하더니 시드니行…여름인 줄 알았는데 \"서울...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-16T11:31:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000784740"
-    },
-    {
-     "title": "'나솔' 32기 영숙, 결별후 의미심장한 근황…\"결국 함께 살아가야\"",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-16T11:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000784737"
-    },
-    {
-     "title": "'나솔' 28기 광수, 정희 결별 후 외로워…\"빼빼로 줄 사람 없어\" 착잡",
-     "press": "atstar1.com",
-     "publishedAt": "2026-11-16T11:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/415/0000053869"
-    }
-   ]
-  }
- ],
+ "measured": 1,
+ "candidates": [],
  "hitRate": {
   "days": 7,
-  "flagged": 713,
-  "matched": 387,
-  "avgLeadMin": 824,
+  "flagged": 719,
+  "matched": 388,
+  "avgLeadMin": 822,
   "recent": [
+   {
+    "keyword": "이지영 AI 부정행위 대책",
+    "hitKeyword": "초소형 카메라 부정행위",
+    "hitAt": "2026-11-16T22:00:00+09:00",
+    "leadMin": 18
+   },
    {
     "keyword": "CL 더블랙레이블과 전속계약",
     "hitKeyword": "블랙핑크 YG 전속계약 제외",
@@ -200,12 +75,6 @@
     "hitKeyword": "젠슨 황 불륜 거짓말",
     "hitAt": "2026-11-16T20:30:00+09:00",
     "leadMin": 176
-   },
-   {
-    "keyword": "AI 부정행위 우려가 커지고 있어",
-    "hitKeyword": "초소형 카메라 부정행위",
-    "hitAt": "2026-11-16T20:30:00+09:00",
-    "leadMin": 19
    }
   ]
  }
