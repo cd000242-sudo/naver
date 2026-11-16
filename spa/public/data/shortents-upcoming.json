@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T14:13:11.897Z",
+ "builtAt": "2026-11-16T14:23:16.708Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 14,
+ "measured": 18,
  "candidates": [
   {
    "keyword": "수능 AI 부정행위 논란",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 20,
-   "recent20": 4,
-   "press": 15,
-   "firstArticleAt": "2026-11-16T12:46:00.000Z",
+   "articles90": 14,
+   "recent20": 2,
+   "press": 13,
+   "firstArticleAt": "2026-11-16T12:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김선태, AI 안경 쓰고 공무원 시험 봤는데 25점…“오류 있었다”",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-16T14:16:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001305126"
+    },
     {
      "title": "\"믿으라고? 다 카메라 보고 수능 칠 판\"…초소형 카메라 품절사태, 점입...",
      "press": "imaeil.com",
@@ -33,51 +39,45 @@
      "press": "munhwa.com",
      "publishedAt": "2026-11-16T14:03:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/021/0002833206?sid=102"
-    },
-    {
-     "title": "'흙수저→100억 연봉' 이지영, AI 커닝 논란에 분통 \"노력한 만큼 보상받...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-16T13:56:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004467192"
     }
    ]
   },
   {
-   "keyword": "서울 올림픽 무산",
+   "keyword": "최민희 제명 촉구",
    "sources": [
     "nate"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-16T12:46:00.000Z",
-   "exclusive": true,
+   "firstArticleAt": "2026-11-16T12:54:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "2036년 하계올림픽 '공동 개최' 무산",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-16T13:26:00.000Z",
-     "link": "http://www.breaknews.com/1251426"
+     "title": "최민희 징계 놓고 민주당 내홍 격화",
+     "press": "mhj21.com",
+     "publishedAt": "2026-11-16T13:12:00.000Z",
+     "link": "https://www.mhj21.com/news/articleView.html?idxno=254827"
     },
     {
-     "title": "'2036 전주 올림픽' 단독 개최, 정말 가능?…'서울과 공동개최 논의' 2달...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-16T13:25:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/311/0002081198"
+     "title": "[김종석의 왜]90도 사과에도 “최민희 제명”",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-16T12:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000367722?sid=100"
     },
     {
-     "title": "2036 올림픽 공동 개최 물거품...전북, 단독 유치 추진",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-16T12:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000121523?sid=102"
+     "title": "'최민희 감찰'에 둘로 쪼개진 최고위...징계 절차 속도",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-16T12:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002433691?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 722,
+  "flagged": 723,
   "matched": 391,
   "avgLeadMin": 820,
   "recent": [
