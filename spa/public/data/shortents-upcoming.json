@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T07:13:10.921Z",
+ "builtAt": "2026-11-16T07:23:13.915Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,179 +8,145 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 16,
+ "measured": 14,
  "candidates": [
   {
    "keyword": "수능 AI 부정행위 대책 필요",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 91,
-   "recent20": 32,
-   "press": 69,
-   "firstArticleAt": "2026-11-16T06:01:00.000Z",
+   "articles90": 87,
+   "recent20": 25,
+   "press": 64,
+   "firstArticleAt": "2026-11-16T06:07:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "회계사 시험까지 번진 AI 부정행위…금융당국도 대응책 마련",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-16T07:22:00.000Z",
+     "link": "https://www.ajunews.com/view/20261116142845383"
+    },
+    {
+     "title": "'AI 커닝' 못 막은 정부…국가자격시험 법적 책임 어디까지",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-16T07:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006410558?sid=102"
+    },
+    {
+     "title": "수능 D-3… 1,312개 시험장 ‘AI 안경’ 부정행위, 정말 잡아낼 수 있나",
+     "press": "christiantoday.co.kr",
+     "publishedAt": "2026-11-16T07:20:00.000Z",
+     "link": "https://www.christiantoday.co.kr/news/378656"
+    }
+   ]
+  },
+  {
+   "keyword": "AI 커닝",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 93,
+   "recent20": 26,
+   "press": 55,
+   "firstArticleAt": "2026-11-16T06:06:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "미미미누·정승제·조정식은 \"수능 연기해야\" vs 교육부는 \"검토 안 해\"...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-16T07:12:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004125526"
+     "title": "여야, ‘AI 수능 커닝’ 우려 교육부 질타…“원스트라이크 아웃제 적용...",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-16T07:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001205140?sid=100"
     },
     {
-     "title": "AI 법안 477건 중 커닝 대책 '0'…사태 터지자 '늑장 입법'",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-16T07:12:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1320601&inflow=N"
+     "title": "'AI 커닝' 못 막은 정부…국가자격시험 법적 책임 어디까지",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-16T07:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006410558?sid=102"
     },
     {
-     "title": "‘AI 부정행위 논란’에 韓총리 “수능 범정부 긴급 대응팀 구성”",
-     "press": "siminilbo.co.kr",
-     "publishedAt": "2026-11-16T07:10:00.000Z",
-     "link": "https://www.siminilbo.co.kr/news/newsview.php?ncode=1160291323288953"
+     "title": "한국거래소·금투협 시험서 'AI 안경' 부정행위 잇따라 적발",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-16T07:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003486226?sid=101"
     }
    ]
   },
   {
-   "keyword": "최민희 사과",
+   "keyword": "무허가 유흥업소 운영하다",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 34,
-   "recent20": 8,
-   "press": 30,
-   "firstArticleAt": "2026-11-16T05:45:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "민주 초선 '더민초' \"최민희 엄중 징계·결단 촉구\"",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-16T07:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001075439?sid=100"
-    },
-    {
-     "title": "[포토] 고개 숙여 사과하는 최민희 최고위원",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-16T07:10:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3449130"
-    },
-    {
-     "title": "'이재명 탄핵 반대' 발언 사과하는 최민희 최고위원",
-     "press": "iminju.net",
-     "publishedAt": "2026-11-16T07:10:00.000Z",
-     "link": "http://www.iminju.net/news/articleView.html?idxno=172533"
-    }
-   ]
-  },
-  {
-   "keyword": "체포",
-   "sources": [
-    "google"
-   ],
-   "articles90": 29,
-   "recent20": 6,
-   "press": 25,
-   "firstArticleAt": "2026-11-16T05:45:00.000Z",
+   "articles90": 15,
+   "recent20": 2,
+   "press": 15,
+   "firstArticleAt": "2026-11-16T05:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] 분당 정자동 학원 여자화장실서 불법촬영 10대 체포",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-16T07:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000132290?sid=102"
-    },
-    {
-     "title": "가석방 중 눈 마주쳤다며 흉기 위협…40대 현행범 체포",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-16T07:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000132289?sid=102"
+     "title": "넷플릭스 출연 인플루언서, 무허가 유흥업소 운영하다 적발",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-16T07:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005354321?sid=104"
     },
     {
      "title": "무허가 유흥업소 운영 혐의 체포…넷플릭스 ‘불량연애2’ 출연 앗슨",
      "press": "sportsseoul.com",
      "publishedAt": "2026-11-16T07:04:00.000Z",
      "link": "https://m.entertain.naver.com/article/468/0001281237"
-    }
-   ]
-  },
-  {
-   "keyword": "최동석, 박지윤 지인 상간소송 일부 승소",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 23,
-   "recent20": 3,
-   "press": 21,
-   "firstArticleAt": "2026-11-16T05:46:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "최동석, 박지윤 지인 상대 상간 소송 일부 승소",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-16T07:02:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95397"
     },
     {
-     "title": "[단독]\"방송 안 돼\" 내용증명 딛고..최동석, 박지윤 불륜 소송 반전 '승...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-16T06:59:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003487845"
-    },
-    {
-     "title": "'박지윤 남사친'에 상간 소송...최동석, 1심 뒤집고 일부 승소",
-     "press": "mt.co.kr",
+     "title": "아침까지 무허가 접대업소…'불량연애2' 출연 여성 체포",
+     "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-16T06:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005441758?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/055/0001403370?sid=102"
     }
    ]
   },
   {
-   "keyword": "한일 정상회담 마닐라",
+   "keyword": "신용한 불구속 송치",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 11,
+   "articles90": 15,
    "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-16T05:44:00.000Z",
+   "press": 14,
+   "firstArticleAt": "2026-11-16T05:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "필리핀 향한 日다카이치 \"李대통령과 정상회담 예정\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-16T06:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014325198?sid=104"
+     "title": "신용한 지사, 선거법 위반 혐의 송치…사법 리스크 빠져",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-16T07:00:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3753408"
     },
     {
-     "title": "李 대통령, 오늘 한일 정상회담…'제2의 얄타' 우려 속 외교전",
-     "press": "newsgn.com",
-     "publishedAt": "2026-11-16T06:38:00.000Z",
-     "link": "https://www.newsgn.com/news/articleView.html?idxno=585914"
+     "title": "신용한 충북도지사 불구속 송치... 우려와 당혹, 法 판단 남아",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-16T06:52:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4118870"
     },
     {
-     "title": "李대통령, 필리핀 마닐라 도착…아세안 정상외교 돌입",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-16T06:36:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903230"
+     "title": "[종합] 신용한 충북지사 송치…출범 초기부터 사법 리스크",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-16T06:51:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261116001066"
     }
    ]
   },
   {
    "keyword": "이재명 재판취소 저지 회의",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 18,
+   "articles90": 17,
    "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-16T05:52:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-16T05:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -205,15 +171,47 @@
    ]
   },
   {
+   "keyword": "한일 정상회담 마닐라",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 9,
+   "recent20": 0,
+   "press": 9,
+   "firstArticleAt": "2026-11-16T05:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "필리핀 향한 日다카이치 \"李대통령과 정상회담 예정\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-16T06:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014325198?sid=104"
+    },
+    {
+     "title": "李 대통령, 오늘 한일 정상회담…'제2의 얄타' 우려 속 외교전",
+     "press": "newsgn.com",
+     "publishedAt": "2026-11-16T06:38:00.000Z",
+     "link": "https://www.newsgn.com/news/articleView.html?idxno=585914"
+    },
+    {
+     "title": "李대통령, 필리핀 마닐라 도착…아세안 정상외교 돌입",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-16T06:36:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903230"
+    }
+   ]
+  },
+  {
    "keyword": "신세계",
    "sources": [
     "signal.bz",
     "google"
    ],
-   "articles90": 9,
+   "articles90": 8,
    "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-16T05:47:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-16T06:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -243,10 +241,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-16T05:49:00.000Z",
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-16T06:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -271,34 +269,34 @@
    ]
   },
   {
-   "keyword": "전이경 총감독 도전",
+   "keyword": "전이경 암 투병 고백",
    "sources": [
     "daum"
    ],
-   "articles90": 7,
-   "recent20": 3,
-   "press": 7,
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
    "firstArticleAt": "2026-11-16T05:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "쇼트 트랙 전설 전이경, 암 딛고 총감독 \"뭐든 가능\"",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-16T07:12:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95400"
-    },
-    {
-     "title": "‘쇼트트랙 전설’ 전이경, 2년 암 투병 딛고 다시 일어섰다…‘인생 2...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-16T07:05:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/468/0001281238"
+     "title": "‘스피드퀸’ 전이경 암 투병 고백…“인생 최대 고비 넘기고 새 도전”",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-16T07:17:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005764451"
     },
     {
      "title": "'쇼트트랙 전설' 전이경, 2년간 암 투병 고백...\"인생 최대 고비 넘겼다...",
      "press": "xportsnews.com",
      "publishedAt": "2026-11-16T06:58:00.000Z",
      "link": "https://m.entertain.naver.com/article/311/0002081064"
+    },
+    {
+     "title": "전이경, 2년간 암 투병 고백…“몸 약해졌지만 다시 도전” (스피드퀸)",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-16T06:50:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001305068"
     }
    ]
   },
@@ -335,7 +333,7 @@
    ]
   },
   {
-   "keyword": "김정관 장관 전략회의",
+   "keyword": "김정관 장관 회의 주재",
    "sources": [
     "nate"
    ],
@@ -347,6 +345,12 @@
    "capped": false,
    "samples": [
     {
+     "title": "핵심광물 민관 전략회의",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-16T06:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009291755?sid=101"
+    },
+    {
      "title": "김정관 장관, 핵심광물 민관 전략회의",
      "press": "news1.kr",
      "publishedAt": "2026-11-16T06:16:00.000Z",
@@ -357,19 +361,13 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-16T06:16:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009291756?sid=101"
-    },
-    {
-     "title": "김정관 산업장관 주재 '핵심광물 민관 전략회의'",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-16T06:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009291757?sid=101"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 659,
+  "flagged": 663,
   "matched": 347,
   "avgLeadMin": 834,
   "recent": [
