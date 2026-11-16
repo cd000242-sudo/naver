@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T13:22:43.966Z",
+ "builtAt": "2026-11-16T13:32:47.553Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,11 +8,44 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 1,
- "candidates": [],
+ "measured": 14,
+ "candidates": [
+  {
+   "keyword": "서울 올림픽 공동 개최 무산",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-16T12:30:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "2036년 하계올림픽 '공동 개최' 무산",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-16T13:26:00.000Z",
+     "link": "http://www.breaknews.com/1251426"
+    },
+    {
+     "title": "'2036 전주 올림픽' 단독 개최, 정말 가능?…'서울과 공동개최 논의' 2달...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-16T13:25:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/311/0002081198"
+    },
+    {
+     "title": "2036 올림픽 공동 개최 물거품...전북, 단독 유치 추진",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-16T12:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000121523?sid=102"
+    }
+   ]
+  }
+ ],
  "hitRate": {
   "days": 7,
-  "flagged": 719,
+  "flagged": 720,
   "matched": 388,
   "avgLeadMin": 822,
   "recent": [
