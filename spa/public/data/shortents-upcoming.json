@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T07:03:00.683Z",
+ "builtAt": "2026-11-16T07:13:10.921Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,134 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 16,
  "candidates": [
   {
-   "keyword": "서울 집값 둔화",
+   "keyword": "수능 AI 부정행위 대책 필요",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 16,
-   "recent20": 0,
-   "press": 16,
-   "firstArticleAt": "2026-11-16T05:36:00.000Z",
+   "articles90": 91,
+   "recent20": 32,
+   "press": 69,
+   "firstArticleAt": "2026-11-16T06:01:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "미미미누·정승제·조정식은 \"수능 연기해야\" vs 교육부는 \"검토 안 해\"...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-16T07:12:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004125526"
+    },
+    {
+     "title": "AI 법안 477건 중 커닝 대책 '0'…사태 터지자 '늑장 입법'",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-16T07:12:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1320601&inflow=N"
+    },
+    {
+     "title": "‘AI 부정행위 논란’에 韓총리 “수능 범정부 긴급 대응팀 구성”",
+     "press": "siminilbo.co.kr",
+     "publishedAt": "2026-11-16T07:10:00.000Z",
+     "link": "https://www.siminilbo.co.kr/news/newsview.php?ncode=1160291323288953"
+    }
+   ]
+  },
+  {
+   "keyword": "최민희 사과",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 34,
+   "recent20": 8,
+   "press": 30,
+   "firstArticleAt": "2026-11-16T05:45:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "민주 초선 '더민초' \"최민희 엄중 징계·결단 촉구\"",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-16T07:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001075439?sid=100"
+    },
+    {
+     "title": "[포토] 고개 숙여 사과하는 최민희 최고위원",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-16T07:10:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3449130"
+    },
+    {
+     "title": "'이재명 탄핵 반대' 발언 사과하는 최민희 최고위원",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-16T07:10:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=172533"
+    }
+   ]
+  },
+  {
+   "keyword": "체포",
+   "sources": [
+    "google"
+   ],
+   "articles90": 29,
+   "recent20": 6,
+   "press": 25,
+   "firstArticleAt": "2026-11-16T05:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“경기도로 밀려나는 것도 이젠 무섭네”…지난달 집값 상승률 서울 앞...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-16T06:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005764411?sid=101"
-    },
-    {
-     "title": "[속보] 수원 영통·화성 동탄 ‘날았다’…경기 집값 상승률, 서울 앞질...",
+     "title": "[속보] 분당 정자동 학원 여자화장실서 불법촬영 10대 체포",
      "press": "kyeonggi.com",
-     "publishedAt": "2026-11-16T06:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000132278?sid=101"
+     "publishedAt": "2026-11-16T07:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000132290?sid=102"
     },
     {
-     "title": "경기 집값 상승률 서울 앞질러…서울 평균 전세가 5억 돌파",
-     "press": "donga.com",
-     "publishedAt": "2026-11-16T06:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003762768?sid=101"
+     "title": "가석방 중 눈 마주쳤다며 흉기 위협…40대 현행범 체포",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-16T07:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000132289?sid=102"
+    },
+    {
+     "title": "무허가 유흥업소 운영 혐의 체포…넷플릭스 ‘불량연애2’ 출연 앗슨",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-16T07:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001281237"
+    }
+   ]
+  },
+  {
+   "keyword": "최동석, 박지윤 지인 상간소송 일부 승소",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 23,
+   "recent20": 3,
+   "press": 21,
+   "firstArticleAt": "2026-11-16T05:46:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "최동석, 박지윤 지인 상대 상간 소송 일부 승소",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-16T07:02:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95397"
+    },
+    {
+     "title": "[단독]\"방송 안 돼\" 내용증명 딛고..최동석, 박지윤 불륜 소송 반전 '승...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-16T06:59:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003487845"
+    },
+    {
+     "title": "'박지윤 남사친'에 상간 소송...최동석, 1심 뒤집고 일부 승소",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-16T06:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005441758?sid=102"
     }
    ]
   },
@@ -71,38 +168,6 @@
      "press": "newsworks.co.kr",
      "publishedAt": "2026-11-16T06:36:00.000Z",
      "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903230"
-    }
-   ]
-  },
-  {
-   "keyword": "음주운전 고경표 소환 예정",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-16T05:41:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "고경표, 음주운전 사고 영상 확보됐다…치상 혐의 검토→소환 조사 임박",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-16T06:49:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001408468"
-    },
-    {
-     "title": "‘음주운전’ 고경표, 경찰 소환조사 예정…치상 혐의 적용 검토",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-16T06:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000367656?sid=102"
-    },
-    {
-     "title": "'음주운전' 고경표, 경찰 소환조사 예정…\"교특법상 치상 혐의 검토 중...",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-16T06:30:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1794809593530942006"
     }
    ]
   },
@@ -148,10 +213,16 @@
    "articles90": 9,
    "recent20": 1,
    "press": 9,
-   "firstArticleAt": "2026-11-16T05:39:00.000Z",
+   "firstArticleAt": "2026-11-16T05:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "대전신세계, '신세계 홀리데이 마켓' 운영",
+     "press": "ccnnews.co.kr",
+     "publishedAt": "2026-11-16T07:08:00.000Z",
+     "link": "http://www.ccnnews.co.kr/news/articleView.html?idxno=417828"
+    },
     {
      "title": "\"지갑 닫은 외국인·환율 직격탄 신세계, 백화점 성장 모멘텀 '빨간불'\"",
      "press": "newsquest.co.kr",
@@ -163,44 +234,71 @@
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-16T06:42:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/079/0004210275?sid=102"
-    },
-    {
-     "title": "신세계백화점, 겨울 비·눈 대비 기능성 의류 팝업 확대",
-     "press": "ziksir.com",
-     "publishedAt": "2026-11-16T06:30:00.000Z",
-     "link": "https://www.ziksir.com/news/articleView.html?idxno=153491"
     }
    ]
   },
   {
-   "keyword": "김정관 장관 전략회의",
+   "keyword": "김유정 100일 거짓말",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 16,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-16T05:34:00.000Z",
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-16T05:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김정관 장관, 핵심광물 민관 전략회의",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-16T06:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009291754?sid=101"
+     "title": "'100일의 거짓말' 최종회, 김유정→박진영과 함께 본다…단체 관람 이벤...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-16T07:06:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16277850"
     },
     {
-     "title": "핵심광물 민관 전략회의 주재하는 김정관 장관",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-16T06:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009291756?sid=101"
+     "title": "'100일의 거짓말' 박진영이 멜로를 놓지 않는 이유... \"멜로의 끝을 볼 ...",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-16T07:00:00.000Z",
+     "link": "https://www.insight.co.kr/news/582244"
     },
     {
-     "title": "김정관 산업장관 주재 '핵심광물 민관 전략회의'",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-16T06:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009291757?sid=101"
+     "title": "‘100일의 거짓말’ 관저 폭발에 다시 두 자릿수…12회 10.4% 전 채널 1위",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-16T06:46:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1175022"
+    }
+   ]
+  },
+  {
+   "keyword": "전이경 총감독 도전",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 7,
+   "recent20": 3,
+   "press": 7,
+   "firstArticleAt": "2026-11-16T05:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "쇼트 트랙 전설 전이경, 암 딛고 총감독 \"뭐든 가능\"",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-16T07:12:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95400"
+    },
+    {
+     "title": "‘쇼트트랙 전설’ 전이경, 2년 암 투병 딛고 다시 일어섰다…‘인생 2...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-16T07:05:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/468/0001281238"
+    },
+    {
+     "title": "'쇼트트랙 전설' 전이경, 2년간 암 투병 고백...\"인생 최대 고비 넘겼다...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-16T06:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002081064"
     }
    ]
   },
@@ -209,10 +307,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 3,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-16T05:42:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-16T05:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -235,14 +333,58 @@
      "link": "https://www.lawtv.kr/news/articleView.html?idxno=61426"
     }
    ]
+  },
+  {
+   "keyword": "김정관 장관 전략회의",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-16T06:09:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김정관 장관, 핵심광물 민관 전략회의",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-16T06:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009291754?sid=101"
+    },
+    {
+     "title": "핵심광물 민관 전략회의 주재하는 김정관 장관",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-16T06:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009291756?sid=101"
+    },
+    {
+     "title": "김정관 산업장관 주재 '핵심광물 민관 전략회의'",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-16T06:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009291757?sid=101"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 655,
-  "matched": 345,
-  "avgLeadMin": 839,
+  "flagged": 659,
+  "matched": 347,
+  "avgLeadMin": 834,
   "recent": [
+   {
+    "keyword": "최예나 의혹에 스타일리스트",
+    "hitKeyword": "최예나 의상 표절 의혹",
+    "hitAt": "2026-11-16T16:00:00+09:00",
+    "leadMin": 57
+   },
+   {
+    "keyword": "고경표 음주치상 혐의",
+    "hitKeyword": "고경표 음주운전",
+    "hitAt": "2026-11-16T16:00:00+09:00",
+    "leadMin": 17
+   },
    {
     "keyword": "임현주 MBC 퇴사",
     "hitKeyword": "임현주 MBC 퇴사",
@@ -290,18 +432,6 @@
     "hitKeyword": "수능 부정행위 경찰 수사",
     "hitAt": "2026-11-16T14:30:00+09:00",
     "leadMin": 28
-   },
-   {
-    "keyword": "수능 AI 부정행위 대책",
-    "hitKeyword": "수능 부정행위 경찰 수사",
-    "hitAt": "2026-11-16T14:30:00+09:00",
-    "leadMin": 8
-   },
-   {
-    "keyword": "양극화 총괄반 첫 회의",
-    "hitKeyword": "주택자산 양극화 심화",
-    "hitAt": "2026-11-16T14:00:00+09:00",
-    "leadMin": 5974
    }
   ]
  }
