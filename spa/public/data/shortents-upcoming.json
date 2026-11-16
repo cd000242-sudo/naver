@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T08:34:01.604Z",
+ "builtAt": "2026-11-16T08:44:04.899Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,38 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 18,
  "candidates": [
   {
    "keyword": "3분기 매출 증가",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 79,
-   "recent20": 55,
-   "press": 53,
-   "firstArticleAt": "2026-11-16T08:06:00.000Z",
+   "articles90": 89,
+   "recent20": 70,
+   "press": 59,
+   "firstArticleAt": "2026-11-16T08:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "SK하이닉스, 미국 매출 100조원 급증…전체 매출 62.5% 차지",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-16T08:32:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1731883"
+     "title": "남양유업, 3분기 영업익 104% 증가…3개 분기 연속 이익 확대",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-16T08:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016444907?sid=101"
     },
     {
-     "title": "야놀자, 3분기 거래액 13조8천억 돌파, 16%↑…AI 데이터 사업 성장에 수...",
-     "press": "tournews21.com",
-     "publishedAt": "2026-11-16T08:32:00.000Z",
-     "link": "https://www.tournews21.com/news/articleView.html?idxno=148556"
+     "title": "와이즈넛, 3분기 누적 흑자전환…“AI 에이전트 매출 비중 절반 넘어”",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-16T08:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003486311?sid=105"
     },
     {
-     "title": "올리브영, 3분기 매출 1.7조…순이익은 전년비 8.4% 감소",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-16T08:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005441894?sid=101"
+     "title": "JW중외제약, 3분기 매출 6%↑ 영업이익 11%↓…R&D 비용 부담",
+     "press": "dailypharm.com",
+     "publishedAt": "2026-11-16T08:42:00.000Z",
+     "link": "https://dailypharm.com/user/news/344648?REFERER=NP"
     }
    ]
   },
@@ -49,10 +48,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 18,
-   "recent20": 3,
-   "press": 18,
-   "firstArticleAt": "2026-11-16T07:14:00.000Z",
+   "articles90": 16,
+   "recent20": 1,
+   "press": 16,
+   "firstArticleAt": "2026-11-16T07:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -79,44 +78,74 @@
   {
    "keyword": "AI 커닝 대책 혼란",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 17,
-   "recent20": 1,
-   "press": 16,
-   "firstArticleAt": "2026-11-16T07:07:00.000Z",
+   "recent20": 3,
+   "press": 15,
+   "firstArticleAt": "2026-11-16T07:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[이슈] 'AI 안경 부정행위' 파장 확산…입시업계 \"수능도 뚫린다, 연기해...",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-16T08:34:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=748544"
+    },
+    {
+     "title": "\"AI 커닝 잡을 자신 있나\" 묻자 교육장관 \"못할 것 같다\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-16T08:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000651399?sid=100"
+    },
     {
      "title": "수능 코앞 'AI 커닝 대응팀' 꾸린 정부…안경 전수점검? [짤e몽땅]",
      "press": "mbn.mk.co.kr",
      "publishedAt": "2026-11-16T08:25:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/057/0001978431?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "블랙핑크 YG 전속계약 명단",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 15,
+   "recent20": 5,
+   "press": 11,
+   "firstArticleAt": "2026-11-16T07:34:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "블랙핑크, YG 전속계약 명단서 빠져…\"그룹 활동에 대해 논의중\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-16T08:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016444903?sid=103"
     },
     {
-     "title": "정승제, AI 커닝에 “항공 보안 준하는 입실 검사해야”",
-     "press": "weekly.khan.co.kr",
-     "publishedAt": "2026-11-16T08:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/033/0000053425?sid=102"
+     "title": "블랙핑크, YG 3분기 전속계약 명단서 전격 제외…악뮤 이어 결별 수순 밟...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-16T08:39:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001408493"
     },
     {
-     "title": "수능 사흘 앞 'AI 부정행위' 비상…현장 혼선·제도적 한계 도마 위",
-     "press": "news.mtn.co.kr",
-     "publishedAt": "2026-11-16T08:04:00.000Z",
-     "link": "https://news.mtn.co.kr/article/2026111615160393824"
+     "title": "YG, 블랙핑크 전속계약 명단 제외에 \"그룹 활동 논의 중\"",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-16T08:39:00.000Z",
+     "link": "https://m.entertain.naver.com/article/437/0000520954"
     }
    ]
   },
   {
    "keyword": "귀국하는 최원호 감독님",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 24,
-   "recent20": 6,
+   "recent20": 3,
    "press": 10,
    "firstArticleAt": "2026-11-16T07:27:00.000Z",
    "exclusive": false,
@@ -143,15 +172,47 @@
    ]
   },
   {
+   "keyword": "한일 정상회담 마닐라",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-16T08:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이 대통령, 아세안·APEC 정상외교 돌입…17일 한일 정상회담",
+     "press": "iusm.co.kr",
+     "publishedAt": "2026-11-16T08:36:00.000Z",
+     "link": "https://www.iusm.co.kr/news/articleView.html?idxno=1070594"
+    },
+    {
+     "title": "‘아세안 순방’ 이재명 대통령, 내일 한일 정상회담…다카이치 총리와...",
+     "press": "kgnews.co.kr",
+     "publishedAt": "2026-11-16T08:18:00.000Z",
+     "link": "https://www.kgnews.co.kr/news/article.html?no=919818"
+    },
+    {
+     "title": "트럼프·시진핑·푸틴 첫 3자 회담…북한 활개, 한일 동병상련",
+     "press": "koreareport.co.kr",
+     "publishedAt": "2026-11-16T08:16:00.000Z",
+     "link": "https://www.koreareport.co.kr/news/articleView.html?idxno=54777"
+    }
+   ]
+  },
+  {
    "keyword": "김유정 100일 거짓말",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-16T07:06:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-16T07:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -176,34 +237,66 @@
    ]
   },
   {
-   "keyword": "한일 정상회담 마닐라",
+   "keyword": "야구 코치",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-16T08:05:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-16T07:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘아세안 순방’ 이재명 대통령, 내일 한일 정상회담…다카이치 총리와...",
-     "press": "kgnews.co.kr",
-     "publishedAt": "2026-11-16T08:18:00.000Z",
-     "link": "https://www.kgnews.co.kr/news/article.html?no=919818"
+     "title": "롯데 대졸 신인 이 정도였어? 박정민 야구만 잘하는 줄 알았더니…마인...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-16T08:29:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/477/0000639335"
     },
     {
-     "title": "李대통령·다카이치, 17일 마닐라서 양자회담…미중러 앞 한일 공조",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-16T08:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005605004?sid=100"
+     "title": "독기 오른 한국 야구 황금세대…2028 LA 로드맵의 시발점",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-16T08:23:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/025/0003565541"
     },
     {
-     "title": "아세안 협력 나선 한일…대중 외교는 '온도차'",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-16T08:12:00.000Z",
-     "link": "https://www.ajunews.com/view/20261116152902619"
+     "title": "프로야구 FA 시장 열린다...승인 선수 22명 명단 공개",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-16T08:20:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/410/0001147447"
+    }
+   ]
+  },
+  {
+   "keyword": "전이경 암 투병",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-16T07:17:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'올림픽 전설' 전이경, 2년 암 투병 털어놔…쇼트트랙 예능 도전",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-16T08:37:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/417/0001164513"
+    },
+    {
+     "title": "금메달 4개 전이경 \"2년 간 암투병…반평생 최고 고비\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-16T07:48:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014325452"
+    },
+    {
+     "title": "‘2년간 암 투병’ 전이경, 러시아 귀화 빅토르 안 신뢰 “구구절절 설...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-16T07:39:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001187993"
     }
    ]
   },
@@ -238,11 +331,43 @@
      "link": "https://n.news.naver.com/mnews/article/001/0016444714?sid=104"
     }
    ]
+  },
+  {
+   "keyword": "뉴스",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 3,
+   "press": 2,
+   "firstArticleAt": "2026-11-16T08:32:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "[포토뉴스]포남1동 주민자치회,‘사랑담은 김장 김치 나눔’ 비용 후원",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-16T08:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001231198?sid=102"
+    },
+    {
+     "title": "[포토뉴스]강원도교육청, 제13기 교육발전자문위원회",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-16T08:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001231196?sid=102"
+    },
+    {
+     "title": "[은행 뉴스브리핑] 국민은행 'KB Star 지수연동외화예금' 출시",
+     "press": "asiatime.co.kr",
+     "publishedAt": "2026-11-16T08:32:00.000Z",
+     "link": "https://www.asiatime.co.kr/article/20261116500419"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 677,
+  "flagged": 679,
   "matched": 363,
   "avgLeadMin": 802,
   "recent": [
