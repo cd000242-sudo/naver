@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T16:04:45.540Z",
+ "builtAt": "2026-11-16T16:14:48.390Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 8,
+ "measured": 10,
  "candidates": [
   {
-   "keyword": "수능 AI 부정행위 대책 마련 필요해",
+   "keyword": "수능 AI 부정행위 대책 필요",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 9,
+   "articles90": 10,
    "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-16T14:36:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-16T14:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -29,16 +29,16 @@
      "link": "https://m.entertain.naver.com/article/109/0005641510"
     },
     {
-     "title": "한성숙, 수능 스마트기기 부정행위 무관용…와이파이 차단 검토",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-16T15:20:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3754029"
+     "title": "'AI 부정' 수능 비상…'와이파이 차단'이 대책인가",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-16T15:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001403457?sid=102"
     },
     {
-     "title": "수능 'AI 컨닝' 비상… 감독관 부담, 수험생에 고스란히…",
-     "press": "gjdream.com",
-     "publishedAt": "2026-11-16T15:10:00.000Z",
-     "link": "http://www.gjdream.com/news/articleView.html?idxno=674385"
+     "title": "[사설] 수능 ‘AI 커닝’, 감독관이 적극 개입할 수 있게 재량권 줘야",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-16T15:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004009947?sid=110"
     }
    ]
   },
@@ -68,49 +68,17 @@
      "link": "https://m.entertain.naver.com/article/440/0000052917"
     },
     {
-     "title": "문근영·차태현, 방송 중 눈물 펑펑..故김주혁 향한 그리움 “들을 때마...",
-     "press": "osen.co.kr",
+     "title": "임바다·허채민, 故 김주혁 추억 담긴 '세월이 가면'으로 149표…세미파...",
+     "press": "celuvmedia.com",
      "publishedAt": "2026-11-16T15:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005641501"
-    }
-   ]
-  },
-  {
-   "keyword": "행정기관 이메일 해킹",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-16T14:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "행정기관 이메일도 뚫렸다… 해커가 계정 300여개 ‘침입’",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-16T15:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001885508?sid=102"
-    },
-    {
-     "title": "행정기관 업무용 이메일 해킹…300여 개 계정 비정상 접속",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-16T14:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004682860?sid=102"
-    },
-    {
-     "title": "행정기관 업무용 이메일 해킹…정부 SSO 취약점 악용, 300여 개 계정 비...",
-     "press": "dailysecu.com",
-     "publishedAt": "2026-11-16T14:36:00.000Z",
-     "link": "https://www.dailysecu.com/news/articleView.html?idxno=209553"
+     "link": "http://www.celuvmedia.com/article.php?aid=1794841780530992010"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 729,
+  "flagged": 730,
   "matched": 392,
   "avgLeadMin": 819,
   "recent": [
