@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T08:54:08.550Z",
+ "builtAt": "2026-11-16T09:09:38.570Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,167 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 9,
  "candidates": [
   {
-   "keyword": "3분기 매출 증가",
+   "keyword": "이재명 한-아세안 발언",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 92,
-   "recent20": 64,
-   "press": 60,
-   "firstArticleAt": "2026-11-16T08:26:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "온코닉테라퓨틱스, 누적 매출 70% 성장…R&D 3.4배 늘리고도 흑자",
-     "press": "ziksir.com",
-     "publishedAt": "2026-11-16T08:52:00.000Z",
-     "link": "https://www.ziksir.com/news/articleView.html?idxno=153542"
-    },
-    {
-     "title": "매출 10원 중 7원은 해외서 벌었다…오리온, 3분기 영업익 9.4%↑",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-16T08:52:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611160234"
-    },
-    {
-     "title": "다올투자증권, 3분기 순익 60% 감소…증시 조정 영향",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-16T08:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001272934?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "박지윤",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 15,
-   "recent20": 2,
-   "press": 15,
-   "firstArticleAt": "2026-11-16T07:25:00.000Z",
+   "articles90": 50,
+   "recent20": 13,
+   "press": 37,
+   "firstArticleAt": "2026-11-16T08:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "최동석, 박지윤 지인 상대 상간 소송 항소심서 일부 승소",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-16T08:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003565551?sid=102"
+     "title": "이 대통령, 한-아세안 ‘AI 동맹·문화창조산업’ 협력 제안",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-16T09:08:00.000Z",
+     "link": "https://www.viva100.com/article/20261116501346"
     },
     {
-     "title": "박지윤, 최동석 상간 소송 2심 결과에 무대응... 공동구매만 예정대로",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-16T08:48:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003541995"
+     "title": "李, 아세안에 'AI 동행·문화창조' 이니셔티브 제안",
+     "press": "news.cpbc.co.kr",
+     "publishedAt": "2026-11-16T09:08:00.000Z",
+     "link": "https://news.cpbc.co.kr/article/1177044?division=NAVER"
     },
     {
-     "title": "박지윤, 전남편 최동석 '상간 소송' 승소에도 타격 無…공구 홍보 '마이...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-16T08:25:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001408490"
-    }
-   ]
-  },
-  {
-   "keyword": "AI 커닝 대책 혼란",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 15,
-   "recent20": 1,
-   "press": 14,
-   "firstArticleAt": "2026-11-16T07:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "유대종·정승제도 작심발언…“AI 커닝, 확실한 대책 없으면 수능 연기...",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-16T08:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003486313?sid=102"
-    },
-    {
-     "title": "[이슈] 'AI 안경 부정행위' 파장 확산…입시업계 \"수능도 뚫린다, 연기해...",
-     "press": "polinews.co.kr",
-     "publishedAt": "2026-11-16T08:34:00.000Z",
-     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=748544"
-    },
-    {
-     "title": "\"AI 커닝 잡을 자신 있나\" 묻자 교육장관 \"못할 것 같다\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-16T08:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000651399?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "귀국하는 최원호 감독님",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 24,
-   "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-16T07:27:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "최원호 야구대표팀 감독 \"투수 구속 훈련 치우쳐…제구력 향상 필요\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-16T08:31:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/421/0009292274"
-    },
-    {
-     "title": "'APBC 준우승' 최원호 감독 \"일본에 져 죄송...구속보다 제구력 키워야\"",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-16T08:30:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261116001316"
-    },
-    {
-     "title": "국제대회 데뷔전 치른 최원호 감독 “다카하시 공, 일본 선수도 치기 어...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-16T08:26:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/144/0001150102"
-    }
-   ]
-  },
-  {
-   "keyword": "김유정 100일 거짓말",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-16T07:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "박진영 “‘100일의 거짓말’ 결말 다 아는데 시청자로서 즐기는중”[화...",
-     "press": "heraldmuse.com",
-     "publishedAt": "2026-11-16T08:44:00.000Z",
-     "link": "https://m.entertain.naver.com/article/112/0003813464"
-    },
-    {
-     "title": "[Opinion] 그마저도 사랑이기에 - 드라마 '100일의 거짓말' [드라마/예능...",
-     "press": "artinsight.co.kr",
-     "publishedAt": "2026-11-16T08:30:00.000Z",
-     "link": "https://www.artinsight.co.kr/news/view.php?no=83333"
-    },
-    {
-     "title": "김유정이라 가능하다, '100일의 거짓말' 이끄는 막강 연기 내공",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-16T08:06:00.000Z",
-     "link": "http://www.joynews24.com/view/2026778"
+     "title": "李 \"한-아세안 AI 동맹·문화 창조산업 이니셔티브 제안\"",
+     "press": "newsprime.co.kr",
+     "publishedAt": "2026-11-16T09:08:00.000Z",
+     "link": "http://www.newsprime.co.kr/news/article.html?no=755159"
     }
    ]
   },
@@ -177,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 7,
    "recent20": 1,
-   "press": 6,
+   "press": 7,
    "firstArticleAt": "2026-11-16T08:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이재명 대통령, 아세안·APEC 정상회의 참석…한일 정상회담도",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-16T09:00:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3753612"
+    },
     {
      "title": "이 대통령, 아세안·APEC 정상외교 돌입…17일 한일 정상회담",
      "press": "iusm.co.kr",
@@ -195,12 +71,70 @@
      "press": "kgnews.co.kr",
      "publishedAt": "2026-11-16T08:18:00.000Z",
      "link": "https://www.kgnews.co.kr/news/article.html?no=919818"
+    }
+   ]
+  },
+  {
+   "keyword": "오세훈 시장, 한동훈 조문",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 18,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-16T07:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한동훈 의원 장인 빈소, 친한계·尹 정부 인사 조문 [TF사진관]",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-16T08:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000552480?sid=100"
     },
     {
-     "title": "트럼프·시진핑·푸틴 첫 3자 회담…북한 활개, 한일 동병상련",
-     "press": "koreareport.co.kr",
-     "publishedAt": "2026-11-16T08:16:00.000Z",
-     "link": "https://www.koreareport.co.kr/news/articleView.html?idxno=54777"
+     "title": "\"장동혁, 조작 징계 개입\" 폭로 예고 … 한동훈 복당 기로에",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-16T08:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005764574?sid=102"
+    },
+    {
+     "title": "한동훈 빙부상에 야권 조문 행렬..오세훈·김문수 등 방문",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-16T08:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005605018?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "APBC 마치고 귀국하는",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 44,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-16T07:41:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[ST포토] 조형우, APBC 마치고 귀국",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-16T08:46:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109937555075"
+    },
+    {
+     "title": "'홈런왕' 김도영, APBC 마치고 귀국 \"일본 투수 수준 보고 나이까지 검색...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-16T08:46:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16277933"
+    },
+    {
+     "title": "[ST포토] 허인서, APBC 마치고 귀국",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-16T08:44:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109937416422"
     }
    ]
   },
@@ -210,7 +144,7 @@
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-16T08:24:00.000Z",
    "exclusive": false,
@@ -271,7 +205,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 680,
+  "flagged": 683,
   "matched": 363,
   "avgLeadMin": 802,
   "recent": [
