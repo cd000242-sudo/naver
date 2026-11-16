@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-15T23:54:37.609Z",
+ "builtAt": "2026-11-16T02:30:56.313Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,396 +8,363 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 16,
  "candidates": [
   {
-   "keyword": "젠슨 황 CEO 복귀 논의",
-   "sources": [
-    "signal.bz",
-    "nate",
-    "daum"
-   ],
-   "articles90": 40,
-   "recent20": 6,
-   "press": 37,
-   "firstArticleAt": "2026-11-15T22:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "젠슨 황 '돌아오나'... \"사임 사흘 만에 복귀 타진\"",
-     "press": "lawtv.kr",
-     "publishedAt": "2026-11-15T23:50:00.000Z",
-     "link": "https://www.lawtv.kr/news/articleView.html?idxno=61418"
-    },
-    {
-     "title": "젠슨 황, 측근들과 CEO 복귀 논의…美 재무장관은 “외부 인사 찾아야”",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-15T23:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001885333?sid=104"
-    },
-    {
-     "title": "\"젠슨 황, 엔비디아 CEO 복귀 논의 중…백악관 설득 시도\"",
-     "press": "tfmedia.co.kr",
-     "publishedAt": "2026-11-15T23:48:00.000Z",
-     "link": "https://www.tfmedia.co.kr/news/article.html?no=208911"
-    }
-   ]
-  },
-  {
-   "keyword": "미미미누, AI 부정행위 대책",
+   "keyword": "대법, 한덕수 내란 선고",
    "sources": [
     "nate"
    ],
-   "articles90": 27,
-   "recent20": 8,
-   "press": 26,
-   "firstArticleAt": "2026-11-15T22:28:00.000Z",
+   "articles90": 69,
+   "recent20": 9,
+   "press": 57,
+   "firstArticleAt": "2026-11-16T01:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "유튜버 미미미누, 수능 연기 제안 \"AI 부정행위에 더 구체적인 대책 마...",
-     "press": "busan.com",
-     "publishedAt": "2026-11-15T23:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001407258?sid=102"
+     "title": "비판여론 못 버텼나…대법, '한덕수 내란 재판' 구속 만료 하루 전 선고...",
+     "press": "pressian.com",
+     "publishedAt": "2026-11-16T02:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/002/0002465988?sid=102"
     },
     {
-     "title": "AI 부정 사태에 미미미누 폭탄발언 \"수능 연기 검토해야\"",
+     "title": "대법, 한덕수 내란중요임무 19일 선고…구속만료 하루 전",
      "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-15T23:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000651234?sid=102"
+     "publishedAt": "2026-11-16T02:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000651305?sid=102"
     },
     {
-     "title": "\"AI 안경으로 맞힐 수 있으면 공부를 왜 하겠나\"던 수석, 하루 만에 왜 ...",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-15T23:48:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3752807"
+     "title": "한덕수·김건희, 19일 '운명의 날'…대법 상고심 선고",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-16T02:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000142334?sid=102"
     }
    ]
   },
   {
-   "keyword": "김유정 100일의 거짓말",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 26,
-   "recent20": 8,
-   "press": 19,
-   "firstArticleAt": "2026-11-15T22:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'100일의 거짓말' 이선, 구국단원 비서 이영복으로 존재감 확대",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-15T23:52:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16277514"
-    },
-    {
-     "title": "'100일의 거짓말' 김유정 정체 발각 위기…박진영 동생 구하려다 폭탄 ...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-15T23:50:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000639234"
-    },
-    {
-     "title": "'100일의 거짓말' 김유정·박진영, 작전도 관계도 균열…최고 시청률 12...",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-15T23:50:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109926635921"
-    }
-   ]
-  },
-  {
-   "keyword": "집",
+   "keyword": "공모",
    "sources": [
     "google"
    ],
-   "articles90": 20,
-   "recent20": 5,
-   "press": 17,
-   "firstArticleAt": "2026-11-15T22:50:00.000Z",
+   "articles90": 23,
+   "recent20": 16,
+   "press": 21,
+   "firstArticleAt": "2026-11-16T02:03:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "집 파는 사람 줄었는데…20년 넘게 보유한 집주인 매도는 늘었다",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-15T23:52:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2648423"
+     "title": "동부교육지원청, 서울교육 AI 활용 공모전 개최…우수작 10편 선정",
+     "press": "news.unn.net",
+     "publishedAt": "2026-11-16T02:28:00.000Z",
+     "link": "https://news.unn.net/news/articleView.html?idxno=600664"
     },
     {
-     "title": "시계·홈캠·부적까지 수상하다…‘완벽한 집’ 미스터리 포인트 3",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-15T23:52:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003541879"
+     "title": "대구행복진흥원 꼼지락발전소 '봉우리', 청소년자원봉사 공모전 장관상...",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-16T02:28:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4118772"
     },
     {
-     "title": "서울 집주인은 달랐다…순자산 같아도 낮은 상속세율 선호",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-15T23:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005354108?sid=101"
+     "title": "내 아이디어가 실제 복지 사업으로…사랑의열매, 공모전 개최",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-16T02:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002723972?sid=103"
     }
    ]
   },
   {
-   "keyword": "방탄소년단 MMA2026 6관왕 행복",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-15T22:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "방탄소년단, MMA2026 대상 2개·6관왕…에스파·아이브·코르티스도 대상",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-15T23:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005604568?sid=103"
-    },
-    {
-     "title": "방탄소년단, 'MMA 2026' 대상 포함 6관왕..\"다시 공연할 수 있어 행복\"",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-15T23:28:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005641228"
-    },
-    {
-     "title": "“역시 BTS” 방탄소년단, ‘MMA2026’ 6관왕…대상 2개 품었다",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-15T23:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001147404"
-    }
-   ]
-  },
-  {
-   "keyword": "잉글랜드 스페인 제압 1위로!",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-15T22:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "잉글랜드, 마드리드 원정서 스페인 3-2 제압...43경기 무패 끊었다",
-     "press": "dailysportshankook.co.kr",
-     "publishedAt": "2026-11-15T23:48:00.000Z",
-     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435551"
-    },
-    {
-     "title": "잉글랜드, UNL서 '월드컵 챔피언' 스페인 3-2 격파…43경기 무패 행진 저...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-15T23:47:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261116000112"
-    },
-    {
-     "title": "'무적함대' 43경기 무패 박살! 잉글랜드, 10명으로 스페인 이겼다... '발...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-15T23:46:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/108/0003487756"
-    }
-   ]
-  },
-  {
-   "keyword": "신인감독 김연경 시즌2",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-15T22:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'신인감독 김연경2' 윤영인X츠바키, 승부수 통했다…최고 시청률 6.5%",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-15T23:22:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109926375983"
-    },
-    {
-     "title": "'신인감독 김연경2' 한송희 시즌아웃·김윤아 영입⋯채선아·이호빈 맞...",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-15T23:06:00.000Z",
-     "link": "http://www.joynews24.com/view/2026370"
-    },
-    {
-     "title": "'신인감독 김연경2' 6주 연속 2054 시청률 1위…최고 6.5% 자체 최고치",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-15T23:06:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16277462"
-    }
-   ]
-  },
-  {
-   "keyword": "국토부 건설현장 안전점검",
+   "keyword": "김유정의 100일 거짓말",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-15T22:52:00.000Z",
+   "articles90": 9,
+   "recent20": 4,
+   "press": 9,
+   "firstArticleAt": "2026-11-16T01:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국토부, 겨울철 건설현장 2946곳 안전점검…추락 방지시설도 확인",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-15T23:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003155462?sid=101"
+     "title": "‘100일의 거짓말’ 김유정, '강단↔불안' 감정의 온도차 빛난 열연",
+     "press": "swtvnews.com",
+     "publishedAt": "2026-11-16T02:30:00.000Z",
+     "link": "https://www.swtvnews.com/news/newsview.php?ncode=1065577880655662"
     },
     {
-     "title": "국토부, 겨울철 건설현장 2900곳 안전점검",
-     "press": "issuenbiz.com",
-     "publishedAt": "2026-11-15T23:30:00.000Z",
-     "link": "http://www.issuenbiz.com/news/articleView.html?idxno=81607"
+     "title": "'100일의 거짓말' 김유정, 감정의 온도차 열연...일품 연기",
+     "press": "ize.co.kr",
+     "publishedAt": "2026-11-16T02:18:00.000Z",
+     "link": "https://m.entertain.naver.com/article/465/0000021027"
     },
     {
-     "title": "국토부, 한파 대비 겨울철 3000여 건설현장 안전점검 나서",
-     "press": "financialpost.co.kr",
-     "publishedAt": "2026-11-15T23:30:00.000Z",
-     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=301047"
+     "title": "시청자 소름 추측 떴다…'100일의 거짓말' 정무총감이 히데오를 입양한...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-16T02:16:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1174927"
     }
    ]
   },
   {
-   "keyword": "사랑이 온다",
+   "keyword": "조작기소 특검법 거부권",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 12,
    "recent20": 3,
-   "press": 4,
-   "firstArticleAt": "2026-11-15T22:50:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-16T01:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "배윤규, '사랑이 온다'서 과거 인정하고 가족 품었다",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-15T23:52:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16277513"
+     "title": "[포토] '조작기소 특검법 거부권 행사 촉구' 국민의힘 현장 최고위",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-16T02:18:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3448998"
     },
     {
-     "title": "'사랑이 온다' 윤유선, 억눌렀던 분노와 설움 폭발한 열연",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-15T23:36:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16277498"
+     "title": "[포토] 청와대 앞 조작기소 특검법 반대하는 국민의힘",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-16T02:16:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3448997"
     },
     {
-     "title": "‘사랑이 온다’ 배윤규, 누나에 화해",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-15T23:36:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611160108"
+     "title": "[포토] 국민의힘 '조작기소 특검법' 거부권 행사 촉구",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-16T02:14:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3448992"
     }
    ]
   },
   {
-   "keyword": "스페이스X 우주선 회수",
+   "keyword": "2027 수능 문답지 배부",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 9,
+   "recent20": 0,
+   "press": 9,
+   "firstArticleAt": "2026-11-16T01:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "수능 문답지 전국 시험지구에 배부 시작",
+     "press": "namdonews.com",
+     "publishedAt": "2026-11-16T02:08:00.000Z",
+     "link": "https://www.namdonews.com/news/articleView.html?idxno=929324"
+    },
+    {
+     "title": "코앞으로 다가온 수능… 2027학년도 수능 문답지 배부 시작",
+     "press": "edu.chosun.com",
+     "publishedAt": "2026-11-16T01:56:00.000Z",
+     "link": "https://edu.chosun.com/site/data/html_dir/2026/11/16/2026111680046.html"
+    },
+    {
+     "title": "수능 문제지·답안지, 전국 85개 시험지구 배부 시작",
+     "press": "tbs.seoul.kr",
+     "publishedAt": "2026-11-16T01:44:00.000Z",
+     "link": "http://tbs.seoul.kr/news/newsView.do?typ_800=6&idx_800=3538771&seq_800=20531672"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 부부 필리핀 출국",
    "sources": [
     "signal.bz"
    ],
    "articles90": 4,
    "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-15T23:04:00.000Z",
+   "firstArticleAt": "2026-11-16T01:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "스타십 '반쪽 성공'에도...상단 십, 첫 발사탑 회수 빛났다",
-     "press": "choicenews.co.kr",
-     "publishedAt": "2026-11-15T23:46:00.000Z",
-     "link": "http://www.choicenews.co.kr/news/articleView.html?idxno=173207"
+     "title": "이재명 대통령 부부, 아세안·APEC 참석... 3박 4일 순방",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-16T02:22:00.000Z",
+     "link": "https://www.insight.co.kr/news/582199"
     },
     {
-     "title": "스페이스X, 사상 첫 '우주선 본체 회수'…로켓 완전 재사용 목표에 성큼",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-15T23:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000651222?sid=101"
+     "title": "李대통령, 필리핀으로 출국…3박 4일 아세안·APEC 정상회의",
+     "press": "namdonews.com",
+     "publishedAt": "2026-11-16T02:08:00.000Z",
+     "link": "https://www.namdonews.com/news/articleView.html?idxno=929327"
     },
     {
-     "title": "[미국 특징주] 스페이스X 스타십 2단부 첫 회수...완전 재사용 성큼",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-15T23:05:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261116000049"
+     "title": "이 대통령, 아세안·APEC 정상회의 참석차 출국…3박 4일 다자외교",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-16T01:50:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=729507"
+    }
+   ]
+  },
+  {
+   "keyword": "진형구 별세",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-16T01:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘한동훈 의원 장인’ 진형구 전 대전고검장 별세",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-16T02:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002723958?sid=100"
+    },
+    {
+     "title": "한동훈 의원 장인 진형구 전 대전고검장 별세-향년 81세",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-16T01:56:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95352"
+    },
+    {
+     "title": "한동훈 의원 장인상…진형구 전 대전고검장 별세",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-16T01:30:00.000Z",
+     "link": "https://www.ajunews.com/view/20261116100945557"
+    }
+   ]
+  },
+  {
+   "keyword": "이현중",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-16T01:21:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이현중, 진짜 NBA 진출하나…3점슛 6개+25득점→또 G리그 '커리어 하이'",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-16T02:24:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/445/0000490634"
+    },
+    {
+     "title": "'크레이지 모드' 4Q를 지배한 이현중, 3점슛 6개 포함 25P 7R 4A 기록하며...",
+     "press": "rookie.co.kr",
+     "publishedAt": "2026-11-16T01:32:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/398/0000105311"
+    },
+    {
+     "title": "‘4쿼터에만 3점 5방·16점 대폭발’ 이현중, 25점 맹폭으로 립시티 연장...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-16T01:25:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/241/0003541906"
+    }
+   ]
+  },
+  {
+   "keyword": "박혜연",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-16T01:31:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "양정아와는 달랐다‥김승수, 16세 연하 박혜연에 진심 “전 안 돼요?”...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-16T01:56:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001187912"
+    },
+    {
+     "title": "\"전 안돼요?\" 김승수, 53세에 전한 핑크빛 소식..♥박혜연과 커플 탄생하...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-16T01:36:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005641256"
+    },
+    {
+     "title": "배우♥아나운서 부부 탄생하나…김승수, '14살 연하' 박혜연에 \"전 안 돼...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-16T01:31:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000784621"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 559,
-  "matched": 287,
-  "avgLeadMin": 667,
+  "flagged": 568,
+  "matched": 301,
+  "avgLeadMin": 680,
   "recent": [
    {
-    "keyword": "서울 아파트값 92주 상승",
-    "hitKeyword": "서울 월세 상승 압박",
-    "hitAt": "2026-11-16T08:30:00+09:00",
-    "leadMin": 5387
+    "keyword": "선관위 특검 압수수색",
+    "hitKeyword": "명륜당 압수수색",
+    "hitAt": "2026-11-16T11:00:00+09:00",
+    "leadMin": 5753
    },
    {
-    "keyword": "서울 아파트값 92주 연속 상승",
-    "hitKeyword": "서울 월세 상승 압박",
-    "hitAt": "2026-11-16T08:30:00+09:00",
-    "leadMin": 5327
+    "keyword": "특검, 중앙선관위 압수수색",
+    "hitKeyword": "명륜당 압수수색",
+    "hitAt": "2026-11-16T11:00:00+09:00",
+    "leadMin": 5658
    },
    {
-    "keyword": "젠슨 황과 러트닉 조사",
-    "hitKeyword": "러트닉 반도체 규제 완화",
-    "hitAt": "2026-11-16T08:30:00+09:00",
-    "leadMin": 2829
+    "keyword": "변요한 티파니 너무 사랑스러워",
+    "hitKeyword": "변요한 티파니 시상자",
+    "hitAt": "2026-11-16T10:30:00+09:00",
+    "leadMin": 629
    },
    {
-    "keyword": "이탈리아 메타 과징금",
-    "hitKeyword": "금융권 과징금 계산",
-    "hitAt": "2026-11-16T08:30:00+09:00",
-    "leadMin": 1946
+    "keyword": "김광규 28년만 자가 공개",
+    "hitKeyword": "김광규 연희동 자가",
+    "hitAt": "2026-11-16T09:30:00+09:00",
+    "leadMin": 559
    },
    {
-    "keyword": "이란 미군기지 드론 공격",
-    "hitKeyword": "이란 미군 공격 재개",
-    "hitAt": "2026-11-16T08:00:00+09:00",
-    "leadMin": 147
-   },
-   {
-    "keyword": "최혜진 골프선수",
-    "hitKeyword": "최혜진 LPGA 준우승",
-    "hitAt": "2026-11-16T08:00:00+09:00",
-    "leadMin": 16
+    "keyword": "김광규 새집",
+    "hitKeyword": "김광규 연희동 자가",
+    "hitAt": "2026-11-16T09:30:00+09:00",
+    "leadMin": 136
    },
    {
     "keyword": "청와대 AI 부정행위 전수조사",
-    "hitKeyword": "세무사 시험 AI 부정행위",
-    "hitAt": "2026-11-16T07:30:00+09:00",
-    "leadMin": 87
+    "hitKeyword": "수능 AI 부정행위",
+    "hitAt": "2026-11-16T09:30:00+09:00",
+    "leadMin": 86
    },
    {
-    "keyword": "세무사 수석",
-    "hitKeyword": "세무사 시험 AI 부정행위",
-    "hitAt": "2026-11-16T07:30:00+09:00",
+    "keyword": "리트 만점자 인터뷰",
+    "hitKeyword": "리트 만점자 인터뷰",
+    "hitAt": "2026-11-16T09:30:00+09:00",
+    "leadMin": 86
+   },
+   {
+    "keyword": "김유정 100일의 거짓말",
+    "hitKeyword": "100일의 거짓말 폭발",
+    "hitAt": "2026-11-16T09:30:00+09:00",
     "leadMin": 56
    },
    {
-    "keyword": "김유정 100일 거짓말",
-    "hitKeyword": "100일의 거짓말 12회",
-    "hitAt": "2026-11-16T07:30:00+09:00",
-    "leadMin": 26
+    "keyword": "잉글랜드 스페인 제압 1위로!",
+    "hitKeyword": "잉글랜드 스페인 승리",
+    "hitAt": "2026-11-16T09:30:00+09:00",
+    "leadMin": 45
    },
    {
-    "keyword": "닥터X : 하얀 마피아의 시대",
-    "hitKeyword": "닥터X 최종회",
-    "hitAt": "2026-11-16T07:30:00+09:00",
-    "leadMin": 6
+    "keyword": "메가스피드 앨리스 황",
+    "hitKeyword": "메가스피드 선긋기",
+    "hitAt": "2026-11-16T09:00:00+09:00",
+    "leadMin": 66
    }
   ]
  }
