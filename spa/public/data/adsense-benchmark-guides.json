@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-16T07:42:36.220Z",
+  "generatedAt": "2026-11-16T08:19:56.792Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -72,79 +72,6 @@
           "views": 410,
           "answers": 4,
           "askedAt": "2026.10.16"
-        }
-      ]
-    },
-    {
-      "id": "ed477398b8b4ea36",
-      "urls": [
-        "https://alldaybiz.com/104",
-        "https://thecheck.co.kr/%ec%82%bc%ec%84%b1%ec%a0%84%ec%9e%90-%eb%b0%b0%eb%8b%b9%ea%b8%88-4601%ec%9b%90-%ea%b8%b0%ec%a4%80%ec%9d%bc-2026/",
-        "https://ezecon.co.kr/news/kakao-150-billion-treasury-stock-burn/",
-        "https://hanbre.tistory.com/1883",
-        "https://yoarc.tistory.com/1841",
-        "https://trendsearch.tistory.com/entry/%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90-SK%ED%95%98%EC%9D%B4%EB%8B%89%EC%8A%A4-%EA%B8%89%EB%9D%BD-%EC%9D%B4%EC%9C%A0-5%EA%B0%80%EC%A7%80%EC%99%80-%EC%A3%BC%EA%B0%80-%ED%99%95%EC%9D%B8-%EA%B8%B0%EC%A4%80-2026%EB%85%84-11%EC%9B%94-%EC%A0%95%EB%A6%AC"
-      ],
-      "guide": {
-        "direction": "삼성전자 주주환원 '발표일이 언제인지', '규모가 실망스럽다'는 질문이 반복되지만 고수 글들은 110조 규모·자사주 매입·배당 소식만 다뤘고 발표 시점과 실제 수령 금액 계산법은 빠져 있다. 이 글은 주주환원 발표일·배당 지급일 흐름과 삼성전자우·보통주 비교표로 '언제, 얼마' 질문을 끝낸다. 카카오 인적분할 비율 이슈는 별개 종목이므로 섞지 않고 분리해 다룬다.",
-        "searchTargets": [
-          "삼성전자 주주환원 발표일",
-          "삼성전자 주주환원 날짜",
-          "삼성전자 주주환원 얼마",
-          "삼성전자 주주환원 실망"
-        ],
-        "mustInclude": [
-          "주주환원 발표일·배당 지급일 일정(확인 필요: 삼성전자 공시·IR)",
-          "주주환원 규모 110조 상세 내역(확인 필요: 공식 발표자료)",
-          "삼성전자우·보통주 배당금 비교표",
-          "자사주 매입·소각 일정과 주가 영향 포인트",
-          "카카오 인적분할 비율 0.388은 별도 이슈로 구분 표기(확인 필요: 카카오 공시)"
-        ],
-        "mustAvoid": [
-          "카카오 인적분할 비율 이슈와 삼성전자 주주환원을 같은 사안처럼 섞기",
-          "주주환원 발표일을 확정되지 않은 채 특정 날짜로 단정",
-          "주가 전망을 보장하듯 서술"
-        ],
-        "checkBefore": [
-          "삼성전자 공식 IR·DART 공시로 주주환원 규모·일정 확인",
-          "특별배당 지급일 공시 확인",
-          "카카오 인적분할 비율은 카카오 공식 공시로 별도 확인"
-        ],
-        "solves": [
-          "주주환원 발표가 언제냐 → 공시 일정 타임라인으로 정리",
-          "주주환원이 실망이다 → 규모·배당 vs 기대치 비교표 제공",
-          "얼마 받는지 모르겠다 → 보통주·우선주별 배당 계산법 제공"
-        ],
-        "actionTitles": [
-          "삼성전자 주주환원 발표일과 배당 지급일 조회하는 법",
-          "삼성전자 주주환원 규모 얼마나 될지 직접 계산해보는 방법",
-          "삼성전자 주주환원 실망이라는 말 나오는 이유와 주가 확인법"
-        ]
-      },
-      "at": "2026-11-09T20:33:46.901Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "삼성전자우 주가 전망 더 들고 있어도 괜찮겠....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=493381072&answerNo=25&qb=7IK87ISx7KCE7J6QIOyjvOyjvO2ZmOybkCDtmZXsoJUg7J6Q7IKs7KO8IOunpOyehQ==",
-          "views": 3872,
-          "answers": 26,
-          "askedAt": "2026.08.30"
-        },
-        {
-          "title": "삼성전자 주가 예측",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=494719061&answerNo=5&qb=7IK87ISx7KCE7J6QIOyjvOyjvO2ZmOybkCDtmZXsoJUg7J6Q7IKs7KO8IOunpOyehQ==",
-          "views": 1143,
-          "answers": 16,
-          "askedAt": "2026.08.13"
-        },
-        {
-          "title": "삼성전자 자사주 매입관련",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=485979850&answerNo=3&qb=7IK87ISx7KCE7J6QIOyjvOyjvO2ZmOybkCDtmZXsoJUg7J6Q7IKs7KO8IOunpOyehQ==",
-          "views": 660,
-          "answers": 3,
-          "askedAt": "2025.07.10"
         }
       ]
     },
@@ -713,71 +640,6 @@
       ]
     },
     {
-      "id": "aa4790bea4ba8636",
-      "urls": [
-        "https://yeeso.tistory.com/entry/%EC%97%B0%EB%A7%90%EC%A0%95%EC%82%B0-%EA%B0%84%EC%86%8C%ED%99%94-%EC%84%9C%EB%B9%84%EC%8A%A4%EC%97%90-%EC%95%88-%EB%82%98%EC%98%A4%EB%8A%94-%EC%9E%90%EB%A3%8C-%EC%B4%9D%EC%A0%95%EB%A6%AC%EF%BD%9C%EC%9B%94%EC%84%B8%C2%B7%EC%95%88%EA%B2%BD%C2%B7%ED%95%99%EC%9B%90%EB%B9%84-%EC%A6%9D%EB%B9%99%EC%84%9C%EB%A5%98-%EC%A4%80%EB%B9%84-%EB%B0%A9%EB%B2%95"
-      ],
-      "guide": {
-        "direction": "지식인에서는 의료비가 간소화서비스에 안 뜨는 이유와 1월 15일 자료 제공 시점을 묻지만, 고수 블로그 제목은 '총정리'라고만 적어 원래 뜨는 항목과 월세·안경·학원비처럼 애초에 안 뜨는 항목을 구분해주지 않는다. 이 글은 항목별 제공 여부와 직접 챙길 증빙서류를 표로 정리해 끝낸다.",
-        "searchTargets": [
-          "연말정산 간소화 서비스",
-          "연말정산 간소화서비스 의료비",
-          "연말정산 간소화 자료",
-          "연말정산 간소화 조회"
-        ],
-        "mustInclude": [
-          "의료비 내역은 1월 15일부터 제공되며 0시부터 조회 가능, 누락 시 선택적 추가·삭제 가능(확인 필요: 국세청 홈택스 공지)",
-          "월세·안경·학원비처럼 간소화서비스에 기본적으로 뜨지 않는 항목과 각각 직접 받아야 할 증빙서류(확인 필요: 원문 기사)",
-          "간소화서비스는 국세청의 '편의 제공'이고 누락 자료는 근로자가 직접 수집해 제출해야 한다는 원칙",
-          "2월 연말정산을 놓쳤을 때 5월 신고 기간에 원천징수영수증+간소화서비스 자료로 다시 신고하는 절차"
-        ],
-        "mustAvoid": [
-          "의료비처럼 간소화서비스에 뜨는 항목과 월세·안경·학원비처럼 원래 안 뜨는 항목을 구분 없이 설명하는 것",
-          "보험금 수령과 연말정산 공제 대상 여부를 혼동해서 설명하는 것(지식인 실제 혼동 사례)",
-          "연도별로 바뀌는 간소화서비스 오픈·개통 일정을 과거 연도 날짜로 단정하는 것"
-        ],
-        "checkBefore": [
-          "해당 연도 간소화서비스 오픈(개통)일과 의료비 자료 제공 시작일(국세청 홈택스 공지)",
-          "월세·안경·학원비 공제를 위한 정확한 제출 서류와 제출처(국세청 연말정산 안내 또는 원문 기사)"
-        ],
-        "solves": [
-          "간소화서비스에 의료비가 안 뜬다 → 전산자료 미제출 사례와 1월 15일 이후 재조회·직접 영수증 받는 법 정리",
-          "월세·안경·학원비는 왜 없나 → 항목별 간소화서비스 대상 여부와 직접 챙길 서류를 표로 구분",
-          "2월에 연말정산 못 했는데 어떻게 하나 → 5월 종합소득세 신고 기간 재신고 순서 안내"
-        ],
-        "actionTitles": [
-          "연말정산 간소화 서비스 의료비 안 뜰 때 확인하는 법",
-          "연말정산 간소화 서비스 조회하고 빠진 자료 채우는 법"
-        ]
-      },
-      "at": "2026-11-09T21:26:28.687Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "국세청 연말정산간소화 서비스 이용시",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40311&docId=214867539&answerNo=1&qb=7Jew66eQ7KCV7IKwIOqwhOyGjO2ZlCDshJzruYTsiqQg64KY7JikIOyekOujjA==",
-          "views": 5732,
-          "answers": 1,
-          "askedAt": "2015.01.08"
-        },
-        {
-          "title": "연말정산에 관하여",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40311&docId=242379620&answerNo=1&qb=7Jew66eQ7KCV7IKwIOqwhOyGjO2ZlCDshJzruYTsiqQg64KY7JikIOyekOujjA==",
-          "views": 3419,
-          "answers": 1,
-          "askedAt": "2016.01.08"
-        },
-        {
-          "title": "연말정산 내역 의료비",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40311&docId=405703497&answerNo=2&qb=7Jew66eQ7KCV7IKwIOqwhOyGjO2ZlCDshJzruYTsiqQg64KY7JikIOyekOujjA==",
-          "views": 1094,
-          "answers": 2,
-          "askedAt": "2021.11.23"
-        }
-      ]
-    },
-    {
       "id": "89fcac98055481a5",
       "urls": [
         "https://car.tipmany.com/entry/%EA%B0%91%EC%83%81%EC%84%A0%EA%B8%B0%EB%8A%A5%EC%A0%80%ED%95%98%EC%A6%9D%EC%A6%9D%EC%83%81",
@@ -1340,69 +1202,6 @@
           "views": 308,
           "answers": 2,
           "askedAt": "2026.10.19"
-        }
-      ]
-    },
-    {
-      "id": "ed249e7a4290b618",
-      "urls": [
-        "https://blogger00220.tistory.com/entry/%EC%86%8C%EB%93%9D%C2%B7%EC%84%B8%EC%9C%A8-%EC%A0%9C33%ED%8E%B8-%ED%8F%89%EC%83%9D-%EC%9D%BC%EA%B5%B0-%ED%87%B4%EC%A7%81%EA%B8%88-%EC%84%B8%EA%B8%88-%EC%B5%9C%EB%8C%80-50-%EA%B9%8E%EB%8A%94-%ED%87%B4%EC%A7%81%EC%86%8C%EB%93%9D%EC%84%B8%EC%9C%A8-%EC%A0%88%EA%B0%90-%EB%B0%8F-IRP-%EC%97%B0%EA%B8%88-%EC%88%98%EB%A0%B9-%EA%B7%B9%EB%8C%80%ED%99%94-3%EB%8C%80-%EC%8B%A4%EC%A0%84-%EA%B3%B5%EC%8B%9D-2026%EB%85%84-%EA%B0%9C%EC%A0%95-%EC%84%B8%EB%B2%95-%EC%99%84%EB%B2%BD-%EB%B0%98%EC%98%81",
-        "https://coolmool-economy.tistory.com/entry/executive-severance-pay-calculation-2026"
-      ],
-      "guide": {
-        "direction": "지식인 질문들은 임원퇴직금을 급여×배수로 계산해도 왜 전액이 퇴직소득으로 인정되지 않는지에서 막혀 있다(한도초과분 처리 혼란). 고수 글 제목은 '2026년 한도 2배수'만 던지고 초과분이 근로소득으로 재분류돼 세금이 어떻게 달라지는지 숫자로 안 보여줬다. 근속연수·급여·배수를 넣는 계산 순서와 한도초과분 분리 계산 예시를 단계별로 보여주면 끝까지 읽힌다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "임원 퇴직금 한도식: 퇴직 직전 1년 급여 × 1/10 × 근속연수(배수) 계산 구조",
-          "한도초과분은 퇴직소득이 아닌 근로소득으로 과세된다는 구분 기준",
-          "근속연수는 역년(1.1~12.31) 기준으로 계산한다는 점(소득세법 시행규칙 제22조 제5항)",
-          "퇴직소득금액과 같은 해 근로소득은 합산하지 않고 별도 계산한다는 점(소득세법 제48조 제2항)",
-          "2026년 개정 세법 반영 여부 (확인 필요: 국세청·기획재정부 공식 발표)"
-        ],
-        "mustAvoid": [
-          "임원 퇴직금과 일반 근로자 퇴직금 계산식을 같은 것으로 섞어 쓰지 않기(한도 규정이 다름)",
-          "정관에 퇴직금 규정이 있다고 전액 퇴직소득으로 인정된다고 단정하지 않기(한도초과분 존재)",
-          "'최대 50% 깎는다'는 수치를 모든 사례에 적용되는 것처럼 일반화하지 않기"
-        ],
-        "checkBefore": [
-          "2026년 개정 세법상 퇴직소득 한도 배수·공식 변경 여부(국세청·기획재정부 공식 공지)",
-          "임원 퇴직금 한도 계산에 적용되는 소득세법 제22조 제3항, 시행규칙 제22조 제5항 원문",
-          "한도초과분 원천세 신고 방법은 홈택스 또는 세무사 확인 필요"
-        ],
-        "solves": [
-          "임원퇴직금을 급여×배수로 계산해도 전액 인정되는지 모르는 문제 → 한도초과분 재분류 구조를 계산 예시로 설명",
-          "근속연수를 어떻게 세는지 모르는 문제 → 역년 기준 계산 규칙 제시",
-          "퇴직금과 그해 급여를 합산해야 하는지 혼란 → 별도(분리) 계산 원칙 명시"
-        ],
-        "actionTitles": [
-          "퇴직소득세 계산, 2026년 개정 세법 기준 정리",
-          "대표이사 퇴직금 소득세, 한도 넘으면 어떻게 되나 확인"
-        ]
-      },
-      "at": "2026-11-10T04:45:45.576Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "임원퇴직금 계산방법 부탁드립니다.",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60802&docId=495048945&answerNo=1&qb=7J6E7JuQ7Ye07KeB6riI6rOE7IKw67Cp67KV",
-          "views": 46,
-          "answers": 1,
-          "askedAt": "2026.09.06"
-        },
-        {
-          "title": "퇴직소득세 계산, 15년 근속에 퇴직금 9천만 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40309&docId=495754978&answerNo=1&qb=7J6E7JuQ7Ye07KeB6riI6rOE7IKw67Cp67KV",
-          "views": 39,
-          "answers": 1,
-          "askedAt": "2026.10.30"
-        },
-        {
-          "title": "대표이사 퇴직금 소득세, 임원 퇴직소득 한도....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40309&docId=495740960&answerNo=1&qb=7J6E7JuQ7Ye07KeB6riI6rOE7IKw67Cp67KV",
-          "views": 28,
-          "answers": 1,
-          "askedAt": "2026.10.29"
         }
       ]
     },
@@ -2195,39 +1994,6 @@
           "askedAt": "2026.11.07"
         }
       ]
-    },
-    {
-      "id": "1bb254f06d2c9448",
-      "urls": [
-        "https://coda3.codaland24.com/128"
-      ],
-      "guide": {
-        "direction": "자동완성 '공모주 방법'에서 보듯 검색자는 사업성보다 신청 절차(주관사·일정·배정 기준)를 몰라서 막힌다. 고수 블로그 제목은 보잉·에어버스 부품사라는 사업성 설명에 그쳐 실제 청약 신청 방법이 빠졌을 가능성이 크다. 글은 청약 일정표와 균등·비례 배정 기준, 신청 절차로 바로 신청까지 끝내게 한다.",
-        "searchTargets": [
-          "하나에어로다이내믹스 공모주",
-          "하나에어로다이내믹스 공모주 방법"
-        ],
-        "mustInclude": [
-          "청약 일정(청약 시작일·종료일·환불일)(확인 필요: 주관사 공고)",
-          "균등배정 vs 비례배정 최소 청약 수량·금액 기준",
-          "보잉·에어버스向 조립 부품 매출 비중(확인 필요: 사업보고서)"
-        ],
-        "mustAvoid": [],
-        "checkBefore": [],
-        "solves": [
-          "하나에어로다이내믹스 공모주 청약 방법을 모름 → 주관사별 신청 절차와 계좌 개설 단계 안내",
-          "균등배정 받으려면 얼마를 청약해야 하는지 모름 → 최소 청약 수량·금액 기준 정리",
-          "공모가가 적정한지 판단 어려움 → 보잉·에어버스 매출 비중과 공모가 밴드 비교"
-        ],
-        "actionTitles": [
-          "하나에어로다이내믹스 공모주 청약 방법 한눈에",
-          "하나에어로다이내믹스 공모주 일정·균등배정 확인",
-          "하나에어로다이내믹스 공모주 청약 전 체크리스트"
-        ]
-      },
-      "at": "2026-11-10T21:53:56.794Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
     },
     {
       "id": "61b7b519e83feeaf",
@@ -4696,73 +4462,6 @@
       ]
     },
     {
-      "id": "411ae5c7d6a5fdea",
-      "urls": [
-        "https://jjanggu1612.tistory.com/entry/%EC%A2%85%ED%95%A9%EB%B6%80%EB%8F%99%EC%82%B0%EC%84%B8-%EB%82%A9%EB%B6%80-12%EC%9B%94-15%EC%9D%BC-%EB%A7%88%EA%B0%90%EA%B3%BC-%EA%B3%B5%EC%A0%9C-%EA%B8%B0%EC%A4%80",
-        "https://info.kjchoi.co.kr/comprehensive-property-tax-payment/"
-      ],
-      "guide": {
-        "direction": "혼인신고·신탁·고지세액 급증·납부유예 가능성 등 지식인 질문은 '마감일'보다 '내 상황이 예외에 해당하는지'에 쏠려 있다. 고수 블로그의 마감일·분납 안내는 있지만 혼인신고·신탁·합산배제 신고 시 납세의무자가 바뀌는 조건은 짚지 못했다. 이 글은 12월 15일 기한, 분납·유예 요건, 상황별 납세의무자 판단을 표로 정리해 끝낸다.",
-        "searchTargets": [
-          "종합부동산세 납부기한",
-          "종합부동산세 납부유예",
-          "종합부동산세 납부내역 조회",
-          "종합부동산세 납부 기준"
-        ],
-        "mustInclude": [
-          "12월 15일 납부기한과 분납 기준(확인 필요: 국세청 분납 기준금액·기간)",
-          "납부유예 법정사유(재해·화재·도난 등) 및 신청해도 승인 가능성이 희박한 이유",
-          "혼인신고 시 종부세 영향(재산세 세율특례만 영향, 종부세 자체는 변동 미미)",
-          "신탁 주택 종부세 납세의무자 기준(종합부동산세법 제7조 1항·2항)",
-          "합산배제(임대주택 등) 신고 매년 필요 여부"
-        ],
-        "mustAvoid": [
-          "혼인신고=종부세 폭탄이라는 과장(실제로는 재산세 특례 일부만 영향)",
-          "재산세 고지서와 종부세 고지서를 같은 세금으로 혼동"
-        ],
-        "checkBefore": [
-          "국세청 홈택스 종부세 납부유예 신청 요건·절차 공지",
-          "종합부동산세법 제7조 원문(신탁 재산 납세의무자 조항)"
-        ],
-        "solves": [
-          "혼인신고하면 종부세 생기나? → 재산세 세율특례 영향만 있고 종부세는 거의 변동 없음을 설명",
-          "종부세 고지세액이 많아 보일 때 어떻게 하나? → 합산배제·이의신청 절차 안내",
-          "종부세 납부유예 가능한가? → 법정사유 요건과 실제 승인 가능성 설명"
-        ],
-        "actionTitles": [
-          "종합부동산세 납부기한 12월 15일, 분납·유예 신청 조건 정리",
-          "종합부동산세 납부내역 조회 방법과 고지서 확인 순서",
-          "종합부동산세 납부유예 신청 조건과 승인 가능성 확인"
-        ]
-      },
-      "at": "2026-11-12T02:59:09.957Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "재혼 후 혼인신고를 하면 종합부동산세와 재....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40309&docId=495696507&answerNo=1&qb=7KKF7ZWp67aA64+Z7IKw7IS464Kp67aA",
-          "views": 30,
-          "answers": 1,
-          "askedAt": "2026.10.26"
-        },
-        {
-          "title": "담보신탁한 주택 종합부동산세, 신탁회사와 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40309&docId=495919328&answerNo=1&qb=7KKF7ZWp67aA64+Z7IKw7IS464Kp67aA",
-          "views": 16,
-          "answers": 1,
-          "askedAt": "2026.11.11"
-        },
-        {
-          "title": "종합부동산세 고지세액이 많아 보일 때, 직접....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40309&docId=495916870&answerNo=1&qb=7KKF7ZWp67aA64+Z7IKw7IS464Kp67aA",
-          "views": 9,
-          "answers": 1,
-          "askedAt": "2026.11.11"
-        }
-      ]
-    },
-    {
       "id": "0ce45a82f82b26fc",
       "urls": [
         "https://apt-view.com/%ec%a7%91-%ed%95%9c-%ec%b1%84-%eb%b9%84%ea%b1%b0%ec%a3%bc%eb%a9%b4-%ec%a2%85%eb%b6%80%ec%84%b8-430%eb%a7%8c%ec%9b%90-%eb%8a%98%ec%96%b4%eb%82%9c%eb%8b%a4-%ea%b3%84%ec%82%b0%eb%b0%a9%eb%b2%95-%ed%99%95/",
@@ -5192,69 +4891,6 @@
           "views": 93,
           "answers": 1,
           "askedAt": "2026.11.10"
-        }
-      ]
-    },
-    {
-      "id": "cac3754ee1f275df",
-      "urls": [
-        "https://quiet-flaneur.tistory.com/53",
-        "https://blanc888.tistory.com/146"
-      ],
-      "guide": {
-        "direction": "지식인 질문은 '연 7% 적금인데 왜 받는 돈이 적냐'보다 '적금 담보대출 받으면 실수령액이 얼마냐'에 더 몰려 있어, 검색자는 표면금리가 아니라 세금·대출 상환 후 남는 돈이 궁금하다. 고수 글은 우대금리 계산까지만 다루고 담보대출로 이어지는 실수령액 계산은 비워둔다. 이 글은 세후 이자, 우대금리 충족 여부별 비교표, 담보대출 상환방식별 실수령액 계산까지 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "연 7% 명시 금리에서 이자소득세 15.4% 뗀 후 실제 받는 이자 계산 예시",
-          "우대금리 조건(자동이체, 카드사용 등) 충족 못했을 때 실제 적용금리 비교표",
-          "월 납입액별(10만/20만/30만원) 만기 수령액 계산표",
-          "적금 담보대출 시 '적금 - 대출금 - 대출이자 = 실제 수령액' 계산 공식",
-          "담보대출 상환방식(만기상환/원리금상환)별 수령액 차이 설명"
-        ],
-        "mustAvoid": [
-          "특정 은행·상품명을 광고처럼 추천하는 뉘앙스",
-          "광고된 금리(연 7%)와 실제 수령 이자를 같은 것처럼 서술하지 않기",
-          "적금 자체 조건과 예금담보대출 조건을 혼동해서 설명하지 않기"
-        ],
-        "checkBefore": [
-          "해당 적금 상품의 우대금리 세부조건(은행 공식 상품설명서·약관)",
-          "이자소득세율 및 비과세종합저축 여부(국세청·은행 고지사항)"
-        ],
-        "solves": [
-          "연 7% 적금인데 실제 받는 돈이 왜 적나요 → 우대금리 조건과 세후이자 계산으로 설명",
-          "적금 담보대출 받으면 만기에 얼마 받나요 → 적금-대출-이자 계산 공식 제공",
-          "담보대출 상환방식에 따라 수령액이 어떻게 달라지나요 → 방식별 비교표 제공"
-        ],
-        "actionTitles": [
-          "연 7% 적금 실제이자 계산, 우대금리 조건까지 확인하기",
-          "적금 만기 수령액 계산법, 우대금리 충족 여부로 비교하기",
-          "적금 담보대출 실제 수령액 계산, 상환방식별로 따져보기"
-        ]
-      },
-      "at": "2026-11-12T02:59:09.957Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "청년도약계좌 예금담보대출",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=4010502&docId=495485489&answerNo=2&qb=7JiI6riI64u067O064yA7LacIOyLpOygnCDsiJjroLnslaEg7IOB7ZmY",
-          "views": 309,
-          "answers": 7,
-          "askedAt": "2026.10.10"
-        },
-        {
-          "title": "폐업예정 기대출문의요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40101&docId=495538258&answerNo=6&qb=7JiI6riI64u067O064yA7LacIOyLpOygnCDsiJjroLnslaEg7IOB7ZmY",
-          "views": 210,
-          "answers": 9,
-          "askedAt": "2026.10.14"
-        },
-        {
-          "title": "kb예적금 담보대출",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=4010502&docId=493222959&answerNo=1&qb=7JiI6riI64u067O064yA7LacIOyLpOygnCDsiJjroLnslaEg7IOB7ZmY",
-          "views": 132,
-          "answers": 5,
-          "askedAt": "2026.05.02"
         }
       ]
     },
@@ -7594,72 +7230,6 @@
           "views": 70,
           "answers": 3,
           "askedAt": "2026.10.23"
-        }
-      ]
-    },
-    {
-      "id": "74ad26e965b80268",
-      "urls": [
-        "https://money-magazine.co.kr/%ea%b1%b4%ea%b0%95%ea%b2%80%ec%a7%84-%ea%b2%b0%ea%b3%bc-%ec%a1%b0%ed%9a%8c/",
-        "https://alldaybiz.com/105"
-      ],
-      "guide": {
-        "direction": "지식인에선 회사 건강검진비 지원이 4대보험·소득공제에 걸리는지, 개인부담이 얼마인지 헷갈려 묻는다. 고수 글은 결과조회 방법과 법정검진 과세 구분을 각각 따로 다뤄 '내 개인부담이 정확히 얼마인지'는 안 보여준다. 법정·추가검진 비용 구분표와 건강iN 조회 경로를 함께 제시해 조회와 비용 질문을 한 글로 끝낸다.",
-        "searchTargets": [
-          "회사 건강검진 비용",
-          "회사 건강검진 비용 지원",
-          "회사 건강검진 비용 개인부담"
-        ],
-        "mustInclude": [
-          "국민건강보험 홈페이지·앱 '건강iN' 메뉴에서 로그인 후 검진결과 조회하는 경로",
-          "법정 건강검진(공단 무료)과 회사 추가검진(개인부담) 구분표",
-          "회사 지원 검진비 중 법정검진 초과분은 근로소득 과세 대상이라는 기준",
-          "(확인 필요: 건강검진비 비과세 한도·과세 기준 - 국세청/국민건강보험공단 공지)",
-          "건강iN에서 결과 미조회 시 병원 발급 검진결과지로 대체하는 방법"
-        ],
-        "mustAvoid": [
-          "회사마다 지원 범위가 다른데 '모든 회사가 전액 지원'처럼 일반화하지 말기",
-          "건강iN 로그인(공동인증서 등) 절차를 과도히 캡처해 피싱처럼 보이게 하지 말기"
-        ],
-        "checkBefore": [
-          "국민건강보험 The건강보험 홈페이지·건강iN 앱 현재 메뉴명과 경로 확인",
-          "국세청·국민건강보험공단 공지에서 건강검진비 과세 기준 최신 확인"
-        ],
-        "solves": [
-          "회사 건강검진 비용을 누가 내는지 헷갈림 → 법정검진·추가검진 구분표로 개인부담 범위 정리",
-          "지난 건강검진 결과를 다시 보는 방법을 모름 → 건강iN 조회 경로 안내",
-          "회사 검진비 지원금의 과세 여부가 궁금 → 법정검진 초과분 과세 기준 정리"
-        ],
-        "actionTitles": [
-          "회사 건강검진 비용 개인부담 확인, 법정검진 구분표로 끝내기",
-          "회사 건강검진 비용 지원 과세 여부, 조회부터 확인까지",
-          "건강검진 결과 조회 방법과 회사 건강검진 비용 한번에 정리"
-        ]
-      },
-      "at": "2026-11-12T20:54:58.082Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "직장인건강검진 궁금한점",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100401&docId=495566663&answerNo=4&qb=7ZqM7IKs6rG06rCV6rKA7KeE67mE",
-          "views": 569,
-          "answers": 4,
-          "askedAt": "2026.11.04"
-        },
-        {
-          "title": "회사 건강검진지원금도 4대보험이랑소득공제....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100401&docId=438440647&answerNo=2&qb=7ZqM7IKs6rG06rCV6rKA7KeE67mE",
-          "views": 359,
-          "answers": 2,
-          "askedAt": "2023.02.02"
-        },
-        {
-          "title": "직장인 건강검진 비용",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=710&docId=495796420&answerNo=3&qb=7ZqM7IKs6rG06rCV6rKA7KeE67mE",
-          "views": 159,
-          "answers": 3,
-          "askedAt": "2026.11.02"
         }
       ]
     },
@@ -10886,71 +10456,6 @@
       ]
     },
     {
-      "id": "b28a6e5aa51bb507",
-      "urls": [
-        "https://yjfreelifestyle.tistory.com/entry/12%EC%B0%A8-%EC%84%9D%EC%9C%A0-%EC%B5%9C%EA%B3%A0%EA%B0%80%EA%B2%A9-%EC%A0%81%EC%9A%A9-%EA%B0%80%EA%B2%A9%EC%9D%80-11%EC%9B%94-14%EC%9D%BC-%EC%8B%9C%ED%96%89%EA%B3%BC-%EC%A3%BC%EC%9C%A0%EC%86%8C-%EB%B0%98%EC%98%81-%EC%8B%9C%EC%A0%90"
-      ],
-      "guide": {
-        "direction": "자동완성에는 11차·1차·기간·종료·폐지·뜻이 섞여 있어 검색자는 지금이 몇 차이고 언제까지인지, 발표와 실제 주유소 반영 시점이 다르다는 점을 가장 헷갈려한다. 고수 블로그 제목은 '12차 적용 가격은?'이라고 질문만 던졌을 뿐 11차 대비 변동과 차수별 기간을 정리한 표는 없다. 독자는 1차부터 12차까지 기간·발표일 표와 발표 후 주유소 실제 반영 시점만 확인하면 더 찾아볼 필요가 없다.",
-        "searchTargets": [
-          "석유 최고가격제 11차",
-          "석유 최고가격제 기간",
-          "석유 최고가격제 종료",
-          "석유 최고가격제 뜻"
-        ],
-        "mustInclude": [
-          "12차 시행일(11월 14일)과 11차 대비 가격 변동폭(확인 필요: 정부 발표)",
-          "1차~12차 차수별 시행 기간을 정리한 표(확인 필요: 산업통상자원부 공지)",
-          "발표 시점과 주유소 실제 반영 시점의 시차(확인 필요: 업계 공지)",
-          "석유 최고가격제의 정확한 뜻과 적용 대상(확인 필요: 정부 보도자료)",
-          "폐지·종료 여부에 대한 최신 공지(확인 필요: 공식 발표)"
-        ],
-        "mustAvoid": [
-          "국제유가 변동 뉴스와 국내 행정 고시인 최고가격제를 혼동해서 설명"
-        ],
-        "checkBefore": [
-          "12차 시행일·적용가격: 산업통상자원부 공식 발표",
-          "11차까지의 차수별 기간: 한국석유공사 오피넷 공지",
-          "주유소 실제 반영 시점: 업계(석유유통협회 등) 공지"
-        ],
-        "solves": [
-          "지금이 몇 차이고 언제까지인지 헷갈림 → 1~12차 기간 정리표로 해결",
-          "발표일과 실제 주유소 가격 적용 시점이 다른 이유를 모름 → 반영 시차 설명",
-          "석유 최고가격제가 정확히 뭔지 모름 → 제도 개념과 적용 대상 설명"
-        ],
-        "actionTitles": [
-          "석유 최고가격제 12차 적용가격과 11차 비교 정리",
-          "석유 최고가격제 기간 확인, 11차부터 12차까지 정리"
-        ]
-      },
-      "at": "2026-11-13T11:59:46.740Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "생물연료(바이오매스)를 사용하면 왜 이산화....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=611&docId=56219722&answerNo=1&qb=7ISd7JygIOy1nOqzoOqwgOqyqSDsoIHsmqkg7KO87Jyg7IaMIOuwmOyYgQ==",
-          "views": 10325,
-          "answers": 1,
-          "askedAt": "2008.04.13"
-        },
-        {
-          "title": "전기와 관련된 과학사 조사하기!! (도와주세....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1118&docId=57133470&answerNo=1&qb=7ISd7JygIOy1nOqzoOqwgOqyqSDsoIHsmqkg7KO87Jyg7IaMIOuwmOyYgQ==",
-          "views": 5271,
-          "answers": 1,
-          "askedAt": "2006.02.07"
-        },
-        {
-          "title": "경제 단어 정리점요 (100)",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=409&docId=34956985&answerNo=1&qb=7ISd7JygIOy1nOqzoOqwgOqyqSDsoIHsmqkg7KO87Jyg7IaMIOuwmOyYgQ==",
-          "views": 2791,
-          "answers": 1,
-          "askedAt": "2008.08.08"
-        }
-      ]
-    },
-    {
       "id": "a747297db8f1e3ad",
       "urls": [
         "https://jjanggu1612.tistory.com/entry/%EC%97%B0%EB%A7%90%EC%A0%95%EC%82%B0-%EC%9D%BC%EA%B4%84%EC%A0%9C%EA%B3%B5-%EB%8F%99%EC%9D%98-%ED%99%88%ED%83%9D%EC%8A%A4%EC%97%90%EC%84%9C-%EB%81%9D%EB%82%B4%EB%8A%94-%EC%88%9C%EC%84%9C"
@@ -11317,72 +10822,6 @@
       "at": "2026-11-13T20:29:29.704Z",
       "rules": "2026-10-20-solve",
       "provider": "claude"
-    },
-    {
-      "id": "66451e17f03c3cd4",
-      "urls": [
-        "https://hanu4.hanuhyunu.pw/entry/%ED%9C%B4%EB%8C%80%ED%8F%B0-%EC%82%AC%EC%A7%84-%EC%BB%B4%ED%93%A8%ED%84%B0%EB%A1%9C-%EC%98%AE%EA%B8%B0%EB%8A%94-%EB%B0%A9%EB%B2%95",
-        "https://uknowlaw.com/phone-handover-account-storage-privacy-checks/"
-      ],
-      "guide": {
-        "direction": "중고폰을 팔기 전 사진을 컴퓨터로 어떻게 옮기는지, 살 때 유심잠금이나 정상해지 여부를 어떻게 확인하는지 몰라 불안한 검색자가 많다. 고수 블로그는 '사진 삭제 외에 무엇을 확인할까요?'라는 질문만 던지고 답은 안 줬다. 사진 백업 방법과 유심잠금·정상해지 확인 체크리스트를 순서대로 주면 이 글로 끝난다.",
-        "searchTargets": [
-          "중고휴대폰판매",
-          "중고휴대폰직거래",
-          "중고휴대폰가격"
-        ],
-        "mustInclude": [
-          "사진 컴퓨터로 옮기는 구체적 방법(USB 연결/클라우드 백업 등)",
-          "중고폰 판매 전 개인정보 삭제 체크리스트(사진·계정 로그아웃·초기화 포함)",
-          "유심잠금 확인 및 해제 방법(지식인 '중고 핸드폰 구매' 질문 근거)",
-          "정상해지(완전해지) 여부 확인법 — 해지 안 되면 개통 불가 (지식인 '중고폰 해지' 질문 근거)",
-          "요금제(약정)폰 중고 구매 시 공통지원금·정상해지 여부 주의사항"
-        ],
-        "mustAvoid": [
-          "사진 옮기는 법과 중고폰 사기 예방을 뒤섞어 글을 산만하게 만들지 않기",
-          "환불 분쟁에서 구매자·판매자 책임 소재를 사례와 상관없이 단정적으로 말하지 않기"
-        ],
-        "checkBefore": [
-          "유심잠금 해제 절차와 조건 — 통신사 공식 고객센터 공지",
-          "정상해지(완전해지) 확인 방법 — 통신사 앱/고객센터"
-        ],
-        "solves": [
-          "휴대폰 팔기 전 사진을 컴퓨터로 어떻게 옮기는지 몰라 막막함 → 백업/전송 방법 안내",
-          "중고폰 살 때 유심잠금 걸려있는지 몰라 걱정 → 확인·해제 방법 제공",
-          "중고폰 정상해지 여부를 몰라 개통 못할까 걱정 → 해지 확인법 안내"
-        ],
-        "actionTitles": [
-          "휴대폰 사진 컴퓨터로 옮기는 방법, 중고폰 팔기 전 필수",
-          "중고휴대폰 유심잠금 확인하는 법과 해제하는 방법 정리",
-          "중고폰 정상해지 확인하는 법, 개통 전 꼭 체크하기"
-        ]
-      },
-      "at": "2026-11-13T20:29:29.704Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "중고 핸드폰 구매",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1070202&docId=495641475&answerNo=1&qb=7KSR6rOg7Zy064yA7Y+w",
-          "views": 146,
-          "answers": 4,
-          "askedAt": "2026.10.21"
-        },
-        {
-          "title": "중고핸드폰 환불 관련질문",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=602060402&docId=495790368&answerNo=1&qb=7KSR6rOg7Zy064yA7Y+w",
-          "views": 139,
-          "answers": 2,
-          "askedAt": "2026.11.02"
-        },
-        {
-          "title": "핸드폰 중고 가격 질문",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10702&docId=495687561&answerNo=4&qb=7KSR6rOg7Zy064yA7Y+w",
-          "views": 106,
-          "answers": 4,
-          "askedAt": "2026.11.12"
-        }
-      ]
     },
     {
       "id": "46e239e065213dc5",
