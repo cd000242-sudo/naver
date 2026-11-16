@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T16:55:01.886Z",
+ "builtAt": "2026-11-16T17:05:04.936Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,42 +11,9 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "로버트 패틴슨",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-16T15:38:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "로버트 패틴슨, 새 제임스 본드 낙점",
-     "press": "segye.com",
-     "publishedAt": "2026-11-16T16:16:00.000Z",
-     "link": "https://m.entertain.naver.com/article/022/0004175673"
-    },
-    {
-     "title": "'트와일라잇' 로버트 패틴슨, 차기 제임스 본드 공식 확정…새로운 제작...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-16T16:12:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16278212"
-    },
-    {
-     "title": "로버트 패틴슨, 다니엘 크레이그 이어 7대 제임스 본드로 선정",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-16T16:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000965946?sid=104"
-    }
-   ]
-  },
-  {
    "keyword": "젠슨 황 복귀 움직임",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 4,
    "recent20": 1,
@@ -56,7 +23,7 @@
    "capped": false,
    "samples": [
     {
-     "title": "트럼프 \"나쁜 생각 아니다\"..젠슨 황 엔비디아 복귀 지지",
+     "title": "트럼프 \"나쁜 생각 아냐\"..젠슨 황 엔비디아 복귀 지지",
      "press": "4th.kr",
      "publishedAt": "2026-11-16T16:54:00.000Z",
      "link": "http://www.4th.kr/news/articleView.html?idxno=2122005"
