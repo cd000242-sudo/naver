@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T20:55:23.083Z",
+ "builtAt": "2026-11-16T21:05:25.770Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,52 +8,58 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 14,
  "candidates": [
   {
-   "keyword": "AI 커닝 국가시험",
+   "keyword": "미국 AI반도체 중국 차단",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
+   "articles90": 14,
    "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-16T19:31:00.000Z",
+   "press": 14,
+   "firstArticleAt": "2026-11-16T19:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "죽어라 공부해서 얻은 ‘사짜 직업’…“AI로 땄나?” 취급에 일자리도...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-16T20:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005764647?sid=101"
+     "title": "美, 중국의 AI 칩 원격접속 차단...동남아 수출에도 사전 허가 도입",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-16T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004682898?sid=104"
     },
     {
-     "title": "수능장 'AI 커닝 도구' 반입 어떻게 막나…오늘 대책 발표",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-16T20:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009292533?sid=105"
+     "title": "美, ‘제2의 앨리스 황’ 막는다… 제3국 통한 AI 칩 우회 접속 차단",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-16T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001205225?sid=104"
     },
     {
-     "title": "[사설] 수능 연기론까지 번진 AI 커닝, 후폭풍 없게 철저 대비를",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-16T20:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003700076?sid=110"
+     "title": "美, 중국의 AI칩 원격 이용도 통제…동남아 우회로 겨냥",
+     "press": "kbmaeil.com",
+     "publishedAt": "2026-11-16T20:42:00.000Z",
+     "link": "https://www.kbmaeil.com/article/20261117500003"
     }
    ]
   },
   {
-   "keyword": "트럼프 중국서 김정은 만날 수도",
+   "keyword": "트럼프 김정은 만날 가능성",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 11,
-   "recent20": 5,
-   "press": 9,
-   "firstArticleAt": "2026-11-16T19:28:00.000Z",
+   "articles90": 8,
+   "recent20": 3,
+   "press": 7,
+   "firstArticleAt": "2026-11-16T20:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "선거 참패 뒤 아시아로…트럼프, 정상외교로 반전 모색",
+     "press": "kbmaeil.com",
+     "publishedAt": "2026-11-16T20:58:00.000Z",
+     "link": "https://www.kbmaeil.com/article/20261117500009"
+    },
     {
      "title": "트럼프 “중국서 김정은 만날 수도…시진핑에 달려”",
      "press": "kbmaeil.com",
@@ -65,76 +71,39 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-16T20:50:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009292537?sid=104"
-    },
-    {
-     "title": "미·중·러 정상회담에 북핵 논의 주목…트럼프, 김정은 회동 가능성 언...",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-16T20:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005843402?sid=104"
     }
    ]
   },
   {
-   "keyword": "미중러 정상회담",
+   "keyword": "음주 운전",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "google"
    ],
    "articles90": 4,
    "recent20": 2,
    "press": 4,
-   "firstArticleAt": "2026-11-16T19:28:00.000Z",
+   "firstArticleAt": "2026-11-16T20:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "트럼프 \"미중러 회담서 우크라·이란전 논의할 것\"",
-     "press": "yonhapnewstv.co.kr",
+     "title": "[법조브리핑] 무면허 음주운전하고 ‘의사면허 취소’ 불복한 의사…법...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-16T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004175708?sid=102"
+    },
+    {
+     "title": "음주운전 집행유예 의사…\"면허 취소 행정처분 적법\"",
+     "press": "dailymedi.com",
      "publishedAt": "2026-11-16T20:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926843?sid=104"
+     "link": "https://www.dailymedi.com/news/news_view.php?wr_id=942662"
     },
     {
-     "title": "미·중·러 정상회담에 북핵 논의 주목…트럼프, 김정은 회동 가능성 언...",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-16T20:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005843402?sid=104"
-    },
-    {
-     "title": "미중러 정상회담 앞둔 한일정상회담…'제2의 얄타' 공동대응할까",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-16T20:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004210418?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황 복귀 검토 안 해",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-16T19:31:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "트럼프, 젠슨 황 CEO 복귀 지지…엔비디아 이사회는 논의 안 해",
-     "press": "aitimes.com",
-     "publishedAt": "2026-11-16T20:54:00.000Z",
-     "link": "https://www.aitimes.com/news/articleView.html?idxno=217468"
-    },
-    {
-     "title": "[핫이슈] 엔비디아 이사회 \"젠슨 황 복귀 검토 안 해\"…삼성전자·SK하이...",
-     "press": "the-today.com",
-     "publishedAt": "2026-11-16T20:28:00.000Z",
-     "link": "https://www.the-today.com/news/articleView.html?idxno=93687"
-    },
-    {
-     "title": "CNBC \"엔비디아 이사회, 젠슨 황 CEO 복귀 검토 안 해\"",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-16T19:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005843399?sid=104"
+     "title": "'고경표와 똑같은 패턴' 클래지콰이 호란, 음주운전 후 청소차 박아 '따...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-16T20:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004125622"
     }
    ]
   },
@@ -146,10 +115,16 @@
    "articles90": 4,
    "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-16T19:35:00.000Z",
+   "firstArticleAt": "2026-11-16T20:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[출근길 브리핑-11월 17일] 수능장 와이파이 차단 추진·'김형오-정세균...",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-16T21:00:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903255"
+    },
     {
      "title": "수능장 'AI 커닝 도구' 반입 어떻게 막나…오늘 대책 발표",
      "press": "news1.kr",
@@ -161,113 +136,75 @@
      "press": "thescoop.co.kr",
      "publishedAt": "2026-11-16T20:13:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/665/0000008582?sid=102"
-    },
-    {
-     "title": "전파 차단 “없던 일로”… 수능은 “예정대로”",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-16T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003699982?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "제니 그래미 후보",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-16T19:53:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "제니, 그래미서 '올해의 레코드' 등 2개 부문 후보",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-16T20:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926818?sid=103"
-    },
-    {
-     "title": "로제 이어 제니도 간다, 브루노·테일러 잡고 美 그래미 정조준…‘드라...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-16T20:24:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001188058"
-    },
-    {
-     "title": "제니, 그래미 ‘올해의 레코드’ 후보…아이브·키키도 첫 입성",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-16T20:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/396/0000761121"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 741,
-  "matched": 392,
-  "avgLeadMin": 819,
+  "flagged": 744,
+  "matched": 421,
+  "avgLeadMin": 917,
   "recent": [
    {
-    "keyword": "서수남 딸 사망",
-    "hitKeyword": "서수남 딸 사망 고백",
-    "hitAt": "2026-11-17T00:00:00+09:00",
-    "leadMin": 437
+    "keyword": "미래에셋 3분기 손실",
+    "hitKeyword": "삼성전자 3분기 실적",
+    "hitAt": "2026-11-17T06:00:00+09:00",
+    "leadMin": 6798
    },
    {
-    "keyword": "은행",
-    "hitKeyword": "하나은행 우리은행 승리",
-    "hitAt": "2026-11-16T23:00:00+09:00",
-    "leadMin": 467
+    "keyword": "한전 3분기 실적",
+    "hitKeyword": "삼성전자 3분기 실적",
+    "hitAt": "2026-11-17T06:00:00+09:00",
+    "leadMin": 6566
    },
    {
-    "keyword": "고경표 팬미팅 취소",
-    "hitKeyword": "고경표 음주운전",
-    "hitAt": "2026-11-16T23:00:00+09:00",
-    "leadMin": 57
+    "keyword": "3분기 순익 급증",
+    "hitKeyword": "삼성전자 3분기 실적",
+    "hitAt": "2026-11-17T06:00:00+09:00",
+    "leadMin": 6556
    },
    {
-    "keyword": "삼전닉스",
-    "hitKeyword": "삼전닉스 외국인",
-    "hitAt": "2026-11-16T22:30:00+09:00",
-    "leadMin": 977
+    "keyword": "3분기 누적 순익",
+    "hitKeyword": "삼성전자 3분기 실적",
+    "hitAt": "2026-11-17T06:00:00+09:00",
+    "leadMin": 6536
    },
    {
-    "keyword": "이지영 AI 부정행위 대책",
-    "hitKeyword": "초소형 카메라 부정행위",
-    "hitAt": "2026-11-16T22:00:00+09:00",
-    "leadMin": 18
+    "keyword": "한화생명, 3분기 순익 8656억↑",
+    "hitKeyword": "삼성전자 3분기 실적",
+    "hitAt": "2026-11-17T06:00:00+09:00",
+    "leadMin": 6476
    },
    {
-    "keyword": "CL 더블랙레이블과 전속계약",
-    "hitKeyword": "블랙핑크 YG 전속계약 제외",
-    "hitAt": "2026-11-16T21:00:00+09:00",
-    "leadMin": 5018
+    "keyword": "펄어비스 3분기 매출 증가",
+    "hitKeyword": "삼성전자 3분기 실적",
+    "hitAt": "2026-11-17T06:00:00+09:00",
+    "leadMin": 6435
    },
    {
-    "keyword": "씨엘, 테디 품 전속계약",
-    "hitKeyword": "블랙핑크 YG 전속계약 제외",
-    "hitAt": "2026-11-16T21:00:00+09:00",
-    "leadMin": 4977
+    "keyword": "아시아나항공 3분기 영업손실",
+    "hitKeyword": "삼성전자 3분기 실적",
+    "hitAt": "2026-11-17T06:00:00+09:00",
+    "leadMin": 6375
    },
    {
-    "keyword": "CL, 테디 품으로 전속계약",
-    "hitKeyword": "블랙핑크 YG 전속계약 제외",
-    "hitAt": "2026-11-16T21:00:00+09:00",
-    "leadMin": 4947
+    "keyword": "HJ중공업 3분기 영업익 1554억",
+    "hitKeyword": "삼성전자 3분기 실적",
+    "hitAt": "2026-11-17T06:00:00+09:00",
+    "leadMin": 5436
    },
    {
-    "keyword": "귀국하는 최원호 감독님",
-    "hitKeyword": "최원호 감독 한일전 사과",
-    "hitAt": "2026-11-16T21:00:00+09:00",
-    "leadMin": 216
+    "keyword": "3분기 매출 분석",
+    "hitKeyword": "삼성전자 3분기 실적",
+    "hitAt": "2026-11-17T06:00:00+09:00",
+    "leadMin": 4653
    },
    {
-    "keyword": "블랙핑크 YG 전속계약 명단",
-    "hitKeyword": "블랙핑크 YG 전속계약 제외",
-    "hitAt": "2026-11-16T21:00:00+09:00",
-    "leadMin": 196
+    "keyword": "미중러 정상회담",
+    "hitKeyword": "북미 정상회담 추진",
+    "hitAt": "2026-11-17T06:00:00+09:00",
+    "leadMin": 1099
    }
   ]
  }
