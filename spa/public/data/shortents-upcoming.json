@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T21:15:28.542Z",
+ "builtAt": "2026-11-16T21:25:31.948Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "미국 AI반도체 중국 차단",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 16,
+   "articles90": 17,
    "recent20": 6,
    "press": 16,
-   "firstArticleAt": "2026-11-16T19:46:00.000Z",
+   "firstArticleAt": "2026-11-16T20:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "시진핑과 회담 앞둔 트럼프, AI ‘대중국 포위망’부터 폈다 [글로벌 모...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-16T21:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004682902?sid=104"
+    },
+    {
+     "title": "AI칩 중국 원격접속 차단‥'젠슨 황 파문' 뒷북조치",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-16T21:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001535991?sid=104"
+    },
     {
      "title": "AI 반도체주 투매…필라델피아지수 5.28% 급락·마이크론 7.59%↓",
      "press": "news1.kr",
      "publishedAt": "2026-11-16T21:12:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009292574?sid=104"
-    },
-    {
-     "title": "'젠슨황 스캔들' 美, AI반도체 中 원격접속 차단...트럼프 \"스파이 아닐...",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-16T21:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000121527?sid=104"
-    },
-    {
-     "title": "트럼프 \"앨리스 황, 스파이 아닐 수도\"...미, AI반도체 중국 원격접속 차...",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-16T21:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002433775?sid=104"
     }
    ]
   },
   {
-   "keyword": "트럼프 김정은 만날 가능성",
+   "keyword": "트럼프 김정은 만남 가능",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 13,
-   "recent20": 6,
+   "recent20": 5,
    "press": 12,
    "firstArticleAt": "2026-11-16T20:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "트럼프, 김정은에 또 대화 손짓…이번엔 中 끌어들였다",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-16T21:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014326006?sid=104"
+     "title": "트럼프 “김정은과 중국서 만날 수도…시진핑에 달렸다”",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-16T21:22:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2648935"
     },
     {
-     "title": "트럼프 \"김정은 중국서 만날 수도…시진핑에 달려\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-16T21:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001403481?sid=104"
+     "title": "트럼프 \"중국서 김정은 만날 수도…시진핑에 달렸다\"",
+     "press": "news.mtn.co.kr",
+     "publishedAt": "2026-11-16T21:20:00.000Z",
+     "link": "https://news.mtn.co.kr/article/2026111706195764444"
     },
     {
-     "title": "트럼프 “중국서 김정은 만날 수도…시진핑에 달려 있어”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-16T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012295130?sid=104"
+     "title": "트럼프, 김정은 만나나?…\"김정은 방중, 시진핑에 달려\"",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-16T21:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000544093?sid=101"
     }
    ]
   },
@@ -81,7 +81,7 @@
     "google"
    ],
    "articles90": 7,
-   "recent20": 4,
+   "recent20": 2,
    "press": 6,
    "firstArticleAt": "2026-11-16T20:16:00.000Z",
    "exclusive": false,
@@ -113,7 +113,7 @@
     "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-16T20:02:00.000Z",
    "exclusive": false,
@@ -138,43 +138,11 @@
      "link": "https://n.news.naver.com/mnews/article/665/0000008582?sid=102"
     }
    ]
-  },
-  {
-   "keyword": "제임스본드",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-16T20:37:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[공식]로버트 패틴슨, 새 제임스 본드 된다… 역대 7번째 007 탄생",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-16T21:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000639390"
-    },
-    {
-     "title": "로버트 패틴슨, '7대 제임스 본드'로…내후년 개봉",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-16T21:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000651457?sid=104"
-    },
-    {
-     "title": "로버트 패틴슨, '7대 제임스 본드' 낙점",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-16T20:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926834?sid=104"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 745,
+  "flagged": 746,
   "matched": 421,
   "avgLeadMin": 917,
   "recent": [
