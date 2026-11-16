@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T22:45:59.230Z",
+ "builtAt": "2026-11-16T22:56:02.298Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,14 +11,46 @@
  "measured": 10,
  "candidates": [
   {
+   "keyword": "수능 AI 커닝 우려",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 14,
+   "recent20": 4,
+   "press": 12,
+   "firstArticleAt": "2026-11-16T21:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "AI가 찍어주는 정답, 모든 시험을 믿을 수 없게 됐다: 슬로우레터 11월1...",
+     "press": "slownews.kr",
+     "publishedAt": "2026-11-16T22:52:00.000Z",
+     "link": "https://slownews.kr/169594"
+    },
+    {
+     "title": "경향 \"장동혁 수능연기 검토 주장, 불안조장 멈춰야\"…'AI커닝 대책' 일...",
+     "press": "mediatoday.co.kr",
+     "publishedAt": "2026-11-16T22:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/006/0000138793?sid=102"
+    },
+    {
+     "title": "\"공정성 믿을 수 없다\"…학부모와 수험생들 '수능 불신' 확산",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-16T22:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000651471?sid=102"
+    }
+   ]
+  },
+  {
    "keyword": "젠슨 황 복귀 논의 없어",
    "sources": [
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-16T21:16:00.000Z",
+   "articles90": 9,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-16T21:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -47,10 +79,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-16T21:26:00.000Z",
+   "articles90": 8,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-16T21:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,44 +107,12 @@
    ]
   },
   {
-   "keyword": "수능 AI 커닝 우려",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-16T21:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[손병관의 뉴스프레소] 수능장 와이파이 꺼도 LTE·5G는 된다…구멍 난...",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-16T22:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002536065?sid=102"
-    },
-    {
-     "title": "'AI 커닝 패키지' 등장, SNS로 사용법 확산…정부 '유통' 차단 나서",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-16T22:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005354573?sid=100"
-    },
-    {
-     "title": "[천지일보 이슈종합] 수능 부정행위·AI 커닝·미중러 정상회담·서울 전...",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-16T22:02:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3449264"
-    }
-   ]
-  },
-  {
    "keyword": "카타르전 앞두고 훈련하는 대표팀",
    "sources": [
     "signal.bz"
    ],
    "articles90": 8,
-   "recent20": 1,
+   "recent20": 0,
    "press": 7,
    "firstArticleAt": "2026-11-16T21:35:00.000Z",
    "exclusive": false,
@@ -144,7 +144,7 @@
     "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-16T21:36:00.000Z",
    "exclusive": true,
