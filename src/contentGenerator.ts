@@ -9468,9 +9468,21 @@ export async function generateStructuredContent(
       config: loopConfig,
       resolveRoute: (stage) => resolveSideTaskRoute(source, stage, 'quality'),
     });
+    // [2026-11-16 사장님 요청] 클로드 코드 글은 claude-seo 스킬 기준 점검·보완을 한 번 거친다(agent-claude 만).
+    //   실패·시간 초과·안전 검사 탈락이면 점검 전 글 그대로 발행까지 간다. BLN_SEO_SKILL_REVIEW=0 이면 건너뛴다.
+    const { runSeoSkillReview, SEO_REVIEW_TIMEOUT_MS } = await import('./content/seoSkill/seoSkillReview.js');
+    const seoReview = await runSeoSkillReview({
+      content: looped.content,
+      mode: String(source.contentMode || 'seo'),
+      provider: selectedProvider,
+      resolveCall: async () => {
+        const route = await resolveSideTaskRoute(source, 'seo-skill-review', 'quality');
+        return route ? (prompt: string) => route.callModel(prompt, { timeoutMs: SEO_REVIEW_TIMEOUT_MS }) : null;
+      },
+    });
     // [2026-11-04 Release C1] Post-processing may have cloned the article; put the harmony record back (no-op when flag OFF).
-    restoreAgentHarmony(looped.content, run);
-    return attachGenerationIntegrity(looped.content, run, { sourceBased, selectedProvider, pipeline, qualityLoop: looped.summary });
+    restoreAgentHarmony(seoReview.content, run);
+    return attachGenerationIntegrity(seoReview.content, run, { sourceBased, selectedProvider, pipeline, qualityLoop: looped.summary });
   } catch (error) {
     run.finish({ publishDecision: 'GENERATION_FAILED', extra: { ...(run.meta.extra || {}), error: String((error as Error)?.message || error).slice(0, 500) } });
     throw error;

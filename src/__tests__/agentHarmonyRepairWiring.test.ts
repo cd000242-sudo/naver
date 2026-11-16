@@ -60,9 +60,11 @@ const BLUEPRINT = {
   facts: [{ claim: '기부액은 1억 원', snippet: '서울의 한 병원에 1억 원을 기부했다고 밝혔다' }], skeleton: ['기부의 시작', '돈의 행방', '남은 질문'], offTopic: [],
 };
 
-type Kind = 'blueprint' | 'distinctness-judge' | 'quote-patch' | 'intro-patch' | 'body';
+type Kind = 'blueprint' | 'distinctness-judge' | 'quote-patch' | 'intro-patch' | 'seo-skill-review' | 'body';
 const classify = (prompt: string): Kind => {
   if (prompt.startsWith('아래 [자료]를 읽고')) return 'blueprint';
+  // [2026-11-16] claude-seo review pass after generation (agent-claude only) — not a body call.
+  if (prompt.startsWith('# 작업: 블로그 글 점검·보완 (claude-seo 스킬 기준)')) return 'seo-skill-review';
   if (prompt.includes('"redundantSections"')) return 'distinctness-judge';
   if (prompt.includes('아래 본문에는 당사자 발언 인용이 없다')) return 'quote-patch';
   if (/\[TASK\]\s*홈판 모드 도입부만/.test(prompt)) return 'intro-patch';
