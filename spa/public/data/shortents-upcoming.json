@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T08:03:36.577Z",
+ "builtAt": "2026-11-16T08:13:43.740Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,38 +8,70 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 13,
  "candidates": [
+  {
+   "keyword": "3분기 매출 성장",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 86,
+   "recent20": 45,
+   "press": 60,
+   "firstArticleAt": "2026-11-16T07:38:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "\"中9.3%·러47.9% 성장에\" 오리온, 3Q영업익 1509억·전년比9.4%↑",
+     "press": "catchnews.kr",
+     "publishedAt": "2026-11-16T08:11:00.000Z",
+     "link": "https://www.catchnews.kr/news/articleView.html?idxno=130579"
+    },
+    {
+     "title": "네오티스, 3분기 누적 영업익 108억…전년比 93%↑",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-16T08:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005843322?sid=101"
+    },
+    {
+     "title": "오리온, 3분기 영업익 1509억원 전년비 9.4%↑…\"글로벌 수요 증가\"",
+     "press": "newspost.kr",
+     "publishedAt": "2026-11-16T08:10:00.000Z",
+     "link": "https://www.newspost.kr/news/articleView.html?idxno=227451"
+    }
+   ]
+  },
   {
    "keyword": "신유열 사장 승진",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 67,
+   "articles90": 63,
    "recent20": 6,
-   "press": 60,
-   "firstArticleAt": "2026-11-16T06:36:00.000Z",
+   "press": 58,
+   "firstArticleAt": "2026-11-16T06:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "롯데 3세 신유열, 사장 승진…위기 돌파·미래 성장 '그룹 숙원' 앞에 섰...",
-     "press": "issuenbiz.com",
-     "publishedAt": "2026-11-16T08:02:00.000Z",
-     "link": "http://www.issuenbiz.com/news/articleView.html?idxno=81654"
+     "title": "신유열 전면에 세운 롯데…젊은 피 수혈·성과주의 인사(종합)",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-16T08:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014325538?sid=101"
     },
     {
-     "title": "‘롯데 3세’ 신유열, 입사 6년 만에 사장 승진…그룹 경영전략 총괄",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-16T07:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002832441?sid=101"
+     "title": "롯데 신유열 사장 승진…야심작 '바이오'는 아직 적자",
+     "press": "youthdaily.co.kr",
+     "publishedAt": "2026-11-16T08:08:00.000Z",
+     "link": "https://www.youthdaily.co.kr/news/article.html?no=229913"
     },
     {
-     "title": "롯데그룹, 2027년 임원인사 단행…신유열 사장 승진",
-     "press": "lcnews.co.kr",
-     "publishedAt": "2026-11-16T07:52:00.000Z",
-     "link": "https://www.lcnews.co.kr/news/articleView.html?idxno=211476"
+     "title": "'안정' 택한 롯데...신동빈 장남 신유열 사장, 그룹 전략 총괄 맡았다",
+     "press": "newsway.co.kr",
+     "publishedAt": "2026-11-16T08:08:00.000Z",
+     "link": "https://www.newsway.co.kr/news/view?ud=2026111617002423998"
     }
    ]
   },
@@ -48,13 +80,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 15,
-   "recent20": 5,
-   "press": 14,
+   "articles90": 16,
+   "recent20": 3,
+   "press": 15,
    "firstArticleAt": "2026-11-16T07:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "수능 사흘 앞 'AI 부정행위' 비상…현장 혼선·제도적 한계 도마 위",
+     "press": "news.mtn.co.kr",
+     "publishedAt": "2026-11-16T08:04:00.000Z",
+     "link": "https://news.mtn.co.kr/article/2026111615160393824"
+    },
     {
      "title": "수능 사흘 앞 “AI 커닝 100% 잡을 수 있나”… 교육장관 답변에 여야 질...",
      "press": "jibs.co.kr",
@@ -66,12 +104,70 @@
      "press": "newsgn.com",
      "publishedAt": "2026-11-16T07:54:00.000Z",
      "link": "https://www.newsgn.com/news/articleView.html?idxno=585994"
+    }
+   ]
+  },
+  {
+   "keyword": "철도 안전 종합대책",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-16T06:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "노후 침목·열차 제동장치 교체… 반복되는 철도사고 막는다",
+     "press": "sisunnews.co.kr",
+     "publishedAt": "2026-11-16T08:04:00.000Z",
+     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=249829"
     },
     {
-     "title": "정승제, 'AI 커닝' 사태에 수능 대책 촉구…\"항공 보안급 검사·전파 차...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-16T07:53:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001408482"
+     "title": "인천교통공사, 대학수학능력시험 특별수송 종합안전대책 시행",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-16T08:04:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/325471/?sc=Naver"
+    },
+    {
+     "title": "인천교통공사, 2027학년도 대학수학능력시험 특별수송 종합안전대책 시...",
+     "press": "kgnews.co.kr",
+     "publishedAt": "2026-11-16T07:44:00.000Z",
+     "link": "https://www.kgnews.co.kr/news/article.html?no=919648"
+    }
+   ]
+  },
+  {
+   "keyword": "뉴스",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 4,
+   "press": 4,
+   "firstArticleAt": "2026-11-16T08:07:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[금융 HOT 뉴스] 은행 탄력점포 991개인데…일반 고객 이용은 '제한적'",
+     "press": "bizwnews.com",
+     "publishedAt": "2026-11-16T08:12:00.000Z",
+     "link": "http://www.bizwnews.com/news/articleView.html?idxno=152023"
+    },
+    {
+     "title": "[포토뉴스]한국다문화청소년협회 원주지회 물품 후원",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-16T08:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001231182?sid=102"
+    },
+    {
+     "title": "르세라핌, 눈빛만으로 느껴지는 설렘아우라 (입국)[뉴스엔TV]",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-16T08:09:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001188003"
     }
    ]
   },
@@ -81,13 +177,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-16T06:36:00.000Z",
+   "articles90": 3,
+   "recent20": 2,
+   "press": 2,
+   "firstArticleAt": "2026-11-16T07:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "공소취소 저지 팔 걷은 주진우 \"이화영 재심·형집행정지 반대 의견서 ...",
+     "press": "thepublic.kr",
+     "publishedAt": "2026-11-16T08:06:00.000Z",
+     "link": "https://www.thepublic.kr/news/articleView.html?idxno=326950"
+    },
     {
      "title": "[포토] 국민의힘, 이재명 대통령 재판취소 저지특위 전체회의",
      "press": "sisafocus.co.kr",
@@ -99,115 +201,13 @@
      "press": "sisafocus.co.kr",
      "publishedAt": "2026-11-16T07:40:00.000Z",
      "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367662"
-    },
-    {
-     "title": "'李 재판취소 저지 특위' 주진우 \"이화영 탈옥부터 막아야\"",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-16T06:42:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2019110"
-    }
-   ]
-  },
-  {
-   "keyword": "철도 안전 종합대책",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-16T06:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "인천교통공사, 2027학년도 대학수학능력시험 특별수송 종합안전대책 시...",
-     "press": "kgnews.co.kr",
-     "publishedAt": "2026-11-16T07:44:00.000Z",
-     "link": "https://www.kgnews.co.kr/news/article.html?no=919648"
-    },
-    {
-     "title": "국토부, 반복되는 철도사고 예방 위해 안전대책 이행 점검",
-     "press": "idsn.co.kr",
-     "publishedAt": "2026-11-16T07:04:00.000Z",
-     "link": "https://idsn.co.kr/news/view/1065596395501604"
-    },
-    {
-     "title": "KTX 제동장치·노후 침목 정비로 철도사고 '예방'",
-     "press": "safetimes.co.kr",
-     "publishedAt": "2026-11-16T06:50:00.000Z",
-     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247535"
-    }
-   ]
-  },
-  {
-   "keyword": "한일 정상회담 마닐라",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-16T06:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "필리핀 향한 日다카이치 \"李대통령과 정상회담 예정\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-16T06:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014325198?sid=104"
-    },
-    {
-     "title": "李 대통령, 오늘 한일 정상회담…'제2의 얄타' 우려 속 외교전",
-     "press": "newsgn.com",
-     "publishedAt": "2026-11-16T06:38:00.000Z",
-     "link": "https://www.newsgn.com/news/articleView.html?idxno=585914"
-    },
-    {
-     "title": "李대통령, 필리핀 마닐라 도착…아세안 정상외교 돌입",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-16T06:36:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903230"
-    }
-   ]
-  },
-  {
-   "keyword": "테슬라 사이버캡 판매",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-16T06:39:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[영상] 테슬라 '사이버캡' 일반고객에도 판다…4천만원에 구독료 40만원",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-16T07:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016444714?sid=104"
-    },
-    {
-     "title": "테슬라, 운전대 없는 '사이버캡' 개인 판매...운행 지역은 제한",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-16T07:24:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2019206"
-    },
-    {
-     "title": "테슬라, 자율주행 로보택시 '사이버캡' 일반 개인 판매 들어갔다",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-16T06:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005604941?sid=101"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 668,
+  "flagged": 670,
   "matched": 360,
   "avgLeadMin": 808,
   "recent": [
