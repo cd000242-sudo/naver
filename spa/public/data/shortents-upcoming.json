@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T07:53:30.514Z",
+ "builtAt": "2026-11-16T08:03:36.577Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,115 +11,89 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "수능 와이파이 차단",
+   "keyword": "신유열 사장 승진",
    "sources": [
     "signal.bz",
     "nate"
    ],
    "articles90": 67,
-   "recent20": 16,
-   "press": 57,
-   "firstArticleAt": "2026-11-16T06:26:00.000Z",
+   "recent20": 6,
+   "press": 60,
+   "firstArticleAt": "2026-11-16T06:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "정부, 수능 스마트기기 반납·공공 와이파이 차단 나선다",
-     "press": "kbsm.net",
-     "publishedAt": "2026-11-16T07:50:00.000Z",
-     "link": "https://www.kbsm.net/news/view.php?idx=541981"
+     "title": "롯데 3세 신유열, 사장 승진…위기 돌파·미래 성장 '그룹 숙원' 앞에 섰...",
+     "press": "issuenbiz.com",
+     "publishedAt": "2026-11-16T08:02:00.000Z",
+     "link": "http://www.issuenbiz.com/news/articleView.html?idxno=81654"
     },
     {
-     "title": "정부, 수능시험장 반경 50m 공공Wifi 끄기로…무선망 대책은?",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-16T07:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005441833?sid=105"
+     "title": "‘롯데 3세’ 신유열, 입사 6년 만에 사장 승진…그룹 경영전략 총괄",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-16T07:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002832441?sid=101"
     },
     {
-     "title": "\"수능은 새로운 출발선\"…강원 곳곳 수능 분위기 고조",
-     "press": "kado.net",
-     "publishedAt": "2026-11-16T07:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000211552?sid=102"
+     "title": "롯데그룹, 2027년 임원인사 단행…신유열 사장 승진",
+     "press": "lcnews.co.kr",
+     "publishedAt": "2026-11-16T07:52:00.000Z",
+     "link": "https://www.lcnews.co.kr/news/articleView.html?idxno=211476"
     }
    ]
   },
   {
-   "keyword": "반려견 개소주 70대와",
+   "keyword": "AI 커닝 대책 혼란",
    "sources": [
     "nate"
    ],
-   "articles90": 13,
-   "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-16T06:34:00.000Z",
+   "articles90": 15,
+   "recent20": 5,
+   "press": 14,
+   "firstArticleAt": "2026-11-16T07:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "잠시 맡긴 반려견 도살해 개소주로…70대 남성 등 입건",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-16T07:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001885441?sid=102"
+     "title": "수능 사흘 앞 “AI 커닝 100% 잡을 수 있나”… 교육장관 답변에 여야 질...",
+     "press": "jibs.co.kr",
+     "publishedAt": "2026-11-16T08:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/661/0000086672?sid=102"
     },
     {
-     "title": "지인이 맡긴 반려견 '개소주'로 만든 70대, 경찰조사서 \"나한테 준 줄\"",
-     "press": "busan.com",
-     "publishedAt": "2026-11-16T07:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001407407?sid=102"
+     "title": "첨단 커닝은 '초고속'인데 대책은 '걸음마'…AI의 습격",
+     "press": "newsgn.com",
+     "publishedAt": "2026-11-16T07:54:00.000Z",
+     "link": "https://www.newsgn.com/news/articleView.html?idxno=585994"
     },
     {
-     "title": "잠시 맡은 지인 반려견을 '개소주'로… 70대·건강원 업주 입건",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-16T07:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000965880?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "김유정 100일 거짓말",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 8,
-   "firstArticleAt": "2026-11-16T06:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'100일의 거짓말' 코우리 유카, 박진영 약혼에 오열…김유정 대신해 체...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-16T07:49:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002081089"
-    },
-    {
-     "title": "박진영 화보 “‘100일의 거짓말’, 결말까지 다 아는데도 매주 본방 챙...",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-16T07:42:00.000Z",
-     "link": "http://www.breaknews.com/1251284"
-    },
-    {
-     "title": "'100일의 거짓말' 코우리 유카, 김유정 대신 체포 반전...존재감 폭발",
-     "press": "ize.co.kr",
-     "publishedAt": "2026-11-16T07:36:00.000Z",
-     "link": "https://m.entertain.naver.com/article/465/0000021034"
+     "title": "정승제, 'AI 커닝' 사태에 수능 대책 촉구…\"항공 보안급 검사·전파 차...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-16T07:53:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001408482"
     }
    ]
   },
   {
    "keyword": "이재명 재판취소 저지 회의",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 5,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-16T06:25:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-16T06:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[포토] 국민의힘, 이재명 대통령 재판취소 저지특위 전체회의",
+     "press": "sisafocus.co.kr",
+     "publishedAt": "2026-11-16T08:02:00.000Z",
+     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367669"
+    },
     {
      "title": "[현장] 국힘 이재명재판취소저지특위 \"이화영 형 집행정지 막겠다\"",
      "press": "sisafocus.co.kr",
@@ -131,76 +105,6 @@
      "press": "m-i.kr",
      "publishedAt": "2026-11-16T06:42:00.000Z",
      "link": "https://www.m-i.kr/news/articleView.html?idxno=2019110"
-    },
-    {
-     "title": "[포토] 이재명 대통령 재판취소 저지특위 전체회의",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-16T06:38:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/16/2026111650270.html"
-    }
-   ]
-  },
-  {
-   "keyword": "테슬라 사이버캡 판매",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-16T06:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[영상] 테슬라 '사이버캡' 일반고객에도 판다…4천만원에 구독료 40만원",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-16T07:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016444714?sid=104"
-    },
-    {
-     "title": "테슬라, 운전대 없는 '사이버캡' 개인 판매...운행 지역은 제한",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-16T07:24:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2019206"
-    },
-    {
-     "title": "테슬라, 자율주행 로보택시 '사이버캡' 일반 개인 판매 들어갔다",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-16T06:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005604941?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "한일 정상회담 마닐라",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-16T06:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "필리핀 향한 日다카이치 \"李대통령과 정상회담 예정\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-16T06:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014325198?sid=104"
-    },
-    {
-     "title": "李 대통령, 오늘 한일 정상회담…'제2의 얄타' 우려 속 외교전",
-     "press": "newsgn.com",
-     "publishedAt": "2026-11-16T06:38:00.000Z",
-     "link": "https://www.newsgn.com/news/articleView.html?idxno=585914"
-    },
-    {
-     "title": "李대통령, 필리핀 마닐라 도착…아세안 정상외교 돌입",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-16T06:36:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903230"
     }
    ]
   },
@@ -235,14 +139,126 @@
      "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247535"
     }
    ]
+  },
+  {
+   "keyword": "한일 정상회담 마닐라",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-16T06:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "필리핀 향한 日다카이치 \"李대통령과 정상회담 예정\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-16T06:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014325198?sid=104"
+    },
+    {
+     "title": "李 대통령, 오늘 한일 정상회담…'제2의 얄타' 우려 속 외교전",
+     "press": "newsgn.com",
+     "publishedAt": "2026-11-16T06:38:00.000Z",
+     "link": "https://www.newsgn.com/news/articleView.html?idxno=585914"
+    },
+    {
+     "title": "李대통령, 필리핀 마닐라 도착…아세안 정상외교 돌입",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-16T06:36:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903230"
+    }
+   ]
+  },
+  {
+   "keyword": "테슬라 사이버캡 판매",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-16T06:39:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[영상] 테슬라 '사이버캡' 일반고객에도 판다…4천만원에 구독료 40만원",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-16T07:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016444714?sid=104"
+    },
+    {
+     "title": "테슬라, 운전대 없는 '사이버캡' 개인 판매...운행 지역은 제한",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-16T07:24:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2019206"
+    },
+    {
+     "title": "테슬라, 자율주행 로보택시 '사이버캡' 일반 개인 판매 들어갔다",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-16T06:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005604941?sid=101"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 666,
-  "matched": 352,
-  "avgLeadMin": 825,
+  "flagged": 668,
+  "matched": 360,
+  "avgLeadMin": 808,
   "recent": [
+   {
+    "keyword": "주지훈, 독자 회사 설립",
+    "hitKeyword": "주지훈 블리츠웨이 결별",
+    "hitAt": "2026-11-16T17:00:00+09:00",
+    "leadMin": 198
+   },
+   {
+    "keyword": "주지훈 독자 회사 설립",
+    "hitKeyword": "주지훈 블리츠웨이 결별",
+    "hitAt": "2026-11-16T17:00:00+09:00",
+    "leadMin": 138
+   },
+   {
+    "keyword": "전이경 총감독",
+    "hitKeyword": "전이경 암 투병 고백",
+    "hitAt": "2026-11-16T17:00:00+09:00",
+    "leadMin": 107
+   },
+   {
+    "keyword": "김유정 100일 거짓말",
+    "hitKeyword": "100일의 거짓말 12화",
+    "hitAt": "2026-11-16T17:00:00+09:00",
+    "leadMin": 87
+   },
+   {
+    "keyword": "전이경 총감독 도전",
+    "hitKeyword": "전이경 암 투병 고백",
+    "hitAt": "2026-11-16T17:00:00+09:00",
+    "leadMin": 47
+   },
+   {
+    "keyword": "전이경 암 투병 고백",
+    "hitKeyword": "전이경 암 투병 고백",
+    "hitAt": "2026-11-16T17:00:00+09:00",
+    "leadMin": 37
+   },
+   {
+    "keyword": "수능 와이파이 차단",
+    "hitKeyword": "수능장 와이파이 차단",
+    "hitAt": "2026-11-16T17:00:00+09:00",
+    "leadMin": 27
+   },
+   {
+    "keyword": "반려견 개소주 70대와",
+    "hitKeyword": "개소주 70대 입건",
+    "hitAt": "2026-11-16T17:00:00+09:00",
+    "leadMin": 17
+   },
    {
     "keyword": "조정식 국회의장 공동위원장",
     "hitKeyword": "조정식 수능 연기 주장",
@@ -254,54 +270,6 @@
     "hitKeyword": "조정식 수능 연기 주장",
     "hitAt": "2026-11-16T16:30:00+09:00",
     "leadMin": 259
-   },
-   {
-    "keyword": "조정식 공동위원장 발표",
-    "hitKeyword": "조정식 수능 연기 주장",
-    "hitAt": "2026-11-16T16:30:00+09:00",
-    "leadMin": 198
-   },
-   {
-    "keyword": "음주운전 고경표 소환 예정",
-    "hitKeyword": "고경표 음주운전",
-    "hitAt": "2026-11-16T16:30:00+09:00",
-    "leadMin": 27
-   },
-   {
-    "keyword": "최동석, 박지윤 지인 상간소송 일부 승소",
-    "hitKeyword": "최동석 상간 소송",
-    "hitAt": "2026-11-16T16:30:00+09:00",
-    "leadMin": 17
-   },
-   {
-    "keyword": "최예나 의혹에 스타일리스트",
-    "hitKeyword": "최예나 의상 표절 의혹",
-    "hitAt": "2026-11-16T16:00:00+09:00",
-    "leadMin": 57
-   },
-   {
-    "keyword": "고경표 음주치상 혐의",
-    "hitKeyword": "고경표 음주운전",
-    "hitAt": "2026-11-16T16:00:00+09:00",
-    "leadMin": 17
-   },
-   {
-    "keyword": "임현주 MBC 퇴사",
-    "hitKeyword": "임현주 MBC 퇴사",
-    "hitAt": "2026-11-16T15:30:00+09:00",
-    "leadMin": 78
-   },
-   {
-    "keyword": "신유열 사장 승진",
-    "hitKeyword": "신유열 롯데 사장 승진",
-    "hitAt": "2026-11-16T15:30:00+09:00",
-    "leadMin": 27
-   },
-   {
-    "keyword": "김유정 100일의 거짓말",
-    "hitKeyword": "100일의 거짓말 12회",
-    "hitAt": "2026-11-16T15:30:00+09:00",
-    "leadMin": 17
    }
   ]
  }
