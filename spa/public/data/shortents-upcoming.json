@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T14:23:16.708Z",
+ "builtAt": "2026-11-16T14:33:28.762Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,27 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 18,
+ "measured": 10,
  "candidates": [
   {
-   "keyword": "수능 AI 부정행위 논란",
+   "keyword": "AI 안경 수능 부정 우려",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 14,
-   "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-16T12:56:00.000Z",
+   "articles90": 11,
+   "recent20": 3,
+   "press": 10,
+   "firstArticleAt": "2026-11-16T13:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "수능 D-3, 경찰 'AI 부정행위' 전면전…장비 판매자도 수사",
+     "press": "weekly.chosun.com",
+     "publishedAt": "2026-11-16T14:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/053/0000063093?sid=102"
+    },
     {
      "title": "김선태, AI 안경 쓰고 공무원 시험 봤는데 25점…“오류 있었다”",
      "press": "sports.donga.com",
@@ -29,55 +36,81 @@
      "link": "https://m.entertain.naver.com/article/382/0001305126"
     },
     {
-     "title": "\"믿으라고? 다 카메라 보고 수능 칠 판\"…초소형 카메라 품절사태, 점입...",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-16T14:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001040634?sid=102"
-    },
-    {
-     "title": "편입도 AI 부정행위?…기출 30문항을 ‘찍은 듯’ 배점까지 복기 “사람...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-16T14:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002833206?sid=102"
+     "title": "한성숙 총리, 'AI 스마트기기 부정행위 차단'…수능 대응 전면 강화",
+     "press": "ppss.kr",
+     "publishedAt": "2026-11-16T14:14:00.000Z",
+     "link": "https://www.ppss.kr/news/articleView.html?idxno=321112"
     }
    ]
   },
   {
-   "keyword": "최민희 제명 촉구",
+   "keyword": "삼척 화물선 표류 구조",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-16T12:54:00.000Z",
+   "articles90": 9,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-16T13:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "최민희 징계 놓고 민주당 내홍 격화",
-     "press": "mhj21.com",
-     "publishedAt": "2026-11-16T13:12:00.000Z",
-     "link": "https://www.mhj21.com/news/articleView.html?idxno=254827"
+     "title": "거센 풍랑 속 삼척 앞바다서 화물선 표류…해경, 선원 16명 전원 구조",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-16T14:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005605175?sid=102"
     },
     {
-     "title": "[김종석의 왜]90도 사과에도 “최민희 제명”",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-16T12:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000367722?sid=100"
+     "title": "삼척 앞바다서 화물선 표류…풍랑주의보 속 선원 16명 전원 구조",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-16T14:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000521019?sid=102"
     },
     {
-     "title": "'최민희 감찰'에 둘로 쪼개진 최고위...징계 절차 속도",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-16T12:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002433691?sid=100"
+     "title": "파도에 삼척 앞바다서 화물선 표류…선원 16명 모두 구조",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-16T13:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006410747?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "서울시립대 개인정보 유출",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-16T13:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "서울시립대서 15명 개인정보 유출…\"경찰에 수사 의뢰\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-16T13:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005441977?sid=102"
+    },
+    {
+     "title": "서울시립대 15명 포털 아이디 유출…학교, 비밀번호 변경 당부",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-16T13:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003565585?sid=102"
+    },
+    {
+     "title": "서울시립대 구성원 15명 개인정보 유출… 경찰 수사 의뢰",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-16T13:04:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3449234"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 723,
+  "flagged": 726,
   "matched": 391,
   "avgLeadMin": 820,
   "recent": [
