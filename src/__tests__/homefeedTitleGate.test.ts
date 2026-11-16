@@ -44,8 +44,9 @@ describe('재작성 제목은 나아졌을 때만 받는다', () => {
 
 describe('판정은 한 곳에서만 한다', () => {
   it('길이·후킹·인용 세 검사를 함께 돌린다', () => {
+    // [2026-11-16] 홈판 하한이 25 로 내려가 WORSE(폭 31)는 더 이상 짧지 않다 — 길이는 짧은 제목으로 따로 확인한다.
     const issues = computeHomefeedTitleGateIssues(WORSE);
-    expect(issues.some(i => /너무 짧음/.test(i))).toBe(true);
+    expect(computeHomefeedTitleGateIssues('이강인 교체 이유').some(i => /너무 짧음/.test(i))).toBe(true);
     expect(issues.some(i => /후킹 구조 부족/.test(i))).toBe(true);
   });
 

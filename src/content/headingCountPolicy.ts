@@ -11,8 +11,9 @@
 //   mate/base.prompt:73                 5~7
 //   business/base.prompt:82             5~7
 //   affiliate/shopping_expert_review:18 4~7
-//   homefeed/base.prompt:72             3~7 ("정확한 개수를 맞추지 않는다")
-//   homefeed/issue-story.prompt:35      0~3 (인물·근황 글은 소제목 없이 흐름으로)
+//   homefeed/base.prompt [STRUCTURE]    4~6 ([2026-11-16] 홈판 지침 v5.2 — 소제목 4~6개)
+//   homefeed/issue-story.prompt         4~6 ([2026-11-16] 방송·가십 지침도 4~6 — 예전 0~3 에서 변경)
+//   homefeed/fashion.prompt             3~4 ([2026-11-16] 패션은 짧게: 소제목 3~4개)
 //   seo/base.prompt                     개수 고정 없음 → 구조 변동 허용 폭 3~8
 //
 // 프롬프트가 개수를 바꾸면 여기도 같이 바꾼다. 검증기가 독자적으로 숫자를 만들지 않는다.
@@ -29,8 +30,9 @@ const RANGES: Record<string, HeadingCountRange> = {
   mate: { min: 5, max: 7, source: 'mate/base.prompt' },
   business: { min: 5, max: 7, source: 'business/base.prompt' },
   affiliate: { min: 4, max: 7, source: 'affiliate/shopping_expert_review.prompt' },
-  homefeed: { min: 3, max: 7, source: 'homefeed/base.prompt' },
-  'homefeed-issue': { min: 0, max: 3, source: 'homefeed/issue-story.prompt' },
+  homefeed: { min: 4, max: 6, source: 'homefeed/base.prompt' },
+  'homefeed-issue': { min: 4, max: 6, source: 'homefeed/issue-story.prompt' },
+  'homefeed-fashion': { min: 3, max: 4, source: 'homefeed/fashion.prompt' },
 };
 
 const DEFAULT_RANGE: HeadingCountRange = RANGES.seo;
@@ -39,12 +41,14 @@ const DEFAULT_RANGE: HeadingCountRange = RANGES.seo;
  * 모드별 소제목 개수 범위.
  *
  * issueStory 가 true 면 홈판 이슈 서사 골격이 적용된 글이라 개수 기준이 따로 있다.
+ * fashion 이 true 면 홈판 패션·뷰티 글(fashion.prompt)이라 더 짧은 기준을 쓴다.
  */
 export function resolveHeadingCountRange(
   mode: string | undefined,
-  options: { issueStory?: boolean } = {},
+  options: { issueStory?: boolean; fashion?: boolean } = {},
 ): HeadingCountRange {
   if (options.issueStory === true) return RANGES['homefeed-issue'];
+  if (options.fashion === true && String(mode || '').trim() === 'homefeed') return RANGES['homefeed-fashion'];
   return RANGES[String(mode || '').trim()] || DEFAULT_RANGE;
 }
 

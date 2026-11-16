@@ -26,8 +26,8 @@ describe('issue-story 골격 파일', () => {
     // 타임라인은 '각도를 못 고른 경우의 기본값'으로 내려가고 [각도] 선택이 앞에 왔다.
     expect(prompt).toContain('[각도');
     expect(prompt).toContain('기본 전개 순서');
-    expect(prompt).toContain('소제목은 0~3개');
-    expect(prompt).toContain('문단은 2~3문장'); // [2026-09-02 사장님 결정] 1~2 → 2~3(모바일 2~3줄)
+    expect(prompt).toContain('소제목은 4~6개'); // [2026-11-16] 지침 v5.2 — 예전 0~3개
+    expect(prompt).toContain('문단은 3문장이 기본(2~4문장'); // [2026-11-16] 지침 v5.2 — 예전 2~3문장(2026-09-02 사장님 결정 1~2 → 2~3)
   });
 
   it('환각·명예훼손 가드를 골격보다 우선한다고 명시한다', () => {

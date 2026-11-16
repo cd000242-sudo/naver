@@ -27,8 +27,8 @@ export interface RequiredSchema {
 export const STRUCTURED_CONTENT_SCHEMA: RequiredSchema = {
   name: 'StructuredContent',
   required: ['selectedTitle'],
-  // minItems 0: homefeed issue-story legitimately allows 0~3 headings; the body check below
-  // (introduction | bodyPlain) is what proves an article exists.
+  // minItems 0: heading counts (homefeed 4~6) are a warning-level policy in headingCountPolicy, not a
+  // completeness failure; the body check below (introduction | bodyPlain) is what proves an article exists.
   arrays: { headings: { minItems: 0, itemRequired: ['title', 'content'] } },
 };
 

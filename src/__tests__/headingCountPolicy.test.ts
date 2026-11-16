@@ -15,14 +15,23 @@ describe('소제목 개수 단일 출처 (2026-08-26 하네스 충돌 정리)', 
   it('모드마다 프롬프트가 요구하는 범위를 그대로 쓴다', () => {
     expect(resolveHeadingCountRange('mate')).toMatchObject({ min: 5, max: 7 });
     expect(resolveHeadingCountRange('affiliate')).toMatchObject({ min: 4, max: 7 });
-    expect(resolveHeadingCountRange('homefeed')).toMatchObject({ min: 3, max: 7 });
+    expect(resolveHeadingCountRange('homefeed')).toMatchObject({ min: 4, max: 6 });
   });
 
-  it('홈판 이슈 서사는 소제목 0개도 정상이다 (issue-story.prompt 0~3)', () => {
+  it('홈판 이슈 서사도 4~6개다 (issue-story.prompt, 2026-11-16 지침 v5.2 — 예전 0~3)', () => {
     const range = resolveHeadingCountRange('homefeed', { issueStory: true });
-    expect(judgeHeadingCount(0, range)).toBe('ok');
-    expect(judgeHeadingCount(2, range)).toBe('ok');
+    expect(range).toMatchObject({ min: 4, max: 6 });
+    expect(judgeHeadingCount(2, range)).toBe('too-few');
+    expect(judgeHeadingCount(4, range)).toBe('ok');
+    expect(judgeHeadingCount(7, range)).toBe('too-many');
+  });
+
+  it('홈판 패션·뷰티는 3~4개이고, 다른 모드에는 영향이 없다 (fashion.prompt)', () => {
+    const range = resolveHeadingCountRange('homefeed', { fashion: true });
+    expect(range).toMatchObject({ min: 3, max: 4 });
+    expect(judgeHeadingCount(3, range)).toBe('ok');
     expect(judgeHeadingCount(5, range)).toBe('too-many');
+    expect(resolveHeadingCountRange('seo', { fashion: true })).toEqual(resolveHeadingCountRange('seo'));
   });
 
   it('모르는 모드는 SEO 기준으로 폴백한다', () => {
@@ -38,10 +47,11 @@ describe('홈판 이슈 서사 소제목 경고 (2026-08-26)', () => {
       join(__dirname, '..', 'contentHomefeedValidator.ts'),
       'utf-8',
     );
-    // 지시를 따라 소제목 0개로 쓴 이슈 서사 글이 "심각 부족"으로 찍히던 문제.
+    // 지시를 따른 이슈 서사 글이 "심각 부족"으로 찍히던 문제(당시 이슈형은 0~3개였다).
     expect(src).not.toMatch(/최소 3개 필요/);
     expect(src).not.toMatch(/소제목 심각 부족/);
     expect(src).toMatch(/resolveHeadingCountRange/);
     expect(src).toMatch(/issueStory: isIssueStory/);
+    expect(src).toMatch(/fashion: hintCategory === 'fashion'/);
   });
 });

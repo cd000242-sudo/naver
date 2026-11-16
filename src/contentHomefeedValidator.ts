@@ -135,14 +135,14 @@ export function validateHomefeedContent(
   console.log(`[HomefeedValidator] 📊 제목 점수: ${titleScore}/100 ("${title.substring(0, 30)}...")`);
 
   // [2026-08-26] 기준을 headingCountPolicy 단일 출처로 옮겼다.
-  // 예전엔 모든 홈판 글에 "최소 3개"를 요구했는데, homefeed/issue-story.prompt는
-  // "인물·근황 글은 소제목 없이 흐름으로"(0~3개)라고 지시한다. 지시를 따른 글이
-  // 부족 경고로 찍히고 있었다.
+  // [2026-11-16] 지침 v5.2 에 맞춰 홈판 4~6개(이슈형도 4~6, 패션·뷰티 3~4)로 바뀌었다.
   const headingsCount = content.headings?.length || 0;
-  const isIssueStory = HOMEFEED_ISSUE_STORY_CATEGORIES.has(
-    resolveCategory((source as any)?.categoryHint),
-  );
-  const headingRange = resolveHeadingCountRange('homefeed', { issueStory: isIssueStory });
+  const hintCategory = resolveCategory((source as any)?.categoryHint);
+  const isIssueStory = HOMEFEED_ISSUE_STORY_CATEGORIES.has(hintCategory);
+  const headingRange = resolveHeadingCountRange('homefeed', {
+    issueStory: isIssueStory,
+    fashion: hintCategory === 'fashion',
+  });
   if (judgeHeadingCount(headingsCount, headingRange) !== 'ok') {
     const line = describeHeadingCount(headingsCount, headingRange);
     warnings.push(line);

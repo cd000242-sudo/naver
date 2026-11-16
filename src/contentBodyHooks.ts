@@ -13,6 +13,7 @@ import {
 
 import type { StructuredContent, ContentSource } from './contentGenerator';
 import type { PromptMode } from './promptLoader.js';
+import { HOMEFEED_ISSUE_STORY_CATEGORIES, resolveCategory } from './promptLoader.js';
 
 export function buildHomefeedDebateHookSummaryBlock(params: {
   title: string;
@@ -142,22 +143,28 @@ export function applyHomefeedNarrativeHookBlock(content: StructuredContent, sour
       console.log(`[HomefeedHook] ✅ AI 표현 0개 — 사람 냄새 양호`);
     }
 
-    // ✅ [2026-03-06] 소제목 수 검증 — 3~8개가 최적 (구조 변동 엔진 대응)
+    // ✅ [2026-03-06] 소제목 수 검증. [2026-11-16] 기준은 headingCountPolicy 단일 출처(홈판 4~6, 패션 3~4).
     const headingCount = content.headings.length;
-    if (headingCount < 3) {
-      console.log(`[HomefeedHook] ⚠️ 소제목 ${headingCount}개 — 최소 3개 필요`);
-    } else if (headingCount > 8) {
-      console.log(`[HomefeedHook] ⚠️ 소제목 ${headingCount}개 — 너무 많음 (8개 이하 권장)`);
+    const hintCategory = resolveCategory((source as any)?.categoryHint);
+    const headingRange = resolveHeadingCountRange('homefeed', {
+      issueStory: HOMEFEED_ISSUE_STORY_CATEGORIES.has(hintCategory),
+      fashion: hintCategory === 'fashion',
+    });
+    const headingVerdict = judgeHeadingCount(headingCount, headingRange);
+    if (headingVerdict === 'too-few') {
+      console.log(`[HomefeedHook] ⚠️ 소제목 ${headingCount}개 — 최소 ${headingRange.min}개 필요`);
+    } else if (headingVerdict === 'too-many') {
+      console.log(`[HomefeedHook] ⚠️ 소제목 ${headingCount}개 — 너무 많음 (${headingRange.max}개 이하 권장)`);
     } else {
-      console.log(`[HomefeedHook] ✅ 소제목 ${headingCount}개 — 구조 변동 엔진 허용 범위`);
+      console.log(`[HomefeedHook] ✅ 소제목 ${headingCount}개 — 허용 범위 ${headingRange.min}~${headingRange.max}개`);
     }
 
     // ✅ [2026-03-06] 본문 품질 종합 점수 로깅
     let bodyScore = 100;
     if (triggerCount < 3) bodyScore -= 15;
     if (aiCount > 0) bodyScore -= (aiCount * 10);
-    if (headingCount < 3) bodyScore -= 20;
-    if (headingCount > 8) bodyScore -= 10;
+    if (headingVerdict === 'too-few') bodyScore -= 20;
+    if (headingVerdict === 'too-many') bodyScore -= 10;
     // 서브키워드 밀도 반영
     if (subKwArr.length > 0) {
       let kwHitCount = 0;

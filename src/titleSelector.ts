@@ -90,7 +90,7 @@ export type TitleMode = 'seo' | 'homefeed' | 'affiliate' | 'business' | 'mate';
 
 const LENGTH_RULES: Record<TitleMode, { optimal: [number, number]; ok: [number, number] }> = {
   seo: { optimal: [25, 40], ok: [22, 45] },
-  homefeed: { optimal: [28, 42], ok: [25, 45] },
+  homefeed: { optimal: [25, 40], ok: [22, 45] },  // [2026-11-16] 홈판 지침 v5.2 25~40
   affiliate: { optimal: [28, 42], ok: [25, 45] },
   business: { optimal: [28, 42], ok: [25, 45] },
   mate: { optimal: [28, 45], ok: [25, 48] },

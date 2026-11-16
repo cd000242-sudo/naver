@@ -23,6 +23,7 @@ import { normalizeHookIntroLines } from './contentHookIntroPolicy.js';
 import { buildNeoHookPromptBlock } from './content/neoHookTitles.js';
 import { excludedBusinessAngleIds, type BusinessIndustry } from './content/businessIndustryDetector.js';
 import { skipsIncidentOverlays } from './content/issueOverlayGate.js';
+import { resolveHeadingCountRange } from './content/headingCountPolicy.js';
 
 // 프롬프트 디렉토리 경로 (개발/프로덕션 환경 모두 지원)
 function getPromptsDir(): string {
@@ -173,6 +174,14 @@ export function resolveCategory(categoryHint?: string): PromptCategory {
 }
 
 /**
+ * [2026-11-16] '스포츠' 힌트는 의도적으로 entertainment 로 해석된다(이슈형 골격·SEO 겹침 유지).
+ * homefeed 는 그 위에 homefeed/sports.prompt 를 한 겹 더 얹는다 — 이 파일은 그동안 아무 데도 붙지 않았다.
+ */
+export function isSportsHint(categoryHint?: string): boolean {
+  return resolveCategory(categoryHint) === 'entertainment' && String(categoryHint || '').includes('스포츠');
+}
+
+/**
  * 2축 분리 구조로 시스템 프롬프트 생성
  *
  * @param mode - 노출 목적 (seo | homefeed)
@@ -208,6 +217,15 @@ export function buildSystemPrompt(
       composed = `${composed}\n\n${categoryPrompt}`;
     } else {
       console.warn(`[PromptLoader] 카테고리 프롬프트 없음: ${categoryPromptMode}/${category}.prompt - base만 사용`);
+    }
+    // [2026-11-16] 홈판 스포츠 글은 entertainment 카테고리 파일 위에 sports 파일을 한 겹 더 받는다.
+    if (mode === 'homefeed' && isSportsHint(options?.categoryHint)) {
+      const sportsPrompt = loadPromptFile('homefeed/sports.prompt');
+      if (sportsPrompt) {
+        composed = `${composed}\n\n${sportsPrompt}`;
+      } else {
+        console.warn('[PromptLoader] homefeed/sports.prompt 로드 실패 - 스포츠 보정 미적용');
+      }
     }
   }
 
@@ -326,8 +344,9 @@ ${briefOverlay}`;
 
   // 2.85 [v2.11.135] Homefeed issue-story skeleton.
   // Real homefeed-exposed Mate posts (20-sample analysis) follow a story
-  // shape — quote-hook titles, timeline body, 0~3 headings, ultra-short
-  // paragraphs — that the practical-info base skeleton actively suppressed.
+  // shape — quote-hook titles, timeline body, ultra-short paragraphs (headings
+  // were 0~3 here until 2026-11-16, now 4~6 per the v5.2 guide) — that the
+  // practical-info base skeleton actively suppressed.
   // Issue-type categories get the story skeleton LAST so it can override the
   // conflicting base/90+ rules; practical categories keep the base shape.
   if (mode === 'homefeed' && HOMEFEED_ISSUE_STORY_CATEGORIES.has(category)) {
@@ -1122,29 +1141,22 @@ const STRUCTURE_ARCHETYPES: StructureArchetype[] = [
     name: '딥다이브형',
     headingCount: 4,
     sentencesPerHeading: '5~7',
-    structureDescription: '소제목 4개, 각 섹션을 깊고 풍성하게. 하나의 주제를 다각도로 파고드는 구조.',
+    structureDescription: '각 섹션을 깊고 풍성하게. 하나의 주제를 다각도로 파고드는 구조.',
     fifoVariation: '소제목1: 핵심 사실로 시작한 뒤 해석, 독자 반응, 의견을 자연스럽게 연결 / 소제목2: 독자 반응을 먼저 짚고 사실과 해석으로 이어감 / 소제목3: 의미 해석을 먼저 던진 뒤 근거와 의견으로 마무리 / 소제목4: 솔직한 의견에서 출발해 사실과 반응으로 정리',
   },
   {
     name: '스탠다드형',
     headingCount: 5,
     sentencesPerHeading: '4~5',
-    structureDescription: '소제목 5개, 균형 잡힌 표준 구조. 정보 밀도와 감정 밸런스.',
+    structureDescription: '균형 잡힌 표준 구조. 정보 밀도와 감정 밸런스.',
     fifoVariation: '소제목1: 사실 중심으로 시작해 해석, 반응, 의견을 연결 / 소제목2: 사실 다음에 독자 반응을 먼저 배치 / 소제목3: 반응을 먼저 보여주고 핵심 사실로 설득 / 소제목4: 해석에서 출발해 반응과 사실을 묶음 / 소제목5: 의견으로 여운을 만들고 사실로 받침',
   },
   {
     name: '속보·이슈형',
     headingCount: 6,
     sentencesPerHeading: '3~5',
-    structureDescription: '소제목 6개, 빠른 전개. 이슈의 다양한 측면을 짧고 임팩트 있게 다룸.',
+    structureDescription: '빠른 전개. 이슈의 다양한 측면을 짧고 임팩트 있게 다룸.',
     fifoVariation: '소제목1: 가장 강한 사실로 시작해 해석, 반응, 의견을 연결 / 소제목2: 독자 반응과 의견을 먼저 보여준 뒤 사실로 확인 / 소제목3: 사실과 해석을 짧게 제시하고 의견으로 마무리 / 소제목4: 반응을 먼저 끌어낸 뒤 사실과 해석으로 정리 / 소제목5: 사실에서 반응으로 전개하고 의견으로 닫음 / 소제목6: 의견과 반응을 먼저 놓고 마지막에 사실로 확인',
-  },
-  {
-    name: '종합분석형',
-    headingCount: 7,
-    sentencesPerHeading: '3~4',
-    structureDescription: '소제목 7개, 넓은 커버리지. 주제를 최대한 다양한 관점에서 훑는 구조.',
-    fifoVariation: '소제목1: 사실, 해석, 반응, 의견을 균형 있게 연결 / 소제목2: 사실을 제시하고 반응과 의견으로 확장 / 소제목3: 해석을 먼저 던진 뒤 사실과 반응으로 보강 / 소제목4: 반응에서 시작해 해석, 사실, 의견으로 수렴 / 소제목5: 사실과 의견을 붙이고 반응으로 확인 / 소제목6: 반응을 먼저 놓고 사실과 의견으로 정리 / 소제목7: 의견으로 여운을 만든 뒤 사실과 반응을 짧게 회수',
   },
 ];
 
@@ -1280,11 +1292,15 @@ export function buildBusinessAngleDirective(industry?: BusinessIndustry | null):
  * 미달을 지시하던 분량 지터 제거, 존재하지 않는 규칙("5~6개") 참조와 0점
  * 위협 삭제.
  */
-export function buildStructureVariationDirective(minChars?: number): string {
+export function buildStructureVariationDirective(minChars?: number, categoryHint?: string): string {
   const archetype = getRandomStructureArchetype();
+  // [2026-11-16] 소제목 개수는 headingCountPolicy 범위(홈판 4~6, 패션·뷰티 3~4) 안으로만 정한다.
+  const headingRange = resolveHeadingCountRange('homefeed', { fashion: resolveCategory(categoryHint) === 'fashion' });
+  const headingCount = Math.min(Math.max(archetype.headingCount, headingRange.min), headingRange.max);
+  const fifoVariation = archetype.fifoVariation.split(' / ').slice(0, headingCount).join(' / ');
   const targetChars = typeof minChars === 'number' && minChars > 0 ? minChars : 2500;
 
-  console.log(`[StructureEngine] 🎲 구조 아키타입: ${archetype.name} (소제목 ${archetype.headingCount}개 안팎) / 목표 ${targetChars}자`);
+  console.log(`[StructureEngine] 🎲 구조 아키타입: ${archetype.name} (소제목 ${headingCount}개) / 목표 ${targetChars}자`);
 
   return `
 ════════════════════════════════════════
@@ -1292,15 +1308,15 @@ export function buildStructureVariationDirective(minChars?: number): string {
 ════════════════════════════════════════
 
 이번 글은 아래 구조를 기준으로 삼아라. 매 글 다른 골격을 쓰기 위한 힌트이며,
-내용에 따라 ±1개 범위에서 조정해도 된다.
+내용에 따라 ${headingRange.min}~${headingRange.max}개 범위 안에서 조정해도 된다.
 
 ■ 구조 아키타입: [${archetype.name}]
-■ 소제목 개수: ${archetype.headingCount}개 안팎 (±1)
+■ 소제목 개수: ${headingCount}개 (${headingRange.min}~${headingRange.max}개 범위 안에서 조정)
 ■ 각 소제목 본문: 최소 ${archetype.sentencesPerHeading}문장 — 할 말이 더 있으면 더 써도 좋다
 ■ 구조 설명: ${archetype.structureDescription}
 
 ■ 문장 흐름 배치 (이번 글 전용, 최종 글에는 구조 라벨을 쓰지 말 것):
-${archetype.fifoVariation}
+${fifoVariation}
 
 ■ 분량은 기준이 아니다. 기준은 제목이 약속한 것에 답했는가다.
    답 다음에 보태는 것은 그 답을 실제로 쓰는 데 필요한 것만 — 갈리는 조건, 먼저 확인할 것, 흔한 실수, 다음 단계, 이어질 질문.

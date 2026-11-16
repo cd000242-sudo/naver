@@ -414,13 +414,13 @@ export function buildContentJsonOutputFormat(options: ContentJsonOutputFormatOpt
   const isMate = mode === 'mate';
   const modeStructureRule = buildModeStructureRule(mode);
   const evidenceBlockRule = buildEvidenceBlockRule();
-  // [2026-07-30] issue-story 골격(연예/시사)은 자체적으로 "소제목 0~3개 + 이 골격이
+  // [2026-07-30] issue-story 골격(연예/시사)은 자체적으로 "소제목 개수 + 이 골격이
   // 우선"을 선언한다. 여기에 STRUCTURE OVERRIDE(개수 지정)까지 겹치면 한 글에
   // 상충하는 개수 계약이 둘 들어가 골격이 무작위로 뒤집힌다 → 배타 처리.
   const usesIssueStorySkeleton = isHomefeed
     && HOMEFEED_ISSUE_STORY_CATEGORIES.has(resolveCategory(source?.categoryHint));
   const structureDirective = isHomefeed && !usesIssueStorySkeleton
-    ? buildStructureVariationDirective(minChars)
+    ? buildStructureVariationDirective(minChars, source?.categoryHint)
     : '';
 
   /*
@@ -530,7 +530,7 @@ ${contentMode === 'mate' ? `
 7. 자료에 제도·서비스가 종료·중단·연장·개정됐다는 내용이 있으면 제목이나 도입 첫 3문장 안에 그 현재 상태를 쓴다. 옛 조건을 현재형으로 소개하지 않는다.` : ''}
 ${contentMode === 'homefeed' ? `
 ⚠️ [홈판 모드 제목 필수 조건]
-1. 제목 규칙의 정본은 system 의 [TITLE](HOMEFEED_TITLE_RULES) 하나다 — 길이(33~42, 장치 3개 이상이면 초과 허용)·장치·금지어·근거 조건은 그곳만 따른다.
+1. 제목 규칙의 정본은 system 의 [TITLE](HOMEFEED_TITLE_RULES) 하나다 — 길이(25~40, 장치 3개 이상이면 초과 허용)·장치·금지어·근거 조건은 그곳만 따른다.
 2. 제목과 본문 주제가 1:1로 일치해야 하며, 주제 이탈 금지. 본문에 없는 주제를 제목에 걸면 홈피드 노출 자체가 막힌다.
 3. 제목이 만든 궁금증은 도입부가 즉시 갚는다 — 궁금증만 만들고 본문이 답하지 않으면 낚시다.` : ''}
 ${buildMetricsBlock(metrics)}
