@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T04:11:45.333Z",
+ "builtAt": "2026-11-16T04:21:50.289Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,70 +8,197 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 17,
+ "measured": 20,
  "candidates": [
   {
-   "keyword": "JTBC 올림픽 중계권 해지",
+   "keyword": "한덕수 19일 선고",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 22,
-   "recent20": 3,
-   "press": 22,
-   "firstArticleAt": "2026-11-16T02:43:00.000Z",
-   "exclusive": true,
+   "articles90": 32,
+   "recent20": 5,
+   "press": 24,
+   "firstArticleAt": "2026-11-16T02:52:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "JTBC, 올림픽 중계권 결국 포기…재무 부담에 IOC와 계약 해지",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-16T04:02:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=625468"
+     "title": "대법원, 19일 한덕수 내란중요임무종사 혐의 선고…김건희 선고도(종합...",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-16T04:18:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/325430/?sc=Naver"
+    },
+    {
+     "title": "[사설] 한덕수 선고 확정한 대법원, 재판 지연 책임은 남는다",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-16T04:09:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000083131"
+    },
+    {
+     "title": "대법, 한덕수 ‘내란 사건’ 19일 선고",
+     "press": "naeil.com",
+     "publishedAt": "2026-11-16T04:06:00.000Z",
+     "link": "https://www.naeil.com/news/read/608928?ref=naver"
+    }
+   ]
+  },
+  {
+   "keyword": "SKT 효성 AI 센터 구축",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 22,
+   "recent20": 7,
+   "press": 22,
+   "firstArticleAt": "2026-11-16T02:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "SKT·효성중공업, AI 데이터센터 전력 동맹…변압기 확보부터 직류배전...",
+     "press": "s-journal.co.kr",
+     "publishedAt": "2026-11-16T04:20:00.000Z",
+     "link": "https://www.s-journal.co.kr/news/articleView.html?idxno=45339"
+    },
+    {
+     "title": "SKT·효성중공업, AI 데이터센터 전력 인프라 확보 및 차세대 기술 협력",
+     "press": "cstimes.com",
+     "publishedAt": "2026-11-16T04:12:00.000Z",
+     "link": "https://www.cstimes.com/news/articleView.html?idxno=728036"
+    },
+    {
+     "title": "AI 데이터센터 승부처는 전력… SKT·효성중공업 손잡았다",
+     "press": "newsmap.co.kr",
+     "publishedAt": "2026-11-16T04:08:00.000Z",
+     "link": "https://www.newsmap.co.kr/news/articleView.html?idxno=5292"
+    }
+   ]
+  },
+  {
+   "keyword": "JTBC 올림픽 중계권 해지",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 19,
+   "recent20": 4,
+   "press": 19,
+   "firstArticleAt": "2026-11-16T02:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오피셜] JTBC, 올림픽 중계권 계약 해지…2028 LA 대회부터 안 한다→\"재...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-16T04:19:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/311/0002081028"
+    },
+    {
+     "title": "‘회생 절차’ JTBC, IOC와 올림픽 중계권 계약 해지 “재무 불확실성 제...",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-16T04:14:00.000Z",
+     "link": "http://www.breaknews.com/1251190"
     },
     {
      "title": "JTBC, 올림픽 중계권 계약 해지",
      "press": "seoul.co.kr",
      "publishedAt": "2026-11-16T04:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/081/0003699737?sid=103"
-    },
-    {
-     "title": "JTBC, 올림픽 중계권 결국 포기 \"2028 LA올림픽 등 중계권 새 주인 찾아...",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-16T03:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001040476?sid=101"
     }
    ]
   },
   {
-   "keyword": "19일 대법 선고",
+   "keyword": "FA 승인 22명",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 18,
-   "recent20": 4,
+   "articles90": 16,
+   "recent20": 5,
    "press": 14,
-   "firstArticleAt": "2026-11-16T02:51:00.000Z",
+   "firstArticleAt": "2026-11-16T02:52:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "최대어 '구자욱' 포함 FA 22명 공시 … 17일부터 계약",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-16T04:18:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/16/2026111650191.html"
+    },
+    {
+     "title": "보상선수 없는 C등급...첫 FA 김호령, 시장 평가 받는다",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-16T04:16:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/660/0000121469"
+    },
+    {
+     "title": "“1~2년 안에 이런 FA 선수 없다”…구자욱·원태인 쟁탈전 시작",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-16T04:12:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/028/0002832398"
+    }
+   ]
+  },
+  {
+   "keyword": "개헌",
+   "sources": [
+    "google"
+   ],
+   "articles90": 13,
+   "recent20": 3,
+   "press": 13,
+   "firstArticleAt": "2026-11-16T02:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "대법, 한덕수 ‘내란 사건’ 19일 선고",
-     "press": "naeil.com",
+     "title": "헌법개정자문위원장에 김형오·정세균…野 \"정부 내 개헌 없다\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-16T04:14:00.000Z",
+     "link": "https://www.ajunews.com/view/20261116115751011"
+    },
+    {
+     "title": "국힘 \"이번 정부서 개헌 없다\"…조정식 국회의장 사퇴 촉구",
+     "press": "kado.net",
      "publishedAt": "2026-11-16T04:06:00.000Z",
-     "link": "https://www.naeil.com/news/read/608928?ref=naver"
+     "link": "https://n.news.naver.com/mnews/article/654/0000211501?sid=100"
     },
     {
-     "title": "與, 한덕수 선고기일 지정에 \"만시지탄\"…정청래는 \"조희대 탄핵\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-16T03:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005441635?sid=100"
+     "title": "조정식 \"내년이 개헌 적기\"…野 \"이번 정부서 개헌 없다\"",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-16T04:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005354220?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "발언하는 김민석 대표",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 28,
+   "recent20": 2,
+   "press": 13,
+   "firstArticleAt": "2026-11-16T02:53:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김민석, 최민희 발언 논란에 \"윤리심판원 독립적 판단\"…당내 갈등 확산",
+     "press": "ppss.kr",
+     "publishedAt": "2026-11-16T04:17:00.000Z",
+     "link": "https://www.ppss.kr/news/articleView.html?idxno=321171"
     },
     {
-     "title": "김민석, 한덕수 선고 예고에 \"만시지탄…대법 재판 지연 반성해야\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-16T03:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005441634?sid=100"
+     "title": "김민석, AI 부정행위에 \"최대 10년 응시 제한 검토\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-16T04:12:00.000Z",
+     "link": "https://www.ajunews.com/view/20261116101451603"
+    },
+    {
+     "title": "발언하는 김민석 대표",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-16T03:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014324587?sid=100"
     }
    ]
   },
@@ -80,10 +207,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 4,
-   "press": 10,
-   "firstArticleAt": "2026-11-16T02:48:00.000Z",
+   "articles90": 10,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-16T03:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -140,34 +267,34 @@
    ]
   },
   {
-   "keyword": "이재명",
+   "keyword": "담합",
    "sources": [
     "google"
    ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-16T03:01:00.000Z",
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-16T03:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[포토] ‘이재명, 윤석열 탄핵 반대’ 발언 최민희, 최고위서 사과",
-     "press": "ilyosisa.co.kr",
-     "publishedAt": "2026-11-16T03:44:00.000Z",
-     "link": "https://www.ilyosisa.co.kr/news/article.html?no=258989"
+     "title": "美 법원 \"삼성·SK·마이크론 D램 담합 가능성\"..5개 의혹 인정",
+     "press": "4th.kr",
+     "publishedAt": "2026-11-16T04:12:00.000Z",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2121941"
     },
     {
-     "title": "이재명·다카이치 17일 마닐라 회담…안보·에너지 공조 다진다",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-16T03:40:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=202611161232588728e7e8286d56_1"
+     "title": "삼성·SK하이닉스 HBM 전환이 담합?…美법원도 인정한 '합리적 경영 판단...",
+     "press": "e-science.co.kr",
+     "publishedAt": "2026-11-16T04:10:00.000Z",
+     "link": "https://www.e-science.co.kr/news/articleView.html?idxno=139847"
     },
     {
-     "title": "[이재명 직무평가] 지지율 36.4% 소폭 반등...박스권 횡보",
-     "press": "00news.co.kr",
-     "publishedAt": "2026-11-16T03:32:00.000Z",
-     "link": "http://www.00news.co.kr/news/articleView.html?idxno=108073"
+     "title": "HD현대오일뱅크, 3조원대 흑자 잔치 뒤 '4년간 가격 담합' 혐의…무너진...",
+     "press": "upkoreanews.kr",
+     "publishedAt": "2026-11-16T03:31:00.000Z",
+     "link": "https://www.upkoreanews.kr/news/articleView.html?idxno=101178"
     }
    ]
   },
@@ -176,10 +303,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 9,
+   "articles90": 4,
    "recent20": 3,
-   "press": 6,
-   "firstArticleAt": "2026-11-16T02:42:00.000Z",
+   "press": 2,
+   "firstArticleAt": "2026-11-16T03:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -204,14 +331,14 @@
    ]
   },
   {
-   "keyword": "종이팩 분리배출 의무화",
+   "keyword": "종이팩 분리배출 의무화 확대",
    "sources": [
     "nate"
    ],
-   "articles90": 25,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-16T02:53:00.000Z",
+   "press": 2,
+   "firstArticleAt": "2026-11-16T03:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -234,43 +361,11 @@
      "link": "https://www.kpinews.kr/newsView/1065581790655501"
     }
    ]
-  },
-  {
-   "keyword": "담합",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-16T03:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "삼성·SK하이닉스 HBM 전환이 담합?…美법원도 인정한 '합리적 경영 판단...",
-     "press": "e-science.co.kr",
-     "publishedAt": "2026-11-16T04:10:00.000Z",
-     "link": "https://www.e-science.co.kr/news/articleView.html?idxno=139847"
-    },
-    {
-     "title": "HD현대오일뱅크, 3조원대 흑자 잔치 뒤 '4년간 가격 담합' 혐의…무너진...",
-     "press": "upkoreanews.kr",
-     "publishedAt": "2026-11-16T03:31:00.000Z",
-     "link": "https://www.upkoreanews.kr/news/articleView.html?idxno=101178"
-    },
-    {
-     "title": "삼성전자·SK하이닉스·마이크론 D램 담합 의혹 소송 이어진다",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-16T03:14:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/438843"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 604,
+  "flagged": 610,
   "matched": 329,
   "avgLeadMin": 841,
   "recent": [
