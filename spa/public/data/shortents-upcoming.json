@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T12:52:31.876Z",
+ "builtAt": "2026-11-16T13:02:35.406Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,66 +11,67 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "조정식 개헌 로드맵",
+   "keyword": "고경표 팬미팅 취소",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "daum"
    ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-16T11:26:00.000Z",
-   "exclusive": false,
+   "articles90": 25,
+   "recent20": 3,
+   "press": 25,
+   "firstArticleAt": "2026-11-16T11:43:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "세종시, 국회 개헌 논의 환영…행정수도 명문화 촉구",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-16T12:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000192603?sid=102"
+     "title": "‘음주운전’ 고경표, 결국 팬미팅 취소…“실망 안겨드려 사과”",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-16T12:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003565583?sid=102"
     },
     {
-     "title": "조 의장, 개헌자문위 출범에 野 \"李 탈옥 도구\"",
-     "press": "ulsanpress.net",
-     "publishedAt": "2026-11-16T12:42:00.000Z",
-     "link": "https://www.ulsanpress.net/news/articleView.html?idxno=586924"
+     "title": "[공식] '음주운전' 고경표 팬미팅, 결국 취소 \"전액 환불 처리\" (전문)",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-16T12:54:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002081192"
     },
     {
-     "title": "[사설] 정치권 주도의 개헌 논의가 공허한 이유",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-16T12:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001164526?sid=110"
+     "title": "'음주운전' 고경표, 팬미팅도 취소…\"실망 안겨드려 죄송\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-16T12:53:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014325843"
     }
    ]
   },
   {
-   "keyword": "이지영 AI 부정행위 대책",
+   "keyword": "서울광장 성탄트리 점등",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 4,
+   "articles90": 26,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-16T11:31:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-16T11:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "스타강사도 나섰다…이지영 \"20년간 수능 강의 중 이런 위기는 처음\"",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-16T12:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003155867?sid=102"
+     "title": "오세훈, 서울광장 성탄트리 점등식…“모두가 따뜻한 겨울 되길”",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-16T12:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003699969?sid=100"
     },
     {
-     "title": "'일타' 이지영, 수능 AI 부정행위 비상대책 강력 촉구…수험생 위한 묵...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-16T12:06:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001408529"
+     "title": "[포토] 불 켜진 성탄트리",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-16T12:36:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/16/2026111650381.html"
     },
     {
-     "title": "\"대책 없으면 수능 연기해야\"…스타 강사들 'AI 부정행위' 우려",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-16T11:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000132352?sid=102"
+     "title": "[포토] 성탄트리 점등식 축사하는 오세훈 서울시장",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-16T12:34:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/16/2026111650380.html"
     }
    ]
   },
@@ -80,13 +81,19 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
    "firstArticleAt": "2026-11-16T11:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "대법, 김건희 '3대 의혹 사건' 19일 상고심 선고",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-16T12:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002433694?sid=102"
+    },
     {
      "title": "김건희, 19일 대법원 '3대 의혹' 상고심 선고기일 불출석",
      "press": "news.jtbc.co.kr",
@@ -98,52 +105,13 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-16T11:50:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009292425?sid=102"
-    },
-    {
-     "title": "김건희, 19일 대법원 '3대 의혹' 상고심 선고기일에 불출석",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-16T11:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014325822?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "두두",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-16T11:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "팀 새 역사 쓰러 간다! '두두' 이동주, DN 수퍼스와 2028년까지 재계약",
-     "press": "sportalkorea.com",
-     "publishedAt": "2026-11-16T12:01:00.000Z",
-     "link": "https://m.sports.naver.com/esports/article/139/0002256126"
-    },
-    {
-     "title": "[오피셜] '두두' 이동주, DNS와 2028년까지 동행",
-     "press": "inven.co.kr",
-     "publishedAt": "2026-11-16T11:28:00.000Z",
-     "link": "https://m.sports.naver.com/esports/article/442/0000198903"
-    },
-    {
-     "title": "[오피셜] '두두' 이동주, DN 수퍼스와 28년까지 동행… \"보답하고 싶다\"",
-     "press": "dailyesports.com",
-     "publishedAt": "2026-11-16T11:26:00.000Z",
-     "link": "https://m.sports.naver.com/esports/article/347/0000196627"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 716,
+  "flagged": 718,
   "matched": 387,
   "avgLeadMin": 824,
   "recent": [
