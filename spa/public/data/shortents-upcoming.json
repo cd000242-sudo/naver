@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T13:52:59.822Z",
+ "builtAt": "2026-11-16T14:03:04.939Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,14 +8,91 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
- "candidates": [],
+ "measured": 18,
+ "candidates": [
+  {
+   "keyword": "수능 AI 부정행위 논란",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 20,
+   "recent20": 4,
+   "press": 14,
+   "firstArticleAt": "2026-11-16T12:39:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'흙수저→100억 연봉' 이지영, AI 커닝 논란에 분통 \"노력한 만큼 보상받...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-16T13:56:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004467192"
+    },
+    {
+     "title": "[사설] 교육부 ‘AI커닝’ 비상, 수능관리에 조직 명운 걸어야",
+     "press": "segye.com",
+     "publishedAt": "2026-11-16T13:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004175654?sid=110"
+    },
+    {
+     "title": "LEET 만점자에 커지는 의혹의 시선...과거 수능성적표에 개명 후 이름?",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-16T13:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003155869?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "서울 올림픽 무산",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-16T12:35:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "2036년 하계올림픽 '공동 개최' 무산",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-16T13:26:00.000Z",
+     "link": "http://www.breaknews.com/1251426"
+    },
+    {
+     "title": "'2036 전주 올림픽' 단독 개최, 정말 가능?…'서울과 공동개최 논의' 2달...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-16T13:25:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/311/0002081198"
+    },
+    {
+     "title": "2036 올림픽 공동 개최 물거품...전북, 단독 유치 추진",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-16T12:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000121523?sid=102"
+    }
+   ]
+  }
+ ],
  "hitRate": {
   "days": 7,
-  "flagged": 721,
-  "matched": 389,
-  "avgLeadMin": 823,
+  "flagged": 722,
+  "matched": 391,
+  "avgLeadMin": 820,
   "recent": [
+   {
+    "keyword": "은행",
+    "hitKeyword": "하나은행 우리은행 승리",
+    "hitAt": "2026-11-16T23:00:00+09:00",
+    "leadMin": 467
+   },
+   {
+    "keyword": "고경표 팬미팅 취소",
+    "hitKeyword": "고경표 음주운전",
+    "hitAt": "2026-11-16T23:00:00+09:00",
+    "leadMin": 57
+   },
    {
     "keyword": "삼전닉스",
     "hitKeyword": "삼전닉스 외국인",
@@ -63,18 +140,6 @@
     "hitKeyword": "블랙핑크 YG 전속계약 제외",
     "hitAt": "2026-11-16T21:00:00+09:00",
     "leadMin": 39
-   },
-   {
-    "keyword": "블랙핑크 YG 명단 제외",
-    "hitKeyword": "블랙핑크 YG 전속계약 제외",
-    "hitAt": "2026-11-16T21:00:00+09:00",
-    "leadMin": 18
-   },
-   {
-    "keyword": "이호선 모친상 조의금 기부",
-    "hitKeyword": "이호선 조의금 기부",
-    "hitAt": "2026-11-16T21:00:00+09:00",
-    "leadMin": 8
    }
   ]
  }
