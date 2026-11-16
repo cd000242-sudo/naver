@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T21:55:40.928Z",
+ "builtAt": "2026-11-16T22:05:43.770Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,168 +11,167 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "트럼프 김정은 만남 가능성",
+   "keyword": "미국 AI반도체 중국 차단",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 16,
-   "recent20": 3,
-   "press": 15,
-   "firstArticleAt": "2026-11-16T20:29:00.000Z",
+   "articles90": 18,
+   "recent20": 4,
+   "press": 16,
+   "firstArticleAt": "2026-11-16T20:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "트럼프 \"중국서 김정은 만날 수도…金 방중 시진핑에 달려\"",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-16T21:48:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=782288"
+     "title": "美, 중국의 해외 GPU 우회 이용 차단…동남아 4개국·브라질 수출 규제 ...",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-16T22:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006410796?sid=105"
     },
     {
-     "title": "트럼프, 중간선거 참패 후 아시아 순방… 외교로 존재감 과시하나",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-16T21:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004010031?sid=104"
+     "title": "트럼프 \"젠슨 황 불륜녀 스파이 아닐 수도… 중국 자극 원치 않아\"",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-16T21:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000965970?sid=104"
     },
     {
-     "title": "외교로 반전 노리는 트럼프…미중러 이어 북미 정상회담 성사되나",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-16T21:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001075569?sid=104"
+     "title": "[뉴욕증시] 엔비디아 쇼크·AI반도체주 급락…나스닥 2.49% ↓",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-16T21:52:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/325495/?sc=Naver"
     }
    ]
   },
   {
-   "keyword": "미중러 정상회담",
+   "keyword": "카타르전 앞두고 훈련하는 대표팀",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
    "articles90": 7,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-16T20:50:00.000Z",
+   "recent20": 4,
+   "press": 6,
+   "firstArticleAt": "2026-11-16T21:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "외교로 반전 노리는 트럼프…미중러 이어 북미 정상회담 성사되나",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-16T21:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001075569?sid=104"
+     "title": "‘골든보이’ 이강인은 17일 카타르전에서도 오른쪽 측면 미드필더로? ...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-16T22:02:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/022/0004175727"
     },
     {
-     "title": "‘북핵 묵인’ 끌려갈까…미중러 회담에 ‘우려’, 왜?",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-16T21:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012295133?sid=100"
+     "title": "황인범 \"임시감독 체제, 대표팀에 긍정적이지 않다\"",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-16T21:58:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=782291"
     },
     {
-     "title": "우크라, 미중러 정상회담 앞두고 러시아 맹공…‘제2 얄타회담’ 우려?",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-16T21:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012295132?sid=104"
+     "title": "모레노, 카타르전 선발진 로테이션 예고…\"새 얼굴 나온다\"",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-16T21:56:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=782290"
     }
    ]
   },
   {
-   "keyword": "연금",
+   "keyword": "100일 거짓말 김유정",
    "sources": [
-    "signal.bz",
-    "google"
+    "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-16T20:37:00.000Z",
+   "articles90": 3,
+   "recent20": 3,
+   "press": 3,
+   "firstArticleAt": "2026-11-16T21:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "내 퇴직연금 '원리금 보장형'인데 손실 났다고? 이유는",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-16T21:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005843412?sid=101"
+     "title": "김유정·박진영·신민아...'100일의 거짓말'·'재혼 황후' 드라마 배우 ...",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-16T22:04:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=782297"
     },
     {
-     "title": "‘투자하는 연금’ 이끄는 미래에셋證…적립금 압도적 1위·ETF 25조원 [퇴...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-16T21:02:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2648643"
+     "title": "치이카와·머무르·사랑이온다·100일의 거짓말·닥터X, 1위 [한눈에 보...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-16T22:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009292596"
     },
     {
-     "title": "정효영 연금지원본부장 “가입자 92% 수익…AI가 먼저 노후자산 챙기는...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-16T21:02:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2648751"
+     "title": "김유정, 11월 드라마 배우 브랜드평판 1위…박진영·신민아 추격",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-16T21:52:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=504776"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 758,
-  "matched": 425,
-  "avgLeadMin": 918,
+  "flagged": 761,
+  "matched": 437,
+  "avgLeadMin": 898,
   "recent": [
    {
-    "keyword": "아버지",
-    "hitKeyword": "아버지 면허 택시 운전",
-    "hitAt": "2026-11-17T06:30:00+09:00",
-    "leadMin": 2893
+    "keyword": "무허가 유흥업소 운영하다",
+    "hitKeyword": "넷플릭스 출연자 유흥업소",
+    "hitAt": "2026-11-17T07:00:00+09:00",
+    "leadMin": 877
    },
    {
-    "keyword": "공모",
-    "hitKeyword": "앤트로픽 공모주 상장",
-    "hitAt": "2026-11-17T06:30:00+09:00",
-    "leadMin": 1139
+    "keyword": "박지윤",
+    "hitKeyword": "박지윤 상간 소송 패소",
+    "hitAt": "2026-11-17T07:00:00+09:00",
+    "leadMin": 806
    },
    {
-    "keyword": "미국 AI반도체 중국 차단",
-    "hitKeyword": "미국 AI칩 중국 규제",
-    "hitAt": "2026-11-17T06:30:00+09:00",
-    "leadMin": 25
+    "keyword": "AI 부정행위 논란",
+    "hitKeyword": "수능 AI 부정행위 확산",
+    "hitAt": "2026-11-17T07:00:00+09:00",
+    "leadMin": 275
    },
    {
-    "keyword": "제임스본드",
-    "hitKeyword": "제임스 본드 7대 배우",
-    "hitAt": "2026-11-17T06:30:00+09:00",
-    "leadMin": 15
+    "keyword": "트럼프, 김정은 만날 수도",
+    "hitKeyword": "트럼프 김정은 중국 회담",
+    "hitAt": "2026-11-17T07:00:00+09:00",
+    "leadMin": 105
    },
    {
-    "keyword": "미래에셋 3분기 손실",
-    "hitKeyword": "삼성전자 3분기 실적",
-    "hitAt": "2026-11-17T06:00:00+09:00",
-    "leadMin": 6798
+    "keyword": "트럼프 중국서 김정은 만날 수도",
+    "hitKeyword": "트럼프 김정은 중국 회담",
+    "hitAt": "2026-11-17T07:00:00+09:00",
+    "leadMin": 85
    },
    {
-    "keyword": "한전 3분기 실적",
-    "hitKeyword": "삼성전자 3분기 실적",
-    "hitAt": "2026-11-17T06:00:00+09:00",
-    "leadMin": 6566
+    "keyword": "트럼프 김정은 만날 가능성",
+    "hitKeyword": "트럼프 김정은 중국 회담",
+    "hitAt": "2026-11-17T07:00:00+09:00",
+    "leadMin": 55
    },
    {
-    "keyword": "3분기 순익 급증",
-    "hitKeyword": "삼성전자 3분기 실적",
-    "hitAt": "2026-11-17T06:00:00+09:00",
-    "leadMin": 6556
+    "keyword": "음주 운전",
+    "hitKeyword": "고경표 음주운전 팬미팅 취소",
+    "hitAt": "2026-11-17T07:00:00+09:00",
+    "leadMin": 55
    },
    {
-    "keyword": "3분기 누적 순익",
-    "hitKeyword": "삼성전자 3분기 실적",
-    "hitAt": "2026-11-17T06:00:00+09:00",
-    "leadMin": 6536
+    "keyword": "트럼프 김정은 만남 가능",
+    "hitKeyword": "트럼프 김정은 중국 회담",
+    "hitAt": "2026-11-17T07:00:00+09:00",
+    "leadMin": 34
    },
    {
-    "keyword": "한화생명, 3분기 순익 8656억↑",
-    "hitKeyword": "삼성전자 3분기 실적",
-    "hitAt": "2026-11-17T06:00:00+09:00",
-    "leadMin": 6476
+    "keyword": "수능",
+    "hitKeyword": "수능 AI 부정행위 확산",
+    "hitAt": "2026-11-17T07:00:00+09:00",
+    "leadMin": 24
    },
    {
-    "keyword": "펄어비스 3분기 매출 증가",
-    "hitKeyword": "삼성전자 3분기 실적",
-    "hitAt": "2026-11-17T06:00:00+09:00",
-    "leadMin": 6435
+    "keyword": "트럼프 김정은 만남 가능성",
+    "hitKeyword": "트럼프 김정은 중국 회담",
+    "hitAt": "2026-11-17T07:00:00+09:00",
+    "leadMin": 24
    }
   ]
  }
