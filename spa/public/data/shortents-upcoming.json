@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T03:41:31.436Z",
+ "builtAt": "2026-11-16T03:51:34.538Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,38 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 14,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "JTBC 올림픽 중계권 해지",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "daum"
    ],
-   "articles90": 39,
-   "recent20": 3,
-   "press": 34,
-   "firstArticleAt": "2026-11-16T02:12:00.000Z",
+   "articles90": 31,
+   "recent20": 6,
+   "press": 28,
+   "firstArticleAt": "2026-11-16T02:26:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "JTBC, IOC 올림픽 중계권 계약 해지..\"불확실성 해소\"",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-16T03:40:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109928516025"
+     "title": "JTBC-IOC 올림픽 중계권 계약 해지 \"재무적 불확실성 제거…안정적 경영...",
+     "press": "swtvnews.com",
+     "publishedAt": "2026-11-16T03:50:00.000Z",
+     "link": "https://swtvnews.com/news/newsview.php?ncode=1065584473104652"
     },
     {
-     "title": "JTBC, IOC와 올림픽 중계권 계약 해지 “재무적 불확실성 해소”",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-16T03:40:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1794800060530930006"
+     "title": "회생 절차 밟는 JTBC, 결국 계약 해지 수순…\"올림픽 중계 사업 지속 어...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-16T03:46:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001408441"
     },
     {
-     "title": "‘기업회생 절차’ JTBC, IOC와 올림픽 중계권 계약 전격 해지",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-16T03:38:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001281192"
+     "title": "JTBC, 올림픽 중계 안 한다…“IOC 중계권 계약 해지”",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-16T03:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001885380?sid=103"
     }
    ]
   },
@@ -47,13 +48,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 42,
+   "articles90": 34,
    "recent20": 1,
-   "press": 27,
-   "firstArticleAt": "2026-11-16T02:14:00.000Z",
+   "press": 21,
+   "firstArticleAt": "2026-11-16T02:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[포토] 조정식 국회의장 헌법개정자문위원회 공동위원장 발표 기자회견",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-16T03:46:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/16/2026111650176.html"
+    },
     {
      "title": "「M포토」 조정식 의장, 헌법개정자문위원회 공동위원장 발표 기자회견",
      "press": "m-economynews.com",
@@ -65,27 +72,27 @@
      "press": "ilyosisa.co.kr",
      "publishedAt": "2026-11-16T03:16:00.000Z",
      "link": "https://www.ilyosisa.co.kr/news/article.html?no=258988"
-    },
-    {
-     "title": "조정식 “개헌자문위원장에 김형오·정세균”",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-16T03:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002833119?sid=100"
     }
    ]
   },
   {
-   "keyword": "19일 대법 선고",
+   "keyword": "대법 19일 선고 해당 사건",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 24,
-   "recent20": 2,
-   "press": 20,
-   "firstArticleAt": "2026-11-16T02:16:00.000Z",
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-16T02:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'12·3 계엄은 내란인가' 대법 첫 판단에 주목…19일 한덕수 선고",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-16T03:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016443819?sid=102"
+    },
     {
      "title": "'내란 가담' 한덕수 19일 대법 선고...김건희 '3대 의혹'도",
      "press": "ytn.co.kr",
@@ -97,12 +104,6 @@
      "press": "straightnews.co.kr",
      "publishedAt": "2026-11-16T03:24:00.000Z",
      "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=315425"
-    },
-    {
-     "title": "대법, 김건희 '3대 의혹'·한덕수 '내란' 사건 19일 선고",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-16T03:20:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903194"
     }
    ]
   },
@@ -111,10 +112,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 3,
-   "press": 7,
-   "firstArticleAt": "2026-11-16T02:18:00.000Z",
+   "articles90": 9,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-16T02:25:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -170,75 +171,11 @@
      "link": "https://www.newspim.com/news/view/20261116000651"
     }
    ]
-  },
-  {
-   "keyword": "수능 AI 부정행위 심각",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-16T02:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"수능 감독관 혼자 AI 안경 가려내나\" 현장 판별 부담 '우려'",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-16T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014324449?sid=102"
-    },
-    {
-     "title": "'AI 커닝' 사태에 불붙는 '수능 연기론'…교육부 \"검토하고 있지 않다\"",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-16T02:26:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903176"
-    },
-    {
-     "title": "\"'AI 반칙' 못 막으면 사회 신뢰 무너진다\" 신문들, 경고음",
-     "press": "journalist.or.kr",
-     "publishedAt": "2026-11-16T02:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/127/0000040062?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "화학물질저감 제품 전시",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 16,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-16T02:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[포토] 한자리에 모인 화학물질저감 우수제품",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-16T03:22:00.000Z",
-     "link": "https://www.ajunews.com/view/20261116121841067"
-    },
-    {
-     "title": "[포토] 더 안전한 선택 '화학물질저감 우수제품'",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-16T03:22:00.000Z",
-     "link": "https://www.ajunews.com/view/20261116122028071"
-    },
-    {
-     "title": "[포토] 2026년 '화학물질저감 우수제품' 전시",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-16T03:20:00.000Z",
-     "link": "https://www.ajunews.com/view/20261116121645064"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 599,
+  "flagged": 600,
   "matched": 323,
   "avgLeadMin": 855,
   "recent": [
