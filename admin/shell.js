@@ -7,12 +7,17 @@
     const THEME_KEY = 'lp_admin_theme';
     const POOL_SIZE = 3; // GAS rejects bursts of parallel executions, keep requests few at a time
     const BADGE_KINDS = ['bank', 'reviews', 'income', 'tips'];
+    const APPROVAL_KINDS = ['reviews', 'income', 'tips']; // shown together as the 승인 menu badge
     const MUTATIONS = {
-        approveReview: 'reviews', rejectReview: 'reviews',
-        approveIncome: 'income', rejectIncome: 'income', deleteIncome: 'income',
+        approveReview: 'reviews', rejectReview: 'reviews', updateReview: 'reviews',
+        approveIncome: 'income', rejectIncome: 'income', deleteIncome: 'income', updateIncome: 'income',
         approveTip: 'tips', rejectTip: 'tips',
         approveBankOrder: 'bank', rejectBankOrder: 'bank',
+        seedDefaults: 'all',
     };
+    // Old one-kind screens stay reachable from the approvals screen; the menu highlights 승인 for them.
+    const PARENT_TAB = { reviews: 'approvals', income: 'approvals', tips: 'approvals' };
+    const counts = {};
     const tools = window.AdminShellTools;
     const root = document.documentElement;
     const byId = (id) => document.getElementById(id);
@@ -34,10 +39,12 @@
     // ----- mobile menu -----
     function setNav(open) {
         document.body.classList.toggle('nav-open', !!open);
-        const btn = byId('menu-btn');
-        if (!btn) return;
-        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-        btn.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+        ['menu-btn', 'tabbar-more'].forEach((id) => {
+            const btn = byId(id);
+            if (!btn) return;
+            btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+            btn.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+        });
     }
 
     // ----- GAS reads (existing actions only) -----
@@ -78,18 +85,30 @@
 
     // ----- menu badges -----
     function setBadge(kind, count) {
-        const el = document.querySelector('[data-badge="' + kind + '"]');
-        if (!el) return;
         const n = Number(count) || 0;
-        el.hidden = n <= 0;
-        el.textContent = n > 99 ? '99+' : String(n);
-        el.setAttribute('aria-label', '대기 ' + n + '건');
+        document.querySelectorAll('[data-badge="' + kind + '"]').forEach((el) => {
+            el.hidden = n <= 0;
+            el.textContent = n > 99 ? '99+' : String(n);
+            el.setAttribute('aria-label', '대기 ' + n + '건');
+        });
+    }
+    /** Remember one kind's pending count (null = unknown) and redraw its badge plus the 승인 total. */
+    function setCount(kind, n) {
+        if (n === null || n === undefined) return;
+        counts[kind] = n;
+        setBadge(kind, n);
+        if (APPROVAL_KINDS.indexOf(kind) !== -1) setBadge('approvals', APPROVAL_KINDS.reduce((sum, k) => sum + (counts[k] || 0), 0));
     }
     async function refreshBadge(kind) {
-        try { setBadge(kind, tools.pendingCount(await SOURCES[kind]()) || 0); } catch (e) { /* keep the previous badge */ }
+        try { setCount(kind, tools.pendingCount(await SOURCES[kind]()) || 0); } catch (e) { /* keep the previous badge */ }
+    }
+    /** Existing GAS read for one list (reviews, income, tips, bank ...), used by approvals.js. */
+    function source(kind) {
+        if (!SOURCES[kind]) return Promise.reject(new Error('unknown source ' + kind));
+        return SOURCES[kind]();
     }
     function applySidebarInfo(sources) {
-        BADGE_KINDS.forEach((kind) => { const n = tools.pendingCount(sources[kind]); if (n !== null) setBadge(kind, n); });
+        BADGE_KINDS.forEach((kind) => setCount(kind, tools.pendingCount(sources[kind])));
         const el = byId('sidebar-license-count');
         if (el && Array.isArray(sources.codes)) el.textContent = sources.codes.filter((c) => c && c.used === true).length + '/' + sources.codes.length;
     }
@@ -99,7 +118,7 @@
         const loading = '<p class="empty">불러오는 중…</p>';
         byId('dash-kpis').innerHTML = ['오늘 방문', '오늘 체험 신청', '오늘 주문', '오늘 매출']
             .map((l, i) => '<div class="kpi' + (i === 0 ? ' kpi-hero' : '') + '"><span>' + l + '</span><b>…</b><small>불러오는 중</small></div>').join('');
-        ['dash-todo', 'dash-bars', 'dash-recent'].forEach((id) => { byId(id).innerHTML = loading; });
+        ['dash-todo', 'dash-quick', 'dash-bars', 'dash-recent'].forEach((id) => { const el = byId(id); if (el) el.innerHTML = loading; });
     }
     async function loadDashboard() {
         if (!byId('dash-kpis') || !tools) return;
@@ -116,16 +135,34 @@
         const stamp = byId('dash-updated');
         if (stamp) stamp.textContent = '마지막 확인 ' + now.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' });
         applySidebarInfo(sources);
+        if (window.AdminApprovals) window.AdminApprovals.seed(sources);
     }
 
     // ----- hooks called by switchTab() -----
+    function markMenus(tabId) {
+        const parent = PARENT_TAB[tabId] || '';
+        document.querySelectorAll('.nav-item.is-parent').forEach((n) => n.classList.remove('is-parent'));
+        if (parent) { const p = document.querySelector('.nav-item[data-tab="' + parent + '"]'); if (p) p.classList.add('is-parent'); }
+        document.querySelectorAll('.tab-btn[data-tab]').forEach((b) => {
+            const on = b.dataset.tab === tabId || b.dataset.tab === parent;
+            b.classList.toggle('active', on);
+            if (on) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current');
+        });
+        const active = document.querySelector('.nav-item[data-tab="' + tabId + '"]');
+        const more = byId('nav-more');
+        if (more && active && more.contains(active)) more.open = true;
+    }
+
     function onTabChange(tabId) {
         const label = document.querySelector('.nav-item[data-tab="' + tabId + '"] > span');
+        const parentLabel = PARENT_TAB[tabId] && document.querySelector('.nav-item[data-tab="' + PARENT_TAB[tabId] + '"] > span');
         const crumb = byId('crumb');
-        if (crumb && label) crumb.textContent = label.textContent;
+        if (crumb && label) crumb.textContent = parentLabel ? parentLabel.textContent + ' · ' + label.textContent : label.textContent;
+        markMenus(tabId);
         setNav(false);
         window.scrollTo(0, 0);
         if (tabId === 'dashboard') loadDashboard();
+        else if (tabId === 'approvals' && window.AdminApprovals) window.AdminApprovals.load();
         else if (tabId === 'leads' && typeof loadLeadsAdmin === 'function') loadLeadsAdmin();
         else if ((tabId === 'orders' || tabId === 'licenses') && typeof loadCodes === 'function') loadCodes();
     }
@@ -137,7 +174,12 @@
             if (typeof original !== 'function') return;
             window[name] = function wrappedMutation() {
                 const result = original.apply(this, arguments);
-                Promise.resolve(result).then(() => setTimeout(() => refreshBadge(MUTATIONS[name]), 800), () => {});
+                const kind = MUTATIONS[name];
+                const after = () => {
+                    if (window.AdminApprovals) window.AdminApprovals.refresh(kind);
+                    else if (kind !== 'all') refreshBadge(kind);
+                };
+                Promise.resolve(result).then(() => setTimeout(after, 800), () => {});
                 return result;
             };
         });
@@ -149,6 +191,7 @@
         if (media && media.addEventListener) media.addEventListener('change', () => { if (!savedTheme()) root.dataset.theme = systemTheme(); });
         const on = (id, type, fn) => { const el = byId(id); if (el) el.addEventListener(type, fn); };
         on('menu-btn', 'click', () => setNav(!document.body.classList.contains('nav-open')));
+        on('tabbar-more', 'click', () => setNav(!document.body.classList.contains('nav-open')));
         on('nav-scrim', 'click', () => setNav(false));
         on('theme-btn', 'click', toggleTheme);
         on('dash-refresh', 'click', loadDashboard);
@@ -160,7 +203,7 @@
         watchMutations();
     }
 
-    window.AdminShell = Object.freeze({ onTabChange, loadDashboard, refreshBadge, toggleTheme, setNav });
+    window.AdminShell = Object.freeze({ onTabChange, loadDashboard, refreshBadge, setCount, source, toggleTheme, setNav });
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
     else init();
 })();

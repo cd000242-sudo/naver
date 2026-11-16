@@ -1,0 +1,148 @@
+/* Phase-2 screens: deposit / licence / order / trial lists, number cards, notice form, the old one-kind approval
+   screens, analytics and the toast. Tokens only (shell-theme.css). Loaded after the inline legacy styles and
+   shell.css, so equal-specificity rules here win; !important only where an inline style must be beaten. */
+
+/* ===== card rows (admin/list-views.js) ===== */
+.lv-list { border-top: 0; }
+.lv-row .q-top { align-items: center; }
+.lv-row .q-title { font-size: 17px; }
+.lv-amount { font-size: 20px; font-weight: 600; color: var(--text); white-space: nowrap; }
+.lv-id { font-size: 15px; color: var(--muted); overflow-wrap: anywhere; }
+.lv-id b { font-weight: 600; color: var(--text); }
+.lv-code { font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace; font-size: 15px; letter-spacing: 0; overflow-wrap: anywhere; }
+.q-title.lv-code { font-size: 17px; font-weight: 600; }
+.lv-bank .q-title { font-size: 20px; }
+.lv-bank .lv-id { font-size: 17px; }
+.lv-row.is-done .q-title, .lv-row.is-done .lv-amount { color: var(--muted); }
+.lv-row .q-acts .btn { min-width: 96px; }
+.q-status::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: currentColor; margin-right: 6px; vertical-align: 1px; }
+.table-card > .q-empty, .table-card .q-empty { margin: 0; }
+
+/* ===== list headers, search, select, pagination ===== */
+.table-header { padding: 16px 20px; }
+.table-actions { flex-wrap: wrap; align-items: center; gap: 8px; }
+.search-input { height: 44px; padding: 0 12px; border-radius: var(--r-control); border: 1px solid var(--line-strong); background: var(--surface); color: var(--text); min-width: 240px; }
+.search-input::placeholder, .notice-form ::placeholder { color: var(--faint); opacity: 1; }
+.select-input, .notice-form select, .issue-form select, .issue-form input { height: 48px; padding: 0 12px; border-radius: var(--r-control); border: 1px solid var(--line-strong); background: var(--surface); color: var(--text); font-size: 17px; cursor: pointer; }
+.select-input { height: 44px; font-size: 15px; }
+.issue-form input { cursor: text; }
+.pagination { gap: 8px; padding: 16px 20px; flex-wrap: wrap; border-top: 1px solid var(--line); }
+.page-btn { min-width: 44px; min-height: 44px; padding: 0 12px; border-radius: var(--r-control); border-color: var(--line-strong); background: var(--surface); color: var(--text); font-size: 15px; font-variant-numeric: tabular-nums; transition: background-color var(--fast) var(--ease), border-color var(--fast) var(--ease); }
+.page-btn:hover { border-color: var(--text); color: var(--text); }
+.page-btn.active { background: var(--btn); border-color: var(--btn); color: var(--on-btn); font-weight: 600; }
+.page-btn:disabled { opacity: .45; }
+.page-info { font-size: 13px; color: var(--faint); }
+
+/* ===== number cards (bank / trial / analytics) ===== */
+.stats-grid.stat-row { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 24px; }
+.stats-grid.stat-row.five { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.stat-card { padding: 16px 20px; border-color: var(--line); background: var(--surface); transition: border-color var(--fast) var(--ease); }
+.stat-card::before, .stat-icon { display: none; }
+.stat-card:hover { transform: none; border-color: var(--line-strong); }
+.stat-label { color: var(--muted); font-weight: 500; margin-bottom: 4px; }
+.stat-value, .stat-value.gold, .stat-value.green, .stat-value.blue, .stat-value.purple { font-size: 30px; font-weight: 700; line-height: 1.2; color: var(--text); font-variant-numeric: tabular-nums; }
+.stat-card.is-key .stat-value { color: var(--accent-ink); }
+.stat-change, .stat-change.neutral { font-size: 13px; color: var(--faint); margin-top: 4px; }
+.act-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.meta { font-size: 13px; }
+.code-text { font-size: 15px; color: var(--text); background: var(--raised); border: 1px solid var(--line); border-radius: 6px; padding: 2px 6px; }
+
+/* ===== trial export boxes ===== */
+.trial-export-box { border-color: var(--line); background: var(--surface); border-radius: var(--r-card); }
+.trial-export-box h3 { font-size: 17px; font-weight: 600; }
+.trial-export-box p { font-size: 15px; color: var(--muted); }
+.trial-export-toolbar strong { color: var(--text); font-variant-numeric: tabular-nums; }
+.trial-export-box.focused { outline-color: var(--accent-fill); }
+
+/* ===== licence issue form ===== */
+.issue-body { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 2fr) 112px auto; gap: 16px; align-items: end; padding: 20px; }
+.field { display: grid; gap: 8px; min-width: 0; }
+.field > span { font-size: 15px; font-weight: 500; color: var(--muted); }
+.field select, .field input { width: 100%; }
+.issue-types { display: flex; gap: 8px; flex-wrap: wrap; }
+.issue-types .chip { min-height: 48px; }
+.chip[aria-pressed="true"] { border-color: var(--accent-ink); background: var(--accent-soft); color: var(--text); font-weight: 600; }
+.issue-go { min-height: 48px; padding: 0 24px; font-size: 17px; }
+
+/* ===== notices (공지·키워드) ===== */
+.note-bar { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; padding: 16px 20px; margin-bottom: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-card); box-shadow: var(--shadow-sm); font-size: 15px; color: var(--muted); }
+.note-bar strong { display: block; font-size: 17px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.note-bar .grow { flex: 1 1 240px; }
+.note-bar .grow > span { display: block; }
+.note-bar .home-ops-admin-grid { margin: 12px 0 0; width: 100%; }
+.note-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; width: 100%; }
+.pill { display: inline-flex; align-items: center; min-height: 32px; padding: 0 12px; border: 1px solid var(--line-strong); border-radius: 999px; font-size: 13px; color: var(--muted); }
+.notice-form { padding: 20px; margin-bottom: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-card); box-shadow: var(--shadow-sm); }
+.notice-form h3 { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+.notice-form > p { margin: 0 0 16px; color: var(--muted); font-size: 15px; }
+.notice-form input[type="text"], .notice-form textarea, .note-bar input { width: 100%; min-height: 48px; padding: 0 12px; border-radius: var(--r-control); border: 1px solid var(--line-strong); background: var(--surface); color: var(--text); font-size: 17px; }
+.notice-form textarea { padding: 12px; line-height: 1.65; margin: 12px 0 16px; resize: vertical; }
+.home-ops-admin-grid { grid-template-columns: 160px 168px minmax(0, 1fr); }
+.sub-title { font-size: 20px; font-weight: 600; margin: 32px 0 12px; }
+.notice-item { padding: 16px 20px; margin-bottom: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-card); }
+.notice-top { display: flex; gap: 8px 12px; align-items: center; flex-wrap: wrap; margin-bottom: 8px; }
+.notice-id { margin-left: auto; font-family: ui-monospace, Consolas, monospace; }
+.notice-title { font-size: 17px; font-weight: 600; line-height: 1.5; margin-bottom: 4px; }
+.notice-preview { font-size: 15px; color: var(--muted); line-height: 1.6; margin-bottom: 12px; }
+.notice-acts { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* ===== status badges (old one-kind approval screens, notices) — text on white: 5:1 or more ===== */
+.st-badge { display: inline-flex; align-items: center; gap: 6px; min-height: 28px; padding: 0 10px; border: 1px solid var(--line-strong); border-radius: 999px; background: var(--surface); color: var(--muted); font-size: 13px; font-weight: 500; white-space: nowrap; }
+.st-badge.st-pending, .st-badge.st-notice { color: var(--accent-ink); }
+.st-badge.st-approved { color: var(--positive); }
+.st-badge.st-rejected { color: var(--negative); }
+.st-badge.st-pending::before, .st-badge.st-approved::before, .st-badge.st-rejected::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+
+/* The old screens draw their lists with inline styles: lift the tiny sizes to the 13px floor. */
+:is(#tab-reviews, #tab-income, #tab-tips, #tab-leword-settings, #tab-leads, #tab-notices) :is([style*="font-size:0.6"], [style*="font-size: 0.6"], [style*="font-size:0.7"], [style*="font-size: 0.7"], [style*="font-size:.7"], [style*="font-size:0.8rem"], [style*="font-size: 0.8rem"], [style*="font-size:.8rem"], [style*="font-size:0.78"], [style*="font-size:.78"], [style*="font-size:0.82"], [style*="font-size: 0.82"], [style*="font-size:12px"], [style*="font-size:11px"]) { font-size: 13px !important; }
+:is(#tab-reviews, #tab-income, #tab-tips) [style*="font-size: 2.4rem"] { display: none; } /* emoji avatar on income cards */
+:is(#tab-reviews, #tab-income, #tab-tips) [style*="rgba(201,168,76,0.08)"] { background: var(--surface) !important; border-color: var(--line) !important; }
+
+/* Old one-kind screens and settings: button rows wrap whole buttons instead of breaking the words. */
+:is(#tab-reviews, #tab-income, #tab-tips) .btn, .editor-save-bar .btn { white-space: nowrap; }
+:is(#tab-reviews, #tab-income, #tab-tips) [style*="display: flex; gap: 8px; margin-bottom: 20px"], .editor-save-bar { flex-wrap: wrap; }
+
+/* ===== toast: under the phone menu drawer (scrim 35, drawer 40), above the tab bar (30) ===== */
+.nav-open .save-toast { z-index: 34; }
+.save-toast { background: var(--btn); color: var(--on-btn); font-weight: 500; padding: 12px 20px; transition: opacity var(--fast) var(--ease), transform var(--fast) var(--ease); }
+
+/* ===== quick jump ===== */
+.tsearch input[aria-invalid="true"] { border-color: var(--negative); }
+
+/* ===== phone ===== */
+@media (max-width: 1180px) { .stats-grid.stat-row.five { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 960px) {
+  .issue-body { grid-template-columns: minmax(0, 1fr) 112px; grid-auto-flow: row dense; }
+  .issue-body .field-wide { grid-column: 1 / -1; }
+  .issue-go { grid-column: 1 / -1; }
+  .save-toast { left: 16px; right: 16px; bottom: calc(80px + env(safe-area-inset-bottom)); text-align: center; }
+}
+@media (max-width: 640px) {
+  .stats-grid.stat-row { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 8px; margin-bottom: 16px; }
+  .stats-grid.stat-row.five { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .stat-card { padding: 12px; }
+  .stat-label { font-size: 13px; }
+  .stat-value, .stat-value.gold, .stat-value.green, .stat-value.blue, .stat-value.purple { font-size: 22px; }
+  .table-header { padding: 12px 16px; }
+  .table-header h3 { width: 100%; }
+  .table-actions { width: 100%; flex-direction: row; justify-content: flex-start; }
+  .table-actions .search-input { flex: 1 1 100%; min-width: 0; width: 100%; }
+  .table-actions .select-input { flex: 1 1 0; min-width: 0; }
+  .table-header { align-items: stretch; }
+  .table-header > .btn { align-self: flex-start; }
+  .lv-row .q-acts .btn { min-width: 0; }
+  .pagination { padding: 12px 16px; justify-content: flex-start; }
+  .issue-body { padding: 16px; gap: 12px; }
+  .home-ops-admin-grid { grid-template-columns: 1fr; }
+  .note-bar, .notice-form, .notice-item { padding: 16px; }
+  .notice-id { margin-left: 0; }
+  .act-row .btn { flex: 1 1 auto; }
+  #analytics-table-body thead { display: none; }
+  #analytics-table-body table, #analytics-table-body tbody { display: block; white-space: normal; }
+  #analytics-table-body tr { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; padding: 12px 16px; border-top: 1px solid var(--line); }
+  #analytics-table-body td { display: block; padding: 0; border: 0; overflow-wrap: anywhere; }
+  #analytics-table-body td:nth-child(1) { grid-column: 1 / -1; font-size: 13px; color: var(--faint); }
+  #analytics-table-body td:nth-child(4) { grid-row: 2; grid-column: 2; font-weight: 600; text-align: right; }
+  #analytics-table-body td:nth-child(5), #analytics-table-body td:nth-child(6) { font-size: 13px; color: var(--muted); }
+  .act-row .btn[style*="margin-left:auto"] { margin-left: 0 !important; }
+}

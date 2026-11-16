@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-14T23:27:48.152Z",
+ "builtAt": "2026-11-16T08:44:04.899Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,235 +8,428 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 18,
  "candidates": [
   {
-   "keyword": "젠지 BLG 2세트",
+   "keyword": "3분기 매출 증가",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 17,
-   "recent20": 5,
-   "press": 11,
-   "firstArticleAt": "2026-11-14T22:04:00.000Z",
+   "articles90": 89,
+   "recent20": 70,
+   "press": 59,
+   "firstArticleAt": "2026-11-16T08:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[롤드컵 브리핑] 매서운 BLG의 스노우볼...젠지, 한타 역전패로 3세트 내...",
-     "press": "techm.kr",
-     "publishedAt": "2026-11-14T23:20:00.000Z",
-     "link": "https://www.techm.kr/news/articleView.html?idxno=157359"
+     "title": "남양유업, 3분기 영업익 104% 증가…3개 분기 연속 이익 확대",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-16T08:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016444907?sid=101"
     },
     {
-     "title": "[롤드컵]젠지, BLG에 역전 허용…우승 도전 벼랑 끝",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-14T23:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014322529?sid=105"
+     "title": "와이즈넛, 3분기 누적 흑자전환…“AI 에이전트 매출 비중 절반 넘어”",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-16T08:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003486311?sid=105"
     },
     {
-     "title": "'바이퍼' 탈리야 극복 못했다…젠지, 3세트 패하며 롤드컵 우승 좌절 위...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-14T23:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003155223?sid=105"
+     "title": "JW중외제약, 3분기 매출 6%↑ 영업이익 11%↓…R&D 비용 부담",
+     "press": "dailypharm.com",
+     "publishedAt": "2026-11-16T08:42:00.000Z",
+     "link": "https://dailypharm.com/user/news/344648?REFERER=NP"
     }
    ]
   },
   {
-   "keyword": "100일의 거짓말",
+   "keyword": "박지윤",
    "sources": [
     "signal.bz",
     "google"
    ],
-   "articles90": 12,
-   "recent20": 7,
-   "press": 8,
-   "firstArticleAt": "2026-11-14T22:10:00.000Z",
+   "articles90": 16,
+   "recent20": 1,
+   "press": 16,
+   "firstArticleAt": "2026-11-16T07:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘100일의 거짓말’ 전채널 동시간대 1위",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-14T23:26:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611150017"
+     "title": "박지윤, 전남편 최동석 '상간 소송' 승소에도 타격 無…공구 홍보 '마이...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-16T08:25:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001408490"
     },
     {
-     "title": "김유정♥박진영, 서로 본명 불렀다…로맨스 눈빛 (100일의 거짓말)",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-14T23:22:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001304790"
+     "title": "최동석, 상간 손배소 1심 뒤집고 '일부 승소'…박지윤 입장 밝힐까 [종합...",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-16T08:24:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000052902"
     },
     {
-     "title": "‘100일의 거짓말’ 박진영, 김유정 향한 진심 폭발…전 채널 시청률 1위",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-14T23:16:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001149831"
+     "title": "'박지윤 남사친'에 상간 소송…최동석, 항소심서 일부 승소",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-16T08:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000651394?sid=102"
     }
    ]
   },
   {
-   "keyword": "미국 항공운항 정상화",
+   "keyword": "AI 커닝 대책 혼란",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-14T22:02:00.000Z",
+   "articles90": 17,
+   "recent20": 3,
+   "press": 15,
+   "firstArticleAt": "2026-11-16T07:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "미 항공기 운항 중단 “시스템 과부하 때문”…15일 밤 정상화 전망",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-14T22:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002832226?sid=104"
+     "title": "[이슈] 'AI 안경 부정행위' 파장 확산…입시업계 \"수능도 뚫린다, 연기해...",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-16T08:34:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=748544"
     },
     {
-     "title": "美 항공 전면 중단사태 여파 계속… FAA “15일까지 정상화”",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-14T22:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001204789?sid=104"
+     "title": "\"AI 커닝 잡을 자신 있나\" 묻자 교육장관 \"못할 것 같다\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-16T08:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000651399?sid=100"
     },
     {
-     "title": "[미국 전역 항공기 이륙 중단 여파 이틀째] 인천발 미국행 항공기엔 어...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-14T22:22:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1174662"
+     "title": "수능 코앞 'AI 커닝 대응팀' 꾸린 정부…안경 전수점검? [짤e몽땅]",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-16T08:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001978431?sid=102"
     }
    ]
   },
   {
-   "keyword": "2026년 11월 15일 운세",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-14T22:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[11월 15일 오늘의 별자리 운세] 성급한 변화보다 신중한 판단이 필요한...",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-14T23:20:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95282"
-    },
-    {
-     "title": "2026년 11월 15일, 오늘의 띠별 운세 [인포그래픽]",
-     "press": "sisunnews.co.kr",
-     "publishedAt": "2026-11-14T23:00:00.000Z",
-     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=249397"
-    },
-    {
-     "title": "[오늘의 운세] 11월 15일 띠별 재물운…자금 이동과 집행 속도 차이",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-14T22:44:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16276870"
-    }
-   ]
-  },
-  {
-   "keyword": "31기 옥순 영호",
+   "keyword": "블랙핑크 YG 전속계약 명단",
    "sources": [
     "daum"
    ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-14T21:58:00.000Z",
+   "articles90": 15,
+   "recent20": 5,
+   "press": 11,
+   "firstArticleAt": "2026-11-16T07:34:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "‘나솔’ 31기 영호, 옥순과 결별 인정 “재회할 생각 없다” [전문]",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-14T23:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003541754"
+     "title": "블랙핑크, YG 전속계약 명단서 빠져…\"그룹 활동에 대해 논의중\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-16T08:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016444903?sid=103"
     },
     {
-     "title": "31기 영호, 옥순과 공식 결별 인정 \"커플사진 유출? 나도 당황스럽지만...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-14T22:41:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004466704"
+     "title": "블랙핑크, YG 3분기 전속계약 명단서 전격 제외…악뮤 이어 결별 수순 밟...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-16T08:39:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001408493"
     },
     {
-     "title": "'사진 유출' 31기 옥순, 영호 재결합 재차 입 열었다 \"일과 연애중♥\"[스...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-14T21:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003487524"
+     "title": "YG, 블랙핑크 전속계약 명단 제외에 \"그룹 활동 논의 중\"",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-16T08:39:00.000Z",
+     "link": "https://m.entertain.naver.com/article/437/0000520954"
+    }
+   ]
+  },
+  {
+   "keyword": "귀국하는 최원호 감독님",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 24,
+   "recent20": 3,
+   "press": 10,
+   "firstArticleAt": "2026-11-16T07:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "최원호 야구대표팀 감독 \"투수 구속 훈련 치우쳐…제구력 향상 필요\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-16T08:31:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/421/0009292274"
+    },
+    {
+     "title": "'APBC 준우승' 최원호 감독 \"일본에 져 죄송...구속보다 제구력 키워야\"",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-16T08:30:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261116001316"
+    },
+    {
+     "title": "국제대회 데뷔전 치른 최원호 감독 “다카하시 공, 일본 선수도 치기 어...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-16T08:26:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/144/0001150102"
+    }
+   ]
+  },
+  {
+   "keyword": "한일 정상회담 마닐라",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-16T08:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이 대통령, 아세안·APEC 정상외교 돌입…17일 한일 정상회담",
+     "press": "iusm.co.kr",
+     "publishedAt": "2026-11-16T08:36:00.000Z",
+     "link": "https://www.iusm.co.kr/news/articleView.html?idxno=1070594"
+    },
+    {
+     "title": "‘아세안 순방’ 이재명 대통령, 내일 한일 정상회담…다카이치 총리와...",
+     "press": "kgnews.co.kr",
+     "publishedAt": "2026-11-16T08:18:00.000Z",
+     "link": "https://www.kgnews.co.kr/news/article.html?no=919818"
+    },
+    {
+     "title": "트럼프·시진핑·푸틴 첫 3자 회담…북한 활개, 한일 동병상련",
+     "press": "koreareport.co.kr",
+     "publishedAt": "2026-11-16T08:16:00.000Z",
+     "link": "https://www.koreareport.co.kr/news/articleView.html?idxno=54777"
+    }
+   ]
+  },
+  {
+   "keyword": "김유정 100일 거짓말",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-16T07:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[Opinion] 그마저도 사랑이기에 - 드라마 '100일의 거짓말' [드라마/예능...",
+     "press": "artinsight.co.kr",
+     "publishedAt": "2026-11-16T08:30:00.000Z",
+     "link": "https://www.artinsight.co.kr/news/view.php?no=83333"
+    },
+    {
+     "title": "김유정이라 가능하다, '100일의 거짓말' 이끄는 막강 연기 내공",
+     "press": "joynews24.com",
+     "publishedAt": "2026-11-16T08:06:00.000Z",
+     "link": "http://www.joynews24.com/view/2026778"
+    },
+    {
+     "title": "'100일의 거짓말' 코우리 유카, 박진영 약혼에 오열…김유정 대신해 체...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-16T07:49:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002081089"
+    }
+   ]
+  },
+  {
+   "keyword": "야구 코치",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-16T07:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "롯데 대졸 신인 이 정도였어? 박정민 야구만 잘하는 줄 알았더니…마인...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-16T08:29:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/477/0000639335"
+    },
+    {
+     "title": "독기 오른 한국 야구 황금세대…2028 LA 로드맵의 시발점",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-16T08:23:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/025/0003565541"
+    },
+    {
+     "title": "프로야구 FA 시장 열린다...승인 선수 22명 명단 공개",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-16T08:20:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/410/0001147447"
+    }
+   ]
+  },
+  {
+   "keyword": "전이경 암 투병",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-16T07:17:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'올림픽 전설' 전이경, 2년 암 투병 털어놔…쇼트트랙 예능 도전",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-16T08:37:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/417/0001164513"
+    },
+    {
+     "title": "금메달 4개 전이경 \"2년 간 암투병…반평생 최고 고비\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-16T07:48:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014325452"
+    },
+    {
+     "title": "‘2년간 암 투병’ 전이경, 러시아 귀화 빅토르 안 신뢰 “구구절절 설...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-16T07:39:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001187993"
+    }
+   ]
+  },
+  {
+   "keyword": "테슬라 사이버캡 판매",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-16T07:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"이젠 핸들도 없다\" 테슬라 사이버캡 개인 판매..가격 4300만원",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-16T08:32:00.000Z",
+     "link": "http://www.breaknews.com/1251304"
+    },
+    {
+     "title": "[쇼츠] '사이버캡' 일반고객 판매…4천만원에 구독료 40만원",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-16T08:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016444826?sid=104"
+    },
+    {
+     "title": "[영상] 테슬라 '사이버캡' 일반고객에도 판다…4천만원에 구독료 40만원",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-16T07:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016444714?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "뉴스",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 3,
+   "press": 2,
+   "firstArticleAt": "2026-11-16T08:32:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "[포토뉴스]포남1동 주민자치회,‘사랑담은 김장 김치 나눔’ 비용 후원",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-16T08:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001231198?sid=102"
+    },
+    {
+     "title": "[포토뉴스]강원도교육청, 제13기 교육발전자문위원회",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-16T08:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001231196?sid=102"
+    },
+    {
+     "title": "[은행 뉴스브리핑] 국민은행 'KB Star 지수연동외화예금' 출시",
+     "press": "asiatime.co.kr",
+     "publishedAt": "2026-11-16T08:32:00.000Z",
+     "link": "https://www.asiatime.co.kr/article/20261116500419"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 504,
-  "matched": 245,
-  "avgLeadMin": 530,
+  "flagged": 679,
+  "matched": 363,
+  "avgLeadMin": 802,
   "recent": [
    {
-    "keyword": "젠슨 황 없는 엔비디아",
-    "hitKeyword": "엔비디아 실적 발표",
-    "hitAt": "2026-11-15T08:00:00+09:00",
-    "leadMin": 12
+    "keyword": "체포",
+    "hitKeyword": "정자동 불법촬영 체포",
+    "hitAt": "2026-11-16T17:30:00+09:00",
+    "leadMin": 117
    },
    {
-    "keyword": "서울 집값 상승",
-    "hitKeyword": "경기남부 집값 상승",
-    "hitAt": "2026-11-15T07:00:00+09:00",
-    "leadMin": 3837
+    "keyword": "수능 AI 부정행위 대책 필요",
+    "hitKeyword": "수능 대책 촉구",
+    "hitAt": "2026-11-16T17:30:00+09:00",
+    "leadMin": 77
    },
    {
-    "keyword": "김도영 결승포 한국, APBC 결승행",
-    "hitKeyword": "김도영 메이저리그",
-    "hitAt": "2026-11-15T07:00:00+09:00",
-    "leadMin": 416
+    "keyword": "신유열 사장 승진",
+    "hitKeyword": "신유열 사장 승진",
+    "hitAt": "2026-11-16T17:30:00+09:00",
+    "leadMin": 26
    },
    {
-    "keyword": "젠슨 황, 엔비디아 사태",
-    "hitKeyword": "트럼프 엔비디아 주식 매입",
-    "hitAt": "2026-11-15T07:00:00+09:00",
-    "leadMin": 335
+    "keyword": "주지훈, 독자 회사 설립",
+    "hitKeyword": "주지훈 블리츠웨이 결별",
+    "hitAt": "2026-11-16T17:00:00+09:00",
+    "leadMin": 198
    },
    {
-    "keyword": "젠슨 황 엔비디아",
-    "hitKeyword": "트럼프 엔비디아 주식 매입",
-    "hitAt": "2026-11-15T07:00:00+09:00",
-    "leadMin": 315
+    "keyword": "주지훈 독자 회사 설립",
+    "hitKeyword": "주지훈 블리츠웨이 결별",
+    "hitAt": "2026-11-16T17:00:00+09:00",
+    "leadMin": 138
    },
    {
-    "keyword": "머스크와 젠슨 황 없는 엔비디아",
-    "hitKeyword": "트럼프 엔비디아 주식 매입",
-    "hitAt": "2026-11-15T07:00:00+09:00",
-    "leadMin": 214
+    "keyword": "전이경 총감독",
+    "hitKeyword": "전이경 암 투병 고백",
+    "hitAt": "2026-11-16T17:00:00+09:00",
+    "leadMin": 107
    },
    {
-    "keyword": "이재명 아세안 정상회담",
-    "hitKeyword": "미중러 정상회담",
-    "hitAt": "2026-11-15T06:30:00+09:00",
-    "leadMin": 2667
+    "keyword": "김유정 100일 거짓말",
+    "hitKeyword": "100일의 거짓말 12화",
+    "hitAt": "2026-11-16T17:00:00+09:00",
+    "leadMin": 87
    },
    {
-    "keyword": "롤드컵 결승전 서울 개최",
-    "hitKeyword": "젠지 롤드컵 결승 1세트",
-    "hitAt": "2026-11-15T06:30:00+09:00",
-    "leadMin": 1300
+    "keyword": "전이경 총감독 도전",
+    "hitKeyword": "전이경 암 투병 고백",
+    "hitAt": "2026-11-16T17:00:00+09:00",
+    "leadMin": 47
    },
    {
-    "keyword": "2027 롤드컵 결승전",
-    "hitKeyword": "젠지 롤드컵 결승 1세트",
-    "hitAt": "2026-11-15T06:30:00+09:00",
-    "leadMin": 1279
+    "keyword": "전이경 암 투병 고백",
+    "hitKeyword": "전이경 암 투병 고백",
+    "hitAt": "2026-11-16T17:00:00+09:00",
+    "leadMin": 37
    },
    {
-    "keyword": "미중러 정상회담",
-    "hitKeyword": "미중러 정상회담",
-    "hitAt": "2026-11-15T06:30:00+09:00",
-    "leadMin": 1279
+    "keyword": "수능 와이파이 차단",
+    "hitKeyword": "수능장 와이파이 차단",
+    "hitAt": "2026-11-16T17:00:00+09:00",
+    "leadMin": 27
    }
   ]
  }

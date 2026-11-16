@@ -1094,6 +1094,9 @@
     <link rel="stylesheet" href="/admin/shell.css">
     <link rel="stylesheet" href="/admin/shell-compat.css">
     <link rel="stylesheet" href="/admin/chatbot-editor.css">
+    <link rel="stylesheet" href="/admin/admin-views.css">
+    <link rel="stylesheet" href="/admin/admin-screens.css">
+    <link rel="stylesheet" href="/admin/admin-editor.css">
 </head>
 <body>
     <!-- ===== LOGIN ===== -->
@@ -1134,40 +1137,48 @@
     <div class="dashboard" id="dashboard">
         <!-- Sidebar -->
         <aside class="sidebar" id="sidebar" aria-label="관리 메뉴">
-            <div class="s-brand"><span class="s-mark">LP</span><div><b>Leaders Pro</b><small>ADMIN</small></div></div>
+            <div class="s-brand"><span class="s-mark">LP</span><div><b>Leaders Pro</b><small>관리자</small></div></div>
             <nav class="sidebar-nav">
-                <button type="button" class="nav-item active" data-tab="dashboard" onclick="switchTab('dashboard')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 4l9 7v9H3z"/></svg><span>대시보드</span></button>
-                <div class="nav-gt">사이트 콘텐츠</div>
-                <button type="button" class="nav-item" data-tab="notices" onclick="switchTab('notices')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l6 4V6L7 10z"/><path d="M17 9a4 4 0 0 1 0 6"/></svg><span>홈 운영</span><small class="nav-hint">공지·황금키워드</small></button>
-                <button type="button" class="nav-item" data-tab="editor" onclick="switchTab('editor')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg><span>사이트 편집</span></button>
-                <button type="button" class="nav-item" data-tab="reviews" onclick="switchTab('reviews')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><span>후기 승인</span><em class="nav-badge" data-badge="reviews" hidden></em></button>
-                <button type="button" class="nav-item" data-tab="income" onclick="switchTab('income')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M9.5 10h4a1.5 1.5 0 0 1 0 3h-3a1.5 1.5 0 0 0 0 3h4"/></svg><span>수익 인증 승인</span><em class="nav-badge" data-badge="income" hidden></em></button>
-                <button type="button" class="nav-item" data-tab="tips" onclick="switchTab('tips')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9V16h7v-2.1A6 6 0 0 0 12 3z"/></svg><span>활용 팁 승인</span><em class="nav-badge" data-badge="tips" hidden></em></button>
-                <div class="nav-gt">매출·주문</div>
-                <button type="button" class="nav-item" data-tab="analytics" onclick="switchTab('analytics')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span>매출·방문 분석</span></button>
+                <button type="button" class="nav-item active" data-tab="dashboard" onclick="switchTab('dashboard')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 4l9 7v9H3z"/></svg><span>오늘 할 일</span></button>
+                <button type="button" class="nav-item" data-tab="approvals" onclick="switchTab('approvals')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5 9 17.5 20 6.5"/></svg><span>승인</span><em class="nav-badge" data-badge="approvals" hidden></em></button>
+                <div class="nav-gt">주문·입금</div>
+                <button type="button" class="nav-item" data-tab="bank" onclick="switchTab('bank')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10h18L12 4zM5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/></svg><span>입금 확인</span><em class="nav-badge" data-badge="bank" hidden></em></button>
                 <button type="button" class="nav-item" data-tab="orders" onclick="switchTab('orders')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg><span>주문 내역</span></button>
-                <button type="button" class="nav-item" data-tab="bank" onclick="switchTab('bank')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10h18L12 4zM5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/></svg><span>계좌이체 승인</span><em class="nav-badge" data-badge="bank" hidden></em></button>
-                <div class="nav-gt">회원</div>
-                <button type="button" class="nav-item" data-tab="licenses" onclick="switchTab('licenses')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9M17 6l3 3"/></svg><span>라이선스 발급·회수</span></button>
+                <div class="nav-gt">라이선스·체험</div>
+                <button type="button" class="nav-item" data-tab="licenses" onclick="switchTab('licenses')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9M17 6l3 3"/></svg><span>라이선스</span></button>
                 <button type="button" class="nav-item" data-tab="trial" onclick="switchTab('trial')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/></svg><span>체험 사용자</span></button>
+                <div class="nav-gt">공지·사이트</div>
+                <button type="button" class="nav-item" data-tab="notices" onclick="switchTab('notices')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l6 4V6L7 10z"/><path d="M17 9a4 4 0 0 1 0 6"/></svg><span>공지·키워드</span></button>
+                <button type="button" class="nav-item" data-tab="editor" onclick="switchTab('editor')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg><span>사이트 편집</span></button>
+                <details class="nav-more" id="nav-more"><summary>더 보기</summary>
+                <button type="button" class="nav-item" data-tab="analytics" onclick="switchTab('analytics')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span>매출·방문</span></button>
                 <button type="button" class="nav-item" data-tab="leads" onclick="switchTab('leads')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v12H3z"/><path d="m3 7 9 6 9-6"/></svg><span>이메일 모음</span></button>
-                <div class="nav-gt">설정</div>
-                <button type="button" class="nav-item" data-tab="leword-settings" onclick="switchTab('leword-settings')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg><span>LEWORD 관리자 설정</span></button>
+                <button type="button" class="nav-item" data-tab="leword-settings" onclick="switchTab('leword-settings')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg><span>LEWORD 설정</span></button>
+                </details>
+                <!-- One-kind approval screens: opened from 승인 > 도구, kept so their old buttons still work. -->
+                <button type="button" class="nav-item" hidden data-tab="reviews" onclick="switchTab('reviews')"><span>후기</span></button>
+                <button type="button" class="nav-item" hidden data-tab="income" onclick="switchTab('income')"><span>수익 인증</span></button>
+                <button type="button" class="nav-item" hidden data-tab="tips" onclick="switchTab('tips')"><span>활용 팁</span></button>
             </nav>
             <div class="s-foot">
-                <span class="ok"><i></i>시스템 정상</span>
-                <span>버전 v1.2.28 · 엔진 GAS API</span>
-                <span>사용 중 라이선스 <b id="sidebar-license-count">—</b></span>
+                <span>사용 중 라이선스 <b class="num" id="sidebar-license-count">—</b></span>
                 <button type="button" class="logout-btn" onclick="handleLogout()">로그아웃</button>
             </div>
         </aside>
         <div class="scrim" id="nav-scrim"></div>
+        <nav class="tabbar" aria-label="자주 쓰는 메뉴">
+            <button type="button" class="tab-btn active" data-tab="dashboard" onclick="switchTab('dashboard')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 4l9 7v9H3z"/></svg><span>할 일</span></button>
+            <button type="button" class="tab-btn" data-tab="approvals" onclick="switchTab('approvals')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5 9 17.5 20 6.5"/></svg><span>승인</span><em class="nav-badge" data-badge="approvals" hidden></em></button>
+            <button type="button" class="tab-btn" data-tab="bank" onclick="switchTab('bank')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10h18L12 4zM5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/></svg><span>입금</span><em class="nav-badge" data-badge="bank" hidden></em></button>
+            <button type="button" class="tab-btn" data-tab="licenses" onclick="switchTab('licenses')"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9M17 6l3 3"/></svg><span>라이선스</span></button>
+            <button type="button" class="tab-btn" id="tabbar-more" aria-controls="sidebar" aria-expanded="false" aria-label="메뉴 열기"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>메뉴</span></button>
+        </nav>
 
         <div class="mainwrap">
         <header class="topbar">
             <button type="button" class="menu-btn" id="menu-btn" aria-label="메뉴 열기" aria-controls="sidebar" aria-expanded="false"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
             <span id="crumb">대시보드</span>
-            <label class="tsearch"><span class="sr">통합 검색</span><input type="search" placeholder="통합 검색 (준비 중)" disabled></label>
+            <label class="tsearch"><span class="sr">메뉴 바로 가기</span><input type="search" id="menu-jump" list="menu-jump-list" placeholder="메뉴 이름으로 이동 (예: 입금)" autocomplete="off" enterkeyhint="go"><datalist id="menu-jump-list"></datalist></label>
             <a class="btn site-link" href="/" target="_blank" rel="noopener">사이트 보기</a>
             <button type="button" class="btn" id="theme-btn" aria-label="밝게/어둡게 바꾸기">화면색</button>
             <span class="who"><i>관</i><span>관리자</span></span>
@@ -1179,33 +1190,67 @@
             <!-- TAB: Dashboard (new first screen; reads existing GAS actions only) -->
             <div class="tab-panel active" id="tab-dashboard">
                 <div class="page-header page-head-row">
-                    <div><h1>대시보드</h1><p>오늘 확인할 것만 모았습니다. <span class="faint" id="dash-updated"></span></p></div>
+                    <div><h1>오늘 할 일</h1><p><span class="faint" id="dash-updated"></span></p></div>
                     <div class="page-act"><button type="button" class="btn" id="dash-refresh">새로고침</button></div>
                 </div>
+                <div id="dash-todo"></div>
+                <section class="panel"><div class="panel-head"><h2>바로 처리</h2></div><div id="dash-quick"></div></section>
                 <div class="kpis" id="dash-kpis"></div>
                 <div class="grid2 wide-left">
-                    <section class="panel"><div class="panel-head"><h2>오늘 할 일</h2></div><div id="dash-todo"></div></section>
+                    <section class="panel"><div class="panel-head"><h2>최근 주문</h2><button type="button" class="mini" data-go="analytics">전체 보기</button></div><div id="dash-recent"></div></section>
                     <section class="panel"><div class="panel-head"><h2>최근 7일 주문</h2><small>이번 달 기준</small></div><div id="dash-bars"></div></section>
                 </div>
-                <section class="panel">
-                    <div class="panel-head"><h2>최근 주문</h2><button type="button" class="mini" data-go="analytics">전체 보기</button></div>
-                    <div id="dash-recent"></div>
-                </section>
             </div>
+
+            <!-- TAB: Approvals (후기 · 수익 인증 · 팁 in one list; filled by admin/approvals.js) -->
+            <div class="tab-panel" id="tab-approvals"></div>
 
             <!-- TAB: Licenses (existing issue/revoke functions, finally reachable) -->
             <div class="tab-panel" id="tab-licenses">
                 <div class="page-header">
-                    <h1>라이선스 발급·회수</h1>
-                    <p>코드를 새로 발급하거나, 잘못 나간 코드를 무효로 돌립니다.</p>
+                    <h1>라이선스</h1>
+                    <p>코드를 발급하거나 잘못 나간 코드를 무효로 돌립니다</p>
                 </div>
+                <!-- Issue form (was the #issue-modal pop-up): same ids, same issueCode() request. -->
+                <section class="panel issue-form" id="issue-form" aria-labelledby="issue-form-title">
+                    <div class="panel-head"><h2 id="issue-form-title">새 코드 발급</h2></div>
+                    <div class="issue-body">
+                        <label class="field"><span>플랫폼</span>
+                            <select id="issue-platform">
+                                <option value="ALL">Leaders Pro 올인원</option>
+                                <option value="NAVER">Leaders Pro (네이버 블로그)</option>
+                                <option value="BLOGGER">Leaders Orbit (워드프레스/블로그스팟)</option>
+                                <option value="TISTORY">Leaders Tistory</option>
+                                <option value="LEWORD">Leword</option>
+                            </select>
+                        </label>
+                        <div class="field field-wide"><span id="issue-type-label">기간</span>
+                            <div class="issue-types" role="group" aria-labelledby="issue-type-label">
+                                <button type="button" class="chip" data-issue-type="MONTH1" aria-pressed="true">1개월</button>
+                                <button type="button" class="chip" data-issue-type="MONTH3" aria-pressed="false">3개월</button>
+                                <button type="button" class="chip" data-issue-type="YEAR1" aria-pressed="false">1년</button>
+                                <button type="button" class="chip" data-issue-type="LIFE" aria-pressed="false">영구제</button>
+                                <button type="button" class="chip" data-issue-type="TRIAL7" aria-pressed="false">7일 체험</button>
+                            </div>
+                            <select id="issue-type" hidden>
+                                <option value="MONTH1">1개월</option>
+                                <option value="MONTH3">3개월</option>
+                                <option value="YEAR1">1년</option>
+                                <option value="LIFE">영구제</option>
+                                <option value="TRIAL7">7일 체험</option>
+                            </select>
+                        </div>
+                        <label class="field field-count"><span>수량</span><input type="number" id="issue-count" value="1" min="1" max="50" inputmode="numeric"></label>
+                        <button class="btn btn-primary issue-go" onclick="issueCode()">발급하기</button>
+                    </div>
+                </section>
                 <div class="table-card">
                     <div class="table-header">
                         <h3>라이선스 코드</h3>
                         <div class="table-actions">
-                            <input type="search" class="search-input" id="code-search" placeholder="코드·플랫폼·사용자 검색" oninput="filterCodes()">
-                            <button class="btn btn-gold" onclick="openIssueModal()">새 코드 발급</button>
-                            <button class="btn" onclick="loadCodes()">🔄 새로고침</button>
+                            <input type="search" class="search-input" id="code-search" placeholder="이름·이메일·코드 검색" aria-label="라이선스 검색" oninput="filterCodes()">
+                            <button class="btn" onclick="openIssueModal()">새 코드 발급</button>
+                            <button class="btn" onclick="loadCodes()">새로고침</button>
                         </div>
                     </div>
                     <div id="codes-table-body">
@@ -1220,7 +1265,7 @@
                     <div><h1>이메일 모음</h1><p>다운로드 페이지에서 모인 이메일입니다.</p></div>
                     <div class="page-act">
                         <span class="faint" id="leads-count">총 0건</span>
-                        <button type="button" class="btn" onclick="loadLeadsAdmin()">🔄 새로고침</button>
+                        <button type="button" class="btn" onclick="loadLeadsAdmin()">새로고침</button>
                         <button type="button" class="btn" onclick="exportLeadsCsv()">CSV 내려받기</button>
                     </div>
                 </div>
@@ -1233,12 +1278,26 @@
             <div class="tab-panel" id="tab-orders">
                 <div class="page-header">
                     <h1>주문 내역</h1>
-                    <p>결제 완료된 주문과 활성화된 라이선스 내역입니다.</p>
+                    <p>결제 완료된 주문과 활성화된 라이선스입니다</p>
+                </div>
+                <!-- Filters run on the list already loaded by loadCodes() (admin/screens.js): no extra request. -->
+                <div class="ap-bar">
+                    <div class="seg" role="group" aria-label="기간" id="orders-period">
+                        <button type="button" data-orders-period="all" aria-pressed="true">전체</button>
+                        <button type="button" data-orders-period="today" aria-pressed="false">오늘</button>
+                        <button type="button" data-orders-period="7" aria-pressed="false">7일</button>
+                        <button type="button" data-orders-period="30" aria-pressed="false">30일</button>
+                    </div>
+                    <div class="ap-status" role="group" aria-label="상태" id="orders-state">
+                        <button type="button" class="chip" data-orders-state="all" aria-pressed="true">전체</button>
+                        <button type="button" class="chip" data-orders-state="active" aria-pressed="false">사용 중</button>
+                        <button type="button" class="chip" data-orders-state="expired" aria-pressed="false">만료</button>
+                    </div>
                 </div>
                 <div class="table-card">
                     <div class="table-header">
-                        <h3>활성화된 주문 목록</h3>
-                        <button class="btn" onclick="loadCodes()">🔄 새로고침</button>
+                        <h3>활성화된 주문 <span class="faint num" id="orders-count"></span></h3>
+                        <button class="btn" onclick="loadCodes()">새로고침</button>
                     </div>
                     <div id="orders-table-body">
                         <div class="loading-spinner"><div class="spinner-ring"></div> 주문 내역 로딩 중...</div>
@@ -1249,47 +1308,47 @@
             <!-- TAB: Analytics -->
             <div class="tab-panel" id="tab-analytics">
                 <div class="page-header">
-                    <h1>매출/방문 분석</h1>
-                    <p>Toss 결제, 계좌이체, 방문 로그를 합쳐 오늘과 이번 달 흐름을 확인합니다.</p>
+                    <h1>매출·방문</h1>
+                    <p>Toss 결제, 계좌이체, 방문 기록을 합친 오늘과 이번 달 흐름</p>
                 </div>
-                <div style="display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;">
+                <div class="act-row">
                     <button class="btn btn-gold" id="analytics-period-today" onclick="loadAnalyticsDashboard('today')">오늘</button>
                     <button class="btn" id="analytics-period-month" onclick="loadAnalyticsDashboard('month')">이번 달</button>
                     <button class="btn" onclick="setInternalAnalytics(true)">내 방문 제외 켜기</button>
                     <button class="btn" onclick="setInternalAnalytics(false)">내 방문 제외 끄기</button>
-                    <button class="btn" onclick="loadAnalyticsDashboard(currentAnalyticsPeriod)" style="margin-left:auto;">🔄 새로고침</button>
+                    <button class="btn" onclick="loadAnalyticsDashboard(currentAnalyticsPeriod)" style="margin-left:auto;">새로고침</button>
                 </div>
-                <div class="stats-grid" style="grid-template-columns: repeat(5, 1fr); margin-bottom: 24px;">
-                    <div class="stat-card card-blue">
-                        <div class="stat-top"><div class="stat-label">오늘 방문자</div><div class="stat-icon icon-blue">👥</div></div>
-                        <div class="stat-value blue" id="analytics-visitors">-</div>
+                <div class="stats-grid stat-row five">
+                    <div class="stat-card">
+                        <div class="stat-label">오늘 방문자</div>
+                        <div class="stat-value num" id="analytics-visitors">-</div>
                         <div class="stat-change neutral" id="analytics-visitors-meta">내 방문 제외</div>
                     </div>
-                    <div class="stat-card card-green">
-                        <div class="stat-top"><div class="stat-label">오늘 주문</div><div class="stat-icon icon-green">#</div></div>
-                        <div class="stat-value green" id="analytics-orders">-</div>
+                    <div class="stat-card">
+                        <div class="stat-label">오늘 주문</div>
+                        <div class="stat-value num" id="analytics-orders">-</div>
                         <div class="stat-change neutral" id="analytics-orders-meta">결제 + 계좌이체</div>
                     </div>
-                    <div class="stat-card card-gold">
-                        <div class="stat-top"><div class="stat-label">오늘 매출</div><div class="stat-icon icon-gold">₩</div></div>
-                        <div class="stat-value gold" id="analytics-revenue">-</div>
+                    <div class="stat-card">
+                        <div class="stat-label">오늘 매출</div>
+                        <div class="stat-value num" id="analytics-revenue">-</div>
                         <div class="stat-change neutral" id="analytics-revenue-meta">실매출 합계</div>
                     </div>
-                    <div class="stat-card card-purple">
-                        <div class="stat-top"><div class="stat-label">이번주 주문</div><div class="stat-icon icon-purple">W</div></div>
-                        <div class="stat-value purple" id="analytics-week-orders">-</div>
+                    <div class="stat-card">
+                        <div class="stat-label">이번 주 주문</div>
+                        <div class="stat-value num" id="analytics-week-orders">-</div>
                         <div class="stat-change neutral" id="analytics-week-orders-meta">월요일부터</div>
                     </div>
-                    <div class="stat-card card-gold">
-                        <div class="stat-top"><div class="stat-label">이번주 매출</div><div class="stat-icon icon-gold">₩</div></div>
-                        <div class="stat-value gold" id="analytics-week-revenue">-</div>
+                    <div class="stat-card">
+                        <div class="stat-label">이번 주 매출</div>
+                        <div class="stat-value num" id="analytics-week-revenue">-</div>
                         <div class="stat-change neutral" id="analytics-week-revenue-meta">월요일부터</div>
                     </div>
                 </div>
                 <div class="table-card">
                     <div class="table-header">
-                        <h3>최근 주문/결제</h3>
-                        <span id="analytics-updated" style="font-size:0.78rem;color:var(--text-secondary);">—</span>
+                        <h3>최근 주문·결제</h3>
+                        <span id="analytics-updated" class="faint meta">—</span>
                     </div>
                     <div id="analytics-table-body">
                         <div class="loading-spinner"><div class="spinner-ring"></div> 분석 데이터 로딩 중...</div>
@@ -1326,7 +1385,7 @@
                         </details>
 
                         <section class="cb-tile" aria-labelledby="cb-h-gemini">
-                            <h5 id="cb-h-gemini">✨ 제미나이 카드</h5>
+                            <h5 id="cb-h-gemini">제미나이 카드</h5>
                             <div class="editor-field-grid">
                                 <div class="editor-field"><label for="edit-cb-gemini-title">제목</label><input id="edit-cb-gemini-title" type="text" autocomplete="off" placeholder="무료 제미나이 챗봇"></div>
                                 <div class="editor-field"><label for="edit-cb-gemini-cta">버튼 문구</label><input id="edit-cb-gemini-cta" type="text" autocomplete="off" placeholder="사용하러 가기"></div>
@@ -1336,7 +1395,7 @@
                         </section>
 
                         <section class="cb-tile" aria-labelledby="cb-h-naver">
-                            <h5 id="cb-h-naver">📝 네이버 무료 프롬프트 카드</h5>
+                            <h5 id="cb-h-naver">네이버 무료 프롬프트 카드</h5>
                             <div class="editor-field-grid">
                                 <div class="editor-field"><label for="edit-cb-naver-title">제목</label><input id="edit-cb-naver-title" type="text" autocomplete="off" placeholder="네이버 무료 프롬프트"></div>
                                 <div class="editor-field"><label for="edit-cb-naver-badge">배지 (카드 오른쪽 위 작은 글자)</label><input id="edit-cb-naver-badge" type="text" autocomplete="off" placeholder="무료"></div>
@@ -1347,7 +1406,7 @@
                         </section>
 
                         <section class="cb-tile" aria-labelledby="cb-h-locked">
-                            <h5 id="cb-h-locked">🔒 홈판 프롬프트 카드 (비밀번호)</h5>
+                            <h5 id="cb-h-locked">홈판 프롬프트 카드 (비밀번호)</h5>
                             <div class="editor-field-grid">
                                 <div class="editor-field"><label for="edit-cb-locked-title">제목</label><input id="edit-cb-locked-title" type="text" autocomplete="off" placeholder="리더남 홈판 프롬프트 (테스트)"></div>
                                 <div class="editor-field full"><label for="edit-cb-locked-desc">설명</label><textarea id="edit-cb-locked-desc" rows="2" placeholder="테스트용입니다. 비밀번호를 아는 분만 열 수 있습니다."></textarea></div>
@@ -1460,7 +1519,7 @@
                                     <span id="keyword-briefing-row-count" role="status" aria-live="polite" style="color:var(--text-secondary);font-size:16px;">0개 행</span>
                                     <div class="keyword-briefing-toolbar-actions">
                                         <input id="keyword-briefing-sheet" type="file" accept=".xlsx,.xls,.csv,.txt,.tsv" hidden>
-                                        <button class="btn btn-gold" type="button" id="keyword-briefing-import">📄 엑셀/CSV 불러오기</button>
+                                        <button class="btn btn-gold" type="button" id="keyword-briefing-import">엑셀/CSV 불러오기</button>
                                         <button class="btn" type="button" id="keyword-briefing-add-row">＋ 키워드 행 추가</button>
                                         <button class="btn" type="button" id="keyword-briefing-sort">기회지수 높은순 정렬</button>
                                     </div>
@@ -1480,7 +1539,7 @@
                                         <tbody id="keyword-briefing-table-body"></tbody>
                                     </table>
                                 </div>
-                                <p class="editor-help" id="keyword-briefing-scroll-help" style="font-size:16px;"><strong>엑셀/CSV를 그대로 넣으면 자동 입력</strong> — <strong>📄 엑셀/CSV 불러오기</strong>를 누르거나 파일을 표 위로 끌어다 놓으면 <em>키워드·검색량·문서수</em> 열을 자동으로 찾아 채웁니다(열 순서·헤더 유무 무관). <strong>기회지수 자동 계산</strong> — 검색량 ÷ (블로그 문서수 + 1). 각 셀을 클릭해 바로 수정하고, 검수 필요 표시가 없어야 저장할 수 있습니다. 화면이 좁으면 표 영역을 좌우로 스크롤하세요.</p>
+                                <p class="editor-help" id="keyword-briefing-scroll-help" style="font-size:16px;"><strong>엑셀/CSV를 그대로 넣으면 자동 입력</strong> — <strong>엑셀/CSV 불러오기</strong>를 누르거나 파일을 표 위로 끌어다 놓으면 <em>키워드·검색량·문서수</em> 열을 자동으로 찾아 채웁니다(열 순서·헤더 유무 무관). <strong>기회지수 자동 계산</strong> — 검색량 ÷ (블로그 문서수 + 1). 각 셀을 클릭해 바로 수정하고, 검수 필요 표시가 없어야 저장할 수 있습니다. 화면이 좁으면 표 영역을 좌우로 스크롤하세요.</p>
                             </div>
                         </div>
                         <div id="keyword-briefing-preview" style="margin-top:14px;"></div>
@@ -1744,11 +1803,11 @@
                         <h4>사이트 콘텐츠 바로 수정</h4>
                         <p class="editor-help">코드 형식 대신 수정할 영역을 누르세요. 서버에서 불러온 기존 항목과 앞으로 추가되는 필드는 그대로 보존됩니다.</p>
                         <div class="structured-content-nav" aria-label="사이트 콘텐츠 수정 영역">
-                            <button type="button" data-content-editor-target="home" aria-controls="editor-sub-home" onclick="switchEditorSubtab('home', true)"><strong>🏠 홈 화면</strong><span>메인 문구, 성과 인증, 부방장 키워드</span></button>
-                            <button type="button" data-content-editor-target="pricing" aria-controls="editor-sub-pricing" onclick="switchEditorSubtab('pricing', true)"><strong>💳 구매·요금제</strong><span>가격, 결제 안내, 플랜별 혜택</span></button>
-                            <button type="button" data-content-editor-target="products" aria-controls="editor-sub-products" onclick="switchEditorSubtab('products', true)"><strong>📦 제품정보</strong><span>제품 카드, 설명, 이미지와 비교표</span></button>
-                            <button type="button" data-content-editor-target="downloads" aria-controls="editor-sub-downloads" onclick="switchEditorSubtab('downloads', true)"><strong>⬇️ 다운로드</strong><span>버전, 설치 파일, 플랫폼별 링크</span></button>
-                            <button type="button" data-content-editor-target="design" aria-controls="editor-sub-design" onclick="switchEditorSubtab('design', true)"><strong>🎨 디자인·음악</strong><span>배경, 강조 색상, 스킨과 음악</span></button>
+                            <button type="button" data-content-editor-target="home" aria-controls="editor-sub-home" onclick="switchEditorSubtab('home', true)"><strong>홈 화면</strong><span>메인 문구, 성과 인증, 부방장 키워드</span></button>
+                            <button type="button" data-content-editor-target="pricing" aria-controls="editor-sub-pricing" onclick="switchEditorSubtab('pricing', true)"><strong>구매·요금제</strong><span>가격, 결제 안내, 플랜별 혜택</span></button>
+                            <button type="button" data-content-editor-target="products" aria-controls="editor-sub-products" onclick="switchEditorSubtab('products', true)"><strong>제품정보</strong><span>제품 카드, 설명, 이미지와 비교표</span></button>
+                            <button type="button" data-content-editor-target="downloads" aria-controls="editor-sub-downloads" onclick="switchEditorSubtab('downloads', true)"><strong>다운로드</strong><span>버전, 설치 파일, 플랫폼별 링크</span></button>
+                            <button type="button" data-content-editor-target="design" aria-controls="editor-sub-design" onclick="switchEditorSubtab('design', true)"><strong>디자인·음악</strong><span>배경, 강조 색상, 스킨과 음악</span></button>
                         </div>
                         <div class="admin-content-summary" id="admin-site-content-summary" aria-live="polite"></div>
                         <div class="editor-save-bar">
@@ -1771,7 +1830,7 @@
                                 </div>
                                 <div data-agent-detail style="margin-top:6px;font-size:0.78rem;color:var(--text-secondary);">사장님 Claude 구독(OAuth 토큰)으로 GitHub Actions 에서 돕니다.</div>
                                 <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;">
-                                    <button class="btn btn-gold" type="button" onclick="runAdminAiWorkerTest()" style="font-size:0.78rem;padding:5px 10px;">⚡ 테스트 실행</button>
+                                    <button class="btn btn-gold" type="button" onclick="runAdminAiWorkerTest()" >테스트 실행</button>
                                 </div>
                             </div>
                             <div data-agent-card="codex" style="padding:14px;border:1px solid var(--border);border-radius:12px;background:color-mix(in srgb, var(--text) 3.5%, transparent);opacity:0.7;">
@@ -1811,9 +1870,9 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
                             </div>
                         </div>
                         <div class="editor-save-bar">
-                            <button class="btn btn-gold" type="button" onclick="connectAdminAiWorker()">🔗 연동하기</button>
+                            <button class="btn btn-gold" type="button" onclick="connectAdminAiWorker()">연동하기</button>
                             <button class="btn" type="button" onclick="checkAdminAiWorkerSettings()">연동상태 확인</button>
-                            <button class="btn" type="button" onclick="runAdminAiWorkerTest()">⚡ 작업자 테스트 실행</button>
+                            <button class="btn" type="button" onclick="runAdminAiWorkerTest()">작업자 테스트 실행</button>
                         </div>
                         <div id="admin-ai-worker-status" style="margin-top:12px;color:var(--text-secondary);font-size:0.86rem;">이 PC 의 LEWORD 앱과 자동 연동됩니다 — 토큰·설정 불필요.</div>
                     </div>
@@ -1848,43 +1907,34 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
                     </div>
                 </div>
                 <div class="editor-save-bar">
-                    <button class="btn" data-site-content-reload onclick="loadEditorContent({ force: true, confirmDiscard: true })">🔄 서버에서 불러오기</button>
+                    <button class="btn" data-site-content-reload onclick="loadEditorContent({ force: true, confirmDiscard: true })">서버에서 불러오기</button>
                     <button class="btn" onclick="resetEditorContent()">↩️ 초기화</button>
-                    <button class="btn btn-gold" data-site-content-save onclick="saveEditorContent()">💾 서버에 저장하기</button>
+                    <button class="btn btn-gold" data-site-content-save onclick="saveEditorContent()">서버에 저장하기</button>
                 </div>
             </div>
 
             <!-- TAB: Trial Management -->
             <div class="tab-panel" id="tab-trial">
                 <div class="page-header">
-                    <h1>체험 사용자 관리</h1>
-                    <p>무료 체험 사용자 목록을 조회하고 차단/해제할 수 있습니다.</p>
+                    <h1>체험 사용자</h1>
+                    <p>무료 체험 사용자를 보고 차단하거나 차단을 풉니다</p>
                 </div>
                 <div class="chips">
                     <button type="button" class="chip" onclick="focusTrialExport('phones')">체험자 번호 모음</button>
                     <button type="button" class="chip" onclick="focusTrialExport('emails')">체험자 이메일 모음</button>
                 </div>
-                <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 24px;">
-                    <div class="stat-card card-purple">
-                        <div class="stat-top">
-                            <div class="stat-label">전체 체험 사용자</div>
-                            <div class="stat-icon icon-purple">🎁</div>
-                        </div>
-                        <div class="stat-value purple" id="trial-stat-total">—</div>
+                <div class="stats-grid stat-row">
+                    <div class="stat-card">
+                        <div class="stat-label">전체</div>
+                        <div class="stat-value num" id="trial-stat-total">—</div>
                     </div>
-                    <div class="stat-card card-green">
-                        <div class="stat-top">
-                            <div class="stat-label">활성 사용자</div>
-                            <div class="stat-icon icon-green">✅</div>
-                        </div>
-                        <div class="stat-value green" id="trial-stat-active">—</div>
+                    <div class="stat-card">
+                        <div class="stat-label">사용 중</div>
+                        <div class="stat-value num" id="trial-stat-active">—</div>
                     </div>
-                    <div class="stat-card" style="border-left: 3px solid #ef4444;">
-                        <div class="stat-top">
-                            <div class="stat-label">차단된 사용자</div>
-                            <div class="stat-icon" style="background:rgba(239,68,68,0.1);color:#ef4444;">🚫</div>
-                        </div>
-                        <div class="stat-value" style="color:#ef4444;" id="trial-stat-blocked">—</div>
+                    <div class="stat-card">
+                        <div class="stat-label">차단됨</div>
+                        <div class="stat-value num" id="trial-stat-blocked">—</div>
                     </div>
                 </div>
 
@@ -1916,8 +1966,8 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
 
                         <h3>체험 사용자 목록</h3>
                         <div class="table-actions">
-                            <input class="search-input" id="trial-search" placeholder="🔍 이메일/닉네임 검색..." oninput="filterTrialUsers()">
-                            <button class="btn" onclick="loadTrialUsers()">🔄 새로고침</button>
+                            <input class="search-input" id="trial-search" placeholder="이메일·닉네임·전화번호 검색" aria-label="체험 사용자 검색" oninput="filterTrialUsers()">
+                            <button class="btn" onclick="loadTrialUsers()">새로고침</button>
                         </div>
                     </div>
                     <div id="trial-table-body">
@@ -1929,44 +1979,35 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
             <!-- TAB: Bank Transfer Management -->
             <div class="tab-panel" id="tab-bank">
                 <div class="page-header">
-                    <h1>계좌이체 관리</h1>
-                    <p>계좌이체 주문을 확인하고 승인/거절할 수 있습니다.</p>
+                    <h1>입금 확인</h1>
+                    <p>계좌이체 주문의 입금을 확인하고 승인하거나 거절합니다</p>
                 </div>
-                <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 24px;">
-                    <div class="stat-card" style="border-left: 3px solid #f59e0b;">
-                        <div class="stat-top">
-                            <div class="stat-label">대기 중</div>
-                            <div class="stat-icon" style="background:rgba(245,158,11,0.1);color:#f59e0b;">⏳</div>
-                        </div>
-                        <div class="stat-value" style="color:#f59e0b;" id="bank-stat-pending">—</div>
+                <div class="stats-grid stat-row">
+                    <div class="stat-card is-key">
+                        <div class="stat-label">확인 대기</div>
+                        <div class="stat-value num" id="bank-stat-pending">—</div>
                     </div>
-                    <div class="stat-card card-green">
-                        <div class="stat-top">
-                            <div class="stat-label">승인 완료</div>
-                            <div class="stat-icon icon-green">✅</div>
-                        </div>
-                        <div class="stat-value green" id="bank-stat-approved">—</div>
+                    <div class="stat-card">
+                        <div class="stat-label">승인 완료</div>
+                        <div class="stat-value num" id="bank-stat-approved">—</div>
                     </div>
-                    <div class="stat-card" style="border-left: 3px solid #ef4444;">
-                        <div class="stat-top">
-                            <div class="stat-label">거절됨</div>
-                            <div class="stat-icon" style="background:rgba(239,68,68,0.1);color:#ef4444;">❌</div>
-                        </div>
-                        <div class="stat-value" style="color:#ef4444;" id="bank-stat-rejected">—</div>
+                    <div class="stat-card">
+                        <div class="stat-label">거절</div>
+                        <div class="stat-value num" id="bank-stat-rejected">—</div>
                     </div>
                 </div>
                 <div class="table-card">
                     <div class="table-header">
-                        <h3>계좌이체 주문 목록</h3>
+                        <h3>계좌이체 주문</h3>
                         <div class="table-actions">
-                            <select id="bank-status-filter" onchange="filterBankOrders()" style="padding:8px 14px;background:color-mix(in srgb, var(--text) 4%, transparent);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-size:0.8rem;cursor:pointer;">
+                            <select id="bank-status-filter" class="select-input" aria-label="상태" onchange="filterBankOrders()">
                                 <option value="all">전체</option>
                                 <option value="pending" selected>대기 중</option>
                                 <option value="approved">승인됨</option>
                                 <option value="rejected">거절됨</option>
                             </select>
-                            <input class="search-input" id="bank-search" placeholder="🔍 이름/이메일 검색..." oninput="filterBankOrders()">
-                            <button class="btn" onclick="loadBankOrders()">🔄 새로고침</button>
+                            <input class="search-input" id="bank-search" placeholder="입금자·이메일·주문번호 검색" aria-label="입금 주문 검색" oninput="filterBankOrders()">
+                            <button class="btn" onclick="loadBankOrders()">새로고침</button>
                         </div>
                     </div>
                     <div id="bank-table-body">
@@ -1983,14 +2024,14 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
                 </div>
                 <div style="margin-bottom: 16px; padding: 12px 16px; background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); border-radius: 10px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
                     <span style="font-size: 0.85rem; color: var(--text-secondary);">하드코딩 sample 후기 3건 가져오기 →</span>
-                    <button class="btn btn-gold" onclick="seedDefaults()">📥 기본 데이터 가져오기</button>
+                    <button class="btn btn-gold" onclick="seedDefaults()">기본 데이터 가져오기</button>
                 </div>
                 <div style="display: flex; gap: 8px; margin-bottom: 20px;">
                     <button class="btn" onclick="loadReviewsAdmin('all')" id="rv-filter-all">전체</button>
-                    <button class="btn" onclick="loadReviewsAdmin('pending')" id="rv-filter-pending">⏳ 대기</button>
-                    <button class="btn" onclick="loadReviewsAdmin('approved')" id="rv-filter-approved">✅ 승인</button>
-                    <button class="btn" onclick="loadReviewsAdmin('rejected')" id="rv-filter-rejected">🚫 거절</button>
-                    <button class="btn" onclick="loadReviewsAdmin(currentReviewFilter)" style="margin-left: auto;">🔄 새로고침</button>
+                    <button class="btn" onclick="loadReviewsAdmin('pending')" id="rv-filter-pending">대기</button>
+                    <button class="btn" onclick="loadReviewsAdmin('approved')" id="rv-filter-approved">승인</button>
+                    <button class="btn" onclick="loadReviewsAdmin('rejected')" id="rv-filter-rejected">거절</button>
+                    <button class="btn" onclick="loadReviewsAdmin(currentReviewFilter)" style="margin-left: auto;">새로고침</button>
                 </div>
                 <div id="reviews-table-body">
                     <div class="loading-spinner"><div class="spinner-ring"></div> 후기 목록 로딩 중...</div>
@@ -2000,24 +2041,24 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
             <!-- TAB: Notices (Phase 6-B) -->
             <div class="tab-panel" id="tab-notices">
                 <div class="page-header">
-                    <h1>홈 운영</h1>
-                    <p>홈 공지사항과 부방장 황금키워드를 직접 수정·발행합니다. 저장하기 전에는 공개 화면이 바뀌지 않습니다.</p>
+                    <h1>공지·키워드</h1>
+                    <p>홈 공지와 부방장 황금키워드를 고칩니다. 저장하기 전에는 공개 화면이 바뀌지 않습니다</p>
                 </div>
-                <div style="margin-bottom:16px;padding:16px;background:rgba(68,215,182,0.08);border:1px solid rgba(68,215,182,0.24);border-radius:10px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
-                    <div style="min-width:220px;flex:1;">
-                        <strong style="display:block;margin-bottom:4px;">부방장 키워드도 여기서 바로 관리하세요</strong>
-                        <span style="font-size:.88rem;color:var(--text-secondary);line-height:1.55;">이미지 OCR, 표 직접 수정, 검증, 홈 발행 화면으로 이동합니다.</span>
+                <div class="note-bar">
+                    <div class="grow">
+                        <strong>부방장 황금키워드</strong>
+                        <span>이미지 글자 읽기, 표 수정, 검증, 홈 발행 화면으로 이동합니다</span>
                     </div>
                     <button class="btn btn-gold" type="button" id="home-ops-open-keyword-briefing" onclick="openKeywordBriefingEditor()">부방장 황금키워드 수정</button>
                     <a class="btn" href="../" target="_blank" rel="noreferrer" style="text-decoration:none;">운영 홈 확인</a>
                 </div>
-                <div style="margin-bottom:16px;padding:16px;background:var(--bg-card);border:1px solid var(--border-glass);border-radius:10px;">
-                    <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:12px;">
-                        <div>
-                            <strong style="display:block;margin-bottom:4px;">저장 권한 상태</strong>
-                            <span id="home-ops-api-status" style="font-size:.85rem;color:var(--text-secondary);">로그인하면 저장 권한이 자동으로 연결됩니다. 따로 입력하지 않아도 됩니다.</span>
+                <div class="note-bar is-plain">
+                    <div class="note-row">
+                        <div class="grow">
+                            <strong>저장 권한</strong>
+                            <span id="home-ops-api-status">로그인하면 저장 권한이 자동으로 연결됩니다. 따로 입력하지 않아도 됩니다.</span>
                         </div>
-                        <span id="home-notice-revision" style="padding:5px 9px;border:1px solid rgba(68,215,182,.35);border-radius:999px;color:#44d7b6;font-size:.78rem;font-weight:800;">notice revision 0</span>
+                        <span id="home-notice-revision" class="pill num">notice revision 0</span>
                     </div>
                     <div class="home-ops-admin-grid" id="home-ops-api-inputs" style="display:none;">
                         <input id="home-ops-api-id" type="text" placeholder="LEWORD API 서버 관리자 ID" autocomplete="off" style="padding:10px;border-radius:8px;">
@@ -2025,29 +2066,29 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
                         <button class="btn" type="button" onclick="connectHomeOpsApi()">저장 권한 연결</button>
                     </div>
                 </div>
-                <div class="form-card" id="home-notice-editor-form" style="padding: 20px; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 12px; margin-bottom: 24px;">
-                    <h3 id="notice-form-title" style="margin-bottom: 8px; font-size: 1.12rem;">📝 홈 공지 작성</h3>
-                    <p style="margin:0 0 16px;color:var(--text-secondary);font-size:.88rem;line-height:1.55;">최신 공지 3건이 홈 맨 위에 표시됩니다. 본문은 일반 텍스트로 입력하며 줄바꿈이 그대로 유지됩니다.</p>
+                <div class="form-card notice-form" id="home-notice-editor-form">
+                    <h3 id="notice-form-title">홈 공지 작성</h3>
+                    <p>최신 공지 3건이 홈 맨 위에 표시됩니다. 본문은 일반 글로 쓰고 줄바꿈은 그대로 남습니다.</p>
                     <input type="hidden" id="notice-edit-id" value="">
                     <div class="home-ops-admin-grid">
-                        <select id="notice-badge" style="padding: 10px; border-radius: 8px;">
+                        <select id="notice-badge" aria-label="공지 종류">
                             <option value="important">중요</option>
                             <option value="update" selected>업데이트</option>
                             <option value="event">이벤트</option>
                             <option value="tip">안내</option>
                         </select>
-                        <input type="text" id="notice-date" placeholder="2026.05.23" style="padding: 10px; border-radius: 8px;">
-                        <input type="text" id="notice-title" placeholder="제목 (필수, 200자 이내)" style="padding: 10px; border-radius: 8px;">
+                        <input type="text" id="notice-date" placeholder="2026.05.23" aria-label="날짜">
+                        <input type="text" id="notice-title" placeholder="제목 (필수, 200자 이내)" aria-label="제목">
                     </div>
-                    <input type="text" id="notice-preview" placeholder="미리보기 — 한 줄 요약 (300자 이내)" style="width: 100%; padding: 10px; border-radius: 8px; margin-bottom: 8px;">
-                    <textarea id="notice-body" placeholder="본문 (필수, 일반 텍스트 · 줄바꿈 유지)" rows="8" style="width: 100%; padding: 12px; border-radius: 8px; font-family: inherit; font-size:1rem; line-height:1.65; margin-bottom: 12px;"></textarea>
+                    <input type="text" id="notice-preview" placeholder="한 줄 요약 (300자 이내)" aria-label="한 줄 요약">
+                    <textarea id="notice-body" placeholder="본문 (필수, 일반 글 · 줄바꿈 유지)" rows="8" aria-label="본문"></textarea>
                     <div class="home-ops-admin-actions">
-                        <button class="btn btn-gold" id="home-notice-submit" data-home-notice-mutation="1" onclick="submitNotice()">💾 홈에 발행</button>
-                        <button class="btn" onclick="resetNoticeForm()">↩️ 초기화</button>
-                        <button class="btn" onclick="loadNotices()" style="margin-left: auto;">🔄 새로고침</button>
+                        <button class="btn btn-primary" id="home-notice-submit" data-home-notice-mutation="1" onclick="submitNotice()">홈에 발행</button>
+                        <button class="btn" onclick="resetNoticeForm()">초기화</button>
+                        <button class="btn" onclick="loadNotices()" style="margin-left: auto;">새로고침</button>
                     </div>
                 </div>
-                <h3 style="margin: 24px 0 12px; font-size: 1rem; color: var(--text-primary); border-bottom: 1px solid var(--border-glass); padding-bottom: 8px;">📋 기존 공지 목록</h3>
+                <h3 class="sub-title">기존 공지</h3>
                 <div id="notices-table-body">
                     <div class="loading-spinner"><div class="spinner-ring"></div> 공지 목록 로딩 중...</div>
                 </div>
@@ -2061,14 +2102,14 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
                 </div>
                 <div style="margin-bottom: 16px; padding: 12px 16px; background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); border-radius: 10px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
                     <span style="font-size: 0.85rem; color: var(--text-secondary);">하드코딩 sample 4건 가져오기 →</span>
-                    <button class="btn btn-gold" onclick="seedDefaults()">📥 기본 데이터 가져오기</button>
+                    <button class="btn btn-gold" onclick="seedDefaults()">기본 데이터 가져오기</button>
                 </div>
                 <div style="display: flex; gap: 8px; margin-bottom: 20px;">
                     <button class="btn" onclick="loadIncomeAdmin('all')" id="ic-filter-all">전체</button>
-                    <button class="btn" onclick="loadIncomeAdmin('pending')" id="ic-filter-pending">⏳ 대기</button>
-                    <button class="btn" onclick="loadIncomeAdmin('approved')" id="ic-filter-approved">✅ 승인</button>
-                    <button class="btn" onclick="loadIncomeAdmin('rejected')" id="ic-filter-rejected">🚫 거절</button>
-                    <button class="btn" onclick="loadIncomeAdmin(currentIncomeFilter)" style="margin-left: auto;">🔄 새로고침</button>
+                    <button class="btn" onclick="loadIncomeAdmin('pending')" id="ic-filter-pending">대기</button>
+                    <button class="btn" onclick="loadIncomeAdmin('approved')" id="ic-filter-approved">승인</button>
+                    <button class="btn" onclick="loadIncomeAdmin('rejected')" id="ic-filter-rejected">거절</button>
+                    <button class="btn" onclick="loadIncomeAdmin(currentIncomeFilter)" style="margin-left: auto;">새로고침</button>
                 </div>
                 <div id="income-table-body">
                     <div class="loading-spinner"><div class="spinner-ring"></div> 로딩 중...</div>
@@ -2083,60 +2124,32 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
                 </div>
                 <div style="margin-bottom: 16px; padding: 12px 16px; background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); border-radius: 10px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
                     <span style="font-size: 0.85rem; color: var(--text-secondary);">하드코딩 sample 6건 가져오기 →</span>
-                    <button class="btn btn-gold" onclick="seedDefaults()">📥 기본 데이터 가져오기</button>
+                    <button class="btn btn-gold" onclick="seedDefaults()">기본 데이터 가져오기</button>
                 </div>
                 <div style="display: flex; gap: 8px; margin-bottom: 20px;">
                     <button class="btn" onclick="loadTipsAdmin('all')" id="tp-filter-all">전체</button>
-                    <button class="btn" onclick="loadTipsAdmin('pending')" id="tp-filter-pending">⏳ 대기</button>
-                    <button class="btn" onclick="loadTipsAdmin('approved')" id="tp-filter-approved">✅ 승인</button>
-                    <button class="btn" onclick="loadTipsAdmin('rejected')" id="tp-filter-rejected">🚫 거절</button>
-                    <button class="btn" onclick="loadTipsAdmin(currentTipFilter)" style="margin-left: auto;">🔄 새로고침</button>
+                    <button class="btn" onclick="loadTipsAdmin('pending')" id="tp-filter-pending">대기</button>
+                    <button class="btn" onclick="loadTipsAdmin('approved')" id="tp-filter-approved">승인</button>
+                    <button class="btn" onclick="loadTipsAdmin('rejected')" id="tp-filter-rejected">거절</button>
+                    <button class="btn" onclick="loadTipsAdmin(currentTipFilter)" style="margin-left: auto;">새로고침</button>
                 </div>
                 <div id="tips-table-body">
                     <div class="loading-spinner"><div class="spinner-ring"></div> 팁 목록 로딩 중...</div>
                 </div>
             </div>
 
-    <!-- Issue Modal -->
-    <div class="modal-overlay" id="issue-modal">
-        <div class="modal">
-            <h3>🔑 새 코드 발급</h3>
-            <div class="form-group">
-                <label>플랫폼</label>
-                <select id="issue-platform">
-                    <option value="ALL">Leaders Pro 올인원</option>
-                    <option value="NAVER">Leaders Pro (네이버 블로그)</option>
-                    <option value="BLOGGER">Leaders Orbit (워드프레스/블로그스팟)</option>
-                    <option value="TISTORY">Leaders Tistory</option>
-                    <option value="LEWORD">Leword</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>유형</label>
-                <select id="issue-type">
-                    <option value="MONTH1">1개월</option>
-                    <option value="MONTH3">3개월</option>
-                    <option value="YEAR1">1년</option>
-                    <option value="LIFE">영구제</option>
-                    <option value="TRIAL7">7일 체험</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>발급 수량</label>
-                <input type="number" id="issue-count" value="1" min="1" max="50">
-            </div>
-            <div class="modal-actions">
-                <button class="btn" onclick="closeIssueModal()">취소</button>
-                <button class="btn btn-gold" onclick="issueCode()">발급하기</button>
-            </div>
-        </div>
-    </div>
+    <!-- The issue form moved onto the licence screen (#issue-form); this empty shell only keeps closeIssueModal() safe. -->
+    <div class="modal-overlay" id="issue-modal" hidden></div>
 
     <!-- Save Toast -->
-    <div class="save-toast" id="save-toast">✅ 저장되었습니다!</div>
+    <div class="save-toast" id="save-toast" role="status" aria-live="polite">저장되었습니다</div>
 
     <script src="/admin/shell-tools.js"></script>
     <script src="/admin/shell.js"></script>
+    <script src="/admin/approvals-tools.js"></script>
+    <script src="/admin/approvals.js"></script>
+    <script src="/admin/list-views.js"></script>
+    <script src="/admin/screens.js"></script>
     <script src="/admin/keyword-briefing-tools.js"></script>
     <script src="/admin/structured-editor-tools.js"></script>
     <script src="/admin/protected-link-tools.js"></script>
@@ -2349,7 +2362,7 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
         let codesPage = 1;
         let ordersPage = 1;
         let currentAnalyticsPeriod = 'today';
-        const PAGE_SIZE = 20;
+        const PAGE_SIZE = 10;
         // Vultr is retired.  Keep the old UI controls visible, but never send
         // requests to the retired host while the Bright Data job wiring is
         // moved to the serverless workflow.
@@ -2955,34 +2968,34 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
             const list = homeNoticeEditorState.notices;
             setHomeNoticeRevision(homeNoticeEditorState.revision);
             if (!list.length) {
-                container.innerHTML = '<div style="padding:32px;text-align:center;color:var(--text-secondary);">등록된 공지가 없습니다. 위 폼에서 새 공지를 작성하세요.</div>';
+                container.innerHTML = '<p class="q-empty">등록된 공지가 없습니다. 위에서 새 공지를 작성하세요</p>';
                 setNoticeMutationDisabled(homeNoticeEditorState.saving);
                 return;
             }
             const archiveCount = list.filter(n => n.archiveOnly).length;
             const migrateBanner = archiveCount > 0
-                ? `<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:14px 18px;margin-bottom:12px;border:1px dashed var(--border-glass);border-radius:10px;background:rgba(201,168,76,.06);">
-                        <span style="font-size:.9rem;color:var(--text-secondary);">아래 ${archiveCount}건은 정적 아카이브라 아직 수정·삭제할 수 없습니다.</span>
-                        <button class="btn btn-gold" type="button" data-home-notice-mutation="1" onclick="migrateArchiveNotices()">📥 서버로 가져오기 (${archiveCount}건)</button>
+                ? `<div class="note-bar">
+                        <span class="grow">아래 ${archiveCount}건은 정적 아카이브라 아직 수정·삭제할 수 없습니다.</span>
+                        <button class="btn btn-gold" type="button" data-home-notice-mutation="1" onclick="migrateArchiveNotices()">서버로 가져오기 (${archiveCount}건)</button>
                     </div>`
                 : '';
             container.innerHTML = migrateBanner + list.map(n => {
                 const encodedId = encodeURIComponent(n.id);
                 return `
-                    <div style="padding:16px 20px;background:var(--bg-card);border:1px solid var(--border-glass);border-radius:10px;margin-bottom:10px;">
-                        <div style="display:flex;gap:12px;align-items:center;margin-bottom:6px;flex-wrap:wrap;">
-                            <span style="padding:3px 10px;border-radius:14px;font-size:.76rem;font-weight:700;background:rgba(201,168,76,.15);color:var(--gold-primary,#c9a84c);">${escapeHtml_(NOTICE_BADGE_LABEL[n.badge] || n.badge)}</span>
-                            <span style="font-size:.86rem;color:var(--text-secondary);">${escapeHtml_(n.date)}</span>
-                            ${n.archiveOnly ? '<span style="padding:3px 9px;border-radius:14px;font-size:.72rem;font-weight:700;background:color-mix(in srgb, var(--text) 8%, transparent);color:var(--text-secondary);">사이트 표시중 · 아카이브</span>' : ''}
-                            <span style="font-size:.74rem;color:var(--text-muted);margin-left:auto;font-family:monospace;">${escapeHtml_(n.id)}</span>
+                    <div class="notice-item">
+                        <div class="notice-top">
+                            <span class="st-badge st-notice">${escapeHtml_(NOTICE_BADGE_LABEL[n.badge] || n.badge)}</span>
+                            <span class="q-meta num">${escapeHtml_(n.date)}</span>
+                            ${n.archiveOnly ? '<span class="st-badge">사이트 표시 중 · 아카이브</span>' : ''}
+                            <span class="q-meta notice-id">${escapeHtml_(n.id)}</span>
                         </div>
-                        <div style="font-size:1rem;font-weight:700;line-height:1.5;margin-bottom:5px;">${escapeHtml_(n.title)}</div>
-                        <div style="font-size:.9rem;color:var(--text-secondary);line-height:1.6;margin-bottom:12px;">${escapeHtml_(n.preview)}</div>
-                        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                        <div class="notice-title">${escapeHtml_(n.title)}</div>
+                        <div class="notice-preview">${escapeHtml_(n.preview)}</div>
+                        <div class="notice-acts">
                             ${n.archiveOnly
-                                ? '<span style="font-size:.82rem;color:var(--text-muted);">정적 아카이브 — 위의 [서버로 가져오기]를 누르면 수정·삭제할 수 있습니다.</span>'
-                                : `<button class="btn" type="button" data-home-notice-mutation="1" data-notice-action="edit" data-notice-id="${escapeHtml_(encodedId)}">✏️ 수정</button>
-                            <button class="btn" type="button" data-home-notice-mutation="1" data-notice-action="delete" data-notice-id="${escapeHtml_(encodedId)}">🗑️ 삭제</button>`}
+                                ? '<span class="q-meta">정적 아카이브입니다. 위의 [서버로 가져오기]를 누르면 수정·삭제할 수 있습니다.</span>'
+                                : `<button class="btn" type="button" data-home-notice-mutation="1" data-notice-action="edit" data-notice-id="${escapeHtml_(encodedId)}">수정</button>
+                            <button class="btn" type="button" data-home-notice-mutation="1" data-notice-action="delete" data-notice-id="${escapeHtml_(encodedId)}">삭제</button>`}
                         </div>
                     </div>`;
             }).join('');
@@ -3106,7 +3119,7 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
             }
         }
         function resetNoticeForm() {
-            document.getElementById('notice-form-title').textContent = '📝 새 공지 작성';
+            document.getElementById('notice-form-title').textContent = '새 공지 작성';
             document.getElementById('notice-edit-id').value = '';
             document.getElementById('notice-badge').value = 'update';
             const now = new Date();
@@ -3120,7 +3133,7 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
             const id = decodeURIComponent(encodedId);
             const n = homeNoticeEditorState.notices.find(item => item.id === id);
             if (!n) { showToast('❌ 수정할 공지를 찾지 못했습니다'); return; }
-            document.getElementById('notice-form-title').textContent = '✏️ 공지 수정 — ' + n.id;
+            document.getElementById('notice-form-title').textContent = '공지 수정 · ' + n.id;
             document.getElementById('notice-edit-id').value = n.id;
             document.getElementById('notice-badge').value = n.badge;
             document.getElementById('notice-date').value = n.date;
@@ -3148,7 +3161,7 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
          */
         function noticePublishProgress(text) {
             const button = document.getElementById('home-notice-submit');
-            if (button) button.textContent = text ? '⏳ ' + text : '💾 홈에 발행';
+            if (button) button.textContent = text ? text : '홈에 발행';
             if (text) homeOpsApiStatus(text, false);
         }
 
@@ -3304,7 +3317,7 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
                         <div style="font-size: 2.4rem; flex-shrink: 0;">${escapeHtml_(n.emoji)}</div>
                         <div style="flex: 1; min-width: 0;">
                             <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 4px; flex-wrap: wrap;">
-                                <span style="padding: 3px 10px; border-radius: 14px; font-size: 0.7rem; font-weight: 700; background: ${REVIEW_STATUS_COLOR[n.status]}22; color: ${REVIEW_STATUS_COLOR[n.status]};">${REVIEW_STATUS_LABEL[n.status] || n.status}</span>
+                                <span class="st-badge st-${escapeHtml_(n.status)}">${REVIEW_STATUS_LABEL[n.status] || escapeHtml_(n.status)}</span>
                                 <strong style="color: var(--gold-primary, #c9a84c);">${escapeHtml_(n.amount)}</strong>
                                 <span style="color: var(--text-secondary); font-size: 0.85rem;">${escapeHtml_(n.author)}</span>
                                 ${n.email ? `<span style="color: var(--text-muted); font-size: 0.78rem;">${escapeHtml_(n.email)}</span>` : ''}
@@ -3314,10 +3327,10 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
                             <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px; white-space: pre-wrap;">${escapeHtml_(n.desc)}</div>
                             <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px;">${(n.tags || []).map(t => `<span style="padding: 2px 8px; border-radius: 10px; background: rgba(201,168,76,0.1); font-size: 0.72rem; color: var(--gold-primary, #c9a84c);">${escapeHtml_(t)}</span>`).join('')}</div>
                             <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                                ${n.status !== 'approved' ? `<button class="btn btn-gold" onclick='approveIncome("${escapeHtml_(n.id)}")'>✅ 승인</button>` : ''}
-                                ${n.status !== 'rejected' ? `<button class="btn" onclick='rejectIncome("${escapeHtml_(n.id)}")'>🚫 거절</button>` : ''}
-                                <button class="btn" onclick='editIncomeFromBtn(${JSON.stringify(n).replace(/'/g, "&#39;")})'>✏️ 수정</button>
-                                <button class="btn" onclick='deleteIncome("${escapeHtml_(n.id)}")'>🗑️ 삭제</button>
+                                ${n.status !== 'approved' ? `<button class="btn btn-gold" onclick='approveIncome("${escapeHtml_(n.id)}")'>승인</button>` : ''}
+                                ${n.status !== 'rejected' ? `<button class="btn" onclick='rejectIncome("${escapeHtml_(n.id)}")'>거절</button>` : ''}
+                                <button class="btn" onclick='editIncomeFromBtn(${JSON.stringify(n).replace(/'/g, "&#39;")})'>수정</button>
+                                <button class="btn" onclick='deleteIncome("${escapeHtml_(n.id)}")'>삭제</button>
                             </div>
                         </div>
                     </div>
@@ -3369,9 +3382,8 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
 
         // ===== PHASE 6-D: REVIEWS ADMIN (approve / reject workflow) =====
         let currentReviewFilter = 'pending';
-        const REVIEW_STATUS_LABEL = { pending: '⏳ 대기', approved: '✅ 승인', rejected: '🚫 거절' };
-        const REVIEW_STATUS_COLOR = { pending: '#ffb84a', approved: '#44d7b6', rejected: '#ff3b5c' };
-        async function loadReviewsAdmin(filter) {
+        const REVIEW_STATUS_LABEL = { pending: '대기', approved: '승인됨', rejected: '거절됨' };
+                async function loadReviewsAdmin(filter) {
             currentReviewFilter = filter || 'pending';
             const container = document.getElementById('reviews-table-body');
             container.innerHTML = '<div class="loading-spinner"><div class="spinner-ring"></div> 로딩 중...</div>';
@@ -3396,7 +3408,7 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
                 container.innerHTML = list.map(r => `
                     <div style="padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 10px; margin-bottom: 10px;">
                         <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 6px; flex-wrap: wrap;">
-                            <span style="padding: 3px 10px; border-radius: 14px; font-size: 0.7rem; font-weight: 700; background: ${REVIEW_STATUS_COLOR[r.status]}22; color: ${REVIEW_STATUS_COLOR[r.status]};">${REVIEW_STATUS_LABEL[r.status] || r.status}</span>
+                            <span class="st-badge st-${escapeHtml_(r.status)}">${REVIEW_STATUS_LABEL[r.status] || escapeHtml_(r.status)}</span>
                             <span style="color: #f5c842;">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
                             <strong>${escapeHtml_(r.author)}</strong>
                             <span style="font-size: 0.8rem; color: var(--text-secondary);">${escapeHtml_(r.email || '')}</span>
@@ -3405,9 +3417,9 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
                         <div style="font-weight: 600; margin-bottom: 4px;">${escapeHtml_(r.summary)}</div>
                         ${r.detail ? `<div style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 10px; white-space: pre-wrap;">${escapeHtml_(r.detail)}</div>` : ''}
                         <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                            ${r.status !== 'approved' ? `<button class="btn btn-gold" onclick='approveReview("${escapeHtml_(r.timestamp)}")'>✅ 승인</button>` : ''}
-                            ${r.status !== 'rejected' ? `<button class="btn" onclick='rejectReview("${escapeHtml_(r.timestamp)}")'>🚫 거절</button>` : ''}
-                            <button class="btn" onclick='editReviewFromBtn(${JSON.stringify(r).replace(/'/g, "&#39;")})'>✏️ 수정</button>
+                            ${r.status !== 'approved' ? `<button class="btn btn-gold" onclick='approveReview("${escapeHtml_(r.timestamp)}")'>승인</button>` : ''}
+                            ${r.status !== 'rejected' ? `<button class="btn" onclick='rejectReview("${escapeHtml_(r.timestamp)}")'>거절</button>` : ''}
+                            <button class="btn" onclick='editReviewFromBtn(${JSON.stringify(r).replace(/'/g, "&#39;")})'>수정</button>
                         </div>
                     </div>
                 `).join('');
@@ -3485,7 +3497,7 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
                 container.innerHTML = list.map(t => `
                     <div style="padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 10px; margin-bottom: 10px;">
                         <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 6px; flex-wrap: wrap;">
-                            <span style="padding: 3px 10px; border-radius: 14px; font-size: 0.7rem; font-weight: 700; background: ${REVIEW_STATUS_COLOR[t.status]}22; color: ${REVIEW_STATUS_COLOR[t.status]};">${REVIEW_STATUS_LABEL[t.status] || t.status}</span>
+                            <span class="st-badge st-${escapeHtml_(t.status)}">${REVIEW_STATUS_LABEL[t.status] || escapeHtml_(t.status)}</span>
                             <strong>${escapeHtml_(t.author)}</strong>
                             <span style="font-size: 0.8rem; color: var(--text-secondary);">${escapeHtml_(t.email || '')}</span>
                             <span style="font-size: 0.72rem; color: var(--text-muted); margin-left: auto; font-family: monospace;">${escapeHtml_(t.timestamp.slice(0, 19))}</span>
@@ -3493,8 +3505,8 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
                         <div style="font-weight: 600; margin-bottom: 4px;">${escapeHtml_(t.title)}</div>
                         <div style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 10px; white-space: pre-wrap;">${escapeHtml_(t.detail)}</div>
                         <div style="display: flex; gap: 8px;">
-                            ${t.status !== 'approved' ? `<button class="btn btn-gold" onclick='approveTip("${escapeHtml_(t.timestamp)}")'>✅ 승인</button>` : ''}
-                            ${t.status !== 'rejected' ? `<button class="btn" onclick='rejectTip("${escapeHtml_(t.timestamp)}")'>🚫 거절</button>` : ''}
+                            ${t.status !== 'approved' ? `<button class="btn btn-gold" onclick='approveTip("${escapeHtml_(t.timestamp)}")'>승인</button>` : ''}
+                            ${t.status !== 'rejected' ? `<button class="btn" onclick='rejectTip("${escapeHtml_(t.timestamp)}")'>거절</button>` : ''}
                         </div>
                     </div>
                 `).join('');
@@ -3569,7 +3581,7 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
                                         <td style="padding:10px 12px; font-size:0.82rem; color:var(--text-secondary);">${escapeHtml_(l.source)}</td>
                                         <td style="padding:10px 12px; font-size:0.82rem; color:var(--text-secondary);">${escapeHtml_(l.productInterest)}</td>
                                         <td style="padding:10px 12px; font-size:0.78rem; color:var(--text-muted); font-family:monospace;">${escapeHtml_(l.timestamp.slice(0,19))}</td>
-                                        <td style="padding:10px 12px; text-align:center;"><button class="btn" style="padding:6px 10px; font-size:0.75rem;" onclick='deleteLead("${escapeHtml_(l.id)}")'>🗑️</button></td>
+                                        <td style="padding:10px 12px; text-align:center;"><button class="btn" onclick='deleteLead("${escapeHtml_(l.id)}")'>삭제</button></td>
                                     </tr>
                                 `).join('')}
                             </tbody>
@@ -3895,12 +3907,8 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
         function renderCodesTable(filter = '') {
             let filtered = allCodes;
             if (filter) {
-                const q = filter.toLowerCase();
-                filtered = allCodes.filter(c =>
-                    (c.code || '').toLowerCase().includes(q) ||
-                    (c.platform || '').toLowerCase().includes(q) ||
-                    (c.userId || '').toLowerCase().includes(q)
-                );
+                // One box for code, user, e-mail, name, platform and type (admin/list-views.js).
+                filtered = allCodes.filter(c => window.AdminListViews.matchesCode(c, filter));
                 codesPage = 1;
             }
 
@@ -3910,32 +3918,8 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
             const start = (codesPage - 1) * PAGE_SIZE;
             const pageItems = filtered.slice(start, start + PAGE_SIZE);
 
-            let html = '<table class="data-table"><thead><tr>';
-            html += '<th>코드</th><th>플랫폼</th><th>유형</th><th>상태</th><th>사용자</th><th>비밀번호</th><th>만료일</th><th>작업</th>';
-            html += '</tr></thead><tbody>';
-
-            if (pageItems.length === 0) {
-                html += '<tr><td colspan="8" style="text-align:center;color:var(--text-secondary);padding:32px;">코드가 없습니다.</td></tr>';
-            } else {
-                pageItems.forEach(c => {
-                    const status = c.used ? '<span class="badge badge-active">활성</span>' :
-                        (c.expiresAt && new Date(c.expiresAt) < new Date() ? '<span class="badge badge-expired">만료</span>' : '<span class="badge badge-unused">미사용</span>');
-                    const expires = c.expiresAt ? new Date(c.expiresAt).toLocaleDateString('ko-KR') : '—';
-                    // Passwords stay masked on screen (the issue/revoke screen is reachable again since the admin-B shell).
-                    const pwDisplay = c.userPassword ? '••••••' : '—';
-                    html += `<tr>
-                        <td><span class="code-text">${c.code}</span></td>
-                        <td>${platformBadge(c.platform)}</td>
-                        <td>${c.type || '—'}</td>
-                        <td>${status}</td>
-                        <td>${c.userId || c.user || '—'}</td>
-                        <td>${pwDisplay}</td>
-                        <td>${expires}</td>
-                        <td><button class="btn btn-red" onclick="revokeCode('${c.code}')" style="padding:4px 10px;font-size:0.7rem;">무효화</button></td>
-                    </tr>`;
-                });
-            }
-            html += '</tbody></table>';
+            // Card rows (admin/list-views.js); passwords stay masked, [무효화] keeps revokeCode('code') and its confirm().
+            let html = window.AdminListViews.renderCodeList(pageItems, new Date());
             html += buildPagination(codesPage, totalPages, filtered.length, 'codes');
             document.getElementById('codes-table-body').innerHTML = html;
         }
@@ -3954,40 +3938,20 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
 
         // ===== ORDERS TABLE =====
         function renderOrdersTable() {
-            const orders = allCodes
+            const filter = window.AdminScreens ? window.AdminScreens.orderFilter() : { period: 'all', state: 'all' };
+            const orders = window.AdminListViews.filterOrders(allCodes
                 .filter(c => c.used && c.usedAt)
-                .sort((a, b) => new Date(b.usedAt) - new Date(a.usedAt));
+                .sort((a, b) => new Date(b.usedAt) - new Date(a.usedAt)), filter, new Date());
 
             const totalPages = Math.max(1, Math.ceil(orders.length / PAGE_SIZE));
             if (ordersPage > totalPages) ordersPage = totalPages;
             const start = (ordersPage - 1) * PAGE_SIZE;
             const pageItems = orders.slice(start, start + PAGE_SIZE);
 
-            let html = '<table class="data-table"><thead><tr>';
-            html += '<th>코드</th><th>플랫폼</th><th>유형</th><th>사용자 ID</th><th>비밀번호</th><th>활성화 일시</th><th>만료일</th>';
-            html += '</tr></thead><tbody>';
-
-            if (pageItems.length === 0) {
-                html += '<tr><td colspan="7" style="text-align:center;color:var(--text-secondary);padding:32px;">주문 내역이 없습니다.</td></tr>';
-            } else {
-                pageItems.forEach(c => {
-                    const dateStr = c.usedAt ? new Date(c.usedAt).toLocaleString('ko-KR') : '—';
-                    const expires = c.expiresAt ? new Date(c.expiresAt).toLocaleDateString('ko-KR') : '영구';
-                    // Passwords stay masked on screen (the issue/revoke screen is reachable again since the admin-B shell).
-                    const pwDisplay = c.userPassword ? '••••••' : '—';
-                    html += `<tr>
-                        <td><span class="code-text">${c.code}</span></td>
-                        <td>${platformBadge(c.platform)}</td>
-                        <td>${c.type || '—'}</td>
-                        <td>${c.userId || '—'}</td>
-                        <td>${pwDisplay}</td>
-                        <td>${dateStr}</td>
-                        <td>${expires}</td>
-                    </tr>`;
-                });
-            }
-            html += '</tbody></table>';
+            let html = window.AdminListViews.renderOrderList(pageItems, new Date());
             html += buildPagination(ordersPage, totalPages, orders.length, 'orders');
+            const count = document.getElementById('orders-count');
+            if (count) count.textContent = `${orders.length}건`;
             document.getElementById('orders-table-body').innerHTML = html;
         }
 
@@ -4021,6 +3985,10 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
             } else if (type === 'trial') {
                 trialPage = page;
                 renderTrialTable(document.getElementById('trial-search')?.value || '');
+            } else if (type === 'bank') {
+                // Deposit pages used to fall through to the order list; 10 rows per page makes that reachable.
+                bankPage = page;
+                renderBankTable();
             } else {
                 ordersPage = page;
                 renderOrdersTable();
@@ -4028,8 +3996,15 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
         }
 
         // ===== ISSUE CODE =====
-        function openIssueModal() { document.getElementById('issue-modal').classList.add('active'); }
-        function closeIssueModal() { document.getElementById('issue-modal').classList.remove('active'); }
+        // The issue form now sits on the licence screen itself (#issue-form): "open" brings it into view.
+        function openIssueModal() {
+            const form = document.getElementById('issue-form');
+            if (!form) return;
+            form.scrollIntoView({ block: 'start', behavior: 'smooth' });
+            const first = document.getElementById('issue-platform');
+            if (first) first.focus({ preventScroll: true });
+        }
+        function closeIssueModal() { const m = document.getElementById('issue-modal'); if (m) m.classList.remove('active'); }
 
         function getdisabledLicenseBundlePresetDays(type) {
             if (type === 'CUSTOM1') return 1;
@@ -4484,7 +4459,7 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
             });
             document.querySelectorAll('[data-site-content-save]').forEach(button => {
                 button.disabled = siteContentEditorState.loading || siteContentEditorState.saving;
-                button.textContent = siteContentEditorState.saving ? '저장 중…' : (button.closest('#editor-sub-site-content') ? '사이트 콘텐츠 저장' : '💾 서버에 저장하기');
+                button.textContent = siteContentEditorState.saving ? '저장 중…' : (button.closest('#editor-sub-site-content') ? '사이트 콘텐츠 저장' : '서버에 저장하기');
             });
         }
 
@@ -4967,12 +4942,12 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
             const bridged = await bridgeFetch('/v1/bridge/admin/worker-status', undefined, 25000);
             if (bridged) {
                 setAgentBadge('✅ 자동 연동 (LEWORD 앱)', 'ok');
-                setAiWorkerStatus('✅ 연동이 완료되었습니다 — 이제 [⚡ 작업자 테스트 실행]과 수동 발굴을 바로 쓸 수 있습니다.');
+                setAiWorkerStatus('✅ 연동이 완료되었습니다 — 이제 [작업자 테스트 실행]과 수동 발굴을 바로 쓸 수 있습니다.');
                 if (typeof showToast === 'function') showToast('연동이 완료되었습니다.');
                 return;
             }
             setAgentBadge('앱 미실행', 'warn');
-            setAiWorkerStatus('LEWORD 앱이 꺼져 있습니다 — 앱을 켜고 다시 [🔗 연동하기]를 누르세요.');
+            setAiWorkerStatus('LEWORD 앱이 꺼져 있습니다 — 앱을 켜고 다시 [연동하기]를 누르세요.');
         }
 
         /*
@@ -5000,13 +4975,13 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
             const badge = document.querySelector('[data-agent-card="claude-code"] [data-agent-badge]');
             if (!badge) return;
             const tones = {
-                ok: 'background:rgba(52,211,153,0.16);color:#6ee7b7;',
-                warn: 'background:rgba(255,215,0,0.14);color:#ffd700;',
-                bad: 'background:rgba(248,113,113,0.15);color:#fca5a5;',
-                idle: 'background:color-mix(in srgb, var(--text) 8%, transparent);color:var(--text-secondary);',
+                ok: 'background:var(--positive-soft);color:var(--positive);',
+                warn: 'background:var(--accent-soft);color:var(--accent-ink);',
+                bad: 'background:var(--negative-soft);color:var(--negative);',
+                idle: 'background:var(--raised);color:var(--muted);',
             };
             badge.textContent = text;
-            badge.style.cssText = 'font-size:0.72rem;font-weight:800;padding:2px 8px;border-radius:6px;' + (tones[tone] || tones.idle);
+            badge.style.cssText = 'font-size:13px;font-weight:500;padding:2px 8px;border-radius:999px;' + (tones[tone] || tones.idle);
         }
 
         function setAgentDetail(text) {
@@ -5036,7 +5011,7 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
                 return;
             }
             setAgentBadge('앱 미실행', 'warn');
-            setAiWorkerStatus('LEWORD 앱이 꺼져 있습니다 — 앱을 켜고 [🔗 연동하기]를 누르세요.');
+            setAiWorkerStatus('LEWORD 앱이 꺼져 있습니다 — 앱을 켜고 [연동하기]를 누르세요.');
         }
 
         /** 실행 진행 UI — GitHub jobs API 를 폴링해 스텝 단위로 그린다. */
@@ -5081,7 +5056,7 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
                 setAiWorkerStatus('4분 안에 안 끝났습니다 — Actions 페이지에서 확인하세요.');
                 return;
             }
-            setAiWorkerStatus('LEWORD 앱이 꺼져 있습니다 — 앱을 켜고 [🔗 연동하기]부터 누르세요.');
+            setAiWorkerStatus('LEWORD 앱이 꺼져 있습니다 — 앱을 켜고 [연동하기]부터 누르세요.');
             renderWorkerProgress([], '앱 미실행', 100);
         }
 
@@ -7095,7 +7070,8 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
         // ===== TOAST =====
         function showToast(msg) {
             const toast = document.getElementById('save-toast');
-            toast.textContent = msg;
+            // Leading status emoji are decoration only; the words carry the meaning.
+            toast.textContent = String(msg).replace(/^[\p{Extended_Pictographic}️⃣\s]+/u, '');
             toast.classList.add('visible');
             setTimeout(() => toast.classList.remove('visible'), 3000);
         }
@@ -7158,38 +7134,8 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
             const start = (trialPage - 1) * PAGE_SIZE;
             const pageItems = filtered.slice(start, start + PAGE_SIZE);
 
-            let html = '<table class="data-table"><thead><tr>';
-            html += '<th>이메일</th><th>닉네임</th><th>전화번호</th><th>상태</th><th>활성화 횟수</th><th>등록일</th><th>최근 활동</th><th>작업</th>';
-            html += '</tr></thead><tbody>';
-
-            if (pageItems.length === 0) {
-                html += '<tr><td colspan="8" style="text-align:center;color:var(--text-secondary);padding:32px;">체험 사용자가 없습니다.</td></tr>';
-            } else {
-                pageItems.forEach(u => {
-                    const isBlocked = u.blocked === 'true' || u.blocked === 'Y';
-                    const statusBadge = isBlocked
-                        ? '<span class="badge badge-expired">차단됨</span>'
-                        : '<span class="badge badge-active">활성</span>';
-                    const regDate = u.registeredAt ? new Date(u.registeredAt).toLocaleDateString('ko-KR') : '—';
-                    const lastDate = u.lastActiveAt ? new Date(u.lastActiveAt).toLocaleString('ko-KR') : '—';
-                    const safeEmail = escapeHtml(u.email);
-                    const actionBtn = isBlocked
-                        ? `<button class="btn" onclick="toggleBlockTrialUser('${safeEmail}', false)" style="padding:4px 10px;font-size:0.7rem;">해제</button>`
-                        : `<button class="btn btn-red" onclick="toggleBlockTrialUser('${safeEmail}', true)" style="padding:4px 10px;font-size:0.7rem;">차단</button>`;
-
-                    html += `<tr${isBlocked ? ' style="opacity:0.5;"' : ''}>
-                        <td><span class="code-text">${safeEmail}</span></td>
-                        <td>${escapeHtml(u.nickname) || '—'}</td>
-                        <td>${escapeHtml(u.phone) || '—'}</td>
-                        <td>${statusBadge}</td>
-                        <td style="text-align:center;">${u.totalActivations || 0}</td>
-                        <td>${escapeHtml(regDate)}</td>
-                        <td>${escapeHtml(lastDate)}</td>
-                        <td>${actionBtn}</td>
-                    </tr>`;
-                });
-            }
-            html += '</tbody></table>';
+            // Card rows (admin/list-views.js); [차단]/[차단 해제] keep toggleBlockTrialUser(email, block) and its confirm().
+            let html = window.AdminListViews.renderTrialList(pageItems);
             html += buildPagination(trialPage, totalPages, filtered.length, 'trial');
             document.getElementById('trial-table-body').innerHTML = html;
         }
@@ -7246,10 +7192,10 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
                     document.getElementById('bank-stat-rejected').textContent = rejected;
                     renderBankTable();
                 } else {
-                    document.getElementById('bank-table-body').innerHTML = `<div style="text-align:center;padding:32px;color:var(--text-secondary);">❌ ${json.error || '로딩 실패'}</div>`;
+                    document.getElementById('bank-table-body').innerHTML = `<div style="text-align:center;padding:32px;color:var(--text-secondary);">${json.error || '로딩 실패'}</div>`;
                 }
             } catch (err) {
-                document.getElementById('bank-table-body').innerHTML = `<div style="text-align:center;padding:32px;color:var(--text-secondary);">❌ 네트워크 오류: ${err.message}</div>`;
+                document.getElementById('bank-table-body').innerHTML = `<div style="text-align:center;padding:32px;color:var(--text-secondary);">네트워크 오류: ${err.message}</div>`;
             }
         }
 
@@ -7280,51 +7226,8 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
             const start = (bankPage - 1) * PAGE_SIZE;
             const pageItems = filtered.slice(start, start + PAGE_SIZE);
 
-            let html = '<table class="data-table"><thead><tr>';
-            html += '<th>주문번호</th><th>입금자명</th><th>이메일</th><th>상품</th><th>금액</th><th>상태</th><th>라이선스</th><th>접수일</th><th>작업</th>';
-            html += '</tr></thead><tbody>';
-
-            if (pageItems.length === 0) {
-                html += '<tr><td colspan="9" style="text-align:center;color:var(--text-secondary);padding:32px;">주문이 없습니다.</td></tr>';
-            } else {
-                pageItems.forEach(o => {
-                    let statusBadge = '';
-                    if (o.status === 'pending') statusBadge = '<span class="badge" style="background:rgba(245,158,11,0.15);color:#f59e0b;border:1px solid rgba(245,158,11,0.3);padding:4px 10px;border-radius:20px;font-size:0.7rem;font-weight:600;">⏳ 대기</span>';
-                    else if (o.status === 'approved') statusBadge = '<span class="badge badge-active">✅ 승인</span>';
-                    else if (o.status === 'rejected') statusBadge = '<span class="badge badge-expired">❌ 거절</span>';
-                    else statusBadge = `<span class="badge">${o.status}</span>`;
-
-                    const createdDate = o.createdAt ? new Date(o.createdAt).toLocaleString('ko-KR') : '—';
-                    const amount = o.amount ? o.amount.toLocaleString() + '원' : '—';
-                    const code = o.licenseCode ? `<span class="code-text">${escapeHtml(o.licenseCode)}</span>` : '—';
-                    const safeOrderId = escapeHtml(o.orderId);
-
-                    let actionBtns = '';
-                    if (o.status === 'pending') {
-                        actionBtns = `
-                            <button class="btn btn-gold" onclick="approveBankOrder('${safeOrderId}')" style="padding:4px 10px;font-size:0.7rem;margin-right:4px;">✅ 승인</button>
-                            <button class="btn btn-red" onclick="rejectBankOrder('${safeOrderId}')" style="padding:4px 10px;font-size:0.7rem;">❌ 거절</button>
-                        `;
-                    } else if (o.status === 'approved') {
-                        actionBtns = '<span style="color:var(--text-secondary);font-size:0.7rem;">처리 완료</span>';
-                    } else {
-                        actionBtns = '<span style="color:var(--text-secondary);font-size:0.7rem;">거절됨</span>';
-                    }
-
-                    html += `<tr>
-                        <td><span class="code-text">${safeOrderId}</span></td>
-                        <td>${escapeHtml(o.name) || '—'}</td>
-                        <td>${escapeHtml(o.email) || '—'}</td>
-                        <td>${escapeHtml(o.product) || '—'}</td>
-                        <td style="font-weight:600;">${amount}</td>
-                        <td>${statusBadge}</td>
-                        <td>${code}</td>
-                        <td>${escapeHtml(createdDate)}</td>
-                        <td>${actionBtns}</td>
-                    </tr>`;
-                });
-            }
-            html += '</tbody></table>';
+            // Card rows (admin/list-views.js); [입금 확인]/[거절] keep approveBankOrder / rejectBankOrder and their confirm().
+            let html = window.AdminListViews.renderBankList(pageItems);
             html += buildPagination(bankPage, totalPages, filtered.length, 'bank');
             document.getElementById('bank-table-body').innerHTML = html;
         }
