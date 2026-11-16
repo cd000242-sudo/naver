@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T03:11:20.158Z",
+ "builtAt": "2026-11-16T03:21:23.929Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 8,
  "candidates": [
   {
    "keyword": "조정식 국회의장 헌법개정위원장",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 65,
+   "articles90": 59,
    "recent20": 4,
-   "press": 42,
-   "firstArticleAt": "2026-11-16T01:43:00.000Z",
+   "press": 39,
+   "firstArticleAt": "2026-11-16T01:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[포토] 개헌 준비 나서는 조정식 국회의장...“내년이 적기”",
+     "press": "ilyosisa.co.kr",
+     "publishedAt": "2026-11-16T03:16:00.000Z",
+     "link": "https://www.ilyosisa.co.kr/news/article.html?no=258988"
+    },
+    {
+     "title": "조정식 “개헌자문위원장에 김형오·정세균”",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-16T03:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002833119?sid=100"
+    },
     {
      "title": "조정식 국회의장, 김형오·정세균 개헌자문위 공동위원장 위촉…정점식...",
      "press": "polinews.co.kr",
      "publishedAt": "2026-11-16T03:08:00.000Z",
      "link": "https://www.polinews.co.kr/news/articleView.html?idxno=748504"
-    },
-    {
-     "title": "조정식, 또 개헌 만지작? 장동혁 \"李 탈옥을 위한 시선돌리기\"",
-     "press": "pennmike.com",
-     "publishedAt": "2026-11-16T03:06:00.000Z",
-     "link": "https://www.pennmike.com/news/articleView.html?idxno=131923"
-    },
-    {
-     "title": "[속보]국힘 “‘이재명 탈옥법’ 의결 앞두고 국회의장이 개헌론 띄워…...",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-16T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001231078?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "대법, 한덕수 19일 선고",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 46,
-   "recent20": 7,
-   "press": 37,
-   "firstArticleAt": "2026-11-16T01:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "대법, 19일 한덕수 '내란' 상고심 선고…\"구속만기 등 종합적 고려\"(종합...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-16T03:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014324459?sid=102"
-    },
-    {
-     "title": "대법, 한덕수 '내란 혐의'·김건희 '3대 의혹 사건' 상고심 모두 19일 선...",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-16T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394113?sid=100"
-    },
-    {
-     "title": "대법, 19일 한덕수 내란·김건희 도이치 함께 선고",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-16T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926582?sid=102"
     }
    ]
   },
@@ -79,30 +47,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 54,
-   "recent20": 7,
-   "press": 36,
-   "firstArticleAt": "2026-11-16T01:42:00.000Z",
+   "articles90": 58,
+   "recent20": 12,
+   "press": 35,
+   "firstArticleAt": "2026-11-16T01:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“수능 연기 없다” 못 박은 교육부…초소형 카메라 대책은 미정",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-16T03:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004682617?sid=102"
+     "title": "교육부 \"수능 연기 어려워…전파 차단 과기부와 협의해 17일 발표\"",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-16T03:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000543913?sid=101"
     },
     {
-     "title": "세무사 수석 합격자, AI 부정행위 자백…초소형 카메라로 답 확인",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-16T03:04:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=625451"
-    },
-    {
-     "title": "[속보]“수능 연기 없다”는 교육부…대안은 감독관 역량 강화?",
+     "title": "수능 3일 앞두고 ‘부랴부랴 회의’… 탐지기 등 올해는 적용불가",
      "press": "munhwa.com",
-     "publishedAt": "2026-11-16T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002833099?sid=102"
+     "publishedAt": "2026-11-16T03:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002833123?sid=102"
+    },
+    {
+     "title": "교육부, AI안경 등 적발 시연… 초소형 기기는 미지수",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-16T03:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002833122?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "대법, 한덕수 내란 19일 선고",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 40,
+   "recent20": 4,
+   "press": 31,
+   "firstArticleAt": "2026-11-16T01:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "대법, 김건희 '3대 의혹'·한덕수 '내란' 사건 19일 선고",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-16T03:20:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903194"
+    },
+    {
+     "title": "대법, 오는 19일 ‘내란 혐의’ 한덕수 선고…김건희 ‘주가 조작’ 선...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-16T03:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012294541?sid=102"
+    },
+    {
+     "title": "대법, 19일 한덕수 내란 선고‥김건희 선고도",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-16T03:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001535833?sid=102"
     }
    ]
   },
@@ -112,10 +112,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 23,
-   "recent20": 4,
-   "press": 20,
-   "firstArticleAt": "2026-11-16T01:44:00.000Z",
+   "articles90": 17,
+   "recent20": 1,
+   "press": 14,
+   "firstArticleAt": "2026-11-16T01:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -132,10 +132,10 @@
      "link": "https://n.news.naver.com/mnews/article/030/0003485993?sid=105"
     },
     {
-     "title": "우주청, 민간 위성기업 15곳에 맞춤형 기술교육…내년 대학까지 확대",
-     "press": "view.asiae.co.kr",
+     "title": "우주청, 민간 위성기업 현장 맞춤형 교육…내년엔 대학까지 확대",
+     "press": "newsis.com",
      "publishedAt": "2026-11-16T03:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005843148?sid=105"
+     "link": "https://n.news.naver.com/mnews/article/003/0014324424?sid=103"
     }
    ]
   },
@@ -144,10 +144,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-16T01:47:00.000Z",
+   "articles90": 12,
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-16T01:53:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -177,10 +177,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-16T01:46:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-16T02:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -203,43 +203,11 @@
      "link": "https://n.news.naver.com/mnews/article/018/0006410377?sid=101"
     }
    ]
-  },
-  {
-   "keyword": "10월 ICT 수출",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-16T01:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "ICT 수출 두 달째 700억달러대…반도체 259%↑",
-     "press": "mbnmoney.mbn.co.kr",
-     "publishedAt": "2026-11-16T02:14:00.000Z",
-     "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005962566"
-    },
-    {
-     "title": "10월 정보통신 수출 703억 달러…전년 대비 202% 급증, 역대 최대 성장률",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-16T02:00:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4118701"
-    },
-    {
-     "title": "10월 ICT 수출 703.5억 달러로 전년비 202.0% 증가… 반도체·서버용 SSD ...",
-     "press": "mtnews.net",
-     "publishedAt": "2026-11-16T01:46:00.000Z",
-     "link": "https://www.mtnews.net/news/articleView.html?idxno=26545"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 589,
+  "flagged": 590,
   "matched": 313,
   "avgLeadMin": 745,
   "recent": [
