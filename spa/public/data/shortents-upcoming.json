@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T23:36:17.663Z",
+ "builtAt": "2026-11-16T23:46:20.707Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,21 +8,59 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 18,
  "candidates": [
+  {
+   "keyword": "김정은 APEC 푸틴 회담",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 38,
+   "recent20": 3,
+   "press": 32,
+   "firstArticleAt": "2026-11-16T22:17:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "APEC 계기 북미 회동 가능성...트럼프 \"중국서 김정은 만날 수도\"",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-16T23:42:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=564340"
+    },
+    {
+     "title": "트럼프 \"中서 김정은 만날 수도\"…북미회담 성사될까",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-16T23:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926866?sid=104"
+    },
+    {
+     "title": "김정은까지 中 APEC 집결하나…크렘린궁 \"푸틴과 회담 가능\"",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-16T23:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003155912?sid=104"
+    }
+   ]
+  },
   {
    "keyword": "러 군용기 KADIZ 진입",
    "sources": [
     "signal.bz",
-    "nate"
+    "daum"
    ],
-   "articles90": 36,
-   "recent20": 4,
-   "press": 34,
-   "firstArticleAt": "2026-11-16T22:09:00.000Z",
+   "articles90": 30,
+   "recent20": 3,
+   "press": 29,
+   "firstArticleAt": "2026-11-16T22:17:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "러 군용기, 석 달 만에 또 동해 KADIZ 진입… 軍 전투기 대응",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-16T23:41:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261117000154"
+    },
     {
      "title": "러 군용기 여러 대 KADIZ 진입…공군 전투기 출격 대응",
      "press": "chosun.com",
@@ -34,44 +72,38 @@
      "press": "mbn.mk.co.kr",
      "publishedAt": "2026-11-16T23:27:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/057/0001978511?sid=100"
-    },
-    {
-     "title": "러 군용기 여러 대, 동해 KADIZ 진입 … 공군 전투기 출격대응",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-16T23:26:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/17/2026111750022.html"
     }
    ]
   },
   {
-   "keyword": "김정은 APEC 푸틴 회담",
+   "keyword": "제니 그래미 후보 2개 부문",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 37,
-   "recent20": 6,
-   "press": 31,
-   "firstArticleAt": "2026-11-16T22:07:00.000Z",
+   "articles90": 15,
+   "recent20": 2,
+   "press": 15,
+   "firstArticleAt": "2026-11-16T22:22:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "김정은까지 中 APEC 집결하나…크렘린궁 \"푸틴과 회담 가능\"",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-16T23:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003155912?sid=104"
+     "title": "'그래미 2개 부문 후보' 제니, 'GTA6' 공식 앨범 참여…韓 가수 유일",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-16T23:42:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014326097"
     },
     {
-     "title": "[선전 APEC] 각국 정상들 속속 집결 18일 개막, 미중러 첫 3자 정상회담...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-16T23:25:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261117000064"
+     "title": "블랙핑크 제니, '드라큘라'로 미국 그래미 본상 '올해의 레코드' 후보 지...",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-16T23:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001978512?sid=103"
     },
     {
-     "title": "\"김정은, 중국에서 만날 수도\"...트럼프, 또 허풍? [뉴스UP]",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-16T23:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002433811?sid=104"
+     "title": "블랙핑크 제니, 그래미 본상 포함 2개 부문 후보…아이브·키키는 '아시...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-16T23:26:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000784779"
     }
    ]
   },
@@ -80,10 +112,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 20,
-   "recent20": 2,
-   "press": 16,
-   "firstArticleAt": "2026-11-16T22:10:00.000Z",
+   "articles90": 18,
+   "recent20": 1,
+   "press": 14,
+   "firstArticleAt": "2026-11-16T22:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -108,34 +140,34 @@
    ]
   },
   {
-   "keyword": "제니, 그래미 본상 후보!",
+   "keyword": "레이미 PGA 오스틴 우승",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 2,
-   "press": 15,
-   "firstArticleAt": "2026-11-16T22:12:00.000Z",
+   "articles90": 13,
+   "recent20": 3,
+   "press": 13,
+   "firstArticleAt": "2026-11-16T22:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "블랙핑크 제니, '드라큘라'로 미국 그래미 본상 '올해의 레코드' 후보 지...",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-16T23:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001978512?sid=103"
+     "title": "레이미, PGA 오스틴 챔피언십 우승…4년 8개월 만에 투어 통산 2승",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-16T23:42:00.000Z",
+     "link": "https://www.ajunews.com/view/20261117084043985"
     },
     {
-     "title": "블랙핑크 제니, 그래미 본상 포함 2개 부문 후보…아이브·키키는 '아시...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-16T23:26:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000784779"
-    },
-    {
-     "title": "제니, 그래미 '올해의 레코드' 등 2개 부문 후보…아이브·키키도 노미네...",
+     "title": "[PGA] 레이미, 오스틴 챔피언십서 두 번째 우승 확정…2028년까지 투어 ...",
      "press": "newspim.com",
-     "publishedAt": "2026-11-16T23:16:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261117000070"
+     "publishedAt": "2026-11-16T23:35:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261117000107"
+    },
+    {
+     "title": "채드 레이미, PGA 오스틴 챔피언십 우승…4년 8개월 만에 통산 2승",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-16T23:35:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/421/0009292739"
     }
    ]
   },
@@ -144,10 +176,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-16T22:12:00.000Z",
+   "articles90": 11,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-16T22:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -172,47 +204,14 @@
    ]
   },
   {
-   "keyword": "레이미 PGA 오스틴 우승",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 12,
-   "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-16T22:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "채드 레이미, 오스틴 챔피언십 제패…135경기 만에 PGA 투어 통산 2승째",
-     "press": "dailysportshankook.co.kr",
-     "publishedAt": "2026-11-16T23:14:00.000Z",
-     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435592"
-    },
-    {
-     "title": "'20언더파' 레이미, PGA투어 오스틴 챔피언십 제패",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-16T23:08:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2019349"
-    },
-    {
-     "title": "폭우 순연 변수 뚫고 135경기 만에 정상 복귀…레이미, 오스틴 챔피언십...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-16T23:00:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/241/0003542046"
-    }
-   ]
-  },
-  {
    "keyword": "체이스 은행 서비스 장애",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
+   "articles90": 9,
    "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-16T22:15:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-16T22:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -237,41 +236,73 @@
    ]
   },
   {
-   "keyword": "우리들의 발라드2",
+   "keyword": "최혜진 준우승 세계랭킹 13위",
    "sources": [
     "nate"
    ],
-   "articles90": 7,
+   "articles90": 8,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-16T22:08:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-16T22:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "임바다·허채민이 완성한 역대급 하모니…'우리들의 발라드2' 분당 최고...",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-16T23:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000052922"
+     "title": "'디 안니카 준우승' 최혜진, 세계랭킹 13위…4계단 상승",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-16T23:25:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/421/0009292720"
     },
     {
-     "title": "‘우리들의 발라드 2’ 임바다·허채민 1위",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-16T23:10:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611170021"
+     "title": "우승 갈증에도 꾸준한 상승세… 최혜진, 세계랭킹 13위 도약",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-16T23:16:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/396/0000761128"
     },
     {
-     "title": "'우리들의 발라드2' 임바다·허채민 열창에 차태현 오열 \"故김주혁 떠올...",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-16T23:06:00.000Z",
-     "link": "http://www.joynews24.com/view/2026905"
+     "title": "통산 10회 준우승 최혜진, 세계랭킹 17위→13위",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-16T23:15:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/277/0005843441"
+    }
+   ]
+  },
+  {
+   "keyword": "나의 유죄인간",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-16T23:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'나의 유죄인간' 임시완·설인아, 화해의 키스에 시청률 5.3%...로맨스 급...",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-16T23:30:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=782350"
+    },
+    {
+     "title": "임시완·설인아, 파혼 후 사랑의 도피… \"좋아한다\" ('나의 유죄인간')",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-16T23:27:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000491027"
+    },
+    {
+     "title": "'나의 유죄인간' 설인아, 파혼 선언 임시완과 입맞춤 엔딩...시청률 5.3%...",
+     "press": "ize.co.kr",
+     "publishedAt": "2026-11-16T23:26:00.000Z",
+     "link": "https://m.entertain.naver.com/article/465/0000021046"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 783,
+  "flagged": 785,
   "matched": 446,
   "avgLeadMin": 888,
   "recent": [
