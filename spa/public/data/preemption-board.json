@@ -17156,7 +17156,12 @@
    "effectiveVolume": 2250,
    "peakConfidence": "",
    "preemptRank": 2,
-   "carried": true
+   "carried": true,
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-11-16T04:39:39.126Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
+   }
   },
   {
    "serpSections": [
@@ -36616,7 +36621,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-15T02:08:59.477Z",
+    "checkedAt": "2026-11-16T04:39:20.240Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -49676,7 +49681,12 @@
    "peakConfidence": "2년 반복 확인",
    "effectiveVolume": 560,
    "preemptRank": 2,
-   "carried": true
+   "carried": true,
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-11-16T04:39:30.125Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
+   }
   },
   {
    "serpSections": [
@@ -50616,7 +50626,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-10-27T01:36:04.041Z",
+    "checkedAt": "2026-11-16T04:39:24.742Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -52825,7 +52835,12 @@
    "peakConfidence": "작년엔 다른 달",
    "effectiveVolume": 520,
    "preemptRank": 2,
-   "carried": true
+   "carried": true,
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-11-16T04:39:31.049Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
+   }
   },
   {
    "serpSections": [
@@ -54521,7 +54536,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-10-27T01:36:08.133Z",
+    "checkedAt": "2026-11-16T04:39:28.337Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -102958,7 +102973,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-15T02:09:00.373Z",
+    "checkedAt": "2026-11-16T04:39:21.142Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -105876,7 +105891,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-10-27T01:36:00.847Z",
+    "checkedAt": "2026-11-16T04:39:22.034Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -112073,5 +112088,5 @@
    ]
   }
  ],
- "revalidatedAt": "2026-11-15T02:09:11.174Z"
+ "revalidatedAt": "2026-11-16T04:39:39.126Z"
 }
