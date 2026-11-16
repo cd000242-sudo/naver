@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T04:52:00.843Z",
+ "builtAt": "2026-11-16T05:02:04.339Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,116 +11,25 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "수능 AI 부정행위 대책 필요",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 40,
-   "recent20": 13,
-   "press": 33,
-   "firstArticleAt": "2026-11-16T03:29:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "수능 연기 선 그은 교육부…최교진 “AI 부정행위 추가 대책 발표 예정...",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-16T04:50:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611160116"
-    },
-    {
-     "title": "교육부 “수능일 ‘통신 차단’, 과기부와 협의 중”",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-16T04:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001205072?sid=102"
-    },
-    {
-     "title": "수능 결과 믿을 수 있을까…딱 사흘 남은 수능 ‘부정행위’ 묘책이 없...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-16T04:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002724061?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "한덕수 내란 선고",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 29,
-   "recent20": 10,
-   "press": 22,
-   "firstArticleAt": "2026-11-16T03:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "법원행정처장, 한덕수 선고기일 지정에 “판결문 작성 어느정도 완성된...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-16T04:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003482906?sid=102"
-    },
-    {
-     "title": "내란 혐의 한덕수 상고심 19일 결론…구속 만료 하루 전 선고",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-16T04:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003059354?sid=100"
-    },
-    {
-     "title": "'내란 혐의' 한덕수 19일 선고…대법 \"구속 만기·관련 사건 등 고려\"(종...",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-16T04:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000552286?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "한화",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 18,
-   "recent20": 5,
-   "press": 16,
-   "firstArticleAt": "2026-11-16T03:44:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이부환 한화에어로 대표, 주한 인도대사와 회동…K9 이어 우주까지 전방...",
-     "press": "theguru.co.kr",
-     "publishedAt": "2026-11-16T04:48:00.000Z",
-     "link": "https://www.theguru.co.kr/news/article.html?no=109782"
-    },
-    {
-     "title": "한화손보, LH 보험 담합 대법 무죄 확정 6%대 강세[핫종목]",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-16T04:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009291439?sid=101"
-    },
-    {
-     "title": "한화투자증권, 연금상담센터 신설 이벤트",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-16T04:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014324697?sid=101"
-    }
-   ]
-  },
-  {
    "keyword": "발언하는 김민석 대표",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 25,
-   "recent20": 9,
-   "press": 14,
-   "firstArticleAt": "2026-11-16T03:24:00.000Z",
+   "articles90": 24,
+   "recent20": 4,
+   "press": 13,
+   "firstArticleAt": "2026-11-16T03:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“김민석, 정말 통합 위해 애썼나” 한민수 공개저격…최민희는 90도 사...",
+     "title": "최민희, '녹취록 파문' 거듭 사과…김민석 \"당헌·당규 따라 조치\"",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-16T04:56:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=172518"
+    },
+    {
+     "title": "\"김민석, 정말 통합 위해 애썼나\" 한민수 공개저격…최민희는 90도 사과",
      "press": "hankyung.com",
      "publishedAt": "2026-11-16T04:50:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/015/0005354236?sid=100"
@@ -130,91 +39,188 @@
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-16T04:50:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/055/0001403336?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "행정기관 이메일 해킹",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 13,
+   "recent20": 2,
+   "press": 13,
+   "firstArticleAt": "2026-11-16T04:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "행정기관 이메일 계정 300여 개 해킹…정부, 합동점검 나서",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-16T05:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004210174?sid=103"
     },
     {
-     "title": "최민희 \"이재명 대통령에게 누 끼쳐 깊이 사과\"···김민석 대표는 윤리...",
-     "press": "dgmbc.com",
+     "title": "행정기관 이메일 300여 개 계정에 비정상 접속…정부, 합동점검",
+     "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-16T04:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/657/0000057514?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/055/0001403332?sid=102"
+    },
+    {
+     "title": "행정기관 업무용 이메일 해킹…300여 개 계정 접속 개인정보 유출",
+     "press": "public25.com",
+     "publishedAt": "2026-11-16T04:42:00.000Z",
+     "link": "https://www.public25.com/news/articleView.html?idxno=58548"
     }
    ]
   },
   {
    "keyword": "주지훈, 독자 회사 설립",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 10,
-   "recent20": 0,
+   "recent20": 2,
    "press": 10,
-   "firstArticleAt": "2026-11-16T03:26:00.000Z",
+   "firstArticleAt": "2026-11-16T03:46:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "주지훈, 블리츠웨이와 전속계약 종료..“독자 회사 설립 준비”",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-16T04:58:00.000Z",
+     "link": "http://www.breaknews.com/1251209"
+    },
+    {
+     "title": "주지훈, 블리츠웨이와 동행 마치고 새 출발…독립 회사 세운다",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-16T04:55:00.000Z",
+     "link": "https://m.entertain.naver.com/article/396/0000761052"
+    },
     {
      "title": "\"48억이 16억으로\"…16년 인연 끝내는 주지훈 결국 회사 떠난다",
      "press": "hankyung.com",
      "publishedAt": "2026-11-16T04:22:00.000Z",
      "link": "https://m.entertain.naver.com/article/015/0005354225"
-    },
-    {
-     "title": "주지훈, 블리츠웨이엔터와 16년 동행 마무리…독자 회사 설립 준비",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-16T04:09:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001305026"
-    },
-    {
-     "title": "주지훈, 독자 회사 설립…블리츠웨이 떠난다",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-16T04:05:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000052866"
     }
    ]
   },
   {
-   "keyword": "미중러 정상회담",
+   "keyword": "한일 정상회담 마닐라",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-16T03:29:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "중국도 시진핑·트럼프·푸틴 19일 선전 정상회담 공식 발표",
-     "press": "tbs.seoul.kr",
-     "publishedAt": "2026-11-16T04:38:00.000Z",
-     "link": "http://tbs.seoul.kr/news/newsView.do?typ_800=4&idx_800=3538775&seq_800=20531676"
-    },
-    {
-     "title": "미중러, 한국 없이 한반도 논의하나…'제2의 얄타' 우려",
-     "press": "goodnews1.com",
-     "publishedAt": "2026-11-16T04:36:00.000Z",
-     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466239"
-    },
-    {
-     "title": "중국, APEC 앞두고 ‘아태공동체’ 부각…미중러회담서 외교력 과시?",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-16T04:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012294570?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "화학물질 저감 제품 소개",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
+   "articles90": 9,
    "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-16T04:19:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-16T03:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "李대통령, 마닐라 도착…아세안·APEC 연쇄 정상외교 돌입",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-16T04:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004682639?sid=100"
+    },
+    {
+     "title": "日 \"다카이치, 17일 마닐라서 이 대통령과 양자 회담\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-16T04:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926605?sid=104"
+    },
+    {
+     "title": "日다카이치, 17일 필리핀서 李대통령과 정상회담",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-16T04:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005843170?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "독립유공자 유해봉환식",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 26,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-16T03:47:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[포토] 한성숙 총리, 독립유공자 유해봉환식서 건국훈장 헌정",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-16T04:52:00.000Z",
+     "link": "https://www.ajunews.com/view/20261116134456179"
+    },
+    {
+     "title": "[포토] 국외 안장 독립유공자 호시한·이괄 지사 유해봉환식",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-16T04:46:00.000Z",
+     "link": "https://www.ajunews.com/view/20261116134308170"
+    },
+    {
+     "title": "[포토] 독립유공자 호시한·이괄 지사 유해봉환식",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-16T04:44:00.000Z",
+     "link": "https://www.ajunews.com/view/20261116133903153"
+    }
+   ]
+  },
+  {
+   "keyword": "수능 AI 부정행위 대책 고심",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-16T03:55:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "현직 강사 \"경찰대 시험, AI 부정행위 강하게 의심\" 일파만파",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-16T04:54:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1174969"
+    },
+    {
+     "title": "교육부 \"수능 연기는 없다\"",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-16T04:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000142353?sid=102"
+    },
+    {
+     "title": "'수능 AI 부정행위 대책' 고심하는 최교진 교육부 장관",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-16T04:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004210155?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "화학물질저감 우수제품 전시",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-16T03:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[포토] 화학안전주간 맞아 '화학물질저감 우수제품' 한자리에",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-16T04:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003486042?sid=100"
+    },
     {
      "title": "[포토] 더 안전한 '화학물질저감 우수제품' 골라보세요!",
      "press": "etnews.com",
@@ -222,23 +228,17 @@
      "link": "https://n.news.naver.com/mnews/article/030/0003486043?sid=100"
     },
     {
-     "title": "[헤럴드포토]GCN녹색소비자연대, ‘화학물질저감 우수제품’ 전시 개최",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-16T04:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002724052?sid=102"
-    },
-    {
-     "title": "생활 속 화학물질 줄인다…화학물질저감 우수제품 98개 한자리에",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-16T04:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004682626?sid=102"
+     "title": "[포토] '화학물질저감 우수제품', 더 안전한 선택!",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-16T04:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003486041?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 615,
+  "flagged": 619,
   "matched": 332,
   "avgLeadMin": 834,
   "recent": [
