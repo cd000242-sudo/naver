@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T22:35:56.370Z",
+ "builtAt": "2026-11-16T23:16:07.539Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,179 +8,226 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 14,
  "candidates": [
   {
-   "keyword": "2026년 17일",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-16T21:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "【오늘의 법조】 2026년 11월 17일",
-     "press": "lawtimes.co.kr",
-     "publishedAt": "2026-11-16T22:30:00.000Z",
-     "link": "https://www.lawtimes.co.kr/news/articleView.html?idxno=229501"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 17일 화요일 띠별 운세… 말띠 '대길', 토끼·...",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-16T22:06:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082951"
-    },
-    {
-     "title": "[오늘의 주요일정·17일] 최교진 장관 학생자살 원인분석 전문가 간담회",
-     "press": "safetimes.co.kr",
-     "publishedAt": "2026-11-16T22:06:00.000Z",
-     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247540"
-    }
-   ]
-  },
-  {
-   "keyword": "수능 AI 커닝 우려",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-16T21:15:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[손병관의 뉴스프레소] 수능장 와이파이 꺼도 LTE·5G는 된다…구멍 난...",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-16T22:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002536065?sid=102"
-    },
-    {
-     "title": "'AI 커닝 패키지' 등장, SNS로 사용법 확산…정부 '유통' 차단 나서",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-16T22:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005354573?sid=100"
-    },
-    {
-     "title": "[천지일보 이슈종합] 수능 부정행위·AI 커닝·미중러 정상회담·서울 전...",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-16T22:02:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3449264"
-    }
-   ]
-  },
-  {
-   "keyword": "카타르전 앞두고 훈련하는 대표팀",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-16T21:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "임시 감독 체제에 소신 밝힌 황인범…“대표팀에 긍정적이지 않다”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-16T22:18:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/011/0004682928"
-    },
-    {
-     "title": "황인범 소신 발언 \"임시 감독 체제, 대표팀에 긍정적이지 않다\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-16T22:04:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/055/0001403495"
-    },
-    {
-     "title": "‘골든보이’ 이강인은 17일 카타르전에서도 오른쪽 측면 미드필더로? ...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-16T22:02:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/022/0004175727"
-    }
-   ]
-  },
-  {
-   "keyword": "김유정 100일 거짓말",
+   "keyword": "러 군용기 KADIZ 진입 전투기 출격",
    "sources": [
     "nate"
    ],
-   "articles90": 5,
+   "articles90": 21,
    "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-16T21:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김유정, 11월 드라마 배우 브랜드평판 1위…박진영·신민아 2·3위",
-     "press": "gpkorea.com",
-     "publishedAt": "2026-11-16T22:32:00.000Z",
-     "link": "https://www.gpkorea.com/news/articleView.html?idxno=148679"
-    },
-    {
-     "title": "1위 김유정, 2위 박진영, 3위 신민아",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-16T22:21:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003487975"
-    },
-    {
-     "title": "김유정·박진영·신민아...'100일의 거짓말'·'재혼 황후' 드라마 배우 ...",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-16T22:04:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=782297"
-    }
-   ]
-  },
-  {
-   "keyword": "아리바이오",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-16T21:36:00.000Z",
+   "press": 21,
+   "firstArticleAt": "2026-11-16T22:09:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "아리바이오 치매약 'AR1001' 3상 단독투여군서 유의성 확보…전체군선 ...",
-     "press": "sentv.co.kr",
-     "publishedAt": "2026-11-16T22:28:00.000Z",
-     "link": "https://www.sentv.co.kr/article/view/sentv202611170009"
+     "title": "[속보]\"러 군용기, 17일 새벽 카디즈 진입 후 이탈\"...軍 전투기 대응",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-16T23:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000121531?sid=102"
     },
     {
-     "title": "[속보]아리바이오, '먹는 치매약' 임상3상서 단독투여군 1차지표 충족",
+     "title": "러시아 군용기 여러 대 동해 KADIZ 진입…공군 전투기 출격 대응",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-16T23:02:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=243344"
+    },
+    {
+     "title": "미·중·러 정상회담·한일 회담 앞두고…러 군용기, 석 달 만에 또 KADI...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-16T22:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005605241?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "날씨",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 20,
+   "recent20": 6,
+   "press": 16,
+   "firstArticleAt": "2026-11-16T21:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오늘날씨] 아침엔 다소 '포근'⋯오후부터는 전국적으로 비 쏟아진다",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-16T23:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001075587?sid=103"
+    },
+    {
+     "title": "[날씨] 전국 온화하지만 오후부터 비…수능일 기온 '뚝'",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-16T23:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926862?sid=103"
+    },
+    {
+     "title": "[출근길인터뷰] 쌀쌀해진 날씨…매트 한 장으로 집에서 운동",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-16T23:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926861?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "제니, 그래미 올해의 레코드 후보",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 15,
+   "recent20": 4,
+   "press": 15,
+   "firstArticleAt": "2026-11-16T21:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "제니, '드라큘라'로 그래미 어워즈 2개 부문 후보",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-16T23:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/055/0001403513"
+    },
+    {
+     "title": "블랙핑크 제니, 美 그래미 '올해의 레코드' 등 2개 부문 후보",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-16T23:06:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261117010006249"
+    },
+    {
+     "title": "[키워드 NOW] 그래미상 후보",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-16T23:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000651478?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "레이미 PGA 오스틴",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 13,
+   "recent20": 3,
+   "press": 13,
+   "firstArticleAt": "2026-11-16T22:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "채드 레이미, 오스틴 챔피언십 제패…135경기 만에 PGA 투어 통산 2승째",
+     "press": "dailysportshankook.co.kr",
+     "publishedAt": "2026-11-16T23:14:00.000Z",
+     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435592"
+    },
+    {
+     "title": "'20언더파' 레이미, PGA투어 오스틴 챔피언십 제패",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-16T23:08:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2019349"
+    },
+    {
+     "title": "폭우 순연 변수 뚫고 135경기 만에 정상 복귀…레이미, 오스틴 챔피언십...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-16T23:00:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/241/0003542046"
+    }
+   ]
+  },
+  {
+   "keyword": "로버트 패틴슨 007 발탁",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-16T22:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "로버트 패틴슨, 제임스 본드 된다…‘007’시리즈 발탁",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-16T23:07:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001150177"
+    },
+    {
+     "title": "봉준호·놀란의 로버트 패틴슨, 드니 빌뇌브의 '제임스 본드' 된다",
      "press": "mt.co.kr",
-     "publishedAt": "2026-11-16T22:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005442053?sid=101"
+     "publishedAt": "2026-11-16T23:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005442064?sid=104"
     },
     {
-     "title": "아리바이오 먹는 치매약, 임상 3상 1차 목표 달성…전체 환자군선 효과...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-16T21:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001205240?sid=101"
+     "title": "로버트 패틴슨, 차기 제임스 본드 낙점…역대 7번째 '007'",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-16T22:56:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014326054"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황 복귀 논의 없어",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-16T21:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프 “젠슨황 불륜녀 中스파이 아닐 수도…아무도 증명 못해”",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-16T22:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001885582?sid=104"
+    },
+    {
+     "title": "방중 앞둔 트럼프 “앨리스 황, 스파이 증거 없어···중국 자극 원치 ...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-16T22:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003483098?sid=104"
+    },
+    {
+     "title": "트럼프 “젠슨 황 복귀 나쁜 생각 아냐”…앨리스 황 스파이 의혹에는 ...",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-16T22:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000132371?sid=104"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 768,
-  "matched": 441,
-  "avgLeadMin": 893,
+  "flagged": 774,
+  "matched": 444,
+  "avgLeadMin": 891,
   "recent": [
+   {
+    "keyword": "앨리스 황 퇴사",
+    "hitKeyword": "트럼프 앨리스 황 두둔",
+    "hitAt": "2026-11-17T08:00:00+09:00",
+    "leadMin": 1406
+   },
+   {
+    "keyword": "미국 AI반도체 중국 차단",
+    "hitKeyword": "미국 중국 AI 규제",
+    "hitAt": "2026-11-17T08:00:00+09:00",
+    "leadMin": 54
+   },
+   {
+    "keyword": "수능 AI 커닝 우려",
+    "hitKeyword": "AI 커닝 적발 한계",
+    "hitAt": "2026-11-17T08:00:00+09:00",
+    "leadMin": 24
+   },
    {
     "keyword": "앨리스 황",
     "hitKeyword": "앨리스황 스파이 의혹",
@@ -222,24 +269,6 @@
     "hitKeyword": "수능 AI 부정행위 확산",
     "hitAt": "2026-11-17T07:00:00+09:00",
     "leadMin": 275
-   },
-   {
-    "keyword": "트럼프, 김정은 만날 수도",
-    "hitKeyword": "트럼프 김정은 중국 회담",
-    "hitAt": "2026-11-17T07:00:00+09:00",
-    "leadMin": 105
-   },
-   {
-    "keyword": "트럼프 중국서 김정은 만날 수도",
-    "hitKeyword": "트럼프 김정은 중국 회담",
-    "hitAt": "2026-11-17T07:00:00+09:00",
-    "leadMin": 85
-   },
-   {
-    "keyword": "트럼프 김정은 만날 가능성",
-    "hitKeyword": "트럼프 김정은 중국 회담",
-    "hitAt": "2026-11-17T07:00:00+09:00",
-    "leadMin": 55
    }
   ]
  }
