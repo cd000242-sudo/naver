@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T10:30:39.350Z",
+ "builtAt": "2026-11-16T10:40:42.975Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,207 +8,153 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 19,
+ "measured": 10,
  "candidates": [
   {
-   "keyword": "3분기 영업적자",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 26,
-   "recent20": 1,
-   "press": 23,
-   "firstArticleAt": "2026-11-16T09:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "다올투자증권, 3분기 영업익 53억…53.8% 감소",
-     "press": "koreareport.co.kr",
-     "publishedAt": "2026-11-16T10:14:00.000Z",
-     "link": "https://www.koreareport.co.kr/news/articleView.html?idxno=54793"
-    },
-    {
-     "title": "삼립 3분기 영업이익 19억3천만원 78.9%↓…식품사업 부진",
-     "press": "4th.kr",
-     "publishedAt": "2026-11-16T10:10:00.000Z",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2121995"
-    },
-    {
-     "title": "신풍제약, 3분기 매출 18% 급감…영업이익 적자전환",
-     "press": "dailypharm.com",
-     "publishedAt": "2026-11-16T10:00:00.000Z",
-     "link": "https://dailypharm.com/user/news/344651?REFERER=NP"
-    }
-   ]
-  },
-  {
-   "keyword": "민희진, 뉴진스 계약 해지 부인",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-16T09:01:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "민희진 전 어도어 대표, 업무상 배임 혐의 공소청 송치…‘뉴진스 계약...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-16T10:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004175601?sid=102"
-    },
-    {
-     "title": "[공식] 민희진, 업무상 배임 송치에 반발…“피의자 통보도 전에 언론 ...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-16T09:44:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001281286"
-    },
-    {
-     "title": "민희진 측, 배임 혐의 송치에 \"뉴진스 계약 해지 유도한 바 없다\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-16T09:35:00.000Z",
-     "link": "https://m.entertain.naver.com/article/469/0000965930"
-    }
-   ]
-  },
-  {
-   "keyword": "오세훈, 한동훈 조문",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-16T09:15:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한동훈 빙부상에 친한계 집결…오세훈·김문수 등도 조문",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-16T10:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014325771?sid=100"
-    },
-    {
-     "title": "한동훈 빙부상 조문 간 오세훈",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-16T10:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000367674?sid=115"
-    },
-    {
-     "title": "한동훈 빙부상에 친한계 집결…오세훈·김문수 등 조문 행렬",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-16T09:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009292350?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "박지윤",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-16T09:27:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "최동석 상간 소송 '일부 승소'…박지윤은 공구 삼매경 [MD이슈]",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-16T10:24:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004125572"
-    },
-    {
-     "title": "박지윤, 최동석 2심 일부 승소에도..지인 만나고 공동구매 홍보ing",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-16T09:50:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003487874"
-    },
-    {
-     "title": "남사친 이슈 박지윤, 친구들과 웃고 즐긴 밤…최동석 ‘상간 소송 일부...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-16T09:36:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001188024"
-    }
-   ]
-  },
-  {
-   "keyword": "APBC 후 귀국하는 선수들",
+   "keyword": "AI 안경 부정행위 적발",
    "sources": [
     "nate"
    ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
+   "articles90": 65,
+   "recent20": 5,
+   "press": 41,
+   "firstArticleAt": "2026-11-16T09:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "AI 부정행위 진화하는데…시험 감독관은 ‘일당제 외부 인력’",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-16T10:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002832490?sid=102"
+    },
+    {
+     "title": "거래소, 신입 채용시험서 스마트안경 부정행위 적발",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-16T10:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926746?sid=101"
+    },
+    {
+     "title": "최산, 수능 앞두고 ‘AI 부정행위’ 언급…“어른이 애들 힘들게 하지 ...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-16T10:31:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001281297"
+    }
+   ]
+  },
+  {
+   "keyword": "3분기 적자 전환",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 45,
+   "recent20": 2,
+   "press": 34,
+   "firstArticleAt": "2026-11-16T09:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "클로봇, 3분기 영업 손실 21억원⋯전년 동기 대비 적자 전환",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-16T10:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001075549?sid=101"
+    },
+    {
+     "title": "상반기 잘나가던 초대형 IB, 3분기 급제동…미래·KB 적자 전환, NH·삼성...",
+     "press": "greened.kr",
+     "publishedAt": "2026-11-16T10:38:00.000Z",
+     "link": "https://www.greened.kr/news/articleView.html?idxno=354754"
+    },
+    {
+     "title": "코인 거래 한파에 빗썸·두나무 나란히 적자 전환…매출 60%대 급감",
+     "press": "fntimes.com",
+     "publishedAt": "2026-11-16T10:12:00.000Z",
+     "link": "https://www.fntimes.com/html/view.php?ud=2026111619063891422a735e27af_18"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 한-아세안 정상회의",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 22,
+   "recent20": 5,
+   "press": 20,
    "firstArticleAt": "2026-11-16T09:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'APBC 준우승' 최원호 감독 \"한일전 패 죄송하다\"",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-16T10:20:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=883881"
+     "title": "李대통령 \"韓·아세안 AI 동행…핵심광물 공급망 협력 강화\"",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-16T10:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005354510?sid=100"
     },
     {
-     "title": "'APBC 대표팀 주장' 한동희 \"손목 부상으로 결승전 결장…아무것도 못 해...",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-16T09:26:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109938128723"
+     "title": "'다자외교 슈퍼위크' 첫날…이 대통령 \"아세안, 한반도 평화 파트너\"",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-16T10:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000520992?sid=100"
     },
     {
-     "title": "'3연속 APBC 준우승→한일전 13연패' 최원호 감독 귀국 후 사과 \"결과 죄...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-16T09:11:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/108/0003487864"
-    }
-   ]
-  },
-  {
-   "keyword": "김지수",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-16T09:30:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[단독] 김지수, 프라하 여행사 대표로 첫 고정예능…유이와 '솔로라서2...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-16T10:21:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000639348"
-    },
-    {
-     "title": "[공식] 54세 김지수, 프라하 여행사 차리더니..2년만에 韓연예계 전격 복...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-16T09:42:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005641373"
-    },
-    {
-     "title": "[단독] \"김지수, 술 아예 안 마시더라\"…'솔로라서2' 대표 직접 밝힌 섭...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-16T09:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000784729"
+     "title": "李대통령, 한-아세안 정상회의…'문화 창조산업 이니셔티브' 제안",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-16T10:36:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5084084"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 695,
-  "matched": 367,
-  "avgLeadMin": 794,
+  "flagged": 697,
+  "matched": 374,
+  "avgLeadMin": 797,
   "recent": [
+   {
+    "keyword": "sk그룹",
+    "hitKeyword": "SK그룹 시총",
+    "hitAt": "2026-11-16T19:30:00+09:00",
+    "leadMin": 6168
+   },
+   {
+    "keyword": "한화",
+    "hitKeyword": "한화 롯데 미야자키 경기",
+    "hitAt": "2026-11-16T19:30:00+09:00",
+    "leadMin": 348
+   },
+   {
+    "keyword": "민희진 배임 혐의 송치",
+    "hitKeyword": "민희진 배임 혐의 송치",
+    "hitAt": "2026-11-16T19:30:00+09:00",
+    "leadMin": 126
+   },
+   {
+    "keyword": "APBC 마치고 귀국하는",
+    "hitKeyword": "APBC 준우승 한일전",
+    "hitAt": "2026-11-16T19:30:00+09:00",
+    "leadMin": 80
+   },
+   {
+    "keyword": "민희진, 뉴진스 배임 송치",
+    "hitKeyword": "민희진 배임 혐의 송치",
+    "hitAt": "2026-11-16T19:30:00+09:00",
+    "leadMin": 60
+   },
+   {
+    "keyword": "민희진, 뉴진스 계약 해지 부인",
+    "hitKeyword": "민희진 배임 혐의 송치",
+    "hitAt": "2026-11-16T19:30:00+09:00",
+    "leadMin": 20
+   },
+   {
+    "keyword": "APBC 후 귀국하는 선수들",
+    "hitKeyword": "APBC 준우승 한일전",
+    "hitAt": "2026-11-16T19:30:00+09:00",
+    "leadMin": 10
+   },
    {
     "keyword": "AI 커닝",
     "hitKeyword": "AI 커닝 해외 처벌",
@@ -226,48 +172,6 @@
     "hitKeyword": "AI 커닝 해외 처벌",
     "hitAt": "2026-11-16T18:30:00+09:00",
     "leadMin": 0
-   },
-   {
-    "keyword": "전이경 암 투병",
-    "hitKeyword": "전이경 암 투병 복귀",
-    "hitAt": "2026-11-16T18:00:00+09:00",
-    "leadMin": 16
-   },
-   {
-    "keyword": "체포",
-    "hitKeyword": "정자동 불법촬영 체포",
-    "hitAt": "2026-11-16T17:30:00+09:00",
-    "leadMin": 117
-   },
-   {
-    "keyword": "수능 AI 부정행위 대책 필요",
-    "hitKeyword": "수능 대책 촉구",
-    "hitAt": "2026-11-16T17:30:00+09:00",
-    "leadMin": 77
-   },
-   {
-    "keyword": "신유열 사장 승진",
-    "hitKeyword": "신유열 사장 승진",
-    "hitAt": "2026-11-16T17:30:00+09:00",
-    "leadMin": 26
-   },
-   {
-    "keyword": "주지훈, 독자 회사 설립",
-    "hitKeyword": "주지훈 블리츠웨이 결별",
-    "hitAt": "2026-11-16T17:00:00+09:00",
-    "leadMin": 198
-   },
-   {
-    "keyword": "주지훈 독자 회사 설립",
-    "hitKeyword": "주지훈 블리츠웨이 결별",
-    "hitAt": "2026-11-16T17:00:00+09:00",
-    "leadMin": 138
-   },
-   {
-    "keyword": "전이경 총감독",
-    "hitKeyword": "전이경 암 투병 고백",
-    "hitAt": "2026-11-16T17:00:00+09:00",
-    "leadMin": 107
    }
   ]
  }
