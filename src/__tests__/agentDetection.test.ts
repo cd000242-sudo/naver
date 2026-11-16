@@ -1,9 +1,15 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 const spawnMock = vi.hoisted(() => vi.fn());
+const recordAgentPlanMock = vi.hoisted(() => vi.fn());
 
 vi.mock('../agentCli/spawnHelper', () => ({
   spawnCollect: (...args: unknown[]) => spawnMock(...args),
+}));
+// detect.ts records the plan through a fire-and-forget dynamic import. Mock it so tests never write the
+// usage file, and so a test can wait for the callback (otherwise coverage of it depends on machine load).
+vi.mock('../agentCli/usageTracker', () => ({
+  recordAgentPlan: (...args: unknown[]) => recordAgentPlanMock(...args),
 }));
 
 import { clearAgentDetectionCache, detectAgent } from '../agentCli/detect';
@@ -181,6 +187,7 @@ describe('detectAgent Claude subscription authentication', () => {
       availabilityCheck: 'authentication',
     });
     expect(spawnMock).toHaveBeenCalledTimes(2);
+    await vi.waitFor(() => expect(recordAgentPlanMock).toHaveBeenCalledWith('claude', 'pro'));
   });
 
   it('fails closed when an older Claude CLI cannot report structured auth provenance', async () => {
