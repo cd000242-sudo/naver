@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T09:39:59.611Z",
+ "builtAt": "2026-11-16T09:50:05.018Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,53 +8,58 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 17,
+ "measured": 10,
  "candidates": [
   {
-   "keyword": "이재명 한-아세안 정상회의",
+   "keyword": "3분기 영업적자",
    "sources": [
     "nate"
    ],
-   "articles90": 65,
-   "recent20": 4,
-   "press": 54,
-   "firstArticleAt": "2026-11-16T08:11:00.000Z",
+   "articles90": 63,
+   "recent20": 7,
+   "press": 49,
+   "firstArticleAt": "2026-11-16T08:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이재명 대통령 \"한·아세안, AI 동행·문화 창조산업 이니셔티브 협력\"",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-16T09:32:00.000Z",
-     "link": "http://www.breaknews.com/1251421"
+     "title": "“3분기 연속 흑자” 상상인증권, 연간 실적 턴어라운드 ‘눈앞’",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-16T09:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/382/0001305116?sid=101"
     },
     {
-     "title": "이 대통령 \"한·아세안 교역 3000억달러 시대\"…AI·문화 협력 제안",
+     "title": "두나무, 매출 60.7% 줄었는데 영업비용 늘어...3분기 적자전환",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-16T09:48:00.000Z",
+     "link": "https://www.insight.co.kr/news/582295"
+    },
+    {
+     "title": "빗썸, 3분기 적자전환…영업손실 81억",
      "press": "newstomato.com",
-     "publishedAt": "2026-11-16T09:30:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1320658&inflow=N"
-    },
-    {
-     "title": "李대통령 “한-아세안 행동 파트너”…AI·문화산업 이니셔티브 제안",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-16T09:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001885457?sid=100"
+     "publishedAt": "2026-11-16T09:48:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1320679&inflow=N"
     }
    ]
   },
   {
    "keyword": "민희진, 뉴진스 배임 송치",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 49,
-   "recent20": 4,
-   "press": 40,
-   "firstArticleAt": "2026-11-16T08:12:00.000Z",
+   "articles90": 44,
+   "recent20": 5,
+   "press": 38,
+   "firstArticleAt": "2026-11-16T08:21:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "[공식] 민희진, 업무상 배임 송치에 반발…“피의자 통보도 전에 언론 ...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-16T09:44:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001281286"
+    },
     {
      "title": "민희진, 뉴진스 계약해지 관여 ‘업무상 배임’ 혐의로 송치",
      "press": "osen.co.kr",
@@ -66,90 +71,18 @@
      "press": "hankookilbo.com",
      "publishedAt": "2026-11-16T09:35:00.000Z",
      "link": "https://m.entertain.naver.com/article/469/0000965930"
-    },
-    {
-     "title": "민희진, 뉴진스 계약 해지 개입 의혹에 배임 혐의 송치",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-16T09:34:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=729662"
-    }
-   ]
-  },
-  {
-   "keyword": "3분기 영업손실 419억",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 28,
-   "recent20": 1,
-   "press": 28,
-   "firstArticleAt": "2026-11-16T08:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "트리니티항공, 3분기 영업손실 419억원…적자 축소",
-     "press": "dnews.co.kr",
-     "publishedAt": "2026-11-16T09:20:00.000Z",
-     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611161807598950330"
-    },
-    {
-     "title": "트리니티 3Q 영업손실 419억, 절반 '뚝'…노선 효율화·리브랜딩 효과",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-16T09:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009292332?sid=101"
-    },
-    {
-     "title": "트리니티항공, 외형 키우고 적자 줄였다…3분기 매출 5336억원",
-     "press": "econovill.com",
-     "publishedAt": "2026-11-16T09:08:00.000Z",
-     "link": "https://www.econovill.com/news/articleView.html?idxno=757452"
-    }
-   ]
-  },
-  {
-   "keyword": "이용철 인사청문요청안 재가",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 14,
-   "recent20": 0,
-   "press": 14,
-   "firstArticleAt": "2026-11-16T08:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령, 법무장관·국세청장 후보자 인사청문요청안 재가",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-16T09:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000651402?sid=100"
-    },
-    {
-     "title": "李, 이용철·안덕수 인사청문요청안 재가…국회 검증 본격화",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-16T08:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001075505?sid=100"
-    },
-    {
-     "title": "이용철·안덕수 국회 인사청문 절차 돌입…경력·도덕성 검증 본격화",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-16T08:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000121504?sid=100"
     }
    ]
   },
   {
    "keyword": "오세훈 시장, 한동훈 조문",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 17,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-16T08:11:00.000Z",
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-16T08:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -170,102 +103,6 @@
      "press": "joongang.co.kr",
      "publishedAt": "2026-11-16T09:15:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/025/0003565559?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "한일 정상회담 마닐라",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-16T08:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "미중러 '제2 얄타회담' 우려 속… 한일 정상 '안보 공조'",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-16T09:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005605087?sid=100"
-    },
-    {
-     "title": "이재명 대통령, 아세안·APEC 정상회의 참석…한일 정상회담도",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-16T09:00:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3753612"
-    },
-    {
-     "title": "이 대통령, 아세안·APEC 정상외교 돌입…17일 한일 정상회담",
-     "press": "iusm.co.kr",
-     "publishedAt": "2026-11-16T08:36:00.000Z",
-     "link": "https://www.iusm.co.kr/news/articleView.html?idxno=1070594"
-    }
-   ]
-  },
-  {
-   "keyword": "김유정 100일 거짓말",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-16T08:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "박진영 \"김유정, '100일의 거짓말' 어마어마한 힘…인물 선명해져\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-16T09:36:00.000Z",
-     "link": "https://m.entertain.naver.com/article/079/0004210381"
-    },
-    {
-     "title": "'100일의 거짓말' 김현주, 진정한 사랑꾼",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-16T09:22:00.000Z",
-     "link": "https://m.entertain.naver.com/article/437/0000520966"
-    },
-    {
-     "title": "박진영 “‘100일의 거짓말’ 결말 다 아는데 시청자로서 즐기는중”[화...",
-     "press": "heraldmuse.com",
-     "publishedAt": "2026-11-16T08:44:00.000Z",
-     "link": "https://m.entertain.naver.com/article/112/0003813464"
-    }
-   ]
-  },
-  {
-   "keyword": "행정기관 이메일 해킹",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-16T08:19:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "정부 행정 메일 300여 개 해킹...기밀 유출 가능성도",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-16T09:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002433629?sid=102"
-    },
-    {
-     "title": "[단독] NHN두레이 해킹 피해 ‘일파만파’…의료기기 기업 직원 정보도...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-16T08:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005764593?sid=102"
-    },
-    {
-     "title": "공무원 이메일도 뚫렸다",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-16T08:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005354430?sid=102"
     }
    ]
   },
@@ -302,41 +139,41 @@
    ]
   },
   {
-   "keyword": "테슬라 사이버캡 판매",
+   "keyword": "한일 정상회담 마닐라",
    "sources": [
     "signal.bz"
    ],
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-16T08:13:00.000Z",
+   "firstArticleAt": "2026-11-16T08:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "테슬라 로보택시 '사이버캡' 개인 판매 시작",
+     "title": "미중러 '제2 얄타회담' 우려 속… 한일 정상 '안보 공조'",
      "press": "fnnews.com",
-     "publishedAt": "2026-11-16T09:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005605081?sid=101"
+     "publishedAt": "2026-11-16T09:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005605087?sid=100"
     },
     {
-     "title": "\"이젠 핸들도 없다\" 테슬라 사이버캡 개인 판매..가격 4300만원",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-16T08:32:00.000Z",
-     "link": "http://www.breaknews.com/1251304"
+     "title": "이재명 대통령, 아세안·APEC 정상회의 참석…한일 정상회담도",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-16T09:00:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3753612"
     },
     {
-     "title": "[쇼츠] '사이버캡' 일반고객 판매…4천만원에 구독료 40만원",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-16T08:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016444826?sid=104"
+     "title": "이 대통령, 아세안·APEC 정상외교 돌입…17일 한일 정상회담",
+     "press": "iusm.co.kr",
+     "publishedAt": "2026-11-16T08:36:00.000Z",
+     "link": "https://www.iusm.co.kr/news/articleView.html?idxno=1070594"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 690,
+  "flagged": 691,
   "matched": 367,
   "avgLeadMin": 794,
   "recent": [
