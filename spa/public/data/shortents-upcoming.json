@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T07:23:13.915Z",
+ "builtAt": "2026-11-16T07:33:16.833Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,35 @@
  "measured": 14,
  "candidates": [
   {
-   "keyword": "수능 AI 부정행위 대책 필요",
+   "keyword": "수능 와이파이 차단",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 87,
-   "recent20": 25,
-   "press": 64,
-   "firstArticleAt": "2026-11-16T06:07:00.000Z",
+   "articles90": 74,
+   "recent20": 11,
+   "press": 65,
+   "firstArticleAt": "2026-11-16T06:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "회계사 시험까지 번진 AI 부정행위…금융당국도 대응책 마련",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-16T07:22:00.000Z",
-     "link": "https://www.ajunews.com/view/20261116142845383"
+     "title": "수능 D-3, AI 부정행위 우려⋯의대 최상위권 가려낼 수 있나?",
+     "press": "kormedi.com",
+     "publishedAt": "2026-11-16T07:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/296/0000107396?sid=102"
     },
     {
-     "title": "'AI 커닝' 못 막은 정부…국가자격시험 법적 책임 어디까지",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-16T07:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006410558?sid=102"
+     "title": "수능장 통신까지 끊나…AI 부정행위 차단 ‘난제’",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-16T07:30:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2648829"
     },
     {
-     "title": "수능 D-3… 1,312개 시험장 ‘AI 안경’ 부정행위, 정말 잡아낼 수 있나",
-     "press": "christiantoday.co.kr",
-     "publishedAt": "2026-11-16T07:20:00.000Z",
-     "link": "https://www.christiantoday.co.kr/news/378656"
+     "title": "[AI 커닝 파장] 이통사, 수능시험장 와이파이 차단할 듯⋯\"LTE·5G는 차단...",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-16T07:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001075448?sid=105"
     }
    ]
   },
@@ -47,30 +48,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 93,
-   "recent20": 26,
-   "press": 55,
-   "firstArticleAt": "2026-11-16T06:06:00.000Z",
+   "articles90": 92,
+   "recent20": 19,
+   "press": 52,
+   "firstArticleAt": "2026-11-16T06:16:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "여야, ‘AI 수능 커닝’ 우려 교육부 질타…“원스트라이크 아웃제 적용...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-16T07:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001205140?sid=100"
+     "title": "GSAT·SKCT…대기업 온라인 전형 'AI 커닝' 우려에 공정성 확보 '고심'",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-16T07:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014325395?sid=101"
     },
     {
-     "title": "'AI 커닝' 못 막은 정부…국가자격시험 법적 책임 어디까지",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-16T07:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006410558?sid=102"
+     "title": "[AI 커닝 파장] 이통사, 수능시험장 와이파이 차단할 듯⋯\"LTE·5G는 차단...",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-16T07:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001075448?sid=105"
     },
     {
-     "title": "한국거래소·금투협 시험서 'AI 안경' 부정행위 잇따라 적발",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-16T07:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003486226?sid=101"
+     "title": "경찰, \"AI로 시험 봤다\" 자백글 추적…장비 판매까지 수사 확대",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-16T07:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005354336?sid=102"
     }
    ]
   },
@@ -79,30 +80,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 15,
-   "recent20": 2,
-   "press": 15,
-   "firstArticleAt": "2026-11-16T05:58:00.000Z",
+   "articles90": 18,
+   "recent20": 4,
+   "press": 18,
+   "firstArticleAt": "2026-11-16T06:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "넷플릭스 출연 인플루언서, 무허가 유흥업소 운영하다 적발",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-16T07:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005354321?sid=104"
+     "title": "‘불량연애2’ 앗슨, 경찰 체포..무허가 유흥업소 운영 혐의 [Oh! 재팬]",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-16T07:31:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005641328"
     },
     {
-     "title": "무허가 유흥업소 운영 혐의 체포…넷플릭스 ‘불량연애2’ 출연 앗슨",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-16T07:04:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001281237"
+     "title": "'불량연애2' 최종 커플 앗슨, 무허가 접대업소 운영 혐의로 체포",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-16T07:24:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1193495"
     },
     {
-     "title": "아침까지 무허가 접대업소…'불량연애2' 출연 여성 체포",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-16T06:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001403370?sid=102"
+     "title": "日 '불량연애2' 출연자 체포…무허가 유흥업소 운영 혐의",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-16T07:22:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014325372"
     }
    ]
   },
@@ -111,13 +112,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 15,
-   "recent20": 0,
-   "press": 14,
-   "firstArticleAt": "2026-11-16T05:56:00.000Z",
+   "articles90": 13,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-16T06:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "신용한 현직 충북지사 첫 선거법 위반 송치…도청 안팎 \"올게 왔다\"",
+     "press": "cctoday.co.kr",
+     "publishedAt": "2026-11-16T07:30:00.000Z",
+     "link": "https://www.cctoday.co.kr/news/articleView.html?idxno=2240329"
+    },
     {
      "title": "신용한 지사, 선거법 위반 혐의 송치…사법 리스크 빠져",
      "press": "gukjenews.com",
@@ -129,44 +136,39 @@
      "press": "news.bbsi.co.kr",
      "publishedAt": "2026-11-16T06:52:00.000Z",
      "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4118870"
-    },
-    {
-     "title": "[종합] 신용한 충북지사 송치…출범 초기부터 사법 리스크",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-16T06:51:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261116001066"
     }
    ]
   },
   {
-   "keyword": "이재명 재판취소 저지 회의",
+   "keyword": "김유정 100일 거짓말",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 17,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-16T05:54:00.000Z",
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-16T06:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'李 재판취소 저지 특위' 주진우 \"이화영 탈옥부터 막아야\"",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-16T06:42:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2019110"
+     "title": "'100일의 거짓말' 코우리 유카, 김유정 덫에 걸려 피습 '충격'",
+     "press": "joynews24.com",
+     "publishedAt": "2026-11-16T07:26:00.000Z",
+     "link": "http://www.joynews24.com/view/2026748"
     },
     {
-     "title": "[포토] 이재명 대통령 재판취소 저지특위 전체회의",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-16T06:38:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/16/2026111650270.html"
+     "title": "'100일의 거짓말' 최종회, 김유정→박진영과 함께 본다…단체 관람 이벤...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-16T07:06:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16277850"
     },
     {
-     "title": "[포토] 발언하는 주진우 국민의힘 이재명 재판취소 저지특위 위원장",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-16T06:36:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/16/2026111650268.html"
+     "title": "'100일의 거짓말' 박진영이 멜로를 놓지 않는 이유... \"멜로의 끝을 볼 ...",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-16T07:00:00.000Z",
+     "link": "https://www.insight.co.kr/news/582244"
     }
    ]
   },
@@ -175,10 +177,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
+   "articles90": 7,
    "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-16T05:54:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-16T06:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -203,115 +205,23 @@
    ]
   },
   {
-   "keyword": "신세계",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-16T06:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "대전신세계, '신세계 홀리데이 마켓' 운영",
-     "press": "ccnnews.co.kr",
-     "publishedAt": "2026-11-16T07:08:00.000Z",
-     "link": "http://www.ccnnews.co.kr/news/articleView.html?idxno=417828"
-    },
-    {
-     "title": "\"지갑 닫은 외국인·환율 직격탄 신세계, 백화점 성장 모멘텀 '빨간불'\"",
-     "press": "newsquest.co.kr",
-     "publishedAt": "2026-11-16T06:48:00.000Z",
-     "link": "https://www.newsquest.co.kr/news/articleView.html?idxno=305130"
-    },
-    {
-     "title": "크리스마스 소품부터 타로까지…대전신세계 '홀리데이 마켓'",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-16T06:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004210275?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "김유정 100일 거짓말",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-16T06:17:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'100일의 거짓말' 최종회, 김유정→박진영과 함께 본다…단체 관람 이벤...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-16T07:06:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16277850"
-    },
-    {
-     "title": "'100일의 거짓말' 박진영이 멜로를 놓지 않는 이유... \"멜로의 끝을 볼 ...",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-16T07:00:00.000Z",
-     "link": "https://www.insight.co.kr/news/582244"
-    },
-    {
-     "title": "‘100일의 거짓말’ 관저 폭발에 다시 두 자릿수…12회 10.4% 전 채널 1위",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-16T06:46:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1175022"
-    }
-   ]
-  },
-  {
-   "keyword": "전이경 암 투병 고백",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-16T05:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘스피드퀸’ 전이경 암 투병 고백…“인생 최대 고비 넘기고 새 도전”",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-16T07:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005764451"
-    },
-    {
-     "title": "'쇼트트랙 전설' 전이경, 2년간 암 투병 고백...\"인생 최대 고비 넘겼다...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-16T06:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002081064"
-    },
-    {
-     "title": "전이경, 2년간 암 투병 고백…“몸 약해졌지만 다시 도전” (스피드퀸)",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-16T06:50:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001305068"
-    }
-   ]
-  },
-  {
    "keyword": "테슬라 사이버캡 판매",
    "sources": [
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-16T05:58:00.000Z",
+   "firstArticleAt": "2026-11-16T06:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "테슬라, 운전대 없는 '사이버캡' 개인 판매...운행 지역은 제한",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-16T07:24:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2019206"
+    },
     {
      "title": "테슬라, 자율주행 로보택시 '사이버캡' 일반 개인 판매 들어갔다",
      "press": "fnnews.com",
@@ -323,12 +233,6 @@
      "press": "newsfc.co.kr",
      "publishedAt": "2026-11-16T06:32:00.000Z",
      "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82508"
-    },
-    {
-     "title": "테슬라, 완전자율주행 '사이버캡' 주문 접수... 실제 운행까진 인증절차...",
-     "press": "lawtv.kr",
-     "publishedAt": "2026-11-16T05:58:00.000Z",
-     "link": "https://www.lawtv.kr/news/articleView.html?idxno=61426"
     }
    ]
   },
@@ -367,10 +271,40 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 663,
-  "matched": 347,
-  "avgLeadMin": 834,
+  "flagged": 664,
+  "matched": 352,
+  "avgLeadMin": 825,
   "recent": [
+   {
+    "keyword": "조정식 국회의장 공동위원장",
+    "hitKeyword": "조정식 수능 연기 주장",
+    "hitAt": "2026-11-16T16:30:00+09:00",
+    "leadMin": 289
+   },
+   {
+    "keyword": "조정식 국회의장 헌법개정위원장",
+    "hitKeyword": "조정식 수능 연기 주장",
+    "hitAt": "2026-11-16T16:30:00+09:00",
+    "leadMin": 259
+   },
+   {
+    "keyword": "조정식 공동위원장 발표",
+    "hitKeyword": "조정식 수능 연기 주장",
+    "hitAt": "2026-11-16T16:30:00+09:00",
+    "leadMin": 198
+   },
+   {
+    "keyword": "음주운전 고경표 소환 예정",
+    "hitKeyword": "고경표 음주운전",
+    "hitAt": "2026-11-16T16:30:00+09:00",
+    "leadMin": 27
+   },
+   {
+    "keyword": "최동석, 박지윤 지인 상간소송 일부 승소",
+    "hitKeyword": "최동석 상간 소송",
+    "hitAt": "2026-11-16T16:30:00+09:00",
+    "leadMin": 17
+   },
    {
     "keyword": "최예나 의혹에 스타일리스트",
     "hitKeyword": "최예나 의상 표절 의혹",
@@ -400,36 +334,6 @@
     "hitKeyword": "100일의 거짓말 12회",
     "hitAt": "2026-11-16T15:30:00+09:00",
     "leadMin": 17
-   },
-   {
-    "keyword": "JTBC 올림픽 중계권 해지",
-    "hitKeyword": "JTBC 올림픽 중계권 해지",
-    "hitAt": "2026-11-16T15:00:00+09:00",
-    "leadMin": 48
-   },
-   {
-    "keyword": "최예나 표절 스타일리스트",
-    "hitKeyword": "최예나 의상 표절 의혹",
-    "hitAt": "2026-11-16T15:00:00+09:00",
-    "leadMin": 18
-   },
-   {
-    "keyword": "ai 안경",
-    "hitKeyword": "AI 커닝 안경 시험장",
-    "hitAt": "2026-11-16T14:30:00+09:00",
-    "leadMin": 416
-   },
-   {
-    "keyword": "수능 AI 부정행위 대책 필요",
-    "hitKeyword": "수능 부정행위 경찰 수사",
-    "hitAt": "2026-11-16T14:30:00+09:00",
-    "leadMin": 48
-   },
-   {
-    "keyword": "수능 AI 부정행위 대책 고심",
-    "hitKeyword": "수능 부정행위 경찰 수사",
-    "hitAt": "2026-11-16T14:30:00+09:00",
-    "leadMin": 28
    }
   ]
  }
