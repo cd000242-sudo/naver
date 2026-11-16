@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T04:41:57.069Z",
+ "builtAt": "2026-11-16T04:52:00.843Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,70 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 18,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "수능 AI 부정행위 대책 필요",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 43,
-   "recent20": 15,
-   "press": 35,
-   "firstArticleAt": "2026-11-16T03:12:00.000Z",
+   "articles90": 40,
+   "recent20": 13,
+   "press": 33,
+   "firstArticleAt": "2026-11-16T03:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "수능 D-3…AI 부정행위 차단 '총력'…교육부 \"수능 연기, 없다\"",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-16T04:40:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261116010005970"
+     "title": "수능 연기 선 그은 교육부…최교진 “AI 부정행위 추가 대책 발표 예정...",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-16T04:50:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611160116"
     },
     {
-     "title": "\"난 수도권 의대 진학했다\"…AI 부정행위 고백 글에 수험가 술렁",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-16T04:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005604816?sid=102"
+     "title": "교육부 “수능일 ‘통신 차단’, 과기부와 협의 중”",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-16T04:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001205072?sid=102"
     },
     {
-     "title": "野, 'AI 커닝' 논란에 수능 연기 제안 ... \"수능 줄소송 이어질 수도\"",
-     "press": "queen.co.kr",
-     "publishedAt": "2026-11-16T04:36:00.000Z",
-     "link": "http://www.queen.co.kr/news/articleView.html?idxno=466374"
+     "title": "수능 결과 믿을 수 있을까…딱 사흘 남은 수능 ‘부정행위’ 묘책이 없...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-16T04:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002724061?sid=102"
     }
    ]
   },
   {
    "keyword": "한덕수 내란 선고",
    "sources": [
-    "signal.bz",
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 25,
-   "recent20": 3,
-   "press": 18,
-   "firstArticleAt": "2026-11-16T03:12:00.000Z",
+   "articles90": 29,
+   "recent20": 10,
+   "press": 22,
+   "firstArticleAt": "2026-11-16T03:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "대법, 19일 한덕수 내란 사건 선고 … 김건희 '3대 의혹'도 결론",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-16T04:40:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/16/2026111650201.html"
+     "title": "법원행정처장, 한덕수 선고기일 지정에 “판결문 작성 어느정도 완성된...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-16T04:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003482906?sid=102"
     },
     {
-     "title": "한덕수 파기환송 묻자…법원행정처장 \"법리 따라 판단\"",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-16T04:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000142356?sid=102"
+     "title": "내란 혐의 한덕수 상고심 19일 결론…구속 만료 하루 전 선고",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-16T04:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003059354?sid=100"
     },
     {
-     "title": "법원행정처장 \"한덕수·김건희 상고심, 대법관 전원 충분히 숙의…법리...",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-16T04:30:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000083140"
+     "title": "'내란 혐의' 한덕수 19일 선고…대법 \"구속 만기·관련 사건 등 고려\"(종...",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-16T04:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000552286?sid=102"
     }
    ]
   },
@@ -81,30 +80,30 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 16,
-   "recent20": 7,
-   "press": 15,
-   "firstArticleAt": "2026-11-16T03:16:00.000Z",
+   "articles90": 18,
+   "recent20": 5,
+   "press": 16,
+   "firstArticleAt": "2026-11-16T03:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김동선 한화비전, 45조원 AI 영상분석 시장 정조준",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-16T04:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/117/0004125458?sid=105"
+     "title": "이부환 한화에어로 대표, 주한 인도대사와 회동…K9 이어 우주까지 전방...",
+     "press": "theguru.co.kr",
+     "publishedAt": "2026-11-16T04:48:00.000Z",
+     "link": "https://www.theguru.co.kr/news/article.html?no=109782"
     },
     {
-     "title": "한화금융, 뉴욕서 글로벌 금융인재 육성…북미 대학생 750명 참여",
-     "press": "megaeconomy.co.kr",
-     "publishedAt": "2026-11-16T04:36:00.000Z",
-     "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065587222740812"
+     "title": "한화손보, LH 보험 담합 대법 무죄 확정 6%대 강세[핫종목]",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-16T04:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009291439?sid=101"
     },
     {
-     "title": "[카드] 한화투자증권, 연금상담센터 개설…고객 혜택 마련",
-     "press": "newsprime.co.kr",
-     "publishedAt": "2026-11-16T04:32:00.000Z",
-     "link": "http://www.newsprime.co.kr/news/article.html?no=755064"
+     "title": "한화투자증권, 연금상담센터 신설 이벤트",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-16T04:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014324697?sid=101"
     }
    ]
   },
@@ -113,30 +112,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 28,
-   "recent20": 6,
-   "press": 13,
-   "firstArticleAt": "2026-11-16T03:14:00.000Z",
+   "articles90": 25,
+   "recent20": 9,
+   "press": 14,
+   "firstArticleAt": "2026-11-16T03:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "고개숙인 최민희, 90도 사과했지만...친청계 \"김민석 징계청원도 처리하...",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-16T04:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005441649?sid=100"
+     "title": "“김민석, 정말 통합 위해 애썼나” 한민수 공개저격…최민희는 90도 사...",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-16T04:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005354236?sid=100"
     },
     {
-     "title": "한민수 최고위원 발언 듣는 김민석 대표",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-16T04:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014324682?sid=100"
+     "title": "김민석, 최민희 발언 논란에 \"정치 별개 윤리 문제 판단 이뤄질 것\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-16T04:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001403336?sid=100"
     },
     {
-     "title": "발언하는 김민석 더불어민주당 대표",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-16T04:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014324683?sid=100"
+     "title": "최민희 \"이재명 대통령에게 누 끼쳐 깊이 사과\"···김민석 대표는 윤리...",
+     "press": "dgmbc.com",
+     "publishedAt": "2026-11-16T04:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/657/0000057514?sid=100"
     }
    ]
   },
@@ -145,15 +144,15 @@
    "sources": [
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-16T03:13:00.000Z",
+   "articles90": 10,
+   "recent20": 0,
+   "press": 10,
+   "firstArticleAt": "2026-11-16T03:26:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "\"새 회사 차린다\"…'블리츠웨이 주주' 주지훈, 16년 인연 마침표",
+     "title": "\"48억이 16억으로\"…16년 인연 끝내는 주지훈 결국 회사 떠난다",
      "press": "hankyung.com",
      "publishedAt": "2026-11-16T04:22:00.000Z",
      "link": "https://m.entertain.naver.com/article/015/0005354225"
@@ -173,46 +172,14 @@
    ]
   },
   {
-   "keyword": "개헌",
-   "sources": [
-    "google"
-   ],
-   "articles90": 12,
-   "recent20": 4,
-   "press": 11,
-   "firstArticleAt": "2026-11-16T03:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"자다가 봉창 두드리는 소리\" 국힘, 국회의장 개헌 회견 맹비난",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-16T04:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005604818?sid=100"
-    },
-    {
-     "title": "개헌 관련 기자회견하는 조정식 국회의장",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-16T04:36:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3753178"
-    },
-    {
-     "title": "정점식, 조정식 개헌론에 \"이번 정부에서 개헌은 없다\"",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-16T04:36:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261116500230"
-    }
-   ]
-  },
-  {
    "keyword": "미중러 정상회담",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 3,
+   "articles90": 8,
+   "recent20": 2,
    "press": 8,
-   "firstArticleAt": "2026-11-16T03:20:00.000Z",
+   "firstArticleAt": "2026-11-16T03:29:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -237,49 +204,23 @@
    ]
   },
   {
-   "keyword": "화학물질저감 우수제품 전시",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-16T03:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[헤럴드포토]GCN녹색소비자연대, ‘화학물질저감 우수제품’ 전시 개최",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-16T04:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002724052?sid=102"
-    },
-    {
-     "title": "생활 속 화학물질 줄인다…화학물질저감 우수제품 98개 한자리에",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-16T04:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004682626?sid=102"
-    },
-    {
-     "title": "덜 유해하게, 더 안전하게…화학물질저감 우수제품 한눈에",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-16T04:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004682625?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "화학물질 저감 제품 소개",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-16T03:22:00.000Z",
+   "firstArticleAt": "2026-11-16T04:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[포토] 더 안전한 '화학물질저감 우수제품' 골라보세요!",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-16T04:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003486043?sid=100"
+    },
     {
      "title": "[헤럴드포토]GCN녹색소비자연대, ‘화학물질저감 우수제품’ 전시 개최",
      "press": "biz.heraldcorp.com",
@@ -291,12 +232,6 @@
      "press": "sedaily.com",
      "publishedAt": "2026-11-16T04:20:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/011/0004682626?sid=102"
-    },
-    {
-     "title": "덜 유해하게, 더 안전하게…화학물질저감 우수제품 한눈에",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-16T04:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004682625?sid=102"
     }
    ]
   }
