@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T12:42:26.741Z",
+ "builtAt": "2026-11-16T12:52:31.876Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,13 +11,77 @@
  "measured": 10,
  "candidates": [
   {
+   "keyword": "조정식 개헌 로드맵",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-16T11:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "세종시, 국회 개헌 논의 환영…행정수도 명문화 촉구",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-16T12:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000192603?sid=102"
+    },
+    {
+     "title": "조 의장, 개헌자문위 출범에 野 \"李 탈옥 도구\"",
+     "press": "ulsanpress.net",
+     "publishedAt": "2026-11-16T12:42:00.000Z",
+     "link": "https://www.ulsanpress.net/news/articleView.html?idxno=586924"
+    },
+    {
+     "title": "[사설] 정치권 주도의 개헌 논의가 공허한 이유",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-16T12:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001164526?sid=110"
+    }
+   ]
+  },
+  {
+   "keyword": "이지영 AI 부정행위 대책",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-16T11:31:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "스타강사도 나섰다…이지영 \"20년간 수능 강의 중 이런 위기는 처음\"",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-16T12:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003155867?sid=102"
+    },
+    {
+     "title": "'일타' 이지영, 수능 AI 부정행위 비상대책 강력 촉구…수험생 위한 묵...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-16T12:06:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001408529"
+    },
+    {
+     "title": "\"대책 없으면 수능 연기해야\"…스타 강사들 'AI 부정행위' 우려",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-16T11:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000132352?sid=102"
+    }
+   ]
+  },
+  {
    "keyword": "김건희",
    "sources": [
     "signal.bz",
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-16T11:48:00.000Z",
    "exclusive": false,
@@ -40,38 +104,6 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-16T11:48:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014325822?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "이지영 AI 부정행위 대책",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-16T11:31:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'일타' 이지영, 수능 AI 부정행위 비상대책 강력 촉구…수험생 위한 묵...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-16T12:06:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001408529"
-    },
-    {
-     "title": "\"대책 없으면 수능 연기해야\"…스타 강사들 'AI 부정행위' 우려",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-16T11:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000132352?sid=102"
-    },
-    {
-     "title": "\"20년 강의 중 이런 위기 처음\"..이지영 강사, AI 부정행위 대책 촉구",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-16T11:31:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003487907"
     }
    ]
   },
