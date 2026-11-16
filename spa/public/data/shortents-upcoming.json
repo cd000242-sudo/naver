@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T15:24:24.971Z",
+ "builtAt": "2026-11-16T15:34:32.639Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,49 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 9,
+ "measured": 10,
  "candidates": [
-  {
-   "keyword": "AI 안경 수능 논란",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 13,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-16T13:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "수능 'AI 컨닝' 비상… 감독관 부담, 수험생에 고스란히…",
-     "press": "gjdream.com",
-     "publishedAt": "2026-11-16T15:10:00.000Z",
-     "link": "http://www.gjdream.com/news/articleView.html?idxno=674385"
-    },
-    {
-     "title": "박지현 \"AI 안경 부정행위, 변형카메라 관리법 진작 만들었다면\"…국회...",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-16T15:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001040636?sid=100"
-    },
-    {
-     "title": "[사설]울산도 AI커닝 불안 확산…수능 공정성 지켜야",
-     "press": "ksilbo.co.kr",
-     "publishedAt": "2026-11-16T15:04:00.000Z",
-     "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1072679"
-    }
-   ]
-  },
   {
    "keyword": "삼척 화물선 표류 구조",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-16T13:57:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-16T14:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,12 +43,44 @@
    ]
   },
   {
+   "keyword": "발언하는 이재명 대통령",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-16T14:13:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이 대통령 \"한·아세안 'AI·문화산업 이니셔티브' 제안\"",
+     "press": "kado.net",
+     "publishedAt": "2026-11-16T15:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000211679?sid=100"
+    },
+    {
+     "title": "'아세안 순방' 이대통령, 오늘 한일 정상회담",
+     "press": "ksilbo.co.kr",
+     "publishedAt": "2026-11-16T15:04:00.000Z",
+     "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1072708"
+    },
+    {
+     "title": "李대통령, 아세안에 'AI 동행' 이니셔티브 제안…태국과 CEPA 속도(종합)",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-16T15:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003155871?sid=100"
+    }
+   ]
+  },
+  {
    "keyword": "행정기관 이메일 해킹",
    "sources": [
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-16T14:36:00.000Z",
    "exclusive": false,
@@ -103,38 +103,6 @@
      "press": "dailysecu.com",
      "publishedAt": "2026-11-16T14:36:00.000Z",
      "link": "https://www.dailysecu.com/news/articleView.html?idxno=209553"
-    }
-   ]
-  },
-  {
-   "keyword": "서울시립대 개인정보 유출",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-16T13:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "서울시립대 홈페이지 해킹으로 개인정보 유출...경찰에 수사 의뢰",
-     "press": "dailysecu.com",
-     "publishedAt": "2026-11-16T14:46:00.000Z",
-     "link": "https://www.dailysecu.com/news/articleView.html?idxno=209554"
-    },
-    {
-     "title": "서울시립대 \"15명 개인정보 유출\"…경찰에 수사 의뢰",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-16T14:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001403454?sid=102"
-    },
-    {
-     "title": "서울시립대서 15명 개인정보 유출…\"경찰에 수사 의뢰\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-16T13:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005441977?sid=102"
     }
    ]
   }
