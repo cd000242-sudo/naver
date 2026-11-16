@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T08:44:04.899Z",
+ "builtAt": "2026-11-16T08:54:08.550Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 18,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "3분기 매출 증가",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 89,
-   "recent20": 70,
-   "press": 59,
-   "firstArticleAt": "2026-11-16T08:18:00.000Z",
+   "articles90": 92,
+   "recent20": 64,
+   "press": 60,
+   "firstArticleAt": "2026-11-16T08:26:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "남양유업, 3분기 영업익 104% 증가…3개 분기 연속 이익 확대",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-16T08:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016444907?sid=101"
+     "title": "온코닉테라퓨틱스, 누적 매출 70% 성장…R&D 3.4배 늘리고도 흑자",
+     "press": "ziksir.com",
+     "publishedAt": "2026-11-16T08:52:00.000Z",
+     "link": "https://www.ziksir.com/news/articleView.html?idxno=153542"
     },
     {
-     "title": "와이즈넛, 3분기 누적 흑자전환…“AI 에이전트 매출 비중 절반 넘어”",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-16T08:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003486311?sid=105"
+     "title": "매출 10원 중 7원은 해외서 벌었다…오리온, 3분기 영업익 9.4%↑",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-16T08:52:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611160234"
     },
     {
-     "title": "JW중외제약, 3분기 매출 6%↑ 영업이익 11%↓…R&D 비용 부담",
-     "press": "dailypharm.com",
-     "publishedAt": "2026-11-16T08:42:00.000Z",
-     "link": "https://dailypharm.com/user/news/344648?REFERER=NP"
+     "title": "다올투자증권, 3분기 순익 60% 감소…증시 조정 영향",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-16T08:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001272934?sid=101"
     }
    ]
   },
@@ -48,30 +48,30 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 16,
-   "recent20": 1,
-   "press": 16,
-   "firstArticleAt": "2026-11-16T07:17:00.000Z",
+   "articles90": 15,
+   "recent20": 2,
+   "press": 15,
+   "firstArticleAt": "2026-11-16T07:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "최동석, 박지윤 지인 상대 상간 소송 항소심서 일부 승소",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-16T08:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003565551?sid=102"
+    },
+    {
+     "title": "박지윤, 최동석 상간 소송 2심 결과에 무대응... 공동구매만 예정대로",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-16T08:48:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003541995"
+    },
     {
      "title": "박지윤, 전남편 최동석 '상간 소송' 승소에도 타격 無…공구 홍보 '마이...",
      "press": "tvreport.co.kr",
      "publishedAt": "2026-11-16T08:25:00.000Z",
      "link": "https://m.entertain.naver.com/article/213/0001408490"
-    },
-    {
-     "title": "최동석, 상간 손배소 1심 뒤집고 '일부 승소'…박지윤 입장 밝힐까 [종합...",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-16T08:24:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000052902"
-    },
-    {
-     "title": "'박지윤 남사친'에 상간 소송…최동석, 항소심서 일부 승소",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-16T08:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000651394?sid=102"
     }
    ]
   },
@@ -80,13 +80,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 17,
-   "recent20": 3,
-   "press": 15,
-   "firstArticleAt": "2026-11-16T07:15:00.000Z",
+   "articles90": 15,
+   "recent20": 1,
+   "press": 14,
+   "firstArticleAt": "2026-11-16T07:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "유대종·정승제도 작심발언…“AI 커닝, 확실한 대책 없으면 수능 연기...",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-16T08:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003486313?sid=102"
+    },
     {
      "title": "[이슈] 'AI 안경 부정행위' 파장 확산…입시업계 \"수능도 뚫린다, 연기해...",
      "press": "polinews.co.kr",
@@ -98,44 +104,6 @@
      "press": "news.tvchosun.com",
      "publishedAt": "2026-11-16T08:33:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/448/0000651399?sid=100"
-    },
-    {
-     "title": "수능 코앞 'AI 커닝 대응팀' 꾸린 정부…안경 전수점검? [짤e몽땅]",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-16T08:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001978431?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "블랙핑크 YG 전속계약 명단",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 15,
-   "recent20": 5,
-   "press": 11,
-   "firstArticleAt": "2026-11-16T07:34:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "블랙핑크, YG 전속계약 명단서 빠져…\"그룹 활동에 대해 논의중\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-16T08:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016444903?sid=103"
-    },
-    {
-     "title": "블랙핑크, YG 3분기 전속계약 명단서 전격 제외…악뮤 이어 결별 수순 밟...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-16T08:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001408493"
-    },
-    {
-     "title": "YG, 블랙핑크 전속계약 명단 제외에 \"그룹 활동 논의 중\"",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-16T08:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/437/0000520954"
     }
    ]
   },
@@ -145,7 +113,7 @@
     "signal.bz"
    ],
    "articles90": 24,
-   "recent20": 3,
+   "recent20": 0,
    "press": 10,
    "firstArticleAt": "2026-11-16T07:27:00.000Z",
    "exclusive": false,
@@ -168,6 +136,39 @@
      "press": "sports.khan.co.kr",
      "publishedAt": "2026-11-16T08:26:00.000Z",
      "link": "https://m.sports.naver.com/kbaseball/article/144/0001150102"
+    }
+   ]
+  },
+  {
+   "keyword": "김유정 100일 거짓말",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-16T07:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "박진영 “‘100일의 거짓말’ 결말 다 아는데 시청자로서 즐기는중”[화...",
+     "press": "heraldmuse.com",
+     "publishedAt": "2026-11-16T08:44:00.000Z",
+     "link": "https://m.entertain.naver.com/article/112/0003813464"
+    },
+    {
+     "title": "[Opinion] 그마저도 사랑이기에 - 드라마 '100일의 거짓말' [드라마/예능...",
+     "press": "artinsight.co.kr",
+     "publishedAt": "2026-11-16T08:30:00.000Z",
+     "link": "https://www.artinsight.co.kr/news/view.php?no=83333"
+    },
+    {
+     "title": "김유정이라 가능하다, '100일의 거짓말' 이끄는 막강 연기 내공",
+     "press": "joynews24.com",
+     "publishedAt": "2026-11-16T08:06:00.000Z",
+     "link": "http://www.joynews24.com/view/2026778"
     }
    ]
   },
@@ -204,99 +205,34 @@
    ]
   },
   {
-   "keyword": "김유정 100일 거짓말",
+   "keyword": "조정식 개헌 로드맵",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 3,
    "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-16T07:26:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-16T08:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[Opinion] 그마저도 사랑이기에 - 드라마 '100일의 거짓말' [드라마/예능...",
-     "press": "artinsight.co.kr",
-     "publishedAt": "2026-11-16T08:30:00.000Z",
-     "link": "https://www.artinsight.co.kr/news/view.php?no=83333"
-    },
-    {
-     "title": "김유정이라 가능하다, '100일의 거짓말' 이끄는 막강 연기 내공",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-16T08:06:00.000Z",
-     "link": "http://www.joynews24.com/view/2026778"
-    },
-    {
-     "title": "'100일의 거짓말' 코우리 유카, 박진영 약혼에 오열…김유정 대신해 체...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-16T07:49:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002081089"
-    }
-   ]
-  },
-  {
-   "keyword": "야구 코치",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-16T07:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "롯데 대졸 신인 이 정도였어? 박정민 야구만 잘하는 줄 알았더니…마인...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-16T08:29:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/477/0000639335"
-    },
-    {
-     "title": "독기 오른 한국 야구 황금세대…2028 LA 로드맵의 시발점",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-16T08:23:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/025/0003565541"
-    },
-    {
-     "title": "프로야구 FA 시장 열린다...승인 선수 22명 명단 공개",
+     "title": "개헌자문委 띄운 조정식 … \"87년체제 40년, 내년 적기\"",
      "press": "mk.co.kr",
-     "publishedAt": "2026-11-16T08:20:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/410/0001147447"
-    }
-   ]
-  },
-  {
-   "keyword": "전이경 암 투병",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-16T07:17:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'올림픽 전설' 전이경, 2년 암 투병 털어놔…쇼트트랙 예능 도전",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-16T08:37:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/417/0001164513"
+     "publishedAt": "2026-11-16T08:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005764573?sid=100"
     },
     {
-     "title": "금메달 4개 전이경 \"2년 간 암투병…반평생 최고 고비\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-16T07:48:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014325452"
+     "title": "野 “이번 정부서 개헌 없다…‘조정식 개헌’, 조작기소 특검 시선 돌...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-16T08:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003699904?sid=100"
     },
     {
-     "title": "‘2년간 암 투병’ 전이경, 러시아 귀화 빅토르 안 신뢰 “구구절절 설...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-16T07:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001187993"
+     "title": "개헌 회견에 국힘 잇따라 ‘발끈’…“자다가 봉창 두드리는 소리”",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-16T08:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003059429?sid=100"
     }
    ]
   },
@@ -305,10 +241,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-16T07:24:00.000Z",
+   "articles90": 3,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-16T07:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -331,43 +267,11 @@
      "link": "https://n.news.naver.com/mnews/article/001/0016444714?sid=104"
     }
    ]
-  },
-  {
-   "keyword": "뉴스",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 3,
-   "press": 2,
-   "firstArticleAt": "2026-11-16T08:32:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "[포토뉴스]포남1동 주민자치회,‘사랑담은 김장 김치 나눔’ 비용 후원",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-16T08:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001231198?sid=102"
-    },
-    {
-     "title": "[포토뉴스]강원도교육청, 제13기 교육발전자문위원회",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-16T08:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001231196?sid=102"
-    },
-    {
-     "title": "[은행 뉴스브리핑] 국민은행 'KB Star 지수연동외화예금' 출시",
-     "press": "asiatime.co.kr",
-     "publishedAt": "2026-11-16T08:32:00.000Z",
-     "link": "https://www.asiatime.co.kr/article/20261116500419"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 679,
+  "flagged": 680,
   "matched": 363,
   "avgLeadMin": 802,
   "recent": [
