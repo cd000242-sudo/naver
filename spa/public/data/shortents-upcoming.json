@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T06:02:34.722Z",
+ "builtAt": "2026-11-16T06:12:39.049Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 19,
  "candidates": [
   {
-   "keyword": "신유열 사장 승진",
+   "keyword": "은행",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 71,
-   "recent20": 39,
-   "press": 67,
-   "firstArticleAt": "2026-11-16T05:28:00.000Z",
+   "articles90": 42,
+   "recent20": 42,
+   "press": 36,
+   "firstArticleAt": "2026-11-16T06:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "롯데 '3세 체제' 시동...신유열 사장 승진에 경영전략실 신설 등 지배구...",
-     "press": "opinionnews.co.kr",
-     "publishedAt": "2026-11-16T06:00:00.000Z",
-     "link": "http://www.opinionnews.co.kr/news/articleView.html?idxno=147132"
+     "title": "IBK기업은행, 현업 주도 AX 가속화 한다",
+     "press": "asiaa.co.kr",
+     "publishedAt": "2026-11-16T06:12:00.000Z",
+     "link": "https://www.asiaa.co.kr/news/articleView.html?idxno=271330"
     },
     {
-     "title": "'롯데 3세' 신유열, 입사 6년 만에 사장 승진…신설 '경영전략실' 총괄",
-     "press": "socialvalue.kr",
-     "publishedAt": "2026-11-16T06:00:00.000Z",
-     "link": "https://www.socialvalue.kr/news/view/1065592373820913"
+     "title": "AI 혁신 가속화: IBK기업은행의 '제니코드'가 금융 기술의 미래를 열다",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-16T06:10:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885838"
     },
     {
-     "title": "롯데, 신유열 사장 승진…경영전략실 신설·계열사 경영체제 개편",
-     "press": "sisafocus.co.kr",
-     "publishedAt": "2026-11-16T06:00:00.000Z",
-     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367654"
+     "title": "IBK기업은행, 매월 이자 지급하는 채권 상품 출시…1년 금리 3.85%",
+     "press": "srtimes.kr",
+     "publishedAt": "2026-11-16T06:10:00.000Z",
+     "link": "http://www.srtimes.kr/news/articleView.html?idxno=217703"
     }
    ]
   },
@@ -75,67 +75,66 @@
    ]
   },
   {
-   "keyword": "대한민국",
+   "keyword": "삼성sdi",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 14,
-   "recent20": 11,
-   "press": 13,
-   "firstArticleAt": "2026-11-16T05:40:00.000Z",
+   "articles90": 15,
+   "recent20": 7,
+   "press": 15,
+   "firstArticleAt": "2026-11-16T04:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[게시판] 아동권리보장원, 대한민국소통어워즈 2개 부문 대상",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-16T05:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016444279?sid=102"
+     "title": "삼성SDI, 美 주피터파워와 대형 계약 체결… ESS용 LFP 배터리 시장 공략...",
+     "press": "queen.co.kr",
+     "publishedAt": "2026-11-16T06:10:00.000Z",
+     "link": "http://www.queen.co.kr/news/articleView.html?idxno=466390"
     },
     {
-     "title": "세무법인 한림, ‘2026 대한민국 중소‧중견기업 혁신대상’ 중소벤처기...",
-     "press": "siminilbo.co.kr",
-     "publishedAt": "2026-11-16T05:56:00.000Z",
-     "link": "https://www.siminilbo.co.kr/news/newsview.php?ncode=1160286888485283"
+     "title": "삼성SDI, 美 주피터파워와 16GWh LFP 배터리 공급계약…2029년 납품",
+     "press": "sateconomy.co.kr",
+     "publishedAt": "2026-11-16T06:10:00.000Z",
+     "link": "https://sateconomy.co.kr/news/view/1065592555005942"
     },
     {
-     "title": "극동대 봉준호 교수, 2026 대한민국 조리대상 수상",
-     "press": "inews365.com",
-     "publishedAt": "2026-11-16T05:54:00.000Z",
-     "link": "https://www.inews365.com/news/article.html?no=943821"
+     "title": "LG엔솔-삼성SDI, 최신 ESS 기술 선봬… 美 공략 가속",
+     "press": "the-biz.co.kr",
+     "publishedAt": "2026-11-16T06:08:00.000Z",
+     "link": "http://www.the-biz.co.kr/news/articleView.html?idxno=731472"
     }
    ]
   },
   {
-   "keyword": "최예나 의혹에 스타일리스트",
+   "keyword": "대법, 한덕수·김건희 19일 선고",
    "sources": [
     "nate"
    ],
    "articles90": 13,
-   "recent20": 1,
+   "recent20": 2,
    "press": 13,
-   "firstArticleAt": "2026-11-16T04:34:00.000Z",
+   "firstArticleAt": "2026-11-16T04:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "최예나 스타일리스트, 표절 의혹에 억울함 토로…“카피로 단정돼 속상...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-16T05:51:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003541961"
+     "title": "與, 대법원 심리지연 '난타'…大法 \"졸속으로 재판할 수 없어\"",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-16T05:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001075356?sid=100"
     },
     {
-     "title": "최예나, 사브리나 카펜터 표절 의혹에 결국 해명…스타일리스트 \"카피 ...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-16T05:40:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004125479"
+     "title": "대법, ‘내란 혐의’ 한덕수 19일 선고…“구속기간 만기 등 고려”",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-16T05:54:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1320572&inflow=N"
     },
     {
-     "title": "최예나 의상 표절 의혹에 스타일리스트 직접 해명 \"카피 단정 속상해\"",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-16T05:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/437/0000520909"
+     "title": "[종합] 대법, 19일 한덕수 상고심 선고…'12·3 계엄 내란' 첫 사법 판단",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-16T05:46:00.000Z",
+     "link": "https://www.ajunews.com/view/20261116135227211"
     }
    ]
   },
@@ -145,29 +144,158 @@
     "signal.bz"
    ],
    "articles90": 11,
-   "recent20": 3,
+   "recent20": 4,
    "press": 11,
-   "firstArticleAt": "2026-11-16T04:35:00.000Z",
+   "firstArticleAt": "2026-11-16T04:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "다카이치·이재명, 17일 마닐라서 정상회담…중일회담은 불발 가능성",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-16T05:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003059373?sid=104"
+     "title": "한일 만나고 중국과도 마주 앉나…이재명 대통령, 아세안·APEC 외교 승부...",
+     "press": "incheonilbo.com",
+     "publishedAt": "2026-11-16T06:10:00.000Z",
+     "link": "https://www.incheonilbo.com/news/articleView.html?idxno=1336909"
     },
     {
-     "title": "한일 정상, 17일 마닐라서 회담…경제·안보 협력 논의 전망",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-16T05:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005604892?sid=104"
+     "title": "‘강대국 담판’ 앞에 만나는 李·다카이치…한일 공조 해법 찾나(종합...",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-16T06:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006410507?sid=100"
     },
     {
-     "title": "경주·안동 이어 마닐라로…이 대통령, 한일 셔틀외교 가속",
-     "press": "kbmaeil.com",
-     "publishedAt": "2026-11-16T05:44:00.000Z",
-     "link": "https://www.kbmaeil.com/article/20261116500428"
+     "title": "李 대통령, 아세안·APEC 외교 돌입…17일 한일 정상회담",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-16T06:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000132269?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "대한민국",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 10,
+   "recent20": 6,
+   "press": 10,
+   "firstArticleAt": "2026-11-16T05:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"AI로 물길 읽고 대한민국 미래 연다\"… 양승조 한국수자원공사 사장, 창...",
+     "press": "dailysmart.co.kr",
+     "publishedAt": "2026-11-16T06:08:00.000Z",
+     "link": "http://www.dailysmart.co.kr/news/articleView.html?idxno=132611"
+    },
+    {
+     "title": "퓨처렉스, 대한민국 중소중견기업 혁신대상 중소벤처기업진흥공단 이사...",
+     "press": "lawissue.co.kr",
+     "publishedAt": "2026-11-16T06:06:00.000Z",
+     "link": "https://www.lawissue.co.kr/view.php?ud=2026111614445711729aeda69934_12"
+    },
+    {
+     "title": "수원도시재단,'창립 10주년' 맞아 미래 비전 선포…\"대한민국 도시활성...",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-16T06:04:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=564167"
+    }
+   ]
+  },
+  {
+   "keyword": "개인정보",
+   "sources": [
+    "google"
+   ],
+   "articles90": 10,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-16T05:01:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "조폐공사 “모바일플랫폼 개인정보 유출은 인증 허점 노린 공격”",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-16T06:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005764389?sid=102"
+    },
+    {
+     "title": "우버 운전자 1만 명 이상 개인정보 유출…AI 서비스 업체 해킹이 원인",
+     "press": "hellot.net",
+     "publishedAt": "2026-11-16T05:56:00.000Z",
+     "link": "https://www.hellot.net/news/article.html?no=116349"
+    },
+    {
+     "title": "개인정보 유출 막지 못한 조폐공사…보안 부실 책임론 거세",
+     "press": "dynews.co.kr",
+     "publishedAt": "2026-11-16T05:50:00.000Z",
+     "link": "https://www.dynews.co.kr/news/articleView.html?idxno=874153"
+    }
+   ]
+  },
+  {
+   "keyword": "임현주 MBC 퇴사",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 9,
+   "recent20": 0,
+   "press": 9,
+   "firstArticleAt": "2026-11-16T04:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "임현주 아나 MBC 퇴사…\"어디서든 계속 마이크 앞에 서겠다\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-16T05:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004210212?sid=102"
+    },
+    {
+     "title": "임현주 아나운서 MBC 떠난다…13년 8개월 재직",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-16T05:36:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=625501"
+    },
+    {
+     "title": "임현주 아나, 14년 만에 MBC 떠난다…\"마음이 이끄는 대로\" [MHN:피드]",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-16T05:34:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000490802"
+    }
+   ]
+  },
+  {
+   "keyword": "김유정 100일의 거짓말",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-16T04:47:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이선, 독립운동부터 로맨스까지... ‘100일의 거짓말’ 신스틸러",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-16T05:49:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003541959"
+    },
+    {
+     "title": "'100일의 거짓말' 이무생, 오랜 순애보 안방극장 울렸다",
+     "press": "enter.etoday.co.kr",
+     "publishedAt": "2026-11-16T05:16:00.000Z",
+     "link": "https://enter.etoday.co.kr/news/view/305350"
+    },
+    {
+     "title": "‘100일의 거짓말’ 박진영 “결말 다 아는데도 본방사수중…시청자 모...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-16T05:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001150049"
     }
    ]
   },
@@ -202,14 +330,90 @@
      "link": "http://www.newstomato.com/ReadNews.aspx?no=1320560&inflow=N"
     }
    ]
+  },
+  {
+   "keyword": "전이경 총감독",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-16T05:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "쇼트트랙 전설 전이경, 2년간 암 투병 고백…'스피드퀸'으로 새 출발",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-16T05:55:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000083228"
+    },
+    {
+     "title": "전이경, 암 투병 2년 극복 후 쇼트트랙 총감독 복귀…'스피드퀸' 이끈다",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-16T05:54:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=625510"
+    },
+    {
+     "title": "'올림픽 전설' 전이경, 암 투병 딛고 총감독 합류…\"뭐든 할 수 있을 것...",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-16T05:05:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000328136"
+    }
+   ]
+  },
+  {
+   "keyword": "한동훈 장인",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-16T04:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'한동훈 복당' 또 수면 위로...장동혁은 일단 '선 긋기' [이슈톺]",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-16T05:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002433478?sid=100"
+    },
+    {
+     "title": "\"보수의 무너진 기둥, 배신자를 품는 순간 끝난다\"… 김채환, 한동훈 복...",
+     "press": "fntoday.co.kr",
+     "publishedAt": "2026-11-16T05:16:00.000Z",
+     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=398375"
+    },
+    {
+     "title": "[막전막후] 한동훈 정치와 장인상(丈人喪)",
+     "press": "pennmike.com",
+     "publishedAt": "2026-11-16T04:46:00.000Z",
+     "link": "https://www.pennmike.com/news/articleView.html?idxno=131934"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 634,
-  "matched": 340,
-  "avgLeadMin": 851,
+  "flagged": 640,
+  "matched": 342,
+  "avgLeadMin": 846,
   "recent": [
+   {
+    "keyword": "JTBC 올림픽 중계권 해지",
+    "hitKeyword": "JTBC 올림픽 중계권 해지",
+    "hitAt": "2026-11-16T15:00:00+09:00",
+    "leadMin": 48
+   },
+   {
+    "keyword": "최예나 표절 스타일리스트",
+    "hitKeyword": "최예나 의상 표절 의혹",
+    "hitAt": "2026-11-16T15:00:00+09:00",
+    "leadMin": 18
+   },
    {
     "keyword": "ai 안경",
     "hitKeyword": "AI 커닝 안경 시험장",
@@ -257,18 +461,6 @@
     "hitKeyword": "KBO FA 22명 공시",
     "hitAt": "2026-11-16T14:00:00+09:00",
     "leadMin": 38
-   },
-   {
-    "keyword": "모친상 조의금 기부",
-    "hitKeyword": "이호선 조의금 전액 기부",
-    "hitAt": "2026-11-16T13:30:00+09:00",
-    "leadMin": 89
-   },
-   {
-    "keyword": "JTBC 올림픽 중계권 해지",
-    "hitKeyword": "JTBC 올림픽 중계권",
-    "hitAt": "2026-11-16T13:30:00+09:00",
-    "leadMin": 59
    }
   ]
  }
