@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T21:25:31.948Z",
+ "builtAt": "2026-11-16T21:35:34.471Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,52 +8,59 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 19,
  "candidates": [
   {
-   "keyword": "미국 AI반도체 중국 차단",
+   "keyword": "수능",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 17,
-   "recent20": 6,
-   "press": 16,
-   "firstArticleAt": "2026-11-16T20:02:00.000Z",
+   "articles90": 38,
+   "recent20": 8,
+   "press": 22,
+   "firstArticleAt": "2026-11-16T20:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "시진핑과 회담 앞둔 트럼프, AI ‘대중국 포위망’부터 폈다 [글로벌 모...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-16T21:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004682902?sid=104"
+     "title": "수능 AI 안경, 감독교사가 잡아라? 교원단체 반발",
+     "press": "labortoday.co.kr",
+     "publishedAt": "2026-11-16T21:34:00.000Z",
+     "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237762"
     },
     {
-     "title": "AI칩 중국 원격접속 차단‥'젠슨 황 파문' 뒷북조치",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-16T21:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001535991?sid=104"
-    },
-    {
-     "title": "AI 반도체주 투매…필라델피아지수 5.28% 급락·마이크론 7.59%↓",
+     "title": "[기고] '수능 AI 커닝' 방지, 교육부만으론 안 된다",
      "press": "news1.kr",
-     "publishedAt": "2026-11-16T21:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009292574?sid=104"
+     "publishedAt": "2026-11-16T21:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009292586?sid=102"
+    },
+    {
+     "title": "수능 이틀 앞두고 ‘연기론’까지…野 “정부 AI 커닝 대응책 역부족”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-16T21:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004682905?sid=100"
     }
    ]
   },
   {
-   "keyword": "트럼프 김정은 만남 가능",
+   "keyword": "트럼프 김정은 만남 가능성",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 13,
-   "recent20": 5,
-   "press": 12,
+   "articles90": 14,
+   "recent20": 4,
+   "press": 13,
    "firstArticleAt": "2026-11-16T20:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "외교 성과 절실한 트럼프 \"중국에서 김정은 만날 수도\" '깜짝' 언급",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-16T21:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004210429?sid=104"
+    },
     {
      "title": "트럼프 “김정은과 중국서 만날 수도…시진핑에 달렸다”",
      "press": "etoday.co.kr",
@@ -65,39 +72,64 @@
      "press": "news.mtn.co.kr",
      "publishedAt": "2026-11-16T21:20:00.000Z",
      "link": "https://news.mtn.co.kr/article/2026111706195764444"
-    },
-    {
-     "title": "트럼프, 김정은 만나나?…\"김정은 방중, 시진핑에 달려\"",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-16T21:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000544093?sid=101"
     }
    ]
   },
   {
-   "keyword": "음주 운전",
+   "keyword": "전자금융업 매출 증가",
    "sources": [
-    "signal.bz",
-    "google"
+    "daum"
+   ],
+   "articles90": 10,
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-16T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "전자금융업 매출 14.5% 늘었지만…미정산·미상환 잔액 15조원",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-16T21:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002394158?sid=101"
+    },
+    {
+     "title": "전자금융업 매출 14.5% 증가…미정산·미상환 잔액 15조원",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-16T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006410783?sid=101"
+    },
+    {
+     "title": "전자금융업 매출 14.5% 성장에도…건전성 미달 업체 24곳",
+     "press": "newsway.co.kr",
+     "publishedAt": "2026-11-16T21:02:00.000Z",
+     "link": "https://www.newsway.co.kr/news/view?ud=2026111615034427172"
+    }
+   ]
+  },
+  {
+   "keyword": "고경표 음주운전",
+   "sources": [
+    "daum"
    ],
    "articles90": 7,
-   "recent20": 2,
+   "recent20": 1,
    "press": 6,
    "firstArticleAt": "2026-11-16T20:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "연예계 음주운전 파문 속…신동엽 \"술 마시려고 택시 탔냐\" 확인 ('짠한...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-16T21:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000784764"
+    },
+    {
      "title": "“이 대통령도 음주하는데” 고경표 편들기, 우리 아닙니다…팬덤 “악...",
      "press": "newsen.com",
      "publishedAt": "2026-11-16T21:14:00.000Z",
      "link": "https://m.entertain.naver.com/article/609/0001188079"
-    },
-    {
-     "title": "[안전상황실·17일] 공주서 음주운전 사고로 오토바이 운전자 사망",
-     "press": "safetimes.co.kr",
-     "publishedAt": "2026-11-16T21:12:00.000Z",
-     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247541"
     },
     {
      "title": "음주운전 고경표 “전액 환불” 티켓 팔이도 끝, 예능은 편집 대전쟁→...",
@@ -108,44 +140,230 @@
    ]
   },
   {
-   "keyword": "수능 스마트기기 반납",
+   "keyword": "최교진 교육부 장관",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-16T20:02:00.000Z",
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-16T20:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[출근길 브리핑-11월 17일] 수능장 와이파이 차단 추진·'김형오-정세균...",
-     "press": "newsworks.co.kr",
+     "title": "국회 나온 교육부 장관 \"난 못 잡아내요, 나이 있어서\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-16T21:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001403484?sid=100"
+    },
+    {
+     "title": "\"100% 잡아낼 자신 있어요?\"‥장관 \"못할 것 같다\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-16T21:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001535989?sid=100"
+    },
+    {
+     "title": "“AI부정행위 다 적발되나”…교육장관 “난 못할것 같다”",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-16T20:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002833213?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "AI 커닝 대책 마련 필요",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-16T20:07:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"AI로 욕심 없이 9급 합격\" \"의과대학 진학\"…부정행위 주장 글 잇따라",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-16T21:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006410794?sid=102"
+    },
+    {
+     "title": "수능 이틀 앞두고 ‘연기론’까지…野 “정부 AI 커닝 대응책 역부족”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-16T21:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004682905?sid=100"
+    },
+    {
+     "title": "\"난 욕심 안 부리고 9급 합격\"…'AI 커닝' 공무원 시험도 비상",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-16T21:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014326002?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "미중러 정상회담",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-16T20:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘북핵 묵인’ 끌려갈까…미중러 회담에 ‘우려’, 왜?",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-16T21:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012295133?sid=100"
+    },
+    {
+     "title": "우크라, 미중러 정상회담 앞두고 러시아 맹공…‘제2 얄타회담’ 우려?",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-16T21:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012295132?sid=104"
+    },
+    {
+     "title": "\"미중러 우크라·이란 논의\"‥'제2의 얄타' 우려",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-16T21:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001535987?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "연금",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-16T20:37:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정효영 연금지원본부장 “가입자 92% 수익…AI가 먼저 노후자산 챙기는...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-16T21:02:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2648751"
+    },
+    {
+     "title": "‘투자하는 연금’ 이끄는 미래에셋證…적립금 압도적 1위·ETF 25조원 [퇴...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-16T21:02:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2648643"
+    },
+    {
+     "title": "국민연금 빠진 기금운용평가 개편…연기금 코스닥 비중 '3%대' 그쳐",
+     "press": "newspim.com",
      "publishedAt": "2026-11-16T21:00:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903255"
+     "link": "https://www.newspim.com/news/view/20261116000561"
+    }
+   ]
+  },
+  {
+   "keyword": "이정현 12월 결혼",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-16T20:15:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'결혼 발표' 이정현, 자격증만 22개 보유..\"지게차 면허까지 취득\" [말자...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-16T21:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003487964"
     },
     {
-     "title": "수능장 'AI 커닝 도구' 반입 어떻게 막나…오늘 대책 발표",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-16T20:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009292533?sid=105"
+     "title": "‘신병’ 이정현, 12월 결혼이 끝 아니었다 “좋은 소식 하나 더” 겹경...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-16T20:52:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001188068"
     },
     {
-     "title": "수능 못 미룬다…교육장관, 부정행위 \"운명 걸고 막겠다\"",
-     "press": "thescoop.co.kr",
-     "publishedAt": "2026-11-16T20:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/665/0000008582?sid=102"
+     "title": "'미스터 션샤인' 이정현, 결혼 앞두고도 행사장 알바 \"쉬는 게 무서워\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-16T20:41:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005442023"
+    }
+   ]
+  },
+  {
+   "keyword": "제니, 그래미 2개 후보",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-16T20:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'그래미 2개 후보' 제니 '드라큘라', 빌보드 '핫 100' 3위 수성…25주째...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-16T21:03:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014326003"
+    },
+    {
+     "title": "로제 이어 제니도 간다, 브루노·테일러 잡고 美 그래미 정조준…‘드라...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-16T20:24:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001188058"
+    },
+    {
+     "title": "제니, 그래미서 '올해의 레코드' 등 2개 부문 후보",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-16T20:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926818?sid=103"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 746,
-  "matched": 421,
-  "avgLeadMin": 917,
+  "flagged": 756,
+  "matched": 425,
+  "avgLeadMin": 918,
   "recent": [
+   {
+    "keyword": "아버지",
+    "hitKeyword": "아버지 면허 택시 운전",
+    "hitAt": "2026-11-17T06:30:00+09:00",
+    "leadMin": 2893
+   },
+   {
+    "keyword": "공모",
+    "hitKeyword": "앤트로픽 공모주 상장",
+    "hitAt": "2026-11-17T06:30:00+09:00",
+    "leadMin": 1139
+   },
+   {
+    "keyword": "미국 AI반도체 중국 차단",
+    "hitKeyword": "미국 AI칩 중국 규제",
+    "hitAt": "2026-11-17T06:30:00+09:00",
+    "leadMin": 25
+   },
+   {
+    "keyword": "제임스본드",
+    "hitKeyword": "제임스 본드 7대 배우",
+    "hitAt": "2026-11-17T06:30:00+09:00",
+    "leadMin": 15
+   },
    {
     "keyword": "미래에셋 3분기 손실",
     "hitKeyword": "삼성전자 3분기 실적",
@@ -181,30 +399,6 @@
     "hitKeyword": "삼성전자 3분기 실적",
     "hitAt": "2026-11-17T06:00:00+09:00",
     "leadMin": 6435
-   },
-   {
-    "keyword": "아시아나항공 3분기 영업손실",
-    "hitKeyword": "삼성전자 3분기 실적",
-    "hitAt": "2026-11-17T06:00:00+09:00",
-    "leadMin": 6375
-   },
-   {
-    "keyword": "HJ중공업 3분기 영업익 1554억",
-    "hitKeyword": "삼성전자 3분기 실적",
-    "hitAt": "2026-11-17T06:00:00+09:00",
-    "leadMin": 5436
-   },
-   {
-    "keyword": "3분기 매출 분석",
-    "hitKeyword": "삼성전자 3분기 실적",
-    "hitAt": "2026-11-17T06:00:00+09:00",
-    "leadMin": 4653
-   },
-   {
-    "keyword": "미중러 정상회담",
-    "hitKeyword": "북미 정상회담 추진",
-    "hitAt": "2026-11-17T06:00:00+09:00",
-    "leadMin": 1099
    }
   ]
  }
