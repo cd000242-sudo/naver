@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T06:32:47.386Z",
+ "builtAt": "2026-11-16T06:42:54.069Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 18,
  "candidates": [
   {
    "keyword": "체포",
@@ -16,46 +16,51 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 22,
-   "recent20": 3,
-   "press": 19,
-   "firstArticleAt": "2026-11-16T05:08:00.000Z",
-   "exclusive": true,
+   "articles90": 24,
+   "recent20": 4,
+   "press": 22,
+   "firstArticleAt": "2026-11-16T05:16:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'불량연애2' 앗슨, 무허가 유흥업소 운영 혐의로 체포…현금 1억 5천만 ...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-16T06:19:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001408465"
+     "title": "오키나와 미군 또 물의…외출·음주 통제에도 공군 병장 공연음란 체포",
+     "press": "ppss.kr",
+     "publishedAt": "2026-11-16T06:39:00.000Z",
+     "link": "https://www.ppss.kr/news/articleView.html?idxno=321121"
     },
     {
-     "title": "‘불량연애2’ 출연 인플루언서, 경찰 체포…무허가 유흥업소 운영 혐의",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-16T06:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005764396?sid=102"
+     "title": "'불량연애2' 앗슨, 무허가 유흥업소 운영 혐의로 체포",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-16T06:36:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000052889"
     },
     {
-     "title": "무허가 접대업소 운영 혐의…'불량 연애' 인기 출연자, 일본서 체포",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-16T06:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926637?sid=104"
+     "title": "‘연프’ 출연 80만 인플루언서 무허가접대업 체포",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-16T06:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002833142?sid=104"
     }
    ]
   },
   {
    "keyword": "대법, 한덕수 선고 19일",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 17,
-   "recent20": 3,
-   "press": 15,
-   "firstArticleAt": "2026-11-16T05:03:00.000Z",
+   "articles90": 14,
+   "recent20": 2,
+   "press": 14,
+   "firstArticleAt": "2026-11-16T05:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "與 법사위 “한덕수 선고기일, 국민 저항 의식했나…결과 중요”",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-16T06:40:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2648780"
+    },
     {
      "title": "한덕수 내란 재판 최종 결론 임박…대법, 19일 상고심 선고",
      "press": "dailian.co.kr",
@@ -67,12 +72,38 @@
      "press": "imnews.imbc.com",
      "publishedAt": "2026-11-16T06:19:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/214/0001535873?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "고경표 음주치상 혐의",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 14,
+   "recent20": 2,
+   "press": 14,
+   "firstArticleAt": "2026-11-16T05:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘음주운전’ 고경표, 경찰 소환조사 예정…치상 혐의 적용 검토",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-16T06:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000367656?sid=102"
     },
     {
-     "title": "예산·입법 대치 속 한덕수·김건희 선고…19일 정국 분수령",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-16T06:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005441727?sid=100"
+     "title": "'음주운전' 고경표, 경찰 소환조사 예정…\"교특법상 치상 혐의 검토 중...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-16T06:30:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1794809593530942006"
+    },
+    {
+     "title": "‘음주 운전’ 고경표, 활동 중단 발표 하루 만에…경찰 소환 예정 “치...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-16T06:15:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001187973"
     }
    ]
   },
@@ -81,127 +112,158 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-16T05:08:00.000Z",
+   "articles90": 13,
+   "recent20": 3,
+   "press": 13,
+   "firstArticleAt": "2026-11-16T05:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "李 대통령, 오늘 한일 정상회담…'제2의 얄타' 우려 속 외교전",
+     "press": "newsgn.com",
+     "publishedAt": "2026-11-16T06:38:00.000Z",
+     "link": "https://www.newsgn.com/news/articleView.html?idxno=585914"
+    },
+    {
+     "title": "李대통령, 필리핀 마닐라 도착…아세안 정상외교 돌입",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-16T06:36:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903230"
+    },
     {
      "title": "李 대통령, 17일 다카이치 총리와 마닐라 정상회담…에너지 공조 주목",
      "press": "news.mtn.co.kr",
      "publishedAt": "2026-11-16T06:26:00.000Z",
      "link": "https://news.mtn.co.kr/article/2026111615174645776"
-    },
-    {
-     "title": "韓·日, 17일 필리핀서 정상회담...경제·안보 협력 논의",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-16T06:14:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=73113"
-    },
-    {
-     "title": "한일 만나고 중국과도 마주 앉나…이재명 대통령, 아세안·APEC 외교 승부...",
-     "press": "incheonilbo.com",
-     "publishedAt": "2026-11-16T06:10:00.000Z",
-     "link": "https://www.incheonilbo.com/news/articleView.html?idxno=1336909"
     }
    ]
   },
   {
-   "keyword": "이재명 재판 취소 저지 특위",
+   "keyword": "신용한 충북지사",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 13,
+   "recent20": 3,
+   "press": 13,
+   "firstArticleAt": "2026-11-16T05:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "신용한 지사, 국회 국비 확보-시장형 공공기관 이전 총력 대응 주문",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-16T06:38:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3753396"
+    },
+    {
+     "title": "대포폰으로 ‘불법 선거운동’ 혐의…신용한 충북지사 송치",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-16T06:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002832419?sid=102"
+    },
+    {
+     "title": "'차명폰 문자 발송 의혹' 신용한 지사 등 22명 공소청 송치",
+     "press": "inews365.com",
+     "publishedAt": "2026-11-16T06:24:00.000Z",
+     "link": "https://www.inews365.com/news/article.html?no=943822"
+    }
+   ]
+  },
+  {
+   "keyword": "삼성sdi",
+   "sources": [
+    "google"
+   ],
+   "articles90": 12,
+   "recent20": 2,
+   "press": 12,
+   "firstArticleAt": "2026-11-16T05:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "삼성SDI, 미국 주피터파워에 3년간 16GWh LFP 배터리 공급…수조원 수주",
+     "press": "socialvalue.kr",
+     "publishedAt": "2026-11-16T06:30:00.000Z",
+     "link": "https://www.socialvalue.kr/news/view/1065594428993152"
+    },
+    {
+     "title": "삼성SDI, 북미 ESS 시장 뚫었다…수조원대 LFP 공급",
+     "press": "financialpost.co.kr",
+     "publishedAt": "2026-11-16T06:24:00.000Z",
+     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=301208"
+    },
+    {
+     "title": "삼성SDI, 美 주피터파워와 16GWh LFP 배터리 공급계약…2029년 납품",
+     "press": "sateconomy.co.kr",
+     "publishedAt": "2026-11-16T06:10:00.000Z",
+     "link": "https://sateconomy.co.kr/news/view/1065592555005942"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 재판취소 저지특위",
    "sources": [
     "nate"
    ],
-   "articles90": 20,
-   "recent20": 9,
-   "press": 10,
+   "articles90": 21,
+   "recent20": 10,
+   "press": 11,
    "firstArticleAt": "2026-11-16T05:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국힘 특위, 수원고법에 \"이화영 재심 요청 기각해야\" 의견서",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-16T06:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016444406?sid=100"
+     "title": "'李 재판취소 저지 특위' 주진우 \"이화영 탈옥부터 막아야\"",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-16T06:42:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2019110"
     },
     {
-     "title": "국힘 '재판취소 저지' 특위 \"이화영 '탈옥' 방지 의견서 공소청 제출\"",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-16T06:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001535875?sid=100"
+     "title": "[포토] 이재명 대통령 재판취소 저지특위 전체회의",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-16T06:38:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/16/2026111650270.html"
     },
     {
-     "title": "이재명 대통령 재판취소 저지특위 전체회의 발언하는 주진우 위원장",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-16T06:23:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261116001029"
+     "title": "[포토] 발언하는 주진우 국민의힘 이재명 재판취소 저지특위 위원장",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-16T06:36:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/16/2026111650268.html"
     }
    ]
   },
   {
-   "keyword": "김유정 100일 거짓말",
+   "keyword": "항공 승무원",
    "sources": [
-    "signal.bz",
-    "nate"
+    "google"
    ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-16T05:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김유정·박진영, 이름 부르던 사이에서 총구 대치까지…‘100일의 거짓말...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-16T06:23:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005641314"
-    },
-    {
-     "title": "김유정, 박진영이 총 겨누자 충격…시청률 10.4%→동시간대 1위 ('100일의...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-16T06:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000784693"
-    },
-    {
-     "title": "이선, 독립운동부터 로맨스까지... ‘100일의 거짓말’ 신스틸러",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-16T05:49:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003541959"
-    }
-   ]
-  },
-  {
-   "keyword": "최교진 장관 질의 답변",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 8,
+   "articles90": 10,
    "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-16T05:21:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-16T05:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“수능 AI 부정행위 적발 가능해?” 묻자... 교육장관 “난 못할 것 같다...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-16T06:24:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1175023"
+     "title": "청주대 항공서비스학과, 항공안전 훈련",
+     "press": "dynews.co.kr",
+     "publishedAt": "2026-11-16T06:32:00.000Z",
+     "link": "https://www.dynews.co.kr/news/articleView.html?idxno=874239"
     },
     {
-     "title": "교육부 장관 “수능시간 일부 전파 차단 검토…수능 연기는 어려워”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-16T06:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012294606?sid=102"
+     "title": "[기획] 조원태의 6년 승부수…통합 대한항공 출범 한달 앞두고 '총력전...",
+     "press": "newsinside.kr",
+     "publishedAt": "2026-11-16T06:10:00.000Z",
+     "link": "https://www.newsinside.kr/news/articleView.html?idxno=5049482"
     },
     {
-     "title": "답변하는 최교진 교육부 장관",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-16T05:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014324994?sid=100"
+     "title": "출범 한 달 앞둔 통합 대한항공..OZ 탈퇴 5시간 뒤 KE로 일원화",
+     "press": "kpenews.com",
+     "publishedAt": "2026-11-16T06:00:00.000Z",
+     "link": "https://kpenews.com/View.aspx?No=4314479"
     }
    ]
   },
@@ -210,13 +272,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
    "firstArticleAt": "2026-11-16T05:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "테슬라, 자율주행 로보택시 '사이버캡' 일반 개인 판매 들어갔다",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-16T06:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005604941?sid=101"
+    },
     {
      "title": "테슬라, 운전대·페달 없는 자율주행차 '사이버캡' 일반판매 개시",
      "press": "newsfc.co.kr",
@@ -228,54 +296,98 @@
      "press": "lawtv.kr",
      "publishedAt": "2026-11-16T05:58:00.000Z",
      "link": "https://www.lawtv.kr/news/articleView.html?idxno=61426"
-    },
-    {
-     "title": "테슬라, 운전대 없는 자율주행차 '사이버캡' 일반 판매 시작",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-16T05:42:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95387"
     }
    ]
   },
   {
-   "keyword": "철도 안전 종합대책",
+   "keyword": "김정관 장관 회의 주재",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 3,
+   "articles90": 14,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-16T05:09:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-16T05:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "대구시 수능일 수험생 안전한 교통수송 지원",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-16T05:18:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082838"
+     "title": "핵심광물 민관 전략회의",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-16T06:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009291755?sid=101"
     },
     {
-     "title": "국토부, 관계기관과 철도사고·운행장애 재발방지대책 점검",
-     "press": "bizwork.co.kr",
-     "publishedAt": "2026-11-16T05:10:00.000Z",
-     "link": "https://www.bizwork.co.kr/news/articleView.html?idxno=420865"
+     "title": "김정관 장관, 핵심광물 민관 전략회의",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-16T06:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009291754?sid=101"
     },
     {
-     "title": "\"철도사고 줄어도 고장 반복\"…KTX 비상제동 부품 교체주기 단축",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-16T05:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004210181?sid=101"
+     "title": "핵심광물 민관 전략회의 주재하는 김정관 장관",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-16T06:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009291756?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "배재대",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-16T05:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "배재대 '간호의 미래와 혁신 포럼'…의료정책 변화 공유",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-16T06:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014325177?sid=102"
+    },
+    {
+     "title": "배재대 간호학과, 18일 '간호의 미래와 혁신 포럼' 개최",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-16T06:02:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1193451"
+    },
+    {
+     "title": "배재대, 대전·충남 간호대생 대상 '간호의 미래와 혁신 포럼'",
+     "press": "ccnnews.co.kr",
+     "publishedAt": "2026-11-16T05:58:00.000Z",
+     "link": "http://www.ccnnews.co.kr/news/articleView.html?idxno=417820"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 645,
-  "matched": 342,
-  "avgLeadMin": 846,
+  "flagged": 650,
+  "matched": 345,
+  "avgLeadMin": 839,
   "recent": [
+   {
+    "keyword": "임현주 MBC 퇴사",
+    "hitKeyword": "임현주 MBC 퇴사",
+    "hitAt": "2026-11-16T15:30:00+09:00",
+    "leadMin": 78
+   },
+   {
+    "keyword": "신유열 사장 승진",
+    "hitKeyword": "신유열 롯데 사장 승진",
+    "hitAt": "2026-11-16T15:30:00+09:00",
+    "leadMin": 27
+   },
+   {
+    "keyword": "김유정 100일의 거짓말",
+    "hitKeyword": "100일의 거짓말 12회",
+    "hitAt": "2026-11-16T15:30:00+09:00",
+    "leadMin": 17
+   },
    {
     "keyword": "JTBC 올림픽 중계권 해지",
     "hitKeyword": "JTBC 올림픽 중계권 해지",
@@ -317,24 +429,6 @@
     "hitKeyword": "주택자산 양극화 심화",
     "hitAt": "2026-11-16T14:00:00+09:00",
     "leadMin": 5974
-   },
-   {
-    "keyword": "정부 양극화 대응 TF",
-    "hitKeyword": "주택자산 양극화 심화",
-    "hitAt": "2026-11-16T14:00:00+09:00",
-    "leadMin": 5899
-   },
-   {
-    "keyword": "FA 선수 22명 명단",
-    "hitKeyword": "KBO FA 22명 공시",
-    "hitAt": "2026-11-16T14:00:00+09:00",
-    "leadMin": 89
-   },
-   {
-    "keyword": "FA 승인 22명",
-    "hitKeyword": "KBO FA 22명 공시",
-    "hitAt": "2026-11-16T14:00:00+09:00",
-    "leadMin": 38
    }
   ]
  }
