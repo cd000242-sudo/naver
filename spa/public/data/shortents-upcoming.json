@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T17:35:14.911Z",
+ "builtAt": "2026-11-16T17:45:18.658Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -13,13 +13,12 @@
   {
    "keyword": "AI 부정행위 논란",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-16T16:11:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-16T16:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -40,38 +39,6 @@
      "press": "kjdaily.com",
      "publishedAt": "2026-11-16T16:32:00.000Z",
      "link": "http://www.kjdaily.com/article.php?aid=1794846613692571276"
-    }
-   ]
-  },
-  {
-   "keyword": "로버트 패틴슨",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-16T16:12:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "로버트 패틴슨, 7대 제임스 본드 된다…'007시리즈' 주인공 낙점",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-16T17:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016445193?sid=104"
-    },
-    {
-     "title": "로버트 패틴슨, 새 제임스 본드 낙점",
-     "press": "segye.com",
-     "publishedAt": "2026-11-16T16:16:00.000Z",
-     "link": "https://m.entertain.naver.com/article/022/0004175673"
-    },
-    {
-     "title": "'트와일라잇' 로버트 패틴슨, 차기 제임스 본드 공식 확정…새로운 제작...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-16T16:12:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16278212"
     }
    ]
   }
