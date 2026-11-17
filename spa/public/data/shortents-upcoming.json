@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T22:32:21.962Z",
+ "builtAt": "2026-11-17T22:42:25.121Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,84 +8,90 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 22,
  "candidates": [
   {
-   "keyword": "엔비디아 3분기 실적",
+   "keyword": "보안 취약점",
+   "sources": [
+    "google"
+   ],
+   "articles90": 14,
+   "recent20": 4,
+   "press": 12,
+   "firstArticleAt": "2026-11-17T21:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "청와대, JAVA 보안 취약점 선제 대응…민관군 긴급회의",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-17T22:34:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261118000039"
+    },
+    {
+     "title": "공공기관·기업에 널리 쓰는 자바서 치명적 보안 구멍…해킹 우려 확산",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-17T22:31:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000083834"
+    },
+    {
+     "title": "대형 금융사 보안점검 연 2회로 확대…이달 말부터 우선 시행",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-17T22:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002724826?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "미국 NSA 통신망 마비",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 86,
-   "recent20": 44,
-   "press": 60,
-   "firstArticleAt": "2026-11-17T21:48:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "젠슨 황 없는 엔비디아, 3분기 매출 103%↑",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-17T22:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001978676?sid=104"
-    },
-    {
-     "title": "\"젠슨 황 없어도 매출 2배\"…엔비디아 깜짝 실적, 컨콜서 \"성장률 75%\" 자...",
-     "press": "newsway.co.kr",
-     "publishedAt": "2026-11-17T22:30:00.000Z",
-     "link": "https://www.newsway.co.kr/news/view?ud=2026111807273891348"
-    },
-    {
-     "title": "존스 엔비디아 이사회 의장 \"젠슨 황 재선임 의사 없어\"고 일축",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-17T22:30:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/325596/?sc=Naver"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황 이사 요청 시 복귀",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 15,
+   "articles90": 14,
    "recent20": 3,
-   "press": 14,
-   "firstArticleAt": "2026-11-17T21:13:00.000Z",
-   "exclusive": true,
+   "press": 12,
+   "firstArticleAt": "2026-11-17T21:19:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'젠슨 황 없는' 엔비디아 3분기 실적 발표...젠슨 황은 \"이사회 원하면...",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-17T22:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002434332?sid=101"
+     "title": "美안보국 기밀통신망 마비…\"필수기능은 가동\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-17T22:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000927262?sid=104"
     },
     {
-     "title": "젠슨황 \"요청시 복귀\"에도…엔비디아 이사회 \"그럴 계획 없다\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-17T22:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009294976?sid=101"
+     "title": "엔비디아 실적 경계감에 NSA 통신망 장애까지⋯뉴욕증시 일제히 하락 마...",
+     "press": "ziksir.com",
+     "publishedAt": "2026-11-17T22:36:00.000Z",
+     "link": "https://www.ziksir.com/news/articleView.html?idxno=153702"
     },
     {
-     "title": "젠슨 황 사임 후 첫 입장 “요청 시 복귀”…“청문회 출석”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-17T22:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012296043?sid=104"
+     "title": "“美국가안보국 기밀정보용 내부 통신망 마비…사이버 공격 증거 없어”",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-17T22:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000367868?sid=104"
     }
    ]
   },
   {
-   "keyword": "계엄 표결 방해 1심 선고",
+   "keyword": "추경호 계엄 방해 1심 선고",
    "sources": [
     "nate"
    ],
    "articles90": 11,
-   "recent20": 3,
-   "press": 10,
-   "firstArticleAt": "2026-11-17T21:04:00.000Z",
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-17T21:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'계엄 해제 표결 방해 의혹' 추경호 대구시장 1심 11월 18일 선고",
+     "press": "dgmbc.com",
+     "publishedAt": "2026-11-17T22:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/657/0000057569?sid=100"
+    },
     {
      "title": "‘계엄해제 표결 방해’ 추경호 오늘 1심 선고…특검, 징역 20년 구형",
      "press": "ichannela.com",
@@ -97,12 +103,71 @@
      "press": "imnews.imbc.com",
      "publishedAt": "2026-11-17T22:20:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/214/0001536309?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "화재",
+   "sources": [
+    "google"
+   ],
+   "articles90": 11,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-17T21:39:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "경기도기술학교, 소방관 62명 대상 전기차 화재 대응 교육",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-17T22:34:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=564674"
     },
     {
-     "title": "추경호 대구시장, 계엄 해제 표결 방해 혐의 1심 판결 임박... 징역 20년...",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-17T22:18:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886166"
+     "title": "대전 평촌동 아파트 주차장서 차량 화재...1200만 원 재산 피해",
+     "press": "newsfreezone.co.kr",
+     "publishedAt": "2026-11-17T22:26:00.000Z",
+     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=719880"
+    },
+    {
+     "title": "청주 옥산면 단독주택서 화재…60대 남성 사망",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-17T22:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001403807?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "중국 이재명 대통령",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 10,
+   "recent20": 4,
+   "press": 8,
+   "firstArticleAt": "2026-11-17T21:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프 \"김정은도 중국 오고 싶어할 것\"…북미 정상회담 가능성 또 시사",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-17T22:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001978681?sid=104"
+    },
+    {
+     "title": "이재명 대통령, 선전 도착…19일 APEC 본회의서 정상들과 협력 논의",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-17T22:38:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3755225"
+    },
+    {
+     "title": "이 대통령, APEC 열리는 중국 도착…미·중·러 회담 앞두고 다카이치 만...",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-17T22:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001978680?sid=100"
     }
    ]
   },
@@ -111,12 +176,12 @@
    "sources": [
     "google"
    ],
-   "articles90": 9,
-   "recent20": 4,
-   "press": 9,
-   "firstArticleAt": "2026-11-17T22:00:00.000Z",
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-17T22:01:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
      "title": "[테크인사이드] 美 수출 규제 백도어?...엔비디아 칩 중국행 우회로의 ...",
@@ -139,98 +204,99 @@
    ]
   },
   {
-   "keyword": "화재",
+   "keyword": "교사",
    "sources": [
     "google"
    ],
-   "articles90": 10,
+   "articles90": 7,
    "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-17T21:39:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "대전 평촌동 아파트 주차장서 차량 화재...1200만 원 재산 피해",
-     "press": "newsfreezone.co.kr",
-     "publishedAt": "2026-11-17T22:26:00.000Z",
-     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=719880"
-    },
-    {
-     "title": "청주 옥산면 단독주택서 화재…60대 남성 사망",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-17T22:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001403807?sid=102"
-    },
-    {
-     "title": "경기도일자리재단, 양평소방서에서 '전기차 화재대응' 교육",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-17T22:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005844065?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "중국 이재명 대통령",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 5,
    "press": 7,
-   "firstArticleAt": "2026-11-17T21:12:00.000Z",
+   "firstArticleAt": "2026-11-17T21:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이 대통령, 中 선전 APEC 참석…미·중·러 정상회담 속 한반도 메시지 ...",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-17T22:27:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000083833"
+     "title": "교육장관도 AI컨닝 “못잡는다”면서…교사들 “책임전가 말라”",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-17T22:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002833583?sid=100"
     },
     {
-     "title": "트럼프 \"한국 투자 덕에 알래스카 LNG 승인\"…이 대통령과 40초간 대화",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-17T22:20:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1320860&inflow=N"
+     "title": "[이슈 톡톡] 교사는 17만 원, 간부는 수백만 원‥\"수능 감독 수당 차이 ...",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-17T22:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001536316?sid=102"
     },
     {
-     "title": "미중러 앞두고 한일회담…이 대통령, 트럼프와 대면",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-17T22:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001403805?sid=100"
+     "title": "수능 감독교사는 17만원, 교육청 간부는 330만원…\"불합리한 수당 관행...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-17T22:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005605867?sid=102"
     }
    ]
   },
   {
-   "keyword": "뉴스",
+   "keyword": "사고",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-17T22:04:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-17T22:02:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "[연합뉴스 이 시각 헤드라인] - 07:30",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-17T22:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016447829?sid=102"
+     "title": "또 우회전 사고‥장바구니 끌던 60대 참변",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-17T22:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001536317?sid=102"
     },
     {
-     "title": "[KFT 모닝 브리프] 2026.11.18 — 오늘 꼭 알아야 할 국내외 경제뉴스",
-     "press": "fntimes.com",
-     "publishedAt": "2026-11-17T22:20:00.000Z",
-     "link": "https://www.fntimes.com/html/view.php?ud=202611180709235657141825007d_18"
+     "title": "오션 \"룩서 사고 관여 안 해\"…\"유효 작업 보상은 재배정 못 해\" 주장",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-17T22:16:00.000Z",
+     "link": "https://www.tokenpost.kr/news/blockchain/440051"
     },
     {
-     "title": "[포토뉴스] 대전 동구의회, 2026년 법정 의무교육 실시",
-     "press": "daily.hankooki.com",
-     "publishedAt": "2026-11-17T22:12:00.000Z",
-     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1426183"
+     "title": "송파구, 수능 끝난 밤 주요 상권 합동 안전순찰…“안전사고 예방”",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-17T22:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002833573?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "노유민 가슴 통증 응급실행",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-17T21:41:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘NRG 출신’ 노유민, 가슴 통증으로 응급실行… 아내 “검사 결과 월요...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-17T22:37:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003542301"
+    },
+    {
+     "title": "건물주 된지 얼마나 됐다고…NRG 노유민, 가슴통증 응급실行",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-17T22:21:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004467557"
+    },
+    {
+     "title": "NRG 노유민, 갑작스러운 가슴 통증에 응급실行…♥아내 \"검사 결과 별것...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-17T22:18:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000784957"
     }
    ]
   },
@@ -239,10 +305,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-17T21:03:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-17T21:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -267,41 +333,8 @@
    ]
   },
   {
-   "keyword": "사고",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-17T22:02:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "오션 \"룩서 사고 관여 안 해\"…\"유효 작업 보상은 재배정 못 해\" 주장",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-17T22:16:00.000Z",
-     "link": "https://www.tokenpost.kr/news/blockchain/440051"
-    },
-    {
-     "title": "송파구, 수능 끝난 밤 주요 상권 합동 안전순찰…“안전사고 예방”",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-17T22:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002833573?sid=102"
-    },
-    {
-     "title": "한파 속 가스사고 '원천 차단'… 강북구·가스안전공사, 관내 37개 시설...",
-     "press": "dailyt.co.kr",
-     "publishedAt": "2026-11-17T22:08:00.000Z",
-     "link": "https://www.dailyt.co.kr/newsView/dlt202611180002"
-    }
-   ]
-  },
-  {
    "keyword": "배당",
    "sources": [
-    "signal.bz",
     "google"
    ],
    "articles90": 3,
@@ -334,10 +367,46 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 957,
-  "matched": 551,
-  "avgLeadMin": 844,
+  "flagged": 961,
+  "matched": 557,
+  "avgLeadMin": 836,
   "recent": [
+   {
+    "keyword": "엔비디아 실적발표",
+    "hitKeyword": "미 증권거래소 엔비디아 조사",
+    "hitAt": "2026-11-18T07:30:00+09:00",
+    "leadMin": 48
+   },
+   {
+    "keyword": "수능 예비소집",
+    "hitKeyword": "수능 예비소집일 한파",
+    "hitAt": "2026-11-18T07:30:00+09:00",
+    "leadMin": 48
+   },
+   {
+    "keyword": "AI 세무사 부정행위 사과",
+    "hitKeyword": "AI 부정행위",
+    "hitAt": "2026-11-18T07:30:00+09:00",
+    "leadMin": 28
+   },
+   {
+    "keyword": "젠슨 황, 이사회 요청 시 복귀",
+    "hitKeyword": "젠슨 황 CEO 복귀 의사",
+    "hitAt": "2026-11-18T07:30:00+09:00",
+    "leadMin": 18
+   },
+   {
+    "keyword": "엔비디아 3분기 실적",
+    "hitKeyword": "미 증권거래소 엔비디아 조사",
+    "hitAt": "2026-11-18T07:30:00+09:00",
+    "leadMin": 8
+   },
+   {
+    "keyword": "젠슨 황 이사 요청 시 복귀",
+    "hitKeyword": "젠슨 황 CEO 복귀 의사",
+    "hitAt": "2026-11-18T07:30:00+09:00",
+    "leadMin": 8
+   },
    {
     "keyword": "미국 NSA 통신망 마비",
     "hitKeyword": "미 국가안보국 통신망 마비",
@@ -361,42 +430,6 @@
     "hitKeyword": "오세훈 카타르전 결승골",
     "hitAt": "2026-11-18T06:30:00+09:00",
     "leadMin": 8087
-   },
-   {
-    "keyword": "오세훈 조작기소 특검법 거부권",
-    "hitKeyword": "오세훈 카타르전 결승골",
-    "hitAt": "2026-11-18T06:30:00+09:00",
-    "leadMin": 6927
-   },
-   {
-    "keyword": "신인감독 김연경 시즌2",
-    "hitKeyword": "원더독스 시즌2",
-    "hitAt": "2026-11-18T06:30:00+09:00",
-    "leadMin": 2786
-   },
-   {
-    "keyword": "오세훈 시장, 한동훈 조문",
-    "hitKeyword": "오세훈 카타르전 결승골",
-    "hitAt": "2026-11-18T06:30:00+09:00",
-    "leadMin": 2180
-   },
-   {
-    "keyword": "오세훈, 한동훈 조문",
-    "hitKeyword": "오세훈 카타르전 결승골",
-    "hitAt": "2026-11-18T06:30:00+09:00",
-    "leadMin": 2120
-   },
-   {
-    "keyword": "오세훈 재초환 재검토",
-    "hitKeyword": "오세훈 카타르전 결승골",
-    "hitAt": "2026-11-18T06:30:00+09:00",
-    "leadMin": 891
-   },
-   {
-    "keyword": "오세훈 선제골",
-    "hitKeyword": "오세훈 카타르전 결승골",
-    "hitAt": "2026-11-18T06:30:00+09:00",
-    "leadMin": 370
    }
   ]
  }
