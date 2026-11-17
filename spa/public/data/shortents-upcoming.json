@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T17:50:42.310Z",
+ "builtAt": "2026-11-17T18:00:46.391Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,22 +11,54 @@
  "measured": 26,
  "candidates": [
   {
-   "keyword": "오세훈 결승골, 모레노호 1-0 승리",
+   "keyword": "중국 이재명 대통령",
    "sources": [
     "nate"
    ],
-   "articles90": 13,
-   "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-17T16:22:00.000Z",
+   "articles90": 11,
+   "recent20": 5,
+   "press": 4,
+   "firstArticleAt": "2026-11-17T17:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "모레노호, 카타르전 승리로 덮기 어려운 아쉬움 [축구 국가대표]",
-     "press": "newsq.co.kr",
-     "publishedAt": "2026-11-17T17:48:00.000Z",
-     "link": "https://www.newsq.co.kr/news/articleView.html?idxno=500937"
+     "title": "이재명 대통령 부부, 중국 선전 도착",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-17T17:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014328576?sid=100"
+    },
+    {
+     "title": "인사하는 이재명 대통령",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-17T17:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014328574?sid=100"
+    },
+    {
+     "title": "인사하는 이재명 대통령 부부",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-17T17:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014328575?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "오세훈 선제골",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-17T16:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'김민재와 좌우 스위칭→오세훈 결승골 기점' 韓 축구 2004년생 센터백 ...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-17T17:47:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/076/0004467538"
     },
     {
      "title": "'오세훈 결승골' 한국, 올해 마지막 A매치에서 카타르에 1-0 승리",
@@ -35,10 +67,10 @@
      "link": "https://m.sports.naver.com/kfootball/article/472/0000042501"
     },
     {
-     "title": "'빅찬스 미스 3회' 결승골 넣고도 고개 숙인 오세훈 \"내가 너무 많이 놓...",
-     "press": "fourfourtwo.co.kr",
-     "publishedAt": "2026-11-17T16:55:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/411/0000090106"
+     "title": "오세훈 ‘헤더’ 빛난 한국 축구 카타르에 1-0 승…‘모레노 체제’ 마...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-17T16:56:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/028/0002832708"
     }
    ]
   },
@@ -47,10 +79,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-17T16:24:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-17T16:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -80,7 +112,7 @@
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-17T17:04:00.000Z",
    "exclusive": true,
@@ -109,7 +141,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 917,
+  "flagged": 918,
   "matched": 514,
   "avgLeadMin": 819,
   "recent": [
