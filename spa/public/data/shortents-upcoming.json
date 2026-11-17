@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-16T23:56:24.340Z",
+ "builtAt": "2026-11-17T00:46:43.398Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,226 +11,388 @@
  "measured": 20,
  "candidates": [
   {
-   "keyword": "김정은 APEC 푸틴 회담",
+   "keyword": "삼성 갤럭시 AI XR 도입",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 31,
-   "recent20": 3,
-   "press": 27,
-   "firstArticleAt": "2026-11-16T22:27:00.000Z",
+   "articles90": 49,
+   "recent20": 17,
+   "press": 44,
+   "firstArticleAt": "2026-11-16T23:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "역사상 첫 美·中·러 정상회담…테이블 위 오를 의제는",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-16T23:52:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445075"
+     "title": "삼성전자, '갤럭시 AI 클래스'에 XR 도입…누적 수료생 20만명 돌파",
+     "press": "fetv.co.kr",
+     "publishedAt": "2026-11-17T00:46:00.000Z",
+     "link": "https://www.fetv.co.kr/news/articleView.html?idxno=313819"
     },
     {
-     "title": "APEC 계기 북미 회동 가능성...트럼프 \"중국서 김정은 만날 수도\"",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-16T23:42:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=564340"
+     "title": "삼성전자, ‘갤럭시 XR’로 교실 속 AI 경험 확대",
+     "press": "news2day.co.kr",
+     "publishedAt": "2026-11-17T00:46:00.000Z",
+     "link": "https://www.news2day.co.kr/article/20261117500062"
     },
     {
-     "title": "트럼프 \"中서 김정은 만날 수도\"…북미회담 성사될까",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-16T23:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926866?sid=104"
+     "title": "삼성전자, ‘갤럭시 AI 클래스’에 XR 도입…“AI 교육 확대”",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-17T00:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/117/0004125674?sid=105"
     }
    ]
   },
   {
-   "keyword": "군용기 KADIZ 진입 전투기 출격",
+   "keyword": "제니 그래미 후보",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 23,
-   "recent20": 1,
-   "press": 23,
-   "firstArticleAt": "2026-11-16T22:28:00.000Z",
+   "articles90": 24,
+   "recent20": 5,
+   "press": 24,
+   "firstArticleAt": "2026-11-16T23:25:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "러시아 군용기 여러 대 새벽 동해 KADIZ 침입...공군 전투기 대응 출격",
-     "press": "kgnews.co.kr",
-     "publishedAt": "2026-11-16T23:48:00.000Z",
-     "link": "https://www.kgnews.co.kr/news/article.html?no=919832"
+     "title": "BTS 보이콧한 미국 그래미, 블핑 제니 받을까?",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-17T00:44:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1137910"
     },
     {
-     "title": "러 군용기 여러 대 KADIZ 진입…공군 전투기 출격 대응",
+     "title": "제니, 美 그래미 '올해의 레코드' 포함 2개 부문 후보...'아시안 팝'엔 ...",
+     "press": "starnewsk.com",
+     "publishedAt": "2026-11-17T00:44:00.000Z",
+     "link": "http://www.starnewsk.com/news/articleView.html?idxno=61075"
+    },
+    {
+     "title": "제니, 테임 임팔라 협업곡 'Dracula'로 그래미 2개 부문 후보",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-17T00:32:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16278628"
+    }
+   ]
+  },
+  {
+   "keyword": "최교진 교육부 장관",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 24,
+   "recent20": 9,
+   "press": 19,
+   "firstArticleAt": "2026-11-16T23:21:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김민석 “AI 부정행위 10년 제재 강화…최교진 답변, 우려 자아내”",
      "press": "chosun.com",
-     "publishedAt": "2026-11-16T23:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004010038?sid=100"
+     "publishedAt": "2026-11-17T00:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004010046?sid=100"
     },
     {
-     "title": "합참 \"러 군용기 여러 대, 새벽 KADIZ 진입 후 이탈\"",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-16T23:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001978511?sid=100"
+     "title": "\"수능 연기 안 해 직무유기\"…최교진 교육장관 고발 당해",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-17T00:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005354657?sid=102"
+    },
+    {
+     "title": "최교진 \"수능 연기 없다…AI 부정행위 추가 대책 검토\"",
+     "press": "kbsm.net",
+     "publishedAt": "2026-11-17T00:42:00.000Z",
+     "link": "https://www.kbsm.net/news/view.php?idx=542002"
     }
    ]
   },
   {
-   "keyword": "레이미 PGA 오스틴 우승",
+   "keyword": "김정은 관광지구 시찰",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 15,
+   "recent20": 5,
+   "press": 15,
+   "firstArticleAt": "2026-11-16T23:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김정은과 백두산 간 김주애…북한이 공개한 사진 속 '뜻밖의 모습'",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-17T00:42:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1175190"
+    },
+    {
+     "title": "[포착] 김정은 딸 주애, 흰 패딩 입고 스키…아빠는 스키장에 “만점짜...",
+     "press": "nownews.seoul.co.kr",
+     "publishedAt": "2026-11-17T00:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003700121?sid=104"
+    },
+    {
+     "title": "김정은, 삼지연·백두산 등 관광사업 이틀간 점검",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-17T00:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001205284?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "축구",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 14,
+   "recent20": 5,
+   "press": 14,
+   "firstArticleAt": "2026-11-16T23:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "포장재 넘어 축구장까지... CJ제일제당, 생분해 소재 'PHA' B2B 시장 영토...",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-17T00:42:00.000Z",
+     "link": "https://www.insight.co.kr/news/582337"
+    },
+    {
+     "title": "[우리동네 스포츠팀] 생거진천(生居鎭川), 이제는 '축구 진천'",
+     "press": "jbnews.com",
+     "publishedAt": "2026-11-17T00:32:00.000Z",
+     "link": "https://www.jbnews.com/news/articleView.html?idxno=1516112"
+    },
+    {
+     "title": "축구장 '고무칩' 바꾼다…CJ제일제당, 국내 첫 PHA 충전재 도입",
+     "press": "newsinside.kr",
+     "publishedAt": "2026-11-17T00:30:00.000Z",
+     "link": "https://www.newsinside.kr/news/articleView.html?idxno=5050101"
+    }
+   ]
+  },
+  {
+   "keyword": "엔비디아 젠슨 황 복귀 논의 없다",
    "sources": [
     "signal.bz"
    ],
    "articles90": 12,
-   "recent20": 1,
+   "recent20": 4,
    "press": 12,
-   "firstArticleAt": "2026-11-16T22:31:00.000Z",
-   "exclusive": false,
+   "firstArticleAt": "2026-11-16T23:21:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "레이미, PGA 오스틴 챔피언십 우승…4년 8개월 만에 투어 통산 2승",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-16T23:42:00.000Z",
-     "link": "https://www.ajunews.com/view/20261117084043985"
+     "title": "[뉴욕 브리핑] 젠슨황 쇼크 지속…나스닥 2.5% 급락",
+     "press": "news.dealsitetv.com",
+     "publishedAt": "2026-11-17T00:44:00.000Z",
+     "link": "https://news.dealsitetv.com/articles/178699"
     },
     {
-     "title": "채드 레이미, PGA 오스틴 챔피언십 우승…4년 8개월 만에 통산 2승",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-16T23:35:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/421/0009292739"
+     "title": "[티조챗] 트럼프는 왜 젠슨황 감쌀까…엔비디아 주식 830억 때문? 백악관...",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-17T00:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000651500?sid=104"
     },
     {
-     "title": "[PGA] 레이미, 오스틴 챔피언십서 두 번째 우승 확정…2028년까지 투어 ...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-16T23:35:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261117000107"
+     "title": "트럼프 \"젠슨황 불륜녀 中스파이 아닐 수도…中자극 원치않아\"",
+     "press": "getnews.co.kr",
+     "publishedAt": "2026-11-17T00:34:00.000Z",
+     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=887407"
     }
    ]
   },
   {
-   "keyword": "미국 AI반도체 중국 차단",
+   "keyword": "최혜진 세계랭킹 4계단 상승",
    "sources": [
     "signal.bz"
+   ],
+   "articles90": 11,
+   "recent20": 5,
+   "press": 11,
+   "firstArticleAt": "2026-11-16T23:25:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'한 달에 준우승만 세 번' 최혜진, 女골프 세계 랭킹 4계단 상승 '13위'",
+     "press": "swtvnews.com",
+     "publishedAt": "2026-11-17T00:42:00.000Z",
+     "link": "https://swtvnews.com/news/newsview.php?ncode=1065573109252019"
+    },
+    {
+     "title": "‘준우승’ 최혜진, 여자골프 세계랭킹 13위로 상승",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-17T00:41:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/056/0012295275"
+    },
+    {
+     "title": "'10번째 준우승' 최혜진, 여자골프 세계랭킹 4계단 점프 '13위'",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-17T00:38:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1137903"
+    }
+   ]
+  },
+  {
+   "keyword": "아리바이오 치매약 임상",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 11,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-16T23:28:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[특징주] 아리바이오랩·홀딩스, 치매약 전체 환자군 효과 입증 실패에...",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-17T00:30:00.000Z",
+     "link": "https://www.viva100.com/article/20261117500076"
+    },
+    {
+     "title": "[특징주] ‘먹는 치매약’ 임상 3상 1차 목표 달성했지만…아리바이오 ...",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-17T00:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001205273?sid=101"
+    },
+    {
+     "title": "삼진제약 도입 치매약 'AR1001', 3상서 엇갈린 결과",
+     "press": "medipana.com",
+     "publishedAt": "2026-11-17T00:22:00.000Z",
+     "link": "https://www.medipana.com/news/articleView.html?idxno=421982"
+    }
+   ]
+  },
+  {
+   "keyword": "수능일",
+   "sources": [
+    "google"
    ],
    "articles90": 12,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-16T22:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美, AI 반도체 '우회 이용'까지 차단",
-     "press": "choicenews.co.kr",
-     "publishedAt": "2026-11-16T23:54:00.000Z",
-     "link": "http://www.choicenews.co.kr/news/articleView.html?idxno=173240"
-    },
-    {
-     "title": "美, 엔비디아 AI 반도체 中 원격 접속 차단…젠슨 황 스캔들 후 규제 강...",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-16T23:52:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=564346"
-    },
-    {
-     "title": "[국제금융 브리핑] 미국, 중국 AI칩 원격접속도 통제...S&P500 1.92% 하락",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-16T23:32:00.000Z",
-     "link": "https://www.tokenpost.kr/news/economy/439445"
-    }
-   ]
-  },
-  {
-   "keyword": "최혜진 준우승 세계랭킹 13위",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 10,
-   "recent20": 2,
+   "recent20": 3,
    "press": 10,
-   "firstArticleAt": "2026-11-16T22:28:00.000Z",
+   "firstArticleAt": "2026-11-16T23:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘10번째 정상 도전 좌절’ 최혜진, 세계랭킹 4계단 점프 ‘17위→13위’",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-16T23:55:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/382/0001305184"
+     "title": "[부산 브리핑 모음(11월17일)] 부산시, 수능일 교통·의료 등 종합지원대...",
+     "press": "dnews.co.kr",
+     "publishedAt": "2026-11-17T00:42:00.000Z",
+     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611161731504700321"
     },
     {
-     "title": "'최근 4개 대회중 3회 준우승' 최혜진, 세계랭킹 13위… LPGA 우승 없는 ...",
-     "press": "smartbizn.com",
-     "publishedAt": "2026-11-16T23:52:00.000Z",
-     "link": "https://www.smartbizn.com/news/articleView.html?idxno=159649"
+     "title": "서울시, 수능일 지하철 27회 증편 운행",
+     "press": "news.skbroadband.com",
+     "publishedAt": "2026-11-17T00:42:00.000Z",
+     "link": "https://news.skbroadband.com/news/articleView.html?idxno=243291"
     },
     {
-     "title": "'디 안니카 준우승' 최혜진, 세계랭킹 13위…4계단 상승",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-16T23:25:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/421/0009292720"
+     "title": "영등포구, 수능일 특별교통대책…수험생 수송차량 34대 배치",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-17T00:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016445600?sid=102"
     }
    ]
   },
   {
-   "keyword": "체이스 은행 서비스 장애",
+   "keyword": "트럼프 미중러 회담 의제",
    "sources": [
     "signal.bz"
-   ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-16T22:43:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美 최대은행 체이스 거래 장애⋯\"소프트웨어 버그 탓\"",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-16T23:46:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2648983"
-    },
-    {
-     "title": "美 최대 은행 체이스 전산 오류에 다른 은행 송금도 '먹통'",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-16T23:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000965977?sid=104"
-    },
-    {
-     "title": "美 최대 은행 체이스 서비스 장애…최근 잇따른 IT사고에 불안 커져",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-16T23:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003059512?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "나의 유죄인간",
-   "sources": [
-    "nate"
    ],
    "articles90": 8,
    "recent20": 2,
    "press": 7,
-   "firstArticleAt": "2026-11-16T23:10:00.000Z",
+   "firstArticleAt": "2026-11-16T23:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "나의 유죄인간 임시완·설인아, 오해 끝 첫 입맞춤…9회 연속 동시간대...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-16T23:54:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16278564"
+     "title": "트럼프 \"中서 김정은 만날 수도…시진핑에 달려\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-17T00:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926890?sid=104"
     },
     {
-     "title": "'나의 유죄인간' 김정현, 임시완·연우와 브로맨스·로맨스 모두 잡았다",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-16T23:48:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16278551"
+     "title": "우크라, 미중러 정상회담 앞두고 러시아 맹공…‘제2 얄타회담’ 우려?",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-17T00:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012295273?sid=104"
     },
     {
-     "title": "'나의 유죄인간' 임시완·설인아, 화해의 키스에 시청률 5.3%...로맨스 급...",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-16T23:30:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=782350"
+     "title": "트럼프 아시아 순방길 '즉흥 외교'…북미·우크라 의제 부상",
+     "press": "youthdaily.co.kr",
+     "publishedAt": "2026-11-17T00:14:00.000Z",
+     "link": "https://www.youthdaily.co.kr/news/article.html?no=229936"
+    }
+   ]
+  },
+  {
+   "keyword": "장동혁, 한동훈 빙부상 조문",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 13,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-16T23:49:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "장동혁, 한동훈 빙부상 빈소 조문…국힘 지도부 동행",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-17T00:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006410916?sid=100"
+    },
+    {
+     "title": "장동혁, 한동훈 빙부상 조문⋯지도부 8명 동행",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-17T00:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001075594?sid=100"
+    },
+    {
+     "title": "장동혁, 한동훈 장인상 조문…4개월여 만에 한자리서 담소",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-17T00:16:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2649042"
+    }
+   ]
+  },
+  {
+   "keyword": "변동성",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-17T00:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "코스피 5,000선 위태...투자자들 불안 속 주식시장 변동성 급증",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-17T00:38:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885989"
+    },
+    {
+     "title": "NH투자증권 \"내년 코스피 9200P 전망\"…상반기 순풍·하반기 변동성 예상",
+     "press": "newsdream.kr",
+     "publishedAt": "2026-11-17T00:26:00.000Z",
+     "link": "http://www.newsdream.kr/news/articleView.html?idxno=122301"
+    },
+    {
+     "title": "변동성 커진 연금 시장 겨냥…한국투자증권, 유튜브 시황 라이브로 자산...",
+     "press": "thefairnews.co.kr",
+     "publishedAt": "2026-11-17T00:18:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94434"
     }
    ]
   },
@@ -239,72 +401,108 @@
    "sources": [
     "google"
    ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-16T23:04:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-16T23:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "로다주, 타노스 넘볼 최악의 빌런…'어벤져스: 둠스데이' 닥터 둠 온다",
+     "press": "maxmovie.com",
+     "publishedAt": "2026-11-17T00:14:00.000Z",
+     "link": "https://www.maxmovie.com/news/articleView.html?idxno=502998"
+    },
+    {
+     "title": "\"타노스와 다른 차원, 공포 느낄 것\"...'어벤져스5' 닥터 둠은 누구인가",
+     "press": "nc.press",
+     "publishedAt": "2026-11-16T23:59:00.000Z",
+     "link": "https://www.nc.press/news/articleView.html?idxno=631161"
+    },
     {
      "title": "'어벤져스: 둠스데이' 아이언맨 아닌 닥터 둠…\"공포 느낄 것\"",
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-16T23:51:00.000Z",
      "link": "https://m.entertain.naver.com/article/018/0006410867"
-    },
-    {
-     "title": "\"MCU 새 판도를 뒤흔든다\"…'어벤져스: 둠스데이' 로버트 다우니 주니어...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-16T23:44:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004467245"
-    },
-    {
-     "title": "로버트 다우니 주니어, '어벤져스: 둠스데이'서 절대 빌런 '닥터 둠' 변...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-16T23:24:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16278513"
     }
    ]
   },
   {
-   "keyword": "트럼프, 젠슨 황 복귀 찬성",
+   "keyword": "젤렌스키 북한 미사일 공급",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-16T22:56:00.000Z",
+   "firstArticleAt": "2026-11-16T23:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "트럼프 \"상관없다\"는데…물러난 젠슨 황 복귀 시도 [소셜픽]",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-16T23:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000521042?sid=104"
+     "title": "젤렌스키 \"北미사일, 우크라 전쟁서 성능 개선…韓안보에도 위협\"",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-17T00:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003155926?sid=104"
     },
     {
-     "title": "트럼프, '젠슨 황 복귀론' 옹호…\"앨리스 황, 中 간첩 아닐 수도\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-16T23:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926867?sid=104"
+     "title": "젤렌스키 \"러, 대규모 공습 준비 중…北 탄도미사일 매달 수십발 공급\"",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-16T23:40:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261117000151"
     },
     {
-     "title": "[美증시] 엔비디아 이사회 \"젠슨황 복귀 논의없다\"…3일째 급락, 시총 3...",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-16T22:56:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1137859"
+     "title": "젤렌스키 \"매달 북한산 탄도미사일 수십 발…한국 주변에 도전 과제\"",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-16T23:28:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3754126"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 788,
-  "matched": 446,
-  "avgLeadMin": 888,
+  "flagged": 804,
+  "matched": 452,
+  "avgLeadMin": 877,
   "recent": [
+   {
+    "keyword": "우리들의 발라드2",
+    "hitKeyword": "우리들의 발라드2 경연",
+    "hitAt": "2026-11-17T09:30:00+09:00",
+    "leadMin": 54
+   },
+   {
+    "keyword": "이정현 12월 결혼",
+    "hitKeyword": "이정현 12월 결혼",
+    "hitAt": "2026-11-17T09:00:00+09:00",
+    "leadMin": 144
+   },
+   {
+    "keyword": "제니, 그래미 올해의 레코드 후보",
+    "hitKeyword": "제니 그래미 본상 후보",
+    "hitAt": "2026-11-17T09:00:00+09:00",
+    "leadMin": 54
+   },
+   {
+    "keyword": "제니, 그래미 본상 후보!",
+    "hitKeyword": "제니 그래미 본상 후보",
+    "hitAt": "2026-11-17T09:00:00+09:00",
+    "leadMin": 24
+   },
+   {
+    "keyword": "제니 그래미 후보 2개 부문",
+    "hitKeyword": "제니 그래미 본상 후보",
+    "hitAt": "2026-11-17T09:00:00+09:00",
+    "leadMin": 14
+   },
+   {
+    "keyword": "트럼프, 젠슨 황 복귀 찬성",
+    "hitKeyword": "트럼프 젠슨황 옹호",
+    "hitAt": "2026-11-17T09:00:00+09:00",
+    "leadMin": 4
+   },
    {
     "keyword": "보안",
     "hitKeyword": "초소형 카메라 보안 강화",
@@ -328,42 +526,6 @@
     "hitKeyword": "미국 중국 AI 규제",
     "hitAt": "2026-11-17T08:00:00+09:00",
     "leadMin": 54
-   },
-   {
-    "keyword": "수능 AI 커닝 우려",
-    "hitKeyword": "AI 커닝 적발 한계",
-    "hitAt": "2026-11-17T08:00:00+09:00",
-    "leadMin": 24
-   },
-   {
-    "keyword": "앨리스 황",
-    "hitKeyword": "앨리스황 스파이 의혹",
-    "hitAt": "2026-11-17T07:30:00+09:00",
-    "leadMin": 1486
-   },
-   {
-    "keyword": "미중러 정상회담",
-    "hitKeyword": "미중러 우크라이나 논의",
-    "hitAt": "2026-11-17T07:30:00+09:00",
-    "leadMin": 54
-   },
-   {
-    "keyword": "제니, 그래미 2개 후보",
-    "hitKeyword": "제니 그래미 본상 후보",
-    "hitAt": "2026-11-17T07:30:00+09:00",
-    "leadMin": 54
-   },
-   {
-    "keyword": "엔비디아 실적발표",
-    "hitKeyword": "엔비디아 주가 급락",
-    "hitAt": "2026-11-17T07:30:00+09:00",
-    "leadMin": 4
-   },
-   {
-    "keyword": "무허가 유흥업소 운영하다",
-    "hitKeyword": "넷플릭스 출연자 유흥업소",
-    "hitAt": "2026-11-17T07:00:00+09:00",
-    "leadMin": 877
    }
   ]
  }
