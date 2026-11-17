@@ -55,7 +55,8 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust, hea
     headingLevel?: 1 | 2;
 }) {
     const Heading = headingLevel === 1 ? 'h1' : 'h2';
-    const [term, setTerm] = useState<TermId>('monthly');
+    // [2026-11-17 owner] The store opens on the one-year term (was one month).
+    const [term, setTerm] = useState<TermId>('yearly');
     // The dark pill behind the chosen term glides between the three segments (transform only).
     const [cart, setCart] = useState<string[]>([]);
     const dday = daysToSwitch();
@@ -227,7 +228,7 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust, hea
                                 </div>
                             )}
 
-                            <div className="st-body">
+                            <div className={`st-body${product.bundle && bundleMedia ? ' st-has-media' : ''}`}>
                                 <h3>
                                     <span aria-hidden="true" style={{ color: product.accent }}>{product.glyph}</span>
                                     {product.name}

@@ -61,7 +61,8 @@ test('LEWORD monthly primary price remains monthly instead of only a daily equiv
 });
 
 test('LEWORD monthly is an independent cart selection in both directions',()=>{
- let index=0;const states=[];
+ // The store opens on the one-year term since 2026-11-17, so the monthly rules are checked with the term set to monthly.
+ let index=0;const states=['monthly'];
  const hooks={...React,useEffect:()=>{},useMemo:fn=>fn(),useState:initial=>{const at=index++;if(!(at in states))states[at]=typeof initial==='function'?initial():initial;return [states[at],next=>{states[at]=typeof next==='function'?next(states[at]):next;}];}};
  const Store=load('../src/components/store/ProductStore.tsx',hooks).default;
  const buttons=()=>{index=0;const list=[];const walk=node=>{if(!node||typeof node!=='object')return;if(node.type==='button'&&String(node.props.className).startsWith('st-buy'))list.push(node);React.Children.forEach(node.props?.children,walk);};walk(Store({}));return list;};
@@ -88,7 +89,7 @@ test('bank transfer LEWORD order shows 19,900 including VAT and explicitly requi
 test('card callback cannot run without recurring consent and accepts it after checking',()=>{
  for(const consent of [false,true]){
   let index=0;let paid=0;
-  const hooks={...React,useEffect:()=>{},useMemo:fn=>fn(),useState:initial=>{const at=index++;return [at===1?['leword']:at===3?true:at===4?'member@example.com':at===6?consent:typeof initial==='function'?initial():initial,()=>{}];}};
+  const hooks={...React,useEffect:()=>{},useMemo:fn=>fn(),useState:initial=>{const at=index++;return [at===0?'monthly':at===1?['leword']:at===3?true:at===4?'member@example.com':at===6?consent:typeof initial==='function'?initial():initial,()=>{}];}};
   const Store=load('../src/components/store/ProductStore.tsx',hooks).default;
   let card;const walk=node=>{if(!node||typeof node!=='object')return;if(node.type==='button'&&node.props.className==='st-pay-opt')card=node;React.Children.forEach(node.props?.children,walk);};
   walk(Store({onCardPay:()=>paid++}));card.props.onClick();assert.equal(paid,consent?1:0);
@@ -114,4 +115,9 @@ test('checkout dialog mounts on document body beyond the filtered pricing contai
  const styles=fs.readFileSync(new URL('../src/components/store/StoreStyles.tsx',import.meta.url),'utf8');
  assert.match(styles,/max-height: calc\(100dvh - 36px\)/);
  assert.match(styles,/overflow-y: auto/);
+});
+test('the store opens on the one-year term and marks the bundle body that carries media',()=>{
+ const source=fs.readFileSync(new URL('../src/components/store/ProductStore.tsx',import.meta.url),'utf8');
+ assert.match(source,/useState<TermId>\('yearly'\)/);
+ assert.match(source,/st-has-media/);
 });

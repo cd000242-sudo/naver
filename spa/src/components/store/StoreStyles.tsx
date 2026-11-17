@@ -156,6 +156,27 @@ function StoreStyles() {
             .st-bundle-side .st-trust, .st-bundle-side .st-buy { margin: 0; }
             .st-plain-side { display: contents; }
 
+            /*
+             * [2026-11-17 owner] The bundle's price and button sit on the first screen: beside the video on a wide
+             * screen, above it on a narrow one. Stacked under the video they started at 1,150px (measured live).
+             */
+            @media (min-width: 981px) {
+                .st-bundle .st-body.st-has-media {
+                    display: grid; grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+                    grid-template-rows: auto auto auto 1fr; column-gap: 32px; row-gap: 16px; align-items: start;
+                }
+                .st-bundle .st-body.st-has-media > h3 { grid-column: 1; grid-row: 1; }
+                .st-bundle .st-body.st-has-media > .st-tag { grid-column: 1; grid-row: 2; }
+                .st-bundle .st-body.st-has-media > .st-incl { grid-column: 1; grid-row: 3; }
+                .st-bundle .st-body.st-has-media > .st-bundle-side { grid-column: 1; grid-row: 4; align-self: end; }
+                .st-bundle .st-body.st-has-media > .st-bundle-media { grid-column: 2; grid-row: 1 / -1; align-self: center; }
+            }
+            @media (max-width: 980px) {
+                .st-bundle .st-body.st-has-media > .st-bundle-side { order: 1; }
+                .st-bundle .st-body.st-has-media > .st-incl { order: 2; }
+                .st-bundle .st-body.st-has-media > .st-bundle-media { order: 3; }
+            }
+
             .st-trust {
                 display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
                 gap: 8px; margin: 0; padding: 12px 8px;
@@ -166,7 +187,8 @@ function StoreStyles() {
             .st-trust b svg { color: var(--st-mute); }
             .st-trust span { display: block; margin-top: 4px; color: var(--st-mute); font-size: ${type.meta}px; line-height: 1.4; word-break: keep-all; }
             .st-bundle h3 { font-size: ${type.h3}px; }
-            .st-bundle-media .purchase-video-frame video { max-height: 340px; }
+            /* The clip fills a 16:9 frame (it used to be letterboxed inside a 200-340px tall box). */
+            .st-bundle-media .purchase-video-frame video { max-height: none; aspect-ratio: 16 / 9; object-fit: cover; background: #0b0c0e; }
 
             .st-cart {
                 margin-top: 24px; border: 1px solid var(--st-line); border-radius: ${lightRadius.card}px;
