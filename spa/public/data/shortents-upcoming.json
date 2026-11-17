@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T03:57:43.947Z",
+ "builtAt": "2026-11-17T04:07:46.758Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,56 +16,56 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 90,
+   "articles90": 89,
    "recent20": 9,
-   "press": 67,
+   "press": 66,
+   "firstArticleAt": "2026-11-17T02:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이달 중 조작기소 특검 시동…이해충돌 논란",
+     "press": "naeil.com",
+     "publishedAt": "2026-11-17T04:06:00.000Z",
+     "link": "https://www.naeil.com/news/read/609071?ref=naver"
+    },
+    {
+     "title": "[속보] ‘조작기소 특검법’ 공포안 국무회의 통과",
+     "press": "segye.com",
+     "publishedAt": "2026-11-17T04:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004175837?sid=100"
+    },
+    {
+     "title": "‘조작기소특검법’ 공포 수순",
+     "press": "naeil.com",
+     "publishedAt": "2026-11-17T04:02:00.000Z",
+     "link": "https://www.naeil.com/news/read/609093?ref=naver"
+    }
+   ]
+  },
+  {
+   "keyword": "AI 부정행위 대응 강화",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 52,
+   "recent20": 4,
+   "press": 41,
    "firstArticleAt": "2026-11-17T02:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'조작기소 특검법' 국무회의 통과…국힘, 전국 순회 장외투쟁",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-17T03:56:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=315518"
+     "title": "인공지능 부정행위, 수능 10년 못 볼 수도",
+     "press": "naeil.com",
+     "publishedAt": "2026-11-17T04:06:00.000Z",
+     "link": "https://www.naeil.com/news/read/609079?ref=naver"
     },
-    {
-     "title": "조작기소 특검 출범 초읽기…309명·200일, 검찰 정면 겨눈다",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-17T03:54:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101411"
-    },
-    {
-     "title": "[속보] “대통령 공소취소 목적 ‘위헌 법률’, 다투겠다”…조작기소...",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-17T03:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003059569?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "AI 부정행위 대응",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 74,
-   "recent20": 16,
-   "press": 50,
-   "firstArticleAt": "2026-11-17T02:45:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
     {
      "title": "삼성·SK 등 4대 그룹, 보안 강화… AI 안경·카메라 반입 차단",
      "press": "newscj.com",
      "publishedAt": "2026-11-17T03:56:00.000Z",
      "link": "https://www.newscj.com/news/articleView.html?idxno=3449378"
-    },
-    {
-     "title": "\"499달러로 SAT 만점\", 미국도 AI 부정행위 기승",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-17T03:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006411075?sid=104"
     },
     {
      "title": "공소청 \"시험 부정행위 엄정 대응…구속영장 청구도 적극 검토\"",
@@ -76,140 +76,12 @@
    ]
   },
   {
-   "keyword": "최교진 교육부 장관",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 13,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-17T02:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "수능 이틀 앞두고 'AI 부정행위' 우려에 연기 요구...교육부 \"검토 안 해...",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-17T03:42:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=564485"
-    },
-    {
-     "title": "최교진 교육장관, 세무사시험 AI 부정행위 논란에 직무유기 고발...\"정부...",
-     "press": "cwn.kr",
-     "publishedAt": "2026-11-17T03:20:00.000Z",
-     "link": "https://www.cwn.kr/news/articleView.html?idxno=61965"
-    },
-    {
-     "title": "전북교사노조 \"'못 할 것 같다'는 장관, 감독 교사에게 책임 떠넘겨선 ...",
-     "press": "jmbc.co.kr",
-     "publishedAt": "2026-11-17T03:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/659/0000048781?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "보습크림 8종 품질 비교",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 21,
-   "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-17T02:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "보습크림 뭐 살까?…세타필 사용 만족도 최고·가격은 가장 저렴",
-     "press": "kizmom.com",
-     "publishedAt": "2026-11-17T03:25:00.000Z",
-     "link": "https://www.kizmom.com/news/articleView.html?idxno=114022"
-    },
-    {
-     "title": "보습크림 가격차 최대 6.9배… 안전성은 모두 '합격점'",
-     "press": "bokuennews.com",
-     "publishedAt": "2026-11-17T03:10:00.000Z",
-     "link": "http://www.bokuennews.com/news/article.html?no=287289"
-    },
-    {
-     "title": "보습크림, 보습력과 수분 증발 감소도, 가격 등 고려해 구매해야",
-     "press": "intn.co.kr",
-     "publishedAt": "2026-11-17T03:02:00.000Z",
-     "link": "https://www.intn.co.kr/news/articleView.html?idxno=3000296"
-    }
-   ]
-  },
-  {
-   "keyword": "김정은 삼지연 방문",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-17T02:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김정은, 북·중 접경 삼지연 관광지구 건설현장 시찰",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-17T03:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926970?sid=100"
-    },
-    {
-     "title": "첫 미중러 정상회담서 북핵 용인?···김정은 왜 백두산行?",
-     "press": "cnbnews.com",
-     "publishedAt": "2026-11-17T03:14:00.000Z",
-     "link": "https://www.cnbnews.com/news/articleView.html?idxno=1024100"
-    },
-    {
-     "title": "김정은, '중대 결심'의 성지 백두산 갔다…트럼프는 또 '러브콜'",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-17T03:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009293526?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "코스피 급락",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-17T02:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "코스피, 美 AI주 급락에 내려…나흘 연속 하락",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-17T03:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926971?sid=101"
-    },
-    {
-     "title": "코스피 5000 급락에 삼성SDI 주가도 흔들...2차전지·전고체 배터리주 약...",
-     "press": "christiantoday.co.kr",
-     "publishedAt": "2026-11-17T03:06:00.000Z",
-     "link": "https://www.christiantoday.co.kr/news/378674"
-    },
-    {
-     "title": "“의무공개매수법 이대로 통과되면 코스피 4200”…외국인 이탈 경고",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-17T03:04:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611170082"
-    }
-   ]
-  },
-  {
    "keyword": "나가야마 에이타, 손석구와 한국 사랑",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 7,
-   "recent20": 1,
+   "recent20": 0,
    "press": 7,
    "firstArticleAt": "2026-11-17T03:09:00.000Z",
    "exclusive": false,
@@ -228,10 +100,42 @@
      "link": "https://m.entertain.naver.com/article/144/0001150244"
     },
     {
-     "title": "［종합］손석구X나가야마 에이타 ‘푸른길’, 본 적 없는 국경초월 범죄...",
-     "press": "breaknews.com",
+     "title": "'푸른길', 손석구·나가야마 에이타의 국경 초월 공조…색다른 버디 수...",
+     "press": "tvdaily.co.kr",
      "publishedAt": "2026-11-17T03:30:00.000Z",
-     "link": "http://www.breaknews.com/1251535"
+     "link": "https://m.entertain.naver.com/article/440/0000052994"
+    }
+   ]
+  },
+  {
+   "keyword": "김정은 건설현장 방문",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-17T02:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김정은, 북·중 접경 삼지연 관광지구 건설현장 시찰",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-17T03:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926970?sid=100"
+    },
+    {
+     "title": "김정은, '중대 결심'의 성지 백두산 갔다…트럼프는 또 '러브콜'",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-17T03:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009293526?sid=100"
+    },
+    {
+     "title": "김정은 삼지연 점검에 통일부 \"APEC 앞둔 시점에 접경 방문 주시 중\"",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-17T03:06:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4119032"
     }
    ]
   },
@@ -241,10 +145,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 7,
+   "articles90": 4,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-17T02:28:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-17T02:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -267,14 +171,58 @@
      "link": "https://www.newdaily.co.kr/site/data/html/2026/11/17/2026111750148.html"
     }
    ]
+  },
+  {
+   "keyword": "트럼프 엔비디아 주식",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-17T02:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "벼랑 끝 670조 AI 지원, 젠슨 복귀 로비 통할까 [트럼프 스톡커]",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-17T03:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004683053?sid=104"
+    },
+    {
+     "title": "“엔비디아 주식 830억 원 보유”…트럼프, ‘젠슨황 복귀’ 시동? [지금...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-17T03:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012295403?sid=121"
+    },
+    {
+     "title": "“젠슨 황 감싸던 트럼프, 알고 보니”…엔비디아 주식 ‘폭풍 매매’ ...",
+     "press": "ekn.kr",
+     "publishedAt": "2026-11-17T02:38:00.000Z",
+     "link": "https://www.ekn.kr/web/view.php?key=20261117022020615"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 851,
-  "matched": 466,
-  "avgLeadMin": 856,
+  "flagged": 853,
+  "matched": 468,
+  "avgLeadMin": 853,
   "recent": [
+   {
+    "keyword": "젠슨 황 복귀 논의 없어",
+    "hitKeyword": "젠슨 황 복귀 불가",
+    "hitAt": "2026-11-17T13:00:00+09:00",
+    "leadMin": 314
+   },
+   {
+    "keyword": "코스피 급락",
+    "hitKeyword": "모건스탠리 코스피 1만",
+    "hitAt": "2026-11-17T13:00:00+09:00",
+    "leadMin": 83
+   },
    {
     "keyword": "김주혁",
     "hitKeyword": "김주혁 9주기",
@@ -322,18 +270,6 @@
     "hitKeyword": "로버트 패틴슨 007",
     "hitAt": "2026-11-17T10:30:00+09:00",
     "leadMin": 124
-   },
-   {
-    "keyword": "트럼프 미중러 회담 의제",
-    "hitKeyword": "트럼프 앨리스황 옹호",
-    "hitAt": "2026-11-17T10:30:00+09:00",
-    "leadMin": 53
-   },
-   {
-    "keyword": "FA 1호 계약 주인공은 오태곤",
-    "hitKeyword": "양의지 두산 FA 계약",
-    "hitAt": "2026-11-17T10:30:00+09:00",
-    "leadMin": 3
    }
   ]
  }
