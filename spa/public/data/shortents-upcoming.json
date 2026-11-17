@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T03:27:34.505Z",
+ "builtAt": "2026-11-17T03:37:37.471Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -13,111 +13,88 @@
   {
    "keyword": "조작기소 특검법 국무회의 통과",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 86,
-   "recent20": 14,
-   "press": 62,
-   "firstArticleAt": "2026-11-17T02:27:00.000Z",
+   "articles90": 88,
+   "recent20": 16,
+   "press": 65,
+   "firstArticleAt": "2026-11-17T02:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] 韓총리, ‘조작기소 특검법’ 공포안 국무회의 의결…최대 309명...",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-17T03:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001231357?sid=100"
+     "title": "[속보] '조작기소 특검법' 공포안 국무회의 통과…韓총리 주재",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-17T03:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000544212?sid=101"
     },
     {
-     "title": "'조작기소 특검법' 공포안 국무회의 통과…최장 200일 활동",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-17T03:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001978563?sid=102"
+     "title": "'조작기소 특검법' 국무회의 통과…한성숙 국무총리 주재",
+     "press": "sisafocus.co.kr",
+     "publishedAt": "2026-11-17T03:34:00.000Z",
+     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367698"
     },
     {
-     "title": "'조작기소 의혹 특검법' 국무회의 의결…국민의힘 장외투쟁",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-17T03:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001403596?sid=100"
+     "title": "한성숙 국무회의 '조작기소특검법' 통과. \"국민 안두렵냐\"",
+     "press": "viewsnnews.com",
+     "publishedAt": "2026-11-17T03:32:00.000Z",
+     "link": "https://www.viewsnnews.com/article?q=239749"
     }
    ]
   },
   {
    "keyword": "AI 부정행위 대응",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 67,
-   "recent20": 10,
-   "press": 47,
-   "firstArticleAt": "2026-11-17T02:36:00.000Z",
+   "articles90": 72,
+   "recent20": 15,
+   "press": 49,
+   "firstArticleAt": "2026-11-17T02:38:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "\"1500만 원 내면 의대·SKY 합격\" … 대치동 학부모 'AI 커닝' 의혹 확산",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-17T03:26:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/17/2026111750157.html"
+     "title": "충남교육청, 수능 감독 인력 보강…AI 부정행위 대응 강화",
+     "press": "goodmorningcc.com",
+     "publishedAt": "2026-11-17T03:36:00.000Z",
+     "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=455978"
     },
     {
-     "title": "[속보]수능 코앞에 어쩌나 …스마트 안경 ‘AI 부정행위’만 대응한 정...",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-17T03:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000161483?sid=102"
+     "title": "“EMP 만들어서 가겠다”…AI커닝 공포에 수험생들 아비규환",
+     "press": "ekn.kr",
+     "publishedAt": "2026-11-17T03:36:00.000Z",
+     "link": "https://www.ekn.kr/web/view.php?key=20261117029290733"
     },
     {
-     "title": "野 \"AI 부정행위, 허둥거리는 정부가 불안 더 키워…대책 없으면 수능 연...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-17T03:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014327041?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "한성숙 총리 발언",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 38,
-   "recent20": 3,
-   "press": 29,
-   "firstArticleAt": "2026-11-17T01:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "국무회의 주재하는 한성숙 국무총리",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-17T03:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016446229?sid=100"
-    },
-    {
-     "title": "국민의힘, 2주째 청와대 앞 의총…\"한성숙, 법정에 서는 날 올 것\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-17T03:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001403594?sid=100"
-    },
-    {
-     "title": "한성숙 주재 국무회의서 ‘조작기소 특검법’ 공포안 통과",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-17T03:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003565773?sid=100"
+     "title": "이준석, AI 악용 시험 부정행위 '방패' 만들었다",
+     "press": "thereport.co.kr",
+     "publishedAt": "2026-11-17T03:34:00.000Z",
+     "link": "https://www.thereport.co.kr/news/articleView.html?idxno=93429"
     }
    ]
   },
   {
    "keyword": "최교진 교육부 장관",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 36,
-   "recent20": 3,
-   "press": 28,
-   "firstArticleAt": "2026-11-17T02:00:00.000Z",
+   "articles90": 30,
+   "recent20": 2,
+   "press": 25,
+   "firstArticleAt": "2026-11-17T02:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이준석, ‘수능 AI 부정행위’ 탐지 앱 개발…“교육부 장관 답변에 한...",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-17T03:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003565776?sid=100"
+    },
     {
      "title": "최교진 교육장관, 세무사시험 AI 부정행위 논란에 직무유기 고발...\"정부...",
      "press": "cwn.kr",
@@ -129,57 +106,20 @@
      "press": "jmbc.co.kr",
      "publishedAt": "2026-11-17T03:16:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/659/0000048781?sid=102"
-    },
-    {
-     "title": "[톺아보기] \"저는 못 잡겠다\" 최교진 발언 '일파만파'…여야 모두 질타",
-     "press": "thepublic.kr",
-     "publishedAt": "2026-11-17T03:08:00.000Z",
-     "link": "https://www.thepublic.kr/news/articleView.html?idxno=327044"
-    }
-   ]
-  },
-  {
-   "keyword": "세무사 경찰 출석",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 17,
-   "recent20": 1,
-   "press": 14,
-   "firstArticleAt": "2026-11-17T02:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"'개조 계산기' 썼다\"…세무사 수석합격자 경찰 출석",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-17T03:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001403593?sid=102"
-    },
-    {
-     "title": "세무사시험 수석합격자 한모, AI·초소형 카메라 부정행위 인정...\"모두...",
-     "press": "cwn.kr",
-     "publishedAt": "2026-11-17T03:06:00.000Z",
-     "link": "https://www.cwn.kr/news/articleView.html?idxno=61957"
-    },
-    {
-     "title": "‘AI 부정행위 자수’ 세무사 수석 경찰 출석…피의자 전환",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-17T03:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012295404?sid=102"
     }
    ]
   },
   {
    "keyword": "김정은 삼지연 방문",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 14,
-   "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-17T01:58:00.000Z",
-   "exclusive": true,
+   "articles90": 13,
+   "recent20": 0,
+   "press": 11,
+   "firstArticleAt": "2026-11-17T02:10:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
@@ -205,12 +145,13 @@
   {
    "keyword": "발언하는 장동혁 대표",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-17T02:05:00.000Z",
+   "articles90": 9,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-17T02:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -239,10 +180,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
+   "articles90": 8,
    "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-17T02:00:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-17T02:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -271,10 +212,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 9,
+   "articles90": 7,
    "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-17T02:02:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-17T02:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -299,13 +240,44 @@
    ]
   },
   {
+   "keyword": "피의자",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-17T02:18:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[단독] '소녀 살해' 피의자 아들도...\"가스라이팅 당해 절도\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-17T03:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002433945?sid=102"
+    },
+    {
+     "title": "'성북 10대 살인' 50대 피의자 전 연인 최초 신고서 \"건성으로 넘어가\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-17T03:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009293534?sid=102"
+    },
+    {
+     "title": "'수석' 합격자가 피의자로‥\"수험생에 죄송\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-17T03:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001536085?sid=102"
+    }
+   ]
+  },
+  {
    "keyword": "상장",
    "sources": [
-    "signal.bz",
     "google"
    ],
    "articles90": 7,
-   "recent20": 3,
+   "recent20": 1,
    "press": 6,
    "firstArticleAt": "2026-11-17T02:38:00.000Z",
    "exclusive": false,
@@ -318,91 +290,70 @@
      "link": "https://www.tokenpost.kr/news/ai/439560"
     },
     {
-     "title": "[ESG 트렌드] 동아제약, KCGS ESG 평가서 지배구조 ‘A+’…상장사 최상...",
-     "press": "ibabynews.com",
-     "publishedAt": "2026-11-17T03:08:00.000Z",
-     "link": "https://www.ibabynews.com/news/articleView.html?idxno=156983"
-    },
-    {
      "title": "핸드셋 상장기업 2026년 11월 브랜드평판...영풍, 아모텍, 드림텍 順",
      "press": "energy-news.co.kr",
      "publishedAt": "2026-11-17T03:08:00.000Z",
      "link": "https://www.energy-news.co.kr/news/articleView.html?idxno=229842"
+    },
+    {
+     "title": "[ESG 트렌드] 동아제약, KCGS ESG 평가서 지배구조 ‘A+’…상장사 최상...",
+     "press": "ibabynews.com",
+     "publishedAt": "2026-11-17T03:08:00.000Z",
+     "link": "https://www.ibabynews.com/news/articleView.html?idxno=156983"
     }
    ]
   },
   {
-   "keyword": "트럼프 엔비디아 주식",
+   "keyword": "2027",
    "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-17T01:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“엔비디아 주식 830억 원 보유”…트럼프, ‘젠슨황 복귀’ 시동? [지금...",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-17T03:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012295403?sid=121"
-    },
-    {
-     "title": "“젠슨 황 감싸던 트럼프, 알고 보니”…엔비디아 주식 ‘폭풍 매매’ ...",
-     "press": "ekn.kr",
-     "publishedAt": "2026-11-17T02:38:00.000Z",
-     "link": "https://www.ekn.kr/web/view.php?key=20261117022020615"
-    },
-    {
-     "title": "[오늘 트럼프는] \"중국서 김정은 만날 수도 있다\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-17T02:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009293410?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "피의자",
-   "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-17T02:18:00.000Z",
+   "articles90": 4,
+   "recent20": 4,
+   "press": 4,
+   "firstArticleAt": "2026-11-17T03:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'성북 10대 살인' 50대 피의자 전 연인 최초 신고서 \"건성으로 넘어가\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-17T03:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009293534?sid=102"
+     "title": "강원도, 청년 농촌 정착 지원 확대…2027년부터 4개 신규사업 추진",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-17T03:34:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5084284"
     },
     {
-     "title": "'수석' 합격자가 피의자로‥\"수험생에 죄송\"",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-17T03:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001536085?sid=102"
+     "title": "KIA 김도영 2027 연봉 10억원? 이정후 7억5천 깰 수도…2026년 10억 받은...",
+     "press": "maniareport.com",
+     "publishedAt": "2026-11-17T03:32:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/425/0000215056"
     },
     {
-     "title": "‘AI 부정행위 자수’ 세무사 수석 경찰 출석…피의자 전환",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-17T03:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012295404?sid=102"
+     "title": "얀마농기코리아(주) 합천대리점, 2027년 신제품 농기계 고객 초청 전시...",
+     "press": "newsgn.com",
+     "publishedAt": "2026-11-17T03:24:00.000Z",
+     "link": "https://www.newsgn.com/news/articleView.html?idxno=586173"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 845,
-  "matched": 464,
-  "avgLeadMin": 858,
+  "flagged": 846,
+  "matched": 466,
+  "avgLeadMin": 856,
   "recent": [
+   {
+    "keyword": "김주혁",
+    "hitKeyword": "김주혁 9주기",
+    "hitAt": "2026-11-17T12:30:00+09:00",
+    "leadMin": 685
+   },
+   {
+    "keyword": "트럼프 엔비디아 주식",
+    "hitKeyword": "트럼프 엔비디아 주식",
+    "hitAt": "2026-11-17T12:30:00+09:00",
+    "leadMin": 23
+   },
    {
     "keyword": "FA 1호 오태곤 SSG 잔류",
     "hitKeyword": "오태곤 SSG 잔류",
@@ -450,18 +401,6 @@
     "hitKeyword": "양의지 두산 FA 계약",
     "hitAt": "2026-11-17T10:30:00+09:00",
     "leadMin": 3
-   },
-   {
-    "keyword": "AI 부정행위 대응 필요",
-    "hitKeyword": "AI 안경 공무원 부정행위",
-    "hitAt": "2026-11-17T10:00:00+09:00",
-    "leadMin": 53
-   },
-   {
-    "keyword": "제니 그래미 후보",
-    "hitKeyword": "제니 그래미 본상 후보",
-    "hitAt": "2026-11-17T10:00:00+09:00",
-    "leadMin": 23
    }
   ]
  }
