@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T19:51:24.589Z",
+ "builtAt": "2026-11-17T20:01:28.388Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 27,
  "candidates": [
   {
-   "keyword": "젠슨 황, 엔비디아 복귀 의사",
+   "keyword": "젠슨 황, 복귀 의사",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 2,
+   "articles90": 12,
+   "recent20": 1,
    "press": 9,
-   "firstArticleAt": "2026-11-17T18:37:00.000Z",
+   "firstArticleAt": "2026-11-17T18:44:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -43,28 +43,60 @@
    ]
   },
   {
-   "keyword": "중국 도착한 이재명",
+   "keyword": "오세훈, 카타르에 1-0 승리",
    "sources": [
     "nate"
    ],
-   "articles90": 6,
+   "articles90": 7,
    "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-17T18:22:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-17T18:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이재명 대통령, 환영 받으며 중국 도착",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-17T19:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016447716?sid=100"
+     "title": "‘슈팅 21-2’ 압도적이지만 단 1골에 그쳤다…‘오세훈 결승골’ 사우...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-17T20:00:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/410/0001147586"
     },
     {
-     "title": "이 대통령, 중국 선전 도착...미중러 회담 앞두고 트럼프와 조우",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-17T19:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002434311?sid=100"
+     "title": "모레노호, 올해 최종전서 카타르에 1-0 승리",
+     "press": "goodnews1.com",
+     "publishedAt": "2026-11-17T19:42:00.000Z",
+     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466340"
+    },
+    {
+     "title": "'경합 부족' 손흥민에게 공 몰아주던 축구는 이제 그만? 오세훈 세우자...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-17T19:30:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/109/0005641864"
+    }
+   ]
+  },
+  {
+   "keyword": "중국 간 이재명 대통령",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-17T18:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李대통령 \"남중국해 항행 자유 수호해야\"",
+     "press": "pressian.com",
+     "publishedAt": "2026-11-17T19:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/002/0002466345?sid=100"
+    },
+    {
+     "title": "한일정상회담·트럼프 조우·수능 점검까지…李 대통령 마닐라 일정 마...",
+     "press": "kbmaeil.com",
+     "publishedAt": "2026-11-17T19:16:00.000Z",
+     "link": "https://www.kbmaeil.com/article/20261118500006"
     },
     {
      "title": "이 대통령, 중국 선전 도착...이틀간 APEC 일정 소화",
@@ -77,7 +109,8 @@
   {
    "keyword": "경북 상주 지진 발생",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
    "articles90": 3,
    "recent20": 1,
@@ -109,7 +142,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 925,
+  "flagged": 926,
   "matched": 514,
   "avgLeadMin": 819,
   "recent": [
