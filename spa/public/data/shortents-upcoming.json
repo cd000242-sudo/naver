@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T17:00:24.254Z",
+ "builtAt": "2026-11-17T17:10:28.035Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -13,20 +13,20 @@
   {
    "keyword": "모레노호 카타르 1-0 승리",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 46,
-   "recent20": 0,
-   "press": 33,
+   "articles90": 47,
+   "recent20": 1,
+   "press": 34,
    "firstArticleAt": "2026-11-17T15:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "마지막까지 정교함 부족했던 모레노호…슈팅 21개에 '고작 1골'(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-17T16:36:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/001/0016447658"
+     "title": "'오세훈 결승골' 한국, 올해 마지막 A매치에서 카타르에 1-0 승리",
+     "press": "thesportstimes.co.kr",
+     "publishedAt": "2026-11-17T17:07:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/472/0000042501"
     },
     {
      "title": "'선발 7명 로테이션' 모레노호, 카타르 1-0 제압하고 올해 마지막 A매치...",
@@ -35,74 +35,74 @@
      "link": "https://m.sports.naver.com/general/article/014/0005605827"
     },
     {
-     "title": "'오세훈 결승골' 모레노호, 카타르 꺾고 올해 A매치 유종의 미",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-17T16:34:00.000Z",
-     "link": "https://www.ajunews.com/view/20261118012841654"
+     "title": "마지막까지 정교함 부족했던 모레노호…슈팅 21개에 '고작 1골'(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-17T16:36:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/001/0016447658"
     }
    ]
   },
   {
-   "keyword": "오세훈 선제골",
+   "keyword": "젠슨 황 엔비디아 복귀 의사",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 32,
-   "recent20": 1,
-   "press": 24,
-   "firstArticleAt": "2026-11-17T15:51:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "오세훈 ‘헤더’ 빛난 한국 축구 카타르에 1-0 승…‘모레노 체제’ 마...",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-17T16:56:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/028/0002832708"
-    },
-    {
-     "title": "'오세훈 결승골' 모레노호, 카타르 꺾고 올해 A매치 유종의 미",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-17T16:34:00.000Z",
-     "link": "https://www.ajunews.com/view/20261118012841654"
-    },
-    {
-     "title": "모레노호, 맥 빠진 카타르에 1-0 진땀승…오세훈 헤더 결승골",
-     "press": "kyeongin.com",
-     "publishedAt": "2026-11-17T16:30:00.000Z",
-     "link": "https://www.kyeongin.com/article/1774971"
-    }
-   ]
-  },
-  {
-   "keyword": "한국",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 13,
-   "recent20": 4,
+   "articles90": 16,
+   "recent20": 3,
    "press": 13,
-   "firstArticleAt": "2026-11-17T16:16:00.000Z",
+   "firstArticleAt": "2026-11-17T16:02:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'불륜스캔들' 젠슨황 복귀의사 공식화…\"이사회 요청시 응할것\"(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-17T17:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016447678?sid=104"
+    },
+    {
+     "title": "젠슨 황 “이사회 요청 시 복귀”…내달 1일 美 하원 ‘스파이 스캔들’...",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-17T17:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003059725?sid=104"
+    },
+    {
+     "title": "젠슨 황 “이사회가 원한다면 엔비디아 CEO 복귀하겠다”",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-17T16:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005765229?sid=105"
+    }
+   ]
+  },
+  {
+   "keyword": "일본 파라과이",
+   "sources": [
+    "google"
+   ],
+   "articles90": 8,
+   "recent20": 5,
+   "press": 8,
+   "firstArticleAt": "2026-11-17T16:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "오세훈 ‘헤더’ 빛난 한국 축구 카타르에 1-0 승…‘모레노 체제’ 마...",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-17T16:56:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/028/0002832708"
+     "title": "브라질 꺾은 일본, 모리야스 고별전은 패배로…파라과이에 1-2 무릎",
+     "press": "dailysportshankook.co.kr",
+     "publishedAt": "2026-11-17T17:06:00.000Z",
+     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435641"
     },
     {
-     "title": "K리그 추춘제 전환 준비하나…한국프로축구연맹, EPL 등 영국 프로축구...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-17T16:50:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/311/0002081573"
+     "title": "‘브라질전 영웅들’ 빼자 62초 만에 실점…일본, 파라과이에 1-2 패배→...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-17T17:02:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/477/0000639614"
     },
     {
-     "title": "\"새는 난방열 잡아 생활비·탄소 동시에 줄인다\"… 한국환경정보연구센...",
-     "press": "woodkorea.co.kr",
-     "publishedAt": "2026-11-17T16:48:00.000Z",
-     "link": "https://www.woodkorea.co.kr/news/articleView.html?idxno=92649"
+     "title": "브라질 꺾은 일본, 파라과이에 1-2 패배…모리야스와 동행 마무리",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-17T17:01:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/119/0003156376"
     }
    ]
   },
@@ -111,10 +111,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 1,
+   "articles90": 6,
+   "recent20": 0,
    "press": 6,
-   "firstArticleAt": "2026-11-17T15:31:00.000Z",
+   "firstArticleAt": "2026-11-17T15:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -139,41 +139,73 @@
    ]
   },
   {
-   "keyword": "일본 파라과이",
+   "keyword": "조작기소 특검법 국무회의",
    "sources": [
-    "google"
+    "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 3,
-   "press": 5,
-   "firstArticleAt": "2026-11-17T16:26:00.000Z",
+   "articles90": 3,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-17T15:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“모리야스 감독님 감사합니다” 日국대 고별전, 파라과이에 1-2 패했지...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-17T16:55:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/468/0001281673"
+     "title": "[사설] 민생 현안 관계없이 논란만 야기할 조작기소 특검법",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-17T16:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001885806?sid=110"
     },
     {
-     "title": "파라과이에 1-2 패…모리야스 일본 대표팀 고별전서 연승 마감",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-17T16:52:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16279353"
+     "title": "한성숙 총리가 ‘의사봉’ 조작기소 특검법 의결",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-17T15:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004010232?sid=100"
     },
     {
-     "title": "일본, 모리야스 감독 고별전서 패배… 5경기 무패 행진 마감",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-17T16:41:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/396/0000761224"
+     "title": "대통령 자리 비우자… 김지용 중수청장 국무회의 불참",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-17T15:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004010222?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "중국 간 이재명 대통령",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-17T15:59:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프 \"韓 역사적 투자로 알래스카 LNG 사업 승인\"…李대통령 참석 만...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-17T16:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005605825?sid=104"
+    },
+    {
+     "title": "李대통령, 아세안 마치고 APEC 열리는 중국행…'미·중·러 회담' 앞두고...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-17T16:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005605823?sid=100"
+    },
+    {
+     "title": "미중러 회담 앞두고…美·日 정상 만난 이재명 대통령",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-17T15:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005355034?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 912,
+  "flagged": 914,
   "matched": 514,
   "avgLeadMin": 819,
   "recent": [
