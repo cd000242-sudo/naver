@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T05:18:07.862Z",
+ "builtAt": "2026-11-17T05:28:11.711Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 9,
+ "measured": 18,
  "candidates": [
   {
    "keyword": "공소청 스마트기기 부정행위 대응",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-17T03:54:00.000Z",
+   "articles90": 11,
+   "recent20": 4,
+   "press": 10,
+   "firstArticleAt": "2026-11-17T04:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "공소청 \"AI 부정행위 엄정 대응…구속영장 적극 검토\"",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-17T05:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001978573?sid=102"
+    },
+    {
+     "title": "공소청 \"스마트기기 이용 시험 부정행위 엄정 대응\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-17T05:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002433986?sid=102"
+    },
     {
      "title": "세무사시험 AI 부정행위 대책 '구멍'…성적 재점검 입증 한계·CCTV 사각...",
      "press": "newspim.com",
      "publishedAt": "2026-11-17T05:15:00.000Z",
      "link": "https://www.newspim.com/news/view/20261117000806"
+    }
+   ]
+  },
+  {
+   "keyword": "손석구·나가야마 에이타 푸른길 공조",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-17T04:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "손석구·나가야마 에이타, 국경 넘은 공조 수사…‘푸른길’로 완성한 ...",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-17T05:24:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001305274"
     },
     {
-     "title": "대전교육청, 수능 부정행위 단속 강화…옷 속 카메라·이어폰까지 점검",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-17T05:11:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261117000830"
+     "title": "손석구 \"배우로서 한계 느꼈을 때 '푸른길' 만났다\"",
+     "press": "raonnews.com",
+     "publishedAt": "2026-11-17T04:52:00.000Z",
+     "link": "https://www.raonnews.com/news/article.html?no=62831"
     },
     {
-     "title": "\"이번 수능 부정행위 하겠다\"…서울대 재학생, 공개 예고글 '발칵'",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-17T05:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001164613?sid=102"
+     "title": "손석구 \"배우로서 틀 깨고자 '푸른길' 선택…외모 변화도 줬죠\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-17T04:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016446392?sid=103"
     }
    ]
   },
@@ -47,13 +79,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-17T03:51:00.000Z",
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-17T04:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "다급한 트럼프, 느긋한 김정은…중간선거 후 달라진 처지",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-17T05:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001164620?sid=100"
+    },
     {
      "title": "백두산 찾은 김정은…통일부 “관광지 건설 치하 목적”",
      "press": "ichannela.com",
@@ -65,12 +103,38 @@
      "press": "m-i.kr",
      "publishedAt": "2026-11-17T05:06:00.000Z",
      "link": "https://www.m-i.kr/news/articleView.html?idxno=2019673"
+    }
+   ]
+  },
+  {
+   "keyword": "보습크림 8종 품질 비교",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-17T04:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "보습크림 8종 비교...세타필 최저가에 흡수력·만족도 최고",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-17T05:06:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=782464"
     },
     {
-     "title": "중대 결단 때마다 삼지연 찾던 김정은…APEC 앞두고 또 방문",
-     "press": "donga.com",
-     "publishedAt": "2026-11-17T05:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003763065?sid=100"
+     "title": "비쌀수록 좋다는 건 ‘착각’…보습크림, 가격 7배 차이나도 성능은 비...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-17T05:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004175848?sid=101"
+    },
+    {
+     "title": "이번 겨울 보습크림 뭐 쓰지…가장 촉촉한 건 에스트라·이니스프리",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-17T04:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005764873?sid=101"
     }
    ]
   },
@@ -79,13 +143,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 2,
+   "articles90": 5,
+   "recent20": 2,
+   "press": 3,
    "firstArticleAt": "2026-11-17T04:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'이카로스의 추락' 등 미공개작 60여 점 韓 최초 공개…'샤갈, 너머의 여...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-17T05:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009293794?sid=103"
+    },
     {
      "title": "샤갈의 삶과 예술을 따라가다…‘퐁피두센터 샤갈전’ 개최",
      "press": "segye.com",
@@ -96,20 +166,78 @@
      "title": "퐁피두센터 한화, '샤갈, 너머의 여정'",
      "press": "newsis.com",
      "publishedAt": "2026-11-17T04:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014327185?sid=103"
+     "link": "https://n.news.naver.com/mnews/article/003/0014327184?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "마약 투약 86명 검거",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-17T05:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"연인·친구·직장 동료가 권해서\" 일상 파고든 마약…유통·투약 86명 무...",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-17T05:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000121575?sid=102"
     },
     {
-     "title": "'샤갈, 너머의 여정'을 찾는 사람들",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-17T04:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014327188?sid=103"
+     "title": "경찰, 지인 통해 마약 퍼뜨린 86명 검거… 초범도 35명",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-17T05:22:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=564520"
+    },
+    {
+     "title": "경찰, 마약 투약·유통 86명 무더기 검거",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-17T05:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016446453?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "순국선열의 날 기념식 뮤지컬",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 12,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-17T04:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정부 기념식에서 뮤지컬 공연",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-17T04:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009293567?sid=102"
+    },
+    {
+     "title": "'꽃다운 향기여 영원하라' 순국선열의 날 기념식 뮤지컬 공연",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-17T04:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009293570?sid=102"
+    },
+    {
+     "title": "뮤지컬 공연 펼쳐진 순국선열의 날 기념식",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-17T04:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009293568?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 870,
+  "flagged": 873,
   "matched": 474,
   "avgLeadMin": 862,
   "recent": [
