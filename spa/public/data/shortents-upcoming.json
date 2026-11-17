@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T20:51:47.304Z",
+ "builtAt": "2026-11-17T21:01:51.214Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
   {
-   "keyword": "젠슨 황 엔비디아 복귀 가능성",
+   "keyword": "젠슨 황 복귀 의사",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 8,
-   "firstArticleAt": "2026-11-17T19:27:00.000Z",
+   "articles90": 14,
+   "recent20": 5,
+   "press": 13,
+   "firstArticleAt": "2026-11-17T19:37:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨 황, 복귀 의사 밝혔지만…엔비디아는 벌써 후임 물색 중",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-17T20:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000927226?sid=104"
+     "title": "젠슨 황 \"엔비디아 이사회 요청하면 돌아가겠다\"",
+     "press": "4th.kr",
+     "publishedAt": "2026-11-17T21:00:00.000Z",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2122079"
     },
     {
-     "title": "젠슨 황 \"이사회가 원하면 CEO 복귀\"…엔비디아는 검토 안 해",
-     "press": "aitimes.com",
-     "publishedAt": "2026-11-17T20:38:00.000Z",
-     "link": "https://www.aitimes.com/news/articleView.html?idxno=217512"
+     "title": "젠슨 황, 엔비디아 복귀 가능성 열어뒀다…경영진 교체 이후 다시 주목...",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-17T21:00:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=847550"
     },
     {
-     "title": "젠슨 황 “엔비디아 복귀할 수 있다면 영광”...사임 후 첫 공식 입장",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-17T20:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003700547?sid=104"
+     "title": "[젠슨 황 스캔들] 젠슨 황, 엔비디아 복귀 의사 공식화",
+     "press": "it.chosun.com",
+     "publishedAt": "2026-11-17T20:54:00.000Z",
+     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000001262"
     }
    ]
   },
@@ -48,12 +48,18 @@
     "signal.bz"
    ],
    "articles90": 9,
-   "recent20": 0,
+   "recent20": 1,
    "press": 8,
-   "firstArticleAt": "2026-11-17T19:31:00.000Z",
+   "firstArticleAt": "2026-11-17T19:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "한 총리 '조작기소 특검법' 의결 '총대'...野 \"쿠데타로 총리도 감옥\"",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-17T21:00:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/325570/?sc=Naver"
+    },
     {
      "title": "[사설] 총리가 의결한 조작기소 특검법, 대통령 책임은 그대로",
      "press": "seoul.co.kr",
@@ -65,59 +71,27 @@
      "press": "busan.com",
      "publishedAt": "2026-11-17T20:10:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/082/0001407683?sid=110"
-    },
-    {
-     "title": "조작기소 특검법, 李순방 중에 의결",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-17T20:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003700468?sid=100"
     }
    ]
   },
   {
-   "keyword": "중국 이재명 대통령",
+   "keyword": "모레노호, 오세훈 1-0 승리",
    "sources": [
     "nate"
    ],
    "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-17T19:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "트럼프, 이 대통령 앞에서 “韓 투자 덕에 알래스카 LNG 승인”",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-17T20:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006411466?sid=104"
-    },
-    {
-     "title": "이 대통령, 트럼프 대통령과 필리핀 만찬장서 조우",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-17T20:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000927215?sid=100"
-    },
-    {
-     "title": "李 대통령, APEC 열리는 中 선전 도착",
-     "press": "goodnews1.com",
-     "publishedAt": "2026-11-17T20:18:00.000Z",
-     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466341"
-    }
-   ]
-  },
-  {
-   "keyword": "오세훈 선제골 1-0 승리",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
    "recent20": 3,
-   "press": 4,
-   "firstArticleAt": "2026-11-17T19:30:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-17T19:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "물 만난 고기였다! 모레노호에서 건진 건 '장점 내뿜은' 송민규… 대표...",
+     "press": "besteleven.com",
+     "publishedAt": "2026-11-17T21:00:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/343/0000149070"
+    },
     {
      "title": "모레노호, 카타르전 승리…재계약은 미정",
      "press": "bntnews.co.kr",
@@ -125,48 +99,108 @@
      "link": "https://www.bntnews.co.kr/article/view/bnt202611180008"
     },
     {
-     "title": "정우영, 카타르전 교체 출전…한국 1-0 승리",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-17T20:48:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611180007"
-    },
-    {
-     "title": "오세훈 선제골…한국 카타르 1-0 승리",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-17T20:46:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611180006"
+     "title": "'일방적 공세 퍼부었지만' 모레노호, 슈팅 21개에도 '고작 1골만 수확'....",
+     "press": "thesportstimes.co.kr",
+     "publishedAt": "2026-11-17T20:45:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/472/0000042505"
     }
    ]
   },
   {
    "keyword": "경북 상주 지진 발생",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 4,
+   "articles90": 8,
+   "recent20": 2,
+   "press": 6,
    "firstArticleAt": "2026-11-17T19:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "\"2017년 악몽 떠올라\"…수능 이틀 전 올해 '가장 강한 지진' 터졌다",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-17T20:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001273068?sid=102"
+    },
+    {
+     "title": "경북 상주 북서쪽서 규모 3.6 지진…올해 최대 규모",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-17T20:52:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611180005"
+    },
+    {
      "title": "경북 상주 규모 3.6 지진…올해 최대 강진",
      "press": "bntnews.co.kr",
      "publishedAt": "2026-11-17T20:36:00.000Z",
      "link": "https://www.bntnews.co.kr/article/view/bnt202611180005"
+    }
+   ]
+  },
+  {
+   "keyword": "백신",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-17T20:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"영유아기 비만은 면역력 떨어뜨린다\" …'백신 항체' 형성에 영향",
+     "press": "kpanews.co.kr",
+     "publishedAt": "2026-11-17T20:52:00.000Z",
+     "link": "https://www.kpanews.co.kr/news/articleView.html?idxno=549191"
     },
     {
-     "title": "상주 지진에 원안위 \"국내 원자로 안전영향 없어\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-17T20:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000927213?sid=102"
+     "title": "코로나백신 접종 피해자 보상 이의신청 '연장 추진'",
+     "press": "dailymedi.com",
+     "publishedAt": "2026-11-17T20:38:00.000Z",
+     "link": "https://www.dailymedi.com/news/news_view.php?wr_id=942696"
     },
     {
-     "title": "경북 상주 규모 3.6 지진…올해 최대 규모",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-17T20:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000927212?sid=103"
+     "title": "유효기한 하루 지난 백신과 자격정지 : 대법원의 기준",
+     "press": "medicaltimes.com",
+     "publishedAt": "2026-11-17T20:30:00.000Z",
+     "link": "https://www.medicaltimes.com/Main/News/NewsView.html?ID=1171896&ref=naverpc"
+    }
+   ]
+  },
+  {
+   "keyword": "경찰",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-17T20:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "수능날 경찰 1만여명 투입…'AI 커닝' 신고·폭파 협박 대비[2027 수능]",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-17T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014328633?sid=102"
+    },
+    {
+     "title": "세무사 수석 경찰 출석… 법조계 “사회적 파장 고려 실형 가능성”",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-17T20:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003700470?sid=102"
+    },
+    {
+     "title": "김종철 경찰청장 후보자 청문회…재개발 입주권·수사 독립성 쟁점",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-17T20:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004210899?sid=102"
     }
    ]
   },
@@ -201,76 +235,11 @@
      "link": "https://www.kukinews.com/article/view/kuk202611180003"
     }
    ]
-  },
-  {
-   "keyword": "백신",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-17T20:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "코로나백신 접종 피해자 보상 이의신청 '연장 추진'",
-     "press": "dailymedi.com",
-     "publishedAt": "2026-11-17T20:38:00.000Z",
-     "link": "https://www.dailymedi.com/news/news_view.php?wr_id=942696"
-    },
-    {
-     "title": "유효기한 하루 지난 백신과 자격정지 : 대법원의 기준",
-     "press": "medicaltimes.com",
-     "publishedAt": "2026-11-17T20:30:00.000Z",
-     "link": "https://www.medicaltimes.com/Main/News/NewsView.html?ID=1171896&ref=naverpc"
-    },
-    {
-     "title": "코로나백신 부작용, 피해자가 증명 안해도 된다…이소희, 개정안 발의",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-17T20:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003059728?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "경찰",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-17T20:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "세무사 수석 경찰 출석… 법조계 “사회적 파장 고려 실형 가능성”",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-17T20:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003700470?sid=102"
-    },
-    {
-     "title": "김종철 경찰청장 후보자 청문회…재개발 입주권·수사 독립성 쟁점",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-17T20:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004210899?sid=102"
-    },
-    {
-     "title": "김종철 경찰청장 후보자 인사청문회…경찰개혁·투기의혹 쟁점",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-17T20:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014328590?sid=100"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 932,
+  "flagged": 934,
   "matched": 514,
   "avgLeadMin": 819,
   "recent": [
