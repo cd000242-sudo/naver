@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T19:11:10.211Z",
+ "builtAt": "2026-11-17T19:21:13.573Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,31 +8,63 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 28,
  "candidates": [
   {
-   "keyword": "중국 이재명 대통령",
+   "keyword": "젠슨 황, 복귀 의사",
    "sources": [
     "nate"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-17T17:44:00.000Z",
+   "articles90": 12,
+   "recent20": 3,
+   "press": 9,
+   "firstArticleAt": "2026-11-17T17:55:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "젠슨 황 돌아오고 싶다던데...엔비디아는 헤드헌터 통해 차기 물색",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-17T19:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000544341?sid=104"
+    },
+    {
+     "title": "엔비디아, 젠슨 황 사태 이후 안보·수출통제위 설치",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-17T19:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002434305?sid=104"
+    },
+    {
+     "title": "젠슨 황 \"이사회 요청시 엔비디아 복귀\"…사임 후 첫 공개 발언",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-17T19:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001403774?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명, 중국 도착",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-17T18:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령, APEC 일정 돌입…한중 정상회담 '기대' 미중러 회담 '촉각'",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-17T19:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009294853?sid=100"
-    },
-    {
-     "title": "[속보] 이 대통령, 중국 선전 도착...이틀간 APEC 일정 소화",
+     "title": "이 대통령, 중국 선전 도착...이틀간 APEC 일정 소화",
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-17T18:54:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002434286?sid=100"
+    },
+    {
+     "title": "트럼프와 40초 대화한 李, 中 선전 도착…남북·북미 대화 재개 지지 요...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-17T18:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005605831?sid=100"
     },
     {
      "title": "이재명 대통령 부부, 중국 선전 도착",
@@ -47,10 +79,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 5,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-17T17:47:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-17T18:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -77,7 +109,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 920,
+  "flagged": 922,
   "matched": 514,
   "avgLeadMin": 819,
   "recent": [
