@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T15:39:54.082Z",
+ "builtAt": "2026-11-17T15:49:57.275Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "경북 상주 북서쪽 지진",
+   "keyword": "경북 상주 지진",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 79,
+   "articles90": 64,
    "recent20": 2,
-   "press": 53,
-   "firstArticleAt": "2026-11-17T14:12:00.000Z",
+   "press": 42,
+   "firstArticleAt": "2026-11-17T14:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "상주서 올해 가장 강한 규모 3.6 지진…주민들 한밤중 '깜짝'",
+     "press": "kyongbuk.co.kr",
+     "publishedAt": "2026-11-17T15:42:00.000Z",
+     "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4091208"
+    },
     {
      "title": "[속보]수능 이틀 앞둔 밤 경북 상주서 규모 3.6 지진…수험생·주민 ‘깜...",
      "press": "seoul.co.kr",
@@ -29,16 +35,10 @@
      "link": "https://n.news.naver.com/mnews/article/081/0003700462?sid=102"
     },
     {
-     "title": "경북 상주에서 규모 3.6 지진…\"그릇과 창문이 흔들릴 정도\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-17T15:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000651691?sid=102"
-    },
-    {
-     "title": "경북 상주서 규모 3.6 지진…올들어 가장 강해",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-17T15:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001403758?sid=102"
+     "title": "경북 상주 규모 3.6 지진…유감 신고 16건",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-17T15:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012295986?sid=102"
     }
    ]
   },
@@ -61,48 +61,48 @@
      "link": "https://m.sports.naver.com/kfootball/article/003/0014328552"
     },
     {
+     "title": "안도하는 오세훈",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-17T15:04:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/001/0016447601"
+    },
+    {
      "title": "한국의 선제골",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-17T15:04:00.000Z",
      "link": "https://m.sports.naver.com/kfootball/article/001/0016447599"
-    },
-    {
-     "title": "안도하는 오세훈",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-17T15:04:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/001/0016447600"
     }
    ]
   },
   {
-   "keyword": "엔비디아 실적발표",
+   "keyword": "수능 비상 점검회의",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 18,
+   "articles90": 11,
    "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-17T14:15:00.000Z",
+   "press": 11,
+   "firstArticleAt": "2026-11-17T14:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "뉴욕 증시, 엔비디아 실적 발표 주시하며 하락 출발",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-17T15:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002434273?sid=104"
+     "title": "이 대통령 \"수능 부정 신고, 포상금 1억\" 수능 비상점검회의",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-17T15:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000521210?sid=100"
     },
     {
-     "title": "[속보] 엔비디아 주가 155달러선 약세…실적 발표 앞두고 8.5% 변동 가능...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-17T15:16:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=627942"
+     "title": "수능 AI 대책은 ‘단춧구멍 스티커’",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-17T15:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003565987?sid=102"
     },
     {
-     "title": "뉴욕증시, 엔비디아 실적 앞두고 방향 탐색…3대 지수 약세",
-     "press": "newsian.co.kr",
+     "title": "이 대통령, AI 수능 부정행위 엄단…“수능 신뢰 절대 흔들려선 안돼”",
+     "press": "viva100.com",
      "publishedAt": "2026-11-17T15:14:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101448"
+     "link": "https://www.viva100.com/article/20261118500004"
     }
    ]
   },
@@ -112,7 +112,7 @@
     "google"
    ],
    "articles90": 8,
-   "recent20": 3,
+   "recent20": 1,
    "press": 7,
    "firstArticleAt": "2026-11-17T14:23:00.000Z",
    "exclusive": false,
@@ -139,12 +139,44 @@
    ]
   },
   {
+   "keyword": "AI 세무사 경찰 조사 종료",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-17T14:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'AI 부정행위' 세무사 가짜 수석 경찰 조사 13시간 만 종료…\"수험생께...",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-17T15:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000521209?sid=102"
+    },
+    {
+     "title": "‘AI 부정행위’ 세무사 수석, 경찰 조사 약 13시간 만에 종료",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-17T14:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012295972?sid=102"
+    },
+    {
+     "title": "'세무냥이' 첫 경찰조사 13시간만 종료…\"남은 절차도 모두 참석\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-17T14:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004210885?sid=102"
+    }
+   ]
+  },
+  {
    "keyword": "한일 정상 회담",
    "sources": [
     "nate"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-17T14:31:00.000Z",
    "exclusive": false,
@@ -183,7 +215,7 @@
    "capped": false,
    "samples": [
     {
-     "title": "李 아세안 일정 마무리, APEC 참석차 중국으로...트럼프 조우",
+     "title": "李 아세안 일정 마무리, APEC 참석 중국으로...트럼프 조우",
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-17T15:11:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006411436?sid=100"
@@ -195,10 +227,10 @@
      "link": "https://n.news.naver.com/mnews/article/056/0012295973?sid=100"
     },
     {
-     "title": "李 대통령, 아세안 일정 마무리…중국 향해 출국",
-     "press": "news.tf.co.kr",
+     "title": "이 대통령, 필리핀 아세안 일정 마치고 중국으로 출국…APEC 참석",
+     "press": "newsis.com",
      "publishedAt": "2026-11-17T14:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000552946?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/003/0014328508?sid=100"
     }
    ]
   },
@@ -208,7 +240,7 @@
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-17T14:53:00.000Z",
    "exclusive": false,
@@ -233,75 +265,11 @@
      "link": "https://n.news.naver.com/mnews/article/022/0004176008?sid=104"
     }
    ]
-  },
-  {
-   "keyword": "AI 커닝 수석 14시간 조사 종료",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-17T14:11:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘AI 커닝’ 세무사 수석 합격자 “깊은 사과”…14시간 경찰 조사 종료",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-17T14:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002832705?sid=102"
-    },
-    {
-     "title": "‘AI 커닝’ 세무사 수석 경찰 조사 14시간 만에 종료… “수험생께 사...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-17T14:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001205487?sid=102"
-    },
-    {
-     "title": "‘AI 커닝' 세무사 수석, 경찰 조사 14시간 만에 종료…”성실히 임했다...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-17T14:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014328501?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "송민규 카타르전 도움",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-17T14:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[IN STAR] 유럽 가더니 달라졌네...'황희찬보다 잘한다' 송민규, 카타르...",
-     "press": "interfootball.co.kr",
-     "publishedAt": "2026-11-17T15:05:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/413/0000226738"
-    },
-    {
-     "title": "우즈베키스탄전 이어 또 합작, 송민규 띄우고 오세훈 넣었다… 카타르전...",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-17T14:57:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/396/0000761219"
-    },
-    {
-     "title": "'오세훈 헤더 선제골' 모레노호, 카타르전 전반 1-0 앞서",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-17T14:52:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/003/0014328518"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 904,
+  "flagged": 906,
   "matched": 514,
   "avgLeadMin": 819,
   "recent": [
