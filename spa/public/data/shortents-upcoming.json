@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T15:09:40.228Z",
+ "builtAt": "2026-11-17T15:19:43.556Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,17 +11,23 @@
  "measured": 25,
  "candidates": [
   {
-   "keyword": "경북 상주 북서쪽 지진",
+   "keyword": "경북 상주 지진",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 76,
-   "recent20": 7,
-   "press": 51,
+   "articles90": 80,
+   "recent20": 1,
+   "press": 50,
    "firstArticleAt": "2026-11-17T14:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "경북 상주서 규모 3.6 지진…올들어 가장 강해",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-17T15:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001403758?sid=102"
+    },
     {
      "title": "경북 상주 규모 3.6 지진…올들어 가장 강해",
      "press": "yonhapnewstv.co.kr",
@@ -33,76 +39,135 @@
      "press": "tbc.co.kr",
      "publishedAt": "2026-11-17T14:56:00.000Z",
      "link": "https://www.tbc.co.kr/news/view?pno=20261117233457AE08730&id=213475"
-    },
-    {
-     "title": "경북 상주 북서쪽서 규모 3.6 지진…유감신고 16건(종합)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-17T14:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014328520?sid=102"
     }
    ]
   },
   {
-   "keyword": "엔비디아 실적발표",
+   "keyword": "세무사 수석 경찰 조사",
    "sources": [
     "daum"
    ],
-   "articles90": 19,
-   "recent20": 10,
-   "press": 13,
-   "firstArticleAt": "2026-11-17T13:42:00.000Z",
+   "articles90": 34,
+   "recent20": 3,
+   "press": 26,
+   "firstArticleAt": "2026-11-17T13:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "아크 인베스트, 엔비디아 54만주 매도…블록·서클·코인베이스는 담았...",
-     "press": "digitaltoday.co.kr",
-     "publishedAt": "2026-11-17T15:06:00.000Z",
-     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=716201"
+     "title": "관세사·법무사·편입까지 의혹…경찰, 자백글 작성자 추적",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-17T15:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003565976?sid=102"
     },
     {
-     "title": "엔비디아 실적 발표 임박, 매출 전망치로 1080억달러 제시 젠슨 황 사임...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-17T15:06:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=627281"
+     "title": "경찰, 'AI 부정행위 자수' 세무사 수석 14시간 조사",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-17T15:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002434257?sid=102"
     },
     {
-     "title": "엔비디아, 젠슨황 사퇴 후 첫 실적…경영 불확실성 해소하나",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-17T15:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006411433?sid=101"
+     "title": "‘AI 부정행위’ 세무사 수석, 13시간 조사 뒤 귀가…“남은 절차도 참...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-17T15:00:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2649473"
     }
    ]
   },
   {
-   "keyword": "송민규",
+   "keyword": "오세훈 선제골",
    "sources": [
-    "google"
+    "daum"
    ],
-   "articles90": 9,
-   "recent20": 4,
-   "press": 8,
+   "articles90": 32,
+   "recent20": 6,
+   "press": 22,
    "firstArticleAt": "2026-11-17T14:46:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "[IN STAR] 유럽 가더니 달라졌네...'황희찬보다 잘한다' 송민규, 카타르...",
-     "press": "interfootball.co.kr",
-     "publishedAt": "2026-11-17T15:05:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/413/0000226738"
+     "title": "'오현규 대신 선발' 오세훈, 헤더로 쾅…남다른 제공권 과시",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-17T15:06:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/003/0014328552"
     },
     {
-     "title": "[속보] 송민규 AS-오세훈 골, 새 콤비 등장...카타르전 선제골 '합작'",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-17T15:03:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/629/0000552963"
+     "title": "한국의 선제골",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-17T15:04:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/001/0016447599"
     },
     {
-     "title": "우즈베키스탄전 이어 또 합작, 송민규 띄우고 오세훈 넣었다… 카타르전...",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-17T14:57:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/396/0000761219"
+     "title": "안도하는 오세훈",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-17T15:04:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/001/0016447600"
+    }
+   ]
+  },
+  {
+   "keyword": "일본 파라과이",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 4,
+   "press": 5,
+   "firstArticleAt": "2026-11-17T14:23:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'모리야스 고별전' 일본, 파라과이에 1-2 패배…5경기 무패 마감",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-17T15:16:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/421/0009294803"
+    },
+    {
+     "title": "日 축구, 싱가포르 참사! '64초 만에 와르르' 파라과이에 1-2 충격패…브...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-17T15:10:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/311/0002081565"
+    },
+    {
+     "title": "브라질 잡았던 일본, '모리야스 감독 고별전'서 파라과이에 1-2 패배",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-17T15:10:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109958753337"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 APEC 출국",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-17T14:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李 아세안 일정 마무리, APEC 참석차 중국으로...트럼프 조우",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-17T15:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006411436?sid=100"
+    },
+    {
+     "title": "아세안 일정 마친 이 대통령, 중국 선전으로…APEC 참석",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-17T14:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012295973?sid=100"
+    },
+    {
+     "title": "이 대통령, 필리핀 아세안 일정 마치고 중국으로 출국…APEC 참석",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-17T14:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014328508?sid=100"
     }
    ]
   },
@@ -111,10 +176,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-17T13:40:00.000Z",
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-17T13:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -137,43 +202,11 @@
      "link": "https://n.news.naver.com/mnews/article/008/0005442589?sid=104"
     }
    ]
-  },
-  {
-   "keyword": "이재명 APEC 출국",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-17T14:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "아세안 일정 마친 이 대통령, 중국 선전으로…APEC 참석",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-17T14:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012295973?sid=100"
-    },
-    {
-     "title": "이 대통령, 필리핀 아세안 일정 마치고 중국으로 출국…APEC 참석",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-17T14:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014328508?sid=100"
-    },
-    {
-     "title": "李 대통령, 아세안 일정 마무리…중국 향해 출국",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-17T14:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000552946?sid=100"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 897,
+  "flagged": 901,
   "matched": 514,
   "avgLeadMin": 819,
   "recent": [
