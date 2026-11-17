@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T04:07:46.758Z",
+ "builtAt": "2026-11-17T04:17:49.459Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 15,
  "candidates": [
   {
    "keyword": "조작기소 특검법 국무회의 통과",
@@ -16,30 +16,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 89,
+   "articles90": 80,
    "recent20": 9,
-   "press": 66,
-   "firstArticleAt": "2026-11-17T02:40:00.000Z",
+   "press": 63,
+   "firstArticleAt": "2026-11-17T02:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이달 중 조작기소 특검 시동…이해충돌 논란",
-     "press": "naeil.com",
-     "publishedAt": "2026-11-17T04:06:00.000Z",
-     "link": "https://www.naeil.com/news/read/609071?ref=naver"
+     "title": "'조작기소 특검법' 공포안 국무회의 통과...최대 309명·최장 200일 수사",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-17T04:16:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=564495"
     },
     {
-     "title": "[속보] ‘조작기소 특검법’ 공포안 국무회의 통과",
-     "press": "segye.com",
-     "publishedAt": "2026-11-17T04:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004175837?sid=100"
+     "title": "장동혁 \"대통령은 탈옥법 통과 위해 해외로 도피\"",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-17T04:16:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3449392"
     },
     {
-     "title": "‘조작기소특검법’ 공포 수순",
-     "press": "naeil.com",
-     "publishedAt": "2026-11-17T04:02:00.000Z",
-     "link": "https://www.naeil.com/news/read/609093?ref=naver"
+     "title": "조작기소 특검법에 ‘李 사건 수사’ 前 검사장들 “민주공화국 근간 흔...",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-17T04:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004010080?sid=102"
     }
    ]
   },
@@ -48,30 +48,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 52,
+   "articles90": 39,
    "recent20": 4,
-   "press": 41,
-   "firstArticleAt": "2026-11-17T02:38:00.000Z",
+   "press": 31,
+   "firstArticleAt": "2026-11-17T02:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "인공지능 부정행위, 수능 10년 못 볼 수도",
-     "press": "naeil.com",
-     "publishedAt": "2026-11-17T04:06:00.000Z",
-     "link": "https://www.naeil.com/news/read/609079?ref=naver"
+     "title": "[수능 AI커닝 비상] \"제발 조치 좀 취해주세요. 잠이 안 옵니다\"…수험...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-17T04:08:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261117000759"
     },
     {
-     "title": "삼성·SK 등 4대 그룹, 보안 강화… AI 안경·카메라 반입 차단",
+     "title": "수능 AI 부정행위 비상...방지방법·수험생 대응 총정리스마트안경·초...",
+     "press": "christiantoday.co.kr",
+     "publishedAt": "2026-11-17T04:08:00.000Z",
+     "link": "https://www.christiantoday.co.kr/news/378675"
+    },
+    {
+     "title": "[경제읽기] 수능 부정행위 차단 총력…\"스마트기기 원천 차단\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-17T04:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926972?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "장동혁",
+   "sources": [
+    "google"
+   ],
+   "articles90": 21,
+   "recent20": 1,
+   "press": 14,
+   "firstArticleAt": "2026-11-17T02:49:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "장동혁 \"대통령은 탈옥법 통과 위해 해외로 도피\"",
      "press": "newscj.com",
-     "publishedAt": "2026-11-17T03:56:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3449378"
+     "publishedAt": "2026-11-17T04:16:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3449392"
     },
     {
-     "title": "공소청 \"시험 부정행위 엄정 대응…구속영장 청구도 적극 검토\"",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-17T03:54:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4119031"
+     "title": "'조작기소 특검법' 국무회의 의결…장동혁 \"국민의 심판은 통과 못 할 것...",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-17T03:48:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903336"
+    },
+    {
+     "title": "토론회 축사하는 장동혁 대표",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-17T03:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016446275?sid=100"
     }
    ]
   },
@@ -100,114 +132,113 @@
      "link": "https://m.entertain.naver.com/article/144/0001150244"
     },
     {
-     "title": "'푸른길', 손석구·나가야마 에이타의 국경 초월 공조…색다른 버디 수...",
-     "press": "tvdaily.co.kr",
+     "title": "［종합］손석구X나가야마 에이타 ‘푸른길’, 본 적 없는 국경초월 범죄...",
+     "press": "breaknews.com",
      "publishedAt": "2026-11-17T03:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000052994"
+     "link": "http://www.breaknews.com/1251535"
     }
    ]
   },
   {
-   "keyword": "김정은 건설현장 방문",
+   "keyword": "면세점",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 6,
-   "recent20": 1,
+   "articles90": 5,
+   "recent20": 0,
    "press": 5,
-   "firstArticleAt": "2026-11-17T02:42:00.000Z",
-   "exclusive": false,
+   "firstArticleAt": "2026-11-17T02:50:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "김정은, 북·중 접경 삼지연 관광지구 건설현장 시찰",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-17T03:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926970?sid=100"
+     "title": "신라면세점, 프리미엄 버번 위스키 '블랑톤' 단독 출시",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-17T03:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003486559?sid=101"
     },
     {
-     "title": "김정은, '중대 결심'의 성지 백두산 갔다…트럼프는 또 '러브콜'",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-17T03:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009293526?sid=100"
+     "title": "신라면세점, '블랑톤' 국내 면세점 단독 입점…프리미엄 위스키 영토 확...",
+     "press": "thefairnews.co.kr",
+     "publishedAt": "2026-11-17T03:22:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94496"
     },
     {
-     "title": "김정은 삼지연 점검에 통일부 \"APEC 앞둔 시점에 접경 방문 주시 중\"",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-17T03:06:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4119032"
+     "title": "신라면세점, 버번 위스키 '블랑톤' 국내 면세 채널 최초 도입",
+     "press": "lawissue.co.kr",
+     "publishedAt": "2026-11-17T03:20:00.000Z",
+     "link": "https://www.lawissue.co.kr/view.php?ud=202611171217422498204ead0791_12"
     }
    ]
   },
   {
-   "keyword": "발언하는 장동혁 대표",
+   "keyword": "닥터X 김우석 연기 집중 중입니다.",
    "sources": [
-    "signal.bz",
     "nate"
    ],
    "articles90": 4,
-   "recent20": 0,
+   "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-17T02:46:00.000Z",
+   "firstArticleAt": "2026-11-17T03:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "장동혁 \"AI 부정행위 대책 없다면 수능 연기라도 검토해야\"",
-     "press": "goodkyung.com",
-     "publishedAt": "2026-11-17T03:12:00.000Z",
-     "link": "https://www.goodkyung.com/news/articleView.html?idxno=293536"
+     "title": "'닥터X' 김우석 \"5·18 등 논란보다 캐릭터에 집중\" [MD인터뷰②]",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-17T04:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004125745"
     },
     {
-     "title": "AI 커닝 대책? 이준석은 '전파탐지 앱', 장동혁은 '수능 연기'",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-17T03:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002536125?sid=100"
+     "title": "‘닥터X’ 김우석 5·18→의료 파업 소재 논란에 “캐릭터로서 환자만 ...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-17T03:41:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001188195"
     },
     {
-     "title": "[포토] 현장 의총서 발언하는 장동혁 국민의힘 대표",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-17T02:58:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/17/2026111750148.html"
+     "title": "김우석, '닥터X' 518·의료 파업 소재 논란에…\"인물 상황에만 집중했다...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-17T03:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002081347"
     }
    ]
   },
   {
-   "keyword": "트럼프 엔비디아 주식",
+   "keyword": "담보 대출",
    "sources": [
-    "signal.bz"
+    "google"
    ],
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-17T02:38:00.000Z",
+   "firstArticleAt": "2026-11-17T03:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "벼랑 끝 670조 AI 지원, 젠슨 복귀 로비 통할까 [트럼프 스톡커]",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-17T03:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004683053?sid=104"
+     "title": "\"대출 억제로 주거 사다리 복원 못 해\"… 국회서 MBS 활성화 목소리",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-17T04:10:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3449390"
     },
     {
-     "title": "“엔비디아 주식 830억 원 보유”…트럼프, ‘젠슨황 복귀’ 시동? [지금...",
+     "title": "대출 2026년 11월 브랜드평판...하나은행, SBI저축은행, 국민은행 順",
+     "press": "energy-news.co.kr",
+     "publishedAt": "2026-11-17T03:20:00.000Z",
+     "link": "https://www.energy-news.co.kr/news/articleView.html?idxno=229846"
+    },
+    {
+     "title": "“청년 내 집 마련 지원…MBS로 장기 고정금리 대출 확대해야”",
      "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-17T03:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012295403?sid=121"
-    },
-    {
-     "title": "“젠슨 황 감싸던 트럼프, 알고 보니”…엔비디아 주식 ‘폭풍 매매’ ...",
-     "press": "ekn.kr",
-     "publishedAt": "2026-11-17T02:38:00.000Z",
-     "link": "https://www.ekn.kr/web/view.php?key=20261117022020615"
+     "publishedAt": "2026-11-17T03:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012295398?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 853,
+  "flagged": 856,
   "matched": 468,
   "avgLeadMin": 853,
   "recent": [
