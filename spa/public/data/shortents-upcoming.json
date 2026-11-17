@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T18:20:53.331Z",
+ "builtAt": "2026-11-17T18:30:56.860Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,14 +11,46 @@
  "measured": 24,
  "candidates": [
   {
+   "keyword": "한국",
+   "sources": [
+    "google"
+   ],
+   "articles90": 12,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-17T17:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프 “한국 투자로 알래스카 LNG 사업 승인”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-17T18:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004683298?sid=100"
+    },
+    {
+     "title": "'오세훈 결승골' 한국, 카타르 1-0 제압하며 올해 마지막 A매치 승리",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-17T18:11:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=748626"
+    },
+    {
+     "title": "미 상원 농업위, 한국시간 19일 오전 5시 CFTC 지명자 청문회",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-17T17:56:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/439959"
+    }
+   ]
+  },
+  {
    "keyword": "오세훈 선제골",
    "sources": [
     "daum"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-17T16:56:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-17T17:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
