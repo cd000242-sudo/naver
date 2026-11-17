@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T20:21:35.758Z",
+ "builtAt": "2026-11-17T20:31:39.629Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "젠슨 황, 엔비디아 복귀 의사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 5,
-   "press": 11,
-   "firstArticleAt": "2026-11-17T18:53:00.000Z",
+   "articles90": 12,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-17T19:09:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -43,34 +43,98 @@
    ]
   },
   {
-   "keyword": "한국",
+   "keyword": "경찰",
    "sources": [
     "google"
    ],
-   "articles90": 5,
-   "recent20": 5,
-   "press": 3,
-   "firstArticleAt": "2026-11-17T20:02:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-17T19:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[씨줄날줄] 주미한국대사관 재건축",
+     "title": "세무사 수석 경찰 출석… 법조계 “사회적 파장 고려 실형 가능성”",
      "press": "seoul.co.kr",
-     "publishedAt": "2026-11-17T20:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003700543?sid=110"
+     "publishedAt": "2026-11-17T20:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003700470?sid=102"
     },
     {
-     "title": "아이디어 넘어 실전 서비스로…한국앤컴퍼니 AI 해커톤 2라운드",
-     "press": "electimes.com",
-     "publishedAt": "2026-11-17T20:12:00.000Z",
-     "link": "https://www.electimes.com/news/articleView.html?idxno=374916"
+     "title": "김종철 경찰청장 후보자 청문회…재개발 입주권·수사 독립성 쟁점",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-17T20:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004210899?sid=102"
     },
     {
-     "title": "IMF “한국 올해 성장률 3.9%… 내년에도 3%대”",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-17T20:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003700528?sid=101"
+     "title": "김종철 경찰청장 후보자 인사청문회…경찰개혁·투기의혹 쟁점",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-17T20:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014328590?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "경북 상주 지진",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 3,
+   "press": 3,
+   "firstArticleAt": "2026-11-17T19:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "상주 지진에 원안위 \"국내 원자로 안전영향 없어\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-17T20:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000927213?sid=102"
+    },
+    {
+     "title": "경북 상주 규모 3.6 지진…올해 최대 규모",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-17T20:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000927212?sid=103"
+    },
+    {
+     "title": "한밤중 상주 덮친 규모 3.6 지진…올해 한반도 최대, 원전은 이상 없어",
+     "press": "abcn.kr",
+     "publishedAt": "2026-11-17T20:22:00.000Z",
+     "link": "https://www.abcn.kr/news/articleView.html?idxno=94685"
+    }
+   ]
+  },
+  {
+   "keyword": "트럼프 알래스카 LNG 승인",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-17T19:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프 \"韓 투자 덕에 알래스카 LNG파이프라인 사업승인\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-17T20:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000927217?sid=104"
+    },
+    {
+     "title": "트럼프 “韓 역사적 투자 덕에 알래스카 LNG파이프라인 사업 승인”",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-17T20:16:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611180003"
+    },
+    {
+     "title": "트럼프, 또 \"한국 역사적 투자로 알래스카 가스관 승인\"",
+     "press": "pressian.com",
+     "publishedAt": "2026-11-17T19:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/002/0002466343?sid=100"
     }
    ]
   },
@@ -80,7 +144,7 @@
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-17T19:31:00.000Z",
    "exclusive": false,
@@ -107,28 +171,28 @@
    ]
   },
   {
-   "keyword": "오세훈 선제골",
+   "keyword": "오세훈 선제골 1-0 승리",
    "sources": [
-    "daum"
+    "nate"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-17T19:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "헤더골 넣은 오세훈",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-17T20:03:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/001/0016447744"
-    },
-    {
      "title": "‘슈팅 21-2’ 압도적이지만 단 1골에 그쳤다…‘오세훈 결승골’ 사우...",
      "press": "mk.co.kr",
      "publishedAt": "2026-11-17T20:00:00.000Z",
      "link": "https://m.sports.naver.com/kfootball/article/410/0001147586"
+    },
+    {
+     "title": "모레노호, 올해 최종전서 카타르에 1-0 승리",
+     "press": "goodnews1.com",
+     "publishedAt": "2026-11-17T19:42:00.000Z",
+     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466340"
     },
     {
      "title": "'경합 부족' 손흥민에게 공 몰아주던 축구는 이제 그만? 오세훈 세우자...",
@@ -141,7 +205,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 927,
+  "flagged": 930,
   "matched": 514,
   "avgLeadMin": 819,
   "recent": [
