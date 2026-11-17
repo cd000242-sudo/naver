@@ -1,20 +1,1504 @@
 {
-  "publishedAt": "2026-11-17T03:41:45.862Z",
+  "publishedAt": "2026-11-17T18:09:25.170Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
     "candidates": 240,
     "niche": 0,
-    "preemption": 6,
+    "preemption": 17,
     "pending": 0
   },
   "freeSample": {
-    "day": "2026-11-17",
+    "day": "2026-11-18",
     "keywords": []
   },
   "rows": [],
   "observations": [
+    {
+      "keyword": "스마일샤크 채용",
+      "issue": "스마일샤크",
+      "topic": "스마일샤크",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 87,
+      "documentCountMeasured": true,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 1,
+      "reasons": [
+        "검색량 10",
+        "문서수 87",
+        "선점 후보 — 경쟁 문서 87건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 1건)"
+        }
+      ],
+      "whySearch": {
+        "text": "스마일샤크, AWS와 스타트업 대상 AI 세미나 개최",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "스마일샤크 채용 전에 보는 연봉·복지와 AWS 파트너 기업 정보",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "스마일샤크 채용 지원하기 전에 스마일샤크 기업정보부터 찾아봤는데요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "스마일샤크 기업정보",
+          "searchVolume": 20,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "스마일샤크 기업정보",
+          "searchVolume": 20,
+          "documentCount": 346,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-17T18:02:39.133Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "데블스플랜3 네모게임 방법",
+      "issue": "데블스플랜3",
+      "topic": "데블스플랜3",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 87,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "rising",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 87",
+        "선점 후보 — 경쟁 문서 87건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "데블스 플랜3 5회 만에 7명 탈락, 유배지 등장",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "거래",
+      "adsenseFit": false,
+      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
+      "titles": {
+        "seo": {
+          "text": "데블스플랜3 네모게임 방법 규칙과 6화 공개일 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "데블스플랜3 네모게임 방법 알고 보니 6화 유배지가 다르게 보이네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "데블스플랜3 장동민",
+          "searchVolume": 6180,
+          "frame": "generic"
+        },
+        {
+          "keyword": "데블스플랜3 출연진",
+          "searchVolume": 5610,
+          "frame": "generic"
+        },
+        {
+          "keyword": "데블스플랜3 유배지",
+          "searchVolume": 2030,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "데블스플랜3 장동민",
+          "searchVolume": 6180,
+          "documentCount": 5693,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "데블스플랜3 출연진",
+          "searchVolume": 5610,
+          "documentCount": 8877,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "데블스플랜3 유배지",
+          "searchVolume": 2030,
+          "documentCount": 741,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "데블스플랜3 정현규",
+          "searchVolume": 1200,
+          "documentCount": 4396,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "데블스플랜3 공개일",
+          "searchVolume": 1140,
+          "documentCount": 9203,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "데블스플랜3 6화 공개일",
+          "searchVolume": 240,
+          "documentCount": 1866,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "데블스플랜3 다시보기",
+          "searchVolume": 40,
+          "documentCount": 11185,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "데블스플랜3 게임 규칙",
+          "searchVolume": 30,
+          "documentCount": 3403,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-17T18:02:39.133Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "쿼드 솔카",
+      "issue": "쿼드",
+      "topic": "쿼드",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 30,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 2,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 30",
+        "선점 후보 — 경쟁 문서 30건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 2건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "트럼프 방중 앞두고 첫 쿼드 정상회의 참여, 중국 견제",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "home": {
+          "text": "쿼드 솔카 쓰다가 요금제 한 번 바꿨더니 생긴 일이에요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 4,
+      "kinTop": [
+        {
+          "title": "쿼드랑 솔카랑 같은인물인가요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=20132&docId=362169578&answerNo=0",
+          "views": 478,
+          "answers": 1
+        },
+        {
+          "title": "솔카(전 쿼드) 칼리스타 룬",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1303&docId=376514643&answerNo=1",
+          "views": 153,
+          "answers": 1
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-11-17T18:02:39.133Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "젠슨 엔디비아 지분",
+      "issue": "젠슨",
+      "topic": "젠슨",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 220,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "rising",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 220",
+        "선점 후보 — 경쟁 문서 220건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "젠슨 황 '이사회 요청시 엔비디아 복귀', 사임 후 첫 발언",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "젠슨 엔디비아 지분 규모와 사임 후 복귀설까지",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "젠슨 엔디비아 지분만 보려다 사임 소식에 다시 봤네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "젠슨 황 사임 이유",
+          "searchVolume": 340,
+          "frame": "mistake"
+        },
+        {
+          "keyword": "젠슨 황 사임",
+          "searchVolume": 43640,
+          "frame": "generic"
+        },
+        {
+          "keyword": "젠슨 황 복귀",
+          "searchVolume": 12890,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "젠슨 황 사임",
+          "searchVolume": 43640,
+          "documentCount": 28002,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "젠슨 황 복귀",
+          "searchVolume": 12890,
+          "documentCount": 16473,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "젠슨 황 엔비디아 지분",
+          "searchVolume": 5260,
+          "documentCount": 32197,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "젠슨 황 스캔들",
+          "searchVolume": 400,
+          "documentCount": 18074,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "젠슨 황 사임 이유",
+          "searchVolume": 340,
+          "documentCount": 21258,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "젠슨 황 CEO 복귀",
+          "searchVolume": 20,
+          "documentCount": 11789,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-17T18:02:39.133Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "스마일샤크 AI무비나이트",
+      "issue": "스마일샤크",
+      "topic": "스마일샤크",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 38,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 38",
+        "선점 후보 — 경쟁 문서 38건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "스마일샤크, AWS와 스타트업 대상 AI 세미나 개최",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "스마일샤크 AI무비나이트 부산 개최 콘텐츠 기업 AX 지원 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "스마일샤크 AI무비나이트 다녀오고 채용 공고를 다시 들여다봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "스마일샤크",
+          "searchVolume": 490,
+          "frame": "generic"
+        },
+        {
+          "keyword": "스마일샤크 채용",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "스마일샤크",
+          "searchVolume": 490,
+          "documentCount": 3595,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "스마일샤크 채용",
+          "searchVolume": 10,
+          "documentCount": 87,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 3,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-17T18:02:39.133Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "스마일샤크 매각",
+      "issue": "스마일샤크",
+      "topic": "스마일샤크",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 59,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 59",
+        "선점 후보 — 경쟁 문서 59건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "스마일샤크, AWS와 스타트업 대상 AI 세미나 개최",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "스마일샤크 매각설, AWS 세미나 근황으로 본 진위",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "스마일샤크 매각 기사 떴는데 기업정보엔 채용 공고가 그대로 올라와 있더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "스마일샤크 기업정보",
+          "searchVolume": 20,
+          "frame": "generic"
+        },
+        {
+          "keyword": "스마일샤크 채용",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "스마일샤크 기업정보",
+          "searchVolume": 20,
+          "documentCount": 346,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "스마일샤크 채용",
+          "searchVolume": 10,
+          "documentCount": 87,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": [
+        {
+          "title": "중고차 매각 및 매입시세 요청",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=811&docId=175966999&answerNo=4",
+          "views": 766,
+          "answers": 10
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-11-17T18:02:39.133Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "스마일샤크 장진환",
+      "issue": "스마일샤크",
+      "topic": "스마일샤크",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 58,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 58",
+        "선점 후보 — 경쟁 문서 58건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "스마일샤크, AWS와 스타트업 대상 AI 세미나 개최",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "스마일샤크 장진환 대표와 AWS 스타트업 세미나 내용",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "스마일샤크 장진환 대표 검색하다 기업정보에서 눈길 멈춘 대목이 있더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "스마일샤크 기업정보",
+          "searchVolume": 20,
+          "frame": "generic"
+        },
+        {
+          "keyword": "스마일샤크 채용",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "스마일샤크 기업정보",
+          "searchVolume": 20,
+          "documentCount": 346,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "스마일샤크 채용",
+          "searchVolume": 10,
+          "documentCount": 87,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-17T18:02:39.133Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "스마일샤크 AX",
+      "issue": "스마일샤크",
+      "topic": "스마일샤크",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 55,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 55",
+        "선점 후보 — 경쟁 문서 55건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "스마일샤크, AWS와 스타트업 대상 AI 세미나 개최",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "스마일샤크 AX, AWS AI 세미나와 게임사 클라우드 지원",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "스마일샤크 AX 팀이 채용 공고에 슬쩍 적어둔 조건이 좀 의외였어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "스마일샤크 채용",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "스마일샤크 채용",
+          "searchVolume": 10,
+          "documentCount": 87,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 6,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-17T18:02:39.133Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "스마일샤크 블라인드",
+      "issue": "스마일샤크",
+      "topic": "스마일샤크",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 81,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 81",
+        "선점 후보 — 경쟁 문서 81건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "스마일샤크, AWS와 스타트업 대상 AI 세미나 개최",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "스마일샤크 블라인드 평판, AWS 파트너 기업 실제 분위기",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "스마일샤크 블라인드 보다가 기업정보랑 채용 공고까지 뒤져본 이유가 있어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "스마일샤크 기업정보",
+          "searchVolume": 20,
+          "frame": "generic"
+        },
+        {
+          "keyword": "스마일샤크 채용",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "스마일샤크 기업정보",
+          "searchVolume": 20,
+          "documentCount": 346,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "스마일샤크 채용",
+          "searchVolume": 10,
+          "documentCount": 87,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 9,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-17T18:02:39.133Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "스마일샤크 세미나",
+      "issue": "스마일샤크",
+      "topic": "스마일샤크",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 86,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 86",
+        "선점 후보 — 경쟁 문서 86건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "스마일샤크, AWS와 스타트업 대상 AI 세미나 개최",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "스마일샤크 세미나 AWS 스타트업 AI 성장과 VC 기회 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "스마일샤크 세미나 갔다가 채용 공고를 다시 들여다보게 됐어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "스마일샤크 채용",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "스마일샤크 채용",
+          "searchVolume": 10,
+          "documentCount": 87,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-17T18:02:39.133Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "스마일샤크 AWS 파트너",
+      "issue": "스마일샤크",
+      "topic": "스마일샤크",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 79,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 79",
+        "선점 후보 — 경쟁 문서 79건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "스마일샤크, AWS와 스타트업 대상 AI 세미나 개최",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "스마일샤크 AWS 파트너 Games on AWS 2026 부스 참가 내용",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "스마일샤크 AWS 파트너 채용 공고 들여다보다 스타트업이 왜 몰리나 싶더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "스마일샤크 기업정보",
+          "searchVolume": 20,
+          "frame": "generic"
+        },
+        {
+          "keyword": "스마일샤크 채용",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "스마일샤크 기업정보",
+          "searchVolume": 20,
+          "documentCount": 346,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "스마일샤크 채용",
+          "searchVolume": 10,
+          "documentCount": 87,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-17T18:02:39.133Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "스마일샤크 매출",
+      "issue": "스마일샤크",
+      "topic": "스마일샤크",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 131,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 131",
+        "선점 후보 — 경쟁 문서 131건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "스마일샤크, AWS와 스타트업 대상 AI 세미나 개최",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "스마일샤크 매출 규모와 채용·연봉, AWS 파트너 정보까지",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "스마일샤크 매출 보러 들어갔다가 기업정보에서 한참을 못 빠져나왔네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "스마일샤크 기업정보",
+          "searchVolume": 20,
+          "frame": "generic"
+        },
+        {
+          "keyword": "스마일샤크 채용",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "스마일샤크 기업정보",
+          "searchVolume": 20,
+          "documentCount": 346,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "스마일샤크 채용",
+          "searchVolume": 10,
+          "documentCount": 87,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-17T18:02:39.133Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "스마일샤크 AWS",
+      "issue": "스마일샤크",
+      "topic": "스마일샤크",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 142,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 2,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 142",
+        "선점 후보 — 경쟁 문서 142건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 2건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "스마일샤크, AWS와 스타트업 대상 AI 세미나 개최",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "스마일샤크 AWS 세미나 일정과 Games on AWS 2026 부스 참가",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "스마일샤크 AWS 세미나 보러 갔다가 채용 공고를 다시 들여다봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "스마일샤크 기업정보",
+          "searchVolume": 20,
+          "frame": "generic"
+        },
+        {
+          "keyword": "스마일샤크 채용",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "스마일샤크 기업정보",
+          "searchVolume": 20,
+          "documentCount": 346,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "스마일샤크 채용",
+          "searchVolume": 10,
+          "documentCount": 87,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-17T18:02:39.133Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "스마일샤크 게임사 지원",
+      "issue": "스마일샤크",
+      "topic": "스마일샤크",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 158,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 158",
+        "선점 후보 — 경쟁 문서 158건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "스마일샤크, AWS와 스타트업 대상 AI 세미나 개최",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "스마일샤크 게임사 지원 Games on AWS 2026 단계별 클라우드 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "스마일샤크 게임사 지원 보러 갔다가 채용 공고에 손이 가더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "스마일샤크 채용",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "스마일샤크 채용",
+          "searchVolume": 10,
+          "documentCount": 87,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 3,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-17T18:02:39.133Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "쿼드 벡스 차이",
+      "issue": "쿼드",
+      "topic": "쿼드",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 206,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 2,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 206",
+        "선점 후보 — 경쟁 문서 206건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 2건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "트럼프 방중 앞두고 첫 쿼드 정상회의 참여, 중국 견제",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "구매 검토",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "쿼드 벡스 차이 어디서 갈리는지 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "쿼드랑 벡스 비교하다 많이들 헷갈리는 부분이 여기더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 4,
+      "kinTop": [
+        {
+          "title": "닥터마틴 1461 차이",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=5040202&docId=473532802&answerNo=0",
+          "views": 11,
+          "answers": 1
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-11-17T18:02:39.133Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "쿼드 로키",
+      "issue": "쿼드",
+      "topic": "쿼드",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 238,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 238",
+        "선점 후보 — 경쟁 문서 238건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "트럼프 방중 앞두고 첫 쿼드 정상회의 참여, 중국 견제",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 32,
+      "kinTop": [
+        {
+          "title": "피파투스쿼드질문. 내공대박",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=20608&docId=145783393&answerNo=1",
+          "views": 40,
+          "answers": 1
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-11-17T18:02:39.133Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "스마일샤크 클라우드",
+      "issue": "스마일샤크",
+      "topic": "스마일샤크",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 236,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 3,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 236",
+        "선점 후보 — 경쟁 문서 236건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 3건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "스마일샤크, AWS와 스타트업 대상 AI 세미나 개최",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "스마일샤크 클라우드 AWS 파트너 MSP 세미나 정보 모음",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "스마일샤크 클라우드 채용 공고 보다가 생각보다 솔직해서 다시 읽었네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "스마일샤크 채용",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "스마일샤크 채용",
+          "searchVolume": 10,
+          "documentCount": 87,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-17T18:02:39.133Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "앤트그룹 링봇 터치",
       "issue": "앤트그룹",
@@ -75,7 +1559,8 @@
       "monetize": null,
       "measuredAt": "2026-11-17T03:39:00.615Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "링봇 터치 오픈소스",
@@ -137,7 +1622,8 @@
       "monetize": null,
       "measuredAt": "2026-11-17T03:39:00.615Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "노타 초봉",
@@ -250,7 +1736,8 @@
       "monetize": null,
       "measuredAt": "2026-11-17T03:39:00.615Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "토스페이먼츠 앤트그룹",
@@ -305,7 +1792,8 @@
       "monetize": null,
       "measuredAt": "2026-11-17T03:39:00.615Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "앤트그룹 촉각 AI",
@@ -367,7 +1855,8 @@
       "monetize": null,
       "measuredAt": "2026-11-17T03:39:00.615Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "노타 사원수",
@@ -480,7 +1969,8 @@
       "monetize": null,
       "measuredAt": "2026-11-17T03:39:00.615Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "웹케시 초봉",
@@ -1186,109 +2676,30 @@
   "rejectedCount": 0,
   "issues": [
     {
-      "issue": "조작기소 특검법 의결",
+      "issue": "경북 상주 지진",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "특검법 공포안이 총리 주재 국무회의를 통과했다",
+      "why": "상주서 규모 3.6 지진, 올해 한반도 발생 지진 중 최대",
       "headlines": [
         {
-          "title": "[속보]‘조작기소 특검법’ 국무회의 의결…李 재가해야 공포",
-          "press": "donga.com",
-          "publishedAt": "2026-11-17T02:49:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/020/0003763046?sid=100"
-        },
-        {
-          "title": "‘조작기소 특검법’ 국무회의 의결⋯대통령 순방 중 총리가 주재",
-          "press": "chosun.com",
-          "publishedAt": "2026-11-17T02:36:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0004010069?sid=100"
-        },
-        {
-          "title": "'조작기소 특검법' 공포안 국무회의 통과…한 총리가 주재",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-11-17T02:36:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/055/0001403585?sid=100"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "조작기소 특검법",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "조작기소",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "트럼프 엔비디아 주식",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "트럼프가 엔비디아 주식 830억원을 보유한 사실이 드러났다",
-      "headlines": [
-        {
-          "title": "[티조챗] 트럼프는 왜 젠슨황 감쌀까…엔비디아 주식 830억 때문? 백악관...",
-          "press": "news.tvchosun.com",
-          "publishedAt": "2026-11-17T00:34:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/448/0000651500?sid=104"
-        },
-        {
-          "title": "“엔비디아 주식 830억 원 보유”…트럼프, ‘젠슨황 복귀’ 시동? [지금...",
-          "press": "news.kbs.co.kr",
-          "publishedAt": "2026-11-17T03:02:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/056/0012295403?sid=121"
-        },
-        {
-          "title": "트럼프·젠슨황 밀착 관계 도마에…엔비디아 기부·주식 보유 논란(종합...",
-          "press": "news1.kr",
-          "publishedAt": "2026-11-17T00:14:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009292849?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "트럼프",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "세무사 경찰 출석",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "AI 부정행위 세무사 수석 합격자가 피의자로 경찰에 출석했다",
-      "headlines": [
-        {
-          "title": "'AI 커닝' 세무사 수석, 경찰 출석해 허리 숙여 사과…\"책임질 것\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-17T00:45:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014326280?sid=102"
-        },
-        {
-          "title": "'AI 부정행위' 세무사시험 수석 경찰 출석…\"잘못 책임지겠다\"",
+          "title": "경북 상주서 규모 3.6 지진 발생…올들어 가장 강해(종합)",
           "press": "yna.co.kr",
-          "publishedAt": "2026-11-17T00:33:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016445579?sid=102"
+          "publishedAt": "2026-11-17T14:24:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016447555?sid=102"
         },
         {
-          "title": "'AI 부정행위' 세무사 수석 합격자 경찰 출석",
-          "press": "imnews.imbc.com",
-          "publishedAt": "2026-11-17T00:19:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/214/0001536043?sid=102"
+          "title": "경북 상주서 규모 3.6 지진",
+          "press": "nocutnews.co.kr",
+          "publishedAt": "2026-11-17T14:54:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/079/0004210886?sid=102"
+        },
+        {
+          "title": "경북 상주서 지진 발생…올들어 가장 강한 '규모 3.6'",
+          "press": "hankyung.com",
+          "publishedAt": "2026-11-17T14:37:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005355026?sid=103"
         }
       ],
       "concentrated": [],
@@ -1296,141 +2707,97 @@
       "rowCount": 0
     },
     {
-      "issue": "FA 1호 오태곤",
+      "issue": "AI 부정행위",
       "issueType": "fresh",
       "lane": "realtime",
-      "issueStatus": "unknown",
+      "issueStatus": "rising",
       "isHot": true,
-      "why": "오태곤이 SSG와 3년 11억원 FA 1호 계약을 맺었다",
+      "why": "AI 부정 우려 수험생, 헌재에 수능 효력정지 신청",
       "headlines": [
         {
-          "title": "내년에도 ‘9시의 남자’ 오태곤은 SSG서…FA 1호 계약 ‘3년 11억’",
-          "press": "sportsworldi.com",
-          "publishedAt": "2026-11-17T00:43:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/396/0000761142"
+          "title": "\"AI 부정행위 우려\" 수험생, 헌재에 19일 수능 효력정지 신청",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-17T11:08:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016447425?sid=102"
         },
         {
-          "title": "FA 1호 곧바로 나왔다…SSG, 오태곤과 3년 총액 11억 원에 FA 계약 완료",
-          "press": "sports.donga.com",
-          "publishedAt": "2026-11-17T01:21:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/382/0001305214"
-        },
-        {
-          "title": "FA 1호 계약… 양의지 ‘영원한 두산맨’",
-          "press": "munhwa.com",
-          "publishedAt": "2026-11-17T02:18:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/021/0002833336"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "피의자",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "성범죄 피의자 추격 중 경찰 6명이 다쳤다",
-      "headlines": [
-        {
-          "title": "'수석' 합격자가 피의자로‥\"수험생에 죄송\"",
+          "title": "[단독] 리트 만점자 \"AI 안 썼지만 확률 희박은 인정\"",
           "press": "imnews.imbc.com",
-          "publishedAt": "2026-11-17T03:03:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/214/0001536085?sid=102"
+          "publishedAt": "2026-11-17T15:44:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/214/0001536245?sid=102"
         },
         {
-          "title": "성범죄 피의자 '추격전'에 경찰 6명 부상…바퀴에 실탄 쏴 체포",
+          "title": "현 고3 \"AI 부정행위 우려\" 헌재에 19일 수능 효력정지 신청",
           "press": "news.jtbc.co.kr",
-          "publishedAt": "2026-11-16T13:43:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/437/0000521018?sid=102"
-        },
-        {
-          "title": "'AI 커닝' 세무사 수석, 피의자로 경찰 출석…개조한 계산기도 썼다(종...",
-          "press": "news1.kr",
-          "publishedAt": "2026-11-17T01:42:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009293147?sid=102"
+          "publishedAt": "2026-11-17T12:11:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/437/0000521197?sid=102"
         }
       ],
       "concentrated": [
         {
-          "keyword": "피의자 뜻",
+          "keyword": "수능 ai 부정행위",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "피의자 피고인",
+          "keyword": "ai 부정행위 방법",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "피해자 피의자",
+          "keyword": "ai 부정행위 처벌",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "피고인 피의자",
+          "keyword": "AI 부정행위 방지방법",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "피의자 신상공개",
+          "keyword": "ai 부정행위 잡는법",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "피의자 피해자",
+          "keyword": "ai 부정행위 대학",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "피의자 송치 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "피의자 피고인 차이",
+          "keyword": "ai",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
-      "nextWave": [
-        {
-          "keyword": "피의자 구속",
-          "reason": "영장 발부",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
+      "nextWave": [],
       "rowCount": 0
     },
     {
-      "issue": "한성숙 총리 발언",
+      "issue": "이재명 APEC 출국",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
-      "isHot": true,
-      "why": "한 총리가 수능 스마트기기 원천 차단을 지시했다",
+      "isHot": false,
+      "why": "이재명 대통령, 아세안·APEC 참석차 필리핀 출국",
       "headlines": [
         {
-          "title": "韓 총리 \"수능 시험장 스마트기기 원천차단…전수점검\"",
-          "press": "hankyung.com",
-          "publishedAt": "2026-11-17T01:21:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005354683?sid=102"
+          "title": "이 대통령 오늘 필리핀으로 출국...아세안·APEC 참석",
+          "press": "ytn.co.kr",
+          "publishedAt": "2026-11-16T02:43:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/052/0002433387?sid=100"
         },
         {
-          "title": "한 총리 \"수능 시험 중 스마트기기 휴대 원천 차단…안경·시계 전수 점...",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-17T01:46:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014326556?sid=100"
+          "title": "러 \"푸틴, 중국에서 이재명 대통령과 만날 것\"",
+          "press": "hankookilbo.com",
+          "publishedAt": "2026-11-17T08:05:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/469/0000966104?sid=104"
         },
         {
-          "title": "韓총리 \"수능 중 스마트기기 휴대 원천 차단…안경·시계 전수 점검\"",
-          "press": "news1.kr",
-          "publishedAt": "2026-11-17T01:40:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009293141?sid=100"
+          "title": "이 대통령, 아세안·APEC 순방 출국…'다자외교 슈퍼위크' 돌입",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-11-16T00:24:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/055/0001403272?sid=100"
         }
       ],
       "concentrated": [],
@@ -1438,78 +2805,116 @@
       "rowCount": 0
     },
     {
-      "issue": "상장",
+      "issue": "오세훈 헤더 한국",
       "issueType": "fresh",
       "lane": "realtime",
-      "issueStatus": "stable",
+      "issueStatus": "unknown",
       "isHot": true,
-      "why": "옵토닉스가 코스닥 상장 첫날 공모가 두 배로 급등했다",
+      "why": "오세훈 헤더 선제골, 한국 카타르전 전반 1-0 리드",
       "headlines": [
         {
-          "title": "[단독] 한투·신한 엔트로픽 상장 후 매수⋯미래에셋·KB, 공모주 노린다",
-          "press": "inews24.com",
-          "publishedAt": "2026-11-17T01:50:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/031/0001075646?sid=101"
+          "title": "모레노호, 카타르에 전반전 1-0 앞서…오세훈 헤더 선제골",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-17T14:50:00.000Z",
+          "link": "https://m.sports.naver.com/kfootball/article/001/0016447578"
         },
         {
-          "title": "[단독] \"내 주식도 상장폐지?\"…150곳 퇴출 예고, 파급효과는 '깜깜이'",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-11-16T23:41:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006410863?sid=101"
+          "title": "'오세훈 헤더 선제골' 한국, 카타르에 1-0 앞선 채 전반종료",
+          "press": "stoo.com",
+          "publishedAt": "2026-11-17T14:48:00.000Z",
+          "link": "http://www.stoo.com/article.php?aid=109958543969"
         },
         {
-          "title": "옵토닉스, 코스닥 상장 첫날 170% 안팎 급등",
+          "title": "'오세훈 헤더 선제골' 모레노호, 카타르전 전반 1-0 앞서",
           "press": "newsis.com",
-          "publishedAt": "2026-11-17T00:11:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014326173?sid=101"
+          "publishedAt": "2026-11-17T14:52:00.000Z",
+          "link": "https://m.sports.naver.com/kfootball/article/003/0014328518"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "젠슨",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "rising",
+      "isHot": true,
+      "why": "젠슨 황 '이사회 요청시 엔비디아 복귀', 사임 후 첫 발언",
+      "headlines": [
+        {
+          "title": "젠슨 황 \"이사회 요청시 엔비디아 복귀\"…사임 후 첫 공개 발언",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-17T16:11:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016447622?sid=104"
+        },
+        {
+          "title": "젠슨 황 “CEO 복귀 요청 쏟아져...이사회가 원하면 돌아갈 것”",
+          "press": "chosun.com",
+          "publishedAt": "2026-11-17T16:18:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0004010235?sid=105"
+        },
+        {
+          "title": "\"젠슨 황 딸 매디슨, 사실상 비서실장…고위 임원에도 고함\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-17T04:32:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014327192?sid=104"
         }
       ],
       "concentrated": [
         {
-          "keyword": "상장 뜻",
+          "keyword": "젠슨황",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "상장 만들기",
+          "keyword": "젠슨 황 배우자",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "앤트로픽 상장",
+          "keyword": "젠슨 애클스",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "상장 케이스",
-          "searchVolume": 7690,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔트로픽 상장",
+          "keyword": "젠슨 황 부인",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "상장 나무위키",
+          "keyword": "젠슨 황 자녀",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "상장 보관 앨범",
+          "keyword": "젠슨 황 재산",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "무신사 상장 일정",
+          "keyword": "젠슨 황 한국어",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "젠슨 버튼",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [
         {
-          "keyword": "엔트로픽 상장",
-          "reason": "IPO 일정",
+          "keyword": "젠슨 복귀 여부",
+          "reason": "이사회 결정 주목",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "젠슨 스캔들 진상",
+          "reason": "대반전 궁금",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -1518,181 +2923,345 @@
       "rowCount": 0
     },
     {
-      "issue": "코스피 급락",
+      "issue": "데블스플랜3",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "rising",
+      "isHot": true,
+      "why": "데블스 플랜3 5회 만에 7명 탈락, 유배지 등장",
+      "headlines": [
+        {
+          "title": "‘데블스 플랜3’ 5회 만에 7명 탈락...판 뒤집을 유배지 등장",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-11-17T01:17:00.000Z",
+          "link": "https://m.entertain.naver.com/article/009/0005764735"
+        },
+        {
+          "title": "‘데블스플랜 3’ 6화 공개일 및 시간",
+          "press": "bntnews.co.kr",
+          "publishedAt": "2026-11-17T00:06:00.000Z",
+          "link": "https://www.bntnews.co.kr/article/view/bnt202611170040"
+        },
+        {
+          "title": "'데블스 플랜3', 첫 주부터 정상 찍었다…비드라마 화제성 단숨에 1위",
+          "press": "tenasia.co.kr",
+          "publishedAt": "2026-11-17T06:48:00.000Z",
+          "link": "https://m.entertain.naver.com/article/312/0000784885"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "데블스플랜3 공개시간",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "데블스플랜3 갤러리",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "데블스플랜3 탈락자",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "데블스플랜3 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "데블스플랜3 스포",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "데블스플랜3 출연진",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "데블스플랜3 우승자",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "데블스플랜3 미니갤러리",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "데블스플랜3 6화",
+          "reason": "다음 탈락자 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "데블스플랜3 우승 후보",
+          "reason": "최종 승자 예측",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "데블스플랜3 공개일",
+          "reason": "다음 회차 일정",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "탄도 미사일",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "dead",
+      "isHot": true,
+      "why": "젤렌스키 '북한, 러시아에 매달 탄도미사일 수십 발 공급'",
+      "headlines": [
+        {
+          "title": "젤렌스키 \"더 많은 北미사일 러에 공급…韓주변에 도전 과제\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-16T20:10:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016445208?sid=104"
+        },
+        {
+          "title": "‘사과 없는’ 젤렌스키, 또 한국 언급…“진화하는 北 미사일, 위협될...",
+          "press": "nownews.seoul.co.kr",
+          "publishedAt": "2026-11-17T13:32:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/081/0003700457?sid=104"
+        },
+        {
+          "title": "“북한, 한 달 수십 발씩 러시아에 탄도미사일 제공…미사일 성능 갈고...",
+          "press": "chosun.com",
+          "publishedAt": "2026-11-17T08:22:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0004010128?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "탄도 미사일 종류",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "탄도 미사일 영어로",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "탄도미사일 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "북한 탄도미사일",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "북한 동해 탄도미사일",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "북한 탄도미사일 발사",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "탄도미사일 순항미사일",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "탄도미사일 사거리",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "쿼드",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "트럼프 방중 앞두고 첫 쿼드 정상회의 참여, 중국 견제",
+      "headlines": [
+        {
+          "title": "트럼프, 방중앞 쿼드 정상회의 첫 참여…인태 '中견제' 결속행보",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-17T16:21:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016447635?sid=104"
+        },
+        {
+          "title": "오늘 미일 등 쿼드 정상회의…中 겨냥해 \"경제적 강압 우려\"",
+          "press": "news1.kr",
+          "publishedAt": "2026-11-16T23:02:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009292688?sid=104"
+        },
+        {
+          "title": "트럼프 “김정은, 회담 오고 싶을 것...지켜보자”",
+          "press": "chosun.com",
+          "publishedAt": "2026-11-17T11:16:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0004010144?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "쿼드 롤",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "롤 쿼드",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "쿼드 북 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "쿼드 벡스 차이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "대학로극장 쿼드",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "쿼드 국가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "쿼드 극장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "쿼드 나라",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "미중러 회담",
+          "reason": "선전 회동 주목",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "쿼드 공동성명",
+          "reason": "대중 메시지 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "쿼드 대중 조치",
+          "reason": "구체 결과 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "정우영",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "코스피가 3.59% 급락해 5100선으로 후퇴했다",
+      "why": "정우영 후반 교체 투입, 카타르전 왼쪽 선발 전망",
       "headlines": [
         {
-          "title": "[속보] 코스피, 3.59% 급락…5,100선으로 후퇴",
+          "title": "후반 교체 투입된 정우영",
           "press": "yna.co.kr",
-          "publishedAt": "2026-11-16T06:34:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016444433?sid=101"
+          "publishedAt": "2026-11-17T16:30:00.000Z",
+          "link": "https://m.sports.naver.com/kfootball/article/001/0016447646"
         },
         {
-          "title": "코스피 반등 열쇠 쥔 엔비디아…'젠슨 황 복귀론' 속 실적발표 주목",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-16T01:52:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014324137?sid=101"
+          "title": "'손흥민 A매치 60호 골, 결국 올해는 못 봤다' 카타르전에서도 침묵...손...",
+          "press": "osen.co.kr",
+          "publishedAt": "2026-11-17T15:28:00.000Z",
+          "link": "https://m.sports.naver.com/kfootball/article/109/0005641844"
         },
         {
-          "title": "코스피 3.59%↓ 5,100선으로 후퇴…코스닥도 4.8%↓",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-16T06:37:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016444451?sid=101"
+          "title": "이강인은 오른쪽 고정 전망… 카타르전 왼쪽은 '돌아온 돌격대장' 정우...",
+          "press": "footballist.co.kr",
+          "publishedAt": "2026-11-17T06:10:00.000Z",
+          "link": "https://m.sports.naver.com/kfootball/article/436/0000114924"
         }
       ],
       "concentrated": [
         {
-          "keyword": "코스피 급락 이유",
+          "keyword": "정우영 에이티즈",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "코스피 급락 경고",
+          "keyword": "정우영 캐스터",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "코스피 급락 손실",
+          "keyword": "정우영 나무위키",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "코스피 급락 국민연금",
+          "keyword": "정우영 축구선수",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "코스피 급락 대책",
+          "keyword": "lg 정우영",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "코스피 급락 전망",
+          "keyword": "정우영 야구",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "코스피 급락 뜻",
+          "keyword": "에이티즈 정우영",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "코스피",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "임현주 육아휴직 퇴사",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "임현주가 육아휴직 후 퇴사 보도를 사실이 아니라고 반박했다",
-      "headlines": [
-        {
-          "title": "임현주 \"두 번의 육아휴직 끝나자 MBC 퇴사? 사실 아냐\"",
-          "press": "hankyung.com",
-          "publishedAt": "2026-11-17T01:12:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005354675?sid=103"
-        },
-        {
-          "title": "임현주, 퇴사 보도 바로잡았다 \"육아휴직 1년9개월 사실 아냐\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-17T00:31:00.000Z",
-          "link": "https://m.entertain.naver.com/article/003/0014326236"
-        },
-        {
-          "title": "임현주, 육아휴직 후 퇴사 논란에 \"내 자리에서 최선 다해\"",
-          "press": "star.ytn.co.kr",
-          "publishedAt": "2026-11-17T01:34:00.000Z",
-          "link": "https://m.entertain.naver.com/article/052/0002433864"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "너구리",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "농심이 매콤마요 볶음너구리 등 신제품을 출시한다",
-      "headlines": [
-        {
-          "title": "너구리 변신 계속된다…농심, '매콤마요 볶음너구리' 등 라인업 확대",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-17T01:26:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014326458?sid=103"
-        },
-        {
-          "title": "농심 볶음너구리, 내년 돌아온다…‘매콤마요’ 신제품도",
-          "press": "biz.heraldcorp.com",
-          "publishedAt": "2026-11-17T01:34:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/016/0002724411?sid=101"
-        },
-        {
-          "title": "[단독] '너구리' 장하권, 4년 만의 현역 복귀 타진",
-          "press": "inven.co.kr",
-          "publishedAt": "2026-11-17T01:45:00.000Z",
-          "link": "https://m.sports.naver.com/esports/article/442/0000198931"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "볶음너구리",
-          "searchVolume": 505200,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "너구리 라면",
-          "searchVolume": 9420,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "너구리 볶음면",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "너구리 양파링",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "너구리 롤",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "너구리 라쿤 차이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "너구리 라쿤",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "너구리 영어로",
+          "keyword": "정우영 생일",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [
         {
-          "keyword": "너구리 추가 라인업",
-          "reason": "확대 제품",
+          "keyword": "정우영 평점",
+          "reason": "교체 활약 평가",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "정우영 선발",
+          "reason": "다음 경기 기용",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -1701,75 +3270,527 @@
       "rowCount": 0
     },
     {
-      "issue": "캘리포니아주",
+      "issue": "조국 일본 입국",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "조국, 일본 하네다공항서 입국 거부당해",
+      "headlines": [
+        {
+          "title": "조국, 일본 입국 거부당해...독도 방문 이력 때문?",
+          "press": "ytn.co.kr",
+          "publishedAt": "2026-11-17T13:05:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/052/0002434224?sid=104"
+        },
+        {
+          "title": "조국, 일본 입국 거부당해... 독도 방문 때문인가",
+          "press": "ohmynews.com",
+          "publishedAt": "2026-11-17T07:21:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/047/0002536175?sid=104"
+        },
+        {
+          "title": "일본 입국 거부당한 조국…조국당 “정부가 항의해야”",
+          "press": "munhwa.com",
+          "publishedAt": "2026-11-17T12:23:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/021/0002833527?sid=100"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "조국",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "메타",
       "issueType": "fresh",
       "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "캘리포니아주가 허깅페이스 해킹 연루 혐의로 오픈AI를 제소했다",
+      "why": "동아ST·메타비아, 비만치료제 전임상서 체중 감소·대사 개선 확인",
       "headlines": [
         {
-          "title": "\"오픈AI가 대중을 위험에 빠트렸다\" 소송",
+          "title": "동아ST·메타비아 \"비만치료제 전임상 연구 발표\"",
           "press": "newsis.com",
-          "publishedAt": "2026-11-16T22:33:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014326044?sid=104"
+          "publishedAt": "2026-11-17T06:47:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014327860?sid=102"
         },
         {
-          "title": "美 캘리포니아, '허깅페이스 해킹' 오픈AI 제소…\"최소 80건 공격 관여\"",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-11-16T22:09:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005843419?sid=104"
+          "title": "동아ST·메타비아, 비만치료제 후보물질 전임상서 체중 감소",
+          "press": "news.tf.co.kr",
+          "publishedAt": "2026-11-17T08:29:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/629/0000552907?sid=101"
         },
         {
-          "title": "美캘리포니아, AI '허깅페이스 해킹' 사건 두고 오픈AI 제소",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-16T21:14:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016445246?sid=104"
+          "title": "동아ST·메타비아, 비만신약 DA-1726 전임상서 대사 개선 효과 확인",
+          "press": "sedaily.com",
+          "publishedAt": "2026-11-17T06:06:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/011/0004683098?sid=105"
         }
       ],
       "concentrated": [
         {
-          "keyword": "미국 캘리포니아주",
+          "keyword": "메타 ai 글라스",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "캘리포니아주 지도",
+          "keyword": "메타 뜻",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "캘리포니아주 시간",
+          "keyword": "메타 주가",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "캘리포니아주 la",
+          "keyword": "메타 AI",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "캘리포니아주 한국 크기차이",
+          "keyword": "메타 안경",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "캘리포니아주 도시",
+          "keyword": "메타 인스타",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "캘리포니아주 면적",
+          "keyword": "메타 뮤즈",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "캘리포니아주 인구",
+          "keyword": "메타(주)",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "전남광주",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "전남광주 통합, 하나의 생활권 통합 교통체계 추진",
+      "headlines": [
+        {
+          "title": "‘전남-광주 하나의 생활권’ 통합 교통체계 추진",
+          "press": "news.kbs.co.kr",
+          "publishedAt": "2026-11-17T12:49:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/056/0012295884?sid=101"
+        },
+        {
+          "title": "수능 감독수당 교사는 17만원, 교육청 고위직은 수백만원",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-17T06:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016446671?sid=102"
+        },
+        {
+          "title": "통합으로 교통장벽 허문다…전남광주 '10·30·60 생활권' 청사진",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-17T02:13:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014326670?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "전남 광주 가볼만한곳",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전남 광주 날씨",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전남 광주 맛집",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전남광주 축제",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전남광주 목포시 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전남광주 노블차이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전남광주 롤",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전남광주 곱창",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "전남광주 통합 찬반",
+          "reason": "주민 반응 주목",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "오픈AI",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "올트먼 '젠슨 황은 내 영웅, 영웅에게도 결점 있어'",
+      "headlines": [
+        {
+          "title": "올트먼 \"젠슨황은 내 영웅…영웅에게도 결점 있어\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-16T22:12:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016445279?sid=104"
+        },
+        {
+          "title": "'오픈AI' 올트먼 \"젠슨 황, 영웅에게도 결점은 있어\"",
+          "press": "hankyung.com",
+          "publishedAt": "2026-11-16T22:55:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005354586?sid=104"
+        },
+        {
+          "title": "오픈AI·구글이 ‘수능 부정 적발’ 도와 줄까? [지금뉴스]",
+          "press": "news.kbs.co.kr",
+          "publishedAt": "2026-11-17T08:04:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/056/0012295586?sid=121"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "오픈ai 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 대표",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 종류",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 순위",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai ceo",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 주식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "오픈AI 상장",
+          "reason": "IPO 일정 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "수능 부정 적발",
+          "reason": "AI 활용 여부",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "오픈AI 보안",
+          "reason": "해킹 후속 대응",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "구글",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "구글 'AI 스스로 취약점 찾아 코딩 후 공격 첫 확인'",
+      "headlines": [
+        {
+          "title": "구글 \"해킹 진화...자율형 멀티 에이전트 기승\"",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-11-17T13:23:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002445752?sid=105"
+        },
+        {
+          "title": "구글 “AI 스스로 취약점 찾아 코딩 후 공격 첫 확인”",
+          "press": "kmib.co.kr",
+          "publishedAt": "2026-11-17T09:07:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/005/0001885717?sid=101"
+        },
+        {
+          "title": "라온시큐어, 구글 '디바이스 트러스트' 연동…제로트러스트 강화",
+          "press": "news1.kr",
+          "publishedAt": "2026-11-17T01:57:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009293197?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "구글 제미나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 영국",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 번역기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 클래스룸",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 재팬",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 원",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 폼",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "구글 제미나이",
+          "reason": "AI 기술 연계",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "애플",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "애플페이 확대, 카카오뱅크 합류…수수료 문제 복병",
+      "headlines": [
+        {
+          "title": "애플페이 확산에 기대와 우려 교차…수수료 부담 변수",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-17T08:23:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016447224?sid=105"
+        },
+        {
+          "title": "애플페이 확산에 삼성페이도 유료화?…카드 혜택 줄어드나",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-11-17T11:42:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005765209?sid=101"
+        },
+        {
+          "title": "애플페이에 카뱅 합류 …외연 넓혔지만 수수료 문제는 복병",
+          "press": "view.asiae.co.kr",
+          "publishedAt": "2026-11-17T00:58:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/277/0005843580?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "애플 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 서비스센터",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 ceo",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 환불",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 보증 확인",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 주식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 폴더블폰",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 폴더블",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "스마일샤크",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "스마일샤크, AWS와 스타트업 대상 AI 세미나 개최",
+      "headlines": [
+        {
+          "title": "스마일샤크, AWS와 스타트업 대상 세미나 개최",
+          "press": "hansbiz.co.kr",
+          "publishedAt": "2026-11-17T08:12:00.000Z",
+          "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=884265"
+        },
+        {
+          "title": "스마일샤크, AWS와 'AI로 만드는 성장, VC가 보는 기회' 세미나 성료",
+          "press": "etoday.co.kr",
+          "publishedAt": "2026-11-17T05:32:00.000Z",
+          "link": "https://www.etoday.co.kr/news/view/2649262"
+        },
+        {
+          "title": "스마일샤크, AWS와 스타트업 AI 세미나 개최…에이전트 적용 사례 공유",
+          "press": "aitimes.com",
+          "publishedAt": "2026-11-17T06:26:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=217494"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "스마일샤크 기업정보",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "스마일샤크 매각",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "스마일샤크 매출",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "스마일샤크 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "스마일샤크 사람인",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "스마일샤크 장진환",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "스마일샤크 블라인드",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "스마일샤크 매각",
+          "reason": "인수자 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "스마일샤크 채용",
+          "reason": "입사 수요",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "스마일샤크 매출",
+          "reason": "성장세 주목",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
       "rowCount": 0
     },
     {
@@ -1778,25 +3799,25 @@
       "lane": "tech",
       "issueStatus": "declining",
       "isHot": false,
-      "why": "트럼프가 중국에서 김정은을 만날 수도 있다고 밝혔다",
+      "why": "트럼프 '김정은도 중국 오고 싶어할 것…지켜보자'",
       "headlines": [
         {
-          "title": "트럼프, 김정은에 또 대화 손짓…이번엔 中 끌어들였다",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-16T21:13:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014326006?sid=104"
-        },
-        {
-          "title": "트럼프 \"중국서 김정은 만날 것‥시진핑에 달려\"",
-          "press": "imnews.imbc.com",
-          "publishedAt": "2026-11-16T21:03:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/214/0001535986?sid=104"
-        },
-        {
-          "title": "트럼프 \"젠슨황 불륜녀 中스파이 아닐 수도…中자극 원치않아\"(종합)",
+          "title": "트럼프 \"김정은도 中 오고 싶어할 것…어떻게 될지 보자\"",
           "press": "yna.co.kr",
-          "publishedAt": "2026-11-16T21:20:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016445254?sid=104"
+          "publishedAt": "2026-11-17T11:30:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016447439?sid=104"
+        },
+        {
+          "title": "트럼프 “김정은, 회담 오고 싶을 것...지켜보자”",
+          "press": "chosun.com",
+          "publishedAt": "2026-11-17T11:16:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0004010144?sid=104"
+        },
+        {
+          "title": "트럼프 “중국서 김정은 만날 수 있어”…또 깜짝카드 띄웠다",
+          "press": "hani.co.kr",
+          "publishedAt": "2026-11-17T10:48:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/028/0002832690?sid=100"
         }
       ],
       "concentrated": [
@@ -1844,7 +3865,7 @@
       "nextWave": [
         {
           "keyword": "트럼프 방중 일정",
-          "reason": "방문 시기",
+          "reason": "구체 날짜 궁금",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -1853,33 +3874,74 @@
       "rowCount": 0
     },
     {
-      "issue": "영상 생성 AI",
+      "issue": "캘리포니아주",
       "issueType": "fresh",
       "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "수능 AI 부정행위를 두고 국가 상대 소송 가능성이 제기됐다",
+      "why": "캘리포니아주, 허깅페이스 해킹 두고 오픈AI 제소",
       "headlines": [
         {
-          "title": "'AI 커닝' 세무사 수석, 경찰 출석…\"수험생에 죄송\" [영상]",
-          "press": "hankyung.com",
-          "publishedAt": "2026-11-17T00:22:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005354635?sid=102"
+          "title": "美 캘리포니아, 오픈AI 상대 소송…\"통제 실패로 공공에 위협\"",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-11-17T05:45:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005442331?sid=101"
         },
         {
-          "title": "'AI 부정합격' 30대 경찰 출석...\"잘못 책임질 것\"",
-          "press": "ytn.co.kr",
-          "publishedAt": "2026-11-17T02:29:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/052/0002433908?sid=102"
+          "title": "\"오픈AI가 대중을 위험에 빠트렸다\" 소송",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-16T22:33:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014326044?sid=104"
         },
         {
-          "title": "“이렇게 쓰라고 만든 AI 아닌데”…카이스트 연구원, 수능 부정행위에...",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-11-16T23:11:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005764667?sid=102"
+          "title": "'탈옥 AI' 허깅페이스 해킹 사태에…美캘리포니아주, 오픈AI 소송",
+          "press": "news1.kr",
+          "publishedAt": "2026-11-17T06:18:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009294086?sid=104"
         }
       ],
-      "concentrated": [],
+      "concentrated": [
+        {
+          "keyword": "미국 캘리포니아주",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "캘리포니아주 지도",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "캘리포니아주 시간",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "캘리포니아주 la",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "캘리포니아주 한국 크기차이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "캘리포니아주 도시",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "캘리포니아주 면적",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "캘리포니아주 인구",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
       "nextWave": [],
       "rowCount": 0
     },
@@ -1968,124 +4030,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
-    },
-    {
-      "issue": "중국 에이스",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "중국 에이스가 AI 음악 생성 세계 1위로 수노를 제쳤다",
-      "headlines": [
-        {
-          "title": "부상과 부진 딛고 반등한 강소휘, 다시 '에이스'로",
-          "press": "isplus.com",
-          "publishedAt": "2026-11-16T21:00:00.000Z",
-          "link": "https://m.sports.naver.com/volleyball/article/241/0003542031"
-        },
-        {
-          "title": "中 에이스로보틱스, 로봇 정밀 작업 성공률 향상 모델 발표",
-          "press": "irobotnews.com",
-          "publishedAt": "2026-11-16T14:34:00.000Z",
-          "link": "https://www.irobotnews.com/news/articleView.html?idxno=49624"
-        },
-        {
-          "title": "중국 에이스, AI 보컬 음악 생성 세계 1위…수노 제쳤다",
-          "press": "aitimes.com",
-          "publishedAt": "2026-11-16T07:44:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=217452"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "중국",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "KAIST",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "KAIST가 중국 칭화대와 기계공학 복수학위 석사과정을 개설한다",
-      "headlines": [
-        {
-          "title": "KAIST, 중국 칭화대 오가며 석사 취득 복수학위과정 개설",
-          "press": "news1.kr",
-          "publishedAt": "2026-11-17T01:08:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009293039?sid=102"
-        },
-        {
-          "title": "KAIST \"배터리 첨가제 때문에 배터리 수명 주는 원인 찾아\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-17T02:13:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016445993?sid=101"
-        },
-        {
-          "title": "KAIST·中 칭화대 학생, 두 대학서 석사학위 딴다",
-          "press": "dt.co.kr",
-          "publishedAt": "2026-11-17T01:28:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/029/0003059536?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "kaist 약자",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kaist 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "KAIST 입학처",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kaist 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "KAIST 등록금",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kaist portal",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kaist 인턴",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kaist 대학원",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "KAIST 배터리",
-          "reason": "연구 성과",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "노타",
@@ -2186,101 +4132,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
-    },
-    {
-      "issue": "인텔",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "declining",
-      "isHot": false,
-      "why": "인텔이 주가 29% 폭락 후 주주들에게 집단소송을 당했다",
-      "headlines": [
-        {
-          "title": "\"악재 숨기고 230억달러 조달\"…인텔, 주주들로부터 피소",
-          "press": "hankyung.com",
-          "publishedAt": "2026-11-16T10:49:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005354513?sid=101"
-        },
-        {
-          "title": "\"돈 삭제\" 하루 새 주가 29% 폭락에...인텔 주주들 '집단소송' 제기",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-11-16T07:13:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005441779?sid=101"
-        },
-        {
-          "title": "인텔 주가 29% 급락후 주주 집단소송…\"PC 재고 부진 늦게 공시\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-16T06:17:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016444351?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "인텔 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인텔 i7",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인텔 i5",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인텔 하락 원인",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인텔 보증 조회",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인텔 세대 정리",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인텔 차이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인텔 전망",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "인텔 주가",
-          "reason": "이후 흐름",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "인텔 실적",
-          "reason": "다음 발표",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "인텔 구조조정",
-          "reason": "대응책",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "웹케시",
