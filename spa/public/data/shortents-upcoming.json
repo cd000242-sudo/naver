@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T16:30:13.331Z",
+ "builtAt": "2026-11-17T16:40:16.976Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,53 +8,58 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "오세훈 선제골",
    "sources": [
     "daum"
    ],
-   "articles90": 35,
-   "recent20": 7,
-   "press": 24,
-   "firstArticleAt": "2026-11-17T15:01:00.000Z",
+   "articles90": 31,
+   "recent20": 6,
+   "press": 23,
+   "firstArticleAt": "2026-11-17T15:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'오세훈 결승골' 모레노호, 카타르 꺾고 올해 A매치 유종의 미",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-17T16:34:00.000Z",
+     "link": "https://www.ajunews.com/view/20261118012841654"
+    },
+    {
+     "title": "모레노호, 맥 빠진 카타르에 1-0 진땀승…오세훈 헤더 결승골",
+     "press": "kyeongin.com",
+     "publishedAt": "2026-11-17T16:30:00.000Z",
+     "link": "https://www.kyeongin.com/article/1774971"
+    },
     {
      "title": "결승골에도 웃지 못한 오세훈 \"더 넣지 못해 팀원들에게 미안\"",
      "press": "news1.kr",
      "publishedAt": "2026-11-17T16:27:00.000Z",
      "link": "https://m.sports.naver.com/kfootball/article/421/0009294816"
-    },
-    {
-     "title": "[핌 포커스] ;결승골에도 사과; 오세훈, 완벽한 연계와 아쉬운 결정력의...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-17T16:26:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261118000013"
-    },
-    {
-     "title": "[442.star] 폼 미친 송민규! 카타르 수비진 초토화 폭풍 드리블...오세훈...",
-     "press": "fourfourtwo.co.kr",
-     "publishedAt": "2026-11-17T16:25:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/411/0000090105"
     }
    ]
   },
   {
    "keyword": "한국",
    "sources": [
-    "signal.bz",
-    "google"
+    "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 9,
-   "press": 11,
-   "firstArticleAt": "2026-11-17T16:07:00.000Z",
+   "articles90": 10,
+   "recent20": 3,
+   "press": 9,
+   "firstArticleAt": "2026-11-17T16:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "슈팅 22개 퍼붓고도 단 1골…경기 지배하니 결정력 부족 한국축구",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-17T16:39:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/119/0003156375"
+    },
     {
      "title": "한국, 독·미·중 이어 네 번째 수출 1조 달러 목전…김정관 “도전과 응...",
      "press": "viva100.com",
@@ -66,12 +71,70 @@
      "press": "biz.chosun.com",
      "publishedAt": "2026-11-17T16:24:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/366/0001205490?sid=004"
+    }
+   ]
+  },
+  {
+   "keyword": "엔비디아 실적발표",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-17T15:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"AI 수요, 시장 예상 웃돈다\"…엔비디아 강세론 속 장기 혁신 역량은 변...",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-17T16:22:00.000Z",
+     "link": "https://www.tokenpost.kr/news/cryptocurrency/439919"
     },
     {
-     "title": "\"한국에 갔을 때는 걱정 안 했는데…이제 돈 아껴야 한다\" 前 두산 투수...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-17T16:19:00.000Z",
-     "link": "https://m.sports.naver.com/wbaseball/article/109/0005641860"
+     "title": "젠슨 황 \"이사회가 부르면 엔비디아 CEO로 돌아갈 것\"",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-17T16:21:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261118000011"
+    },
+    {
+     "title": "11월 엔비디아 실적발표일 한국시간 몇시?",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-17T16:08:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1175367"
+    }
+   ]
+  },
+  {
+   "keyword": "경북 상주 지진",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-17T15:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "원안위 \"상주 인근 규모 3.6 지진, 원자로 안전에 영향 없어\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-17T16:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016447650?sid=101"
+    },
+    {
+     "title": "“강한 진동과 굉음” 경북 상주서 ‘올해 최강 지진’…규모 3.6",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-17T16:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003700463?sid=102"
+    },
+    {
+     "title": "경북 상주 북서쪽 22km 지역서 규모 3.6 지진",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-17T15:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001403765?sid=102"
     }
    ]
   },
@@ -80,10 +143,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 8,
+   "articles90": 5,
    "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-17T15:08:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-17T15:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -108,13 +171,13 @@
    ]
   },
   {
-   "keyword": "경북 상주 지진",
+   "keyword": "지진 3.7",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 7,
+   "articles90": 5,
    "recent20": 0,
-   "press": 5,
+   "press": 4,
    "firstArticleAt": "2026-11-17T15:14:00.000Z",
    "exclusive": false,
    "capped": false,
@@ -126,87 +189,23 @@
      "link": "https://n.news.naver.com/mnews/article/081/0003700463?sid=102"
     },
     {
-     "title": "경북 상주 북서쪽 22km 지역서 규모 3.6 지진",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-17T15:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001403765?sid=102"
-    },
-    {
      "title": "상주서 올해 가장 강한 규모 3.6 지진…주민들 한밤중 '깜짝'",
      "press": "kyongbuk.co.kr",
      "publishedAt": "2026-11-17T15:42:00.000Z",
      "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4091208"
-    }
-   ]
-  },
-  {
-   "keyword": "조작기소 특검법 통과",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-17T15:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[사설] 민생 현안 관계없이 논란만 야기할 조작기소 특검법",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-17T16:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001885806?sid=110"
     },
     {
-     "title": "野 \"조작기소 특검 수용 총리 특활비 삭감\" vs 與 \"식물 총리 만들건가...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-17T15:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005605818?sid=100"
-    },
-    {
-     "title": "조작기소 특검법 국무회의 통과…정국 격랑",
-     "press": "ksilbo.co.kr",
-     "publishedAt": "2026-11-17T15:04:00.000Z",
-     "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1072830"
-    }
-   ]
-  },
-  {
-   "keyword": "조국, 일본 입국 거부",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-17T15:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "조국, 일본 입국 거부당해… 공항서 5시간 머물다 귀국",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-17T15:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004010220?sid=100"
-    },
-    {
-     "title": "日언론도 '조국 입국 거부' 잇달아 보도…독도 방문·형사처벌 전력 주...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-17T15:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009294802?sid=104"
-    },
-    {
-     "title": "조국, 일본공항서 입국 거부당해…“형사처벌 전력 따른 비자 절차 안 ...",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-17T15:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003565931?sid=104"
+     "title": "[속보]수능 이틀 앞둔 밤 경북 상주서 규모 3.6 지진…수험생·주민 ‘깜...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-17T15:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003700462?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 910,
+  "flagged": 911,
   "matched": 514,
   "avgLeadMin": 819,
   "recent": [
