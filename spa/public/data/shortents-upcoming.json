@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T02:47:21.314Z",
+ "builtAt": "2026-11-17T02:57:24.729Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 14,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "한성숙 총리 발언",
    "sources": [
     "nate"
    ],
-   "articles90": 53,
+   "articles90": 52,
    "recent20": 5,
-   "press": 35,
-   "firstArticleAt": "2026-11-17T01:20:00.000Z",
+   "press": 34,
+   "firstArticleAt": "2026-11-17T01:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "韓총리 “수능서 모든 스마트기기 전원 종료 후 수거, 옷깃·소매·단추...",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-17T02:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001231354?sid=100"
+     "title": "국힘, 2주 연속 靑 앞 의총…한성숙 총리에 '조작기소 특검법' 의결 중단...",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-17T02:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003486538?sid=100"
     },
     {
-     "title": "“안경·시계까지 전수점검”… 수능 이틀 앞, 총리까지 나섰다",
-     "press": "jibs.co.kr",
-     "publishedAt": "2026-11-17T02:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/661/0000086696?sid=102"
+     "title": "침묵속 의사봉 두드린 韓총리… 李 순방중 특검법 ‘대리 의결’",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-17T02:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002833376?sid=100"
     },
     {
-     "title": "한성숙 \"AI 악용 부정행위는 '사회악'…스마트기기 점검 강화\"",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-17T02:28:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1320714&inflow=N"
+     "title": "한성숙 \"수능 안경·시계 전수조사하고 소매·옷깃·단추도 검사\"",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-17T02:48:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2019568"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 37,
+   "articles90": 45,
    "recent20": 12,
-   "press": 23,
-   "firstArticleAt": "2026-11-17T01:19:00.000Z",
+   "press": 28,
+   "firstArticleAt": "2026-11-17T01:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'조작기소 특검법' 국무회의서 의결…한 총리 주재",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-17T02:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001978557?sid=100"
+     "title": "[속보] '조작기소특검법' 한 총리 주재 국무회의 통과…李대통령 재가 ...",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-17T02:56:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/325541/?sc=Naver"
     },
     {
-     "title": "[포토] 국민의힘 '조작기소 특검법 국무회의 의결' 규탄",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-17T02:42:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3449347"
+     "title": "조작기소 특검법 국무회의 통과…최장 200일 수사 본격화",
+     "press": "jeonmae.co.kr",
+     "publishedAt": "2026-11-17T02:56:00.000Z",
+     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1312714"
     },
     {
-     "title": "조작 기소 특검법 국무회의 의결 전망...여야 공방",
+     "title": "국민의힘, '조작기소 특검' 국무회의 의결 반대하며 도보 투쟁",
      "press": "ytn.co.kr",
-     "publishedAt": "2026-11-17T02:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002433914?sid=100"
+     "publishedAt": "2026-11-17T02:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002433926?sid=100"
     }
    ]
   },
@@ -81,23 +81,23 @@
     "google"
    ],
    "articles90": 23,
-   "recent20": 6,
+   "recent20": 5,
    "press": 22,
    "firstArticleAt": "2026-11-17T01:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "트럼프 '유학생 체류 4년 제한' 제동…美 법원, 체류기간 제한 규정 전면...",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-17T02:42:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=782443"
-    },
-    {
      "title": "미 법원, 유학생 체류기간 제한 무효화 ... 기존 제도 유지",
      "press": "news.bbsi.co.kr",
      "publishedAt": "2026-11-17T02:42:00.000Z",
      "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4119030"
+    },
+    {
+     "title": "트럼프 '유학생 체류 4년 제한' 제동…美 법원, 체류기간 제한 규정 전면...",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-17T02:42:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=782443"
     },
     {
      "title": "美법원, 트럼프 유학생 체류 제한 무효화",
@@ -112,13 +112,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 20,
-   "recent20": 3,
-   "press": 18,
-   "firstArticleAt": "2026-11-17T01:18:00.000Z",
+   "articles90": 18,
+   "recent20": 1,
+   "press": 16,
+   "firstArticleAt": "2026-11-17T01:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "에이피알 주가 8%대 급락 22만원선까지 밀려…코스피·코스닥 동반 약세",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-17T02:56:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=627701"
+    },
     {
      "title": "코스피 장중 4984까지 추락…외국인 5850억원 매도에 5000선 위태",
      "press": "jnilbo.com",
@@ -130,140 +136,38 @@
      "press": "businesspost.co.kr",
      "publishedAt": "2026-11-17T02:30:00.000Z",
      "link": "https://www.businesspost.co.kr/BP?command=article_view&num=452163"
-    },
-    {
-     "title": "韓·美 반도체주 동반 급락…코스피, 엔비디아 실적이 분수령 [뉴스큐]",
-     "press": "newsq.co.kr",
-     "publishedAt": "2026-11-17T02:28:00.000Z",
-     "link": "https://www.newsq.co.kr/news/articleView.html?idxno=500921"
     }
    ]
   },
   {
-   "keyword": "최교진 직무유기 고발",
+   "keyword": "서울시 공무원 AI 부정",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 3,
-   "press": 14,
-   "firstArticleAt": "2026-11-17T01:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'AI 부정행위' 우려에도 수능 강행한 최교진 교육부 장관, 직무유기 혐의...",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-17T02:46:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3449351"
-    },
-    {
-     "title": "'AI 부정행위' 논란에 최교진 교육장관, 직무유기 혐의 고발",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-17T02:38:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/17/2026111750069.html"
-    },
-    {
-     "title": "최교진 교육장관, 직무유기 고발 당해...수능 AI 부정행위 대응 논란",
-     "press": "wikileaks-kr.org",
-     "publishedAt": "2026-11-17T02:28:00.000Z",
-     "link": "https://www.wikileaks-kr.org/news/articleView.html?idxno=194743"
-    }
-   ]
-  },
-  {
-   "keyword": "전쟁",
-   "sources": [
-    "google"
-   ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 10,
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
    "firstArticleAt": "2026-11-17T01:50:00.000Z",
-   "exclusive": true,
-   "capped": true,
-   "samples": [
-    {
-     "title": "[단독] 中 해커, 아세안정상회의 공격…외교안보 해킹 전쟁 본격화",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-17T02:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005764824?sid=101"
-    },
-    {
-     "title": "[영상]30년 법조 경험 중에 처음...대법원은 지금 내부 전쟁중?",
-     "press": "facttv.kr",
-     "publishedAt": "2026-11-17T02:34:00.000Z",
-     "link": "https://www.facttv.kr/news/articleView.html?idxno=50979"
-    },
-    {
-     "title": "[이슈분석]FA 1호 계약 두고 두산·SSG의 ‘초격차 전쟁’…양의지가 사...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-17T02:29:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/021/0002833341"
-    }
-   ]
-  },
-  {
-   "keyword": "파라타항공",
-   "sources": [
-    "google"
-   ],
-   "articles90": 10,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-17T01:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "미주 노선 87% 쥔 통합 대한항공…에어프레미아 이어 파라타항공도 도전...",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-17T02:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002248866?sid=101"
+     "title": "윤수혁 서울시의원 “공무원 채용시험의 공정성은 서울시 행정 신뢰의 ...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-17T02:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003700191?sid=102"
     },
     {
-     "title": "파라타항공, LA 노선 항공권 판매 개시…내년 5월 A330 매일 운항",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-17T02:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009293370?sid=101"
+     "title": "윤수혁 서울시의원 \"서울시 공무원 채용시험 관리체계 강화해야\"",
+     "press": "weekly.hankooki.com",
+     "publishedAt": "2026-11-17T02:26:00.000Z",
+     "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7194235"
     },
     {
-     "title": "파라타항공, 내년 5월 인천~LA 노선 취항… 항공권 판매 개시",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-17T02:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001205348?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "옵토닉스",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-17T01:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[특징주] 옵토닉스, 코스닥 입성 첫날 +119%대 급등",
-     "press": "jeonmae.co.kr",
-     "publishedAt": "2026-11-17T02:08:00.000Z",
-     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1312654"
-    },
-    {
-     "title": "[특징주] 옵토닉스, 코스닥 입성 첫날 급등… 신사업은 2029년 이후",
-     "press": "biztribune.co.kr",
-     "publishedAt": "2026-11-17T01:58:00.000Z",
-     "link": "http://www.biztribune.co.kr/news/articleView.html?idxno=362625"
-    },
-    {
-     "title": "'방산용 광학부품' 옵토닉스 코스닥 상장 첫날 '따블' 달성",
-     "press": "newsfc.co.kr",
-     "publishedAt": "2026-11-17T01:54:00.000Z",
-     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82521"
+     "title": "윤수혁 시의원 \"시공무원 채용시험, 감독관 2명 있어도 AI 부정행위 못 ...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-17T02:02:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261117000539"
     }
    ]
   },
@@ -272,10 +176,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 7,
+   "articles90": 5,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-17T01:26:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-17T01:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -305,7 +209,7 @@
     "nate"
    ],
    "articles90": 5,
-   "recent20": 2,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-17T01:29:00.000Z",
    "exclusive": false,
@@ -328,38 +232,6 @@
      "press": "munhwa.com",
      "publishedAt": "2026-11-17T02:18:00.000Z",
      "link": "https://m.sports.naver.com/kbaseball/article/021/0002833336"
-    }
-   ]
-  },
-  {
-   "keyword": "서울시 공무원 AI 부정",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-17T01:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "윤수혁 서울시의원 \"서울시 공무원 채용시험 관리체계 강화해야\"",
-     "press": "weekly.hankooki.com",
-     "publishedAt": "2026-11-17T02:26:00.000Z",
-     "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7194235"
-    },
-    {
-     "title": "윤수혁 시의원 \"시공무원 채용시험, 감독관 2명 있어도 AI 부정행위 못 ...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-17T02:02:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261117000539"
-    },
-    {
-     "title": "윤수혁 서울시의원, AI 활용 시험 부정행위 대응 강화 촉구",
-     "press": "daily.hankooki.com",
-     "publishedAt": "2026-11-17T01:56:00.000Z",
-     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1425872"
     }
    ]
   }
