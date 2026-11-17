@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T02:17:12.362Z",
+ "builtAt": "2026-11-17T02:27:16.096Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,134 +8,38 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 10,
  "candidates": [
-  {
-   "keyword": "수능 스마트기기 휴대",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 67,
-   "recent20": 28,
-   "press": 56,
-   "firstArticleAt": "2026-11-17T00:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "수능 D-2, AI 부정행위 차단 총력… 안경·시계까지 전수 점검",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-17T02:16:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3449337"
-    },
-    {
-     "title": "한총리 \"수능서 스마트기기 원천 차단…안경·시계 전수검사\"",
-     "press": "tbs.seoul.kr",
-     "publishedAt": "2026-11-17T02:15:00.000Z",
-     "link": "http://tbs.seoul.kr/news/newsView.do?typ_800=9&idx_800=3538785&seq_800=20531686"
-    },
-    {
-     "title": "한 총리 \"수능서 스마트기기 원천 차단… 안경·시계도 전수 점검\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-17T02:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000966004?sid=100"
-    }
-   ]
-  },
   {
    "keyword": "세무사 수석 경찰 출석",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 69,
-   "recent20": 6,
-   "press": 55,
-   "firstArticleAt": "2026-11-17T00:49:00.000Z",
+   "articles90": 58,
+   "recent20": 9,
+   "press": 50,
+   "firstArticleAt": "2026-11-17T00:58:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "63기 세무사 동기회장 \"부정행위자 극소수…합격자들 색안경 끼고 보지...",
-     "press": "tfmedia.co.kr",
-     "publishedAt": "2026-11-17T02:14:00.000Z",
-     "link": "https://www.tfmedia.co.kr/news/article.html?no=208956"
+     "title": "[뉴스분석]세무사 수석 자백에 번진 'AI 커닝'…시험장 곳곳 부정행위 ...",
+     "press": "namdonews.com",
+     "publishedAt": "2026-11-17T02:26:00.000Z",
+     "link": "https://www.namdonews.com/news/articleView.html?idxno=929468"
     },
     {
-     "title": "\"혼자했나\"...세무사 수석, '이 장비'도 썼다",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-17T02:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006411015?sid=102"
+     "title": "AI 부정행위' 들통난 세무사시험 수석합격자…경찰 출석해 사과",
+     "press": "namdonews.com",
+     "publishedAt": "2026-11-17T02:24:00.000Z",
+     "link": "https://www.namdonews.com/news/articleView.html?idxno=929457"
     },
     {
-     "title": "'AI커닝 자백' 세무사 수석, \"공범 있나\" 질문에 답 없이 조사실로",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-17T02:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005605413?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "장동혁 한동훈 장인상 조문",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 36,
-   "recent20": 6,
-   "press": 36,
-   "firstArticleAt": "2026-11-17T00:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "장동혁, 한동훈 장인상 조문…韓 “바쁜데” 張 “당연히”",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-17T02:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001205343?sid=100"
-    },
-    {
-     "title": "징계·복당 갈등 속 조문…한동훈 장인상 찾은 장동혁",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-17T02:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005764787?sid=100"
-    },
-    {
-     "title": "장동혁, 한동훈 장인상 조문···7분간 머물러",
-     "press": "todaykorea.co.kr",
-     "publishedAt": "2026-11-17T02:08:00.000Z",
-     "link": "https://www.todaykorea.co.kr/news/articleView.html?idxno=408712"
-    }
-   ]
-  },
-  {
-   "keyword": "삼성 갤럭시 AI XR 도입",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 34,
-   "recent20": 5,
-   "press": 34,
-   "firstArticleAt": "2026-11-17T00:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "삼성전자, '갤럭시 AI 클래스'에 XR 체험 도입",
-     "press": "newswell.co.kr",
-     "publishedAt": "2026-11-17T02:14:00.000Z",
-     "link": "http://www.newswell.co.kr/news/articleView.html?idxno=23685"
-    },
-    {
-     "title": "삼성전자, 청소년 AI 교육에 갤럭시 XR 도입…3D 체험 확대",
-     "press": "itdaily.kr",
-     "publishedAt": "2026-11-17T02:12:00.000Z",
-     "link": "https://www.itdaily.kr/news/articleView.html?idxno=242974"
-    },
-    {
-     "title": "삼성전자, 학교 AI 수업에 ‘갤럭시 XR’ 도입",
-     "press": "dnews.co.kr",
-     "publishedAt": "2026-11-17T02:02:00.000Z",
-     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611171021551900403"
+     "title": "'AI 부정행위' 세무사 수석, '개조 계산기 사용'...시험장 반입 확인",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-17T02:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002394200?sid=100"
     }
    ]
   },
@@ -144,126 +48,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 47,
-   "recent20": 16,
-   "press": 21,
-   "firstArticleAt": "2026-11-17T01:02:00.000Z",
+   "articles90": 53,
+   "recent20": 17,
+   "press": 24,
+   "firstArticleAt": "2026-11-17T01:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[뉴스1 PICK] 국힘 \"조작기소 특검법 국무회의 의결 저지\" 정부청사 행진",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-17T02:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009293288?sid=100"
+     "title": "[포토] '조작기소 특검법 반대' 정부청사로 행진하는 국민의힘",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-17T02:26:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3449341"
     },
     {
-     "title": "국무회의 법률공포안으로 올라온 조작 기소 특검법",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-17T02:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009293281?sid=100"
+     "title": "장동혁 “조작기소 특검법 통과땐 국무위원들 모두 공범 될 것”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-17T02:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002724498?sid=100"
     },
     {
-     "title": "법률공포안으로 올라온 '조작 기소 특검법'",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-17T02:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009293280?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "최교진 직무유기 고발",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 14,
-   "recent20": 2,
-   "press": 14,
-   "firstArticleAt": "2026-11-17T00:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“나이가 있어서 AI커닝 100% 못 잡아” 최교진, 직무유기 피고발",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-17T02:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003700168?sid=102"
-    },
-    {
-     "title": "“나이 때문에 AI부정행위 못잡아” 최교진, 직무유기 고발 당해",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-17T02:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000367751?sid=102"
-    },
-    {
-     "title": "[속보] \"AI 커닝 난 못잡을 것 같다\" 최교진… 수능 이틀 앞 고발 당해",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-17T01:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000192621?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "옵토닉스",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 14,
-   "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-17T00:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[특징주] 옵토닉스, 코스닥 입성 첫날 +119%대 급등",
-     "press": "jeonmae.co.kr",
-     "publishedAt": "2026-11-17T02:08:00.000Z",
-     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1312654"
-    },
-    {
-     "title": "[특징주] 옵토닉스, 코스닥 입성 첫날 급등… 신사업은 2029년 이후",
-     "press": "biztribune.co.kr",
-     "publishedAt": "2026-11-17T01:58:00.000Z",
-     "link": "http://www.biztribune.co.kr/news/articleView.html?idxno=362625"
-    },
-    {
-     "title": "'방산용 광학부품' 옵토닉스 코스닥 상장 첫날 '따블' 달성",
-     "press": "newsfc.co.kr",
-     "publishedAt": "2026-11-17T01:54:00.000Z",
-     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82521"
-    }
-   ]
-  },
-  {
-   "keyword": "한병도 원내대표 발언",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 19,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-17T00:49:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "발언하는 민주당 한병도 원내대표",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-17T02:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005764783?sid=100"
-    },
-    {
-     "title": "한병도 \"AI 악용 국가시험 부정행위 용납 못 해… 수능 범정부 대응태세...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-17T01:46:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261117000489"
-    },
-    {
-     "title": "한병도 \"합격 취소·응시 제한·수사 의뢰…AI 부정행위, 엄정 대응\"",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-17T01:44:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1320700&inflow=N"
+     "title": "국힘, 2주째 靑앞 의총 \"한 총리 특검법 의결 포기해야\"",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-17T02:25:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000083512"
     }
    ]
   },
@@ -273,30 +81,30 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 10,
+   "articles90": 13,
+   "recent20": 4,
+   "press": 13,
    "firstArticleAt": "2026-11-17T01:32:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "아시아 각국, 시험장 첨단 부정행위와의 전쟁",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-17T02:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005605417?sid=104"
+     "title": "[37th SRE][Interview]미·이란 전쟁 장기화에 산업별 명암…한신평 분석...",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-17T02:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006411026?sid=101"
     },
     {
-     "title": "이란戰 참전 미군 장교, 국방부 고발…\"준비 안 된 전쟁 수행\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-17T01:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004210544?sid=104"
+     "title": "보건의료인 393명, 청해부대 확대 파병 반대 …\"전쟁 지원 중단하라\"",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-17T02:18:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=243304"
     },
     {
-     "title": "우승상금 400만 달러 ‘별들의 전쟁’…한국 군단 시즌 7승 합작 ‘정조...",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-17T01:55:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/005/0001885608"
+     "title": "밴스 부통령 \"트럼프, 이란과 끝없는 전쟁 내버려두지 않을 것\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-17T02:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002433902?sid=104"
     }
    ]
   },
@@ -306,30 +114,62 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-17T00:54:00.000Z",
+   "articles90": 9,
+   "recent20": 3,
+   "press": 9,
+   "firstArticleAt": "2026-11-17T01:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "파라타항공, 내년 5월 인천~LA 노선 취항… 항공권 판매 개시",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-17T02:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001205348?sid=101"
+    },
+    {
+     "title": "파라타항공, 첫 미주 노선 'LA행 티켓' 판매…내년 5월 취항",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-17T02:24:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5084250"
+    },
     {
      "title": "파라타항공, 인천~LA 항공권 판매 개시…내년 5월 첫 취항",
      "press": "dailian.co.kr",
      "publishedAt": "2026-11-17T02:09:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/119/0003156057?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "한병도 원내대표 회의 주재",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-17T00:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "남종섭 경기도의회 의장 \"지방의회법 연내 제정 이끌겠다\"",
+     "press": "kmaeil.com",
+     "publishedAt": "2026-11-17T01:52:00.000Z",
+     "link": "https://www.kmaeil.com/news/articleView.html?idxno=658566"
     },
     {
-     "title": "파라타항공, LA 항공권 판매 개시…대한항공·에어프레미아와 미주 노선...",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-17T02:02:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611170062"
+     "title": "한병도 \"AI 부정행위, 용납 안 해…합격 취소·자격 제한·수사 의뢰 엄...",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-17T01:50:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903313"
     },
     {
-     "title": "파라타항공, 첫 미주 노선 LA 항공권 판매 개시… 내년 5월 취항",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-17T01:44:00.000Z",
-     "link": "https://www.viva100.com/article/20261117500418"
+     "title": "한병도 \"AI 부정행위, 법과 원칙에 따라 엄정히 대응할 것\" [TF사진관]",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-17T01:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000552590?sid=100"
     }
    ]
   },
@@ -338,10 +178,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-17T00:48:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-17T00:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -364,107 +204,11 @@
      "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261117010006402"
     }
    ]
-  },
-  {
-   "keyword": "김주애",
-   "sources": [
-    "google"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-17T00:54:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김정은, 딸 김주애와 백두산 인근 삼지연 시찰… ‘단독 스키’ 사진 공...",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-17T01:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004010063?sid=100"
-    },
-    {
-     "title": "스키 타는 北 김주애 사진 공개...'200만원' 스키복 착용 추정",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-17T01:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002433886?sid=100"
-    },
-    {
-     "title": "흰색 스키복 입고 등장한 김주애...상·하의 합치면 최대 200만원?",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-17T01:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003156030?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "김포시",
-   "sources": [
-    "google"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-17T00:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김포시, 나이·장애 넘어 누구나 운동하는 도시…‘2027년 체육정책 확...",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-17T02:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/382/0001305232?sid=102"
-    },
-    {
-     "title": "이기형 김포시장, 2027년 시민체육 활성화 추진...생활체육·시설 확충",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-17T01:44:00.000Z",
-     "link": "https://www.ajunews.com/view/20261117103020459"
-    },
-    {
-     "title": "'제21회 김포시장기 금쌀사랑 종별 생활체육 농구대회' 성료... 동호인 ...",
-     "press": "tournews21.com",
-     "publishedAt": "2026-11-17T01:28:00.000Z",
-     "link": "https://www.tournews21.com/news/articleView.html?idxno=148653"
-    }
-   ]
-  },
-  {
-   "keyword": "두산에너빌리티",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-17T00:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "두산에너빌리티 주가 2.90% 하락 4만3600원…KB증권 목표가 12만원 유지,...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-17T01:24:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=627663"
-    },
-    {
-     "title": "두산에너빌리티 주가, 11월 17일 장중 43,450원 3.23% 하락",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-17T00:56:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=564411"
-    },
-    {
-     "title": "원전주 줄줄이 하락…두산에너빌리티 3%대 약세, 우리기술도 부진 증시...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-17T00:52:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=627646"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 823,
+  "flagged": 824,
   "matched": 461,
   "avgLeadMin": 861,
   "recent": [
