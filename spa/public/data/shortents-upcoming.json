@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T20:11:31.789Z",
+ "builtAt": "2026-11-17T20:21:35.758Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,62 +15,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 3,
+   "articles90": 14,
+   "recent20": 5,
    "press": 11,
-   "firstArticleAt": "2026-11-17T18:44:00.000Z",
+   "firstArticleAt": "2026-11-17T18:53:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "젠슨 황 “이사회 요청시 엔비디아 복귀”… 사임 5일만에 성명",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-17T20:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001885832?sid=104"
+    },
+    {
+     "title": "젠슨 황 복귀의사 공식화 \"이사회 요청시 응할것\"",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-17T20:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001978665?sid=102"
+    },
     {
      "title": "젠슨 황 사태 후폭풍...국내 반도체주 어디로 가나",
      "press": "pinpointnews.co.kr",
      "publishedAt": "2026-11-17T20:10:00.000Z",
      "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=505206"
-    },
-    {
-     "title": "AI 황제 없는 엔비디아, 삼성전자·SK하이닉스에도 불똥 튀나",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-17T20:06:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=505205"
-    },
-    {
-     "title": "젠슨 황 \"잘못 인정…이사회가 원한다면 복귀할 것\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-17T20:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000651692?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "오세훈, 카타르에 1-0 승리",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-17T18:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘슈팅 21-2’ 압도적이지만 단 1골에 그쳤다…‘오세훈 결승골’ 사우...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-17T20:00:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/410/0001147586"
-    },
-    {
-     "title": "모레노호, 올해 최종전서 카타르에 1-0 승리",
-     "press": "goodnews1.com",
-     "publishedAt": "2026-11-17T19:42:00.000Z",
-     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466340"
-    },
-    {
-     "title": "'경합 부족' 손흥민에게 공 몰아주던 축구는 이제 그만? 오세훈 세우자...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-17T19:30:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/109/0005641864"
     }
    ]
   },
@@ -79,30 +47,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 4,
-   "recent20": 4,
+   "articles90": 5,
+   "recent20": 5,
    "press": 3,
-   "firstArticleAt": "2026-11-17T20:01:00.000Z",
+   "firstArticleAt": "2026-11-17T20:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[씨줄날줄] 주미한국대사관 재건축",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-17T20:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003700543?sid=110"
+    },
+    {
+     "title": "아이디어 넘어 실전 서비스로…한국앤컴퍼니 AI 해커톤 2라운드",
+     "press": "electimes.com",
+     "publishedAt": "2026-11-17T20:12:00.000Z",
+     "link": "https://www.electimes.com/news/articleView.html?idxno=374916"
+    },
     {
      "title": "IMF “한국 올해 성장률 3.9%… 내년에도 3%대”",
      "press": "seoul.co.kr",
      "publishedAt": "2026-11-17T20:06:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/081/0003700528?sid=101"
-    },
-    {
-     "title": "참전군인 카메라로 본 한국전쟁과 피란수도 부산",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-17T20:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003700519?sid=102"
-    },
-    {
-     "title": "[전문가의 눈] 美 중간선거 이후 한국의 CPTPP 가입 전망",
-     "press": "nongmin.com",
-     "publishedAt": "2026-11-17T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/662/0000108719?sid=110"
     }
    ]
   },
@@ -112,7 +80,7 @@
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-17T19:31:00.000Z",
    "exclusive": false,
@@ -139,66 +107,34 @@
    ]
   },
   {
-   "keyword": "경북 상주 지진",
+   "keyword": "오세훈 선제골",
    "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-17T18:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "경북 상주 규모 3.6 지진…원안위 “원자로 이상 없어”",
-     "press": "kbmaeil.com",
-     "publishedAt": "2026-11-17T20:04:00.000Z",
-     "link": "https://www.kbmaeil.com/article/20261118500014"
-    },
-    {
-     "title": "수능 앞두고 상주서 3.6 지진…올해 최대 규모",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-17T19:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000927203?sid=103"
-    },
-    {
-     "title": "원안위 \"경북 상주 지진, 원자로 안전에 영향 없어\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-17T18:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002434285?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "중국 간 이재명 대통령",
-   "sources": [
-    "nate"
+    "daum"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-17T18:54:00.000Z",
+   "firstArticleAt": "2026-11-17T19:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령 \"남중국해 항행 자유 수호해야\"",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-17T19:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002466345?sid=100"
+     "title": "헤더골 넣은 오세훈",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-17T20:03:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/001/0016447744"
     },
     {
-     "title": "한일정상회담·트럼프 조우·수능 점검까지…李 대통령 마닐라 일정 마...",
-     "press": "kbmaeil.com",
-     "publishedAt": "2026-11-17T19:16:00.000Z",
-     "link": "https://www.kbmaeil.com/article/20261118500006"
+     "title": "‘슈팅 21-2’ 압도적이지만 단 1골에 그쳤다…‘오세훈 결승골’ 사우...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-17T20:00:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/410/0001147586"
     },
     {
-     "title": "이 대통령, 중국 선전 도착...이틀간 APEC 일정 소화",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-17T18:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002434286?sid=100"
+     "title": "'경합 부족' 손흥민에게 공 몰아주던 축구는 이제 그만? 오세훈 세우자...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-17T19:30:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/109/0005641864"
     }
    ]
   }
