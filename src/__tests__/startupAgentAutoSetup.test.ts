@@ -18,6 +18,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   AGENT_AUTO_SETUP_IMAGE_KEY,
   AGENT_AUTO_SETUP_MIGRATION_KEY,
+  AGENT_AUTO_SETUP_CONFIRM_READS,
   AGENT_AUTO_SETUP_PROVIDERS,
   AGENT_AUTO_SETUP_RETRY_MS,
   agentAutoSetupApplyImageDefault,
@@ -80,9 +81,31 @@ describe('one-time text default', () => {
     expect(agentAutoSetupNeedsMigration(api.read(), localStorage)).toBe(false);
   });
 
+  // 2026-11-17 cold-start probe (4 of 5 launches): other startup steps read and write the config at the same
+  // moment, so the save's own answer and the first read-backs can still show the old file, or an empty one.
+  it('stale and empty read-backs during a cold start do not fail it: it reads again until the engine shows', async () => {
+    const api = configApi({ primaryGeminiTextModel: 'gemini-3.8-flash' });
+    const real = api.getConfig.getMockImplementation()!;
+    const save = api.saveConfig.getMockImplementation()!;
+    api.saveConfig.mockImplementation(async (update: Record<string, unknown>) => { await save(update); return { primaryGeminiTextModel: 'gemini-3.8-flash' } as never; });
+    api.getConfig
+      .mockImplementationOnce(real) // before the save
+      .mockImplementationOnce(async () => ({ primaryGeminiTextModel: 'gemini-3.8-flash' })) // the file before the write
+      .mockImplementationOnce(async () => ({})); // read while another step was writing
+    const wait = vi.fn(async () => undefined);
+    expect(await agentAutoSetupApplyTextDefault(api as never, localStorage, wait)).toBe(true);
+    expect(api.getConfig).toHaveBeenCalledTimes(4);
+    expect(wait).toHaveBeenCalledTimes(2);
+    expect(api.saveConfig).toHaveBeenCalledTimes(1);
+    expect(api.read()).toMatchObject({ primaryGeminiTextModel: 'agent-claude', [AGENT_AUTO_SETUP_MIGRATION_KEY]: true });
+    expect(localStorage.getItem(AGENT_AUTO_SETUP_MIGRATION_KEY)).toBeNull();
+  });
+
   it('a save that did not stick sets no flag, so the next launch tries again', async () => {
     const api = configApi({ primaryGeminiTextModel: 'gemini-3.8-flash' }, { ignoreSave: true });
-    await expect(agentAutoSetupApplyTextDefault(api as never, localStorage)).rejects.toThrow();
+    const wait = vi.fn(async () => undefined);
+    await expect(agentAutoSetupApplyTextDefault(api as never, localStorage, wait)).rejects.toThrow();
+    expect(api.getConfig).toHaveBeenCalledTimes(1 + AGENT_AUTO_SETUP_CONFIRM_READS);
     expect(localStorage.getItem(AGENT_AUTO_SETUP_MIGRATION_KEY)).toBeNull();
     expect(agentAutoSetupNeedsMigration(api.read(), localStorage)).toBe(true);
   });

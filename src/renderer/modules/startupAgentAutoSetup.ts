@@ -123,11 +123,38 @@ export async function runAgentAutoSetupInstalls(
   return results;
 }
 
+/** Read-backs after the save, and the pause between them. */
+export const AGENT_AUTO_SETUP_CONFIRM_READS = 5;
+const AGENT_AUTO_SETUP_CONFIRM_GAP_MS = 200;
+
 /**
- * Text engine, once. Saves only its own three fields (never the whole config back), then re-reads: the flag
+ * Reads the config back until it shows the written engine; null when it never does. One read proves nothing
+ * either way: at a cold start other startup steps read and write the config at the same moment, and both the
+ * save's own answer and a single read can still show the file as it was before the write, or empty
+ * (2026-11-17 cold-start probe: 4 of 5 launches). A matching read also leaves main holding the fresh file.
+ */
+async function agentAutoSetupConfirmEngine(
+  api: AgentAutoSetupConfigApi,
+  model: string,
+  wait: (ms: number) => Promise<void>,
+): Promise<Record<string, unknown> | null> {
+  for (let attempt = 0; attempt < AGENT_AUTO_SETUP_CONFIRM_READS; attempt += 1) {
+    if (attempt > 0) await wait(AGENT_AUTO_SETUP_CONFIRM_GAP_MS);
+    const config = (await api.getConfig()) as Record<string, unknown> | null;
+    if (String(config?.primaryGeminiTextModel || '') === model) return config;
+  }
+  return null;
+}
+
+/**
+ * Text engine, once. Saves only its own three fields (never the whole config back), then reads back: the flag
  * is trusted only when the engine really is what was written. Returns false when nothing was applied.
  */
-export async function agentAutoSetupApplyTextDefault(api: AgentAutoSetupConfigApi, store: AgentAutoSetupStore): Promise<boolean> {
+export async function agentAutoSetupApplyTextDefault(
+  api: AgentAutoSetupConfigApi,
+  store: AgentAutoSetupStore,
+  wait: (ms: number) => Promise<void> = (ms) => new Promise((resolve) => setTimeout(resolve, ms)),
+): Promise<boolean> {
   const before = await api.getConfig();
   if (!agentAutoSetupNeedsMigration(before, store)) return false;
   const selection = resolveTextModelSelection(AGENT_AUTO_SETUP_TEXT_ENGINE, undefined, false);
@@ -136,12 +163,10 @@ export async function agentAutoSetupApplyTextDefault(api: AgentAutoSetupConfigAp
     defaultAiProvider: selection.provider,
     [AGENT_AUTO_SETUP_MIGRATION_KEY]: true,
   } as never);
-  const after = (await api.getConfig()) as Record<string, unknown> | null;
-  if (String(after?.primaryGeminiTextModel || '') !== selection.model) {
-    throw new Error('기본 글 엔진이 저장되지 않았습니다.');
-  }
+  const after = await agentAutoSetupConfirmEngine(api, selection.model, wait);
+  if (!after) throw new Error('기본 글 엔진이 저장되지 않았습니다.');
   // Backup for a config that does not keep the flag: without it the next launch would overwrite the user's choice.
-  if (after?.[AGENT_AUTO_SETUP_MIGRATION_KEY] !== true) store.setItem(AGENT_AUTO_SETUP_MIGRATION_KEY, '1');
+  if (after[AGENT_AUTO_SETUP_MIGRATION_KEY] !== true) store.setItem(AGENT_AUTO_SETUP_MIGRATION_KEY, '1');
   restoreTextModelRadio(selection.model);
   const unifiedGenerator = document.getElementById('unified-generator') as HTMLInputElement | null;
   if (unifiedGenerator) unifiedGenerator.value = selection.provider;
