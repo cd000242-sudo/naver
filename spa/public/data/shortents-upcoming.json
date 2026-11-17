@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T23:22:43.969Z",
+ "builtAt": "2026-11-17T23:32:48.714Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,18 +8,51 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "태안 어선 실종",
+   "keyword": "자바 보안 취약점",
    "sources": [
     "signal.bz",
     "daum"
    ],
-   "articles90": 27,
-   "recent20": 5,
+   "articles90": 49,
+   "recent20": 14,
+   "press": 36,
+   "firstArticleAt": "2026-11-17T22:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "공공 정보시스템 71% 쓰는 '자바'서 치명적 보안 취약점...정부 긴급 점...",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-17T23:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000121628?sid=102"
+    },
+    {
+     "title": "PHP이어 JAVA에서도 ‘치명적 취약점’ 발견…과기부 “긴급점검·보안...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-17T23:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002832721?sid=105"
+    },
+    {
+     "title": "PHP 이어 자바도 '치명적 보안 경고'…공공·금융 핵심 IT 시스템 비상",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-17T23:30:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=564665"
+    }
+   ]
+  },
+  {
+   "keyword": "태안 7명 어선 실종",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 26,
+   "recent20": 1,
    "press": 22,
-   "firstArticleAt": "2026-11-17T21:57:00.000Z",
+   "firstArticleAt": "2026-11-17T22:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -44,98 +77,131 @@
    ]
   },
   {
-   "keyword": "중국 이재명 대통령",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 18,
-   "recent20": 4,
-   "press": 15,
-   "firstArticleAt": "2026-11-17T22:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령, 中 선전서 APEC 외교전…한반도 평화 해법 모색",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-17T23:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000132578?sid=100"
-    },
-    {
-     "title": "[선전 APEC] 이재명·푸틴 새벽 도착, 오후엔 트럼프…시진핑 주재 환영...",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-17T23:18:00.000Z",
-     "link": "https://www.ajunews.com/view/20261118081153816"
-    },
-    {
-     "title": "아세안 정상회의 폐막...트럼프 중국 견제·李대통령, 위기 대응 협력 강...",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-17T23:16:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=73197"
-    }
-   ]
-  },
-  {
    "keyword": "노유민 가슴 통증 응급실",
    "sources": [
     "daum"
    ],
-   "articles90": 12,
+   "articles90": 13,
    "recent20": 4,
-   "press": 12,
-   "firstArticleAt": "2026-11-17T21:56:00.000Z",
+   "press": 13,
+   "firstArticleAt": "2026-11-17T22:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "노유민, 가슴 통증에 새벽 응급실行… 아내 \"결과는 월요일에\"",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-17T23:26:00.000Z",
+     "link": "https://m.entertain.naver.com/article/469/0000966206"
+    },
+    {
+     "title": "NRG 노유민, 갑작스러운 가슴 통증에 응급실行…검사 결과 대기",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-17T23:24:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261118000111"
+    },
     {
      "title": "노유민, 가슴 통증으로 응급실行…\"지금은 잘 쉬고 있어\"",
      "press": "tvdaily.co.kr",
      "publishedAt": "2026-11-17T23:17:00.000Z",
      "link": "https://m.entertain.naver.com/article/440/0000053089"
-    },
-    {
-     "title": "기절에 손목 절단 위기까지…노유민, 이번엔 가슴 통증에 응급실行",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-17T23:14:00.000Z",
-     "link": "https://www.ajunews.com/view/20261118080343786"
-    },
-    {
-     "title": "새벽에 갑자기 가슴 통증…응급실 실려 간 유명 아이돌 출신 가수",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-17T23:12:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1175480"
     }
    ]
   },
   {
-   "keyword": "오세훈 헤더 결승골 1-0 승리",
+   "keyword": "크래시2 분노의 도로",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-17T22:26:00.000Z",
+   "articles90": 15,
+   "recent20": 10,
+   "press": 11,
+   "firstArticleAt": "2026-11-17T22:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘오세훈 결승 헤더’ 모레노호, 카타르에 1-0 승리…유효슈팅 9-0 압도...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-17T23:12:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/022/0004176077"
+     "title": "'크래시2', 차량 폭발 위기 엔딩 반전…이민기·곽선영 추격전, 허성태...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-17T23:30:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16279482"
     },
     {
-     "title": "“진심으로 미안해”… 카타르전 결승골 넣고도 고개 숙인 한국 선수",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-17T23:10:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1175473"
+     "title": "오의식, '크래시2' 속 국수본 과장 이태주로 서늘한 변신",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-17T23:30:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16279484"
     },
     {
-     "title": "오세훈 결승골… 한국 축구, 카타르 꺾고 올해 마지막 A매치 ‘유종의 ...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-17T23:05:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/009/0005765259"
+     "title": "'크래시2' 이민기, 뺑소니 사건 해결…박지성 '수상한 움직임' [시청률]",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-17T23:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/440/0000053090?sid=004"
+    }
+   ]
+  },
+  {
+   "keyword": "은행 연체율 0.59% 하락",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 10,
+   "recent20": 7,
+   "press": 10,
+   "firstArticleAt": "2026-11-17T22:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "은행 대출 연체율 0.59%…9월 기준 10년 만에 최고",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-17T23:30:00.000Z",
+     "link": "https://www.ajunews.com/view/20261118082545880"
+    },
+    {
+     "title": "은행 연체율, 10년 만에 최고...기업대출 부실 부담 확대",
+     "press": "youthdaily.co.kr",
+     "publishedAt": "2026-11-17T23:30:00.000Z",
+     "link": "https://www.youthdaily.co.kr/news/article.html?no=229980"
+    },
+    {
+     "title": "9월 은행 대출 연체율 0.59%…기업·가계 동반 악화",
+     "press": "sentv.co.kr",
+     "publishedAt": "2026-11-17T23:28:00.000Z",
+     "link": "https://www.sentv.co.kr/article/view/sentv202611180010"
+    }
+   ]
+  },
+  {
+   "keyword": "재난문자",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 9,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-17T22:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李대통령 \"수능中 재난문자로 시험방해시 그만큼 시간연장 검토\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-17T23:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016447910?sid=100"
+    },
+    {
+     "title": "李 “수능 중 재난문자 수시 발신, 첨단 부정행위 신고 1억 포상”",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-17T23:28:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/325602/?sc=Naver"
+    },
+    {
+     "title": "李 대통령 \"수능 중 재난문자 수시로…부정행위 신고시 포상금 1억원\"",
+     "press": "namdonews.com",
+     "publishedAt": "2026-11-17T23:04:00.000Z",
+     "link": "https://www.namdonews.com/news/articleView.html?idxno=929599"
     }
    ]
   },
@@ -144,10 +210,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-17T22:02:00.000Z",
+   "articles90": 10,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-17T22:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -177,12 +243,18 @@
     "nate"
    ],
    "articles90": 7,
-   "recent20": 1,
+   "recent20": 2,
    "press": 7,
-   "firstArticleAt": "2026-11-17T22:00:00.000Z",
+   "firstArticleAt": "2026-11-17T22:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'나의 유죄인간' 임시완·설인아, 엇갈린 마음…5.4% 동시간대 1위[시청...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-17T23:22:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1794956839531084006"
+    },
     {
      "title": "'나의 유죄인간' 임시완, 설인아 지키려 이별 통보⋯시청률 5.4%",
      "press": "joynews24.com",
@@ -194,12 +266,6 @@
      "press": "slist.kr",
      "publishedAt": "2026-11-17T23:00:00.000Z",
      "link": "https://www.slist.kr/news/articleView.html?idxno=782637"
-    },
-    {
-     "title": "‘유죄인간’ 임시완, 설인아와 꿈 꾸던 데이트까지 했는데… 태강그룹...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-17T22:59:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003542305"
     }
    ]
   },
@@ -236,49 +302,23 @@
    ]
   },
   {
-   "keyword": "은행 연체율 0.59% 하락",
+   "keyword": "조국 일본 입국거부",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 5,
-   "recent20": 3,
-   "press": 5,
-   "firstArticleAt": "2026-11-17T22:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "은행 연체율 0.59%…9월 기준 10년 만에 최고",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-17T23:20:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1732049"
-    },
-    {
-     "title": "9월 은행 대출 연체율 0.59%…10년만에 최고",
-     "press": "smarttoday.co.kr",
-     "publishedAt": "2026-11-17T23:18:00.000Z",
-     "link": "https://www.smarttoday.co.kr/ko-kr/articles/113829"
-    },
-    {
-     "title": "연체 채권 4.7조 털어냈지만… 9월 은행 연체율 10년 만에 최고",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-17T23:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004010256?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "조국 일본 입국 거부",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
+   "articles90": 6,
    "recent20": 1,
-   "press": 5,
+   "press": 6,
    "firstArticleAt": "2026-11-17T22:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "조국, 日 공항서 입국 거부 당해…\"범죄경력·독도방문 때문인 듯\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-17T23:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000651726?sid=100"
+    },
     {
      "title": "조국, 일본 공항서 '입국 거부'당해...\"독도 방문 때문?\"",
      "press": "insight.co.kr",
@@ -290,18 +330,77 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-17T22:53:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009294999?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "정호연 007 본드걸 후보 거론",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 3,
+   "press": 4,
+   "firstArticleAt": "2026-11-17T22:51:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정호연, 차기 ‘007’ 본드걸 거론될 만…깊게 훅 파인 파격 드레스 자...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-17T23:25:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001188480"
     },
     {
-     "title": "조국, 하네다공항서 입국 거부…일본 당국 구체적 사유는 안 밝혀",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-17T22:40:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3755227"
+     "title": "정호연, '007' 본드 걸 후보다운 독단적 개성-독보적 매력",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-17T23:16:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95490"
+    },
+    {
+     "title": "정호연, 차기 '007' 본드걸로 거론…보그 선정 후보 45인 포함",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-17T23:14:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261118000073"
+    }
+   ]
+  },
+  {
+   "keyword": "카타르전",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-17T22:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "모레노와 동행 '일단 종료'…카타르전 승리에도 물음표 남아",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-17T23:28:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/417/0001164702"
+    },
+    {
+     "title": "“진심으로 미안해”… 카타르전 결승골 넣고도 고개 숙인 한국 선수",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-17T23:10:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1175473"
+    },
+    {
+     "title": "카타르전 작전 지시하는 모레노 감독",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-17T23:08:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/003/0014328745"
     }
    ]
   },
   {
    "keyword": "방탄 아리랑 34주 차트인",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 3,
@@ -366,7 +465,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 972,
+  "flagged": 978,
   "matched": 560,
   "avgLeadMin": 850,
   "recent": [
