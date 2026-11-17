@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T15:29:49.178Z",
+ "builtAt": "2026-11-17T15:39:54.082Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "경북 상주 북서쪽 지진",
    "sources": [
     "daum"
    ],
-   "articles90": 77,
-   "recent20": 1,
-   "press": 51,
+   "articles90": 79,
+   "recent20": 2,
+   "press": 53,
    "firstArticleAt": "2026-11-17T14:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "[속보]수능 이틀 앞둔 밤 경북 상주서 규모 3.6 지진…수험생·주민 ‘깜...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-17T15:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003700462?sid=102"
+    },
+    {
+     "title": "경북 상주에서 규모 3.6 지진…\"그릇과 창문이 흔들릴 정도\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-17T15:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000651691?sid=102"
+    },
+    {
      "title": "경북 상주서 규모 3.6 지진…올들어 가장 강해",
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-17T15:14:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/055/0001403758?sid=102"
-    },
-    {
-     "title": "경북 상주 규모 3.6 지진…올들어 가장 강해",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-17T14:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000927187?sid=103"
-    },
-    {
-     "title": "상주서 규모 3.6 지진…1년 반 만에 국내 최대",
-     "press": "tbc.co.kr",
-     "publishedAt": "2026-11-17T14:56:00.000Z",
-     "link": "https://www.tbc.co.kr/news/view?pno=20261117233457AE08730&id=213475"
     }
    ]
   },
@@ -75,18 +75,55 @@
    ]
   },
   {
+   "keyword": "엔비디아 실적발표",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 18,
+   "recent20": 1,
+   "press": 13,
+   "firstArticleAt": "2026-11-17T14:15:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "뉴욕 증시, 엔비디아 실적 발표 주시하며 하락 출발",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-17T15:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002434273?sid=104"
+    },
+    {
+     "title": "[속보] 엔비디아 주가 155달러선 약세…실적 발표 앞두고 8.5% 변동 가능...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-17T15:16:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=627942"
+    },
+    {
+     "title": "뉴욕증시, 엔비디아 실적 앞두고 방향 탐색…3대 지수 약세",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-17T15:14:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101448"
+    }
+   ]
+  },
+  {
    "keyword": "일본 파라과이",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 7,
-   "recent20": 5,
-   "press": 6,
+   "articles90": 8,
+   "recent20": 3,
+   "press": 7,
    "firstArticleAt": "2026-11-17T14:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "브라질 이긴 일본, 파라과이에 1-2 패배…모리야스 감독 고별전서 패배",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-17T15:30:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/117/0004125945"
+    },
     {
      "title": "'모리야스 고별전' 일본, 파라과이에 1-2 패배...5경기 연속 무패 마침표",
      "press": "newspim.com",
@@ -98,12 +135,6 @@
      "press": "interfootball.co.kr",
      "publishedAt": "2026-11-17T15:24:00.000Z",
      "link": "https://m.sports.naver.com/kfootball/article/413/0000226740"
-    },
-    {
-     "title": "'모리야스 고별전' 일본, 파라과이에 1-2 패배…5경기 무패 마감",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-17T15:16:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/421/0009294803"
     }
    ]
   },
@@ -113,12 +144,18 @@
     "nate"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 2,
    "press": 6,
-   "firstArticleAt": "2026-11-17T14:00:00.000Z",
+   "firstArticleAt": "2026-11-17T14:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "아세안 정상회의 폐막…트럼프, 쿼드·아세안 정상들과 회동(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-17T15:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016447608?sid=104"
+    },
     {
      "title": "이 대통령, 다카이치와 정상회담…미중러 앞두고 '한일협력' 강조",
      "press": "yonhapnewstv.co.kr",
@@ -130,12 +167,6 @@
      "press": "news.jtbc.co.kr",
      "publishedAt": "2026-11-17T15:01:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/437/0000521208?sid=100"
-    },
-    {
-     "title": "이 대통령, 다카이치 총리와 정상회담…경제·에너지 안보 협력 강화",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-17T15:00:00.000Z",
-     "link": "https://www.viva100.com/article/20261117501311"
     }
    ]
   },
@@ -145,7 +176,7 @@
     "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-17T14:40:00.000Z",
    "exclusive": false,
@@ -164,10 +195,42 @@
      "link": "https://n.news.naver.com/mnews/article/056/0012295973?sid=100"
     },
     {
-     "title": "이 대통령, 필리핀 아세안 일정 마치고 중국으로 출국…APEC 참석",
-     "press": "newsis.com",
+     "title": "李 대통령, 아세안 일정 마무리…중국 향해 출국",
+     "press": "news.tf.co.kr",
      "publishedAt": "2026-11-17T14:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014328508?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/629/0000552946?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "트럼프 희토류 생산",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-17T14:53:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "아세안 정상회의 폐막…트럼프, 쿼드·아세안 정상들과 회동(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-17T15:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016447608?sid=104"
+    },
+    {
+     "title": "트럼프 \"10개월 내 中 희토류 추월\"…이란 '더티밤' 공격설엔 \"전례 없는...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-17T14:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005605815?sid=104"
+    },
+    {
+     "title": "트럼프 “10개월 안에 중국 희토류 따라잡겠다”",
+     "press": "segye.com",
+     "publishedAt": "2026-11-17T14:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004176008?sid=104"
     }
    ]
   },
@@ -176,10 +239,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-17T14:09:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-17T14:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -202,11 +265,43 @@
      "link": "https://n.news.naver.com/mnews/article/003/0014328501?sid=102"
     }
    ]
+  },
+  {
+   "keyword": "송민규 카타르전 도움",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-17T14:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[IN STAR] 유럽 가더니 달라졌네...'황희찬보다 잘한다' 송민규, 카타르...",
+     "press": "interfootball.co.kr",
+     "publishedAt": "2026-11-17T15:05:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/413/0000226738"
+    },
+    {
+     "title": "우즈베키스탄전 이어 또 합작, 송민규 띄우고 오세훈 넣었다… 카타르전...",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-17T14:57:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/396/0000761219"
+    },
+    {
+     "title": "'오세훈 헤더 선제골' 모레노호, 카타르전 전반 1-0 앞서",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-17T14:52:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/003/0014328518"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 903,
+  "flagged": 904,
   "matched": 514,
   "avgLeadMin": 819,
   "recent": [
