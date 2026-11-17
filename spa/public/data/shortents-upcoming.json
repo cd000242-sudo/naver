@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T16:50:20.547Z",
+ "builtAt": "2026-11-17T17:00:24.254Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,23 +16,23 @@
     "nate"
    ],
    "articles90": 46,
-   "recent20": 4,
+   "recent20": 0,
    "press": 33,
    "firstArticleAt": "2026-11-17T15:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'선발 7명 로테이션' 모레노호, 카타르 1-0 제압하고 올해 마지막 A매치...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-17T16:36:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/014/0005605827"
-    },
-    {
      "title": "마지막까지 정교함 부족했던 모레노호…슈팅 21개에 '고작 1골'(종합)",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-17T16:36:00.000Z",
      "link": "https://m.sports.naver.com/kfootball/article/001/0016447658"
+    },
+    {
+     "title": "'선발 7명 로테이션' 모레노호, 카타르 1-0 제압하고 올해 마지막 A매치...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-17T16:36:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/014/0005605827"
     },
     {
      "title": "'오세훈 결승골' 모레노호, 카타르 꺾고 올해 A매치 유종의 미",
@@ -47,13 +47,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 31,
+   "articles90": 32,
    "recent20": 1,
-   "press": 23,
+   "press": 24,
    "firstArticleAt": "2026-11-17T15:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "오세훈 ‘헤더’ 빛난 한국 축구 카타르에 1-0 승…‘모레노 체제’ 마...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-17T16:56:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/028/0002832708"
+    },
     {
      "title": "'오세훈 결승골' 모레노호, 카타르 꺾고 올해 A매치 유종의 미",
      "press": "ajunews.com",
@@ -65,12 +71,6 @@
      "press": "kyeongin.com",
      "publishedAt": "2026-11-17T16:30:00.000Z",
      "link": "https://www.kyeongin.com/article/1774971"
-    },
-    {
-     "title": "결승골에도 웃지 못한 오세훈 \"더 넣지 못해 팀원들에게 미안\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-17T16:27:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/421/0009294816"
     }
    ]
   },
@@ -79,30 +79,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
+   "articles90": 13,
    "recent20": 4,
-   "press": 12,
-   "firstArticleAt": "2026-11-17T16:14:00.000Z",
+   "press": 13,
+   "firstArticleAt": "2026-11-17T16:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "오세훈 ‘헤더’ 빛난 한국 축구 카타르에 1-0 승…‘모레노 체제’ 마...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-17T16:56:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/028/0002832708"
+    },
+    {
+     "title": "K리그 추춘제 전환 준비하나…한국프로축구연맹, EPL 등 영국 프로축구...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-17T16:50:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/311/0002081573"
+    },
     {
      "title": "\"새는 난방열 잡아 생활비·탄소 동시에 줄인다\"… 한국환경정보연구센...",
      "press": "woodkorea.co.kr",
      "publishedAt": "2026-11-17T16:48:00.000Z",
      "link": "https://www.woodkorea.co.kr/news/articleView.html?idxno=92649"
-    },
-    {
-     "title": "[IN POINT] 홍명보 아래 월드컵 실패, 모레노 임시 체제까지...한국 축구...",
-     "press": "interfootball.co.kr",
-     "publishedAt": "2026-11-17T16:45:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/413/0000226744"
-    },
-    {
-     "title": "한국석유공업 3분기 영업이익 20.5% 감소",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-17T16:40:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=406763"
     }
    ]
   },
@@ -111,10 +111,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-17T15:26:00.000Z",
+   "articles90": 7,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-17T15:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -143,30 +143,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-17T15:24:00.000Z",
+   "articles90": 5,
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-17T16:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“모리야스 감독님 감사합니다” 日국대 고별전, 파라과이에 1-2 패했지...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-17T16:55:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/468/0001281673"
+    },
+    {
+     "title": "파라과이에 1-2 패…모리야스 일본 대표팀 고별전서 연승 마감",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-17T16:52:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16279353"
+    },
     {
      "title": "일본, 모리야스 감독 고별전서 패배… 5경기 무패 행진 마감",
      "press": "sportsworldi.com",
      "publishedAt": "2026-11-17T16:41:00.000Z",
      "link": "https://m.sports.naver.com/wfootball/article/396/0000761224"
-    },
-    {
-     "title": "브라질도 꺾은 일본, '모리야스 고별전'서 파라과이에 1-2 패배",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-17T16:39:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/001/0016447660"
-    },
-    {
-     "title": "브라질 잡았던 일본, '모리야스 고별전'서 파라과이에 덜미",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-17T16:26:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/003/0014328561"
     }
    ]
   }
