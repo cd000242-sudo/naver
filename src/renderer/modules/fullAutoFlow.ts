@@ -2937,6 +2937,7 @@ async function generateAIImagesForHeadings(headings, formData, structuredContent
         'genspark': '젠스파크',
         'collect-photos': '관련 사진 찾기',
         'codex-image': 'Codex 구독 이미지',
+        'gemini-cli-image': 'Gemini 구독 이미지',
         'nano-banana': '나노바나나',
         'nano-banana-2': '나노바나나2',
         'openai-image': 'OpenAI DALL-E',

@@ -8,6 +8,7 @@ import { gensparkNormalizeModelId } from '../genspark/gensparkModels.js';
  *   openai-image                      GPT Image, 덕트테이프 (한글 최강)
  *   dropshot                          리더스 나노바나나 무제한
  *   codex-image                       Codex 구독 이미지 (GPT 이미지 — 한글 정확, 실측 2026-11-03)
+ *   gemini-cli-image                  Gemini 구독 이미지 (Gemini CLI — 한글 정확, 실측 2026-11-17)
  *   genspark                          모델에 따라 다름(gensparkModels 의 drawsKorean) — 모델 인자로 판정
  *
  * Not listed: 'nano-banana' (Gemini 2.5 Flash Image) — the engine picker itself says "한글 텍스트 깨짐",
@@ -23,6 +24,7 @@ export const KOREAN_TEXT_ENGINES: ReadonlySet<string> = new Set([
   'openai-image',
   'dropshot',
   'codex-image',
+  'gemini-cli-image',
 ]);
 
 /**

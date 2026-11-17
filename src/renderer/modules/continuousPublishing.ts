@@ -3236,6 +3236,7 @@ const imageSourceNames: Record<string, string> = {
   'local-folder': '📂 내 폴더',
   'collect-photos': '📷 관련 사진 찾기 (뉴스·웹 사진 · 무료)',
   'codex-image': '🐙 Codex 구독 이미지 (GPT 이미지 · 별도 비용 없음)',
+  'gemini-cli-image': '✨ Gemini 구독 이미지 (Gemini CLI · 별도 비용 없음)',
   'skip': '🚫 없음'
 };
 

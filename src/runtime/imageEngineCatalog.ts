@@ -11,6 +11,7 @@
 import { GEMINI_IMAGE_MODELS, OPENAI_IMAGE_MODELS } from './modelRegistry.js';
 import { COLLECT_PHOTOS_ENGINE, COLLECT_PHOTOS_ENGINE_LABEL } from './collectPhotosPolicy.js';
 import { CODEX_IMAGE_ENGINE, CODEX_IMAGE_ENGINE_LABEL } from './codexImagePolicy.js';
+import { GEMINI_CLI_IMAGE_ENGINE, GEMINI_CLI_IMAGE_ENGINE_LABEL } from './geminiCliImagePolicy.js';
 import { AGENT_IMAGE_PROFILES } from '../agentCli/agentModelDefaults.js';
 
 export interface ImageEngineSpec {
@@ -173,6 +174,22 @@ export const CODEX_IMAGE: ImageEngineSpec = {
   freeTierNote: 'API 비용은 들지 않지만 ChatGPT 구독의 사용 한도를 씁니다. 한도가 소진되면 리셋 시각을 안내하고 멈추며 다른 엔진으로 바꾸지 않습니다.',
 };
 
+/**
+ * Gemini 구독 이미지 — Gemini CLI(agy)의 이미지 생성 도구로 그린다. API 과금 없음, Gemini 구독 한도를 쓴다.
+ * CODEX_IMAGE 와 같은 이유로 IMAGE_ENGINE_CATALOG 에는 넣지 않는다(API 모델이 아니다). 참고 사진은 지원하지 않는다.
+ */
+export const GEMINI_CLI_IMAGE: ImageEngineSpec = {
+  value: GEMINI_CLI_IMAGE_ENGINE,
+  label: GEMINI_CLI_IMAGE_ENGINE_LABEL,
+  tagline: 'Gemini 구독(Gemini CLI)의 이미지 생성 · 한글 문구 정확 · Gemini CLI 연결 필요 · 장당 약 60초',
+  model: `agy/${AGENT_IMAGE_PROFILES.gemini.model}`,
+  forceModelKey: null,
+  costKrw: 0,
+  koreanText: true,
+  icon: '✨',
+  freeTierNote: 'API 비용은 들지 않지만 Gemini 구독의 사용 한도를 씁니다. 한도가 소진되면 안내하고 멈추며 다른 엔진으로 바꾸지 않습니다.',
+};
+
 /** AI 생성엔진 카탈로그 — 그리드/드롭다운 노출 순서 */
 // [2026-10-10] 사용자에게 보이는 목록에서 나노바나나 프로·2.5는 뺐다 (스펙 상수와 NANO_PROVIDER_TO_MODEL_KEY는 옛 값 호환용으로 유지).
 export const IMAGE_ENGINE_CATALOG: ImageEngineSpec[] = [
@@ -185,7 +202,7 @@ export const IMAGE_ENGINE_CATALOG: ImageEngineSpec[] = [
 
 /** provider 값 → 엔진 스펙 조회 */
 export function getImageEngineSpec(value: string): ImageEngineSpec | undefined {
-  return IMAGE_ENGINE_CATALOG.find((e) => e.value === value) ?? (value === COLLECT_PHOTOS.value ? COLLECT_PHOTOS : value === CODEX_IMAGE.value ? CODEX_IMAGE : undefined);
+  return IMAGE_ENGINE_CATALOG.find((e) => e.value === value) ?? (value === COLLECT_PHOTOS.value ? COLLECT_PHOTOS : value === CODEX_IMAGE.value ? CODEX_IMAGE : value === GEMINI_CLI_IMAGE.value ? GEMINI_CLI_IMAGE : undefined);
 }
 
 /** 나노바나나 3종 provider 값 → nanoBananaProGenerator forceModelKey */

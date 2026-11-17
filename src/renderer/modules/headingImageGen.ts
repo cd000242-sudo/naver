@@ -608,6 +608,7 @@ export function initHeadingImageGeneration(): void {
     'local-folder': '내 폴더',
     'collect-photos': '관련 사진 찾기',
     'codex-image': 'Codex 구독 이미지',
+    'gemini-cli-image': 'Gemini 구독 이미지',
   };
 
   // ✅ [2026-02-02] 실시간 이미지 미리보기 패널 (Live Preview)
@@ -1533,7 +1534,7 @@ export function initHeadingImageGeneration(): void {
               } else {
                 throw new Error(imageResult.message || 'Flow 이미지 생성 실패. Google 로그인 + AI Pro 쿼터 확인 필요.');
               }
-            } else if (imageSource === 'dropshot' || imageSource === 'genspark' || imageSource === 'codex-image' || imageSource === 'nano-banana-2' || imageSource === 'nano-banana') {
+            } else if (imageSource === 'gemini-cli-image' || imageSource === 'dropshot' || imageSource === 'genspark' || imageSource === 'codex-image' || imageSource === 'nano-banana-2' || imageSource === 'nano-banana') {
               // [2026-08-04] 누락 분기 3종 추가. dropshot(무료 구독·UI 기본 선택값),
               // nano-banana-2(₩97), nano-banana(₩54)가 분기 없이 최종 else로 떨어져
               // 최고가 nano-banana-pro(₩185)로 대체 과금되던 경로를 끊는다.
@@ -5420,7 +5421,7 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
       } else {
         throw new Error(imageResult.message || 'Flow 이미지 생성 실패. Google 로그인 상태를 확인해주세요.');
       }
-    } else if (imageSource === 'dropshot' || imageSource === 'genspark' || imageSource === 'codex-image' || imageSource === 'nano-banana-2' || imageSource === 'nano-banana') {
+    } else if (imageSource === 'gemini-cli-image' || imageSource === 'dropshot' || imageSource === 'genspark' || imageSource === 'codex-image' || imageSource === 'nano-banana-2' || imageSource === 'nano-banana') {
       // [2026-08-04] 일괄 생성과 동일한 누락 분기 3종 — 개별 재생성에서도
       // 선택 엔진이 최고가 nano-banana-pro로 대체되던 경로를 끊는다.
       console.log(`[ImageGen] 선택 엔진으로 개별 재생성: ${imageSource}`);

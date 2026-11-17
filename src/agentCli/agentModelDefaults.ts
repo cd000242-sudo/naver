@@ -54,11 +54,14 @@ export const AGENT_TIER_PROFILES: Readonly<Record<AgentDefaultModelProvider, Rea
  * (measured on Codex CLI 0.166.0: gpt-6-luna 35s per image against 51-52s for terra/astra, same output quality).
  * A model the caller names still wins.
  */
-export const AGENT_IMAGE_PROFILES: Readonly<Record<'codex', AgentTierProfile>> = Object.freeze({
+export const AGENT_IMAGE_PROFILES: Readonly<Record<'codex' | 'gemini', AgentTierProfile>> = Object.freeze({
   codex: Object.freeze({ model: 'gpt-6-luna', effort: 'low' as const }),
+  // [2026-11-17] 'gemini-cli-image': agy names carry the effort in the model id (-low), so there is no separate
+  //   effort - the same as the Gemini text profiles above. Verified against `agy models` the same day.
+  gemini: Object.freeze({ model: 'gemini-3.8-flash-low' }),
 });
 
-export function resolveAgentImageProfile(provider: 'codex', named?: string | null): AgentTierProfile {
+export function resolveAgentImageProfile(provider: 'codex' | 'gemini', named?: string | null): AgentTierProfile {
   const profile = AGENT_IMAGE_PROFILES[provider];
   const model = typeof named === 'string' ? named.trim() : '';
   return model ? { ...profile, model } : profile;

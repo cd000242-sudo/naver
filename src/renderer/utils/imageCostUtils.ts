@@ -25,6 +25,7 @@ export function getCostRiskProviderLabel(provider: string): string {
     if (p === 'openai-image') return 'OpenAI 덕트테이프 (gpt-image-2.6 Sunburst / Flare)';
     if (p === 'dall-e-3') return 'OpenAI GPT 이미지 시리즈 (레거시 설정)';
     if (p === 'codex-image') return 'Codex 구독 이미지 (GPT 이미지 · 별도 비용 없음)';
+    if (p === 'gemini-cli-image') return 'Gemini 구독 이미지 (Gemini CLI · 별도 비용 없음)';
     return p || 'AI 이미지';
 }
 

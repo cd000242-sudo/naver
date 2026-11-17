@@ -29,10 +29,10 @@ describe('엔진 고르기 창 카드는 서로 겹쳐 들어가지 않는다', 
     expect(html).not.toContain('${');
   });
 
-  it('카드 8장 모두 다른 카드 안에 들어 있지 않다', () => {
+  it('카드 9장 모두 다른 카드 안에 들어 있지 않다 (2026-11-17 Gemini 구독 이미지 추가)', () => {
     const cards = mount();
     expect(cards.map(card => card.getAttribute('data-value'))).toEqual([
-      'genspark', 'codex-image', 'collect-photos', 'nano-banana-2', 'openai-image', 'flow', 'dropshot', 'local-folder',
+      'genspark', 'codex-image', 'gemini-cli-image', 'collect-photos', 'nano-banana-2', 'openai-image', 'flow', 'dropshot', 'local-folder',
     ]);
     for (const card of cards) {
       expect(card.parentElement?.closest('.source-option'), `${card.getAttribute('data-value')} 가 다른 카드 안에 있다`).toBeNull();

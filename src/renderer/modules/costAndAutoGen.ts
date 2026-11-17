@@ -89,6 +89,7 @@ const SLOW_IMAGE_PROVIDERS = new Set([
   'nano-banana-2',
   'openai-image',
   'codex-image', // [2026-11-03] one image takes 35s+ through the Codex CLI
+  'gemini-cli-image', // [2026-11-17] one image takes 45-85s through the Gemini CLI
 ]);
 let imageGenerationQueue: Promise<void> = Promise.resolve();
 let lastImageGenerationFinishedAt = 0;

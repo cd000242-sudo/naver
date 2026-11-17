@@ -13,15 +13,18 @@ export interface GsPrefetchItem {
 /**
  * 소제목 이미지를 한 번에 요청하는 엔진: 젠스파크(엔진이 4장씩 동시)와 Codex 구독 이미지(main 이 한 세션 한 장씩 4개 동시).
  * [2026-11-04] codex-image 추가 — 렌더러가 1장씩 보내면 main 의 동시 실행이 쓰이지 않아 8장에 8분이 걸렸다.
+ * [2026-11-17] gemini-cli-image 추가 — main 이 한 세션 한 장씩 동시 2개로 돌리므로 같은 이유로 한꺼번에 보낸다.
  */
 export function gsPrefetchBatchProvider(provider: unknown): boolean {
   const name = String(provider || '').trim();
-  return name === 'genspark' || name === 'codex-image';
+  return name === 'genspark' || name === 'codex-image' || name === 'gemini-cli-image';
 }
 
 /** 진행 로그에 쓰는 엔진 이름. */
 export function gsPrefetchLabel(provider: unknown): string {
-  return String(provider || '').trim() === 'codex-image' ? 'Codex 구독 이미지' : '젠스파크';
+  const name = String(provider || '').trim();
+  if (name === 'codex-image') return 'Codex 구독 이미지';
+  return name === 'gemini-cli-image' ? 'Gemini 구독 이미지' : '젠스파크';
 }
 
 /** 미리 요청할 본문 항목(썸네일 제외)의 위치. 한 번에 요청하는 엔진이 아니거나 2장 미만이면 빈 배열(한꺼번에 이득 없음). */

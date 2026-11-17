@@ -4930,6 +4930,8 @@ import { setCollectPhotosLogSink } from './main/services/collectPhotosEngine.js'
 setCollectPhotosLogSink(sendLog); // 관련 사진 찾기 진행 문구를 렌더러 진행 로그로 보낸다
 import { setCodexImageLogSink } from './image/codex/codexImageGenerator.js';
 setCodexImageLogSink(sendLog); // Codex 구독 이미지 진행 문구("N번 이미지를 받지 못함" 포함)도 같은 진행 로그로 보낸다
+import { setGeminiCliImageLogSink } from './image/geminiCli/geminiCliImageGenerator.js';
+setGeminiCliImageLogSink(sendLog); // Gemini 구독 이미지 진행 문구도 같은 진행 로그로 보낸다
 import { attachDailyNativeReservation, assertDailyNativeReservationAdapterReady, assertDailyNativeReservationReady } from './automation/dailyNativeReservation.js';
 import { createDailyNativeReservationAdapter } from './automation/dailyNativeReservationAdapter.js';
 import { ensureDailyOfficialCaptureBatch } from './main/services/dailyOfficialCaptureProducer.js';
