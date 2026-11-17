@@ -5,6 +5,7 @@ import {
     CloseBand, FaqList, FeatureBand, HeroActions, PriceBlock, ProofStrip, ReviewQuotes, VsPanel, useProduct,
 } from '../components/products/ProductBlocks';
 import { DetailExtrasStyles, LewordCompanion, NaverProofShots } from '../components/products/DetailExtras';
+import DetailFilm from '../components/products/DetailFilm';
 import { won } from '../lib/productCatalog';
 
 /*
@@ -131,6 +132,8 @@ function DetailPage() {
                     ]} />
                 </div>
             </section>
+
+            <DetailFilm id="naver" />
 
             <section className="pp-section">
                 <div className="pp-wrap">

@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import SplitWords from '../components/motion/SplitWords';
 import ProductPageStyles from '../components/products/ProductPageStyles';
+import DetailFilm from '../components/products/DetailFilm';
 import {
     AdsenseVsPanel, CloseBand, CompareBars, FaqList, FeatureBand, HeroActions, PriceBlock, ProofStrip, ReviewQuotes, useProduct,
 } from '../components/products/ProductBlocks';
@@ -108,6 +109,8 @@ function LewordDetailPage() {
                     ]} />
                 </div>
             </section>
+
+            <DetailFilm id="leword" />
 
             <section className="pp-section">
                 <div className="pp-wrap">

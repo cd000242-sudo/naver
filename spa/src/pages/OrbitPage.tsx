@@ -3,6 +3,7 @@ import SplitWords from '../components/motion/SplitWords';
 import { Link } from 'react-router-dom';
 import ProductPageStyles from '../components/products/ProductPageStyles';
 import OrbitExtras from '../components/products/OrbitExtras';
+import DetailFilm from '../components/products/DetailFilm';
 import {
     CloseBand, FaqList, FeatureBand, HeroActions, PriceBlock, ProofStrip, ReviewQuotes, VsPanel, useProduct,
 } from '../components/products/ProductBlocks';
@@ -144,6 +145,8 @@ function OrbitPage() {
                     ]} />
                 </div>
             </section>
+
+            <DetailFilm id="orbit" />
 
             <section className="pp-section">
                 <div className="pp-wrap">
