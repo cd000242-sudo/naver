@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T05:48:19.010Z",
+ "builtAt": "2026-11-17T05:58:23.196Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,165 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 16,
  "candidates": [
+  {
+   "keyword": "IMF 한국 성장률 3.9%",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 69,
+   "recent20": 13,
+   "press": 57,
+   "firstArticleAt": "2026-11-17T05:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "IMF, 올해 성장률 3.9%로 높여…“AI 투자로 잠재성장률 2.5%까지” [종합...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-17T05:56:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2649290"
+    },
+    {
+     "title": "IMF, 韓 올해 성장 전망 '3.3%→3.9%' 상향…\"통화·재정 긴축 적절\"",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-17T05:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000552776?sid=101"
+    },
+    {
+     "title": "IMF, 올해 韓성장률 3.9% 전망…한달만에 0.6%P 상향",
+     "press": "donga.com",
+     "publishedAt": "2026-11-17T05:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003763083?sid=101"
+    }
+   ]
+  },
   {
    "keyword": "조작기소 특검법 국무회의",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 80,
-   "recent20": 26,
+   "articles90": 83,
+   "recent20": 20,
    "press": 49,
-   "firstArticleAt": "2026-11-17T04:32:00.000Z",
+   "firstArticleAt": "2026-11-17T04:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'조작기소 특검법' 공포안, 국무회의 통과… 한성숙 총리 주재",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-17T05:46:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/325549/?sc=Naver"
+     "title": "與, 조작기소특검 국무회의 통과에 \"수사권 오용 발본색원해야\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-17T05:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016446657?sid=100"
     },
     {
-     "title": "국힘, '조작기소 특검법' 국무회의 의결 \"동참자 잊지 않을 것\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-17T05:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009293911?sid=100"
+     "title": "'조작기소 특검법' 국무회의 통과, 한 총리 주재 심의·의결 완료",
+     "press": "goodnews1.com",
+     "publishedAt": "2026-11-17T05:52:00.000Z",
+     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466305"
     },
     {
-     "title": "조작기소 특검 출범 초읽기…위헌 논란에 수사 난항 우려",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-17T05:46:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2019709"
+     "title": "李 대통령 사건 수사한 전직 검사장 4명 “조작기소 특검법 위헌”…법...",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-17T05:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001205401?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "수능 AI 커닝",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 66,
+   "recent20": 9,
+   "press": 45,
+   "firstArticleAt": "2026-11-17T04:33:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"정직한 성취마저 의심\"…16개 대학 총학, 'AI 커닝' 대책 촉구",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-17T05:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004210682?sid=102"
+    },
+    {
+     "title": "'청와대, 수능 부정행위 TF 꾸려 비상근무' 소식에 네티즌들 폭발 (이유...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-17T05:54:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1175305"
+    },
+    {
+     "title": "개혁신당 \"AI 커닝 방지 앱 개발…열화상카메라 활용은 어려워\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-17T05:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001403633?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "수능 이틀 전!",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 19,
+   "recent20": 2,
+   "press": 17,
+   "firstArticleAt": "2026-11-17T04:31:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'청와대, 수능 부정행위 TF 꾸려 비상근무' 소식에 네티즌들 폭발 (이유...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-17T05:54:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1175305"
+    },
+    {
+     "title": "[성공예감] ‘한국 교육’ 자체가 범죄 행위…이번 수능이 이런 방식의...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-17T05:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012295464?sid=101"
+    },
+    {
+     "title": "\"흔들리지 말고 내 실력만 믿자\"…수능 D-2, 공정한 시험장·수험생 멘탈...",
+     "press": "pointe.co.kr",
+     "publishedAt": "2026-11-17T05:38:00.000Z",
+     "link": "https://www.pointe.co.kr/news/articleView.html?idxno=87908"
+    }
+   ]
+  },
+  {
+   "keyword": "전혜진 써닝야구단 출연",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 10,
+   "recent20": 0,
+   "press": 10,
+   "firstArticleAt": "2026-11-17T04:36:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "오정세, ‘써닝야구단’ 감독 손정호 역 출연",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-17T05:34:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001150265"
+    },
+    {
+     "title": "오정세, '써닝야구단'서 감독 변신...전혜진과 부부 호흡",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-17T05:34:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3754612"
+    },
+    {
+     "title": "[공식] 전혜진과 부부된다…오정세, '스토브리그' 이어 야구 드라마 '써...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-17T05:16:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000784852"
     }
    ]
   },
@@ -47,13 +175,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-17T04:22:00.000Z",
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-17T04:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "손석구 “배우로서 한계 느낄 즈음 만나”…‘D.P.’ 한준희와 다시 달...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-17T05:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002724610?sid=103"
+    },
     {
      "title": "[핌in현장] 손석구·나가야마 \"국적의 장벽 넘어 통했다\"…'푸른길' 특별...",
      "press": "newspim.com",
@@ -65,12 +199,38 @@
      "press": "sports.donga.com",
      "publishedAt": "2026-11-17T05:24:00.000Z",
      "link": "https://m.entertain.naver.com/article/382/0001305274"
+    }
+   ]
+  },
+  {
+   "keyword": "담보 대출",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-17T04:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "은행권, 대출 쟁쟁 구도 바꾼다",
+     "press": "enewstoday.co.kr",
+     "publishedAt": "2026-11-17T05:56:00.000Z",
+     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2493556"
     },
     {
-     "title": "손석구 \"배우로서 한계 느꼈을 때 '푸른길' 만났다\"",
-     "press": "raonnews.com",
-     "publishedAt": "2026-11-17T04:52:00.000Z",
-     "link": "https://www.raonnews.com/news/article.html?no=62831"
+     "title": "[나인앤컴퍼니 ①] 250억 만기 한 달…롯데관광 2세 담보는 '후순위 약정...",
+     "press": "fieldnews.kr",
+     "publishedAt": "2026-11-17T05:34:00.000Z",
+     "link": "http://www.fieldnews.kr/news/articleView.html?idxno=33143"
+    },
+    {
+     "title": "[기자의 눈] 가계대출 옥죄기 1년, 풀리지 않은 숙제",
+     "press": "ekn.kr",
+     "publishedAt": "2026-11-17T05:28:00.000Z",
+     "link": "https://www.ekn.kr/web/view.php?key=20261117025260759"
     }
    ]
   },
@@ -81,7 +241,7 @@
     "nate"
    ],
    "articles90": 7,
-   "recent20": 2,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-17T04:29:00.000Z",
    "exclusive": false,
@@ -112,13 +272,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 1,
-   "press": 3,
+   "press": 4,
    "firstArticleAt": "2026-11-17T04:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "충북 독립운동 정신 되새긴 '순국선열의 날' 기념식 개최",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-17T05:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000192656?sid=102"
+    },
     {
      "title": "경북도, 제87회 순국선열의 날 기념식…독립운동 희생정신 기려",
      "press": "shinailbo.co.kr",
@@ -130,19 +296,13 @@
      "press": "kgnews.co.kr",
      "publishedAt": "2026-11-17T05:02:00.000Z",
      "link": "https://www.kgnews.co.kr/news/article.html?no=919921"
-    },
-    {
-     "title": "[17일 안성시]제87회 순국선열의 날 기념식·추모 제례 거행 등",
-     "press": "asiatime.co.kr",
-     "publishedAt": "2026-11-17T04:44:00.000Z",
-     "link": "https://www.asiatime.co.kr/article/20261117500274"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 874,
+  "flagged": 878,
   "matched": 477,
   "avgLeadMin": 857,
   "recent": [
