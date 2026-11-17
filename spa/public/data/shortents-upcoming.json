@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T22:12:14.798Z",
+ "builtAt": "2026-11-17T22:22:18.460Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
+ "measured": 24,
  "candidates": [
   {
-   "keyword": "엔비디아 실적발표",
+   "keyword": "엔비디아 3분기 실적",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 79,
-   "recent20": 29,
-   "press": 50,
+   "articles90": 89,
+   "recent20": 34,
+   "press": 55,
    "firstArticleAt": "2026-11-17T21:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "엔비디아 실적 발표 앞둔 뉴욕 증시 급락, 투자자들 불안 고조",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-17T22:10:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886139"
+     "title": "젠슨 황 없는 엔비디아, 3분기 매출 155조 원…시간외 주가 반등",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-17T22:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000121625?sid=104"
     },
     {
-     "title": "엔비디아 실적 경계감에 일제히 하락…S&P500, 7월 이후 최저 [뉴욕증시...",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-17T22:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005355069?sid=101"
+     "title": "엔비디아 이사회 \"젠슨 황 CEO 복귀 계획 없다\"",
+     "press": "news.mtn.co.kr",
+     "publishedAt": "2026-11-17T22:20:00.000Z",
+     "link": "https://news.mtn.co.kr/article/2026111807185437405"
     },
     {
-     "title": "젠슨 황 없는 엔비디아 매출 사상 최대...현금 흐름도 2배[마켓무버]",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-17T22:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004683357?sid=104"
+     "title": "엔비디아 이사회 의장 \"젠슨 황 재선임 의사 없어\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-17T22:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016447824?sid=104"
     }
    ]
   },
@@ -47,9 +47,9 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 23,
+   "articles90": 22,
    "recent20": 2,
-   "press": 23,
+   "press": 22,
    "firstArticleAt": "2026-11-17T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
@@ -67,21 +67,53 @@
      "link": "http://sateconomy.co.kr/news/view/1065564077142055"
     },
     {
-     "title": "은행 연체율 한 달 만에 0.1%p 하락 … 기업·가계 연체율 상승 흐름은 ...",
-     "press": "biz.newdaily.co.kr",
+     "title": "은행 대출 연체율 0.59%…전년比 0.07%p↑",
+     "press": "kukinews.com",
      "publishedAt": "2026-11-17T21:02:00.000Z",
-     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/17/2026111750247.html"
+     "link": "https://www.kukinews.com/article/view/kuk202611170233"
     }
    ]
   },
   {
-   "keyword": "젠슨 황, 이사회 요청 시 복귀",
+   "keyword": "계엄 표결 방해 1심 선고",
    "sources": [
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 4,
-   "press": 12,
+   "articles90": 14,
+   "recent20": 2,
+   "press": 13,
+   "firstArticleAt": "2026-11-17T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "추경호 대구시장, 계엄 해제 표결 방해 혐의 1심 판결 임박... 징역 20년...",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-17T22:18:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886166"
+    },
+    {
+     "title": "[뉴스클레임 PICK] 수능 D-1 '영하·눈' 비상… 추경호 대구시장 오늘 1심...",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-17T22:10:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3083143"
+    },
+    {
+     "title": "'계엄해제 표결 방해의혹' 추경호 대구시장 오늘 1심…20년 구형",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-17T21:58:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=782595"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황 이사 요청 시 복귀",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 13,
+   "recent20": 2,
+   "press": 13,
    "firstArticleAt": "2026-11-17T21:01:00.000Z",
    "exclusive": true,
    "capped": false,
@@ -107,77 +139,109 @@
    ]
   },
   {
-   "keyword": "수능 예비소집",
+   "keyword": "수출",
    "sources": [
     "google"
    ],
-   "articles90": 14,
-   "recent20": 3,
-   "press": 11,
-   "firstArticleAt": "2026-11-17T20:52:00.000Z",
+   "articles90": 9,
+   "recent20": 6,
+   "press": 9,
+   "firstArticleAt": "2026-11-17T21:45:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
+    {
+     "title": "한국, 첫 연간 수출 1조 달러 돌파 눈앞... 반도체 강국의 위상 강화",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-17T22:18:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886169"
+    },
+    {
+     "title": "엔비디아, 안보·수출 통제 委 설치…CEO 사임 후 첫 구조 개편",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-17T22:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000544372?sid=104"
+    },
+    {
+     "title": "한국, 세계 4번째 ‘수출 1조 달러’ 초읽기…이르면 19일 저녁 달성",
+     "press": "busan.com",
+     "publishedAt": "2026-11-17T22:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001407686?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "뉴스",
+   "sources": [
+    "google"
+   ],
+   "articles90": 8,
+   "recent20": 5,
+   "press": 8,
+   "firstArticleAt": "2026-11-17T22:00:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "[KFT 모닝 브리프] 2026.11.18 — 오늘 꼭 알아야 할 국내외 경제뉴스",
+     "press": "fntimes.com",
+     "publishedAt": "2026-11-17T22:20:00.000Z",
+     "link": "https://www.fntimes.com/html/view.php?ud=202611180709235657141825007d_18"
+    },
+    {
+     "title": "[포토뉴스] 대전 동구의회, 2026년 법정 의무교육 실시",
+     "press": "daily.hankooki.com",
+     "publishedAt": "2026-11-17T22:12:00.000Z",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1426183"
+    },
     {
      "title": "[뉴스클레임 PICK] 수능 D-1 '영하·눈' 비상… 추경호 대구시장 오늘 1심...",
      "press": "newsclaim.co.kr",
      "publishedAt": "2026-11-17T22:10:00.000Z",
      "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3083143"
-    },
-    {
-     "title": "[날씨] 오후부터 전국 비·곳곳 눈…수능일 기온 '뚝'",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-17T22:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000927256?sid=103"
-    },
-    {
-     "title": "수능 N수생, 23년 만에 최대 규모로 몰렸다…하루 앞두고 55만명 예비소...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-17T21:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005765250?sid=102"
     }
    ]
   },
   {
-   "keyword": "수출",
-   "sources": [
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 4,
-   "press": 6,
-   "firstArticleAt": "2026-11-17T21:22:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "'젠슨 황 스캔들' 러트닉 경질론…\"수출통제 강화 대비를\"",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-17T22:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001164694?sid=100"
-    },
-    {
-     "title": "상장제약사 3분기 누적 수출액 급증, 녹십자 5000억 근접",
-     "press": "newsmp.com",
-     "publishedAt": "2026-11-17T22:08:00.000Z",
-     "link": "http://www.newsmp.com/news/articleView.html?idxno=259358"
-    },
-    {
-     "title": "[수출 1조 달러의 명암②] 손님 줄고 임대 늘고…겨울보다 빠른 골목상...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-17T22:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003156400?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "2026년 11월 18일 운세",
+   "keyword": "중국 이재명 대통령",
    "sources": [
     "nate"
    ],
-   "articles90": 7,
+   "articles90": 9,
+   "recent20": 4,
+   "press": 8,
+   "firstArticleAt": "2026-11-17T20:57:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프 \"한국 투자 덕에 알래스카 LNG 승인\"…이 대통령과 40초간 대화",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-17T22:20:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1320860&inflow=N"
+    },
+    {
+     "title": "미중러 앞두고 한일회담…이 대통령, 트럼프와 대면",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-17T22:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001403805?sid=100"
+    },
+    {
+     "title": "이재명-트럼프, 필리핀 만찬서 56일 만에 재회…북미 대화 진전 신호?",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-17T22:16:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886158"
+    }
+   ]
+  },
+  {
+   "keyword": "운세",
+   "sources": [
+    "google"
+   ],
+   "articles90": 8,
    "recent20": 0,
-   "press": 6,
+   "press": 7,
    "firstArticleAt": "2026-11-17T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
@@ -208,12 +272,18 @@
     "google"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 2,
    "press": 5,
-   "firstArticleAt": "2026-11-17T21:00:00.000Z",
+   "firstArticleAt": "2026-11-17T21:02:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
+    {
+     "title": "세무사 수석, 13시간 조사 종료‥수사 확대 검토",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-17T22:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001536306?sid=102"
+    },
     {
      "title": "\"수능 부정행위 할것\" 예고에 '1500 브로커'설..자칫하면 수사대상",
      "press": "edaily.co.kr",
@@ -225,76 +295,6 @@
      "press": "segye.com",
      "publishedAt": "2026-11-17T21:04:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/022/0004176059?sid=102"
-    },
-    {
-     "title": "태안 하천서 80대 여성 숨진 채 발견...경찰 수사 중",
-     "press": "newsfreezone.co.kr",
-     "publishedAt": "2026-11-17T21:02:00.000Z",
-     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=719873"
-    }
-   ]
-  },
-  {
-   "keyword": "훈련",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-17T20:57:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "제57회 피스메이커 지도자훈련, 12월 14~16일 가평 필그림하우스에서",
-     "press": "christiantoday.co.kr",
-     "publishedAt": "2026-11-17T21:58:00.000Z",
-     "link": "https://www.christiantoday.co.kr/news/378685"
-    },
-    {
-     "title": "프랑스 \"우크라 주둔 병력은 훈련·정비 목적\"…러 \"참전 행위\" 반박",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-17T21:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009294939?sid=104"
-    },
-    {
-     "title": "빙그레 비개발자 53명, AI 프로젝트 10건…사업주훈련 경진대회 대상",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-17T21:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002724804?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "중국 이재명 대통령",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-17T20:57:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "트럼프 \"김정은, 중국 오고 싶어할 것\"...\"한국 투자 덕에 알래스카 LNG ...",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-17T21:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002434329?sid=104"
-    },
-    {
-     "title": "이 대통령, APEC 무대 중국 선전 도착…시진핑 회담·미중러 정상회담 주...",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-17T21:42:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101454"
-    },
-    {
-     "title": "아세안 일정 마친 이 대통령 선전으로…APEC 정상회의 참석",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-17T21:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012296013?sid=100"
     }
    ]
   },
@@ -305,7 +305,7 @@
     "google"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-17T21:00:00.000Z",
    "exclusive": false,
@@ -344,29 +344,29 @@
    "capped": false,
    "samples": [
     {
-     "title": "여성 노동자 몸이 먼저 알아챈 '일의 위험'",
-     "press": "labortoday.co.kr",
-     "publishedAt": "2026-11-17T21:34:00.000Z",
-     "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237798"
-    },
-    {
      "title": "[청년노동자 사망 보름째] 금속노조·유족 HD현대삼호에 \"진상규명과 사...",
      "press": "labortoday.co.kr",
      "publishedAt": "2026-11-17T21:34:00.000Z",
      "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237793"
     },
     {
-     "title": "파업 예고한 코레일테크 노동자가 청와대 찾은 까닭은",
+     "title": "여성 노동자 몸이 먼저 알아챈 '일의 위험'",
      "press": "labortoday.co.kr",
      "publishedAt": "2026-11-17T21:34:00.000Z",
-     "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237792"
+     "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237798"
+    },
+    {
+     "title": "느끼고 추측하는 노동자들",
+     "press": "labortoday.co.kr",
+     "publishedAt": "2026-11-17T21:34:00.000Z",
+     "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237799"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 952,
+  "flagged": 955,
   "matched": 551,
   "avgLeadMin": 844,
   "recent": [
