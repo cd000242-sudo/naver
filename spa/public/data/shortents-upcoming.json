@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T15:49:57.275Z",
+ "builtAt": "2026-11-17T16:00:01.260Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,13 +15,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 64,
+   "articles90": 39,
    "recent20": 2,
-   "press": 42,
-   "firstArticleAt": "2026-11-17T14:20:00.000Z",
+   "press": 30,
+   "firstArticleAt": "2026-11-17T14:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "경북 상주 북서쪽 22km 지역서 규모 3.6 지진",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-17T15:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001403765?sid=102"
+    },
     {
      "title": "상주서 올해 가장 강한 규모 3.6 지진…주민들 한밤중 '깜짝'",
      "press": "kyongbuk.co.kr",
@@ -33,12 +39,6 @@
      "press": "seoul.co.kr",
      "publishedAt": "2026-11-17T15:31:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/081/0003700462?sid=102"
-    },
-    {
-     "title": "경북 상주 규모 3.6 지진…유감 신고 16건",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-17T15:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012295986?sid=102"
     }
    ]
   },
@@ -47,30 +47,62 @@
    "sources": [
     "daum"
    ],
-   "articles90": 32,
-   "recent20": 0,
-   "press": 22,
+   "articles90": 44,
+   "recent20": 12,
+   "press": 26,
    "firstArticleAt": "2026-11-17T14:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'오현규 대신 선발' 오세훈, 헤더로 쾅…남다른 제공권 과시",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-17T15:06:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/003/0014328552"
+     "title": "손흥민 '60호'는 다음에... 골문 연 건 투톱 짝꿍 오세훈",
+     "press": "stnsports.co.kr",
+     "publishedAt": "2026-11-17T15:58:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/450/0000155546"
     },
     {
-     "title": "안도하는 오세훈",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-17T15:04:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/001/0016447601"
+     "title": "오세훈이 최전방에 있으면 편안하게 시청 가능! 깔끔한 전술수행부터 골...",
+     "press": "footballist.co.kr",
+     "publishedAt": "2026-11-17T15:55:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/436/0000114977"
     },
     {
-     "title": "한국의 선제골",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-17T15:04:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/001/0016447599"
+     "title": "7명 바꾸자 달라진 모레노호…오세훈 결승골로 카타르에 1-0 승리",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-17T15:54:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611180001"
+    }
+   ]
+  },
+  {
+   "keyword": "한국",
+   "sources": [
+    "google"
+   ],
+   "articles90": 16,
+   "recent20": 15,
+   "press": 14,
+   "firstArticleAt": "2026-11-17T15:38:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "한국토지신탁 3분기 영업익 15억원 흑자 전환",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-17T15:58:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=406747"
+    },
+    {
+     "title": "[A매치 REVIEW] '한국, 역대급 최악의 결정력' 상대 골키퍼 선방 쇼에 고...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-17T15:56:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/477/0000639610"
+    },
+    {
+     "title": "트럼프 \"한국 역사적 투자 덕에 알래스카 LNG파이프라인 사업승인\"",
+     "press": "tfmedia.co.kr",
+     "publishedAt": "2026-11-17T15:54:00.000Z",
+     "link": "https://www.tfmedia.co.kr/news/article.html?no=208975"
     }
    ]
   },
@@ -79,10 +111,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 11,
+   "articles90": 9,
    "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-17T14:23:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-17T14:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -111,10 +143,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 8,
-   "recent20": 1,
+   "articles90": 7,
+   "recent20": 0,
    "press": 7,
-   "firstArticleAt": "2026-11-17T14:23:00.000Z",
+   "firstArticleAt": "2026-11-17T15:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -135,38 +167,6 @@
      "press": "interfootball.co.kr",
      "publishedAt": "2026-11-17T15:24:00.000Z",
      "link": "https://m.sports.naver.com/kfootball/article/413/0000226740"
-    }
-   ]
-  },
-  {
-   "keyword": "AI 세무사 경찰 조사 종료",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-17T14:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'AI 부정행위' 세무사 가짜 수석 경찰 조사 13시간 만 종료…\"수험생께...",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-17T15:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000521209?sid=102"
-    },
-    {
-     "title": "‘AI 부정행위’ 세무사 수석, 경찰 조사 약 13시간 만에 종료",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-17T14:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012295972?sid=102"
-    },
-    {
-     "title": "'세무냥이' 첫 경찰조사 13시간만 종료…\"남은 절차도 모두 참석\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-17T14:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004210885?sid=102"
     }
    ]
   },
@@ -203,6 +203,38 @@
    ]
   },
   {
+   "keyword": "AI 세무사 경찰 조사 종료",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-17T14:33:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'AI 부정행위' 세무사 가짜 수석 경찰 조사 13시간 만 종료…\"수험생께...",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-17T15:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000521209?sid=102"
+    },
+    {
+     "title": "‘AI 부정행위’ 세무사 수석, 경찰 조사 약 13시간 만에 종료",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-17T14:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012295972?sid=102"
+    },
+    {
+     "title": "'세무냥이' 첫 경찰조사 13시간만 종료…\"남은 절차도 모두 참석\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-17T14:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004210885?sid=102"
+    }
+   ]
+  },
+  {
    "keyword": "이재명 APEC 출국",
    "sources": [
     "signal.bz"
@@ -231,6 +263,38 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-17T14:40:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014328508?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "조국, 일본 입국 거부",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-17T15:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "조국, 일본 입국 거부당해… 공항서 5시간 머물다 귀국",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-17T15:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004010220?sid=100"
+    },
+    {
+     "title": "日언론도 '조국 입국 거부' 잇달아 보도…독도 방문·형사처벌 전력 주...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-17T15:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009294802?sid=104"
+    },
+    {
+     "title": "조국, 일본공항서 입국 거부당해…“형사처벌 전력 따른 비자 절차 안 ...",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-17T15:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003565931?sid=104"
     }
    ]
   },
@@ -269,7 +333,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 906,
+  "flagged": 908,
   "matched": 514,
   "avgLeadMin": 819,
   "recent": [
