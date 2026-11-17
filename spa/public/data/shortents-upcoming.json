@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T06:18:29.383Z",
+ "builtAt": "2026-11-17T06:28:32.759Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,135 +8,101 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 18,
+ "measured": 10,
  "candidates": [
   {
-   "keyword": "IMF 연례협의 발표",
+   "keyword": "IMF 협의 결과 발표",
    "sources": [
     "nate"
    ],
-   "articles90": 78,
+   "articles90": 81,
    "recent20": 11,
-   "press": 57,
+   "press": 59,
    "firstArticleAt": "2026-11-17T05:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "IMF 한국 성장률 전망 한 달 만에 3.9%로 상향 : 반도체 호황에도 추가 ...",
-     "press": "huffingtonpost.kr",
-     "publishedAt": "2026-11-17T06:16:00.000Z",
-     "link": "https://www.huffingtonpost.kr/article/262142"
+     "title": "IMF, 韓 성장률 3.9%로 상향.. 잠재성장률도 2.5% 기대",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-17T06:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005605581?sid=101"
     },
     {
-     "title": "코린 들레샤 단장, 2026년 IMF 연례협의 결과 발표",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-17T06:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009294066?sid=101"
+     "title": "AI 투자 훈풍에 세계경제 성장률 상향…IMF, 한국 성장률 3%대 제시",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-17T06:22:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5084383"
     },
     {
-     "title": "IMF, 올해 한국 성장률 전망치 한 달 만에 3.3%→3.9%로 상향",
-     "press": "delighti.co.kr",
-     "publishedAt": "2026-11-17T06:14:00.000Z",
-     "link": "https://www.delighti.co.kr/news/articleView.html?idxno=125099"
+     "title": "IMF, 올해 韓성장률 3.3→3.9%로…\"잠재성장률 2.5%까지 개선\"(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-17T06:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016446786?sid=101"
     }
    ]
   },
   {
    "keyword": "조작기소 특검법 국무회의",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 82,
-   "recent20": 17,
+   "articles90": 81,
+   "recent20": 13,
    "press": 52,
-   "firstArticleAt": "2026-11-17T05:00:00.000Z",
+   "firstArticleAt": "2026-11-17T05:06:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "조작기소 특검 수사대상 된 전직 검사장들 “특검법 위헌 다루겠다”",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-17T06:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000521109?sid=102"
+     "title": "'조작기소 특검법' 국무회의 의결···수사대상 전 검사장들 \"법치 근간...",
+     "press": "dgmbc.com",
+     "publishedAt": "2026-11-17T06:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/657/0000057553?sid=100"
     },
     {
-     "title": "국힘 2주째 靑앞 의총…\"韓총리, '귀태' 특검법 산파될텐가\"",
-     "press": "kbsm.net",
-     "publishedAt": "2026-11-17T06:16:00.000Z",
-     "link": "https://www.kbsm.net/news/view.php?idx=542148"
+     "title": "파견검사 19명으로 돌아가는 선관위 특검…조작기소 특검엔 20명 더 필요",
+     "press": "thepublic.kr",
+     "publishedAt": "2026-11-17T06:20:00.000Z",
+     "link": "https://www.thepublic.kr/news/articleView.html?idxno=327125"
     },
     {
-     "title": "‘조작기소 특검법’ 공포안, 국무회의 통과",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-17T06:16:00.000Z",
-     "link": "https://www.viva100.com/article/20261117500624"
+     "title": "'조작기소 특검법' 국무회의 의결…재가 시 내달 309명 특검 출범",
+     "press": "ziksir.com",
+     "publishedAt": "2026-11-17T06:20:00.000Z",
+     "link": "https://www.ziksir.com/news/articleView.html?idxno=153662"
     }
    ]
   },
   {
    "keyword": "수능 이틀 전!",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 26,
-   "recent20": 10,
-   "press": 20,
-   "firstArticleAt": "2026-11-17T04:49:00.000Z",
+   "articles90": 36,
+   "recent20": 17,
+   "press": 29,
+   "firstArticleAt": "2026-11-17T05:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "AI 커닝 막겠다더니 기존 대책 재탕…수능 D-2에도 '육안 검사'",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-17T06:16:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=884192"
+     "title": "[기획] 쌀알보다 작은 '0.65mm 초소형 카메라' 들고 수능장에 들어가기…...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-17T06:26:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1175287"
     },
     {
-     "title": "김민석 \"수능 AI 부정행위 제재 특별법 제정 착수…자격 박탈 올해 수능...",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-17T06:12:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261117500397"
+     "title": "가방은 복도에, 책상엔 허용 물품만… 수능 부정행위 차단",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-17T06:26:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3083062"
     },
     {
-     "title": "[속보] 한 총리 \"수능 시작 전 모든 전자기기 전원 끄고 수거…별도 보...",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-17T06:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001075802?sid=105"
-    }
-   ]
-  },
-  {
-   "keyword": "김민석 대표의 의원총회 참석",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 27,
-   "recent20": 3,
-   "press": 10,
-   "firstArticleAt": "2026-11-17T05:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "민주당, 의원총회 [포토]",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-17T06:14:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2649312"
-    },
-    {
-     "title": "김민석 \"AI 부정행위 처벌 강화...특별법 제정 즉시 착수할 것\" [TF사진관...",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-17T06:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000552780?sid=100"
-    },
-    {
-     "title": "김민석 \"AI 부정행위 제재·처벌 대폭 강화할 것… 특별법 제정 즉시 착...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-17T05:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014327577?sid=100"
+     "title": "AI·초소형기기 부정행위 차단…대구·경북 수능 125곳 감독 강화",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-17T06:26:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=729755"
     }
    ]
   },
@@ -145,13 +111,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 3,
-   "press": 5,
+   "articles90": 7,
+   "recent20": 2,
+   "press": 6,
    "firstArticleAt": "2026-11-17T05:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "충남도, 87회 순국선열의 날 기념식 개최",
+     "press": "pressian.com",
+     "publishedAt": "2026-11-17T06:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/002/0002466261?sid=102"
+    },
     {
      "title": "충남도, 제87회 순국선열의 날 기념식…독립정신 계승 다짐",
      "press": "ajunews.com",
@@ -163,12 +135,6 @@
      "press": "gukjenews.com",
      "publishedAt": "2026-11-17T06:06:00.000Z",
      "link": "https://www.gukjenews.com/news/articleView.html?idxno=3754663"
-    },
-    {
-     "title": "충북도의회, 순국선열의 날 삼일공원 참배…이상식 의장 등 참석",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-17T06:00:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3754670"
     }
    ]
   },
@@ -178,13 +144,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
    "firstArticleAt": "2026-11-17T05:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[갤러리 산책]샤갈의 신랑 신부 곁에, 추락하는 천사가 있었다",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-17T06:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005843856?sid=103"
+    },
     {
      "title": "“프랑스에서도 못 봐”…샤갈 걸작 65점, 서울에서 본다",
      "press": "biz.heraldcorp.com",
@@ -196,51 +168,45 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-17T05:39:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014327472?sid=103"
-    },
-    {
-     "title": "환상에 시대의 기억을 담다…샤갈의 예술과 삶의 궤적(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-17T05:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016446566?sid=103"
     }
    ]
   },
   {
-   "keyword": "고지용",
+   "keyword": "김민석 대표 모습",
    "sources": [
-    "google"
+    "nate"
    ],
    "articles90": 4,
    "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-17T05:03:00.000Z",
+   "firstArticleAt": "2026-11-17T05:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[뮤즈이슈]“‘슈돌’은 시간 맞춰줬다” 고지용, 젝키 완전체 활동 빠...",
-     "press": "heraldmuse.com",
-     "publishedAt": "2026-11-17T05:40:00.000Z",
-     "link": "https://m.entertain.naver.com/article/112/0003813559"
+     "title": "\"AI 커닝 못 잡겠다\"는 교육장관…김민석도 \"발언 정정했어야\" 비판",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-17T05:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000651589?sid=100"
     },
     {
-     "title": "고지용, '슈돌' 출연-젝스키스 불참 왜? \"일정상\"",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-17T05:26:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95468"
+     "title": "김민석, 최교진 'AI 커닝 못 잡는다' 발언에 \"빨리 정정했어야 했다\"",
+     "press": "fntoday.co.kr",
+     "publishedAt": "2026-11-17T05:46:00.000Z",
+     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=398661"
     },
     {
-     "title": "이혼 후에도 잡음 계속…고지용·최동석, 면접교섭→상간 소송까지 '시...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-17T05:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000491162"
+     "title": "김민석 \"AI부정행위 적발시 시험 응시 10년 제한 입법\"",
+     "press": "kbsm.net",
+     "publishedAt": "2026-11-17T05:44:00.000Z",
+     "link": "https://www.kbsm.net/news/view.php?idx=542013"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 885,
+  "flagged": 887,
   "matched": 482,
   "avgLeadMin": 850,
   "recent": [
