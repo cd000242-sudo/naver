@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T19:41:20.867Z",
+ "builtAt": "2026-11-17T19:51:24.589Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,12 +16,18 @@
     "nate"
    ],
    "articles90": 13,
-   "recent20": 3,
+   "recent20": 2,
    "press": 9,
-   "firstArticleAt": "2026-11-17T18:14:00.000Z",
+   "firstArticleAt": "2026-11-17T18:37:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "[글로벌 비즈 브리핑] 젠슨 황 돌아오고 싶다던데...엔비디아는 헤드헌...",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-17T19:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000544348?sid=104"
+    },
     {
      "title": "젠슨 황 “이사회가 원하면 복귀”…사임 닷새 만에 입 열었다",
      "press": "edaily.co.kr",
@@ -33,12 +39,6 @@
      "press": "goodnews1.com",
      "publishedAt": "2026-11-17T19:30:00.000Z",
      "link": "https://www.goodnews1.com/news/articleView.html?idxno=466339"
-    },
-    {
-     "title": "젠슨 황 복귀 의사 밝혔지만…엔비디아, 헤드헌터 통해 후임 물색",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-17T19:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012296001?sid=104"
     }
    ]
   },
@@ -48,12 +48,18 @@
     "nate"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 2,
    "press": 5,
-   "firstArticleAt": "2026-11-17T18:15:00.000Z",
+   "firstArticleAt": "2026-11-17T18:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이재명 대통령, 환영 받으며 중국 도착",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-17T19:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016447716?sid=100"
+    },
     {
      "title": "이 대통령, 중국 선전 도착...미중러 회담 앞두고 트럼프와 조우",
      "press": "ytn.co.kr",
@@ -65,19 +71,45 @@
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-17T18:54:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002434286?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "경북 상주 지진 발생",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 2,
+   "firstArticleAt": "2026-11-17T18:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "수능 앞두고 상주서 3.6 지진…올해 최대 규모",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-17T19:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000927203?sid=103"
     },
     {
-     "title": "이재명 대통령 부부, 중국 선전 도착",
-     "press": "newsis.com",
+     "title": "원안위 \"경북 상주 지진, 원자로 안전에 영향 없어\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-17T18:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002434285?sid=102"
+    },
+    {
+     "title": "또 수능 앞두고...경북 상주에서 규모 3.6 지진",
+     "press": "ytn.co.kr",
      "publishedAt": "2026-11-17T18:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014328585?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/052/0002434284?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 924,
+  "flagged": 925,
   "matched": 514,
   "avgLeadMin": 819,
   "recent": [
