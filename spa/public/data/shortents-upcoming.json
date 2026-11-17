@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T20:31:39.629Z",
+ "builtAt": "2026-11-17T20:41:43.560Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,28 +11,28 @@
  "measured": 26,
  "candidates": [
   {
-   "keyword": "젠슨 황, 엔비디아 복귀 의사",
+   "keyword": "젠슨 황 엔비디아 복귀 가능성",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
+   "articles90": 10,
    "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-17T19:09:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-17T19:14:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨 황 “이사회 요청시 엔비디아 복귀”… 사임 5일만에 성명",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-17T20:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001885832?sid=104"
+     "title": "젠슨 황 \"이사회가 원하면 CEO 복귀\"…엔비디아는 검토 안 해",
+     "press": "aitimes.com",
+     "publishedAt": "2026-11-17T20:38:00.000Z",
+     "link": "https://www.aitimes.com/news/articleView.html?idxno=217512"
     },
     {
-     "title": "젠슨 황 복귀의사 공식화 \"이사회 요청시 응할것\"",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-17T20:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001978665?sid=102"
+     "title": "젠슨 황 “엔비디아 복귀할 수 있다면 영광”...사임 후 첫 공식 입장",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-17T20:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003700547?sid=104"
     },
     {
      "title": "젠슨 황 사태 후폭풍...국내 반도체주 어디로 가나",
@@ -43,8 +43,105 @@
    ]
   },
   {
+   "keyword": "조작기소 특검법 국무회의",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 9,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-17T19:31:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[사설] 총리가 의결한 조작기소 특검법, 대통령 책임은 그대로",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-17T20:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003700544?sid=110"
+    },
+    {
+     "title": "[사설] 총리가 총대 멘 조작기소 특검법, 뒷감당은 누가 하나",
+     "press": "busan.com",
+     "publishedAt": "2026-11-17T20:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001407683?sid=110"
+    },
+    {
+     "title": "조작기소 특검법, 李순방 중에 의결",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-17T20:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003700468?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "중국 이재명 대통령",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-17T19:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이 대통령, 트럼프 대통령과 필리핀 만찬장서 조우",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-17T20:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000927215?sid=100"
+    },
+    {
+     "title": "李 대통령, APEC 열리는 中 선전 도착",
+     "press": "goodnews1.com",
+     "publishedAt": "2026-11-17T20:18:00.000Z",
+     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466341"
+    },
+    {
+     "title": "이재명 대통령, 환영 받으며 중국 도착",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-17T19:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016447716?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "경북 상주 지진 발생",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 6,
+   "recent20": 4,
+   "press": 4,
+   "firstArticleAt": "2026-11-17T19:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "경북 상주 규모 3.6 지진…올해 최대 강진",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-17T20:36:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611180005"
+    },
+    {
+     "title": "상주 지진에 원안위 \"국내 원자로 안전영향 없어\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-17T20:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000927213?sid=102"
+    },
+    {
+     "title": "경북 상주 규모 3.6 지진…올해 최대 규모",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-17T20:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000927212?sid=103"
+    }
+   ]
+  },
+  {
    "keyword": "경찰",
    "sources": [
+    "signal.bz",
     "google"
    ],
    "articles90": 4,
@@ -75,113 +172,23 @@
    ]
   },
   {
-   "keyword": "경북 상주 지진",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 3,
-   "press": 3,
-   "firstArticleAt": "2026-11-17T19:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "상주 지진에 원안위 \"국내 원자로 안전영향 없어\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-17T20:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000927213?sid=102"
-    },
-    {
-     "title": "경북 상주 규모 3.6 지진…올해 최대 규모",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-17T20:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000927212?sid=103"
-    },
-    {
-     "title": "한밤중 상주 덮친 규모 3.6 지진…올해 한반도 최대, 원전은 이상 없어",
-     "press": "abcn.kr",
-     "publishedAt": "2026-11-17T20:22:00.000Z",
-     "link": "https://www.abcn.kr/news/articleView.html?idxno=94685"
-    }
-   ]
-  },
-  {
-   "keyword": "트럼프 알래스카 LNG 승인",
+   "keyword": "오세훈 결승골, 모레노호 1-0 승리",
    "sources": [
     "nate"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-17T19:05:00.000Z",
+   "firstArticleAt": "2026-11-17T19:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "트럼프 \"韓 투자 덕에 알래스카 LNG파이프라인 사업승인\"",
-     "press": "yonhapnewstv.co.kr",
+     "title": "'모레노호 1기 최다 득점자'는 손흥민…'6경기 3골'로 공격진 중심 잡았...",
+     "press": "sports.hankooki.com",
      "publishedAt": "2026-11-17T20:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000927217?sid=104"
+     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6943790"
     },
-    {
-     "title": "트럼프 “韓 역사적 투자 덕에 알래스카 LNG파이프라인 사업 승인”",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-17T20:16:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611180003"
-    },
-    {
-     "title": "트럼프, 또 \"한국 역사적 투자로 알래스카 가스관 승인\"",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-17T19:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002466343?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "조국 일본 입국 거부",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-17T19:31:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "조국, 日공항서 입국 거부… 독도 방문·전과 이력 때문?",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-17T20:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003700474?sid=100"
-    },
-    {
-     "title": "조국, 日당국 입국거부로 방일 무산…혁신당 \"사과하라\"",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-17T20:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002466347?sid=100"
-    },
-    {
-     "title": "조국, 日입국 거부당해… 독도 방문 영향 가능성",
-     "press": "donga.com",
-     "publishedAt": "2026-11-17T19:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003763235?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "오세훈 선제골 1-0 승리",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-17T19:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
     {
      "title": "‘슈팅 21-2’ 압도적이지만 단 1골에 그쳤다…‘오세훈 결승골’ 사우...",
      "press": "mk.co.kr",
@@ -193,19 +200,13 @@
      "press": "goodnews1.com",
      "publishedAt": "2026-11-17T19:42:00.000Z",
      "link": "https://www.goodnews1.com/news/articleView.html?idxno=466340"
-    },
-    {
-     "title": "'경합 부족' 손흥민에게 공 몰아주던 축구는 이제 그만? 오세훈 세우자...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-17T19:30:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/109/0005641864"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 930,
+  "flagged": 931,
   "matched": 514,
   "avgLeadMin": 819,
   "recent": [
