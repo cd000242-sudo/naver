@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T04:27:52.692Z",
+ "builtAt": "2026-11-17T04:58:01.715Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,78 +11,143 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "조작기소 특검법 국무회의 통과",
+   "keyword": "조작기소 특검법 국무회의 의결",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 65,
-   "recent20": 10,
-   "press": 53,
-   "firstArticleAt": "2026-11-17T02:58:00.000Z",
+   "articles90": 53,
+   "recent20": 15,
+   "press": 40,
+   "firstArticleAt": "2026-11-17T03:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국힘 “조작기소 특검법은 ‘이재명 탈옥법’…사법권 짓밟은 헌정질서...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-17T04:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001205367?sid=100"
+     "title": "‘조작기소 특검법’ 국무회의 의결…대장동·대북송금 등 12개 항목 수...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-17T04:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003700225?sid=100"
     },
     {
-     "title": "'조작기소 특검법' 의결에 \"쿠데타\"라며 격분한 국힘",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-17T04:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002536134?sid=100"
+     "title": "李 순방 중 '조작기소 특검법' 국무회의 통과…오세훈 \"민주주의 욕보여...",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-17T04:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005354750?sid=100"
     },
     {
-     "title": "'조작기소 특검법', 한성숙 총리 주재 국무회의 통과",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-17T04:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002536135?sid=100"
+     "title": "오세훈, 조작기소 특검법 의결에 \"치외법권 대통령 생겼다\" 비판",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-17T04:55:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261117000800"
     }
    ]
   },
   {
-   "keyword": "AI 부정행위 대응 강화",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 32,
-   "recent20": 9,
-   "press": 29,
-   "firstArticleAt": "2026-11-17T02:59:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[사설] ‘AI 커닝’에 수능·산업기밀 뚫려선 안 된다",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-17T04:26:00.000Z",
-     "link": "https://www.viva100.com/article/20261117500558"
-    },
-    {
-     "title": "수능 D-2, 정치권까지 흔든 AI 부정행위 파문",
-     "press": "00news.co.kr",
-     "publishedAt": "2026-11-17T04:26:00.000Z",
-     "link": "http://www.00news.co.kr/news/articleView.html?idxno=108120"
-    },
-    {
-     "title": "공소청, AI·스마트안경 동원한 시험 부정행위 무관용 엄단…초범도 정...",
-     "press": "goodmorningcc.com",
-     "publishedAt": "2026-11-17T04:26:00.000Z",
-     "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=455979"
-    }
-   ]
-  },
-  {
-   "keyword": "나가야마 에이타, 손석구와 한국 사랑",
+   "keyword": "공소청 스마트기기 부정행위 엄정 대응",
    "sources": [
     "signal.bz"
    ],
    "articles90": 8,
-   "recent20": 1,
+   "recent20": 2,
    "press": 8,
-   "firstArticleAt": "2026-11-17T03:09:00.000Z",
+   "firstArticleAt": "2026-11-17T03:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "공소청 \"스마트기기 시험부정행위 엄정 대응\"",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-17T04:54:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544028"
+    },
+    {
+     "title": "공소청, 'AI 커닝'에 \"시도만 해도 기소 원칙... 파급력 크면 구속·징역...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-17T04:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000966028?sid=102"
+    },
+    {
+     "title": "공소청 \"스마트기기 부정행위 엄단…정식 재판 원칙\"",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-17T04:32:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=172601"
+    }
+   ]
+  },
+  {
+   "keyword": "코스피 급락",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 6,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-17T03:51:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "코스피 또 장중 5000선 붕괴…엔비디아 등 美기술주 하락 여파",
+     "press": "donga.com",
+     "publishedAt": "2026-11-17T04:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003763060?sid=101"
+    },
+    {
+     "title": "코스피 100포인트 넘게 급락하며 5000선 붕괴",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-17T04:46:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3754563"
+    },
+    {
+     "title": "5000선 공방 벌이는 코스피…외인 1조원 '팔자'",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-17T04:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006411104?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "김정은, 삼지연 방문",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-17T03:51:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“흰색 스키복 입고 설원 질주”…北 김정은 앞에서 스키 실력 뽐낸 김...",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-17T04:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003486589?sid=104"
+    },
+    {
+     "title": "김정은, 백두산 스키장 현지 지도…딸 주애 스키 사진 공개",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-17T04:42:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903341"
+    },
+    {
+     "title": "트럼프 선거 패배 후 아시아 첫 순방길 \"김정은 만날지 몰라\"…김정은 ...",
+     "press": "kado.net",
+     "publishedAt": "2026-11-17T04:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000211722?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "푸른길 나가야마 한국 사랑 중",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-17T03:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -93,119 +158,23 @@
      "link": "http://digitalchosun.dizzo.com/site/data/html_dir/2026/11/17/2026111780102.html"
     },
     {
+     "title": "'푸른길' 한준희 감독이 끌어낸 새로움, \"좋은 작품\" 무한 믿음·자신감...",
+     "press": "joynews24.com",
+     "publishedAt": "2026-11-17T04:12:00.000Z",
+     "link": "http://www.joynews24.com/view/2027089"
+    },
+    {
      "title": "'푸른길' 손석구x나가야마 에이타, 국경 넘은 한·일 콤비...\"장벽 넘어...",
      "press": "starnewsk.com",
      "publishedAt": "2026-11-17T03:40:00.000Z",
      "link": "http://www.starnewsk.com/news/articleView.html?idxno=61090"
-    },
-    {
-     "title": "‘푸른길’ 나가야마 에이타 “한국인의 국민성 사랑하게 돼”…한국어...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-17T03:35:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001150244"
-    }
-   ]
-  },
-  {
-   "keyword": "김정은, 삼지연 방문",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-17T03:03:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김정은 삼지연 관광지구 현지지도…김주애 스키 모습 공개",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-17T04:22:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3754528"
-    },
-    {
-     "title": "김정은, 백두산 천지에 올랐는데…중대 구상 VS 과거와 달라",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-17T03:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004210598?sid=100"
-    },
-    {
-     "title": "김정은, 북·중 접경 삼지연 관광지구 건설현장 시찰",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-17T03:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926970?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "트럼프 엔비디아 주식",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-17T03:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "트럼프, 엔비디아 주식 최대 830억 보유 추정…중국 수출 허용에 이해충...",
-     "press": "aitimes.com",
-     "publishedAt": "2026-11-17T04:22:00.000Z",
-     "link": "https://www.aitimes.com/news/articleView.html?idxno=217483"
-    },
-    {
-     "title": "벼랑 끝 670조 AI 지원, 젠슨 복귀 로비 통할까 [트럼프 스톡커]",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-17T03:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004683053?sid=104"
-    },
-    {
-     "title": "“엔비디아 주식 830억 원 보유”…트럼프, ‘젠슨황 복귀’ 시동? [지금...",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-17T03:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012295403?sid=121"
-    }
-   ]
-  },
-  {
-   "keyword": "발언하는 장동혁 대표",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-17T02:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "장동혁 \"AI 부정행위 대책 없다면 수능 연기라도 검토해야\"",
-     "press": "goodkyung.com",
-     "publishedAt": "2026-11-17T03:12:00.000Z",
-     "link": "https://www.goodkyung.com/news/articleView.html?idxno=293536"
-    },
-    {
-     "title": "AI 커닝 대책? 이준석은 '전파탐지 앱', 장동혁은 '수능 연기'",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-17T03:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002536125?sid=100"
-    },
-    {
-     "title": "[포토] 현장 의총서 발언하는 장동혁 국민의힘 대표",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-17T02:58:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/17/2026111750148.html"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 857,
+  "flagged": 866,
   "matched": 468,
   "avgLeadMin": 853,
   "recent": [
