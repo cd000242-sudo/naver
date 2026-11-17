@@ -1,12 +1,12 @@
 {
-  "publishedAt": "2026-11-17T03:18:25.176Z",
+  "publishedAt": "2026-11-17T03:41:45.862Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
     "candidates": 240,
     "niche": 0,
-    "preemption": 9,
+    "preemption": 6,
     "pending": 0
   },
   "freeSample": {
@@ -49,7 +49,7 @@
         }
       ],
       "whySearch": {
-        "text": "중국 앤트그룹이 로봇 촉각 AI 모델 '링봇 터치'를 오픈소스로 공개했다.",
+        "text": "앤트그룹이 로봇 촉각 AI '링봇 터치'를 오픈소스로 공개했다",
         "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
       },
       "intentLabel": "분류 안 됨",
@@ -57,12 +57,12 @@
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "앤트그룹 링봇 터치, 물체 잡는 힘까지 판단하는 로봇 촉각 AI",
+          "text": "앤트그룹 링봇 터치 로봇 촉각 AI 오픈소스 공개",
           "frame": "ai",
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "앤트그룹 링봇 터치 오픈소스로 풀렸다는데 로봇 촉각이 생각보다",
+          "text": "앤트그룹 링봇 터치 오픈소스로 풀었다는데 촉각 AI가 생각보다 멀리 갔네요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -73,7 +73,69 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-11-17T03:14:24.359Z",
+      "measuredAt": "2026-11-17T03:39:00.615Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "링봇 터치 오픈소스",
+      "issue": "앤트그룹",
+      "topic": "앤트그룹",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 4,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 4",
+        "선점 후보 — 경쟁 문서 4건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "앤트그룹이 로봇 촉각 AI '링봇 터치'를 오픈소스로 공개했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "링봇 터치 오픈소스 앤트그룹 로봇 촉각 AI 어디까지",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "링봇 터치 오픈소스 공개 소식 봤는데 로봇이 물체 잡는 힘까지 판단한다네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-17T03:39:00.615Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -115,7 +177,7 @@
         }
       ],
       "whySearch": {
-        "text": "노타가 두베와 금융권 특화 AI 코딩 에이전트용 LLM·서버 공급 계약을 맺었다.",
+        "text": "노타가 두베와 금융권 AI 코딩 시장 공략에 나섰다",
         "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
       },
       "intentLabel": "분류 안 됨",
@@ -123,12 +185,242 @@
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "노타 초봉, 금융권 AI 코딩 공급 기업 연봉 살펴보기",
+          "text": "노타 초봉 신입 연봉부터 채용 조건까지",
           "frame": "ai",
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "노타 초봉이 궁금해서 노타 연봉 자료를 뒤적이다가 그만 시간 가는 줄 몰랐네요",
+          "text": "노타 초봉 궁금해서 노타 채용 공고 열어봤는데 생각보다 복잡하더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "노타 ai",
+          "searchVolume": 1030,
+          "frame": "generic"
+        },
+        {
+          "keyword": "노타 채용",
+          "searchVolume": 80,
+          "frame": "generic"
+        },
+        {
+          "keyword": "노타 ai 채용",
+          "searchVolume": 30,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "노타 ai",
+          "searchVolume": 1030,
+          "documentCount": 15694,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "노타 채용",
+          "searchVolume": 80,
+          "documentCount": 681,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "노타 ai 채용",
+          "searchVolume": 30,
+          "documentCount": 562,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "노타 회사",
+          "searchVolume": 30,
+          "documentCount": 8540,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "노타 연봉",
+          "searchVolume": 20,
+          "documentCount": 260,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-17T03:39:00.615Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "토스페이먼츠 앤트그룹",
+      "issue": "앤트그룹",
+      "topic": "앤트그룹",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 176,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 176",
+        "선점 후보 — 경쟁 문서 176건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "앤트그룹이 로봇 촉각 AI '링봇 터치'를 오픈소스로 공개했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 4,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-17T03:39:00.615Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "앤트그룹 촉각 AI",
+      "issue": "앤트그룹",
+      "topic": "앤트그룹",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 175,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 175",
+        "선점 후보 — 경쟁 문서 175건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "앤트그룹이 로봇 촉각 AI '링봇 터치'를 오픈소스로 공개했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "앤트그룹 촉각 AI, 링봇 터치 오픈소스로 공개한 내용",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "앤트그룹 촉각 AI 공개됐는데 링봇 터치가 쥐는 힘까지 본다는 게 의외네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-17T03:39:00.615Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "노타 사원수",
+      "issue": "노타",
+      "topic": "노타",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 223,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 223",
+        "선점 후보 — 경쟁 문서 223건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "노타가 두베와 금융권 AI 코딩 시장 공략에 나섰다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "노타 사원수 연봉 채용 금융권 AI 코딩 기업 규모",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "노타 사원수 얼마길래 노타 연봉 공고 보다가 이직 생각이 들더라고요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -176,17 +468,17 @@
           "source": "ai-verified"
         },
         {
-          "keyword": "노타 인턴",
-          "searchVolume": 10,
-          "documentCount": 202,
+          "keyword": "노타 상장",
+          "searchVolume": 20,
+          "documentCount": 11295,
           "source": "ai-verified"
         }
       ],
       "trend": null,
-      "kinCount": 0,
+      "kinCount": 16,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-11-17T03:14:24.359Z",
+      "measuredAt": "2026-11-17T03:39:00.615Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -295,135 +587,8 @@
       "monetize": null,
       "measuredAt": "2026-11-17T03:14:24.359Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "토스페이먼츠 앤트그룹",
-      "issue": "앤트그룹",
-      "topic": "앤트그룹",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 176,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 176",
-        "선점 후보 — 경쟁 문서 176건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "중국 앤트그룹이 로봇 촉각 AI 모델 '링봇 터치'를 오픈소스로 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "토스페이먼츠 앤트그룹 지분 관계와 투자 배경 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "토스페이먼츠에 앤트그룹 지분 있다는 거 의외로 모르더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 4,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-17T03:14:24.359Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "앤트그룹 촉각 AI",
-      "issue": "앤트그룹",
-      "topic": "앤트그룹",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 175,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 175",
-        "선점 후보 — 경쟁 문서 175건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "중국 앤트그룹이 로봇 촉각 AI 모델 '링봇 터치'를 오픈소스로 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "앤트그룹 촉각 AI 링봇 터치, 로봇이 잡는 힘까지 판단한다",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "앤트그룹 촉각 AI 링봇 터치가 로봇 손힘 조절하는 방식이 생각보다 다르네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-17T03:14:24.359Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "웹케시 rerp",
@@ -478,120 +643,8 @@
       "monetize": null,
       "measuredAt": "2026-11-17T03:14:24.359Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "노타 사원수",
-      "issue": "노타",
-      "topic": "노타",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 223,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 223",
-        "선점 후보 — 경쟁 문서 223건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "노타가 두베와 금융권 특화 AI 코딩 에이전트용 LLM·서버 공급 계약을 맺었다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "노타 사원수와 연봉, 금융권 AI 공급 업체 규모는",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "노타 사원수 보러 들어갔다가 노타 연봉 숫자에 눈이 더 오래 갔어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "노타 채용",
-          "searchVolume": 80,
-          "frame": "generic"
-        },
-        {
-          "keyword": "노타 기업정보",
-          "searchVolume": 30,
-          "frame": "generic"
-        },
-        {
-          "keyword": "노타 연봉",
-          "searchVolume": 20,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "노타 채용",
-          "searchVolume": 80,
-          "documentCount": 681,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "노타 기업정보",
-          "searchVolume": 30,
-          "documentCount": 9712,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "노타 연봉",
-          "searchVolume": 20,
-          "documentCount": 260,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "노타 매출",
-          "searchVolume": 20,
-          "documentCount": 7478,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "노타 상장",
-          "searchVolume": 20,
-          "documentCount": 11295,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 16,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-17T03:14:24.359Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "웹케시 하나은행 실증",
@@ -666,7 +719,8 @@
       "monetize": null,
       "measuredAt": "2026-11-17T03:14:24.359Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "웹케시 통합CMS",
@@ -746,7 +800,8 @@
       "monetize": null,
       "measuredAt": "2026-11-17T03:14:24.359Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "노타 퍼자켓",
@@ -1136,7 +1191,7 @@
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "정부가 국무회의에서 조작기소 특검법 공포안을 의결했다.",
+      "why": "특검법 공포안이 총리 주재 국무회의를 통과했다",
       "headlines": [
         {
           "title": "[속보]‘조작기소 특검법’ 국무회의 의결…李 재가해야 공포",
@@ -1145,16 +1200,16 @@
           "link": "https://n.news.naver.com/mnews/article/020/0003763046?sid=100"
         },
         {
-          "title": "[속보] 정부, 총리 주재 국무회의에서 '조작기소 특검법' 의결",
-          "press": "imnews.imbc.com",
-          "publishedAt": "2026-11-17T02:35:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/214/0001536080?sid=100"
+          "title": "‘조작기소 특검법’ 국무회의 의결⋯대통령 순방 중 총리가 주재",
+          "press": "chosun.com",
+          "publishedAt": "2026-11-17T02:36:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0004010069?sid=100"
         },
         {
-          "title": "[속보] 조작기소 특검법 국무회의 의결...\"12개 항목 대상\"",
-          "press": "ytn.co.kr",
-          "publishedAt": "2026-11-17T02:35:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/052/0002433912?sid=100"
+          "title": "'조작기소 특검법' 공포안 국무회의 통과…한 총리가 주재",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-11-17T02:36:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/055/0001403585?sid=100"
         }
       ],
       "concentrated": [
@@ -1178,7 +1233,7 @@
       "lane": "realtime",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "트럼프가 엔비디아 주식 830억원을 보유한 사실이 논란이다.",
+      "why": "트럼프가 엔비디아 주식 830억원을 보유한 사실이 드러났다",
       "headlines": [
         {
           "title": "[티조챗] 트럼프는 왜 젠슨황 감쌀까…엔비디아 주식 830억 때문? 백악관...",
@@ -1187,16 +1242,16 @@
           "link": "https://n.news.naver.com/mnews/article/448/0000651500?sid=104"
         },
         {
+          "title": "“엔비디아 주식 830억 원 보유”…트럼프, ‘젠슨황 복귀’ 시동? [지금...",
+          "press": "news.kbs.co.kr",
+          "publishedAt": "2026-11-17T03:02:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/056/0012295403?sid=121"
+        },
+        {
           "title": "트럼프·젠슨황 밀착 관계 도마에…엔비디아 기부·주식 보유 논란(종합...",
           "press": "news1.kr",
           "publishedAt": "2026-11-17T00:14:00.000Z",
           "link": "https://n.news.naver.com/mnews/article/421/0009292849?sid=104"
-        },
-        {
-          "title": "칩수출통제 완화하더니…\"트럼프, 엔비디아 주식 830억원 보유\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-16T14:56:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016445179?sid=104"
         }
       ],
       "concentrated": [
@@ -1215,7 +1270,7 @@
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "AI 부정행위 세무사 시험 수석 합격자가 경찰에 출석했다.",
+      "why": "AI 부정행위 세무사 수석 합격자가 피의자로 경찰에 출석했다",
       "headlines": [
         {
           "title": "'AI 커닝' 세무사 수석, 경찰 출석해 허리 숙여 사과…\"책임질 것\"",
@@ -1230,10 +1285,10 @@
           "link": "https://n.news.naver.com/mnews/article/001/0016445579?sid=102"
         },
         {
-          "title": "'AI 커닝' 세무사 수석 첫 경찰 출석…\"수험생께 죄송, 책임지겠다\"",
-          "press": "news1.kr",
-          "publishedAt": "2026-11-17T00:35:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009292929?sid=102"
+          "title": "'AI 부정행위' 세무사 수석 합격자 경찰 출석",
+          "press": "imnews.imbc.com",
+          "publishedAt": "2026-11-17T00:19:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/214/0001536043?sid=102"
         }
       ],
       "concentrated": [],
@@ -1246,7 +1301,7 @@
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "오태곤이 SSG와 3년 11억원에 FA 1호 계약했다.",
+      "why": "오태곤이 SSG와 3년 11억원 FA 1호 계약을 맺었다",
       "headlines": [
         {
           "title": "내년에도 ‘9시의 남자’ 오태곤은 SSG서…FA 1호 계약 ‘3년 11억’",
@@ -1277,8 +1332,14 @@
       "lane": "realtime",
       "issueStatus": "stable",
       "isHot": true,
-      "why": "성범죄·AI부정행위·살인 피의자 관련 사건이 잇따랐다.",
+      "why": "성범죄 피의자 추격 중 경찰 6명이 다쳤다",
       "headlines": [
+        {
+          "title": "'수석' 합격자가 피의자로‥\"수험생에 죄송\"",
+          "press": "imnews.imbc.com",
+          "publishedAt": "2026-11-17T03:03:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/214/0001536085?sid=102"
+        },
         {
           "title": "성범죄 피의자 '추격전'에 경찰 6명 부상…바퀴에 실탄 쏴 체포",
           "press": "news.jtbc.co.kr",
@@ -1290,12 +1351,6 @@
           "press": "news1.kr",
           "publishedAt": "2026-11-17T01:42:00.000Z",
           "link": "https://n.news.naver.com/mnews/article/421/0009293147?sid=102"
-        },
-        {
-          "title": "성범죄 피의자 추격전 끝 '탕탕탕'…경찰 6명 다쳤다",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-11-16T11:24:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/055/0001403423?sid=102"
         }
       ],
       "concentrated": [
@@ -1342,29 +1397,8 @@
       ],
       "nextWave": [
         {
-          "keyword": "피의자 구속영장",
-          "reason": "체포 후 구속 여부",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "피의자 신상공개",
-          "reason": "공개 결정 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "피의자 송치",
-          "reason": "검찰 송치 시점",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "피의자 혐의",
-          "reason": "적용 죄명 관심",
+          "keyword": "피의자 구속",
+          "reason": "영장 발부",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -1378,7 +1412,7 @@
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "한성숙 총리가 수능 중 스마트기기 휴대를 원천 차단하겠다고 밝혔다.",
+      "why": "한 총리가 수능 스마트기기 원천 차단을 지시했다",
       "headlines": [
         {
           "title": "韓 총리 \"수능 시험장 스마트기기 원천차단…전수점검\"",
@@ -1387,16 +1421,16 @@
           "link": "https://n.news.naver.com/mnews/article/015/0005354683?sid=102"
         },
         {
-          "title": "韓총리 “수험생 가방 복도에 보관하고 기기 작동여부 점검”",
-          "press": "donga.com",
-          "publishedAt": "2026-11-17T01:28:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/020/0003763011?sid=100"
-        },
-        {
           "title": "한 총리 \"수능 시험 중 스마트기기 휴대 원천 차단…안경·시계 전수 점...",
           "press": "newsis.com",
           "publishedAt": "2026-11-17T01:46:00.000Z",
           "link": "https://n.news.naver.com/mnews/article/003/0014326556?sid=100"
+        },
+        {
+          "title": "韓총리 \"수능 중 스마트기기 휴대 원천 차단…안경·시계 전수 점검\"",
+          "press": "news1.kr",
+          "publishedAt": "2026-11-17T01:40:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009293141?sid=100"
         }
       ],
       "concentrated": [],
@@ -1409,7 +1443,7 @@
       "lane": "realtime",
       "issueStatus": "stable",
       "isHot": true,
-      "why": "옵토닉스가 코스닥 상장 첫날 공모가 두 배로 급등했다.",
+      "why": "옵토닉스가 코스닥 상장 첫날 공모가 두 배로 급등했다",
       "headlines": [
         {
           "title": "[단독] 한투·신한 엔트로픽 상장 후 매수⋯미래에셋·KB, 공모주 노린다",
@@ -1472,7 +1506,15 @@
           "origin": "autocomplete"
         }
       ],
-      "nextWave": [],
+      "nextWave": [
+        {
+          "keyword": "엔트로픽 상장",
+          "reason": "IPO 일정",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
       "rowCount": 0
     },
     {
@@ -1481,7 +1523,7 @@
       "lane": "realtime",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "코스피가 3.59% 급락해 5,100선으로 후퇴했다.",
+      "why": "코스피가 3.59% 급락해 5100선으로 후퇴했다",
       "headlines": [
         {
           "title": "[속보] 코스피, 3.59% 급락…5,100선으로 후퇴",
@@ -1553,7 +1595,7 @@
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "임현주 아나운서가 육아휴직 후 퇴사 보도를 사실이 아니라고 반박했다.",
+      "why": "임현주가 육아휴직 후 퇴사 보도를 사실이 아니라고 반박했다",
       "headlines": [
         {
           "title": "임현주 \"두 번의 육아휴직 끝나자 MBC 퇴사? 사실 아냐\"",
@@ -1584,7 +1626,7 @@
       "lane": "realtime",
       "issueStatus": "stable",
       "isHot": true,
-      "why": "농심이 볶음너구리를 정식 판매하고 매콤마요 신제품을 출시한다.",
+      "why": "농심이 매콤마요 볶음너구리 등 신제품을 출시한다",
       "headlines": [
         {
           "title": "너구리 변신 계속된다…농심, '매콤마요 볶음너구리' 등 라인업 확대",
@@ -1593,16 +1635,16 @@
           "link": "https://n.news.naver.com/mnews/article/003/0014326458?sid=103"
         },
         {
-          "title": "[단독] '너구리' 장하권, 4년 만의 현역 복귀 타진",
-          "press": "inven.co.kr",
-          "publishedAt": "2026-11-17T01:45:00.000Z",
-          "link": "https://m.sports.naver.com/esports/article/442/0000198931"
-        },
-        {
           "title": "농심 볶음너구리, 내년 돌아온다…‘매콤마요’ 신제품도",
           "press": "biz.heraldcorp.com",
           "publishedAt": "2026-11-17T01:34:00.000Z",
           "link": "https://n.news.naver.com/mnews/article/016/0002724411?sid=101"
+        },
+        {
+          "title": "[단독] '너구리' 장하권, 4년 만의 현역 복귀 타진",
+          "press": "inven.co.kr",
+          "publishedAt": "2026-11-17T01:45:00.000Z",
+          "link": "https://m.sports.naver.com/esports/article/442/0000198931"
         }
       ],
       "concentrated": [
@@ -1642,8 +1684,88 @@
           "origin": "autocomplete"
         },
         {
-          "keyword": "너구리 순한맛",
-          "searchVolume": 2810,
+          "keyword": "너구리 영어로",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "너구리 추가 라인업",
+          "reason": "확대 제품",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "캘리포니아주",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "캘리포니아주가 허깅페이스 해킹 연루 혐의로 오픈AI를 제소했다",
+      "headlines": [
+        {
+          "title": "\"오픈AI가 대중을 위험에 빠트렸다\" 소송",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-16T22:33:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014326044?sid=104"
+        },
+        {
+          "title": "美 캘리포니아, '허깅페이스 해킹' 오픈AI 제소…\"최소 80건 공격 관여\"",
+          "press": "view.asiae.co.kr",
+          "publishedAt": "2026-11-16T22:09:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/277/0005843419?sid=104"
+        },
+        {
+          "title": "美캘리포니아, AI '허깅페이스 해킹' 사건 두고 오픈AI 제소",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-16T21:14:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016445246?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "미국 캘리포니아주",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "캘리포니아주 지도",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "캘리포니아주 시간",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "캘리포니아주 la",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "캘리포니아주 한국 크기차이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "캘리포니아주 도시",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "캘리포니아주 면적",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "캘리포니아주 인구",
+          "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
@@ -1656,25 +1778,25 @@
       "lane": "tech",
       "issueStatus": "declining",
       "isHot": false,
-      "why": "트럼프가 중국에서 김정은을 만날 수도 있다고 말했다.",
+      "why": "트럼프가 중국에서 김정은을 만날 수도 있다고 밝혔다",
       "headlines": [
         {
-          "title": "트럼프 \"김정은 중국서 만날 수도…시진핑에 달려\"",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-11-16T21:06:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/055/0001403481?sid=104"
+          "title": "트럼프, 김정은에 또 대화 손짓…이번엔 中 끌어들였다",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-16T21:13:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014326006?sid=104"
+        },
+        {
+          "title": "트럼프 \"중국서 김정은 만날 것‥시진핑에 달려\"",
+          "press": "imnews.imbc.com",
+          "publishedAt": "2026-11-16T21:03:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/214/0001535986?sid=104"
         },
         {
           "title": "트럼프 \"젠슨황 불륜녀 中스파이 아닐 수도…中자극 원치않아\"(종합)",
           "press": "yna.co.kr",
           "publishedAt": "2026-11-16T21:20:00.000Z",
           "link": "https://n.news.naver.com/mnews/article/001/0016445254?sid=104"
-        },
-        {
-          "title": "[단독] 트럼프 ‘유학생 체류 4년 제한’ 결국 무효…미 법원 “법률 취...",
-          "press": "hani.co.kr",
-          "publishedAt": "2026-11-16T20:56:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/028/0002832513?sid=104"
         }
       ],
       "concentrated": [
@@ -1721,15 +1843,8 @@
       ],
       "nextWave": [
         {
-          "keyword": "트럼프 방중",
-          "reason": "중국 방문 일정",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "트럼프 유학생 정책",
-          "reason": "체류제한 무효 영향",
+          "keyword": "트럼프 방중 일정",
+          "reason": "방문 시기",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -1743,8 +1858,14 @@
       "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "AI를 이용한 수능·시험 부정행위와 적발 기술이 논란이다.",
+      "why": "수능 AI 부정행위를 두고 국가 상대 소송 가능성이 제기됐다",
       "headlines": [
+        {
+          "title": "'AI 커닝' 세무사 수석, 경찰 출석…\"수험생에 죄송\" [영상]",
+          "press": "hankyung.com",
+          "publishedAt": "2026-11-17T00:22:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005354635?sid=102"
+        },
         {
           "title": "'AI 부정합격' 30대 경찰 출석...\"잘못 책임질 것\"",
           "press": "ytn.co.kr",
@@ -1756,12 +1877,6 @@
           "press": "mk.co.kr",
           "publishedAt": "2026-11-16T23:11:00.000Z",
           "link": "https://n.news.naver.com/mnews/article/009/0005764667?sid=102"
-        },
-        {
-          "title": "김정철 \"수능 AI 부정행위 발생 땐, 국가 상대 소송도 가능\"[한판승부]",
-          "press": "nocutnews.co.kr",
-          "publishedAt": "2026-11-16T22:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/079/0004210430?sid=102"
         }
       ],
       "concentrated": [],
@@ -1774,7 +1889,7 @@
       "lane": "tech",
       "issueStatus": "unknown",
       "isHot": false,
-      "why": "중국 앤트그룹이 로봇 촉각 AI 모델 '링봇 터치'를 오픈소스로 공개했다.",
+      "why": "앤트그룹이 로봇 촉각 AI '링봇 터치'를 오픈소스로 공개했다",
       "headlines": [
         {
           "title": "앤트그룹, 로봇에 '촉각' 더하는 AI 공개…물체 잡는 힘까지 판단",
@@ -1839,15 +1954,15 @@
       ],
       "nextWave": [
         {
-          "keyword": "앤트그룹 상장 재개",
-          "reason": "IPO 여부",
+          "keyword": "앤트그룹 상장",
+          "reason": "IPO 재개",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "앤트그룹 주가",
-          "reason": "투자 관심",
+          "keyword": "앤트그룹 토스",
+          "reason": "국내 연관",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -1861,7 +1976,7 @@
       "lane": "tech",
       "issueStatus": "unknown",
       "isHot": false,
-      "why": "중국 에이스가 AI 보컬 음악 생성에서 수노를 제치고 세계 1위에 올랐다.",
+      "why": "중국 에이스가 AI 음악 생성 세계 1위로 수노를 제쳤다",
       "headlines": [
         {
           "title": "부상과 부진 딛고 반등한 강소휘, 다시 '에이스'로",
@@ -1898,7 +2013,7 @@
       "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "KAIST가 중국 칭화대와 기계공학 석사 복수학위 과정을 개설한다.",
+      "why": "KAIST가 중국 칭화대와 기계공학 복수학위 석사과정을 개설한다",
       "headlines": [
         {
           "title": "KAIST, 중국 칭화대 오가며 석사 취득 복수학위과정 개설",
@@ -1961,7 +2076,15 @@
           "origin": "autocomplete"
         }
       ],
-      "nextWave": [],
+      "nextWave": [
+        {
+          "keyword": "KAIST 배터리",
+          "reason": "연구 성과",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
       "rowCount": 0
     },
     {
@@ -1970,7 +2093,7 @@
       "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "노타가 두베와 금융권 특화 AI 코딩 에이전트용 LLM·서버 공급 계약을 맺었다.",
+      "why": "노타가 두베와 금융권 AI 코딩 시장 공략에 나섰다",
       "headlines": [
         {
           "title": "노타, 두베와 금융권 AI 코딩 시장 공략…GPU 효율 최대 95% 개선",
@@ -2035,36 +2158,29 @@
       ],
       "nextWave": [
         {
-          "keyword": "노타 주가 전망",
-          "reason": "계약 후 주가",
+          "keyword": "노타 주가",
+          "reason": "계약 반응",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
           "keyword": "노타 상장일",
-          "reason": "상장 일정 관심",
+          "reason": "IPO 시점",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "노타 매출",
-          "reason": "계약 실적 영향",
+          "keyword": "AI 코딩 시장",
+          "reason": "산업 전망",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "AI 코딩 에이전트",
-          "reason": "시장 경쟁",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "노타 추가 계약",
-          "reason": "금융권 확대",
+          "keyword": "노타 실적",
+          "reason": "매출 영향",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -2078,7 +2194,7 @@
       "lane": "tech",
       "issueStatus": "declining",
       "isHot": false,
-      "why": "인텔이 PC 재고 부진을 늦게 공시했다며 주주들이 집단소송을 제기했다.",
+      "why": "인텔이 주가 29% 폭락 후 주주들에게 집단소송을 당했다",
       "headlines": [
         {
           "title": "\"악재 숨기고 230억달러 조달\"…인텔, 주주들로부터 피소",
@@ -2136,43 +2252,29 @@
           "origin": "autocomplete"
         },
         {
-          "keyword": "인텔 주식",
+          "keyword": "인텔 전망",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [
         {
-          "keyword": "인텔 소송 결과",
-          "reason": "집단소송 전망",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "인텔 주가 전망",
-          "reason": "회복 여부",
+          "keyword": "인텔 주가",
+          "reason": "이후 흐름",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
           "keyword": "인텔 실적",
-          "reason": "다음 분기 전망",
+          "reason": "다음 발표",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "인텔 배당",
-          "reason": "투자 영향",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "인텔 CEO",
-          "reason": "경영 책임 논란",
+          "keyword": "인텔 구조조정",
+          "reason": "대응책",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -2265,13 +2367,6 @@
           "onBoard": false
         },
         {
-          "keyword": "AI 자금관리 서비스",
-          "reason": "출시 시점",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
           "keyword": "웹케시 검증 결과",
           "reason": "시범사업 성과",
           "searchVolume": null,
@@ -2286,7 +2381,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     }
   ]
 }
