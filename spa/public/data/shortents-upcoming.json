@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T18:00:46.391Z",
+ "builtAt": "2026-11-17T18:10:49.795Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "중국 이재명 대통령",
    "sources": [
     "nate"
    ],
-   "articles90": 11,
-   "recent20": 5,
-   "press": 4,
+   "articles90": 12,
+   "recent20": 1,
+   "press": 5,
    "firstArticleAt": "2026-11-17T17:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "李대통령, 中 선전 도착…CEO 서밋으로 APEC 첫 일정",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-17T18:08:00.000Z",
+     "link": "https://www.ajunews.com/view/20261118030543668"
+    },
     {
      "title": "이재명 대통령 부부, 중국 선전 도착",
      "press": "newsis.com",
@@ -33,32 +39,26 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-17T17:47:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014328574?sid=100"
-    },
-    {
-     "title": "인사하는 이재명 대통령 부부",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-17T17:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014328575?sid=100"
     }
    ]
   },
   {
-   "keyword": "오세훈 선제골",
+   "keyword": "오세훈 결승골, 모레노호 1-0 승리",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-17T16:34:00.000Z",
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-17T16:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'김민재와 좌우 스위칭→오세훈 결승골 기점' 韓 축구 2004년생 센터백 ...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-17T17:47:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/076/0004467538"
+     "title": "모레노호, 카타르전 승리로 덮기 어려운 아쉬움 [축구 국가대표]",
+     "press": "newsq.co.kr",
+     "publishedAt": "2026-11-17T17:48:00.000Z",
+     "link": "https://www.newsq.co.kr/news/articleView.html?idxno=500937"
     },
     {
      "title": "'오세훈 결승골' 한국, 올해 마지막 A매치에서 카타르에 1-0 승리",
@@ -67,74 +67,10 @@
      "link": "https://m.sports.naver.com/kfootball/article/472/0000042501"
     },
     {
-     "title": "오세훈 ‘헤더’ 빛난 한국 축구 카타르에 1-0 승…‘모레노 체제’ 마...",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-17T16:56:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/028/0002832708"
-    }
-   ]
-  },
-  {
-   "keyword": "카타르 대 한국",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-17T16:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "오세훈 ‘헤더’ 빛난 한국 축구 카타르에 1-0 승…‘모레노 체제’ 마...",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-17T16:56:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/028/0002832708"
-    },
-    {
-     "title": "슈팅 22개 퍼붓고도 단 1골…경기 지배하니 결정력 부족 한국축구",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-17T16:39:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/119/0003156375"
-    },
-    {
-     "title": "'선발 7명 로테이션' 모레노호, 카타르 1-0 제압하고 올해 마지막 A매치...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-17T16:36:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/014/0005605827"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황, 이사회 요청 시 엔비디아 복귀 의사.",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-17T17:04:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "젠슨 황 복귀의사 공식화…\"이사회 요청시 응할것\"",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-17T17:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001978664?sid=104"
-    },
-    {
-     "title": "'불륜스캔들' 젠슨황 복귀의사 공식화…\"이사회 요청시 응할것\"(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-17T17:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016447678?sid=104"
-    },
-    {
-     "title": "젠슨 황 “이사회 요청 시 복귀”…내달 1일 美 하원 ‘스파이 스캔들’...",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-17T17:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003059725?sid=104"
+     "title": "'빅찬스 미스 3회' 결승골 넣고도 고개 숙인 오세훈 \"내가 너무 많이 놓...",
+     "press": "fourfourtwo.co.kr",
+     "publishedAt": "2026-11-17T16:55:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/411/0000090106"
     }
    ]
   }
