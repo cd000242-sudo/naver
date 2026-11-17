@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T18:41:00.090Z",
+ "builtAt": "2026-11-17T18:51:03.511Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,14 +11,46 @@
  "measured": 25,
  "candidates": [
   {
+   "keyword": "한국",
+   "sources": [
+    "google"
+   ],
+   "articles90": 9,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-17T17:23:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "11월 엔비디아 실적발표일 한국시간은",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-17T18:36:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611180002"
+    },
+    {
+     "title": "인도, 32조원 자국 선박 물량 풀었다…한국 조선 3사 뉴델리 집결한 이...",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-17T18:34:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=20261118032054135fbbec65dfb_1"
+    },
+    {
+     "title": "트럼프 “한국 투자로 알래스카 LNG 사업 승인”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-17T18:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004683298?sid=100"
+    }
+   ]
+  },
+  {
    "keyword": "중국 이재명 대통령",
    "sources": [
     "nate"
    ],
-   "articles90": 15,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-17T17:13:00.000Z",
+   "articles90": 13,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-17T17:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
