@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T04:27:52.692Z",
+ "builtAt": "2026-11-17T04:37:55.431Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,78 +8,81 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 18,
  "candidates": [
   {
-   "keyword": "조작기소 특검법 국무회의 통과",
+   "keyword": "조작기소 특검법 국무회의 의결",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 65,
+   "articles90": 61,
    "recent20": 10,
-   "press": 53,
-   "firstArticleAt": "2026-11-17T02:58:00.000Z",
+   "press": 44,
+   "firstArticleAt": "2026-11-17T03:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국힘 “조작기소 특검법은 ‘이재명 탈옥법’…사법권 짓밟은 헌정질서...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-17T04:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001205367?sid=100"
+     "title": "국힘 靑부터 정부청사까지 도보행진 ‘조작기소 특검법’ 국무회의 규탄...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-17T04:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002724563?sid=100"
     },
     {
-     "title": "'조작기소 특검법' 의결에 \"쿠데타\"라며 격분한 국힘",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-17T04:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002536134?sid=100"
+     "title": "380억·309명·200일…'역대급' 조작기소 특검 출범 현실화",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-17T04:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000552719?sid=102"
     },
     {
-     "title": "'조작기소 특검법', 한성숙 총리 주재 국무회의 통과",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-17T04:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002536135?sid=100"
+     "title": "정부, 조작기소 특검법 처리…韓총리가 주재",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-17T04:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003486577?sid=100"
     }
    ]
   },
   {
-   "keyword": "AI 부정행위 대응 강화",
+   "keyword": "공소청 스마트기기 부정행위 엄정 대응",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 32,
-   "recent20": 9,
-   "press": 29,
-   "firstArticleAt": "2026-11-17T02:59:00.000Z",
+   "articles90": 10,
+   "recent20": 3,
+   "press": 10,
+   "firstArticleAt": "2026-11-17T03:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[사설] ‘AI 커닝’에 수능·산업기밀 뚫려선 안 된다",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-17T04:26:00.000Z",
-     "link": "https://www.viva100.com/article/20261117500558"
-    },
-    {
-     "title": "수능 D-2, 정치권까지 흔든 AI 부정행위 파문",
-     "press": "00news.co.kr",
-     "publishedAt": "2026-11-17T04:26:00.000Z",
-     "link": "http://www.00news.co.kr/news/articleView.html?idxno=108120"
+     "title": "공소청 \"스마트기기 부정행위 엄단…정식 재판 원칙\"",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-17T04:32:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=172601"
     },
     {
      "title": "공소청, AI·스마트안경 동원한 시험 부정행위 무관용 엄단…초범도 정...",
      "press": "goodmorningcc.com",
      "publishedAt": "2026-11-17T04:26:00.000Z",
      "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=455979"
+    },
+    {
+     "title": "극에 달한 '수능 부정행위' 우려…공소청 \"재범 여부 등 불문 재판 넘길...",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-17T04:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000142443?sid=102"
     }
    ]
   },
   {
-   "keyword": "나가야마 에이타, 손석구와 한국 사랑",
+   "keyword": "푸른길 나가야마 한국 사랑 중",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 8,
+   "articles90": 9,
    "recent20": 1,
    "press": 8,
    "firstArticleAt": "2026-11-17T03:09:00.000Z",
@@ -93,31 +96,38 @@
      "link": "http://digitalchosun.dizzo.com/site/data/html_dir/2026/11/17/2026111780102.html"
     },
     {
+     "title": "'푸른길' 한준희 감독이 끌어낸 새로움, \"좋은 작품\" 무한 믿음·자신감...",
+     "press": "joynews24.com",
+     "publishedAt": "2026-11-17T04:12:00.000Z",
+     "link": "http://www.joynews24.com/view/2027089"
+    },
+    {
      "title": "'푸른길' 손석구x나가야마 에이타, 국경 넘은 한·일 콤비...\"장벽 넘어...",
      "press": "starnewsk.com",
      "publishedAt": "2026-11-17T03:40:00.000Z",
      "link": "http://www.starnewsk.com/news/articleView.html?idxno=61090"
-    },
-    {
-     "title": "‘푸른길’ 나가야마 에이타 “한국인의 국민성 사랑하게 돼”…한국어...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-17T03:35:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001150244"
     }
    ]
   },
   {
    "keyword": "김정은, 삼지연 방문",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-17T03:03:00.000Z",
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-17T03:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "트럼프 선거 패배 후 아시아 첫 순방길 \"김정은 만날지 몰라\"…김정은 ...",
+     "press": "kado.net",
+     "publishedAt": "2026-11-17T04:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000211722?sid=100"
+    },
     {
      "title": "김정은 삼지연 관광지구 현지지도…김주애 스키 모습 공개",
      "press": "gukjenews.com",
@@ -129,83 +139,206 @@
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-17T03:58:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/079/0004210598?sid=100"
-    },
-    {
-     "title": "김정은, 북·중 접경 삼지연 관광지구 건설현장 시찰",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-17T03:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926970?sid=100"
     }
    ]
   },
   {
-   "keyword": "트럼프 엔비디아 주식",
+   "keyword": "나의 유죄인간",
    "sources": [
-    "signal.bz"
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-17T03:41:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'나의 유죄인간' 남해준, 설인아에 직진 고백 \"남자로 곁에 있고 싶다\"",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-17T04:36:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109943559063"
+    },
+    {
+     "title": "임시완, 최희진과 파혼… ♥설인아와 키스엔딩 (나의 유죄인간)",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-17T04:31:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001305263"
+    },
+    {
+     "title": "‘나의 유죄인간’ 남해준, 절절한 순애보",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-17T04:23:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001281507"
+    }
+   ]
+  },
+  {
+   "keyword": "보습크림 품질 비교",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-17T03:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“잘 살펴보고 고르세요”… 시중 판매 8개 보습크림, 품질 등 천차만별",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-17T04:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000161489?sid=101"
+    },
+    {
+     "title": "보습크림 8종 비교해 보니…'ㅇㅇㅇ' 만족도 높고 가격도 저렴",
+     "press": "kado.net",
+     "publishedAt": "2026-11-17T04:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000211714?sid=101"
+    },
+    {
+     "title": "보습크림 8종 비교 평가…가격 차이 6.9배",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-17T04:00:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1731970"
+    }
+   ]
+  },
+  {
+   "keyword": "면세점",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-17T03:20:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "신라면세점, '블랑톤' 단독 출시…첫 주 초도 물량 소진",
+     "press": "cstimes.com",
+     "publishedAt": "2026-11-17T04:24:00.000Z",
+     "link": "https://www.cstimes.com/news/articleView.html?idxno=728228"
+    },
+    {
+     "title": "신라면세점, 프리미엄 버번 위스키 '블랑톤' 단독 출시",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-17T03:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003486559?sid=101"
+    },
+    {
+     "title": "신라면세점, '블랑톤' 국내 면세점 단독 입점…프리미엄 위스키 영토 확...",
+     "press": "thefairnews.co.kr",
+     "publishedAt": "2026-11-17T03:22:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94496"
+    }
+   ]
+  },
+  {
+   "keyword": "장동혁 대표 토론회 참석",
+   "sources": [
+    "signal.bz",
+    "nate"
    ],
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-17T03:02:00.000Z",
+   "firstArticleAt": "2026-11-17T03:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "트럼프, 엔비디아 주식 최대 830억 보유 추정…중국 수출 허용에 이해충...",
-     "press": "aitimes.com",
-     "publishedAt": "2026-11-17T04:22:00.000Z",
-     "link": "https://www.aitimes.com/news/articleView.html?idxno=217483"
+     "title": "국민의힘, 주택저당증권(MBS) 활성화 토론회 개최",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-17T04:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000367763?sid=100"
     },
     {
-     "title": "벼랑 끝 670조 AI 지원, 젠슨 복귀 로비 통할까 [트럼프 스톡커]",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-17T03:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004683053?sid=104"
+     "title": "[포토]'토론회 참석하는 장동혁 대표'",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-17T03:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006411069?sid=100"
     },
     {
-     "title": "“엔비디아 주식 830억 원 보유”…트럼프, ‘젠슨황 복귀’ 시동? [지금...",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-17T03:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012295403?sid=121"
+     "title": "장동혁 \"부동산 지옥 탈출하는 길은 李정권 탈출하는 길뿐\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-17T03:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014327042?sid=100"
     }
    ]
   },
   {
-   "keyword": "발언하는 장동혁 대표",
+   "keyword": "담보 대출",
    "sources": [
-    "signal.bz"
+    "google"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-17T02:58:00.000Z",
+   "firstArticleAt": "2026-11-17T03:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "장동혁 \"AI 부정행위 대책 없다면 수능 연기라도 검토해야\"",
-     "press": "goodkyung.com",
-     "publishedAt": "2026-11-17T03:12:00.000Z",
-     "link": "https://www.goodkyung.com/news/articleView.html?idxno=293536"
+     "title": "예금 늘고 대출 주춤한 카카오뱅크, 단기자금 비중 25%로 확대",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-17T04:20:00.000Z",
+     "link": "https://www.viva100.com/article/20261115500052"
     },
     {
-     "title": "AI 커닝 대책? 이준석은 '전파탐지 앱', 장동혁은 '수능 연기'",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-17T03:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002536125?sid=100"
+     "title": "\"대출 억제로 주거 사다리 복원 못 해\"… 국회서 MBS 활성화 목소리",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-17T04:10:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3449390"
     },
     {
-     "title": "[포토] 현장 의총서 발언하는 장동혁 국민의힘 대표",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-17T02:58:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/17/2026111750148.html"
+     "title": "대출 2026년 11월 브랜드평판...하나은행, SBI저축은행, 국민은행 順",
+     "press": "energy-news.co.kr",
+     "publishedAt": "2026-11-17T03:20:00.000Z",
+     "link": "https://www.energy-news.co.kr/news/articleView.html?idxno=229846"
+    }
+   ]
+  },
+  {
+   "keyword": "마약 사범 86명 검거",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-17T03:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘흥분제’라는 말에 발동한 호기심…친구·연인 따라 시작한 마약, 공...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-17T03:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002724548?sid=102"
+    },
+    {
+     "title": "친구·연인에게 마약 권유… 투약·유통 일당 86명 무더기 검거",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-17T03:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001205363?sid=102"
+    },
+    {
+     "title": "'지인 권유'에 빠진 일반인 마약…86명 입건·29명 구속",
+     "press": "youthdaily.co.kr",
+     "publishedAt": "2026-11-17T03:14:00.000Z",
+     "link": "https://www.youthdaily.co.kr/news/article.html?no=229955"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 857,
+  "flagged": 862,
   "matched": 468,
   "avgLeadMin": 853,
   "recent": [
