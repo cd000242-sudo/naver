@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T01:57:07.087Z",
+ "builtAt": "2026-11-17T02:07:09.685Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,62 +16,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 78,
-   "recent20": 7,
+   "articles90": 76,
+   "recent20": 4,
    "press": 56,
-   "firstArticleAt": "2026-11-17T00:38:00.000Z",
+   "firstArticleAt": "2026-11-17T00:41:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "'AI 커닝' 세무사 수석, 고개 숙인 채 경찰로…취재진 앞 꺼낸 말들",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-17T02:04:00.000Z",
+     "link": "https://www.ajunews.com/view/20261117105939585"
+    },
+    {
+     "title": "'AI 부정행위' 세무사 수석, 경찰 출석해 90도 숙여 사과… \"책임 지겠다...",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-17T02:00:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3449326"
+    },
     {
      "title": "[영상] \"책임질 것\" 허리 숙인 'AI커닝' 세무사 수석…'혼자 했나' 묻자",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-17T01:50:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016445903?sid=102"
-    },
-    {
-     "title": "부정행위 수석 합격자 경찰 출석해 사과",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-17T01:48:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4119002"
-    },
-    {
-     "title": "'AI 커닝' 세무사 시험 수석 합격자 한 씨 경찰 출석",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-17T01:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000651523?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "갤럭시 AI 클래스 도입",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 46,
-   "recent20": 5,
-   "press": 45,
-   "firstArticleAt": "2026-11-17T00:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "삼성전자, 중학교 AI 교육에 '갤럭시 XR' 투입···누적 수료생 20만명 ...",
-     "press": "enewstoday.co.kr",
-     "publishedAt": "2026-11-17T01:55:00.000Z",
-     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2493325"
-    },
-    {
-     "title": "삼성전자, 중학교 AI 교육에 '갤럭시 XR' 도입",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-17T01:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001075647?sid=101"
-    },
-    {
-     "title": "교실에 들어온 '갤럭시 XR'…삼성 AI 수업, 체험형으로 확장",
-     "press": "socialvalue.kr",
-     "publishedAt": "2026-11-17T01:44:00.000Z",
-     "link": "https://www.socialvalue.kr/news/view/1065577342753947"
     }
    ]
   },
@@ -80,169 +48,208 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 37,
-   "recent20": 17,
+   "articles90": 41,
+   "recent20": 22,
    "press": 19,
-   "firstArticleAt": "2026-11-17T00:34:00.000Z",
+   "firstArticleAt": "2026-11-17T01:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "조작기소 특검법 의결 반대하며 행진하는 국힘",
+     "title": "공수처 \"조작기소 특검에 공수처 검사 파견, 규정상 가능 \"",
      "press": "news1.kr",
-     "publishedAt": "2026-11-17T01:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009293183?sid=100"
+     "publishedAt": "2026-11-17T02:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009293256?sid=102"
     },
     {
-     "title": "'조작기소 특검법' 국무회의 의결 반대하며 행진하는 국민의힘",
+     "title": "국힘 2주째 靑앞 의총…\"韓총리, '귀태' 특검법 산파될텐가\"",
      "press": "yna.co.kr",
-     "publishedAt": "2026-11-17T01:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016445920?sid=100"
+     "publishedAt": "2026-11-17T02:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016445963?sid=100"
     },
     {
-     "title": "장동혁 “국무위원들 모두 공범”…野 ‘조작기소 특검법’ 장외투쟁 본...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-17T01:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002724426?sid=100"
+     "title": "청와대 앞 의총 연 국힘…“특검법 의결 강행하면 총리, 국무위원도 공...",
+     "press": "busan.com",
+     "publishedAt": "2026-11-17T02:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001407520?sid=100"
     }
    ]
   },
   {
-   "keyword": "군용기 KADIZ 진입 대응",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 14,
-   "recent20": 1,
-   "press": 14,
-   "firstArticleAt": "2026-11-17T00:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "러 군용기 여러 대, 동해 카디즈 진입…軍 전투기 출격 대응",
-     "press": "goodnews1.com",
-     "publishedAt": "2026-11-17T01:38:00.000Z",
-     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466287"
-    },
-    {
-     "title": "미·중·러 회담 앞두고 북·러 밀착…러 군용기 동해 KADIZ 진입",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-17T01:34:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1320694&inflow=N"
-    },
-    {
-     "title": "러 군용기 여러 대 새벽 KADIZ 진입…공군 전투기 출격대응",
-     "press": "tbs.seoul.kr",
-     "publishedAt": "2026-11-17T01:15:00.000Z",
-     "link": "http://tbs.seoul.kr/news/newsView.do?typ_800=9&idx_800=3538777&seq_800=20531678"
-    }
-   ]
-  },
-  {
-   "keyword": "김주애",
+   "keyword": "전쟁",
    "sources": [
     "signal.bz",
     "google"
    ],
-   "articles90": 10,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-17T00:36:00.000Z",
+   "articles90": 11,
+   "recent20": 3,
+   "press": 11,
+   "firstArticleAt": "2026-11-17T01:17:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "스키 타는 北 김주애 사진 공개...'200만원' 스키복 착용 추정",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-17T01:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002433886?sid=100"
+     "title": "이란戰 참전 미군 장교, 국방부 고발…\"준비 안 된 전쟁 수행\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-17T01:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004210544?sid=104"
     },
     {
-     "title": "흰색 스키복 입고 등장한 김주애...상·하의 합치면 최대 200만원?",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-17T01:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003156030?sid=100"
+     "title": "우승상금 400만 달러 ‘별들의 전쟁’…한국 군단 시즌 7승 합작 ‘정조...",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-17T01:55:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/005/0001885608"
     },
     {
-     "title": "설원 가른 김주애…흰색 스키복 어디 제품인가 보니",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-17T01:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005843620?sid=100"
+     "title": "핵심광물 전쟁 속 5년 만에 빗장 푸는 해외 자원투자 … '제2의 볼레오'...",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-17T01:50:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/17/2026111750089.html"
     }
    ]
   },
   {
-   "keyword": "한병도 원내대표 회의 참석",
+   "keyword": "한병도 원내대표 발언",
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-17T00:56:00.000Z",
+   "articles90": 21,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-17T00:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[포토] 더불어민주당 원내대책회의",
-     "press": "sisafocus.co.kr",
-     "publishedAt": "2026-11-17T01:54:00.000Z",
-     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367689"
+     "title": "발언하는 민주당 한병도 원내대표",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-17T02:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005764783?sid=100"
     },
     {
-     "title": "남종섭 경기도의회 의장 \"지방의회법 연내 제정 이끌겠다\"",
-     "press": "kmaeil.com",
-     "publishedAt": "2026-11-17T01:52:00.000Z",
-     "link": "https://www.kmaeil.com/news/articleView.html?idxno=658566"
+     "title": "한병도 \"AI 악용 국가시험 부정행위 용납 못 해… 수능 범정부 대응태세...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-17T01:46:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261117000489"
     },
     {
-     "title": "한병도 \"AI 부정행위, 법과 원칙에 따라 엄정히 대응할 것\" [TF사진관]",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-17T01:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000552590?sid=100"
+     "title": "한병도 \"합격 취소·응시 제한·수사 의뢰…AI 부정행위, 엄정 대응\"",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-17T01:44:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1320700&inflow=N"
     }
    ]
   },
   {
-   "keyword": "장동혁, 한동훈 빙부상 조문",
+   "keyword": "FA 1호 계약 확정!",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 9,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-17T00:43:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "양의지, 두산과 2년 최대 55억원 FA 계약…2027년 시장 1호 계약",
+     "press": "dailysportshankook.co.kr",
+     "publishedAt": "2026-11-17T02:06:00.000Z",
+     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435613"
+    },
+    {
+     "title": "'FA 1호 계약' 양의지, 두산 잔류…2년 최대 55억원(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-17T01:50:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/001/0016445901"
+    },
+    {
+     "title": "베테랑 포수 양의지, 두산 잔류 확정…FA 1호 계약",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-17T01:42:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261117010006402"
+    }
+   ]
+  },
+  {
+   "keyword": "파라타항공",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 7,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-17T00:35:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-17T00:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "장동혁, 한동훈 빙부상 조문…정점식 오후 방문·오세훈 전날 발걸음",
+     "title": "파라타항공, LA 항공권 판매 개시…대한항공·에어프레미아와 미주 노선...",
      "press": "kukinews.com",
-     "publishedAt": "2026-11-17T01:54:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611170047"
+     "publishedAt": "2026-11-17T02:02:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611170062"
     },
     {
-     "title": "'3분 조문' 장동혁, 마주앉지 않은 오세훈…먼 보수통합",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-17T01:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005354693?sid=100"
+     "title": "파라타항공, 첫 미주 노선 LA 항공권 판매 개시… 내년 5월 취항",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-17T01:44:00.000Z",
+     "link": "https://www.viva100.com/article/20261117500418"
     },
     {
-     "title": "국민의힘 '투톱' 장동혁·정점식, 한동훈 장인상 조문",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-17T01:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001403568?sid=100"
+     "title": "파라타항공, 내년 5월 인천~LA 매일 운항…첫 미주 노선 판매 개시",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-17T01:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005442178?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "이용철 법무부 후보자",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-17T01:01:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[AI 판결 돋보기] \"원고의 주장에 의하더라도\"…이용철 5·18 보상 소송,...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-17T02:02:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261116001162"
+    },
+    {
+     "title": "이용철 성남산업진흥재단, 대장동 관련 인력↑…\"조직 커져 인재 필요\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-17T01:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009293195?sid=102"
+    },
+    {
+     "title": "[단독] 이용철, '꼼수 1주택자' 논란 … 딸에 증여한 단독 주택, 본인 주...",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-17T01:20:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/17/2026111750041.html"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 816,
-  "matched": 460,
-  "avgLeadMin": 863,
+  "flagged": 820,
+  "matched": 461,
+  "avgLeadMin": 861,
   "recent": [
+   {
+    "keyword": "엔비디아 젠슨 황 복귀 논의 없다",
+    "hitKeyword": "트럼프 엔비디아 주식",
+    "hitAt": "2026-11-17T11:00:00+09:00",
+    "leadMin": 83
+   },
    {
     "keyword": "로버트 패틴슨 007 발탁",
     "hitKeyword": "로버트 패틴슨 007",
@@ -296,12 +303,6 @@
     "hitKeyword": "우리들의 발라드2 경연",
     "hitAt": "2026-11-17T09:30:00+09:00",
     "leadMin": 54
-   },
-   {
-    "keyword": "이정현 12월 결혼",
-    "hitKeyword": "이정현 12월 결혼",
-    "hitAt": "2026-11-17T09:00:00+09:00",
-    "leadMin": 144
    }
   ]
  }
