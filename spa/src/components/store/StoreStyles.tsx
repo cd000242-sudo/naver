@@ -72,6 +72,16 @@ function StoreStyles() {
             .st-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
             @media (max-width: 980px) { .st-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
             @media (max-width: 640px) { .st-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; } }
+            /* Two columns with three single products left the third one alone beside an empty half (641-980px):
+               it takes the full row instead, clip on the left and price on the right. */
+            @media (min-width: 641px) and (max-width: 980px) {
+                .st-grid:not(.st-grid-2) > .st-card:not(.st-bundle):nth-child(4):last-child {
+                    grid-column: 1 / -1; flex-direction: row; align-items: stretch;
+                }
+                .st-grid:not(.st-grid-2) > .st-card:not(.st-bundle):nth-child(4):last-child > .st-shot { flex: 0 0 50%; aspect-ratio: auto; border-bottom: 0; border-right: 1px solid var(--st-line); }
+                .st-grid:not(.st-grid-2) > .st-card:not(.st-bundle):nth-child(4):last-child > .st-body { flex: 1 1 50%; min-width: 0; }
+                .st-grid:not(.st-grid-2) > .st-card:not(.st-bundle):nth-child(4):last-child > .st-shot video { object-fit: contain; }
+            }
             /* Two single-product cards: two columns, no empty third cell. */
             .st-grid.st-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             @media (max-width: 640px) { .st-grid.st-grid-2 { grid-template-columns: minmax(0, 1fr); } }
