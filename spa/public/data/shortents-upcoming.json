@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T00:46:43.398Z",
+ "builtAt": "2026-11-17T00:56:47.303Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,101 +8,103 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 10,
  "candidates": [
-  {
-   "keyword": "삼성 갤럭시 AI XR 도입",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 49,
-   "recent20": 17,
-   "press": 44,
-   "firstArticleAt": "2026-11-16T23:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "삼성전자, '갤럭시 AI 클래스'에 XR 도입…누적 수료생 20만명 돌파",
-     "press": "fetv.co.kr",
-     "publishedAt": "2026-11-17T00:46:00.000Z",
-     "link": "https://www.fetv.co.kr/news/articleView.html?idxno=313819"
-    },
-    {
-     "title": "삼성전자, ‘갤럭시 XR’로 교실 속 AI 경험 확대",
-     "press": "news2day.co.kr",
-     "publishedAt": "2026-11-17T00:46:00.000Z",
-     "link": "https://www.news2day.co.kr/article/20261117500062"
-    },
-    {
-     "title": "삼성전자, ‘갤럭시 AI 클래스’에 XR 도입…“AI 교육 확대”",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-17T00:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/117/0004125674?sid=105"
-    }
-   ]
-  },
   {
    "keyword": "제니 그래미 후보",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "daum"
    ],
-   "articles90": 24,
+   "articles90": 25,
    "recent20": 5,
    "press": 24,
-   "firstArticleAt": "2026-11-16T23:25:00.000Z",
+   "firstArticleAt": "2026-11-16T23:29:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "BTS 보이콧한 미국 그래미, 블핑 제니 받을까?",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-17T00:44:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1137910"
+     "title": "블랙핑크 제니, 홀로서기 1년만 그래미 본상 뚫었다…BTS는 출품 거부(종...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-17T00:52:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001150202"
     },
     {
-     "title": "제니, 美 그래미 '올해의 레코드' 포함 2개 부문 후보...'아시안 팝'엔 ...",
-     "press": "starnewsk.com",
-     "publishedAt": "2026-11-17T00:44:00.000Z",
-     "link": "http://www.starnewsk.com/news/articleView.html?idxno=61075"
+     "title": "블랙핑크 제니, 美 그래미 '올해의 레코드' 후보..데뷔 첫 노미네이트",
+     "press": "ize.co.kr",
+     "publishedAt": "2026-11-17T00:50:00.000Z",
+     "link": "https://m.entertain.naver.com/article/465/0000021053"
     },
     {
-     "title": "제니, 테임 임팔라 협업곡 'Dracula'로 그래미 2개 부문 후보",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-17T00:32:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16278628"
+     "title": "제니, 데뷔 후 첫 그래미 후보 지명..‘올해의 레코드’ 이름 올려",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-17T00:48:00.000Z",
+     "link": "http://www.breaknews.com/1251491"
     }
    ]
   },
   {
-   "keyword": "최교진 교육부 장관",
+   "keyword": "축구",
    "sources": [
-    "daum"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 24,
-   "recent20": 9,
-   "press": 19,
-   "firstArticleAt": "2026-11-16T23:21:00.000Z",
+   "articles90": 21,
+   "recent20": 8,
+   "press": 20,
+   "firstArticleAt": "2026-11-16T23:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김민석 “AI 부정행위 10년 제재 강화…최교진 답변, 우려 자아내”",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-17T00:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004010046?sid=100"
+     "title": "프로축구연맹, K리그 추춘제 대비 EPL 경기장 방문… “겨울철 잔디 관...",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-17T00:53:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/396/0000761146"
     },
     {
-     "title": "\"수능 연기 안 해 직무유기\"…최교진 교육장관 고발 당해",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-17T00:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005354657?sid=102"
+     "title": "축구장 미세플라스틱 줄인다…CJ제일제당, 국가대표 훈련시설에 친환경...",
+     "press": "techm.kr",
+     "publishedAt": "2026-11-17T00:52:00.000Z",
+     "link": "https://www.techm.kr/news/articleView.html?idxno=157418"
     },
     {
-     "title": "최교진 \"수능 연기 없다…AI 부정행위 추가 대책 검토\"",
-     "press": "kbsm.net",
-     "publishedAt": "2026-11-17T00:42:00.000Z",
-     "link": "https://www.kbsm.net/news/view.php?idx=542002"
+     "title": "CJ제일제당, 국내 축구장 첫 '생분해 인조잔디' 적용…미세플라스틱 줄...",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-17T00:52:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2019434"
+    }
+   ]
+  },
+  {
+   "keyword": "아리바이오 치매약 임상",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 14,
+   "recent20": 3,
+   "press": 14,
+   "firstArticleAt": "2026-11-16T23:28:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "아리바이오 \"먹는 치매약, 임상적 악화 31% 지연…美 허가신청 예정\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-17T00:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005442137?sid=101"
+    },
+    {
+     "title": "아리바이오 치매약 임상3상 1차 목표 달성, 전체 환자군에서는 효과 입...",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-17T00:50:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=452137"
+    },
+    {
+     "title": "아리바이오 먹는 치매약 3상 '부분 성공'…FDA 허가는 미지수(종합)",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-17T00:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005843569?sid=103"
     }
    ]
   },
@@ -112,10 +114,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 15,
-   "recent20": 5,
-   "press": 15,
-   "firstArticleAt": "2026-11-16T23:18:00.000Z",
+   "articles90": 13,
+   "recent20": 4,
+   "press": 13,
+   "firstArticleAt": "2026-11-16T23:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -140,50 +142,23 @@
    ]
   },
   {
-   "keyword": "축구",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 14,
-   "recent20": 5,
-   "press": 14,
-   "firstArticleAt": "2026-11-16T23:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "포장재 넘어 축구장까지... CJ제일제당, 생분해 소재 'PHA' B2B 시장 영토...",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-17T00:42:00.000Z",
-     "link": "https://www.insight.co.kr/news/582337"
-    },
-    {
-     "title": "[우리동네 스포츠팀] 생거진천(生居鎭川), 이제는 '축구 진천'",
-     "press": "jbnews.com",
-     "publishedAt": "2026-11-17T00:32:00.000Z",
-     "link": "https://www.jbnews.com/news/articleView.html?idxno=1516112"
-    },
-    {
-     "title": "축구장 '고무칩' 바꾼다…CJ제일제당, 국내 첫 PHA 충전재 도입",
-     "press": "newsinside.kr",
-     "publishedAt": "2026-11-17T00:30:00.000Z",
-     "link": "https://www.newsinside.kr/news/articleView.html?idxno=5050101"
-    }
-   ]
-  },
-  {
    "keyword": "엔비디아 젠슨 황 복귀 논의 없다",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 4,
-   "press": 12,
-   "firstArticleAt": "2026-11-16T23:21:00.000Z",
-   "exclusive": true,
+   "articles90": 11,
+   "recent20": 3,
+   "press": 11,
+   "firstArticleAt": "2026-11-16T23:28:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'엔비디아 반전은 없었다', 젠슨황 복귀설 부인과 함께 하향곡선",
+     "press": "economist.co.kr",
+     "publishedAt": "2026-11-17T00:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/243/0000105769?sid=101"
+    },
     {
      "title": "[뉴욕 브리핑] 젠슨황 쇼크 지속…나스닥 2.5% 급락",
      "press": "news.dealsitetv.com",
@@ -191,16 +166,10 @@
      "link": "https://news.dealsitetv.com/articles/178699"
     },
     {
-     "title": "[티조챗] 트럼프는 왜 젠슨황 감쌀까…엔비디아 주식 830억 때문? 백악관...",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-17T00:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000651500?sid=104"
-    },
-    {
-     "title": "트럼프 \"젠슨황 불륜녀 中스파이 아닐 수도…中자극 원치않아\"",
-     "press": "getnews.co.kr",
-     "publishedAt": "2026-11-17T00:34:00.000Z",
-     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=887407"
+     "title": "미국, AI 반도체 중국 원격 접속 차단…엔비디아 “안보 문제 조사”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-17T00:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012295278?sid=104"
     }
    ]
   },
@@ -209,10 +178,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 5,
-   "press": 11,
-   "firstArticleAt": "2026-11-16T23:25:00.000Z",
+   "articles90": 10,
+   "recent20": 3,
+   "press": 10,
+   "firstArticleAt": "2026-11-16T23:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -237,66 +206,34 @@
    ]
   },
   {
-   "keyword": "아리바이오 치매약 임상",
+   "keyword": "장동혁, 한동훈 빙부상 조문",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-16T23:28:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[특징주] 아리바이오랩·홀딩스, 치매약 전체 환자군 효과 입증 실패에...",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-17T00:30:00.000Z",
-     "link": "https://www.viva100.com/article/20261117500076"
-    },
-    {
-     "title": "[특징주] ‘먹는 치매약’ 임상 3상 1차 목표 달성했지만…아리바이오 ...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-17T00:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001205273?sid=101"
-    },
-    {
-     "title": "삼진제약 도입 치매약 'AR1001', 3상서 엇갈린 결과",
-     "press": "medipana.com",
-     "publishedAt": "2026-11-17T00:22:00.000Z",
-     "link": "https://www.medipana.com/news/articleView.html?idxno=421982"
-    }
-   ]
-  },
-  {
-   "keyword": "수능일",
-   "sources": [
-    "google"
-   ],
-   "articles90": 12,
-   "recent20": 3,
-   "press": 10,
-   "firstArticleAt": "2026-11-16T23:19:00.000Z",
+   "articles90": 15,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-16T23:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[부산 브리핑 모음(11월17일)] 부산시, 수능일 교통·의료 등 종합지원대...",
-     "press": "dnews.co.kr",
-     "publishedAt": "2026-11-17T00:42:00.000Z",
-     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611161731504700321"
+     "title": "장동혁, 한동훈 빙부상 조문 … 국민의힘 지도부와 함께 빈소 찾아",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-17T00:56:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/17/2026111750058.html"
     },
     {
-     "title": "서울시, 수능일 지하철 27회 증편 운행",
-     "press": "news.skbroadband.com",
-     "publishedAt": "2026-11-17T00:42:00.000Z",
-     "link": "https://news.skbroadband.com/news/articleView.html?idxno=243291"
+     "title": "한동훈 빙부상 조문한 장동혁..짧은 대화 뒤 이석",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-17T00:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005605339?sid=100"
     },
     {
-     "title": "영등포구, 수능일 특별교통대책…수험생 수송차량 34대 배치",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-17T00:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016445600?sid=102"
+     "title": "장동혁, 한동훈 빙부상 빈소 조문…국힘 지도부 동행",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-17T00:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006410916?sid=100"
     }
    ]
   },
@@ -305,10 +242,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-16T23:24:00.000Z",
+   "articles90": 6,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-16T23:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -329,102 +266,6 @@
      "press": "youthdaily.co.kr",
      "publishedAt": "2026-11-17T00:14:00.000Z",
      "link": "https://www.youthdaily.co.kr/news/article.html?no=229936"
-    }
-   ]
-  },
-  {
-   "keyword": "장동혁, 한동훈 빙부상 조문",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 13,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-16T23:49:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "장동혁, 한동훈 빙부상 빈소 조문…국힘 지도부 동행",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-17T00:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006410916?sid=100"
-    },
-    {
-     "title": "장동혁, 한동훈 빙부상 조문⋯지도부 8명 동행",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-17T00:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001075594?sid=100"
-    },
-    {
-     "title": "장동혁, 한동훈 장인상 조문…4개월여 만에 한자리서 담소",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-17T00:16:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2649042"
-    }
-   ]
-  },
-  {
-   "keyword": "변동성",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-17T00:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "코스피 5,000선 위태...투자자들 불안 속 주식시장 변동성 급증",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-17T00:38:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=885989"
-    },
-    {
-     "title": "NH투자증권 \"내년 코스피 9200P 전망\"…상반기 순풍·하반기 변동성 예상",
-     "press": "newsdream.kr",
-     "publishedAt": "2026-11-17T00:26:00.000Z",
-     "link": "http://www.newsdream.kr/news/articleView.html?idxno=122301"
-    },
-    {
-     "title": "변동성 커진 연금 시장 겨냥…한국투자증권, 유튜브 시황 라이브로 자산...",
-     "press": "thefairnews.co.kr",
-     "publishedAt": "2026-11-17T00:18:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94434"
-    }
-   ]
-  },
-  {
-   "keyword": "어벤져스",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-16T23:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "로다주, 타노스 넘볼 최악의 빌런…'어벤져스: 둠스데이' 닥터 둠 온다",
-     "press": "maxmovie.com",
-     "publishedAt": "2026-11-17T00:14:00.000Z",
-     "link": "https://www.maxmovie.com/news/articleView.html?idxno=502998"
-    },
-    {
-     "title": "\"타노스와 다른 차원, 공포 느낄 것\"...'어벤져스5' 닥터 둠은 누구인가",
-     "press": "nc.press",
-     "publishedAt": "2026-11-16T23:59:00.000Z",
-     "link": "https://www.nc.press/news/articleView.html?idxno=631161"
-    },
-    {
-     "title": "'어벤져스: 둠스데이' 아이언맨 아닌 닥터 둠…\"공포 느낄 것\"",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-16T23:51:00.000Z",
-     "link": "https://m.entertain.naver.com/article/018/0006410867"
     }
    ]
   },
