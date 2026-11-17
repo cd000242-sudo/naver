@@ -74,6 +74,15 @@ describe('one-time text default', () => {
     expect(agentAutoSetupNeedsMigration({}, localStorage)).toBe(true);
   });
 
+  // 2026-11-17: the config flag is not in the save-side PRESERVE list, and a partial save merged over a stale cache
+  // can drop it. Without a second copy the next launch would switch the user's chosen engine back to Claude Code.
+  it('always keeps a second copy of the flag, so a config that later loses it does not switch the engine again', async () => {
+    const api = configApi({ primaryGeminiTextModel: 'gemini-3.8-flash' });
+    expect(await agentAutoSetupApplyTextDefault(api as never, localStorage)).toBe(true);
+    expect(localStorage.getItem(AGENT_AUTO_SETUP_MIGRATION_KEY)).toBe('1');
+    expect(agentAutoSetupNeedsMigration({ primaryGeminiTextModel: 'agent-codex' }, localStorage)).toBe(false);
+  });
+
   it('keeps a backup flag when the config does not keep it', async () => {
     const api = configApi({}, { dropFlag: true });
     expect(await agentAutoSetupApplyTextDefault(api as never, localStorage)).toBe(true);
@@ -98,7 +107,6 @@ describe('one-time text default', () => {
     expect(wait).toHaveBeenCalledTimes(2);
     expect(api.saveConfig).toHaveBeenCalledTimes(1);
     expect(api.read()).toMatchObject({ primaryGeminiTextModel: 'agent-claude', [AGENT_AUTO_SETUP_MIGRATION_KEY]: true });
-    expect(localStorage.getItem(AGENT_AUTO_SETUP_MIGRATION_KEY)).toBeNull();
   });
 
   it('a save that did not stick sets no flag, so the next launch tries again', async () => {

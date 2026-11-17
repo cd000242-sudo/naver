@@ -165,8 +165,9 @@ export async function agentAutoSetupApplyTextDefault(
   } as never);
   const after = await agentAutoSetupConfirmEngine(api, selection.model, wait);
   if (!after) throw new Error('기본 글 엔진이 저장되지 않았습니다.');
-  // Backup for a config that does not keep the flag: without it the next launch would overwrite the user's choice.
-  if (after[AGENT_AUTO_SETUP_MIGRATION_KEY] !== true) store.setItem(AGENT_AUTO_SETUP_MIGRATION_KEY, '1');
+  // Always a second copy of the flag: the config can lose it later (it is not in the save-side PRESERVE list, and a
+  // partial save merged over a stale cache drops it) and the next launch would then overwrite the user's choice.
+  store.setItem(AGENT_AUTO_SETUP_MIGRATION_KEY, '1');
   restoreTextModelRadio(selection.model);
   const unifiedGenerator = document.getElementById('unified-generator') as HTMLInputElement | null;
   if (unifiedGenerator) unifiedGenerator.value = selection.provider;
