@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-17T17:24:54.751Z",
+  "generatedAt": "2026-11-17T17:37:50.342Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -89092,6 +89092,732 @@
           "views": 256,
           "answers": 9,
           "askedAt": "2026.06.27"
+        }
+      ]
+    },
+    {
+      "id": "0a04f72f46823674",
+      "urls": [
+        "https://earnnomad.com/health-insurance-dependent-criteria/",
+        "https://zsewqzsewq.tistory.com/443"
+      ],
+      "guide": {
+        "direction": "검색자는 '자격조회에서 피부양자로 나오는지'와 '유족연금·일용근로 소득이 합산되는지'처럼 구체 사례에서 막힌다. 고수 글은 '3분 완성'을 내세우지만 소급 여부, 재취득 시 재확인 포인트는 안 다룬다. 이 글은 소득·재산 기준표와 조회 화면 경로, 사례별 체크리스트로 끝맺는다.",
+        "searchTargets": [
+          "건강보험 피부양자 조회",
+          "건강보험 피부양자 확인",
+          "건강보험 피부양자 자격",
+          "건강보험 피부양자 등록 방법"
+        ],
+        "mustInclude": [
+          "소득 기준표(사업·금융·연금소득 합산 기준) (확인 필요: 국민건강보험공단 공지)",
+          "재산 기준 구간(4억~9억원 초과 시 소득 1,000만원 이하 조건)",
+          "자격조회 화면에서 피부양자 여부 확인하는 경로 (확인 필요: 공단 홈페이지·앱)",
+          "유족연금 등 비과세 소득의 합산 제외 여부",
+          "상실일 기준 지역보험료 부과 시점(소급 여부)"
+        ],
+        "mustAvoid": [
+          "지식인 속 개인 사례(소득·재산 금액)를 일반 기준처럼 단정",
+          "소득 발생 즉시 자격이 바로 끊기는 것처럼 오도(실제는 그해 소득을 다음 해에 반영)"
+        ],
+        "checkBefore": [
+          "최신 소득·재산 기준 수치는 국민건강보험공단 공지에서 확인",
+          "자격조회 화면 경로 변경 여부 공단 앱·홈페이지에서 확인"
+        ],
+        "solves": [
+          "건강보험 피부양자 확인방법은? → 자격조회 화면에서 보는 법과 안 나올 때 대응법 정리",
+          "유족연금 받는데 피부양자 유지되나요? → 비과세 소득 제외 기준으로 판단법 제공",
+          "일용근로자 취득·상실 반복시 피부양자는? → 재취득 시마다 다시 확인할 포인트 정리"
+        ],
+        "actionTitles": [
+          "건강보험 피부양자 조회 방법과 탈락 기준 한눈에 정리",
+          "건강보험 피부양자 등록 방법, 소득·재산 기준으로 확인하기",
+          "건강보험 피부양자 자격 확인, 탈락 전 소득·재산 기준 체크"
+        ]
+      },
+      "at": "2026-11-17T17:35:46.050Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "건강보험 피부양자 확인방법은?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100401&docId=483375748&answerNo=4&qb=6rG06rCV67O07ZeY7ZS867aA7JaR7J6Q",
+          "views": 3285,
+          "answers": 5,
+          "askedAt": "2026.11.15"
+        },
+        {
+          "title": "건강보험 피부양자",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100401&docId=490750586&answerNo=4&qb=6rG06rCV67O07ZeY7ZS867aA7JaR7J6Q",
+          "views": 734,
+          "answers": 4,
+          "askedAt": "2026.11.15"
+        },
+        {
+          "title": "건강보험 피부양자",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100401&docId=492854321&answerNo=8&qb=6rG06rCV67O07ZeY7ZS867aA7JaR7J6Q",
+          "views": 646,
+          "answers": 8,
+          "askedAt": "2026.11.11"
+        }
+      ]
+    },
+    {
+      "id": "b60b227ef8bcb9d6",
+      "urls": [
+        "https://gumiland.net/officetel-acquisition-tax-2026/",
+        "https://bariro.tistory.com/entry/%EC%83%9D%EC%95%A0%EC%B5%9C%EC%B4%88-%EC%B7%A8%EB%93%9D%EC%84%B8-%EA%B0%90%EB%A9%B4-%EC%B6%9C%EC%82%B0%EA%B0%80%EA%B5%AC-%EC%A4%91%EB%B3%B5-%EC%A0%81%EC%9A%A9%EB%90%A0%EA%B9%8C-%E2%80%94-%EC%9C%A0%EB%A6%AC%ED%95%9C-%EC%84%A0%ED%83%9D%EB%B2%95"
+      ],
+      "guide": {
+        "direction": "검색자는 생애최초 감면과 출산가구 감면이 중복인지 별개인지, 오피스텔도 '주거용'으로 생애최초 감면 대상이 되는지 헷갈린다. 고수 글은 '유리한 선택법'만 던지고 합산 한도·추징 요건을 표로 안 보여준다. 이 글은 두 감면의 합산 한도표와 오피스텔 주거용 인정 기준, 추징 계산 예시로 끝맺는다.",
+        "searchTargets": [
+          "생애최초 취득세 감면 조건",
+          "생애최초 취득세 감면 신청",
+          "생애최초 취득세 감면 추징",
+          "생애최초 취득세 감면 실거주"
+        ],
+        "mustInclude": [
+          "생애최초·출산가구 감면 합산 한도(500만원 한도, 2028년 말까지 적용 연장) (확인 필요: 행안부·위택스 공지)",
+          "오피스텔이 '주거용'으로 인정되는 기준(건축물대장 용도·전입신고 여부)",
+          "생애최초 감면 실거주 3년 유지 요건과 미충족 시 추징·가산세 계산 예시",
+          "신청 서류 목록과 신청 기한(취득 후 일정 기간 내) (확인 필요: 위택스·정부24)",
+          "생애최초 감면 vs 출산가구 감면 중 유리한 쪽 선택 비교표"
+        ],
+        "mustAvoid": [
+          "생애최초 감면을 다자녀·신혼부부 감면 등 비슷한 제도와 혼동",
+          "지자체별로 다를 수 있는 세부 기준을 전국 공통처럼 단정"
+        ],
+        "checkBefore": [
+          "출산가구 취득세 감면 적용기한(2028년 말)과 한도는 행안부·위택스 공지로 확인",
+          "오피스텔의 주거용 인정 기준(전입신고·실거주)은 관할 시군구 세무과에 사전 확인"
+        ],
+        "solves": [
+          "생애최초 감면과 출산 감면 중복되나요? → 합산 한도 구조와 유리한 선택법 비교표로 정리",
+          "생애최초 취득세 감면 추징됐는데 출산 감면 다시 받을 수 있나요? → 별개 적용 가능 여부와 재신청 절차 안내",
+          "오피스텔도 생애최초 취득세 감면 되나요? → 주거용 인정 기준으로 가능 여부 판단법 제공"
+        ],
+        "actionTitles": [
+          "생애최초 취득세 감면 조건, 오피스텔도 되는지 확인",
+          "생애최초 취득세 감면 신청서류와 추징 기준 총정리",
+          "생애최초 취득세 감면 실거주 3년, 출산가구 중복 비교"
+        ]
+      },
+      "at": "2026-11-17T17:35:46.050Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "주택구입시 취득세 감면에 대하여(신생아,생....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40306&docId=494724280&answerNo=4&qb=7IOd7JWg7LWc7LSIIOy3qOuTneyEuCDqsJDrqbQg7Lac7IKw6rCA6rWsIOykkeuztQ==",
+          "views": 937,
+          "answers": 4,
+          "askedAt": "2026.08.14"
+        },
+        {
+          "title": "생애최초 취득세 감면 추징 반납했는데 출산....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40306&docId=494952433&answerNo=1&qb=7IOd7JWg7LWc7LSIIOy3qOuTneyEuCDqsJDrqbQg7Lac7IKw6rCA6rWsIOykkeuztQ==",
+          "views": 494,
+          "answers": 2,
+          "askedAt": "2026.08.30"
+        },
+        {
+          "title": "생애최초 취득세 감면받고 나머지 금액을 신....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40306&docId=492649933&answerNo=2&qb=7IOd7JWg7LWc7LSIIOy3qOuTneyEuCDqsJDrqbQg7Lac7IKw6rCA6rWsIOykkeuztQ==",
+          "views": 161,
+          "answers": 2,
+          "askedAt": "2026.05.10"
+        }
+      ]
+    },
+    {
+      "id": "38da6d5744d315b9",
+      "urls": [
+        "https://hwichistory.tistory.com/1310"
+      ],
+      "guide": {
+        "direction": "'초보자 카메라 추천'으로 검색하는 사람은 바디뿐 아니라 렌즈까지 묶어서 뭘 사야 손해 안 보는지 고민하지만, 지식인 질문은 기종 식별·중고 가격처럼 구매 판단과도 맞닿아 있다. 고수 글은 크롭바디 환산 화각만 강하게 다루고 예산·용도별 구매 순서는 비워둔다. 이 글은 환산 화각표와 용도별(인물·풍경) 렌즈 선택 기준, 예산별 구매 체크리스트로 끝맺는다.",
+        "searchTargets": [
+          "초보자 카메라 추천"
+        ],
+        "mustInclude": [
+          "크롭바디 환산 화각 계산법(캐논 1.6배·니콘 1.5배 등) (확인 필요: 제조사 공식 환산계수)",
+          "50mm 단렌즈가 크롭바디에서 실제 약 80mm 안팎이 되는 이유와 인물·풍경 용도 구분표",
+          "'장롱 아령'이 되는 실패 사례(화각 오판·조리개 오해·손떨림 보정 부재) 나열",
+          "구매 전 체크리스트(바디 마운트 호환·환산화각·용도) 표"
+        ],
+        "mustAvoid": [
+          "특정 렌즈·브랜드를 '무조건 사라/사지 마라'로 단정해 소비자 피해 유발",
+          "중고 카메라·렌즈 가격을 상태 확인 없이 단정적 수치로 제시"
+        ],
+        "checkBefore": [
+          "크롭바디 환산 계수는 캐논·니콘·소니 등 제조사 공식 스펙에서 확인",
+          "렌즈·중고 바디 가격은 판매 시점 중고 플랫폼 시세로 재확인"
+        ],
+        "solves": [
+          "초보자 카메라 추천, 뭘 사야 할지 모르겠어요 → 바디+렌즈 조합을 예산별로 고르는 순서 제공",
+          "크롭바디에서 50mm 화각이 왜 다르게 보이나요 → 환산 공식과 용도별 선택 기준표로 해결",
+          "비싼 렌즈 샀는데 장롱행이 됐어요 → 구매 전 체크리스트로 같은 실수 막는 법 제시"
+        ],
+        "actionTitles": [
+          "초보자 카메라 추천, 크롭바디 화각 계산부터 확인",
+          "초보자 카메라 추천, 렌즈 장롱 아령 피하는 체크리스트",
+          "초보자 카메라 추천, 50mm 단렌즈 사기 전 확인할 것"
+        ]
+      },
+      "at": "2026-11-17T17:35:46.050Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "이 카메라 기종이 뭔가요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=31402&docId=477570225&answerNo=1&qb=7LSI67O07J6QIOy5tOuplOudvCDroIzspogg7ISg7YOdIOuCqOuTpA==",
+          "views": 92,
+          "answers": 2,
+          "askedAt": "2024.11.06"
+        },
+        {
+          "title": "카메라 이름문의드립니다",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=31402&docId=495810545&answerNo=1&qb=7LSI67O07J6QIOy5tOuplOudvCDroIzspogg7ISg7YOdIOuCqOuTpA==",
+          "views": 59,
+          "answers": 1,
+          "askedAt": "2026.11.03"
+        },
+        {
+          "title": "카메라 기종 알려주세요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=50102&docId=487936046&answerNo=1&qb=7LSI67O07J6QIOy5tOuplOudvCDroIzspogg7ISg7YOdIOuCqOuTpA==",
+          "views": 59,
+          "answers": 1,
+          "askedAt": "2025.08.12"
+        }
+      ]
+    },
+    {
+      "id": "5b52d07222ad3b95",
+      "urls": [
+        "https://niscity.com/kitchen-utensil-sanitary-cloth/"
+      ],
+      "guide": {
+        "direction": "검색자는 행주를 얼마나 자주, 어떤 방법으로 소독해야 식중독을 막을 수 있는지 구체적 주기와 방법을 몰라 막혀 있다. 고수 블로그 제목은 '관리법'이라고만 적어 끓는물·전자레인지·에탄올 중 어떤 방법을 요일별로 써야 하는지 구분해주지 않는다. 이 글은 요일별 소독 체크리스트와 소독법별 비교표로 끝낸다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "요일별 소독 체크리스트(월~일, 삶기/전자레인지/에탄올 구분)",
+          "소독법별 비교표: 끓는물 vs 전자레인지 vs 소독용 에탄올(확인 필요: 식약처 권장 온도·시간)",
+          "도마-행주 교차오염 방지법(설거지 후 자연건조 vs 밀폐보관 비교)",
+          "행주 교체 주기 기준(확인 필요: 재질별 권장 주기)"
+        ],
+        "mustAvoid": [
+          "특정 세제·소독제 브랜드를 광고처럼 추천하는 서술",
+          "'이렇게 하면 식중독 100% 예방'식 의학적 과장"
+        ],
+        "checkBefore": [
+          "식약처(식품의약품안전처) 공식 가이드에서 행주 소독 권장 온도·주기 확인",
+          "면행주와 극세사행주의 소독법 차이 확인"
+        ],
+        "solves": [
+          "행주를 언제, 어떻게 삶아야 하는지 모르는 문제 → 요일별 소독 체크리스트로 답",
+          "설거지 후 행주로 닦아야 하는지 헷갈리는 문제 → 자연건조가 위생적이라는 기준 제시"
+        ],
+        "actionTitles": [
+          "행주 소독주기 1주일 관리법과 식중독 예방 체크리스트 총정리",
+          "주방행주 소독법 비교: 끓는물·전자레인지·에탄올 중 뭐가 좋을까",
+          "도마·행주 교차오염 막는 주방위생 소독 관리법 확인하기"
+        ]
+      },
+      "at": "2026-11-17T17:35:46.050Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "상식문제 좀...",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=61303&docId=183889357&answerNo=1&qb=7KO867Cp6riw6rWsIOychOyDnSDtlonso7wg7IaM64+F7KO86riwIOuLqOychA==",
+          "views": 119428,
+          "answers": 2,
+          "askedAt": "2013.11.05"
+        },
+        {
+          "title": "일반 상식 문제좀 올려주세염",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=613&docId=46884418&answerNo=1&qb=7KO867Cp6riw6rWsIOychOyDnSDtlonso7wg7IaM64+F7KO86riwIOuLqOychA==",
+          "views": 114844,
+          "answers": 2,
+          "askedAt": "2004.10.07"
+        },
+        {
+          "title": "여러 잡다하고 재미있는 상식들 100개 (내공 50....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=613&docId=47686915&answerNo=2&qb=7KO867Cp6riw6rWsIOychOyDnSDtlonso7wg7IaM64+F7KO86riwIOuLqOychA==",
+          "views": 45717,
+          "answers": 3,
+          "askedAt": "2007.04.29"
+        }
+      ]
+    },
+    {
+      "id": "cf719d84f314f34a",
+      "urls": [
+        "https://jackti.tistory.com/3483"
+      ],
+      "guide": {
+        "direction": "실무자는 신기술사업금융업자가 해외(글로벌) 펀드를 직접 결성·운용해도 여전법상 고유업무로 인정되는지를 몰라 투자구조를 설계하지 못한다. 고수 블로그 제목은 '완전 해설'이라 적어도 회신문 260150의 신청 배경과 다른 신기술금융사에도 동일하게 적용되는지는 밝히지 않는다. 이 글은 회신문 핵심 요지·관련 여전법 조문·실무 적용 범위를 표로 정리해 끝낸다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "금융위 법령해석 회신문 번호(260150)와 신청인·신청 배경",
+          "여전법상 '고유업무' 인정 근거 조문(확인 필요: 여전법 몇 조)",
+          "글로벌 펀드 결성·운용이 고유업무로 인정된 구체 범위(국내펀드와 차이)",
+          "다른 신기술사업금융업자에도 동일 적용 여부(확인 필요: 금융위 공지)"
+        ],
+        "mustAvoid": [
+          "여신전문금융업법의 비슷한 다른 회신 사례(겸영업무 등)와 혼동"
+        ],
+        "checkBefore": [
+          "금융위원회 홈페이지 법령해석 게시판에서 회신문 260150 원문 재확인",
+          "여전법 및 시행령 상 신기술사업금융업자 고유업무 조항 재확인"
+        ],
+        "solves": [
+          "신기술금융사가 해외펀드를 만들어도 되는지 모르는 문제 → 회신문 결론으로 명확히 답",
+          "고유업무 범위에 글로벌 펀드가 포함되는지 헷갈리는 문제 → 조문·회신 요지 비교표로 정리"
+        ],
+        "actionTitles": [
+          "신기술금융사 글로벌펀드 결성, 여전법 고유업무 인정 여부 확인",
+          "신기술사업금융업자 해외펀드 운용 가능한지 법령으로 확인하기"
+        ]
+      },
+      "at": "2026-11-17T17:35:46.050Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "광주광역시 후보자 정당,성명.공약점 갈켜주....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=61402&docId=54560507&answerNo=1&qb=7Iug6riw7Iig7IKs7JeF6riI7Jy17JeF7J6QIOq4gOuhnOuyjCDtjoDrk5wg6rKw7ISxIOyatOyaqQ==",
+          "views": 119637,
+          "answers": 5,
+          "askedAt": "2008.04.09"
+        },
+        {
+          "title": "한양사이버대학교의 인기학과를 소개해주세....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110408&docId=56781121&answerNo=385&qb=7Iug6riw7Iig7IKs7JeF6riI7Jy17JeF7J6QIOq4gOuhnOuyjCDtjoDrk5wg6rKw7ISxIOyatOyaqQ==",
+          "views": 42956,
+          "answers": 393,
+          "askedAt": "2008.07.14"
+        },
+        {
+          "title": "한양사이버대학에는 어떤 학과들이 있나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110408&docId=54622802&answerNo=77&qb=7Iug6riw7Iig7IKs7JeF6riI7Jy17JeF7J6QIOq4gOuhnOuyjCDtjoDrk5wg6rKw7ISxIOyatOyaqQ==",
+          "views": 34582,
+          "answers": 146,
+          "askedAt": "2007.12.08"
+        }
+      ]
+    },
+    {
+      "id": "52e9cbc65ce21a1c",
+      "urls": [
+        "https://www.pchardwarepro.com/unreal-engine-5-8-y-la-lucha-contra-el-stuttering-mediante-advanced-shader-delivery/"
+      ],
+      "guide": {
+        "direction": "자동완성에는 'unreal engine 뜻'처럼 엔진 자체를 모르는 초보 검색자가 섞여 있는데, 고수 블로그 제목은 5.8의 Advanced Shader Delivery라는 전문 기능만 다뤄 기초 설명이 빠져 있다. 검색자는 '게임이 자꾸 끊기는(스터터링) 이유'와 'Unreal Engine 5가 이전 버전과 뭐가 다른지'를 함께 궁금해한다. 이 글은 엔진 개념 한 줄 정리 → 5.8의 스터터링 완화 방식 → 이전 버전과 비교표 순서로 끝낸다.",
+        "searchTargets": [
+          "unreal engine",
+          "Unreal Engine 5",
+          "unreal engine 뜻"
+        ],
+        "mustInclude": [
+          "Unreal Engine 뜻(게임엔진 개념) 한 문단 정리",
+          "Unreal Engine 5.8 버전에서 달라진 점(확인 필요: 공식 릴리즈노트)",
+          "Advanced Shader Delivery가 스터터링을 줄이는 원리"
+        ],
+        "mustAvoid": [],
+        "checkBefore": [
+          "Epic Games 공식 Unreal Engine 5.8 릴리즈 노트에서 Advanced Shader Delivery 정식 기능명·상태 확인"
+        ],
+        "solves": [
+          "unreal engine이 뭔지 모르는 문제 → 엔진 개념을 한 문단으로 정리해 답함",
+          "게임이 자꾸 끊기는(스터터링) 이유를 모르는 문제 → Advanced Shader Delivery 원리로 설명"
+        ],
+        "actionTitles": [
+          "Unreal Engine 뜻부터 5.8 버전 차이까지 확인하기"
+        ]
+      },
+      "at": "2026-11-17T17:35:46.050Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "febfce19e359b853",
+      "urls": [
+        "https://luvgg.com/light-padding-washing-care-guide-2026/"
+      ],
+      "guide": {
+        "direction": "브랜드 경량패딩(스파오·유니클로·탑텐 등)을 세탁기에 돌려도 되는지, 돌린 뒤 털이 뭉치고 부피가 줄어든 상태를 되돌릴 수 있는지가 검색자가 실제로 막히는 지점이다. 기존 제목은 '막히는 지점 3가지'라고만 요약해 라벨별 세탁 가능 여부와 망가진 뒤 복원법을 구체적으로 짚지 못한다. 라벨 확인→세탁코스·세제 선택표→건조 순서→뭉침 복원 체크리스트 순으로 읽으면 한 번에 해결된다.",
+        "searchTargets": [
+          "경량패딩 세탁기",
+          "스파오 경량패딩 세탁",
+          "유니클로 경량패딩 세탁",
+          "경량패딩 세탁소"
+        ],
+        "mustInclude": [
+          "지퍼·단추 잠그고 세탁망에 넣어 울코스+중성(약산성)세제로 돌리는 순서",
+          "건조 후 털 뭉침·부피 줄어듦 복원법: 자연건조 후 열건조기, 또는 드라이기 중간열로 가열하며 쳐주기",
+          "스파오·유니클로·탑텐·무신사 등 브랜드별 라벨 물세탁 가능 여부 (확인 필요: 각 제품 라벨)",
+          "물세탁 불가 라벨(드라이클리닝 전용) 제품을 세탁기에 돌리지 않도록 구분하는 표"
+        ],
+        "mustAvoid": [
+          "구스·덕다운 패딩(충전재가 깃털)과 경량패딩(합성충전재) 세탁법을 같은 것으로 설명하지 않기",
+          "라벨 미확인 상태에서 '전부 세탁기 돌려도 된다'고 일반화하지 않기"
+        ],
+        "checkBefore": [
+          "브랜드별(스파오·유니클로·탑텐·무신사) 실제 세탁 라벨 지시 - 해당 브랜드 공식 홈페이지·매장 라벨 확인",
+          "울코스+중성세제 조합이 가정용 세탁기 최신 모델에서도 동일하게 적용되는지 - 세탁기 제조사 매뉴얼 확인"
+        ],
+        "solves": [
+          "경량패딩 세탁기로 돌렸는데 털이 뭉치고 부피가 줄었어요 → 드라이기 가열+열건조기 복원 순서 제공",
+          "경량패딩 세탁소 맡겨야 하나 집에서 돌려도 되나 → 라벨별 세탁망+울코스 가능 여부 판단표 제공",
+          "스파오·유니클로 경량패딩도 세탁기 돌려도 되나 → 브랜드별 라벨 비교로 헷갈림 정리"
+        ],
+        "actionTitles": [
+          "스파오·유니클로 경량패딩 세탁, 라벨로 바로 확인하는 법"
+        ]
+      },
+      "at": "2026-11-17T17:35:46.050Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "경량패딩 세탁기로 세탁했는데요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80903&docId=384803775&answerNo=1&qb=6rK965+J7Yyo65SpIOyEuO2DgSDshLjtg4HquLAg64+M66a0IOunie2eiA==",
+          "views": 7137,
+          "answers": 3,
+          "askedAt": "2021.03.17"
+        },
+        {
+          "title": "경량패딩 세탁기 세탁",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80903&docId=407979614&answerNo=1&qb=6rK965+J7Yyo65SpIOyEuO2DgSDshLjtg4HquLAg64+M66a0IOunie2eiA==",
+          "views": 3164,
+          "answers": 1,
+          "askedAt": "2021.12.24"
+        },
+        {
+          "title": "경량패딩 세탁기(급함)",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80903&docId=437453390&answerNo=2&qb=6rK965+J7Yyo65SpIOyEuO2DgSDshLjtg4HquLAg64+M66a0IOunie2eiA==",
+          "views": 2591,
+          "answers": 3,
+          "askedAt": "2026.11.04"
+        }
+      ]
+    },
+    {
+      "id": "ee3071cbbb37c003",
+      "urls": [
+        "https://tecnobits.com/como-evitar-spoilers-de-gta-vi/"
+      ],
+      "guide": {
+        "direction": "검색자는 GTA VI 출시 전후로 트레일러 해석 영상·커뮤니티 글에서 스토리나 레오니다 지역 정보가 의도치 않게 노출되는 것을 피하고 싶어 한다. 기존 제목은 '스포일러 피하는 법'이라는 포괄적 다짐만 있고 어떤 키워드·채널을 구체적으로 피해야 하는지 알려주지 않는다. 유튜브·SNS·커뮤니티별로 뮤트할 키워드 목록과 플랫폼별 설정 순서를 체크리스트로 주면 검색자가 이 글에서 끝낼 수 있다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "GTA VI 정식 출시일 및 리뷰 임베고 해제일 (확인 필요: 락스타 게임즈 공식 발표)",
+          "'Leonida' 등 지역명·캐릭터명 뮤트 키워드 리스트"
+        ],
+        "mustAvoid": [
+          "GTA V와 GTA VI의 스토리·지역 설정을 혼동해서 설명하지 않기"
+        ],
+        "checkBefore": [
+          "GTA VI 정식 출시일과 리뷰 임베고 해제 시점 - 락스타 게임즈 공식 발표·뉴스룸 확인"
+        ],
+        "solves": [
+          "GTA VI 스포일러를 피하려면 어떤 키워드를 막아야 하나 → 플랫폼별 뮤트 키워드 리스트 제공"
+        ]
+      },
+      "at": "2026-11-17T17:35:46.050Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "238ee1b8604f4f58",
+      "urls": [
+        "https://tecnobits.com/solicitar-confirmacion-antes-de-enviar-un-correo/"
+      ],
+      "guide": {
+        "direction": "검색자는 메일을 잘못 보내기 전에 Gmail이 전송 확인창을 띄우거나 몇 초간 취소할 수 있게 하는 정확한 설정 위치를 찾고 있다. 기존 제목은 '확인 요청하는 법'이라고만 말해 설정 메뉴 경로나 선택 가능한 취소 시간(초)을 구체적으로 보여주지 않는다. 설정 톱니바퀴→일반 탭→전송 취소 옵션→시간 선택 순서를 표로 정리하면 검색자가 바로 적용하고 끝낼 수 있다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "Gmail 설정(톱니바퀴) > 모든 설정 보기 > 일반 탭 경로 (확인 필요: 최신 Gmail UI)",
+          "전송 취소(Undo Send) 가능 시간 선택지(초 단위) (확인 필요: Gmail 공식 고객센터)"
+        ],
+        "mustAvoid": [
+          "전송 취소(Undo Send) 기능과 읽음 확인 요청 기능을 같은 것으로 설명하지 않기",
+          "개인 Gmail 계정 설정과 Google Workspace 관리자 설정을 혼동하지 않기"
+        ],
+        "checkBefore": [
+          "Gmail 전송 취소 설정의 메뉴명·경로가 최신 UI에서 동일한지 - Gmail 공식 고객센터 도움말 확인"
+        ],
+        "solves": [
+          "Gmail에서 전송 전 확인창이 뜨게 하는 법 → 일반 탭 옵션 토글 위치 안내"
+        ]
+      },
+      "at": "2026-11-17T17:35:46.050Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "337f29ea7d299a7c",
+      "urls": [
+        "https://shcomms12.com/2026/11/17/mobile-plan-partner-benefit-missing/"
+      ],
+      "guide": {
+        "direction": "검색자는 알뜰폰 제휴카드·쿠폰을 신청했는데 할인이 안 들어와 어디서 막혔는지 모른다. 고수 글은 '확인 순서'라는 틀만 제목에 걸었을 뿐 신청부터 적용까지 단계별 체크 항목을 표로 안 보여준다. 이 글은 신청-등록-적용 단계별 체크리스트로 끊긴 지점을 찾게 해 끝낸다.",
+        "searchTargets": [
+          "알뜰폰 제휴카드 신청방법",
+          "알뜰폰 제휴요금제"
+        ],
+        "mustInclude": [
+          "제휴카드 등록 후 혜택 반영까지 걸리는 기간 (확인 필요: 카드사·통신사 공지)",
+          "요금제별 제휴 혜택 적용 조건 비교표 (확인 필요: 각 알뜰폰사 홈페이지)",
+          "혜택 미적용 시 고객센터 문의 순서와 준비물(가입일·카드번호 등) (확인 필요: 통신사 고객센터)",
+          "제휴카드 신청 자격(기존 가입자/신규 가입자) 차이 (확인 필요: 카드사 공지)"
+        ],
+        "mustAvoid": [
+          "특정 통신사·카드사의 혜택 중단 원인을 확정적으로 단정하지 말 것",
+          "가족결합·선택약정 등 비슷한 할인과 제휴카드 할인을 혼동해서 설명하지 말 것"
+        ],
+        "checkBefore": [
+          "현재 알뜰폰사별 제휴카드·쿠폰 혜택 조건을 각 통신사 공식 홈페이지에서 확인",
+          "카드사 공지사항에서 혜택 중단·변경 여부 확인"
+        ],
+        "solves": [
+          "제휴카드 신청했는데 할인이 안 들어와요 → 신청-등록-적용 단계별 확인 순서로 막힌 지점 찾기",
+          "알뜰폰 제휴요금제 혜택 조건이 뭔지 모르겠어요 → 요금제별 조건 비교표로 정리"
+        ],
+        "actionTitles": [
+          "알뜰폰 제휴카드 신청방법, 혜택 안 들어올 때 확인 순서",
+          "알뜰폰 제휴요금제 혜택 끊겼을 때 원인 확인하는 법",
+          "알뜰폰 제휴카드 신청 전 꼭 확인할 조건 체크리스트"
+        ]
+      },
+      "at": "2026-11-17T17:35:46.050Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "f18d23aa650e46c2",
+      "urls": [
+        "https://economybeginner.com/440"
+      ],
+      "guide": {
+        "direction": "검색자는 유상증자 참여 시 신주배정기준일과 청약일을 혼동해 참여 기회를 놓친다. 고수 글은 '주주 달력'이라는 컨셉만 제목에 걸었고 실제 디데이 역산 방법이나 놓쳤을 때 처리는 안 보여준다. 이 글은 기준일부터 청약일까지 역산하는 계산법과 종류별 자격 체크리스트로 끝낸다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "신주배정기준일부터 청약일까지 역산하는 디데이 계산법 (확인 필요: 해당 종목 공시)",
+          "유상증자 종류별(주주배정/일반공모/제3자배정) 청약 자격 차이 (확인 필요: 전자공시)",
+          "청약일을 놓쳤을 때 실권주 처리 절차 (확인 필요: 증권사 공지)",
+          "주주명부 폐쇄일·신주배정기준일·청약일 순서를 담은 달력표 (확인 필요: DART 공시)"
+        ],
+        "mustAvoid": [
+          "특정 종목의 유상증자 참여를 투자 추천처럼 서술하지 말 것",
+          "무상증자·배당기준일 등 비슷한 주주환원 일정과 혼동하지 말 것"
+        ],
+        "checkBefore": [
+          "해당 종목의 유상증자 공시 원문을 DART(전자공시시스템)에서 확인",
+          "청약일·신주배정기준일 정확한 날짜를 증권사 MTS 공지에서 재확인"
+        ],
+        "solves": [
+          "유상증자 청약일을 놓쳤어요 → 신주배정기준일부터 역산하는 디데이 계산법 제공",
+          "신주배정일과 청약일이 헷갈려요 → 주주 달력 순서표로 정리"
+        ],
+        "actionTitles": [
+          "유상증자 청약일 놓치지 않도록 주주 달력으로 계산하는 법",
+          "유상증자 일정 헷갈릴 때 신주배정일부터 역산하는 방법",
+          "청약일 계산하는 법, 유상증자 주주 달력으로 정리하기"
+        ]
+      },
+      "at": "2026-11-17T17:35:46.050Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "7f0fee9b0863e9a0",
+      "urls": [
+        "https://swhong858585.tistory.com/62"
+      ],
+      "guide": {
+        "direction": "검색자는 증여세 신고기한이 정확히 언제까지인지 계산이 안 되고, 넘겼을 때 가산세가 얼마인지도 모른다. 고수 글은 '11월 증여 시 3월 2일까지'라는 한 가지 사례만 제목에 걸었을 뿐 월별 일반화 계산법이나 기한 초과 시 가산세는 안 보여준다. 이 글은 월별 신고기한 계산표와 기한 초과 시 가산세 기준으로 끝낸다.",
+        "searchTargets": [
+          "증여세 신고기한",
+          "증여세 신고기한 넘기면",
+          "증여세 신고기한 계산",
+          "증여세 신고기한 놓침 대처법"
+        ],
+        "mustInclude": [
+          "증여일이 속한 달의 말일부터 3개월 이내라는 상속세 및 증여세법 제68조 제1항 기준",
+          "11월 증여 시 11월 30일+3개월=2월 28일, 주말·공휴일과 겹치면 다음 평일로 이동해 3월 2일이 되는 계산 과정",
+          "신고기한 넘겼을 때 무신고가산세·납부지연가산세 적용 기준 (확인 필요: 국세청 가산세율 안내)",
+          "상장주식 증여 시 평가기준일(증여일 전후 2개월 종가 평균) 적용 (확인 필요: 국세청 안내)",
+          "1월~12월 증여 시 각각의 신고기한을 한눈에 보는 월별 계산표"
+        ],
+        "mustAvoid": [
+          "국세 부과제척기간(10년·15년)과 신고기한(3개월)을 같은 개념처럼 섞어 쓰지 말 것",
+          "증여재산 반환 시 비과세 요건(3개월 이내 반환 등)을 신고기한과 동일하게 설명하지 말 것"
+        ],
+        "checkBefore": [
+          "현재 가산세율·부과제척기간 등 최신 수치는 국세청 홈택스 또는 공지에서 확인",
+          "상속세 및 증여세법 제68조 원문을 국가법령정보센터에서 재확인"
+        ],
+        "solves": [
+          "증여세 신고기한이 정확히 언제까지인지 헷갈려요 → 증여받은 달 말일부터 3개월, 월별 계산표로 정리",
+          "신고기한을 넘기면 어떻게 되는지 몰라요 → 가산세 적용 기준과 대처법 안내",
+          "부모님께 증여받고 몇 년 지나면 안전한지 궁금해요 → 신고기한(3개월)과 부과제척기간은 다르다는 점 구분"
+        ],
+        "actionTitles": [
+          "증여세 신고기한 계산, 11월 증여 시 3월 2일까지",
+          "증여세 신고기한 놓침 대처법, 월별 계산표로 정리"
+        ]
+      },
+      "at": "2026-11-17T17:35:46.050Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "부모님께 받은 돈 증여세 미신고, 몇 년이 지....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40309&docId=495731070&answerNo=1&qb=7Kad7Jes7IS4IOyLoOqzoOq4sO2VnCDspp3sl6zrsJvslZjri6TrqbQ=",
+          "views": 65,
+          "answers": 1,
+          "askedAt": "2026.10.28"
+        },
+        {
+          "title": "증여받은 아파트 반환, 몇 달 안에 돌려드리....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40309&docId=495740366&answerNo=1&qb=7Kad7Jes7IS4IOyLoOqzoOq4sO2VnCDspp3sl6zrsJvslZjri6TrqbQ=",
+          "views": 33,
+          "answers": 1,
+          "askedAt": "2026.10.29"
+        },
+        {
+          "title": "증여받고 해외 이주, 신고기한 전에도 증여세....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40309&docId=495939560&answerNo=1&qb=7Kad7Jes7IS4IOyLoOqzoOq4sO2VnCDspp3sl6zrsJvslZjri6TrqbQ=",
+          "views": 19,
+          "answers": 1,
+          "askedAt": "2026.11.13"
+        }
+      ]
+    },
+    {
+      "id": "ca43b3975911f844",
+      "urls": [
+        "https://shcomms12.com/2026/11/17/tax-accountant-exam-guide/"
+      ],
+      "guide": {
+        "direction": "재경관리사 보유자나 하루 10시간 학습자가 세법학개론·회계학개론 과락만 피하면 단기 합격이 가능한지, 응시 연령 상한이 있는지 등 자격 조건을 헷갈려 묻는 질문이 많다. 고수 글은 제목에 응시 제한·과목·영어성적·면제 대상을 나열했지만 연령 제한 없음 같은 오해를 바로잡거나 접수부터 등록까지의 순서는 안내하지 못했다. 이 글은 응시자격·면제표·영어성적 환산표·원서접수 일정·합격 후 등록 절차를 단계별로 정리해 한 번에 끝낸다.",
+        "searchTargets": [
+          "세무사 시험과목",
+          "세무사 시험 자격",
+          "세무사 시험일정"
+        ],
+        "mustInclude": [
+          "1차 과목(재정학·세법학개론·회계학개론 등)과 2차 과목 구성 정리표(확인 필요: 공식 공고)",
+          "영어 성적 인정기준(토익·텝스·토플 등급별 환산표)과 유효기간(확인 필요: 한국산업인력공단 공고)",
+          "1차 시험 면제 대상(경력·학위 등 조건별) 요건 표",
+          "원서접수 일정(접수 시작·마감일, 응시료)(확인 필요: 큐넷 공고)",
+          "합격 후 실무교육 기간과 세무사 등록 절차 순서"
+        ],
+        "mustAvoid": [
+          "응시 연령 상한이 있다고 서술(지식인 답변 근거로 실제 상한 없음)",
+          "세무사시험 ai안경 등 최근 부정행위 이슈와 혼동해 시험 자체를 의심스럽게 서술",
+          "세무사 시험 난이도를 수능과 직접 비교해 단순화(지식인 답변에서 비교 불가 지적)"
+        ],
+        "checkBefore": [
+          "최신 회차(제63회 등) 과목·면제 기준 변경 여부 — 한국산업인력공단/큐넷 공고 확인",
+          "영어 성적 인정 등급표 최신본 — 한국산업인력공단 공식 공고 확인",
+          "실무교육 기관 및 등록 절차 최신 규정 — 한국세무사회 공지 확인"
+        ],
+        "solves": [
+          "세무사 시험 자격이 되는지 모르겠다 → 응시 제한(연령 없음 등)과 면제 대상 조건을 표로 정리해 바로 확인",
+          "1차 2차 과목과 영어 성적 인정 기준이 헷갈린다 → 과목 구성과 영어성적 환산표를 한 번에 제공",
+          "합격하면 바로 세무사로 일할 수 있는지 모르겠다 → 실무교육 기간과 등록 절차를 단계별로 안내"
+        ],
+        "actionTitles": [
+          "세무사 시험과목 1차 2차 정리, 면제대상까지 확인",
+          "세무사 시험 자격 조건과 영어성적 인정기준 확인",
+          "세무사 시험일정 원서접수부터 등록까지 체크"
+        ]
+      },
+      "at": "2026-11-17T17:35:46.050Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "세무사 시험 관련 질문드립니다.",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40402&docId=495676857&answerNo=3&qb=7IS466y07IKs7Iuc7ZeY",
+          "views": 852,
+          "answers": 4,
+          "askedAt": "2026.10.24"
+        },
+        {
+          "title": "수능 만점이 어렵나요 세무사 시험 만점이 어....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110704&docId=495929075&answerNo=1&qb=7IS466y07IKs7Iuc7ZeY",
+          "views": 146,
+          "answers": 2,
+          "askedAt": "2026.11.12"
+        },
+        {
+          "title": "세무사 시험 준비, 새벽 기상 효과적일까요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1121&docId=495924664&answerNo=1&qb=7IS466y07IKs7Iuc7ZeY",
+          "views": 79,
+          "answers": 3,
+          "askedAt": "2026.11.12"
+        }
+      ]
+    },
+    {
+      "id": "e9c7f1386c942842",
+      "urls": [
+        "https://bodyandwell.com/%ec%bd%94%ec%97%94%ec%9e%90%ec%9e%84%ed%81%9010-%ea%b3%a0%eb%a5%b4%eb%8a%94%eb%b2%95%ea%b3%bc-%ec%8b%9d%ed%9b%84-%eb%b3%b5%ec%9a%a9-%ec%8b%9c%ea%b0%84-%eb%b6%80%ec%9e%91%ec%9a%a9-%ea%b1%b1%ec%a0%95/"
+      ],
+      "guide": {
+        "direction": "영양제 복용 시간을 '활동적인 시간대 식후'로만 알고 오메가3·마그네슘 등 다른 영양제와 병용 가능한지, 흡수 유지시간은 얼마인지 헷갈려 묻는 질문이 많다. 고수 글은 고르는 기준만 나열하고 식후 몇 시간 내 복용해야 하는지, 병용 시 주의할 조합은 짚지 못했다. 이 글은 고르는 4가지 기준과 식후 복용 타이밍, 병용 체크리스트를 표로 정리해 한 번에 해결한다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "고르는 4가지 기준(함량·형태 유비퀴놀/유비퀴논·흡수율·부형제) 비교표(확인 필요: 제품 성분표)",
+          "식후 권장 복용 시간대(활동적인 시간대 식후)와 흡수·유지 시간 정리(확인 필요: 제조사 안내)",
+          "오메가3·마그네슘·비타민 등 타 영양제와 함께 먹을 때 주의할 조합 체크리스트",
+          "부작용 걱정을 줄이는 복용량·주의 대상(임산부·특정 약물 복용자 등) 기준(확인 필요: 식약처 가이드)"
+        ],
+        "mustAvoid": [
+          "특정 질병 치료·예방 효과를 보장하는 것처럼 서술(건강기능식품 과장 광고 소지)",
+          "오메가3·비타민 등 다른 영양제의 복용법을 코큐텐 고유 기준처럼 혼동해서 서술"
+        ],
+        "checkBefore": [
+          "코엔자임큐10 1일 권장량 및 상한선 — 식약처 건강기능식품 기준 확인"
+        ],
+        "solves": [
+          "영양제 먹는 시간이 헷갈린다 → 활동적인 식후 시간대 복용 기준과 흡수 유지시간을 정리해 제공",
+          "다른 영양제와 같이 먹어도 되는지 모르겠다 → 병용 가능/주의 조합을 체크리스트로 제공",
+          "부작용이 걱정된다 → 부작용 줄이는 복용량·주의대상 기준을 표로 제공"
+        ],
+        "actionTitles": [
+          "코엔자임큐10 고르는법 4가지 기준과 복용 시간 확인",
+          "코엔자임큐10 부작용 걱정 줄이는 복용량 기준 체크"
+        ]
+      },
+      "at": "2026-11-17T17:35:46.050Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "영양제 먹는 시간 좀 부탁드립니다",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70403&docId=404789956&answerNo=4&qb=7L2U7JeU7J6Q7J6E7YGQMTAg6rOg66W064qU67KVIOyLne2bhCDrs7Xsmqkg7Iuc6rCE",
+          "views": 251,
+          "answers": 4,
+          "askedAt": "2021.11.11"
+        },
+        {
+          "title": "영양제 섭취 같이 먹어도 되는지?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=50801&docId=479530930&answerNo=3&qb=7L2U7JeU7J6Q7J6E7YGQMTAg6rOg66W064qU67KVIOyLne2bhCDrs7Xsmqkg7Iuc6rCE",
+          "views": 213,
+          "answers": 3,
+          "askedAt": "2024.12.24"
+        },
+        {
+          "title": "혈액순환, 혈당, 비타민, 오메가3, 루테인 등 ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70403&docId=462966735&answerNo=2&qb=7L2U7JeU7J6Q7J6E7YGQMTAg6rOg66W064qU67KVIOyLne2bhCDrs7Xsmqkg7Iuc6rCE",
+          "views": 52,
+          "answers": 3,
+          "askedAt": "2024.01.25"
         }
       ]
     }
