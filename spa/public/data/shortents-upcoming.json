@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T16:00:01.260Z",
+ "builtAt": "2026-11-17T16:10:05.200Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,17 +11,55 @@
  "measured": 26,
  "candidates": [
   {
+   "keyword": "오세훈 선제골",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 53,
+   "recent20": 21,
+   "press": 26,
+   "firstArticleAt": "2026-11-17T14:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한국축구 올해 마지막 평가전서 카타르에 1-0 승…오세훈 결승골(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-17T16:07:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/001/0016447621"
+    },
+    {
+     "title": "'카타르전 결승골' 오세훈 \"기회 너무 많이 놓쳐 미안해\"",
+     "press": "sports.hankooki.com",
+     "publishedAt": "2026-11-17T16:06:00.000Z",
+     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6943789"
+    },
+    {
+     "title": "오세훈 결승골... 모레노호, 카타르에 1-0 승리 '유종의 미'",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-17T16:04:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=884406"
+    }
+   ]
+  },
+  {
    "keyword": "경북 상주 지진",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 39,
+   "articles90": 28,
    "recent20": 2,
-   "press": 30,
-   "firstArticleAt": "2026-11-17T14:31:00.000Z",
+   "press": 23,
+   "firstArticleAt": "2026-11-17T14:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "경북 상주서 ‘올해 최강 지진’…규모 3.6",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-17T16:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003700463?sid=102"
+    },
     {
      "title": "경북 상주 북서쪽 22km 지역서 규모 3.6 지진",
      "press": "news.sbs.co.kr",
@@ -33,108 +71,103 @@
      "press": "kyongbuk.co.kr",
      "publishedAt": "2026-11-17T15:42:00.000Z",
      "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4091208"
-    },
-    {
-     "title": "[속보]수능 이틀 앞둔 밤 경북 상주서 규모 3.6 지진…수험생·주민 ‘깜...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-17T15:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003700462?sid=102"
     }
    ]
   },
   {
-   "keyword": "오세훈 선제골",
+   "keyword": "엔비디아 실적발표",
    "sources": [
     "daum"
    ],
-   "articles90": 44,
-   "recent20": 12,
-   "press": 26,
-   "firstArticleAt": "2026-11-17T14:46:00.000Z",
+   "articles90": 17,
+   "recent20": 1,
+   "press": 14,
+   "firstArticleAt": "2026-11-17T14:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "손흥민 '60호'는 다음에... 골문 연 건 투톱 짝꿍 오세훈",
-     "press": "stnsports.co.kr",
-     "publishedAt": "2026-11-17T15:58:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/450/0000155546"
+     "title": "11월 엔비디아 실적발표일 한국시간 몇시?",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-17T16:08:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1175367"
     },
     {
-     "title": "오세훈이 최전방에 있으면 편안하게 시청 가능! 깔끔한 전술수행부터 골...",
-     "press": "footballist.co.kr",
-     "publishedAt": "2026-11-17T15:55:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/436/0000114977"
+     "title": "뉴욕 증시, 엔비디아 실적 발표 주시하며 하락 출발",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-17T15:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002434273?sid=104"
     },
     {
-     "title": "7명 바꾸자 달라진 모레노호…오세훈 결승골로 카타르에 1-0 승리",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-17T15:54:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611180001"
+     "title": "[속보] 엔비디아 주가 155달러선 약세…실적 발표 앞두고 8.5% 변동 가능...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-17T15:16:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=627942"
     }
    ]
   },
   {
    "keyword": "한국",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 16,
+   "articles90": 15,
    "recent20": 15,
-   "press": 14,
-   "firstArticleAt": "2026-11-17T15:38:00.000Z",
+   "press": 13,
+   "firstArticleAt": "2026-11-17T15:53:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "한국토지신탁 3분기 영업익 15억원 흑자 전환",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-17T15:58:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=406747"
+     "title": "[442.told] 손흥민-이강인 다 막았다...'슈팅 22개 난사' 한국 울린 카타...",
+     "press": "fourfourtwo.co.kr",
+     "publishedAt": "2026-11-17T16:09:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/411/0000090103"
     },
     {
-     "title": "[A매치 REVIEW] '한국, 역대급 최악의 결정력' 상대 골키퍼 선방 쇼에 고...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-17T15:56:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/477/0000639610"
+     "title": "11월 엔비디아 실적발표일 한국시간 몇시?",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-17T16:08:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1175367"
     },
     {
-     "title": "트럼프 \"한국 역사적 투자 덕에 알래스카 LNG파이프라인 사업승인\"",
-     "press": "tfmedia.co.kr",
-     "publishedAt": "2026-11-17T15:54:00.000Z",
-     "link": "https://www.tfmedia.co.kr/news/article.html?no=208975"
+     "title": "‘한국 창작춤 대모’ 배정혜 안무가 별세",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-17T16:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001885800?sid=103"
     }
    ]
   },
   {
-   "keyword": "수능 비상 점검회의",
+   "keyword": "한일 정상 회담",
    "sources": [
     "nate"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-17T14:49:00.000Z",
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-17T14:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이 대통령 \"수능 부정 신고, 포상금 1억\" 수능 비상점검회의",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-17T15:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000521210?sid=100"
+     "title": "'미중러' 바라만 보는 한일…\"서로 협력\" 강조",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-17T16:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001403769?sid=100"
     },
     {
-     "title": "수능 AI 대책은 ‘단춧구멍 스티커’",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-17T15:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003565987?sid=102"
+     "title": "李대통령, 아세안 마치고 APEC 열리는 중국행…'미·중·러 회담' 앞두고...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-17T16:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005605823?sid=100"
     },
     {
-     "title": "이 대통령, AI 수능 부정행위 엄단…“수능 신뢰 절대 흔들려선 안돼”",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-17T15:14:00.000Z",
-     "link": "https://www.viva100.com/article/20261118500004"
+     "title": "아세안 정상회의 폐막…트럼프, 쿼드·아세안 정상들과 회동(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-17T15:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016447608?sid=104"
     }
    ]
   },
@@ -171,17 +204,23 @@
    ]
   },
   {
-   "keyword": "한일 정상 회담",
+   "keyword": "트럼프 희토류 생산",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-17T14:31:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-17T14:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "트럼프 \"10개월 내 희토류 생산 중국 따라잡을 것\"",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-17T16:00:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3449624"
+    },
     {
      "title": "아세안 정상회의 폐막…트럼프, 쿼드·아세안 정상들과 회동(종합)",
      "press": "yna.co.kr",
@@ -189,28 +228,22 @@
      "link": "https://n.news.naver.com/mnews/article/001/0016447608?sid=104"
     },
     {
-     "title": "이 대통령, 다카이치와 정상회담…미중러 앞두고 '한일협력' 강조",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-17T15:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000927193?sid=100"
-    },
-    {
-     "title": "이 대통령, 필리핀 일정 마치고 중국 선전으로 출발…APEC 정상회의 참석",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-17T15:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000521208?sid=100"
+     "title": "트럼프 \"10개월 내 中 희토류 추월\"…이란 '더티밤' 공격설엔 \"전례 없는...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-17T14:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005605815?sid=104"
     }
    ]
   },
   {
-   "keyword": "AI 세무사 경찰 조사 종료",
+   "keyword": "AI 세무사 조사 종료 사과",
    "sources": [
     "nate"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-17T14:33:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-17T14:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -239,13 +272,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-17T14:40:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-17T14:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "李대통령, 아세안 마치고 APEC 열리는 중국행…'미·중·러 회담' 앞두고...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-17T16:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005605823?sid=100"
+    },
     {
      "title": "李 아세안 일정 마무리, APEC 참석 중국으로...트럼프 조우",
      "press": "edaily.co.kr",
@@ -257,22 +296,17 @@
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-17T14:56:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012295973?sid=100"
-    },
-    {
-     "title": "이 대통령, 필리핀 아세안 일정 마치고 중국으로 출국…APEC 참석",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-17T14:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014328508?sid=100"
     }
    ]
   },
   {
    "keyword": "조국, 일본 입국 거부",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-17T15:01:00.000Z",
    "exclusive": false,
@@ -297,43 +331,11 @@
      "link": "https://n.news.naver.com/mnews/article/025/0003565931?sid=104"
     }
    ]
-  },
-  {
-   "keyword": "트럼프 희토류 생산",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-17T14:53:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "아세안 정상회의 폐막…트럼프, 쿼드·아세안 정상들과 회동(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-17T15:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016447608?sid=104"
-    },
-    {
-     "title": "트럼프 \"10개월 내 中 희토류 추월\"…이란 '더티밤' 공격설엔 \"전례 없는...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-17T14:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005605815?sid=104"
-    },
-    {
-     "title": "트럼프 “10개월 안에 중국 희토류 따라잡겠다”",
-     "press": "segye.com",
-     "publishedAt": "2026-11-17T14:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004176008?sid=104"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 908,
+  "flagged": 909,
   "matched": 514,
   "avgLeadMin": 819,
   "recent": [
