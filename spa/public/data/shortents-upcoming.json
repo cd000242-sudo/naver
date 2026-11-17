@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T03:37:37.471Z",
+ "builtAt": "2026-11-17T03:47:40.429Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -17,83 +17,81 @@
     "nate"
    ],
    "articles90": 88,
-   "recent20": 16,
+   "recent20": 13,
    "press": 65,
-   "firstArticleAt": "2026-11-17T02:36:00.000Z",
+   "firstArticleAt": "2026-11-17T02:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] '조작기소 특검법' 공포안 국무회의 통과…韓총리 주재",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-17T03:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000544212?sid=101"
+     "title": "국민의힘 “한성숙 총리도 탈옥 범죄 공범 될 것”… 공소취소 특검법 ...",
+     "press": "mediawatch.kr",
+     "publishedAt": "2026-11-17T03:42:00.000Z",
+     "link": "https://www.mediawatch.kr/news/article.html?no=261765"
     },
     {
-     "title": "'조작기소 특검법' 국무회의 통과…한성숙 국무총리 주재",
-     "press": "sisafocus.co.kr",
-     "publishedAt": "2026-11-17T03:34:00.000Z",
-     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367698"
+     "title": "총리 주재 국무회의서 '조작기소특검법' 의결",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-17T03:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926966?sid=100"
     },
     {
-     "title": "한성숙 국무회의 '조작기소특검법' 통과. \"국민 안두렵냐\"",
-     "press": "viewsnnews.com",
-     "publishedAt": "2026-11-17T03:32:00.000Z",
-     "link": "https://www.viewsnnews.com/article?q=239749"
+     "title": "이재명 대통령 둘러싼 조작기소 특검법 통과, 정치권 긴장 고조",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-17T03:38:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886067"
     }
    ]
   },
   {
-   "keyword": "AI 부정행위 대응",
+   "keyword": "AI 부정행위 대응 강화",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 72,
-   "recent20": 15,
-   "press": 49,
-   "firstArticleAt": "2026-11-17T02:38:00.000Z",
+   "articles90": 75,
+   "recent20": 9,
+   "press": 55,
+   "firstArticleAt": "2026-11-17T02:22:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "충남교육청, 수능 감독 인력 보강…AI 부정행위 대응 강화",
-     "press": "goodmorningcc.com",
-     "publishedAt": "2026-11-17T03:36:00.000Z",
-     "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=455978"
+     "title": "AI 악용한 시험 부정행위, SAT부터 유럽까지 확산... 국제 교육계 비상",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-17T03:40:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886074"
     },
     {
-     "title": "“EMP 만들어서 가겠다”…AI커닝 공포에 수험생들 아비규환",
-     "press": "ekn.kr",
-     "publishedAt": "2026-11-17T03:36:00.000Z",
-     "link": "https://www.ekn.kr/web/view.php?key=20261117029290733"
+     "title": "與, AI 활용 시험 부정행위 엄정 대응… 응시제한 최대 10년 입법 추진",
+     "press": "m.skyedaily.com",
+     "publishedAt": "2026-11-17T03:40:00.000Z",
+     "link": "https://m.skyedaily.com/news_view.html?ID=314766"
     },
     {
-     "title": "이준석, AI 악용 시험 부정행위 '방패' 만들었다",
-     "press": "thereport.co.kr",
-     "publishedAt": "2026-11-17T03:34:00.000Z",
-     "link": "https://www.thereport.co.kr/news/articleView.html?idxno=93429"
+     "title": "수능 부정행위 자격정지 '1년 -> 5년' 추진",
+     "press": "news.ebs.co.kr",
+     "publishedAt": "2026-11-17T03:40:00.000Z",
+     "link": "http://news.ebs.co.kr/ebsnews/allView/60791015/N"
     }
    ]
   },
   {
    "keyword": "최교진 교육부 장관",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 30,
-   "recent20": 2,
-   "press": 25,
-   "firstArticleAt": "2026-11-17T02:10:00.000Z",
+   "articles90": 21,
+   "recent20": 1,
+   "press": 21,
+   "firstArticleAt": "2026-11-17T02:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이준석, ‘수능 AI 부정행위’ 탐지 앱 개발…“교육부 장관 답변에 한...",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-17T03:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003565776?sid=100"
+     "title": "수능 이틀 앞두고 'AI 부정행위' 우려에 연기 요구...교육부 \"검토 안 해...",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-17T03:42:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=564485"
     },
     {
      "title": "최교진 교육장관, 세무사시험 AI 부정행위 논란에 직무유기 고발...\"정부...",
@@ -110,15 +108,110 @@
    ]
   },
   {
-   "keyword": "김정은 삼지연 방문",
+   "keyword": "장동혁",
    "sources": [
-    "signal.bz",
+    "google"
+   ],
+   "articles90": 27,
+   "recent20": 4,
+   "press": 15,
+   "firstArticleAt": "2026-11-17T02:37:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "토론회 축사하는 장동혁 대표",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-17T03:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016446275?sid=100"
+    },
+    {
+     "title": "목 축이는 장동혁 대표",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-17T03:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016446279?sid=100"
+    },
+    {
+     "title": "생각에 잠긴 장동혁 대표",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-17T03:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016446272?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "마약 사범 86명 검거",
+   "sources": [
     "nate"
    ],
-   "articles90": 13,
+   "articles90": 16,
+   "recent20": 1,
+   "press": 15,
+   "firstArticleAt": "2026-11-17T03:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘흥분제’라는 말에 발동한 호기심…친구·연인 따라 시작한 마약, 공...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-17T03:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002724548?sid=102"
+    },
+    {
+     "title": "친구·연인에게 마약 권유… 투약·유통 일당 86명 무더기 검거",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-17T03:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001205363?sid=102"
+    },
+    {
+     "title": "'지인 권유'에 빠진 일반인 마약…86명 입건·29명 구속",
+     "press": "youthdaily.co.kr",
+     "publishedAt": "2026-11-17T03:14:00.000Z",
+     "link": "https://www.youthdaily.co.kr/news/article.html?no=229955"
+    }
+   ]
+  },
+  {
+   "keyword": "보습크림 8종 품질 비교",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 21,
    "recent20": 0,
    "press": 11,
-   "firstArticleAt": "2026-11-17T02:10:00.000Z",
+   "firstArticleAt": "2026-11-17T02:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "보습크림 뭐 살까?…세타필 사용 만족도 최고·가격은 가장 저렴",
+     "press": "kizmom.com",
+     "publishedAt": "2026-11-17T03:25:00.000Z",
+     "link": "https://www.kizmom.com/news/articleView.html?idxno=114022"
+    },
+    {
+     "title": "보습크림 가격차 최대 6.9배… 안전성은 모두 '합격점'",
+     "press": "bokuennews.com",
+     "publishedAt": "2026-11-17T03:10:00.000Z",
+     "link": "http://www.bokuennews.com/news/article.html?no=287289"
+    },
+    {
+     "title": "보습크림 가격 6.9배차…'최저가'가 만족도 1위",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-17T03:02:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445155"
+    }
+   ]
+  },
+  {
+   "keyword": "김정은 삼지연 방문",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 11,
+   "recent20": 0,
+   "press": 9,
+   "firstArticleAt": "2026-11-17T02:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -139,39 +232,6 @@
      "press": "news.bbsi.co.kr",
      "publishedAt": "2026-11-17T03:06:00.000Z",
      "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4119032"
-    }
-   ]
-  },
-  {
-   "keyword": "발언하는 장동혁 대표",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-17T02:09:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "장동혁 \"AI 부정행위 대책 없다면 수능 연기라도 검토해야\"",
-     "press": "goodkyung.com",
-     "publishedAt": "2026-11-17T03:12:00.000Z",
-     "link": "https://www.goodkyung.com/news/articleView.html?idxno=293536"
-    },
-    {
-     "title": "AI 커닝 대책? 이준석은 '전파탐지 앱', 장동혁은 '수능 연기'",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-17T03:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002536125?sid=100"
-    },
-    {
-     "title": "[포토] 현장 의총서 발언하는 장동혁 국민의힘 대표",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-17T02:58:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/17/2026111750148.html"
     }
    ]
   },
@@ -208,66 +268,34 @@
    ]
   },
   {
-   "keyword": "LG 올레드 TV 유럽 7개국 1위",
+   "keyword": "나가야마 에이타, 손석구와 한국 사랑",
    "sources": [
     "nate"
    ],
    "articles90": 7,
-   "recent20": 0,
+   "recent20": 4,
    "press": 7,
-   "firstArticleAt": "2026-11-17T02:12:00.000Z",
+   "firstArticleAt": "2026-11-17T03:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "LG 올레드 TV, 유럽 7개국 소비자 평가 27개 부문 1위",
-     "press": "whitepaper.co.kr",
-     "publishedAt": "2026-11-17T02:40:00.000Z",
-     "link": "http://www.whitepaper.co.kr/news/articleView.html?idxno=268849"
+     "title": "'푸른길' 손석구x나가야마 에이타, 국경 넘은 한·일 콤비...\"장벽 넘어...",
+     "press": "starnewsk.com",
+     "publishedAt": "2026-11-17T03:40:00.000Z",
+     "link": "http://www.starnewsk.com/news/articleView.html?idxno=61090"
     },
     {
-     "title": "LG전자 올레드 TV, 유럽 7개국 소비자 평가 27개 부문 석권 … 프리미엄...",
-     "press": "worktoday.co.kr",
-     "publishedAt": "2026-11-17T02:38:00.000Z",
-     "link": "http://www.worktoday.co.kr/news/articleView.html?idxno=92148"
-    },
-    {
-     "title": "픽셀이 스스로 빛 내는 LG올레드 TV, 유럽서 빛났다…점유율 51.8% 질주",
-     "press": "wikileaks-kr.org",
-     "publishedAt": "2026-11-17T02:32:00.000Z",
-     "link": "https://www.wikileaks-kr.org/news/articleView.html?idxno=194730"
-    }
-   ]
-  },
-  {
-   "keyword": "피의자",
-   "sources": [
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-17T02:18:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[단독] '소녀 살해' 피의자 아들도...\"가스라이팅 당해 절도\"",
-     "press": "ytn.co.kr",
+     "title": "‘푸른길’ 나가야마 에이타 “한국인의 국민성 사랑하게 돼”…한국어...",
+     "press": "sports.khan.co.kr",
      "publishedAt": "2026-11-17T03:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002433945?sid=102"
+     "link": "https://m.entertain.naver.com/article/144/0001150244"
     },
     {
-     "title": "'성북 10대 살인' 50대 피의자 전 연인 최초 신고서 \"건성으로 넘어가\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-17T03:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009293534?sid=102"
-    },
-    {
-     "title": "'수석' 합격자가 피의자로‥\"수험생에 죄송\"",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-17T03:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001536085?sid=102"
+     "title": "'푸른길', 손석구·나가야마 에이타의 국경 초월 공조…색다른 버디 수...",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-17T03:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000052994"
     }
    ]
   },
@@ -276,13 +304,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 7,
+   "articles90": 8,
    "recent20": 1,
-   "press": 6,
+   "press": 7,
    "firstArticleAt": "2026-11-17T02:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'대어' 앤트로픽 상장 임박…잔잔한 환시에 미칠 파장은",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-17T03:42:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445160"
+    },
     {
      "title": "샘 알트먼 \"AI 칩 수요에 중복 계산 있다\"…상장은 '언젠가'",
      "press": "tokenpost.kr",
@@ -294,51 +328,13 @@
      "press": "energy-news.co.kr",
      "publishedAt": "2026-11-17T03:08:00.000Z",
      "link": "https://www.energy-news.co.kr/news/articleView.html?idxno=229842"
-    },
-    {
-     "title": "[ESG 트렌드] 동아제약, KCGS ESG 평가서 지배구조 ‘A+’…상장사 최상...",
-     "press": "ibabynews.com",
-     "publishedAt": "2026-11-17T03:08:00.000Z",
-     "link": "https://www.ibabynews.com/news/articleView.html?idxno=156983"
-    }
-   ]
-  },
-  {
-   "keyword": "2027",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 4,
-   "press": 4,
-   "firstArticleAt": "2026-11-17T03:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "강원도, 청년 농촌 정착 지원 확대…2027년부터 4개 신규사업 추진",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-17T03:34:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5084284"
-    },
-    {
-     "title": "KIA 김도영 2027 연봉 10억원? 이정후 7억5천 깰 수도…2026년 10억 받은...",
-     "press": "maniareport.com",
-     "publishedAt": "2026-11-17T03:32:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/425/0000215056"
-    },
-    {
-     "title": "얀마농기코리아(주) 합천대리점, 2027년 신제품 농기계 고객 초청 전시...",
-     "press": "newsgn.com",
-     "publishedAt": "2026-11-17T03:24:00.000Z",
-     "link": "https://www.newsgn.com/news/articleView.html?idxno=586173"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 846,
+  "flagged": 851,
   "matched": 466,
   "avgLeadMin": 856,
   "recent": [
