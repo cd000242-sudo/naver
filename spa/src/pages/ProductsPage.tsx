@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import SplitWords from '../components/motion/SplitWords';
 import { Link } from 'react-router-dom';
+import HeroFilm from '../components/products/HeroFilm';
 import ProductPageStyles from '../components/products/ProductPageStyles';
 import { CloseBand, FaqList, HeroActions, ProofStrip, ReviewQuotes, VsPanel } from '../components/products/ProductBlocks';
 import { ArrowRight } from '../components/products/ProductIcons';
@@ -132,7 +133,8 @@ function ProductsPage() {
             <section className="pp-hero">
                 <div className="pp-wrap">
                     <div className="pp-hero-grid">
-                        <div>
+                        <div className="pp-hero-copy">
+                            <HeroFilm />
                             <h1><SplitWords text="찾고, 쓰고, 올리는" /><br /><em><SplitWords text="블로그로 버는 데" offset={3} /><br /><SplitWords text="필요한 도구" offset={6} /></em></h1>
                             <p className="pp-hero-sub">키워드를 찾는 LEWORD, 네이버에 올리는 Better Life Naver, 워드프레스 · 티스토리 · 블로그스팟을 맡는 Orbit. 필요한 것만 하나씩 사도 됩니다.</p>
                             <HeroActions primary={{ to: '/pricing', label: '상점에서 고르기' }} secondary={{ to: '/leword', label: 'LEWORD 맛보기' }} />
