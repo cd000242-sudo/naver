@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T20:41:43.560Z",
+ "builtAt": "2026-11-17T20:51:47.304Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,13 +15,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 2,
+   "articles90": 9,
+   "recent20": 3,
    "press": 8,
-   "firstArticleAt": "2026-11-17T19:14:00.000Z",
+   "firstArticleAt": "2026-11-17T19:27:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "젠슨 황, 복귀 의사 밝혔지만…엔비디아는 벌써 후임 물색 중",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-17T20:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000927226?sid=104"
+    },
     {
      "title": "젠슨 황 \"이사회가 원하면 CEO 복귀\"…엔비디아는 검토 안 해",
      "press": "aitimes.com",
@@ -33,12 +39,6 @@
      "press": "seoul.co.kr",
      "publishedAt": "2026-11-17T20:35:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/081/0003700547?sid=104"
-    },
-    {
-     "title": "젠슨 황 사태 후폭풍...국내 반도체주 어디로 가나",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-17T20:10:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=505206"
     }
    ]
   },
@@ -82,10 +82,16 @@
    "articles90": 6,
    "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-17T19:16:00.000Z",
+   "firstArticleAt": "2026-11-17T19:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "트럼프, 이 대통령 앞에서 “韓 투자 덕에 알래스카 LNG 승인”",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-17T20:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006411466?sid=104"
+    },
     {
      "title": "이 대통령, 트럼프 대통령과 필리핀 만찬장서 조우",
      "press": "yonhapnewstv.co.kr",
@@ -97,12 +103,38 @@
      "press": "goodnews1.com",
      "publishedAt": "2026-11-17T20:18:00.000Z",
      "link": "https://www.goodnews1.com/news/articleView.html?idxno=466341"
+    }
+   ]
+  },
+  {
+   "keyword": "오세훈 선제골 1-0 승리",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 6,
+   "recent20": 3,
+   "press": 4,
+   "firstArticleAt": "2026-11-17T19:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "모레노호, 카타르전 승리…재계약은 미정",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-17T20:50:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611180008"
     },
     {
-     "title": "이재명 대통령, 환영 받으며 중국 도착",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-17T19:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016447716?sid=100"
+     "title": "정우영, 카타르전 교체 출전…한국 1-0 승리",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-17T20:48:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611180007"
+    },
+    {
+     "title": "오세훈 선제골…한국 카타르 1-0 승리",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-17T20:46:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611180006"
     }
    ]
   },
@@ -112,7 +144,7 @@
     "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 4,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-17T19:50:00.000Z",
    "exclusive": false,
@@ -139,15 +171,79 @@
    ]
   },
   {
+   "keyword": "트럼프 알래스카 LNG 승인",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-17T20:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프, 이 대통령 앞에서 “韓 투자 덕에 알래스카 LNG 승인”",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-17T20:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006411466?sid=104"
+    },
+    {
+     "title": "트럼프 \"韓 투자 덕에 알래스카 LNG파이프라인 사업승인\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-17T20:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000927217?sid=104"
+    },
+    {
+     "title": "트럼프 “韓 역사적 투자 덕에 알래스카 LNG파이프라인 사업 승인”",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-17T20:16:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611180003"
+    }
+   ]
+  },
+  {
+   "keyword": "백신",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-17T20:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "코로나백신 접종 피해자 보상 이의신청 '연장 추진'",
+     "press": "dailymedi.com",
+     "publishedAt": "2026-11-17T20:38:00.000Z",
+     "link": "https://www.dailymedi.com/news/news_view.php?wr_id=942696"
+    },
+    {
+     "title": "유효기한 하루 지난 백신과 자격정지 : 대법원의 기준",
+     "press": "medicaltimes.com",
+     "publishedAt": "2026-11-17T20:30:00.000Z",
+     "link": "https://www.medicaltimes.com/Main/News/NewsView.html?ID=1171896&ref=naverpc"
+    },
+    {
+     "title": "코로나백신 부작용, 피해자가 증명 안해도 된다…이소희, 개정안 발의",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-17T20:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003059728?sid=100"
+    }
+   ]
+  },
+  {
    "keyword": "경찰",
    "sources": [
     "signal.bz",
     "google"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-17T19:19:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-17T20:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -170,43 +266,11 @@
      "link": "https://n.news.naver.com/mnews/article/003/0014328590?sid=100"
     }
    ]
-  },
-  {
-   "keyword": "오세훈 결승골, 모레노호 1-0 승리",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-17T19:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'모레노호 1기 최다 득점자'는 손흥민…'6경기 3골'로 공격진 중심 잡았...",
-     "press": "sports.hankooki.com",
-     "publishedAt": "2026-11-17T20:30:00.000Z",
-     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6943790"
-    },
-    {
-     "title": "‘슈팅 21-2’ 압도적이지만 단 1골에 그쳤다…‘오세훈 결승골’ 사우...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-17T20:00:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/410/0001147586"
-    },
-    {
-     "title": "모레노호, 올해 최종전서 카타르에 1-0 승리",
-     "press": "goodnews1.com",
-     "publishedAt": "2026-11-17T19:42:00.000Z",
-     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466340"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 931,
+  "flagged": 932,
   "matched": 514,
   "avgLeadMin": 819,
   "recent": [
