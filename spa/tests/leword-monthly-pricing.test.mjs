@@ -121,3 +121,15 @@ test('the store opens on the one-year term and marks the bundle body that carrie
  assert.match(source,/useState<TermId>\('yearly'\)/);
  assert.match(source,/st-has-media/);
 });
+test('each single product carries a clip whose files exist, and the bundle keeps its own showcase',()=>{
+ for(const id of ['naver','orbit','leword']){
+  const {clip}=product(id);
+  assert.ok(clip,`${id} has a clip`);
+  for(const file of [clip.src,clip.poster])assert.ok(fs.existsSync(new URL(`../public${file}`,import.meta.url)),`${file} exists`);
+ }
+ assert.equal(product('all').clip,undefined);
+ const store=fs.readFileSync(new URL('../src/components/store/ProductStore.tsx',import.meta.url),'utf8');
+ assert.match(store,/product\.clip\s*\?\s*<InViewClip/);
+ const band=fs.readFileSync(new URL('../src/components/products/ProductsExtras.tsx',import.meta.url),'utf8');
+ assert.match(band,/useState\(film \? -1 : 0\)/);
+});

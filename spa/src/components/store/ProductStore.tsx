@@ -9,6 +9,7 @@ import {
 import StoreIcon from './StoreIcons';
 import SplitWords from '../motion/SplitWords';
 import SlidingInk from '../motion/SlidingInk';
+import InViewClip from '../motion/InViewClip';
 import StoreStyles from './StoreStyles';
 
 /**
@@ -218,9 +219,11 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust, hea
                                 <div className="st-bundle-proof">{proof}</div>
                             )}
                             {!product.bundle && (
-                                <div className="st-shot">
+                                <div className={`st-shot${product.clip ? ' st-shot-clip' : ''}`}>
                                     {/* 어드민이 새로 만든 제품은 그림이 없다 — 기호로 채운다. 빈 src 는 깨진 그림이 된다. */}
-                                    {product.image
+                                    {product.clip
+                                        ? <InViewClip src={product.clip.src} poster={product.clip.poster} label={`${product.name} 소개 영상`} />
+                                        : product.image
                                         ? <img src={product.image} alt="" loading="lazy" />
                                         : <span className="st-shot-glyph" aria-hidden="true">{product.glyph}</span>}
                                     {product.trial && <span className="st-flag">무료 체험 있음</span>}

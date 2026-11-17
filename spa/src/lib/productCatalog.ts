@@ -39,6 +39,8 @@ export type Product = {
     licensePlatform: string;
     /** 카드 그림. 기존 사이트에 이미 있는 파일만 쓴다 — 없는 이미지를 지어내지 않는다. */
     image: string;
+    /** [2026-11-17] Silent motion clip made from real recordings; the card plays it instead of the still. */
+    clip?: { src: string; poster: string };
     accent: string;
     glyph: string;
     /** 이벤트가. 비어 있으면 그 기간은 팔지 않는다. */
@@ -59,6 +61,7 @@ export const PRODUCTS: Product[] = [
         summary: '키워드만 넣으면 글·이미지 구성까지 만들어 예약 발행합니다.',
         licensePlatform: 'LEADERNAM',
         image: '/images/feature-auto-publish.png',
+        clip: { src: '/videos/pricing-showcase/site-naver.mp4', poster: '/videos/pricing-showcase/site-naver.jpg' },
         accent: '#34d399',
         glyph: '✎',
         prices: { monthly: 29000, yearly: 300000, lifetime: 1500000 },
@@ -73,6 +76,7 @@ export const PRODUCTS: Product[] = [
         summary: '세 블로그에 글을 쓰고 관리합니다. 외부 유입용 글과 카드뉴스까지 만듭니다.',
         licensePlatform: 'ORBIT',
         image: '/images/orbit/leadernam-orbit-download-card.webp',
+        clip: { src: '/videos/pricing-showcase/site-orbit.mp4', poster: '/videos/pricing-showcase/site-orbit.jpg' },
         accent: '#818cf8',
         glyph: '◎',
         prices: { monthly: 39000, yearly: 400000, lifetime: 2000000 },
@@ -87,6 +91,7 @@ export const PRODUCTS: Product[] = [
         summary: '검색결과를 직접 열어 보고 지금 들어갈 자리가 있는 키워드만 남깁니다.',
         licensePlatform: 'LEWORD',
         image: '/images/leword/hero-banner-card.webp',
+        clip: { src: '/videos/pricing-showcase/site-leword.mp4', poster: '/videos/pricing-showcase/site-leword.jpg' },
         accent: '#f0b53f',
         glyph: '◆',
         // 2026-10-07 사장님 결정 — 월 19,900원 유지(검증된 도구보다 같거나 싸게) · 1년은 월 10달 치 199,000원 · 영구제 판매 중지

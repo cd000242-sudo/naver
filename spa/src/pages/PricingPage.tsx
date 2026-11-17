@@ -108,6 +108,7 @@ function PurchaseVideoShowcase() {
                 <video
                     key={clip.src}
                     src={clip.src}
+                    poster={clip.poster}
                     autoPlay
                     muted
                     playsInline
@@ -121,7 +122,7 @@ function PurchaseVideoShowcase() {
                 <b>{clip.label}</b>
                 <span>{clip.title}</span>
             </div>
-            <div className="purchase-video-tabs" role="group" aria-label="발행 예시 영상 고르기">
+            <div className="purchase-video-tabs" role="group" aria-label="제품 영상 고르기">
                 {PURCHASE_SHOWCASE_VIDEOS.map((item, at) => (
                     <button
                         key={item.src}
@@ -135,35 +136,39 @@ function PurchaseVideoShowcase() {
     );
 }
 
+/*
+ * [2026-11-17 owner] The raw 5-13 second screen recordings were replaced by four silent motion-graphic clips made
+ * from real recordings: one for the bundle and one per product. They play muted, so each clip explains itself
+ * with on-screen words; the poster is shown until the clip loads.
+ */
 const PURCHASE_SHOWCASE_VIDEOS = [
     {
-        title: 'Better-Life-Naver 글발행 예시 영상',
-        label: '네이버 자동 발행',
-        desc: '키워드 입력부터 글 작성, 이미지 구성, 발행 흐름까지 실제 구매자가 가장 먼저 확인해야 할 장면입니다.',
-        src: '/videos/pricing-showcase/better-life-naver-publish-demo.mp4',
+        title: '키워드 찾기부터 글 생성 · 발행까지 한 번에',
+        label: '올인원 한눈에',
+        desc: 'LEWORD 로 키워드를 찾고, Better Life Naver 로 글을 만들어 발행하고, Leadernam Orbit 으로 워드프레스까지 발행하는 흐름입니다.',
+        src: '/videos/pricing-showcase/site-allinone.mp4',
+        poster: '/videos/pricing-showcase/site-allinone.jpg',
     },
     {
-        title: 'LEADERNAM-Orbit 글 발행 영상',
-        label: 'Orbit 통합 발행',
-        desc: '외부유입용 글 발행 흐름을 한 번에 확인합니다.',
-        src: '/videos/pricing-showcase/leadernam-orbit-publish-demo.mp4',
-    },
-    /*
-     * 블로그스팟은 뺐다(2026-08-23). 나머지 넷은 1280×720 원본으로 갈았는데
-     * 이것만 옛 400×224 라 혼자 뭉개져 보인다 — 나란히 두면 오히려 흠이 된다.
-     * 720p 원본을 받으면 그때 되살린다.
-     */
-    {
-        title: 'LEADERNAM-Orbit 워드프레스 발행 예시 영상',
-        label: '워드프레스',
-        desc: 'WordPress 발행 채널을 운영하는 사용자를 위한 예시입니다.',
-        src: '/videos/pricing-showcase/leadernam-orbit-wordpress-demo.mp4',
+        title: '네이버 블로그 글 생성 · 이미지 · 발행',
+        label: 'Better Life Naver',
+        desc: '글 생성, 이미지 생성, 네이버 블로그 발행까지의 실제 화면입니다.',
+        src: '/videos/pricing-showcase/site-naver.mp4',
+        poster: '/videos/pricing-showcase/site-naver.jpg',
     },
     {
-        title: 'LEADERNAM-Orbit 티스토리 발행 예시 영상',
-        label: '티스토리',
-        desc: 'Tistory 발행까지 연결되는 외부유입 운영 흐름입니다.',
-        src: '/videos/pricing-showcase/leadernam-orbit-tistory-demo.mp4',
+        title: '워드프레스 · 티스토리 · 블로그스팟 발행',
+        label: 'Leadernam Orbit',
+        desc: '글 엔진을 고르고 키워드만 넣어 외부 블로그에 발행하는 실제 화면입니다.',
+        src: '/videos/pricing-showcase/site-orbit.mp4',
+        poster: '/videos/pricing-showcase/site-orbit.jpg',
+    },
+    {
+        title: '블로그 키워드 찾기 · 확장',
+        label: 'LEWORD',
+        desc: '황금키워드, 검색량 · 문서수, 마인드맵 확장, 실시간 검색어 화면입니다.',
+        src: '/videos/pricing-showcase/site-leword.mp4',
+        poster: '/videos/pricing-showcase/site-leword.jpg',
     },
 ];
 

@@ -178,6 +178,7 @@ function ProductsPage() {
                         body="검색량은 붙었는데 글은 적은 키워드를 매일 검색결과를 직접 열어 확인하고 남깁니다. 고수 블로그가 요즘 쓰는 소재와 그보다 나은 제목, 글 한 편의 설계까지 이어 줍니다. 웹에서 바로 쓰고 PC 앱도 있습니다. 글을 쓰지는 않습니다."
                         shots={LEWORD_SHOTS}
                         clip={clipFor(content, 'leword', null)}
+                        film={{ src: '/videos/pricing-showcase/site-leword.mp4', poster: '/videos/pricing-showcase/site-leword.jpg', alt: 'LEWORD 소개 영상' }}
                     >
                         {leword && <BandPrice product={leword} />}
                         <BandLinks detail="/leword-detail" product={leword} />
@@ -189,6 +190,7 @@ function ProductsPage() {
                         body="키워드나 상품 주소를 넣으면 글과 이미지 구성을 만들어 네이버 블로그에 예약 발행합니다. 검색 · 홈판 · 쇼핑커넥트 · 사용자 정의 네 가지 모드가 있고, 여러 계정을 차례로 돌릴 수 있습니다."
                         shots={NAVER_SHOTS}
                         clip={clipFor(content, 'naver', { src: '/images/hero-demo.mp4', alt: 'Better Life Naver 자동 발행 장면' })}
+                        film={{ src: '/videos/pricing-showcase/site-naver.mp4', poster: '/videos/pricing-showcase/site-naver.jpg', alt: 'Better Life Naver 소개 영상' }}
                         flip
                     >
                         {naver && <BandPrice product={naver} />}
@@ -201,6 +203,7 @@ function ProductsPage() {
                         body="세 블로그에 글을 쓰고 발행합니다. 여러 키워드를 대기열에 넣어 차례로 올리고, 발행한 글을 바탕으로 외부 유입용 글과 카드뉴스도 만듭니다."
                         shots={ORBIT_SHOTS}
                         clip={clipFor(content, 'orbit', { src: '/images/orbit/orbit-hero-live.mp4', alt: 'Leadernam Orbit 발행 결과 화면' })}
+                        film={{ src: '/videos/pricing-showcase/site-orbit.mp4', poster: '/videos/pricing-showcase/site-orbit.jpg', alt: 'Leadernam Orbit 소개 영상' }}
                     >
                         {orbit && <BandPrice product={orbit} />}
                         <BandLinks detail="/orbit" product={orbit} trial />

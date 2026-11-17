@@ -7,6 +7,7 @@
  */
 import { useState, type ReactNode } from 'react';
 import CountUp from '../motion/CountUp';
+import InViewClip from '../motion/InViewClip';
 import { TERMS, isTaxIncludedPrice, won, type Product } from '../../lib/productCatalog';
 import { light, lightRadius, motion, type } from '../../styles/tokens';
 
@@ -18,6 +19,7 @@ export function ProductsExtrasStyles() {
 .pp-pb .pp-pb-frame > picture { display:block; }
 .pp-pb .pp-pb-frame > picture > img { display:block; width:100%; aspect-ratio:4 / 3; object-fit:cover; object-position:top center; background:var(--pp-raised); }
 .pp-pb .pp-pb-frame > picture > img.left { object-position:left top; }
+.pp-pb .pp-pb-frame > .pp-pb-film { display:block; width:100%; aspect-ratio:16 / 9; object-fit:cover; background:#0b0c0e; cursor:pointer; }
 .pp-pb-clip { position:absolute; right:12px; bottom:12px; width:30%; max-width:230px; display:block; border-radius:${lightRadius.control}px; border:1px solid var(--pp-line); background:var(--pp-raised);
   box-shadow:${light.shadowFloat}; }
 .pp-switch { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 24px; }
@@ -66,14 +68,17 @@ export function ProductsExtrasStyles() {
  *  mobileSrc — 폰(≤720px)에서 쓸 확대 잘라낸 화면. 전체 화면을 폰 폭으로 줄이면 글씨가 무늬가 된다. */
 export type BandShot = { label: string; src: string; alt: string; caption: string; align?: 'left'; mobileSrc?: string };
 export type BandClip = { src: string; alt: string };
+/** [2026-11-17] The product's silent motion clip: the first thing the frame shows. */
+export type BandFilm = { src: string; poster: string; alt: string };
 
 const prefersReducedMotion = () => typeof window !== 'undefined' && !!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
 /** 제품 띠 — 글 한쪽 · 실제 화면 한쪽. 화면 이름을 누르면 같은 자리에서 실제 화면이 바뀐다. */
-export function ProductBand({ id, title, body, shots, clip, flip, children }: {
-    id: string; title: string; body: string; shots: BandShot[]; clip?: BandClip | null; flip?: boolean; children?: ReactNode;
+export function ProductBand({ id, title, body, shots, clip, film, flip, children }: {
+    id: string; title: string; body: string; shots: BandShot[]; clip?: BandClip | null; film?: BandFilm | null; flip?: boolean; children?: ReactNode;
 }) {
-    const [index, setIndex] = useState(0);
+    // -1 is the film. A band with a film opens on it; the screen names then switch to the stills.
+    const [index, setIndex] = useState(film ? -1 : 0);
     const [reduceMotion] = useState(prefersReducedMotion);
     const shot = shots[index] || shots[0];
     return (
@@ -81,8 +86,9 @@ export function ProductBand({ id, title, body, shots, clip, flip, children }: {
             <div className="pp-band-copy">
                 <h3>{title}</h3>
                 <p>{body}</p>
-                {shots.length > 1 && (
+                {(shots.length > 1 || film) && (
                     <div className="pp-switch" role="group" aria-label="실제 화면 바꿔 보기">
+                        {film && <button type="button" aria-pressed={index === -1} onClick={() => setIndex(-1)}>소개 영상</button>}
                         {shots.map((item, i) => (
                             <button key={item.src} type="button" aria-pressed={i === index} onClick={() => setIndex(i)}>{item.label}</button>
                         ))}
@@ -92,16 +98,20 @@ export function ProductBand({ id, title, body, shots, clip, flip, children }: {
             </div>
             <figure className="pp-shot">
                 <div className="pp-pb-frame">
+                    {film && index === -1 ? (
+                        <InViewClip className="pp-pb-film" src={film.src} poster={film.poster} label={film.alt} />
+                    ) : (
                     <picture key={shot.src}>
                         {shot.mobileSrc && <source media="(max-width: 720px)" srcSet={shot.mobileSrc} />}
                         <img className={shot.align === 'left' ? 'left' : undefined} src={shot.src} alt={shot.alt} loading="lazy" decoding="async" />
                     </picture>
-                    {clip && (
+                    )}
+                    {clip && !film && (
                         <video className="pp-pb-clip" src={clip.src} aria-label={clip.alt} muted loop playsInline preload="metadata"
                             autoPlay={!reduceMotion} controls={reduceMotion} />
                     )}
                 </div>
-                <figcaption>{clip ? `${shot.caption} · 작은 창은 실제 영상` : shot.caption}</figcaption>
+                <figcaption>{film && index === -1 ? '실제 화면으로 만든 소개 영상 · 소리 없음' : clip && !film ? `${shot.caption} · 작은 창은 실제 영상` : shot.caption}</figcaption>
             </figure>
         </div>
     );

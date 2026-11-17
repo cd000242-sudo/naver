@@ -88,6 +88,9 @@ function StoreStyles() {
 
             .st-shot { position: relative; aspect-ratio: 16 / 9.6; overflow: hidden; background: var(--st-raised); border-bottom: 1px solid var(--st-line); }
             .st-shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+            /* [2026-11-17] A product clip fills the same box; its headline sits top-left, so the flags move down. */
+            .st-shot video { width: 100%; height: 100%; object-fit: cover; display: block; background: #0b0c0e; cursor: pointer; }
+            .st-shot-clip .st-flag { top: auto; bottom: 12px; }
             .st-shot-glyph { display: grid; place-items: center; width: 100%; height: 100%; font-size: 44px; color: var(--st-mute); }
             .st-flag {
                 position: absolute; left: 12px; top: 12px; z-index: 2; padding: 4px 12px; border-radius: ${lightRadius.pill}px;
