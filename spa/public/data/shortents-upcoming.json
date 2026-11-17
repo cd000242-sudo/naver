@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T21:01:51.214Z",
+ "builtAt": "2026-11-17T21:11:54.988Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,38 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 20,
  "candidates": [
   {
-   "keyword": "젠슨 황 복귀 의사",
+   "keyword": "경찰",
    "sources": [
-    "nate"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 14,
-   "recent20": 5,
-   "press": 13,
-   "firstArticleAt": "2026-11-17T19:37:00.000Z",
-   "exclusive": true,
-   "capped": false,
+   "articles90": 9,
+   "recent20": 6,
+   "press": 8,
+   "firstArticleAt": "2026-11-17T20:00:00.000Z",
+   "exclusive": false,
+   "capped": true,
    "samples": [
     {
-     "title": "젠슨 황 \"엔비디아 이사회 요청하면 돌아가겠다\"",
-     "press": "4th.kr",
-     "publishedAt": "2026-11-17T21:00:00.000Z",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2122079"
+     "title": "상인 20명에 ‘생일 돈봉투’ 받은 경찰… 근무지 압수수색",
+     "press": "segye.com",
+     "publishedAt": "2026-11-17T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004176031?sid=102"
     },
     {
-     "title": "젠슨 황, 엔비디아 복귀 가능성 열어뒀다…경영진 교체 이후 다시 주목...",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-17T21:00:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=847550"
+     "title": "태안 하천서 80대 여성 숨진 채 발견...경찰 수사 중",
+     "press": "newsfreezone.co.kr",
+     "publishedAt": "2026-11-17T21:02:00.000Z",
+     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=719873"
     },
     {
-     "title": "[젠슨 황 스캔들] 젠슨 황, 엔비디아 복귀 의사 공식화",
-     "press": "it.chosun.com",
-     "publishedAt": "2026-11-17T20:54:00.000Z",
-     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000001262"
+     "title": "수능날 경찰 1만여명 투입…'AI 커닝' 신고·폭파 협박 대비[2027 수능]",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-17T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014328633?sid=102"
     }
    ]
   },
@@ -48,9 +49,9 @@
     "signal.bz"
    ],
    "articles90": 9,
-   "recent20": 1,
+   "recent20": 2,
    "press": 8,
-   "firstArticleAt": "2026-11-17T19:40:00.000Z",
+   "firstArticleAt": "2026-11-17T20:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -61,16 +62,16 @@
      "link": "https://www.jasm.co.kr/news/view/325570/?sc=Naver"
     },
     {
+     "title": "'특검법' 의결날 '조작징계' 정황 공개…국힘, 대여투쟁 동력 '흔들'",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-17T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009294925?sid=100"
+    },
+    {
      "title": "[사설] 총리가 의결한 조작기소 특검법, 대통령 책임은 그대로",
      "press": "seoul.co.kr",
      "publishedAt": "2026-11-17T20:14:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/081/0003700544?sid=110"
-    },
-    {
-     "title": "[사설] 총리가 총대 멘 조작기소 특검법, 뒷감당은 누가 하나",
-     "press": "busan.com",
-     "publishedAt": "2026-11-17T20:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001407683?sid=110"
     }
    ]
   },
@@ -79,13 +80,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 3,
-   "press": 6,
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
    "firstArticleAt": "2026-11-17T19:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "카타르 꺾었지만…모레노호 끝내 아쉬움 남긴 결정력",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-17T21:06:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/055/0001403783"
+    },
     {
      "title": "물 만난 고기였다! 모레노호에서 건진 건 '장점 내뿜은' 송민규… 대표...",
      "press": "besteleven.com",
@@ -97,60 +104,28 @@
      "press": "bntnews.co.kr",
      "publishedAt": "2026-11-17T20:50:00.000Z",
      "link": "https://www.bntnews.co.kr/article/view/bnt202611180008"
-    },
-    {
-     "title": "'일방적 공세 퍼부었지만' 모레노호, 슈팅 21개에도 '고작 1골만 수확'....",
-     "press": "thesportstimes.co.kr",
-     "publishedAt": "2026-11-17T20:45:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/472/0000042505"
-    }
-   ]
-  },
-  {
-   "keyword": "경북 상주 지진 발생",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-17T19:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"2017년 악몽 떠올라\"…수능 이틀 전 올해 '가장 강한 지진' 터졌다",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-17T20:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001273068?sid=102"
-    },
-    {
-     "title": "경북 상주 북서쪽서 규모 3.6 지진…올해 최대 규모",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-17T20:52:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611180005"
-    },
-    {
-     "title": "경북 상주 규모 3.6 지진…올해 최대 강진",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-17T20:36:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611180005"
     }
    ]
   },
   {
    "keyword": "백신",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
    "firstArticleAt": "2026-11-17T20:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "내일이 수능인데 '콜록콜록'…지금 백신 맞아도 될까?",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-17T21:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014328662?sid=102"
+    },
     {
      "title": "\"영유아기 비만은 면역력 떨어뜨린다\" …'백신 항체' 형성에 영향",
      "press": "kpanews.co.kr",
@@ -162,146 +137,107 @@
      "press": "dailymedi.com",
      "publishedAt": "2026-11-17T20:38:00.000Z",
      "link": "https://www.dailymedi.com/news/news_view.php?wr_id=942696"
-    },
-    {
-     "title": "유효기한 하루 지난 백신과 자격정지 : 대법원의 기준",
-     "press": "medicaltimes.com",
-     "publishedAt": "2026-11-17T20:30:00.000Z",
-     "link": "https://www.medicaltimes.com/Main/News/NewsView.html?ID=1171896&ref=naverpc"
     }
    ]
   },
   {
-   "keyword": "경찰",
+   "keyword": "김장",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 4,
+   "articles90": 5,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-17T20:00:00.000Z",
+   "firstArticleAt": "2026-11-17T20:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "수능날 경찰 1만여명 투입…'AI 커닝' 신고·폭파 협박 대비[2027 수능]",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-17T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014328633?sid=102"
+     "title": "[투데이춘추] 김장 부담은 줄었지만, 농업인의 시름은 여전하다",
+     "press": "cctoday.co.kr",
+     "publishedAt": "2026-11-17T21:02:00.000Z",
+     "link": "https://www.cctoday.co.kr/news/articleView.html?idxno=2240457"
     },
     {
-     "title": "세무사 수석 경찰 출석… 법조계 “사회적 파장 고려 실형 가능성”",
+     "title": "빨간 양념에 온정 버무린 성북… 추위 이기는 24년 김장 나눔 [현장 행정...",
      "press": "seoul.co.kr",
+     "publishedAt": "2026-11-17T20:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003700513?sid=102"
+    },
+    {
+     "title": "성남 판교낙생농협, ‘농업인의 날’ 맞아 김장김치 전달",
+     "press": "nongmin.com",
      "publishedAt": "2026-11-17T20:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003700470?sid=102"
-    },
-    {
-     "title": "김종철 경찰청장 후보자 청문회…재개발 입주권·수사 독립성 쟁점",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-17T20:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004210899?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "트럼프 알래스카 LNG 승인",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-17T20:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "트럼프, 이 대통령 앞에서 “韓 투자 덕에 알래스카 LNG 승인”",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-17T20:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006411466?sid=104"
-    },
-    {
-     "title": "트럼프 \"韓 투자 덕에 알래스카 LNG파이프라인 사업승인\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-17T20:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000927217?sid=104"
-    },
-    {
-     "title": "트럼프 “韓 역사적 투자 덕에 알래스카 LNG파이프라인 사업 승인”",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-17T20:16:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611180003"
+     "link": "https://n.news.naver.com/mnews/article/662/0000108730?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 934,
-  "matched": 514,
-  "avgLeadMin": 819,
+  "flagged": 935,
+  "matched": 534,
+  "avgLeadMin": 811,
   "recent": [
    {
-    "keyword": "FA 1호 계약 확정!",
-    "hitKeyword": "양의지 두산 FA 계약",
-    "hitAt": "2026-11-17T21:00:00+09:00",
-    "leadMin": 593
+    "keyword": "부동산",
+    "hitKeyword": "강남 부동산 하락세",
+    "hitAt": "2026-11-18T06:00:00+09:00",
+    "leadMin": 7764
    },
    {
-    "keyword": "날씨",
-    "hitKeyword": "수능 날씨 한파",
-    "hitAt": "2026-11-17T20:30:00+09:00",
-    "leadMin": 744
+    "keyword": "경북 상주 북서쪽 지진",
+    "hitKeyword": "경북 상주 지진",
+    "hitAt": "2026-11-18T06:00:00+09:00",
+    "leadMin": 350
    },
    {
-    "keyword": "수능일",
-    "hitKeyword": "수능일 한파 예보",
-    "hitAt": "2026-11-17T20:00:00+09:00",
-    "leadMin": 623
+    "keyword": "엔비디아 실적발표",
+    "hitKeyword": "엔비디아 중국 칩 제한",
+    "hitAt": "2026-11-18T06:00:00+09:00",
+    "leadMin": 350
    },
    {
-    "keyword": "황인범 임시 감독 체제",
-    "hitKeyword": "한국 축구 임시 감독 체제",
-    "hitAt": "2026-11-17T19:30:00+09:00",
-    "leadMin": 473
+    "keyword": "트럼프 희토류 생산",
+    "hitKeyword": "트럼프 알래스카 LNG 승인",
+    "hitAt": "2026-11-18T06:00:00+09:00",
+    "leadMin": 350
    },
    {
-    "keyword": "연금",
-    "hitKeyword": "연금복권 더블 잭팟",
-    "hitAt": "2026-11-17T19:00:00+09:00",
-    "leadMin": 744
+    "keyword": "경북 상주 지진",
+    "hitKeyword": "경북 상주 지진",
+    "hitAt": "2026-11-18T06:00:00+09:00",
+    "leadMin": 340
    },
    {
-    "keyword": "서울 집값 둔화",
-    "hitKeyword": "서울 집값 부담",
-    "hitAt": "2026-11-17T18:30:00+09:00",
-    "leadMin": 1587
+    "keyword": "세무사 수석 경찰 조사",
+    "hitKeyword": "세무사 수석 부정행위",
+    "hitAt": "2026-11-18T06:00:00+09:00",
+    "leadMin": 340
    },
    {
-    "keyword": "축구",
-    "hitKeyword": "한국 축구 임시감독 체제",
-    "hitAt": "2026-11-17T18:30:00+09:00",
-    "leadMin": 533
+    "keyword": "AI 세무사 경찰 조사 종료",
+    "hitKeyword": "세무사 수석 부정행위",
+    "hitAt": "2026-11-18T06:00:00+09:00",
+    "leadMin": 310
    },
    {
-    "keyword": "닥터X 김우석 연기 집중 중입니다.",
-    "hitKeyword": "김우석 닥터X",
-    "hitAt": "2026-11-17T18:30:00+09:00",
-    "leadMin": 312
+    "keyword": "한국",
+    "hitKeyword": "한국 카타르 승리",
+    "hitAt": "2026-11-18T06:00:00+09:00",
+    "leadMin": 300
    },
    {
-    "keyword": "김우석 김지원 팬",
-    "hitKeyword": "김우석 닥터X",
-    "hitAt": "2026-11-17T18:30:00+09:00",
-    "leadMin": 282
+    "keyword": "AI 세무사 조사 종료 사과",
+    "hitKeyword": "세무사 수석 부정행위",
+    "hitAt": "2026-11-18T06:00:00+09:00",
+    "leadMin": 290
    },
    {
-    "keyword": "김우석 닥터X 시즌2 기대해요",
-    "hitKeyword": "김우석 닥터X",
-    "hitAt": "2026-11-17T18:30:00+09:00",
-    "leadMin": 262
+    "keyword": "모레노호 카타르 1-0 승리",
+    "hitKeyword": "한국 카타르 승리",
+    "hitAt": "2026-11-18T06:00:00+09:00",
+    "leadMin": 250
    }
   ]
  }
