@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T22:42:25.121Z",
+ "builtAt": "2026-11-17T22:52:28.367Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 14,
-   "recent20": 4,
-   "press": 12,
+   "articles90": 23,
+   "recent20": 10,
+   "press": 20,
    "firstArticleAt": "2026-11-17T21:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "청와대, JAVA 보안 취약점 선제 대응…민관군 긴급회의",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-17T22:34:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261118000039"
+     "title": "국가안보실, '자바' 취약점에 민관군 합동 대책회의…대응 체계 점검",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-17T22:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014328716?sid=100"
     },
     {
-     "title": "공공기관·기업에 널리 쓰는 자바서 치명적 보안 구멍…해킹 우려 확산",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-17T22:31:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000083834"
+     "title": "[속보] PHP 이어 Java도 보안 취약점…정부 \"패치 권고\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-17T22:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004210917?sid=101"
     },
     {
-     "title": "대형 금융사 보안점검 연 2회로 확대…이달 말부터 우선 시행",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-17T22:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002724826?sid=101"
+     "title": "[디깅노트] 증권사 경영진이 책임져야 할 보안 검증",
+     "press": "bloter.net",
+     "publishedAt": "2026-11-17T22:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/293/0000093419?sid=110"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
+   "articles90": 15,
    "recent20": 3,
-   "press": 12,
-   "firstArticleAt": "2026-11-17T21:19:00.000Z",
+   "press": 13,
+   "firstArticleAt": "2026-11-17T21:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "60년된 ‘구리선’으로 항공대란 빚더니…美국가안보국 내부망 마비",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-17T22:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003566042?sid=104"
+    },
     {
      "title": "美안보국 기밀통신망 마비…\"필수기능은 가동\"",
      "press": "yonhapnewstv.co.kr",
@@ -65,12 +71,38 @@
      "press": "ziksir.com",
      "publishedAt": "2026-11-17T22:36:00.000Z",
      "link": "https://www.ziksir.com/news/articleView.html?idxno=153702"
+    }
+   ]
+  },
+  {
+   "keyword": "화재",
+   "sources": [
+    "google"
+   ],
+   "articles90": 13,
+   "recent20": 3,
+   "press": 11,
+   "firstArticleAt": "2026-11-17T21:39:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "새벽 인천 숙박업소서 화재…투숙객 60여 명 대피",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-17T22:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001403823?sid=102"
     },
     {
-     "title": "“美국가안보국 기밀정보용 내부 통신망 마비…사이버 공격 증거 없어”",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-17T22:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000367868?sid=104"
+     "title": "인천 계양구 호텔 새벽 화재…투숙객 60명 대피",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-17T22:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004683364?sid=102"
+    },
+    {
+     "title": "경기도기술학교, 소방관 62명 대상 전기차 화재 대응 교육",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-17T22:34:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=564674"
     }
    ]
   },
@@ -80,7 +112,7 @@
     "nate"
    ],
    "articles90": 11,
-   "recent20": 2,
+   "recent20": 1,
    "press": 11,
    "firstArticleAt": "2026-11-17T21:26:00.000Z",
    "exclusive": false,
@@ -107,50 +139,24 @@
    ]
   },
   {
-   "keyword": "화재",
-   "sources": [
-    "google"
-   ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-17T21:39:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "경기도기술학교, 소방관 62명 대상 전기차 화재 대응 교육",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-17T22:34:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=564674"
-    },
-    {
-     "title": "대전 평촌동 아파트 주차장서 차량 화재...1200만 원 재산 피해",
-     "press": "newsfreezone.co.kr",
-     "publishedAt": "2026-11-17T22:26:00.000Z",
-     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=719880"
-    },
-    {
-     "title": "청주 옥산면 단독주택서 화재…60대 남성 사망",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-17T22:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001403807?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "중국 이재명 대통령",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 10,
+   "articles90": 11,
    "recent20": 4,
-   "press": 8,
+   "press": 9,
    "firstArticleAt": "2026-11-17T21:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이대통령 순방 중 '조작기소 특검법' 의결…수사 대상 절반이 李 사건",
+     "press": "weekly.chosun.com",
+     "publishedAt": "2026-11-17T22:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/053/0000063132?sid=100"
+    },
     {
      "title": "트럼프 \"김정은도 중국 오고 싶어할 것\"…북미 정상회담 가능성 또 시사",
      "press": "mbn.co.kr",
@@ -162,76 +168,6 @@
      "press": "gukjenews.com",
      "publishedAt": "2026-11-17T22:38:00.000Z",
      "link": "https://www.gukjenews.com/news/articleView.html?idxno=3755225"
-    },
-    {
-     "title": "이 대통령, APEC 열리는 중국 도착…미·중·러 회담 앞두고 다카이치 만...",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-17T22:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001978680?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "수출",
-   "sources": [
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-17T22:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[테크인사이드] 美 수출 규제 백도어?...엔비디아 칩 중국행 우회로의 ...",
-     "press": "digitaltoday.co.kr",
-     "publishedAt": "2026-11-17T22:30:00.000Z",
-     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=716208"
-    },
-    {
-     "title": "한국, 첫 연간 수출 1조 달러 돌파 눈앞... 반도체 강국의 위상 강화",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-17T22:18:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886169"
-    },
-    {
-     "title": "엔비디아, 안보·수출 통제 委 설치…CEO 사임 후 첫 구조 개편",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-17T22:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000544372?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "교사",
-   "sources": [
-    "google"
-   ],
-   "articles90": 7,
-   "recent20": 3,
-   "press": 7,
-   "firstArticleAt": "2026-11-17T21:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "교육장관도 AI컨닝 “못잡는다”면서…교사들 “책임전가 말라”",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-17T22:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002833583?sid=100"
-    },
-    {
-     "title": "[이슈 톡톡] 교사는 17만 원, 간부는 수백만 원‥\"수능 감독 수당 차이 ...",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-17T22:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001536316?sid=102"
-    },
-    {
-     "title": "수능 감독교사는 17만원, 교육청 간부는 330만원…\"불합리한 수당 관행...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-17T22:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005605867?sid=102"
     }
    ]
   },
@@ -242,7 +178,7 @@
     "google"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-17T22:02:00.000Z",
    "exclusive": false,
@@ -269,46 +205,14 @@
    ]
   },
   {
-   "keyword": "노유민 가슴 통증 응급실행",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-17T21:41:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘NRG 출신’ 노유민, 가슴 통증으로 응급실行… 아내 “검사 결과 월요...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-17T22:37:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003542301"
-    },
-    {
-     "title": "건물주 된지 얼마나 됐다고…NRG 노유민, 가슴통증 응급실行",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-17T22:21:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004467557"
-    },
-    {
-     "title": "NRG 노유민, 갑작스러운 가슴 통증에 응급실行…♥아내 \"검사 결과 별것...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-17T22:18:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000784957"
-    }
-   ]
-  },
-  {
    "keyword": "2026년 11월 18일 운세",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-17T21:16:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-17T21:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
