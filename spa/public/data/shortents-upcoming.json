@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T16:40:16.976Z",
+ "builtAt": "2026-11-17T16:50:20.547Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,12 +11,44 @@
  "measured": 27,
  "candidates": [
   {
+   "keyword": "모레노호 카타르 1-0 승리",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 46,
+   "recent20": 4,
+   "press": 33,
+   "firstArticleAt": "2026-11-17T15:51:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'선발 7명 로테이션' 모레노호, 카타르 1-0 제압하고 올해 마지막 A매치...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-17T16:36:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/014/0005605827"
+    },
+    {
+     "title": "마지막까지 정교함 부족했던 모레노호…슈팅 21개에 '고작 1골'(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-17T16:36:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/001/0016447658"
+    },
+    {
+     "title": "'오세훈 결승골' 모레노호, 카타르 꺾고 올해 A매치 유종의 미",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-17T16:34:00.000Z",
+     "link": "https://www.ajunews.com/view/20261118012841654"
+    }
+   ]
+  },
+  {
    "keyword": "오세훈 선제골",
    "sources": [
     "daum"
    ],
    "articles90": 31,
-   "recent20": 6,
+   "recent20": 1,
    "press": 23,
    "firstArticleAt": "2026-11-17T15:51:00.000Z",
    "exclusive": false,
@@ -47,62 +79,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-17T16:12:00.000Z",
+   "articles90": 12,
+   "recent20": 4,
+   "press": 12,
+   "firstArticleAt": "2026-11-17T16:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "슈팅 22개 퍼붓고도 단 1골…경기 지배하니 결정력 부족 한국축구",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-17T16:39:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/119/0003156375"
+     "title": "\"새는 난방열 잡아 생활비·탄소 동시에 줄인다\"… 한국환경정보연구센...",
+     "press": "woodkorea.co.kr",
+     "publishedAt": "2026-11-17T16:48:00.000Z",
+     "link": "https://www.woodkorea.co.kr/news/articleView.html?idxno=92649"
     },
     {
-     "title": "한국, 독·미·중 이어 네 번째 수출 1조 달러 목전…김정관 “도전과 응...",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-17T16:26:00.000Z",
-     "link": "https://www.viva100.com/article/20261118500009"
+     "title": "[IN POINT] 홍명보 아래 월드컵 실패, 모레노 임시 체제까지...한국 축구...",
+     "press": "interfootball.co.kr",
+     "publishedAt": "2026-11-17T16:45:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/413/0000226744"
     },
     {
-     "title": "한국, 카타르 1-0 꺾고 올해 A매치 마무리… 오세훈 결승골",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-17T16:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001205490?sid=004"
-    }
-   ]
-  },
-  {
-   "keyword": "엔비디아 실적발표",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-17T15:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"AI 수요, 시장 예상 웃돈다\"…엔비디아 강세론 속 장기 혁신 역량은 변...",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-17T16:22:00.000Z",
-     "link": "https://www.tokenpost.kr/news/cryptocurrency/439919"
-    },
-    {
-     "title": "젠슨 황 \"이사회가 부르면 엔비디아 CEO로 돌아갈 것\"",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-17T16:21:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261118000011"
-    },
-    {
-     "title": "11월 엔비디아 실적발표일 한국시간 몇시?",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-17T16:08:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1175367"
+     "title": "한국석유공업 3분기 영업이익 20.5% 감소",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-17T16:40:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=406763"
     }
    ]
   },
@@ -112,12 +112,18 @@
     "signal.bz"
    ],
    "articles90": 8,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-17T15:14:00.000Z",
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-17T15:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "원안위 \"상주 규모 3.6 지진에 원자로 안전 영향 없어\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-17T16:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000927197?sid=102"
+    },
     {
      "title": "원안위 \"상주 인근 규모 3.6 지진, 원자로 안전에 영향 없어\"",
      "press": "yna.co.kr",
@@ -129,12 +135,6 @@
      "press": "seoul.co.kr",
      "publishedAt": "2026-11-17T16:08:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/081/0003700463?sid=102"
-    },
-    {
-     "title": "경북 상주 북서쪽 22km 지역서 규모 3.6 지진",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-17T15:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001403765?sid=102"
     }
    ]
   },
@@ -143,69 +143,37 @@
    "sources": [
     "google"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-17T15:16:00.000Z",
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-17T15:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "일본, 모리야스 감독 고별전서 패배… 5경기 무패 행진 마감",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-17T16:41:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/396/0000761224"
+    },
+    {
+     "title": "브라질도 꺾은 일본, '모리야스 고별전'서 파라과이에 1-2 패배",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-17T16:39:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/001/0016447660"
+    },
     {
      "title": "브라질 잡았던 일본, '모리야스 고별전'서 파라과이에 덜미",
      "press": "newsis.com",
      "publishedAt": "2026-11-17T16:26:00.000Z",
      "link": "https://m.sports.naver.com/kfootball/article/003/0014328561"
-    },
-    {
-     "title": "브라질 이긴 일본, 파라과이에 1-2 패배…모리야스 감독 고별전서 패배",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-17T15:30:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/117/0004125945"
-    },
-    {
-     "title": "'모리야스 고별전' 일본, 파라과이에 1-2 패배...5경기 연속 무패 마침표",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-17T15:27:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261118000005"
-    }
-   ]
-  },
-  {
-   "keyword": "지진 3.7",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-17T15:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“강한 진동과 굉음” 경북 상주서 ‘올해 최강 지진’…규모 3.6",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-17T16:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003700463?sid=102"
-    },
-    {
-     "title": "상주서 올해 가장 강한 규모 3.6 지진…주민들 한밤중 '깜짝'",
-     "press": "kyongbuk.co.kr",
-     "publishedAt": "2026-11-17T15:42:00.000Z",
-     "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4091208"
-    },
-    {
-     "title": "[속보]수능 이틀 앞둔 밤 경북 상주서 규모 3.6 지진…수험생·주민 ‘깜...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-17T15:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003700462?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 911,
+  "flagged": 912,
   "matched": 514,
   "avgLeadMin": 819,
   "recent": [
