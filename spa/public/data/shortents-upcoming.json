@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T01:06:50.289Z",
+ "builtAt": "2026-11-17T01:16:53.684Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,101 +8,101 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 15,
+ "measured": 14,
  "candidates": [
-  {
-   "keyword": "AI 합격",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 76,
-   "recent20": 53,
-   "press": 62,
-   "firstArticleAt": "2026-11-17T00:37:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "세무냥이 이어 충주냥이…김선태, AI 안경 쓰고 시험 풀이",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-17T01:06:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005764728"
-    },
-    {
-     "title": "'AI 커닝' 세무사 수석 경찰 출석…\"숨기지 않고 말하겠다\"",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-17T01:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001978524?sid=102"
-    },
-    {
-     "title": "충주냥이 김선태, AI 안경 쓰고 9급 공무원 국어 라이브…25점으로 과락",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-17T01:06:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001188124"
-    }
-   ]
-  },
   {
    "keyword": "세무사 수석 경찰 출석",
    "sources": [
     "nate"
    ],
    "articles90": 81,
-   "recent20": 33,
-   "press": 57,
-   "firstArticleAt": "2026-11-17T00:27:00.000Z",
+   "recent20": 30,
+   "press": 59,
+   "firstArticleAt": "2026-11-17T00:33:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "'AI 커닝' 세무사 수석 경찰 출석…\"숨기지 않고 말하겠다\"",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-17T01:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001978524?sid=102"
+     "title": "'AI 부정행위' 세무사 수석 합격자, 피의자 신분 경찰 출석",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-17T01:16:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903295"
     },
     {
-     "title": "AI 커닝 세무사 수석, 경찰 출석…\"제가 한 일 숨기지 않겠다\"",
-     "press": "weekly.chosun.com",
-     "publishedAt": "2026-11-17T01:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/053/0000063107?sid=102"
+     "title": "'AI 커닝' 세무사 수석 경찰 출석…\"잘못 책임 지겠다\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-17T01:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926897?sid=102"
     },
     {
-     "title": "'AI 부정행위' 세무사시험 수석 경찰 출석…\"수험생께 죄송, 책임지겠다...",
-     "press": "womennews.co.kr",
-     "publishedAt": "2026-11-17T01:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/310/0000141778?sid=102"
+     "title": "[속보] 'AI 부정행위' 세무사 수석 합격자 경찰 출석… \"잘못에 대한 책...",
+     "press": "cjb.co.kr",
+     "publishedAt": "2026-11-17T01:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/655/0000033601?sid=102"
     }
    ]
   },
   {
-   "keyword": "옵토닉스",
+   "keyword": "갤럭시 AI 클래스 도입",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 20,
-   "recent20": 1,
-   "press": 20,
-   "firstArticleAt": "2026-11-17T00:02:00.000Z",
+   "articles90": 58,
+   "recent20": 14,
+   "press": 53,
+   "firstArticleAt": "2026-11-16T23:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[특징주] 옵토닉스, 코스닥 첫날 장초반 '따블' 강세",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-17T00:52:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=884048"
+     "title": "삼성 ‘갤럭시 XR’ 교실로 간다…AI 수업 20만명 돌파",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-17T01:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004682998?sid=101"
     },
     {
-     "title": "[특징주] 옵토닉스, 코스닥 상장 첫날.. '따블' 성공",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-17T00:46:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=20261117091717312444093b5d4e_1"
+     "title": "삼성전자, 청소년 AI 교육에 '갤럭시 XR' 도입…AI·확장현실 융합",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-17T01:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926895?sid=101"
     },
     {
-     "title": "'K-방산 광학 센서' 옵토닉스, 코스닥 입성 첫날 '따블' 성공",
+     "title": "삼성전자, 갤럭시 AI 클래스 확장…XR로 교실 속 AI 교육 강화",
      "press": "newsquest.co.kr",
-     "publishedAt": "2026-11-17T00:44:00.000Z",
-     "link": "https://www.newsquest.co.kr/news/articleView.html?idxno=305179"
+     "publishedAt": "2026-11-17T01:08:00.000Z",
+     "link": "https://www.newsquest.co.kr/news/articleView.html?idxno=305181"
+    }
+   ]
+  },
+  {
+   "keyword": "러 군용기 KADIZ 진입",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 16,
+   "recent20": 3,
+   "press": 16,
+   "firstArticleAt": "2026-11-17T00:03:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "러 군용기 여러 대 새벽 KADIZ 진입…공군 전투기 출격대응",
+     "press": "tbs.seoul.kr",
+     "publishedAt": "2026-11-17T01:15:00.000Z",
+     "link": "http://tbs.seoul.kr/news/newsView.do?typ_800=9&idx_800=3538777&seq_800=20531678"
+    },
+    {
+     "title": "러시아 군용기 여러 대, 동해 KADIZ 진입…軍 전투기 출격 대응",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-17T01:10:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=729695"
+    },
+    {
+     "title": "러 군용기 여러 대 KADIZ 진입…합참 \"전투기 투입 조치\"",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-17T01:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000142410?sid=100"
     }
    ]
   },
@@ -111,15 +111,21 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 2,
-   "press": 14,
+   "articles90": 15,
+   "recent20": 3,
+   "press": 15,
    "firstArticleAt": "2026-11-16T23:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "북·미회담 거론 속 북·중 접경 향한 김정은…백두산 관광지구 시찰에...",
+     "title": "백두산서 스키 타는 김정은 딸 김주애…걸친 옷만 ‘200만원’",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-17T01:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000132389?sid=100"
+    },
+    {
+     "title": "흰 패딩 입은 주애, 스키 실력 뽐내···‘북·미회담’ 거론 속 김정은...",
      "press": "khan.co.kr",
      "publishedAt": "2026-11-17T01:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/032/0003483112?sid=100"
@@ -129,76 +135,6 @@
      "press": "imaeil.com",
      "publishedAt": "2026-11-17T01:01:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/088/0001040671?sid=100"
-    },
-    {
-     "title": "김정은과 백두산 간 김주애…북한이 공개한 사진 속 '뜻밖의 모습'",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-17T00:42:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1175190"
-    }
-   ]
-  },
-  {
-   "keyword": "최교진 직무유기 고발",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 11,
-   "recent20": 5,
-   "press": 11,
-   "firstArticleAt": "2026-11-17T00:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"믿음을 근거로\"\"AI 커닝 100% 적발 못해\" 최교진 발언에 여론 대폭발",
-     "press": "busan.com",
-     "publishedAt": "2026-11-17T01:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001407499?sid=102"
-    },
-    {
-     "title": "[수능 D-2] “연기 없다” 최교진 교육장관, 직무유기 혐의로 고발 당해",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-17T01:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001205304?sid=102"
-    },
-    {
-     "title": "'AI 커닝' 모두 못 잡는다 발언한 최교진, '직무유기' 고발돼",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-17T01:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001978523?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "수능일",
-   "sources": [
-    "google"
-   ],
-   "articles90": 13,
-   "recent20": 4,
-   "press": 11,
-   "firstArticleAt": "2026-11-16T23:39:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "전남광주 서구, 수능일 교통·소음 특별관리…7개 시험장 집중 대응",
-     "press": "thefairnews.co.kr",
-     "publishedAt": "2026-11-17T01:04:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94454"
-    },
-    {
-     "title": "[930 날씨] 이번 주 잦은 비…수능일 기온 ‘뚝’",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-17T00:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012295295?sid=103"
-    },
-    {
-     "title": "제주도, 수능일 교통 지원 총력…긴급 수송차량 96대",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-17T00:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016445677?sid=102"
     }
    ]
   },
@@ -240,29 +176,29 @@
     "signal.bz"
    ],
    "articles90": 16,
-   "recent20": 8,
-   "press": 10,
-   "firstArticleAt": "2026-11-16T23:46:00.000Z",
+   "recent20": 6,
+   "press": 9,
+   "firstArticleAt": "2026-11-17T00:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국힘 “총리도 감옥 갈 것”…조작기소 특검법 의결 반대 청와대 앞 의...",
+     "title": "'조작기소 특검법' 국무회의 의결 반대하며 행진하는 국민의힘",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-17T01:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016445739?sid=100"
+    },
+    {
+     "title": "국민의힘, '조작기소 특검법' 국무회의 의결 반대 행진",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-17T01:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009293040?sid=100"
+    },
+    {
+     "title": "장동혁 “조작기소 특검 의결, 총리도 감옥 갈 것”…청와대 앞서 의총",
      "press": "hani.co.kr",
      "publishedAt": "2026-11-17T01:06:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/028/0002832534?sid=100"
-    },
-    {
-     "title": "국힘, '조작기소 특검법' 의결 앞두고 靑 앞 의총⋯\"총리, 강행하면 탈옥...",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-17T01:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001075616?sid=100"
-    },
-    {
-     "title": "정점식 \"한 총리, 조작기소 특검법 의결 포기해야…최악의 쿠데타\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-17T01:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009293024?sid=100"
     }
    ]
   },
@@ -273,7 +209,7 @@
     "nate"
    ],
    "articles90": 15,
-   "recent20": 2,
+   "recent20": 0,
    "press": 9,
    "firstArticleAt": "2026-11-16T23:49:00.000Z",
    "exclusive": false,
@@ -300,14 +236,46 @@
    ]
   },
   {
+   "keyword": "트럼프 미중러 회담 의제",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-16T23:49:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프 \"선전서 김정은 만날 수도\"...시진핑의 초청이 관건",
+     "press": "monthly.chosun.com",
+     "publishedAt": "2026-11-17T01:16:00.000Z",
+     "link": "https://monthly.chosun.com/news/articleView.html?idxno=71986"
+    },
+    {
+     "title": "러 \"미중러 정상회담 후 공동성명 전망…미러 양자회담도 추진\"(종합)",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-17T01:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009293030?sid=104"
+    },
+    {
+     "title": "트럼프 \"中서 김정은 만날 수도…시진핑에 달려\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-17T00:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926890?sid=104"
+    }
+   ]
+  },
+  {
    "keyword": "이용철 법무부 후보자",
    "sources": [
     "nate"
    ],
-   "articles90": 20,
+   "articles90": 15,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-16T23:41:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-16T23:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -330,43 +298,11 @@
      "link": "https://n.news.naver.com/mnews/article/003/0014326217?sid=100"
     }
    ]
-  },
-  {
-   "keyword": "트럼프 미중러 회담 의제",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-16T23:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "러 \"미중러 정상회담 후 공동성명 전망…미러 양자회담도 추진\"(종합)",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-17T01:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009293030?sid=104"
-    },
-    {
-     "title": "트럼프 \"中서 김정은 만날 수도…시진핑에 달려\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-17T00:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000926890?sid=104"
-    },
-    {
-     "title": "우크라, 미중러 정상회담 앞두고 러시아 맹공…‘제2 얄타회담’ 우려?",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-17T00:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012295273?sid=104"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 811,
+  "flagged": 812,
   "matched": 456,
   "avgLeadMin": 870,
   "recent": [
