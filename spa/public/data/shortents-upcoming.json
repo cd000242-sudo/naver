@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T20:01:28.388Z",
+ "builtAt": "2026-11-17T20:11:31.789Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,34 @@
  "measured": 27,
  "candidates": [
   {
-   "keyword": "젠슨 황, 복귀 의사",
+   "keyword": "젠슨 황, 엔비디아 복귀 의사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 9,
+   "articles90": 15,
+   "recent20": 3,
+   "press": 11,
    "firstArticleAt": "2026-11-17T18:44:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "[글로벌 비즈 브리핑] 젠슨 황 돌아오고 싶다던데...엔비디아는 헤드헌...",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-17T19:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000544348?sid=104"
+     "title": "젠슨 황 사태 후폭풍...국내 반도체주 어디로 가나",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-17T20:10:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=505206"
     },
     {
-     "title": "젠슨 황 “이사회가 원하면 복귀”…사임 닷새 만에 입 열었다",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-17T19:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006411444?sid=101"
+     "title": "AI 황제 없는 엔비디아, 삼성전자·SK하이닉스에도 불똥 튀나",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-17T20:06:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=505205"
     },
     {
-     "title": "젠슨 황 전 엔비디아 CEO, \"이사회 요청 시 복귀 의사\"",
-     "press": "goodnews1.com",
-     "publishedAt": "2026-11-17T19:30:00.000Z",
-     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466339"
+     "title": "젠슨 황 \"잘못 인정…이사회가 원한다면 복귀할 것\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-17T20:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000651692?sid=104"
     }
    ]
   },
@@ -47,10 +47,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-17T18:33:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-17T18:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -71,6 +71,102 @@
      "press": "osen.co.kr",
      "publishedAt": "2026-11-17T19:30:00.000Z",
      "link": "https://m.sports.naver.com/kfootball/article/109/0005641864"
+    }
+   ]
+  },
+  {
+   "keyword": "한국",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 4,
+   "press": 3,
+   "firstArticleAt": "2026-11-17T20:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "IMF “한국 올해 성장률 3.9%… 내년에도 3%대”",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-17T20:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003700528?sid=101"
+    },
+    {
+     "title": "참전군인 카메라로 본 한국전쟁과 피란수도 부산",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-17T20:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003700519?sid=102"
+    },
+    {
+     "title": "[전문가의 눈] 美 중간선거 이후 한국의 CPTPP 가입 전망",
+     "press": "nongmin.com",
+     "publishedAt": "2026-11-17T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/662/0000108719?sid=110"
+    }
+   ]
+  },
+  {
+   "keyword": "조국 일본 입국 거부",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-17T19:31:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "조국, 日공항서 입국 거부… 독도 방문·전과 이력 때문?",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-17T20:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003700474?sid=100"
+    },
+    {
+     "title": "조국, 日당국 입국거부로 방일 무산…혁신당 \"사과하라\"",
+     "press": "pressian.com",
+     "publishedAt": "2026-11-17T20:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/002/0002466347?sid=100"
+    },
+    {
+     "title": "조국, 日입국 거부당해… 독도 방문 영향 가능성",
+     "press": "donga.com",
+     "publishedAt": "2026-11-17T19:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003763235?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "경북 상주 지진",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-17T18:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "경북 상주 규모 3.6 지진…원안위 “원자로 이상 없어”",
+     "press": "kbmaeil.com",
+     "publishedAt": "2026-11-17T20:04:00.000Z",
+     "link": "https://www.kbmaeil.com/article/20261118500014"
+    },
+    {
+     "title": "수능 앞두고 상주서 3.6 지진…올해 최대 규모",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-17T19:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000927203?sid=103"
+    },
+    {
+     "title": "원안위 \"경북 상주 지진, 원자로 안전에 영향 없어\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-17T18:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002434285?sid=102"
     }
    ]
   },
@@ -105,44 +201,11 @@
      "link": "https://n.news.naver.com/mnews/article/052/0002434286?sid=100"
     }
    ]
-  },
-  {
-   "keyword": "경북 상주 지진 발생",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 2,
-   "firstArticleAt": "2026-11-17T18:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "수능 앞두고 상주서 3.6 지진…올해 최대 규모",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-17T19:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000927203?sid=103"
-    },
-    {
-     "title": "원안위 \"경북 상주 지진, 원자로 안전에 영향 없어\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-17T18:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002434285?sid=102"
-    },
-    {
-     "title": "또 수능 앞두고...경북 상주에서 규모 3.6 지진",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-17T18:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002434284?sid=102"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 926,
+  "flagged": 927,
   "matched": 514,
   "avgLeadMin": 819,
   "recent": [
