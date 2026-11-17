@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T05:58:23.196Z",
+ "builtAt": "2026-11-17T06:08:26.308Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,133 +8,199 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 16,
+ "measured": 20,
  "candidates": [
   {
-   "keyword": "IMF 한국 성장률 3.9%",
+   "keyword": "수능 AI 부정행위",
    "sources": [
     "daum"
    ],
-   "articles90": 69,
-   "recent20": 13,
-   "press": 57,
+   "articles90": 91,
+   "recent20": 51,
+   "press": 59,
+   "firstArticleAt": "2026-11-17T05:34:00.000Z",
+   "exclusive": true,
+   "capped": true,
+   "samples": [
+    {
+     "title": "[속보] 안철수 “이재명 대통령, AI 부정행위에 입장 없나…실종상태인...",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-17T06:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000132452?sid=100"
+    },
+    {
+     "title": "수능 부정행위 우려…정부 \"스마트기기 전수점검\"",
+     "press": "news.lghellovision.net",
+     "publishedAt": "2026-11-17T06:06:00.000Z",
+     "link": "http://news.lghellovision.net/news/articleView.html?idxno=562604"
+    },
+    {
+     "title": "대학생 단체 \"AI 시험 부정행위 엄정 대응해야\"",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-17T06:06:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544039"
+    }
+   ]
+  },
+  {
+   "keyword": "IMF 연례협의 발표",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 73,
+   "recent20": 14,
+   "press": 53,
    "firstArticleAt": "2026-11-17T05:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "IMF, 올해 성장률 3.9%로 높여…“AI 투자로 잠재성장률 2.5%까지” [종합...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-17T05:56:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2649290"
+     "title": "IMF “반도체 호황에 韓 성장률 4% 육박…추가 통화 긴축 적절\"",
+     "press": "segyebiz.com",
+     "publishedAt": "2026-11-17T06:06:00.000Z",
+     "link": "http://www.segyebiz.com/newsView/20261117512283?OutUrl=naver"
     },
     {
-     "title": "IMF, 韓 올해 성장 전망 '3.3%→3.9%' 상향…\"통화·재정 긴축 적절\"",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-17T05:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000552776?sid=101"
+     "title": "IMF, 올해 韓 성장률 3.9%로 상향…추가 통화·재정 긴축 권고",
+     "press": "smedaily.co.kr",
+     "publishedAt": "2026-11-17T06:02:00.000Z",
+     "link": "http://www.smedaily.co.kr/news/articleView.html?idxno=366261"
     },
     {
-     "title": "IMF, 올해 韓성장률 3.9% 전망…한달만에 0.6%P 상향",
-     "press": "donga.com",
-     "publishedAt": "2026-11-17T05:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003763083?sid=101"
+     "title": "IMF, 올해 韓성장률 전망치 한 달 만에 '3.3%→3.9%' 상향(종합)",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-17T06:02:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445181"
     }
    ]
   },
   {
    "keyword": "조작기소 특검법 국무회의",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 83,
-   "recent20": 20,
+   "articles90": 80,
+   "recent20": 10,
    "press": 49,
-   "firstArticleAt": "2026-11-17T04:34:00.000Z",
+   "firstArticleAt": "2026-11-17T04:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "與, 조작기소특검 국무회의 통과에 \"수사권 오용 발본색원해야\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-17T05:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016446657?sid=100"
+     "title": "오세훈 \"조작기소 특검법, '치외법권 대통령' 만들었다\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-17T06:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005442353?sid=102"
     },
     {
-     "title": "'조작기소 특검법' 국무회의 통과, 한 총리 주재 심의·의결 완료",
-     "press": "goodnews1.com",
-     "publishedAt": "2026-11-17T05:52:00.000Z",
-     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466305"
+     "title": "국힘, 조작기소특검법 국무회의 의결에 \"이재명 탈옥법\" 맹비난",
+     "press": "kihoilbo.co.kr",
+     "publishedAt": "2026-11-17T06:02:00.000Z",
+     "link": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3041226"
     },
     {
-     "title": "李 대통령 사건 수사한 전직 검사장 4명 “조작기소 특검법 위헌”…법...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-17T05:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001205401?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "수능 AI 커닝",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 66,
-   "recent20": 9,
-   "press": 45,
-   "firstArticleAt": "2026-11-17T04:33:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"정직한 성취마저 의심\"…16개 대학 총학, 'AI 커닝' 대책 촉구",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-17T05:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004210682?sid=102"
-    },
-    {
-     "title": "'청와대, 수능 부정행위 TF 꾸려 비상근무' 소식에 네티즌들 폭발 (이유...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-17T05:54:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1175305"
-    },
-    {
-     "title": "개혁신당 \"AI 커닝 방지 앱 개발…열화상카메라 활용은 어려워\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-17T05:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001403633?sid=100"
+     "title": "'조작기소 특검법' 공포안 국무회의 통과…최대 309명·200일 활동",
+     "press": "kbsm.net",
+     "publishedAt": "2026-11-17T06:00:00.000Z",
+     "link": "https://www.kbsm.net/news/view.php?idx=542110"
     }
    ]
   },
   {
    "keyword": "수능 이틀 전!",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 19,
-   "recent20": 2,
-   "press": 17,
-   "firstArticleAt": "2026-11-17T04:31:00.000Z",
+   "articles90": 24,
+   "recent20": 7,
+   "press": 18,
+   "firstArticleAt": "2026-11-17T04:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'청와대, 수능 부정행위 TF 꾸려 비상근무' 소식에 네티즌들 폭발 (이유...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-17T05:54:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1175305"
-    },
-    {
-     "title": "[성공예감] ‘한국 교육’ 자체가 범죄 행위…이번 수능이 이런 방식의...",
+     "title": "유승민 “AI 부정행위, 허둥거리는 정부가 불안 키워…필요하다면 수능...",
      "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-17T05:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012295464?sid=101"
+     "publishedAt": "2026-11-17T06:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012295491?sid=100"
     },
     {
-     "title": "\"흔들리지 말고 내 실력만 믿자\"…수능 D-2, 공정한 시험장·수험생 멘탈...",
-     "press": "pointe.co.kr",
-     "publishedAt": "2026-11-17T05:38:00.000Z",
-     "link": "https://www.pointe.co.kr/news/articleView.html?idxno=87908"
+     "title": "[속보] 한 총리 \"수능 시작 전에 모든 전자기기 전원 끈 채 수거, 별도 ...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-17T06:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005605559?sid=101"
+    },
+    {
+     "title": "수능 이틀 앞두고 ‘AI 안경·초소형 카메라’ 비상…“전수 점검” vs ...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-17T06:02:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1175323"
+    }
+   ]
+  },
+  {
+   "keyword": "정호연 본드걸 후보",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 15,
+   "recent20": 3,
+   "press": 15,
+   "firstArticleAt": "2026-11-17T04:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정호연, 사상 첫 한국인 '본드걸' 후보 거론…로버트 패틴슨 만날까",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-17T06:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000053045"
+    },
+    {
+     "title": "로버트 패틴슨, 7대 제임스 본드 낙점…본드걸 후보로 정호연 거론",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-17T05:58:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611170126"
+    },
+    {
+     "title": "정호연, 차기 '007' 본드걸 거론…로버트 패틴슨 만날까",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-17T05:50:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004125792"
+    }
+   ]
+  },
+  {
+   "keyword": "파업",
+   "sources": [
+    "google"
+   ],
+   "articles90": 12,
+   "recent20": 3,
+   "press": 11,
+   "firstArticleAt": "2026-11-17T04:41:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "철도·지하철 총파업 예고…GTX-A도 20일부터 준법운행",
+     "press": "redaily.co.kr",
+     "publishedAt": "2026-11-17T06:06:00.000Z",
+     "link": "https://www.redaily.co.kr/news/articleView.html?idxno=18233"
+    },
+    {
+     "title": "25일 무기한 총파업 돌입 예고…서울 지하철 노조\"인력감축 철회해야\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-17T06:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005442357?sid=102"
+    },
+    {
+     "title": "서울 지하철 임금협상 평행선…노조, 25일 무기한 총파업 예고",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-17T06:04:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261117001008"
     }
    ]
   },
@@ -143,10 +209,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 10,
+   "articles90": 8,
    "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-17T04:36:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-17T04:41:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -171,66 +237,34 @@
    ]
   },
   {
-   "keyword": "손석구·나가야마 에이타 푸른길 공조",
+   "keyword": "순국선열 기념식 개최",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-17T04:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "손석구 “배우로서 한계 느낄 즈음 만나”…‘D.P.’ 한준희와 다시 달...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-17T05:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002724610?sid=103"
-    },
-    {
-     "title": "[핌in현장] 손석구·나가야마 \"국적의 장벽 넘어 통했다\"…'푸른길' 특별...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-17T05:43:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261117000587"
-    },
-    {
-     "title": "손석구·나가야마 에이타, 국경 넘은 공조 수사…‘푸른길’로 완성한 ...",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-17T05:24:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001305274"
-    }
-   ]
-  },
-  {
-   "keyword": "담보 대출",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-17T04:42:00.000Z",
+   "firstArticleAt": "2026-11-17T04:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "은행권, 대출 쟁쟁 구도 바꾼다",
-     "press": "enewstoday.co.kr",
-     "publishedAt": "2026-11-17T05:56:00.000Z",
-     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2493556"
+     "title": "추경호 대구시장, 순국선열의 날 기념식...독립유공자 포상 전수",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-17T06:06:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3754663"
     },
     {
-     "title": "[나인앤컴퍼니 ①] 250억 만기 한 달…롯데관광 2세 담보는 '후순위 약정...",
-     "press": "fieldnews.kr",
-     "publishedAt": "2026-11-17T05:34:00.000Z",
-     "link": "http://www.fieldnews.kr/news/articleView.html?idxno=33143"
+     "title": "충북도의회, 순국선열의 날 삼일공원 참배…이상식 의장 등 참석",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-17T06:00:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3754670"
     },
     {
-     "title": "[기자의 눈] 가계대출 옥죄기 1년, 풀리지 않은 숙제",
-     "press": "ekn.kr",
-     "publishedAt": "2026-11-17T05:28:00.000Z",
-     "link": "https://www.ekn.kr/web/view.php?key=20261117025260759"
+     "title": "충북 독립운동 정신 되새긴 '순국선열의 날' 기념식 개최",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-17T05:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000192656?sid=102"
     }
    ]
   },
@@ -240,15 +274,21 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 7,
+   "articles90": 5,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-17T04:29:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-17T05:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이카루스의 추락, 보라색 스타킹 신은 신부…샤갈 작품 61점 국내 첫 공...",
+     "title": "“프랑스에서도 못 봐”…샤갈 걸작 65점, 서울에서 본다",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-17T05:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002724612?sid=103"
+    },
+    {
+     "title": "이카로스의 추락, 보라색 스타킹 신은 신부…샤갈 작품 61점 국내 첫 공...",
      "press": "newsis.com",
      "publishedAt": "2026-11-17T05:39:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014327472?sid=103"
@@ -258,54 +298,78 @@
      "press": "yna.co.kr",
      "publishedAt": "2026-11-17T05:33:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016446566?sid=103"
-    },
-    {
-     "title": "'이카로스의 추락' 등 미공개작 60여 점 韓 최초 공개…'샤갈, 너머의 여...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-17T05:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009293794?sid=103"
     }
    ]
   },
   {
-   "keyword": "순국선열 기념식 개최",
+   "keyword": "농구",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 4,
+   "articles90": 5,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-17T04:44:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-17T04:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "충북 독립운동 정신 되새긴 '순국선열의 날' 기념식 개최",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-17T05:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000192656?sid=102"
+     "title": "김포시, 제21회 금쌀사랑 생활체육 농구대회 개최…약 900명 참가",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-17T06:00:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3754664"
     },
     {
-     "title": "경북도, 제87회 순국선열의 날 기념식…독립운동 희생정신 기려",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-17T05:32:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5084368"
+     "title": "창단 첫해 전국 정상..당진 서정초 농구부, 3X3 농구대회 여초부 우승·...",
+     "press": "idjnews.kr",
+     "publishedAt": "2026-11-17T05:46:00.000Z",
+     "link": "https://www.idjnews.kr/news/articleView.html?idxno=304016"
     },
     {
-     "title": "경기남부보훈지청, 제87회 순국선열의 날 기념식 개최",
-     "press": "kgnews.co.kr",
-     "publishedAt": "2026-11-17T05:02:00.000Z",
-     "link": "https://www.kgnews.co.kr/news/article.html?no=919921"
+     "title": "제주스포츠클럽, 전국 교류전서 농구 입상·축구 8강",
+     "press": "jejumaeil.net",
+     "publishedAt": "2026-11-17T05:14:00.000Z",
+     "link": "https://www.jejumaeil.net/news/articleView.html?idxno=406812"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 878,
-  "matched": 477,
-  "avgLeadMin": 857,
+  "flagged": 883,
+  "matched": 482,
+  "avgLeadMin": 850,
   "recent": [
+   {
+    "keyword": "김정은 APEC 푸틴 회담",
+    "hitKeyword": "김정은 트럼프 외교 쇼",
+    "hitAt": "2026-11-17T15:00:00+09:00",
+    "leadMin": 384
+   },
+   {
+    "keyword": "김정은 관광지구 시찰",
+    "hitKeyword": "김정은 트럼프 외교 쇼",
+    "hitAt": "2026-11-17T15:00:00+09:00",
+    "leadMin": 323
+   },
+   {
+    "keyword": "김정은 삼지연 방문",
+    "hitKeyword": "김정은 트럼프 외교 쇼",
+    "hitAt": "2026-11-17T15:00:00+09:00",
+    "leadMin": 152
+   },
+   {
+    "keyword": "김정은 건설현장 방문",
+    "hitKeyword": "김정은 트럼프 외교 쇼",
+    "hitAt": "2026-11-17T15:00:00+09:00",
+    "leadMin": 112
+   },
+   {
+    "keyword": "김정은, 삼지연 방문",
+    "hitKeyword": "김정은 트럼프 외교 쇼",
+    "hitAt": "2026-11-17T15:00:00+09:00",
+    "leadMin": 92
+   },
    {
     "keyword": "마약 사범 86명 검거",
     "hitKeyword": "마약 투약 유통 검거",
@@ -335,36 +399,6 @@
     "hitKeyword": "이란 더티밤 공격 계획",
     "hitAt": "2026-11-17T14:00:00+09:00",
     "leadMin": 1755
-   },
-   {
-    "keyword": "상장",
-    "hitKeyword": "엔트로픽 상장 한국 제외",
-    "hitAt": "2026-11-17T14:00:00+09:00",
-    "leadMin": 113
-   },
-   {
-    "keyword": "트럼프 엔비디아 주식",
-    "hitKeyword": "엔비디아 안보 문제 검토",
-    "hitAt": "2026-11-17T14:00:00+09:00",
-    "leadMin": 52
-   },
-   {
-    "keyword": "신영철 감독 자진 사퇴",
-    "hitKeyword": "신영철 감독 사퇴",
-    "hitAt": "2026-11-17T14:00:00+09:00",
-    "leadMin": 12
-   },
-   {
-    "keyword": "코스피 급락",
-    "hitKeyword": "모건스탠리 코스피 1만",
-    "hitAt": "2026-11-17T14:00:00+09:00",
-    "leadMin": 12
-   },
-   {
-    "keyword": "젠슨 황 복귀 논의 없어",
-    "hitKeyword": "젠슨 황 복귀 불가",
-    "hitAt": "2026-11-17T13:00:00+09:00",
-    "leadMin": 314
    }
   ]
  }
