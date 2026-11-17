@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T19:31:17.481Z",
+ "builtAt": "2026-11-17T19:41:20.867Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,17 +11,23 @@
  "measured": 28,
  "candidates": [
   {
-   "keyword": "젠슨 황, 복귀 의사",
+   "keyword": "젠슨 황, 엔비디아 복귀 의사",
    "sources": [
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 4,
-   "press": 8,
-   "firstArticleAt": "2026-11-17T18:02:00.000Z",
+   "articles90": 13,
+   "recent20": 3,
+   "press": 9,
+   "firstArticleAt": "2026-11-17T18:14:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "젠슨 황 “이사회가 원하면 복귀”…사임 닷새 만에 입 열었다",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-17T19:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006411444?sid=101"
+    },
     {
      "title": "젠슨 황 전 엔비디아 CEO, \"이사회 요청 시 복귀 의사\"",
      "press": "goodnews1.com",
@@ -33,70 +39,32 @@
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-17T19:27:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012296001?sid=104"
-    },
-    {
-     "title": "젠슨 황 돌아오고 싶다던데...엔비디아는 헤드헌터 통해 차기 물색",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-17T19:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000544341?sid=104"
     }
    ]
   },
   {
-   "keyword": "오세훈 골로 카타르 1-0 승리",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-17T18:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'경합 부족' 손흥민에게 공 몰아주던 축구는 이제 그만? 오세훈 세우자...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-17T19:30:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/109/0005641864"
-    },
-    {
-     "title": "'오세훈 결승골' 축구대표팀, 카타르에 1-0 승리‥올해 A매치 끝",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-17T19:28:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/214/0001536265"
-    },
-    {
-     "title": "모레노호, 마지막 A매치 카타르전 1대 0 승리",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-17T18:46:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/052/0002434279"
-    }
-   ]
-  },
-  {
-   "keyword": "이재명, 중국 도착",
+   "keyword": "중국 도착한 이재명",
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-17T18:08:00.000Z",
+   "articles90": 6,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-17T18:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이 대통령, 중국 선전 도착...미중러 회담 앞두고 트럼프와 조우",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-17T19:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002434311?sid=100"
+    },
     {
      "title": "이 대통령, 중국 선전 도착...이틀간 APEC 일정 소화",
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-17T18:54:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002434286?sid=100"
-    },
-    {
-     "title": "트럼프와 40초 대화한 李, 中 선전 도착…남북·북미 대화 재개 지지 요...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-17T18:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005605831?sid=100"
     },
     {
      "title": "이재명 대통령 부부, 중국 선전 도착",
@@ -109,7 +77,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 922,
+  "flagged": 924,
   "matched": 514,
   "avgLeadMin": 819,
   "recent": [
