@@ -85,7 +85,7 @@ const ALL_FEATURES: Array<[string, string]> = [
     ['거미줄치기 통합글', '지난 글 최대 5개의 핵심을 엮어 통합글 한 편으로 만들어 발행합니다.'],
     ['외부 유입용 글 · 홍보', '발행한 글로 채널별 유입 글 초안을 만들고, 복사 · 바로가기로 직접 올립니다.'],
     ['카드뉴스 만들기', '홍보에 쓸 카드뉴스도 같은 프로그램에서 만듭니다.'],
-    ['환경 설정 한 창', 'API 키 · 블로그 플랫폼 · 원클릭 세팅을 한 창에서 관리합니다.'],
+    ['환경 설정 한 창', '블로그 연결 · 글 엔진 선택 · 원클릭 세팅을 한 창에서 관리합니다.'],
 ];
 
 function OrbitPage() {
@@ -103,6 +103,7 @@ function OrbitPage() {
         ['어떤 블로그에 올릴 수 있나요?', '워드프레스 · 티스토리 · 블로그스팟(구글 블로거) 세 곳입니다. 네이버 블로그 발행은 Better Life Naver가 맡습니다.'],
         ['사기 전에 써 볼 수 있나요?', '네. 다운로드 페이지에서 프로그램을 받아 30일 동안 하루 3편까지 무료로 써 볼 수 있습니다.'],
         ['설치해야 하나요?', '네. Orbit은 PC에 설치해서 쓰는 프로그램입니다. 다운로드 페이지에서 받습니다.'],
+        ['API 키가 필요한가요?', '아니요. 새로 설치하면 글은 Claude Code 에이전트 모드, 이미지는 Codex 구독으로 시작합니다. Claude와 ChatGPT 구독은 따로 있어야 하고, API 키로 쓰는 방법도 환경 설정에서 고를 수 있습니다.'],
         ['외부 유입용 글은 자동으로 올라가나요?', '아니요. 초안을 만들고 복사 · 바로가기 버튼만 드립니다. 자동 게시는 플랫폼 규정에 걸려 계정이 막힐 위험이 커서, 직접 붙여 넣는 방식으로 만들었습니다.'],
         ['키워드는 어떻게 고르나요?', '쓰고 싶은 키워드를 직접 넣으면 됩니다. 검색량과 문서수를 재서 쓸 키워드를 고르고 싶다면 키워드 도구 LEWORD를 함께 쓰면 좋습니다. LEWORD는 상점에서 따로 사는 단품입니다.'],
         ['상위 노출이나 수익을 보장하나요?', '아니요. 검색 노출과 수익은 키워드, 글 품질, 블로그 상태, 운영 기간, 플랫폼 정책에 따라 달라집니다.'],
@@ -126,7 +127,8 @@ function OrbitPage() {
                             chip={<>
                                 <span>30일 무료 체험</span><i aria-hidden />
                                 <span>하루 <b>3</b>편까지</span><i aria-hidden />
-                                <span>블로그 <b>3</b>곳 한 번에</span>
+                                <span>블로그 <b>3</b>곳 한 번에</span><i aria-hidden />
+                                <span>API 키 없이 구독으로 바로</span>
                             </>}
                             theirsTitle="블로그마다 따로"
                             oursTitle="Leadernam Orbit"
@@ -146,7 +148,7 @@ function OrbitPage() {
             <section className="pp-section">
                 <div className="pp-wrap">
                     <h2 className="pp-h2">쓰고, 올리고, 묶고, 알리기까지</h2>
-                    <p className="pp-lead">글 한 편 올리는 데서 끝나지 않습니다. 여러 편을 차례로 올리고, 지난 글을 묶고, 밖에서 사람을 데려올 글까지 한 프로그램에서 이어집니다.</p>
+                    <p className="pp-lead">여러 편을 차례로 올리고, 지난 글을 묶고, 밖에서 사람을 데려올 글까지 한 프로그램에서 이어집니다.</p>
                     {BANDS.map((band) => <FeatureBand key={band.title} {...band} />)}
                 </div>
             </section>
@@ -154,7 +156,7 @@ function OrbitPage() {
             <section className="pp-section">
                 <div className="pp-wrap">
                     <h2 className="pp-h2">이용권 하나에 다 들어 있습니다</h2>
-                    <p className="pp-lead">기능을 단계별로 잠그지 않습니다. Orbit 이용권이 있으면 아래가 전부 열립니다.</p>
+                    <p className="pp-lead">Orbit 이용권 하나로 아래가 모두 열립니다.</p>
                     <ul className="pp-all" role="list">
                         {ALL_FEATURES.map(([name, desc]) => <li key={name}><b>{name}</b><span>{desc}</span></li>)}
                     </ul>

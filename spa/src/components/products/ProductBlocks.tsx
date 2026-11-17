@@ -200,7 +200,7 @@ export function CompareBars({ rows, source }: { rows: PriceLadder[]; source: str
  * 실제 구매 후기 — 후기 페이지와 같은 창구 · 같은 가림 처리. 제품 말이 들어간 것만, 최신 3건.
  * exclude — 지금 사실과 다른 기대를 주는 후기(옛 무료판 · 영구제 · 그 제품이 하지 않는 일)를 뺀다. 문장은 고치지 않는다.
  */
-export function ReviewQuotes({ match, exclude, title }: { match: RegExp; exclude?: RegExp; title: string }) {
+export function ReviewQuotes({ match, exclude, maxLength, title }: { match: RegExp; exclude?: RegExp; maxLength?: number; title: string }) {
     const [quotes, setQuotes] = useState<Testimonial[]>([]);
     useEffect(() => {
         const controller = new AbortController();
@@ -210,7 +210,7 @@ export function ReviewQuotes({ match, exclude, title }: { match: RegExp; exclude
             .then((data) => {
                 const list = (Array.isArray(data?.reviews) ? data.reviews : []).map(normalizeReview).filter(Boolean) as Testimonial[];
                 const picked = list
-                    .filter((item) => item.text.length >= 40 && match.test(item.text) && !(exclude && exclude.test(item.text)))
+                    .filter((item) => item.text.length >= 40 && !(maxLength && item.text.length > maxLength) && match.test(item.text) && !(exclude && exclude.test(item.text)))
                     .sort((a, b) => String(b.timestamp || '').localeCompare(String(a.timestamp || '')))
                     .slice(0, 3);
                 setQuotes(picked);
@@ -218,7 +218,7 @@ export function ReviewQuotes({ match, exclude, title }: { match: RegExp; exclude
             .catch(() => setQuotes([]))
             .finally(() => window.clearTimeout(timer));
         return () => { controller.abort(); window.clearTimeout(timer); };
-    }, [match, exclude]);
+    }, [match, exclude, maxLength]);
 
     // 이 제품 후기가 없으면 칸째 비운다(감싼 .pp-section 은 CSS :has 로 접힌다) — 증거 띠에 이미 '구매 후기' 링크가 있다. 다른 제품 후기를 섞지 않는다.
     if (quotes.length === 0) return null;

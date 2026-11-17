@@ -145,7 +145,7 @@ function PurchaseVideoShowcase() {
 const PURCHASE_SHOWCASE_VIDEOS = [
     {
         title: '키워드 찾기부터 글 생성 · 발행까지 한 번에',
-        label: '올인원 한눈에',
+        label: 'All in one 한눈에',
         desc: 'LEWORD 로 키워드를 찾고, Better Life Naver 로 글을 만들어 발행하고, Leadernam Orbit 으로 워드프레스까지 발행하는 흐름입니다.',
         src: '/videos/pricing-showcase/site-allinone-short.mp4',
         poster: '/videos/pricing-showcase/site-allinone-short.jpg',
@@ -262,7 +262,7 @@ function PricingPage() {
 
     useEffect(() => {
         const prev = document.title;
-        document.title = '올인원 기간제 이용권 — Leaders Pro';
+        document.title = '가격 · 구매 | Leaders Pro';
         return () => { document.title = prev; };
     }, []);
 
@@ -867,7 +867,7 @@ function buildCustomerKey(email: string): string {
                                     <p><b>LEWORD 월 구독은 어떻게 갱신하나요?</b><br />월 19,900원(부가세 포함)입니다. 카드 구독은 30일마다 자동결제되며, 계좌이체는 30일 이용권을 직접 입금해 수동 갱신합니다. 계좌에서 자동출금되지 않습니다.</p>
                                     <p><b>결제 정보는 안전한가요?</b><br />토스페이먼츠 공식 PG 로 처리됩니다. 카드 정보는 저희 서버에 저장되지 않습니다.</p>
                                     <p><b>환불이 정말 가능한가요?</b><br />라이선스 발급 후 7일 이내·서비스 미사용이면 전액 환불됩니다. 카카오톡 1:1 상담으로 바로 신청하실 수 있습니다.</p>
-                                    <p><b>사용법이 어렵지 않나요?</b><br />설치하고 키워드만 넣으면 글·이미지·발행까지 자동입니다. 처음 5분 안내 영상과 카카오톡 지원이 함께 갑니다.</p>
+                                    <p><b>사용법이 어렵지 않나요?</b><br />Better Life Naver와 Orbit은 설치한 뒤 키워드만 넣으면 글과 이미지, 발행까지 이어집니다. LEWORD는 설치 없이 웹에서 로그인만 하면 됩니다. 막히면 카카오톡 1:1 문의로 물어보세요.</p>
                                 </div>
                             </details>
                             <p className="st-note-line">

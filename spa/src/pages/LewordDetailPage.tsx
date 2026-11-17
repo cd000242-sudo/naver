@@ -66,7 +66,7 @@ const ALL_TABS: Array<[string, string]> = [
     ['유튜브 급상승 글감', '유튜브에서 갑자기 오르는 주제를 블로그 글감으로 옮겨 줍니다.'],
     ['외부유입 레이더', '카페 · 지식인 · 구글에 최근 올라온 질문 중 내 글로 데려올 자리를 찾습니다.'],
     ['노출 추적', '블로그 주소 하나로 발행한 글 전체의 노출 · 누락 · 순위를 직접 셉니다.'],
-    ['내 API 키', '내 키를 넣으면 내 몫으로 조회해 횟수 제한 없이 씁니다.'],
+    ['내 API 키', '내 API 키를 넣으면 내 계정 한도로 조회합니다.'],
 ];
 
 function LewordDetailPage() {
@@ -113,7 +113,7 @@ function LewordDetailPage() {
             <section className="pp-section">
                 <div className="pp-wrap">
                     <h2 className="pp-h2">찾아 주고, 설계까지</h2>
-                    <p className="pp-lead">키워드를 조회만 하는 도구가 아닙니다. 될 만한 키워드와 글감과 제목을 먼저 찾아 오고, 글 한 편의 설계까지 이어 줍니다.</p>
+                    <p className="pp-lead">될 만한 키워드와 글감과 제목을 먼저 찾고, 글 한 편의 설계까지 이어 줍니다.</p>
                     {BANDS.map((band) => <FeatureBand key={band.title} {...band} />)}
                 </div>
             </section>

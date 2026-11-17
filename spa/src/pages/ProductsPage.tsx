@@ -20,7 +20,9 @@ import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
 
 // 제품 말이 들어간 후기만. 옛 무료판 · GPTs · 영구제 · 하루 체험권 · "Orbit 아직 없음" · HTML 글쓰기 · 가격 인상 재촉처럼 지금 사실과 다른 기대를 주는 후기는 뺀다.
 const REVIEW_MATCH = /자동화|키워드|홈판|홈피드|발행|프로그램/;
-const REVIEW_EXCLUDE = /무료|gpts|영구제|pro\s*버전|체험권|블로그스팟|워드프레스도|html로|만명|커서로|비싸지기/i;
+const REVIEW_EXCLUDE = /무료|gpts|영구제|pro\s*버전|체험권|블로그스팟|워드프레스도|html로|만명|커서로|비싸지기|애드포스트|본전|본접|수익|월\s*\d/i;
+// Quotes longer than this many characters are not shown on this page.
+const REVIEW_MAX_LENGTH = 200;
 
 const LEWORD_SHOTS: BandShot[] = [
     { label: '황금키워드', src: '/images/leword/product/golden-board.webp', mobileSrc: '/images/leword/product/m/golden-board.webp', alt: 'LEWORD 리더남 전용 황금키워드 화면', caption: '리더남 전용 황금키워드 · 실제 화면' },
@@ -162,7 +164,7 @@ function ProductsPage() {
                     <ProofStrip items={[
                         { to: '/reviews', title: '구매 후기', desc: '실제 구매자가 남긴 후기', icon: 'review' },
                         { to: '/reviews', title: '수익 인증', desc: '사용자가 올린 블로그 수익 인증', icon: 'income' },
-                        { to: '/download', title: '30일 무료 체험', desc: 'Naver · Orbit 은 설치해서 바로', icon: 'devices' },
+                        { to: '/download', title: '30일 무료 체험', desc: 'Better Life Naver · Orbit은 설치해서 바로', icon: 'devices' },
                     ]} />
                 </div>
             </section>
@@ -170,7 +172,7 @@ function ProductsPage() {
             <section className="pp-section">
                 <div className="pp-wrap">
                     <h2 className="pp-h2">제품마다 맡은 일이 다릅니다</h2>
-                    <p className="pp-lead">LEWORD가 무엇을 쓸지 찾고, Better Life Naver와 Orbit이 글을 써서 올립니다. 화면 이름을 누르면 실제 화면이 바뀝니다.</p>
+                    <p className="pp-lead">LEWORD가 무엇을 쓸지 찾고, Better Life Naver와 Orbit이 글을 써서 올립니다.</p>
 
                     <ProductBand
                         id="product-leword"
@@ -186,8 +188,8 @@ function ProductsPage() {
 
                     <ProductBand
                         id="product-naver"
-                        title="Better Life Naver는 네이버 블로그에 글을 올립니다"
-                        body="키워드나 상품 주소를 넣으면 글과 이미지 구성을 만들어 네이버 블로그에 예약 발행합니다. 검색 · 홈판 · 쇼핑커넥트 · 사용자 정의 네 가지 모드가 있고, 여러 계정을 차례로 돌릴 수 있습니다."
+                        title="Better Life Naver: 키워드 하나로 네이버 블로그 발행까지"
+                        body="키워드나 상품 주소를 넣으면 글과 이미지를 만들어 네이버 블로그에 예약 발행합니다. SEO · 홈판 · 네이버 메이트 · 쇼핑커넥트 · 업체홍보 · 사용자 정의 모드로 쓰고, 여러 계정을 차례로 돌릴 수 있습니다."
                         shots={NAVER_SHOTS}
                         clip={clipFor(content, 'naver', { src: '/images/hero-demo.mp4', alt: 'Better Life Naver 자동 발행 장면' })}
                         film={{ src: '/videos/pricing-showcase/site-naver.mp4', poster: '/videos/pricing-showcase/site-naver.jpg', alt: 'Better Life Naver 소개 영상' }}
@@ -214,12 +216,9 @@ function ProductsPage() {
             <section className="pp-section" id="price">
                 <div className="pp-wrap">
                     <h2 className="pp-h2">요금 한눈에</h2>
-                    <p className="pp-lead">
-                        하나만 필요하면 그 제품만 사면 됩니다.
-                        {bundleYearly > 0 && yearlyGap > 0 && ` 세 제품을 1년씩 따로 사면 ${won(yearlySum)}원, ${bundle?.name} 1년은 ${won(bundleYearly)}원입니다(모두 부가세 별도).`}
-                    </p>
+                    <p className="pp-lead">하나만 필요하면 그 제품만 사면 됩니다.</p>
                     <PriceTable products={sellable} />
-                    <p className="pp-source">‘부가세 포함’ 표시가 없는 값은 모두 부가세 별도입니다. 값은 상점과 같은 곳에서 읽어 옵니다.</p>
+                    <p className="pp-source">‘부가세 포함’ 표시가 없는 값은 모두 부가세 별도입니다.</p>
                     <div className="pp-price-cta">
                         <Link to="/pricing" className="pp-btn pp-btn-gold lp-sheen">상점에서 고르기<ArrowRight /></Link>
                         <Link to="/bank-order" className="pp-btn pp-btn-line">계좌이체로 사기<ArrowRight /></Link>
@@ -229,7 +228,7 @@ function ProductsPage() {
 
             <section className="pp-section">
                 <div className="pp-wrap">
-                    <ReviewQuotes match={REVIEW_MATCH} exclude={REVIEW_EXCLUDE} title="써 본 분들의 말" />
+                    <ReviewQuotes match={REVIEW_MATCH} exclude={REVIEW_EXCLUDE} maxLength={REVIEW_MAX_LENGTH} title="써 본 분들의 말" />
                 </div>
             </section>
 
