@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T06:08:26.308Z",
+ "builtAt": "2026-11-17T06:18:29.383Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 18,
  "candidates": [
-  {
-   "keyword": "수능 AI 부정행위",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 91,
-   "recent20": 51,
-   "press": 59,
-   "firstArticleAt": "2026-11-17T05:34:00.000Z",
-   "exclusive": true,
-   "capped": true,
-   "samples": [
-    {
-     "title": "[속보] 안철수 “이재명 대통령, AI 부정행위에 입장 없나…실종상태인...",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-17T06:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000132452?sid=100"
-    },
-    {
-     "title": "수능 부정행위 우려…정부 \"스마트기기 전수점검\"",
-     "press": "news.lghellovision.net",
-     "publishedAt": "2026-11-17T06:06:00.000Z",
-     "link": "http://news.lghellovision.net/news/articleView.html?idxno=562604"
-    },
-    {
-     "title": "대학생 단체 \"AI 시험 부정행위 엄정 대응해야\"",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-17T06:06:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544039"
-    }
-   ]
-  },
   {
    "keyword": "IMF 연례협의 발표",
    "sources": [
     "nate"
    ],
-   "articles90": 73,
-   "recent20": 14,
-   "press": 53,
+   "articles90": 78,
+   "recent20": 11,
+   "press": 57,
    "firstArticleAt": "2026-11-17T05:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "IMF “반도체 호황에 韓 성장률 4% 육박…추가 통화 긴축 적절\"",
-     "press": "segyebiz.com",
-     "publishedAt": "2026-11-17T06:06:00.000Z",
-     "link": "http://www.segyebiz.com/newsView/20261117512283?OutUrl=naver"
+     "title": "IMF 한국 성장률 전망 한 달 만에 3.9%로 상향 : 반도체 호황에도 추가 ...",
+     "press": "huffingtonpost.kr",
+     "publishedAt": "2026-11-17T06:16:00.000Z",
+     "link": "https://www.huffingtonpost.kr/article/262142"
     },
     {
-     "title": "IMF, 올해 韓 성장률 3.9%로 상향…추가 통화·재정 긴축 권고",
-     "press": "smedaily.co.kr",
-     "publishedAt": "2026-11-17T06:02:00.000Z",
-     "link": "http://www.smedaily.co.kr/news/articleView.html?idxno=366261"
+     "title": "코린 들레샤 단장, 2026년 IMF 연례협의 결과 발표",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-17T06:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009294066?sid=101"
     },
     {
-     "title": "IMF, 올해 韓성장률 전망치 한 달 만에 '3.3%→3.9%' 상향(종합)",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-17T06:02:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445181"
+     "title": "IMF, 올해 한국 성장률 전망치 한 달 만에 3.3%→3.9%로 상향",
+     "press": "delighti.co.kr",
+     "publishedAt": "2026-11-17T06:14:00.000Z",
+     "link": "https://www.delighti.co.kr/news/articleView.html?idxno=125099"
     }
    ]
   },
@@ -80,30 +48,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 80,
-   "recent20": 10,
-   "press": 49,
-   "firstArticleAt": "2026-11-17T04:50:00.000Z",
+   "articles90": 82,
+   "recent20": 17,
+   "press": 52,
+   "firstArticleAt": "2026-11-17T05:00:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "오세훈 \"조작기소 특검법, '치외법권 대통령' 만들었다\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-17T06:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005442353?sid=102"
+     "title": "조작기소 특검 수사대상 된 전직 검사장들 “특검법 위헌 다루겠다”",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-17T06:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000521109?sid=102"
     },
     {
-     "title": "국힘, 조작기소특검법 국무회의 의결에 \"이재명 탈옥법\" 맹비난",
-     "press": "kihoilbo.co.kr",
-     "publishedAt": "2026-11-17T06:02:00.000Z",
-     "link": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3041226"
-    },
-    {
-     "title": "'조작기소 특검법' 공포안 국무회의 통과…최대 309명·200일 활동",
+     "title": "국힘 2주째 靑앞 의총…\"韓총리, '귀태' 특검법 산파될텐가\"",
      "press": "kbsm.net",
-     "publishedAt": "2026-11-17T06:00:00.000Z",
-     "link": "https://www.kbsm.net/news/view.php?idx=542110"
+     "publishedAt": "2026-11-17T06:16:00.000Z",
+     "link": "https://www.kbsm.net/news/view.php?idx=542148"
+    },
+    {
+     "title": "‘조작기소 특검법’ 공포안, 국무회의 통과",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-17T06:16:00.000Z",
+     "link": "https://www.viva100.com/article/20261117500624"
     }
    ]
   },
@@ -113,126 +81,62 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 24,
-   "recent20": 7,
-   "press": 18,
-   "firstArticleAt": "2026-11-17T04:47:00.000Z",
+   "articles90": 26,
+   "recent20": 10,
+   "press": 20,
+   "firstArticleAt": "2026-11-17T04:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "유승민 “AI 부정행위, 허둥거리는 정부가 불안 키워…필요하다면 수능...",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-17T06:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012295491?sid=100"
+     "title": "AI 커닝 막겠다더니 기존 대책 재탕…수능 D-2에도 '육안 검사'",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-17T06:16:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=884192"
     },
     {
-     "title": "[속보] 한 총리 \"수능 시작 전에 모든 전자기기 전원 끈 채 수거, 별도 ...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-17T06:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005605559?sid=101"
+     "title": "김민석 \"수능 AI 부정행위 제재 특별법 제정 착수…자격 박탈 올해 수능...",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-17T06:12:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261117500397"
     },
     {
-     "title": "수능 이틀 앞두고 ‘AI 안경·초소형 카메라’ 비상…“전수 점검” vs ...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-17T06:02:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1175323"
+     "title": "[속보] 한 총리 \"수능 시작 전 모든 전자기기 전원 끄고 수거…별도 보...",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-17T06:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001075802?sid=105"
     }
    ]
   },
   {
-   "keyword": "정호연 본드걸 후보",
+   "keyword": "김민석 대표의 의원총회 참석",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 15,
+   "articles90": 27,
    "recent20": 3,
-   "press": 15,
-   "firstArticleAt": "2026-11-17T04:46:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-17T05:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "정호연, 사상 첫 한국인 '본드걸' 후보 거론…로버트 패틴슨 만날까",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-17T06:04:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000053045"
+     "title": "민주당, 의원총회 [포토]",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-17T06:14:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2649312"
     },
     {
-     "title": "로버트 패틴슨, 7대 제임스 본드 낙점…본드걸 후보로 정호연 거론",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-17T05:58:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611170126"
+     "title": "김민석 \"AI 부정행위 처벌 강화...특별법 제정 즉시 착수할 것\" [TF사진관...",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-17T06:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000552780?sid=100"
     },
     {
-     "title": "정호연, 차기 '007' 본드걸 거론…로버트 패틴슨 만날까",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-17T05:50:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004125792"
-    }
-   ]
-  },
-  {
-   "keyword": "파업",
-   "sources": [
-    "google"
-   ],
-   "articles90": 12,
-   "recent20": 3,
-   "press": 11,
-   "firstArticleAt": "2026-11-17T04:41:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "철도·지하철 총파업 예고…GTX-A도 20일부터 준법운행",
-     "press": "redaily.co.kr",
-     "publishedAt": "2026-11-17T06:06:00.000Z",
-     "link": "https://www.redaily.co.kr/news/articleView.html?idxno=18233"
-    },
-    {
-     "title": "25일 무기한 총파업 돌입 예고…서울 지하철 노조\"인력감축 철회해야\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-17T06:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005442357?sid=102"
-    },
-    {
-     "title": "서울 지하철 임금협상 평행선…노조, 25일 무기한 총파업 예고",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-17T06:04:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261117001008"
-    }
-   ]
-  },
-  {
-   "keyword": "전혜진 써닝야구단 출연",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-17T04:41:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "오정세, ‘써닝야구단’ 감독 손정호 역 출연",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-17T05:34:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001150265"
-    },
-    {
-     "title": "오정세, '써닝야구단'서 감독 변신...전혜진과 부부 호흡",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-17T05:34:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3754612"
-    },
-    {
-     "title": "[공식] 전혜진과 부부된다…오정세, '스토브리그' 이어 야구 드라마 '써...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-17T05:16:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000784852"
+     "title": "김민석 \"AI 부정행위 제재·처벌 대폭 강화할 것… 특별법 제정 즉시 착...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-17T05:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014327577?sid=100"
     }
    ]
   },
@@ -242,12 +146,18 @@
     "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 3,
    "press": 5,
-   "firstArticleAt": "2026-11-17T04:44:00.000Z",
+   "firstArticleAt": "2026-11-17T05:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "충남도, 제87회 순국선열의 날 기념식…독립정신 계승 다짐",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-17T06:10:00.000Z",
+     "link": "https://www.ajunews.com/view/20261117093357175"
+    },
     {
      "title": "추경호 대구시장, 순국선열의 날 기념식...독립유공자 포상 전수",
      "press": "gukjenews.com",
@@ -259,12 +169,6 @@
      "press": "gukjenews.com",
      "publishedAt": "2026-11-17T06:00:00.000Z",
      "link": "https://www.gukjenews.com/news/articleView.html?idxno=3754670"
-    },
-    {
-     "title": "충북 독립운동 정신 되새긴 '순국선열의 날' 기념식 개최",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-17T05:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000192656?sid=102"
     }
    ]
   },
@@ -275,7 +179,7 @@
     "nate"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-17T05:12:00.000Z",
    "exclusive": false,
@@ -302,41 +206,41 @@
    ]
   },
   {
-   "keyword": "농구",
+   "keyword": "고지용",
    "sources": [
     "google"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-17T04:52:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-17T05:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김포시, 제21회 금쌀사랑 생활체육 농구대회 개최…약 900명 참가",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-17T06:00:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3754664"
+     "title": "[뮤즈이슈]“‘슈돌’은 시간 맞춰줬다” 고지용, 젝키 완전체 활동 빠...",
+     "press": "heraldmuse.com",
+     "publishedAt": "2026-11-17T05:40:00.000Z",
+     "link": "https://m.entertain.naver.com/article/112/0003813559"
     },
     {
-     "title": "창단 첫해 전국 정상..당진 서정초 농구부, 3X3 농구대회 여초부 우승·...",
-     "press": "idjnews.kr",
-     "publishedAt": "2026-11-17T05:46:00.000Z",
-     "link": "https://www.idjnews.kr/news/articleView.html?idxno=304016"
+     "title": "고지용, '슈돌' 출연-젝스키스 불참 왜? \"일정상\"",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-17T05:26:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95468"
     },
     {
-     "title": "제주스포츠클럽, 전국 교류전서 농구 입상·축구 8강",
-     "press": "jejumaeil.net",
-     "publishedAt": "2026-11-17T05:14:00.000Z",
-     "link": "https://www.jejumaeil.net/news/articleView.html?idxno=406812"
+     "title": "이혼 후에도 잡음 계속…고지용·최동석, 면접교섭→상간 소송까지 '시...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-17T05:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000491162"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 883,
+  "flagged": 885,
   "matched": 482,
   "avgLeadMin": 850,
   "recent": [
