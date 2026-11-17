@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T03:07:28.268Z",
+ "builtAt": "2026-11-17T03:17:31.352Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,57 +8,25 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 14,
+ "measured": 7,
  "candidates": [
   {
-   "keyword": "조작기소 특검법 의결",
+   "keyword": "한성숙 총리 발언",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 74,
-   "recent20": 35,
-   "press": 54,
-   "firstArticleAt": "2026-11-17T02:33:00.000Z",
+   "articles90": 44,
+   "recent20": 3,
+   "press": 31,
+   "firstArticleAt": "2026-11-17T01:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국민의힘, '조작기소 특검법' 의결 규탄… \"이재명 탈옥법, 헌정사 최악...",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-17T03:06:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3449338"
-    },
-    {
-     "title": "한성숙 총리, '조작기소 특검법' 공포안 국무회의 의결...국민의힘 강력...",
-     "press": "hbnpress.com",
-     "publishedAt": "2026-11-17T03:04:00.000Z",
-     "link": "https://hbnpress.com/news/view/1065581394784555"
-    },
-    {
-     "title": "'조작기소 특검법' 공포안 국무회의 통과…李대통령 재가만 남았다",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-17T03:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000142433?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "국무회의 한성숙 국무총리",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 61,
-   "recent20": 27,
-   "press": 51,
-   "firstArticleAt": "2026-11-17T02:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한성숙 총리, '조작기소 특검법' 공포안 국무회의 의결...국민의힘 강력...",
-     "press": "hbnpress.com",
-     "publishedAt": "2026-11-17T03:04:00.000Z",
-     "link": "https://hbnpress.com/news/view/1065581394784555"
+     "title": "국무회의 주재하는 한성숙 국무총리",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-17T03:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016446219?sid=100"
     },
     {
      "title": "총리 한성숙 \"수능 스마트기기 휴대 원천 차단\", 청와대 AI 부정행위 비...",
@@ -67,42 +35,42 @@
      "link": "https://www.businesspost.co.kr/BP?command=article_view&num=452166"
     },
     {
-     "title": "'조작기소 특검법' 공포안 국무회의 의결…최장 200일 활동",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-17T03:02:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261117000660"
+     "title": "한 총리 “수능 시험장 스마트기기 휴대 원천 차단”",
+     "press": "naeil.com",
+     "publishedAt": "2026-11-17T03:04:00.000Z",
+     "link": "https://www.naeil.com/news/read/609096?ref=naver"
     }
    ]
   },
   {
-   "keyword": "유학생",
+   "keyword": "조작기소 특검법 의결 반대 행진",
    "sources": [
-    "google"
+    "signal.bz"
    ],
-   "articles90": 22,
-   "recent20": 0,
-   "press": 21,
-   "firstArticleAt": "2026-11-17T01:40:00.000Z",
+   "articles90": 30,
+   "recent20": 3,
+   "press": 19,
+   "firstArticleAt": "2026-11-17T01:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美법원, 트럼프 유학생 체류 제한 무효화",
-     "press": "mstoday.co.kr",
-     "publishedAt": "2026-11-17T02:42:00.000Z",
-     "link": "https://www.mstoday.co.kr/news/articleView.html?idxno=200499"
+     "title": "청와대서 의총, 정부청사서 규탄… 국민의힘, '특검법 저지' 안간힘",
+     "press": "sisaweek.com",
+     "publishedAt": "2026-11-17T03:14:00.000Z",
+     "link": "https://www.sisaweek.com/news/articleView.html?idxno=239015"
     },
     {
-     "title": "트럼프 '유학생 체류 4년 제한' 제동…美 법원, 체류기간 제한 규정 전면...",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-17T02:42:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=782443"
+     "title": "국힘, '조작기소 특검' 반대 거리 행진",
+     "press": "thepublic.kr",
+     "publishedAt": "2026-11-17T03:08:00.000Z",
+     "link": "https://www.thepublic.kr/news/articleView.html?idxno=327056"
     },
     {
-     "title": "미 법원, 유학생 체류기간 제한 무효화 ... 기존 제도 유지",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-17T02:42:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4119030"
+     "title": "국힘, 靑 앞 의총 이어 정부청사 행진…\"韓총리, 범죄자 李와 법정 설 것...",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-17T03:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000142434?sid=100"
     }
    ]
   },
@@ -111,13 +79,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 22,
+   "articles90": 19,
    "recent20": 3,
-   "press": 19,
-   "firstArticleAt": "2026-11-17T01:38:00.000Z",
+   "press": 16,
+   "firstArticleAt": "2026-11-17T01:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"'개조 계산기' 썼다\"…세무사 수석합격자 경찰 출석",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-17T03:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001403593?sid=102"
+    },
     {
      "title": "세무사시험 수석합격자 한모, AI·초소형 카메라 부정행위 인정...\"모두...",
      "press": "cwn.kr",
@@ -125,16 +99,10 @@
      "link": "https://www.cwn.kr/news/articleView.html?idxno=61957"
     },
     {
-     "title": "‘AI커닝’ 자수한 세무사시험 수석, 경찰 출석 “수험생들께 죄송”",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-17T02:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002833377?sid=102"
-    },
-    {
-     "title": "'AI 커닝' 세무사 수석, 개조 계산기도 썼다…수법 등 입증 총력(종합)",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-17T02:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006411043?sid=102"
+     "title": "‘AI 부정행위 자수’ 세무사 수석 경찰 출석…피의자 전환",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-17T03:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012295404?sid=102"
     }
    ]
   },
@@ -143,10 +111,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 4,
-   "press": 13,
-   "firstArticleAt": "2026-11-17T01:40:00.000Z",
+   "articles90": 12,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-17T01:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -175,10 +143,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
+   "articles90": 8,
    "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-17T01:38:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-17T01:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -208,11 +176,11 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-17T01:45:00.000Z",
-   "exclusive": true,
+   "press": 6,
+   "firstArticleAt": "2026-11-17T01:53:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
@@ -236,107 +204,42 @@
    ]
   },
   {
-   "keyword": "옵토닉스",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-17T01:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[특징주] 옵토닉스, 코스닥 입성 첫날 +119%대 급등",
-     "press": "jeonmae.co.kr",
-     "publishedAt": "2026-11-17T02:08:00.000Z",
-     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1312654"
-    },
-    {
-     "title": "[특징주] 옵토닉스, 코스닥 입성 첫날 급등… 신사업은 2029년 이후",
-     "press": "biztribune.co.kr",
-     "publishedAt": "2026-11-17T01:58:00.000Z",
-     "link": "http://www.biztribune.co.kr/news/articleView.html?idxno=362625"
-    },
-    {
-     "title": "'방산용 광학부품' 옵토닉스 코스닥 상장 첫날 '따블' 달성",
-     "press": "newsfc.co.kr",
-     "publishedAt": "2026-11-17T01:54:00.000Z",
-     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82521"
-    }
-   ]
-  },
-  {
-   "keyword": "상장",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-17T02:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "식품 상장기업 2026년 11월 브랜드평판...삼양식품, 농심, 오리온 順",
-     "press": "energy-news.co.kr",
-     "publishedAt": "2026-11-17T03:02:00.000Z",
-     "link": "https://www.energy-news.co.kr/news/articleView.html?idxno=229841"
-    },
-    {
-     "title": "'인텔릭스·클러쉬' 코스닥 상장",
-     "press": "newswell.co.kr",
-     "publishedAt": "2026-11-17T02:58:00.000Z",
-     "link": "http://www.newswell.co.kr/news/articleView.html?idxno=23689"
-    },
-    {
-     "title": "상장제약사 3분의 1 영업손실, 절반은 순손실 기록",
-     "press": "newsmp.com",
-     "publishedAt": "2026-11-17T02:46:00.000Z",
-     "link": "http://www.newsmp.com/news/articleView.html?idxno=259337"
-    }
-   ]
-  },
-  {
    "keyword": "피의자",
    "sources": [
     "signal.bz",
     "google"
    ],
-   "articles90": 4,
-   "recent20": 0,
+   "articles90": 5,
+   "recent20": 2,
    "press": 4,
-   "firstArticleAt": "2026-11-17T01:42:00.000Z",
+   "firstArticleAt": "2026-11-17T01:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "‘AI 부정행위 자수’ 세무사 수석 경찰 출석…피의자 전환",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-17T03:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012295404?sid=102"
+    },
+    {
+     "title": "'수석' 합격자가 피의자로‥\"수험생에 죄송\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-17T03:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001536085?sid=102"
+    },
     {
      "title": "아동·청소년 성착취물 범죄 피의자 절반 이상이 10대",
      "press": "ibabynews.com",
      "publishedAt": "2026-11-17T02:32:00.000Z",
      "link": "https://www.ibabynews.com/news/articleView.html?idxno=156988"
-    },
-    {
-     "title": "수석 합격 뒤 피의자로...AI 부정행위 대가",
-     "press": "00news.co.kr",
-     "publishedAt": "2026-11-17T02:18:00.000Z",
-     "link": "http://www.00news.co.kr/news/articleView.html?idxno=108119"
-    },
-    {
-     "title": "성범죄 피의자 7km 추격 끝에 실탄까지…경찰 6명 부상",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-17T01:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012295358?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 839,
+  "flagged": 840,
   "matched": 464,
   "avgLeadMin": 858,
   "recent": [
