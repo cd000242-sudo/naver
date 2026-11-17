@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T17:20:31.817Z",
+ "builtAt": "2026-11-17T17:30:35.629Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "모레노호 카타르 1-0 승리",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 47,
-   "recent20": 1,
-   "press": 34,
-   "firstArticleAt": "2026-11-17T15:51:00.000Z",
+   "articles90": 29,
+   "recent20": 0,
+   "press": 25,
+   "firstArticleAt": "2026-11-17T16:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -43,55 +43,17 @@
    ]
   },
   {
-   "keyword": "젠슨 황 엔비디아 복귀 의사",
+   "keyword": "오세훈 선제골",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 16,
-   "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-17T16:02:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'불륜스캔들' 젠슨황 복귀의사 공식화…\"이사회 요청시 응할것\"(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-17T17:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016447678?sid=104"
-    },
-    {
-     "title": "젠슨 황 “이사회 요청 시 복귀”…내달 1일 美 하원 ‘스파이 스캔들’...",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-17T17:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003059725?sid=104"
-    },
-    {
-     "title": "젠슨 황 “이사회가 원한다면 엔비디아 CEO 복귀하겠다”",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-17T16:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005765229?sid=105"
-    }
-   ]
-  },
-  {
-   "keyword": "한국",
-   "sources": [
-    "google"
-   ],
-   "articles90": 13,
-   "recent20": 5,
-   "press": 11,
-   "firstArticleAt": "2026-11-17T16:26:00.000Z",
+   "articles90": 20,
+   "recent20": 0,
+   "press": 17,
+   "firstArticleAt": "2026-11-17T16:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "한국투자증권, ELW 258종목 신규 상장",
-     "press": "issuenbiz.com",
-     "publishedAt": "2026-11-17T17:10:00.000Z",
-     "link": "http://www.issuenbiz.com/news/articleView.html?idxno=81698"
-    },
     {
      "title": "'오세훈 결승골' 한국, 올해 마지막 A매치에서 카타르에 1-0 승리",
      "press": "thesportstimes.co.kr",
@@ -99,10 +61,16 @@
      "link": "https://m.sports.naver.com/kfootball/article/472/0000042501"
     },
     {
-     "title": "한국 축구 또 참사, 중국에 무너졌다!…U-19 대표팀 충격의 2연패→킥오...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-17T17:05:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/311/0002081578"
+     "title": "오세훈 ‘헤더’ 빛난 한국 축구 카타르에 1-0 승…‘모레노 체제’ 마...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-17T16:56:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/028/0002832708"
+    },
+    {
+     "title": "'오세훈 결승골' 모레노호, 카타르 꺾고 올해 A매치 유종의 미",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-17T16:34:00.000Z",
+     "link": "https://www.ajunews.com/view/20261118012841654"
     }
    ]
   },
@@ -111,10 +79,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 3,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-17T15:51:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-17T16:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -139,73 +107,41 @@
    ]
   },
   {
-   "keyword": "조작기소 특검법 국무회의",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-17T15:51:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[사설] 민생 현안 관계없이 논란만 야기할 조작기소 특검법",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-17T16:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001885806?sid=110"
-    },
-    {
-     "title": "한성숙 총리가 ‘의사봉’ 조작기소 특검법 의결",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-17T15:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004010232?sid=100"
-    },
-    {
-     "title": "대통령 자리 비우자… 김지용 중수청장 국무회의 불참",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-17T15:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004010222?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "중국 간 이재명 대통령",
+   "keyword": "젠슨 황, 이사회 요청 시 엔비디아 복귀 의사.",
    "sources": [
     "nate"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 2,
-   "firstArticleAt": "2026-11-17T15:59:00.000Z",
-   "exclusive": false,
+   "firstArticleAt": "2026-11-17T16:11:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "트럼프 \"韓 역사적 투자로 알래스카 LNG 사업 승인\"…李대통령 참석 만...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-17T16:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005605825?sid=104"
+     "title": "'불륜스캔들' 젠슨황 복귀의사 공식화…\"이사회 요청시 응할것\"(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-17T17:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016447678?sid=104"
     },
     {
-     "title": "李대통령, 아세안 마치고 APEC 열리는 중국행…'미·중·러 회담' 앞두고...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-17T16:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005605823?sid=100"
+     "title": "젠슨 황 “이사회 요청 시 복귀”…내달 1일 美 하원 ‘스파이 스캔들’...",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-17T17:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003059725?sid=104"
     },
     {
-     "title": "미중러 회담 앞두고…美·日 정상 만난 이재명 대통령",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-17T15:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005355034?sid=100"
+     "title": "젠슨 황 \"이사회 요청시 엔비디아 복귀\"…사임 후 첫 공개 발언",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-17T16:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016447622?sid=104"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 914,
+  "flagged": 915,
   "matched": 514,
   "avgLeadMin": 819,
   "recent": [
