@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T16:20:08.934Z",
+ "builtAt": "2026-11-17T16:30:13.331Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 41,
-   "recent20": 12,
-   "press": 23,
-   "firstArticleAt": "2026-11-17T14:52:00.000Z",
+   "articles90": 35,
+   "recent20": 7,
+   "press": 24,
+   "firstArticleAt": "2026-11-17T15:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한국, 오세훈 결승골 앞세워 카타르 1-0 제압…모레노호 3승 1무 2패로 A...",
-     "press": "dailysportshankook.co.kr",
-     "publishedAt": "2026-11-17T16:18:00.000Z",
-     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435640"
+     "title": "결승골에도 웃지 못한 오세훈 \"더 넣지 못해 팀원들에게 미안\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-17T16:27:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/421/0009294816"
     },
     {
-     "title": "“더 넣었다면 편하게 이겼을 텐데”…골 넣고도 미안했던 오세훈",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-17T16:16:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/018/0006411440"
+     "title": "[핌 포커스] ;결승골에도 사과; 오세훈, 완벽한 연계와 아쉬운 결정력의...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-17T16:26:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261118000013"
     },
     {
-     "title": "슛수 21-2 일방적인 경기에도 아쉬운 골 결정력…‘오세훈 헤더 결승포...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-17T16:13:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/468/0001281672"
+     "title": "[442.star] 폼 미친 송민규! 카타르 수비진 초토화 폭풍 드리블...오세훈...",
+     "press": "fourfourtwo.co.kr",
+     "publishedAt": "2026-11-17T16:25:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/411/0000090105"
     }
    ]
   },
@@ -48,30 +48,62 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 18,
-   "recent20": 16,
-   "press": 13,
-   "firstArticleAt": "2026-11-17T16:00:00.000Z",
+   "articles90": 15,
+   "recent20": 9,
+   "press": 11,
+   "firstArticleAt": "2026-11-17T16:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "한국, 독·미·중 이어 네 번째 수출 1조 달러 목전…김정관 “도전과 응...",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-17T16:26:00.000Z",
+     "link": "https://www.viva100.com/article/20261118500009"
+    },
+    {
+     "title": "한국, 카타르 1-0 꺾고 올해 A매치 마무리… 오세훈 결승골",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-17T16:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001205490?sid=004"
+    },
+    {
      "title": "\"한국에 갔을 때는 걱정 안 했는데…이제 돈 아껴야 한다\" 前 두산 투수...",
      "press": "osen.co.kr",
      "publishedAt": "2026-11-17T16:19:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/109/0005641860"
+     "link": "https://m.sports.naver.com/wbaseball/article/109/0005641860"
+    }
+   ]
+  },
+  {
+   "keyword": "일본 파라과이",
+   "sources": [
+    "google"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-17T15:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "브라질 잡았던 일본, '모리야스 고별전'서 파라과이에 덜미",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-17T16:26:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/003/0014328561"
     },
     {
-     "title": "오세훈 머리로 웃었다... 한국, 카타르 1-0 꺾고 '숙제 남긴 마침표'",
-     "press": "stnsports.co.kr",
-     "publishedAt": "2026-11-17T16:18:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/450/0000155547"
+     "title": "브라질 이긴 일본, 파라과이에 1-2 패배…모리야스 감독 고별전서 패배",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-17T15:30:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/117/0004125945"
     },
     {
-     "title": "한국, 오세훈 결승골 앞세워 카타르 1-0 제압…모레노호 3승 1무 2패로 A...",
-     "press": "dailysportshankook.co.kr",
-     "publishedAt": "2026-11-17T16:18:00.000Z",
-     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435640"
+     "title": "'모리야스 고별전' 일본, 파라과이에 1-2 패배...5경기 연속 무패 마침표",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-17T15:27:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261118000005"
     }
    ]
   },
@@ -80,10 +112,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-17T14:51:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-17T15:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -108,170 +140,41 @@
    ]
   },
   {
-   "keyword": "엔비디아 실적발표",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 13,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-17T14:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "11월 엔비디아 실적발표일 한국시간 몇시?",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-17T16:08:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1175367"
-    },
-    {
-     "title": "뉴욕 증시, 엔비디아 실적 발표 주시하며 하락 출발",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-17T15:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002434273?sid=104"
-    },
-    {
-     "title": "[속보] 엔비디아 주가 155달러선 약세…실적 발표 앞두고 8.5% 변동 가능...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-17T15:16:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=627942"
-    }
-   ]
-  },
-  {
-   "keyword": "한일 정상 회담",
+   "keyword": "조작기소 특검법 통과",
    "sources": [
     "nate"
-   ],
-   "articles90": 7,
-   "recent20": 3,
-   "press": 7,
-   "firstArticleAt": "2026-11-17T15:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李·트럼프, 마닐라서 45초 환담…미중러 회담 이틀 앞두고 조우",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-17T16:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003059722?sid=100"
-    },
-    {
-     "title": "'미중러' 바라만 보는 한일…\"서로 협력\" 강조",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-17T16:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001403769?sid=100"
-    },
-    {
-     "title": "李대통령, 아세안 마치고 APEC 열리는 중국행…'미·중·러 회담' 앞두고...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-17T16:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005605823?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "일본 파라과이",
-   "sources": [
-    "google"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-17T15:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "브라질 이긴 일본, 파라과이에 1-2 패배…모리야스 감독 고별전서 패배",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-17T15:30:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/117/0004125945"
-    },
-    {
-     "title": "'모리야스 고별전' 일본, 파라과이에 1-2 패배...5경기 연속 무패 마침표",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-17T15:27:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261118000005"
-    },
-    {
-     "title": "[A매치 REVIEW] '일본 역대 최고 감독' 모리야스 마지막 경기는 패배로....",
-     "press": "interfootball.co.kr",
-     "publishedAt": "2026-11-17T15:24:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/413/0000226740"
-    }
-   ]
-  },
-  {
-   "keyword": "트럼프 희토류 생산",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-17T14:53:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "트럼프 \"10개월 내 희토류 생산 중국 따라잡을 것\"",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-17T16:00:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3449624"
-    },
-    {
-     "title": "아세안 정상회의 폐막…트럼프, 쿼드·아세안 정상들과 회동(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-17T15:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016447608?sid=104"
-    },
-    {
-     "title": "트럼프 \"10개월 내 中 희토류 추월\"…이란 '더티밤' 공격설엔 \"전례 없는...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-17T14:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005605815?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "이재명 APEC 출국",
-   "sources": [
-    "signal.bz"
    ],
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-17T14:56:00.000Z",
+   "firstArticleAt": "2026-11-17T15:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령, 아세안 마치고 APEC 열리는 중국행…'미·중·러 회담' 앞두고...",
+     "title": "[사설] 민생 현안 관계없이 논란만 야기할 조작기소 특검법",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-17T16:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001885806?sid=110"
+    },
+    {
+     "title": "野 \"조작기소 특검 수용 총리 특활비 삭감\" vs 與 \"식물 총리 만들건가...",
      "press": "fnnews.com",
-     "publishedAt": "2026-11-17T16:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005605823?sid=100"
+     "publishedAt": "2026-11-17T15:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005605818?sid=100"
     },
     {
-     "title": "李 아세안 일정 마무리, APEC 참석 중국으로...트럼프 조우",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-17T15:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006411436?sid=100"
-    },
-    {
-     "title": "아세안 일정 마친 이 대통령, 중국 선전으로…APEC 참석",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-17T14:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012295973?sid=100"
+     "title": "조작기소 특검법 국무회의 통과…정국 격랑",
+     "press": "ksilbo.co.kr",
+     "publishedAt": "2026-11-17T15:04:00.000Z",
+     "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1072830"
     }
    ]
   },
   {
    "keyword": "조국, 일본 입국 거부",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 3,
    "recent20": 0,
@@ -299,43 +202,11 @@
      "link": "https://n.news.naver.com/mnews/article/025/0003565931?sid=104"
     }
    ]
-  },
-  {
-   "keyword": "AI 세무사 조사 종료 사과",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-17T14:51:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'AI 부정행위' 세무사 가짜 수석 경찰 조사 13시간 만 종료…\"수험생께...",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-17T15:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000521209?sid=102"
-    },
-    {
-     "title": "‘AI 부정행위’ 세무사 수석, 경찰 조사 약 13시간 만에 종료",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-17T14:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012295972?sid=102"
-    },
-    {
-     "title": "'세무냥이' 첫 경찰조사 13시간만 종료…\"남은 절차도 모두 참석\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-17T14:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004210885?sid=102"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 909,
+  "flagged": 910,
   "matched": 514,
   "avgLeadMin": 819,
   "recent": [
