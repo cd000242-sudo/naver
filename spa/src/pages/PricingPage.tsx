@@ -139,36 +139,37 @@ function PurchaseVideoShowcase() {
 /*
  * [2026-11-17 owner] The raw 5-13 second screen recordings were replaced by four silent motion-graphic clips made
  * from real recordings: one for the bundle and one per product. They play muted, so each clip explains itself
- * with on-screen words; the poster is shown until the clip loads.
+ * with on-screen words; the poster is shown until the clip loads. The price page plays the short cuts (7-12 s):
+ * "소개는 간단하고 강력하게" — the longer cuts live on the product page.
  */
 const PURCHASE_SHOWCASE_VIDEOS = [
     {
         title: '키워드 찾기부터 글 생성 · 발행까지 한 번에',
         label: '올인원 한눈에',
         desc: 'LEWORD 로 키워드를 찾고, Better Life Naver 로 글을 만들어 발행하고, Leadernam Orbit 으로 워드프레스까지 발행하는 흐름입니다.',
-        src: '/videos/pricing-showcase/site-allinone.mp4',
-        poster: '/videos/pricing-showcase/site-allinone.jpg',
+        src: '/videos/pricing-showcase/site-allinone-short.mp4',
+        poster: '/videos/pricing-showcase/site-allinone-short.jpg',
     },
     {
         title: '네이버 블로그 글 생성 · 이미지 · 발행',
         label: 'Better Life Naver',
         desc: '글 생성, 이미지 생성, 네이버 블로그 발행까지의 실제 화면입니다.',
-        src: '/videos/pricing-showcase/site-naver.mp4',
-        poster: '/videos/pricing-showcase/site-naver.jpg',
+        src: '/videos/pricing-showcase/site-naver-short.mp4',
+        poster: '/videos/pricing-showcase/site-naver-short.jpg',
     },
     {
         title: '워드프레스 · 티스토리 · 블로그스팟 발행',
         label: 'Leadernam Orbit',
         desc: '글 엔진을 고르고 키워드만 넣어 외부 블로그에 발행하는 실제 화면입니다.',
-        src: '/videos/pricing-showcase/site-orbit.mp4',
-        poster: '/videos/pricing-showcase/site-orbit.jpg',
+        src: '/videos/pricing-showcase/site-orbit-short.mp4',
+        poster: '/videos/pricing-showcase/site-orbit-short.jpg',
     },
     {
         title: '블로그 키워드 찾기 · 확장',
         label: 'LEWORD',
         desc: '황금키워드, 검색량 · 문서수, 마인드맵 확장, 실시간 검색어 화면입니다.',
-        src: '/videos/pricing-showcase/site-leword.mp4',
-        poster: '/videos/pricing-showcase/site-leword.jpg',
+        src: '/videos/pricing-showcase/site-leword-short.mp4',
+        poster: '/videos/pricing-showcase/site-leword-short.jpg',
     },
 ];
 

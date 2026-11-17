@@ -39,7 +39,7 @@ export type Product = {
     licensePlatform: string;
     /** 카드 그림. 기존 사이트에 이미 있는 파일만 쓴다 — 없는 이미지를 지어내지 않는다. */
     image: string;
-    /** [2026-11-17] Silent motion clip made from real recordings; the card plays it instead of the still. */
+    /** [2026-11-17] Silent motion clip made from real recordings (the short cut); the card plays it instead of the still. */
     clip?: { src: string; poster: string };
     /** [2026-11-17] Where the full description lives; the store card only links to it. */
     detail?: string;
@@ -63,7 +63,7 @@ export const PRODUCTS: Product[] = [
         summary: '키워드만 넣으면 글·이미지 구성까지 만들어 예약 발행합니다.',
         licensePlatform: 'LEADERNAM',
         image: '/images/feature-auto-publish.png',
-        clip: { src: '/videos/pricing-showcase/site-naver.mp4', poster: '/videos/pricing-showcase/site-naver.jpg' },
+        clip: { src: '/videos/pricing-showcase/site-naver-short.mp4', poster: '/videos/pricing-showcase/site-naver-short.jpg' },
         detail: '/detail',
         accent: '#34d399',
         glyph: '✎',
@@ -79,7 +79,7 @@ export const PRODUCTS: Product[] = [
         summary: '세 블로그에 글을 쓰고 관리합니다. 외부 유입용 글과 카드뉴스까지 만듭니다.',
         licensePlatform: 'ORBIT',
         image: '/images/orbit/leadernam-orbit-download-card.webp',
-        clip: { src: '/videos/pricing-showcase/site-orbit.mp4', poster: '/videos/pricing-showcase/site-orbit.jpg' },
+        clip: { src: '/videos/pricing-showcase/site-orbit-short.mp4', poster: '/videos/pricing-showcase/site-orbit-short.jpg' },
         detail: '/orbit',
         accent: '#818cf8',
         glyph: '◎',
@@ -95,7 +95,7 @@ export const PRODUCTS: Product[] = [
         summary: '검색결과를 직접 열어 보고 지금 들어갈 자리가 있는 키워드만 남깁니다.',
         licensePlatform: 'LEWORD',
         image: '/images/leword/hero-banner-card.webp',
-        clip: { src: '/videos/pricing-showcase/site-leword.mp4', poster: '/videos/pricing-showcase/site-leword.jpg' },
+        clip: { src: '/videos/pricing-showcase/site-leword-short.mp4', poster: '/videos/pricing-showcase/site-leword-short.jpg' },
         detail: '/leword-detail',
         accent: '#f0b53f',
         glyph: '◆',
