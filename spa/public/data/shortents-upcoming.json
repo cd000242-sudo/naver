@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T22:52:28.367Z",
+ "builtAt": "2026-11-17T23:02:32.309Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,133 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "보안 취약점",
    "sources": [
     "google"
    ],
-   "articles90": 23,
-   "recent20": 10,
-   "press": 20,
-   "firstArticleAt": "2026-11-17T21:30:00.000Z",
+   "articles90": 32,
+   "recent20": 19,
+   "press": 24,
+   "firstArticleAt": "2026-11-17T21:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국가안보실, '자바' 취약점에 민관군 합동 대책회의…대응 체계 점검",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-17T22:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014328716?sid=100"
+     "title": "\"인증 없이 원격 공격 가능\"…과기정통부, 자바 취약점 긴급 보안조치 ...",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-17T23:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002248971?sid=105"
     },
     {
-     "title": "[속보] PHP 이어 Java도 보안 취약점…정부 \"패치 권고\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-17T22:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004210917?sid=101"
+     "title": "공공 정보시스템 71% 쓰는 자바, 치명적 보안 취약점…정부 긴급 점검 권...",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-17T23:00:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=782638"
     },
     {
-     "title": "[디깅노트] 증권사 경영진이 책임져야 할 보안 검증",
-     "press": "bloter.net",
-     "publishedAt": "2026-11-17T22:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/293/0000093419?sid=110"
+     "title": "\"자바포셸\" 치명적 취약점 확인…정부, 공공·기업 시스템 긴급 점검령",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-17T23:00:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=67955"
     }
    ]
   },
   {
-   "keyword": "미국 NSA 통신망 마비",
+   "keyword": "태안 어선 실종",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 3,
-   "press": 13,
-   "firstArticleAt": "2026-11-17T21:24:00.000Z",
+   "articles90": 23,
+   "recent20": 9,
+   "press": 20,
+   "firstArticleAt": "2026-11-17T21:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "60년된 ‘구리선’으로 항공대란 빚더니…美국가안보국 내부망 마비",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-17T22:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003566042?sid=104"
+     "title": "충남 태안 서격렬비도 해상서 7명 탄 어선 실종",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-17T23:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004010255?sid=102"
     },
     {
-     "title": "美안보국 기밀통신망 마비…\"필수기능은 가동\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-17T22:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000927262?sid=104"
+     "title": "충남 태안 해상서 어선 실종… 마지막 위치는 서격렬비도 인근",
+     "press": "busan.com",
+     "publishedAt": "2026-11-17T22:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001407688?sid=102"
     },
     {
-     "title": "엔비디아 실적 경계감에 NSA 통신망 장애까지⋯뉴욕증시 일제히 하락 마...",
-     "press": "ziksir.com",
-     "publishedAt": "2026-11-17T22:36:00.000Z",
-     "link": "https://www.ziksir.com/news/articleView.html?idxno=153702"
-    }
-   ]
-  },
-  {
-   "keyword": "화재",
-   "sources": [
-    "google"
-   ],
-   "articles90": 13,
-   "recent20": 3,
-   "press": 11,
-   "firstArticleAt": "2026-11-17T21:39:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "새벽 인천 숙박업소서 화재…투숙객 60여 명 대피",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-17T22:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001403823?sid=102"
-    },
-    {
-     "title": "인천 계양구 호텔 새벽 화재…투숙객 60명 대피",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-17T22:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004683364?sid=102"
-    },
-    {
-     "title": "경기도기술학교, 소방관 62명 대상 전기차 화재 대응 교육",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-17T22:34:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=564674"
-    }
-   ]
-  },
-  {
-   "keyword": "추경호 계엄 방해 1심 선고",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-17T21:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'계엄 해제 표결 방해 의혹' 추경호 대구시장 1심 11월 18일 선고",
-     "press": "dgmbc.com",
-     "publishedAt": "2026-11-17T22:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/657/0000057569?sid=100"
-    },
-    {
-     "title": "‘계엄해제 표결 방해’ 추경호 오늘 1심 선고…특검, 징역 20년 구형",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-17T22:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000367869?sid=102"
-    },
-    {
-     "title": "'계엄 해제 방해' 추경호, 오늘 1심 선고",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-17T22:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001536309?sid=102"
+     "title": "태안 해상서 7명 탄 어선 실종…윤호중 \"가용 자원 총동원해 구조\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-17T22:58:00.000Z",
+     "link": "https://www.ajunews.com/view/20261118074014764"
     }
    ]
   },
@@ -144,46 +80,179 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 11,
+   "articles90": 14,
    "recent20": 4,
-   "press": 9,
+   "press": 12,
    "firstArticleAt": "2026-11-17T21:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이대통령 순방 중 '조작기소 특검법' 의결…수사 대상 절반이 李 사건",
-     "press": "weekly.chosun.com",
+     "title": "APEC 정상회의 오늘 중국 선전서 개막...사상 첫 미중러 3자회담 주목",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-17T23:00:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=73196"
+    },
+    {
+     "title": "[APEC 개막] 이재명 대통령 18일새벽 선전도착 APEC일정 시작, 中 관영 C...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-17T22:57:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261118000053"
+    },
+    {
+     "title": "미·중·러 회담 앞두고 한·중·일 협력 강조한 李대통령…“관련국과...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-17T22:56:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2649368"
+    }
+   ]
+  },
+  {
+   "keyword": "추경호 계엄 방해 1심 선고",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 10,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-17T21:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "추경호 '계엄표결 방해 의혹', 오늘 법원 1심 선고",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-17T22:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002394265?sid=100"
+    },
+    {
+     "title": "징역 20년 구형…추경호 대구시장 오늘 '운명의 날'",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-17T22:58:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1175472"
+    },
+    {
+     "title": "'계엄 해제 표결 방해 의혹' 추경호 대구시장 1심 11월 18일 선고",
+     "press": "dgmbc.com",
+     "publishedAt": "2026-11-17T22:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/657/0000057569?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "노유민 가슴 통증 응급실",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 8,
+   "recent20": 3,
+   "press": 8,
+   "firstArticleAt": "2026-11-17T21:41:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "NRG 노유민, 가슴 통증으로 새벽 응급실 行…아내 \"별일 아니길\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-17T22:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009295003"
+    },
+    {
+     "title": "건물주 된 노유민, 새벽 응급실行 \"가슴 통증으로 실려가\"",
+     "press": "starnewskorea.com",
      "publishedAt": "2026-11-17T22:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/053/0000063132?sid=100"
+     "link": "https://m.entertain.naver.com/article/108/0003488249"
     },
     {
-     "title": "트럼프 \"김정은도 중국 오고 싶어할 것\"…북미 정상회담 가능성 또 시사",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-17T22:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001978681?sid=104"
+     "title": "NRG 노유민, 새벽 가슴 통증에 응급실행…“별일 아니길”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-17T22:43:00.000Z",
+     "link": "https://m.entertain.naver.com/article/016/0002724838"
+    }
+   ]
+  },
+  {
+   "keyword": "APEC 정상회의 개막",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 9,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-17T22:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "APEC 정상회의 오늘 중국 선전서 개막...사상 첫 미중러 3자회담 주목",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-17T23:00:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=73196"
     },
     {
-     "title": "이재명 대통령, 선전 도착…19일 APEC 본회의서 정상들과 협력 논의",
-     "press": "gukjenews.com",
+     "title": "[APEC 개막] 이재명 대통령 18일새벽 선전도착 APEC일정 시작, 中 관영 C...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-17T22:57:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261118000053"
+    },
+    {
+     "title": "[선전 APEC 개막] 트럼프·시진핑·푸틴 한자리에, 김정은 깜짝 방문할까",
+     "press": "newspim.com",
      "publishedAt": "2026-11-17T22:38:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3755225"
+     "link": "https://www.newspim.com/news/view/20261118000042"
+    }
+   ]
+  },
+  {
+   "keyword": "조국 일본 입국 거부",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-17T21:47:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "박노자 \"박근혜·이명박 日 입국도 거부할까\"…조국 \"날 불령선인으로 ...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-17T22:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009294999?sid=100"
+    },
+    {
+     "title": "조국, 하네다공항서 입국 거부…일본 당국 구체적 사유는 안 밝혀",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-17T22:40:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3755227"
+    },
+    {
+     "title": "한일 정상회담 직전‥조국, 일본 입국 거부당해",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-17T22:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001536320?sid=104"
     }
    ]
   },
   {
    "keyword": "사고",
    "sources": [
-    "signal.bz",
     "google"
    ],
    "articles90": 5,
-   "recent20": 0,
+   "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-17T22:02:00.000Z",
+   "firstArticleAt": "2026-11-17T22:08:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
+    {
+     "title": "“전 국민과 방귀 텄다”…16기 상철, 방송사고에 ‘가스 공급망 실패’...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-17T22:56:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001281690"
+    },
     {
      "title": "또 우회전 사고‥장바구니 끌던 60대 참변",
      "press": "imnews.imbc.com",
@@ -195,83 +264,45 @@
      "press": "tokenpost.kr",
      "publishedAt": "2026-11-17T22:16:00.000Z",
      "link": "https://www.tokenpost.kr/news/blockchain/440051"
-    },
-    {
-     "title": "송파구, 수능 끝난 밤 주요 상권 합동 안전순찰…“안전사고 예방”",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-17T22:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002833573?sid=102"
     }
    ]
   },
   {
-   "keyword": "2026년 11월 18일 운세",
+   "keyword": "장나라, 6세 연하 남편에게 고백",
    "sources": [
     "nate"
    ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-17T21:30:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-17T21:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[오늘의 띠별 운세] 2026년 11월 18일 수요일",
-     "press": "mhns.co.kr",
-     "publishedAt": "2026-11-17T22:22:00.000Z",
-     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=769549"
+     "title": "장나라, 6세 연하 남편에게 먼저 고백…“거절하면 어쩔 수 없는 거고”",
+     "press": "segye.com",
+     "publishedAt": "2026-11-17T22:21:00.000Z",
+     "link": "https://m.entertain.naver.com/article/022/0004176067"
     },
     {
-     "title": "[오늘의 운세] 18일 수요일 나의 운세는?",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-17T21:30:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1193280"
+     "title": "장나라, 6세 연하 남편에 먼저 고백… “좋은 누나라길래 이성적 감정이...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-17T22:09:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003542296"
     },
     {
-     "title": "[AI] 오늘의 띠별 운세...2026.11.18(수요일)",
-     "press": "newsroad.co.kr",
-     "publishedAt": "2026-11-17T21:30:00.000Z",
-     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=67916"
-    }
-   ]
-  },
-  {
-   "keyword": "배당",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-17T21:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "퀀타서비스, 주당 0.13달러 배당…2027년 1월 지급",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-17T22:08:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=406886"
-    },
-    {
-     "title": "[더벨][주주총회 프리뷰] 액토즈소프트, 첫 현금배당 채비…주주환원 구...",
-     "press": "thebell.co.kr",
-     "publishedAt": "2026-11-17T22:02:00.000Z",
-     "link": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202611161419406880102764"
-    },
-    {
-     "title": "찬바람 부니 배당주?…고금리에 '옥석가리기' 필요",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-17T21:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009294953?sid=101"
+     "title": "\"결혼식 입장 전 짜증내고 성질내\" ‘카메라감독♥' 장나라, 父와 비화...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-17T22:05:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005641872"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 961,
+  "flagged": 965,
   "matched": 557,
   "avgLeadMin": 836,
   "recent": [
