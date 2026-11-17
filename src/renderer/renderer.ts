@@ -365,7 +365,7 @@ import { applyEditedHeadingsToPreview, initHeadingControlPanel, renderHeadingLis
 import { initPublishFlowChooser } from './modules/publishFlowChooser.js';
 import { initImageTabTitleMirror } from './modules/contentGeneration.js';
 import { resetPhotoModeForNextPost } from './modules/photoModeReset.js';
-import { initStartupEngineGate } from './modules/startupEngineGate.js';
+import { initStartupAgentAutoSetup } from './modules/startupAgentAutoSetup.js';
 import { markRetiredImageEngines } from '../runtime/retiredImageEngines.js';
 import { initRetiredImageEngineGate } from './modules/retiredImageEngineGate.js';
 // ✅ [SPEC-DROPSHOT-2026] 이미지 관리 → 🎨 이미지 생성 서브탭 (멀티엔진 대량 생성 스튜디오)
@@ -979,13 +979,14 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (error) {
       console.warn("[Startup] 텍스트 모델 복원 실패:", error);
     }
-    // [2026-09-10] 매 실행마다 글생성 엔진을 먼저 고르게 한다(차단 모달). 저장값이 없을 때
-    //   모든 폴백이 3.1 Flash-Lite 로 떨어져 사용자가 고른 적 없는 엔진으로 발행되던 문제.
+    // [2026-11-17 사장님] 기동 엔진 선택 창(2026-09-10)을 없앤다. 구매자는 구독 CLI 로 바로 쓰므로
+    //   글 = Claude Code · 이미지 = Codex 를 한 번 기본값으로 넣고, CLI 설치·로그인 상태는 뒤에서 점검한다.
+    //   저장값이 비어 엉뚱한 엔진으로 떨어지던 문제는 기본값을 설정에 써 넣는 것으로 막는다.
     try {
-      const chosen = await initStartupEngineGate();
-      if (chosen) await refreshAgentQuotaBadge();
+      await initStartupAgentAutoSetup();
+      await refreshAgentQuotaBadge();
     } catch (error) {
-      console.warn("[Startup] 엔진 선택 게이트 실패:", error);
+      console.warn("[Startup] 에이전트 자동 점검 실패:", error);
     }
     // [2026-11-03] 옛 이미지 엔진(Leonardo AI · DeepInfra · Prodia)을 쓰던 사용자에게만 한 번 뜬다.
     try {

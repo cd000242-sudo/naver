@@ -184,10 +184,13 @@ describe('startupEngineGate — 기동 진입점', () => {
 describe('배선 소스 핀', () => {
   const read = (rel: string) => fs.readFileSync(path.resolve(__dirname, '..', '..', rel), 'utf-8');
 
-  it('renderer.ts 기동 블록이 initStartupEngineGate 를 호출한다', () => {
+  // [2026-11-17 사장님] 기동 선택 창을 없앴다 — 구독 CLI 로 바로 쓰게 기본 엔진을 넣고 뒤에서 점검한다
+  //   (startupAgentAutoSetup.test.ts). 창 모듈은 저장 함수를 그 모듈이 쓰므로 남아 있다.
+  it('renderer.ts 기동 블록은 선택 창을 띄우지 않고 자동 점검을 부른다', () => {
     const renderer = read('src/renderer/renderer.ts');
-    expect(renderer).toMatch(/import \{ initStartupEngineGate \} from ["']\.\/modules\/startupEngineGate\.js["']/);
-    expect(renderer).toMatch(/await initStartupEngineGate\(\)/);
+    expect(renderer).not.toMatch(/initStartupEngineGate/);
+    expect(renderer).toMatch(/import \{ initStartupAgentAutoSetup \} from ["']\.\/modules\/startupAgentAutoSetup\.js["']/);
+    expect(renderer).toMatch(/await initStartupAgentAutoSetup\(\)/);
   });
 
   it('priceInfoModal 의 첫 실행 설정창 자동 오픈(3.1 선택 잠금 경로)이 제거됨', () => {

@@ -661,8 +661,11 @@ try {
     //   (이미지 칸이 쓰는 imageCollectEngineConsent 는 아래에서 로드되지만 호출 시점에만 참조한다)
     'startupEngineGateView.js',
     'startupImageEngineGate.js',
-    // [2026-09-10] 매 실행 글생성 엔진 선택 게이트 (renderer.ts 시작 시 호출)
+    // [2026-09-10] 글생성 엔진 선택 창. [2026-11-17] 기동 때는 더 이상 띄우지 않는다(저장 함수는 아래 모듈이 쓴다)
     'startupEngineGate.js',
+    // [2026-11-17] 기동 시 기본 엔진 적용 + CLI 자동 점검·설치 (renderer.ts 시작 시 호출)
+    'startupAgentAutoSetupBanner.js',
+    'startupAgentAutoSetup.js',
     // [2026-11-03] 지원이 끝난 이미지 엔진을 쓰던 사용자에게 한 번 뜨는 재선택 안내 (renderer.ts 시작 시 호출)
     'retiredImageEngineGate.js',
     // ✅ [v2.11.206] 장소(지도) 미리 확정 UI — 사진 모드 장소 블록

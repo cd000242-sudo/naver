@@ -8,12 +8,14 @@
 //
 // Precedence: a model the caller names (settings field, explicit option) always wins; this default only
 // fills the gap. Codex ignores the user's ~/.codex/config.toml (runCodex passes --ignore-user-config),
-// so the effort below is what actually runs. Gemini (agy) is intentionally absent.
+// so the effort below is what actually runs.
+// [2026-11-17 owner] Gemini (agy) defaults to 3.8 Flash too. agy names carry the effort in the model id
+// (gemini-3.8-flash-medium), so its profiles have no separate effort.
 //
 // Tier: 'main' = long article generation, 'light' = short helper calls (connection check, search-plan
 // analysis, JSON judgments, title/prompt inference). Callers say which; the default is 'main'.
 
-export type AgentDefaultModelProvider = 'claude' | 'codex';
+export type AgentDefaultModelProvider = 'claude' | 'codex' | 'gemini';
 export type AgentTier = 'main' | 'light';
 
 export interface AgentTierProfile {
@@ -39,6 +41,11 @@ export const AGENT_TIER_PROFILES: Readonly<Record<AgentDefaultModelProvider, Rea
     main: Object.freeze({ model: 'gpt-6.1-terra', effort: 'medium' as const }),
     light: Object.freeze({ model: 'gpt-6.1-terra', effort: 'low' as const }),
   }),
+  // Verified against `agy models` (2026-11-17): gemini-3.8-flash-high / -medium / -low exist.
+  gemini: Object.freeze({
+    main: Object.freeze({ model: 'gemini-3.8-flash-medium' }),
+    light: Object.freeze({ model: 'gemini-3.8-flash-low' }),
+  }),
 });
 
 /**
@@ -61,16 +68,18 @@ export function resolveAgentImageProfile(provider: 'codex', named?: string | nul
 export const AGENT_DEFAULT_MODELS: Readonly<Record<AgentDefaultModelProvider, string>> = Object.freeze({
   claude: AGENT_TIER_PROFILES.claude.main.model,
   codex: AGENT_TIER_PROFILES.codex.main.model,
+  gemini: AGENT_TIER_PROFILES.gemini.main.model,
 });
 
 /** Short names for the settings card status line. */
 export const AGENT_DEFAULT_MODEL_LABELS: Readonly<Record<AgentDefaultModelProvider, string>> = Object.freeze({
   claude: 'Sonnet 5.5',
   codex: 'GPT-6.1 Terra',
+  gemini: 'Gemini 3.8 Flash',
 });
 
 function hasDefault(provider: string): provider is AgentDefaultModelProvider {
-  return provider === 'claude' || provider === 'codex';
+  return provider === 'claude' || provider === 'codex' || provider === 'gemini';
 }
 
 export function normalizeAgentTier(value: unknown): AgentTier {

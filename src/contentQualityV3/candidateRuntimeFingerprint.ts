@@ -879,6 +879,8 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/renderer/modules/revenueOperationsDashboard.ts',
   'src/renderer/modules/scheduleDistributor.ts',
   'src/renderer/modules/scheduleManager.ts',
+  'src/renderer/modules/startupAgentAutoSetup.ts',
+  'src/renderer/modules/startupAgentAutoSetupBanner.ts',
   'src/renderer/modules/startupEngineGate.ts',
   'src/renderer/modules/startupEngineGateView.ts',
   'src/renderer/modules/startupImageEngineGate.ts',

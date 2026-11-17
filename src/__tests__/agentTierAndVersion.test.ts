@@ -42,7 +42,8 @@ describe('tier profiles (codex main/light, claude both sonnet)', () => {
     expect(AGENT_TIER_PROFILES.codex.light).toEqual({ model: 'gpt-6.1-terra', effort: 'low' });
     expect(AGENT_TIER_PROFILES.claude.main.model).toBe('claude-sonnet-5-5');
     expect(AGENT_TIER_PROFILES.claude.light.model).toBe('claude-sonnet-5-5');
-    expect(resolveAgentRunProfile('gemini', { tier: 'light' })).toEqual({ tier: 'light' });
+    // [2026-11-17 owner] Gemini (agy) has defaults now; the effort lives in the model id, so no effort field.
+    expect(resolveAgentRunProfile('gemini', { tier: 'light' })).toEqual({ model: 'gemini-3.8-flash-low', tier: 'light' });
   });
 
   it('runCodex passes the model and effort itself, ignoring the user config; default tier is main', async () => {

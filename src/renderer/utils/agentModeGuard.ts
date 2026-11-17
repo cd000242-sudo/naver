@@ -79,7 +79,10 @@ export async function ensureAgentEngineReady(generator: string): Promise<boolean
       : status?.errorCode === 'subscription_inactive'
       ? `${providerLabel} 구독을 갱신한 뒤 환경설정에서 계정을 다시 로그인해주세요.`
       : !status?.installed
-        ? '환경설정의 AI 텍스트 엔진 카드에서 CLI를 설치해주세요.'
+        // [2026-11-17] startupAgentAutoSetup installs the CLIs in the background and raises this flag while it runs.
+        ? ((window as any).__agentAutoSetupInstalling === true
+          ? '앱이 CLI 를 자동으로 설치하는 중입니다. 설치가 끝난 뒤 다시 눌러 주세요.'
+          : '환경설정의 AI 텍스트 엔진 카드에서 CLI를 설치해주세요.')
         : '환경설정의 AI 텍스트 엔진 카드에서 로그인 또는 계정 전환을 진행해주세요.';
     showBlockingMessage(`에이전트 모드(${provider})를 사용할 수 없습니다.\n\n${reason}\n\n${action}`);
     return false;

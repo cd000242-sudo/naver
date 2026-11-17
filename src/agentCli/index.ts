@@ -103,7 +103,7 @@ export async function generateWithAgent(
       text = provider === 'codex'
         ? await runCodex(prompt, { schema, model, tier, timeoutMs, signal })
         : provider === 'gemini'
-          ? await runGemini(prompt, { schema, model, timeoutMs, signal })
+          ? await runGemini(prompt, { schema, model, tier, timeoutMs, signal })
           : await runClaude(prompt, { schema, model, tier, timeoutMs, signal });
 
       // Quota is consumed once the CLI answered, even if JSON parsing below

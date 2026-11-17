@@ -34,10 +34,11 @@ const lastArgs = (): string[] => {
 describe('agent default models (2026-11-03)', () => {
   beforeEach(() => spawnMock.mockReset());
 
-  it('claude = claude-sonnet-5-5, codex = gpt-6.1-terra, gemini has none', () => {
+  // [2026-11-17 owner] Gemini (agy) now defaults to 3.8 Flash as well.
+  it('claude = claude-sonnet-5-5, codex = gpt-6.1-terra, gemini = gemini-3.8-flash-medium', () => {
     expect(AGENT_DEFAULT_MODELS.claude).toBe('claude-sonnet-5-5');
     expect(AGENT_DEFAULT_MODELS.codex).toBe('gpt-6.1-terra');
-    expect(resolveAgentRunModel('gemini', '')).toBeUndefined();
+    expect(resolveAgentRunModel('gemini', '')).toBe('gemini-3.8-flash-medium');
   });
 
   it('a named model wins over the default; blank falls to the default', () => {
@@ -94,11 +95,11 @@ describe('agent default models (2026-11-03)', () => {
     expect(classifyExit('claude', 'Not logged in')).toBe('not_logged_in');
   });
 
-  it('status-line text: saved model, app default, nothing for gemini', () => {
+  it('status-line text: saved model, app default (gemini included since 2026-11-17)', () => {
     expect(describeAgentModelLine('claude', '')).toBe('기본 모델: Sonnet 5.5');
     expect(describeAgentModelLine('codex', undefined)).toBe('기본 모델: GPT-6.1 Terra');
     expect(describeAgentModelLine('codex', 'gpt-6-astra')).toBe('모델: gpt-6-astra');
-    expect(describeAgentModelLine('gemini', '')).toBe('');
+    expect(describeAgentModelLine('gemini', '')).toBe('기본 모델: Gemini 3.8 Flash');
   });
 
   it('renderer wiring: card status line, inline registration, fingerprint', () => {

@@ -26,6 +26,7 @@ import { buildGeminiSubscriptionEnv } from './subscriptionEnv.js';
 import { agentCommandName } from './commandName.js';
 import { AgentCliError } from './types.js';
 import { buildAgentFailureMessage } from './failureMessage.js';
+import { resolveAgentRunModel, type AgentTier } from './agentModelDefaults.js';
 
 /** Let agy report its own timeout before spawnCollect SIGKILLs it. */
 const PRINT_TIMEOUT_MARGIN_MS = 5_000;
@@ -35,6 +36,8 @@ export interface GeminiRunOptions {
   /** Provided for API symmetry with codex; agy has no output-schema flag, so it is unused here. */
   schema?: Record<string, unknown>;
   model?: string;
+  /** 'light' for short helper calls; picks the default model when none is named. */
+  tier?: AgentTier;
   timeoutMs?: number;
   signal?: AbortSignal;
 }
@@ -53,7 +56,9 @@ function printTimeoutArgs(timeoutMs?: number): string[] {
  * Throws AgentCliError on failure (install / login / rate-limit / timeout / empty output).
  */
 export async function runGemini(prompt: string, opts: GeminiRunOptions = {}): Promise<string> {
-  const { model, timeoutMs, signal } = opts;
+  const { timeoutMs, signal } = opts;
+  // [2026-11-17] No model named -> the app default (3.8 Flash) instead of whatever agy would pick.
+  const model = resolveAgentRunModel('gemini', opts.model, opts.tier);
   // Throwaway cwd so project context files near the caller's cwd are not auto-discovered.
   const dir = await mkdtemp(join(tmpdir(), 'agentcli-gemini-'));
 

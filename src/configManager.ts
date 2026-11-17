@@ -192,6 +192,8 @@ export interface AppConfig {
   agentCodexModel?: string;
   agentClaudeModel?: string;
   agentGeminiModel?: string;
+  /** [2026-11-17] One-time default (text = Claude Code) already applied — renderer/modules/startupAgentAutoSetup.ts. */
+  engineDefaultsClaudeCodexV1?: boolean;
 
   /**
    * [SPEC-EVENT-RETRIEVAL-2026 Phase 2] 자료가 마른 키워드에서 키워드를 분해해
@@ -514,7 +516,7 @@ export async function loadConfig(): Promise<AppConfig> {
           'rememberLicenseCredentials', 'savedLicenseUserId', 'savedLicensePassword',
           'userDisplayName', 'userEmail',
           'geminiModel', 'primaryGeminiTextModel', 'defaultAiProvider',
-          'agentCodexModel', 'agentClaudeModel', 'agentGeminiModel',
+          'agentCodexModel', 'agentClaudeModel', 'agentGeminiModel', 'engineDefaultsClaudeCodexV1',
           'expandedRetrieval', 'humanizerIntensity', 'naverQualityLoop', 'agentHarmonyMode',
           'perplexityModel', 'geminiPlanType', 'geminiUseFreeQuotaBeforePaid',
           'customImageSavePath',
@@ -1107,7 +1109,7 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
           'minPublishIntervalMinutes',
           'naverAdApiKey', 'naverAdSecretKey', 'naverAdCustomerId',
           'geminiModel', 'primaryGeminiTextModel', 'defaultAiProvider',
-          'agentCodexModel', 'agentClaudeModel', 'agentGeminiModel',
+          'agentCodexModel', 'agentClaudeModel', 'agentGeminiModel', 'engineDefaultsClaudeCodexV1',
           'expandedRetrieval', 'humanizerIntensity', 'naverQualityLoop', 'agentHarmonyMode',
           'perplexityModel', 'geminiPlanType', 'geminiUseFreeQuotaBeforePaid',
         ];

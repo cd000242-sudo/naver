@@ -138,6 +138,20 @@ function startupImagePersist(select: HTMLSelectElement, value: string, store: St
 }
 
 /**
+ * [2026-11-17] Applies an image engine without the startup window (one-time default, startupAgentAutoSetup).
+ * Same save path as the window; false when nothing was saved.
+ */
+export function startupImageApplyDefault(value: string): boolean {
+  const store = startupImageStore();
+  const select = document.getElementById(STARTUP_IMAGE_SELECT_ID) as HTMLSelectElement | null;
+  if (!store || !select) return false;
+  if (readRetiredImageEnginePending(store)) resolveRetiredImageEngineChoice(value, store);
+  if (!startupImagePersist(select, value, store)) return false;
+  store.setItem(STARTUP_IMAGE_FIRST_SHOWN_KEY, '1');
+  return true;
+}
+
+/**
  * Applies the chosen image engine. Returns '' on success (also when the section is absent) or a Korean message
  * for the gate hint when nothing was saved; the window stays open in that case.
  */
