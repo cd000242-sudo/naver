@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T16:10:05.200Z",
+ "builtAt": "2026-11-17T16:20:08.934Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,63 @@
    "sources": [
     "daum"
    ],
-   "articles90": 53,
-   "recent20": 21,
-   "press": 26,
-   "firstArticleAt": "2026-11-17T14:46:00.000Z",
+   "articles90": 41,
+   "recent20": 12,
+   "press": 23,
+   "firstArticleAt": "2026-11-17T14:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한국축구 올해 마지막 평가전서 카타르에 1-0 승…오세훈 결승골(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-17T16:07:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/001/0016447621"
+     "title": "한국, 오세훈 결승골 앞세워 카타르 1-0 제압…모레노호 3승 1무 2패로 A...",
+     "press": "dailysportshankook.co.kr",
+     "publishedAt": "2026-11-17T16:18:00.000Z",
+     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435640"
     },
     {
-     "title": "'카타르전 결승골' 오세훈 \"기회 너무 많이 놓쳐 미안해\"",
-     "press": "sports.hankooki.com",
-     "publishedAt": "2026-11-17T16:06:00.000Z",
-     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6943789"
+     "title": "“더 넣었다면 편하게 이겼을 텐데”…골 넣고도 미안했던 오세훈",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-17T16:16:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/018/0006411440"
     },
     {
-     "title": "오세훈 결승골... 모레노호, 카타르에 1-0 승리 '유종의 미'",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-17T16:04:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=884406"
+     "title": "슛수 21-2 일방적인 경기에도 아쉬운 골 결정력…‘오세훈 헤더 결승포...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-17T16:13:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/468/0001281672"
+    }
+   ]
+  },
+  {
+   "keyword": "한국",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 18,
+   "recent20": 16,
+   "press": 13,
+   "firstArticleAt": "2026-11-17T16:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"한국에 갔을 때는 걱정 안 했는데…이제 돈 아껴야 한다\" 前 두산 투수...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-17T16:19:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/109/0005641860"
+    },
+    {
+     "title": "오세훈 머리로 웃었다... 한국, 카타르 1-0 꺾고 '숙제 남긴 마침표'",
+     "press": "stnsports.co.kr",
+     "publishedAt": "2026-11-17T16:18:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/450/0000155547"
+    },
+    {
+     "title": "한국, 오세훈 결승골 앞세워 카타르 1-0 제압…모레노호 3승 1무 2패로 A...",
+     "press": "dailysportshankook.co.kr",
+     "publishedAt": "2026-11-17T16:18:00.000Z",
+     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435640"
     }
    ]
   },
@@ -47,15 +80,15 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 28,
-   "recent20": 2,
-   "press": 23,
-   "firstArticleAt": "2026-11-17T14:42:00.000Z",
+   "articles90": 15,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-17T14:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "경북 상주서 ‘올해 최강 지진’…규모 3.6",
+     "title": "“강한 진동과 굉음” 경북 상주서 ‘올해 최강 지진’…규모 3.6",
      "press": "seoul.co.kr",
      "publishedAt": "2026-11-17T16:08:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/081/0003700463?sid=102"
@@ -79,10 +112,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 17,
+   "articles90": 13,
    "recent20": 1,
-   "press": 14,
-   "firstArticleAt": "2026-11-17T14:42:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-17T14:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,50 +140,23 @@
    ]
   },
   {
-   "keyword": "한국",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 15,
-   "recent20": 15,
-   "press": 13,
-   "firstArticleAt": "2026-11-17T15:53:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "[442.told] 손흥민-이강인 다 막았다...'슈팅 22개 난사' 한국 울린 카타...",
-     "press": "fourfourtwo.co.kr",
-     "publishedAt": "2026-11-17T16:09:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/411/0000090103"
-    },
-    {
-     "title": "11월 엔비디아 실적발표일 한국시간 몇시?",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-17T16:08:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1175367"
-    },
-    {
-     "title": "‘한국 창작춤 대모’ 배정혜 안무가 별세",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-17T16:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001885800?sid=103"
-    }
-   ]
-  },
-  {
    "keyword": "한일 정상 회담",
    "sources": [
     "nate"
    ],
    "articles90": 7,
-   "recent20": 2,
+   "recent20": 3,
    "press": 7,
-   "firstArticleAt": "2026-11-17T14:42:00.000Z",
+   "firstArticleAt": "2026-11-17T15:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "李·트럼프, 마닐라서 45초 환담…미중러 회담 이틀 앞두고 조우",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-17T16:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003059722?sid=100"
+    },
     {
      "title": "'미중러' 바라만 보는 한일…\"서로 협력\" 강조",
      "press": "news.sbs.co.kr",
@@ -162,12 +168,6 @@
      "press": "fnnews.com",
      "publishedAt": "2026-11-17T16:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/014/0005605823?sid=100"
-    },
-    {
-     "title": "아세안 정상회의 폐막…트럼프, 쿼드·아세안 정상들과 회동(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-17T15:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016447608?sid=104"
     }
    ]
   },
@@ -209,7 +209,7 @@
     "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-17T14:53:00.000Z",
    "exclusive": false,
@@ -232,38 +232,6 @@
      "press": "fnnews.com",
      "publishedAt": "2026-11-17T14:56:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/014/0005605815?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "AI 세무사 조사 종료 사과",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-17T14:49:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'AI 부정행위' 세무사 가짜 수석 경찰 조사 13시간 만 종료…\"수험생께...",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-17T15:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000521209?sid=102"
-    },
-    {
-     "title": "‘AI 부정행위’ 세무사 수석, 경찰 조사 약 13시간 만에 종료",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-17T14:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012295972?sid=102"
-    },
-    {
-     "title": "'세무냥이' 첫 경찰조사 13시간만 종료…\"남은 절차도 모두 참석\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-17T14:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004210885?sid=102"
     }
    ]
   },
@@ -329,6 +297,38 @@
      "press": "joongang.co.kr",
      "publishedAt": "2026-11-17T15:01:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/025/0003565931?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "AI 세무사 조사 종료 사과",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-17T14:51:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'AI 부정행위' 세무사 가짜 수석 경찰 조사 13시간 만 종료…\"수험생께...",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-17T15:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000521209?sid=102"
+    },
+    {
+     "title": "‘AI 부정행위’ 세무사 수석, 경찰 조사 약 13시간 만에 종료",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-17T14:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012295972?sid=102"
+    },
+    {
+     "title": "'세무냥이' 첫 경찰조사 13시간만 종료…\"남은 절차도 모두 참석\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-17T14:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004210885?sid=102"
     }
    ]
   }
