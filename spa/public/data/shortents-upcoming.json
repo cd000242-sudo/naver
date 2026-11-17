@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T06:38:35.488Z",
+ "builtAt": "2026-11-17T15:09:40.228Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,334 +8,234 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 14,
+ "measured": 25,
  "candidates": [
   {
-   "keyword": "조작기소 특검법 국무회의 통과",
+   "keyword": "경북 상주 북서쪽 지진",
    "sources": [
-    "signal.bz",
-    "nate"
+    "daum"
    ],
-   "articles90": 66,
-   "recent20": 10,
+   "articles90": 76,
+   "recent20": 7,
    "press": 51,
-   "firstArticleAt": "2026-11-17T05:12:00.000Z",
+   "firstArticleAt": "2026-11-17T14:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"결국\" 조작기소 특검법 국무회의 통과…국힘, '현장투혼'은 \"계속\"",
+     "title": "경북 상주 규모 3.6 지진…올들어 가장 강해",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-17T14:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000927187?sid=103"
+    },
+    {
+     "title": "상주서 규모 3.6 지진…1년 반 만에 국내 최대",
+     "press": "tbc.co.kr",
+     "publishedAt": "2026-11-17T14:56:00.000Z",
+     "link": "https://www.tbc.co.kr/news/view?pno=20261117233457AE08730&id=213475"
+    },
+    {
+     "title": "경북 상주 북서쪽서 규모 3.6 지진…유감신고 16건(종합)",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-17T14:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014328520?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "엔비디아 실적발표",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 19,
+   "recent20": 10,
+   "press": 13,
+   "firstArticleAt": "2026-11-17T13:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "아크 인베스트, 엔비디아 54만주 매도…블록·서클·코인베이스는 담았...",
+     "press": "digitaltoday.co.kr",
+     "publishedAt": "2026-11-17T15:06:00.000Z",
+     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=716201"
+    },
+    {
+     "title": "엔비디아 실적 발표 임박, 매출 전망치로 1080억달러 제시 젠슨 황 사임...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-17T15:06:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=627281"
+    },
+    {
+     "title": "엔비디아, 젠슨황 사퇴 후 첫 실적…경영 불확실성 해소하나",
      "press": "edaily.co.kr",
-     "publishedAt": "2026-11-17T06:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006411205?sid=100"
-    },
-    {
-     "title": "조용술 국민의힘 대변인 “수능 AI 컨닝 무방비…특검법 의결 법치훼손...",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-17T06:36:00.000Z",
-     "link": "http://www.breaknews.com/1251634"
-    },
-    {
-     "title": "'조작기소 특검법' 공포안 국무회의 의결, 최대 309명 규모로 최장 200일...",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-17T06:36:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=452179"
+     "publishedAt": "2026-11-17T15:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006411433?sid=101"
     }
    ]
   },
   {
-   "keyword": "수능 한파",
+   "keyword": "송민규",
    "sources": [
-    "signal.bz"
-   ],
-   "articles90": 21,
-   "recent20": 2,
-   "press": 17,
-   "firstArticleAt": "2026-11-17T05:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "수능일 아침 전국 영하권 추위…6년 만에 ‘수능 한파’",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-17T06:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003483197?sid=102"
-    },
-    {
-     "title": "\"매서운 수능 한파\"...전국 영하권, 도로 살얼음 '주의'",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-17T06:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000121579?sid=103"
-    },
-    {
-     "title": "수능일 전국 영하권 '꽁꽁' 6년만 한파…충청·전라·제주에 비",
-     "press": "kbsm.net",
-     "publishedAt": "2026-11-17T06:16:00.000Z",
-     "link": "https://www.kbsm.net/news/view.php?idx=542135"
-    }
-   ]
-  },
-  {
-   "keyword": "오세훈 재초환 재검토",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 11,
-   "recent20": 4,
-   "press": 10,
-   "firstArticleAt": "2026-11-17T05:23:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"3년 이내 손실 보전 중단 가능\"⋯오세훈, 한강버스 논란 돌파ㆍ재초환...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-17T06:32:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2649336"
-    },
-    {
-     "title": "오세훈 “서울 집값 92주 연속 상승… 공급 부족 서울시 책임론 동의 못...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-17T06:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004175881?sid=101"
-    },
-    {
-     "title": "오세훈 \"재초환은 주택 공급에 걸림돌...전면 재검토해야\"",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-17T06:24:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4119111"
-    }
-   ]
-  },
-  {
-   "keyword": "샤갈 너머의 여정",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-17T05:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'새처럼 노래한' 샤갈, 서울로…퐁피두센터 한화서 61점 국내 첫 공개",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-17T06:32:00.000Z",
-     "link": "https://www.ajunews.com/view/20261117140348102"
-    },
-    {
-     "title": "[갤러리 산책]샤갈의 신랑 신부 곁에, 추락하는 천사가 있었다",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-17T06:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005843856?sid=103"
-    },
-    {
-     "title": "“프랑스에서도 못 봐”…샤갈 걸작 65점, 서울에서 본다",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-17T05:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002724612?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "순국선열의 날 기념식 개최",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-17T05:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "영주시, 제87주년 순국선열의 날 기념식 개최…독립정신 되새겨",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-17T06:32:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5084450"
-    },
-    {
-     "title": "충남도, 87회 순국선열의 날 기념식 개최",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-17T06:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002466261?sid=102"
-    },
-    {
-     "title": "충남도, 제87회 순국선열의 날 기념식…독립정신 계승 다짐",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-17T06:10:00.000Z",
-     "link": "https://www.ajunews.com/view/20261117093357175"
-    }
-   ]
-  },
-  {
-   "keyword": "김민석 대표 모습",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-17T05:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김민석, AI 수능 부정행위에 칼 빼들었다…\"응시자격 10년 박탈\"",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-17T06:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003156241?sid=100"
-    },
-    {
-     "title": "\"AI 커닝 못 잡겠다\"는 교육장관…김민석도 \"발언 정정했어야\" 비판",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-17T05:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000651589?sid=100"
-    },
-    {
-     "title": "김민석, 최교진 'AI 커닝 못 잡는다' 발언에 \"빨리 정정했어야 했다\"",
-     "press": "fntoday.co.kr",
-     "publishedAt": "2026-11-17T05:46:00.000Z",
-     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=398661"
-    }
-   ]
-  },
-  {
-   "keyword": "소프트웨어",
-   "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-17T06:02:00.000Z",
+   "articles90": 9,
+   "recent20": 4,
+   "press": 8,
+   "firstArticleAt": "2026-11-17T14:46:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "AI 도입 확산에도 수익성은 과제…로봇·소프트웨어주 차별화 확대",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-17T06:26:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=505083"
+     "title": "[IN STAR] 유럽 가더니 달라졌네...'황희찬보다 잘한다' 송민규, 카타르...",
+     "press": "interfootball.co.kr",
+     "publishedAt": "2026-11-17T15:05:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/413/0000226738"
     },
     {
-     "title": "버크셔, 3분기 소프트웨어 기업 벤딩 스푼스 신규 편입",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-17T06:20:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/439632"
+     "title": "[속보] 송민규 AS-오세훈 골, 새 콤비 등장...카타르전 선제골 '합작'",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-17T15:03:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/629/0000552963"
     },
     {
-     "title": "DNV·스패로우, 25일 OT 소프트웨어 공급망 보안 웨비나 '눈길'",
-     "press": "industrynews.co.kr",
-     "publishedAt": "2026-11-17T06:02:00.000Z",
-     "link": "https://www.industrynews.co.kr/news/articleView.html?idxno=89697"
+     "title": "우즈베키스탄전 이어 또 합작, 송민규 띄우고 오세훈 넣었다… 카타르전...",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-17T14:57:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/396/0000761219"
     }
    ]
   },
   {
-   "keyword": "소희 루머 유포자 징역형 1년 6개월",
+   "keyword": "트럼프 희토류 생산",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-17T05:25:00.000Z",
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-17T13:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“술집서 남편 만났다” 루머 시달린 소희…허위사실 유포자, 징역형",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-17T05:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005764914?sid=102"
+     "title": "트럼프 \"10개월 내 中 희토류 추월\"…이란 '더티밤' 공격설엔 \"전례 없는...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-17T14:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005605815?sid=104"
     },
     {
-     "title": "앨리스 소희, 유흥업소 루머 유포자 고소…징역 1년6개월",
+     "title": "트럼프 “10개월 안에 중국 희토류 따라잡겠다”",
+     "press": "segye.com",
+     "publishedAt": "2026-11-17T14:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004176008?sid=104"
+    },
+    {
+     "title": "트럼프 대통령 \"미국, 10개월 안에 희토류 생산서 중국 따라잡을 것\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-17T13:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005442589?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 APEC 출국",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-17T14:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "아세안 일정 마친 이 대통령, 중국 선전으로…APEC 참석",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-17T14:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012295973?sid=100"
+    },
+    {
+     "title": "이 대통령, 필리핀 아세안 일정 마치고 중국으로 출국…APEC 참석",
      "press": "newsis.com",
-     "publishedAt": "2026-11-17T05:35:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014327452"
+     "publishedAt": "2026-11-17T14:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014328508?sid=100"
     },
     {
-     "title": "[전문] 김소희 루머 가해자 징역형 “타인 삶 짓밟는 행위, 책임 뒤따라...",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-17T05:25:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001305275"
+     "title": "李 대통령, 아세안 일정 마무리…중국 향해 출국",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-17T14:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000552946?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 892,
-  "matched": 487,
-  "avgLeadMin": 842,
+  "flagged": 897,
+  "matched": 514,
+  "avgLeadMin": 819,
   "recent": [
    {
-    "keyword": "김주애",
-    "hitKeyword": "김주애 백두산 스키",
-    "hitAt": "2026-11-17T15:30:00+09:00",
-    "leadMin": 293
+    "keyword": "FA 1호 계약 확정!",
+    "hitKeyword": "양의지 두산 FA 계약",
+    "hitAt": "2026-11-17T21:00:00+09:00",
+    "leadMin": 593
    },
    {
-    "keyword": "IMF 한국 성장률 3.9%",
-    "hitKeyword": "IMF 성장률 상향",
-    "hitAt": "2026-11-17T15:30:00+09:00",
-    "leadMin": 32
+    "keyword": "날씨",
+    "hitKeyword": "수능 날씨 한파",
+    "hitAt": "2026-11-17T20:30:00+09:00",
+    "leadMin": 744
    },
    {
-    "keyword": "IMF 연례협의 발표",
-    "hitKeyword": "IMF 성장률 상향",
-    "hitAt": "2026-11-17T15:30:00+09:00",
-    "leadMin": 22
+    "keyword": "수능일",
+    "hitKeyword": "수능일 한파 예보",
+    "hitAt": "2026-11-17T20:00:00+09:00",
+    "leadMin": 623
    },
    {
-    "keyword": "정호연 본드걸 후보",
-    "hitKeyword": "정호연 본드걸 후보",
-    "hitAt": "2026-11-17T15:30:00+09:00",
-    "leadMin": 22
+    "keyword": "황인범 임시 감독 체제",
+    "hitKeyword": "한국 축구 임시 감독 체제",
+    "hitAt": "2026-11-17T19:30:00+09:00",
+    "leadMin": 473
    },
    {
-    "keyword": "IMF 협의 결과 발표",
-    "hitKeyword": "IMF 성장률 상향",
-    "hitAt": "2026-11-17T15:30:00+09:00",
-    "leadMin": 1
+    "keyword": "연금",
+    "hitKeyword": "연금복권 더블 잭팟",
+    "hitAt": "2026-11-17T19:00:00+09:00",
+    "leadMin": 744
    },
    {
-    "keyword": "김정은 APEC 푸틴 회담",
-    "hitKeyword": "김정은 트럼프 외교 쇼",
-    "hitAt": "2026-11-17T15:00:00+09:00",
-    "leadMin": 384
+    "keyword": "서울 집값 둔화",
+    "hitKeyword": "서울 집값 부담",
+    "hitAt": "2026-11-17T18:30:00+09:00",
+    "leadMin": 1587
    },
    {
-    "keyword": "김정은 관광지구 시찰",
-    "hitKeyword": "김정은 트럼프 외교 쇼",
-    "hitAt": "2026-11-17T15:00:00+09:00",
-    "leadMin": 323
+    "keyword": "축구",
+    "hitKeyword": "한국 축구 임시감독 체제",
+    "hitAt": "2026-11-17T18:30:00+09:00",
+    "leadMin": 533
    },
    {
-    "keyword": "김정은 삼지연 방문",
-    "hitKeyword": "김정은 트럼프 외교 쇼",
-    "hitAt": "2026-11-17T15:00:00+09:00",
-    "leadMin": 152
+    "keyword": "닥터X 김우석 연기 집중 중입니다.",
+    "hitKeyword": "김우석 닥터X",
+    "hitAt": "2026-11-17T18:30:00+09:00",
+    "leadMin": 312
    },
    {
-    "keyword": "김정은 건설현장 방문",
-    "hitKeyword": "김정은 트럼프 외교 쇼",
-    "hitAt": "2026-11-17T15:00:00+09:00",
-    "leadMin": 112
+    "keyword": "김우석 김지원 팬",
+    "hitKeyword": "김우석 닥터X",
+    "hitAt": "2026-11-17T18:30:00+09:00",
+    "leadMin": 282
    },
    {
-    "keyword": "김정은, 삼지연 방문",
-    "hitKeyword": "김정은 트럼프 외교 쇼",
-    "hitAt": "2026-11-17T15:00:00+09:00",
-    "leadMin": 92
+    "keyword": "김우석 닥터X 시즌2 기대해요",
+    "hitKeyword": "김우석 닥터X",
+    "hitAt": "2026-11-17T18:30:00+09:00",
+    "leadMin": 262
    }
   ]
  }
