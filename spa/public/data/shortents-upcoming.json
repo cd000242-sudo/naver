@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T04:37:55.431Z",
+ "builtAt": "2026-11-17T04:47:58.323Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,51 +8,177 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 18,
+ "measured": 20,
  "candidates": [
   {
    "keyword": "조작기소 특검법 국무회의 의결",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 61,
-   "recent20": 10,
-   "press": 44,
-   "firstArticleAt": "2026-11-17T03:08:00.000Z",
+   "articles90": 51,
+   "recent20": 9,
+   "press": 38,
+   "firstArticleAt": "2026-11-17T03:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국힘 靑부터 정부청사까지 도보행진 ‘조작기소 특검법’ 국무회의 규탄...",
-     "press": "biz.heraldcorp.com",
+     "title": "'조작기소 특검' 수사 대상 전직 검사장들 \"위헌 법률에 법적 대응\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-17T04:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009293674?sid=102"
+    },
+    {
+     "title": "조작기소 특검법 국무회의 의결...\"최대 200일 활동\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-17T04:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002433967?sid=100"
+    },
+    {
+     "title": "오세훈, 조작기소 특검법 국무회의 의결에 “오늘 치외법권 대통령 탄생...",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-17T04:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001205373?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "신영철 감독 자진 사퇴",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 14,
+   "recent20": 2,
+   "press": 14,
+   "firstArticleAt": "2026-11-17T03:29:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이제 3경기 치렀는데…OK저축은행 신영철 감독, 석연찮은 건강상 이유로...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-17T04:32:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/468/0001281510"
+    },
+    {
+     "title": "OK저축은행 신영철 감독, 건강상 이유로 자진 사퇴",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-17T04:29:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/119/0003156142"
+    },
+    {
+     "title": "신영철 OK저축은행 감독, 건강 문제로 '자진 사퇴'",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-17T04:26:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/17/2026111750167.html"
+    }
+   ]
+  },
+  {
+   "keyword": "김우석 김지원 팬",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 9,
+   "recent20": 0,
+   "press": 9,
+   "firstArticleAt": "2026-11-17T03:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"말도 못 걸어\"…김우석, '닥터X' 김지원 보고 놀란 이유 [인터뷰M]",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-17T04:27:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000328248"
+    },
+    {
+     "title": "'닥터X' 김우석 \"김지원, 지금껏 가장 완벽한 사람…반의반이라도 닮고...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-17T04:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004125744"
+    },
+    {
+     "title": "‘닥터X’ 김지원, 인턴 김우석에 “나도 같은 사람이야” 호소한 이유...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-17T03:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005641641"
+    }
+   ]
+  },
+  {
+   "keyword": "정호연 본드걸 후보",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 8,
+   "recent20": 3,
+   "press": 8,
+   "firstArticleAt": "2026-11-17T03:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정호연, 차기 '007 본드걸' 후보 거론…젠데이아와 나란히 이름 올려",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-17T04:46:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2649225"
+    },
+    {
+     "title": "\"'오겜' 정호연이 차기 본드걸?\"…美 매거진 선정 45인에 발탁",
+     "press": "enews.imbc.com",
      "publishedAt": "2026-11-17T04:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002724563?sid=100"
+     "link": "https://m.entertain.naver.com/article/408/0000328250"
     },
     {
-     "title": "380억·309명·200일…'역대급' 조작기소 특검 출범 현실화",
-     "press": "news.tf.co.kr",
+     "title": "차세대 본드걸로 정호연 거론 \"007 동양으로 간다면\"",
+     "press": "ytn.co.kr",
      "publishedAt": "2026-11-17T04:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000552719?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/052/0002433965?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "장동혁",
+   "sources": [
+    "google"
+   ],
+   "articles90": 10,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-17T03:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "장동혁 \"李 탈옥법, 국민 심판 못 넘는다…결국 정권 몰락\"",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-17T04:30:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261117500239"
     },
     {
-     "title": "정부, 조작기소 특검법 처리…韓총리가 주재",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-17T04:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003486577?sid=100"
+     "title": "장동혁 \"대통령은 탈옥법 통과 위해 해외로 도피\"",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-17T04:16:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3449392"
+    },
+    {
+     "title": "'조작기소 특검법' 국무회의 의결…장동혁 \"국민의 심판은 통과 못 할 것...",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-17T03:48:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903336"
     }
    ]
   },
   {
    "keyword": "공소청 스마트기기 부정행위 엄정 대응",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 10,
-   "firstArticleAt": "2026-11-17T03:08:00.000Z",
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-17T03:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -77,15 +203,79 @@
    ]
   },
   {
-   "keyword": "푸른길 나가야마 한국 사랑 중",
+   "keyword": "코스피 급락",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-17T03:51:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "5000선 공방 벌이는 코스피…외인 1조원 '팔자'",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-17T04:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006411104?sid=101"
+    },
+    {
+     "title": "코스피 100포인트 넘게 급락하며 5000선 붕괴",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-17T04:46:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3754563"
+    },
+    {
+     "title": "\"현재 의무공개매수안 국회 통과하면 코스피 3900까지 떨어질 것\"[전문]",
+     "press": "dailybrief.co.kr",
+     "publishedAt": "2026-11-17T04:38:00.000Z",
+     "link": "https://www.dailybrief.co.kr/news/articleView.html?idxno=7331"
+    }
+   ]
+  },
+  {
+   "keyword": "김정은, 삼지연 방문",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-17T03:09:00.000Z",
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-17T03:51:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김정은, 백두산 스키장 현지 지도…딸 주애 스키 사진 공개",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-17T04:42:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903341"
+    },
+    {
+     "title": "트럼프 선거 패배 후 아시아 첫 순방길 \"김정은 만날지 몰라\"…김정은 ...",
+     "press": "kado.net",
+     "publishedAt": "2026-11-17T04:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000211722?sid=100"
+    },
+    {
+     "title": "김정은 삼지연 관광지구 현지지도…김주애 스키 모습 공개",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-17T04:22:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3754528"
+    }
+   ]
+  },
+  {
+   "keyword": "푸른길 나가야마 한국 사랑 중",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-17T03:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -108,237 +298,11 @@
      "link": "http://www.starnewsk.com/news/articleView.html?idxno=61090"
     }
    ]
-  },
-  {
-   "keyword": "김정은, 삼지연 방문",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-17T03:09:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "트럼프 선거 패배 후 아시아 첫 순방길 \"김정은 만날지 몰라\"…김정은 ...",
-     "press": "kado.net",
-     "publishedAt": "2026-11-17T04:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000211722?sid=100"
-    },
-    {
-     "title": "김정은 삼지연 관광지구 현지지도…김주애 스키 모습 공개",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-17T04:22:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3754528"
-    },
-    {
-     "title": "김정은, 백두산 천지에 올랐는데…중대 구상 VS 과거와 달라",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-17T03:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004210598?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "나의 유죄인간",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 3,
-   "press": 5,
-   "firstArticleAt": "2026-11-17T03:41:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'나의 유죄인간' 남해준, 설인아에 직진 고백 \"남자로 곁에 있고 싶다\"",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-17T04:36:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109943559063"
-    },
-    {
-     "title": "임시완, 최희진과 파혼… ♥설인아와 키스엔딩 (나의 유죄인간)",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-17T04:31:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001305263"
-    },
-    {
-     "title": "‘나의 유죄인간’ 남해준, 절절한 순애보",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-17T04:23:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001281507"
-    }
-   ]
-  },
-  {
-   "keyword": "보습크림 품질 비교",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-17T03:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“잘 살펴보고 고르세요”… 시중 판매 8개 보습크림, 품질 등 천차만별",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-17T04:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000161489?sid=101"
-    },
-    {
-     "title": "보습크림 8종 비교해 보니…'ㅇㅇㅇ' 만족도 높고 가격도 저렴",
-     "press": "kado.net",
-     "publishedAt": "2026-11-17T04:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000211714?sid=101"
-    },
-    {
-     "title": "보습크림 8종 비교 평가…가격 차이 6.9배",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-17T04:00:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1731970"
-    }
-   ]
-  },
-  {
-   "keyword": "면세점",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-17T03:20:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "신라면세점, '블랑톤' 단독 출시…첫 주 초도 물량 소진",
-     "press": "cstimes.com",
-     "publishedAt": "2026-11-17T04:24:00.000Z",
-     "link": "https://www.cstimes.com/news/articleView.html?idxno=728228"
-    },
-    {
-     "title": "신라면세점, 프리미엄 버번 위스키 '블랑톤' 단독 출시",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-17T03:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003486559?sid=101"
-    },
-    {
-     "title": "신라면세점, '블랑톤' 국내 면세점 단독 입점…프리미엄 위스키 영토 확...",
-     "press": "thefairnews.co.kr",
-     "publishedAt": "2026-11-17T03:22:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94496"
-    }
-   ]
-  },
-  {
-   "keyword": "장동혁 대표 토론회 참석",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-17T03:23:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "국민의힘, 주택저당증권(MBS) 활성화 토론회 개최",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-17T04:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000367763?sid=100"
-    },
-    {
-     "title": "[포토]'토론회 참석하는 장동혁 대표'",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-17T03:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006411069?sid=100"
-    },
-    {
-     "title": "장동혁 \"부동산 지옥 탈출하는 길은 李정권 탈출하는 길뿐\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-17T03:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014327042?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "담보 대출",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-17T03:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "예금 늘고 대출 주춤한 카카오뱅크, 단기자금 비중 25%로 확대",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-17T04:20:00.000Z",
-     "link": "https://www.viva100.com/article/20261115500052"
-    },
-    {
-     "title": "\"대출 억제로 주거 사다리 복원 못 해\"… 국회서 MBS 활성화 목소리",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-17T04:10:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3449390"
-    },
-    {
-     "title": "대출 2026년 11월 브랜드평판...하나은행, SBI저축은행, 국민은행 順",
-     "press": "energy-news.co.kr",
-     "publishedAt": "2026-11-17T03:20:00.000Z",
-     "link": "https://www.energy-news.co.kr/news/articleView.html?idxno=229846"
-    }
-   ]
-  },
-  {
-   "keyword": "마약 사범 86명 검거",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-17T03:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘흥분제’라는 말에 발동한 호기심…친구·연인 따라 시작한 마약, 공...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-17T03:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002724548?sid=102"
-    },
-    {
-     "title": "친구·연인에게 마약 권유… 투약·유통 일당 86명 무더기 검거",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-17T03:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001205363?sid=102"
-    },
-    {
-     "title": "'지인 권유'에 빠진 일반인 마약…86명 입건·29명 구속",
-     "press": "youthdaily.co.kr",
-     "publishedAt": "2026-11-17T03:14:00.000Z",
-     "link": "https://www.youthdaily.co.kr/news/article.html?no=229955"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 862,
+  "flagged": 866,
   "matched": 468,
   "avgLeadMin": 853,
   "recent": [
