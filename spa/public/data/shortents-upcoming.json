@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T05:28:11.711Z",
+ "builtAt": "2026-11-17T05:38:15.672Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,49 +8,50 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 18,
+ "measured": 10,
  "candidates": [
   {
-   "keyword": "공소청 스마트기기 부정행위 대응",
+   "keyword": "조작기소 특검법 국무회의",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 4,
-   "press": 10,
-   "firstArticleAt": "2026-11-17T04:22:00.000Z",
+   "articles90": 75,
+   "recent20": 18,
+   "press": 47,
+   "firstArticleAt": "2026-11-17T04:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "공소청 \"AI 부정행위 엄정 대응…구속영장 적극 검토\"",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-17T05:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001978573?sid=102"
+     "title": "공수처 \"조작기소 특검에 검사 파견 가능\"",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-17T05:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000552761?sid=102"
     },
     {
-     "title": "공소청 \"스마트기기 이용 시험 부정행위 엄정 대응\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-17T05:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002433986?sid=102"
+     "title": "국민의힘 \"조작기소 특검법은 쿠데타\"…거부권 요구",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-17T05:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001164625?sid=100"
     },
     {
-     "title": "세무사시험 AI 부정행위 대책 '구멍'…성적 재점검 입증 한계·CCTV 사각...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-17T05:15:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261117000806"
+     "title": "오세훈, 조작기소 특검법에 \"치외법권 대통령 탄생\" 비판",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-17T05:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016446575?sid=102"
     }
    ]
   },
   {
    "keyword": "손석구·나가야마 에이타 푸른길 공조",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 9,
+   "articles90": 8,
    "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-17T04:08:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-17T04:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,46 +76,14 @@
    ]
   },
   {
-   "keyword": "김정은, 삼지연 방문",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-17T04:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "다급한 트럼프, 느긋한 김정은…중간선거 후 달라진 처지",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-17T05:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001164620?sid=100"
-    },
-    {
-     "title": "백두산 찾은 김정은…통일부 “관광지 건설 치하 목적”",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-17T05:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000367777?sid=100"
-    },
-    {
-     "title": "北中접경지 체류 사실 공개한 김정은…트럼프 \"中서 金 만날 수도\"",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-17T05:06:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2019673"
-    }
-   ]
-  },
-  {
    "keyword": "보습크림 8종 품질 비교",
    "sources": [
     "nate"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-17T04:00:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-17T04:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -141,15 +110,22 @@
   {
    "keyword": "샤갈 너머의 여정",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 5,
+   "articles90": 6,
    "recent20": 2,
-   "press": 3,
+   "press": 4,
    "firstArticleAt": "2026-11-17T04:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "환상에 시대의 기억을 담다…샤갈의 예술과 삶의 궤적(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-17T05:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016446566?sid=103"
+    },
     {
      "title": "'이카로스의 추락' 등 미공개작 60여 점 韓 최초 공개…'샤갈, 너머의 여...",
      "press": "news1.kr",
@@ -161,76 +137,6 @@
      "press": "segye.com",
      "publishedAt": "2026-11-17T05:12:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/022/0004175853?sid=103"
-    },
-    {
-     "title": "퐁피두센터 한화, '샤갈, 너머의 여정'",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-17T04:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014327184?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "마약 투약 86명 검거",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-17T05:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"연인·친구·직장 동료가 권해서\" 일상 파고든 마약…유통·투약 86명 무...",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-17T05:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000121575?sid=102"
-    },
-    {
-     "title": "경찰, 지인 통해 마약 퍼뜨린 86명 검거… 초범도 35명",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-17T05:22:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=564520"
-    },
-    {
-     "title": "경찰, 마약 투약·유통 86명 무더기 검거",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-17T05:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016446453?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "순국선열의 날 기념식 뮤지컬",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 12,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-17T04:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "정부 기념식에서 뮤지컬 공연",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-17T04:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009293567?sid=102"
-    },
-    {
-     "title": "'꽃다운 향기여 영원하라' 순국선열의 날 기념식 뮤지컬 공연",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-17T04:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009293570?sid=102"
-    },
-    {
-     "title": "뮤지컬 공연 펼쳐진 순국선열의 날 기념식",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-17T04:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009293568?sid=102"
     }
    ]
   }
@@ -238,9 +144,27 @@
  "hitRate": {
   "days": 7,
   "flagged": 873,
-  "matched": 474,
-  "avgLeadMin": 862,
+  "matched": 477,
+  "avgLeadMin": 857,
   "recent": [
+   {
+    "keyword": "마약 사범 86명 검거",
+    "hitKeyword": "마약 투약 유통 검거",
+    "hitAt": "2026-11-17T14:30:00+09:00",
+    "leadMin": 102
+   },
+   {
+    "keyword": "정호연 본드걸 후보",
+    "hitKeyword": "정호연 본드걸 후보",
+    "hitAt": "2026-11-17T14:30:00+09:00",
+    "leadMin": 42
+   },
+   {
+    "keyword": "마약 투약 86명 검거",
+    "hitKeyword": "마약 투약 유통 검거",
+    "hitAt": "2026-11-17T14:30:00+09:00",
+    "leadMin": 2
+   },
    {
     "keyword": "GS건설 침해사고 직권조사",
     "hitKeyword": "GS건설 자이 AI 주거",
@@ -282,24 +206,6 @@
     "hitKeyword": "젠슨 황 복귀 불가",
     "hitAt": "2026-11-17T13:00:00+09:00",
     "leadMin": 314
-   },
-   {
-    "keyword": "코스피 급락",
-    "hitKeyword": "모건스탠리 코스피 1만",
-    "hitAt": "2026-11-17T13:00:00+09:00",
-    "leadMin": 83
-   },
-   {
-    "keyword": "김주혁",
-    "hitKeyword": "김주혁 9주기",
-    "hitAt": "2026-11-17T12:30:00+09:00",
-    "leadMin": 685
-   },
-   {
-    "keyword": "트럼프 엔비디아 주식",
-    "hitKeyword": "트럼프 엔비디아 주식",
-    "hitAt": "2026-11-17T12:30:00+09:00",
-    "leadMin": 23
    }
   ]
  }
