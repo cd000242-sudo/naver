@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T15:19:43.556Z",
+ "builtAt": "2026-11-17T15:29:49.178Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,16 +8,16 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "경북 상주 지진",
+   "keyword": "경북 상주 북서쪽 지진",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 80,
+   "articles90": 77,
    "recent20": 1,
-   "press": 50,
+   "press": 51,
    "firstArticleAt": "2026-11-17T14:12:00.000Z",
    "exclusive": false,
    "capped": false,
@@ -43,44 +43,12 @@
    ]
   },
   {
-   "keyword": "세무사 수석 경찰 조사",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 34,
-   "recent20": 3,
-   "press": 26,
-   "firstArticleAt": "2026-11-17T13:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "관세사·법무사·편입까지 의혹…경찰, 자백글 작성자 추적",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-17T15:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003565976?sid=102"
-    },
-    {
-     "title": "경찰, 'AI 부정행위 자수' 세무사 수석 14시간 조사",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-17T15:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002434257?sid=102"
-    },
-    {
-     "title": "‘AI 부정행위’ 세무사 수석, 13시간 조사 뒤 귀가…“남은 절차도 참...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-17T15:00:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2649473"
-    }
-   ]
-  },
-  {
    "keyword": "오세훈 선제골",
    "sources": [
     "daum"
    ],
    "articles90": 32,
-   "recent20": 6,
+   "recent20": 0,
    "press": 22,
    "firstArticleAt": "2026-11-17T14:46:00.000Z",
    "exclusive": false,
@@ -112,30 +80,62 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 5,
-   "recent20": 4,
-   "press": 5,
+   "articles90": 7,
+   "recent20": 5,
+   "press": 6,
    "firstArticleAt": "2026-11-17T14:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "'모리야스 고별전' 일본, 파라과이에 1-2 패배...5경기 연속 무패 마침표",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-17T15:27:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261118000005"
+    },
+    {
+     "title": "[A매치 REVIEW] '일본 역대 최고 감독' 모리야스 마지막 경기는 패배로....",
+     "press": "interfootball.co.kr",
+     "publishedAt": "2026-11-17T15:24:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/413/0000226740"
+    },
+    {
      "title": "'모리야스 고별전' 일본, 파라과이에 1-2 패배…5경기 무패 마감",
      "press": "news1.kr",
      "publishedAt": "2026-11-17T15:16:00.000Z",
      "link": "https://m.sports.naver.com/kfootball/article/421/0009294803"
+    }
+   ]
+  },
+  {
+   "keyword": "한일 정상 회담",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-17T14:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이 대통령, 다카이치와 정상회담…미중러 앞두고 '한일협력' 강조",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-17T15:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000927193?sid=100"
     },
     {
-     "title": "日 축구, 싱가포르 참사! '64초 만에 와르르' 파라과이에 1-2 충격패…브...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-17T15:10:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/311/0002081565"
+     "title": "이 대통령, 필리핀 일정 마치고 중국 선전으로 출발…APEC 정상회의 참석",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-17T15:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000521208?sid=100"
     },
     {
-     "title": "브라질 잡았던 일본, '모리야스 감독 고별전'서 파라과이에 1-2 패배",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-17T15:10:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109958753337"
+     "title": "이 대통령, 다카이치 총리와 정상회담…경제·에너지 안보 협력 강화",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-17T15:00:00.000Z",
+     "link": "https://www.viva100.com/article/20261117501311"
     }
    ]
   },
@@ -172,41 +172,41 @@
    ]
   },
   {
-   "keyword": "트럼프 희토류 생산",
+   "keyword": "AI 커닝 수석 14시간 조사 종료",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-17T13:59:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-17T14:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "트럼프 \"10개월 내 中 희토류 추월\"…이란 '더티밤' 공격설엔 \"전례 없는...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-17T14:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005605815?sid=104"
+     "title": "‘AI 커닝’ 세무사 수석 합격자 “깊은 사과”…14시간 경찰 조사 종료",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-17T14:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002832705?sid=102"
     },
     {
-     "title": "트럼프 “10개월 안에 중국 희토류 따라잡겠다”",
-     "press": "segye.com",
-     "publishedAt": "2026-11-17T14:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004176008?sid=104"
+     "title": "‘AI 커닝’ 세무사 수석 경찰 조사 14시간 만에 종료… “수험생께 사...",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-17T14:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001205487?sid=102"
     },
     {
-     "title": "트럼프 대통령 \"미국, 10개월 안에 희토류 생산서 중국 따라잡을 것\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-17T13:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005442589?sid=104"
+     "title": "‘AI 커닝' 세무사 수석, 경찰 조사 14시간 만에 종료…”성실히 임했다...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-17T14:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014328501?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 901,
+  "flagged": 903,
   "matched": 514,
   "avgLeadMin": 819,
   "recent": [
