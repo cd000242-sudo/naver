@@ -235,9 +235,16 @@ export function getThumbnailRatio(): ImageAspectRatio {
   return saved || '1:1';
 }
 
+/**
+ * [2026-11-17 owner] Body pictures default to portrait 3:4: the LDB short is built from the published post's
+ * pictures, and it only fills the vertical screen with pictures narrower than 0.8 (a square is shown as a
+ * centre band over a blurred copy). The thumbnail stays 1:1 for Naver's list crop.
+ */
+export const DEFAULT_SUBHEADING_IMAGE_RATIO: ImageAspectRatio = '3:4';
+
 export function getSubheadingRatio(): ImageAspectRatio {
-  const saved = safeLocalStorageGet('subheadingImageRatio') || safeLocalStorageGet('imageRatio', '1:1');
-  return (saved as ImageAspectRatio) || '1:1';
+  const saved = safeLocalStorageGet('subheadingImageRatio') || safeLocalStorageGet('imageRatio', DEFAULT_SUBHEADING_IMAGE_RATIO);
+  return (saved as ImageAspectRatio) || DEFAULT_SUBHEADING_IMAGE_RATIO;
 }
 
 export function setThumbnailRatio(ratio: ImageAspectRatio): void {
@@ -1370,7 +1377,7 @@ export function createHeadingImageModal(): void {
 
   // ✅ [2026-01-27] 드롭다운 초기값 복원
   const savedThumbnailRatio = localStorage.getItem('thumbnailImageRatio') || '1:1';
-  const savedSubheadingRatio = localStorage.getItem('subheadingImageRatio') || localStorage.getItem('imageRatio') || '1:1';
+  const savedSubheadingRatio = localStorage.getItem('subheadingImageRatio') || localStorage.getItem('imageRatio') || DEFAULT_SUBHEADING_IMAGE_RATIO;
 
   const thumbnailRatioSelect = document.getElementById('thumbnail-ratio-select') as HTMLSelectElement;
   const subheadingRatioSelect = document.getElementById('subheading-ratio-select') as HTMLSelectElement;

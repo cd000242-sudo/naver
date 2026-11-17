@@ -306,3 +306,38 @@ describe('startup wiring', () => {
     expect(core).toMatch(/__agentAutoSetupInstalling = true[\s\S]*__agentAutoSetupInstalling = false/);
   });
 });
+
+// [2026-11-17 owner] "이미지는 쇼츠 연계도 생각해서" — the LDB short is built from the published post's pictures and
+// only fills the vertical screen with pictures narrower than 0.8, so body pictures default to portrait 3:4.
+describe('body picture ratio for shorts', () => {
+  it('the old default (unset or 1:1) becomes 3:4 once; a ratio picked on purpose is kept', async () => {
+    const { AGENT_AUTO_SETUP_RATIO_KEY, agentAutoSetupApplyRatioDefault } = await import('../renderer/modules/startupAgentAutoSetup');
+    const apply = vi.fn();
+    expect(agentAutoSetupApplyRatioDefault(localStorage, apply)).toBe(true);
+    expect(apply).toHaveBeenCalledWith('3:4');
+    expect(localStorage.getItem(AGENT_AUTO_SETUP_RATIO_KEY)).toBe('1');
+    expect(agentAutoSetupApplyRatioDefault(localStorage, apply)).toBe(false);
+    expect(apply).toHaveBeenCalledTimes(1);
+
+    localStorage.clear();
+    localStorage.setItem('subheadingImageRatio', '1:1');
+    expect(agentAutoSetupApplyRatioDefault(localStorage, apply)).toBe(true);
+
+    localStorage.clear();
+    localStorage.setItem('subheadingImageRatio', '16:9');
+    expect(agentAutoSetupApplyRatioDefault(localStorage, apply)).toBe(false);
+    expect(apply).toHaveBeenCalledTimes(2);
+    expect(localStorage.getItem('subheadingImageRatio')).toBe('16:9');
+  });
+
+  it('settings show 3:4 when nothing is saved; the thumbnail stays 1:1', () => {
+    const settings = src('src/renderer/components/HeadingImageSettings.ts');
+    expect(settings).toMatch(/DEFAULT_SUBHEADING_IMAGE_RATIO: ImageAspectRatio = '3:4'/);
+    expect(settings).toMatch(/safeLocalStorageGet\('thumbnailImageRatio', '1:1'\)/);
+    expect(settings).not.toMatch(/localStorage\.getItem\('imageRatio'\) \|\| '1:1'/);
+  });
+
+  it('Codex keeps the subject and letters inside the part the short does not crop', () => {
+    expect(src('src/image/codex/codexImageInstruction.ts')).toMatch(/'3:4': 'portrait 3:4\. Keep the main subject and all text inside the central three quarters of the width'/);
+  });
+});

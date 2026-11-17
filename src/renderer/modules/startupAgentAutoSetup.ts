@@ -24,12 +24,15 @@ import {
   agentAutoSetupShowRows,
 } from './startupAgentAutoSetupBanner.js';
 import { startupImageApplyDefault } from './startupImageEngineGate.js';
+import { DEFAULT_SUBHEADING_IMAGE_RATIO, setSubheadingRatio } from '../components/HeadingImageSettings.js';
 
 export const AGENT_AUTO_SETUP_PROVIDERS: readonly AgentProvider[] = Object.freeze(['claude', 'codex', 'gemini']);
 /** Text-engine flag: lives in the config file next to the engine it guards (localStorage is only a backup). */
 export const AGENT_AUTO_SETUP_MIGRATION_KEY = 'engineDefaultsClaudeCodexV1';
 /** Image-engine flag: the image engine itself is kept in localStorage, so its flag is too. */
 export const AGENT_AUTO_SETUP_IMAGE_KEY = 'engineDefaultsImageCodexV1';
+/** Body-picture ratio flag (the ratio is kept in localStorage as well). */
+export const AGENT_AUTO_SETUP_RATIO_KEY = 'imageRatioDefaultShortsV1';
 /** After a failed install the next automatic try waits this long; the banner button still retries at once. */
 export const AGENT_AUTO_SETUP_RETRY_MS = 6 * 60 * 60 * 1000;
 const AGENT_AUTO_SETUP_TEXT_ENGINE = 'agent-claude';
@@ -185,6 +188,23 @@ async function agentAutoSetupRunBackground(api: Window['api'], textEngine: strin
 }
 
 /**
+ * Body pictures, once: the old default (unset or 1:1) becomes portrait 3:4 so the short made from the post
+ * fills the screen. A ratio the person picked on purpose (16:9, 4:3, 9:16, 3:4) is left alone.
+ */
+export function agentAutoSetupApplyRatioDefault(
+  store: AgentAutoSetupStore,
+  apply: (ratio: typeof DEFAULT_SUBHEADING_IMAGE_RATIO) => void = setSubheadingRatio,
+): boolean {
+  if (store.getItem(AGENT_AUTO_SETUP_RATIO_KEY) === '1') return false;
+  const saved = String(store.getItem('subheadingImageRatio') || store.getItem('imageRatio') || '').trim();
+  const changed = saved === '' || saved === '1:1';
+  if (changed) apply(DEFAULT_SUBHEADING_IMAGE_RATIO);
+  store.setItem(AGENT_AUTO_SETUP_RATIO_KEY, '1');
+  if (changed) console.log('[AgentAutoSetup] 본문 사진 기본 비율 적용: 3:4 (쇼츠 연계)');
+  return changed;
+}
+
+/**
  * Startup entry. Applies the one-time defaults (awaited: later startup steps read them), then checks and
  * installs in the background. Skipped without an IPC bridge (unit tests) and under E2E_TEST=1.
  */
@@ -205,6 +225,12 @@ export async function initStartupAgentAutoSetup(): Promise<void> {
     agentAutoSetupApplyImageDefault(localStorage);
   } catch (error) {
     console.warn('[AgentAutoSetup] 기본 이미지 엔진 적용 실패 — 다음 실행 때 다시 시도합니다:', error);
+  }
+
+  try {
+    agentAutoSetupApplyRatioDefault(localStorage);
+  } catch (error) {
+    console.warn('[AgentAutoSetup] 본문 사진 비율 기본값 적용 실패:', error);
   }
 
   let textEngine = '';

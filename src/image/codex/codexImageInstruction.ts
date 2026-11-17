@@ -20,7 +20,9 @@ const CODEX_ASPECT_FRAMES: Readonly<Record<string, string>> = Object.freeze({
   '16:9': 'wide landscape 16:9',
   '9:16': 'tall portrait 9:16',
   '4:3': 'landscape 4:3',
-  '3:4': 'portrait 3:4',
+  // 2026-11-17: the default body ratio. The LDB short crops this to 9:16 (about a quarter of the width is cut),
+  //   so the subject and every letter must sit inside the central three quarters of the width.
+  '3:4': 'portrait 3:4. Keep the main subject and all text inside the central three quarters of the width',
 });
 
 export function withCodexAspectRatio(prompt: string, ratio: unknown): string {
