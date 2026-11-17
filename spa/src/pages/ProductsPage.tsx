@@ -163,7 +163,6 @@ function ProductsPage() {
                     </div>
                     <ProofStrip items={[
                         { to: '/reviews', title: '구매 후기', desc: '실제 구매자가 남긴 후기', icon: 'review' },
-                        { to: '/reviews', title: '수익 인증', desc: '사용자가 올린 블로그 수익 인증', icon: 'income' },
                         { to: '/download', title: '30일 무료 체험', desc: 'Better Life Naver · Orbit은 설치해서 바로', icon: 'devices' },
                     ]} />
                 </div>

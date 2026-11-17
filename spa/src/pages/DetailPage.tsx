@@ -80,6 +80,7 @@ function DetailPage() {
         ['설치해야 하나요?', '네. Better Life Naver는 PC에 설치해서 쓰는 앱입니다. 다운로드 페이지에서 받아 설치하고, 구매 후 받은 라이선스 코드를 넣으면 됩니다. Windows PC용입니다.'],
         ['API 키가 필요한가요?', '아니요. 기본값은 글 Claude Code, 이미지 Codex 구독입니다. 필요한 프로그램은 앱이 자동으로 설치하고, 로그인이 필요하면 화면 왼쪽 아래에 [로그인] 버튼이 뜹니다. Claude와 ChatGPT 구독은 따로 있어야 하고, API 키로 쓰는 방법도 환경설정에서 고를 수 있습니다.'],
         ['사기 전에 써 볼 수 있나요?', '네. 앱을 설치하면 30일 동안 하루 3편까지 무료로 써 볼 수 있습니다.'],
+        ['무료 체험에서 못 쓰는 기능이 있나요?', '네. 무료 체험은 30일 동안 하루 3편까지입니다. 연속 발행, 풀오토 다중계정 발행, 이미지 생성 스튜디오는 체험에서 막혀 있고, 이용권을 구매하면 쓸 수 있습니다.'],
         ['글을 바로 올리지 않고 확인할 수 있나요?', '네. 반자동 모드로 글을 먼저 확인하거나, 임시저장해 두었다가 발행할 수 있습니다. 끝까지 맡기고 싶으면 풀오토 모드를 쓰면 됩니다.'],
         ['계정 여러 개를 같이 돌릴 수 있나요?', '네. 다중계정 발행으로 계정마다 설정을 따로 두고, 계정별로 차례로 발행합니다.'],
         ['워드프레스나 티스토리에도 올리나요?', '아니요. Better Life Naver는 네이버 블로그용입니다. 워드프레스 · 티스토리 · 블로그스팟은 Leadernam Orbit이 맡습니다.'],
@@ -126,7 +127,6 @@ function DetailPage() {
                     </div>
                     <ProofStrip items={[
                         { to: '/reviews', title: '구매 후기', desc: '실제 구매자가 남긴 후기', icon: 'review' },
-                        { to: '/reviews', title: '수익 인증', desc: '사용자가 올린 블로그 수익 인증', icon: 'income' },
                         { to: '/download', title: 'PC 앱 설치', desc: '내려받아 30일 무료 체험', icon: 'devices' },
                     ]} />
                 </div>
@@ -155,7 +155,7 @@ function DetailPage() {
                 <section className="pp-section" id="price">
                     <div className="pp-wrap">
                         <h2 className="pp-h2">요금</h2>
-                        <p className="pp-lead">30일 무료 체험(하루 3편)으로 먼저 써 보고 고르셔도 됩니다. Better Life Naver만 따로 살 수 있습니다.</p>
+                        <p className="pp-lead">30일 무료 체험(하루 3편)으로 먼저 써 보고 고르셔도 됩니다. 체험에서는 연속 발행과 풀오토 다중계정 발행이 막혀 있고, 이용권을 사면 열립니다. Better Life Naver만 따로 살 수 있습니다.</p>
                         <PriceBlock product={product} cta={{ to: '/pricing', label: 'Better Life Naver 담으러 가기' }} />
                     </div>
                 </section>

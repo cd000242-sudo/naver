@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
-import { isNormalPricingActive, PRICING_SWITCH_AT_MS } from '../../lib/pricingSchedule';
+import { EVENT_PRICE_UNTIL_MS, isNormalPricingActive, PRICING_SWITCH_AT_MS } from '../../lib/pricingSchedule';
 import { fetchSiteContent } from '../../lib/siteOps';
 import {
     applyStoreOverrides, individualTotal, isTaxIncludedPrice, productCardAmount, normalPriceOf, perDay, perMonth, sellableProducts, TERMS, won,
@@ -235,7 +235,7 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust, hea
                                 <h3>
                                     <span aria-hidden="true" style={{ color: product.accent }}>{product.glyph}</span>
                                     {product.name}
-                                    {product.bundle && <em className="st-evt">특별 이벤트가</em>}
+                                    {product.bundle && Date.now() < EVENT_PRICE_UNTIL_MS && <em className="st-evt">특별 이벤트가 · 11월까지</em>}
                                 </h3>
                                 <p className="st-tag">{product.tagline}</p>
 

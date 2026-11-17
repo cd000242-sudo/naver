@@ -102,6 +102,7 @@ function OrbitPage() {
     const faqs: Array<[string, string]> = [
         ['어떤 블로그에 올릴 수 있나요?', '워드프레스 · 티스토리 · 블로그스팟(구글 블로거) 세 곳입니다. 네이버 블로그 발행은 Better Life Naver가 맡습니다.'],
         ['사기 전에 써 볼 수 있나요?', '네. 다운로드 페이지에서 프로그램을 받아 30일 동안 하루 3편까지 무료로 써 볼 수 있습니다.'],
+        ['무료 체험에서 못 쓰는 기능이 있나요?', '네. 무료 체험은 30일 동안 글포스팅 탭에서 하루 3편까지 발행할 수 있습니다. 예약 발행, 다중계정 발행, 거미줄 통합글, 외부유입 글 생성, 카카오 채널 자동 발행은 체험에서 막혀 있고, 라이선스를 등록하면 쓸 수 있습니다.'],
         ['설치해야 하나요?', '네. Orbit은 PC에 설치해서 쓰는 프로그램입니다. 다운로드 페이지에서 받습니다.'],
         ['API 키가 필요한가요?', '아니요. 새로 설치하면 글은 Claude Code 에이전트 모드, 이미지는 Codex 구독으로 시작합니다. Claude와 ChatGPT 구독은 따로 있어야 하고, API 키로 쓰는 방법도 환경 설정에서 고를 수 있습니다.'],
         ['외부 유입용 글은 자동으로 올라가나요?', '아니요. 초안을 만들고 복사 · 바로가기 버튼만 드립니다. 자동 게시는 플랫폼 규정에 걸려 계정이 막힐 위험이 커서, 직접 붙여 넣는 방식으로 만들었습니다.'],
@@ -139,7 +140,6 @@ function OrbitPage() {
                     </div>
                     <ProofStrip items={[
                         { to: '/reviews', title: '구매 후기', desc: '실제 구매자가 남긴 후기', icon: 'review' },
-                        { to: '/reviews', title: '수익 인증', desc: '사용자가 올린 블로그 수익 인증', icon: 'income' },
                         { to: '/download', title: '30일 무료 체험', desc: 'PC 프로그램 · 하루 3편까지', icon: 'devices' },
                     ]} />
                 </div>
@@ -179,7 +179,7 @@ function OrbitPage() {
                 <section className="pp-section" id="price">
                     <div className="pp-wrap">
                         <h2 className="pp-h2">요금</h2>
-                        <p className="pp-lead">상점에서 Orbit만 따로 삽니다. 사기 전에 30일 동안 하루 3편까지 무료로 써 볼 수 있습니다.</p>
+                        <p className="pp-lead">상점에서 Orbit만 따로 삽니다. 사기 전에 30일 동안 하루 3편까지 무료로 써 볼 수 있습니다. 체험에서는 예약 발행과 다중계정 발행이 막혀 있고, 이용권을 사면 열립니다.</p>
                         <PriceBlock product={product} cta={{ to: '/pricing', label: 'Orbit 담으러 가기' }} />
                     </div>
                 </section>

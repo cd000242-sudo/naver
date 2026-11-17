@@ -69,7 +69,7 @@ export const PRODUCTS: Product[] = [
         glyph: '✎',
         prices: { monthly: 29000, yearly: 300000, lifetime: 1500000 },
         features: ['API 키 없이 구독으로 바로 사용', 'AI 글 생성 · 이미지 구성', '예약 발행과 발행 한도 관리', '댓글 크롤링과 응답', '이메일 고객 지원'],
-        trial: { limits: ['30일 동안 · 하루 3편까지', 'LEWORD·Orbit 은 따로 구매하셔야 합니다'], download: '/download' },
+        trial: { limits: ['30일 동안 · 하루 3편까지', '연속 발행 · 풀오토 다중계정 · 이미지 생성 스튜디오는 이용권 구매 후', 'LEWORD·Orbit 은 따로 구매하셔야 합니다'], download: '/download' },
         status: 'on',
     },
     {
@@ -85,7 +85,7 @@ export const PRODUCTS: Product[] = [
         glyph: '◎',
         prices: { monthly: 39000, yearly: 400000, lifetime: 2000000 },
         features: ['API 키 없이 구독으로 바로 사용', '워드프레스 · 티스토리 · 블로그스팟 발행', '발행한 글 관리', '외부 유입용 글 만들기 · 홍보', '카드뉴스 만들기'],
-        trial: { limits: ['30일 동안 · 하루 3편까지'], download: '/download' },
+        trial: { limits: ['30일 동안 · 하루 3편까지', '예약 발행 · 다중계정 발행 · 거미줄 통합글 · 외부유입 글은 이용권 구매 후'], download: '/download' },
         status: 'on',
     },
     {

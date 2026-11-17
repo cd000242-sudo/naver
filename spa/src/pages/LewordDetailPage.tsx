@@ -104,7 +104,6 @@ function LewordDetailPage() {
                     </div>
                     <ProofStrip items={[
                         { to: '/reviews', title: '구매 후기', desc: '실제 구매자가 남긴 후기', icon: 'review' },
-                        { to: '/reviews', title: '수익 인증', desc: '사용자가 올린 블로그 수익 인증', icon: 'income' },
                         { to: '/download', title: '웹 · PC 앱', desc: '웹에서 바로, PC 앱도 있어요', icon: 'devices' },
                     ]} />
                 </div>
@@ -134,11 +133,11 @@ function LewordDetailPage() {
                     <p className="pp-lead">검증된 키워드 도구는 단계마다 기능과 조회량이 나뉩니다. LEWORD는 한 가지 요금으로 14개 탭을 전부 엽니다.</p>
                     <CompareBars
                         rows={[
-                            { name: '블랙키위', low: 13800, high: 89100, note: '30일 · 3단계' },
+                            { name: '블랙키위', low: 13800, high: 89100, note: '30일 · 3단계 · 부가세 별도' },
                             { name: '판다랭크', low: 19800, high: 99000, note: '월 · 3단계' },
                             { name: 'LEWORD', low: monthly, high: monthly, ours: true, note: '월 · 한 가지, 전 기능' },
                         ]}
-                        source={`각 사 공식 요금 페이지 표시가 기준(2026-10-07 확인). LEWORD 월 ${won(monthly)}원은 부가세 포함입니다.`}
+                        source={`각 사 공식 요금 페이지 표시가 기준(2026-11-17 확인). LEWORD 월 ${won(monthly)}원은 부가세 포함입니다.`}
                     />
                 </div>
             </section>

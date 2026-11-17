@@ -2,7 +2,7 @@
  * 제품 페이지 공용 부품 — 시안 1(고수보다 한 수 위, 비교로 증명)을 네 페이지가 같이 쓴다.
  * 가격 · 후기는 상점 · 후기 페이지와 같은 출처에서 읽는다(화면마다 숫자를 따로 적지 않는다).
  */
-import { useEffect, useMemo, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useState, type CSSProperties, type ReactNode } from 'react';
 import CountUp from '../motion/CountUp';
 import { Link } from 'react-router-dom';
 import { fetchSiteContent, EDGE_URL } from '../../lib/siteOps';
@@ -90,7 +90,8 @@ const PROOF_ICON = { review: ReviewIcon, income: IncomeIcon, devices: DevicesIco
 
 export function ProofStrip({ items }: { items: ProofItem[] }) {
     return (
-        <nav className="pp-proof" aria-label="증거 바로가기">
+        // Column count follows the card count so two cards fill the row (no empty third cell on wide screens).
+        <nav className="pp-proof" aria-label="증거 바로가기" style={{ '--pp-proof-cols': items.length } as CSSProperties}>
             {items.map((item) => {
                 const Icon = PROOF_ICON[item.icon];
                 return (

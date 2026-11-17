@@ -44,7 +44,7 @@ const PLANS: Record<string, Plan[]> = {
             period: '무료',
             free: true,
             badge: { text: '🎁 FREE', type: 'trial' },
-            features: ['Better Life Naver 체험', 'AI 콘텐츠 생성', '매일 2편 발행 제한', 'LEWORD·Orbit은 올인원 구매 후 이용'],
+            features: ['Better Life Naver 체험', 'AI 콘텐츠 생성', '30일 동안 하루 3편까지', '연속 발행 · 풀오토 다중계정은 이용권 구매 후', 'LEWORD·Orbit은 올인원 구매 후 이용'],
         },
         {
             id: 'all-in-one-monthly',

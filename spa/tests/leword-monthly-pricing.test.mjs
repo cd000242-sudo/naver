@@ -133,3 +133,36 @@ test('each single product carries a clip whose files exist, and the bundle keeps
  const band=fs.readFileSync(new URL('../src/components/products/ProductsExtras.tsx',import.meta.url),'utf8');
  assert.match(band,/useState\(film \? -1 : 0\)/);
 });
+test('the bundle card says the special event price runs until November and the label is gated by a deadline constant',()=>{
+ // 2026-11-17 owner: "올인원카드 특별 이벤트가 11월까지로 표시해주고". Source-level lock, no hooks added to ProductStore.
+ const source=fs.readFileSync(new URL('../src/components/store/ProductStore.tsx',import.meta.url),'utf8');
+ assert.match(source,/<em className="st-evt">특별 이벤트가 · 11월까지<\/em>/);
+ assert.doesNotMatch(source,/<em className="st-evt">특별 이벤트가<\/em>/);
+ assert.match(source,/Date\.now\(\) < EVENT_PRICE_UNTIL_MS/);
+ const schedule=load('../src/lib/pricingSchedule.ts');
+ assert.equal(schedule.EVENT_PRICE_UNTIL_MS,Date.parse('2026-12-01T00:00:00+09:00'));
+});
+test('the "until November" label renders before 2026-12-01 KST and disappears from that instant on',()=>{
+ const realNow=Date.now;
+ const labelAt=ms=>{Date.now=()=>ms;try{return render().html.includes('특별 이벤트가 · 11월까지');}finally{Date.now=realNow;}};
+ const until=Date.parse('2026-12-01T00:00:00+09:00');
+ assert.equal(labelAt(until-1),true);
+ assert.equal(labelAt(until),false);
+ assert.equal(labelAt(until+86400000),false);
+});
+test('free trial copy states the verified limits the same way on every page (3 per day, 30 days, what is locked)',()=>{
+ // 2026-11-17 owner: "무료 체험 막히는 기능 안내 제대로". Facts: BLN freeTrialPolicy.ts (3/day) + featureLockModal.ts (locks); Orbit auth-utils.ts (3/day, 30 days, blockIfFreeTier list).
+ const read=name=>fs.readFileSync(new URL(`../src/pages/${name}`,import.meta.url),'utf8');
+ const detail=read('DetailPage.tsx');
+ assert.match(detail,/무료 체험에서 못 쓰는 기능이 있나요\?[^\]]*하루 3편[^\]]*연속 발행[^\]]*풀오토 다중계정 발행[^\]]*이미지 생성 스튜디오/);
+ const orbit=read('OrbitPage.tsx');
+ assert.match(orbit,/무료 체험에서 못 쓰는 기능이 있나요\?[^\]]*하루 3편[^\]]*예약 발행[^\]]*다중계정 발행[^\]]*거미줄 통합글[^\]]*외부유입 글 생성/);
+ const pricing=read('PricingPage.tsx');
+ assert.doesNotMatch(pricing,/매일 2편 발행 제한/);
+ assert.match(pricing,/'30일 동안 하루 3편까지', '연속 발행 · 풀오토 다중계정은 이용권 구매 후'/);
+ for(const id of ['naver','orbit']){
+  const {limits}=product(id).trial;
+  assert.equal(limits[0],'30일 동안 · 하루 3편까지');
+  assert.ok(limits.some(line=>/이용권 구매 후/.test(line)),`${id} trial lists what is locked`);
+ }
+});
