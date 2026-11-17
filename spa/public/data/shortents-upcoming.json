@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T04:47:58.323Z",
+ "builtAt": "2026-11-17T04:58:01.715Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,165 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "조작기소 특검법 국무회의 의결",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 51,
-   "recent20": 9,
-   "press": 38,
-   "firstArticleAt": "2026-11-17T03:18:00.000Z",
+   "articles90": 53,
+   "recent20": 15,
+   "press": 40,
+   "firstArticleAt": "2026-11-17T03:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'조작기소 특검' 수사 대상 전직 검사장들 \"위헌 법률에 법적 대응\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-17T04:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009293674?sid=102"
+     "title": "‘조작기소 특검법’ 국무회의 의결…대장동·대북송금 등 12개 항목 수...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-17T04:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003700225?sid=100"
     },
     {
-     "title": "조작기소 특검법 국무회의 의결...\"최대 200일 활동\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-17T04:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002433967?sid=100"
+     "title": "李 순방 중 '조작기소 특검법' 국무회의 통과…오세훈 \"민주주의 욕보여...",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-17T04:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005354750?sid=100"
     },
     {
-     "title": "오세훈, 조작기소 특검법 국무회의 의결에 “오늘 치외법권 대통령 탄생...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-17T04:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001205373?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "신영철 감독 자진 사퇴",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 14,
-   "recent20": 2,
-   "press": 14,
-   "firstArticleAt": "2026-11-17T03:29:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이제 3경기 치렀는데…OK저축은행 신영철 감독, 석연찮은 건강상 이유로...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-17T04:32:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/468/0001281510"
-    },
-    {
-     "title": "OK저축은행 신영철 감독, 건강상 이유로 자진 사퇴",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-17T04:29:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/119/0003156142"
-    },
-    {
-     "title": "신영철 OK저축은행 감독, 건강 문제로 '자진 사퇴'",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-17T04:26:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/17/2026111750167.html"
-    }
-   ]
-  },
-  {
-   "keyword": "김우석 김지원 팬",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-17T03:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"말도 못 걸어\"…김우석, '닥터X' 김지원 보고 놀란 이유 [인터뷰M]",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-17T04:27:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000328248"
-    },
-    {
-     "title": "'닥터X' 김우석 \"김지원, 지금껏 가장 완벽한 사람…반의반이라도 닮고...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-17T04:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004125744"
-    },
-    {
-     "title": "‘닥터X’ 김지원, 인턴 김우석에 “나도 같은 사람이야” 호소한 이유...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-17T03:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005641641"
-    }
-   ]
-  },
-  {
-   "keyword": "정호연 본드걸 후보",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 8,
-   "recent20": 3,
-   "press": 8,
-   "firstArticleAt": "2026-11-17T03:27:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "정호연, 차기 '007 본드걸' 후보 거론…젠데이아와 나란히 이름 올려",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-17T04:46:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2649225"
-    },
-    {
-     "title": "\"'오겜' 정호연이 차기 본드걸?\"…美 매거진 선정 45인에 발탁",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-17T04:36:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000328250"
-    },
-    {
-     "title": "차세대 본드걸로 정호연 거론 \"007 동양으로 간다면\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-17T04:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002433965?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "장동혁",
-   "sources": [
-    "google"
-   ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-17T03:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "장동혁 \"李 탈옥법, 국민 심판 못 넘는다…결국 정권 몰락\"",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-17T04:30:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261117500239"
-    },
-    {
-     "title": "장동혁 \"대통령은 탈옥법 통과 위해 해외로 도피\"",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-17T04:16:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3449392"
-    },
-    {
-     "title": "'조작기소 특검법' 국무회의 의결…장동혁 \"국민의 심판은 통과 못 할 것...",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-17T03:48:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903336"
+     "title": "오세훈, 조작기소 특검법 의결에 \"치외법권 대통령 생겼다\" 비판",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-17T04:55:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261117000800"
     }
    ]
   },
@@ -175,30 +47,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-17T03:18:00.000Z",
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-17T03:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "공소청 \"스마트기기 시험부정행위 엄정 대응\"",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-17T04:54:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544028"
+    },
+    {
+     "title": "공소청, 'AI 커닝'에 \"시도만 해도 기소 원칙... 파급력 크면 구속·징역...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-17T04:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000966028?sid=102"
+    },
     {
      "title": "공소청 \"스마트기기 부정행위 엄단…정식 재판 원칙\"",
      "press": "iminju.net",
      "publishedAt": "2026-11-17T04:32:00.000Z",
      "link": "http://www.iminju.net/news/articleView.html?idxno=172601"
-    },
-    {
-     "title": "공소청, AI·스마트안경 동원한 시험 부정행위 무관용 엄단…초범도 정...",
-     "press": "goodmorningcc.com",
-     "publishedAt": "2026-11-17T04:26:00.000Z",
-     "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=455979"
-    },
-    {
-     "title": "극에 달한 '수능 부정행위' 우려…공소청 \"재범 여부 등 불문 재판 넘길...",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-17T04:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000142443?sid=102"
     }
    ]
   },
@@ -207,18 +79,18 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 6,
    "recent20": 3,
-   "press": 5,
+   "press": 6,
    "firstArticleAt": "2026-11-17T03:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "5000선 공방 벌이는 코스피…외인 1조원 '팔자'",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-17T04:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006411104?sid=101"
+     "title": "코스피 또 장중 5000선 붕괴…엔비디아 등 美기술주 하락 여파",
+     "press": "donga.com",
+     "publishedAt": "2026-11-17T04:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003763060?sid=101"
     },
     {
      "title": "코스피 100포인트 넘게 급락하며 5000선 붕괴",
@@ -227,10 +99,10 @@
      "link": "https://www.gukjenews.com/news/articleView.html?idxno=3754563"
     },
     {
-     "title": "\"현재 의무공개매수안 국회 통과하면 코스피 3900까지 떨어질 것\"[전문]",
-     "press": "dailybrief.co.kr",
-     "publishedAt": "2026-11-17T04:38:00.000Z",
-     "link": "https://www.dailybrief.co.kr/news/articleView.html?idxno=7331"
+     "title": "5000선 공방 벌이는 코스피…외인 1조원 '팔자'",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-17T04:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006411104?sid=101"
     }
    ]
   },
@@ -240,13 +112,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 5,
+   "articles90": 6,
    "recent20": 2,
-   "press": 5,
+   "press": 6,
    "firstArticleAt": "2026-11-17T03:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“흰색 스키복 입고 설원 질주”…北 김정은 앞에서 스키 실력 뽐낸 김...",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-17T04:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003486589?sid=104"
+    },
     {
      "title": "김정은, 백두산 스키장 현지 지도…딸 주애 스키 사진 공개",
      "press": "newsworks.co.kr",
@@ -258,12 +136,6 @@
      "press": "kado.net",
      "publishedAt": "2026-11-17T04:33:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/654/0000211722?sid=100"
-    },
-    {
-     "title": "김정은 삼지연 관광지구 현지지도…김주애 스키 모습 공개",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-17T04:22:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3754528"
     }
    ]
   },
@@ -272,10 +144,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-17T03:26:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-17T03:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
