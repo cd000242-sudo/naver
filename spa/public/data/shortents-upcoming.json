@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T21:52:07.930Z",
+ "builtAt": "2026-11-17T22:02:11.596Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 63,
-   "recent20": 39,
-   "press": 40,
-   "firstArticleAt": "2026-11-17T20:28:00.000Z",
+   "articles90": 73,
+   "recent20": 22,
+   "press": 46,
+   "firstArticleAt": "2026-11-17T20:38:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨 황 떠난 엔비디아, 첫 실적 발표서 매출 1158억 달러…월가 예상 웃...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-17T21:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003156397?sid=101"
+     "title": "엔비디아, 시간외 거래서 1.6%, 마이크론 0.4%↑...반도체주, 소록 상승",
+     "press": "beyondpost.co.kr",
+     "publishedAt": "2026-11-17T22:00:00.000Z",
+     "link": "http://www.beyondpost.co.kr/view.php?ud=2026111806505223272aaae0046f_30"
     },
     {
-     "title": "젠슨 황 \"이사회 요청 시 엔비디아 CEO로 복귀… 영광일 것\"",
-     "press": "busan.com",
-     "publishedAt": "2026-11-17T21:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001407685?sid=104"
+     "title": "[김대호 인물] 젠슨황 빠진 엔비디아 실적발표 컨콜 \"콜레드 크레스\" 임...",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-17T22:00:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=20261117135945655906806b77b_1"
     },
     {
-     "title": "엔비디아, 3분기 실적 시장 전망치 상회…4분기도 '청신호'",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-17T21:50:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1732041"
+     "title": "[뉴욕증시 마감] 엔비디아 실적 앞두고 일제히 하락…다우 1.64%↓",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-17T22:00:00.000Z",
+     "link": "https://www.ajunews.com/view/20261118065553734"
     }
    ]
   },
@@ -55,22 +55,22 @@
    "capped": false,
    "samples": [
     {
-     "title": "9월 말 은행 연체율 0.59%…8월 대비 0.10%p↓",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-17T21:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003156382?sid=101"
-    },
-    {
-     "title": "은행 9월 말 대출 연체율 0.59%…전년 대비 가계·기업 동반 상승",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-17T21:02:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445229"
-    },
-    {
      "title": "은행권 연체율 0.59%로 두 달만에 하락…중소기업 대출은 여전히 '빨간불...",
      "press": "newsway.co.kr",
      "publishedAt": "2026-11-17T21:02:00.000Z",
      "link": "https://www.newsway.co.kr/news/view?ud=2026111715043068930"
+    },
+    {
+     "title": "은행 대출 연체율 0.59%…전년比 0.07%p↑",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-17T21:02:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611170233"
+    },
+    {
+     "title": "9월 은행 대출 연체율 소폭 하락…‘신규 연체율’은 3년 만에 최저",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-17T21:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002832717?sid=101"
     }
    ]
   },
@@ -79,30 +79,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 4,
+   "articles90": 13,
+   "recent20": 5,
    "press": 11,
-   "firstArticleAt": "2026-11-17T20:27:00.000Z",
+   "firstArticleAt": "2026-11-17T20:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "美 국가안보국 기밀통신망 마비…항공 중단 이어 또 '인프라 다운'",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-17T22:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004210912?sid=104"
+    },
+    {
+     "title": "美증시, 기밀통신망 마비에 하락 지속...다우지수, 5개월만에 최저 [데일...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-17T21:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004683349?sid=104"
+    },
     {
      "title": "뉴욕증시, NSA 기밀통신망 마비에 하락⋯다우 1.64%↓ [종합]",
      "press": "etoday.co.kr",
      "publishedAt": "2026-11-17T21:50:00.000Z",
      "link": "https://www.etoday.co.kr/news/view/2649486"
-    },
-    {
-     "title": "美 국가안보국 기밀 통신망 장애…백악관 \"사이버 공격 증거 없어\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-17T21:46:00.000Z",
-     "link": "https://www.ajunews.com/view/20261118063849728"
-    },
-    {
-     "title": "美 국가안보국 기밀 통신망 일부 마비⋯\"핵심 업무는 정상\"",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-17T21:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001075967?sid=104"
     }
    ]
   },
@@ -139,49 +139,56 @@
    ]
   },
   {
-   "keyword": "수능 예비소집",
+   "keyword": "수출",
    "sources": [
     "google"
    ],
-   "articles90": 13,
-   "recent20": 3,
-   "press": 10,
-   "firstArticleAt": "2026-11-17T20:30:00.000Z",
+   "articles90": 8,
+   "recent20": 4,
+   "press": 8,
+   "firstArticleAt": "2026-11-17T21:02:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "오늘 수능 수험생 55만명 예비소집…N수생 23년만 '최다'",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-17T21:50:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=782593"
+     "title": "[수출 1조 달러의 명암②] 손님 줄고 임대 늘고…겨울보다 빠른 골목상...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-17T22:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003156400?sid=101"
     },
     {
-     "title": "[수능 D-1] N수생 23년 만에 최다…55만명 예비소집, AI 부정행위와의 전...",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-17T21:46:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101455"
+     "title": "엔비디아, '국가안보·수출통제 감독위원회' 신설",
+     "press": "zdnet.co.kr",
+     "publishedAt": "2026-11-17T22:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/092/0002445761?sid=105"
     },
     {
-     "title": "[날씨] '수능 예비소집일' 오후부터 비·눈...찬 바람 강해져",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-17T21:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002434327?sid=103"
+     "title": "하염없는 수출 기대 현대로템, 이젠 증명해야[클릭e종목]",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-17T22:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005844053?sid=101"
     }
    ]
   },
   {
    "keyword": "중국 이재명 대통령",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
    "articles90": 6,
    "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-17T20:27:00.000Z",
+   "firstArticleAt": "2026-11-17T20:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "트럼프 \"김정은, 중국 오고 싶어할 것\"...\"한국 투자 덕에 알래스카 LNG ...",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-17T21:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002434329?sid=104"
+    },
     {
      "title": "이 대통령, APEC 무대 중국 선전 도착…시진핑 회담·미중러 정상회담 주...",
      "press": "newsian.co.kr",
@@ -193,12 +200,6 @@
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-17T21:12:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012296013?sid=100"
-    },
-    {
-     "title": "[출근길 브리핑-11월 18일] 李대통령 아세안 순방·수능 부정행위 담화...",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-17T21:00:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903394"
     }
    ]
   },
@@ -235,49 +236,23 @@
    ]
   },
   {
-   "keyword": "뉴스",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-17T21:04:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "[오늘의 경제뉴스] 국제 LNG값 2.6배 급등…산업계 덮친 가스비 충격, 생...",
-     "press": "newsverse.kr",
-     "publishedAt": "2026-11-17T21:30:00.000Z",
-     "link": "https://www.newsverse.kr/news/articleView.html?idxno=11947"
-    },
-    {
-     "title": "[뉴스클레임 사설] 세무사 수석 부정행위, 당국은 감독 실패 경위부터 ...",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-17T21:26:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3083142"
-    },
-    {
-     "title": "[데이터&뉴스] 저축은행 정기예금 절반이 금리 4% 이상…NH·드림저축은...",
-     "press": "consumernews.co.kr",
-     "publishedAt": "2026-11-17T21:10:00.000Z",
-     "link": "http://www.consumernews.co.kr/news/articleView.html?idxno=768263"
-    }
-   ]
-  },
-  {
    "keyword": "훈련",
    "sources": [
     "google"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
    "firstArticleAt": "2026-11-17T20:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "제57회 피스메이커 지도자훈련, 12월 14~16일 가평 필그림하우스에서",
+     "press": "christiantoday.co.kr",
+     "publishedAt": "2026-11-17T21:58:00.000Z",
+     "link": "https://www.christiantoday.co.kr/news/378685"
+    },
     {
      "title": "프랑스 \"우크라 주둔 병력은 훈련·정비 목적\"…러 \"참전 행위\" 반박",
      "press": "news1.kr",
@@ -289,44 +264,102 @@
      "press": "biz.heraldcorp.com",
      "publishedAt": "2026-11-17T21:01:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/016/0002724804?sid=101"
-    },
-    {
-     "title": "AI로 업무환경 향상…빙그레, 사업주훈련 우수사례 '대상'",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-17T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014328653?sid=102"
     }
    ]
   },
   {
-   "keyword": "AI 세무사 부정행위 조사 종료",
+   "keyword": "AI 세무사 부정행위 사과",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 3,
+   "articles90": 5,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-17T20:50:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-17T21:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘AI 부정행위’ 세무사 수석, 13시간 조사 종료…“수험생들에게 죄송...",
-     "press": "news.kbs.co.kr",
+     "title": "[뉴스클레임 사설] 세무사 수석 부정행위, 당국은 감독 실패 경위부터 ...",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-17T21:26:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3083142"
+    },
+    {
+     "title": "'AI커닝' 세무사 수석합격자 \"공범 없다\"...계산기 개조해 범행",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-17T21:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001273069?sid=102"
+    },
+    {
+     "title": "AI 부정행위 파문에…유명 연예인의 ‘공인중개사 시험’ 합격 수기, 재...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-17T21:16:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1175393"
+    }
+   ]
+  },
+  {
+   "keyword": "수사",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-17T20:41:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김완섭 ‘피의자 신분’ 조사하고도… 종합특검, 수사 두 달간 입건 안...",
+     "press": "segye.com",
      "publishedAt": "2026-11-17T21:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012296009?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/022/0004176059?sid=102"
     },
     {
-     "title": "수능날 경찰 1만여명 투입…'AI 커닝' 신고·폭파 협박 대비[2027 수능]",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-17T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014328633?sid=102"
+     "title": "[시선] 검사가 수사를 안 하면 범죄자는 더 좋아할까?",
+     "press": "cctoday.co.kr",
+     "publishedAt": "2026-11-17T21:02:00.000Z",
+     "link": "https://www.cctoday.co.kr/news/articleView.html?idxno=2240453"
     },
     {
-     "title": "'AI 커닝' 시험 전엔 처벌 못하고 처벌해도 벌금형…\"규정 정비 시급\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-17T20:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009294906?sid=102"
+     "title": "태안 하천서 80대 여성 숨진 채 발견...경찰 수사 중",
+     "press": "newsfreezone.co.kr",
+     "publishedAt": "2026-11-17T21:02:00.000Z",
+     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=719873"
+    }
+   ]
+  },
+  {
+   "keyword": "뉴스",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-17T21:30:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "2026년 11월 18일 전체뉴스",
+     "press": "btnnews.tv",
+     "publishedAt": "2026-11-17T22:00:00.000Z",
+     "link": "https://www.btnnews.tv/news/articleView.html?idxno=92473"
+    },
+    {
+     "title": "[YTN 실시간뉴스] 'AI부정' 세무사 14시간 조사...\"깊이 사과\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-17T21:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002434328?sid=102"
+    },
+    {
+     "title": "[오늘의 경제뉴스] 국제 LNG값 2.6배 급등…산업계 덮친 가스비 충격, 생...",
+     "press": "newsverse.kr",
+     "publishedAt": "2026-11-17T21:30:00.000Z",
+     "link": "https://www.newsverse.kr/news/articleView.html?idxno=11947"
     }
    ]
   },
@@ -336,36 +369,36 @@
     "google"
    ],
    "articles90": 6,
-   "recent20": 5,
+   "recent20": 0,
    "press": 2,
    "firstArticleAt": "2026-11-17T21:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "여성 노동자 몸이 먼저 알아챈 '일의 위험'",
+     "press": "labortoday.co.kr",
+     "publishedAt": "2026-11-17T21:34:00.000Z",
+     "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237798"
+    },
+    {
+     "title": "파업 예고한 코레일테크 노동자가 청와대 찾은 까닭은",
+     "press": "labortoday.co.kr",
+     "publishedAt": "2026-11-17T21:34:00.000Z",
+     "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237792"
+    },
+    {
      "title": "느끼고 추측하는 노동자들",
      "press": "labortoday.co.kr",
      "publishedAt": "2026-11-17T21:34:00.000Z",
      "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237799"
-    },
-    {
-     "title": "이 대통령 지시한 휴게소 개혁 과정서 노동자 50여명 전원 해고",
-     "press": "labortoday.co.kr",
-     "publishedAt": "2026-11-17T21:34:00.000Z",
-     "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237801"
-    },
-    {
-     "title": "[청년노동자 사망 보름째] 금속노조·유족 HD현대삼호에 \"진상규명과 사...",
-     "press": "labortoday.co.kr",
-     "publishedAt": "2026-11-17T21:34:00.000Z",
-     "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237793"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 947,
+  "flagged": 950,
   "matched": 549,
   "avgLeadMin": 847,
   "recent": [
