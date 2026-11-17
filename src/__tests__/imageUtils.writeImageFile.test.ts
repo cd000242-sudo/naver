@@ -262,4 +262,42 @@ describe('writeImageFile — 생성 이미지 800x800 고정', () => {
     const result = await writeImageFile(await png(1152, 896), 'png', 'collected', undefined, undefined, { keepAspect: true });
     expect(await dims(result.filePath)).toEqual({ width: 1200, height: 933 });
   });
+
+  /*
+   * [2026-11-17 사장님] 본문 사진 기본 = 세로 3:4 (블로그 글로 만드는 쇼츠가 화면을 채우게).
+   * v2.11.396 은 3:4 로 그리게만 하고 이 저장 단계가 다시 800x800 으로 잘랐다(3:4 = 1.333 <= 1.34).
+   * 쇼츠가 화면을 채우는 조건은 가로/세로 < 0.8 (세로/가로 > 1.25) — 그런 세로 사진은 일부러 고른 것이라 지킨다.
+   */
+  it('세로 3:4 생성 이미지(940x1253)는 정사각으로 자르지 않고 너비 800 세로 그대로 저장한다', async () => {
+    const { writeImageFile } = await import('../image/imageUtils.js');
+    const result = await writeImageFile(await png(940, 1253), 'png', 'portrait-3x4');
+    const size = await dims(result.filePath);
+    expect(size).toEqual({ width: 800, height: 1066 });
+    expect(size.width / size.height).toBeLessThan(0.8);
+  });
+
+  it('엔진이 내준 896x1200(세로 3:4)도 세로 그대로 저장한다', async () => {
+    const { writeImageFile } = await import('../image/imageUtils.js');
+    const result = await writeImageFile(await png(896, 1200), 'png', 'portrait-896');
+    expect(await dims(result.filePath)).toEqual({ width: 800, height: 1071 });
+  });
+
+  it('가로 4:3(1253x940)은 지금처럼 800x800 으로 맞춘다', async () => {
+    const { writeImageFile } = await import('../image/imageUtils.js');
+    const result = await writeImageFile(await png(1253, 940), 'png', 'landscape-4x3');
+    expect(await dims(result.filePath)).toEqual({ width: 800, height: 800 });
+  });
+
+  it('세로라도 정사각에 가까우면(1000x1200 · 4:5 인 1024x1280) 800x800 으로 맞춘다', async () => {
+    const { writeImageFile } = await import('../image/imageUtils.js');
+    expect(await dims((await writeImageFile(await png(1000, 1200), 'png', 'portrait-near-square')).filePath)).toEqual({ width: 800, height: 800 });
+    expect(await dims((await writeImageFile(await png(1024, 1280), 'png', 'portrait-4x5')).filePath)).toEqual({ width: 800, height: 800 });
+  });
+
+  it('홈판 풀오토처럼 정사각을 강제한 호출에서는 세로 3:4 도 800x800 이다', async () => {
+    const { writeImageFile } = await import('../image/imageUtils.js');
+    const { runWithSquareImageTarget } = await import('../image/squareImageTarget.js');
+    const result = await runWithSquareImageTarget(800, async () => writeImageFile(await png(940, 1253), 'png', 'forced-square'));
+    expect(await dims(result.filePath)).toEqual({ width: 800, height: 800 });
+  });
 });

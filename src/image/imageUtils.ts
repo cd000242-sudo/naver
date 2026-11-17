@@ -64,9 +64,16 @@ export async function getImageSaveBasePath(): Promise<string> {
  * AI 생성 엔진은 전부 이 함수로 모인다. 정사각에 가까운 결과(1:1, 4:3, 3:4)는 가운데를 잘라
  * 800x800 으로 맞추고, 16:9·9:16 처럼 사용자가 일부러 고른 넓은 비율은 비율을 지킨 채 너비 800.
  * 수집·다운로드 이미지(뉴스 사진, 상품 사진)는 keepAspect 로 기존 동작(너비 1200, 비율 유지)을 지킨다.
+ *
+ * [2026-11-17 사장님] 본문 사진 기본 = 세로 3:4 (블로그 글로 만드는 쇼츠가 화면을 채우게). 세로 3:4 는
+ * 위 "정사각에 가까운 결과"에서 뺀다 — v2.11.396 은 3:4 로 그리게 해 놓고 여기서 다시 800x800 으로 잘랐다.
+ * 쇼츠가 화면을 채우는 조건(가로/세로 < 0.8, LDB CONTAIN_ASPECT)에 드는 세로 사진만 비율을 지키고,
+ * 가로 4:3 과 그보다 정사각에 가까운 결과는 지금처럼 800x800 이다. 정사각 강제 호출(홈판 풀오토)은 그대로.
  */
 export const GENERATED_IMAGE_SQUARE_SIZE = 800;
 const NEAR_SQUARE_MAX_RATIO = 1.34;
+// height / width above this fills the vertical short (the inverse of the 0.8 fill threshold).
+const PORTRAIT_KEEP_MIN_RATIO = 1.25;
 
 export interface WriteImageFileOptions {
   /** true 면 자르지 않는다 — 수집/다운로드 이미지 전용. */
@@ -97,7 +104,8 @@ function resolveGeneratedImageTarget(
   if (forcedSquare) {
     return { width: forcedSquare, height: forcedSquare, fit: 'cover', position: ratio <= NEAR_SQUARE_MAX_RATIO ? 'centre' : 'attention' };
   }
-  if (ratio <= NEAR_SQUARE_MAX_RATIO) {
+  const keptPortrait = height > width && ratio > PORTRAIT_KEEP_MIN_RATIO;
+  if (ratio <= NEAR_SQUARE_MAX_RATIO && !keptPortrait) {
     return { width: GENERATED_IMAGE_SQUARE_SIZE, height: GENERATED_IMAGE_SQUARE_SIZE, fit: 'cover', position: 'centre' };
   }
   const targetWidth = GENERATED_IMAGE_SQUARE_SIZE;
