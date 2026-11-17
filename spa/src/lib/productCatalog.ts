@@ -41,6 +41,8 @@ export type Product = {
     image: string;
     /** [2026-11-17] Silent motion clip made from real recordings; the card plays it instead of the still. */
     clip?: { src: string; poster: string };
+    /** [2026-11-17] Where the full description lives; the store card only links to it. */
+    detail?: string;
     accent: string;
     glyph: string;
     /** 이벤트가. 비어 있으면 그 기간은 팔지 않는다. */
@@ -62,6 +64,7 @@ export const PRODUCTS: Product[] = [
         licensePlatform: 'LEADERNAM',
         image: '/images/feature-auto-publish.png',
         clip: { src: '/videos/pricing-showcase/site-naver.mp4', poster: '/videos/pricing-showcase/site-naver.jpg' },
+        detail: '/detail',
         accent: '#34d399',
         glyph: '✎',
         prices: { monthly: 29000, yearly: 300000, lifetime: 1500000 },
@@ -77,6 +80,7 @@ export const PRODUCTS: Product[] = [
         licensePlatform: 'ORBIT',
         image: '/images/orbit/leadernam-orbit-download-card.webp',
         clip: { src: '/videos/pricing-showcase/site-orbit.mp4', poster: '/videos/pricing-showcase/site-orbit.jpg' },
+        detail: '/orbit',
         accent: '#818cf8',
         glyph: '◎',
         prices: { monthly: 39000, yearly: 400000, lifetime: 2000000 },
@@ -92,6 +96,7 @@ export const PRODUCTS: Product[] = [
         licensePlatform: 'LEWORD',
         image: '/images/leword/hero-banner-card.webp',
         clip: { src: '/videos/pricing-showcase/site-leword.mp4', poster: '/videos/pricing-showcase/site-leword.jpg' },
+        detail: '/leword-detail',
         accent: '#f0b53f',
         glyph: '◆',
         // 2026-10-07 사장님 결정 — 월 19,900원 유지(검증된 도구보다 같거나 싸게) · 1년은 월 10달 치 199,000원 · 영구제 판매 중지

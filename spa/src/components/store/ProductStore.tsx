@@ -243,9 +243,12 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust, hea
                                     <ul className="st-incl">
                                         {product.features.map((feature) => <li key={feature}>{feature}</li>)}
                                     </ul>
-                                ) : (
-                                    <p className="st-what">{product.summary}</p>
-                                )}
+                                ) : null}
+                                {/*
+                                  * [2026-11-17 owner] "금액이 잘 보여야 되고 소개는 간단하고 강력하게 — 어차피 제품 설명을
+                                  * 가서 보면 되니까." A single card no longer carries the summary paragraph: the name and one
+                                  * short line, then the price. The full description is one link away.
+                                  */}
 
                                 {product.bundle && bundleMedia && (
                                     <div className="st-bundle-media">{bundleMedia}</div>
@@ -318,6 +321,9 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust, hea
                                 >
                                     {inCart ? <>담았습니다<StoreIcon name="check" /></> : product.bundle ? 'All in one 담기' : '담기'}
                                 </button>
+                                {!product.bundle && product.detail && (
+                                    <a className="st-more" href={product.detail}>{product.name} 자세히 보기</a>
+                                )}
                                 </div>
                             </div>
                         </article>

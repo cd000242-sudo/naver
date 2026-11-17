@@ -119,7 +119,13 @@ function StoreStyles() {
                 margin: 4px 0 0; min-height: 24px; font-size: ${type.small}px;
                 color: var(--st-dim); font-variant-numeric: tabular-nums;
             }
-            .st-permo strong { color: var(--st-ink); font-weight: 600; }
+            /* [2026-11-17 owner] The amount that is charged reads at a glance (it was the same small size as the notes). */
+            .st-permo strong { color: var(--st-ink); font-weight: 700; font-size: ${type.lead}px; letter-spacing: -.01em; }
+            .st-more {
+                display: inline-flex; align-items: center; align-self: center; min-height: 44px; margin-top: 4px;
+                color: var(--st-gold-ink); font-size: ${type.small}px; font-weight: 600; text-decoration: underline; text-underline-offset: 3px;
+            }
+            .st-more:hover { color: var(--st-ink); }
             .st-permo s { margin-right: 4px; color: var(--st-mute); }
             .st-fine { margin: 4px 0 0; font-size: ${type.small}px; line-height: 1.6; color: var(--st-dim); }
 
