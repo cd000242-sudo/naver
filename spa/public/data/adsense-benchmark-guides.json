@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-17T05:11:12.497Z",
+  "generatedAt": "2026-11-17T05:25:17.753Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -3219,72 +3219,6 @@
           "views": 413,
           "answers": 1,
           "askedAt": "2026.04.29"
-        }
-      ]
-    },
-    {
-      "id": "18820ea88ef5fea3",
-      "urls": [
-        "https://yeon0720.tistory.com/entry/2027-%EC%88%98%EB%8A%A5-%EC%8A%A4%EB%A7%88%ED%8A%B8%EC%95%88%EA%B2%BD-%EB%8B%A8%EC%86%8D-%EA%B0%95%ED%99%94%EF%BD%9C%EC%9D%BC%EB%B0%98-%EC%95%88%EA%B2%BD-%EA%B2%80%EC%82%AC%C2%B7%EB%B0%98%EC%9E%85-%EA%B8%88%EC%A7%80%C2%B7%EC%A0%81%EB%B0%9C-%EC%8B%9C-%EC%B2%98%EB%B2%8C-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://someofthem.tistory.com/125",
-        "https://jjyiu.tistory.com/entry/%EC%88%98%EB%8A%A5-%EC%A0%84%EC%9E%90%EA%B8%B0%EA%B8%B0-%EB%B0%98%EC%9E%85-%EA%B8%88%EC%A7%80-%ED%92%88%EB%AA%A9-%EC%B4%9D%EC%A0%95%EB%A6%AC-%EC%8A%A4%EB%A7%88%ED%8A%B8%EC%95%88%EA%B2%BD-%EC%A0%81%EB%B0%9C-%EC%8B%9C-%EB%B6%80%EC%A0%95%ED%96%89%EC%9C%84-%EA%B8%B0%EC%A4%80",
-        "https://trendsearch.tistory.com/entry/%EC%88%98%EB%8A%A5-%EC%8A%A4%EB%A7%88%ED%8A%B8%EC%95%88%EA%B2%BD-%EB%B0%98%EC%9E%85-%EA%B8%88%EC%A7%80-%EB%B6%80%EC%A0%95%ED%96%89%EC%9C%84-%EC%B2%98%EB%A6%AC-%EA%B8%B0%EC%A4%80-%EC%B4%9D%EC%A0%95%EB%A6%AC-%EC%86%8C%EC%A7%80%C2%B7%EC%B0%A9%EC%9A%A9%C2%B7%EC%A0%90%EA%B2%80-%EB%B6%88%EC%9D%91%EB%B3%84"
-      ],
-      "guide": {
-        "direction": "지식인에서는 전자기기를 가방에 다 못 넣거나 아이패드를 따로 제출해야 하는지 등 실제 제출 절차를 몰라 묻는다. 고수 블로그들은 금지 품목과 처벌 기준은 정리했지만 가방 크기 제약 같은 실제 제출 상황별 대처법은 다루지 않았다. 입실시간·반입금지 품목·제출 순서·처벌 기준을 한 표로 정리해 검색자가 당일 바로 따라 할 수 있게 한다.",
-        "searchTargets": [
-          "수능 전자기기 규정",
-          "수능 전자기기 검사",
-          "수능 전자기기 수거 방법"
-        ],
-        "mustInclude": [
-          "2027학년도 수능 날짜(11월19일)와 입실시간 8시10분 (확인 필요: 교육청 공지)",
-          "반입금지 품목 목록(스마트안경·스마트워치·이어폰 등) 표로 정리",
-          "가방에 다 안 들어갈 때 전자기기 별도 제출 절차(지식인 질문 기반)",
-          "적발 시 처벌 기준: 소지·착용·점검 불응별 구분표"
-        ],
-        "mustAvoid": [
-          "특정 수험생의 전자기기 사용 의도를 사생활 추측처럼 서술하지 않기",
-          "작년 수능 반입규정과 혼동해 2027학년도 기준과 다른 정보 섞지 않기",
-          "스마트안경 브랜드·기능을 홍보하듯 설명하지 않기"
-        ],
-        "checkBefore": [
-          "2027학년도 수능 입실시간·반입금지 품목은 한국교육과정평가원·교육청 공식 공지로 확인",
-          "적발 시 처벌(부정행위) 기준은 평가원 수능 부정행위 처리 규정 원문으로 확인"
-        ],
-        "solves": [
-          "가방에 전자기기가 다 안 들어가면 어떻게 하나 → 별도 제출 절차 안내",
-          "전자기기 종류별로 뭐가 금지인지 헷갈림 → 품목 표로 정리",
-          "적발되면 어떻게 처리되는지 모름 → 소지·착용·불응별 처벌 기준표"
-        ],
-        "actionTitles": [
-          "수능 전자기기 수거 방법과 제출 순서, 처벌 기준까지 정리"
-        ]
-      },
-      "at": "2026-11-12T12:18:46.154Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "수능장 전자기기 제출",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110408&docId=458628517&answerNo=1&qb=7IiY64ql7KCE7J6Q6riw6riw",
-          "views": 453,
-          "answers": 2,
-          "askedAt": "2023.11.15"
-        },
-        {
-          "title": "수능 전자기기",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110408&docId=477771813&answerNo=1&qb=7IiY64ql7KCE7J6Q6riw6riw",
-          "views": 398,
-          "answers": 1,
-          "askedAt": "2024.11.11"
-        },
-        {
-          "title": "학교 전자기기 사용 금지",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1121&docId=494265423&answerNo=1&qb=7IiY64ql7KCE7J6Q6riw6riw",
-          "views": 149,
-          "answers": 1,
-          "askedAt": "2026.07.11"
         }
       ]
     },
@@ -7241,74 +7175,6 @@
       "provider": "claude"
     },
     {
-      "id": "46e239e065213dc5",
-      "urls": [
-        "https://cheinggyemoney.tistory.com/150"
-      ],
-      "guide": {
-        "direction": "지식인 질문은 대행업체 문의와 지역별 해체재활용업체 현황표, 선정일 기준 2개월 신청기한을 궁금해하지만 고수 글 제목은 '조건과 절차'로만 뭉뚱그려 있다. 조기폐차지원금(최대 150만원)과 폐차장 고철값(60만원+α)이 별도 지급되는 구조를 명확히 가르는 글이 드물다. 이 글은 대상 조건·업체 현황 조회 방법·신청 기한을 순서대로 정리해 독자가 바로 신청까지 끝내게 한다.",
-        "searchTargets": [
-          "노후경유차 조기폐차 조건",
-          "노후경유차 조기폐차 보조금",
-          "노후경유차 조기폐차 대상",
-          "노후경유차 조기폐차 기간"
-        ],
-        "mustInclude": [
-          "지원금은 선정일 기준 2개월 이내 신청해야 한다는 기간 규정 (확인 필요: 관할 시청 공지)",
-          "조기폐차지원금 최대 150만원 + 폐차장 지급 고철값(폐차보상금) 60만원+α 별도 지급 구조 (확인 필요: 한국자동차환경협회)",
-          "지역별 자동차 해체재활용업체 현황표(업체명·소재지·전화번호) 정리",
-          "대상 차량: RV·승합·화물 경유(디젤)차 등 선정 조건 (확인 필요: 환경부/관할 시청 공고)",
-          "신청 창구: 관할 시청 또는 한국자동차환경협회 (확인 필요)"
-        ],
-        "mustAvoid": [
-          "특정 대행업체(고릴라페차 등)를 추천하는 듯한 홍보성 서술",
-          "조기폐차지원금과 폐차장 고철값(폐차보상금)을 같은 돈처럼 혼동해서 설명",
-          "지역마다 지원금 액수·조건이 다른데 전국 공통인 것처럼 일반화"
-        ],
-        "checkBefore": [
-          "거주 지역 시청 환경과 공고로 올해 지원 대상 및 예산 소진 여부 확인",
-          "한국자동차환경협회 조기폐차 지원 시스템에서 보유 차량 대상 여부 조회",
-          "자동차 해체재활용업체 현황은 관할 지자체 또는 협회 공시자료로 최신본 확인"
-        ],
-        "solves": [
-          "어느 해체재활용업체에 맡겨야 하나 → 지역별 업체 현황표로 소재지·연락처 비교",
-          "지원금과 고철값을 같이 받을 수 있나 → 조기폐차지원금과 폐차보상금이 별도 지급되는 구조 설명",
-          "신청 기한을 놓치면 어떻게 되나 → 선정일 기준 2개월 이내 신청 기한 명시"
-        ],
-        "actionTitles": [
-          "노후경유차 조기폐차 지원금 조회 및 신청 방법 총정리",
-          "노후경유차 조기폐차 대상·조건·신청방법 한번에 확인하기",
-          "노후경유차 조기폐차 지원금과 폐차 고철값 함께 받는 법"
-        ]
-      },
-      "at": "2026-11-13T20:29:29.704Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "광주광역시 노후경유 조기폐차 대행 의뢰",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8110104&docId=359966068&answerNo=3&qb=64W47ZuEIOqyveycoOywqCDsobDquLDtj5DssKgg7J6Q64+Z7LCoIO2VtOyytOyerO2ZnOyaqeyXheyytA==",
-          "views": 5039,
-          "answers": 6,
-          "askedAt": "2020.06.17"
-        },
-        {
-          "title": "울산광역시 노후경유차조기폐차",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=81102&docId=382622070&answerNo=1&qb=64W47ZuEIOqyveycoOywqCDsobDquLDtj5DssKgg7J6Q64+Z7LCoIO2VtOyytOyerO2ZnOyaqeyXheyytA==",
-          "views": 2271,
-          "answers": 8,
-          "askedAt": "2021.02.22"
-        },
-        {
-          "title": "(자동차)조기폐차를 신청하려고 하는데 궁금....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=811&docId=202264674&answerNo=1&qb=64W47ZuEIOqyveycoOywqCDsobDquLDtj5DssKgg7J6Q64+Z7LCoIO2VtOyytOyerO2ZnOyaqeyXheyytA==",
-          "views": 2042,
-          "answers": 1,
-          "askedAt": "2014.07.17"
-        }
-      ]
-    },
-    {
       "id": "f45b1b77e27fcf50",
       "urls": [
         "https://wealti.tistory.com/entry/%EC%9C%A0%ED%8A%9C%EB%B8%8C-%E2%80%98%EB%AC%B8%EC%A0%9C%EA%B0%80-%EB%B0%9C%EC%83%9D%ED%96%88%EC%8A%B5%EB%8B%88%EB%8B%A4%E2%80%99-%EC%98%A4%EB%A5%98%EA%B0%80-%EB%9C%B0-%EB%95%8C-%EC%95%B1%C2%B7%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80-%EC%A0%90%EA%B2%80-%EC%88%9C%EC%84%9C"
@@ -8415,77 +8281,6 @@
           "views": 476,
           "answers": 10,
           "askedAt": "2026.11.03"
-        }
-      ]
-    },
-    {
-      "id": "6b57e2cb6f7cfa96",
-      "urls": [
-        "https://economyfactory.com/items-prohibited-in-the-csat-exam-venue/",
-        "https://trendsearch.tistory.com/entry/2027-%EC%88%98%EB%8A%A5-%EC%8B%9C%ED%97%98%EC%9E%A5-%EB%B0%98%EC%9E%85%EA%B8%88%EC%A7%80-%EB%AC%BC%ED%92%88-%EC%B4%9D%EC%A0%95%EB%A6%AC%EF%BD%9C%ED%9C%B4%EB%8C%80%ED%8F%B0%C2%B7%EC%A0%84%EC%9E%90%EA%B8%B0%EA%B8%B0%C2%B7%EC%8B%9C%EA%B3%84%C2%B7%EA%B0%80%EB%B0%A9-%EC%A3%BC%EC%9D%98%EC%82%AC%ED%95%AD",
-        "https://solang.co.kr/%ec%88%98%eb%8a%a5-%ec%8b%9c%ed%97%98%ec%9e%a5-%eb%82%a0%ec%94%a8-%ec%9a%b0%eb%a6%ac-%ed%95%99%ea%b5%90%eb%8a%94-%ec%96%b4%eb%94%94%ec%84%9c-%ed%99%95%ec%9d%b8%ed%95%a0%ea%b9%8c%ec%9a%94/",
-        "https://annas.co.kr/2026-%ec%88%98%eb%8a%a5/"
-      ],
-      "guide": {
-        "direction": "검색자는 반입금지 물품 목록보다 내 수능 시험장이 언제 어떤 기준으로 배정·발표되는지, 반입금지가 건물 내부 기준인지에서 막힌다. 고수 블로그는 물품 나열에 집중해 시험장 배정 기준과 지역별(대구·광주·부산) 배정 방식, 예비소집일 확인 가능 범위를 풀지 않았다. 배정 기준표와 예비소집일 체크리스트, 반입금지 '소지 vs 반입' 기준을 정리해 한 번에 끝내준다.",
-        "searchTargets": [
-          "수능 시험장 배정 발표",
-          "수능 시험장 배정 기준",
-          "수능 시험장 배정",
-          "수능 시험장 시계"
-        ],
-        "mustInclude": [
-          "반입금지 기준이 '시험장 건물 내부 반입·소지'임을 명시(스마트워치·스마트안경·와이파이 기기 포함)",
-          "시험장 배정은 집 주소·재학고가 아니라 관할 시험지구 전체 수용인원 기준(확인 필요: 교육청 공지)",
-          "2026(해당 연도) 수능 날짜·시간표(확인 필요: 평가원 공식 발표)",
-          "예비소집일에 확인 가능한 것(학교 위치, 시험실 위치)과 불가능한 것(시험실 내부 입장) 구분",
-          "지역별(대구·광주·부산) 시험장 배정 발표 방법(확인 필요: 각 시도교육청 공지)"
-        ],
-        "mustAvoid": [
-          "특정 수험생의 시험장 배정 결과를 단정적으로 예측(매년 시험지구 수용 인원에 따라 달라짐)",
-          "반입금지 '소지 금지'와 '사용 금지'를 혼용해 불필요한 불안 조성",
-          "같은 소재의 2026·2027 수능 일정·제목을 섞어 연도 혼동 유발"
-        ],
-        "checkBefore": [
-          "수능 날짜·시험장 배정 발표 일정은 한국교육과정평가원·시도교육청 공식 공지로 확인",
-          "반입금지 물품 최신 목록은 평가원 수능 시행계획 공고로 확인",
-          "지역별(대구·광주·부산) 시험장 배정 기준은 각 시도교육청 보도자료로 확인"
-        ],
-        "solves": [
-          "수능 시험장이 집이나 재학고 기준인지 궁금함 → 관할 시험지구 전체 수용인원 기준임을 설명",
-          "반입금지 물품이 건물 외부에서도 금지인지 궁금함 → 건물 내부 반입·소지 기준으로 구분해 설명",
-          "예비소집일에 시험실 내부까지 볼 수 있는지 궁금함 → 학교 위치·외부만 확인 가능함을 안내"
-        ],
-        "actionTitles": [
-          "수능 시험장 배정 발표 확인하는 법과 반입금지 물품 총정리",
-          "2026 수능 시험장소 조회 전 배정 기준 꼭 확인하세요",
-          "대구·광주·부산 수능시험장 배정 기준, 헷갈리면 꼭 확인"
-        ]
-      },
-      "at": "2026-11-16T20:19:13.752Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "수능 시험 장소",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110408&docId=495603595&answerNo=3&qb=7IiY64ql7Iuc7ZeY7J6l",
-          "views": 387,
-          "answers": 6,
-          "askedAt": "2026.10.19"
-        },
-        {
-          "title": "수능 고사장",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=11040303&docId=495761848&answerNo=1&qb=7IiY64ql7Iuc7ZeY7J6l",
-          "views": 194,
-          "answers": 2,
-          "askedAt": "2026.10.30"
-        },
-        {
-          "title": "수능 시험장 반입 금지 물품 관련하여..",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110408&docId=495951554&answerNo=1&qb=7IiY64ql7Iuc7ZeY7J6l",
-          "views": 94,
-          "answers": 1,
-          "askedAt": "2026.11.14"
         }
       ]
     },
@@ -10410,72 +10205,6 @@
       ]
     },
     {
-      "id": "decb01b6623afc2a",
-      "urls": [
-        "https://money-phd.com/1999",
-        "https://moneynotediary.tistory.com/54",
-        "https://semoti.tistory.com/entry/2027-%EC%88%98%EB%8A%A5-%EC%8B%9C%EA%B0%84%ED%91%9C-%EC%A4%80%EB%B9%84%EB%AC%BC%EA%B3%BC-%EC%9E%85%EC%8B%A4-%EC%8B%9C%EA%B0%81-%EC%B4%9D%EC%A0%95%EB%A6%AC"
-      ],
-      "guide": {
-        "direction": "① 탐구 과목 시간이 과목당 40분으로 늘어 선배들 수능과 체감이 달라져 헷갈리는 수험생·학부모가 많다. ② 고수 글들은 입실 8시10분·출근 10시는 짚었지만 탐구 1과목만 선택했을 때 진행 방식과 한국사 미응시 처리 기준은 비워뒀다. ③ 교시별 시간표·탐구 응시 규칙·반입금지물품을 표로 정리해 한 번에 끝내도록 한다.",
-        "searchTargets": [
-          "2027 수능 시간표",
-          "수능 시간표 탐구",
-          "2027학년도 수능 시간표",
-          "수능 시간표 한국사"
-        ],
-        "mustInclude": [
-          "입실시간 8시10분, 출근시간 10시 조정 안내",
-          "2교시 수학 10:30~12:10 100분 진행",
-          "탐구 과목당 40분(기존보다 20분 증가)",
-          "탐구 1과목만 선택 시 첫 과목 시간에 응시, 이후 대기",
-          "한국사 응시 후 탐구 결시 시 한국사만 인정·탐구 0점 처리"
-        ],
-        "mustAvoid": [
-          "2026·2028 수능 시간표와 혼동해서 숫자 섞어 쓰기",
-          "탐구 결시 처리 기준을 확인 없이 단정적으로 서술"
-        ],
-        "checkBefore": [
-          "한국교육과정평가원·교육부 공식 공지에서 교시별 시간표·반입금지물품 확인",
-          "각 지역 교육청 공지에서 교통통제·출근시간 조정 범위 확인"
-        ],
-        "solves": [
-          "탐구 한 과목만 선택했는데 시험을 어떻게 치르는지 모름 → 첫 과목 시간 응시 후 교실 대기 규칙 정리",
-          "한국사만 보고 탐구를 안 보면 어떻게 되는지 헷갈림 → 한국사 인정·탐구 0점 처리 기준 정리",
-          "수학 시간이 왜 가장 긴지 모름 → 10:30~12:10 100분 구조 정리"
-        ],
-        "actionTitles": [
-          "수능 시간표 한국사만 보면 탐구 처리 확인하기"
-        ]
-      },
-      "at": "2026-11-16T20:19:13.752Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "수능시간표.",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110408&docId=75749969&answerNo=4&qb=7IiY64ql7Iuc6rCE7ZGc",
-          "views": 8649,
-          "answers": 4,
-          "askedAt": "2026.11.13"
-        },
-        {
-          "title": "왜 수능 시간표 수학이 100분으로",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1104&docId=314473484&answerNo=2&qb=7IiY64ql7Iuc6rCE7ZGc",
-          "views": 1519,
-          "answers": 2,
-          "askedAt": "2026.10.24"
-        },
-        {
-          "title": "수능 시간표",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110413&docId=485994476&answerNo=7&qb=7IiY64ql7Iuc6rCE7ZGc",
-          "views": 899,
-          "answers": 8,
-          "askedAt": "2026.10.24"
-        }
-      ]
-    },
-    {
       "id": "0487b9e9e8d53475",
       "urls": [
         "https://yun11.tistory.com/entry/XLOV%EC%97%91%EC%8A%A4%EB%9F%AC%EB%B8%8C-%EC%9A%B0%EB%AC%B4%ED%8B%B0-%ED%94%84%EB%A1%9C%ED%95%84-%EC%B4%9D%EC%A0%95%EB%A6%AC-%EA%B5%AD%EC%A0%81-%EC%84%B1%EB%B3%84-%EB%82%98%EC%9D%B4%EB%B6%80%ED%84%B0-%EC%A0%A0%EB%8D%94%EB%A6%AC%EC%8A%A4-%EA%B7%B8%EB%A3%B9-%EC%A0%95%EC%B2%B4%EA%B9%8C%EC%A7%80",
@@ -11324,76 +11053,6 @@
           "views": 748,
           "answers": 6,
           "askedAt": "2025.03.18"
-        }
-      ]
-    },
-    {
-      "id": "185014c2d0c797e6",
-      "urls": [
-        "https://gov.pinetreem.com/68",
-        "https://flameleaf.tistory.com/entry/CCNA-%EC%9E%90%EA%B2%A9%EC%A6%9D-%EC%B7%A8%EB%93%9D-%EA%B0%80%EC%9D%B4%EB%93%9C-%EB%82%9C%EC%9D%B4%EB%8F%84%EB%B6%80%ED%84%B0-%ED%95%A9%EA%B2%A9-%EC%A0%84%EB%9E%B5%EA%B9%8C%EC%A7%80-2026%EB%85%84-%EC%99%84%EC%A0%84-%EC%A0%95%EB%A6%AC",
-        "https://money-magazine.co.kr/%ed%83%9d%ec%8b%9c%ec%9a%b4%ec%a0%84%ec%9e%90%ea%b2%a9%ec%8b%9c%ed%97%98/",
-        "https://money-magazine.co.kr/%eb%b2%84%ec%8a%a4%ec%9a%b4%ec%a0%84%ec%9e%90%ea%b2%a9%ec%8b%9c%ed%97%98/"
-      ],
-      "guide": {
-        "direction": "검색자는 CCNA 접수 절차·비용·난이도·독학 가능 여부에서 막히고, 지식인에는 '덤프로 영어만 하면 된다'는 말과 '차라리 다른 언어를 공부하라'는 상반된 조언이 섞여 있다. 고수 글은 난이도·합격 전략은 다뤘지만 3년 후 재인증 시험, CCNP 응시자격(엔터프라이즈·보안 등 트랙 제한 없음) 같은 갱신·연계 정보는 비워둔다. 이 글은 접수→취득→재인증까지 기간별 체크리스트로 정리해 끝까지 읽히게 한다.",
-        "searchTargets": [
-          "ccna 자격증 접수",
-          "ccna 자격증 난이도",
-          "ccna 자격증 독학",
-          "ccna 자격증 비용"
-        ],
-        "mustInclude": [
-          "CCNA 유효기간 3년, 만료 시 재인증 시험 필요",
-          "CCNP 응시자격은 제한 없음(엔터프라이즈·서비스제공업체·협업·보안 트랙)",
-          "시험은 영어로 진행되며 덤프 의존 시 실무 역량 괴리 위험 언급",
-          "접수·응시료·교재는 공식 Cisco/Pearson VUE 기준으로 확인 필요",
-          "전공자가 아니어도 네트워크 기초 학습으로 준비 가능한지 안내"
-        ],
-        "mustAvoid": [
-          "덤프 사용을 정답처럼 권장하는 서술",
-          "파크골프자격증·택시·버스운전자격시험과 섞어 쓰지 않기",
-          "정보처리기사 등 국내 IT 자격증과 CCNA를 동급으로 혼동"
-        ],
-        "checkBefore": [
-          "Cisco 공식 홈페이지에서 최신 응시료·시험 과목·유효기간 정책 확인",
-          "Pearson VUE 등 접수처에서 수수료 변경 여부 확인"
-        ],
-        "solves": [
-          "CCNA 덤프로만 준비해도 되나? → 영어 시험 특성과 실무 역량 괴리 위험, 균형점 제시",
-          "CCNA 유효기간 지나면? → 3년 후 재인증 시험 필요 조건 정리",
-          "전공자 아니어도 CCNA 딸 수 있나? → 전공 여부보다 기초 학습 필요성 안내"
-        ],
-        "actionTitles": [
-          "CCNA 자격증 접수 전 비용과 난이도부터 확인하는 법",
-          "CCNA 자격증 독학 가능할까, 교재·학원 비교하는 기준",
-          "CCNA 자격증 유효기간 3년, 재인증 준비 체크리스트"
-        ]
-      },
-      "at": "2026-11-16T20:19:13.752Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "CCNA 자격증 취득",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=11004&docId=142189685&answerNo=4&qb=Y2NuYeyekOqyqeymnQ==",
-          "views": 5069,
-          "answers": 8,
-          "askedAt": "2011.12.24"
-        },
-        {
-          "title": "Ccna 자격증",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40608&docId=469101742&answerNo=1&qb=Y2NuYeyekOqyqeymnQ==",
-          "views": 745,
-          "answers": 3,
-          "askedAt": "2024.05.04"
-        },
-        {
-          "title": "CCNA자격증에 대해서.",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40608&docId=360927345&answerNo=1&qb=Y2NuYeyekOqyqeymnQ==",
-          "views": 185,
-          "answers": 3,
-          "askedAt": "2020.06.27"
         }
       ]
     },
@@ -73499,6 +73158,1218 @@
           "views": 67,
           "answers": 1,
           "askedAt": "2024.02.06"
+        }
+      ]
+    },
+    {
+      "id": "6b57e2cb6f7cfa96",
+      "urls": [
+        "https://economyfactory.com/items-prohibited-in-the-csat-exam-venue/",
+        "https://yjfreelifestyle.tistory.com/entry/%EC%88%98%EB%8A%A5-%EB%B0%98%EC%9E%85-%EA%B0%80%EB%8A%A5-%EB%AC%BC%ED%92%88%EA%B3%BC-%EC%A4%80%EB%B9%84%EB%AC%BC-%EC%B4%9D%EC%A0%95%EB%A6%AC-%EC%8B%9C%EA%B3%84%C2%B7%EC%83%A4%ED%94%84%C2%B7%EC%A0%84%EC%9E%90%EA%B8%B0%EA%B8%B0-%EA%B8%B0%EC%A4%80-%ED%99%95%EC%9D%B8",
+        "https://yjfreelifestyle.tistory.com/entry/%EC%88%98%EB%8A%A5-%EC%8A%A4%EB%A7%88%ED%8A%B8%EA%B8%B0%EA%B8%B0-%EB%B0%98%EC%9E%85-%EA%B8%88%EC%A7%80-%EB%AC%BC%ED%92%88-%EC%B4%9D%EC%A0%95%EB%A6%AC-%EC%8A%A4%EB%A7%88%ED%8A%B8%EC%95%88%EA%B2%BD%C2%B7%EC%8A%A4%EB%A7%88%ED%8A%B8%EC%9B%8C%EC%B9%98-%EB%B6%80%EC%A0%95%ED%96%89%EC%9C%84-%EA%B8%B0%EC%A4%80",
+        "https://moneynotediary.tistory.com/54",
+        "https://trendsearch.tistory.com/entry/2027-%EC%88%98%EB%8A%A5-%EC%8B%9C%ED%97%98%EC%9E%A5-%EB%B0%98%EC%9E%85%EA%B8%88%EC%A7%80-%EB%AC%BC%ED%92%88-%EC%B4%9D%EC%A0%95%EB%A6%AC%EF%BD%9C%ED%9C%B4%EB%8C%80%ED%8F%B0%C2%B7%EC%A0%84%EC%9E%90%EA%B8%B0%EA%B8%B0%C2%B7%EC%8B%9C%EA%B3%84%C2%B7%EA%B0%80%EB%B0%A9-%EC%A3%BC%EC%9D%98%EC%82%AC%ED%95%AD",
+        "https://lsy7651.tistory.com/entry/suneung-banned-items-smartwatch-earbuds"
+      ],
+      "guide": {
+        "direction": "검색자는 '반입 금지'(건물 내 소지 자체 금지)와 '시험 중 휴대 금지'(소지 가능하나 전원 꺼서 제출)를 혼동해 막혀 있다. 고수 블로그들은 금지 물품 나열에 그치고 전자기기를 언제·어디서·누구에게 제출하는지 절차를 안 다룬다. 반입금지·제출필요 물품을 구분한 표와 제출 시점을 주면 한 번에 끝난다.",
+        "searchTargets": [
+          "수능 반입 금지 물품",
+          "수능 반입 금지 물품 샤프"
+        ],
+        "mustInclude": [
+          "반입 자체 금지 물품 vs 소지는 되나 제출해야 하는 물품(시계·휴대폰) 구분표",
+          "스마트워치·스마트안경·와이파이 기기 적발 시 부정행위 처리 기준",
+          "샤프펜슬 허용 여부(확인 필요: 교육청·평가원 공지)",
+          "전자기기 제출 시점과 장소(1교시 시작 전 감독관 제출, 확인 필요: 시험장 안내문)",
+          "2027학년도 수능 날짜·입실시간(확인 필요: 한국교육과정평가원 공지)"
+        ],
+        "mustAvoid": [
+          "반입 금지와 소지 후 제출 의무를 같은 것처럼 섞어 쓰지 말 것",
+          "작년도 수능 규정을 확인 없이 올해도 동일하다고 단정하지 말 것"
+        ],
+        "checkBefore": [
+          "2027학년도 수능 반입금지 물품 최종 목록 - 한국교육과정평가원 공식 공지",
+          "전자기기 제출 시점·장소 - 시험장별 안내문 또는 교육청 공지"
+        ],
+        "solves": [
+          "수능 반입 금지 물품이 뭔지 모른다 → 반입금지/제출필요 물품을 표로 구분해 제공",
+          "샤프펜슬 가져가도 되는지 모른다 → 허용 필기구 기준 명시",
+          "스마트워치·무선이어폰 가져가면 어떻게 되는지 모른다 → 적발 시 처리 기준 안내"
+        ],
+        "actionTitles": [
+          "수능 반입 금지 물품 총정리, 샤프펜슬까지 한눈에 확인",
+          "수능 반입 금지 물품 샤프 허용 여부와 전자기기 제출 방법",
+          "수능 스마트워치·와이파이 반입 금지 기준과 제출 순서 확인"
+        ]
+      },
+      "at": "2026-11-17T05:22:58.223Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "수능 반입금지 물품 알려주세요.",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110408&docId=340292404&answerNo=6&qb=7IiY64ql67CY7J6F6riI7KeA",
+          "views": 1884,
+          "answers": 6,
+          "askedAt": "2026.11.14"
+        },
+        {
+          "title": "수능 시험장 반입 금지 물품은 무엇인가요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110408&docId=478130587&answerNo=3&qb=7IiY64ql67CY7J6F6riI7KeA",
+          "views": 176,
+          "answers": 5,
+          "askedAt": "2026.11.12"
+        },
+        {
+          "title": "수능 시험장 반입 금지 물품 관련하여..",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110408&docId=495951554&answerNo=1&qb=7IiY64ql67CY7J6F6riI7KeA",
+          "views": 111,
+          "answers": 1,
+          "askedAt": "2026.11.14"
+        }
+      ]
+    },
+    {
+      "id": "687f7d779fe784ca",
+      "urls": [
+        "https://jjyiu.tistory.com/entry/%EB%B0%B0%EC%9A%B0-%EC%9D%B4%EC%A0%95%ED%98%84-12%EC%9B%94-%EA%B2%B0%ED%98%BC-%EA%B9%9C%EC%A7%9D-%EB%B0%9C%ED%91%9C-%EC%9E%90%EA%B2%A9%EC%A6%9D-22%EA%B0%9C-%EC%B7%A8%EB%93%9D%EC%97%90-%EC%95%8C%EB%B0%94%EA%B9%8C%EC%A7%80-%ED%96%88%EB%8D%98-%EB%B0%98%EC%A0%84-%EC%82%AC%EC%97%B0",
+        "https://gov.pinetreem.com/68"
+      ],
+      "guide": {
+        "direction": "검색자는 '배우 이정현'이 어떤 인물인지, 동명이인(가수 출신 배우 등)과 어떻게 구분되는지부터 막혀 있다. 고수 블로그 제목들은 결혼 발표와 자격증 22개를 언급하지만 구체적 프로필·목록 없이 질문형으로 끝난다. 프로필·자격증 목록·결혼 발표 사실을 한 표로 정리해야 끝까지 읽힌다.",
+        "searchTargets": [
+          "배우 이정현 나무위키",
+          "배우이정현 프로필"
+        ],
+        "mustInclude": [
+          "이정현 배우 기본 프로필(출생·대표작)과 동명이인 구분(확인 필요: 나무위키·공식 프로필)",
+          "자격증 22개 구체 목록(확인 필요: 원문 기사)",
+          "12월 결혼 발표 날짜·발표 방식(확인 필요: 원문 기사·소속사 공지)",
+          "알바 경험과 반전 사연 구체 내용(확인 필요: 원문 기사)"
+        ],
+        "mustAvoid": [
+          "결혼 상대·결혼 이유 등 사생활에 대한 추측성 서술",
+          "동명이인(다른 이정현 배우·가수)의 프로필과 섞어서 쓰지 말 것",
+          "확인되지 않은 자격증 22개 목록을 추측해서 나열하지 말 것"
+        ],
+        "checkBefore": [
+          "이정현 동명이인 구분과 결혼 발표 사실관계 - 공식 기사·소속사 공지",
+          "자격증 22개 목록과 알바 경력 - 원문 인터뷰 기사"
+        ],
+        "solves": [
+          "배우 이정현이 누구인지 모른다 → 프로필과 대표작으로 동명이인 구분해 제공",
+          "자격증 22개가 뭔지 모른다 → 취득 자격증 목록 정리(확인 필요 표시)",
+          "결혼 발표가 언제 어떻게 됐는지 모른다 → 발표 날짜·방식 정리"
+        ],
+        "actionTitles": [
+          "배우 이정현 자격증 22개 목록과 결혼 발표 사실 확인"
+        ]
+      },
+      "at": "2026-11-17T05:22:58.223Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "배우 이정현님!! (미스터 선샤인)",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=30301&docId=315838361&answerNo=2&qb=67Cw7Jqw7J207KCV7ZiE",
+          "views": 637,
+          "answers": 2,
+          "askedAt": "2018.12.05"
+        },
+        {
+          "title": "라디오 스타 배우 이정현님 자격증 지갑",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40605&docId=489088597&answerNo=1&qb=67Cw7Jqw7J207KCV7ZiE",
+          "views": 131,
+          "answers": 1,
+          "askedAt": "2025.09.25"
+        },
+        {
+          "title": "미스터선샤인 이정현 배우",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=30301&docId=491732240&answerNo=2&qb=67Cw7Jqw7J207KCV7ZiE",
+          "views": 73,
+          "answers": 2,
+          "askedAt": "2026.02.03"
+        }
+      ]
+    },
+    {
+      "id": "e32464f541165a02",
+      "urls": [
+        "https://moneyinftong.tistory.com/entry/%EB%82%B4%EA%B0%80-%EC%9E%8A%EA%B3%A0-%EC%9E%88%EC%97%88%EA%B1%B0%EB%82%98-%EC%98%A4%EB%9E%9C-%EA%B8%B0%EA%B0%84-%EC%B0%BE%EC%95%84%EA%B0%80%EC%A7%80-%EC%95%8A%EC%9D%80-%EC%98%88%EA%B8%88%EA%B3%BC-%EB%B3%B4%ED%97%98%EA%B8%88%EB%8F%84-%EC%88%A8%EC%9D%80-%EC%9E%90%EC%82%B0-%EC%B0%BE%EA%B8%B0%EB%A5%BC-%ED%86%B5%ED%95%B4-%EC%86%90%EC%89%BD%EA%B2%8C-%ED%99%95%EC%9D%B8%ED%95%A0-%EC%88%98-%EC%9E%88%EB%8B%A4-1",
+        "https://aluminum.zncloud.pw/entry/%EB%82%B4-%EB%8C%93%EA%B8%80-%EC%B0%BE%EA%B8%B0-%EB%8B%A4%EC%9D%8C-%EB%82%B4%EA%B0%80-%EC%93%B4-%EB%8C%93%EA%B8%80-%ED%99%95%EC%9D%B8"
+      ],
+      "guide": {
+        "direction": "검색자는 오랫동안 잊고 있던 예금·보험금을 어디서 어떻게 조회하는지 구체 절차를 모른다. 고수 블로그 제목은 '손쉽게 확인할 수 있다?'는 질문형으로 끝나고 실제 조회 사이트명·절차를 안 준다. 조회 가능한 서비스명과 신청 순서, 필요한 본인확인 수단을 체크리스트로 주면 바로 찾아볼 수 있다.",
+        "searchTargets": [
+          "내가 잊고 싶은 두려움"
+        ],
+        "mustInclude": [
+          "숨은 자산 찾기 조회 가능 서비스명(확인 필요: 금융감독원 공지)",
+          "조회 가능한 자산 종류(휴면예금, 보험금, 증권 등) 구분표(확인 필요: 원문)",
+          "찾은 자산 환급 신청 절차(온라인/은행 방문, 확인 필요: 원문)"
+        ],
+        "mustAvoid": [
+          "채무·압류·개인회생 걱정과 혼동해 '압류될까' 식으로 엮지 말 것"
+        ],
+        "checkBefore": [
+          "숨은 자산 찾기 서비스명과 접속 경로 - 금융감독원·해당 서비스 공식 홈페이지",
+          "조회 가능한 자산 범위와 최신 변경사항 - 공식 공지"
+        ],
+        "solves": [
+          "오랫동안 안 찾은 예금·보험금을 어떻게 확인하나 모른다 → 조회 가능 서비스와 절차 정리",
+          "본인 인증은 어떻게 하나 모른다 → 필요한 인증 수단 안내",
+          "찾은 돈은 어떻게 돌려받나 모른다 → 환급 신청 절차 정리"
+        ],
+        "actionTitles": [
+          "숨은 자산 찾기로 잊은 예금·보험금 한번에 조회하는 법",
+          "잊고 있던 보험금·예금 숨은 자산 찾기 조회 방법 확인",
+          "숨은 자산 찾기 신청 순서, 예금·보험금 환급까지 정리"
+        ]
+      },
+      "at": "2026-11-17T05:22:58.223Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "회사가 폐업되면 직원들 퇴직금은 다받을수 ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40403&docId=493639782&answerNo=3&qb=64K06rCAIOyeiuqzoCDsnojsl4jqsbDrgpgg7Jik656cIOywvuyVhOqwgOyngA==",
+          "views": 870,
+          "answers": 3,
+          "askedAt": "2026.06.01"
+        },
+        {
+          "title": "개인회생 채권양도 통지서",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40106&docId=495089618&answerNo=4&qb=64K06rCAIOyeiuqzoCDsnojsl4jqsbDrgpgg7Jik656cIOywvuyVhOqwgOyngA==",
+          "views": 572,
+          "answers": 13,
+          "askedAt": "2026.09.09"
+        },
+        {
+          "title": "채무불이행자 등록",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40106&docId=495179764&answerNo=2&qb=64K06rCAIOyeiuqzoCDsnojsl4jqsbDrgpgg7Jik656cIOywvuyVhOqwgOyngA==",
+          "views": 134,
+          "answers": 3,
+          "askedAt": "2026.09.15"
+        }
+      ]
+    },
+    {
+      "id": "f8631036c69aa472",
+      "urls": [
+        "https://4050s.tistory.com/301",
+        "https://cc.productinsight.kr/95"
+      ],
+      "guide": {
+        "direction": "'33년 넘으면 기여금 안 내도 되나' 보다 실제 검색은 복지포털 로그인, 대출·사망조위금 신청, 지사 위치 같은 실무 민원에서 막힌다. 고수 글은 33년 면제 규정만 설명하고 끝나 정작 '어디서 조회·신청하는지'는 안 알려준다. 이 글은 33년 면제 기준표에 복지포털 접속 경로와 서울·대구지부 등 지사 찾기까지 한 번에 정리해 끝내준다.",
+        "searchTargets": [
+          "공무원연금관리공단 복지포털",
+          "공무원연금관리공단지사",
+          "공무원연금관리공단 퇴직금",
+          "공무원연금관리공단 대출"
+        ],
+        "mustInclude": [
+          "33년 재직기간 기준 기여금 납부 면제 규정 (확인 필요: 공무원연금공단 공지)",
+          "연금복지포털(gepco.or.kr) 로그인 후 재직기간·기여금 조회 메뉴 경로",
+          "서울지부·대구지부 등 전국 지사 위치 찾는 법",
+          "사망조위금·행복도약대출 등 복지포털 신청 전 보완서류 안내",
+          "33년 초과분이 퇴직 연금액 산정에 반영되는지 여부 (확인 필요: 공단 공지)"
+        ],
+        "mustAvoid": [
+          "공무원연금과 국민연금 계산 공식을 섞어서 설명하기",
+          "교원연금 등 특정직군 사례를 공무원연금 전체 규정처럼 일반화하기",
+          "사망조위금 지급 조건을 민간기업 조위금 규정과 혼동하기"
+        ],
+        "checkBefore": [
+          "33년 초과 재직자 기여금 면제·연금액 산정 최신 규정은 공무원연금공단 공식 공지에서 확인",
+          "지사별 관할 구역(서울지부·대구지부 등)은 공단 홈페이지 '지사 찾기'에서 확인",
+          "대출·사망조위금 신청 조건과 필요서류는 연금복지포털 공지사항에서 확인"
+        ],
+        "solves": [
+          "'33년 넘으면 기여금 그만 내도 되나' → 재직기간 33년 기준 면제 규정 표로 정리",
+          "'복지포털에 어떻게 들어가서 뭘 조회하나' → 로그인 후 재직기간·기여금 조회 경로 안내",
+          "'내 관할 지사가 어디인지' → 서울지부·대구지부 등 지사 찾는 법 안내"
+        ],
+        "actionTitles": [
+          "공무원연금관리공단 복지포털 로그인·재직기간 조회하는 법",
+          "공무원연금 33년 납부 면제 기준과 지사 찾는 법 총정리",
+          "공무원연금관리공단 대출·사망조위금 신청 전 꼭 확인할 것"
+        ]
+      },
+      "at": "2026-11-17T05:22:58.223Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "공무원연금공단 학자금 대출 질문이요!",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110503&docId=400059438&answerNo=1&qb=6rO166y07JuQ7Jew6riI6rSA66as6rO164uo",
+          "views": 2098,
+          "answers": 3,
+          "askedAt": "2021.09.15"
+        },
+        {
+          "title": "공무원연금공단 무주택기준에서 20m²이하의 ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60202&docId=386258952&answerNo=1&qb=6rO166y07JuQ7Jew6riI6rSA66as6rO164uo",
+          "views": 1186,
+          "answers": 1,
+          "askedAt": "2021.04.04"
+        },
+        {
+          "title": "공무원연금공단 입사 후 업무 환경은 어떤가....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1128&docId=493277565&answerNo=1&qb=6rO166y07JuQ7Jew6riI6rSA66as6rO164uo",
+          "views": 172,
+          "answers": 1,
+          "askedAt": "2026.05.06"
+        }
+      ]
+    },
+    {
+      "id": "206a3f6660459569",
+      "urls": [
+        "https://chamchi37.tistory.com/entry/2026-%EA%B5%AD%EA%B0%80%EA%B1%B4%EA%B0%95%EA%B2%80%EC%A7%84-%EB%8C%80%EC%83%81%EC%9E%90-%EC%A1%B0%ED%9A%8C-%EB%B0%A9%EB%B2%95-%EB%B0%8F-%EB%8C%80%EC%83%81-%EC%97%AC%EB%B6%80-%EC%B4%9D%EC%A0%95%EB%A6%AC",
+        "https://kinghell.tistory.com/entry/%ED%9C%B4%EC%A7%81%EC%9E%90-%EC%A7%81%EC%9E%A5%EC%9D%B8-%EA%B1%B4%EA%B0%95%EA%B2%80%EC%A7%84-%EA%B3%BC%ED%83%9C%EB%A3%8C-%EB%8C%80%EC%83%81-%EC%97%AC%EB%B6%80%EC%99%80-%EB%A9%B4%EC%A0%9C-%EC%8B%A0%EC%B2%AD-%EB%B0%A9%EB%B2%95"
+      ],
+      "guide": {
+        "direction": "'육아휴직 중인데도 건강검진 받아야 하나' '일반 휴직자는 과태료 대상인가'처럼 사례별로 헷갈려 검색하지만 질문마다 답이 엇갈려 끝을 못 낸다. 고수 글은 전체 대상자 기준만 설명하고 육아휴직자·일반휴직자·과태료 대상을 한 표로 비교하지 않는다. 이 글은 상황별(휴직 종류)로 대상 여부를 표로 정리하고 건강보험공단 대상자 조회 메뉴까지 짚어 끝내게 한다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "직장가입자 자격 유지 시 육아휴직자도 검진 대상에 포함된다는 기준",
+          "산업안전보건법 제43조에 따른 일반휴직자 검진 제외 가능 규정",
+          "국민건강보험공단 '건강검진 대상자 조회' 메뉴 접근 경로",
+          "휴직 종류별(육아휴직·일반휴직) 검진 대상 여부 비교표",
+          "미검진 과태료 부과 대상이 근로자인지 사업주인지 (확인 필요: 공단 공지)"
+        ],
+        "mustAvoid": [
+          "직장가입자 검진과 지역가입자 검진 대상 기준을 혼동해서 쓰기",
+          "육아휴직자와 일반휴직자를 같은 대상으로 뭉뚱그려 설명하기",
+          "과태료 부과 대상을 확인 없이 근로자 개인으로 단정하기"
+        ],
+        "checkBefore": [
+          "산업안전보건법 제43조 및 시행령상 휴직자 제외 규정 원문은 법제처에서 확인",
+          "본인 대상 여부는 국민건강보험공단 홈페이지 '건강검진대상조회' 메뉴에서 확인",
+          "과태료 부과 대상과 금액은 국민건강보험공단 공지사항에서 확인"
+        ],
+        "solves": [
+          "'육아휴직 중인데 건강검진 받아야 하나' → 직장가입자 자격 유지 시 대상 포함 규정 정리",
+          "'일반 휴직자도 검진 대상인가' → 산업안전보건법 43조 기준 제외 가능 여부 정리",
+          "'내가 올해 대상인지 모르겠다' → 건강보험공단 대상자 조회 메뉴 경로 안내"
+        ],
+        "actionTitles": [
+          "국민건강보험공단 건강검진 대상자 조회하는 법 총정리",
+          "육아휴직자·휴직자 건강검진 대상 여부 확인하는 법",
+          "직장인 건강검진 비대상자 과태료 피하는 법 확인하기"
+        ]
+      },
+      "at": "2026-11-17T05:22:58.223Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "육아휴직 중 임신, 직장건강검진 여부",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100401&docId=478396912&answerNo=1&qb=7Zy07KeB7J6QIOyngeyepeyduCDqsbTqsJXqsoDsp4Qg6rO87YOc66OMIOyXrOu2gA==",
+          "views": 2357,
+          "answers": 2,
+          "askedAt": "2024.11.27"
+        },
+        {
+          "title": "직장인 건강검진 휴직자 제외해도 되나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=709&docId=459755164&answerNo=1&qb=7Zy07KeB7J6QIOyngeyepeyduCDqsbTqsJXqsoDsp4Qg6rO87YOc66OMIOyXrOu2gA==",
+          "views": 1749,
+          "answers": 1,
+          "askedAt": "2023.12.06"
+        },
+        {
+          "title": "육아휴직자도 건강검진 받아야하나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100401&docId=488415286&answerNo=4&qb=7Zy07KeB7J6QIOyngeyepeyduCDqsbTqsJXqsoDsp4Qg6rO87YOc66OMIOyXrOu2gA==",
+          "views": 1729,
+          "answers": 5,
+          "askedAt": "2025.08.29"
+        }
+      ]
+    },
+    {
+      "id": "decb01b6623afc2a",
+      "urls": [
+        "https://money-phd.com/1999",
+        "https://semoti.tistory.com/entry/2027-%EC%88%98%EB%8A%A5-%EC%8B%9C%EA%B0%84%ED%91%9C-%EC%A4%80%EB%B9%84%EB%AC%BC%EA%B3%BC-%EC%9E%85%EC%8B%A4-%EC%8B%9C%EA%B0%81-%EC%B4%9D%EC%A0%95%EB%A6%AC"
+      ],
+      "guide": {
+        "direction": "'수능 왜 연기 안 하냐' 보다 실제로는 '탐구 시간이 왜 40분으로 늘었냐' '수학이 왜 100분이냐'처럼 교시별 시간 배치 자체를 못 외워 검색한다. 고수 글은 연기 여부·교통통제 위주라 탐구 과목 수·한국사 순서·시계 반입 같은 세부 시간표는 비워둔다. 이 글은 교시별 시간표 표와 탐구 선택과목별 차이, 입실시간까지 한 번에 확인시켜 끝낸다.",
+        "searchTargets": [
+          "2027 수능 시간표",
+          "수능 시간표 탐구",
+          "수능 시간표 한국사",
+          "수능 시간표 시계"
+        ],
+        "mustInclude": [
+          "2027학년도 수능 교시별 시간표(국어~제2외국어/한문) 표 (확인 필요: 평가원 발표)",
+          "탐구영역 과목당 시험시간 40분으로 늘어난 변경사항 (확인 필요: 평가원 공지)",
+          "수학 10시 30분~12시 10분, 100분 시간 배치",
+          "탐구 1과목(한국사만)만 응시 시 남은 시간 처리 방식",
+          "시험장 입실 마감 시각과 시계(스마트워치 제외) 반입 규정"
+        ],
+        "mustAvoid": [
+          "2026수능·2027수능·2028수능 학년도 표기를 섞어서 올해/작년 시간표처럼 쓰기",
+          "탐구 2과목 선택자와 1과목(한국사만) 선택자의 시간표를 같은 것으로 설명하기",
+          "수능 연기·지진 등 미확인 소문을 사실처럼 단정하기"
+        ],
+        "checkBefore": [
+          "2027학년도 수능 교시별 입실·시작·종료 시간은 한국교육과정평가원 수능 시행계획 공식 발표로 확인",
+          "탐구영역 시간이 40분으로 바뀌었는지와 적용 학년도는 평가원 보도자료로 재확인",
+          "교통통제 시간·구간은 해당 지역 경찰청·시험장 공지로 확인"
+        ],
+        "solves": [
+          "'탐구 시간이 왜 40분으로 늘었나' → 교시별 변경 시간표로 정리",
+          "'수학이 왜 100분으로 가장 기냐' → 교시별 시간 배치 표로 한눈에 정리",
+          "'탐구 한 과목만 봐도 되나, 그럼 시간표는' → 선택 과목 수별 시간표 차이 정리"
+        ],
+        "actionTitles": [
+          "2027 수능 시간표 교시별 총정리 탐구 40분 변경 확인",
+          "수능 시간표 탐구 한국사 순서까지 한눈에 확인하는 법"
+        ]
+      },
+      "at": "2026-11-17T05:22:58.223Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "수능시간표.",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110408&docId=75749969&answerNo=4&qb=7IiY64ql7Iuc6rCE7ZGc",
+          "views": 8651,
+          "answers": 4,
+          "askedAt": "2026.11.13"
+        },
+        {
+          "title": "왜 수능 시간표 수학이 100분으로",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1104&docId=314473484&answerNo=2&qb=7IiY64ql7Iuc6rCE7ZGc",
+          "views": 1521,
+          "answers": 2,
+          "askedAt": "2026.10.24"
+        },
+        {
+          "title": "수능 시간표",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110413&docId=485994476&answerNo=7&qb=7IiY64ql7Iuc6rCE7ZGc",
+          "views": 900,
+          "answers": 8,
+          "askedAt": "2026.10.24"
+        }
+      ]
+    },
+    {
+      "id": "568e967f56ba2a6a",
+      "urls": [
+        "https://insurancekr.com/%ea%b0%9c%ec%9d%b8%ec%82%ac%ec%97%85%ec%9e%90-%ec%9e%90%eb%8f%99%ec%b0%a8%eb%b3%b4%ed%97%98-%eb%8b%a4%ec%9d%b4%eb%a0%89%ed%8a%b8-%eb%b9%84%ea%b5%90/",
+        "https://info-247.kr/blog/loan-insurance/direct-car-insurance-signup/"
+      ],
+      "guide": {
+        "direction": "지식인에는 다이렉트가 주말에도 자동가입되는지, 설계사에서 다이렉트로 바꿀 때 블랙박스 사진이 자동 반영되는지, 타사로 바꿔도 사고이력이 따라오는지 같은 구체적 막힘이 몰려 있다. 고수 제목은 '보험다모아 비교 후 같은 조건 견적'까지만 짚고, 개인사업자가 업무용으로 차를 쓸 때 특약이 일반 다이렉트와 달라지는지는 비워둔다. 보험다모아 비교 → 자손·자상 특약 선택 → 전환 시 확인사항까지 순서표로 끝낸다.",
+        "searchTargets": [
+          "다이렉트자동차보험비교견적사이트",
+          "다이렉트자동차보험비교견적",
+          "다이렉트자동차보험비교"
+        ],
+        "mustInclude": [
+          "보험다모아에서 비교 후 동일 조건으로 각 보험사 다이렉트 견적 받는 순서",
+          "다이렉트 가입은 자동진행 시 주말도 가능하나 문제 발생 시 평일 업무시간만 가능",
+          "자기손해 vs 자기신체사고(자상) 특약 차이와 가격차 (확인 필요: 각 보험사 특약 비교표)",
+          "설계사→다이렉트 전환 시 블랙박스 사진 등록 자동반영 여부는 보험사별로 다름",
+          "타사로 다이렉트 변경해도 사고이력은 그대로 승계됨"
+        ],
+        "mustAvoid": [
+          "개인사업자 업무용 차량 특약을 일반 다이렉트 조건과 동일하게 안내하지 않기(용도 다르면 조건 다름, 확인 필요)",
+          "특정 보험사만 추천해 광고성 글처럼 보이지 않게 하기"
+        ],
+        "checkBefore": [
+          "보험다모아 공식 비교 사이트에서 현재 특약·할인율 기준 재확인",
+          "각 보험사 다이렉트 공식 홈페이지에서 개인/업무용 특약 여부 확인"
+        ],
+        "solves": [
+          "다이렉트 가입이 주말에도 되는지 → 자동가입 가능 여부와 평일 업무시간 제한 조건 정리",
+          "설계사→다이렉트 전환시 사진 자동반영 여부 → 보험사별 차이 안내",
+          "타사로 다이렉트 변경해도 사고이력이 따라오는지 → 사고이력 승계 원칙 설명"
+        ],
+        "actionTitles": [
+          "다이렉트자동차보험비교견적사이트 순서대로 개인사업자 보험료 비교하기",
+          "다이렉트자동차보험비교견적, 보험다모아로 조건 맞춰 견적받는 법",
+          "다이렉트자동차보험비교, 평일 가입 조건까지 확인하고 가입하는 법"
+        ]
+      },
+      "at": "2026-11-17T05:22:58.223Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "자동차보험 다이렉트 가입",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=401030202&docId=495377527&answerNo=4&qb=64uk7J2066CJ7Yq47J6Q64+Z7LCo67O07ZeY",
+          "views": 318,
+          "answers": 5,
+          "askedAt": "2026.10.01"
+        },
+        {
+          "title": "다이렉트 자동차보험",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=401030202&docId=495152452&answerNo=4&qb=64uk7J2066CJ7Yq47J6Q64+Z7LCo67O07ZeY",
+          "views": 263,
+          "answers": 4,
+          "askedAt": "2026.09.14"
+        },
+        {
+          "title": "자동차보험 db다이렉트인데 주행거리 만기환....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=401030202&docId=495732193&answerNo=2&qb=64uk7J2066CJ7Yq47J6Q64+Z7LCo67O07ZeY",
+          "views": 255,
+          "answers": 4,
+          "askedAt": "2026.10.28"
+        }
+      ]
+    },
+    {
+      "id": "7048490223a57ed0",
+      "urls": [
+        "https://flameleaf.tistory.com/entry/CCNA-%EC%9E%90%EA%B2%A9%EC%A6%9D-%EC%B7%A8%EB%93%9D-%EA%B0%80%EC%9D%B4%EB%93%9C-%EB%82%9C%EC%9D%B4%EB%8F%84%EB%B6%80%ED%84%B0-%ED%95%A9%EA%B2%A9-%EC%A0%84%EB%9E%B5%EA%B9%8C%EC%A7%80-2026%EB%85%84-%EC%99%84%EC%A0%84-%EC%A0%95%EB%A6%AC",
+        "https://money-magazine.co.kr/%ed%83%9d%ec%8b%9c%ec%9a%b4%ec%a0%84%ec%9e%90%ea%b2%a9%ec%8b%9c%ed%97%98/",
+        "https://money-magazine.co.kr/%eb%b2%84%ec%8a%a4%ec%9a%b4%ec%a0%84%ec%9e%90%ea%b2%a9%ec%8b%9c%ed%97%98/"
+      ],
+      "guide": {
+        "direction": "지식인에는 CCNA를 덤프로만 따도 되는지, 비전공자도 가능한지, 유효기간이 지나면 어떻게 되는지 같은 질문이 몰려 있다. 고수 제목은 '난이도부터 합격전략'을 내세우지만 접수 절차·비용·3년 재인증 조건 같은 수치는 비워둔다. 접수부터 교재 선택, 발급, 재인증까지 단계별로 정리해 끝낸다.",
+        "searchTargets": [
+          "ccna 자격증 비용",
+          "ccna 자격증 난이도",
+          "ccna 자격증 접수",
+          "ccna 자격증 발급"
+        ],
+        "mustInclude": [
+          "피어슨뷰 접수 절차와 CCNA 시험접수 단계 (확인 필요: 시스코 공식 사이트)",
+          "응시료·교재·학원 비용 구체 금액 (확인 필요: 피어슨뷰 공시가)",
+          "자격증 유효기간 3년, 재인증 시 재시험 필요",
+          "CCNP는 응시자격 제한 없음, CCNA 선행 여부와 무관",
+          "덤프만으로 합격은 가능하나 실무역량과는 괴리가 있다는 지적"
+        ],
+        "mustAvoid": [
+          "덤프 사이트 링크나 구체적 이용법 안내(윤리·시험 규정 위반 소지)",
+          "특정 학원·교재만 홍보하듯 쓰지 않기",
+          "정보처리기사 등 다른 IT 자격증과 응시조건 혼동하지 않기"
+        ],
+        "checkBefore": [
+          "시스코 공식 사이트에서 최신 커리큘럼·유효기간 변경 여부 확인",
+          "피어슨뷰 접수 사이트에서 현재 응시료·시험일정 확인"
+        ],
+        "solves": [
+          "CCNA 덤프로만 공부해도 되는지 → 실무역량과 자격증 취득의 차이, 덤프의 한계를 짚어준다",
+          "CCNA 유효기간과 재인증 조건이 궁금함 → 3년 유효, 재인증시 재시험 필요 정리",
+          "CCNP 응시 전에 CCNA가 필요한지 → CCNP는 응시자격 제한 없음을 안내"
+        ],
+        "actionTitles": [
+          "ccna 자격증 접수 절차부터 비용까지 한번에 확인하는 법",
+          "ccna 자격증 난이도와 교재, 덤프 말고 제대로 준비하는 법",
+          "ccna 자격증 발급과 유효기간 재인증까지 정리해서 확인하기"
+        ]
+      },
+      "at": "2026-11-17T05:22:58.223Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "CCNA 자격증 취득",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=11004&docId=142189685&answerNo=4&qb=Y2NuYeyekOqyqeymnQ==",
+          "views": 5070,
+          "answers": 8,
+          "askedAt": "2011.12.24"
+        },
+        {
+          "title": "Ccna 자격증",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40608&docId=469101742&answerNo=1&qb=Y2NuYeyekOqyqeymnQ==",
+          "views": 746,
+          "answers": 3,
+          "askedAt": "2024.05.04"
+        },
+        {
+          "title": "CCNA자격증에 대해서.",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40608&docId=360927345&answerNo=1&qb=Y2NuYeyekOqyqeymnQ==",
+          "views": 186,
+          "answers": 3,
+          "askedAt": "2020.06.27"
+        }
+      ]
+    },
+    {
+      "id": "47a912822345093d",
+      "urls": [
+        "https://solang.co.kr/%ec%88%98%eb%8a%a5-%ec%8b%9c%ed%97%98%ec%9e%a5-%eb%82%a0%ec%94%a8-%ec%9a%b0%eb%a6%ac-%ed%95%99%ea%b5%90%eb%8a%94-%ec%96%b4%eb%94%94%ec%84%9c-%ed%99%95%ec%9d%b8%ed%95%a0%ea%b9%8c%ec%9a%94/",
+        "https://lsy7651.tistory.com/entry/suneung-exam-sharp-computer-pen-omr"
+      ],
+      "guide": {
+        "direction": "지식인에는 왜 재학고가 아닌 다른 학교로 시험장이 배정되는지, 예비소집일에 시험실 내부까지 볼 수 있는지 같은 질문이 몰려 있다. 고수 제목은 '날씨를 어디서 확인하나'만 짚고, 시험지구 배정 기준이나 지역별 시험장 명단 확인법은 다루지 않는다. 시험지구 배정 기준 → 우리 학교 시험장 찾기 → 그 주소 기준 날씨 확인까지 순서대로 끝낸다.",
+        "searchTargets": [
+          "수능 시험장 배정 발표",
+          "수능 시험장 배정 기준",
+          "2026 수능 시험장소",
+          "대구 수능시험장"
+        ],
+        "mustInclude": [
+          "시험장은 거주지·재학고와 무관하게 관할 교육청 시험지구 전체 수용인원 기준으로 배정",
+          "예비소집일에 시험장 위치는 확인 가능하나 시험실 내부는 입장 불가",
+          "기상청 동네예보로 해당 시험장 주소 기준 날씨 확인하는 방법 (확인 필요: 기상청 공식 페이지)",
+          "지역별(대구·대전·부산·광주) 시험장 명단 확인 경로 (확인 필요: 각 교육청 공고)",
+          "반입금지물품 기준은 '건물 내부로의 반입·소지' — 외부 보관은 별개"
+        ],
+        "mustAvoid": [
+          "특정 학교·수험생 개인정보를 추측해서 쓰지 않기",
+          "작년 날씨 패턴으로 올해 날씨를 단정하지 않기",
+          "다른 시험지구 지역의 시험장 정보를 섞어 안내하지 않기"
+        ],
+        "checkBefore": [
+          "한국교육과정평가원·관할 교육청의 수능 시험장 배정 공고 확인",
+          "기상청 동네예보 공식 페이지에서 시험장 주소 기준 예보 확인"
+        ],
+        "solves": [
+          "우리 학교가 아닌 다른 학교로 배정되는 이유 → 거주지·재학고와 무관한 시험지구 배정 기준 설명",
+          "예비소집일에 시험실 안까지 볼 수 있는지 → 건물 위치만 확인 가능, 내부 입장 불가 안내",
+          "시험장 날씨를 학교 주소 기준으로 확인하는 방법 → 기상청 동네예보 활용법 안내"
+        ],
+        "actionTitles": [
+          "수능 시험장 배정 기준과 발표, 우리 학교 확인하는 법",
+          "2026 수능 시험장소 찾고 날씨까지 한번에 확인하는 법",
+          "대구 수능시험장 등 지역별 배정 발표 바로 확인하는 법"
+        ]
+      },
+      "at": "2026-11-17T05:22:58.223Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "수능 시험 장소",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110408&docId=495603595&answerNo=3&qb=7IiY64ql7Iuc7ZeY7J6l",
+          "views": 412,
+          "answers": 6,
+          "askedAt": "2026.10.19"
+        },
+        {
+          "title": "수능 고사장",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=11040303&docId=495761848&answerNo=1&qb=7IiY64ql7Iuc7ZeY7J6l",
+          "views": 202,
+          "answers": 2,
+          "askedAt": "2026.10.30"
+        },
+        {
+          "title": "수능 시험장 반입 금지 물품 관련하여..",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110408&docId=495951554&answerNo=1&qb=7IiY64ql7Iuc7ZeY7J6l",
+          "views": 112,
+          "answers": 1,
+          "askedAt": "2026.11.14"
+        }
+      ]
+    },
+    {
+      "id": "30fa448f061c79b6",
+      "urls": [
+        "https://sweetonion1005.tistory.com/entry/%EC%97%AC%EC%84%B1-%EB%A1%B1%ED%8C%A8%EB%94%A9-%EC%B6%94%EC%B2%9C-2026-%EA%B2%A8%EC%9A%B8-%ED%8C%A8%EB%94%A9-%ED%8A%B8%EB%A0%8C%EB%93%9C-%EA%B2%BD%EB%9F%89%C2%B7%ED%95%98%EC%9D%B4%EB%B8%8C%EB%A6%AC%EB%93%9C-%EC%84%A0%ED%83%9D-%EA%B0%80%EC%9D%B4%EB%93%9C"
+      ],
+      "guide": {
+        "direction": "검색자는 '여성 롱패딩이 아직 트렌드인지'와 '숏패딩과 뭐가 다른지' 혼란 상태에서 들어온다. 고수 글 제목은 '가이드'로만 끝나 k2·몽클레어·노스페이스 등 자동완성에 뜨는 8개 브랜드를 직접 비교해주지 않는다. 브랜드별 비교표와 경량·하이브리드 구분 기준, 코디 팁까지 주면 글에서 선택이 끝난다.",
+        "searchTargets": [
+          "여성 롱패딩 추천",
+          "k2 여성 롱패딩",
+          "몽클레어 여성 롱패딩",
+          "노스페이스 여성 롱패딩"
+        ],
+        "mustInclude": [
+          "자동완성에 있는 8개 브랜드(k2·몽클레어·노스페이스·디스커버리·네파·아이더·코오롱·블랙야크) 비교표",
+          "경량 vs 하이브리드 충전재 차이와 각각 어울리는 체형·활동 기준",
+          "슬릿스커트·미니백 등 롱패딩 코디 조합 예시",
+          "브랜드별 가격대 (확인 필요: 각 브랜드 공식몰 2026 겨울 신상 가격)"
+        ],
+        "mustAvoid": [
+          "특정 연예인(아이유 등) 협찬·사생활 추측성 서술",
+          "'남자 숏패딩·여자 롱패딩' 같은 성별 구분을 단정적 유행 법칙처럼 서술",
+          "단종된 특정 연식(21년식) 제품을 현재 판매 상품처럼 혼동"
+        ],
+        "checkBefore": [
+          "각 브랜드 공식몰에서 2026 겨울 시즌 신상 라인업·가격 확인"
+        ],
+        "solves": [
+          "여성 롱패딩이 올해도 유행인지 헷갈리는 문제 → 2026 경량·하이브리드 트렌드로 정리",
+          "브랜드가 너무 많아 못 고르는 문제 → 8개 브랜드 비교표로 바로 선택 가능하게 정리",
+          "롱패딩이 둔해 보이는 코디 문제 → 슬릿스커트·미니백 조합 팁 제공"
+        ],
+        "actionTitles": [
+          "여성 롱패딩 추천 브랜드 비교, 2026 겨울 고르는 법",
+          "k2·몽클레어·노스페이스 여성 롱패딩 가격 비교하기"
+        ]
+      },
+      "at": "2026-11-17T05:22:58.223Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "요즘 분위기가 남자는 숏패딩 여자는 롱패딩....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=814&docId=406326303&answerNo=6&qb=7Jes7ISxIOuhse2MqOuUqSDqsqjsmrgg7Yyo65SpIO2KuOugjOuTnA==",
+          "views": 1304,
+          "answers": 6,
+          "askedAt": "2021.12.02"
+        },
+        {
+          "title": "블랙야크 아이유 21년식 아이보리 패딩",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60215&docId=495853120&answerNo=1&qb=7Jes7ISxIOuhse2MqOuUqSDqsqjsmrgg7Yyo65SpIO2KuOugjOuTnA==",
+          "views": 139,
+          "answers": 1,
+          "askedAt": "2026.11.06"
+        },
+        {
+          "title": "여자 롱패딩",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=5040103&docId=490643262&answerNo=2&qb=7Jes7ISxIOuhse2MqOuUqSDqsqjsmrgg7Yyo65SpIO2KuOugjOuTnA==",
+          "views": 138,
+          "answers": 3,
+          "askedAt": "2025.12.08"
+        }
+      ]
+    },
+    {
+      "id": "d00247b1b221f6c6",
+      "urls": [
+        "https://wellsy.tistory.com/entry/%EC%88%98%EB%A9%B4%EB%AC%B4%ED%98%B8%ED%9D%A1%EC%A6%9D-%EB%8B%B9%EB%87%A8%EB%B3%91-%EC%9C%84%ED%97%98-%EB%86%92%EC%9D%B4%EB%8A%94-%EC%9D%B4%EC%9C%A0%EC%99%80-%EC%9E%90%EA%B0%80%EC%A7%84%EB%8B%A8-%EB%B0%8F-%EC%96%91%EC%95%95%EA%B8%B0-%EC%B9%98%EB%A3%8C-%EA%B8%B0%EC%A4%80"
+      ],
+      "guide": {
+        "direction": "검색자는 만성 피로·졸림을 당뇨병이나 갑상선 문제로 오해해 지식인에 올리지만, 수면무호흡증과 당뇨병의 연결 기전은 아무 답변도 제대로 짚지 못한다. 고수 블로그 제목은 '위험 높이는 이유'만 언급하고 자가진단 체크리스트와 양압기 치료 기준(보험 적용 조건)까지는 풀어주지 않는다. 연관 기전, 자가진단 체크리스트, 양압기 급여 기준을 한 글에 묶으면 검색이 끝난다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "수면무호흡증이 인슐린저항성을 높이는 연관 기전 (확인 필요: 질병관리청 국가건강정보포털)",
+          "코골이·주간졸림·목둘레 등 자가진단 체크리스트",
+          "수면다원검사로 넘어가는 절차 설명",
+          "양압기 치료 건강보험 적용 기준 (확인 필요: 건강보험심사평가원 고시)"
+        ],
+        "mustAvoid": [
+          "자가진단 체크리스트만으로 당뇨병을 확진할 수 있는 것처럼 서술",
+          "양압기를 일반 코골이 방지 기구와 같은 것으로 혼동",
+          "갑상선기능저하증 등 다른 질환 증상과 수면무호흡증 증상을 뭉쳐서 서술"
+        ],
+        "checkBefore": [
+          "질병관리청 국가건강정보포털에서 수면무호흡증-당뇨병 연관 기전 확인",
+          "건강보험심사평가원 고시에서 양압기 급여(보험 적용) 기준 확인"
+        ],
+        "solves": [
+          "수면무호흡증과 당뇨병이 왜 연결되는지 모르는 문제 → 인슐린저항성 연관 기전 정리(확인 필요)",
+          "병원 가기 전 스스로 의심할 방법이 없는 문제 → 자가진단 체크리스트 제공",
+          "양압기가 보험이 되는지 모르는 문제 → 치료 적용 기준 정리(확인 필요)"
+        ],
+        "actionTitles": [
+          "수면무호흡증 자가진단 체크리스트로 당뇨 위험 확인하기",
+          "수면무호흡증 양압기 치료 기준, 보험 적용 확인하는 법"
+        ]
+      },
+      "at": "2026-11-17T05:22:58.223Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "수전증...",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70107&docId=147593384&answerNo=1&qb=7IiY66m066y07Zi47Z2h7KadIOuLueuHqOuzkSDsnITtl5gg64aS7J20IOyekOqwgOynhOuLqA==",
+          "views": 7004,
+          "answers": 2,
+          "askedAt": "2012.03.14"
+        },
+        {
+          "title": "목디스크 증상좀 알려주세요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70106&docId=145579221&answerNo=1&qb=7IiY66m066y07Zi47Z2h7KadIOuLueuHqOuzkSDsnITtl5gg64aS7J20IOyekOqwgOynhOuLqA==",
+          "views": 6990,
+          "answers": 2,
+          "askedAt": "2012.02.13"
+        },
+        {
+          "title": "청소년 갑상선기능저하증",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=7010106&docId=403576535&answerNo=2&qb=7IiY66m066y07Zi47Z2h7KadIOuLueuHqOuzkSDsnITtl5gg64aS7J20IOyekOqwgOynhOuLqA==",
+          "views": 2129,
+          "answers": 6,
+          "askedAt": "2021.10.26"
+        }
+      ]
+    },
+    {
+      "id": "04a3649808a95f5b",
+      "urls": [
+        "https://on.sano.co.kr/%ea%b4%8c-12%ec%9b%94-%eb%82%a0%ec%94%a8-%ed%95%9c%ec%97%ac%eb%a6%84-%ec%88%98%ec%a4%80-%ea%b1%b4%ea%b8%b0-%ec%b4%88%ec%9e%85-%eb%82%a0%ec%94%a8%ec%99%80-%ec%98%b7%ec%b0%a8%eb%a6%bc-%ec%a0%95%eb%a6%ac/"
+      ],
+      "guide": {
+        "direction": "지식인에 '괌 12월 날씨에 맞는 옷차림과 필수 준비물'을 묻는 실제 질문이 있고, 답변은 '한국 한여름과 비슷하고 습도 70~75%'까지만 알려준다. 고수 블로그 제목은 '건기 초입 날씨'라고만 하고 낮·밤 옷차림 구분이나 짐 체크리스트까지는 안 풀어준다. 기온·습도 수치와 낮밤 옷차림, 준비물 체크리스트를 한 번에 주면 짐 싸기가 끝난다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "평균 습도 70~75% 수준이라는 지식인 답변 근거",
+          "한국 한여름과 비슷한 기온이라는 비교",
+          "낮·밤 옷차림 구분 체크리스트",
+          "12월 괌 평균 기온 수치 (확인 필요: 괌 기상청 NWS Guam 공식 자료)",
+          "건기 초입 필수 준비물(우산·우비 등, 확인 필요: 최신 여행 공식 자료)"
+        ],
+        "mustAvoid": [
+          "'건기 초입'을 비 전혀 안 오는 완전 건기처럼 과장",
+          "다낭 등 건기 시즌이 다른 동남아 여행지와 괌 날씨를 혼동"
+        ],
+        "checkBefore": [
+          "괌 기상청(NWS Guam) 또는 관광청 공식 자료에서 12월 평균 기온·강수량 확인",
+          "최신 여행 후기·공식 자료에서 건기 초입 옷차림 품목 확인"
+        ],
+        "solves": [
+          "괌 12월에 뭘 입어야 할지 모르는 문제 → 낮밤 옷차림 체크리스트로 정리",
+          "건기인데 비가 오는지 헷갈리는 문제 → 습도 수치와 건기 초입 특성으로 설명"
+        ],
+        "actionTitles": [
+          "괌 12월 날씨 옷차림, 건기 초입 체크리스트로 준비하기",
+          "괌 12월 평균 습도 70~75%, 옷차림 정리하는 법",
+          "괌 12월 여행 준비물과 옷차림 한번에 확인하기"
+        ]
+      },
+      "at": "2026-11-17T05:22:58.223Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "1~2월에 가기 좋은 해외여행지 BEST5 추천 부탁....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=90105&docId=490847055&answerNo=3&qb=64Kg7JSoIO2VnOyXrOumhCDsiJjspIAg6rG06riwIOy0iOyehQ==",
+          "views": 1078,
+          "answers": 5,
+          "askedAt": "2025.12.19"
+        },
+        {
+          "title": "괌 12월 날씨에 맞는 옷차림과 필수 준비물은 ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=815&docId=490709341&answerNo=3&qb=64Kg7JSoIO2VnOyXrOumhCDsiJjspIAg6rG06riwIOy0iOyehQ==",
+          "views": 152,
+          "answers": 3,
+          "askedAt": "2025.12.11"
+        }
+      ]
+    },
+    {
+      "id": "ed99096e5c88e19d",
+      "urls": [
+        "https://life.sano.co.kr/%eb%8b%a4%ec%9d%b4%ec%86%8c-%ec%98%b7%ec%86%94-%ed%95%98%eb%82%98%eb%a1%9c-%ea%b2%a8%ec%9a%b8-%eb%8b%88%ed%8a%b8-%ec%bd%94%ed%8a%b8-%eb%a8%bc%ec%a7%80-%ea%b4%80%eb%a6%ac-%eb%81%9d%eb%82%b4%eb%8a%94/"
+      ],
+      "guide": {
+        "direction": "검색자는 다이소 옷솔이 매장 어느 코너에 있고 가격이 얼마인지, 니트·코트 보풀과 먼지 제거에 실제 효과가 있는지가 막힌 지점이다. 고수 글은 '관리 끝내는 법'이라고만 썼지 옷솔 재질별 용도 구분과 매장 재고 확인법은 못 풀었다. 매장 코너 안내·재질 비교표·용도별 사용법을 정리하면 이 글에서 끝난다.",
+        "searchTargets": [
+          "다이소 옷솔",
+          "다이소 옷솔 코트",
+          "다이소 옷솔 위치",
+          "다이소 옷솔 브러쉬"
+        ],
+        "mustInclude": [
+          "다이소 매장 내 옷솔 진열 코너 (확인 필요: 다이소 매장/공식몰)",
+          "옷솔 가격 (확인 필요: 다이소 공식몰)",
+          "솔 재질(돈모·나일론 등)별 니트/코트 적합도 구분",
+          "옷솔로 되는 '먼지 제거'와 안 되는 '보풀 제거'의 차이",
+          "실제 사용 후기 및 효과 범위"
+        ],
+        "mustAvoid": [
+          "캐시미어 등 민감한 니트 소재에 무조건 안전하다고 단정하는 것",
+          "옷솔과 전용 보풀제거기를 같은 기능으로 혼동시키는 서술"
+        ],
+        "checkBefore": [
+          "다이소 공식 홈페이지/앱에서 실제 상품명·가격·재고 확인"
+        ],
+        "solves": [
+          "다이소 옷솔이 매장 몇 번 코너에 있는지 모름 → 진열 코너 위치 안내",
+          "옷솔로 니트 보풀까지 제거되는지 궁금 → 보풀제거기와의 역할 구분표",
+          "코트 먼지 제거에 실제 효과가 있는지 후기 궁금 → 사용법과 효과 범위 정리"
+        ],
+        "actionTitles": [
+          "다이소 옷솔 후기로 보풀 제거 효과 확인하는 법",
+          "다이소 옷솔 브러쉬로 니트 코트 먼지 관리하는 법"
+        ]
+      },
+      "at": "2026-11-17T05:22:58.223Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "ea89b94f83550a80",
+      "urls": [
+        "https://muramara.com/entry/%ED%91%B8%EB%A5%B8%EA%B8%B8-11%EC%9B%9420%EC%9D%BC-%EA%B3%B5%EA%B0%9C-%EC%86%90%EC%84%9D%EA%B5%AC-%ED%95%9C%EC%9D%BC-%ED%98%95%EC%82%AC-%EA%B3%B5%EC%A1%B0-%EA%B4%80%EC%A0%84%ED%8F%AC%EC%9D%B8%ED%8A%B8"
+      ],
+      "guide": {
+        "direction": "검색자는 '푸른길' 정확한 공개일시와 어디서 볼 수 있는지, 손석구·나가야마 에이타가 맡은 한일 형사 공조 설정이 구체적으로 어떤 내용인지 막혀 있다. 고수 글은 '관전포인트'라고만 던졌지 공개일시·플랫폼·배우 역할 매칭은 못 풀었다. 공개일시 표와 역할 매칭표로 정리하면 이 글에서 궁금증이 끝난다.",
+        "searchTargets": [
+          "푸른길 공개일"
+        ],
+        "mustInclude": [
+          "정확한 공개일시 (11월20일, 확인 필요: 넷플릭스 공식)",
+          "공개 플랫폼 (확인 필요: 넷플릭스 공식)",
+          "손석구·나가야마 에이타 각 배역(서울경찰청 형사 등) 설정",
+          "선공개·티저 공개 시점 (확인 필요: 원문 기사)",
+          "서울과 도쿄 형사가 충돌하는 핵심 줄거리 설정"
+        ],
+        "mustAvoid": [
+          "비슷한 한일 공조 수사극과 설정을 혼동시키는 서술",
+          "배우 간 실제 호흡·사이에 대한 사생활 추측"
+        ],
+        "checkBefore": [
+          "넷플릭스 공식 계정/페이지에서 공개일시와 시간대 확인",
+          "원문 기사에서 티저 공개일과 줄거리 설정 재확인"
+        ],
+        "solves": [
+          "정확한 공개일시가 언제인지 헷갈림 → 공식 공개일시 정리",
+          "한일 형사 공조 설정이 어떤 내용인지 궁금 → 배우·역할 매칭표 제공",
+          "티저 보고 긴장감 느낀 반응이 공통적인지 궁금 → 시청자 반응 요약"
+        ],
+        "actionTitles": [
+          "푸른길 공개일 확인하고 한일 형사 공조 설정 정리",
+          "푸른길 공개일 손석구·나가야마 에이타 역할 설정 비교",
+          "푸른길 공개일 선공개 티저로 본 반응 확인하는 법"
+        ]
+      },
+      "at": "2026-11-17T05:22:58.223Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "새 티저 본 소감, 저만 긴장감 느꼈나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=111004&docId=495701583&answerNo=1&qb=7ZG466W46ri4IOqzteqwnCDshpDshJ3qtawg7ZWc7J28IO2YleyCrA==",
+          "views": 29,
+          "answers": 1,
+          "askedAt": "2026.10.26"
+        },
+        {
+          "title": "'푸른길' 공개 임박! 한일 형사 수사, 주변 반....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=71104&docId=495713900&answerNo=1&qb=7ZG466W46ri4IOqzteqwnCDshpDshJ3qtawg7ZWc7J28IO2YleyCrA==",
+          "views": 73,
+          "answers": 1,
+          "askedAt": "2026.10.27"
+        }
+      ]
+    },
+    {
+      "id": "8e05855ac2cae9aa",
+      "urls": [
+        "https://money-phd.com/2006"
+      ],
+      "guide": {
+        "direction": "검색자는 장동혁이 한동훈 장인상에 조문한 정확한 날짜·장소와 조문 이유, 그리고 '조작징계' 논란이 조문과 실제로 무슨 관계인지가 막힌 지점이다. 고수 글은 '조문 이유는?'이라고 질문만 던졌지 날짜·장소·조문자 명단 같은 확인된 사실은 못 정리했다. 조문 사실관계와 조작징계 논란을 시점별로 분리해 표로 정리하면 이 글에서 끝난다.",
+        "searchTargets": [
+          "한동훈 장인상"
+        ],
+        "mustInclude": [
+          "장인상 발생 및 조문 날짜 (확인 필요: 원문 기사)",
+          "조문 장소 (확인 필요: 원문 기사)",
+          "조문자 명단(장동혁 등) (확인 필요: 원문 기사)",
+          "'조작징계' 논란의 핵심 쟁점 요약 (확인 필요: 원문 기사)",
+          "장동혁이 밝힌 조문 이유 (확인 필요: 당사자 발언/공지)"
+        ],
+        "mustAvoid": [
+          "개인 가족의 애도(장인상)를 선정적인 정치 공격 소재로 다루는 서술",
+          "조문 이유를 확인 없이 정치적 의도로 단정하는 추측",
+          "'조작징계' 논란과 조문을 사실 확인 없이 인과관계로 단정하는 것"
+        ],
+        "checkBefore": [
+          "한동훈·장동혁 측 공식 입장(공지·SNS)에서 조문 사실과 날짜 확인",
+          "국민의힘 공식 발표·원문 기사에서 조작징계 논란 쟁점 재확인"
+        ],
+        "solves": [
+          "장동혁이 왜 조문했는지 이유가 궁금함 → 공식 확인된 발언·공지 정리",
+          "조작징계 논란과 조문이 무슨 관계인지 헷갈림 → 두 사안을 시점별로 구분 정리"
+        ],
+        "actionTitles": [
+          "한동훈 장인상 조문 날짜·장소와 조문자 명단 확인",
+          "한동훈 장인상 조문자 명단과 조작징계 논란 쟁점 비교"
+        ]
+      },
+      "at": "2026-11-17T05:22:58.223Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "6dc5245560284a6d",
+      "urls": [
+        "https://it-curator.com/entry/%EA%B0%A4%EB%9F%AD%EC%8B%9C-%EC%82%AC%EC%A7%84-%EB%A6%AC%EB%A7%88%EC%8A%A4%ED%84%B0-%EC%82%AC%EC%9A%A9%EB%B2%95-%ED%9D%90%EB%A6%BF%ED%95%9C-%EC%98%9B%EB%82%A0-%EC%82%AC%EC%A7%84-%EC%84%A0%EB%AA%85%ED%95%98%EA%B2%8C-%EB%B3%B4%EC%A0%95%ED%95%98%EA%B8%B0"
+      ],
+      "guide": {
+        "direction": "검색자는 흐릿한 옛날 사진을 선명하게 만들 '리마스터' 사용법을 찾지만, 갤러리 앱에서 메뉴 자체가 보이지 않거나 '사라짐' 현상에 막힌다. 고수 글은 '사용법'만 다루고 지원 기기·OS 조건이나 사라짐 원인은 짚지 않는다. 지원 기기 조건표와 메뉴 경로, 사라졌을 때 체크리스트까지 주면 글 안에서 해결된다.",
+        "searchTargets": [
+          "갤럭시 사진 리마스터 하는 법",
+          "갤럭시 사진 리마스터 사라짐",
+          "갤럭시 사진 리마스터 기능"
+        ],
+        "mustInclude": [
+          "리마스터 기능 지원 기기·One UI 버전 조건표(확인 필요: 삼성 공식 지원 페이지)",
+          "갤러리 앱에서 리마스터 메뉴 찾는 정확한 경로(확인 필요: 실기기 캡처)",
+          "'사라짐' 현상 원인(업데이트 누락, 저장공간 부족 등)과 복구 방법"
+        ],
+        "mustAvoid": [
+          "모든 갤럭시 기종에서 동일하게 된다고 일반화(기종·OS별 지원 차이 존재)",
+          "사진 합치기·옮기기·백업 같은 다른 기능과 뒤섞어 설명"
+        ],
+        "checkBefore": [
+          "리마스터 지원 기기 목록과 One UI 버전(삼성 공식 공지/삼성멤버스)"
+        ],
+        "solves": [
+          "리마스터 메뉴가 안 보이거나 사라짐 → 지원 기기·OS 조건표로 원인 확인",
+          "사용법을 몰라 흐릿한 사진을 못 고침 → 갤러리 앱 경로 캡처로 단계별 안내"
+        ],
+        "actionTitles": [
+          "갤럭시 사진 리마스터 하는 법, 메뉴 위치부터 확인",
+          "갤럭시 사진 리마스터 사라짐 원인, 기기별로 바로 확인",
+          "갤럭시 사진 리마스터 기능 지원기기, 조건표로 확인"
+        ]
+      },
+      "at": "2026-11-17T05:22:58.223Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "스마트폰 사진첩",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1070402&docId=479174942&answerNo=1&qb=6rCk65+t7IucIOyCrOynhCDrpqzrp4jsiqTthLAg7Z2Q66a/7ZWcIOyYm+uCoA==",
+          "views": 97,
+          "answers": 1,
+          "askedAt": "2024.12.18"
+        }
+      ]
+    },
+    {
+      "id": "1404b78b96c781e6",
+      "urls": [
+        "https://secondary4u.tistory.com/629"
+      ],
+      "guide": {
+        "direction": "자동완성을 보면 '수능앞둔' 검색자는 AI 부정행위 심층분석보다 손주·손녀·아들에게 보낼 응원 메시지나 수능 전날 꿈 해몽을 찾는다. 고수 글 제목은 뉴스 이슈에만 집중해 실제 유입 검색어인 응원 문구 수요를 못 채운다. 상황별 응원 문구 예시와 AI 부정행위 핵심 사실을 함께 묶어야 검색 의도가 한 번에 끝난다.",
+        "searchTargets": [
+          "수능앞둔손주에게",
+          "수능앞둔손녀에게",
+          "수능앞둔 아들꿈"
+        ],
+        "mustInclude": [
+          "손주·손녀·아들에게 보낼 수능 응원 문구 예시 3~5개(짧은 문자용/긴 편지용)",
+          "AI 부정행위 논란의 핵심 사실: 누가 언제 어떤 방식으로 적발됐는지(확인 필요: 원문 기사)",
+          "08년생(해당 학년도 응시생) 공정성 이슈 요약(확인 필요: 원문 기사)",
+          "'수능앞둔 아들꿈' 해몽 핵심 의미 간단 정리(확인 필요: 해몽 자료)"
+        ],
+        "mustAvoid": [
+          "특정 수험생·학교를 지목해 부정행위 가해자로 추측",
+          "응원 메시지 섹션과 AI부정행위 뉴스 섹션을 섞어 맥락 없이 나열",
+          "생기부 관련 다른 사회이슈(드루킹 특검법 등)와 혼동해 서술"
+        ],
+        "checkBefore": [
+          "AI 부정행위 논란의 사건 경위(원문 기사, 교육부·평가원 공지)",
+          "해당 학년도 수능 시행일(한국교육과정평가원 공지)"
+        ],
+        "solves": [
+          "수능 앞둔 손주·손녀·아들에게 뭐라고 해야할지 모름 → 상황별 응원 문구 예시 제공",
+          "수능 전날 아들꿈 의미가 궁금함 → 해몽 핵심 요약으로 답",
+          "AI 부정행위가 정확히 뭔지 모름 → 핵심 사실 요약으로 정리"
+        ],
+        "actionTitles": [
+          "수능앞둔손녀에게 전할 응원 한마디, 바로 확인",
+          "수능앞둔 아들꿈 해몽, 의미부터 바로 확인하기"
+        ]
+      },
+      "at": "2026-11-17T05:22:58.223Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "생기부만 보면 사회적 이슈에 관심이 많은 나",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110408&docId=306783997&answerNo=2&qb=7IiY64qlIOyVnuuRlCBhaSDrtoDsoJXtlonsnIQg6rO17Y+s",
+          "views": 32297,
+          "answers": 3,
+          "askedAt": "2018.08.07"
+        },
+        {
+          "title": "표현의 자유",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80101&docId=495646170&answerNo=16&qb=7IiY64qlIOyVnuuRlCBhaSDrtoDsoJXtlonsnIQg6rO17Y+s",
+          "views": 25737,
+          "answers": 18,
+          "askedAt": "2026.11.07"
+        }
+      ]
+    },
+    {
+      "id": "83ac8d15a529da01",
+      "urls": [
+        "https://echeveau.net/my-insurance-lookup/"
+      ],
+      "guide": {
+        "direction": "검색자는 조회 방법 자체보다 '전화가 왔는데 진짜냐', '조회가 안 된다', '수수료 내야 하냐'에 막혀 있다(지식인 질문 기준). 고수 글 제목은 '조회 방법'만 다루고 전화 진위 구분·조회 안됨 원인·수수료 유무는 못 짚는다. 공식 사이트 주소·본인인증 단계·조회 안될 때 체크리스트·무료 여부를 한 번에 정리하면 글에서 끝난다.",
+        "searchTargets": [
+          "내 보험 찾아줌 조회",
+          "내보험찾아줌 전화",
+          "내보험찾아줌 수수료",
+          "내보험찾아줌 조회 안됨"
+        ],
+        "mustInclude": [
+          "공식 사이트 주소 cont.insure.or.kr과 운영주체(생명보험협회·손해보험협회 공동, 확인 필요: 공식 공지)",
+          "휴대폰 간편인증 또는 공동인증서로 조회하는 단계별 순서",
+          "조회·청구 수수료 무료 여부(확인 필요: 공식 FAQ)와 수수료 요구 전화는 사기 의심 포인트",
+          "조회 안될 때 체크리스트: 인증수단 오류, 보험사 폐업·합병으로 전화번호 없는 경우 협회 문의(확인 필요: 정확 연락처)"
+        ],
+        "mustAvoid": [
+          "전화로 먼저 연락 온 경우를 무조건 사기 또는 무조건 안전으로 단정(확인 필요 후 서술)",
+          "'내보험 다나와' 등 비슷한 이름의 민간 서비스와 공식 내보험찾아줌 혼동",
+          "수수료 받는 민간 대리청구 업체와 무료 공식 서비스 혼동"
+        ],
+        "checkBefore": [
+          "공식 사이트 주소와 운영주체(생명보험협회·손해보험협회 공동 공지)",
+          "조회 수수료 무료 여부와 고객센터 번호(공식 FAQ/공지)"
+        ],
+        "solves": [
+          "내보험찾아줌에서 전화가 왔는데 진짜냐 → 공식 서비스 운영주체·연락 방식 기준으로 구분",
+          "조회가 안 되는데 왜 그러냐 → 인증수단·보험사 폐업 등 원인별 체크리스트 제공",
+          "수수료 내야 하냐 → 공식 서비스 무료 여부와 사기성 수수료 요구 구분"
+        ],
+        "actionTitles": [
+          "내 보험 찾아줌 조회 방법, 본인인증부터 순서대로",
+          "내보험찾아줌 전화 왔을 때, 사기인지 바로 확인하는 법",
+          "내보험찾아줌 조회 안될 때, 원인별로 바로 해결하기"
+        ]
+      },
+      "at": "2026-11-17T05:22:58.223Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "내보험 찾아줌이란 곳에서 전화가 왔는데",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40603&docId=492756678&answerNo=8&qb=64K067O07ZeY7LC+7JWE7KSM",
+          "views": 3891,
+          "answers": 8,
+          "askedAt": "2026.07.08"
+        },
+        {
+          "title": "내보험다나와 내보험보기 내숨은보험금찾아....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=4010302&docId=375831126&answerNo=16&qb=64K067O07ZeY7LC+7JWE7KSM",
+          "views": 3806,
+          "answers": 15,
+          "askedAt": "2026.11.01"
+        },
+        {
+          "title": "내숨은보험금찾아줌 내게맞는보험 모든보험 ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=4010302&docId=363334397&answerNo=12&qb=64K067O07ZeY7LC+7JWE7KSM",
+          "views": 1283,
+          "answers": 13,
+          "askedAt": "2026.10.30"
+        }
+      ]
+    },
+    {
+      "id": "433437f45f827e0e",
+      "urls": [
+        "https://naver-doc.com/life/health/pet/%ea%b3%a0%ec%96%91%ec%9d%b4-%ea%b2%b0%eb%a7%89%ec%97%bc-%ec%a6%9d%ec%83%81-%ec%9c%99%ed%81%ac%ed%95%98%ea%b1%b0%eb%82%98-%eb%88%88%ea%b3%b1%ec%9d%b4-%eb%82%84-%eb%95%8c-%ed%99%95%ec%9d%b8%ed%95%a0/"
+      ],
+      "guide": {
+        "direction": "① 고양이가 한쪽 눈만 깜빡이거나 눈곱이 노란색·딱딱하게 낄 때 결막염인지 허피스인지 구분 못 해 묻는 질문이 많다. ② 고수 글 제목은 증상만 짚고 안약 종류·병원비·자연치유 가능 여부는 다루지 않는다. ③ 증상별 체크리스트와 안약 비교, 병원비 범위를 한 번에 제시해 이 글로 결론 내게 한다.",
+        "searchTargets": [
+          "고양이 결막염 안약",
+          "고양이 결막염 치료",
+          "고양이 결막염 병원비",
+          "고양이 결막염 원인"
+        ],
+        "mustInclude": [
+          "한쪽 눈만 깜빡임, 노란·딱딱한 눈곱, 눈물 과다 등 증상별 구분 체크리스트",
+          "결막염과 허피스(고양이 호흡기질환)를 헷갈리는 이유와 구분 포인트",
+          "처방 안약과 자연치유 불가 이유를 비교한 표 (확인 필요: 동물병원 공식 자료)",
+          "결막염 치료비 평균 범위 (확인 필요: 동물병원 비용 공개 커뮤니티·협회 자료)"
+        ],
+        "mustAvoid": [
+          "자연치유 키워드만 보고 방치를 권하듯 서술하는 것",
+          "결막염을 사람의 알레르기성 비염처럼 혼동해 설명하는 것",
+          "특정 동물병원이나 안약 브랜드를 홍보성으로 추천하는 것"
+        ],
+        "checkBefore": [
+          "동물병원 공식 자료(대한동물병원협회 등)에서 결막염 원인·치료 가이드 확인",
+          "안약이 처방전 필요 품목인지 동물약국·동물병원 공지에서 확인"
+        ],
+        "solves": [
+          "\"한쪽눈만 깜빡이고 눈곱 낀다\" 질문 → 결막염 vs 허피스 구분 체크리스트 제공",
+          "\"자연치유 되나\" 질문 → 방치 위험성과 안약 치료 필요성 정리",
+          "\"병원비 얼마냐\" 질문 → 치료비 범위 가이드 제시(확인 필요)"
+        ],
+        "actionTitles": [
+          "고양이 결막염 증상 체크, 안약 치료 시작하기 전 확인할 것",
+          "고양이 결막염 병원비 얼마? 치료비 비교 전 알아야 할 것"
+        ]
+      },
+      "at": "2026-11-17T05:22:58.223Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "고양이 두부모래 눈꼽",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80502&docId=285996561&answerNo=1&qb=6rOg7JaRIOqysOunieyXvCDsnJntgaztlZjqsbDrgpgg64iI6rOx",
+          "views": 8254,
+          "answers": 1,
+          "askedAt": "2017.11.02"
+        },
+        {
+          "title": "고양이 눈꼽이 딱딱한 노란색이고 한쪽눈만 ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70122&docId=313298141&answerNo=1&qb=6rOg7JaRIOqysOunieyXvCDsnJntgaztlZjqsbDrgpgg64iI6rOx",
+          "views": 556,
+          "answers": 1,
+          "askedAt": "2018.11.06"
+        },
+        {
+          "title": "고양이 눈 질병에 대해 마니 아시는 분 답변....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80502&docId=381597070&answerNo=2&qb=6rOg7JaRIOqysOunieyXvCDsnJntgaztlZjqsbDrgpgg64iI6rOx",
+          "views": 118,
+          "answers": 2,
+          "askedAt": "2021.02.11"
+        }
+      ]
+    },
+    {
+      "id": "f85b42e7e26c5072",
+      "urls": [
+        "https://onna.kr/iphone-kakaotalk-notification-not-working-fix-methods"
+      ],
+      "guide": {
+        "direction": "① 설정은 다 켜놨는데도 아이폰17·16에서 카톡 알림이 안 오거나 늦게 뜬다는 질문이 반복된다. ② 고수 글의 '7가지 방법'은 설정 경로만 나열하고 최신 모델별 버그 여부와 집중모드·저전력모드 같은 숨은 원인은 짚지 않는다. ③ 설정>알림 경로 체크리스트에 집중모드·백그라운드 새로고침까지 더한 순서로 한 번에 점검하게 한다.",
+        "searchTargets": [
+          "아이폰 카톡 알림 안옴 오류",
+          "아이폰 카톡 알림 오류",
+          "아이폰 카톡 알림 설정",
+          "아이폰 카톡 알림 안뜰때"
+        ],
+        "mustInclude": [
+          "설정>알림>카카오톡 경로에서 확인할 알림 허용·배너·사운드 체크리스트",
+          "아이폰17·16 등 최신 모델에서 보고된 알림 지연 여부 (확인 필요: 애플 지원 문서·카카오 공지)",
+          "집중모드(방해금지모드)·저전력모드가 알림을 지연시키는 설정 확인 항목",
+          "백그라운드 앱 새로고침 설정이 카톡 알림에 미치는 영향",
+          "iOS 업데이트 여부에 따른 알림 오류 해결 사례 (확인 필요: iOS 업데이트 노트)"
+        ],
+        "mustAvoid": [
+          "원인 불분명한 카카오톡 앱 버그를 아이폰 기기 결함으로 단정하는 것",
+          "인스타그램 등 다른 앱 알림 오류 사례를 아이폰 카톡 문제와 섞어 혼동시키는 것",
+          "검증 안 된 알림음 다운로드 사이트를 추천하는 것"
+        ],
+        "checkBefore": [
+          "아이폰17·16에서 알림 지연이 공식 이슈로 보고됐는지 애플 지원 문서 확인",
+          "카카오톡 공지사항·고객센터에서 최근 알림 오류 패치 여부 확인"
+        ],
+        "solves": [
+          "\"알림 설정 다 켜놨는데도 안 옴\" 질문 → 집중모드·저전력모드까지 짚는 체크리스트로 해결",
+          "\"아이폰17/16 알림 버그\" 질문 → 모델별 알려진 이슈 여부와 대응법 정리",
+          "\"카톡 알림 늦게 뜸\" 질문 → 백그라운드 새로고침·네트워크 점검 순서 제공"
+        ],
+        "actionTitles": [
+          "아이폰 카톡 알림 안옴 오류, 설정 7가지 순서대로 확인하기",
+          "아이폰 카톡 알림 늦게 뜰 때, 집중모드부터 점검하는 법",
+          "아이폰17 카톡 알림 버그, 설정 확인 전 알아야 할 것"
+        ]
+      },
+      "at": "2026-11-17T05:22:58.223Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "아이폰14프로 카카오톡 알림 안뜸",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1060801&docId=488069219&answerNo=1&qb=7JWE7J207Y+wIOy5tO2GoSDslYzrprwg66mU7Iuc7KeAIOuKpuqyjA==",
+          "views": 1397,
+          "answers": 1,
+          "askedAt": "2025.08.18"
+        },
+        {
+          "title": "아이폰16 카카오톡 알림 안옴",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1060801&docId=491198903&answerNo=1&qb=7JWE7J207Y+wIOy5tO2GoSDslYzrprwg66mU7Iuc7KeAIOuKpuqyjA==",
+          "views": 327,
+          "answers": 1,
+          "askedAt": "2026.01.07"
+        },
+        {
+          "title": "아이폰17인데 계속 알림 버그가 생겨요ㅠㅠ",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1061203&docId=495008780&answerNo=2&qb=7JWE7J207Y+wIOy5tO2GoSDslYzrprwg66mU7Iuc7KeAIOuKpuqyjA==",
+          "views": 159,
+          "answers": 2,
+          "askedAt": "2026.09.03"
         }
       ]
     }
