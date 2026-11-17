@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T00:16:34.351Z",
+ "builtAt": "2026-11-17T00:26:37.760Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 9,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "김정은 APEC 푸틴 회담",
@@ -16,29 +16,29 @@
     "signal.bz"
    ],
    "articles90": 25,
-   "recent20": 4,
-   "press": 21,
-   "firstArticleAt": "2026-11-16T22:50:00.000Z",
+   "recent20": 5,
+   "press": 20,
+   "firstArticleAt": "2026-11-16T23:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "트럼프 \"중국서 김정은 만날 수도\"… '깜짝 회동' 성사될까",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-17T00:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002536066?sid=104"
+     "title": "김정은 APEC 참석하나…트럼프 이어 푸틴도 회동 가능성 열어",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-17T00:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004210455?sid=104"
     },
     {
-     "title": "[뉴스분석] 트럼프, 김정은과 전격 회동할까...시진핑 '중재' 언급한 배...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-17T00:06:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261117000253"
+     "title": "\"中서 만남 가능\" 김정은에 집착하는 트럼프…노벨평화상 원하나",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-17T00:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009292891?sid=104"
     },
     {
-     "title": "트럼프 \"중국서 김정은 만날 수도…시진핑에 달렸다\"",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-17T00:02:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903287"
+     "title": "APEC 앞두고 북중 접경행 김정은, 백두산·삼지연 시찰… 트럼프 \"중국서...",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-17T00:22:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=729684"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
+   "articles90": 12,
    "recent20": 2,
-   "press": 15,
-   "firstArticleAt": "2026-11-16T22:49:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-16T23:02:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "러 군용기 또 동해 방공식별구역 진입… 공군 전투기 긴급 대응",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-17T00:20:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=564370"
+    },
+    {
+     "title": "러 군용기, 동해 KADIZ 진입 후 이탈…공군 전투기 출격",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-17T00:18:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5084110"
+    },
     {
      "title": "러 군용기 17일 새벽 동해 KADIZ 진입…공군 전투기 출격대응",
      "press": "segye.com",
      "publishedAt": "2026-11-17T00:06:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/022/0004175743?sid=100"
-    },
-    {
-     "title": "러시아 군용기, 새벽 시간 동해 KADIZ 진입…軍 전투기 출격 대응",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-17T00:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006410885?sid=100"
-    },
-    {
-     "title": "러시아 군용기 여러 대 새벽 동해 KADIZ 침입...공군 전투기 대응 출격",
-     "press": "kgnews.co.kr",
-     "publishedAt": "2026-11-16T23:48:00.000Z",
-     "link": "https://www.kgnews.co.kr/news/article.html?no=919832"
     }
    ]
   },
@@ -79,13 +79,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 3,
-   "press": 11,
-   "firstArticleAt": "2026-11-16T22:47:00.000Z",
+   "articles90": 10,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-16T23:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[LPGA] '준우승 3번' 최혜진, 세계랭킹 13위로 상승…유해란 3위·김효주...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-17T00:16:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261117000171"
+    },
     {
      "title": "'준우승만 10번' 최혜진, 세계랭킹 17→13위 상승…유해란 3위·김효주 5...",
      "press": "stoo.com",
@@ -97,12 +103,6 @@
      "press": "m-i.kr",
      "publishedAt": "2026-11-17T00:04:00.000Z",
      "link": "https://www.m-i.kr/news/articleView.html?idxno=2019380"
-    },
-    {
-     "title": "최혜진, LPGA 우승은 놓쳤지만 세계랭킹 13위로 도약",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-17T00:01:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000083386"
     }
    ]
   },
@@ -111,13 +111,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
+   "articles90": 11,
    "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-16T22:55:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-16T23:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "코스피, 미국 AI주 급락에 반도체주 휘청…장 초반 5000선 붕괴",
+     "press": "ziksir.com",
+     "publishedAt": "2026-11-17T00:22:00.000Z",
+     "link": "https://www.ziksir.com/news/articleView.html?idxno=153567"
+    },
     {
      "title": "美, 중국 AI 반도체 우회 사용 차단…원격 접속도 규제",
      "press": "4th.kr",
@@ -129,12 +135,6 @@
      "press": "yna.co.kr",
      "publishedAt": "2026-11-16T23:55:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016445466?sid=101"
-    },
-    {
-     "title": "美, AI 반도체 '우회 이용'까지 차단",
-     "press": "choicenews.co.kr",
-     "publishedAt": "2026-11-16T23:54:00.000Z",
-     "link": "http://www.choicenews.co.kr/news/articleView.html?idxno=173240"
     }
    ]
   },
@@ -145,7 +145,7 @@
     "google"
    ],
    "articles90": 9,
-   "recent20": 2,
+   "recent20": 1,
    "press": 9,
    "firstArticleAt": "2026-11-16T23:04:00.000Z",
    "exclusive": false,
