@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T01:47:03.566Z",
+ "builtAt": "2026-11-17T04:27:52.692Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,238 +11,252 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "세무사 수석 경찰 출석",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 78,
-   "recent20": 7,
-   "press": 58,
-   "firstArticleAt": "2026-11-17T00:37:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'AI 커닝' 세무사시험 수석 경찰 출석…'개조' 계산기도 사용(종합)",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-17T01:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009293147?sid=102"
-    },
-    {
-     "title": "세무사시험 수석 합격자 경찰 출석…\"사실대로 말씀드리겠다\"",
-     "press": "kdfnews.com",
-     "publishedAt": "2026-11-17T01:42:00.000Z",
-     "link": "http://www.kdfnews.com/news/articleView.html?idxno=191032"
-    },
-    {
-     "title": "'AI 부정행위' 세무사 시험 수석, 경찰 출석…\"잘못 책임지겠다\"",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-17T01:38:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1320698&inflow=N"
-    }
-   ]
-  },
-  {
-   "keyword": "갤럭시 AI 클래스 도입",
+   "keyword": "조작기소 특검법 국무회의 통과",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 47,
-   "recent20": 5,
-   "press": 46,
-   "firstArticleAt": "2026-11-17T00:18:00.000Z",
+   "articles90": 65,
+   "recent20": 10,
+   "press": 53,
+   "firstArticleAt": "2026-11-17T02:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "교실에 들어온 '갤럭시 XR'…삼성 AI 수업, 체험형으로 확장",
-     "press": "socialvalue.kr",
-     "publishedAt": "2026-11-17T01:44:00.000Z",
-     "link": "https://www.socialvalue.kr/news/view/1065577342753947"
+     "title": "국힘 “조작기소 특검법은 ‘이재명 탈옥법’…사법권 짓밟은 헌정질서...",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-17T04:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001205367?sid=100"
     },
     {
-     "title": "삼성전자 '갤럭시 AI 클래스'에 XR 과정 도입, \"학교 내 다양한 AI 경험 ...",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-17T01:40:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=452131"
+     "title": "'조작기소 특검법' 의결에 \"쿠데타\"라며 격분한 국힘",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-17T04:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002536134?sid=100"
     },
     {
-     "title": "교실로 들어온 AI·XR… 삼성전자, '갤럭시 AI 클래스'에 '갤럭시 XR' 더...",
-     "press": "kr.aving.net",
-     "publishedAt": "2026-11-17T01:38:00.000Z",
-     "link": "https://kr.aving.net/news/articleView.html?idxno=1817095"
+     "title": "'조작기소 특검법', 한성숙 총리 주재 국무회의 통과",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-17T04:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002536135?sid=100"
     }
    ]
   },
   {
-   "keyword": "조작기소 특검법 국무회의",
+   "keyword": "AI 부정행위 대응 강화",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 30,
-   "recent20": 13,
-   "press": 18,
-   "firstArticleAt": "2026-11-17T00:18:00.000Z",
+   "articles90": 32,
+   "recent20": 9,
+   "press": 29,
+   "firstArticleAt": "2026-11-17T02:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[포토] 국무회의 '조작기소 특검법' 상정, 의결",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-17T01:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005843636?sid=100"
+     "title": "[사설] ‘AI 커닝’에 수능·산업기밀 뚫려선 안 된다",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-17T04:26:00.000Z",
+     "link": "https://www.viva100.com/article/20261117500558"
     },
     {
-     "title": "'조작기소 특검법' 국무회의 의결 반대하며 행진하는 국민의힘",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-17T01:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004210530?sid=100"
+     "title": "수능 D-2, 정치권까지 흔든 AI 부정행위 파문",
+     "press": "00news.co.kr",
+     "publishedAt": "2026-11-17T04:26:00.000Z",
+     "link": "http://www.00news.co.kr/news/articleView.html?idxno=108120"
     },
     {
-     "title": "'조작기소 특검법' 국무회의 의결 반대…정부청사 향해 행진하는 국민의...",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-17T01:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004210528?sid=100"
+     "title": "공소청, AI·스마트안경 동원한 시험 부정행위 무관용 엄단…초범도 정...",
+     "press": "goodmorningcc.com",
+     "publishedAt": "2026-11-17T04:26:00.000Z",
+     "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=455979"
     }
    ]
   },
   {
-   "keyword": "군용기 KADIZ 진입 대응",
+   "keyword": "나가야마 에이타, 손석구와 한국 사랑",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 17,
-   "recent20": 2,
-   "press": 17,
-   "firstArticleAt": "2026-11-17T00:18:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "러 군용기 여러 대, 동해 카디즈 진입…軍 전투기 출격 대응",
-     "press": "goodnews1.com",
-     "publishedAt": "2026-11-17T01:38:00.000Z",
-     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466287"
-    },
-    {
-     "title": "미·중·러 회담 앞두고 북·러 밀착…러 군용기 동해 KADIZ 진입",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-17T01:34:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1320694&inflow=N"
-    },
-    {
-     "title": "러 군용기 여러 대 새벽 KADIZ 진입…공군 전투기 출격대응",
-     "press": "tbs.seoul.kr",
-     "publishedAt": "2026-11-17T01:15:00.000Z",
-     "link": "http://tbs.seoul.kr/news/newsView.do?typ_800=9&idx_800=3538777&seq_800=20531678"
-    }
-   ]
-  },
-  {
-   "keyword": "김주애",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-17T00:36:00.000Z",
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-17T03:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "흰색 스키복 입고 등장한 김주애...상·하의 합치면 최대 200만원?",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-17T01:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003156030?sid=100"
+     "title": "'푸른길' 손석구X나가야마 에이타, 하드보일드하게 뭉친 한일 시너지 [종...",
+     "press": "digitalchosun.dizzo.com",
+     "publishedAt": "2026-11-17T04:22:00.000Z",
+     "link": "http://digitalchosun.dizzo.com/site/data/html_dir/2026/11/17/2026111780102.html"
     },
     {
-     "title": "설원 가른 김주애…흰색 스키복 어디 제품인가 보니",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-17T01:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005843620?sid=100"
+     "title": "'푸른길' 손석구x나가야마 에이타, 국경 넘은 한·일 콤비...\"장벽 넘어...",
+     "press": "starnewsk.com",
+     "publishedAt": "2026-11-17T03:40:00.000Z",
+     "link": "http://www.starnewsk.com/news/articleView.html?idxno=61090"
     },
     {
-     "title": "백두산서 스키 타는 김정은 딸 김주애…걸친 옷만 ‘200만원’",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-17T01:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000132389?sid=100"
+     "title": "‘푸른길’ 나가야마 에이타 “한국인의 국민성 사랑하게 돼”…한국어...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-17T03:35:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001150244"
     }
    ]
   },
   {
-   "keyword": "장동혁, 한동훈 빙부상 조문",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-17T00:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'3분 조문' 장동혁, 마주앉지 않은 오세훈…먼 보수통합",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-17T01:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005354693?sid=100"
-    },
-    {
-     "title": "국민의힘 '투톱' 장동혁·정점식, 한동훈 장인상 조문",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-17T01:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001403568?sid=100"
-    },
-    {
-     "title": "장동혁, 한동훈 빙부상 조문 … 국민의힘 지도부와 함께 빈소 찾아",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-17T00:56:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/17/2026111750058.html"
-    }
-   ]
-  },
-  {
-   "keyword": "한병도 원내대표 회의 참석",
+   "keyword": "김정은, 삼지연 방문",
    "sources": [
     "nate"
    ],
-   "articles90": 6,
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-17T03:03:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김정은 삼지연 관광지구 현지지도…김주애 스키 모습 공개",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-17T04:22:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3754528"
+    },
+    {
+     "title": "김정은, 백두산 천지에 올랐는데…중대 구상 VS 과거와 달라",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-17T03:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004210598?sid=100"
+    },
+    {
+     "title": "김정은, 북·중 접경 삼지연 관광지구 건설현장 시찰",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-17T03:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000926970?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "트럼프 엔비디아 주식",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-17T03:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프, 엔비디아 주식 최대 830억 보유 추정…중국 수출 허용에 이해충...",
+     "press": "aitimes.com",
+     "publishedAt": "2026-11-17T04:22:00.000Z",
+     "link": "https://www.aitimes.com/news/articleView.html?idxno=217483"
+    },
+    {
+     "title": "벼랑 끝 670조 AI 지원, 젠슨 복귀 로비 통할까 [트럼프 스톡커]",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-17T03:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004683053?sid=104"
+    },
+    {
+     "title": "“엔비디아 주식 830억 원 보유”…트럼프, ‘젠슨황 복귀’ 시동? [지금...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-17T03:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012295403?sid=121"
+    }
+   ]
+  },
+  {
+   "keyword": "발언하는 장동혁 대표",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-17T00:23:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-17T02:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한병도 \"AI 부정행위, 법과 원칙에 따라 엄정히 대응할 것\" [TF사진관]",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-17T01:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000552590?sid=100"
+     "title": "장동혁 \"AI 부정행위 대책 없다면 수능 연기라도 검토해야\"",
+     "press": "goodkyung.com",
+     "publishedAt": "2026-11-17T03:12:00.000Z",
+     "link": "https://www.goodkyung.com/news/articleView.html?idxno=293536"
     },
     {
-     "title": "원내대책회의 참석하는 한병도 원내대표",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-17T01:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003700138?sid=100"
+     "title": "AI 커닝 대책? 이준석은 '전파탐지 앱', 장동혁은 '수능 연기'",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-17T03:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002536125?sid=100"
     },
     {
-     "title": "한병도 민주당 원내대표, 원내대책회의 참석",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-17T00:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009293012?sid=100"
+     "title": "[포토] 현장 의총서 발언하는 장동혁 국민의힘 대표",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-17T02:58:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/17/2026111750148.html"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 816,
-  "matched": 460,
-  "avgLeadMin": 863,
+  "flagged": 857,
+  "matched": 468,
+  "avgLeadMin": 853,
   "recent": [
+   {
+    "keyword": "젠슨 황 복귀 논의 없어",
+    "hitKeyword": "젠슨 황 복귀 불가",
+    "hitAt": "2026-11-17T13:00:00+09:00",
+    "leadMin": 314
+   },
+   {
+    "keyword": "코스피 급락",
+    "hitKeyword": "모건스탠리 코스피 1만",
+    "hitAt": "2026-11-17T13:00:00+09:00",
+    "leadMin": 83
+   },
+   {
+    "keyword": "김주혁",
+    "hitKeyword": "김주혁 9주기",
+    "hitAt": "2026-11-17T12:30:00+09:00",
+    "leadMin": 685
+   },
+   {
+    "keyword": "트럼프 엔비디아 주식",
+    "hitKeyword": "트럼프 엔비디아 주식",
+    "hitAt": "2026-11-17T12:30:00+09:00",
+    "leadMin": 23
+   },
+   {
+    "keyword": "FA 1호 오태곤 SSG 잔류",
+    "hitKeyword": "오태곤 SSG 잔류",
+    "hitAt": "2026-11-17T12:00:00+09:00",
+    "leadMin": 13
+   },
+   {
+    "keyword": "씨엘, 박봄 건강 언급",
+    "hitKeyword": "씨엘 박봄 건강 배려",
+    "hitAt": "2026-11-17T11:30:00+09:00",
+    "leadMin": 868
+   },
+   {
+    "keyword": "세무사 수석 경찰 출석",
+    "hitKeyword": "세무사 수석 경찰 출석",
+    "hitAt": "2026-11-17T11:30:00+09:00",
+    "leadMin": 83
+   },
+   {
+    "keyword": "엔비디아 젠슨 황 복귀 논의 없다",
+    "hitKeyword": "트럼프 엔비디아 주식",
+    "hitAt": "2026-11-17T11:00:00+09:00",
+    "leadMin": 83
+   },
    {
     "keyword": "로버트 패틴슨 007 발탁",
     "hitKeyword": "로버트 패틴슨 007",
@@ -254,54 +268,6 @@
     "hitKeyword": "로버트 패틴슨 007",
     "hitAt": "2026-11-17T10:30:00+09:00",
     "leadMin": 124
-   },
-   {
-    "keyword": "트럼프 미중러 회담 의제",
-    "hitKeyword": "트럼프 앨리스황 옹호",
-    "hitAt": "2026-11-17T10:30:00+09:00",
-    "leadMin": 53
-   },
-   {
-    "keyword": "FA 1호 계약 주인공은 오태곤",
-    "hitKeyword": "양의지 두산 FA 계약",
-    "hitAt": "2026-11-17T10:30:00+09:00",
-    "leadMin": 3
-   },
-   {
-    "keyword": "AI 부정행위 대응 필요",
-    "hitKeyword": "AI 안경 공무원 부정행위",
-    "hitAt": "2026-11-17T10:00:00+09:00",
-    "leadMin": 53
-   },
-   {
-    "keyword": "제니 그래미 후보",
-    "hitKeyword": "제니 그래미 본상 후보",
-    "hitAt": "2026-11-17T10:00:00+09:00",
-    "leadMin": 23
-   },
-   {
-    "keyword": "AI 부정행위 대책 시급하다",
-    "hitKeyword": "AI 안경 공무원 부정행위",
-    "hitAt": "2026-11-17T10:00:00+09:00",
-    "leadMin": 23
-   },
-   {
-    "keyword": "아리바이오 치매약 임상",
-    "hitKeyword": "아리바이오 치매약",
-    "hitAt": "2026-11-17T10:00:00+09:00",
-    "leadMin": 13
-   },
-   {
-    "keyword": "우리들의 발라드2",
-    "hitKeyword": "우리들의 발라드2 경연",
-    "hitAt": "2026-11-17T09:30:00+09:00",
-    "leadMin": 54
-   },
-   {
-    "keyword": "이정현 12월 결혼",
-    "hitKeyword": "이정현 12월 결혼",
-    "hitAt": "2026-11-17T09:00:00+09:00",
-    "leadMin": 144
    }
   ]
  }
