@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T21:11:54.988Z",
+ "builtAt": "2026-11-17T21:21:57.960Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 21,
  "candidates": [
   {
    "keyword": "경찰",
@@ -17,12 +17,18 @@
     "google"
    ],
    "articles90": 9,
-   "recent20": 6,
-   "press": 8,
-   "firstArticleAt": "2026-11-17T20:00:00.000Z",
+   "recent20": 3,
+   "press": 9,
+   "firstArticleAt": "2026-11-17T20:01:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
+    {
+     "title": "'AI 부정' 세무사 수석, 13시간 경찰 조사",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-17T21:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001536271?sid=102"
+    },
     {
      "title": "상인 20명에 ‘생일 돈봉투’ 받은 경찰… 근무지 압수수색",
      "press": "segye.com",
@@ -34,12 +40,6 @@
      "press": "newsfreezone.co.kr",
      "publishedAt": "2026-11-17T21:02:00.000Z",
      "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=719873"
-    },
-    {
-     "title": "수능날 경찰 1만여명 투입…'AI 커닝' 신고·폭파 협박 대비[2027 수능]",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-17T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014328633?sid=102"
     }
    ]
   },
@@ -49,23 +49,23 @@
     "signal.bz"
    ],
    "articles90": 9,
-   "recent20": 2,
+   "recent20": 0,
    "press": 8,
    "firstArticleAt": "2026-11-17T20:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한 총리 '조작기소 특검법' 의결 '총대'...野 \"쿠데타로 총리도 감옥\"",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-17T21:00:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/325570/?sc=Naver"
-    },
-    {
      "title": "'특검법' 의결날 '조작징계' 정황 공개…국힘, 대여투쟁 동력 '흔들'",
      "press": "news1.kr",
      "publishedAt": "2026-11-17T21:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009294925?sid=100"
+    },
+    {
+     "title": "한 총리 '조작기소 특검법' 의결 '총대'...野 \"쿠데타로 총리도 감옥\"",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-17T21:00:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/325570/?sc=Naver"
     },
     {
      "title": "[사설] 총리가 의결한 조작기소 특검법, 대통령 책임은 그대로",
@@ -76,34 +76,34 @@
    ]
   },
   {
-   "keyword": "모레노호, 오세훈 1-0 승리",
+   "keyword": "오세훈 결승골 1-0 승리",
    "sources": [
     "nate"
    ],
-   "articles90": 7,
+   "articles90": 8,
    "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-17T19:42:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-17T20:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "카타르 꺾었지만…모레노호 끝내 아쉬움 남긴 결정력",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-17T21:06:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/055/0001403783"
+     "title": "'결승골 도움' 송민규, 카타르전 1-0 승리에도 \"공격수들 반성해야\"",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-17T21:10:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16279380"
     },
     {
-     "title": "물 만난 고기였다! 모레노호에서 건진 건 '장점 내뿜은' 송민규… 대표...",
-     "press": "besteleven.com",
+     "title": "‘손흥민 최적의 투톱 파트너는 오세훈’ 장기인 헤더로 결승골 작렬…...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-17T21:10:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/109/0005641869"
+    },
+    {
+     "title": "‘빅 찬스 미스 3회’ 해결사 오세훈, 결승골에도 고개 숙였다…“제가...",
+     "press": "mk.co.kr",
      "publishedAt": "2026-11-17T21:00:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/343/0000149070"
-    },
-    {
-     "title": "모레노호, 카타르전 승리…재계약은 미정",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-17T20:50:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611180008"
+     "link": "https://m.sports.naver.com/kfootball/article/410/0001147587"
     }
    ]
   },
@@ -114,7 +114,7 @@
     "google"
    ],
    "articles90": 5,
-   "recent20": 2,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-17T20:10:00.000Z",
    "exclusive": false,
@@ -137,6 +137,70 @@
      "press": "dailymedi.com",
      "publishedAt": "2026-11-17T20:38:00.000Z",
      "link": "https://www.dailymedi.com/news/news_view.php?wr_id=942696"
+    }
+   ]
+  },
+  {
+   "keyword": "중국 이재명 대통령",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-17T20:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[출근길 브리핑-11월 18일] 李대통령 아세안 순방·수능 부정행위 담화...",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-17T21:00:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903394"
+    },
+    {
+     "title": "러 “한미 훈련 탓에 한반도 긴장 높아져” “푸틴, 李대통령 만날 것”",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-17T20:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004010241?sid=104"
+    },
+    {
+     "title": "트럼프, 이 대통령 앞에서 “韓 투자 덕에 알래스카 LNG 승인”",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-17T20:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006411466?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "애플",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 3,
+   "press": 4,
+   "firstArticleAt": "2026-11-17T20:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "애플, 내부 업데이트 오류로 대규모 서비스 장애…\"사이버 공격 아냐\"",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-17T21:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002248968?sid=105"
+    },
+    {
+     "title": "[투데이온] 단기계약 고수하던 애플 '물량 확보형' 선회…글로벌 메모리...",
+     "press": "the-today.com",
+     "publishedAt": "2026-11-17T21:12:00.000Z",
+     "link": "https://www.the-today.com/news/articleView.html?idxno=93756"
+    },
+    {
+     "title": "아이폰 듀오, 얼굴로 잠금 푼다…애플은 Face ID보다 보안 낮다고 직접 ...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-17T21:10:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1175451"
     }
    ]
   },
@@ -175,7 +239,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 935,
+  "flagged": 937,
   "matched": 534,
   "avgLeadMin": 811,
   "recent": [
