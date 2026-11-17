@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T02:27:16.096Z",
+ "builtAt": "2026-11-17T02:37:18.785Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,133 +11,132 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "세무사 수석 경찰 출석",
+   "keyword": "조작기소 특검법 국무회의 의결 반대",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 58,
-   "recent20": 9,
-   "press": 50,
-   "firstArticleAt": "2026-11-17T00:58:00.000Z",
-   "exclusive": true,
+   "articles90": 28,
+   "recent20": 7,
+   "press": 18,
+   "firstArticleAt": "2026-11-17T01:19:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[뉴스분석]세무사 수석 자백에 번진 'AI 커닝'…시험장 곳곳 부정행위 ...",
-     "press": "namdonews.com",
-     "publishedAt": "2026-11-17T02:26:00.000Z",
-     "link": "https://www.namdonews.com/news/articleView.html?idxno=929468"
+     "title": "[포토] '조작기소 특검법 국무회의 의결' 규탄하는 국민의힘",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-17T02:36:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3449346"
     },
     {
-     "title": "AI 부정행위' 들통난 세무사시험 수석합격자…경찰 출석해 사과",
-     "press": "namdonews.com",
-     "publishedAt": "2026-11-17T02:24:00.000Z",
-     "link": "https://www.namdonews.com/news/articleView.html?idxno=929457"
+     "title": "'조작기소 특검법' 국무회의 의결 반대하며 행진하는 국민의힘",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-17T02:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016446054?sid=100"
     },
     {
-     "title": "'AI 부정행위' 세무사 수석, '개조 계산기 사용'...시험장 반입 확인",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-17T02:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394200?sid=100"
+     "title": "국힘, 공소취소 특검 국무회의 의결 강력 반발 … \"국민 심판은 통과 못...",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-17T02:28:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/17/2026111750121.html"
     }
    ]
   },
   {
-   "keyword": "조작기소 특검법 국무회의",
+   "keyword": "코스피 급락",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 53,
-   "recent20": 17,
-   "press": 24,
-   "firstArticleAt": "2026-11-17T01:25:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[포토] '조작기소 특검법 반대' 정부청사로 행진하는 국민의힘",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-17T02:26:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3449341"
-    },
-    {
-     "title": "장동혁 “조작기소 특검법 통과땐 국무위원들 모두 공범 될 것”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-17T02:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002724498?sid=100"
-    },
-    {
-     "title": "국힘, 2주째 靑앞 의총 \"한 총리 특검법 의결 포기해야\"",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-17T02:25:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000083512"
-    }
-   ]
-  },
-  {
-   "keyword": "전쟁",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 13,
+   "articles90": 20,
    "recent20": 4,
-   "press": 13,
-   "firstArticleAt": "2026-11-17T01:32:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "[37th SRE][Interview]미·이란 전쟁 장기화에 산업별 명암…한신평 분석...",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-17T02:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006411026?sid=101"
-    },
-    {
-     "title": "보건의료인 393명, 청해부대 확대 파병 반대 …\"전쟁 지원 중단하라\"",
-     "press": "ngonews.kr",
-     "publishedAt": "2026-11-17T02:18:00.000Z",
-     "link": "https://www.ngonews.kr/news/articleView.html?idxno=243304"
-    },
-    {
-     "title": "밴스 부통령 \"트럼프, 이란과 끝없는 전쟁 내버려두지 않을 것\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-17T02:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002433902?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "파라타항공",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-17T01:06:00.000Z",
+   "press": 18,
+   "firstArticleAt": "2026-11-17T01:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "파라타항공, 내년 5월 인천~LA 노선 취항… 항공권 판매 개시",
-     "press": "biz.chosun.com",
+     "title": "코스피 장중 4984까지 추락…외국인 5850억원 매도에 5000선 위태",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-17T02:32:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000083546"
+    },
+    {
+     "title": "에스엘 주가 장중 13%대 급락, 3분기 영업이익 시장 예상치 크게 밑돌아",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-17T02:30:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=452163"
+    },
+    {
+     "title": "韓·美 반도체주 동반 급락…코스피, 엔비디아 실적이 분수령 [뉴스큐]",
+     "press": "newsq.co.kr",
+     "publishedAt": "2026-11-17T02:28:00.000Z",
+     "link": "https://www.newsq.co.kr/news/articleView.html?idxno=500921"
+    }
+   ]
+  },
+  {
+   "keyword": "유학생",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 17,
+   "recent20": 3,
+   "press": 16,
+   "firstArticleAt": "2026-11-17T01:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美대학 외국인 신입 유학생 올해도 15%↓…'트럼프 반이민' 여파",
+     "press": "yna.co.kr",
      "publishedAt": "2026-11-17T02:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001205348?sid=101"
+     "link": "https://n.news.naver.com/mnews/article/001/0016446039?sid=104"
     },
     {
-     "title": "파라타항공, 첫 미주 노선 'LA행 티켓' 판매…내년 5월 취항",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-17T02:24:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5084250"
+     "title": "트럼프의 유학생·외신기자 체류기간 제한 무산…美 법원, 규정 취소",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-17T02:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004210563?sid=104"
     },
     {
-     "title": "파라타항공, 인천~LA 항공권 판매 개시…내년 5월 첫 취항",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-17T02:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003156057?sid=101"
+     "title": "미 법원, 트럼프 '유학생·특파원 체류 제한' 무효화",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-17T02:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001978552?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "황인범 임시 감독 체제",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-17T01:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"대표팀 이끄는 게 아니라 도와주러 온 꼴\" 황인범의 뼈있는 일갈… '땜...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-17T02:30:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/014/0005605433"
+    },
+    {
+     "title": "“입지 불투명한 임시 사령탑 대표팀에 긍정적이지 않다”",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-17T02:19:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/021/0002833337"
+    },
+    {
+     "title": "‘임시 체제’ 답답했던 황인범…“좋은 상황은 아니라 생각” [현장영...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-17T02:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012295349?sid=121"
     }
    ]
   },
@@ -146,10 +145,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 9,
+   "articles90": 5,
    "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-17T00:58:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-17T01:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -174,44 +173,56 @@
    ]
   },
   {
-   "keyword": "FA 1호 계약 확정!",
+   "keyword": "서울시 공무원 AI 부정",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-17T00:59:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-17T01:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "양의지, 두산과 2년 최대 55억원 FA 계약…2027년 시장 1호 계약",
-     "press": "dailysportshankook.co.kr",
-     "publishedAt": "2026-11-17T02:06:00.000Z",
-     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435613"
+     "title": "윤수혁 서울시의원 \"서울시 공무원 채용시험 관리체계 강화해야\"",
+     "press": "weekly.hankooki.com",
+     "publishedAt": "2026-11-17T02:26:00.000Z",
+     "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7194235"
     },
     {
-     "title": "'FA 1호 계약' 양의지, 두산 잔류…2년 최대 55억원(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-17T01:50:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/001/0016445901"
+     "title": "윤수혁 시의원 \"시공무원 채용시험, 감독관 2명 있어도 AI 부정행위 못 ...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-17T02:02:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261117000539"
     },
     {
-     "title": "베테랑 포수 양의지, 두산 잔류 확정…FA 1호 계약",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-17T01:42:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261117010006402"
+     "title": "윤수혁 서울시의원, AI 활용 시험 부정행위 대응 강화 촉구",
+     "press": "daily.hankooki.com",
+     "publishedAt": "2026-11-17T01:56:00.000Z",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1425872"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 824,
-  "matched": 461,
-  "avgLeadMin": 861,
+  "flagged": 829,
+  "matched": 463,
+  "avgLeadMin": 860,
   "recent": [
+   {
+    "keyword": "씨엘, 박봄 건강 언급",
+    "hitKeyword": "씨엘 박봄 건강 배려",
+    "hitAt": "2026-11-17T11:30:00+09:00",
+    "leadMin": 868
+   },
+   {
+    "keyword": "세무사 수석 경찰 출석",
+    "hitKeyword": "세무사 수석 경찰 출석",
+    "hitAt": "2026-11-17T11:30:00+09:00",
+    "leadMin": 83
+   },
    {
     "keyword": "엔비디아 젠슨 황 복귀 논의 없다",
     "hitKeyword": "트럼프 엔비디아 주식",
@@ -259,18 +270,6 @@
     "hitKeyword": "AI 안경 공무원 부정행위",
     "hitAt": "2026-11-17T10:00:00+09:00",
     "leadMin": 23
-   },
-   {
-    "keyword": "아리바이오 치매약 임상",
-    "hitKeyword": "아리바이오 치매약",
-    "hitAt": "2026-11-17T10:00:00+09:00",
-    "leadMin": 13
-   },
-   {
-    "keyword": "우리들의 발라드2",
-    "hitKeyword": "우리들의 발라드2 경연",
-    "hitAt": "2026-11-17T09:30:00+09:00",
-    "leadMin": 54
    }
   ]
  }
