@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T21:32:01.700Z",
+ "builtAt": "2026-11-17T21:42:04.873Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,18 +8,177 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 21,
+ "measured": 23,
  "candidates": [
+  {
+   "keyword": "엔비디아 실적발표",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 50,
+   "recent20": 37,
+   "press": 36,
+   "firstArticleAt": "2026-11-17T20:22:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "젠슨 황 없 엔비디아, 14분기 연속 사상 최대 실적...전년보다 두 배 증...",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-17T21:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004010250?sid=105"
+    },
+    {
+     "title": "젠슨황 없는 엔비디아, 3분기 매출 155조원…월가 예상 뛰어넘어",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-17T21:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002724815?sid=104"
+    },
+    {
+     "title": "엔비디아 3분기, 시장 예상치 상회...주가, 약세로 마감했으나 시간외 ...",
+     "press": "beyondpost.co.kr",
+     "publishedAt": "2026-11-17T21:40:00.000Z",
+     "link": "http://www.beyondpost.co.kr/view.php?ud=202611180635099022aaae0046f_30"
+    }
+   ]
+  },
+  {
+   "keyword": "은행 연체율 하락",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 21,
+   "recent20": 0,
+   "press": 21,
+   "firstArticleAt": "2026-11-17T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "은행 대출 연체율 0.59%…전년比 0.07%p↑",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-17T21:02:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611170233"
+    },
+    {
+     "title": "은행 연체율 한 달 만에 0.1%p 하락 … 기업·가계 연체율 상승 흐름은 ...",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-17T21:02:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/17/2026111750247.html"
+    },
+    {
+     "title": "9월 은행 대출 연체율 소폭 하락…‘신규 연체율’은 3년 만에 최저",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-17T21:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002832717?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "미국 NSA 통신망 마비",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 10,
+   "recent20": 3,
+   "press": 10,
+   "firstArticleAt": "2026-11-17T20:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美 항공중단→은행장애→기밀통신망 마비...트럼프는 “괜찮다”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-17T21:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004683339?sid=104"
+    },
+    {
+     "title": "美안보국 기밀 통신망 마비… “항공 중단, MS 장애 이은 중대 결함”",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-17T21:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004010247?sid=104"
+    },
+    {
+     "title": "뉴욕증시, NSA 기밀통신망 마비에 하락⋯다우 1.64%↓[상보]",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-17T21:24:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2649478"
+    }
+   ]
+  },
+  {
+   "keyword": "금융권 IT자산 관리 의무화",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 10,
+   "recent20": 0,
+   "press": 10,
+   "firstArticleAt": "2026-11-17T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "금융위, 금융권 IT자산 관리 의무 부과",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-17T21:02:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261117500523"
+    },
+    {
+     "title": "금융권 IT자산 관리 의무화…대형 금융사 보안점검 연 2회로",
+     "press": "newsway.co.kr",
+     "publishedAt": "2026-11-17T21:02:00.000Z",
+     "link": "https://www.newsway.co.kr/news/view?ud=2026111716340699396"
+    },
+    {
+     "title": "금융권 IT자산 관리 의무화…대형 금융사 취약점 점검 연 2회",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-17T21:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006411475?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "수능 예비소집",
+   "sources": [
+    "google"
+   ],
+   "articles90": 11,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-17T20:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "수능 전날 비·눈에 찬바람…낮 기온 전날보다 최대 6도 '뚝'(종합)",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-17T21:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009294947?sid=103"
+    },
+    {
+     "title": "오늘 수능 예비소집...N수생 23년 만에 최대",
+     "press": "womennews.co.kr",
+     "publishedAt": "2026-11-17T21:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/310/0000141806?sid=102"
+    },
+    {
+     "title": "[날씨클릭] 예비소집일 곳곳 비·눈…6년 만의 수능 한파",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-17T21:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000927247?sid=103"
+    }
+   ]
+  },
   {
    "keyword": "경찰",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 8,
+   "articles90": 7,
    "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-17T20:03:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-17T21:00:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
@@ -44,9 +203,41 @@
    ]
   },
   {
-   "keyword": "중국 이재명 대통령",
+   "keyword": "2026년 11월 18일 운세",
    "sources": [
     "nate"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-17T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[AI] 오늘의 띠별 운세...2026.11.18(수요일)",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-17T21:30:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=67916"
+    },
+    {
+     "title": "[오늘의 운세] 18일 수요일 나의 운세는?",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-17T21:30:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1193280"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 18일 수요일 띠별 운세… 쥐띠·용띠 '대길',...",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-17T21:16:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3083140"
+    }
+   ]
+  },
+  {
+   "keyword": "중국 이재명 대통령",
+   "sources": [
+    "signal.bz"
    ],
    "articles90": 6,
    "recent20": 0,
@@ -76,82 +267,23 @@
    ]
   },
   {
-   "keyword": "애플",
-   "sources": [
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 3,
-   "press": 5,
-   "firstArticleAt": "2026-11-17T20:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"중2부터 카뱅 카드로 애플페이\"…아이폰 좋아하는 10대 홀릴까",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-17T21:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009294952?sid=101"
-    },
-    {
-     "title": "애플 \"아이클라우드·애플페이 장애는 내부 업데이트 탓…사이버 공격 ...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-17T21:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009294943?sid=104"
-    },
-    {
-     "title": "애플, 내부 업데이트 오류로 대규모 서비스 장애…\"사이버 공격 아냐\"",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-17T21:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002248968?sid=105"
-    }
-   ]
-  },
-  {
-   "keyword": "오세훈 결승골 1-0 승리",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-17T20:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘손흥민 최적의 투톱 파트너는 오세훈’ 장기인 헤더로 결승골 작렬…...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-17T21:10:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/109/0005641869"
-    },
-    {
-     "title": "'결승골 도움' 송민규, 카타르전 1-0 승리에도 \"공격수들 반성해야\"",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-17T21:10:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16279380"
-    },
-    {
-     "title": "‘빅 찬스 미스 3회’ 해결사 오세훈, 결승골에도 고개 숙였다…“제가...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-17T21:00:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/410/0001147587"
-    }
-   ]
-  },
-  {
    "keyword": "백신",
    "sources": [
-    "signal.bz",
     "google"
    ],
    "articles90": 5,
-   "recent20": 0,
+   "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-17T20:10:00.000Z",
+   "firstArticleAt": "2026-11-17T20:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "美 26년 만 '홍역 퇴치 국가' 지위 상실…'백신 음모론'에 접종률↓",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-17T21:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006411487?sid=104"
+    },
     {
      "title": "내일이 수능인데 '콜록콜록'…지금 백신 맞아도 될까?",
      "press": "newsis.com",
@@ -163,51 +295,12 @@
      "press": "kpanews.co.kr",
      "publishedAt": "2026-11-17T20:52:00.000Z",
      "link": "https://www.kpanews.co.kr/news/articleView.html?idxno=549191"
-    },
-    {
-     "title": "코로나백신 접종 피해자 보상 이의신청 '연장 추진'",
-     "press": "dailymedi.com",
-     "publishedAt": "2026-11-17T20:38:00.000Z",
-     "link": "https://www.dailymedi.com/news/news_view.php?wr_id=942696"
-    }
-   ]
-  },
-  {
-   "keyword": "조작기소 특검법 국무회의",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-17T20:03:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'특검법' 의결날 '조작징계' 정황 공개…국힘, 대여투쟁 동력 '흔들'",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-17T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009294925?sid=100"
-    },
-    {
-     "title": "한 총리 '조작기소 특검법' 의결 '총대'...野 \"쿠데타로 총리도 감옥\"",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-17T21:00:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/325570/?sc=Naver"
-    },
-    {
-     "title": "[사설] 총리가 의결한 조작기소 특검법, 대통령 책임은 그대로",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-17T20:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003700544?sid=110"
     }
    ]
   },
   {
    "keyword": "아이폰",
    "sources": [
-    "signal.bz",
     "google"
    ],
    "articles90": 3,
@@ -238,103 +331,103 @@
    ]
   },
   {
-   "keyword": "김장",
+   "keyword": "AI 세무사 부정행위 조사 종료",
    "sources": [
-    "google"
+    "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-17T20:03:00.000Z",
+   "firstArticleAt": "2026-11-17T20:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[투데이춘추] 김장 부담은 줄었지만, 농업인의 시름은 여전하다",
-     "press": "cctoday.co.kr",
-     "publishedAt": "2026-11-17T21:02:00.000Z",
-     "link": "https://www.cctoday.co.kr/news/articleView.html?idxno=2240457"
+     "title": "‘AI 부정행위’ 세무사 수석, 13시간 조사 종료…“수험생들에게 죄송...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-17T21:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012296009?sid=102"
     },
     {
-     "title": "빨간 양념에 온정 버무린 성북… 추위 이기는 24년 김장 나눔 [현장 행정...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-17T20:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003700513?sid=102"
+     "title": "수능날 경찰 1만여명 투입…'AI 커닝' 신고·폭파 협박 대비[2027 수능]",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-17T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014328633?sid=102"
     },
     {
-     "title": "양평 양서농협·행복플러스봉사단, 김장김치 나누며 이웃사랑 실천",
-     "press": "nongmin.com",
-     "publishedAt": "2026-11-17T20:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/662/0000108728?sid=102"
+     "title": "'AI 커닝' 시험 전엔 처벌 못하고 처벌해도 벌금형…\"규정 정비 시급\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-17T20:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009294906?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 938,
-  "matched": 534,
-  "avgLeadMin": 811,
+  "flagged": 945,
+  "matched": 549,
+  "avgLeadMin": 847,
   "recent": [
    {
-    "keyword": "부동산",
-    "hitKeyword": "강남 부동산 하락세",
-    "hitAt": "2026-11-18T06:00:00+09:00",
-    "leadMin": 7764
+    "keyword": "오세훈 대학생 주거안정 논의",
+    "hitKeyword": "오세훈 카타르전 결승골",
+    "hitAt": "2026-11-18T06:30:00+09:00",
+    "leadMin": 8097
    },
    {
-    "keyword": "경북 상주 북서쪽 지진",
-    "hitKeyword": "경북 상주 지진",
-    "hitAt": "2026-11-18T06:00:00+09:00",
+    "keyword": "오세훈 서울시장과 대학생들",
+    "hitKeyword": "오세훈 카타르전 결승골",
+    "hitAt": "2026-11-18T06:30:00+09:00",
+    "leadMin": 8087
+   },
+   {
+    "keyword": "오세훈 조작기소 특검법 거부권",
+    "hitKeyword": "오세훈 카타르전 결승골",
+    "hitAt": "2026-11-18T06:30:00+09:00",
+    "leadMin": 6927
+   },
+   {
+    "keyword": "신인감독 김연경 시즌2",
+    "hitKeyword": "원더독스 시즌2",
+    "hitAt": "2026-11-18T06:30:00+09:00",
+    "leadMin": 2786
+   },
+   {
+    "keyword": "오세훈 시장, 한동훈 조문",
+    "hitKeyword": "오세훈 카타르전 결승골",
+    "hitAt": "2026-11-18T06:30:00+09:00",
+    "leadMin": 2180
+   },
+   {
+    "keyword": "오세훈, 한동훈 조문",
+    "hitKeyword": "오세훈 카타르전 결승골",
+    "hitAt": "2026-11-18T06:30:00+09:00",
+    "leadMin": 2120
+   },
+   {
+    "keyword": "오세훈 재초환 재검토",
+    "hitKeyword": "오세훈 카타르전 결승골",
+    "hitAt": "2026-11-18T06:30:00+09:00",
+    "leadMin": 891
+   },
+   {
+    "keyword": "오세훈 선제골",
+    "hitKeyword": "오세훈 카타르전 결승골",
+    "hitAt": "2026-11-18T06:30:00+09:00",
+    "leadMin": 370
+   },
+   {
+    "keyword": "송민규 카타르전 도움",
+    "hitKeyword": "오세훈 카타르전 결승골",
+    "hitAt": "2026-11-18T06:30:00+09:00",
     "leadMin": 350
    },
    {
-    "keyword": "엔비디아 실적발표",
-    "hitKeyword": "엔비디아 중국 칩 제한",
-    "hitAt": "2026-11-18T06:00:00+09:00",
-    "leadMin": 350
-   },
-   {
-    "keyword": "트럼프 희토류 생산",
-    "hitKeyword": "트럼프 알래스카 LNG 승인",
-    "hitAt": "2026-11-18T06:00:00+09:00",
-    "leadMin": 350
-   },
-   {
-    "keyword": "경북 상주 지진",
-    "hitKeyword": "경북 상주 지진",
-    "hitAt": "2026-11-18T06:00:00+09:00",
-    "leadMin": 340
-   },
-   {
-    "keyword": "세무사 수석 경찰 조사",
-    "hitKeyword": "세무사 수석 부정행위",
-    "hitAt": "2026-11-18T06:00:00+09:00",
-    "leadMin": 340
-   },
-   {
-    "keyword": "AI 세무사 경찰 조사 종료",
-    "hitKeyword": "세무사 수석 부정행위",
-    "hitAt": "2026-11-18T06:00:00+09:00",
-    "leadMin": 310
-   },
-   {
-    "keyword": "한국",
-    "hitKeyword": "한국 카타르 승리",
-    "hitAt": "2026-11-18T06:00:00+09:00",
-    "leadMin": 300
-   },
-   {
-    "keyword": "AI 세무사 조사 종료 사과",
-    "hitKeyword": "세무사 수석 부정행위",
-    "hitAt": "2026-11-18T06:00:00+09:00",
-    "leadMin": 290
-   },
-   {
-    "keyword": "모레노호 카타르 1-0 승리",
-    "hitKeyword": "한국 카타르 승리",
-    "hitAt": "2026-11-18T06:00:00+09:00",
-    "leadMin": 250
+    "keyword": "오세훈 결승골, 모레노호 1-0 승리",
+    "hitKeyword": "오세훈 카타르전 결승골",
+    "hitAt": "2026-11-18T06:30:00+09:00",
+    "leadMin": 229
    }
   ]
  }
