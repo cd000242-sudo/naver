@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T17:40:39.099Z",
+ "builtAt": "2026-11-17T17:50:42.310Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,13 +15,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 17,
-   "recent20": 0,
-   "press": 16,
-   "firstArticleAt": "2026-11-17T16:13:00.000Z",
+   "articles90": 13,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-17T16:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "모레노호, 카타르전 승리로 덮기 어려운 아쉬움 [축구 국가대표]",
+     "press": "newsq.co.kr",
+     "publishedAt": "2026-11-17T17:48:00.000Z",
+     "link": "https://www.newsq.co.kr/news/articleView.html?idxno=500937"
+    },
     {
      "title": "'오세훈 결승골' 한국, 올해 마지막 A매치에서 카타르에 1-0 승리",
      "press": "thesportstimes.co.kr",
@@ -33,12 +39,6 @@
      "press": "fourfourtwo.co.kr",
      "publishedAt": "2026-11-17T16:55:00.000Z",
      "link": "https://m.sports.naver.com/kfootball/article/411/0000090106"
-    },
-    {
-     "title": "'선발 7명 로테이션' 모레노호, 카타르 1-0 제압하고 올해 마지막 A매치...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-17T16:36:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/014/0005605827"
     }
    ]
   },
@@ -47,10 +47,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 7,
+   "articles90": 5,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-17T16:16:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-17T16:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -79,10 +79,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-17T16:11:00.000Z",
+   "firstArticleAt": "2026-11-17T17:04:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
