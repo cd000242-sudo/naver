@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T05:38:15.672Z",
+ "builtAt": "2026-11-17T05:48:19.010Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,46 +15,51 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 75,
-   "recent20": 18,
-   "press": 47,
-   "firstArticleAt": "2026-11-17T04:14:00.000Z",
+   "articles90": 80,
+   "recent20": 26,
+   "press": 49,
+   "firstArticleAt": "2026-11-17T04:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "공수처 \"조작기소 특검에 검사 파견 가능\"",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-17T05:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000552761?sid=102"
+     "title": "'조작기소 특검법' 공포안, 국무회의 통과… 한성숙 총리 주재",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-17T05:46:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/325549/?sc=Naver"
     },
     {
-     "title": "국민의힘 \"조작기소 특검법은 쿠데타\"…거부권 요구",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-17T05:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001164625?sid=100"
+     "title": "국힘, '조작기소 특검법' 국무회의 의결 \"동참자 잊지 않을 것\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-17T05:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009293911?sid=100"
     },
     {
-     "title": "오세훈, 조작기소 특검법에 \"치외법권 대통령 탄생\" 비판",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-17T05:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016446575?sid=102"
+     "title": "조작기소 특검 출범 초읽기…위헌 논란에 수사 난항 우려",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-17T05:46:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2019709"
     }
    ]
   },
   {
    "keyword": "손석구·나가야마 에이타 푸른길 공조",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 8,
    "recent20": 1,
    "press": 8,
-   "firstArticleAt": "2026-11-17T04:15:00.000Z",
+   "firstArticleAt": "2026-11-17T04:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[핌in현장] 손석구·나가야마 \"국적의 장벽 넘어 통했다\"…'푸른길' 특별...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-17T05:43:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261117000587"
+    },
     {
      "title": "손석구·나가야마 에이타, 국경 넘은 공조 수사…‘푸른길’로 완성한 ...",
      "press": "sports.donga.com",
@@ -66,44 +71,6 @@
      "press": "raonnews.com",
      "publishedAt": "2026-11-17T04:52:00.000Z",
      "link": "https://www.raonnews.com/news/article.html?no=62831"
-    },
-    {
-     "title": "손석구 \"배우로서 틀 깨고자 '푸른길' 선택…외모 변화도 줬죠\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-17T04:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016446392?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "보습크림 8종 품질 비교",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-17T04:17:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "보습크림 8종 비교...세타필 최저가에 흡수력·만족도 최고",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-17T05:06:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=782464"
-    },
-    {
-     "title": "비쌀수록 좋다는 건 ‘착각’…보습크림, 가격 7배 차이나도 성능은 비...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-17T05:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004175848?sid=101"
-    },
-    {
-     "title": "이번 겨울 보습크림 뭐 쓰지…가장 촉촉한 건 에스트라·이니스프리",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-17T04:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005764873?sid=101"
     }
    ]
   },
@@ -113,13 +80,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 6,
+   "articles90": 7,
    "recent20": 2,
    "press": 4,
    "firstArticleAt": "2026-11-17T04:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이카루스의 추락, 보라색 스타킹 신은 신부…샤갈 작품 61점 국내 첫 공...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-17T05:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014327472?sid=103"
+    },
     {
      "title": "환상에 시대의 기억을 담다…샤갈의 예술과 삶의 궤적(종합)",
      "press": "yna.co.kr",
@@ -131,19 +104,45 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-17T05:23:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009293794?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "순국선열 기념식 개최",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-17T04:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "경북도, 제87회 순국선열의 날 기념식…독립운동 희생정신 기려",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-17T05:32:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5084368"
     },
     {
-     "title": "샤갈의 삶과 예술을 따라가다…‘퐁피두센터 샤갈전’ 개최",
-     "press": "segye.com",
-     "publishedAt": "2026-11-17T05:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004175853?sid=103"
+     "title": "경기남부보훈지청, 제87회 순국선열의 날 기념식 개최",
+     "press": "kgnews.co.kr",
+     "publishedAt": "2026-11-17T05:02:00.000Z",
+     "link": "https://www.kgnews.co.kr/news/article.html?no=919921"
+    },
+    {
+     "title": "[17일 안성시]제87회 순국선열의 날 기념식·추모 제례 거행 등",
+     "press": "asiatime.co.kr",
+     "publishedAt": "2026-11-17T04:44:00.000Z",
+     "link": "https://www.asiatime.co.kr/article/20261117500274"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 873,
+  "flagged": 874,
   "matched": 477,
   "avgLeadMin": 857,
   "recent": [
