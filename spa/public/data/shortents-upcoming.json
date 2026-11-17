@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T22:02:11.596Z",
+ "builtAt": "2026-11-17T22:12:14.798Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 22,
  "candidates": [
   {
    "keyword": "엔비디아 실적발표",
    "sources": [
     "daum"
    ],
-   "articles90": 73,
-   "recent20": 22,
-   "press": 46,
-   "firstArticleAt": "2026-11-17T20:38:00.000Z",
-   "exclusive": true,
+   "articles90": 79,
+   "recent20": 29,
+   "press": 50,
+   "firstArticleAt": "2026-11-17T21:28:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "엔비디아, 시간외 거래서 1.6%, 마이크론 0.4%↑...반도체주, 소록 상승",
-     "press": "beyondpost.co.kr",
-     "publishedAt": "2026-11-17T22:00:00.000Z",
-     "link": "http://www.beyondpost.co.kr/view.php?ud=2026111806505223272aaae0046f_30"
+     "title": "엔비디아 실적 발표 앞둔 뉴욕 증시 급락, 투자자들 불안 고조",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-17T22:10:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886139"
     },
     {
-     "title": "[김대호 인물] 젠슨황 빠진 엔비디아 실적발표 컨콜 \"콜레드 크레스\" 임...",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-17T22:00:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=20261117135945655906806b77b_1"
+     "title": "엔비디아 실적 경계감에 일제히 하락…S&P500, 7월 이후 최저 [뉴욕증시...",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-17T22:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005355069?sid=101"
     },
     {
-     "title": "[뉴욕증시 마감] 엔비디아 실적 앞두고 일제히 하락…다우 1.64%↓",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-17T22:00:00.000Z",
-     "link": "https://www.ajunews.com/view/20261118065553734"
+     "title": "젠슨 황 없는 엔비디아 매출 사상 최대...현금 흐름도 2배[마켓무버]",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-17T22:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004683357?sid=104"
     }
    ]
   },
@@ -47,94 +47,94 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 21,
-   "recent20": 0,
-   "press": 21,
+   "articles90": 23,
+   "recent20": 2,
+   "press": 23,
    "firstArticleAt": "2026-11-17T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "은행권 연체율 0.59%로 두 달만에 하락…중소기업 대출은 여전히 '빨간불...",
-     "press": "newsway.co.kr",
-     "publishedAt": "2026-11-17T21:02:00.000Z",
-     "link": "https://www.newsway.co.kr/news/view?ud=2026111715043068930"
+     "title": "9월 은행 대출 연체율 0.59%…10년 만에 최고",
+     "press": "straightnews.co.kr",
+     "publishedAt": "2026-11-17T22:10:00.000Z",
+     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=315599"
     },
     {
-     "title": "은행 대출 연체율 0.59%…전년比 0.07%p↑",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-17T21:02:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611170233"
+     "title": "국내은행 대출 연체율, 9월 기준 10년 만에 최고",
+     "press": "sateconomy.co.kr",
+     "publishedAt": "2026-11-17T22:04:00.000Z",
+     "link": "http://sateconomy.co.kr/news/view/1065564077142055"
     },
     {
-     "title": "9월 은행 대출 연체율 소폭 하락…‘신규 연체율’은 3년 만에 최저",
-     "press": "hani.co.kr",
+     "title": "은행 연체율 한 달 만에 0.1%p 하락 … 기업·가계 연체율 상승 흐름은 ...",
+     "press": "biz.newdaily.co.kr",
      "publishedAt": "2026-11-17T21:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002832717?sid=101"
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/17/2026111750247.html"
     }
    ]
   },
   {
-   "keyword": "미국 NSA 통신망 마비",
+   "keyword": "젠슨 황, 이사회 요청 시 복귀",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 13,
-   "recent20": 5,
-   "press": 11,
-   "firstArticleAt": "2026-11-17T20:45:00.000Z",
-   "exclusive": false,
+   "articles90": 12,
+   "recent20": 4,
+   "press": 12,
+   "firstArticleAt": "2026-11-17T21:01:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "美 국가안보국 기밀통신망 마비…항공 중단 이어 또 '인프라 다운'",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-17T22:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004210912?sid=104"
+     "title": "젠슨황 복귀의사 공식화…“이사회 요청시 응할것”",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-17T22:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003486808?sid=105"
     },
     {
-     "title": "美증시, 기밀통신망 마비에 하락 지속...다우지수, 5개월만에 최저 [데일...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-17T21:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004683349?sid=104"
+     "title": "5일 만에 침묵 깬 젠슨 황 \"이사회 요청시 엔비디아 복귀\"",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-17T22:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001164693?sid=104"
     },
     {
-     "title": "뉴욕증시, NSA 기밀통신망 마비에 하락⋯다우 1.64%↓ [종합]",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-17T21:50:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2649486"
+     "title": "젠슨 황 “이사회 요청 땐 복귀”⋯엔비디아는 후임 CEO 물색",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-17T22:00:00.000Z",
+     "link": "https://www.viva100.com/article/20261118500033"
     }
    ]
   },
   {
-   "keyword": "금융권 IT자산 관리 의무화",
+   "keyword": "수능 예비소집",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 11,
-   "recent20": 1,
+   "articles90": 14,
+   "recent20": 3,
    "press": 11,
-   "firstArticleAt": "2026-11-17T21:00:00.000Z",
+   "firstArticleAt": "2026-11-17T20:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "AI 해킹 위협에 금융권 보안 ‘고삐’…대형사 취약점 점검 연 2회로 확...",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-17T21:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003059741?sid=101"
+     "title": "[뉴스클레임 PICK] 수능 D-1 '영하·눈' 비상… 추경호 대구시장 오늘 1심...",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-17T22:10:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3083143"
     },
     {
-     "title": "금융위, 금융권 IT자산 관리 의무 부과",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-17T21:02:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261117500523"
+     "title": "[날씨] 오후부터 전국 비·곳곳 눈…수능일 기온 '뚝'",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-17T22:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000927256?sid=103"
     },
     {
-     "title": "금융권 IT자산 관리 의무화…대형 금융사 보안점검 연 2회로",
-     "press": "newsway.co.kr",
-     "publishedAt": "2026-11-17T21:02:00.000Z",
-     "link": "https://www.newsway.co.kr/news/view?ud=2026111716340699396"
+     "title": "수능 N수생, 23년 만에 최대 규모로 몰렸다…하루 앞두고 55만명 예비소...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-17T21:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005765250?sid=102"
     }
    ]
   },
@@ -143,63 +143,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 8,
+   "articles90": 6,
    "recent20": 4,
-   "press": 8,
-   "firstArticleAt": "2026-11-17T21:02:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-17T21:22:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
+    {
+     "title": "'젠슨 황 스캔들' 러트닉 경질론…\"수출통제 강화 대비를\"",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-17T22:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001164694?sid=100"
+    },
+    {
+     "title": "상장제약사 3분기 누적 수출액 급증, 녹십자 5000억 근접",
+     "press": "newsmp.com",
+     "publishedAt": "2026-11-17T22:08:00.000Z",
+     "link": "http://www.newsmp.com/news/articleView.html?idxno=259358"
+    },
     {
      "title": "[수출 1조 달러의 명암②] 손님 줄고 임대 늘고…겨울보다 빠른 골목상...",
      "press": "dailian.co.kr",
      "publishedAt": "2026-11-17T22:01:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/119/0003156400?sid=101"
-    },
-    {
-     "title": "엔비디아, '국가안보·수출통제 감독위원회' 신설",
-     "press": "zdnet.co.kr",
-     "publishedAt": "2026-11-17T22:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/092/0002445761?sid=105"
-    },
-    {
-     "title": "하염없는 수출 기대 현대로템, 이젠 증명해야[클릭e종목]",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-17T22:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005844053?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "중국 이재명 대통령",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-17T20:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "트럼프 \"김정은, 중국 오고 싶어할 것\"...\"한국 투자 덕에 알래스카 LNG ...",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-17T21:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002434329?sid=104"
-    },
-    {
-     "title": "이 대통령, APEC 무대 중국 선전 도착…시진핑 회담·미중러 정상회담 주...",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-17T21:42:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101454"
-    },
-    {
-     "title": "아세안 일정 마친 이 대통령 선전으로…APEC 정상회의 참석",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-17T21:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012296013?sid=100"
     }
    ]
   },
@@ -236,6 +203,38 @@
    ]
   },
   {
+   "keyword": "수사",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-17T21:00:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "\"수능 부정행위 할것\" 예고에 '1500 브로커'설..자칫하면 수사대상",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-17T22:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006411494?sid=102"
+    },
+    {
+     "title": "김완섭 ‘피의자 신분’ 조사하고도… 종합특검, 수사 두 달간 입건 안...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-17T21:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004176059?sid=102"
+    },
+    {
+     "title": "태안 하천서 80대 여성 숨진 채 발견...경찰 수사 중",
+     "press": "newsfreezone.co.kr",
+     "publishedAt": "2026-11-17T21:02:00.000Z",
+     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=719873"
+    }
+   ]
+  },
+  {
    "keyword": "훈련",
    "sources": [
     "google"
@@ -268,98 +267,67 @@
    ]
   },
   {
-   "keyword": "AI 세무사 부정행위 사과",
+   "keyword": "중국 이재명 대통령",
    "sources": [
     "nate"
    ],
    "articles90": 5,
    "recent20": 0,
    "press": 5,
-   "firstArticleAt": "2026-11-17T21:04:00.000Z",
+   "firstArticleAt": "2026-11-17T20:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[뉴스클레임 사설] 세무사 수석 부정행위, 당국은 감독 실패 경위부터 ...",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-17T21:26:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3083142"
-    },
-    {
-     "title": "'AI커닝' 세무사 수석합격자 \"공범 없다\"...계산기 개조해 범행",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-17T21:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001273069?sid=102"
-    },
-    {
-     "title": "AI 부정행위 파문에…유명 연예인의 ‘공인중개사 시험’ 합격 수기, 재...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-17T21:16:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1175393"
-    }
-   ]
-  },
-  {
-   "keyword": "수사",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-17T20:41:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김완섭 ‘피의자 신분’ 조사하고도… 종합특검, 수사 두 달간 입건 안...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-17T21:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004176059?sid=102"
-    },
-    {
-     "title": "[시선] 검사가 수사를 안 하면 범죄자는 더 좋아할까?",
-     "press": "cctoday.co.kr",
-     "publishedAt": "2026-11-17T21:02:00.000Z",
-     "link": "https://www.cctoday.co.kr/news/articleView.html?idxno=2240453"
-    },
-    {
-     "title": "태안 하천서 80대 여성 숨진 채 발견...경찰 수사 중",
-     "press": "newsfreezone.co.kr",
-     "publishedAt": "2026-11-17T21:02:00.000Z",
-     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=719873"
-    }
-   ]
-  },
-  {
-   "keyword": "뉴스",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-17T21:30:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "2026년 11월 18일 전체뉴스",
-     "press": "btnnews.tv",
-     "publishedAt": "2026-11-17T22:00:00.000Z",
-     "link": "https://www.btnnews.tv/news/articleView.html?idxno=92473"
-    },
-    {
-     "title": "[YTN 실시간뉴스] 'AI부정' 세무사 14시간 조사...\"깊이 사과\"",
+     "title": "트럼프 \"김정은, 중국 오고 싶어할 것\"...\"한국 투자 덕에 알래스카 LNG ...",
      "press": "ytn.co.kr",
-     "publishedAt": "2026-11-17T21:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002434328?sid=102"
+     "publishedAt": "2026-11-17T21:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002434329?sid=104"
     },
     {
-     "title": "[오늘의 경제뉴스] 국제 LNG값 2.6배 급등…산업계 덮친 가스비 충격, 생...",
-     "press": "newsverse.kr",
+     "title": "이 대통령, APEC 무대 중국 선전 도착…시진핑 회담·미중러 정상회담 주...",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-17T21:42:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101454"
+    },
+    {
+     "title": "아세안 일정 마친 이 대통령 선전으로…APEC 정상회의 참석",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-17T21:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012296013?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "배당",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-17T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "퀀타서비스, 주당 0.13달러 배당…2027년 1월 지급",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-17T22:08:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=406886"
+    },
+    {
+     "title": "[더벨][주주총회 프리뷰] 액토즈소프트, 첫 현금배당 채비…주주환원 구...",
+     "press": "thebell.co.kr",
+     "publishedAt": "2026-11-17T22:02:00.000Z",
+     "link": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202611161419406880102764"
+    },
+    {
+     "title": "찬바람 부니 배당주?…고금리에 '옥석가리기' 필요",
+     "press": "news1.kr",
      "publishedAt": "2026-11-17T21:30:00.000Z",
-     "link": "https://www.newsverse.kr/news/articleView.html?idxno=11947"
+     "link": "https://n.news.naver.com/mnews/article/421/0009294953?sid=101"
     }
    ]
   },
@@ -382,26 +350,38 @@
      "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237798"
     },
     {
+     "title": "[청년노동자 사망 보름째] 금속노조·유족 HD현대삼호에 \"진상규명과 사...",
+     "press": "labortoday.co.kr",
+     "publishedAt": "2026-11-17T21:34:00.000Z",
+     "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237793"
+    },
+    {
      "title": "파업 예고한 코레일테크 노동자가 청와대 찾은 까닭은",
      "press": "labortoday.co.kr",
      "publishedAt": "2026-11-17T21:34:00.000Z",
      "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237792"
-    },
-    {
-     "title": "느끼고 추측하는 노동자들",
-     "press": "labortoday.co.kr",
-     "publishedAt": "2026-11-17T21:34:00.000Z",
-     "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237799"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 950,
-  "matched": 549,
-  "avgLeadMin": 847,
+  "flagged": 952,
+  "matched": 551,
+  "avgLeadMin": 844,
   "recent": [
+   {
+    "keyword": "미국 NSA 통신망 마비",
+    "hitKeyword": "미 국가안보국 통신망 마비",
+    "hitAt": "2026-11-18T07:00:00+09:00",
+    "leadMin": 18
+   },
+   {
+    "keyword": "AI 세무사 부정행위 조사 종료",
+    "hitKeyword": "수능 부정행위 방지 대책",
+    "hitAt": "2026-11-18T07:00:00+09:00",
+    "leadMin": 18
+   },
    {
     "keyword": "오세훈 대학생 주거안정 논의",
     "hitKeyword": "오세훈 카타르전 결승골",
@@ -449,18 +429,6 @@
     "hitKeyword": "오세훈 카타르전 결승골",
     "hitAt": "2026-11-18T06:30:00+09:00",
     "leadMin": 370
-   },
-   {
-    "keyword": "송민규 카타르전 도움",
-    "hitKeyword": "오세훈 카타르전 결승골",
-    "hitAt": "2026-11-18T06:30:00+09:00",
-    "leadMin": 350
-   },
-   {
-    "keyword": "오세훈 결승골, 모레노호 1-0 승리",
-    "hitKeyword": "오세훈 카타르전 결승골",
-    "hitAt": "2026-11-18T06:30:00+09:00",
-    "leadMin": 229
    }
   ]
  }
