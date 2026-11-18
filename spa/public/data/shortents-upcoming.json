@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T21:00:12.641Z",
+ "builtAt": "2026-11-18T21:10:17.083Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "정부 수능 부정행위 대응",
+   "keyword": "2026년 11월 19일 운세",
    "sources": [
     "nate"
    ],
-   "articles90": 18,
-   "recent20": 3,
-   "press": 18,
-   "firstArticleAt": "2026-11-18T19:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "의대 490명 증원·지역의사제 적용 첫 수능 실시",
-     "press": "dailymedi.com",
-     "publishedAt": "2026-11-18T20:58:00.000Z",
-     "link": "https://www.dailymedi.com/news/news_view.php?wr_id=942760"
-    },
-    {
-     "title": "'AI 부정행위' 공포 속 수능 개막…뒷북 대책에 현장 혼란 가중",
-     "press": "goodnews1.com",
-     "publishedAt": "2026-11-18T20:52:00.000Z",
-     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466410"
-    },
-    {
-     "title": "전남광주교육청 '수능 AI 기기 활용 부정행위' 예방 총력",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-18T20:42:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=884935"
-    }
-   ]
-  },
-  {
-   "keyword": "승리",
-   "sources": [
-    "google"
-   ],
    "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-18T19:32:00.000Z",
+   "recent20": 4,
+   "press": 5,
+   "firstArticleAt": "2026-11-18T20:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美 알래스카 상원서 민주당 펠톨라 승리…상원 56석 확보",
-     "press": "goodnews1.com",
-     "publishedAt": "2026-11-18T20:26:00.000Z",
-     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466407"
+     "title": "[오늘의 운세] 2026년 11월 19일 별자리 운세",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-18T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006412169?sid=103"
     },
     {
-     "title": "미 민주, 알래스카 승리로 상원 56석…68년 만에 최다 탈환",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-18T20:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404099?sid=104"
+     "title": "[오늘의 운세] 2026년 11월 19일 띠별 운세",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-18T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006412168?sid=103"
     },
     {
-     "title": "민주 제프리스, 첫 흑인 하원의장 확정…펠톨라 승리로 민주 상원 56석,...",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-18T20:06:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261119010007299"
+     "title": "[재미있는 오늘의 운세] 2026년 11월 19일",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-18T21:00:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261114000063"
     }
    ]
   },
@@ -79,99 +47,163 @@
    "sources": [
     "daum"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-18T19:31:00.000Z",
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-18T20:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[사설] 추경호 1심 무죄, 대구시 동력 회복하길",
+     "press": "yeongnam.com",
+     "publishedAt": "2026-11-18T21:00:00.000Z",
+     "link": "https://www.yeongnam.com/web/view.php?key=20261118028581591"
+    },
+    {
+     "title": "秋 1심 무죄에 국힘 \"내란몰이 종지부\"...與 \"특검 즉각 항소해야\"",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-18T21:00:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/325706/?sc=Naver"
+    },
     {
      "title": "‘계엄 해제 표결 방해’ 추경호 1심 무죄",
      "press": "seoul.co.kr",
      "publishedAt": "2026-11-18T20:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/081/0003700892?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "자바 보안 취약점",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-18T20:03:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이스트시큐리티, Java 취약점 점검 스캐너 배포",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-18T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004683765?sid=105"
     },
     {
-     "title": "[사설] 추경호 시장 1심 무죄, 대구 시민도 대구시정도 한시름 덜었다",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-18T20:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001041155?sid=110"
+     "title": "PHP 이어 자바도 해킹 위험…정부 긴급 보안점검",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-18T20:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000927651?sid=101"
     },
     {
-     "title": "'계엄 해제 방해' 추경호 1심 무죄 이유는… \"국힘 제외해도 가결 가능...",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-18T19:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000966445?sid=102"
+     "title": "‘27만원 AI’에 공공 시스템 71% 쓰는 ‘자바’ 뚫린다",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-18T20:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003700903?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "유퀴즈 김명민 출연 고백",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-18T20:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김명민, 1박 2일 유치장 신세→즉결심판 벌금형 고백 “사식 치킨맛 못...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-18T21:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001188924"
+    },
+    {
+     "title": "'유퀴즈' 김명민, 은퇴 후 이민 고민했지만 \"아이가 선물해 준 '불멸의 ...",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-18T20:36:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109980768846"
+    },
+    {
+     "title": "김명민 \"배우 관두고 이민 준비 중 '불멸의 이순신' 캐스팅\" [RE:TV]",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-18T20:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009297450"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1072,
-  "matched": 590,
-  "avgLeadMin": 894,
+  "flagged": 1074,
+  "matched": 602,
+  "avgLeadMin": 882,
   "recent": [
    {
-    "keyword": "에이엘로봇",
-    "hitKeyword": "에이엘로봇 상장 급락",
-    "hitAt": "2026-11-19T00:00:00+09:00",
-    "leadMin": 857
+    "keyword": "앤트로픽 상장",
+    "hitKeyword": "앤트로픽 IPO 공모가",
+    "hitAt": "2026-11-19T06:00:00+09:00",
+    "leadMin": 1247
    },
    {
-    "keyword": "이재명 다카이치 정상회담",
-    "hitKeyword": "다카이치 총리 냉대 의전",
-    "hitAt": "2026-11-18T23:30:00+09:00",
-    "leadMin": 804
+    "keyword": "수능 부정행위 포상금 1억",
+    "hitKeyword": "자격시험 AI 부정행위",
+    "hitAt": "2026-11-19T06:00:00+09:00",
+    "leadMin": 352
    },
    {
-    "keyword": "기예르모 에레디아",
-    "hitKeyword": "에레디아 SSG 결별",
-    "hitAt": "2026-11-18T23:30:00+09:00",
-    "leadMin": 644
+    "keyword": "승리 아내 동반 입국",
+    "hitKeyword": "승리 만삭 아내 입국",
+    "hitAt": "2026-11-19T06:00:00+09:00",
+    "leadMin": 352
    },
    {
-    "keyword": "농구",
-    "hitKeyword": "삼성 프로농구 1위 질주",
-    "hitAt": "2026-11-18T23:00:00+09:00",
-    "leadMin": 1912
+    "keyword": "시진핑 APEC 환영만찬",
+    "hitKeyword": "시진핑 트럼프 공항 영접",
+    "hitAt": "2026-11-19T06:00:00+09:00",
+    "leadMin": 322
    },
    {
-    "keyword": "브로커 양씨 징역 4년 구형",
-    "hitKeyword": "유튜버 징역 1년 구형",
-    "hitAt": "2026-11-18T18:00:00+09:00",
-    "leadMin": 8616
+    "keyword": "트럼프 푸틴 악수",
+    "hitKeyword": "시진핑 트럼프 공항 영접",
+    "hitAt": "2026-11-19T06:00:00+09:00",
+    "leadMin": 322
    },
    {
-    "keyword": "브로커 징역 4년 구형",
-    "hitKeyword": "유튜버 징역 1년 구형",
-    "hitAt": "2026-11-18T18:00:00+09:00",
-    "leadMin": 8585
+    "keyword": "승리 임신한 아내 동반 입국",
+    "hitKeyword": "승리 만삭 아내 입국",
+    "hitAt": "2026-11-19T06:00:00+09:00",
+    "leadMin": 322
    },
    {
-    "keyword": "김승원 브로커 징역 4년 구형",
-    "hitKeyword": "유튜버 징역 1년 구형",
-    "hitAt": "2026-11-18T18:00:00+09:00",
-    "leadMin": 8515
+    "keyword": "승리 아내 공항 포착",
+    "hitKeyword": "승리 만삭 아내 입국",
+    "hitAt": "2026-11-19T06:00:00+09:00",
+    "leadMin": 292
    },
    {
-    "keyword": "김승원 징역 4년 구형",
-    "hitKeyword": "유튜버 징역 1년 구형",
-    "hitAt": "2026-11-18T18:00:00+09:00",
-    "leadMin": 8424
+    "keyword": "수능 부정행위 1억 포상금",
+    "hitKeyword": "자격시험 AI 부정행위",
+    "hitAt": "2026-11-19T06:00:00+09:00",
+    "leadMin": 271
    },
    {
-    "keyword": "수사",
-    "hitKeyword": "LEET 만점자 수사",
-    "hitAt": "2026-11-18T18:00:00+09:00",
-    "leadMin": 658
+    "keyword": "승리",
+    "hitKeyword": "승리 만삭 아내 입국",
+    "hitAt": "2026-11-19T06:00:00+09:00",
+    "leadMin": 100
    },
    {
-    "keyword": "김장",
-    "hitKeyword": "김장 물가 상승",
-    "hitAt": "2026-11-18T17:00:00+09:00",
-    "leadMin": 648
+    "keyword": "수능 부정행위 TF 가동",
+    "hitKeyword": "자격시험 AI 부정행위",
+    "hitAt": "2026-11-19T06:00:00+09:00",
+    "leadMin": 50
    }
   ]
  }
