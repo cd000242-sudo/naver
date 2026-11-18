@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T15:18:00.559Z",
+ "builtAt": "2026-11-18T15:28:04.403Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 28,
  "candidates": [
   {
    "keyword": "수능 부정행위 포상금 1억",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-18T13:56:00.000Z",
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-18T13:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[사설] 1억 포상 노린 시험장 고발, 어떤 혼란 부를지 걱정된다",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-18T15:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004010407?sid=110"
+    },
     {
      "title": "수능 부정행위 신고하면 \"1억원 포상금\" 추진",
      "press": "gukjenews.com",
@@ -33,12 +39,6 @@
      "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-18T15:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/422/0000927611?sid=100"
-    },
-    {
-     "title": "[잡채기 칼럼] 무신불립ⵈ '수능' 조롱",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-18T15:00:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3083273"
     }
    ]
   },
@@ -48,13 +48,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 9,
-   "recent20": 0,
+   "articles90": 8,
+   "recent20": 1,
    "press": 7,
-   "firstArticleAt": "2026-11-18T13:55:00.000Z",
+   "firstArticleAt": "2026-11-18T14:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[사진] 중국 선전에 모인 APEC 정상들",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-18T15:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003566295?sid=100"
+    },
     {
      "title": "시진핑 내외 양옆에 트럼프·푸틴…푸틴은 9년만에 APEC 단체사진(종합...",
      "press": "yna.co.kr",
@@ -66,44 +72,70 @@
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-18T14:50:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012296850?sid=104"
-    },
-    {
-     "title": "APEC 환영만찬",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-18T14:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016450381?sid=100"
     }
    ]
   },
   {
-   "keyword": "김명민",
+   "keyword": "한중 FTA 실질 타결",
    "sources": [
-    "google"
+    "nate"
    ],
-   "articles90": 8,
-   "recent20": 0,
+   "articles90": 6,
+   "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-18T13:51:00.000Z",
+   "firstArticleAt": "2026-11-18T14:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"메소드 연기\" 김명민, '베토벤 바이러스' 웃픈 비화 (유퀴즈) [TV나우]",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-18T14:43:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000053269"
+     "title": "한중 경제·문화 교류 새 물꼬…강원관광 탄력 기대감",
+     "press": "kado.net",
+     "publishedAt": "2026-11-18T15:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000212167?sid=100"
     },
     {
-     "title": "김명민, ♥아내 임신 중 태아 성장 멈췄다…\"배우 포기 후 이민 결심\" (...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-18T14:41:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004467874"
+     "title": "[사설]한중 서비스 협상 타결, 선언 아닌 실질 개방으로 이어져야",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-18T15:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004683740?sid=110"
     },
     {
-     "title": "‘유퀴즈’ 김명민, 故 안판석 감독 떠올리며 먹먹… “한 작품 더 못한...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-18T14:16:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003542507"
+     "title": "김정관 장관, 한·중 FTA 서비스 후속 협상 타결 따른 ‘한한령’ 해제...",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-18T15:02:00.000Z",
+     "link": "https://www.viva100.com/article/20261118501472"
+    }
+   ]
+  },
+  {
+   "keyword": "추경호 1심 무죄에",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-18T14:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[사설] 추경호, 1심 내란 무죄 불구 정치적 책임 가볍지 않다",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-18T15:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000966428?sid=110"
+    },
+    {
+     "title": "장동혁, 추경호 무죄에 주도권 강화?…한동훈 '배신자 프레임' 거세지나",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-18T15:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000553407?sid=100"
+    },
+    {
+     "title": "계엄 협조 증거라던 윤과 ‘2분 통화’…1심 “그런 증거 없다”",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-18T15:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003566243?sid=102"
     }
    ]
   },
@@ -140,12 +172,76 @@
    ]
   },
   {
+   "keyword": "김명민",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-18T14:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"메소드 연기\" 김명민, '베토벤 바이러스' 웃픈 비화 (유퀴즈) [TV나우]",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-18T14:43:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000053269"
+    },
+    {
+     "title": "김명민, ♥아내 임신 중 태아 성장 멈췄다…\"배우 포기 후 이민 결심\" (...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-18T14:41:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004467874"
+    },
+    {
+     "title": "‘유퀴즈’ 김명민, 故 안판석 감독 떠올리며 먹먹… “한 작품 더 못한...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-18T14:16:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003542507"
+    }
+   ]
+  },
+  {
+   "keyword": "2026 대한민국 게임대상",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-18T14:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[게임대상] 펄어비스 '붉은사막' 대상(대통령상) 포함 8관왕…엔씨 '아...",
+     "press": "webeconomy.co.kr",
+     "publishedAt": "2026-11-18T15:16:00.000Z",
+     "link": "https://www.webeconomy.co.kr/news/articleView.html?idxno=2381861"
+    },
+    {
+     "title": "펄어비스 '붉은사막', 2026 대한민국 게임대상 대통령상 등 역대 최다 8...",
+     "press": "onews.tv",
+     "publishedAt": "2026-11-18T14:42:00.000Z",
+     "link": "https://www.onews.tv/news/articleView.html?idxno=292025"
+    },
+    {
+     "title": "게임대상 우수상 〈도깨비의세계〉 초기화·돌파 이전·천장 시스템 도...",
+     "press": "globale.co.kr",
+     "publishedAt": "2026-11-18T14:20:00.000Z",
+     "link": "https://www.globale.co.kr/news/articleView.html?idxno=41733"
+    }
+   ]
+  },
+  {
    "keyword": "승리 아내 동반 입국",
    "sources": [
     "daum"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-18T14:20:00.000Z",
    "exclusive": false,
@@ -177,7 +273,7 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-18T14:00:00.000Z",
    "exclusive": false,
@@ -200,38 +296,6 @@
      "press": "xportsnews.com",
      "publishedAt": "2026-11-18T14:00:00.000Z",
      "link": "https://m.sports.naver.com/general/article/311/0002081909"
-    }
-   ]
-  },
-  {
-   "keyword": "신생아 발견 수사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-18T13:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "신생아 자녀에게 신체적 학대 가한 혐의 현직 경찰관 부부 경찰 수사",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-18T14:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001231816?sid=102"
-    },
-    {
-     "title": "아파트 헌옷수거함서 탯줄 달린 신생아 시신 발견…경찰 수사",
-     "press": "weekly.chosun.com",
-     "publishedAt": "2026-11-18T14:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/053/0000063149?sid=102"
-    },
-    {
-     "title": "하남 아파트 헌옷수거함서 탯줄 붙은 신생아 시신 발견…경찰, CCTV 등 분...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-18T13:56:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16280199"
     }
    ]
   },
@@ -270,7 +334,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1062,
+  "flagged": 1065,
   "matched": 597,
   "avgLeadMin": 887,
   "recent": [
