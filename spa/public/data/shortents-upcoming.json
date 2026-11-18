@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T20:19:57.761Z",
+ "builtAt": "2026-11-18T20:30:01.344Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 28,
  "candidates": [
   {
    "keyword": "승리",
    "sources": [
     "google"
    ],
-   "articles90": 7,
-   "recent20": 3,
-   "press": 7,
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
    "firstArticleAt": "2026-11-18T19:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "美 알래스카 상원서 민주당 펠톨라 승리…상원 56석 확보",
+     "press": "goodnews1.com",
+     "publishedAt": "2026-11-18T20:26:00.000Z",
+     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466407"
+    },
     {
      "title": "미 민주, 알래스카 승리로 상원 56석…68년 만에 최다 탈환",
      "press": "news.sbs.co.kr",
@@ -33,28 +39,27 @@
      "press": "asiatoday.co.kr",
      "publishedAt": "2026-11-18T20:06:00.000Z",
      "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261119010007299"
-    },
-    {
-     "title": "승리, 만삭 20대 아내와 공항 포착…\"여기까지 찍어라\" 제지",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-18T20:05:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005443256"
     }
    ]
   },
   {
    "keyword": "수능 부정행위 TF 가동",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 4,
-   "press": 5,
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
    "firstArticleAt": "2026-11-18T19:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "오늘 수능, 시험 끝나도 부정행위 추적…신고 포상금 최대 1억원 추진",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-18T20:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003059964?sid=100"
+    },
     {
      "title": "정부, 이번 수능부터 ‘부정행위 신고포상금 최대 1억원’…즉시 적용 ...",
      "press": "kukinews.com",
@@ -66,23 +71,16 @@
      "press": "seoul.co.kr",
      "publishedAt": "2026-11-18T20:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/081/0003700895?sid=100"
-    },
-    {
-     "title": "역대 대통령 수능 응원 메시지는…올해는 명운 건 '공정'",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-18T20:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005844730?sid=100"
     }
    ]
   },
   {
-   "keyword": "추경호 1심 무죄",
+   "keyword": "추경호 1심 무죄 판결",
    "sources": [
-    "nate",
-    "daum"
+    "nate"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-18T19:30:00.000Z",
    "exclusive": false,
@@ -114,7 +112,7 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-18T19:22:00.000Z",
    "exclusive": false,
@@ -143,7 +141,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1073,
+  "flagged": 1072,
   "matched": 592,
   "avgLeadMin": 892,
   "recent": [
