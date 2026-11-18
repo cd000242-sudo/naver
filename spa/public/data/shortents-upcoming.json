@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T17:08:52.169Z",
+ "builtAt": "2026-11-18T17:18:55.470Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,10 +15,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-18T15:40:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-18T15:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -43,50 +43,24 @@
    ]
   },
   {
-   "keyword": "추경호 1심 무죄 판결",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-18T15:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "추경호 1심 무죄…\"표결 방해 증명 안 돼\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-18T16:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404094?sid=102"
-    },
-    {
-     "title": "추경호, 1심 무죄… 법원 “내란 가담 증명 안돼”",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-18T15:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004010478?sid=102"
-    },
-    {
-     "title": "이준석 “추경호 유죄 주장, 기본적 헌법 무시…尹·李 들어 심화된 법...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-18T15:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002833854?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "수능 부정행위 1억 포상금",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
    "firstArticleAt": "2026-11-18T15:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "부정행위 신고하면 최대 1억 원 포상금...이번 수능부터 적용",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-18T17:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002434880?sid=100"
+    },
     {
      "title": "[사설] AI 부정행위 파문 속 수능, 공정하고 차질 없이 치러야",
      "press": "kmib.co.kr",
@@ -98,12 +72,6 @@
      "press": "chosun.com",
      "publishedAt": "2026-11-18T15:58:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/023/0004010480?sid=102"
-    },
-    {
-     "title": "불시 재난문자? 1억 포상금? 대책마다 '혼선'",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-18T15:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404088?sid=102"
     }
    ]
   }
