@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-18T13:17:18.252Z",
+  "generatedAt": "2026-11-18T13:31:33.801Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -194,134 +194,6 @@
           "views": 533,
           "answers": 1,
           "askedAt": "2022.10.06"
-        }
-      ]
-    },
-    {
-      "id": "05714bb2f6988886",
-      "urls": [
-        "https://someofthem.tistory.com/123"
-      ],
-      "guide": {
-        "direction": "'입찰 지역의무 금액'을 검색하는 사람은 자기 공사가 지역의무공동계약 대상인지, 기준 금액이 얼마인지 궁금해한다. 고수 블로그들은 '300억원 미만·2027년 시행'이라는 발표 내용만 전하고 현행 기준과 바뀐 기준의 차이, 적용 시점을 비교해 주지 않는다. 독자는 현행·2027년 이후 기준 비교표와 지역업체 최소 참여비율 조건으로 바로 확인하고 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "300억원 미만 공공공사 지역의무공동계약 기준 상향, 2027년 시행 예정",
-          "(확인 필요: 주관 부처 보도자료) 현행 지역의무공동계약 적용 공사 금액 기준",
-          "지역업체 최소 시공참여비율 조건(최소 참여비율 이상 시공능력평가액 보유 기준)",
-          "현행 기준과 2027년 변경 기준 비교표(적용 대상 공사 규모·참여 비율)"
-        ],
-        "mustAvoid": [
-          "민간 발주 공사와 지방자치단체·공공기관 발주 공사를 혼동해 적용 대상을 잘못 안내하는 것",
-          "지역제한 입찰제도(지역업체만 참여)와 지역의무공동계약(공동수급체 의무 구성)을 같은 제도로 섞어 쓰는 것"
-        ],
-        "checkBefore": [
-          "정책을 발표한 주관 부처의 공식 보도자료와 시행 예정일 확인",
-          "2027년 시행 전까지 적용되는 현행 기준(공사 금액·참여비율)이 지역별로 다른지 확인"
-        ],
-        "solves": [
-          "입찰 지역의무 금액이 얼마인지 모름 → 현행 기준과 2027년 변경 기준 비교표로 정리",
-          "지역제한 입찰제도와 지역의무공동계약을 헷갈림 → 두 제도의 차이와 적용 대상 규모로 구분"
-        ],
-        "actionTitles": [
-          "지역의무공동계약 기준 확인하는 법 2027년 변경",
-          "입찰 지역의무 금액 조회하기 300억 기준 정리",
-          "지역제한 입찰제도와 지역의무공동계약 차이 비교"
-        ]
-      },
-      "at": "2026-11-11T20:20:20.526Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "중1사회요점정리",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110302&docId=60219932&answerNo=25&qb=66+466eMIOqzteqztSDqs7Xsgqwg7KeA7Jet7JeF7LK0IOywuOyXrA==",
-          "views": 63312,
-          "answers": 27,
-          "askedAt": "2008.04.28"
-        },
-        {
-          "title": "날씨와 관련된 생활조사 (3가지)",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=130102&docId=36617564&answerNo=7&qb=66+466eMIOqzteqztSDqs7Xsgqwg7KeA7Jet7JeF7LK0IOywuOyXrA==",
-          "views": 51285,
-          "answers": 9,
-          "askedAt": "2008.07.15"
-        },
-        {
-          "title": "아파트 미분양 문제...",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=402&docId=34684424&answerNo=1&qb=66+466eMIOqzteqztSDqs7Xsgqwg7KeA7Jet7JeF7LK0IOywuOyXrA==",
-          "views": 11835,
-          "answers": 1,
-          "askedAt": "2008.02.20"
-        }
-      ]
-    },
-    {
-      "id": "ec929c17f4d1985b",
-      "urls": [
-        "https://jade-story.tistory.com/entry/5%EC%9B%94-%EC%A2%85%ED%95%A9%EC%86%8C%EB%93%9D%EC%84%B8-%EC%8B%A0%EA%B3%A0-%EC%B4%9D%EC%A0%95%EB%A6%AC-%EB%8C%80%EC%83%81-%EA%B8%B0%EA%B0%84-%ED%99%88%ED%83%9D%EC%8A%A4-%EB%B0%A9%EB%B2%95-%ED%99%98%EA%B8%89%EC%9D%BC-%EC%A7%80%EB%B0%A9%EC%86%8C%EB%93%9D%EC%84%B8-%EC%A0%88%EC%84%B8-%ED%8C%81",
-        "https://futurefreelance.tistory.com/entry/2026-%EC%A2%85%ED%95%A9%EC%86%8C%EB%93%9D%EC%84%B8-%EC%A4%91%EA%B0%84%EC%98%88%EB%82%A9-11%EC%9B%94-30%EC%9D%BC-%EB%82%A9%EB%B6%80%EF%BD%9C%EB%8C%80%EC%83%81%C2%B750%EB%A7%8C%EC%9B%90-%EA%B8%B0%EC%A4%80%C2%B7%EB%B6%84%EB%82%A9%C2%B7%EC%B6%94%EA%B3%84%EC%8B%A0%EA%B3%A0",
-        "https://njhyou.tistory.com/entry/2026-%EC%A2%85%ED%95%A9%EC%86%8C%EB%93%9D%EC%84%B8-%EC%A4%91%EA%B0%84%EC%98%88%EB%82%A9-%EB%8C%80%EC%83%81%C2%B7%EB%82%A9%EB%B6%80%EA%B8%B0%ED%95%9C%C2%B7%EB%B6%84%EB%82%A9%C2%B7%EC%B6%94%EA%B3%84%EC%8B%A0%EA%B3%A0-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://onsum.kr/entry/2026-%EC%A2%85%ED%95%A9%EC%86%8C%EB%93%9D%EC%84%B8-%EC%A4%91%EA%B0%84%EC%98%88%EB%82%A9-%EB%82%A9%EB%B6%80%EA%B8%B0%ED%95%9C-%EC%97%B0%EC%9E%A5-%EC%B4%9D%EC%A0%95%EB%A6%AC%EF%BD%9C%EC%84%B8%EA%B8%88-%EB%82%A9%EB%B6%80%EA%B0%80-%EC%96%B4%EB%A0%A4%EC%9A%B8-%EB%95%8C-%EC%8B%A0%EC%B2%AD%EB%B0%A9%EB%B2%95"
-      ],
-      "guide": {
-        "direction": "종합소득세 중간예납 고지서를 받은 사람은 '왜 또 내야 하는지'와 '추계신고로 줄일 수 있는지'를 몰라 막막해한다. 고수 블로그들은 대상·분납·연장을 총정리했지만 추계신고가 가능한지 판단하는 상반기 매출 기준 30% 수치는 짚지 않았다. 이 글은 추계신고 가능 여부 판단표와 분납·연장 신청 순서로 11월 30일 전에 끝내게 한다.",
-        "searchTargets": [
-          "종합소득세 중간예납 기준",
-          "종합소득세 중간예납 신고",
-          "종합소득세 중간예납 분납",
-          "종합소득세 중간예납 대상자"
-        ],
-        "mustInclude": [
-          "11월 30일 납부기한과 고지서 발송 기준(50만원 미만 고지 제외 등, 확인 필요: 국세청)",
-          "추계신고 가능 조건: 중간예납추계액이 중간예납기준액의 30% 미달할 때",
-          "상반기 실제 매출로 추계액 계산하는 순서",
-          "소득세법 제85조 제4항 초과세액 환급·충당 규정",
-          "분납 신청 가능 조건과 신청 방법(확인 필요: 홈택스)"
-        ],
-        "mustAvoid": [
-          "부가가치세 예정고지·법인세 중간예납과 이름이 비슷해 혼동하지 않기",
-          "작년 기준액·기한을 올해 것처럼 쓰지 않기"
-        ],
-        "checkBefore": [
-          "국세청 홈택스 공지에서 2026년 중간예납 고지 기준액(50만원 등)과 기한 재확인",
-          "분납·납부기한 연장 신청 조건을 국세청 보도자료에서 확인"
-        ],
-        "solves": [
-          "중간예납 고지서 금액이 부담스러운데 줄일 방법을 몰라 그냥 낸다 → 추계신고 30% 기준표로 가능 여부 바로 판단",
-          "추계신고가 처음이라 뭘 준비해야 할지 모른다 → 상반기 매출 기준 계산 순서 정리",
-          "낸 중간예납액이 확정신고 세액보다 많으면 어떻게 되는지 모른다 → 초과세액 환급·충당 규정 안내"
-        ],
-        "actionTitles": [
-          "종합소득세 중간예납 기준 확인하고 추계신고 신청하는 법",
-          "종합소득세 중간예납 분납 신청 조건과 방법 정리",
-          "종합소득세 중간예납 대상자 확인하고 고지금액 줄이기"
-        ]
-      },
-      "at": "2026-11-12T02:59:09.957Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "11월 종합소득세 중간예납",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40301&docId=493620048&answerNo=6&qb=7KKF7ZWp7IaM65Od7IS47KSR6rCE7JiI64Kp",
-          "views": 414,
-          "answers": 7,
-          "askedAt": "2026.11.07"
-        },
-        {
-          "title": "종합소득세 중간예납, 처음이라 어렵네요. 어....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=601&docId=494017666&answerNo=8&qb=7KKF7ZWp7IaM65Od7IS47KSR6rCE7JiI64Kp",
-          "views": 232,
-          "answers": 8,
-          "askedAt": "2026.11.09"
-        },
-        {
-          "title": "종합소득세 중간예납, 확정신고 세액보다 많....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40309&docId=495786613&answerNo=1&qb=7KKF7ZWp7IaM65Od7IS47KSR6rCE7JiI64Kp",
-          "views": 150,
-          "answers": 1,
-          "askedAt": "2026.11.01"
         }
       ]
     },
@@ -76702,6 +76574,1117 @@
           "askedAt": "2026.09.09"
         }
       ]
+    },
+    {
+      "id": "a57d6be4f8eaf106",
+      "urls": [
+        "https://financialfragrance.com/%ec%a2%85%ed%95%a9%ec%86%8c%eb%93%9d%ec%84%b8-%ec%a4%91%ea%b0%84%ec%98%88%eb%82%a9-%eb%b6%84%eb%82%a9-%eb%b0%a9%eb%b2%95-%ec%84%b8%ea%b8%88-1%ec%b2%9c%eb%a7%8c%ec%9b%90/",
+        "https://financialfragrance.com/%ec%a2%85%ed%95%a9%ec%86%8c%eb%93%9d%ec%84%b8-%ec%a4%91%ea%b0%84%ec%98%88%eb%82%a9-%eb%8c%80%ec%83%81%ec%9e%90-%ed%99%95%ec%9d%b8%eb%b0%a9%eb%b2%95-%ea%b3%a0%ec%a7%80%ec%84%9c-%ec%a1%b0%ed%9a%8c/",
+        "https://yjfreelifestyle.tistory.com/entry/2026%EB%85%84-%EC%A2%85%ED%95%A9%EC%86%8C%EB%93%9D%EC%84%B8-%EC%A4%91%EA%B0%84%EC%98%88%EB%82%A9-%EB%8C%80%EC%83%81%EC%9E%90%EB%8A%94-%EB%88%84%EA%B5%AC-11%EC%9B%94-30%EC%9D%BC-%EB%82%A9%EB%B6%80-%EB%B0%A9%EB%B2%95%EA%B3%BC-%EB%B6%84%EB%82%A9-%EA%B8%B0%EC%A4%80",
+        "https://bangulnote.com/entry/income-tax-interim-prepayment-qa/",
+        "https://dbswjd11.com/441"
+      ],
+      "guide": {
+        "direction": "검색자는 11월 중간예납고지서를 받고 그 금액을 그대로 내야 하는지, 상반기 소득이 줄었으면 추계신고로 줄일 수 있는지부터 막힌다. 고수 블로그 제목들은 대상자 확인·납부기간은 다루지만 1천만원·2천만원 구간별 분납 가능액과 추계신고 전환 조건(30% 미달 기준)을 표로 정리하지 못했다. 이 글은 고지금액 구간별 분납액 계산표와 추계신고 전환 체크리스트로 글 하나로 끝낸다.",
+        "searchTargets": [
+          "종합소득세 중간예납 분납",
+          "종합소득세 중간예납 추계신고",
+          "종합소득세 중간예납 기간",
+          "종합소득세 중간예납 대상자"
+        ],
+        "mustInclude": [
+          "고지서 1천만원 초과·2천만원 초과 구간별 분납 가능 기준 (확인 필요: 국세청 안내/소득세법 시행령)",
+          "상반기 소득 감소로 추계액이 중간예납기준액 30% 미달 시 추계신고 가능 조건 (소득세법 근거)",
+          "11월 30일 납부기한, 고지서 미수령 시 홈택스 대상자 조회 방법 (확인 필요: 홈택스)",
+          "중간예납세액이 확정세액 초과 시 환급·충당 규정(소득세법 제85조 4항)",
+          "직전 과세기간 세액 없는 복식부기의무자의 중간예납기준액 산정 방식(소득세법 제65조)"
+        ],
+        "mustAvoid": [
+          "중간예납과 5월 확정신고(종합소득세 신고)를 같은 세금처럼 섞어 쓰지 않기",
+          "분납이 모든 사업자에게 자동 적용되는 것처럼 쓰지 않기(금액 기준 미달자는 해당 없음)",
+          "부동산매매업자 등 특수 업종 계산방식을 일반 사업자 기준과 섞지 않기"
+        ],
+        "checkBefore": [
+          "1천만원·2천만원 분납 비율과 기한의 정확한 수치 — 국세청 홈택스/국세법령정보시스템에서 확인",
+          "11월 30일 납부기한이 2026년에도 동일한지 — 국세청 보도자료에서 확인",
+          "추계신고 30% 미달 기준의 최신 조문 — 국가법령정보센터에서 확인"
+        ],
+        "solves": [
+          "고지서 금액 그대로 내야 하는지 몰라 막힘 → 추계신고 전환 조건(30% 미달 기준)을 표로 제공",
+          "1천만원·2천만원 기준 분납 계산이 헷갈림 → 금액 구간별 분납 가능액 계산 예시 제공",
+          "11월 고지서가 안 와서 대상자인지 모름 → 홈택스 대상자 조회 경로 안내"
+        ],
+        "actionTitles": [
+          "종합소득세 중간예납 분납 계산법, 1천만원·2천만원 기준 정리",
+          "종합소득세 중간예납 대상자 조회, 11월 고지서 안 왔다면 확인"
+        ]
+      },
+      "at": "2026-11-18T13:28:10.206Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "종합소득세 중간예납 신고, 처음이라 헷갈리....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40305&docId=495809067&answerNo=3&qb=7KKF7ZWp7IaM65Od7IS47KSR6rCE7JiI64Kp",
+          "views": 532,
+          "answers": 9,
+          "askedAt": "2026.11.03"
+        },
+        {
+          "title": "종합소득세 중간예납고지서",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40305&docId=495834566&answerNo=3&qb=7KKF7ZWp7IaM65Od7IS47KSR6rCE7JiI64Kp",
+          "views": 317,
+          "answers": 15,
+          "askedAt": "2026.11.05"
+        },
+        {
+          "title": "종합소득세 중간예납, 확정신고 세액보다 많....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40309&docId=495786613&answerNo=1&qb=7KKF7ZWp7IaM65Od7IS47KSR6rCE7JiI64Kp",
+          "views": 170,
+          "answers": 1,
+          "askedAt": "2026.11.01"
+        }
+      ]
+    },
+    {
+      "id": "3f1c7b7a17c4bb10",
+      "urls": [
+        "https://dhsy.tistory.com/433",
+        "https://nitrogen.zncloud.pw/entry/%EC%97%B0%EB%A7%90-%EC%86%A1%EB%85%84-%EA%B1%B4%EB%B0%B0%EC%82%AC-%EB%AA%A8%EC%9D%8C-31"
+      ],
+      "guide": {
+        "direction": "지식인 질문과 자동완성을 보면 실제 검색자는 건배사 문구 자체보다 송년회 전체를 어떻게 준비할지(인사말·게임·선물·행사 진행)를 더 많이 묻는다. 고수 블로그들의 '건배사 모음' 제목은 문구 나열에 그쳐 독자가 송년회 진행 전체를 한 번에 해결하지 못한다. 이 글은 짧은 건배사를 인사말·게임과 묶어 송년회 진행 순서 체크리스트로 끝낸다.",
+        "searchTargets": [
+          "연말 송년회 인사말",
+          "연말 송년회 게임",
+          "연말 송년회 선물",
+          "연말 송년회 행사"
+        ],
+        "mustInclude": [
+          "분위기별(공식·친근·신년 다짐용) 짧은 건배사 문구 예시 (확인 필요: 실제 문구는 재료에 없어 보강 필요)",
+          "건배사 뒤에 바로 이어지는 짧은 인사말 예시",
+          "건배사와 함께 할 수 있는 간단한 게임 1~2가지",
+          "인사말→건배사→게임 순서로 이어지는 송년회 진행 체크리스트"
+        ],
+        "mustAvoid": [
+          "특정 회사·조직명을 예시로 들어 사생활처럼 보이는 건배사 지어내지 않기",
+          "'송년회'와 일본식 표현 '망년회'를 구분 없이 혼용하지 않기",
+          "지나치게 길고 격식 있는 건배사만 나열해 끝까지 읽히지 못하게 하지 않기"
+        ],
+        "checkBefore": [
+          "'송년회'와 '망년회' 표현 차이 — 국립국어원 자료에서 확인",
+          "최근 유행하는 건배사 트렌드가 있는지 — 최신 커뮤니티/뉴스에서 확인"
+        ],
+        "solves": [
+          "건배사 뭘 해야 할지 몰라 막힘 → 분위기별(공식/친근/신년) 짧은 건배사 예시 제공",
+          "건배사만으론 진행이 부족해 막힘 → 인사말·게임까지 묶은 진행 순서 체크리스트 제공"
+        ],
+        "actionTitles": [
+          "연말 송년회 행사 진행 순서, 건배사부터 마무리까지 체크"
+        ]
+      },
+      "at": "2026-11-18T13:28:10.206Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "연말 송년회 진행.. 질문드립니다.",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=12&docId=20600474&answerNo=6&qb=7Jew66eQ7Iah64WE7ZqM",
+          "views": 6331,
+          "answers": 2,
+          "askedAt": "2007.11.14"
+        },
+        {
+          "title": "송년회 연말모임하기 좋은장소 소개바람요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6&docId=239906680&answerNo=16&qb=7Jew66eQ7Iah64WE7ZqM",
+          "views": 2194,
+          "answers": 14,
+          "askedAt": "2026.09.05"
+        },
+        {
+          "title": "연말 송년회 장소 추천바랍니다",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80208&docId=29434954&answerNo=1&qb=7Jew66eQ7Iah64WE7ZqM",
+          "views": 2115,
+          "answers": 2,
+          "askedAt": "2005.12.02"
+        }
+      ]
+    },
+    {
+      "id": "7a17678dad9586ac",
+      "urls": [
+        "https://codingzero.tistory.com/entry/pohang-fireworks-festival-2026-guide",
+        "https://hwa-ahn-drawingstory.tistory.com/236"
+      ],
+      "guide": {
+        "direction": "검색자는 불꽃쇼가 정확히 몇 시에 시작·종료하는지, 명당이 어디고 무료로 앉을 자리가 남아있는지, 주차장 통제 시간대에 차를 어디 둬야 하는지를 궁금해한다. 고수 블로그 제목들은 모두 '시간·명당·주차·교통통제'를 나열하지만 실제 수치(시작시간, 통제 구간, 주차 가능 여부)까지 구체화했는지는 불명확하다. 이 글은 시작·종료 시간, 명당 순위, 무료석 위치, 주차장별 통제 시간을 표로 정리해 현장 도착 전에 끝낸다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "2026년 11월 21일 불꽃쇼 정확한 시작·종료 시간 (확인 필요: 포항시청/축제 공식 홈페이지 공지)",
+          "명당 스팟 순위와 위치별 도보 접근 방법 (확인 필요: 포항시 관광 공식 자료)",
+          "무료 좌석/구역과 유료 구역 구분 기준 (확인 필요: 축제 운영본부 공지)",
+          "주차장 위치별 통제 시작 시간과 대체 주차 공간 (확인 필요: 포항시 교통정보과 공지)",
+          "당일 교통통제 구간과 우회 도로 (확인 필요: 포항남부경찰서/포항시 공지)"
+        ],
+        "mustAvoid": [
+          "작년 이전 포항불빛축제 정보와 2026년 일정을 섞어 날짜·시간을 혼동하지 않기",
+          "확정되지 않은 주차·교통통제 정보를 단정적으로 쓰지 않기(변경 가능성 고지)"
+        ],
+        "checkBefore": [
+          "2026년 11월 21일 불꽃쇼 정확한 시간과 장소 — 포항시청/축제 공식 홈페이지·SNS에서 확인",
+          "당일 교통통제 구간·시간 — 포항시 공식 발표 또는 경찰청 공지에서 확인",
+          "주차장 운영 여부와 요금 — 축제 운영본부 안내에서 확인"
+        ],
+        "solves": [
+          "불꽃쇼 정확한 시작 시간을 몰라 헛걸음할까 걱정 → 시작·종료 시간과 도착 권장 시간 안내",
+          "명당 자리가 어디인지 몰라 막힘 → 명당 순위와 접근 경로 정리",
+          "주차장이 통제되는지 몰라 막힘 → 주차장별 통제 시간과 대체 주차 안내"
+        ],
+        "actionTitles": [
+          "포항국제불빛축제 불꽃쇼 시간 확인, 명당 좌석까지 정리",
+          "포항국제불빛축제 주차장 통제시간 확인, 무료 좌석까지 체크",
+          "포항국제불빛축제 교통통제 구간 확인, 명당 가는 길 찾기"
+        ]
+      },
+      "at": "2026-11-18T13:28:10.206Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "a1175ce533783f81",
+      "urls": [
+        "https://youngdr.tistory.com/332"
+      ],
+      "guide": {
+        "direction": "해외직구 반품 후 관세 환급이 되는지, 6개월 이내·초과 시 적용 규정이 다른지 헷갈려 검색하는 사람이 많다. 고수 글은 수출신고 기준만 언급하고 유니패스에서 실제로 전자신고·환급신고 메뉴를 어떻게 누르는지는 비워둔다. 이 글은 금액별 수출신고 필요 여부와 기간 기준표, 유니패스 신청 순서를 함께 제시해 끝낸다.",
+        "searchTargets": [
+          "해외직구 관세 환급 기간",
+          "해외 직구 관세 환급 방법",
+          "해외직구 관세 환급 신청하는법"
+        ],
+        "mustInclude": [
+          "관세법 제106조의2 개인자가사용물품 위약수출 규정 명시",
+          "수입신고수리일로부터 6개월 이내 수출 시 환급 적용 기준",
+          "유니패스(UNIPASS) 접속→전자신고→환급신고 메뉴 경로",
+          "가방 등 금액 200만원 초과 시 정식 수출신고 필요 기준",
+          "6개월 초과~1년 미만 반품 시 적용 규정 차이(확인 필요: 관세사 답변 원문)"
+        ],
+        "mustAvoid": [
+          "관세 환급과 관세 면제를 같은 개념으로 혼동시키는 서술",
+          "구매대행·해외 재수입 등 다른 통관 상황과 혼동",
+          "6개월 이내·초과 케이스를 구분 없이 하나로 묶어 설명"
+        ],
+        "checkBefore": [
+          "관세법 제106조의2 정확한 조문 내용 — 국가법령정보센터",
+          "유니패스 전자신고 메뉴 실제 명칭·경로 — 관세청 유니패스 홈페이지",
+          "200만원 기준의 최신 적용 여부 — 관세청 고시·공지"
+        ],
+        "solves": [
+          "반품은 했는데 관세 환급을 어떻게 받는지 몰라요 → 유니패스 전자신고 절차를 단계별로 정리",
+          "6개월 지났는데도 환급되나요 → 6개월 이내·초과 적용 기준을 구분표로 제공",
+          "수출신고를 꼭 해야 하나요 → 금액 기준별 수출신고 필요 여부 체크리스트 제공"
+        ],
+        "actionTitles": [
+          "해외직구 관세 환급 신청하는법, 유니패스 단계별 정리",
+          "해외직구 관세 환급 기간 지났다면? 6개월 기준 확인법",
+          "해외 직구 관세 환급 방법, 수출신고 필요 여부부터 확인"
+        ]
+      },
+      "at": "2026-11-18T13:28:10.206Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "해외직구 관세질문",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40310&docId=372893787&answerNo=2&qb=7ZW07Jm47KeB6rWsIOq0gOyEuO2ZmOq4iSDsiJjstpzsi6Dqs6A=",
+          "views": 303,
+          "answers": 2,
+          "askedAt": "2020.11.10"
+        },
+        {
+          "title": "해외 직구 반품 관세",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40310&docId=494998881&answerNo=1&qb=7ZW07Jm47KeB6rWsIOq0gOyEuO2ZmOq4iSDsiJjstpzsi6Dqs6A=",
+          "views": 160,
+          "answers": 3,
+          "askedAt": "2026.09.02"
+        },
+        {
+          "title": "해외직구 관세환급 어떻게 해야하나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40310&docId=492981338&answerNo=1&qb=7ZW07Jm47KeB6rWsIOq0gOyEuO2ZmOq4iSDsiJjstpzsi6Dqs6A=",
+          "views": 156,
+          "answers": 3,
+          "askedAt": "2026.04.16"
+        }
+      ]
+    },
+    {
+      "id": "a64d01aab759699b",
+      "urls": [
+        "https://money-phd.com/2022"
+      ],
+      "guide": {
+        "direction": "내새연3에 나온 최수린과 아들 이승훈이 어떤 관계인지, 키 185cm '메기남' 별명과 피아노 치는 공대생이라는 설명이 누구를 가리키는지 헷갈려 검색하는 사람이 많다. 고수 제목은 별명과 신상 키워드만 나열해 두 인물의 관계와 방송 맥락을 설명하지 않는다. 이 글은 인물 관계도와 별명 유래를 표로 정리해 한 번에 확인시켜 끝낸다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "'내 새끼의 연애3(내새연3)' 정식 프로그램명·방영 정보(확인 필요: 편성표)",
+          "최수린-이승훈 관계가 모자 관계인지 명시(확인 필요: 방송 내용)",
+          "키 185cm·'메기남' 별명 유래 설명(확인 필요: 방송 자막·기사)",
+          "'피아노 치는 공대생' 직업·학력 정보(확인 필요: 방송 소개 자막)"
+        ],
+        "mustAvoid": [
+          "동명이인인 다른 유명 이승훈(가수·운동선수 등)과 혼동"
+        ],
+        "checkBefore": [
+          "'내새연3' 정식 제목·방영일 — 방송사 공식 편성표"
+        ],
+        "solves": [
+          "최수린 아들이 누구인지 헷갈려요 → 최수린-이승훈 관계를 관계도로 정리",
+          "이승훈 키 185cm 진짜인지, 메기남 별명이 뭔지 궁금해요 → 신체정보·별명 유래를 표로 정리",
+          "피아노 치는 공대생이 어떤 사람인지 궁금해요 → 학력·직업 정보를 방송 자막 기준으로 정리"
+        ],
+        "actionTitles": [
+          "내새연3 이승훈 키 185cm 메기남, 정체 한눈에 확인",
+          "최수린 아들 이승훈 관계 정리, 내새연3 인물표 확인"
+        ]
+      },
+      "at": "2026-11-18T13:28:10.206Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "ac8122b503bac883",
+      "urls": [
+        "https://4jsm.com/entry/%ED%95%9C%EA%B5%AD%EC%9E%90%EA%B2%A9%ED%8F%89%EC%83%9D%EA%B5%90%EC%9C%A1%EC%9B%90-%ED%99%88%ED%8E%98%EC%9D%B4%EC%A7%80%EF%BD%9C%EB%AC%B4%EB%A3%8C%EC%88%98%EA%B0%95-%EC%8B%A0%EC%B2%AD%C2%B7%EC%9E%90%EA%B2%A9%EC%A6%9D-%EC%8B%9C%ED%97%98%C2%B7%EB%B0%9C%EA%B8%89%EB%B9%84-%ED%99%95%EC%9D%B8"
+      ],
+      "guide": {
+        "direction": "한국자격평생교육원에서 무료수강이라고 안내받았는데 나중에 자격증 발급비를 내라고 해서 사기인지, 국민내일배움카드로 그 비용까지 처리되는지 헷갈려 묻는 질문이 많다. 고수 제목은 '발급비 확인'만 언급하고 무료 항목과 유료 항목을 구분한 표나 신청 순서는 보여주지 않는다. 이 글은 무료수강-시험-발급비 단계를 순서대로, 유료 항목만 따로 표로 정리해 끝낸다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "무료 항목(수강료·시험응시료)과 유료 항목(발급비 약 8만~10만원) 구분표",
+          "과정별 수강 기간 약 4~6주, 온라인강의+온라인시험 형식",
+          "시험 합격 기준 100점 만점 60점 이상",
+          "한국직업능력연구원 등록 여부(확인 필요: 공식 등록현황 조회)",
+          "국민내일배움카드로 발급비 결제 가능 여부(확인 필요: 교육원 공지)"
+        ],
+        "mustAvoid": [
+          "민간자격증을 국가공인자격증처럼 오인시키는 표현",
+          "'무료수강'을 전체 무료로 오인하게 해 발급비 안내를 빠뜨림",
+          "비슷한 이름의 다른 협회·교육원과 혼동"
+        ],
+        "checkBefore": [
+          "한국직업능력연구원 등록 여부·정식 명칭 — 공식 등록현황 조회",
+          "발급비 정확한 금액·포함 항목 — 교육원 공식 홈페이지 공지",
+          "국민내일배움카드 사용 가능 여부 — 교육원 고객센터 공지"
+        ],
+        "solves": [
+          "무료수강인데 나중에 돈 내라고 해서 사기인가 싶어요 → 무료 항목과 유료(발급비) 항목을 구분표로 정리",
+          "국민내일배움카드로 발급비까지 되나요 → 카드 적용 범위를 확인하는 방법 안내",
+          "시험 난이도·합격 기준이 어떻게 되나요 → 100점 만점 60점 이상 합격 기준 정리"
+        ],
+        "actionTitles": [
+          "한국자격평생교육원 무료수강 신청 순서, 발급비까지 확인",
+          "한국자격평생교육원 자격증 시험, 합격 기준부터 확인",
+          "한국자격평생교육원 발급비, 국민내일배움카드 사용법 확인"
+        ]
+      },
+      "at": "2026-11-18T13:28:10.206Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "노인심리상담사 자격증 취득 어떻게 하나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100103&docId=466844405&answerNo=2&qb=7ZWc6rWt7J6Q6rKp7Y+J7IOd6rWQ7Jyh7JuQIO2ZiO2OmOydtOyngOustOujjOyImOqwlSDsnpDqsqnspp0g7Iuc7ZeYIOuwnOq4ieu5hA==",
+          "views": 3442,
+          "answers": 12,
+          "askedAt": "2024.03.25"
+        },
+        {
+          "title": "사무직 자격증 추천",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40402&docId=487242258&answerNo=7&qb=7ZWc6rWt7J6Q6rKp7Y+J7IOd6rWQ7Jyh7JuQIO2ZiO2OmOydtOyngOustOujjOyImOqwlSDsnpDqsqnspp0g7Iuc7ZeYIOuwnOq4ieu5hA==",
+          "views": 1570,
+          "answers": 10,
+          "askedAt": "2025.08.23"
+        },
+        {
+          "title": "간병사자격증문의",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1107&docId=324378721&answerNo=2&qb=7ZWc6rWt7J6Q6rKp7Y+J7IOd6rWQ7Jyh7JuQIO2ZiO2OmOydtOyngOustOujjOyImOqwlSDsnpDqsqnspp0g7Iuc7ZeYIOuwnOq4ieu5hA==",
+          "views": 884,
+          "answers": 3,
+          "askedAt": "2019.04.04"
+        }
+      ]
+    },
+    {
+      "id": "ccb1befdb3bdc3af",
+      "urls": [
+        "https://supercoms.tistory.com/entry/NH%EB%86%8D%ED%98%91%EC%9D%80%ED%96%89-%EB%B0%B0%EB%8B%AC-%EB%A7%A4%EC%B6%9C-%EC%8B%A0%EC%B2%AD-%EA%B4%80%EC%95%85%EA%B5%AC%EC%97%90%EC%84%9C-%EB%86%93%EC%B9%98%EB%8A%94-3%EA%B0%80%EC%A7%80-%EC%A1%B0%EA%B1%B4-%E2%80%94-%EC%8B%A4%EC%A0%9C-%EC%9D%B8%EC%A0%95-%EB%B2%94%EC%9C%84-%ED%99%95%EC%9D%B8"
+      ],
+      "guide": {
+        "direction": "검색자는 관악구에서 배달 영업 매출을 NH농협은행에 어떤 범위까지 인정받는지 몰라 신청을 미루는 상태다. 고수 블로그 제목은 '3가지 조건'을 예고했지만 배달앱별 매출 포함 여부나 관악구만의 특이 조건을 구체 수치로 밝히지 못했을 가능성이 크다. 독자는 조건표와 신청 순서·필요 서류 체크리스트로 신청 여부를 바로 판단하고 끝내게 한다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "배달매출 인정 대상 업종·기준 (확인 필요: NH농협은행 공식 공지)",
+          "배민·쿠팡이츠·요기요 등 배달앱별 매출 인정 범위 (확인 필요: NH농협은행 영업점 안내)",
+          "관악구 소재 지점 특이 조건 여부 (확인 필요: 관악구 관할 지점 공지)",
+          "신청 시 필요한 서류 목록 (확인 필요: NH농협은행 영업점 안내)",
+          "신청 접수 기간·마감일 (확인 필요: NH농협은행 공식 홈페이지)"
+        ],
+        "mustAvoid": [
+          "관악구가 아닌 타 지자체 지원사업 조건을 섞어서 서술",
+          "확인되지 않은 조건·수치를 확정된 사실처럼 단정하는 것"
+        ],
+        "checkBefore": [
+          "NH농협은행 공식 홈페이지 또는 영업점 공지에서 배달매출 인정 대상·조건 재확인",
+          "관악구 관할 지점에서 지역별 특이 조건 유무 확인"
+        ],
+        "solves": [
+          "배달매출이 어디까지 인정되는지 몰라 신청을 못한다 → 배달앱별 인정 범위 조건표 제공",
+          "관악구만 조건이 다른지 궁금하다 → 관할 지점 기준 유의사항 정리",
+          "신청 서류를 몰라 헛걸음한다 → 신청 순서·필요 서류 체크리스트 제공"
+        ],
+        "actionTitles": [
+          "NH농협은행 배달매출 신청 조건 확인, 관악구 인정 범위 총정리",
+          "배달매출 인정 범위 조회 전 꼭 확인할 3가지 조건 체크",
+          "관악구 배달매출 신청 서류·순서 한 번에 확인하는 법"
+        ]
+      },
+      "at": "2026-11-18T13:28:10.206Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "61970fb0ac9dbb03",
+      "urls": [
+        "https://jade-story.tistory.com/entry/%EC%99%80%EC%9D%B4%ED%8C%8C%EC%9D%B4-%EC%97%B0%EA%B2%B0-%EC%95%88%EB%90%A0%EB%95%8C-%ED%95%B4%EA%B2%B0%EB%B0%A9%EB%B2%95-7%EB%8B%A8%EA%B3%84-%EA%B3%B5%EC%9C%A0%EA%B8%B0-%EC%9E%AC%EB%B6%80%ED%8C%85-DNS-%EB%B3%80%EA%B2%BD-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EC%B4%88%EA%B8%B0%ED%99%94-%EC%B4%9D%EC%A0%95%EB%A6%AC"
+      ],
+      "guide": {
+        "direction": "검색자는 와이파이는 잡히는데 인터넷이 안 될 때 공유기·모뎀·회선·PC 중 뭐가 문제인지 구분하지 못해 막힌다. 고수 블로그의 '7단계 총정리'는 해결법을 나열만 해서 원인별로 어디서부터 시도해야 하는지 순서를 안 준다. 독자는 모뎀 표시등 확인→공유기 재부팅→DNS 변경→회선 점검 신청 순서의 진단 체크리스트로 글을 끝내게 한다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "모뎀 인터넷 표시등 꺼짐=회선 문제, 켜짐=공유기/PC 문제로 나누는 1차 진단 기준",
+          "모뎀 전원 분리 후 1분 대기 후 재연결하는 순서(지식인 답변 근거)",
+          "벽 랜포트는 단자함에서 연결해야 사용 가능하다는 점(지식인 답변 근거)",
+          "윈도우11에서 파일 탐색기 네트워크 탭 재부팅 후 확인하는 절차(지식인 답변 근거)",
+          "'식별되지 않은 네트워크' 오류는 DNS/IP 설정 문제로 접근하는 구분법"
+        ],
+        "mustAvoid": [
+          "공유기 문제와 회선(통신사) 문제를 구분 없이 같은 해결법으로 뭉쳐서 설명하는 것",
+          "통신사(KT·SKB·LG U+)마다 다른 모뎀 표시등 구조를 하나로 일반화하는 것",
+          "검증 안 된 레지스트리 수정·네트워크 초기화 명령을 근거 없이 따라하게 하는 것"
+        ],
+        "checkBefore": [
+          "통신사별 모뎀 표시등(인터넷/온라인 램) 의미 차이를 통신사 공식 고객센터 안내로 확인",
+          "윈도우11 네트워크 오류 문구가 최신 버전 기준으로 동일한지 마이크로소프트 공식 지원 문서로 확인"
+        ],
+        "solves": [
+          "인터넷 표시등 불이 안 들어와요 → 회선 문제 여부를 표시등으로 1차 구분하는 기준 제공",
+          "공유기 재부팅해도 안 돼요 → 모뎀까지 포함한 전원 분리·재연결 순서 제공",
+          "윈도우11에서 네트워크를 못 찾아요 → 네트워크 탭 재부팅 절차로 구분"
+        ],
+        "actionTitles": [
+          "와이파이 인터넷 연결 없음, 공유기부터 모뎀까지 확인하는 법",
+          "식별되지 않은 네트워크 뜰 때 DNS 변경으로 해결하는 순서",
+          "윈도우11 와이파이 네트워크 못 찾을 때 재부팅 확인 순서"
+        ]
+      },
+      "at": "2026-11-18T13:28:10.206Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "와이파이 공유기 인터넷 연결 없음 문제",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=106&docId=493022421&answerNo=1&qb=7JmA7J207YyMIOyXhuydjCDsi53rs4TrkJjsp4Ag7JWK7J2AIOuEpO2KuOybjO2BrA==",
+          "views": 4960,
+          "answers": 5,
+          "askedAt": "2026.04.18"
+        },
+        {
+          "title": "컴퓨터로 와이파이존 만들기 식별중오류",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=5020301&docId=493741016&answerNo=1&qb=7JmA7J207YyMIOyXhuydjCDsi53rs4TrkJjsp4Ag7JWK7J2AIOuEpO2KuOybjO2BrA==",
+          "views": 1177,
+          "answers": 7,
+          "askedAt": "2026.06.08"
+        },
+        {
+          "title": "와이파이 인터넷 연결 없음",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1010406&docId=495617478&answerNo=7&qb=7JmA7J207YyMIOyXhuydjCDsi53rs4TrkJjsp4Ag7JWK7J2AIOuEpO2KuOybjO2BrA==",
+          "views": 1137,
+          "answers": 7,
+          "askedAt": "2026.11.08"
+        }
+      ]
+    },
+    {
+      "id": "643e54e6ba206e03",
+      "urls": [
+        "https://gilbert-choi.tistory.com/813"
+      ],
+      "guide": {
+        "direction": "검색자는 ps1 파일의 한글이 ?쒗듃로 깨지고 실행 시 토큰 오류까지 겹쳐 인코딩 문제인지 스크립트 문법 문제인지 구분하지 못한다. 고수 블로그는 'BOM 없는 UTF-8'이라는 원인은 짚었지만 VSCode·메모장에서 실제로 어떤 인코딩 옵션을 눌러 다시 저장해야 하는지 절차가 빠졌을 가능성이 크다. 독자는 PowerShell 버전별(5.1 vs 7) 인코딩 차이표와 저장 절차 체크리스트로 바로 해결하고 끝내게 한다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "Windows PowerShell 5.1이 BOM 없는 UTF-8을 시스템 기본 인코딩으로 잘못 해석한다는 원인 설명",
+          "VSCode에서 'UTF-8 with BOM'으로 저장하는 메뉴 경로(우측 하단 인코딩 버튼)",
+          "메모장에서 'UTF-8(BOM 포함)'으로 다시 저장하는 방법",
+          "PowerShell 7(pwsh)은 BOM 없는 UTF-8도 정상 인식한다는 버전별 차이",
+          "이미 깨진 ps1 파일을 재인코딩해서 복구하는 순서"
+        ],
+        "mustAvoid": [
+          "PowerShell ISE와 VSCode의 저장 방식을 구분 없이 같다고 서술하는 것"
+        ],
+        "checkBefore": [
+          "Windows PowerShell 5.1과 PowerShell 7의 기본 인코딩 처리 차이를 마이크로소프트 공식 문서(about_Character_Encoding)에서 확인"
+        ],
+        "solves": [
+          "ps1 파일 한글이 ?쒗듃로 깨져요 → BOM 없는 UTF-8이 원인임을 짚고 재인코딩 저장법 제공",
+          "한글 주석 때문에 토큰 오류가 나요 → 인코딩별 파싱 차이와 버전별 해결법 구분 제공"
+        ],
+        "actionTitles": [
+          "PowerShell 한글 깨짐, BOM 없는 UTF-8 저장법으로 해결하기",
+          "ps1 파일 한글 ?쒗듃 깨질 때 인코딩 바로 확인하는 법",
+          "PowerShell 토큰 오류, 한글 인코딩 재저장으로 해결하는 순서"
+        ]
+      },
+      "at": "2026-11-18T13:28:10.206Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "34a0fcc7cd5cc055",
+      "urls": [
+        "https://adipo.tistory.com/entry/%ED%96%89%EC%A0%95%ED%95%99%EC%9D%98-%EA%B8%B0%EC%9B%90%EA%B3%BC-%EC%84%B1%EB%A6%BD-%EC%A0%9C1%ED%8E%B8-%ED%96%89%EC%A0%95%ED%95%99-%EC%B4%9D%EB%A1%A0",
+        "https://adipo.tistory.com/entry/%ED%96%89%EC%A0%95%ED%95%99%EC%9D%98-%ED%95%99%EB%AC%B8%EC%A0%81-%EC%84%B1%EA%B2%A9-%EC%A0%9C1%ED%8E%B8-%ED%96%89%EC%A0%95%ED%95%99-%EC%B4%9D%EB%A1%A0",
+        "https://adipo.tistory.com/entry/%ED%96%89%EC%A0%95%EC%9D%98-%EB%B3%B8%EC%A7%88%EA%B3%BC-%EA%B3%B5%EA%B3%B5%EC%84%B1-%EC%A0%9C1%ED%8E%B8-%ED%96%89%EC%A0%95%ED%95%99-%EC%B4%9D%EB%A1%A0",
+        "https://adipo.tistory.com/entry/%ED%96%89%EC%A0%95%EA%B3%BC-%EA%B2%BD%EC%98%81%EC%9D%98-%EA%B4%80%EA%B3%84-%EC%A0%9C1%ED%8E%B8-%ED%96%89%EC%A0%95%ED%95%99-%EC%B4%9D%EB%A1%A0",
+        "https://adipo.tistory.com/entry/%ED%96%89%EC%A0%95%EC%9D%98-%EC%9D%98%EC%9D%98%EC%99%80-%EB%B3%B8%EC%A7%88-%EC%A0%9C1%ED%8E%B8-%ED%96%89%EC%A0%95%ED%95%99-%EC%B4%9D%EB%A1%A0"
+      ],
+      "guide": {
+        "direction": "행정학을 처음 접하는 독자는 '행정학이 언제 왜 독립 학문이 됐는지'와 '정치·경영과 뭐가 다른지'를 교과서식 설명만으로는 못 이해해 막막해한다. 고수 블로그들은 기원·학문적 성격·정치행정관계·행정경영관계·개념 5편을 따로 올려 전체 흐름을 한 번에 못 보여준다. 이 글은 5편을 순서대로 묶어 기원→성격→비교→개념 흐름을 한 글에서 끝까지 읽게 한다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "행정학 성립 시기와 계기 (확인 필요: 원문 교재·강의자료)",
+          "정치-행정 관계를 설명하는 대표 이론·학자명 (확인 필요: 원문 자료)",
+          "행정과 경영의 차이를 가르는 기준 비교표",
+          "행정학 총론 5편 순서와 각 편 핵심 한줄 정리"
+        ],
+        "mustAvoid": [
+          "중·고등 사회 교과서(삼국시대·민족유일당운동 등) 내용과 혼동해 끼워넣기"
+        ],
+        "checkBefore": [
+          "행정학 성립 연도·대표 학자는 원문 교재나 강의자료에서 재확인",
+          "정치-행정 관계 이론(이원론/일원론 등) 명칭은 원문에서 확인"
+        ],
+        "solves": [
+          "행정학이 왜 독립 학문이 됐는지 모르는 문제 → 성립 배경을 기원 편에서 정리",
+          "정치·경영과 행정이 뭐가 다른지 헷갈리는 문제 → 비교표로 바로 구분"
+        ],
+        "actionTitles": [
+          "행정학 기원과 성립부터 총론까지 한번에 정리하는 법",
+          "행정과 경영 차이, 정치행정관계 비교표로 확인하기"
+        ]
+      },
+      "at": "2026-11-18T13:28:10.206Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "4학년 1학기 사회 35쪽좀 알려죠여",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=130102&docId=108829169&answerNo=7&qb=7ZaJ7KCV7ZWZIOq4sOybkCDshLHrpr0g7KCcMe2OuCDstJ3roaA=",
+          "views": 94677,
+          "answers": 13,
+          "askedAt": "2010.04.26"
+        },
+        {
+          "title": "4학년 1학기 사회 35쪽",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=130102&docId=107435744&answerNo=2&qb=7ZaJ7KCV7ZWZIOq4sOybkCDshLHrpr0g7KCcMe2OuCDstJ3roaA=",
+          "views": 90226,
+          "answers": 9,
+          "askedAt": "2010.03.31"
+        },
+        {
+          "title": "우리나라의 삼국 시대 때 삼국은 각각 어떤 ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1110&docId=105118471&answerNo=5&qb=7ZaJ7KCV7ZWZIOq4sOybkCDshLHrpr0g7KCcMe2OuCDstJ3roaA=",
+          "views": 67298,
+          "answers": 12,
+          "askedAt": "2010.02.19"
+        }
+      ]
+    },
+    {
+      "id": "5ae81cba4db2c24a",
+      "urls": [
+        "https://hanbre.tistory.com/1986"
+      ],
+      "guide": {
+        "direction": "검색자는 'IEA 아시아 협력'과 '라이즈 아시아'가 정확히 뭘 가리키는지, 한국이 그 안에서 전력망·에너지 안보와 관련해 뭘 하는지 못 잡는다. 기사형 고수 제목은 사실만 나열해 프로그램 범위나 한국 역할의 구체 내용을 설명하지 않는다. 이 글은 라이즈 아시아 개요와 한국의 참여 방식, 전력망·안보 연계점을 정리해 궁금증을 끝낸다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "IEA(국제에너지기구)와 '라이즈 아시아' 프로그램의 정식 명칭·범위 (확인 필요: 원문 기사·IEA 공식 발표)",
+          "전력망 강화와 에너지 안보가 연결되는 구체적 방식 (확인 필요: 원문 기사)"
+        ],
+        "mustAvoid": [
+          "'라이즈 아시아'를 비슷한 이름의 다른 국제 협력체·이니셔티브와 혼동"
+        ],
+        "checkBefore": [
+          "IEA 공식 보도자료·홈페이지에서 '라이즈 아시아' 프로그램 명칭과 범위 확인"
+        ],
+        "solves": [
+          "'라이즈 아시아'가 뭔지 모르는 문제 → 프로그램 개요를 정리해 설명",
+          "한국이 왜 전력망·에너지 안보를 함께 언급하는지 모르는 문제 → 연계 내용 정리"
+        ],
+        "actionTitles": [
+          "IEA 라이즈 아시아가 뭔지, 한국 역할까지 확인하기",
+          "IEA 아시아 협력과 라이즈 아시아 핵심만 확인하는 법"
+        ]
+      },
+      "at": "2026-11-18T13:28:10.206Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "7cbf6d03f4c01467",
+      "urls": [
+        "https://sosc.pensionhub.co.kr/20"
+      ],
+      "guide": {
+        "direction": "검색자는 신청자격이 되는지, 신청기간이 지나면 못 받는지, 지급일을 어디서 조회하는지를 몰라 막혀 있다. 고수 제목 '신청자격 신청기간 지급시기 금액 조회'는 항목만 나열해 실제 조회 메뉴 경로나 기한후신청 가능 여부까지는 안 짚는다. 이 글은 홈택스 조회 경로와 기한후신청 절차, 소득요건 표까지 포함해 끝낸다.",
+        "searchTargets": [
+          "자녀장려금 신청자격"
+        ],
+        "mustInclude": [
+          "자녀장려금 신청자격(소득·재산 요건) 정리표",
+          "지급일·심사진행상황 조회 경로: 전체메뉴→장려금·연말정산·기부금→근로·자녀장려금→심사진행상황 조회",
+          "근로장려금 기한후신청 가능 여부와 절차 (확인 필요: 국세청 안내)",
+          "부모님 명의 대신 신청 불가 여부(본인 명의 로그인 필요)"
+        ],
+        "mustAvoid": [
+          "근로장려금과 자녀장려금 자격·금액 기준을 섞어서 혼동 유발",
+          "신청 안내문을 받았다는 사실을 최종 지급 보장으로 오해하게 서술"
+        ],
+        "checkBefore": [
+          "국세청 홈택스·손택스 공식 안내에서 신청기간·지급시기·소득기준 확인",
+          "국세청 보도자료에서 기한후신청 가능 기간 확인"
+        ],
+        "solves": [
+          "지급일이 언제인지, 심사상태 어떻게 조회하는지 모르는 문제 → 홈택스 메뉴 경로 안내",
+          "신청기간 지나서 못했는데 기한후신청 되는지 모르는 문제 → 가능 여부와 절차 정리",
+          "본인이 신청자격 되는지 헷갈리는 문제 → 소득요건 정리표로 바로 확인"
+        ],
+        "actionTitles": [
+          "자녀장려금 신청자격 확인하고 지급일까지 조회하는 법",
+          "근로자녀장려금 기한후신청 가능여부와 절차 확인하기",
+          "근로장려금 지급일 조회, 심사진행상황 확인하는 방법"
+        ]
+      },
+      "at": "2026-11-18T13:28:10.206Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "근로자녀장려금 지급일 조회 방법과 예상 지....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6080401&docId=489538014&answerNo=11&qb=7J6Q64WA7J6l66Ck6riIIOyLoOyyreyekOqyqSDsi6Dssq3quLDqsIQg7KeA6riJ7Iuc6riwIOq3vOuhnA==",
+          "views": 1064,
+          "answers": 13,
+          "askedAt": "2026.09.04"
+        },
+        {
+          "title": "근로장려금 기한후신청, 부모님 대신 신청 가....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=601&docId=492281341&answerNo=18&qb=7J6Q64WA7J6l66Ck6riIIOyLoOyyreyekOqyqSDsi6Dssq3quLDqsIQg7KeA6riJ7Iuc6riwIOq3vOuhnA==",
+          "views": 596,
+          "answers": 21,
+          "askedAt": "2026.10.05"
+        },
+        {
+          "title": "근로·자녀장려금 신청, 소득 요건 정확히 알....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60804&docId=494967447&answerNo=6&qb=7J6Q64WA7J6l66Ck6riIIOyLoOyyreyekOqyqSDsi6Dssq3quLDqsIQg7KeA6riJ7Iuc6riwIOq3vOuhnA==",
+          "views": 573,
+          "answers": 10,
+          "askedAt": "2026.10.12"
+        }
+      ]
+    },
+    {
+      "id": "8da370a6be6b78cf",
+      "urls": [
+        "https://infodemic.kr/3934"
+      ],
+      "guide": {
+        "direction": "검색자는 '이웃집 백만장자'에 나온 김덕식이 누구인지, 떡 사업과 집이 실제로 어떤 모습인지 궁금해 들어온다. 고수 블로그 제목은 이름과 소재만 나열해 출연 회차·날짜 같은 구체 정보는 아직 못 채웠다. 이 글은 출연 정보와 떡집 사업, 집 관련 사실을 원문 기준으로 정리해 궁금증을 끝내준다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "김덕식 출연 회차·방송일 (확인 필요: 방송사 공식 홈페이지)",
+          "이웃집 백만장자 프로그램 소개 및 김덕식 등장 맥락 (확인 필요: 원문 기사)"
+        ],
+        "mustAvoid": [],
+        "checkBefore": [],
+        "solves": [
+          "김덕식이 누군지, 어느 회차에 나왔는지 궁금 → 출연 정보 정리"
+        ],
+        "actionTitles": [
+          "김덕식 떡집 사업 정리, 이웃집 백만장자 출연 확인",
+          "김덕식 재산·떡집 사업 궁금증, 원문 기준으로 확인"
+        ]
+      },
+      "at": "2026-11-18T13:28:10.206Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "a2a3ac195e64e9aa",
+      "urls": [
+        "https://thinkingatelier.tistory.com/entry/%EC%97%B0%EB%A7%90%EC%A0%95%EC%82%B0-%EC%9E%A5%EC%95%A0%EC%9D%B8%EA%B3%B5%EC%A0%9C-%EC%B6%94%EA%B0%80%EA%B3%B5%EC%A0%9C-200%EB%A7%8C-%EC%9B%90-%EB%82%98%EC%9D%B4-%EC%A0%9C%ED%95%9C-%EC%97%86%EC%9D%8C"
+      ],
+      "guide": {
+        "direction": "장애인공제 질문은 나이 제한과 소득기준에서 막히는데, 32세 성인 자녀나 장애인 부모도 나이와 무관하게 공제받을 수 있는지가 핵심이다. 기존 글은 공제금액만 강조해 소득·동거요건 기준과 몰라서 못 받은 과거분을 경정청구로 환급받는 절차는 비워둔다. 이 글은 대상 조건표와 신청 순서, 경정청구 절차까지 한 번에 정리해 끝낸다.",
+        "searchTargets": [
+          "연말정산 장애인공제 대상",
+          "연말정산 장애인공제 신청방법",
+          "연말정산 장애인공제 경정청구",
+          "연말정산 장애인공제 기준일"
+        ],
+        "mustInclude": [
+          "대상 조건: 나이 무관, 자녀 총급여 500만원 이하 등 소득기준 표로 정리",
+          "공제금액 구조: 기본공제 150만원 + 장애인추가공제 (확인 필요: 국세청 홈택스 정확한 금액)",
+          "동거·생계요건: 주민등록상 동거 및 생계 충족 여부가 공제 핵심",
+          "경정청구로 과거 놓친 공제 환급 가능 (확인 필요: 국세청 경정청구 가능 기간)"
+        ],
+        "mustAvoid": [
+          "경로우대공제·국가유공자공제와 금액·조건 혼동",
+          "장애인연금·장애수당 등 복지급여와 세액공제 혼동",
+          "소득조건을 총급여와 소득금액 구분 없이 안내"
+        ],
+        "checkBefore": [
+          "국세청 홈택스 연말정산 안내에서 장애인공제 정확한 금액과 소득기준 확인",
+          "경정청구 가능 기간은 국세청 공식 안내로 확인"
+        ],
+        "solves": [
+          "나이 제한 있는지 헷갈림 → 장애인공제는 나이 무관임을 조건표로 정리",
+          "공제금액이 얼마인지 헷갈림 → 기본공제와 추가공제 금액 구분해서 제시",
+          "몰라서 못 받았으면 어떻게 하나 → 경정청구 절차로 환급받는 방법 안내"
+        ],
+        "actionTitles": [
+          "연말정산 장애인공제 대상 확인, 나이 제한 있는지 정리",
+          "연말정산 장애인공제 신청방법, 서류와 절차 정리",
+          "연말정산 장애인공제 경정청구로 놓친 공제 환급받기"
+        ]
+      },
+      "at": "2026-11-18T13:28:10.206Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "연말정산 부양가족 인적공제 (장애인 부양) ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40311&docId=490003649&answerNo=7&qb=7Jew66eQ7KCV7IKwIOyepeyVoOyduOqzteygnCDstpTqsIDqs7XsoJwg64KY7J20IOygnO2VnA==",
+          "views": 1066,
+          "answers": 7,
+          "askedAt": "2026.10.29"
+        },
+        {
+          "title": "연말정산 부모님 장애인 공제 질문",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40311&docId=491811085&answerNo=2&qb=7Jew66eQ7KCV7IKwIOyepeyVoOyduOqzteygnCDstpTqsIDqs7XsoJwg64KY7J20IOygnO2VnA==",
+          "views": 381,
+          "answers": 4,
+          "askedAt": "2026.02.06"
+        },
+        {
+          "title": "장애인자녀취직시연말정산?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100102&docId=491417580&answerNo=1&qb=7Jew66eQ7KCV7IKwIOyepeyVoOyduOqzteygnCDstpTqsIDqs7XsoJwg64KY7J20IOygnO2VnA==",
+          "views": 85,
+          "answers": 2,
+          "askedAt": "2026.01.17"
+        }
+      ]
+    },
+    {
+      "id": "76447e0d0dbf3aca",
+      "urls": [
+        "https://jjanggu1612.tistory.com/entry/%EC%9A%B4%EC%A0%84%EC%9E%90%EB%B3%B4%ED%97%98-%EA%B0%80%EC%9E%85-%EC%A0%84-%ED%99%95%EC%9D%B8%ED%95%A0-3%EB%8C%80-%ED%8A%B9%EC%95%BD%EA%B3%BC-2026-%EB%B3%80%EA%B2%BD%EC%A0%90"
+      ],
+      "guide": {
+        "direction": "운전자보험 질문은 특약을 추가·변경할 때 조건과 가능 여부에서 막히는데, 단기운전자확대특약처럼 추가 운전자도 연령조건(만 30세 이상)을 충족해야 한다는 점이 핵심이다. 기존 글은 특약 종류만 나열해 설계변경 가능 여부와 2026년 바뀐 점은 비워둔다. 이 글은 3대 특약 조건표와 변경·삭제 절차, 2026 변경점까지 정리해 끝낸다.",
+        "searchTargets": [
+          "운전자보험 특약 추가",
+          "운전자보험 특약 변경",
+          "운전자보험 특약 삭제",
+          "운전자보험 특약 종류"
+        ],
+        "mustInclude": [
+          "단기운전자확대특약은 추가 운전자도 만 30세 이상이어야 보장되는 연령조건",
+          "특약 변경·삭제는 보험사 전산 설계변경 시뮬레이션으로 가능 (확인 필요: 보험사 콜센터)",
+          "2026년 운전자보험 변경점 (확인 필요: 금융감독원·보험사 공식 공지)",
+          "운전자 범위 위반 시 보상한도는 약관·담보별로 다름, 일률적 50만원 아님"
+        ],
+        "mustAvoid": [
+          "운전자보험과 자동차 책임보험(의무보험) 혼동",
+          "특정 보험사 상품을 광고처럼 단정적으로 추천",
+          "도로교통법 개정마다 재가입 필요하다고 과장"
+        ],
+        "checkBefore": [
+          "2026년 변경점은 금융감독원 보도자료나 보험사 공식 공지로 확인",
+          "특약 변경 가능 여부는 가입한 보험사 콜센터·설계변경 시뮬레이션으로 확인"
+        ],
+        "solves": [
+          "추가 운전자 나이조건 모름 → 단기운전자확대특약은 만 30세 이상만 보장됨을 명시",
+          "특약을 더 넣고 싶은데 되는지 모름 → 전산 설계변경으로 가능한지 절차 정리",
+          "법 바뀔 때마다 새로 가입해야 하나 → 기존 약관 점검 후 특약만 교체하는 방법 제시"
+        ],
+        "actionTitles": [
+          "운전자보험 특약 추가 전 꼭 볼 연령조건 확인하기",
+          "운전자보험 특약 변경·삭제, 전산 설계변경 방법",
+          "운전자보험 특약 종류와 2026 변경점 한눈에 확인"
+        ]
+      },
+      "at": "2026-11-18T13:28:10.206Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "kb운전자보험 특약 관련",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=4010302&docId=495805314&answerNo=1&qb=7Jq07KCE7J6Q67O07ZeYIO2KueyVvSDrs4Dqsr3soJA=",
+          "views": 278,
+          "answers": 7,
+          "askedAt": "2026.11.03"
+        },
+        {
+          "title": "DB자동차 보험 단기운전자확대특약",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=401030202&docId=495310399&answerNo=1&qb=7Jq07KCE7J6Q67O07ZeYIO2KueyVvSDrs4Dqsr3soJA=",
+          "views": 269,
+          "answers": 4,
+          "askedAt": "2026.09.26"
+        },
+        {
+          "title": "사고 이력자 운전자보험에 암·간병 묶어서 ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=401030202&docId=495870106&answerNo=12&qb=7Jq07KCE7J6Q67O07ZeYIO2KueyVvSDrs4Dqsr3soJA=",
+          "views": 250,
+          "answers": 15,
+          "askedAt": "2026.11.11"
+        }
+      ]
+    },
+    {
+      "id": "f9fb9aac9e33fe6a",
+      "urls": [
+        "https://4jsm.com/entry/%EA%B2%BD%EB%82%A8%EA%B5%90%EC%9C%A1%EC%B2%AD-%ED%8A%B9%EA%B8%B0%EC%A0%81%EC%84%B1%EA%B5%90%EC%9C%A1%EC%B9%B4%EB%93%9C-%ED%99%88%ED%8E%98%EC%9D%B4%EC%A7%80%EF%BD%9C%EC%8B%A0%EC%B2%AD%C2%B7%EC%82%AC%EC%9A%A9%EC%B2%98%C2%B7%EC%9E%94%EC%95%A1%EC%A1%B0%ED%9A%8C%C2%B7%EC%9E%AC%EB%B0%9C%EA%B8%89"
+      ],
+      "guide": {
+        "direction": "학부모는 카드를 받고도 어디서 결제되는지, 분실했을 때 재발급 절차가 뭔지 몰라 막힌다. 고수 블로그 제목은 '신청·사용처·잔액조회·재발급'을 나열만 하고 각 항목의 실제 절차·필요서류는 비워둔 경우가 많다. 이 글은 네 가지 상황(신청/사용처/잔액조회/재발급)을 각각 따로 체크리스트로 끝내준다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "경남교육청 특기적성교육카드 홈페이지 주소(확인 필요: 경남교육청 공고)",
+          "신청 대상(차상위·다자녀 등 소득기준, 확인 필요: 교육청 공고문)",
+          "잔액조회 방법(홈페이지 로그인/카드사 앱, 확인 필요)",
+          "재발급 시 필요서류·수수료(확인 필요: 운영기관 공지)"
+        ],
+        "mustAvoid": [
+          "소득기준을 확인하지 않고 '누구나 신청 가능'처럼 쓰기"
+        ],
+        "checkBefore": [
+          "경남교육청 공식 홈페이지 공고문에서 신청자격·기간 확인",
+          "카드 운영기관 공지에서 가맹점 목록과 잔액조회 방법 확인"
+        ],
+        "solves": [
+          "카드 사용처를 몰라 결제가 막혔다 → 가맹점 업종별 정리로 해결",
+          "분실했는데 재발급 방법을 모른다 → 필요서류·절차 순서로 해결"
+        ],
+        "actionTitles": [
+          "경남교육청 특기적성교육카드 신청 자격 바로 확인하는 법",
+          "특기적성교육카드 사용처·잔액조회 한 번에 확인하는 법",
+          "경남교육청 특기적성교육카드 분실 시 재발급 신청 방법"
+        ]
+      },
+      "at": "2026-11-18T13:28:10.206Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "b418eacc9a904801",
+      "urls": [
+        "https://limeade.kr/worknet-employment-portal/"
+      ],
+      "guide": {
+        "direction": "지식인 질문들은 구직신청 연장, 실업급여 인정되는 구직활동 범위, 청년구직활동지원금 신청 경로를 놓고 혼란스러워한다. 고수 블로그 제목은 단순 '바로가기' 링크만 제공해 실제 막히는 절차(워크넷-고용24 통합, 구직재신청 예약)는 설명하지 않는다. 이 글은 상황별(실업급여/채용정보/청년지원금) 바로가기와 신청 순서를 체크리스트로 끝내준다.",
+        "searchTargets": [
+          "워크넷 고용24 구인구직",
+          "워크넷 고용24 채용정보",
+          "워크넷 고용24 구직활동",
+          "워크넷 고용24 홈페이지"
+        ],
+        "mustInclude": [
+          "구 워크넷(work.go.kr)과 고용24(work24.go.kr) 통합 여부·주소(확인 필요: 고용노동부 공지)",
+          "실업급여 인정 구직활동 기준(온라인 입사지원 등, 확인 필요: 고용센터 공지)",
+          "구직 재신청(연장) 예약 절차",
+          "청년구직활동지원금 신청 경로(고용24 홈페이지/앱)",
+          "지역별(인천·대구 등) 채용정보 검색 방법"
+        ],
+        "mustAvoid": [
+          "워크넷과 고용24를 별개 사이트처럼 설명해 혼란 주기(실제는 통합)",
+          "온라인 특강 전송 같은 불인정 활동을 구직활동으로 인정된다고 오인시키기"
+        ],
+        "checkBefore": [
+          "고용24 공식 공지에서 워크넷-고용24 통합 여부와 주소 확인",
+          "고용센터 공지에서 실업급여 구직활동 인정 기준 최신본 확인"
+        ],
+        "solves": [
+          "구직신청 기간이 끝났는데 연장되는지 모른다 → 구직재신청 예약 절차로 해결",
+          "실업급여 구직활동으로 뭐가 인정되는지 모른다 → 인정/불인정 구분표로 해결",
+          "청년구직활동지원금을 어디서 신청하는지 모른다 → 고용24 신청 경로로 해결"
+        ],
+        "actionTitles": [
+          "워크넷 고용24 구인구직 홈페이지 바로가기와 가입 방법",
+          "워크넷 고용24 구직활동 인정 기준 한눈에 확인하기",
+          "워크넷 고용24 채용정보 지역별로 검색하는 법"
+        ]
+      },
+      "at": "2026-11-18T13:28:10.206Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "실업급여 워크넷 구직신청 연장이요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6080402&docId=369932899&answerNo=1&qb=7JuM7YGs64S3IOqzoOyaqTI0IOq1rOyduOq1rOyngSB3d3cgd29yazI0",
+          "views": 11293,
+          "answers": 1,
+          "askedAt": "2020.10.06"
+        },
+        {
+          "title": "고용보험 실업급여 신청 시 필요한 절차는 무....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=6080402&docId=486783181&answerNo=1&qb=7JuM7YGs64S3IOqzoOyaqTI0IOq1rOyduOq1rOyngSB3d3cgd29yazI0",
+          "views": 2440,
+          "answers": 3,
+          "askedAt": "2025.07.04"
+        },
+        {
+          "title": "청년구직활동지원금은 어디서 받을 수 있나....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40613&docId=488938688&answerNo=14&qb=7JuM7YGs64S3IOqzoOyaqTI0IOq1rOyduOq1rOyngSB3d3cgd29yazI0",
+          "views": 603,
+          "answers": 14,
+          "askedAt": "2026.05.28"
+        }
+      ]
+    },
+    {
+      "id": "4a24f113c843ad00",
+      "urls": [
+        "https://adaybook.com/nonghyup-auction-trading-system/"
+      ],
+      "guide": {
+        "direction": "검색자는 안동·풍기·제주시·상주·전주·대전·구리·청도·제주 등 지역별 공판장을 치면서 이곳이 소매마트인지 경매·도매 공간인지, 위치·운영시간은 어떻게 되는지 몰라 막힌다. 고수 블로그 제목은 newgp.nonghyup.com 시스템명만 던지고 지역별 실제 위치·접속 후 조회 방법은 비워뒀다. 9개 지역 정리표와 로그인 후 경락대금·정산 조회 절차를 함께 주면 검색이 그 글에서 끝난다.",
+        "searchTargets": [
+          "안동농협공판장",
+          "제주시농협공판장",
+          "전주농협공판장",
+          "청도농협공판장"
+        ],
+        "mustInclude": [
+          "안동·풍기·제주시·상주·전주·대전·구리·청도·제주 공판장 위치·연락처 정리표(확인 필요: 각 지역농협 공식페이지)",
+          "newgp.nonghyup.com 로그인 후 경락실적·정산대금 조회 절차",
+          "공판장은 소매마트가 아닌 경매·도매 중개 공간이라는 설명",
+          "일요일 아침 미운영이라는 지식인 답변 기준 안내",
+          "음성공판장 등 별정직 채용 필기전형 출제영역(확인 필요: 농협 채용공고)"
+        ],
+        "mustAvoid": [
+          "공판장을 하나로마트 같은 소매매장으로 설명해 혼동 유발",
+          "가락공판장을 가락시장 내 다른 운영사와 혼동",
+          "지역별 운영시간을 전부 동일하다고 일반화"
+        ],
+        "checkBefore": [
+          "각 지역 공판장 주소·전화번호는 해당 지역농협 홈페이지/고객센터에서 확인",
+          "newgp.nonghyup.com 현재 로그인 방식(공동인증서 등) 직접 접속 확인",
+          "일요일 운영 여부는 지점별로 다를 수 있어 개별 공판장에 재확인"
+        ],
+        "solves": [
+          "공판장이 마트인지 헷갈림 → 경매·도매 거래 공간이라는 개념부터 정리",
+          "지역 공판장 위치를 못 찾음 → 9개 지역 정리표로 한번에 확인",
+          "일요일에 가도 되는지 궁금 → 운영 여부 안내로 헛걸음 방지"
+        ],
+        "actionTitles": [
+          "안동·전주·대전 등 농협공판장 위치·운영시간 한눈에 조회",
+          "newgp.nonghyup.com 경락대금·정산 조회하는 법 총정리",
+          "제주농협공판장 일요일 운영여부 등 방문 전 확인사항"
+        ]
+      },
+      "at": "2026-11-18T13:28:10.206Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "농협가락공판장",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=12013201&docId=200289946&answerNo=2&qb=64aN7ZiR6rO17YyQ7J6l",
+          "views": 4253,
+          "answers": 1,
+          "askedAt": "2014.06.19"
+        },
+        {
+          "title": "청주사시는분들!!! 청주시 충북원예농협공판....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=121602&docId=20313591&answerNo=2&qb=64aN7ZiR6rO17YyQ7J6l",
+          "views": 3109,
+          "answers": 2,
+          "askedAt": "2005.08.14"
+        },
+        {
+          "title": "농협 경제지주 별정직 음성공판장 필기",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=408&docId=494585988&answerNo=1&qb=64aN7ZiR6rO17YyQ7J6l",
+          "views": 110,
+          "answers": 1,
+          "askedAt": "2026.08.04"
+        }
+      ]
+    },
+    {
+      "id": "7a72db1347f99764",
+      "urls": [
+        "https://truelight0413.tistory.com/entry/%ED%86%B5%EC%9E%A5%EC%97%90-%EB%8F%88%EC%9D%B4-%EB%93%A4%EC%96%B4%EC%98%A4%EB%8A%94-%EA%BF%88-%ED%95%B4%EB%AA%BD%EF%BD%9C%EC%9E%85%EA%B8%88%C2%B7%EC%9E%94%EC%95%A1-%EC%A6%9D%EA%B0%80%C2%B7%EC%9B%94%EA%B8%89%EB%B0%9B%EB%8A%94-%EA%BF%88-15%EA%B0%80%EC%A7%80-%EC%9E%AC%EB%AC%BC%EC%9A%B4-%EA%B8%B8%EB%AA%BD%EC%9D%BC%EA%B9%8C"
+      ],
+      "guide": {
+        "direction": "검색자는 '통장에 돈이 들어오는 꿈'이 단순 길몽인지, 자동완성의 '돈이 빠져나가는 꿈'·'돈이 불어나는 꿈'과 정반대 의미인지 헷갈려서 검색한다. 고수 블로그 제목은 입금·잔액증가·월급 15가지는 다뤘지만 반대 의미인 유출형 꿈과의 대조는 비워뒀다. 길몽(입금·증가)과 흉몽(유출·이체실수)을 나란히 대조한 표를 보여주면 검색자가 자신의 꿈이 어느 쪽인지 바로 판단하고 글을 떠난다.",
+        "searchTargets": [
+          "통장 돈 입금",
+          "통장돈이빠져나가요",
+          "통장돈이 불어나는꿈"
+        ],
+        "mustInclude": [
+          "입금받는 꿈=행운·이득·연애·명예 등 길몽 해석(지식인 답변 기준)",
+          "계좌이체 잘못하는 꿈=이득 누출·문제 미해결 흉몽 해석",
+          "타인(회사대표 등)이 돈을 입금해주는 꿈=관재구설 주의 해석",
+          "통장돈이빠져나가요/불어나는꿈 등 유형별 길몽·흉몽 비교표",
+          "잔액 증가·월급받는 꿈 별도 해석 포함"
+        ],
+        "mustAvoid": [
+          "금단현상 등 건강·정신질환 문제로 과도 연결해 불안 조장"
+        ],
+        "checkBefore": [
+          "전통 해몽사전·역술 자료 기준으로 길몽/흉몽 분류 재확인"
+        ],
+        "solves": [
+          "입금되는 꿈이 좋은 건지 몰라 검색 → 길몽 여부와 의미(행운·이득) 정리",
+          "돈 빠져나가는 꿈이 걱정됨 → 흉몽 해석(손해·미해결)으로 구분 제공",
+          "타인이 입금해주는 꿈 의미 궁금 → 관재구설 주의 해석 전달"
+        ],
+        "actionTitles": [
+          "통장 돈 입금되는 꿈 길몽일까, 15가지 해몽으로 확인",
+          "통장돈이빠져나가요 꿈 의미, 입금꿈과 반대 해석 비교",
+          "통장돈이 불어나는꿈 해몽, 재물운 길몽 여부 바로 확인"
+        ]
+      },
+      "at": "2026-11-18T13:28:10.206Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "계좌에 돈이 입금되는 꿈",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=31505&docId=362851848&answerNo=1&qb=7Ya17J6lIOuPiOydtCDrk6TslrTsmKQg7ZW066q97J6F6riIIOyelOyVoQ==",
+          "views": 1551,
+          "answers": 1,
+          "askedAt": "2020.07.18"
+        },
+        {
+          "title": "계좌로 입금 받는꿈",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=31505&docId=252180264&answerNo=1&qb=7Ya17J6lIOuPiOydtCDrk6TslrTsmKQg7ZW066q97J6F6riIIOyelOyVoQ==",
+          "views": 1024,
+          "answers": 1,
+          "askedAt": "2016.05.13"
+        },
+        {
+          "title": "계좌이체 잘못하는 꿈",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=31505&docId=406894285&answerNo=3&qb=7Ya17J6lIOuPiOydtCDrk6TslrTsmKQg7ZW066q97J6F6riIIOyelOyVoQ==",
+          "views": 968,
+          "answers": 5,
+          "askedAt": "2021.12.12"
+        }
+      ]
+    },
+    {
+      "id": "50185d004bedd15d",
+      "urls": [
+        "https://hometex.co.kr/%eb%a1%b1%eb%b6%80%ec%b8%a0/"
+      ],
+      "guide": {
+        "direction": "검색자는 '롱부츠 뭐가 평점이 제일 좋은지' 비교 기준이 없어 못 고르는데, 고수 글 제목은 'BEST5 종합'이라고만 하고 체형·용도별 비교는 안 보여준다. 자동완성·지식인 자료가 주어지지 않아 세부 수치는 재료에서 확인할 수 없다. 이 글은 종아리 굵기·용도별 비교표로 검색자가 자신에게 맞는 제품을 바로 고르게 한다.",
+        "searchTargets": [],
+        "mustInclude": [
+          "브랜드별 BEST5 제품명·가격 비교표 (확인 필요: 쿠팡·무신사 등 판매처)",
+          "종아리 둘레(굵은 다리/얇은 다리)별 핏 비교 (확인 필요: 실제 구매자 리뷰)",
+          "평점·리뷰 수 정리표 (확인 필요: 판매처 리뷰 데이터)"
+        ],
+        "mustAvoid": [],
+        "checkBefore": [
+          "판매처(쿠팡·무신사·W컨셉 등)의 최신 평점·리뷰 수 확인"
+        ],
+        "solves": [
+          "'롱부츠 뭐 사야할지 모르겠다' → 체형·용도별 BEST5 비교표로 선택",
+          "'평점만 보고 사도 되나' → 리뷰 수·핏 후기 교차 확인 기준 제공"
+        ],
+        "actionTitles": [
+          "롱부츠 베스트5 평점 비교로 다리 체형별 고르기",
+          "롱부츠 구매 전 리뷰·사이즈 비교표로 실패 줄이기",
+          "통허벅지도 맞는 롱부츠 평점 비교 총정리"
+        ]
+      },
+      "at": "2026-11-18T13:28:10.206Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude"
+    },
+    {
+      "id": "5f6ee5ef90388cc0",
+      "urls": [
+        "https://onsum.kr/entry/%EB%8C%80%EC%B6%9C-%EC%97%B0%EC%B2%B4-%EC%A0%84-%EC%B1%84%EB%AC%B4%EC%A1%B0%EC%A0%95-%EC%8B%A0%EC%B2%AD%EB%B0%A9%EB%B2%95-2026%EF%BD%9C%EC%8B%A0%EC%86%8D%EC%B1%84%EB%AC%B4%EC%A1%B0%EC%A0%95-%EC%A1%B0%EA%B1%B4%C2%B7%ED%95%84%EC%9A%94%EC%84%9C%EB%A5%98%C2%B7%EC%9D%B4%EC%9E%90%EC%9C%A8-%EC%A1%B0%EC%A0%95-%EC%B4%9D%EC%A0%95%EB%A6%AC"
+      ],
+      "guide": {
+        "direction": "검색자는 연체 전이거나 연체 30일 이하 상태에서 신속채무조정이 되는지, 원금감면 없이 이자율만 조정되는지 지식인에서 직접 묻는다. 고수 글 제목은 '총정리'라고만 하고 연체일수 기준표·개인회생과의 차이를 명확히 안 보여준다. 이 글은 연체 전/30일 이하 기준표, 필요서류 체크리스트, 신청 순서로 검색자가 바로 신청까지 가게 한다.",
+        "searchTargets": [
+          "연체채무조정"
+        ],
+        "mustInclude": [
+          "신속채무조정 정의: 연체 전·30일 이하 신청, 원금감면 없이 이자율만 조정 (지식인 답변 근거)",
+          "프리워크아웃·개인회생과 차이 비교표(연체일수 기준)",
+          "서류 '정식 접수일' 기준 효력 발생 설명",
+          "신용회복위원회 채무조정상담 절차·필요서류 체크리스트 (확인 필요: 신용회복위원회 공식 홈페이지)",
+          "연체 중인 금융사 사전 고지 필요 여부 (확인 필요: 신용회복위원회 상담)"
+        ],
+        "mustAvoid": [
+          "신속채무조정을 개인회생·파산과 혼동해 원금감면 가능한 것처럼 서술",
+          "심사·소득 조건 없이 무조건 승인되는 것처럼 과장"
+        ],
+        "checkBefore": [
+          "신청 자격(연체일수·소득요건)은 신용회복위원회 공식 공지로 재확인",
+          "필요서류 목록은 신용회복위원회 공식 안내 기준으로 확인"
+        ],
+        "solves": [
+          "'연체 30일 이하인데 되나요' → 신청 가능 기준표로 바로 확인",
+          "'원금감면 되나요' → 이자율만 조정된다는 점을 비교표로 명확화",
+          "'금융사에 통보되나요' → 사전 고지 필요 여부 정리"
+        ],
+        "actionTitles": [
+          "연체채무조정 신청조건 - 연체 전·30일 이하 기준표",
+          "연체 전 채무조정 신청순서 신용회복위원회 체크리스트"
+        ]
+      },
+      "at": "2026-11-18T13:28:10.206Z",
+      "rules": "2026-10-20-solve",
+      "provider": "claude",
+      "kinQuestions": [
+        {
+          "title": "현대카드 연체에 대해서",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40104&docId=495826828&answerNo=4&qb=7Jew7LK0IOyxhOustOyhsOyglSDsi6Dssq3rsKnrspUg7ZWE7JqU7ISc66WYIOydtOyekOycqA==",
+          "views": 349,
+          "answers": 6,
+          "askedAt": "2026.11.04"
+        },
+        {
+          "title": "파산신청 가능할까요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110103&docId=495755229&answerNo=7&qb=7Jew7LK0IOyxhOustOyhsOyglSDsi6Dssq3rsKnrspUg7ZWE7JqU7ISc66WYIOydtOyekOycqA==",
+          "views": 317,
+          "answers": 10,
+          "askedAt": "2026.10.30"
+        },
+        {
+          "title": "대출 연체",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40105&docId=495826139&answerNo=6&qb=7Jew7LK0IOyxhOustOyhsOyglSDsi6Dssq3rsKnrspUg7ZWE7JqU7ISc66WYIOydtOyekOycqA==",
+          "views": 291,
+          "answers": 9,
+          "askedAt": "2026.11.06"
+        }
+      ]
     }
   ],
   "misses": [
@@ -76788,6 +77771,18 @@
     {
       "id": "566aa751c71d41ba",
       "at": "2026-11-18T12:42:12.308Z"
+    },
+    {
+      "id": "0695647e8e4475ee",
+      "at": "2026-11-18T13:28:09.470Z"
+    },
+    {
+      "id": "4698c14d28b4edfc",
+      "at": "2026-11-18T13:28:09.470Z"
+    },
+    {
+      "id": "f66a7c31f3dcfe3e",
+      "at": "2026-11-18T13:28:09.470Z"
     }
   ]
 }
