@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T01:55:54.376Z",
+ "builtAt": "2026-11-18T02:05:57.487Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,66 +11,98 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "당정 육사 충청권 이전",
+   "keyword": "KDB생명 매각 무산",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 50,
-   "recent20": 2,
-   "press": 46,
-   "firstArticleAt": "2026-11-18T00:26:00.000Z",
-   "exclusive": false,
+   "articles90": 54,
+   "recent20": 9,
+   "press": 52,
+   "firstArticleAt": "2026-11-18T00:38:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "국군사관학교, 2029년부터 신입생 선발…육사만 충청권 이전",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-18T01:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005442816?sid=100"
+     "title": "KDB생명 매각 또 결렬…'1조 자본확충' 누가 부담하나 '쟁점'(종합)",
+     "press": "fins.co.kr",
+     "publishedAt": "2026-11-18T02:04:00.000Z",
+     "link": "http://www.fins.co.kr/news/articleView.html?idxno=110607"
     },
     {
-     "title": "4년 통합 접고 ‘1+2+1’로…육사만 충청권 이전 추진",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-18T01:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006411691?sid=100"
+     "title": "산업은행, KDB생명 7번째 매각도 무산…한투금융과 협상 결렬",
+     "press": "industrynews.co.kr",
+     "publishedAt": "2026-11-18T02:04:00.000Z",
+     "link": "https://www.industrynews.co.kr/news/articleView.html?idxno=89752"
     },
     {
-     "title": "육사 결국 충청권으로…해사·공사는 현 위치 유지",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-18T01:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001273104?sid=100"
+     "title": "KDB생명 매각 협상 결렬…7번째 주인 찾기 무산",
+     "press": "goodnews1.com",
+     "publishedAt": "2026-11-18T02:04:00.000Z",
+     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466354"
     }
    ]
   },
   {
-   "keyword": "국군사관학교 창설",
+   "keyword": "육사 충청권 이전",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 29,
-   "recent20": 1,
-   "press": 27,
-   "firstArticleAt": "2026-11-18T00:26:00.000Z",
+   "articles90": 46,
+   "recent20": 5,
+   "press": 43,
+   "firstArticleAt": "2026-11-18T00:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국군사관학교, 2029년부터 신입생 선발…육사만 충청권 이전",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-18T01:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005442816?sid=100"
+     "title": "국군사관학교 통합안 수정…육사 옮기고 해사·공사는 남는다",
+     "press": "straightnews.co.kr",
+     "publishedAt": "2026-11-18T02:02:00.000Z",
+     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=315624"
     },
     {
-     "title": "육사, 서울 태릉 떠나 충청권 이전 검토… 국군사관학교 본교는 대전 자...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-18T01:32:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261118000462"
+     "title": "육사, 충청권 이전… 국군사관학교 신입생 선발은 2029년부터",
+     "press": "sisunnews.co.kr",
+     "publishedAt": "2026-11-18T01:58:00.000Z",
+     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=249957"
     },
     {
-     "title": "서울 떠나는 육사…충청권 이전하고 '국군사관학교'로 통합 개편",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-18T01:27:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000083909"
+     "title": "“육사 충청 이전…사관생도 1, 4학년 통합 교육”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-18T01:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012296241?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "수능 AI 부정대책 논의",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 44,
+   "recent20": 9,
+   "press": 27,
+   "firstArticleAt": "2026-11-18T00:41:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "당정 “수능 AI 부정행위 땐 응시 제한 최대 10년”…올해부터 소급 적...",
+     "press": "news-s.kr",
+     "publishedAt": "2026-11-18T01:56:00.000Z",
+     "link": "https://news-s.kr/view.html?id=L261118105150ce0b"
+    },
+    {
+     "title": "“재난문자 방해시 시험 연장”·“10년 응시제한 소급”…수능 D-1 대책...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-18T01:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002725010?sid=100"
+    },
+    {
+     "title": "오세훈 \"모든 제도에 AI 내진설계 필요\"…정부 대응 비판·서울시 전면 ...",
+     "press": "ppss.kr",
+     "publishedAt": "2026-11-18T01:53:00.000Z",
+     "link": "https://www.ppss.kr/news/articleView.html?idxno=321656"
     }
    ]
   },
@@ -80,12 +112,12 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 21,
-   "recent20": 3,
-   "press": 18,
-   "firstArticleAt": "2026-11-18T00:46:00.000Z",
+   "articles90": 17,
+   "recent20": 1,
+   "press": 15,
+   "firstArticleAt": "2026-11-18T00:58:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
      "title": "[뉴스워커_롯데칠성음료] 올해 첫 수확한 포도로 만든 와인…'보졸레 누...",
@@ -108,98 +140,34 @@
    ]
   },
   {
-   "keyword": "수능 AI 부정행위 대책 회의",
+   "keyword": "노란우산 개인정보 유출",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-18T00:28:00.000Z",
-   "exclusive": false,
+   "articles90": 15,
+   "recent20": 0,
+   "press": 14,
+   "firstArticleAt": "2026-11-18T00:38:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "[수능 D-1] 당정 'AI 커닝' 원천 봉쇄…재난문자 불시 발송",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-18T01:38:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=315619"
+     "title": "주소·연락처 등 \"20만 5천 명 규모\"…노란우산도 털렸다",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-18T01:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001403873?sid=101"
     },
     {
-     "title": "하헌기 \"최교진 경질해야, 신천지 논쟁할 때 AI 커닝 대책 세웠어야\"[뉴...",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-18T01:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004211016?sid=100"
+     "title": "지역화페 플랫폼 '착' 에서 이용자 566명 개인정보 유출",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-18T01:42:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=73206"
     },
     {
-     "title": "“수능 미뤄달라”…고3 수험생, 헌재이어 행정법원에도 소송",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-18T01:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006411680?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "이재명 다카이치 정상회담",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-18T00:37:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[동북아 정세브리핑] 미·중·러 첫 3자 정상회담...북핵·대만·반도체...",
-     "press": "kor.theasian.asia",
-     "publishedAt": "2026-11-18T01:48:00.000Z",
-     "link": "http://kor.theasian.asia/archives/422107"
-    },
-    {
-     "title": "어제 다카이치, 오늘 시진핑…李대통령, 미중러 회동 앞 외교 총력전",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-18T01:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002724986?sid=100"
-    },
-    {
-     "title": "이재명, 다카이치 만나고 하루 뒤 시진핑…‘48시간 동북아 외교’",
-     "press": "asiatime.co.kr",
-     "publishedAt": "2026-11-18T01:22:00.000Z",
-     "link": "https://www.asiatime.co.kr/article/20261118500105"
-    }
-   ]
-  },
-  {
-   "keyword": "성유리 남편 무죄에 좋아요",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-18T00:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "안성현, 무죄 확정 후 3년 8개월 만에 SNS 활동 재개... 성유리 '좋아요...",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-18T01:40:00.000Z",
-     "link": "https://www.insight.co.kr/news/582528"
-    },
-    {
-     "title": "[뮤즈이슈]성유리, ♥안성현 무죄 확정되자 ‘좋아요’..3년8개월만 SNS ...",
-     "press": "heraldmuse.com",
-     "publishedAt": "2026-11-18T01:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/112/0003813633"
-    },
-    {
-     "title": "'옥바라지' 끝낸 성유리…안성현, 무죄 확정→3년 8개월 만에 근황에 '좋...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-18T00:54:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000491338"
+     "title": "소상공인 공제 '노란우산'서도 개인정보 20만명 넘게 유출 정황",
+     "press": "mbnmoney.mbn.co.kr",
+     "publishedAt": "2026-11-18T01:42:00.000Z",
+     "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005963728"
     }
    ]
   },
@@ -208,40 +176,46 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 4,
+   "articles90": 7,
+   "recent20": 3,
+   "press": 6,
    "firstArticleAt": "2026-11-18T00:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "부산 고액·상습 체납자 860명 공개…체납액 529억",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-18T02:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001076083?sid=102"
+    },
+    {
+     "title": "부산 지방세 체납 1위 금양 류광지 회장…30억8천만원 안 냈다(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-18T02:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016448525?sid=102"
+    },
+    {
      "title": "울산시, 고액·상습 체납자 194명 공개…최고액 4.9억",
      "press": "newsis.com",
      "publishedAt": "2026-11-18T01:51:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014329372?sid=102"
-    },
-    {
-     "title": "부산시, 1천만 원 이상 고액·상습 체납자 860명 명단 공개",
-     "press": "lawissue.co.kr",
-     "publishedAt": "2026-11-18T01:44:00.000Z",
-     "link": "https://www.lawissue.co.kr/view.php?ud=2026111810401770449a8c8bf58f_12"
-    },
-    {
-     "title": "부산 고액·상습 체납자 860명 공개…개인 최고 45억 8700만원 체납",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-18T01:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009295418?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1030,
-  "matched": 572,
-  "avgLeadMin": 833,
+  "flagged": 1031,
+  "matched": 573,
+  "avgLeadMin": 832,
   "recent": [
+   {
+    "keyword": "핑클",
+    "hitKeyword": "핑클 완전체 회동",
+    "hitAt": "2026-11-18T11:00:00+09:00",
+    "leadMin": 137
+   },
    {
     "keyword": "정호연 007 본드걸 후보 거론",
     "hitKeyword": "정호연 007 본드걸 후보",
@@ -295,12 +269,6 @@
     "hitKeyword": "태안 해상 어선 7명 실종",
     "hitAt": "2026-11-18T09:00:00+09:00",
     "leadMin": 27
-   },
-   {
-    "keyword": "젠슨 황 복귀 없다",
-    "hitKeyword": "젠슨 황 복귀 의사",
-    "hitAt": "2026-11-18T09:00:00+09:00",
-    "leadMin": 17
    }
   ]
  }
