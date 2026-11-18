@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T17:39:02.685Z",
+ "builtAt": "2026-11-18T17:49:06.072Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,15 +8,47 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 29,
  "candidates": [
+  {
+   "keyword": "한중 FTA 협상 타결",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-18T16:51:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한한령 닫힌 문 열리나...한중 FTA 후속협상 타결, K-콘텐츠 기지개",
+     "press": "kdpress.co.kr",
+     "publishedAt": "2026-11-18T17:44:00.000Z",
+     "link": "https://www.kdpress.co.kr/news/articleView.html?idxno=209965"
+    },
+    {
+     "title": "중국 상무부 “한중 2단계 FTA 협상 타결…문화·인터넷 협력 계획 마련...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-18T17:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012296864?sid=104"
+    },
+    {
+     "title": "李대통령, 中 'K콘텐츠 최혜국대우'에 \"한중관계 새로운 미래 만들 토대...",
+     "press": "tfmedia.co.kr",
+     "publishedAt": "2026-11-18T17:02:00.000Z",
+     "link": "https://www.tfmedia.co.kr/news/article.html?no=209009"
+    }
+   ]
+  },
   {
    "keyword": "트럼프 푸틴 악수",
    "sources": [
     "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-18T16:31:00.000Z",
    "exclusive": false,
@@ -109,7 +141,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1072,
+  "flagged": 1073,
   "matched": 595,
   "avgLeadMin": 889,
   "recent": [
