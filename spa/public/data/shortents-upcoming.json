@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T17:18:55.470Z",
+ "builtAt": "2026-11-18T17:28:58.920Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 29,
  "candidates": [
   {
    "keyword": "수능 재난문자 시간",
    "sources": [
     "google"
    ],
-   "articles90": 5,
+   "articles90": 3,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-18T15:49:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-18T16:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -39,39 +39,6 @@
      "press": "kmib.co.kr",
      "publishedAt": "2026-11-18T16:22:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/005/0001886073?sid=110"
-    }
-   ]
-  },
-  {
-   "keyword": "수능 부정행위 1억 포상금",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-18T15:49:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "부정행위 신고하면 최대 1억 원 포상금...이번 수능부터 적용",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-18T17:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002434880?sid=100"
-    },
-    {
-     "title": "[사설] AI 부정행위 파문 속 수능, 공정하고 차질 없이 치러야",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-18T16:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001886073?sid=110"
-    },
-    {
-     "title": "불안한 수능, 그래도 노력을 믿습니다",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-18T15:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004010480?sid=102"
     }
    ]
   }
