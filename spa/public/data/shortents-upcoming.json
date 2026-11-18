@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T20:40:05.527Z",
+ "builtAt": "2026-11-18T20:50:09.040Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,49 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
+  {
+   "keyword": "정부 수능 부정행위 대응",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 16,
+   "recent20": 2,
+   "press": 16,
+   "firstArticleAt": "2026-11-18T19:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "전남광주교육청 '수능 AI 기기 활용 부정행위' 예방 총력",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-18T20:42:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=884935"
+    },
+    {
+     "title": "오늘 수능…'단춧구멍 스티커' 아날로그식 대응에 우려 여전",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-18T20:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000927633?sid=102"
+    },
+    {
+     "title": "인천시교육청, 수능 '스마트안경' 등 첨단 부정행위 원천 차단 고강도 ...",
+     "press": "cstimes.com",
+     "publishedAt": "2026-11-18T20:30:00.000Z",
+     "link": "https://www.cstimes.com/news/articleView.html?idxno=728501"
+    }
+   ]
+  },
   {
    "keyword": "승리",
    "sources": [
     "google"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-18T19:12:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-18T19:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -43,42 +75,9 @@
    ]
   },
   {
-   "keyword": "부정행위 TF 가동",
+   "keyword": "추경호 1심 무죄",
    "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-18T19:59:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "오늘 수능, 시험 끝나도 부정행위 추적…신고 포상금 최대 1억원 추진",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-18T20:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003059964?sid=100"
-    },
-    {
-     "title": "정부, 이번 수능부터 ‘부정행위 신고포상금 최대 1억원’…즉시 적용 ...",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-18T20:16:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611190003"
-    },
-    {
-     "title": "AI커닝 끝까지 잡는다… 수능 직후 범정부 TF·1억 포상금 즉시 적용",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-18T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003700895?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "추경호 1심 무죄 판결",
-   "sources": [
-    "nate"
+    "daum"
    ],
    "articles90": 4,
    "recent20": 0,
@@ -142,7 +141,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1071,
+  "flagged": 1072,
   "matched": 590,
   "avgLeadMin": 894,
   "recent": [
