@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T02:16:00.726Z",
+ "builtAt": "2026-11-18T02:26:03.192Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -13,64 +13,33 @@
   {
    "keyword": "KDB생명 매각 무산",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 50,
-   "recent20": 9,
-   "press": 47,
-   "firstArticleAt": "2026-11-18T00:47:00.000Z",
+   "articles90": 43,
+   "recent20": 5,
+   "press": 40,
+   "firstArticleAt": "2026-11-18T00:58:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "KDB생명 매각 또 무산…산은, 7번째 매각 실패",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-18T02:14:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5084744"
+     "title": "한국금융지주, KDB생명 인수 불발…\"보험업 진출 검토 계속 한다\"[표류하...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-18T02:22:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2649718"
     },
     {
-     "title": "한국금융, KDB생명 인수 무산…'1조 증자' 놓고 산은과 평행선",
-     "press": "weekly.hankooki.com",
-     "publishedAt": "2026-11-18T02:14:00.000Z",
-     "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7194500"
+     "title": "산은·한투, KDB생명 인수 협상 결렬",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-18T02:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002725069?sid=101"
     },
     {
-     "title": "[종합] KDB생명 7번째 매각 불발…산은, 한국금융지주와 ‘1조원 자본확...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-18T02:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/117/0004126058?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "육사 충청권 이전",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 37,
-   "recent20": 3,
-   "press": 36,
-   "firstArticleAt": "2026-11-18T00:48:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "육사, 서울->충청권 이전...신설 국군사관학교 '1+2+1' 방식 도입",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-18T02:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394294?sid=100"
-    },
-    {
-     "title": "국군사관학교 통합안 수정…육사 옮기고 해사·공사는 남는다",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-18T02:02:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=315624"
-    },
-    {
-     "title": "육사, 충청권 이전… 국군사관학교 신입생 선발은 2029년부터",
-     "press": "sisunnews.co.kr",
-     "publishedAt": "2026-11-18T01:58:00.000Z",
-     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=249957"
+     "title": "한국산업은행, 한국투자금융지주와 KDB생명 매각협상 종료",
+     "press": "insnews.co.kr",
+     "publishedAt": "2026-11-18T02:16:00.000Z",
+     "link": "https://www.insnews.co.kr/news/articleView.html?idxno=93907"
     }
    ]
   },
@@ -79,30 +48,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 48,
-   "recent20": 6,
+   "articles90": 44,
+   "recent20": 7,
    "press": 31,
-   "firstArticleAt": "2026-11-18T00:48:00.000Z",
+   "firstArticleAt": "2026-11-18T00:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "수능 D-1 당정 \"AI 부정행위 응시 제한 10년 확대·소급 적용\"…범정부 ...",
-     "press": "idaegu.co.kr",
-     "publishedAt": "2026-11-18T02:12:00.000Z",
-     "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=565709"
+     "title": "당정, AI 기업에 '수능 부정행위 의심 자료' 제출 의무화 추진…\"빅테크...",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-18T02:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000521269?sid=100"
     },
     {
-     "title": "당정, AI 부정행위 '원스트라이크 아웃'…올해 수능부터 응시 제한 10년...",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-18T02:10:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2020066"
+     "title": "'수능 D-1' 당정 \"부정행위 원스트라이크 아웃\"…野 \"무책임\" 맹공",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-18T02:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000927361?sid=100"
     },
     {
-     "title": "김민석 \"AI 수능 부정, 강력 대응 입법…올해 수능부터 즉시 적용\"",
+     "title": "당정, 수능 AI 부정행위 사전·사후 대책 논의…\"무관용 원칙 적용\"",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-18T02:16:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261118500164"
+    }
+   ]
+  },
+  {
+   "keyword": "육사 충청권 이전",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 32,
+   "recent20": 4,
+   "press": 30,
+   "firstArticleAt": "2026-11-18T00:58:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "당정, 육사 충청권 이전 합의...국군사관학교 신입생 선발 2029년부터",
      "press": "goodmorningcc.com",
-     "publishedAt": "2026-11-18T02:10:00.000Z",
-     "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=456072"
+     "publishedAt": "2026-11-18T02:22:00.000Z",
+     "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=456075"
+    },
+    {
+     "title": "당정 \"육사, 충청권으로 이전…해사·공사는 기존 위치 활용\"",
+     "press": "chungnamilbo.co.kr",
+     "publishedAt": "2026-11-18T02:20:00.000Z",
+     "link": "http://www.chungnamilbo.co.kr/news/articleView.html?idxno=921456"
+    },
+    {
+     "title": "당정 \"육사 충청권 이전 검토…사관학교 새 교육체계 2029년부터\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-18T02:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000651789?sid=100"
     }
    ]
   },
@@ -112,30 +113,30 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 16,
-   "recent20": 3,
-   "press": 14,
-   "firstArticleAt": "2026-11-18T01:00:00.000Z",
+   "articles90": 17,
+   "recent20": 7,
+   "press": 15,
+   "firstArticleAt": "2026-11-18T01:12:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "이마트24, 자몽허니블랙티·배도라지 차음료 2종 출시",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-18T02:12:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4119287"
+     "title": "롯데칠성음료, 2026년산 햇와인 '조르쥐 뒤뵈프 보졸레 누보' 3종 출시",
+     "press": "popcornnews.net",
+     "publishedAt": "2026-11-18T02:24:00.000Z",
+     "link": "http://www.popcornnews.net/news/articleView.html?idxno=140529"
     },
     {
-     "title": "롯데칠성음료, 올해 수확 포도로 담근 햇와인 '보졸레 누보' 선봬",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-18T02:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014329481?sid=103"
+     "title": "롯데칠성음료, 2026년산 햇와인 '보졸레 누보' 3종 선보인다",
+     "press": "nextdaily.co.kr",
+     "publishedAt": "2026-11-18T02:24:00.000Z",
+     "link": "https://www.nextdaily.co.kr/news/articleView.html?idxno=255049"
     },
     {
-     "title": "숙취 해소 음료, 정말 효과 있을까? 확실하게 마시는 방법",
-     "press": "gqkorea.co.kr",
-     "publishedAt": "2026-11-18T02:03:00.000Z",
-     "link": "https://www.gqkorea.co.kr/2026/11/18/%ec%88%99%ec%b7%a8-%ed%95%b4%ec%86%8c-%ec%9d%8c%eb%a3%8c-%ec%a0%95%eb%a7%90-%ed%9a%a8%ea%b3%bc-%ec%9e%88%ec%9d%84%ea%b9%8c-%ed%99%95%ec%8b%a4%ed%95%98%ea%b2%8c-%eb%a7%88%ec%8b%9c%eb%8a%94-%eb%b0%a9/?utm_source=naver&utm_medium=partnership"
+     "title": "텐퍼센트커피, 겨울 시즌 차 음료 3종 출시… \"전국 1200여 개 매장 도입...",
+     "press": "newsdream.kr",
+     "publishedAt": "2026-11-18T02:20:00.000Z",
+     "link": "http://www.newsdream.kr/news/articleView.html?idxno=122445"
     }
    ]
   },
@@ -144,13 +145,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 1,
+   "articles90": 14,
+   "recent20": 2,
    "press": 14,
-   "firstArticleAt": "2026-11-18T00:48:00.000Z",
+   "firstArticleAt": "2026-11-18T01:16:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "노란우산 개인정보 20만명 유출...가입자 10명 중 1명꼴",
+     "press": "tjb.co.kr",
+     "publishedAt": "2026-11-18T02:18:00.000Z",
+     "link": "https://www.tjb.co.kr/news05/bodo/view/id/106221"
+    },
     {
      "title": "충남도, 지역화폐 개인정보 유출 2차 피해 차단",
      "press": "news.tf.co.kr",
@@ -162,12 +169,6 @@
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-18T01:44:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/055/0001403873?sid=101"
-    },
-    {
-     "title": "지역화페 플랫폼 '착' 에서 이용자 566명 개인정보 유출",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-18T01:42:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=73206"
     }
    ]
   },
@@ -177,7 +178,7 @@
     "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-18T01:00:00.000Z",
    "exclusive": false,
