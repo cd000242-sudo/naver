@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T03:16:19.291Z",
+ "builtAt": "2026-11-18T03:26:22.183Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 9,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "고액 체납자 공개",
@@ -16,30 +16,62 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 83,
-   "recent20": 7,
-   "press": 58,
-   "firstArticleAt": "2026-11-18T01:47:00.000Z",
+   "articles90": 70,
+   "recent20": 8,
+   "press": 55,
+   "firstArticleAt": "2026-11-18T01:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "전주시, 고액·상습 체납자 203명 명단 공개",
-     "press": "news.skbroadband.com",
-     "publishedAt": "2026-11-18T03:14:00.000Z",
-     "link": "https://news.skbroadband.com/news/articleView.html?idxno=243584"
+     "title": "서산시, 지방세 등 고액·상습 체납자 명단 공개",
+     "press": "cctimes.kr",
+     "publishedAt": "2026-11-18T03:24:00.000Z",
+     "link": "http://www.cctimes.kr/news/articleView.html?idxno=937828"
     },
     {
-     "title": "행안부 고액·상습 체납자 명단 공개…전북 548명, 체납액 203억원",
-     "press": "segye.com",
-     "publishedAt": "2026-11-18T03:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004176155?sid=102"
+     "title": "인천시, 고액·상습 체납자 882명 공개…개인 최고 367억원",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-18T03:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009296043?sid=102"
     },
     {
-     "title": "경기도, 고액·상습 체납자 4029명 명단 공개…체납액 총 2233억 원",
-     "press": "thefairnews.co.kr",
-     "publishedAt": "2026-11-18T03:08:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94648"
+     "title": "성남시, 1000만원 이상 고액·상습 체납자 110명 명단 공개",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-18T03:22:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2020107"
+    }
+   ]
+  },
+  {
+   "keyword": "김종철 청장 후보자 인사청문회",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 66,
+   "recent20": 26,
+   "press": 23,
+   "firstArticleAt": "2026-11-18T02:33:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "경찰청장 청문회, '국무회의 배석·2주택' 도마…\"중립 믿을 국민 없어...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-18T03:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009296042?sid=100"
+    },
+    {
+     "title": "인사하는 김종철 후보자",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-18T03:19:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261118000763"
+    },
+    {
+     "title": "김종철 경찰청장 후보자 \"수능 AI 부정행위, 배후 공모자·조력자까지 추...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-18T03:19:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261118000765"
     }
    ]
   },
@@ -48,10 +80,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 34,
-   "recent20": 5,
-   "press": 28,
-   "firstArticleAt": "2026-11-18T01:48:00.000Z",
+   "articles90": 25,
+   "recent20": 1,
+   "press": 22,
+   "firstArticleAt": "2026-11-18T02:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -76,34 +108,35 @@
    ]
   },
   {
-   "keyword": "김종철 청장 후보자 인사청문회",
+   "keyword": "정치",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 63,
-   "recent20": 12,
-   "press": 22,
-   "firstArticleAt": "2026-11-18T02:24:00.000Z",
+   "articles90": 15,
+   "recent20": 5,
+   "press": 14,
+   "firstArticleAt": "2026-11-18T02:48:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "[포토] 김종철 경찰청장 후보자 'AI 부정행위 14건 접수...8건 수사 진행...",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-18T03:14:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261118010006981"
+     "title": "‘위증·정치관여’ 조태용, 징역 2년 6개월 확정…직무유기 혐의는 무...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-18T03:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004683508?sid=102"
     },
     {
-     "title": "김종철 경찰청장 후보자 인사청문회 공방…野 \"李정부 국무위원 전부 전...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-18T03:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014329831?sid=100"
+     "title": "건보공단·심평원 임원 '정치 이력' 제한…현직도 퇴임 대상",
+     "press": "medipana.com",
+     "publishedAt": "2026-11-18T03:16:00.000Z",
+     "link": "https://www.medipana.com/news/articleView.html?idxno=422124"
     },
     {
-     "title": "김종철 \"사건 암장·불공정 수사 원천 차단\"…경찰서 법률전문가 충원",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-18T03:12:00.000Z",
-     "link": "https://www.ajunews.com/view/20261118114816859"
+     "title": "‘정치 관여·위증’ 조태용 전 국정원장, 징역 2년 6개월 확정",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-18T03:16:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2649747"
     }
    ]
   },
@@ -113,13 +146,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 13,
+   "articles90": 12,
    "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-18T01:48:00.000Z",
+   "press": 11,
+   "firstArticleAt": "2026-11-18T02:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"사회적 가치 창출 기업에 확실한 보상\"…최태원, 새 자본주의 실험 확...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-18T03:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/108/0003488353?sid=004"
+    },
     {
      "title": "“사회문제 해결에 확실한 경제적 보상을”… 최태원 ‘SPC 성장론’ 제...",
      "press": "munhwa.com",
@@ -131,45 +170,38 @@
      "press": "seouleconews.com",
      "publishedAt": "2026-11-18T02:56:00.000Z",
      "link": "http://www.seouleconews.com/news/articleView.html?idxno=95096"
-    },
-    {
-     "title": "기조연설 하는 최태원 대한상의 회장",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-18T02:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016448731?sid=101"
     }
    ]
   },
   {
-   "keyword": "정치",
+   "keyword": "강애심의 사운드 트랙",
    "sources": [
-    "signal.bz",
-    "google"
+    "nate"
    ],
-   "articles90": 12,
+   "articles90": 16,
    "recent20": 5,
-   "press": 11,
-   "firstArticleAt": "2026-11-18T02:48:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-18T02:36:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "“정치인 체포 지시 없었다” 허위 발언…조태용 전 국정원장, 징역 2년...",
-     "press": "hani.co.kr",
+     "title": "‘사운드:트랙’ 표예진X이기택 “케미 만족…어린아이처럼 장난치며 촬...",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-18T03:23:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001305438"
+    },
+    {
+     "title": "'사운드:트랙' 주종혁 \"다시는 이런 연기 못 해\"…확신 이유",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-18T03:16:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000328353"
+    },
+    {
+     "title": "'사운드:트랙' 주종혁 \"단막극 작업, 독립영화 활동 때 떠올라\"",
+     "press": "hankookilbo.com",
      "publishedAt": "2026-11-18T03:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002832758?sid=102"
-    },
-    {
-     "title": "오세훈 “세운4구역 소송, 국가유산청 반드시 질 것···정치적 목적 행...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-18T03:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003483416?sid=102"
-    },
-    {
-     "title": "\"강청희 이사장 사퇴하라\"…공공기관장 정치 이력 제한법 발의",
-     "press": "docdocdoc.co.kr",
-     "publishedAt": "2026-11-18T03:06:00.000Z",
-     "link": "http://www.docdocdoc.co.kr/news/articleView.html?idxno=3044661"
+     "link": "https://m.entertain.naver.com/article/469/0000966264"
     }
    ]
   },
@@ -178,10 +210,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
+   "articles90": 7,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-18T01:48:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-18T02:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -211,13 +243,19 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
    "firstArticleAt": "2026-11-18T02:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "구교환, 이옥섭과 4년전 혼인신고 숨긴 이유…\"궁금해하지 않았다\" [N인...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-18T03:25:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009296044"
+    },
     {
      "title": "구교환, ♥이옥섭과 4년 전 혼인 신고…\"아무도 안 물어보더라\" [엑's 인...",
      "press": "xportsnews.com",
@@ -229,19 +267,13 @@
      "press": "gimhaenews.co.kr",
      "publishedAt": "2026-11-18T02:56:00.000Z",
      "link": "http://www.gimhaenews.co.kr/news/articleView.html?idxno=54471"
-    },
-    {
-     "title": "[카드뉴스] 혼인지원금부터 최저임금·청년 연금까지... 2027년 달라지는...",
-     "press": "sisunnews.co.kr",
-     "publishedAt": "2026-11-18T02:00:00.000Z",
-     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=249883"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1049,
+  "flagged": 1050,
   "matched": 580,
   "avgLeadMin": 826,
   "recent": [
