@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T21:10:17.083Z",
+ "builtAt": "2026-11-18T21:20:20.546Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,15 +8,47 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
+  {
+   "keyword": "김건희",
+   "sources": [
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-18T20:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"아무것도 아닌 사람\" 김건희...수사 1년여 만 대법 결론",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-18T21:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002434903?sid=102"
+    },
+    {
+     "title": "김건희 ‘3대 의혹’ 오늘 대법 결론… ‘명태균 여론조사’ 판단 주목",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-18T21:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006412162?sid=102"
+    },
+    {
+     "title": "[뉴스분석] 조작기소 특검법부터 한덕수·김건희 선고까지…여야 사법 ...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-18T21:00:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261118001182"
+    }
+   ]
+  },
   {
    "keyword": "2026년 11월 19일 운세",
    "sources": [
     "nate"
    ],
    "articles90": 6,
-   "recent20": 4,
+   "recent20": 2,
    "press": 5,
    "firstArticleAt": "2026-11-18T20:00:00.000Z",
    "exclusive": false,
@@ -47,18 +79,18 @@
    "sources": [
     "daum"
    ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
    "firstArticleAt": "2026-11-18T20:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[사설] 추경호 1심 무죄, 대구시 동력 회복하길",
-     "press": "yeongnam.com",
-     "publishedAt": "2026-11-18T21:00:00.000Z",
-     "link": "https://www.yeongnam.com/web/view.php?key=20261118028581591"
+     "title": "'秋 1심 무죄'에 내란정당 프레임 탈출…다들 환영하는데 이걸 갖고 계...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-18T21:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003156891?sid=100"
     },
     {
      "title": "秋 1심 무죄에 국힘 \"내란몰이 종지부\"...與 \"특검 즉각 항소해야\"",
@@ -67,42 +99,10 @@
      "link": "https://www.jasm.co.kr/news/view/325706/?sc=Naver"
     },
     {
-     "title": "‘계엄 해제 표결 방해’ 추경호 1심 무죄",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-18T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003700892?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "자바 보안 취약점",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-18T20:03:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이스트시큐리티, Java 취약점 점검 스캐너 배포",
-     "press": "sedaily.com",
+     "title": "[사설] 추경호 1심 무죄, 대구시 동력 회복하길",
+     "press": "yeongnam.com",
      "publishedAt": "2026-11-18T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004683765?sid=105"
-    },
-    {
-     "title": "PHP 이어 자바도 해킹 위험…정부 긴급 보안점검",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-18T20:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000927651?sid=101"
-    },
-    {
-     "title": "‘27만원 AI’에 공공 시스템 71% 쓰는 ‘자바’ 뚫린다",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-18T20:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003700903?sid=101"
+     "link": "https://www.yeongnam.com/web/view.php?key=20261118028581591"
     }
    ]
   },
@@ -135,6 +135,38 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-18T20:10:00.000Z",
      "link": "https://m.entertain.naver.com/article/421/0009297450"
+    }
+   ]
+  },
+  {
+   "keyword": "자바 보안 취약점",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-18T20:03:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이스트시큐리티, Java 취약점 점검 스캐너 배포",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-18T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004683765?sid=105"
+    },
+    {
+     "title": "PHP 이어 자바도 해킹 위험…정부 긴급 보안점검",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-18T20:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000927651?sid=101"
+    },
+    {
+     "title": "‘27만원 AI’에 공공 시스템 71% 쓰는 ‘자바’ 뚫린다",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-18T20:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003700903?sid=101"
     }
    ]
   }
