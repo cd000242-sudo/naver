@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T18:19:17.112Z",
+ "builtAt": "2026-11-18T18:29:20.725Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,41 +8,8 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 29,
- "candidates": [
-  {
-   "keyword": "트럼프 푸틴 악수",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-18T16:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"공통 표적 될까 우려\"...다카이치와 악수할까도 관심",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-18T17:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002434883?sid=104"
-    },
-    {
-     "title": "시진핑 내외 양옆에 트럼프·푸틴…사상 첫 미·중·러 3자 회담 앞두고...",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-18T17:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003059959?sid=104"
-    },
-    {
-     "title": "트럼프 대통령 방중 시작…19일 미·중·러 정상 3자 회담 예정",
-     "press": "voakorea.com",
-     "publishedAt": "2026-11-18T16:50:00.000Z",
-     "link": "https://www.voakorea.com/a/8225096.html"
-    }
-   ]
-  }
- ],
+ "measured": 28,
+ "candidates": [],
  "hitRate": {
   "days": 7,
   "flagged": 1073,
