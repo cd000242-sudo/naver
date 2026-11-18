@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T16:58:48.207Z",
+ "builtAt": "2026-11-18T17:08:52.169Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -43,14 +43,14 @@
    ]
   },
   {
-   "keyword": "추경호 1심 무죄",
+   "keyword": "추경호 1심 무죄 판결",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-18T15:30:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-18T15:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -71,38 +71,6 @@
      "press": "munhwa.com",
      "publishedAt": "2026-11-18T15:42:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/021/0002833854?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "김명민",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-18T15:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'유퀴즈' 김명민, 데뷔 30년 만 첫 예능 \"할말 못할말 못 가려\"",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-18T16:56:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000328409"
-    },
-    {
-     "title": "김명민ㆍ유재석, 1972년생 동갑→서울예대 동문이었다…'유퀴즈'서 밝혀...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-18T16:48:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16280227"
-    },
-    {
-     "title": "김명민, 집까지 팔고 이민 준비했는데…♥아내 한마디에 '이순신' 됐다...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-18T15:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004126243"
     }
    ]
   },
@@ -142,7 +110,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1071,
+  "flagged": 1072,
   "matched": 595,
   "avgLeadMin": 889,
   "recent": [
