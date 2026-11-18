@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T17:49:06.072Z",
+ "builtAt": "2026-11-18T17:59:09.234Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -75,44 +75,12 @@
    ]
   },
   {
-   "keyword": "수능 재난문자 시간",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-18T16:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "수능날 재난문자 폰 알림…왜?",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-18T16:52:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611180260"
-    },
-    {
-     "title": "수능일 전국 휴대전화 '10.5초 경보음'…부산시 심야 긴급회의",
-     "press": "pennmike.com",
-     "publishedAt": "2026-11-18T16:36:00.000Z",
-     "link": "https://www.pennmike.com/news/articleView.html?idxno=132200"
-    },
-    {
-     "title": "[사설] AI 부정행위 파문 속 수능, 공정하고 차질 없이 치러야",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-18T16:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001886073?sid=110"
-    }
-   ]
-  },
-  {
    "keyword": "김명민",
    "sources": [
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 2,
    "firstArticleAt": "2026-11-18T16:48:00.000Z",
    "exclusive": false,
