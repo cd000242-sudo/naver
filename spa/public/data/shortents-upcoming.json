@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T17:28:58.920Z",
+ "builtAt": "2026-11-18T17:39:02.685Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,8 +8,40 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 29,
+ "measured": 28,
  "candidates": [
+  {
+   "keyword": "트럼프 푸틴 악수",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-18T16:31:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"공통 표적 될까 우려\"...다카이치와 악수할까도 관심",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-18T17:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002434883?sid=104"
+    },
+    {
+     "title": "시진핑 내외 양옆에 트럼프·푸틴…사상 첫 미·중·러 3자 회담 앞두고...",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-18T17:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003059959?sid=104"
+    },
+    {
+     "title": "트럼프 대통령 방중 시작…19일 미·중·러 정상 3자 회담 예정",
+     "press": "voakorea.com",
+     "publishedAt": "2026-11-18T16:50:00.000Z",
+     "link": "https://www.voakorea.com/a/8225096.html"
+    }
+   ]
+  },
   {
    "keyword": "수능 재난문자 시간",
    "sources": [
@@ -39,6 +71,38 @@
      "press": "kmib.co.kr",
      "publishedAt": "2026-11-18T16:22:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/005/0001886073?sid=110"
+    }
+   ]
+  },
+  {
+   "keyword": "김명민",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 2,
+   "firstArticleAt": "2026-11-18T16:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김명민 \"故 안판석 감독님과 한 작품은 더 할 수 있을 줄…한이 돼\" (유...",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-18T17:36:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000328410"
+    },
+    {
+     "title": "'유퀴즈' 김명민, 데뷔 30년 만 첫 예능 \"할말 못할말 못 가려\"",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-18T16:56:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000328409"
+    },
+    {
+     "title": "김명민ㆍ유재석, 1972년생 동갑→서울예대 동문이었다…'유퀴즈'서 밝혀...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-18T16:48:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16280227"
     }
    ]
   }
