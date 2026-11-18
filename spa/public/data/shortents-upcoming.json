@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T00:55:30.635Z",
+ "builtAt": "2026-11-18T01:05:38.119Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,367 +8,278 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 14,
  "candidates": [
   {
-   "keyword": "수능 재난문자 시간연장",
+   "keyword": "육사 충청 이전",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 41,
-   "recent20": 10,
-   "press": 35,
-   "firstArticleAt": "2026-11-17T23:35:00.000Z",
+   "articles90": 84,
+   "recent20": 16,
+   "press": 59,
+   "firstArticleAt": "2026-11-17T23:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "수능 부정 신고 ‘포상금 1억’에 野 “시험치러 가지 1억 벌러 가나”...",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-18T00:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004010274?sid=100"
+     "title": "사관학교 1·4학년 통합하고 육사는 이전…29학년도부터 적용",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-18T01:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004210985?sid=100"
     },
     {
-     "title": "李 \"커닝 신고 1억 포상·불시 문자\" 지시…수능 코앞 또 고강도 대책",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-18T00:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009295305?sid=102"
+     "title": "육사만 충청권 이전, 국군사관생도 3년 뒤 선발",
+     "press": "viewsnnews.com",
+     "publishedAt": "2026-11-18T01:02:00.000Z",
+     "link": "https://www.viewsnnews.com/article?q=239770"
     },
     {
-     "title": "“이 대통령, 사시 어떻게 합격했나”…장동혁, 수능 중 재난문자 지시...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-18T00:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005765323?sid=100"
+     "title": "당정, 국군사관학교 자운대에... 육사는 충청권 이전(종합)",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-18T01:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006411649?sid=100"
     }
    ]
   },
   {
-   "keyword": "육사 충청권 이전 추진",
+   "keyword": "수능 경계 강화",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 23,
-   "recent20": 6,
-   "press": 20,
-   "firstArticleAt": "2026-11-17T23:47:00.000Z",
+   "articles90": 39,
+   "recent20": 18,
+   "press": 32,
+   "firstArticleAt": "2026-11-18T00:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "당정, 사관학교 창설안에 칼 댔다… '1+2+1' 체제 추진",
-     "press": "newsworks.co.kr",
+     "title": "경찰, 수능 당일 전국 경계강화…AI 부정행위·유언비어 엄정 대응",
+     "press": "issuenbiz.com",
+     "publishedAt": "2026-11-18T01:04:00.000Z",
+     "link": "http://www.issuenbiz.com/news/articleView.html?idxno=81714"
+    },
+    {
+     "title": "경찰, 수능 당일 ‘전국 경계강화’ 발령…“부정행위·유언비어 즉각 ...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-18T01:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002832732?sid=102"
+    },
+    {
+     "title": "경찰, 'AI 부정행위' 우려에 수능 당일 전국 '경계강화' 발령",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-18T01:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004210983?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "코스피 5000선 회복",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 34,
+   "recent20": 5,
+   "press": 28,
+   "firstArticleAt": "2026-11-17T23:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "코스피 5100선 회복…엔비디아 실적에 반도체주 반등",
+     "press": "straightnews.co.kr",
+     "publishedAt": "2026-11-18T00:56:00.000Z",
+     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=315612"
+    },
+    {
+     "title": "코스피, 외국인 매수에 2%대 반등…5100선 회복",
+     "press": "mediapen.com",
      "publishedAt": "2026-11-18T00:52:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903440"
+     "link": "https://www.mediapen.com/news/view/1138214"
     },
     {
-     "title": "당정, 국군사관학교 1·4학년 통합교육 추진…육사는 충청권으로",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-18T00:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002724929?sid=100"
-    },
-    {
-     "title": "당정 \"육사, '충청권' 이전…사관학교 1·4학년만 통합\"",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-18T00:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001076028?sid=100"
+     "title": "“땡큐 엔비디아”…코스피, 하루 만에 5100선 회복 [시황]",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-18T00:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003156506?sid=101"
     }
    ]
   },
   {
    "keyword": "국군사관학교 창설방안 당정협의",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 37,
-   "recent20": 5,
-   "press": 16,
-   "firstArticleAt": "2026-11-17T23:27:00.000Z",
+   "articles90": 40,
+   "recent20": 7,
+   "press": 19,
+   "firstArticleAt": "2026-11-17T23:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "당정, 국군사관학교 1·4학년 통합교육 추진…육사는 충청권으로",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-18T00:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002724929?sid=100"
+     "title": "당정, 국군사관학교 자운대에... 육사는 충청권 이전(종합)",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-18T01:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006411649?sid=100"
     },
     {
-     "title": "당정 \"국군사관학교에서 미래 장교 양성…29학년도부터 신입 생도 선발...",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-18T00:50:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261118500097"
+     "title": "국군사관학교 '1+2+1' 체제로…육사 충청권 이전 추진(종합2보)",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-18T01:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009295385?sid=100"
     },
     {
-     "title": "당정, 육사 충청 이전…통합교육 맡는 국군사관학교 2029년 출범",
-     "press": "segye.com",
-     "publishedAt": "2026-11-18T00:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004176098?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "한국 카타르 평가전",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 14,
-   "recent20": 5,
-   "press": 12,
-   "firstArticleAt": "2026-11-17T23:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'오세훈 헤더 결승골' 한국, FIFA 60위 카타르에 1-0 진땀승",
-     "press": "hg-times.com",
-     "publishedAt": "2026-11-18T00:54:00.000Z",
-     "link": "https://www.hg-times.com/news/articleView.html?idxno=307115"
-    },
-    {
-     "title": "모레노 한국 떠나나 했는데…오늘 전해진 깜짝 '대형 소식'",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-18T00:52:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1175503"
-    },
-    {
-     "title": "'슈팅 21-2에 단 1골' 모레노호, 카타르 1-0 제압...오세훈 헤더로 2026년...",
-     "press": "maniareport.com",
-     "publishedAt": "2026-11-18T00:50:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/425/0000215076"
-    }
-   ]
-  },
-  {
-   "keyword": "앤트로픽 상장",
-   "sources": [
-    "google"
-   ],
-   "articles90": 13,
-   "recent20": 4,
-   "press": 11,
-   "firstArticleAt": "2026-11-17T23:39:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“앤트로픽 공모가 78달러 웃돌 듯”… ‘AI 투자 회의론’ 속 흥행 기대...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-18T00:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001205575?sid=105"
-    },
-    {
-     "title": "日증시, 엔비디아 호실적에 닛케이 반등…앤트로픽 IPO 주목",
+     "title": "국군사관학교, 2029년부터 대전 자운대서 신입생 선발…육사 충청권 이...",
      "press": "newsis.com",
-     "publishedAt": "2026-11-18T00:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014329028?sid=104"
-    },
-    {
-     "title": "아마존·구글, 앤트로픽 IPO 이후 지분율 28% 달해",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-18T00:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016448131?sid=101"
+     "publishedAt": "2026-11-18T00:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014329080?sid=100"
     }
    ]
   },
   {
-   "keyword": "박훈, VAST와 한솥밥",
+   "keyword": "성유리, 남편 무죄에 좋아요♥",
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-17T23:42:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "박훈, 현빈·유해진과 한솥밥",
-     "press": "newsinside.kr",
-     "publishedAt": "2026-11-18T00:28:00.000Z",
-     "link": "https://www.newsinside.kr/news/articleView.html?idxno=5050779"
-    },
-    {
-     "title": "박훈, VAST엔터와 전속계약 체결…현빈과 한솥밥",
-     "press": "star.ytn.co.kr",
-     "publishedAt": "2026-11-18T00:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/052/0002434366"
-    },
-    {
-     "title": "박훈, VAST엔터 전속계약…현빈·유해진과 한솥밥[공식]",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-18T00:06:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1794959349531086006"
-    }
-   ]
-  },
-  {
-   "keyword": "gpt 6.2",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 3,
-   "press": 5,
-   "firstArticleAt": "2026-11-17T23:30:00.000Z",
+   "articles90": 12,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-17T23:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "오픈AI, GPT-6.2 아스트라·솔 전격 공개…전문가급 AI 업무 수행에 비용...",
-     "press": "aitimes.kr",
+     "title": "[뮤즈이슈]성유리, ♥안성현 무죄 확정되자 ‘좋아요’..3년8개월만 SNS ...",
+     "press": "heraldmuse.com",
+     "publishedAt": "2026-11-18T01:03:00.000Z",
+     "link": "https://m.entertain.naver.com/article/112/0003813633"
+    },
+    {
+     "title": "'옥바라지' 끝낸 성유리…안성현, 무죄 확정→3년 8개월 만에 근황에 '좋...",
+     "press": "mhnse.com",
      "publishedAt": "2026-11-18T00:54:00.000Z",
-     "link": "https://www.aitimes.kr/news/articleView.html?idxno=42776"
+     "link": "https://m.entertain.naver.com/article/445/0000491338"
     },
     {
-     "title": "오픈AI, 'GPT-6.2 아스트라·솔' 출시… AI 연구·보안 역량 강화",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-18T00:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002248992?sid=105"
-    },
-    {
-     "title": "오픈AI, ‘GPT-6.2’ 출시…API 가격 내려 앤트로픽 추격",
-     "press": "dt.co.kr",
+     "title": "성유리, 안성현 무죄 확정 후 SNS '좋아요'…3년 만 공개 응원 [소셜in]",
+     "press": "enews.imbc.com",
      "publishedAt": "2026-11-18T00:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003059779?sid=105"
+     "link": "https://m.entertain.naver.com/article/408/0000328320"
     }
    ]
   },
   {
-   "keyword": "박세미 결혼 후 악플",
+   "keyword": "16기 상철 역대급 방귀",
    "sources": [
     "nate"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-17T23:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"역대급 흑역사\"…16기 상철, 방귀 생중계 입장 밝혀 [소셜in]",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-18T00:35:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000328319"
+    },
+    {
+     "title": "16기 상철, 고개 숙였다…전 국민에 방귀 오픈 “수습 안되는 역대급 흑...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-18T00:19:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001188516"
+    },
+    {
+     "title": "“전국 시청자와 방귀 트는 대업 달성”…16기 상철 긴급 기념 소감문 ...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-18T00:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005765299?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 다카이치 정상회담",
+   "sources": [
+    "signal.bz"
    ],
    "articles90": 5,
    "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-17T23:29:00.000Z",
+   "firstArticleAt": "2026-11-17T23:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "훈남 남편과 결혼 후…박세미 \"엄마와 아들이라고\" 악플 언급",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-18T00:50:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109960565684"
+     "title": "[스틸컷] \"일본서 또 만나기로...\" 이재명-다카이치 정상의 환담 [전문]",
+     "press": "dailybrief.co.kr",
+     "publishedAt": "2026-11-18T00:52:00.000Z",
+     "link": "https://www.dailybrief.co.kr/news/articleView.html?idxno=7342"
     },
     {
-     "title": "박세미, '변우석 닮은꼴' 남편 공개했다가 봉변..\"엄마랑 아들\" 악플 속...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-18T00:18:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003488276"
+     "title": "미중러 회담 앞두고 한일 정상회담… '전략적 소통' 공감대",
+     "press": "sisaweek.com",
+     "publishedAt": "2026-11-18T00:42:00.000Z",
+     "link": "https://www.sisaweek.com/news/articleView.html?idxno=239035"
     },
     {
-     "title": "박세미, ♥1살 연하 남편 공개 후 악플 세례…\"엄마와 아들 같다고\" (제...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-18T00:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002081621"
+     "title": "이재명 대통령-시진핑 주석, 오늘 한중 정상회담",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-18T00:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001536342?sid=100"
     }
    ]
   },
   {
-   "keyword": "상속",
+   "keyword": "홀란 PK로 노르웨이 8강행!",
    "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-18T00:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "안산시, 상속·신탁재산 조사로 3억 징수",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-18T00:48:00.000Z",
-     "link": "http://www.breaknews.com/1251809"
-    },
-    {
-     "title": "이지스자산운용·하나증권, 고액자산가 부동산 투자·상속 관리 협력 확...",
-     "press": "e-science.co.kr",
-     "publishedAt": "2026-11-18T00:34:00.000Z",
-     "link": "https://www.e-science.co.kr/news/articleView.html?idxno=140060"
-    },
-    {
-     "title": "안산시, 상속·신탁재산 집중 조사 지방세 고액 체납액 징수",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-18T00:30:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=564680"
-    }
-   ]
-  },
-  {
-   "keyword": "장동혁 대표 인사말",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-17T23:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "장동혁 \"낡은 규제가 혁신 발목 잡지 않게\"…스타트업 단계별 지원 약속",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-18T00:54:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903443"
-    },
-    {
-     "title": "자리 일어나는 장동혁 대표",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-17T23:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009295085?sid=100"
-    },
-    {
-     "title": "인사말하는 장동혁 국민의힘 대표",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-17T23:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009295080?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "노유민, 가슴 통증으로 응급실行",
-   "sources": [
-    "signal.bz"
+    "nate"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-17T23:26:00.000Z",
+   "firstArticleAt": "2026-11-17T23:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "NRG 노유민, 4년 전 기절하더니…가슴 통증→새벽 응급실行 [MHN:피드]",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-18T00:46:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000491336"
+     "title": "\"0-2→3-2! 이건 상의탈의각이지!\" 홀란 PK극장골, 노르웨이 덴마크에 大...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-18T00:35:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/076/0004467596"
     },
     {
-     "title": "NRG 노유민, 가슴 통증으로 응급실行...\"별일 아니길\"",
-     "press": "starnewsk.com",
-     "publishedAt": "2026-11-18T00:08:00.000Z",
-     "link": "http://www.starnewsk.com/news/articleView.html?idxno=61117"
+     "title": "UEFA 네이션스리그 8강 확정…노르웨이 극적으로 합류",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-18T00:18:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/003/0014328912"
     },
     {
-     "title": "노유민, 가슴 통증에 새벽 응급실行… 아내 \"결과는 월요일에\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-17T23:26:00.000Z",
-     "link": "https://m.entertain.naver.com/article/469/0000966206"
+     "title": "'0-2→3-2' 홀란의 극장 PK로 뒤집었다…노르웨이, 덴마크 꺾고 UNL 8강행",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-17T23:56:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/241/0003542321"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1010,
-  "matched": 567,
-  "avgLeadMin": 840,
+  "flagged": 1017,
+  "matched": 568,
+  "avgLeadMin": 839,
   "recent": [
+   {
+    "keyword": "카타르전",
+    "hitKeyword": "카타르전 손흥민",
+    "hitAt": "2026-11-18T10:00:00+09:00",
+    "leadMin": 87
+   },
    {
     "keyword": "보안 취약점",
     "hitKeyword": "자바 보안 취약점",
@@ -422,12 +333,6 @@
     "hitKeyword": "특공 전수조사",
     "hitAt": "2026-11-18T08:00:00+09:00",
     "leadMin": 3218
-   },
-   {
-    "keyword": "뉴욕증시 하락",
-    "hitKeyword": "뉴욕증시 하락",
-    "hitAt": "2026-11-18T08:00:00+09:00",
-    "leadMin": 1474
    }
   ]
  }
