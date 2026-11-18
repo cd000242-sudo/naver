@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T02:46:09.283Z",
+ "builtAt": "2026-11-18T02:56:11.865Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 20,
  "candidates": [
   {
    "keyword": "고액 체납자 공개",
@@ -16,30 +16,62 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 89,
-   "recent20": 13,
-   "press": 55,
-   "firstArticleAt": "2026-11-18T01:28:00.000Z",
+   "articles90": 90,
+   "recent20": 14,
+   "press": 59,
+   "firstArticleAt": "2026-11-18T01:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "서울시, 지방세 1000만 원 이상 고액 체납자 1552명 공개…체납액 2261억...",
-     "press": "pennmike.com",
-     "publishedAt": "2026-11-18T02:44:00.000Z",
-     "link": "https://www.pennmike.com/news/articleView.html?idxno=132139"
+     "title": "울산시, 지방세 등 고액·상습체납자 194명 명단 공개",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-18T02:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001040981?sid=102"
     },
     {
-     "title": "서울시, 고액·상습 체납자 1552명 명단 공개… 체납액 2261억원",
-     "press": "sisafocus.co.kr",
-     "publishedAt": "2026-11-18T02:44:00.000Z",
-     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367744"
+     "title": "춘천시, 고액·상습체납자 65명 신규 명단 공개",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-18T02:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001231668?sid=102"
     },
     {
-     "title": "충북도 고액·상습 체납자 427명 공개…217억 미납",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-18T02:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009295929?sid=102"
+     "title": "강원도, 고액·상습 체납자 373명 명단 공개",
+     "press": "mbceg.co.kr",
+     "publishedAt": "2026-11-18T02:54:00.000Z",
+     "link": "https://www.mbceg.co.kr/post/142082"
+    }
+   ]
+  },
+  {
+   "keyword": "조태용 징역 2년6개월 확정",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 59,
+   "recent20": 12,
+   "press": 52,
+   "firstArticleAt": "2026-11-18T02:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘정치 관여·위증’ 조태용 전 국정원장 2년6개월형 확정",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-18T02:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002833699?sid=102"
+    },
+    {
+     "title": "\"체포 지시 없어\" 허위 발언 조태용, 대법서 징역 2년6개월 확정",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-18T02:54:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1320890&inflow=N"
+    },
+    {
+     "title": "'계엄 위증' 조태용 전 국정원장, 징역 2년 6개월 확정",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-18T02:54:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3449756"
     }
    ]
   },
@@ -49,30 +81,62 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 35,
+   "articles90": 36,
    "recent20": 5,
-   "press": 29,
-   "firstArticleAt": "2026-11-18T01:17:00.000Z",
+   "press": 32,
+   "firstArticleAt": "2026-11-18T01:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "시험장인가 범인색출장인가…불안만 더 키운 수능 대책",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-18T02:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002725107?sid=102"
+     "title": "“5년 박탈” “수익 몰수”…AI 부정행위 처벌만 집중하는 국회",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-18T02:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003566100?sid=100"
     },
     {
-     "title": "[포토] '수능 AI 부정행위 대책 당정' 논의하는 김민석 대표와 한성숙 총...",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-18T02:34:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261118010006965"
+     "title": "당정 “AI 부정행위 불이익, ‘빅테크 기업’ 자료 제출 ‘법제화’ 추...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-18T02:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012296270?sid=100"
     },
     {
-     "title": "수능 하루 전 긴급 당정협의 \"AI 커닝, 올해부터 10년 자격 제한\"",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-18T02:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002536285?sid=100"
+     "title": "AI 부정행위에 무너진 시험 신뢰…10명 중 8명 “고득점자 성적 못 믿겠...",
+     "press": "gosiweek.com",
+     "publishedAt": "2026-11-18T02:50:00.000Z",
+     "link": "https://www.gosiweek.com/article/1065580774898076"
+    }
+   ]
+  },
+  {
+   "keyword": "최지훈 SSG 잔류",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 25,
+   "recent20": 3,
+   "press": 24,
+   "firstArticleAt": "2026-11-18T01:48:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오피셜]\"최소 10억은 손해 봤을 것\"...FA 최지훈은 왜 이리 SSG에 진심이...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-18T02:49:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/445/0000491384"
+    },
+    {
+     "title": "'SSG맨' 최지훈, 4년 67억원에 FA 잔류",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-18T02:43:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/469/0000966256"
+    },
+    {
+     "title": "SSG, 최지훈과 4년 67억원 FA 계약…청라돔 시대 핵심 중견수 붙잡았다",
+     "press": "dailysportshankook.co.kr",
+     "publishedAt": "2026-11-18T02:38:00.000Z",
+     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435659"
     }
    ]
   },
@@ -81,24 +145,24 @@
    "sources": [
     "nate"
    ],
-   "articles90": 25,
-   "recent20": 2,
-   "press": 22,
-   "firstArticleAt": "2026-11-18T01:20:00.000Z",
+   "articles90": 22,
+   "recent20": 0,
+   "press": 19,
+   "firstArticleAt": "2026-11-18T01:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "기조연설 하는 최태원 대한상의 회장",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-18T02:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016448731?sid=101"
-    },
     {
      "title": "최태원 \"사회문제 해결에 경제적 보상해야\"…새 성장모델 제안",
      "press": "sisafocus.co.kr",
      "publishedAt": "2026-11-18T02:28:00.000Z",
      "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367746"
+    },
+    {
+     "title": "기조연설 하는 최태원 대한상의 회장",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-18T02:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016448731?sid=101"
     },
     {
      "title": "최태원 \"사회문제 해결한 만큼 현금 보상해야\"…세계행정학회서 제언",
@@ -109,34 +173,66 @@
    ]
   },
   {
+   "keyword": "교육청",
+   "sources": [
+    "google"
+   ],
+   "articles90": 25,
+   "recent20": 9,
+   "press": 17,
+   "firstArticleAt": "2026-11-18T02:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "세종시교육청, 수능 직후부터 관계기관 합동 학폭 예방 캠페인",
+     "press": "dtnews24.com",
+     "publishedAt": "2026-11-18T02:54:00.000Z",
+     "link": "http://www.dtnews24.com/news/articleView.html?idxno=817319"
+    },
+    {
+     "title": "대전시교육청, 겨울철 교육시설 3,250곳 안전점검 실시",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-18T02:52:00.000Z",
+     "link": "http://www.breaknews.com/1251866"
+    },
+    {
+     "title": "경남교육청, 신설 기관·학교 12곳 현장 보안 업무 컨설팅",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-18T02:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016448819?sid=102"
+    }
+   ]
+  },
+  {
    "keyword": "노란우산 개인정보 유출",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 19,
-   "recent20": 6,
-   "press": 19,
-   "firstArticleAt": "2026-11-18T01:22:00.000Z",
+   "articles90": 17,
+   "recent20": 5,
+   "press": 17,
+   "firstArticleAt": "2026-11-18T01:28:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "충남도, 지역화폐 ‘착’ 개인정보 566명 유출 '2차 피해 차단 총력'",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-18T02:52:00.000Z",
+     "link": "http://www.breaknews.com/1251878"
+    },
+    {
+     "title": "노란우산 개인정보 유출 36만2천명 달해…당초보다 16만명 늘어(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-18T02:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016448821?sid=102"
+    },
     {
      "title": "노란우산 개인정보 20만5000명 유출 정황…가입자 10명 중 1명꼴",
      "press": "joongang.co.kr",
      "publishedAt": "2026-11-18T02:43:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/025/0003566097?sid=102"
-    },
-    {
-     "title": "노란우산 개인정보 유출 36만명 규모…가입자 5명 중 1명꼴",
-     "press": "newsfc.co.kr",
-     "publishedAt": "2026-11-18T02:42:00.000Z",
-     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82555"
-    },
-    {
-     "title": "소상공인 안전망 '노란우산' 뚫렸나…20만5000명 개인정보 노출 우려",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-18T02:38:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5084753"
     }
    ]
   },
@@ -145,30 +241,94 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 54,
-   "recent20": 37,
-   "press": 15,
-   "firstArticleAt": "2026-11-18T02:20:00.000Z",
+   "articles90": 59,
+   "recent20": 30,
+   "press": 16,
+   "firstArticleAt": "2026-11-18T02:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[포토] 김종철 경찰청장 후보자 답변",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-18T02:44:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3449749"
+     "title": "김종철 경찰청장 후보자 \"AI 시험 부정행위 신고 14건 접수…8건 수사 중...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-18T02:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005606082?sid=102"
     },
     {
-     "title": "경찰청장 후보자 \"AI 부정행위, 당사자·공모자·조력자 끝까지 추적\" [...",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-18T02:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000553146?sid=100"
+     "title": "경찰청장 후보자, '꼼수 입주권' 의혹에 \"편법 아니지만 최대한 빨리 처...",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-18T02:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005442874?sid=100"
     },
     {
-     "title": "[포토] 답변하는 김종철 경찰청장 후보자",
+     "title": "[포토] 김종철 경찰청장 후보자, 인사청문회 출석",
      "press": "newscj.com",
-     "publishedAt": "2026-11-18T02:44:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3449747"
+     "publishedAt": "2026-11-18T02:52:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3449754"
+    }
+   ]
+  },
+  {
+   "keyword": "정치",
+   "sources": [
+    "google"
+   ],
+   "articles90": 10,
+   "recent20": 8,
+   "press": 10,
+   "firstArticleAt": "2026-11-18T02:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘정치 관여·위증’ 조태용 전 국정원장 2년6개월형 확정",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-18T02:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002833699?sid=102"
+    },
+    {
+     "title": "美 민주당 텍사스주 상원의원 당선인 “분열 넘어 사랑의 정치를”",
+     "press": "christiantoday.co.kr",
+     "publishedAt": "2026-11-18T02:54:00.000Z",
+     "link": "https://www.christiantoday.co.kr/news/378700"
+    },
+    {
+     "title": "'정치관여·위증' 조태용 전 국정원장, 징역 2년6개월 확정",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-18T02:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005442876?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "수험표",
+   "sources": [
+    "google"
+   ],
+   "articles90": 21,
+   "recent20": 7,
+   "press": 9,
+   "firstArticleAt": "2026-11-18T02:25:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"수험표 버리지 마세요\"…수능 끝나면 쏟아지는 할인 혜택",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-18T02:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001273115?sid=101"
+    },
+    {
+     "title": "수험표 배부, '파이팅!'",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-18T02:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004211097?sid=102"
+    },
+    {
+     "title": "수험표 배부",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-18T02:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004211096?sid=102"
     }
    ]
   },
@@ -177,13 +337,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 1,
+   "articles90": 5,
+   "recent20": 2,
    "press": 4,
    "firstArticleAt": "2026-11-18T01:36:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "[오피셜] 광주 역사상 최초! '4경기 3골 5도움' 바 루아, 10월 K리그 이달...",
+     "press": "interfootball.co.kr",
+     "publishedAt": "2026-11-18T02:55:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/413/0000226766"
+    },
     {
      "title": "[공식발표] 광주 최초 역사 썼다! '4경기 3골 5도움' 바 루아, 10월 K리그...",
      "press": "osen.co.kr",
@@ -195,19 +361,45 @@
      "press": "newspim.com",
      "publishedAt": "2026-11-18T01:44:00.000Z",
      "link": "https://www.newspim.com/news/view/20261118000498"
+    }
+   ]
+  },
+  {
+   "keyword": "삼전닉스",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-18T02:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'삼전닉스' 삼성전자·SK하이닉스 주가 엇갈려…엔비디아 실적 호조에도...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-18T02:26:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=628133"
     },
     {
-     "title": "[오피셜] 수원삼성 김민우, 10월 K리그 '이달의 딜리버리' 수상",
-     "press": "interfootball.co.kr",
-     "publishedAt": "2026-11-18T01:38:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/413/0000226762"
+     "title": "젠슨 황 없는 엔비디아, 3분기 실적 예상 웃돌아…삼전닉스 등 국내 기...",
+     "press": "newsworker.co.kr",
+     "publishedAt": "2026-11-18T02:22:00.000Z",
+     "link": "https://www.newsworker.co.kr/news/articleView.html?idxno=514725"
+    },
+    {
+     "title": "엔비디아 호실적에 투심 반등…삼전닉스 상승 출발",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-18T02:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001164743?sid=101"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1036,
+  "flagged": 1042,
   "matched": 576,
   "avgLeadMin": 829,
   "recent": [
