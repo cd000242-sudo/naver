@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T16:08:27.256Z",
+ "builtAt": "2026-11-18T16:18:31.115Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,7 +16,7 @@
     "google"
    ],
    "articles90": 9,
-   "recent20": 2,
+   "recent20": 0,
    "press": 9,
    "firstArticleAt": "2026-11-18T15:00:00.000Z",
    "exclusive": false,
@@ -48,7 +48,7 @@
     "signal.bz"
    ],
    "articles90": 8,
-   "recent20": 1,
+   "recent20": 0,
    "press": 8,
    "firstArticleAt": "2026-11-18T15:00:00.000Z",
    "exclusive": false,
@@ -79,10 +79,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-18T14:42:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-18T14:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -111,10 +111,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-18T14:40:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-18T14:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -144,10 +144,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 7,
+   "articles90": 4,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-18T14:40:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-18T14:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -170,45 +170,13 @@
      "link": "https://n.news.naver.com/mnews/article/001/0016450386?sid=104"
     }
    ]
-  },
-  {
-   "keyword": "김명민",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-18T14:41:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김명민, 집까지 팔고 이민 준비했는데…♥아내 한마디에 '이순신' 됐다...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-18T15:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004126243"
-    },
-    {
-     "title": "\"메소드 연기\" 김명민, '베토벤 바이러스' 웃픈 비화 (유퀴즈) [TV나우]",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-18T14:43:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000053269"
-    },
-    {
-     "title": "김명민, ♥아내 임신 중 태아 성장 멈췄다…\"배우 포기 후 이민 결심\" (...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-18T14:41:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004467874"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1070,
-  "matched": 596,
-  "avgLeadMin": 888,
+  "flagged": 1069,
+  "matched": 595,
+  "avgLeadMin": 889,
   "recent": [
    {
     "keyword": "에이엘로봇",
