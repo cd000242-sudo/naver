@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T00:23:06.516Z",
+ "builtAt": "2026-11-18T00:33:10.256Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,101 +8,230 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 25,
  "candidates": [
   {
-   "keyword": "자바 보안 취약점",
+   "keyword": "육사 충청권 이전",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 63,
-   "recent20": 10,
-   "press": 52,
-   "firstArticleAt": "2026-11-17T22:55:00.000Z",
+   "articles90": 54,
+   "recent20": 20,
+   "press": 41,
+   "firstArticleAt": "2026-11-17T23:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "PHP 이어 자바도 보안 취약점 발견…기업·기관 주의 요구",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-18T00:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000552997?sid=105"
+     "title": "[속보] 당정 \"육사 충청권 이전…해사와 공사는 기존 위치 활용\"",
+     "press": "cjb.co.kr",
+     "publishedAt": "2026-11-18T00:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/655/0000033613?sid=102"
     },
     {
-     "title": "자바에서도 치명적 보안 구멍…원격으로 서버 장악 가능",
+     "title": "당정 \"국군사관학교 자운대에 1+2+1 체제로\"…육사 충청권으로 이전(종...",
      "press": "news1.kr",
-     "publishedAt": "2026-11-18T00:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009295182?sid=105"
+     "publishedAt": "2026-11-18T00:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009295218?sid=100"
     },
     {
-     "title": "자바도 뚫렸다…‘반인반AI’ 켄타우로스 해커가 찾아낸 치명적 결함 비...",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-18T00:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003566055?sid=105"
+     "title": "사관학교 통폐합… 육사만 이전 가닥",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-18T00:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005844186?sid=100"
     }
    ]
   },
   {
-   "keyword": "수능 재난문자 시간연장",
+   "keyword": "재난문자",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 26,
-   "recent20": 8,
-   "press": 25,
-   "firstArticleAt": "2026-11-17T23:35:00.000Z",
+   "articles90": 37,
+   "recent20": 10,
+   "press": 32,
+   "firstArticleAt": "2026-11-17T23:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李 대통령 \"수능서 재난문자로 피해 받으면 시험 시간 연장\"",
-     "press": "wolyo.co.kr",
-     "publishedAt": "2026-11-18T00:22:00.000Z",
-     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=320657"
+     "title": "정부, 수능 당일 '위급재난문자'로 휴대전화 적발 검토",
+     "press": "starnewsk.com",
+     "publishedAt": "2026-11-18T00:30:00.000Z",
+     "link": "http://www.starnewsk.com/news/articleView.html?idxno=61119"
     },
     {
-     "title": "李대통령 “수능 중 재난문자 방해받으면 시험 시간 연장 검토”",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-18T00:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000132581?sid=100"
+     "title": "정부, 수능 부정행위 적발 위해 재난문자 추가 ‘불시 발송’ 검토",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-18T00:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000161577?sid=102"
     },
     {
-     "title": "이대통령 \"수능 중 재난문자로 방해받으면 시험 시간 연장 검토\"",
-     "press": "weekly.chosun.com",
-     "publishedAt": "2026-11-18T00:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/053/0000063133?sid=100"
+     "title": "정부, ‘수능 무예고 점검’ 재난문자 추가 검토",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-18T00:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001885856?sid=102"
     }
    ]
   },
   {
    "keyword": "강신철 장관, 국군사관학교",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 33,
-   "recent20": 3,
-   "press": 10,
+   "articles90": 36,
+   "recent20": 5,
+   "press": 11,
    "firstArticleAt": "2026-11-17T23:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "강신철 국방장관, 자운대서 각 군 대학 간담회…\"미래전 승패, 합동역량...",
-     "press": "news.cpbc.co.kr",
-     "publishedAt": "2026-11-18T00:20:00.000Z",
-     "link": "https://news.cpbc.co.kr/article/1177108?division=NAVER"
+     "title": "당정 \"국군사관학교 자운대에 1+2+1 체제로\"…육사 충청권으로 이전(종...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-18T00:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009295218?sid=100"
     },
     {
-     "title": "당정, 국군사관학교 '1+2+1' 확정…육사 충청권 이전",
-     "press": "etoday.co.kr",
+     "title": "당정 “국군사관학교 창설 1+2+1 통합교육…육사 충청권 이전”",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-18T00:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002832726?sid=100"
+    },
+    {
+     "title": "육사, 충청권 이전…국군사관학교 신입생 선발은 2029년부터(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-18T00:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016448049?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "한국 카타르 평가전",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 13,
+   "recent20": 5,
+   "press": 11,
+   "firstArticleAt": "2026-11-17T23:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "오세훈 결승골, 올해 마지막 경기서 카타르에 1-0 승리",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-18T00:31:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/666/0000132582"
+    },
+    {
+     "title": "카타르는 꺾었다, 모레노 감독 계속할 수 있을까",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-18T00:31:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/047/0002536252"
+    },
+    {
+     "title": "'임시 감독 계약 만료' 모레노, 다시 한국행?… \"장기 프로젝트 필요\"",
+     "press": "joynews24.com",
+     "publishedAt": "2026-11-18T00:24:00.000Z",
+     "link": "http://www.joynews24.com/view/2027448"
+    }
+   ]
+  },
+  {
+   "keyword": "앤트로픽 상장",
+   "sources": [
+    "google"
+   ],
+   "articles90": 11,
+   "recent20": 3,
+   "press": 10,
+   "firstArticleAt": "2026-11-17T23:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "세일즈포스 등 소프트웨어주, 앤트로픽 IPO 앞두고 하락",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-18T00:30:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445289"
+    },
+    {
+     "title": "앤트로픽 상장에 최대 7조원 평가받는 SKT 지분…AI 투자 결실",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-18T00:30:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445288"
+    },
+    {
+     "title": "\"2030년 매출 676조 원\"...월가, 앤트로픽 폭발적 성장 전망",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-18T00:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002434373?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "KDB생명 매각 불발",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 10,
+   "recent20": 3,
+   "press": 10,
+   "firstArticleAt": "2026-11-17T23:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "KDB생명 매각 또 불발…산업은행, 한투금융과 협상 종료",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-18T00:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014328954?sid=101"
+    },
+    {
+     "title": "산업은행, 한투금융에 KDB생명 매각 불발…석 달 협상 끝에 결렬",
+     "press": "popcornnews.net",
+     "publishedAt": "2026-11-18T00:18:00.000Z",
+     "link": "http://www.popcornnews.net/news/articleView.html?idxno=140472"
+    },
+    {
+     "title": "KDB생명 매각 또 불발...산은·한국금융, 협상 결렬",
+     "press": "youthdaily.co.kr",
      "publishedAt": "2026-11-18T00:16:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2649591"
+     "link": "https://www.youthdaily.co.kr/news/article.html?no=229990"
+    }
+   ]
+  },
+  {
+   "keyword": "성유리, 안성현 무죄에 좋아요",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 3,
+   "press": 9,
+   "firstArticleAt": "2026-11-17T23:33:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "성유리, 남편 안성현 무죄 확정 후 공개응원…SNS에 '좋아요'",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-18T00:30:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109960488875"
     },
     {
-     "title": "국군사관학교 창설방안 당정협의",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-18T00:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005765296?sid=100"
+     "title": "옥바라지 끝낸 성유리, '무죄 확정' 남편 새 글에 '좋아요' 꾹…3년 8개...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-18T00:24:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001408692"
+    },
+    {
+     "title": "성유리, 코인 청탁 혐의 벗은 ♥안성현 SNS에 '좋아요'…남편 응원",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-18T00:14:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000053097"
     }
    ]
   },
@@ -111,62 +240,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 15,
+   "articles90": 12,
    "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-17T22:54:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-17T23:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "‘나의 유죄인간’ 최진호, 임시완과 대립",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-18T00:32:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611180152"
+    },
+    {
+     "title": "‘나의 유죄인간’ 임시완, 설인아에 이별 통보한 이유…홍은희 반전 엔...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-18T00:24:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1175513"
+    },
     {
      "title": "티빙 11월 2주차, 100일의 거짓말·나의 유죄인간 4주 연속 1·2위",
      "press": "topstarnews.net",
      "publishedAt": "2026-11-18T00:10:00.000Z",
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16279526"
-    },
-    {
-     "title": "'연기 달인' 김인권, '나의 유죄인간'서 빛나는 내공",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-18T00:08:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1138187"
-    },
-    {
-     "title": "박아인, '나의 유죄인간'에서 직진 빌런 활약…후반부 긴장감 높였다",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-17T23:54:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16279510"
-    }
-   ]
-  },
-  {
-   "keyword": "노유민 가슴 통증",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-17T22:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "NRG 노유민, 가슴 통증으로 응급실行...\"별일 아니길\"",
-     "press": "starnewsk.com",
-     "publishedAt": "2026-11-18T00:08:00.000Z",
-     "link": "http://www.starnewsk.com/news/articleView.html?idxno=61117"
-    },
-    {
-     "title": "노유민, 새벽에 응급실 실려갔다...갑작스러운 가슴 통증",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-17T23:34:00.000Z",
-     "link": "https://www.insight.co.kr/news/582481"
-    },
-    {
-     "title": "노유민, 가슴 통증에 새벽 응급실行… 아내 \"결과는 월요일에\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-17T23:26:00.000Z",
-     "link": "https://m.entertain.naver.com/article/469/0000966206"
     }
    ]
   },
@@ -175,10 +272,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-17T23:02:00.000Z",
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-17T23:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -203,66 +300,34 @@
    ]
   },
   {
-   "keyword": "성유리, 안성현 무죄에 좋아요",
+   "keyword": "노유민 가슴 통증 응급실",
    "sources": [
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-17T22:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "성유리, 코인 청탁 혐의 벗은 ♥안성현 SNS에 '좋아요'…남편 응원",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-18T00:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000053097"
-    },
-    {
-     "title": "성유리, 남편 안성현 '무죄 확정' 후 3년 8개월 만 SNS에 '좋아요'",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-17T23:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000639631"
-    },
-    {
-     "title": "남편 안성현 무죄 확정에…성유리, SNS ‘좋아요’ 공개 응원",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-17T23:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005765281?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "앤트로픽 상장",
-   "sources": [
-    "google"
+    "daum"
    ],
    "articles90": 8,
-   "recent20": 1,
+   "recent20": 0,
    "press": 8,
-   "firstArticleAt": "2026-11-17T23:12:00.000Z",
+   "firstArticleAt": "2026-11-17T23:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"앤트로픽 공모가 78달러 웃돌 듯\"…AI 투자 열기 되살릴까",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-18T00:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000927294?sid=104"
+     "title": "NRG 노유민, 가슴 통증으로 응급실行...\"별일 아니길\"",
+     "press": "starnewsk.com",
+     "publishedAt": "2026-11-18T00:08:00.000Z",
+     "link": "http://www.starnewsk.com/news/articleView.html?idxno=61117"
     },
     {
-     "title": "앤트로픽 IPO 앞두고 비트코인 6만3000달러대 추락",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-17T23:58:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=884459"
+     "title": "노유민, 새벽에 응급실 실려갔다...갑작스러운 가슴 통증",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-17T23:34:00.000Z",
+     "link": "https://www.insight.co.kr/news/582481"
     },
     {
-     "title": "앤트로픽 신속편입?…NH아문디운용, ETF 마케팅 우려",
-     "press": "news.dealsitetv.com",
-     "publishedAt": "2026-11-17T23:52:00.000Z",
-     "link": "https://news.dealsitetv.com/articles/178770"
+     "title": "노유민, 가슴 통증에 새벽 응급실行… 아내 \"결과는 월요일에\"",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-17T23:26:00.000Z",
+     "link": "https://m.entertain.naver.com/article/469/0000966206"
     }
    ]
   },
@@ -272,7 +337,7 @@
     "daum"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-17T23:14:00.000Z",
    "exclusive": false,
@@ -331,40 +396,9 @@
    ]
   },
   {
-   "keyword": "출근하는 이용철 후보자",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-17T23:09:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "출근하는 이용철 법무장관 후보자",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-17T23:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014328753?sid=102"
-    },
-    {
-     "title": "이용철 후보자, 밝은 표정으로 출근",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-17T23:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014328750?sid=102"
-    },
-    {
-     "title": "인사청문회 준비 사무실 출근하는 이용철 후보자",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-17T23:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016447861?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "장동혁 대표 인사말",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 6,
@@ -397,10 +431,22 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 999,
-  "matched": 565,
-  "avgLeadMin": 843,
+  "flagged": 1001,
+  "matched": 567,
+  "avgLeadMin": 840,
   "recent": [
+   {
+    "keyword": "보안 취약점",
+    "hitKeyword": "자바 보안 취약점",
+    "hitAt": "2026-11-18T09:30:00+09:00",
+    "leadMin": 108
+   },
+   {
+    "keyword": "자바 보안 취약점",
+    "hitKeyword": "자바 보안 취약점",
+    "hitAt": "2026-11-18T09:30:00+09:00",
+    "leadMin": 57
+   },
    {
     "keyword": "미국 NSA 통신망 마비",
     "hitKeyword": "미국 기밀 통신망 마비",
@@ -448,18 +494,6 @@
     "hitKeyword": "뉴욕증시 하락",
     "hitAt": "2026-11-18T08:00:00+09:00",
     "leadMin": 1474
-   },
-   {
-    "keyword": "엔비디아 실적발표",
-    "hitKeyword": "미 증권거래소 엔비디아 조사",
-    "hitAt": "2026-11-18T07:30:00+09:00",
-    "leadMin": 48
-   },
-   {
-    "keyword": "수능 예비소집",
-    "hitKeyword": "수능 예비소집일 한파",
-    "hitAt": "2026-11-18T07:30:00+09:00",
-    "leadMin": 48
    }
   ]
  }
