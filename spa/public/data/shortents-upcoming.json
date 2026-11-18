@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T21:50:30.724Z",
+ "builtAt": "2026-11-18T22:00:34.094Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,82 +11,24 @@
  "measured": 28,
  "candidates": [
   {
-   "keyword": "뉴욕증시 혼조 마감",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 28,
-   "recent20": 14,
-   "press": 24,
-   "firstArticleAt": "2026-11-18T20:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[뉴욕증시 마감] 엔비디아 반등 하루 못 가 혼조…다우 1.1%↓·S&P500 5일...",
-     "press": "thefairnews.co.kr",
-     "publishedAt": "2026-11-18T21:48:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94723"
-    },
-    {
-     "title": "美증시 혼조...엔트로픽 역대 최대 IPO되나 [월가월부]",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-18T21:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005765901?sid=101"
-    },
-    {
-     "title": "[글로벌 마켓뷰] 뉴욕증시, 엔비디아 역대급 실적에도 연준 매파 충격…...",
-     "press": "moneystorm.kr",
-     "publishedAt": "2026-11-18T21:44:00.000Z",
-     "link": "https://www.moneystorm.kr/news/articleView.html?idxno=8577"
-    }
-   ]
-  },
-  {
-   "keyword": "금융권 해외 부동산 투자",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 16,
-   "recent20": 2,
-   "press": 16,
-   "firstArticleAt": "2026-11-18T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "올 상반기 금융권 해외부동산 투자 55.6조 원…부실 징후 '2.6조'",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-18T21:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005844753?sid=101"
-    },
-    {
-     "title": "해외 부동산 대체투자 잔액 줄었지만…EOD 규모는 증가",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-18T21:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394351?sid=101"
-    },
-    {
-     "title": "금융권 해외 부동산 투자 55.6조…부실징후 사업장 2.6조로 증가",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-18T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006412165?sid=101"
-    }
-   ]
-  },
-  {
    "keyword": "김건희",
    "sources": [
     "signal.bz",
     "google"
    ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 6,
+   "articles90": 8,
+   "recent20": 1,
+   "press": 7,
    "firstArticleAt": "2026-11-18T20:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "12·3 비상계엄 716일 만에 대법 첫 판단…한덕수·김건희 상고심 선고",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-18T21:52:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101547"
+    },
     {
      "title": "한덕수·김건희 대법원 선고…‘내란’ 여부 첫 판단 ‘주목’",
      "press": "news.kbs.co.kr",
@@ -98,12 +40,38 @@
      "press": "imnews.imbc.com",
      "publishedAt": "2026-11-18T21:18:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/214/0001536533?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "추경호 1심 무죄 판결",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-18T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "추경호 무죄 선고, 국민의힘 \"내란몰이 정치공작 종지부\"",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-18T21:58:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886322"
     },
     {
-     "title": "\"아무것도 아닌 사람\" 김건희...수사 1년여 만 대법 결론",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-18T21:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002434903?sid=102"
+     "title": "'계엄해제 표결방해 혐의' 추경호 1심 '무죄' 선고",
+     "press": "labortoday.co.kr",
+     "publishedAt": "2026-11-18T21:34:00.000Z",
+     "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237820"
+    },
+    {
+     "title": "추경호 1심 무죄에 커진 與 긴장감…한덕수 선고에 '촉각'",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-18T21:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009297509?sid=100"
     }
    ]
   },
@@ -113,7 +81,7 @@
     "nate"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-18T21:00:00.000Z",
    "exclusive": false,
@@ -140,34 +108,66 @@
    ]
   },
   {
-   "keyword": "추경호 1심 무죄 판결",
+   "keyword": "승리 아내 동반 입국",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 1,
-   "press": 5,
+   "press": 4,
    "firstArticleAt": "2026-11-18T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'계엄해제 표결방해 혐의' 추경호 1심 '무죄' 선고",
-     "press": "labortoday.co.kr",
-     "publishedAt": "2026-11-18T21:34:00.000Z",
-     "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237820"
+     "title": "승리, '임신 8개월' 아내와 동반 입국…D라인 포착",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-18T21:46:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014331511"
     },
     {
-     "title": "추경호 1심 무죄에 커진 與 긴장감…한덕수 선고에 '촉각'",
+     "title": "승리, 'D라인' ♥아내와 동반 입국…\"여기까지 찍으시면 안 되겠냐\" 밀착...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-18T21:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002081950"
+    },
+    {
+     "title": "‘예비아빠’ 승리, 만삭 아내와 함께 들어왔다가 따로 나갔다…“여기...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-18T21:01:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001147702"
+    }
+   ]
+  },
+  {
+   "keyword": "수능일 주식시장 개장시간",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-18T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "수능일 주식시장 10시 개장…마감은 오후 4시 30분",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-18T21:54:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611190015"
+    },
+    {
+     "title": "수능일 국내 증시 1시간 늦게 개장…오전 10시부터 오후 4시30분 거래",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-18T21:16:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2650049"
+    },
+    {
+     "title": "오늘 은행·증시 1시간 늦게 문 연다…수능일 프리마켓 휴장",
      "press": "news1.kr",
-     "publishedAt": "2026-11-18T21:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009297509?sid=100"
-    },
-    {
-     "title": "‘계엄해제 표결 방해의혹’ 추경호 대구시장 1심 무죄",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-18T21:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012296893?sid=102"
+     "publishedAt": "2026-11-18T21:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009297497?sid=101"
     }
    ]
   },
@@ -236,66 +236,34 @@
    ]
   },
   {
-   "keyword": "수능일 주식시장 개장시간",
+   "keyword": "수능 시간표",
    "sources": [
     "daum"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-18T20:30:00.000Z",
+   "firstArticleAt": "2026-11-18T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "수능일 국내 증시 1시간 늦게 개장…오전 10시부터 오후 4시30분 거래",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-18T21:16:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2650049"
+     "title": "2027학년도 수능 시간표·끝나는 시간 총정리",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-18T21:30:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1175466"
     },
     {
-     "title": "오늘 은행·증시 1시간 늦게 문 연다…수능일 프리마켓 휴장",
+     "title": "수능 시간표·준비물…입실시간 오전 8시 10분",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-18T21:06:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611190006"
+    },
+    {
+     "title": "\"개장은 10시, 프리마켓 휴무\"…수능 날 바뀐 증시 시간표",
      "press": "news1.kr",
-     "publishedAt": "2026-11-18T21:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009297497?sid=101"
-    },
-    {
-     "title": "수능일 주식시장 10시 개장…은행도 1시간 늦춰",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-18T20:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000544595?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "이재명",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-18T21:02:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "트럼프 옆엔 이재명, 푸틴은 '펑리위안 옆'…APEC 단체사진 자리 눈길",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-18T21:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009297501?sid=104"
-    },
-    {
-     "title": "[천지일보 여론조사] 국민 61.7% \"이재명 정부 신뢰 안 해\"",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-18T21:02:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3449950"
-    },
-    {
-     "title": "[천지일보 여론조사] 이재명 대통령 지지율 36.6%… 부정 61.5%",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-18T21:02:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3449949"
+     "publishedAt": "2026-11-18T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009297484?sid=101"
     }
    ]
   }
