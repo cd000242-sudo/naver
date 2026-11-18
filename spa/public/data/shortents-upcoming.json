@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T22:00:34.094Z",
+ "builtAt": "2026-11-18T22:10:37.929Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,181 +8,187 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 29,
  "candidates": [
   {
-   "keyword": "김건희",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-18T20:31:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "12·3 비상계엄 716일 만에 대법 첫 판단…한덕수·김건희 상고심 선고",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-18T21:52:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101547"
-    },
-    {
-     "title": "한덕수·김건희 대법원 선고…‘내란’ 여부 첫 판단 ‘주목’",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-18T21:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012296892?sid=102"
-    },
-    {
-     "title": "한덕수·김건희 '운명의 날'‥선고 실시간 중계",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-18T21:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001536533?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "추경호 1심 무죄 판결",
+   "keyword": "연준 추가 금리 인상",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-18T21:00:00.000Z",
+   "articles90": 25,
+   "recent20": 7,
+   "press": 22,
+   "firstArticleAt": "2026-11-18T20:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "추경호 무죄 선고, 국민의힘 \"내란몰이 정치공작 종지부\"",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-18T21:58:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886322"
+     "title": "연준 위원 거의 전원 “수개월 내 추가 금리 인상 필요”…12월 빅스텝...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-18T22:08:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2650058"
     },
     {
-     "title": "'계엄해제 표결방해 혐의' 추경호 1심 '무죄' 선고",
-     "press": "labortoday.co.kr",
-     "publishedAt": "2026-11-18T21:34:00.000Z",
-     "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237820"
+     "title": "美 연준, 추가 금리 인상에 무게…12월 '빅스텝' 가능성도",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-18T22:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000553414?sid=104"
     },
     {
-     "title": "추경호 1심 무죄에 커진 與 긴장감…한덕수 선고에 '촉각'",
+     "title": "동결했던 10월 美연준, 추가 인상 필요 판단…2명은 '빅스텝' 시사",
      "press": "news1.kr",
-     "publishedAt": "2026-11-18T21:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009297509?sid=100"
+     "publishedAt": "2026-11-18T22:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009297611?sid=101"
     }
    ]
   },
   {
-   "keyword": "2026년 11월 19일 운세",
+   "keyword": "김정은 함경남도 시찰",
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-18T21:00:00.000Z",
+   "articles90": 57,
+   "recent20": 49,
+   "press": 12,
+   "firstArticleAt": "2026-11-18T21:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[오늘의 운세] 2026년 11월 19일 (목) 띠별운세 '수능 날, 모두를 응원하...",
-     "press": "dailypop.kr",
-     "publishedAt": "2026-11-18T21:40:00.000Z",
-     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103985"
-    },
-    {
-     "title": "[오늘의 운세] 19일 목요일 나의 운세는?",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-18T21:26:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1193281"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 19일 띠별 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-18T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006412168?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "승리 아내 동반 입국",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-18T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "승리, '임신 8개월' 아내와 동반 입국…D라인 포착",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-18T21:46:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014331511"
-    },
-    {
-     "title": "승리, 'D라인' ♥아내와 동반 입국…\"여기까지 찍으시면 안 되겠냐\" 밀착...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-18T21:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002081950"
-    },
-    {
-     "title": "‘예비아빠’ 승리, 만삭 아내와 함께 들어왔다가 따로 나갔다…“여기...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-18T21:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001147702"
-    }
-   ]
-  },
-  {
-   "keyword": "수능일 주식시장 개장시간",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-18T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "수능일 주식시장 10시 개장…마감은 오후 4시 30분",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-18T21:54:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611190015"
-    },
-    {
-     "title": "수능일 국내 증시 1시간 늦게 개장…오전 10시부터 오후 4시30분 거래",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-18T21:16:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2650049"
-    },
-    {
-     "title": "오늘 은행·증시 1시간 늦게 문 연다…수능일 프리마켓 휴장",
+     "title": "김정은, 해군대학 시찰…\"현대전 대응할 지휘관 양성 절박\"",
      "press": "news1.kr",
-     "publishedAt": "2026-11-18T21:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009297497?sid=101"
+     "publishedAt": "2026-11-18T22:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009297623?sid=100"
+    },
+    {
+     "title": "김정은, 동해안에 새로 지은 대형 온실 농장 시찰",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-18T22:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009297617?sid=100"
+    },
+    {
+     "title": "김정은, 동해안에 새로 지은 낙원포온실분장 현지지도",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-18T22:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009297619?sid=100"
     }
    ]
   },
   {
-   "keyword": "승리 아내와 공항 포착",
+   "keyword": "한중 FTA 후속협상 타결",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 3,
+   "articles90": 14,
+   "recent20": 8,
+   "press": 12,
+   "firstArticleAt": "2026-11-18T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한중 FTA 후속 협상 실질 타결…靑 \"한한령 완화 진전, K팝 공연 가능성...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-18T22:08:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2650059"
+    },
+    {
+     "title": "靑 “한중 FTA 서비스·투자 타결, 최대한 앞당겨 서명”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-18T22:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004683793?sid=100"
+    },
+    {
+     "title": "靑 “한중 FTA 서비스·투자 협상 실질 타결…경제 협력 질적 도약 기반...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-18T22:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002725431?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "수능 한파 아침 영하 -4도 주의",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 12,
+   "recent20": 2,
+   "press": 12,
+   "firstArticleAt": "2026-11-18T20:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[날씨]6년만의 수능 한파...눈·비·바람에 체감온도 '뚝'",
+     "press": "womennews.co.kr",
+     "publishedAt": "2026-11-18T22:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/310/0000141859?sid=103"
+    },
+    {
+     "title": "[수능 D-DAY] 영하권 추위 속 55만명 결전…'AI 커닝' 차단 총력",
+     "press": "straightnews.co.kr",
+     "publishedAt": "2026-11-18T22:02:00.000Z",
+     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=315704"
+    },
+    {
+     "title": "[출근길 날씨] 수능일, 영하권 추위…서쪽 눈·비",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-18T21:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012296895?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "재난문자",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 7,
    "recent20": 1,
-   "press": 3,
+   "press": 7,
+   "firstArticleAt": "2026-11-18T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“놀라지 마세요” 수신 거부 불가…수능날 국민재난문자 울린다",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-18T21:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005765902?sid=102"
+    },
+    {
+     "title": "오늘 오전 8시30분 평소보다 큰 재난 문자 울려도 당황하지 마세요",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-18T21:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000966460?sid=102"
+    },
+    {
+     "title": "[2027 수능] 안경 전수검사부터 불시 재난문자까지… 입실 전 '이것'만은...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-18T21:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005606505?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "승리, 아내와 공항 포착",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
    "firstArticleAt": "2026-11-18T21:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "승리, 임신한 20대 아내와 동반 입국…취재진 향해 \"여기까지 찍으시죠...",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-18T22:08:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=782956"
+    },
     {
      "title": "승리, '임신 8개월' 아내와 동반 입국…D라인 포착",
      "press": "newsis.com",
@@ -194,44 +200,38 @@
      "press": "bntnews.co.kr",
      "publishedAt": "2026-11-18T21:20:00.000Z",
      "link": "https://www.bntnews.co.kr/article/view/bnt202611190009"
-    },
-    {
-     "title": "승리, 'D라인' ♥아내와 동반 입국…\"여기까지 찍으시면 안 되겠냐\" 밀착...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-18T21:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002081950"
     }
    ]
   },
   {
-   "keyword": "수능 한파 대비 대책",
+   "keyword": "kbo 리그",
    "sources": [
-    "signal.bz"
+    "google"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-18T21:04:00.000Z",
+   "firstArticleAt": "2026-11-18T21:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[오늘날씨] 수능일 전국 강추위·강풍…서울 낮 5도, 충청·호남 눈 최대...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-18T21:16:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16280240"
+     "title": "[2027 프로야구 스토브리그] 본격적으로 논공행상 시작...김도영 일구회...",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-18T21:46:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101546"
     },
     {
-     "title": "수능 한파 6년 만에 찾아온다…정부 비상대응",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-18T21:14:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611190008"
+     "title": "‘이틀간 173억 계약 터졌다’ 역대급 스토브리그 시작인가, 변수는 12월...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-18T21:41:00.000Z",
+     "link": "https://m.sports.naver.com/wbaseball/article/109/0005642291"
     },
     {
-     "title": "'AI 부정행위' 논란에 한파까지‥이 시각 고사장",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-18T21:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001536524?sid=102"
+     "title": "KIA도 KBO도 놀랐던 이 선수… 삼성 초비상 美日 모두 붙었다, 그런데 믿...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-18T21:10:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/477/0000639810"
     }
    ]
   },
@@ -266,14 +266,90 @@
      "link": "https://n.news.naver.com/mnews/article/421/0009297484?sid=101"
     }
    ]
+  },
+  {
+   "keyword": "수능 한파와 눈비",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 2,
+   "firstArticleAt": "2026-11-18T21:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[날씨] 수능일 영하권 추위…충청·호남·제주 눈비",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-18T22:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000927670?sid=103"
+    },
+    {
+     "title": "[날씨]6년만의 수능 한파...눈·비·바람에 체감온도 '뚝'",
+     "press": "womennews.co.kr",
+     "publishedAt": "2026-11-18T22:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/310/0000141859?sid=103"
+    },
+    {
+     "title": "[날씨클릭] 6년 만에 영하권 '수능 한파'…서쪽 중심 눈비",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-18T21:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000927666?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "최수린 아들 이승훈 메기남",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 2,
+   "firstArticleAt": "2026-11-18T21:39:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "최수린 아들, 185㎝ 메기남 등판 \"짝사랑 해본 적 없어…결국 다 사귀더...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-18T22:03:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014331538"
+    },
+    {
+     "title": "최수린 아들 이승훈, 메기남 첫등장 “작곡 디제잉 하는 공대생” 반전...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-18T21:40:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001188939"
+    },
+    {
+     "title": "이종혁 아들 이준수, 이재시와 위스키 마시자 김성주 당황 “많이 컸다...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-18T21:39:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001188938"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1079,
+  "flagged": 1085,
   "matched": 601,
-  "avgLeadMin": 878,
+  "avgLeadMin": 868,
   "recent": [
+   {
+    "keyword": "북미 정상회담 준비",
+    "hitKeyword": "미중러 3자 정상회담",
+    "hitAt": "2026-11-19T07:00:00+09:00",
+    "leadMin": 1134
+   },
+   {
+    "keyword": "한중 정상회담",
+    "hitKeyword": "미중러 3자 정상회담",
+    "hitAt": "2026-11-19T07:00:00+09:00",
+    "leadMin": 1104
+   },
    {
     "keyword": "신생아 발견 수사",
     "hitKeyword": "하남 아파트 신생아 시신",
@@ -321,18 +397,6 @@
     "hitKeyword": "승리 만삭 아내 입국",
     "hitAt": "2026-11-19T06:00:00+09:00",
     "leadMin": 292
-   },
-   {
-    "keyword": "수능 부정행위 1억 포상금",
-    "hitKeyword": "자격시험 AI 부정행위",
-    "hitAt": "2026-11-19T06:00:00+09:00",
-    "leadMin": 271
-   },
-   {
-    "keyword": "승리",
-    "hitKeyword": "승리 만삭 아내 입국",
-    "hitAt": "2026-11-19T06:00:00+09:00",
-    "leadMin": 100
    }
   ]
  }
