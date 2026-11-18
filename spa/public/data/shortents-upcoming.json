@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T20:50:09.040Z",
+ "builtAt": "2026-11-18T21:00:12.641Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 16,
-   "recent20": 2,
-   "press": 16,
+   "articles90": 18,
+   "recent20": 3,
+   "press": 18,
    "firstArticleAt": "2026-11-18T19:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "의대 490명 증원·지역의사제 적용 첫 수능 실시",
+     "press": "dailymedi.com",
+     "publishedAt": "2026-11-18T20:58:00.000Z",
+     "link": "https://www.dailymedi.com/news/news_view.php?wr_id=942760"
+    },
+    {
+     "title": "'AI 부정행위' 공포 속 수능 개막…뒷북 대책에 현장 혼란 가중",
+     "press": "goodnews1.com",
+     "publishedAt": "2026-11-18T20:52:00.000Z",
+     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466410"
+    },
+    {
      "title": "전남광주교육청 '수능 AI 기기 활용 부정행위' 예방 총력",
      "press": "hansbiz.co.kr",
      "publishedAt": "2026-11-18T20:42:00.000Z",
      "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=884935"
-    },
-    {
-     "title": "오늘 수능…'단춧구멍 스티커' 아날로그식 대응에 우려 여전",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-18T20:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000927633?sid=102"
-    },
-    {
-     "title": "인천시교육청, 수능 '스마트안경' 등 첨단 부정행위 원천 차단 고강도 ...",
-     "press": "cstimes.com",
-     "publishedAt": "2026-11-18T20:30:00.000Z",
-     "link": "https://www.cstimes.com/news/articleView.html?idxno=728501"
     }
    ]
   },
@@ -79,10 +79,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-18T19:30:00.000Z",
+   "firstArticleAt": "2026-11-18T19:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -103,38 +103,6 @@
      "press": "hankookilbo.com",
      "publishedAt": "2026-11-18T19:31:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/469/0000966445?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "한화",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-18T19:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한화시스템, 美에 ‘드론 탐지’ 레이다 수출… 73조 시장 뚫는다",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-18T20:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003700970?sid=101"
-    },
-    {
-     "title": "'한화 최초' 27살 이 선수는 신임감독 마음을 훔칠 수 있나…\"2루수 GG 수...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-18T19:41:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/117/0004126258"
-    },
-    {
-     "title": "한화오션 건조 평택함 진수…2027년 12월 해군 인도",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-18T19:22:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=407430"
     }
    ]
   }
