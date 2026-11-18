@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T15:48:12.505Z",
+ "builtAt": "2026-11-18T15:58:17.764Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 28,
  "candidates": [
   {
    "keyword": "시진핑 APEC 환영만찬",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 8,
+   "articles90": 11,
+   "recent20": 2,
+   "press": 9,
    "firstArticleAt": "2026-11-18T14:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "시진핑, 트럼프 오는 공항 직접 나갔다… 푸틴과는 3차례 ‘작전회의’",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-18T15:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004010472?sid=104"
+    },
     {
      "title": "시진핑, APEC서 개방·혁신·협력 강조… 푸틴과 정상회담",
      "press": "newscj.com",
@@ -33,12 +39,6 @@
      "press": "hankookilbo.com",
      "publishedAt": "2026-11-18T15:25:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/469/0000966430?sid=104"
-    },
-    {
-     "title": "[사진] 중국 선전에 모인 APEC 정상들",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-18T15:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003566295?sid=100"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
+   "articles90": 9,
+   "recent20": 2,
+   "press": 9,
    "firstArticleAt": "2026-11-18T14:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "불시 재난문자? 1억 포상금? 대책마다 '혼선'",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-18T15:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404088?sid=102"
+    },
     {
      "title": "국힘 이준배 당협위원장, 수능 하루 앞둔 교육부 앞 1인 시위",
      "press": "ccnnews.co.kr",
@@ -65,12 +71,6 @@
      "press": "joongang.co.kr",
      "publishedAt": "2026-11-18T15:26:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/025/0003566301?sid=110"
-    },
-    {
-     "title": "[이슈] 수능 D-day, 진화하는 AI 기기…부정행위 차단 대책엔 빈틈",
-     "press": "sisafocus.co.kr",
-     "publishedAt": "2026-11-18T15:08:00.000Z",
-     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367782"
     }
    ]
   },
@@ -79,13 +79,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
    "firstArticleAt": "2026-11-18T14:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "한중 FTA 서비스·투자 타결… 영화·관광 ‘한한령’ 해제되나",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-18T15:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004010479?sid=100"
+    },
     {
      "title": "경제계 \"한중 FTA 후속협상 환영…투자 기대\"",
      "press": "yonhapnewstv.co.kr",
@@ -97,12 +103,6 @@
      "press": "kado.net",
      "publishedAt": "2026-11-18T15:10:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/654/0000212167?sid=100"
-    },
-    {
-     "title": "[사설]한중 서비스 협상 타결, 선언 아닌 실질 개방으로 이어져야",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-18T15:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004683740?sid=110"
     }
    ]
   },
@@ -139,12 +139,44 @@
    ]
   },
   {
+   "keyword": "2026 대한민국 게임대상",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-18T14:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "지스타 2026, 게임 전시회를 초월한다",
+     "press": "gametoc.co.kr",
+     "publishedAt": "2026-11-18T15:52:00.000Z",
+     "link": "https://www.gametoc.co.kr/news/articleView.html?idxno=113203"
+    },
+    {
+     "title": "[게임대상] 펄어비스 '붉은사막' 대상(대통령상) 포함 8관왕…엔씨 '아...",
+     "press": "webeconomy.co.kr",
+     "publishedAt": "2026-11-18T15:16:00.000Z",
+     "link": "https://www.webeconomy.co.kr/news/articleView.html?idxno=2381861"
+    },
+    {
+     "title": "펄어비스 '붉은사막', 2026 대한민국 게임대상 대통령상 등 역대 최다 8...",
+     "press": "onews.tv",
+     "publishedAt": "2026-11-18T14:42:00.000Z",
+     "link": "https://www.onews.tv/news/articleView.html?idxno=292025"
+    }
+   ]
+  },
+  {
    "keyword": "김명민",
    "sources": [
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-18T14:41:00.000Z",
    "exclusive": false,
@@ -167,38 +199,6 @@
      "press": "sportschosun.com",
      "publishedAt": "2026-11-18T14:41:00.000Z",
      "link": "https://m.entertain.naver.com/article/076/0004467874"
-    }
-   ]
-  },
-  {
-   "keyword": "2026 대한민국 게임대상",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-18T14:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[게임대상] 펄어비스 '붉은사막' 대상(대통령상) 포함 8관왕…엔씨 '아...",
-     "press": "webeconomy.co.kr",
-     "publishedAt": "2026-11-18T15:16:00.000Z",
-     "link": "https://www.webeconomy.co.kr/news/articleView.html?idxno=2381861"
-    },
-    {
-     "title": "펄어비스 '붉은사막', 2026 대한민국 게임대상 대통령상 등 역대 최다 8...",
-     "press": "onews.tv",
-     "publishedAt": "2026-11-18T14:42:00.000Z",
-     "link": "https://www.onews.tv/news/articleView.html?idxno=292025"
-    },
-    {
-     "title": "게임대상 우수상 〈도깨비의세계〉 초기화·돌파 이전·천장 시스템 도...",
-     "press": "globale.co.kr",
-     "publishedAt": "2026-11-18T14:20:00.000Z",
-     "link": "https://www.globale.co.kr/news/articleView.html?idxno=41733"
     }
    ]
   }
