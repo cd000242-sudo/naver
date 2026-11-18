@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T02:05:57.487Z",
+ "builtAt": "2026-11-18T02:16:00.726Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 54,
+   "articles90": 50,
    "recent20": 9,
-   "press": 52,
-   "firstArticleAt": "2026-11-18T00:38:00.000Z",
+   "press": 47,
+   "firstArticleAt": "2026-11-18T00:47:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "KDB생명 매각 또 결렬…'1조 자본확충' 누가 부담하나 '쟁점'(종합)",
-     "press": "fins.co.kr",
-     "publishedAt": "2026-11-18T02:04:00.000Z",
-     "link": "http://www.fins.co.kr/news/articleView.html?idxno=110607"
+     "title": "KDB생명 매각 또 무산…산은, 7번째 매각 실패",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-18T02:14:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5084744"
     },
     {
-     "title": "산업은행, KDB생명 7번째 매각도 무산…한투금융과 협상 결렬",
-     "press": "industrynews.co.kr",
-     "publishedAt": "2026-11-18T02:04:00.000Z",
-     "link": "https://www.industrynews.co.kr/news/articleView.html?idxno=89752"
+     "title": "한국금융, KDB생명 인수 무산…'1조 증자' 놓고 산은과 평행선",
+     "press": "weekly.hankooki.com",
+     "publishedAt": "2026-11-18T02:14:00.000Z",
+     "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7194500"
     },
     {
-     "title": "KDB생명 매각 협상 결렬…7번째 주인 찾기 무산",
-     "press": "goodnews1.com",
-     "publishedAt": "2026-11-18T02:04:00.000Z",
-     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466354"
+     "title": "[종합] KDB생명 7번째 매각 불발…산은, 한국금융지주와 ‘1조원 자본확...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-18T02:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/117/0004126058?sid=103"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 46,
-   "recent20": 5,
-   "press": 43,
-   "firstArticleAt": "2026-11-18T00:38:00.000Z",
-   "exclusive": false,
+   "articles90": 37,
+   "recent20": 3,
+   "press": 36,
+   "firstArticleAt": "2026-11-18T00:48:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "육사, 서울->충청권 이전...신설 국군사관학교 '1+2+1' 방식 도입",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-18T02:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002394294?sid=100"
+    },
     {
      "title": "국군사관학교 통합안 수정…육사 옮기고 해사·공사는 남는다",
      "press": "straightnews.co.kr",
@@ -65,12 +71,6 @@
      "press": "sisunnews.co.kr",
      "publishedAt": "2026-11-18T01:58:00.000Z",
      "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=249957"
-    },
-    {
-     "title": "“육사 충청 이전…사관생도 1, 4학년 통합 교육”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-18T01:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012296241?sid=100"
     }
    ]
   },
@@ -79,30 +79,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 44,
-   "recent20": 9,
-   "press": 27,
-   "firstArticleAt": "2026-11-18T00:41:00.000Z",
+   "articles90": 48,
+   "recent20": 6,
+   "press": 31,
+   "firstArticleAt": "2026-11-18T00:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "당정 “수능 AI 부정행위 땐 응시 제한 최대 10년”…올해부터 소급 적...",
-     "press": "news-s.kr",
-     "publishedAt": "2026-11-18T01:56:00.000Z",
-     "link": "https://news-s.kr/view.html?id=L261118105150ce0b"
+     "title": "수능 D-1 당정 \"AI 부정행위 응시 제한 10년 확대·소급 적용\"…범정부 ...",
+     "press": "idaegu.co.kr",
+     "publishedAt": "2026-11-18T02:12:00.000Z",
+     "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=565709"
     },
     {
-     "title": "“재난문자 방해시 시험 연장”·“10년 응시제한 소급”…수능 D-1 대책...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-18T01:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002725010?sid=100"
+     "title": "당정, AI 부정행위 '원스트라이크 아웃'…올해 수능부터 응시 제한 10년...",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-18T02:10:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2020066"
     },
     {
-     "title": "오세훈 \"모든 제도에 AI 내진설계 필요\"…정부 대응 비판·서울시 전면 ...",
-     "press": "ppss.kr",
-     "publishedAt": "2026-11-18T01:53:00.000Z",
-     "link": "https://www.ppss.kr/news/articleView.html?idxno=321656"
+     "title": "김민석 \"AI 수능 부정, 강력 대응 입법…올해 수능부터 즉시 적용\"",
+     "press": "goodmorningcc.com",
+     "publishedAt": "2026-11-18T02:10:00.000Z",
+     "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=456072"
     }
    ]
   },
@@ -112,30 +112,30 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 17,
-   "recent20": 1,
-   "press": 15,
-   "firstArticleAt": "2026-11-18T00:58:00.000Z",
+   "articles90": 16,
+   "recent20": 3,
+   "press": 14,
+   "firstArticleAt": "2026-11-18T01:00:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "[뉴스워커_롯데칠성음료] 올해 첫 수확한 포도로 만든 와인…'보졸레 누...",
-     "press": "newsworker.co.kr",
-     "publishedAt": "2026-11-18T01:46:00.000Z",
-     "link": "https://www.newsworker.co.kr/news/articleView.html?idxno=514680"
+     "title": "이마트24, 자몽허니블랙티·배도라지 차음료 2종 출시",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-18T02:12:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4119287"
     },
     {
-     "title": "[식음료 Pick] 연말 신제품 공급·안전 관리 강화",
-     "press": "lcnews.co.kr",
-     "publishedAt": "2026-11-18T01:44:00.000Z",
-     "link": "https://www.lcnews.co.kr/news/articleView.html?idxno=211587"
+     "title": "롯데칠성음료, 올해 수확 포도로 담근 햇와인 '보졸레 누보' 선봬",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-18T02:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014329481?sid=103"
     },
     {
-     "title": "잠바, 제주 황금향 활용한 겨울 시즌 음료 3종 출시",
-     "press": "beyondpost.co.kr",
-     "publishedAt": "2026-11-18T01:36:00.000Z",
-     "link": "http://www.beyondpost.co.kr/view.php?ud=20261118103331849446a9e4dd7f_30"
+     "title": "숙취 해소 음료, 정말 효과 있을까? 확실하게 마시는 방법",
+     "press": "gqkorea.co.kr",
+     "publishedAt": "2026-11-18T02:03:00.000Z",
+     "link": "https://www.gqkorea.co.kr/2026/11/18/%ec%88%99%ec%b7%a8-%ed%95%b4%ec%86%8c-%ec%9d%8c%eb%a3%8c-%ec%a0%95%eb%a7%90-%ed%9a%a8%ea%b3%bc-%ec%9e%88%ec%9d%84%ea%b9%8c-%ed%99%95%ec%8b%a4%ed%95%98%ea%b2%8c-%eb%a7%88%ec%8b%9c%eb%8a%94-%eb%b0%a9/?utm_source=naver&utm_medium=partnership"
     }
    ]
   },
@@ -145,12 +145,18 @@
     "signal.bz"
    ],
    "articles90": 15,
-   "recent20": 0,
+   "recent20": 1,
    "press": 14,
-   "firstArticleAt": "2026-11-18T00:38:00.000Z",
+   "firstArticleAt": "2026-11-18T00:48:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "충남도, 지역화폐 개인정보 유출 2차 피해 차단",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-18T02:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000553105?sid=102"
+    },
     {
      "title": "주소·연락처 등 \"20만 5천 명 규모\"…노란우산도 털렸다",
      "press": "news.sbs.co.kr",
@@ -162,12 +168,6 @@
      "press": "m-economynews.com",
      "publishedAt": "2026-11-18T01:42:00.000Z",
      "link": "https://www.m-economynews.com/news/article.html?no=73206"
-    },
-    {
-     "title": "소상공인 공제 '노란우산'서도 개인정보 20만명 넘게 유출 정황",
-     "press": "mbnmoney.mbn.co.kr",
-     "publishedAt": "2026-11-18T01:42:00.000Z",
-     "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005963728"
     }
    ]
   },
@@ -176,10 +176,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 3,
-   "press": 6,
-   "firstArticleAt": "2026-11-18T00:37:00.000Z",
+   "articles90": 6,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-18T01:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
