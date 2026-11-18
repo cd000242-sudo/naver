@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T19:09:34.545Z",
+ "builtAt": "2026-11-18T19:19:37.856Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -9,10 +9,44 @@
   "minPress": 2
  },
  "measured": 29,
- "candidates": [],
+ "candidates": [
+  {
+   "keyword": "승리",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 3,
+   "press": 3,
+   "firstArticleAt": "2026-11-18T19:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "성베드로 대성당 봉헌 400주년…교황 “평화 선포하는 한 전쟁은 승리 ...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-18T19:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012296866?sid=104"
+    },
+    {
+     "title": "美민주, 알래스카 승리로 상원 56석…68년만에 최다탈환",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-18T19:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000544581?sid=101"
+    },
+    {
+     "title": "성베드로 대성당 봉헌 400주년...교황 \"전쟁 승리 못해\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-18T19:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002434886?sid=104"
+    }
+   ]
+  }
+ ],
  "hitRate": {
   "days": 7,
-  "flagged": 1072,
+  "flagged": 1073,
   "matched": 594,
   "avgLeadMin": 890,
   "recent": [
