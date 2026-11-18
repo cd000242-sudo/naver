@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T16:28:36.122Z",
+ "builtAt": "2026-11-18T16:38:40.588Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 29,
+ "measured": 28,
  "candidates": [
   {
    "keyword": "수능 재난문자 시간",
    "sources": [
     "google"
    ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-18T15:00:00.000Z",
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-18T15:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "수능일 전국 휴대전화 '10.5초 경보음'…부산시 심야 긴급회의",
+     "press": "pennmike.com",
+     "publishedAt": "2026-11-18T16:36:00.000Z",
+     "link": "https://www.pennmike.com/news/articleView.html?idxno=132200"
+    },
     {
      "title": "[사설] AI 부정행위 파문 속 수능, 공정하고 차질 없이 치러야",
      "press": "kmib.co.kr",
@@ -33,12 +39,6 @@
      "press": "chosun.com",
      "publishedAt": "2026-11-18T15:58:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/023/0004010480?sid=102"
-    },
-    {
-     "title": "불시 재난문자? 1억 포상금? 대책마다 '혼선'",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-18T15:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404088?sid=102"
     }
    ]
   },
@@ -47,10 +47,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-18T15:01:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-18T15:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,46 +75,15 @@
    ]
   },
   {
-   "keyword": "한중 FTA 타결",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-18T15:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한중 FTA 서비스·투자 타결… 영화·관광 ‘한한령’ 해제되나",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-18T15:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004010479?sid=100"
-    },
-    {
-     "title": "한중 FTA 후속 협상 타결‥오늘 첫 미중러 회담",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-18T15:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001536517?sid=100"
-    },
-    {
-     "title": "경제계 \"한중 FTA 후속협상 환영…투자 기대\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-18T15:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000927613?sid=101"
-    }
-   ]
-  },
-  {
    "keyword": "수능 부정행위 1억 포상금",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 7,
+   "articles90": 4,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-18T15:00:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-18T15:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -135,38 +104,6 @@
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-18T15:49:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/055/0001404088?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "승리 아내 공항 포착",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-18T15:05:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "빅뱅 출신 승리, 임신한 아내와 홍콩서 동반 입국…공개된 유튜브 영상...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-18T15:58:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16280223"
-    },
-    {
-     "title": "승리, 만삭 20대 아내와 동반 입국…D라인 포착",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-18T15:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000651943?sid=103"
-    },
-    {
-     "title": "'예비 아빠' 승리, 임신한 ♥아내와 동반 입국…캐리어까지 대신 끌었다...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-18T15:05:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002081921"
     }
    ]
   }
