@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T01:05:38.119Z",
+ "builtAt": "2026-11-18T01:15:40.875Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,98 +11,66 @@
  "measured": 14,
  "candidates": [
   {
-   "keyword": "육사 충청 이전",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 84,
-   "recent20": 16,
-   "press": 59,
-   "firstArticleAt": "2026-11-17T23:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "사관학교 1·4학년 통합하고 육사는 이전…29학년도부터 적용",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-18T01:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004210985?sid=100"
-    },
-    {
-     "title": "육사만 충청권 이전, 국군사관생도 3년 뒤 선발",
-     "press": "viewsnnews.com",
-     "publishedAt": "2026-11-18T01:02:00.000Z",
-     "link": "https://www.viewsnnews.com/article?q=239770"
-    },
-    {
-     "title": "당정, 국군사관학교 자운대에... 육사는 충청권 이전(종합)",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-18T01:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006411649?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "수능 경계 강화",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 39,
-   "recent20": 18,
-   "press": 32,
+   "articles90": 45,
+   "recent20": 16,
+   "press": 36,
    "firstArticleAt": "2026-11-18T00:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "경찰, 수능 당일 전국 경계강화…AI 부정행위·유언비어 엄정 대응",
-     "press": "issuenbiz.com",
-     "publishedAt": "2026-11-18T01:04:00.000Z",
-     "link": "http://www.issuenbiz.com/news/articleView.html?idxno=81714"
+     "title": "\"AI 시험 커닝, 막아도 우회\"…빅테크 차단 한계, 삼성·SK 감독 강화",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-18T01:12:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261118000305"
     },
     {
-     "title": "경찰, 수능 당일 ‘전국 경계강화’ 발령…“부정행위·유언비어 즉각 ...",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-18T01:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002832732?sid=102"
+     "title": "경찰, 수능일 6시부터 전국 '경계강화' 발령…AI 부정행위·혼란 대응",
+     "press": "kado.net",
+     "publishedAt": "2026-11-18T01:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000211952?sid=004"
     },
     {
-     "title": "경찰, 'AI 부정행위' 우려에 수능 당일 전국 '경계강화' 발령",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-18T01:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004210983?sid=102"
+     "title": "당정 “AI 부정행위 적발 땐 응시제한 10년”…수능 하루 전 총력 대응",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-18T01:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005765340?sid=100"
     }
    ]
   },
   {
-   "keyword": "코스피 5000선 회복",
+   "keyword": "육사 충청권 이전 추진",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 34,
-   "recent20": 5,
-   "press": 28,
-   "firstArticleAt": "2026-11-17T23:50:00.000Z",
+   "articles90": 33,
+   "recent20": 9,
+   "press": 27,
+   "firstArticleAt": "2026-11-17T23:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "코스피 5100선 회복…엔비디아 실적에 반도체주 반등",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-18T00:56:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=315612"
+     "title": "육사, 충청권 이전…국군사관학교 신입생 선발은 2029년부터(종합2보)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-18T01:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016448285?sid=100"
     },
     {
-     "title": "코스피, 외국인 매수에 2%대 반등…5100선 회복",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-18T00:52:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1138214"
+     "title": "국군사관학교 본교 충청권…육사는 충청권 이전, 해공사 유지",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-18T01:10:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261118010006883"
     },
     {
-     "title": "“땡큐 엔비디아”…코스피, 하루 만에 5100선 회복 [시황]",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-18T00:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003156506?sid=101"
+     "title": "당정 “육사 충청권 이전...국군사관학교 신입생 선발은 2029년부터”",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-18T01:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000132592?sid=100"
     }
    ]
   },
@@ -112,94 +80,62 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 40,
-   "recent20": 7,
-   "press": 19,
-   "firstArticleAt": "2026-11-17T23:38:00.000Z",
+   "articles90": 28,
+   "recent20": 10,
+   "press": 22,
+   "firstArticleAt": "2026-11-17T23:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "당정, 국군사관학교 자운대에... 육사는 충청권 이전(종합)",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-18T01:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006411649?sid=100"
+     "title": "육사, 충청권 이전…국군사관학교 신입생 선발은 2029년부터(종합2보)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-18T01:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016448285?sid=100"
     },
     {
-     "title": "국군사관학교 '1+2+1' 체제로…육사 충청권 이전 추진(종합2보)",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-18T01:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009295385?sid=100"
+     "title": "당정 \"육사 충청권 이전\" 2029년부터 국군사관학교 신입생 선발",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-18T01:12:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=884548"
     },
     {
-     "title": "국군사관학교, 2029년부터 대전 자운대서 신입생 선발…육사 충청권 이...",
-     "press": "newsis.com",
+     "title": "민주당·정부, \"대전 자운대에 국군사관학교 본교와 대학원 설립\"",
+     "press": "joongdo.co.kr",
+     "publishedAt": "2026-11-18T01:12:00.000Z",
+     "link": "https://www.joongdo.co.kr/web/view.php?key=20261118010006300"
+    }
+   ]
+  },
+  {
+   "keyword": "에이엘로봇",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 22,
+   "recent20": 4,
+   "press": 21,
+   "firstArticleAt": "2026-11-18T00:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "에이엘로봇, 상장 첫날 20%대 급락 후 낙폭 만회 [이런국장 저런주식]",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-18T01:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004683438?sid=101"
+    },
+    {
+     "title": "에이엘로봇 코스닥상장 기념식",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-18T01:04:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261118000373"
+    },
+    {
+     "title": "에이엘로봇, 코스닥 상장 첫 날 급락",
+     "press": "imaeil.com",
      "publishedAt": "2026-11-18T00:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014329080?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "성유리, 남편 무죄에 좋아요♥",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-17T23:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[뮤즈이슈]성유리, ♥안성현 무죄 확정되자 ‘좋아요’..3년8개월만 SNS ...",
-     "press": "heraldmuse.com",
-     "publishedAt": "2026-11-18T01:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/112/0003813633"
-    },
-    {
-     "title": "'옥바라지' 끝낸 성유리…안성현, 무죄 확정→3년 8개월 만에 근황에 '좋...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-18T00:54:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000491338"
-    },
-    {
-     "title": "성유리, 안성현 무죄 확정 후 SNS '좋아요'…3년 만 공개 응원 [소셜in]",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-18T00:37:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000328320"
-    }
-   ]
-  },
-  {
-   "keyword": "16기 상철 역대급 방귀",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-17T23:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"역대급 흑역사\"…16기 상철, 방귀 생중계 입장 밝혀 [소셜in]",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-18T00:35:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000328319"
-    },
-    {
-     "title": "16기 상철, 고개 숙였다…전 국민에 방귀 오픈 “수습 안되는 역대급 흑...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-18T00:19:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001188516"
-    },
-    {
-     "title": "“전국 시청자와 방귀 트는 대업 달성”…16기 상철 긴급 기념 소감문 ...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-18T00:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005765299?sid=103"
+     "link": "https://n.news.naver.com/mnews/article/088/0001040944?sid=101"
     }
    ]
   },
@@ -209,7 +145,7 @@
     "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-17T23:56:00.000Z",
    "exclusive": false,
@@ -236,41 +172,105 @@
    ]
   },
   {
-   "keyword": "홀란 PK로 노르웨이 8강행!",
+   "keyword": "gpt 6.2",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-17T23:56:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-18T00:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"0-2→3-2! 이건 상의탈의각이지!\" 홀란 PK극장골, 노르웨이 덴마크에 大...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-18T00:35:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/076/0004467596"
+     "title": "오픈AI, GPT-6.2 아스트라 출시…성능 2위·가격 20% 인하",
+     "press": "mstoday.co.kr",
+     "publishedAt": "2026-11-18T01:00:00.000Z",
+     "link": "https://www.mstoday.co.kr/news/articleView.html?idxno=200505"
     },
     {
-     "title": "UEFA 네이션스리그 8강 확정…노르웨이 극적으로 합류",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-18T00:18:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/003/0014328912"
+     "title": "오픈AI, GPT-6.2 아스트라·솔 전격 공개…전문가급 AI 업무 수행에 비용...",
+     "press": "aitimes.kr",
+     "publishedAt": "2026-11-18T00:54:00.000Z",
+     "link": "https://www.aitimes.kr/news/articleView.html?idxno=42776"
     },
     {
-     "title": "'0-2→3-2' 홀란의 극장 PK로 뒤집었다…노르웨이, 덴마크 꺾고 UNL 8강행",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-17T23:56:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/241/0003542321"
+     "title": "오픈AI, 'GPT-6.2 아스트라·솔' 출시… AI 연구·보안 역량 강화",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-18T00:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002248992?sid=105"
+    }
+   ]
+  },
+  {
+   "keyword": "노유민 가슴 통증 응급실",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-18T00:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "3년 전 실신했던 노유민, 또 건강 이상…돌연 '가슴 통증' 호소→새벽 응...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-18T01:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001408699"
+    },
+    {
+     "title": "NRG 노유민, 4년 전 기절하더니…가슴 통증→새벽 응급실行 [MHN:피드]",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-18T00:46:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000491336"
+    },
+    {
+     "title": "30kg 뺀 노유민, 건강한 줄 알았는데…새벽 흉통에 응급실행 [건강!톡]",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-18T00:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005355145?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "gta 6",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-18T00:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"GTA6 실컷 하세요\"…직원 7000명에게 유급휴가 쏜 회사",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-18T00:34:00.000Z",
+     "link": "https://www.ajunews.com/view/20261118092932234"
+    },
+    {
+     "title": "출시도 안 했는데... GTA6, ‘올해의 게임’ 후보 올라",
+     "press": "gameshot.net",
+     "publishedAt": "2026-11-18T00:30:00.000Z",
+     "link": "https://www.gameshot.net/common/con_view.php?code=GA6afcef60562cb"
+    },
+    {
+     "title": "‘GTA6’ 출시도 전에 TGA 올해의 게임 후보로",
+     "press": "zdnet.co.kr",
+     "publishedAt": "2026-11-18T00:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/092/0002445786?sid=105"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1017,
+  "flagged": 1018,
   "matched": 568,
   "avgLeadMin": 839,
   "recent": [
