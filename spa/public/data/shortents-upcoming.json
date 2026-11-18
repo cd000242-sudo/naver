@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T21:20:20.546Z",
+ "builtAt": "2026-11-18T21:30:23.745Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,49 +11,23 @@
  "measured": 27,
  "candidates": [
   {
-   "keyword": "김건희",
-   "sources": [
-    "google"
-   ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-18T20:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"아무것도 아닌 사람\" 김건희...수사 1년여 만 대법 결론",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-18T21:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002434903?sid=102"
-    },
-    {
-     "title": "김건희 ‘3대 의혹’ 오늘 대법 결론… ‘명태균 여론조사’ 판단 주목",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-18T21:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006412162?sid=102"
-    },
-    {
-     "title": "[뉴스분석] 조작기소 특검법부터 한덕수·김건희 선고까지…여야 사법 ...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-18T21:00:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261118001182"
-    }
-   ]
-  },
-  {
    "keyword": "2026년 11월 19일 운세",
    "sources": [
     "nate"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-18T20:00:00.000Z",
+   "firstArticleAt": "2026-11-18T20:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[오늘의 운세] 19일 목요일 나의 운세는?",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-18T21:26:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1193281"
+    },
     {
      "title": "[오늘의 운세] 2026년 11월 19일 별자리 운세",
      "press": "edaily.co.kr",
@@ -65,76 +39,134 @@
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-18T21:03:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006412168?sid=103"
-    },
-    {
-     "title": "[재미있는 오늘의 운세] 2026년 11월 19일",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-18T21:00:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261114000063"
     }
    ]
   },
   {
-   "keyword": "추경호 1심 무죄",
+   "keyword": "김건희",
    "sources": [
-    "daum"
+    "google"
    ],
-   "articles90": 5,
+   "articles90": 6,
    "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-18T20:00:00.000Z",
+   "firstArticleAt": "2026-11-18T20:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'秋 1심 무죄'에 내란정당 프레임 탈출…다들 환영하는데 이걸 갖고 계...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-18T21:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003156891?sid=100"
+     "title": "한덕수·김건희 '운명의 날'‥선고 실시간 중계",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-18T21:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001536533?sid=102"
     },
     {
-     "title": "秋 1심 무죄에 국힘 \"내란몰이 종지부\"...與 \"특검 즉각 항소해야\"",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-18T21:00:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/325706/?sc=Naver"
+     "title": "\"아무것도 아닌 사람\" 김건희...수사 1년여 만 대법 결론",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-18T21:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002434903?sid=102"
     },
     {
-     "title": "[사설] 추경호 1심 무죄, 대구시 동력 회복하길",
-     "press": "yeongnam.com",
-     "publishedAt": "2026-11-18T21:00:00.000Z",
-     "link": "https://www.yeongnam.com/web/view.php?key=20261118028581591"
+     "title": "김건희 ‘3대 의혹’ 오늘 대법 결론… ‘명태균 여론조사’ 판단 주목",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-18T21:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006412162?sid=102"
     }
    ]
   },
   {
-   "keyword": "유퀴즈 김명민 출연 고백",
+   "keyword": "유퀴즈 김명민 첫 예능 출연",
    "sources": [
     "nate"
    ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
    "firstArticleAt": "2026-11-18T20:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김명민, 1박 2일 유치장 신세→즉결심판 벌금형 고백 “사식 치킨맛 못...",
+     "title": "‘72년생·서울예대 동문’ 김명민·유재석, 학교서도 못 만났는데…첫...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-18T21:05:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001147704"
+    },
+    {
+     "title": "김명민 20㎏ 감량만 한 게 아니다, 시청자 소름돋은 연기 디테일(유퀴즈...",
      "press": "newsen.com",
-     "publishedAt": "2026-11-18T21:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001188924"
+     "publishedAt": "2026-11-18T21:01:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001188905"
     },
     {
-     "title": "'유퀴즈' 김명민, 은퇴 후 이민 고민했지만 \"아이가 선물해 준 '불멸의 ...",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-18T20:36:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109980768846"
+     "title": "\"이놈 봐라?\" 김명민, 경찰서장에 끌려가 '즉결심판'...왜?",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-18T20:47:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005443264"
+    }
+   ]
+  },
+  {
+   "keyword": "김정은",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 3,
+   "press": 4,
+   "firstArticleAt": "2026-11-18T20:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[속보] 김정은, 북미회담 주목 속 해군대학 등 함경남도 지역 시찰",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-18T21:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000521394?sid=100"
     },
     {
-     "title": "김명민 \"배우 관두고 이민 준비 중 '불멸의 이순신' 캐스팅\" [RE:TV]",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-18T20:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009297450"
+     "title": "[속보] 김정은, 어제 함경남도서 공개활동...오늘 방중 여부에 촉각",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-18T21:22:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261119000028"
+    },
+    {
+     "title": "미국, 유엔 북한인권결의안 첫 기권…김정은에 대화 신호?",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-18T21:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012296887?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "승리, 아내와 공항 포착",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-18T20:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "승리 아내 첫 포착…내년 1월 출산",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-18T21:20:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611190009"
+    },
+    {
+     "title": "승리, 'D라인' ♥아내와 동반 입국…\"여기까지 찍으시면 안 되겠냐\" 밀착...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-18T21:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002081950"
+    },
+    {
+     "title": "승리, 만삭 20대 아내와 공항 포착…\"여기까지 찍어라\" 제지",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-18T20:05:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005443256"
     }
    ]
   },
@@ -169,13 +201,45 @@
      "link": "https://n.news.naver.com/mnews/article/081/0003700903?sid=101"
     }
    ]
+  },
+  {
+   "keyword": "추경호 1심 무죄 판결",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-18T20:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'秋 1심 무죄'에 내란정당 프레임 탈출…다들 환영하는데 이걸 갖고 계...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-18T21:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003156891?sid=100"
+    },
+    {
+     "title": "秋 1심 무죄에 국힘 \"내란몰이 종지부\"...與 \"특검 즉각 항소해야\"",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-18T21:00:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/325706/?sc=Naver"
+    },
+    {
+     "title": "‘계엄 해제 표결 방해’ 추경호 1심 무죄",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-18T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003700892?sid=102"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1074,
-  "matched": 602,
-  "avgLeadMin": 882,
+  "flagged": 1075,
+  "matched": 600,
+  "avgLeadMin": 879,
   "recent": [
    {
     "keyword": "앤트로픽 상장",
