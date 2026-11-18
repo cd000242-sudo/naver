@@ -25925,7 +25925,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-10-31T01:43:50.367Z",
+    "checkedAt": "2026-11-18T04:21:08.696Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -36621,7 +36621,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-17T04:44:59.762Z",
+    "checkedAt": "2026-11-18T04:20:53.371Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -37621,6 +37621,11 @@
     "tier": "none",
     "pc": 70,
     "mobile": 70
+   },
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-11-18T04:20:58.771Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
   {
@@ -42174,7 +42179,12 @@
    "effectiveVolume": 680,
    "peakConfidence": "",
    "preemptRank": 2,
-   "carried": true
+   "carried": true,
+   "revalidation": {
+    "status": "rejected",
+    "checkedAt": "2026-11-18T04:21:10.486Z",
+    "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
+   }
   },
   {
    "serpSections": [
@@ -43685,7 +43695,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-10-31T01:43:39.086Z",
+    "checkedAt": "2026-11-18T04:20:57.886Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -88063,7 +88073,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-10-31T01:43:45.627Z",
+    "checkedAt": "2026-11-18T04:21:04.180Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -91773,7 +91783,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-10-31T01:43:47.525Z",
+    "checkedAt": "2026-11-18T04:21:05.977Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -99573,7 +99583,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-10-31T01:43:36.193Z",
+    "checkedAt": "2026-11-18T04:20:55.198Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -101642,7 +101652,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-10-31T01:43:44.662Z",
+    "checkedAt": "2026-11-18T04:21:03.289Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -102973,7 +102983,7 @@
    },
    "revalidation": {
     "status": "rejected",
-    "checkedAt": "2026-11-17T04:45:00.664Z",
+    "checkedAt": "2026-11-18T04:20:54.274Z",
     "reason": "월 검색량이 추천 기준보다 낮아졌습니다."
    }
   },
@@ -112088,5 +112098,5 @@
    ]
   }
  ],
- "revalidatedAt": "2026-11-17T04:45:00.664Z"
+ "revalidatedAt": "2026-11-18T04:21:10.486Z"
 }
