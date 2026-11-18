@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T02:36:06.658Z",
+ "builtAt": "2026-11-18T02:46:09.283Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,62 +16,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 91,
-   "recent20": 15,
-   "press": 54,
-   "firstArticleAt": "2026-11-18T01:24:00.000Z",
+   "articles90": 89,
+   "recent20": 13,
+   "press": 55,
+   "firstArticleAt": "2026-11-18T01:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "경남도, 고액·상습체납자 602명 명단 공개",
-     "press": "newsgn.com",
-     "publishedAt": "2026-11-18T02:34:00.000Z",
-     "link": "https://www.newsgn.com/news/articleView.html?idxno=586368"
+     "title": "서울시, 지방세 1000만 원 이상 고액 체납자 1552명 공개…체납액 2261억...",
+     "press": "pennmike.com",
+     "publishedAt": "2026-11-18T02:44:00.000Z",
+     "link": "https://www.pennmike.com/news/articleView.html?idxno=132139"
     },
     {
-     "title": "충북 고액·상습 체납자 427명 명단공개…미납액 217억원",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-18T02:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016448758?sid=102"
+     "title": "서울시, 고액·상습 체납자 1552명 명단 공개… 체납액 2261억원",
+     "press": "sisafocus.co.kr",
+     "publishedAt": "2026-11-18T02:44:00.000Z",
+     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367744"
     },
     {
-     "title": "경남도 고액·상습 체납자 602명 명단 공개",
-     "press": "busan.com",
-     "publishedAt": "2026-11-18T02:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001407739?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "KDB생명 매각 무산",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 38,
-   "recent20": 4,
-   "press": 36,
-   "firstArticleAt": "2026-11-18T01:08:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "KDB생명 새 주인 찾기 또 실패…자본건전성 부담에 매각 '원점'",
+     "title": "충북도 고액·상습 체납자 427명 공개…217억 미납",
      "press": "news1.kr",
-     "publishedAt": "2026-11-18T02:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009295895?sid=101"
-    },
-    {
-     "title": "[Invest]한투의 '무리수'로 끝난 KDB생명 인수전…후순위채 투자 요구에...",
-     "press": "investchosun.com",
-     "publishedAt": "2026-11-18T02:26:00.000Z",
-     "link": "https://www.investchosun.com/site/data/html_dir/2026/11/18/2026111880080.html"
-    },
-    {
-     "title": "한국금융지주, KDB생명 인수 불발…\"보험업 진출 검토 계속 한다\"[표류하...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-18T02:22:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2649718"
+     "publishedAt": "2026-11-18T02:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009295929?sid=102"
     }
    ]
   },
@@ -81,10 +49,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 42,
+   "articles90": 35,
    "recent20": 5,
-   "press": 30,
-   "firstArticleAt": "2026-11-18T01:08:00.000Z",
+   "press": 29,
+   "firstArticleAt": "2026-11-18T01:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -101,10 +69,10 @@
      "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261118010006965"
     },
     {
-     "title": "수능 D-1…與 “부정방지 대책 강화” 野 “신고포상 1억 기막혀”",
-     "press": "biz.heraldcorp.com",
+     "title": "수능 하루 전 긴급 당정협의 \"AI 커닝, 올해부터 10년 자격 제한\"",
+     "press": "ohmynews.com",
      "publishedAt": "2026-11-18T02:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002725095?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/047/0002536285?sid=100"
     }
    ]
   },
@@ -113,24 +81,24 @@
    "sources": [
     "nate"
    ],
-   "articles90": 28,
-   "recent20": 4,
-   "press": 25,
-   "firstArticleAt": "2026-11-18T01:08:00.000Z",
+   "articles90": 25,
+   "recent20": 2,
+   "press": 22,
+   "firstArticleAt": "2026-11-18T01:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "최태원 \"사회문제 해결에 경제적 보상해야\"…새 성장모델 제안",
-     "press": "sisafocus.co.kr",
-     "publishedAt": "2026-11-18T02:28:00.000Z",
-     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367746"
-    },
     {
      "title": "기조연설 하는 최태원 대한상의 회장",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-18T02:28:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016448731?sid=101"
+    },
+    {
+     "title": "최태원 \"사회문제 해결에 경제적 보상해야\"…새 성장모델 제안",
+     "press": "sisafocus.co.kr",
+     "publishedAt": "2026-11-18T02:28:00.000Z",
+     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367746"
     },
     {
      "title": "최태원 \"사회문제 해결한 만큼 현금 보상해야\"…세계행정학회서 제언",
@@ -145,30 +113,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 17,
-   "recent20": 4,
-   "press": 17,
-   "firstArticleAt": "2026-11-18T01:16:00.000Z",
+   "articles90": 19,
+   "recent20": 6,
+   "press": 19,
+   "firstArticleAt": "2026-11-18T01:22:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "노란우산서 20만5천명 개인정보 유출",
-     "press": "viewsnnews.com",
-     "publishedAt": "2026-11-18T02:32:00.000Z",
-     "link": "https://www.viewsnnews.com/article?q=239782"
+     "title": "노란우산 개인정보 20만5000명 유출 정황…가입자 10명 중 1명꼴",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-18T02:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003566097?sid=102"
     },
     {
-     "title": "노란우산 개인정보 유출 20만명 규모… 전체 가입자 10% 수준",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-18T02:32:00.000Z",
-     "link": "https://www.viva100.com/article/20261118500643"
+     "title": "노란우산 개인정보 유출 36만명 규모…가입자 5명 중 1명꼴",
+     "press": "newsfc.co.kr",
+     "publishedAt": "2026-11-18T02:42:00.000Z",
+     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82555"
     },
     {
-     "title": "중소기업중앙회 노란우산 해킹 사고…가입자 20만5000명 개인정보 유출...",
-     "press": "delighti.co.kr",
-     "publishedAt": "2026-11-18T02:30:00.000Z",
-     "link": "https://www.delighti.co.kr/news/articleView.html?idxno=125160"
+     "title": "소상공인 안전망 '노란우산' 뚫렸나…20만5000명 개인정보 노출 우려",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-18T02:38:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5084753"
     }
    ]
   },
@@ -177,46 +145,51 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 46,
-   "recent20": 41,
-   "press": 11,
-   "firstArticleAt": "2026-11-18T02:09:00.000Z",
+   "articles90": 54,
+   "recent20": 37,
+   "press": 15,
+   "firstArticleAt": "2026-11-18T02:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[포토] 인사청문회 출석하는 김종철 후보자",
+     "title": "[포토] 김종철 경찰청장 후보자 답변",
      "press": "newscj.com",
-     "publishedAt": "2026-11-18T02:34:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3449738"
+     "publishedAt": "2026-11-18T02:44:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3449749"
     },
     {
-     "title": "수능 하루 전 청문회 선 김종철 \"부정행위용 장비 유통까지 수사\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-18T02:34:00.000Z",
-     "link": "https://www.ajunews.com/view/20261118111611730"
+     "title": "경찰청장 후보자 \"AI 부정행위, 당사자·공모자·조력자 끝까지 추적\" [...",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-18T02:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000553146?sid=100"
     },
     {
-     "title": "김종철 경찰청장 후보자 인사청문회",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-18T02:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014329658?sid=100"
+     "title": "[포토] 답변하는 김종철 경찰청장 후보자",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-18T02:44:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3449747"
     }
    ]
   },
   {
    "keyword": "K리그 이달의 수상자 발표",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
    "firstArticleAt": "2026-11-18T01:36:00.000Z",
-   "exclusive": false,
+   "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "[공식발표] 광주 최초 역사 썼다! '4경기 3골 5도움' 바 루아, 10월 K리그...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-18T02:41:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/109/0005642004"
+    },
     {
      "title": "[프로축구] 바 루아, 광주FC 최초 K리그 이달의 선수 수상",
      "press": "newspim.com",
@@ -228,12 +201,6 @@
      "press": "interfootball.co.kr",
      "publishedAt": "2026-11-18T01:38:00.000Z",
      "link": "https://m.sports.naver.com/kfootball/article/413/0000226762"
-    },
-    {
-     "title": "바 루아, 광주FC 최초 K리그 이달의 선수…10월 3골 5도움 맹활약",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-18T01:36:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16279650"
     }
    ]
   }
