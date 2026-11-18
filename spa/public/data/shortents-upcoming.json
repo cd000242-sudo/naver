@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T23:21:06.606Z",
+ "builtAt": "2026-11-18T23:31:13.220Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "시진핑 푸틴 회동",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 43,
-   "recent20": 5,
-   "press": 40,
-   "firstArticleAt": "2026-11-18T21:52:00.000Z",
+   "articles90": 34,
+   "recent20": 3,
+   "press": 32,
+   "firstArticleAt": "2026-11-18T22:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이 대통령, 푸틴과 첫 회동…북핵 문제·한러 관계 등 논의",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-18T23:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404138?sid=100"
+    },
     {
      "title": "이 대통령, 푸틴과 첫 회동서 북한 핵 문제 언급… 시진핑에 '바둑 두자...",
      "press": "busan.com",
@@ -32,45 +38,7 @@
      "title": "李, 푸틴과 10분 간 첫 회동…靑 \"북핵 문제도 다뤘다\"",
      "press": "news.tvchosun.com",
      "publishedAt": "2026-11-18T23:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000651971?sid=004"
-    },
-    {
-     "title": "李, 푸틴과 '10분 깜짝 회동'…靑 \"북한 핵 문제도 다뤄져\"",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-18T23:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001076431?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "이 대통령 특검법 재가",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 32,
-   "recent20": 10,
-   "press": 29,
-   "firstArticleAt": "2026-11-18T22:15:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령, 조작기소특검법 재가…19일 공포 즉시 시행",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-18T23:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006412225?sid=100"
-    },
-    {
-     "title": "李대통령, '조작기소 특검법' 재가…19일 공포·시행",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-18T23:18:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5085121"
-    },
-    {
-     "title": "李대통령, '조작기소 특검법' 재가…19일 공포·즉시 시행",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-18T23:14:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445448"
+     "link": "https://n.news.naver.com/mnews/article/448/0000651971?sid=100"
     }
    ]
   },
@@ -79,30 +47,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 32,
-   "recent20": 11,
+   "articles90": 34,
+   "recent20": 7,
    "press": 28,
-   "firstArticleAt": "2026-11-18T21:58:00.000Z",
+   "firstArticleAt": "2026-11-18T22:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "미국 금리 다시 오르나…연준 위원 대다수 추가 긴축 필요성에 무게",
-     "press": "jemin.com",
+     "title": "미 연준, 추가 금리 인상 공감대...일부 위원 '빅스텝' 거론",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-18T23:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002434943?sid=104"
+    },
+    {
+     "title": "美 연준 월러 이사, '빅스텝' 필요성 언급…비트코인 6.2만달러[코인브...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-18T23:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009297757?sid=101"
+    },
+    {
+     "title": "[뉴욕환시] 달러 상승…파운드 약세 속 연준 인사들 잇단 '매파' 발언",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-18T23:24:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445451"
+    }
+   ]
+  },
+  {
+   "keyword": "엔비디아 호실적에도 혼조",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 27,
+   "recent20": 2,
+   "press": 26,
+   "firstArticleAt": "2026-11-18T22:03:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "엔비디아 호실적도 역부족... S&P500 5거래일 연속 하락 [뉴욕증시]",
+     "press": "m-i.kr",
      "publishedAt": "2026-11-18T23:20:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=847657"
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2020540"
     },
     {
-     "title": "비트코인 6만2000달러대…금리 인상 우려·ETF 자금 이탈에 약세",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-18T23:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001205829?sid=101"
+     "title": "엔비디아 호실적에 나스닥만 0.4%↑…S&P500 5일연속 하락",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-18T23:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012296941?sid=104"
     },
     {
-     "title": "미연준도 \"순환금융, 손실 증폭시킬 수도\"",
-     "press": "viewsnnews.com",
-     "publishedAt": "2026-11-18T23:18:00.000Z",
-     "link": "https://www.viewsnnews.com/article?q=239794"
+     "title": "[오늘의 투자전략] 엔비디아 하락·연준 매파 발언…\"코스피 약세 출발...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-18T23:10:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2650083"
     }
    ]
   },
@@ -112,29 +112,61 @@
     "signal.bz"
    ],
    "articles90": 32,
-   "recent20": 8,
-   "press": 24,
-   "firstArticleAt": "2026-11-18T22:00:00.000Z",
+   "recent20": 6,
+   "press": 25,
+   "firstArticleAt": "2026-11-18T22:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김정관 산업장관 \"한중 FTA 타결, 한한령 완화 물꼬…모든 문턱 없애진...",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-18T23:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005844799?sid=101"
+     "title": "대한상의 \"한중 FTA 서비스·투자 협상 타결 환영…기업 기회 확대 기대...",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-18T23:30:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2020557"
     },
     {
-     "title": "'사랑이 뭐길래'·H.O.T.로 열고 사드로 닫힌 中 한류…FTA로 다시 열리...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-18T23:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014331596"
+     "title": "하나證 \"제주항공, 한중 FTA 수혜 기대…목표가 33% 상향",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-18T23:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009297768?sid=101"
     },
     {
-     "title": "[모닝 리포트] 하나證 \"한중 FTA 타결에 제주항공 수혜…목표가 33% 상향...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-18T23:12:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261119000065"
+     "title": "[기업이슈] 한·중 정상 “FTA 서비스·투자 협상 타결”",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-18T23:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000544637?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "헌옷수거함 아기 시신 발견",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 18,
+   "recent20": 2,
+   "press": 18,
+   "firstArticleAt": "2026-11-18T22:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "하남 헌옷수거함에 아기 시신 버리고 광주로…30대 친모 체포",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-18T23:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005443319?sid=102"
+    },
+    {
+     "title": "아파트 헌옷수거함서 신생아 시신 발견…경찰, 용의자 추적",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-18T23:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000651974?sid=102"
+    },
+    {
+     "title": "헌옷수거함 열었더니 탯줄 달린 아기 시신…30대 친모 긴급체포",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-18T23:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004211391?sid=102"
     }
    ]
   },
@@ -144,29 +176,29 @@
     "google"
    ],
    "articles90": 24,
-   "recent20": 12,
-   "press": 17,
-   "firstArticleAt": "2026-11-18T21:54:00.000Z",
+   "recent20": 9,
+   "press": 16,
+   "firstArticleAt": "2026-11-18T22:10:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "단양군, 겨울철 대설 대비 제설전진기지 및 취약구간 현장점검 실시",
-     "press": "enewstoday.co.kr",
-     "publishedAt": "2026-11-18T23:20:00.000Z",
-     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2494367"
+     "title": "카리나, MLB 겨울 화보 공개",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-18T23:30:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611190087"
     },
     {
-     "title": "키스오브라이프, 여름 공식 깼다…첫 겨울 시즌송 ‘그리디’ 발표",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-18T23:19:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001305595"
+     "title": "키스오브라이프, 첫 겨울 시즌송 발매",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-18T23:24:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611190080"
     },
     {
-     "title": "KISS OF LIFE, 신곡 'Greedy' 콘셉트 영상으로 겨울 시즌송 예고",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-18T23:18:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16280320"
+     "title": "[포토] \"가을은 어디 가고 벌써 겨울왕국?\"…덕유산, 온통 새하얀 눈 세...",
+     "press": "tournews21.com",
+     "publishedAt": "2026-11-18T23:24:00.000Z",
+     "link": "https://www.tournews21.com/news/articleView.html?idxno=148899"
     }
    ]
   },
@@ -174,10 +206,11 @@
    "keyword": "김정은 함경남도 시찰",
    "sources": [
     "signal.bz",
-    "nate"
+    "nate",
+    "daum"
    ],
    "articles90": 26,
-   "recent20": 5,
+   "recent20": 1,
    "press": 15,
    "firstArticleAt": "2026-11-18T22:04:00.000Z",
    "exclusive": false,
@@ -204,34 +237,34 @@
    ]
   },
   {
-   "keyword": "AI 부정행위 차단 총력",
+   "keyword": "승리, 아내와 공항 포착",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 10,
-   "firstArticleAt": "2026-11-18T22:00:00.000Z",
+   "articles90": 12,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-18T22:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "AI 커닝 잡음 속…오늘 55만 수험생 수능 치른다",
-     "press": "mbn.mk.co.kr",
+     "title": "'빅뱅 출신' 승리, 내년 출산 앞둔 20대 아내와 공항서 포착",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-18T23:22:00.000Z",
+     "link": "https://www.insight.co.kr/news/582658"
+    },
+    {
+     "title": "승리, 만삭 아내와 공항서 포착…\"여기까지 찍으시죠\" 취재진 제지",
+     "press": "tenasia.co.kr",
      "publishedAt": "2026-11-18T23:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001978872?sid=102"
+     "link": "https://m.entertain.naver.com/article/312/0000785144"
     },
     {
-     "title": "'AI 부정행위' 우려 속 오늘 수능…당국 부정행위 차단총력",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-18T23:10:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4119485"
-    },
-    {
-     "title": "오늘 수능...55만명 지원, AI 부정행위 차단 총력",
-     "press": "tjb.co.kr",
-     "publishedAt": "2026-11-18T23:02:00.000Z",
-     "link": "https://www.tjb.co.kr/news05/bodo/view/id/106267"
+     "title": "빅뱅 출신 승리, 20대 아내와 동반 입국…D라인 포착",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-18T23:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005765918"
     }
    ]
   },
@@ -241,7 +274,7 @@
     "google"
    ],
    "articles90": 10,
-   "recent20": 2,
+   "recent20": 1,
    "press": 10,
    "firstArticleAt": "2026-11-18T22:11:00.000Z",
    "exclusive": false,
@@ -268,34 +301,34 @@
    ]
   },
   {
-   "keyword": "승리, 아내와 공항 포착",
+   "keyword": "수능일 주식시장 개장시간",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 11,
+   "articles90": 10,
    "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-18T22:08:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-18T22:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "승리, 만삭 아내와 공항서 포착…\"여기까지 찍으시죠\" 취재진 제지",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-18T23:18:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000785144"
+     "title": "수능일 주식시장 10시 개장⋯넥스트레이드 프리마켓 휴장",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-18T23:22:00.000Z",
+     "link": "https://www.viva100.com/article/20261119500025"
     },
     {
-     "title": "“어디서 나오셨냐” 승리, 애처가 모드 발동…‘만삭’ 20대 아내 철저...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-18T23:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001281965"
+     "title": "수능일 국내 증시 오전 10시 개장…은행 영업도 1시간 늦춰",
+     "press": "issuenbiz.com",
+     "publishedAt": "2026-11-18T23:06:00.000Z",
+     "link": "http://www.issuenbiz.com/news/articleView.html?idxno=81751"
     },
     {
-     "title": "빅뱅 출신 승리, 20대 아내와 동반 입국…D라인 포착",
-     "press": "mk.co.kr",
+     "title": "[한국증시] 코스피·코스닥 수능일 주식 거래시간 변경된다…일정은?",
+     "press": "cbci.co.kr",
      "publishedAt": "2026-11-18T23:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005765918"
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=623462"
     }
    ]
   },
@@ -305,12 +338,18 @@
     "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 0,
+   "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-18T21:54:00.000Z",
+   "firstArticleAt": "2026-11-18T22:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "일본 \"조국 입국 거부는 전과 때문…독도 방문과는 무관\" 해명",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-18T23:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001978876?sid=100"
+    },
     {
      "title": "외교부 \"조국, 日 입국 거부 전과 이력 때문…독도 방문 때문 아냐\"",
      "press": "ajunews.com",
@@ -322,44 +361,38 @@
      "press": "etoday.co.kr",
      "publishedAt": "2026-11-18T22:42:00.000Z",
      "link": "https://www.etoday.co.kr/news/view/2650065"
-    },
-    {
-     "title": "日, 조국 입국 거부관련 “전과가 이유…독도 방문이력 때문 아냐”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-18T22:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002725442?sid=100"
     }
    ]
   },
   {
-   "keyword": "최민희 징계와 김민석 갈등",
+   "keyword": "수능 시간표",
    "sources": [
-    "nate"
+    "daum"
    ],
    "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-18T22:21:00.000Z",
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-18T22:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "직접 나선 정청래 \"최민희 징계 강력 반대\"…추미애도 '김민석 직격'",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-18T22:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000651962?sid=100"
+     "title": "2027 수능 시험 시간표·끝나는 시간은?",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-18T23:24:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611190078"
     },
     {
-     "title": "정청래 \"최민희 징계 강력 반대\"·추미애 \"당대표 문제부터 엄중판단\"…...",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-18T22:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001978863?sid=100"
+     "title": "\"2026 수능 주식 개장시간·선물·야간시장 총정리\"",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-18T23:02:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3756532"
     },
     {
-     "title": "김유정 \"최민희 징계 없다면 김민석 대표 위태로울 것\"[한판승부]",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-18T22:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004211387?sid=100"
+     "title": "\"출근시간 오전 10시 이후 조정·지하철 증편\"…수능 시간표 보니",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-18T22:22:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3756487"
     }
    ]
   },
@@ -396,7 +429,7 @@
    ]
   },
   {
-   "keyword": "김간지 문희준 안티 고백",
+   "keyword": "문희준 안티 고백",
    "sources": [
     "nate"
    ],
@@ -426,43 +459,11 @@
      "link": "https://m.entertain.naver.com/article/468/0001281948"
     }
    ]
-  },
-  {
-   "keyword": "수능 시간표",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 2,
-   "firstArticleAt": "2026-11-18T22:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"2026 수능 주식 개장시간·선물·야간시장 총정리\"",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-18T23:02:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3756532"
-    },
-    {
-     "title": "\"출근시간 오전 10시 이후 조정·지하철 증편\"…수능 시간표 보니",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-18T22:22:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3756487"
-    },
-    {
-     "title": "2027학년도 수능 시간표…오전 8시 10분 입실·오후 5시 45분 종료",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-18T22:16:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=782962"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1092,
+  "flagged": 1095,
   "matched": 596,
   "avgLeadMin": 851,
   "recent": [
