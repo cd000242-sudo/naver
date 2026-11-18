@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T00:02:59.602Z",
+ "builtAt": "2026-11-18T00:13:03.048Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,67 +11,66 @@
  "measured": 25,
  "candidates": [
   {
-   "keyword": "젠슨 황 복귀 없다",
+   "keyword": "자바 보안 취약점",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 58,
-   "recent20": 10,
-   "press": 52,
-   "firstArticleAt": "2026-11-17T22:33:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "젠슨 황, 복귀 의사 밝혔는데 어쩌나... 엔비디아 공식입장 떴다",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-18T00:00:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1175504"
-    },
-    {
-     "title": "창업자 복귀엔 선 긋고 실적 전망엔 힘준 엔비디아",
-     "press": "fortunekorea.co.kr",
-     "publishedAt": "2026-11-18T00:00:00.000Z",
-     "link": "https://www.fortunekorea.co.kr/news/articleView.html?idxno=54789"
-    },
-    {
-     "title": "\"젠슨 떠나도 문제없다\"…엔비디아, 메모리·패키징 공급 확보",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-17T23:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001075996?sid=105"
-    }
-   ]
-  },
-  {
-   "keyword": "자바 보안 취약점",
-   "sources": [
-    "signal.bz",
-    "daum"
-   ],
-   "articles90": 64,
-   "recent20": 12,
-   "press": 50,
+   "articles90": 70,
+   "recent20": 11,
+   "press": 55,
    "firstArticleAt": "2026-11-17T22:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[T나는 보안] 공공정보 71% '자바'서도 치명적 취약점…정부 긴급 점검 ...",
-     "press": "tjb.co.kr",
-     "publishedAt": "2026-11-18T00:02:00.000Z",
-     "link": "https://www.tjb.co.kr/news05/bodo/view/id/106209"
+     "title": "PHP 이어 자바 취약점 발견…국내 기업·공공기관 3만곳 보안 ‘비상’",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-18T00:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002724896?sid=105"
     },
     {
-     "title": "韓개발자 절반 쓰는 자바도 로그인없이 뚫린다…정부 \"보안 업데이트 \"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-17T23:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005442701?sid=105"
+     "title": "PHP 이어 자바 보안 취약점 발견… 정부, 긴급 점검 권고",
+     "press": "asiatime.co.kr",
+     "publishedAt": "2026-11-18T00:10:00.000Z",
+     "link": "https://www.asiatime.co.kr/article/20261118500052"
     },
     {
-     "title": "PHP 이어 '자바'도 치명적 취약점…정부 긴급 점검 권고",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-17T23:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001978705?sid=101"
+     "title": "웹 보안 심각한 위험…PHP 이어 '자바'에서도 취약점 발견",
+     "press": "mbnmoney.mbn.co.kr",
+     "publishedAt": "2026-11-18T00:06:00.000Z",
+     "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005963726"
+    }
+   ]
+  },
+  {
+   "keyword": "육사 충청권 이전",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 32,
+   "recent20": 18,
+   "press": 29,
+   "firstArticleAt": "2026-11-17T23:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "당정 “육사, 충청권으로 이전…해사·공사는 기존 위치 활용”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-18T00:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003763295?sid=100"
+    },
+    {
+     "title": "與, 육사 충청권 이전 확정…국군사관학교 2029년 출범",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-18T00:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004683395?sid=100"
+    },
+    {
+     "title": "당정, 국군사관학교 창설안 수정…육사 충청권 이전 추진",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-18T00:08:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5084636"
     }
    ]
   },
@@ -80,62 +79,62 @@
    "sources": [
     "daum"
    ],
-   "articles90": 24,
-   "recent20": 16,
-   "press": 22,
+   "articles90": 28,
+   "recent20": 7,
+   "press": 25,
    "firstArticleAt": "2026-11-17T22:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "수능날 재난문자 추가 '불시 발송' 검토…시험장 혼란 우려도",
-     "press": "ngonews.kr",
-     "publishedAt": "2026-11-17T23:58:00.000Z",
-     "link": "https://www.ngonews.kr/news/articleView.html?idxno=243478"
+     "title": "‘수능 中 재난문자로 시험방해시 시간 더주는 방안 검토’ 李 지시에....",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-18T00:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004683396?sid=102"
     },
     {
-     "title": "이 대통령 \"수능 중 재난문자에 방해받으면 시험시간 연장 검토\"",
+     "title": "수능 중 재난문자 '불시 발송' 검토…휴대전화 부정행위 잡는다",
      "press": "kado.net",
-     "publishedAt": "2026-11-17T23:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000211937?sid=100"
+     "publishedAt": "2026-11-18T00:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000211940?sid=102"
     },
     {
-     "title": "李 대통령 “재난문자로 수험생 방해 받으면 시험시간 연장 검토”",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-17T23:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005765283?sid=102"
+     "title": "‘시험 중 재난문자, 다른 수험생 피해’ 우려... 李 “걱정말라, 2~3분...",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-18T00:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004010267?sid=100"
     }
    ]
   },
   {
-   "keyword": "노유민 가슴 통증",
+   "keyword": "앤트로픽 상장",
    "sources": [
-    "daum"
+    "google"
    ],
-   "articles90": 12,
-   "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-17T22:37:00.000Z",
+   "articles90": 11,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-17T22:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "노유민, 새벽에 응급실 실려갔다...갑작스러운 가슴 통증",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-17T23:34:00.000Z",
-     "link": "https://www.insight.co.kr/news/582481"
+     "title": "\"앤트로픽 공모가 78달러 웃돌 듯\"…AI 투자 열기 되살릴까",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-18T00:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000927294?sid=104"
     },
     {
-     "title": "노유민, 가슴 통증에 새벽 응급실行… 아내 \"결과는 월요일에\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-17T23:26:00.000Z",
-     "link": "https://m.entertain.naver.com/article/469/0000966206"
+     "title": "앤트로픽 IPO 앞두고 비트코인 6만3000달러대 추락",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-17T23:58:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=884459"
     },
     {
-     "title": "NRG 노유민, 갑작스러운 가슴 통증에 응급실行…검사 결과 대기",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-17T23:24:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261118000111"
+     "title": "앤트로픽 신속편입?…NH아문디운용, ETF 마케팅 우려",
+     "press": "news.dealsitetv.com",
+     "publishedAt": "2026-11-17T23:52:00.000Z",
+     "link": "https://news.dealsitetv.com/articles/178770"
     }
    ]
   },
@@ -145,7 +144,7 @@
     "nate"
    ],
    "articles90": 9,
-   "recent20": 4,
+   "recent20": 2,
    "press": 9,
    "firstArticleAt": "2026-11-17T22:50:00.000Z",
    "exclusive": false,
@@ -176,13 +175,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-17T22:38:00.000Z",
+   "articles90": 9,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-17T22:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[수능 D-1] 강화된 부정행위 점검에 제주 감독 교사들 \"현장 보완 필요\"",
+     "press": "newsjeju.net",
+     "publishedAt": "2026-11-18T00:12:00.000Z",
+     "link": "https://www.newsjeju.net/news/articleView.html?idxno=428579"
+    },
     {
      "title": "송파구, 수능일 주요 상권 야간 순찰…3개 권역 집중 점검",
      "press": "gukjenews.com",
@@ -194,27 +199,60 @@
      "press": "yna.co.kr",
      "publishedAt": "2026-11-17T23:42:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016447930?sid=102"
-    },
-    {
-     "title": "수능 가채점부터 정시 1대1 상담까지…서대문구, 수험생 맞춤형 진학 지...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-17T23:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002724860?sid=102"
     }
    ]
   },
   {
-   "keyword": "정호연 007 본드걸 후보 거론",
+   "keyword": "노유민, 가슴 통증으로 응급실행",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-17T22:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "NRG 노유민, 가슴 통증으로 응급실行...\"별일 아니길\"",
+     "press": "starnewsk.com",
+     "publishedAt": "2026-11-18T00:08:00.000Z",
+     "link": "http://www.starnewsk.com/news/articleView.html?idxno=61117"
+    },
+    {
+     "title": "노유민, 가슴 통증에 새벽 응급실行… 아내 \"결과는 월요일에\"",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-17T23:26:00.000Z",
+     "link": "https://m.entertain.naver.com/article/469/0000966206"
+    },
+    {
+     "title": "NRG 노유민, 갑작스러운 가슴 통증에 응급실行…검사 결과 대기",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-17T23:24:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261118000111"
+    }
+   ]
+  },
+  {
+   "keyword": "정호연 본드걸 후보 거론",
    "sources": [
     "daum"
    ],
-   "articles90": 6,
+   "articles90": 7,
    "recent20": 1,
-   "press": 6,
+   "press": 7,
    "firstArticleAt": "2026-11-17T22:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'본드걸 후보 거론' 정호연, 아웃백 겨울 시즌 캠페인 모델 발탁",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-18T00:12:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=782729"
+    },
     {
      "title": "정호연, 韓 최초 '본드걸' 후보 거론될 만…대체 불가한 분위기[셀럽샷...",
      "press": "celuvmedia.com",
@@ -226,12 +264,6 @@
      "press": "kado.net",
      "publishedAt": "2026-11-17T23:39:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/654/0000211936?sid=104"
-    },
-    {
-     "title": "정호연, 차기 ‘007’ 본드걸 거론될 만…깊게 훅 파인 파격 드레스 자...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-17T23:25:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001188480"
     }
    ]
   },
@@ -241,7 +273,7 @@
     "nate"
    ],
    "articles90": 5,
-   "recent20": 3,
+   "recent20": 2,
    "press": 5,
    "firstArticleAt": "2026-11-17T23:11:00.000Z",
    "exclusive": false,
@@ -273,7 +305,7 @@
     "google"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-17T23:06:00.000Z",
    "exclusive": false,
@@ -296,70 +328,6 @@
      "press": "ekn.kr",
      "publishedAt": "2026-11-17T23:24:00.000Z",
      "link": "https://www.ekn.kr/web/view.php?key=20261118029471110"
-    }
-   ]
-  },
-  {
-   "keyword": "장나라 김혜윤 출연 기도",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-17T22:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "장나라, 김혜윤 출연 기도까지 했다…“엄마 아빠한테 자랑해야겠다”...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-17T23:18:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001147599"
-    },
-    {
-     "title": "장나라, 남지현 하차 후 김혜윤 캐스팅 간절히 원했다…\"물 떠 놓고 기도...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-17T23:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000784965"
-    },
-    {
-     "title": "장나라, 김혜윤 출연 위해 기도 제안…'굿파트너2' 호흡",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-17T22:56:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=625889"
-    }
-   ]
-  },
-  {
-   "keyword": "south korea",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 2,
-   "firstArticleAt": "2026-11-17T23:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "S. Korea issues cybersecurity advisory after flaws discovered in Java pla...",
-     "press": "en.yna.co.kr",
-     "publishedAt": "2026-11-17T23:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016447935?sid=104"
-    },
-    {
-     "title": "South Korean Won Closes at 1,338.2 per Dollar, Near 2026 Low",
-     "press": "econotimes.com",
-     "publishedAt": "2026-11-17T23:16:00.000Z",
-     "link": "https://econotimes.com/South-Korean-Won-Closes-at-1-338-2-per-Dollar-Near-2026-Low-1778569"
-    },
-    {
-     "title": "South Korean Study Models Negative Costs for Brine-Based SF6 Destruction",
-     "press": "econotimes.com",
-     "publishedAt": "2026-11-17T23:12:00.000Z",
-     "link": "https://econotimes.com/South-Korean-Study-Models-Negative-Costs-for-Brine-Based-SF6-Destruction-1778567"
     }
    ]
   },
@@ -389,20 +357,38 @@
      "link": "https://n.news.naver.com/mnews/article/003/0014328750?sid=102"
     },
     {
-     "title": "인사청문회 준비 사무실 출근하는 이용철 후보자",
+     "title": "출근하는 이용철 후보자",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-17T23:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016447861?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/001/0016447860?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 990,
-  "matched": 562,
-  "avgLeadMin": 847,
+  "flagged": 994,
+  "matched": 565,
+  "avgLeadMin": 843,
   "recent": [
+   {
+    "keyword": "미국 NSA 통신망 마비",
+    "hitKeyword": "미국 기밀 통신망 마비",
+    "hitAt": "2026-11-18T09:00:00+09:00",
+    "leadMin": 78
+   },
+   {
+    "keyword": "태안 7명 어선 실종",
+    "hitKeyword": "태안 해상 어선 7명 실종",
+    "hitAt": "2026-11-18T09:00:00+09:00",
+    "leadMin": 27
+   },
+   {
+    "keyword": "젠슨 황 복귀 없다",
+    "hitKeyword": "젠슨 황 복귀 의사",
+    "hitAt": "2026-11-18T09:00:00+09:00",
+    "leadMin": 17
+   },
    {
     "keyword": "수출",
     "hitKeyword": "수출 1조달러 눈앞",
@@ -444,24 +430,6 @@
     "hitKeyword": "수능 예비소집일 한파",
     "hitAt": "2026-11-18T07:30:00+09:00",
     "leadMin": 48
-   },
-   {
-    "keyword": "AI 세무사 부정행위 사과",
-    "hitKeyword": "AI 부정행위",
-    "hitAt": "2026-11-18T07:30:00+09:00",
-    "leadMin": 28
-   },
-   {
-    "keyword": "젠슨 황, 이사회 요청 시 복귀",
-    "hitKeyword": "젠슨 황 CEO 복귀 의사",
-    "hitAt": "2026-11-18T07:30:00+09:00",
-    "leadMin": 18
-   },
-   {
-    "keyword": "엔비디아 3분기 실적",
-    "hitKeyword": "미 증권거래소 엔비디아 조사",
-    "hitAt": "2026-11-18T07:30:00+09:00",
-    "leadMin": 8
    }
   ]
  }
