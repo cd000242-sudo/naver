@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T02:26:03.192Z",
+ "builtAt": "2026-11-18T02:36:06.658Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,132 +11,132 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "KDB생명 매각 무산",
+   "keyword": "고액 체납자 공개",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 43,
-   "recent20": 5,
-   "press": 40,
-   "firstArticleAt": "2026-11-18T00:58:00.000Z",
+   "articles90": 91,
+   "recent20": 15,
+   "press": 54,
+   "firstArticleAt": "2026-11-18T01:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "경남도, 고액·상습체납자 602명 명단 공개",
+     "press": "newsgn.com",
+     "publishedAt": "2026-11-18T02:34:00.000Z",
+     "link": "https://www.newsgn.com/news/articleView.html?idxno=586368"
+    },
+    {
+     "title": "충북 고액·상습 체납자 427명 명단공개…미납액 217억원",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-18T02:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016448758?sid=102"
+    },
+    {
+     "title": "경남도 고액·상습 체납자 602명 명단 공개",
+     "press": "busan.com",
+     "publishedAt": "2026-11-18T02:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001407739?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "KDB생명 매각 무산",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 38,
+   "recent20": 4,
+   "press": 36,
+   "firstArticleAt": "2026-11-18T01:08:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "KDB생명 새 주인 찾기 또 실패…자본건전성 부담에 매각 '원점'",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-18T02:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009295895?sid=101"
+    },
+    {
+     "title": "[Invest]한투의 '무리수'로 끝난 KDB생명 인수전…후순위채 투자 요구에...",
+     "press": "investchosun.com",
+     "publishedAt": "2026-11-18T02:26:00.000Z",
+     "link": "https://www.investchosun.com/site/data/html_dir/2026/11/18/2026111880080.html"
+    },
     {
      "title": "한국금융지주, KDB생명 인수 불발…\"보험업 진출 검토 계속 한다\"[표류하...",
      "press": "etoday.co.kr",
      "publishedAt": "2026-11-18T02:22:00.000Z",
      "link": "https://www.etoday.co.kr/news/view/2649718"
-    },
-    {
-     "title": "산은·한투, KDB생명 인수 협상 결렬",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-18T02:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002725069?sid=101"
-    },
-    {
-     "title": "한국산업은행, 한국투자금융지주와 KDB생명 매각협상 종료",
-     "press": "insnews.co.kr",
-     "publishedAt": "2026-11-18T02:16:00.000Z",
-     "link": "https://www.insnews.co.kr/news/articleView.html?idxno=93907"
     }
    ]
   },
   {
-   "keyword": "수능 AI 부정대책 논의",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 44,
-   "recent20": 7,
-   "press": 31,
-   "firstArticleAt": "2026-11-18T00:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "당정, AI 기업에 '수능 부정행위 의심 자료' 제출 의무화 추진…\"빅테크...",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-18T02:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000521269?sid=100"
-    },
-    {
-     "title": "'수능 D-1' 당정 \"부정행위 원스트라이크 아웃\"…野 \"무책임\" 맹공",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-18T02:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000927361?sid=100"
-    },
-    {
-     "title": "당정, 수능 AI 부정행위 사전·사후 대책 논의…\"무관용 원칙 적용\"",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-18T02:16:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261118500164"
-    }
-   ]
-  },
-  {
-   "keyword": "육사 충청권 이전",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 32,
-   "recent20": 4,
-   "press": 30,
-   "firstArticleAt": "2026-11-18T00:58:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "당정, 육사 충청권 이전 합의...국군사관학교 신입생 선발 2029년부터",
-     "press": "goodmorningcc.com",
-     "publishedAt": "2026-11-18T02:22:00.000Z",
-     "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=456075"
-    },
-    {
-     "title": "당정 \"육사, 충청권으로 이전…해사·공사는 기존 위치 활용\"",
-     "press": "chungnamilbo.co.kr",
-     "publishedAt": "2026-11-18T02:20:00.000Z",
-     "link": "http://www.chungnamilbo.co.kr/news/articleView.html?idxno=921456"
-    },
-    {
-     "title": "당정 \"육사 충청권 이전 검토…사관학교 새 교육체계 2029년부터\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-18T02:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000651789?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "음료",
+   "keyword": "수능 AI 부정행위 대책 논의",
    "sources": [
     "signal.bz",
-    "google"
+    "nate"
    ],
-   "articles90": 17,
-   "recent20": 7,
-   "press": 15,
-   "firstArticleAt": "2026-11-18T01:12:00.000Z",
+   "articles90": 42,
+   "recent20": 5,
+   "press": 30,
+   "firstArticleAt": "2026-11-18T01:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "롯데칠성음료, 2026년산 햇와인 '조르쥐 뒤뵈프 보졸레 누보' 3종 출시",
-     "press": "popcornnews.net",
-     "publishedAt": "2026-11-18T02:24:00.000Z",
-     "link": "http://www.popcornnews.net/news/articleView.html?idxno=140529"
+     "title": "시험장인가 범인색출장인가…불안만 더 키운 수능 대책",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-18T02:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002725107?sid=102"
     },
     {
-     "title": "롯데칠성음료, 2026년산 햇와인 '보졸레 누보' 3종 선보인다",
-     "press": "nextdaily.co.kr",
-     "publishedAt": "2026-11-18T02:24:00.000Z",
-     "link": "https://www.nextdaily.co.kr/news/articleView.html?idxno=255049"
+     "title": "[포토] '수능 AI 부정행위 대책 당정' 논의하는 김민석 대표와 한성숙 총...",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-18T02:34:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261118010006965"
     },
     {
-     "title": "텐퍼센트커피, 겨울 시즌 차 음료 3종 출시… \"전국 1200여 개 매장 도입...",
-     "press": "newsdream.kr",
-     "publishedAt": "2026-11-18T02:20:00.000Z",
-     "link": "http://www.newsdream.kr/news/articleView.html?idxno=122445"
+     "title": "수능 D-1…與 “부정방지 대책 강화” 野 “신고포상 1억 기막혀”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-18T02:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002725095?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "최태원 회장 기조연설",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 28,
+   "recent20": 4,
+   "press": 25,
+   "firstArticleAt": "2026-11-18T01:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "최태원 \"사회문제 해결에 경제적 보상해야\"…새 성장모델 제안",
+     "press": "sisafocus.co.kr",
+     "publishedAt": "2026-11-18T02:28:00.000Z",
+     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367746"
+    },
+    {
+     "title": "기조연설 하는 최태원 대한상의 회장",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-18T02:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016448731?sid=101"
+    },
+    {
+     "title": "최태원 \"사회문제 해결한 만큼 현금 보상해야\"…세계행정학회서 제언",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-18T02:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001076104?sid=101"
     }
    ]
   },
@@ -145,72 +145,123 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 2,
-   "press": 14,
+   "articles90": 17,
+   "recent20": 4,
+   "press": 17,
    "firstArticleAt": "2026-11-18T01:16:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "노란우산 개인정보 20만명 유출...가입자 10명 중 1명꼴",
-     "press": "tjb.co.kr",
-     "publishedAt": "2026-11-18T02:18:00.000Z",
-     "link": "https://www.tjb.co.kr/news05/bodo/view/id/106221"
+     "title": "노란우산서 20만5천명 개인정보 유출",
+     "press": "viewsnnews.com",
+     "publishedAt": "2026-11-18T02:32:00.000Z",
+     "link": "https://www.viewsnnews.com/article?q=239782"
     },
     {
-     "title": "충남도, 지역화폐 개인정보 유출 2차 피해 차단",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-18T02:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000553105?sid=102"
+     "title": "노란우산 개인정보 유출 20만명 규모… 전체 가입자 10% 수준",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-18T02:32:00.000Z",
+     "link": "https://www.viva100.com/article/20261118500643"
     },
     {
-     "title": "주소·연락처 등 \"20만 5천 명 규모\"…노란우산도 털렸다",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-18T01:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001403873?sid=101"
+     "title": "중소기업중앙회 노란우산 해킹 사고…가입자 20만5000명 개인정보 유출...",
+     "press": "delighti.co.kr",
+     "publishedAt": "2026-11-18T02:30:00.000Z",
+     "link": "https://www.delighti.co.kr/news/articleView.html?idxno=125160"
     }
    ]
   },
   {
-   "keyword": "부산 체납자 명단 공개",
+   "keyword": "김종철 경찰청장 인사청문회",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-18T01:00:00.000Z",
+   "articles90": 46,
+   "recent20": 41,
+   "press": 11,
+   "firstArticleAt": "2026-11-18T02:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "부산 고액·상습 체납자 860명 공개…체납액 529억",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-18T02:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001076083?sid=102"
+     "title": "[포토] 인사청문회 출석하는 김종철 후보자",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-18T02:34:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3449738"
     },
     {
-     "title": "부산 지방세 체납 1위 금양 류광지 회장…30억8천만원 안 냈다(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-18T02:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016448525?sid=102"
+     "title": "수능 하루 전 청문회 선 김종철 \"부정행위용 장비 유통까지 수사\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-18T02:34:00.000Z",
+     "link": "https://www.ajunews.com/view/20261118111611730"
     },
     {
-     "title": "울산시, 고액·상습 체납자 194명 공개…최고액 4.9억",
+     "title": "김종철 경찰청장 후보자 인사청문회",
      "press": "newsis.com",
-     "publishedAt": "2026-11-18T01:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014329372?sid=102"
+     "publishedAt": "2026-11-18T02:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014329658?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "K리그 이달의 수상자 발표",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-18T01:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[프로축구] 바 루아, 광주FC 최초 K리그 이달의 선수 수상",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-18T01:44:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261118000498"
+    },
+    {
+     "title": "[오피셜] 수원삼성 김민우, 10월 K리그 '이달의 딜리버리' 수상",
+     "press": "interfootball.co.kr",
+     "publishedAt": "2026-11-18T01:38:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/413/0000226762"
+    },
+    {
+     "title": "바 루아, 광주FC 최초 K리그 이달의 선수…10월 3골 5도움 맹활약",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-18T01:36:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16279650"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1031,
-  "matched": 573,
-  "avgLeadMin": 832,
+  "flagged": 1036,
+  "matched": 576,
+  "avgLeadMin": 829,
   "recent": [
+   {
+    "keyword": "사고",
+    "hitKeyword": "이진우 형사고발",
+    "hitAt": "2026-11-18T11:30:00+09:00",
+    "leadMin": 238
+   },
+   {
+    "keyword": "재난문자",
+    "hitKeyword": "수능 위급재난문자 발송",
+    "hitAt": "2026-11-18T11:30:00+09:00",
+    "leadMin": 177
+   },
+   {
+    "keyword": "장나라 김혜윤 출연 기도",
+    "hitKeyword": "김혜윤 살롱드립",
+    "hitAt": "2026-11-18T11:30:00+09:00",
+    "leadMin": 147
+   },
    {
     "keyword": "핑클",
     "hitKeyword": "핑클 완전체 회동",
@@ -252,24 +303,6 @@
     "hitKeyword": "자바 보안 취약점",
     "hitAt": "2026-11-18T09:30:00+09:00",
     "leadMin": 108
-   },
-   {
-    "keyword": "자바 보안 취약점",
-    "hitKeyword": "자바 보안 취약점",
-    "hitAt": "2026-11-18T09:30:00+09:00",
-    "leadMin": 57
-   },
-   {
-    "keyword": "미국 NSA 통신망 마비",
-    "hitKeyword": "미국 기밀 통신망 마비",
-    "hitAt": "2026-11-18T09:00:00+09:00",
-    "leadMin": 78
-   },
-   {
-    "keyword": "태안 7명 어선 실종",
-    "hitKeyword": "태안 해상 어선 7명 실종",
-    "hitAt": "2026-11-18T09:00:00+09:00",
-    "leadMin": 27
    }
   ]
  }
