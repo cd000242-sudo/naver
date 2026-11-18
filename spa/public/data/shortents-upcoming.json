@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T19:59:50.783Z",
+ "builtAt": "2026-11-18T20:09:54.505Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,38 +8,135 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "승리",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-18T19:05:00.000Z",
+   "articles90": 6,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-18T19:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "연어 잡던 소녀, 공화 텃밭 잡았다… 알래스카 상원도 민주당 승리[지금...",
-     "press": "donga.com",
-     "publishedAt": "2026-11-18T19:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003763519?sid=104"
+     "title": "민주 제프리스, 첫 흑인 하원의장 확정…펠톨라 승리로 민주 상원 56석,...",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-18T20:06:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261119010007299"
     },
     {
-     "title": "美민주, 알래스카 승리로 상원 56석…68년만에 최다탈환",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-18T19:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000544581?sid=101"
+     "title": "승리, 만삭 20대 아내와 공항 포착…\"여기까지 찍어라\" 제지",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-18T20:05:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005443256"
     },
     {
-     "title": "성베드로 대성당 봉헌 400주년…교황 “평화 선포하는 한 전쟁은 승리 ...",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-18T19:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012296866?sid=104"
+     "title": "성베드로 대성당 봉헌 400주년...교황 \"전쟁 승리 못해\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-18T19:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002434890?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "수능 부정행위 TF 가동",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 4,
+   "press": 4,
+   "firstArticleAt": "2026-11-18T19:59:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "AI커닝 끝까지 잡는다… 수능 직후 범정부 TF·1억 포상금 즉시 적용",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-18T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003700895?sid=100"
+    },
+    {
+     "title": "역대 대통령 수능 응원 메시지는…올해는 명운 건 '공정'",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-18T20:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005844730?sid=100"
+    },
+    {
+     "title": "오늘 수능…AI 커닝 신고, 경찰·시험감독관 공동 대응[2027 수능]",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-18T20:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014331424?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "추경호 1심 무죄",
+   "sources": [
+    "nate",
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-18T19:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘계엄 해제 표결 방해’ 추경호 1심 무죄",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-18T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003700892?sid=102"
+    },
+    {
+     "title": "[사설] 추경호 시장 1심 무죄, 대구 시민도 대구시정도 한시름 덜었다",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-18T20:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001041155?sid=110"
+    },
+    {
+     "title": "'계엄 해제 방해' 추경호 1심 무죄 이유는… \"국힘 제외해도 가결 가능...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-18T19:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000966445?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "한화",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-18T19:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한화시스템, 美에 ‘드론 탐지’ 레이다 수출… 73조 시장 뚫는다",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-18T20:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003700970?sid=101"
+    },
+    {
+     "title": "'한화 최초' 27살 이 선수는 신임감독 마음을 훔칠 수 있나…\"2루수 GG 수...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-18T19:41:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/117/0004126258"
+    },
+    {
+     "title": "한화오션 건조 평택함 진수…2027년 12월 해군 인도",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-18T19:22:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=407430"
     }
    ]
   }
@@ -47,8 +144,8 @@
  "hitRate": {
   "days": 7,
   "flagged": 1073,
-  "matched": 594,
-  "avgLeadMin": 890,
+  "matched": 592,
+  "avgLeadMin": 892,
   "recent": [
    {
     "keyword": "에이엘로봇",
