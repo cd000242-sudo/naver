@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T22:50:52.262Z",
+ "builtAt": "2026-11-18T23:00:56.062Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "뉴욕증시 혼조",
    "sources": [
     "daum"
    ],
-   "articles90": 39,
+   "articles90": 41,
    "recent20": 7,
-   "press": 38,
-   "firstArticleAt": "2026-11-18T21:24:00.000Z",
+   "press": 40,
+   "firstArticleAt": "2026-11-18T21:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[글로벗 마켓시황] 금리 인상 경계감에 투자 위축…혼조세 마감",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-18T22:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404125?sid=101"
+     "title": "뉴욕증시, 앤트로픽 IPO 앞두고 혼조···국제유가 3% 급락에 에너지주...",
+     "press": "smartbizn.com",
+     "publishedAt": "2026-11-18T22:54:00.000Z",
+     "link": "https://www.smartbizn.com/news/articleView.html?idxno=159901"
     },
     {
-     "title": "뉴욕증시 희비 엇갈려…나스닥 0.42% 상승, 다우 561포인트 하락",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-18T22:46:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=847651"
+     "title": "엔비디아 깜짝 실적에도...미국증시 '혼조', 다우 1.11% '뚝'",
+     "press": "choicenews.co.kr",
+     "publishedAt": "2026-11-18T22:54:00.000Z",
+     "link": "http://www.choicenews.co.kr/news/articleView.html?idxno=173308"
     },
     {
-     "title": "뉴욕증시 혼조 마감...엔비디아 호실적에도 다우 1.11%↓·나스닥 0.42%↑",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-18T22:44:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=73261"
+     "title": "[마켓무버]뉴욕증시 혼조 마감…엔비디아 호실적에도 AI 투심 제한",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-18T22:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006412205?sid=101"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 36,
-   "recent20": 9,
-   "press": 33,
+   "articles90": 38,
+   "recent20": 6,
+   "press": 35,
    "firstArticleAt": "2026-11-18T21:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "트럼프·시진핑·푸틴, 오늘 선전서 첫 3자 정상회담 … 핵군축 논의 주...",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-18T22:56:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/19/2026111950024.html"
+    },
+    {
+     "title": "이재명·푸틴 첫 회동…한러 관계·한반도 정세 논의",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-18T22:52:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626230"
+    },
+    {
      "title": "트럼프, 푸틴 따로 만날 듯…우크라이나 종전 해법 나올까",
      "press": "hankookilbo.com",
      "publishedAt": "2026-11-18T22:49:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/469/0000966465?sid=104"
-    },
-    {
-     "title": "李대통령, 푸틴과 첫 회동…靑 \"북한 핵 문제도 다뤄\"",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-18T22:48:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/325744/?sc=Naver"
-    },
-    {
-     "title": "李대통령, 푸틴과 취임 후 첫 회동…북한 핵 문제도 다뤄져",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-18T22:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000544624?sid=101"
     }
    ]
   },
@@ -80,12 +80,18 @@
     "signal.bz"
    ],
    "articles90": 27,
-   "recent20": 6,
-   "press": 25,
-   "firstArticleAt": "2026-11-18T21:28:00.000Z",
+   "recent20": 5,
+   "press": 24,
+   "firstArticleAt": "2026-11-18T21:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "美연준, 10월 FOMC서 추가 금리인상 공감대…일부는 ‘빅스텝’ 가능성...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-18T22:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002725464?sid=104"
+    },
     {
      "title": "“실적 좋아도 소용없네”…엔비디아 급락에 연준 금리 인상론도 ‘고개...",
      "press": "biz.heraldcorp.com",
@@ -97,12 +103,6 @@
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-18T22:48:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/055/0001404125?sid=101"
-    },
-    {
-     "title": "\"물가 데이터 나빠지면 '빅스텝'도\"…10월 FOMC, 추가 인상 공감대 확인",
-     "press": "newsroad.co.kr",
-     "publishedAt": "2026-11-18T22:46:00.000Z",
-     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68023"
     }
    ]
   },
@@ -111,51 +111,78 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 22,
+   "articles90": 25,
    "recent20": 5,
-   "press": 19,
+   "press": 21,
    "firstArticleAt": "2026-11-18T21:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "제주항공, 한·중 FTA 추가 타결 수혜…목표가↑-하나",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-18T22:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006412203?sid=101"
+     "title": "제주항공, 한·중 FTA 타결에 日 '스시자로' 수혜까지…\"증익 가시성 높...",
+     "press": "newsprime.co.kr",
+     "publishedAt": "2026-11-18T22:58:00.000Z",
+     "link": "http://www.newsprime.co.kr/news/article.html?no=755563"
     },
     {
-     "title": "[클릭 e종목]\"한중 FTA 수혜 기대...제주항공, 목표주가 상향\"",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-18T22:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005844784?sid=101"
+     "title": "한국에 푹 빠진 중국 MZ 여성들…FTA 타결에 뷰티株 '들썩' [분석+]",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-18T22:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005355604?sid=101"
     },
     {
-     "title": "한중 FTA로 K콘텐츠 ‘최혜국 대우’…K팝 공연은 추가 협의",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-18T22:40:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611190002"
+     "title": "한중 FTA 후속 타결에 K-콘텐츠 '청신호'…드라마·예능도 공동제작 길 ...",
+     "press": "dailysportshankook.co.kr",
+     "publishedAt": "2026-11-18T22:56:00.000Z",
+     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435679"
     }
    ]
   },
   {
-   "keyword": "6년 만의 수능 한파 예상",
+   "keyword": "김정은 함경남도 시찰",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 18,
-   "recent20": 5,
-   "press": 15,
-   "firstArticleAt": "2026-11-18T21:23:00.000Z",
+   "articles90": 26,
+   "recent20": 3,
+   "press": 13,
+   "firstArticleAt": "2026-11-18T22:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "6년 만의 '수능 한파'..광주전남 비·눈",
-     "press": "kjmbc.co.kr",
-     "publishedAt": "2026-11-18T22:45:00.000Z",
-     "link": "https://kjmbc.co.kr/NewsArticle/1546389"
+     "title": "김정은, 접경지에서 다시 남쪽으로 이동…해군대학 등 시찰",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-18T22:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004683799?sid=100"
     },
+    {
+     "title": "김정은, 함경남도 리원군·락원군 지역 시찰",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-18T22:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016450605?sid=100"
+    },
+    {
+     "title": "[속보] 김정은, 북미회담 주목 속 해군대학 등 함경남도 지역 시찰",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-18T22:42:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000084293"
+    }
+   ]
+  },
+  {
+   "keyword": "수능 한파 아침 영하 -4도",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 14,
+   "recent20": 1,
+   "press": 13,
+   "firstArticleAt": "2026-11-18T21:31:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
     {
      "title": "6년 만에 찾아온 수능 한파…서울 영하권, 제주·남부엔 눈 [오늘날씨]",
      "press": "segye.com",
@@ -167,40 +194,12 @@
      "press": "kado.net",
      "publishedAt": "2026-11-18T22:40:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/654/0000212168?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "김정은 함경남도 시찰",
-   "sources": [
-    "signal.bz",
-    "nate",
-    "daum"
-   ],
-   "articles90": 26,
-   "recent20": 4,
-   "press": 12,
-   "firstArticleAt": "2026-11-18T22:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김정은, 함경남도 리원군·락원군 지역 시찰",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-18T22:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016450604?sid=100"
     },
     {
-     "title": "[속보] 김정은, 북미회담 주목 속 해군대학 등 함경남도 지역 시찰",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-18T22:42:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000084293"
-    },
-    {
-     "title": "‘북미회담 여부 주목’ 김정은, 김정숙 해군대학 등 함경남도 현지지도",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-18T22:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002725456?sid=100"
+     "title": "[날씨]6년 만의 '수능 한파'…찬바람도 꺾지 못할 꿈",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-18T22:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005844777?sid=103"
     }
    ]
   },
@@ -209,13 +208,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 9,
+   "articles90": 10,
+   "recent20": 2,
+   "press": 10,
    "firstArticleAt": "2026-11-18T21:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“어디서 나오셨냐” 승리, 애처가 모드 발동…‘만삭’ 20대 아내와 동...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-18T23:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001281965"
+    },
     {
      "title": "승리, 만삭 아내와 공항 포착…취재진에 “여기까지 찍으시죠”",
      "press": "mk.co.kr",
@@ -227,44 +232,38 @@
      "press": "enews.imbc.com",
      "publishedAt": "2026-11-18T22:37:00.000Z",
      "link": "https://m.entertain.naver.com/article/408/0000328417"
-    },
-    {
-     "title": "'예비아빠' 승리, 만삭 아내와 입국…취재진에 \"여기까지 찍으시죠\"",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-18T22:37:00.000Z",
-     "link": "https://m.entertain.naver.com/article/417/0001164850"
     }
    ]
   },
   {
-   "keyword": "조국 일본 입국 거부 전과",
+   "keyword": "최민희 징계와 김민석 갈등",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-18T21:36:00.000Z",
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-18T21:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"조국 日입국 거부, 독도 방문과 무관...전과 이력 때문\"",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-18T22:42:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2650065"
+     "title": "직접 나선 정청래 \"최민희 징계 강력 반대\"…추미애도 '김민석 직격'",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-18T22:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000651962?sid=004"
     },
     {
-     "title": "日, 조국 입국 거부관련 “전과가 이유…독도 방문이력 때문 아냐”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-18T22:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002725442?sid=100"
+     "title": "정청래 \"최민희 징계 강력 반대\"·추미애 \"당대표 문제부터 엄중판단\"…...",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-18T22:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001978863?sid=100"
     },
     {
-     "title": "\"조국 전과로 막힌 일본행, 독도 방문이 원인?\"...한일 외교 갈등 심화",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-18T21:54:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886311"
+     "title": "김유정 \"최민희 징계 없다면 김민석 대표 위태로울 것\"[한판승부]",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-18T22:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004211387?sid=100"
     }
    ]
   },
@@ -274,7 +273,7 @@
     "nate"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-18T22:07:00.000Z",
    "exclusive": false,
@@ -297,134 +296,6 @@
      "press": "sportsseoul.com",
      "publishedAt": "2026-11-18T22:07:00.000Z",
      "link": "https://m.entertain.naver.com/article/468/0001281948"
-    }
-   ]
-  },
-  {
-   "keyword": "오늘의 운세",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-18T21:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오늘의 운세] 2026년 11월 19일 목요일 띠별 운세… 용띠 '대길', 토끼띠...",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-18T22:18:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3083318"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 19일 (목) 띠별운세 '수능 날, 모두를 응원하...",
-     "press": "dailypop.kr",
-     "publishedAt": "2026-11-18T21:40:00.000Z",
-     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103985"
-    },
-    {
-     "title": "[오늘의 운세] 19일 목요일 나의 운세는?",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-18T21:26:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1193281"
-    }
-   ]
-  },
-  {
-   "keyword": "kbo 리그",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-18T21:41:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "2루는 물론 1루에 외야까지 돌아다녔다…하지만 이젠 아니다! KBO 3번째 ...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-18T22:21:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/477/0000639814"
-    },
-    {
-     "title": "[2027 프로야구 스토브리그] 본격적으로 논공행상 시작...김도영 일구회...",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-18T21:46:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101546"
-    },
-    {
-     "title": "‘이틀간 173억 계약 터졌다’ 역대급 스토브리그 시작인가, 변수는 12월...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-18T21:41:00.000Z",
-     "link": "https://m.sports.naver.com/wbaseball/article/109/0005642291"
-    }
-   ]
-  },
-  {
-   "keyword": "수능 시간표",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-18T21:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"출근시간 오전 10시 이후 조정·지하철 증편\"…수능 시간표 보니",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-18T22:22:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3756487"
-    },
-    {
-     "title": "2027학년도 수능 시간표…오전 8시 10분 입실·오후 5시 45분 종료",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-18T22:16:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=782962"
-    },
-    {
-     "title": "2027학년도 수능 시간표·끝나는 시간 총정리",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-18T21:30:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1175466"
-    }
-   ]
-  },
-  {
-   "keyword": "야구",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-18T21:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[2027 프로야구 스토브리그] 본격적으로 논공행상 시작...김도영 일구회...",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-18T21:46:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101546"
-    },
-    {
-     "title": "[연예인야구대회] 알바트로스, 크루세이더스 꺾고 우승…20회 대회 대미...",
-     "press": "stardailynews.co.kr",
-     "publishedAt": "2026-11-18T21:28:00.000Z",
-     "link": "https://www.stardailynews.co.kr/news/articleView.html?idxno=602582"
-    },
-    {
-     "title": "한일 야구 레전드 한자리에…'한일 드림 플레이어즈 게임 2026'",
-     "press": "stardailynews.co.kr",
-     "publishedAt": "2026-11-18T21:28:00.000Z",
-     "link": "https://www.stardailynews.co.kr/news/articleView.html?idxno=602581"
     }
    ]
   },
@@ -463,7 +334,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1091,
+  "flagged": 1092,
   "matched": 599,
   "avgLeadMin": 865,
   "recent": [
