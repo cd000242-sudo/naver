@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T22:10:37.929Z",
+ "builtAt": "2026-11-18T22:20:41.414Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,66 +11,98 @@
  "measured": 29,
  "candidates": [
   {
-   "keyword": "연준 추가 금리 인상",
+   "keyword": "뉴욕증시 혼조 마감",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 25,
-   "recent20": 7,
-   "press": 22,
-   "firstArticleAt": "2026-11-18T20:42:00.000Z",
+   "articles90": 41,
+   "recent20": 6,
+   "press": 34,
+   "firstArticleAt": "2026-11-18T21:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "연준 위원 거의 전원 “수개월 내 추가 금리 인상 필요”…12월 빅스텝...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-18T22:08:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2650058"
+     "title": "뉴욕증시, 엔비디아 호실적에도 혼조세... S&P500 5일연속 하락",
+     "press": "getnews.co.kr",
+     "publishedAt": "2026-11-18T22:16:00.000Z",
+     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=887678"
     },
     {
-     "title": "美 연준, 추가 금리 인상에 무게…12월 '빅스텝' 가능성도",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-18T22:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000553414?sid=104"
+     "title": "[뉴욕증시 마감] 엔비디아 호실적에도 혼조…다우 1.11%↓",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-18T22:16:00.000Z",
+     "link": "https://www.ajunews.com/view/20261119071131743"
     },
     {
-     "title": "동결했던 10월 美연준, 추가 인상 필요 판단…2명은 '빅스텝' 시사",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-18T22:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009297611?sid=101"
+     "title": "뉴욕증시, 엔비디아 호실적에도 혼조…나스닥 0.4%↑",
+     "press": "womennews.co.kr",
+     "publishedAt": "2026-11-18T22:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/310/0000141860?sid=104"
     }
    ]
   },
   {
-   "keyword": "김정은 함경남도 시찰",
+   "keyword": "연준 추가 금리 인상",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 57,
-   "recent20": 49,
-   "press": 12,
-   "firstArticleAt": "2026-11-18T21:21:00.000Z",
+   "articles90": 27,
+   "recent20": 9,
+   "press": 24,
+   "firstArticleAt": "2026-11-18T20:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김정은, 해군대학 시찰…\"현대전 대응할 지휘관 양성 절박\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-18T22:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009297623?sid=100"
+     "title": "[오늘의 이슈] 연준 '추가 인상' 신호…수능일 증시 10시 개장",
+     "press": "newskr.kr",
+     "publishedAt": "2026-11-18T22:18:00.000Z",
+     "link": "http://www.newskr.kr/news/articleView.html?idxno=108120"
     },
     {
-     "title": "김정은, 동해안에 새로 지은 대형 온실 농장 시찰",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-18T22:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009297617?sid=100"
+     "title": "美증시, 엔비디아 호실적에도 혼조…금리 인상 우려에 다우 1.1%↓",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-18T22:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003156909?sid=104"
     },
     {
-     "title": "김정은, 동해안에 새로 지은 낙원포온실분장 현지지도",
-     "press": "news1.kr",
+     "title": "비트코인·금·미국 증시 동반 급락! 연준 12월 금리 인상 확률 96% 충격",
+     "press": "coinreaders.com",
+     "publishedAt": "2026-11-18T22:10:00.000Z",
+     "link": "http://coinreaders.com/271509"
+    }
+   ]
+  },
+  {
+   "keyword": "수능 한파 아침 영하 -4도",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 21,
+   "recent20": 4,
+   "press": 20,
+   "firstArticleAt": "2026-11-18T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[날씨] 서울 영하권 '수능 한파'… 충청·호남 눈비, 제주 강풍",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-18T22:14:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3083317"
+    },
+    {
+     "title": "'AI 부정행위' 논란에 한파까지‥이 시각 고사장",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-18T22:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001536558?sid=102"
+    },
+    {
+     "title": "[날씨]6년만의 수능 한파...눈·비·바람에 체감온도 '뚝'",
+     "press": "womennews.co.kr",
      "publishedAt": "2026-11-18T22:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009297619?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/310/0000141859?sid=103"
     }
    ]
   },
@@ -79,127 +111,158 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 8,
-   "press": 12,
+   "articles90": 17,
+   "recent20": 9,
+   "press": 15,
    "firstArticleAt": "2026-11-18T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한중 FTA 후속 협상 실질 타결…靑 \"한한령 완화 진전, K팝 공연 가능성...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-18T22:08:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2650059"
+     "title": "靑 \"한중 FTA 타결, 한한령 완화에 진전…K팝 공연 가능성도 열려\"",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-18T22:12:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=782959"
     },
     {
-     "title": "靑 “한중 FTA 서비스·투자 타결, 최대한 앞당겨 서명”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-18T22:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004683793?sid=100"
+     "title": "한중 FTA 서비스·투자 후속협상 타결에…靑 “한한령 관련 어느정도 진...",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-18T22:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006412192?sid=100"
     },
     {
-     "title": "靑 “한중 FTA 서비스·투자 협상 실질 타결…경제 협력 질적 도약 기반...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-18T22:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002725431?sid=100"
+     "title": "세계 2위 中시장, 한중 공동제작 드라마 쿼터 제외",
+     "press": "newskr.kr",
+     "publishedAt": "2026-11-18T22:10:00.000Z",
+     "link": "http://www.newskr.kr/news/articleView.html?idxno=108115"
     }
    ]
   },
   {
-   "keyword": "수능 한파 아침 영하 -4도 주의",
+   "keyword": "김정은 함경남도 시찰",
    "sources": [
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-18T20:46:00.000Z",
+   "articles90": 61,
+   "recent20": 24,
+   "press": 14,
+   "firstArticleAt": "2026-11-18T21:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[날씨]6년만의 수능 한파...눈·비·바람에 체감온도 '뚝'",
-     "press": "womennews.co.kr",
-     "publishedAt": "2026-11-18T22:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/310/0000141859?sid=103"
+     "title": "김정은, APEC 개막일 '비접경지' 함경남도 방문…'북미대화'에는 침묵",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-18T22:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014331545?sid=100"
     },
     {
-     "title": "[수능 D-DAY] 영하권 추위 속 55만명 결전…'AI 커닝' 차단 총력",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-18T22:02:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=315704"
-    },
-    {
-     "title": "[출근길 날씨] 수능일, 영하권 추위…서쪽 눈·비",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-18T21:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012296895?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "재난문자",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-18T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“놀라지 마세요” 수신 거부 불가…수능날 국민재난문자 울린다",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-18T21:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005765902?sid=102"
-    },
-    {
-     "title": "오늘 오전 8시30분 평소보다 큰 재난 문자 울려도 당황하지 마세요",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-18T21:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000966460?sid=102"
-    },
-    {
-     "title": "[2027 수능] 안경 전수검사부터 불시 재난문자까지… 입실 전 '이것'만은...",
+     "title": "김정은, 백두산에서 함경남도로 이동..방중 조짐 안보여",
      "press": "fnnews.com",
-     "publishedAt": "2026-11-18T21:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005606505?sid=102"
+     "publishedAt": "2026-11-18T22:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005606518?sid=100"
+    },
+    {
+     "title": "北 함남 함흥 찾아 해군대학 시찰",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-18T22:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009297624?sid=100"
     }
    ]
   },
   {
    "keyword": "승리, 아내와 공항 포착",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
+   "articles90": 6,
+   "recent20": 3,
+   "press": 6,
    "firstArticleAt": "2026-11-18T21:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "‘예비아빠’ 승리, ♥만삭 아내와 韓 왔다…공항서 포착 “여기까지 찍...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-18T22:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005642296"
+    },
+    {
+     "title": "빅뱅→감옥→아빠 된 승리 양손 캐리어 끌고, 공항 입국…♥만삭 D라인...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-18T22:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001188949"
+    },
+    {
      "title": "승리, 임신한 20대 아내와 동반 입국…취재진 향해 \"여기까지 찍으시죠...",
      "press": "slist.kr",
      "publishedAt": "2026-11-18T22:08:00.000Z",
      "link": "https://www.slist.kr/news/articleView.html?idxno=782956"
+    }
+   ]
+  },
+  {
+   "keyword": "수능 시간표",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-18T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "2027학년도 수능 시간표…오전 8시 10분 입실·오후 5시 45분 종료",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-18T22:16:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=782962"
     },
     {
-     "title": "승리, '임신 8개월' 아내와 동반 입국…D라인 포착",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-18T21:46:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014331511"
+     "title": "2027학년도 수능 시간표·끝나는 시간 총정리",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-18T21:30:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1175466"
     },
     {
-     "title": "승리 아내 첫 포착…내년 1월 출산",
+     "title": "수능 시간표·준비물…입실시간 오전 8시 10분",
      "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-18T21:20:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611190009"
+     "publishedAt": "2026-11-18T21:06:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611190006"
+    }
+   ]
+  },
+  {
+   "keyword": "수능 한파와 눈비",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 3,
+   "press": 3,
+   "firstArticleAt": "2026-11-18T21:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[날씨] 서울 영하권 '수능 한파'… 충청·호남 눈비, 제주 강풍",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-18T22:14:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3083317"
+    },
+    {
+     "title": "[날씨] 수능일 영하권 추위…충청·호남·제주 눈비",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-18T22:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000927670?sid=103"
+    },
+    {
+     "title": "[날씨]6년만의 수능 한파...눈·비·바람에 체감온도 '뚝'",
+     "press": "womennews.co.kr",
+     "publishedAt": "2026-11-18T22:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/310/0000141859?sid=103"
     }
    ]
   },
@@ -232,70 +295,6 @@
      "press": "spotvnews.co.kr",
      "publishedAt": "2026-11-18T21:10:00.000Z",
      "link": "https://m.sports.naver.com/kbaseball/article/477/0000639810"
-    }
-   ]
-  },
-  {
-   "keyword": "수능 시간표",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-18T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "2027학년도 수능 시간표·끝나는 시간 총정리",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-18T21:30:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1175466"
-    },
-    {
-     "title": "수능 시간표·준비물…입실시간 오전 8시 10분",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-18T21:06:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611190006"
-    },
-    {
-     "title": "\"개장은 10시, 프리마켓 휴무\"…수능 날 바뀐 증시 시간표",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-18T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009297484?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "수능 한파와 눈비",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 2,
-   "firstArticleAt": "2026-11-18T21:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[날씨] 수능일 영하권 추위…충청·호남·제주 눈비",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-18T22:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000927670?sid=103"
-    },
-    {
-     "title": "[날씨]6년만의 수능 한파...눈·비·바람에 체감온도 '뚝'",
-     "press": "womennews.co.kr",
-     "publishedAt": "2026-11-18T22:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/310/0000141859?sid=103"
-    },
-    {
-     "title": "[날씨클릭] 6년 만에 영하권 '수능 한파'…서쪽 중심 눈비",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-18T21:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000927666?sid=103"
     }
    ]
   },
@@ -335,7 +334,7 @@
  "hitRate": {
   "days": 7,
   "flagged": 1085,
-  "matched": 601,
+  "matched": 600,
   "avgLeadMin": 868,
   "recent": [
    {
