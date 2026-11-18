@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T00:13:03.048Z",
+ "builtAt": "2026-11-18T00:23:06.516Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,101 +8,229 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "자바 보안 취약점",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 70,
-   "recent20": 11,
-   "press": 55,
-   "firstArticleAt": "2026-11-17T22:44:00.000Z",
+   "articles90": 63,
+   "recent20": 10,
+   "press": 52,
+   "firstArticleAt": "2026-11-17T22:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "PHP 이어 자바 취약점 발견…국내 기업·공공기관 3만곳 보안 ‘비상’",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-18T00:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002724896?sid=105"
+     "title": "PHP 이어 자바도 보안 취약점 발견…기업·기관 주의 요구",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-18T00:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000552997?sid=105"
     },
     {
-     "title": "PHP 이어 자바 보안 취약점 발견… 정부, 긴급 점검 권고",
-     "press": "asiatime.co.kr",
-     "publishedAt": "2026-11-18T00:10:00.000Z",
-     "link": "https://www.asiatime.co.kr/article/20261118500052"
+     "title": "자바에서도 치명적 보안 구멍…원격으로 서버 장악 가능",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-18T00:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009295182?sid=105"
     },
     {
-     "title": "웹 보안 심각한 위험…PHP 이어 '자바'에서도 취약점 발견",
-     "press": "mbnmoney.mbn.co.kr",
-     "publishedAt": "2026-11-18T00:06:00.000Z",
-     "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005963726"
+     "title": "자바도 뚫렸다…‘반인반AI’ 켄타우로스 해커가 찾아낸 치명적 결함 비...",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-18T00:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003566055?sid=105"
     }
    ]
   },
   {
-   "keyword": "육사 충청권 이전",
+   "keyword": "수능 재난문자 시간연장",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 32,
-   "recent20": 18,
-   "press": 29,
-   "firstArticleAt": "2026-11-17T23:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "당정 “육사, 충청권으로 이전…해사·공사는 기존 위치 활용”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-18T00:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003763295?sid=100"
-    },
-    {
-     "title": "與, 육사 충청권 이전 확정…국군사관학교 2029년 출범",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-18T00:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004683395?sid=100"
-    },
-    {
-     "title": "당정, 국군사관학교 창설안 수정…육사 충청권 이전 추진",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-18T00:08:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5084636"
-    }
-   ]
-  },
-  {
-   "keyword": "재난문자",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 28,
-   "recent20": 7,
+   "articles90": 26,
+   "recent20": 8,
    "press": 25,
-   "firstArticleAt": "2026-11-17T22:45:00.000Z",
+   "firstArticleAt": "2026-11-17T23:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘수능 中 재난문자로 시험방해시 시간 더주는 방안 검토’ 李 지시에....",
-     "press": "sedaily.com",
+     "title": "李 대통령 \"수능서 재난문자로 피해 받으면 시험 시간 연장\"",
+     "press": "wolyo.co.kr",
+     "publishedAt": "2026-11-18T00:22:00.000Z",
+     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=320657"
+    },
+    {
+     "title": "李대통령 “수능 중 재난문자 방해받으면 시험 시간 연장 검토”",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-18T00:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000132581?sid=100"
+    },
+    {
+     "title": "이대통령 \"수능 중 재난문자로 방해받으면 시험 시간 연장 검토\"",
+     "press": "weekly.chosun.com",
+     "publishedAt": "2026-11-18T00:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/053/0000063133?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "강신철 장관, 국군사관학교",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 33,
+   "recent20": 3,
+   "press": 10,
+   "firstArticleAt": "2026-11-17T23:15:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "강신철 국방장관, 자운대서 각 군 대학 간담회…\"미래전 승패, 합동역량...",
+     "press": "news.cpbc.co.kr",
+     "publishedAt": "2026-11-18T00:20:00.000Z",
+     "link": "https://news.cpbc.co.kr/article/1177108?division=NAVER"
+    },
+    {
+     "title": "당정, 국군사관학교 '1+2+1' 확정…육사 충청권 이전",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-18T00:16:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2649591"
+    },
+    {
+     "title": "국군사관학교 창설방안 당정협의",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-18T00:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005765296?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "나의 유죄인간",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 15,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-17T22:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "티빙 11월 2주차, 100일의 거짓말·나의 유죄인간 4주 연속 1·2위",
+     "press": "topstarnews.net",
      "publishedAt": "2026-11-18T00:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004683396?sid=102"
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16279526"
     },
     {
-     "title": "수능 중 재난문자 '불시 발송' 검토…휴대전화 부정행위 잡는다",
-     "press": "kado.net",
-     "publishedAt": "2026-11-18T00:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000211940?sid=102"
+     "title": "'연기 달인' 김인권, '나의 유죄인간'서 빛나는 내공",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-18T00:08:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1138187"
     },
     {
-     "title": "‘시험 중 재난문자, 다른 수험생 피해’ 우려... 李 “걱정말라, 2~3분...",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-18T00:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004010267?sid=100"
+     "title": "박아인, '나의 유죄인간'에서 직진 빌런 활약…후반부 긴장감 높였다",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-17T23:54:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16279510"
+    }
+   ]
+  },
+  {
+   "keyword": "노유민 가슴 통증",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 10,
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-17T22:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "NRG 노유민, 가슴 통증으로 응급실行...\"별일 아니길\"",
+     "press": "starnewsk.com",
+     "publishedAt": "2026-11-18T00:08:00.000Z",
+     "link": "http://www.starnewsk.com/news/articleView.html?idxno=61117"
+    },
+    {
+     "title": "노유민, 새벽에 응급실 실려갔다...갑작스러운 가슴 통증",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-17T23:34:00.000Z",
+     "link": "https://www.insight.co.kr/news/582481"
+    },
+    {
+     "title": "노유민, 가슴 통증에 새벽 응급실行… 아내 \"결과는 월요일에\"",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-17T23:26:00.000Z",
+     "link": "https://m.entertain.naver.com/article/469/0000966206"
+    }
+   ]
+  },
+  {
+   "keyword": "16기 상철 방귀 흑역사",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 3,
+   "press": 9,
+   "firstArticleAt": "2026-11-17T23:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "16기 상철, 고개 숙였다…전 국민에 방귀 오픈 “수습 안되는 역대급 흑...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-18T00:19:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001188516"
+    },
+    {
+     "title": "“전국 시청자와 방귀 트는 대업 달성”…16기 상철 긴급 기념 소감문 ...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-18T00:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005765299?sid=103"
+    },
+    {
+     "title": "나솔 16기 상철, '계약결혼' 방귀 장면 언급…\"전 국민과 방귀 튼 남자\"",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-18T00:04:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16279516"
+    }
+   ]
+  },
+  {
+   "keyword": "성유리, 안성현 무죄에 좋아요",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-17T22:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "성유리, 코인 청탁 혐의 벗은 ♥안성현 SNS에 '좋아요'…남편 응원",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-18T00:14:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000053097"
+    },
+    {
+     "title": "성유리, 남편 안성현 '무죄 확정' 후 3년 8개월 만 SNS에 '좋아요'",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-17T23:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/477/0000639631"
+    },
+    {
+     "title": "남편 안성현 무죄 확정에…성유리, SNS ‘좋아요’ 공개 응원",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-17T23:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005765281?sid=102"
     }
    ]
   },
@@ -111,10 +239,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-17T22:44:00.000Z",
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-17T23:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -139,111 +267,14 @@
    ]
   },
   {
-   "keyword": "성유리, 안성현 무죄 좋아요",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-17T22:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "성유리, 남편 안성현 '무죄 확정' 후 3년 8개월 만 SNS에 '좋아요'",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-17T23:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000639631"
-    },
-    {
-     "title": "남편 안성현 무죄 확정에…성유리, SNS ‘좋아요’ 공개 응원",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-17T23:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005765281?sid=102"
-    },
-    {
-     "title": "성유리, 남편 안성현 무죄 확정 후 SNS에 '좋아요'…3년 8개월 만의 게시...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-17T23:52:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16279508"
-    }
-   ]
-  },
-  {
-   "keyword": "예정대로 수능 진행",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-17T22:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[수능 D-1] 강화된 부정행위 점검에 제주 감독 교사들 \"현장 보완 필요\"",
-     "press": "newsjeju.net",
-     "publishedAt": "2026-11-18T00:12:00.000Z",
-     "link": "https://www.newsjeju.net/news/articleView.html?idxno=428579"
-    },
-    {
-     "title": "송파구, 수능일 주요 상권 야간 순찰…3개 권역 집중 점검",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-18T00:00:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3755356"
-    },
-    {
-     "title": "정부, 수능 부정행위 적발용 재난문자 추가 '불시 발송' 검토",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-17T23:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016447930?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "노유민, 가슴 통증으로 응급실행",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-17T22:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "NRG 노유민, 가슴 통증으로 응급실行...\"별일 아니길\"",
-     "press": "starnewsk.com",
-     "publishedAt": "2026-11-18T00:08:00.000Z",
-     "link": "http://www.starnewsk.com/news/articleView.html?idxno=61117"
-    },
-    {
-     "title": "노유민, 가슴 통증에 새벽 응급실行… 아내 \"결과는 월요일에\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-17T23:26:00.000Z",
-     "link": "https://m.entertain.naver.com/article/469/0000966206"
-    },
-    {
-     "title": "NRG 노유민, 갑작스러운 가슴 통증에 응급실行…검사 결과 대기",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-17T23:24:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261118000111"
-    }
-   ]
-  },
-  {
    "keyword": "정호연 본드걸 후보 거론",
    "sources": [
     "daum"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-17T22:51:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-17T23:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -268,44 +299,12 @@
    ]
   },
   {
-   "keyword": "아들 남편과 악플",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-17T23:11:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "박세미, “엄마와 아들 같다” 악플에…♥변우석 닮은꼴 남편 “아내는...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-18T00:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001150413"
-    },
-    {
-     "title": "박세미, ♥1살 연하 남편 공개 후 악플 세례…\"엄마와 아들 같다고\" (제...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-18T00:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002081621"
-    },
-    {
-     "title": "박세미, 결혼 후 악플 토로 \"아줌마와 아들이 산다고\"…♥남편 '황당' (...",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-17T23:46:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000053091"
-    }
-   ]
-  },
-  {
    "keyword": "무안군",
    "sources": [
     "google"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-17T23:06:00.000Z",
    "exclusive": false,
@@ -334,8 +333,7 @@
   {
    "keyword": "출근하는 이용철 후보자",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 7,
    "recent20": 0,
@@ -357,17 +355,49 @@
      "link": "https://n.news.naver.com/mnews/article/003/0014328750?sid=102"
     },
     {
-     "title": "출근하는 이용철 후보자",
+     "title": "인사청문회 준비 사무실 출근하는 이용철 후보자",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-17T23:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016447860?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/001/0016447861?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "장동혁 대표 인사말",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-17T23:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "자리 일어나는 장동혁 대표",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-17T23:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009295085?sid=100"
+    },
+    {
+     "title": "장동혁 국민의힘 대표 인사말",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-17T23:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009295078?sid=100"
+    },
+    {
+     "title": "인사말하는 장동혁 국민의힘 대표",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-17T23:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009295084?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 994,
+  "flagged": 999,
   "matched": 565,
   "avgLeadMin": 843,
   "recent": [
