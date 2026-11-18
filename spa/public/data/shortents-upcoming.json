@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T03:46:28.767Z",
+ "builtAt": "2026-11-18T15:07:57.287Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,493 +8,299 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "조태용 징역 확정",
+   "keyword": "수능 부정행위 포상금 1억",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 11,
+   "recent20": 3,
+   "press": 11,
+   "firstArticleAt": "2026-11-18T13:39:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "수능 부정행위 신고하면 \"1억원 포상금\" 추진",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-18T15:06:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3756407"
+    },
+    {
+     "title": "이번 수능부터 부정행위 신고 시 '1억 포상금' 추진",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-18T15:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000927611?sid=100"
+    },
+    {
+     "title": "[잡채기 칼럼] 무신불립ⵈ '수능' 조롱",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-18T15:00:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3083273"
+    }
+   ]
+  },
+  {
+   "keyword": "김명민",
+   "sources": [
+    "google"
+   ],
+   "articles90": 12,
+   "recent20": 0,
+   "press": 10,
+   "firstArticleAt": "2026-11-18T13:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"메소드 연기\" 김명민, '베토벤 바이러스' 웃픈 비화 (유퀴즈) [TV나우]",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-18T14:43:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000053269"
+    },
+    {
+     "title": "김명민, ♥아내 임신 중 태아 성장 멈췄다…\"배우 포기 후 이민 결심\" (...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-18T14:41:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004467874"
+    },
+    {
+     "title": "‘유퀴즈’ 김명민, 故 안판석 감독 떠올리며 먹먹… “한 작품 더 못한...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-18T14:16:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003542507"
+    }
+   ]
+  },
+  {
+   "keyword": "APEC 정상회의 환영만찬",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 10,
+   "recent20": 3,
+   "press": 8,
+   "firstArticleAt": "2026-11-18T13:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "시진핑 내외 양옆에 트럼프·푸틴…푸틴은 9년만에 APEC 단체사진(종합...",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-18T14:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016450386?sid=104"
+    },
+    {
+     "title": "미중러, 사상 첫 3자회담 앞두고 APEC 환영 행사서 만나…나란히 기념사...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-18T14:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012296850?sid=104"
+    },
+    {
+     "title": "APEC 환영만찬",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-18T14:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016450381?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "승리 아내 동반 입국",
    "sources": [
     "daum"
    ],
-   "articles90": 43,
+   "articles90": 4,
    "recent20": 1,
-   "press": 41,
-   "firstArticleAt": "2026-11-18T02:18:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-18T13:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "조태용 전 국정원장, '계엄 위증·증거인멸' 징역 2년 6개월 확정",
-     "press": "iminju.net",
-     "publishedAt": "2026-11-18T03:28:00.000Z",
-     "link": "http://www.iminju.net/news/articleView.html?idxno=172662"
-    },
-    {
-     "title": "'계엄 위증·정치관여' 조태용 전 국정원장, 징역 2년6개월 확정",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-18T03:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000142523?sid=102"
-    },
-    {
-     "title": "‘위증·정치관여’ 조태용, 징역 2년 6개월 확정…직무유기 혐의는 무...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-18T03:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004683508?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "고액 체납자 공개",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 48,
-   "recent20": 6,
-   "press": 38,
-   "firstArticleAt": "2026-11-18T02:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "무안군, 고액·상습 체납 73명 공개",
-     "press": "naeil.com",
-     "publishedAt": "2026-11-18T03:38:00.000Z",
-     "link": "https://www.naeil.com/news/read/609289?ref=naver"
-    },
-    {
-     "title": "이게 가능해? 개인 최고 320억 원, 법인 최고 32억 원 고액체납자들...인...",
-     "press": "kgnews.co.kr",
-     "publishedAt": "2026-11-18T03:36:00.000Z",
-     "link": "https://www.kgnews.co.kr/news/article.html?no=920061"
-    },
-    {
-     "title": "지방세 최고액 체납자는? 경기도, 상습체납자 4029명 공개",
-     "press": "kgnews.co.kr",
-     "publishedAt": "2026-11-18T03:32:00.000Z",
-     "link": "https://www.kgnews.co.kr/news/article.html?no=920114"
-    }
-   ]
-  },
-  {
-   "keyword": "KDI 경제성장률 전망",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 31,
-   "recent20": 1,
-   "press": 29,
-   "firstArticleAt": "2026-11-18T03:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "KDI \"내년 성장률 3.9%, 3분의 2가 반도체…체감경기와 격차\"[일문일답]",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-18T03:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014329889?sid=101"
-    },
-    {
-     "title": "KDI \"내년 3.9% 성장\"…반도체가 끌고 가는 경제, 쏠림 심화",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-18T03:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004211112?sid=101"
-    },
-    {
-     "title": "KDI, 올해 성장률 3.8%·내년 3.9%로 상향…\"성장 동력 3분의 2는 반도체...",
-     "press": "queen.co.kr",
-     "publishedAt": "2026-11-18T03:20:00.000Z",
-     "link": "http://www.queen.co.kr/news/articleView.html?idxno=466528"
-    }
-   ]
-  },
-  {
-   "keyword": "고발",
-   "sources": [
-    "google"
-   ],
-   "articles90": 20,
-   "recent20": 2,
-   "press": 20,
-   "firstArticleAt": "2026-11-18T02:19:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘AI 부정행위 의혹’ 리트 만점자 이진우 피고발…수능도 수사 대상",
-     "press": "segye.com",
-     "publishedAt": "2026-11-18T03:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004176161?sid=102"
-    },
-    {
-     "title": "‘리트 만점자’ 광수단·관악서 등에서 고발 이어져…수능 고득점 수사...",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-18T03:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002832762?sid=102"
-    },
-    {
-     "title": "리트 만점자, 현직 변호사가 형사고발…시대인재도 ‘계약 해지’ [세상...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-18T03:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002725145?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "한중 정상회담",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 36,
-   "recent20": 17,
-   "press": 19,
-   "firstArticleAt": "2026-11-18T02:28:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[속보] 이 대통령-시진핑, 한중 정상회담 종료…34분간 대좌",
-     "press": "busan.com",
-     "publishedAt": "2026-11-18T03:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001407749?sid=100"
-    },
-    {
-     "title": "[속보] 李대통령-시진핑, 한중 정상회담 종료…34분간 대좌",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-18T03:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005765400?sid=104"
-    },
-    {
-     "title": "[속보] 李대통령, 시진핑과 한중 정상회담…총 34분 진행",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-18T03:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005606097?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "폭설",
-   "sources": [
-    "google"
-   ],
-   "articles90": 18,
-   "recent20": 6,
-   "press": 13,
-   "firstArticleAt": "2026-11-18T02:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘폭설’부터 결혼까지…구교환이 답했다[인터뷰]",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-18T03:41:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001150463"
-    },
-    {
-     "title": "‘폭설’ 구교환 “홍의정 감독에 뜨거운 구애중..감독교체 부담NO, 자신...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-18T03:40:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005642034"
-    },
-    {
-     "title": "구교환 \"'폭설', 김윤석과 함께한 겨울 연기 캠프…독식할 수 있었다\" [...",
+     "title": "'예비 아빠' 승리, 임신한 ♥아내와 동반 입국…캐리어까지 대신 끌었다...",
      "press": "xportsnews.com",
-     "publishedAt": "2026-11-18T03:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002081684"
+     "publishedAt": "2026-11-18T15:05:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002081921"
+    },
+    {
+     "title": "[왓IS] 승리, 임신한 20대 아내와 동반 입국… 공항서 얼굴 가린 모습 포...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-18T14:26:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003542508"
+    },
+    {
+     "title": "승리, ♥임신한 20대 아내와 동반 입국..\"여기까지 찍어라\" 취재진 경계",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-18T14:20:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004467873"
     }
    ]
   },
   {
-   "keyword": "김종철 청장 후보자 답변",
+   "keyword": "gta6 메타크리틱",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-18T13:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "〈GTA6〉 메타크리틱·오픈크리틱 동시 99점···올해 최고 평점",
+     "press": "globale.co.kr",
+     "publishedAt": "2026-11-18T14:50:00.000Z",
+     "link": "https://www.globale.co.kr/news/articleView.html?idxno=41734"
+    },
+    {
+     "title": "GTA 6, 메타크리틱 99점 기록…28년 만에 역대 최고점 타이",
+     "press": "gameshot.net",
+     "publishedAt": "2026-11-18T14:00:00.000Z",
+     "link": "https://www.gameshot.net/common/con_view.php?code=GA6afdada6b979d"
+    },
+    {
+     "title": "\"믿어도 될까?\" 경이로운 평점 받은 'GTA6'",
+     "press": "gametoc.co.kr",
+     "publishedAt": "2026-11-18T13:54:00.000Z",
+     "link": "https://www.gametoc.co.kr/news/articleView.html?idxno=113200"
+    }
+   ]
+  },
+  {
+   "keyword": "신생아 발견 수사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 21,
+   "articles90": 3,
    "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-18T02:37:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "경찰청장 청문회, '국무회의 배석·2주택' 도마…\"중립 믿을 국민 없어...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-18T03:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009296042?sid=100"
-    },
-    {
-     "title": "질의에 답변하는 김종철 경찰청장 후보자",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-18T03:19:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261118000768"
-    },
-    {
-     "title": "의원 질의에 답변하는 김종철 경찰청장 후보자",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-18T03:19:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261118000771"
-    }
-   ]
-  },
-  {
-   "keyword": "선수",
-   "sources": [
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 3,
-   "press": 8,
-   "firstArticleAt": "2026-11-18T02:58:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "NH농협금융, 스포츠단 납회식 개최… 선수단 격려·소통의 장 마련",
-     "press": "s-journal.co.kr",
-     "publishedAt": "2026-11-18T03:44:00.000Z",
-     "link": "https://www.s-journal.co.kr/news/articleView.html?idxno=45412"
-    },
-    {
-     "title": "'충격! 올림픽 메달리스트도 못 뛴다'…러시아 피겨 선수 7명, 핀란드 입...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-18T03:32:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/445/0000491399"
-    },
-    {
-     "title": "‘4경기 3골 5도움’ 바 루아, 광주FC 사상 첫 ‘이달의 선수’",
-     "press": "kwangju.co.kr",
-     "publishedAt": "2026-11-18T03:30:00.000Z",
-     "link": "http://www.kwangju.co.kr/article.php?aid=1794972309805476008"
-    }
-   ]
-  },
-  {
-   "keyword": "최태원 회장 기조연설",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-18T02:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "최태원 꺼낸 새 성장 카드 '사회적 가치'",
-     "press": "00news.co.kr",
-     "publishedAt": "2026-11-18T03:28:00.000Z",
-     "link": "http://www.00news.co.kr/news/articleView.html?idxno=108165"
-    },
-    {
-     "title": "\"사회적 가치 창출 기업에 확실한 보상\"…최태원, 새 자본주의 실험 확...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-18T03:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/108/0003488353?sid=004"
-    },
-    {
-     "title": "“사회문제 해결에 확실한 경제적 보상을”… 최태원 ‘SPC 성장론’ 제...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-18T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002833708?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "기예르모 에레디아",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 2,
    "press": 3,
-   "firstArticleAt": "2026-11-18T02:45:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[공식발표] KBO 유일무이 진기록! '교체설' 에레디아 사상 첫 4연패…유...",
-     "press": "sportalkorea.com",
-     "publishedAt": "2026-11-18T03:41:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/139/0002256208"
-    },
-    {
-     "title": "'에레디아 4연패·김도영 첫 3루수 부문 수상'…2026 KBO 수비상 10명 확...",
-     "press": "sports.hankooki.com",
-     "publishedAt": "2026-11-18T03:28:00.000Z",
-     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6943816"
-    },
-    {
-     "title": "에레디아, 4회 연속 KBO 수비상 영예…유틸리티 첫 수상자는 구본혁",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-18T02:45:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/144/0001150454"
-    }
-   ]
-  },
-  {
-   "keyword": "lpga",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-18T03:14:00.000Z",
+   "firstArticleAt": "2026-11-18T13:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "유현조·김민선·이다연, LPGA 투어 출전권 도전…20일 Q시리즈 최종전 ...",
+     "title": "신생아 자녀에게 신체적 학대 가한 혐의 현직 경찰관 부부 경찰 수사",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-18T14:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001231816?sid=102"
+    },
+    {
+     "title": "아파트 헌옷수거함서 탯줄 달린 신생아 시신 발견…경찰 수사",
+     "press": "weekly.chosun.com",
+     "publishedAt": "2026-11-18T14:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/053/0000063149?sid=102"
+    },
+    {
+     "title": "하남 아파트 헌옷수거함서 탯줄 붙은 신생아 시신 발견…경찰, CCTV 등 분...",
      "press": "topstarnews.net",
-     "publishedAt": "2026-11-18T03:44:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16279785"
-    },
-    {
-     "title": "유현조·김민선·이다연, LPGA에 도전장…20일부터 Q시리즈",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-18T03:34:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/001/0016448964"
-    },
-    {
-     "title": "유해란, LPGA 시즌 세 번째 우승 도전… 최종 투어 챔피언십 19일 개막",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-18T03:14:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3449742"
+     "publishedAt": "2026-11-18T13:56:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16280199"
     }
    ]
   },
   {
-   "keyword": "혈당",
+   "keyword": "소노 브롱코스 제압",
    "sources": [
-    "signal.bz",
-    "google"
+    "daum"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-18T02:31:00.000Z",
+   "firstArticleAt": "2026-11-18T14:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "바늘 대신 레이저로 채혈…라메디텍, 혈당기 해외시장 공략",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-18T03:08:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5084777"
+     "title": "'오브라이언트 23점 8R·막판 91-91 동점 뚫은 자유투 집중력' 고양 소노...",
+     "press": "dailysportshankook.co.kr",
+     "publishedAt": "2026-11-18T14:32:00.000Z",
+     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435676"
     },
     {
-     "title": "검진 결과지 속 '혈당 변화', 췌장 위험 신호일 수도... 낭종 발견 땐 추...",
-     "press": "newsgn.com",
-     "publishedAt": "2026-11-18T02:32:00.000Z",
-     "link": "https://www.newsgn.com/news/articleView.html?idxno=586353"
+     "title": "소노, EASL서 몽골 브롱코스 제압하고 2연승",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-18T14:30:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/055/0001404085"
     },
     {
-     "title": "\"같은 당뇨병 약에도 한국인은 혈당 더 많이 떨어졌다\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-18T02:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000966253?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "강애심, 아이 생각에 눈물",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-18T02:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'사운드 트랙' 강애심, 제작발표회 도중 눈물 왈칵…\"떠나보낸 아이 생...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-18T03:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004126083"
-    },
-    {
-     "title": "'사운드:트랙' 강애심, 끝내 눈물 \"떠나보낸 아이 생각에… \"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-18T02:50:00.000Z",
-     "link": "https://m.entertain.naver.com/article/469/0000966259"
-    },
-    {
-     "title": "'사운드:트랙' 강애심, 녹음 중 오열 \"떠나보낸 아이 생각나\"",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-18T02:48:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000328347"
+     "title": "소노, 브롱코스 추격 뿌리치고 95-91 신승…2연승 질주 [EASL]",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-18T14:10:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611180243"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1063,
-  "matched": 583,
-  "avgLeadMin": 822,
+  "flagged": 1061,
+  "matched": 598,
+  "avgLeadMin": 887,
   "recent": [
    {
-    "keyword": "박세미 결혼 후 악플",
-    "hitKeyword": "박세미 결혼 악플",
-    "hitAt": "2026-11-18T12:30:00+09:00",
-    "leadMin": 167
+    "keyword": "에이엘로봇",
+    "hitKeyword": "에이엘로봇 상장 급락",
+    "hitAt": "2026-11-19T00:00:00+09:00",
+    "leadMin": 857
    },
    {
-    "keyword": "수능 AI 부정행위 대책 회의",
-    "hitKeyword": "세무사 시험 AI 부정행위",
-    "hitAt": "2026-11-18T12:30:00+09:00",
-    "leadMin": 124
+    "keyword": "이재명 다카이치 정상회담",
+    "hitKeyword": "다카이치 총리 냉대 의전",
+    "hitAt": "2026-11-18T23:30:00+09:00",
+    "leadMin": 804
    },
    {
-    "keyword": "수능 AI 부정행위 대책 논의",
-    "hitKeyword": "세무사 시험 AI 부정행위",
-    "hitAt": "2026-11-18T12:30:00+09:00",
-    "leadMin": 54
+    "keyword": "기예르모 에레디아",
+    "hitKeyword": "에레디아 SSG 결별",
+    "hitAt": "2026-11-18T23:30:00+09:00",
+    "leadMin": 644
    },
    {
-    "keyword": "변동성",
-    "hitKeyword": "코스피 지수 변동성",
-    "hitAt": "2026-11-18T12:00:00+09:00",
-    "leadMin": 1573
+    "keyword": "농구",
+    "hitKeyword": "삼성 프로농구 1위 질주",
+    "hitAt": "2026-11-18T23:00:00+09:00",
+    "leadMin": 1912
    },
    {
-    "keyword": "장나라, 6세 연하 남편에게 고백",
-    "hitKeyword": "장나라 굿파트너 작가",
-    "hitAt": "2026-11-18T12:00:00+09:00",
-    "leadMin": 237
+    "keyword": "브로커 양씨 징역 4년 구형",
+    "hitKeyword": "유튜버 징역 1년 구형",
+    "hitAt": "2026-11-18T18:00:00+09:00",
+    "leadMin": 8616
    },
    {
-    "keyword": "최지훈 SSG 잔류",
-    "hitKeyword": "SSG 에레디아 방출",
-    "hitAt": "2026-11-18T12:00:00+09:00",
-    "leadMin": 4
+    "keyword": "브로커 징역 4년 구형",
+    "hitKeyword": "유튜버 징역 1년 구형",
+    "hitAt": "2026-11-18T18:00:00+09:00",
+    "leadMin": 8585
    },
    {
-    "keyword": "삼전닉스",
-    "hitKeyword": "삼전닉스 전망",
-    "hitAt": "2026-11-18T12:00:00+09:00",
-    "leadMin": 4
+    "keyword": "김승원 브로커 징역 4년 구형",
+    "hitKeyword": "유튜버 징역 1년 구형",
+    "hitAt": "2026-11-18T18:00:00+09:00",
+    "leadMin": 8515
    },
    {
-    "keyword": "사고",
-    "hitKeyword": "이진우 형사고발",
-    "hitAt": "2026-11-18T11:30:00+09:00",
-    "leadMin": 238
+    "keyword": "김승원 징역 4년 구형",
+    "hitKeyword": "유튜버 징역 1년 구형",
+    "hitAt": "2026-11-18T18:00:00+09:00",
+    "leadMin": 8424
    },
    {
-    "keyword": "재난문자",
-    "hitKeyword": "수능 위급재난문자 발송",
-    "hitAt": "2026-11-18T11:30:00+09:00",
-    "leadMin": 177
+    "keyword": "수사",
+    "hitKeyword": "LEET 만점자 수사",
+    "hitAt": "2026-11-18T18:00:00+09:00",
+    "leadMin": 658
    },
    {
-    "keyword": "장나라 김혜윤 출연 기도",
-    "hitKeyword": "김혜윤 살롱드립",
-    "hitAt": "2026-11-18T11:30:00+09:00",
-    "leadMin": 147
+    "keyword": "김장",
+    "hitKeyword": "김장 물가 상승",
+    "hitAt": "2026-11-18T17:00:00+09:00",
+    "leadMin": 648
    }
   ]
  }
