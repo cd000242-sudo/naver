@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T16:48:44.041Z",
+ "builtAt": "2026-11-18T16:58:48.207Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -18,10 +18,16 @@
    "articles90": 6,
    "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-18T15:26:00.000Z",
+   "firstArticleAt": "2026-11-18T15:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "수능날 재난문자 폰 알림…왜?",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-18T16:52:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611180260"
+    },
     {
      "title": "수능일 전국 휴대전화 '10.5초 경보음'…부산시 심야 긴급회의",
      "press": "pennmike.com",
@@ -33,12 +39,6 @@
      "press": "kmib.co.kr",
      "publishedAt": "2026-11-18T16:22:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/005/0001886073?sid=110"
-    },
-    {
-     "title": "불안한 수능, 그래도 노력을 믿습니다",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-18T15:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004010480?sid=102"
     }
    ]
   },
@@ -67,10 +67,42 @@
      "link": "https://n.news.naver.com/mnews/article/023/0004010478?sid=102"
     },
     {
-     "title": "장예찬, 당게 글 공개 “미국 있는 한동훈 딸 ‘추경호, 용산 실드 적당...",
-     "press": "weekly.khan.co.kr",
+     "title": "이준석 “추경호 유죄 주장, 기본적 헌법 무시…尹·李 들어 심화된 법...",
+     "press": "munhwa.com",
      "publishedAt": "2026-11-18T15:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/033/0000053478?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/021/0002833854?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "김명민",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-18T15:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'유퀴즈' 김명민, 데뷔 30년 만 첫 예능 \"할말 못할말 못 가려\"",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-18T16:56:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000328409"
+    },
+    {
+     "title": "김명민ㆍ유재석, 1972년생 동갑→서울예대 동문이었다…'유퀴즈'서 밝혀...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-18T16:48:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16280227"
+    },
+    {
+     "title": "김명민, 집까지 팔고 이민 준비했는데…♥아내 한마디에 '이순신' 됐다...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-18T15:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004126243"
     }
    ]
   },
@@ -80,10 +112,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-18T15:21:00.000Z",
+   "firstArticleAt": "2026-11-18T15:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
