@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T15:58:17.764Z",
+ "builtAt": "2026-11-18T16:08:27.256Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,40 +8,8 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 29,
  "candidates": [
-  {
-   "keyword": "시진핑 APEC 환영만찬",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-18T14:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "시진핑, 트럼프 오는 공항 직접 나갔다… 푸틴과는 3차례 ‘작전회의’",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-18T15:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004010472?sid=104"
-    },
-    {
-     "title": "시진핑, APEC서 개방·혁신·협력 강조… 푸틴과 정상회담",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-18T15:40:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3450007"
-    },
-    {
-     "title": "트럼프·시진핑·푸틴 만났다… 첫 미중러 정상회담 전날 한자리에",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-18T15:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000966430?sid=104"
-    }
-   ]
-  },
   {
    "keyword": "수능 재난문자 시간",
    "sources": [
@@ -50,10 +18,16 @@
    "articles90": 9,
    "recent20": 2,
    "press": 9,
-   "firstArticleAt": "2026-11-18T14:31:00.000Z",
+   "firstArticleAt": "2026-11-18T15:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "불안한 수능, 그래도 노력을 믿습니다",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-18T15:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004010480?sid=102"
+    },
     {
      "title": "불시 재난문자? 1억 포상금? 대책마다 '혼선'",
      "press": "news.sbs.co.kr",
@@ -65,24 +39,18 @@
      "press": "ccnnews.co.kr",
      "publishedAt": "2026-11-18T15:40:00.000Z",
      "link": "http://www.ccnnews.co.kr/news/articleView.html?idxno=418013"
-    },
-    {
-     "title": "[사설] ‘AI 커닝’ 사태 속에 치러지는 수능…혼란 없도록 만전 기해야",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-18T15:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003566301?sid=110"
     }
    ]
   },
   {
    "keyword": "한중 FTA 타결",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 8,
    "recent20": 1,
    "press": 8,
-   "firstArticleAt": "2026-11-18T14:32:00.000Z",
+   "firstArticleAt": "2026-11-18T15:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -93,80 +61,113 @@
      "link": "https://n.news.naver.com/mnews/article/023/0004010479?sid=100"
     },
     {
+     "title": "한중 FTA 후속 협상 타결‥오늘 첫 미중러 회담",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-18T15:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001536517?sid=100"
+    },
+    {
      "title": "경제계 \"한중 FTA 후속협상 환영…투자 기대\"",
      "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-18T15:15:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/422/0000927613?sid=101"
-    },
-    {
-     "title": "한중 경제·문화 교류 새 물꼬…강원관광 탄력 기대감",
-     "press": "kado.net",
-     "publishedAt": "2026-11-18T15:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000212167?sid=100"
     }
    ]
   },
   {
-   "keyword": "트럼프 푸틴 악수",
+   "keyword": "日 입국 조국 독도 방문",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-18T14:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "트럼프·시진핑·푸틴 만났다… 첫 미중러 정상회담 전날 한자리에",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-18T15:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000966430?sid=104"
-    },
-    {
-     "title": "트럼프·푸틴, 시진핑 지켜보는 가운데 악수…19일 3자 정상회담",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-18T15:18:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626163"
-    },
-    {
-     "title": "푸틴, 9년 만에 APEC 정상들과 단체사진…국제무대 복귀 과시",
-     "press": "segye.com",
-     "publishedAt": "2026-11-18T15:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004176351?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "2026 대한민국 게임대상",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
+   "articles90": 8,
    "recent20": 1,
-   "press": 3,
+   "press": 8,
    "firstArticleAt": "2026-11-18T14:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "지스타 2026, 게임 전시회를 초월한다",
-     "press": "gametoc.co.kr",
-     "publishedAt": "2026-11-18T15:52:00.000Z",
-     "link": "https://www.gametoc.co.kr/news/articleView.html?idxno=113203"
+     "title": "외교부, 조국 日 입국 거부에 유감·항의 전달…\"사실관계 확인 요청\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-18T15:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009297408?sid=100"
     },
     {
-     "title": "[게임대상] 펄어비스 '붉은사막' 대상(대통령상) 포함 8관왕…엔씨 '아...",
-     "press": "webeconomy.co.kr",
-     "publishedAt": "2026-11-18T15:16:00.000Z",
-     "link": "https://www.webeconomy.co.kr/news/articleView.html?idxno=2381861"
+     "title": "일본 \"조국 입국 거부는 전과 때문\"...독도 방문과 무관 해명",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-18T15:47:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261119000007"
     },
     {
-     "title": "펄어비스 '붉은사막', 2026 대한민국 게임대상 대통령상 등 역대 최다 8...",
-     "press": "onews.tv",
-     "publishedAt": "2026-11-18T14:42:00.000Z",
-     "link": "https://www.onews.tv/news/articleView.html?idxno=292025"
+     "title": "日, 조국 입국 거부에 \"전과가 이유\"…외교부 \"재발방지 요청\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-18T15:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000927617?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "승리 아내 공항 포착",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-18T14:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "빅뱅 출신 승리, 임신한 아내와 홍콩서 동반 입국…공개된 유튜브 영상...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-18T15:58:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16280223"
+    },
+    {
+     "title": "승리, 만삭 20대 아내와 동반 입국…D라인 포착",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-18T15:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000651943?sid=103"
+    },
+    {
+     "title": "'예비 아빠' 승리, 임신한 ♥아내와 동반 입국…캐리어까지 대신 끌었다...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-18T15:05:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002081921"
+    }
+   ]
+  },
+  {
+   "keyword": "APEC 정상회의 환영만찬",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-18T14:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "시진핑, APEC서 개방·혁신·협력 강조… 푸틴과 정상회담",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-18T15:40:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3450007"
+    },
+    {
+     "title": "[사진] 중국 선전에 모인 APEC 정상들",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-18T15:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003566295?sid=100"
+    },
+    {
+     "title": "시진핑 내외 양옆에 트럼프·푸틴…푸틴은 9년만에 APEC 단체사진(종합...",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-18T14:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016450386?sid=104"
     }
    ]
   },
@@ -206,8 +207,8 @@
  "hitRate": {
   "days": 7,
   "flagged": 1070,
-  "matched": 597,
-  "avgLeadMin": 887,
+  "matched": 596,
+  "avgLeadMin": 888,
   "recent": [
    {
     "keyword": "에이엘로봇",
