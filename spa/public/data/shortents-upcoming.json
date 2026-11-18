@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T23:52:55.566Z",
+ "builtAt": "2026-11-18T00:02:59.602Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,101 +8,102 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "젠슨 황 복귀 없다",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 59,
-   "recent20": 9,
-   "press": 55,
-   "firstArticleAt": "2026-11-17T22:25:00.000Z",
+   "articles90": 58,
+   "recent20": 10,
+   "press": 52,
+   "firstArticleAt": "2026-11-17T22:33:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨황 복귀 이뤄질까..엔비디아 호실적에 삼전·닉스 급등세",
-     "press": "peoplewatch.co.kr",
-     "publishedAt": "2026-11-17T23:50:00.000Z",
-     "link": "https://www.peoplewatch.co.kr/article/view/ppw202611180003"
+     "title": "젠슨 황, 복귀 의사 밝혔는데 어쩌나... 엔비디아 공식입장 떴다",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-18T00:00:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1175504"
     },
     {
-     "title": "엔비디아 의장, '젠슨황 복귀' 일축…\"재선임 의사 없다\"",
-     "press": "cstimes.com",
-     "publishedAt": "2026-11-17T23:48:00.000Z",
-     "link": "https://www.cstimes.com/news/articleView.html?idxno=728291"
+     "title": "창업자 복귀엔 선 긋고 실적 전망엔 힘준 엔비디아",
+     "press": "fortunekorea.co.kr",
+     "publishedAt": "2026-11-18T00:00:00.000Z",
+     "link": "https://www.fortunekorea.co.kr/news/articleView.html?idxno=54789"
     },
     {
-     "title": "엔비디아 또 깜짝실적… 이사회 \"젠슨 황 복귀는 없다\"",
-     "press": "news.bizwatch.co.kr",
-     "publishedAt": "2026-11-17T23:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/648/0000052729?sid=101"
+     "title": "\"젠슨 떠나도 문제없다\"…엔비디아, 메모리·패키징 공급 확보",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-17T23:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001075996?sid=105"
     }
    ]
   },
   {
    "keyword": "자바 보안 취약점",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "daum"
    ],
-   "articles90": 61,
-   "recent20": 14,
-   "press": 48,
-   "firstArticleAt": "2026-11-17T22:24:00.000Z",
+   "articles90": 64,
+   "recent20": 12,
+   "press": 50,
+   "firstArticleAt": "2026-11-17T22:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘자바’ 오픈제이디케이 보안 취약점 발견…과기정통부, 긴급 업데이트...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-17T23:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003156443?sid=105"
+     "title": "[T나는 보안] 공공정보 71% '자바'서도 치명적 취약점…정부 긴급 점검 ...",
+     "press": "tjb.co.kr",
+     "publishedAt": "2026-11-18T00:02:00.000Z",
+     "link": "https://www.tjb.co.kr/news05/bodo/view/id/106209"
     },
     {
-     "title": "국가안보실, ‘자바’ 취약점 확인에 민관군 긴급회의…PHP 이어 보안 취...",
-     "press": "donga.com",
-     "publishedAt": "2026-11-17T23:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003763292?sid=100"
+     "title": "韓개발자 절반 쓰는 자바도 로그인없이 뚫린다…정부 \"보안 업데이트 \"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-17T23:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005442701?sid=105"
     },
     {
-     "title": "자바서 고위험 보안 취약점 발견…과기정통부·KISA, 긴급 점검 권고",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-17T23:48:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2019908"
+     "title": "PHP 이어 '자바'도 치명적 취약점…정부 긴급 점검 권고",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-17T23:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001978705?sid=101"
     }
    ]
   },
   {
-   "keyword": "은행 연체율 0.59% 하락",
+   "keyword": "재난문자",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-17T22:58:00.000Z",
+   "articles90": 24,
+   "recent20": 16,
+   "press": 22,
+   "firstArticleAt": "2026-11-17T22:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "9월 은행 연체율 10년 만에 최고…신규 연체는 둔화",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-17T23:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000927283?sid=101"
+     "title": "수능날 재난문자 추가 '불시 발송' 검토…시험장 혼란 우려도",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-17T23:58:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=243478"
     },
     {
-     "title": "9월 은행 대출 연체율 0.59%…한 달 새 하락, 1년 전보다 상승",
-     "press": "segyebiz.com",
-     "publishedAt": "2026-11-17T23:48:00.000Z",
-     "link": "http://www.segyebiz.com/newsView/20261118503576?OutUrl=naver"
+     "title": "이 대통령 \"수능 중 재난문자에 방해받으면 시험시간 연장 검토\"",
+     "press": "kado.net",
+     "publishedAt": "2026-11-17T23:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000211937?sid=100"
     },
     {
-     "title": "9월 국내은행 대출 연체율 0.59%…전년 대비로는 상승",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-17T23:32:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2019879"
+     "title": "李 대통령 “재난문자로 수험생 방해 받으면 시험시간 연장 검토”",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-17T23:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005765283?sid=102"
     }
    ]
   },
@@ -112,7 +113,7 @@
     "daum"
    ],
    "articles90": 12,
-   "recent20": 1,
+   "recent20": 0,
    "press": 12,
    "firstArticleAt": "2026-11-17T22:37:00.000Z",
    "exclusive": false,
@@ -139,66 +140,66 @@
    ]
   },
   {
-   "keyword": "나의 유죄인간",
+   "keyword": "성유리, 안성현 무죄 좋아요",
    "sources": [
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 5,
-   "press": 9,
-   "firstArticleAt": "2026-11-17T22:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘나의 유죄인간’ 박아인, 야심 폭발",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-17T23:50:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611180115"
-    },
-    {
-     "title": "'나의 유죄인간' 홍은희, 소름 돋는 두 얼굴?…시청률 5.4%",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-17T23:46:00.000Z",
-     "link": "https://m.entertain.naver.com/article/018/0006411568"
-    },
-    {
-     "title": "'나의 유죄인간' 김인권, 생활 연기부터 카리스마까지 '박봉이' 완성",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-17T23:46:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16279504"
-    }
-   ]
-  },
-  {
-   "keyword": "성유리 3년 만에 좋아요",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
+   "articles90": 9,
    "recent20": 4,
-   "press": 7,
+   "press": 9,
    "firstArticleAt": "2026-11-17T22:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "성유리, 남편 안성현 '무죄 확정' 후 3년 8개월 만 SNS에 '좋아요'",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-17T23:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/477/0000639631"
+    },
+    {
+     "title": "남편 안성현 무죄 확정에…성유리, SNS ‘좋아요’ 공개 응원",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-17T23:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005765281?sid=102"
+    },
+    {
      "title": "성유리, 남편 안성현 무죄 확정 후 SNS에 '좋아요'…3년 8개월 만의 게시...",
      "press": "topstarnews.net",
      "publishedAt": "2026-11-17T23:52:00.000Z",
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16279508"
+    }
+   ]
+  },
+  {
+   "keyword": "예정대로 수능 진행",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 10,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-17T22:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "송파구, 수능일 주요 상권 야간 순찰…3개 권역 집중 점검",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-18T00:00:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3755356"
     },
     {
-     "title": "'옥바라지' 끝낸 성유리, '코인사기 무죄' ♥안성현 공개응원..SNS 재개에...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-17T23:50:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005641903"
+     "title": "정부, 수능 부정행위 적발용 재난문자 추가 '불시 발송' 검토",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-17T23:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016447930?sid=102"
     },
     {
-     "title": "성유리 ‘무죄 확정’ 남편 게시물에 ‘좋아요’ 꾹…공개 응원",
+     "title": "수능 가채점부터 정시 1대1 상담까지…서대문구, 수험생 맞춤형 진학 지...",
      "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-17T23:36:00.000Z",
-     "link": "https://m.entertain.naver.com/article/016/0002724864"
+     "publishedAt": "2026-11-17T23:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002724860?sid=102"
     }
    ]
   },
@@ -208,7 +209,7 @@
     "daum"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 1,
    "press": 6,
    "firstArticleAt": "2026-11-17T22:51:00.000Z",
    "exclusive": false,
@@ -235,99 +236,34 @@
    ]
   },
   {
-   "keyword": "핑클",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-17T22:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘뉴욕댁’ 변신 핑클멤버 이진, 미국에 남편 두고 한국와서 한 일",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-17T23:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005765276?sid=103"
-    },
-    {
-     "title": "'뉴욕댁' 이진, 10년 미국 생활 접고 한국서 핑클에 전념",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-17T23:38:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95494"
-    },
-    {
-     "title": "'뉴욕댁' 이진, ♥남편만 두고 한국오더니 신났네..핑클 컴백 앞두고 \"깔...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-17T23:25:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005641895"
-    }
-   ]
-  },
-  {
-   "keyword": "APEC 정상회의 개막",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-17T22:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[선전 APEC] 시진핑, 캐나다·멕시코 정상회담…트럼프 앞두고 외교 공세",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-17T23:34:00.000Z",
-     "link": "https://www.ajunews.com/view/20261118082820894"
-    },
-    {
-     "title": "[선전 APEC] 이재명·푸틴 새벽 도착, 오후엔 트럼프…시진핑 주재 환영...",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-17T23:18:00.000Z",
-     "link": "https://www.ajunews.com/view/20261118081153816"
-    },
-    {
-     "title": "[AI MY 뉴스] 18일 중국증시 'AI 반도체 전운 속 APEC 개막…기술주 반전...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-17T23:10:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261118000048"
-    }
-   ]
-  },
-  {
-   "keyword": "엄마 아들 남편 악플",
+   "keyword": "아들 남편과 악플",
    "sources": [
     "nate"
    ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
+   "articles90": 5,
+   "recent20": 3,
+   "press": 5,
    "firstArticleAt": "2026-11-17T23:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "박세미, “엄마와 아들 같다” 악플에…♥변우석 닮은꼴 남편 “아내는...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-18T00:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001150413"
+    },
+    {
+     "title": "박세미, ♥1살 연하 남편 공개 후 악플 세례…\"엄마와 아들 같다고\" (제...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-18T00:01:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002081621"
+    },
+    {
      "title": "박세미, 결혼 후 악플 토로 \"아줌마와 아들이 산다고\"…♥남편 '황당' (...",
      "press": "tvdaily.co.kr",
      "publishedAt": "2026-11-17T23:46:00.000Z",
      "link": "https://m.entertain.naver.com/article/440/0000053091"
-    },
-    {
-     "title": "“아줌마랑 아들” 박세미 결혼 후 악플, 변우석 닮은 연하 남편 반응은...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-17T23:29:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001188482"
-    },
-    {
-     "title": "'엄마랑 아들 같아'…박세미 향한 악플에 연하 훈남 남편 발끈 \"말도 안...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-17T23:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009295013"
     }
    ]
   },
@@ -336,13 +272,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 3,
-   "recent20": 1,
+   "articles90": 4,
+   "recent20": 2,
    "press": 3,
    "firstArticleAt": "2026-11-17T23:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "무안군의회, 농어촌 소멸위기 지원 기준 개선 촉구",
+     "press": "news.lghellovision.net",
+     "publishedAt": "2026-11-17T23:56:00.000Z",
+     "link": "http://news.lghellovision.net/news/articleView.html?idxno=562724"
+    },
     {
      "title": "무안군의회, 내년 예산안 심사 등 30일간 정례회 돌입",
      "press": "news.lghellovision.net",
@@ -354,12 +296,38 @@
      "press": "ekn.kr",
      "publishedAt": "2026-11-17T23:24:00.000Z",
      "link": "https://www.ekn.kr/web/view.php?key=20261118029471110"
+    }
+   ]
+  },
+  {
+   "keyword": "장나라 김혜윤 출연 기도",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-17T22:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "장나라, 김혜윤 출연 기도까지 했다…“엄마 아빠한테 자랑해야겠다”...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-17T23:18:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001147599"
     },
     {
-     "title": "무안군, 폐레고 1만2000여 개 활용한 휠체어 경사로 설치",
-     "press": "newsmaker.or.kr",
-     "publishedAt": "2026-11-17T23:06:00.000Z",
-     "link": "http://www.newsmaker.or.kr/news/articleView.html?idxno=185966"
+     "title": "장나라, 남지현 하차 후 김혜윤 캐스팅 간절히 원했다…\"물 떠 놓고 기도...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-17T23:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000784965"
+    },
+    {
+     "title": "장나라, 김혜윤 출연 위해 기도 제안…'굿파트너2' 호흡",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-17T22:56:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=625889"
     }
    ]
   },
@@ -398,6 +366,7 @@
   {
    "keyword": "출근하는 이용철 후보자",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 7,
@@ -408,29 +377,29 @@
    "capped": false,
    "samples": [
     {
+     "title": "출근하는 이용철 법무장관 후보자",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-17T23:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014328753?sid=102"
+    },
+    {
+     "title": "이용철 후보자, 밝은 표정으로 출근",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-17T23:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014328750?sid=102"
+    },
+    {
      "title": "인사청문회 준비 사무실 출근하는 이용철 후보자",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-17T23:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016447859?sid=100"
-    },
-    {
-     "title": "이용철 법무장관 후보자 출근",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-17T23:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014328758?sid=102"
-    },
-    {
-     "title": "출근하는 이용철 후보자",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-17T23:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016447864?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/001/0016447861?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 986,
+  "flagged": 990,
   "matched": 562,
   "avgLeadMin": 847,
   "recent": [
