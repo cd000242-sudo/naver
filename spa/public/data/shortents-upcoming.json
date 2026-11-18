@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T18:09:13.416Z",
+ "builtAt": "2026-11-18T18:19:17.112Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -39,38 +39,6 @@
      "press": "voakorea.com",
      "publishedAt": "2026-11-18T16:50:00.000Z",
      "link": "https://www.voakorea.com/a/8225096.html"
-    }
-   ]
-  },
-  {
-   "keyword": "김명민",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 2,
-   "firstArticleAt": "2026-11-18T16:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'유퀴즈' 김명민 \"호객행위 하다가 파출소 끌려가…경찰서장이었다\"",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-18T18:05:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000328411"
-    },
-    {
-     "title": "김명민 \"故 안판석 감독님과 한 작품은 더 할 수 있을 줄…한이 돼\" (유...",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-18T17:36:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000328410"
-    },
-    {
-     "title": "'유퀴즈' 김명민, 데뷔 30년 만 첫 예능 \"할말 못할말 못 가려\"",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-18T16:56:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000328409"
     }
    ]
   }
