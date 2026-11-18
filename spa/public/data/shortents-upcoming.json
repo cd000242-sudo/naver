@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T15:28:04.403Z",
+ "builtAt": "2026-11-18T15:38:08.225Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,50 +11,23 @@
  "measured": 28,
  "candidates": [
   {
-   "keyword": "수능 부정행위 포상금 1억",
+   "keyword": "시진핑 APEC 환영만찬",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
+   "articles90": 11,
    "recent20": 1,
    "press": 8,
-   "firstArticleAt": "2026-11-18T13:59:00.000Z",
+   "firstArticleAt": "2026-11-18T14:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[사설] 1억 포상 노린 시험장 고발, 어떤 혼란 부를지 걱정된다",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-18T15:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004010407?sid=110"
+     "title": "트럼프·시진핑·푸틴 만났다… 첫 미중러 정상회담 전날 한자리에",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-18T15:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000966430?sid=104"
     },
-    {
-     "title": "수능 부정행위 신고하면 \"1억원 포상금\" 추진",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-18T15:06:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3756407"
-    },
-    {
-     "title": "이번 수능부터 부정행위 신고 시 '1억 포상금' 추진",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-18T15:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000927611?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "APEC 정상회의 환영만찬",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-18T14:17:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
     {
      "title": "[사진] 중국 선전에 모인 APEC 정상들",
      "press": "joongang.co.kr",
@@ -66,27 +39,28 @@
      "press": "yna.co.kr",
      "publishedAt": "2026-11-18T14:52:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016450386?sid=104"
-    },
-    {
-     "title": "미중러, 사상 첫 3자회담 앞두고 APEC 환영 행사서 만나…나란히 기념사...",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-18T14:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012296850?sid=104"
     }
    ]
   },
   {
    "keyword": "한중 FTA 실질 타결",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 6,
    "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-18T14:03:00.000Z",
+   "firstArticleAt": "2026-11-18T14:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "李대통령, 中 'K콘텐츠 최혜국대우'에 \"전면·실질 복원 넘는 새 미래\"",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-18T15:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000544575?sid=101"
+    },
     {
      "title": "한중 경제·문화 교류 새 물꼬…강원관광 탄력 기대감",
      "press": "kado.net",
@@ -98,56 +72,83 @@
      "press": "sedaily.com",
      "publishedAt": "2026-11-18T15:06:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/011/0004683740?sid=110"
-    },
-    {
-     "title": "김정관 장관, 한·중 FTA 서비스 후속 협상 타결 따른 ‘한한령’ 해제...",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-18T15:02:00.000Z",
-     "link": "https://www.viva100.com/article/20261118501472"
     }
    ]
   },
   {
-   "keyword": "추경호 1심 무죄에",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-18T14:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[사설] 추경호, 1심 내란 무죄 불구 정치적 책임 가볍지 않다",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-18T15:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000966428?sid=110"
-    },
-    {
-     "title": "장동혁, 추경호 무죄에 주도권 강화?…한동훈 '배신자 프레임' 거세지나",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-18T15:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000553407?sid=100"
-    },
-    {
-     "title": "계엄 협조 증거라던 윤과 ‘2분 통화’…1심 “그런 증거 없다”",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-18T15:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003566243?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "김간지",
+   "keyword": "김명민",
    "sources": [
     "google"
    ],
    "articles90": 5,
    "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-18T14:05:00.000Z",
+   "firstArticleAt": "2026-11-18T14:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김명민, 집까지 팔고 이민 준비했는데…♥아내 한마디에 '이순신' 됐다...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-18T15:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004126243"
+    },
+    {
+     "title": "\"메소드 연기\" 김명민, '베토벤 바이러스' 웃픈 비화 (유퀴즈) [TV나우]",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-18T14:43:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000053269"
+    },
+    {
+     "title": "김명민, ♥아내 임신 중 태아 성장 멈췄다…\"배우 포기 후 이민 결심\" (...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-18T14:41:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004467874"
+    }
+   ]
+  },
+  {
+   "keyword": "트럼프 푸틴 악수",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-18T14:17:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프·시진핑·푸틴 만났다… 첫 미중러 정상회담 전날 한자리에",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-18T15:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000966430?sid=104"
+    },
+    {
+     "title": "트럼프·푸틴, 시진핑 지켜보는 가운데 악수…19일 3자 정상회담",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-18T15:18:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626163"
+    },
+    {
+     "title": "푸틴, 9년 만에 APEC 정상들과 단체사진…국제무대 복귀 과시",
+     "press": "segye.com",
+     "publishedAt": "2026-11-18T15:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004176351?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "김간지",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-18T14:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -172,71 +173,39 @@
    ]
   },
   {
-   "keyword": "김명민",
-   "sources": [
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-18T14:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"메소드 연기\" 김명민, '베토벤 바이러스' 웃픈 비화 (유퀴즈) [TV나우]",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-18T14:43:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000053269"
-    },
-    {
-     "title": "김명민, ♥아내 임신 중 태아 성장 멈췄다…\"배우 포기 후 이민 결심\" (...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-18T14:41:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004467874"
-    },
-    {
-     "title": "‘유퀴즈’ 김명민, 故 안판석 감독 떠올리며 먹먹… “한 작품 더 못한...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-18T14:16:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003542507"
-    }
-   ]
-  },
-  {
-   "keyword": "2026 대한민국 게임대상",
+   "keyword": "추경호 1심 무죄에",
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 1,
+   "articles90": 4,
+   "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-18T14:02:00.000Z",
+   "firstArticleAt": "2026-11-18T14:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[게임대상] 펄어비스 '붉은사막' 대상(대통령상) 포함 8관왕…엔씨 '아...",
-     "press": "webeconomy.co.kr",
-     "publishedAt": "2026-11-18T15:16:00.000Z",
-     "link": "https://www.webeconomy.co.kr/news/articleView.html?idxno=2381861"
+     "title": "[사설] 추경호, 1심 내란 무죄 불구 정치적 책임 가볍지 않다",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-18T15:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000966428?sid=110"
     },
     {
-     "title": "펄어비스 '붉은사막', 2026 대한민국 게임대상 대통령상 등 역대 최다 8...",
-     "press": "onews.tv",
-     "publishedAt": "2026-11-18T14:42:00.000Z",
-     "link": "https://www.onews.tv/news/articleView.html?idxno=292025"
+     "title": "장동혁, 추경호 무죄에 주도권 강화?…한동훈 '배신자 프레임' 거세지나",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-18T15:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000553407?sid=100"
     },
     {
-     "title": "게임대상 우수상 〈도깨비의세계〉 초기화·돌파 이전·천장 시스템 도...",
-     "press": "globale.co.kr",
-     "publishedAt": "2026-11-18T14:20:00.000Z",
-     "link": "https://www.globale.co.kr/news/articleView.html?idxno=41733"
+     "title": "계엄 협조 증거라던 윤과 ‘2분 통화’…1심 “그런 증거 없다”",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-18T15:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003566243?sid=102"
     }
    ]
   },
   {
-   "keyword": "승리 아내 동반 입국",
+   "keyword": "승리 임신한 아내 동반 입국",
    "sources": [
     "daum"
    ],
@@ -268,73 +237,42 @@
    ]
   },
   {
-   "keyword": "교통 사고",
+   "keyword": "2026 대한민국 게임대상",
    "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-18T14:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "교통사고 현장 속 빛난 군인정신…육군 21사단 신임장교 생명 구조",
-     "press": "kado.net",
-     "publishedAt": "2026-11-18T15:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000212150?sid=102"
-    },
-    {
-     "title": "최근 5년간 보행 교통사고 사망자 11월 가장 많아",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-18T15:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001231859?sid=102"
-    },
-    {
-     "title": "345kg 들던 역도 국가대표, 교통사고로 오른팔 절단…'金메달 딴 지 4개...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-18T14:00:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/311/0002081909"
-    }
-   ]
-  },
-  {
-   "keyword": "소노 브롱코스 제압",
-   "sources": [
-    "daum"
+    "signal.bz",
+    "nate"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-18T14:10:00.000Z",
+   "firstArticleAt": "2026-11-18T14:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'오브라이언트 23점 8R·막판 91-91 동점 뚫은 자유투 집중력' 고양 소노...",
-     "press": "dailysportshankook.co.kr",
-     "publishedAt": "2026-11-18T14:32:00.000Z",
-     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435676"
+     "title": "[게임대상] 펄어비스 '붉은사막' 대상(대통령상) 포함 8관왕…엔씨 '아...",
+     "press": "webeconomy.co.kr",
+     "publishedAt": "2026-11-18T15:16:00.000Z",
+     "link": "https://www.webeconomy.co.kr/news/articleView.html?idxno=2381861"
     },
     {
-     "title": "소노, EASL서 몽골 브롱코스 제압하고 2연승",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-18T14:30:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/055/0001404085"
+     "title": "펄어비스 '붉은사막', 2026 대한민국 게임대상 대통령상 등 역대 최다 8...",
+     "press": "onews.tv",
+     "publishedAt": "2026-11-18T14:42:00.000Z",
+     "link": "https://www.onews.tv/news/articleView.html?idxno=292025"
     },
     {
-     "title": "소노, 브롱코스 추격 뿌리치고 95-91 신승…2연승 질주 [EASL]",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-18T14:10:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611180243"
+     "title": "게임대상 우수상 〈도깨비의세계〉 초기화·돌파 이전·천장 시스템 도...",
+     "press": "globale.co.kr",
+     "publishedAt": "2026-11-18T14:20:00.000Z",
+     "link": "https://www.globale.co.kr/news/articleView.html?idxno=41733"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1065,
+  "flagged": 1068,
   "matched": 597,
   "avgLeadMin": 887,
   "recent": [
