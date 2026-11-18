@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T03:26:22.183Z",
+ "builtAt": "2026-11-18T03:36:26.053Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,42 +16,107 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 70,
-   "recent20": 8,
-   "press": 55,
-   "firstArticleAt": "2026-11-18T01:58:00.000Z",
+   "articles90": 56,
+   "recent20": 10,
+   "press": 45,
+   "firstArticleAt": "2026-11-18T02:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "서산시, 지방세 등 고액·상습 체납자 명단 공개",
-     "press": "cctimes.kr",
-     "publishedAt": "2026-11-18T03:24:00.000Z",
-     "link": "http://www.cctimes.kr/news/articleView.html?idxno=937828"
+     "title": "지방세 최고액 체납자는? 경기도, 상습체납자 4029명 공개",
+     "press": "kgnews.co.kr",
+     "publishedAt": "2026-11-18T03:32:00.000Z",
+     "link": "https://www.kgnews.co.kr/news/article.html?no=920114"
     },
     {
-     "title": "인천시, 고액·상습 체납자 882명 공개…개인 최고 367억원",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-18T03:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009296043?sid=102"
+     "title": "강원도, 1000만 원 이상 고액·상습 체납자 373명 명단공개",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-18T03:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003483418?sid=102"
     },
     {
-     "title": "성남시, 1000만원 이상 고액·상습 체납자 110명 명단 공개",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-18T03:22:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2020107"
+     "title": "서천군, 지방세 고액·상습 체납자 공개…개인 8명·법인 4곳",
+     "press": "newstnt.com",
+     "publishedAt": "2026-11-18T03:30:00.000Z",
+     "link": "https://www.newstnt.com/news/articleView.html?idxno=729093"
     }
    ]
   },
   {
-   "keyword": "김종철 청장 후보자 인사청문회",
+   "keyword": "KDI 경제성장률 전망",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 66,
-   "recent20": 26,
-   "press": 23,
-   "firstArticleAt": "2026-11-18T02:33:00.000Z",
+   "articles90": 30,
+   "recent20": 3,
+   "press": 29,
+   "firstArticleAt": "2026-11-18T03:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "KDI \"내년 3.9% 성장\"…반도체가 끌고 가는 경제, 쏠림 심화",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-18T03:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004211112?sid=101"
+    },
+    {
+     "title": "KDI, 올해 성장률 3.8%·내년 3.9%로 상향…\"성장 동력 3분의 2는 반도체...",
+     "press": "queen.co.kr",
+     "publishedAt": "2026-11-18T03:20:00.000Z",
+     "link": "http://www.queen.co.kr/news/articleView.html?idxno=466528"
+    },
+    {
+     "title": "KDI, 내년 3.9% 성장 전망…반도체 쏠림 경계",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-18T03:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003059840?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "한중 정상회담",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 24,
+   "recent20": 14,
+   "press": 13,
+   "firstArticleAt": "2026-11-18T02:28:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한중 정상회담 악수",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-18T03:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009296054?sid=100"
+    },
+    {
+     "title": "한중 정상회담",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-18T03:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009296051?sid=100"
+    },
+    {
+     "title": "악수하는 한중 정상",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-18T03:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009296050?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "김종철 청장 후보자 답변",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 21,
+   "recent20": 3,
+   "press": 11,
+   "firstArticleAt": "2026-11-18T02:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -62,81 +127,16 @@
      "link": "https://n.news.naver.com/mnews/article/421/0009296042?sid=100"
     },
     {
-     "title": "인사하는 김종철 후보자",
+     "title": "질의에 답변하는 김종철 경찰청장 후보자",
      "press": "newspim.com",
      "publishedAt": "2026-11-18T03:19:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261118000763"
+     "link": "https://www.newspim.com/news/view/20261118000768"
     },
     {
-     "title": "김종철 경찰청장 후보자 \"수능 AI 부정행위, 배후 공모자·조력자까지 추...",
+     "title": "의원 질의에 답변하는 김종철 경찰청장 후보자",
      "press": "newspim.com",
      "publishedAt": "2026-11-18T03:19:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261118000765"
-    }
-   ]
-  },
-  {
-   "keyword": "수능 AI 부정행위 대책 논의",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 25,
-   "recent20": 1,
-   "press": 22,
-   "firstArticleAt": "2026-11-18T02:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'수능 D-1' 민주당 설화 경계령 … 'AI 부정행위' 틀어막기 총력전 [여의...",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-18T03:14:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/18/2026111850175.html"
-    },
-    {
-     "title": "당·정 \"올 수능부터 AI 부정행위자 10년 응시제한\"…법 개정 추진",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-18T03:02:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1320891&inflow=N"
-    },
-    {
-     "title": "당정 “부정행위 시 10년 응시 금지, 올해 수능도 소급 추진”",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-18T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003566106?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "정치",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 15,
-   "recent20": 5,
-   "press": 14,
-   "firstArticleAt": "2026-11-18T02:48:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "‘위증·정치관여’ 조태용, 징역 2년 6개월 확정…직무유기 혐의는 무...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-18T03:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004683508?sid=102"
-    },
-    {
-     "title": "건보공단·심평원 임원 '정치 이력' 제한…현직도 퇴임 대상",
-     "press": "medipana.com",
-     "publishedAt": "2026-11-18T03:16:00.000Z",
-     "link": "https://www.medipana.com/news/articleView.html?idxno=422124"
-    },
-    {
-     "title": "‘정치 관여·위증’ 조태용 전 국정원장, 징역 2년 6개월 확정",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-18T03:16:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2649747"
+     "link": "https://www.newspim.com/news/view/20261118000771"
     }
    ]
   },
@@ -146,13 +146,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-18T02:02:00.000Z",
+   "articles90": 11,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-18T02:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "최태원 꺼낸 새 성장 카드 '사회적 가치'",
+     "press": "00news.co.kr",
+     "publishedAt": "2026-11-18T03:28:00.000Z",
+     "link": "http://www.00news.co.kr/news/articleView.html?idxno=108165"
+    },
     {
      "title": "\"사회적 가치 창출 기업에 확실한 보상\"…최태원, 새 자본주의 실험 확...",
      "press": "starnewskorea.com",
@@ -164,12 +170,6 @@
      "press": "munhwa.com",
      "publishedAt": "2026-11-18T03:01:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/021/0002833708?sid=101"
-    },
-    {
-     "title": "최태원 \"사회문제 해결에 경제적 보상 필요…AI가 유효한 도구\"",
-     "press": "seouleconews.com",
-     "publishedAt": "2026-11-18T02:56:00.000Z",
-     "link": "http://www.seouleconews.com/news/articleView.html?idxno=95096"
     }
    ]
   },
@@ -178,105 +178,156 @@
    "sources": [
     "nate"
    ],
-   "articles90": 16,
-   "recent20": 5,
+   "articles90": 19,
+   "recent20": 4,
    "press": 8,
    "firstArticleAt": "2026-11-18T02:36:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "‘사운드:트랙’ 표예진X이기택 “케미 만족…어린아이처럼 장난치며 촬...",
+     "title": "‘사운드:트랙’ 주종혁 “단막극 작업, 독립영화 떠올라…끝나고 나면...",
      "press": "sports.donga.com",
-     "publishedAt": "2026-11-18T03:23:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001305438"
+     "publishedAt": "2026-11-18T03:31:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001305441"
     },
     {
-     "title": "'사운드:트랙' 주종혁 \"다시는 이런 연기 못 해\"…확신 이유",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-18T03:16:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000328353"
-    },
-    {
-     "title": "'사운드:트랙' 주종혁 \"단막극 작업, 독립영화 활동 때 떠올라\"",
+     "title": "KBS 단막극 '사운드:트랙', 사랑은 선율을 타고 [종합]",
      "press": "hankookilbo.com",
-     "publishedAt": "2026-11-18T03:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/469/0000966264"
+     "publishedAt": "2026-11-18T03:29:00.000Z",
+     "link": "https://m.entertain.naver.com/article/469/0000966266"
+    },
+    {
+     "title": "김나영→장필순· 아이유 명곡 재해석..'사운드:트랙', 음악과 단막극의...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-18T03:28:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003488356"
     }
    ]
   },
   {
-   "keyword": "북미 정상회담 준비",
+   "keyword": "바 루아, 광주 최초 K리그 이달의 선수 수상",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 7,
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-18T02:07:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘4경기 3골 5도움’ 바 루아, 광주FC 사상 첫 ‘이달의 선수’",
+     "press": "kwangju.co.kr",
+     "publishedAt": "2026-11-18T03:30:00.000Z",
+     "link": "http://www.kwangju.co.kr/article.php?aid=1794972309805476008"
+    },
+    {
+     "title": "[공식발표] 바 루아 3개월 만에 K리그1 접수! 10월 4경기서 3골 5도움, 광...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-18T03:11:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/117/0004126089"
+    },
+    {
+     "title": "바 루아, K리그 10월 MVP…광주 선수 최초 수상",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-18T02:58:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/421/0009295985"
+    }
+   ]
+  },
+  {
+   "keyword": "조태용 징역형 확정",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 5,
    "recent20": 0,
-   "press": 6,
+   "press": 5,
    "firstArticleAt": "2026-11-18T02:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美국무 \"트럼프, 북미 정상회담에 진지…성사 안 될 수도\"(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-18T02:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016448798?sid=104"
+     "title": "조태용 전 국정원장, 징역 2년 6개월 확정",
+     "press": "naeil.com",
+     "publishedAt": "2026-11-18T03:16:00.000Z",
+     "link": "https://www.naeil.com/news/read/609288?ref=naver"
     },
     {
-     "title": "\"김정은 APEC 참석설에 북미회담 가능성…중국 전용기 탈수도\"",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-18T02:30:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261118010006956"
+     "title": "\"尹 체포지시 없었다\" 허위 발언…조태용 전 국정원장 징역형 확정",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-18T02:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006411744?sid=102"
     },
     {
-     "title": "루비오 美 국무 \"북미 정상회담 예정 없어…트럼프는 김정은과 회담에 ...",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-18T02:22:00.000Z",
-     "link": "https://www.ajunews.com/view/20261118103936575"
+     "title": "'尹 체포 지시 부인' 조태용, 징역 2년 6개월 확정",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-18T02:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004211085?sid=102"
     }
    ]
   },
   {
-   "keyword": "혼인",
+   "keyword": "혈당",
    "sources": [
     "signal.bz",
     "google"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-18T02:00:00.000Z",
+   "firstArticleAt": "2026-11-18T02:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "구교환, 이옥섭과 4년전 혼인신고 숨긴 이유…\"궁금해하지 않았다\" [N인...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-18T03:25:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009296044"
+     "title": "바늘 대신 레이저로 채혈…라메디텍, 혈당기 해외시장 공략",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-18T03:08:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5084777"
     },
     {
-     "title": "구교환, ♥이옥섭과 4년 전 혼인 신고…\"아무도 안 물어보더라\" [엑's 인...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-18T03:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002081678"
+     "title": "검진 결과지 속 '혈당 변화', 췌장 위험 신호일 수도... 낭종 발견 땐 추...",
+     "press": "newsgn.com",
+     "publishedAt": "2026-11-18T02:32:00.000Z",
+     "link": "https://www.newsgn.com/news/articleView.html?idxno=586353"
     },
     {
-     "title": "혼인신고하고 기념사진도 '찰칵'…김해시, 행복민원실에 포토존 설치",
-     "press": "gimhaenews.co.kr",
-     "publishedAt": "2026-11-18T02:56:00.000Z",
-     "link": "http://www.gimhaenews.co.kr/news/articleView.html?idxno=54471"
+     "title": "\"같은 당뇨병 약에도 한국인은 혈당 더 많이 떨어졌다\"",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-18T02:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000966253?sid=103"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1050,
-  "matched": 580,
-  "avgLeadMin": 826,
+  "flagged": 1056,
+  "matched": 583,
+  "avgLeadMin": 822,
   "recent": [
+   {
+    "keyword": "박세미 결혼 후 악플",
+    "hitKeyword": "박세미 결혼 악플",
+    "hitAt": "2026-11-18T12:30:00+09:00",
+    "leadMin": 167
+   },
+   {
+    "keyword": "수능 AI 부정행위 대책 회의",
+    "hitKeyword": "세무사 시험 AI 부정행위",
+    "hitAt": "2026-11-18T12:30:00+09:00",
+    "leadMin": 124
+   },
+   {
+    "keyword": "수능 AI 부정행위 대책 논의",
+    "hitKeyword": "세무사 시험 AI 부정행위",
+    "hitAt": "2026-11-18T12:30:00+09:00",
+    "leadMin": 54
+   },
    {
     "keyword": "변동성",
     "hitKeyword": "코스피 지수 변동성",
@@ -318,24 +369,6 @@
     "hitKeyword": "김혜윤 살롱드립",
     "hitAt": "2026-11-18T11:30:00+09:00",
     "leadMin": 147
-   },
-   {
-    "keyword": "핑클",
-    "hitKeyword": "핑클 완전체 회동",
-    "hitAt": "2026-11-18T11:00:00+09:00",
-    "leadMin": 137
-   },
-   {
-    "keyword": "정호연 007 본드걸 후보 거론",
-    "hitKeyword": "정호연 007 본드걸 후보",
-    "hitAt": "2026-11-18T10:30:00+09:00",
-    "leadMin": 117
-   },
-   {
-    "keyword": "정호연 본드걸 후보",
-    "hitKeyword": "정호연 007 본드걸 후보",
-    "hitAt": "2026-11-18T10:30:00+09:00",
-    "leadMin": 107
    }
   ]
  }
