@@ -1,20 +1,572 @@
 {
-  "publishedAt": "2026-11-18T01:25:47.209Z",
+  "publishedAt": "2026-11-18T17:48:35.204Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
     "candidates": 240,
     "niche": 0,
-    "preemption": 1,
+    "preemption": 5,
     "pending": 0
   },
   "freeSample": {
-    "day": "2026-11-18",
+    "day": "2026-11-19",
     "keywords": []
   },
   "rows": [],
   "observations": [
+    {
+      "keyword": "김간지 정치성향",
+      "issue": "김간지",
+      "topic": "김간지",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 11,
+      "documentCountMeasured": true,
+      "searchVolume": 20,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 20",
+        "문서수 11",
+        "선점 후보 — 경쟁 문서 11건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "김간지가 과거 저격했던 라디오스타에 출연해 열정페이 탄생 비화를 공개해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "김간지 정치성향 논란? 라스 저격부터 출연까지 발언 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "김간지 정치성향 궁금해 찾다 보니 라스 저격한 이유가 따로 있더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "김간지 라디오스타",
+          "searchVolume": 180,
+          "frame": "generic"
+        },
+        {
+          "keyword": "김간지 밴드",
+          "searchVolume": 50,
+          "frame": "generic"
+        },
+        {
+          "keyword": "김간지 라스",
+          "searchVolume": 40,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "김간지 라디오스타",
+          "searchVolume": 180,
+          "documentCount": 332,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김간지 밴드",
+          "searchVolume": 50,
+          "documentCount": 1312,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김간지 라스",
+          "searchVolume": 40,
+          "documentCount": 91,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김간지 열정페이",
+          "searchVolume": 20,
+          "documentCount": 49,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김간지 하헌진",
+          "searchVolume": 10,
+          "documentCount": 1043,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-18T17:42:14.012Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "김간지 열정페이",
+      "issue": "김간지",
+      "topic": "김간지",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 49,
+      "documentCountMeasured": true,
+      "searchVolume": 20,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 2,
+      "freshFrontalCount": 2,
+      "reasons": [
+        "검색량 20",
+        "문서수 49",
+        "선점 후보 — 경쟁 문서 49건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 2건 (최근 2건)"
+        }
+      ],
+      "whySearch": {
+        "text": "김간지가 과거 저격했던 라디오스타에 출연해 열정페이 탄생 비화를 공개해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "김간지 열정페이 라스 저격했다 출연한 이유",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "김간지 열정페이 라스 저격해놓고 왜 나갔나 했더니 이유가 있더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "김간지 나이",
+          "searchVolume": 1030,
+          "frame": "generic"
+        },
+        {
+          "keyword": "김간지 라디오스타",
+          "searchVolume": 180,
+          "frame": "generic"
+        },
+        {
+          "keyword": "김간지 라스",
+          "searchVolume": 40,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "김간지 나이",
+          "searchVolume": 1030,
+          "documentCount": 563,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김간지 라디오스타",
+          "searchVolume": 180,
+          "documentCount": 332,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김간지 라스",
+          "searchVolume": 40,
+          "documentCount": 91,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김간지 하헌진",
+          "searchVolume": 10,
+          "documentCount": 1043,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": [
+        {
+          "title": "열정페이 유래 어원이요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=11080102&docId=316621583&answerNo=2",
+          "views": 1972,
+          "answers": 2
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-11-18T17:42:14.012Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "김간지 저격 영상",
+      "issue": "김간지",
+      "topic": "김간지",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "과거 발언 주목",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 45,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 45",
+        "선점 후보 — 경쟁 문서 45건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 과거 발언 주목"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "김간지가 과거 저격했던 라디오스타에 출연해 열정페이 탄생 비화를 공개해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "김간지 저격 영상 라스 클럽 발언 전말과 출연 이유",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "김간지 저격 영상 그렇게 저격해놓고 결국 라스 나온 게 의외더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "김간지 라디오스타",
+          "searchVolume": 180,
+          "frame": "generic"
+        },
+        {
+          "keyword": "김간지 라스",
+          "searchVolume": 40,
+          "frame": "generic"
+        },
+        {
+          "keyword": "김간지 열정페이",
+          "searchVolume": 20,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "김간지 라디오스타",
+          "searchVolume": 180,
+          "documentCount": 332,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김간지 라스",
+          "searchVolume": 40,
+          "documentCount": 91,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김간지 열정페이",
+          "searchVolume": 20,
+          "documentCount": 49,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-18T17:42:14.012Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "김간지 방송 반응",
+      "issue": "김간지",
+      "topic": "김간지",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "시청자 평가 궁금",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 145,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 145",
+        "선점 후보 — 경쟁 문서 145건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 시청자 평가 궁금"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "김간지가 과거 저격했던 라디오스타에 출연해 열정페이 탄생 비화를 공개해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "김간지 방송 반응 라스 저격부터 결국 출연까지 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "김간지 방송 반응 보기 전에 열정페이랑 라스 저격 영상부터 찾게 되더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "김간지 라디오스타",
+          "searchVolume": 180,
+          "frame": "generic"
+        },
+        {
+          "keyword": "김간지 밴드",
+          "searchVolume": 50,
+          "frame": "generic"
+        },
+        {
+          "keyword": "김간지 라스",
+          "searchVolume": 40,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "김간지 라디오스타",
+          "searchVolume": 180,
+          "documentCount": 332,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김간지 밴드",
+          "searchVolume": 50,
+          "documentCount": 1312,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김간지 라스",
+          "searchVolume": 40,
+          "documentCount": 91,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김간지 열정페이",
+          "searchVolume": 20,
+          "documentCount": 49,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-18T17:42:14.012Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "퍼플렉시티 근황",
+      "issue": "퍼플렉시티",
+      "topic": "퍼플렉시티",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 279,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 279",
+        "선점 후보 — 경쟁 문서 279건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "AI 검색 퍼플렉시티가 연 환산 매출 10억 달러를 돌파해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "퍼플렉시티 근황 연매출 10억 달러 돌파와 AI 에이전트 16개",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "퍼플렉시티 근황 찾다가 구독 가격 보고 결제창에서 한참 망설였어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "퍼플렉시티 가격",
+          "searchVolume": 120,
+          "frame": "price"
+        },
+        {
+          "keyword": "퍼플렉시티 구독",
+          "searchVolume": 40,
+          "frame": "generic"
+        },
+        {
+          "keyword": "퍼플렉시티 앱",
+          "searchVolume": 30,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "퍼플렉시티 가격",
+          "searchVolume": 120,
+          "documentCount": 23041,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "퍼플렉시티 구독",
+          "searchVolume": 40,
+          "documentCount": 19757,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "퍼플렉시티 앱",
+          "searchVolume": 30,
+          "documentCount": 21303,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "퍼플렉시티 사용법",
+          "searchVolume": 20,
+          "documentCount": 30855,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "퍼플렉시티 코멧",
+          "searchVolume": 20,
+          "documentCount": 1336,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "퍼플렉시티 프로 무료",
+          "searchVolume": 10,
+          "documentCount": 7814,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-18T17:42:14.012Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "제물포고등학교 농구부",
       "issue": "제물포고등학교",
@@ -73,7 +625,8 @@
       "monetize": null,
       "measuredAt": "2026-11-18T01:23:07.433Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "스마일샤크 채용",
@@ -2454,30 +3007,901 @@
   "rejectedCount": 0,
   "issues": [
     {
-      "issue": "엔비디아",
+      "issue": "수능 부정행위 제보",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "정부가 이번 수능부터 부정행위 제보 1억 포상금 즉시 적용을 추진해서",
+      "headlines": [
+        {
+          "title": "정부, 내일 수능부터 '부정행위 제보시 1억 포상금' 지급 추진",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-18T12:22:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016450323?sid=100"
+        },
+        {
+          "title": "정부, 수능 부정행위 제보 1억원 포상 즉시적용 추진",
+          "press": "news.jtbc.co.kr",
+          "publishedAt": "2026-11-18T11:58:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/437/0000521383?sid=102"
+        },
+        {
+          "title": "정부, 부정행위 제보 1억 포상금 이번 수능부터 적용 추진",
+          "press": "news.kbs.co.kr",
+          "publishedAt": "2026-11-18T12:03:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/056/0012296677?sid=100"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "수능",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "APEC",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "rising",
       "isHot": true,
-      "why": "엔비디아 의장이 젠슨 황 재선임 의사가 없다고 밝혀서",
+      "why": "중국 APEC 계기로 이재명 대통령이 시진핑과 정상회담을 해서",
       "headlines": [
         {
-          "title": "엔비디아 의장, '젠슨황 복귀' 일축…\"재선임 의사 없다\"(종합)",
+          "title": "李대통령 \"한반도 평화, 韓中 공동이익…함께 노력하길\"",
           "press": "yna.co.kr",
-          "publishedAt": "2026-11-17T23:06:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016447853?sid=104"
+          "publishedAt": "2026-11-18T04:33:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016449083?sid=100"
         },
         {
-          "title": "엔비디아 이사회 의장 \"젠슨 황 복귀시킬 의사 없어\"",
+          "title": "이 대통령, 중국 APEC 계기 시진핑 주석과 정상회담",
+          "press": "ytn.co.kr",
+          "publishedAt": "2026-11-18T03:57:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/052/0002434515?sid=100"
+        },
+        {
+          "title": "중러 정상, 미중러 첫 3자 회담 앞두고 결속 과시…APEC서 협력 강조",
           "press": "newsis.com",
-          "publishedAt": "2026-11-17T22:50:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014328715?sid=104"
+          "publishedAt": "2026-11-18T14:02:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014331354?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "apec 2026",
+          "searchVolume": null,
+          "origin": "autocomplete"
         },
         {
-          "title": "\"재선임 의사 없다\"…엔비디아 의장, '젠슨황 복귀' 일축",
+          "keyword": "야구 apec",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "apec 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "apec 2026 야구",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "apec 회원국",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "apec 나루공원",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "경주 apec",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "apec 중계",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "APEC 공동선언",
+          "reason": "성과 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "자바 보안 취약점",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "PHP에 이어 자바에서도 고위험 취약점이 발견돼 정부가 긴급 점검을 권고해서",
+      "headlines": [
+        {
+          "title": "PHP 이어 자바서도 고위험 보안 취약점…정부 긴급 점검 권고",
+          "press": "news.kbs.co.kr",
+          "publishedAt": "2026-11-18T00:51:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/056/0012296153?sid=105"
+        },
+        {
+          "title": "PHP 이어 '자바'서도 치명적 취약점…공공·기업 보안 비상",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-17T21:50:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016447797?sid=105"
+        },
+        {
+          "title": "韓 공공기관 73% 쓰는 '자바'… 태생부터 해킹 취약점 있었다",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-11-18T07:53:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005765674?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "자바",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "자바 보안",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "트럼프 푸틴 악수",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "시진핑이 트럼프를 공항에서 직접 영접하고 사상 첫 미중러 3자 회담을 앞둬서",
+      "headlines": [
+        {
+          "title": "시진핑, 中도착 트럼프 공항서 직접 영접…국가주석 취임후 처음(종합2...",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-18T11:03:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016450247?sid=104"
+        },
+        {
+          "title": "시진핑 내외 양옆에 트럼프·푸틴…사상 첫 미·중·러 3자 회담 앞두고...",
+          "press": "dt.co.kr",
+          "publishedAt": "2026-11-18T17:01:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/029/0003059959?sid=104"
+        },
+        {
+          "title": "트럼프·푸틴·시진핑 한자리에…사상 첫 미중러 3자 회담 앞두고 ‘악...",
+          "press": "seoul.co.kr",
+          "publishedAt": "2026-11-18T16:31:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/081/0003700886?sid=104"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "수원FC 위민 지소연",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "리그 3위 경주한수원이 1위 수원FC 위민을 꺾고 WK리그 첫 우승을 해서",
+      "headlines": [
+        {
+          "title": "경주한수원, 창단 첫 WK리그 챔프전 우승…'3위팀 새 역사'",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-18T12:04:00.000Z",
+          "link": "https://m.sports.naver.com/kfootball/article/001/0016450306"
+        },
+        {
+          "title": "[포토]도움상 수상하는 수원FC 위민 지소연",
+          "press": "sportsseoul.com",
+          "publishedAt": "2026-11-18T13:31:00.000Z",
+          "link": "https://m.sports.naver.com/kfootball/article/468/0001281930"
+        },
+        {
+          "title": "수원FC 위민, 우승 문턱서 무너졌다…프리킥 한 방에 ‘눈물’",
+          "press": "kyeonggi.com",
+          "publishedAt": "2026-11-18T12:10:00.000Z",
+          "link": "https://m.sports.naver.com/kfootball/article/666/0000132754"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "수원fc",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "수원fc 위민",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "김성환 기후부 장관",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "김성환 기후부 장관이 COP31과 국제 기후대화에서 녹색대전환을 촉구해서",
+      "headlines": [
+        {
+          "title": "韓, IEA와 '라이즈 아시아' 소개…아시아 에너지 안보 협력 강화",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-18T10:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014331214?sid=101"
+        },
+        {
+          "title": "페루 환경부 장관과 기념 촬영하는 김성환 기후부 장관",
+          "press": "news1.kr",
+          "publishedAt": "2026-11-18T10:36:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009297225?sid=101"
+        },
+        {
+          "title": "김성환 기후부 장관, 한-호주 COP31 녹색산업화 라운드테이블 개회사",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-18T13:35:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016450370?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "김성환",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "김종철 경찰청장 후보자",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "국회 행안위가 인사청문 당일 김종철 경찰청장 후보자 보고서를 채택해서",
+      "headlines": [
+        {
+          "title": "행안위, 인사청문 당일 김종철 경찰청장 후보자 보고서 채택",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-18T10:47:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016450241?sid=100"
+        },
+        {
+          "title": "국회 행안위, 김종철 경찰청장 후보자 인사청문보고서 채택",
+          "press": "news1.kr",
+          "publishedAt": "2026-11-18T11:23:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009297274?sid=100"
+        },
+        {
+          "title": "행안위, 김종철 경찰청장 후보자 인사청문보고서 채택",
+          "press": "imnews.imbc.com",
+          "publishedAt": "2026-11-18T10:29:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/214/0001536466?sid=100"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "김종철 경찰청장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김종철",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "신세계",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "신세계인터내셔날이 미국 럭셔리 니치향수 에드워드 베스를 국내 독점 론칭해서",
+      "headlines": [
+        {
+          "title": "니치 향수 키우는 신세계인터내셔날…美 럭셔리 향수 들여온다",
+          "press": "hankyung.com",
+          "publishedAt": "2026-11-18T00:54:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005355158?sid=101"
+        },
+        {
+          "title": "대전신세계, 유성구에 상생 후원금 5천만원 기탁…6년째",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-17T01:35:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016445842?sid=102"
+        },
+        {
+          "title": "신세계인터내셔날, 美 럭셔리 향수 '에드워드 베스' 독점 론칭",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-18T02:06:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014329472?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "신세계 센텀시티점",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "신세계 강남점",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "신세계 상품권",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "신세계 대구",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "신세계 영화",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "신세계 회장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "신세계 면세점 온라인",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "신세계(주)",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "신세계 크리스마스",
+          "reason": "연말 연출 주목",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "신세계 니치향수",
+          "reason": "라인업 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "추경호 1심 무죄",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "법원이 계엄 해제 표결 방해 혐의로 기소된 추경호에게 1심 무죄를 선고해서",
+      "headlines": [
+        {
+          "title": "추경호 1심 무죄…\"표결 방해 증명 안 돼\"",
           "press": "news.sbs.co.kr",
-          "publishedAt": "2026-11-17T23:11:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/055/0001403834?sid=104"
+          "publishedAt": "2026-11-18T11:32:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/055/0001404055?sid=102"
+        },
+        {
+          "title": "추경호 '계엄해제 표결방해' 1심 무죄…\"내란행위 아냐\"(종합2보)",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-18T10:45:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016450240?sid=102"
+        },
+        {
+          "title": "'계엄 해제 방해' 추경호 1심 무죄‥\"尹 요청 증명 안 돼\"",
+          "press": "imnews.imbc.com",
+          "publishedAt": "2026-11-18T11:27:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/214/0001536486?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "추경호",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "추경호 1심",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "김간지",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "김간지가 과거 저격했던 라디오스타에 출연해 열정페이 탄생 비화를 공개해서",
+      "headlines": [
+        {
+          "title": "김간지, “열정 페이 내가 만들었다”…탄생 비화 공개 (라스)",
+          "press": "sports.donga.com",
+          "publishedAt": "2026-11-18T04:41:00.000Z",
+          "link": "https://m.entertain.naver.com/article/382/0001305453"
+        },
+        {
+          "title": "김간지, 클럽서 '라스' 저격한 이유…\"제작진이 보길 바랐다\"",
+          "press": "enews.imbc.com",
+          "publishedAt": "2026-11-18T06:51:00.000Z",
+          "link": "https://m.entertain.naver.com/article/408/0000328379"
+        },
+        {
+          "title": "'라스' 공개 저격했던 가수, 결국 출연했다…김간지 \"사실 섭외 기다려...",
+          "press": "tenasia.co.kr",
+          "publishedAt": "2026-11-18T07:01:00.000Z",
+          "link": "https://m.entertain.naver.com/article/312/0000785074"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "김간지 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김간지 연세대",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김간지 mbti",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김간지 라디오스타",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "라디오스타 김간지",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김간지 집",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김간지 인스타",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김간지 키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "김간지 방송 반응",
+          "reason": "시청자 평가 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "김간지 저격 영상",
+          "reason": "과거 발언 주목",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "김간지 근황",
+          "reason": "현재 활동 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "구글",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "구글이 한국에 무료로 예약·구매를 맡는 AI 비서를 확대 적용해서",
+      "headlines": [
+        {
+          "title": "네이버웹툰 2차 창작앱 '컷츠 메이크', 구글 '올해의앱' 선정",
+          "press": "hankyung.com",
+          "publishedAt": "2026-11-18T06:42:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005355314?sid=105"
+        },
+        {
+          "title": "\"한국은 무료\"...구글, 예약·구매 맡는 AI 비서 확대",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-11-18T01:15:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002445806?sid=105"
+        },
+        {
+          "title": "인하대병원, 구글 워크스페이스·제미나이 도입한다",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-18T02:27:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014329627?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "구글 제미나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 영국",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 번역기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 클래스룸",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 재팬",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 원",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 폼",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "구글 한국 서비스",
+          "reason": "적용 범위 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "리퀴드 AI",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "리퀴드 AI가 의사결정 모델 d1.2를 출시해 AA 평가 1위를 기록해서",
+      "headlines": [
+        {
+          "title": "리퀴드 AI, 의사결정 모델 'd1.2' 출시…AA 평가 1위",
+          "press": "aitimes.com",
+          "publishedAt": "2026-11-18T08:40:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=217536"
+        },
+        {
+          "title": "AI주 급락에도 가상자산 시장은 앤트로픽 시총 1.7조달러 베팅",
+          "press": "news1.kr",
+          "publishedAt": "2026-11-18T07:23:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009296905?sid=104"
+        },
+        {
+          "title": "델 테크놀로지스, 에이전틱 AI 겨냥 데이터 솔루션·AI인프라 업글",
+          "press": "digitaltoday.co.kr",
+          "publishedAt": "2026-11-17T01:36:00.000Z",
+          "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=715995"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "리퀴드",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "리퀴드 AI 사용",
+          "reason": "이용 방법 주목",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "리퀴드 AI 투자",
+          "reason": "기업 가치 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "퍼플렉시티",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "AI 검색 퍼플렉시티가 연 환산 매출 10억 달러를 돌파해서",
+      "headlines": [
+        {
+          "title": "연매출 10억 달러 찍은 퍼플렉시티의 비결...“좋은 AI 모델들 섞어 썼을...",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-11-16T23:02:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005764663?sid=105"
+        },
+        {
+          "title": "'AI 검색' 퍼플렉시티, 연 환산 매출 10억 달러 돌파",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-11-17T07:26:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002445712?sid=105"
+        },
+        {
+          "title": "퍼플렉시티, AI 에이전트 16개가 협업·상호 검증하는 기능 출시",
+          "press": "aitimes.com",
+          "publishedAt": "2026-11-18T08:30:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=217543"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "퍼플렉시티 1년 무료",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "퍼플렉시티 ai",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "퍼플렉시티 무료",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "퍼플렉시티 프로",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "퍼플렉시티 크레딧",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "퍼플렉시티 유료",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "퍼플렉시티 요금제",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "퍼플렉시티 회사",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "퍼플렉시티 챗GPT",
+          "reason": "비교 수요 주목",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "퍼플렉시티 요금제",
+          "reason": "유료 조건 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "퍼플렉시티 1년 무료",
+          "reason": "프로모션 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "중국 AI 기업들",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "중국어권 텔레그램에서 AI 커닝 장치 거래가 성행하는 정황이 포착돼서",
+      "headlines": [
+        {
+          "title": "중국어권 텔레그램서 'AI 커닝' 장치 거래 성행 정황 포착",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-18T00:05:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016448000?sid=105"
+        },
+        {
+          "title": "美 기업 파고든 '가성비' 중국산 AI…트럼프 정부 공개 의무화 검토",
+          "press": "hankyung.com",
+          "publishedAt": "2026-11-18T14:54:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005355550?sid=101"
+        },
+        {
+          "title": "“중국어권 텔레그램서 ‘AI 커닝’ 장비 거래 정황”",
+          "press": "busan.com",
+          "publishedAt": "2026-11-18T09:32:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/082/0001407898?sid=101"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "전남광주",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "전남광주가 70만명에게 농어촌 기본소득 지급을 추진해서",
+      "headlines": [
+        {
+          "title": "\"뭉쳐야 더 온다\"…전남광주 2차 공공기관 유치 '원팀' 시급",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-18T06:12:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014330572?sid=102"
+        },
+        {
+          "title": "전남광주, K-제약바이오 프론티어기업 육성 선제 대응",
+          "press": "segye.com",
+          "publishedAt": "2026-11-18T00:11:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/022/0004176087?sid=102"
+        },
+        {
+          "title": "전남광주시, 'K-제약바이오 프론트기업 육성' 지역기업 지원",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-18T00:55:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016448177?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "전남 광주 가볼만한곳",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전남 광주 날씨",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전남 광주 맛집",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전남광주 축제",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전남광주 단풍",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전남광주 목포시 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전남광주 의회",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전남광주 롤",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "전남광주 통합 시기",
+          "reason": "특별시 출범 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "엔비디아",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "rising",
+      "isHot": true,
+      "why": "엔비디아 이사회가 젠슨 황을 복귀시킬 계획이 없다고 밝혀서",
+      "headlines": [
+        {
+          "title": "\"엔비디아, 2022년 알리바바와 앨리스황 연결해줘\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-18T06:06:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016449520?sid=101"
+        },
+        {
+          "title": "‘엔비디아’ 계약에 삼성전기 생산 확장",
+          "press": "busan.com",
+          "publishedAt": "2026-11-18T09:22:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/082/0001407889?sid=101"
+        },
+        {
+          "title": "\"젠슨 황, 엔비디아 이사 2명 추천 가능…영향력 유지 가능성\"",
+          "press": "news1.kr",
+          "publishedAt": "2026-11-18T02:22:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009295825?sid=104"
         }
       ],
       "concentrated": [
@@ -2524,22 +3948,15 @@
       ],
       "nextWave": [
         {
-          "keyword": "엔비디아 신임 CEO",
-          "reason": "후임이 누구인지 궁금",
+          "keyword": "엔비디아 새 CEO",
+          "reason": "후임 주목",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "엔비디아 주가 영향",
-          "reason": "시장 반응 확인",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "엔비디아 이사회 구성",
-          "reason": "의사결정 구조",
+          "keyword": "엔비디아 주가 전망",
+          "reason": "투자 영향 궁금",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -2548,71 +3965,159 @@
       "rowCount": 0
     },
     {
-      "issue": "이재명 다카이치 정상회담",
+      "issue": "초록소프트",
       "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "이재명 대통령과 다카이치 총리가 한일 안보 협력을 논의해서",
+      "lane": "tech",
+      "issueStatus": "dead",
+      "isHot": false,
+      "why": "초록소프트가 한국이엔씨와 AI 스마트팜·제조AI 구축 협약을 맺어서",
       "headlines": [
         {
-          "title": "이 대통령, 다카이치 총리와 '동북아 안보 정세 논의' [뉴시스Pic]",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-17T12:21:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014328470?sid=100"
+          "title": "초록소프트-한국이엔씨, AI 스마트팜·제조AI 구축 맞손",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-11-18T09:08:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002445912?sid=105"
         },
         {
-          "title": "미중러 회담 앞두고 만난 한일 정상...'협력' 강조",
-          "press": "ytn.co.kr",
-          "publishedAt": "2026-11-17T13:03:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/052/0002434223?sid=100"
+          "title": "초록소프트, 한국이엔씨와 협력",
+          "press": "hansbiz.co.kr",
+          "publishedAt": "2026-11-18T07:46:00.000Z",
+          "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=884488"
         },
         {
-          "title": "李대통령 \"韓日국민 선호도 사상 최고수준…안보문제 서로 도움\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-17T09:35:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016447347?sid=100"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "육사 충청권 이전",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "당정이 육사를 충청권으로 이전하기로 발표해서",
-      "headlines": [
-        {
-          "title": "[속보] 당정 “육사, 충청권 이전…국군사관학교 1+2+1 통합교육”",
-          "press": "hani.co.kr",
-          "publishedAt": "2026-11-18T00:26:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/028/0002832726?sid=100"
-        },
-        {
-          "title": "육사, 충청권 이전…국군사관학교 신입생 선발은 2029년부터(종합)",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-18T00:23:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016448049?sid=100"
-        },
-        {
-          "title": "당정 \"육사 충청권 이전…해사와 공사는 기존 위치 활용\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-18T00:16:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014328902?sid=100"
+          "title": "초록소프트, 한국이엔씨와 '스마트팜 AI' 맞손",
+          "press": "datanet.co.kr",
+          "publishedAt": "2026-11-18T00:38:00.000Z",
+          "link": "https://www.datanet.co.kr/news/articleView.html?idxno=300266"
         }
       ],
       "concentrated": [
         {
-          "keyword": "육사",
+          "keyword": "초록소프트 매출",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "초록소프트(주)",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "초록소프트 김명락",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
-      "nextWave": [],
+      "nextWave": [
+        {
+          "keyword": "초록소프트 투자",
+          "reason": "기업 가치 주목",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "초록소프트 채용",
+          "reason": "입사 정보 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "몬드리안AI",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "dead",
+      "isHot": false,
+      "why": "몬드리안AI가 서울대 공대에 AI 클라우드 플랫폼 런유어클라우드를 공급해서",
+      "headlines": [
+        {
+          "title": "몬드리안AI, 서울대 공대에 AI 클라우드 플랫폼 '런유어 클라우드' 공급",
+          "press": "etnews.com",
+          "publishedAt": "2026-11-18T07:35:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/030/0003487224?sid=105"
+        },
+        {
+          "title": "[ZD SW 투데이] 몬드리안AI, 서울대 공대 AI 클라우드 플랫폼 공급",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-11-18T07:40:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002445882?sid=105"
+        },
+        {
+          "title": "몬드리안AI, 서울대 공대에 프라이빗 AI 클라우드 플랫폼 공급...기존 시...",
+          "press": "aitimes.com",
+          "publishedAt": "2026-11-18T07:20:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=217539"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "몬드리안ai 기업정보",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "몬드리안ai 매출",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "몬드리안ai 투자",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "몬드리안ai 대표",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "몬드리안ai 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "몬드리안ai 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "몬드리안AI 블로그",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "몬드리안ai 블라인드",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "몬드리안AI 채용",
+          "reason": "입사 정보 주목",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "몬드리안AI 연봉",
+          "reason": "처우 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "몬드리안AI 투자 유치",
+          "reason": "기업 가치 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
       "rowCount": 0
     },
     {
@@ -2685,833 +4190,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "NRG 노유민 가슴",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "NRG 노유민이 새벽 가슴 통증으로 응급실에 가서",
-      "headlines": [
-        {
-          "title": "NRG 노유민, 가슴 통증으로 응급실행…\"별일 아니길\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-17T21:41:00.000Z",
-          "link": "https://m.entertain.naver.com/article/003/0014328676"
-        },
-        {
-          "title": "30kg 뺀 노유민, 건강한 줄 알았는데…새벽 흉통에 응급실행 [건강!톡]",
-          "press": "hankyung.com",
-          "publishedAt": "2026-11-18T00:41:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005355145?sid=103"
-        },
-        {
-          "title": "NRG 노유민, 가슴 통증으로 새벽 응급실 行…아내 \"별일 아니길\"",
-          "press": "news1.kr",
-          "publishedAt": "2026-11-17T22:58:00.000Z",
-          "link": "https://m.entertain.naver.com/article/421/0009295003"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "nrg",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "nrg 노유민",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "장동혁 대표 행사",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "장동혁 대표가 한동훈 장인상 빈소를 조문해서",
-      "headlines": [
-        {
-          "title": "한동훈 장인상 빈소서 韓·張 껄끄러운 조우",
-          "press": "kmib.co.kr",
-          "publishedAt": "2026-11-17T09:57:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/005/0001885734?sid=100"
-        },
-        {
-          "title": "“李 대통령, 자신의 탈옥법 통과 위해 해외 도피”…장동혁 특검법 규...",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-11-17T01:48:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005764757?sid=100"
-        },
-        {
-          "title": "국힘 '투톱' 장동혁·정점식, 한동훈 장인상 조문(종합2보)",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-17T13:42:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016447517?sid=100"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "자바 취약점 긴급",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "자바에서 고위험 취약점이 발견돼 정부가 긴급 점검을 권고해서",
-      "headlines": [
-        {
-          "title": "PHP 이어 자바도 고위험 취약점…정부 긴급 점검 권고(종합)",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-17T22:55:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016447835?sid=105"
-        },
-        {
-          "title": "PHP 이어 자바서도 고위험 보안 취약점…정부 긴급 점검 권고",
-          "press": "news.kbs.co.kr",
-          "publishedAt": "2026-11-18T00:51:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/056/0012296153?sid=105"
-        },
-        {
-          "title": "PHP 이어 '자바'도 치명적 취약점…정부 긴급 점검 권고",
-          "press": "mbn.mk.co.kr",
-          "publishedAt": "2026-11-17T23:56:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/057/0001978705?sid=101"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "록히드 마틴",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "록히드마틴이 한국에 10억달러 투자와 헬기 공동개발을 제안해서",
-      "headlines": [
-        {
-          "title": "록히드마틴, 韓에 10억달러 투자…\"차세대 헬기 공동 개발하자\"",
-          "press": "hankyung.com",
-          "publishedAt": "2026-11-17T08:30:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005354890?sid=101"
-        },
-        {
-          "title": "한미동맹 70년 넘어 방산 '공동수출' 시대로···록히드마틴, 방산협력...",
-          "press": "enewstoday.co.kr",
-          "publishedAt": "2026-11-17T08:38:00.000Z",
-          "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2493703"
-        },
-        {
-          "title": "록히드 마틴 “X2 지식 재산, 韓에 최대 90% 이전”…한국형 고속 헬리콥...",
-          "press": "ekn.kr",
-          "publishedAt": "2026-11-17T08:52:00.000Z",
-          "link": "https://www.ekn.kr/web/view.php?key=20261117023311009"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "록히드 마틴 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "록히드마틴 패딩",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "록히드마틴 어패럴",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "록히드마틴 어패럴 패딩",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "록히드마틴 코리아",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "록히드마틴 시총",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "록히드마틴 위치",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "록히드마틴 한국지사",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "방산 공동수출",
-          "reason": "협력 방향",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "록히드마틴 투자규모",
-          "reason": "투자 세부 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "수능 경계 강화",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "경찰이 수능 당일 AI 부정행위 대비로 전국 경계강화를 발령해서",
-      "headlines": [
-        {
-          "title": "경찰, 수능 당일 전국 '경계강화' 발령…\"AI 부정행위 엄단\"[2027 수능]",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-18T00:37:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014328989?sid=102"
-        },
-        {
-          "title": "[속보] 경찰청, 수능 앞두고 내일 전국 '경계강화' 발령",
-          "press": "ytn.co.kr",
-          "publishedAt": "2026-11-18T00:34:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/052/0002434378?sid=102"
-        },
-        {
-          "title": "[속보] \"수능 부정행위 대비\"‥경찰, 내일 오전 6시부터 전국 경계 강화",
-          "press": "imnews.imbc.com",
-          "publishedAt": "2026-11-18T00:41:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/214/0001536345?sid=102"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "GPT-6.2 아스트라",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "오픈AI가 GPT-6.2 아스트라·솔을 출시하며 API가격을 최대 20% 인하해서",
-      "headlines": [
-        {
-          "title": "오픈AI, GPT-6.2 아스트라·솔 출시…API 가격 최대 20% 인하",
-          "press": "it.chosun.com",
-          "publishedAt": "2026-11-17T23:34:00.000Z",
-          "link": "https://it.chosun.com/news/articleView.html?idxno=3000000001267"
-        },
-        {
-          "title": "오픈AI, ‘GPT-6.2’ 출시…API 가격 내려 앤트로픽 추격",
-          "press": "dt.co.kr",
-          "publishedAt": "2026-11-18T00:37:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/029/0003059779?sid=105"
-        },
-        {
-          "title": "오픈AI, GPT-6.2 아스트라·솔 출시…챗GPT 워크·코덱스에 적용",
-          "press": "digitaltoday.co.kr",
-          "publishedAt": "2026-11-17T23:30:00.000Z",
-          "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=716218"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "오픈AI",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "올트먼이 젠슨 황을 영웅이라며 결점도 있다고 말해서",
-      "headlines": [
-        {
-          "title": "올트먼 \"젠슨황은 내 영웅…영웅에게도 결점 있어\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-16T22:12:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016445279?sid=104"
-        },
-        {
-          "title": "'오픈AI' 올트먼 \"젠슨 황, 영웅에게도 결점은 있어\"",
-          "press": "hankyung.com",
-          "publishedAt": "2026-11-16T22:55:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005354586?sid=104"
-        },
-        {
-          "title": "MS, ‘가성비 AI’ 공세...GPT급 코딩 성능에 비용 40%",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-11-17T21:32:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005765244?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "오픈ai 상장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 대표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 종류",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 순위",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 상장일",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai ceo",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "오픈AI 소송 결과",
-          "reason": "재판 향방",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "오픈AI 상장",
-          "reason": "IPO 관심 지속",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "MS 오픈AI",
-          "reason": "협력·경쟁 변화",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "오픈AI 보안",
-          "reason": "안전성 논란",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "MAI 코드 2",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "MS가 자체 코딩 AI 'MAI 코드 2'를 공개해서",
-      "headlines": [
-        {
-          "title": "MS, 자체 코딩 AI ‘MAI 코드 2’ 공개…“오픈AI·앤트로픽보다 60~95% 저...",
-          "press": "ddaily.co.kr",
-          "publishedAt": "2026-11-17T23:54:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/138/0002248974?sid=105"
-        },
-        {
-          "title": "\"오픈AI 성능 98%에 비용은 절반\"…'홀로서기' 나선 MS, 자체 AI 모델 7종...",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-18T00:55:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014329058?sid=105"
-        },
-        {
-          "title": "MS, 디시전 1.1 공개…\"기존 LLM보다 10배 빠르고 비용은 200분의 1\"",
-          "press": "zdnet.co.kr",
-          "publishedAt": "2026-11-17T21:10:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/092/0002445760?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "mai",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "MAI 코드2 사용법",
-          "reason": "이용 방법 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "MS",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "미 안보국 기밀 통신망이 마비돼 MS 장애 이은 결함으로 지적돼서",
-      "headlines": [
-        {
-          "title": "美안보국 기밀 통신망 마비… “항공 중단, MS 장애 이은 중대 결함”",
-          "press": "chosun.com",
-          "publishedAt": "2026-11-17T21:28:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0004010247?sid=104"
-        },
-        {
-          "title": "MS, ‘가성비 AI’ 공세...GPT급 코딩 성능에 비용 40%",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-11-17T21:32:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005765244?sid=105"
-        },
-        {
-          "title": "MS, 자체 코딩·사이버보안 AI 모델 공개…오픈AI·앤트로픽에 도전",
-          "press": "news1.kr",
-          "publishedAt": "2026-11-17T19:30:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009294859?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "ms 오피스",
-          "searchVolume": 38200,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms 오피스 365",
-          "searchVolume": 14750,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms 장애",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "Ms 오류",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms 오피스 영구",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms 오피스 무료",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms 로그아웃 방법",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "MS 장애 복구",
-          "reason": "정상화 시점",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "MS 장애 보상",
-          "reason": "피해 보상 여부",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "MS 버그 원인",
-          "reason": "재발 가능성",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "MS 협업 플랫폼",
-          "reason": "신규 기능 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "메타",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "동아ST·메타비아가 비만치료제 전임상 결과를 발표해서",
-      "headlines": [
-        {
-          "title": "동아ST·메타비아 \"비만치료제 전임상 연구 발표\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-17T06:47:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014327860?sid=102"
-        },
-        {
-          "title": "동아ST·메타비아, 비만치료제 후보물질 전임상서 체중 감소",
-          "press": "news.tf.co.kr",
-          "publishedAt": "2026-11-17T08:29:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/629/0000552907?sid=101"
-        },
-        {
-          "title": "동아ST·메타비아, 비만신약 DA-1726 전임상서 대사 개선 효과 확인",
-          "press": "sedaily.com",
-          "publishedAt": "2026-11-17T06:06:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/011/0004683098?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "메타 ai 글라스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메타 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메타 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메타 AI",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메타 뮤즈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메타 안경",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메타 인스타",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "메타(주)",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "전남광주",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "전남·광주가 통합 생활권 교통체계와 바이오 육성을 추진해서",
-      "headlines": [
-        {
-          "title": "전남광주, K-제약바이오 프론티어기업 육성 선제 대응",
-          "press": "segye.com",
-          "publishedAt": "2026-11-18T00:11:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/022/0004176087?sid=102"
-        },
-        {
-          "title": "‘전남-광주 하나의 생활권’ 통합 교통체계 추진",
-          "press": "news.kbs.co.kr",
-          "publishedAt": "2026-11-17T12:49:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/056/0012295884?sid=101"
-        },
-        {
-          "title": "전남광주시, 'K-제약바이오 프론트기업 육성' 지역기업 지원",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-18T00:55:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016448177?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "전남 광주 가볼만한곳",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "전남 광주 날씨",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "전남 광주 맛집",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "전남광주 축제",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "전남광주 단풍",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "전남광주 목포시 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "전남광주 의회",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "전남광주 롤",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "전남광주 통합일정",
-          "reason": "통합 시기 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "전남광주 광역교통",
-          "reason": "노선 변화",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "전남광주 바이오기업",
-          "reason": "지원 대상",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "구글",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "구글이 AI가 스스로 취약점을 찾아 공격한 사례를 처음 확인해서",
-      "headlines": [
-        {
-          "title": "아마존·구글, 앤트로픽 IPO 이후 지분율 28% 달해",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-18T00:46:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016448131?sid=101"
-        },
-        {
-          "title": "구글 \"해킹 진화...자율형 멀티 에이전트 기승\"",
-          "press": "zdnet.co.kr",
-          "publishedAt": "2026-11-17T13:23:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/092/0002445752?sid=105"
-        },
-        {
-          "title": "구글 “AI 스스로 취약점 찾아 코딩 후 공격 첫 확인”",
-          "press": "kmib.co.kr",
-          "publishedAt": "2026-11-17T09:07:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/005/0001885717?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "구글 제미나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 영국",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 번역기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 클래스룸",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 재팬",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 원",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 폼",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "구글 보안 보고서",
-          "reason": "상세 내용 확인",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "애플",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "애플페이 확산에 수수료 부담과 삼성페이 유료화 우려가 교차해서",
-      "headlines": [
-        {
-          "title": "애플페이 확산에 기대와 우려 교차…수수료 부담 변수",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-17T08:23:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016447224?sid=105"
-        },
-        {
-          "title": "애플페이 확산에 삼성페이도 유료화?…카드 혜택 줄어드나",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-11-17T11:42:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005765209?sid=101"
-        },
-        {
-          "title": "애플페이에 카뱅 합류 …외연 넓혔지만 수수료 문제는 복병",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-11-17T00:58:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005843580?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "애플 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 서비스센터",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 ceo",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플페이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 환불",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 키보드",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 폴더블폰",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "애플 서비스 장애",
-          "reason": "복구 여부",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "젠슨",
