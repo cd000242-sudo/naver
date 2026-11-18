@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T20:30:01.344Z",
+ "builtAt": "2026-11-18T20:40:05.527Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "승리",
@@ -16,7 +16,7 @@
     "google"
    ],
    "articles90": 8,
-   "recent20": 2,
+   "recent20": 1,
    "press": 8,
    "firstArticleAt": "2026-11-18T19:12:00.000Z",
    "exclusive": false,
@@ -43,13 +43,14 @@
    ]
   },
   {
-   "keyword": "수능 부정행위 TF 가동",
+   "keyword": "부정행위 TF 가동",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
    "firstArticleAt": "2026-11-18T19:59:00.000Z",
    "exclusive": false,
    "capped": false,
@@ -141,9 +142,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1072,
-  "matched": 592,
-  "avgLeadMin": 892,
+  "flagged": 1071,
+  "matched": 590,
+  "avgLeadMin": 894,
   "recent": [
    {
     "keyword": "에이엘로봇",
