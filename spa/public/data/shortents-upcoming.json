@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T21:40:27.513Z",
+ "builtAt": "2026-11-18T21:50:30.724Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,8 +8,72 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 28,
  "candidates": [
+  {
+   "keyword": "뉴욕증시 혼조 마감",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 28,
+   "recent20": 14,
+   "press": 24,
+   "firstArticleAt": "2026-11-18T20:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[뉴욕증시 마감] 엔비디아 반등 하루 못 가 혼조…다우 1.1%↓·S&P500 5일...",
+     "press": "thefairnews.co.kr",
+     "publishedAt": "2026-11-18T21:48:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94723"
+    },
+    {
+     "title": "美증시 혼조...엔트로픽 역대 최대 IPO되나 [월가월부]",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-18T21:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005765901?sid=101"
+    },
+    {
+     "title": "[글로벌 마켓뷰] 뉴욕증시, 엔비디아 역대급 실적에도 연준 매파 충격…...",
+     "press": "moneystorm.kr",
+     "publishedAt": "2026-11-18T21:44:00.000Z",
+     "link": "https://www.moneystorm.kr/news/articleView.html?idxno=8577"
+    }
+   ]
+  },
+  {
+   "keyword": "금융권 해외 부동산 투자",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 16,
+   "recent20": 2,
+   "press": 16,
+   "firstArticleAt": "2026-11-18T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "올 상반기 금융권 해외부동산 투자 55.6조 원…부실 징후 '2.6조'",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-18T21:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005844753?sid=101"
+    },
+    {
+     "title": "해외 부동산 대체투자 잔액 줄었지만…EOD 규모는 증가",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-18T21:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002394351?sid=101"
+    },
+    {
+     "title": "금융권 해외 부동산 투자 55.6조…부실징후 사업장 2.6조로 증가",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-18T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006412165?sid=101"
+    }
+   ]
+  },
   {
    "keyword": "김건희",
    "sources": [
@@ -17,7 +81,7 @@
     "google"
    ],
    "articles90": 7,
-   "recent20": 1,
+   "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-18T20:31:00.000Z",
    "exclusive": false,
@@ -44,14 +108,45 @@
    ]
   },
   {
-   "keyword": "추경호 1심 무죄 판결",
+   "keyword": "2026년 11월 19일 운세",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
+   "articles90": 6,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-18T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오늘의 운세] 2026년 11월 19일 (목) 띠별운세 '수능 날, 모두를 응원하...",
+     "press": "dailypop.kr",
+     "publishedAt": "2026-11-18T21:40:00.000Z",
+     "link": "http://www.dailypop.kr/news/articleView.html?idxno=103985"
+    },
+    {
+     "title": "[오늘의 운세] 19일 목요일 나의 운세는?",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-18T21:26:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1193281"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 19일 띠별 운세",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-18T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006412168?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "추경호 1심 무죄 판결",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
    "firstArticleAt": "2026-11-18T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
@@ -69,106 +164,42 @@
      "link": "https://n.news.naver.com/mnews/article/421/0009297509?sid=100"
     },
     {
-     "title": "'秋 1심 무죄'에 내란정당 프레임 탈출…다들 환영하는데 이걸 갖고 계...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-18T21:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003156891?sid=100"
+     "title": "‘계엄해제 표결 방해의혹’ 추경호 대구시장 1심 무죄",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-18T21:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012296893?sid=102"
     }
    ]
   },
   {
-   "keyword": "2026년 11월 19일 운세",
+   "keyword": "승리 아내와 공항 포착",
    "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-18T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오늘의 운세] 19일 목요일 나의 운세는?",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-18T21:26:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1193281"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 19일 띠별 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-18T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006412168?sid=103"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 19일 별자리 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-18T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006412169?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "유퀴즈 김명민 첫 예능 출연",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-18T20:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘72년생·서울예대 동문’ 김명민·유재석, 학교서도 못 만났는데…첫...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-18T21:05:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001147704"
-    },
-    {
-     "title": "김명민 20㎏ 감량만 한 게 아니다, 시청자 소름돋은 연기 디테일(유퀴즈...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-18T21:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001188905"
-    },
-    {
-     "title": "\"이놈 봐라?\" 김명민, 경찰서장에 끌려가 '즉결심판'...왜?",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-18T20:47:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005443264"
-    }
-   ]
-  },
-  {
-   "keyword": "수능 시간표",
-   "sources": [
-    "daum"
+    "signal.bz"
    ],
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-18T21:00:00.000Z",
+   "firstArticleAt": "2026-11-18T21:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "2027학년도 수능 시간표·끝나는 시간 총정리",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-18T21:30:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1175466"
+     "title": "승리, '임신 8개월' 아내와 동반 입국…D라인 포착",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-18T21:46:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014331511"
     },
     {
-     "title": "수능 시간표·준비물…입실시간 오전 8시 10분",
+     "title": "승리 아내 첫 포착…내년 1월 출산",
      "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-18T21:06:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611190006"
+     "publishedAt": "2026-11-18T21:20:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611190009"
     },
     {
-     "title": "\"개장은 10시, 프리마켓 휴무\"…수능 날 바뀐 증시 시간표",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-18T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009297484?sid=101"
+     "title": "승리, 'D라인' ♥아내와 동반 입국…\"여기까지 찍으시면 안 되겠냐\" 밀착...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-18T21:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002081950"
     }
    ]
   },
@@ -237,38 +268,6 @@
    ]
   },
   {
-   "keyword": "승리 아내 동반 입국",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-18T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "승리, 'D라인' ♥아내와 동반 입국…\"여기까지 찍으시면 안 되겠냐\" 밀착...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-18T21:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002081950"
-    },
-    {
-     "title": "‘예비아빠’ 승리, 만삭 아내와 함께 들어왔다가 따로 나갔다…“여기...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-18T21:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001147702"
-    },
-    {
-     "title": "'아빠'가 된 버닝썬 핵심 인물..도망가는 '만삭' 아내, 애타게 찾는 '가...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-18T21:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003488574"
-    }
-   ]
-  },
-  {
    "keyword": "이재명",
    "sources": [
     "google"
@@ -287,10 +286,10 @@
      "link": "https://n.news.naver.com/mnews/article/421/0009297501?sid=104"
     },
     {
-     "title": "[천지일보 사설] 국정 운영 불신 61.7%… 이재명 정부, 뭘 놓쳤나",
+     "title": "[천지일보 여론조사] 국민 61.7% \"이재명 정부 신뢰 안 해\"",
      "press": "newscj.com",
      "publishedAt": "2026-11-18T21:02:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3449911"
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3449950"
     },
     {
      "title": "[천지일보 여론조사] 이재명 대통령 지지율 36.6%… 부정 61.5%",
@@ -303,7 +302,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1076,
+  "flagged": 1079,
   "matched": 601,
   "avgLeadMin": 878,
   "recent": [
