@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T19:33:28.566Z",
+ "builtAt": "2026-11-19T19:43:32.156Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,40 +8,8 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 26,
  "candidates": [
-  {
-   "keyword": "푸틴 얄타회담 발언",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-19T18:07:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘지각왕’ 푸틴이 먼저 왔다… 트럼프 “이게 누구야, 내 친구네”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-19T19:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003763826?sid=104"
-    },
-    {
-     "title": "[미중러 정상회담] \"우리는 푸틴 친구 아냐\"…발끈한 유럽(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-19T19:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016453375?sid=104"
-    },
-    {
-     "title": "유럽 정상들 “우리는 푸틴 친구 아냐…앞으로도 그럴 것”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-19T18:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012297739?sid=104"
-    }
-   ]
-  },
   {
    "keyword": "한덕수 내란혐의 파기환송",
    "sources": [
@@ -73,13 +41,109 @@
      "link": "https://n.news.naver.com/mnews/article/469/0000966692?sid=100"
     }
    ]
+  },
+  {
+   "keyword": "조희대 탄핵 추진",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-19T19:02:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "민주 “韓 판결은 역사적인 반역”… 긴급 의총뒤 “조희대 탄핵 추진”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-19T19:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003763859?sid=100"
+    },
+    {
+     "title": "예상 밖 한덕수 파기환송에 들끓은 與… 격론 끝 '조희대 탄핵' 공식화",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-19T19:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000966692?sid=100"
+    },
+    {
+     "title": "정성호 \"추경호 무죄 비상식적…다만 '조희대 책임론'은 어려워\"",
+     "press": "pressian.com",
+     "publishedAt": "2026-11-19T19:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/002/0002466764?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "푸틴 얄타회담 발언",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-19T18:39:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘지각왕’ 푸틴이 먼저 왔다… 트럼프 “이게 누구야, 내 친구네”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-19T19:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003763826?sid=104"
+    },
+    {
+     "title": "[미중러 정상회담] \"우리는 푸틴 친구 아냐\"…발끈한 유럽(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-19T19:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016453375?sid=104"
+    },
+    {
+     "title": "유럽 정상들 “우리는 푸틴 친구 아냐…앞으로도 그럴 것”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-19T18:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012297739?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "amd",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-19T18:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美 반도체 '中 리스크' 일파만파...AMD도 엮였다?",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-19T19:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000544831?sid=104"
+    },
+    {
+     "title": "AMD 리사 수, 젠슨 황 파문에 \"소음 곧 가라앉을 것\"",
+     "press": "dkilbo.com",
+     "publishedAt": "2026-11-19T19:10:00.000Z",
+     "link": "https://www.dkilbo.com/news/articleView.html?idxno=561526"
+    },
+    {
+     "title": "美 반도체업계 '중국 리스크' 확산…AMD 9% 급락",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-19T18:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005607167?sid=101"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 883,
-  "matched": 526,
-  "avgLeadMin": 741,
+  "flagged": 882,
+  "matched": 525,
+  "avgLeadMin": 740,
   "recent": [
    {
     "keyword": "gta 6",
