@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T22:24:27.166Z",
+ "builtAt": "2026-11-19T22:34:30.449Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,82 +8,114 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 21,
  "candidates": [
   {
-   "keyword": "10월 생산자물가 하락",
+   "keyword": "뉴욕증시 급락",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 33,
-   "recent20": 3,
-   "press": 31,
-   "firstArticleAt": "2026-11-19T21:00:00.000Z",
+   "articles90": 43,
+   "recent20": 6,
+   "press": 38,
+   "firstArticleAt": "2026-11-19T21:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국내 농산물 가격 급락, 생산자물가 3개월 만에 감소세 전환",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-19T22:22:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886509"
+     "title": "뉴욕증시, 앤스로픽 잔치에도 2%대 급락⋯다우 5만선 붕괴 [종합]",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-19T22:32:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2650660"
     },
     {
-     "title": "[뉴욕증시 마감] 앤트로픽 상장에도 2%대 하락…나스닥 2.25%↓",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-19T22:12:00.000Z",
-     "link": "https://www.ajunews.com/view/20261120070723733"
+     "title": "뉴욕증시, '대박' 앤트로픽 상장에도 2%대 급락…다우 50,000선 아래로",
+     "press": "getnews.co.kr",
+     "publishedAt": "2026-11-19T22:26:00.000Z",
+     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=887833"
     },
     {
-     "title": "사과 29%·돼지고기 13%↓…생산자물가 석 달 만에 하락",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-19T22:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005766491?sid=101"
+     "title": "뉴욕증시, 2%대 급락...앤트로픽 상장에도 AI 매도세 확산",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-19T22:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001076843?sid=104"
     }
    ]
   },
   {
-   "keyword": "2호선",
+   "keyword": "지하철 2호선 운행 중단",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 25,
-   "recent20": 16,
-   "press": 23,
+   "articles90": 18,
+   "recent20": 7,
+   "press": 17,
    "firstArticleAt": "2026-11-19T21:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] 서울지하철 2호선 성수지선 양방향 운행중지",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-19T22:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928060?sid=102"
+     "title": "[1보] 서울 지하철 2호선 용답역 선로전환기 장애에 1호선까지 지연",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-19T22:30:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3757787"
     },
     {
-     "title": "서울 지하철 2호선 용답역 성수지선 운행 중단…선로전환기 장애",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-19T22:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014334664?sid=102"
+     "title": "서울 지하철 2호선 성수지선 양방향 운행 중단…1호선도 일부 지연",
+     "press": "4th.kr",
+     "publishedAt": "2026-11-19T22:26:00.000Z",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2122287"
     },
     {
-     "title": "서울 지하철 2호선 운행 중단, 시민 불편 극심... 원인은 궤도 전환기 장...",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-19T22:22:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886508"
+     "title": "[속보] 서울 지하철 2호선 용답역 선로전환기 장애…성수지선 양방향 운...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-19T22:24:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=628892"
+    }
+   ]
+  },
+  {
+   "keyword": "경제",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 11,
+   "recent20": 9,
+   "press": 8,
+   "firstArticleAt": "2026-11-19T22:03:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "강서구, 지방자치 혁신대상 2년 연속 수상…AI 행정·지역경제 성과 인...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-19T22:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002725997?sid=102"
+    },
+    {
+     "title": "용인시의회 경제환경위, 신재생에너지·산단 관리 허점 집중 점검",
+     "press": "bizwnews.com",
+     "publishedAt": "2026-11-19T22:30:00.000Z",
+     "link": "http://www.bizwnews.com/news/articleView.html?idxno=152482"
+    },
+    {
+     "title": "[KFT 모닝 브리프] 2026.11.20 — 오늘 꼭 알아야 할 국내외 경제뉴스",
+     "press": "fntimes.com",
+     "publishedAt": "2026-11-19T22:30:00.000Z",
+     "link": "https://www.fntimes.com/html/view.php?ud=20261120071256267141825007d_18"
     }
    ]
   },
   {
    "keyword": "택시",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-19T21:00:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-19T21:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -108,14 +140,111 @@
    ]
   },
   {
-   "keyword": "아파트",
+   "keyword": "축구 감독",
    "sources": [
     "google"
    ],
-   "articles90": 8,
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-19T21:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "계약 만료까지 단 7일, 모레노 감독이 남긴 메시지…\"언제나 국가대표팀...",
+     "press": "interfootball.co.kr",
+     "publishedAt": "2026-11-19T22:15:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/413/0000226846"
+    },
+    {
+     "title": "[오피셜] '韓 축구 소리 질러!' 이강인, 亞 축구 역사에 한 획 그었다…...",
+     "press": "goal.com",
+     "publishedAt": "2026-11-19T21:55:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/216/0000143855"
+    },
+    {
+     "title": "'韓축구 풀백의 희망' 옌스, BVB전서 첫 선발 출격 전망...\"빠르게 투입...",
+     "press": "fourfourtwo.co.kr",
+     "publishedAt": "2026-11-19T21:43:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/411/0000090210"
+    }
+   ]
+  },
+  {
+   "keyword": "영국 배우 백진경 득녀 소식",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-19T21:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘명예영국인’ 백진경, 고위험산모 극복하고 딸 출산…“제왕 다음날...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-19T22:20:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003542697"
+    },
+    {
+     "title": "'고위험 산모' 백진경, 영국서 득녀…\"제왕 다음 날 아침 메뉴 토스트\" ...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-19T22:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002082315"
+    },
+    {
+     "title": "“얼마나 걱정했을까”…‘영국 배우♥’ 백진경, 고위험 산모 판정 딛...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-19T21:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001282248"
+    }
+   ]
+  },
+  {
+   "keyword": "수능 난이도",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-19T21:28:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "2027 수능, 국어·수학 1등급 커트라인 상승 예측…수학 변별력 주목",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-19T22:20:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886506"
+    },
+    {
+     "title": "개편 전 마지막 수능…“영어, 지난해보다 쉬워”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-19T21:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012297768?sid=102"
+    },
+    {
+     "title": "2027학년도 수능 국어·영어 쉬워지고 수학은 비슷",
+     "press": "jejudomin.co.kr",
+     "publishedAt": "2026-11-19T21:28:00.000Z",
+     "link": "https://www.jejudomin.co.kr/news/articleView.html?idxno=402550"
+    }
+   ]
+  },
+  {
+   "keyword": "아파트",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 4,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-19T21:00:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-19T21:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -144,10 +273,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-19T21:00:00.000Z",
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-19T21:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -170,142 +299,44 @@
      "link": "https://www.ggilbo.com/news/articleView.html?idxno=1193282"
     }
    ]
-  },
-  {
-   "keyword": "축구 감독",
-   "sources": [
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-19T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "계약 만료까지 단 7일, 모레노 감독이 남긴 메시지…\"언제나 국가대표팀...",
-     "press": "interfootball.co.kr",
-     "publishedAt": "2026-11-19T22:15:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/413/0000226846"
-    },
-    {
-     "title": "[오피셜] '韓 축구 소리 질러!' 이강인, 亞 축구 역사에 한 획 그었다…...",
-     "press": "goal.com",
-     "publishedAt": "2026-11-19T21:55:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/216/0000143855"
-    },
-    {
-     "title": "'韓축구 풀백의 희망' 옌스, BVB전서 첫 선발 출격 전망...\"빠르게 투입...",
-     "press": "fourfourtwo.co.kr",
-     "publishedAt": "2026-11-19T21:43:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/411/0000090210"
-    }
-   ]
-  },
-  {
-   "keyword": "與 조희대 탄핵 추진",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-19T21:01:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "신중론 접은 與, 한덕수 판결에 조희대 탄핵 공식화…野 “의회 쿠데타...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-19T22:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004684241?sid=100"
-    },
-    {
-     "title": "한덕수 파기환송에 野 “조작기소 확인”…조희대 탄핵론엔 “의회 쿠데...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-19T22:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004684233?sid=100"
-    },
-    {
-     "title": "[AM-PM] 與, 오늘 의원총회서 '조희대 탄핵' 당론 채택 外",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-19T21:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928056?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "이강인, AFC 2연패 수상",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-19T21:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이강인, AFC 2연패…손흥민도 못한 대기록",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-19T21:56:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611200020"
-    },
-    {
-     "title": "[오피셜] '韓 축구 소리 질러!' 이강인, 亞 축구 역사에 한 획 그었다…...",
-     "press": "goal.com",
-     "publishedAt": "2026-11-19T21:55:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/216/0000143855"
-    },
-    {
-     "title": "[오피셜] '2026년은 이강인의 해!'…UCL 2연패·아틀레티코 마드리드 이...",
-     "press": "besteleven.com",
-     "publishedAt": "2026-11-19T21:43:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/343/0000149117"
-    }
-   ]
-  },
-  {
-   "keyword": "영국 배우 백진경 득녀 소식",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-19T21:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘명예영국인’ 백진경, 고위험산모 극복하고 딸 출산…“제왕 다음날...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-19T22:20:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003542697"
-    },
-    {
-     "title": "'고위험 산모' 백진경, 영국서 득녀…\"제왕 다음 날 아침 메뉴 토스트\" ...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-19T22:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002082315"
-    },
-    {
-     "title": "“얼마나 걱정했을까”…‘영국 배우♥’ 백진경, 고위험 산모 판정 딛...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-19T21:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001282248"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 888,
-  "matched": 526,
-  "avgLeadMin": 741,
+  "flagged": 891,
+  "matched": 530,
+  "avgLeadMin": 753,
   "recent": [
+   {
+    "keyword": "오현규 동점골 폭발",
+    "hitKeyword": "오현규 토트넘 이적설",
+    "hitAt": "2026-11-20T07:30:00+09:00",
+    "leadMin": 8962
+   },
+   {
+    "keyword": "이강인 2연속 아시아 선수상",
+    "hitKeyword": "이강인 AFC 2연패",
+    "hitAt": "2026-11-20T07:30:00+09:00",
+    "leadMin": 388
+   },
+   {
+    "keyword": "이강인 AFC 국제선수상",
+    "hitKeyword": "이강인 AFC 2연패",
+    "hitAt": "2026-11-20T07:30:00+09:00",
+    "leadMin": 86
+   },
+   {
+    "keyword": "이강인 AFC 2연속 수상",
+    "hitKeyword": "이강인 AFC 2연패",
+    "hitAt": "2026-11-20T07:30:00+09:00",
+    "leadMin": 66
+   },
+   {
+    "keyword": "이강인, AFC 2연패 수상",
+    "hitKeyword": "이강인 AFC 2연패",
+    "hitAt": "2026-11-20T07:30:00+09:00",
+    "leadMin": 26
+   },
    {
     "keyword": "겨울",
     "hitKeyword": "한겨울 추위 눈 예보",
@@ -335,36 +366,6 @@
     "hitKeyword": "트럼프 김정은 회담불발",
     "hitAt": "2026-11-20T06:00:00+09:00",
     "leadMin": 1369
-   },
-   {
-    "keyword": "트럼프 아시아 순방 귀국",
-    "hitKeyword": "트럼프 김정은 회담불발",
-    "hitAt": "2026-11-20T06:00:00+09:00",
-    "leadMin": 328
-   },
-   {
-    "keyword": "amd",
-    "hitKeyword": "AMD 주가 급락",
-    "hitAt": "2026-11-20T06:00:00+09:00",
-    "leadMin": 237
-   },
-   {
-    "keyword": "트럼프와 김정은 회담 불발",
-    "hitKeyword": "트럼프 김정은 회담불발",
-    "hitAt": "2026-11-20T06:00:00+09:00",
-    "leadMin": 56
-   },
-   {
-    "keyword": "트럼프 김정은 회동 불발",
-    "hitKeyword": "트럼프 김정은 회담불발",
-    "hitAt": "2026-11-20T06:00:00+09:00",
-    "leadMin": 36
-   },
-   {
-    "keyword": "gta 6",
-    "hitKeyword": "GTA6 출시",
-    "hitAt": "2026-11-20T00:00:00+09:00",
-    "leadMin": 2264
    }
   ]
  }
