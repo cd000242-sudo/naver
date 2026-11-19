@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T16:12:24.805Z",
+ "builtAt": "2026-11-19T16:22:28.218Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "김휘강 재산공개",
    "sources": [
     "daum"
    ],
-   "articles90": 18,
-   "recent20": 0,
-   "press": 16,
+   "articles90": 19,
+   "recent20": 1,
+   "press": 17,
    "firstArticleAt": "2026-11-19T15:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김휘강 靑 비서관, 재산 75억 신고…고위공직 60명 중 1위",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-19T16:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004211895?sid=100"
+    },
     {
      "title": "고위공직자 60명 재산공개…1위는 김휘강 靑 사이버안보비서관",
      "press": "biz.chosun.com",
@@ -33,12 +39,6 @@
      "press": "hankyung.com",
      "publishedAt": "2026-11-19T15:13:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/015/0005356135?sid=102"
-    },
-    {
-     "title": "김휘강 국가안보실 사이버안보비서관 재산 75억원…남영준 국립중앙도...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-19T15:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004176663?sid=100"
     }
    ]
   },
@@ -48,7 +48,7 @@
     "daum"
    ],
    "articles90": 9,
-   "recent20": 1,
+   "recent20": 0,
    "press": 9,
    "firstArticleAt": "2026-11-19T15:00:00.000Z",
    "exclusive": false,
@@ -75,34 +75,66 @@
    ]
   },
   {
-   "keyword": "이강인 2연속 아시아 선수상",
+   "keyword": "박찬종 별세",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 7,
+   "articles90": 3,
    "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-19T15:00:00.000Z",
-   "exclusive": true,
+   "press": 3,
+   "firstArticleAt": "2026-11-19T15:01:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[공식발표] '이강인, 아시아 축구 역사 새로 썼다!'…AFC 올해의 아시아...",
-     "press": "fourfourtwo.co.kr",
-     "publishedAt": "2026-11-19T16:04:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/411/0000090196"
+     "title": "‘14대 대선 출마’ 박찬종 전 의원 별세",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-19T16:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001886364?sid=100"
     },
     {
-     "title": "이강인, 황인범 제치고 AFC 올해의 국제선수상...최초 2회 연속 수상",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-19T15:35:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261120000008"
+     "title": "‘미스터 클린’ 박찬종 前의원 별세",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-19T15:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004010688?sid=102"
     },
     {
-     "title": "[오피셜]손흥민도 못한 대업, 이강인이 해냈다…2년 연속 AFC 올해의 국...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-19T15:21:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/468/0001282232"
+     "title": "‘미스터 클린’ 박찬종 전 의원 별세",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-19T15:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003566564?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "아세안·APEC 마치고 귀국",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 3,
+   "press": 2,
+   "firstArticleAt": "2026-11-19T15:45:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이 대통령, 아세안·APEC 순방 마치고 귀국",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-19T16:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002435396?sid=100"
+    },
+    {
+     "title": "트럼프, 북미 정상회담 띄우더니 또 '빈손' 귀국",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-19T16:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002435395?sid=104"
+    },
+    {
+     "title": "이 대통령, 아세안·APEC 마치고 귀국...한반도 당사국 각인 주력",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-19T16:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002435392?sid=100"
     }
    ]
   }
@@ -110,8 +142,8 @@
  "hitRate": {
   "days": 7,
   "flagged": 881,
-  "matched": 529,
-  "avgLeadMin": 739,
+  "matched": 528,
+  "avgLeadMin": 738,
   "recent": [
    {
     "keyword": "gta 6",
