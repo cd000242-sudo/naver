@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T16:42:35.412Z",
+ "builtAt": "2026-11-19T16:52:38.565Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -39,38 +39,6 @@
      "press": "pointdaily.co.kr",
      "publishedAt": "2026-11-19T15:30:00.000Z",
      "link": "https://www.pointdaily.co.kr/news/articleView.html?idxno=326741"
-    }
-   ]
-  },
-  {
-   "keyword": "김휘강 재산공개",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-19T15:13:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김휘강 靑 비서관, 재산 75억 신고…고위공직 60명 중 1위",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-19T16:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004211895?sid=100"
-    },
-    {
-     "title": "고위공직자 60명 재산공개…1위는 김휘강 靑 사이버안보비서관",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-19T15:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001206099?sid=100"
-    },
-    {
-     "title": "김휘강 靑 사이버안보비서관 재산 75억",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-19T15:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005356135?sid=102"
     }
    ]
   }
