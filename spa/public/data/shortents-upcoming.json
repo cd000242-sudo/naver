@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-18T23:51:24.172Z",
+ "builtAt": "2026-11-19T00:01:27.276Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,66 @@
  "measured": 24,
  "candidates": [
   {
-   "keyword": "조작기소 특검법 재가",
+   "keyword": "리트 만점자 공개검증",
    "sources": [
     "nate"
    ],
-   "articles90": 50,
-   "recent20": 12,
-   "press": 43,
-   "firstArticleAt": "2026-11-18T22:24:00.000Z",
+   "articles90": 88,
+   "recent20": 47,
+   "press": 61,
+   "firstArticleAt": "2026-11-18T23:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이 대통령, 순방 중 '조작기소 특검법' 재가…공포 즉시 시행",
-     "press": "kado.net",
-     "publishedAt": "2026-11-18T23:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000212175?sid=100"
+     "title": "'리트 만점자' 이진우, 수능 국어 공개검증 무산…27만명 지켜봤지만 끝...",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-19T00:00:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101555"
     },
     {
-     "title": "조작기소 특검법 공포…11일 내 특검 임명, 수사 절차 돌입",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-18T23:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004211395?sid=100"
+     "title": "'리트 만점자' 수능 공개검증 최종 무산…약속 시간까지 연락 두절(종합...",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-19T00:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001076439?sid=102"
     },
     {
-     "title": "이 대통령, 순방 중 조작기소 특검법 재가…공포돼 즉시 시행",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-18T23:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404145?sid=100"
+     "title": "[현장] 20만명 모인 리트 만점자 '검증쇼'…주인공은 '노쇼'",
+     "press": "weekly.chosun.com",
+     "publishedAt": "2026-11-19T00:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/053/0000063160?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "조작기소 특검법 재가",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 48,
+   "recent20": 6,
+   "press": 41,
+   "firstArticleAt": "2026-11-18T22:33:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이 대통령, 조작기소특검법 재가…공포 즉시 시행",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-19T00:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000927705?sid=100"
+    },
+    {
+     "title": "李대통령, 순방 중 '조작기소 특검법' 재가…즉시 공포·시행",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-18T23:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003156953?sid=100"
+    },
+    {
+     "title": "이 대통령, 조작기소 특검법 재가‥공포돼 즉시 시행",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-18T23:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001536581?sid=100"
     }
    ]
   },
@@ -47,46 +79,83 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 30,
-   "recent20": 5,
-   "press": 26,
-   "firstArticleAt": "2026-11-18T22:22:00.000Z",
+   "articles90": 29,
+   "recent20": 7,
+   "press": 25,
+   "firstArticleAt": "2026-11-18T22:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "비트코인, 6만2000달러대로 하락…연준발 '빅스텝' 우려 심화",
-     "press": "newsway.co.kr",
-     "publishedAt": "2026-11-18T23:50:00.000Z",
-     "link": "https://www.newsway.co.kr/news/view?ud=2026111908411746541"
+     "title": "FOMC 의사록 '12월 50bp 인상' 거론…엔비디아(NVDA) 2.89% 반락",
+     "press": "coinreaders.com",
+     "publishedAt": "2026-11-18T23:56:00.000Z",
+     "link": "http://coinreaders.com/271542"
     },
     {
-     "title": "비트코인 6만 2000달러대로 하락…연준 빅스텝 가능성에 위축 [디센터 시...",
-     "press": "decenter.kr",
-     "publishedAt": "2026-11-18T23:48:00.000Z",
-     "link": "https://www.decenter.kr/article/20116232?ref=naverdc"
+     "title": "美 12월 기준금리 0.25%P 인상 전망 대세, 빅스텝 가능성은 낮아",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-18T23:54:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1138462"
     },
     {
-     "title": "[국제금융리포트] 美 금리인상 가능성에 달러 강세…금융시장 불확실성...",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-18T23:48:00.000Z",
-     "link": "https://www.ajunews.com/view/20261119084504985"
+     "title": "연준 이사 \"0.5%p 금리 인상 충격 요법 필요\"...12월 빅스텝 오나?",
+     "press": "coinreaders.com",
+     "publishedAt": "2026-11-18T23:52:00.000Z",
+     "link": "http://coinreaders.com/271544"
+    }
+   ]
+  },
+  {
+   "keyword": "겨울",
+   "sources": [
+    "google"
+   ],
+   "articles90": 27,
+   "recent20": 18,
+   "press": 24,
+   "firstArticleAt": "2026-11-18T23:19:00.000Z",
+   "exclusive": true,
+   "capped": true,
+   "samples": [
+    {
+     "title": "다운 판매량 34% 뛴 올리비아로렌, 겨울 성수기 ‘헤비’로 승부",
+     "press": "fashionbiz.co.kr",
+     "publishedAt": "2026-11-19T00:00:00.000Z",
+     "link": "https://www.fashionbiz.co.kr/article/231199"
+    },
+    {
+     "title": "오아, 메가팩토리약국 금천점서 팝업행사 운영… 안마기부터 겨울 생활...",
+     "press": "e2news.com",
+     "publishedAt": "2026-11-19T00:00:00.000Z",
+     "link": "http://www.e2news.com/news/articleView.html?idxno=336236"
+    },
+    {
+     "title": "부평소방서장, 펌텍코리아(주) 겨울철 현장점검",
+     "press": "fpn119.co.kr",
+     "publishedAt": "2026-11-18T23:58:00.000Z",
+     "link": "http://fpn119.co.kr/259686"
     }
    ]
   },
   {
    "keyword": "엔비디아 호실적에도 혼조",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 26,
-   "recent20": 5,
-   "press": 25,
-   "firstArticleAt": "2026-11-18T22:26:00.000Z",
+   "articles90": 25,
+   "recent20": 3,
+   "press": 23,
+   "firstArticleAt": "2026-11-18T22:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "뉴욕증시, 엔비디아 호실적에도 혼조 마감",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-18T23:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000544639?sid=104"
+    },
     {
      "title": "뉴욕증시, 엔비디아 호실적에도 혼조...다우 1.11%↓·나스닥 0.42%↑",
      "press": "newstopkorea.com",
@@ -98,44 +167,6 @@
      "press": "cstimes.com",
      "publishedAt": "2026-11-18T23:42:00.000Z",
      "link": "https://www.cstimes.com/news/articleView.html?idxno=728524"
-    },
-    {
-     "title": "[해외시황] 뉴욕증시, 엔비디아 호실적에도 '혼조'…나스닥 0.42%↑",
-     "press": "newsprime.co.kr",
-     "publishedAt": "2026-11-18T23:38:00.000Z",
-     "link": "http://www.newsprime.co.kr/news/article.html?no=755570"
-    }
-   ]
-  },
-  {
-   "keyword": "겨울",
-   "sources": [
-    "google"
-   ],
-   "articles90": 27,
-   "recent20": 13,
-   "press": 22,
-   "firstArticleAt": "2026-11-18T23:06:00.000Z",
-   "exclusive": true,
-   "capped": true,
-   "samples": [
-    {
-     "title": "'겨울 디저트 옷' 입은 유통업계...풍미 '듬뿍' 한정판으로 소비자 눈길",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-18T23:50:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=783046"
-    },
-    {
-     "title": "에어로웨이, 겨울철 난방 효율 높이는 '실링팬 역회전 운전 가이드' 공...",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-18T23:50:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886286"
-    },
-    {
-     "title": "NH농협생명, 취약계층에 김장김치 4.2톤 지원…겨울나기 온정 나눠",
-     "press": "ziksir.com",
-     "publishedAt": "2026-11-18T23:48:00.000Z",
-     "link": "https://www.ziksir.com/news/articleView.html?idxno=153895"
     }
    ]
   },
@@ -145,10 +176,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 14,
+   "articles90": 12,
    "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-18T22:25:00.000Z",
+   "press": 11,
+   "firstArticleAt": "2026-11-18T22:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -173,49 +204,23 @@
    ]
   },
   {
-   "keyword": "다우 존스 산업평균지수",
-   "sources": [
-    "google"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-18T22:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "뉴욕증시, 엔비디아 호실적에도 혼조...다우 1.11%↓·나스닥 0.42%↑",
-     "press": "newstopkorea.com",
-     "publishedAt": "2026-11-18T23:44:00.000Z",
-     "link": "https://www.newstopkorea.com/news/articleView.html?idxno=49154"
-    },
-    {
-     "title": "AI 투자 불안 속 뉴욕증시 혼조…다우 1%↓",
-     "press": "smedaily.co.kr",
-     "publishedAt": "2026-11-18T23:18:00.000Z",
-     "link": "http://www.smedaily.co.kr/news/articleView.html?idxno=366328"
-    },
-    {
-     "title": "엔비디아 호실적에도 뉴욕증시 혼조…다우 1.11%↓·나스닥 0.42%↑",
-     "press": "issuenbiz.com",
-     "publishedAt": "2026-11-18T23:08:00.000Z",
-     "link": "http://www.issuenbiz.com/news/articleView.html?idxno=81750"
-    }
-   ]
-  },
-  {
    "keyword": "트럼프 푸틴 악수",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 6,
+   "articles90": 8,
+   "recent20": 2,
+   "press": 7,
    "firstArticleAt": "2026-11-18T22:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"트럼프엔 포옹, 이재명엔 환영단\"…다카이치 홀대론 나온 中 의전 보니",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-18T23:58:00.000Z",
+     "link": "https://www.ajunews.com/view/20261119085041009"
+    },
     {
      "title": "푸틴과 10분간 서서 대화…이 대통령 \"한반도 긴장 완화 공감\"",
      "press": "news.jtbc.co.kr",
@@ -227,12 +232,6 @@
      "press": "newsfreezone.co.kr",
      "publishedAt": "2026-11-18T23:12:00.000Z",
      "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=720119"
-    },
-    {
-     "title": "시진핑, 中도착 트럼프 공항서 직접 영접…국가주석 취임후 처음",
-     "press": "getnews.co.kr",
-     "publishedAt": "2026-11-18T22:58:00.000Z",
-     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=887681"
     }
    ]
   },
@@ -241,13 +240,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
    "firstArticleAt": "2026-11-18T22:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "유엔총회 제3위, 북한인권결의 채택…美는 21년 만에 기권",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-18T23:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009297833?sid=100"
+    },
     {
      "title": "미, 21년 만에 유엔 북한인권결의안 기권…“ICC 조항 반대”",
      "press": "hani.co.kr",
@@ -259,12 +264,38 @@
      "press": "mdtoday.co.kr",
      "publishedAt": "2026-11-18T23:00:00.000Z",
      "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626233"
+    }
+   ]
+  },
+  {
+   "keyword": "주식 거래시간",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-18T22:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[쩐의흔적] 벌금 191억원 확정…전인장 전 회장, 삼양식품 주식 470억원...",
+     "press": "thepublic.kr",
+     "publishedAt": "2026-11-18T23:56:00.000Z",
+     "link": "https://www.thepublic.kr/news/articleView.html?idxno=327422"
     },
     {
-     "title": "미국, 유엔 북한인권결의안에 첫 기권...ICC 문구 문제 삼아",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-18T22:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002434930?sid=104"
+     "title": "오늘 주식 거래는 10시부터, 프리장도 쉰다…수능일, 증시 1시간 순연",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-18T23:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005443314?sid=101"
+    },
+    {
+     "title": "수능일, 주식거래 오전 10시부터…프리마켓은 휴장",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-18T23:14:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445449"
     }
    ]
   },
@@ -273,13 +304,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-18T22:29:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-18T22:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "LPGA, PGA 이어 25년만에 '공 위치 데이터' 도입",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-18T23:54:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261119010007349"
+    },
     {
      "title": "[LPGA]케슬러 커미셔너 \"내년부터 공 위치 데이터 도입\"",
      "press": "newspim.com",
@@ -291,12 +328,38 @@
      "press": "sportsworldi.com",
      "publishedAt": "2026-11-18T23:11:00.000Z",
      "link": "https://m.sports.naver.com/golf/article/396/0000761352"
+    }
+   ]
+  },
+  {
+   "keyword": "靑, 한한령 진전",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 3,
+   "press": 4,
+   "firstArticleAt": "2026-11-18T23:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "靑, '한중 FTA 서비스·투자 협상' 타결…\"한한령 해제 어느 정도 진전\"",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-18T23:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001076437?sid=100"
     },
     {
-     "title": "LPGA 커미셔너 \"내년 시즌부터 공 위치 데이터 도입할 것\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-18T22:46:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/003/0014331560"
+     "title": "한중 FTA 타결에 靑 “한한령 해제 기대”…K팝 공연 빗장 풀릴까",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-18T23:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005765945?sid=100"
+    },
+    {
+     "title": "靑 “한한령 해제에 진전…K팝 공연 등 중국 진출 가능성 열려”",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-18T23:42:00.000Z",
+     "link": "https://www.viva100.com/article/20261119500062"
     }
    ]
   },
@@ -305,10 +368,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 5,
-   "recent20": 2,
+   "articles90": 4,
+   "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-18T22:22:00.000Z",
+   "firstArticleAt": "2026-11-18T23:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -333,39 +396,7 @@
    ]
   },
   {
-   "keyword": "靑, 한한령 진전 기대",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-18T22:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한중 FTA 타결에 靑 “한한령 해제 기대”…K팝 공연 빗장 풀릴까",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-18T23:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005765945?sid=100"
-    },
-    {
-     "title": "靑, 한한령 해빙 기대감 \"진전 있다…공연도 가능성\"",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-18T22:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000544619?sid=101"
-    },
-    {
-     "title": "한·중 정상회담에 한한령 해제 기대감…靑 “진전 있다, 공연도 가능성...",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-18T22:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001886113?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "조국, 일본 입국 거부",
+   "keyword": "조국 입국 거부 전과",
    "sources": [
     "nate"
    ],
@@ -399,7 +430,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1098,
+  "flagged": 1102,
   "matched": 601,
   "avgLeadMin": 846,
   "recent": [
