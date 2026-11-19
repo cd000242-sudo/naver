@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T17:42:55.117Z",
+ "builtAt": "2026-11-19T17:52:58.293Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,12 +16,18 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 2,
    "press": 3,
-   "firstArticleAt": "2026-11-19T16:20:00.000Z",
+   "firstArticleAt": "2026-11-19T16:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "AMD Firmware Appeared in Updates From China-Listed IEIT, Report Says",
+     "press": "econotimes.com",
+     "publishedAt": "2026-11-19T17:46:00.000Z",
+     "link": "https://econotimes.com/AMD-Firmware-Appeared-in-Updates-From-China-Listed-IEIT-Report-Says-1779846"
+    },
     {
      "title": "[미국 특징주] AMD, 중국 연계 의혹 보고서에 7%대 급락",
      "press": "newspim.com",
@@ -33,44 +39,6 @@
      "press": "tokenpost.kr",
      "publishedAt": "2026-11-19T16:56:00.000Z",
      "link": "https://www.tokenpost.kr/news/breaking/440960"
-    },
-    {
-     "title": "AMD 주가 7% 급락…공매도 업체, 中 수출통제 위반 의혹 제기",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-19T16:20:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445628"
-    }
-   ]
-  },
-  {
-   "keyword": "푸틴 얄타회담 발언",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-19T16:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[미중러 정상회담] \"우리는 푸틴 친구 아냐\"…발끈한 유럽",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-19T17:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016453361?sid=104"
-    },
-    {
-     "title": "\"미중러 회담서 우크라, 핵심의제 못돼\"…'新얄타회담' 우려와 거리(종...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-19T16:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009300338?sid=104"
-    },
-    {
-     "title": "트럼프의 '푸틴 환대'에 폴란드 우려…\"누가 더 가까운 친구인가\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-19T16:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014334514?sid=104"
     }
    ]
   }
