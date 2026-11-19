@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T00:31:36.990Z",
+ "builtAt": "2026-11-19T15:01:51.738Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,588 +8,202 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 23,
  "candidates": [
   {
-   "keyword": "수능 시작",
-   "sources": [
-    "google"
-   ],
-   "articles90": 73,
-   "recent20": 73,
-   "press": 58,
-   "firstArticleAt": "2026-11-19T00:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "수능 4교시 끝나기 37분 전…나성동의 음주 예방",
-     "press": "ccdailynews.com",
-     "publishedAt": "2026-11-19T00:30:00.000Z",
-     "link": "https://www.ccdailynews.com/news/articleView.html?idxno=2452249"
-    },
-    {
-     "title": "2027학년도 수능 개막…AI 부정행위 우려 속 안경 정밀 검사 등 긴장감 ...",
-     "press": "widedaily.com",
-     "publishedAt": "2026-11-19T00:30:00.000Z",
-     "link": "https://www.widedaily.com/news/articleView.html?idxno=304071"
-    },
-    {
-     "title": "2027학년도 수능 일제히 시작…충남 1만 9225명 응시",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-19T00:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002466573?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "리트 만점자 수사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 70,
-   "recent20": 15,
-   "press": 48,
-   "firstArticleAt": "2026-11-18T23:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"치킨집까지 알아봤는데\"…리트 만점자 '노쇼'에 네티즌 '황당'",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-19T00:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014331876?sid=102"
-    },
-    {
-     "title": "잠적한 '리트 만점자' 수능 시험지 폐기되나?…박정훈 의원 \"서울 영훈...",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-19T00:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001076449?sid=102"
-    },
-    {
-     "title": "'리트 만점자' 이진우, 수능 공개검증 당일 잠적…연락 두절로 검증 무...",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-19T00:26:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1795046423531154006"
-    }
-   ]
-  },
-  {
-   "keyword": "수능 위급재난문자 불시 발송",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 52,
-   "recent20": 15,
-   "press": 44,
-   "firstArticleAt": "2026-11-18T23:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "정부, 2027학년도 수능 부정행위 차단에 범정부 역량 총동원",
-     "press": "ibabynews.com",
-     "publishedAt": "2026-11-19T00:28:00.000Z",
-     "link": "https://www.ibabynews.com/news/articleView.html?idxno=157056"
-    },
-    {
-     "title": "수능 1312개 시험장서 일제히 시작…전국 '위급재난문자' 울려",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-19T00:26:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903593"
-    },
-    {
-     "title": "‘위급재난문자’로 2027학년도 수능 시작 알림 … 교육부, AI 부정행위...",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-19T00:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002466571?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "조작기소 특검법 재가",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 44,
-   "recent20": 12,
-   "press": 41,
-   "firstArticleAt": "2026-11-18T23:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령, 中 현지서 '조작기소 특검법' 재가…공포·즉시 시행",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-19T00:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000142591?sid=100"
-    },
-    {
-     "title": "검사들, 검찰총장 대행에 \"'조작기소 특검법' 대응, 통일된 기준 정해달...",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-19T00:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001536584?sid=102"
-    },
-    {
-     "title": "이 대통령 순방 중 조작기소 특검법 재가, 즉시 공포 시행",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-19T00:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000161690?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "앤트로픽 IPO 83달러",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 38,
-   "recent20": 12,
-   "press": 33,
-   "firstArticleAt": "2026-11-18T23:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "앤트로픽, 공모가 83달러 확정…스페이스X 넘어 역대 최대 IPO",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-19T00:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000121737?sid=104"
-    },
-    {
-     "title": "앤트로픽 공모가 83달러 확정…125조 조달·역대 최대 IPO 기록 '눈앞'",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-19T00:30:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101559"
-    },
-    {
-     "title": "엔비디아 호실적·앤트로픽 IPO 겹호재에도…외국인 ‘셀코리아’ 여전",
-     "press": "segye.com",
-     "publishedAt": "2026-11-19T00:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004176425?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "태안 어선 실종",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 31,
-   "recent20": 2,
-   "press": 28,
-   "firstArticleAt": "2026-11-18T23:03:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "태안 연락 두절 어선 이틀째 수색…밤샘 수색에도 흔적 못찾아",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-19T00:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404166?sid=102"
-    },
-    {
-     "title": "李대통령, 태안 어선 실종에 “수색 총력”...실종자 가족 지원 지시",
-     "press": "idsn.co.kr",
-     "publishedAt": "2026-11-19T00:16:00.000Z",
-     "link": "https://idsn.co.kr/news/view/1065571985538076"
-    },
-    {
-     "title": "李, 태안 어선 실종 보고 받고…\"수색에 최선 다하라\"",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-19T00:10:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2020602"
-    }
-   ]
-  },
-  {
-   "keyword": "겨울",
-   "sources": [
-    "google"
-   ],
-   "articles90": 26,
-   "recent20": 23,
-   "press": 19,
-   "firstArticleAt": "2026-11-19T00:08:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "대전시교육청, 2026년 겨울방학 학교 석면모니터단 교육 실시",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-19T00:30:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5085135"
-    },
-    {
-     "title": "오아, 하이마트 잠실점서 겨울가전 팝업 운영… 'SWEET WINTER 2026' 선보여",
-     "press": "fntoday.co.kr",
-     "publishedAt": "2026-11-19T00:30:00.000Z",
-     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=398911"
-    },
-    {
-     "title": "목포시, 눈 오는 날에도 안전하게…겨울철 제설 대응 강화",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-19T00:30:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261118500594"
-    }
-   ]
-  },
-  {
-   "keyword": "관광",
-   "sources": [
-    "google"
-   ],
-   "articles90": 23,
-   "recent20": 23,
-   "press": 18,
-   "firstArticleAt": "2026-11-19T00:12:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "금정산 국립공원 체험형 관광 콘텐츠 띄운다",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-19T00:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004683839?sid=102"
-    },
-    {
-     "title": "조폐공사, 관광기념품 박람회서 화폐 굿즈 판매",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-19T00:30:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5085174"
-    },
-    {
-     "title": "KB증권, '모험자본 투자 플랫폼' 통해 지역 관광 AI 펀드에 20억원 출자",
-     "press": "pointdaily.co.kr",
-     "publishedAt": "2026-11-19T00:28:00.000Z",
-     "link": "https://www.pointdaily.co.kr/news/articleView.html?idxno=326592"
-    }
-   ]
-  },
-  {
-   "keyword": "leet 시험",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 18,
-   "recent20": 10,
-   "press": 18,
-   "firstArticleAt": "2026-11-18T23:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'부정행위 의혹' LEET 만점자, 공개 검증 불참…연락두절",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-19T00:30:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5085171"
-    },
-    {
-     "title": "잠적한 '리트 만점자' 수능 시험지 폐기되나?…박정훈 의원 \"서울 영훈...",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-19T00:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001076449?sid=102"
-    },
-    {
-     "title": "\"수능 국어로 실력 증명하겠다\"던 LEET 만점자…당일 잠적·연락두절",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-19T00:22:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000084348"
-    }
-   ]
-  },
-  {
-   "keyword": "수험생 응원 후배들",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 30,
-   "recent20": 7,
-   "press": 12,
-   "firstArticleAt": "2026-11-18T23:09:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[2027 수능] \"긴장하지 말고 잘 보고 와\"…충북, 수험생 1만3693명 수능 ...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-19T00:29:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261119000280"
-    },
-    {
-     "title": "[수능 이모저모] \"만점 기원\" 응원 나온 후배·학부모들",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-19T00:24:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=847669"
-    },
-    {
-     "title": "[2027 수능] 한파 속에도 식지 않은 응원 열기…\"사랑한다, 파이팅\"",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-19T00:23:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261119000136"
-    }
-   ]
-  },
-  {
-   "keyword": "포체티노 감독 시작",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 12,
-   "recent20": 3,
-   "press": 12,
-   "firstArticleAt": "2026-11-18T23:06:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美 떠난 포체티노, 英 도착해 맨유 감독 업무 돌입",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-19T00:30:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/021/0002833913"
-    },
-    {
-     "title": "美 떠나 맨체스터로…'소방수' 포체티노, 23일 리버풀전서 데뷔전",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-19T00:25:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/079/0004211422"
-    },
-    {
-     "title": "포체티노에게는 답이 있을까 ‘맨유 공식 업무 돌입→23일 리버풀전’",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-19T00:12:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/382/0001305625"
-    }
-   ]
-  },
-  {
-   "keyword": "김정은 함경남도 시찰",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-18T23:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김정은, 동해안 지역 시찰하며 해군대학 방문…북미회담 안갯속?",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-19T00:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002832932?sid=100"
-    },
-    {
-     "title": "김정은, APEC 개막일 함경남도 시찰…'미·중·러 회담' 앞두고 움직임 ...",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-19T00:12:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5085134"
-    },
-    {
-     "title": "북미 회동설 속 김정은, 북중 접경지 떠나 이번엔 동해안으로 갔다",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-19T00:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000966476?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "수능 시간표",
+   "keyword": "조희대 탄핵 추진",
    "sources": [
     "daum"
    ],
-   "articles90": 7,
+   "articles90": 21,
    "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-18T23:02:00.000Z",
+   "press": 19,
+   "firstArticleAt": "2026-11-19T13:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "수능 4교시 끝나기 37분 전…나성동의 음주 예방",
-     "press": "ccdailynews.com",
-     "publishedAt": "2026-11-19T00:30:00.000Z",
-     "link": "https://www.ccdailynews.com/news/articleView.html?idxno=2452249"
+     "title": "한동훈 의원, 조희대 대법원장 탄핵 추진에 강력 반발...\"사법부 마비·...",
+     "press": "news2day.co.kr",
+     "publishedAt": "2026-11-19T14:50:00.000Z",
+     "link": "https://www.news2day.co.kr/article/20261119500419"
     },
     {
-     "title": "수능당일 주식시장 10시 문 연다…마감은 오후 4시 30분",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-19T00:14:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=202611190852334111923c501012_1"
+     "title": "與, '曺대법원장 탄핵' 직행…진보정당과 구성단 추진 계획(종합2보)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-19T14:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016453339?sid=100"
     },
     {
-     "title": "수능 시간표, 오전 8시 10분까지 입실 완료…수험표·실물 신분증 필수",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-19T00:06:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95550"
+     "title": "국정조사도 미뤘던 與…한덕수 판결에 조희대 탄핵 급선회",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-19T14:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004684183?sid=100"
     }
    ]
   },
   {
-   "keyword": "LPGA 공 위치 데이터 도입",
+   "keyword": "인천 전 연인 둔기 살해 구속",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-18T23:11:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "LPGA 커미셔녀 \"내년부터 '공 위치 데이터' 도입\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-19T00:27:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/469/0000966478"
-    },
-    {
-     "title": "LPGA 투어, '골프 공 위치 데이터' 내년 도입…시즌 최종전 시범 운영",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-19T00:06:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/325768/?sc=Naver"
-    },
-    {
-     "title": "LPGA, PGA 이어 25년만에 '공 위치 데이터' 도입",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-18T23:54:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261119010007349"
-    }
-   ]
-  },
-  {
-   "keyword": "주식 거래시간",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
+   "articles90": 7,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-18T23:08:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-19T13:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[뉴욕마켓워치] 엔비디아 호실적도 못 살린 투심…주식·채권 혼조·달러...",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-19T00:04:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445463"
+     "title": "접근금지 해제 뒤 전 연인 살해 혐의 60대 구속 “증거인멸·도주 우려”",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-19T14:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003566555?sid=102"
     },
     {
-     "title": "[쩐의흔적] 벌금 191억원 확정…전인장 전 회장, 삼양식품 주식 470억원...",
-     "press": "thepublic.kr",
-     "publishedAt": "2026-11-18T23:56:00.000Z",
-     "link": "https://www.thepublic.kr/news/articleView.html?idxno=327422"
+     "title": "접근금지 해제되자 전 연인 살해한 60대 남성 '구속'...혐의 부인",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-19T14:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000121808?sid=102"
     },
     {
-     "title": "오늘 주식 거래는 10시부터, 프리장도 쉰다…수능일, 증시 1시간 순연",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-18T23:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005443314?sid=101"
+     "title": "접근금지 조치 실효 뒤 전 연인 살해 혐의…60대 구속",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-19T14:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701313?sid=102"
     }
    ]
   },
   {
-   "keyword": "청, 한한령 해제 진전",
+   "keyword": "영하 제주 눈.",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-19T13:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "영하 6도 출근길 강추위…충청·호남 눈에 강풍까지[오늘날씨]",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-19T15:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014334477?sid=102"
+    },
+    {
+     "title": "[오늘(20일) 날씨] 아침 최저 영하 6도 '뚝'…전북남부 최대 8㎝ 많은 눈",
+     "press": "thefairnews.co.kr",
+     "publishedAt": "2026-11-19T15:00:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94796"
+    },
+    {
+     "title": "[출근길 날씨] 아침 최저 영하 6도 '뚝'…충청·전라·제주 곳곳 눈·비",
+     "press": "news-s.kr",
+     "publishedAt": "2026-11-19T14:40:00.000Z",
+     "link": "https://news-s.kr/view.html?id=L261119233543d253"
+    }
+   ]
+  },
+  {
+   "keyword": "영하 6도 눈비",
    "sources": [
     "nate"
    ],
    "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-18T23:06:00.000Z",
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-19T13:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "靑, '한중 FTA 서비스·투자 협상' 타결…\"한한령 해제 어느 정도 진전\"",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-18T23:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001076437?sid=100"
+     "title": "[서울·인천·경기 오늘(20일) 날씨] 아침 영하 3도 '강추위'…경기 남부...",
+     "press": "thefairnews.co.kr",
+     "publishedAt": "2026-11-19T15:00:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94799"
     },
     {
-     "title": "한중 FTA 타결에 靑 “한한령 해제 기대”…K팝 공연 빗장 풀릴까",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-18T23:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005765945?sid=100"
+     "title": "[충북 오늘(20일) 날씨] 아침 최저 영하 6도 한파…중·남부 최대 5㎝ 눈...",
+     "press": "thefairnews.co.kr",
+     "publishedAt": "2026-11-19T15:00:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94809"
     },
     {
-     "title": "靑 “한한령 해제에 진전…K팝 공연 등 중국 진출 가능성 열려”",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-18T23:42:00.000Z",
-     "link": "https://www.viva100.com/article/20261119500062"
+     "title": "[출근길 날씨] 아침 최저 영하 6도 '뚝'…충청·전라·제주 곳곳 눈·비",
+     "press": "news-s.kr",
+     "publishedAt": "2026-11-19T14:40:00.000Z",
+     "link": "https://news-s.kr/view.html?id=L261119233543d253"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1107,
-  "matched": 601,
-  "avgLeadMin": 837,
+  "flagged": 878,
+  "matched": 533,
+  "avgLeadMin": 736,
   "recent": [
    {
-    "keyword": "수능 한파 대비 대책",
-    "hitKeyword": "수능 당일 한파 기승",
-    "hitAt": "2026-11-19T09:00:00+09:00",
-    "leadMin": 140
+    "keyword": "구글 젠틀몬스터 안경 공개",
+    "hitKeyword": "삼성 구글 AI 안경",
+    "hitAt": "2026-11-19T23:00:00+09:00",
+    "leadMin": 9478
    },
    {
-    "keyword": "수능 한파 아침 영하 -4도 주의",
-    "hitKeyword": "수능 당일 한파 기승",
-    "hitAt": "2026-11-19T09:00:00+09:00",
-    "leadMin": 109
+    "keyword": "이 대통령 자본시장 간담회",
+    "hitKeyword": "멕시코 대통령 이코노미석",
+    "hitAt": "2026-11-19T23:00:00+09:00",
+    "leadMin": 9417
    },
    {
-    "keyword": "수능 한파 아침 영하 -4도",
-    "hitKeyword": "수능 당일 한파 기승",
-    "hitAt": "2026-11-19T09:00:00+09:00",
-    "leadMin": 99
+    "keyword": "이 대통령 태국 필리핀 회담",
+    "hitKeyword": "멕시코 대통령 이코노미석",
+    "hitAt": "2026-11-19T23:00:00+09:00",
+    "leadMin": 9387
    },
    {
-    "keyword": "6년 만의 수능 한파 예상",
-    "hitKeyword": "수능 당일 한파 기승",
-    "hitAt": "2026-11-19T09:00:00+09:00",
-    "leadMin": 69
+    "keyword": "이 대통령 아세안 순방",
+    "hitKeyword": "멕시코 대통령 이코노미석",
+    "hitAt": "2026-11-19T23:00:00+09:00",
+    "leadMin": 5266
    },
    {
-    "keyword": "엔비디아 호실적에도 혼조",
-    "hitKeyword": "삼성전기 엔비디아 기판 계약",
-    "hitAt": "2026-11-19T09:00:00+09:00",
-    "leadMin": 29
+    "keyword": "이 대통령, 이용철 후보 인사청문 재가",
+    "hitKeyword": "멕시코 대통령 이코노미석",
+    "hitAt": "2026-11-19T23:00:00+09:00",
+    "leadMin": 4600
    },
    {
-    "keyword": "한중 FTA 실질 타결",
-    "hitKeyword": "한중 FTA 엔터 급등",
-    "hitAt": "2026-11-19T08:30:00+09:00",
-    "leadMin": 482
+    "keyword": "이 대통령 한-메콩 정상회의",
+    "hitKeyword": "멕시코 대통령 이코노미석",
+    "hitAt": "2026-11-19T23:00:00+09:00",
+    "leadMin": 4479
    },
    {
-    "keyword": "한중 FTA 타결",
-    "hitKeyword": "한중 FTA 엔터 급등",
-    "hitAt": "2026-11-19T08:30:00+09:00",
-    "leadMin": 462
+    "keyword": "한-메콩 정상회의에서 이 대통령",
+    "hitKeyword": "멕시코 대통령 이코노미석",
+    "hitAt": "2026-11-19T23:00:00+09:00",
+    "leadMin": 4458
    },
    {
-    "keyword": "한중 FTA 협상 타결",
-    "hitKeyword": "한중 FTA 엔터 급등",
-    "hitAt": "2026-11-19T08:30:00+09:00",
-    "leadMin": 341
+    "keyword": "이 대통령, 한-메콩 회의 개최",
+    "hitKeyword": "멕시코 대통령 이코노미석",
+    "hitAt": "2026-11-19T23:00:00+09:00",
+    "leadMin": 4438
    },
    {
-    "keyword": "수능일 주식시장 개장시간",
-    "hitKeyword": "수능일 증시 개장",
-    "hitAt": "2026-11-19T08:30:00+09:00",
-    "leadMin": 110
+    "keyword": "한-메콩 정상회의 이 대통령",
+    "hitKeyword": "멕시코 대통령 이코노미석",
+    "hitAt": "2026-11-19T23:00:00+09:00",
+    "leadMin": 4418
    },
    {
-    "keyword": "한중 FTA 후속협상 타결",
-    "hitKeyword": "한중 FTA 엔터 급등",
-    "hitAt": "2026-11-19T08:30:00+09:00",
-    "leadMin": 79
+    "keyword": "이 대통령 AI 문화 이니셔티브 제안",
+    "hitKeyword": "멕시코 대통령 이코노미석",
+    "hitAt": "2026-11-19T23:00:00+09:00",
+    "leadMin": 4165
    }
   ]
  }
