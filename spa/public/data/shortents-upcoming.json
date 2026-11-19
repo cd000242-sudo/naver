@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T15:42:14.797Z",
+ "builtAt": "2026-11-19T15:52:17.983Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,13 +15,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 17,
-   "recent20": 0,
-   "press": 15,
+   "articles90": 18,
+   "recent20": 1,
+   "press": 16,
    "firstArticleAt": "2026-11-19T15:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "고위공직자 60명 재산공개…1위는 김휘강 靑 사이버안보비서관",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-19T15:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001206099?sid=100"
+    },
     {
      "title": "김휘강 靑 사이버안보비서관 재산 75억",
      "press": "hankyung.com",
@@ -33,12 +39,6 @@
      "press": "segye.com",
      "publishedAt": "2026-11-19T15:12:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/022/0004176663?sid=100"
-    },
-    {
-     "title": "김휘강 안보실 사이버안보비서관 '75억'..고위공직자 재산 공개",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-19T15:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001536797?sid=100"
     }
    ]
   },
@@ -47,10 +47,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 8,
+   "articles90": 6,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-19T14:13:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-19T14:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -79,13 +79,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 3,
-   "recent20": 0,
+   "articles90": 4,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-19T15:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "앤스로픽 호가 105달러…ANT 계약과 같은 수준",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-19T15:48:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/440923"
+    },
     {
      "title": "앤스로픽($ANT) IPO 기관 절반 이상 무배정…총 1073억달러 조달",
      "press": "tokenpost.kr",
@@ -97,20 +103,14 @@
      "press": "coinreaders.com",
      "publishedAt": "2026-11-19T15:02:00.000Z",
      "link": "http://coinreaders.com/271770"
-    },
-    {
-     "title": "Ondo Plans Anthropic Share Token for Nasdaq’s First Trading Day",
-     "press": "econotimes.com",
-     "publishedAt": "2026-11-19T15:02:00.000Z",
-     "link": "https://econotimes.com/Ondo-Plans-Anthropic-Share-Token-for-Nasdaq-s-First-Trading-Day-1779751"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 881,
-  "matched": 531,
+  "flagged": 880,
+  "matched": 530,
   "avgLeadMin": 738,
   "recent": [
    {
