@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T17:32:50.731Z",
+ "builtAt": "2026-11-19T17:42:55.117Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,13 +15,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-19T16:06:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-19T16:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[미국 특징주] AMD, 중국 연계 의혹 보고서에 7%대 급락",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-19T17:36:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261120000037"
+    },
     {
      "title": "AMD 주가 장중 11% 하락…헌터브룩, IEIT서 AMD 펌웨어 주장",
      "press": "tokenpost.kr",
@@ -33,12 +39,6 @@
      "press": "news.einfomax.co.kr",
      "publishedAt": "2026-11-19T16:20:00.000Z",
      "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445628"
-    },
-    {
-     "title": "AMD news tops US searches in Google Trends daily rankings",
-     "press": "econotimes.com",
-     "publishedAt": "2026-11-19T16:12:00.000Z",
-     "link": "https://econotimes.com/AMD-news-tops-US-searches-in-Google-Trends-daily-rankings-1779794"
     }
    ]
   },
