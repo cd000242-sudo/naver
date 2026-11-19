@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T15:32:11.071Z",
+ "builtAt": "2026-11-19T15:42:14.797Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,52 +8,58 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 24,
  "candidates": [
   {
-   "keyword": "영하 6도 제주 눈.",
+   "keyword": "김휘강 재산공개",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 12,
+   "articles90": 17,
    "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-19T14:39:00.000Z",
+   "press": 15,
+   "firstArticleAt": "2026-11-19T15:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[오늘의 날씨] 아침 영하 6도…전북 남부 시간당 최대 3cm 눈",
-     "press": "kdfnews.com",
-     "publishedAt": "2026-11-19T15:06:00.000Z",
-     "link": "http://www.kdfnews.com/news/articleView.html?idxno=191162"
+     "title": "김휘강 靑 사이버안보비서관 재산 75억",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-19T15:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005356135?sid=102"
     },
     {
-     "title": "[오늘날씨] 최저 영하 6도 '강추위'…전북·제주 '눈'",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-19T15:06:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5085690"
+     "title": "김휘강 국가안보실 사이버안보비서관 재산 75억원…남영준 국립중앙도...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-19T15:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004176663?sid=100"
     },
     {
-     "title": "[날씨] 아침 기온 전국 대부분 영하권‥ 전북 곳곳 대설주의보",
+     "title": "김휘강 안보실 사이버안보비서관 '75억'..고위공직자 재산 공개",
      "press": "imnews.imbc.com",
      "publishedAt": "2026-11-19T15:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001536798?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/214/0001536797?sid=100"
     }
    ]
   },
   {
-   "keyword": "대법, 한덕수 파기환송",
+   "keyword": "대법 한덕수 파기환송",
    "sources": [
     "nate"
    ],
-   "articles90": 7,
+   "articles90": 8,
    "recent20": 1,
    "press": 6,
    "firstArticleAt": "2026-11-19T14:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "대법, 한덕수 내란혐의 일부 무죄로 파기환송",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-19T15:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003566624?sid=102"
+    },
     {
      "title": "[사설] 대법 “12·3 비상계엄은 위헌·위법”…여야 정쟁 멈춰야",
      "press": "joongang.co.kr",
@@ -65,76 +71,6 @@
      "press": "ksilbo.co.kr",
      "publishedAt": "2026-11-19T15:04:00.000Z",
      "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1073117"
-    },
-    {
-     "title": "[사설]대법 “계엄은 내란”이라는데 대법원장 탄핵 추진한다니",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-19T15:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004684186?sid=110"
-    }
-   ]
-  },
-  {
-   "keyword": "LG 임원 11명 승진",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-19T14:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "LG, 주요 CEO 유임 ‘안정 인사’… AI-로봇 인재는 대거 발탁",
-     "press": "donga.com",
-     "publishedAt": "2026-11-19T15:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003763802?sid=101"
-    },
-    {
-     "title": "LG그룹, 안정 속 쇄신 택했다…기술 인재는 전진 배치",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-19T15:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003566598?sid=101"
-    },
-    {
-     "title": "LG엔솔, 품질·기술 경쟁력에 무게⋯2027 임원인사 11명 승진",
-     "press": "autodaily.co.kr",
-     "publishedAt": "2026-11-19T15:00:00.000Z",
-     "link": "https://www.autodaily.co.kr/news/articleView.html?idxno=602262"
-    }
-   ]
-  },
-  {
-   "keyword": "트럼프 아시아 순방 귀국",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-19T14:05:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "트럼프시진핑푸틴 첫 정상회담…'핵확산 방지ㆍ석유공급 확대' 확인",
-     "press": "pointdaily.co.kr",
-     "publishedAt": "2026-11-19T15:30:00.000Z",
-     "link": "https://www.pointdaily.co.kr/news/articleView.html?idxno=326741"
-    },
-    {
-     "title": "트럼프·시진핑·푸틴, 첫 3자 정상회담…핵위험 감소·정제유 공급 확...",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-19T14:06:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261119010007846"
-    },
-    {
-     "title": "미중러 정상 모두 만난 李대통령…순방 성과·남은 과제는",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-19T14:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003157438?sid=100"
     }
    ]
   },
@@ -157,48 +93,16 @@
      "link": "https://www.tokenpost.kr/news/breaking/440892"
     },
     {
-     "title": "Ondo Plans Anthropic Share Token for Nasdaq’s First Trading Day",
-     "press": "econotimes.com",
-     "publishedAt": "2026-11-19T15:02:00.000Z",
-     "link": "https://econotimes.com/Ondo-Plans-Anthropic-Share-Token-for-Nasdaq-s-First-Trading-Day-1779751"
-    },
-    {
      "title": "앤트로픽(ANT) 공모가 83달러 확정...순손실에도 813억 달러 싹쓸이",
      "press": "coinreaders.com",
      "publishedAt": "2026-11-19T15:02:00.000Z",
      "link": "http://coinreaders.com/271770"
-    }
-   ]
-  },
-  {
-   "keyword": "김대두",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-19T14:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
+    },
     {
-     "title": "'꼬꼬무' 최산, 김대두 사건 수사에 의문…\"조금 더 깊이 들여다봤으면...",
-     "press": "slist.kr",
+     "title": "Ondo Plans Anthropic Share Token for Nasdaq’s First Trading Day",
+     "press": "econotimes.com",
      "publishedAt": "2026-11-19T15:02:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=783223"
-    },
-    {
-     "title": "韓 최초 연쇄살인마 김대두, 2만 5천원 갖겠다고 17명 죽였다(꼬꼬무) [...",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-19T14:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000053461"
-    },
-    {
-     "title": "'꼬꼬무' 최산, 김대두 가족단위 연쇄살인에 분노…\"쓰레기다\"",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-19T14:06:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=783218"
+     "link": "https://econotimes.com/Ondo-Plans-Anthropic-Share-Token-for-Nasdaq-s-First-Trading-Day-1779751"
     }
    ]
   }
@@ -206,8 +110,8 @@
  "hitRate": {
   "days": 7,
   "flagged": 881,
-  "matched": 532,
-  "avgLeadMin": 737,
+  "matched": 531,
+  "avgLeadMin": 738,
   "recent": [
    {
     "keyword": "gta 6",
