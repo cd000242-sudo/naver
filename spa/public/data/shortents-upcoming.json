@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T22:54:37.577Z",
+ "builtAt": "2026-11-19T23:04:40.689Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,102 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "뉴욕증시 급락",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 54,
+   "articles90": 51,
    "recent20": 14,
-   "press": 50,
-   "firstArticleAt": "2026-11-19T21:26:00.000Z",
+   "press": 46,
+   "firstArticleAt": "2026-11-19T21:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“앤트로픽 상장도 소용없었다”…美 증시 2%대 급락",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-19T22:52:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611200007"
+     "title": "앤트로픽 상장에도 뉴욕증시 2%대 급락…다우 50,000선 붕괴",
+     "press": "tfmedia.co.kr",
+     "publishedAt": "2026-11-19T23:02:00.000Z",
+     "link": "https://www.tfmedia.co.kr/news/article.html?no=209045"
     },
     {
-     "title": "AI 열풍도 못 막은 뉴욕증시 급락…다우 5만선 다시 무너졌다",
-     "press": "newsroad.co.kr",
-     "publishedAt": "2026-11-19T22:50:00.000Z",
-     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68113"
+     "title": "미국증시 나스닥100 '추락'...AI칩 & AI인프라주 '급락'",
+     "press": "choicenews.co.kr",
+     "publishedAt": "2026-11-19T23:02:00.000Z",
+     "link": "http://www.choicenews.co.kr/news/articleView.html?idxno=173350"
     },
     {
-     "title": "AMD, 中 수출 제재 위반 의혹에 주가 8% 급락",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-19T22:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001076844?sid=104"
+     "title": "[마켓무버]뉴욕증시, 앤트로픽 IPO 흥행에도 급반락…3대 지수 일제히 하...",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-19T23:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006412888?sid=101"
     }
    ]
   },
   {
-   "keyword": "지하철 2호선 성수지선",
+   "keyword": "백진경, 영국서 출산",
    "sources": [
     "nate"
    ],
-   "articles90": 43,
-   "recent20": 13,
-   "press": 35,
-   "firstArticleAt": "2026-11-19T21:54:00.000Z",
+   "articles90": 7,
+   "recent20": 3,
+   "press": 7,
+   "firstArticleAt": "2026-11-19T21:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "서울 지하철 2호선 성수지선 운행 중단…1호선 일부 열차 지연",
-     "press": "delighti.co.kr",
-     "publishedAt": "2026-11-19T22:52:00.000Z",
-     "link": "https://www.delighti.co.kr/news/articleView.html?idxno=125272"
+     "title": "‘명예영국인’ 백진경, 딸 출산 후 “제와절개 다음 날 토스트” [셀럽...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-19T23:02:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1795129000531235005"
     },
     {
-     "title": "서울지하철 2호선 성수지선 양방향 운행중단...출근길 시민 불편",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-19T22:48:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261120000069"
+     "title": "‘명예영국인’ 백진경, 英서 득녀…미역국 대신 토스트 먹는 산모",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-19T22:59:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001150818"
     },
     {
-     "title": "[속보] 서울지하철 2호선 성수역~신설동역 지선 운행 중지… 본선은 정...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-19T22:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002726005?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "경제",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 8,
-   "firstArticleAt": "2026-11-19T22:24:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "해남군, 군민 생활안정·지역경제 활성화 위해 내년 자체 기본소득 검토",
-     "press": "thebigdata.co.kr",
-     "publishedAt": "2026-11-19T22:42:00.000Z",
-     "link": "https://www.thebigdata.co.kr/view.php?ud=202611191617457815e91b94b033_23"
-    },
-    {
-     "title": "청년들 “열심히 일해도 집 못 산다”…경제 불만 확산",
-     "press": "koreadaily.com",
-     "publishedAt": "2026-11-19T22:38:00.000Z",
-     "link": "https://www.koreadaily.com/article/20261119143759154"
-    },
-    {
-     "title": "도봉구, 내년 예산 9982억 편성…서울아레나 중심 ‘문화경제도시’ 도...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-19T22:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002726001?sid=102"
+     "title": "'고위험산모' 명예영국인 백진경, 英서 깜짝 제왕절개 출산",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-19T22:45:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000053465"
     }
    ]
   },
@@ -112,10 +79,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-19T21:30:00.000Z",
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-19T21:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -140,44 +107,12 @@
    ]
   },
   {
-   "keyword": "10월 생산자물가 0.1%↓",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-19T21:33:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "사과·돼지고기 내림세에 10월 생산자물가, 석 달 만에 하락 전환",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-19T22:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004010744?sid=101"
-    },
-    {
-     "title": "10월 생산자물가 0.1% 내려…석달 만에 하락전환",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-19T22:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000544855?sid=101"
-    },
-    {
-     "title": "국내 농산물 가격 급락, 생산자물가 3개월 만에 감소세 전환",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-19T22:22:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886509"
-    }
-   ]
-  },
-  {
    "keyword": "이승기 20억 기부",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 3,
+   "recent20": 2,
    "press": 4,
    "firstArticleAt": "2026-11-19T22:09:00.000Z",
    "exclusive": false,
@@ -209,7 +144,7 @@
     "daum"
    ],
    "articles90": 4,
-   "recent20": 3,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-19T21:53:00.000Z",
    "exclusive": false,
@@ -236,19 +171,117 @@
    ]
   },
   {
-   "keyword": "이진우 고소 준비한 피해자 글",
+   "keyword": "김휘강 75억 고위공직 1위",
    "sources": [
-    "signal.bz"
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 3,
+   "press": 3,
+   "firstArticleAt": "2026-11-19T22:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "고위공직자 60명 재산 공개...김휘강 비서관 75억 최다",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-19T23:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002435471?sid=100"
+    },
+    {
+     "title": "고위공직 60명 재산공개…김휘강 靑비서관 75억으로 1위",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-19T22:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000544864?sid=101"
+    },
+    {
+     "title": "공직자 60명 재산공개...김휘강 사이버안보비서관 75억 '톱'",
+     "press": "public25.com",
+     "publishedAt": "2026-11-19T22:50:00.000Z",
+     "link": "https://www.public25.com/news/articleView.html?idxno=58727"
+    }
+   ]
+  },
+  {
+   "keyword": "경제",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-19T22:42:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "서울중기청·서울창조경제혁신센터, 마곡서 ‘밋업 & 네트워킹 데이’ ...",
+     "press": "sentv.co.kr",
+     "publishedAt": "2026-11-19T22:56:00.000Z",
+     "link": "https://www.sentv.co.kr/article/view/sentv202611200008"
+    },
+    {
+     "title": "파주 평화경제특구 1차 신청…210개 기업 입주 의향, 시행자 확보가 관...",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-19T22:54:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=202611200007138567f0f3e23044_1"
+    },
+    {
+     "title": "해남군, 군민 생활안정·지역경제 활성화 위해 내년 자체 기본소득 검토",
+     "press": "thebigdata.co.kr",
+     "publishedAt": "2026-11-19T22:42:00.000Z",
+     "link": "https://www.thebigdata.co.kr/view.php?ud=202611191617457815e91b94b033_23"
+    }
+   ]
+  },
+  {
+   "keyword": "박찬종 별세",
+   "sources": [
+    "nate",
+    "daum"
    ],
    "articles90": 3,
    "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-19T21:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "5선 지낸 박찬종 전 국회의원 별세",
+     "press": "news.knn.co.kr",
+     "publishedAt": "2026-11-19T23:02:00.000Z",
+     "link": "https://news.knn.co.kr/news/article/194732"
+    },
+    {
+     "title": "박찬종 전 의원의 마지막 나눔…“아름다운 죽음”",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-19T22:34:00.000Z",
+     "link": "http://www.breaknews.com/1252485"
+    },
+    {
+     "title": "고독한 결단, 마지막은 나눔 [박찬종 별세]",
+     "press": "sisaon.co.kr",
+     "publishedAt": "2026-11-19T21:48:00.000Z",
+     "link": "https://www.sisaon.co.kr/news/articleView.html?idxno=206244"
+    }
+   ]
+  },
+  {
+   "keyword": "이진우 고소 준비중",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-19T22:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"예비 1번이었는데…이진우 때문에 떨어져\" 직접 피해자 등장",
+     "title": "\"고대 정외과 예비 1번…이진우 때문에 떨어져\" 직접 피해자 등장",
      "press": "ajunews.com",
      "publishedAt": "2026-11-19T22:36:00.000Z",
      "link": "https://www.ajunews.com/view/20261120070824734"
@@ -268,9 +301,40 @@
    ]
   },
   {
+   "keyword": "수능 등급컷",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-19T21:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[2026 수능 등급컷] 2027학년도 수능 국어 1등급 커트라인 90~95점 전망…...",
+     "press": "lecturernews.com",
+     "publishedAt": "2026-11-19T22:42:00.000Z",
+     "link": "https://www.lecturernews.com/news/articleView.html?idxno=214177"
+    },
+    {
+     "title": "2027학년도 수능 예상 등급컷 공개…국어 129~131점·수학 127~131점",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-19T22:00:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=783233"
+    },
+    {
+     "title": "수능 등급컷 공개…국어 95점·수학 90점",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-19T21:46:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611200018"
+    }
+   ]
+  },
+  {
    "keyword": "아파트",
    "sources": [
-    "signal.bz",
     "google"
    ],
    "articles90": 3,
@@ -303,10 +367,34 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 892,
-  "matched": 527,
-  "avgLeadMin": 748,
+  "flagged": 894,
+  "matched": 529,
+  "avgLeadMin": 751,
   "recent": [
+   {
+    "keyword": "체이스 은행 서비스 장애",
+    "hitKeyword": "실손보험 청구 서비스",
+    "hitAt": "2026-11-20T08:00:00+09:00",
+    "leadMin": 4284
+   },
+   {
+    "keyword": "amd",
+    "hitKeyword": "AMD 중국 의혹",
+    "hitAt": "2026-11-20T08:00:00+09:00",
+    "leadMin": 86
+   },
+   {
+    "keyword": "지하철 2호선 운행 중단",
+    "hitKeyword": "성수지선 운행 중단",
+    "hitAt": "2026-11-20T08:00:00+09:00",
+    "leadMin": 25
+   },
+   {
+    "keyword": "지하철 2호선 성수지선",
+    "hitKeyword": "성수지선 운행 중단",
+    "hitAt": "2026-11-20T08:00:00+09:00",
+    "leadMin": 15
+   },
    {
     "keyword": "오현규 동점골 폭발",
     "hitKeyword": "오현규 토트넘 이적설",
@@ -342,30 +430,6 @@
     "hitKeyword": "한겨울 추위 눈 예보",
     "hitAt": "2026-11-20T07:00:00+09:00",
     "leadMin": 1359
-   },
-   {
-    "keyword": "젤렌스키 북한 미사일 공급",
-    "hitKeyword": "리야드 빌딩 후티 미사일",
-    "hitAt": "2026-11-20T06:30:00+09:00",
-    "leadMin": 4133
-   },
-   {
-    "keyword": "전쟁",
-    "hitKeyword": "네타냐후 이란 전쟁 추진",
-    "hitAt": "2026-11-20T06:30:00+09:00",
-    "leadMin": 4043
-   },
-   {
-    "keyword": "김정은",
-    "hitKeyword": "트럼프 김정은 회담불발",
-    "hitAt": "2026-11-20T06:00:00+09:00",
-    "leadMin": 1410
-   },
-   {
-    "keyword": "김정은 함경남도 시찰",
-    "hitKeyword": "트럼프 김정은 회담불발",
-    "hitAt": "2026-11-20T06:00:00+09:00",
-    "leadMin": 1369
    }
   ]
  }
