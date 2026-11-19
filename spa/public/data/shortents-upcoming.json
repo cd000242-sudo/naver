@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T22:34:30.449Z",
+ "builtAt": "2026-11-19T22:44:34.117Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 21,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "뉴욕증시 급락",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 43,
-   "recent20": 6,
-   "press": 38,
-   "firstArticleAt": "2026-11-19T21:09:00.000Z",
+   "articles90": 48,
+   "recent20": 8,
+   "press": 44,
+   "firstArticleAt": "2026-11-19T21:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "뉴욕증시, 앤스로픽 잔치에도 2%대 급락⋯다우 5만선 붕괴 [종합]",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-19T22:32:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2650660"
+     "title": "[마켓 브리핑] 뉴욕증시, 앤트로픽 상장 기대감에 일제히 상승 출발",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-19T22:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000544858?sid=104"
     },
     {
-     "title": "뉴욕증시, '대박' 앤트로픽 상장에도 2%대 급락…다우 50,000선 아래로",
-     "press": "getnews.co.kr",
-     "publishedAt": "2026-11-19T22:26:00.000Z",
-     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=887833"
+     "title": "앤트로픽 상장도 못 막은 AI주 투매…뉴욕증시 2%대 하락",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-19T22:40:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=243706"
     },
     {
-     "title": "뉴욕증시, 2%대 급락...앤트로픽 상장에도 AI 매도세 확산",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-19T22:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001076843?sid=104"
+     "title": "[오늘의 이슈] 앤트로픽 역대 최대 상장에도 뉴욕증시 2% 급락",
+     "press": "newskr.kr",
+     "publishedAt": "2026-11-19T22:38:00.000Z",
+     "link": "http://www.newskr.kr/news/articleView.html?idxno=108154"
     }
    ]
   },
   {
-   "keyword": "지하철 2호선 운행 중단",
+   "keyword": "지하철 2호선 성수지선",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 18,
-   "recent20": 7,
-   "press": 17,
-   "firstArticleAt": "2026-11-19T21:52:00.000Z",
+   "articles90": 39,
+   "recent20": 13,
+   "press": 33,
+   "firstArticleAt": "2026-11-19T21:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[1보] 서울 지하철 2호선 용답역 선로전환기 장애에 1호선까지 지연",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-19T22:30:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3757787"
+     "title": "지하철 2호선 성수지선 양방향 운행 중지...선로전환기 훼손 영향",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-19T22:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005607204?sid=102"
     },
     {
-     "title": "서울 지하철 2호선 성수지선 양방향 운행 중단…1호선도 일부 지연",
-     "press": "4th.kr",
-     "publishedAt": "2026-11-19T22:26:00.000Z",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2122287"
+     "title": "서울 지하철 2호선 성수지선 운행 중단…1호선도 일부 지연",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-19T22:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004684251?sid=102"
     },
     {
-     "title": "[속보] 서울 지하철 2호선 용답역 선로전환기 장애…성수지선 양방향 운...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-19T22:24:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=628892"
+     "title": "지하철 2호선 성수지선 양방향 운행 중지…1호선 일부 지연",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-19T22:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404423?sid=102"
     }
    ]
   },
@@ -80,30 +80,62 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 11,
-   "recent20": 9,
-   "press": 8,
-   "firstArticleAt": "2026-11-19T22:03:00.000Z",
+   "articles90": 13,
+   "recent20": 8,
+   "press": 10,
+   "firstArticleAt": "2026-11-19T22:12:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "강서구, 지방자치 혁신대상 2년 연속 수상…AI 행정·지역경제 성과 인...",
+     "title": "해남군, 군민 생활안정·지역경제 활성화 위해 내년 자체 기본소득 검토",
+     "press": "thebigdata.co.kr",
+     "publishedAt": "2026-11-19T22:42:00.000Z",
+     "link": "https://www.thebigdata.co.kr/view.php?ud=202611191617457815e91b94b033_23"
+    },
+    {
+     "title": "청년들 “열심히 일해도 집 못 산다”…경제 불만 확산",
+     "press": "koreadaily.com",
+     "publishedAt": "2026-11-19T22:38:00.000Z",
+     "link": "https://www.koreadaily.com/article/20261119143759154"
+    },
+    {
+     "title": "도봉구, 내년 예산 9982억 편성…서울아레나 중심 ‘문화경제도시’ 도...",
      "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-19T22:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002725997?sid=102"
+     "publishedAt": "2026-11-19T22:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002726001?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "10월 생산자물가 0.1%↓",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-19T21:21:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "10월 생산자물가 0.1% 내려…석달 만에 하락전환",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-19T22:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000544855?sid=101"
     },
     {
-     "title": "용인시의회 경제환경위, 신재생에너지·산단 관리 허점 집중 점검",
-     "press": "bizwnews.com",
-     "publishedAt": "2026-11-19T22:30:00.000Z",
-     "link": "http://www.bizwnews.com/news/articleView.html?idxno=152482"
+     "title": "국내 농산물 가격 급락, 생산자물가 3개월 만에 감소세 전환",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-19T22:22:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886509"
     },
     {
-     "title": "[KFT 모닝 브리프] 2026.11.20 — 오늘 꼭 알아야 할 국내외 경제뉴스",
-     "press": "fntimes.com",
-     "publishedAt": "2026-11-19T22:30:00.000Z",
-     "link": "https://www.fntimes.com/html/view.php?ud=20261120071256267141825007d_18"
+     "title": "사과 29%·돼지고기 13%↓…생산자물가 석 달 만에 하락",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-19T22:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005766491?sid=101"
     }
    ]
   },
@@ -144,13 +176,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 5,
+   "articles90": 6,
    "recent20": 1,
    "press": 5,
    "firstArticleAt": "2026-11-19T21:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[오피셜] '축구 도사' 벨링엄, 득점 없이도 10월 레알의 선수 선정...\"5전...",
+     "press": "fourfourtwo.co.kr",
+     "publishedAt": "2026-11-19T22:35:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/411/0000090213"
+    },
     {
      "title": "계약 만료까지 단 7일, 모레노 감독이 남긴 메시지…\"언제나 국가대표팀...",
      "press": "interfootball.co.kr",
@@ -162,76 +200,70 @@
      "press": "goal.com",
      "publishedAt": "2026-11-19T21:55:00.000Z",
      "link": "https://m.sports.naver.com/kfootball/article/216/0000143855"
-    },
-    {
-     "title": "'韓축구 풀백의 희망' 옌스, BVB전서 첫 선발 출격 전망...\"빠르게 투입...",
-     "press": "fourfourtwo.co.kr",
-     "publishedAt": "2026-11-19T21:43:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/411/0000090210"
     }
    ]
   },
   {
-   "keyword": "영국 배우 백진경 득녀 소식",
+   "keyword": "이진우 고소 준비한 피해자 글",
    "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-19T21:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘명예영국인’ 백진경, 고위험산모 극복하고 딸 출산…“제왕 다음날...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-19T22:20:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003542697"
-    },
-    {
-     "title": "'고위험 산모' 백진경, 영국서 득녀…\"제왕 다음 날 아침 메뉴 토스트\" ...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-19T22:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002082315"
-    },
-    {
-     "title": "“얼마나 걱정했을까”…‘영국 배우♥’ 백진경, 고위험 산모 판정 딛...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-19T21:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001282248"
-    }
-   ]
-  },
-  {
-   "keyword": "수능 난이도",
-   "sources": [
-    "daum"
+    "signal.bz"
    ],
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-19T21:28:00.000Z",
+   "firstArticleAt": "2026-11-19T22:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "2027 수능, 국어·수학 1등급 커트라인 상승 예측…수학 변별력 주목",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-19T22:20:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886506"
+     "title": "\"예비 1번이었는데…이진우 때문에 떨어져\" 직접 피해자 등장",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-19T22:36:00.000Z",
+     "link": "https://www.ajunews.com/view/20261120070824734"
     },
     {
-     "title": "개편 전 마지막 수능…“영어, 지난해보다 쉬워”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-19T21:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012297768?sid=102"
+     "title": "\"리트만점자 고소 준비했는데\"…24학년도 고대 예비1번 탈락자 등장",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-19T22:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979025?sid=102"
     },
     {
-     "title": "2027학년도 수능 국어·영어 쉬워지고 수학은 비슷",
-     "press": "jejudomin.co.kr",
-     "publishedAt": "2026-11-19T21:28:00.000Z",
-     "link": "https://www.jejudomin.co.kr/news/articleView.html?idxno=402550"
+     "title": "\"고대 예비 1번 탈락 후 재수\"…이진우 고소 준비한 '피해자' 글 올라왔...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-19T22:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005607196?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "이승기 20억 기부",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-19T21:15:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이승기, 미정산금 54억 받아 20억 기부 “없던 돈이라 생각했는데”",
+     "press": "segye.com",
+     "publishedAt": "2026-11-19T22:40:00.000Z",
+     "link": "https://m.entertain.naver.com/article/022/0004176722"
+    },
+    {
+     "title": "이승기 \"20억 기부 비화? 처음엔 5억만 하려 했다\"",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-19T22:09:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000328535"
+    },
+    {
+     "title": "'20억 기부' 이승기, 서울대병원 주차 평생 공짜…\"원래 5억만 하려 했다...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-19T21:15:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000785286"
     }
    ]
   },
@@ -303,9 +335,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 891,
-  "matched": 530,
-  "avgLeadMin": 753,
+  "flagged": 892,
+  "matched": 528,
+  "avgLeadMin": 754,
   "recent": [
    {
     "keyword": "오현규 동점골 폭발",
