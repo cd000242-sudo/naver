@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T19:03:18.201Z",
+ "builtAt": "2026-11-19T19:13:21.579Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,12 +16,18 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-19T17:36:00.000Z",
+   "firstArticleAt": "2026-11-19T17:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "AMD 리사 수, 젠슨 황 파문에 \"소음 곧 가라앉을 것\"",
+     "press": "dkilbo.com",
+     "publishedAt": "2026-11-19T19:10:00.000Z",
+     "link": "https://www.dkilbo.com/news/articleView.html?idxno=561526"
+    },
     {
      "title": "美 반도체업계 '중국 리스크' 확산…AMD 9% 급락",
      "press": "fnnews.com",
@@ -33,53 +39,15 @@
      "press": "econotimes.com",
      "publishedAt": "2026-11-19T17:46:00.000Z",
      "link": "https://econotimes.com/AMD-Firmware-Appeared-in-Updates-From-China-Listed-IEIT-Report-Says-1779846"
-    },
-    {
-     "title": "[미국 특징주] AMD, 중국 연계 의혹 보고서에 7%대 급락",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-19T17:36:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261120000037"
-    }
-   ]
-  },
-  {
-   "keyword": "anthropic stock",
-   "sources": [
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 2,
-   "firstArticleAt": "2026-11-19T17:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "Anthropic’s unusual corporate structure mandates it balance safety and ...",
-     "press": "nytimes.com",
-     "publishedAt": "2026-11-19T18:54:00.000Z",
-     "link": "https://www.nytimes.com/live/2026/11/19/technology/anthropic-ipo-ai/anthropics-unusual-corporate-structure-mandates-it-balance-safety-and-profit?partner=naver"
-    },
-    {
-     "title": "Anthropic Workforce Growth Puts Employee Tenure and Culture in Focus",
-     "press": "econotimes.com",
-     "publishedAt": "2026-11-19T18:54:00.000Z",
-     "link": "https://econotimes.com/Anthropic-Workforce-Growth-Puts-Employee-Tenure-and-Culture-in-Focus-1779867"
-    },
-    {
-     "title": "Anthropic’s Debut Rally Fails to Lift Wall Street as Oil Climbs",
-     "press": "econotimes.com",
-     "publishedAt": "2026-11-19T18:26:00.000Z",
-     "link": "https://econotimes.com/Anthropic-s-Debut-Rally-Fails-to-Lift-Wall-Street-as-Oil-Climbs-1779860"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 885,
-  "matched": 528,
-  "avgLeadMin": 738,
+  "flagged": 884,
+  "matched": 527,
+  "avgLeadMin": 740,
   "recent": [
    {
     "keyword": "gta 6",
