@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T00:01:27.276Z",
+ "builtAt": "2026-11-19T00:11:30.823Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,52 +8,91 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "리트 만점자 공개검증",
+   "keyword": "이진우 공개 검증 불참",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 88,
-   "recent20": 47,
-   "press": 61,
-   "firstArticleAt": "2026-11-18T23:18:00.000Z",
+   "articles90": 53,
+   "recent20": 23,
+   "press": 40,
+   "firstArticleAt": "2026-11-18T23:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'리트 만점자' 이진우, 수능 국어 공개검증 무산…27만명 지켜봤지만 끝...",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-19T00:00:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101555"
+     "title": "\"실력으로 증명\" 호언장담했지만…리트 만점자 이진우씨, 공개검증 불참",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-19T00:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005606594?sid=102"
     },
     {
-     "title": "'리트 만점자' 수능 공개검증 최종 무산…약속 시간까지 연락 두절(종합...",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-19T00:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001076439?sid=102"
+     "title": "'리트냥이' 이진우, 수능 국어 생중계 불참... 여전히 24만명 시청중",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-19T00:08:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1194106"
     },
     {
-     "title": "[현장] 20만명 모인 리트 만점자 '검증쇼'…주인공은 '노쇼'",
-     "press": "weekly.chosun.com",
-     "publishedAt": "2026-11-19T00:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/053/0000063160?sid=102"
+     "title": "리트 만점자 이진우, 안 나타난 이유가... “휴대폰 꺼지고 카톡 무응답...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-19T00:08:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1175813"
+    }
+   ]
+  },
+  {
+   "keyword": "리트 만점자 수사",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 57,
+   "recent20": 19,
+   "press": 40,
+   "firstArticleAt": "2026-11-18T22:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"실력으로 증명\" 호언장담했지만…리트 만점자 이진우씨, 공개검증 불참",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-19T00:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005606594?sid=102"
+    },
+    {
+     "title": "리트 만점자 이진우, 안 나타난 이유가... “휴대폰 꺼지고 카톡 무응답...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-19T00:08:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1175813"
+    },
+    {
+     "title": "[속보] 리트 만점자, 공개검증 최종 불참…“연락두절”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-19T00:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004683827?sid=102"
     }
    ]
   },
   {
    "keyword": "조작기소 특검법 재가",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 48,
-   "recent20": 6,
-   "press": 41,
-   "firstArticleAt": "2026-11-18T22:33:00.000Z",
+   "articles90": 43,
+   "recent20": 4,
+   "press": 38,
+   "firstArticleAt": "2026-11-18T22:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "李대통령, 순방 중 '조작기소 특검법' 재가... 공포 즉시 시행",
+     "press": "lawtv.kr",
+     "publishedAt": "2026-11-19T00:08:00.000Z",
+     "link": "https://www.lawtv.kr/news/articleView.html?idxno=61463"
+    },
     {
      "title": "이 대통령, 조작기소특검법 재가…공포 즉시 시행",
      "press": "yonhapnewstv.co.kr",
@@ -65,44 +104,103 @@
      "press": "dailian.co.kr",
      "publishedAt": "2026-11-18T23:57:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/119/0003156953?sid=100"
-    },
-    {
-     "title": "이 대통령, 조작기소 특검법 재가‥공포돼 즉시 시행",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-18T23:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001536581?sid=100"
     }
    ]
   },
   {
-   "keyword": "연준 추가 금리 인상",
+   "keyword": "수능 위급재난문자 불시 발송",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 29,
-   "recent20": 7,
-   "press": 25,
-   "firstArticleAt": "2026-11-18T22:32:00.000Z",
+   "articles90": 40,
+   "recent20": 8,
+   "press": 36,
+   "firstArticleAt": "2026-11-18T22:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "FOMC 의사록 '12월 50bp 인상' 거론…엔비디아(NVDA) 2.89% 반락",
-     "press": "coinreaders.com",
-     "publishedAt": "2026-11-18T23:56:00.000Z",
-     "link": "http://coinreaders.com/271542"
+     "title": "'초강력 부정행위 점검' 속 2027 수능 시작",
+     "press": "jmbc.co.kr",
+     "publishedAt": "2026-11-19T00:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/659/0000048840?sid=102"
     },
     {
-     "title": "美 12월 기준금리 0.25%P 인상 전망 대세, 빅스텝 가능성은 낮아",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-18T23:54:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1138462"
+     "title": "전국 85개 시험지구서 55만여명 수능 돌입…영하권 추위 속 '부정 방지 ...",
+     "press": "pointe.co.kr",
+     "publishedAt": "2026-11-19T00:06:00.000Z",
+     "link": "https://www.pointe.co.kr/news/articleView.html?idxno=88047"
     },
     {
-     "title": "연준 이사 \"0.5%p 금리 인상 충격 요법 필요\"...12월 빅스텝 오나?",
-     "press": "coinreaders.com",
-     "publishedAt": "2026-11-18T23:52:00.000Z",
-     "link": "http://coinreaders.com/271544"
+     "title": "[포토] 정부, 수능 당일 위급재난문자 발송…불시 추가 경고도 예고",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-19T00:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005844860?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "앤트로픽 공모가 83달러",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 42,
+   "recent20": 6,
+   "press": 36,
+   "firstArticleAt": "2026-11-18T22:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "앤트로픽, 공모가 83달러 확정…수혜주는?",
+     "press": "bigtanews.co.kr",
+     "publishedAt": "2026-11-19T00:10:00.000Z",
+     "link": "https://www.bigtanews.co.kr/article/view/big202611190004"
+    },
+    {
+     "title": "하나증권 \"앤트로픽 상장에 AI 소프트웨어 관심 확대, 관련주 네이버 카...",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-19T00:06:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=452348"
+    },
+    {
+     "title": "\"노후자금까지 털었다\"…스페이스X 넘보는 앤트로픽, 개미들 몰린 이유",
+     "press": "digitaltoday.co.kr",
+     "publishedAt": "2026-11-19T00:04:00.000Z",
+     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=716551"
+    }
+   ]
+  },
+  {
+   "keyword": "태안 어선 실종",
+   "sources": [
+    "signal.bz",
+    "daum"
+   ],
+   "articles90": 30,
+   "recent20": 6,
+   "press": 27,
+   "firstArticleAt": "2026-11-18T22:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李, 태안 어선 실종 보고 받고…\"수색에 최선 다하라\"",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-19T00:10:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2020602"
+    },
+    {
+     "title": "4m 파도에 우박까지···실종된 ‘7명 승선’ 태안 어선 밤샘 수색",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-19T00:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003483656?sid=102"
+    },
+    {
+     "title": "“흔적조차 없다” 선원 7명 탄 어선 실종 이틀째 '감감무소식'",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-19T00:08:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1175799"
     }
    ]
   },
@@ -111,62 +209,63 @@
    "sources": [
     "google"
    ],
-   "articles90": 27,
-   "recent20": 18,
-   "press": 24,
-   "firstArticleAt": "2026-11-18T23:19:00.000Z",
-   "exclusive": true,
+   "articles90": 23,
+   "recent20": 13,
+   "press": 21,
+   "firstArticleAt": "2026-11-18T23:42:00.000Z",
+   "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "다운 판매량 34% 뛴 올리비아로렌, 겨울 성수기 ‘헤비’로 승부",
-     "press": "fashionbiz.co.kr",
-     "publishedAt": "2026-11-19T00:00:00.000Z",
-     "link": "https://www.fashionbiz.co.kr/article/231199"
+     "title": "원주 자율방재단, 강릉서 재난 대응 사례 공유…겨울철 대비 강화",
+     "press": "sentv.co.kr",
+     "publishedAt": "2026-11-19T00:10:00.000Z",
+     "link": "https://www.sentv.co.kr/article/view/sentv202611190024"
     },
     {
-     "title": "오아, 메가팩토리약국 금천점서 팝업행사 운영… 안마기부터 겨울 생활...",
-     "press": "e2news.com",
-     "publishedAt": "2026-11-19T00:00:00.000Z",
-     "link": "http://www.e2news.com/news/articleView.html?idxno=336236"
+     "title": "키스오브라이프, 첫 겨울 시즌송 ‘그리디’ 콘셉트 영상…25일 컴백",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-19T00:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/396/0000761359"
     },
     {
-     "title": "부평소방서장, 펌텍코리아(주) 겨울철 현장점검",
-     "press": "fpn119.co.kr",
-     "publishedAt": "2026-11-18T23:58:00.000Z",
-     "link": "http://fpn119.co.kr/259686"
+     "title": "[오늘의 먹거리] 저가 김밥 상시 판매 이마트·겨울 한정 비빔면 선보인...",
+     "press": "kpenews.com",
+     "publishedAt": "2026-11-19T00:08:00.000Z",
+     "link": "https://kpenews.com/View.aspx?No=4319741"
     }
    ]
   },
   {
-   "keyword": "엔비디아 호실적에도 혼조",
+   "keyword": "leet 시험",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 25,
-   "recent20": 3,
-   "press": 23,
-   "firstArticleAt": "2026-11-18T22:32:00.000Z",
+   "articles90": 12,
+   "recent20": 8,
+   "press": 10,
+   "firstArticleAt": "2026-11-18T23:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "뉴욕증시, 엔비디아 호실적에도 혼조 마감",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-18T23:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000544639?sid=104"
+     "title": "[사설]AI시험 부정행위 못 잡으면 사회적 혼란이 온다",
+     "press": "chungnamilbo.co.kr",
+     "publishedAt": "2026-11-19T00:08:00.000Z",
+     "link": "http://www.chungnamilbo.co.kr/news/articleView.html?idxno=921660"
     },
     {
-     "title": "뉴욕증시, 엔비디아 호실적에도 혼조...다우 1.11%↓·나스닥 0.42%↑",
-     "press": "newstopkorea.com",
-     "publishedAt": "2026-11-18T23:44:00.000Z",
-     "link": "https://www.newstopkorea.com/news/articleView.html?idxno=49154"
+     "title": "전국 85개 시험지구서 55만여명 수능 돌입…영하권 추위 속 '부정 방지 ...",
+     "press": "pointe.co.kr",
+     "publishedAt": "2026-11-19T00:06:00.000Z",
+     "link": "https://www.pointe.co.kr/news/articleView.html?idxno=88047"
     },
     {
-     "title": "뉴욕증시, AI투자 불안에 혼조세 마감",
-     "press": "cstimes.com",
-     "publishedAt": "2026-11-18T23:42:00.000Z",
-     "link": "https://www.cstimes.com/news/articleView.html?idxno=728524"
+     "title": "세무사 수석·LEET만점자, “법적 대응·공개 검증” 큰소리치더니…어...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-19T00:03:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001281988"
     }
    ]
   },
@@ -176,10 +275,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-18T22:35:00.000Z",
+   "articles90": 10,
+   "recent20": 0,
+   "press": 10,
+   "firstArticleAt": "2026-11-18T22:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -204,81 +303,23 @@
    ]
   },
   {
-   "keyword": "트럼프 푸틴 악수",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-18T22:44:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"트럼프엔 포옹, 이재명엔 환영단\"…다카이치 홀대론 나온 中 의전 보니",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-18T23:58:00.000Z",
-     "link": "https://www.ajunews.com/view/20261119085041009"
-    },
-    {
-     "title": "푸틴과 10분간 서서 대화…이 대통령 \"한반도 긴장 완화 공감\"",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-18T23:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000521419?sid=100"
-    },
-    {
-     "title": "트럼프는 거래, 시진핑은 주도권, 푸틴은 복귀…세 정상의 서로 다른 셈...",
-     "press": "newsfreezone.co.kr",
-     "publishedAt": "2026-11-18T23:12:00.000Z",
-     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=720119"
-    }
-   ]
-  },
-  {
-   "keyword": "미국 북한인권결의안 기권",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-18T22:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "유엔총회 제3위, 북한인권결의 채택…美는 21년 만에 기권",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-18T23:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009297833?sid=100"
-    },
-    {
-     "title": "미, 21년 만에 유엔 북한인권결의안 기권…“ICC 조항 반대”",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-18T23:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002832928?sid=104"
-    },
-    {
-     "title": "미국, 21년 만에 유엔 북한인권결의안 기권…ICC 조항 반발",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-18T23:00:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626233"
-    }
-   ]
-  },
-  {
    "keyword": "주식 거래시간",
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 1,
+   "articles90": 8,
+   "recent20": 2,
    "press": 7,
    "firstArticleAt": "2026-11-18T22:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[뉴욕마켓워치] 엔비디아 호실적도 못 살린 투심…주식·채권 혼조·달러...",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-19T00:04:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445463"
+    },
     {
      "title": "[쩐의흔적] 벌금 191억원 확정…전인장 전 회장, 삼양식품 주식 470억원...",
      "press": "thepublic.kr",
@@ -290,27 +331,28 @@
      "press": "mt.co.kr",
      "publishedAt": "2026-11-18T23:19:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/008/0005443314?sid=101"
-    },
-    {
-     "title": "수능일, 주식거래 오전 10시부터…프리마켓은 휴장",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-18T23:14:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445449"
     }
    ]
   },
   {
    "keyword": "LPGA 공 위치 데이터 도입",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 2,
    "press": 5,
-   "firstArticleAt": "2026-11-18T22:36:00.000Z",
+   "firstArticleAt": "2026-11-18T22:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "LPGA 투어, '골프 공 위치 데이터' 내년 도입…시즌 최종전 시범 운영",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-19T00:06:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/325768/?sc=Naver"
+    },
     {
      "title": "LPGA, PGA 이어 25년만에 '공 위치 데이터' 도입",
      "press": "asiatoday.co.kr",
@@ -322,12 +364,38 @@
      "press": "newspim.com",
      "publishedAt": "2026-11-18T23:41:00.000Z",
      "link": "https://www.newspim.com/news/view/20261119000132"
+    }
+   ]
+  },
+  {
+   "keyword": "수능 시간표",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-18T23:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "수능 시간표, 오전 8시 10분까지 입실 완료…수험표·실물 신분증 필수",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-19T00:06:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95550"
     },
     {
-     "title": "LPGA, 공 위치 데이터 기술 도입 추진 “내년 시즌 목표”",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-18T23:11:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/396/0000761352"
+     "title": "[2027수능] 수능 시간표는?.. '예외없이 8시10분까지 입실완료'",
+     "press": "veritas-a.com",
+     "publishedAt": "2026-11-18T23:40:00.000Z",
+     "link": "https://www.veritas-a.com/news/articleView.html?idxno=637841"
+    },
+    {
+     "title": "2027 수능 끝나는 시간 오후 5시 45분",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-18T23:32:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=407528"
     }
    ]
   },
@@ -337,7 +405,7 @@
     "nate"
    ],
    "articles90": 4,
-   "recent20": 3,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-18T23:06:00.000Z",
    "exclusive": false,
@@ -360,38 +428,6 @@
      "press": "viva100.com",
      "publishedAt": "2026-11-18T23:42:00.000Z",
      "link": "https://www.viva100.com/article/20261119500062"
-    }
-   ]
-  },
-  {
-   "keyword": "수능 시간표",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-18T23:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[2027수능] 수능 시간표는?.. '예외없이 8시10분까지 입실완료'",
-     "press": "veritas-a.com",
-     "publishedAt": "2026-11-18T23:40:00.000Z",
-     "link": "https://www.veritas-a.com/news/articleView.html?idxno=637841"
-    },
-    {
-     "title": "2027 수능 끝나는 시간 오후 5시 45분",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-18T23:32:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=407528"
-    },
-    {
-     "title": "2027 수능 시험 시간표·끝나는 시간은?",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-18T23:24:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611190078"
     }
    ]
   },
@@ -430,10 +466,40 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1102,
-  "matched": 601,
-  "avgLeadMin": 846,
+  "flagged": 1104,
+  "matched": 603,
+  "avgLeadMin": 834,
   "recent": [
+   {
+    "keyword": "수능 한파 대비 대책",
+    "hitKeyword": "수능 당일 한파 기승",
+    "hitAt": "2026-11-19T09:00:00+09:00",
+    "leadMin": 140
+   },
+   {
+    "keyword": "수능 한파 아침 영하 -4도 주의",
+    "hitKeyword": "수능 당일 한파 기승",
+    "hitAt": "2026-11-19T09:00:00+09:00",
+    "leadMin": 109
+   },
+   {
+    "keyword": "수능 한파 아침 영하 -4도",
+    "hitKeyword": "수능 당일 한파 기승",
+    "hitAt": "2026-11-19T09:00:00+09:00",
+    "leadMin": 99
+   },
+   {
+    "keyword": "6년 만의 수능 한파 예상",
+    "hitKeyword": "수능 당일 한파 기승",
+    "hitAt": "2026-11-19T09:00:00+09:00",
+    "leadMin": 69
+   },
+   {
+    "keyword": "엔비디아 호실적에도 혼조",
+    "hitKeyword": "삼성전기 엔비디아 기판 계약",
+    "hitAt": "2026-11-19T09:00:00+09:00",
+    "leadMin": 29
+   },
    {
     "keyword": "한중 FTA 실질 타결",
     "hitKeyword": "한중 FTA 엔터 급등",
@@ -463,36 +529,6 @@
     "hitKeyword": "한중 FTA 엔터 급등",
     "hitAt": "2026-11-19T08:30:00+09:00",
     "leadMin": 79
-   },
-   {
-    "keyword": "AI 부정행위 차단 총력",
-    "hitKeyword": "수능 부정행위 방지책",
-    "hitAt": "2026-11-19T08:30:00+09:00",
-    "leadMin": 19
-   },
-   {
-    "keyword": "피의자",
-    "hitKeyword": "성북 피의자 범행 시인",
-    "hitAt": "2026-11-19T08:00:00+09:00",
-    "leadMin": 2633
-   },
-   {
-    "keyword": "AI 커닝 수석 14시간 조사 종료",
-    "hitKeyword": "세무사 수석 AI 부정행위",
-    "hitAt": "2026-11-19T07:30:00+09:00",
-    "leadMin": 1860
-   },
-   {
-    "keyword": "수능 경계 강화",
-    "hitKeyword": "수능 부정행위 방지 강화",
-    "hitAt": "2026-11-19T07:30:00+09:00",
-    "leadMin": 1284
-   },
-   {
-    "keyword": "승리 아내 동반 입국",
-    "hitKeyword": "승리 만삭 아내 입국",
-    "hitAt": "2026-11-19T07:30:00+09:00",
-    "leadMin": 50
    }
   ]
  }
