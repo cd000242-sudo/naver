@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T15:12:04.423Z",
+ "builtAt": "2026-11-19T15:22:07.833Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,25 +8,57 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
+ "measured": 24,
  "candidates": [
   {
-   "keyword": "조희대 탄핵 추진",
+   "keyword": "영하 6도 제주 눈.",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 21,
+   "articles90": 12,
    "recent20": 4,
-   "press": 16,
-   "firstArticleAt": "2026-11-19T13:46:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-19T14:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "민주, 오늘 의원총회 열고 '조희대 탄핵' 당론 채택",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-19T15:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002435378?sid=100"
+     "title": "[오늘의 날씨] 아침 영하 6도…전북 남부 시간당 최대 3cm 눈",
+     "press": "kdfnews.com",
+     "publishedAt": "2026-11-19T15:06:00.000Z",
+     "link": "http://www.kdfnews.com/news/articleView.html?idxno=191162"
+    },
+    {
+     "title": "[오늘날씨] 최저 영하 6도 '강추위'…전북·제주 '눈'",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-19T15:06:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5085690"
+    },
+    {
+     "title": "[오늘날씨] 출근길 영하권 강추위…충청·호남 눈 소식, 일부 지역 최대...",
+     "press": "queen.co.kr",
+     "publishedAt": "2026-11-19T15:06:00.000Z",
+     "link": "http://www.queen.co.kr/news/articleView.html?idxno=466582"
+    }
+   ]
+  },
+  {
+   "keyword": "대법, 한덕수 파기환송",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-19T14:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "대법, 한덕수 일부 무죄취지 파기환송",
+     "press": "ksilbo.co.kr",
+     "publishedAt": "2026-11-19T15:04:00.000Z",
+     "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1073117"
     },
     {
      "title": "[사설]대법 “계엄은 내란”이라는데 대법원장 탄핵 추진한다니",
@@ -43,66 +75,34 @@
    ]
   },
   {
-   "keyword": "영하 6도 제주 눈.",
+   "keyword": "LG 임원 11명 승진",
    "sources": [
-    "signal.bz"
-   ],
-   "articles90": 12,
-   "recent20": 9,
-   "press": 11,
-   "firstArticleAt": "2026-11-19T13:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오늘날씨] 최저 영하 6도 '강추위'…전북·제주 '눈'",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-19T15:06:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5085690"
-    },
-    {
-     "title": "[오늘의 날씨] 아침 영하 6도…전북 남부 시간당 최대 3cm 눈",
-     "press": "kdfnews.com",
-     "publishedAt": "2026-11-19T15:06:00.000Z",
-     "link": "http://www.kdfnews.com/news/articleView.html?idxno=191162"
-    },
-    {
-     "title": "[오늘날씨] 출근길 영하권 강추위…충청·호남 눈 소식, 일부 지역 최대...",
-     "press": "queen.co.kr",
-     "publishedAt": "2026-11-19T15:06:00.000Z",
-     "link": "http://www.queen.co.kr/news/articleView.html?idxno=466582"
-    }
-   ]
-  },
-  {
-   "keyword": "인천 전 연인 둔기 살해 구속",
-   "sources": [
-    "signal.bz"
+    "nate"
    ],
    "articles90": 5,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-19T13:43:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-19T14:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "접근금지 해제 뒤 전 연인 살해 혐의 60대 구속 “증거인멸·도주 우려”",
+     "title": "LG그룹, 안정 속 쇄신 택했다…기술 인재는 전진 배치",
      "press": "joongang.co.kr",
-     "publishedAt": "2026-11-19T14:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003566555?sid=102"
+     "publishedAt": "2026-11-19T15:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003566598?sid=101"
     },
     {
-     "title": "접근금지 해제되자 전 연인 살해한 60대 남성 '구속'...혐의 부인",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-19T14:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000121808?sid=102"
+     "title": "LG엔솔, 품질·기술 경쟁력에 무게⋯2027 임원인사 11명 승진",
+     "press": "autodaily.co.kr",
+     "publishedAt": "2026-11-19T15:00:00.000Z",
+     "link": "https://www.autodaily.co.kr/news/articleView.html?idxno=602262"
     },
     {
-     "title": "접근금지 조치 실효 뒤 전 연인 살해 혐의…60대 구속",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-19T14:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701313?sid=102"
+     "title": "[인사] LG에너지솔루션",
+     "press": "meconomynews.com",
+     "publishedAt": "2026-11-19T14:24:00.000Z",
+     "link": "https://www.meconomynews.com/news/articleView.html?idxno=203919"
     }
    ]
   },
@@ -112,7 +112,7 @@
     "google"
    ],
    "articles90": 4,
-   "recent20": 3,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-19T13:58:00.000Z",
    "exclusive": false,
@@ -139,12 +139,44 @@
    ]
   },
   {
+   "keyword": "인천 전 연인 둔기 살해 구속",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-19T14:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "접근금지 해제 뒤 전 연인 살해 혐의 60대 구속 “증거인멸·도주 우려”",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-19T14:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003566555?sid=102"
+    },
+    {
+     "title": "접근금지 해제되자 전 연인 살해한 60대 남성 '구속'...혐의 부인",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-19T14:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000121808?sid=102"
+    },
+    {
+     "title": "접근금지 조치 실효 뒤 전 연인 살해 혐의…60대 구속",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-19T14:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701313?sid=102"
+    }
+   ]
+  },
+  {
    "keyword": "김대두",
    "sources": [
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 2,
    "firstArticleAt": "2026-11-19T14:06:00.000Z",
    "exclusive": false,
@@ -173,9 +205,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 879,
-  "matched": 533,
-  "avgLeadMin": 740,
+  "flagged": 880,
+  "matched": 532,
+  "avgLeadMin": 737,
   "recent": [
    {
     "keyword": "gta 6",
