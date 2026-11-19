@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T15:52:17.983Z",
+ "builtAt": "2026-11-19T16:02:20.971Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "김휘강 재산공개",
@@ -43,73 +43,73 @@
    ]
   },
   {
-   "keyword": "대법 한덕수 파기환송",
+   "keyword": "한덕수 내란혐의 파기환송",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-19T14:30:00.000Z",
+   "articles90": 11,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-19T14:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "대법, 한덕수 내란혐의 일부 무죄로 파기환송",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-19T15:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003566624?sid=102"
+     "title": "한덕수 일부 무죄에 與, 조희대 탄핵 추진",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-19T15:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004010726?sid=102"
     },
     {
-     "title": "[사설] 대법 “12·3 비상계엄은 위헌·위법”…여야 정쟁 멈춰야",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-19T15:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003566618?sid=110"
+     "title": "대법원, 한덕수 계엄 전 행위 내란 혐의 일부 무죄…사건 파기환송",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-19T15:50:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3757729"
     },
     {
-     "title": "대법, 한덕수 일부 무죄취지 파기환송",
-     "press": "ksilbo.co.kr",
-     "publishedAt": "2026-11-19T15:04:00.000Z",
-     "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1073117"
+     "title": "내란죄 인정되지만…일부 무죄 취지 파기환송",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-19T15:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404383?sid=102"
     }
    ]
   },
   {
-   "keyword": "ant",
+   "keyword": "이강인 2연속 아시아 선수상",
    "sources": [
-    "google"
+    "nate"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-19T15:02:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-19T14:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "앤스로픽 호가 105달러…ANT 계약과 같은 수준",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-19T15:48:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/440923"
+     "title": "이강인, 황인범 제치고 AFC 올해의 국제선수상...최초 2회 연속 수상",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-19T15:35:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261120000008"
     },
     {
-     "title": "앤스로픽($ANT) IPO 기관 절반 이상 무배정…총 1073억달러 조달",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-19T15:06:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/440892"
+     "title": "[오피셜]손흥민도 못한 대업, 이강인이 해냈다…2년 연속 AFC 올해의 국...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-19T15:21:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/468/0001282232"
     },
     {
-     "title": "앤트로픽(ANT) 공모가 83달러 확정...순손실에도 813억 달러 싹쓸이",
-     "press": "coinreaders.com",
-     "publishedAt": "2026-11-19T15:02:00.000Z",
-     "link": "http://coinreaders.com/271770"
+     "title": "[오피셜] 日 우에다 제치고 또 \"대한민국 이강인\", AFC 국제선수상 2년 ...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-19T15:16:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/108/0003488825"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 880,
+  "flagged": 882,
   "matched": 530,
   "avgLeadMin": 738,
   "recent": [
