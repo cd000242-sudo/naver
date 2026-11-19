@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T15:01:51.738Z",
+ "builtAt": "2026-11-19T15:12:04.423Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 22,
  "candidates": [
   {
    "keyword": "조희대 탄핵 추진",
@@ -16,29 +16,61 @@
     "daum"
    ],
    "articles90": 21,
-   "recent20": 2,
-   "press": 19,
-   "firstArticleAt": "2026-11-19T13:33:00.000Z",
+   "recent20": 4,
+   "press": 16,
+   "firstArticleAt": "2026-11-19T13:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한동훈 의원, 조희대 대법원장 탄핵 추진에 강력 반발...\"사법부 마비·...",
-     "press": "news2day.co.kr",
-     "publishedAt": "2026-11-19T14:50:00.000Z",
-     "link": "https://www.news2day.co.kr/article/20261119500419"
+     "title": "민주, 오늘 의원총회 열고 '조희대 탄핵' 당론 채택",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-19T15:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002435378?sid=100"
     },
     {
-     "title": "與, '曺대법원장 탄핵' 직행…진보정당과 구성단 추진 계획(종합2보)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-19T14:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016453339?sid=100"
-    },
-    {
-     "title": "국정조사도 미뤘던 與…한덕수 판결에 조희대 탄핵 급선회",
+     "title": "[사설]대법 “계엄은 내란”이라는데 대법원장 탄핵 추진한다니",
      "press": "sedaily.com",
-     "publishedAt": "2026-11-19T14:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004684183?sid=100"
+     "publishedAt": "2026-11-19T15:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004684186?sid=110"
+    },
+    {
+     "title": "김민석도 강공 돌아섰다…“대법 역사적 반역, 조희대 탄핵”",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-19T15:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003566562?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "영하 6도 제주 눈.",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 12,
+   "recent20": 9,
+   "press": 11,
+   "firstArticleAt": "2026-11-19T13:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오늘날씨] 최저 영하 6도 '강추위'…전북·제주 '눈'",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-19T15:06:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5085690"
+    },
+    {
+     "title": "[오늘의 날씨] 아침 영하 6도…전북 남부 시간당 최대 3cm 눈",
+     "press": "kdfnews.com",
+     "publishedAt": "2026-11-19T15:06:00.000Z",
+     "link": "http://www.kdfnews.com/news/articleView.html?idxno=191162"
+    },
+    {
+     "title": "[오늘날씨] 출근길 영하권 강추위…충청·호남 눈 소식, 일부 지역 최대...",
+     "press": "queen.co.kr",
+     "publishedAt": "2026-11-19T15:06:00.000Z",
+     "link": "http://www.queen.co.kr/news/articleView.html?idxno=466582"
     }
    ]
   },
@@ -47,10 +79,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 5,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-19T13:36:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-19T13:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,76 +107,88 @@
    ]
   },
   {
-   "keyword": "영하 제주 눈.",
+   "keyword": "ant",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-19T13:38:00.000Z",
+   "articles90": 4,
+   "recent20": 3,
+   "press": 3,
+   "firstArticleAt": "2026-11-19T13:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "영하 6도 출근길 강추위…충청·호남 눈에 강풍까지[오늘날씨]",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-19T15:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014334477?sid=102"
+     "title": "앤스로픽($ANT) IPO 기관 절반 이상 무배정…총 1073억달러 조달",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-19T15:06:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/440892"
     },
     {
-     "title": "[오늘(20일) 날씨] 아침 최저 영하 6도 '뚝'…전북남부 최대 8㎝ 많은 눈",
-     "press": "thefairnews.co.kr",
-     "publishedAt": "2026-11-19T15:00:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94796"
+     "title": "Ondo Plans Anthropic Share Token for Nasdaq’s First Trading Day",
+     "press": "econotimes.com",
+     "publishedAt": "2026-11-19T15:02:00.000Z",
+     "link": "https://econotimes.com/Ondo-Plans-Anthropic-Share-Token-for-Nasdaq-s-First-Trading-Day-1779751"
     },
     {
-     "title": "[출근길 날씨] 아침 최저 영하 6도 '뚝'…충청·전라·제주 곳곳 눈·비",
-     "press": "news-s.kr",
-     "publishedAt": "2026-11-19T14:40:00.000Z",
-     "link": "https://news-s.kr/view.html?id=L261119233543d253"
+     "title": "앤트로픽(ANT) 공모가 83달러 확정...순손실에도 813억 달러 싹쓸이",
+     "press": "coinreaders.com",
+     "publishedAt": "2026-11-19T15:02:00.000Z",
+     "link": "http://coinreaders.com/271770"
     }
    ]
   },
   {
-   "keyword": "영하 6도 눈비",
+   "keyword": "김대두",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-19T13:46:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 2,
+   "firstArticleAt": "2026-11-19T14:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[서울·인천·경기 오늘(20일) 날씨] 아침 영하 3도 '강추위'…경기 남부...",
-     "press": "thefairnews.co.kr",
-     "publishedAt": "2026-11-19T15:00:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94799"
+     "title": "'꼬꼬무' 최산, 김대두 사건 수사에 의문…\"조금 더 깊이 들여다봤으면...",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-19T15:02:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=783223"
     },
     {
-     "title": "[충북 오늘(20일) 날씨] 아침 최저 영하 6도 한파…중·남부 최대 5㎝ 눈...",
-     "press": "thefairnews.co.kr",
-     "publishedAt": "2026-11-19T15:00:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94809"
+     "title": "韓 최초 연쇄살인마 김대두, 2만 5천원 갖겠다고 17명 죽였다(꼬꼬무) [...",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-19T14:14:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000053461"
     },
     {
-     "title": "[출근길 날씨] 아침 최저 영하 6도 '뚝'…충청·전라·제주 곳곳 눈·비",
-     "press": "news-s.kr",
-     "publishedAt": "2026-11-19T14:40:00.000Z",
-     "link": "https://news-s.kr/view.html?id=L261119233543d253"
+     "title": "'꼬꼬무' 최산, 김대두 가족단위 연쇄살인에 분노…\"쓰레기다\"",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-19T14:06:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=783218"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 878,
+  "flagged": 879,
   "matched": 533,
-  "avgLeadMin": 736,
+  "avgLeadMin": 740,
   "recent": [
+   {
+    "keyword": "gta 6",
+    "hitKeyword": "GTA6 출시",
+    "hitAt": "2026-11-20T00:00:00+09:00",
+    "leadMin": 2264
+   },
+   {
+    "keyword": "gta6 메타크리틱",
+    "hitKeyword": "GTA6 출시",
+    "hitAt": "2026-11-20T00:00:00+09:00",
+    "leadMin": 1432
+   },
    {
     "keyword": "구글 젠틀몬스터 안경 공개",
     "hitKeyword": "삼성 구글 AI 안경",
@@ -192,18 +236,6 @@
     "hitKeyword": "멕시코 대통령 이코노미석",
     "hitAt": "2026-11-19T23:00:00+09:00",
     "leadMin": 4438
-   },
-   {
-    "keyword": "한-메콩 정상회의 이 대통령",
-    "hitKeyword": "멕시코 대통령 이코노미석",
-    "hitAt": "2026-11-19T23:00:00+09:00",
-    "leadMin": 4418
-   },
-   {
-    "keyword": "이 대통령 AI 문화 이니셔티브 제안",
-    "hitKeyword": "멕시코 대통령 이코노미석",
-    "hitAt": "2026-11-19T23:00:00+09:00",
-    "leadMin": 4165
    }
   ]
  }
