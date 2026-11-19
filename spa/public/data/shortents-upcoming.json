@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T16:22:28.218Z",
+ "builtAt": "2026-11-19T16:32:31.909Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,49 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 22,
  "candidates": [
+  {
+   "keyword": "한덕수 내란혐의 파기환송",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-19T15:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[사설] 한덕수 일부 무죄 판단… 헌정 훼손 책임 끝까지 묻길",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-19T16:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001886366?sid=110"
+    },
+    {
+     "title": "한덕수 일부 무죄에 與, 조희대 탄핵 추진",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-19T15:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004010726?sid=102"
+    },
+    {
+     "title": "대법원, 한덕수 계엄 전 행위 내란 혐의 일부 무죄…사건 파기환송",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-19T15:50:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3757729"
+    }
+   ]
+  },
   {
    "keyword": "김휘강 재산공개",
    "sources": [
     "daum"
    ],
-   "articles90": 19,
-   "recent20": 1,
-   "press": 17,
-   "firstArticleAt": "2026-11-19T15:00:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-19T15:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -43,66 +75,34 @@
    ]
   },
   {
-   "keyword": "한덕수 내란혐의 파기환송",
+   "keyword": "트럼프 아시아 순방 귀국",
    "sources": [
-    "daum"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-19T15:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한덕수 일부 무죄에 與, 조희대 탄핵 추진",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-19T15:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004010726?sid=102"
-    },
-    {
-     "title": "대법원, 한덕수 계엄 전 행위 내란 혐의 일부 무죄…사건 파기환송",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-19T15:50:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3757729"
-    },
-    {
-     "title": "내란죄 인정되지만…일부 무죄 취지 파기환송",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-19T15:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404383?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "박찬종 별세",
-   "sources": [
-    "daum"
+    "signal.bz"
    ],
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-19T15:01:00.000Z",
+   "firstArticleAt": "2026-11-19T15:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘14대 대선 출마’ 박찬종 전 의원 별세",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-19T16:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001886364?sid=100"
+     "title": "트럼프, 북미 정상회담 띄우더니 또 '빈손' 귀국",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-19T16:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002435395?sid=104"
     },
     {
-     "title": "‘미스터 클린’ 박찬종 前의원 별세",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-19T15:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004010688?sid=102"
+     "title": "북미정상회담 한껏 띄우더니…트럼프, 이번에도 빈손 귀국",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-19T15:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016453349?sid=104"
     },
     {
-     "title": "‘미스터 클린’ 박찬종 전 의원 별세",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-19T15:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003566564?sid=100"
+     "title": "트럼프시진핑푸틴 첫 정상회담…'핵확산 방지ㆍ석유공급 확대' 확인",
+     "press": "pointdaily.co.kr",
+     "publishedAt": "2026-11-19T15:30:00.000Z",
+     "link": "https://www.pointdaily.co.kr/news/articleView.html?idxno=326741"
     }
    ]
   },
@@ -112,7 +112,7 @@
     "nate"
    ],
    "articles90": 4,
-   "recent20": 3,
+   "recent20": 2,
    "press": 2,
    "firstArticleAt": "2026-11-19T15:45:00.000Z",
    "exclusive": false,
