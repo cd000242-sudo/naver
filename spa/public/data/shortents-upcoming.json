@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T21:34:09.191Z",
+ "builtAt": "2026-11-19T21:44:12.694Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "10월 생산자물가 하락",
@@ -16,13 +16,19 @@
     "signal.bz",
     "daum"
    ],
-   "articles90": 30,
-   "recent20": 3,
-   "press": 29,
+   "articles90": 31,
+   "recent20": 2,
+   "press": 30,
    "firstArticleAt": "2026-11-19T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "엔비디아 3.3% 하락하며 6거래일 연속 약세 이어가...시총 격차, 1위 애플...",
+     "press": "beyondpost.co.kr",
+     "publishedAt": "2026-11-19T21:40:00.000Z",
+     "link": "http://www.beyondpost.co.kr/view.php?ud=2026112006361565392aaae0046f_30"
+    },
     {
      "title": "10월 생산자물가 0.1% 하락…농축산물 내려",
      "press": "yonhapnewstv.co.kr",
@@ -34,12 +40,6 @@
      "press": "mbnmoney.mbn.co.kr",
      "publishedAt": "2026-11-19T21:22:00.000Z",
      "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005963799"
-    },
-    {
-     "title": "농림수산품이 끌어내린 생산자물가…제외하면 0.2% 상승",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-19T21:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394463?sid=101"
     }
    ]
   },
@@ -50,7 +50,7 @@
     "daum"
    ],
    "articles90": 20,
-   "recent20": 3,
+   "recent20": 2,
    "press": 19,
    "firstArticleAt": "2026-11-19T21:00:00.000Z",
    "exclusive": false,
@@ -77,81 +77,23 @@
    ]
   },
   {
-   "keyword": "백승기 예산 검증",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-19T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "백승기 경기의회 예결위원장 \"민생예산 지키고 관행적 예산 철저히 검증...",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-19T21:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004211916?sid=102"
-    },
-    {
-     "title": "백승기 위원장 \"구조 불안해도 '경기도민 필수예산' 지탱하겠다\"",
-     "press": "joongboo.com",
-     "publishedAt": "2026-11-19T21:06:00.000Z",
-     "link": "https://www.joongboo.com/news/articleView.html?idxno=363743095"
-    },
-    {
-     "title": "백승기 경기도의회 도청 예결위원장 “도민 생명과 안전, 취약계층 보호...",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-19T21:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000132967?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "amd",
-   "sources": [
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 4,
-   "press": 6,
-   "firstArticleAt": "2026-11-19T20:05:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "AMD도 中 제재 기업과 연계 의혹…주가 8% 급락",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-19T21:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006412859?sid=101"
-    },
-    {
-     "title": "중국에 발목 잡힌 AMD…하나마이크론·네패스 수혜 가능성 주목",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-19T21:30:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=506110"
-    },
-    {
-     "title": "뉴욕증시 마감 직전...반도체ETF·엔비디아·AMD·AMAT '급락'",
-     "press": "choicenews.co.kr",
-     "publishedAt": "2026-11-19T21:28:00.000Z",
-     "link": "http://www.choicenews.co.kr/news/articleView.html?idxno=173347"
-    }
-   ]
-  },
-  {
    "keyword": "축구 감독",
    "sources": [
     "google"
    ],
-   "articles90": 6,
-   "recent20": 2,
+   "articles90": 7,
+   "recent20": 3,
    "press": 6,
    "firstArticleAt": "2026-11-19T20:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'韓축구 풀백의 희망' 옌스, BVB전서 첫 선발 출격 전망...\"빠르게 투입...",
+     "press": "fourfourtwo.co.kr",
+     "publishedAt": "2026-11-19T21:43:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/411/0000090210"
+    },
     {
      "title": "[스포츠&라이프] 경북대 미식축구 동아리 '오렌지 파이터스' 감독·선수...",
      "press": "imaeil.com",
@@ -163,60 +105,123 @@
      "press": "sports.hankooki.com",
      "publishedAt": "2026-11-19T21:30:00.000Z",
      "link": "https://sports.hankooki.com/news/articleView.html?idxno=6943908"
-    },
-    {
-     "title": "동행? 결별? 운명의 일주일…모레노 감독 거취, 27일 전에 결정",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-19T21:00:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/421/0009300400"
     }
    ]
   },
   {
-   "keyword": "한덕수 징역 15년 파기환송",
+   "keyword": "amd",
    "sources": [
-    "daum"
+    "google"
    ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-19T20:15:00.000Z",
+   "articles90": 5,
+   "recent20": 5,
+   "press": 5,
+   "firstArticleAt": "2026-11-19T21:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'한덕수 파기환송'에 與 \"조희대 탄핵\" vs 野 \"깡패처럼 보복\"",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-19T21:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394464?sid=100"
+     "title": "AMD, 중국 반도체 수출규제 위반 의혹…\"제재 기업에 최신 펌웨어 유입...",
+     "press": "4th.kr",
+     "publishedAt": "2026-11-19T21:38:00.000Z",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2122284"
     },
     {
-     "title": "한덕수 내란 일부 무죄 취지 파기환송…구속은 2개월 연장",
+     "title": "중국에 발목 잡힌 AMD…하나마이크론·네패스 수혜 가능성 주목",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-19T21:30:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=506110"
+    },
+    {
+     "title": "AMD도 中 제재 기업과 연계 의혹…주가 8% 급락",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-19T21:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006412859?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "택시",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-19T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "영월서 중앙선 넘은 택시와 SUV 충돌…2명 숨져",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-19T21:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016453429?sid=102"
+    },
+    {
+     "title": "강원 영월서 승용차와 택시 충돌…3명 사상",
      "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-19T21:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012297762?sid=102"
+     "publishedAt": "2026-11-19T21:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012297763?sid=102"
     },
     {
-     "title": "\"계엄은 위헌·위법\"이지만‥한덕수 파기환송",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-19T21:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001536820?sid=102"
+     "title": "남산터널 통행료 납부기간 2배로…장애인콜택시 아파트 자동 입출차 추...",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-19T21:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006412854?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "2026년 11월 20일 운세",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-19T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오늘의 운세] 2026년 11월 20일 (금) 띠별운세 '한 주를 가볍게 매듭짓...",
+     "press": "dailypop.kr",
+     "publishedAt": "2026-11-19T21:30:00.000Z",
+     "link": "http://www.dailypop.kr/news/articleView.html?idxno=104279"
+    },
+    {
+     "title": "[오늘의 운세] 20일 금요일 나의 운세는?",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-19T21:20:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1193282"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 20일 띠별 운세",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-19T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006412851?sid=103"
     }
    ]
   },
   {
    "keyword": "이강인 AFC 2연속 수상",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 4,
    "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-19T20:05:00.000Z",
+   "firstArticleAt": "2026-11-19T20:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[오피셜] '2026년은 이강인의 해!'…UCL 2연패·아틀레티코 마드리드 이...",
+     "press": "besteleven.com",
+     "publishedAt": "2026-11-19T21:43:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/343/0000149117"
+    },
     {
      "title": "이강인, 'AFC 국제선수상' 2연패...손흥민 넘은 아시아 최초 '새 역사'",
      "press": "news.tf.co.kr",
@@ -228,12 +233,6 @@
      "press": "mhnse.com",
      "publishedAt": "2026-11-19T21:01:00.000Z",
      "link": "https://m.sports.naver.com/kfootball/article/445/0000491802"
-    },
-    {
-     "title": "[오피셜] '손흥민도 못한 대기록!' 이강인, 아시아 축구 새 역사 썼다…...",
-     "press": "sportalkorea.com",
-     "publishedAt": "2026-11-19T20:51:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/139/0002256290"
     }
    ]
   },
@@ -243,7 +242,7 @@
     "google"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-19T21:00:00.000Z",
    "exclusive": false,
@@ -256,16 +255,16 @@
      "link": "https://n.news.naver.com/mnews/article/018/0006412857?sid=102"
     },
     {
+     "title": "DDP·한강이 웹툰 배경으로…서울시, 3D 배경 13종 무료 배포",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-19T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009300395?sid=102"
+    },
+    {
      "title": "서울 명소가 웹툰 배경으로…'3D 디지털 애셋' 13종 무료 배포",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-19T21:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016453397?sid=102"
-    },
-    {
-     "title": "DDP·한강이 웹툰 속 배경으로…서울시, 3D 배경 13종 무료 배포",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-19T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005443921?sid=102"
     }
    ]
   },
@@ -276,7 +275,7 @@
     "nate"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-19T21:01:00.000Z",
    "exclusive": false,
@@ -305,9 +304,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 896,
-  "matched": 532,
-  "avgLeadMin": 743,
+  "flagged": 894,
+  "matched": 531,
+  "avgLeadMin": 742,
   "recent": [
    {
     "keyword": "젤렌스키 북한 미사일 공급",
