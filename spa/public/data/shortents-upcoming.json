@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T19:53:35.584Z",
+ "builtAt": "2026-11-19T20:03:38.600Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 24,
  "candidates": [
   {
-   "keyword": "조희대 탄핵 추진",
+   "keyword": "與, 조희대 탄핵 추진",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
+   "articles90": 6,
+   "recent20": 4,
+   "press": 5,
    "firstArticleAt": "2026-11-19T19:02:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "與, 41년만의 대법원장 탄핵 추진…\"역사적 반역\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-19T19:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928015?sid=100"
+     "title": "“한덕수 판결은 역사적 반역”… 與, 조희대에 쌓였던 불만 폭발",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-19T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701331?sid=100"
     },
     {
-     "title": "민주 “韓 판결은 역사적인 반역”… 긴급 의총뒤 “조희대 탄핵 추진”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-19T19:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003763859?sid=100"
+     "title": "한덕수 파기환송에 현실화된 '조희대 탄핵'…얼어붙는 연말정국",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-19T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004211908?sid=100"
     },
     {
-     "title": "예상 밖 한덕수 파기환송에 들끓은 與… 격론 끝 '조희대 탄핵' 공식화",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-19T19:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000966692?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "amd",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-19T18:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美 반도체 '中 리스크' 일파만파...AMD도 엮였다?",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-19T19:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000544831?sid=104"
-    },
-    {
-     "title": "AMD 리사 수, 젠슨 황 파문에 \"소음 곧 가라앉을 것\"",
-     "press": "dkilbo.com",
-     "publishedAt": "2026-11-19T19:10:00.000Z",
-     "link": "https://www.dkilbo.com/news/articleView.html?idxno=561526"
-    },
-    {
-     "title": "美 반도체업계 '중국 리스크' 확산…AMD 9% 급락",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-19T18:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005607167?sid=101"
+     "title": "한덕수 일부 무죄…與 “조희대 탄핵”",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-19T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701326?sid=102"
     }
    ]
   },
@@ -79,30 +47,62 @@
    "sources": [
     "daum"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 3,
+   "articles90": 7,
+   "recent20": 3,
+   "press": 5,
    "firstArticleAt": "2026-11-19T19:00:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "한덕수 내란 가담 2건 유죄… ‘계엄 국무회의 건의’만 무죄 판단",
-     "press": "donga.com",
-     "publishedAt": "2026-11-19T19:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003763827?sid=102"
+     "title": "한덕수 일부 무죄…與 “조희대 탄핵”",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-19T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701326?sid=102"
     },
     {
-     "title": "\"형식적 국무회의는 윤석열 때문\"... 한덕수 '내란' 파기환송 이유는",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-19T19:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000966699?sid=102"
+     "title": "한덕수 일부 무죄 취지인데…이상민·박성재엔 '불리한 신호'?",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-19T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004211903?sid=102"
     },
     {
-     "title": "예상 밖 한덕수 파기환송에 들끓은 與… 격론 끝 '조희대 탄핵' 공식화",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-19T19:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000966692?sid=100"
+     "title": "한덕수 파기환송에 현실화된 '조희대 탄핵'…얼어붙는 연말정국",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-19T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004211908?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "트럼프와 김정은 회담 불발",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-19T18:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "군불 때던 APEC 북미대화, 결국 불발",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-19T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004211898?sid=100"
+    },
+    {
+     "title": "트럼프, 김정은과 회담 불발…향후 만남 가능성 열어둬",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-19T19:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005845354?sid=104"
+    },
+    {
+     "title": "트럼프 \"김정은과 좋은 관계…이번엔 회담 성사 안돼\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-19T19:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928014?sid=104"
     }
    ]
   },
@@ -141,7 +141,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 882,
+  "flagged": 884,
   "matched": 525,
   "avgLeadMin": 740,
   "recent": [
