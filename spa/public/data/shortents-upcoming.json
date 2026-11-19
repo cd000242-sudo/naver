@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T17:02:41.541Z",
+ "builtAt": "2026-11-19T17:22:47.341Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,10 +15,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 7,
-   "recent20": 1,
+   "articles90": 6,
+   "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-19T15:50:00.000Z",
+   "firstArticleAt": "2026-11-19T15:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -39,38 +39,6 @@
      "press": "econotimes.com",
      "publishedAt": "2026-11-19T16:12:00.000Z",
      "link": "https://econotimes.com/AMD-news-tops-US-searches-in-Google-Trends-daily-rankings-1779794"
-    }
-   ]
-  },
-  {
-   "keyword": "PHP 치명적 취약점 발견",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-19T15:49:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "PHP서 또 치명적 보안 취약점 발견…웹사이트 해킹 경고등",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-19T16:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928008?sid=101"
-    },
-    {
-     "title": "PHP 취약점 또 발견… '치명적' 등급만 7건 달해",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-19T16:00:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3450543"
-    },
-    {
-     "title": "PHP 보안 취약점 또 무더기 발견… “최신 보안 업뎃을”",
-     "press": "segye.com",
-     "publishedAt": "2026-11-19T15:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004176664?sid=105"
     }
    ]
   }
