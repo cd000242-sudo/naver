@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T21:03:59.053Z",
+ "builtAt": "2026-11-19T21:14:02.612Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,13 +15,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 2,
+   "articles90": 7,
+   "recent20": 3,
    "press": 5,
    "firstArticleAt": "2026-11-19T19:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김민석도 '조희대 탄핵론' 가세…민주당 내부에선 찬반 양론 여전",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-19T21:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003157449?sid=100"
+    },
     {
      "title": "전합 판결인데 조희대만?…한동훈 \"與, 탄핵하려면 대법관 전원 하라\" 등...",
      "press": "dailian.co.kr",
@@ -33,12 +39,6 @@
      "press": "imaeil.com",
      "publishedAt": "2026-11-19T21:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/088/0001041401?sid=100"
-    },
-    {
-     "title": "“한덕수 판결은 역사적 반역”… 與, 조희대에 쌓였던 불만 폭발",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-19T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701331?sid=100"
     }
    ]
   },
@@ -75,6 +75,38 @@
    ]
   },
   {
+   "keyword": "축구 감독",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-19T20:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "동행? 결별? 운명의 일주일…모레노 감독 거취, 27일 전에 결정",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-19T21:00:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/421/0009300400"
+    },
+    {
+     "title": "[오피셜] '손흥민도 못한 대기록!' 이강인, 아시아 축구 새 역사 썼다…...",
+     "press": "sportalkorea.com",
+     "publishedAt": "2026-11-19T20:51:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/139/0002256290"
+    },
+    {
+     "title": "‘한국은 축구협회장도 없는데’ 일본은 FIFA 회장까지 도전한다…한일...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-19T20:42:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/109/0005642775"
+    }
+   ]
+  },
+  {
    "keyword": "웹툰",
    "sources": [
     "google"
@@ -107,12 +139,44 @@
    ]
   },
   {
+   "keyword": "푸틴 얄타회담 발언",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-19T20:49:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "미중러 3자 회동 '동상이몽'…시진핑·푸틴 웃고 트럼프 '빈손'",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-19T21:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005443931?sid=104"
+    },
+    {
+     "title": "[미중러 정상회담] \"트럼프 '강대국 공동지배' 발언…동맹에 최악\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-19T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016453411?sid=104"
+    },
+    {
+     "title": "푸틴, '제2의 얄타회담' 우려에…\"얄타회담이 뭐가 나빠\" 홀로 기자회견",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-19T20:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005845357?sid=104"
+    }
+   ]
+  },
+  {
    "keyword": "이강인 AFC 국제선수상",
    "sources": [
     "nate"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-19T20:05:00.000Z",
    "exclusive": false,
@@ -134,7 +198,7 @@
      "title": "유럽 1티어 기자도 주목! 이강인, AFC 올해의 국제 선수상...\"2년 연속 수...",
      "press": "fourfourtwo.co.kr",
      "publishedAt": "2026-11-19T20:05:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/411/0000090205"
+     "link": "https://m.sports.naver.com/kfootball/article/411/0000090205"
     }
    ]
   }
