@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T22:14:22.658Z",
+ "builtAt": "2026-11-19T22:24:27.166Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,13 +15,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 32,
-   "recent20": 2,
-   "press": 30,
+   "articles90": 33,
+   "recent20": 3,
+   "press": 31,
    "firstArticleAt": "2026-11-19T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "국내 농산물 가격 급락, 생산자물가 3개월 만에 감소세 전환",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-19T22:22:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886509"
+    },
     {
      "title": "[뉴욕증시 마감] 앤트로픽 상장에도 2%대 하락…나스닥 2.25%↓",
      "press": "ajunews.com",
@@ -33,44 +39,38 @@
      "press": "mk.co.kr",
      "publishedAt": "2026-11-19T22:08:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/009/0005766491?sid=101"
-    },
-    {
-     "title": "엔비디아 3.3% 하락하며 6거래일 연속 약세 이어가...시총 격차, 1위 애플...",
-     "press": "beyondpost.co.kr",
-     "publishedAt": "2026-11-19T21:40:00.000Z",
-     "link": "http://www.beyondpost.co.kr/view.php?ud=2026112006361565392aaae0046f_30"
     }
    ]
   },
   {
-   "keyword": "조희대 탄핵 추진",
+   "keyword": "2호선",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 15,
-   "recent20": 5,
-   "press": 13,
-   "firstArticleAt": "2026-11-19T21:00:00.000Z",
-   "exclusive": true,
+   "articles90": 25,
+   "recent20": 16,
+   "press": 23,
+   "firstArticleAt": "2026-11-19T21:52:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "민주당, 한덕수 파기환송에 '조희대 탄핵' 나서",
-     "press": "goodmorningcc.com",
-     "publishedAt": "2026-11-19T22:12:00.000Z",
-     "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=456200"
+     "title": "[속보] 서울지하철 2호선 성수지선 양방향 운행중지",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-19T22:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928060?sid=102"
     },
     {
-     "title": "신중론 접은 與, 한덕수 판결에 조희대 탄핵 공식화…野 “의회 쿠데타...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-19T22:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004684241?sid=100"
+     "title": "서울 지하철 2호선 용답역 성수지선 운행 중단…선로전환기 장애",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-19T22:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014334664?sid=102"
     },
     {
-     "title": "\"대법원 파기환송 판결 규탄… 조희대 대법원장 사퇴·탄핵 촉구\"",
-     "press": "jbsori.com",
-     "publishedAt": "2026-11-19T22:04:00.000Z",
-     "link": "http://www.jbsori.com/news/articleView.html?idxno=18226"
+     "title": "서울 지하철 2호선 운행 중단, 시민 불편 극심... 원인은 궤도 전환기 장...",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-19T22:22:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886508"
     }
    ]
   },
@@ -81,7 +81,7 @@
     "google"
    ],
    "articles90": 9,
-   "recent20": 2,
+   "recent20": 1,
    "press": 9,
    "firstArticleAt": "2026-11-19T21:00:00.000Z",
    "exclusive": false,
@@ -108,34 +108,34 @@
    ]
   },
   {
-   "keyword": "이강인, AFC 2연패 수상",
+   "keyword": "아파트",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-19T20:51:00.000Z",
+   "articles90": 8,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-19T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이강인, AFC 2연패…손흥민도 못한 대기록",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-19T21:56:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611200020"
+     "title": "아파트값 하락세 '한강벨트'로‥외곽은 엇갈려",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-19T21:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001536845?sid=101"
     },
     {
-     "title": "[오피셜] '韓 축구 소리 질러!' 이강인, 亞 축구 역사에 한 획 그었다…...",
-     "press": "goal.com",
-     "publishedAt": "2026-11-19T21:55:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/216/0000143855"
+     "title": "서울 노원구 아파트 불‥관악구 빌라서 화재",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-19T21:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001536833?sid=102"
     },
     {
-     "title": "[오피셜] '2026년은 이강인의 해!'…UCL 2연패·아틀레티코 마드리드 이...",
-     "press": "besteleven.com",
-     "publishedAt": "2026-11-19T21:43:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/343/0000149117"
+     "title": "지방은 미분양 천지?…잘 팔린 아파트도 있다",
+     "press": "news.bizwatch.co.kr",
+     "publishedAt": "2026-11-19T21:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/648/0000052810?sid=101"
     }
    ]
   },
@@ -179,10 +179,16 @@
    "articles90": 6,
    "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-19T20:51:00.000Z",
+   "firstArticleAt": "2026-11-19T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "계약 만료까지 단 7일, 모레노 감독이 남긴 메시지…\"언제나 국가대표팀...",
+     "press": "interfootball.co.kr",
+     "publishedAt": "2026-11-19T22:15:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/413/0000226846"
+    },
     {
      "title": "[오피셜] '韓 축구 소리 질러!' 이강인, 亞 축구 역사에 한 획 그었다…...",
      "press": "goal.com",
@@ -194,44 +200,102 @@
      "press": "fourfourtwo.co.kr",
      "publishedAt": "2026-11-19T21:43:00.000Z",
      "link": "https://m.sports.naver.com/wfootball/article/411/0000090210"
-    },
-    {
-     "title": "'월드컵 탈락'부터 '모레노호의 진통'까지…한국축구 2026 A매치 결산[초...",
-     "press": "sports.hankooki.com",
-     "publishedAt": "2026-11-19T21:30:00.000Z",
-     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6943908"
     }
    ]
   },
   {
-   "keyword": "웹툰",
+   "keyword": "與 조희대 탄핵 추진",
    "sources": [
-    "google"
+    "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 6,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-19T21:01:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "신중론 접은 與, 한덕수 판결에 조희대 탄핵 공식화…野 “의회 쿠데타...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-19T22:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004684241?sid=100"
+    },
+    {
+     "title": "한덕수 파기환송에 野 “조작기소 확인”…조희대 탄핵론엔 “의회 쿠데...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-19T22:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004684233?sid=100"
+    },
+    {
+     "title": "[AM-PM] 與, 오늘 의원총회서 '조희대 탄핵' 당론 채택 外",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-19T21:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928056?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "이강인, AFC 2연패 수상",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-19T21:00:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-19T21:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "DDP·한강 등 웹툰 속 배경으로…서울시, '서울 명소' 13종 배포",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-19T21:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006412857?sid=102"
+     "title": "이강인, AFC 2연패…손흥민도 못한 대기록",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-19T21:56:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611200020"
     },
     {
-     "title": "서울 명소가 웹툰 배경으로…'3D 디지털 애셋' 13종 무료 배포",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-19T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016453397?sid=102"
+     "title": "[오피셜] '韓 축구 소리 질러!' 이강인, 亞 축구 역사에 한 획 그었다…...",
+     "press": "goal.com",
+     "publishedAt": "2026-11-19T21:55:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/216/0000143855"
     },
     {
-     "title": "DDP·한강이 웹툰 속 배경으로…서울시, 3D 배경 13종 무료 배포",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-19T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005443921?sid=102"
+     "title": "[오피셜] '2026년은 이강인의 해!'…UCL 2연패·아틀레티코 마드리드 이...",
+     "press": "besteleven.com",
+     "publishedAt": "2026-11-19T21:43:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/343/0000149117"
+    }
+   ]
+  },
+  {
+   "keyword": "영국 배우 백진경 득녀 소식",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-19T21:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘명예영국인’ 백진경, 고위험산모 극복하고 딸 출산…“제왕 다음날...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-19T22:20:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003542697"
+    },
+    {
+     "title": "'고위험 산모' 백진경, 영국서 득녀…\"제왕 다음 날 아침 메뉴 토스트\" ...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-19T22:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002082315"
+    },
+    {
+     "title": "“얼마나 걱정했을까”…‘영국 배우♥’ 백진경, 고위험 산모 판정 딛...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-19T21:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001282248"
     }
    ]
   }
@@ -239,8 +303,8 @@
  "hitRate": {
   "days": 7,
   "flagged": 888,
-  "matched": 527,
-  "avgLeadMin": 739,
+  "matched": 526,
+  "avgLeadMin": 741,
   "recent": [
    {
     "keyword": "겨울",
