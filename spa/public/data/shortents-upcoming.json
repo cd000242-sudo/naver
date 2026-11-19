@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T23:24:47.624Z",
+ "builtAt": "2026-11-19T23:34:50.984Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,52 +8,124 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "뉴욕증시 급락",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 54,
-   "recent20": 13,
-   "press": 44,
-   "firstArticleAt": "2026-11-19T21:56:00.000Z",
+   "articles90": 56,
+   "recent20": 11,
+   "press": 47,
+   "firstArticleAt": "2026-11-19T22:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "코어위브, 창업자 회사채 매입에도 6.1% 급락",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-19T23:22:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=2026112008175951379a1f309431_1"
+     "title": "삼성전자·SK하이닉스, 美 AI·반도체주 급락에 프리마켓서 동반 약세",
+     "press": "newsway.co.kr",
+     "publishedAt": "2026-11-19T23:32:00.000Z",
+     "link": "https://www.newsway.co.kr/news/view?ud=2026112008212655853"
     },
     {
-     "title": "美 반도체주 급락…코스피 5000선 다시 시험대",
-     "press": "kbmaeil.com",
-     "publishedAt": "2026-11-19T23:20:00.000Z",
-     "link": "https://www.kbmaeil.com/article/20261120500042"
+     "title": "뉴욕증시 급락…다우지수 5만선 하회",
+     "press": "cstimes.com",
+     "publishedAt": "2026-11-19T23:30:00.000Z",
+     "link": "https://www.cstimes.com/news/articleView.html?idxno=728703"
     },
     {
-     "title": "[뉴욕증시] 앤트로픽 상장 흥행에도 AI 관련주 매도 확산…나스닥 2.25%↓",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-19T23:20:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5085704"
+     "title": "앤트로픽 IPO 흥행에도 뉴욕증시 2% 급락... 다우 5만선 밑돌아 [뉴욕증...",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-19T23:30:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2021177"
+    }
+   ]
+  },
+  {
+   "keyword": "ai 데이터 센터",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 31,
+   "recent20": 7,
+   "press": 27,
+   "firstArticleAt": "2026-11-19T22:14:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美·中 반도체 갈등, 삼성전자 AI 메모리 중심 체질 개선 주목",
+     "press": "press9.kr",
+     "publishedAt": "2026-11-19T23:32:00.000Z",
+     "link": "http://www.press9.kr/news/articleView.html?idxno=86709"
+    },
+    {
+     "title": "中문샷AI, 엔비디아 첨단칩 우회 확보 2천억원 계약 취소",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-19T23:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000544871?sid=104"
+    },
+    {
+     "title": "LG그룹, 2027년 임원인사…승진 35% 늘리고 AI·로봇 인재 전진 배치",
+     "press": "eroun.net",
+     "publishedAt": "2026-11-19T23:24:00.000Z",
+     "link": "https://www.eroun.net/news/articleView.html?idxno=96040"
+    }
+   ]
+  },
+  {
+   "keyword": "리트 만점자 이진우",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 27,
+   "recent20": 9,
+   "press": 23,
+   "firstArticleAt": "2026-11-19T22:07:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "리트냥이 이진우 사망 후에도 남은 의혹…세무냥이·편입냥이·감평냥이...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-19T23:28:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16281132"
+    },
+    {
+     "title": "리트만점자 이진우 사망…검증 나섰던 노형석 추모글",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-19T23:26:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261120010007872"
+    },
+    {
+     "title": "'리트 만점자' 사망이 던진 질문…점수에 매달리는 한국 사회의 민낯",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-19T23:24:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000084785"
     }
    ]
   },
   {
    "keyword": "10월 생산자물가 하락",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 9,
+   "articles90": 10,
    "recent20": 1,
-   "press": 9,
+   "press": 10,
    "firstArticleAt": "2026-11-19T22:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "10월 생산자물가 석달만에 0.1%↓…사과 29.2%·돈육 12.8%↓",
+     "press": "tfmedia.co.kr",
+     "publishedAt": "2026-11-19T23:32:00.000Z",
+     "link": "https://www.tfmedia.co.kr/news/article.html?no=209046"
+    },
     {
      "title": "사과·돼지고기 가격 뚝…10월 생산자물가 0.1% 하락",
      "press": "pointe.co.kr",
@@ -65,83 +137,109 @@
      "press": "news.einfomax.co.kr",
      "publishedAt": "2026-11-19T23:02:00.000Z",
      "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445651"
-    },
-    {
-     "title": "농림수산품 가격 하락에 10월 생산자물가 하락 전환",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-19T22:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002435469?sid=101"
     }
    ]
   },
   {
-   "keyword": "경제",
+   "keyword": "트럼프 이란 추가 공격 결정",
    "sources": [
-    "signal.bz",
-    "google"
+    "daum"
    ],
-   "articles90": 6,
-   "recent20": 6,
-   "press": 5,
-   "firstArticleAt": "2026-11-19T23:08:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "[아주경제 코이너스 브리핑] 비트코인 6만2000달러대 횡보...긴축 우려·...",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-19T23:22:00.000Z",
-     "link": "https://www.ajunews.com/view/20261120074723761"
-    },
-    {
-     "title": "지역소멸·돌봄공백 대응…전북도, 사회연대경제 201억 지원 추진",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-19T23:20:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2650681"
-    },
-    {
-     "title": "경기도, 27~29일 킨텍스서 ‘대한민국 사회연대경제박람회’ 개최",
-     "press": "mediagunpo.co.kr",
-     "publishedAt": "2026-11-19T23:14:00.000Z",
-     "link": "http://www.mediagunpo.co.kr/22136"
-    }
-   ]
-  },
-  {
-   "keyword": "택시",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
+   "articles90": 9,
    "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-19T22:02:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-19T22:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "영월서 쏘렌토·택시 충돌…2명 숨지고 1명 부상",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-19T23:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009300510?sid=102"
+     "title": "인남식 “호르무즈 협상으로 트럼프에 노벨평화상 명분 만들어줄 수도”...",
+     "press": "sisain.co.kr",
+     "publishedAt": "2026-11-19T23:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/308/0000039004?sid=100"
     },
     {
-     "title": "영월군 한반도면 후탄리 연정교차로 38국도 택시‧SUV 정면 충돌 2명 사...",
-     "press": "eroun.net",
-     "publishedAt": "2026-11-19T22:50:00.000Z",
-     "link": "https://www.eroun.net/news/articleView.html?idxno=96035"
+     "title": "트럼프 “이란 추가 공습 결정, 새해 이후에 논의…서두르지 않아”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-19T23:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003763886?sid=104"
     },
     {
-     "title": "강원 영월서 중앙선 넘은 택시와 SUV 충돌…2명 숨져",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-19T22:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404425?sid=102"
+     "title": "트럼프 \"이란 결정 서두르지 않아…새해 시작 뒤 지켜볼 것\"(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-19T22:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016453462?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "수능 난이도",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-19T22:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "수능 국어·영어 작년보다 쉬웠다… \"수학 변별력 커질 듯\"",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-19T23:24:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/325898/?sc=Naver"
+    },
+    {
+     "title": "수능 국어 1등급컷 91~95점, 수학 1등급컷 86~90점 예상",
+     "press": "edu.donga.com",
+     "publishedAt": "2026-11-19T23:20:00.000Z",
+     "link": "https://edu.donga.com/news/articleView.html?idxno=113966"
+    },
+    {
+     "title": "수능 부정행위 98명 적발, 재난문자에 49명 덜미…수학이 대입 당락 변수",
+     "press": "abcn.kr",
+     "publishedAt": "2026-11-19T23:08:00.000Z",
+     "link": "https://www.abcn.kr/news/articleView.html?idxno=94778"
+    }
+   ]
+  },
+  {
+   "keyword": "제갈성렬 아내 공개",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-19T22:39:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "제갈성렬, 19세 연하와 재혼… 둘째 임신 소식",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-19T23:27:00.000Z",
+     "link": "https://m.entertain.naver.com/article/469/0000966708"
+    },
+    {
+     "title": "19살 연하 아내와 재혼…56세에 두 아이 아빠 되는 '스포츠 스타'",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-19T23:24:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1176169"
+    },
+    {
+     "title": "\"지탄받아 마땅할 나이 차\" 제갈성렬, 19살 연하 아내와 재혼…부녀 지...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-19T23:12:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004126593"
     }
    ]
   },
   {
    "keyword": "고대 예비 1번 고소 준비중",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 5,
@@ -172,98 +270,34 @@
    ]
   },
   {
-   "keyword": "이승기 20억 기부",
+   "keyword": "이승기 어린이병원 기부 이유",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-19T22:09:00.000Z",
+   "articles90": 4,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-19T22:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이승기, 어린이병원에 음원 미정산금 20억 기부 이유…\"원래 5억만 하려...",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-19T23:34:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109995720300"
+    },
+    {
+     "title": "'이다인♥' 이승기, 병원에 20억 기부한 진짜 이유...\"원래 5억만 하려고...",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-19T23:28:00.000Z",
+     "link": "https://www.insight.co.kr/news/582827"
+    },
     {
      "title": "이승기, 어린이병원에 20억 기부한 이유...“처음엔 5억 생각했는데”",
      "press": "mk.co.kr",
      "publishedAt": "2026-11-19T23:14:00.000Z",
      "link": "https://m.entertain.naver.com/article/009/0005766498"
-    },
-    {
-     "title": "이승기, 20억 기부-원래 5억 계획-부모들 보고 변화",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-19T22:52:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95591"
-    },
-    {
-     "title": "“원래 5억만 하려 했다”…이승기, 서울대어린이병원에 20억 쾌척한 진...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-19T22:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005766496?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "제갈성렬 아내 공개",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-19T22:39:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"지탄받아 마땅할 나이 차\" 제갈성렬, 19살 연하 아내와 재혼…부녀 지...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-19T23:12:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004126593"
-    },
-    {
-     "title": "제갈성렬, 아내 공개-치과 의사와 이혼 후 19세 연하와",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-19T22:50:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95590"
-    },
-    {
-     "title": "제갈성렬, 19세 연하 아내 최초 공개…\"부녀 사이로 오해받아\"",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-19T22:44:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=783261"
-    }
-   ]
-  },
-  {
-   "keyword": "아파트",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-19T23:03:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "수도권 주택 착공 줄고 노후 아파트 늘고…관리 중요성 커진다",
-     "press": "gpkorea.com",
-     "publishedAt": "2026-11-19T23:18:00.000Z",
-     "link": "https://www.gpkorea.com/news/articleView.html?idxno=148819"
-    },
-    {
-     "title": "인천 아파트값 보합세…서해·부평·제물포구 상승",
-     "press": "news.skbroadband.com",
-     "publishedAt": "2026-11-19T23:12:00.000Z",
-     "link": "https://news.skbroadband.com/news/articleView.html?idxno=243771"
-    },
-    {
-     "title": "서울 아파트값 93주 연속 상승…'한강벨트' 꺾이고 '반도체벨트' 강세",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-19T23:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652239?sid=004"
     }
    ]
   },
@@ -273,7 +307,7 @@
     "daum"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-19T22:34:00.000Z",
    "exclusive": false,
@@ -283,7 +317,7 @@
      "title": "[키워드 NOW] 박찬종 별세",
      "press": "news.tvchosun.com",
      "publishedAt": "2026-11-19T23:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652243?sid=004"
+     "link": "https://n.news.naver.com/mnews/article/448/0000652243?sid=100"
     },
     {
      "title": "5선 지낸 박찬종 전 국회의원 별세",
@@ -302,10 +336,28 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 887,
-  "matched": 523,
-  "avgLeadMin": 736,
+  "flagged": 890,
+  "matched": 525,
+  "avgLeadMin": 741,
   "recent": [
+   {
+    "keyword": "lpga",
+    "hitKeyword": "유현조 LPGA Q시리즈",
+    "hitAt": "2026-11-20T08:30:00+09:00",
+    "leadMin": 2624
+   },
+   {
+    "keyword": "LPGA 공 위치 데이터 도입",
+    "hitKeyword": "유현조 LPGA Q시리즈",
+    "hitAt": "2026-11-20T08:30:00+09:00",
+    "leadMin": 1429
+   },
+   {
+    "keyword": "수능 등급컷",
+    "hitKeyword": "2027 수능 등급컷",
+    "hitAt": "2026-11-20T08:30:00+09:00",
+    "leadMin": 25
+   },
    {
     "keyword": "체이스 은행 서비스 장애",
     "hitKeyword": "실손보험 청구 서비스",
@@ -347,24 +399,6 @@
     "hitKeyword": "이강인 AFC 2연패",
     "hitAt": "2026-11-20T07:30:00+09:00",
     "leadMin": 86
-   },
-   {
-    "keyword": "이강인 AFC 2연속 수상",
-    "hitKeyword": "이강인 AFC 2연패",
-    "hitAt": "2026-11-20T07:30:00+09:00",
-    "leadMin": 66
-   },
-   {
-    "keyword": "이강인, AFC 2연패 수상",
-    "hitKeyword": "이강인 AFC 2연패",
-    "hitAt": "2026-11-20T07:30:00+09:00",
-    "leadMin": 26
-   },
-   {
-    "keyword": "겨울",
-    "hitKeyword": "한겨울 추위 눈 예보",
-    "hitAt": "2026-11-20T07:00:00+09:00",
-    "leadMin": 1359
    }
   ]
  }
