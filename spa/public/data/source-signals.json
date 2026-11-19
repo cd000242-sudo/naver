@@ -8,60 +8,62 @@
         {
           "id": "naver-1",
           "rank": 1,
-          "keyword": "수능 시험지 보관 지시",
-          "title": "수능 시험지 보관 지시",
-          "rawKeyword": "수능 시험지 보관 지시",
+          "keyword": "수능 시간표",
+          "title": "수능 시간표",
+          "rawKeyword": "수능 시간표",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 100,
           "source": "naver",
           "expansions": [
-            "수능 시험지",
-            "수능 시험지 크기",
-            "수능 시험지 회수",
-            "2026수능",
-            "수능 날짜",
-            "2026 수능 날짜",
-            "수능 연기",
-            "수능 시간표"
+            "수능 시간표 탐구",
+            "2026수능 시간표",
+            "수능 시간표 한국사",
+            "2028 수능 시간표",
+            "28수능 시간표",
+            "27 수능 시간표",
+            "2027 수능 시간표 탐구",
+            "27년 수능 시간표"
           ],
-          "expansionSeed": "수능",
+          "expansionSeed": "수능 시간표",
           "insight": {
             "titles": {
-              "seo": "수능 시험지 보관 지시 최신 이슈와 핵심 내용 정리",
-              "home": "수능 시험지 보관 지시, [단독] 교육부, 지난해 수능 시험지 전체 보관 지시…AI 부정행위 사례 잡는다 관련 확인할 점",
-              "topic": "수능 시험지 보관 지시",
-              "topicGroup": "네이버 실시간 검색어"
+              "seo": "수능 시간표 국어 8시 40분 시작, 영어 5시 45분 종료",
+              "home": "수능 시간표 확인, 증시 개장까지 한 시간 밀린 까닭은",
+              "topic": "수능 시간표",
+              "topicGroup": "다음 실시간 검색어",
+              "summary": "수능날 국내 증시는 평소보다 한 시간 늦은 오전 10시에 문을 연다. 국어는 오전 8시 40분, 마지막 영역은 오후 5시 45분에 끝난다.",
+              "aiTitled": true
             },
             "facts": [
               {
-                "text": "교육부가 2026학년도 대입수학능력시험 시험지를 보관하라고 각 시·도교육청에 지시한 것으로 확인됐다. 이에 따라 인공지능(AI) 부정행위 의심 사례에 대한 정부 조사가 지난해 수능까지 확대될 것으로 관측된다.",
+                "text": "정규시장, 1시간 늦춰 개장·오후 4시 30분 마감 개장 전·장 마감 후 시간 외 종가매매도 변동 대학수학능력시험이 치러지는 19일 국내 증시는 평소보다 한 시간 늦은 오전 10시에 문을 연다.",
                 "sourceIndex": 0
               },
               {
-                "text": "총리실에 따르면 한 총리는 \"교육부는 별도 지시 전까지 작년도 수능 시험지 보관 상태를 유지하라\"고 지시 했다. 이번 지시 는 인공지능(AI) 활용한 시험 부정행위에 대한 국민적 우려가 심화한 가운데 나온 것이다.",
+                "text": "수능 시간표 …국어 오전 8시 40분, 영어 오후 1시 10분 일반 수험생 기준 시간표는 다음과 같다. 시험편의 제공 대상자에게는 별도 시간표가 적용될 수 있으며, 실제 퇴실은 감독관 안내에 따른다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.kmib.co.kr/article/20261119500732",
-                "press": "국민일보"
+                "url": "https://www.news1.kr/finance/general-stock/6358587",
+                "press": "뉴스1"
               },
               {
-                "url": "https://www.yna.co.kr/view/AKR20261119098800001?input=1195m",
-                "press": "연합뉴스"
+                "url": "https://www.bntnews.co.kr/article/view/bnt202611180259",
+                "press": "bnt뉴스"
               }
             ],
             "images": [
-              "https://3f3bm4nnaefgwrtq8izg16625.edge.naverncp.com/data2/content/image/2026/11/19/.cache/512/20261119500724.png"
+              "https://i3n.news1.kr/system/photos/2026/11/18/8220850/high.jpg"
             ],
             "press": [
-              "국민일보",
-              "연합뉴스"
+              "뉴스1",
+              "bnt뉴스"
             ],
             "headlines": [
-              "[단독] 교육부, 지난해 수능 시험지 전체 보관 지시…AI 부정행위 사례 잡는다",
-              "韓총리, '폐기시한 도래' 지난해 수능 시험지 보관 긴급 지시"
+              "\"개장은 10시, 프리마켓 휴무\"…수능 날 바뀐 증시 시간표",
+              "수능 일 입실시간· 시간표 ·준비물"
             ],
             "extraction": "playwright",
             "collectedAt": "2026-11-19T06:12:10.836Z"
@@ -70,507 +72,128 @@
         {
           "id": "naver-2",
           "rank": 2,
-          "keyword": "이진우 만점 취재 요청",
-          "title": "이진우 만점 취재 요청",
-          "rawKeyword": "이진우 만점 취재 요청",
+          "keyword": "리트 만점 이진우 모텔서 발견",
+          "title": "리트 만점 이진우 모텔서 발견",
+          "rawKeyword": "리트 만점 이진우 모텔서 발견",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 99,
           "source": "naver",
           "expansions": [
             "리트 만점자 이진우",
             "이진우 리트",
+            "리트 이진우",
+            "리트 만점자",
+            "리트 만점자 ai",
             "이진우 나무위키",
             "이진우 책",
-            "리트 이진우",
-            "이진우 ai",
-            "이진우 인스타",
-            "요청 뜻"
+            "이진우 ai"
           ],
           "expansionSeed": "이진우",
           "insight": {
             "titles": {
-              "seo": "이진우 만점 취재 요청 최신 이슈와 핵심 내용 정리",
-              "home": "이진우 만점 취재 요청, '공개검증 불참' 이진우 행방묘연…경찰, 증거보전 신청(종합) 관련 확인할 점",
-              "topic": "이진우 만점 취재 요청",
+              "seo": "리트 만점 이진우 모텔서 발견 최신 이슈와 핵심 내용 정리",
+              "home": "리트 만점 이진우 모텔서 발견, [속보] '리트 만점자' 이진우 서울 천호동 모텔에서 발견 관련 확인할 점",
+              "topic": "리트 만점 이진우 모텔서 발견",
               "topicGroup": "네이버 실시간 검색어"
             },
             "facts": [
               {
-                "text": "법학적성시험(LEET·리트) 만점자 이진우(32) 씨의 신변 안전이 우려된다는 신고가 접수돼 경찰이 행방 추적에 나섰다. 이 씨는 19일 오전 예정됐던 대학수학능력시험(수능) 국어 영역 공개 검증에도 나타나지 않았다.",
+                "text": "'리트 만점자' 이진우 서울 천호동 모텔에서 발견 공개검증 불참 뒤 잠적…경찰, 이진우 소재 확인 경찰, 이진우 소재 확인 모텔 주변 통제…경력 배치 '신변 우려' 신고…경찰, 광진→송파→강동구 수색 앞서 부정행위 의혹에 오늘 '수능 풀이' 중계 예고 공개검증 당일인 오늘 잠적…휴대전화 끄고 두절 ▶ 자세한 뉴스 잠시 뒤 이어집니다.",
                 "sourceIndex": 0
               },
               {
-                "text": "(LEET·리트) 만점 자 이진우 씨의 저서 구매자들이 법원을 통해 이씨의 대학수학능력시험(수능) 시험지 확보에 나섰다. 신청서에 따르면 구매자 측은 이씨가 2026학년도 수능에 응시한 서울 강북구 영훈고등학교에 교시별 문제지 사본을 제출하도록 요청 했다.",
+                "text": "대학수학능력시험(수능) 당일 부정행위 의혹을 풀겠다고 약속한 법학적성시험(LEET· 리트 ) 만점 자 이진우 (32)씨가 숨진 채 발견 됐다. 이씨가 이날 아침까지 머문 숙소에선 과거 수능 수험표가 찢어진 상태로 발견 됐다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.edaily.co.kr/News/Read?newsId=02699446645647360&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
-                "press": "이데일리"
+                "url": "https://www.ytn.co.kr/_ln/0103_202611191319177141",
+                "press": "YTN"
               },
               {
-                "url": "https://www.newsis.com/view/NISX20261119_0003874939",
-                "press": "뉴시스"
+                "url": "https://www.joongang.co.kr/article/25480102",
+                "press": "중앙일보"
               }
             ],
             "images": [
-              "https://image.edaily.co.kr/images/Photo/files/NP/S/2026/11/PS26111900687.jpg"
+              "https://image.ytn.co.kr/general/jpg/2026/1119/202611191319177141_t.jpg"
             ],
             "press": [
-              "이데일리",
-              "뉴시스"
+              "YTN",
+              "중앙일보"
             ],
             "headlines": [
-              "'공개검증 불참' 이진우 행방묘연…경찰, 증거보전 신청(종합)",
-              "[단독] 이진우 책 구매자들, 수능 시험지 확보 나서…법원에 제출명령 신..."
+              "[속보] '리트 만점자' 이진우 서울 천호동 모텔에서 발견",
+              "[단독] 리트 만점 자 묵은 광진구 모텔 엔 ‘찢어진 수능수험표’"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T06:12:10.836Z"
+            "collectedAt": "2026-11-19T07:10:32.941Z"
           }
         },
         {
           "id": "naver-3",
           "rank": 3,
-          "keyword": "박찬종 별세 시신기증",
-          "title": "박찬종 별세 시신기증",
-          "rawKeyword": "박찬종 별세 시신기증",
+          "keyword": "수출 1조달러 달성",
+          "title": "수출 1조달러 달성",
+          "rawKeyword": "수출 1조달러 달성",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 98,
           "source": "naver",
           "expansions": [
-            "시신기증 절차와 방법",
-            "시신기증 장례",
-            "시신기증 방법",
-            "시신기증자",
-            "시신기증 장례식",
-            "시신기증 뜻",
-            "시신기증 신청",
-            "시신기증 후 처리 방법"
+            "수출1조달러달성예즉일"
           ],
-          "expansionSeed": "시신기증",
+          "expansionSeed": "수출 1조달러 달성",
           "insight": {
             "titles": {
-              "seo": "박찬종 별세 시신기증 최신 이슈와 핵심 내용 정리",
-              "home": "박찬종 별세 시신기증, '14대 대선출마' 박찬종 前의원 별세…생전 약속대로 시신기증 관련 확인할 점",
-              "topic": "박찬종 별세 시신기증",
+              "seo": "수출 1조달러 달성 최신 이슈와 핵심 내용 정리",
+              "home": "수출 1조달러 달성, 한국 수출 1조달러 달성... 전세계 4번째 관련 확인할 점",
+              "topic": "수출 1조달러 달성",
               "topicGroup": "네이버 실시간 검색어"
             },
             "facts": [
               {
-                "text": "(서울=연합뉴스) 이정현 박수윤 기자 = 5선 국회의원을 지낸 박찬종 변호사가 18일 별세했다.",
+                "text": "대한민국 연간 수출액이 사상 처음으로 1조 달러를 돌파해 세계 4위 수출국에 등극함. 반도체 및 AI 산업이 성장을 견인했으나, 글로벌 통상 환경 악화와 산업 편중 현상이 과제로 제시됨. 향후 수출 성과가 국민 소득 증대로 이어지기 위한 국내 생산 거점 유지와 차세대 주력 산업 발굴의 필요성이 강조됨.",
                 "sourceIndex": 0
               },
               {
-                "text": "‘미스터 클린’으로 불리며 5선 국회의원을 지낸 박찬종 (사진) 변호사가 별세 한 것으로 19일 전해졌다. 유족에 따르면 고인은 전날 오후 숙환으로 별세 했다.",
+                "text": "강감찬 산업통상부 무역투자실장이 18일 세종시 정부세종청사에서 사상 첫 연간 수출 1조달러 달성 과 관련해 브리핑하고 있다. 연합뉴스 한국이 연간 수출액 1조 달러(약 1400조 원)를 돌파했다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.yna.co.kr/view/AKR20261119083700001?input=1195m",
-                "press": "연합뉴스"
+                "url": "https://www.chosun.com/economy/economy_general/2026/11/19/EAKIS76TVBF5VMQAULMTDUIQUU/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
+                "press": "조선일보"
               },
               {
-                "url": "https://www.munhwa.com/article/11632574?ref=naver",
-                "press": "문화일보"
+                "url": "https://www.segye.com/newsView/20261119511751?OutUrl=naver",
+                "press": "세계일보"
               }
             ],
             "images": [
-              "https://img5.yna.co.kr/photo/cms/2023/08/14/93/PCM20230814000193990_P4.jpg"
+              "https://www.chosun.com/resizer/v2/GI4TAOJUHA2GCMRSHAZDQYJSMU.jpg?auth=0fa78e06516951d57249b87841904c7f1deb56ed72059cd0c0f925f2751d1a71&width=1200&height=630&smart=true"
             ],
             "press": [
-              "연합뉴스",
-              "문화일보"
+              "조선일보",
+              "세계일보"
             ],
             "headlines": [
-              "'14대 대선출마' 박찬종 前의원 별세…생전 약속대로 시신기증",
-              "‘미스터 클린’ 박찬종 前의원 별세"
+              "한국 수출 1조달러 달성... 전세계 4번째",
+              "[속보] 한국 수출 ‘꿈의 1조달러 ’ 달성 …세계 4번째"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T06:12:10.836Z"
+            "collectedAt": "2026-11-19T07:10:32.941Z"
           }
         },
         {
           "id": "naver-4",
           "rank": 4,
-          "keyword": "kbs 뉴스",
-          "title": "kbs 뉴스",
-          "rawKeyword": "kbs 뉴스",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 97,
-          "source": "naver",
-          "expansions": [
-            "KBS 뉴스 9",
-            "KBS 뉴스광장",
-            "KBS 뉴스 7",
-            "KBS 뉴스타임",
-            "KBS 뉴스 12",
-            "KBS 뉴스 5",
-            "KBS 뉴스라인 W",
-            "kbs 뉴스 앵커"
-          ],
-          "expansionSeed": "kbs 뉴스",
-          "insight": {
-            "titles": {
-              "seo": "kbs 뉴스 최신 이슈와 핵심 내용 정리",
-              "home": "kbs 뉴스, 방미심위 9월 좋은 프로그램에 KBS '추심면허' 관련 확인할 점",
-              "topic": "kbs 뉴스",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "(서울=연합뉴스) 유현민 기자 = 방송미디어통신심의위원회는 18일 올해 9월 '이달의 좋은 프로그램' 수상작 4편을 선정해 시상했다고 밝혔다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "앞서 방미심위는 지난 6월, 2024년 2월8일자 KBS ' 뉴스 9'에 6인 동의로 법정제재 '주의'를 의결한 바 있다. 회의에 불참한 홍미애 위원을 제외하고 KBS에 법정제재를 의결했던 위원이 전원 KBS의 재심 신청을 기각했다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.yna.co.kr/view/AKR20261118160000017?input=1195m",
-                "press": "연합뉴스"
-              },
-              {
-                "url": "https://www.mediatoday.co.kr/news/articleView.html?idxno=338315",
-                "press": "미디어오늘"
-              }
-            ],
-            "images": [
-              "https://img5.yna.co.kr/etc/inner/KR/2026/11/18/AKR20261118160000017_01_i_P4.jpg"
-            ],
-            "press": [
-              "연합뉴스",
-              "미디어오늘"
-            ],
-            "headlines": [
-              "방미심위 9월 좋은 프로그램에 KBS '추심면허'",
-              "박장범 파우치 해명 보도 중징계에 재심 청구한 KBS"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-19T06:12:10.836Z"
-          }
-        },
-        {
-          "id": "naver-5",
-          "rank": 5,
-          "keyword": "민주유공자법 필리버스터",
-          "title": "민주유공자법 필리버스터",
-          "rawKeyword": "민주유공자법 필리버스터",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 96,
-          "source": "naver",
-          "expansions": [
-            "민주유공자법 내용",
-            "민주유공자법 혜택",
-            "민주유공자법 개정",
-            "민주유공자법 통과",
-            "민주유공자법 본회의",
-            "민주유공자법 뜻",
-            "민주유공자법 법사위",
-            "필리버스터 뜻"
-          ],
-          "expansionSeed": "민주유공자법",
-          "insight": {
-            "titles": {
-              "seo": "민주유공자법 필리버스터 최신 이슈와 핵심 내용 정리",
-              "home": "민주유공자법 필리버스터, '민주유공자법' 與주도 본회의 상정…국힘 \"운동권 특혜\" 필버 관련 확인할 점",
-              "topic": "민주유공자법 필리버스터",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "민주 당 한병도 원내대표는 이날 국회에서 열린 정책조정회의에서 \" 민주 유공자법 은 평생을 트라우마와 생활고에 시달린 민주 화 운동 과정의 희생자와 유가족에게 최소한의 돌봄과 예우를 보장하는 법 \"이라고 강조했다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "하지현 전상우 김윤영 기자 = 민주유공자 예우에 관한 법 ( 민주유공자법 )이 19일 더불어 민주 당 주도로 국회 본회의에 상정됐다. 국민의힘은 이를 저지하기 위한 필리버스터 (무제한 토론을 통한 합법적 의사진행방해)에 돌입했다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.yna.co.kr/view/AKR20261119109000001?input=1195m",
-                "press": "연합뉴스"
-              },
-              {
-                "url": "https://www.newsis.com/view/NISX20261119_0003875203",
-                "press": "뉴시스"
-              }
-            ],
-            "images": [
-              "https://img1.yna.co.kr/photo/yna/YH/2026/11/19/PYH2026111917710001300_P4.jpg"
-            ],
-            "press": [
-              "연합뉴스",
-              "뉴시스"
-            ],
-            "headlines": [
-              "'민주유공자법' 與주도 본회의 상정…국힘 \"운동권 특혜\" 필버",
-              "민주유공자법 국회 본회의 상정…野 필리버스터 돌입"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-19T06:12:10.836Z"
-          }
-        },
-        {
-          "id": "naver-6",
-          "rank": 6,
-          "keyword": "트럼프 푸틴 악수",
-          "title": "트럼프 푸틴 악수",
-          "rawKeyword": "트럼프 푸틴 악수",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 95,
-          "source": "naver",
-          "expansions": [
-            "트럼프 임기",
-            "트럼프 이란",
-            "트럼프 중간선거",
-            "트럼프 공화당",
-            "트럼프 탄핵",
-            "트럼프 김정은",
-            "트럼프 나무위키",
-            "트럼프 지지율"
-          ],
-          "expansionSeed": "트럼프",
-          "insight": {
-            "titles": {
-              "seo": "트럼프 푸틴 악수 최신 이슈와 핵심 내용 정리",
-              "home": "트럼프 푸틴 악수, 푸틴 팔 토닥인 트럼프 “저 사람 내 친구, 성과 나올 것” 관련 확인할 점",
-              "topic": "트럼프 푸틴 악수",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "도널드 트럼프 미국 대통령과 블라디미르 푸틴 러시아 대통령이 APEC 회의가 열리는 중국 선전에서 약 42분간 양자 회담을 가졌습니다. 트럼프 대통령은 푸틴 대통령과의 친분을 강조하며 향후 성과에 대한 기대감을 표명했습니다. 백악관의 당초 예상을 깨고 러시아의 적극적인 추진으로 성사된 이번 회담은 양국 관계의 새로운 출발점으로 평가받고 있습니다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "이어 푸틴 대통령이 다가와 트럼프 대통령과 악수 하고 몇 마디를 나눴다. 단체사진 촬영에서는 시 주석 내외 양옆에 트럼프 대통령과 푸틴 대통령이 섰다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.chosun.com/international/international_general/2026/11/19/JC7ZAEFXYNECVHQW2M54HKIGEA/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
-                "press": "조선일보"
-              },
-              {
-                "url": "http://www.inews24.com/view/2027944",
-                "press": "아이뉴스24"
-              }
-            ],
-            "images": [
-              "https://www.chosun.com/resizer/v2/5SSY34XYRFGYVK6OB4L2JB6WFE.jpg?auth=83e41cc4a7c4d215822cd963963889a8eda66ec94d365af80c2088725110166a&width=1200&height=630&smart=true"
-            ],
-            "press": [
-              "조선일보",
-              "아이뉴스24"
-            ],
-            "headlines": [
-              "푸틴 팔 토닥인 트럼프 “저 사람 내 친구, 성과 나올 것”",
-              "美·中·러, 오늘 첫 3자 정상회담⋯ 트럼프 · 푸틴 1년3개월 만에 재회"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-19T06:12:10.836Z"
-          }
-        },
-        {
-          "id": "naver-7",
-          "rank": 7,
-          "keyword": "한국 수출 1조달러 돌파",
-          "title": "한국 수출 1조달러 돌파",
-          "rawKeyword": "한국 수출 1조달러 돌파",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 94,
-          "source": "naver",
-          "expansions": [
-            "수출 1조달러",
-            "한국 수출",
-            "한국 축구 일정",
-            "한국금거래소",
-            "한국 사우디",
-            "한국 축구",
-            "한국시리즈",
-            "한국장학재단"
-          ],
-          "expansionSeed": "한국",
-          "insight": {
-            "titles": {
-              "seo": "한국 수출 1조달러 돌파 최신 이슈와 핵심 내용 정리",
-              "home": "한국 수출 1조달러 돌파, 한국 수출 1조달러 돌파…일본 넘어 세계 4대 수출 강국(종합) 관련 확인할 점",
-              "topic": "한국 수출 1조달러 돌파",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "(서울=연합뉴스) 신창용 기자 = 우리나라가 사상 처음으로 연간 수출 1조달러를 달성했다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "한국 의 연간 수출 액이 사상 처음으로 1조달러 (약 1470조원)를 돌파 했다. 미국과 독일, 중국에 이어 세계에서 네 번째다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.yna.co.kr/view/AKR20261119094200003?input=1195m",
-                "press": "연합뉴스"
-              },
-              {
-                "url": "https://news.tvchosun.com/site/data/html_dir/2026/11/19/2026111990180.html",
-                "press": "TV조선"
-              }
-            ],
-            "images": [
-              "https://img4.yna.co.kr/photo/yna/YH/2026/11/17/PYH2026111717300001300_P4.jpg"
-            ],
-            "press": [
-              "연합뉴스",
-              "TV조선"
-            ],
-            "headlines": [
-              "한국 수출 1조달러 돌파…일본 넘어 세계 4대 수출 강국(종합)",
-              "한국 수출 사상 첫 1조달러 돌파 …美·獨·中 이어 세계 4번째"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-19T06:12:10.836Z"
-          }
-        },
-        {
-          "id": "naver-8",
-          "rank": 8,
-          "keyword": "홍나영 이혼 고백 후 행복",
-          "title": "홍나영 이혼 고백 후 행복",
-          "rawKeyword": "홍나영 이혼 고백 후 행복",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 93,
-          "source": "naver",
-          "expansions": [
-            "개그우먼 홍나영",
-            "행복주택",
-            "행복하지말아요",
-            "행복 악보",
-            "국민행복카드",
-            "행복 뜻",
-            "행복 찬양",
-            "국민행복몰"
-          ],
-          "expansionSeed": "홍나영",
-          "insight": {
-            "titles": {
-              "seo": "홍나영 이혼 고백 후 행복 최신 이슈와 핵심 내용 정리",
-              "home": "홍나영 이혼 고백 후 행복, 개그우먼 홍나영 , 뒤늦은 이혼 고백 “1년 전 돌아왔다” 관련 확인할 점",
-              "topic": "홍나영 이혼 고백 후 행복",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "시간이 많이 지났다”고 유쾌하게 고백 했다. 새로운 출발이다”라며 홍나영 을 응원했다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "이투데이=장영준 기자 | 코미디언 홍나영 이 결혼 1년 만에 이혼 한 사실을 뒤늦게 고백 하며 홀로서기 중인 근황을 전했다. 홍나영 은 \"요즘 행복 하다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://news.jtbc.co.kr/article/NB12328795?influxDiv=NAVER",
-                "press": "JTBC"
-              },
-              {
-                "url": "https://www.etoday.co.kr/news/view/2650358",
-                "press": "이투데이"
-              }
-            ],
-            "images": [
-              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F437%2F2026%2F11%2F19%2F521433.jpg&type=fface200_200&expire=2&refresh=true"
-            ],
-            "press": [
-              "JTBC",
-              "이투데이"
-            ],
-            "headlines": [
-              "개그우먼 홍나영 , 뒤늦은 이혼 고백 “1년 전 돌아왔다”",
-              "'개콘' 홍나영 , 뒤늦게 이혼 고백 …\"결혼 1년 만에 파경, 지금은 행복 \""
-            ],
-            "extraction": "search-card",
-            "collectedAt": "2026-11-19T06:12:10.836Z"
-          }
-        },
-        {
-          "id": "naver-9",
-          "rank": 9,
-          "keyword": "도이치모터스 주가조작 사건",
-          "title": "도이치모터스 주가조작 사건",
-          "rawKeyword": "도이치모터스 주가조작 사건",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 92,
-          "source": "naver",
-          "expansions": [
-            "도이치모터스 수원",
-            "도이치모터스 서비스센터",
-            "bmw 도이치모터스",
-            "수원 도이치모터스",
-            "원주 도이치모터스",
-            "도이치모터스 성수",
-            "도이치모터스 주가",
-            "도이치모터스 양재"
-          ],
-          "expansionSeed": "도이치모터스",
-          "insight": {
-            "titles": {
-              "seo": "도이치모터스 주가조작 사건 최신 이슈와 핵심 내용 정리",
-              "home": "도이치모터스 주가조작 사건, 김건희 주가조작 사건, 13년 만에 최종 결론 관련 확인할 점",
-              "topic": "도이치모터스 주가조작 사건",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "13년 만의 대법원 판결이다.대법원 전원합의체는 19일 오후 4시 주가조작 가담을 포함한 김건희씨 3대 의혹 사건 상고심 판결을 내린다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "대표적으로 권창영 2차 종합특검팀은 김건희 여사의 도이치모터스 주가조작 사건 봐주기 의혹을 수사하며 당시 관여한 검찰 지휘부를 기소했다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.ohmynews.com/NWS_Web/View/at_pg.aspx?CNTN_CD=A0003286167&CMPT_CD=P0010&utm_source=naver&utm_medium=newsearch&utm_campaign=naver_news",
-                "press": "오마이뉴스"
-              },
-              {
-                "url": "https://www.yna.co.kr/view/AKR20261118163300004?input=1195m",
-                "press": "연합뉴스"
-              }
-            ],
-            "images": [
-              "https://ojsfile.ohmynews.com/CRI_T_IMG/2026/1118/A0003286167_T.jpg"
-            ],
-            "press": [
-              "오마이뉴스",
-              "연합뉴스"
-            ],
-            "headlines": [
-              "김건희 주가조작 사건, 13년 만에 최종 결론",
-              "\"영장·조서 한 줄씩 따져봐\"…검사 겨눈 조작 기소특검 가시밭길"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-19T06:12:10.836Z"
-          }
-        },
-        {
-          "id": "naver-10",
-          "rank": 10,
           "keyword": "미중러 정상회담",
           "title": "미중러 정상회담",
           "rawKeyword": "미중러 정상회담",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 91,
+          "priority": 97,
           "source": "naver",
           "expansions": [
             "미중러 정상회담 개최",
@@ -618,6 +241,378 @@
             ],
             "extraction": "playwright",
             "collectedAt": "2026-11-19T06:12:10.836Z"
+          }
+        },
+        {
+          "id": "naver-5",
+          "rank": 5,
+          "keyword": "민주유공자법 필리버스터 시작",
+          "title": "민주유공자법 필리버스터 시작",
+          "rawKeyword": "민주유공자법 필리버스터 시작",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 96,
+          "source": "naver",
+          "expansions": [
+            "민주유공자법 내용",
+            "민주유공자법 혜택",
+            "민주유공자법 개정",
+            "민주유공자법 통과",
+            "민주유공자법 본회의",
+            "민주유공자법 뜻",
+            "민주유공자법 법사위",
+            "시작스터디카페"
+          ],
+          "expansionSeed": "민주유공자법",
+          "insight": {
+            "titles": {
+              "seo": "민주유공자법 필리버스터 시작 최신 이슈와 핵심 내용 정리",
+              "home": "민주유공자법 필리버스터 시작, [속보] 민주유공자법 본회의 상정…국힘 필리버스터 돌입 관련 확인할 점",
+              "topic": "민주유공자법 필리버스터 시작",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "한병도 더불어 민주 당 원내대표는 이날 정책조정회의에서 “ 민주유공자법 은 평생을 트라우마와 생활고에 시달린 민주 화 운동 과정의 희생자와 유가족에게 최소한의 돌봄과 예우를 보장하는 법 ”이라고 설명했다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "국민의힘은 민주유공자법 이 상정되자 즉각 필리버스터 에 돌입했다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://biz.heraldcorp.com/article/10942784?ref=naver",
+                "press": "헤럴드경제"
+              },
+              {
+                "url": "https://www.yna.co.kr/view/AKR20261119109000001?input=1195m",
+                "press": "연합뉴스"
+              }
+            ],
+            "images": [
+              "https://wimg.heraldcorp.com/news/cms/2026/11/19/news-p.v1.20261119.2536a9e4f84f40dc8035e0dc90bbea95_P1.jpg"
+            ],
+            "press": [
+              "헤럴드경제",
+              "연합뉴스"
+            ],
+            "headlines": [
+              "[속보] 민주유공자법 본회의 상정…국힘 필리버스터 돌입",
+              "' 민주유공자법 ' 與주도 본회의 상정…국힘 \"운동권 특혜\" 필버"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-19T07:10:32.941Z"
+          }
+        },
+        {
+          "id": "naver-6",
+          "rank": 6,
+          "keyword": "한덕수 선고 앞둔 대법",
+          "title": "한덕수 선고 앞둔 대법",
+          "rawKeyword": "한덕수 선고 앞둔 대법",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 95,
+          "source": "naver",
+          "expansions": [
+            "한덕수 선고",
+            "한덕수 석방",
+            "한덕수 재판",
+            "한덕수 근황",
+            "한덕수 나무위키",
+            "한덕수 징역",
+            "한덕수 국무총리",
+            "한덕수 2심"
+          ],
+          "expansionSeed": "한덕수",
+          "insight": {
+            "titles": {
+              "seo": "한덕수 선고 앞둔 대법 최신 이슈와 핵심 내용 정리",
+              "home": "한덕수 선고 앞둔 대법, '내란 중요임무' 한덕수 오늘 선고…'계엄=내란' 첫 대법 판단 관련 확인할 점",
+              "topic": "한덕수 선고 앞둔 대법",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "대법 원 전원합의체(주심 오경미 대법 관)는 이날 오후 4시 대법 정에서 한덕수 전 총리의 내란 중요임무 종사 등 혐의 상고심 선고 기일을 연다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "[기자] 내란에 가담한 혐의로 2심에서 징역 15년을 선고 받은 한덕수 전 국무총리에 대한 대법 원의 최종 판단이 나옵니다. 대법 은 '특검 사건 3개월 내 선고 ' 원칙을 깨는 등 숙고를 거듭해왔는데, 구속기한 만료를 하루 앞둔 날을 선고 기일로 정했습니다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.yna.co.kr/view/AKR20261118187100004?input=1195m",
+                "press": "연합뉴스"
+              },
+              {
+                "url": "http://www.yonhapnewstv.co.kr/news/MYH20261119044431Z5i",
+                "press": "연합뉴스TV"
+              }
+            ],
+            "images": [
+              "https://img5.yna.co.kr/photo/yna/YH/2026/01/21/PYH2026012110900001300_P4.jpg"
+            ],
+            "press": [
+              "연합뉴스",
+              "연합뉴스TV"
+            ],
+            "headlines": [
+              "'내란 중요임무' 한덕수 오늘 선고…'계엄=내란' 첫 대법 판단",
+              "' 한덕수 내란·김건희 3대 의혹'…오늘 나란히 대법 선고"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-19T07:10:32.941Z"
+          }
+        },
+        {
+          "id": "naver-7",
+          "rank": 7,
+          "keyword": "예비타당성조사",
+          "title": "예비타당성조사",
+          "rawKeyword": "예비타당성조사",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 94,
+          "source": "naver",
+          "expansions": [
+            "예비타당성조사 뜻",
+            "예비타당성조사 대상",
+            "예비타당성조사 통과",
+            "예비타당성조사 기준",
+            "예비타당성조사표",
+            "예비타당성조사 기간",
+            "예비타당성조사 금액",
+            "예비타당성조사 법령"
+          ],
+          "expansionSeed": "예비타당성조사",
+          "insight": {
+            "titles": {
+              "seo": "예비타당성조사 최신 이슈와 핵심 내용 정리",
+              "home": "예비타당성조사, ‘경기동북부 공공의료원’ 건립, 예비타당성 조사 대상 되나 관련 확인할 점",
+              "topic": "예비타당성조사",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "경기 동북부 공공의료원 건립 사업이 기획예산처의 예비타당성 조사 대상으로 선정될 지 관심이 모아지고 있다. 19일 남양주시에 따르면 보건복지부는 지난 16일 경기 동북부 공공의료원 건립 필요성에 대한 검토를 마치고 20일 기획예산처에 예비타당성 조사를 신청할 예정이다. 남양주시는 앞서 호평동 백봉지구에 400병상 규모로 경기 동북부 공공의료원 건립을 추진했다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "2022년 예비타당성조사 를 통과하며 본격화됐지만, 항공기 운항 안전성과 공항 운영 여건 등을 고려해 취항 항공기 규모를 기존 50인승에서 80인승으로 확대하고, 착륙대 폭도 150m에서 280m로 조정하면서 총사업비가 늘었다. 이에 따라 2024년 11월 타당성 재조사에 착수했다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.segye.com/newsView/20261119505490?OutUrl=naver",
+                "press": "세계일보"
+              },
+              {
+                "url": "https://www.m-i.kr/news/articleView.html?idxno=2018925",
+                "press": "매일일보"
+              }
+            ],
+            "images": [
+              "https://www.segye.com/content/image/2026/11/19/20261119505489.jpg"
+            ],
+            "press": [
+              "세계일보",
+              "매일일보"
+            ],
+            "headlines": [
+              "‘경기동북부 공공의료원’ 건립, 예비타당성 조사 대상 되나",
+              "옹진군, 백령공항 타당성 재 조사 통과… 개항 2033년 전망"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-19T07:10:32.941Z"
+          }
+        },
+        {
+          "id": "naver-8",
+          "rank": 8,
+          "keyword": "박찬종 변호사 별세 시신 기증 약속",
+          "title": "박찬종 변호사 별세 시신 기증 약속",
+          "rawKeyword": "박찬종 변호사 별세 시신 기증 약속",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 93,
+          "source": "naver",
+          "expansions": [
+            "약속의 네버랜드",
+            "어린이를 지키는 약속, 블루 닷 2026",
+            "약속 영어로",
+            "약속 뜻",
+            "규현 약속",
+            "천일의 약속",
+            "신과의 약속",
+            "생활약속"
+          ],
+          "expansionSeed": "약속",
+          "insight": {
+            "titles": {
+              "seo": "박찬종 변호사 별세 시신 기증 약속 최신 이슈와 핵심 내용 정리",
+              "home": "박찬종 변호사 별세 시신 기증 약속, 403 Forbidden 관련 확인할 점",
+              "topic": "박찬종 변호사 별세 시신 기증 약속",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "5선 국회의원을 지내고 제14대 대통령 선거에 출마했던 박찬종 변호사 가 별세 했다. 모친 정현수씨 역시 아들의 뜻에 동참해 시신 기증 을 약속 했으며, 2005년 별세 한 뒤 세브란스병원에 시신 을 기증 한 것으로 알려졌다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "5선 국회의원을 지내고 제14대 대통령 선거에 출마했던 박찬종 변호사 가 18일 별세 했다. 19일 유족에 따르면 고인은 전날 오후 숙환으로 별세 했다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.khan.co.kr/article/202611191525001",
+                "press": "경향신문"
+              },
+              {
+                "url": "https://www.news1.kr/politics/assembly/6359505",
+                "press": "뉴스1"
+              }
+            ],
+            "images": [
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F032%2F2026%2F11%2F19%2F3483753.jpg&type=ofullfill208_208_dominantcolor&expire=2&refresh=true"
+            ],
+            "press": [
+              "경향신문",
+              "뉴스1"
+            ],
+            "headlines": [
+              "403 Forbidden",
+              "'5선·대선 후보' 박찬종 전 의원 별세 …향년 87세"
+            ],
+            "extraction": "search-card",
+            "collectedAt": "2026-11-19T07:10:32.941Z"
+          }
+        },
+        {
+          "id": "naver-9",
+          "rank": 9,
+          "keyword": "디 에이치 반포 124",
+          "title": "디 에이치 반포 124",
+          "rawKeyword": "디 에이치 반포 124",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 92,
+          "source": "naver",
+          "expansions": [
+            "디에이치 반포124 분양가",
+            "디에이치반포 124 청약 일정",
+            "디에이치반포124 청약",
+            "디에이치 반포124",
+            "디에이치 반포124 청약조건",
+            "디에이치반포 124 평면도",
+            "디에이치 반포124 59",
+            "디에이치 반포124 분양"
+          ],
+          "expansionSeed": "디 에이치 반포 124",
+          "insight": {
+            "titles": {
+              "seo": "디 에이치 반포 124 최신 이슈와 핵심 내용 정리",
+              "home": "디 에이치 반포 124, 반포 이어 개포까지…분양가 3.3㎡당 5000만원 찍는다 관련 확인할 점",
+              "topic": "디 에이치 반포 124",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "△서울 서초구 반포동 재건축 아파트에 이어 강남구 개포동에서도 다음달 재건축 아파트 최고 분양가 3.3㎡당 5000만원 이상인 일반 분양 물량이 나온다. 1만 8000가구가 잇따라 재건축에 들어갈 예정인 개포지구 아파트(1단지) 전경.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "오직 반포 주공1단지 수주를 위해 재건축 역사상 최고의 사업조건을 제시했다고 강조했다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "http://www.edaily.co.kr/news/newspath.asp?newsid=03575206612680080",
+                "press": "이데일리"
+              },
+              {
+                "url": "http://www.cstimes.com/?mod=news&act=articleView&idxno=257151",
+                "press": "컨슈머타임스"
+              }
+            ],
+            "images": [
+              "https://image.edaily.co.kr/images/Photo/files/NP/S/2016/06/PS16060900814.jpg"
+            ],
+            "press": [
+              "이데일리",
+              "컨슈머타임스"
+            ],
+            "headlines": [
+              "반포 이어 개포까지…분양가 3.3㎡당 5000만원 찍는다",
+              "현대건설-GS건설, 반포 1단지 두고 막바지 경쟁"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-19T07:10:32.941Z"
+          }
+        },
+        {
+          "id": "naver-10",
+          "rank": 10,
+          "keyword": "이재명 대통령 APEC 참석",
+          "title": "이재명 대통령 APEC 참석",
+          "rawKeyword": "이재명 대통령 APEC 참석",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 91,
+          "source": "naver",
+          "expansions": [
+            "이재명 대통령",
+            "이재명 지지율",
+            "이재명 임기",
+            "이재명 탄핵",
+            "이재명 재판",
+            "이재명 직무정지",
+            "이재명 북한",
+            "이재명 수능"
+          ],
+          "expansionSeed": "이재명",
+          "insight": {
+            "titles": {
+              "seo": "이재명 대통령 APEC 참석 최신 이슈와 핵심 내용 정리",
+              "home": "이재명 대통령 APEC 참석, [속보] 李대통령, 조작기소 특검법 재가…19일 공포 즉시 시행 관련 확인할 점",
+              "topic": "이재명 대통령 APEC 참석",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "[헤럴드경제=서영상 기자] 이재명 대통령이 윤석열 정부 당시 검찰 등 국가기관의 조작수사·조작기소 의혹을 규명하기 위한 이른바 ‘조작기소 특검법’을 재가했다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "이재명 대통령 의 중국 선전 APEC 정상회의 참석 을 수행 중인 청와대 고위 관계자는 18일 현지 프레스센터에서 취재진과 만나 '한·중 FTA 2단계 협상 타결로 한한령이 해제됐다는 평가에 대한 의견'을 묻는 질문에 일부 진전이 있다고 볼 수 있다고 평가했다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://biz.heraldcorp.com/article/10942018?ref=naver",
+                "press": "헤럴드경제"
+              },
+              {
+                "url": "https://www.hankyung.com/article/202611195951i",
+                "press": "한국경제"
+              }
+            ],
+            "images": [
+              "https://wimg.heraldcorp.com/news/cms/2026/11/19/news-p.v1.20261113.205ef28c9ada45c282a00585a1321db6_P1.jpg"
+            ],
+            "press": [
+              "헤럴드경제",
+              "한국경제"
+            ],
+            "headlines": [
+              "[속보] 李대통령, 조작기소 특검법 재가…19일 공포 즉시 시행",
+              "靑 \"한·중 FTA 2단계 실질 타결…한한령 일부 진전\""
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-19T07:10:32.941Z"
           }
         }
       ]
@@ -1253,287 +1248,311 @@
         {
           "id": "nate-1",
           "rank": 1,
-          "keyword": "이진우",
-          "title": "이진우",
-          "rawKeyword": "이진우",
+          "keyword": "서울 상승폭 반토막",
+          "title": "서울 상승폭 반토막",
+          "rawKeyword": "서울 상승폭 반토막",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 100,
           "source": "nate",
           "expansions": [
-            "이진우 리트",
-            "이진우 나무위키",
-            "이진우 책",
-            "리트 만점자 이진우",
-            "리트 이진우",
-            "이진욱",
-            "이진우 ai",
-            "이진우 인스타"
+            "서울 날씨",
+            "오늘 서울 날씨",
+            "서울마이소울 조은영입니다",
+            "서울 가볼만한곳",
+            "서울 놀거리",
+            "서울 팝업",
+            "서울 맛집",
+            "서울 전시회"
           ],
-          "expansionSeed": "이진우",
+          "expansionSeed": "서울",
           "insight": {
             "titles": {
-              "seo": "이진우 최신 이슈와 핵심 내용 정리",
-              "home": "이진우, [속보] '리트 만점자' 이진우 씨, 서울 천호동서 심정지 상태 발견 관련 확인할 점",
-              "topic": "이진우",
+              "seo": "서울 상승폭 반토막 최신 이슈와 핵심 내용 정리",
+              "home": "서울 상승폭 반토막, 서울 집값 상승폭 '반토막' 관련 확인할 점",
+              "topic": "서울 상승폭 반토막",
               "topicGroup": "네이트 실시간 검색어"
             },
             "facts": [
               {
-                "text": "법학적성시험 '리트' 만점을 받은 뒤 인공지능 부정행위 의혹이 불거진 서울대생 이진우 씨가 오늘 오후 1시 10분쯤 서울 강동구 천호동에서 심정지 상태로 발견됐습니다.",
+                "text": "서울 아파트값이 93주 연속 오름세는 이어갔지만, 상승폭 이 0.03%로 전주(0.07%)의 절반 아래로 줄어든 것으로 발표된 19일 서울 성동구 응봉산 팔각정을 찾은 여행객이 아파트 단지를 바라보고 있다.",
                 "sourceIndex": 0
               },
               {
-                "text": "집행유예 중에도 같은 수법으로 범행 저질러 징역 6개월 선고 이영섭 김빛나 기자 = 부정시험 의혹으로 고발된 법학적성시험(LEET·리트) 만점자 이진우 (32)씨가 과거 여러 차례 형사처벌을 받은 것으로 보인다.",
+                "text": "매매 상승률 0.07%→0.03%, 용산·동작도 하락 전환 강남 3구 낙폭 확대, 경기 0.21% 상승세 유지 아주경제=김승현 기자 raon@ajunews.com 서울 집값이 93주 연속 올랐지만 상승폭 은 전주 대비 절반으로 축소됐다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://imnews.imbc.com/news/2026/society/article/6866915_36918.html",
-                "press": "MBC"
+                "url": "https://www.news1.kr/photos/8222919",
+                "press": "뉴스1"
               },
               {
-                "url": "https://www.yna.co.kr/view/AKR20261119073000004?input=1195m",
-                "press": "연합뉴스"
+                "url": "https://www.ajunews.com/view/20261119130531885",
+                "press": "아주경제"
               }
             ],
             "images": [
-              "https://image.imnews.imbc.com/news/2026/society/article/__icsFiles/afieldfile/2026/11/19/lyj_261119_50.jpg"
+              "https://image.news1.kr/system/photos/2026/11/19/8222919/high.jpg"
             ],
             "press": [
-              "MBC",
-              "연합뉴스"
+              "뉴스1",
+              "아주경제"
             ],
             "headlines": [
-              "[속보] '리트 만점자' 이진우 씨, 서울 천호동서 심정지 상태 발견",
-              "LEET 만점자 추정인물 '고의 교통사고'로 실형…경찰 폭행도"
+              "서울 집값 상승폭 '반토막'",
+              "서울 집값 93주째 올랐지만 상승폭 반토막 … 하락 지역 7곳으로"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T06:12:10.836Z"
+            "collectedAt": "2026-11-19T07:10:32.941Z"
           }
         },
         {
           "id": "nate-2",
           "rank": 2,
-          "keyword": "박찬종",
-          "title": "박찬종",
-          "rawKeyword": "박찬종",
+          "keyword": "국민의힘 의원총회",
+          "title": "국민의힘 의원총회",
+          "rawKeyword": "국민의힘 의원총회",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 99,
           "source": "nate",
-          "expansions": [],
+          "expansions": [
+            "국민의힘 의원총회",
+            "국민의힘 당대표",
+            "국민의힘 의원",
+            "국민의힘 당원가입",
+            "국민의힘 김민수",
+            "국민의힘 지지율",
+            "국민의힘 최고위원",
+            "국민의힘 갤러리"
+          ],
+          "expansionSeed": "국민의힘",
           "insight": {
             "titles": {
-              "seo": "박찬종 최신 이슈와 핵심 내용 정리",
-              "home": "박찬종, '14대 대선출마' 박찬종 前의원 별세…생전 약속대로 시신기증 관련 확인할 점",
-              "topic": "박찬종",
+              "seo": "국민의힘 의원총회 최신 이슈와 핵심 내용 정리",
+              "home": "국민의힘 의원총회, 국힘 \"19일 본회의 상정 법안 모두 필리버스터 진행\" 관련 확인할 점",
+              "topic": "국민의힘 의원총회",
               "topicGroup": "네이트 실시간 검색어"
             },
             "facts": [
               {
-                "text": "(서울=연합뉴스) 이정현 박수윤 기자 = 5선 국회의원을 지낸 박찬종 변호사가 18일 별세했다.",
+                "text": "국민의힘은 19일 국회 본회의에 상정될 것으로 예상되는 민주유공자법 등 모든 법안에 대해 필리버스터(무제한 토론을 통한 합법적 의사진행방해)를 진행하기로 결정했다.",
                 "sourceIndex": 0
               },
               {
-                "text": "‘미스터 클린’으로 불리며 5선 국회의원을 지낸 박찬종 (사진) 변호사가 별세한 것으로 19일 전해졌다. 유족에 따르면 고인은 전날 오후 숙환으로 별세했다.",
+                "text": "국민의힘 은 의원총회 를 열어 민주유공자법을 포함한 법안 처리를 필리버스터로 저지하기로 결의했다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.yna.co.kr/view/AKR20261119083700001?input=1195m",
-                "press": "연합뉴스"
+                "url": "https://www.newsis.com/view/NISX20261118_0003873113",
+                "press": "뉴시스"
               },
               {
-                "url": "https://www.munhwa.com/article/11632574?ref=naver",
-                "press": "문화일보"
+                "url": "https://www.segye.com/newsView/20261118520044?OutUrl=naver",
+                "press": "세계일보"
               }
             ],
             "images": [
-              "https://img5.yna.co.kr/photo/cms/2023/08/14/93/PCM20230814000193990_P4.jpg"
+              "https://img1.newsis.com/2026/11/05/NISI20261105_0021520315_web.jpg"
             ],
             "press": [
-              "연합뉴스",
-              "문화일보"
+              "뉴시스",
+              "세계일보"
             ],
             "headlines": [
-              "'14대 대선출마' 박찬종 前의원 별세…생전 약속대로 시신기증",
-              "‘미스터 클린’ 박찬종 前의원 별세"
+              "국힘 \"19일 본회의 상정 법안 모두 필리버스터 진행\"",
+              "與, 19일 민주유공자법 처리 예고… 국힘 ‘필버’ 맞불"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T06:12:10.836Z"
+            "collectedAt": "2026-11-19T07:10:32.941Z"
           }
         },
         {
           "id": "nate-3",
           "rank": 3,
-          "keyword": "홍나영",
-          "title": "홍나영",
-          "rawKeyword": "홍나영",
+          "keyword": "최동석 박지윤 반박",
+          "title": "최동석 박지윤 반박",
+          "rawKeyword": "최동석 박지윤 반박",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 98,
           "source": "nate",
           "expansions": [
-            "개그우먼 홍나영"
+            "최동석 박지윤",
+            "박지윤 최동석",
+            "박지윤 최동석 카톡",
+            "최동석 아나운서",
+            "최동석소아과",
+            "최동석 인스타",
+            "최동석 상간 소송",
+            "최동석 승소"
           ],
-          "expansionSeed": "홍나영",
+          "expansionSeed": "최동석",
           "insight": {
             "titles": {
-              "seo": "홍나영 최신 이슈와 핵심 내용 정리",
-              "home": "홍나영, 개그우먼 홍나영 , 뒤늦은 이혼 고백 “1년 전 돌아왔다” 관련 확인할 점",
-              "topic": "홍나영",
+              "seo": "최동석 박지윤 반박 최신 이슈와 핵심 내용 정리",
+              "home": "최동석 박지윤 반박, 상간 2심 작심 반박 한 박지윤 …\" 최동석 , 다른 여성과 관계\" 주장 관련 확인할 점",
+              "topic": "최동석 박지윤 반박",
               "topicGroup": "네이트 실시간 검색어"
             },
             "facts": [
               {
-                "text": "개그우먼 홍나영 이 뒤늦게 이혼 사실을 전했다. 영상에는 코미디언 황정혜, 박소라, 홍예슬이 동료 홍나영 의 이사한 집에 모여 다양한 이야기를 나누는 모습이 그려졌다.",
+                "text": "방송인 박지윤 씨가 오늘(19일) 상간 소송 항소심 판결에 반박 하며, 전 남편 최동석 씨가 이혼 소송 중 다른 여성과 관계를 가졌다고 주장했습니다.",
                 "sourceIndex": 0
               },
               {
-                "text": "올해로 16회째를 맞은 이번 행사에서는 정채봉 선생의 작품을 재해석한 판소리 공연과 동화 작가와의 만남 등 다채로운 문화·체험 프로그램이 진행됐습니다. 올해 정채봉 문학상에는 전쟁과 생계라는 무거운 주제를 어린이의 시선으로 풀어낸 홍나영 작가의 '앙상블, 바다를 울리다'가 당선작으로 선정됐습니다.",
+                "text": "앞서 최동석 은 박지윤 이 남성 지인 A씨와 부정행위를 저질렀다며 상간 소송을 제기했고 항소심에서 일부 승소 판결을 받은 것이 최근 스타뉴스 보도로 알려졌다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://news.jtbc.co.kr/article/NB12328795?influxDiv=NAVER",
+                "url": "https://news.jtbc.co.kr/article/NB12328829?influxDiv=NAVER",
                 "press": "JTBC"
               },
               {
-                "url": "https://ysmbc.co.kr/NewsArticle/1543632",
-                "press": "여수MBC"
+                "url": "https://www.nocutnews.co.kr/news/6609338?utm_source=naver&utm_medium=article&utm_campaign=20261119105100",
+                "press": "노컷뉴스"
               }
             ],
             "images": [
-              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F437%2F2026%2F11%2F19%2F521433.jpg&type=fface200_200&expire=2&refresh=true"
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F437%2F2026%2F11%2F19%2F521467.jpg&type=fface200_200&expire=2&refresh=true"
             ],
             "press": [
               "JTBC",
-              "여수MBC"
+              "노컷뉴스"
             ],
             "headlines": [
-              "개그우먼 홍나영 , 뒤늦은 이혼 고백 “1년 전 돌아왔다”",
-              "제16회 정채봉 동화잔치...당선작에 '앙상블, 바다를 울리다' 선정"
+              "상간 2심 작심 반박 한 박지윤 …\" 최동석 , 다른 여성과 관계\" 주장",
+              "박지윤 , 상간 소송 판결 반박 \" 최동석 언론플레이에 지쳐간다\""
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-19T06:12:10.836Z"
+            "collectedAt": "2026-11-19T07:10:32.941Z"
           }
         },
         {
           "id": "nate-4",
           "rank": 4,
-          "keyword": "지스타 2026 개막",
-          "title": "지스타 2026 개막",
-          "rawKeyword": "지스타 2026 개막",
+          "keyword": "트럼프 양자회담",
+          "title": "트럼프 양자회담",
+          "rawKeyword": "트럼프 양자회담",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 97,
           "source": "nate",
           "expansions": [
-            "지스타 2026 개막식"
+            "트럼프 임기",
+            "트럼프 이란",
+            "트럼프 중간선거",
+            "트럼프 공화당",
+            "트럼프 탄핵",
+            "트럼프 김정은",
+            "트럼프 나무위키",
+            "트럼프 지지율"
           ],
-          "expansionSeed": "지스타 2026 개막",
+          "expansionSeed": "트럼프",
           "insight": {
             "titles": {
-              "seo": "지스타 2026 개막 최신 이슈와 핵심 내용 정리",
-              "home": "지스타 2026 개막, 지스타 2026 부산서 개막…신작 게임과 AI 함께 만난다(종합) 관련 확인할 점",
-              "topic": "지스타 2026 개막",
+              "seo": "트럼프 양자회담 최신 이슈와 핵심 내용 정리",
+              "home": "트럼프 양자회담, 403 Forbidden 관련 확인할 점",
+              "topic": "트럼프 양자회담",
               "topicGroup": "네이트 실시간 검색어"
             },
             "facts": [
               {
-                "text": "(부산=연합뉴스) 김주환 기자 = 게임과 인공지능(AI)이 어우러진 국제게임전시회 지스타 2026이 부산에서 막을 올렸다.",
+                "text": "이번 양자 회담 은 당초 트럼프 대통령의 아시아 순방 일정에 포함돼 있지 않았다. 트럼프 대통령은 이날 APEC 전체회의 이후 시진핑 중국 국가주석과의 양자 회담 , 미·중·러 3자 정상 회담 을 잇달아 가질 예정이었다.",
                 "sourceIndex": 0
               },
               {
-                "text": "19일 부산 해운대구 벡스코 제1전시장에서 열린 국내 최대 게임전시회 ' 지스타 2026 '에서 관람객들이 신작 게임을 즐기고 있다. 22일까지 열리는 지스타 에는 41개국 1237개사가 참가해 총 3445개 부스를 운영한다.",
+                "text": "크렘린궁 측은 도널드 트럼프 미국 대통령과의 양자회담 과 관련해서는 \"미·러 양자회담 은 APEC 정상회의 본회의 이후 열릴 예정\"이라고 답했다. 미국의 한 당국자도 이날 AP통신에 \" 트럼프 대통령이 푸틴 대통령과 별도로 회담 할 계획\"이라고 했다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.yna.co.kr/view/AKR20261119056451017?input=1195m",
-                "press": "연합뉴스"
+                "url": "https://www.khan.co.kr/article/202611191232001",
+                "press": "경향신문"
               },
               {
-                "url": "https://www.news1.kr/photos/8222934",
-                "press": "뉴스1"
+                "url": "https://www.yna.co.kr/view/AKR20261119000900109?input=1195m",
+                "press": "연합뉴스"
               }
             ],
             "images": [
-              "https://img7.yna.co.kr/etc/inner/KR/2026/11/19/AKR20261119056451017_03_i_P4.jpg"
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F032%2F2026%2F11%2F19%2F3483712.jpg&type=fface200_200&expire=2&refresh=true"
             ],
             "press": [
-              "연합뉴스",
-              "뉴스1"
+              "경향신문",
+              "연합뉴스"
             ],
             "headlines": [
-              "지스타 2026 부산서 개막…신작 게임과 AI 함께 만난다(종합)",
-              "지스타 2026 개막"
+              "403 Forbidden",
+              "\"푸틴·다카이치 30분간 대화\"…\"크렘린궁 \" 회담 계획 없어\""
             ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-19T06:12:10.836Z"
+            "extraction": "search-card",
+            "collectedAt": "2026-11-19T07:10:32.941Z"
           }
         },
         {
           "id": "nate-5",
           "rank": 5,
-          "keyword": "수출 달성",
-          "title": "수출 달성",
-          "rawKeyword": "수출 달성",
+          "keyword": "세무사 수석",
+          "title": "세무사 수석",
+          "rawKeyword": "세무사 수석",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 96,
           "source": "nate",
           "expansions": [
-            "중고차수출",
-            "수출 1조달러",
-            "수출 뜻",
-            "수출입은행",
-            "수출입동향",
-            "수출액",
-            "중고차수출업체",
-            "한국 수출"
+            "63회 세무사 수석",
+            "세무사 수석 ai",
+            "세무사 수석 한원석",
+            "세무사 수석 합격 수기",
+            "세무사 수석 블로그",
+            "세무사 수석 합격",
+            "세무사 수석 ai안경",
+            "세무사 수석 합격자"
           ],
-          "expansionSeed": "수출",
+          "expansionSeed": "세무사 수석",
           "insight": {
             "titles": {
-              "seo": "수출 달성 최신 이슈와 핵심 내용 정리",
-              "home": "수출 달성, [속보] 반도체 호황에 수출 1조 달러 달성‥세계 4번째 관련 확인할 점",
-              "topic": "수출 달성",
+              "seo": "세무사 수석 최신 이슈와 핵심 내용 정리",
+              "home": "세무사 수석, [단독]'AI 커닝' 세무사 시험 부정행위…집단소송 나선다 관련 확인할 점",
+              "topic": "세무사 수석",
               "topicGroup": "네이트 실시간 검색어"
             },
             "facts": [
               {
-                "text": "우리나라가 반도체 호황에 힘입어 세계에서 4번째로 연간 수출 1조 달러를 달성했습니다.",
+                "text": "‘세무냥이’로 알려진 올해 세무사 시험 수석합격자 한모 씨의 ‘인공지능(AI) 커닝’ 부정행위 자백 사태가 일파만파 확산되고 있다. 한 씨에 대한 경찰의 수사와 별개로 로펌업계에서는 한국산업인력공단을 상대로 한 집단소송도 본격 채비에 들어갔다.",
                 "sourceIndex": 0
               },
               {
-                "text": "우리나라가 사상 처음으로 연간 수출 1조 달러를 달성 했습니다. 미국과 독일, 중국에 이은 세계 4번째로, 경제 규모에서 우리를 앞서간 일본도 달성 하지 못한 경지입니다.",
+                "text": "최근 세무사 시험 수석 합격자가 AI를 이용한 부정행위를 자백한 이후 다른 전문자격시험의 단기 합격자들에게까지 의혹이 번지자 직접 입장을 밝힌 것이다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://imnews.imbc.com/news/2026/econo/article/6866938_36932.html",
-                "press": "MBC"
+                "url": "https://www.edaily.co.kr/News/Read?newsId=03312806645647360&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+                "press": "이데일리"
               },
               {
-                "url": "https://news.kbs.co.kr/news/pc/view/view.do?ncd=8717339&ref=A",
-                "press": "KBS"
+                "url": "https://www.hankyung.com/article/202611184503i",
+                "press": "한국경제"
               }
             ],
             "images": [
-              "https://image.imnews.imbc.com/news/2026/econo/article/__icsFiles/afieldfile/2026/11/19/sa_20261119_8_1.jpg"
+              "https://image.edaily.co.kr/images/Photo/files/NP/S/2026/11/PS26111900962.jpg"
             ],
             "press": [
-              "MBC",
-              "KBS"
+              "이데일리",
+              "한국경제"
             ],
             "headlines": [
-              "[속보] 반도체 호황에 수출 1조 달러 달성‥세계 4번째",
-              "[속보] 한국 연간 수출 1조 달러 달성 …세계 4번째"
+              "[단독]'AI 커닝' 세무사 시험 부정행위…집단소송 나선다",
+              "[단독] 수석 은커녕 189명 중 150등…'6개월 합격' 감평사의 해명"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T06:12:10.836Z"
+            "collectedAt": "2026-11-19T07:10:32.941Z"
           }
         }
       ]
@@ -1603,7 +1622,7 @@
               "서울시, 비아파트 건설에 200억 저리 융자 … 전세사기 이후 위축된 빌..."
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-19T06:12:10.836Z"
+            "collectedAt": "2026-11-19T07:10:32.941Z"
           }
         },
         {
@@ -2039,7 +2058,7 @@
               "403 Forbidden"
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-19T06:12:10.836Z"
+            "collectedAt": "2026-11-19T07:10:32.941Z"
           }
         },
         {
@@ -2104,7 +2123,7 @@
               "[공식발표] ' 손흥민 선발 명단 제외 ' LAFC, 콜로라도전 'BEST 11' 공개!…..."
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-19T06:12:10.836Z"
+            "collectedAt": "2026-11-19T07:10:32.941Z"
           }
         },
         {
@@ -2324,7 +2343,7 @@
               "안세영이 돌아왔다! 압승, 쾌승!…유럽 최강자 블리치펠트 43분 만에 2-0 완파→세계선수권 8강행 성공"
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-19T06:12:10.836Z"
+            "collectedAt": "2026-11-19T07:10:32.941Z"
           }
         },
         {
@@ -3055,603 +3074,614 @@
         {
           "id": "issue-1",
           "rank": 1,
-          "keyword": "이찬원, 스타랭킹 男스타트롯 톱3 위엄",
-          "title": "이찬원, 스타랭킹 男스타트롯 톱3 위엄",
-          "rawKeyword": "이찬원, 스타랭킹 男스타트롯 톱3 위엄",
-          "description": "스타뉴스 최신 기사 · 이찬원, 스타랭킹 男스타트롯 톱3 위엄",
+          "keyword": "장윤정母 '투자사기' 인정 눈물..\"가족 연락 끊은지 오래 됐다\"",
+          "title": "장윤정母 '투자사기' 인정 눈물..\"가족 연락 끊은지 오래 됐다\"",
+          "rawKeyword": "장윤정母 '투자사기' 인정 눈물..\"가족 연락 끊은지 오래 됐다\"",
+          "description": "스타뉴스 최신 기사 · 장윤정母 '투자사기' 인정 눈물..\"가족 연락 끊은지 오래 됐다\"",
           "priority": 100,
           "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/music/2026/11/19/2026111913362464393",
+          "officialUrl": "https://www.starnewskorea.com/star/2026/11/19/2026111915340028329",
           "sourceLabel": "스타뉴스",
           "expansions": [
-            "위엄 뜻",
-            "위엄있다",
-            "축옥 위엄",
-            "위엄 위",
-            "절요 위엄",
-            "위엄성",
-            "옥을 찾아서 위엄",
-            "스타랭킹투표"
+            "오래된 노래",
+            "오래오",
+            "오래도",
+            "장윤정 셋째",
+            "장윤정 노래",
+            "장윤정 나무위키",
+            "장윤정 콘서트",
+            "장윤정 엄마"
           ],
-          "expansionSeed": "이찬원",
-          "ago": "1분 전",
-          "agoMinutes": 1,
-          "publishedLabel": "2026-11-19T06:08:36.000Z",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111913362464393_1.jpg",
+          "expansionSeed": "장윤정",
+          "ago": "8분 전",
+          "agoMinutes": 8,
+          "publishedLabel": "2026-11-19T07:01:33.000Z",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111915340028329_1.jpg",
           "insight": {
             "titles": {
-              "seo": "이찬원, 스타랭킹 男스타트롯 톱3 위엄 최신 이슈와 핵심 내용 정리",
-              "home": "이찬원, 스타랭킹 男스타트롯 톱3 위엄, 이찬원, 스타랭킹 男스타트롯 톱3 위엄 관련 확인할 점",
-              "topic": "이찬원, 스타랭킹 男스타트롯 톱3 위엄",
+              "seo": "장윤정母 '투자사기' 인정 눈물..\"가족 연락 끊은지 오래 됐다\" 최신 이슈와 핵심 내용 정리",
+              "home": "장윤정母 '투자사기' 인정 눈물..\"가족 연락 끊은지 오래 됐다\", 장윤정母 '투자사기' 인정 눈물..\"가족 연락 끊은지 오래 됐다\" 관련 확인할 점",
+              "topic": "장윤정母 '투자사기' 인정 눈물..\"가족 연락 끊은지 오래 됐다\"",
               "topicGroup": "이슈 실시간 검색어"
             },
             "facts": [
               {
-                "text": "스타뉴스 최신 기사 · 이찬원, 스타랭킹 男스타트롯 톱3 위엄",
+                "text": "스타뉴스 최신 기사 · 장윤정母 '투자사기' 인정 눈물..\"가족 연락 끊은지 오래 됐다\"",
                 "sourceIndex": 0
-              },
-              {
-                "text": "이찬원 은 지난 10일 3시 1분부터 9월 17일 오후 3시까지 진행된 266차 스타랭킹 스타트롯 남자 랭킹 투표에서 2만 8029표를 기록했다. 이찬원 은 스타랭킹 해당 부문에서 줄곧 톱3 의 위엄 을 뽐내고 있다.",
-                "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.starnewskorea.com/music/2026/11/19/2026111913362464393",
-                "press": "스타뉴스"
-              },
-              {
-                "url": "https://www.starnewskorea.com/music/2026/09/18/2026091814142264434",
+                "url": "https://www.starnewskorea.com/star/2026/11/19/2026111915340028329",
                 "press": "스타뉴스"
               }
             ],
             "images": [
-              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F108%2F2026%2F09%2F18%2F3471508.jpg&type=fface200_200&expire=2&refresh=true"
+              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111915340028329_1.jpg"
             ],
             "press": [
               "스타뉴스"
             ],
             "headlines": [
-              "이찬원, 스타랭킹 男스타트롯 톱3 위엄",
-              "'이'렇게 '찬' 바람 불 땐 이찬원 생각.. 스타랭킹 男 트롯 '3위'"
+              "장윤정母 '투자사기' 인정 눈물..\"가족 연락 끊은지 오래 됐다\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T06:12:10.836Z"
+            "collectedAt": "2026-11-19T07:10:32.941Z"
           }
         },
         {
           "id": "issue-2",
           "rank": 2,
-          "keyword": "영탁, 스타랭킹 남자트롯 2위 '굳건'",
-          "title": "영탁, 스타랭킹 남자트롯 2위 '굳건'",
-          "rawKeyword": "영탁, 스타랭킹 남자트롯 2위 '굳건'",
-          "description": "스타뉴스 최신 기사 · 영탁, 스타랭킹 남자트롯 2위 '굳건'",
+          "keyword": "'투자 사기 구속' 장윤정母 \"잘못했습니다\" 눈물..징역 1년 6개월 구형",
+          "title": "'투자 사기 구속' 장윤정母 \"잘못했습니다\" 눈물..징역 1년 6개월 구형",
+          "rawKeyword": "'투자 사기 구속' 장윤정母 \"잘못했습니다\" 눈물..징역 1년 6개월 구형",
+          "description": "스타뉴스 최신 기사 · '투자 사기 구속' 장윤정母 \"잘못했습니다\" 눈물..징역 1년 6개월 구형",
           "priority": 99,
           "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/music/2026/11/19/2026111913361598072",
+          "officialUrl": "https://www.starnewskorea.com/star/2026/11/19/2026111915335122373",
           "sourceLabel": "스타뉴스",
           "expansions": [
-            "스타랭킹투표",
-            "스타뉴스스타랭킹",
-            "스타랭킹 스타뉴스",
-            "스타랭킹 투표하기",
-            "스타랭킹여자",
-            "스타랭킹 투표 방법",
-            "스타랭킹 1위",
-            "스타랭킹 스타랭킹"
+            "사기계좌조회",
+            "사기번호 조회",
+            "사기꾼들",
+            "사기 뜻",
+            "사기죄",
+            "폰지사기",
+            "삼국사기",
+            "이로운사기"
           ],
-          "expansionSeed": "영탁",
-          "ago": "3분 전",
-          "agoMinutes": 3,
-          "publishedLabel": "2026-11-19T06:07:04.000Z",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111913361598072_1.jpg",
+          "expansionSeed": "장윤정",
+          "ago": "15분 전",
+          "agoMinutes": 15,
+          "publishedLabel": "2026-11-19T06:54:38.000Z",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111915335122373_1.jpg",
           "insight": {
             "titles": {
-              "seo": "영탁, 스타랭킹 남자트롯 2위 '굳건' 최신 이슈와 핵심 내용 정리",
-              "home": "영탁, 스타랭킹 남자트롯 2위 '굳건', 영탁, 스타랭킹 남자트롯 2위 '굳건' 관련 확인할 점",
-              "topic": "영탁, 스타랭킹 남자트롯 2위 '굳건'",
+              "seo": "'투자 사기 구속' 장윤정母 \"잘못했습니다\" 눈물..징역 1년 6개월 구형 최신 이슈와 핵심 내용 정리",
+              "home": "'투자 사기 구속' 장윤정母 \"잘못했습니다\" 눈물..징역 1년 6개월 구형, '투자 사기 구속' 장윤정母 \"잘못했습니다\" 눈물..징역 1년 6개월 구형 관련 확인할 점",
+              "topic": "'투자 사기 구속' 장윤정母 \"잘못했습니다\" 눈물..징역 1년 6개월 구형",
               "topicGroup": "이슈 실시간 검색어"
             },
             "facts": [
               {
-                "text": "스타뉴스 최신 기사 · 영탁, 스타랭킹 남자트롯 2위 '굳건'",
+                "text": "스타뉴스 최신 기사 · '투자 사기 구속' 장윤정母 \"잘못했습니다\" 눈물..징역 1년 6개월 구형",
                 "sourceIndex": 0
               },
               {
-                "text": "영탁 은 지난 4월 30일 오후 3시 1분부터 5월 7일 오후 3시까지 진행된 247차 스타랭킹 스타 트롯 남자 랭킹 투표에서 22만 179표를 획득하며 가장 높은 득표수를 기록했다. 영탁 은 변함없는 팬덤 화력을 바탕으로 또 한 번 정상 자리를 지켜냈다.",
+                "text": "씨에게 징역 1년 6개월 을 구형 했다. 검찰은 \"비슷한 수법의 사기 로 실형을 산 전력이 있는데도 재차 범행을 저질렀다\"고 지적했다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.starnewskorea.com/music/2026/11/19/2026111913361598072",
+                "url": "https://www.starnewskorea.com/star/2026/11/19/2026111915335122373",
                 "press": "스타뉴스"
               },
               {
-                "url": "https://www.starnewskorea.com/music/2026/05/07/2026050715194159169",
-                "press": "스타뉴스"
+                "url": "https://www.tvreport.co.kr/entertainment/article/1084173/",
+                "press": "TV리포트"
               }
             ],
             "images": [
-              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F108%2F2026%2F05%2F07%2F3433504.jpg&type=fface200_200&expire=2&refresh=true"
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F213%2F2026%2F10%2F19%2F1405154.jpg&type=fface200_200&expire=2&refresh=true"
             ],
             "press": [
-              "스타뉴스"
+              "스타뉴스",
+              "TV리포트"
             ],
             "headlines": [
-              "영탁, 스타랭킹 남자트롯 2위 '굳건'",
-              "믿고 보는 영탁 파워.. 스타랭킹 男 트롯 1위 '굳건'"
+              "'투자 사기 구속' 장윤정母 \"잘못했습니다\" 눈물..징역 1년 6개월 구형",
+              "또 사기 혐의… 장윤정 母 , ' 징역 10개월' 불복→\"생활비 필요했다\" 11월..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T06:12:10.836Z"
+            "collectedAt": "2026-11-19T07:10:32.941Z"
           }
         },
         {
           "id": "issue-3",
           "rank": 3,
-          "keyword": "18만 넘사벽..박서진, 스타랭킹 남자트롯 10주 연속 1위",
-          "title": "18만 넘사벽..박서진, 스타랭킹 남자트롯 10주 연속 1위",
-          "rawKeyword": "18만 넘사벽..박서진, 스타랭킹 남자트롯 10주 연속 1위",
-          "description": "스타뉴스 최신 기사 · 18만 넘사벽..박서진, 스타랭킹 남자트롯 10주 연속 1위",
+          "keyword": "김대범, '리트 만점자' 이진우 사망 소식에 씁쓸 \"왜 이런 선택을\"",
+          "title": "김대범, '리트 만점자' 이진우 사망 소식에 씁쓸 \"왜 이런 선택을\"",
+          "rawKeyword": "김대범, '리트 만점자' 이진우 사망 소식에 씁쓸 \"왜 이런 선택을\"",
+          "description": "스타뉴스 최신 기사 · 김대범, '리트 만점자' 이진우 사망 소식에 씁쓸 \"왜 이런 선택을\"",
           "priority": 98,
           "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/music/2026/11/19/2026111913360529333",
+          "officialUrl": "https://www.starnewskorea.com/star/2026/11/19/2026111915412993692",
           "sourceLabel": "스타뉴스",
           "expansions": [
-            "스타랭킹 1위",
-            "18만달러",
-            "18만엔",
-            "18만동",
-            "18만위안",
-            "18만불",
-            "18만페소",
-            "18만유로"
+            "이진우 리트",
+            "이진우 나무위키",
+            "이진우 책",
+            "리트 만점자 이진우",
+            "리트 이진우",
+            "이진우 ai",
+            "이진우 인스타",
+            "개그맨 김대범"
           ],
-          "expansionSeed": "18만",
-          "ago": "4분 전",
-          "agoMinutes": 4,
-          "publishedLabel": "2026-11-19T06:06:09.000Z",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111913360529333_1.jpg",
+          "expansionSeed": "김대범",
+          "ago": "15분 전",
+          "agoMinutes": 15,
+          "publishedLabel": "2026-11-19T06:54:19.000Z",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111915412993692_1.jpg",
           "insight": {
             "titles": {
-              "seo": "18만 넘사벽..박서진, 스타랭킹 남자트롯 10주 연속 1위 최신 이슈와 핵심 내용 정리",
-              "home": "18만 넘사벽..박서진, 스타랭킹 남자트롯 10주 연속 1위, 18만 넘사벽..박서진, 스타랭킹 남자트롯 10주 연속 1위 관련 확인할 점",
-              "topic": "18만 넘사벽..박서진, 스타랭킹 남자트롯 10주 연속 1위",
+              "seo": "김대범, '리트 만점자' 이진우 사망 소식에 씁쓸 \"왜 이런 선택을\" 최신 이슈와 핵심 내용 정리",
+              "home": "김대범, '리트 만점자' 이진우 사망 소식에 씁쓸 \"왜 이런 선택을\", 김대범, '리트 만점자' 이진우 사망 소식에 씁쓸 \"왜 이런 선택을\" 관련 확인할 점",
+              "topic": "김대범, '리트 만점자' 이진우 사망 소식에 씁쓸 \"왜 이런 선택을\"",
               "topicGroup": "이슈 실시간 검색어"
             },
             "facts": [
               {
-                "text": "스타뉴스 최신 기사 · 18만 넘사벽..박서진, 스타랭킹 남자트롯 10주 연속 1위",
+                "text": "스타뉴스 최신 기사 · 김대범, '리트 만점자' 이진우 사망 소식에 씁쓸 \"왜 이런 선택을\"",
                 "sourceIndex": 0
               }
             ],
             "links": [
               {
-                "url": "https://www.starnewskorea.com/music/2026/11/19/2026111913360529333",
+                "url": "https://www.starnewskorea.com/star/2026/11/19/2026111915412993692",
                 "press": "스타뉴스"
               }
             ],
             "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111913360529333_1.jpg"
+              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111915412993692_1.jpg"
             ],
             "press": [
               "스타뉴스"
             ],
             "headlines": [
-              "18만 넘사벽..박서진, 스타랭킹 남자트롯 10주 연속 1위"
+              "김대범, '리트 만점자' 이진우 사망 소식에 씁쓸 \"왜 이런 선택을\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T06:12:10.836Z"
+            "collectedAt": "2026-11-19T07:10:32.941Z"
           }
         },
         {
           "id": "issue-4",
           "rank": 4,
-          "keyword": "\"'심정지' 이진우, 숨지더라도 수사 계속..공범 가능성\" 현직 변호사가 바라본 부정행위 의혹",
-          "title": "\"'심정지' 이진우, 숨지더라도 수사 계속..공범 가능성\" 현직 변호사가 바라본 부정행위 의혹",
-          "rawKeyword": "\"'심정지' 이진우, 숨지더라도 수사 계속..공범 가능성\" 현직 변호사가 바라본 부정행위 의혹",
-          "description": "스타뉴스 최신 기사 · \"'심정지' 이진우, 숨지더라도 수사 계속..공범 가능성\" 현직 변호사가 바라본 부정행위 의혹",
+          "keyword": "안효섭, '파이널 테이블' 호연→韓 배우 최초 '키즈 초이스 어워즈' 수상",
+          "title": "안효섭, '파이널 테이블' 호연→韓 배우 최초 '키즈 초이스 어워즈' 수상",
+          "rawKeyword": "안효섭, '파이널 테이블' 호연→韓 배우 최초 '키즈 초이스 어워즈' 수상",
+          "description": "스타뉴스 최신 기사 · 안효섭, '파이널 테이블' 호연→韓 배우 최초 '키즈 초이스 어워즈' 수상",
           "priority": 97,
           "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/star/2026/11/19/2026111914423477262",
+          "officialUrl": "https://www.starnewskorea.com/star/2026/11/19/2026111915470824358",
           "sourceLabel": "스타뉴스",
           "expansions": [
-            "의혹 뜻",
-            "표절의혹",
-            "세무사 의혹",
-            "세무사 수석 의혹",
-            "의혹 영어로",
-            "의혹 한자로",
-            "의혹하다 뜻",
-            "의혹을 가지다"
+            "배우안효섭",
+            "수상한 파트너",
+            "수상 뜻",
+            "수상구조사",
+            "수상한그녀",
+            "수상한 PT샵",
+            "mma 수상",
+            "mma 수상자"
           ],
-          "expansionSeed": "심정지",
-          "ago": "4분 전",
-          "agoMinutes": 4,
-          "publishedLabel": "2026-11-19T06:05:45.000Z",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111914423477262_1.jpg",
+          "expansionSeed": "안효섭",
+          "ago": "17분 전",
+          "agoMinutes": 17,
+          "publishedLabel": "2026-11-19T06:52:44.000Z",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111915470824358_1.jpg",
           "insight": {
             "titles": {
-              "seo": "\"'심정지' 이진우, 숨지더라도 수사 계속..공범 가능성\" 현직 변호사가 바라본 부정행위 의혹 최신 이슈와 핵심 내용 정리",
-              "home": "\"'심정지' 이진우, 숨지더라도 수사 계속..공범 가능성\" 현직 변호사가 바라본 부정행위 의혹, \"'심정지' 이진우, 숨지더라도 수사 계속..공범 가능성\" 현직 변호사가 바라본 부정행위 의혹 관련 확인할 점",
-              "topic": "\"'심정지' 이진우, 숨지더라도 수사 계속..공범 가능성\" 현직 변호사가 바라본 부정행위 의혹",
+              "seo": "안효섭, '파이널 테이블' 호연→韓 배우 최초 '키즈 초이스 어워즈' 수상 최신 이슈와 핵심 내용 정리",
+              "home": "안효섭, '파이널 테이블' 호연→韓 배우 최초 '키즈 초이스 어워즈' 수상, 안효섭, '파이널 테이블' 호연→韓 배우 최초 '키즈 초이스 어워즈' 수상 관련 확인할 점",
+              "topic": "안효섭, '파이널 테이블' 호연→韓 배우 최초 '키즈 초이스 어워즈' 수상",
               "topicGroup": "이슈 실시간 검색어"
             },
             "facts": [
               {
-                "text": "스타뉴스 최신 기사 · \"'심정지' 이진우, 숨지더라도 수사 계속..공범 가능성\" 현직 변호사가 바라본 부정행위 의혹",
+                "text": "스타뉴스 최신 기사 · 안효섭, '파이널 테이블' 호연→韓 배우 최초 '키즈 초이스 어워즈' 수상",
                 "sourceIndex": 0
               }
             ],
             "links": [
               {
-                "url": "https://www.starnewskorea.com/star/2026/11/19/2026111914423477262",
+                "url": "https://www.starnewskorea.com/star/2026/11/19/2026111915470824358",
                 "press": "스타뉴스"
               }
             ],
             "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111914423477262_1.jpg"
+              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111915470824358_1.jpg"
             ],
             "press": [
               "스타뉴스"
             ],
             "headlines": [
-              "\"'심정지' 이진우, 숨지더라도 수사 계속..공범 가능성\" 현직 변호사가 바라본 부정행위 의혹"
+              "안효섭, '파이널 테이블' 호연→韓 배우 최초 '키즈 초이스 어워즈' 수상"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T06:12:10.836Z"
+            "collectedAt": "2026-11-19T07:10:32.941Z"
           }
         },
         {
           "id": "issue-5",
           "rank": 5,
-          "keyword": "최동석, 박지윤에 맞불 \"성소수자 지인? 법원은 혼인 파탄 원인 판단\"",
-          "title": "최동석, 박지윤에 맞불 \"성소수자 지인? 법원은 혼인 파탄 원인 판단\"",
-          "rawKeyword": "최동석, 박지윤에 맞불 \"성소수자 지인? 법원은 혼인 파탄 원인 판단\"",
-          "description": "스타뉴스 최신 기사 · 최동석, 박지윤에 맞불 \"성소수자 지인? 법원은 혼인 파탄 원인 판단\"",
+          "keyword": "사망 이진우 \"몸과 맘 지쳐\" 유서 추정 메모..'리트 만점' 부정행위 해명은 없었다",
+          "title": "사망 이진우 \"몸과 맘 지쳐\" 유서 추정 메모..'리트 만점' 부정행위 해명은 없었다",
+          "rawKeyword": "사망 이진우 \"몸과 맘 지쳐\" 유서 추정 메모..'리트 만점' 부정행위 해명은 없었다",
+          "description": "스타뉴스 최신 기사 · 사망 이진우 \"몸과 맘 지쳐\" 유서 추정 메모..'리트 만점' 부정행위 해명은 없었다",
           "priority": 96,
           "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/star/2026/11/19/2026111914443830721",
+          "officialUrl": "https://www.starnewskorea.com/star/2026/11/19/2026111915304316433",
           "sourceLabel": "스타뉴스",
           "expansions": [
-            "최동석 박지윤",
-            "최동석 아나운서",
-            "최동석소아과",
-            "최동석 인스타",
-            "박지윤 최동석",
-            "최동석 상간 소송",
-            "최동석 승소",
-            "박지윤 최동석 카톡"
+            "이진우 리트",
+            "이진우 나무위키",
+            "이진우 책",
+            "리트 만점자 이진우",
+            "리트 이진우",
+            "이진우 ai",
+            "이진우 인스타",
+            "이진우 해명"
           ],
-          "expansionSeed": "최동석",
-          "ago": "12분 전",
-          "agoMinutes": 12,
-          "publishedLabel": "2026-11-19T05:58:10.000Z",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111914443830721_1.jpg",
+          "expansionSeed": "이진우",
+          "ago": "21분 전",
+          "agoMinutes": 21,
+          "publishedLabel": "2026-11-19T06:48:10.000Z",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111915304316433_1.jpg",
           "insight": {
             "titles": {
-              "seo": "최동석, 박지윤에 맞불 \"성소수자 지인? 법원은 혼인 파탄 원인 판단\" 최신 이슈와 핵심 내용 정리",
-              "home": "최동석, 박지윤에 맞불 \"성소수자 지인? 법원은 혼인 파탄 원인 판단\", 최동석, 박지윤에 맞불 \"성소수자 지인? 법원은 혼인 파탄 원인 판단\" 관련 확인할 점",
-              "topic": "최동석, 박지윤에 맞불 \"성소수자 지인? 법원은 혼인 파탄 원인 판단\"",
+              "seo": "사망 이진우 \"몸과 맘 지쳐\" 유서 추정 메모..'리트 만점' 부정행위 해명은 없었다 최신 이슈와 핵심 내용 정리",
+              "home": "사망 이진우 \"몸과 맘 지쳐\" 유서 추정 메모..'리트 만점' 부정행위 해명은 없었다, 사망 이진우 \"몸과 맘 지쳐\" 유서 추정 메모..'리트 만점' 부정행위 해명은 없었다 관련 확인할 점",
+              "topic": "사망 이진우 \"몸과 맘 지쳐\" 유서 추정 메모..'리트 만점' 부정행위 해명은 없었다",
               "topicGroup": "이슈 실시간 검색어"
             },
             "facts": [
               {
-                "text": "스타뉴스 최신 기사 · 최동석, 박지윤에 맞불 \"성소수자 지인? 법원은 혼인 파탄 원인 판단\"",
+                "text": "스타뉴스 최신 기사 · 사망 이진우 \"몸과 맘 지쳐\" 유서 추정 메모..'리트 만점' 부정행위 해명은 없었다",
                 "sourceIndex": 0
               }
             ],
             "links": [
               {
-                "url": "https://www.starnewskorea.com/star/2026/11/19/2026111914443830721",
+                "url": "https://www.starnewskorea.com/star/2026/11/19/2026111915304316433",
                 "press": "스타뉴스"
               }
             ],
             "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111914443830721_1.jpg"
+              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111915304316433_1.jpg"
             ],
             "press": [
               "스타뉴스"
             ],
             "headlines": [
-              "최동석, 박지윤에 맞불 \"성소수자 지인? 법원은 혼인 파탄 원인 판단\""
+              "사망 이진우 \"몸과 맘 지쳐\" 유서 추정 메모..'리트 만점' 부정행위 해명은 없었다"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T06:12:10.836Z"
+            "collectedAt": "2026-11-19T07:10:32.941Z"
           }
         },
         {
           "id": "issue-6",
           "rank": 6,
-          "keyword": "'궁금한 이야기Y' 나섰다..'리트 만점' 이진우 취재 \"피해 제보 부탁\"",
-          "title": "'궁금한 이야기Y' 나섰다..'리트 만점' 이진우 취재 \"피해 제보 부탁\"",
-          "rawKeyword": "'궁금한 이야기Y' 나섰다..'리트 만점' 이진우 취재 \"피해 제보 부탁\"",
-          "description": "스타뉴스 최신 기사 · '궁금한 이야기Y' 나섰다..'리트 만점' 이진우 취재 \"피해 제보 부탁\"",
+          "keyword": "손태진, 1월 9·10일 전국투어 콘서트 'Bon Voyage' 서울 시작..19일 팬카페 선예매",
+          "title": "손태진, 1월 9·10일 전국투어 콘서트 'Bon Voyage' 서울 시작..19일 팬카페 선예매",
+          "rawKeyword": "손태진, 1월 9·10일 전국투어 콘서트 'Bon Voyage' 서울 시작..19일 팬카페 선예매",
+          "description": "스타뉴스 최신 기사 · 손태진, 1월 9·10일 전국투어 콘서트 'Bon Voyage' 서울 시작..19일 팬카페 선예매",
           "priority": 95,
           "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/star/2026/11/19/2026111914110146162",
+          "officialUrl": "https://www.starnewskorea.com/music/2026/11/19/2026111915411740436",
           "sourceLabel": "스타뉴스",
           "expansions": [
-            "이진우 리트",
-            "이진우 나무위키",
-            "이진우 책",
-            "리트 만점자 이진우",
-            "리트 이진우",
-            "이진우 ai",
-            "이진우 인스타",
-            "이진욱"
+            "태연 콘서트 선예매",
+            "손태진팬카페",
+            "손태진 콘서트",
+            "성시경 선예매",
+            "요아소비 선예매",
+            "크러쉬 선예매",
+            "태연 선예매",
+            "위버스 선예매"
           ],
-          "expansionSeed": "이진우",
-          "ago": "42분 전",
-          "agoMinutes": 42,
-          "publishedLabel": "2026-11-19T05:27:47.000Z",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111914110146162_1.jpg",
+          "expansionSeed": "손태진",
+          "ago": "24분 전",
+          "agoMinutes": 24,
+          "publishedLabel": "2026-11-19T06:45:20.000Z",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111915411740436_1.jpg",
           "insight": {
             "titles": {
-              "seo": "'궁금한 이야기Y' 나섰다..'리트 만점' 이진우 취재 \"피해 제보 부탁\" 최신 이슈와 핵심 내용 정리",
-              "home": "'궁금한 이야기Y' 나섰다..'리트 만점' 이진우 취재 \"피해 제보 부탁\", '궁금한 이야기Y' 나섰다..'리트 만점' 이진우 취재 \"피해 제보 부탁\" 관련 확인할 점",
-              "topic": "'궁금한 이야기Y' 나섰다..'리트 만점' 이진우 취재 \"피해 제보 부탁\"",
+              "seo": "손태진, 1월 9·10일 전국투어 콘서트 'Bon Voyage' 서울 시작..19일 팬카페 선예매 최신 이슈와 핵심 내용 정리",
+              "home": "손태진, 1월 9·10일 전국투어 콘서트 'Bon Voyage' 서울 시작..19일 팬카페 선예매, 손태진, 1월 9·10일 전국투어 콘서트 'Bon Voyage' 서울 시작..19일 팬카페 선예매 관련 확인할 점",
+              "topic": "손태진, 1월 9·10일 전국투어 콘서트 'Bon Voyage' 서울 시작..19일 팬카페 선예매",
               "topicGroup": "이슈 실시간 검색어"
             },
             "facts": [
               {
-                "text": "스타뉴스 최신 기사 · '궁금한 이야기Y' 나섰다..'리트 만점' 이진우 취재 \"피해 제보 부탁\"",
+                "text": "스타뉴스 최신 기사 · 손태진, 1월 9·10일 전국투어 콘서트 'Bon Voyage' 서울 시작..19일 팬카페 선예매",
                 "sourceIndex": 0
+              },
+              {
+                "text": "'2027 손태진 전국투어 콘서트 'Bon Voyage' '는 \"뜨거웠던 계절을 지나 감동의 선율로 다시 하나 되는 우리, 새해의 첫 페이지를 빛낼 찬란한 항해\"라는 주제로 진행된다. 19일 오후 7시 NOL티켓을 통해 팬카페 대상 선예매 가 시작 된다.",
+                "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.starnewskorea.com/star/2026/11/19/2026111914110146162",
+                "url": "https://www.starnewskorea.com/music/2026/11/19/2026111915411740436",
                 "press": "스타뉴스"
+              },
+              {
+                "url": "https://mhnse.com/news/articleView.html?idxno=1702844",
+                "press": "MHN스포츠"
               }
             ],
             "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111914110146162_1.jpg"
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F445%2F2026%2F11%2F19%2F491608.jpg&type=fface200_200&expire=2&refresh=true"
             ],
             "press": [
-              "스타뉴스"
+              "스타뉴스",
+              "MHN스포츠"
             ],
             "headlines": [
-              "'궁금한 이야기Y' 나섰다..'리트 만점' 이진우 취재 \"피해 제보 부탁\""
+              "손태진, 1월 9·10일 전국투어 콘서트 'Bon Voyage' 서울 시작..19일 팬카페 선예매",
+              "손태진, 새해맞이 전국투어 … \"새해의 첫 페이지를 빛낼 찬란한 항해\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T06:12:10.836Z"
+            "collectedAt": "2026-11-19T07:10:32.941Z"
           }
         },
         {
           "id": "issue-7",
           "rank": 7,
-          "keyword": "백지연, 이진우 심정지 상태로 발견되자 영상 '빛삭'..사라진 부정 의혹 전 인터뷰",
-          "title": "백지연, 이진우 심정지 상태로 발견되자 영상 '빛삭'..사라진 부정 의혹 전 인터뷰",
-          "rawKeyword": "백지연, 이진우 심정지 상태로 발견되자 영상 '빛삭'..사라진 부정 의혹 전 인터뷰",
-          "description": "스타뉴스 최신 기사 · 백지연, 이진우 심정지 상태로 발견되자 영상 '빛삭'..사라진 부정 의혹 전 인터뷰",
+          "keyword": "하니, 스타랭킹 女아이돌 3위..뉴진스 줄 세우기 성공",
+          "title": "하니, 스타랭킹 女아이돌 3위..뉴진스 줄 세우기 성공",
+          "rawKeyword": "하니, 스타랭킹 女아이돌 3위..뉴진스 줄 세우기 성공",
+          "description": "스타뉴스 최신 기사 · 하니, 스타랭킹 女아이돌 3위..뉴진스 줄 세우기 성공",
           "priority": 94,
           "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/star/2026/11/19/2026111914103824279",
+          "officialUrl": "https://www.starnewskorea.com/music/2026/11/19/2026111915214987213",
           "sourceLabel": "스타뉴스",
           "expansions": [
-            "이진우 리트",
-            "이진우 나무위키",
-            "이진우 책",
-            "리트 만점자 이진우",
-            "리트 이진우",
-            "이진우 ai",
-            "이진우 인스타",
-            "심정지 전조증상"
+            "성공회대학교",
+            "성공회",
+            "성공회대",
+            "성공 영어로",
+            "취업성공수당",
+            "성공률",
+            "취업성공패키지",
+            "팔공산 성공식당"
           ],
-          "expansionSeed": "백지연",
-          "ago": "42분 전",
-          "agoMinutes": 42,
-          "publishedLabel": "2026-11-19T05:27:47.000Z",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111914103824279_1.jpg",
+          "expansionSeed": "하니",
+          "ago": "29분 전",
+          "agoMinutes": 29,
+          "publishedLabel": "2026-11-19T06:40:36.000Z",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111915214987213_1.jpg",
           "insight": {
             "titles": {
-              "seo": "백지연, 이진우 심정지 상태로 발견되자 영상 '빛삭'..사라진 부정 의혹 전 인터뷰 최신 이슈와 핵심 내용 정리",
-              "home": "백지연, 이진우 심정지 상태로 발견되자 영상 '빛삭'..사라진 부정 의혹 전 인터뷰, 백지연, 이진우 심정지 상태로 발견되자 영상 '빛삭'..사라진 부정 의혹 전 인터뷰 관련 확인할 점",
-              "topic": "백지연, 이진우 심정지 상태로 발견되자 영상 '빛삭'..사라진 부정 의혹 전 인터뷰",
+              "seo": "하니, 스타랭킹 女아이돌 3위..뉴진스 줄 세우기 성공 최신 이슈와 핵심 내용 정리",
+              "home": "하니, 스타랭킹 女아이돌 3위..뉴진스 줄 세우기 성공, 하니, 스타랭킹 女아이돌 3위..뉴진스 줄 세우기 성공 관련 확인할 점",
+              "topic": "하니, 스타랭킹 女아이돌 3위..뉴진스 줄 세우기 성공",
               "topicGroup": "이슈 실시간 검색어"
             },
             "facts": [
               {
-                "text": "스타뉴스 최신 기사 · 백지연, 이진우 심정지 상태로 발견되자 영상 '빛삭'..사라진 부정 의혹 전 인터뷰",
+                "text": "스타뉴스 최신 기사 · 하니, 스타랭킹 女아이돌 3위..뉴진스 줄 세우기 성공",
                 "sourceIndex": 0
               }
             ],
             "links": [
               {
-                "url": "https://www.starnewskorea.com/star/2026/11/19/2026111914103824279",
+                "url": "https://www.starnewskorea.com/music/2026/11/19/2026111915214987213",
                 "press": "스타뉴스"
               }
             ],
             "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111914103824279_1.jpg"
+              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111915214987213_1.jpg"
             ],
             "press": [
               "스타뉴스"
             ],
             "headlines": [
-              "백지연, 이진우 심정지 상태로 발견되자 영상 '빛삭'..사라진 부정 의혹 전 인터뷰"
+              "하니, 스타랭킹 女아이돌 3위..뉴진스 줄 세우기 성공"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T06:12:10.836Z"
+            "collectedAt": "2026-11-19T07:10:32.941Z"
           }
         },
         {
           "id": "issue-8",
           "rank": 8,
-          "keyword": "'이세영 子 친부', 충격 정체..'재혼황후' 측 \"기리보이 출연 맞다\"",
-          "title": "'이세영 子 친부', 충격 정체..'재혼황후' 측 \"기리보이 출연 맞다\"",
-          "rawKeyword": "'이세영 子 친부', 충격 정체..'재혼황후' 측 \"기리보이 출연 맞다\"",
-          "description": "스타뉴스 최신 기사 · '이세영 子 친부', 충격 정체..'재혼황후' 측 \"기리보이 출연 맞다\"",
+          "keyword": "뉴진스 해린, 1위 민지 이어 스타랭킹 女아이돌 2위",
+          "title": "뉴진스 해린, 1위 민지 이어 스타랭킹 女아이돌 2위",
+          "rawKeyword": "뉴진스 해린, 1위 민지 이어 스타랭킹 女아이돌 2위",
+          "description": "스타뉴스 최신 기사 · 뉴진스 해린, 1위 민지 이어 스타랭킹 女아이돌 2위",
           "priority": 93,
           "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/star/2026/11/19/2026111913504167855",
+          "officialUrl": "https://www.starnewskorea.com/music/2026/11/19/2026111915214248350",
           "sourceLabel": "스타뉴스",
           "expansions": [
-            "이세영 배우",
-            "이세영 나무위키",
-            "이세영 아역",
-            "이세영 켄타로",
-            "이세영 개그우먼",
-            "이세영 라스타",
-            "이세영패딩",
-            "이세영갤"
+            "뉴진스 민지",
+            "뉴진스 다니엘",
+            "뉴진스 나무위키",
+            "뉴진스 복귀",
+            "뉴진스 해린",
+            "뉴진스 하니",
+            "뉴진스 혜인",
+            "뉴진스님"
           ],
-          "expansionSeed": "이세영",
-          "ago": "50분 전",
-          "agoMinutes": 50,
-          "publishedLabel": "2026-11-19T05:19:43.000Z",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111913504167855_1.jpg",
+          "expansionSeed": "뉴진스",
+          "ago": "30분 전",
+          "agoMinutes": 30,
+          "publishedLabel": "2026-11-19T06:39:36.000Z",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111915214248350_1.jpg",
           "insight": {
             "titles": {
-              "seo": "'이세영 子 친부', 충격 정체..'재혼황후' 측 \"기리보이 출연 맞다\" 최신 이슈와 핵심 내용 정리",
-              "home": "'이세영 子 친부', 충격 정체..'재혼황후' 측 \"기리보이 출연 맞다\", '이세영 子 친부', 충격 정체..'재혼황후' 측 \"기리보이 출연 맞다\" 관련 확인할 점",
-              "topic": "'이세영 子 친부', 충격 정체..'재혼황후' 측 \"기리보이 출연 맞다\"",
+              "seo": "뉴진스 해린, 1위 민지 이어 스타랭킹 女아이돌 2위 최신 이슈와 핵심 내용 정리",
+              "home": "뉴진스 해린, 1위 민지 이어 스타랭킹 女아이돌 2위, 뉴진스 해린, 1위 민지 이어 스타랭킹 女아이돌 2위 관련 확인할 점",
+              "topic": "뉴진스 해린, 1위 민지 이어 스타랭킹 女아이돌 2위",
               "topicGroup": "이슈 실시간 검색어"
             },
             "facts": [
               {
-                "text": "스타뉴스 최신 기사 · '이세영 子 친부', 충격 정체..'재혼황후' 측 \"기리보이 출연 맞다\"",
+                "text": "스타뉴스 최신 기사 · 뉴진스 해린, 1위 민지 이어 스타랭킹 女아이돌 2위",
                 "sourceIndex": 0
+              },
+              {
+                "text": "그룹 뉴진스 민지 가 26주 연속 스타랭킹 스타 아이돌 여자 랭킹 1위 를 수성했다. 민지 는 지난 5일 오후 3시 1분부터 12일 오후 3시까지 진행된 263차 스타랭킹 스타 아이돌 여자 랭킹 투표에서 1만 7647표를 얻어 정상을 지켰다.",
+                "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.starnewskorea.com/star/2026/11/19/2026111913504167855",
+                "url": "https://www.starnewskorea.com/music/2026/11/19/2026111915214248350",
+                "press": "스타뉴스"
+              },
+              {
+                "url": "https://www.starnewskorea.com/star/2026/11/12/2026111217024553698",
                 "press": "스타뉴스"
               }
             ],
             "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111913504167855_1.jpg"
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F108%2F2026%2F11%2F12%2F3486995.jpg&type=fface200_200&expire=2&refresh=true"
             ],
             "press": [
               "스타뉴스"
             ],
             "headlines": [
-              "'이세영 子 친부', 충격 정체..'재혼황후' 측 \"기리보이 출연 맞다\""
+              "뉴진스 해린, 1위 민지 이어 스타랭킹 女아이돌 2위",
+              "뉴진스 민지 , 매주 신기록 쓰는 중..26주 연속 스타랭킹 女아이돌 1위"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T06:12:10.836Z"
+            "collectedAt": "2026-11-19T07:10:32.941Z"
           }
         },
         {
           "id": "issue-9",
           "rank": 9,
-          "keyword": "마흔살 된 '오페라의 유령'..뮤지컬 전설이 말하는 \"로맨스, 이야기\"",
-          "title": "마흔살 된 '오페라의 유령'..뮤지컬 전설이 말하는 \"로맨스, 이야기\"",
-          "rawKeyword": "마흔살 된 '오페라의 유령'..뮤지컬 전설이 말하는 \"로맨스, 이야기\"",
-          "description": "스타뉴스 최신 기사 · 마흔살 된 '오페라의 유령'..뮤지컬 전설이 말하는 \"로맨스, 이야기\"",
+          "keyword": "민지, 뉴진스 리더의 존재감..'27주 연속' 스타랭킹 女아이돌 1위",
+          "title": "민지, 뉴진스 리더의 존재감..'27주 연속' 스타랭킹 女아이돌 1위",
+          "rawKeyword": "민지, 뉴진스 리더의 존재감..'27주 연속' 스타랭킹 女아이돌 1위",
+          "description": "스타뉴스 최신 기사 · 민지, 뉴진스 리더의 존재감..'27주 연속' 스타랭킹 女아이돌 1위",
           "priority": 92,
           "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/star/2026/11/19/2026111912100969553",
+          "officialUrl": "https://www.starnewskorea.com/music/2026/11/19/2026111915211418402",
           "sourceLabel": "스타뉴스",
           "expansions": [
-            "마흔살 뜻",
-            "마흔살 띠",
-            "마흔살에 읽는 쇼펜",
-            "마흔살 남자",
-            "마흔살에",
-            "마흔살 케이크",
-            "마흔살의",
-            "마흔살쯤에"
+            "뉴진스 민지",
+            "1위안",
+            "1위안 환율",
+            "1위안 한국돈",
+            "뮤직뱅크 1위",
+            "인기가요1위",
+            "음중 1위",
+            "음악중심 1위"
           ],
-          "expansionSeed": "오페라",
-          "ago": "1시간 전",
-          "agoMinutes": 60,
-          "publishedLabel": "2026-11-19T05:00:00.000Z",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111912100969553_1.jpg",
+          "expansionSeed": "민지",
+          "ago": "30분 전",
+          "agoMinutes": 30,
+          "publishedLabel": "2026-11-19T06:38:50.000Z",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111915211418402_1.jpg",
           "insight": {
             "titles": {
-              "seo": "마흔살 된 '오페라의 유령'..뮤지컬 전설이 말하는 \"로맨스, 이야기\" 최신 이슈와 핵심 내용 정리",
-              "home": "마흔살 된 '오페라의 유령'..뮤지컬 전설이 말하는 \"로맨스, 이야기\", 마흔살 된 '오페라의 유령'..뮤지컬 전설이 말하는 \"로맨스, 이야기\" 관련 확인할 점",
-              "topic": "마흔살 된 '오페라의 유령'..뮤지컬 전설이 말하는 \"로맨스, 이야기\"",
+              "seo": "민지, 뉴진스 리더의 존재감..'27주 연속' 스타랭킹 女아이돌 1위 최신 이슈와 핵심 내용 정리",
+              "home": "민지, 뉴진스 리더의 존재감..'27주 연속' 스타랭킹 女아이돌 1위, 민지, 뉴진스 리더의 존재감..'27주 연속' 스타랭킹 女아이돌 1위 관련 확인할 점",
+              "topic": "민지, 뉴진스 리더의 존재감..'27주 연속' 스타랭킹 女아이돌 1위",
               "topicGroup": "이슈 실시간 검색어"
             },
             "facts": [
               {
-                "text": "스타뉴스 최신 기사 · 마흔살 된 '오페라의 유령'..뮤지컬 전설이 말하는 \"로맨스, 이야기\"",
+                "text": "스타뉴스 최신 기사 · 민지, 뉴진스 리더의 존재감..'27주 연속' 스타랭킹 女아이돌 1위",
                 "sourceIndex": 0
               }
             ],
             "links": [
               {
-                "url": "https://www.starnewskorea.com/star/2026/11/19/2026111912100969553",
+                "url": "https://www.starnewskorea.com/music/2026/11/19/2026111915211418402",
                 "press": "스타뉴스"
               }
             ],
             "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111912100969553_1.jpg"
+              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111915211418402_1.jpg"
             ],
             "press": [
               "스타뉴스"
             ],
             "headlines": [
-              "마흔살 된 '오페라의 유령'..뮤지컬 전설이 말하는 \"로맨스, 이야기\""
+              "민지, 뉴진스 리더의 존재감..'27주 연속' 스타랭킹 女아이돌 1위"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T06:12:10.836Z"
+            "collectedAt": "2026-11-19T07:10:32.941Z"
           }
         },
         {
           "id": "issue-10",
           "rank": 10,
-          "keyword": "'심정지 상태' 이진우, 묵었던 모텔에 찢어진 수험표·로프 포장지 발견",
-          "title": "'심정지 상태' 이진우, 묵었던 모텔에 찢어진 수험표·로프 포장지 발견",
-          "rawKeyword": "'심정지 상태' 이진우, 묵었던 모텔에 찢어진 수험표·로프 포장지 발견",
-          "description": "스타뉴스 최신 기사 · '심정지 상태' 이진우, 묵었던 모텔에 찢어진 수험표·로프 포장지 발견",
+          "keyword": "김다현, 트롯 요정의 꾸준한 인기..스타랭킹 女트롯 3위",
+          "title": "김다현, 트롯 요정의 꾸준한 인기..스타랭킹 女트롯 3위",
+          "rawKeyword": "김다현, 트롯 요정의 꾸준한 인기..스타랭킹 女트롯 3위",
+          "description": "스타뉴스 최신 기사 · 김다현, 트롯 요정의 꾸준한 인기..스타랭킹 女트롯 3위",
           "priority": 91,
           "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/star/2026/11/19/2026111913394016348",
+          "officialUrl": "https://www.starnewskorea.com/music/2026/11/19/2026111915303862328",
           "sourceLabel": "스타뉴스",
           "expansions": [
-            "놀이의발견",
-            "연애의 발견",
-            "숨진채발견",
-            "생활의 발견",
-            "셰프의 발견 통영",
-            "주식의발견",
-            "셰프의발견",
-            "효소의발견 치약"
+            "3위안",
+            "3위안 가격",
+            "3위 결정전",
+            "3위일체 뜻",
+            "3위안 한화로",
+            "3위 일체",
+            "3위6위",
+            "3위 영어로"
           ],
-          "expansionSeed": "심정지",
-          "ago": "1시간 전",
-          "agoMinutes": 60,
-          "publishedLabel": "2026-11-19T04:59:17.000Z",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111913394016348_1.jpg",
+          "expansionSeed": "김다현",
+          "ago": "37분 전",
+          "agoMinutes": 37,
+          "publishedLabel": "2026-11-19T06:32:05.000Z",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111915303862328_1.jpg",
           "insight": {
             "titles": {
-              "seo": "'심정지 상태' 이진우, 묵었던 모텔에 찢어진 수험표·로프 포장지 발견 최신 이슈와 핵심 내용 정리",
-              "home": "'심정지 상태' 이진우, 묵었던 모텔에 찢어진 수험표·로프 포장지 발견, '심정지 상태' 이진우, 묵었던 모텔에 찢어진 수험표·로프 포장지 발견 관련 확인할 점",
-              "topic": "'심정지 상태' 이진우, 묵었던 모텔에 찢어진 수험표·로프 포장지 발견",
+              "seo": "김다현, 트롯 요정의 꾸준한 인기..스타랭킹 女트롯 3위 최신 이슈와 핵심 내용 정리",
+              "home": "김다현, 트롯 요정의 꾸준한 인기..스타랭킹 女트롯 3위, 김다현, 트롯 요정의 꾸준한 인기..스타랭킹 女트롯 3위 관련 확인할 점",
+              "topic": "김다현, 트롯 요정의 꾸준한 인기..스타랭킹 女트롯 3위",
               "topicGroup": "이슈 실시간 검색어"
             },
             "facts": [
               {
-                "text": "스타뉴스 최신 기사 · '심정지 상태' 이진우, 묵었던 모텔에 찢어진 수험표·로프 포장지 발견",
+                "text": "스타뉴스 최신 기사 · 김다현, 트롯 요정의 꾸준한 인기..스타랭킹 女트롯 3위",
                 "sourceIndex": 0
               }
             ],
             "links": [
               {
-                "url": "https://www.starnewskorea.com/star/2026/11/19/2026111913394016348",
+                "url": "https://www.starnewskorea.com/music/2026/11/19/2026111915303862328",
                 "press": "스타뉴스"
               }
             ],
             "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111913394016348_1.jpg"
+              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111915303862328_1.jpg"
             ],
             "press": [
               "스타뉴스"
             ],
             "headlines": [
-              "'심정지 상태' 이진우, 묵었던 모텔에 찢어진 수험표·로프 포장지 발견"
+              "김다현, 트롯 요정의 꾸준한 인기..스타랭킹 女트롯 3위"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T06:12:10.836Z"
+            "collectedAt": "2026-11-19T07:10:32.941Z"
           }
         }
       ]
     }
   ],
-  "updatedAt": "2026-11-19T06:14:37.631Z"
+  "updatedAt": "2026-11-19T07:11:40.620Z"
 }
