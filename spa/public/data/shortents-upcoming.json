@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T15:22:07.833Z",
+ "builtAt": "2026-11-19T15:32:11.071Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "영하 6도 제주 눈.",
@@ -16,7 +16,7 @@
     "signal.bz"
    ],
    "articles90": 12,
-   "recent20": 4,
+   "recent20": 0,
    "press": 12,
    "firstArticleAt": "2026-11-19T14:39:00.000Z",
    "exclusive": false,
@@ -35,10 +35,10 @@
      "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5085690"
     },
     {
-     "title": "[오늘날씨] 출근길 영하권 강추위…충청·호남 눈 소식, 일부 지역 최대...",
-     "press": "queen.co.kr",
+     "title": "[날씨] 아침 기온 전국 대부분 영하권‥ 전북 곳곳 대설주의보",
+     "press": "imnews.imbc.com",
      "publishedAt": "2026-11-19T15:06:00.000Z",
-     "link": "http://www.queen.co.kr/news/articleView.html?idxno=466582"
+     "link": "https://n.news.naver.com/mnews/article/214/0001536798?sid=102"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-19T14:02:00.000Z",
+   "articles90": 7,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-19T14:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[사설] 대법 “12·3 비상계엄은 위헌·위법”…여야 정쟁 멈춰야",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-19T15:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003566618?sid=110"
+    },
     {
      "title": "대법, 한덕수 일부 무죄취지 파기환송",
      "press": "ksilbo.co.kr",
@@ -65,12 +71,6 @@
      "press": "sedaily.com",
      "publishedAt": "2026-11-19T15:03:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/011/0004684186?sid=110"
-    },
-    {
-     "title": "김민석도 강공 돌아섰다…“대법 역사적 반역, 조희대 탄핵”",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-19T15:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003566562?sid=100"
     }
    ]
   },
@@ -79,13 +79,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 4,
+   "articles90": 6,
+   "recent20": 1,
+   "press": 5,
    "firstArticleAt": "2026-11-19T14:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "LG, 주요 CEO 유임 ‘안정 인사’… AI-로봇 인재는 대거 발탁",
+     "press": "donga.com",
+     "publishedAt": "2026-11-19T15:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003763802?sid=101"
+    },
     {
      "title": "LG그룹, 안정 속 쇄신 택했다…기술 인재는 전진 배치",
      "press": "joongang.co.kr",
@@ -97,12 +103,38 @@
      "press": "autodaily.co.kr",
      "publishedAt": "2026-11-19T15:00:00.000Z",
      "link": "https://www.autodaily.co.kr/news/articleView.html?idxno=602262"
+    }
+   ]
+  },
+  {
+   "keyword": "트럼프 아시아 순방 귀국",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-19T14:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프시진핑푸틴 첫 정상회담…'핵확산 방지ㆍ석유공급 확대' 확인",
+     "press": "pointdaily.co.kr",
+     "publishedAt": "2026-11-19T15:30:00.000Z",
+     "link": "https://www.pointdaily.co.kr/news/articleView.html?idxno=326741"
     },
     {
-     "title": "[인사] LG에너지솔루션",
-     "press": "meconomynews.com",
-     "publishedAt": "2026-11-19T14:24:00.000Z",
-     "link": "https://www.meconomynews.com/news/articleView.html?idxno=203919"
+     "title": "트럼프·시진핑·푸틴, 첫 3자 정상회담…핵위험 감소·정제유 공급 확...",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-19T14:06:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261119010007846"
+    },
+    {
+     "title": "미중러 정상 모두 만난 李대통령…순방 성과·남은 과제는",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-19T14:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003157438?sid=100"
     }
    ]
   },
@@ -111,10 +143,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 4,
-   "recent20": 1,
+   "articles90": 3,
+   "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-19T13:58:00.000Z",
+   "firstArticleAt": "2026-11-19T15:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -135,38 +167,6 @@
      "press": "coinreaders.com",
      "publishedAt": "2026-11-19T15:02:00.000Z",
      "link": "http://coinreaders.com/271770"
-    }
-   ]
-  },
-  {
-   "keyword": "인천 전 연인 둔기 살해 구속",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-19T14:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "접근금지 해제 뒤 전 연인 살해 혐의 60대 구속 “증거인멸·도주 우려”",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-19T14:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003566555?sid=102"
-    },
-    {
-     "title": "접근금지 해제되자 전 연인 살해한 60대 남성 '구속'...혐의 부인",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-19T14:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000121808?sid=102"
-    },
-    {
-     "title": "접근금지 조치 실효 뒤 전 연인 살해 혐의…60대 구속",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-19T14:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701313?sid=102"
     }
    ]
   },
@@ -205,7 +205,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 880,
+  "flagged": 881,
   "matched": 532,
   "avgLeadMin": 737,
   "recent": [
