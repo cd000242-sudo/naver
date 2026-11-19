@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T20:23:45.454Z",
+ "builtAt": "2026-11-19T20:33:48.512Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,13 +15,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
+   "articles90": 8,
+   "recent20": 3,
+   "press": 8,
    "firstArticleAt": "2026-11-19T19:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "트럼프 “우크라 배제한 채 전쟁 관련 최종 결정 안 내려”",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-19T20:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004010734?sid=104"
+    },
     {
      "title": "트럼프 \"김정은과 좋은 관계지만, 이번엔 회담 성사 안돼\"",
      "press": "news.sbs.co.kr",
@@ -33,12 +39,6 @@
      "press": "mt.co.kr",
      "publishedAt": "2026-11-19T20:14:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/008/0005443912?sid=104"
-    },
-    {
-     "title": "군불 때던 APEC 북미대화, 결국 불발",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-19T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004211898?sid=100"
     }
    ]
   },
@@ -47,10 +47,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 8,
+   "articles90": 7,
    "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-19T19:00:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-19T19:30:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -61,48 +61,16 @@
      "link": "https://n.news.naver.com/mnews/article/081/0003701410?sid=110"
     },
     {
-     "title": "한덕수 일부 무죄 취지인데…이상민·박성재엔 '불리한 신호'?",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-19T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004211903?sid=102"
-    },
-    {
-     "title": "한덕수 일부 무죄…與 “조희대 탄핵”",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-19T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701326?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "與, 조희대 탄핵 추진",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-19T19:02:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한덕수 일부 무죄…與 “조희대 탄핵”",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-19T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701326?sid=102"
-    },
-    {
-     "title": "“한덕수 판결은 역사적 반역”… 與, 조희대에 쌓였던 불만 폭발",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-19T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701331?sid=100"
-    },
-    {
      "title": "한덕수 파기환송에 현실화된 '조희대 탄핵'…얼어붙는 연말정국",
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-19T20:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/079/0004211908?sid=100"
+    },
+    {
+     "title": "한덕수 일부 무죄 취지인데…이상민·박성재엔 '불리한 신호'?",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-19T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004211903?sid=102"
     }
    ]
   },
@@ -112,7 +80,7 @@
     "google"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-19T19:10:00.000Z",
    "exclusive": false,
@@ -135,6 +103,38 @@
      "press": "biz.sbs.co.kr",
      "publishedAt": "2026-11-19T19:39:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/374/0000544831?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "박찬종 별세",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-19T19:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'14대 대선출마' 박찬종 전 의원 별세",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-19T20:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928029?sid=100"
+    },
+    {
+     "title": "박찬종 전 의원 별세… 약속대로 시신 기증",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-19T20:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701384?sid=102"
+    },
+    {
+     "title": "박찬종 前의원 별세… 고인 뜻대로 시신 기증, 조문 안받아",
+     "press": "donga.com",
+     "publishedAt": "2026-11-19T19:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003763837?sid=102"
     }
    ]
   }
