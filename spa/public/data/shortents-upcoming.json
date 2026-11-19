@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T20:33:48.512Z",
+ "builtAt": "2026-11-19T20:43:52.188Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,34 @@
  "measured": 25,
  "candidates": [
   {
-   "keyword": "트럼프 김정은 회동 불발",
+   "keyword": "아침 -6도 눈, 비 강풍",
    "sources": [
     "nate"
    ],
-   "articles90": 8,
-   "recent20": 3,
-   "press": 8,
-   "firstArticleAt": "2026-11-19T19:29:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-19T19:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "트럼프 “우크라 배제한 채 전쟁 관련 최종 결정 안 내려”",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-19T20:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004010734?sid=104"
+     "title": "[대전·세종·충남 날씨예보] 비 또는 눈 최대 5cm…아침 영하 5도 강추...",
+     "press": "thefairnews.co.kr",
+     "publishedAt": "2026-11-19T20:40:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94819"
     },
     {
-     "title": "트럼프 \"김정은과 좋은 관계지만, 이번엔 회담 성사 안돼\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-19T20:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404396?sid=104"
+     "title": "'아침 6도' 제주 쌀쌀…강풍에 새벽까지 눈, 비도 내린다",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-19T20:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014334561?sid=102"
     },
     {
-     "title": "트럼프 \"김정은과 좋은 관계, 이번엔 회담 성사 안돼\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-19T20:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005443912?sid=104"
+     "title": "경기남부, '아침 -6도' 한파 계속된다…눈·비에 강풍까지",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-19T20:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014334562?sid=102"
     }
    ]
   },
@@ -48,7 +48,7 @@
     "daum"
    ],
    "articles90": 7,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-19T19:30:00.000Z",
    "exclusive": true,
@@ -61,16 +61,80 @@
      "link": "https://n.news.naver.com/mnews/article/081/0003701410?sid=110"
     },
     {
-     "title": "한덕수 파기환송에 현실화된 '조희대 탄핵'…얼어붙는 연말정국",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-19T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004211908?sid=100"
-    },
-    {
      "title": "한덕수 일부 무죄 취지인데…이상민·박성재엔 '불리한 신호'?",
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-19T20:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/079/0004211903?sid=102"
+    },
+    {
+     "title": "한덕수 일부 무죄…與 “조희대 탄핵”",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-19T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701326?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "조희대 탄핵 당론 채택",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-19T19:30:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한덕수 일부 무죄…與 “조희대 탄핵”",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-19T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701326?sid=102"
+    },
+    {
+     "title": "“한덕수 판결은 역사적 반역”… 與, 조희대에 쌓였던 불만 폭발",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-19T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701331?sid=100"
+    },
+    {
+     "title": "한덕수 파기환송에 현실화된 '조희대 탄핵'…얼어붙는 연말정국",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-19T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004211908?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "1등급 국어 수학 예상",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-19T19:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "국어·영어 쉬워지고 수학은 비슷… 역대급 N수생·사탐런 변수",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-19T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701333?sid=102"
+    },
+    {
+     "title": "국어·영어 난이도 조절…'물수능' 수준은 아닐 듯[2027 수능]",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-19T20:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014334546?sid=102"
+    },
+    {
+     "title": "“국어-영어 작년 ‘불수능’보다는 다소 쉬워”… 수학 변별력 커질듯",
+     "press": "donga.com",
+     "publishedAt": "2026-11-19T19:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003763840?sid=102"
     }
    ]
   },
@@ -79,10 +143,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-19T19:10:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-19T19:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -105,43 +169,11 @@
      "link": "https://n.news.naver.com/mnews/article/374/0000544831?sid=104"
     }
    ]
-  },
-  {
-   "keyword": "박찬종 별세",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-19T19:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'14대 대선출마' 박찬종 전 의원 별세",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-19T20:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928029?sid=100"
-    },
-    {
-     "title": "박찬종 전 의원 별세… 약속대로 시신 기증",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-19T20:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701384?sid=102"
-    },
-    {
-     "title": "박찬종 前의원 별세… 고인 뜻대로 시신 기증, 조문 안받아",
-     "press": "donga.com",
-     "publishedAt": "2026-11-19T19:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003763837?sid=102"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 884,
+  "flagged": 887,
   "matched": 524,
   "avgLeadMin": 732,
   "recent": [
