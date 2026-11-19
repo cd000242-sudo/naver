@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T20:53:55.558Z",
+ "builtAt": "2026-11-19T21:03:59.053Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,63 +8,31 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 23,
  "candidates": [
   {
-   "keyword": "한덕수 내란혐의 파기환송",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-19T19:30:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[사설] 한덕수 파기환송, 내란 책임까지 지워진 것 아니다",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-19T20:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701410?sid=110"
-    },
-    {
-     "title": "한덕수 일부 무죄…與 “조희대 탄핵”",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-19T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701326?sid=102"
-    },
-    {
-     "title": "한덕수 일부 무죄 취지인데…이상민·박성재엔 '불리한 신호'?",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-19T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004211903?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "조희대 탄핵 당론 채택",
+   "keyword": "조희대 탄핵 추진",
    "sources": [
     "nate"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-19T19:30:00.000Z",
-   "exclusive": true,
+   "articles90": 6,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-19T19:49:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한덕수 일부 무죄…與 “조희대 탄핵”",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-19T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701326?sid=102"
+     "title": "전합 판결인데 조희대만?…한동훈 \"與, 탄핵하려면 대법관 전원 하라\" 등...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-19T21:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003157446?sid=100"
     },
     {
-     "title": "한덕수 파기환송에 현실화된 '조희대 탄핵'…얼어붙는 연말정국",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-19T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004211908?sid=100"
+     "title": "민주당 눈에 조희대는 '사마의'?…사법권으로 판 흔든다고 보는 이유 [시...",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-19T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001041401?sid=100"
     },
     {
      "title": "“한덕수 판결은 역사적 반역”… 與, 조희대에 쌓였던 불만 폭발",
@@ -75,17 +43,23 @@
    ]
   },
   {
-   "keyword": "아침 -6도 눈, 비 강풍",
+   "keyword": "아침 영하 6도 눈 비 강풍",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 6,
    "recent20": 1,
-   "press": 3,
+   "press": 4,
    "firstArticleAt": "2026-11-19T20:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "아침 최저 -6도 전국 영하권…전북남부 적설 최대 8㎝ [오늘 날씨]",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-19T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009300412?sid=103"
+    },
     {
      "title": "[대전·세종·충남 날씨예보] 비 또는 눈 최대 5cm…아침 영하 5도 강추...",
      "press": "thefairnews.co.kr",
@@ -93,90 +67,120 @@
      "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94819"
     },
     {
-     "title": "'아침 6도' 제주 쌀쌀…강풍에 새벽까지 눈, 비도 내린다",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-19T20:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014334561?sid=102"
-    },
-    {
-     "title": "경기남부, '아침 -6도' 한파 계속된다…눈·비에 강풍까지",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-19T20:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014334562?sid=102"
+     "title": "[수도권 날씨예보] 영하권 추위…경기남부서해안 새벽까지 눈",
+     "press": "thefairnews.co.kr",
+     "publishedAt": "2026-11-19T20:26:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94815"
     }
    ]
   },
   {
-   "keyword": "1등급 국어 수학 예상",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-19T19:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "국어·영어 쉬워지고 수학은 비슷… 역대급 N수생·사탐런 변수",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-19T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701333?sid=102"
-    },
-    {
-     "title": "국어·영어 난이도 조절…'물수능' 수준은 아닐 듯[2027 수능]",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-19T20:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014334546?sid=102"
-    },
-    {
-     "title": "“국어-영어 작년 ‘불수능’보다는 다소 쉬워”… 수학 변별력 커질듯",
-     "press": "donga.com",
-     "publishedAt": "2026-11-19T19:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003763840?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "amd",
+   "keyword": "웹툰",
    "sources": [
     "google"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 3,
    "press": 3,
-   "firstArticleAt": "2026-11-19T19:39:00.000Z",
+   "firstArticleAt": "2026-11-19T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[美증시 특징주] 앤트로픽 상장에도 반도체 '주르륵'…AMD 중국 우회수출...",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-19T20:06:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1138720"
+     "title": "서울 명소가 웹툰 배경으로…'3D 디지털 애셋' 13종 무료 배포",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-19T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016453397?sid=102"
     },
     {
-     "title": "리사 수 AMD CEO, 친척 젠슨 황 사임에 \"소음과 거리 둬야\"",
-     "press": "newsis.com",
+     "title": "DDP·한강이 웹툰 속 배경으로…서울시, 3D 배경 13종 무료 배포",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-19T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005443921?sid=102"
+    },
+    {
+     "title": "DDP·한강이 웹툰 배경으로…서울시, 3D 배경 13종 무료 배포",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-19T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009300395?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "이강인 AFC 국제선수상",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-19T20:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오피셜] '손흥민도 못한 대기록' 이강인이 해냈다! '아시아 최고 선수...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-19T21:01:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/445/0000491802"
+    },
+    {
+     "title": "[오피셜] '손흥민도 못한 대기록!' 이강인, 아시아 축구 새 역사 썼다…...",
+     "press": "sportalkorea.com",
+     "publishedAt": "2026-11-19T20:51:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/139/0002256290"
+    },
+    {
+     "title": "유럽 1티어 기자도 주목! 이강인, AFC 올해의 국제 선수상...\"2년 연속 수...",
+     "press": "fourfourtwo.co.kr",
      "publishedAt": "2026-11-19T20:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014334565?sid=104"
-    },
-    {
-     "title": "美 반도체 '中 리스크' 일파만파...AMD도 엮였다?",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-19T19:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000544831?sid=104"
+     "link": "https://m.sports.naver.com/wfootball/article/411/0000090205"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 887,
-  "matched": 524,
-  "avgLeadMin": 732,
+  "flagged": 890,
+  "matched": 530,
+  "avgLeadMin": 730,
   "recent": [
+   {
+    "keyword": "김정은",
+    "hitKeyword": "트럼프 김정은 회담불발",
+    "hitAt": "2026-11-20T06:00:00+09:00",
+    "leadMin": 1410
+   },
+   {
+    "keyword": "김정은 함경남도 시찰",
+    "hitKeyword": "트럼프 김정은 회담불발",
+    "hitAt": "2026-11-20T06:00:00+09:00",
+    "leadMin": 1369
+   },
+   {
+    "keyword": "트럼프 아시아 순방 귀국",
+    "hitKeyword": "트럼프 김정은 회담불발",
+    "hitAt": "2026-11-20T06:00:00+09:00",
+    "leadMin": 328
+   },
+   {
+    "keyword": "amd",
+    "hitKeyword": "AMD 주가 급락",
+    "hitAt": "2026-11-20T06:00:00+09:00",
+    "leadMin": 237
+   },
+   {
+    "keyword": "트럼프와 김정은 회담 불발",
+    "hitKeyword": "트럼프 김정은 회담불발",
+    "hitAt": "2026-11-20T06:00:00+09:00",
+    "leadMin": 56
+   },
+   {
+    "keyword": "트럼프 김정은 회동 불발",
+    "hitKeyword": "트럼프 김정은 회담불발",
+    "hitAt": "2026-11-20T06:00:00+09:00",
+    "leadMin": 36
+   },
    {
     "keyword": "gta 6",
     "hitKeyword": "GTA6 출시",
@@ -200,42 +204,6 @@
     "hitKeyword": "멕시코 대통령 이코노미석",
     "hitAt": "2026-11-19T23:00:00+09:00",
     "leadMin": 9417
-   },
-   {
-    "keyword": "이 대통령 태국 필리핀 회담",
-    "hitKeyword": "멕시코 대통령 이코노미석",
-    "hitAt": "2026-11-19T23:00:00+09:00",
-    "leadMin": 9387
-   },
-   {
-    "keyword": "이 대통령 아세안 순방",
-    "hitKeyword": "멕시코 대통령 이코노미석",
-    "hitAt": "2026-11-19T23:00:00+09:00",
-    "leadMin": 5266
-   },
-   {
-    "keyword": "이 대통령, 이용철 후보 인사청문 재가",
-    "hitKeyword": "멕시코 대통령 이코노미석",
-    "hitAt": "2026-11-19T23:00:00+09:00",
-    "leadMin": 4600
-   },
-   {
-    "keyword": "이 대통령 한-메콩 정상회의",
-    "hitKeyword": "멕시코 대통령 이코노미석",
-    "hitAt": "2026-11-19T23:00:00+09:00",
-    "leadMin": 4479
-   },
-   {
-    "keyword": "한-메콩 정상회의에서 이 대통령",
-    "hitKeyword": "멕시코 대통령 이코노미석",
-    "hitAt": "2026-11-19T23:00:00+09:00",
-    "leadMin": 4458
-   },
-   {
-    "keyword": "이 대통령, 한-메콩 회의 개최",
-    "hitKeyword": "멕시코 대통령 이코노미석",
-    "hitAt": "2026-11-19T23:00:00+09:00",
-    "leadMin": 4438
    }
   ]
  }
