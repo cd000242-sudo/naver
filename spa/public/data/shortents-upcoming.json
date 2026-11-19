@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T19:13:21.579Z",
+ "builtAt": "2026-11-19T19:23:24.725Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,46 +8,46 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 21,
+ "measured": 22,
  "candidates": [
   {
-   "keyword": "amd",
+   "keyword": "푸틴 얄타회담 발언",
    "sources": [
-    "google"
+    "signal.bz"
    ],
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-19T17:46:00.000Z",
+   "firstArticleAt": "2026-11-19T18:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "AMD 리사 수, 젠슨 황 파문에 \"소음 곧 가라앉을 것\"",
-     "press": "dkilbo.com",
-     "publishedAt": "2026-11-19T19:10:00.000Z",
-     "link": "https://www.dkilbo.com/news/articleView.html?idxno=561526"
+     "title": "[미중러 정상회담] \"우리는 푸틴 친구 아냐\"…발끈한 유럽(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-19T19:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016453375?sid=104"
     },
     {
-     "title": "美 반도체업계 '중국 리스크' 확산…AMD 9% 급락",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-19T18:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005607167?sid=101"
+     "title": "유럽 정상들 “우리는 푸틴 친구 아냐…앞으로도 그럴 것”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-19T18:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012297739?sid=104"
     },
     {
-     "title": "AMD Firmware Appeared in Updates From China-Listed IEIT, Report Says",
-     "press": "econotimes.com",
-     "publishedAt": "2026-11-19T17:46:00.000Z",
-     "link": "https://econotimes.com/AMD-Firmware-Appeared-in-Updates-From-China-Listed-IEIT-Report-Says-1779846"
+     "title": "푸틴, 미중러 회담 뒤 홀로 \"얄타 회담이 뭐가 나빠\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-19T18:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002435421?sid=104"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 884,
-  "matched": 527,
-  "avgLeadMin": 740,
+  "flagged": 883,
+  "matched": 526,
+  "avgLeadMin": 741,
   "recent": [
    {
     "keyword": "gta 6",
