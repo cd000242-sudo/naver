@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T20:43:52.188Z",
+ "builtAt": "2026-11-19T20:53:55.558Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -10,38 +10,6 @@
  },
  "measured": 25,
  "candidates": [
-  {
-   "keyword": "아침 -6도 눈, 비 강풍",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-19T19:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[대전·세종·충남 날씨예보] 비 또는 눈 최대 5cm…아침 영하 5도 강추...",
-     "press": "thefairnews.co.kr",
-     "publishedAt": "2026-11-19T20:40:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94819"
-    },
-    {
-     "title": "'아침 6도' 제주 쌀쌀…강풍에 새벽까지 눈, 비도 내린다",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-19T20:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014334561?sid=102"
-    },
-    {
-     "title": "경기남부, '아침 -6도' 한파 계속된다…눈·비에 강풍까지",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-19T20:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014334562?sid=102"
-    }
-   ]
-  },
   {
    "keyword": "한덕수 내란혐의 파기환송",
    "sources": [
@@ -61,16 +29,16 @@
      "link": "https://n.news.naver.com/mnews/article/081/0003701410?sid=110"
     },
     {
-     "title": "한덕수 일부 무죄 취지인데…이상민·박성재엔 '불리한 신호'?",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-19T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004211903?sid=102"
-    },
-    {
      "title": "한덕수 일부 무죄…與 “조희대 탄핵”",
      "press": "seoul.co.kr",
      "publishedAt": "2026-11-19T20:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/081/0003701326?sid=102"
+    },
+    {
+     "title": "한덕수 일부 무죄 취지인데…이상민·박성재엔 '불리한 신호'?",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-19T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004211903?sid=102"
     }
    ]
   },
@@ -93,16 +61,48 @@
      "link": "https://n.news.naver.com/mnews/article/081/0003701326?sid=102"
     },
     {
-     "title": "“한덕수 판결은 역사적 반역”… 與, 조희대에 쌓였던 불만 폭발",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-19T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701331?sid=100"
-    },
-    {
      "title": "한덕수 파기환송에 현실화된 '조희대 탄핵'…얼어붙는 연말정국",
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-19T20:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/079/0004211908?sid=100"
+    },
+    {
+     "title": "“한덕수 판결은 역사적 반역”… 與, 조희대에 쌓였던 불만 폭발",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-19T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701331?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "아침 -6도 눈, 비 강풍",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-19T20:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[대전·세종·충남 날씨예보] 비 또는 눈 최대 5cm…아침 영하 5도 강추...",
+     "press": "thefairnews.co.kr",
+     "publishedAt": "2026-11-19T20:40:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94819"
+    },
+    {
+     "title": "'아침 6도' 제주 쌀쌀…강풍에 새벽까지 눈, 비도 내린다",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-19T20:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014334561?sid=102"
+    },
+    {
+     "title": "경기남부, '아침 -6도' 한파 계속된다…눈·비에 강풍까지",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-19T20:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014334562?sid=102"
     }
    ]
   },
