@@ -61,3 +61,28 @@
 :root[data-theme="dark"] :is([style*="color: #1f2937" i], [style*="color: #1a1a1a" i], [style*="color:#1a1a1a" i], [style*="color: #111827" i], [style*="color: #000" i],
   [style*="color: #333" i], [style*="color: #222" i], [style*="color: black" i]):not([style*="background: #fbbf24" i]):not([style*="background:#fbbf24" i]) { color: var(--nv-ink) !important; }
 :root[data-theme="dark"] :is([style*="color: #4b5563" i], [style*="color: #374151" i], [style*="color: #555" i], [style*="color: #666" i]) { color: var(--nv-ink-3) !important; }
+
+/* 3b. The same colours when a script sets them (2026-11-19, owner: "검은색상으로 하면 텍스트색상도 검은색이라서 환경설정
+   텍스트가 안 보여요"). el.style.color = '#1f2937' is written back by the browser as "color: rgb(31, 41, 55)", so the
+   hex selectors of section 3 never matched and dark ink stayed on the repainted dark surface (measured 1.06-1.32:1).
+   Anchored to the start of the attribute or to "; " so "background-color: rgb(...)" / "border-color: rgb(...)" do not match. */
+:root[data-theme="dark"] :is([style*="background: rgb(249, 250, 251)"], [style*="background: rgb(243, 244, 246)"], [style*="background: rgb(248, 249, 250)"],
+  [style*="background-color: rgb(255, 255, 255)"], [style*="background-color: rgb(249, 250, 251)"], [style*="background-color: rgb(243, 244, 246)"], [style*="background-color: rgb(248, 249, 250)"]) {
+  background: var(--nv-card) !important; color: var(--nv-ink) !important;
+}
+:root[data-theme="dark"] :is([style^="color: rgb(31, 41, 55)"], [style*="; color: rgb(31, 41, 55)"], [style^="color: rgb(17, 24, 39)"], [style*="; color: rgb(17, 24, 39)"],
+  [style^="color: rgb(26, 26, 26)"], [style*="; color: rgb(26, 26, 26)"], [style^="color: rgb(0, 0, 0)"], [style*="; color: rgb(0, 0, 0)"],
+  [style^="color: rgb(51, 51, 51)"], [style*="; color: rgb(51, 51, 51)"], [style^="color: rgb(34, 34, 34)"], [style*="; color: rgb(34, 34, 34)"],
+  [style^="color: black"], [style*="; color: black"]):not([style*="background: rgb(251, 191, 36)"]):not([style*="background: #fbbf24" i]) { color: var(--nv-ink) !important; }
+:root[data-theme="dark"] :is([style^="color: rgb(75, 85, 99)"], [style*="; color: rgb(75, 85, 99)"], [style^="color: rgb(55, 65, 81)"], [style*="; color: rgb(55, 65, 81)"],
+  [style^="color: rgb(85, 85, 85)"], [style*="; color: rgb(85, 85, 85)"], [style^="color: rgb(102, 102, 102)"], [style*="; color: rgb(102, 102, 102)"],
+  [style^="color: rgb(107, 114, 128)"], [style*="; color: rgb(107, 114, 128)"], [style*="color: #6b7280" i]) { color: var(--nv-ink-3) !important; }
+
+/* 3c. Settings window, engine cards: pastel card fills stayed light while their text turned light (1.03-2.3:1), and
+   dark brand-tinted captions sat on repainted dark panels. Cards take the dark surface (border colour still tells
+   them apart), tinted captions take the readable token of the same hue. */
+:root[data-theme="dark"] #settings-modal .gemini-model-card { background: var(--nv-card) !important; }
+:root[data-theme="dark"] #settings-modal :is([style*="color: #9a3412" i], [style*="color: #92400e" i], [style*="color: #b45309" i], [style*="color: #c2410c" i]):not([style*="background"]) { color: var(--nv-amber) !important; }
+:root[data-theme="dark"] #settings-modal :is([style*="color: #166534" i], [style*="color: #15803d" i], [style*="color: #065f46" i]):not([style*="background"]) { color: var(--nv-green-text) !important; }
+:root[data-theme="dark"] #settings-modal :is([style*="color: #3730a3" i], [style*="color: #4338ca" i], [style*="color: #7c3aed" i], [style*="color: #6d28d9" i], [style*="color: #5b21b6" i], [style*="color: #6b21a8" i]):not([style*="background: #"]) { color: var(--nv-select-ink) !important; }
+:root[data-theme="dark"] #settings-modal :is([style*="color: #1e40af" i], [style*="color: #1d4ed8" i], [style*="color: #075985" i], [style*="color: #0369a1" i], [style*="color: #0284c7" i]):not([style*="background: #"]) { color: var(--nv-blue) !important; }
