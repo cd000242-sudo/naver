@@ -39,6 +39,10 @@ export type Product = {
     licensePlatform: string;
     /** 카드 그림. 기존 사이트에 이미 있는 파일만 쓴다 — 없는 이미지를 지어내지 않는다. */
     image: string;
+    /** [2026-11-17] Silent motion clip made from real recordings (the short cut); the card plays it instead of the still. */
+    clip?: { src: string; poster: string };
+    /** [2026-11-17] Where the full description lives; the store card only links to it. */
+    detail?: string;
     accent: string;
     glyph: string;
     /** 이벤트가. 비어 있으면 그 기간은 팔지 않는다. */
@@ -55,15 +59,17 @@ export const PRODUCTS: Product[] = [
     {
         id: 'naver',
         name: 'Better Life Naver',
-        tagline: '네이버 블로그 자동화',
+        tagline: '키워드 하나로 네이버 블로그 발행까지',
         summary: '키워드만 넣으면 글·이미지 구성까지 만들어 예약 발행합니다.',
         licensePlatform: 'LEADERNAM',
         image: '/images/feature-auto-publish.png',
+        clip: { src: '/videos/pricing-showcase/site-naver-short.mp4', poster: '/videos/pricing-showcase/site-naver-short.jpg' },
+        detail: '/detail',
         accent: '#34d399',
         glyph: '✎',
         prices: { monthly: 29000, yearly: 300000, lifetime: 1500000 },
-        features: ['AI 글 생성 · 이미지 구성', '예약 발행과 발행 한도 관리', '댓글 크롤링과 응답', '이메일 고객 지원'],
-        trial: { limits: ['30일 동안 · 하루 3편까지', 'LEWORD·Orbit 은 따로 구매하셔야 합니다'], download: '/download' },
+        features: ['API 키 없이 구독으로 바로 사용', 'AI 글 생성 · 이미지 구성', '예약 발행과 발행 한도 관리', '댓글 크롤링과 응답', '이메일 고객 지원'],
+        trial: { limits: ['30일 동안 · 하루 3편까지', '연속 발행 · 풀오토 다중계정 · 이미지 생성 스튜디오는 이용권 구매 후', 'LEWORD·Orbit 은 따로 구매하셔야 합니다'], download: '/download' },
         status: 'on',
     },
     {
@@ -73,20 +79,24 @@ export const PRODUCTS: Product[] = [
         summary: '세 블로그에 글을 쓰고 관리합니다. 외부 유입용 글과 카드뉴스까지 만듭니다.',
         licensePlatform: 'ORBIT',
         image: '/images/orbit/leadernam-orbit-download-card.webp',
+        clip: { src: '/videos/pricing-showcase/site-orbit-short.mp4', poster: '/videos/pricing-showcase/site-orbit-short.jpg' },
+        detail: '/orbit',
         accent: '#818cf8',
         glyph: '◎',
         prices: { monthly: 39000, yearly: 400000, lifetime: 2000000 },
-        features: ['워드프레스 · 티스토리 · 블로그스팟 발행', '발행한 글 관리', '외부 유입용 글 만들기 · 홍보', '카드뉴스 만들기'],
-        trial: { limits: ['30일 동안 · 하루 3편까지'], download: '/download' },
+        features: ['API 키 없이 구독으로 바로 사용', '워드프레스 · 티스토리 · 블로그스팟 발행', '발행한 글 관리', '외부 유입용 글 만들기 · 홍보', '카드뉴스 만들기'],
+        trial: { limits: ['30일 동안 · 하루 3편까지', '예약 발행 · 다중계정 발행 · 거미줄 통합글 · 외부유입 글은 이용권 구매 후'], download: '/download' },
         status: 'on',
     },
     {
         id: 'leword',
         name: 'LEWORD',
-        tagline: '키워드마스터',
+        tagline: '검색량은 있고 글은 적은 키워드 찾기',
         summary: '검색결과를 직접 열어 보고 지금 들어갈 자리가 있는 키워드만 남깁니다.',
         licensePlatform: 'LEWORD',
         image: '/images/leword/hero-banner-card.webp',
+        clip: { src: '/videos/pricing-showcase/site-leword-short.mp4', poster: '/videos/pricing-showcase/site-leword-short.jpg' },
+        detail: '/leword-detail',
         accent: '#f0b53f',
         glyph: '◆',
         // 2026-10-07 사장님 결정 — 월 19,900원 유지(검증된 도구보다 같거나 싸게) · 1년은 월 10달 치 199,000원 · 영구제 판매 중지

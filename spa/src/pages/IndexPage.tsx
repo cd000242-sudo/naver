@@ -13,6 +13,7 @@ import { useSlidingIndicator } from '../components/motion/useSlidingIndicator';
 import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
 import { light, lightRadius, motion, type as typeScale } from '../styles/tokens';
 import { fetchHotKeywords, fetchIssueBrief, fetchRealtimeIssues, type HotLaneItem } from '../lib/keywordApi';
+import { quotaNotice, readBriefs, rememberBrief, type StoredIssueBrief } from '../lib/issueBriefStore.mjs';
 import {
     SOURCE_SEARCH_PATHS,
     buildSourceSearchUrl,
@@ -1168,7 +1169,7 @@ function SourceInsightLoading({ keyword, accent, step }: { keyword: string; acce
  * 데이터는 이미 로컬에 있어서 실제로 기다릴 필요는 없지만, 여러 카드가
  * 동시에 갈아치워지면 사용자가 뭘 봐야 하는지 놓친다.
  */
-function SourceSignalInsight(props: { lane: SourceLane; item: SourceSignal | null; items: SourceSignal[]; onOpen?: () => void }) {
+function SourceSignalInsight(props: { lane: SourceLane; item: SourceSignal | null; items: SourceSignal[]; onOpen?: () => void; quotaNotice?: string }) {
     const keyword = props.item ? cleanLiveText(props.item.keyword || props.item.title, props.lane.label) : '';
     const [shownKeyword, setShownKeyword] = useState(keyword);
     const [step, setStep] = useState(ANALYZE_STEPS.length - 1);
@@ -1190,7 +1191,7 @@ function SourceSignalInsight(props: { lane: SourceLane; item: SourceSignal | nul
     return <SourceSignalInsightPanel {...props} />;
 }
 
-function SourceSignalInsightPanel({ lane, item, items, onOpen }: { lane: SourceLane; item: SourceSignal | null; items: SourceSignal[]; onOpen?: () => void }) {
+function SourceSignalInsightPanel({ lane, item, items, onOpen, quotaNotice: quotaText }: { lane: SourceLane; item: SourceSignal | null; items: SourceSignal[]; onOpen?: () => void; quotaNotice?: string }) {
     // Source articles start folded. This panel remounts on every keyword change, so a new keyword is folded again.
     const [sourcesOpen, setSourcesOpen] = useState(false);
     const sourcesId = useId();
@@ -1240,7 +1241,10 @@ function SourceSignalInsightPanel({ lane, item, items, onOpen }: { lane: SourceL
             <aside className="source-insight-panel source-insight-panel-empty">
                 <span>직접 수집 확인 · {lane.label} {rank}위</span>
                 <strong>{keyword}</strong>
-                <p>{lane.label} 원본 실시간 목록에서 직접 수집한 검색 신호입니다. 관련 보도는 자동 매칭될 때만 기사 브리프로 함께 표시합니다.</p>
+                {/* 무료 한도로 브리프를 못 받았으면 그 사실을 그대로 말한다(2026-11-17: "자동 매칭될 때만…" 문구 뒤에 거절이 숨어 있었다). */}
+                {quotaText
+                    ? <p className="source-insight-quota" role="status">{quotaText}</p>
+                    : <p>{lane.label} 원본 실시간 목록에서 직접 수집한 검색 신호입니다. 관련 보도는 자동 매칭될 때만 기사 브리프로 함께 표시합니다.</p>}
                 <AppBriefTitles key={keyword} keyword={keyword} fallback={briefTitles} />
                 <div className="source-insight-actions">
                     <a href={searchUrl} target="_blank" rel="noreferrer">원본에서 검색</a>
@@ -1406,13 +1410,12 @@ function IndexPage() {
      * "브리프가 제대로 안 나온다"로 보였다(2026-09-05). 받아 온 것은 여기 모아 두고
      * 화면에 겹쳐 쓴다 — 발행본 데이터를 덮어쓰지 않는다.
      */
-    const [onDemandBriefs, setOnDemandBriefs] = useState<Record<string, {
-        facts: Array<{ text: string; sourceIndex: number }>;
-        links: Array<{ url: string; press: string; publishedAt?: string | null; summary?: string }>;
-        images: string[];
-        keywords: string[];
-        latestArticleAt?: string;
-    }>>({});
+    // 받은 브리프는 15분 동안 다시 묻지 않는다 — 새로고침할 때마다 같은 키워드로 무료 한도를 또 쓰고 있었다(2026-11-17).
+    const [onDemandBriefs, setOnDemandBriefs] = useState<Record<string, StoredIssueBrief>>(() => {
+        try { return readBriefs(window.sessionStorage, Date.now()); } catch { return {}; }
+    });
+    // 워커가 무료 한도로 브리프를 거절했을 때의 문장. 비어 있으면 거절된 적 없음.
+    const [briefQuotaNotice, setBriefQuotaNotice] = useState('');
     // 기본 탭은 인기 — 분 단위로 움직이는 실시간 원본이 먼저 보인다(2026-09-06).
     const [activeSourceLaneId, setActiveSourceLaneId] = useState<SourceLaneId>('popular');
     const [activeSourceKeyword, setActiveSourceKeyword] = useState('');
@@ -1583,24 +1586,30 @@ function IndexPage() {
     useEffect(() => {
         if (!activeInsightKeyword) return;
         if (onDemandBriefs[activeInsightKeyword]) return;
+        // 한도로 한 번 거절되면 이 화면에서는 더 묻지 않는다 — 물어도 같은 거절이고, 다시 열면 새로 확인한다.
+        if (briefQuotaNotice) return;
         let alive = true;
         fetchIssueBrief(activeInsightKeyword)
             .then((result) => {
-                if (!alive || !result.ok || !result.data) return;
-                setOnDemandBriefs((prev) => ({
-                    ...prev,
-                    [activeInsightKeyword]: {
-                        facts: result.data!.facts || [],
-                        links: result.data!.links || [],
-                        images: result.data!.images || [],
-                        keywords: result.data!.keywords || [],
-                        ...(result.data!.latestArticleAt ? { latestArticleAt: result.data!.latestArticleAt } : {}),
-                    },
-                }));
+                if (!alive) return;
+                if (!result.ok || !result.data) {
+                    const notice = quotaNotice(result);
+                    if (notice) setBriefQuotaNotice(notice);
+                    return;
+                }
+                const received: StoredIssueBrief = {
+                    facts: result.data.facts || [],
+                    links: result.data.links || [],
+                    images: result.data.images || [],
+                    keywords: result.data.keywords || [],
+                    ...(result.data.latestArticleAt ? { latestArticleAt: result.data.latestArticleAt } : {}),
+                };
+                try { rememberBrief(window.sessionStorage, activeInsightKeyword, received, Date.now()); } catch { /* 저장 못 해도 화면은 그대로 */ }
+                setOnDemandBriefs((prev) => ({ ...prev, [activeInsightKeyword]: received }));
             })
             .catch(() => { /* 못 받아도 화면은 원래 폴백으로 간다 */ });
         return () => { alive = false; };
-    }, [activeInsightKeyword, onDemandBriefs]);
+    }, [activeInsightKeyword, onDemandBriefs, briefQuotaNotice]);
 
     const selectSourceLane = (laneId: SourceLaneId) => {
         setActiveSourceLaneId(laneId);
@@ -1795,6 +1804,7 @@ function IndexPage() {
                                 </div>
                                 <div className="hero-source-insight-cell">
                                 <SourceSignalInsight
+                                    quotaNotice={briefQuotaNotice}
                                     lane={activeSourceLane}
                                     item={activeSourceInsightItem}
                                     items={activeSourceItems}
@@ -2459,6 +2469,10 @@ function IndexPage() {
                     color: ${light.textSecondary};
                     font-size: ${typeScale.small}px;
                     line-height: 1.6;
+                }
+                .source-insight-panel-empty > p.source-insight-quota {
+                    color: ${light.text};
+                    font-weight: 600;
                 }
 
                 .source-insight-head {

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
-import { isNormalPricingActive, PRICING_SWITCH_AT_MS } from '../../lib/pricingSchedule';
+import { EVENT_PRICE_UNTIL_MS, isNormalPricingActive, PRICING_SWITCH_AT_MS } from '../../lib/pricingSchedule';
 import { fetchSiteContent } from '../../lib/siteOps';
 import {
     applyStoreOverrides, individualTotal, isTaxIncludedPrice, productCardAmount, normalPriceOf, perDay, perMonth, sellableProducts, TERMS, won,
@@ -9,6 +9,7 @@ import {
 import StoreIcon from './StoreIcons';
 import SplitWords from '../motion/SplitWords';
 import SlidingInk from '../motion/SlidingInk';
+import InViewClip from '../motion/InViewClip';
 import StoreStyles from './StoreStyles';
 
 /**
@@ -55,7 +56,8 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust, hea
     headingLevel?: 1 | 2;
 }) {
     const Heading = headingLevel === 1 ? 'h1' : 'h2';
-    const [term, setTerm] = useState<TermId>('monthly');
+    // [2026-11-17 owner] The store opens on the one-year term (was one month).
+    const [term, setTerm] = useState<TermId>('yearly');
     // The dark pill behind the chosen term glides between the three segments (transform only).
     const [cart, setCart] = useState<string[]>([]);
     const dday = daysToSwitch();
@@ -217,9 +219,11 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust, hea
                                 <div className="st-bundle-proof">{proof}</div>
                             )}
                             {!product.bundle && (
-                                <div className="st-shot">
+                                <div className={`st-shot${product.clip ? ' st-shot-clip' : ''}`}>
                                     {/* 어드민이 새로 만든 제품은 그림이 없다 — 기호로 채운다. 빈 src 는 깨진 그림이 된다. */}
-                                    {product.image
+                                    {product.clip
+                                        ? <InViewClip src={product.clip.src} poster={product.clip.poster} label={`${product.name} 소개 영상`} />
+                                        : product.image
                                         ? <img src={product.image} alt="" loading="lazy" />
                                         : <span className="st-shot-glyph" aria-hidden="true">{product.glyph}</span>}
                                     {product.trial && <span className="st-flag">무료 체험 있음</span>}
@@ -227,11 +231,11 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust, hea
                                 </div>
                             )}
 
-                            <div className="st-body">
+                            <div className={`st-body${product.bundle && bundleMedia ? ' st-has-media' : ''}`}>
                                 <h3>
                                     <span aria-hidden="true" style={{ color: product.accent }}>{product.glyph}</span>
                                     {product.name}
-                                    {product.bundle && <em className="st-evt">특별 이벤트가</em>}
+                                    {product.bundle && Date.now() < EVENT_PRICE_UNTIL_MS && <em className="st-evt">특별 이벤트가 · 11월까지</em>}
                                 </h3>
                                 <p className="st-tag">{product.tagline}</p>
 
@@ -239,9 +243,12 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust, hea
                                     <ul className="st-incl">
                                         {product.features.map((feature) => <li key={feature}>{feature}</li>)}
                                     </ul>
-                                ) : (
-                                    <p className="st-what">{product.summary}</p>
-                                )}
+                                ) : null}
+                                {/*
+                                  * [2026-11-17 owner] "금액이 잘 보여야 되고 소개는 간단하고 강력하게 — 어차피 제품 설명을
+                                  * 가서 보면 되니까." A single card no longer carries the summary paragraph: the name and one
+                                  * short line, then the price. The full description is one link away.
+                                  */}
 
                                 {product.bundle && bundleMedia && (
                                     <div className="st-bundle-media">{bundleMedia}</div>
@@ -314,6 +321,9 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust, hea
                                 >
                                     {inCart ? <>담았습니다<StoreIcon name="check" /></> : product.bundle ? 'All in one 담기' : '담기'}
                                 </button>
+                                {!product.bundle && product.detail && (
+                                    <a className="st-more" href={product.detail}>{product.name} 자세히 보기</a>
+                                )}
                                 </div>
                             </div>
                         </article>

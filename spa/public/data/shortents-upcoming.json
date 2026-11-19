@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-17T05:18:07.862Z",
+ "builtAt": "2026-11-19T23:24:47.624Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,170 +8,363 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 9,
+ "measured": 24,
  "candidates": [
   {
-   "keyword": "공소청 스마트기기 부정행위 대응",
+   "keyword": "뉴욕증시 급락",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-17T03:54:00.000Z",
+   "articles90": 54,
+   "recent20": 13,
+   "press": 44,
+   "firstArticleAt": "2026-11-19T21:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "세무사시험 AI 부정행위 대책 '구멍'…성적 재점검 입증 한계·CCTV 사각...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-17T05:15:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261117000806"
+     "title": "코어위브, 창업자 회사채 매입에도 6.1% 급락",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-19T23:22:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=2026112008175951379a1f309431_1"
     },
     {
-     "title": "대전교육청, 수능 부정행위 단속 강화…옷 속 카메라·이어폰까지 점검",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-17T05:11:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261117000830"
+     "title": "美 반도체주 급락…코스피 5000선 다시 시험대",
+     "press": "kbmaeil.com",
+     "publishedAt": "2026-11-19T23:20:00.000Z",
+     "link": "https://www.kbmaeil.com/article/20261120500042"
     },
     {
-     "title": "\"이번 수능 부정행위 하겠다\"…서울대 재학생, 공개 예고글 '발칵'",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-17T05:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001164613?sid=102"
+     "title": "[뉴욕증시] 앤트로픽 상장 흥행에도 AI 관련주 매도 확산…나스닥 2.25%↓",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-19T23:20:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5085704"
     }
    ]
   },
   {
-   "keyword": "김정은, 삼지연 방문",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-17T03:51:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "백두산 찾은 김정은…통일부 “관광지 건설 치하 목적”",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-17T05:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000367777?sid=100"
-    },
-    {
-     "title": "北中접경지 체류 사실 공개한 김정은…트럼프 \"中서 金 만날 수도\"",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-17T05:06:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2019673"
-    },
-    {
-     "title": "중대 결단 때마다 삼지연 찾던 김정은…APEC 앞두고 또 방문",
-     "press": "donga.com",
-     "publishedAt": "2026-11-17T05:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003763065?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "샤갈 너머의 여정",
+   "keyword": "10월 생산자물가 하락",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 9,
    "recent20": 1,
-   "press": 2,
-   "firstArticleAt": "2026-11-17T04:29:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-19T22:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "샤갈의 삶과 예술을 따라가다…‘퐁피두센터 샤갈전’ 개최",
-     "press": "segye.com",
-     "publishedAt": "2026-11-17T05:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004175853?sid=103"
+     "title": "사과·돼지고기 가격 뚝…10월 생산자물가 0.1% 하락",
+     "press": "pointe.co.kr",
+     "publishedAt": "2026-11-19T23:10:00.000Z",
+     "link": "https://www.pointe.co.kr/news/articleView.html?idxno=88134"
     },
     {
-     "title": "퐁피두센터 한화, '샤갈, 너머의 여정'",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-17T04:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014327185?sid=103"
+     "title": "10월 생산자물가 전월比 0.1% 하락…농림수산품 급락 영향",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-19T23:02:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445651"
     },
     {
-     "title": "'샤갈, 너머의 여정'을 찾는 사람들",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-17T04:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014327188?sid=103"
+     "title": "농림수산품 가격 하락에 10월 생산자물가 하락 전환",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-19T22:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002435469?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "경제",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 6,
+   "press": 5,
+   "firstArticleAt": "2026-11-19T23:08:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "[아주경제 코이너스 브리핑] 비트코인 6만2000달러대 횡보...긴축 우려·...",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-19T23:22:00.000Z",
+     "link": "https://www.ajunews.com/view/20261120074723761"
+    },
+    {
+     "title": "지역소멸·돌봄공백 대응…전북도, 사회연대경제 201억 지원 추진",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-19T23:20:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2650681"
+    },
+    {
+     "title": "경기도, 27~29일 킨텍스서 ‘대한민국 사회연대경제박람회’ 개최",
+     "press": "mediagunpo.co.kr",
+     "publishedAt": "2026-11-19T23:14:00.000Z",
+     "link": "http://www.mediagunpo.co.kr/22136"
+    }
+   ]
+  },
+  {
+   "keyword": "택시",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-19T22:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "영월서 쏘렌토·택시 충돌…2명 숨지고 1명 부상",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-19T23:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009300510?sid=102"
+    },
+    {
+     "title": "영월군 한반도면 후탄리 연정교차로 38국도 택시‧SUV 정면 충돌 2명 사...",
+     "press": "eroun.net",
+     "publishedAt": "2026-11-19T22:50:00.000Z",
+     "link": "https://www.eroun.net/news/articleView.html?idxno=96035"
+    },
+    {
+     "title": "강원 영월서 중앙선 넘은 택시와 SUV 충돌…2명 숨져",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-19T22:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404425?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "고대 예비 1번 고소 준비중",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-19T22:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“리트 만점자 고소 준비했는데” 피해자 등장?…고대 예비 1번 “재수...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-19T22:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701422?sid=102"
+    },
+    {
+     "title": "\"고대 정외과 예비 1번…이진우 때문에 떨어져\" 직접 피해자 등장",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-19T22:36:00.000Z",
+     "link": "https://www.ajunews.com/view/20261120070824734"
+    },
+    {
+     "title": "\"리트만점자 고소 준비했는데\"…24학년도 고대 예비1번 탈락자 등장",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-19T22:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979025?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "이승기 20억 기부",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-19T22:09:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이승기, 어린이병원에 20억 기부한 이유...“처음엔 5억 생각했는데”",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-19T23:14:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005766498"
+    },
+    {
+     "title": "이승기, 20억 기부-원래 5억 계획-부모들 보고 변화",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-19T22:52:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95591"
+    },
+    {
+     "title": "“원래 5억만 하려 했다”…이승기, 서울대어린이병원에 20억 쾌척한 진...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-19T22:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005766496?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "제갈성렬 아내 공개",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-19T22:39:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"지탄받아 마땅할 나이 차\" 제갈성렬, 19살 연하 아내와 재혼…부녀 지...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-19T23:12:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004126593"
+    },
+    {
+     "title": "제갈성렬, 아내 공개-치과 의사와 이혼 후 19세 연하와",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-19T22:50:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95590"
+    },
+    {
+     "title": "제갈성렬, 19세 연하 아내 최초 공개…\"부녀 사이로 오해받아\"",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-19T22:44:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=783261"
+    }
+   ]
+  },
+  {
+   "keyword": "아파트",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-19T23:03:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "수도권 주택 착공 줄고 노후 아파트 늘고…관리 중요성 커진다",
+     "press": "gpkorea.com",
+     "publishedAt": "2026-11-19T23:18:00.000Z",
+     "link": "https://www.gpkorea.com/news/articleView.html?idxno=148819"
+    },
+    {
+     "title": "인천 아파트값 보합세…서해·부평·제물포구 상승",
+     "press": "news.skbroadband.com",
+     "publishedAt": "2026-11-19T23:12:00.000Z",
+     "link": "https://news.skbroadband.com/news/articleView.html?idxno=243771"
+    },
+    {
+     "title": "서울 아파트값 93주 연속 상승…'한강벨트' 꺾이고 '반도체벨트' 강세",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-19T23:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000652239?sid=004"
+    }
+   ]
+  },
+  {
+   "keyword": "박찬종 별세",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-19T22:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[키워드 NOW] 박찬종 별세",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-19T23:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000652243?sid=004"
+    },
+    {
+     "title": "5선 지낸 박찬종 전 국회의원 별세",
+     "press": "news.knn.co.kr",
+     "publishedAt": "2026-11-19T23:02:00.000Z",
+     "link": "https://news.knn.co.kr/news/article/194732"
+    },
+    {
+     "title": "박찬종 전 의원의 마지막 나눔…“아름다운 죽음”",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-19T22:34:00.000Z",
+     "link": "http://www.breaknews.com/1252485"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 870,
-  "matched": 474,
-  "avgLeadMin": 862,
+  "flagged": 887,
+  "matched": 523,
+  "avgLeadMin": 736,
   "recent": [
    {
-    "keyword": "GS건설 침해사고 직권조사",
-    "hitKeyword": "GS건설 자이 AI 주거",
-    "hitAt": "2026-11-17T14:00:00+09:00",
-    "leadMin": 7555
+    "keyword": "체이스 은행 서비스 장애",
+    "hitKeyword": "실손보험 청구 서비스",
+    "hitAt": "2026-11-20T08:00:00+09:00",
+    "leadMin": 4284
    },
    {
-    "keyword": "이란 미군기지 드론 공격",
-    "hitKeyword": "이란 더티밤 공격 계획",
-    "hitAt": "2026-11-17T14:00:00+09:00",
-    "leadMin": 1755
+    "keyword": "amd",
+    "hitKeyword": "AMD 중국 의혹",
+    "hitAt": "2026-11-20T08:00:00+09:00",
+    "leadMin": 86
    },
    {
-    "keyword": "상장",
-    "hitKeyword": "엔트로픽 상장 한국 제외",
-    "hitAt": "2026-11-17T14:00:00+09:00",
-    "leadMin": 113
+    "keyword": "지하철 2호선 운행 중단",
+    "hitKeyword": "성수지선 운행 중단",
+    "hitAt": "2026-11-20T08:00:00+09:00",
+    "leadMin": 25
    },
    {
-    "keyword": "트럼프 엔비디아 주식",
-    "hitKeyword": "엔비디아 안보 문제 검토",
-    "hitAt": "2026-11-17T14:00:00+09:00",
-    "leadMin": 52
+    "keyword": "지하철 2호선 성수지선",
+    "hitKeyword": "성수지선 운행 중단",
+    "hitAt": "2026-11-20T08:00:00+09:00",
+    "leadMin": 15
    },
    {
-    "keyword": "신영철 감독 자진 사퇴",
-    "hitKeyword": "신영철 감독 사퇴",
-    "hitAt": "2026-11-17T14:00:00+09:00",
-    "leadMin": 12
+    "keyword": "오현규 동점골 폭발",
+    "hitKeyword": "오현규 토트넘 이적설",
+    "hitAt": "2026-11-20T07:30:00+09:00",
+    "leadMin": 8962
    },
    {
-    "keyword": "코스피 급락",
-    "hitKeyword": "모건스탠리 코스피 1만",
-    "hitAt": "2026-11-17T14:00:00+09:00",
-    "leadMin": 12
+    "keyword": "이강인 2연속 아시아 선수상",
+    "hitKeyword": "이강인 AFC 2연패",
+    "hitAt": "2026-11-20T07:30:00+09:00",
+    "leadMin": 388
    },
    {
-    "keyword": "젠슨 황 복귀 논의 없어",
-    "hitKeyword": "젠슨 황 복귀 불가",
-    "hitAt": "2026-11-17T13:00:00+09:00",
-    "leadMin": 314
+    "keyword": "이강인 AFC 국제선수상",
+    "hitKeyword": "이강인 AFC 2연패",
+    "hitAt": "2026-11-20T07:30:00+09:00",
+    "leadMin": 86
    },
    {
-    "keyword": "코스피 급락",
-    "hitKeyword": "모건스탠리 코스피 1만",
-    "hitAt": "2026-11-17T13:00:00+09:00",
-    "leadMin": 83
+    "keyword": "이강인 AFC 2연속 수상",
+    "hitKeyword": "이강인 AFC 2연패",
+    "hitAt": "2026-11-20T07:30:00+09:00",
+    "leadMin": 66
    },
    {
-    "keyword": "김주혁",
-    "hitKeyword": "김주혁 9주기",
-    "hitAt": "2026-11-17T12:30:00+09:00",
-    "leadMin": 685
+    "keyword": "이강인, AFC 2연패 수상",
+    "hitKeyword": "이강인 AFC 2연패",
+    "hitAt": "2026-11-20T07:30:00+09:00",
+    "leadMin": 26
    },
    {
-    "keyword": "트럼프 엔비디아 주식",
-    "hitKeyword": "트럼프 엔비디아 주식",
-    "hitAt": "2026-11-17T12:30:00+09:00",
-    "leadMin": 23
+    "keyword": "겨울",
+    "hitKeyword": "한겨울 추위 눈 예보",
+    "hitAt": "2026-11-20T07:00:00+09:00",
+    "leadMin": 1359
    }
   ]
  }

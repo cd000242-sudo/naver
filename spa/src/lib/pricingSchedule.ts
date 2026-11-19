@@ -7,6 +7,13 @@
  */
 export const PRICING_SWITCH_AT_MS = Date.UTC(2026, 8, 30, 15, 0, 0); // 2026-10-01 00:00 KST
 
+/**
+ * "특별 이벤트가 · 11월까지" 표시를 그리는 마지막 시각(미포함). 2026-12-01 00:00 KST.
+ * Past this instant the "until November" label would be false, so the store stops rendering it.
+ * This only gates the label; no price is derived from it.
+ */
+export const EVENT_PRICE_UNTIL_MS = Date.UTC(2026, 10, 30, 15, 0, 0); // 2026-12-01 00:00 KST
+
 export function isNormalPricingActive(nowMs: number = Date.now()) {
     return nowMs >= PRICING_SWITCH_AT_MS;
 }

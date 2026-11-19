@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import SplitWords from '../components/motion/SplitWords';
 import ProductPageStyles from '../components/products/ProductPageStyles';
+import DetailFilm from '../components/products/DetailFilm';
 import {
     AdsenseVsPanel, CloseBand, CompareBars, FaqList, FeatureBand, HeroActions, PriceBlock, ProofStrip, ReviewQuotes, useProduct,
 } from '../components/products/ProductBlocks';
@@ -66,7 +67,7 @@ const ALL_TABS: Array<[string, string]> = [
     ['유튜브 급상승 글감', '유튜브에서 갑자기 오르는 주제를 블로그 글감으로 옮겨 줍니다.'],
     ['외부유입 레이더', '카페 · 지식인 · 구글에 최근 올라온 질문 중 내 글로 데려올 자리를 찾습니다.'],
     ['노출 추적', '블로그 주소 하나로 발행한 글 전체의 노출 · 누락 · 순위를 직접 셉니다.'],
-    ['내 API 키', '내 키를 넣으면 내 몫으로 조회해 횟수 제한 없이 씁니다.'],
+    ['내 API 키', '내 API 키를 넣으면 내 계정 한도로 조회합니다.'],
 ];
 
 function LewordDetailPage() {
@@ -104,16 +105,17 @@ function LewordDetailPage() {
                     </div>
                     <ProofStrip items={[
                         { to: '/reviews', title: '구매 후기', desc: '실제 구매자가 남긴 후기', icon: 'review' },
-                        { to: '/reviews', title: '수익 인증', desc: '사용자가 올린 블로그 수익 인증', icon: 'income' },
                         { to: '/download', title: '웹 · PC 앱', desc: '웹에서 바로, PC 앱도 있어요', icon: 'devices' },
                     ]} />
                 </div>
             </section>
 
+            <DetailFilm id="leword" />
+
             <section className="pp-section">
                 <div className="pp-wrap">
                     <h2 className="pp-h2">찾아 주고, 설계까지</h2>
-                    <p className="pp-lead">키워드를 조회만 하는 도구가 아닙니다. 될 만한 키워드와 글감과 제목을 먼저 찾아 오고, 글 한 편의 설계까지 이어 줍니다.</p>
+                    <p className="pp-lead">될 만한 키워드와 글감과 제목을 먼저 찾고, 글 한 편의 설계까지 이어 줍니다.</p>
                     {BANDS.map((band) => <FeatureBand key={band.title} {...band} />)}
                 </div>
             </section>
@@ -134,11 +136,11 @@ function LewordDetailPage() {
                     <p className="pp-lead">검증된 키워드 도구는 단계마다 기능과 조회량이 나뉩니다. LEWORD는 한 가지 요금으로 14개 탭을 전부 엽니다.</p>
                     <CompareBars
                         rows={[
-                            { name: '블랙키위', low: 13800, high: 89100, note: '30일 · 3단계' },
+                            { name: '블랙키위', low: 13800, high: 89100, note: '30일 · 3단계 · 부가세 별도' },
                             { name: '판다랭크', low: 19800, high: 99000, note: '월 · 3단계' },
                             { name: 'LEWORD', low: monthly, high: monthly, ours: true, note: '월 · 한 가지, 전 기능' },
                         ]}
-                        source={`각 사 공식 요금 페이지 표시가 기준(2026-10-07 확인). LEWORD 월 ${won(monthly)}원은 부가세 포함입니다.`}
+                        source={`각 사 공식 요금 페이지 표시가 기준(2026-11-17 확인). LEWORD 월 ${won(monthly)}원은 부가세 포함입니다.`}
                     />
                 </div>
             </section>

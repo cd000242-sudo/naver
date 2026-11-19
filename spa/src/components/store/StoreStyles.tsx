@@ -72,6 +72,16 @@ function StoreStyles() {
             .st-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
             @media (max-width: 980px) { .st-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
             @media (max-width: 640px) { .st-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; } }
+            /* Two columns with three single products left the third one alone beside an empty half (641-980px):
+               it takes the full row instead, clip on the left and price on the right. */
+            @media (min-width: 641px) and (max-width: 980px) {
+                .st-grid:not(.st-grid-2) > .st-card:not(.st-bundle):nth-child(4):last-child {
+                    grid-column: 1 / -1; flex-direction: row; align-items: stretch;
+                }
+                .st-grid:not(.st-grid-2) > .st-card:not(.st-bundle):nth-child(4):last-child > .st-shot { flex: 0 0 50%; aspect-ratio: auto; border-bottom: 0; border-right: 1px solid var(--st-line); }
+                .st-grid:not(.st-grid-2) > .st-card:not(.st-bundle):nth-child(4):last-child > .st-body { flex: 1 1 50%; min-width: 0; }
+                .st-grid:not(.st-grid-2) > .st-card:not(.st-bundle):nth-child(4):last-child > .st-shot video { object-fit: contain; }
+            }
             /* Two single-product cards: two columns, no empty third cell. */
             .st-grid.st-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             @media (max-width: 640px) { .st-grid.st-grid-2 { grid-template-columns: minmax(0, 1fr); } }
@@ -88,6 +98,9 @@ function StoreStyles() {
 
             .st-shot { position: relative; aspect-ratio: 16 / 9.6; overflow: hidden; background: var(--st-raised); border-bottom: 1px solid var(--st-line); }
             .st-shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+            /* [2026-11-17] A product clip fills the same box; its headline sits top-left, so the flags move down. */
+            .st-shot video { width: 100%; height: 100%; object-fit: cover; display: block; background: #0b0c0e; cursor: pointer; }
+            .st-shot-clip .st-flag { top: auto; bottom: 12px; }
             .st-shot-glyph { display: grid; place-items: center; width: 100%; height: 100%; font-size: 44px; color: var(--st-mute); }
             .st-flag {
                 position: absolute; left: 12px; top: 12px; z-index: 2; padding: 4px 12px; border-radius: ${lightRadius.pill}px;
@@ -116,7 +129,13 @@ function StoreStyles() {
                 margin: 4px 0 0; min-height: 24px; font-size: ${type.small}px;
                 color: var(--st-dim); font-variant-numeric: tabular-nums;
             }
-            .st-permo strong { color: var(--st-ink); font-weight: 600; }
+            /* [2026-11-17 owner] The amount that is charged reads at a glance (it was the same small size as the notes). */
+            .st-permo strong { color: var(--st-ink); font-weight: 700; font-size: ${type.lead}px; letter-spacing: -.01em; }
+            .st-more {
+                display: inline-flex; align-items: center; align-self: center; min-height: 44px; margin-top: 4px;
+                color: var(--st-gold-ink); font-size: ${type.small}px; font-weight: 600; text-decoration: underline; text-underline-offset: 3px;
+            }
+            .st-more:hover { color: var(--st-ink); }
             .st-permo s { margin-right: 4px; color: var(--st-mute); }
             .st-fine { margin: 4px 0 0; font-size: ${type.small}px; line-height: 1.6; color: var(--st-dim); }
 
@@ -156,6 +175,27 @@ function StoreStyles() {
             .st-bundle-side .st-trust, .st-bundle-side .st-buy { margin: 0; }
             .st-plain-side { display: contents; }
 
+            /*
+             * [2026-11-17 owner] The bundle's price and button sit on the first screen: beside the video on a wide
+             * screen, above it on a narrow one. Stacked under the video they started at 1,150px (measured live).
+             */
+            @media (min-width: 981px) {
+                .st-bundle .st-body.st-has-media {
+                    display: grid; grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+                    grid-template-rows: auto auto auto 1fr; column-gap: 32px; row-gap: 16px; align-items: start;
+                }
+                .st-bundle .st-body.st-has-media > h3 { grid-column: 1; grid-row: 1; }
+                .st-bundle .st-body.st-has-media > .st-tag { grid-column: 1; grid-row: 2; }
+                .st-bundle .st-body.st-has-media > .st-incl { grid-column: 1; grid-row: 3; }
+                .st-bundle .st-body.st-has-media > .st-bundle-side { grid-column: 1; grid-row: 4; align-self: end; }
+                .st-bundle .st-body.st-has-media > .st-bundle-media { grid-column: 2; grid-row: 1 / -1; align-self: center; }
+            }
+            @media (max-width: 980px) {
+                .st-bundle .st-body.st-has-media > .st-bundle-side { order: 1; }
+                .st-bundle .st-body.st-has-media > .st-incl { order: 2; }
+                .st-bundle .st-body.st-has-media > .st-bundle-media { order: 3; }
+            }
+
             .st-trust {
                 display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
                 gap: 8px; margin: 0; padding: 12px 8px;
@@ -166,7 +206,8 @@ function StoreStyles() {
             .st-trust b svg { color: var(--st-mute); }
             .st-trust span { display: block; margin-top: 4px; color: var(--st-mute); font-size: ${type.meta}px; line-height: 1.4; word-break: keep-all; }
             .st-bundle h3 { font-size: ${type.h3}px; }
-            .st-bundle-media .purchase-video-frame video { max-height: 340px; }
+            /* The clip fills a 16:9 frame (it used to be letterboxed inside a 200-340px tall box). */
+            .st-bundle-media .purchase-video-frame video { max-height: none; aspect-ratio: 16 / 9; object-fit: cover; background: #0b0c0e; }
 
             .st-cart {
                 margin-top: 24px; border: 1px solid var(--st-line); border-radius: ${lightRadius.card}px;

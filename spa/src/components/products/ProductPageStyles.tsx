@@ -58,7 +58,7 @@ export default function ProductPageStyles() {
 .pp-vs-badge { position:relative; width:44px; height:44px; border-radius:50%; display:grid; place-items:center; background:var(--pp-panel); border:1px solid var(--pp-line-strong); color:var(--pp-ink-2); font-weight:600; font-size:${type.small}px; }
 .pp-vs-foot { margin:16px 0 0; color:var(--pp-ink-3); font-size:${type.meta}px; text-align:right; }
 
-.pp-proof { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:16px; margin-top:64px; }
+.pp-proof { display:grid; grid-template-columns:repeat(var(--pp-proof-cols, 3), minmax(0,1fr)); gap:16px; margin-top:64px; }
 .pp-proof a { display:flex; align-items:center; gap:16px; padding:20px 24px; border-radius:${lightRadius.card}px; border:1px solid var(--pp-line); background:var(--pp-panel); transition:border-color ${ease}, background-color ${ease}; }
 .pp-proof a:hover { border-color:var(--pp-line-strong); background:var(--pp-raised); }
 .pp-proof-icon { flex:none; width:44px; height:44px; border-radius:50%; display:grid; place-items:center; background:var(--pp-raised); border:1px solid var(--pp-line); color:var(--pp-ink-2); }
