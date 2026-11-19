@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T00:21:33.941Z",
+ "builtAt": "2026-11-19T00:31:36.990Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,101 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 26,
  "candidates": [
+  {
+   "keyword": "수능 시작",
+   "sources": [
+    "google"
+   ],
+   "articles90": 73,
+   "recent20": 73,
+   "press": 58,
+   "firstArticleAt": "2026-11-19T00:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "수능 4교시 끝나기 37분 전…나성동의 음주 예방",
+     "press": "ccdailynews.com",
+     "publishedAt": "2026-11-19T00:30:00.000Z",
+     "link": "https://www.ccdailynews.com/news/articleView.html?idxno=2452249"
+    },
+    {
+     "title": "2027학년도 수능 개막…AI 부정행위 우려 속 안경 정밀 검사 등 긴장감 ...",
+     "press": "widedaily.com",
+     "publishedAt": "2026-11-19T00:30:00.000Z",
+     "link": "https://www.widedaily.com/news/articleView.html?idxno=304071"
+    },
+    {
+     "title": "2027학년도 수능 일제히 시작…충남 1만 9225명 응시",
+     "press": "pressian.com",
+     "publishedAt": "2026-11-19T00:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/002/0002466573?sid=102"
+    }
+   ]
+  },
   {
    "keyword": "리트 만점자 수사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 63,
-   "recent20": 18,
-   "press": 45,
+   "articles90": 70,
+   "recent20": 15,
+   "press": 48,
    "firstArticleAt": "2026-11-18T23:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "경찰, '리트 만점자' 고발 사건 광수단 금융범죄수사대 배당",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-19T00:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009297969?sid=102"
+     "title": "\"치킨집까지 알아봤는데\"…리트 만점자 '노쇼'에 네티즌 '황당'",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-19T00:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014331876?sid=102"
     },
     {
-     "title": "‘리트 만점’ 이진우씨 공개 검증 무산… 경찰도 출동",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-19T00:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001205869?sid=102"
+     "title": "잠적한 '리트 만점자' 수능 시험지 폐기되나?…박정훈 의원 \"서울 영훈...",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-19T00:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001076449?sid=102"
     },
     {
-     "title": "‘리트 만점자’ 고발 사건, 서울청 금수대 수사",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-19T00:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004010511?sid=102"
+     "title": "'리트 만점자' 이진우, 수능 공개검증 당일 잠적…연락 두절로 검증 무...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-19T00:26:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1795046423531154006"
+    }
+   ]
+  },
+  {
+   "keyword": "수능 위급재난문자 불시 발송",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 52,
+   "recent20": 15,
+   "press": 44,
+   "firstArticleAt": "2026-11-18T23:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정부, 2027학년도 수능 부정행위 차단에 범정부 역량 총동원",
+     "press": "ibabynews.com",
+     "publishedAt": "2026-11-19T00:28:00.000Z",
+     "link": "https://www.ibabynews.com/news/articleView.html?idxno=157056"
+    },
+    {
+     "title": "수능 1312개 시험장서 일제히 시작…전국 '위급재난문자' 울려",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-19T00:26:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903593"
+    },
+    {
+     "title": "‘위급재난문자’로 2027학년도 수능 시작 알림 … 교육부, AI 부정행위...",
+     "press": "pressian.com",
+     "publishedAt": "2026-11-19T00:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/002/0002466571?sid=102"
     }
    ]
   },
@@ -48,93 +112,29 @@
     "signal.bz"
    ],
    "articles90": 44,
-   "recent20": 8,
+   "recent20": 12,
    "press": 41,
-   "firstArticleAt": "2026-11-18T22:52:00.000Z",
+   "firstArticleAt": "2026-11-18T23:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李 대통령, 조작기소 특검법 공포…19일 바로 시행",
-     "press": "iminju.net",
-     "publishedAt": "2026-11-19T00:20:00.000Z",
-     "link": "http://www.iminju.net/news/articleView.html?idxno=172709"
+     "title": "李대통령, 中 현지서 '조작기소 특검법' 재가…공포·즉시 시행",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-19T00:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000142591?sid=100"
     },
     {
-     "title": "李대통령, 중국서 '조작기소 특검법' 재가…수사 대상 절반이 본인 사건",
-     "press": "weekly.chosun.com",
-     "publishedAt": "2026-11-19T00:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/053/0000063161?sid=100"
+     "title": "검사들, 검찰총장 대행에 \"'조작기소 특검법' 대응, 통일된 기준 정해달...",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-19T00:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001536584?sid=102"
     },
     {
-     "title": "李대통령, 순방중에 '조작기소특검법' 재가",
-     "press": "viewsnnews.com",
-     "publishedAt": "2026-11-19T00:18:00.000Z",
-     "link": "https://www.viewsnnews.com/article?q=239798"
-    }
-   ]
-  },
-  {
-   "keyword": "2027 수능",
-   "sources": [
-    "google"
-   ],
-   "articles90": 73,
-   "recent20": 73,
-   "press": 40,
-   "firstArticleAt": "2026-11-19T00:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[2027 수능] 사탐런 심화 속 모평·원서접수 분석해 선택과목 난이도 균...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-19T00:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005606599?sid=102"
-    },
-    {
-     "title": "국립부산과학관, 수능 수험생에 '과학 힐링' 선물",
-     "press": "industrynews.co.kr",
-     "publishedAt": "2026-11-19T00:20:00.000Z",
-     "link": "https://www.industrynews.co.kr/news/articleView.html?idxno=89825"
-    },
-    {
-     "title": "SK텔레콤, 수능 마친 수험생에 공연·영화·AI 서비스 프로모션",
-     "press": "hbnpress.com",
-     "publishedAt": "2026-11-19T00:20:00.000Z",
-     "link": "https://hbnpress.com/news/view/1065572227055718"
-    }
-   ]
-  },
-  {
-   "keyword": "수능 위급재난문자 불시 발송",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 46,
-   "recent20": 11,
-   "press": 40,
-   "firstArticleAt": "2026-11-18T23:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "오늘 수능시험 감독하는 감독관들에게 내려진 '황당한 지침'",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-19T00:18:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1175805"
-    },
-    {
-     "title": "단추 없는 옷, 무테 안경, 이웃에서 빌린 연필… ‘AI 논란’ 속 수능 날...",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-19T00:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004010512?sid=102"
-    },
-    {
-     "title": "수능 AI 커닝 막으려 전국에 10.5초간 '삐'…\"출근길 소리 너무 커 깜짝...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-19T00:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009297962?sid=102"
+     "title": "이 대통령 순방 중 조작기소 특검법 재가, 즉시 공포 시행",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-19T00:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000161690?sid=100"
     }
    ]
   },
@@ -143,30 +143,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 39,
-   "recent20": 8,
-   "press": 35,
-   "firstArticleAt": "2026-11-18T22:52:00.000Z",
+   "articles90": 38,
+   "recent20": 12,
+   "press": 33,
+   "firstArticleAt": "2026-11-18T23:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "앤트로픽 IPO 공모가 주당 83달러(약 11만원), 희망가 웃돌았다",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-19T00:20:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/440439"
+     "title": "앤트로픽, 공모가 83달러 확정…스페이스X 넘어 역대 최대 IPO",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-19T00:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000121737?sid=104"
     },
     {
-     "title": "앤트로픽 IPO 공모가 83달러 확정…자금 조달 940억달러 넘어선다",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-19T00:19:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000084343"
+     "title": "앤트로픽 공모가 83달러 확정…125조 조달·역대 최대 IPO 기록 '눈앞'",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-19T00:30:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101559"
     },
     {
-     "title": "앤트로픽, 공모가 83달러 확정…스페이스X 넘은 역대 최대 IPO",
-     "press": "kado.net",
-     "publishedAt": "2026-11-19T00:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000212185?sid=101"
+     "title": "엔비디아 호실적·앤트로픽 IPO 겹호재에도…외국인 ‘셀코리아’ 여전",
+     "press": "segye.com",
+     "publishedAt": "2026-11-19T00:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004176425?sid=101"
     }
    ]
   },
@@ -175,13 +175,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 30,
-   "recent20": 6,
-   "press": 27,
+   "articles90": 31,
+   "recent20": 2,
+   "press": 28,
    "firstArticleAt": "2026-11-18T23:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "태안 연락 두절 어선 이틀째 수색…밤샘 수색에도 흔적 못찾아",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-19T00:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404166?sid=102"
+    },
     {
      "title": "李대통령, 태안 어선 실종에 “수색 총력”...실종자 가족 지원 지시",
      "press": "idsn.co.kr",
@@ -193,12 +199,6 @@
      "press": "m-i.kr",
      "publishedAt": "2026-11-19T00:10:00.000Z",
      "link": "https://www.m-i.kr/news/articleView.html?idxno=2020602"
-    },
-    {
-     "title": "4m 파도에 우박까지···실종된 ‘7명 승선’ 태안 어선 밤샘 수색",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-19T00:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003483656?sid=102"
     }
    ]
   },
@@ -207,30 +207,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 20,
-   "recent20": 11,
-   "press": 18,
-   "firstArticleAt": "2026-11-18T23:52:00.000Z",
+   "articles90": 26,
+   "recent20": 23,
+   "press": 19,
+   "firstArticleAt": "2026-11-19T00:08:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "산청군, 겨울철 설해대책 수립… 216개 노선 관리",
+     "title": "대전시교육청, 2026년 겨울방학 학교 석면모니터단 교육 실시",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-19T00:30:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5085135"
+    },
+    {
+     "title": "오아, 하이마트 잠실점서 겨울가전 팝업 운영… 'SWEET WINTER 2026' 선보여",
+     "press": "fntoday.co.kr",
+     "publishedAt": "2026-11-19T00:30:00.000Z",
+     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=398911"
+    },
+    {
+     "title": "목포시, 눈 오는 날에도 안전하게…겨울철 제설 대응 강화",
      "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-19T00:20:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261118500529"
-    },
-    {
-     "title": "구호플러스, 퍼 재킷 물량 20% 확대…겨울 아우터 공략",
-     "press": "apparelnews.co.kr",
-     "publishedAt": "2026-11-19T00:20:00.000Z",
-     "link": "http://www.apparelnews.co.kr/news/news_view/?idx=229101"
-    },
-    {
-     "title": "게스 x 현진, 1990년대 얼터너티브 무드 담은 겨울 캠페인 공개",
-     "press": "fashionbiz.co.kr",
-     "publishedAt": "2026-11-19T00:18:00.000Z",
-     "link": "https://www.fashionbiz.co.kr/article/231202"
+     "publishedAt": "2026-11-19T00:30:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261118500594"
     }
    ]
   },
@@ -239,30 +239,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 19,
-   "recent20": 15,
-   "press": 16,
-   "firstArticleAt": "2026-11-18T23:54:00.000Z",
+   "articles90": 23,
+   "recent20": 23,
+   "press": 18,
+   "firstArticleAt": "2026-11-19T00:12:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "태종대 가을밤, 별빛과 영화에 물든다…부산관광공사 '별밤극장' 개최",
-     "press": "industrynews.co.kr",
-     "publishedAt": "2026-11-19T00:20:00.000Z",
-     "link": "https://www.industrynews.co.kr/news/articleView.html?idxno=89824"
+     "title": "금정산 국립공원 체험형 관광 콘텐츠 띄운다",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-19T00:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004683839?sid=102"
     },
     {
-     "title": "러 여행사 '평양 미식관광' 출시…캐비아 등 고급식재료 제공",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-19T00:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016450944?sid=100"
+     "title": "조폐공사, 관광기념품 박람회서 화폐 굿즈 판매",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-19T00:30:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5085174"
     },
     {
-     "title": "경성대, 부산 글로벌 관광혁신 포럼서 국제 협력 논의",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-19T00:18:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261118500513"
+     "title": "KB증권, '모험자본 투자 플랫폼' 통해 지역 관광 AI 펀드에 20억원 출자",
+     "press": "pointdaily.co.kr",
+     "publishedAt": "2026-11-19T00:28:00.000Z",
+     "link": "https://www.pointdaily.co.kr/news/articleView.html?idxno=326592"
     }
    ]
   },
@@ -271,62 +271,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 16,
+   "articles90": 18,
    "recent20": 10,
-   "press": 16,
-   "firstArticleAt": "2026-11-18T23:41:00.000Z",
+   "press": 18,
+   "firstArticleAt": "2026-11-18T23:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "LEET 만점 논란 이진우씨, 수능 공개검증 불참…연락도 두절",
-     "press": "ngonews.kr",
-     "publishedAt": "2026-11-19T00:20:00.000Z",
-     "link": "https://www.ngonews.kr/news/articleView.html?idxno=243602"
+     "title": "'부정행위 의혹' LEET 만점자, 공개 검증 불참…연락두절",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-19T00:30:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5085171"
     },
     {
-     "title": "법학적성시험 만점자, 예고한 공개 검증 불참...주최 측 \"연락 시도 중\"",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-19T00:20:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=565008"
+     "title": "잠적한 '리트 만점자' 수능 시험지 폐기되나?…박정훈 의원 \"서울 영훈...",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-19T00:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001076449?sid=102"
     },
     {
-     "title": "LEET 만점 서울대 치대생 이진우, 수능 공개 검증 불참…AI 부정행위 의...",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-19T00:18:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95553"
-    }
-   ]
-  },
-  {
-   "keyword": "포체티노 감독 시작",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-18T22:55:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "포체티노에게는 답이 있을까 ‘맨유 공식 업무 돌입→23일 리버풀전’",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-19T00:12:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/382/0001305625"
-    },
-    {
-     "title": "포체티노, 맨유 지휘봉 잡고 첫 출근…데뷔전 상대는 ‘숙적’ 리버풀",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-19T00:02:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611190011"
-    },
-    {
-     "title": "포체티노, 맨유 지휘봉 잡고 맨체스터 입성…리버풀전서 데뷔",
+     "title": "\"수능 국어로 실력 증명하겠다\"던 LEET 만점자…당일 잠적·연락두절",
      "press": "jnilbo.com",
-     "publishedAt": "2026-11-18T23:39:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000084316"
+     "publishedAt": "2026-11-19T00:22:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000084348"
     }
    ]
   },
@@ -335,30 +303,62 @@
    "sources": [
     "nate"
    ],
-   "articles90": 25,
-   "recent20": 8,
-   "press": 10,
+   "articles90": 30,
+   "recent20": 7,
+   "press": 12,
    "firstArticleAt": "2026-11-18T23:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "후배들 응원 받으며 입실하는 수험생",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-19T00:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016450936?sid=102"
+     "title": "[2027 수능] \"긴장하지 말고 잘 보고 와\"…충북, 수험생 1만3693명 수능 ...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-19T00:29:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261119000280"
     },
     {
-     "title": "2027학년도 수능…최북단 주민들도 '한마음으로 응원'[쿠키포토]",
-     "press": "kukinews.com",
+     "title": "[수능 이모저모] \"만점 기원\" 응원 나온 후배·학부모들",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-19T00:24:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=847669"
+    },
+    {
+     "title": "[2027 수능] 한파 속에도 식지 않은 응원 열기…\"사랑한다, 파이팅\"",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-19T00:23:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261119000136"
+    }
+   ]
+  },
+  {
+   "keyword": "포체티노 감독 시작",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 12,
+   "recent20": 3,
+   "press": 12,
+   "firstArticleAt": "2026-11-18T23:06:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美 떠난 포체티노, 英 도착해 맨유 감독 업무 돌입",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-19T00:30:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/021/0002833913"
+    },
+    {
+     "title": "美 떠나 맨체스터로…'소방수' 포체티노, 23일 리버풀전서 데뷔전",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-19T00:25:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/079/0004211422"
+    },
+    {
+     "title": "포체티노에게는 답이 있을까 ‘맨유 공식 업무 돌입→23일 리버풀전’",
+     "press": "sports.donga.com",
      "publishedAt": "2026-11-19T00:12:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611190016"
-    },
-    {
-     "title": "영하권 수능 한파에도 뜨거운 응원…강원 고사장서 후배들 큰절까지",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-19T00:11:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000084328"
+     "link": "https://m.sports.naver.com/wfootball/article/382/0001305625"
     }
    ]
   },
@@ -368,13 +368,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 10,
+   "articles90": 9,
    "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-18T22:53:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-18T23:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김정은, 동해안 지역 시찰하며 해군대학 방문…북미회담 안갯속?",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-19T00:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002832932?sid=100"
+    },
     {
      "title": "김정은, APEC 개막일 함경남도 시찰…'미·중·러 회담' 앞두고 움직임 ...",
      "press": "shinailbo.co.kr",
@@ -386,12 +392,6 @@
      "press": "hankookilbo.com",
      "publishedAt": "2026-11-19T00:11:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/469/0000966476?sid=100"
-    },
-    {
-     "title": "김정은, 북미회담 성사 여부 관심 속 함경남도 시찰",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-18T23:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001536579?sid=100"
     }
    ]
   },
@@ -400,13 +400,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 6,
+   "articles90": 7,
    "recent20": 2,
-   "press": 6,
+   "press": 7,
    "firstArticleAt": "2026-11-18T23:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "수능 4교시 끝나기 37분 전…나성동의 음주 예방",
+     "press": "ccdailynews.com",
+     "publishedAt": "2026-11-19T00:30:00.000Z",
+     "link": "https://www.ccdailynews.com/news/articleView.html?idxno=2452249"
+    },
     {
      "title": "수능당일 주식시장 10시 문 연다…마감은 오후 4시 30분",
      "press": "g-enews.com",
@@ -418,12 +424,39 @@
      "press": "mediafine.co.kr",
      "publishedAt": "2026-11-19T00:06:00.000Z",
      "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95550"
+    }
+   ]
+  },
+  {
+   "keyword": "LPGA 공 위치 데이터 도입",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-18T23:11:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "LPGA 커미셔녀 \"내년부터 '공 위치 데이터' 도입\"",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-19T00:27:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/469/0000966478"
     },
     {
-     "title": "[2027수능] 수능 시간표는?.. '예외없이 8시10분까지 입실완료'",
-     "press": "veritas-a.com",
-     "publishedAt": "2026-11-18T23:40:00.000Z",
-     "link": "https://www.veritas-a.com/news/articleView.html?idxno=637841"
+     "title": "LPGA 투어, '골프 공 위치 데이터' 내년 도입…시즌 최종전 시범 운영",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-19T00:06:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/325768/?sc=Naver"
+    },
+    {
+     "title": "LPGA, PGA 이어 25년만에 '공 위치 데이터' 도입",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-18T23:54:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261119010007349"
     }
    ]
   },
@@ -432,10 +465,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-18T22:52:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-18T23:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -456,39 +489,6 @@
      "press": "mt.co.kr",
      "publishedAt": "2026-11-18T23:19:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/008/0005443314?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "LPGA 공 위치 데이터 도입",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-18T23:11:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "LPGA 투어, '골프 공 위치 데이터' 내년 도입…시즌 최종전 시범 운영",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-19T00:06:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/325768/?sc=Naver"
-    },
-    {
-     "title": "LPGA, PGA 이어 25년만에 '공 위치 데이터' 도입",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-18T23:54:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261119010007349"
-    },
-    {
-     "title": "[LPGA]케슬러 커미셔너 \"내년부터 공 위치 데이터 도입\"",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-18T23:41:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261119000132"
     }
    ]
   },
@@ -527,9 +527,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1108,
-  "matched": 602,
-  "avgLeadMin": 835,
+  "flagged": 1107,
+  "matched": 601,
+  "avgLeadMin": 837,
   "recent": [
    {
     "keyword": "수능 한파 대비 대책",
