@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T19:43:32.156Z",
+ "builtAt": "2026-11-19T19:53:35.584Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,52 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 25,
  "candidates": [
-  {
-   "keyword": "한덕수 내란혐의 파기환송",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 3,
-   "press": 3,
-   "firstArticleAt": "2026-11-19T19:00:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한덕수 내란 가담 2건 유죄… ‘계엄 국무회의 건의’만 무죄 판단",
-     "press": "donga.com",
-     "publishedAt": "2026-11-19T19:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003763827?sid=102"
-    },
-    {
-     "title": "\"형식적 국무회의는 윤석열 때문\"... 한덕수 '내란' 파기환송 이유는",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-19T19:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000966699?sid=102"
-    },
-    {
-     "title": "예상 밖 한덕수 파기환송에 들끓은 與… 격론 끝 '조희대 탄핵' 공식화",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-19T19:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000966692?sid=100"
-    }
-   ]
-  },
   {
    "keyword": "조희대 탄핵 추진",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
    "firstArticleAt": "2026-11-19T19:02:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "與, 41년만의 대법원장 탄핵 추진…\"역사적 반역\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-19T19:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928015?sid=100"
+    },
     {
      "title": "민주 “韓 판결은 역사적인 반역”… 긴급 의총뒤 “조희대 탄핵 추진”",
      "press": "donga.com",
@@ -65,44 +39,6 @@
      "press": "hankookilbo.com",
      "publishedAt": "2026-11-19T19:30:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/469/0000966692?sid=100"
-    },
-    {
-     "title": "정성호 \"추경호 무죄 비상식적…다만 '조희대 책임론'은 어려워\"",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-19T19:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002466764?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "푸틴 얄타회담 발언",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-19T18:39:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘지각왕’ 푸틴이 먼저 왔다… 트럼프 “이게 누구야, 내 친구네”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-19T19:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003763826?sid=104"
-    },
-    {
-     "title": "[미중러 정상회담] \"우리는 푸틴 친구 아냐\"…발끈한 유럽(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-19T19:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016453375?sid=104"
-    },
-    {
-     "title": "유럽 정상들 “우리는 푸틴 친구 아냐…앞으로도 그럴 것”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-19T18:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012297739?sid=104"
     }
    ]
   },
@@ -135,6 +71,70 @@
      "press": "fnnews.com",
      "publishedAt": "2026-11-19T18:32:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/014/0005607167?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "한덕수 내란혐의 파기환송",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-19T19:00:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한덕수 내란 가담 2건 유죄… ‘계엄 국무회의 건의’만 무죄 판단",
+     "press": "donga.com",
+     "publishedAt": "2026-11-19T19:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003763827?sid=102"
+    },
+    {
+     "title": "\"형식적 국무회의는 윤석열 때문\"... 한덕수 '내란' 파기환송 이유는",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-19T19:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000966699?sid=102"
+    },
+    {
+     "title": "예상 밖 한덕수 파기환송에 들끓은 與… 격론 끝 '조희대 탄핵' 공식화",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-19T19:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000966692?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "푸틴 얄타회담 발언",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-19T18:39:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘지각왕’ 푸틴이 먼저 왔다… 트럼프 “이게 누구야, 내 친구네”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-19T19:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003763826?sid=104"
+    },
+    {
+     "title": "[미중러 정상회담] \"우리는 푸틴 친구 아냐\"…발끈한 유럽(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-19T19:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016453375?sid=104"
+    },
+    {
+     "title": "유럽 정상들 “우리는 푸틴 친구 아냐…앞으로도 그럴 것”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-19T18:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012297739?sid=104"
     }
    ]
   }
