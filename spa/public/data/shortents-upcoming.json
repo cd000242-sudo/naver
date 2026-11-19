@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T16:32:31.909Z",
+ "builtAt": "2026-11-19T16:42:35.412Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,76 +11,12 @@
  "measured": 22,
  "candidates": [
   {
-   "keyword": "한덕수 내란혐의 파기환송",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-19T15:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[사설] 한덕수 일부 무죄 판단… 헌정 훼손 책임 끝까지 묻길",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-19T16:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001886366?sid=110"
-    },
-    {
-     "title": "한덕수 일부 무죄에 與, 조희대 탄핵 추진",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-19T15:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004010726?sid=102"
-    },
-    {
-     "title": "대법원, 한덕수 계엄 전 행위 내란 혐의 일부 무죄…사건 파기환송",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-19T15:50:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3757729"
-    }
-   ]
-  },
-  {
-   "keyword": "김휘강 재산공개",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-19T15:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김휘강 靑 비서관, 재산 75억 신고…고위공직 60명 중 1위",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-19T16:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004211895?sid=100"
-    },
-    {
-     "title": "고위공직자 60명 재산공개…1위는 김휘강 靑 사이버안보비서관",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-19T15:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001206099?sid=100"
-    },
-    {
-     "title": "김휘강 靑 사이버안보비서관 재산 75억",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-19T15:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005356135?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "트럼프 아시아 순방 귀국",
    "sources": [
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-19T15:30:00.000Z",
    "exclusive": false,
@@ -107,34 +43,34 @@
    ]
   },
   {
-   "keyword": "아세안·APEC 마치고 귀국",
+   "keyword": "김휘강 재산공개",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 2,
-   "firstArticleAt": "2026-11-19T15:45:00.000Z",
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-19T15:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이 대통령, 아세안·APEC 순방 마치고 귀국",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-19T16:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002435396?sid=100"
+     "title": "김휘강 靑 비서관, 재산 75억 신고…고위공직 60명 중 1위",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-19T16:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004211895?sid=100"
     },
     {
-     "title": "트럼프, 북미 정상회담 띄우더니 또 '빈손' 귀국",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-19T16:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002435395?sid=104"
+     "title": "고위공직자 60명 재산공개…1위는 김휘강 靑 사이버안보비서관",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-19T15:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001206099?sid=100"
     },
     {
-     "title": "이 대통령, 아세안·APEC 마치고 귀국...한반도 당사국 각인 주력",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-19T16:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002435392?sid=100"
+     "title": "김휘강 靑 사이버안보비서관 재산 75억",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-19T15:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005356135?sid=102"
     }
    ]
   }
