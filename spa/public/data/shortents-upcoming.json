@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T21:44:12.694Z",
+ "builtAt": "2026-11-19T21:54:16.173Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -13,11 +13,10 @@
   {
    "keyword": "10월 생산자물가 하락",
    "sources": [
-    "signal.bz",
-    "daum"
+    "signal.bz"
    ],
    "articles90": 31,
-   "recent20": 2,
+   "recent20": 1,
    "press": 30,
    "firstArticleAt": "2026-11-19T21:00:00.000Z",
    "exclusive": false,
@@ -46,11 +45,10 @@
   {
    "keyword": "외국인 국내 주식 순매도",
    "sources": [
-    "signal.bz",
-    "daum"
+    "signal.bz"
    ],
    "articles90": 20,
-   "recent20": 2,
+   "recent20": 0,
    "press": 19,
    "firstArticleAt": "2026-11-19T21:00:00.000Z",
    "exclusive": false,
@@ -77,12 +75,76 @@
    ]
   },
   {
-   "keyword": "축구 감독",
+   "keyword": "택시",
    "sources": [
     "google"
    ],
    "articles90": 7,
    "recent20": 3,
+   "press": 7,
+   "firstArticleAt": "2026-11-19T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[속보]강원 영월군 국도서 중앙선 넘은 택시 SUV와 충돌 2명 사망",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-19T21:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000161795?sid=102"
+    },
+    {
+     "title": "강원 영월서 SUV-택시 충돌‥3명 사상",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-19T21:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001536839?sid=102"
+    },
+    {
+     "title": "영월서 중앙선 넘은 택시와 SUV 충돌…2명 숨져",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-19T21:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016453429?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "amd",
+   "sources": [
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 3,
+   "press": 7,
+   "firstArticleAt": "2026-11-19T21:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "리사 수 AMD CEO “젠슨 황, 탁월한 리더…소음 가라 앉을 것”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-19T21:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003763883?sid=104"
+    },
+    {
+     "title": "AMD 주가 30분 만에 13% 급락…헌터브룩 중국 연계 의혹",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-19T21:50:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/441131"
+    },
+    {
+     "title": "AMD, 중국 반도체 수출규제 위반 의혹…\"제재 기업에 최신 펌웨어 유입...",
+     "press": "4th.kr",
+     "publishedAt": "2026-11-19T21:38:00.000Z",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2122284"
+    }
+   ]
+  },
+  {
+   "keyword": "축구 감독",
+   "sources": [
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 1,
    "press": 6,
    "firstArticleAt": "2026-11-19T20:35:00.000Z",
    "exclusive": false,
@@ -109,76 +171,12 @@
    ]
   },
   {
-   "keyword": "amd",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 5,
-   "press": 5,
-   "firstArticleAt": "2026-11-19T21:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "AMD, 중국 반도체 수출규제 위반 의혹…\"제재 기업에 최신 펌웨어 유입...",
-     "press": "4th.kr",
-     "publishedAt": "2026-11-19T21:38:00.000Z",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2122284"
-    },
-    {
-     "title": "중국에 발목 잡힌 AMD…하나마이크론·네패스 수혜 가능성 주목",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-19T21:30:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=506110"
-    },
-    {
-     "title": "AMD도 中 제재 기업과 연계 의혹…주가 8% 급락",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-19T21:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006412859?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "택시",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-19T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "영월서 중앙선 넘은 택시와 SUV 충돌…2명 숨져",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-19T21:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016453429?sid=102"
-    },
-    {
-     "title": "강원 영월서 승용차와 택시 충돌…3명 사상",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-19T21:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012297763?sid=102"
-    },
-    {
-     "title": "남산터널 통행료 납부기간 2배로…장애인콜택시 아파트 자동 입출차 추...",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-19T21:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006412854?sid=101"
-    }
-   ]
-  },
-  {
    "keyword": "2026년 11월 20일 운세",
    "sources": [
     "nate"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-19T21:00:00.000Z",
    "exclusive": false,
@@ -197,10 +195,10 @@
      "link": "https://www.ggilbo.com/news/articleView.html?idxno=1193282"
     },
     {
-     "title": "[오늘의 운세] 2026년 11월 20일 띠별 운세",
+     "title": "[오늘의 운세] 2026년 11월 20일 별자리 운세",
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-19T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006412851?sid=103"
+     "link": "https://n.news.naver.com/mnews/article/018/0006412852?sid=103"
     }
    ]
   },
@@ -220,7 +218,7 @@
      "title": "[오피셜] '2026년은 이강인의 해!'…UCL 2연패·아틀레티코 마드리드 이...",
      "press": "besteleven.com",
      "publishedAt": "2026-11-19T21:43:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/343/0000149117"
+     "link": "https://m.sports.naver.com/wfootball/article/343/0000149117"
     },
     {
      "title": "이강인, 'AFC 국제선수상' 2연패...손흥민 넘은 아시아 최초 '새 역사'",
@@ -255,16 +253,48 @@
      "link": "https://n.news.naver.com/mnews/article/018/0006412857?sid=102"
     },
     {
-     "title": "DDP·한강이 웹툰 배경으로…서울시, 3D 배경 13종 무료 배포",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-19T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009300395?sid=102"
-    },
-    {
      "title": "서울 명소가 웹툰 배경으로…'3D 디지털 애셋' 13종 무료 배포",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-19T21:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016453397?sid=102"
+    },
+    {
+     "title": "DDP·한강이 웹툰 속 배경으로…서울시, 3D 배경 13종 무료 배포",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-19T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005443921?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "박찬종 별세",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-19T20:28:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "고독한 결단, 마지막은 나눔 [박찬종 추모]",
+     "press": "sisaon.co.kr",
+     "publishedAt": "2026-11-19T21:48:00.000Z",
+     "link": "https://www.sisaon.co.kr/news/articleView.html?idxno=206244"
+    },
+    {
+     "title": "‘미스터 클린’ 박찬종 정치의 좌절 [김태훈의 의미 또는 재미]",
+     "press": "segye.com",
+     "publishedAt": "2026-11-19T20:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004176674?sid=100"
+    },
+    {
+     "title": "'14대 대선출마' 박찬종 전 의원 별세",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-19T20:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928029?sid=100"
     }
    ]
   },
@@ -275,7 +305,7 @@
     "nate"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-19T21:01:00.000Z",
    "exclusive": false,
