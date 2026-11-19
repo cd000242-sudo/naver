@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T16:02:20.971Z",
+ "builtAt": "2026-11-19T16:12:24.805Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "김휘강 재산공개",
@@ -16,7 +16,7 @@
     "daum"
    ],
    "articles90": 18,
-   "recent20": 1,
+   "recent20": 0,
    "press": 16,
    "firstArticleAt": "2026-11-19T15:00:00.000Z",
    "exclusive": false,
@@ -47,10 +47,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-19T14:35:00.000Z",
+   "articles90": 9,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-19T15:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -80,12 +80,18 @@
     "nate"
    ],
    "articles90": 7,
-   "recent20": 0,
+   "recent20": 1,
    "press": 7,
-   "firstArticleAt": "2026-11-19T14:42:00.000Z",
-   "exclusive": false,
+   "firstArticleAt": "2026-11-19T15:00:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "[공식발표] '이강인, 아시아 축구 역사 새로 썼다!'…AFC 올해의 아시아...",
+     "press": "fourfourtwo.co.kr",
+     "publishedAt": "2026-11-19T16:04:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/411/0000090196"
+    },
     {
      "title": "이강인, 황인범 제치고 AFC 올해의 국제선수상...최초 2회 연속 수상",
      "press": "newspim.com",
@@ -97,21 +103,15 @@
      "press": "sportsseoul.com",
      "publishedAt": "2026-11-19T15:21:00.000Z",
      "link": "https://m.sports.naver.com/kfootball/article/468/0001282232"
-    },
-    {
-     "title": "[오피셜] 日 우에다 제치고 또 \"대한민국 이강인\", AFC 국제선수상 2년 ...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-19T15:16:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/108/0003488825"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 882,
-  "matched": 530,
-  "avgLeadMin": 738,
+  "flagged": 881,
+  "matched": 529,
+  "avgLeadMin": 739,
   "recent": [
    {
     "keyword": "gta 6",
