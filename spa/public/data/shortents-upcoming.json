@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T23:44:54.762Z",
+ "builtAt": "2026-11-19T23:54:58.574Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "뉴욕증시 급락",
@@ -16,29 +16,29 @@
     "signal.bz"
    ],
    "articles90": 51,
-   "recent20": 10,
-   "press": 42,
-   "firstArticleAt": "2026-11-19T22:16:00.000Z",
+   "recent20": 8,
+   "press": 43,
+   "firstArticleAt": "2026-11-19T22:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[마켓 프리뷰] 美 반도체주 급락에 국내 증시도 '찬바람'…5000선 사수 주...",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-19T23:38:00.000Z",
-     "link": "https://www.ajunews.com/view/20261120082814858"
+     "title": "마이크론, 장중 101만원 돌파 후 91만원대로 급락…AI 반도체주 투자심...",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-19T23:54:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=847869"
     },
     {
-     "title": "앤트로픽도 구하지 못한 뉴욕증시...상장 첫날 17% 올랐지만 3대 지수는...",
-     "press": "livebiz.today",
-     "publishedAt": "2026-11-19T23:38:00.000Z",
-     "link": "https://www.livebiz.today/news/articleView.html?idxno=206706"
+     "title": "뉴욕증시, 2%대 급락..다우 5만선 아래로 ↓",
+     "press": "newstopkorea.com",
+     "publishedAt": "2026-11-19T23:52:00.000Z",
+     "link": "https://www.newstopkorea.com/news/articleView.html?idxno=49199"
     },
     {
-     "title": "앤트로픽 17% 뛰자 뉴욕증시 급락…삼전닉스 프리장서 4~5%↓[코주부]",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-19T23:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004684265?sid=101"
+     "title": "뉴욕증시, 앤트로픽 IPO 흥행에도 급락…다우 5만선 붕괴",
+     "press": "econovill.com",
+     "publishedAt": "2026-11-19T23:52:00.000Z",
+     "link": "https://www.econovill.com/news/articleView.html?idxno=757941"
     }
    ]
   },
@@ -48,62 +48,30 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 36,
-   "recent20": 12,
-   "press": 30,
-   "firstArticleAt": "2026-11-19T22:34:00.000Z",
+   "articles90": 34,
+   "recent20": 14,
+   "press": 29,
+   "firstArticleAt": "2026-11-19T22:50:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "피지컬 AI와 휴머노이드 시대는 인류 문명의 거대한 전환점이다 (8부)",
-     "press": "koreaittimes.com",
-     "publishedAt": "2026-11-19T23:44:00.000Z",
-     "link": "https://www.koreaittimes.com/news/articleView.html?idxno=159335"
+     "title": "아이폰 조립 대만 폭스콘, 오픈AI 스마트폰 수주?",
+     "press": "choicenews.co.kr",
+     "publishedAt": "2026-11-19T23:54:00.000Z",
+     "link": "http://www.choicenews.co.kr/news/articleView.html?idxno=173358"
     },
     {
-     "title": "미국의 대중 AI칩 허가 내역 공개…엔비디아·AMD 제품 87만여 개 승인",
+     "title": "마이크론, 장중 101만원 돌파 후 91만원대로 급락…AI 반도체주 투자심...",
      "press": "jemin.com",
-     "publishedAt": "2026-11-19T23:42:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=847868"
+     "publishedAt": "2026-11-19T23:54:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=847869"
     },
     {
-     "title": "LG전자, 로보틱스·AIDC 조직 강화 총력…백승태·이상우 사장 승진",
-     "press": "ftoday.co.kr",
-     "publishedAt": "2026-11-19T23:42:00.000Z",
-     "link": "http://www.ftoday.co.kr/news/articleView.html?idxno=370157"
-    }
-   ]
-  },
-  {
-   "keyword": "이번에도 김정은 트럼프",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 21,
-   "recent20": 5,
-   "press": 18,
-   "firstArticleAt": "2026-11-19T22:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "트럼프 \"미중러 회담 성공적…김정은 언젠가 만날 것\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-19T23:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928072?sid=104"
-    },
-    {
-     "title": "트럼프 \"APEC 회담 너무 많았다\"…김정은과 만남 불발 인정",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-19T23:39:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000084792"
-    },
-    {
-     "title": "“김정은, 트럼프와 만남에 가치 못느껴…진짜 원한건 4대 핵보유국 회...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-19T23:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002726035?sid=104"
+     "title": "젠슨 황 없는 엔비디아, AI 제국의 진짜 리스크는 ‘그’였다",
+     "press": "magazine.hankyung.com",
+     "publishedAt": "2026-11-19T23:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/050/0000113530?sid=101"
     }
    ]
   },
@@ -112,13 +80,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 20,
-   "recent20": 9,
-   "press": 16,
+   "articles90": 21,
+   "recent20": 5,
+   "press": 17,
    "firstArticleAt": "2026-11-19T22:56:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "[공식] 빅뱅, 오늘(20일) 깜짝 신곡 발매…20주년 대미 장식",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-19T23:45:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002082330"
+    },
     {
      "title": "빅뱅, 오늘(20일) 신곡 기습 발매…‘BiiiG’과는 다른 분위기",
      "press": "mk.co.kr",
@@ -130,12 +104,70 @@
      "press": "mk.co.kr",
      "publishedAt": "2026-11-19T23:40:00.000Z",
      "link": "https://m.entertain.naver.com/article/009/0005766511"
+    }
+   ]
+  },
+  {
+   "keyword": "트럼프 김정은 회담 불발",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 21,
+   "recent20": 3,
+   "press": 17,
+   "firstArticleAt": "2026-11-19T22:25:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프 \"김정은과 언젠가 만날 것\" … APEC 북미회담 불발에도 대화 여지",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-19T23:50:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/20/2026112050047.html"
     },
     {
-     "title": "빅뱅, 오늘(20일) 깜짝 신곡 발표…'BiiiG'보다 큰 거 온다",
-     "press": "ize.co.kr",
-     "publishedAt": "2026-11-19T23:38:00.000Z",
-     "link": "https://m.entertain.naver.com/article/465/0000021139"
+     "title": "트럼프 \"미중러 회담 성공적…김정은 언젠가 만날 것\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-19T23:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928072?sid=104"
+    },
+    {
+     "title": "트럼프 \"APEC 회담 너무 많았다\"…김정은과 만남 불발 인정",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-19T23:39:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000084792"
+    }
+   ]
+  },
+  {
+   "keyword": "10월 생산자물가 하락",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 12,
+   "recent20": 5,
+   "press": 12,
+   "firstArticleAt": "2026-11-19T22:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "사과·돼지고기값 급락…생산자물가 3개월만 하락 전환",
+     "press": "cstimes.com",
+     "publishedAt": "2026-11-19T23:52:00.000Z",
+     "link": "https://www.cstimes.com/news/articleView.html?idxno=728713"
+    },
+    {
+     "title": "[그래픽] 10월 생산자물가 0.1% 하락",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-19T23:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014334758?sid=101"
+    },
+    {
+     "title": "10월 생산자물가 0.1% 하락…사과 29.2%·돼지고기 12.8%↓",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-19T23:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404446?sid=101"
     }
    ]
   },
@@ -164,85 +196,85 @@
      "link": "https://www.nc.press/news/articleView.html?idxno=631446"
     },
     {
-     "title": "오연서, 스토리제이컴퍼니와 동행 계속 “신뢰 바탕 재계약” [공식]",
-     "press": "celuvmedia.com",
+     "title": "오연서, 스토리제이컴퍼니와 재계약…굳건한 신뢰 바탕",
+     "press": "sports.donga.com",
      "publishedAt": "2026-11-19T23:10:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1795129703531236006"
+     "link": "https://m.entertain.naver.com/article/382/0001305828"
     }
    ]
   },
   {
-   "keyword": "한덕수 선고",
+   "keyword": "이진우 사망 소식",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-19T22:18:00.000Z",
+   "articles90": 6,
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-19T22:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김민석 \"조희대 탄핵, 한덕수 판결이 계기…미루기 어려운 역사적 판단...",
-     "press": "ajunews.com",
+     "title": "\"책임 회피하려 잠적한 것\"…이진우 사망 전 프로파일러 분석 재조명",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-19T23:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005607225?sid=102"
+    },
+    {
+     "title": "\"지난 3년간 부정행위자 더 많을 것 \"리트 만점자 사망에 커지는 수능 불...",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-19T23:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005845419?sid=102"
+    },
+    {
+     "title": "\"좋은 형이었는데\"…이진우 서울대 치대 동기들 애도",
+     "press": "hankyung.com",
      "publishedAt": "2026-11-19T23:38:00.000Z",
-     "link": "https://www.ajunews.com/view/20261120081835823"
-    },
-    {
-     "title": "12·3 계엄은 내란이라면서…한덕수, 계엄 전 행위는 '무죄'",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-19T23:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000521602?sid=102"
-    },
-    {
-     "title": "'국조부터'라던 김민석, 한덕수 파기환송에 '조희대 탄핵' 꺼냈다",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-19T23:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000142683?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/015/0005356198?sid=102"
     }
    ]
   },
   {
-   "keyword": "10월 생산자물가 하락",
+   "keyword": "이승기 어린이병원 20억 기부 이유",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-19T22:22:00.000Z",
+   "articles90": 6,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-19T22:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "10월 생산자물가 석달만에 0.1%↓…사과 29.2%·돈육 12.8%↓",
-     "press": "tfmedia.co.kr",
-     "publishedAt": "2026-11-19T23:32:00.000Z",
-     "link": "https://www.tfmedia.co.kr/news/article.html?no=209046"
+     "title": "“원래 5억 생각” 이승기, 어린이병원에 ‘20억’ 기부한 이유..“6인실...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-19T23:51:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005642803"
     },
     {
-     "title": "사과·돼지고기 가격 뚝…10월 생산자물가 0.1% 하락",
-     "press": "pointe.co.kr",
-     "publishedAt": "2026-11-19T23:10:00.000Z",
-     "link": "https://www.pointe.co.kr/news/articleView.html?idxno=88134"
+     "title": "이승기 \"5억만 하려 했다\"…어린이병원에 20억 기부한 사연",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-19T23:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005356201?sid=102"
     },
     {
-     "title": "10월 생산자물가 전월比 0.1% 하락…농림수산품 급락 영향",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-19T23:02:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445651"
+     "title": "이승기, 어린이병원에 음원 미정산금 20억 기부 이유…\"원래 5억만 하려...",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-19T23:34:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109995720300"
     }
    ]
   },
   {
-   "keyword": "제갈성렬 아내 재혼",
+   "keyword": "제갈성렬, 19살 연하 아내 재혼",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
    "firstArticleAt": "2026-11-19T22:39:00.000Z",
    "exclusive": false,
    "capped": false,
@@ -268,145 +300,23 @@
    ]
   },
   {
-   "keyword": "이진우 사망 소식",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-19T22:31:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"지난 3년간 부정행위자 더 많을 것 \"리트 만점자 사망에 커지는 수능 불...",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-19T23:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005845419?sid=102"
-    },
-    {
-     "title": "\"세상은 욕해도 내겐 좋은 형\"…이진우 치대 동기들 애도",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-19T23:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005356198?sid=102"
-    },
-    {
-     "title": "\"천재라며 띄워놓고…죄는 미워해도 사람은 미워하지 말라\" 이진우 사태...",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-19T23:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005845398?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "이승기 어린이병원 20억 기부 이유",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-19T22:49:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이승기, 어린이병원에 음원 미정산금 20억 기부 이유…\"원래 5억만 하려...",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-19T23:34:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109995720300"
-    },
-    {
-     "title": "'이다인♥' 이승기, 병원에 20억 기부한 진짜 이유...\"원래 5억만 하려고...",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-19T23:28:00.000Z",
-     "link": "https://www.insight.co.kr/news/582827"
-    },
-    {
-     "title": "이승기, 어린이병원에 20억 기부한 이유...“처음엔 5억 생각했는데”",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-19T23:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005766498"
-    }
-   ]
-  },
-  {
-   "keyword": "기아",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-19T22:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "전국금속노동조합 기아자동차지부 정비지회, 화성시 아동·청소년 위해...",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-19T23:36:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2021128"
-    },
-    {
-     "title": "기아차 정비지회, 통 큰 나눔! 화성 아동·청소년에 1000만원+차량 기탁",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-19T23:14:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5085699"
-    },
-    {
-     "title": "현대차·기아, 북미 오토쇼에서 하이브리드 혁신 기술로 시선 집중",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-19T22:18:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886497"
-    }
-   ]
-  },
-  {
-   "keyword": "박찬종 별세",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-19T22:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[키워드 NOW] 박찬종 별세",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-19T23:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652243?sid=100"
-    },
-    {
-     "title": "5선 지낸 박찬종 전 국회의원 별세",
-     "press": "news.knn.co.kr",
-     "publishedAt": "2026-11-19T23:02:00.000Z",
-     "link": "https://news.knn.co.kr/news/article/194732"
-    },
-    {
-     "title": "박찬종 전 의원의 마지막 나눔…“아름다운 죽음”",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-19T22:34:00.000Z",
-     "link": "http://www.breaknews.com/1252485"
-    }
-   ]
-  },
-  {
    "keyword": "대학 순위",
    "sources": [
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
-   "press": 2,
-   "firstArticleAt": "2026-11-19T22:18:00.000Z",
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-19T23:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "부산대, '2027 QS 지속가능성평가' 4년 연속 국립대 1위…국내 대학 전체...",
+     "press": "news.unn.net",
+     "publishedAt": "2026-11-19T23:44:00.000Z",
+     "link": "https://news.unn.net/news/articleView.html?idxno=601043"
+    },
     {
      "title": "[부산ㆍ경남 대학 브리핑 모음(11월20일)] 동서대, ‘2026 DSU ANCHOR FAIR’...",
      "press": "dnews.co.kr",
@@ -418,19 +328,13 @@
      "press": "dailysmart.co.kr",
      "publishedAt": "2026-11-19T23:16:00.000Z",
      "link": "http://www.dailysmart.co.kr/news/articleView.html?idxno=132862"
-    },
-    {
-     "title": "이동근 고려대 10번째 1순위 유력, 얼리 대세는 여전",
-     "press": null,
-     "publishedAt": "2026-11-19T22:18:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/065/0000304963"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 896,
+  "flagged": 898,
   "matched": 523,
   "avgLeadMin": 729,
   "recent": [
