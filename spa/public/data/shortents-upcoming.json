@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T21:14:02.612Z",
+ "builtAt": "2026-11-19T21:24:05.668Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,25 +8,25 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 22,
  "candidates": [
   {
-   "keyword": "조희대 탄핵 추진",
+   "keyword": "與 조희대 탄핵 추진",
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 3,
-   "press": 5,
-   "firstArticleAt": "2026-11-19T19:49:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-19T20:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김민석도 '조희대 탄핵론' 가세…민주당 내부에선 찬반 양론 여전",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-19T21:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003157449?sid=100"
+     "title": "'한덕수 파기환송'에 與 \"조희대 탄핵\" vs 野 \"깡패처럼 보복\"",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-19T21:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002394464?sid=100"
     },
     {
      "title": "전합 판결인데 조희대만?…한동훈 \"與, 탄핵하려면 대법관 전원 하라\" 등...",
@@ -35,42 +35,74 @@
      "link": "https://n.news.naver.com/mnews/article/119/0003157446?sid=100"
     },
     {
-     "title": "민주당 눈에 조희대는 '사마의'?…사법권으로 판 흔든다고 보는 이유 [시...",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-19T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001041401?sid=100"
+     "title": "한덕수 일부 무죄…與 “조희대 탄핵”",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-19T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701326?sid=102"
     }
    ]
   },
   {
-   "keyword": "아침 영하 6도 눈 비 강풍",
+   "keyword": "이강인 AFC 2연속 수상",
    "sources": [
     "nate"
    ],
-   "articles90": 6,
+   "articles90": 4,
    "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-19T20:00:00.000Z",
+   "firstArticleAt": "2026-11-19T20:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "아침 최저 -6도 전국 영하권…전북남부 적설 최대 8㎝ [오늘 날씨]",
-     "press": "news1.kr",
+     "title": "이강인, 'AFC 국제선수상' 2연패...손흥민 넘은 아시아 최초 '새 역사'",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-19T21:16:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/629/0000553849"
+    },
+    {
+     "title": "[오피셜] '손흥민도 못한 대기록' 이강인이 해냈다! '아시아 최고 선수...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-19T21:01:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/445/0000491802"
+    },
+    {
+     "title": "[오피셜] '손흥민도 못한 대기록!' 이강인, 아시아 축구 새 역사 썼다…...",
+     "press": "sportalkorea.com",
+     "publishedAt": "2026-11-19T20:51:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/139/0002256290"
+    }
+   ]
+  },
+  {
+   "keyword": "웹툰",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-19T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "DDP·한강 등 웹툰 속 배경으로…서울시, '서울 명소' 13종 배포",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-19T21:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006412857?sid=102"
+    },
+    {
+     "title": "서울 명소가 웹툰 배경으로…'3D 디지털 애셋' 13종 무료 배포",
+     "press": "yna.co.kr",
      "publishedAt": "2026-11-19T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009300412?sid=103"
+     "link": "https://n.news.naver.com/mnews/article/001/0016453397?sid=102"
     },
     {
-     "title": "[대전·세종·충남 날씨예보] 비 또는 눈 최대 5cm…아침 영하 5도 강추...",
-     "press": "thefairnews.co.kr",
-     "publishedAt": "2026-11-19T20:40:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94819"
-    },
-    {
-     "title": "[수도권 날씨예보] 영하권 추위…경기남부서해안 새벽까지 눈",
-     "press": "thefairnews.co.kr",
-     "publishedAt": "2026-11-19T20:26:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=94815"
+     "title": "DDP·한강이 웹툰 속 배경으로…서울시, 3D 배경 13종 무료 배포",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-19T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005443921?sid=102"
     }
    ]
   },
@@ -80,7 +112,7 @@
     "google"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-19T20:35:00.000Z",
    "exclusive": false,
@@ -102,39 +134,7 @@
      "title": "‘한국은 축구협회장도 없는데’ 일본은 FIFA 회장까지 도전한다…한일...",
      "press": "osen.co.kr",
      "publishedAt": "2026-11-19T20:42:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/109/0005642775"
-    }
-   ]
-  },
-  {
-   "keyword": "웹툰",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 3,
-   "press": 3,
-   "firstArticleAt": "2026-11-19T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "서울 명소가 웹툰 배경으로…'3D 디지털 애셋' 13종 무료 배포",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-19T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016453397?sid=102"
-    },
-    {
-     "title": "DDP·한강이 웹툰 속 배경으로…서울시, 3D 배경 13종 무료 배포",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-19T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005443921?sid=102"
-    },
-    {
-     "title": "DDP·한강이 웹툰 배경으로…서울시, 3D 배경 13종 무료 배포",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-19T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009300395?sid=102"
+     "link": "https://m.sports.naver.com/wfootball/article/109/0005642775"
     }
    ]
   },
@@ -144,7 +144,7 @@
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-19T20:49:00.000Z",
    "exclusive": false,
@@ -171,41 +171,41 @@
    ]
   },
   {
-   "keyword": "이강인 AFC 국제선수상",
+   "keyword": "박찬종 별세",
    "sources": [
-    "nate"
+    "daum"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-19T20:05:00.000Z",
+   "firstArticleAt": "2026-11-19T20:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[오피셜] '손흥민도 못한 대기록' 이강인이 해냈다! '아시아 최고 선수...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-19T21:01:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/445/0000491802"
+     "title": "‘미스터 클린’ 박찬종 정치의 좌절 [김태훈의 의미 또는 재미]",
+     "press": "segye.com",
+     "publishedAt": "2026-11-19T20:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004176674?sid=100"
     },
     {
-     "title": "[오피셜] '손흥민도 못한 대기록!' 이강인, 아시아 축구 새 역사 썼다…...",
-     "press": "sportalkorea.com",
-     "publishedAt": "2026-11-19T20:51:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/139/0002256290"
+     "title": "'14대 대선출마' 박찬종 전 의원 별세",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-19T20:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928029?sid=100"
     },
     {
-     "title": "유럽 1티어 기자도 주목! 이강인, AFC 올해의 국제 선수상...\"2년 연속 수...",
-     "press": "fourfourtwo.co.kr",
-     "publishedAt": "2026-11-19T20:05:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/411/0000090205"
+     "title": "박찬종 전 의원 별세… 약속대로 시신 기증",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-19T20:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701384?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 890,
+  "flagged": 891,
   "matched": 530,
   "avgLeadMin": 730,
   "recent": [
