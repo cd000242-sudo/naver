@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T23:34:50.984Z",
+ "builtAt": "2026-11-19T23:44:54.762Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 56,
-   "recent20": 11,
-   "press": 47,
-   "firstArticleAt": "2026-11-19T22:05:00.000Z",
+   "articles90": 51,
+   "recent20": 10,
+   "press": 42,
+   "firstArticleAt": "2026-11-19T22:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼성전자·SK하이닉스, 美 AI·반도체주 급락에 프리마켓서 동반 약세",
-     "press": "newsway.co.kr",
-     "publishedAt": "2026-11-19T23:32:00.000Z",
-     "link": "https://www.newsway.co.kr/news/view?ud=2026112008212655853"
+     "title": "[마켓 프리뷰] 美 반도체주 급락에 국내 증시도 '찬바람'…5000선 사수 주...",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-19T23:38:00.000Z",
+     "link": "https://www.ajunews.com/view/20261120082814858"
     },
     {
-     "title": "뉴욕증시 급락…다우지수 5만선 하회",
-     "press": "cstimes.com",
-     "publishedAt": "2026-11-19T23:30:00.000Z",
-     "link": "https://www.cstimes.com/news/articleView.html?idxno=728703"
+     "title": "앤트로픽도 구하지 못한 뉴욕증시...상장 첫날 17% 올랐지만 3대 지수는...",
+     "press": "livebiz.today",
+     "publishedAt": "2026-11-19T23:38:00.000Z",
+     "link": "https://www.livebiz.today/news/articleView.html?idxno=206706"
     },
     {
-     "title": "앤트로픽 IPO 흥행에도 뉴욕증시 2% 급락... 다우 5만선 밑돌아 [뉴욕증...",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-19T23:30:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2021177"
+     "title": "앤트로픽 17% 뛰자 뉴욕증시 급락…삼전닉스 프리장서 4~5%↓[코주부]",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-19T23:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004684265?sid=101"
     }
    ]
   },
@@ -48,75 +48,170 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 31,
-   "recent20": 7,
-   "press": 27,
-   "firstArticleAt": "2026-11-19T22:14:00.000Z",
+   "articles90": 36,
+   "recent20": 12,
+   "press": 30,
+   "firstArticleAt": "2026-11-19T22:34:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "美·中 반도체 갈등, 삼성전자 AI 메모리 중심 체질 개선 주목",
-     "press": "press9.kr",
-     "publishedAt": "2026-11-19T23:32:00.000Z",
-     "link": "http://www.press9.kr/news/articleView.html?idxno=86709"
+     "title": "피지컬 AI와 휴머노이드 시대는 인류 문명의 거대한 전환점이다 (8부)",
+     "press": "koreaittimes.com",
+     "publishedAt": "2026-11-19T23:44:00.000Z",
+     "link": "https://www.koreaittimes.com/news/articleView.html?idxno=159335"
     },
     {
-     "title": "中문샷AI, 엔비디아 첨단칩 우회 확보 2천억원 계약 취소",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-19T23:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000544871?sid=104"
+     "title": "미국의 대중 AI칩 허가 내역 공개…엔비디아·AMD 제품 87만여 개 승인",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-19T23:42:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=847868"
     },
     {
-     "title": "LG그룹, 2027년 임원인사…승진 35% 늘리고 AI·로봇 인재 전진 배치",
-     "press": "eroun.net",
-     "publishedAt": "2026-11-19T23:24:00.000Z",
-     "link": "https://www.eroun.net/news/articleView.html?idxno=96040"
+     "title": "LG전자, 로보틱스·AIDC 조직 강화 총력…백승태·이상우 사장 승진",
+     "press": "ftoday.co.kr",
+     "publishedAt": "2026-11-19T23:42:00.000Z",
+     "link": "http://www.ftoday.co.kr/news/articleView.html?idxno=370157"
     }
    ]
   },
   {
-   "keyword": "리트 만점자 이진우",
+   "keyword": "이번에도 김정은 트럼프",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 27,
-   "recent20": 9,
-   "press": 23,
-   "firstArticleAt": "2026-11-19T22:07:00.000Z",
+   "articles90": 21,
+   "recent20": 5,
+   "press": 18,
+   "firstArticleAt": "2026-11-19T22:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "리트냥이 이진우 사망 후에도 남은 의혹…세무냥이·편입냥이·감평냥이...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-19T23:28:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16281132"
+     "title": "트럼프 \"미중러 회담 성공적…김정은 언젠가 만날 것\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-19T23:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928072?sid=104"
     },
     {
-     "title": "리트만점자 이진우 사망…검증 나섰던 노형석 추모글",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-19T23:26:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261120010007872"
-    },
-    {
-     "title": "'리트 만점자' 사망이 던진 질문…점수에 매달리는 한국 사회의 민낯",
+     "title": "트럼프 \"APEC 회담 너무 많았다\"…김정은과 만남 불발 인정",
      "press": "jnilbo.com",
+     "publishedAt": "2026-11-19T23:39:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000084792"
+    },
+    {
+     "title": "“김정은, 트럼프와 만남에 가치 못느껴…진짜 원한건 4대 핵보유국 회...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-19T23:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002726035?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "빅뱅 오늘 신곡 발표",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 20,
+   "recent20": 9,
+   "press": 16,
+   "firstArticleAt": "2026-11-19T22:56:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "빅뱅, 오늘(20일) 신곡 기습 발매…‘BiiiG’과는 다른 분위기",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-19T23:40:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001147760"
+    },
+    {
+     "title": "빅뱅, 오늘(20일) 신곡 깜짝 발매…데뷔 20주년 화려한 피날레",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-19T23:40:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005766511"
+    },
+    {
+     "title": "빅뱅, 오늘(20일) 깜짝 신곡 발표…'BiiiG'보다 큰 거 온다",
+     "press": "ize.co.kr",
+     "publishedAt": "2026-11-19T23:38:00.000Z",
+     "link": "https://m.entertain.naver.com/article/465/0000021139"
+    }
+   ]
+  },
+  {
+   "keyword": "오연서 스토리제이컴퍼니와 재계약",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 12,
+   "recent20": 0,
+   "press": 12,
+   "firstArticleAt": "2026-11-19T22:34:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[공식] 오연서, 데뷔 24년 차에도 의리 이어간다…현 소속사와 재계약",
+     "press": "sportschosun.com",
      "publishedAt": "2026-11-19T23:24:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000084785"
+     "link": "https://m.entertain.naver.com/article/076/0004468216"
+    },
+    {
+     "title": "오연서, 現 소속사와 동행 이어간다...스토리제이컴퍼니와 재계약",
+     "press": "nc.press",
+     "publishedAt": "2026-11-19T23:15:00.000Z",
+     "link": "https://www.nc.press/news/articleView.html?idxno=631446"
+    },
+    {
+     "title": "오연서, 스토리제이컴퍼니와 동행 계속 “신뢰 바탕 재계약” [공식]",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-19T23:10:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1795129703531236006"
+    }
+   ]
+  },
+  {
+   "keyword": "한덕수 선고",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 9,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-19T22:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김민석 \"조희대 탄핵, 한덕수 판결이 계기…미루기 어려운 역사적 판단...",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-19T23:38:00.000Z",
+     "link": "https://www.ajunews.com/view/20261120081835823"
+    },
+    {
+     "title": "12·3 계엄은 내란이라면서…한덕수, 계엄 전 행위는 '무죄'",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-19T23:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000521602?sid=102"
+    },
+    {
+     "title": "'국조부터'라던 김민석, 한덕수 파기환송에 '조희대 탄핵' 꺼냈다",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-19T23:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000142683?sid=100"
     }
    ]
   },
   {
    "keyword": "10월 생산자물가 하락",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 10,
+   "articles90": 8,
    "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-19T22:08:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-19T22:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -141,81 +236,23 @@
    ]
   },
   {
-   "keyword": "트럼프 이란 추가 공격 결정",
+   "keyword": "제갈성렬 아내 재혼",
    "sources": [
     "daum"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-19T22:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "인남식 “호르무즈 협상으로 트럼프에 노벨평화상 명분 만들어줄 수도”...",
-     "press": "sisain.co.kr",
-     "publishedAt": "2026-11-19T23:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/308/0000039004?sid=100"
-    },
-    {
-     "title": "트럼프 “이란 추가 공습 결정, 새해 이후에 논의…서두르지 않아”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-19T23:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003763886?sid=104"
-    },
-    {
-     "title": "트럼프 \"이란 결정 서두르지 않아…새해 시작 뒤 지켜볼 것\"(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-19T22:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016453462?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "수능 난이도",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 8,
+   "articles90": 7,
    "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-19T22:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "수능 국어·영어 작년보다 쉬웠다… \"수학 변별력 커질 듯\"",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-19T23:24:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/325898/?sc=Naver"
-    },
-    {
-     "title": "수능 국어 1등급컷 91~95점, 수학 1등급컷 86~90점 예상",
-     "press": "edu.donga.com",
-     "publishedAt": "2026-11-19T23:20:00.000Z",
-     "link": "https://edu.donga.com/news/articleView.html?idxno=113966"
-    },
-    {
-     "title": "수능 부정행위 98명 적발, 재난문자에 49명 덜미…수학이 대입 당락 변수",
-     "press": "abcn.kr",
-     "publishedAt": "2026-11-19T23:08:00.000Z",
-     "link": "https://www.abcn.kr/news/articleView.html?idxno=94778"
-    }
-   ]
-  },
-  {
-   "keyword": "제갈성렬 아내 공개",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
+   "press": 7,
    "firstArticleAt": "2026-11-19T22:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "제갈성렬, 19세 연하 아내·딸과 재혼 일상 공개…둘째는 아들",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-19T23:42:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626539"
+    },
     {
      "title": "제갈성렬, 19세 연하와 재혼… 둘째 임신 소식",
      "press": "hankookilbo.com",
@@ -227,50 +264,43 @@
      "press": "wikitree.co.kr",
      "publishedAt": "2026-11-19T23:24:00.000Z",
      "link": "https://www.wikitree.co.kr/articles/1176169"
-    },
-    {
-     "title": "\"지탄받아 마땅할 나이 차\" 제갈성렬, 19살 연하 아내와 재혼…부녀 지...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-19T23:12:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004126593"
     }
    ]
   },
   {
-   "keyword": "고대 예비 1번 고소 준비중",
+   "keyword": "이진우 사망 소식",
    "sources": [
-    "signal.bz",
     "nate"
    ],
    "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-19T22:05:00.000Z",
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-19T22:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“리트 만점자 고소 준비했는데” 피해자 등장?…고대 예비 1번 “재수...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-19T22:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701422?sid=102"
+     "title": "\"지난 3년간 부정행위자 더 많을 것 \"리트 만점자 사망에 커지는 수능 불...",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-19T23:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005845419?sid=102"
     },
     {
-     "title": "\"고대 정외과 예비 1번…이진우 때문에 떨어져\" 직접 피해자 등장",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-19T22:36:00.000Z",
-     "link": "https://www.ajunews.com/view/20261120070824734"
+     "title": "\"세상은 욕해도 내겐 좋은 형\"…이진우 치대 동기들 애도",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-19T23:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005356198?sid=102"
     },
     {
-     "title": "\"리트만점자 고소 준비했는데\"…24학년도 고대 예비1번 탈락자 등장",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-19T22:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979025?sid=102"
+     "title": "\"천재라며 띄워놓고…죄는 미워해도 사람은 미워하지 말라\" 이진우 사태...",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-19T23:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005845398?sid=102"
     }
    ]
   },
   {
-   "keyword": "이승기 어린이병원 기부 이유",
+   "keyword": "이승기 어린이병원 20억 기부 이유",
    "sources": [
     "nate"
    ],
@@ -298,6 +328,38 @@
      "press": "mk.co.kr",
      "publishedAt": "2026-11-19T23:14:00.000Z",
      "link": "https://m.entertain.naver.com/article/009/0005766498"
+    }
+   ]
+  },
+  {
+   "keyword": "기아",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-19T22:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "전국금속노동조합 기아자동차지부 정비지회, 화성시 아동·청소년 위해...",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-19T23:36:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2021128"
+    },
+    {
+     "title": "기아차 정비지회, 통 큰 나눔! 화성 아동·청소년에 1000만원+차량 기탁",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-19T23:14:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5085699"
+    },
+    {
+     "title": "현대차·기아, 북미 오토쇼에서 하이브리드 혁신 기술로 시선 집중",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-19T22:18:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886497"
     }
    ]
   },
@@ -332,13 +394,45 @@
      "link": "http://www.breaknews.com/1252485"
     }
    ]
+  },
+  {
+   "keyword": "대학 순위",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 2,
+   "firstArticleAt": "2026-11-19T22:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[부산ㆍ경남 대학 브리핑 모음(11월20일)] 동서대, ‘2026 DSU ANCHOR FAIR’...",
+     "press": "dnews.co.kr",
+     "publishedAt": "2026-11-19T23:42:00.000Z",
+     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611191723011530865"
+    },
+    {
+     "title": "\"글로벌 대학 3관왕 찍었다\"… 한양대, 지속가능성 평가서도 28계단 껑충",
+     "press": "dailysmart.co.kr",
+     "publishedAt": "2026-11-19T23:16:00.000Z",
+     "link": "http://www.dailysmart.co.kr/news/articleView.html?idxno=132862"
+    },
+    {
+     "title": "이동근 고려대 10번째 1순위 유력, 얼리 대세는 여전",
+     "press": null,
+     "publishedAt": "2026-11-19T22:18:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/065/0000304963"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 890,
-  "matched": 525,
-  "avgLeadMin": 741,
+  "flagged": 896,
+  "matched": 523,
+  "avgLeadMin": 729,
   "recent": [
    {
     "keyword": "lpga",
