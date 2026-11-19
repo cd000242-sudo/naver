@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T22:04:19.242Z",
+ "builtAt": "2026-11-19T22:14:22.658Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 31,
-   "recent20": 0,
+   "articles90": 32,
+   "recent20": 2,
    "press": 30,
    "firstArticleAt": "2026-11-19T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "[뉴욕증시 마감] 앤트로픽 상장에도 2%대 하락…나스닥 2.25%↓",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-19T22:12:00.000Z",
+     "link": "https://www.ajunews.com/view/20261120070723733"
+    },
+    {
+     "title": "사과 29%·돼지고기 13%↓…생산자물가 석 달 만에 하락",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-19T22:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005766491?sid=101"
+    },
+    {
      "title": "엔비디아 3.3% 하락하며 6거래일 연속 약세 이어가...시총 격차, 1위 애플...",
      "press": "beyondpost.co.kr",
      "publishedAt": "2026-11-19T21:40:00.000Z",
      "link": "http://www.beyondpost.co.kr/view.php?ud=2026112006361565392aaae0046f_30"
-    },
-    {
-     "title": "10월 생산자물가 0.1% 하락…농축산물 내려",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-19T21:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928053?sid=101"
-    },
-    {
-     "title": "10월 생산자물가 0.1% 하락…사과·돼지고기값 영향",
-     "press": "mbnmoney.mbn.co.kr",
-     "publishedAt": "2026-11-19T21:22:00.000Z",
-     "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005963799"
     }
    ]
   },
@@ -47,62 +47,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 4,
-   "press": 11,
+   "articles90": 15,
+   "recent20": 5,
+   "press": 13,
    "firstArticleAt": "2026-11-19T21:00:00.000Z",
-   "exclusive": false,
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "한덕수 파기환송에 野 “조작기소 확인”…조희대 탄핵론엔 “의회 쿠데...",
+     "title": "민주당, 한덕수 파기환송에 '조희대 탄핵' 나서",
+     "press": "goodmorningcc.com",
+     "publishedAt": "2026-11-19T22:12:00.000Z",
+     "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=456200"
+    },
+    {
+     "title": "신중론 접은 與, 한덕수 판결에 조희대 탄핵 공식화…野 “의회 쿠데타...",
      "press": "sedaily.com",
-     "publishedAt": "2026-11-19T22:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004684233?sid=100"
+     "publishedAt": "2026-11-19T22:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004684241?sid=100"
     },
     {
-     "title": "[AM-PM] 與, 오늘 의원총회서 '조희대 탄핵' 당론 채택 外",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-19T21:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928056?sid=102"
-    },
-    {
-     "title": "민주당, 조희대 대법원장 탄핵 추진…사법부·여야 정면충돌 예고",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-19T21:50:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101649"
-    }
-   ]
-  },
-  {
-   "keyword": "축구 감독",
-   "sources": [
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-19T20:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오피셜] '韓 축구 소리 질러!' 이강인, 亞 축구 역사에 한 획 그었다…...",
-     "press": "goal.com",
-     "publishedAt": "2026-11-19T21:55:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/216/0000143855"
-    },
-    {
-     "title": "'韓축구 풀백의 희망' 옌스, BVB전서 첫 선발 출격 전망...\"빠르게 투입...",
-     "press": "fourfourtwo.co.kr",
-     "publishedAt": "2026-11-19T21:43:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/411/0000090210"
-    },
-    {
-     "title": "[스포츠&라이프] 경북대 미식축구 동아리 '오렌지 파이터스' 감독·선수...",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-19T21:30:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/088/0001041404"
+     "title": "\"대법원 파기환송 판결 규탄… 조희대 대법원장 사퇴·탄핵 촉구\"",
+     "press": "jbsori.com",
+     "publishedAt": "2026-11-19T22:04:00.000Z",
+     "link": "http://www.jbsori.com/news/articleView.html?idxno=18226"
     }
    ]
   },
@@ -112,30 +80,30 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
+   "articles90": 9,
+   "recent20": 2,
+   "press": 9,
    "firstArticleAt": "2026-11-19T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "영월 38번 국도서 SUV·택시 정면충돌…2명 심정지",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-19T22:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014334661?sid=102"
+    },
+    {
+     "title": "강원 영월서 중앙선 넘은 택시 SUV 충돌...2명 숨져",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-19T22:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002435454?sid=102"
+    },
+    {
      "title": "[속보]강원 영월군 국도서 중앙선 넘은 택시 SUV와 충돌 2명 사망",
      "press": "kookje.co.kr",
      "publishedAt": "2026-11-19T21:45:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/658/0000161795?sid=102"
-    },
-    {
-     "title": "강원 영월서 SUV-택시 충돌‥3명 사상",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-19T21:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001536839?sid=102"
-    },
-    {
-     "title": "영월서 중앙선 넘은 택시와 SUV 충돌…2명 숨져",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-19T21:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016453429?sid=102"
     }
    ]
   },
@@ -176,13 +144,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 5,
+   "articles90": 7,
+   "recent20": 1,
+   "press": 6,
    "firstArticleAt": "2026-11-19T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[오늘의 운세] 2026년 11월 20일 금요일 띠별 운세… 토끼띠 '대길', 용띠...",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-19T22:10:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3083487"
+    },
     {
      "title": "[오늘의 운세] 2026년 11월 20일 (금) 띠별운세 '한 주를 가볍게 매듭짓...",
      "press": "dailypop.kr",
@@ -194,12 +168,38 @@
      "press": "ggilbo.com",
      "publishedAt": "2026-11-19T21:20:00.000Z",
      "link": "https://www.ggilbo.com/news/articleView.html?idxno=1193282"
+    }
+   ]
+  },
+  {
+   "keyword": "축구 감독",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-19T20:51:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오피셜] '韓 축구 소리 질러!' 이강인, 亞 축구 역사에 한 획 그었다…...",
+     "press": "goal.com",
+     "publishedAt": "2026-11-19T21:55:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/216/0000143855"
     },
     {
-     "title": "[오늘의 운세] 2026년 11월 20일 별자리 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-19T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006412852?sid=103"
+     "title": "'韓축구 풀백의 희망' 옌스, BVB전서 첫 선발 출격 전망...\"빠르게 투입...",
+     "press": "fourfourtwo.co.kr",
+     "publishedAt": "2026-11-19T21:43:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/411/0000090210"
+    },
+    {
+     "title": "'월드컵 탈락'부터 '모레노호의 진통'까지…한국축구 2026 A매치 결산[초...",
+     "press": "sports.hankooki.com",
+     "publishedAt": "2026-11-19T21:30:00.000Z",
+     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6943908"
     }
    ]
   },
@@ -222,25 +222,25 @@
      "link": "https://n.news.naver.com/mnews/article/018/0006412857?sid=102"
     },
     {
-     "title": "DDP·한강이 웹툰 배경으로…서울시, 3D 배경 13종 무료 배포",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-19T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009300395?sid=102"
-    },
-    {
      "title": "서울 명소가 웹툰 배경으로…'3D 디지털 애셋' 13종 무료 배포",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-19T21:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016453397?sid=102"
+    },
+    {
+     "title": "DDP·한강이 웹툰 속 배경으로…서울시, 3D 배경 13종 무료 배포",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-19T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005443921?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 892,
-  "matched": 530,
-  "avgLeadMin": 736,
+  "flagged": 888,
+  "matched": 527,
+  "avgLeadMin": 739,
   "recent": [
    {
     "keyword": "겨울",
