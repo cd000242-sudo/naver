@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T22:44:34.117Z",
+ "builtAt": "2026-11-19T22:54:37.577Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 48,
-   "recent20": 8,
-   "press": 44,
-   "firstArticleAt": "2026-11-19T21:16:00.000Z",
+   "articles90": 54,
+   "recent20": 14,
+   "press": 50,
+   "firstArticleAt": "2026-11-19T21:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[마켓 브리핑] 뉴욕증시, 앤트로픽 상장 기대감에 일제히 상승 출발",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-19T22:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000544858?sid=104"
+     "title": "“앤트로픽 상장도 소용없었다”…美 증시 2%대 급락",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-19T22:52:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611200007"
     },
     {
-     "title": "앤트로픽 상장도 못 막은 AI주 투매…뉴욕증시 2%대 하락",
-     "press": "ngonews.kr",
-     "publishedAt": "2026-11-19T22:40:00.000Z",
-     "link": "https://www.ngonews.kr/news/articleView.html?idxno=243706"
+     "title": "AI 열풍도 못 막은 뉴욕증시 급락…다우 5만선 다시 무너졌다",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-19T22:50:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68113"
     },
     {
-     "title": "[오늘의 이슈] 앤트로픽 역대 최대 상장에도 뉴욕증시 2% 급락",
-     "press": "newskr.kr",
-     "publishedAt": "2026-11-19T22:38:00.000Z",
-     "link": "http://www.newskr.kr/news/articleView.html?idxno=108154"
+     "title": "AMD, 中 수출 제재 위반 의혹에 주가 8% 급락",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-19T22:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001076844?sid=104"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 39,
+   "articles90": 43,
    "recent20": 13,
-   "press": 33,
+   "press": 35,
    "firstArticleAt": "2026-11-19T21:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "지하철 2호선 성수지선 양방향 운행 중지...선로전환기 훼손 영향",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-19T22:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005607204?sid=102"
+     "title": "서울 지하철 2호선 성수지선 운행 중단…1호선 일부 열차 지연",
+     "press": "delighti.co.kr",
+     "publishedAt": "2026-11-19T22:52:00.000Z",
+     "link": "https://www.delighti.co.kr/news/articleView.html?idxno=125272"
     },
     {
-     "title": "서울 지하철 2호선 성수지선 운행 중단…1호선도 일부 지연",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-19T22:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004684251?sid=102"
+     "title": "서울지하철 2호선 성수지선 양방향 운행중단...출근길 시민 불편",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-19T22:48:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261120000069"
     },
     {
-     "title": "지하철 2호선 성수지선 양방향 운행 중지…1호선 일부 지연",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-19T22:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404423?sid=102"
+     "title": "[속보] 서울지하철 2호선 성수역~신설동역 지선 운행 중지… 본선은 정...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-19T22:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002726005?sid=102"
     }
    ]
   },
@@ -80,10 +80,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 13,
-   "recent20": 8,
-   "press": 10,
-   "firstArticleAt": "2026-11-19T22:12:00.000Z",
+   "articles90": 10,
+   "recent20": 3,
+   "press": 8,
+   "firstArticleAt": "2026-11-19T22:24:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
@@ -108,17 +108,55 @@
    ]
   },
   {
+   "keyword": "택시",
+   "sources": [
+    "google"
+   ],
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-19T21:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "영월군 한반도면 후탄리 연정교차로 38국도 택시‧SUV 정면 충돌 2명 사...",
+     "press": "eroun.net",
+     "publishedAt": "2026-11-19T22:50:00.000Z",
+     "link": "https://www.eroun.net/news/articleView.html?idxno=96035"
+    },
+    {
+     "title": "강원 영월서 중앙선 넘은 택시와 SUV 충돌…2명 숨져",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-19T22:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404425?sid=102"
+    },
+    {
+     "title": "영월 38번 국도서 SUV·택시 정면충돌…2명 심정지",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-19T22:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014334661?sid=102"
+    }
+   ]
+  },
+  {
    "keyword": "10월 생산자물가 0.1%↓",
    "sources": [
     "nate"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-19T21:21:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-19T21:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "사과·돼지고기 내림세에 10월 생산자물가, 석 달 만에 하락 전환",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-19T22:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004010744?sid=101"
+    },
     {
      "title": "10월 생산자물가 0.1% 내려…석달 만에 하락전환",
      "press": "biz.sbs.co.kr",
@@ -130,76 +168,70 @@
      "press": "gokorea.kr",
      "publishedAt": "2026-11-19T22:22:00.000Z",
      "link": "https://www.gokorea.kr/news/articleView.html?idxno=886509"
+    }
+   ]
+  },
+  {
+   "keyword": "이승기 20억 기부",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 3,
+   "press": 4,
+   "firstArticleAt": "2026-11-19T22:09:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이승기, 20억 기부-원래 5억 계획-부모들 보고 변화",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-19T22:52:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95591"
     },
     {
-     "title": "사과 29%·돼지고기 13%↓…생산자물가 석 달 만에 하락",
+     "title": "“원래 5억만 하려 했다”…이승기, 서울대어린이병원에 20억 쾌척한 진...",
      "press": "mk.co.kr",
-     "publishedAt": "2026-11-19T22:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005766491?sid=101"
+     "publishedAt": "2026-11-19T22:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005766496?sid=103"
+    },
+    {
+     "title": "이승기, 미정산금 54억 받아 20억 기부 “없던 돈이라 생각했는데”",
+     "press": "segye.com",
+     "publishedAt": "2026-11-19T22:40:00.000Z",
+     "link": "https://m.entertain.naver.com/article/022/0004176722"
     }
    ]
   },
   {
-   "keyword": "택시",
+   "keyword": "제갈성렬 아내 공개",
    "sources": [
-    "google"
+    "daum"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-19T21:30:00.000Z",
+   "articles90": 4,
+   "recent20": 3,
+   "press": 4,
+   "firstArticleAt": "2026-11-19T21:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "영월 38번 국도서 SUV·택시 정면충돌…2명 심정지",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-19T22:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014334661?sid=102"
+     "title": "제갈성렬, 아내 공개-치과 의사와 이혼 후 19세 연하와",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-19T22:50:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95590"
     },
     {
-     "title": "강원 영월서 중앙선 넘은 택시 SUV 충돌...2명 숨져",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-19T22:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002435454?sid=102"
+     "title": "제갈성렬, 19세 연하 아내 최초 공개…\"부녀 사이로 오해받아\"",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-19T22:44:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=783261"
     },
     {
-     "title": "[속보]강원 영월군 국도서 중앙선 넘은 택시 SUV와 충돌 2명 사망",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-19T21:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000161795?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "축구 감독",
-   "sources": [
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-19T21:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오피셜] '축구 도사' 벨링엄, 득점 없이도 10월 레알의 선수 선정...\"5전...",
-     "press": "fourfourtwo.co.kr",
-     "publishedAt": "2026-11-19T22:35:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/411/0000090213"
-    },
-    {
-     "title": "계약 만료까지 단 7일, 모레노 감독이 남긴 메시지…\"언제나 국가대표팀...",
-     "press": "interfootball.co.kr",
-     "publishedAt": "2026-11-19T22:15:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/413/0000226846"
-    },
-    {
-     "title": "[오피셜] '韓 축구 소리 질러!' 이강인, 亞 축구 역사에 한 획 그었다…...",
-     "press": "goal.com",
-     "publishedAt": "2026-11-19T21:55:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/216/0000143855"
+     "title": "56세 제갈성렬, 19살 연하 아내와 재혼에 둘째도 \"부녀 사이로 오해…지...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-19T22:39:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009300465"
     }
    ]
   },
@@ -236,47 +268,15 @@
    ]
   },
   {
-   "keyword": "이승기 20억 기부",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-19T21:15:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이승기, 미정산금 54억 받아 20억 기부 “없던 돈이라 생각했는데”",
-     "press": "segye.com",
-     "publishedAt": "2026-11-19T22:40:00.000Z",
-     "link": "https://m.entertain.naver.com/article/022/0004176722"
-    },
-    {
-     "title": "이승기 \"20억 기부 비화? 처음엔 5억만 하려 했다\"",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-19T22:09:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000328535"
-    },
-    {
-     "title": "'20억 기부' 이승기, 서울대병원 주차 평생 공짜…\"원래 5억만 하려 했다...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-19T21:15:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000785286"
-    }
-   ]
-  },
-  {
    "keyword": "아파트",
    "sources": [
     "signal.bz",
     "google"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-19T21:21:00.000Z",
+   "press": 2,
+   "firstArticleAt": "2026-11-19T21:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -299,45 +299,13 @@
      "link": "https://n.news.naver.com/mnews/article/648/0000052810?sid=101"
     }
    ]
-  },
-  {
-   "keyword": "2026년 11월 20일 운세",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-19T21:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오늘의 운세] 2026년 11월 20일 금요일 띠별 운세… 토끼띠 '대길', 용띠...",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-19T22:10:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3083487"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 20일 (금) 띠별운세 '한 주를 가볍게 매듭짓...",
-     "press": "dailypop.kr",
-     "publishedAt": "2026-11-19T21:30:00.000Z",
-     "link": "http://www.dailypop.kr/news/articleView.html?idxno=104279"
-    },
-    {
-     "title": "[오늘의 운세] 20일 금요일 나의 운세는?",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-19T21:20:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1193282"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
   "flagged": 892,
-  "matched": 528,
-  "avgLeadMin": 754,
+  "matched": 527,
+  "avgLeadMin": 748,
   "recent": [
    {
     "keyword": "오현규 동점골 폭발",
