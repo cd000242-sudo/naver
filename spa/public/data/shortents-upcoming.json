@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T17:22:47.341Z",
+ "builtAt": "2026-11-19T17:32:50.731Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,10 +15,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-19T15:58:00.000Z",
+   "firstArticleAt": "2026-11-19T16:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -41,11 +41,43 @@
      "link": "https://econotimes.com/AMD-news-tops-US-searches-in-Google-Trends-daily-rankings-1779794"
     }
    ]
+  },
+  {
+   "keyword": "푸틴 얄타회담 발언",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-19T16:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[미중러 정상회담] \"우리는 푸틴 친구 아냐\"…발끈한 유럽",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-19T17:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016453361?sid=104"
+    },
+    {
+     "title": "\"미중러 회담서 우크라, 핵심의제 못돼\"…'新얄타회담' 우려와 거리(종...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-19T16:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009300338?sid=104"
+    },
+    {
+     "title": "트럼프의 '푸틴 환대'에 폴란드 우려…\"누가 더 가까운 친구인가\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-19T16:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014334514?sid=104"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 883,
+  "flagged": 884,
   "matched": 528,
   "avgLeadMin": 738,
   "recent": [
