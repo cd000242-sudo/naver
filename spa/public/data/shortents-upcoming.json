@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T21:54:16.173Z",
+ "builtAt": "2026-11-19T22:04:19.242Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,7 +16,7 @@
     "signal.bz"
    ],
    "articles90": 31,
-   "recent20": 1,
+   "recent20": 0,
    "press": 30,
    "firstArticleAt": "2026-11-19T21:00:00.000Z",
    "exclusive": false,
@@ -43,44 +43,77 @@
    ]
   },
   {
-   "keyword": "외국인 국내 주식 순매도",
+   "keyword": "조희대 탄핵 추진",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 20,
-   "recent20": 0,
-   "press": 19,
+   "articles90": 12,
+   "recent20": 4,
+   "press": 11,
    "firstArticleAt": "2026-11-19T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "외국인, 10월 韓주식 26조원 순매도…보유액 397조원 ‘뚝’",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-19T21:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394465?sid=101"
+     "title": "한덕수 파기환송에 野 “조작기소 확인”…조희대 탄핵론엔 “의회 쿠데...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-19T22:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004684233?sid=100"
     },
     {
-     "title": "AI 기업 상장 잔칫날 뉴욕증시는 급랭…국내 반도체주도 시험대",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-19T21:26:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=506108"
+     "title": "[AM-PM] 與, 오늘 의원총회서 '조희대 탄핵' 당론 채택 外",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-19T21:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928056?sid=102"
     },
     {
-     "title": "외국인, 10월 국내 주식 26조원 순매도",
-     "press": "mbnmoney.mbn.co.kr",
-     "publishedAt": "2026-11-19T21:20:00.000Z",
-     "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005963798"
+     "title": "민주당, 조희대 대법원장 탄핵 추진…사법부·여야 정면충돌 예고",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-19T21:50:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101649"
+    }
+   ]
+  },
+  {
+   "keyword": "축구 감독",
+   "sources": [
+    "google"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-19T20:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오피셜] '韓 축구 소리 질러!' 이강인, 亞 축구 역사에 한 획 그었다…...",
+     "press": "goal.com",
+     "publishedAt": "2026-11-19T21:55:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/216/0000143855"
+    },
+    {
+     "title": "'韓축구 풀백의 희망' 옌스, BVB전서 첫 선발 출격 전망...\"빠르게 투입...",
+     "press": "fourfourtwo.co.kr",
+     "publishedAt": "2026-11-19T21:43:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/411/0000090210"
+    },
+    {
+     "title": "[스포츠&라이프] 경북대 미식축구 동아리 '오렌지 파이터스' 감독·선수...",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-19T21:30:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/088/0001041404"
     }
    ]
   },
   {
    "keyword": "택시",
    "sources": [
+    "signal.bz",
     "google"
    ],
    "articles90": 7,
-   "recent20": 3,
+   "recent20": 1,
    "press": 7,
    "firstArticleAt": "2026-11-19T21:00:00.000Z",
    "exclusive": false,
@@ -107,66 +140,34 @@
    ]
   },
   {
-   "keyword": "amd",
+   "keyword": "이강인, AFC 2연패 수상",
    "sources": [
-    "google"
+    "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 3,
-   "press": 7,
-   "firstArticleAt": "2026-11-19T21:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "리사 수 AMD CEO “젠슨 황, 탁월한 리더…소음 가라 앉을 것”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-19T21:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003763883?sid=104"
-    },
-    {
-     "title": "AMD 주가 30분 만에 13% 급락…헌터브룩 중국 연계 의혹",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-19T21:50:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/441131"
-    },
-    {
-     "title": "AMD, 중국 반도체 수출규제 위반 의혹…\"제재 기업에 최신 펌웨어 유입...",
-     "press": "4th.kr",
-     "publishedAt": "2026-11-19T21:38:00.000Z",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2122284"
-    }
-   ]
-  },
-  {
-   "keyword": "축구 감독",
-   "sources": [
-    "google"
-   ],
-   "articles90": 7,
-   "recent20": 1,
+   "articles90": 6,
+   "recent20": 2,
    "press": 6,
-   "firstArticleAt": "2026-11-19T20:35:00.000Z",
+   "firstArticleAt": "2026-11-19T20:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'韓축구 풀백의 희망' 옌스, BVB전서 첫 선발 출격 전망...\"빠르게 투입...",
-     "press": "fourfourtwo.co.kr",
+     "title": "이강인, AFC 2연패…손흥민도 못한 대기록",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-19T21:56:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611200020"
+    },
+    {
+     "title": "[오피셜] '韓 축구 소리 질러!' 이강인, 亞 축구 역사에 한 획 그었다…...",
+     "press": "goal.com",
+     "publishedAt": "2026-11-19T21:55:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/216/0000143855"
+    },
+    {
+     "title": "[오피셜] '2026년은 이강인의 해!'…UCL 2연패·아틀레티코 마드리드 이...",
+     "press": "besteleven.com",
      "publishedAt": "2026-11-19T21:43:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/411/0000090210"
-    },
-    {
-     "title": "[스포츠&라이프] 경북대 미식축구 동아리 '오렌지 파이터스' 감독·선수...",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-19T21:30:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/088/0001041404"
-    },
-    {
-     "title": "'월드컵 탈락'부터 '모레노호의 진통'까지…한국축구 2026 A매치 결산[초...",
-     "press": "sports.hankooki.com",
-     "publishedAt": "2026-11-19T21:30:00.000Z",
-     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6943908"
+     "link": "https://m.sports.naver.com/wfootball/article/343/0000149117"
     }
    ]
   },
@@ -203,38 +204,6 @@
    ]
   },
   {
-   "keyword": "이강인 AFC 2연속 수상",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-19T20:51:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오피셜] '2026년은 이강인의 해!'…UCL 2연패·아틀레티코 마드리드 이...",
-     "press": "besteleven.com",
-     "publishedAt": "2026-11-19T21:43:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/343/0000149117"
-    },
-    {
-     "title": "이강인, 'AFC 국제선수상' 2연패...손흥민 넘은 아시아 최초 '새 역사'",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-19T21:16:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/629/0000553849"
-    },
-    {
-     "title": "[오피셜] '손흥민도 못한 대기록' 이강인이 해냈다! '아시아 최고 선수...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-19T21:01:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/445/0000491802"
-    }
-   ]
-  },
-  {
    "keyword": "웹툰",
    "sources": [
     "google"
@@ -253,91 +222,32 @@
      "link": "https://n.news.naver.com/mnews/article/018/0006412857?sid=102"
     },
     {
+     "title": "DDP·한강이 웹툰 배경으로…서울시, 3D 배경 13종 무료 배포",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-19T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009300395?sid=102"
+    },
+    {
      "title": "서울 명소가 웹툰 배경으로…'3D 디지털 애셋' 13종 무료 배포",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-19T21:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016453397?sid=102"
-    },
-    {
-     "title": "DDP·한강이 웹툰 속 배경으로…서울시, 3D 배경 13종 무료 배포",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-19T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005443921?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "박찬종 별세",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-19T20:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "고독한 결단, 마지막은 나눔 [박찬종 추모]",
-     "press": "sisaon.co.kr",
-     "publishedAt": "2026-11-19T21:48:00.000Z",
-     "link": "https://www.sisaon.co.kr/news/articleView.html?idxno=206244"
-    },
-    {
-     "title": "‘미스터 클린’ 박찬종 정치의 좌절 [김태훈의 의미 또는 재미]",
-     "press": "segye.com",
-     "publishedAt": "2026-11-19T20:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004176674?sid=100"
-    },
-    {
-     "title": "'14대 대선출마' 박찬종 전 의원 별세",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-19T20:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928029?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "與 조희대 탄핵 추진",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-19T21:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "與, 조희대 탄핵 추진 급물살…오늘 의총서 당론 모은다",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-19T21:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009300439?sid=100"
-    },
-    {
-     "title": "'한덕수 파기환송'에 與 \"조희대 탄핵\" vs 野 \"깡패처럼 보복\"",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-19T21:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394464?sid=100"
-    },
-    {
-     "title": "전합 판결인데 조희대만?…한동훈 \"與, 탄핵하려면 대법관 전원 하라\" 등...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-19T21:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003157446?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 894,
-  "matched": 531,
-  "avgLeadMin": 742,
+  "flagged": 892,
+  "matched": 530,
+  "avgLeadMin": 736,
   "recent": [
+   {
+    "keyword": "겨울",
+    "hitKeyword": "한겨울 추위 눈 예보",
+    "hitAt": "2026-11-20T07:00:00+09:00",
+    "leadMin": 1359
+   },
    {
     "keyword": "젤렌스키 북한 미사일 공급",
     "hitKeyword": "리야드 빌딩 후티 미사일",
@@ -391,12 +301,6 @@
     "hitKeyword": "GTA6 출시",
     "hitAt": "2026-11-20T00:00:00+09:00",
     "leadMin": 2264
-   },
-   {
-    "keyword": "gta6 메타크리틱",
-    "hitKeyword": "GTA6 출시",
-    "hitAt": "2026-11-20T00:00:00+09:00",
-    "leadMin": 1432
    }
   ]
  }
