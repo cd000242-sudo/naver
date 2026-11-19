@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T21:24:05.668Z",
+ "builtAt": "2026-11-19T21:34:09.191Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,179 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
+ "measured": 24,
  "candidates": [
   {
-   "keyword": "與 조희대 탄핵 추진",
+   "keyword": "10월 생산자물가 하락",
    "sources": [
-    "nate"
+    "signal.bz",
+    "daum"
    ],
-   "articles90": 5,
-   "recent20": 1,
+   "articles90": 30,
+   "recent20": 3,
+   "press": 29,
+   "firstArticleAt": "2026-11-19T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "10월 생산자물가 0.1% 하락…농축산물 내려",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-19T21:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928053?sid=101"
+    },
+    {
+     "title": "10월 생산자물가 0.1% 하락…사과·돼지고기값 영향",
+     "press": "mbnmoney.mbn.co.kr",
+     "publishedAt": "2026-11-19T21:22:00.000Z",
+     "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005963799"
+    },
+    {
+     "title": "농림수산품이 끌어내린 생산자물가…제외하면 0.2% 상승",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-19T21:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002394463?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "외국인 국내 주식 순매도",
+   "sources": [
+    "signal.bz",
+    "daum"
+   ],
+   "articles90": 20,
+   "recent20": 3,
+   "press": 19,
+   "firstArticleAt": "2026-11-19T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "외국인, 10월 韓주식 26조원 순매도…보유액 397조원 ‘뚝’",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-19T21:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002394465?sid=101"
+    },
+    {
+     "title": "AI 기업 상장 잔칫날 뉴욕증시는 급랭…국내 반도체주도 시험대",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-19T21:26:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=506108"
+    },
+    {
+     "title": "외국인, 10월 국내 주식 26조원 순매도",
+     "press": "mbnmoney.mbn.co.kr",
+     "publishedAt": "2026-11-19T21:20:00.000Z",
+     "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005963798"
+    }
+   ]
+  },
+  {
+   "keyword": "백승기 예산 검증",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 9,
+   "recent20": 0,
+   "press": 9,
+   "firstArticleAt": "2026-11-19T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "백승기 경기의회 예결위원장 \"민생예산 지키고 관행적 예산 철저히 검증...",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-19T21:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004211916?sid=102"
+    },
+    {
+     "title": "백승기 위원장 \"구조 불안해도 '경기도민 필수예산' 지탱하겠다\"",
+     "press": "joongboo.com",
+     "publishedAt": "2026-11-19T21:06:00.000Z",
+     "link": "https://www.joongboo.com/news/articleView.html?idxno=363743095"
+    },
+    {
+     "title": "백승기 경기도의회 도청 예결위원장 “도민 생명과 안전, 취약계층 보호...",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-19T21:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000132967?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "amd",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 4,
+   "press": 6,
+   "firstArticleAt": "2026-11-19T20:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "AMD도 中 제재 기업과 연계 의혹…주가 8% 급락",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-19T21:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006412859?sid=101"
+    },
+    {
+     "title": "중국에 발목 잡힌 AMD…하나마이크론·네패스 수혜 가능성 주목",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-19T21:30:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=506110"
+    },
+    {
+     "title": "뉴욕증시 마감 직전...반도체ETF·엔비디아·AMD·AMAT '급락'",
+     "press": "choicenews.co.kr",
+     "publishedAt": "2026-11-19T21:28:00.000Z",
+     "link": "http://www.choicenews.co.kr/news/articleView.html?idxno=173347"
+    }
+   ]
+  },
+  {
+   "keyword": "축구 감독",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-19T20:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[스포츠&라이프] 경북대 미식축구 동아리 '오렌지 파이터스' 감독·선수...",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-19T21:30:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/088/0001041404"
+    },
+    {
+     "title": "'월드컵 탈락'부터 '모레노호의 진통'까지…한국축구 2026 A매치 결산[초...",
+     "press": "sports.hankooki.com",
+     "publishedAt": "2026-11-19T21:30:00.000Z",
+     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6943908"
+    },
+    {
+     "title": "동행? 결별? 운명의 일주일…모레노 감독 거취, 27일 전에 결정",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-19T21:00:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/421/0009300400"
+    }
+   ]
+  },
+  {
+   "keyword": "한덕수 징역 15년 파기환송",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 2,
    "press": 4,
-   "firstArticleAt": "2026-11-19T20:02:00.000Z",
+   "firstArticleAt": "2026-11-19T20:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -29,22 +191,23 @@
      "link": "https://n.news.naver.com/mnews/article/123/0002394464?sid=100"
     },
     {
-     "title": "전합 판결인데 조희대만?…한동훈 \"與, 탄핵하려면 대법관 전원 하라\" 등...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-19T21:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003157446?sid=100"
+     "title": "한덕수 내란 일부 무죄 취지 파기환송…구속은 2개월 연장",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-19T21:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012297762?sid=102"
     },
     {
-     "title": "한덕수 일부 무죄…與 “조희대 탄핵”",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-19T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701326?sid=102"
+     "title": "\"계엄은 위헌·위법\"이지만‥한덕수 파기환송",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-19T21:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001536820?sid=102"
     }
    ]
   },
   {
    "keyword": "이강인 AFC 2연속 수상",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 4,
@@ -107,108 +270,57 @@
    ]
   },
   {
-   "keyword": "축구 감독",
+   "keyword": "與 조희대 탄핵 추진",
    "sources": [
-    "google"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-19T20:35:00.000Z",
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-19T21:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "동행? 결별? 운명의 일주일…모레노 감독 거취, 27일 전에 결정",
+     "title": "與, 조희대 탄핵 추진 급물살…오늘 의총서 당론 모은다",
      "press": "news1.kr",
-     "publishedAt": "2026-11-19T21:00:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/421/0009300400"
+     "publishedAt": "2026-11-19T21:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009300439?sid=100"
     },
     {
-     "title": "[오피셜] '손흥민도 못한 대기록!' 이강인, 아시아 축구 새 역사 썼다…...",
-     "press": "sportalkorea.com",
-     "publishedAt": "2026-11-19T20:51:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/139/0002256290"
+     "title": "'한덕수 파기환송'에 與 \"조희대 탄핵\" vs 野 \"깡패처럼 보복\"",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-19T21:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002394464?sid=100"
     },
     {
-     "title": "‘한국은 축구협회장도 없는데’ 일본은 FIFA 회장까지 도전한다…한일...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-19T20:42:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/109/0005642775"
-    }
-   ]
-  },
-  {
-   "keyword": "푸틴 얄타회담 발언",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-19T20:49:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "미중러 3자 회동 '동상이몽'…시진핑·푸틴 웃고 트럼프 '빈손'",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-19T21:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005443931?sid=104"
-    },
-    {
-     "title": "[미중러 정상회담] \"트럼프 '강대국 공동지배' 발언…동맹에 최악\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-19T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016453411?sid=104"
-    },
-    {
-     "title": "푸틴, '제2의 얄타회담' 우려에…\"얄타회담이 뭐가 나빠\" 홀로 기자회견",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-19T20:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005845357?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "박찬종 별세",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-19T20:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘미스터 클린’ 박찬종 정치의 좌절 [김태훈의 의미 또는 재미]",
-     "press": "segye.com",
-     "publishedAt": "2026-11-19T20:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004176674?sid=100"
-    },
-    {
-     "title": "'14대 대선출마' 박찬종 전 의원 별세",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-19T20:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928029?sid=100"
-    },
-    {
-     "title": "박찬종 전 의원 별세… 약속대로 시신 기증",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-19T20:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701384?sid=102"
+     "title": "전합 판결인데 조희대만?…한동훈 \"與, 탄핵하려면 대법관 전원 하라\" 등...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-19T21:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003157446?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 891,
-  "matched": 530,
-  "avgLeadMin": 730,
+  "flagged": 896,
+  "matched": 532,
+  "avgLeadMin": 743,
   "recent": [
+   {
+    "keyword": "젤렌스키 북한 미사일 공급",
+    "hitKeyword": "리야드 빌딩 후티 미사일",
+    "hitAt": "2026-11-20T06:30:00+09:00",
+    "leadMin": 4133
+   },
+   {
+    "keyword": "전쟁",
+    "hitKeyword": "네타냐후 이란 전쟁 추진",
+    "hitAt": "2026-11-20T06:30:00+09:00",
+    "leadMin": 4043
+   },
    {
     "keyword": "김정은",
     "hitKeyword": "트럼프 김정은 회담불발",
@@ -256,18 +368,6 @@
     "hitKeyword": "GTA6 출시",
     "hitAt": "2026-11-20T00:00:00+09:00",
     "leadMin": 1432
-   },
-   {
-    "keyword": "구글 젠틀몬스터 안경 공개",
-    "hitKeyword": "삼성 구글 AI 안경",
-    "hitAt": "2026-11-19T23:00:00+09:00",
-    "leadMin": 9478
-   },
-   {
-    "keyword": "이 대통령 자본시장 간담회",
-    "hitKeyword": "멕시코 대통령 이코노미석",
-    "hitAt": "2026-11-19T23:00:00+09:00",
-    "leadMin": 9417
    }
   ]
  }
