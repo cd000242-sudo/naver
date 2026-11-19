@@ -8,73 +8,259 @@
         {
           "id": "naver-1",
           "rank": 1,
-          "keyword": "이진우 수능 만점자",
-          "title": "이진우 수능 만점자",
-          "rawKeyword": "이진우 수능 만점자",
+          "keyword": "이진우 검증 불참",
+          "title": "이진우 검증 불참",
+          "rawKeyword": "이진우 검증 불참",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 100,
           "source": "naver",
           "expansions": [
-            "리트 만점자 이진우",
+            "이진우 검증",
             "이진우 리트",
             "이진우 나무위키",
             "이진우 책",
+            "리트 만점자 이진우",
             "리트 이진우",
             "이진우 ai",
-            "이진우 인스타",
-            "2026수능"
+            "이진우 인스타"
           ],
           "expansionSeed": "이진우",
           "insight": {
             "titles": {
-              "seo": "이진우 수능 만점자 최신 이슈와 핵심 내용 정리",
-              "home": "이진우 수능 만점자, Attention Required! 관련 확인할 점",
-              "topic": "이진우 수능 만점자",
+              "seo": "이진우 검증 불참 최신 이슈와 핵심 내용 정리",
+              "home": "이진우 검증 불참, 법학적성시험 만점자, 공개검증 불참…주최 측도 연락 안돼 관련 확인할 점",
+              "topic": "이진우 검증 불참",
               "topicGroup": "네이버 실시간 검색어"
             },
             "facts": [
               {
-                "text": "수능 부정행위 의혹을 받는 법학적성시험(LEET) 만점자 이진우 (32)씨와 연락이 닿지 않고 있다. 연합뉴스 보도에 따르면 이날 오전 8시42분께 이씨의 신변이 우려된다는 신고가 경찰에 들어왔다.",
+                "text": "수능 국어 시작 시각까지 도착 안해…부정행위 의혹 급물살 변호사들이 업무방해 등 혐의로 고발…서울청 광역수사단 수사 법학적성시험(LEET) 만점을 받은 뒤 부정행위 의혹에 휩싸인 서울대 치대생 이진우 씨가 공언했던 공개 검증 에 불참 했다.",
                 "sourceIndex": 0
               },
               {
-                "text": "수능 당일인 오늘(19일) 국어 영역을 풀며 공개 검증에 나서겠다고 예고한 뒤, 연락이 두절된 이진우 씨가 어제아침 자택에서 나선 뒤 돌아오지 않고 있는 것으로 파악됐습니다.",
+                "text": "'리트 만점자' 이진우 , 수능 공개 검증 최종 불참 주관사 \" 이진우 , 오지 않는다고 판단… 검증 종료\" 주관사 \"전화 꺼져있어…SNS 연락도 닿지 않아\" 이진우 , 앞서 'AI 부정' 의혹에 공개 검증 예고 이진우 'AI 부정' 피고발…서울청 광수단 배당 ▷ 자세한 뉴스 곧 이어집니다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.hankyung.com/article/2026111965007",
-                "press": "한국경제"
+                "url": "https://www.yna.co.kr/view/AKR20261119026000004?input=1195m",
+                "press": "연합뉴스"
               },
               {
-                "url": "https://news.kbs.co.kr/news/pc/view/view.do?ncd=8717016&ref=A",
-                "press": "KBS"
+                "url": "https://www.ytn.co.kr/_ln/0103_202611190843538320",
+                "press": "YTN"
               }
             ],
             "images": [
-              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F015%2F2026%2F11%2F19%2F5355672.jpg&type=fface200_200&expire=2&refresh=true"
+              "https://img9.yna.co.kr/photo/yna/YH/2026/11/19/PYH2026111905240001301_P4.jpg"
             ],
             "press": [
-              "한국경제",
-              "KBS"
+              "연합뉴스",
+              "YTN"
             ],
             "headlines": [
-              "Attention Required!",
-              "[단독] ‘리트 만점자 ’ 이진우 연락 두절…경찰, 광진구 수색 중"
+              "법학적성시험 만점자, 공개검증 불참…주최 측도 연락 안돼",
+              "[속보] '리트 만점자' 이진우 , 수능 공개 검증 최종 불참"
             ],
-            "extraction": "search-card",
-            "collectedAt": "2026-11-19T01:35:37.907Z"
+            "extraction": "playwright",
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
           "id": "naver-2",
           "rank": 2,
+          "keyword": "주식 거래시간",
+          "title": "주식 거래시간",
+          "rawKeyword": "주식 거래시간",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 99,
+          "source": "naver",
+          "expansions": [
+            "한국주식 거래시간",
+            "미국주식 거래시간",
+            "해외주식 거래시간",
+            "국내주식 거래시간",
+            "미 주식 거래시간",
+            "미국주식 거래시간 프리장",
+            "금요일 주식 거래시간",
+            "미국주식 거래시간 주말"
+          ],
+          "expansionSeed": "주식 거래시간",
+          "insight": {
+            "titles": {
+              "seo": "주식 거래시간 최신 이슈와 핵심 내용 정리",
+              "home": "주식 거래시간, 오늘 주식 거래는 10시부터, 프리장도 쉰다…수능일, 증시 1시간 순연 - 머니투데이 관련 확인할 점",
+              "topic": "주식 거래시간",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "오늘 주식 거래는 10시부터, 프리장도 쉰다…수능일, 증시 1시간 순연 /자료=한국거래소 대학수학능력시험(수능)이 열리는 19일 국내 증시는 평소보다 1시간 늦은 오전 10시에 개장한다. 장마감 시간도 1시간 늦춰지며, 오전 8시부터 8시50분까지 운영되던 프리마켓도 하루 쉰다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "주식 과 상장지수펀드(ETF), 상장지수증권(ETN), 상장형 수익증권의 정규시장 거래시간 은 오전 10시부터 오후 4시 30분으로 기존보다 18일 증권업계에 따르면 한국 거래 소는 이튿날 유가증권시장과 코스닥·코넥스시장, 파생상품시장 등의 거래시간 을 임시 변경한다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.mt.co.kr/stock/2026/11/19/2026111908152248511",
+                "press": "머니투데이"
+              },
+              {
+                "url": "https://www.hankyung.com/article/202611185520i",
+                "press": "한국경제"
+              }
+            ],
+            "images": [
+              "https://thumb.mt.co.kr/cdn-cgi/image/w=1200,h=649,fit=cover,bg=white,f=auto,quality=high,sharpen=2,g=face/21/2026/11/2026111908152248511_1.jpg"
+            ],
+            "press": [
+              "머니투데이",
+              "한국경제"
+            ],
+            "headlines": [
+              "오늘 주식 거래는 10시부터, 프리장도 쉰다…수능일, 증시 1시간 순연 - 머니투데이",
+              "\"수능날 착각하지 마세요\"...프리마켓은 휴장, 정규장은 10시부터"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-19T02:10:44.493Z"
+          }
+        },
+        {
+          "id": "naver-3",
+          "rank": 3,
+          "keyword": "2027 수능 시험 당일",
+          "title": "2027 수능 시험 당일",
+          "rawKeyword": "2027 수능 시험 당일",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 98,
+          "source": "naver",
+          "expansions": [
+            "2027수능",
+            "2027년 최저시급",
+            "2027년 띠",
+            "2027 fa",
+            "2027년 달력",
+            "2027 띠",
+            "2027 다이어리",
+            "2027 설날"
+          ],
+          "expansionSeed": "2027",
+          "insight": {
+            "titles": {
+              "seo": "2027 수능 시험 당일 최신 이슈와 핵심 내용 정리",
+              "home": "2027 수능 시험 당일, 수능 시험장 100ｍ내 공공 와이파이 차단…오늘 오후 6시부터 관련 확인할 점",
+              "topic": "2027 수능 시험 당일",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "",
+                "sourceIndex": 0
+              },
+              {
+                "text": "교육부는 수능 당일 인 19일 위급재난문자를 예고 없이 추가 발송하는 방안을 검토 중이라고 18일 행정안전부가 밝혔다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.yna.co.kr/view/AKR20261118153800017?input=1195m",
+                "press": "연합뉴스"
+              },
+              {
+                "url": "http://www.wowtv.co.kr/NewsCenter/News/Read?articleId=A202611180030&t=NN",
+                "press": "한국경제TV"
+              }
+            ],
+            "images": [
+              "https://img7.yna.co.kr/photo/yna/YH/2026/11/17/PYH2026111708400001300_P4.jpg"
+            ],
+            "press": [
+              "연합뉴스",
+              "한국경제TV"
+            ],
+            "headlines": [
+              "수능 시험장 100ｍ내 공공 와이파이 차단…오늘 오후 6시부터",
+              "수능 '폰 적발용' 재난문자, 불시에 '추가 발송' 검토 중"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-19T02:10:44.493Z"
+          }
+        },
+        {
+          "id": "naver-4",
+          "rank": 4,
+          "keyword": "리트 만점자 수사",
+          "title": "리트 만점자 수사",
+          "rawKeyword": "리트 만점자 수사",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 97,
+          "source": "naver",
+          "expansions": [
+            "리트 만점자",
+            "리트 만점자 ai",
+            "리트 시험",
+            "리트 뜻",
+            "리트 이진우",
+            "리트 기출",
+            "리트냥이",
+            "이진우 리트"
+          ],
+          "expansionSeed": "리트",
+          "insight": {
+            "titles": {
+              "seo": "리트 만점자 수사 최신 이슈와 핵심 내용 정리",
+              "home": "리트 만점자 수사, KBS 뉴스 관련 확인할 점",
+              "topic": "리트 만점자 수사",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "경찰은 실종 사건으로 전환해 수사 에 착수하는 한편, 서울 광진구 일대를 수색하고 있습니다. 이 씨는 당초 오늘 오전 9시까지 서울 강남구의 한 스튜디오에 나와 수능 국어 문제 풀이를 하기로 했지만, 나타나지 않았습니다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "법학적성시험(LEET· 리트 ) 만점자 이모 씨(32)가 스스로 예고한 ‘공개 검증’ 당일 돌연 잠적해 경찰이 소재 파악에 나섰다. 한편 전날에는 이씨의 시험 부정행위 의혹과 만점 이력을 내세운 수험서 판매 행위를 수사 해 달라는 고발장 2건이 경찰에 접수됐다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://news.kbs.co.kr/news/pc/view/view.do?ncd=8717016&ref=A",
+                "press": "KBS"
+              },
+              {
+                "url": "https://www.donga.com/news/Society/article/all/20261119/135052872/1",
+                "press": "동아일보"
+              }
+            ],
+            "images": [
+              "https://news.kbs.co.kr/resource/image/common/img_meta.png"
+            ],
+            "press": [
+              "KBS",
+              "동아일보"
+            ],
+            "headlines": [
+              "KBS 뉴스",
+              "[속보]잠적한 리트 만점자 , 광진구 모텔서 이동 정황…경찰 수색 나서"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-19T02:10:44.493Z"
+          }
+        },
+        {
+          "id": "naver-5",
+          "rank": 5,
           "keyword": "미국 아세안 북한 비핵화",
           "title": "미국 아세안 북한 비핵화",
           "rawKeyword": "미국 아세안 북한 비핵화",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 99,
+          "priority": 96,
           "source": "naver",
           "expansions": [
             "북한 비핵화",
@@ -100,7 +286,7 @@
                 "sourceIndex": 0
               },
               {
-                "text": "미국 정부가 필리핀에서 열린 아세안 (ASEAN·동남아시아국가연합) 정상회의 직후 북한 의 완전한 비핵화 와 북한 에 대한 유엔 안전보장이사회 제재 이행을 거듭 확인했다.",
+                "text": "도널드 트럼피 미국 행정부가 북한 의 완전한 비핵화 와 대북 제재 이행이라는 기존 원칙을 다시 한번 분명히 했다. 미 국 무부는 필리핀에서 열린 아세안 (ASEAN·동남아시아국가연합) 정상회의가 막을 내린 18일(현지시간) 전날 회의 결과를 정리한 팩트시트(설명자료)를 배포했다.",
                 "sourceIndex": 1
               }
             ],
@@ -110,8 +296,8 @@
                 "press": "연합뉴스"
               },
               {
-                "url": "https://www.hankookilbo.com/news/article/A2026111908060000748?did=NA",
-                "press": "한국일보"
+                "url": "https://www.hankyung.com/article/2026111961427",
+                "press": "한국경제"
               }
             ],
             "images": [
@@ -119,24 +305,24 @@
             ],
             "press": [
               "연합뉴스",
-              "한국일보"
+              "한국경제"
             ],
             "headlines": [
               "美, 아세안회의 팩트시트…\"北 완전한 비핵화에 계속 전념\"",
-              "美 \" 북한 완전한 비핵화 지속 의지\"… 아세안 회의 후 설명 자료"
+              "美, 아세안 서 北 비핵화 원칙 재확인…인태 안보 협력 강화"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:09:38.902Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
-          "id": "naver-3",
-          "rank": 3,
-          "keyword": "수험생 응원 행렬",
-          "title": "수험생 응원 행렬",
-          "rawKeyword": "수험생 응원 행렬",
+          "id": "naver-6",
+          "rank": 6,
+          "keyword": "수험생 응원하는 이들",
+          "title": "수험생 응원하는 이들",
+          "rawKeyword": "수험생 응원하는 이들",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 98,
+          "priority": 95,
           "source": "naver",
           "expansions": [
             "수험생 할인",
@@ -151,116 +337,238 @@
           "expansionSeed": "수험생",
           "insight": {
             "titles": {
-              "seo": "수험생 응원 행렬 최신 이슈와 핵심 내용 정리",
-              "home": "수험생 응원 행렬, \"평소대로 하면 돼\"…구미여고 앞 애틋한 수험생 배웅·응원 행렬 관련 확인할 점",
-              "topic": "수험생 응원 행렬",
+              "seo": "수험생 응원하는 이들 최신 이슈와 핵심 내용 정리",
+              "home": "수험생 응원하는 이들, 이 대통령 \"수험생 여러분의 내일 응원…부정행위 철저히 차단\" 관련 확인할 점",
+              "topic": "수험생 응원하는 이들",
               "topicGroup": "네이버 실시간 검색어"
             },
             "facts": [
               {
-                "text": "이날 오전 구미 지역은 '수능 한파' 속에, 영하권에 가까운 쌀쌀한 날씨를 보였지만 추위 속에서도 구미여고 앞에는 각 학교 운영위원과 학부모회 임원, 후배들이 도열해 교실로 향하는 수험생 들에게 따뜻한 응원 메시지를 전했다.",
+                "text": "이 대통령 \"수험생 여러분의 내일 응원…부정행위 철저히 차단\" 강민우 기자 Seoul 작성 2026.11.18 19:04 수정 2026.11.18 19:27 조회 조회수 ▲ 이재명 대통령의 수능 수험생 응원글 이재명 대통령이 대학수학능력시험을 하루 앞둔 오늘(18일), 수험생들에게 응원 메시지를 보내고, 인공지능(AI) 악용 부정행위 등에 대한 엄정 대응 의지를 재차 나타냈습니다. 아시아태평양경제협력체(APEC) 정상회의로 중국 선전(深圳)을 방문 중인 이 대통령은 자신의 SNS에 \"내일 수능을 치르는 여러분께 응원의 마음을 전한다. 수많은 밤을 지새우며 자신의 꿈을 향해 달려온 여러분, 정말 고생 많으셨다\"고 적었습니다.",
                 "sourceIndex": 0
               },
               {
-                "text": "2027학년도 대학수학능력시험을 앞두고 재계에서도 수험생 응원 행렬 이 이어지고 있다. 기업 총수들까지 나서 수능을 보는 임직원 자녀들을 격려했다.",
+                "text": "[수능] 안경 대신 렌즈·가방엔 자물쇠까지…'AI 커닝' 경계 속 입실",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.news1.kr/local/daegu-gyeongbuk/6359056",
-                "press": "뉴스1"
+                "url": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008852576&plink=ORI&cooper=NAVER",
+                "press": "SBS"
               },
               {
-                "url": "https://www.hankookilbo.com/news/article/A2026111816050000642?did=NA",
-                "press": "한국일보"
+                "url": "https://www.yna.co.kr/view/AKR20261119031900004?input=1195m",
+                "press": "연합뉴스"
               }
             ],
             "images": [
-              "https://i3n.news1.kr/system/photos/2026/11/19/8221963/high.jpg"
+              "https://img.sbs.co.kr/newimg/news/20261118/202242001_1280.jpg"
             ],
             "press": [
-              "뉴스1",
-              "한국일보"
+              "SBS",
+              "연합뉴스"
             ],
             "headlines": [
-              "\"평소대로 하면 돼\"…구미여고 앞 애틋한 수험생 배웅·응원 행렬",
-              "'수능 D-1' 범현대가부터 한화까지… 수험생 응원 나선 회장님들"
+              "이 대통령 \"수험생 여러분의 내일 응원…부정행위 철저히 차단\"",
+              "[수능] 안경 대신 렌즈·가방엔 자물쇠까지…'AI 커닝' 경계 속 입실"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:35:37.907Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
-          "id": "naver-4",
-          "rank": 4,
-          "keyword": "박지윤 최동석 이혼 소송 중",
-          "title": "박지윤 최동석 이혼 소송 중",
-          "rawKeyword": "박지윤 최동석 이혼 소송 중",
+          "id": "naver-7",
+          "rank": 7,
+          "keyword": "이혼사유",
+          "title": "이혼",
+          "rawKeyword": "이혼",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 97,
+          "priority": 94,
           "source": "naver",
           "expansions": [
-            "박지윤 최동석",
-            "최동석 박지윤",
-            "최동석 상간 소송",
-            "박지윤 최동석 카톡",
-            "이혼소송",
-            "박지윤 아나운서",
-            "박지윤 상간남",
-            "박지윤 가수"
+            "이혼사유",
+            "이혼하기",
+            "합의이혼",
+            "이혼영어로",
+            "이혜영이혼",
+            "배우이소연이혼"
           ],
-          "expansionSeed": "박지윤",
+          "expansionSeed": "이혼",
           "insight": {
             "titles": {
-              "seo": "박지윤 최동석 이혼 소송 중 최신 이슈와 핵심 내용 정리",
-              "home": "박지윤 최동석 이혼 소송 중, 박지윤 “최동석, 이혼 소송 중 다른 여성과 관계…내 눈으로 목격” 폭로 - 매일경제 관련 확인할 점",
-              "topic": "박지윤 최동석 이혼 소송 중",
+              "seo": "이혼사유 최신 이슈와 핵심 내용 정리",
+              "home": "이혼사유, 403 Forbidden 관련 확인할 점",
+              "topic": "이혼사유",
               "topicGroup": "네이버 실시간 검색어"
             },
             "facts": [
               {
-                "text": "공유 글자 크기 번역 ENG JPN CHN 편의기능 공유 글자크기 인쇄 즐겨찾기 댓글 AI기능 번역 핵심요약 추천질문 관련종목 AI해설 에디터 픽 추천기사 중노위는 근로자 인정, 국세청은 부정…노조 지원비 과세 논란 한중 FTA 타결에 靑 “한한령 해제 기대”…K팝 공연 빗장 풀릴까 반도체 훈풍에 눈높이 '쑥' … KDI, 내년 성장률 3.9% 전망 정부, ‘지역별 전기 도매가 차등화’ 개편 보류 고액·상습 체납자 1년 새 29% 급증…행안부 명단 공개 사회 > 사건 사고 박지윤 “최동석, 이혼 소송 중 다른 여성과 관계…내 눈으로 목격” 폭로 한현정 기자 입력 : 2026.11.19 08:11 업데이트 : 2026.11.19 08:17 닫기 구글 검색 선호 추가 Google 검색에서 매일경제 기사를 더 자주 볼 수 있습니다.",
+                "text": "그는 이혼 사유 에 대해 \"결혼을 하고 처음부터 생활비를 제가 거의 책임졌고 저의 광고 수익과 사업수익으로 재산을 형성했다. 최동석씨는 본인 수입의 대부분을 자신의 생활비로, 일부는 본인 부모님 집의 담보 대출을 갚는데 사용하였고 이는 제가 용인한 부분\"이라며 \"그러다",
                 "sourceIndex": 0
               },
               {
-                "text": "박지윤 은 최동석 이 이혼소송 중 다른 여성 B 씨와 관계를 맺었으며 두 사람이 서로의 집을 오가는 모습을 직접 봤다고 주장했다. 다만 \"그들이 별거 이후 사귀기 시작했을 수도 있다\"며 교제 시점을 알 수 없어 B 씨를 상대로 위자료 청구 소송 을 냈다고 설명했다.",
+                "text": "1인 가구 형성 사유 를 보면 50대는 본인의 이혼 , 60대 이상은 배우자 사망이 가장 큰 비중을 차지하는 것으로 나타났다. 혼인 관계가 해체된 이후 혼자 생활하는 중장년층이 늘어나는 만큼 이들의 사회적 고립과 경제적 어려움에도 관심이 필요하다는 지적이 나온다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.mk.co.kr/article/12213218",
-                "press": "매일경제"
+                "url": "https://www.spotvnews.co.kr/news/articleView.html?idxno=1020687",
+                "press": "스포티비뉴스"
               },
               {
-                "url": "https://www.hankyung.com/article/202611196484H",
-                "press": "한국경제"
+                "url": "https://www.segye.com/newsView/20261118502736?OutUrl=naver",
+                "press": "세계일보"
               }
             ],
             "images": [
-              "https://pimg.mk.co.kr/news/cms/202611/19/news-p.v1.20261119.3150c41fb1a146918afb11bea27ff8d1_R.png"
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F477%2F2026%2F11%2F19%2F639824.jpg&type=fface200_200&expire=2&refresh=true"
             ],
             "press": [
-              "매일경제",
-              "한국경제"
+              "스포티비뉴스",
+              "세계일보"
             ],
             "headlines": [
-              "박지윤 “최동석, 이혼 소송 중 다른 여성과 관계…내 눈으로 목격” 폭로 - 매일경제",
-              "박지윤 \"남사친, 남자로 생각하지 않아… 최동석 도 다른 여성과 관계\" 폭..."
+              "403 Forbidden",
+              "“자녀가 먼저 권하기도”…황혼 이혼 , 신혼 이혼 처음 앞질렀다"
             ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:35:37.907Z"
+            "extraction": "search-card",
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
-          "id": "naver-5",
-          "rank": 5,
+          "id": "naver-8",
+          "rank": 8,
+          "keyword": "네이버뉴스",
+          "title": "네이버뉴스",
+          "rawKeyword": "네이버뉴스",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 93,
+          "source": "naver",
+          "expansions": [
+            "네이버뉴스속보",
+            "네이버 뉴스 라이브러리",
+            "네이버뉴스홈",
+            "네이버뉴스 스포츠",
+            "네이버 뉴스스탠드",
+            "뉴스 네이버뉴스",
+            "네이버뉴스 구독",
+            "네이버뉴스제휴"
+          ],
+          "expansionSeed": "네이버뉴스",
+          "insight": {
+            "titles": {
+              "seo": "네이버뉴스 최신 이슈와 핵심 내용 정리",
+              "home": "네이버뉴스, 네이버 제휴심사 합격매체 0곳 “12월 말부터 재접수 시작” 관련 확인할 점",
+              "topic": "네이버뉴스",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "3년 만에 가동된 네이버 뉴스제휴위원회(뉴스제휴위)가 ‘2026년도 검색제휴·콘텐츠제휴 심사’를 진행한 결과, 검색제휴와 콘텐츠제휴 모두 한 곳도 합격시키지 않았다.네이버 뉴스제휴위는 18일 올해 검색제휴와 콘텐츠제휴 입점 매체는 단 한 곳도 없다고 밝혔다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "네이버 뉴스 제휴위원회는 심사 통과 기준을 낮추고 일정 수의 언론사가 심사를 통과하도록 보장하는 방안을 논의 중이다. 네이버 뉴스 제휴위는 이러한 내용의 심사 결과와 함께 향후 일정을 18일 공개했다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.mediatoday.co.kr/news/articleView.html?idxno=338530",
+                "press": "미디어오늘"
+              },
+              {
+                "url": "https://www.newsis.com/view/NISX20261118_0003873282",
+                "press": "뉴시스"
+              }
+            ],
+            "images": [
+              "https://cdn.mediatoday.co.kr/news/photo/202611/338530_485869_5842.jpg"
+            ],
+            "press": [
+              "미디어오늘",
+              "뉴시스"
+            ],
+            "headlines": [
+              "네이버 제휴심사 합격매체 0곳 “12월 말부터 재접수 시작”",
+              "네이버 뉴스 제휴, 607곳 신청해 통과 '0곳'…합격선 하향 검토"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-19T02:10:44.493Z"
+          }
+        },
+        {
+          "id": "naver-9",
+          "rank": 9,
+          "keyword": "송도 발코니 붕괴 조사 연장",
+          "title": "송도 발코니 붕괴 조사 연장",
+          "rawKeyword": "송도 발코니 붕괴 조사 연장",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 92,
+          "source": "naver",
+          "expansions": [
+            "발코니 뜻",
+            "발코니 베란다",
+            "발코니 가림막",
+            "발코니키친",
+            "발코니 매트",
+            "클럽발코니",
+            "발코니 확장",
+            "줄리엣발코니"
+          ],
+          "expansionSeed": "발코니",
+          "insight": {
+            "titles": {
+              "seo": "송도 발코니 붕괴 조사 연장 최신 이슈와 핵심 내용 정리",
+              "home": "송도 발코니 붕괴 조사 연장, '송도 아파트 돌출 발코니' 붕괴사고 조사 2개월 연장 관련 확인할 점",
+              "topic": "송도 발코니 붕괴 조사 연장",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "국토교통부와 인천시가 공동 구성한 시설물사고 조사 위원회는 지난 8월7일 발생한 송도 아파트 돌출 발코니 붕괴 사고와 관련해 조사 기간을 2027년 1월20일까지 연장 하기로 의결했다고 19일 밝혔다. 이에 따라 당초 2026년 11월20일까지였던 조사 기간은 2개월 늘어나 전체 5개월간 진행된다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "' 발코니 붕괴 ' 송도 럭스오션 주민 \"경제청, 감리 결과 비공개 규탄\"",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.newsis.com/view/NISX20261119_0003874637",
+                "press": "뉴시스"
+              },
+              {
+                "url": "https://www.edaily.co.kr/News/Read?newsId=04024566645581432&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+                "press": "이데일리"
+              }
+            ],
+            "images": [
+              "https://img1.newsis.com/2022/08/11/NISI20220811_0001061562_web.jpg"
+            ],
+            "press": [
+              "뉴시스",
+              "이데일리"
+            ],
+            "headlines": [
+              "'송도 아파트 돌출 발코니' 붕괴사고 조사 2개월 연장",
+              "' 발코니 붕괴 ' 송도 럭스오션 주민 \"경제청, 감리 결과 비공개 규탄\""
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-19T02:10:44.493Z"
+          }
+        },
+        {
+          "id": "naver-10",
+          "rank": 10,
           "keyword": "시즌2",
           "title": "시즌2",
           "rawKeyword": "시즌2",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 96,
+          "priority": 91,
           "source": "naver",
           "expansions": [
             "시그널 시즌2",
@@ -314,316 +622,6 @@
             "extraction": "playwright",
             "collectedAt": "2026-11-19T01:35:37.907Z"
           }
-        },
-        {
-          "id": "naver-6",
-          "rank": 6,
-          "keyword": "송도 발코니 붕괴 조사 연장",
-          "title": "송도 발코니 붕괴 조사 연장",
-          "rawKeyword": "송도 발코니 붕괴 조사 연장",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 95,
-          "source": "naver",
-          "expansions": [
-            "발코니 뜻",
-            "발코니 베란다",
-            "발코니 가림막",
-            "발코니키친",
-            "발코니 매트",
-            "클럽발코니",
-            "발코니 확장",
-            "줄리엣발코니"
-          ],
-          "expansionSeed": "발코니",
-          "insight": {
-            "titles": {
-              "seo": "송도 발코니 붕괴 조사 연장 최신 이슈와 핵심 내용 정리",
-              "home": "송도 발코니 붕괴 조사 연장, 국토부·인천시, 송도 아파트 발코니 붕괴사고 조사 2개월 연장 관련 확인할 점",
-              "topic": "송도 발코니 붕괴 조사 연장",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "인천시는 국토교통부와 공동으로 구성한 송도 아파트 발코니 붕괴 시설물사고 조사 위원회(위원장 홍건호 호서대 교수)가 조사 기간을 2개월 연장 하기로 의결했다고 19일 밝혔다. 이에 따라 지난 8월 21일 시작해 이달 20일까지 계획됐던 조사 기간은 내년 1월 20일까지로 늘어나게 됐다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "' 발코니 붕괴 ' 송도 럭스오션 주민 \"경제청, 감리 결과 비공개 규탄\"",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.yna.co.kr/view/AKR20261119022900065?input=1195m",
-                "press": "연합뉴스"
-              },
-              {
-                "url": "https://www.edaily.co.kr/News/Read?newsId=04024566645581432&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
-                "press": "이데일리"
-              }
-            ],
-            "images": [
-              "https://img3.yna.co.kr/photo/yna/YH/2026/08/14/PYH2026081414400006500_P4.jpg"
-            ],
-            "press": [
-              "연합뉴스",
-              "이데일리"
-            ],
-            "headlines": [
-              "국토부·인천시, 송도 아파트 발코니 붕괴사고 조사 2개월 연장",
-              "' 발코니 붕괴 ' 송도 럭스오션 주민 \"경제청, 감리 결과 비공개 규탄\""
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:09:38.902Z"
-          }
-        },
-        {
-          "id": "naver-7",
-          "rank": 7,
-          "keyword": "올랜도 대 필라데피아",
-          "title": "올랜도 대 필라데피아",
-          "rawKeyword": "올랜도 대 필라데피아",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 94,
-          "source": "naver",
-          "expansions": [
-            "올랜도 블룸",
-            "올랜도",
-            "올랜도 매직",
-            "보스턴 올랜도",
-            "올랜도 날씨",
-            "올랜도 여행",
-            "필라데피아현재시간",
-            "올랜드"
-          ],
-          "expansionSeed": "올랜",
-          "insight": {
-            "titles": {
-              "seo": "올랜도 대 필라데피아 최신 이슈와 핵심 내용 정리",
-              "home": "올랜도 대 필라데피아, [오늘의 MLB] (8.18) 밀워키 6연승 '19승2패 대질주' 관련 확인할 점",
-              "topic": "올랜도 대 필라데피아",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "실력 발휘를 하기 시작한 그레인키 ⓒ gettyimages/멀티비츠 밀워키가 6연승을 질주하고 최근 21경기에서 19승을 따냈다. 그레인키는 홈에서 9승 무패. 텍사스도 6연승을 달리며 2위 에인절스에게 3연패라는 강펀치를 먹였다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "필라데피아 선수가 30득점 10리바운드를 기록한 것도 굉장히 오랜 만이었다. 이 역시 1991년 바클리가 마지막이었다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://m.sports.naver.com/general/article/224/0000002169",
-                "press": "김형준 칼럼"
-              },
-              {
-                "url": "https://m.sports.naver.com/basketball/article/430/0000000865",
-                "press": "손대범 칼럼"
-              }
-            ],
-            "images": [
-              "https://imgnews.pstatic.net/image/224/2011/08/18/120602474.jpg"
-            ],
-            "press": [
-              "김형준 칼럼",
-              "손대범 칼럼"
-            ],
-            "headlines": [
-              "[오늘의 MLB] (8.18) 밀워키 6연승 '19승2패 대질주'",
-              "[가나다라] NBA 전설을 소환해낸 PO1라운드의 기록들"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:35:37.907Z"
-          }
-        },
-        {
-          "id": "naver-8",
-          "rank": 8,
-          "keyword": "전도연",
-          "title": "전도연",
-          "rawKeyword": "전도연",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 93,
-          "source": "naver",
-          "expansions": [
-            "전도연 영화",
-            "전도연 자녀",
-            "전도연 나무위키",
-            "전도연 조인성",
-            "전도연 설경구",
-            "전도연 강시규",
-            "전도연 오스카",
-            "전도연 리즈"
-          ],
-          "expansionSeed": "전도연",
-          "insight": {
-            "titles": {
-              "seo": "전도연 최신 이슈와 핵심 내용 정리",
-              "home": "전도연, 전도연, 오스카 레이스 뛰어드나…데뷔 후 첫 SNS 개설 관련 확인할 점",
-              "topic": "전도연",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "평소 소셜미디어 활동을 하지 않던 배우 전도연이 소셜미디어 계정을 개설했다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "배우 전도연 이 데뷔 이후 처음으로 SNS를 개설하고 팬들과 소통에 나섰다. 18일 오후 전도연 은 개인 SNS를 개설하고 미국에 머물고 있는 근황을 사진으로 공개했다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.newsis.com/view/NISX20261118_0003873770",
-                "press": "뉴시스"
-              },
-              {
-                "url": "https://ent.sbs.co.kr/news/article.do?article_id=E10010324868&plink=ORI&cooper=NAVER",
-                "press": "SBS연예뉴스"
-              }
-            ],
-            "images": [
-              "https://img1.newsis.com/2026/11/18/NISI20261118_0002295915_web.jpg"
-            ],
-            "press": [
-              "뉴시스",
-              "SBS연예뉴스"
-            ],
-            "headlines": [
-              "전도연, 오스카 레이스 뛰어드나…데뷔 후 첫 SNS 개설",
-              "'53세' 전도연 , 데뷔 첫 SNS 개설…글로벌 소통 나섰다"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:35:37.907Z"
-          }
-        },
-        {
-          "id": "naver-9",
-          "rank": 9,
-          "keyword": "이민호 박규영 버츄얼 러브",
-          "title": "이민호 박규영 버츄얼 러브",
-          "rawKeyword": "이민호 박규영 버츄얼 러브",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 92,
-          "source": "naver",
-          "expansions": [
-            "이민호 송혜교",
-            "이민호 마라톤",
-            "이민호 철인3종",
-            "이민호 나무위키",
-            "이민호 드라마",
-            "이민호 수지",
-            "송혜교 이민호",
-            "박규영 단발"
-          ],
-          "expansionSeed": "이민호",
-          "insight": {
-            "titles": {
-              "seo": "이민호 박규영 버츄얼 러브 최신 이슈와 핵심 내용 정리",
-              "home": "이민호 박규영 버츄얼 러브, 이민호·박규영 '버츄얼 러브' 캐스팅…내년 하반기 방송 관련 확인할 점",
-              "topic": "이민호 박규영 버츄얼 러브",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "배우 이민호와 박규영이 로맨스 호흡을 맞춘다. SBS는 두 사람이 주연하는 새 드라마 '버츄얼 러브'(가제)를 내년 하반기 방송한다고 19일 밝혔다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "배우 이민호 와 박규영 이 SBS 새 드라마 ' 버츄얼 러브 (가제)'에서 처음으로 로맨스 호흡을 맞춘다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.newsis.com/view/NISX20261119_0003874358",
-                "press": "뉴시스"
-              },
-              {
-                "url": "https://www.slist.kr/news/articleView.html?idxno=783016",
-                "press": "싱글리스트"
-              }
-            ],
-            "images": [
-              "https://img1.newsis.com/2026/11/19/NISI20261119_0002296325_web.jpg"
-            ],
-            "press": [
-              "뉴시스",
-              "싱글리스트"
-            ],
-            "headlines": [
-              "이민호·박규영 '버츄얼 러브' 캐스팅…내년 하반기 방송",
-              "이민호 · 박규영 , ' 버츄얼 러브 ' 주연 확정…2027년 하반기 SBS 편성"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:35:37.907Z"
-          }
-        },
-        {
-          "id": "naver-10",
-          "rank": 10,
-          "keyword": "이적 시장",
-          "title": "이적 시장",
-          "rawKeyword": "이적 시장",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 91,
-          "source": "naver",
-          "expansions": [
-            "이적시장",
-            "롤 이적시장",
-            "피파 이적시장 갱신",
-            "k리그 이적시장",
-            "2027 k리그 이적시장",
-            "lck 이적시장",
-            "겨울이적시장",
-            "발로란트 이적시장"
-          ],
-          "expansionSeed": "이적 시장",
-          "insight": {
-            "titles": {
-              "seo": "이적 시장 최신 이슈와 핵심 내용 정리",
-              "home": "이적 시장, 403 Forbidden 관련 확인할 점",
-              "topic": "이적 시장",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "손흥민의 친정팀 토트넘 홋스퍼가 오는 1월 겨울 이적시장 에서 한국 축구대표팀 공격수 오현규 영입을 검토 중이다. 영국 ‘풋볼팬캐스트’는 18일(한국시각) “토트넘이 오현규 영입을 1월 이적시장 에서 검토하고 있다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "아틀레티코 소식에 정통한 루벤 우리아 기자는 16일(한국시각) '이강인이 아틀레티코 마드리드에서 뛰기 위해 거절한 모든 제안'이라며 여름 이적시장 당시 이강인에 대한 관심을 보도했다. 우리아는 '지난여름에 있었던 일이다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://sports.khan.co.kr/article/202611182033003?pt=nv",
-                "press": "스포츠경향"
-              },
-              {
-                "url": "https://www.sportschosun.com/football/2026-11-18/202611180100114510010526",
-                "press": "스포츠조선"
-              }
-            ],
-            "images": [
-              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F144%2F2026%2F11%2F18%2F1150572.jpg&type=fface200_200&expire=2&refresh=true"
-            ],
-            "press": [
-              "스포츠경향",
-              "스포츠조선"
-            ],
-            "headlines": [
-              "403 Forbidden",
-              "충격 폭로! 이강인 대체 어떻게 1250억을 거절했나...韓 축구 자존심까..."
-            ],
-            "extraction": "search-card",
-            "collectedAt": "2026-11-19T01:35:37.907Z"
-          }
         }
       ]
     },
@@ -634,9 +632,9 @@
         {
           "id": "daum-1",
           "rank": 1,
-          "keyword": "이진우 현장검증 노쇼",
-          "title": "이진우 현장검증 노쇼",
-          "rawKeyword": "이진우 현장검증 노쇼",
+          "keyword": "이진우 공갈 판결문",
+          "title": "이진우 공갈 판결문",
+          "rawKeyword": "이진우 공갈 판결문",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
           "priority": 100,
           "source": "daum",
@@ -648,113 +646,111 @@
             "리트 이진우",
             "이진우 ai",
             "이진우 인스타",
-            "노쇼 뜻"
+            "법원 판결문 조회"
           ],
           "expansionSeed": "이진우",
           "insight": {
             "titles": {
-              "seo": "이진우 현장검증 노쇼 최신 이슈와 핵심 내용 정리",
-              "home": "이진우 현장검증 노쇼, '리트 만점' 이진우, 결국 현장검증 노쇼…\"잘 있는지 확인해주길\" 관련 확인할 점",
-              "topic": "이진우 현장검증 노쇼",
+              "seo": "이진우 공갈 판결문 최신 이슈와 핵심 내용 정리",
+              "home": "이진우 공갈 판결문, [단독] \"리트만점 이진우 와 구치소 수감\" 재소자 증언...'이름·생년월일... 관련 확인할 점",
+              "topic": "이진우 공갈 판결문",
               "topicGroup": "다음 실시간 검색어"
             },
             "facts": [
               {
-                "text": "올해 법학적성시험(LEET·리트) 만점자 이진우(32)씨가 인공지능(AI) 부정행위 의혹을 해소하기 위해 공개 라이브 방송을 예고했지만, 결국 현장에 도착하지 않아 검증이 종료됐다.",
+                "text": "올해 법학적성시험(LEET·리트) 만점자로 유명세를 얻은 이진우 씨가 과거 공갈 범죄로 구치소에 복역했다는 증언을 확보했습니다. JTBC는 이 씨의 이름과 이씨가 공개한 수험서에 적힌 생년월일과 일치하는 판결문 들을 확인했습니다.",
                 "sourceIndex": 0
               },
               {
-                "text": "그러나 공개 검증 전날부터 주최 측의 연락을 받지 않았고, 검증 당일에도 현장 에 나타나지 않았다.",
+                "text": "[단독] 리트냥이 전과자였다…‘고의 교통사고’ 공갈 누범에 실형도",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.edaily.co.kr/News/Read?newsId=02069686645647360&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
-                "press": "이데일리"
+                "url": "https://news.jtbc.co.kr/article/NB12328788?influxDiv=NAVER",
+                "press": "JTBC"
               },
               {
-                "url": "https://www.sportschosun.com/entertainment/2026-11-19/202611190100122420011314",
-                "press": "스포츠조선"
+                "url": "https://www.joongang.co.kr/article/25480053",
+                "press": "중앙일보"
               }
             ],
             "images": [
-              "https://image.edaily.co.kr/images/Photo/files/NP/S/2026/11/PS26111900398.jpg"
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F437%2F2026%2F11%2F19%2F521426.jpg&type=fface200_200&expire=2&refresh=true"
             ],
             "press": [
-              "이데일리",
-              "스포츠조선"
+              "JTBC",
+              "중앙일보"
             ],
             "headlines": [
-              "'리트 만점' 이진우, 결국 현장검증 노쇼…\"잘 있는지 확인해주길\"",
-              "'리트 만점' 이진우 , 인터뷰 후 돌연 잠적 파문…공개 검증 끝내 ' 노쇼 '"
+              "[단독] \"리트만점 이진우 와 구치소 수감\" 재소자 증언...'이름·생년월일...",
+              "[단독] 리트냥이 전과자였다…‘고의 교통사고’ 공갈 누범에 실형도"
             ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:35:37.907Z"
+            "extraction": "search-card",
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
           "id": "daum-2",
           "rank": 2,
-          "keyword": "수능 시간표",
-          "title": "수능 시간표",
-          "rawKeyword": "수능 시간표",
+          "keyword": "리트 시험",
+          "title": "리트 시험",
+          "rawKeyword": "리트 시험",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
           "priority": 99,
           "source": "daum",
           "expansions": [
-            "수능 시간표 탐구",
-            "2026수능 시간표",
-            "수능 시간표 한국사",
-            "2028 수능 시간표",
-            "28수능 시간표",
-            "27 수능 시간표",
-            "2027 수능 시간표 탐구",
-            "27년 수능 시간표"
+            "리트 시험 뜻",
+            "리트 시험이란",
+            "리트 시험 문제",
+            "리트 시험 만점자",
+            "리트 시험 일정",
+            "리트 시험지",
+            "리트 시험 자격",
+            "리트 시험 만점"
           ],
-          "expansionSeed": "수능 시간표",
+          "expansionSeed": "리트 시험",
           "insight": {
             "titles": {
-              "seo": "수능 시간표 국어 8시 40분 시작, 영어 5시 45분 종료",
-              "home": "수능 시간표 확인, 증시 개장까지 한 시간 밀린 까닭은",
-              "topic": "수능 시간표",
-              "topicGroup": "다음 실시간 검색어",
-              "summary": "수능날 국내 증시는 평소보다 한 시간 늦은 오전 10시에 문을 연다. 국어는 오전 8시 40분, 마지막 영역은 오후 5시 45분에 끝난다.",
-              "aiTitled": true
+              "seo": "리트 시험 최신 이슈와 핵심 내용 정리",
+              "home": "리트 시험, [단독] 'LEET 만점자' 이진우, 전과자였다...'고의 교통사고' 공갈 누범에 실형도 관련 확인할 점",
+              "topic": "리트 시험",
+              "topicGroup": "다음 실시간 검색어"
             },
             "facts": [
               {
-                "text": "정규시장, 1시간 늦춰 개장·오후 4시 30분 마감 개장 전·장 마감 후 시간 외 종가매매도 변동 대학수학능력시험이 치러지는 19일 국내 증시는 평소보다 한 시간 늦은 오전 10시에 문을 연다.",
+                "text": "대학수학능력시험 전국 3등과 법학적성시험(LEET·리트) 만점 등 이력으로 인공지능(AI) 활용 부정행위 의혹의 중심에 선 ‘리트냥이’ 이진우씨가 2021년 고의로 교통사고를 내 합의금을 뜯어내는 공갈 혐의 누범으로 구속(2회)·실형 전과가 있는 것으로 나타났다.",
                 "sourceIndex": 0
               },
               {
-                "text": "수능 시간표 …국어 오전 8시 40분, 영어 오후 1시 10분 일반 수험생 기준 시간표는 다음과 같다. 시험편의 제공 대상자에게는 별도 시간표가 적용될 수 있으며, 실제 퇴실은 감독관 안내에 따른다.",
+                "text": "법학적성 시험 (LEET· 리트 ) 만점자 이진우씨가 2026학년도 대학수학능력 시험 에서도 인공지능(AI) 활용 부정행위를 저질렀다는 의혹이 제기되는 가운데 정부가 이씨의 수능 시험 지에 대한 보존 지시를 한 것으로 확인됐다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.news1.kr/finance/general-stock/6358587",
-                "press": "뉴스1"
+                "url": "https://www.joongang.co.kr/article/25480053",
+                "press": "중앙일보"
               },
               {
-                "url": "https://www.bntnews.co.kr/article/view/bnt202611180259",
-                "press": "bnt뉴스"
+                "url": "https://www.kmib.co.kr/article/20261119500482",
+                "press": "국민일보"
               }
             ],
             "images": [
-              "https://i3n.news1.kr/system/photos/2026/11/18/8220850/high.jpg"
+              "https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/202611/19/202c55e1-97b8-4f06-8af6-d080fb1ba21a.jpg"
             ],
             "press": [
-              "뉴스1",
-              "bnt뉴스"
+              "중앙일보",
+              "국민일보"
             ],
             "headlines": [
-              "\"개장은 10시, 프리마켓 휴무\"…수능 날 바뀐 증시 시간표",
-              "수능 일 입실시간· 시간표 ·준비물"
+              "[단독] 'LEET 만점자' 이진우, 전과자였다...'고의 교통사고' 공갈 누범에 실형도",
+              "[단독] 정부, ‘ 리트 냥이’ 지난해 수능 시험 지 보존 지시"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:09:38.902Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
@@ -822,197 +818,135 @@
         {
           "id": "daum-4",
           "rank": 4,
-          "keyword": "히우라 2027시즌 재계약",
-          "title": "히우라 2027시즌 재계약",
-          "rawKeyword": "히우라 2027시즌 재계약",
+          "keyword": "수능 시간표",
+          "title": "수능 시간표",
+          "rawKeyword": "수능 시간표",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
           "priority": 97,
           "source": "daum",
           "expansions": [
-            "히우라 재계약",
-            "케스턴 히우라",
-            "키움 히우라",
-            "히우라 국적",
-            "히우라 일본",
-            "히우라 wbc",
-            "캐스턴 히우라",
-            "히우라 계약"
+            "수능 시간표 탐구",
+            "2026수능 시간표",
+            "수능 시간표 한국사",
+            "2028 수능 시간표",
+            "28수능 시간표",
+            "27 수능 시간표",
+            "2027 수능 시간표 탐구",
+            "27년 수능 시간표"
           ],
-          "expansionSeed": "히우라",
+          "expansionSeed": "수능 시간표",
           "insight": {
             "titles": {
-              "seo": "히우라 2027시즌 재계약 최신 이슈와 핵심 내용 정리",
-              "home": "히우라 2027시즌 재계약, 키움, 데이비슨·히우라·알칸타라와 2027시즌도 동행…아시아 쿼터는 교체 관련 확인할 점",
-              "topic": "히우라 2027시즌 재계약",
-              "topicGroup": "다음 실시간 검색어"
+              "seo": "수능 시간표 국어 8시 40분 시작, 영어 5시 45분 종료",
+              "home": "수능 시간표 확인, 증시 개장까지 한 시간 밀린 까닭은",
+              "topic": "수능 시간표",
+              "topicGroup": "다음 실시간 검색어",
+              "summary": "수능날 국내 증시는 평소보다 한 시간 늦은 오전 10시에 문을 연다. 국어는 오전 8시 40분, 마지막 영역은 오후 5시 45분에 끝난다.",
+              "aiTitled": true
             },
             "facts": [
               {
-                "text": "키움은 2026 시즌 을 함께 마무리한 외국인 선수 맷 데이비슨, 케스턴 히우라 , 라울 알칸타라와 재계약 했다고 발표했다. 아시아 쿼터로는 우완 투수 후쿠타니 고지를 새롭게 영입하며 2027시즌 외국인 선수 구성을 모두 마무리했다.",
+                "text": "정규시장, 1시간 늦춰 개장·오후 4시 30분 마감 개장 전·장 마감 후 시간 외 종가매매도 변동 대학수학능력시험이 치러지는 19일 국내 증시는 평소보다 한 시간 늦은 오전 10시에 문을 연다.",
                 "sourceIndex": 0
               },
               {
-                "text": "키움은 19일 2027시즌 외국인 선수 구성을 완료했다고 공식 발표했다. 외국인 투수 라울 알칸타라와 총액 110만 달러, 외국인 타자 맷 데이비슨과 총액 110만 달러, 케스턴 히우라 와 총액 80만 달러에 각각 재계약 했다.",
+                "text": "수능 시간표 …국어 오전 8시 40분, 영어 오후 1시 10분 일반 수험생 기준 시간표는 다음과 같다. 시험편의 제공 대상자에게는 별도 시간표가 적용될 수 있으며, 실제 퇴실은 감독관 안내에 따른다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.newsis.com/view/NISX20261119_0003874320",
-                "press": "뉴시스"
+                "url": "https://www.news1.kr/finance/general-stock/6358587",
+                "press": "뉴스1"
               },
               {
-                "url": "http://www.spochoo.com/news/articleView.html?idxno=132228",
-                "press": "더게이트"
+                "url": "https://www.bntnews.co.kr/article/view/bnt202611180259",
+                "press": "bnt뉴스"
               }
             ],
             "images": [
-              "https://img1.newsis.com/2026/11/19/NISI20261119_0002296353_web.jpg"
+              "https://i3n.news1.kr/system/photos/2026/11/18/8220850/high.jpg"
             ],
             "press": [
-              "뉴시스",
-              "더게이트"
+              "뉴스1",
+              "bnt뉴스"
             ],
             "headlines": [
-              "키움, 데이비슨·히우라·알칸타라와 2027시즌도 동행…아시아 쿼터는 교체",
-              "4년 연속 꼴찌팀이 외국인 3명 전원 재계약 ? 역시 키움은 '보법'이 다르..."
+              "\"개장은 10시, 프리마켓 휴무\"…수능 날 바뀐 증시 시간표",
+              "수능 일 입실시간· 시간표 ·준비물"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:09:38.902Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
           "id": "daum-5",
           "rank": 5,
-          "keyword": "백지연 이진우 인터뷰 공개",
-          "title": "백지연 이진우 인터뷰 공개",
-          "rawKeyword": "백지연 이진우 인터뷰 공개",
+          "keyword": "남태현 법정구속",
+          "title": "남태현 법정구속",
+          "rawKeyword": "남태현 법정구속",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
           "priority": 96,
           "source": "daum",
           "expansions": [
-            "백지연 홈쇼핑",
-            "백지연 나무위키",
-            "백지연아나운서",
-            "백지연 교수",
-            "백지연 강인찬",
-            "백지연가습기가격",
-            "백지연습장 찾는 법",
-            "이진우 리트"
+            "위너 남태현",
+            "장재인 남태현",
+            "법정구속이란",
+            "법정구속되면 찾는법",
+            "법정구속자 찾는법",
+            "법정구속되면 연락"
           ],
-          "expansionSeed": "백지연",
+          "expansionSeed": "남태현",
           "insight": {
             "titles": {
-              "seo": "백지연 이진우 인터뷰 공개 최신 이슈와 핵심 내용 정리",
-              "home": "백지연 이진우 인터뷰 공개, Attention Required! 관련 확인할 점",
-              "topic": "백지연 이진우 인터뷰 공개",
+              "seo": "남태현 법정구속 최신 이슈와 핵심 내용 정리",
+              "home": "남태현 법정구속, Attention Required! 관련 확인할 점",
+              "topic": "남태현 법정구속",
               "topicGroup": "다음 실시간 검색어"
             },
             "facts": [
               {
-                "text": "법학적성시험(LEET·리트) 만점자 이진우 씨가 부정행위 의혹을 해소하겠다며 예고한 공개 검증에 불참한 가운데, 이 씨가 방송인 백지연 과 사전에 촬영한 인터뷰 영상이 공개 됐다. 19일 유튜브 채널 '지금 백지연 '에는 '11월 11일 시점 촬영 인터뷰 '라는 제목의 영상이 올라왔다.",
+                "text": "그룹 위너 출신 남태현 (32)이 법정구속 됐다. 서울서부지법 형사항소2-2부(이현우 부장판사)는 19일 음주운전과 제한속도 위반 혐의로 기소된 남태현 에게 1심과 같은 징역 1년과 벌금 100만원을 선고했다.",
                 "sourceIndex": 0
               },
               {
-                "text": "올해 7월 치러진 법학적성시험(LEET·리트)에서 만점을 받아 유명세를 얻었지만 인공지능(AI)을 이용한 부정행위 의혹이 제기된 이진우 (32)씨가 공개 검증 현장에 불참하고 연락이 두절된 가운데, 방송인 백지연 이 이씨와 진행한 인터뷰 를 공개 했다.",
+                "text": "법원 \"음주운전 위험성 너무 높고 도주 우려\" 마약 범죄로 징역형 집행유예를 선고받고 음주운전 혐의로 다시 재판에 넘겨진 아이돌 그룹 '위너' 출신 남태현 (32)이 2심에서도 실형을 선고받고 법정구속 됐다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.hankyung.com/article/202611196417H",
+                "url": "https://www.hankyung.com/article/202611196853H",
                 "press": "한국경제"
               },
               {
-                "url": "https://www.seoul.co.kr/news/society/education-news/2026/11/19/20261119500060?wlog_tag3=naver",
-                "press": "서울신문"
+                "url": "https://www.yna.co.kr/view/AKR20261119062300004?input=1195m",
+                "press": "연합뉴스"
               }
             ],
             "images": [
-              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F015%2F2026%2F11%2F19%2F5355701.jpg&type=fface200_200&expire=2&refresh=true"
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F015%2F2026%2F11%2F19%2F5355731.jpg&type=fface200_200&expire=2&refresh=true"
             ],
             "press": [
               "한국경제",
-              "서울신문"
+              "연합뉴스"
             ],
             "headlines": [
               "Attention Required!",
-              "“3주만에 ‘머리 리셋’이 된다고요?” 백지연 , ‘리트 만점’ 이진우 ..."
+              "'마약 집행유예중 음주운전' 남태현 2심도 실형… 법정구속"
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-19T01:35:37.907Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
           "id": "daum-6",
           "rank": 6,
-          "keyword": "수능 출제위원장 난도 조정",
-          "title": "수능 출제위원장 난도 조정",
-          "rawKeyword": "수능 출제위원장 난도 조정",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 95,
-          "source": "daum",
-          "expansions": [
-            "2026수능",
-            "수능 날짜",
-            "2026 수능 날짜",
-            "수능 연기",
-            "수능 시간표",
-            "수능 선물",
-            "수능 출제의 비밀",
-            "수능 디데이"
-          ],
-          "expansionSeed": "수능",
-          "insight": {
-            "titles": {
-              "seo": "수능 출제위원장 난도 조정 최신 이슈와 핵심 내용 정리",
-              "home": "수능 출제위원장 난도 조정, 수능 출제위원장 \"영어 1등급 비율 안정적 달성 예상\"(종합) 관련 확인할 점",
-              "topic": "수능 출제위원장 난도 조정",
-              "topicGroup": "다음 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "",
-                "sourceIndex": 0
-              },
-              {
-                "text": "오기영 한경국립대 교수 / 2027 수능출제위원장 예. 올해 수능 체제가 마지막으로 바뀌고 내년에 새롭게 가는데 혹시 그런 체제 변화에 대비한 난도 조정 이나 이런 부분도 있었습니까?",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.yna.co.kr/view/AKR20261119033751530?input=1195m",
-                "press": "연합뉴스"
-              },
-              {
-                "url": "http://news.ebs.co.kr/ebsnews/allView/60792074/N",
-                "press": "EBS"
-              }
-            ],
-            "images": [
-              "https://img7.yna.co.kr/photo/yna/YH/2026/11/19/PYH2026111905030001300_P4.jpg"
-            ],
-            "press": [
-              "연합뉴스",
-              "EBS"
-            ],
-            "headlines": [
-              "수능 출제위원장 \"영어 1등급 비율 안정적 달성 예상\"(종합)",
-              "<속보> 수능 출제위원장 \"영어 난도 미세 조정 ...선택과목 유불리 최소화..."
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:35:37.907Z"
-          }
-        },
-        {
-          "id": "daum-7",
-          "rank": 7,
           "keyword": "최수린 아들 메기남 등장",
           "title": "최수린 아들 메기남 등장",
           "rawKeyword": "최수린 아들 메기남 등장",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 94,
+          "priority": 95,
           "source": "daum",
           "expansions": [
             "배우 최수린",
@@ -1064,17 +998,17 @@
               "'키 185cm' 최수린 아들 이승훈, '내새연3' 메기남 등장 \"짝사랑 경험無..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:09:38.902Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
-          "id": "daum-8",
-          "rank": 8,
-          "keyword": "홍나영 이혼 고백",
-          "title": "홍나영 이혼 고백",
-          "rawKeyword": "홍나영 이혼 고백",
+          "id": "daum-7",
+          "rank": 7,
+          "keyword": "홍나영 이혼 발표",
+          "title": "홍나영 이혼 발표",
+          "rawKeyword": "홍나영 이혼 발표",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 93,
+          "priority": 94,
           "source": "daum",
           "expansions": [
             "개그우먼 홍나영",
@@ -1088,18 +1022,18 @@
           "expansionSeed": "홍나영",
           "insight": {
             "titles": {
-              "seo": "홍나영 이혼 고백 최신 이슈와 핵심 내용 정리",
-              "home": "홍나영 이혼 고백, 개그우먼 홍나영 , 뒤늦은 이혼 고백 “1년 전 돌아왔다” 관련 확인할 점",
-              "topic": "홍나영 이혼 고백",
+              "seo": "홍나영 이혼 발표 최신 이슈와 핵심 내용 정리",
+              "home": "홍나영 이혼 발표, 개그우먼 홍나영 , 뒤늦은 이혼 고백 “1년 전 돌아왔다” 관련 확인할 점",
+              "topic": "홍나영 이혼 발표",
               "topicGroup": "다음 실시간 검색어"
             },
             "facts": [
               {
-                "text": "홍나영 은 직접 “ 이혼 했다. 시간이 많이 지났다”고 유쾌하게 고백 했다.",
+                "text": "개그우먼 홍나영 이 뒤늦게 이혼 사실을 전했다. 영상에는 코미디언 황정혜, 박소라, 홍예슬이 동료 홍나영 의 이사한 집에 모여 다양한 이야기를 나누는 모습이 그려졌다.",
                 "sourceIndex": 0
               },
               {
-                "text": "코미디언 홍나영 이 뒤늦게 이혼 을 고백 했다. 이날 홍나영 은 \"입이 잘 안 떨어진다\"라고 머뭇거리다가 이혼 을 발표했다.",
+                "text": "코미디언 홍나영 이 이혼 사실을 뒤늦게 고백했다. 최근 유튜브 채널 '쉬케치'에는 '집들이 도중 중대 발표 …다소 무거운 브이로그'라는 제목의 영상이 게재됐다.",
                 "sourceIndex": 1
               }
             ],
@@ -1109,8 +1043,8 @@
                 "press": "JTBC"
               },
               {
-                "url": "http://www.tvdaily.co.kr/read.php3?aid=17950503771810334002",
-                "press": "티브이데일리"
+                "url": "https://www.spotvnews.co.kr/news/articleView.html?idxno=1020699",
+                "press": "스포티비뉴스"
               }
             ],
             "images": [
@@ -1118,138 +1052,197 @@
             ],
             "press": [
               "JTBC",
-              "티브이데일리"
+              "스포티비뉴스"
             ],
             "headlines": [
               "개그우먼 홍나영 , 뒤늦은 이혼 고백 “1년 전 돌아왔다”",
-              "홍나영 , 뒤늦게 이혼 고백 \"결혼 생활은 1년…지금 행복해\" (쉬케치)"
+              "코미디언 홍나영 , 뒤늦은 이혼 발표 …\"1년 전 돌아와, 혼자의 삶 좋다\""
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-19T01:35:37.907Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
+          }
+        },
+        {
+          "id": "daum-8",
+          "rank": 8,
+          "keyword": "경찰 수험생 긴급 수송",
+          "title": "경찰 수험생 긴급 수송",
+          "rawKeyword": "경찰 수험생 긴급 수송",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 93,
+          "source": "daum",
+          "expansions": [
+            "경찰 계급",
+            "경찰민원24",
+            "경찰공무원 시험",
+            "경찰 계급도",
+            "경찰 월급",
+            "경찰 분실물 조회",
+            "경찰청",
+            "경찰공제회"
+          ],
+          "expansionSeed": "경찰",
+          "insight": {
+            "titles": {
+              "seo": "경찰 수험생 긴급 수송 최신 이슈와 핵심 내용 정리",
+              "home": "경찰 수험생 긴급 수송, [수능] \"시험장에 늦어요\"…수험생 다급한 요청에 경찰이 달렸다(종합) 관련 확인할 점",
+              "topic": "경찰 수험생 긴급 수송",
+              "topicGroup": "다음 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "오전 7시 34분께 대구 동구 대구공업고를 시험장으로 알고 잘못 찾아온 수험생 을 경찰 이 원래 시험장인 남구 대구고까지 약 9.1㎞ 긴급 수송 했다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "2027학년도 대학수학능력시험이 치러진 19일 인천에서 시험장에 늦거나 수험표를 챙기지 못한 수험생 들을 경찰 이 순찰차로 수송 하는 사례가 잇따랐다. 19일 인천 경찰 청에 따르면 이날 오전 7시 15분쯤 인천 서구 온누리병원 앞에서 \"택시가 잡히지 않는다\"는 여학생의 112신고가 접수됐다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.yna.co.kr/view/AKR20261119042851053?input=1195m",
+                "press": "연합뉴스"
+              },
+              {
+                "url": "https://www.news1.kr/local/incheon/6359021",
+                "press": "뉴스1"
+              }
+            ],
+            "images": [
+              "https://img5.yna.co.kr/photo/yna/YH/2026/11/19/PYH2026111904380005600_P4.jpg"
+            ],
+            "press": [
+              "연합뉴스",
+              "뉴스1"
+            ],
+            "headlines": [
+              "[수능] \"시험장에 늦어요\"…수험생 다급한 요청에 경찰이 달렸다(종합)",
+              "\"수험표 놓고 오고 택시 안 잡히고\"…인천 경찰 , 수험생 긴급 수송"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
           "id": "daum-9",
           "rank": 9,
-          "keyword": "한덕수 선고",
-          "title": "한덕수 선고",
-          "rawKeyword": "한덕수 선고",
+          "keyword": "김창민 감독 사망사건 선고",
+          "title": "김창민 감독 사망사건 선고",
+          "rawKeyword": "김창민 감독 사망사건 선고",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
           "priority": 92,
           "source": "daum",
           "expansions": [
-            "한덕수 선고",
-            "한덕수 석방",
-            "한덕수 재판",
-            "한덕수 근황",
-            "한덕수 나무위키",
-            "한덕수 징역",
-            "한덕수 국무총리",
-            "한덕수 2심"
+            "김창민 감독",
+            "김창민감독 가해자",
+            "시흥 사망사건",
+            "사망사건 공소시효",
+            "부천링거사망사건"
           ],
-          "expansionSeed": "한덕수",
+          "expansionSeed": "김창민",
           "insight": {
             "titles": {
-              "seo": "한덕수 선고 최신 이슈와 핵심 내용 정리",
-              "home": "한덕수 선고, '내란 중요임무' 한덕수 오늘 선고…'계엄=내란' 첫 대법 판단 관련 확인할 점",
-              "topic": "한덕수 선고",
+              "seo": "김창민 감독 사망사건 선고 최신 이슈와 핵심 내용 정리",
+              "home": "김창민 감독 사망사건 선고, 故김창민감독 사망사건 피의자들 오늘 1심 선고 관련 확인할 점",
+              "topic": "김창민 감독 사망사건 선고",
               "topicGroup": "다음 실시간 검색어"
             },
             "facts": [
               {
-                "text": "대법원 전원합의체(주심 오경미 대법관)는 이날 오후 4시 대법정에서 한덕수 전 총리의 내란 중요임무 종사 등 혐의 상고심 선고 기일을 연다. 지난해 8월 29일 조은석 내란 특별검사팀에 의해 재판에 넘겨진 지 약 1년 2개월 만이자 올해 5월 7일 항소심 선고 이후 6개월여 만이다.",
+                "text": "고(故) 김창민 영화 감독 을 폭행해 사망 에 이르게 한 혐의로 재판에 넘겨진 30대 남성들에 대한 1심 선고 가 19일(오늘) 나온다. 김 감독 은 몇 시간뒤 의식불명 상태에 빠져 18일만에 뇌사 판정을 받고 장기기증후 세상을 떠났다.",
                 "sourceIndex": 0
               },
               {
-                "text": "더불어민주당 김민석 대표는 오늘 오후로 예정된 한덕수 전 국무총리의 내란중요임무종사 혐의 대법원 선고 를 앞두고 \"의외의 결과가 나오면 즉응하는 결정을 하겠다\"고 예고했습니다.",
+                "text": "감독 의 사망 을 예견했다고 판단해 살인죄를 적용했다. 김 감독 은 사건 발생 약 1시간 뒤 병원으로 옮겨졌지만 상태가 악화됐다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.yna.co.kr/view/AKR20261118187100004?input=1195m",
-                "press": "연합뉴스"
+                "url": "https://www.newsis.com/view/NISX20261118_0003873860",
+                "press": "뉴시스"
               },
               {
-                "url": "https://imnews.imbc.com/news/2026/politics/article/6866846_36911.html",
-                "press": "MBC"
+                "url": "https://www.mk.co.kr/article/12213427",
+                "press": "매일경제"
               }
             ],
             "images": [
-              "https://img5.yna.co.kr/photo/yna/YH/2026/01/21/PYH2026012110900001300_P4.jpg"
+              "https://img1.newsis.com/2026/05/04/NISI20260504_0021271073_web.jpg"
             ],
             "press": [
-              "연합뉴스",
-              "MBC"
+              "뉴시스",
+              "매일경제"
             ],
             "headlines": [
-              "'내란 중요임무' 한덕수 오늘 선고…'계엄=내란' 첫 대법 판단",
-              "김민석 \" 한덕수 대법원 선고 , 의외 결과 나오면 즉시 대응\""
+              "故김창민감독 사망사건 피의자들 오늘 1심 선고",
+              "법원, ‘ 김창민 감독 사망 사건 ’ 피고인 2명에 징역 12년·3년 선고"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:35:37.907Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
           "id": "daum-10",
           "rank": 10,
-          "keyword": "브레인 악셀",
-          "title": "브레인 악셀",
-          "rawKeyword": "브레인 악셀",
+          "keyword": "백지연 이진우 인터뷰 공개",
+          "title": "백지연 이진우 인터뷰 공개",
+          "rawKeyword": "백지연 이진우 인터뷰 공개",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
           "priority": 91,
           "source": "daum",
           "expansions": [
-            "브레인 악셀 후기",
-            "브레인 악셀 이진우",
-            "브레인 악셀 블로그",
-            "브레인 악셀 판매량",
-            "브레인 악셀 ai",
-            "브레인 악셀 중고",
-            "브레인 악셀 내용",
-            "브레인 악셀 요약"
+            "백지연 홈쇼핑",
+            "백지연 나무위키",
+            "백지연아나운서",
+            "백지연 교수",
+            "백지연 강인찬",
+            "백지연가습기가격",
+            "백지연습장 찾는 법",
+            "이진우 리트"
           ],
-          "expansionSeed": "브레인 악셀",
+          "expansionSeed": "백지연",
           "insight": {
             "titles": {
-              "seo": "브레인 악셀 최신 이슈와 핵심 내용 정리",
-              "home": "브레인 악셀, \"단 1원도 아깝다\"…리트 만점자 책 '브레인 악셀', 환불 요구 속출 관련 확인할 점",
-              "topic": "브레인 악셀",
+              "seo": "백지연 이진우 인터뷰 공개 최신 이슈와 핵심 내용 정리",
+              "home": "백지연 이진우 인터뷰 공개, Attention Required! 관련 확인할 점",
+              "topic": "백지연 이진우 인터뷰 공개",
               "topicGroup": "다음 실시간 검색어"
             },
             "facts": [
               {
-                "text": "조기용 이다솜 기자 = 올해 법학적성시험(리트·LEET)에서 인공지능(AI)을 활용해 만점을 받았다는 의혹을 받고 있는 이진우씨의 책 ' 브레인 악셀 ' 환불 요구가 서점가에 빗발치고 있다.",
+                "text": "법학적성시험(LEET·리트) 만점자 이진우 씨가 부정행위 의혹을 해소하겠다며 예고한 공개 검증에 불참한 가운데, 이 씨가 방송인 백지연 과 사전에 촬영한 인터뷰 영상이 공개 됐다. 19일 유튜브 채널 '지금 백지연 '에는 '11월 11일 시점 촬영 인터뷰 '라는 제목의 영상이 올라왔다.",
                 "sourceIndex": 0
               },
               {
-                "text": "이씨는 리트 성적이 발표된 후인 올해 9월2일 자기계발 도서 ' 브레인악셀 ' 발간했다. 브레인악셀 은 현재 알라딘에서 자기계발 주간 순위 11위, 종합 톱100 9주의 성과를 기록하고 있다.",
+                "text": "올해 7월 치러진 법학적성시험(LEET·리트)에서 만점을 받아 유명세를 얻었지만 인공지능(AI)을 이용한 부정행위 의혹이 제기된 이진우 (32)씨가 공개 검증 현장에 불참하고 연락이 두절된 가운데, 방송인 백지연 이 이씨와 진행한 인터뷰 를 공개 했다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.newsis.com/view/NISX20261118_0003873284",
-                "press": "뉴시스"
+                "url": "https://www.hankyung.com/article/202611196417H",
+                "press": "한국경제"
               },
               {
-                "url": "https://www.mt.co.kr/policy/2026/11/18/2026111816330535566",
-                "press": "머니투데이"
+                "url": "https://www.seoul.co.kr/news/society/education-news/2026/11/19/20261119500060?wlog_tag3=naver",
+                "press": "서울신문"
               }
             ],
             "images": [
-              "https://img1.newsis.com/2026/11/18/NISI20261118_0002295182_web.jpg"
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F015%2F2026%2F11%2F19%2F5355701.jpg&type=fface200_200&expire=2&refresh=true"
             ],
             "press": [
-              "뉴시스",
-              "머니투데이"
+              "한국경제",
+              "서울신문"
             ],
             "headlines": [
-              "\"단 1원도 아깝다\"…리트 만점자 책 '브레인 악셀', 환불 요구 속출",
-              "시대인재, '리트 만점자' 이진우씨 계약 해지… 브레인 코치 영입 8일만"
+              "Attention Required!",
+              "“3주만에 ‘머리 리셋’이 된다고요?” 백지연 , ‘리트 만점’ 이진우 ..."
             ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:35:37.907Z"
+            "extraction": "search-card",
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         }
       ]
@@ -1261,197 +1254,73 @@
         {
           "id": "nate-1",
           "rank": 1,
-          "keyword": "이민호 버츄얼 러브",
-          "title": "이민호 버츄얼 러브",
-          "rawKeyword": "이민호 버츄얼 러브",
+          "keyword": "피지컬 아시아 시즌2",
+          "title": "피지컬 아시아 시즌2",
+          "rawKeyword": "피지컬 아시아 시즌2",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 100,
           "source": "nate",
           "expansions": [
-            "버츄얼러브",
-            "이민호 송혜교",
-            "이민호 마라톤",
-            "이민호 철인3종",
-            "이민호 나무위키",
-            "이민호 드라마",
-            "이민호 수지",
-            "송혜교 이민호"
+            "피지컬 아시아",
+            "피지컬ai",
+            "피지컬가먼츠",
+            "피지컬 뜻",
+            "피지컬100",
+            "피지컬 ai 뜻",
+            "피지컬지옥",
+            "피지컬지옥 후기"
           ],
-          "expansionSeed": "이민호",
+          "expansionSeed": "피지컬",
           "insight": {
             "titles": {
-              "seo": "이민호 버츄얼 러브 최신 이슈와 핵심 내용 정리",
-              "home": "이민호 버츄얼 러브, 이민호·박규영 '버츄얼 러브' 캐스팅…내년 하반기 방송 관련 확인할 점",
-              "topic": "이민호 버츄얼 러브",
+              "seo": "피지컬 아시아 시즌2 최신 이슈와 핵심 내용 정리",
+              "home": "피지컬 아시아 시즌2, 넷플릭스 '피지컬: 아시아' 시즌2 내년 공개 관련 확인할 점",
+              "topic": "피지컬 아시아 시즌2",
               "topicGroup": "네이트 실시간 검색어"
             },
             "facts": [
               {
-                "text": "배우 이민호와 박규영이 로맨스 호흡을 맞춘다. SBS는 두 사람이 주연하는 새 드라마 '버츄얼 러브'(가제)를 내년 하반기 방송한다고 19일 밝혔다.",
+                "text": "(서울=연합뉴스) 조윤희 기자 = 넷플릭스 오리지널 예능 '피지컬: 아시아'가 시즌2로 돌아온다.",
                 "sourceIndex": 0
               },
               {
-                "text": "극 중 버츄얼 아이돌 제작자 역할을 맡아 이민호 , 박규영과 호흡을 맞출 예정이다. ' 버츄얼 러브 '는 팍팍한 일상을 견디게 해주는 버츄얼 아이돌 그룹 멤버가 자신의 직장 상사란 사실을 알게 된 회사원의 이야기를 담은 로맨틱 코미디 드라마다.",
+                "text": "예능프로그램 ‘ 피지컬 100’ 시즌2 최종 20명(퀘스트 4) 중 하나다. 종합격투기 프로 전적은 4승 1패가 됐다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.newsis.com/view/NISX20261119_0003874358",
-                "press": "뉴시스"
+                "url": "https://www.yna.co.kr/view/AKR20261119043100005?input=1195m",
+                "press": "연합뉴스"
               },
               {
-                "url": "https://news.jtbc.co.kr/article/NB12327237?influxDiv=NAVER",
-                "press": "JTBC"
+                "url": "https://www.mk.co.kr/article/12192137",
+                "press": "MK스포츠"
               }
             ],
             "images": [
-              "https://img1.newsis.com/2026/11/19/NISI20261119_0002296325_web.jpg"
+              "https://img3.yna.co.kr/etc/inner/KR/2026/11/19/AKR20261119043100005_01_i_P4.jpg"
             ],
             "press": [
-              "뉴시스",
-              "JTBC"
+              "연합뉴스",
+              "MK스포츠"
             ],
             "headlines": [
-              "이민호·박규영 '버츄얼 러브' 캐스팅…내년 하반기 방송",
-              "[단독] 서현우, ' 버츄얼 러브 ' 출연… 이민호 아이돌 만든다"
+              "넷플릭스 '피지컬: 아시아' 시즌2 내년 공개",
+              "피지컬 100 설영호, 일본 격투기 챔피언 압도"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:35:37.907Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
           "id": "nate-2",
           "rank": 2,
-          "keyword": "포체티노 감독 맨유",
-          "title": "포체티노 감독 맨유",
-          "rawKeyword": "포체티노 감독 맨유",
+          "keyword": "승리 만삭 아내와",
+          "title": "승리 만삭 아내와",
+          "rawKeyword": "승리 만삭 아내와",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 99,
-          "source": "nate",
-          "expansions": [
-            "맨유 포체티노",
-            "포체티노 맨유",
-            "맨유 감독",
-            "마우리시오 포체티노",
-            "포체티노 나무위키",
-            "포체티노 첼시",
-            "포체티노 전술",
-            "포체티노 손흥민"
-          ],
-          "expansionSeed": "포체티노",
-          "insight": {
-            "titles": {
-              "seo": "포체티노 감독 맨유 최신 이슈와 핵심 내용 정리",
-              "home": "포체티노 감독 맨유, 맨체스터 도착한 포체티노 감독 \"맨유 맡아 큰 영광·특권\" 관련 확인할 점",
-              "topic": "포체티노 감독 맨유",
-              "topicGroup": "네이트 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "포체티노 감독 은 지난 13일 맨유 신임 감독 으로 선임하면서 미국 축구대표팀을 떠났다. 맨유 는 성적 부진을 이유로 마이클 캐릭 감독 을 경질했다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "한국 시간으로 23일 오전 1시 30분 킥오프하는 리버풀과 원정 경기가 포체티노 감독 의 맨유 데뷔전이다. 미국축구협회는 새 감독 찾기에 나선다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.newsis.com/view/NISX20261119_0003874208",
-                "press": "뉴시스"
-              },
-              {
-                "url": "https://www.yna.co.kr/view/AKR20261118096400007?input=1195m",
-                "press": "연합뉴스"
-              }
-            ],
-            "images": [
-              "https://img1.newsis.com/2026/11/18/NISI20261118_0001758676_web.jpg"
-            ],
-            "press": [
-              "뉴시스",
-              "연합뉴스"
-            ],
-            "headlines": [
-              "맨체스터 도착한 포체티노 감독 \"맨유 맡아 큰 영광·특권\"",
-              "포체티노 고별전서 풀리식 바이시클킥…미국, 아이티 2-0 제압"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:35:37.907Z"
-          }
-        },
-        {
-          "id": "nate-3",
-          "rank": 3,
-          "keyword": "영어 1등급 비율",
-          "title": "영어 1등급 비율",
-          "rawKeyword": "영어 1등급 비율",
-          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
-          "priority": 98,
-          "source": "nate",
-          "expansions": [
-            "역대 영어 1등급 비율",
-            "6모 영어 1등급 비율",
-            "24 수능 영어 1등급 비율",
-            "수능 영어 1등급 비율",
-            "9모 영어 1등급 비율",
-            "2025 수능 영어 1등급 비율",
-            "2027 6모 영어 1등급 비율",
-            "2024 수능 영어 1등급 비율"
-          ],
-          "expansionSeed": "영어 1등급 비율",
-          "insight": {
-            "titles": {
-              "seo": "영어 1등급 비율 최신 이슈와 핵심 내용 정리",
-              "home": "영어 1등급 비율, 수능 출제위원장 \"영어 1등급 비율 안정적 달성 예상\"(종합) 관련 확인할 점",
-              "topic": "영어 1등급 비율",
-              "topicGroup": "네이트 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "6월 모의평가에서는 영어 1등급 비율 이 4.13%에 그쳤지만, 9월 모의평가에서는 15.5%까지 높아졌다. 두 시험 간 차이는 11.37%포인트(p)에 달한다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "2027학년도 대학수학능력시험 출제위원장은 고등학교 공교육 내용만으로 변별력을 확보할 수 있도록 출제했다고 밝혔습니다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.yna.co.kr/view/AKR20261119033751530?input=1195m",
-                "press": "연합뉴스"
-              },
-              {
-                "url": "https://news.jtbc.co.kr/article/NB12328786?influxDiv=NAVER",
-                "press": "JTBC"
-              }
-            ],
-            "images": [
-              "https://img7.yna.co.kr/photo/yna/YH/2026/11/19/PYH2026111905030001300_P4.jpg"
-            ],
-            "press": [
-              "연합뉴스",
-              "JTBC"
-            ],
-            "headlines": [
-              "수능 출제위원장 \"영어 1등급 비율 안정적 달성 예상\"(종합)",
-              "수능 출제위원장 \"공교육만으로 변별력… 영어 1등급 비율 안정적일 듯\""
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:35:37.907Z"
-          }
-        },
-        {
-          "id": "nate-4",
-          "rank": 4,
-          "keyword": "승리 아내와 포착",
-          "title": "승리 아내와 포착",
-          "rawKeyword": "승리 아내와 포착",
-          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
-          "priority": 97,
           "source": "nate",
           "expansions": [
             "승리 와이프",
@@ -1466,106 +1335,230 @@
           "expansionSeed": "승리",
           "insight": {
             "titles": {
-              "seo": "승리 아내와 포착 최신 이슈와 핵심 내용 정리",
-              "home": "승리 아내와 포착, 승리, 만삭 아내와 공항 포착…취재진에 “여기까지 찍으시죠” - 매일경제 관련 확인할 점",
-              "topic": "승리 아내와 포착",
+              "seo": "승리 만삭 아내와 최신 이슈와 핵심 내용 정리",
+              "home": "승리 만삭 아내와, 승리, 만삭 20대 아내와 동반 입국…D라인 포착 관련 확인할 점",
+              "topic": "승리 만삭 아내와",
               "topicGroup": "네이트 실시간 검색어"
             },
             "facts": [
               {
-                "text": "공유 글자 크기 번역 ENG JPN CHN 편의기능 공유 글자크기 인쇄 즐겨찾기 댓글 AI기능 번역 핵심요약 추천질문 관련종목 AI해설 에디터 픽 추천기사 정부, ‘지역별 전기 도매가 차등화’ 개편 보류 반도체 훈풍에 눈높이 '쑥' … KDI, 내년 성장률 3.9% 전망 한중 FTA 타결에 靑 “한한령 해제 기대”…K팝 공연 빗장 풀릴까 내년 회계사 최소선발인원 3년 연속 감축 가닥…1100명 이하 유력 4인 가족 김장 비용 34만원…완제품은 2.3배 비쌌다 로그인 하시면 세밀한 개인 맞춤형 기사를 보실 수 있습니다. 승리, 만삭 아내와 공항 포착…취재진에 “여기까지 찍으시죠” 이다겸 기자 입력 : 2026.11.19 07:46 구글 검색 선호 추가 Google 검색에서 매일경제 기사를 더 자주 볼 수 있습니다.",
+                "text": "곁에는 최근 혼인신고를 마친 20대 비연예인 아내 가 함께했다. 이날 승리 는 검은색 비니 위에 회색 후드 모자를 쓰고 마스크로 얼굴을 가린 채 입국장에 나타났다.",
                 "sourceIndex": 0
               },
               {
-                "text": "곁에는 최근 혼인신고를 마친 20대 비연예인 아내 가 함께했다. 이날 승리 는 검은색 비니 위에 회색 후드 모자를 쓰고 마스크로 얼굴을 가린 채 입국장에 나타났다.",
+                "text": "그룹 빅뱅 출신 승리 가 임신한 아내와 함께 공항에서 포착됐다. 승리 는 지난 18일 홍콩발 항공편을 타고 인천국제공항으로 입국했다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.mk.co.kr/article/12213211",
-                "press": "매일경제"
-              },
-              {
                 "url": "https://news.tvchosun.com/site/data/html_dir/2026/11/19/2026111990001.html",
                 "press": "TV조선"
+              },
+              {
+                "url": "https://www.mk.co.kr/article/12213211",
+                "press": "매일경제"
               }
             ],
             "images": [
-              "https://pimg.mk.co.kr/news/cms/202611/19/news-p.v1.20261119.f1986514aa0443ff9d48c36101818d8c_R.jpeg"
+              "https://img.tvchosun.com/sitedata/image/202611/19/2026111990001_0.jpg"
             ],
             "press": [
-              "매일경제",
-              "TV조선"
+              "TV조선",
+              "매일경제"
             ],
             "headlines": [
-              "승리, 만삭 아내와 공항 포착…취재진에 “여기까지 찍으시죠” - 매일경제",
-              "승리 , 만삭 20대 아내와 동반 입국…D라인 포착"
+              "승리, 만삭 20대 아내와 동반 입국…D라인 포착",
+              "승리 , 만삭 아내와 공항 포착…취재진에 “여기까지 찍으시죠”"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:35:37.907Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
+          }
+        },
+        {
+          "id": "nate-3",
+          "rank": 3,
+          "keyword": "조작기소 특검법 수사",
+          "title": "조작기소 특검법 수사",
+          "rawKeyword": "조작기소 특검법 수사",
+          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
+          "priority": 98,
+          "source": "nate",
+          "expansions": [
+            "조작기소 특검법",
+            "조작기소 특검법 뜻",
+            "조작기소 특검법 통과",
+            "조작기소 특검법이란",
+            "조작기소 특검법 내용",
+            "조작기소 특검",
+            "조작기소법",
+            "조작기소뜻"
+          ],
+          "expansionSeed": "조작기소",
+          "insight": {
+            "titles": {
+              "seo": "조작기소 특검법 수사 최신 이슈와 핵심 내용 정리",
+              "home": "조작기소 특검법 수사, [속보] 이 대통령, 조작 기소 특검법 공포안 재가...특검 임명만 남아 관련 확인할 점",
+              "topic": "조작기소 특검법 수사",
+              "topicGroup": "네이트 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "이재명 대통령이 국무회의에서 통과된 이른바 '조작 기소 특검법' 공포안을 재가했습니다. 이 대통령의 해외 순방으로 한성숙 총리가 그제(17일) 국무회의를 주재해, 공포안을 의결했는데, 이 대통령 재가로 공포안이 관보에 게재되면서 특검 임명 절차만 남겨두게 됐습니다. 특검법에는 윤석열 정부 당시 검찰 등 국가기관이 야당이던 더불어민주당과 정치적 반대 세력을 상대로 조작 수사·기소를 벌였다는 의혹을 규명하겠다는 내용이 담겼습니다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "지난달 2일 형사소송법 개정으로 검사의 수사 권은 사라졌지만, 조작기소 특검법 은 ‘개정 이전 형사소송법 규정에 따른다’는 부칙을 둬 검사가 수사 ·지휘권을 행사할 수 있도록 했다. 이 가운데 이 대통령 관련 사건은 △대장동·위례신도시·백현동 개발 의혹 △쌍방울 대북송금 사건 등 6개다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.ytn.co.kr/_ln/0101_202611190743127841",
+                "press": "YTN"
+              },
+              {
+                "url": "https://www.hani.co.kr/arti/politics/politics_general/1288062.html",
+                "press": "한겨레"
+              }
+            ],
+            "images": [
+              "https://image.ytn.co.kr/general/jpg/2026/1119/202611190743127841_t.jpg"
+            ],
+            "press": [
+              "YTN",
+              "한겨레"
+            ],
+            "headlines": [
+              "[속보] 이 대통령, 조작 기소 특검법 공포안 재가...특검 임명만 남아",
+              "이 대통령, 순방 중 ‘ 조작기소 특검법 ’ 재가"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-19T02:10:44.493Z"
+          }
+        },
+        {
+          "id": "nate-4",
+          "rank": 4,
+          "keyword": "백종원 안성재 흑백요리사3",
+          "title": "백종원 안성재 흑백요리사3",
+          "rawKeyword": "백종원 안성재 흑백요리사3",
+          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
+          "priority": 97,
+          "source": "nate",
+          "expansions": [
+            "백종원 떡볶이",
+            "백종원 나락",
+            "백종원 근황",
+            "백종원 중국집",
+            "백종원 나무위키",
+            "백종원 소유진",
+            "백종원 주식",
+            "백종원 예산시장"
+          ],
+          "expansionSeed": "백종원",
+          "insight": {
+            "titles": {
+              "seo": "백종원 안성재 흑백요리사3 최신 이슈와 핵심 내용 정리",
+              "home": "백종원 안성재 흑백요리사3, '와인 바꿔치기' 품고 간다..백종원·안성재, '흑백요리사3' 교체無 '또 심사위원' 관련 확인할 점",
+              "topic": "백종원 안성재 흑백요리사3",
+              "topicGroup": "네이트 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "왼쪽부터 백종원, 안성재 /사진=넷플릭스'흑백요리사' 제작진이 결국 백종원과 안성재를 품었다. 두 심사위원 모두 각종 구설에 오르내렸으나, 변동 없이 시즌3 동행을 이어간다.19일 스타뉴스 취재 결과, 더본코리아 대표 백종원과 안성재 셰프는 '흑백요리사: 요리 계급 전쟁 시즌3'(이하 '흑백요리사3') 심사위원으로서 최근 모든 회차의 녹화를 마쳤다. 이에 따라 이미 시즌3의 우승자도 확정된 상황이다.'흑백요리사3'는 글로벌 OTT 넷플릭스의 요리 서바이벌 예능으로, 2024년 론칭해 작년 시즌2까지 큰 사랑을 받았다.이번 시즌3는 개인전이 아닌 '식당의 대결'로 새롭게 돌아온다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "' 흑백요리사 '는 대중에게 잘 알려지지 않은 실력파 요리사 인 흑수저 셰프들이 스타 셰프 중심의 백수저들과 맞붙는 요리 경연 프로그램이다. 심사는 외식사업가이자 요리연구가인 백종원 과 미쉐린 3스타 레스토랑 '모수 서울'을 이끈 안성재 셰프가 맡았다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.starnewskorea.com/star/2026/11/19/2026111817220754561",
+                "press": "스타뉴스"
+              },
+              {
+                "url": "https://www.wikitree.co.kr/articles/1175358",
+                "press": "위키트리"
+              }
+            ],
+            "images": [
+              "https://image.starnewskorea.com/cdn-cgi/image/f=auto,w=1200,h=781,fit=cover,q=high,sharpen=2/21/2026/11/2026111817220754561_1.jpg"
+            ],
+            "press": [
+              "스타뉴스",
+              "위키트리"
+            ],
+            "headlines": [
+              "'와인 바꿔치기' 품고 간다..백종원·안성재, '흑백요리사3' 교체無 '또 심사위원'",
+              "여러 번 고사했다더니 마침내…‘ 흑백요리사3 ’ 출연 확정한 '스타 셰프..."
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
           "id": "nate-5",
           "rank": 5,
-          "keyword": "폭설 개봉 1위",
-          "title": "폭설 개봉 1위",
-          "rawKeyword": "폭설 개봉 1위",
+          "keyword": "김간지 활동 사과",
+          "title": "김간지 활동 사과",
+          "rawKeyword": "김간지 활동 사과",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 96,
           "source": "nate",
           "expansions": [
-            "영화 폭설 개봉",
-            "폭설 영화",
-            "영화 폭설",
-            "폭설 무대인사",
-            "영화 폭설 결말",
-            "영화 폭설 원작",
-            "폭설 나무위키",
-            "폭설 평점"
+            "김간지 나무위키",
+            "김간지 연세대",
+            "김간지 mbti",
+            "김간지 라디오스타",
+            "라디오스타 김간지",
+            "김간지 인스타",
+            "사과영양성분",
+            "꿀사과"
           ],
-          "expansionSeed": "폭설",
+          "expansionSeed": "김간지",
           "insight": {
             "titles": {
-              "seo": "폭설 개봉 1위 최신 이슈와 핵심 내용 정리",
-              "home": "폭설 개봉 1위, 김윤석·구교환 '폭설', 개봉 첫날 박스오피스 1위 - 연예 관련 확인할 점",
-              "topic": "폭설 개봉 1위",
+              "seo": "김간지 활동 사과 최신 이슈와 핵심 내용 정리",
+              "home": "김간지 활동 사과, 김간지 \"중학교 때 문희준 안티 카페 활동…직접 사과해\" 관련 확인할 점",
+              "topic": "김간지 활동 사과",
               "topicGroup": "네이트 실시간 검색어"
             },
             "facts": [
               {
-                "text": "임영웅 공연 실황 영화는 2위로 출발 영화 폭설이 박스오피스 정상에 오르며 기분 좋게 출발했다.",
+                "text": "밴드 술탄 오브 더 디스코의 드러머 김간지가 과거 그룹 H.O.T. 문희준의 안티 카페에서 활동했다고 밝혔다.",
                 "sourceIndex": 0
               },
               {
-                "text": "19일 영화관입장권 통합전산망에 따르면 ‘ 폭설 ’은 개봉 첫날인 18일 5만8036명의 관객을 동원했다. 누적 관객 수는 6만3695명으로, 전체 박스오피스 1위 를 기록했다.",
+                "text": "김간지 는 KBS2 ‘불후의 명곡’에서 문희준과 마주쳤고, 과거 안티 카페에서 활동 했던 사실을 털어놓으며 사과 했다고 밝혔다. 그는 “너무 죄송해서 왠지 이야기해야 할 것 같았다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://news.tf.co.kr/read/entertain/2390735.htm",
-                "press": "더팩트"
+                "url": "https://www.newsis.com/view/NISX20261119_0003874444",
+                "press": "뉴시스"
               },
               {
-                "url": "https://sports.donga.com/ent/article/all/20261119/135051532/1",
-                "press": "스포츠동아"
+                "url": "https://www.tvreport.co.kr/entertainment/article/1092060/",
+                "press": "TV리포트"
               }
             ],
             "images": [
-              "https://img.tf.co.kr/article/home/2026/11/19/202678941795047665.jpg"
+              "https://img1.newsis.com/2026/11/19/NISI20261119_0002296393_web.jpg"
             ],
             "press": [
-              "더팩트",
-              "스포츠동아"
+              "뉴시스",
+              "TV리포트"
             ],
             "headlines": [
-              "김윤석·구교환 '폭설', 개봉 첫날 박스오피스 1위 - 연예",
-              "김윤석·구교환 ‘ 폭설 ’, 개봉 첫날 박스오피스 1위 …실관람객 평점 9..."
+              "김간지 \"중학교 때 문희준 안티 카페 활동…직접 사과해\"",
+              "\"문희준 싫어했다\" 김간지 , 필터 없는 '솔직 고백'...김구라도 '당황' ('..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:35:37.907Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         }
       ]
@@ -1609,7 +1602,7 @@
                 "sourceIndex": 0
               },
               {
-                "text": "한편 지난 9월 로 전세사기 누적 피해 자는 4만명을 훌쩍 넘어섰다. 623건이 추가 인정돼 누적 4만1559건으로 집계됐다.",
+                "text": "국토교통부 통계누리에 따르면 올해 1~ 9월 서울의 비아파트(단독·다가구·다세대·연립주택) 착공 물량은 5911가구에 그쳤다. 2022년 같은 기간 1만5341가구와 비교하면 61.5% 감소한 규모다.",
                 "sourceIndex": 1
               }
             ],
@@ -1619,8 +1612,8 @@
                 "press": "서울신문"
               },
               {
-                "url": "https://biz.heraldcorp.com/article/10930024?ref=naver",
-                "press": "헤럴드경제"
+                "url": "http://www.queen.co.kr/news/articleView.html?idxno=466586",
+                "press": "Queen 이코노미퀸"
               }
             ],
             "images": [
@@ -1628,14 +1621,14 @@
             ],
             "press": [
               "서울신문",
-              "헤럴드경제"
+              "Queen 이코노미퀸"
             ],
             "headlines": [
               "수능 끝나면 대학가 자취방 시즌… 청년 노린 전세사기·부동산 경매 물건 주의",
-              "“ 전세사기 보증금 3분의1은 구제” 13일부터 ‘최소보장제’ 시행 [부..."
+              "서울시, 비아파트 건설에 200억 저리 융자 … 전세사기 이후 위축된 빌..."
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-19T01:35:37.907Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
@@ -1699,7 +1692,7 @@
               "[2026 국감] ' 책무구조도 ' 도입후 금융사고 203건… 제재 '0건'"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:09:38.902Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
@@ -1763,7 +1756,7 @@
               "' 수출 1兆 달러' 초읽기…반도체가 이끈 새 역사, 산업별 온도차는 여전"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:09:38.902Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
@@ -1826,7 +1819,7 @@
               "LH 임대주택 150만호 돌파…하자관리·화재안전 대책 강화"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:09:38.902Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
@@ -1890,7 +1883,7 @@
               "월가 “연준이 금리 안올린 건 실수”… 한은 은?"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:09:38.902Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         }
       ]
@@ -1951,7 +1944,7 @@
               "'강정호도 아니라는데' 키움은 또 틀렸고 NC는 옳았다...데이비슨, 확실히 하락세, 키움 2용타 완전 실패"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:09:38.902Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
@@ -2016,7 +2009,7 @@
               "'韓 수비 에이스 ' 김민재 미쳤다 , 독일 생활 마침표 찍고 EPL 입성할까....."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:09:38.902Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
@@ -2071,7 +2064,7 @@
               "403 Forbidden"
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-19T01:35:37.907Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
@@ -2136,7 +2129,7 @@
               "[공식발표] ' 손흥민 선발 명단 제외 ' LAFC, 콜로라도전 'BEST 11' 공개!…..."
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-19T01:35:37.907Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
@@ -2191,7 +2184,7 @@
               "\"와, 대박이다!\" 7번 물려준 그리즈만도 환호성...'데뷔전 데뷔골' 이강인 '후계자 자격' 완벽 증명"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:09:38.902Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
@@ -2246,7 +2239,7 @@
               "'와' 한국 야구 대박 터지나! 17억 이도류 유망주 156km '쾅'→2이닝 4K 무실점 호투...\"정말 인상적\" 美 극찬 이어져"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:09:38.902Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
@@ -2301,7 +2294,7 @@
               "[오피셜] 이럴수가, 배지환 ML 생존 벼랑 끝 몰렸다! 30개 구단 모두 외면…웨이버 통과→트리플A 이관 \"FA 선택할 듯\" 美 전망"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:09:38.902Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
@@ -2356,7 +2349,7 @@
               "안세영이 돌아왔다! 압승, 쾌승!…유럽 최강자 블리치펠트 43분 만에 2-0 완파→세계선수권 8강행 성공"
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-19T01:35:37.907Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
@@ -2411,7 +2404,7 @@
               "[오피셜] '충격' 아슬아슬했던 전북현대 끝내 무너졌다...디펜딩 챔피언 코리아컵 16강 탈락, K3 당진 '자이언트 킬링' 성공→8개 팀 생존"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:09:38.902Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
@@ -2476,7 +2469,7 @@
               "' 손흥민 과 한솥밥 먹었는데' 토트넘 역대 최고 이적료 주인공의 몰락…..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:09:38.902Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         }
       ]
@@ -2546,7 +2539,7 @@
               "돌봄 은 가까이, 일상은 듣든하게...'20분 생활권 돌봄 '"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:09:38.902Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
@@ -2599,18 +2592,18 @@
               }
             ],
             "images": [
-              "https://img.hankyung.com/photo/202611/0D.46435852.1.png"
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F015%2F2026%2F11%2F16%2F5354155.jpg&type=fface200_200&expire=2&refresh=true"
             ],
             "press": [
               "한국경제",
               "문화일보"
             ],
             "headlines": [
-              "롯데백화점, 8개 계열사 통합 '엘패스' 캠페인 진행",
+              "Attention Required!",
               "강북구 “9일부터 스포츠강좌 이용권 신청하세요”"
             ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:09:38.902Z"
+            "extraction": "search-card",
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
@@ -2665,7 +2658,7 @@
               "복지부-23개 장애인 단체, 정책 현안 논의를 위한 대규모 소통의 장 마련"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:09:38.902Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
@@ -2717,7 +2710,7 @@
               "남양주시, 요양비 408억 절감 기대"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:09:38.902Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
@@ -2740,43 +2733,43 @@
           "insight": {
             "titles": {
               "seo": "장애인일자리지원 최신 이슈와 핵심 내용 정리",
-              "home": "장애인일자리지원, 한전KPS, 3년째 자원순환 캠페인…장애인 일자리 지원 관련 확인할 점",
+              "home": "장애인일자리지원, 사천시, 내년도 장애인일자리 참여자 142명 모집 관련 확인할 점",
               "topic": "장애인일자리지원",
               "topicGroup": "정책 실시간 검색어"
             },
             "facts": [
               {
-                "text": "17일 굿윌스토어에 미사용 물품·후원금 500만원 전달 [나주=뉴시스] 이창우 기자=한전KPS는 17일 '굿사이클링 캠페인'을 이날 마무리하고 의류·잡화·생활용품·가전 등 기부 물품 800여점과 후원금 500만원을 사회복지법인 밀알복지재단이 운영하는 굿윌스토어에 전달했다. (사진=한전KPS 제공) photo@newsis.com *재판매 및 DB 금지 [나주=뉴시스]이창우 기자 = 한전KPS가 임직원들의 자발적인 참여로 미사용 물품을 기부하고 후원금을 전달하는 등 자원순환과 나눔을 통한 ESG(환경·사회·지배구조) 경영을 실천했다. 17일 한전KPS에 따르면 지난 9월부터 3개월여간 진행한 '굿사이클링 캠페인'을 이날 마무리하고 의류·잡화·생활용품·가전 등 기부 물품 800여점을 사회복지법인 밀알복지재단이 운영하는 굿윌스토어에 전달했다.",
+                "text": "장애인편의시설 모니터링 일자리 신설…올해보다",
                 "sourceIndex": 0
               },
               {
-                "text": "▲ 내년도 장애인일자리 사업 참여자·수행기관 모집 = 강원 철원군은 취업이 어려운 장애인 의 사회참여 기회를 넓히고 자립을 지원 하고자 내년도 장애인일자리 참여자 26명과 특화형 일자리 수행기관 1곳을 공개 모집한다고 17일 밝혔다.",
+                "text": "한전KPS가 임직원들의 자발적인 기부를 통해 자원순환과 장애인 일자리 창출을 지원 하는 사회공헌활동을 3년 연속 이어갔다. 전력설비 정비 전문기업인 한전KPS는 임직원들이 참여하는 '굿사이클링 캠페인'을 통해 미사용 물품 800점 이상과 성금 500만원을 기부했다고 17일 밝혔다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.newsis.com/view/NISX20261117_0003871936",
+                "url": "https://www.newsis.com/view/NISX20261119_0003874650",
                 "press": "뉴시스"
               },
               {
-                "url": "https://www.yna.co.kr/view/AKR20261117151900062?input=1195m",
-                "press": "연합뉴스"
+                "url": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2493778",
+                "press": "이뉴스투데이"
               }
             ],
             "images": [
-              "https://img1.newsis.com/2026/11/17/NISI20261117_0002294618_web.jpg"
+              "https://img1.newsis.com/2024/08/12/NISI20240812_0001626635_web.jpg"
             ],
             "press": [
               "뉴시스",
-              "연합뉴스"
+              "이뉴스투데이"
             ],
             "headlines": [
-              "한전KPS, 3년째 자원순환 캠페인…장애인 일자리 지원",
-              "[철원소식] 반려동물 등록 여부 집중 단속"
+              "사천시, 내년도 장애인일자리 참여자 142명 모집",
+              "한전KPS, 안 쓰는 물품 800점 기부··· 장애인 자립 지원 나서"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:09:38.902Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
@@ -2831,7 +2824,7 @@
               "전남광주특별시 광산구, 고혈압 ·당뇨 관리 성과 인정…복지부 장관 표..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:09:38.902Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
@@ -2886,7 +2879,7 @@
               "\"철강 불황 지속에\"…포항 '고용위기 선제대응지역' 1년 연장"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:09:38.902Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
@@ -2905,43 +2898,43 @@
           "insight": {
             "titles": {
               "seo": "주거취약계층 주거상향 지원사업 최신 이슈와 핵심 내용 정리",
-              "home": "주거취약계층 주거상향 지원사업, 성남시 주거복지센터, '대한민국주거복지문화대상' 단체 부문 대상 - 매일일보 관련 확인할 점",
+              "home": "주거취약계층 주거상향 지원사업, 성남시, 2030 스마트도시 청사진 확정…주거복지 대상·규제혁신 15건 선정 관련 확인할 점",
               "topic": "주거취약계층 주거상향 지원사업",
               "topicGroup": "정책 실시간 검색어"
             },
             "facts": [
               {
-                "text": "센터는 주거취약계층 의 안정적인 주거 이전을 돕는 ' 주거상향 지원사업 ', 열악한 주거 환경을 정비하는 ' 취약계층 주거 환경개선 사업 ', 물건을 버리지 못하고 쌓아두는 가구의 주거 환경 회복을 지원 하는 '저장강박 의심가구 주거 환경개선 사업 ' 등을 추진해 주거 복지 사각지대 해소에 힘써왔다.",
+                "text": "성남시가 인공지능(AI) 기반의 미래 도시 청사진인 5개년 스마트도시계획을 확정하고 불합리한 규제 15건을 발굴하는 한편, 전국 최고 수준의 주거복지 행정 역량을 대외적으로 인정받으며 도시 혁신에 박차를 가하고 있다.",
                 "sourceIndex": 0
               },
               {
-                "text": "구는 한국토지주택공사(LH)와 협력해 현장에 이주지원센터를 설치하고 주거취약계층 주거상향 지원사업 과 긴급주거지원을 연계했습니다. 이를 통해 영세 입주민이 공공임대주택으로 이주할 수 있도록 지원하며 거주자 주거 안정을 확보했습니다.",
+                "text": "센터는 주거취약계층 의 안정적인 주거 이전을 지원 하는 ‘ 주거상향 지원사업 ’을 비롯해 열악한 주거 공간을 정비하는 ‘ 취약계층 주거 환경개선 사업 ’을 추진해 왔다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.m-i.kr/news/articleView.html?idxno=2020532",
-                "press": "매일일보"
+                "url": "https://www.incheonilbo.com/news/articleView.html?idxno=1337231",
+                "press": "인천일보"
               },
               {
-                "url": "https://news.skbroadband.com/news/articleView.html?idxno=243468",
-                "press": "SK브로드밴드"
+                "url": "https://www.viva100.com/article/20261119500443",
+                "press": "브릿지경제"
               }
             ],
             "images": [
-              "https://cdn.m-i.kr/news/photo/202611/2020532_2021253_4643.jpg"
+              "https://cdn.incheonilbo.com/news/thumbnail/202611/1337231_680177_2431_v150.jpg"
             ],
             "press": [
-              "매일일보",
-              "SK브로드밴드"
+              "인천일보",
+              "브릿지경제"
             ],
             "headlines": [
-              "성남시 주거복지센터, '대한민국주거복지문화대상' 단체 부문 대상 - 매일일보",
-              "서대문구, 대한민국 주거 복지문화대상 우수상"
+              "성남시, 2030 스마트도시 청사진 확정…주거복지 대상·규제혁신 15건 선정",
+              "성남시 주거 복지센터, 대한민국 주거 복지문화대상 단체 부문 대상"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:09:38.902Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
@@ -2967,7 +2960,7 @@
             },
             "facts": [
               {
-                "text": "공유 글자 크기 번역 ENG JPN CHN 편의기능 공유 글자크기 인쇄 즐겨찾기 댓글 AI기능 번역 핵심요약 추천질문 관련종목 AI해설 에디터 픽 추천기사 반도체 훈풍에 눈높이 '쑥' … KDI, 내년 성장률 3.9% 전망 정부, ‘지역별 전기 도매가 차등화’ 개편 보류 중노위는 근로자 인정, 국세청은 부정…노조 지원비 과세 논란 고액·상습 체납자 1년 새 29% 급증…행안부 명단 공개 내년 회계사 최소선발인원 3년 연속 감축 가닥…1100명 이하 유력 로그인 하시면 세밀한 개인 맞춤형 기사를 보실 수 있습니다.",
+                "text": "공유 글자 크기 번역 ENG JPN CHN 편의기능 공유 글자크기 인쇄 즐겨찾기 댓글 AI기능 번역 핵심요약 추천질문 관련종목 AI해설 에디터 픽 추천기사 내년 회계사 최소선발인원 3년 연속 감축 가닥…1100명 이하 유력 중노위는 근로자 인정, 국세청은 부정…노조 지원비 과세 논란 4인 가족 김장 비용 34만원…완제품은 2.3배 비쌌다 반도체 훈풍에 눈높이 '쑥' … KDI, 내년 성장률 3.9% 전망 한중 FTA 타결에 靑 “한한령 해제 기대”…K팝 공연 빗장 풀릴까 로그인 하시면 세밀한 개인 맞춤형 기사를 보실 수 있습니다.",
                 "sourceIndex": 0
               },
               {
@@ -2997,7 +2990,7 @@
               "시간제보육 제공반 10년 새 10배 확대…올해 이용 아동 3만7000명 넘어"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:09:38.902Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
@@ -3023,43 +3016,43 @@
           "insight": {
             "titles": {
               "seo": "공공분양 최신 이슈와 핵심 내용 정리",
-              "home": "공공분양, 분양가는 '뚝' 품질은 '쑥'…공공분양의 변신 관련 확인할 점",
+              "home": "공공분양, 15년 만에 최저주거기준 높인다…보편형 공공임대 도입도 논의 관련 확인할 점",
               "topic": "공공분양",
               "topicGroup": "정책 실시간 검색어"
             },
             "facts": [
               {
-                "text": "공공분양 아파트에서도 민간 브랜드 수준의 주거 품질을 누릴 수 있게 된다. 입주자가 인테리어 색상과 평면을 고르고 계절창고 등 편의시설도 이용할 수 있다.",
+                "text": "정부가 15년 만에 최저주거기준 개정을 추진한다. 최소주거면적뿐 아니라 주택의 필수설비와 안전·환경 기준까지 전반적으로 손질하고, 다양한 계층이 장기간 거주할 수 있는 ‘보편형 공공임대주택’ 도입 방안도 구체화한다.",
                 "sourceIndex": 0
               },
               {
-                "text": "분양 대금의 60%에 해당하는 중도금 전액을 무이자로 지원해 기업의 초기 자금 부담도 낮췄다. GH 비즈앤 광교는 수원시 영통구 이의동 광교신도시 유일의 공공 지식산업센터다.",
+                "text": "공공분양 아파트에서도 민간 브랜드 수준의 주거 품질을 누릴 수 있게 된다. 입주자가 인테리어 색상과 평면을 고르고 계절창고 등 편의시설도 이용할 수 있다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.hankyung.com/article/2026111699731",
-                "press": "한국경제"
+                "url": "https://www.edaily.co.kr/News/Read?newsId=02604326645647360&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+                "press": "이데일리"
               },
               {
-                "url": "https://www.donga.com/news/Society/article/all/20261118/135047783/1",
-                "press": "동아일보"
+                "url": "https://www.hankyung.com/article/2026111699731",
+                "press": "한국경제"
               }
             ],
             "images": [
-              "https://img.hankyung.com/photo/202611/AA.46443870.1.jpg"
+              "https://image.edaily.co.kr/images/Photo/files/NP/S/2026/11/PS26111900645.jpg"
             ],
             "press": [
-              "한국경제",
-              "동아일보"
+              "이데일리",
+              "한국경제"
             ],
             "headlines": [
-              "분양가는 '뚝' 품질은 '쑥'…공공분양의 변신",
-              "GH, 광교 공공 지식산업센터 1차 분양 시작"
+              "15년 만에 최저주거기준 높인다…보편형 공공임대 도입도 논의",
+              "분양가는 '뚝' 품질은 '쑥'… 공공분양 의 변신"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:09:38.902Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         }
       ]
@@ -3071,11 +3064,243 @@
         {
           "id": "issue-1",
           "rank": 1,
+          "keyword": "백팩 멘 채로 구속 엔딩..\"남태현, 도주 우려 있다\" 마약 집유 중 음주운전 2회 최후",
+          "title": "백팩 멘 채로 구속 엔딩..\"남태현, 도주 우려 있다\" 마약 집유 중 음주운전 2회 최후",
+          "rawKeyword": "백팩 멘 채로 구속 엔딩..\"남태현, 도주 우려 있다\" 마약 집유 중 음주운전 2회 최후",
+          "description": "스타뉴스 최신 기사 · 백팩 멘 채로 구속 엔딩..\"남태현, 도주 우려 있다\" 마약 집유 중 음주운전 2회 최후",
+          "priority": 100,
+          "source": "issue",
+          "officialUrl": "https://www.starnewskorea.com/star/2026/11/19/2026111910363974864",
+          "sourceLabel": "스타뉴스",
+          "expansions": [
+            "학생백팩",
+            "가죽백팩",
+            "백팩스타일",
+            "고등학생백팩",
+            "백팩브랜드",
+            "최후의 만찬",
+            "최후 뜻",
+            "최후의 인류"
+          ],
+          "expansionSeed": "백팩",
+          "ago": "1분 전",
+          "agoMinutes": 1,
+          "publishedLabel": "2026-11-19T02:08:54.000Z",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111910363974864_1.jpg",
+          "insight": {
+            "titles": {
+              "seo": "백팩 멘 채로 구속 엔딩..\"남태현, 도주 우려 있다\" 마약 집유 중 음주운전 2회 최후 최신 이슈와 핵심 내용 정리",
+              "home": "백팩 멘 채로 구속 엔딩..\"남태현, 도주 우려 있다\" 마약 집유 중 음주운전 2회 최후, 백팩 멘 채로 구속 엔딩..\"남태현, 도주 우려 있다\" 마약 집유 중 음주운전 2회 최후 관련 확인할 점",
+              "topic": "백팩 멘 채로 구속 엔딩..\"남태현, 도주 우려 있다\" 마약 집유 중 음주운전 2회 최후",
+              "topicGroup": "이슈 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "스타뉴스 최신 기사 · 백팩 멘 채로 구속 엔딩..\"남태현, 도주 우려 있다\" 마약 집유 중 음주운전 2회 최후",
+                "sourceIndex": 0
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.starnewskorea.com/star/2026/11/19/2026111910363974864",
+                "press": "스타뉴스"
+              }
+            ],
+            "images": [
+              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111910363974864_1.jpg"
+            ],
+            "press": [
+              "스타뉴스"
+            ],
+            "headlines": [
+              "백팩 멘 채로 구속 엔딩..\"남태현, 도주 우려 있다\" 마약 집유 중 음주운전 2회 최후"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-19T02:10:44.493Z"
+          }
+        },
+        {
+          "id": "issue-2",
+          "rank": 2,
+          "keyword": "윤하, 독자 활동 본격화..'전독시' OST 가창 합류",
+          "title": "윤하, 독자 활동 본격화..'전독시' OST 가창 합류",
+          "rawKeyword": "윤하, 독자 활동 본격화..'전독시' OST 가창 합류",
+          "description": "스타뉴스 최신 기사 · 윤하, 독자 활동 본격화..'전독시' OST 가창 합류",
+          "priority": 99,
+          "source": "issue",
+          "officialUrl": "https://www.starnewskorea.com/music/2026/11/19/2026111910562915986",
+          "sourceLabel": "스타뉴스",
+          "expansions": [
+            "합류 뜻",
+            "합류하다",
+            "합류하다 뜻",
+            "합류하다 영어",
+            "이진 합류",
+            "합류도로",
+            "합류하라",
+            "합류할게"
+          ],
+          "expansionSeed": "윤하",
+          "ago": "10분 전",
+          "agoMinutes": 10,
+          "publishedLabel": "2026-11-19T01:59:17.000Z",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111910562915986_1.jpg",
+          "insight": {
+            "titles": {
+              "seo": "윤하, 독자 활동 본격화..'전독시' OST 가창 합류 최신 이슈와 핵심 내용 정리",
+              "home": "윤하, 독자 활동 본격화..'전독시' OST 가창 합류, 윤하, 독자 활동 본격화..'전독시' OST 가창 합류 관련 확인할 점",
+              "topic": "윤하, 독자 활동 본격화..'전독시' OST 가창 합류",
+              "topicGroup": "이슈 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "스타뉴스 최신 기사 · 윤하, 독자 활동 본격화..'전독시' OST 가창 합류",
+                "sourceIndex": 0
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.starnewskorea.com/music/2026/11/19/2026111910562915986",
+                "press": "스타뉴스"
+              }
+            ],
+            "images": [
+              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111910562915986_1.jpg"
+            ],
+            "press": [
+              "스타뉴스"
+            ],
+            "headlines": [
+              "윤하, 독자 활동 본격화..'전독시' OST 가창 합류"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-19T02:10:44.493Z"
+          }
+        },
+        {
+          "id": "issue-3",
+          "rank": 3,
+          "keyword": "'이혼' 김민영, ♥김형배와 비즈니스석 타고 韓 떠났다 \"잘 맞는지 보려면 유럽 여행\"",
+          "title": "'이혼' 김민영, ♥김형배와 비즈니스석 타고 韓 떠났다 \"잘 맞는지 보려면 유럽 여행\"",
+          "rawKeyword": "'이혼' 김민영, ♥김형배와 비즈니스석 타고 韓 떠났다 \"잘 맞는지 보려면 유럽 여행\"",
+          "description": "스타뉴스 최신 기사 · '이혼' 김민영, ♥김형배와 비즈니스석 타고 韓 떠났다 \"잘 맞는지 보려면 유럽 여행\"",
+          "priority": 98,
+          "source": "issue",
+          "officialUrl": "https://www.starnewskorea.com/star/2026/11/19/2026111910483379917",
+          "sourceLabel": "스타뉴스",
+          "expansions": [
+            "김민영 당구",
+            "김민영 배우",
+            "김민영왕호떡",
+            "당구 김민영",
+            "김민 영화",
+            "김민 영어",
+            "김민영호떡",
+            "김민영맛집"
+          ],
+          "expansionSeed": "김민영",
+          "ago": "10분 전",
+          "agoMinutes": 10,
+          "publishedLabel": "2026-11-19T01:59:11.000Z",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111910483379917_1.jpg",
+          "insight": {
+            "titles": {
+              "seo": "'이혼' 김민영, ♥김형배와 비즈니스석 타고 韓 떠났다 \"잘 맞는지 보려면 유럽 여행\" 최신 이슈와 핵심 내용 정리",
+              "home": "'이혼' 김민영, ♥김형배와 비즈니스석 타고 韓 떠났다 \"잘 맞는지 보려면 유럽 여행\", '이혼' 김민영, ♥김형배와 비즈니스석 타고 韓 떠났다 \"잘 맞는지 보려면 유럽 여행\" 관련 확인할 점",
+              "topic": "'이혼' 김민영, ♥김형배와 비즈니스석 타고 韓 떠났다 \"잘 맞는지 보려면 유럽 여행\"",
+              "topicGroup": "이슈 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "스타뉴스 최신 기사 · '이혼' 김민영, ♥김형배와 비즈니스석 타고 韓 떠났다 \"잘 맞는지 보려면 유럽 여행\"",
+                "sourceIndex": 0
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.starnewskorea.com/star/2026/11/19/2026111910483379917",
+                "press": "스타뉴스"
+              }
+            ],
+            "images": [
+              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111910483379917_1.jpg"
+            ],
+            "press": [
+              "스타뉴스"
+            ],
+            "headlines": [
+              "'이혼' 김민영, ♥김형배와 비즈니스석 타고 韓 떠났다 \"잘 맞는지 보려면 유럽 여행\""
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-19T02:10:44.493Z"
+          }
+        },
+        {
+          "id": "issue-4",
+          "rank": 4,
+          "keyword": "'조영수 프로듀스' 원, 엄마 향한 애틋한 감정..'마마 송' 어쿠스틱 라이브 공개",
+          "title": "'조영수 프로듀스' 원, 엄마 향한 애틋한 감정..'마마 송' 어쿠스틱 라이브 공개",
+          "rawKeyword": "'조영수 프로듀스' 원, 엄마 향한 애틋한 감정..'마마 송' 어쿠스틱 라이브 공개",
+          "description": "스타뉴스 최신 기사 · '조영수 프로듀스' 원, 엄마 향한 애틋한 감정..'마마 송' 어쿠스틱 라이브 공개",
+          "priority": 97,
+          "source": "issue",
+          "officialUrl": "https://www.starnewskorea.com/music/2026/11/19/2026111910392457700",
+          "sourceLabel": "스타뉴스",
+          "expansions": [
+            "엄마가 미쳤어요",
+            "엄마친구아들",
+            "엄마 죽는꿈",
+            "엄마까투리",
+            "엄마 생일선물",
+            "나쁜엄마",
+            "순자엄마",
+            "엄마손김밥"
+          ],
+          "expansionSeed": "조영수",
+          "ago": "26분 전",
+          "agoMinutes": 26,
+          "publishedLabel": "2026-11-19T01:43:00.000Z",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111910392457700_1.jpg",
+          "insight": {
+            "titles": {
+              "seo": "'조영수 프로듀스' 원, 엄마 향한 애틋한 감정..'마마 송' 어쿠스틱 라이브 공개 최신 이슈와 핵심 내용 정리",
+              "home": "'조영수 프로듀스' 원, 엄마 향한 애틋한 감정..'마마 송' 어쿠스틱 라이브 공개, '조영수 프로듀스' 원, 엄마 향한 애틋한 감정..'마마 송' 어쿠스틱 라이브 공개 관련 확인할 점",
+              "topic": "'조영수 프로듀스' 원, 엄마 향한 애틋한 감정..'마마 송' 어쿠스틱 라이브 공개",
+              "topicGroup": "이슈 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "스타뉴스 최신 기사 · '조영수 프로듀스' 원, 엄마 향한 애틋한 감정..'마마 송' 어쿠스틱 라이브 공개",
+                "sourceIndex": 0
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.starnewskorea.com/music/2026/11/19/2026111910392457700",
+                "press": "스타뉴스"
+              }
+            ],
+            "images": [
+              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111910392457700_1.jpg"
+            ],
+            "press": [
+              "스타뉴스"
+            ],
+            "headlines": [
+              "'조영수 프로듀스' 원, 엄마 향한 애틋한 감정..'마마 송' 어쿠스틱 라이브 공개"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-19T02:10:44.493Z"
+          }
+        },
+        {
+          "id": "issue-5",
+          "rank": 5,
           "keyword": "김도현, '100일의 거짓말'→ '문무'·'신의 구슬'..이유있는 열일 행보",
           "title": "김도현, '100일의 거짓말'→ '문무'·'신의 구슬'..이유있는 열일 행보",
           "rawKeyword": "김도현, '100일의 거짓말'→ '문무'·'신의 구슬'..이유있는 열일 행보",
           "description": "스타뉴스 최신 기사 · 김도현, '100일의 거짓말'→ '문무'·'신의 구슬'..이유있는 열일 행보",
-          "priority": 100,
+          "priority": 96,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/broadcast-drama/2026/11/19/2026111910183737549",
           "sourceLabel": "스타뉴스",
@@ -3090,8 +3315,8 @@
             "김도현소아과"
           ],
           "expansionSeed": "김도현",
-          "ago": "8분 전",
-          "agoMinutes": 8,
+          "ago": "42분 전",
+          "agoMinutes": 42,
           "publishedLabel": "2026-11-19T01:26:43.000Z",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111910183737549_1.jpg",
           "insight": {
@@ -3127,13 +3352,13 @@
           }
         },
         {
-          "id": "issue-2",
-          "rank": 2,
+          "id": "issue-6",
+          "rank": 6,
           "keyword": "또 음주운전 남태현, 결국 법정구속",
           "title": "또 음주운전 남태현, 결국 법정구속",
           "rawKeyword": "또 음주운전 남태현, 결국 법정구속",
           "description": "스타뉴스 최신 기사 · 또 음주운전 남태현, 결국 법정구속",
-          "priority": 99,
+          "priority": 95,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/star/2026/11/19/2026111910025322626",
           "sourceLabel": "스타뉴스",
@@ -3148,8 +3373,8 @@
             "음주운전 단속"
           ],
           "expansionSeed": "남태현",
-          "ago": "12분 전",
-          "agoMinutes": 12,
+          "ago": "47분 전",
+          "agoMinutes": 47,
           "publishedLabel": "2026-11-19T01:22:37.000Z",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111910025322626_1.jpg",
           "insight": {
@@ -3195,13 +3420,13 @@
           }
         },
         {
-          "id": "issue-3",
-          "rank": 3,
+          "id": "issue-7",
+          "rank": 7,
           "keyword": "'상간 소송' 박지윤, 남사친과 본 19금 '365일'=노출·성폭행 미화 논란작..2심 일부 패소",
           "title": "'상간 소송' 박지윤, 남사친과 본 19금 '365일'=노출·성폭행 미화 논란작..2심 일부 패소",
           "rawKeyword": "'상간 소송' 박지윤, 남사친과 본 19금 '365일'=노출·성폭행 미화 논란작..2심 일부 패소",
           "description": "스타뉴스 최신 기사 · '상간 소송' 박지윤, 남사친과 본 19금 '365일'=노출·성폭행 미화 논란작..2심 일부 패소",
-          "priority": 98,
+          "priority": 94,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/star/2026/11/19/2026111909495745696",
           "sourceLabel": "스타뉴스",
@@ -3216,8 +3441,8 @@
             "박지윤 최동석"
           ],
           "expansionSeed": "박지윤",
-          "ago": "16분 전",
-          "agoMinutes": 16,
+          "ago": "50분 전",
+          "agoMinutes": 50,
           "publishedLabel": "2026-11-19T01:18:43.000Z",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111909495745696_1.jpg",
           "insight": {
@@ -3253,13 +3478,13 @@
           }
         },
         {
-          "id": "issue-4",
-          "rank": 4,
+          "id": "issue-8",
+          "rank": 8,
           "keyword": "쇼윈도 부부? 장나라 \"결혼하고 요리 시작, ♥남편 도시락 만든다\"",
           "title": "쇼윈도 부부? 장나라 \"결혼하고 요리 시작, ♥남편 도시락 만든다\"",
           "rawKeyword": "쇼윈도 부부? 장나라 \"결혼하고 요리 시작, ♥남편 도시락 만든다\"",
           "description": "스타뉴스 최신 기사 · 쇼윈도 부부? 장나라 \"결혼하고 요리 시작, ♥남편 도시락 만든다\"",
-          "priority": 97,
+          "priority": 93,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/broadcast-show/2026/11/19/2026111909482728054",
           "sourceLabel": "스타뉴스",
@@ -3274,8 +3499,8 @@
             "장나라 풀써마"
           ],
           "expansionSeed": "장나라",
-          "ago": "30분 전",
-          "agoMinutes": 30,
+          "ago": "1시간 전",
+          "agoMinutes": 60,
           "publishedLabel": "2026-11-19T01:03:57.000Z",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111909482728054_1.jpg",
           "insight": {
@@ -3289,35 +3514,45 @@
               {
                 "text": "스타뉴스 최신 기사 · 쇼윈도 부부? 장나라 \"결혼하고 요리 시작, ♥남편 도시락 만든다\"",
                 "sourceIndex": 0
+              },
+              {
+                "text": "배우 장나라 가 6살 연하 남편 을 위해서 요리 를 시작 하고 도시락 까지 싼다고 고백했다. 이를 듣던 지승현은 “ 쇼윈도 부부 네”라는 폭탄 발언을 해 웃음을 줬다고.",
+                "sourceIndex": 1
               }
             ],
             "links": [
               {
                 "url": "https://www.starnewskorea.com/broadcast-show/2026/11/19/2026111909482728054",
                 "press": "스타뉴스"
+              },
+              {
+                "url": "http://www.osen.co.kr/article/G1112912075",
+                "press": "OSEN"
               }
             ],
             "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111909482728054_1.jpg"
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F109%2F2026%2F11%2F19%2F5642364.jpg&type=fface200_200&expire=2&refresh=true"
             ],
             "press": [
-              "스타뉴스"
+              "스타뉴스",
+              "OSEN"
             ],
             "headlines": [
-              "쇼윈도 부부? 장나라 \"결혼하고 요리 시작, ♥남편 도시락 만든다\""
+              "쇼윈도 부부? 장나라 \"결혼하고 요리 시작, ♥남편 도시락 만든다\"",
+              "장나라 , 6살 연하 ♥남편 에 먼저 고백하더니..\" 요리 배워 도시락 도 만든..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:09:38.902Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
-          "id": "issue-5",
-          "rank": 5,
+          "id": "issue-9",
+          "rank": 9,
           "keyword": "이민호, '암살자(들)' 악플 불똥 2개월만..버추얼 아이돌 된다",
           "title": "이민호, '암살자(들)' 악플 불똥 2개월만..버추얼 아이돌 된다",
           "rawKeyword": "이민호, '암살자(들)' 악플 불똥 2개월만..버추얼 아이돌 된다",
           "description": "스타뉴스 최신 기사 · 이민호, '암살자(들)' 악플 불똥 2개월만..버추얼 아이돌 된다",
-          "priority": 96,
+          "priority": 92,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/star/2026/11/19/2026111908345184910",
           "sourceLabel": "스타뉴스",
@@ -3332,8 +3567,8 @@
             "아이돌봄"
           ],
           "expansionSeed": "이민호",
-          "ago": "42분 전",
-          "agoMinutes": 42,
+          "ago": "1시간 전",
+          "agoMinutes": 60,
           "publishedLabel": "2026-11-19T00:52:32.000Z",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111908345184910_1.jpg",
           "insight": {
@@ -3365,17 +3600,17 @@
               "이민호, '암살자(들)' 악플 불똥 2개월만..버추얼 아이돌 된다"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:09:38.902Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         },
         {
-          "id": "issue-6",
-          "rank": 6,
+          "id": "issue-10",
+          "rank": 10,
           "keyword": "전도연, 오스카 수상 미리 준비 중?..19년만의 공개, 관심집중",
           "title": "전도연, 오스카 수상 미리 준비 중?..19년만의 공개, 관심집중",
           "rawKeyword": "전도연, 오스카 수상 미리 준비 중?..19년만의 공개, 관심집중",
           "description": "스타뉴스 최신 기사 · 전도연, 오스카 수상 미리 준비 중?..19년만의 공개, 관심집중",
-          "priority": 95,
+          "priority": 91,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/star/2026/11/19/2026111909024168122",
           "sourceLabel": "스타뉴스",
@@ -3390,8 +3625,8 @@
             "전도연 자녀"
           ],
           "expansionSeed": "전도연",
-          "ago": "51분 전",
-          "agoMinutes": 51,
+          "ago": "1시간 전",
+          "agoMinutes": 60,
           "publishedLabel": "2026-11-19T00:43:07.000Z",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111909024168122_1.jpg",
           "insight": {
@@ -3423,252 +3658,11 @@
               "전도연, 오스카 수상 미리 준비 중?..19년만의 공개, 관심집중"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:09:38.902Z"
-          }
-        },
-        {
-          "id": "issue-7",
-          "rank": 7,
-          "keyword": "'AI 부정행위 저격' 장성규, 수능날 올린 글 \"정정당당하게 준비한 수험생들 응원\"",
-          "title": "'AI 부정행위 저격' 장성규, 수능날 올린 글 \"정정당당하게 준비한 수험생들 응원\"",
-          "rawKeyword": "'AI 부정행위 저격' 장성규, 수능날 올린 글 \"정정당당하게 준비한 수험생들 응원\"",
-          "description": "스타뉴스 최신 기사 · 'AI 부정행위 저격' 장성규, 수능날 올린 글 \"정정당당하게 준비한 수험생들 응원\"",
-          "priority": 94,
-          "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/star/2026/11/19/2026111909261099584",
-          "sourceLabel": "스타뉴스",
-          "expansions": [
-            "ai 부정행위",
-            "수능 부정행위 처벌",
-            "세무사 부정행위",
-            "수능 부정행위",
-            "부정행위 1억",
-            "시험 부정행위 처벌",
-            "수능 부정행위 1억",
-            "수능 부정행위 대책"
-          ],
-          "expansionSeed": "장성규",
-          "ago": "53분 전",
-          "agoMinutes": 53,
-          "publishedLabel": "2026-11-19T00:41:29.000Z",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111909261099584_1.jpg",
-          "insight": {
-            "titles": {
-              "seo": "'AI 부정행위 저격' 장성규, 수능날 올린 글 \"정정당당하게 준비한 수험생들 응원\" 최신 이슈와 핵심 내용 정리",
-              "home": "'AI 부정행위 저격' 장성규, 수능날 올린 글 \"정정당당하게 준비한 수험생들 응원\", 'AI 부정행위 저격' 장성규, 수능날 올린 글 \"정정당당하게 준비한 수험생들 응원\" 관련 확인할 점",
-              "topic": "'AI 부정행위 저격' 장성규, 수능날 올린 글 \"정정당당하게 준비한 수험생들 응원\"",
-              "topicGroup": "이슈 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "스타뉴스 최신 기사 · 'AI 부정행위 저격' 장성규, 수능날 올린 글 \"정정당당하게 준비한 수험생들 응원\"",
-                "sourceIndex": 0
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.starnewskorea.com/star/2026/11/19/2026111909261099584",
-                "press": "스타뉴스"
-              }
-            ],
-            "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111909261099584_1.jpg"
-            ],
-            "press": [
-              "스타뉴스"
-            ],
-            "headlines": [
-              "'AI 부정행위 저격' 장성규, 수능날 올린 글 \"정정당당하게 준비한 수험생들 응원\""
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:09:38.902Z"
-          }
-        },
-        {
-          "id": "issue-8",
-          "rank": 8,
-          "keyword": "홍이삭, 19일 EP '결' 발매..돌비 애트모스로 전하는 '홍이삭표 감성'",
-          "title": "홍이삭, 19일 EP '결' 발매..돌비 애트모스로 전하는 '홍이삭표 감성'",
-          "rawKeyword": "홍이삭, 19일 EP '결' 발매..돌비 애트모스로 전하는 '홍이삭표 감성'",
-          "description": "스타뉴스 최신 기사 · 홍이삭, 19일 EP '결' 발매..돌비 애트모스로 전하는 '홍이삭표 감성'",
-          "priority": 93,
-          "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/star/2026/11/19/2026111909320410326",
-          "sourceLabel": "스타뉴스",
-          "expansions": [
-            "11월 19일 수능",
-            "11월 19일 날씨",
-            "19일 재난문자",
-            "11월19일",
-            "19일 사이렌",
-            "음력 10월19일",
-            "음력 11월 19일",
-            "12월 19일"
-          ],
-          "expansionSeed": "홍이삭",
-          "ago": "57분 전",
-          "agoMinutes": 57,
-          "publishedLabel": "2026-11-19T00:36:52.000Z",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111909320410326_1.jpg",
-          "insight": {
-            "titles": {
-              "seo": "홍이삭, 19일 EP '결' 발매..돌비 애트모스로 전하는 '홍이삭표 감성' 최신 이슈와 핵심 내용 정리",
-              "home": "홍이삭, 19일 EP '결' 발매..돌비 애트모스로 전하는 '홍이삭표 감성', 홍이삭, 19일 EP '결' 발매..돌비 애트모스로 전하는 '홍이삭표 감성' 관련 확인할 점",
-              "topic": "홍이삭, 19일 EP '결' 발매..돌비 애트모스로 전하는 '홍이삭표 감성'",
-              "topicGroup": "이슈 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "스타뉴스 최신 기사 · 홍이삭, 19일 EP '결' 발매..돌비 애트모스로 전하는 '홍이삭표 감성'",
-                "sourceIndex": 0
-              },
-              {
-                "text": "가수 홍이삭/사진제공=아카이브아침싱어송라이터 홍이삭이 약 7개월 만에 새 앨범으로 돌아온다.홍이삭은 19일 오후 6시 각종 온라인 음원 사이트를 통해 새 EP '결'을 발매한다. 이번 신보는 불안과 외로움 속에서 피어나는 성장의 과정을 새벽부터 해 질 녘까지의 시공간에 담아낸 앨범이다.소속사 아카이브아침에 따르면 이번 앨범에는 타이틀곡 '그때 우리'를 비롯해 '동이', '나 너', '짙은 색 흙', '해가 지는 모습 따라' 등 총 5곡이 수록됐다. 어쿠스틱 기타와 피아노를 중심으로 도시의 소음, 파도 소리 등 공감각적인 사운드를 더했다.특히 기존 발라드 문법에서 나아간 '홍이삭표 포크' 위에 영화 '헤어질 결심', 넷플릭스 '지옥' 등에 참여한 김은정 음향 감독의 시네마틱 앰비언스 사운드를 입혔다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.starnewskorea.com/star/2026/11/19/2026111909320410326",
-                "press": "스타뉴스"
-              },
-              {
-                "url": "https://www.starnewskorea.com/music/2026/11/19/2026111909320410326",
-                "press": "스타뉴스"
-              }
-            ],
-            "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=auto,w=1200,h=1600,fit=cover,q=high,sharpen=2/21/2026/11/2026111909320410326_1.jpg"
-            ],
-            "press": [
-              "스타뉴스"
-            ],
-            "headlines": [
-              "홍이삭, 19일 EP '결' 발매..돌비 애트모스로 전하는 '홍이삭표 감성'",
-              "홍이삭, 19일 EP '결' 발매..돌비 애트모스로 전하는 '홍이삭표 감성'"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:09:38.902Z"
-          }
-        },
-        {
-          "id": "issue-9",
-          "rank": 9,
-          "keyword": "단독 \"동성애자라도 부정행위\" 판결문 확인..박지윤 \"남자로 생각한 적 없어\" 반박",
-          "title": "단독 \"동성애자라도 부정행위\" 판결문 확인..박지윤 \"남자로 생각한 적 없어\" 반박",
-          "rawKeyword": "단독 \"동성애자라도 부정행위\" 판결문 확인..박지윤 \"남자로 생각한 적 없어\" 반박",
-          "description": "스타뉴스 최신 기사 · 단독 \"동성애자라도 부정행위\" 판결문 확인..박지윤 \"남자로 생각한 적 없어\" 반박",
-          "priority": 92,
-          "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/star/2026/11/19/2026111907134574140",
-          "sourceLabel": "스타뉴스",
-          "expansions": [
-            "반박 뜻",
-            "반박하다",
-            "반박귀진",
-            "반박불가",
-            "95개조 반박문",
-            "반박하다 영어로",
-            "반박귀진 뜻",
-            "반박자 음표"
-          ],
-          "expansionSeed": "남자로",
-          "ago": "58분 전",
-          "agoMinutes": 58,
-          "publishedLabel": "2026-11-19T00:36:24.000Z",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111907134574140_1.jpg",
-          "insight": {
-            "titles": {
-              "seo": "단독 \"동성애자라도 부정행위\" 판결문 확인..박지윤 \"남자로 생각한 적 없어\" 반박 최신 이슈와 핵심 내용 정리",
-              "home": "단독 \"동성애자라도 부정행위\" 판결문 확인..박지윤 \"남자로 생각한 적 없어\" 반박, 단독 \"동성애자라도 부정행위\" 판결문 확인..박지윤 \"남자로 생각한 적 없어\" 반박 관련 확인할 점",
-              "topic": "단독 \"동성애자라도 부정행위\" 판결문 확인..박지윤 \"남자로 생각한 적 없어\" 반박",
-              "topicGroup": "이슈 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "스타뉴스 최신 기사 · 단독 \"동성애자라도 부정행위\" 판결문 확인..박지윤 \"남자로 생각한 적 없어\" 반박",
-                "sourceIndex": 0
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.starnewskorea.com/star/2026/11/19/2026111907134574140",
-                "press": "스타뉴스"
-              }
-            ],
-            "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111907134574140_1.jpg"
-            ],
-            "press": [
-              "스타뉴스"
-            ],
-            "headlines": [
-              "단독 \"동성애자라도 부정행위\" 판결문 확인..박지윤 \"남자로 생각한 적 없어\" 반박"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:09:38.902Z"
-          }
-        },
-        {
-          "id": "issue-10",
-          "rank": 10,
-          "keyword": "권은비, 대학 축제→MBC '대학가요제'..'페스티벌 퀸' 행보",
-          "title": "권은비, 대학 축제→MBC '대학가요제'..'페스티벌 퀸' 행보",
-          "rawKeyword": "권은비, 대학 축제→MBC '대학가요제'..'페스티벌 퀸' 행보",
-          "description": "스타뉴스 최신 기사 · 권은비, 대학 축제→MBC '대학가요제'..'페스티벌 퀸' 행보",
-          "priority": 91,
-          "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/music/2026/11/19/2026111909180577372",
-          "sourceLabel": "스타뉴스",
-          "expansions": [
-            "행보 뜻",
-            "대학백과",
-            "대학 어디가",
-            "국내 대학 순위",
-            "와플대학",
-            "가천대학교",
-            "백석대학교",
-            "계명대학교"
-          ],
-          "expansionSeed": "권은비",
-          "ago": "1시간 전",
-          "agoMinutes": 60,
-          "publishedLabel": "2026-11-19T00:26:32.000Z",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111909180577372_1.jpg",
-          "insight": {
-            "titles": {
-              "seo": "권은비, 대학 축제→MBC '대학가요제'..'페스티벌 퀸' 행보 최신 이슈와 핵심 내용 정리",
-              "home": "권은비, 대학 축제→MBC '대학가요제'..'페스티벌 퀸' 행보, 권은비, 대학 축제→MBC '대학가요제'..'페스티벌 퀸' 행보 관련 확인할 점",
-              "topic": "권은비, 대학 축제→MBC '대학가요제'..'페스티벌 퀸' 행보",
-              "topicGroup": "이슈 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "스타뉴스 최신 기사 · 권은비, 대학 축제→MBC '대학가요제'..'페스티벌 퀸' 행보",
-                "sourceIndex": 0
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.starnewskorea.com/music/2026/11/19/2026111909180577372",
-                "press": "스타뉴스"
-              }
-            ],
-            "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026111909180577372_1.jpg"
-            ],
-            "press": [
-              "스타뉴스"
-            ],
-            "headlines": [
-              "권은비, 대학 축제→MBC '대학가요제'..'페스티벌 퀸' 행보"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-19T01:09:38.902Z"
+            "collectedAt": "2026-11-19T02:10:44.493Z"
           }
         }
       ]
     }
   ],
-  "updatedAt": "2026-11-19T01:36:47.757Z"
+  "updatedAt": "2026-11-19T02:13:08.988Z"
 }
