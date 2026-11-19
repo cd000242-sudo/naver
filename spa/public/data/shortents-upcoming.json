@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T23:04:40.689Z",
+ "builtAt": "2026-11-19T23:14:44.282Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "뉴욕증시 급락",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 51,
-   "recent20": 14,
-   "press": 46,
-   "firstArticleAt": "2026-11-19T21:35:00.000Z",
+   "articles90": 52,
+   "recent20": 13,
+   "press": 42,
+   "firstArticleAt": "2026-11-19T21:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "앤트로픽 상장에도 뉴욕증시 2%대 급락…다우 50,000선 붕괴",
-     "press": "tfmedia.co.kr",
-     "publishedAt": "2026-11-19T23:02:00.000Z",
-     "link": "https://www.tfmedia.co.kr/news/article.html?no=209045"
+     "title": "앤트로픽 상장에도 뉴욕증시 2%대 급락…국제유가, 보합세",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-19T23:12:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=885441"
     },
     {
-     "title": "미국증시 나스닥100 '추락'...AI칩 & AI인프라주 '급락'",
+     "title": "앤트로픽 상장에도 뉴욕증시 3대 지수 2%대 급락",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-19T23:10:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626531"
+    },
+    {
+     "title": "앤트로픽 상장에도...미국증시 '급락', 다우 5만선 '붕괴'",
      "press": "choicenews.co.kr",
-     "publishedAt": "2026-11-19T23:02:00.000Z",
-     "link": "http://www.choicenews.co.kr/news/articleView.html?idxno=173350"
-    },
-    {
-     "title": "[마켓무버]뉴욕증시, 앤트로픽 IPO 흥행에도 급반락…3대 지수 일제히 하...",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-19T23:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006412888?sid=101"
+     "publishedAt": "2026-11-19T23:08:00.000Z",
+     "link": "http://www.choicenews.co.kr/news/articleView.html?idxno=173346"
     }
    ]
   },
@@ -48,7 +48,7 @@
     "nate"
    ],
    "articles90": 7,
-   "recent20": 3,
+   "recent20": 2,
    "press": 7,
    "firstArticleAt": "2026-11-19T21:58:00.000Z",
    "exclusive": false,
@@ -75,14 +75,110 @@
    ]
   },
   {
+   "keyword": "수능 등급컷",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 6,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-19T21:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "2027 수능 등급컷 공개…국어 129~131점·수학 127~131점 예상",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-19T23:12:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16281103"
+    },
+    {
+     "title": "수능 끝, 이제 ‘진짜 레이스’…수시·정시 유불리 따져야",
+     "press": "kwangju.co.kr",
+     "publishedAt": "2026-11-19T23:06:00.000Z",
+     "link": "http://www.kwangju.co.kr/article.php?aid=1795129200805549006"
+    },
+    {
+     "title": "수능 1등급컷 국어 5~6점 상승…영어 1등급 비율 8% 전망",
+     "press": "edu.donga.com",
+     "publishedAt": "2026-11-19T23:06:00.000Z",
+     "link": "https://edu.donga.com/news/articleView.html?idxno=113965"
+    }
+   ]
+  },
+  {
+   "keyword": "김휘강 75억 고위공직 1위",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-19T22:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김휘강 비서관, 재산 75억 신고…고위공직 60명 중 1위",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-19T23:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979049?sid=100"
+    },
+    {
+     "title": "김휘강 청와대 사이버안보비서관 재산 75억…신규 공개 고위공직자 1위",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-19T23:06:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=243708"
+    },
+    {
+     "title": "고위공직자 60명 재산 공개...김휘강 비서관 75억 최다",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-19T23:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002435471?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "제갈성렬 아내 공개",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-19T21:53:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"지탄받아 마땅할 나이 차\" 제갈성렬, 19살 연하 아내와 재혼…부녀 지...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-19T23:12:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004126593"
+    },
+    {
+     "title": "제갈성렬, 아내 공개-치과 의사와 이혼 후 19세 연하와",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-19T22:50:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95590"
+    },
+    {
+     "title": "제갈성렬, 19세 연하 아내 최초 공개…\"부녀 사이로 오해받아\"",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-19T22:44:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=783261"
+    }
+   ]
+  },
+  {
    "keyword": "택시",
    "sources": [
     "google"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-19T21:39:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-19T21:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,12 +203,78 @@
    ]
   },
   {
+   "keyword": "경제",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 3,
+   "press": 4,
+   "firstArticleAt": "2026-11-19T22:54:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "김포시, 1조8482억 편성…민생·경제·교통에 재정 집중",
+     "press": "enewstoday.co.kr",
+     "publishedAt": "2026-11-19T23:10:00.000Z",
+     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2494917"
+    },
+    {
+     "title": "北, 우호국 '라오스'와 경제·무역·과학기술 분야 협력 방안 논의",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-19T23:08:00.000Z",
+     "link": "https://www.ajunews.com/view/20261120080123775"
+    },
+    {
+     "title": "서울중기청·서울창조경제혁신센터, 마곡서 ‘밋업 & 네트워킹 데이’ ...",
+     "press": "sentv.co.kr",
+     "publishedAt": "2026-11-19T22:56:00.000Z",
+     "link": "https://www.sentv.co.kr/article/view/sentv202611200008"
+    }
+   ]
+  },
+  {
+   "keyword": "박찬종 별세",
+   "sources": [
+    "nate",
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-19T21:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[키워드 NOW] 박찬종 별세",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-19T23:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000652243?sid=004"
+    },
+    {
+     "title": "5선 지낸 박찬종 전 국회의원 별세",
+     "press": "news.knn.co.kr",
+     "publishedAt": "2026-11-19T23:02:00.000Z",
+     "link": "https://news.knn.co.kr/news/article/194732"
+    },
+    {
+     "title": "박찬종 전 의원의 마지막 나눔…“아름다운 죽음”",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-19T22:34:00.000Z",
+     "link": "http://www.breaknews.com/1252485"
+    }
+   ]
+  },
+  {
    "keyword": "이승기 20억 기부",
    "sources": [
     "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-19T22:09:00.000Z",
    "exclusive": false,
@@ -139,132 +301,34 @@
    ]
   },
   {
-   "keyword": "제갈성렬 아내 공개",
+   "keyword": "아파트",
    "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-19T21:53:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "제갈성렬, 아내 공개-치과 의사와 이혼 후 19세 연하와",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-19T22:50:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95590"
-    },
-    {
-     "title": "제갈성렬, 19세 연하 아내 최초 공개…\"부녀 사이로 오해받아\"",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-19T22:44:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=783261"
-    },
-    {
-     "title": "56세 제갈성렬, 19살 연하 아내와 재혼에 둘째도 \"부녀 사이로 오해…지...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-19T22:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009300465"
-    }
-   ]
-  },
-  {
-   "keyword": "김휘강 75억 고위공직 1위",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 3,
-   "press": 3,
-   "firstArticleAt": "2026-11-19T22:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "고위공직자 60명 재산 공개...김휘강 비서관 75억 최다",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-19T23:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002435471?sid=100"
-    },
-    {
-     "title": "고위공직 60명 재산공개…김휘강 靑비서관 75억으로 1위",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-19T22:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000544864?sid=101"
-    },
-    {
-     "title": "공직자 60명 재산공개...김휘강 사이버안보비서관 75억 '톱'",
-     "press": "public25.com",
-     "publishedAt": "2026-11-19T22:50:00.000Z",
-     "link": "https://www.public25.com/news/articleView.html?idxno=58727"
-    }
-   ]
-  },
-  {
-   "keyword": "경제",
-   "sources": [
-    "signal.bz",
     "google"
    ],
    "articles90": 3,
    "recent20": 2,
    "press": 3,
-   "firstArticleAt": "2026-11-19T22:42:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "서울중기청·서울창조경제혁신센터, 마곡서 ‘밋업 & 네트워킹 데이’ ...",
-     "press": "sentv.co.kr",
-     "publishedAt": "2026-11-19T22:56:00.000Z",
-     "link": "https://www.sentv.co.kr/article/view/sentv202611200008"
-    },
-    {
-     "title": "파주 평화경제특구 1차 신청…210개 기업 입주 의향, 시행자 확보가 관...",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-19T22:54:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=202611200007138567f0f3e23044_1"
-    },
-    {
-     "title": "해남군, 군민 생활안정·지역경제 활성화 위해 내년 자체 기본소득 검토",
-     "press": "thebigdata.co.kr",
-     "publishedAt": "2026-11-19T22:42:00.000Z",
-     "link": "https://www.thebigdata.co.kr/view.php?ud=202611191617457815e91b94b033_23"
-    }
-   ]
-  },
-  {
-   "keyword": "박찬종 별세",
-   "sources": [
-    "nate",
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-19T21:48:00.000Z",
+   "firstArticleAt": "2026-11-19T21:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "5선 지낸 박찬종 전 국회의원 별세",
-     "press": "news.knn.co.kr",
-     "publishedAt": "2026-11-19T23:02:00.000Z",
-     "link": "https://news.knn.co.kr/news/article/194732"
+     "title": "인천 아파트값 보합세…서해·부평·제물포구 상승",
+     "press": "news.skbroadband.com",
+     "publishedAt": "2026-11-19T23:12:00.000Z",
+     "link": "https://news.skbroadband.com/news/articleView.html?idxno=243771"
     },
     {
-     "title": "박찬종 전 의원의 마지막 나눔…“아름다운 죽음”",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-19T22:34:00.000Z",
-     "link": "http://www.breaknews.com/1252485"
+     "title": "서울 아파트값 93주 연속 상승…'한강벨트' 꺾이고 '반도체벨트' 강세",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-19T23:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000652239?sid=004"
     },
     {
-     "title": "고독한 결단, 마지막은 나눔 [박찬종 별세]",
-     "press": "sisaon.co.kr",
-     "publishedAt": "2026-11-19T21:48:00.000Z",
-     "link": "https://www.sisaon.co.kr/news/articleView.html?idxno=206244"
+     "title": "아파트값 하락세 '한강벨트'로‥외곽은 엇갈려",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-19T21:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001536845?sid=101"
     }
    ]
   },
@@ -299,77 +363,13 @@
      "link": "https://n.news.naver.com/mnews/article/014/0005607196?sid=102"
     }
    ]
-  },
-  {
-   "keyword": "수능 등급컷",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-19T21:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[2026 수능 등급컷] 2027학년도 수능 국어 1등급 커트라인 90~95점 전망…...",
-     "press": "lecturernews.com",
-     "publishedAt": "2026-11-19T22:42:00.000Z",
-     "link": "https://www.lecturernews.com/news/articleView.html?idxno=214177"
-    },
-    {
-     "title": "2027학년도 수능 예상 등급컷 공개…국어 129~131점·수학 127~131점",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-19T22:00:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=783233"
-    },
-    {
-     "title": "수능 등급컷 공개…국어 95점·수학 90점",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-19T21:46:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611200018"
-    }
-   ]
-  },
-  {
-   "keyword": "아파트",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-19T21:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "아파트값 하락세 '한강벨트'로‥외곽은 엇갈려",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-19T21:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001536845?sid=101"
-    },
-    {
-     "title": "서울 노원구 아파트 불‥관악구 빌라서 화재",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-19T21:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001536833?sid=102"
-    },
-    {
-     "title": "지방은 미분양 천지?…잘 팔린 아파트도 있다",
-     "press": "news.bizwatch.co.kr",
-     "publishedAt": "2026-11-19T21:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/648/0000052810?sid=101"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 894,
-  "matched": 529,
-  "avgLeadMin": 751,
+  "flagged": 890,
+  "matched": 526,
+  "avgLeadMin": 734,
   "recent": [
    {
     "keyword": "체이스 은행 서비스 장애",
