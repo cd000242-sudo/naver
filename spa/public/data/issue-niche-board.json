@@ -1,19 +1,123 @@
 {
-  "publishedAt": "2026-11-18T21:39:43.002Z",
+  "publishedAt": "2026-11-19T21:44:42.372Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
-    "issues": 17,
+    "issues": 18,
     "candidates": 240,
     "niche": 1,
-    "preemption": 9,
+    "preemption": 0,
     "pending": 0
   },
   "freeSample": {
-    "day": "2026-11-19",
-    "keywords": []
+    "day": "2026-11-20",
+    "keywords": [
+      "삼전닉스 실시간",
+      "천위페이 나이"
+    ]
   },
   "rows": [
+    {
+      "keyword": "천위페이 나이",
+      "issue": "천위페이",
+      "topic": "천위페이",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "천위페이 프로필 안세영 상대전적2026 아시안게임 배드민턴 준결승 한중전",
+          "놀라운 체력! 야마구치 아카네, 엄청난 경기력으로 천위페이의 기권을 만들어냈다! BWF 구마모토 마스터즈 결승은 야마구치와 왕즈이의 대결!",
+          "\"왕즈이 천위페이 코리아오픈 불참\" 안세영도 고민하는 진짜 이유는 '이것'",
+          "2026 아시안게임 천위페이 안세영 상대 전적 (+프로필 배드민턴 준결승 한중전 총정리)",
+          "천위페이 세계랭킹과 안세영 전적, 7연패 안기던 천적이 어떻게 뒤집혔나",
+          "\"세계 랭킹 1위 안세영\" 배드민턴 아시안게임 2연패 도전, 프로필 연봉 나이 키",
+          "안세영 유일하게 꺾은 왕즈이 누구? 8개월째 우승 없다…구마모토 마스터스 우승할까?",
+          "안세영 연봉 랭킹 나이 학력 고향 가족 집안 소속 경력 경기일정 인스타 프로필 총정리",
+          "[배드민턴 안세영 프로필] 나이, 키, 학력, 소속팀, 누적 상금, 2026 아시안게임 최신 근황!",
+          "배드민턴 안세영 프로필 고향 나이 아버지 안정현 어머니 이현희 남동생 안윤성"
+        ],
+        "measuredAt": "2026-11-19T21:44:05.422Z"
+      },
+      "documentCount": 1073,
+      "documentCountMeasured": true,
+      "searchVolume": 300,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 1.3015222482435596,
+      "issueStatus": "rising",
+      "isHot": true,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 300",
+        "문서수 1,073",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 300 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.3배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+        },
+        "home": {
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-11-19T21:40:09.866Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2"
+    },
     {
       "keyword": "삼전닉스 실시간",
       "issue": "삼전 닉스",
@@ -107,7 +211,6 @@
       "keywordPool": null,
       "trend": {
         "series": [
-          41,
           42,
           45,
           30,
@@ -135,30 +238,34 @@
           61,
           100,
           51,
+          46,
           46
         ],
         "label": "🐢 연금형",
-        "recommendation": "한 번 쓰면 1년 꾸준 방문자. 안정적 연금 키워드"
+        "recommendation": "한 번 쓰면 1년 꾸준 방문자. 안정적 연금 키워드",
+        "measuredAt": "2026-11-19T21:44:42.830Z"
       },
       "kinCount": 12,
       "kinTop": [
         {
           "title": "삼전닉스 레버리지, 왜 문제인가요?",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=494293721&answerNo=11",
-          "views": 2661,
+          "views": 2666,
           "answers": 21
         },
         {
           "title": "etf 랑 삼전닉스 두개 비교",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=494006327&answerNo=9",
-          "views": 195,
+          "views": 197,
           "answers": 10
         }
       ],
       "monetize": null,
       "measuredAt": "2026-11-18T21:33:20.268Z",
       "recommendationStatus": "recommend",
-      "exclusionReason": null
+      "exclusionReason": null,
+      "carried": true,
+      "kinMode": "date-views-v2"
     }
   ],
   "observations": [
@@ -227,7 +334,8 @@
       "monetize": null,
       "measuredAt": "2026-11-18T21:33:20.268Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "초록소프트 김명락",
@@ -293,7 +401,8 @@
       "monetize": null,
       "measuredAt": "2026-11-18T21:33:20.268Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "리퀴드 AI LFM",
@@ -368,7 +477,8 @@
       "monetize": null,
       "measuredAt": "2026-11-18T21:33:20.268Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "몬드리안AI 서울대",
@@ -443,7 +553,8 @@
       "monetize": null,
       "measuredAt": "2026-11-18T21:33:20.268Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "몬드리안ai 블라인드",
@@ -533,7 +644,8 @@
       "monetize": null,
       "measuredAt": "2026-11-18T21:33:20.268Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "런유어클라우드",
@@ -595,7 +707,8 @@
       "monetize": null,
       "measuredAt": "2026-11-18T21:33:20.268Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "우승 박남열 감독과",
@@ -668,7 +781,8 @@
       "monetize": null,
       "measuredAt": "2026-11-18T21:33:20.268Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "삼전 닉스 지방세",
@@ -734,7 +848,8 @@
       "monetize": null,
       "measuredAt": "2026-11-18T21:33:20.268Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "퍼플렉시티 근황",
@@ -847,7 +962,8 @@
       "monetize": null,
       "measuredAt": "2026-11-18T21:33:20.268Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "김간지 정치성향",
@@ -1346,2565 +1462,81 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "스마일샤크 채용",
-      "issue": "스마일샤크",
-      "topic": "스마일샤크",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 87,
-      "documentCountMeasured": true,
-      "searchVolume": 10,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 1,
-      "reasons": [
-        "검색량 10",
-        "문서수 87",
-        "선점 후보 — 경쟁 문서 87건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 1건)"
-        }
-      ],
-      "whySearch": {
-        "text": "스마일샤크, AWS와 스타트업 대상 AI 세미나 개최",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "스마일샤크 채용 전에 보는 연봉·복지와 AWS 파트너 기업 정보",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "스마일샤크 채용 지원하기 전에 스마일샤크 기업정보부터 찾아봤는데요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "스마일샤크 기업정보",
-          "searchVolume": 20,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "스마일샤크 기업정보",
-          "searchVolume": 20,
-          "documentCount": 346,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-17T18:02:39.133Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "데블스플랜3 네모게임 방법",
-      "issue": "데블스플랜3",
-      "topic": "데블스플랜3",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 87,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "rising",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 87",
-        "선점 후보 — 경쟁 문서 87건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "데블스 플랜3 5회 만에 7명 탈락, 유배지 등장",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "거래",
-      "adsenseFit": false,
-      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
-      "titles": {
-        "seo": {
-          "text": "데블스플랜3 네모게임 방법 규칙과 6화 공개일 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "데블스플랜3 네모게임 방법 알고 보니 6화 유배지가 다르게 보이네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "데블스플랜3 장동민",
-          "searchVolume": 6180,
-          "frame": "generic"
-        },
-        {
-          "keyword": "데블스플랜3 출연진",
-          "searchVolume": 5610,
-          "frame": "generic"
-        },
-        {
-          "keyword": "데블스플랜3 유배지",
-          "searchVolume": 2030,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "데블스플랜3 장동민",
-          "searchVolume": 6180,
-          "documentCount": 5693,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "데블스플랜3 출연진",
-          "searchVolume": 5610,
-          "documentCount": 8877,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "데블스플랜3 유배지",
-          "searchVolume": 2030,
-          "documentCount": 741,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "데블스플랜3 정현규",
-          "searchVolume": 1200,
-          "documentCount": 4396,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "데블스플랜3 공개일",
-          "searchVolume": 1140,
-          "documentCount": 9203,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "데블스플랜3 6화 공개일",
-          "searchVolume": 240,
-          "documentCount": 1866,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "데블스플랜3 다시보기",
-          "searchVolume": 40,
-          "documentCount": 11185,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "데블스플랜3 게임 규칙",
-          "searchVolume": 30,
-          "documentCount": 3403,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-17T18:02:39.133Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "쿼드 솔카",
-      "issue": "쿼드",
-      "topic": "쿼드",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 30,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 2,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 30",
-        "선점 후보 — 경쟁 문서 30건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 2건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "트럼프 방중 앞두고 첫 쿼드 정상회의 참여, 중국 견제",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "home": {
-          "text": "쿼드 솔카 쓰다가 요금제 한 번 바꿨더니 생긴 일이에요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 4,
-      "kinTop": [
-        {
-          "title": "쿼드랑 솔카랑 같은인물인가요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=20132&docId=362169578&answerNo=0",
-          "views": 478,
-          "answers": 1
-        },
-        {
-          "title": "솔카(전 쿼드) 칼리스타 룬",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1303&docId=376514643&answerNo=1",
-          "views": 153,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-11-17T18:02:39.133Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "젠슨 엔디비아 지분",
-      "issue": "젠슨",
-      "topic": "젠슨",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 220,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "rising",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 220",
-        "선점 후보 — 경쟁 문서 220건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "젠슨 황 '이사회 요청시 엔비디아 복귀', 사임 후 첫 발언",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "젠슨 엔디비아 지분 규모와 사임 후 복귀설까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "젠슨 엔디비아 지분만 보려다 사임 소식에 다시 봤네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "젠슨 황 사임 이유",
-          "searchVolume": 340,
-          "frame": "mistake"
-        },
-        {
-          "keyword": "젠슨 황 사임",
-          "searchVolume": 43640,
-          "frame": "generic"
-        },
-        {
-          "keyword": "젠슨 황 복귀",
-          "searchVolume": 12890,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "젠슨 황 사임",
-          "searchVolume": 43640,
-          "documentCount": 28002,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "젠슨 황 복귀",
-          "searchVolume": 12890,
-          "documentCount": 16473,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "젠슨 황 엔비디아 지분",
-          "searchVolume": 5260,
-          "documentCount": 32197,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "젠슨 황 스캔들",
-          "searchVolume": 400,
-          "documentCount": 18074,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "젠슨 황 사임 이유",
-          "searchVolume": 340,
-          "documentCount": 21258,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "젠슨 황 CEO 복귀",
-          "searchVolume": 20,
-          "documentCount": 11789,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-17T18:02:39.133Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "스마일샤크 AI무비나이트",
-      "issue": "스마일샤크",
-      "topic": "스마일샤크",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 38,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 38",
-        "선점 후보 — 경쟁 문서 38건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "스마일샤크, AWS와 스타트업 대상 AI 세미나 개최",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "스마일샤크 AI무비나이트 부산 개최 콘텐츠 기업 AX 지원 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "스마일샤크 AI무비나이트 다녀오고 채용 공고를 다시 들여다봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "스마일샤크",
-          "searchVolume": 490,
-          "frame": "generic"
-        },
-        {
-          "keyword": "스마일샤크 채용",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "스마일샤크",
-          "searchVolume": 490,
-          "documentCount": 3595,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "스마일샤크 채용",
-          "searchVolume": 10,
-          "documentCount": 87,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 3,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-17T18:02:39.133Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "스마일샤크 매각",
-      "issue": "스마일샤크",
-      "topic": "스마일샤크",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 59,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 59",
-        "선점 후보 — 경쟁 문서 59건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "스마일샤크, AWS와 스타트업 대상 AI 세미나 개최",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "스마일샤크 매각설, AWS 세미나 근황으로 본 진위",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "스마일샤크 매각 기사 떴는데 기업정보엔 채용 공고가 그대로 올라와 있더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "스마일샤크 기업정보",
-          "searchVolume": 20,
-          "frame": "generic"
-        },
-        {
-          "keyword": "스마일샤크 채용",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "스마일샤크 기업정보",
-          "searchVolume": 20,
-          "documentCount": 346,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "스마일샤크 채용",
-          "searchVolume": 10,
-          "documentCount": 87,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": [
-        {
-          "title": "중고차 매각 및 매입시세 요청",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=811&docId=175966999&answerNo=4",
-          "views": 766,
-          "answers": 10
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-11-17T18:02:39.133Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "스마일샤크 장진환",
-      "issue": "스마일샤크",
-      "topic": "스마일샤크",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 58,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 58",
-        "선점 후보 — 경쟁 문서 58건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "스마일샤크, AWS와 스타트업 대상 AI 세미나 개최",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "스마일샤크 장진환 대표와 AWS 스타트업 세미나 내용",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "스마일샤크 장진환 대표 검색하다 기업정보에서 눈길 멈춘 대목이 있더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "스마일샤크 기업정보",
-          "searchVolume": 20,
-          "frame": "generic"
-        },
-        {
-          "keyword": "스마일샤크 채용",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "스마일샤크 기업정보",
-          "searchVolume": 20,
-          "documentCount": 346,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "스마일샤크 채용",
-          "searchVolume": 10,
-          "documentCount": 87,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-17T18:02:39.133Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "스마일샤크 AX",
-      "issue": "스마일샤크",
-      "topic": "스마일샤크",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 55,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 55",
-        "선점 후보 — 경쟁 문서 55건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "스마일샤크, AWS와 스타트업 대상 AI 세미나 개최",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "스마일샤크 AX, AWS AI 세미나와 게임사 클라우드 지원",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "스마일샤크 AX 팀이 채용 공고에 슬쩍 적어둔 조건이 좀 의외였어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "스마일샤크 채용",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "스마일샤크 채용",
-          "searchVolume": 10,
-          "documentCount": 87,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 6,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-17T18:02:39.133Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "스마일샤크 블라인드",
-      "issue": "스마일샤크",
-      "topic": "스마일샤크",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 81,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 81",
-        "선점 후보 — 경쟁 문서 81건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "스마일샤크, AWS와 스타트업 대상 AI 세미나 개최",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "스마일샤크 블라인드 평판, AWS 파트너 기업 실제 분위기",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "스마일샤크 블라인드 보다가 기업정보랑 채용 공고까지 뒤져본 이유가 있어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "스마일샤크 기업정보",
-          "searchVolume": 20,
-          "frame": "generic"
-        },
-        {
-          "keyword": "스마일샤크 채용",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "스마일샤크 기업정보",
-          "searchVolume": 20,
-          "documentCount": 346,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "스마일샤크 채용",
-          "searchVolume": 10,
-          "documentCount": 87,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 9,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-17T18:02:39.133Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "스마일샤크 세미나",
-      "issue": "스마일샤크",
-      "topic": "스마일샤크",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 86,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 86",
-        "선점 후보 — 경쟁 문서 86건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "스마일샤크, AWS와 스타트업 대상 AI 세미나 개최",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "스마일샤크 세미나 AWS 스타트업 AI 성장과 VC 기회 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "스마일샤크 세미나 갔다가 채용 공고를 다시 들여다보게 됐어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "스마일샤크 채용",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "스마일샤크 채용",
-          "searchVolume": 10,
-          "documentCount": 87,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-17T18:02:39.133Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "스마일샤크 AWS 파트너",
-      "issue": "스마일샤크",
-      "topic": "스마일샤크",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 79,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 79",
-        "선점 후보 — 경쟁 문서 79건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "스마일샤크, AWS와 스타트업 대상 AI 세미나 개최",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "스마일샤크 AWS 파트너 Games on AWS 2026 부스 참가 내용",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "스마일샤크 AWS 파트너 채용 공고 들여다보다 스타트업이 왜 몰리나 싶더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "스마일샤크 기업정보",
-          "searchVolume": 20,
-          "frame": "generic"
-        },
-        {
-          "keyword": "스마일샤크 채용",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "스마일샤크 기업정보",
-          "searchVolume": 20,
-          "documentCount": 346,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "스마일샤크 채용",
-          "searchVolume": 10,
-          "documentCount": 87,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-17T18:02:39.133Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "스마일샤크 매출",
-      "issue": "스마일샤크",
-      "topic": "스마일샤크",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 131,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 131",
-        "선점 후보 — 경쟁 문서 131건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "스마일샤크, AWS와 스타트업 대상 AI 세미나 개최",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "스마일샤크 매출 규모와 채용·연봉, AWS 파트너 정보까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "스마일샤크 매출 보러 들어갔다가 기업정보에서 한참을 못 빠져나왔네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "스마일샤크 기업정보",
-          "searchVolume": 20,
-          "frame": "generic"
-        },
-        {
-          "keyword": "스마일샤크 채용",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "스마일샤크 기업정보",
-          "searchVolume": 20,
-          "documentCount": 346,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "스마일샤크 채용",
-          "searchVolume": 10,
-          "documentCount": 87,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-17T18:02:39.133Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "스마일샤크 AWS",
-      "issue": "스마일샤크",
-      "topic": "스마일샤크",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 142,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 2,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 142",
-        "선점 후보 — 경쟁 문서 142건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 2건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "스마일샤크, AWS와 스타트업 대상 AI 세미나 개최",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "스마일샤크 AWS 세미나 일정과 Games on AWS 2026 부스 참가",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "스마일샤크 AWS 세미나 보러 갔다가 채용 공고를 다시 들여다봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "스마일샤크 기업정보",
-          "searchVolume": 20,
-          "frame": "generic"
-        },
-        {
-          "keyword": "스마일샤크 채용",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "스마일샤크 기업정보",
-          "searchVolume": 20,
-          "documentCount": 346,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "스마일샤크 채용",
-          "searchVolume": 10,
-          "documentCount": 87,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-17T18:02:39.133Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "스마일샤크 게임사 지원",
-      "issue": "스마일샤크",
-      "topic": "스마일샤크",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 158,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 158",
-        "선점 후보 — 경쟁 문서 158건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "스마일샤크, AWS와 스타트업 대상 AI 세미나 개최",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "스마일샤크 게임사 지원 Games on AWS 2026 단계별 클라우드 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "스마일샤크 게임사 지원 보러 갔다가 채용 공고에 손이 가더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "스마일샤크 채용",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "스마일샤크 채용",
-          "searchVolume": 10,
-          "documentCount": 87,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 3,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-17T18:02:39.133Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "쿼드 벡스 차이",
-      "issue": "쿼드",
-      "topic": "쿼드",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 206,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 2,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 206",
-        "선점 후보 — 경쟁 문서 206건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 2건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "트럼프 방중 앞두고 첫 쿼드 정상회의 참여, 중국 견제",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "쿼드 벡스 차이 어디서 갈리는지 비교",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "쿼드랑 벡스 비교하다 많이들 헷갈리는 부분이 여기더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 4,
-      "kinTop": [
-        {
-          "title": "닥터마틴 1461 차이",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=5040202&docId=473532802&answerNo=0",
-          "views": 11,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-11-17T18:02:39.133Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "쿼드 로키",
-      "issue": "쿼드",
-      "topic": "쿼드",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 238,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 238",
-        "선점 후보 — 경쟁 문서 238건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "트럼프 방중 앞두고 첫 쿼드 정상회의 참여, 중국 견제",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 32,
-      "kinTop": [
-        {
-          "title": "피파투스쿼드질문. 내공대박",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=20608&docId=145783393&answerNo=1",
-          "views": 40,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-11-17T18:02:39.133Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "스마일샤크 클라우드",
-      "issue": "스마일샤크",
-      "topic": "스마일샤크",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 236,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 3,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 236",
-        "선점 후보 — 경쟁 문서 236건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 3건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "스마일샤크, AWS와 스타트업 대상 AI 세미나 개최",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "스마일샤크 클라우드 AWS 파트너 MSP 세미나 정보 모음",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "스마일샤크 클라우드 채용 공고 보다가 생각보다 솔직해서 다시 읽었네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "스마일샤크 채용",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "스마일샤크 채용",
-          "searchVolume": 10,
-          "documentCount": 87,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-17T18:02:39.133Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "앤트그룹 링봇 터치",
-      "issue": "앤트그룹",
-      "topic": "앤트그룹",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 4,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 4",
-        "선점 후보 — 경쟁 문서 4건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "앤트그룹이 로봇 촉각 AI '링봇 터치'를 오픈소스로 공개했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "앤트그룹 링봇 터치 로봇 촉각 AI 오픈소스 공개",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "앤트그룹 링봇 터치 오픈소스로 풀었다는데 촉각 AI가 생각보다 멀리 갔네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-17T03:39:00.615Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "링봇 터치 오픈소스",
-      "issue": "앤트그룹",
-      "topic": "앤트그룹",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 4,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 4",
-        "선점 후보 — 경쟁 문서 4건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "앤트그룹이 로봇 촉각 AI '링봇 터치'를 오픈소스로 공개했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "링봇 터치 오픈소스 앤트그룹 로봇 촉각 AI 어디까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "링봇 터치 오픈소스 공개 소식 봤는데 로봇이 물체 잡는 힘까지 판단한다네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-17T03:39:00.615Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "노타 초봉",
-      "issue": "노타",
-      "topic": "노타",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 9,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 9",
-        "선점 후보 — 경쟁 문서 9건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "노타가 두베와 금융권 AI 코딩 시장 공략에 나섰다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "노타 초봉 신입 연봉부터 채용 조건까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "노타 초봉 궁금해서 노타 채용 공고 열어봤는데 생각보다 복잡하더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "노타 ai",
-          "searchVolume": 1030,
-          "frame": "generic"
-        },
-        {
-          "keyword": "노타 채용",
-          "searchVolume": 80,
-          "frame": "generic"
-        },
-        {
-          "keyword": "노타 ai 채용",
-          "searchVolume": 30,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "노타 ai",
-          "searchVolume": 1030,
-          "documentCount": 15694,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "노타 채용",
-          "searchVolume": 80,
-          "documentCount": 681,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "노타 ai 채용",
-          "searchVolume": 30,
-          "documentCount": 562,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "노타 회사",
-          "searchVolume": 30,
-          "documentCount": 8540,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "노타 연봉",
-          "searchVolume": 20,
-          "documentCount": 260,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-17T03:39:00.615Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "토스페이먼츠 앤트그룹",
-      "issue": "앤트그룹",
-      "topic": "앤트그룹",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 176,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 176",
-        "선점 후보 — 경쟁 문서 176건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "앤트그룹이 로봇 촉각 AI '링봇 터치'를 오픈소스로 공개했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 4,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-17T03:39:00.615Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "앤트그룹 촉각 AI",
-      "issue": "앤트그룹",
-      "topic": "앤트그룹",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 175,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 175",
-        "선점 후보 — 경쟁 문서 175건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "앤트그룹이 로봇 촉각 AI '링봇 터치'를 오픈소스로 공개했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "앤트그룹 촉각 AI, 링봇 터치 오픈소스로 공개한 내용",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "앤트그룹 촉각 AI 공개됐는데 링봇 터치가 쥐는 힘까지 본다는 게 의외네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-17T03:39:00.615Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "노타 사원수",
-      "issue": "노타",
-      "topic": "노타",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 223,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 223",
-        "선점 후보 — 경쟁 문서 223건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "노타가 두베와 금융권 AI 코딩 시장 공략에 나섰다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "노타 사원수 연봉 채용 금융권 AI 코딩 기업 규모",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "노타 사원수 얼마길래 노타 연봉 공고 보다가 이직 생각이 들더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "노타 채용",
-          "searchVolume": 80,
-          "frame": "generic"
-        },
-        {
-          "keyword": "노타 기업정보",
-          "searchVolume": 30,
-          "frame": "generic"
-        },
-        {
-          "keyword": "노타 연봉",
-          "searchVolume": 20,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "노타 채용",
-          "searchVolume": 80,
-          "documentCount": 681,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "노타 기업정보",
-          "searchVolume": 30,
-          "documentCount": 9712,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "노타 연봉",
-          "searchVolume": 20,
-          "documentCount": 260,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "노타 매출",
-          "searchVolume": 20,
-          "documentCount": 7478,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "노타 상장",
-          "searchVolume": 20,
-          "documentCount": 11295,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 16,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-17T03:39:00.615Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "웹케시 초봉",
-      "issue": "웹케시",
-      "topic": "웹케시",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 66,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 2,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 66",
-        "선점 후보 — 경쟁 문서 66건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 2건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "웹케시가 하나은행과 통합CMS AI 분석 시범사업에 착수했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "웹케시 초봉 신입 연봉테이블·채용 조건까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "웹케시 초봉 보고 지원했는데 웹케시 채용 공고를 다시 읽어보게 되네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "웹케시 주가",
-          "searchVolume": 680,
-          "frame": "generic"
-        },
-        {
-          "keyword": "웹케시 그룹",
-          "searchVolume": 160,
-          "frame": "generic"
-        },
-        {
-          "keyword": "웹케시 채용",
-          "searchVolume": 20,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "웹케시 주가",
-          "searchVolume": 680,
-          "documentCount": 10381,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "웹케시 그룹",
-          "searchVolume": 160,
-          "documentCount": 10636,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "웹케시 채용",
-          "searchVolume": 20,
-          "documentCount": 1130,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "웹케시 기업정보",
-          "searchVolume": 10,
-          "documentCount": 12814,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-17T03:14:24.359Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "웹케시 rerp",
-      "issue": "웹케시",
-      "topic": "웹케시",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 215,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 3,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 215",
-        "선점 후보 — 경쟁 문서 215건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 3건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "웹케시가 하나은행과 통합CMS AI 분석 시범사업에 착수했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-17T03:14:24.359Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "웹케시 하나은행 실증",
-      "issue": "웹케시",
-      "topic": "웹케시",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 218,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 218",
-        "선점 후보 — 경쟁 문서 218건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "웹케시가 하나은행과 통합CMS AI 분석 시범사업에 착수했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "웹케시 하나은행 실증, 통합CMS AI 분석 내년 2월까지 검증",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "웹케시 하나은행 실증 소식 나오니까 웹케시 주가를 다시 들여다봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "웹케시 주가",
-          "searchVolume": 680,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "웹케시 주가",
-          "searchVolume": 680,
-          "documentCount": 10381,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-17T03:14:24.359Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "웹케시 통합CMS",
-      "issue": "웹케시",
-      "topic": "웹케시",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 247,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 1,
-      "reasons": [
-        "문서수 247",
-        "선점 후보 — 경쟁 문서 247건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 1건)"
-        }
-      ],
-      "whySearch": {
-        "text": "웹케시가 하나은행과 통합CMS AI 분석 시범사업에 착수했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "웹케시 통합CMS 하나은행 AI 분석 시범사업 내년 2월까지 검증",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "웹케시 통합CMS 쓰는데 브랜치 소식 나오니까 자금팀이 술렁이더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "웹케시 주가",
-          "searchVolume": 680,
-          "frame": "generic"
-        },
-        {
-          "keyword": "웹케시 브랜치",
-          "searchVolume": null,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "웹케시 주가",
-          "searchVolume": 680,
-          "documentCount": 10381,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-17T03:14:24.359Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
   "issues": [
     {
-      "issue": "정부 수능 부정행위",
+      "issue": "천위페이",
       "issueType": "fresh",
       "lane": "realtime",
-      "issueStatus": "unknown",
+      "issueStatus": "rising",
       "isHot": true,
-      "why": "정부가 수능 부정행위 제보 1억 포상금을 즉시 적용 추진해서.",
+      "why": null,
       "headlines": [
         {
-          "title": "정부, 내일 수능부터 '부정행위 제보시 1억 포상금' 지급 추진",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-18T12:22:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016450323?sid=100"
+          "title": "천위페이, 세계 47위에 충격패…안세영 없는 홍콩오픈서 탈락",
+          "press": "bntnews.co.kr",
+          "publishedAt": "2026-11-19T21:10:00.000Z",
+          "link": "https://www.bntnews.co.kr/article/view/bnt202611200011"
         },
         {
-          "title": "정부, 수능 직후 '부정행위 대응TF' 가동…총리가 TF반장",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-11-18T12:06:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/055/0001404065?sid=100"
+          "title": "안세영도 없는데→\"이번엔 문제없다\" 우승 자신했던 中 천위페이, 19세 ...",
+          "press": "starnewskorea.com",
+          "publishedAt": "2026-11-19T09:59:00.000Z",
+          "link": "https://m.sports.naver.com/general/article/108/0003488758"
         },
         {
-          "title": "정부, 수능 부정행위 제보 1억원 포상 즉시적용 추진",
-          "press": "news.jtbc.co.kr",
-          "publishedAt": "2026-11-18T11:58:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/437/0000521383?sid=102"
+          "title": "‘안세영만 없으면 우승하겠다더니?’ 2번 시드 천위페이, 세계랭킹 47위...",
+          "press": "osen.co.kr",
+          "publishedAt": "2026-11-19T09:22:00.000Z",
+          "link": "https://m.sports.naver.com/general/article/109/0005642527"
         }
       ],
       "concentrated": [
         {
-          "keyword": "정부",
+          "keyword": "안세영 천위페이",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "정부 수능",
+          "keyword": "배드민턴 천위페이",
           "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "야마구치 천위페이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "천위페이 기권",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "천위페이 순위",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "천위페이 세계선수권",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "천위페이 키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "천위페이 나이",
+          "searchVolume": 300,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "승리",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "dead",
-      "isHot": true,
-      "why": "승리가 만삭 아내와 동반 입국해 포착돼서.",
-      "headlines": [
-        {
-          "title": "승리, 만삭 20대 아내와 동반 입국…D라인 포착",
-          "press": "news.tvchosun.com",
-          "publishedAt": "2026-11-18T15:06:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/448/0000651943?sid=103"
-        },
-        {
-          "title": "美 '공화 텃밭' 알래스카 상원 선거도 민주 승리…총 56석",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-18T03:55:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016448997?sid=104"
-        },
-        {
-          "title": "美 상원 마지막 승부처 알래스카도 민주당 승리",
-          "press": "kmib.co.kr",
-          "publishedAt": "2026-11-18T07:46:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/005/0001885966?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "승리 와이프",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "빅뱅 승리",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "승리 아빠",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "승리 근황",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "승리 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "승리 나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "승리 빅뱅",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "승리 논란",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "승리 아내 누구",
-          "reason": "신상 궁금증 폭발",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "승리 출산",
-          "reason": "만삭이라 출산 임박",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "승리 현재 직업",
-          "reason": "출소 후 생계 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "승리 거주지",
-          "reason": "어디 사는지 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "빅뱅 승리 복귀",
-          "reason": "연예계 복귀 여부",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "나는 솔로",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "34기 영철이 현숙에게 약속 취소를 통보해 현숙이 눈물 흘려서.",
-      "headlines": [
-        {
-          "title": "‘나는 솔로’ 영철의 일방통보…현숙의 눈물",
-          "press": "sports.khan.co.kr",
-          "publishedAt": "2026-11-18T05:55:00.000Z",
-          "link": "https://m.entertain.naver.com/article/144/0001150487"
-        },
-        {
-          "title": "'나는 솔로' 34기 영철에게 또 무슨 일이?…현숙에 '약속 취소' 통보",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-11-18T06:06:00.000Z",
-          "link": "https://m.entertain.naver.com/article/018/0006411886"
-        },
-        {
-          "title": "34기 현숙, 영철 변심에 눈물 \"내가 그렇게 잘못했나\" (나는 솔로)",
-          "press": "xportsnews.com",
-          "publishedAt": "2026-11-18T05:29:00.000Z",
-          "link": "https://m.entertain.naver.com/article/311/0002081726"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "나는 솔로 34기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "나는 솔로 영철",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "나는 솔로 갤러리",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "나는 솔로 16기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "나는 솔로 33기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "나는 솔로 옥순",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "나는 솔로 편성표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "나는 솔로 영자",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "34기 상철 순자",
-          "reason": "직진 커플 주목",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "이재명 APEC CEO",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "이재명 대통령이 APEC CEO 서밋 연설과 한중 정상회담에 나서서.",
-      "headlines": [
-        {
-          "title": "韓 없는 3자 회담… 李, 習에 한반도 평화 중재 요청",
-          "press": "segye.com",
-          "publishedAt": "2026-11-18T08:35:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/022/0004176259?sid=100"
-        },
-        {
-          "title": "한중 정상회담 “한반도 평화 공동 이익”…‘CEO서밋 연설’ APEC 일정...",
-          "press": "news.kbs.co.kr",
-          "publishedAt": "2026-11-18T09:10:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/056/0012296493?sid=100"
-        },
-        {
-          "title": "APEC CEO 서밋 참석한 이재명 대통령",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-18T08:10:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016450039?sid=104"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
+      "rowCount": 1
     },
     {
       "issue": "우승 박남열 감독과",
@@ -3935,7 +1567,8 @@
       ],
       "concentrated": [],
       "nextWave": [],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "삼전 닉스",
@@ -3981,279 +1614,14 @@
           "origin": "autocomplete"
         },
         {
-          "keyword": "삼전",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
           "keyword": "삼전닉스 실시간",
           "searchVolume": 3120,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [],
-      "rowCount": 1
-    },
-    {
-      "issue": "한화오션",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "한화오션에서 해군 평택함 진수식이 열려서.",
-      "headlines": [
-        {
-          "title": "한화오션서 열린 해군 평택함 진수식",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-18T05:20:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016449216?sid=101"
-        },
-        {
-          "title": "거제 한화오션서 평택함 진수식",
-          "press": "news1.kr",
-          "publishedAt": "2026-11-18T05:23:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009296358?sid=102"
-        },
-        {
-          "title": "5년 만의 수상전투함 진수…한화오션, '함정 명가' 재건 속도",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-11-18T06:54:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006411933?sid=100"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "한화오션 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한화오션 주가전망",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한화오션 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한화오션 연봉",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한화오션 파업",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한화오션 하청",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "거제 한화오션",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한화오션 거제",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "한화오션 캐나다 잠수함",
-          "reason": "21조 수주 임박",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "한화오션 목표주가",
-          "reason": "잭팟 기대 주목",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "한화오션 채용",
-          "reason": "수주 확대로 채용 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "수상전투함 진수",
-          "reason": "5년만 재개 주목",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "자바 보안 취약점",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "PHP에 이어 자바서도 고위험 취약점이 발견돼 정부가 긴급 점검을 권고해서.",
-      "headlines": [
-        {
-          "title": "PHP 이어 자바서도 고위험 보안 취약점…정부 긴급 점검 권고",
-          "press": "news.kbs.co.kr",
-          "publishedAt": "2026-11-18T00:51:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/056/0012296153?sid=105"
-        },
-        {
-          "title": "PHP 이어 '자바'서도 치명적 취약점…공공·기업 보안 비상",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-17T21:50:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016447797?sid=105"
-        },
-        {
-          "title": "韓 공공기관 73% 쓰는 '자바'… 태생부터 해킹 취약점 있었다",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-11-18T07:53:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005765674?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "자바",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "자바 보안",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "천재 이진우",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "LEET 만점자 이진우가 AI 부정행위 의혹으로 검증 생방송에 나서서.",
-      "headlines": [
-        {
-          "title": "진짜 천재? or AI 커닝?…LEET 만점자 검증 생방 전부터 1000명 북적",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-11-18T13:22:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005443225?sid=102"
-        },
-        {
-          "title": "\"천재라며 모셔왔는데 8일 만에 손절\"…'리트 만점자' AI 부정행위 의혹...",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-11-18T05:16:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005844473?sid=102"
-        },
-        {
-          "title": "수능 D-1...'AI 부정' 대응 총력에도 '불안감 여전' [뉴스퀘어 2PM]",
-          "press": "ytn.co.kr",
-          "publishedAt": "2026-11-18T05:18:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/052/0002434561?sid=102"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "구글",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "네이버웹툰 컷츠 메이크가 구글 올해의 앱에 선정돼서.",
-      "headlines": [
-        {
-          "title": "네이버웹툰 2차 창작앱 '컷츠 메이크', 구글 '올해의앱' 선정",
-          "press": "hankyung.com",
-          "publishedAt": "2026-11-18T06:42:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005355314?sid=105"
-        },
-        {
-          "title": "\"한국은 무료\"...구글, 예약·구매 맡는 AI 비서 확대",
-          "press": "zdnet.co.kr",
-          "publishedAt": "2026-11-18T01:15:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/092/0002445806?sid=105"
-        },
-        {
-          "title": "인하대병원, 구글 워크스페이스·제미나이 도입한다",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-18T02:27:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014329627?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "구글 제미나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 영국",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 번역기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 클래스룸",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 재팬",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 원",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 폼",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "구글 올해의앱 목록",
-          "reason": "전체 선정작 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "구글 로보택시 중단",
-          "reason": "운행금지 이유 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
+      "rowCount": 1,
+      "carried": true
     },
     {
       "issue": "리퀴드 AI",
@@ -4312,7 +1680,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "퍼플렉시티",
@@ -4420,205 +1789,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
-    },
-    {
-      "issue": "중국 AI 기업들",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "중국어권 텔레그램에서 AI 커닝 장치 거래 정황이 포착돼서.",
-      "headlines": [
-        {
-          "title": "중국어권 텔레그램서 'AI 커닝' 장치 거래 성행 정황 포착",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-18T00:05:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016448000?sid=105"
-        },
-        {
-          "title": "美 기업 파고든 '가성비' 중국산 AI…트럼프 정부 공개 의무화 검토",
-          "press": "hankyung.com",
-          "publishedAt": "2026-11-18T14:54:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005355550?sid=101"
-        },
-        {
-          "title": "“중국어권 텔레그램서 ‘AI 커닝’ 장비 거래 정황”",
-          "press": "busan.com",
-          "publishedAt": "2026-11-18T09:32:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/082/0001407898?sid=101"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "전남광주",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "전남광주가 2차 공공기관 유치 원팀 구성에 나서서.",
-      "headlines": [
-        {
-          "title": "\"뭉쳐야 더 온다\"…전남광주 2차 공공기관 유치 '원팀' 시급",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-18T06:12:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014330572?sid=102"
-        },
-        {
-          "title": "전남광주, K-제약바이오 프론티어기업 육성 선제 대응",
-          "press": "segye.com",
-          "publishedAt": "2026-11-18T00:11:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/022/0004176087?sid=102"
-        },
-        {
-          "title": "전남광주시, 'K-제약바이오 프론트기업 육성' 지역기업 지원",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-18T00:55:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016448177?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "전남 광주 가볼만한곳",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "전남 광주 날씨",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "전남 광주 맛집",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "전남광주 축제",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "전남광주 단풍",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "전남광주 목포시 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "전남광주 의회",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "전남광주 롤",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "전남광주 통합 시기",
-          "reason": "특별시 출범 일정",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "엔비디아",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "삼성전기가 엔비디아 계약으로 생산을 확장하고 젠슨 황 복귀설이 일축돼서.",
-      "headlines": [
-        {
-          "title": "\"엔비디아, 2022년 알리바바와 앨리스황 연결해줘\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-18T06:06:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016449520?sid=101"
-        },
-        {
-          "title": "‘엔비디아’ 계약에 삼성전기 생산 확장",
-          "press": "busan.com",
-          "publishedAt": "2026-11-18T09:22:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/082/0001407889?sid=101"
-        },
-        {
-          "title": "\"젠슨 황, 엔비디아 이사 2명 추천 가능…영향력 유지 가능성\"",
-          "press": "news1.kr",
-          "publishedAt": "2026-11-18T02:22:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009295825?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "엔비디아 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 실적발표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 회장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 젠슨황",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 그래픽카드",
-          "searchVolume": 6000,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 ai",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 실적",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "엔비디아 실적 발표",
-          "reason": "실적 일정 주목",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "엔비디아 HBM 공급",
-          "reason": "국내사 수혜 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "초록소프트",
@@ -4680,13 +1852,6 @@
           "onBoard": false
         },
         {
-          "keyword": "식물공장 AI",
-          "reason": "적용 분야 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
           "keyword": "초록소프트 대표",
           "reason": "창업자 배경 궁금",
           "searchVolume": null,
@@ -4694,7 +1859,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "몬드리안AI",
@@ -4795,7 +1961,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "김간지",
@@ -4964,659 +2131,23 @@
       "nextWave": [],
       "rowCount": 0,
       "carried": true
-    },
-    {
-      "issue": "젠슨",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "젠슨 황 '이사회 요청시 엔비디아 복귀', 사임 후 첫 발언",
-      "headlines": [
-        {
-          "title": "젠슨 황 \"이사회 요청시 엔비디아 복귀\"…사임 후 첫 공개 발언",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-17T16:11:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016447622?sid=104"
-        },
-        {
-          "title": "젠슨 황 “CEO 복귀 요청 쏟아져...이사회가 원하면 돌아갈 것”",
-          "press": "chosun.com",
-          "publishedAt": "2026-11-17T16:18:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0004010235?sid=105"
-        },
-        {
-          "title": "\"젠슨 황 딸 매디슨, 사실상 비서실장…고위 임원에도 고함\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-17T04:32:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014327192?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "젠슨황",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "젠슨 황 배우자",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "젠슨 애클스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "젠슨 황 부인",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "젠슨 황 자녀",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "젠슨 황 재산",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "젠슨 황 한국어",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "젠슨 버튼",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "젠슨 복귀 여부",
-          "reason": "이사회 결정 주목",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "젠슨 스캔들 진상",
-          "reason": "대반전 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "데블스플랜3",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "데블스 플랜3 5회 만에 7명 탈락, 유배지 등장",
-      "headlines": [
-        {
-          "title": "‘데블스 플랜3’ 5회 만에 7명 탈락...판 뒤집을 유배지 등장",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-11-17T01:17:00.000Z",
-          "link": "https://m.entertain.naver.com/article/009/0005764735"
-        },
-        {
-          "title": "‘데블스플랜 3’ 6화 공개일 및 시간",
-          "press": "bntnews.co.kr",
-          "publishedAt": "2026-11-17T00:06:00.000Z",
-          "link": "https://www.bntnews.co.kr/article/view/bnt202611170040"
-        },
-        {
-          "title": "'데블스 플랜3', 첫 주부터 정상 찍었다…비드라마 화제성 단숨에 1위",
-          "press": "tenasia.co.kr",
-          "publishedAt": "2026-11-17T06:48:00.000Z",
-          "link": "https://m.entertain.naver.com/article/312/0000784885"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "데블스플랜3 공개시간",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "데블스플랜3 갤러리",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "데블스플랜3 탈락자",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "데블스플랜3 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "데블스플랜3 스포",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "데블스플랜3 출연진",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "데블스플랜3 우승자",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "데블스플랜3 미니갤러리",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "데블스플랜3 6화",
-          "reason": "다음 탈락자 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "데블스플랜3 우승 후보",
-          "reason": "최종 승자 예측",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "데블스플랜3 공개일",
-          "reason": "다음 회차 일정",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "쿼드",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "트럼프 방중 앞두고 첫 쿼드 정상회의 참여, 중국 견제",
-      "headlines": [
-        {
-          "title": "트럼프, 방중앞 쿼드 정상회의 첫 참여…인태 '中견제' 결속행보",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-17T16:21:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016447635?sid=104"
-        },
-        {
-          "title": "오늘 미일 등 쿼드 정상회의…中 겨냥해 \"경제적 강압 우려\"",
-          "press": "news1.kr",
-          "publishedAt": "2026-11-16T23:02:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009292688?sid=104"
-        },
-        {
-          "title": "트럼프 “김정은, 회담 오고 싶을 것...지켜보자”",
-          "press": "chosun.com",
-          "publishedAt": "2026-11-17T11:16:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0004010144?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "쿼드 롤",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "롤 쿼드",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "쿼드 북 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "쿼드 벡스 차이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "대학로극장 쿼드",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "쿼드 국가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "쿼드 극장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "쿼드 나라",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "쿼드 공동성명",
-          "reason": "대중 메시지 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "쿼드 대중 조치",
-          "reason": "구체 결과 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "스마일샤크",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "스마일샤크, AWS와 스타트업 대상 AI 세미나 개최",
-      "headlines": [
-        {
-          "title": "스마일샤크, AWS와 스타트업 대상 세미나 개최",
-          "press": "hansbiz.co.kr",
-          "publishedAt": "2026-11-17T08:12:00.000Z",
-          "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=884265"
-        },
-        {
-          "title": "스마일샤크, AWS와 'AI로 만드는 성장, VC가 보는 기회' 세미나 성료",
-          "press": "etoday.co.kr",
-          "publishedAt": "2026-11-17T05:32:00.000Z",
-          "link": "https://www.etoday.co.kr/news/view/2649262"
-        },
-        {
-          "title": "스마일샤크, AWS와 스타트업 AI 세미나 개최…에이전트 적용 사례 공유",
-          "press": "aitimes.com",
-          "publishedAt": "2026-11-17T06:26:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=217494"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "스마일샤크 기업정보",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "스마일샤크 매각",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "스마일샤크 매출",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "스마일샤크 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "스마일샤크 사람인",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "스마일샤크 장진환",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "스마일샤크 블라인드",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "스마일샤크 매각",
-          "reason": "인수자 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "스마일샤크 채용",
-          "reason": "입사 수요",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "스마일샤크 매출",
-          "reason": "성장세 주목",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "앤트그룹",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "앤트그룹이 로봇 촉각 AI '링봇 터치'를 오픈소스로 공개했다",
-      "headlines": [
-        {
-          "title": "앤트그룹, 로봇에 '촉각' 더하는 AI 공개…물체 잡는 힘까지 판단",
-          "press": "aitimes.com",
-          "publishedAt": "2026-11-16T08:58:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=217455"
-        },
-        {
-          "title": "“젠슨 황 떠난 엔비디아에 또 악재?”…중국 AI 모델 6개서 블랙웰 ‘...",
-          "press": "donga.com",
-          "publishedAt": "2026-11-13T02:35:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/020/0003762293?sid=104"
-        },
-        {
-          "title": "중국 앤트그룹, 범용 로봇 촉각 AI 모델 '링봇 터치' 오픈소스 공개",
-          "press": "irobotnews.com",
-          "publishedAt": "2026-11-10T14:56:00.000Z",
-          "link": "https://www.irobotnews.com/news/articleView.html?idxno=49515"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "앤트그룹 상장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트그룹 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트그룹 토스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트그룹 ipo",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트그룹 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트그룹 알리바바",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트그룹 지분구조",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "중국 앤트그룹",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "앤트그룹 상장",
-          "reason": "IPO 재개",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "앤트그룹 토스",
-          "reason": "국내 연관",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "노타",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "노타가 두베와 금융권 AI 코딩 시장 공략에 나섰다",
-      "headlines": [
-        {
-          "title": "노타, 두베와 금융권 AI 코딩 시장 공략…GPU 효율 최대 95% 개선",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-11-16T00:24:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005441447?sid=101"
-        },
-        {
-          "title": "노타, 두베와 금융권 폐쇄망 기반 AI 코딩 에이전트 지원",
-          "press": "etnews.com",
-          "publishedAt": "2026-11-16T00:31:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/030/0003485878?sid=105"
-        },
-        {
-          "title": "노타, 금융권 특화 코딩용 LLM·서버 공급 계약",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-11-16T01:50:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005764241?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "노타 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "노타 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "노타 주가 전망",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "노타 ai 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "노타 ai 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "노타 매출",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "노타 실적",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "노타 위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "노타 주가",
-          "reason": "계약 반응",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "노타 상장일",
-          "reason": "IPO 시점",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "AI 코딩 시장",
-          "reason": "산업 전망",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "노타 실적",
-          "reason": "매출 영향",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "웹케시",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "웹케시가 하나은행과 통합CMS AI 분석 시범사업에 착수했다.",
-      "headlines": [
-        {
-          "title": "\"금융 AI 업무 효용 검증한다\"…웹케시·하나은행 실증 착수",
-          "press": "news1.kr",
-          "publishedAt": "2026-11-16T05:55:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009291661?sid=101"
-        },
-        {
-          "title": "[핀테크 NOW] 토스·웹케시·NHN KCP",
-          "press": "wikileaks-kr.org",
-          "publishedAt": "2026-11-16T08:34:00.000Z",
-          "link": "https://www.wikileaks-kr.org/news/articleView.html?idxno=194701"
-        },
-        {
-          "title": "웹케시, 하나銀 통합CMS AI분석 시범사업 맡아",
-          "press": "dt.co.kr",
-          "publishedAt": "2026-11-16T02:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/029/0003059314?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "웹케시 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "웹케시 그룹",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "웹케시(주)",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "웹케시 초봉",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "웹케시 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "웹케시 기업정보",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "웹케시 기업규모",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "웹케시 본사",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "웹케시 주가 전망",
-          "reason": "계약 후 주가",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "웹케시 실적",
-          "reason": "사업 매출 영향",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "웹케시 검증 결과",
-          "reason": "시범사업 성과",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "웹케시 추가 은행",
-          "reason": "확대 여부",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
     }
-  ]
+  ],
+  "enrichedAt": "2026-11-19T21:45:02.426Z",
+  "enrichStats": {
+    "enriched": 0,
+    "subsAdded": 0,
+    "titleUpgraded": 0,
+    "proposed": 0,
+    "verified": 0,
+    "judged": 0,
+    "judgedBad": 0,
+    "related": 0,
+    "picked": 0,
+    "pooled": 0,
+    "aiTitled": 0,
+    "trended": 0,
+    "aiCalls": 2,
+    "partial": false
+  }
 }
