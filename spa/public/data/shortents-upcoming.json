@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T18:33:09.668Z",
+ "builtAt": "2026-11-19T18:53:15.071Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,7 +16,7 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-19T17:36:00.000Z",
    "exclusive": false,
@@ -39,38 +39,6 @@
      "press": "newspim.com",
      "publishedAt": "2026-11-19T17:36:00.000Z",
      "link": "https://www.newspim.com/news/view/20261120000037"
-    }
-   ]
-  },
-  {
-   "keyword": "anthropic stock",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 2,
-   "firstArticleAt": "2026-11-19T17:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "Anthropic’s Debut Rally Fails to Lift Wall Street as Oil Climbs",
-     "press": "econotimes.com",
-     "publishedAt": "2026-11-19T18:26:00.000Z",
-     "link": "https://econotimes.com/Anthropic-s-Debut-Rally-Fails-to-Lift-Wall-Street-as-Oil-Climbs-1779860"
-    },
-    {
-     "title": "Anthropic Opens Trading on Wall Street as a $2 Trillion Company",
-     "press": "nytimes.com",
-     "publishedAt": "2026-11-19T18:04:00.000Z",
-     "link": "https://www.nytimes.com/2026/11/19/technology/anthropic-2-trillion.html?partner=naver"
-    },
-    {
-     "title": "How Anthropic sold itself to investors ahead of its I.P.O.",
-     "press": "nytimes.com",
-     "publishedAt": "2026-11-19T17:58:00.000Z",
-     "link": "https://www.nytimes.com/live/2026/11/19/technology/anthropic-ipo-ai/how-anthropic-sold-itself-to-investors-ahead-of-its-ipo?partner=naver"
     }
    ]
   }
