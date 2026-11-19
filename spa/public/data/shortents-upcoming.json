@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-19T00:11:30.823Z",
+ "builtAt": "2026-11-19T00:21:33.941Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,102 +8,101 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 25,
  "candidates": [
-  {
-   "keyword": "이진우 공개 검증 불참",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 53,
-   "recent20": 23,
-   "press": 40,
-   "firstArticleAt": "2026-11-18T23:05:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"실력으로 증명\" 호언장담했지만…리트 만점자 이진우씨, 공개검증 불참",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-19T00:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005606594?sid=102"
-    },
-    {
-     "title": "'리트냥이' 이진우, 수능 국어 생중계 불참... 여전히 24만명 시청중",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-19T00:08:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1194106"
-    },
-    {
-     "title": "리트 만점자 이진우, 안 나타난 이유가... “휴대폰 꺼지고 카톡 무응답...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-19T00:08:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1175813"
-    }
-   ]
-  },
   {
    "keyword": "리트 만점자 수사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 57,
-   "recent20": 19,
-   "press": 40,
-   "firstArticleAt": "2026-11-18T22:42:00.000Z",
+   "articles90": 63,
+   "recent20": 18,
+   "press": 45,
+   "firstArticleAt": "2026-11-18T23:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"실력으로 증명\" 호언장담했지만…리트 만점자 이진우씨, 공개검증 불참",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-19T00:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005606594?sid=102"
+     "title": "경찰, '리트 만점자' 고발 사건 광수단 금융범죄수사대 배당",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-19T00:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009297969?sid=102"
     },
     {
-     "title": "리트 만점자 이진우, 안 나타난 이유가... “휴대폰 꺼지고 카톡 무응답...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-19T00:08:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1175813"
+     "title": "‘리트 만점’ 이진우씨 공개 검증 무산… 경찰도 출동",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-19T00:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001205869?sid=102"
     },
     {
-     "title": "[속보] 리트 만점자, 공개검증 최종 불참…“연락두절”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-19T00:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004683827?sid=102"
+     "title": "‘리트 만점자’ 고발 사건, 서울청 금수대 수사",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-19T00:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004010511?sid=102"
     }
    ]
   },
   {
    "keyword": "조작기소 특검법 재가",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 43,
-   "recent20": 4,
-   "press": 38,
-   "firstArticleAt": "2026-11-18T22:42:00.000Z",
+   "articles90": 44,
+   "recent20": 8,
+   "press": 41,
+   "firstArticleAt": "2026-11-18T22:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령, 순방 중 '조작기소 특검법' 재가... 공포 즉시 시행",
-     "press": "lawtv.kr",
-     "publishedAt": "2026-11-19T00:08:00.000Z",
-     "link": "https://www.lawtv.kr/news/articleView.html?idxno=61463"
+     "title": "李 대통령, 조작기소 특검법 공포…19일 바로 시행",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-19T00:20:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=172709"
     },
     {
-     "title": "이 대통령, 조작기소특검법 재가…공포 즉시 시행",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-19T00:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000927705?sid=100"
+     "title": "李대통령, 중국서 '조작기소 특검법' 재가…수사 대상 절반이 본인 사건",
+     "press": "weekly.chosun.com",
+     "publishedAt": "2026-11-19T00:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/053/0000063161?sid=100"
     },
     {
-     "title": "李대통령, 순방 중 '조작기소 특검법' 재가…즉시 공포·시행",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-18T23:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003156953?sid=100"
+     "title": "李대통령, 순방중에 '조작기소특검법' 재가",
+     "press": "viewsnnews.com",
+     "publishedAt": "2026-11-19T00:18:00.000Z",
+     "link": "https://www.viewsnnews.com/article?q=239798"
+    }
+   ]
+  },
+  {
+   "keyword": "2027 수능",
+   "sources": [
+    "google"
+   ],
+   "articles90": 73,
+   "recent20": 73,
+   "press": 40,
+   "firstArticleAt": "2026-11-19T00:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[2027 수능] 사탐런 심화 속 모평·원서접수 분석해 선택과목 난이도 균...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-19T00:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005606599?sid=102"
+    },
+    {
+     "title": "국립부산과학관, 수능 수험생에 '과학 힐링' 선물",
+     "press": "industrynews.co.kr",
+     "publishedAt": "2026-11-19T00:20:00.000Z",
+     "link": "https://www.industrynews.co.kr/news/articleView.html?idxno=89825"
+    },
+    {
+     "title": "SK텔레콤, 수능 마친 수험생에 공연·영화·AI 서비스 프로모션",
+     "press": "hbnpress.com",
+     "publishedAt": "2026-11-19T00:20:00.000Z",
+     "link": "https://hbnpress.com/news/view/1065572227055718"
     }
    ]
   },
@@ -112,78 +111,83 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 40,
-   "recent20": 8,
-   "press": 36,
-   "firstArticleAt": "2026-11-18T22:42:00.000Z",
+   "articles90": 46,
+   "recent20": 11,
+   "press": 40,
+   "firstArticleAt": "2026-11-18T23:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'초강력 부정행위 점검' 속 2027 수능 시작",
-     "press": "jmbc.co.kr",
-     "publishedAt": "2026-11-19T00:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/659/0000048840?sid=102"
+     "title": "오늘 수능시험 감독하는 감독관들에게 내려진 '황당한 지침'",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-19T00:18:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1175805"
     },
     {
-     "title": "전국 85개 시험지구서 55만여명 수능 돌입…영하권 추위 속 '부정 방지 ...",
-     "press": "pointe.co.kr",
-     "publishedAt": "2026-11-19T00:06:00.000Z",
-     "link": "https://www.pointe.co.kr/news/articleView.html?idxno=88047"
+     "title": "단추 없는 옷, 무테 안경, 이웃에서 빌린 연필… ‘AI 논란’ 속 수능 날...",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-19T00:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004010512?sid=102"
     },
     {
-     "title": "[포토] 정부, 수능 당일 위급재난문자 발송…불시 추가 경고도 예고",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-19T00:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005844860?sid=102"
+     "title": "수능 AI 커닝 막으려 전국에 10.5초간 '삐'…\"출근길 소리 너무 커 깜짝...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-19T00:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009297962?sid=102"
     }
    ]
   },
   {
-   "keyword": "앤트로픽 공모가 83달러",
+   "keyword": "앤트로픽 IPO 83달러",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 42,
-   "recent20": 6,
-   "press": 36,
-   "firstArticleAt": "2026-11-18T22:46:00.000Z",
+   "articles90": 39,
+   "recent20": 8,
+   "press": 35,
+   "firstArticleAt": "2026-11-18T22:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "앤트로픽, 공모가 83달러 확정…수혜주는?",
-     "press": "bigtanews.co.kr",
-     "publishedAt": "2026-11-19T00:10:00.000Z",
-     "link": "https://www.bigtanews.co.kr/article/view/big202611190004"
+     "title": "앤트로픽 IPO 공모가 주당 83달러(약 11만원), 희망가 웃돌았다",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-19T00:20:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/440439"
     },
     {
-     "title": "하나증권 \"앤트로픽 상장에 AI 소프트웨어 관심 확대, 관련주 네이버 카...",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-19T00:06:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=452348"
+     "title": "앤트로픽 IPO 공모가 83달러 확정…자금 조달 940억달러 넘어선다",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-19T00:19:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000084343"
     },
     {
-     "title": "\"노후자금까지 털었다\"…스페이스X 넘보는 앤트로픽, 개미들 몰린 이유",
-     "press": "digitaltoday.co.kr",
-     "publishedAt": "2026-11-19T00:04:00.000Z",
-     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=716551"
+     "title": "앤트로픽, 공모가 83달러 확정…스페이스X 넘은 역대 최대 IPO",
+     "press": "kado.net",
+     "publishedAt": "2026-11-19T00:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000212185?sid=101"
     }
    ]
   },
   {
    "keyword": "태안 어선 실종",
    "sources": [
-    "signal.bz",
-    "daum"
+    "signal.bz"
    ],
    "articles90": 30,
    "recent20": 6,
    "press": 27,
-   "firstArticleAt": "2026-11-18T22:46:00.000Z",
+   "firstArticleAt": "2026-11-18T23:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "李대통령, 태안 어선 실종에 “수색 총력”...실종자 가족 지원 지시",
+     "press": "idsn.co.kr",
+     "publishedAt": "2026-11-19T00:16:00.000Z",
+     "link": "https://idsn.co.kr/news/view/1065571985538076"
+    },
     {
      "title": "李, 태안 어선 실종 보고 받고…\"수색에 최선 다하라\"",
      "press": "m-i.kr",
@@ -195,12 +199,6 @@
      "press": "khan.co.kr",
      "publishedAt": "2026-11-19T00:09:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/032/0003483656?sid=102"
-    },
-    {
-     "title": "“흔적조차 없다” 선원 7명 탄 어선 실종 이틀째 '감감무소식'",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-19T00:08:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1175799"
     }
    ]
   },
@@ -209,63 +207,158 @@
    "sources": [
     "google"
    ],
-   "articles90": 23,
-   "recent20": 13,
-   "press": 21,
-   "firstArticleAt": "2026-11-18T23:42:00.000Z",
+   "articles90": 20,
+   "recent20": 11,
+   "press": 18,
+   "firstArticleAt": "2026-11-18T23:52:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "원주 자율방재단, 강릉서 재난 대응 사례 공유…겨울철 대비 강화",
-     "press": "sentv.co.kr",
-     "publishedAt": "2026-11-19T00:10:00.000Z",
-     "link": "https://www.sentv.co.kr/article/view/sentv202611190024"
+     "title": "산청군, 겨울철 설해대책 수립… 216개 노선 관리",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-19T00:20:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261118500529"
     },
     {
-     "title": "키스오브라이프, 첫 겨울 시즌송 ‘그리디’ 콘셉트 영상…25일 컴백",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-19T00:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/396/0000761359"
+     "title": "구호플러스, 퍼 재킷 물량 20% 확대…겨울 아우터 공략",
+     "press": "apparelnews.co.kr",
+     "publishedAt": "2026-11-19T00:20:00.000Z",
+     "link": "http://www.apparelnews.co.kr/news/news_view/?idx=229101"
     },
     {
-     "title": "[오늘의 먹거리] 저가 김밥 상시 판매 이마트·겨울 한정 비빔면 선보인...",
-     "press": "kpenews.com",
-     "publishedAt": "2026-11-19T00:08:00.000Z",
-     "link": "https://kpenews.com/View.aspx?No=4319741"
+     "title": "게스 x 현진, 1990년대 얼터너티브 무드 담은 겨울 캠페인 공개",
+     "press": "fashionbiz.co.kr",
+     "publishedAt": "2026-11-19T00:18:00.000Z",
+     "link": "https://www.fashionbiz.co.kr/article/231202"
+    }
+   ]
+  },
+  {
+   "keyword": "관광",
+   "sources": [
+    "google"
+   ],
+   "articles90": 19,
+   "recent20": 15,
+   "press": 16,
+   "firstArticleAt": "2026-11-18T23:54:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "태종대 가을밤, 별빛과 영화에 물든다…부산관광공사 '별밤극장' 개최",
+     "press": "industrynews.co.kr",
+     "publishedAt": "2026-11-19T00:20:00.000Z",
+     "link": "https://www.industrynews.co.kr/news/articleView.html?idxno=89824"
+    },
+    {
+     "title": "러 여행사 '평양 미식관광' 출시…캐비아 등 고급식재료 제공",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-19T00:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016450944?sid=100"
+    },
+    {
+     "title": "경성대, 부산 글로벌 관광혁신 포럼서 국제 협력 논의",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-19T00:18:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261118500513"
     }
    ]
   },
   {
    "keyword": "leet 시험",
    "sources": [
-    "signal.bz",
-    "google"
+    "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 8,
-   "press": 10,
-   "firstArticleAt": "2026-11-18T23:31:00.000Z",
+   "articles90": 16,
+   "recent20": 10,
+   "press": 16,
+   "firstArticleAt": "2026-11-18T23:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[사설]AI시험 부정행위 못 잡으면 사회적 혼란이 온다",
-     "press": "chungnamilbo.co.kr",
-     "publishedAt": "2026-11-19T00:08:00.000Z",
-     "link": "http://www.chungnamilbo.co.kr/news/articleView.html?idxno=921660"
+     "title": "LEET 만점 논란 이진우씨, 수능 공개검증 불참…연락도 두절",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-19T00:20:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=243602"
     },
     {
-     "title": "전국 85개 시험지구서 55만여명 수능 돌입…영하권 추위 속 '부정 방지 ...",
-     "press": "pointe.co.kr",
-     "publishedAt": "2026-11-19T00:06:00.000Z",
-     "link": "https://www.pointe.co.kr/news/articleView.html?idxno=88047"
+     "title": "법학적성시험 만점자, 예고한 공개 검증 불참...주최 측 \"연락 시도 중\"",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-19T00:20:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=565008"
     },
     {
-     "title": "세무사 수석·LEET만점자, “법적 대응·공개 검증” 큰소리치더니…어...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-19T00:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001281988"
+     "title": "LEET 만점 서울대 치대생 이진우, 수능 공개 검증 불참…AI 부정행위 의...",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-19T00:18:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95553"
+    }
+   ]
+  },
+  {
+   "keyword": "포체티노 감독 시작",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 11,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-18T22:55:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "포체티노에게는 답이 있을까 ‘맨유 공식 업무 돌입→23일 리버풀전’",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-19T00:12:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/382/0001305625"
+    },
+    {
+     "title": "포체티노, 맨유 지휘봉 잡고 첫 출근…데뷔전 상대는 ‘숙적’ 리버풀",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-19T00:02:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611190011"
+    },
+    {
+     "title": "포체티노, 맨유 지휘봉 잡고 맨체스터 입성…리버풀전서 데뷔",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-18T23:39:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000084316"
+    }
+   ]
+  },
+  {
+   "keyword": "수험생 응원 후배들",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 25,
+   "recent20": 8,
+   "press": 10,
+   "firstArticleAt": "2026-11-18T23:09:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "후배들 응원 받으며 입실하는 수험생",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-19T00:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016450936?sid=102"
+    },
+    {
+     "title": "2027학년도 수능…최북단 주민들도 '한마음으로 응원'[쿠키포토]",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-19T00:12:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611190016"
+    },
+    {
+     "title": "영하권 수능 한파에도 뜨거운 응원…강원 고사장서 후배들 큰절까지",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-19T00:11:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000084328"
     }
    ]
   },
@@ -276,29 +369,61 @@
     "nate"
    ],
    "articles90": 10,
-   "recent20": 0,
+   "recent20": 2,
    "press": 10,
-   "firstArticleAt": "2026-11-18T22:42:00.000Z",
+   "firstArticleAt": "2026-11-18T22:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김정은, APEC 개막일 함경남도 시찰…'미·중·러 회담' 앞두고 움직임 ...",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-19T00:12:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5085134"
+    },
+    {
+     "title": "북미 회동설 속 김정은, 북중 접경지 떠나 이번엔 동해안으로 갔다",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-19T00:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000966476?sid=100"
+    },
     {
      "title": "김정은, 북미회담 성사 여부 관심 속 함경남도 시찰",
      "press": "imnews.imbc.com",
      "publishedAt": "2026-11-18T23:46:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/214/0001536579?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "수능 시간표",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-18T23:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "수능당일 주식시장 10시 문 연다…마감은 오후 4시 30분",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-19T00:14:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=202611190852334111923c501012_1"
     },
     {
-     "title": "김정은, 함남으로 이동…트럼프 러브콜 반응 없이 내치 집중",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-18T23:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004211392?sid=100"
+     "title": "수능 시간표, 오전 8시 10분까지 입실 완료…수험표·실물 신분증 필수",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-19T00:06:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95550"
     },
     {
-     "title": "김정은, 북미회담 주목 속 해군대학 등 시찰",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-18T23:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000927684?sid=100"
+     "title": "[2027수능] 수능 시간표는?.. '예외없이 8시10분까지 입실완료'",
+     "press": "veritas-a.com",
+     "publishedAt": "2026-11-18T23:40:00.000Z",
+     "link": "https://www.veritas-a.com/news/articleView.html?idxno=637841"
     }
    ]
   },
@@ -307,10 +432,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-18T22:50:00.000Z",
+   "articles90": 7,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-18T22:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -340,10 +465,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-18T22:46:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-18T23:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -368,44 +493,12 @@
    ]
   },
   {
-   "keyword": "수능 시간표",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-18T23:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "수능 시간표, 오전 8시 10분까지 입실 완료…수험표·실물 신분증 필수",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-19T00:06:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95550"
-    },
-    {
-     "title": "[2027수능] 수능 시간표는?.. '예외없이 8시10분까지 입실완료'",
-     "press": "veritas-a.com",
-     "publishedAt": "2026-11-18T23:40:00.000Z",
-     "link": "https://www.veritas-a.com/news/articleView.html?idxno=637841"
-    },
-    {
-     "title": "2027 수능 끝나는 시간 오후 5시 45분",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-18T23:32:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=407528"
-    }
-   ]
-  },
-  {
-   "keyword": "靑, 한한령 진전",
+   "keyword": "청, 한한령 해제 진전",
    "sources": [
     "nate"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-18T23:06:00.000Z",
    "exclusive": false,
@@ -430,45 +523,13 @@
      "link": "https://www.viva100.com/article/20261119500062"
     }
    ]
-  },
-  {
-   "keyword": "조국 입국 거부 전과",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-18T22:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "일본 \"조국 입국 거부는 전과 때문…독도 방문과는 무관\" 해명",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-18T23:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001978876?sid=100"
-    },
-    {
-     "title": "외교부 \"조국, 日 입국 거부 전과 이력 때문…독도 방문 때문 아냐\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-18T22:50:00.000Z",
-     "link": "https://www.ajunews.com/view/20261119073713776"
-    },
-    {
-     "title": "\"조국 日입국 거부, 독도 방문과 무관...전과 이력 때문\"",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-18T22:42:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2650065"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1104,
-  "matched": 603,
-  "avgLeadMin": 834,
+  "flagged": 1108,
+  "matched": 602,
+  "avgLeadMin": 835,
   "recent": [
    {
     "keyword": "수능 한파 대비 대책",
