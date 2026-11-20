@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T21:39:20.392Z",
+ "builtAt": "2026-11-20T21:49:23.992Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 28,
  "candidates": [
   {
    "keyword": "나스닥 급락",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 20,
-   "recent20": 12,
-   "press": 17,
+   "articles90": 27,
+   "recent20": 14,
+   "press": 22,
    "firstArticleAt": "2026-11-20T20:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "엔비디아 14% 급락 '52주 신저가'…나스닥 5% 넘게 추락[뉴욕마감]",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-20T21:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005444356?sid=101"
+     "title": "뉴욕증시 다우·S&P500 조정장 진입…나스닥, AI주 투매에 올해 상승분 ...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-20T21:48:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2651148"
     },
     {
-     "title": "나스닥, 기술주 매도에 5.3% 폭락...다우·S&P 500도 조정 진입",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-20T21:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002435992?sid=104"
+     "title": "[美증시] 엔비디아·앤트로픽 쇼크 나스닥 '대폭락'…반도체 '블랙프라...",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-20T21:48:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1138969"
     },
     {
-     "title": "앤트로픽, 상장 이틀째 8.5% 급락…장중 공모가까지 떨어지기도",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-20T21:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016455442?sid=104"
+     "title": "뉴욕증시, 기술주 매도에 급락...다우·S&P500도 조정 진입",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-20T21:48:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=783551"
+    }
+   ]
+  },
+  {
+   "keyword": "트럼프 데이터센터 세금 부과",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 10,
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-20T20:23:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프 \"미국 기업, 다른 나라에 데이터센터 지으면 엄청난 세금 부과\"",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-20T21:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979203?sid=102"
+    },
+    {
+     "title": "[핫이슈] 트럼프 \"해외 데이터센터 지으면 막대한 세금\"…AWS 한국 투자...",
+     "press": "the-today.com",
+     "publishedAt": "2026-11-20T21:14:00.000Z",
+     "link": "https://www.the-today.com/news/articleView.html?idxno=93890"
+    },
+    {
+     "title": "트럼프, 해외 AI 데이터센터 투자에 고율 과세 경고…미국 빅테크 긴장",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-20T21:08:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=847949"
     }
    ]
   },
@@ -75,9 +107,41 @@
    ]
   },
   {
-   "keyword": "장나라 변호사 굿파트너",
+   "keyword": "2026년 11월 21일 운세",
    "sources": [
     "nate"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-20T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[AI] 오늘의 띠별 운세...2026.11.21(토요일)",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-20T21:30:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68157"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 21일 (토) 띠별운세 '느긋한 주말 아침을 누...",
+     "press": "dailypop.kr",
+     "publishedAt": "2026-11-20T21:30:00.000Z",
+     "link": "http://www.dailypop.kr/news/articleView.html?idxno=104280"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 21일 띠별 운세",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-20T21:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413396?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "굿파트너 2",
+   "sources": [
+    "daum"
    ],
    "articles90": 3,
    "recent20": 1,
@@ -110,8 +174,8 @@
  "hitRate": {
   "days": 7,
   "flagged": 827,
-  "matched": 502,
-  "avgLeadMin": 652,
+  "matched": 501,
+  "avgLeadMin": 653,
   "recent": [
    {
     "keyword": "김신영 수영복 자태 공개",
