@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T21:29:17.147Z",
+ "builtAt": "2026-11-20T21:39:20.392Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,79 +8,117 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 27,
  "candidates": [
   {
-   "keyword": "트럼프 데이터센터 세금 부과",
+   "keyword": "나스닥 급락",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-20T20:06:00.000Z",
+   "articles90": 20,
+   "recent20": 12,
+   "press": 17,
+   "firstArticleAt": "2026-11-20T20:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[핫이슈] 트럼프 \"해외 데이터센터 지으면 막대한 세금\"…AWS 한국 투자...",
-     "press": "the-today.com",
-     "publishedAt": "2026-11-20T21:14:00.000Z",
-     "link": "https://www.the-today.com/news/articleView.html?idxno=93890"
+     "title": "엔비디아 14% 급락 '52주 신저가'…나스닥 5% 넘게 추락[뉴욕마감]",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-20T21:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005444356?sid=101"
     },
     {
-     "title": "트럼프, 해외 AI 데이터센터 투자에 고율 과세 경고…미국 빅테크 긴장",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-20T21:08:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=847949"
+     "title": "나스닥, 기술주 매도에 5.3% 폭락...다우·S&P 500도 조정 진입",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-20T21:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002435992?sid=104"
     },
     {
-     "title": "트럼프 \"美 기업, 다른 나라에 데이터센터 지으면 고액 세금 부과\"",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-20T21:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000121874?sid=104"
+     "title": "앤트로픽, 상장 이틀째 8.5% 급락…장중 공모가까지 떨어지기도",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-20T21:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016455442?sid=104"
     }
    ]
   },
   {
-   "keyword": "2026년 11월 21일 운세",
+   "keyword": "엔비디아 H200 수출 허용",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-20T20:00:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-20T20:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[오늘의 운세] 2026년 11월 21일 띠별 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-20T21:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413396?sid=103"
+     "title": "엔비디아, 中군 연계 기업에 AI칩 수출 추진…앨리스 황 연관사도 포함",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-20T21:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001206367?sid=104"
     },
     {
-     "title": "[오늘의 운세] 2026년 11월 21일 별자리 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-20T21:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413397?sid=103"
+     "title": "엔비디아, 중국 간첩 연루 메가스피드 관련사에 칩 4만개 판매신청",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-20T21:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012298523?sid=104"
     },
     {
-     "title": "[백운산 오늘의 운세] 2026년 11월 21일",
-     "press": "asiatoday.co.kr",
+     "title": "엔비디아, 中간첩 연루 메가스피드 관련사에 칩 4만개 판매신청",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-20T21:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016455432?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "장나라 변호사 굿파트너",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-20T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김혜윤, '오픈 메리지 약정서' 의뢰인 거짓말에 당했다(굿파트너2) [텔리...",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-20T21:36:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110018147307"
+    },
+    {
+     "title": "'굿파트너2' 장나라X김혜윤, 이번에도 실패하지 않습니다[★FOCUS]",
+     "press": "starnewskorea.com",
      "publishedAt": "2026-11-20T21:00:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20260916001523167"
+     "link": "https://m.entertain.naver.com/article/108/0003489116"
+    },
+    {
+     "title": "“일과 인생 사이”…‘굿파트너2’ 여전한 장나라 변호사 [TV온에어]",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-20T21:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000053674"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 826,
-  "matched": 501,
+  "flagged": 827,
+  "matched": 502,
   "avgLeadMin": 652,
   "recent": [
+   {
+    "keyword": "김신영 수영복 자태 공개",
+    "hitKeyword": "김신영 천연염료",
+    "hitAt": "2026-11-21T06:30:00+09:00",
+    "leadMin": 353
+   },
    {
     "keyword": "공사 생도 시험지 촬영 퇴교",
     "hitKeyword": "LEET 시험지",
@@ -134,12 +172,6 @@
     "hitKeyword": "컬리 개인정보 유출",
     "hitAt": "2026-11-20T23:00:00+09:00",
     "leadMin": 3594
-   },
-   {
-    "keyword": "아파트",
-    "hitKeyword": "아파트 공시가격 5년 동결",
-    "hitAt": "2026-11-20T22:00:00+09:00",
-    "leadMin": 876
    }
   ]
  }
