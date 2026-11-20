@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T22:19:35.299Z",
+ "builtAt": "2026-11-20T22:29:41.654Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "나스닥",
+   "keyword": "나스닥 급락",
    "sources": [
-    "google"
+    "signal.bz"
    ],
-   "articles90": 34,
-   "recent20": 3,
-   "press": 25,
+   "articles90": 46,
+   "recent20": 16,
+   "press": 35,
    "firstArticleAt": "2026-11-20T21:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'AI 거품 공포'에 美 증시 폭락⋯나스닥 5.28% 급락·다우도 950포인트↓",
-     "press": "autodaily.co.kr",
-     "publishedAt": "2026-11-20T22:16:00.000Z",
-     "link": "https://www.autodaily.co.kr/news/articleView.html?idxno=602297"
+     "title": "\"믿었던 AI마저\"…기술주 투매에 나스닥 5% 급락 [뉴욕증시 브리핑]",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-20T22:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005356555?sid=101"
     },
     {
-     "title": "나스닥 하루 5%, 일주일 10% 추락…AI주 투매 공포[월스트리트in]",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-20T22:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413409?sid=101"
+     "title": "[지난밤 뉴욕에선] 나스닥 5.28% 급락…다우·S&P500도 조정장",
+     "press": "straightnews.co.kr",
+     "publishedAt": "2026-11-20T22:28:00.000Z",
+     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=315879"
     },
     {
-     "title": "‘AI 투매’에 나스닥 5.3% 추락하며 올해 상승분 반납…엔비디아 14%↓",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-20T22:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394534?sid=101"
+     "title": "나스닥 5.3% 폭락…AMD·마이크론 13% 급락",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-20T22:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002249434?sid=105"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 12,
-   "recent20": 3,
-   "press": 8,
-   "firstArticleAt": "2026-11-20T20:52:00.000Z",
+   "articles90": 13,
+   "recent20": 4,
+   "press": 11,
+   "firstArticleAt": "2026-11-20T21:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "비트코인, 1시간 새 1.35% 올라 5만9123달러",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-20T22:18:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/441844"
+     "title": "7주 연속 하락세 탄 비트코인...지난해 고점 대비 '반토막'",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-20T22:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436000?sid=104"
     },
     {
-     "title": "웨일 얼럿, 코인베이스로 비트코인 899개 이동 관측",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-20T22:04:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/441836"
+     "title": "잇단 악재에 '휘청'…비트코인, 넉 달 만에 6만달러선 붕괴",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-20T22:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001273454?sid=101"
     },
     {
-     "title": "보름 만에 23% 떨어진 비트코인…바닥은 어디일까[코인현미경]",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-20T22:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009302347?sid=101"
+     "title": "\"내 비트코인 어쩌나\" 6만달러 붕괴…AI주 투매에 암호화폐도 '휘청'",
+     "press": "digitaltoday.co.kr",
+     "publishedAt": "2026-11-20T22:20:00.000Z",
+     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=717229"
     }
    ]
   },
@@ -79,30 +79,62 @@
    "sources": [
     "nate"
    ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 4,
+   "articles90": 7,
+   "recent20": 3,
+   "press": 6,
    "firstArticleAt": "2026-11-20T21:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "\"믿었던 AI마저\"…기술주 투매에 나스닥 5% 급락 [뉴욕증시 브리핑]",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-20T22:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005356555?sid=101"
+    },
+    {
+     "title": "나스닥 5.3% 폭락…AMD·마이크론 13% 급락",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-20T22:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002249434?sid=105"
+    },
+    {
      "title": "앤트로픽, 상장 이틀째 8.5% 급락...장중 공모가 선까지 위협",
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-20T22:17:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002435998?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "김민재",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-20T21:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘비상!’ 김민재 ‘교체+20분 활약’ 간판 FW 케인·올리세 부상 교체·...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-20T22:24:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/144/0001150980"
     },
     {
-     "title": "앤트로픽, 상장 이틀째 8.5% 급락…장중 공모가까지 떨어지기도",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-20T22:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012298552?sid=104"
+     "title": "김민재 투입될 때 벌어진 '신규규칙 위반' 상황! 우파메카노가 물통 걷...",
+     "press": "footballist.co.kr",
+     "publishedAt": "2026-11-20T22:00:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/436/0000115094"
     },
     {
-     "title": "앤트로픽, 상장 이틀째 급락…장중 공모가 턱밑까지",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-20T21:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009302346?sid=101"
+     "title": "'김민재 교체 출전' 바이에른 뮌헨, '강등권 경쟁' 쾰른과 1-1 무승부",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-20T21:45:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/117/0004126931"
     }
    ]
   },
@@ -144,7 +176,7 @@
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-20T21:00:00.000Z",
    "exclusive": false,
@@ -176,7 +208,7 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-20T21:00:00.000Z",
    "exclusive": false,
@@ -206,8 +238,8 @@
  "hitRate": {
   "days": 7,
   "flagged": 831,
-  "matched": 506,
-  "avgLeadMin": 647,
+  "matched": 505,
+  "avgLeadMin": 648,
   "recent": [
    {
     "keyword": "트럼프",
