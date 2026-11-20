@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T20:38:57.399Z",
+ "builtAt": "2026-11-20T20:49:02.912Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 29,
  "candidates": [
   {
    "keyword": "트럼프",
    "sources": [
     "google"
    ],
-   "articles90": 34,
-   "recent20": 4,
-   "press": 16,
-   "firstArticleAt": "2026-11-20T19:10:00.000Z",
+   "articles90": 30,
+   "recent20": 2,
+   "press": 15,
+   "firstArticleAt": "2026-11-20T19:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "트럼프 \"美기업, 해외 데이터센터 지으면 막대한 세금 부과\"(종합)",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-20T20:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014336935?sid=104"
+    },
+    {
+     "title": "트럼프, 중간선거 패배 이유 꼽으며 '남 탓'",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-20T20:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000652456?sid=104"
+    },
     {
      "title": "트럼프 \"美 핵무기 앞서는데, 절반 줄이자 말하기 어려워\"",
      "press": "news.tvchosun.com",
      "publishedAt": "2026-11-20T20:29:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/448/0000652455?sid=104"
-    },
-    {
-     "title": "트럼프 “푸틴·시진핑과 잘 지내는 내가 대통령인 건 행운···선거 패...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-20T20:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484084?sid=104"
-    },
-    {
-     "title": "트럼프 \"금리 높은 건 정치적인 연준 탓\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-20T20:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652454?sid=104"
     }
    ]
   },
