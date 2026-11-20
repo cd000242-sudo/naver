@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T23:30:04.702Z",
+ "builtAt": "2026-11-20T23:40:07.799Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,47 +8,82 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 22,
  "candidates": [
   {
-   "keyword": "소정리역 화물열차 탈선",
+   "keyword": "소정리역",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 45,
+   "articles90": 41,
    "recent20": 7,
-   "press": 36,
-   "firstArticleAt": "2026-11-20T22:06:00.000Z",
+   "press": 32,
+   "firstArticleAt": "2026-11-20T22:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "경부선 소정리역서 화물열차 탈선…열차 운행 차질",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-20T23:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928393?sid=102"
+     "title": "경부선 소정리역, 화물열차 5량 탈선…일반열차 \"운행 중단\"",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-20T23:38:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4119951"
     },
     {
-     "title": "경부선 화물열차 탈선에 일반열차 운행 중단⋯수험생 이동 차질 우려 [...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-20T23:20:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2651160"
+     "title": "경부선 소정리역서 화물열차 탈선…천안~대전 일반열차 운행 중단",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-20T23:34:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101732"
     },
     {
-     "title": "[종합]경부선 화물열차 5량 탈선…천안∼대전 운행 전면 중단",
-     "press": "fnnews.com",
+     "title": "경부선 소정리역서 화물열차 탈선…새마을·무궁화호 운행 중단(종합)",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-20T23:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005444374?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "굿파트너 2",
+   "sources": [
+    "signal.bz",
+    "nate",
+    "daum"
+   ],
+   "articles90": 15,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-20T22:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "['굿파트너2' 첫방] 장나라·김혜윤, 첫 만남부터 팽팽한 신경전...시청...",
+     "press": "nc.press",
+     "publishedAt": "2026-11-20T23:33:00.000Z",
+     "link": "https://www.nc.press/news/articleView.html?idxno=631544"
+    },
+    {
+     "title": "[TV핫스팟] ‘굿파트너2’ 장나라·김혜윤 첫 대면부터 팽팽…첫 방송 ...",
+     "press": "sportsworldi.com",
      "publishedAt": "2026-11-20T23:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005607607?sid=102"
+     "link": "https://m.entertain.naver.com/article/396/0000761503"
+    },
+    {
+     "title": "‘굿파트너’ 시즌1 첫방보다 높다‥시즌2 시청률 8.4%로 시작",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-20T23:12:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001189807"
     }
    ]
   },
   {
    "keyword": "김정은 건설현장 시찰",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 10,
-   "recent20": 3,
+   "recent20": 1,
    "press": 7,
    "firstArticleAt": "2026-11-20T22:27:00.000Z",
    "exclusive": false,
@@ -75,15 +110,79 @@
    ]
   },
   {
+   "keyword": "무궁화호",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-20T22:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "경부선 소정리역서 화물열차 탈선…새마을·무궁화호 운행 중단(종합)",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-20T23:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005444374?sid=102"
+    },
+    {
+     "title": "경부선 소정리역서 화물열차 탈선…새마을·무궁화호 운행 중지(종합)",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-20T23:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014337001?sid=101"
+    },
+    {
+     "title": "경부선 소정리역 화물열차 탈선…새마을·무궁화호 운행 중지",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-20T23:13:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085104"
+    }
+   ]
+  },
+  {
+   "keyword": "최미나수 레드카펫 진행",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 5,
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-20T22:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "맨살 드러난 드레스 입고 '덜덜'…최미나수, 인터뷰 모습 갑론을박",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-20T23:37:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005444377"
+    },
+    {
+     "title": "강추위에 노출드레스…‘MAMA’ 최미나수에 누리꾼 ‘걱정 가득’",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-20T23:32:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001150984"
+    },
+    {
+     "title": "\"얼어 죽으라는 건가?\"…최미나수, '등 훤히 드러난 드레스' 입고 사시나...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-20T23:28:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004126951"
+    }
+   ]
+  },
+  {
    "keyword": "손흥민 MLS 4위 연봉",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-20T22:06:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-20T22:14:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -108,34 +207,34 @@
    ]
   },
   {
-   "keyword": "연예인",
+   "keyword": "퇴교 시험지 부정행위",
    "sources": [
-    "google"
+    "nate"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-20T22:01:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-20T22:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“S.E.S는 연예인, 핑클은 이성”…클릭비 유호석 발언에 멤버들 ‘화들...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-20T22:20:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005766944"
+     "title": "공사 생도, 휴대전화로 시험지 불법 촬영해 적발…퇴교 처분",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-20T23:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009302428?sid=100"
     },
     {
-     "title": "클릭비 유호석 \"S.E.S는 연예인, 핑클은 이성 느낌\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-20T22:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014336974"
+     "title": "'명예시험' 공사 생도, 스마트폰으로 시험지 촬영…퇴교 처분",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-20T22:34:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=783562"
     },
     {
-     "title": "한고은, ‘파묘’ 무속인에 신점…“연예인 안 됐으면 신밥 먹었을 것”",
-     "press": "segye.com",
-     "publishedAt": "2026-11-20T22:06:00.000Z",
-     "link": "https://m.entertain.naver.com/article/022/0004176925"
+     "title": "시험지 스마트폰으로 찍었다…공사 생도 부정행위 퇴교",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-20T22:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404686?sid=100"
     }
    ]
   },
@@ -174,10 +273,22 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 833,
-  "matched": 507,
-  "avgLeadMin": 630,
+  "flagged": 835,
+  "matched": 508,
+  "avgLeadMin": 629,
   "recent": [
+   {
+    "keyword": "김민재",
+    "hitKeyword": "김민재 바이에른 출전",
+    "hitAt": "2026-11-21T08:30:00+09:00",
+    "leadMin": 60
+   },
+   {
+    "keyword": "소정리역 화물열차 탈선",
+    "hitKeyword": "경부선 화물열차 탈선",
+    "hitAt": "2026-11-21T08:30:00+09:00",
+    "leadMin": 20
+   },
    {
     "keyword": "비트코인",
     "hitKeyword": "비트코인 최장 약세",
@@ -225,18 +336,6 @@
     "hitKeyword": "트럼프 젠슨 황",
     "hitAt": "2026-11-21T07:00:00+09:00",
     "leadMin": 152
-   },
-   {
-    "keyword": "트럼프 해외 데이터센터 세금",
-    "hitKeyword": "트럼프 젠슨 황",
-    "hitAt": "2026-11-21T07:00:00+09:00",
-    "leadMin": 91
-   },
-   {
-    "keyword": "트럼프 데이터센터 세금 부과",
-    "hitKeyword": "트럼프 젠슨 황",
-    "hitAt": "2026-11-21T07:00:00+09:00",
-    "leadMin": 51
    }
   ]
  }
