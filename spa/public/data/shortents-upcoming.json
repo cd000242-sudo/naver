@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T23:40:07.799Z",
+ "builtAt": "2026-11-20T23:50:11.691Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,40 +8,8 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
+ "measured": 21,
  "candidates": [
-  {
-   "keyword": "소정리역",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 41,
-   "recent20": 7,
-   "press": 32,
-   "firstArticleAt": "2026-11-20T22:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "경부선 소정리역, 화물열차 5량 탈선…일반열차 \"운행 중단\"",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-20T23:38:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4119951"
-    },
-    {
-     "title": "경부선 소정리역서 화물열차 탈선…천안~대전 일반열차 운행 중단",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-20T23:34:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101732"
-    },
-    {
-     "title": "경부선 소정리역서 화물열차 탈선…새마을·무궁화호 운행 중단(종합)",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-20T23:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005444374?sid=102"
-    }
-   ]
-  },
   {
    "keyword": "굿파트너 2",
    "sources": [
@@ -50,94 +18,61 @@
     "daum"
    ],
    "articles90": 15,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-20T22:14:00.000Z",
+   "recent20": 4,
+   "press": 13,
+   "firstArticleAt": "2026-11-20T22:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "['굿파트너2' 첫방] 장나라·김혜윤, 첫 만남부터 팽팽한 신경전...시청...",
-     "press": "nc.press",
-     "publishedAt": "2026-11-20T23:33:00.000Z",
-     "link": "https://www.nc.press/news/articleView.html?idxno=631544"
+     "title": "돌아온 장나라 힘, '굿파트너2' 최고 9.9% [시청률]",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-20T23:49:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000053677"
     },
     {
-     "title": "[TV핫스팟] ‘굿파트너2’ 장나라·김혜윤 첫 대면부터 팽팽…첫 방송 ...",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-20T23:19:00.000Z",
-     "link": "https://m.entertain.naver.com/article/396/0000761503"
+     "title": "장나라·김혜윤 '굿파트너2' 첫방 8.4%…시즌1 넘었다",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-20T23:46:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16281903"
     },
     {
-     "title": "‘굿파트너’ 시즌1 첫방보다 높다‥시즌2 시청률 8.4%로 시작",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-20T23:12:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001189807"
+     "title": "장나라·김혜윤 첫 맞대결 통했다…‘굿파트너2’ 8.4%로 굿스타트 [MK★...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-20T23:42:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001147897"
     }
    ]
   },
   {
    "keyword": "김정은 건설현장 시찰",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 7,
+   "articles90": 12,
+   "recent20": 2,
+   "press": 9,
    "firstArticleAt": "2026-11-20T22:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "김정은, 교구비품·기자재공장 건설 현장 시찰",
+     "press": "donga.com",
+     "publishedAt": "2026-11-20T23:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764118?sid=100"
+    },
+    {
+     "title": "트럼프 대화제의 외면하고 교육기자재 공장 간 김정은",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-20T23:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002833291?sid=100"
+    },
+    {
      "title": "김정은, 북·미 회동 불발 뒤 교육공장으로…내정 집중",
      "press": "khan.co.kr",
      "publishedAt": "2026-11-20T23:27:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/032/0003484100?sid=100"
-    },
-    {
-     "title": "김정은, 트럼프 러브콜 외면하고 교육공장 시찰…내정 행보 이어가",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-20T23:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001206376?sid=104"
-    },
-    {
-     "title": "김정은, 평양 교구비품·교육기자재공장 건설장 시찰…\"교육혁명 성공 ...",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-20T23:14:00.000Z",
-     "link": "https://www.ajunews.com/view/20261121080938853"
-    }
-   ]
-  },
-  {
-   "keyword": "무궁화호",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-20T22:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "경부선 소정리역서 화물열차 탈선…새마을·무궁화호 운행 중단(종합)",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-20T23:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005444374?sid=102"
-    },
-    {
-     "title": "경부선 소정리역서 화물열차 탈선…새마을·무궁화호 운행 중지(종합)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-20T23:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014337001?sid=101"
-    },
-    {
-     "title": "경부선 소정리역 화물열차 탈선…새마을·무궁화호 운행 중지",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-20T23:13:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085104"
     }
    ]
   },
@@ -146,15 +81,21 @@
    "sources": [
     "daum"
    ],
-   "articles90": 5,
+   "articles90": 6,
    "recent20": 3,
-   "press": 5,
+   "press": 6,
    "firstArticleAt": "2026-11-20T22:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "맨살 드러난 드레스 입고 '덜덜'…최미나수, 인터뷰 모습 갑론을박",
+     "title": "“옷 좀 입혀라” 최미나수, 강추위에도 드레스 하나 입고 야외 진행 ‘...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-20T23:42:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005643406"
+    },
+    {
+     "title": "최미나수, 노출 드레스 입고 '몸 덜덜'...김연경 \"괜찮냐\"",
      "press": "mt.co.kr",
      "publishedAt": "2026-11-20T23:37:00.000Z",
      "link": "https://m.entertain.naver.com/article/008/0005444377"
@@ -164,118 +105,15 @@
      "press": "sports.khan.co.kr",
      "publishedAt": "2026-11-20T23:32:00.000Z",
      "link": "https://m.entertain.naver.com/article/144/0001150984"
-    },
-    {
-     "title": "\"얼어 죽으라는 건가?\"…최미나수, '등 훤히 드러난 드레스' 입고 사시나...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-20T23:28:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004126951"
-    }
-   ]
-  },
-  {
-   "keyword": "손흥민 MLS 4위 연봉",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-20T22:14:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘오피셜’ 공식발표, ‘韓 대표팀 주장’ 손흥민 MLS에서 149억 받는데...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-20T23:25:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/477/0000640164"
-    },
-    {
-     "title": "[오피셜] 손흥민 충격 공식발표...'150억' MLS 연봉 2위 자리 뺏겼다, '2...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-20T22:37:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/076/0004468420"
-    },
-    {
-     "title": "손흥민 올해 연봉 150억…메시·레반도프스키·그리즈만 이어 MLS 전체 4...",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-20T22:14:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1138971"
-    }
-   ]
-  },
-  {
-   "keyword": "퇴교 시험지 부정행위",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-20T22:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "공사 생도, 휴대전화로 시험지 불법 촬영해 적발…퇴교 처분",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-20T23:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009302428?sid=100"
-    },
-    {
-     "title": "'명예시험' 공사 생도, 스마트폰으로 시험지 촬영…퇴교 처분",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-20T22:34:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=783562"
-    },
-    {
-     "title": "시험지 스마트폰으로 찍었다…공사 생도 부정행위 퇴교",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-20T22:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404686?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "김신영 남자들의 직각어깨",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-20T22:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"심권호 아닙니다\" 김신영, 수영복 자태 공개…남성들도 탐낸 '태평양 직...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-20T23:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004126946"
-    },
-    {
-     "title": "출발도 안 한 김신영, 수영 잘한다는 던에 “웃통을 벗고 계시잖아”",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-20T23:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001147892"
-    },
-    {
-     "title": "김신영, 수영복 입자 ‘직각 어깨’ 자랑…전현무 “남자들이 탐내” (...",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-20T22:32:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1795213800531304010"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 835,
-  "matched": 508,
-  "avgLeadMin": 629,
+  "flagged": 831,
+  "matched": 505,
+  "avgLeadMin": 630,
   "recent": [
    {
     "keyword": "김민재",
