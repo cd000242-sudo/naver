@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T00:15:05.680Z",
+ "builtAt": "2026-11-20T00:25:09.089Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 21,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "뉴욕증시 급락",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 51,
-   "recent20": 10,
-   "press": 43,
-   "firstArticleAt": "2026-11-19T22:46:00.000Z",
+   "articles90": 55,
+   "recent20": 20,
+   "press": 47,
+   "firstArticleAt": "2026-11-19T22:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'앤트로픽 쇼크'… 코스피 3%대 급락 '오천피' 붕괴, '검은 금요일'",
-     "press": "biz.newdaily.co.kr",
-     "publishedAt": "2026-11-20T00:14:00.000Z",
-     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/20/2026112050056.html"
+     "title": "코스피, 반도체 약세에 4% 급락 출발...다시 5000피 붕괴",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-20T00:22:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261120500013"
     },
     {
-     "title": "코스피, 3%대 급락해 4900선…삼성전자·SK하이닉스 동반 약세",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-20T00:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005356219?sid=101"
+     "title": "[특징주] 앤트로픽 수급 쏠림⋯삼성전자·SK하이닉스 '급락'",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-20T00:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001076857?sid=101"
     },
     {
-     "title": "[개장 시황] 코스피, 하락 출발…미국 반도체 급락 여파",
-     "press": "fieldnews.kr",
-     "publishedAt": "2026-11-20T00:12:00.000Z",
-     "link": "http://www.fieldnews.kr/news/articleView.html?idxno=33241"
+     "title": "코스피, 다시 5000선 붕괴···4%대 급락 출발",
+     "press": "enewstoday.co.kr",
+     "publishedAt": "2026-11-20T00:21:00.000Z",
+     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2494969"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 40,
+   "articles90": 44,
    "recent20": 16,
-   "press": 31,
-   "firstArticleAt": "2026-11-19T23:18:00.000Z",
-   "exclusive": true,
-   "capped": false,
+   "press": 34,
+   "firstArticleAt": "2026-11-19T23:32:00.000Z",
+   "exclusive": false,
+   "capped": true,
    "samples": [
     {
-     "title": "구글 블루 오리진과 손잡았다…2029년 AI 데이터센터 우주로 쏜다",
-     "press": "digitaltoday.co.kr",
-     "publishedAt": "2026-11-20T00:14:00.000Z",
-     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=716910"
+     "title": "젠슨 황은 왜 무너졌나…80년 반도체 전쟁이 드러낸 AI 제국의 약점",
+     "press": "betanews.net",
+     "publishedAt": "2026-11-20T00:24:00.000Z",
+     "link": "https://www.betanews.net/article/view/beta202611200046"
     },
     {
-     "title": "“근로자 16만 6000명인데 119센터 전무”…이인식 서울시의원, ‘가산1...",
-     "press": "megaeconomy.co.kr",
-     "publishedAt": "2026-11-20T00:12:00.000Z",
-     "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065571515923941"
+     "title": "영진전문대 AI컴퓨터보안과, IT 인프라 및 사이버보안 분야 실무형 전문...",
+     "press": "newsfreezone.co.kr",
+     "publishedAt": "2026-11-20T00:24:00.000Z",
+     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=720402"
     },
     {
-     "title": "타임X AI 주가, 상한가... 왜?",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-20T00:10:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1194386"
+     "title": "포스코, AI 데이터센터 겨냥 '전자파 방패' 꺼냈다…포스맥 쉴드 차폐율...",
+     "press": "snmnews.com",
+     "publishedAt": "2026-11-20T00:24:00.000Z",
+     "link": "http://www.snmnews.com/news/articleView.html?idxno=577683"
     }
    ]
   },
@@ -80,7 +80,7 @@
     "nate"
    ],
    "articles90": 24,
-   "recent20": 3,
+   "recent20": 2,
    "press": 20,
    "firstArticleAt": "2026-11-19T22:56:00.000Z",
    "exclusive": true,
@@ -112,30 +112,94 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 21,
-   "recent20": 13,
-   "press": 17,
-   "firstArticleAt": "2026-11-19T23:41:00.000Z",
+   "articles90": 20,
+   "recent20": 8,
+   "press": 18,
+   "firstArticleAt": "2026-11-19T23:54:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "전현무, 독립유공자 후손 위한 기부금→유기견 봉사까지 '선행' 눈길(사...",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-20T00:24:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=109996170895"
+    },
+    {
+     "title": "'삼각봉 14.5㎝ 눈' 한라산 탐방 통제…곳곳 강풍 피해도",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-20T00:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404461?sid=102"
+    },
+    {
+     "title": "눈길에 강한 사계절용 '올 웨더'…넥센타이어 구원투수 될까",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-20T00:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006412959?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "한덕수 대법원 선고",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 16,
+   "recent20": 6,
+   "press": 16,
+   "firstArticleAt": "2026-11-19T23:00:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "대법 \"계엄은 위헌·위법\"…한덕수 파기환송, 계엄 '전'과 '후'에서 판단...",
+     "press": "theopiniontimes.news",
+     "publishedAt": "2026-11-20T00:22:00.000Z",
+     "link": "https://theopiniontimes.news/%eb%8c%80%eb%b2%95-%ea%b3%84%ec%97%84%ec%9d%80-%ec%9c%84%ed%97%8c%c2%b7%ec%9c%84%eb%b2%95%ed%95%9c%eb%8d%95%ec%88%98-%ed%8c%8c%ea%b8%b0%ed%99%98%ec%86%a1-%ea%b3%84%ec%97%84-%ec%a0%84/"
+    },
+    {
+     "title": "5·18재단 이사장, 한덕수 파기환송에 \"조희대 대법원장 탄핵감\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-20T00:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009300599?sid=102"
+    },
+    {
+     "title": "대법, 한덕수 '내란 가담' 인정···\"국무회의 건의는 무죄\" 징역 15년 ...",
+     "press": "ziksir.com",
+     "publishedAt": "2026-11-20T00:16:00.000Z",
+     "link": "https://www.ziksir.com/news/articleView.html?idxno=154086"
+    }
+   ]
+  },
+  {
+   "keyword": "50대 남성 10대 살해",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 16,
+   "recent20": 0,
+   "press": 16,
+   "firstArticleAt": "2026-11-19T23:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "전남광주 내일까지 비·눈…강한 바람에 체감온도 '뚝'",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-20T00:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000121814?sid=103"
+     "title": "'아들 성범죄 피해자' 살해 50대 여전히 묵묵부답...공소청 구속송치",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-20T00:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002435496?sid=102"
     },
     {
-     "title": "[동심의 창] 눈 오는 밤",
-     "press": "kmaeil.com",
-     "publishedAt": "2026-11-20T00:10:00.000Z",
-     "link": "https://www.kmaeil.com/news/articleView.html?idxno=659117"
+     "title": "‘성북 10대 살해’ 50대 남성 구속 송치",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-20T00:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004010747?sid=102"
     },
     {
-     "title": "[날씨]당분간 추위 이어져…모레 새벽까지 서쪽지역 비 또는 눈",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-20T00:08:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4119739"
+     "title": "'10대 소녀 살해' 50대 남성 공소청 구속송치",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-20T00:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928075?sid=102"
     }
    ]
   },
@@ -144,10 +208,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 3,
-   "press": 14,
-   "firstArticleAt": "2026-11-19T22:53:00.000Z",
+   "articles90": 13,
+   "recent20": 0,
+   "press": 13,
+   "firstArticleAt": "2026-11-19T23:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -172,34 +236,34 @@
    ]
   },
   {
-   "keyword": "LPGA 최종전 공동 선두",
+   "keyword": "수능 난이도",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 16,
+   "articles90": 9,
    "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-19T22:49:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-19T23:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "LPGA CME그룹 투어 챔피언십 첫날 김아림 선두, 유해란 최혜진 이소미 공...",
-     "press": "smartbizn.com",
-     "publishedAt": "2026-11-20T00:06:00.000Z",
-     "link": "https://www.smartbizn.com/news/articleView.html?idxno=160055"
+     "title": "2027학년도 수능 국어 1등급컷 최대 6점 상승 전망-상위권 경쟁 수학이 ...",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-20T00:14:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95602"
     },
     {
-     "title": "김아림, LPGA 투어 시즌 최종전 투어 챔피언십 첫날 공동 1위",
-     "press": "viva100.com",
+     "title": "2027 수능, 상위권 당락 '수학'이 가를 것으로 예상",
+     "press": "starnewsk.com",
      "publishedAt": "2026-11-20T00:06:00.000Z",
-     "link": "https://www.viva100.com/article/20261120500055"
+     "link": "http://www.starnewsk.com/news/articleView.html?idxno=61199"
     },
     {
-     "title": "김아림, LPGA 시즌 최종전 투어 챔피언십 첫날 공동 선두",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-19T23:53:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/396/0000761435"
+     "title": "긴장 속 수능 끝..대입전략 변수는?",
+     "press": "busanmbc.co.kr",
+     "publishedAt": "2026-11-19T23:52:00.000Z",
+     "link": "https://busanmbc.co.kr/01_new/new01_view.asp?idx=291210"
     }
    ]
   },
@@ -208,13 +272,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-19T22:49:00.000Z",
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-19T23:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "트럼프 \"이란 추가 공습, 내년에 결정…우리에겐 시간 있어\"",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-20T00:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001165025?sid=104"
+    },
     {
      "title": "트럼프 \"이란 공격 서두르지 않겠다…새해 시작되면 지켜볼 것\"",
      "press": "dailian.co.kr",
@@ -226,12 +296,6 @@
      "press": "joongangenews.com",
      "publishedAt": "2026-11-19T23:56:00.000Z",
      "link": "https://www.joongangenews.com/news/articleView.html?idxno=565322"
-    },
-    {
-     "title": "이란, 화학·생물무기 의심하는 美에 \"군사공격 구실 만드냐\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-19T23:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009300543?sid=104"
     }
    ]
   },
@@ -261,10 +325,10 @@
      "link": "https://www.nc.press/news/articleView.html?idxno=631446"
     },
     {
-     "title": "오연서, 스토리제이컴퍼니와 동행 계속 “신뢰 바탕 재계약” [공식]",
-     "press": "celuvmedia.com",
+     "title": "오연서, 스토리제이컴퍼니와 재계약…굳건한 신뢰 바탕",
+     "press": "sports.donga.com",
      "publishedAt": "2026-11-19T23:10:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1795129703531236006"
+     "link": "https://m.entertain.naver.com/article/382/0001305828"
     }
    ]
   },
@@ -273,10 +337,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-19T22:50:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-19T23:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -301,12 +365,44 @@
    ]
   },
   {
+   "keyword": "LPGA 최종전 공동 8위",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-19T23:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "유현조, LPGA Q시리즈 최종전 1라운드 공동 8위… 선두와 3타 차",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-20T00:15:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/396/0000761440"
+    },
+    {
+     "title": "무너질 뻔한 유현조, 연속 버디로 반전…LPGA Q시리즈 첫날 공동 8위",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-19T23:29:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/018/0006412909"
+    },
+    {
+     "title": "유현조, LPGA Q시리즈 첫날 공동 8위..선두와 3타 차",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-19T23:05:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/016/0002726021"
+    }
+   ]
+  },
+  {
    "keyword": "파운드리",
    "sources": [
     "google"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-19T23:12:00.000Z",
    "exclusive": false,
@@ -336,8 +432,8 @@
  "hitRate": {
   "days": 7,
   "flagged": 900,
-  "matched": 531,
-  "avgLeadMin": 701,
+  "matched": 529,
+  "avgLeadMin": 691,
   "recent": [
    {
     "keyword": "외국인 국내 주식 순매도",
