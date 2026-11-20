@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T17:27:46.553Z",
+ "builtAt": "2026-11-20T17:37:49.512Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,10 +15,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 7,
+   "articles90": 5,
    "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-20T15:58:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-20T16:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -47,13 +47,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
+   "articles90": 4,
+   "recent20": 1,
+   "press": 3,
    "firstArticleAt": "2026-11-20T16:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "몸 단 혁신당? “오늘(20일) 탄핵안, 내일 표결”…민주당에 조희대 탄...",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-20T17:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002834423?sid=100"
+    },
     {
      "title": "범여권 186명중 150명 찬성 탄핵안 통과땐 대법원장 직무정지",
      "press": "donga.com",
@@ -65,20 +71,14 @@
      "press": "donga.com",
      "publishedAt": "2026-11-20T16:41:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/020/0003764065?sid=100"
-    },
-    {
-     "title": "특검도 수긍한 판결…민주당선 탄핵 당론",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-20T16:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/353/0000057355?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 827,
-  "matched": 504,
+  "flagged": 825,
+  "matched": 502,
   "avgLeadMin": 656,
   "recent": [
    {
