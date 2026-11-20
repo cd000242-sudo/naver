@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T19:58:35.058Z",
+ "builtAt": "2026-11-20T20:08:38.232Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,73 +11,42 @@
  "measured": 26,
  "candidates": [
   {
-   "keyword": "트럼프",
+   "keyword": "한파",
    "sources": [
-    "signal.bz"
-   ],
-   "articles90": 29,
-   "recent20": 7,
-   "press": 17,
-   "firstArticleAt": "2026-11-20T18:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"트럼프, 우크라 종전협상 내년 1월 초까지 타결 원해\"",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-20T19:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001537083?sid=104"
-    },
-    {
-     "title": "트럼프 \"시진핑·푸틴과의 환상적 관계가 미국을 안전하게 지켜\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-20T19:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002435975?sid=104"
-    },
-    {
-     "title": "트럼프 \"금리 너무 높아…매우 정치적인 연준 때문\"(상보)",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-20T19:46:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445830"
-    }
-   ]
-  },
-  {
-   "keyword": "연준",
-   "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 5,
+   "articles90": 3,
    "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-20T19:19:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-20T19:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "S&P500 10% 조정에도 연준은 물가 우선 기조",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-20T19:52:00.000Z",
-     "link": "https://www.tokenpost.kr/news/economy/441770"
+     "title": "'아침 -9도' 경기북부 냉동고 한파…\"강풍 맹위\" 체감 뚝",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-20T20:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014336934?sid=102"
     },
     {
-     "title": "트럼프 \"금리 너무 높아…매우 정치적인 연준 때문\"(상보)",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-20T19:46:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445830"
+     "title": "[오늘의 날씨] 경기(21일, 토)…아침 영하 9도 '한파'",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-20T20:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009302306?sid=102"
     },
     {
-     "title": "美연준 이사, 금리 추가 인상 필요성 강조…트럼프는 \"금리 너무 높아\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-20T19:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928385?sid=104"
+     "title": "한덕수 파기환송에 조희대 탄핵 추진까지… 국민의힘 '한파' 장외투쟁",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-20T19:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000966886?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 825,
+  "flagged": 826,
   "matched": 501,
   "avgLeadMin": 657,
   "recent": [
