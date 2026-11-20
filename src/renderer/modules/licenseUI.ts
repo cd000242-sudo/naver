@@ -4,7 +4,7 @@
 // ═══════════════════════════════════════════════════════════════════
 
 import { toastManager } from '../utils/uiManagers.js';
-import { initAccountSettings, onAccountLogin, onAccountLogout } from './accountSettingsManager.js';
+import { initAccountSettings, markAccountSettingsReady, onAccountLogin, onAccountLogout } from './accountSettingsManager.js';
 import { FREE_TRIAL_DAILY_PUBLISH_LIMIT } from '../../freeTrialPolicy.js';
 import { collectWorkStorageKeys } from './globalResetPlan.js';
 
@@ -678,6 +678,8 @@ export async function initLicenseModal(): Promise<void> {
                 console.log(`[LicenseModal] ✅ 계정별 세팅 로드 완료: ${acctUserId}`);
             }
 
+            // Readers of account-scoped keys do not wait for the admin panel call (network).
+            markAccountSettingsReady();
             // 관리자 패널 연동
             await connectToAdminPanel();
         } else {
@@ -694,6 +696,9 @@ export async function initLicenseModal(): Promise<void> {
         if (licenseStatusText) {
             licenseStatusText.textContent = `오류: ${(error as Error).message}`;
         }
+    } finally {
+        // No user, an unverified license and a failed lookup all end the wait too (see whenAccountSettingsReady).
+        markAccountSettingsReady();
     }
 
     // 인증 버튼

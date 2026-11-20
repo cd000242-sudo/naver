@@ -474,7 +474,7 @@ import {
   }
 })();
 
-import { onAccountLogout as accountLogout } from './modules/accountSettingsManager.js';
+import { onAccountLogout as accountLogout, whenAccountSettingsReady } from './modules/accountSettingsManager.js';
 import { runWhenIdle } from './utils/idleInit.js';
 import { initShoppingConnectObserver } from './utils/shoppingConnectEvents.js';
 
@@ -8566,7 +8566,18 @@ async function askAutosaveRecoveryChoice(timeSinceMinutes: number): Promise<bool
 }
 
 async function restoreAutosavedContent(): Promise<void> {
-  const saved = loadAutosavedContent();
+  // [2026-11-20] The autosave key is account-scoped. Reading it before the license lookup has set the user id finds
+  // nothing, and the recovery prompt was silently skipped on a slow start.
+  const accountLookupDone = await whenAccountSettingsReady();
+  let saved = loadAutosavedContent();
+  if (!accountLookupDone) {
+    console.warn('[Autosave] license lookup did not finish within the wait; recovery check used the current scope');
+    if (!saved) {
+      // Nothing under the current scope: look once more when the lookup does finish, so the prompt is late, not lost.
+      await whenAccountSettingsReady(0);
+      saved = loadAutosavedContent();
+    }
+  }
   if (!saved) return;
   const restoredContent = saved.structuredContent
     ? {

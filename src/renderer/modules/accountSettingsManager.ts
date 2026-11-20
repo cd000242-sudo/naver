@@ -81,6 +81,34 @@ export function setCurrentUserId(userId: string): void {
 }
 
 // ============================================
+// Startup account lookup signal
+// ============================================
+
+// [2026-11-20] Account-scoped keys (autosave, backups) can only be read correctly after the license lookup has set
+// the user id. Startup code that reads such a key waits for this signal; the timeout keeps a hung lookup from
+// blocking it forever (then it reads with whatever scope is active, which is the previous behaviour).
+const ACCOUNT_SETTINGS_READY_TIMEOUT_MS = 20000;
+let _resolveAccountSettingsReady: () => void = () => { /* replaced by the promise executor below */ };
+const _accountSettingsReady = new Promise<void>((resolve) => { _resolveAccountSettingsReady = resolve; });
+
+/** Called once the startup license lookup has finished, whether or not it found a user. Safe to call again. */
+export function markAccountSettingsReady(): void {
+    _resolveAccountSettingsReady();
+}
+
+/**
+ * Resolves true once the startup license lookup has finished, or false when timeoutMs passed first.
+ * timeoutMs <= 0 waits for the lookup with no limit. Never rejects.
+ */
+export function whenAccountSettingsReady(timeoutMs: number = ACCOUNT_SETTINGS_READY_TIMEOUT_MS): Promise<boolean> {
+    if (timeoutMs <= 0) return _accountSettingsReady.then(() => true);
+    return new Promise<boolean>((resolve) => {
+        const timer = setTimeout(() => resolve(false), timeoutMs);
+        void _accountSettingsReady.then(() => { clearTimeout(timer); resolve(true); });
+    });
+}
+
+// ============================================
 // 키 네임스페이싱
 // ============================================
 
@@ -196,6 +224,8 @@ export async function onAccountLogin(userId: string): Promise<void> {
     if (!_isProxyActive) {
         activateLocalStorageProxy();
     }
+    // Scoped keys are readable from here on; the steps below (config, server sync) must not hold readers back.
+    markAccountSettingsReady();
 
     // 3. 메인 프로세스에 userId 전달하여 계정별 설정 파일 로드
     try {
