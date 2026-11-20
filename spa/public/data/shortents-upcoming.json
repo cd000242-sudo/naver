@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T15:57:15.200Z",
+ "builtAt": "2026-11-20T16:07:18.810Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,141 +8,76 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "민주유공자법 본회의 통과",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-20T14:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "국보법 위반자도 뉘우치면 인정? ‘운동권 특혜법’ 통과",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-20T15:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004010925?sid=100"
-    },
-    {
-     "title": "민주유공자법 26년 만에 국회 통과…635명 등록·예우 추진",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-20T15:18:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3758843"
-    },
-    {
-     "title": "[사설] 누가 뽑고 누가 뽑히는지 모르는 민주유공자법, 이래도 되나",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-20T15:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004010850?sid=110"
-    }
-   ]
-  },
-  {
-   "keyword": "푸틴 키이우 교량 공격",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-20T14:31:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "푸틴, 미중 정상과 첫 3자 회담…우크라이나 합의는 없어",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-20T15:30:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3758848"
-    },
-    {
-     "title": "푸틴, 미중러 회담 직후 키이우 교량 공격…\"역대 최대 규모\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-20T14:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404661?sid=104"
-    },
-    {
-     "title": "푸틴, 트럼프·시진핑 회담 끝나자마자 \"우크라이나 총공격\"",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-20T14:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000521775?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "김신영 수영복 자태 공개",
+   "keyword": "김종국 소속사 사무실",
    "sources": [
     "daum"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-20T14:32:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-20T14:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"나 아니야\" 김신영, 웃통 벗은 아저씨로 오해 받자 발끈…수영 2주차의...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-20T15:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409054"
-    },
-    {
-     "title": "김신영, 군살 제로 수영복 자태 공개 ('나 혼자 산다')",
+     "title": "김종국 뒤풀이 메뉴에 이서진 황당…닭가슴살 내놓자 “소주 없니?” (...",
      "press": "mhnse.com",
-     "publishedAt": "2026-11-20T14:57:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000492075"
+     "publishedAt": "2026-11-20T15:57:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000492080"
     },
     {
-     "title": "\"직각 어깨 깎고파\" 김신영, 수영복 자태 최초 공개",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-20T14:45:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005643353"
+     "title": "이서진, '월세 2억' 김종국 소속사 사무실에 감탄했는데…\"비데는 없네...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-20T15:37:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002082667"
+    },
+    {
+     "title": "‘월세만 2억’ 지드래곤→김종국 초호화 소속사에‥금수저 이서진도 “...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-20T15:27:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001189776"
     }
    ]
   },
   {
    "keyword": "엔비디아",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 3,
-   "recent20": 0,
+   "articles90": 5,
+   "recent20": 2,
    "press": 3,
    "firstArticleAt": "2026-11-20T15:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "삼전 7만, 하닉 20만원 전망한 전문가…\"엔비디아, 장기적으로 경쟁력 ...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-20T16:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014336897?sid=101"
+    },
+    {
+     "title": "나스닥 2.21% 급락…앤트로픽 12%·엔비디아 6% 하락, 반도체주 초토화,...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-20T15:58:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629278"
+    },
+    {
      "title": "'젠슨 황' 복귀 가능성 열어두면 독?…엔비디아가 선 그은 이유는",
      "press": "newsis.com",
      "publishedAt": "2026-11-20T15:15:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014336893?sid=104"
-    },
-    {
-     "title": "엔비디아 시총 3.4조달러…구글에 4위 내줬다는 보도",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-20T15:12:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/441642"
-    },
-    {
-     "title": "[속보] 엔비디아 3.89%·앤트로픽 6.04% 하락...초반 엇갈린 흐름",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-20T15:06:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629263"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 822,
+  "flagged": 823,
   "matched": 505,
   "avgLeadMin": 672,
   "recent": [
