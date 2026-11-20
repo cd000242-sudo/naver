@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T16:07:18.810Z",
+ "builtAt": "2026-11-20T16:17:22.409Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,10 +15,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-20T14:42:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-20T14:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -47,13 +47,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 5,
-   "recent20": 2,
+   "articles90": 6,
+   "recent20": 3,
    "press": 3,
    "firstArticleAt": "2026-11-20T15:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "스콧 베선트, 미·중 협상서 젠슨 황·엔비디아 논의 없었다",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-20T16:12:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/441673"
+    },
     {
      "title": "삼전 7만, 하닉 20만원 전망한 전문가…\"엔비디아, 장기적으로 경쟁력 ...",
      "press": "newsis.com",
@@ -65,12 +71,6 @@
      "press": "cbci.co.kr",
      "publishedAt": "2026-11-20T15:58:00.000Z",
      "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629278"
-    },
-    {
-     "title": "'젠슨 황' 복귀 가능성 열어두면 독?…엔비디아가 선 그은 이유는",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-20T15:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014336893?sid=104"
     }
    ]
   }
