@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T22:49:51.214Z",
+ "builtAt": "2026-11-20T22:59:54.973Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 24,
+   "articles90": 31,
    "recent20": 10,
-   "press": 22,
+   "press": 26,
    "firstArticleAt": "2026-11-20T22:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보]경부선 소정리역서 화물열차 탈선…새마을·무궁화호 운행 차질",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-20T22:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004212309?sid=102"
+     "title": "세종 소정리역서 화물열차 5량 탈선…경부선 일반열차 운행 중단",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-20T22:58:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=783569"
     },
     {
-     "title": "[속보] 경부선 소정리역서 화물열차 탈선…\"수험생 다른 교통수단 이용...",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-20T22:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652460?sid=102"
+     "title": "경부선 소정리역서 화물열차 탈선…“일반열차 운행 중단”",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-20T22:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484094?sid=102"
     },
     {
-     "title": "[속보]경부선 소정리역서 화물열차 탈선…전차선 단전·일반열차 지연",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-20T22:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003157863?sid=102"
+     "title": "[속보] 경부선 세종 소정리역서 화물열차 탈선…전차선 단전·일반열차...",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-20T22:52:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/326018/?sc=Naver"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 18,
-   "recent20": 6,
-   "press": 12,
-   "firstArticleAt": "2026-11-20T21:20:00.000Z",
+   "articles90": 17,
+   "recent20": 5,
+   "press": 11,
+   "firstArticleAt": "2026-11-20T21:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "비트코인 ETF 정규장 사이 41.5시간…CME 선물 거래 가능",
+     "title": "비트코인, 20일(현지시간) 장중 7% 넘게 하락해 7월 이후 최저",
      "press": "tokenpost.kr",
-     "publishedAt": "2026-11-20T22:44:00.000Z",
-     "link": "https://www.tokenpost.kr/news/cryptocurrency/441857"
+     "publishedAt": "2026-11-20T22:54:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/441866"
+    },
+    {
+     "title": "비트코인 4달 만에 6만달러 아래로…2022년 이후 최장 약세",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-20T22:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000545039?sid=104"
     },
     {
      "title": "비트코인 4개월 만에 6만달러 붕괴⋯“저가매수 기회” vs “75% 조정”",
      "press": "etoday.co.kr",
      "publishedAt": "2026-11-20T22:44:00.000Z",
      "link": "https://www.etoday.co.kr/news/view/2651158"
-    },
-    {
-     "title": "비트코인 4달만에 도로 6만달러 아래로…2022년 이후 최장 약세",
-     "press": "tfmedia.co.kr",
-     "publishedAt": "2026-11-20T22:44:00.000Z",
-     "link": "https://www.tfmedia.co.kr/news/article.html?no=209085"
     }
    ]
   },
@@ -80,7 +80,7 @@
     "daum"
    ],
    "articles90": 10,
-   "recent20": 4,
+   "recent20": 0,
    "press": 9,
    "firstArticleAt": "2026-11-20T21:36:00.000Z",
    "exclusive": false,
@@ -109,13 +109,12 @@
   {
    "keyword": "김민재",
    "sources": [
-    "signal.bz",
-    "google"
+    "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-20T21:26:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-20T21:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -140,44 +139,12 @@
    ]
   },
   {
-   "keyword": "손흥민 MLS 4위 연봉",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-20T21:27:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오피셜] 손흥민 충격 오피셜 발표...'150억' MLS 연봉 2위 자리 뺏겼다...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-20T22:37:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/076/0004468420"
-    },
-    {
-     "title": "손흥민 올해 연봉 150억…메시·레반도프스키·그리즈만 이어 MLS 전체 4...",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-20T22:14:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1138971"
-    },
-    {
-     "title": "손흥민 149억원이나 받는데 4위?…MLS 연봉 ‘톱3’ 누굴까",
-     "press": "segye.com",
-     "publishedAt": "2026-11-20T22:06:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/022/0004176924"
-    }
-   ]
-  },
-  {
    "keyword": "포스코",
    "sources": [
     "google"
    ],
    "articles90": 5,
-   "recent20": 3,
+   "recent20": 2,
    "press": 4,
    "firstArticleAt": "2026-11-20T21:30:00.000Z",
    "exclusive": true,
@@ -204,43 +171,43 @@
    ]
   },
   {
-   "keyword": "항공",
+   "keyword": "손흥민 MLS 4위 연봉",
    "sources": [
-    "google"
+    "nate"
    ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-20T21:28:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-20T22:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[하늘길] 11월 4주, 수능 끝! 할인 받고 여행 시작!…제주항공 외 4가지...",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-20T22:00:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5085865"
+     "title": "[오피셜] 손흥민 충격 오피셜 발표...'150억' MLS 연봉 2위 자리 뺏겼다...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-20T22:37:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/076/0004468420"
     },
     {
-     "title": "\"유커 다시 온다\"… 한·중 FTA 훈풍 탄 항공업계, 중국 노선 증편·모객...",
-     "press": "it.chosun.com",
-     "publishedAt": "2026-11-20T22:00:00.000Z",
-     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000001539"
+     "title": "손흥민 올해 연봉 150억…메시·레반도프스키·그리즈만 이어 MLS 전체 4...",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-20T22:14:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1138971"
     },
     {
-     "title": "취항도 못하고 폐업 위기 ‘시리우스항공’ 대표, 임금·퇴직금 체불해...",
+     "title": "손흥민 149억원이나 받는데 4위?…MLS 연봉 ‘톱3’ 누굴까",
      "press": "segye.com",
-     "publishedAt": "2026-11-20T21:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004176917?sid=102"
+     "publishedAt": "2026-11-20T22:06:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/022/0004176924"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 835,
-  "matched": 508,
-  "avgLeadMin": 645,
+  "flagged": 833,
+  "matched": 507,
+  "avgLeadMin": 643,
   "recent": [
    {
     "keyword": "한파",
