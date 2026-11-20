@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T16:47:33.247Z",
+ "builtAt": "2026-11-20T16:57:36.345Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,10 +16,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-20T15:18:00.000Z",
+   "articles90": 8,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-20T15:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -44,44 +44,12 @@
    ]
   },
   {
-   "keyword": "민주유공자법 국회 통과",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-20T15:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "與, 선정 기준 논란 ‘민주유공자법’ 강행 처리",
-     "press": "donga.com",
-     "publishedAt": "2026-11-20T16:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764068?sid=100"
-    },
-    {
-     "title": "[사설] 민주유공자법, 심사 투명성 확보해야",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-20T16:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001886532?sid=110"
-    },
-    {
-     "title": "[사진] ‘민주유공자법’ 통과 자축?",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-20T16:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/353/0000057357?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "엔비디아",
    "sources": [
     "google"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 1,
    "press": 5,
    "firstArticleAt": "2026-11-20T15:58:00.000Z",
    "exclusive": false,
@@ -108,34 +76,34 @@
    ]
   },
   {
-   "keyword": "후티 사우디 공습 예고",
+   "keyword": "민주유공자법 국회 통과",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 4,
-   "recent20": 0,
+   "articles90": 5,
+   "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-20T15:20:00.000Z",
+   "firstArticleAt": "2026-11-20T15:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "후티 반군, 이번엔 사우디 금융지구·발전소 공격 예고",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-20T16:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001206349?sid=104"
+     "title": "與, 선정 기준 논란 ‘민주유공자법’ 강행 처리",
+     "press": "donga.com",
+     "publishedAt": "2026-11-20T16:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764068?sid=100"
     },
     {
-     "title": "후티 반군, 사우디 항구·발전소·금융지구 대대적 공습 예고…\"민간인...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-20T15:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005607566?sid=104"
+     "title": "[사설] 민주유공자법, 심사 투명성 확보해야",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-20T16:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001886532?sid=110"
     },
     {
-     "title": "후티 반군, 사우디 금융지구 등 민간 시설 대대적 공습 예고",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-20T15:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014336894?sid=104"
+     "title": "[사진] ‘민주유공자법’ 통과 자축?",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-20T16:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/353/0000057357?sid=102"
     }
    ]
   },
@@ -145,7 +113,7 @@
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-20T15:30:00.000Z",
    "exclusive": false,
@@ -172,34 +140,34 @@
    ]
   },
   {
-   "keyword": "김종국 소속사 사무실",
+   "keyword": "후티 사우디 공습 예고",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-20T15:27:00.000Z",
+   "firstArticleAt": "2026-11-20T15:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김종국 뒤풀이 메뉴에 이서진 황당…닭가슴살 내놓자 “소주 없니?” (...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-20T15:57:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000492080"
+     "title": "후티 반군, 이번엔 사우디 금융지구·발전소 공격 예고",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-20T16:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001206349?sid=104"
     },
     {
-     "title": "이서진, '월세 2억' 김종국 소속사 사무실에 감탄했는데…\"비데는 없네...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-20T15:37:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002082667"
+     "title": "후티 반군, 사우디 항구·발전소·금융지구 대대적 공습 예고…\"민간인...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-20T15:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005607566?sid=104"
     },
     {
-     "title": "‘월세만 2억’ 지드래곤→김종국 초호화 소속사에‥금수저 이서진도 “...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-20T15:27:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001189776"
+     "title": "후티 반군, 사우디 금융지구 등 민간 시설 대대적 공습 예고",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-20T15:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014336894?sid=104"
     }
    ]
   }
