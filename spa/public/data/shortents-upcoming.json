@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T15:47:12.006Z",
+ "builtAt": "2026-11-20T15:57:15.200Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,15 +8,47 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 25,
  "candidates": [
+  {
+   "keyword": "민주유공자법 본회의 통과",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-20T14:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "국보법 위반자도 뉘우치면 인정? ‘운동권 특혜법’ 통과",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-20T15:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004010925?sid=100"
+    },
+    {
+     "title": "민주유공자법 26년 만에 국회 통과…635명 등록·예우 추진",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-20T15:18:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3758843"
+    },
+    {
+     "title": "[사설] 누가 뽑고 누가 뽑히는지 모르는 민주유공자법, 이래도 되나",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-20T15:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004010850?sid=110"
+    }
+   ]
+  },
   {
    "keyword": "푸틴 키이우 교량 공격",
    "sources": [
     "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-20T14:31:00.000Z",
    "exclusive": false,
@@ -39,71 +71,6 @@
      "press": "news.jtbc.co.kr",
      "publishedAt": "2026-11-20T14:52:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/437/0000521775?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "민주유공자법 본회의 통과",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-20T14:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "민주유공자법 26년 만에 국회 통과…635명 등록·예우 추진",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-20T15:18:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3758843"
-    },
-    {
-     "title": "[사설] 누가 뽑고 누가 뽑히는지 모르는 민주유공자법, 이래도 되나",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-20T15:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004010850?sid=110"
-    },
-    {
-     "title": "‘민주유공자법’ 여권 주도 통과…국힘 “운동권 특혜”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-20T14:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012298505?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "엔비디아",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-20T15:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'젠슨 황' 복귀 가능성 열어두면 독?…엔비디아가 선 그은 이유는",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-20T15:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014336893?sid=104"
-    },
-    {
-     "title": "엔비디아 시총 3.4조달러…구글에 4위 내줬다는 보도",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-20T15:12:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/441642"
-    },
-    {
-     "title": "[속보] 엔비디아 3.89%·앤트로픽 6.04% 하락...초반 엇갈린 흐름",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-20T15:06:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629263"
     }
    ]
   },
@@ -138,12 +105,45 @@
      "link": "https://m.entertain.naver.com/article/109/0005643353"
     }
    ]
+  },
+  {
+   "keyword": "엔비디아",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-20T15:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'젠슨 황' 복귀 가능성 열어두면 독?…엔비디아가 선 그은 이유는",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-20T15:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014336893?sid=104"
+    },
+    {
+     "title": "엔비디아 시총 3.4조달러…구글에 4위 내줬다는 보도",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-20T15:12:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/441642"
+    },
+    {
+     "title": "[속보] 엔비디아 3.89%·앤트로픽 6.04% 하락...초반 엇갈린 흐름",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-20T15:06:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629263"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 824,
-  "matched": 506,
+  "flagged": 822,
+  "matched": 505,
   "avgLeadMin": 672,
   "recent": [
    {
