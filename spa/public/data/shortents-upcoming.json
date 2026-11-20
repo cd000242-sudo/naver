@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T15:06:59.363Z",
+ "builtAt": "2026-11-20T15:17:02.649Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,14 +11,47 @@
  "measured": 24,
  "candidates": [
   {
+   "keyword": "엔비디아",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 4,
+   "press": 4,
+   "firstArticleAt": "2026-11-20T13:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'젠슨 황' 복귀 가능성 열어두면 독?…엔비디아가 선 그은 이유는",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-20T15:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014336893?sid=104"
+    },
+    {
+     "title": "엔비디아 시총 3.4조달러…구글에 4위 내줬다는 보도",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-20T15:12:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/441642"
+    },
+    {
+     "title": "[속보] 엔비디아 3.89%·앤트로픽 6.04% 하락...초반 엇갈린 흐름",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-20T15:06:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629263"
+    }
+   ]
+  },
+  {
    "keyword": "공사 생도 시험지 촬영 퇴교",
    "sources": [
     "nate"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-20T13:37:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-20T13:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -39,38 +72,6 @@
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-20T14:10:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006413371?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "방탄소년단 엔하이픈 대상",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-20T13:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "오사카 달군 '2026 마마 어워즈'…첫날 대상에 BTS·엔하이픈",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-20T14:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016455381?sid=103"
-    },
-    {
-     "title": "방탄소년단·엔하이픈, '2026 마마 어워즈' 첫날 대상…나란히 3관왕",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-20T14:07:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014336850"
-    },
-    {
-     "title": "방탄소년단·엔하이픈, 나란히 대상 영예[2026 MAMA AWARDS]",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-20T13:50:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003489094"
     }
    ]
   },
@@ -107,43 +108,43 @@
    ]
   },
   {
-   "keyword": "컬리 개인정보 유출",
+   "keyword": "방탄소년단 엔하이픈 대상",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-20T13:42:00.000Z",
+   "firstArticleAt": "2026-11-20T13:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "컬리, 해킹으로 1만여명 개인정보 유출…최대 15만원 적립금 보상",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-20T14:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003060283?sid=101"
+     "title": "오사카 달군 '2026 마마 어워즈'…첫날 대상에 BTS·엔하이픈",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-20T14:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016455381?sid=103"
     },
     {
-     "title": "컬리 큐레이터 1만여명 개인정보 유출… 주민번호·계좌번호도 포함",
-     "press": "segye.com",
-     "publishedAt": "2026-11-20T13:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004176887?sid=101"
+     "title": "방탄소년단·엔하이픈, '2026 마마 어워즈' 첫날 대상…나란히 3관왕",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-20T14:07:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014336850"
     },
     {
-     "title": "컬리서 1만여명 규모 개인정보 유출…\"손해 발생 시 전액 보상\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-20T13:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004212290?sid=101"
+     "title": "방탄소년단·엔하이픈, 나란히 대상 영예[2026 MAMA AWARDS]",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-20T13:50:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003489094"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 832,
-  "matched": 515,
-  "avgLeadMin": 676,
+  "flagged": 830,
+  "matched": 512,
+  "avgLeadMin": 677,
   "recent": [
    {
     "keyword": "푸른길 나가야마 한국 사랑 중",
