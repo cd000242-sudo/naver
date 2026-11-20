@@ -16,13 +16,15 @@ type Props = {
     onEdit: () => void;
     onDelete: () => void;
     onVisit: () => void;
+    /** [공유] on the reader's own post: title, summary and address to wherever they choose. */
+    onShare?: () => void;
     /** What [신고] does for this reader (see reportAction); without it a post of someone else can be reported. */
     reportMode?: 'hidden' | 'login' | 'report';
     now?: number;
 };
 
 /** One post: title, author, numbers, body (plain text, line breaks kept), and what the reader can do with it. */
-function PostView({ post, boards, busy = false, onLike, onReport, onEdit, onDelete, onVisit, reportMode, now = Date.now() }: Props) {
+function PostView({ post, boards, busy = false, onLike, onReport, onEdit, onDelete, onVisit, onShare, reportMode, now = Date.now() }: Props) {
     const promo = post.board === 'promo';
     const mode = reportMode ?? reportAction(post, {});
     const photos = useAvatars([post.avatarKey]);
@@ -56,6 +58,7 @@ function PostView({ post, boards, busy = false, onLike, onReport, onEdit, onDele
                 {(post.mine && !post.notice) || !post.likable
                     ? <span className="cm-like cm-like-static"><b>{post.likes}</b> 좋아요</span>
                     : <button type="button" className="cm-like" aria-pressed={post.liked} disabled={busy} onClick={onLike}><b>{post.likes}</b> 좋아요</button>}
+                {post.mine && onShare ? <button type="button" className="cm-act" onClick={onShare}>공유</button> : null}
                 {post.notice ? null : post.mine ? (
                     <>
                         <button type="button" className="cm-act" onClick={onEdit}>수정</button>
