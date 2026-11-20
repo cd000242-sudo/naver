@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T19:28:24.386Z",
+ "builtAt": "2026-11-20T19:38:27.588Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "트럼프",
    "sources": [
-    "google"
+    "signal.bz"
    ],
-   "articles90": 23,
+   "articles90": 28,
    "recent20": 10,
-   "press": 12,
-   "firstArticleAt": "2026-11-20T18:03:00.000Z",
+   "press": 14,
+   "firstArticleAt": "2026-11-20T18:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"트럼프, 우크라 종전 협상 내년 1월 내 타결 원해\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-20T19:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002435965?sid=104"
+     "title": "美연준 이사, 금리 추가 인상 필요성 강조…트럼프는 \"금리 너무 높아\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-20T19:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928385?sid=104"
     },
     {
-     "title": "트럼프 \"미기업, 다른 나라에 데이터센터 지으면 엄청난 세금 부과\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-20T19:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404667?sid=104"
-    },
-    {
-     "title": "트럼프 \"젠슨 황, 사과하고 엔비디아로 돌아갔으면\"",
+     "title": "트럼프 \"해외 데이터센터 짓는 미국 기업에 엄청난 세금…美에 지어라\"",
      "press": "newspim.com",
-     "publishedAt": "2026-11-20T19:20:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261121000014"
+     "publishedAt": "2026-11-20T19:33:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261121000015"
+    },
+    {
+     "title": "트럼프 \"다른 나라에 데이터센터 건설 시 막대한 세금\"…젠슨 황 복귀 ...",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-20T19:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928384?sid=104"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 3,
-   "recent20": 1,
+   "articles90": 4,
+   "recent20": 3,
    "press": 3,
-   "firstArticleAt": "2026-11-20T18:00:00.000Z",
+   "firstArticleAt": "2026-11-20T18:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "美연준 이사, 금리 추가 인상 필요성 강조…트럼프는 \"금리 너무 높아\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-20T19:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928385?sid=104"
+    },
+    {
+     "title": "트럼프 \"금리가 너무 높은 건 정치적인 연준 탓\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-20T19:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002435968?sid=104"
+    },
     {
      "title": "베센트 \"연준 '빅스텝' 안 해야...월러는 오락가락\"",
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-20T19:19:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002435963?sid=104"
-    },
-    {
-     "title": "투바투 연준, 10년 숙소 생활 끝내고 독립…'나혼산'서 자취 7개월 차 집...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-20T18:24:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16281861"
-    },
-    {
-     "title": "美재무, '빅스텝' 월러 연준 이사 겨냥 \"다소 종잡을 수 없는 행보\"",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-20T18:00:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445826"
     }
    ]
   }
