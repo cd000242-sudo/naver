@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T22:29:41.654Z",
+ "builtAt": "2026-11-20T22:39:46.760Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 24,
  "candidates": [
   {
-   "keyword": "나스닥 급락",
+   "keyword": "소정리역",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 46,
-   "recent20": 16,
-   "press": 35,
-   "firstArticleAt": "2026-11-20T21:02:00.000Z",
+   "articles90": 22,
+   "recent20": 17,
+   "press": 21,
+   "firstArticleAt": "2026-11-20T22:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"믿었던 AI마저\"…기술주 투매에 나스닥 5% 급락 [뉴욕증시 브리핑]",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-20T22:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005356555?sid=101"
+     "title": "[속보] 경부선 소정리역서 화물열차 탈선…전차선 단전·일반열차 지연",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-20T22:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701742?sid=102"
     },
     {
-     "title": "[지난밤 뉴욕에선] 나스닥 5.28% 급락…다우·S&P500도 조정장",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-20T22:28:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=315879"
+     "title": "[속보] 세종 소정리역서 화물열차 탈선…전차선 단전·열차 운행 차질",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-20T22:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193102?sid=102"
     },
     {
-     "title": "나스닥 5.3% 폭락…AMD·마이크론 13% 급락",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-20T22:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002249434?sid=105"
+     "title": "세종 소정리역서 화물열차 탈선…경부선 새마을·무궁화호 운행 차질",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-20T22:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009302364?sid=102"
     }
    ]
   },
@@ -47,77 +47,84 @@
    "sources": [
     "google"
    ],
-   "articles90": 13,
-   "recent20": 4,
+   "articles90": 16,
+   "recent20": 6,
    "press": 11,
    "firstArticleAt": "2026-11-20T21:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "7주 연속 하락세 탄 비트코인...지난해 고점 대비 '반토막'",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-20T22:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436000?sid=104"
+     "title": "비트코인 6만달러 하회…JP모건 추정 원가와 2만6000달러 이상 차",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-20T22:34:00.000Z",
+     "link": "https://www.tokenpost.kr/news/cryptocurrency/441854"
     },
     {
-     "title": "잇단 악재에 '휘청'…비트코인, 넉 달 만에 6만달러선 붕괴",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-20T22:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001273454?sid=101"
+     "title": "기요사키 “비트코인 매수 대기”…브랜트는 과거 75% 조정 질문",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-20T22:32:00.000Z",
+     "link": "https://www.tokenpost.kr/news/cryptocurrency/441850"
     },
     {
-     "title": "\"내 비트코인 어쩌나\" 6만달러 붕괴…AI주 투매에 암호화폐도 '휘청'",
-     "press": "digitaltoday.co.kr",
-     "publishedAt": "2026-11-20T22:20:00.000Z",
-     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=717229"
+     "title": "[아침 시황] 비트코인 8,152만원, 24시간 3.6% 하락",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-20T22:32:00.000Z",
+     "link": "https://www.tokenpost.kr/news/cryptocurrency/441851"
     }
    ]
   },
   {
-   "keyword": "앤트로픽 이틀째 급락",
+   "keyword": "굿파트너 2",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 7,
-   "recent20": 3,
-   "press": 6,
-   "firstArticleAt": "2026-11-20T21:33:00.000Z",
+   "articles90": 9,
+   "recent20": 4,
+   "press": 8,
+   "firstArticleAt": "2026-11-20T21:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"믿었던 AI마저\"…기술주 투매에 나스닥 5% 급락 [뉴욕증시 브리핑]",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-20T22:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005356555?sid=101"
+     "title": "장나라·김혜윤의 첫 법정 대결 ‘굿파트너2’…8.4% 출발",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-20T22:33:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001305981"
     },
     {
-     "title": "나스닥 5.3% 폭락…AMD·마이크론 13% 급락",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-20T22:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002249434?sid=105"
+     "title": "'굿파트너2' 첫방부터 9.9%! 장나라, 김혜윤과 법정 대결→'박해진 의뢰...",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-20T22:32:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=783561"
     },
     {
-     "title": "앤트로픽, 상장 이틀째 8.5% 급락...장중 공모가 선까지 위협",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-20T22:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002435998?sid=104"
+     "title": "장나라, 법정서 맞붙은 김혜윤 '픽'했다…시즌 2 화려한 서막 ('굿파트너...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-20T22:31:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000785443"
     }
    ]
   },
   {
    "keyword": "김민재",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 5,
+   "articles90": 7,
+   "recent20": 2,
+   "press": 6,
    "firstArticleAt": "2026-11-20T21:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"실수 없이 경기 마쳤다\" 김민재, 20분 뛰고도 '경쟁자' 둘과 같은 평점...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-20T22:33:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/108/0003489126"
+    },
     {
      "title": "‘비상!’ 김민재 ‘교체+20분 활약’ 간판 FW 케인·올리세 부상 교체·...",
      "press": "sports.khan.co.kr",
@@ -129,76 +136,6 @@
      "press": "footballist.co.kr",
      "publishedAt": "2026-11-20T22:00:00.000Z",
      "link": "https://m.sports.naver.com/wfootball/article/436/0000115094"
-    },
-    {
-     "title": "'김민재 교체 출전' 바이에른 뮌헨, '강등권 경쟁' 쾰른과 1-1 무승부",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-20T21:45:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/117/0004126931"
-    }
-   ]
-  },
-  {
-   "keyword": "2026년 11월 21일 운세",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-20T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[AI] 오늘의 띠별 운세...2026.11.21(토요일)",
-     "press": "newsroad.co.kr",
-     "publishedAt": "2026-11-20T21:30:00.000Z",
-     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68157"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 21일 (토) 띠별운세 '느긋한 주말 아침을 누...",
-     "press": "dailypop.kr",
-     "publishedAt": "2026-11-20T21:30:00.000Z",
-     "link": "http://www.dailypop.kr/news/articleView.html?idxno=104280"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 21일 별자리 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-20T21:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413397?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "조희대 탄핵 여론",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-20T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오늘의 신문] 코스피 5%대 급락·수출 1조 달러 돌파…대법원장 탄핵 논...",
-     "press": "kor.theasian.asia",
-     "publishedAt": "2026-11-20T22:06:00.000Z",
-     "link": "http://kor.theasian.asia/archives/422340"
-    },
-    {
-     "title": "“조희대 탄핵은 광기이자 보복”…거리로 나선 야당",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-20T21:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012298538?sid=100"
-    },
-    {
-     "title": "“與 논리면, 내란특검도 탄핵해야”…‘조희대 탄핵’ 당론 발칵",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-20T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003566813?sid=100"
     }
    ]
   },
@@ -208,12 +145,18 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-20T21:00:00.000Z",
+   "firstArticleAt": "2026-11-20T21:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "포스코, 생산부터 사무까지 'AX 혁신' 가속",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-20T22:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001165134?sid=101"
+    },
     {
      "title": "현대제철 발전소 짓고 포스코는 아끼고…철강업계 전력비 전쟁",
      "press": "etoday.co.kr",
@@ -225,22 +168,72 @@
      "press": "segye.com",
      "publishedAt": "2026-11-20T21:30:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/022/0004176920?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "정철원 롯데 트레이드",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-20T21:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'두산→롯데→키움' 정철원 의미심장 작별인사? 아니, 진심이다 \"팔 고...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-20T22:20:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/477/0000640158"
     },
     {
-     "title": "[사회공헌 Pick] 삼표그룹·포스코1%나눔재단, '배리어프리' 나눔과 국가...",
-     "press": "lcnews.co.kr",
-     "publishedAt": "2026-11-20T21:00:00.000Z",
-     "link": "https://www.lcnews.co.kr/news/articleView.html?idxno=211744"
+     "title": "재능만 출중한 정철원, 마지막 인사마저 추했다…임지열과 너무 다른 품...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-20T21:42:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/109/0005643387"
+    },
+    {
+     "title": "정철원 롯데 트레이드…'원수' 언급에 술렁",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-20T21:32:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611210027"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 831,
-  "matched": 505,
-  "avgLeadMin": 648,
+  "flagged": 833,
+  "matched": 508,
+  "avgLeadMin": 645,
   "recent": [
+   {
+    "keyword": "한파",
+    "hitKeyword": "성층권 한파 영향",
+    "hitAt": "2026-11-21T07:30:00+09:00",
+    "leadMin": 141
+   },
+   {
+    "keyword": "나스닥 급락",
+    "hitKeyword": "나스닥 기술주 급락",
+    "hitAt": "2026-11-21T07:30:00+09:00",
+    "leadMin": 51
+   },
+   {
+    "keyword": "나스닥",
+    "hitKeyword": "나스닥 기술주 급락",
+    "hitAt": "2026-11-21T07:30:00+09:00",
+    "leadMin": 31
+   },
+   {
+    "keyword": "앤트로픽 이틀째 급락",
+    "hitKeyword": "앤트로픽 상승분 반납",
+    "hitAt": "2026-11-21T07:30:00+09:00",
+    "leadMin": 20
+   },
    {
     "keyword": "트럼프",
     "hitKeyword": "트럼프 젠슨 황",
@@ -276,30 +269,6 @@
     "hitKeyword": "김신영 천연염료",
     "hitAt": "2026-11-21T06:30:00+09:00",
     "leadMin": 353
-   },
-   {
-    "keyword": "공사 생도 시험지 촬영 퇴교",
-    "hitKeyword": "LEET 시험지",
-    "hitAt": "2026-11-21T06:00:00+09:00",
-    "leadMin": 353
-   },
-   {
-    "keyword": "김수현 소속사 쿠쿠에 배상 판결",
-    "hitKeyword": "김수현 소속사 쿠쿠 배상",
-    "hitAt": "2026-11-21T06:00:00+09:00",
-    "leadMin": 353
-   },
-   {
-    "keyword": "엔비디아",
-    "hitKeyword": "엔비디아 젠슨 황",
-    "hitAt": "2026-11-21T06:00:00+09:00",
-    "leadMin": 343
-   },
-   {
-    "keyword": "김종국 소속사 사무실",
-    "hitKeyword": "비서진 김종국",
-    "hitAt": "2026-11-21T06:00:00+09:00",
-    "leadMin": 293
    }
   ]
  }
