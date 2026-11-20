@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T18:28:06.726Z",
+ "builtAt": "2026-11-20T18:38:09.912Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -39,6 +39,38 @@
      "press": "tokenpost.kr",
      "publishedAt": "2026-11-20T17:34:00.000Z",
      "link": "https://www.tokenpost.kr/news/breaking/441718"
+    }
+   ]
+  },
+  {
+   "keyword": "엔비디아",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-20T17:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프 \"젠슨 황, 사과하고 엔비디아에 복귀하길…두 번째 기회 줘야\"",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-20T18:34:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445828"
+    },
+    {
+     "title": "美베선트 \"미·중, AI 군사 결정에 인간 개입 합의…엔비디아 수출 허용...",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-20T17:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928381?sid=104"
+    },
+    {
+     "title": "마이클 버리 ‘엔비디아 공매도 포지션 절반 매도’…워처구루 X 게시",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-20T17:26:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/441714"
     }
    ]
   }
