@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T17:57:56.451Z",
+ "builtAt": "2026-11-20T18:07:59.869Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "엔비디아",
    "sources": [
     "google"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-20T16:32:00.000Z",
+   "firstArticleAt": "2026-11-20T16:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -39,6 +39,38 @@
      "press": "4th.kr",
      "publishedAt": "2026-11-20T16:46:00.000Z",
      "link": "http://www.4th.kr/news/articleView.html?idxno=2122386"
+    }
+   ]
+  },
+  {
+   "keyword": "조희대 탄핵 추진",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-20T16:41:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "몸 단 혁신당? “오늘(20일) 탄핵안, 내일 표결”…민주당에 조희대 탄...",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-20T17:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002834423?sid=100"
+    },
+    {
+     "title": "범여권 186명중 150명 찬성 탄핵안 통과땐 대법원장 직무정지",
+     "press": "donga.com",
+     "publishedAt": "2026-11-20T16:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764097?sid=100"
+    },
+    {
+     "title": "與 ‘조희대 탄핵’ 착수… “내달까지 소추안 통과”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-20T16:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764065?sid=100"
     }
    ]
   }
