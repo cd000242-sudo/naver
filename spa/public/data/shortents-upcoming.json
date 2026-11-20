@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T00:25:09.089Z",
+ "builtAt": "2026-11-20T15:06:59.363Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,492 +8,202 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 24,
  "candidates": [
   {
-   "keyword": "뉴욕증시 급락",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 55,
-   "recent20": 20,
-   "press": 47,
-   "firstArticleAt": "2026-11-19T22:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "코스피, 반도체 약세에 4% 급락 출발...다시 5000피 붕괴",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-20T00:22:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261120500013"
-    },
-    {
-     "title": "[특징주] 앤트로픽 수급 쏠림⋯삼성전자·SK하이닉스 '급락'",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-20T00:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001076857?sid=101"
-    },
-    {
-     "title": "코스피, 다시 5000선 붕괴···4%대 급락 출발",
-     "press": "enewstoday.co.kr",
-     "publishedAt": "2026-11-20T00:21:00.000Z",
-     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2494969"
-    }
-   ]
-  },
-  {
-   "keyword": "ai 데이터 센터",
-   "sources": [
-    "google"
-   ],
-   "articles90": 44,
-   "recent20": 16,
-   "press": 34,
-   "firstArticleAt": "2026-11-19T23:32:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "젠슨 황은 왜 무너졌나…80년 반도체 전쟁이 드러낸 AI 제국의 약점",
-     "press": "betanews.net",
-     "publishedAt": "2026-11-20T00:24:00.000Z",
-     "link": "https://www.betanews.net/article/view/beta202611200046"
-    },
-    {
-     "title": "영진전문대 AI컴퓨터보안과, IT 인프라 및 사이버보안 분야 실무형 전문...",
-     "press": "newsfreezone.co.kr",
-     "publishedAt": "2026-11-20T00:24:00.000Z",
-     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=720402"
-    },
-    {
-     "title": "포스코, AI 데이터센터 겨냥 '전자파 방패' 꺼냈다…포스맥 쉴드 차폐율...",
-     "press": "snmnews.com",
-     "publishedAt": "2026-11-20T00:24:00.000Z",
-     "link": "http://www.snmnews.com/news/articleView.html?idxno=577683"
-    }
-   ]
-  },
-  {
-   "keyword": "빅뱅, 오늘 신곡 발표",
+   "keyword": "공사 생도 시험지 촬영 퇴교",
    "sources": [
     "nate"
    ],
-   "articles90": 24,
-   "recent20": 2,
-   "press": 20,
-   "firstArticleAt": "2026-11-19T22:56:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "빅뱅, '마마' 출연 앞두고 깜짝 소식…오늘(20일) 기습 신곡 발매",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-20T00:07:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000785311"
-    },
-    {
-     "title": "20주년 빅뱅, 오늘 신곡 깜짝 발표…내일 '마마 어워즈' 출연",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-20T00:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016453575?sid=103"
-    },
-    {
-     "title": "빅뱅, 오늘(20일) 신곡 깜짝 발표…'BiiiG' 이후 3개월만",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-20T00:05:00.000Z",
-     "link": "https://m.entertain.naver.com/article/629/0000553864"
-    }
-   ]
-  },
-  {
-   "keyword": "눈",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 20,
-   "recent20": 8,
-   "press": 18,
-   "firstArticleAt": "2026-11-19T23:54:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "전현무, 독립유공자 후손 위한 기부금→유기견 봉사까지 '선행' 눈길(사...",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-20T00:24:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=109996170895"
-    },
-    {
-     "title": "'삼각봉 14.5㎝ 눈' 한라산 탐방 통제…곳곳 강풍 피해도",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-20T00:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404461?sid=102"
-    },
-    {
-     "title": "눈길에 강한 사계절용 '올 웨더'…넥센타이어 구원투수 될까",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-20T00:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006412959?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "한덕수 대법원 선고",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 16,
-   "recent20": 6,
-   "press": 16,
-   "firstArticleAt": "2026-11-19T23:00:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "대법 \"계엄은 위헌·위법\"…한덕수 파기환송, 계엄 '전'과 '후'에서 판단...",
-     "press": "theopiniontimes.news",
-     "publishedAt": "2026-11-20T00:22:00.000Z",
-     "link": "https://theopiniontimes.news/%eb%8c%80%eb%b2%95-%ea%b3%84%ec%97%84%ec%9d%80-%ec%9c%84%ed%97%8c%c2%b7%ec%9c%84%eb%b2%95%ed%95%9c%eb%8d%95%ec%88%98-%ed%8c%8c%ea%b8%b0%ed%99%98%ec%86%a1-%ea%b3%84%ec%97%84-%ec%a0%84/"
-    },
-    {
-     "title": "5·18재단 이사장, 한덕수 파기환송에 \"조희대 대법원장 탄핵감\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-20T00:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009300599?sid=102"
-    },
-    {
-     "title": "대법, 한덕수 '내란 가담' 인정···\"국무회의 건의는 무죄\" 징역 15년 ...",
-     "press": "ziksir.com",
-     "publishedAt": "2026-11-20T00:16:00.000Z",
-     "link": "https://www.ziksir.com/news/articleView.html?idxno=154086"
-    }
-   ]
-  },
-  {
-   "keyword": "50대 남성 10대 살해",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 16,
-   "recent20": 0,
-   "press": 16,
-   "firstArticleAt": "2026-11-19T23:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'아들 성범죄 피해자' 살해 50대 여전히 묵묵부답...공소청 구속송치",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-20T00:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002435496?sid=102"
-    },
-    {
-     "title": "‘성북 10대 살해’ 50대 남성 구속 송치",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-20T00:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004010747?sid=102"
-    },
-    {
-     "title": "'10대 소녀 살해' 50대 남성 공소청 구속송치",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-20T00:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928075?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "15세 소녀 살해 구속송치",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 13,
-   "recent20": 0,
-   "press": 13,
-   "firstArticleAt": "2026-11-19T23:09:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "15세 소녀 살해한 50대男 구속송치...취재진 질문에 '묵묵부답'",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-20T00:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001273357?sid=102"
-    },
-    {
-     "title": "'10대 소녀 살해' 50대 남성 공소청 구속송치",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-20T00:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928075?sid=102"
-    },
-    {
-     "title": "[속보]아들이 저지른 성범죄 피해 15세 소녀 살해 50대 남성 공소청 구속...",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-19T23:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001232248?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "수능 난이도",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-19T23:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "2027학년도 수능 국어 1등급컷 최대 6점 상승 전망-상위권 경쟁 수학이 ...",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-20T00:14:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95602"
-    },
-    {
-     "title": "2027 수능, 상위권 당락 '수학'이 가를 것으로 예상",
-     "press": "starnewsk.com",
-     "publishedAt": "2026-11-20T00:06:00.000Z",
-     "link": "http://www.starnewsk.com/news/articleView.html?idxno=61199"
-    },
-    {
-     "title": "긴장 속 수능 끝..대입전략 변수는?",
-     "press": "busanmbc.co.kr",
-     "publishedAt": "2026-11-19T23:52:00.000Z",
-     "link": "https://busanmbc.co.kr/01_new/new01_view.asp?idx=291210"
-    }
-   ]
-  },
-  {
-   "keyword": "트럼프 이란 추가공습",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
+   "articles90": 5,
    "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-19T23:03:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-20T13:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "트럼프 \"이란 추가 공습, 내년에 결정…우리에겐 시간 있어\"",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-20T00:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001165025?sid=104"
+     "title": "공사 생도 감독관 없는 ‘명예시험’ 중 스마트폰으로 시험지 촬영…퇴...",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-20T14:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002834418?sid=100"
     },
     {
-     "title": "트럼프 \"이란 공격 서두르지 않겠다…새해 시작되면 지켜볼 것\"",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-20T00:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003157489?sid=104"
+     "title": "감독관 없는 시험, 명예도 없었다… ‘시험지 촬영’ 공사 생도, 퇴교 처...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-20T14:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004176889?sid=102"
     },
     {
-     "title": "트럼프 \"이란 결정 서두르지 않을 것...새해 시작 뒤 지켜보겠다\"",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-19T23:56:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=565322"
+     "title": "감독관 없는 '명예시험'조차 시험지 찰칵...공사 생도, 결국",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-20T14:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413371?sid=100"
     }
    ]
   },
   {
-   "keyword": "오연서 스토리제이컴퍼니와 재계약",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-19T22:59:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[공식] 오연서, 데뷔 24년 차에도 의리 이어간다…현 소속사와 재계약",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-19T23:24:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004468216"
-    },
-    {
-     "title": "오연서, 現 소속사와 동행 이어간다...스토리제이컴퍼니와 재계약",
-     "press": "nc.press",
-     "publishedAt": "2026-11-19T23:15:00.000Z",
-     "link": "https://www.nc.press/news/articleView.html?idxno=631446"
-    },
-    {
-     "title": "오연서, 스토리제이컴퍼니와 재계약…굳건한 신뢰 바탕",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-19T23:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001305828"
-    }
-   ]
-  },
-  {
-   "keyword": "제갈성렬 아내 공개",
+   "keyword": "방탄소년단 엔하이픈 대상",
    "sources": [
     "daum"
    ],
    "articles90": 4,
    "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-19T23:12:00.000Z",
+   "firstArticleAt": "2026-11-20T13:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "제갈성렬, 19세 연하 아내·딸과 재혼 일상 공개…둘째는 아들",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-19T23:42:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626539"
+     "title": "오사카 달군 '2026 마마 어워즈'…첫날 대상에 BTS·엔하이픈",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-20T14:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016455381?sid=103"
     },
     {
-     "title": "제갈성렬, 19세 연하와 재혼… 둘째 임신 소식",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-19T23:27:00.000Z",
-     "link": "https://m.entertain.naver.com/article/469/0000966708"
+     "title": "방탄소년단·엔하이픈, '2026 마마 어워즈' 첫날 대상…나란히 3관왕",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-20T14:07:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014336850"
     },
     {
-     "title": "19살 연하 아내와 재혼…56세에 두 아이 아빠 되는 '스포츠 스타'",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-19T23:24:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1176169"
+     "title": "방탄소년단·엔하이픈, 나란히 대상 영예[2026 MAMA AWARDS]",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-20T13:50:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003489094"
     }
    ]
   },
   {
-   "keyword": "LPGA 최종전 공동 8위",
+   "keyword": "김수현 소속사 쿠쿠에 배상 판결",
    "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-19T23:05:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "유현조, LPGA Q시리즈 최종전 1라운드 공동 8위… 선두와 3타 차",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-20T00:15:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/396/0000761440"
-    },
-    {
-     "title": "무너질 뻔한 유현조, 연속 버디로 반전…LPGA Q시리즈 첫날 공동 8위",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-19T23:29:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/018/0006412909"
-    },
-    {
-     "title": "유현조, LPGA Q시리즈 첫날 공동 8위..선두와 3타 차",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-19T23:05:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/016/0002726021"
-    }
-   ]
-  },
-  {
-   "keyword": "파운드리",
-   "sources": [
-    "google"
+    "signal.bz"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-19T23:12:00.000Z",
+   "firstArticleAt": "2026-11-20T14:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "ASI 파운드리, 알파벳 이사회 의장과 한국 AI 협력 논의",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-20T00:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005443971?sid=105"
+     "title": "김수현 소속사 골드메달리스트, 쿠쿠에 모델료 반환 1심 판단…\"김수현...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-20T14:10:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16281797"
     },
     {
-     "title": "[속보] 삼성 전영현, 메모리사업부장 겸직 해제…파운드리 등 미래사업...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-20T00:02:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261120000221"
+     "title": "법원 \"김수현 소속사, 쿠쿠에 모델료 8억 7천만 원 돌려줘야\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-20T14:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928366?sid=102"
     },
     {
-     "title": "인텔, 파운드리 18A 제조 공정 첫 외부 고객사 확보",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-19T23:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000544867?sid=101"
+     "title": "김수현 측, 광고주에 또 거액 물어준다…쿠쿠에 8.7억 배상 판결",
+     "press": "weekly.chosun.com",
+     "publishedAt": "2026-11-20T14:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/053/0000063220?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "컬리 개인정보 유출",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-20T13:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "컬리, 해킹으로 1만여명 개인정보 유출…최대 15만원 적립금 보상",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-20T14:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003060283?sid=101"
+    },
+    {
+     "title": "컬리 큐레이터 1만여명 개인정보 유출… 주민번호·계좌번호도 포함",
+     "press": "segye.com",
+     "publishedAt": "2026-11-20T13:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004176887?sid=101"
+    },
+    {
+     "title": "컬리서 1만여명 규모 개인정보 유출…\"손해 발생 시 전액 보상\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-20T13:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004212290?sid=101"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 900,
-  "matched": 529,
-  "avgLeadMin": 691,
+  "flagged": 832,
+  "matched": 515,
+  "avgLeadMin": 676,
   "recent": [
    {
-    "keyword": "외국인 국내 주식 순매도",
-    "hitKeyword": "키움 외국인 투수",
-    "hitAt": "2026-11-20T09:00:00+09:00",
-    "leadMin": 146
+    "keyword": "푸른길 나가야마 한국 사랑 중",
+    "hitKeyword": "푸른길 넷플릭스 공개",
+    "hitAt": "2026-11-21T00:00:00+09:00",
+    "leadMin": 4942
    },
    {
-    "keyword": "2호선",
-    "hitKeyword": "2호선 성수지선 중단",
-    "hitAt": "2026-11-20T09:00:00+09:00",
-    "leadMin": 96
+    "keyword": "손석구·나가야마 에이타 푸른길 공조",
+    "hitKeyword": "푸른길 넷플릭스 공개",
+    "hitAt": "2026-11-21T00:00:00+09:00",
+    "leadMin": 4892
    },
    {
-    "keyword": "이진우 고소 준비한 피해자 글",
-    "hitKeyword": "이진우 사망 강사 자책",
-    "hitAt": "2026-11-20T09:00:00+09:00",
-    "leadMin": 75
+    "keyword": "개인정보",
+    "hitKeyword": "컬리 개인정보 유출",
+    "hitAt": "2026-11-20T23:00:00+09:00",
+    "leadMin": 6258
    },
    {
-    "keyword": "이승기 20억 기부",
-    "hitKeyword": "이승기 20억 기부",
-    "hitAt": "2026-11-20T09:00:00+09:00",
-    "leadMin": 75
+    "keyword": "서울시립대 개인정보 유출",
+    "hitKeyword": "컬리 개인정보 유출",
+    "hitAt": "2026-11-20T23:00:00+09:00",
+    "leadMin": 5727
    },
    {
-    "keyword": "이진우 고소 준비중",
-    "hitKeyword": "이진우 사망 강사 자책",
-    "hitAt": "2026-11-20T09:00:00+09:00",
-    "leadMin": 55
+    "keyword": "노란우산 개인정보 유출",
+    "hitKeyword": "컬리 개인정보 유출",
+    "hitAt": "2026-11-20T23:00:00+09:00",
+    "leadMin": 3594
    },
    {
-    "keyword": "고대 예비 1번 고소 준비중",
-    "hitKeyword": "고대 예비 1번 재수비",
-    "hitAt": "2026-11-20T09:00:00+09:00",
-    "leadMin": 35
+    "keyword": "아파트",
+    "hitKeyword": "아파트 공시가격 5년 동결",
+    "hitAt": "2026-11-20T22:00:00+09:00",
+    "leadMin": 876
    },
    {
-    "keyword": "리트 만점자 이진우",
-    "hitKeyword": "이진우 사망 강사 자책",
-    "hitAt": "2026-11-20T09:00:00+09:00",
-    "leadMin": 25
+    "keyword": "수험표",
+    "hitKeyword": "이진우 2018 수험표",
+    "hitAt": "2026-11-20T19:30:00+09:00",
+    "leadMin": 3334
    },
    {
-    "keyword": "이승기 어린이병원 기부 이유",
-    "hitKeyword": "이승기 20억 기부",
-    "hitAt": "2026-11-20T09:00:00+09:00",
-    "leadMin": 25
+    "keyword": "기아",
+    "hitKeyword": "도란 디플러스 기아 이적",
+    "hitAt": "2026-11-20T18:00:00+09:00",
+    "leadMin": 555
    },
    {
-    "keyword": "이진우 사망 소식",
-    "hitKeyword": "이진우 사망 강사 자책",
-    "hitAt": "2026-11-20T09:00:00+09:00",
-    "leadMin": 15
+    "keyword": "테슬라 사이버캡 판매",
+    "hitKeyword": "테슬라 FSD 특례 신청 반려",
+    "hitAt": "2026-11-20T17:30:00+09:00",
+    "leadMin": 5907
    },
    {
-    "keyword": "이승기 어린이병원 20억 기부 이유",
-    "hitKeyword": "이승기 20억 기부",
-    "hitAt": "2026-11-20T09:00:00+09:00",
-    "leadMin": 15
+    "keyword": "하리수 김지선 남학생",
+    "hitKeyword": "하리수 51세 동안",
+    "hitAt": "2026-11-20T13:30:00+09:00",
+    "leadMin": 7976
    }
   ]
  }
