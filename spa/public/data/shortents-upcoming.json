@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T22:59:54.973Z",
+ "builtAt": "2026-11-20T23:09:58.093Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,182 +8,86 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 23,
  "candidates": [
   {
-   "keyword": "소정리역",
+   "keyword": "소정리역 화물열차 탈선",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 31,
-   "recent20": 10,
-   "press": 26,
+   "articles90": 39,
+   "recent20": 8,
+   "press": 34,
    "firstArticleAt": "2026-11-20T22:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "세종 소정리역서 화물열차 5량 탈선…경부선 일반열차 운행 중단",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-20T22:58:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=783569"
+     "title": "[속보]경부선 소정리역서 화물열차 탈선…\"일반열차 운행 중지\"",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-20T23:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000121878?sid=102"
     },
     {
-     "title": "경부선 소정리역서 화물열차 탈선…“일반열차 운행 중단”",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-20T22:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484094?sid=102"
+     "title": "경부선 화물열차 5량 탈선에 단전…천안~대전 새마을·무궁화호 운행 중...",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-20T23:08:00.000Z",
+     "link": "https://www.ajunews.com/view/20261121080453846"
     },
     {
-     "title": "[속보] 경부선 세종 소정리역서 화물열차 탈선…전차선 단전·일반열차...",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-20T22:52:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/326018/?sc=Naver"
+     "title": "경부선 화물열차 5량 탈선…천안~대전 일반열차 운행 중단·KTX 정상",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-20T23:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002394537?sid=102"
     }
    ]
   },
   {
-   "keyword": "비트코인",
+   "keyword": "김정은, 교육기자재공장 시찰",
    "sources": [
-    "google"
+    "nate"
    ],
-   "articles90": 17,
-   "recent20": 5,
-   "press": 11,
-   "firstArticleAt": "2026-11-20T21:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "비트코인, 20일(현지시간) 장중 7% 넘게 하락해 7월 이후 최저",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-20T22:54:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/441866"
-    },
-    {
-     "title": "비트코인 4달 만에 6만달러 아래로…2022년 이후 최장 약세",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-20T22:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000545039?sid=104"
-    },
-    {
-     "title": "비트코인 4개월 만에 6만달러 붕괴⋯“저가매수 기회” vs “75% 조정”",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-20T22:44:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2651158"
-    }
-   ]
-  },
-  {
-   "keyword": "굿파트너 2",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 10,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-20T21:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "고원희, 두 번 이혼 낙인 두려웠지만..당당하게 홀로섰다 [굿파트너2]",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-20T22:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003489127"
-    },
-    {
-     "title": "장나라·김혜윤의 첫 법정 대결 ‘굿파트너2’…8.4% 출발",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-20T22:33:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001305981"
-    },
-    {
-     "title": "'굿파트너2' 첫방부터 9.9%! 장나라, 김혜윤과 법정 대결→'박해진 의뢰...",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-20T22:32:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=783561"
-    }
-   ]
-  },
-  {
-   "keyword": "김민재",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-20T21:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"실수 없이 경기 마쳤다\" 김민재, 20분 뛰고도 '경쟁자' 둘과 같은 평점...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-20T22:33:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/108/0003489126"
-    },
-    {
-     "title": "‘비상!’ 김민재 ‘교체+20분 활약’ 간판 FW 케인·올리세 부상 교체·...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-20T22:24:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/144/0001150980"
-    },
-    {
-     "title": "김민재 투입될 때 벌어진 '신규규칙 위반' 상황! 우파메카노가 물통 걷...",
-     "press": "footballist.co.kr",
-     "publishedAt": "2026-11-20T22:00:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/436/0000115094"
-    }
-   ]
-  },
-  {
-   "keyword": "포스코",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 2,
+   "articles90": 7,
+   "recent20": 4,
    "press": 4,
-   "firstArticleAt": "2026-11-20T21:30:00.000Z",
-   "exclusive": true,
+   "firstArticleAt": "2026-11-20T22:27:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "포스코, 일시금 최대 80만원 늘려 재합의…고로 보수 앞둔 현장 안정 시...",
-     "press": "sateconomy.co.kr",
-     "publishedAt": "2026-11-20T22:46:00.000Z",
-     "link": "http://sateconomy.co.kr/news/view/1065566654676264"
+     "title": "김정은, 트럼프 대화 제의에 '무응답'⋯교육공장 시찰하며 내치 집중 [미...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-20T23:06:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2651159"
     },
     {
-     "title": "[단독] 포스코·현대제철, 美 냉연강판 상계관세 예비 하향…포스코 1.1...",
-     "press": "sateconomy.co.kr",
-     "publishedAt": "2026-11-20T22:40:00.000Z",
-     "link": "https://sateconomy.co.kr/news/view/1065565552551100"
+     "title": "김정은, 교육공장 건설 현장 시찰",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-20T23:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009302406?sid=100"
     },
     {
-     "title": "포스코, 생산부터 사무까지 'AX 혁신' 가속",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-20T22:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001165134?sid=101"
+     "title": "교육비품공장 건설현장 시찰하는 김정은",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-20T23:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009302392?sid=100"
     }
    ]
   },
   {
    "keyword": "손흥민 MLS 4위 연봉",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 4,
    "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-20T22:00:00.000Z",
-   "exclusive": false,
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "[오피셜] 손흥민 충격 오피셜 발표...'150억' MLS 연봉 2위 자리 뺏겼다...",
+     "title": "[오피셜] 손흥민 충격 공식발표...'150억' MLS 연봉 2위 자리 뺏겼다, '2...",
      "press": "sportschosun.com",
      "publishedAt": "2026-11-20T22:37:00.000Z",
      "link": "https://m.sports.naver.com/wfootball/article/076/0004468420"
@@ -205,10 +109,28 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 833,
-  "matched": 507,
-  "avgLeadMin": 643,
+  "flagged": 835,
+  "matched": 510,
+  "avgLeadMin": 640,
   "recent": [
+   {
+    "keyword": "비트코인",
+    "hitKeyword": "비트코인 최장 약세",
+    "hitAt": "2026-11-21T08:00:00+09:00",
+    "leadMin": 50
+   },
+   {
+    "keyword": "굿파트너 2",
+    "hitKeyword": "굿파트너2 첫방송",
+    "hitAt": "2026-11-21T08:00:00+09:00",
+    "leadMin": 20
+   },
+   {
+    "keyword": "정철원 롯데 트레이드",
+    "hitKeyword": "정철원 키움 이적",
+    "hitAt": "2026-11-21T08:00:00+09:00",
+    "leadMin": 20
+   },
    {
     "keyword": "한파",
     "hitKeyword": "성층권 한파 영향",
@@ -250,24 +172,6 @@
     "hitKeyword": "트럼프 젠슨 황",
     "hitAt": "2026-11-21T07:00:00+09:00",
     "leadMin": 51
-   },
-   {
-    "keyword": "엔비디아 H200 수출 허용",
-    "hitKeyword": "엔비디아 7주 하락",
-    "hitAt": "2026-11-21T07:00:00+09:00",
-    "leadMin": 21
-   },
-   {
-    "keyword": "굿파트너 2",
-    "hitKeyword": "굿파트너2 출연진",
-    "hitAt": "2026-11-21T07:00:00+09:00",
-    "leadMin": 11
-   },
-   {
-    "keyword": "김신영 수영복 자태 공개",
-    "hitKeyword": "김신영 천연염료",
-    "hitAt": "2026-11-21T06:30:00+09:00",
-    "leadMin": 353
    }
   ]
  }
