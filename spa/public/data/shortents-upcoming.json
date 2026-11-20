@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T21:49:23.992Z",
+ "builtAt": "2026-11-20T21:59:27.897Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 29,
  "candidates": [
   {
-   "keyword": "나스닥 급락",
+   "keyword": "나스닥",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 27,
-   "recent20": 14,
-   "press": 22,
-   "firstArticleAt": "2026-11-20T20:40:00.000Z",
+   "articles90": 33,
+   "recent20": 10,
+   "press": 23,
+   "firstArticleAt": "2026-11-20T20:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "AI 거품 공포에 뉴욕증시 급락…나스닥 5.28% 폭락",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-20T21:58:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101729"
+    },
+    {
+     "title": "나스닥, 올해 상승분 전액 반납…'AI 거품 공포'에 뉴욕증시 패닉",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-20T21:50:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101726"
+    },
     {
      "title": "뉴욕증시 다우·S&P500 조정장 진입…나스닥, AI주 투매에 올해 상승분 ...",
      "press": "etoday.co.kr",
      "publishedAt": "2026-11-20T21:48:00.000Z",
      "link": "https://www.etoday.co.kr/news/view/2651148"
-    },
-    {
-     "title": "[美증시] 엔비디아·앤트로픽 쇼크 나스닥 '대폭락'…반도체 '블랙프라...",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-20T21:48:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1138969"
-    },
-    {
-     "title": "뉴욕증시, 기술주 매도에 급락...다우·S&P500도 조정 진입",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-20T21:48:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=783551"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-20T20:23:00.000Z",
+   "articles90": 9,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-20T20:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "트럼프 \"환상적인 미중러 관계가 미국 안전히 지켜...해외 데이터센터 ...",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-20T21:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002435996?sid=104"
+    },
     {
      "title": "트럼프 \"미국 기업, 다른 나라에 데이터센터 지으면 엄청난 세금 부과\"",
      "press": "mbn.mk.co.kr",
@@ -65,12 +71,6 @@
      "press": "the-today.com",
      "publishedAt": "2026-11-20T21:14:00.000Z",
      "link": "https://www.the-today.com/news/articleView.html?idxno=93890"
-    },
-    {
-     "title": "트럼프, 해외 AI 데이터센터 투자에 고율 과세 경고…미국 빅테크 긴장",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-20T21:08:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=847949"
     }
    ]
   },
@@ -80,7 +80,7 @@
     "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-20T20:52:00.000Z",
    "exclusive": false,
@@ -112,7 +112,7 @@
     "nate"
    ],
    "articles90": 5,
-   "recent20": 2,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-20T21:00:00.000Z",
    "exclusive": false,
@@ -131,10 +131,10 @@
      "link": "http://www.dailypop.kr/news/articleView.html?idxno=104280"
     },
     {
-     "title": "[오늘의 운세] 2026년 11월 21일 띠별 운세",
+     "title": "[오늘의 운세] 2026년 11월 21일 별자리 운세",
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-20T21:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413396?sid=103"
+     "link": "https://n.news.naver.com/mnews/article/018/0006413397?sid=103"
     }
    ]
   },
@@ -144,7 +144,7 @@
     "daum"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-20T21:00:00.000Z",
    "exclusive": false,
@@ -157,23 +157,23 @@
      "link": "http://www.stoo.com/article.php?aid=110018147307"
     },
     {
-     "title": "'굿파트너2' 장나라X김혜윤, 이번에도 실패하지 않습니다[★FOCUS]",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-20T21:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003489116"
-    },
-    {
      "title": "“일과 인생 사이”…‘굿파트너2’ 여전한 장나라 변호사 [TV온에어]",
      "press": "tvdaily.co.kr",
      "publishedAt": "2026-11-20T21:00:00.000Z",
      "link": "https://m.entertain.naver.com/article/440/0000053674"
+    },
+    {
+     "title": "'굿파트너2' 장나라X김혜윤, 이번에도 실패하지 않습니다[★FOCUS]",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-20T21:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003489116"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 827,
+  "flagged": 828,
   "matched": 501,
   "avgLeadMin": 653,
   "recent": [
