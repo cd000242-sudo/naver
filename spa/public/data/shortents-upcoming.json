@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T15:27:05.435Z",
+ "builtAt": "2026-11-20T15:37:08.227Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,13 +11,77 @@
  "measured": 25,
  "candidates": [
   {
+   "keyword": "나혼산",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 9,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-20T14:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'나혼산' 연준, 먹모델 성환 따라 아침식사...직접 뚱움바 파스타 요리",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-20T15:26:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=783548"
+    },
+    {
+     "title": "\"싱크대에 버려도 괜찮다\" 김신영, 천연 염료로 옷 염색 시도 ('나혼산'...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-20T15:24:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005643363"
+    },
+    {
+     "title": "김신영, 피자 이어 김치 칼국수 뚝딱...하루 피로 싹 내려가 [나혼산]",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-20T15:08:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=783546"
+    }
+   ]
+  },
+  {
+   "keyword": "푸틴 키이우 교량 공격",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-20T14:31:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "푸틴, 미중 정상과 첫 3자 회담…우크라이나 합의는 없어",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-20T15:30:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3758848"
+    },
+    {
+     "title": "푸틴, 미중러 회담 직후 키이우 교량 공격…\"역대 최대 규모\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-20T14:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404661?sid=104"
+    },
+    {
+     "title": "푸틴, 트럼프·시진핑 회담 끝나자마자 \"우크라이나 총공격\"",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-20T14:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000521775?sid=104"
+    }
+   ]
+  },
+  {
    "keyword": "엔비디아",
    "sources": [
     "signal.bz",
     "google"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-20T15:06:00.000Z",
    "exclusive": false,
@@ -44,34 +108,34 @@
    ]
   },
   {
-   "keyword": "김수현 소속사 쿠쿠에 배상 판결",
+   "keyword": "김신영 수영복 자태 공개",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-20T14:00:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-20T14:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김수현 소속사 골드메달리스트, 쿠쿠에 모델료 반환 1심 판단…\"김수현...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-20T14:10:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16281797"
+     "title": "\"나 아니야\" 김신영, 웃통 벗은 아저씨로 오해 받자 발끈…수영 2주차의...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-20T15:01:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001409054"
     },
     {
-     "title": "법원 \"김수현 소속사, 쿠쿠에 모델료 8억 7천만 원 돌려줘야\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-20T14:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928366?sid=102"
+     "title": "김신영, 군살 제로 수영복 자태 공개 ('나 혼자 산다')",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-20T14:57:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000492075"
     },
     {
-     "title": "김수현 측, 광고주에 또 거액 물어준다…쿠쿠에 8.7억 배상 판결",
-     "press": "weekly.chosun.com",
-     "publishedAt": "2026-11-20T14:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/053/0000063220?sid=102"
+     "title": "\"직각 어깨 깎고파\" 김신영, 수영복 자태 최초 공개",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-20T14:45:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005643353"
     }
    ]
   }
@@ -79,8 +143,8 @@
  "hitRate": {
   "days": 7,
   "flagged": 825,
-  "matched": 509,
-  "avgLeadMin": 670,
+  "matched": 507,
+  "avgLeadMin": 671,
   "recent": [
    {
     "keyword": "푸른길 나가야마 한국 사랑 중",
