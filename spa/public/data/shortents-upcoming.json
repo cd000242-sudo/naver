@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T18:48:13.672Z",
+ "builtAt": "2026-11-20T19:08:18.809Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -9,72 +9,7 @@
   "minPress": 2
  },
  "measured": 24,
- "candidates": [
-  {
-   "keyword": "연준",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-20T17:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "투바투 연준, 10년 숙소 생활 끝내고 독립…'나혼산'서 자취 7개월 차 집...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-20T18:24:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16281861"
-    },
-    {
-     "title": "美재무, '빅스텝' 월러 연준 이사 겨냥 \"다소 종잡을 수 없는 행보\"",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-20T18:00:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445826"
-    },
-    {
-     "title": "리사 쿡 연준 이사, 물가 대응 추가 금리 인상 지지 시사",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-20T17:34:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/441718"
-    }
-   ]
-  },
-  {
-   "keyword": "EU 영국 정상회담",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 2,
-   "firstArticleAt": "2026-11-20T17:59:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "브렉시트로 헤어진 EU·영국, 정상회담서 ‘관계 재설정’ 시동",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-20T18:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012298518?sid=104"
-    },
-    {
-     "title": "英·EU, 브렉시트 10년만에 관계 재설정…식품 교역 완화·청년 취업 허...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-20T18:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014336914?sid=104"
-    },
-    {
-     "title": "EU·영국 정상회담에서 손 맞잡은 지도자들",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-20T17:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014336910?sid=104"
-    }
-   ]
-  }
- ],
+ "candidates": [],
  "hitRate": {
   "days": 7,
   "flagged": 824,
