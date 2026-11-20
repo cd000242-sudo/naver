@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T15:37:08.227Z",
+ "builtAt": "2026-11-20T15:47:12.006Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,40 +8,8 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 26,
  "candidates": [
-  {
-   "keyword": "나혼산",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-20T14:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'나혼산' 연준, 먹모델 성환 따라 아침식사...직접 뚱움바 파스타 요리",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-20T15:26:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=783548"
-    },
-    {
-     "title": "\"싱크대에 버려도 괜찮다\" 김신영, 천연 염료로 옷 염색 시도 ('나혼산'...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-20T15:24:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005643363"
-    },
-    {
-     "title": "김신영, 피자 이어 김치 칼국수 뚝딱...하루 피로 싹 내려가 [나혼산]",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-20T15:08:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=783546"
-    }
-   ]
-  },
   {
    "keyword": "푸틴 키이우 교량 공격",
    "sources": [
@@ -71,6 +39,38 @@
      "press": "news.jtbc.co.kr",
      "publishedAt": "2026-11-20T14:52:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/437/0000521775?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "민주유공자법 본회의 통과",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-20T14:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "민주유공자법 26년 만에 국회 통과…635명 등록·예우 추진",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-20T15:18:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3758843"
+    },
+    {
+     "title": "[사설] 누가 뽑고 누가 뽑히는지 모르는 민주유공자법, 이래도 되나",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-20T15:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004010850?sid=110"
+    },
+    {
+     "title": "‘민주유공자법’ 여권 주도 통과…국힘 “운동권 특혜”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-20T14:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012298505?sid=100"
     }
    ]
   },
@@ -142,9 +142,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 825,
-  "matched": 507,
-  "avgLeadMin": 671,
+  "flagged": 824,
+  "matched": 506,
+  "avgLeadMin": 672,
   "recent": [
    {
     "keyword": "푸른길 나가야마 한국 사랑 중",
