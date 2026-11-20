@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T17:07:39.813Z",
+ "builtAt": "2026-11-20T17:17:43.498Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -10,39 +10,6 @@
  },
  "measured": 26,
  "candidates": [
-  {
-   "keyword": "연준",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-20T15:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘나혼산’ TXT 연준, 첫 보금자리 최초 공개 “10년 숙소 생활”",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-20T16:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000328653"
-    },
-    {
-     "title": "'자취 7개월' 연준, 멤버들이랑 10년 살다가 독립...'첫 보금자리 공개'...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-20T16:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002082670"
-    },
-    {
-     "title": "베선트, 연준 대폭 금리 인상론에 의문 제기",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-20T15:56:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/441662"
-    }
-   ]
-  },
   {
    "keyword": "엔비디아",
    "sources": [
@@ -72,6 +39,39 @@
      "press": "yna.co.kr",
      "publishedAt": "2026-11-20T16:23:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016455396?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "연준",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-20T15:55:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘나혼산’ TXT 연준, 첫 보금자리 최초 공개 “10년 숙소 생활”",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-20T16:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000328653"
+    },
+    {
+     "title": "'자취 7개월' 연준, 멤버들이랑 10년 살다가 독립...'첫 보금자리 공개'...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-20T16:01:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002082670"
+    },
+    {
+     "title": "베선트, 연준 대폭 금리 인상론에 의문 제기",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-20T15:56:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/441662"
     }
    ]
   },
@@ -110,9 +110,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 828,
-  "matched": 505,
-  "avgLeadMin": 672,
+  "flagged": 827,
+  "matched": 504,
+  "avgLeadMin": 656,
   "recent": [
    {
     "keyword": "푸른길 나가야마 한국 사랑 중",
