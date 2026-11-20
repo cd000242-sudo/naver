@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T22:09:31.306Z",
+ "builtAt": "2026-11-20T22:19:35.299Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,22 +11,86 @@
  "measured": 28,
  "candidates": [
   {
-   "keyword": "나스닥 급락",
+   "keyword": "나스닥",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 32,
-   "recent20": 6,
-   "press": 24,
-   "firstArticleAt": "2026-11-20T20:40:00.000Z",
+   "articles90": 34,
+   "recent20": 3,
+   "press": 25,
+   "firstArticleAt": "2026-11-20T21:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'AI 거품 공포'에 美 증시 폭락⋯나스닥 5.28% 급락·다우도 950포인트↓",
+     "press": "autodaily.co.kr",
+     "publishedAt": "2026-11-20T22:16:00.000Z",
+     "link": "https://www.autodaily.co.kr/news/articleView.html?idxno=602297"
+    },
+    {
+     "title": "나스닥 하루 5%, 일주일 10% 추락…AI주 투매 공포[월스트리트in]",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-20T22:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413409?sid=101"
+    },
     {
      "title": "‘AI 투매’에 나스닥 5.3% 추락하며 올해 상승분 반납…엔비디아 14%↓",
      "press": "joseilbo.com",
      "publishedAt": "2026-11-20T22:06:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/123/0002394534?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "비트코인",
+   "sources": [
+    "google"
+   ],
+   "articles90": 12,
+   "recent20": 3,
+   "press": 8,
+   "firstArticleAt": "2026-11-20T20:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "비트코인, 1시간 새 1.35% 올라 5만9123달러",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-20T22:18:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/441844"
+    },
+    {
+     "title": "웨일 얼럿, 코인베이스로 비트코인 899개 이동 관측",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-20T22:04:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/441836"
+    },
+    {
+     "title": "보름 만에 23% 떨어진 비트코인…바닥은 어디일까[코인현미경]",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-20T22:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009302347?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "앤트로픽 이틀째 급락",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-20T21:33:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "앤트로픽, 상장 이틀째 8.5% 급락...장중 공모가 선까지 위협",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-20T22:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002435998?sid=104"
     },
     {
      "title": "앤트로픽, 상장 이틀째 8.5% 급락…장중 공모가까지 떨어지기도",
@@ -39,38 +103,6 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-20T21:59:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009302346?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "비트코인",
-   "sources": [
-    "google"
-   ],
-   "articles90": 12,
-   "recent20": 5,
-   "press": 9,
-   "firstArticleAt": "2026-11-20T20:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "웨일 얼럿, 코인베이스로 비트코인 899개 이동 관측",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-20T22:04:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/441836"
-    },
-    {
-     "title": "보름 만에 23% 떨어진 비트코인…바닥은 어디일까[코인현미경]",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-20T22:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009302347?sid=101"
-    },
-    {
-     "title": "[오전 브리핑] 비트코인 8,181만원…4개월 만에 6만달러 하회",
-     "press": "coinreaders.com",
-     "publishedAt": "2026-11-20T21:58:00.000Z",
-     "link": "http://coinreaders.com/272142"
     }
    ]
   },
@@ -103,38 +135,6 @@
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-20T21:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006413397?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "앤트로픽 이틀째 급락",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-20T21:33:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "앤트로픽, 상장 이틀째 8.5% 급락…장중 공모가까지 떨어지기도",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-20T22:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012298552?sid=104"
-    },
-    {
-     "title": "앤트로픽, 상장 이틀째 급락…장중 공모가 턱밑까지",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-20T21:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009302346?sid=101"
-    },
-    {
-     "title": "[뉴욕마감] 앤트로픽 상장도 못 잠재운 AI 우려…나스닥 5.3% 급락",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-20T21:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009302344?sid=101"
     }
    ]
   },
@@ -205,7 +205,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 832,
+  "flagged": 831,
   "matched": 506,
   "avgLeadMin": 647,
   "recent": [
