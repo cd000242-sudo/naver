@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T16:27:25.517Z",
+ "builtAt": "2026-11-20T16:37:28.513Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,27 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "연준",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 12,
-   "recent20": 0,
-   "press": 8,
+   "articles90": 13,
+   "recent20": 1,
+   "press": 9,
    "firstArticleAt": "2026-11-20T15:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "‘나혼산’ TXT 연준, 첫 보금자리 최초 공개 “10년 숙소 생활”",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-20T16:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000328653"
+    },
     {
      "title": "'자취 7개월' 연준, 멤버들이랑 10년 살다가 독립...'첫 보금자리 공개'...",
      "press": "xportsnews.com",
@@ -33,12 +40,6 @@
      "press": "tokenpost.kr",
      "publishedAt": "2026-11-20T15:56:00.000Z",
      "link": "https://www.tokenpost.kr/news/breaking/441662"
-    },
-    {
-     "title": "투바투 연준, \"롤모델은 구성환\"... 친구 누나 아기 위해 유아차 플렉스...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-20T15:55:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000492079"
     }
    ]
   },
@@ -50,10 +51,16 @@
    "articles90": 7,
    "recent20": 2,
    "press": 4,
-   "firstArticleAt": "2026-11-20T15:06:00.000Z",
+   "firstArticleAt": "2026-11-20T15:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "엔비디아 주가 4.7% 하락…2025년 6월 이후 최저",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-20T16:32:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/441687"
+    },
     {
      "title": "美재무 \"'엔비디아 H200 中 판매 허용' 정책 변화 없어\"",
      "press": "yna.co.kr",
@@ -65,12 +72,70 @@
      "press": "tokenpost.kr",
      "publishedAt": "2026-11-20T16:12:00.000Z",
      "link": "https://www.tokenpost.kr/news/breaking/441673"
+    }
+   ]
+  },
+  {
+   "keyword": "후티 사우디 공습 예고",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-20T15:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "후티 반군, 이번엔 사우디 금융지구·발전소 공격 예고",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-20T16:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001206349?sid=104"
     },
     {
-     "title": "삼전 7만, 하닉 20만원 전망한 전문가…\"엔비디아, 장기적으로 경쟁력 ...",
+     "title": "후티 반군, 사우디 항구·발전소·금융지구 대대적 공습 예고…\"민간인...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-20T15:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005607566?sid=104"
+    },
+    {
+     "title": "후티 반군, 사우디 금융지구 등 민간 시설 대대적 공습 예고",
      "press": "newsis.com",
-     "publishedAt": "2026-11-20T16:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014336897?sid=101"
+     "publishedAt": "2026-11-20T15:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014336894?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "나혼산",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-20T15:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘나혼산’ TXT 연준, 첫 보금자리 최초 공개 “10년 숙소 생활”",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-20T16:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000328653"
+    },
+    {
+     "title": "'나혼산' 연준, 먹모델 성환 따라 아침식사...직접 뚱움바 파스타 요리",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-20T15:26:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=783548"
+    },
+    {
+     "title": "\"싱크대에 버려도 괜찮다\" 김신영, 천연 염료로 옷 염색 시도 ('나혼산'...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-20T15:24:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005643363"
     }
    ]
   },
@@ -109,7 +174,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 824,
+  "flagged": 825,
   "matched": 505,
   "avgLeadMin": 672,
   "recent": [
