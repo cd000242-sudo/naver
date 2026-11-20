@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T18:07:59.869Z",
+ "builtAt": "2026-11-20T18:18:03.631Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -9,72 +9,7 @@
   "minPress": 2
  },
  "measured": 23,
- "candidates": [
-  {
-   "keyword": "엔비디아",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-20T16:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美베선트 \"미·중, AI 군사 결정에 인간 개입 합의…엔비디아 수출 허용...",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-20T17:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928381?sid=104"
-    },
-    {
-     "title": "마이클 버리 ‘엔비디아 공매도 포지션 절반 매도’…워처구루 X 게시",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-20T17:26:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/441714"
-    },
-    {
-     "title": "베선트 \"엔비디아 H200 중국 수출 계속 허용\"",
-     "press": "4th.kr",
-     "publishedAt": "2026-11-20T16:46:00.000Z",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2122386"
-    }
-   ]
-  },
-  {
-   "keyword": "조희대 탄핵 추진",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-20T16:41:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "몸 단 혁신당? “오늘(20일) 탄핵안, 내일 표결”…민주당에 조희대 탄...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-20T17:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002834423?sid=100"
-    },
-    {
-     "title": "범여권 186명중 150명 찬성 탄핵안 통과땐 대법원장 직무정지",
-     "press": "donga.com",
-     "publishedAt": "2026-11-20T16:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764097?sid=100"
-    },
-    {
-     "title": "與 ‘조희대 탄핵’ 착수… “내달까지 소추안 통과”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-20T16:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764065?sid=100"
-    }
-   ]
-  }
- ],
+ "candidates": [],
  "hitRate": {
   "days": 7,
   "flagged": 824,
