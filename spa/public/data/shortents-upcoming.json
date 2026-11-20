@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T16:17:22.409Z",
+ "builtAt": "2026-11-20T16:27:25.517Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,81 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 28,
  "candidates": [
+  {
+   "keyword": "연준",
+   "sources": [
+    "google"
+   ],
+   "articles90": 12,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-20T15:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'자취 7개월' 연준, 멤버들이랑 10년 살다가 독립...'첫 보금자리 공개'...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-20T16:01:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002082670"
+    },
+    {
+     "title": "베선트, 연준 대폭 금리 인상론에 의문 제기",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-20T15:56:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/441662"
+    },
+    {
+     "title": "투바투 연준, \"롤모델은 구성환\"... 친구 누나 아기 위해 유아차 플렉스...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-20T15:55:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000492079"
+    }
+   ]
+  },
+  {
+   "keyword": "엔비디아",
+   "sources": [
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-20T15:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美재무 \"'엔비디아 H200 中 판매 허용' 정책 변화 없어\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-20T16:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016455396?sid=104"
+    },
+    {
+     "title": "스콧 베선트, 미·중 협상서 젠슨 황·엔비디아 논의 없었다",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-20T16:12:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/441673"
+    },
+    {
+     "title": "삼전 7만, 하닉 20만원 전망한 전문가…\"엔비디아, 장기적으로 경쟁력 ...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-20T16:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014336897?sid=101"
+    }
+   ]
+  },
   {
    "keyword": "김종국 소속사 사무실",
    "sources": [
     "daum"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-20T14:51:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-20T15:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -41,43 +105,11 @@
      "link": "https://m.entertain.naver.com/article/609/0001189776"
     }
    ]
-  },
-  {
-   "keyword": "엔비디아",
-   "sources": [
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 3,
-   "press": 3,
-   "firstArticleAt": "2026-11-20T15:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "스콧 베선트, 미·중 협상서 젠슨 황·엔비디아 논의 없었다",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-20T16:12:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/441673"
-    },
-    {
-     "title": "삼전 7만, 하닉 20만원 전망한 전문가…\"엔비디아, 장기적으로 경쟁력 ...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-20T16:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014336897?sid=101"
-    },
-    {
-     "title": "나스닥 2.21% 급락…앤트로픽 12%·엔비디아 6% 하락, 반도체주 초토화,...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-20T15:58:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629278"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 823,
+  "flagged": 824,
   "matched": 505,
   "avgLeadMin": 672,
   "recent": [
