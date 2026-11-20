@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T16:57:36.345Z",
+ "builtAt": "2026-11-20T17:07:39.813Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "연준",
@@ -16,10 +16,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 8,
+   "articles90": 7,
    "recent20": 0,
    "press": 6,
-   "firstArticleAt": "2026-11-20T15:29:00.000Z",
+   "firstArticleAt": "2026-11-20T15:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -49,7 +49,7 @@
     "google"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-20T15:58:00.000Z",
    "exclusive": false,
@@ -76,105 +76,41 @@
    ]
   },
   {
-   "keyword": "민주유공자법 국회 통과",
+   "keyword": "조희대 탄핵 당론 추진",
    "sources": [
     "nate"
    ],
    "articles90": 5,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-20T15:54:00.000Z",
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-20T15:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "與, 선정 기준 논란 ‘민주유공자법’ 강행 처리",
+     "title": "범여권 186명중 150명 찬성 탄핵안 통과땐 대법원장 직무정지",
+     "press": "donga.com",
+     "publishedAt": "2026-11-20T16:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764097?sid=100"
+    },
+    {
+     "title": "與 ‘조희대 탄핵’ 착수… “내달까지 소추안 통과”",
      "press": "donga.com",
      "publishedAt": "2026-11-20T16:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764068?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/020/0003764065?sid=100"
     },
     {
-     "title": "[사설] 민주유공자법, 심사 투명성 확보해야",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-20T16:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001886532?sid=110"
-    },
-    {
-     "title": "[사진] ‘민주유공자법’ 통과 자축?",
+     "title": "특검도 수긍한 판결…민주당선 탄핵 당론",
      "press": "joongang.co.kr",
-     "publishedAt": "2026-11-20T16:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/353/0000057357?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "EU 영국 정상회담",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-20T15:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "EU·영국, 브렉시트 10년 만에 관계 재설정… 식품 무역·청년 교류 합의",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-20T16:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001206350?sid=104"
-    },
-    {
-     "title": "브렉시트로 헤어진 EU·영국, 정상회담서 '관계 재설정' 시동(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-20T15:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016455392?sid=104"
-    },
-    {
-     "title": "영국-EU, 브렉시트 10년 만에 관계 재설정…식품 검역 폐지·청년교류 합...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-20T15:30:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261121000002"
-    }
-   ]
-  },
-  {
-   "keyword": "후티 사우디 공습 예고",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-20T15:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "후티 반군, 이번엔 사우디 금융지구·발전소 공격 예고",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-20T16:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001206349?sid=104"
-    },
-    {
-     "title": "후티 반군, 사우디 항구·발전소·금융지구 대대적 공습 예고…\"민간인...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-20T15:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005607566?sid=104"
-    },
-    {
-     "title": "후티 반군, 사우디 금융지구 등 민간 시설 대대적 공습 예고",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-20T15:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014336894?sid=104"
+     "publishedAt": "2026-11-20T16:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/353/0000057355?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 827,
+  "flagged": 828,
   "matched": 505,
   "avgLeadMin": 672,
   "recent": [
