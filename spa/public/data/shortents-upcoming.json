@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T20:59:06.651Z",
+ "builtAt": "2026-11-20T21:09:10.190Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,70 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 29,
+ "measured": 25,
  "candidates": [
   {
-   "keyword": "트럼프",
+   "keyword": "트럼프 데이터센터 세금 부과",
    "sources": [
-    "google"
+    "signal.bz"
    ],
-   "articles90": 26,
-   "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-20T19:30:00.000Z",
+   "articles90": 9,
+   "recent20": 3,
+   "press": 8,
+   "firstArticleAt": "2026-11-20T19:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "트럼프 \"고유가는 이란과의 협상이 관건\"…이견 '평행선' 시사",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-20T20:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928389?sid=104"
+     "title": "트럼프, 해외 AI 데이터센터 투자에 고율 과세 경고…미국 빅테크 긴장",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-20T21:08:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=847949"
     },
     {
-     "title": "트럼프 \"美기업, 해외 데이터센터 지으면 막대한 세금 부과\"(종합)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-20T20:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014336935?sid=104"
+     "title": "트럼프 \"美 기업, 다른 나라에 데이터센터 지으면 고액 세금 부과\"",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-20T21:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000121874?sid=104"
     },
     {
-     "title": "트럼프, 중간선거 패배 이유 꼽으며 '남 탓'",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-20T20:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652456?sid=104"
+     "title": "트럼프 “美기업, 해외에 데이터센터 지으면 고율 과세”",
+     "press": "kbmaeil.com",
+     "publishedAt": "2026-11-20T21:04:00.000Z",
+     "link": "https://www.kbmaeil.com/article/20261121500018"
     }
    ]
   },
   {
-   "keyword": "한파",
+   "keyword": "2026년 11월 21일 운세",
    "sources": [
-    "signal.bz",
-    "google"
+    "signal.bz"
    ],
-   "articles90": 3,
-   "recent20": 0,
+   "articles90": 4,
+   "recent20": 3,
    "press": 3,
-   "firstArticleAt": "2026-11-20T19:30:00.000Z",
+   "firstArticleAt": "2026-11-20T20:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'아침 -9도' 경기북부 냉동고 한파…\"강풍 맹위\" 체감 뚝",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-20T20:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014336934?sid=102"
+     "title": "[오늘의 운세] 2026년 11월 21일 별자리 운세",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-20T21:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413397?sid=103"
     },
     {
-     "title": "[오늘의 날씨] 경기(21일, 토)…아침 영하 9도 '한파'",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-20T20:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009302306?sid=102"
+     "title": "[오늘의 운세] 2026년 11월 21일 띠별 운세",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-20T21:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413396?sid=103"
     },
     {
-     "title": "한덕수 파기환송에 조희대 탄핵 추진까지… 국민의힘 '한파' 장외투쟁",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-20T19:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000966886?sid=100"
+     "title": "[백운산 오늘의 운세] 2026년 11월 21일",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-20T21:00:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20260916001523167"
     }
    ]
   }
@@ -79,9 +78,33 @@
  "hitRate": {
   "days": 7,
   "flagged": 825,
-  "matched": 499,
-  "avgLeadMin": 660,
+  "matched": 501,
+  "avgLeadMin": 652,
   "recent": [
+   {
+    "keyword": "공사 생도 시험지 촬영 퇴교",
+    "hitKeyword": "LEET 시험지",
+    "hitAt": "2026-11-21T06:00:00+09:00",
+    "leadMin": 353
+   },
+   {
+    "keyword": "김수현 소속사 쿠쿠에 배상 판결",
+    "hitKeyword": "김수현 소속사 쿠쿠 배상",
+    "hitAt": "2026-11-21T06:00:00+09:00",
+    "leadMin": 353
+   },
+   {
+    "keyword": "엔비디아",
+    "hitKeyword": "엔비디아 젠슨 황",
+    "hitAt": "2026-11-21T06:00:00+09:00",
+    "leadMin": 343
+   },
+   {
+    "keyword": "김종국 소속사 사무실",
+    "hitKeyword": "비서진 김종국",
+    "hitAt": "2026-11-21T06:00:00+09:00",
+    "leadMin": 293
+   },
    {
     "keyword": "푸른길 나가야마 한국 사랑 중",
     "hitKeyword": "푸른길 넷플릭스 공개",
@@ -117,30 +140,6 @@
     "hitKeyword": "아파트 공시가격 5년 동결",
     "hitAt": "2026-11-20T22:00:00+09:00",
     "leadMin": 876
-   },
-   {
-    "keyword": "수험표",
-    "hitKeyword": "이진우 2018 수험표",
-    "hitAt": "2026-11-20T19:30:00+09:00",
-    "leadMin": 3334
-   },
-   {
-    "keyword": "기아",
-    "hitKeyword": "도란 디플러스 기아 이적",
-    "hitAt": "2026-11-20T18:00:00+09:00",
-    "leadMin": 555
-   },
-   {
-    "keyword": "테슬라 사이버캡 판매",
-    "hitKeyword": "테슬라 FSD 특례 신청 반려",
-    "hitAt": "2026-11-20T17:30:00+09:00",
-    "leadMin": 5907
-   },
-   {
-    "keyword": "하리수 김지선 남학생",
-    "hitKeyword": "하리수 51세 동안",
-    "hitAt": "2026-11-20T13:30:00+09:00",
-    "leadMin": 7976
    }
   ]
  }
