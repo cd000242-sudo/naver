@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T15:17:02.649Z",
+ "builtAt": "2026-11-20T15:27:05.435Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "엔비디아",
@@ -16,10 +16,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 5,
-   "recent20": 4,
+   "articles90": 4,
+   "recent20": 2,
    "press": 4,
-   "firstArticleAt": "2026-11-20T13:54:00.000Z",
+   "firstArticleAt": "2026-11-20T15:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -40,38 +40,6 @@
      "press": "cbci.co.kr",
      "publishedAt": "2026-11-20T15:06:00.000Z",
      "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629263"
-    }
-   ]
-  },
-  {
-   "keyword": "공사 생도 시험지 촬영 퇴교",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-20T13:53:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "공사 생도 감독관 없는 ‘명예시험’ 중 스마트폰으로 시험지 촬영…퇴...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-20T14:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002834418?sid=100"
-    },
-    {
-     "title": "감독관 없는 시험, 명예도 없었다… ‘시험지 촬영’ 공사 생도, 퇴교 처...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-20T14:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004176889?sid=102"
-    },
-    {
-     "title": "감독관 없는 '명예시험'조차 시험지 찰칵...공사 생도, 결국",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-20T14:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413371?sid=100"
     }
    ]
   },
@@ -106,45 +74,13 @@
      "link": "https://n.news.naver.com/mnews/article/053/0000063220?sid=102"
     }
    ]
-  },
-  {
-   "keyword": "방탄소년단 엔하이픈 대상",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-20T13:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "오사카 달군 '2026 마마 어워즈'…첫날 대상에 BTS·엔하이픈",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-20T14:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016455381?sid=103"
-    },
-    {
-     "title": "방탄소년단·엔하이픈, '2026 마마 어워즈' 첫날 대상…나란히 3관왕",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-20T14:07:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014336850"
-    },
-    {
-     "title": "방탄소년단·엔하이픈, 나란히 대상 영예[2026 MAMA AWARDS]",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-20T13:50:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003489094"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 830,
-  "matched": 512,
-  "avgLeadMin": 677,
+  "flagged": 825,
+  "matched": 509,
+  "avgLeadMin": 670,
   "recent": [
    {
     "keyword": "푸른길 나가야마 한국 사랑 중",
