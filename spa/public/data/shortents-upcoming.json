@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T18:18:03.631Z",
+ "builtAt": "2026-11-20T18:28:06.726Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,8 +8,41 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
- "candidates": [],
+ "measured": 25,
+ "candidates": [
+  {
+   "keyword": "연준",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-20T17:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "투바투 연준, 10년 숙소 생활 끝내고 독립…'나혼산'서 자취 7개월 차 집...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-20T18:24:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16281861"
+    },
+    {
+     "title": "美재무, '빅스텝' 월러 연준 이사 겨냥 \"다소 종잡을 수 없는 행보\"",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-20T18:00:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445826"
+    },
+    {
+     "title": "리사 쿡 연준 이사, 물가 대응 추가 금리 인상 지지 시사",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-20T17:34:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/441718"
+    }
+   ]
+  }
+ ],
  "hitRate": {
   "days": 7,
   "flagged": 824,
