@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T21:59:27.897Z",
+ "builtAt": "2026-11-20T22:09:31.306Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,108 +8,76 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 29,
+ "measured": 28,
  "candidates": [
   {
-   "keyword": "나스닥",
-   "sources": [
-    "google"
-   ],
-   "articles90": 33,
-   "recent20": 10,
-   "press": 23,
-   "firstArticleAt": "2026-11-20T20:39:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "AI 거품 공포에 뉴욕증시 급락…나스닥 5.28% 폭락",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-20T21:58:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101729"
-    },
-    {
-     "title": "나스닥, 올해 상승분 전액 반납…'AI 거품 공포'에 뉴욕증시 패닉",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-20T21:50:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101726"
-    },
-    {
-     "title": "뉴욕증시 다우·S&P500 조정장 진입…나스닥, AI주 투매에 올해 상승분 ...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-20T21:48:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2651148"
-    }
-   ]
-  },
-  {
-   "keyword": "트럼프 데이터센터 세금 부과",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-20T20:47:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "트럼프 \"환상적인 미중러 관계가 미국 안전히 지켜...해외 데이터센터 ...",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-20T21:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002435996?sid=104"
-    },
-    {
-     "title": "트럼프 \"미국 기업, 다른 나라에 데이터센터 지으면 엄청난 세금 부과\"",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-20T21:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979203?sid=102"
-    },
-    {
-     "title": "[핫이슈] 트럼프 \"해외 데이터센터 지으면 막대한 세금\"…AWS 한국 투자...",
-     "press": "the-today.com",
-     "publishedAt": "2026-11-20T21:14:00.000Z",
-     "link": "https://www.the-today.com/news/articleView.html?idxno=93890"
-    }
-   ]
-  },
-  {
-   "keyword": "엔비디아 H200 수출 허용",
+   "keyword": "나스닥 급락",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-20T20:52:00.000Z",
+   "articles90": 32,
+   "recent20": 6,
+   "press": 24,
+   "firstArticleAt": "2026-11-20T20:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "엔비디아, 中군 연계 기업에 AI칩 수출 추진…앨리스 황 연관사도 포함",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-20T21:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001206367?sid=104"
+     "title": "‘AI 투매’에 나스닥 5.3% 추락하며 올해 상승분 반납…엔비디아 14%↓",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-20T22:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002394534?sid=101"
     },
     {
-     "title": "엔비디아, 중국 간첩 연루 메가스피드 관련사에 칩 4만개 판매신청",
+     "title": "앤트로픽, 상장 이틀째 8.5% 급락…장중 공모가까지 떨어지기도",
      "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-20T21:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012298523?sid=104"
+     "publishedAt": "2026-11-20T22:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012298552?sid=104"
     },
     {
-     "title": "엔비디아, 中간첩 연루 메가스피드 관련사에 칩 4만개 판매신청",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-20T21:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016455432?sid=104"
+     "title": "앤트로픽, 상장 이틀째 급락…장중 공모가 턱밑까지",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-20T21:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009302346?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "비트코인",
+   "sources": [
+    "google"
+   ],
+   "articles90": 12,
+   "recent20": 5,
+   "press": 9,
+   "firstArticleAt": "2026-11-20T20:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "웨일 얼럿, 코인베이스로 비트코인 899개 이동 관측",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-20T22:04:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/441836"
+    },
+    {
+     "title": "보름 만에 23% 떨어진 비트코인…바닥은 어디일까[코인현미경]",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-20T22:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009302347?sid=101"
+    },
+    {
+     "title": "[오전 브리핑] 비트코인 8,181만원…4개월 만에 6만달러 하회",
+     "press": "coinreaders.com",
+     "publishedAt": "2026-11-20T21:58:00.000Z",
+     "link": "http://coinreaders.com/272142"
     }
    ]
   },
   {
    "keyword": "2026년 11월 21일 운세",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 5,
    "recent20": 0,
@@ -139,44 +107,138 @@
    ]
   },
   {
-   "keyword": "굿파트너 2",
+   "keyword": "앤트로픽 이틀째 급락",
    "sources": [
-    "daum"
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-20T21:33:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "앤트로픽, 상장 이틀째 8.5% 급락…장중 공모가까지 떨어지기도",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-20T22:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012298552?sid=104"
+    },
+    {
+     "title": "앤트로픽, 상장 이틀째 급락…장중 공모가 턱밑까지",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-20T21:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009302346?sid=101"
+    },
+    {
+     "title": "[뉴욕마감] 앤트로픽 상장도 못 잠재운 AI 우려…나스닥 5.3% 급락",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-20T21:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009302344?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "조희대 탄핵 여론",
+   "sources": [
+    "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-20T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김혜윤, '오픈 메리지 약정서' 의뢰인 거짓말에 당했다(굿파트너2) [텔리...",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-20T21:36:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110018147307"
+     "title": "[오늘의 신문] 코스피 5%대 급락·수출 1조 달러 돌파…대법원장 탄핵 논...",
+     "press": "kor.theasian.asia",
+     "publishedAt": "2026-11-20T22:06:00.000Z",
+     "link": "http://kor.theasian.asia/archives/422340"
     },
     {
-     "title": "“일과 인생 사이”…‘굿파트너2’ 여전한 장나라 변호사 [TV온에어]",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-20T21:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000053674"
+     "title": "“조희대 탄핵은 광기이자 보복”…거리로 나선 야당",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-20T21:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012298538?sid=100"
     },
     {
-     "title": "'굿파트너2' 장나라X김혜윤, 이번에도 실패하지 않습니다[★FOCUS]",
-     "press": "starnewskorea.com",
+     "title": "“與 논리면, 내란특검도 탄핵해야”…‘조희대 탄핵’ 당론 발칵",
+     "press": "joongang.co.kr",
      "publishedAt": "2026-11-20T21:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003489116"
+     "link": "https://n.news.naver.com/mnews/article/025/0003566813?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "포스코",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-20T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "현대제철 발전소 짓고 포스코는 아끼고…철강업계 전력비 전쟁",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-20T22:00:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2650747"
+    },
+    {
+     "title": "보훈부·포스코1%나눔재단, 상이 국가유공자 등에 첨단 보조기구 전달",
+     "press": "segye.com",
+     "publishedAt": "2026-11-20T21:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004176920?sid=100"
+    },
+    {
+     "title": "[사회공헌 Pick] 삼표그룹·포스코1%나눔재단, '배리어프리' 나눔과 국가...",
+     "press": "lcnews.co.kr",
+     "publishedAt": "2026-11-20T21:00:00.000Z",
+     "link": "https://www.lcnews.co.kr/news/articleView.html?idxno=211744"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 828,
-  "matched": 501,
-  "avgLeadMin": 653,
+  "flagged": 832,
+  "matched": 506,
+  "avgLeadMin": 647,
   "recent": [
+   {
+    "keyword": "트럼프",
+    "hitKeyword": "트럼프 젠슨 황",
+    "hitAt": "2026-11-21T07:00:00+09:00",
+    "leadMin": 152
+   },
+   {
+    "keyword": "트럼프 해외 데이터센터 세금",
+    "hitKeyword": "트럼프 젠슨 황",
+    "hitAt": "2026-11-21T07:00:00+09:00",
+    "leadMin": 91
+   },
+   {
+    "keyword": "트럼프 데이터센터 세금 부과",
+    "hitKeyword": "트럼프 젠슨 황",
+    "hitAt": "2026-11-21T07:00:00+09:00",
+    "leadMin": 51
+   },
+   {
+    "keyword": "엔비디아 H200 수출 허용",
+    "hitKeyword": "엔비디아 7주 하락",
+    "hitAt": "2026-11-21T07:00:00+09:00",
+    "leadMin": 21
+   },
+   {
+    "keyword": "굿파트너 2",
+    "hitKeyword": "굿파트너2 출연진",
+    "hitAt": "2026-11-21T07:00:00+09:00",
+    "leadMin": 11
+   },
    {
     "keyword": "김신영 수영복 자태 공개",
     "hitKeyword": "김신영 천연염료",
@@ -206,36 +268,6 @@
     "hitKeyword": "비서진 김종국",
     "hitAt": "2026-11-21T06:00:00+09:00",
     "leadMin": 293
-   },
-   {
-    "keyword": "푸른길 나가야마 한국 사랑 중",
-    "hitKeyword": "푸른길 넷플릭스 공개",
-    "hitAt": "2026-11-21T00:00:00+09:00",
-    "leadMin": 4942
-   },
-   {
-    "keyword": "손석구·나가야마 에이타 푸른길 공조",
-    "hitKeyword": "푸른길 넷플릭스 공개",
-    "hitAt": "2026-11-21T00:00:00+09:00",
-    "leadMin": 4892
-   },
-   {
-    "keyword": "개인정보",
-    "hitKeyword": "컬리 개인정보 유출",
-    "hitAt": "2026-11-20T23:00:00+09:00",
-    "leadMin": 6258
-   },
-   {
-    "keyword": "서울시립대 개인정보 유출",
-    "hitKeyword": "컬리 개인정보 유출",
-    "hitAt": "2026-11-20T23:00:00+09:00",
-    "leadMin": 5727
-   },
-   {
-    "keyword": "노란우산 개인정보 유출",
-    "hitKeyword": "컬리 개인정보 유출",
-    "hitAt": "2026-11-20T23:00:00+09:00",
-    "leadMin": 3594
    }
   ]
  }
