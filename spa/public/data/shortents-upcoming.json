@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T21:19:13.811Z",
+ "builtAt": "2026-11-20T21:29:17.147Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,9 +15,9 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 5,
-   "press": 9,
+   "articles90": 11,
+   "recent20": 1,
+   "press": 11,
    "firstArticleAt": "2026-11-20T20:06:00.000Z",
    "exclusive": false,
    "capped": false,
@@ -48,18 +48,12 @@
     "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 3,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-20T20:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "[오늘의 운세] 2026년 11월 21일 별자리 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-20T21:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413397?sid=103"
-    },
     {
      "title": "[오늘의 운세] 2026년 11월 21일 띠별 운세",
      "press": "edaily.co.kr",
@@ -67,74 +61,16 @@
      "link": "https://n.news.naver.com/mnews/article/018/0006413396?sid=103"
     },
     {
+     "title": "[오늘의 운세] 2026년 11월 21일 별자리 운세",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-20T21:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413397?sid=103"
+    },
+    {
      "title": "[백운산 오늘의 운세] 2026년 11월 21일",
      "press": "asiatoday.co.kr",
      "publishedAt": "2026-11-20T21:00:00.000Z",
      "link": "https://www.asiatoday.co.kr/kn/view.php?key=20260916001523167"
-    }
-   ]
-  },
-  {
-   "keyword": "이진우 리트 만점 의혹",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 3,
-   "press": 3,
-   "firstArticleAt": "2026-11-20T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'궁금한 이야기Y' 이어 '그알'도…'리트 만점자' 故이진우 관련 제보 요...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-20T21:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000640150"
-    },
-    {
-     "title": "미트 수석 합격자도 혹시?…\"6년 준비\" AI 부정행위 의혹 일축",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-20T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005444342?sid=102"
-    },
-    {
-     "title": "\"이진우 5년간 평가했다면?…시험 패러다임 바꿔야\"",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-20T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001165132?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "한파",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-20T20:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "주말 한파 절정…서울 -5도·경기 -9도",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-20T21:10:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611210025"
-    },
-    {
-     "title": "'아침 -9도' 경기북부 냉동고 한파…\"강풍 맹위\" 체감 뚝",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-20T20:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014336934?sid=102"
-    },
-    {
-     "title": "[오늘의 날씨] 경기(21일, 토)…아침 영하 9도 '한파'",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-20T20:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009302306?sid=102"
     }
    ]
   }
