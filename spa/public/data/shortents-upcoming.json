@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T16:37:28.513Z",
+ "builtAt": "2026-11-20T16:47:33.247Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,10 +16,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 13,
+   "articles90": 12,
    "recent20": 1,
    "press": 9,
-   "firstArticleAt": "2026-11-20T15:16:00.000Z",
+   "firstArticleAt": "2026-11-20T15:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -44,17 +44,55 @@
    ]
   },
   {
+   "keyword": "민주유공자법 국회 통과",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-20T15:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "與, 선정 기준 논란 ‘민주유공자법’ 강행 처리",
+     "press": "donga.com",
+     "publishedAt": "2026-11-20T16:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764068?sid=100"
+    },
+    {
+     "title": "[사설] 민주유공자법, 심사 투명성 확보해야",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-20T16:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001886532?sid=110"
+    },
+    {
+     "title": "[사진] ‘민주유공자법’ 통과 자축?",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-20T16:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/353/0000057357?sid=102"
+    }
+   ]
+  },
+  {
    "keyword": "엔비디아",
    "sources": [
     "google"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-20T15:12:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-20T15:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "베선트 \"엔비디아 H200 중국 수출 계속 허용\"",
+     "press": "4th.kr",
+     "publishedAt": "2026-11-20T16:46:00.000Z",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2122386"
+    },
     {
      "title": "엔비디아 주가 4.7% 하락…2025년 6월 이후 최저",
      "press": "tokenpost.kr",
@@ -66,12 +104,6 @@
      "press": "yna.co.kr",
      "publishedAt": "2026-11-20T16:23:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016455396?sid=104"
-    },
-    {
-     "title": "스콧 베선트, 미·중 협상서 젠슨 황·엔비디아 논의 없었다",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-20T16:12:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/441673"
     }
    ]
   },
@@ -108,34 +140,34 @@
    ]
   },
   {
-   "keyword": "나혼산",
+   "keyword": "EU 영국 정상회담",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-20T15:08:00.000Z",
+   "firstArticleAt": "2026-11-20T15:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘나혼산’ TXT 연준, 첫 보금자리 최초 공개 “10년 숙소 생활”",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-20T16:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000328653"
+     "title": "EU·영국, 브렉시트 10년 만에 관계 재설정… 식품 무역·청년 교류 합의",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-20T16:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001206350?sid=104"
     },
     {
-     "title": "'나혼산' 연준, 먹모델 성환 따라 아침식사...직접 뚱움바 파스타 요리",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-20T15:26:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=783548"
+     "title": "브렉시트로 헤어진 EU·영국, 정상회담서 '관계 재설정' 시동(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-20T15:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016455392?sid=104"
     },
     {
-     "title": "\"싱크대에 버려도 괜찮다\" 김신영, 천연 염료로 옷 염색 시도 ('나혼산'...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-20T15:24:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005643363"
+     "title": "영국-EU, 브렉시트 10년 만에 관계 재설정…식품 검역 폐지·청년교류 합...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-20T15:30:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261121000002"
     }
    ]
   },
@@ -174,7 +206,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 825,
+  "flagged": 827,
   "matched": 505,
   "avgLeadMin": 672,
   "recent": [
