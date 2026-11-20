@@ -78,6 +78,12 @@ describe('account settings ready signal: call sites', () => {
     expect(body.indexOf('markAccountSettingsReady();', mark + 1)).toBe(-1);
   });
 
+  it('startup redraws the post list and the calendar once the lookup has finished (e2e: startup-account-scope-redraw)', () => {
+    const init = read('renderer/renderer.ts').split('whenAccountSettingsReady(0).then(')[1]?.slice(0, 400) ?? '';
+    expect(init).toContain('refreshGeneratedPostsList();');
+    expect(init).toContain('initClockAndCalendar();');
+  });
+
   it('the startup license check always ends the wait', () => {
     const body = read('renderer/modules/licenseUI.ts').split('export async function initLicenseModal')[1].split('// 인증 버튼')[0];
     expect(body).toMatch(/finally \{[^}]*markAccountSettingsReady\(\);/);

@@ -3483,6 +3483,18 @@ async function initializeApplication(): Promise<void> {
     }
   }, { name: 'refresh-posts-list', timeoutMs: 3000 });
 
+  // [2026-11-20] The post list and the calendar memo dots are account-scoped and were drawn before the startup license
+  // lookup set the account: on a slow start the list stayed empty all session, and the memo dots never showed.
+  // Draw both once more when the lookup has finished (no limit: if it never answers, nothing changes).
+  void whenAccountSettingsReady(0).then(() => {
+    try {
+      refreshGeneratedPostsList();
+      initClockAndCalendar();
+    } catch (e) {
+      console.warn('[Init] redraw after account lookup failed (ignored):', e);
+    }
+  });
+
   // ✅ [v2.10.93] 최종 요약 — top 5 느린 단계 console.warn으로 강조 출력
   //   (v2.10.41 console.log no-op 회피)
   const topSlow = [..._perfSteps].sort((a, b) => b.ms - a.ms).slice(0, 5);
