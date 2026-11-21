@@ -1,22 +1,23 @@
 {
  "schemaVersion": "homefeed-speed-v1",
- "publishedAt": "2026-11-21T09:05:16.202Z",
- "snapshotAt": "2026-11-21T09:05:14.353Z",
- "computedAt": "2026-11-21T09:05:16.202Z",
+ "publishedAt": "2026-11-21T09:12:47.528Z",
+ "snapshotAt": "2026-11-21T09:12:40.996Z",
+ "computedAt": "2026-11-21T09:12:47.528Z",
  "resolutionMinutes": 15,
  "speedScoreboard": {
   "windowDays": 7,
   "measuredDays": 0,
   "ready": false,
-  "total": 12,
+  "total": 14,
   "ahead": 0,
   "behind": 0,
-  "unmeasured": 12,
+  "unmeasured": 14,
   "unmeasuredReasons": {
-   "censored": 12
+   "censored": 12,
+   "sample_capped": 2
   },
   "resolutionMinutes": 15,
-  "computedAt": "2026-11-21T09:05:16.202Z"
+  "computedAt": "2026-11-21T09:12:47.528Z"
  },
  "stories": [
   {
@@ -24,7 +25,7 @@
    "keyword": "삼성전자 tsmc 중국 반도체 출하 중단 및 국내 증시 영향 최신 뉴스 알려줘",
    "category": "tech",
    "newsBuckets": {
-    "endAt": "2026-11-21T09:05:14.353Z",
+    "endAt": "2026-11-21T09:12:40.996Z",
     "bucketMinutes": 30,
     "counts": [
      0,
@@ -70,7 +71,7 @@
    "keyword": "수원 삼성 K리그2 우승!",
    "category": "sports",
    "newsBuckets": {
-    "endAt": "2026-11-21T09:05:14.353Z",
+    "endAt": "2026-11-21T09:12:40.996Z",
     "bucketMinutes": 30,
     "counts": [
      0,
@@ -88,19 +89,65 @@
      0,
      0,
      0,
-     3,
-     1,
      0,
      0,
-     9,
-     14,
-     9,
+     0,
+     0,
+     16,
+     8,
+     13,
      11,
-     11
+     9
     ],
-    "counted": 58,
+    "counted": 57,
     "undated": 0,
     "outOfRange": 0
+   },
+   "lead": {
+    "status": "unmeasured",
+    "minutes": null,
+    "reason": "censored",
+    "resolutionMinutes": 15,
+    "firstSeenAt": "2026-11-21T09:02:48.389Z",
+    "firstNewsAt": null
+   }
+  },
+  {
+   "id": "f77ae293e4ee",
+   "keyword": "경기도교육청 교원 개인정보 유출",
+   "category": "sports",
+   "newsBuckets": {
+    "endAt": "2026-11-21T09:12:40.996Z",
+    "bucketMinutes": 30,
+    "counts": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     3,
+     6,
+     4
+    ],
+    "counted": 13,
+    "undated": 0,
+    "outOfRange": 3
    },
    "lead": {
     "status": "unmeasured",
@@ -116,7 +163,7 @@
    "keyword": "연준 자취일상 공개",
    "category": "unknown",
    "newsBuckets": {
-    "endAt": "2026-11-21T09:05:14.353Z",
+    "endAt": "2026-11-21T09:12:40.996Z",
     "bucketMinutes": 30,
     "counts": [
      0,
@@ -158,103 +205,11 @@
    }
   },
   {
-   "id": "f77ae293e4ee",
-   "keyword": "경기도교육청 교원 개인정보 유출",
-   "category": "sports",
-   "newsBuckets": {
-    "endAt": "2026-11-21T09:05:14.353Z",
-    "bucketMinutes": 30,
-    "counts": [
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     1,
-     5,
-     7
-    ],
-    "counted": 13,
-    "undated": 0,
-    "outOfRange": 3
-   },
-   "lead": {
-    "status": "unmeasured",
-    "minutes": null,
-    "reason": "censored",
-    "resolutionMinutes": 15,
-    "firstSeenAt": "2026-11-21T09:02:48.389Z",
-    "firstNewsAt": null
-   }
-  },
-  {
-   "id": "e89a43bc550b",
-   "keyword": "국힘 조작기소 특검법 규탄",
-   "category": "policy",
-   "newsBuckets": {
-    "endAt": "2026-11-21T09:05:14.353Z",
-    "bucketMinutes": 30,
-    "counts": [
-     0,
-     0,
-     0,
-     1,
-     0,
-     0,
-     0,
-     1,
-     0,
-     0,
-     1,
-     1,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     3,
-     3
-    ],
-    "counted": 10,
-    "undated": 0,
-    "outOfRange": 31
-   },
-   "lead": {
-    "status": "unmeasured",
-    "minutes": null,
-    "reason": "censored",
-    "resolutionMinutes": 15,
-    "firstSeenAt": "2026-11-21T09:02:48.389Z",
-    "firstNewsAt": null
-   }
-  },
-  {
    "id": "01dbd3579515",
    "keyword": "최민정 1000M 3연속 우승",
    "category": "sports",
    "newsBuckets": {
-    "endAt": "2026-11-21T09:05:14.353Z",
+    "endAt": "2026-11-21T09:12:40.996Z",
     "bucketMinutes": 30,
     "counts": [
      0,
@@ -276,9 +231,9 @@
      0,
      0,
      0,
-     5,
+     6,
      3,
-     3,
+     2,
      2,
      4
     ],
@@ -300,7 +255,7 @@
    "keyword": "추성훈 은퇴전",
    "category": "weather",
    "newsBuckets": {
-    "endAt": "2026-11-21T09:05:14.353Z",
+    "endAt": "2026-11-21T09:12:40.996Z",
     "bucketMinutes": 30,
     "counts": [
      0,
@@ -308,17 +263,17 @@
      0,
      0,
      1,
-     0,
+     1,
      2,
-     1,
-     0,
-     1,
      0,
      0,
      1,
      0,
      0,
      1,
+     0,
+     1,
+     0,
      0,
      0,
      0,
@@ -342,57 +297,57 @@
    }
   },
   {
-   "id": "9867dcc8984c",
-   "keyword": "굿파트너 2",
-   "category": "unknown",
+   "id": "2cffa813bac5",
+   "keyword": "코르티스 일본 레코드 대상 수상",
+   "category": "entertainment",
    "newsBuckets": {
-    "endAt": "2026-11-21T09:05:14.353Z",
+    "endAt": "2026-11-21T09:12:40.996Z",
     "bucketMinutes": 30,
     "counts": [
      0,
      0,
-     1,
+     0,
+     0,
+     4,
      0,
      1,
      0,
-     1,
      0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
-     0,
+     3,
      1,
      0,
      0,
      0,
      0,
+     1,
+     1,
+     3,
+     2,
+     0,
+     1,
      0,
      0,
-     0,
-     0
+     2
     ],
-    "counted": 4,
+    "counted": 19,
     "undated": 0,
-    "outOfRange": 1
+    "outOfRange": 20
    },
    "lead": {
     "status": "unmeasured",
     "minutes": null,
-    "reason": "censored",
+    "reason": "sample_capped",
     "resolutionMinutes": 15,
-    "firstSeenAt": "2026-11-21T09:02:48.389Z",
+    "firstSeenAt": "2026-11-21T09:12:40.996Z",
     "firstNewsAt": null
    }
   },
   {
    "id": "73007077a7e6",
    "keyword": "김민석 대표 인사",
-   "category": "policy",
+   "category": "unknown",
    "newsBuckets": {
-    "endAt": "2026-11-21T09:05:14.353Z",
+    "endAt": "2026-11-21T09:12:40.996Z",
     "bucketMinutes": 30,
     "counts": [
      0,
@@ -434,11 +389,11 @@
    }
   },
   {
-   "id": "66d2d19a2ecb",
-   "keyword": "수능 부정 신고 최소 1억 포상",
-   "category": "policy",
+   "id": "9e09972d0c99",
+   "keyword": "개인중립선수",
+   "category": "sports",
    "newsBuckets": {
-    "endAt": "2026-11-21T09:05:14.353Z",
+    "endAt": "2026-11-21T09:12:40.996Z",
     "bucketMinutes": 30,
     "counts": [
      0,
@@ -459,14 +414,60 @@
      0,
      0,
      0,
-     3,
-     31,
-     18,
-     8,
-     5,
-     2
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
     ],
-    "counted": 67,
+    "counted": 0,
+    "undated": 0,
+    "outOfRange": 0
+   },
+   "lead": {
+    "status": "unmeasured",
+    "minutes": null,
+    "reason": "sample_capped",
+    "resolutionMinutes": 15,
+    "firstSeenAt": "2026-11-21T09:12:40.996Z",
+    "firstNewsAt": null
+   }
+  },
+  {
+   "id": "66d2d19a2ecb",
+   "keyword": "수능 부정 신고 최소 1억 포상",
+   "category": "policy",
+   "newsBuckets": {
+    "endAt": "2026-11-21T09:12:40.996Z",
+    "bucketMinutes": 30,
+    "counts": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     8,
+     31,
+     16,
+     7,
+     3,
+     4
+    ],
+    "counted": 69,
     "undated": 0,
     "outOfRange": 0
    },
@@ -484,7 +485,7 @@
    "keyword": "종묘",
    "category": "house",
    "newsBuckets": {
-    "endAt": "2026-11-21T09:05:14.353Z",
+    "endAt": "2026-11-21T09:12:40.996Z",
     "bucketMinutes": 30,
     "counts": [
      0,
@@ -526,23 +527,19 @@
    }
   },
   {
-   "id": "fa3ac97234d5",
-   "keyword": "푸른길",
+   "id": "9867dcc8984c",
+   "keyword": "굿파트너 2",
    "category": "unknown",
    "newsBuckets": {
-    "endAt": "2026-11-21T09:05:14.353Z",
+    "endAt": "2026-11-21T09:12:40.996Z",
     "bucketMinutes": 30,
     "counts": [
      0,
      0,
-     0,
      1,
-     0,
      1,
      0,
-     1,
-     1,
-     1,
+     0,
      1,
      0,
      0,
@@ -550,17 +547,21 @@
      0,
      0,
      0,
-     1,
-     1,
      0,
      1,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
      0,
      0,
      0
     ],
-    "counted": 9,
+    "counted": 4,
     "undated": 0,
-    "outOfRange": 23
+    "outOfRange": 1
    },
    "lead": {
     "status": "unmeasured",
