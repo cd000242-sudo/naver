@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T15:00:45.129Z",
+ "builtAt": "2026-11-21T15:10:48.246Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,18 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "김혜윤",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 9,
+   "articles90": 7,
    "recent20": 0,
    "press": 6,
-   "firstArticleAt": "2026-11-21T13:36:00.000Z",
+   "firstArticleAt": "2026-11-21T14:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -43,44 +44,94 @@
    ]
   },
   {
-   "keyword": "수능 부정 신고 포상금",
+   "keyword": "1251회 로또 당첨 번호",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 2,
-   "firstArticleAt": "2026-11-21T13:59:00.000Z",
+   "articles90": 5,
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-21T14:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "무작위 전화 걸었더니 벨 울렸다…국가자격시험서 부정행위 '이만큼' 적...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-21T14:42:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1176609"
+     "title": "로또1등당첨지역 \"20억 부산 2곳\" 1251회 로또당첨번호조회",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-21T15:06:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3759142"
     },
     {
-     "title": "이 대통령 \"수능 부정행위 신고 포상, 1건당 최소 1억\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-21T14:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436201?sid=100"
+     "title": "로또 당첨번호 지역 1251회",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-21T15:02:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611210163"
     },
     {
-     "title": "부정행위 신고 포상금 최소 1억...여야, 징계 정치로 혼란",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-21T13:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436199?sid=100"
+     "title": "로또 1251회 1등 번호 14·18·19·29·40·45",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-21T14:52:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=409000"
+    }
+   ]
+  },
+  {
+   "keyword": "홍대 인도 돌진 6명 경상",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-21T13:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "홍대입구역서 3중 추돌로 시내버스 인도 돌진…승객 6명 경상",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-21T14:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005607679?sid=102"
+    },
+    {
+     "title": "주말 홍대서 시내버스 삼중추돌·인도 돌진…승객 6명 병원 이송(종합)",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-21T13:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009302912?sid=102"
+    },
+    {
+     "title": "홍대입구역서 버스 2대·승용차 '쾅'…인도 돌진에 6명 부상",
+     "press": "weekly.chosun.com",
+     "publishedAt": "2026-11-21T13:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/053/0000063246?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 892,
+  "flagged": 890,
   "matched": 534,
-  "avgLeadMin": 629,
+  "avgLeadMin": 624,
   "recent": [
+   {
+    "keyword": "굿파트너 2",
+    "hitKeyword": "고원희 굿파트너2",
+    "hitAt": "2026-11-22T00:00:00+09:00",
+    "leadMin": 80
+   },
+   {
+    "keyword": "경비지도사",
+    "hitKeyword": "경비지도사 시험 적발",
+    "hitAt": "2026-11-22T00:00:00+09:00",
+    "leadMin": 39
+   },
+   {
+    "keyword": "경부선 일반열차 재개",
+    "hitKeyword": "경부선 운행 재개",
+    "hitAt": "2026-11-22T00:00:00+09:00",
+    "leadMin": 19
+   },
    {
     "keyword": "W코리아컵 초대 챔피언 수원FC",
     "hitKeyword": "김재웅 챔피언 사수",
@@ -122,24 +173,6 @@
     "hitKeyword": "경부선 운행 재개",
     "hitAt": "2026-11-21T22:30:00+09:00",
     "leadMin": 100
-   },
-   {
-    "keyword": "1251회 로또 당첨 번호",
-    "hitKeyword": "로또 1251회 당첨",
-    "hitAt": "2026-11-21T22:30:00+09:00",
-    "leadMin": 80
-   },
-   {
-    "keyword": "최민정 쇼트트랙 3연속 우승",
-    "hitKeyword": "최민정 월드투어 우승",
-    "hitAt": "2026-11-21T22:30:00+09:00",
-    "leadMin": 80
-   },
-   {
-    "keyword": "22일 첫차 운행 재개",
-    "hitKeyword": "경부선 운행 재개",
-    "hitAt": "2026-11-21T22:30:00+09:00",
-    "leadMin": 60
    }
   ]
  }
