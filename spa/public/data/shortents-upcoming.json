@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T13:10:06.931Z",
+ "builtAt": "2026-11-21T13:20:10.283Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 11,
+   "articles90": 13,
+   "recent20": 4,
+   "press": 13,
    "firstArticleAt": "2026-11-21T11:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "경부선 화물열차 탈선 여파…코레일, 22일 오전 일반열차 운행 재개 추...",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-21T13:18:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=848002"
+    },
+    {
+     "title": "경부선 일반열차 22일 첫차부터 재개…화물열차 탈선 복구",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-21T13:14:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903927"
+    },
+    {
      "title": "'운행 중단' 경부선 일반열차 22일 첫차부터 정상 운행 [종합]",
      "press": "hankyung.com",
      "publishedAt": "2026-11-21T13:06:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/015/0005356627?sid=102"
-    },
-    {
-     "title": "[아주경제 오늘의 종합 뉴스] 코레일 \"소정리역 탈선 밤샘 복구\"…22일 ...",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-21T13:02:00.000Z",
-     "link": "https://www.ajunews.com/view/20261121214444202"
-    },
-    {
-     "title": "경부선 소정리역 화물열차 5칸 탈선 사고…천안~대전 운행 중단, 22일 첫...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-21T12:38:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282543"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 10,
-   "recent20": 5,
-   "press": 9,
+   "articles90": 12,
+   "recent20": 4,
+   "press": 10,
    "firstArticleAt": "2026-11-21T11:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "‘51세’ 추성훈, 은퇴전서 아쉬운 판정패…“도전으로 이미 승리한 것...",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-21T13:19:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000328693"
+    },
+    {
+     "title": "추성훈, 은퇴전서 아쉬운 패배…딸 추사랑 폭풍 오열",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-21T13:15:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004127031"
+    },
+    {
      "title": "‘전설’ 추성훈, 22년 격투 인생 마침표… 고척돔 은퇴전 패배",
      "press": "chosun.com",
      "publishedAt": "2026-11-21T13:09:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/023/0004010977?sid=102"
-    },
-    {
-     "title": "추성훈 나이, 은퇴전 결과 \"크리스 리벤 승리\"",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-21T13:02:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3759160"
-    },
-    {
-     "title": "\"타임 투 세이 굿바이\" 추성훈, 16년 전 자신을 꺾었던 남자에게 또 졌다...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-21T12:54:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/109/0005643744"
     }
    ]
   },
@@ -80,12 +80,18 @@
     "nate"
    ],
    "articles90": 6,
-   "recent20": 0,
+   "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-21T11:46:00.000Z",
+   "firstArticleAt": "2026-11-21T12:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "홍대입구역 버스 인도 돌진…3중 추돌로 6명 부상",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-21T13:14:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282562"
+    },
     {
      "title": "홍대입구역서 버스 인도 돌진…3중 추돌로 6명 부상",
      "press": "edaily.co.kr",
@@ -97,76 +103,6 @@
      "press": "kado.net",
      "publishedAt": "2026-11-21T12:22:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/654/0000212547?sid=102"
-    },
-    {
-     "title": "홍대입구역서 3중 추돌사고…버스 1대 인도 돌진, 6명 경상",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-21T12:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004684685?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "로또1251",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-21T11:44:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "로또 1251회 1등 14매·20억6884만원…총구매수 역대 상위 10%",
-     "press": "econovill.com",
-     "publishedAt": "2026-11-21T13:00:00.000Z",
-     "link": "https://www.econovill.com/news/articleView.html?idxno=758062"
-    },
-    {
-     "title": "로또 1251회 당첨번호 조회···'1등 몽땅 자동 14명'",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-21T12:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000554277?sid=101"
-    },
-    {
-     "title": "로또 1251회 1등 14명…당첨금 각 20억6884만원",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-21T12:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002726600?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "호르무즈 유조선 피격",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-21T12:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "UKMTO \"호르무즈 해협서 미확인 발사체에 유조선 잇단 피격\"",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-21T12:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000121909?sid=104"
-    },
-    {
-     "title": "호르무즈 해협서 유조선 잇단 피격… 미확인 발사체 공격 보고",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-21T12:44:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3450958"
-    },
-    {
-     "title": "호르무즈 해협서 유조선 또 피격··· 이틀 새 3건",
-     "press": "dkilbo.com",
-     "publishedAt": "2026-11-21T12:00:00.000Z",
-     "link": "https://www.dkilbo.com/news/articleView.html?idxno=561547"
     }
    ]
   },
@@ -203,34 +139,66 @@
    ]
   },
   {
-   "keyword": "김민석",
+   "keyword": "호르무즈 유조선 피격",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-21T12:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "UKMTO \"호르무즈 해협서 미확인 발사체에 유조선 잇단 피격\"",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-21T12:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000121909?sid=104"
+    },
+    {
+     "title": "호르무즈 해협서 유조선 잇단 피격… 미확인 발사체 공격 보고",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-21T12:44:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3450958"
+    },
+    {
+     "title": "호르무즈 해협서 유조선 또 피격··· 이틀 새 3건",
+     "press": "dkilbo.com",
+     "publishedAt": "2026-11-21T12:00:00.000Z",
+     "link": "https://www.dkilbo.com/news/articleView.html?idxno=561547"
+    }
+   ]
+  },
+  {
+   "keyword": "로또1251",
    "sources": [
     "google"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-21T11:44:00.000Z",
+   "firstArticleAt": "2026-11-21T12:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김민석 “청년과 함께하는 것이 민주당 최대 과제”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-21T12:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004684686?sid=100"
+     "title": "로또 1251회 1등 14매·20억6884만원…총구매수 역대 상위 10%",
+     "press": "econovill.com",
+     "publishedAt": "2026-11-21T13:00:00.000Z",
+     "link": "https://www.econovill.com/news/articleView.html?idxno=758062"
     },
     {
-     "title": "與 '1030 청년 연설대전' 개최…김민석 \"새로운 민주당 역사의 장 열려\"...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-21T11:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014337513?sid=100"
+     "title": "로또 1251회 당첨번호 조회···'1등 몽땅 자동 14명'",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-21T12:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000554277?sid=101"
     },
     {
-     "title": "“노래 불러보고 까인 거냐!” 로이킴, 10CM·김민석·존박에 곡 뺏기고...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-21T11:44:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005767056"
+     "title": "로또 1251회 1등 14명…당첨금 각 20억6884만원",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-21T12:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002726600?sid=101"
     }
    ]
   }
