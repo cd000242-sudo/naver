@@ -1042,18 +1042,24 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
   }
 
   // [2026-11-17] Gemini 구독 이미지 (gemini-cli-image) — 사용자 명시 선택 시만. Gemini CLI(agy) 구독의 이미지 생성 도구를 쓰므로 API 과금이 없다.
-  //   auto/폴백 체인 제외. 실패한 칸은 다른 엔진으로 채우지 않고 명시 실패로 멈춘다. 참고 사진은 지원하지 않으며,
-  //   렌더러가 실어 보내는 imageModel(OpenAI 모델)은 쓰지 않는다.
+  //   auto/폴백 체인 제외. 실패한 칸은 다른 엔진으로 채우지 않고 명시 실패로 멈춘다. 렌더러가 실어 보내는 imageModel(OpenAI 모델)은 쓰지 않는다.
+  // [2026-11-21] 쇼핑: 대표 상품 사진 1장을 모든 소제목 세션에 참고로 붙인다. 불러오지 못하면 여기서 멈춘다
+  //   (SHOPPING_REFERENCE_LOAD_FAILED) — 참고 없는 그림도, 다른 엔진도 없다. 사용자 참고 사진(최대 3장)은 Codex 전용이다.
   if (isGeminiCliImageEngine(normalizedProvider)) {
     try {
       const { generateWithGeminiCliImage } = await import('./image/geminiCli/geminiCliImageGenerator.js');
+      const geminiCliReferences = await (await import('./image/geminiCli/geminiCliReferenceInput.js')).resolveGeminiCliReferenceInputs({
+        isShoppingConnect: Boolean(options.isShoppingConnect),
+        hasItems: items.length > 0,
+        shoppingBuffer: shoppingReferenceData?.buffer,
+      });
       const geminiCliImages = await generateWithGeminiCliImage(
         items,
         options.postTitle,
         options.postId,
         options.stopCheck,
         onImageGenerated,
-        { allowPartial: options.allowPartialResults === true },
+        { allowPartial: options.allowPartialResults === true, ...geminiCliReferences },
       );
       if (geminiCliImages.length === 0) {
         if (options.stopCheck?.()) return [];

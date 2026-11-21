@@ -63,6 +63,29 @@ describe('publishPreflightNeeds — 무엇을 확인해야 하나', () => {
   it('API 글 엔진 + codex-image 는 Codex 만 확인한다', () => {
     expect(publishPreflightNeeds('openai-gpt41', ['codex-image'])).toEqual([{ provider: 'codex', roles: ['image'] }]);
   });
+
+  it('gemini-cli-image 는 Gemini(agy) 이미지 연결을 확인한다 (메인 엔진 칸과 쇼핑 보조 칸이 같은 값을 쓴다)', () => {
+    expect(publishPreflightNeeds('openai-gpt41', ['gemini-cli-image'])).toEqual([{ provider: 'gemini', roles: ['image'] }]);
+    expect(publishPreflightNeeds('agent-claude', ['gemini-cli-image'])).toEqual([
+      { provider: 'claude', roles: ['text'] },
+      { provider: 'gemini', roles: ['image'] },
+    ]);
+  });
+
+  it('Codex 와 Gemini 이미지를 함께 쓰는 큐는 둘 다 확인하고, 같은 엔진 값은 한 번만 센다', () => {
+    expect(publishPreflightNeeds('openai-gpt41', ['codex-image', 'gemini-cli-image', 'gemini-cli-image'])).toEqual([
+      { provider: 'codex', roles: ['image'] },
+      { provider: 'gemini', roles: ['image'] },
+    ]);
+  });
+
+  it('Gemini 글 엔진(에이전트)과 Gemini 이미지는 한 CLI 로 모여 한 번만 확인한다', () => {
+    expect(publishPreflightNeeds('agent-gemini', ['gemini-cli-image'])).toEqual([{ provider: 'gemini', roles: ['text', 'image'] }]);
+  });
+
+  it('앞뒤 공백이 있어도 같은 엔진으로 본다 (Codex 와 같은 규칙)', () => {
+    expect(publishPreflightNeeds('', [' gemini-cli-image '])).toEqual([{ provider: 'gemini', roles: ['image'] }]);
+  });
 });
 
 describe('publishPreflightProbe — 상태 확인', () => {
@@ -109,6 +132,29 @@ describe('publishPreflightEnsureReady — 시작 버튼 앞 확인', () => {
     await expect(publishPreflightEnsureReady({ generator: 'agent-claude', imageSources: ['codex-image'] }, api)).resolves.toBe(false);
     const lines = Array.from(modal()!.querySelectorAll('[data-preflight-line]')).map((el) => el.textContent);
     expect(lines).toEqual(['이미지 · Codex — 로그인 필요']);
+  });
+
+  it('Gemini 이미지 엔진을 골랐는데 로그인이 안 돼 있으면 시작하지 않고 Gemini 줄만 보여 준다', async () => {
+    const api = makeApi({ claude: READY, gemini: NEEDS_LOGIN });
+    await expect(publishPreflightEnsureReady({ generator: 'agent-claude', imageSources: ['gemini-cli-image'] }, api)).resolves.toBe(false);
+    const lines = Array.from(modal()!.querySelectorAll('[data-preflight-line]')).map((el) => el.textContent);
+    expect(lines).toEqual(['이미지 · Antigravity — 로그인 필요']);
+    expect(api.agentStatus).toHaveBeenCalledWith('gemini', { forceRefresh: true });
+    expect(api.agentStatus).not.toHaveBeenCalledWith('codex', expect.anything());
+    expect(connectBtn()).not.toBeNull();
+  });
+
+  it('Gemini 이미지 엔진이 준비돼 있으면 true, 안내 창 없음', async () => {
+    const api = makeApi({ gemini: READY });
+    await expect(publishPreflightEnsureReady({ generator: 'openai-gpt41', imageSources: ['gemini-cli-image'] }, api)).resolves.toBe(true);
+    expect(modal()).toBeNull();
+  });
+
+  it('Gemini 구독 한도를 다 썼으면 연결 버튼 없이 사유만 보여 준다', async () => {
+    const api = makeApi({ gemini: RATE_LIMITED });
+    await expect(publishPreflightEnsureReady({ generator: '', imageSources: ['gemini-cli-image'] }, api)).resolves.toBe(false);
+    expect(modal()!.textContent).toContain('사용 불가');
+    expect(connectBtn()).toBeNull();
   });
 
   it('버전이 낮으면 "업데이트 필요" 로 보이고 같은 연결 버튼이 쓰인다', async () => {

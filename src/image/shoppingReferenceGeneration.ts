@@ -12,6 +12,8 @@ export const SHOPPING_REFERENCE_IMAGE_ENGINES = [
   'dropshot',
   // [2026-11-05] Codex subscription image: the product photo is attached as image_gen's referenced image (codexReferenceImage.ts).
   'codex-image',
+  // [2026-11-21] Gemini subscription image: the product photo is written into the session folder and named in the CLI instruction (geminiCliReferenceInput.ts).
+  'gemini-cli-image',
 ] as const;
 
 export type ShoppingReferenceImageEngine = typeof SHOPPING_REFERENCE_IMAGE_ENGINES[number];
@@ -22,6 +24,7 @@ export const SHOPPING_SELECTABLE_REFERENCE_ENGINES = [
   'openai-image',
   'dropshot',
   'codex-image',
+  'gemini-cli-image',
 ] as const;
 
 export type ShoppingSelectableReferenceEngine = typeof SHOPPING_SELECTABLE_REFERENCE_ENGINES[number];
@@ -324,7 +327,7 @@ export function assertShoppingReferenceGenerationSelectionSupported(
 
   throw new Error(
     `SHOPPING_REFERENCE_PROVIDER_UNSUPPORTED: "${normalizedProvider}"는 쇼핑 대표이미지 기반 AI 생성을 지원하지 않습니다. `
-    + '나노바나나2, 덕테이프(gpt-image-2.6), 리더스 나노바나나 무제한, Codex 구독 이미지 중 하나를 선택해주세요.',
+    + '나노바나나2, 덕테이프(gpt-image-2.6), 리더스 나노바나나 무제한, Codex 구독 이미지, Gemini 구독 이미지 중 하나를 선택해주세요.',
   );
 }
 

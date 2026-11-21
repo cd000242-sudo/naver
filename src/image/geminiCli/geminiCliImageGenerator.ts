@@ -1,11 +1,14 @@
 // src/image/geminiCli/geminiCliImageGenerator.ts
 // The 'gemini-cli-image' engine ("Gemini 구독 이미지"): draws with the image generation tool of the user's Antigravity
 // (agy / Gemini CLI) subscription — no API billing, it spends the subscription's usage window.
-// A reduced copy of generateWithCodexImage: no reference photos.
+// A reduced copy of generateWithCodexImage: only ONE kind of reference photo (the shopping product photo), no user photos.
 //
 // - The prompts are the ones imageGenerator already built for the item; only the aspect ratio line is appended.
 // - One `agy` session draws exactly ONE image, and up to GEMINI_CLI_IMAGE_CONCURRENCY sessions run at the same time.
 //   A session's file comes from its own conversation folder, so a result belongs to its item by construction.
+// - [2026-11-21] Shopping: an optional cleaned product photo (geminiCliReferenceInput.ts) is written into EVERY session's work
+//   folder as reference-01.png and named in the CLI instruction; a result that is only a byte copy of that photo fails its
+//   slot. Without it nothing changes.
 // - A slot that gets no image is an explicit failure ("N번 이미지를 받지 못함"). No other engine fills it, nothing is
 //   retried silently (no automatic fallback) — the subscription limit is the user's, a retry would spend it again.
 // - A subscription-level failure (limit reached, logged out, CLI missing, plan inactive...) is the same for every
@@ -16,6 +19,7 @@ import { AgentCliError, type AgentErrorCode } from '../../agentCli/types.js';
 import { resolveAgentImageProfile } from '../../agentCli/agentModelDefaults.js';
 import { GEMINI_CLI_IMAGE_ENGINE } from '../../runtime/geminiCliImagePolicy.js';
 import { withCodexAspectRatio } from '../codex/codexImageInstruction.js';
+import { isCodexReferenceCopy, type CodexReferenceImage } from '../codex/codexReferenceImage.js';
 import { assertGeminiCliImageReady } from './geminiCliImageReadiness.js';
 import { runGeminiCliImageSession, type GeminiCliImageSessionOptions, type GeminiCliImageSessionResult } from './geminiCliImageSession.js';
 
@@ -41,11 +45,18 @@ export interface GeminiCliImageRuntime {
   /** Copies one result file into the app's image storage (same folder and format as every engine). */
   save(filePath: string, item: ImageRequestItem, postTitle?: string, postId?: string): Promise<GeneratedImage>;
   log(message: string): void;
+  /** True when a result file is a byte-identical copy of the reference photo (only asked when a reference is attached). */
+  isReferenceCopy(filePath: string, reference: CodexReferenceImage): Promise<boolean>;
 }
 
 export interface GeminiCliImageOptions {
   /** Return the images that arrived even when some slots failed (still fails on 0 images). */
   allowPartial?: boolean;
+  /**
+   * [2026-11-21] Shopping product photo (already cleaned): attached to EVERY session as the reference. Without it the
+   * behaviour is exactly the plain one. A result that is only a copy of this photo fails its slot.
+   */
+  referenceImage?: CodexReferenceImage;
   /** How often the stop request is polled; tests shorten it. */
   pollMs?: number;
 }
@@ -102,6 +113,10 @@ function defaultRuntime(): GeminiCliImageRuntime {
       };
     },
     log: emitGeminiCliImageLog,
+    async isReferenceCopy(filePath, reference) {
+      const { readFile } = await import('fs/promises');
+      return isCodexReferenceCopy(await readFile(filePath), reference);
+    },
   };
 }
 
@@ -113,6 +128,7 @@ interface RunContext {
   items: ImageRequestItem[];
   runtime: GeminiCliImageRuntime;
   abort: AbortController;
+  reference?: CodexReferenceImage;
   onImageGenerated?: (image: GeneratedImage, index: number, total: number) => void;
   saveInTurn(file: string, item: ImageRequestItem): Promise<GeneratedImage>;
   images: Map<number, GeneratedImage>;
@@ -126,13 +142,25 @@ async function drawOne(ctx: RunContext, index: number): Promise<void> {
   const sessionStartedAt = Date.now();
   try {
     const prompt = withCodexAspectRatio(item.prompt, (item as { imageRatio?: unknown }).imageRatio);
-    const session = await runtime.runSession(prompt, { signal: abort.signal, timeoutMs: GEMINI_CLI_IMAGE_SESSION_TIMEOUT_MS });
+    const { reference } = ctx;
+    const session = await runtime.runSession(prompt, {
+      signal: abort.signal,
+      timeoutMs: GEMINI_CLI_IMAGE_SESSION_TIMEOUT_MS,
+      ...(reference ? { referenceImage: { buffer: reference.buffer, fileName: reference.fileName } } : {}),
+    });
     if (session.files.length > 1) {
       // The tool refines its own picture now and then (measured: 3 files in one request); files[0] is the one it settled on.
       runtime.log(`ℹ️ Gemini 구독 이미지: ${index + 1}번은 도구가 ${session.files.length}번 그려 다듬었습니다 — 최종본을 씁니다`);
     }
     const file = session.files[0];
     if (!file) { reasons.set(index, ''); return; }
+    if (reference) {
+      // A file that is only the reference photo handed back is not a new image: the slot fails (no other engine fills it).
+      let copied: boolean;
+      try { copied = await runtime.isReferenceCopy(file, reference); }
+      catch (checkError) { reasons.set(index, `결과 파일을 확인하지 못함: ${describeError(checkError)}`); return; }
+      if (copied) { reasons.set(index, '참고 사진을 그대로 복사한 결과라 버렸습니다'); return; }
+    }
     try {
       const saved = await ctx.saveInTurn(file, item);
       // The engine draws the Korean copy itself: the app never overlays text on its thumbnail.
@@ -194,11 +222,13 @@ export async function generateWithGeminiCliImage(
   await runtime.assertReady();
   const concurrency = Math.min(GEMINI_CLI_IMAGE_CONCURRENCY, items.length);
   runtime.log(`🎨 Gemini 구독 이미지 ${items.length}장 생성 중 (${resolveAgentImageProfile('gemini').model}) · 동시 ${concurrency}개`);
+  if (options.referenceImage) runtime.log(`🛒 상품 사진 1장을 참고로 붙여 ${items.length}장 생성`);
 
   // Saves run one at a time: the local copy is named <heading>-<millisecond>, two parallel saves could collide.
   let saveQueue: Promise<unknown> = Promise.resolve();
   const ctx: RunContext = {
     items, runtime, onImageGenerated,
+    reference: options.referenceImage,
     abort: new AbortController(),
     images: new Map(), reasons: new Map(),
     state: { fatal: undefined, stopLaunching: undefined, nextIndex: 0 },

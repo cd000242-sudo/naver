@@ -16,7 +16,7 @@ export const IMG_SYNC_THUMBNAIL_TEXT_KEY = 'thumbnailTextInclude';
 export const IMG_SYNC_SHOPPING_ENGINE_KEY = 'scAIImageEngine';
 
 /** Engines the shopping-connect AI mode accepts (kept equal to the image tab's old rule). */
-export const IMG_SYNC_SHOPPING_ENGINES: readonly string[] = ['nano-banana-2', 'openai-image', 'dropshot', 'codex-image'];
+export const IMG_SYNC_SHOPPING_ENGINES: readonly string[] = ['nano-banana-2', 'openai-image', 'dropshot', 'codex-image', 'gemini-cli-image'];
 
 /** Every checkbox that edits the one thumbnail-copy key (image tab, full-auto window, full-auto publish screen, continuous). */
 export const IMG_SYNC_THUMBNAIL_CHECKBOX_IDS: readonly string[] = [

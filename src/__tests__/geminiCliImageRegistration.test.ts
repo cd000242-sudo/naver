@@ -106,15 +106,15 @@ describe('Gemini 구독 이미지 - 화면 등록 목록', () => {
     expect(slowSource.slice(slowStart, slowSource.indexOf(']);', slowStart))).toContain("'gemini-cli-image'");
   });
 
-  it('쇼핑 참고 사진 목록에는 넣지 않는다 (참고 사진을 지원하지 않는 엔진)', () => {
-    expect(read('image/shoppingReferenceGeneration.ts')).not.toContain('gemini-cli-image');
-    expect(read('runtime/imageSettingsSync.ts')).not.toContain('gemini-cli-image');
+  it('쇼핑 대표 상품 사진 목록에는 들어 있고(2026-11-21), 사용자 참고 사진 목록(Codex 전용)과 쇼핑 유틸에는 넣지 않는다', () => {
+    expect(read('image/shoppingReferenceGeneration.ts')).toContain("'gemini-cli-image'");
+    expect(read('runtime/imageSettingsSync.ts')).toContain("'gemini-cli-image'");
     expect(read('renderer/utils/codexReferenceImageList.ts')).not.toContain('gemini-cli-image');
     expect(read('renderer/utils/shoppingConnectUtils.ts')).not.toContain('gemini-cli-image');
   });
 
-  it('발행 전 점검과 기동 기본값은 Codex 그대로 둔다', () => {
-    expect(read('renderer/modules/publishStartPreflight.ts')).not.toContain('gemini-cli-image');
+  it('발행 전 점검은 Gemini 도 점검하고(2026-11-21), 기동 기본값은 Codex 그대로 둔다', () => {
+    expect(read('renderer/modules/publishStartPreflight.ts')).toContain('gemini-cli-image');
     expect(read('renderer/modules/startupImageEngineGate.ts')).not.toContain('gemini-cli-image');
   });
 });

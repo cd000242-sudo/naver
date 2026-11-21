@@ -6,7 +6,7 @@
 // The file appears in <home>/.gemini/antigravity-cli/brain/<parent conversation id>/ (or the sub-agent's own folder).
 // Reuses the agentCli spawn path, subscription env, exit classifier and failure messages — no spawn path of its own.
 
-import { mkdtemp, rm } from 'fs/promises';
+import { mkdtemp, rm, writeFile } from 'fs/promises';
 import { tmpdir } from 'os';
 import { join } from 'path';
 import { spawnCollect, type SpawnArgs, type SpawnResult } from '../../agentCli/spawnHelper.js';
@@ -31,11 +31,22 @@ export interface GeminiCliImageSessionDeps {
   listImages(dir: string, sinceMs: number): Promise<string[]>;
 }
 
+export interface GeminiCliSessionReferenceFile {
+  buffer: Buffer;
+  /** A plain file name (never a path): it becomes a file inside the session work folder. */
+  fileName: string;
+}
+
 export interface GeminiCliImageSessionOptions {
   signal?: AbortSignal;
   timeoutMs?: number;
   /** A named model wins over the app's image default (agentModelDefaults). */
   model?: string;
+  /**
+   * [2026-11-21] Shopping product photo (already cleaned). Written into this session's work folder (removed with it), which
+   * is also agy's current folder; the instruction tells the image tool to take it as the reference input.
+   */
+  referenceImage?: GeminiCliSessionReferenceFile;
 }
 
 export interface GeminiCliImageSessionResult {
@@ -94,13 +105,19 @@ export async function runGeminiCliImageSession(
   options: GeminiCliImageSessionOptions = {},
   deps: GeminiCliImageSessionDeps = defaultDeps,
 ): Promise<GeminiCliImageSessionResult> {
-  // Checks the prompt before any work folder exists.
-  const instruction = buildGeminiCliImageInstruction(prompt);
+  const reference = options.referenceImage;
+  // A photo that is missing cannot be replaced by a reference-free drawing: stop before any work folder exists.
+  if (reference && (!Buffer.isBuffer(reference.buffer) || reference.buffer.length === 0)) {
+    throw new Error('Gemini 구독 이미지: 참고 사진을 불러오지 못해 멈췄습니다. 참고 사진 없이 만들거나 다른 엔진으로 바꾸지 않았습니다.');
+  }
+  // Checks the prompt (and the reference file name) before any work folder exists.
+  const instruction = buildGeminiCliImageInstruction(prompt, reference?.fileName);
   const { model } = resolveAgentImageProfile('gemini', options.model);
   const env = deps.env();
   const startedAt = deps.now();
   const cwd = await mkdtemp(join(tmpdir(), 'agentcli-gemini-image-'));
   try {
+    if (reference) await writeFile(join(cwd, reference.fileName), reference.buffer);
     const res = await deps.spawn({
       command: agentCommandName('gemini'),
       args: ['--output-format', 'stream-json', '--model', model, ...printTimeoutArgs(options.timeoutMs)],

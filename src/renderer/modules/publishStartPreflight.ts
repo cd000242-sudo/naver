@@ -4,7 +4,7 @@
 // Without it a missing CLI or an expired login failed every queue item one by one (continuous publishing retried
 // after 15 seconds, then moved on). Single publish already has a renderer pre-check (ensureAgentEngineReady);
 // this applies the same idea to the long runs: look at the text engine (subscription agent) and the image engine
-// (codex-image) the user picked, and when one is not ready do NOT start. A short window offers one button,
+// (codex-image / gemini-cli-image) the user picked, and when one is not ready do NOT start. A short window offers one button,
 // "연결하기 (설치 -> 로그인 -> 확인)", which reuses the connection flow of the startup gate (agentConnectRun).
 // Nothing is switched to another engine and nothing starts by itself after the connection: the user presses start again.
 //
@@ -22,7 +22,12 @@ import type { AgentConnectApi, AgentConnectKind, AgentConnectStatusLike } from '
 import { agentConnectChipLabel, agentConnectProviderFromValue } from './agentConnectGate.js';
 
 export const PUBLISH_PREFLIGHT_ID = 'publish-preflight-modal';
-const PUBLISH_PREFLIGHT_IMAGE_ENGINE = 'codex-image';
+// [2026-11-21] Image engines that depend on a subscription CLI -> the CLI to check. The shopping sub-image radios write the same
+//   engine value as the main image-source box (IMG_SYNC_SHOPPING_ENGINES), so one list covers both places.
+const PUBLISH_PREFLIGHT_IMAGE_ENGINE_PROVIDERS: Readonly<Record<string, AgentProvider>> = Object.freeze({
+  'codex-image': 'codex',
+  'gemini-cli-image': 'gemini',
+});
 const PUBLISH_PREFLIGHT_PROBE_LIMIT_MS = 20_000;
 const PUBLISH_PREFLIGHT_CONNECT_LABEL = '⚡ 연결하기 (설치 → 로그인 → 확인)';
 
@@ -62,7 +67,7 @@ export function publishPreflightNeeds(generator: string, imageSources: readonly 
     roles.set(provider, list);
   };
   add(agentConnectProviderFromValue(String(generator || '').trim()), 'text');
-  if (imageSources.some((source) => String(source || '').trim() === PUBLISH_PREFLIGHT_IMAGE_ENGINE)) add('codex', 'image');
+  for (const source of imageSources) add(PUBLISH_PREFLIGHT_IMAGE_ENGINE_PROVIDERS[String(source || '').trim()], 'image');
   return Array.from(roles, ([provider, list]) => Object.freeze({ provider, roles: Object.freeze(list) }));
 }
 

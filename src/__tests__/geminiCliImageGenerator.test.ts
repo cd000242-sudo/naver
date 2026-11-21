@@ -51,6 +51,7 @@ function makeRuntime(
       } finally { saving -= 1; }
     }),
     log,
+    isReferenceCopy: vi.fn(async () => false),
   };
   return { runtime, sessions, options, log, maxRunning: () => maxRunning, maxSaving: () => maxSaving };
 }

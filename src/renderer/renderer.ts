@@ -9285,7 +9285,7 @@ function addShoppingConnectSubImageModeOption(): void {
           <input type="radio" name="sc-subimage-mode-inline-radio" value="ai" style="width: 16px; height: 16px; accent-color: #8b5cf6;">
           <span style="color: var(--text-strong); font-size: 0.75rem; font-weight: 600;">🎨 AI 이미지 생성</span>
         </span>
-        <span style="font-size: 0.68rem; color: var(--text-muted); padding-left: 1.6rem;">대표 원본은 썸네일, 소제목은 대표 원본을 참조해 생성 — 지원 엔진 5종 · Codex 구독 이미지 포함</span>
+        <span style="font-size: 0.68rem; color: var(--text-muted); padding-left: 1.6rem;">대표 원본은 썸네일, 소제목은 대표 원본을 참조해 생성 — 지원 엔진 6종 · Codex·Gemini 구독 이미지 포함</span>
       </label>
     </div>
     <label style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.6rem; padding: 0.55rem 0.6rem; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 8px; cursor: pointer;">

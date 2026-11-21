@@ -172,6 +172,7 @@ const SHOPPING_AI_ENGINE_NAMES = new Set([
   'flow',
   'dropshot',
   'codex-image',
+  'gemini-cli-image',
 ]);
 
 // [2026-10-10] 저장값 없음 기본 = 덕트테이프(참조 이미지 지원 확인: shoppingReferenceGeneration 허용 목록)

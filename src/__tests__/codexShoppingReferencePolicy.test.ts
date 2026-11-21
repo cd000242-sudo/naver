@@ -17,9 +17,9 @@ const root = process.cwd();
 const read = (...parts: string[]) => fs.readFileSync(path.join(root, ...parts), 'utf8');
 
 describe('Codex 구독 이미지 - 쇼핑 참고 사진 허용 목록', () => {
-  it('두 허용 배열에 codex-image 가 있고 기존 4개는 그대로다', () => {
-    expect(SHOPPING_REFERENCE_IMAGE_ENGINES).toEqual(['nano-banana-2', 'nano-banana-pro', 'openai-image', 'dropshot', 'codex-image']);
-    expect(SHOPPING_SELECTABLE_REFERENCE_ENGINES).toEqual(['nano-banana-2', 'nano-banana-pro', 'openai-image', 'dropshot', 'codex-image']);
+  it('두 허용 배열에 codex-image 가 있고 기존 4개는 그대로다 (2026-11-21 gemini-cli-image 가 Codex 뒤에 더해졌다)', () => {
+    expect(SHOPPING_REFERENCE_IMAGE_ENGINES).toEqual(['nano-banana-2', 'nano-banana-pro', 'openai-image', 'dropshot', 'codex-image', 'gemini-cli-image']);
+    expect(SHOPPING_SELECTABLE_REFERENCE_ENGINES).toEqual(['nano-banana-2', 'nano-banana-pro', 'openai-image', 'dropshot', 'codex-image', 'gemini-cli-image']);
     expect(isShoppingReferenceImageEngine('codex-image')).toBe(true);
     expect(isShoppingReferenceImageEngine(' codex-image ')).toBe(true);
     expect(isShoppingSelectableReferenceEngine('codex-image')).toBe(true);
@@ -51,7 +51,7 @@ describe('Codex 구독 이미지 - 쇼핑 참고 사진 허용 목록', () => {
 
 describe('Codex 구독 이미지 - 쇼핑 엔진 목록 미러', () => {
   it('IMG_SYNC_SHOPPING_ENGINES 와 imgSyncShoppingEngineFor 가 codex-image 를 받는다', () => {
-    expect(IMG_SYNC_SHOPPING_ENGINES).toEqual(['nano-banana-2', 'openai-image', 'dropshot', 'codex-image']);
+    expect(IMG_SYNC_SHOPPING_ENGINES).toEqual(['nano-banana-2', 'openai-image', 'dropshot', 'codex-image', 'gemini-cli-image']);
     expect(imgSyncShoppingEngineFor('codex-image')).toBe('codex-image');
     expect(imgSyncShoppingEngineFor('flow')).toBeNull();
   });
@@ -77,7 +77,7 @@ describe('Codex 구독 이미지 - 쇼핑 소제목 이미지 소스 라디오',
   }
 
   it('두 곳의 안내 문구가 Codex 구독 이미지를 포함한 엔진 목록을 말한다', () => {
-    const hint = 'AI: 나노바나나2·덕트테이프(gpt-image-2.6)·리더스 무제한·Codex 구독 이미지만 대표 상품 이미지 기반 생성';
+    const hint = 'AI: 나노바나나2·덕트테이프(gpt-image-2.6)·리더스 무제한·Codex·Gemini 구독 이미지만 대표 상품 이미지 기반 생성';
     expect(html.split(hint).length - 1).toBe(2);
     expect(html).not.toContain('AI: 나노바나나2·덕트테이프(gpt-image-2.6)·리더스 무제한만 대표 상품 이미지 기반 생성');
   });
@@ -93,9 +93,9 @@ describe('Codex 구독 이미지 - 쇼핑 소제목 이미지 소스 라디오',
     expect(multi).not.toMatch(/value === 'nano-banana-2' \|\| value === 'openai-image'/);
   });
 
-  it('반자동 안내 문구는 지원 엔진 5종과 Codex 구독 이미지를 말한다', () => {
+  it('반자동 안내 문구는 지원 엔진 6종과 두 구독 이미지(Codex·Gemini)를 말한다', () => {
     const renderer = read('src', 'renderer', 'renderer.ts');
-    expect(renderer).toContain('지원 엔진 5종 · Codex 구독 이미지 포함');
+    expect(renderer).toContain('지원 엔진 6종 · Codex·Gemini 구독 이미지 포함');
     expect(renderer).not.toContain('지원 엔진 4종만');
   });
 
