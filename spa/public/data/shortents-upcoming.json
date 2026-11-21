@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T16:01:05.217Z",
+ "builtAt": "2026-11-21T16:11:09.130Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,8 +8,40 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 26,
  "candidates": [
+  {
+   "keyword": "채령",
+   "sources": [
+    "google"
+   ],
+   "articles90": 16,
+   "recent20": 3,
+   "press": 10,
+   "firstArticleAt": "2026-11-21T14:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "채령, 친언니 채연 JYP 퇴사에 죄책감…\"내가 나갔어야 했는데\" (전참시...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-21T16:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002082876"
+    },
+    {
+     "title": "MBC ‘전참시’ ITZY 채령, 일상 속 간식 공개…메디슨벨 ‘한입샐러드...",
+     "press": "economist.co.kr",
+     "publishedAt": "2026-11-21T16:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/243/0000106006?sid=101"
+    },
+    {
+     "title": "채령, 母 희귀암 투병 고백 “폐에서 육종암 발견..너무 바빠 연락도 못...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-21T15:59:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005643816"
+    }
+   ]
+  },
   {
    "keyword": "1251회 로또 당첨 번호",
    "sources": [
@@ -41,77 +73,13 @@
      "link": "https://www.bntnews.co.kr/article/view/bnt202611210163"
     }
    ]
-  },
-  {
-   "keyword": "채령 자매",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 3,
-   "press": 3,
-   "firstArticleAt": "2026-11-21T15:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "채령, 母 희귀암 투병 고백 “폐에서 육종암 발견..너무 바빠 연락도 못...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-21T15:59:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005643816"
-    },
-    {
-     "title": "있지 채령, 암 투병 母 위해 운전면허 취득 목표 ('전지적참견시점')",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-21T15:50:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000492160"
-    },
-    {
-     "title": "ITZY 채령 모친, 올해 희귀암 진단‥팬미팅서 母 보고 펑펑 운 이유 있었...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-21T15:50:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190023"
-    }
-   ]
-  },
-  {
-   "keyword": "EU 빅테크 디지털세",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-21T14:41:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "EU, 빅테크 디지털세 공식 제안…트럼프와 충돌 예상",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-21T14:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000121913?sid=104"
-    },
-    {
-     "title": "美 중간선거 참패 틈타… EU, 빅테크 겨냥 디지털세 도입 추진",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-21T14:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001206402?sid=104"
-    },
-    {
-     "title": "EU, 빅테크 디지털세 공식 제안…트럼프와 충돌 불가피",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-21T14:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928572?sid=104"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
   "flagged": 888,
-  "matched": 531,
-  "avgLeadMin": 609,
+  "matched": 530,
+  "avgLeadMin": 608,
   "recent": [
    {
     "keyword": "굿파트너 2",
