@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T10:59:20.764Z",
+ "builtAt": "2026-11-21T11:09:23.951Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,15 +11,110 @@
  "measured": 27,
  "candidates": [
   {
-   "keyword": "k리그1",
+   "keyword": "코르티스 대상 수상",
    "sources": [
-    "signal.bz",
-    "google"
+    "nate"
    ],
-   "articles90": 10,
+   "articles90": 16,
+   "recent20": 2,
+   "press": 14,
+   "firstArticleAt": "2026-11-21T09:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "BTS·코르티스, 마마 둘째날 대상…3관왕 빅뱅, 신곡 무대 첫선",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-21T10:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016455921?sid=103"
+    },
+    {
+     "title": "방탄소년단·코르티스 대상 품었다…빅뱅 20주년 존재감까지('2026 MAMA')[...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-21T10:52:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1795257350531337007"
+    },
+    {
+     "title": "방시혁, 간만에 호재 만났다…방탄소년단·코르티스 나란히 대상 [2026 M...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-21T10:28:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000785522"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 탈옥법 규탄",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 11,
+   "recent20": 4,
+   "press": 9,
+   "firstArticleAt": "2026-11-21T09:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "대구·경북 규탄대회 참석해 규탄사 하는 정점식 원내대표",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-21T11:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016455932?sid=100"
+    },
+    {
+     "title": "'대구·경북 규탄대회' 장외 여론전 이어가는 국민의힘",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-21T11:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016455930?sid=100"
+    },
+    {
+     "title": "대구·경북 규탄대회 참석해 규탄사 하는 장동혁 대표",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-21T11:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016455927?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "최민정 월드투어 3연속 우승",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 14,
    "recent20": 3,
    "press": 9,
-   "firstArticleAt": "2026-11-21T09:33:00.000Z",
+   "firstArticleAt": "2026-11-21T09:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "최민정, 안방서 월드투어 여자 1000m 3연속 金 쾌거…신동민 남자 1500m 우...",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-21T11:04:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1139044"
+    },
+    {
+     "title": "최민정, 안방서 월드투어 3연속 우승 ‘위업’",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-21T11:02:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/241/0003542886"
+    },
+    {
+     "title": "월드투어 메달 통산 106개! 최민정이 세계 최강 한국 쇼트트랙이다…'은...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-21T11:00:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/311/0002082830"
+    }
+   ]
+  },
+  {
+   "keyword": "k리그1",
+   "sources": [
+    "google"
+   ],
+   "articles90": 8,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-21T09:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -44,13 +139,13 @@
    ]
   },
   {
-   "keyword": "코르티스, 데뷔 1년 만에 대상 수상",
+   "keyword": "빅뱅 마마",
    "sources": [
-    "signal.bz"
+    "google"
    ],
    "articles90": 8,
    "recent20": 1,
-   "press": 8,
+   "press": 7,
    "firstArticleAt": "2026-11-21T09:40:00.000Z",
    "exclusive": false,
    "capped": false,
@@ -62,56 +157,23 @@
      "link": "https://n.news.naver.com/mnews/article/001/0016455921?sid=103"
     },
     {
+     "title": "빅뱅 '기립' 첫 무대…지드래곤 장발·둘리 협업 화제",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-21T10:48:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282501"
+    },
+    {
      "title": "데뷔 1년 만에 MAMA 대상 품은 코르티스… 빅뱅 완전체로 피날레 장식 [...",
      "press": "hankookilbo.com",
      "publishedAt": "2026-11-21T10:14:00.000Z",
      "link": "https://m.entertain.naver.com/article/469/0000966953"
-    },
-    {
-     "title": "5관왕 방탄소년단→엔하이픈·코르티스, 하이브 집안 대상 싹쓸이[종합...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-21T10:13:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001189951"
-    }
-   ]
-  },
-  {
-   "keyword": "이재명 탈옥법 대구 경북 규탄",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-21T09:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "국힘, 대구서 장외집회 “이재명 돌돌말아 청와대서 강제 퇴거시켜야”",
-     "press": "weekly.khan.co.kr",
-     "publishedAt": "2026-11-21T10:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/033/0000053546?sid=100"
-    },
-    {
-     "title": "국힘, 대구서 대규모 장외 집회 \"이재명 탄핵만이 답\"",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-21T10:00:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3450906"
-    },
-    {
-     "title": "[포토] 대구에 모인 국민의힘 의원들…'조작기소 특검법' 규탄",
-     "press": "sisafocus.co.kr",
-     "publishedAt": "2026-11-21T09:54:00.000Z",
-     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367885"
     }
    ]
   },
   {
    "keyword": "호르무즈 유조선 피격",
    "sources": [
-    "signal.bz",
-    "daum"
+    "signal.bz"
    ],
    "articles90": 6,
    "recent20": 0,
@@ -141,14 +203,46 @@
    ]
   },
   {
-   "keyword": "신한은행 3연승 공동 선두",
+   "keyword": "트럼프 한반도 논의",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-21T10:47:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프 \"미중러 정상회담서 한반도 위험 대응 논의했다\"",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-21T11:04:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544569"
+    },
+    {
+     "title": "트럼프 \"미중러 정상, 한반도 문제 논의\"…젠슨 황 복귀 촉구",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-21T11:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979280?sid=104"
+    },
+    {
+     "title": "[한반도브리핑] 사상 첫 미중러 회담…트럼프 \"한반도 문제 논의\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-21T10:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928556?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "신한은행, 3연승 선두 공동",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-21T09:32:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-21T09:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -173,73 +267,41 @@
    ]
   },
   {
-   "keyword": "한동훈 꼭 하라 이제 내란정당",
+   "keyword": "최백호",
    "sources": [
-    "nate"
+    "google"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-21T09:36:00.000Z",
+   "firstArticleAt": "2026-11-21T09:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한동훈 “‘조희대 탄핵 추진’ 민주당은 내란 정당…모두 감옥 갈 것”",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-21T09:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000133138?sid=100"
+     "title": "최백호 발언에 장미화 심기 불편... \"윤항기, 장미화와 결혼 안 해서 참...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-21T10:12:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000492147"
     },
     {
-     "title": "한동훈 “조희대 탄핵 무르지 말고 꼭 하라…민주당은 이제 내란정당”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-21T09:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004684674?sid=100"
+     "title": "'80세' 장미화, 젊음 비결 공개 \"혼자 살면\"…놀리는 최백호에 등짝 스매...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-21T09:47:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001409116"
     },
     {
-     "title": "한동훈 \"민주당 내란정당 자백... 모두 감옥 갈 것\"",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-21T09:36:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=730359"
-    }
-   ]
-  },
-  {
-   "keyword": "투어스 도훈, 유재석 위인 발언",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-21T09:31:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "도훈, 유재석 향해 \"위인이십니다\"…'조상' 발언에 센스 있는 수습",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-21T10:36:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009302842"
-    },
-    {
-     "title": "'2005년생' 투어스 도훈 \"요즘 어린 친구들 너무 많아… 유재석=위인\" (...",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-21T09:56:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000053780"
-    },
-    {
-     "title": "‘놀면 뭐하니?’ 유재석, 2005년생 투어스 도훈에 ‘위인’ 칭호 받은...",
-     "press": "heraldmuse.com",
-     "publishedAt": "2026-11-21T09:31:00.000Z",
-     "link": "https://m.entertain.naver.com/article/112/0003813978"
+     "title": "윤항기, 장미화 흠모했다..최백호 \"결혼 안 해서 다행\" 폭소 [불후의명...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-21T09:46:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003489179"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 842,
+  "flagged": 849,
   "matched": 505,
   "avgLeadMin": 635,
   "recent": [
