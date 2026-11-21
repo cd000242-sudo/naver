@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T15:40:58.343Z",
+ "builtAt": "2026-11-21T15:51:01.657Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 28,
  "candidates": [
   {
    "keyword": "1251회 로또 당첨 번호",
@@ -77,9 +77,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 889,
-  "matched": 532,
-  "avgLeadMin": 610,
+  "flagged": 888,
+  "matched": 531,
+  "avgLeadMin": 609,
   "recent": [
    {
     "keyword": "굿파트너 2",
