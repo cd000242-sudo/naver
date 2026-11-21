@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T13:00:01.850Z",
+ "builtAt": "2026-11-21T13:10:06.931Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,133 +8,165 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 28,
  "candidates": [
-  {
-   "keyword": "1251회 로또 당첨 번호",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 30,
-   "recent20": 4,
-   "press": 24,
-   "firstArticleAt": "2026-11-21T11:40:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "로또 1등 14명 모두 '자동'…당첨금 각 20억7000만원 받는다",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-21T12:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005356626?sid=103"
-    },
-    {
-     "title": "한 판매점서 로또 2등 10게임 당첨…강릉서 1등 나와",
-     "press": "kado.net",
-     "publishedAt": "2026-11-21T12:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000212548?sid=101"
-    },
-    {
-     "title": "1251회 로또 1등 당첨번호 '14·18·19·29·40·45'번…1등 당첨지역 어디...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-21T12:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003157940?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "50대 전자발찌 도주",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 15,
-   "recent20": 3,
-   "press": 14,
-   "firstArticleAt": "2026-11-21T11:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘키 163㎝·노란 티셔츠’…전자발찌 끊고 사라진 50대 성범죄자 공개...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-21T12:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002834482?sid=102"
-    },
-    {
-     "title": "전자발찌 끊고 달아난 50대 성범죄자 공개수배 전환",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-21T12:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436175?sid=102"
-    },
-    {
-     "title": "50대 성범죄자, 충북 진천에서 전자발찌 끊고 도주…당국 공개수배",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-21T12:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000521849?sid=102"
-    }
-   ]
-  },
   {
    "keyword": "22일 첫차 운행 재개",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 10,
-   "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-21T11:36:00.000Z",
+   "articles90": 11,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-21T11:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'운행 중단' 경부선 일반열차 22일 첫차부터 정상 운행 [종합]",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-21T13:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005356627?sid=102"
+    },
+    {
+     "title": "[아주경제 오늘의 종합 뉴스] 코레일 \"소정리역 탈선 밤샘 복구\"…22일 ...",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-21T13:02:00.000Z",
+     "link": "https://www.ajunews.com/view/20261121214444202"
+    },
     {
      "title": "경부선 소정리역 화물열차 5칸 탈선 사고…천안~대전 운행 중단, 22일 첫...",
      "press": "topstarnews.net",
      "publishedAt": "2026-11-21T12:38:00.000Z",
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282543"
-    },
-    {
-     "title": "코레일 “22일 첫차부터 경부선 일반열차 운행 재개”",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-21T12:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413538?sid=102"
-    },
-    {
-     "title": "22일 첫차부터 경부선 일반열차 운행 재개 예정",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-21T12:02:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611210030"
     }
    ]
   },
   {
-   "keyword": "로또 1등 14명 20억 지급",
+   "keyword": "추성훈 은퇴전 리벤 패배",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-21T11:49:00.000Z",
+   "articles90": 10,
+   "recent20": 5,
+   "press": 9,
+   "firstArticleAt": "2026-11-21T11:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "로또 1등 '14·18·19·29·40·45'…14명 모두 자동, 20억씩 받는다",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-21T12:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009302874?sid=102"
+     "title": "‘전설’ 추성훈, 22년 격투 인생 마침표… 고척돔 은퇴전 패배",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-21T13:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004010977?sid=102"
     },
     {
-     "title": "1251회 로또 1등 각 20억씩…당첨자 14명 모두 자동(종합)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-21T12:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014337520?sid=102"
+     "title": "추성훈 나이, 은퇴전 결과 \"크리스 리벤 승리\"",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-21T13:02:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3759160"
+    },
+    {
+     "title": "\"타임 투 세이 굿바이\" 추성훈, 16년 전 자신을 꺾었던 남자에게 또 졌다...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-21T12:54:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/109/0005643744"
+    }
+   ]
+  },
+  {
+   "keyword": "홍대 인도 돌진 6명 부상",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-21T11:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "홍대입구역서 버스 인도 돌진…3중 추돌로 6명 부상",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-21T12:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413539?sid=102"
+    },
+    {
+     "title": "홍대입구역서 버스 2대·승용차 연쇄 추돌…버스 인도 돌진에 6명 부상",
+     "press": "kado.net",
+     "publishedAt": "2026-11-21T12:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000212547?sid=102"
+    },
+    {
+     "title": "홍대입구역서 3중 추돌사고…버스 1대 인도 돌진, 6명 경상",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-21T12:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004684685?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "로또1251",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-21T11:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "로또 1251회 1등 14매·20억6884만원…총구매수 역대 상위 10%",
+     "press": "econovill.com",
+     "publishedAt": "2026-11-21T13:00:00.000Z",
+     "link": "https://www.econovill.com/news/articleView.html?idxno=758062"
     },
     {
      "title": "로또 1251회 당첨번호 조회···'1등 몽땅 자동 14명'",
      "press": "news.tf.co.kr",
      "publishedAt": "2026-11-21T12:08:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/629/0000554277?sid=101"
+    },
+    {
+     "title": "로또 1251회 1등 14명…당첨금 각 20억6884만원",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-21T12:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002726600?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "호르무즈 유조선 피격",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-21T12:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "UKMTO \"호르무즈 해협서 미확인 발사체에 유조선 잇단 피격\"",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-21T12:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000121909?sid=104"
+    },
+    {
+     "title": "호르무즈 해협서 유조선 잇단 피격… 미확인 발사체 공격 보고",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-21T12:44:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3450958"
+    },
+    {
+     "title": "호르무즈 해협서 유조선 또 피격··· 이틀 새 3건",
+     "press": "dkilbo.com",
+     "publishedAt": "2026-11-21T12:00:00.000Z",
+     "link": "https://www.dkilbo.com/news/articleView.html?idxno=561547"
     }
    ]
   },
@@ -167,38 +199,6 @@
      "press": "gokorea.kr",
      "publishedAt": "2026-11-21T11:54:00.000Z",
      "link": "https://www.gokorea.kr/news/articleView.html?idxno=886725"
-    }
-   ]
-  },
-  {
-   "keyword": "수능 부정 신고 포상금",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-21T11:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이 대통령 “수능 부정행위 신고, 건당 최소 1억”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-21T12:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012298648?sid=100"
-    },
-    {
-     "title": "한성숙 총리, '수능 와이파이·블루투스 신호 분석'...\"부정행위 끝까지...",
-     "press": "ppss.kr",
-     "publishedAt": "2026-11-21T11:45:00.000Z",
-     "link": "https://www.ppss.kr/news/articleView.html?idxno=322176"
-    },
-    {
-     "title": "李대통령 \"수능 부정 신고자도 공범 신고하면 포상금\"",
-     "press": "viewsnnews.com",
-     "publishedAt": "2026-11-21T11:32:00.000Z",
-     "link": "https://www.viewsnnews.com/article?q=239852"
     }
    ]
   },
@@ -237,10 +237,22 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 878,
-  "matched": 521,
-  "avgLeadMin": 643,
+  "flagged": 881,
+  "matched": 523,
+  "avgLeadMin": 641,
   "recent": [
+   {
+    "keyword": "50대 성범죄자 전자발찌 도주",
+    "hitKeyword": "전자발찌 끊고 도주",
+    "hitAt": "2026-11-21T22:00:00+09:00",
+    "leadMin": 50
+   },
+   {
+    "keyword": "50대 전자발찌 도주",
+    "hitKeyword": "전자발찌 끊고 도주",
+    "hitAt": "2026-11-21T22:00:00+09:00",
+    "leadMin": 10
+   },
    {
     "keyword": "태양, 민효린 언급하며 눈물",
     "hitKeyword": "태양 민효린 눈물",
@@ -288,18 +300,6 @@
     "hitKeyword": "전투기 조종사 간식",
     "hitAt": "2026-11-21T21:00:00+09:00",
     "leadMin": 6524
-   },
-   {
-    "keyword": "군용기 KADIZ 진입 전투기 출격",
-    "hitKeyword": "전투기 조종사 간식",
-    "hitAt": "2026-11-21T21:00:00+09:00",
-    "leadMin": 6484
-   },
-   {
-    "keyword": "유노윤호 와일드카드 합류",
-    "hitKeyword": "놀뭐 유노윤호 효연",
-    "hitAt": "2026-11-21T21:00:00+09:00",
-    "leadMin": 41
    }
   ]
  }
