@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T22:53:14.525Z",
+ "builtAt": "2026-11-21T23:03:18.953Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-21T21:25:00.000Z",
+   "articles90": 14,
+   "recent20": 7,
+   "press": 11,
+   "firstArticleAt": "2026-11-21T21:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "앤트로픽 급등락에 월가 AI수익성 우려·실리콘밸리 낙관론 교차",
-     "press": "tfmedia.co.kr",
-     "publishedAt": "2026-11-21T22:52:00.000Z",
-     "link": "https://www.tfmedia.co.kr/news/article.html?no=209100"
+     "title": "LG U+, AI 사업 '진검 갈았다\"...사람 바꾸고 투자 늘리고",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-21T23:02:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=2026112012332314453d7a510102_1"
     },
     {
-     "title": "미국은 AI 전력망에 ESG 자금 쏟는데…한국 기업은 여전히 관망",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-21T22:30:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=506644"
+     "title": "AI 불확실성 vs 美 블랙프라이데이 기대…코스피 변동성 장세 [주간전망...",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-21T23:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005356642?sid=101"
     },
     {
-     "title": "美 뉴욕증시, AI ‘버블’ 공포에 곤두박질…나스닥 5.28% 폭락",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-21T22:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003157955?sid=104"
+     "title": "홍범식의 2년, '2조 베팅'…LGU+, 구광모 AI '수익화 기지'로 우뚝",
+     "press": "apnews.kr",
+     "publishedAt": "2026-11-21T23:00:00.000Z",
+     "link": "https://www.apnews.kr/news/articleView.html?idxno=3053396"
     }
    ]
   },
@@ -48,12 +48,18 @@
     "daum"
    ],
    "articles90": 8,
-   "recent20": 2,
+   "recent20": 1,
    "press": 8,
-   "firstArticleAt": "2026-11-21T21:30:00.000Z",
+   "firstArticleAt": "2026-11-21T21:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "소설(小雪), 눈보다 추위가 겨울 문턱 슬금슬금",
+     "press": "nongmin.com",
+     "publishedAt": "2026-11-21T23:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/662/0000109012?sid=103"
+    },
     {
      "title": "‘소설’ 아침 서울 영하 5도·춘천 영하 9.5도… 전국 대체로 맑음",
      "press": "biz.chosun.com",
@@ -65,204 +71,40 @@
      "press": "lecturernews.com",
      "publishedAt": "2026-11-21T22:34:00.000Z",
      "link": "https://www.lecturernews.com/news/articleView.html?idxno=214290"
-    },
-    {
-     "title": "[오늘 날씨] 절기상 소설(小雪) 겨울 강추위 이어져-서울 아침 영하 4도...",
-     "press": "econonews.co.kr",
-     "publishedAt": "2026-11-21T22:18:00.000Z",
-     "link": "http://www.econonews.co.kr/news/articleView.html?idxno=447505"
     }
    ]
   },
   {
-   "keyword": "경제",
+   "keyword": "굿파트너 2",
    "sources": [
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-21T22:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“야간경제 활성화 위한 톡톡 튀는 청년 아이디어 찾아요”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-21T22:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002726622?sid=102"
-    },
-    {
-     "title": "北 서포청년역, 경제 주요 부문 물자 수송에 '구슬땀'",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-21T22:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009302995?sid=100"
-    },
-    {
-     "title": "中 경제에 ‘장기불황의 그림자’ 짙어졌다 [김규환의 핸디 차이나]",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-21T22:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003157953?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "조희대 대법원장 탄핵",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-21T22:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "속도 내는 '조희대 탄핵'...법관회의 '주목'",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-21T22:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436265?sid=102"
-    },
-    {
-     "title": "예산안 법정시한 앞둔 국회…조희대 탄핵, 헌재·정년까지 ‘겹치는 시...",
-     "press": "sateconomy.co.kr",
-     "publishedAt": "2026-11-21T22:26:00.000Z",
-     "link": "https://sateconomy.co.kr/news/view/1065564447888929"
-    },
-    {
-     "title": "‘조희대 탄핵 압박’ 추미애 “여당 정치적 유불리 계산할 때 아냐”",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-21T22:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003060360?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "1251회 로또 당첨 번호",
-   "sources": [
+    "signal.bz",
+    "nate",
     "daum"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-21T22:00:00.000Z",
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-21T22:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "제1251회 로또 당첨번호 '14·18·19·29·40·45' 보너스 1",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-21T22:48:00.000Z",
-     "link": "https://www.insight.co.kr/news/583045"
+     "title": "\"많이 기다렸다\"…장나라, 김혜윤 향한 영입 제안 통했다 (굿파트너2) [...",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-21T23:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000053813"
     },
     {
-     "title": "로또 1251회 당첨번호, 20억 주인공은?…100% 자동에서 나와",
-     "press": "econonews.co.kr",
-     "publishedAt": "2026-11-21T22:26:00.000Z",
-     "link": "http://www.econonews.co.kr/news/articleView.html?idxno=447503"
+     "title": "SBS 드라마 '굿파트너2' \"법정 승부를 초월한 이야기! 장나라·김혜윤·...",
+     "press": "lecturernews.com",
+     "publishedAt": "2026-11-21T22:56:00.000Z",
+     "link": "https://www.lecturernews.com/news/articleView.html?idxno=214291"
     },
     {
-     "title": "서울 중구 어느 복권방이길래…로또 2등 10장만 '무더기 당첨'",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-21T22:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005444487?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "EU 빅테크 디지털세",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-21T21:24:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘트럼프 눈치 접었나'…EU, 美 빅테크에 3% 디지털세 추진",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-21T22:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394550?sid=104"
-    },
-    {
-     "title": "EU, 빅테크 디지털세 공식 제안…트럼프 행정부와 충돌 불가피",
-     "press": "tfmedia.co.kr",
-     "publishedAt": "2026-11-21T21:58:00.000Z",
-     "link": "https://www.tfmedia.co.kr/news/article.html?no=209097"
-    },
-    {
-     "title": "'사실상 미국 겨냥?'…EU, 빅테크 디지털세 공식 제안",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-21T21:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404816?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "2026년 11월 22일 운세",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-21T21:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오늘의 운세] 2026년11월 22일 (음 10월 14일)",
-     "press": "kookje.co.kr",
+     "title": "'굿파트너2' 7.7%·'라이어' 3.6%…시청률 격차 확대",
+     "press": "topstarnews.net",
      "publishedAt": "2026-11-21T22:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000161863?sid=103"
-    },
-    {
-     "title": "[AI] 오늘의 띠별 운세...2026.11.22(일요일)",
-     "press": "newsroad.co.kr",
-     "publishedAt": "2026-11-21T21:30:00.000Z",
-     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68183"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 22일 (일) 띠별운세 '겨울 채비를 시작하는 ...",
-     "press": "dailypop.kr",
-     "publishedAt": "2026-11-21T21:30:00.000Z",
-     "link": "http://www.dailypop.kr/news/articleView.html?idxno=104281"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-21T22:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[월드 프리즘] 젠슨 황, 엔비디아 이사회 흔들 '5가지 반격 카드'...실효...",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-21T22:26:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101747"
-    },
-    {
-     "title": "\"네 엄마가 낙태했어야\"…'유퀴즈 사랑꾼' 젠슨 황의 섬뜩한 공포 경영...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-21T22:24:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004127060"
-    },
-    {
-     "title": "젠슨 황, '낙태'까지 언급하며 막말... 추가 폭로 또 나왔다",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-21T22:00:00.000Z",
-     "link": "https://www.insight.co.kr/news/583043"
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282639"
     }
    ]
   },
@@ -301,10 +143,22 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 891,
-  "matched": 532,
-  "avgLeadMin": 618,
+  "flagged": 890,
+  "matched": 533,
+  "avgLeadMin": 617,
   "recent": [
+   {
+    "keyword": "1251회 로또 당첨 번호",
+    "hitKeyword": "로또 1251회 1등",
+    "hitAt": "2026-11-22T08:00:00+09:00",
+    "leadMin": 27
+   },
+   {
+    "keyword": "젠슨 황",
+    "hitKeyword": "젠슨 황 스캔들",
+    "hitAt": "2026-11-22T08:00:00+09:00",
+    "leadMin": 17
+   },
    {
     "keyword": "연준 추가 금리 인상",
     "hitKeyword": "한은 금리 인상 재개",
@@ -352,18 +206,6 @@
     "hitKeyword": "호르무즈 유조선 피격",
     "hitAt": "2026-11-22T06:00:00+09:00",
     "leadMin": 621
-   },
-   {
-    "keyword": "대만 공매도 규제",
-    "hitKeyword": "대만 공매도 빗장",
-    "hitAt": "2026-11-22T06:00:00+09:00",
-    "leadMin": 500
-   },
-   {
-    "keyword": "로또 1등 14명 20억 지급",
-    "hitKeyword": "강릉 로또 1등 당첨",
-    "hitAt": "2026-11-22T06:00:00+09:00",
-    "leadMin": 490
    }
   ]
  }
