@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T10:49:17.203Z",
+ "builtAt": "2026-11-21T10:59:20.764Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,22 +11,55 @@
  "measured": 27,
  "candidates": [
   {
-   "keyword": "코르티스 대상",
+   "keyword": "k리그1",
    "sources": [
-    "daum"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 19,
-   "recent20": 0,
-   "press": 15,
-   "firstArticleAt": "2026-11-21T09:21:00.000Z",
+   "articles90": 10,
+   "recent20": 3,
+   "press": 9,
+   "firstArticleAt": "2026-11-21T09:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "방시혁, 간만에 호재 만났다…방탄소년단·코르티스 나란히 대상 [2026 M...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-21T10:28:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000785522"
+     "title": "'이정효 매직' 수원 삼성, K리그2 우승 확정…4시즌 만에 K리그1 복귀",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-21T10:55:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=748888"
+    },
+    {
+     "title": "[포토] 김주찬, ' K리그1 무대로 간다~'",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-21T10:54:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=748923"
+    },
+    {
+     "title": "'K리그1 우승팀' 서울, 전북 꺾고 5경기 만에 승리…대전은 10경기 무패...",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-21T10:48:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110028959907"
+    }
+   ]
+  },
+  {
+   "keyword": "코르티스, 데뷔 1년 만에 대상 수상",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-21T09:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "BTS·코르티스, 마마 둘째날 대상…3관왕 빅뱅, 신곡 무대 첫선",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-21T10:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016455921?sid=103"
     },
     {
      "title": "데뷔 1년 만에 MAMA 대상 품은 코르티스… 빅뱅 완전체로 피날레 장식 [...",
@@ -47,10 +80,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-21T09:22:00.000Z",
+   "articles90": 9,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-21T09:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,47 +108,15 @@
    ]
   },
   {
-   "keyword": "k리그1",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-21T09:33:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'K리그1 우승팀' 서울, 전북 꺾고 5경기 만에 승리…대전은 10경기 무패...",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-21T10:48:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110028959907"
-    },
-    {
-     "title": "'K리그1 우승팀' 서울, 전북 꺾고 2연패 탈출…안데르손 결승골",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-21T10:11:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/421/0009302836"
-    },
-    {
-     "title": "'K리그1 조기 승격 확정' 수원, K리그2 우승도 확정…경남에 3-1 승리",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-21T10:10:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/117/0004127016"
-    }
-   ]
-  },
-  {
    "keyword": "호르무즈 유조선 피격",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "daum"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-21T09:20:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-21T10:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -140,14 +141,46 @@
    ]
   },
   {
-   "keyword": "한동훈 꼭 하라 이제 내란정당",
+   "keyword": "신한은행 3연승 공동 선두",
    "sources": [
     "nate"
    ],
    "articles90": 4,
-   "recent20": 0,
+   "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-21T09:20:00.000Z",
+   "firstArticleAt": "2026-11-21T09:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "여자농구 신한은행, KB스타즈 꺾고 3연승·공동 선두 도약",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-21T10:56:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/421/0009302848"
+    },
+    {
+     "title": "'외곽포 14방' 신한은행, 디펜딩 챔피언 KB 4연패 빠뜨리며 공동 선두 복...",
+     "press": "dailysportshankook.co.kr",
+     "publishedAt": "2026-11-21T10:22:00.000Z",
+     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435787"
+    },
+    {
+     "title": "'3점슛 14개에 성공률 64%, 디펜딩 챔피언도 무너졌다' 신한은행, KB국민...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-21T09:56:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/109/0005643673"
+    }
+   ]
+  },
+  {
+   "keyword": "한동훈 꼭 하라 이제 내란정당",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-21T09:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -177,7 +210,7 @@
     "nate"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-21T09:31:00.000Z",
    "exclusive": false,
@@ -202,43 +235,11 @@
      "link": "https://m.entertain.naver.com/article/112/0003813978"
     }
    ]
-  },
-  {
-   "keyword": "신한은행 3연승 공동 선두",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-21T09:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'외곽포 14방' 신한은행, 디펜딩 챔피언 KB 4연패 빠뜨리며 공동 선두 복...",
-     "press": "dailysportshankook.co.kr",
-     "publishedAt": "2026-11-21T10:22:00.000Z",
-     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435787"
-    },
-    {
-     "title": "'3점슛 14개에 성공률 64%, 디펜딩 챔피언도 무너졌다' 신한은행, KB국민...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-21T09:56:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/109/0005643673"
-    },
-    {
-     "title": "'노구치 19점' 신한은행, 3연승으로 공동 선두 도약…BNK는 우리은행 꺾...",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-21T09:32:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110026017585"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 841,
+  "flagged": 842,
   "matched": 505,
   "avgLeadMin": 635,
   "recent": [
