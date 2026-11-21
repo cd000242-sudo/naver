@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T15:51:01.657Z",
+ "builtAt": "2026-11-21T16:01:05.217Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,10 +15,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-21T14:31:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-21T14:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -39,6 +39,38 @@
      "press": "bntnews.co.kr",
      "publishedAt": "2026-11-21T15:02:00.000Z",
      "link": "https://www.bntnews.co.kr/article/view/bnt202611210163"
+    }
+   ]
+  },
+  {
+   "keyword": "채령 자매",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 3,
+   "press": 3,
+   "firstArticleAt": "2026-11-21T15:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "채령, 母 희귀암 투병 고백 “폐에서 육종암 발견..너무 바빠 연락도 못...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-21T15:59:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005643816"
+    },
+    {
+     "title": "있지 채령, 암 투병 母 위해 운전면허 취득 목표 ('전지적참견시점')",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-21T15:50:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000492160"
+    },
+    {
+     "title": "ITZY 채령 모친, 올해 희귀암 진단‥팬미팅서 母 보고 펑펑 운 이유 있었...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-21T15:50:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190023"
     }
    ]
   },
