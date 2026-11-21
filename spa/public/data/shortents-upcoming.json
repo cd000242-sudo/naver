@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T21:02:37.204Z",
+ "builtAt": "2026-11-21T21:12:40.334Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,14 +8,14 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "조희대 대법원장 탄핵",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 5,
    "recent20": 4,
    "press": 3,
    "firstArticleAt": "2026-11-21T20:50:00.000Z",
@@ -23,10 +23,10 @@
    "capped": false,
    "samples": [
     {
-     "title": "계파 갈등·지지율 정체 겹친 김민석 취임 100일…'조희대 탄핵' 돌파구...",
+     "title": "민주당 조희대 탄핵추진단, 오늘 첫 공개 간담회",
      "press": "news1.kr",
-     "publishedAt": "2026-11-21T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009302951?sid=100"
+     "publishedAt": "2026-11-21T21:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009302966?sid=100"
     },
     {
      "title": "與 '조희대 탄핵' 추진에 정국 급랭…예산·인사청문회까지 '전운'",
@@ -35,20 +35,50 @@
      "link": "https://n.news.naver.com/mnews/article/421/0009302954?sid=100"
     },
     {
-     "title": "\"직무 정지만으로도 의미 있다\"는 탄핵",
-     "press": "gokorea.kr",
+     "title": "계파 갈등·지지율 정체 겹친 김민석 취임 100일…'조희대 탄핵' 돌파구...",
+     "press": "news1.kr",
      "publishedAt": "2026-11-21T21:00:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886721"
+     "link": "https://n.news.naver.com/mnews/article/421/0009302951?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 886,
-  "matched": 524,
-  "avgLeadMin": 599,
+  "flagged": 885,
+  "matched": 528,
+  "avgLeadMin": 596,
   "recent": [
+   {
+    "keyword": "호르무즈 유조선 피격",
+    "hitKeyword": "호르무즈 유조선 피격",
+    "hitAt": "2026-11-22T06:00:00+09:00",
+    "leadMin": 621
+   },
+   {
+    "keyword": "대만 공매도 규제",
+    "hitKeyword": "대만 공매도 빗장",
+    "hitAt": "2026-11-22T06:00:00+09:00",
+    "leadMin": 500
+   },
+   {
+    "keyword": "로또 1등 14명 20억 지급",
+    "hitKeyword": "강릉 로또 1등 당첨",
+    "hitAt": "2026-11-22T06:00:00+09:00",
+    "leadMin": 490
+   },
+   {
+    "keyword": "1251회 로또 당첨 번호",
+    "hitKeyword": "강릉 로또 1등 당첨",
+    "hitAt": "2026-11-22T06:00:00+09:00",
+    "leadMin": 349
+   },
+   {
+    "keyword": "토트넘 입스위치",
+    "hitKeyword": "바넷 토트넘 선발 데뷔",
+    "hitAt": "2026-11-22T06:00:00+09:00",
+    "leadMin": 239
+   },
    {
     "keyword": "굿파트너 2",
     "hitKeyword": "고원희 굿파트너2",
@@ -78,36 +108,6 @@
     "hitKeyword": "최민정 월드투어 금메달",
     "hitAt": "2026-11-21T23:30:00+09:00",
     "leadMin": 60
-   },
-   {
-    "keyword": "추성훈 은퇴전 리벤 패배",
-    "hitKeyword": "추성훈 리벤에 판정패",
-    "hitAt": "2026-11-21T23:00:00+09:00",
-    "leadMin": 50
-   },
-   {
-    "keyword": "추성훈 은퇴전 리벤 판정패",
-    "hitKeyword": "추성훈 리벤에 판정패",
-    "hitAt": "2026-11-21T23:00:00+09:00",
-    "leadMin": 30
-   },
-   {
-    "keyword": "코레일 첫차 운행 재개",
-    "hitKeyword": "경부선 운행 재개",
-    "hitAt": "2026-11-21T23:00:00+09:00",
-    "leadMin": 30
-   },
-   {
-    "keyword": "추성훈 격투 인생 마무리",
-    "hitKeyword": "추성훈 리벤에 판정패",
-    "hitAt": "2026-11-21T23:00:00+09:00",
-    "leadMin": 20
-   },
-   {
-    "keyword": "코레일 일반열차 운행 재개",
-    "hitKeyword": "경부선 운행 재개",
-    "hitAt": "2026-11-21T22:30:00+09:00",
-    "leadMin": 100
    }
   ]
  }
