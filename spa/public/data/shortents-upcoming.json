@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T16:41:20.210Z",
+ "builtAt": "2026-11-21T16:51:23.474Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,10 +16,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 10,
+   "articles90": 6,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-21T15:15:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-21T15:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -46,8 +46,8 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 887,
-  "matched": 529,
+  "flagged": 885,
+  "matched": 527,
   "avgLeadMin": 609,
   "recent": [
    {
