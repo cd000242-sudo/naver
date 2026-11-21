@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T14:50:41.522Z",
+ "builtAt": "2026-11-21T15:00:45.129Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,49 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "김혜윤",
    "sources": [
     "google"
    ],
-   "articles90": 10,
+   "articles90": 9,
    "recent20": 0,
    "press": 6,
-   "firstArticleAt": "2026-11-21T13:27:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'굿파트너2' 김혜윤, 장나라 파트너 됐다...\"이혼에 진심\" [종합]",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-21T14:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002082865"
-    },
-    {
-     "title": "'굿파트너2' 김혜윤, 류승수 떠나…박해진 피해…장나라 손 잡았다 [종합...",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-21T14:28:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000053809"
-    },
-    {
-     "title": "김혜윤, 장나라 손잡은 이유 있었다…친모 등장에 정색('굿파트너2')[셀...",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-21T14:18:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1795268904531343006"
-    }
-   ]
-  },
-  {
-   "keyword": "굿파트너 2",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-21T13:27:00.000Z",
+   "firstArticleAt": "2026-11-21T13:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -79,10 +47,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 3,
    "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-21T13:25:00.000Z",
+   "press": 2,
+   "firstArticleAt": "2026-11-21T13:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -103,70 +71,6 @@
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-21T13:59:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002436199?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "인도네시아 규모 6.8 지진",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-21T13:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "인도네시아·동티모르 인근 반다해서 규모 6.8~7.2 강진…호주 다윈서도...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-21T13:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005607678?sid=104"
-    },
-    {
-     "title": "인도네시아 중부 말루쿠 해역서 규모 7.2 강진…쓰나미 위험은 없어",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-21T13:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014337532?sid=104"
-    },
-    {
-     "title": "인도네시아 말루쿠주 앞바다서 규모 6.8 지진",
-     "press": "safetimes.co.kr",
-     "publishedAt": "2026-11-21T13:24:00.000Z",
-     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247763"
-    }
-   ]
-  },
-  {
-   "keyword": "경비지도사",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-21T13:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[속보] 세무사 시험 AI 부정행위 파장 속 경비지도사 시험서 6명 적발",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-21T13:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001232332?sid=102"
-    },
-    {
-     "title": "시험 중 울린 휴대전화…경비지도사 시험서 6명 부정행위 적발",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-21T13:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000193145?sid=102"
-    },
-    {
-     "title": "무작위로 전화 걸었더니 ‘띠링'… 경비지도사 시험서 부정행위 6건 적...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-21T13:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001206399?sid=102"
     }
    ]
   }
