@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T16:11:09.130Z",
+ "builtAt": "2026-11-21T16:21:12.245Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 28,
  "candidates": [
   {
    "keyword": "채령",
    "sources": [
     "google"
    ],
-   "articles90": 16,
-   "recent20": 3,
-   "press": 10,
-   "firstArticleAt": "2026-11-21T14:42:00.000Z",
+   "articles90": 15,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-21T15:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -47,10 +47,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-21T14:50:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-21T14:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
