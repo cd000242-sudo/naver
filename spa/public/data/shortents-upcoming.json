@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T22:43:10.945Z",
+ "builtAt": "2026-11-21T22:53:14.525Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,14 +11,46 @@
  "measured": 26,
  "candidates": [
   {
+   "keyword": "ai 데이터 센터",
+   "sources": [
+    "google"
+   ],
+   "articles90": 9,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-21T21:25:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "앤트로픽 급등락에 월가 AI수익성 우려·실리콘밸리 낙관론 교차",
+     "press": "tfmedia.co.kr",
+     "publishedAt": "2026-11-21T22:52:00.000Z",
+     "link": "https://www.tfmedia.co.kr/news/article.html?no=209100"
+    },
+    {
+     "title": "미국은 AI 전력망에 ESG 자금 쏟는데…한국 기업은 여전히 관망",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-21T22:30:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=506644"
+    },
+    {
+     "title": "美 뉴욕증시, AI ‘버블’ 공포에 곤두박질…나스닥 5.28% 폭락",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-21T22:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003157955?sid=104"
+    }
+   ]
+  },
+  {
    "keyword": "소설 절기",
    "sources": [
     "daum"
    ],
-   "articles90": 9,
+   "articles90": 8,
    "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-21T21:14:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-21T21:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -35,42 +67,10 @@
      "link": "https://www.lecturernews.com/news/articleView.html?idxno=214290"
     },
     {
-     "title": "절기 '소설' 아침 영하권 추위…전북 낮 최고 3~8도 '맑음'",
-     "press": "newsis.com",
+     "title": "[오늘 날씨] 절기상 소설(小雪) 겨울 강추위 이어져-서울 아침 영하 4도...",
+     "press": "econonews.co.kr",
      "publishedAt": "2026-11-21T22:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014337646?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "조희대 대법원장 탄핵",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-21T22:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "예산안 법정시한 앞둔 국회…조희대 탄핵, 헌재·정년까지 ‘겹치는 시...",
-     "press": "sateconomy.co.kr",
-     "publishedAt": "2026-11-21T22:26:00.000Z",
-     "link": "https://sateconomy.co.kr/news/view/1065564447888929"
-    },
-    {
-     "title": "‘조희대 탄핵 압박’ 추미애 “여당 정치적 유불리 계산할 때 아냐”",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-21T22:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003060360?sid=100"
-    },
-    {
-     "title": "추미애 \"조희대 대법원장 탄핵 실행, 좌고우면 안 된다\"",
-     "press": "goodmorningcc.com",
-     "publishedAt": "2026-11-21T22:08:00.000Z",
-     "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=456267"
+     "link": "http://www.econonews.co.kr/news/articleView.html?idxno=447505"
     }
    ]
   },
@@ -79,13 +79,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 5,
+   "articles90": 8,
+   "recent20": 1,
+   "press": 6,
    "firstArticleAt": "2026-11-21T22:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“야간경제 활성화 위한 톡톡 튀는 청년 아이디어 찾아요”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-21T22:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002726622?sid=102"
+    },
     {
      "title": "北 서포청년역, 경제 주요 부문 물자 수송에 '구슬땀'",
      "press": "news1.kr",
@@ -97,12 +103,38 @@
      "press": "dailian.co.kr",
      "publishedAt": "2026-11-21T22:09:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/119/0003157953?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "조희대 대법원장 탄핵",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-21T22:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "속도 내는 '조희대 탄핵'...법관회의 '주목'",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-21T22:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436265?sid=102"
     },
     {
-     "title": "영암군, 2030 지역순환경제 기본계획 확정",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-21T22:00:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5085918"
+     "title": "예산안 법정시한 앞둔 국회…조희대 탄핵, 헌재·정년까지 ‘겹치는 시...",
+     "press": "sateconomy.co.kr",
+     "publishedAt": "2026-11-21T22:26:00.000Z",
+     "link": "https://sateconomy.co.kr/news/view/1065564447888929"
+    },
+    {
+     "title": "‘조희대 탄핵 압박’ 추미애 “여당 정치적 유불리 계산할 때 아냐”",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-21T22:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003060360?sid=100"
     }
    ]
   },
@@ -111,13 +143,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 4,
+   "articles90": 5,
    "recent20": 1,
-   "press": 4,
+   "press": 5,
    "firstArticleAt": "2026-11-21T22:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "제1251회 로또 당첨번호 '14·18·19·29·40·45' 보너스 1",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-21T22:48:00.000Z",
+     "link": "https://www.insight.co.kr/news/583045"
+    },
     {
      "title": "로또 1251회 당첨번호, 20억 주인공은?…100% 자동에서 나와",
      "press": "econonews.co.kr",
@@ -129,78 +167,6 @@
      "press": "mt.co.kr",
      "publishedAt": "2026-11-21T22:23:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/008/0005444487?sid=102"
-    },
-    {
-     "title": "1251회 로또, 1등 14명 20억씩…대박 판매점은?",
-     "press": "kbsm.net",
-     "publishedAt": "2026-11-21T22:00:00.000Z",
-     "link": "https://www.kbsm.net/news/view.php?idx=542685"
-    }
-   ]
-  },
-  {
-   "keyword": "굿파트너 2",
-   "sources": [
-    "signal.bz",
-    "nate",
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-21T21:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'굿파트너2' 7.7%·'라이어' 3.6%…시청률 격차 확대",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-21T22:34:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282639"
-    },
-    {
-     "title": "[스브스夜] '굿파트너2' 김혜윤, \"이혼에 진심\"···장나라와 손 잡은 ...",
-     "press": "ent.sbs.co.kr",
-     "publishedAt": "2026-11-21T22:31:00.000Z",
-     "link": "https://m.entertain.naver.com/article/416/0000328215"
-    },
-    {
-     "title": "'굿파트너2' 장나라vs박해진, 김혜윤 두고 스카우트 전쟁 [전일야화]",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-21T21:20:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002082891"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-21T22:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[월드 프리즘] 젠슨 황, 엔비디아 이사회 흔들 '5가지 반격 카드'...실효...",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-21T22:26:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101747"
-    },
-    {
-     "title": "\"네 엄마가 낙태했어야\"…'유퀴즈 사랑꾼' 젠슨 황의 섬뜩한 공포 경영...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-21T22:24:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004127060"
-    },
-    {
-     "title": "젠슨 황, '낙태'까지 언급하며 막말... 추가 폭로 또 나왔다",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-21T22:00:00.000Z",
-     "link": "https://www.insight.co.kr/news/583043"
     }
    ]
   },
@@ -269,6 +235,38 @@
    ]
   },
   {
+   "keyword": "젠슨 황",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-21T22:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[월드 프리즘] 젠슨 황, 엔비디아 이사회 흔들 '5가지 반격 카드'...실효...",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-21T22:26:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101747"
+    },
+    {
+     "title": "\"네 엄마가 낙태했어야\"…'유퀴즈 사랑꾼' 젠슨 황의 섬뜩한 공포 경영...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-21T22:24:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004127060"
+    },
+    {
+     "title": "젠슨 황, '낙태'까지 언급하며 막말... 추가 폭로 또 나왔다",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-21T22:00:00.000Z",
+     "link": "https://www.insight.co.kr/news/583043"
+    }
+   ]
+  },
+  {
    "keyword": "지수",
    "sources": [
     "google"
@@ -299,45 +297,13 @@
      "link": "https://m.entertain.naver.com/article/076/0004468560"
     }
    ]
-  },
-  {
-   "keyword": "배추",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-21T21:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "괴산 절임배추 폐염수, 열처리 거쳐 제설용 재생소금으로",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-21T22:20:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=409217"
-    },
-    {
-     "title": "김장 배추에 ‘검은 점’ 다닥다닥…“이거 곰팡이 아니야?” 그냥 먹어...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-21T22:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004684706?sid=102"
-    },
-    {
-     "title": "ITZY 채령, 한끼 식사가 고작 배추 1장+달걀 1알+고구마‥소금도 안 찍는...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-21T21:20:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190041"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 892,
-  "matched": 533,
-  "avgLeadMin": 617,
+  "flagged": 891,
+  "matched": 532,
+  "avgLeadMin": 618,
   "recent": [
    {
     "keyword": "연준 추가 금리 인상",
