@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T23:03:18.953Z",
+ "builtAt": "2026-11-21T23:13:22.284Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,13 +15,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 14,
+   "articles90": 15,
    "recent20": 7,
    "press": 11,
    "firstArticleAt": "2026-11-21T21:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "삼성전자 30조·SK하이닉스 14조 쏜다…AI 슈퍼사이클에 배당 폭탄",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-21T23:04:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=506653"
+    },
     {
      "title": "LG U+, AI 사업 '진검 갈았다\"...사람 바꾸고 투자 늘리고",
      "press": "g-enews.com",
@@ -33,12 +39,6 @@
      "press": "hankyung.com",
      "publishedAt": "2026-11-21T23:01:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/015/0005356642?sid=101"
-    },
-    {
-     "title": "홍범식의 2년, '2조 베팅'…LGU+, 구광모 AI '수익화 기지'로 우뚝",
-     "press": "apnews.kr",
-     "publishedAt": "2026-11-21T23:00:00.000Z",
-     "link": "https://www.apnews.kr/news/articleView.html?idxno=3053396"
     }
    ]
   },
@@ -48,12 +48,18 @@
     "daum"
    ],
    "articles90": 8,
-   "recent20": 1,
+   "recent20": 2,
    "press": 8,
-   "firstArticleAt": "2026-11-21T21:34:00.000Z",
+   "firstArticleAt": "2026-11-21T22:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "‘소설’인 일요일, 대체로 맑고 추운 날씨",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-21T23:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002833324?sid=102"
+    },
     {
      "title": "소설(小雪), 눈보다 추위가 겨울 문턱 슬금슬금",
      "press": "nongmin.com",
@@ -65,12 +71,6 @@
      "press": "biz.chosun.com",
      "publishedAt": "2026-11-21T22:35:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/366/0001206423?sid=102"
-    },
-    {
-     "title": "24절기 '소설' 전국 대체로 날씨 맑고 쌀쌀…전남·제주에는 비 또는 눈",
-     "press": "lecturernews.com",
-     "publishedAt": "2026-11-21T22:34:00.000Z",
-     "link": "https://www.lecturernews.com/news/articleView.html?idxno=214290"
     }
    ]
   },
@@ -105,38 +105,6 @@
      "press": "topstarnews.net",
      "publishedAt": "2026-11-21T22:34:00.000Z",
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282639"
-    }
-   ]
-  },
-  {
-   "keyword": "지수",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-21T21:43:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "골드만삭스 패닉지수 최고치 근접…다음주도 매도세 지속 경고",
-     "press": "tfmedia.co.kr",
-     "publishedAt": "2026-11-21T22:20:00.000Z",
-     "link": "https://www.tfmedia.co.kr/news/article.html?no=209099"
-    },
-    {
-     "title": "골드만삭스, 다음주도 뉴욕증시 매도세 지속 전망···\"패닉지수 9점\"",
-     "press": "seoulfn.com",
-     "publishedAt": "2026-11-21T22:01:00.000Z",
-     "link": "https://www.seoulfn.com/news/articleView.html?idxno=643544"
-    },
-    {
-     "title": "이서진, 블핑 지수 '월클' 위상에 감탄하더니..\"성격 걸걸해\"",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-21T21:43:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004468560"
     }
    ]
   }
