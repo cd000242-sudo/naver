@@ -1,22 +1,154 @@
 {
-  "publishedAt": "2026-11-19T21:44:42.372Z",
+  "publishedAt": "2026-11-20T21:46:45.579Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
     "candidates": 240,
     "niche": 1,
-    "preemption": 0,
+    "preemption": 11,
     "pending": 0
   },
   "freeSample": {
-    "day": "2026-11-20",
+    "day": "2026-11-21",
     "keywords": [
-      "삼전닉스 실시간",
-      "천위페이 나이"
+      "천위페이 나이",
+      "엔하이픈 군대"
     ]
   },
   "rows": [
+    {
+      "keyword": "엔하이픈 군대",
+      "issue": "엔하이픈",
+      "topic": "엔하이픈",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "덕통사고를 고백합니다",
+          "과거 케이팝덕질하던 머글의 솔직한 롯데시네마 월드타워 엔하이픈 VR콘서트 destiny후기",
+          "진짜 딱 한번만 말한다 사랑할수도 있잖아",
+          "인터넷 설치기사인 척 가족까지 언급…통화 몰래 녹음해 퍼뜨린 스토커에 고소 나선 톱아이돌",
+          "엔하이픈 얘기만 함",
+          "이혼 후에도 클래스는 여전했다...개코, 아비브·엔하이픈 이어 지드래곤까지 작업",
+          "해외에서 더 강한 K POP 아이돌 TOP3",
+          "26년 하이브 아이돌 레이블 1위는? 매출과 수익성비교 (BTS, TXT, 세븐틴, 코르티스, 투어스, 르세라핌, 뉴진스, 엔하이픈, 아일릿, 지코)",
+          "솔로지옥을 왜 나가 그냥 지옥가고싶어",
+          "역대급 실적을 찍고도 하이브 주가는 왜 떨어질까?"
+        ],
+        "measuredAt": "2026-11-20T21:45:47.352Z"
+      },
+      "documentCount": 1257,
+      "documentCountMeasured": true,
+      "searchVolume": 410,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 1.1191885629354843,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 410",
+        "문서수 1,257",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 410 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.1배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+        },
+        "home": {
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 112,
+      "kinTop": [
+        {
+          "title": "엔하이픈 제이 군대 가나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60402&docId=490310672&answerNo=2",
+          "views": 869,
+          "answers": 2
+        },
+        {
+          "title": "엔하이픈 희승과 결혼하고싶어요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=803&docId=482083000&answerNo=4",
+          "views": 611,
+          "answers": 4
+        },
+        {
+          "title": "엔하이픈 콘서트 다음년도에하나여?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=30215&docId=489198923&answerNo=2",
+          "views": 377,
+          "answers": 2
+        },
+        {
+          "title": "엔하이픈 군대",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=603&docId=487557442&answerNo=2",
+          "views": 303,
+          "answers": 2
+        },
+        {
+          "title": "엔하이픈 제이크 군대 가나요.....?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=3021401&docId=496023024&answerNo=1",
+          "views": 25,
+          "answers": 1
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-11-20T21:39:35.203Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2"
+    },
     {
       "keyword": "천위페이 나이",
       "issue": "천위페이",
@@ -109,170 +241,55 @@
       },
       "subKeywords": null,
       "keywordPool": null,
-      "trend": null,
+      "trend": {
+        "series": [
+          28,
+          35,
+          35,
+          18,
+          23,
+          0,
+          13,
+          0,
+          0,
+          25,
+          0,
+          0,
+          0,
+          13,
+          0,
+          0,
+          15,
+          25,
+          0,
+          30,
+          0,
+          0,
+          30,
+          100,
+          53,
+          40,
+          23,
+          18,
+          35
+        ],
+        "measuredAt": "2026-11-20T21:46:46.107Z"
+      },
       "kinCount": 0,
       "kinTop": [],
       "monetize": null,
       "measuredAt": "2026-11-19T21:40:09.866Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
-      "kinMode": "date-views-v2"
-    },
-    {
-      "keyword": "삼전닉스 실시간",
-      "issue": "삼전 닉스",
-      "topic": "삼전 닉스",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 2건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 2,
-        "sampledTitles": 10,
-        "topTitles": [
-          "삼전닉스 야간선물 뜻과 거래시간 총정리! 야선 18시·애프터마켓 16시 시초가 대응법",
-          "삼전닉스 뜻과 오늘 상승 배경, 장중 수치로 살펴봐요",
-          "삼전닉스 야간 시세(24시간) 보는 방법 (feat. 코루라이브)",
-          "삼전닉스 60% 하락 매수 추천, 강방천 회장 인터뷰 보고 주식앱 켜다 멈칫한 이유",
-          "\"대장주라 버티면 된다더니...\"삼전·닉스 반토막 쇼크, 빚투 계좌 비상 걸린 이유",
-          "\"삼전닉스 2008년급 폭락\" 오늘 추가 붕괴 경고등 켜진 이유",
-          "삼전닉스 개미 손실 왜 커졌나, 외국인 7.6조 팔 때 개인은 왜 샀을까",
-          "\"월요일 삼전닉스 주가 또 파란불\" 반등 기대하면 안되는 이유",
-          "\"삼전닉스는 던지고 이걸 샀다?\" 주식 초고수 19% 와르르 3만원대 마이크로컨텍솔 줍줍한 진짜 이유",
-          "삼전닉스 빚투 신용잔고 7조, 삼전닉스 레버리지 막히자 몰린 돈의 끝"
-        ],
-        "measuredAt": "2026-11-18T21:34:27.297Z"
-      },
-      "documentCount": 12460,
-      "documentCountMeasured": true,
-      "searchVolume": 3120,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "stable",
-      "demandRatio": 1.169087055768022,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 3,
-      "freshFrontalCount": 2,
-      "reasons": [
-        "검색량 3,120",
-        "문서수 12,460",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 3,120 실측 — 트래픽 하한 통과"
-        },
-        {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.2배"
-        },
-        {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 3건 (최근 2건)"
-        }
-      ],
-      "whySearch": {
-        "text": "코스피 3분기 영업익을 삼전·닉스가 견인했으나 고점 대비 급락해서.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "삼전닉스 실시간 주가와 고점 대비 55% 급락 반등 신호 확인",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "삼전닉스 실시간 지켜보다 고점 대비 55% 급락에 다들 멈칫하는 분위기",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": {
-        "series": [
-          42,
-          45,
-          30,
-          31,
-          35,
-          48,
-          48,
-          53,
-          37,
-          32,
-          41,
-          62,
-          55,
-          53,
-          48,
-          50,
-          75,
-          66,
-          65,
-          66,
-          55,
-          69,
-          54,
-          41,
-          61,
-          100,
-          51,
-          46,
-          46
-        ],
-        "label": "🐢 연금형",
-        "recommendation": "한 번 쓰면 1년 꾸준 방문자. 안정적 연금 키워드",
-        "measuredAt": "2026-11-19T21:44:42.830Z"
-      },
-      "kinCount": 12,
-      "kinTop": [
-        {
-          "title": "삼전닉스 레버리지, 왜 문제인가요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=494293721&answerNo=11",
-          "views": 2666,
-          "answers": 21
-        },
-        {
-          "title": "etf 랑 삼전닉스 두개 비교",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=494006327&answerNo=9",
-          "views": 197,
-          "answers": 10
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-11-18T21:33:20.268Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "carried": true,
-      "kinMode": "date-views-v2"
+      "kinMode": "date-views-v2",
+      "carried": true
     }
   ],
   "observations": [
     {
-      "keyword": "몬드리안ai 연봉",
-      "issue": "몬드리안AI",
-      "topic": "몬드리안AI",
+      "keyword": "뉴로퓨전 채용",
+      "issue": "뉴로퓨전",
+      "topic": "뉴로퓨전",
       "lane": "tech",
       "issueType": "fresh",
       "isDerived": true,
@@ -281,7 +298,7 @@
       "verdict": "preemption",
       "preemptionKind": "no-demand",
       "serp": null,
-      "documentCount": 180,
+      "documentCount": 50,
       "documentCountMeasured": true,
       "searchVolume": 10,
       "searchVolumeLt10": true,
@@ -294,8 +311,8 @@
       "freshFrontalCount": 0,
       "reasons": [
         "검색량 10",
-        "문서수 180",
-        "선점 후보 — 경쟁 문서 180건, 수요 미검출"
+        "문서수 50",
+        "선점 후보 — 경쟁 문서 50건, 수요 미검출"
       ],
       "evidence": [
         {
@@ -307,1147 +324,7 @@
           "text": "정면으로 다룬 글 0건 (최근 0건)"
         }
       ],
-      "whySearch": {
-        "text": "몬드리안AI가 서울대 공대에 AI 클라우드 런유어클라우드를 공급해서.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "몬드리안ai 연봉 초봉·복지부터 채용 기업정보까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "몬드리안ai 연봉 어느 정도인가 싶어 채용공고 열어봤다가 한참 봤네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-18T21:33:20.268Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "초록소프트 김명락",
-      "issue": "초록소프트",
-      "topic": "초록소프트",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 110,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 110",
-        "선점 후보 — 경쟁 문서 110건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "초록소프트가 한국이엔씨와 AI 스마트팜·제조AI 구축에 협력해서.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "초록소프트 김명락 대표가 한국이엔씨와 손잡은 이유",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "초록소프트 김명락 대표가 한국이엔씨랑 스마트팜만 노린 게 아니더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-18T21:33:20.268Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "리퀴드 AI LFM",
-      "issue": "리퀴드 AI",
-      "topic": "리퀴드 AI",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 100,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 3,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 100",
-        "선점 후보 — 경쟁 문서 100건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 3건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "리퀴드 AI가 의사결정 모델 d1.2를 출시해 AA 평가 1위를 해서.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "리퀴드 AI LFM d1.2 모델 AA 평가 1위 성능",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "리퀴드 AI LFM이 d1.2로 AA 평가 1위한 거 보고 좀 다시 봤네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "리퀴드 AI",
-          "searchVolume": 20,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "리퀴드 AI",
-          "searchVolume": 20,
-          "documentCount": 21064,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-18T21:33:20.268Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "몬드리안AI 서울대",
-      "issue": "몬드리안AI",
-      "topic": "몬드리안AI",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 113,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 113",
-        "선점 후보 — 경쟁 문서 113건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "몬드리안AI가 서울대 공대에 AI 클라우드 런유어클라우드를 공급해서.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "몬드리안AI 서울대 공대 런유어클라우드 공급 배경",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "몬드리안AI 서울대 들어간다길래 기업정보부터 다시 찾아보게 되더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "몬드리안AI 기업정보",
-          "searchVolume": 30,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "몬드리안AI 기업정보",
-          "searchVolume": 30,
-          "documentCount": 1006,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-18T21:33:20.268Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "몬드리안ai 블라인드",
-      "issue": "몬드리안AI",
-      "topic": "몬드리안AI",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 124,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 124",
-        "선점 후보 — 경쟁 문서 124건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "몬드리안AI가 서울대 공대에 AI 클라우드 런유어클라우드를 공급해서.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "몬드리안ai 블라인드 연봉·채용 평판 실제 후기",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "몬드리안ai 블라인드에서 연봉이랑 채용 얘기 찾다 보면 여기서 갈리더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "몬드리안ai 기업정보",
-          "searchVolume": 30,
-          "frame": "generic"
-        },
-        {
-          "keyword": "몬드리안ai 연봉",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "몬드리안ai 기업정보",
-          "searchVolume": 30,
-          "documentCount": 1006,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "몬드리안ai 연봉",
-          "searchVolume": 10,
-          "documentCount": 180,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-18T21:33:20.268Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "런유어클라우드",
-      "issue": "몬드리안AI",
-      "topic": "몬드리안AI",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 140,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 140",
-        "선점 후보 — 경쟁 문서 140건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "몬드리안AI가 서울대 공대에 AI 클라우드 런유어클라우드를 공급해서.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "런유어클라우드 몬드리안AI가 서울대 공대에 공급한 AI 플랫폼",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "런유어클라우드 서울대 공대가 GPU 수급난에 꺼내든 카드가 의외네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 4,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-18T21:33:20.268Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "우승 박남열 감독과",
-      "issue": "우승 박남열 감독과",
-      "topic": "우승 박남열 감독과",
-      "lane": "realtime",
-      "issueType": "entertainment",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 249,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 249",
-        "선점 후보 — 경쟁 문서 249건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "박남열 감독의 경주한수원이 창단 첫 WK리그 챔프전 우승을 해서.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "우승 박남열 감독과 경주한수원 10년 만 WK리그 창단 첫 정상",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "박남열 감독과 경주한수원이 2무7패로 시작했는데 WK리그 우승까지 갔더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 6,
-      "kinTop": [
-        {
-          "title": "역대 컵대회축구 우승팀과 준우승팀이 어떤팀인지 공개해주....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1001010201&docId=60868404&answerNo=3",
-          "views": 1487,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-11-18T21:33:20.268Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "삼전 닉스 지방세",
-      "issue": "삼전 닉스",
-      "topic": "삼전 닉스",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 282,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 282",
-        "선점 후보 — 경쟁 문서 282건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "코스피 3분기 영업익을 삼전·닉스가 견인했으나 고점 대비 급락해서.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "삼전 닉스 지방세, 영업익 264% 급증에 얼마나 늘까",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "삼전닉스 영업익 250조라는데 지방세 늘어나는 건 많이들 모르더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-18T21:33:20.268Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "퍼플렉시티 근황",
-      "issue": "퍼플렉시티",
-      "topic": "퍼플렉시티",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 279,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 279",
-        "선점 후보 — 경쟁 문서 279건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "AI 검색 퍼플렉시티가 연 환산 매출 10억 달러를 돌파해서.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "퍼플렉시티 근황 연매출 10억 달러 돌파와 에이전트 16개 협업 기능",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "퍼플렉시티 근황 보려고 가격 먼저 봤는데 구독 해지가 생각보다 어렵더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "퍼플렉시티 가격",
-          "searchVolume": 100,
-          "frame": "price"
-        },
-        {
-          "keyword": "퍼플렉시티 구독 해지",
-          "searchVolume": 40,
-          "frame": "generic"
-        },
-        {
-          "keyword": "퍼플렉시티 사용법",
-          "searchVolume": 20,
-          "frame": "howto"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "퍼플렉시티 가격",
-          "searchVolume": 100,
-          "documentCount": 23043,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "퍼플렉시티 구독 해지",
-          "searchVolume": 40,
-          "documentCount": 897,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "퍼플렉시티 사용법",
-          "searchVolume": 20,
-          "documentCount": 30861,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "퍼플렉시티 코멧",
-          "searchVolume": 20,
-          "documentCount": 1336,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "퍼플렉시티 프로 무료",
-          "searchVolume": 10,
-          "documentCount": 7815,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-18T21:33:20.268Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "김간지 정치성향",
-      "issue": "김간지",
-      "topic": "김간지",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 11,
-      "documentCountMeasured": true,
-      "searchVolume": 20,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 20",
-        "문서수 11",
-        "선점 후보 — 경쟁 문서 11건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "김간지가 과거 저격했던 라디오스타에 출연해 열정페이 탄생 비화를 공개해서",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "김간지 정치성향 논란? 라스 저격부터 출연까지 발언 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "김간지 정치성향 궁금해 찾다 보니 라스 저격한 이유가 따로 있더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "김간지 라디오스타",
-          "searchVolume": 180,
-          "frame": "generic"
-        },
-        {
-          "keyword": "김간지 밴드",
-          "searchVolume": 50,
-          "frame": "generic"
-        },
-        {
-          "keyword": "김간지 라스",
-          "searchVolume": 40,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "김간지 라디오스타",
-          "searchVolume": 180,
-          "documentCount": 332,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "김간지 밴드",
-          "searchVolume": 50,
-          "documentCount": 1312,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "김간지 라스",
-          "searchVolume": 40,
-          "documentCount": 91,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "김간지 열정페이",
-          "searchVolume": 20,
-          "documentCount": 49,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "김간지 하헌진",
-          "searchVolume": 10,
-          "documentCount": 1043,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-18T17:42:14.012Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "김간지 열정페이",
-      "issue": "김간지",
-      "topic": "김간지",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 49,
-      "documentCountMeasured": true,
-      "searchVolume": 20,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 2,
-      "freshFrontalCount": 2,
-      "reasons": [
-        "검색량 20",
-        "문서수 49",
-        "선점 후보 — 경쟁 문서 49건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 2건 (최근 2건)"
-        }
-      ],
-      "whySearch": {
-        "text": "김간지가 과거 저격했던 라디오스타에 출연해 열정페이 탄생 비화를 공개해서",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "김간지 열정페이 라스 저격했다 출연한 이유",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "김간지 열정페이 라스 저격해놓고 왜 나갔나 했더니 이유가 있더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "김간지 나이",
-          "searchVolume": 1030,
-          "frame": "generic"
-        },
-        {
-          "keyword": "김간지 라디오스타",
-          "searchVolume": 180,
-          "frame": "generic"
-        },
-        {
-          "keyword": "김간지 라스",
-          "searchVolume": 40,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "김간지 나이",
-          "searchVolume": 1030,
-          "documentCount": 563,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "김간지 라디오스타",
-          "searchVolume": 180,
-          "documentCount": 332,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "김간지 라스",
-          "searchVolume": 40,
-          "documentCount": 91,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "김간지 하헌진",
-          "searchVolume": 10,
-          "documentCount": 1043,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": [
-        {
-          "title": "열정페이 유래 어원이요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=11080102&docId=316621583&answerNo=2",
-          "views": 1972,
-          "answers": 2
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-11-18T17:42:14.012Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "김간지 저격 영상",
-      "issue": "김간지",
-      "topic": "김간지",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "next-wave",
-      "originReason": "과거 발언 주목",
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 45,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 45",
-        "선점 후보 — 경쟁 문서 45건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "next-wave",
-          "text": "다음 물결 — 과거 발언 주목"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "김간지가 과거 저격했던 라디오스타에 출연해 열정페이 탄생 비화를 공개해서",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "김간지 저격 영상 라스 클럽 발언 전말과 출연 이유",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "김간지 저격 영상 그렇게 저격해놓고 결국 라스 나온 게 의외더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "김간지 라디오스타",
-          "searchVolume": 180,
-          "frame": "generic"
-        },
-        {
-          "keyword": "김간지 라스",
-          "searchVolume": 40,
-          "frame": "generic"
-        },
-        {
-          "keyword": "김간지 열정페이",
-          "searchVolume": 20,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "김간지 라디오스타",
-          "searchVolume": 180,
-          "documentCount": 332,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "김간지 라스",
-          "searchVolume": 40,
-          "documentCount": 91,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "김간지 열정페이",
-          "searchVolume": 20,
-          "documentCount": 49,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-18T17:42:14.012Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "김간지 방송 반응",
-      "issue": "김간지",
-      "topic": "김간지",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "next-wave",
-      "originReason": "시청자 평가 궁금",
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 145,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 145",
-        "선점 후보 — 경쟁 문서 145건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "next-wave",
-          "text": "다음 물결 — 시청자 평가 궁금"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "김간지가 과거 저격했던 라디오스타에 출연해 열정페이 탄생 비화를 공개해서",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "김간지 방송 반응 라스 저격부터 결국 출연까지 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "김간지 방송 반응 보기 전에 열정페이랑 라스 저격 영상부터 찾게 되더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "김간지 라디오스타",
-          "searchVolume": 180,
-          "frame": "generic"
-        },
-        {
-          "keyword": "김간지 밴드",
-          "searchVolume": 50,
-          "frame": "generic"
-        },
-        {
-          "keyword": "김간지 라스",
-          "searchVolume": 40,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "김간지 라디오스타",
-          "searchVolume": 180,
-          "documentCount": 332,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "김간지 밴드",
-          "searchVolume": 50,
-          "documentCount": 1312,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "김간지 라스",
-          "searchVolume": 40,
-          "documentCount": 91,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "김간지 열정페이",
-          "searchVolume": 20,
-          "documentCount": 49,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-18T17:42:14.012Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "제물포고등학교 농구부",
-      "issue": "제물포고등학교",
-      "topic": "제물포고등학교",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 299,
-      "documentCountMeasured": true,
-      "searchVolume": 10,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 10",
-        "문서수 299",
-        "선점 후보 — 경쟁 문서 299건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "AI 커닝 우려 속 제물포고가 70년째 무감독 시험을 치러서",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
+      "whySearch": null,
       "intentLabel": "분류 안 됨",
       "adsenseFit": null,
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
@@ -1455,17 +332,610 @@
       "subKeywords": null,
       "keywordPool": null,
       "trend": null,
-      "kinCount": null,
+      "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-11-18T01:23:07.433Z",
+      "measuredAt": "2026-11-20T21:39:35.203Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "뉴로퓨전 초봉",
+      "issue": "뉴로퓨전",
+      "topic": "뉴로퓨전",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 6,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 6",
+        "선점 후보 — 경쟁 문서 6건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-20T21:39:35.203Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "뉴로퓨전 주식회사",
+      "issue": "뉴로퓨전",
+      "topic": "뉴로퓨전",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 179,
+      "documentCountMeasured": true,
+      "searchVolume": 20,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 20",
+        "문서수 179",
+        "선점 후보 — 경쟁 문서 179건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-20T21:39:35.203Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "뉴로퓨전 잡플래닛",
+      "issue": "뉴로퓨전",
+      "topic": "뉴로퓨전",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 8,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 8",
+        "선점 후보 — 경쟁 문서 8건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-20T21:39:35.203Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "셀렉트스타 연봉",
+      "issue": "셀렉트스타",
+      "topic": "셀렉트스타",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 219,
+      "documentCountMeasured": true,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 10",
+        "문서수 219",
+        "선점 후보 — 경쟁 문서 219건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-20T21:39:35.203Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "뉴로퓨전 블라인드",
+      "issue": "뉴로퓨전",
+      "topic": "뉴로퓨전",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 18,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 18",
+        "선점 후보 — 경쟁 문서 18건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-20T21:39:35.203Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "셀렉트스타 잡플래닛",
+      "issue": "셀렉트스타",
+      "topic": "셀렉트스타",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 15,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 15",
+        "선점 후보 — 경쟁 문서 15건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-20T21:39:35.203Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "뉴로퓨전 연봉",
+      "issue": "뉴로퓨전",
+      "topic": "뉴로퓨전",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 26,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 26",
+        "선점 후보 — 경쟁 문서 26건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-20T21:39:35.203Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "뉴로퓨전 투자유치",
+      "issue": "뉴로퓨전",
+      "topic": "뉴로퓨전",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 49,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 49",
+        "선점 후보 — 경쟁 문서 49건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-20T21:39:35.203Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "뉴로퓨전 매출",
+      "issue": "뉴로퓨전",
+      "topic": "뉴로퓨전",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 143,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 143",
+        "선점 후보 — 경쟁 문서 143건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-20T21:39:35.203Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "셀렉트스타 블라인드",
+      "issue": "셀렉트스타",
+      "topic": "셀렉트스타",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 228,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 228",
+        "선점 후보 — 경쟁 문서 228건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-20T21:39:35.203Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
     }
   ],
   "rejectedCount": 0,
   "issues": [
+    {
+      "issue": "엔하이픈",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": null,
+      "headlines": [
+        {
+          "title": "오사카 달군 '2026 마마 어워즈'…첫날 대상에 BTS·엔하이픈",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-20T14:10:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016455381?sid=103"
+        },
+        {
+          "title": "엔하이픈, 첫 싱글로 '1년 3컴백' 방점…\"'딸기 우유맛' 달콤함 전할 것...",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-20T07:08:00.000Z",
+          "link": "https://m.entertain.naver.com/article/003/0014336404"
+        },
+        {
+          "title": "\"다사다난했는데\"…엔하이픈, 챕터1 대상에 뜨거운 오열(종합) [2026 MAMA]",
+          "press": "news1.kr",
+          "publishedAt": "2026-11-20T13:06:00.000Z",
+          "link": "https://m.entertain.naver.com/article/421/0009302259"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "엔하이픈 성훈",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "엔하이픈 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "엔하이픈 선우",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "엔하이픈 정원",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "엔하이픈 제이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "엔하이픈 vr",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "엔하이픈 희승",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "엔하이픈 제이크",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 1
+    },
     {
       "issue": "천위페이",
       "issueType": "fresh",
@@ -1536,604 +1006,11 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 1
-    },
-    {
-      "issue": "우승 박남열 감독과",
-      "issueType": "entertainment",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "박남열 감독의 경주한수원이 창단 첫 WK리그 챔프전 우승을 해서.",
-      "headlines": [
-        {
-          "title": "10년만의 복귀 감독과 창단 첫 우승…WK리그 한수원 '기쁨 두배'",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-18T13:41:00.000Z",
-          "link": "https://m.sports.naver.com/kfootball/article/001/0016450371"
-        },
-        {
-          "title": "경주한수원, 창단 10년 만에 WK리그 챔피언결정전 우승",
-          "press": "newsis.com",
-          "publishedAt": "2026-11-18T12:24:00.000Z",
-          "link": "https://m.sports.naver.com/kfootball/article/003/0014331328"
-        },
-        {
-          "title": "'첫 9경기 2무 7패→챔피언결정전 우승' 반전... 박남열 감독 \"고생한 선...",
-          "press": "starnewskorea.com",
-          "publishedAt": "2026-11-18T13:19:00.000Z",
-          "link": "https://m.sports.naver.com/kfootball/article/108/0003488542"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "삼전 닉스",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "코스피 3분기 영업익을 삼전·닉스가 견인했으나 고점 대비 급락해서.",
-      "headlines": [
-        {
-          "title": "\"삼전닉스에 또 돈벼락 쏟아지나\"…엔비디아가 꺼낸 '비장의 카드'",
-          "press": "hankyung.com",
-          "publishedAt": "2026-11-18T06:33:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005355309?sid=101"
-        },
-        {
-          "title": "코스피 상장사 영업익 264% 급증…삼전·닉스가 견인 [투자360]",
-          "press": "biz.heraldcorp.com",
-          "publishedAt": "2026-11-18T03:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/016/0002725134?sid=101"
-        },
-        {
-          "title": "코스피 상장사 3Q영업익 250조…삼전닉스가 4분의3 차지",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-11-18T03:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005442882?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "삼전 닉스 지방세",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼전 닉스 조언",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼전 닉스 취업방법",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼전닉스 실시간",
-          "searchVolume": 3120,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
       "rowCount": 1,
-      "carried": true
-    },
-    {
-      "issue": "리퀴드 AI",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "리퀴드 AI가 의사결정 모델 d1.2를 출시해 AA 평가 1위를 해서.",
-      "headlines": [
-        {
-          "title": "리퀴드 AI, 의사결정 모델 'd1.2' 출시…AA 평가 1위",
-          "press": "aitimes.com",
-          "publishedAt": "2026-11-18T08:40:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=217536"
-        },
-        {
-          "title": "AI주 급락에도 가상자산 시장은 앤트로픽 시총 1.7조달러 베팅",
-          "press": "news1.kr",
-          "publishedAt": "2026-11-18T07:23:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009296905?sid=104"
-        },
-        {
-          "title": "델 테크놀로지스, 에이전틱 AI 겨냥 데이터 솔루션·AI인프라 업글",
-          "press": "digitaltoday.co.kr",
-          "publishedAt": "2026-11-17T01:36:00.000Z",
-          "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=715995"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "리퀴드",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "리퀴드 AI 사용법",
-          "reason": "모델 활용 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "리퀴드 AI 창업자",
-          "reason": "기업 배경 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "리퀴드 AI 한국",
-          "reason": "국내 도입 여부",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "퍼플렉시티",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "AI 검색 퍼플렉시티가 연 환산 매출 10억 달러를 돌파해서.",
-      "headlines": [
-        {
-          "title": "연매출 10억 달러 찍은 퍼플렉시티의 비결...“좋은 AI 모델들 섞어 썼을...",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-11-16T23:02:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005764663?sid=105"
-        },
-        {
-          "title": "'AI 검색' 퍼플렉시티, 연 환산 매출 10억 달러 돌파",
-          "press": "zdnet.co.kr",
-          "publishedAt": "2026-11-17T07:26:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/092/0002445712?sid=105"
-        },
-        {
-          "title": "퍼플렉시티, AI 에이전트 16개가 협업·상호 검증하는 기능 출시",
-          "press": "aitimes.com",
-          "publishedAt": "2026-11-18T08:30:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=217543"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "퍼플렉시티 1년 무료",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "퍼플렉시티 ai",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "퍼플렉시티 무료",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "퍼플렉시티 프로",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "퍼플렉시티 크레딧",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "퍼플렉시티 유료",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "퍼플렉시티 요금제",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "퍼플렉시티 회사",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "퍼플렉시티 에이전트 기능",
-          "reason": "16개 협업 기능 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "퍼플렉시티 무료 방법",
-          "reason": "무료 이용 관심 높음",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "퍼플렉시티 챗지피티 비교",
-          "reason": "성능 비교 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "퍼플렉시티 글쓰기",
-          "reason": "실사용 활용 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "퍼플렉시티 구독료",
-          "reason": "유료 가치 판단",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "초록소프트",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "초록소프트가 한국이엔씨와 AI 스마트팜·제조AI 구축에 협력해서.",
-      "headlines": [
-        {
-          "title": "초록소프트-한국이엔씨, AI 스마트팜·제조AI 구축 맞손",
-          "press": "zdnet.co.kr",
-          "publishedAt": "2026-11-18T09:08:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/092/0002445912?sid=105"
-        },
-        {
-          "title": "초록소프트, 한국이엔씨와 협력",
-          "press": "hansbiz.co.kr",
-          "publishedAt": "2026-11-18T07:46:00.000Z",
-          "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=884488"
-        },
-        {
-          "title": "초록소프트, 한국이엔씨와 '스마트팜 AI' 맞손",
-          "press": "datanet.co.kr",
-          "publishedAt": "2026-11-18T00:38:00.000Z",
-          "link": "https://www.datanet.co.kr/news/articleView.html?idxno=300266"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "초록소프트 매출",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "초록소프트(주)",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "초록소프트 김명락",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "초록소프트 기업정보",
-          "reason": "신생 기업 정보 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "초록소프트 상장",
-          "reason": "투자·상장 여부 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "초록소프트 대표",
-          "reason": "창업자 배경 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "몬드리안AI",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "몬드리안AI가 서울대 공대에 AI 클라우드 런유어클라우드를 공급해서.",
-      "headlines": [
-        {
-          "title": "몬드리안AI, 서울대 공대에 AI 클라우드 플랫폼 '런유어 클라우드' 공급",
-          "press": "etnews.com",
-          "publishedAt": "2026-11-18T07:35:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/030/0003487224?sid=105"
-        },
-        {
-          "title": "[ZD SW 투데이] 몬드리안AI, 서울대 공대 AI 클라우드 플랫폼 공급",
-          "press": "zdnet.co.kr",
-          "publishedAt": "2026-11-18T07:40:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/092/0002445882?sid=105"
-        },
-        {
-          "title": "몬드리안AI, 서울대 공대에 프라이빗 AI 클라우드 플랫폼 공급...기존 시...",
-          "press": "aitimes.com",
-          "publishedAt": "2026-11-18T07:20:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=217539"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "몬드리안ai 기업정보",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "몬드리안ai 매출",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "몬드리안ai 투자",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "몬드리안ai 대표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "몬드리안ai 연봉",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "몬드리안ai 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "몬드리안AI 블로그",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "몬드리안ai 블라인드",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "몬드리안AI 기업정보",
-          "reason": "회사 규모 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "몬드리안AI 상장",
-          "reason": "투자 유치 여부 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "프라이빗 AI 클라우드",
-          "reason": "기술 방식 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "몬드리안AI 채용",
-          "reason": "공급 확대로 채용 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "김간지",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "김간지가 과거 저격했던 라디오스타에 출연해 열정페이 탄생 비화를 공개해서",
-      "headlines": [
-        {
-          "title": "김간지, “열정 페이 내가 만들었다”…탄생 비화 공개 (라스)",
-          "press": "sports.donga.com",
-          "publishedAt": "2026-11-18T04:41:00.000Z",
-          "link": "https://m.entertain.naver.com/article/382/0001305453"
-        },
-        {
-          "title": "김간지, 클럽서 '라스' 저격한 이유…\"제작진이 보길 바랐다\"",
-          "press": "enews.imbc.com",
-          "publishedAt": "2026-11-18T06:51:00.000Z",
-          "link": "https://m.entertain.naver.com/article/408/0000328379"
-        },
-        {
-          "title": "'라스' 공개 저격했던 가수, 결국 출연했다…김간지 \"사실 섭외 기다려...",
-          "press": "tenasia.co.kr",
-          "publishedAt": "2026-11-18T07:01:00.000Z",
-          "link": "https://m.entertain.naver.com/article/312/0000785074"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "김간지 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김간지 연세대",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김간지 mbti",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김간지 라디오스타",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "라디오스타 김간지",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김간지 집",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김간지 인스타",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김간지 키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "김간지 방송 반응",
-          "reason": "시청자 평가 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "김간지 저격 영상",
-          "reason": "과거 발언 주목",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "김간지 근황",
-          "reason": "현재 활동 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "제물포고등학교",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "AI 커닝 우려 속 제물포고가 70년째 무감독 시험을 치러서",
-      "headlines": [
-        {
-          "title": "AI부정행위 우려 속 70년째 양심 지킨 '무감독 시험'",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-11-17T02:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016445949?sid=102"
-        },
-        {
-          "title": "수능 'AI 부정행위' 비상인데…70년째 '무감독 시험' 치르는 학교",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-11-17T09:11:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005843974?sid=102"
-        },
-        {
-          "title": "'AI 커닝' 비상인데 시험 감독 없는 학교? '동문'인 교감에게 물었다",
-          "press": "ohmynews.com",
-          "publishedAt": "2026-11-17T22:41:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/047/0002536241?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "인천 제물포고등학교",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "제물포고등학교 교복",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "제물포고등학교 야구부",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "제물포고등학교 위치",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "제물포고등학교 급식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "제물포고등학교 홈페이지",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "제물포고등학교 이전",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "제물포고등학교 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0,
       "carried": true
     }
   ],
-  "enrichedAt": "2026-11-19T21:45:02.426Z",
+  "enrichedAt": "2026-11-20T21:47:05.651Z",
   "enrichStats": {
     "enriched": 0,
     "subsAdded": 0,
