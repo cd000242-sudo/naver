@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T09:28:50.952Z",
+ "builtAt": "2026-11-21T09:38:53.961Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,133 +8,70 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
-  {
-   "keyword": "수원 삼성 K리그2 우승!",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 41,
-   "recent20": 3,
-   "press": 26,
-   "firstArticleAt": "2026-11-21T07:59:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘3년 만에 승격’ 수원, K리그2 우승 확정…이정효 감독 “아직 갈 길 ...",
-     "press": "goal.com",
-     "publishedAt": "2026-11-21T09:25:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/216/0000143892"
-    },
-    {
-     "title": "[포토] 루이스, '우승에 쐐기를 박는 세 번째 골'",
-     "press": "polinews.co.kr",
-     "publishedAt": "2026-11-21T09:17:00.000Z",
-     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=748897"
-    },
-    {
-     "title": "[K리그2 라이브] 유망주서 수원 사나이 된 김주찬 \"내년 목표는 우승! 이...",
-     "press": "interfootball.co.kr",
-     "publishedAt": "2026-11-21T09:11:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/413/0000226928"
-    }
-   ]
-  },
   {
    "keyword": "대구·경북 규탄대회",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 37,
-   "recent20": 2,
-   "press": 25,
-   "firstArticleAt": "2026-11-21T08:00:00.000Z",
+   "recent20": 4,
+   "press": 24,
+   "firstArticleAt": "2026-11-21T08:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[포토] 국힘, 대구서 '조작기소 특검법' 규탄…손팻말 든 지도부",
+     "press": "sisafocus.co.kr",
+     "publishedAt": "2026-11-21T09:38:00.000Z",
+     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367884"
+    },
+    {
+     "title": "장동혁, 대구서 “이재명 탄핵만이 답”…국힘, 조희대 탄핵 추진 규탄",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-21T09:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005845929?sid=100"
+    },
     {
      "title": "국민의힘, 대구서 '조작기소 특검법' 규탄 장외집회 [뉴시스Pic]",
      "press": "newsis.com",
      "publishedAt": "2026-11-21T09:22:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014337477?sid=100"
-    },
-    {
-     "title": "국힘, 대구서 ‘조작기소특검법 규탄’ 장외집회···“‘탈옥법’ 강...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-21T09:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484134?sid=100"
-    },
-    {
-     "title": "[현장]\"이재명 탈옥법·대법원장 탄핵 추진이 내란\"…국힘, 대구서 규탄...",
-     "press": "sisafocus.co.kr",
-     "publishedAt": "2026-11-21T09:02:00.000Z",
-     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367883"
     }
    ]
   },
   {
-   "keyword": "수능 부정 신고 최소 1억 포상",
+   "keyword": "이재명 대통령 전통시장 방문",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-21T08:02:00.000Z",
+   "articles90": 14,
+   "recent20": 4,
+   "press": 13,
+   "firstArticleAt": "2026-11-21T08:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李 대통령 “수능 부정행위 신고 포상금, 건당 최소 1억원”…엄정 대응...",
-     "press": "ekn.kr",
-     "publishedAt": "2026-11-21T09:24:00.000Z",
-     "link": "https://www.ekn.kr/web/view.php?key=20261121020392858"
-    },
-    {
-     "title": "[속보]李대통령 \"수능 부정 신고포상금 건당 1억…행위자수만큼 가산\"",
-     "press": "magazine.hankyung.com",
-     "publishedAt": "2026-11-21T09:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/050/0000113581?sid=101"
-    },
-    {
-     "title": "李 \"수능 부정 신고 포상금, 건당 최소 1억원…부정행위자 수만큼 가산...",
+     "title": "부산 자갈치시장, 고향 안동구시장, 울산은 하루 2곳 방문…李대통령, ...",
      "press": "imaeil.com",
-     "publishedAt": "2026-11-21T09:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001041533?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "MBK, 와콤 인수 추진",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-21T08:03:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
+     "publishedAt": "2026-11-21T09:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001041535?sid=100"
+    },
     {
-     "title": "해외서 들려온 MBK파트너스 일본 와콤·소프트뱅크 손정의 SK하이닉스 M...",
-     "press": "getnews.co.kr",
+     "title": "이 대통령, 울산 전통시장 두 곳 방문…\"내년엔 좀 더 좋아질 것\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-21T09:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404786?sid=100"
+    },
+    {
+     "title": "李대통령, 울산 전통시장 잇따라 찾아 민생 소통…\"내년엔 좀 더 나아질...",
+     "press": "etoday.co.kr",
      "publishedAt": "2026-11-21T09:26:00.000Z",
-     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=887983"
-    },
-    {
-     "title": "한국서 따가운 눈총받는 MBK...디지털 펜 기술 보유 日 와콤 인수 참여",
-     "press": "livebiz.today",
-     "publishedAt": "2026-11-21T09:14:00.000Z",
-     "link": "https://www.livebiz.today/news/articleView.html?idxno=206760"
-    },
-    {
-     "title": "갤럭시 S펜 기술 보유한 日 와콤…MBK, 1조원대 인수 추진",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-21T08:52:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611210025"
+     "link": "https://www.etoday.co.kr/news/view/2651224"
     }
    ]
   },
@@ -143,13 +80,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 0,
-   "press": 11,
+   "articles90": 13,
+   "recent20": 1,
+   "press": 12,
    "firstArticleAt": "2026-11-21T08:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "경기도교육청, 교원 158명 개인정보 유출 사고 발생",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-21T09:34:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3450916"
+    },
     {
      "title": "교원 158명 정보 5월 유출, 공지는 11월…경기교육청 인지일 안 밝혀",
      "press": "etoday.co.kr",
@@ -161,12 +104,6 @@
      "press": "kyeonggi.com",
      "publishedAt": "2026-11-21T08:54:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/666/0000133131?sid=102"
-    },
-    {
-     "title": "경기교육청, 개인정보 유출…교원 158명 정보",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-21T08:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014337452?sid=102"
     }
    ]
   },
@@ -175,13 +112,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 11,
+   "articles90": 12,
+   "recent20": 1,
+   "press": 12,
    "firstArticleAt": "2026-11-21T08:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "FBI 범죄정보망 해킹 의혹…1,950만 건 기록 안전한가",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-21T09:32:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282440"
+    },
     {
      "title": "미 FBI 범죄정보망 침입 정황…농무부도 사이버공격",
      "press": "kbmaeil.com",
@@ -193,44 +136,136 @@
      "press": "biz.chosun.com",
      "publishedAt": "2026-11-21T08:58:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/366/0001206392?sid=104"
-    },
-    {
-     "title": "FBI 범죄정보망도 뚫렸나…美 농무부도 해킹 피해",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-21T08:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004684669?sid=104"
     }
    ]
   },
   {
-   "keyword": "최민정 1000M 3연속 우승",
+   "keyword": "MBK, 와콤 인수 추진",
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-21T08:18:00.000Z",
+   "articles90": 10,
+   "recent20": 3,
+   "press": 10,
+   "firstArticleAt": "2026-11-21T08:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘3개 대회 연속 1000m 우승’ 대역전승 펼친 최민정 “한국에서 오랜만...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-21T09:23:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/109/0005643654"
+     "title": "갤럭시 S펜 핵심기술 보유 일본 와콤, MBK가 1조 원대에 인수",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-21T09:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404785?sid=104"
     },
     {
-     "title": "'은퇴 시즌에도 최정상' 최민정, 안방서 월드투어 1000m 3연속 우승(종합...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-21T09:03:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/421/0009302811"
+     "title": "MBK, ‘S펜 기술사’ 일 와콤 인수 추진…1조원대 규모",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-21T09:30:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321317&inflow=N"
     },
     {
-     "title": "'쇼트트랙 간판' 최민정, 3차 월드투어 1000m 우승…여자계주는 銀(종합...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-21T08:46:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/003/0014337451"
+     "title": "해외서 들려온 MBK파트너스 일본 와콤·소프트뱅크 손정의 SK하이닉스 M...",
+     "press": "getnews.co.kr",
+     "publishedAt": "2026-11-21T09:26:00.000Z",
+     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=887983"
+    }
+   ]
+  },
+  {
+   "keyword": "수능 부정 신고 1억 가산",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 10,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-21T08:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "수능 부정행위 신고하면 최소 1억… 李, 정부 발표 직접 바로잡았다",
+     "press": "jibs.co.kr",
+     "publishedAt": "2026-11-21T09:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/661/0000086889?sid=102"
+    },
+    {
+     "title": "李 대통령 “수능 부정행위 신고 포상금, 건당 최소 1억원”…엄정 대응...",
+     "press": "ekn.kr",
+     "publishedAt": "2026-11-21T09:24:00.000Z",
+     "link": "https://www.ekn.kr/web/view.php?key=20261121020392858"
+    },
+    {
+     "title": "[속보]李대통령 \"수능 부정 신고포상금 건당 1억…행위자수만큼 가산\"",
+     "press": "magazine.hankyung.com",
+     "publishedAt": "2026-11-21T09:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/050/0000113581?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "태양, 민효린 언급하며 눈물",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-21T08:09:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "빅뱅 태양, '2026 MAMA'서 울컥…\"아내 민효린, 진정한 사랑 알려줬다\"",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-21T09:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/396/0000761545"
+    },
+    {
+     "title": "태양, 'MAMA' 수상소감 중 민효린 언급하며 눈물...르세라핌X제이홉 '베...",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-21T08:44:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=783666"
+    },
+    {
+     "title": "빅뱅 GD 긴생머리 파격…태양, '2026 MAMA' 수상 중 민효린 언급 눈물까...",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-21T08:41:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085174"
+    }
+   ]
+  },
+  {
+   "keyword": "최교진 교육부 장관",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-21T08:09:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "수험생 연대 “수능 대책 허점투성이”...최교진 장관 사퇴 촉구",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-21T09:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000133137?sid=102"
+    },
+    {
+     "title": "뿔난 수험생들 “최교진 교육부 장관 즉각 사퇴해야”",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-21T08:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004010975?sid=102"
+    },
+    {
+     "title": "수험생연대 \"수능 대책, 보여주기식 통제…교육부 장관 사퇴 촉구\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-21T08:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928541?sid=102"
     }
    ]
   },
@@ -240,7 +275,7 @@
     "nate"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-21T08:10:00.000Z",
    "exclusive": false,
@@ -329,46 +364,26 @@
      "link": "https://n.news.naver.com/mnews/article/022/0004177006?sid=104"
     }
    ]
-  },
-  {
-   "keyword": "산불",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-21T08:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "서울·경기·강원·경북 곳곳 '건조특보' 발효…\"산불·화재 유의\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-21T08:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652534?sid=102"
-    },
-    {
-     "title": "\"패딩에 구멍까지\"... 산불 현장서 소화기 들고 불길 막은 배우, 김민이...",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-21T08:18:00.000Z",
-     "link": "https://www.insight.co.kr/news/583029"
-    },
-    {
-     "title": "김민, 산불 끄다 옷까지 탔다…긴박했던 순간 [엑's 이슈]",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-21T08:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002082778"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 818,
-  "matched": 497,
-  "avgLeadMin": 643,
+  "flagged": 821,
+  "matched": 499,
+  "avgLeadMin": 640,
   "recent": [
+   {
+    "keyword": "수원 삼성 K리그2 우승!",
+    "hitKeyword": "수원 삼성 K리그2 우승",
+    "hitAt": "2026-11-21T18:30:00+09:00",
+    "leadMin": 11
+   },
+   {
+    "keyword": "최민정 1000M 3연속 우승",
+    "hitKeyword": "최민정 월드투어 우승",
+    "hitAt": "2026-11-21T18:30:00+09:00",
+    "leadMin": 11
+   },
    {
     "keyword": "KDI 경제성장률 전망",
     "hitKeyword": "KDI 성장률 상향",
@@ -416,18 +431,6 @@
     "hitKeyword": "해리 케인 발목 인대 파열",
     "hitAt": "2026-11-21T10:00:00+09:00",
     "leadMin": 7316
-   },
-   {
-    "keyword": "장나라 변호사 굿파트너",
-    "hitKeyword": "장나라 김혜윤 조합",
-    "hitAt": "2026-11-21T09:30:00+09:00",
-    "leadMin": 171
-   },
-   {
-    "keyword": "손흥민 MLS 4위 연봉",
-    "hitKeyword": "손흥민 MLS 연봉 4위",
-    "hitAt": "2026-11-21T09:30:00+09:00",
-    "leadMin": 100
    }
   ]
  }
