@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T23:13:22.284Z",
+ "builtAt": "2026-11-21T23:23:27.159Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "ai 데이터 센터",
    "sources": [
     "google"
    ],
-   "articles90": 15,
-   "recent20": 7,
-   "press": 11,
-   "firstArticleAt": "2026-11-21T21:46:00.000Z",
+   "articles90": 19,
+   "recent20": 6,
+   "press": 13,
+   "firstArticleAt": "2026-11-21T21:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼성전자 30조·SK하이닉스 14조 쏜다…AI 슈퍼사이클에 배당 폭탄",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-21T23:04:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=506653"
+     "title": "브로드컴, AI 반도체 성장세 시험대…12월 실적 발표에 시장 촉각",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-21T23:22:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=848008"
     },
     {
-     "title": "LG U+, AI 사업 '진검 갈았다\"...사람 바꾸고 투자 늘리고",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-21T23:02:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=2026112012332314453d7a510102_1"
+     "title": "[탐사경] 최태원, 한일 경제공동체 밑그림 구체화…에너지서 AI 인재까지...",
+     "press": "moneystorm.kr",
+     "publishedAt": "2026-11-21T23:22:00.000Z",
+     "link": "https://www.moneystorm.kr/news/articleView.html?idxno=8699"
     },
     {
-     "title": "AI 불확실성 vs 美 블랙프라이데이 기대…코스피 변동성 장세 [주간전망...",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-21T23:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005356642?sid=101"
+     "title": "젠슨 황 없는 엔비디아 겨냥 총공세.. 'AI 칩워' 새국면",
+     "press": "digitaltoday.co.kr",
+     "publishedAt": "2026-11-21T23:22:00.000Z",
+     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=717250"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 8,
+   "articles90": 9,
    "recent20": 2,
-   "press": 8,
+   "press": 9,
    "firstArticleAt": "2026-11-21T22:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "소설 절기 날씨는?, 첫눈 대신 건조특보…서울·강원·경북 화재 예방 주...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-21T23:20:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629513"
+    },
     {
      "title": "‘소설’인 일요일, 대체로 맑고 추운 날씨",
      "press": "hani.co.kr",
@@ -65,12 +71,38 @@
      "press": "nongmin.com",
      "publishedAt": "2026-11-21T23:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/662/0000109012?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "뉴스",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-21T22:00:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "[AI 카드뉴스] 증시 책갈피 | 엔비디아 이어 AMD까지…반도체 규제 공포...",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-21T23:04:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261122500007"
     },
     {
-     "title": "‘소설’ 아침 서울 영하 5도·춘천 영하 9.5도… 전국 대체로 맑음",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-21T22:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001206423?sid=102"
+     "title": "[뉴스1 ★] 르세라핌 사쿠라, 블랙으로 뒤덮은 몽환美…파격 그 자체",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-21T23:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009303021"
+    },
+    {
+     "title": "\"재난문자로 시험 공정성 지켜\"...'AI커닝' 두고 여야 전쟁 [자막뉴스]",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-21T22:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436272?sid=100"
     }
    ]
   },
@@ -82,7 +114,7 @@
     "daum"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-21T22:31:00.000Z",
    "exclusive": false,
@@ -111,9 +143,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 890,
-  "matched": 533,
-  "avgLeadMin": 617,
+  "flagged": 889,
+  "matched": 532,
+  "avgLeadMin": 618,
   "recent": [
    {
     "keyword": "1251회 로또 당첨 번호",
