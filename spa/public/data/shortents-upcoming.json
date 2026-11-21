@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T14:40:38.366Z",
+ "builtAt": "2026-11-21T14:50:41.522Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,8 +8,104 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 25,
  "candidates": [
+  {
+   "keyword": "김혜윤",
+   "sources": [
+    "google"
+   ],
+   "articles90": 10,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-21T13:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'굿파트너2' 김혜윤, 장나라 파트너 됐다...\"이혼에 진심\" [종합]",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-21T14:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002082865"
+    },
+    {
+     "title": "'굿파트너2' 김혜윤, 류승수 떠나…박해진 피해…장나라 손 잡았다 [종합...",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-21T14:28:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000053809"
+    },
+    {
+     "title": "김혜윤, 장나라 손잡은 이유 있었다…친모 등장에 정색('굿파트너2')[셀...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-21T14:18:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1795268904531343006"
+    }
+   ]
+  },
+  {
+   "keyword": "굿파트너 2",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 8,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-21T13:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'굿파트너2' 김혜윤, 장나라 파트너 됐다...\"이혼에 진심\" [종합]",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-21T14:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002082865"
+    },
+    {
+     "title": "'굿파트너2' 김혜윤, 류승수 떠나…박해진 피해…장나라 손 잡았다 [종합...",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-21T14:28:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000053809"
+    },
+    {
+     "title": "김혜윤, 장나라 손잡은 이유 있었다…친모 등장에 정색('굿파트너2')[셀...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-21T14:18:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1795268904531343006"
+    }
+   ]
+  },
+  {
+   "keyword": "수능 부정 신고 포상금",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-21T13:25:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "무작위 전화 걸었더니 벨 울렸다…국가자격시험서 부정행위 '이만큼' 적...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-21T14:42:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1176609"
+    },
+    {
+     "title": "이 대통령 \"수능 부정행위 신고 포상, 1건당 최소 1억\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-21T14:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436201?sid=100"
+    },
+    {
+     "title": "부정행위 신고 포상금 최소 1억...여야, 징계 정치로 혼란",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-21T13:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436199?sid=100"
+    }
+   ]
+  },
   {
    "keyword": "인도네시아 규모 6.8 지진",
    "sources": [
@@ -39,39 +135,6 @@
      "press": "safetimes.co.kr",
      "publishedAt": "2026-11-21T13:24:00.000Z",
      "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247763"
-    }
-   ]
-  },
-  {
-   "keyword": "경부선 일반열차 재개",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-21T13:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "번쩍하더니 전철주가 엿가락처럼…경부선 탈선 순간 공개",
-     "press": "weekly.chosun.com",
-     "publishedAt": "2026-11-21T13:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/053/0000063244?sid=102"
-    },
-    {
-     "title": "경부선 화물열차 탈선 여파…코레일, 22일 오전 일반열차 운행 재개 추...",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-21T13:18:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=848002"
-    },
-    {
-     "title": "경부선 일반열차 22일 첫차부터 재개…화물열차 탈선 복구",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-21T13:14:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903927"
     }
    ]
   },
@@ -106,43 +169,11 @@
      "link": "https://n.news.naver.com/mnews/article/366/0001206399?sid=102"
     }
    ]
-  },
-  {
-   "keyword": "수능 부정 신고 포상금",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-21T13:25:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이 대통령 \"수능 부정행위 신고 포상, 1건당 최소 1억\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-21T14:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436201?sid=100"
-    },
-    {
-     "title": "부정행위 신고 포상금 최소 1억...여야, 징계 정치로 혼란",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-21T13:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436199?sid=100"
-    },
-    {
-     "title": "수능 뒤 더 커진 '부실' 논란...\"역사상 최악의 장관\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-21T13:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436185?sid=100"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 891,
+  "flagged": 892,
   "matched": 534,
   "avgLeadMin": 629,
   "recent": [
