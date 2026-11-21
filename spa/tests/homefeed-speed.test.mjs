@@ -113,8 +113,8 @@ test('막대 좌표: 센 값에 비례하고 0 은 높이 0, 입력은 바꾸지
 
 test('막대 글: 창 길이 · 센 수 · 뺀 수, 양 끝은 창 시작과 수집 시각(한국 시각)', () => {
     const clean = normalizeBuckets(buckets);
-    assert.equal(bucketCaption(clean), '최근 12시간 뉴스 기사 6건 · 서로 다른 제목 기준 · 시각 없는 1건 제외');
-    assert.deepEqual(bucketAxis(clean), { left: '12시간 전', right: '00:00 수집' });
+    assert.equal(bucketCaption(clean), '수집 직전 12시간 뉴스 기사 6건 · 서로 다른 제목 기준 · 시각 없는 1건 제외');
+    assert.deepEqual(bucketAxis(clean), { left: '12시간 전', right: '2026-11-02 00:00 수집' });
     assert.equal(kstClock('2026-11-01T15:30:00.000Z'), '00:30');
     assert.equal(kstClock('x'), '');
 });
@@ -129,4 +129,41 @@ test('화면 문구에는 단정 표현 · 확률 · 점수가 없다', () => {
         bucketCaption(clean), ...Object.values(bucketAxis(clean)),
     ];
     for (const text of texts) assert.doesNotMatch(String(text), /빠르|가장 빠|실시간 1위|1위|확률|점수|예상|추정/);
+});
+test('같은 이슈의 12시간 비교 범위를 넘은 오래된 기사와 검증할 수 없는 분 차이를 숨긴다', () => {
+    const ancient = normalizeLead({ ...ahead, status: 'behind', minutes: 4_690_102, firstNewsAt: '2017-11-03T00:00:00.000Z' });
+    assert.equal(ancient.status, 'unmeasured');
+    assert.equal(ancient.reason, 'outside_window');
+    assert.equal(ancient.minutes, null);
+    assert.equal(normalizeLead({ ...ahead, minutes: 90 }), null);
+    assert.equal(normalizeLead({ ...ahead, status: 'behind' }), null);
+    assert.equal(normalizeLead({ ...ahead, firstNewsAt: null }), null);
+});
+
+test('실측을 우선하되 가장 최근 수집 회차도 구분한다', async () => {
+    const { chooseSpeedBoard, normalizeSpeedCandidate, speedCollectionState } = await import('../src/lib/homefeedSpeedModel.mjs');
+    const measured = (at) => ({ snapshotAt: at, speedScoreboard: scoreboard, stories: [story('이슈', { newsBuckets: { ...buckets, endAt: at } })] });
+    const legacy = normalizeSpeedCandidate(measured('2026-11-01T15:00:00Z'), 'legacy');
+    const service = normalizeSpeedCandidate({ ...measured('2026-11-01T15:15:00Z'), speedScoreboard: { ...scoreboard, resolutionMinutes: 15 } }, 'service');
+    const app = normalizeSpeedCandidate({ snapshotAt: '2026-11-01T15:30:00Z', settings: { snapshotIntervalMinutes: 10 }, speedScoreboard: scoreboard, stories: [story('측정 실패 소재')] }, 'app');
+    const future = normalizeSpeedCandidate(measured('2027-11-01T15:45:00Z'), 'legacy');
+    const at = Date.parse('2026-11-01T15:35:00Z');
+    const state = chooseSpeedBoard([legacy, service, app, future, null], at);
+    assert.equal(state.board.source, 'service');
+    assert.equal(state.board.measuredAt, '2026-11-01T15:15:00Z');
+    assert.equal(state.latestSnapshotAt, '2026-11-01T15:30:00Z');
+    assert.equal(speedCollectionState(state.board, at), 'fresh');
+    assert.equal(speedCollectionState(state.board, Date.parse('2026-11-01T16:01:00Z')), 'stale');
+    assert.equal(speedCollectionState(app, at), 'unmeasured');
+    assert.equal(speedCollectionState(null, at), 'unavailable');
+    const sameTimeApp = normalizeSpeedCandidate(measured('2026-11-01T15:15:00Z'), 'app');
+    assert.equal(chooseSpeedBoard([sameTimeApp, service], at).board.source, 'service');
+    const measuredApp = normalizeSpeedCandidate(measured('2026-11-01T15:30:00Z'), 'app');
+    assert.equal(chooseSpeedBoard([service, measuredApp], at).board.source, 'app');
+});
+
+test('마지막 실측 표기에 한국 날짜가 들어간다', async () => {
+    const { kstDateTime } = await import('../src/lib/homefeedSpeedModel.mjs');
+    assert.equal(kstDateTime('2026-11-01T15:30:00.000Z'), '2026-11-02 00:30');
+    assert.equal(kstDateTime('x'), '');
 });

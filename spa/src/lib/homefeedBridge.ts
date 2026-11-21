@@ -390,8 +390,8 @@ export async function hfPublicStories(): Promise<HfStoriesResult | null> {
     }
 }
 
-export async function hfStories(): Promise<BridgeCallResult<HfStoriesResult>> {
-    const called = await bridgeCall<HfStoriesResult>(`${ROUTE}stories`, undefined, 12_000);
+export async function hfAppStories(timeoutMs = 12_000): Promise<BridgeCallResult<HfStoriesResult>> {
+    const called = await bridgeCall<HfStoriesResult>(`${ROUTE}stories`, undefined, timeoutMs);
     if (called.status === 'ok') {
         // 앱 응답은 바깥 입력이다 — 목록 모양이 아니면 성공으로 넘기지 않는다.
         if (!Array.isArray(called.result.stories) || !Array.isArray(called.result.sources)) {
@@ -399,6 +399,12 @@ export async function hfStories(): Promise<BridgeCallResult<HfStoriesResult>> {
         }
         return called;
     }
+    return called;
+}
+
+export async function hfStories(): Promise<BridgeCallResult<HfStoriesResult>> {
+    const called = await hfAppStories();
+    if (called.status === 'ok') return called;
     // 앱이 꺼졌거나 구버전이면 사이트가 가진 공개본으로 그린다 — 앱을 켜지 않아도 보이게(2026-09-17).
     const publicResult = await hfPublicStories();
     if (publicResult) return { status: 'ok', result: publicResult };
