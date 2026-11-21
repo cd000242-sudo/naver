@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T21:22:43.561Z",
+ "builtAt": "2026-11-21T21:32:47.228Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 28,
  "candidates": [
   {
    "keyword": "소설 절기",
@@ -16,12 +16,18 @@
     "daum"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 2,
    "press": 6,
-   "firstArticleAt": "2026-11-21T20:00:00.000Z",
+   "firstArticleAt": "2026-11-21T20:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[날씨] 첫눈 온다는 '소설' 전국 대체로 맑아…전남·제주 비 또는 눈",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-21T21:30:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=783701"
+    },
     {
      "title": "[오늘날씨] '소설' 아침 영하권 한파… 전국 맑지만 찬바람에 체감온도...",
      "press": "newscj.com",
@@ -33,12 +39,6 @@
      "press": "newsroad.co.kr",
      "publishedAt": "2026-11-21T21:00:00.000Z",
      "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68182"
-    },
-    {
-     "title": "첫눈 내리는 '소설' 최저 -9도 '뚝'…전국 영하권 아침[오늘날씨]",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-21T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009302961?sid=103"
     }
    ]
   },
@@ -48,7 +48,7 @@
     "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-21T20:50:00.000Z",
    "exclusive": false,
@@ -61,23 +61,55 @@
      "link": "https://n.news.naver.com/mnews/article/421/0009302966?sid=100"
     },
     {
+     "title": "\"직무 정지만으로도 의미 있다\"는 탄핵",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-21T21:00:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886721"
+    },
+    {
      "title": "계파 갈등·지지율 정체 겹친 김민석 취임 100일…'조희대 탄핵' 돌파구...",
      "press": "news1.kr",
      "publishedAt": "2026-11-21T21:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009302951?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "lpga",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 2,
+   "firstArticleAt": "2026-11-21T20:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "LPGA CME Group Championship",
+     "press": null,
+     "publishedAt": "2026-11-21T21:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/077/0007245835?sid=104"
     },
     {
-     "title": "與 '조희대 탄핵' 추진에 정국 급랭…예산·인사청문회까지 '전운'",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-21T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009302954?sid=100"
+     "title": "김아림, '무빙데이' 1타 차 선두…LPGA투어 최종전 최종일 코다·티띠꾼...",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-21T21:18:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=20261122060739353daecd3dad5_1"
+    },
+    {
+     "title": "김민선7·유현조, , LPGA Q시리즈 최종전 3R 공동 10위",
+     "press": "golfhankook.hankooki.com",
+     "publishedAt": "2026-11-21T21:02:00.000Z",
+     "link": "https://golfhankook.hankooki.com/news/articleView.html?idxno=20022720"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 885,
+  "flagged": 886,
   "matched": 527,
   "avgLeadMin": 592,
   "recent": [
