@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T00:00:14.636Z",
+ "builtAt": "2026-11-21T00:10:17.662Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,113 +8,167 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 24,
  "candidates": [
   {
-   "keyword": "굿파트너 2",
+   "keyword": "트럼프 한반도 논의",
    "sources": [
-    "signal.bz",
-    "nate",
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 14,
+   "articles90": 17,
    "recent20": 3,
-   "press": 13,
-   "firstArticleAt": "2026-11-20T22:31:00.000Z",
+   "press": 15,
+   "firstArticleAt": "2026-11-20T22:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "돌아온 장나라 힘, '굿파트너2' 최고 9.9% [시청률]",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-20T23:49:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000053677"
+     "title": "트럼프 “시진핑·푸틴과 한반도 위험 대응 논의했다”",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-21T00:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001206378?sid=104"
     },
     {
-     "title": "장나라·김혜윤 '굿파트너2' 첫방 8.4%…시즌1 넘었다",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-20T23:46:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16281903"
+     "title": "트럼프 “미중러 정상회담서 한반도 위험 대응 논의했다”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-20T23:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012298569?sid=104"
     },
     {
-     "title": "장나라·김혜윤 첫 맞대결 통했다…‘굿파트너2’ 8.4%로 굿스타트 [MK★...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-20T23:42:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001147897"
+     "title": "트럼프 “아시아 순방 성공” 자화자찬⋯외신들 “3자 회담 원칙 합의 ...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-20T23:52:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2651165"
     }
    ]
   },
   {
-   "keyword": "김정은 건설현장 시찰",
+   "keyword": "김민재 뮌헨 1-1",
    "sources": [
     "signal.bz"
    ],
    "articles90": 10,
-   "recent20": 2,
-   "press": 8,
+   "recent20": 4,
+   "press": 10,
+   "firstArticleAt": "2026-11-20T23:00:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김민재 '교체 출전' 뮌헨, 무승부로 1위 자리 위험 … 케인은 '부상 이탈...",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-21T00:06:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/21/2026112150012.html"
+    },
+    {
+     "title": "[오피셜] 김민재 초비상! 왼쪽 발목 부상 공식발표 나왔다....쓰러진 케...",
+     "press": "interfootball.co.kr",
+     "publishedAt": "2026-11-21T00:01:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/413/0000226896"
+    },
+    {
+     "title": "김민재, 지상 볼 경합 75% ‘평점 6.4점’…교체 출전 20분 ‘뮌헨 쾰른...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-20T23:57:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/477/0000640166"
+    }
+   ]
+  },
+  {
+   "keyword": "김정은 교구비품 교육기자재공장",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 30,
+   "recent20": 1,
+   "press": 9,
    "firstArticleAt": "2026-11-20T22:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김정은, 교구비품·기자재공장 건설 현장 시찰",
+     "title": "김정은, 평양 소재 추정 교육공장 건설 현지지도…내치 집중 행보",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-21T00:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928421?sid=100"
+    },
+    {
+     "title": "트럼프 손짓에도 김정은 ‘마이웨이’…이번엔 교구공장 시찰",
      "press": "donga.com",
      "publishedAt": "2026-11-20T23:49:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/020/0003764118?sid=100"
     },
     {
-     "title": "트럼프 대화제의 외면하고 교육기자재 공장 간 김정은",
+     "title": "트럼프 대화제의 외면한 김정은…교육기자재 공장 건설 시찰",
      "press": "hani.co.kr",
      "publishedAt": "2026-11-20T23:46:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/028/0002833291?sid=100"
-    },
-    {
-     "title": "김정은, 북·미 회동 불발 뒤 교육공장으로…내정 집중",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-20T23:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484100?sid=100"
     }
    ]
   },
   {
-   "keyword": "최미나수 레드카펫 진행",
+   "keyword": "엔비디아 메가스피드 칩 판매",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-20T22:42:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-20T23:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "최미나수, 2시간 내내 추위에 덜덜…레드카펫 선 김연경도 걱정했다 [엑...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-20T23:59:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002082713"
-    },
-    {
-     "title": "“옷 좀 입혀라” 최미나수, 강추위에도 드레스 하나 입고 야외 진행 ‘...",
-     "press": "osen.co.kr",
+     "title": "엔비디아, 칩 4만개 '中 간첩 연루' 메가스피드 관련사로 판매신청",
+     "press": "fnnews.com",
      "publishedAt": "2026-11-20T23:42:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005643406"
+     "link": "https://n.news.naver.com/mnews/article/014/0005607613?sid=104"
     },
     {
-     "title": "최미나수, 노출 드레스 입고 '몸 덜덜'...김연경 \"괜찮냐\"",
+     "title": "앨리스 황 일가, 군수업체와 밀접…엔비디아 칩 中 방산에 넘어갔나",
      "press": "mt.co.kr",
-     "publishedAt": "2026-11-20T23:37:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005444377"
+     "publishedAt": "2026-11-20T23:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005444375?sid=104"
+    },
+    {
+     "title": "\"엔비디아, 메가스피드 측에 칩 4만 개 판매 신청\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-20T23:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436005?sid=104"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 827,
-  "matched": 501,
-  "avgLeadMin": 630,
+  "flagged": 831,
+  "matched": 505,
+  "avgLeadMin": 626,
   "recent": [
+   {
+    "keyword": "컬리 개인정보 유출",
+    "hitKeyword": "컬리 개인정보 유출",
+    "hitAt": "2026-11-21T09:00:00+09:00",
+    "leadMin": 533
+   },
+   {
+    "keyword": "소정리역",
+    "hitKeyword": "소정리역 화물열차 탈선",
+    "hitAt": "2026-11-21T09:00:00+09:00",
+    "leadMin": 80
+   },
+   {
+    "keyword": "굿파트너 2",
+    "hitKeyword": "굿파트너2 시청률 1위",
+    "hitAt": "2026-11-21T09:00:00+09:00",
+    "leadMin": 20
+   },
+   {
+    "keyword": "최미나수 레드카펫 진행",
+    "hitKeyword": "최미나수 레드카펫 추위",
+    "hitAt": "2026-11-21T09:00:00+09:00",
+    "leadMin": 20
+   },
    {
     "keyword": "김민재",
     "hitKeyword": "김민재 바이에른 출전",
@@ -150,30 +204,6 @@
     "hitKeyword": "성층권 한파 영향",
     "hitAt": "2026-11-21T07:30:00+09:00",
     "leadMin": 141
-   },
-   {
-    "keyword": "나스닥 급락",
-    "hitKeyword": "나스닥 기술주 급락",
-    "hitAt": "2026-11-21T07:30:00+09:00",
-    "leadMin": 51
-   },
-   {
-    "keyword": "나스닥",
-    "hitKeyword": "나스닥 기술주 급락",
-    "hitAt": "2026-11-21T07:30:00+09:00",
-    "leadMin": 31
-   },
-   {
-    "keyword": "앤트로픽 이틀째 급락",
-    "hitKeyword": "앤트로픽 상승분 반납",
-    "hitAt": "2026-11-21T07:30:00+09:00",
-    "leadMin": 20
-   },
-   {
-    "keyword": "트럼프",
-    "hitKeyword": "트럼프 젠슨 황",
-    "hitAt": "2026-11-21T07:00:00+09:00",
-    "leadMin": 152
    }
   ]
  }
