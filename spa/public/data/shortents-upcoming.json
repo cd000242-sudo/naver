@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T09:18:47.317Z",
+ "builtAt": "2026-11-21T09:28:50.952Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,134 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 26,
  "candidates": [
-  {
-   "keyword": "대구·경북 규탄대회",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 36,
-   "recent20": 3,
-   "press": 25,
-   "firstArticleAt": "2026-11-21T07:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[현장]\"이재명 탈옥법·대법원장 탄핵 추진이 내란\"…국힘, 대구서 규탄...",
-     "press": "sisafocus.co.kr",
-     "publishedAt": "2026-11-21T09:02:00.000Z",
-     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367883"
-    },
-    {
-     "title": "국힘, 이번엔 대구서 집회…장동혁 “조희대 지켜내자”",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-21T09:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833311?sid=100"
-    },
-    {
-     "title": "국민의힘 대구 집회에 7천 명 집결…TK 의원 대거 참석 속 야유도",
-     "press": "idaegu.com",
-     "publishedAt": "2026-11-21T09:00:00.000Z",
-     "link": "https://www.idaegu.com/news/articleView.html?idxno=667155"
-    }
-   ]
-  },
   {
    "keyword": "수원 삼성 K리그2 우승!",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 45,
-   "recent20": 9,
-   "press": 24,
-   "firstArticleAt": "2026-11-21T07:54:00.000Z",
+   "articles90": 41,
+   "recent20": 3,
+   "press": 26,
+   "firstArticleAt": "2026-11-21T07:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "‘3년 만에 승격’ 수원, K리그2 우승 확정…이정효 감독 “아직 갈 길 ...",
+     "press": "goal.com",
+     "publishedAt": "2026-11-21T09:25:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/216/0000143892"
+    },
+    {
+     "title": "[포토] 루이스, '우승에 쐐기를 박는 세 번째 골'",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-21T09:17:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=748897"
+    },
     {
      "title": "[K리그2 라이브] 유망주서 수원 사나이 된 김주찬 \"내년 목표는 우승! 이...",
      "press": "interfootball.co.kr",
      "publishedAt": "2026-11-21T09:11:00.000Z",
      "link": "https://m.sports.naver.com/kfootball/article/413/0000226928"
-    },
-    {
-     "title": "수원 삼성, 승격 확정 이어 우승 조기 달성",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-21T09:06:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/003/0014337470"
-    },
-    {
-     "title": "우승 축하 헹가래 받는 이정효 감독",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-21T09:06:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/003/0014337467"
     }
    ]
   },
   {
-   "keyword": "W코리아컵 초대 챔피언 수원FC",
+   "keyword": "대구·경북 규탄대회",
    "sources": [
     "nate"
    ],
-   "articles90": 18,
+   "articles90": 37,
    "recent20": 2,
-   "press": 15,
-   "firstArticleAt": "2026-11-21T07:49:00.000Z",
+   "press": 25,
+   "firstArticleAt": "2026-11-21T08:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "수원FC 위민, 2026 W코리아컵 첫 챔피언…시즌 3관왕 달성",
-     "press": "kyeonggi.com",
+     "title": "국민의힘, 대구서 '조작기소 특검법' 규탄 장외집회 [뉴시스Pic]",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-21T09:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014337477?sid=100"
+    },
+    {
+     "title": "국힘, 대구서 ‘조작기소특검법 규탄’ 장외집회···“‘탈옥법’ 강...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-21T09:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484134?sid=100"
+    },
+    {
+     "title": "[현장]\"이재명 탈옥법·대법원장 탄핵 추진이 내란\"…국힘, 대구서 규탄...",
+     "press": "sisafocus.co.kr",
      "publishedAt": "2026-11-21T09:02:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/666/0000133133"
-    },
-    {
-     "title": "\"여자 축구를 많이 알릴 수 있는 대회\" '4경기 3골' 수원FC 윤수정의 우...",
-     "press": "footballist.co.kr",
-     "publishedAt": "2026-11-21T09:00:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/436/0000115122"
-    },
-    {
-     "title": "우승컵 들어 올린 수원FC 위민, 시선은 벌써 내년으로…통합 챔피언 도...",
-     "press": "kgnews.co.kr",
-     "publishedAt": "2026-11-21T08:40:00.000Z",
-     "link": "https://www.kgnews.co.kr/news/article.html?no=920541"
-    }
-   ]
-  },
-  {
-   "keyword": "FBI 범죄정보망 해킹",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 16,
-   "recent20": 1,
-   "press": 15,
-   "firstArticleAt": "2026-11-21T07:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "미 FBI 범죄정보망 침입 정황…농무부도 사이버공격",
-     "press": "kbmaeil.com",
-     "publishedAt": "2026-11-21T09:08:00.000Z",
-     "link": "https://www.kbmaeil.com/article/20261121500139"
-    },
-    {
-     "title": "美 FBI 범죄정보망에 외부 침입 정황… “해커 소행 의심”",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-21T08:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001206392?sid=104"
-    },
-    {
-     "title": "FBI 범죄정보망도 뚫렸나…美 농무부도 해킹 피해",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-21T08:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004684669?sid=104"
+     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367883"
     }
    ]
   },
@@ -144,13 +79,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 3,
-   "press": 13,
-   "firstArticleAt": "2026-11-21T07:53:00.000Z",
+   "articles90": 11,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-21T08:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "李 대통령 “수능 부정행위 신고 포상금, 건당 최소 1억원”…엄정 대응...",
+     "press": "ekn.kr",
+     "publishedAt": "2026-11-21T09:24:00.000Z",
+     "link": "https://www.ekn.kr/web/view.php?key=20261121020392858"
+    },
     {
      "title": "[속보]李대통령 \"수능 부정 신고포상금 건당 1억…행위자수만큼 가산\"",
      "press": "magazine.hankyung.com",
@@ -162,12 +103,38 @@
      "press": "imaeil.com",
      "publishedAt": "2026-11-21T09:05:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/088/0001041533?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "MBK, 와콤 인수 추진",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 11,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-21T08:03:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "해외서 들려온 MBK파트너스 일본 와콤·소프트뱅크 손정의 SK하이닉스 M...",
+     "press": "getnews.co.kr",
+     "publishedAt": "2026-11-21T09:26:00.000Z",
+     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=887983"
     },
     {
-     "title": "李대통령 \"수능 부정행위 포상금 1건당 최소 1억\"…인원수만큼 가산",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-21T09:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000545076?sid=101"
+     "title": "한국서 따가운 눈총받는 MBK...디지털 펜 기술 보유 日 와콤 인수 참여",
+     "press": "livebiz.today",
+     "publishedAt": "2026-11-21T09:14:00.000Z",
+     "link": "https://www.livebiz.today/news/articleView.html?idxno=206760"
+    },
+    {
+     "title": "갤럭시 S펜 기술 보유한 日 와콤…MBK, 1조원대 인수 추진",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-21T08:52:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611210025"
     }
    ]
   },
@@ -176,10 +143,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-21T07:54:00.000Z",
+   "articles90": 12,
+   "recent20": 0,
+   "press": 11,
+   "firstArticleAt": "2026-11-21T08:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -204,66 +171,34 @@
    ]
   },
   {
-   "keyword": "하는 김민석 대표",
+   "keyword": "FBI 범죄정보망 해킹",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-21T07:50:00.000Z",
+   "articles90": 11,
+   "recent20": 0,
+   "press": 11,
+   "firstArticleAt": "2026-11-21T08:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김민석 “민주당, 청년과 어떻게 함께할지 고민”…청년 소통 강화 강조",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-21T09:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001232327?sid=100"
+     "title": "미 FBI 범죄정보망 침입 정황…농무부도 사이버공격",
+     "press": "kbmaeil.com",
+     "publishedAt": "2026-11-21T09:08:00.000Z",
+     "link": "https://www.kbmaeil.com/article/20261121500139"
     },
     {
-     "title": "김민석 \"민주당 큰 고민 중 하나는 청년과 함께 하는 방법\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-21T09:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928545?sid=100"
+     "title": "美 FBI 범죄정보망에 외부 침입 정황… “해커 소행 의심”",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-21T08:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001206392?sid=104"
     },
     {
-     "title": "김민석 “민주당의 가장 큰 고민 중 하나는 청년…더 함께하고 싶다”",
-     "press": "segye.com",
+     "title": "FBI 범죄정보망도 뚫렸나…美 농무부도 해킹 피해",
+     "press": "sedaily.com",
      "publishedAt": "2026-11-21T08:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177008?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "최태원, 한일 대학 AI 플랫폼 제안",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-21T07:55:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "최태원 \"대학, AI 시대 맞게학위·평가 방식 재설계를\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-21T09:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000966950?sid=104"
-    },
-    {
-     "title": "“AI시대, 한일 기업·대학 함께하자”…최태원이 파격 발언한 이유",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-21T08:48:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1176558"
-    },
-    {
-     "title": "최태원 \"AI 시대엔 교육도 재설계\"… 한일 산학연계 강조",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-21T08:40:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3450904"
+     "link": "https://n.news.naver.com/mnews/article/011/0004684669?sid=104"
     }
    ]
   },
@@ -275,10 +210,16 @@
    "articles90": 7,
    "recent20": 1,
    "press": 7,
-   "firstArticleAt": "2026-11-21T07:55:00.000Z",
+   "firstArticleAt": "2026-11-21T08:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "‘3개 대회 연속 1000m 우승’ 대역전승 펼친 최민정 “한국에서 오랜만...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-21T09:23:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/109/0005643654"
+    },
     {
      "title": "'은퇴 시즌에도 최정상' 최민정, 안방서 월드투어 1000m 3연속 우승(종합...",
      "press": "news1.kr",
@@ -290,44 +231,70 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-21T08:46:00.000Z",
      "link": "https://m.sports.naver.com/general/article/003/0014337451"
-    },
-    {
-     "title": "‘은퇴 예고’ 쇼트트랙 최민정, 안방서 여자 1000m 3연속 우승",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-21T08:44:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/119/0003157932"
     }
    ]
   },
   {
-   "keyword": "성범죄자 전자발찌 진천",
+   "keyword": "젠슨 황 거짓말과 폭언",
    "sources": [
     "nate"
    ],
-   "articles90": 6,
+   "articles90": 4,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-21T07:57:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-21T08:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "평택 거주 50대 성범죄자, 충북 진천서 전자발찌 끊고 도주",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-21T09:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436144?sid=102"
-    },
-    {
-     "title": "50대 성범죄자 충북 진천서 전자발찌 끊고 도주‥당국 추적 중",
+     "title": "\"모욕해야 성과 나와\"‥젠슨 황 폭언 폭로 파문",
      "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-21T08:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001537133?sid=102"
+     "publishedAt": "2026-11-21T09:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537138?sid=104"
     },
     {
-     "title": "차 안에서 전자발찌 끊고 달아나…충북 진천서 50대 성범죄자 추적중",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-21T08:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005767028?sid=102"
+     "title": "이사회엔 거짓말, 직원엔 폭언…젠슨 황 폭로 잇달아",
+     "press": "goodnews1.com",
+     "publishedAt": "2026-11-21T08:32:00.000Z",
+     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466491"
+    },
+    {
+     "title": "\"널 낙태했어야\" 툭하면 '폭언'...\"젠슨황, 직원들 고문했다\"",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-21T08:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001273479?sid=105"
+    }
+   ]
+  },
+  {
+   "keyword": "최태원 AI 대학 재설계",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-21T08:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "최태원 SK 회장 \"실무 역량 높인 대학 인재, 적극 영입하고파\"",
+     "press": "financialpost.co.kr",
+     "publishedAt": "2026-11-21T09:20:00.000Z",
+     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=302341"
+    },
+    {
+     "title": "최태원 \"대학, AI 시대 맞게학위·평가 방식 재설계를\"",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-21T09:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000966950?sid=104"
+    },
+    {
+     "title": "최태원 \"AI 시대엔 교육도 재설계\"… 한일 산학연계 강조",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-21T08:40:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3450904"
     }
    ]
   },
@@ -336,10 +303,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-21T07:52:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-21T08:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -398,7 +365,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 815,
+  "flagged": 818,
   "matched": 497,
   "avgLeadMin": 643,
   "recent": [
