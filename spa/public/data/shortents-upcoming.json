@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T11:49:37.782Z",
+ "builtAt": "2026-11-21T11:59:41.466Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 24,
  "candidates": [
-  {
-   "keyword": "코레일 일반열차 운행 재개",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 29,
-   "recent20": 1,
-   "press": 26,
-   "firstArticleAt": "2026-11-21T10:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "코레일 \"경부선 일반열차, 22일 첫차부터 운행 재개 예정\"",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-21T11:36:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=202611212033205818bb91c46fcd_1"
-    },
-    {
-     "title": "코레일 \"경부선 일반열차 내일 첫차부터 정상 운행 예정\"",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-21T11:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000554276?sid=102"
-    },
-    {
-     "title": "코레일 \"내일 첫차부터 경부선 일반열차 운행 재개\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-21T11:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928564?sid=101"
-    }
-   ]
-  },
   {
    "keyword": "소정리역 화물열차 탈선",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 18,
-   "recent20": 0,
-   "press": 18,
-   "firstArticleAt": "2026-11-21T10:28:00.000Z",
+   "articles90": 19,
+   "recent20": 2,
+   "press": 19,
+   "firstArticleAt": "2026-11-21T10:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "코레일 \"화물열차 탈선 복구 완료\"…22일 첫차부터 운행 재개",
+     "press": "segyebiz.com",
+     "publishedAt": "2026-11-21T11:58:00.000Z",
+     "link": "http://www.segyebiz.com/newsView/20261121506226?OutUrl=naver"
+    },
+    {
+     "title": "[리포트] 화물열차 탈선… 경부선 일반열차 운행 중단에 수험생 불편",
+     "press": "tjmbc.co.kr",
+     "publishedAt": "2026-11-21T11:45:00.000Z",
+     "link": "https://tjmbc.co.kr/NewsArticle/874681"
+    },
     {
      "title": "화물열차 탈선 여파 광주-용산 일반열차 운행 중단",
      "press": "kjmbc.co.kr",
      "publishedAt": "2026-11-21T11:25:00.000Z",
      "link": "https://kjmbc.co.kr/NewsArticle/1546735"
-    },
-    {
-     "title": "화물열차 5량 '탈선 물의' 경부선...코레일, 22일 첫차 정상화",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-21T11:24:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=885816"
-    },
-    {
-     "title": "'소정리역 열차탈선' 복구 완료…22일 첫차 운행재개",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-21T11:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014337505?sid=102"
     }
    ]
   },
@@ -107,14 +75,46 @@
    ]
   },
   {
+   "keyword": "수능 신고 포상금 1억",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-21T10:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李대통령 \"수능 부정 신고자도 공범 신고하면 포상금\"",
+     "press": "viewsnnews.com",
+     "publishedAt": "2026-11-21T11:32:00.000Z",
+     "link": "https://www.viewsnnews.com/article?q=239852"
+    },
+    {
+     "title": "이 대통령 \"수능 부정 포상금, 최대 아닌 최소 1억 원\"",
+     "press": "goodmorningcc.com",
+     "publishedAt": "2026-11-21T11:12:00.000Z",
+     "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=456266"
+    },
+    {
+     "title": "이 대통령 \"수능 부정행위 신고포상금 건당 최소 1억…행위자 수만큼 가...",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-21T11:04:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544568"
+    }
+   ]
+  },
+  {
    "keyword": "이재명 울산 전통시장 방문",
    "sources": [
     "nate"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-21T10:27:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-21T10:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -139,44 +139,12 @@
    ]
   },
   {
-   "keyword": "수능 신고 포상금 1억",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-21T10:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령 \"수능 부정 신고자도 공범 신고하면 포상금\"",
-     "press": "viewsnnews.com",
-     "publishedAt": "2026-11-21T11:32:00.000Z",
-     "link": "https://www.viewsnnews.com/article?q=239852"
-    },
-    {
-     "title": "이 대통령 \"수능 부정 포상금, 최대 아닌 최소 1억 원\"",
-     "press": "goodmorningcc.com",
-     "publishedAt": "2026-11-21T11:12:00.000Z",
-     "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=456266"
-    },
-    {
-     "title": "이 대통령 \"신고 포상금, 최대 1억 아닌 최소 1억 원\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-21T11:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404792?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "대구 경북 규탄대회",
    "sources": [
     "nate"
    ],
    "articles90": 7,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-21T10:35:00.000Z",
    "exclusive": false,
@@ -235,44 +203,12 @@
    ]
   },
   {
-   "keyword": "인도네시아 규모 6.8 지진",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-21T10:23:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "인도네시아 말라쿠주 앞 반다해에서 6.8 지진 발생",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-21T11:10:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085179"
-    },
-    {
-     "title": "인도네시아 딜리 동북동쪽 해역서 규모 6.8 강진 발생",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-21T10:34:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2651229"
-    },
-    {
-     "title": "[속보] 인도네시아 딜리 동북동쪽 바다서 규모 6.8 지진",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-21T10:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000161859?sid=104"
-    }
-   ]
-  },
-  {
    "keyword": "k리그1",
    "sources": [
     "google"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-21T10:48:00.000Z",
    "exclusive": false,
@@ -304,7 +240,7 @@
     "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-21T10:56:00.000Z",
    "exclusive": false,
@@ -329,11 +265,76 @@
      "link": "https://www.slist.kr/news/articleView.html?idxno=783681"
     }
    ]
+  },
+  {
+   "keyword": "김민석",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-21T11:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "與 '1030 청년 연설대전' 개최…김민석 \"새로운 민주당 역사의 장 열려\"...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-21T11:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014337513?sid=100"
+    },
+    {
+     "title": "“노래 불러보고 까인 거냐!” 로이킴, 10CM·김민석·존박에 곡 뺏기고...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-21T11:44:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005767056"
+    },
+    {
+     "title": "김민석 \"민주당 큰 고민 중 하나는 청년…더 함께하고 싶다\"(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-21T11:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016455933?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "인도네시아 규모 6.8 지진",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-21T10:33:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "인도네시아 말라쿠주 앞 반다해에서 6.8 지진 발생",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-21T11:10:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085179"
+    },
+    {
+     "title": "인도네시아 딜리 동북동쪽 해역서 규모 6.8 강진 발생",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-21T10:34:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2651229"
+    },
+    {
+     "title": "[속보] 인도네시아 딜리 동북동쪽 바다서 규모 6.8 지진",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-21T10:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000161859?sid=104"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 863,
+  "flagged": 864,
   "matched": 510,
   "avgLeadMin": 631,
   "recent": [
