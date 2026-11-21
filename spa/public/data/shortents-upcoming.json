@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T09:59:00.469Z",
+ "builtAt": "2026-11-21T10:09:03.587Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "대구·경북 규탄대회",
+   "keyword": "대구 경북 규탄대회",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 29,
-   "recent20": 4,
-   "press": 23,
-   "firstArticleAt": "2026-11-21T08:31:00.000Z",
+   "articles90": 25,
+   "recent20": 2,
+   "press": 20,
+   "firstArticleAt": "2026-11-21T08:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "국힘, 대구서 대규모 장외 집회 \"이재명 탄핵만이 답\"",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-21T10:00:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3450906"
+    },
     {
      "title": "[포토] 대구에 모인 국민의힘 의원들…'조작기소 특검법' 규탄",
      "press": "sisafocus.co.kr",
@@ -33,12 +39,70 @@
      "press": "daily.hankooki.com",
      "publishedAt": "2026-11-21T09:48:00.000Z",
      "link": "https://daily.hankooki.com/news/articleView.html?idxno=1427624"
+    }
+   ]
+  },
+  {
+   "keyword": "이 대통령 전통시장 방문",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 18,
+   "recent20": 2,
+   "press": 17,
+   "firstArticleAt": "2026-11-21T08:49:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이 대통령, 울산 전통시장 두 곳 방문…\"내년에는 조금 더 좋아질 것\"",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-21T10:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000521834?sid=100"
     },
     {
-     "title": "대구 찾은 장동혁 \"曺탄핵, 이재명 정권 붕괴 시작될 것\"",
-     "press": "idaegu.co.kr",
+     "title": "이 대통령, 울산 전통시장 방문...\"내년은 조금 더 좋아질 것\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-21T09:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436154?sid=100"
+    },
+    {
+     "title": "李, 울산 전통시장서 장바구니 물가 점검‥\"내년엔 좀 더 좋아질 것\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-21T09:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537139?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "평창 공기총 사고",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 12,
+   "recent20": 2,
+   "press": 12,
+   "firstArticleAt": "2026-11-21T08:56:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "공기총 사격 연습하다 지나가던 행인 맞혀…60대 남성 사망",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-21T10:04:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1176568"
+    },
+    {
+     "title": "공기총 영점 조절 중 발사된 총알에 길 가던 60대 숨져(종합)",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-21T10:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009302835?sid=102"
+    },
+    {
+     "title": "공기총 사격연습 중 날아간 총알에…길 가던 60대 행인 숨져",
+     "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-21T09:44:00.000Z",
-     "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=566016"
+     "link": "https://n.news.naver.com/mnews/article/422/0000928548?sid=102"
     }
    ]
   },
@@ -47,13 +111,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 1,
+   "articles90": 9,
+   "recent20": 2,
    "press": 9,
-   "firstArticleAt": "2026-11-21T08:35:00.000Z",
+   "firstArticleAt": "2026-11-21T08:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "경기도교육청, 교원 158명 개인정보 유출…\"불특정 다수에 공개되지 않...",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-21T09:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000652539?sid=102"
+    },
     {
      "title": "경기도교육청, 교원 158명 개인정보 유출…\"제3자 열람 정황 없어\"",
      "press": "news1.kr",
@@ -65,27 +135,27 @@
      "press": "newscj.com",
      "publishedAt": "2026-11-21T09:34:00.000Z",
      "link": "https://www.newscj.com/news/articleView.html?idxno=3450916"
-    },
-    {
-     "title": "교원 158명 정보 5월 유출, 공지는 11월…경기교육청 인지일 안 밝혀",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-21T09:04:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2651222"
     }
    ]
   },
   {
    "keyword": "빅뱅 기립 무대 최초 공개",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 9,
-   "recent20": 3,
-   "press": 8,
-   "firstArticleAt": "2026-11-21T08:39:00.000Z",
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-21T08:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "빅뱅 지드래곤, 비녀→파격 장발 스타일링까지..\"머리가 힘드네요\"[스타...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-21T10:06:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003489182"
+    },
     {
      "title": "지드래곤, 핑크빛 오대오 장발 휘날리며 등장…빅뱅 뜨자 전원 '기립' [...",
      "press": "tenasia.co.kr",
@@ -97,44 +167,70 @@
      "press": "spotvnews.co.kr",
      "publishedAt": "2026-11-21T09:46:00.000Z",
      "link": "https://m.entertain.naver.com/article/477/0000640226"
-    },
-    {
-     "title": "BTSㆍ코르티스, 나란히 '2026 마마' 대상⋯빅뱅 신곡 무대 최초 공개 [종...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-21T09:40:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2651225"
     }
    ]
   },
   {
-   "keyword": "탈선 현장 점검 재발 방지 대책",
+   "keyword": "신한은행 3연승 공동 선두",
    "sources": [
     "nate"
    ],
-   "articles90": 8,
-   "recent20": 2,
+   "articles90": 9,
+   "recent20": 1,
    "press": 8,
-   "firstArticleAt": "2026-11-21T08:45:00.000Z",
+   "firstArticleAt": "2026-11-21T08:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국토부, 경부선 화물열차 탈선 현장 점검‥\"원인 규명·재발 방지\"",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-21T09:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001537140?sid=102"
+     "title": "'3점슛 14개에 성공률 64%, 디펜딩 챔피언도 무너졌다' 신한은행, KB국민...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-21T09:56:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/109/0005643673"
     },
     {
-     "title": "국토부, 경부선 화물열차 탈선 사고 현장 점검··· \"원인 규명·재발 ...",
-     "press": "dkilbo.com",
-     "publishedAt": "2026-11-21T09:44:00.000Z",
-     "link": "https://www.dkilbo.com/news/articleView.html?idxno=561546"
+     "title": "'노구치 19점' 신한은행, 3연승으로 공동 선두 도약…BNK는 우리은행 꺾...",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-21T09:32:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110026017585"
     },
     {
-     "title": "국토부, 경부선 화물열차 탈선 현장 점검…KTX·버스 대체수송 추진",
-     "press": "g-enews.com",
+     "title": "‘최하위 후보’ 신한은행, 3연승으로 공동 선두…KB는 충격 4연패",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-21T09:13:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/119/0003157934"
+    }
+   ]
+  },
+  {
+   "keyword": "한동훈, 12월 3일에 꼭 하라",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-21T08:43:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한동훈 “‘조희대 탄핵 추진’ 민주당은 내란 정당…모두 감옥 갈 것”",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-21T09:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000133138?sid=100"
+    },
+    {
+     "title": "한동훈 “조희대 탄핵 무르지 말고 꼭 하라…민주당은 이제 내란정당”",
+     "press": "sedaily.com",
      "publishedAt": "2026-11-21T09:38:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=202611211835259740bb91c46fcd_1"
+     "link": "https://n.news.naver.com/mnews/article/011/0004684674?sid=100"
+    },
+    {
+     "title": "한동훈 \"민주당 내란정당 자백... 모두 감옥 갈 것\"",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-21T09:36:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=730359"
     }
    ]
   },
@@ -143,13 +239,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-21T08:32:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-21T08:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "미 FBI, 법 집행기관 범죄 정보 DB 해킹 정황 조사",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-21T10:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001165149?sid=104"
+    },
     {
      "title": "FBI 범죄정보망 해킹 의혹…1,950만 건 기록 안전한가",
      "press": "topstarnews.net",
@@ -161,150 +263,34 @@
      "press": "kbmaeil.com",
      "publishedAt": "2026-11-21T09:08:00.000Z",
      "link": "https://www.kbmaeil.com/article/20261121500139"
-    },
-    {
-     "title": "美 FBI 범죄정보망에 외부 침입 정황… “해커 소행 의심”",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-21T08:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001206392?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "수능 부정 신고 1억 가산",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-21T08:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "수능 부정행위 TF 출범...이 대통령 \"수능 부정 신고, 포상금 최소 1억 ...",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-21T09:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436152?sid=100"
-    },
-    {
-     "title": "수능 부정행위 신고하면 최소 1억… 李, 정부 발표 직접 바로잡았다",
-     "press": "jibs.co.kr",
-     "publishedAt": "2026-11-21T09:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/661/0000086889?sid=102"
-    },
-    {
-     "title": "李 대통령 “수능 부정행위 신고 포상금, 건당 최소 1억원”…엄정 대응...",
-     "press": "ekn.kr",
-     "publishedAt": "2026-11-21T09:24:00.000Z",
-     "link": "https://www.ekn.kr/web/view.php?key=20261121020392858"
-    }
-   ]
-  },
-  {
-   "keyword": "태양, 민효린 언급하며 눈물",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-21T08:41:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "태양, MAMA 소감 중 ♥민효린 언급하다 눈물…“진정한 사랑 알려줘” ...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-21T09:51:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001147934"
-    },
-    {
-     "title": "빅뱅 태양, '2026 MAMA'서 울컥…\"아내 민효린, 진정한 사랑 알려줬다\"",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-21T09:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/396/0000761545"
-    },
-    {
-     "title": "태양, 'MAMA' 수상소감 중 민효린 언급하며 눈물...르세라핌X제이홉 '베...",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-21T08:44:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=783666"
-    }
-   ]
-  },
-  {
-   "keyword": "최백호 장미화 진땀",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-21T08:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "60대 최성수 진땀, 평균 나이 70대 대가수들 사이 “네가 여기 앉을 나이...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-21T09:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001189942"
-    },
-    {
-     "title": "\"뽀뽀한 지 40년 넘었다\"… 만 80세 장미화 화끈한 입담에 만 76세 최백호...",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-21T09:00:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3759063"
-    },
-    {
-     "title": "'불후의 명곡' 장미화·장계현·최백호·조항조·최성수 '평균 나이 75.2...",
-     "press": "enter.etoday.co.kr",
-     "publishedAt": "2026-11-21T09:00:00.000Z",
-     "link": "https://enter.etoday.co.kr/news/view/305563"
-    }
-   ]
-  },
-  {
-   "keyword": "유엔 킬러로봇 규제",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-21T08:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "유엔, AI '킬러 로봇' 국제규범 마련 추진… 구속력 있는 합의 불발",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-21T09:54:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3450913"
-    },
-    {
-     "title": "유엔 '킬러로봇' 규제 국제규범 마련 착수…미·러 반대에 구속력은 '아...",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-21T08:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979253?sid=104"
-    },
-    {
-     "title": "유엔 '킬러 로봇' 규제 규범 마련 착수...미국·러시아는 소극적",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-21T08:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436132?sid=104"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 824,
-  "matched": 499,
-  "avgLeadMin": 640,
+  "flagged": 829,
+  "matched": 502,
+  "avgLeadMin": 639,
   "recent": [
+   {
+    "keyword": "연준",
+    "hitKeyword": "TXT 연준 나혼산",
+    "hitAt": "2026-11-21T19:00:00+09:00",
+    "leadMin": 1053
+   },
+   {
+    "keyword": "MBK, 와콤 인수 추진",
+    "hitKeyword": "와콤 1조원 인수",
+    "hitAt": "2026-11-21T19:00:00+09:00",
+    "leadMin": 31
+   },
+   {
+    "keyword": "젠슨 황 거짓말과 폭언",
+    "hitKeyword": "젠슨 황 폭언 거짓말",
+    "hitAt": "2026-11-21T19:00:00+09:00",
+    "leadMin": 31
+   },
    {
     "keyword": "수원 삼성 K리그2 우승!",
     "hitKeyword": "수원 삼성 K리그2 우승",
@@ -346,24 +332,6 @@
     "hitKeyword": "김신영 직각 어깨",
     "hitAt": "2026-11-21T13:00:00+09:00",
     "leadMin": 270
-   },
-   {
-    "keyword": "엔비디아 메가스피드 칩 판매",
-    "hitKeyword": "엔비디아 폭락 나스닥",
-    "hitAt": "2026-11-21T12:30:00+09:00",
-    "leadMin": 200
-   },
-   {
-    "keyword": "추성훈",
-    "hitKeyword": "추성훈 은퇴전 야노시호",
-    "hitAt": "2026-11-21T11:30:00+09:00",
-    "leadMin": 130
-   },
-   {
-    "keyword": "해리 케인",
-    "hitKeyword": "해리 케인 발목 인대 파열",
-    "hitAt": "2026-11-21T10:00:00+09:00",
-    "leadMin": 7316
    }
   ]
  }
