@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T13:40:17.172Z",
+ "builtAt": "2026-11-21T13:50:20.032Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,70 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 21,
  "candidates": [
   {
-   "keyword": "굿파트너 2",
+   "keyword": "추성훈 은퇴전 리벤 패배",
    "sources": [
-    "daum"
-   ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-21T12:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'굿파트너2' 장나라, 김혜윤 스카우트 하나...\"마음에 들어\"",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-21T13:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002082856"
-    },
-    {
-     "title": "'굿파트너2' 장나라, 김혜윤 점찍었다 \"포기하는 법 없어\" [TV나우]",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-21T13:27:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000053806"
-    },
-    {
-     "title": "'굿파트너2' 박해진, 장나라와 무슨 관계?...\"나 기억 안 나?\"",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-21T13:15:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002082854"
-    }
-   ]
-  },
-  {
-   "keyword": "추성훈 격투 인생 마무리",
-   "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-21T12:35:00.000Z",
+   "articles90": 15,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-21T12:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "추성훈, 은퇴전서 리벤에 1-2 판정패…MMA 22년 마무리",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-21T13:24:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626836"
+     "title": "51세 추성훈, 은퇴전서 아쉬운 판정패…22년 파이터 인생 마침표",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-21T13:39:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014337533"
     },
     {
-     "title": "추성훈, 파이트머니 한국 격투기 선수들에게 기부 결정…\"사랑아 이번엔...",
+     "title": "\"사랑아 용돈 없다\"…추성훈, 은퇴전 파이트머니 전액 기부",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-21T13:33:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004127032"
+    },
+    {
+     "title": "'섹시야마' 추성훈, 은퇴전서 리벤에 스플릿 판정패…'UFC 출신' 강경호...",
      "press": "stoo.com",
-     "publishedAt": "2026-11-21T13:20:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110031755098"
-    },
-    {
-     "title": "추성훈, 복수 못한 은퇴전... 22년 격투 인생 마침표",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-21T13:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004010977?sid=102"
+     "publishedAt": "2026-11-21T13:28:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110031977525"
     }
    ]
   },
@@ -80,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 1,
-   "press": 3,
+   "press": 4,
    "firstArticleAt": "2026-11-21T12:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "대만 증시 일주일 새 17.5% 폭락…공매도 규제 세 번째 강화",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-21T13:42:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282575"
+    },
     {
      "title": "증시 폭락에 공매도 빗장 건 대만…韓 개미들 \"우리도 막아달라\" 청원 ...",
      "press": "imaeil.com",
@@ -98,19 +71,77 @@
      "press": "inews24.com",
      "publishedAt": "2026-11-21T12:33:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/031/0001077209?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "코레일 첫차 정상운행",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-21T13:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "경부선 화물열차 탈선 여파…코레일, 22일 오전 일반열차 운행 재개 추...",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-21T13:18:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=848002"
     },
     {
-     "title": "대만, 23일부터 전일 종가 이하 공매도 전면 금지",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-21T12:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014337523?sid=104"
+     "title": "'운행 중단' 경부선 일반열차 22일 첫차부터 정상 운행 [종합]",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-21T13:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005356627?sid=102"
+    },
+    {
+     "title": "[아주경제 오늘의 종합 뉴스] 코레일 \"소정리역 탈선 밤샘 복구\"…22일 ...",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-21T13:02:00.000Z",
+     "link": "https://www.ajunews.com/view/20261121214444202"
+    }
+   ]
+  },
+  {
+   "keyword": "BTS 코르티스 대상 수상",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-21T12:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "BTS·엔하이픈·코르티스 대상…'뮤직 인터스텔라'로 빛난 이틀 [2026 MAM...",
+     "press": "harpersbazaar.co.kr",
+     "publishedAt": "2026-11-21T13:22:00.000Z",
+     "link": "https://www.harpersbazaar.co.kr/article/1913473"
+    },
+    {
+     "title": "‘2026 마마’ BTS·코르티스·엔하이픈 대상…빅뱅 20주년 피날레",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-21T12:46:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611210032"
+    },
+    {
+     "title": "BTS, '2026 마마 어워즈' 대상 2관왕·5관왕 달성…코르티스 첫 대상, 빅...",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-21T12:42:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626829"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 886,
+  "flagged": 888,
   "matched": 528,
   "avgLeadMin": 635,
   "recent": [
