@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-20T23:50:11.691Z",
+ "builtAt": "2026-11-21T00:00:14.636Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 21,
+ "measured": 20,
  "candidates": [
   {
    "keyword": "굿파트너 2",
@@ -17,10 +17,10 @@
     "nate",
     "daum"
    ],
-   "articles90": 15,
-   "recent20": 4,
+   "articles90": 14,
+   "recent20": 3,
    "press": 13,
-   "firstArticleAt": "2026-11-20T22:26:00.000Z",
+   "firstArticleAt": "2026-11-20T22:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -49,10 +49,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
+   "articles90": 10,
    "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-20T22:27:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-20T22:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -81,13 +81,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 6,
-   "recent20": 3,
-   "press": 6,
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
    "firstArticleAt": "2026-11-20T22:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "최미나수, 2시간 내내 추위에 덜덜…레드카펫 선 김연경도 걱정했다 [엑...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-20T23:59:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002082713"
+    },
     {
      "title": "“옷 좀 입혀라” 최미나수, 강추위에도 드레스 하나 입고 야외 진행 ‘...",
      "press": "osen.co.kr",
@@ -99,20 +105,14 @@
      "press": "mt.co.kr",
      "publishedAt": "2026-11-20T23:37:00.000Z",
      "link": "https://m.entertain.naver.com/article/008/0005444377"
-    },
-    {
-     "title": "강추위에 노출드레스…‘MAMA’ 최미나수에 누리꾼 ‘걱정 가득’",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-20T23:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001150984"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 831,
-  "matched": 505,
+  "flagged": 827,
+  "matched": 501,
   "avgLeadMin": 630,
   "recent": [
    {
