@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-20T21:26:52.611Z",
+  "generatedAt": "2026-11-21T03:16:17.806Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -140,76 +140,6 @@
           "views": 63,
           "answers": 3,
           "askedAt": "2026.11.15"
-        }
-      ]
-    },
-    {
-      "id": "a7d8ee80ae4096d9",
-      "urls": [
-        "https://realmoneyshot.kr/midyear-resignation-yearend-tax-settlement-2026/",
-        "https://dineroinfo.com/year-end-tax-refund-withholding-calculation/",
-        "https://coolmool-economy.tistory.com/entry/mid-year-retiree-year-end-tax-settlement-2026",
-        "https://yeeso.tistory.com/entry/%EC%A4%91%EB%8F%84%ED%87%B4%EC%82%AC%EC%9E%90-%EC%97%B0%EB%A7%90%EC%A0%95%EC%82%B0-%EB%B0%A9%EB%B2%95%EF%BD%9C%ED%87%B4%EC%82%AC-%ED%9B%84-%EC%9E%AC%EC%B7%A8%EC%97%85%ED%95%98%EC%A7%80-%EC%95%8A%EC%95%98%EB%8B%A4%EB%A9%B4-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%A0%EA%B9%8C"
-      ],
-      "guide": {
-        "direction": "퇴사 후 재취업을 안 했거나 올해 중 이직한 사람이 연말정산을 어떻게 마무리하고 환급을 받는지 몰라 검색한다. 기존 글들은 '환급 93만원' 같은 숫자나 절차를 다뤘지만 재취업 여부별 경로와 계산 공식을 한 화면에 연결하지 못했다. 이 글은 재취업/미취업 두 경로와 결정세액-기납부세액 계산법을 순서대로 제시한다.",
-        "searchTargets": [
-          "중도퇴사자 연말정산 방법",
-          "중도퇴사자 연말정산 환급",
-          "중도퇴사자 연말정산 계산기",
-          "중도퇴사자 연말정산 안하면"
-        ],
-        "mustInclude": [
-          "재취업 여부에 따른 두 경로: 미취업 시 5월 종합소득세 신고 / 재취업 시 새 회사 합산정산",
-          "환급액 계산 공식: 결정세액-기납부세액",
-          "퇴사 시 회사는 퇴사월 급여까지 간단정산만 해준다는 점",
-          "귀속연도별로 전년 퇴사분과 올해 재취업분을 나눠 계산해야 한다는 점",
-          "필요 서류: 전 직장 원천징수영수증"
-        ],
-        "mustAvoid": [
-          "연말정산을 회사가 자동으로 매년 해준다고 오해하게 쓰는 것",
-          "작년 퇴사분과 올해 재취업분을 같은 해로 섞어 계산하는 것",
-          "93만원 환급을 누구에게나 적용되는 숫자처럼 일반화하는 것"
-        ],
-        "checkBefore": [
-          "본인 결정세액·기납부세액(홈택스 연말정산 미리보기 또는 종합소득세 신고 화면)",
-          "전 직장 원천징수영수증 발급 여부(전 직장 인사·급여팀)"
-        ],
-        "solves": [
-          "재취업 안 했는데 연말정산을 안 해도 되는지 헷갈리는 문제 → 5월 종합소득세 신고로 마무리하는 절차 제시",
-          "환급액이 얼마인지 감이 없는 문제 → 결정세액-기납부세액 계산 공식과 예시로 해결",
-          "작년 퇴사분과 올해 재취업분을 같이 정산해야 하는지 헷갈리는 문제 → 귀속연도별 계산법 명시"
-        ],
-        "actionTitles": [
-          "중도퇴사자 연말정산 방법, 5월 신고로 환급받는 순서",
-          "중도퇴사자 연말정산 환급금 계산법, 결정세액 확인하기",
-          "중도퇴사자 연말정산 안하면 생기는 일, 신고 체크리스트"
-        ]
-      },
-      "at": "2026-11-16T20:19:13.752Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "중도퇴사자 연말정산",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40311&docId=484194359&answerNo=5&qb=7KSR64+E7Ye07IKs7J6Q7Jew66eQ7KCV7IKw",
-          "views": 2453,
-          "answers": 5,
-          "askedAt": "2026.01.02"
-        },
-        {
-          "title": "5월 중도퇴사자 연말정산",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40309&docId=494956542&answerNo=9&qb=7KSR64+E7Ye07IKs7J6Q7Jew66eQ7KCV7IKw",
-          "views": 698,
-          "answers": 9,
-          "askedAt": "2026.10.13"
-        },
-        {
-          "title": "중도퇴사자 연말정산",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6080401&docId=489668634&answerNo=11&qb=7KSR64+E7Ye07IKs7J6Q7Jew66eQ7KCV7IKw",
-          "views": 636,
-          "answers": 12,
-          "askedAt": "2026.01.07"
         }
       ]
     },
@@ -514,71 +444,6 @@
           "views": 183,
           "answers": 2,
           "askedAt": "2026.11.05"
-        }
-      ]
-    },
-    {
-      "id": "ca44647ae34b2426",
-      "urls": [
-        "https://smile-nest.com/%ec%b9%b4%ec%8b%9c%ec%98%a4-%ec%88%98%eb%8a%a5%ec%8b%9c%ea%b3%84-%eb%b0%b0%ed%84%b0%eb%a6%ac-%ea%b5%90%ec%b2%b4/",
-        "https://astrowise.tistory.com/entry/%EC%9E%90%EB%8F%99%EC%B0%A8-%EB%B0%B0%ED%84%B0%EB%A6%AC-%EA%B5%90%EC%B2%B4-%EC%8B%9C%EA%B8%B0%EC%99%80-%EC%88%98%EB%AA%85-%ED%99%95%EC%9D%B8%EB%B2%95-%EC%A6%9D%EC%83%81%C2%B7%EC%A0%84%EC%95%95%EC%9C%BC%EB%A1%9C-%ED%8C%90%EB%8B%A8%ED%95%98%EA%B8%B0",
-        "https://onsum.kr/entry/%EC%9E%90%EB%8F%99%EC%B0%A8-%EB%B0%B0%ED%84%B0%EB%A6%AC-%EA%B5%90%EC%B2%B4%EB%B9%84%EC%9A%A9-2026%EF%BD%9C%EB%B0%A9%EC%A0%84-%EC%A6%9D%EC%83%81%C2%B7%EB%B0%B0%ED%84%B0%EB%A6%AC-%EA%B0%80%EA%B2%A9%C2%B7%EA%B3%B5%EC%9E%84%EB%B9%84%C2%B7%EC%B6%9C%EC%9E%A5-%EA%B5%90%EC%B2%B4%C2%B7%EA%B8%B4%EA%B8%89%EC%B6%9C%EB%8F%99-%EB%B9%84%EC%9A%A9-%EB%B9%84%EA%B5%90"
-      ],
-      "guide": {
-        "direction": "지식인 질문처럼 반복 방전 시 교체 여부, 용량(Ah) 변경 가능성, 외부충전·단자방향이 헷갈려 검색한다. 고수 글들은 수명확인법·비용비교는 다루지만 방전 후 점프 vs 교체 판단과 용량 변경 가능 여부는 명확히 안 풀었다. 증상별 판단표와 비용비교표로 한 번에 정리해준다.",
-        "searchTargets": [
-          "자동차배터리수명"
-        ],
-        "mustInclude": [
-          "방전 반복 시 성능저하 가능성, 점검 우선순위(충전상태→발전기)부터 판단",
-          "60Ah 등 용량 변경이 전기장치 자체 문제를 일으키진 않음(단, 차종별 확인)",
-          "외부충전 시 배터리 케이블 분리 후 충전(차종별 취급설명서 기준 확인 필요)",
-          "교체비용·공임비·출장교체·긴급출동 비용 비교표 (확인 필요: 지역·차종별 시세)",
-          "+/- 단자는 몸 기준 멀리 두고 보는 방향으로 확인(사진 반전 주의)"
-        ],
-        "mustAvoid": [
-          "특정 배터리 브랜드(델코 등) 성능을 단정적으로 비교·추천하지 않기",
-          "모든 차종에 동일 충전·교체법 적용된다고 일반화하지 않기(설명서 다름)",
-          "자가교체를 긴급출동보다 과도하게 권장해 안전문제 만들지 않기"
-        ],
-        "checkBefore": [
-          "차종별 배터리 규격(Ah)·충전법 - 차량 취급설명서/제조사 공지 확인",
-          "현재 교체비용·공임비 시세 - 정비소/보험사 긴급출동 공지 확인"
-        ],
-        "solves": [
-          "\"반복 방전되면 바로 교체해야 하나요?\" → 충전상태·발전기 점검 우선순위 제시",
-          "\"60Ah로 바꿔도 되나요?\" → 용량 변경이 전기장치에 직접 문제 없다는 점과 주의사항 안내",
-          "\"외부 충전기로 충전해도 되나요?\" → 케이블 분리 후 충전해야 하는 이유 설명"
-        ],
-        "actionTitles": [
-          "자동차배터리수명 확인하고 방전 전에 교체 시기 잡는 법",
-          "자동차 배터리 교체비용 비교: 공임비·출장·긴급출동"
-        ]
-      },
-      "at": "2026-11-16T20:19:13.752Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "더뉴스파크 차량밧데리 델코 DF60L로 교환해도....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8020608&docId=481107423&answerNo=2&qb=7J6Q64+Z7LCo67Cw7YSw66as",
-          "views": 488,
-          "answers": 3,
-          "askedAt": "2026.11.04"
-        },
-        {
-          "title": "차량 배터리 방전",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=81101&docId=495481682&answerNo=3&qb=7J6Q64+Z7LCo67Cw7YSw66as",
-          "views": 246,
-          "answers": 4,
-          "askedAt": "2026.10.17"
-        },
-        {
-          "title": "상전 충전기로 차량배터리 충전",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8110101&docId=495880810&answerNo=3&qb=7J6Q64+Z7LCo67Cw7YSw66as",
-          "views": 64,
-          "answers": 3,
-          "askedAt": "2026.11.09"
         }
       ]
     },
@@ -1072,68 +937,6 @@
       ]
     },
     {
-      "id": "e4cefb894b2d862d",
-      "urls": [
-        "https://earnnomad.com/small-business-voucher-deadline/",
-        "https://ace4.jspeopleone.com/entry/%EC%97%90%EB%84%88%EC%A7%80%EB%B0%94%EC%9A%B0%EC%B2%98-%EC%8B%A0%EC%B2%AD-%EB%B0%A9%EB%B2%95-12%EC%9B%94-31%EC%9D%BC-%EB%A7%88%EA%B0%90-%EC%A0%84-%EB%8C%80%EC%83%81%C2%B7%EA%B8%88%EC%95%A1%C2%B7%EB%8C%80%EB%A6%AC%EC%8B%A0%EC%B2%AD-%EC%A0%95%EB%A6%AC"
-      ],
-      "guide": {
-        "direction": "지식인 질문은 전부 에너지바우처 대리신청 서류와 마감(12월31일) 처리 방식에 몰려 있는데, 본인인증이 안 되면 대리신청이 막힌다는 점이 반복해서 막힌 지점이다. 고수 글은 대상·금액·마감일은 정리했지만 마감 후 미신청분 사용기한 처리와 대리신청 서류 목록은 비어있다. 대리신청 서류 체크리스트와 마감 후 처리 기준을 한 번에 정리하면 글에서 끝난다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "신청 마감일 2026년 12월 31일 명시",
-          "대리신청 시 필요서류(위임장·대리인 신분증 등) 체크리스트",
-          "온라인 신청은 본인 명의 인증 필수, 대리신청은 오프라인(행정복지센터)으로 가능한 점",
-          "마감 후 미신청분·사용기한 처리 기준 (확인 필요: 주관 기관 공지)"
-        ],
-        "mustAvoid": [
-          "제목의 '소상공인 바우처'와 실제 다루는 '에너지바우처'를 같은 사업처럼 섞어 서술",
-          "수급 대상 여부를 지역·소득 기준 확인 없이 단정적으로 안내"
-        ],
-        "checkBefore": [
-          "이 글이 소상공인바우처인지 에너지바우처인지 제목-자료 불일치 재확인 (원고 기획 재확인)",
-          "2026년 신청 마감일·대상 조건 최신 공지 확인 (에너지바우처 공식 사이트·복지로)",
-          "마감 후 미신청분 사용기한 정책 확인 (주관 기관 공지)"
-        ],
-        "solves": [
-          "\"대리신청 가능한가\" 위임장·신분증 등 필요서류 체크리스트로 정리",
-          "\"신청 마감 지나면 어떻게 되나\" 미신청분·사용기한 처리 기준 정리",
-          "\"신청 서류가 뭔지 모르겠다\" 준비서류 목록을 한 번에 정리"
-        ],
-        "actionTitles": [
-          "에너지바우처 신청 마감 12월31일, 대리신청 서류 한번에 확인",
-          "에너지바우처 대리신청 방법, 필요서류 체크리스트로 정리",
-          "에너지바우처 마감 후 미신청분, 사용기한 갈리는 지점 확인"
-        ]
-      },
-      "at": "2026-11-17T16:57:58.209Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "에너지바우처 신청할 때 필요한 서류가 뭐예....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=709&docId=494000928&answerNo=10&qb=7JeQ64SI7KeA67CU7Jqw7LKYIOuniOqwkCDrjIDrpqzsi6Dssq0=",
-          "views": 927,
-          "answers": 46,
-          "askedAt": "2026.06.24"
-        },
-        {
-          "title": "2026 에너지바우처 냉방지원금, 온라인 신청 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1118&docId=494132236&answerNo=21&qb=7JeQ64SI7KeA67CU7Jqw7LKYIOuniOqwkCDrjIDrpqzsi6Dssq0=",
-          "views": 798,
-          "answers": 46,
-          "askedAt": "2026.07.26"
-        },
-        {
-          "title": "에너지바우처 신청, 온라인으로 간편하게 할 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10504&docId=493912549&answerNo=32&qb=7JeQ64SI7KeA67CU7Jqw7LKYIOuniOqwkCDrjIDrpqzsi6Dssq0=",
-          "views": 467,
-          "answers": 33,
-          "askedAt": "2026.11.12"
-        }
-      ]
-    },
-    {
       "id": "b548dc8c033fbc6a",
       "urls": [
         "https://cerd.honeymotip.com/entry/%EB%86%8D%ED%98%91-%EC%A0%95%EA%B8%B0%EC%98%88%EA%B8%88-%EA%B8%88%EB%A6%AC-%EC%A1%B0%ED%9A%8C-%EB%B9%84%EA%B5%90-%EC%A0%95%EA%B8%B0%EC%A0%81%EA%B8%88-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0",
@@ -1398,73 +1201,6 @@
           "views": 3445,
           "answers": 5,
           "askedAt": "2024.03.07"
-        }
-      ]
-    },
-    {
-      "id": "0a04f72f46823674",
-      "urls": [
-        "https://earnnomad.com/health-insurance-dependent-criteria/",
-        "https://zsewqzsewq.tistory.com/443"
-      ],
-      "guide": {
-        "direction": "검색자는 '자격조회에서 피부양자로 나오는지'와 '유족연금·일용근로 소득이 합산되는지'처럼 구체 사례에서 막힌다. 고수 글은 '3분 완성'을 내세우지만 소급 여부, 재취득 시 재확인 포인트는 안 다룬다. 이 글은 소득·재산 기준표와 조회 화면 경로, 사례별 체크리스트로 끝맺는다.",
-        "searchTargets": [
-          "건강보험 피부양자 조회",
-          "건강보험 피부양자 확인",
-          "건강보험 피부양자 자격",
-          "건강보험 피부양자 등록 방법"
-        ],
-        "mustInclude": [
-          "소득 기준표(사업·금융·연금소득 합산 기준) (확인 필요: 국민건강보험공단 공지)",
-          "재산 기준 구간(4억~9억원 초과 시 소득 1,000만원 이하 조건)",
-          "자격조회 화면에서 피부양자 여부 확인하는 경로 (확인 필요: 공단 홈페이지·앱)",
-          "유족연금 등 비과세 소득의 합산 제외 여부",
-          "상실일 기준 지역보험료 부과 시점(소급 여부)"
-        ],
-        "mustAvoid": [
-          "지식인 속 개인 사례(소득·재산 금액)를 일반 기준처럼 단정",
-          "소득 발생 즉시 자격이 바로 끊기는 것처럼 오도(실제는 그해 소득을 다음 해에 반영)"
-        ],
-        "checkBefore": [
-          "최신 소득·재산 기준 수치는 국민건강보험공단 공지에서 확인",
-          "자격조회 화면 경로 변경 여부 공단 앱·홈페이지에서 확인"
-        ],
-        "solves": [
-          "건강보험 피부양자 확인방법은? → 자격조회 화면에서 보는 법과 안 나올 때 대응법 정리",
-          "유족연금 받는데 피부양자 유지되나요? → 비과세 소득 제외 기준으로 판단법 제공",
-          "일용근로자 취득·상실 반복시 피부양자는? → 재취득 시마다 다시 확인할 포인트 정리"
-        ],
-        "actionTitles": [
-          "건강보험 피부양자 조회 방법과 탈락 기준 한눈에 정리",
-          "건강보험 피부양자 등록 방법, 소득·재산 기준으로 확인하기",
-          "건강보험 피부양자 자격 확인, 탈락 전 소득·재산 기준 체크"
-        ]
-      },
-      "at": "2026-11-17T17:35:46.050Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "건강보험 피부양자 확인방법은?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100401&docId=483375748&answerNo=4&qb=6rG06rCV67O07ZeY7ZS867aA7JaR7J6Q",
-          "views": 3285,
-          "answers": 5,
-          "askedAt": "2026.11.15"
-        },
-        {
-          "title": "건강보험 피부양자",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100401&docId=490750586&answerNo=4&qb=6rG06rCV67O07ZeY7ZS867aA7JaR7J6Q",
-          "views": 734,
-          "answers": 4,
-          "askedAt": "2026.11.15"
-        },
-        {
-          "title": "건강보험 피부양자",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100401&docId=492854321&answerNo=8&qb=6rG06rCV67O07ZeY7ZS867aA7JaR7J6Q",
-          "views": 646,
-          "answers": 8,
-          "askedAt": "2026.11.11"
         }
       ]
     },
@@ -1800,71 +1536,6 @@
       ]
     },
     {
-      "id": "4e856777d8d2dab6",
-      "urls": [
-        "https://yun11.tistory.com/entry/%EC%88%98%EC%9C%A1-%EC%95%9E%EB%8B%A4%EB%A6%AC%EC%82%B4-vs-%EC%82%BC%EA%B2%B9%EC%82%B4-%EB%B6%80%EC%9C%84-%EB%B9%84%EA%B5%90-%EB%B0%8F-%EB%B6%80%EC%9C%84%EB%B3%84-%EC%82%B6%EB%8A%94-%EC%8B%9C%EA%B0%84-%ED%99%A9%EA%B8%88%EB%A0%88%EC%8B%9C%ED%94%BC-%EC%B4%9D%EC%A0%95%EB%A6%AC",
-        "https://solang.co.kr/%ec%88%98%ec%9c%a1-%ec%82%b6%eb%8a%94-%eb%b2%95-600g%ec%9d%80-%eb%aa%87-%eb%b6%84%eb%b6%80%ed%84%b0-%ed%99%95%ec%9d%b8%ed%95%98%eb%a9%b4-%eb%90%a0%ea%b9%8c%ec%9a%94/"
-      ],
-      "guide": {
-        "direction": "검색자는 앞다리살과 삼겹살 수육이 뭐가 다른지, 또 600g이나 2인분 고기를 몇 분 삶아야 할지 몰라 막힌다. 고수 블로그 제목은 '부위 비교'와 '삶는 시간'을 총정리했다지만 중량별 시간표와 목살과의 구분 기준이 빠져 있다. 이 글은 부위별 비교표와 중량별 삶는 시간표, 핏물 빼는 시간까지 묶어 바로 적용하게 끝낸다.",
-        "searchTargets": [
-          "수육 앞다리살 삼겹살",
-          "수육 앞다리살 삶는법",
-          "수육 앞다리살 2인분",
-          "수육 앞다리살 고르는법"
-        ],
-        "mustInclude": [
-          "앞다리살 vs 삼겹살 지방·식감 비교표(확인 필요: 식약처/축산물 등급 기준 데이터)",
-          "중량별 삶는 시간표: 600g/1kg/2인분 기준(확인 필요: 실제 조리 시간 데이터)",
-          "핏물 빼는 시간: 30분이면 충분(지식인 답변 기준)",
-          "앞다리살과 목살 구분 기준(마블링·결 차이, 확인 필요: 축산물 부위 설명)",
-          "앞다리살 고르는 법 체크포인트(지방 비율·두께, 확인 필요: 정육점/마트 기준)"
-        ],
-        "mustAvoid": [
-          "앞다리살을 목살과 같은 부위처럼 혼용 설명",
-          "중량 언급 없이 '푹 삶으세요'식 모호한 시간 제시"
-        ],
-        "checkBefore": [
-          "핏물 제거 30분 기준이 실제 지식인 답변과 일치하는지 재확인",
-          "앞다리살·목살 부위 구분 기준을 축산물 등급판정 자료에서 확인"
-        ],
-        "solves": [
-          "앞다리살과 삼겹살 수육 뭐가 다른지 헷갈림 → 지방·식감 비교표로 구분",
-          "600g~2인분 고기를 몇 분 삶아야 할지 모름 → 중량별 삶는 시간표 제공",
-          "핏물 꼭 오래 빼야 하는지 궁금 → 30분이면 충분하다는 기준 제시"
-        ],
-        "actionTitles": [
-          "수육 앞다리살 2인분 삶는법, 중량별 시간 확인하기"
-        ]
-      },
-      "at": "2026-11-18T02:26:09.460Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "돼지고기 앞다리살 수육, 부드럽게 만드는 핵....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=50502&docId=490876001&answerNo=1&qb=7IiY7Jyh7JWe64uk66as7IK0",
-          "views": 695,
-          "answers": 2,
-          "askedAt": "2025.12.20"
-        },
-        {
-          "title": "앞다리살 수육, 핏물 꼭 빼야 하나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8020110&docId=494411404&answerNo=2&qb=7IiY7Jyh7JWe64uk66as7IK0",
-          "views": 290,
-          "answers": 3,
-          "askedAt": "2026.07.22"
-        },
-        {
-          "title": "돼지 앞다리살 수육, 소스는 뭘 곁들이면 좋....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8020114&docId=491867195&answerNo=2&qb=7IiY7Jyh7JWe64uk66as7IK0",
-          "views": 203,
-          "answers": 2,
-          "askedAt": "2026.02.10"
-        }
-      ]
-    },
-    {
       "id": "20b54907de1c149b",
       "urls": [
         "https://hereissuetell.tistory.com/entry/2026-%EC%88%99%EB%B0%95%EC%84%B8%EC%9D%BC-%ED%8E%98%EC%8A%A4%ED%83%80-%EC%B5%9C%EB%8C%80-9%EB%A7%8C%EC%9B%90-%ED%95%A0%EC%9D%B8-12%EC%9B%94-13%EC%9D%BC%EA%B9%8C%EC%A7%80-%EA%B1%B0%EC%A0%9C%C2%B7%ED%86%B5%EC%98%81-%EC%88%99%EB%B0%95%EC%BF%A0%ED%8F%B0-%EB%B0%9B%EB%8A%94-%EB%B2%95",
@@ -2155,53 +1826,6 @@
           "views": 502,
           "answers": 1,
           "askedAt": "2010.11.21"
-        }
-      ]
-    },
-    {
-      "id": "2d6ab3f3e5dcaf0c",
-      "urls": [
-        "https://jjyiu.tistory.com/entry/%EC%95%84%EC%9D%B4%EB%8F%8C%EB%B4%84%EC%84%9C%EB%B9%84%EC%8A%A4-%EA%B1%B4%EA%B0%95%EB%B3%B4%ED%97%98%EB%A3%8C-%ED%8C%90%EC%A0%95-%EA%B8%B0%EC%A4%80%ED%91%9C-%EC%9A%B0%EB%A6%AC-%EC%A7%91-%EA%B0%80%ED%98%95%C2%B7%EB%9D%BC%ED%98%95-%ED%99%95%EC%9D%B8%EB%B2%95",
-        "https://earnnomad.com/voluntary-continued-health-insurance/"
-      ],
-      "guide": {
-        "direction": "지식인 질문자는 다자녀인데도 건보료 초과로 시간당 11,060원 전액본인부담을 받은 이유를 모른다. 고수 글은 등급표와 건강보험 임의계속가입을 섞어 다뤄 '우리 집이 가형인지 라형인지' 직접 확인하는 방법은 비어 있다. 독자는 가구원수별 건보료 구간표로 자기 등급을 바로 대입해야 글을 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "가형·나형·다형·라형 건강보험료 구간 기준표(가구원수별)",
-          "전액 본인부담 구간 시간당 11,060원 기준 명시",
-          "다자녀 가구도 건보료 기준 초과 시 지원 등급 어떻게 되는지 설명",
-          "건보료 확인 방법(건강보험공단 홈페이지·고지서) 안내"
-        ],
-        "mustAvoid": [
-          "아이돌봄서비스 등급표를 건강보험 임의계속가입 제도와 혼동",
-          "지난 연도 건보료 구간표를 최신 기준처럼 제시",
-          "가구원수 미반영한 단순 소득 기준으로 등급 설명"
-        ],
-        "checkBefore": [
-          "가형·나형·다형·라형 건보료 구간 최신 기준: 아이돌봄서비스 공식 홈페이지·정부24에서 확인",
-          "시간당 11,060원 등 이용요금 최신 수치: 아이돌봄서비스 공고문에서 확인"
-        ],
-        "solves": [
-          "우리집 건보료로 가형인지 라형인지 몰라 신청 못함 → 가구원수별 구간표로 즉시 확인",
-          "다자녀인데 왜 전액본인부담인지 이해 안 됨 → 건보료 초과 기준 설명으로 해결"
-        ],
-        "actionTitles": [
-          "아이돌봄서비스 가형·라형 건강보험료 기준표로 확인",
-          "아이돌봄서비스 건강보험료 판정기준, 우리집 등급 조회",
-          "아이돌봄서비스 전액본인부담 11,060원 기준 확인하기"
-        ]
-      },
-      "at": "2026-11-18T12:42:13.044Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "아이돌봄서비스",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=61401&docId=484653856&answerNo=2&qb=7JWE7J2064+M67SE7ISc67mE7IqkIOqxtOqwleuztO2XmOujjCDtjJDsoJUg6riw7KSA7ZGcIOqwgO2YlQ==",
-          "views": 1059,
-          "answers": 6,
-          "askedAt": "2025.05.18"
         }
       ]
     },
@@ -3134,71 +2758,6 @@
       ]
     },
     {
-      "id": "b05fa91d6f982f07",
-      "urls": [
-        "https://salimchunjae.com/doorlock-not-locking/",
-        "https://zsewqzsewq.tistory.com/453"
-      ],
-      "guide": {
-        "direction": "문이 닫혀도 자동으로 안 잠기는 원인을 모른 채, 지식인에는 도어락 건전지가 방전됐는데 문 앞에서 어떻게 해야 하냐는 다급한 질문만 쌓여 답을 못 받는다. 고수 글 '식겁한 대처법'은 방전 순간의 당황만 다루고, 건전지 사이즈·규격 확인이나 없을 때 당장 문 여는 법까지는 못 짚는다. 원인 4가지 확인 순서와 건전지 규격표, 비상 열림 순서로 그 자리에서 해결하게 한다.",
-        "searchTargets": [
-          "도어락 건전지 방전",
-          "도어락 건전지 교체",
-          "도어락 건전지 없을때",
-          "도어락 건전지 사이즈"
-        ],
-        "mustInclude": [
-          "건전지 규격 1.5V 4개, +/- 극성 확인법 (지식인 답변 근거)",
-          "제조사별(삼성 등) 건전지 호환 여부 (확인 필요: 제조사 공식 매뉴얼)",
-          "건전지 없을 때 비상 열림(보조키·외부단자) 안내 (확인 필요: 제품 매뉴얼)",
-          "교체 주기가 비정상적으로 짧아지면 누전 의심이라는 지식인 답변 근거 반영",
-          "문 맞물림·설정 문제와 건전지 문제를 구분하는 확인 순서"
-        ],
-        "mustAvoid": [
-          "특정 모델(하이원플러스 H-1500) 고장 사례를 모든 도어락 공통 증상처럼 일반화하지 말기",
-          "단순 건전지 교체로 해결되는 상황과 기사 호출이 필요한 고장을 구분 없이 섞지 말기"
-        ],
-        "checkBefore": [
-          "보유 도어락 모델의 건전지 규격은 제조사 공식 매뉴얼·고객센터로 확인"
-        ],
-        "solves": [
-          "도어락 건전지 방전됐는데 문 앞에서 어떻게 해야 할지 몰라 당황함 → 비상 열림 순서 안내",
-          "건전지 규격을 몰라서 아무거나 사도 되는지 궁금함 → 규격(1.5V 4개 등) 확인법 정리",
-          "교체한지 얼마 안 됐는데 또 방전되는 이유를 몰라 불안함 → 누전 의심 신호 체크리스트 제공"
-        ],
-        "actionTitles": [
-          "도어락 건전지 방전 대처법｜비상 열림 순서 바로 확인",
-          "도어락 건전지 교체｜규격·사이즈 헷갈릴 때 확인하는 법"
-        ]
-      },
-      "at": "2026-11-19T03:42:15.805Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "하이원플러스 도어락 h-1500 배터리 방전",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=501&docId=489114857&answerNo=3&qb=64+E7Ja065296rG07KCE7KeA",
-          "views": 930,
-          "answers": 3,
-          "askedAt": "2026.10.25"
-        },
-        {
-          "title": "도어락 배터리교체 도와주세요ㅠㅠ",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8080105&docId=494648460&answerNo=2&qb=64+E7Ja065296rG07KCE7KeA",
-          "views": 264,
-          "answers": 3,
-          "askedAt": "2026.08.08"
-        },
-        {
-          "title": "도어락 건전지 질문이요ㅜㅜ",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8080105&docId=494709429&answerNo=2&qb=64+E7Ja065296rG07KCE7KeA",
-          "views": 218,
-          "answers": 3,
-          "askedAt": "2026.08.12"
-        }
-      ]
-    },
-    {
       "id": "b08aab0f39464e42",
       "urls": [
         "https://daynote.blog/%ec%a0%88%ec%b9%9c-%ec%84%a0%eb%ac%bc-%ec%b6%94%ec%b2%9c-%ec%83%9d%ec%9d%bc%ec%97%90-%ec%b1%99%ea%b8%b0%eb%8a%94-6%ea%b0%80%ec%a7%80/",
@@ -3320,37 +2879,6 @@
           "askedAt": "2026.11.09"
         }
       ]
-    },
-    {
-      "id": "c9dae7fe78894153",
-      "urls": [
-        "https://gusle.kr/%eb%a1%af%eb%8d%b0%ea%b1%b4%ec%84%a4-%ed%8c%8c%ed%8a%b8%eb%84%88%ed%8f%ac%ed%84%b8-%ec%82%ac%ec%9d%b4%ed%8a%b8-%eb%b0%94%eb%a1%9c%ea%b0%80%ea%b8%b0-https-partner-lottenc-com/"
-      ],
-      "guide": {
-        "direction": "검색자는 협력사 담당자로, 바로가기 링크만으로는 로그인·회원가입 경로를 못 찾아 막힌다. 고수 글이 URL만 던지고 끝나는 지점을 로그인 단계와 아이디·비밀번호 찾기 경로로 보완한다. 접속부터 회원가입까지 순서를 정리해 한 번에 끝내게 한다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "공식 URL partner.lottenc.com 명시",
-          "로그인 화면 진입 경로 안내(확인 필요: 사이트 접속 후 메뉴 구성)",
-          "회원가입·아이디/비밀번호 찾기 절차(확인 필요: 사이트 내 안내)",
-          "고객센터 전화번호(확인 필요: 사이트 하단 고지)"
-        ],
-        "mustAvoid": [
-          "삼성물산 등 다른 건설사 파트너포털과 혼동"
-        ],
-        "checkBefore": [
-          "partner.lottenc.com 실제 접속해 로그인·가입 화면 메뉴명 확인",
-          "롯데건설 공식 공지에서 고객센터 번호 확인"
-        ],
-        "actionTitles": [
-          "롯데건설 파트너포털 로그인 바로가기 및 가입 방법",
-          "롯데건설 파트너포털 아이디 비밀번호 찾는 법 정리",
-          "롯데건설 파트너포털 바로가기 및 이용 순서 안내"
-        ]
-      },
-      "at": "2026-11-19T03:42:15.805Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
     },
     {
       "id": "dc78c9699f960aa5",
@@ -4671,69 +4199,6 @@
           "views": 937,
           "answers": 5,
           "askedAt": "2026.03.03"
-        }
-      ]
-    },
-    {
-      "id": "8e9a9849967af1e4",
-      "urls": [
-        "https://blogger00220.tistory.com/entry/%EC%97%B0%EA%B8%88%C2%B7%EB%85%B8%ED%9B%84%EC%A4%80%EB%B9%84-51%ED%8E%B8-%EB%B6%80%EB%B6%80%EA%B0%80-%ED%95%A8%EA%BB%98-%EA%B5%AD%EB%AF%BC%EC%97%B0%EA%B8%88%EC%9D%84-%EB%B0%9B%EC%9C%BC%EB%A9%B4-%EA%B9%8E%EC%9D%B8%EB%8B%A4-%EC%9C%A0%EC%A1%B1%EC%97%B0%EA%B8%88-%EC%A4%91%EB%B3%B5%EA%B8%89%EC%97%AC-%EC%A1%B0%EC%A0%9530-%EC%88%98%EB%A0%B9%EC%9D%98-%EC%A7%84%EC%8B%A4%EA%B3%BC-%EB%B6%80%EB%B6%80-%EA%B5%AD%EB%AF%BC%EC%97%B0%EA%B8%88-100-%EB%8B%A4-%EC%B1%99%EA%B2%A8-%EB%B0%9B%EB%8A%94-%ED%99%A9%EA%B8%88-%EC%A0%84%EB%9E%B5",
-        "https://earnnomad.com/national-pension-survivor-benefit/"
-      ],
-      "guide": {
-        "direction": "① '부부 둘다 국민연금 받으면 한쪽이 깎인다'는 말이 실제로는 한쪽 사망 후 유족연금 중복급여 조정(30%) 상황이라는 걸 검색자는 구분 못 한다. ② 고수 글 제목은 '진실'과 '전략'만 말하고 본인연금+유족연금30% 조합과 유족연금100% 단독 중 어느 쪽이 유리한지 숫자로 비교해주지 않는다. ③ 두 선택지의 계산 예시 표와 국민연금공단 예상연금액 조회·선택 변경 절차를 함께 주면 독자가 바로 선택할 수 있다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "본인연금+유족연금30% 조합 vs 유족연금100% 단독, 두 선택지 수치 비교표",
-          "기초연금(만 65세, 2026년 선정기준액 단독가구 247만원대)과 국민연금 유족연금의 감액 구조 차이 구분",
-          "국민연금공단 예상연금액 조회 경로 안내",
-          "선택 전환(한 번 고른 뒤 변경) 가능 여부와 신청 절차 (확인 필요: 국민연금공단)",
-          "유족연금 지급률이 가입기간별로 달라지는 기준 (확인 필요: 국민연금공단 고시)"
-        ],
-        "mustAvoid": [
-          "기초연금(노인연금)과 국민연금 유족연금을 같은 제도처럼 혼용 서술",
-          "특정 가입자의 사례처럼 1인칭 경험담을 지어내는 것",
-          "연도별로 바뀌는 선정기준액을 확정값처럼 못박는 것"
-        ],
-        "checkBefore": [
-          "국민연금공단 공식 안내의 유족연금 중복급여 조정 최신 지급률 기준",
-          "2026년 기초연금 선정기준액(단독가구 247만원대) 공식 공지"
-        ],
-        "solves": [
-          "부부가 같이 국민연금 받으면 한쪽이 깎이는 게 맞나? → 중복급여 조정 발생 조건과 두 선택지(30% 조합 vs 100% 단독) 비교로 답한다",
-          "노인연금과 국민연금 동시 수령 어떻게 준비? → 기초연금과 국민연금 유족연금의 감액 구조가 다름을 구분해 설명한다",
-          "부부 국민연금 수령액 계산하는 방법? → 선택 가능한 두 조합의 계산 예시로 직접 비교하게 한다"
-        ],
-        "actionTitles": [
-          "부부 국민연금 유족연금 30% 조정, 손해 안 보는 계산법",
-          "국민연금 유족연금 중복조정 수령액 비교 계산 가이드",
-          "부부 국민연금 수령액 계산, 유족연금 선택 전 확인할 것"
-        ]
-      },
-      "at": "2026-11-19T13:20:58.026Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "국민연금 100만 원 이상 수급자가 100만 명이라....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=601&docId=493687488&answerNo=2&qb=7Jew6riIIOuFuO2bhOykgOu5hCDrtoDrtoAg7ZWo6ruYIOq1reuvvOyXsOq4iA==",
-          "views": 565,
-          "answers": 4,
-          "askedAt": "2026.06.12"
-        },
-        {
-          "title": "국민연금 수령액, 정말 노후 생활에 충분할까....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=601&docId=493687621&answerNo=2&qb=7Jew6riIIOuFuO2bhOykgOu5hCDrtoDrtoAg7ZWo6ruYIOq1reuvvOyXsOq4iA==",
-          "views": 397,
-          "answers": 5,
-          "askedAt": "2026.06.12"
-        },
-        {
-          "title": "부부 국민연금 수령액 계산하는 방법 알려주....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100402&docId=495089845&answerNo=5&qb=7Jew6riIIOuFuO2bhOykgOu5hCDrtoDrtoAg7ZWo6ruYIOq1reuvvOyXsOq4iA==",
-          "views": 189,
-          "answers": 7,
-          "askedAt": "2026.09.11"
         }
       ]
     }
