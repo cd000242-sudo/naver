@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T12:09:44.294Z",
+ "builtAt": "2026-11-21T12:19:47.479Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,18 +15,18 @@
    "sources": [
     "daum"
    ],
-   "articles90": 43,
-   "recent20": 9,
-   "press": 39,
-   "firstArticleAt": "2026-11-21T10:46:00.000Z",
+   "articles90": 40,
+   "recent20": 7,
+   "press": 38,
+   "firstArticleAt": "2026-11-21T10:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "코레일 “22일 첫차부터 경부선 일반열차 운행 재개”",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-21T12:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413538?sid=102"
+     "title": "화물열차 탈선 여파, 광주발 용산행 일반열차 운행 차질",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-21T12:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000121904?sid=102"
     },
     {
      "title": "경부선 탈선 사고 여파...일반열차 운행 차질",
@@ -35,10 +35,42 @@
      "link": "https://www.tbc.co.kr/news/view?pno=20261121094833AE08939&id=213631"
     },
     {
-     "title": "경부선 화물열차 탈선 '복구 지속'…내일 첫차 운행 재개",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-21T12:02:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086075"
+     "title": "코레일 “22일 첫차부터 경부선 일반열차 운행 재개”",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-21T12:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413538?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "홍대입구역 버스 인도 돌진",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 27,
+   "recent20": 5,
+   "press": 23,
+   "firstArticleAt": "2026-11-21T10:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "홍대입구역서 3중 추돌사고…버스 1대 인도 돌진, 6명 경상",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-21T12:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004684685?sid=102"
+    },
+    {
+     "title": "홍대입구역에서 버스 인도로 돌진…승객 6명 경상",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-21T12:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012298650?sid=101"
+    },
+    {
+     "title": "홍대입구역 인근서 버스 인도 돌진…3중 추돌사고로 6명 부상",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-21T12:04:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=783688"
     }
    ]
   },
@@ -47,30 +79,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 19,
-   "recent20": 12,
-   "press": 15,
+   "articles90": 23,
+   "recent20": 9,
+   "press": 18,
    "firstArticleAt": "2026-11-21T11:40:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "로또 1251회 당첨번호 조회···'1등 몽땅 자동 14명'",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-21T12:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000554277?sid=101"
+     "title": "로또 1등 당첨자 14명 각 20억6884만원씩 수령",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-21T12:17:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085182"
     },
     {
-     "title": "제1251회 로또 1등 14명···당첨금 20억6884만원",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-21T12:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484141?sid=101"
+     "title": "[오늘 로또]1,251회 추첨도 '자동만세' 1등 14명 모두 자동 조합...1인당...",
+     "press": "namdonews.com",
+     "publishedAt": "2026-11-21T12:12:00.000Z",
+     "link": "https://www.namdonews.com/news/articleView.html?idxno=929984"
     },
     {
-     "title": "로또 1251회 1등 14명…당첨금 각 20억6884만원",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-21T12:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002726600?sid=101"
+     "title": "1251회 로또 1등 14명…각 20.6억원씩·서울-경기 각 3곳 최다 당첨",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-21T12:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002394547?sid=101"
     }
    ]
   },
@@ -79,62 +111,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 9,
+   "articles90": 13,
    "recent20": 4,
-   "press": 9,
+   "press": 13,
    "firstArticleAt": "2026-11-21T11:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "진천서 전자발찌 끊고 도주한 56세 성범죄자 공개수배",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-21T11:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000193143?sid=102"
+     "title": "충북 진천서 전자발찌 훼손하고 달아난 50대 남성 공개수배",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-21T12:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012298652?sid=101"
     },
     {
-     "title": "충북 진천서 전자발찌 훼손하고 도망간 50대 성범죄자 공개 수배",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-21T11:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000966956?sid=102"
+     "title": "50대 성범죄자, 전자발찌 끊고 도주…'공개수배'",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-21T12:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009302865?sid=102"
     },
     {
-     "title": "“사투리 쓴다” 진천서 전자발찌 끊고 도주한 50대, 공개수배",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-21T11:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003566881?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "최민정 쇼트트랙 3연속 우승",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-21T11:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "최민정 \"팬들의 은퇴 만류, 마음은 알지만 일단 경기 집중\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-21T11:51:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/055/0001404809"
-    },
-    {
-     "title": "최민정, 쇼트트랙 3차 월드투어 여자 1000ｍ 금메달",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-21T11:50:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3450939"
-    },
-    {
-     "title": "'아웃코스로 한 명, 인코스로 또 한 명' 최민정, 마지막 2바퀴 역전쇼로...",
-     "press": "maniareport.com",
-     "publishedAt": "2026-11-21T11:30:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/425/0000215251"
+     "title": "제보 요청…전자발찌 끊고 도주한 50대 성범죄자 '공개수배'",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-21T12:12:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1176586"
     }
    ]
   },
@@ -171,34 +171,34 @@
    ]
   },
   {
-   "keyword": "홍대입구역 버스 인도 돌진 6명 부상",
+   "keyword": "최민정 쇼트트랙 3연속 우승",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 2,
+   "articles90": 8,
+   "recent20": 0,
    "press": 7,
-   "firstArticleAt": "2026-11-21T11:01:00.000Z",
+   "firstArticleAt": "2026-11-21T11:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "홍대입구역 인근서 버스 인도 돌진…3중 추돌사고로 6명 부상",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-21T12:04:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=783688"
+     "title": "최민정 \"팬들의 은퇴 만류, 마음은 알지만 일단 경기 집중\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-21T11:51:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/055/0001404809"
     },
     {
-     "title": "토요일 저녁, 홍대입구역서 버스 인도로 돌진…3중 추돌사고, 6명 부상",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-21T12:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002834480?sid=102"
+     "title": "최민정, 쇼트트랙 3차 월드투어 여자 1000ｍ 금메달",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-21T11:50:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3450939"
     },
     {
-     "title": "홍대입구역서 3중 추돌사고로 버스 인도 돌진⋯6명 부상",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-21T11:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001077207?sid=102"
+     "title": "'아웃코스로 한 명, 인코스로 또 한 명' 최민정, 마지막 2바퀴 역전쇼로...",
+     "press": "maniareport.com",
+     "publishedAt": "2026-11-21T11:30:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/425/0000215251"
     }
    ]
   },
@@ -207,13 +207,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-21T10:40:00.000Z",
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-21T11:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이 대통령 “수능 부정행위 신고, 건당 최소 1억”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-21T12:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012298648?sid=100"
+    },
     {
      "title": "李대통령 \"수능 부정 신고자도 공범 신고하면 포상금\"",
      "press": "viewsnnews.com",
@@ -225,12 +231,6 @@
      "press": "goodmorningcc.com",
      "publishedAt": "2026-11-21T11:12:00.000Z",
      "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=456266"
-    },
-    {
-     "title": "이 대통령 \"수능 부정행위 신고포상금 건당 최소 1억…행위자 수만큼 가...",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-21T11:04:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544568"
     }
    ]
   },
@@ -239,10 +239,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 8,
+   "articles90": 7,
    "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-21T10:48:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-21T10:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -272,12 +272,18 @@
     "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 0,
+   "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-21T10:47:00.000Z",
+   "firstArticleAt": "2026-11-21T11:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "트럼프 “미·중·러, 한반도 위험 논의”…핵 감축엔 “동의 어려워”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-21T12:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012298653?sid=104"
+    },
     {
      "title": "트럼프 \"미중러 정상, 한반도 위험 논의\"",
      "press": "news.sbs.co.kr",
@@ -289,12 +295,6 @@
      "press": "imnews.imbc.com",
      "publishedAt": "2026-11-21T11:19:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/214/0001537156?sid=104"
-    },
-    {
-     "title": "트럼프 \"미중러 정상회담서 한반도 위험 대응 논의했다\"",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-21T11:04:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544569"
     }
    ]
   },
@@ -333,7 +333,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 870,
+  "flagged": 871,
   "matched": 514,
   "avgLeadMin": 651,
   "recent": [
