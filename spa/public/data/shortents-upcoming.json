@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T16:31:16.999Z",
+ "builtAt": "2026-11-21T16:41:20.210Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,18 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "채령",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 14,
+   "articles90": 10,
    "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-21T15:02:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-21T15:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -39,38 +40,6 @@
      "press": "osen.co.kr",
      "publishedAt": "2026-11-21T15:59:00.000Z",
      "link": "https://m.entertain.naver.com/article/109/0005643816"
-    }
-   ]
-  },
-  {
-   "keyword": "1251회 로또 당첨 번호",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-21T15:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "로또 1251회 1등 14게임…당첨번호 14·18·19·29·40·45",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-21T15:14:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=409011"
-    },
-    {
-     "title": "로또1등당첨지역 \"20억 부산 2곳\" 1251회 로또당첨번호조회",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-21T15:06:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3759142"
-    },
-    {
-     "title": "로또 당첨번호 지역 1251회",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-21T15:02:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611210163"
     }
    ]
   }
