@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T10:19:06.770Z",
+ "builtAt": "2026-11-21T10:29:10.164Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 28,
  "candidates": [
   {
    "keyword": "코르티스 대상",
@@ -16,12 +16,18 @@
     "daum"
    ],
    "articles90": 24,
-   "recent20": 5,
-   "press": 18,
-   "firstArticleAt": "2026-11-21T08:52:00.000Z",
+   "recent20": 3,
+   "press": 17,
+   "firstArticleAt": "2026-11-21T09:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "방시혁, 간만에 호재 만났다…방탄소년단·코르티스 나란히 대상 [2026 M...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-21T10:28:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000785522"
+    },
     {
      "title": "데뷔 1년 만에 MAMA 대상 품은 코르티스… 빅뱅 완전체로 피날레 장식 [...",
      "press": "hankookilbo.com",
@@ -33,24 +39,82 @@
      "press": "newsen.com",
      "publishedAt": "2026-11-21T10:13:00.000Z",
      "link": "https://m.entertain.naver.com/article/609/0001189951"
-    },
-    {
-     "title": "'마마 어워즈' BTS·코르티스·엔하이픈 '대상'…빅뱅 '기립' 공개 [종합...",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-21T10:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/015/0005356617"
     }
    ]
   },
   {
-   "keyword": "대구 경북 규탄대회",
+   "keyword": "평창 공기총 사고",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 13,
+   "recent20": 3,
+   "press": 13,
+   "firstArticleAt": "2026-11-21T09:14:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "평창서 공기총 탄환에 행인 사망…60대 남성 과실 여부 수사",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-21T10:28:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=848000"
+    },
+    {
+     "title": "강원 평창서 공기총 사격 연습 중 60대 행인 맞아 숨져",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-21T10:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436158?sid=102"
+    },
+    {
+     "title": "[속보] 비닐하우스 옆 지나던 60대, 공기총에 맞아 사망",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-21T10:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701777?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "수원 삼성 우승 확정",
    "sources": [
     "nate"
    ],
-   "articles90": 19,
-   "recent20": 1,
-   "press": 15,
-   "firstArticleAt": "2026-11-21T08:50:00.000Z",
+   "articles90": 17,
+   "recent20": 0,
+   "press": 11,
+   "firstArticleAt": "2026-11-21T09:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "수원FC, 김포 잡고 서울E에 6점 앞선 2위 사수…다이렉트 승격 ‘청신호...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-21T09:58:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/468/0001282509"
+    },
+    {
+     "title": "'전통 명가' 수원 삼성, K리그1 복귀 이어 K리그2 우승 조기 확정",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-21T09:56:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/469/0000966952"
+    },
+    {
+     "title": "수원 삼성, 승격 이어 K리그2 우승까지…수원FC는 승격까지 승점 1(종합...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-21T09:48:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/421/0009302832"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 탈옥법 대구 경북 규탄",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 13,
+   "recent20": 0,
+   "press": 11,
+   "firstArticleAt": "2026-11-21T09:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,34 +139,66 @@
    ]
   },
   {
-   "keyword": "평창 공기총 사고",
+   "keyword": "수능 신고 최소 1억 포상",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 14,
-   "recent20": 4,
-   "press": 14,
-   "firstArticleAt": "2026-11-21T08:56:00.000Z",
-   "exclusive": true,
+   "articles90": 9,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-21T09:00:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "강원 평창서 공기총 사격 연습 중 60대 행인 맞아 숨져",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-21T10:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436158?sid=102"
+     "title": "[속보] 이재명 대통령 “수능 부정행위 포상금, 1건당 최소 1억원…가담...",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-21T10:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001232330?sid=100"
     },
     {
-     "title": "[속보] 비닐하우스 옆 지나던 60대, 공기총에 맞아 사망",
-     "press": "seoul.co.kr",
+     "title": "李대통령 \"수능 부정행위 신고 포상금 1건당 최소 1억원\"",
+     "press": "shinailbo.co.kr",
      "publishedAt": "2026-11-21T10:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701777?sid=102"
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086071"
     },
     {
-     "title": "공기총 사격 연습하다 지나가던 행인 맞혀…60대 남성 사망",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-21T10:04:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1176568"
+     "title": "李 \"수능 부정 신고, 1건당 최소 1억…자수 후 신고하면 감경과 포상\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-21T10:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000652543?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "k리그1",
+   "sources": [
+    "google"
+   ],
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-21T09:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'K리그1 우승팀' 서울, 전북 꺾고 2연패 탈출…안데르손 결승골",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-21T10:11:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/421/0009302836"
+    },
+    {
+     "title": "'K리그1 조기 승격 확정' 수원, K리그2 우승도 확정…경남에 3-1 승리",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-21T10:10:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/117/0004127016"
+    },
+    {
+     "title": "'전통 명가' 수원 삼성, K리그1 복귀 이어 K리그2 우승 조기 확정",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-21T09:56:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/469/0000966952"
     }
    ]
   },
@@ -111,10 +207,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-21T08:50:00.000Z",
+   "articles90": 8,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-21T09:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -139,46 +235,14 @@
    ]
   },
   {
-   "keyword": "신한은행 3연승 공동 선두",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-21T08:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'3점슛 14개에 성공률 64%, 디펜딩 챔피언도 무너졌다' 신한은행, KB국민...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-21T09:56:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/109/0005643673"
-    },
-    {
-     "title": "'노구치 19점' 신한은행, 3연승으로 공동 선두 도약…BNK는 우리은행 꺾...",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-21T09:32:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110026017585"
-    },
-    {
-     "title": "‘최하위 후보’ 신한은행, 3연승으로 공동 선두…KB는 충격 4연패",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-21T09:13:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/119/0003157934"
-    }
-   ]
-  },
-  {
-   "keyword": "한동훈, 12월 3일에 꼭 하라",
+   "keyword": "한동훈 무르지 탄핵",
    "sources": [
     "nate"
    ],
    "articles90": 7,
    "recent20": 0,
    "press": 7,
-   "firstArticleAt": "2026-11-21T08:51:00.000Z",
+   "firstArticleAt": "2026-11-21T09:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -203,14 +267,46 @@
    ]
   },
   {
+   "keyword": "신한은행, 3연승 공동 선두",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-21T09:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'외곽포 14방' 신한은행, 디펜딩 챔피언 KB 4연패 빠뜨리며 공동 선두 복...",
+     "press": "dailysportshankook.co.kr",
+     "publishedAt": "2026-11-21T10:22:00.000Z",
+     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435787"
+    },
+    {
+     "title": "'3점슛 14개에 성공률 64%, 디펜딩 챔피언도 무너졌다' 신한은행, KB국민...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-21T09:56:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/109/0005643673"
+    },
+    {
+     "title": "'노구치 19점' 신한은행, 3연승으로 공동 선두 도약…BNK는 우리은행 꺾...",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-21T09:32:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110026017585"
+    }
+   ]
+  },
+  {
    "keyword": "경기도교육청 교원 개인정보 유출",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-21T08:54:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-21T09:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -239,10 +335,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-21T08:58:00.000Z",
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-21T09:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -269,7 +365,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 830,
+  "flagged": 836,
   "matched": 502,
   "avgLeadMin": 639,
   "recent": [
