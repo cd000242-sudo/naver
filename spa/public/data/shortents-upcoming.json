@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T23:23:27.159Z",
+ "builtAt": "2026-11-21T23:33:32.307Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 24,
  "candidates": [
   {
-   "keyword": "ai 데이터 센터",
+   "keyword": "김아림 프로",
    "sources": [
-    "google"
+    "daum"
    ],
-   "articles90": 19,
-   "recent20": 6,
-   "press": 13,
-   "firstArticleAt": "2026-11-21T21:58:00.000Z",
-   "exclusive": false,
+   "articles90": 9,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-21T22:20:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "브로드컴, AI 반도체 성장세 시험대…12월 실적 발표에 시장 촉각",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-21T23:22:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=848008"
+     "title": "김아림, LPGA 최종전 선두 유지…티띠꾼·코르다 맹추격",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-21T23:32:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261122010008241"
     },
     {
-     "title": "[탐사경] 최태원, 한일 경제공동체 밑그림 구체화…에너지서 AI 인재까지...",
-     "press": "moneystorm.kr",
-     "publishedAt": "2026-11-21T23:22:00.000Z",
-     "link": "https://www.moneystorm.kr/news/articleView.html?idxno=8699"
+     "title": "김아림, 사흘째 LPGA 최종전 선두 질주…티띠꾼·코르다와 우승 경쟁",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-21T23:17:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/021/0002834500"
     },
     {
-     "title": "젠슨 황 없는 엔비디아 겨냥 총공세.. 'AI 칩워' 새국면",
-     "press": "digitaltoday.co.kr",
-     "publishedAt": "2026-11-21T23:22:00.000Z",
-     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=717250"
+     "title": "김아림, CME그룹 투어 챔피언십 3R 단독 선두…최종일 400만달러 도전",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-21T23:06:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282664"
     }
    ]
   },
@@ -48,7 +48,7 @@
     "daum"
    ],
    "articles90": 9,
-   "recent20": 2,
+   "recent20": 1,
    "press": 9,
    "firstArticleAt": "2026-11-21T22:08:00.000Z",
    "exclusive": false,
@@ -61,7 +61,7 @@
      "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629513"
     },
     {
-     "title": "‘소설’인 일요일, 대체로 맑고 추운 날씨",
+     "title": "눈 없이 맑은 ‘소설’…아침 최저 영하 10도, 낮 최고 12도",
      "press": "hani.co.kr",
      "publishedAt": "2026-11-21T23:10:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/028/0002833324?sid=102"
@@ -75,6 +75,38 @@
    ]
   },
   {
+   "keyword": "경부선 일반열차 운행 재개",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-21T22:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "코레일 \"경부선 일반열차 운행 정상적으로 재개\"",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-21T23:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000545085?sid=103"
+    },
+    {
+     "title": "열차 탈선으로 중단됐던 경부선 운행 정상 재개…코레일 \"첫 열차부터 ...",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-21T23:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000521852?sid=102"
+    },
+    {
+     "title": "코레일 \"일시중단 경부선 일반열차 운행 정상적으로 재개\"",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-21T22:56:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=783711"
+    }
+   ]
+  },
+  {
    "keyword": "뉴스",
    "sources": [
     "google"
@@ -82,10 +114,16 @@
    "articles90": 4,
    "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-21T22:00:00.000Z",
+   "firstArticleAt": "2026-11-21T22:32:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
+    {
+     "title": "[금융 HOT 뉴스] \"상장기업 64.7%, '기관투자자 유입 촉진' 시급\"",
+     "press": "bizwnews.com",
+     "publishedAt": "2026-11-21T23:30:00.000Z",
+     "link": "http://www.bizwnews.com/news/articleView.html?idxno=152607"
+    },
     {
      "title": "[AI 카드뉴스] 증시 책갈피 | 엔비디아 이어 AMD까지…반도체 규제 공포...",
      "press": "metroseoul.co.kr",
@@ -97,56 +135,22 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-21T23:00:00.000Z",
      "link": "https://m.entertain.naver.com/article/421/0009303021"
-    },
-    {
-     "title": "\"재난문자로 시험 공정성 지켜\"...'AI커닝' 두고 여야 전쟁 [자막뉴스]",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-21T22:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436272?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "굿파트너 2",
-   "sources": [
-    "signal.bz",
-    "nate",
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-21T22:31:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"많이 기다렸다\"…장나라, 김혜윤 향한 영입 제안 통했다 (굿파트너2) [...",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-21T23:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000053813"
-    },
-    {
-     "title": "SBS 드라마 '굿파트너2' \"법정 승부를 초월한 이야기! 장나라·김혜윤·...",
-     "press": "lecturernews.com",
-     "publishedAt": "2026-11-21T22:56:00.000Z",
-     "link": "https://www.lecturernews.com/news/articleView.html?idxno=214291"
-    },
-    {
-     "title": "'굿파트너2' 7.7%·'라이어' 3.6%…시청률 격차 확대",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-21T22:34:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282639"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 889,
-  "matched": 532,
-  "avgLeadMin": 618,
+  "flagged": 891,
+  "matched": 533,
+  "avgLeadMin": 617,
   "recent": [
+   {
+    "keyword": "굿파트너 2",
+    "hitKeyword": "굿파트너2 김혜윤 스카우트",
+    "hitAt": "2026-11-22T08:30:00+09:00",
+    "leadMin": 47
+   },
    {
     "keyword": "1251회 로또 당첨 번호",
     "hitKeyword": "로또 1251회 1등",
@@ -200,12 +204,6 @@
     "hitKeyword": "이란 미 F-16 공격 주장",
     "hitAt": "2026-11-22T06:30:00+09:00",
     "leadMin": 258
-   },
-   {
-    "keyword": "호르무즈 유조선 피격",
-    "hitKeyword": "호르무즈 유조선 피격",
-    "hitAt": "2026-11-22T06:00:00+09:00",
-    "leadMin": 621
    }
   ]
  }
