@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T12:29:51.193Z",
+ "builtAt": "2026-11-21T12:39:54.640Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,59 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 27,
  "candidates": [
+  {
+   "keyword": "1251회 로또 당첨 번호",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 26,
+   "recent20": 3,
+   "press": 21,
+   "firstArticleAt": "2026-11-21T11:40:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "1251회 로또, 1등 당첨자 14명 '20억' 잭팟⋯지난 주 이어 전원 자동",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-21T12:30:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2651235"
+    },
+    {
+     "title": "로또 1등 '14·18·19·29·40·45'…14명 모두 자동, 20억씩 받는다",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-21T12:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009302874?sid=102"
+    },
+    {
+     "title": "로또 2등 '10+5=15게임' 약수역 도보 4분 두 판매점서 당첨…7억5천만원...",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-21T12:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001041543?sid=101"
+    }
+   ]
+  },
   {
    "keyword": "22일 첫차 운행 재개",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 25,
-   "recent20": 0,
-   "press": 25,
-   "firstArticleAt": "2026-11-21T11:00:00.000Z",
+   "articles90": 19,
+   "recent20": 1,
+   "press": 19,
+   "firstArticleAt": "2026-11-21T11:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "경부선 소정리역 화물열차 5칸 탈선 사고…천안~대전 운행 중단, 22일 첫...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-21T12:38:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282543"
+    },
     {
      "title": "코레일 “22일 첫차부터 경부선 일반열차 운행 재개”",
      "press": "edaily.co.kr",
@@ -33,44 +72,6 @@
      "press": "shinailbo.co.kr",
      "publishedAt": "2026-11-21T12:02:00.000Z",
      "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086075"
-    },
-    {
-     "title": "코레일 경부선 일반열차 22일 첫차부터 운행 재개 예정…임시열차 15대...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-21T12:02:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629474"
-    }
-   ]
-  },
-  {
-   "keyword": "1251회 로또 당첨 번호",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 25,
-   "recent20": 6,
-   "press": 20,
-   "firstArticleAt": "2026-11-21T11:40:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "로또 1등 '14·18·19·29·40·45'…14명 모두 자동, 20억씩 받는다",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-21T12:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009302874?sid=102"
-    },
-    {
-     "title": "로또 2등 한 판매점서 10게임 당첨…한 사람이면 5억원, 1등 못잖은 행운...",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-21T12:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001041543?sid=101"
-    },
-    {
-     "title": "로또 1등 당첨자 14명 각 20억6884만원씩 수령",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-21T12:17:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085182"
     }
    ]
   },
@@ -80,7 +81,7 @@
     "nate"
    ],
    "articles90": 13,
-   "recent20": 3,
+   "recent20": 0,
    "press": 13,
    "firstArticleAt": "2026-11-21T11:17:00.000Z",
    "exclusive": false,
@@ -107,78 +108,14 @@
    ]
   },
   {
-   "keyword": "홍대입구역 버스 돌진 6명 부상",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-21T11:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "홍대입구역서 버스 2대·승용차 연쇄 추돌…버스 인도 돌진에 6명 부상",
-     "press": "kado.net",
-     "publishedAt": "2026-11-21T12:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000212547?sid=102"
-    },
-    {
-     "title": "홍대입구역서 3중 추돌사고…버스 1대 인도 돌진, 6명 경상",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-21T12:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004684685?sid=102"
-    },
-    {
-     "title": "홍대입구역 인근서 버스 인도 돌진…3중 추돌사고로 6명 부상",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-21T12:04:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=783688"
-    }
-   ]
-  },
-  {
-   "keyword": "최민정 쇼트트랙 3연속 우승",
+   "keyword": "수능 부정 신고 포상금",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
+   "articles90": 4,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-21T11:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "최민정 \"팬들의 은퇴 만류, 마음은 알지만 일단 경기 집중\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-21T11:51:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/055/0001404809"
-    },
-    {
-     "title": "최민정, 쇼트트랙 3차 월드투어 여자 1000ｍ 금메달",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-21T11:50:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3450939"
-    },
-    {
-     "title": "'아웃코스로 한 명, 인코스로 또 한 명' 최민정, 마지막 2바퀴 역전쇼로...",
-     "press": "maniareport.com",
-     "publishedAt": "2026-11-21T11:30:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/425/0000215251"
-    }
-   ]
-  },
-  {
-   "keyword": "수능 부정 신고 포상금 1억",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-21T11:00:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-21T11:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -189,48 +126,80 @@
      "link": "https://n.news.naver.com/mnews/article/056/0012298648?sid=100"
     },
     {
+     "title": "한성숙 총리, '수능 와이파이·블루투스 신호 분석'...\"부정행위 끝까지...",
+     "press": "ppss.kr",
+     "publishedAt": "2026-11-21T11:45:00.000Z",
+     "link": "https://www.ppss.kr/news/articleView.html?idxno=322176"
+    },
+    {
      "title": "李대통령 \"수능 부정 신고자도 공범 신고하면 포상금\"",
      "press": "viewsnnews.com",
      "publishedAt": "2026-11-21T11:32:00.000Z",
      "link": "https://www.viewsnnews.com/article?q=239852"
-    },
-    {
-     "title": "이 대통령 \"수능 부정 포상금, 최대 아닌 최소 1억 원\"",
-     "press": "goodmorningcc.com",
-     "publishedAt": "2026-11-21T11:12:00.000Z",
-     "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=456266"
     }
    ]
   },
   {
-   "keyword": "트럼프 한반도 논의",
+   "keyword": "국민의힘 탄핵",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-21T11:03:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-21T11:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "트럼프 “미·중·러, 한반도 위험 논의”…핵 감축엔 “동의 어려워”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-21T12:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012298653?sid=104"
+     "title": "\"조희대 탄핵은 내란\"..국힘, 대구서 장외 집회",
+     "press": "tbc.co.kr",
+     "publishedAt": "2026-11-21T12:08:00.000Z",
+     "link": "https://www.tbc.co.kr/news/view?pno=20261121173028AE08940&id=213630"
     },
     {
-     "title": "트럼프 \"미중러 정상, 한반도 위험 논의\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-21T11:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404802?sid=104"
+     "title": "민주당 \"국민의힘, 장외집회 멈추고 국회 예산심사 복귀해야\"",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-21T11:46:00.000Z",
+     "link": "http://www.breaknews.com/1252877"
     },
     {
-     "title": "시시콜콜 환대 자랑‥한반도 논의는 한 줄에 해법은 '빈칸'",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-21T11:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001537156?sid=104"
+     "title": "\"조희대 탄핵 땐 정권 붕괴\"…국힘, 대구서 대규모 장외 집회",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-21T11:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005356623?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "대만 공매도 규제",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-21T11:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "대만, 증시 폭락에 비상⋯\"전일 종가 미만 공매도 금지\"",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-21T12:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001077209?sid=104"
+    },
+    {
+     "title": "대만, 23일부터 전일 종가 이하 공매도 전면 금지",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-21T12:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014337523?sid=104"
+    },
+    {
+     "title": "대만, 주가 급락에 공매도 규제 강화…23일부터 5개 안정 대책 시행",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-21T11:54:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886725"
     }
    ]
   },
@@ -239,10 +208,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-21T11:04:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-21T11:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -265,14 +234,88 @@
      "link": "https://m.entertain.naver.com/article/009/0005767056"
     }
    ]
+  },
+  {
+   "keyword": "트럼프 한반도 논의",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-21T11:19:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프 “미·중·러, 한반도 위험 논의”…핵 감축엔 “동의 어려워”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-21T12:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012298653?sid=104"
+    },
+    {
+     "title": "트럼프 \"미중러 정상, 한반도 위험 논의\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-21T11:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404802?sid=104"
+    },
+    {
+     "title": "시시콜콜 환대 자랑‥한반도 논의는 한 줄에 해법은 '빈칸'",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-21T11:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537156?sid=104"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 874,
-  "matched": 514,
-  "avgLeadMin": 651,
+  "flagged": 876,
+  "matched": 521,
+  "avgLeadMin": 643,
   "recent": [
+   {
+    "keyword": "태양, 민효린 언급하며 눈물",
+    "hitKeyword": "태양 민효린 눈물",
+    "hitAt": "2026-11-21T21:30:00+09:00",
+    "leadMin": 171
+   },
+   {
+    "keyword": "최백호 장미화 진땀",
+    "hitKeyword": "장미화 동안 비결",
+    "hitAt": "2026-11-21T21:30:00+09:00",
+    "leadMin": 151
+   },
+   {
+    "keyword": "소정리역 화물열차 탈선",
+    "hitKeyword": "경부선 화물열차 탈선",
+    "hitAt": "2026-11-21T21:30:00+09:00",
+    "leadMin": 50
+   },
+   {
+    "keyword": "코레일 경부선 일반열차",
+    "hitKeyword": "경부선 화물열차 탈선",
+    "hitAt": "2026-11-21T21:30:00+09:00",
+    "leadMin": 20
+   },
+   {
+    "keyword": "홍대입구역 버스 인도 돌진 6명 부상",
+    "hitKeyword": "홍대입구역 버스 인도 돌진",
+    "hitAt": "2026-11-21T21:30:00+09:00",
+    "leadMin": 20
+   },
+   {
+    "keyword": "홍대입구역 버스 인도 돌진",
+    "hitKeyword": "홍대입구역 버스 인도 돌진",
+    "hitAt": "2026-11-21T21:30:00+09:00",
+    "leadMin": 10
+   },
+   {
+    "keyword": "홍대입구역 버스 돌진 6명 부상",
+    "hitKeyword": "홍대입구역 버스 인도 돌진",
+    "hitAt": "2026-11-21T21:30:00+09:00",
+    "leadMin": 0
+   },
    {
     "keyword": "러 군용기 KADIZ 진입 전투기 출격",
     "hitKeyword": "전투기 조종사 간식",
@@ -290,48 +333,6 @@
     "hitKeyword": "놀뭐 유노윤호 효연",
     "hitAt": "2026-11-21T21:00:00+09:00",
     "leadMin": 41
-   },
-   {
-    "keyword": "유노윤호 와일드카드 섭외",
-    "hitKeyword": "놀뭐 유노윤호 효연",
-    "hitAt": "2026-11-21T21:00:00+09:00",
-    "leadMin": 20
-   },
-   {
-    "keyword": "항공",
-    "hitKeyword": "미군 항공모함 간식",
-    "hitAt": "2026-11-21T20:30:00+09:00",
-    "leadMin": 760
-   },
-   {
-    "keyword": "빅뱅 기립 무대 최초 공개",
-    "hitKeyword": "빅뱅 MAMA 신곡 무대",
-    "hitAt": "2026-11-21T20:30:00+09:00",
-    "leadMin": 101
-   },
-   {
-    "keyword": "최민정 월드투어 3연속 우승",
-    "hitKeyword": "최민정 월드투어 우승",
-    "hitAt": "2026-11-21T20:30:00+09:00",
-    "leadMin": 21
-   },
-   {
-    "keyword": "경부선 일반열차 운행 재개",
-    "hitKeyword": "경부선 열차 탈선",
-    "hitAt": "2026-11-21T20:30:00+09:00",
-    "leadMin": 11
-   },
-   {
-    "keyword": "코레일 경부선 일반열차",
-    "hitKeyword": "경부선 열차 탈선",
-    "hitAt": "2026-11-21T20:30:00+09:00",
-    "leadMin": 0
-   },
-   {
-    "keyword": "성범죄자 전자발찌 진천",
-    "hitKeyword": "성범죄자 전자발찌 도주",
-    "hitAt": "2026-11-21T19:30:00+09:00",
-    "leadMin": 71
    }
   ]
  }
