@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T13:50:20.032Z",
+ "builtAt": "2026-11-21T14:00:24.539Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,13 +15,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 15,
-   "recent20": 2,
-   "press": 11,
+   "articles90": 16,
+   "recent20": 1,
+   "press": 12,
    "firstArticleAt": "2026-11-21T12:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "추성훈, 은퇴전서 1-2 아쉬운 판정패…22년 파이터 인생 마침표",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-21T13:57:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005444461"
+    },
     {
      "title": "51세 추성훈, 은퇴전서 아쉬운 판정패…22년 파이터 인생 마침표",
      "press": "newsis.com",
@@ -33,12 +39,6 @@
      "press": "mydaily.co.kr",
      "publishedAt": "2026-11-21T13:33:00.000Z",
      "link": "https://m.entertain.naver.com/article/117/0004127032"
-    },
-    {
-     "title": "'섹시야마' 추성훈, 은퇴전서 리벤에 스플릿 판정패…'UFC 출신' 강경호...",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-21T13:28:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110031977525"
     }
    ]
   },
@@ -47,10 +47,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-21T12:23:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-21T12:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
