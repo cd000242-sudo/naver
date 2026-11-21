@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T21:12:40.334Z",
+ "builtAt": "2026-11-21T21:22:43.561Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,15 +8,47 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 26,
  "candidates": [
+  {
+   "keyword": "소설 절기",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-21T20:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오늘날씨] '소설' 아침 영하권 한파… 전국 맑지만 찬바람에 체감온도...",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-21T21:14:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3450979"
+    },
+    {
+     "title": "[날씨] 첫눈 예고한 절기 '소설', 전국 맑지만 아침 영하 9도까지 '꽁꽁...",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-21T21:00:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68182"
+    },
+    {
+     "title": "첫눈 내리는 '소설' 최저 -9도 '뚝'…전국 영하권 아침[오늘날씨]",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-21T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009302961?sid=103"
+    }
+   ]
+  },
   {
    "keyword": "조희대 대법원장 탄핵",
    "sources": [
     "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 4,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-21T20:50:00.000Z",
    "exclusive": false,
@@ -29,16 +61,16 @@
      "link": "https://n.news.naver.com/mnews/article/421/0009302966?sid=100"
     },
     {
-     "title": "與 '조희대 탄핵' 추진에 정국 급랭…예산·인사청문회까지 '전운'",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-21T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009302954?sid=100"
-    },
-    {
      "title": "계파 갈등·지지율 정체 겹친 김민석 취임 100일…'조희대 탄핵' 돌파구...",
      "press": "news1.kr",
      "publishedAt": "2026-11-21T21:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009302951?sid=100"
+    },
+    {
+     "title": "與 '조희대 탄핵' 추진에 정국 급랭…예산·인사청문회까지 '전운'",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-21T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009302954?sid=100"
     }
    ]
   }
@@ -46,8 +78,8 @@
  "hitRate": {
   "days": 7,
   "flagged": 885,
-  "matched": 528,
-  "avgLeadMin": 596,
+  "matched": 527,
+  "avgLeadMin": 592,
   "recent": [
    {
     "keyword": "호르무즈 유조선 피격",
