@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T21:32:47.228Z",
+ "builtAt": "2026-11-21T21:42:50.469Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "소설 절기",
@@ -16,7 +16,7 @@
     "daum"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 1,
    "press": 6,
    "firstArticleAt": "2026-11-21T20:33:00.000Z",
    "exclusive": false,
@@ -35,10 +35,10 @@
      "link": "https://www.newscj.com/news/articleView.html?idxno=3450979"
     },
     {
-     "title": "[날씨] 첫눈 예고한 절기 '소설', 전국 맑지만 아침 영하 9도까지 '꽁꽁...",
-     "press": "newsroad.co.kr",
+     "title": "첫눈 내리는 '소설' 최저 -9도 '뚝'…전국 영하권 아침[오늘날씨]",
+     "press": "news1.kr",
      "publishedAt": "2026-11-21T21:00:00.000Z",
-     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68182"
+     "link": "https://n.news.naver.com/mnews/article/421/0009302961?sid=103"
     }
    ]
   },
@@ -61,10 +61,10 @@
      "link": "https://n.news.naver.com/mnews/article/421/0009302966?sid=100"
     },
     {
-     "title": "\"직무 정지만으로도 의미 있다\"는 탄핵",
-     "press": "gokorea.kr",
+     "title": "與 '조희대 탄핵' 추진에 정국 급랭…예산·인사청문회까지 '전운'",
+     "press": "news1.kr",
      "publishedAt": "2026-11-21T21:00:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886721"
+     "link": "https://n.news.naver.com/mnews/article/421/0009302954?sid=100"
     },
     {
      "title": "계파 갈등·지지율 정체 겹친 김민석 취임 100일…'조희대 탄핵' 돌파구...",
@@ -73,46 +73,44 @@
      "link": "https://n.news.naver.com/mnews/article/421/0009302951?sid=100"
     }
    ]
-  },
-  {
-   "keyword": "lpga",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 2,
-   "firstArticleAt": "2026-11-21T20:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "LPGA CME Group Championship",
-     "press": null,
-     "publishedAt": "2026-11-21T21:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/077/0007245835?sid=104"
-    },
-    {
-     "title": "김아림, '무빙데이' 1타 차 선두…LPGA투어 최종전 최종일 코다·티띠꾼...",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-21T21:18:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=20261122060739353daecd3dad5_1"
-    },
-    {
-     "title": "김민선7·유현조, , LPGA Q시리즈 최종전 3R 공동 10위",
-     "press": "golfhankook.hankooki.com",
-     "publishedAt": "2026-11-21T21:02:00.000Z",
-     "link": "https://golfhankook.hankooki.com/news/articleView.html?idxno=20022720"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
   "flagged": 886,
-  "matched": 527,
-  "avgLeadMin": 592,
+  "matched": 532,
+  "avgLeadMin": 609,
   "recent": [
+   {
+    "keyword": "뉴욕증시 혼조 마감",
+    "hitKeyword": "뉴욕증시 AI 급락",
+    "hitAt": "2026-11-22T06:30:00+09:00",
+    "leadMin": 4299
+   },
+   {
+    "keyword": "뉴욕증시 혼조",
+    "hitKeyword": "뉴욕증시 AI 급락",
+    "hitAt": "2026-11-22T06:30:00+09:00",
+    "leadMin": 4249
+   },
+   {
+    "keyword": "뉴욕증시 급락",
+    "hitKeyword": "뉴욕증시 AI 급락",
+    "hitAt": "2026-11-22T06:30:00+09:00",
+    "leadMin": 2815
+   },
+   {
+    "keyword": "김혜윤",
+    "hitKeyword": "굿파트너2 김혜윤",
+    "hitAt": "2026-11-22T06:30:00+09:00",
+    "leadMin": 399
+   },
+   {
+    "keyword": "이란 미 F-16 공격 주장",
+    "hitKeyword": "이란 미 F-16 공격 주장",
+    "hitAt": "2026-11-22T06:30:00+09:00",
+    "leadMin": 258
+   },
    {
     "keyword": "호르무즈 유조선 피격",
     "hitKeyword": "호르무즈 유조선 피격",
@@ -142,36 +140,6 @@
     "hitKeyword": "바넷 토트넘 선발 데뷔",
     "hitAt": "2026-11-22T06:00:00+09:00",
     "leadMin": 239
-   },
-   {
-    "keyword": "굿파트너 2",
-    "hitKeyword": "고원희 굿파트너2",
-    "hitAt": "2026-11-22T00:00:00+09:00",
-    "leadMin": 80
-   },
-   {
-    "keyword": "경비지도사",
-    "hitKeyword": "경비지도사 시험 적발",
-    "hitAt": "2026-11-22T00:00:00+09:00",
-    "leadMin": 39
-   },
-   {
-    "keyword": "경부선 일반열차 재개",
-    "hitKeyword": "경부선 운행 재개",
-    "hitAt": "2026-11-22T00:00:00+09:00",
-    "leadMin": 19
-   },
-   {
-    "keyword": "W코리아컵 초대 챔피언 수원FC",
-    "hitKeyword": "김재웅 챔피언 사수",
-    "hitAt": "2026-11-21T23:30:00+09:00",
-    "leadMin": 311
-   },
-   {
-    "keyword": "최민정 1000M 3연속 우승",
-    "hitKeyword": "최민정 월드투어 금메달",
-    "hitAt": "2026-11-21T23:30:00+09:00",
-    "leadMin": 60
    }
   ]
  }
