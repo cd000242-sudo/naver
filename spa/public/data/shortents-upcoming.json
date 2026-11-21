@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T22:02:57.326Z",
+ "builtAt": "2026-11-21T22:13:00.671Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,8 +8,72 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 28,
  "candidates": [
+  {
+   "keyword": "소설 절기",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-21T20:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오늘날씨] '소설' 전국 맑고 추워…서울 낮 5도·내일 비·눈",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-21T22:12:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282635"
+    },
+    {
+     "title": "[오늘 날씨] '소설' 대구·경북 맑고 내륙 '강추위'...낮 최고 9도",
+     "press": "kbsm.net",
+     "publishedAt": "2026-11-21T21:34:00.000Z",
+     "link": "https://www.kbsm.net/news/view.php?idx=542682"
+    },
+    {
+     "title": "[날씨] 첫눈 온다는 '소설' 전국 대체로 맑아…전남·제주 비 또는 눈",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-21T21:30:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=783701"
+    }
+   ]
+  },
+  {
+   "keyword": "조희대 대법원장 탄핵",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-21T20:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "추미애 \"조희대 대법원장 탄핵 실행, 좌고우면 안 된다\"",
+     "press": "goodmorningcc.com",
+     "publishedAt": "2026-11-21T22:08:00.000Z",
+     "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=456267"
+    },
+    {
+     "title": "[천지일보 이슈종합] 울산 SK AI 데이터센터 찾은 李대통령·조희대 탄핵...",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-21T22:02:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3450974"
+    },
+    {
+     "title": "조희대 탄핵 '명분'에 전합 판결까지?…與 최종 논리 주목",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-21T22:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014337629?sid=102"
+    }
+   ]
+  },
   {
    "keyword": "아침 기온 영하 9도 추위",
    "sources": [
@@ -35,42 +99,10 @@
      "link": "https://www.newscj.com/news/articleView.html?idxno=3450979"
     },
     {
-     "title": "\"엄청 춥다\"…전남광주, 아침 최저 영하 4도 '강추위'",
-     "press": "jnilbo.com",
+     "title": "[날씨] 첫눈 예고한 절기 '소설', 전국 맑지만 아침 영하 9도까지 '꽁꽁...",
+     "press": "newsroad.co.kr",
      "publishedAt": "2026-11-21T21:00:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085176"
-    }
-   ]
-  },
-  {
-   "keyword": "소설 절기",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-21T20:33:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[날씨] 첫눈 온다는 '소설' 전국 대체로 맑아…전남·제주 비 또는 눈",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-21T21:30:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=783701"
-    },
-    {
-     "title": "[오늘날씨] '소설' 아침 영하권 한파… 전국 맑지만 찬바람에 체감온도...",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-21T21:14:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3450979"
-    },
-    {
-     "title": "첫눈 내리는 '소설' 최저 -9도 '뚝'…전국 영하권 아침[오늘날씨]",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-21T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009302961?sid=103"
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68182"
     }
    ]
   },
@@ -80,95 +112,30 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 6,
-   "recent20": 5,
-   "press": 4,
-   "firstArticleAt": "2026-11-21T21:00:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "영암군, 2030 지역순환경제 기본계획 확정",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-21T22:00:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5085918"
-    },
-    {
-     "title": "강진군, '반값여행' 지역경제 선순환 효과 강조…일본 관광지원책과 차...",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-21T22:00:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5085893"
-    },
-    {
-     "title": "금산세계인삼축제 방문객 116만명 돌파…경제효과 1450억원 추산",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-21T22:00:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5085887"
-    }
-   ]
-  },
-  {
-   "keyword": "조희대 대법원장 탄핵",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-21T20:50:00.000Z",
+   "articles90": 7,
+   "recent20": 7,
+   "press": 5,
+   "firstArticleAt": "2026-11-21T22:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "조희대 탄핵 '명분'에 전합 판결까지?…與 최종 논리 주목",
-     "press": "newsis.com",
+     "title": "北 서포청년역, 경제 주요 부문 물자 수송에 '구슬땀'",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-21T22:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009302995?sid=100"
+    },
+    {
+     "title": "中 경제에 ‘장기불황의 그림자’ 짙어졌다 [김규환의 핸디 차이나]",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-21T22:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003157953?sid=104"
+    },
+    {
+     "title": "[글로벌 경제지표] '추수감사절' 뉴욕증시 한산할 듯…한국은행 기준금...",
+     "press": "biz.sbs.co.kr",
      "publishedAt": "2026-11-21T22:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014337629?sid=102"
-    },
-    {
-     "title": "민주당 조희대 탄핵추진단, 오늘 첫 공개 간담회",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-21T21:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009302966?sid=100"
-    },
-    {
-     "title": "계파 갈등·지지율 정체 겹친 김민석 취임 100일…'조희대 탄핵' 돌파구...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-21T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009302951?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "지수",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-21T21:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "골드만, 다음주에도 매도세 지속 경고···\"패닉지수 최고치 근접\"",
-     "press": "seoulfn.com",
-     "publishedAt": "2026-11-21T22:01:00.000Z",
-     "link": "https://www.seoulfn.com/news/articleView.html?idxno=643544"
-    },
-    {
-     "title": "이서진, 블핑 지수 '월클' 위상에 감탄하더니..\"성격 걸걸해\"",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-21T21:43:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004468560"
-    },
-    {
-     "title": "골드만 패닉지수 9점…뉴욕증시 추가 매도 경고",
-     "press": "kbmaeil.com",
-     "publishedAt": "2026-11-21T21:02:00.000Z",
-     "link": "https://www.kbmaeil.com/article/20261122500017"
+     "link": "https://n.news.naver.com/mnews/article/374/0000545077?sid=101"
     }
    ]
   }
@@ -176,9 +143,15 @@
  "hitRate": {
   "days": 7,
   "flagged": 888,
-  "matched": 532,
+  "matched": 533,
   "avgLeadMin": 609,
   "recent": [
+   {
+    "keyword": "트럼프 한반도 논의",
+    "hitKeyword": "트럼프 이란 핵무기 합의",
+    "hitAt": "2026-11-22T07:00:00+09:00",
+    "leadMin": 651
+   },
    {
     "keyword": "뉴욕증시 혼조 마감",
     "hitKeyword": "뉴욕증시 AI 급락",
@@ -232,12 +205,6 @@
     "hitKeyword": "강릉 로또 1등 당첨",
     "hitAt": "2026-11-22T06:00:00+09:00",
     "leadMin": 349
-   },
-   {
-    "keyword": "토트넘 입스위치",
-    "hitKeyword": "바넷 토트넘 선발 데뷔",
-    "hitAt": "2026-11-22T06:00:00+09:00",
-    "leadMin": 239
    }
   ]
  }
