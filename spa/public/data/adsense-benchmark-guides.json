@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-21T12:12:25.710Z",
+  "generatedAt": "2026-11-21T12:56:50.064Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -1145,72 +1145,6 @@
           "views": 552,
           "answers": 2,
           "askedAt": "2025.05.30"
-        }
-      ]
-    },
-    {
-      "id": "fa03e77017fd79c8",
-      "urls": [
-        "https://bangulnote.com/entry/overseas-stock-tax-250-qa/",
-        "https://spylab.tistory.com/800"
-      ],
-      "guide": {
-        "direction": "검색자는 올해 250만원 공제를 받기 위해 해외주식을 '12월 며칠까지' 팔아야 하는지 결제일 기준을 몰라 막혀 있고, RIA 계좌 50% 감면 조건도 혼동한다(지식인의 '결제일 기준' '12월23일 기한' 질문). 고수 제목은 'RIA 계좌란'과 '12월 마감'만 다뤄 지식인에 나온 손익통산 계산, 기한후 신고 시 신고기한 산정 기준 같은 실전 Q&A는 못 풀었다. 결제일 기준 매도 마감일 계산표, RIA 50% 감면 조건 체크리스트, 250만원 공제·손익통산 계산 예시를 주면 끝까지 읽힌다.",
-        "searchTargets": [
-          "해외주식 양도세 기준일",
-          "해외주식 양도세 감면",
-          "해외주식 양도세 손익통산",
-          "해외주식 양도세 계산"
-        ],
-        "mustInclude": [
-          "결제일 기준 매도 마감 시한 설명(미국주식 체결 후 결제 소요, 지식인 '12월23일' 언급, 확인 필요: 증권사 공식 결제일 기준)",
-          "250만원 공제와 손익통산 포함 계산 예시",
-          "RIA 계좌 50% 감면 조건 체크리스트",
-          "양도세 외 지방세(국세의 10%) 별도 부과 설명",
-          "기한후 신고 시 신고기한은 실제 제출일이 아니라 원래 기한 기준이라는 점"
-        ],
-        "mustAvoid": [
-          "양도세 계산 기준(거래가)과 증여받은 주식의 증여세 신고 시 시가 기준을 혼동하지 않기",
-          "RIA 계좌를 일반 해외주식 매매 계좌와 같은 것으로 혼동하지 않기"
-        ],
-        "checkBefore": [
-          "해외주식 양도세 신고 기준과 결제일 기준은 국세청 홈택스 공식 안내로 확인",
-          "RIA 계좌 50% 감면 요건은 관련 공식 공지 또는 원문 기사로 확인"
-        ],
-        "solves": [
-          "올해 공제받으려면 12월 며칠까지 팔아야 하는지 모름 → 결제일 기준 매도 마감일 계산표로 해결",
-          "RIA 계좌 50% 감면 조건이 헷갈림 → 조건 체크리스트로 해결",
-          "손익통산·지방세 계산이 복잡함 → 250만원 공제 계산 예시로 해결"
-        ],
-        "actionTitles": [
-          "해외주식 양도세 감면 RIA 계좌 조건 확인하는 법",
-          "해외주식 양도세 손익통산 계산, 250만원 공제받는 법"
-        ]
-      },
-      "at": "2026-11-18T02:26:09.460Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "해외주식 양도소득세 지방세",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40301&docId=493547702&answerNo=4&qb=7ZW07Jm47KO87IudIOyWkeuPhOyEuCDquLDspIDsnbwg67Cb7Jy866Ck66m0IOupsOy5oA==",
-          "views": 1380,
-          "answers": 5,
-          "askedAt": "2026.05.26"
-        },
-        {
-          "title": "ria계좌 매도전 미국주식매수?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=493054557&answerNo=2&qb=7ZW07Jm47KO87IudIOyWkeuPhOyEuCDquLDspIDsnbwg67Cb7Jy866Ck66m0IOupsOy5oA==",
-          "views": 382,
-          "answers": 8,
-          "askedAt": "2026.04.21"
-        },
-        {
-          "title": "해외주식 양도소득세 기한후 신고질문",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40301&docId=494533156&answerNo=2&qb=7ZW07Jm47KO87IudIOyWkeuPhOyEuCDquLDspIDsnbwg67Cb7Jy866Ck66m0IOupsOy5oA==",
-          "views": 291,
-          "answers": 3,
-          "askedAt": "2026.07.31"
         }
       ]
     },
