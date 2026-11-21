@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T14:00:24.539Z",
+ "builtAt": "2026-11-21T14:10:28.587Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,76 +8,76 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 21,
+ "measured": 20,
  "candidates": [
   {
-   "keyword": "추성훈 은퇴전 리벤 패배",
+   "keyword": "홍대버스 돌진 6명 경상",
    "sources": [
     "nate"
    ],
-   "articles90": 16,
-   "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-21T12:36:00.000Z",
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-21T12:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "추성훈, 은퇴전서 1-2 아쉬운 판정패…22년 파이터 인생 마침표",
-     "press": "mt.co.kr",
+     "title": "주말 홍대서 시내버스 삼중추돌·인도 돌진…승객 6명 병원 이송(종합)",
+     "press": "news1.kr",
      "publishedAt": "2026-11-21T13:57:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005444461"
+     "link": "https://n.news.naver.com/mnews/article/421/0009302912?sid=102"
     },
     {
-     "title": "51세 추성훈, 은퇴전서 아쉬운 판정패…22년 파이터 인생 마침표",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-21T13:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014337533"
+     "title": "홍대입구역서 버스 2대·승용차 '쾅'…인도 돌진에 6명 부상",
+     "press": "weekly.chosun.com",
+     "publishedAt": "2026-11-21T13:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/053/0000063246?sid=102"
     },
     {
-     "title": "\"사랑아 용돈 없다\"…추성훈, 은퇴전 파이트머니 전액 기부",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-21T13:33:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004127032"
+     "title": "홍대입구역에서 인도로 돌진한 버스…3중 추돌사고로 6명 다쳐",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-21T13:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005767066?sid=102"
     }
    ]
   },
   {
-   "keyword": "대만 공매도 규제",
+   "keyword": "인도네시아 규모 6.8 지진",
    "sources": [
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-21T12:33:00.000Z",
+   "firstArticleAt": "2026-11-21T13:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "대만 증시 일주일 새 17.5% 폭락…공매도 규제 세 번째 강화",
-     "press": "topstarnews.net",
+     "title": "인도네시아·동티모르 인근 반다해서 규모 6.8~7.2 강진…호주 다윈서도...",
+     "press": "fnnews.com",
      "publishedAt": "2026-11-21T13:42:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282575"
+     "link": "https://n.news.naver.com/mnews/article/014/0005607678?sid=104"
     },
     {
-     "title": "증시 폭락에 공매도 빗장 건 대만…韓 개미들 \"우리도 막아달라\" 청원 ...",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-21T13:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001041547?sid=101"
+     "title": "인도네시아 중부 말루쿠 해역서 규모 7.2 강진…쓰나미 위험은 없어",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-21T13:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014337532?sid=104"
     },
     {
-     "title": "대만, 증시 폭락에 비상⋯\"전일 종가 미만 공매도 금지\"",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-21T12:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001077209?sid=104"
+     "title": "인도네시아 말루쿠주 앞바다서 규모 6.8 지진",
+     "press": "safetimes.co.kr",
+     "publishedAt": "2026-11-21T13:24:00.000Z",
+     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247763"
     }
    ]
   },
   {
    "keyword": "코레일 첫차 정상운행",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 3,
    "recent20": 0,
@@ -107,7 +107,7 @@
    ]
   },
   {
-   "keyword": "BTS 코르티스 대상 수상",
+   "keyword": "방탄소년단·코르티스 대상수상",
    "sources": [
     "nate"
    ],
@@ -141,10 +141,34 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 888,
-  "matched": 528,
-  "avgLeadMin": 635,
+  "flagged": 889,
+  "matched": 532,
+  "avgLeadMin": 631,
   "recent": [
+   {
+    "keyword": "추성훈 은퇴전 리벤 패배",
+    "hitKeyword": "추성훈 리벤에 판정패",
+    "hitAt": "2026-11-21T23:00:00+09:00",
+    "leadMin": 50
+   },
+   {
+    "keyword": "추성훈 은퇴전 리벤 판정패",
+    "hitKeyword": "추성훈 리벤에 판정패",
+    "hitAt": "2026-11-21T23:00:00+09:00",
+    "leadMin": 30
+   },
+   {
+    "keyword": "코레일 첫차 운행 재개",
+    "hitKeyword": "경부선 운행 재개",
+    "hitAt": "2026-11-21T23:00:00+09:00",
+    "leadMin": 30
+   },
+   {
+    "keyword": "추성훈 격투 인생 마무리",
+    "hitKeyword": "추성훈 리벤에 판정패",
+    "hitAt": "2026-11-21T23:00:00+09:00",
+    "leadMin": 20
+   },
    {
     "keyword": "코레일 일반열차 운행 재개",
     "hitKeyword": "경부선 운행 재개",
@@ -179,30 +203,6 @@
     "keyword": "50대 성범죄자 전자발찌 도주",
     "hitKeyword": "전자발찌 끊고 도주",
     "hitAt": "2026-11-21T22:00:00+09:00",
-    "leadMin": 50
-   },
-   {
-    "keyword": "50대 전자발찌 도주",
-    "hitKeyword": "전자발찌 끊고 도주",
-    "hitAt": "2026-11-21T22:00:00+09:00",
-    "leadMin": 10
-   },
-   {
-    "keyword": "태양, 민효린 언급하며 눈물",
-    "hitKeyword": "태양 민효린 눈물",
-    "hitAt": "2026-11-21T21:30:00+09:00",
-    "leadMin": 171
-   },
-   {
-    "keyword": "최백호 장미화 진땀",
-    "hitKeyword": "장미화 동안 비결",
-    "hitAt": "2026-11-21T21:30:00+09:00",
-    "leadMin": 151
-   },
-   {
-    "keyword": "소정리역 화물열차 탈선",
-    "hitKeyword": "경부선 화물열차 탈선",
-    "hitAt": "2026-11-21T21:30:00+09:00",
     "leadMin": 50
    }
   ]
