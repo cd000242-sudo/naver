@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-21T03:16:17.806Z",
+  "generatedAt": "2026-11-21T03:34:43.403Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -3422,68 +3422,6 @@
       ]
     },
     {
-      "id": "d2959e10bdcb9fda",
-      "urls": [
-        "https://initive.co.kr/2026%eb%85%84-11%ec%9b%94-%ec%84%b8%ea%b8%88%ec%8b%a0%ea%b3%a0-%ec%9d%bc%ec%a0%95%ec%97%90%ec%84%9c-%ec%84%b8%ea%b8%88-%ec%a4%84%ec%9d%b4%eb%8a%94-%ec%a0%88%ec%84%b8-%ec%a0%84%eb%9e%b5/",
-        "https://jjyiu.tistory.com/entry/%EA%B0%80%EC%83%81%EC%9E%90%EC%82%B0-%EC%86%90%EC%8B%A4-%EC%9D%B4%EC%9B%94%EA%B3%B5%EC%A0%9C-3%EB%85%84-%EC%8B%A0%EC%84%A4-2029%EB%85%84-%EC%BD%94%EC%9D%B8-%EC%84%B8%EA%B8%88-%EC%A4%84%EC%9D%B4%EB%8A%94-%EB%B2%95-%EB%AF%B8%EB%A6%AC-%EC%A0%95%EB%A6%AC"
-      ],
-      "guide": {
-        "direction": "① 검색자는 '코인 손실을 다른 해 이익과 합산(이월공제)할 수 있는지, 과세가 2027년부터인지 2029년부터인지' 정확한 기준점에서 막힌다. ② 고수 블로그 제목은 '이월공제 3년 신설'이라 단정하지만 지식인 답변들은 '이월공제 불허' 구조라 서로 엇갈려 이 모순을 못 푼다. ③ 시행일·공제한도 250만원·이월공제 허용여부를 연도별로 표로 비교해 혼란을 정리해준다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "가상자산 과세 시행일 2027년 1월 1일 기준 정리(지식인 질문 근거, 확정 여부는 확인 필요)",
-          "손실 공제 한도 250만원 표시(지식인 질문 근거)",
-          "2024년 손실은 2025년 종소세 신고에서 공제 불가라는 사례 정리",
-          "손실 이월공제 3년 신설 여부 비교표(확인 필요: 기획재정부·국세청 공식 발표)"
-        ],
-        "mustAvoid": [
-          "시행일을 2027년과 2029년 중 하나로 단정해서 쓰는 것(현재 자료상 혼동 존재)",
-          "이월공제 허용 여부가 확정되지 않은 상태를 '허용된다'처럼 사실화하는 것",
-          "특정 투자상담업체(eXpert 자산컨설팅 등) 상담 링크를 본문에 홍보성으로 노출하는 것"
-        ],
-        "checkBefore": [
-          "가상자산 과세 시행일과 손실 이월공제 허용 여부를 국세청·기획재정부 공식 보도자료에서 확인",
-          "공제 한도 250만원이 최신 개정안 기준인지 확인"
-        ],
-        "solves": [
-          "코인 손실을 작년 이익과 합산할 수 있나? → 이월공제 허용 여부와 연도별 기준 표로 정리",
-          "2027년부터 과세면 지금 생긴 손실은 어떻게 되나? → 시행일 전후 손익통산 가능 여부 구분",
-          "종소세 신고 시 코인 손실 공제받을 수 있나? → 공제 불가 사례와 대안 정리"
-        ],
-        "actionTitles": [
-          "2027년 가상자산 과세, 손실 이월공제 가능한지 계산하는 법",
-          "코인 투자 손실, 종소세에서 공제 되는지 확인하는 법",
-          "가상자산 손실 이월공제 한도 250만원 지금 계산하는 법"
-        ]
-      },
-      "at": "2026-11-19T12:37:14.410Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "코인 과세",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40305&docId=494671572&answerNo=4&qb=6rCA7IOB7J6Q7IKw7IaQ7Iuk7J207JuU6rO17KCc",
-          "views": 980,
-          "answers": 7,
-          "askedAt": "2026.08.10"
-        },
-        {
-          "title": "2027년 가상자산 과세 질문",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40307&docId=494843218&answerNo=5&qb=6rCA7IOB7J6Q7IKw7IaQ7Iuk7J207JuU6rO17KCc",
-          "views": 792,
-          "answers": 7,
-          "askedAt": "2026.09.03"
-        },
-        {
-          "title": "코인손실 종소세 적용?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=485601790&answerNo=4&qb=6rCA7IOB7J6Q7IKw7IaQ7Iuk7J207JuU6rO17KCc",
-          "views": 422,
-          "answers": 4,
-          "askedAt": "2025.05.27"
-        }
-      ]
-    },
-    {
       "id": "5ede0e3166bb0885",
       "urls": [
         "https://soyblog.co.kr/%ed%99%94%eb%8b%b4%ec%88%b2-%ec%98%88%ec%95%bd-%eb%b0%a9%eb%b2%95-%ec%9e%85%ec%9e%a5%eb%a3%8c-%eb%aa%a8%eb%85%b8%eb%a0%88%ec%9d%bc-%ec%a3%bc%ec%b0%a8%ea%b9%8c%ec%a7%80/",
@@ -4139,68 +4077,6 @@
       "at": "2026-11-19T12:37:14.410Z",
       "rules": "2026-10-20-solve",
       "provider": "claude"
-    },
-    {
-      "id": "8b23fef5f6e8e9cb",
-      "urls": [
-        "https://initive.co.kr/%ec%82%ac%ec%97%85%ec%9e%90-%eb%8c%80%ec%b6%9c-%eb%b9%84%eb%8c%80%eb%a9%b4-%ec%8b%a0%ec%b2%ad/"
-      ],
-      "guide": {
-        "direction": "지식인에는 '비대면 신청 처음인데 뭐부터 하나', '내 신용등급에 맞는 상품이 뭔지' 묻는 글이 많아, 인증서 준비와 상품 선택 단계에서 검색자가 막힌다. 고수 블로그 제목은 '단계별 절차와 자격기준'만 적어 신용등급별 상품 구분과 현장실사처럼 비대면이 아닌 단계가 섞여 있다는 실제 흐름을 못 짚는다. 신용등급별 추천 상품표와 준비물 체크리스트, 상담→서류제출→현장실사→전자약정 순서를 한 번에 정리해 주면 독자가 이 글로 끝낼 수 있다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "신용등급별(우량~중신용~저신용) 추천 상품 구분표(햇살론/정책자금/보증서대출)",
-          "비대면 신청 필수 준비물: 공동인증서 또는 간편인증, 디지털 서류 파일",
-          "진행순서: 상담→서류제출(자동 스크랩)→현장실사(사업장 확인)→전자약정(비대면)",
-          "소진공 직접대출 vs 지역신용보증재단 보증서대출 차이표",
-          "(확인 필요: 신용보증재단 공지) 사업자등록 전 단계에서도 가능한 창업대출·보증상품 여부"
-        ],
-        "mustAvoid": [
-          "'승인률 높은 곳'처럼 보장성 표현으로 개인 신용상태 차이를 흐리는 서술",
-          "햇살론(서민금융)과 정책자금(소진공)을 같은 상품처럼 섞어 설명",
-          "현장실사 같은 비대면 아닌 단계를 '완전 비대면'이라고 과장"
-        ],
-        "checkBefore": [
-          "공동인증서/간편인증 종류와 소상공인정책자금 홈페이지 로그인 방식 (소상공인정책자금 공식 홈페이지 공지)",
-          "신용보증재단 비대면 보증상품의 사업자등록 전 신청 가능 여부 (지역신용보증재단 공식 안내)",
-          "현재 정책자금 지원 한도·절차 유효성 (소진공 공식 발표)"
-        ],
-        "solves": [
-          "비대면 신청 처음인데 뭐부터 준비해야 하나 → 공동인증서·간편인증 등 준비물과 신청 순서를 정리",
-          "내 신용등급에 맞는 상품이 뭔지 모르겠다 → 신용등급별 추천 상품(햇살론/정책자금/보증서대출) 구분표 제공",
-          "정책자금 받으려면 어떤 순서로 진행되나 → 상담→서류제출→현장실사→전자약정 단계를 순서대로 정리"
-        ],
-        "actionTitles": [
-          "사업자 대출 비대면 신청 준비물과 신청 순서 한눈에 정리",
-          "정책자금 자격 기준, 신용등급별 맞는 상품 비교로 확인하기"
-        ]
-      },
-      "at": "2026-11-19T12:37:14.410Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "햇살론생계자금대출...승인률높은곳?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=4010503&docId=427008641&answerNo=2&qb=7IKs7JeF7J6QIOu5hOuMgOuptCDsoJXssYXsnpDquIgg64uo6rOE67OE",
-          "views": 12516,
-          "answers": 5,
-          "askedAt": "2026.11.14"
-        },
-        {
-          "title": "정부소상공인정책자금관련",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=4010505&docId=319651350&answerNo=6&qb=7IKs7JeF7J6QIOu5hOuMgOuptCDsoJXssYXsnpDquIgg64uo6rOE67OE",
-          "views": 2620,
-          "answers": 18,
-          "askedAt": "2025.12.24"
-        },
-        {
-          "title": "일반경영안정자금 신청, 처음인데 뭐부터 준....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=4010505&docId=492283792&answerNo=1&qb=7IKs7JeF7J6QIOu5hOuMgOuptCDsoJXssYXsnpDquIgg64uo6rOE67OE",
-          "views": 937,
-          "answers": 5,
-          "askedAt": "2026.03.03"
-        }
-      ]
     }
   ],
   "misses": []
