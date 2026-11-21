@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T23:33:32.307Z",
+ "builtAt": "2026-11-21T23:43:36.214Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 23,
  "candidates": [
   {
-   "keyword": "김아림 프로",
+   "keyword": "라이어 유연석 변사체 충격",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 9,
+   "articles90": 12,
+   "recent20": 0,
+   "press": 12,
    "firstArticleAt": "2026-11-21T22:20:00.000Z",
-   "exclusive": true,
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김아림, LPGA 최종전 선두 유지…티띠꾼·코르다 맹추격",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-21T23:32:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261122010008241"
+     "title": "'라이어' 유연석 변사체 발견…8회 엔딩에 남주 사망이라니 '충격', 최고...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-21T23:14:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002082906"
     },
     {
-     "title": "김아림, 사흘째 LPGA 최종전 선두 질주…티띠꾼·코르다와 우승 경쟁",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-21T23:17:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/021/0002834500"
+     "title": "유연석, 충격 사망...서현진이 밝혀낸 추악한 실체 ('라이어')",
+     "press": "nc.press",
+     "publishedAt": "2026-11-21T23:11:00.000Z",
+     "link": "https://www.nc.press/news/articleView.html?idxno=631582"
     },
     {
-     "title": "김아림, CME그룹 투어 챔피언십 3R 단독 선두…최종일 400만달러 도전",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-21T23:06:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282664"
+     "title": "드라마 8회에 남주 사망 충격‥‘라이어’ 유연석 변사체 엔딩 ‘최고의...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-21T23:09:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190064"
     }
    ]
   },
@@ -48,61 +48,125 @@
     "daum"
    ],
    "articles90": 9,
-   "recent20": 1,
+   "recent20": 2,
    "press": 9,
-   "firstArticleAt": "2026-11-21T22:08:00.000Z",
+   "firstArticleAt": "2026-11-21T22:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[날씨] 서울 영하 4도·춘천 영하 8도 '소설 추위'… 제주 낮 12도 포근",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-21T23:42:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3083689"
+    },
+    {
+     "title": "[기상속보]'소설' 오늘날씨 전국 아침 영하권 전남·제주 비 또는 눈 서...",
+     "press": "public25.com",
+     "publishedAt": "2026-11-21T23:38:00.000Z",
+     "link": "https://www.public25.com/news/articleView.html?idxno=58783"
+    },
     {
      "title": "소설 절기 날씨는?, 첫눈 대신 건조특보…서울·강원·경북 화재 예방 주...",
      "press": "cbci.co.kr",
      "publishedAt": "2026-11-21T23:20:00.000Z",
      "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629513"
-    },
-    {
-     "title": "눈 없이 맑은 ‘소설’…아침 최저 영하 10도, 낮 최고 12도",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-21T23:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833324?sid=102"
-    },
-    {
-     "title": "소설(小雪), 눈보다 추위가 겨울 문턱 슬금슬금",
-     "press": "nongmin.com",
-     "publishedAt": "2026-11-21T23:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/662/0000109012?sid=103"
     }
    ]
   },
   {
-   "keyword": "경부선 일반열차 운행 재개",
+   "keyword": "경부선 일반열차 정상 운행",
    "sources": [
     "nate"
    ],
    "articles90": 8,
-   "recent20": 0,
+   "recent20": 2,
    "press": 8,
-   "firstArticleAt": "2026-11-21T22:16:00.000Z",
+   "firstArticleAt": "2026-11-21T22:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
      "title": "코레일 \"경부선 일반열차 운행 정상적으로 재개\"",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-21T23:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000545085?sid=103"
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-21T23:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928586?sid=102"
+    },
+    {
+     "title": "경부선 화물열차 5량 탈선…밤샘 복구 끝 운행 정상화",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-21T23:34:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085220"
     },
     {
      "title": "열차 탈선으로 중단됐던 경부선 운행 정상 재개…코레일 \"첫 열차부터 ...",
      "press": "news.jtbc.co.kr",
      "publishedAt": "2026-11-21T23:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/437/0000521852?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "홍대입구역에서 버스 6명",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-21T22:15:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "홍대입구역서 버스 인도로 '쾅'…6명 다쳐",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-21T23:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928584?sid=102"
     },
     {
-     "title": "코레일 \"일시중단 경부선 일반열차 운행 정상적으로 재개\"",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-21T22:56:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=783711"
+     "title": "홍대입구역에서 인도로 돌진한 버스…3중 추돌 '6명 부상'",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-21T23:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001165153?sid=102"
+    },
+    {
+     "title": "홍대입구역 연쇄추돌로 버스 인도 돌진...6명 이송",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-21T22:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436274?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "EU 빅테크 디지털세",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 3,
+   "press": 4,
+   "firstArticleAt": "2026-11-21T22:40:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "EU, 빅테크 디지털세 초안 제안⋯트럼프와 갈등 불가피",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-21T23:42:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2651248"
+    },
+    {
+     "title": "EU, 미국 빅테크 기업 겨냥 디지털세 3% 부과 추진",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-21T23:37:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085222"
+    },
+    {
+     "title": "EU, 빅테크 디지털세 공식 제안…트럼프, 관세 100％ 맞대응",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-21T23:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000545087?sid=104"
     }
    ]
   },
@@ -141,7 +205,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 891,
+  "flagged": 894,
   "matched": 533,
   "avgLeadMin": 617,
   "recent": [
