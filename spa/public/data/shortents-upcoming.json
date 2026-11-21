@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T12:19:47.479Z",
+ "builtAt": "2026-11-21T12:29:51.193Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 28,
  "candidates": [
   {
-   "keyword": "코레일 경부선 일반열차",
+   "keyword": "22일 첫차 운행 재개",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 40,
-   "recent20": 7,
-   "press": 38,
-   "firstArticleAt": "2026-11-21T10:51:00.000Z",
+   "articles90": 25,
+   "recent20": 0,
+   "press": 25,
+   "firstArticleAt": "2026-11-21T11:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "화물열차 탈선 여파, 광주발 용산행 일반열차 운행 차질",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-21T12:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000121904?sid=102"
-    },
-    {
-     "title": "경부선 탈선 사고 여파...일반열차 운행 차질",
-     "press": "tbc.co.kr",
-     "publishedAt": "2026-11-21T12:08:00.000Z",
-     "link": "https://www.tbc.co.kr/news/view?pno=20261121094833AE08939&id=213631"
-    },
     {
      "title": "코레일 “22일 첫차부터 경부선 일반열차 운행 재개”",
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-21T12:08:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006413538?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "홍대입구역 버스 인도 돌진",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 27,
-   "recent20": 5,
-   "press": 23,
-   "firstArticleAt": "2026-11-21T10:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "홍대입구역서 3중 추돌사고…버스 1대 인도 돌진, 6명 경상",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-21T12:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004684685?sid=102"
     },
     {
-     "title": "홍대입구역에서 버스 인도로 돌진…승객 6명 경상",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-21T12:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012298650?sid=101"
+     "title": "경부선 화물열차 탈선 '복구 지속'…내일 첫차 운행 재개",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-21T12:02:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086075"
     },
     {
-     "title": "홍대입구역 인근서 버스 인도 돌진…3중 추돌사고로 6명 부상",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-21T12:04:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=783688"
+     "title": "코레일 경부선 일반열차 22일 첫차부터 운행 재개 예정…임시열차 15대...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-21T12:02:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629474"
     }
    ]
   },
@@ -79,30 +47,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 23,
-   "recent20": 9,
-   "press": 18,
+   "articles90": 25,
+   "recent20": 6,
+   "press": 20,
    "firstArticleAt": "2026-11-21T11:40:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
+     "title": "로또 1등 '14·18·19·29·40·45'…14명 모두 자동, 20억씩 받는다",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-21T12:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009302874?sid=102"
+    },
+    {
+     "title": "로또 2등 한 판매점서 10게임 당첨…한 사람이면 5억원, 1등 못잖은 행운...",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-21T12:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001041543?sid=101"
+    },
+    {
      "title": "로또 1등 당첨자 14명 각 20억6884만원씩 수령",
      "press": "jnilbo.com",
      "publishedAt": "2026-11-21T12:17:00.000Z",
      "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085182"
-    },
-    {
-     "title": "[오늘 로또]1,251회 추첨도 '자동만세' 1등 14명 모두 자동 조합...1인당...",
-     "press": "namdonews.com",
-     "publishedAt": "2026-11-21T12:12:00.000Z",
-     "link": "https://www.namdonews.com/news/articleView.html?idxno=929984"
-    },
-    {
-     "title": "1251회 로또 1등 14명…각 20.6억원씩·서울-경기 각 3곳 최다 당첨",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-21T12:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394547?sid=101"
     }
    ]
   },
@@ -112,7 +80,7 @@
     "nate"
    ],
    "articles90": 13,
-   "recent20": 4,
+   "recent20": 3,
    "press": 13,
    "firstArticleAt": "2026-11-21T11:17:00.000Z",
    "exclusive": false,
@@ -139,34 +107,34 @@
    ]
   },
   {
-   "keyword": "방탄소년단·코르티스 대상 수상",
+   "keyword": "홍대입구역 버스 돌진 6명 부상",
    "sources": [
     "nate"
    ],
-   "articles90": 7,
+   "articles90": 9,
    "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-21T10:52:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-21T11:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "방탄소년단, 이틀 연속 '마마' 대상…코르티스 '레드레드' 올해의 노래",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-21T12:07:00.000Z",
-     "link": "https://m.entertain.naver.com/article/119/0003157939"
+     "title": "홍대입구역서 버스 2대·승용차 연쇄 추돌…버스 인도 돌진에 6명 부상",
+     "press": "kado.net",
+     "publishedAt": "2026-11-21T12:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000212547?sid=102"
     },
     {
-     "title": "‘2026 마마 어워즈’ 둘째 날, BTS·코르티스 대상 수상",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-21T12:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484140?sid=103"
+     "title": "홍대입구역서 3중 추돌사고…버스 1대 인도 돌진, 6명 경상",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-21T12:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004684685?sid=102"
     },
     {
-     "title": "2026 MAMA AWARDS, 360도 K팝 소통우주 완성…BTS·엔하이픈·코르티스 대...",
-     "press": "nc.press",
-     "publishedAt": "2026-11-21T11:36:00.000Z",
-     "link": "https://www.nc.press/news/articleView.html?idxno=631578"
+     "title": "홍대입구역 인근서 버스 인도 돌진…3중 추돌사고로 6명 부상",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-21T12:04:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=783688"
     }
    ]
   },
@@ -203,13 +171,13 @@
    ]
   },
   {
-   "keyword": "수능 신고 포상금 1억",
+   "keyword": "수능 부정 신고 포상금 1억",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
    "firstArticleAt": "2026-11-21T11:00:00.000Z",
    "exclusive": false,
    "capped": false,
@@ -231,38 +199,6 @@
      "press": "goodmorningcc.com",
      "publishedAt": "2026-11-21T11:12:00.000Z",
      "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=456266"
-    }
-   ]
-  },
-  {
-   "keyword": "k리그1",
-   "sources": [
-    "google"
-   ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-21T10:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "수원 삼성, K리그1 승격 이어 K리그2 우승 축포까지",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-21T12:08:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1139051"
-    },
-    {
-     "title": "K리그1 대전, 10경기 무패…2위 울산과 승점 1점 차",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-21T12:07:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/055/0001404810"
-    },
-    {
-     "title": "수원 삼성 김주찬, \"우리는 K리그1에서도 우승할 자격 있다\"",
-     "press": "kgnews.co.kr",
-     "publishedAt": "2026-11-21T11:36:00.000Z",
-     "link": "https://www.kgnews.co.kr/news/article.html?no=920543"
     }
    ]
   },
@@ -303,13 +239,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
    "firstArticleAt": "2026-11-21T11:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김민석 “청년과 함께하는 것이 민주당 최대 과제”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-21T12:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004684686?sid=100"
+    },
     {
      "title": "與 '1030 청년 연설대전' 개최…김민석 \"새로운 민주당 역사의 장 열려\"...",
      "press": "newsis.com",
@@ -321,19 +263,13 @@
      "press": "mk.co.kr",
      "publishedAt": "2026-11-21T11:44:00.000Z",
      "link": "https://m.entertain.naver.com/article/009/0005767056"
-    },
-    {
-     "title": "김민석 \"민주당 큰 고민 중 하나는 청년…더 함께하고 싶다\"(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-21T11:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016455933?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 871,
+  "flagged": 874,
   "matched": 514,
   "avgLeadMin": 651,
   "recent": [
