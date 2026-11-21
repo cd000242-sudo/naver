@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T13:20:10.283Z",
+ "builtAt": "2026-11-21T13:30:13.799Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,49 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "22일 첫차 운행 재개",
+   "keyword": "추성훈 은퇴전 리벤 판정패",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 13,
+   "recent20": 5,
+   "press": 11,
+   "firstArticleAt": "2026-11-21T12:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'섹시야마' 추성훈, 은퇴전서 리벤에 스플릿 판정패…'UFC 출신' 강경호...",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-21T13:28:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110031977525"
+    },
+    {
+     "title": "추성훈, 은퇴전서 리벤에 1-2 판정패…MMA 22년 마무리",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-21T13:24:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626836"
+    },
+    {
+     "title": "[속보] 추성훈,은퇴전서 아쉬운 판정패…딸 추사랑 결국 '오열'",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-21T13:22:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004468536"
+    }
+   ]
+  },
+  {
+   "keyword": "코레일 첫차 운행 재개",
    "sources": [
     "nate"
    ],
-   "articles90": 13,
-   "recent20": 4,
-   "press": 13,
-   "firstArticleAt": "2026-11-21T11:53:00.000Z",
+   "articles90": 9,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-21T12:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -43,66 +75,34 @@
    ]
   },
   {
-   "keyword": "추성훈 은퇴전 리벤 패배",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 12,
-   "recent20": 4,
-   "press": 10,
-   "firstArticleAt": "2026-11-21T11:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘51세’ 추성훈, 은퇴전서 아쉬운 판정패…“도전으로 이미 승리한 것...",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-21T13:19:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000328693"
-    },
-    {
-     "title": "추성훈, 은퇴전서 아쉬운 패배…딸 추사랑 폭풍 오열",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-21T13:15:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004127031"
-    },
-    {
-     "title": "‘전설’ 추성훈, 22년 격투 인생 마침표… 고척돔 은퇴전 패배",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-21T13:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004010977?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "홍대 인도 돌진 6명 부상",
+   "keyword": "최민정 1000M 3연속 우승",
    "sources": [
     "nate"
    ],
-   "articles90": 6,
+   "articles90": 4,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-21T12:02:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-21T12:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "홍대입구역 버스 인도 돌진…3중 추돌로 6명 부상",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-21T13:14:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282562"
+     "title": "'한국 역대급 선수인데' 꼭 은퇴해야 하나?! '韓 빙상 스타' 최민정의 금...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-21T13:11:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/477/0000640236"
     },
     {
-     "title": "홍대입구역서 버스 인도 돌진…3중 추돌로 6명 부상",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-21T12:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413539?sid=102"
+     "title": "대표팀 은퇴한다는 최민정, 월드투어 여자 1000ｍ 3회 연속 우승···안...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-21T13:07:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/144/0001151037"
     },
     {
-     "title": "홍대입구역서 버스 2대·승용차 연쇄 추돌…버스 인도 돌진에 6명 부상",
-     "press": "kado.net",
-     "publishedAt": "2026-11-21T12:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000212547?sid=102"
+     "title": "은퇴 시즌 맞나… ‘쇼트트랙 간판’ 최민정, 월드투어 1000m 3연속 정상",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-21T12:53:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/396/0000761552"
     }
    ]
   },
@@ -112,12 +112,18 @@
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-21T11:54:00.000Z",
+   "firstArticleAt": "2026-11-21T12:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "증시 폭락에 공매도 빗장 건 대만…외국인 공매도 비중 80% 넘은 한국은...",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-21T13:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001041547?sid=101"
+    },
     {
      "title": "대만, 증시 폭락에 비상⋯\"전일 종가 미만 공매도 금지\"",
      "press": "inews24.com",
@@ -129,44 +135,6 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-21T12:23:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014337523?sid=104"
-    },
-    {
-     "title": "대만, 주가 급락에 공매도 규제 강화…23일부터 5개 안정 대책 시행",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-21T11:54:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886725"
-    }
-   ]
-  },
-  {
-   "keyword": "호르무즈 유조선 피격",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-21T12:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "UKMTO \"호르무즈 해협서 미확인 발사체에 유조선 잇단 피격\"",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-21T12:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000121909?sid=104"
-    },
-    {
-     "title": "호르무즈 해협서 유조선 잇단 피격… 미확인 발사체 공격 보고",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-21T12:44:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3450958"
-    },
-    {
-     "title": "호르무즈 해협서 유조선 또 피격··· 이틀 새 3건",
-     "press": "dkilbo.com",
-     "publishedAt": "2026-11-21T12:00:00.000Z",
-     "link": "https://www.dkilbo.com/news/articleView.html?idxno=561547"
     }
    ]
   },
@@ -205,7 +173,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 881,
+  "flagged": 884,
   "matched": 523,
   "avgLeadMin": 641,
   "recent": [
