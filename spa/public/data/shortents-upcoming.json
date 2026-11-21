@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T10:39:13.317Z",
+ "builtAt": "2026-11-21T10:49:17.203Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "코르티스 대상",
    "sources": [
     "daum"
    ],
-   "articles90": 22,
-   "recent20": 1,
-   "press": 16,
-   "firstArticleAt": "2026-11-21T09:10:00.000Z",
+   "articles90": 19,
+   "recent20": 0,
+   "press": 15,
+   "firstArticleAt": "2026-11-21T09:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -43,42 +43,9 @@
    ]
   },
   {
-   "keyword": "이 대통령 전통시장 방문",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 14,
-   "recent20": 3,
-   "press": 14,
-   "firstArticleAt": "2026-11-21T09:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령, 울산 전통시장 방문…\"내년에는 조금 더 좋아질 것\"",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-21T10:30:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086072"
-    },
-    {
-     "title": "울산 전통시장 찾은 李대통령...\"장사할 맛 나는 날 오도록 할 것\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-21T10:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005444450?sid=100"
-    },
-    {
-     "title": "李, 울산 전통시장서 “내년에는 좀 더 좋아질 것”…‘최애’ 배추전 ...",
-     "press": "donga.com",
-     "publishedAt": "2026-11-21T10:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764147?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "이재명 탈옥법 대구 경북 규탄",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 11,
    "recent20": 1,
@@ -108,12 +75,45 @@
    ]
   },
   {
+   "keyword": "k리그1",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-21T09:33:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'K리그1 우승팀' 서울, 전북 꺾고 5경기 만에 승리…대전은 10경기 무패...",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-21T10:48:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110028959907"
+    },
+    {
+     "title": "'K리그1 우승팀' 서울, 전북 꺾고 2연패 탈출…안데르손 결승골",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-21T10:11:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/421/0009302836"
+    },
+    {
+     "title": "'K리그1 조기 승격 확정' 수원, K리그2 우승도 확정…경남에 3-1 승리",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-21T10:10:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/117/0004127016"
+    }
+   ]
+  },
+  {
    "keyword": "호르무즈 유조선 피격",
    "sources": [
     "signal.bz"
    ],
    "articles90": 7,
-   "recent20": 4,
+   "recent20": 1,
    "press": 7,
    "firstArticleAt": "2026-11-21T09:20:00.000Z",
    "exclusive": false,
@@ -140,79 +140,14 @@
    ]
   },
   {
-   "keyword": "k리그1",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-21T09:33:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'K리그1 우승팀' 서울, 전북 꺾고 2연패 탈출…안데르손 결승골",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-21T10:11:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/421/0009302836"
-    },
-    {
-     "title": "'K리그1 조기 승격 확정' 수원, K리그2 우승도 확정…경남에 3-1 승리",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-21T10:10:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/117/0004127016"
-    },
-    {
-     "title": "'전통 명가' 수원 삼성, K리그1 복귀 이어 K리그2 우승 조기 확정",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-21T09:56:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/469/0000966952"
-    }
-   ]
-  },
-  {
-   "keyword": "수능 신고 최소 1억 포상",
+   "keyword": "한동훈 꼭 하라 이제 내란정당",
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-21T09:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[속보] 이재명 대통령 “수능 부정행위 포상금, 1건당 최소 1억원…가담...",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-21T10:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001232330?sid=100"
-    },
-    {
-     "title": "李대통령 \"수능 부정행위 신고 포상금 1건당 최소 1억원\"",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-21T10:10:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086071"
-    },
-    {
-     "title": "李 \"수능 부정 신고, 1건당 최소 1억…자수 후 신고하면 감경과 포상\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-21T10:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652543?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "한동훈 무르지 탄핵",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
+   "articles90": 4,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-21T09:15:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-21T09:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -237,14 +172,46 @@
    ]
   },
   {
-   "keyword": "신한은행, 3연승 공동 선두",
+   "keyword": "투어스 도훈, 유재석 위인 발언",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-21T09:13:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-21T09:31:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "도훈, 유재석 향해 \"위인이십니다\"…'조상' 발언에 센스 있는 수습",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-21T10:36:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009302842"
+    },
+    {
+     "title": "'2005년생' 투어스 도훈 \"요즘 어린 친구들 너무 많아… 유재석=위인\" (...",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-21T09:56:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000053780"
+    },
+    {
+     "title": "‘놀면 뭐하니?’ 유재석, 2005년생 투어스 도훈에 ‘위인’ 칭호 받은...",
+     "press": "heraldmuse.com",
+     "publishedAt": "2026-11-21T09:31:00.000Z",
+     "link": "https://m.entertain.naver.com/article/112/0003813978"
+    }
+   ]
+  },
+  {
+   "keyword": "신한은행 3연승 공동 선두",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-21T09:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -267,75 +234,11 @@
      "link": "http://www.stoo.com/article.php?aid=110026017585"
     }
    ]
-  },
-  {
-   "keyword": "김지민 김준호 태교 여행",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-21T09:13:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김지민, ♥김준호·뱃속 2세와 제주도로 떠났다…\"첫 여행\" [★해시태그...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-21T10:38:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002082822"
-    },
-    {
-     "title": "'임신 7개월' 김지민, 만삭 몸으로 ♥김준호와 첫 제주 태교 여행 \"우리...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-21T09:16:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005643653"
-    },
-    {
-     "title": "김지민♥김준호, 출산 앞두고 제주 태교여행…뱃속 아들까지 '다섯 식구...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-21T09:13:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004127006"
-    }
-   ]
-  },
-  {
-   "keyword": "교원 158명 유출",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-21T09:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "경기도교육청, 교원 158명 개인정보 유출…\"불특정 다수에 공개되지 않...",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-21T09:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652539?sid=102"
-    },
-    {
-     "title": "경기도교육청, 교원 158명 개인정보 유출…\"제3자 열람 정황 없어\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-21T09:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009302833?sid=102"
-    },
-    {
-     "title": "경기도교육청, 교원 158명 개인정보 유출 사고 발생",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-21T09:34:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3450916"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 839,
+  "flagged": 841,
   "matched": 505,
   "avgLeadMin": 635,
   "recent": [
