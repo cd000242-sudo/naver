@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T15:10:48.246Z",
+ "builtAt": "2026-11-21T15:20:51.337Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "김혜윤",
@@ -48,13 +48,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 5,
+   "articles90": 6,
    "recent20": 3,
    "press": 5,
    "firstArticleAt": "2026-11-21T14:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "로또 1251회 1등 14게임…당첨번호 14·18·19·29·40·45",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-21T15:14:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=409011"
+    },
     {
      "title": "로또1등당첨지역 \"20억 부산 2곳\" 1251회 로또당첨번호조회",
      "press": "gukjenews.com",
@@ -66,12 +72,6 @@
      "press": "bntnews.co.kr",
      "publishedAt": "2026-11-21T15:02:00.000Z",
      "link": "https://www.bntnews.co.kr/article/view/bnt202611210163"
-    },
-    {
-     "title": "로또 1251회 1등 번호 14·18·19·29·40·45",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-21T14:52:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=409000"
     }
    ]
   },
