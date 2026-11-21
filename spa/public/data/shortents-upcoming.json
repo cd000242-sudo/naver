@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T16:21:12.245Z",
+ "builtAt": "2026-11-21T16:31:16.999Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,10 +15,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 15,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-21T15:00:00.000Z",
+   "articles90": 14,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-21T15:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -47,10 +47,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-21T14:52:00.000Z",
+   "firstArticleAt": "2026-11-21T15:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -77,9 +77,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 888,
-  "matched": 530,
-  "avgLeadMin": 608,
+  "flagged": 887,
+  "matched": 529,
+  "avgLeadMin": 609,
   "recent": [
    {
     "keyword": "굿파트너 2",
