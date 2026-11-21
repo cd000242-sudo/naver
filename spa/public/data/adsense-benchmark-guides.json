@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-21T12:56:50.064Z",
+  "generatedAt": "2026-11-21T20:13:22.458Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -1279,72 +1279,6 @@
       ]
     },
     {
-      "id": "c42f6768d242596e",
-      "urls": [
-        "https://financialfragrance.com/%ec%86%90%ec%a3%bc-%ec%a6%9d%ec%97%ac%ec%84%b8-%eb%af%b8%ec%84%b1%eb%85%84%ec%9e%90-%ec%a6%9d%ec%97%ac%ea%b3%b5%ec%a0%9c-2000%eb%a7%8c%ec%9b%90-10%eb%85%84-%ea%b8%b0%ec%a4%80/",
-        "https://yeeso.tistory.com/entry/%EC%A1%B0%EB%B6%80%EB%AA%A8%EA%B0%80-%EC%86%90%EC%A3%BC%EC%97%90%EA%B2%8C-%EC%A6%9D%EC%97%AC%ED%95%98%EB%A9%B4-%EC%84%B8%EA%B8%88-%EB%8D%94-%EB%82%BC%EA%B9%8C%EF%BD%9C%EC%84%B8%EB%8C%80%EC%83%9D%EB%9E%B5-%EC%A6%9D%EC%97%AC-%ED%95%A0%EC%A6%9D-30%C2%B740-%EA%B8%B0%EC%A4%80"
-      ],
-      "guide": {
-        "direction": "손주에게 돈이나 교육비를 줄 때 증여세가 붙는지, 2000만원 한도를 넘으면 얼마를 더 내는지에서 검색자가 막힌다. 고수 제목은 할증률만 짚고 교육비 비과세 인정 범위나 주식 증여 절차는 다루지 않는다. 이 글은 공제한도·할증 계산 순서와 비과세 교육비 기준, 증여 절차를 함께 정리해 끝낸다.",
-        "searchTargets": [
-          "조부모 손주 증여 한도",
-          "조부모 손주 증여 할증",
-          "조부모 손주 증여가능금액"
-        ],
-        "mustInclude": [
-          "미성년자 10년간 2000만원, 성인 5000만원 증여재산공제 한도",
-          "세대생략(조부모→손주) 증여 시 할증 30%(30억 초과분 40%)(확인 필요: 국세청)",
-          "영어유치원비·학원비 등 교육비는 사회통념상 인정범위 내 비과세 가능",
-          "주식 증여는 계좌이체 후 증여세 신고까지가 기본 절차",
-          "(확인 필요: 홈택스) 세대생략 할증 계산 시 기존 증여재산 합산 여부"
-        ],
-        "mustAvoid": [
-          "손주 용돈·생활비를 무조건 전액 비과세로 단정",
-          "세대생략 증여와 일반(부모→자녀) 증여 할증 기준 혼동",
-          "특정 가족의 지식인 사례(며느리·고모 등)를 일반 규정처럼 서술"
-        ],
-        "checkBefore": [
-          "세대생략 증여 할증률(30%/40%) 기준은 상속세및증여세법·국세청 홈택스 확인",
-          "교육비 비과세 인정 범위는 국세청 예규·안내 확인"
-        ],
-        "solves": [
-          "손주 교육비 매달 지원이 증여에 해당하는지 헷갈림 → 비과세 인정되는 교육비 범위 기준 제시",
-          "미성년자 2000만원 한도 넘으면 세금 얼마인지 모름 → 공제 후 세율·할증 계산 순서 정리",
-          "주식 증여 절차를 몰라 막힘 → 계좌이체부터 신고까지 순서 안내"
-        ],
-        "actionTitles": [
-          "손주 증여세 공제한도 확인하고 할증 30% 계산하는 법",
-          "손주 교육비 증여세 해당 여부, 비과세 기준 확인하기"
-        ]
-      },
-      "at": "2026-11-18T02:26:09.460Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "할머니가 손주 영어유치원비와 학원비를 매....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40309&docId=495422487&answerNo=1&qb=7KGw67aA66qoIOyGkOyjvCDspp3sl6wg7IS46riIIOuCvOq5jA==",
-          "views": 244,
-          "answers": 1,
-          "askedAt": "2026.10.05"
-        },
-        {
-          "title": "조부모가 손주에게 돈 증여할 때 2000만원 이....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60220&docId=491464141&answerNo=1&qb=7KGw67aA66qoIOyGkOyjvCDspp3sl6wg7IS46riIIOuCvOq5jA==",
-          "views": 206,
-          "answers": 1,
-          "askedAt": "2026.01.20"
-        },
-        {
-          "title": "조부모가 손주한테 주식 증여 절차?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=493930475&answerNo=2&qb=7KGw67aA66qoIOyGkOyjvCDspp3sl6wg7IS46riIIOuCvOq5jA==",
-          "views": 112,
-          "answers": 3,
-          "askedAt": "2026.06.18"
-        }
-      ]
-    },
-    {
       "id": "fa0ba217422aa71d",
       "urls": [
         "https://hanbre.tistory.com/1985",
@@ -1998,74 +1932,6 @@
           "views": 214,
           "answers": 6,
           "askedAt": "2026.10.21"
-        }
-      ]
-    },
-    {
-      "id": "d03ad440efb99e38",
-      "urls": [
-        "https://jcks100.com/entry/2025-%EC%88%98%EB%8A%A5-%EC%88%98%ED%97%98%ED%91%9C-%EC%B9%B4%ED%8E%98-%EC%99%B8%EC%8B%9D-%ED%95%A0%EC%9D%B8-%EB%8F%84%EB%AF%B8%EB%85%B8%ED%94%BC%EC%9E%90-%EC%88%98%ED%97%98%EC%83%9D-%EC%9D%B4%EB%B2%A4%ED%8A%B8",
-        "https://jcks100.com/entry/2025-%EC%88%98%ED%97%98%EC%83%9D-%EC%88%98%ED%97%98%ED%91%9C-%ED%95%A0%EC%9D%B8-%ED%98%9C%ED%83%9D-%EB%A1%AF%EB%8D%B0%EC%9B%94%EB%93%9C-%EC%97%90%EB%B2%84%EB%9E%9C%EB%93%9C-%EC%84%9C%EC%9A%B8%EB%9E%9C%EB%93%9C-%EC%9D%B4%EB%B2%A4%ED%8A%B8",
-        "https://annas.co.kr/2027-%ec%88%98%ed%97%98%ec%83%9d-%ed%95%a0%ec%9d%b8/"
-      ],
-      "guide": {
-        "direction": "검색자는 수험생 할인 목록은 봤지만 수험표를 언제·어떻게 받는지 몰라 당일 할인을 못 받을까 걱정한다. 고수 글들은 혜택 나열에 그치고 재학생·졸업생·검정고시생별 수령 절차는 안 짚는다. 수험표 수령 시점과 대상별 조건표, 매장별 혜택 비교표로 한 번에 끝내준다.",
-        "searchTargets": [
-          "수능 수험생 할인",
-          "수능 수험생 선물",
-          "수능 수험생 선물 추천",
-          "수능 수험생 간식"
-        ],
-        "mustInclude": [
-          "도미노피자·쿠우쿠우 할인율 및 적용 기간 (확인 필요: 각 브랜드 공식 이벤트 공지)",
-          "롯데월드·에버랜드·서울랜드 이벤트 혜택 비교표 (확인 필요: 각 테마파크 공식 공지)",
-          "재학생/졸업생/검정고시생별 수험표 인정 여부 (확인 필요: 각 매장 이벤트 약관)",
-          "수험표 수령 시점(예비소집일) 및 분실 시 대체 신분증 가능 여부 (확인 필요: 교육청 공지)"
-        ],
-        "mustAvoid": [
-          "작년 수능 이벤트 내용을 올해 것처럼 혼용 서술",
-          "수험표 분실 시 신분증 대체가 모든 매장에서 가능하다고 일반화"
-        ],
-        "checkBefore": [
-          "도미노피자·쿠우쿠우 공식 앱/홈페이지 이벤트 공지",
-          "롯데월드·에버랜드·서울랜드 공식 SNS 이벤트 공지",
-          "한국교육과정평가원 예비소집일 공지"
-        ],
-        "solves": [
-          "수험표를 언제 받는지 몰라 할인을 놓칠까 걱정 → 예비소집일 수령 절차 정리",
-          "졸업생·검정고시생도 할인되는지 헷갈림 → 대상별 조건표 제공",
-          "여러 매장 혜택을 일일이 찾기 번거로움 → 브랜드별 비교표 한 번에 제공"
-        ],
-        "actionTitles": [
-          "2026 수능 수험생 할인 총정리, 도미노피자 쿠우쿠우 받는 법",
-          "수능 수험생 선물 추천, 수험표로 받는 할인 혜택 비교하기",
-          "수능 수험표 못 받았다면? 할인 전 수령 절차부터 확인"
-        ]
-      },
-      "at": "2026-11-18T21:22:34.945Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "수능 수험표 어디서 주나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110501&docId=495957674&answerNo=1&qb=7IiY64ql7IiY7ZeY7IOd",
-          "views": 531,
-          "answers": 3,
-          "askedAt": "2026.11.15"
-        },
-        {
-          "title": "수능 수험생 정신과 약",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70109&docId=495808825&answerNo=3&qb=7IiY64ql7IiY7ZeY7IOd",
-          "views": 255,
-          "answers": 7,
-          "askedAt": "2026.11.03"
-        },
-        {
-          "title": "수능수험표",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=11030303&docId=495985324&answerNo=2&qb=7IiY64ql7IiY7ZeY7IOd",
-          "views": 230,
-          "answers": 3,
-          "askedAt": "2026.11.17"
         }
       ]
     },
