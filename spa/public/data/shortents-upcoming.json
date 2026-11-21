@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T14:30:35.360Z",
+ "builtAt": "2026-11-21T14:40:38.366Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 19,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "인도네시아 규모 6.8 지진",
@@ -43,17 +43,24 @@
    ]
   },
   {
-   "keyword": "코레일 첫차 정상운행",
+   "keyword": "경부선 일반열차 재개",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-21T13:02:00.000Z",
+   "firstArticleAt": "2026-11-21T13:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "번쩍하더니 전철주가 엿가락처럼…경부선 탈선 순간 공개",
+     "press": "weekly.chosun.com",
+     "publishedAt": "2026-11-21T13:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/053/0000063244?sid=102"
+    },
     {
      "title": "경부선 화물열차 탈선 여파…코레일, 22일 오전 일반열차 운행 재개 추...",
      "press": "jemin.com",
@@ -61,26 +68,96 @@
      "link": "https://www.jemin.com/news/articleView.html?idxno=848002"
     },
     {
-     "title": "'운행 중단' 경부선 일반열차 22일 첫차부터 정상 운행 [종합]",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-21T13:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005356627?sid=102"
+     "title": "경부선 일반열차 22일 첫차부터 재개…화물열차 탈선 복구",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-21T13:14:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903927"
+    }
+   ]
+  },
+  {
+   "keyword": "경비지도사",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-21T13:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[속보] 세무사 시험 AI 부정행위 파장 속 경비지도사 시험서 6명 적발",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-21T13:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001232332?sid=102"
     },
     {
-     "title": "[아주경제 오늘의 종합 뉴스] 코레일 \"소정리역 탈선 밤샘 복구\"…22일 ...",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-21T13:02:00.000Z",
-     "link": "https://www.ajunews.com/view/20261121214444202"
+     "title": "시험 중 울린 휴대전화…경비지도사 시험서 6명 부정행위 적발",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-21T13:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193145?sid=102"
+    },
+    {
+     "title": "무작위로 전화 걸었더니 ‘띠링'… 경비지도사 시험서 부정행위 6건 적...",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-21T13:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001206399?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "수능 부정 신고 포상금",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-21T13:25:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이 대통령 \"수능 부정행위 신고 포상, 1건당 최소 1억\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-21T14:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436201?sid=100"
+    },
+    {
+     "title": "부정행위 신고 포상금 최소 1억...여야, 징계 정치로 혼란",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-21T13:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436199?sid=100"
+    },
+    {
+     "title": "수능 뒤 더 커진 '부실' 논란...\"역사상 최악의 장관\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-21T13:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436185?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 890,
-  "matched": 532,
-  "avgLeadMin": 631,
+  "flagged": 891,
+  "matched": 534,
+  "avgLeadMin": 629,
   "recent": [
+   {
+    "keyword": "W코리아컵 초대 챔피언 수원FC",
+    "hitKeyword": "김재웅 챔피언 사수",
+    "hitAt": "2026-11-21T23:30:00+09:00",
+    "leadMin": 311
+   },
+   {
+    "keyword": "최민정 1000M 3연속 우승",
+    "hitKeyword": "최민정 월드투어 금메달",
+    "hitAt": "2026-11-21T23:30:00+09:00",
+    "leadMin": 60
+   },
    {
     "keyword": "추성훈 은퇴전 리벤 패배",
     "hitKeyword": "추성훈 리벤에 판정패",
@@ -128,18 +205,6 @@
     "hitKeyword": "경부선 운행 재개",
     "hitAt": "2026-11-21T22:30:00+09:00",
     "leadMin": 60
-   },
-   {
-    "keyword": "로또1251",
-    "hitKeyword": "로또 1251회 당첨",
-    "hitAt": "2026-11-21T22:30:00+09:00",
-    "leadMin": 20
-   },
-   {
-    "keyword": "50대 성범죄자 전자발찌 도주",
-    "hitKeyword": "전자발찌 끊고 도주",
-    "hitAt": "2026-11-21T22:00:00+09:00",
-    "leadMin": 50
    }
   ]
  }
