@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T16:51:23.474Z",
+ "builtAt": "2026-11-21T17:01:27.223Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "채령",
@@ -16,10 +16,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 0,
    "press": 5,
-   "firstArticleAt": "2026-11-21T15:23:00.000Z",
+   "firstArticleAt": "2026-11-21T15:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -42,11 +42,43 @@
      "link": "https://m.entertain.naver.com/article/109/0005643816"
     }
    ]
+  },
+  {
+   "keyword": "토트넘 입스위치",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 3,
+   "press": 3,
+   "firstArticleAt": "2026-11-21T16:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[PL REVIEW] '토트넘의 새로운 희망 등장!' 18세 윌리엄스-바넷, PL 첫 선...",
+     "press": "interfootball.co.kr",
+     "publishedAt": "2026-11-21T16:59:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/413/0000226946"
+    },
+    {
+     "title": "대선배 손흥민 말 맞았다…양민혁 헤매는 사이, 토트넘 18살 경쟁자 '선...",
+     "press": "fourfourtwo.co.kr",
+     "publishedAt": "2026-11-21T16:56:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/411/0000090293"
+    },
+    {
+     "title": "\"토트넘에 이런 선수가 있었다니\"...18세 신성, PL 첫 선발부터 1골 1도움...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-21T16:56:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/109/0005643820"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 885,
+  "flagged": 886,
   "matched": 527,
   "avgLeadMin": 609,
   "recent": [
