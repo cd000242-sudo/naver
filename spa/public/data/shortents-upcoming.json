@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T11:59:41.466Z",
+ "builtAt": "2026-11-21T12:09:44.294Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,76 +8,204 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 27,
  "candidates": [
   {
-   "keyword": "소정리역 화물열차 탈선",
+   "keyword": "코레일 경부선 일반열차",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 19,
-   "recent20": 2,
-   "press": 19,
-   "firstArticleAt": "2026-11-21T10:39:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "코레일 \"화물열차 탈선 복구 완료\"…22일 첫차부터 운행 재개",
-     "press": "segyebiz.com",
-     "publishedAt": "2026-11-21T11:58:00.000Z",
-     "link": "http://www.segyebiz.com/newsView/20261121506226?OutUrl=naver"
-    },
-    {
-     "title": "[리포트] 화물열차 탈선… 경부선 일반열차 운행 중단에 수험생 불편",
-     "press": "tjmbc.co.kr",
-     "publishedAt": "2026-11-21T11:45:00.000Z",
-     "link": "https://tjmbc.co.kr/NewsArticle/874681"
-    },
-    {
-     "title": "화물열차 탈선 여파 광주-용산 일반열차 운행 중단",
-     "press": "kjmbc.co.kr",
-     "publishedAt": "2026-11-21T11:25:00.000Z",
-     "link": "https://kjmbc.co.kr/NewsArticle/1546735"
-    }
-   ]
-  },
-  {
-   "keyword": "22일 첫차 정상 운행",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 17,
-   "recent20": 0,
-   "press": 16,
+   "articles90": 43,
+   "recent20": 9,
+   "press": 39,
    "firstArticleAt": "2026-11-21T10:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "코레일 \"경부선 일반열차 내일 첫차부터 정상 운행 예정\"",
+     "title": "코레일 “22일 첫차부터 경부선 일반열차 운행 재개”",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-21T12:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413538?sid=102"
+    },
+    {
+     "title": "경부선 탈선 사고 여파...일반열차 운행 차질",
+     "press": "tbc.co.kr",
+     "publishedAt": "2026-11-21T12:08:00.000Z",
+     "link": "https://www.tbc.co.kr/news/view?pno=20261121094833AE08939&id=213631"
+    },
+    {
+     "title": "경부선 화물열차 탈선 '복구 지속'…내일 첫차 운행 재개",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-21T12:02:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086075"
+    }
+   ]
+  },
+  {
+   "keyword": "1251회 로또 당첨 번호",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 19,
+   "recent20": 12,
+   "press": 15,
+   "firstArticleAt": "2026-11-21T11:40:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "로또 1251회 당첨번호 조회···'1등 몽땅 자동 14명'",
      "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-21T11:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000554276?sid=102"
+     "publishedAt": "2026-11-21T12:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000554277?sid=101"
     },
     {
-     "title": "화물열차 5량 '탈선 물의' 경부선...코레일, 22일 첫차 정상화",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-21T11:24:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=885816"
+     "title": "제1251회 로또 1등 14명···당첨금 20억6884만원",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-21T12:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484141?sid=101"
     },
     {
-     "title": "탈선에 멈춰선 경부선 일반열차, 내일 첫차부터 정상 운행",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-21T11:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833316?sid=102"
+     "title": "로또 1251회 1등 14명…당첨금 각 20억6884만원",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-21T12:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002726600?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "50대 성범죄자 전자발찌 도주",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 4,
+   "press": 9,
+   "firstArticleAt": "2026-11-21T11:17:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "진천서 전자발찌 끊고 도주한 56세 성범죄자 공개수배",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-21T11:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193143?sid=102"
+    },
+    {
+     "title": "충북 진천서 전자발찌 훼손하고 도망간 50대 성범죄자 공개 수배",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-21T11:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000966956?sid=102"
+    },
+    {
+     "title": "“사투리 쓴다” 진천서 전자발찌 끊고 도주한 50대, 공개수배",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-21T11:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003566881?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "최민정 쇼트트랙 3연속 우승",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-21T11:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "최민정 \"팬들의 은퇴 만류, 마음은 알지만 일단 경기 집중\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-21T11:51:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/055/0001404809"
+    },
+    {
+     "title": "최민정, 쇼트트랙 3차 월드투어 여자 1000ｍ 금메달",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-21T11:50:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3450939"
+    },
+    {
+     "title": "'아웃코스로 한 명, 인코스로 또 한 명' 최민정, 마지막 2바퀴 역전쇼로...",
+     "press": "maniareport.com",
+     "publishedAt": "2026-11-21T11:30:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/425/0000215251"
+    }
+   ]
+  },
+  {
+   "keyword": "방탄소년단·코르티스 대상 수상",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-21T10:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "방탄소년단, 이틀 연속 '마마' 대상…코르티스 '레드레드' 올해의 노래",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-21T12:07:00.000Z",
+     "link": "https://m.entertain.naver.com/article/119/0003157939"
+    },
+    {
+     "title": "‘2026 마마 어워즈’ 둘째 날, BTS·코르티스 대상 수상",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-21T12:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484140?sid=103"
+    },
+    {
+     "title": "2026 MAMA AWARDS, 360도 K팝 소통우주 완성…BTS·엔하이픈·코르티스 대...",
+     "press": "nc.press",
+     "publishedAt": "2026-11-21T11:36:00.000Z",
+     "link": "https://www.nc.press/news/articleView.html?idxno=631578"
+    }
+   ]
+  },
+  {
+   "keyword": "홍대입구역 버스 인도 돌진 6명 부상",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-21T11:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "홍대입구역 인근서 버스 인도 돌진…3중 추돌사고로 6명 부상",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-21T12:04:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=783688"
+    },
+    {
+     "title": "토요일 저녁, 홍대입구역서 버스 인도로 돌진…3중 추돌사고, 6명 부상",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-21T12:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002834480?sid=102"
+    },
+    {
+     "title": "홍대입구역서 3중 추돌사고로 버스 인도 돌진⋯6명 부상",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-21T11:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001077207?sid=102"
     }
    ]
   },
   {
    "keyword": "수능 신고 포상금 1억",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 7,
    "recent20": 0,
@@ -107,66 +235,34 @@
    ]
   },
   {
-   "keyword": "이재명 울산 전통시장 방문",
+   "keyword": "k리그1",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-21T10:30:00.000Z",
+   "articles90": 8,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-21T10:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이재명 대통령, 울산 전통시장 연이어 방문…'민생 체감 경청' 행보",
-     "press": "ppss.kr",
-     "publishedAt": "2026-11-21T11:37:00.000Z",
-     "link": "https://www.ppss.kr/news/articleView.html?idxno=322222"
+     "title": "수원 삼성, K리그1 승격 이어 K리그2 우승 축포까지",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-21T12:08:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1139051"
     },
     {
-     "title": "울산 전통시장 찾은 李 “내년엔 더 좋아질 것”",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-21T11:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001206397?sid=100"
+     "title": "K리그1 대전, 10경기 무패…2위 울산과 승점 1점 차",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-21T12:07:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/055/0001404810"
     },
     {
-     "title": "李, 울산 전통시장 2곳 '깜짝 방문'… \"내년에는 좀 더 좋아질 것\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-21T11:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000966955?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "대구 경북 규탄대회",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-21T10:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "국힘 안태욱, 대구 '이재명 탈옥법' 규탄대회 참석",
-     "press": "pennmike.com",
-     "publishedAt": "2026-11-21T11:32:00.000Z",
-     "link": "https://www.pennmike.com/news/articleView.html?idxno=132439"
-    },
-    {
-     "title": "\"조희대 탄핵 땐 정권 붕괴\"…국힘, 대구서 대규모 장외 집회",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-21T11:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005356623?sid=100"
-    },
-    {
-     "title": "대구·경북 규탄대회 참석해 규탄사 하는 정점식 원내대표",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-21T11:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016455932?sid=100"
+     "title": "수원 삼성 김주찬, \"우리는 K리그1에서도 우승할 자격 있다\"",
+     "press": "kgnews.co.kr",
+     "publishedAt": "2026-11-21T11:36:00.000Z",
+     "link": "https://www.kgnews.co.kr/news/article.html?no=920543"
     }
    ]
   },
@@ -203,77 +299,12 @@
    ]
   },
   {
-   "keyword": "k리그1",
-   "sources": [
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-21T10:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "수원 삼성 김주찬, \"우리는 K리그1에서도 우승할 자격 있다\"",
-     "press": "kgnews.co.kr",
-     "publishedAt": "2026-11-21T11:36:00.000Z",
-     "link": "https://www.kgnews.co.kr/news/article.html?no=920543"
-    },
-    {
-     "title": "이정효 수원 삼성 감독 \"승격과 우승에 취하지 않겠다…K리그1서 더 높은...",
-     "press": "kgnews.co.kr",
-     "publishedAt": "2026-11-21T11:34:00.000Z",
-     "link": "https://www.kgnews.co.kr/news/article.html?no=920542"
-    },
-    {
-     "title": "아직 끝나지 않은 K리그1 ‘2위 싸움’…대전은 강원에 역전승, 울산은...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-21T11:26:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/144/0001151032"
-    }
-   ]
-  },
-  {
-   "keyword": "코르티스, 1년 만에 대상 수상",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-21T10:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "2026 MAMA AWARDS, 360도 K팝 소통우주 완성…BTS·엔하이픈·코르티스 대...",
-     "press": "nc.press",
-     "publishedAt": "2026-11-21T11:36:00.000Z",
-     "link": "https://www.nc.press/news/articleView.html?idxno=631578"
-    },
-    {
-     "title": "방탄소년단·코르티스, '2026 마마 어워즈' 대상…하이브 4개 대상 석권",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-21T11:20:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014337504"
-    },
-    {
-     "title": "방탄소년단, '2026 MAMA' 5관왕…코르티스 대상·빅뱅 3관왕",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-21T11:10:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=783681"
-    }
-   ]
-  },
-  {
    "keyword": "김민석",
    "sources": [
-    "signal.bz",
     "google"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-21T11:04:00.000Z",
    "exclusive": false,
@@ -298,46 +329,38 @@
      "link": "https://n.news.naver.com/mnews/article/001/0016455933?sid=100"
     }
    ]
-  },
-  {
-   "keyword": "인도네시아 규모 6.8 지진",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-21T10:33:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "인도네시아 말라쿠주 앞 반다해에서 6.8 지진 발생",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-21T11:10:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085179"
-    },
-    {
-     "title": "인도네시아 딜리 동북동쪽 해역서 규모 6.8 강진 발생",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-21T10:34:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2651229"
-    },
-    {
-     "title": "[속보] 인도네시아 딜리 동북동쪽 바다서 규모 6.8 지진",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-21T10:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000161859?sid=104"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 864,
-  "matched": 510,
-  "avgLeadMin": 631,
+  "flagged": 870,
+  "matched": 514,
+  "avgLeadMin": 651,
   "recent": [
+   {
+    "keyword": "러 군용기 KADIZ 진입 전투기 출격",
+    "hitKeyword": "전투기 조종사 간식",
+    "hitAt": "2026-11-21T21:00:00+09:00",
+    "leadMin": 6524
+   },
+   {
+    "keyword": "군용기 KADIZ 진입 전투기 출격",
+    "hitKeyword": "전투기 조종사 간식",
+    "hitAt": "2026-11-21T21:00:00+09:00",
+    "leadMin": 6484
+   },
+   {
+    "keyword": "유노윤호 와일드카드 합류",
+    "hitKeyword": "놀뭐 유노윤호 효연",
+    "hitAt": "2026-11-21T21:00:00+09:00",
+    "leadMin": 41
+   },
+   {
+    "keyword": "유노윤호 와일드카드 섭외",
+    "hitKeyword": "놀뭐 유노윤호 효연",
+    "hitAt": "2026-11-21T21:00:00+09:00",
+    "leadMin": 20
+   },
    {
     "keyword": "항공",
     "hitKeyword": "미군 항공모함 간식",
@@ -373,30 +396,6 @@
     "hitKeyword": "성범죄자 전자발찌 도주",
     "hitAt": "2026-11-21T19:30:00+09:00",
     "leadMin": 71
-   },
-   {
-    "keyword": "평창 공기총 사고",
-    "hitKeyword": "평창 공기총 사고",
-    "hitAt": "2026-11-21T19:30:00+09:00",
-    "leadMin": 21
-   },
-   {
-    "keyword": "수원 삼성 우승 확정",
-    "hitKeyword": "수원 삼성 K리그2 우승",
-    "hitAt": "2026-11-21T19:30:00+09:00",
-    "leadMin": 1
-   },
-   {
-    "keyword": "연준",
-    "hitKeyword": "TXT 연준 나혼산",
-    "hitAt": "2026-11-21T19:00:00+09:00",
-    "leadMin": 1053
-   },
-   {
-    "keyword": "MBK, 와콤 인수 추진",
-    "hitKeyword": "와콤 1조원 인수",
-    "hitAt": "2026-11-21T19:00:00+09:00",
-    "leadMin": 31
    }
   ]
  }
