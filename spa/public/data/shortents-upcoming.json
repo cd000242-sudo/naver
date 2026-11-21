@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T22:33:07.737Z",
+ "builtAt": "2026-11-21T22:43:10.945Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "소설 절기",
    "sources": [
     "daum"
    ],
-   "articles90": 7,
+   "articles90": 9,
    "recent20": 2,
-   "press": 7,
+   "press": 9,
    "firstArticleAt": "2026-11-21T21:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "‘소설’ 아침 서울 영하 5도·춘천 영하 9.5도… 전국 대체로 맑음",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-21T22:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001206423?sid=102"
+    },
+    {
+     "title": "24절기 '소설' 전국 대체로 날씨 맑고 쌀쌀…전남·제주에는 비 또는 눈",
+     "press": "lecturernews.com",
+     "publishedAt": "2026-11-21T22:34:00.000Z",
+     "link": "https://www.lecturernews.com/news/articleView.html?idxno=214290"
+    },
+    {
      "title": "절기 '소설' 아침 영하권 추위…전북 낮 최고 3~8도 '맑음'",
      "press": "newsis.com",
      "publishedAt": "2026-11-21T22:18:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014337646?sid=102"
-    },
-    {
-     "title": "[오늘 날씨] 절기상 소설(小雪) 겨울 강추위 이어져-서울 아침 영하 4도...",
-     "press": "econonews.co.kr",
-     "publishedAt": "2026-11-21T22:18:00.000Z",
-     "link": "http://www.econonews.co.kr/news/articleView.html?idxno=447505"
-    },
-    {
-     "title": "[오늘날씨] '소설' 전국 맑고 추워…서울 낮 5도·내일 비·눈",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-21T22:12:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282635"
     }
    ]
   },
@@ -47,10 +47,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-21T21:10:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-21T22:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -99,10 +99,10 @@
      "link": "https://n.news.naver.com/mnews/article/119/0003157953?sid=104"
     },
     {
-     "title": "[韓경제 아킬레스건](60) 연봉 격차가 부른 양극화 : 대기업-중소기업간...",
-     "press": "newsfc.co.kr",
+     "title": "영암군, 2030 지역순환경제 기본계획 확정",
+     "press": "shinailbo.co.kr",
      "publishedAt": "2026-11-21T22:00:00.000Z",
-     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82473"
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5085918"
     }
    ]
   },
@@ -112,7 +112,7 @@
     "daum"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-21T22:00:00.000Z",
    "exclusive": false,
@@ -131,10 +131,140 @@
      "link": "https://n.news.naver.com/mnews/article/008/0005444487?sid=102"
     },
     {
-     "title": "로또 1251회 당첨번호 20억, '딱 하나 땜에 200억 놓쳤나'",
-     "press": "news.tf.co.kr",
+     "title": "1251회 로또, 1등 14명 20억씩…대박 판매점은?",
+     "press": "kbsm.net",
      "publishedAt": "2026-11-21T22:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000554292?sid=101"
+     "link": "https://www.kbsm.net/news/view.php?idx=542685"
+    }
+   ]
+  },
+  {
+   "keyword": "굿파트너 2",
+   "sources": [
+    "signal.bz",
+    "nate",
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-21T21:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'굿파트너2' 7.7%·'라이어' 3.6%…시청률 격차 확대",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-21T22:34:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282639"
+    },
+    {
+     "title": "[스브스夜] '굿파트너2' 김혜윤, \"이혼에 진심\"···장나라와 손 잡은 ...",
+     "press": "ent.sbs.co.kr",
+     "publishedAt": "2026-11-21T22:31:00.000Z",
+     "link": "https://m.entertain.naver.com/article/416/0000328215"
+    },
+    {
+     "title": "'굿파트너2' 장나라vs박해진, 김혜윤 두고 스카우트 전쟁 [전일야화]",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-21T21:20:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002082891"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-21T22:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[월드 프리즘] 젠슨 황, 엔비디아 이사회 흔들 '5가지 반격 카드'...실효...",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-21T22:26:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101747"
+    },
+    {
+     "title": "\"네 엄마가 낙태했어야\"…'유퀴즈 사랑꾼' 젠슨 황의 섬뜩한 공포 경영...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-21T22:24:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004127060"
+    },
+    {
+     "title": "젠슨 황, '낙태'까지 언급하며 막말... 추가 폭로 또 나왔다",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-21T22:00:00.000Z",
+     "link": "https://www.insight.co.kr/news/583043"
+    }
+   ]
+  },
+  {
+   "keyword": "EU 빅테크 디지털세",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-21T21:24:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘트럼프 눈치 접었나'…EU, 美 빅테크에 3% 디지털세 추진",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-21T22:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002394550?sid=104"
+    },
+    {
+     "title": "EU, 빅테크 디지털세 공식 제안…트럼프 행정부와 충돌 불가피",
+     "press": "tfmedia.co.kr",
+     "publishedAt": "2026-11-21T21:58:00.000Z",
+     "link": "https://www.tfmedia.co.kr/news/article.html?no=209097"
+    },
+    {
+     "title": "'사실상 미국 겨냥?'…EU, 빅테크 디지털세 공식 제안",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-21T21:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404816?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "2026년 11월 22일 운세",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-21T21:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오늘의 운세] 2026년11월 22일 (음 10월 14일)",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-21T22:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000161863?sid=103"
+    },
+    {
+     "title": "[AI] 오늘의 띠별 운세...2026.11.22(일요일)",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-21T21:30:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68183"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 22일 (일) 띠별운세 '겨울 채비를 시작하는 ...",
+     "press": "dailypop.kr",
+     "publishedAt": "2026-11-21T21:30:00.000Z",
+     "link": "http://www.dailypop.kr/news/articleView.html?idxno=104281"
     }
    ]
   },
@@ -144,7 +274,7 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-21T21:43:00.000Z",
    "exclusive": false,
@@ -176,7 +306,7 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-21T21:20:00.000Z",
    "exclusive": false,
@@ -205,7 +335,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 890,
+  "flagged": 892,
   "matched": 533,
   "avgLeadMin": 617,
   "recent": [
