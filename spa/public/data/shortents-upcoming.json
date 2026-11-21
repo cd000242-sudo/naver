@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T15:20:51.337Z",
+ "builtAt": "2026-11-21T15:30:55.126Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -49,7 +49,7 @@
     "daum"
    ],
    "articles90": 6,
-   "recent20": 3,
+   "recent20": 1,
    "press": 5,
    "firstArticleAt": "2026-11-21T14:31:00.000Z",
    "exclusive": false,
@@ -74,44 +74,12 @@
      "link": "https://www.bntnews.co.kr/article/view/bnt202611210163"
     }
    ]
-  },
-  {
-   "keyword": "홍대 인도 돌진 6명 경상",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-21T13:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "홍대입구역서 3중 추돌로 시내버스 인도 돌진…승객 6명 경상",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-21T14:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005607679?sid=102"
-    },
-    {
-     "title": "주말 홍대서 시내버스 삼중추돌·인도 돌진…승객 6명 병원 이송(종합)",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-21T13:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009302912?sid=102"
-    },
-    {
-     "title": "홍대입구역서 버스 2대·승용차 '쾅'…인도 돌진에 6명 부상",
-     "press": "weekly.chosun.com",
-     "publishedAt": "2026-11-21T13:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/053/0000063246?sid=102"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 890,
-  "matched": 534,
+  "flagged": 889,
+  "matched": 533,
   "avgLeadMin": 624,
   "recent": [
    {
