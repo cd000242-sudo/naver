@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T10:29:10.164Z",
+ "builtAt": "2026-11-21T10:39:13.317Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,10 +15,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 24,
-   "recent20": 3,
-   "press": 17,
-   "firstArticleAt": "2026-11-21T09:06:00.000Z",
+   "articles90": 22,
+   "recent20": 1,
+   "press": 16,
+   "firstArticleAt": "2026-11-21T09:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -43,81 +43,56 @@
    ]
   },
   {
-   "keyword": "평창 공기총 사고",
+   "keyword": "이 대통령 전통시장 방문",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 13,
+   "articles90": 14,
    "recent20": 3,
-   "press": 13,
-   "firstArticleAt": "2026-11-21T09:14:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "평창서 공기총 탄환에 행인 사망…60대 남성 과실 여부 수사",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-21T10:28:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=848000"
-    },
-    {
-     "title": "강원 평창서 공기총 사격 연습 중 60대 행인 맞아 숨져",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-21T10:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436158?sid=102"
-    },
-    {
-     "title": "[속보] 비닐하우스 옆 지나던 60대, 공기총에 맞아 사망",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-21T10:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701777?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "수원 삼성 우승 확정",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 17,
-   "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-21T09:00:00.000Z",
+   "press": 14,
+   "firstArticleAt": "2026-11-21T09:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "수원FC, 김포 잡고 서울E에 6점 앞선 2위 사수…다이렉트 승격 ‘청신호...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-21T09:58:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/468/0001282509"
+     "title": "李대통령, 울산 전통시장 방문…\"내년에는 조금 더 좋아질 것\"",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-21T10:30:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086072"
     },
     {
-     "title": "'전통 명가' 수원 삼성, K리그1 복귀 이어 K리그2 우승 조기 확정",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-21T09:56:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/469/0000966952"
+     "title": "울산 전통시장 찾은 李대통령...\"장사할 맛 나는 날 오도록 할 것\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-21T10:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005444450?sid=100"
     },
     {
-     "title": "수원 삼성, 승격 이어 K리그2 우승까지…수원FC는 승격까지 승점 1(종합...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-21T09:48:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/421/0009302832"
+     "title": "李, 울산 전통시장서 “내년에는 좀 더 좋아질 것”…‘최애’ 배추전 ...",
+     "press": "donga.com",
+     "publishedAt": "2026-11-21T10:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764147?sid=100"
     }
    ]
   },
   {
    "keyword": "이재명 탈옥법 대구 경북 규탄",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 13,
-   "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-21T09:00:00.000Z",
+   "articles90": 11,
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-21T09:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "국힘, 대구서 장외집회 “이재명 돌돌말아 청와대서 강제 퇴거시켜야”",
+     "press": "weekly.khan.co.kr",
+     "publishedAt": "2026-11-21T10:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/033/0000053546?sid=100"
+    },
     {
      "title": "국힘, 대구서 대규모 장외 집회 \"이재명 탄핵만이 답\"",
      "press": "newscj.com",
@@ -129,56 +104,51 @@
      "press": "sisafocus.co.kr",
      "publishedAt": "2026-11-21T09:54:00.000Z",
      "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367885"
-    },
-    {
-     "title": "국민의힘, 대구서 '조작기소 특검법' 규탄 집회…\"이재명 탈옥법\"",
-     "press": "daily.hankooki.com",
-     "publishedAt": "2026-11-21T09:48:00.000Z",
-     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1427624"
     }
    ]
   },
   {
-   "keyword": "수능 신고 최소 1억 포상",
+   "keyword": "호르무즈 유조선 피격",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-21T09:00:00.000Z",
+   "articles90": 7,
+   "recent20": 4,
+   "press": 7,
+   "firstArticleAt": "2026-11-21T09:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] 이재명 대통령 “수능 부정행위 포상금, 1건당 최소 1억원…가담...",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-21T10:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001232330?sid=100"
+     "title": "UKMTO “호르무즈 해협서 미확인 발사체에 유조선 잇단 피격”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-21T10:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004684678?sid=104"
     },
     {
-     "title": "李대통령 \"수능 부정행위 신고 포상금 1건당 최소 1억원\"",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-21T10:10:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086071"
+     "title": "호르무즈 해협서 미확인 발사체에 유조선 피격",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-21T10:26:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2651228"
     },
     {
-     "title": "李 \"수능 부정 신고, 1건당 최소 1억…자수 후 신고하면 감경과 포상\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-21T10:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652543?sid=100"
+     "title": "“호르무즈 해협서 미확인 발사체에 유조선 잇단 피격”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-21T10:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012298640?sid=104"
     }
    ]
   },
   {
    "keyword": "k리그1",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-21T09:00:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-21T09:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -203,34 +173,34 @@
    ]
   },
   {
-   "keyword": "빅뱅 기립 무대 최초 공개",
+   "keyword": "수능 신고 최소 1억 포상",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 8,
+   "articles90": 6,
    "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-21T09:05:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-21T09:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "데뷔 1년 만에 MAMA 대상 품은 코르티스… 빅뱅 완전체로 피날레 장식 [...",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-21T10:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/469/0000966953"
+     "title": "[속보] 이재명 대통령 “수능 부정행위 포상금, 1건당 최소 1억원…가담...",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-21T10:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001232330?sid=100"
     },
     {
-     "title": "빅뱅 지드래곤, 비녀→파격 장발 스타일링까지..\"머리가 힘드네요\"[스타...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-21T10:06:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003489182"
+     "title": "李대통령 \"수능 부정행위 신고 포상금 1건당 최소 1억원\"",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-21T10:10:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086071"
     },
     {
-     "title": "지드래곤, 핑크빛 오대오 장발 휘날리며 등장…빅뱅 뜨자 전원 '기립' [...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-21T09:51:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000785518"
+     "title": "李 \"수능 부정 신고, 1건당 최소 1억…자수 후 신고하면 감경과 포상\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-21T10:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000652543?sid=100"
     }
    ]
   },
@@ -239,10 +209,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-21T09:02:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-21T09:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -271,10 +241,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 6,
+   "articles90": 4,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-21T09:00:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-21T09:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -299,14 +269,46 @@
    ]
   },
   {
-   "keyword": "경기도교육청 교원 개인정보 유출",
+   "keyword": "김지민 김준호 태교 여행",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-21T09:13:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김지민, ♥김준호·뱃속 2세와 제주도로 떠났다…\"첫 여행\" [★해시태그...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-21T10:38:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002082822"
+    },
+    {
+     "title": "'임신 7개월' 김지민, 만삭 몸으로 ♥김준호와 첫 제주 태교 여행 \"우리...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-21T09:16:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005643653"
+    },
+    {
+     "title": "김지민♥김준호, 출산 앞두고 제주 태교여행…뱃속 아들까지 '다섯 식구...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-21T09:13:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004127006"
+    }
+   ]
+  },
+  {
+   "keyword": "교원 158명 유출",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-21T09:04:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-21T09:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -329,46 +331,32 @@
      "link": "https://www.newscj.com/news/articleView.html?idxno=3450916"
     }
    ]
-  },
-  {
-   "keyword": "FBI 범죄정보망 해킹",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-21T09:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "미 FBI, 법 집행기관 범죄 정보 DB 해킹 정황 조사",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-21T10:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001165149?sid=104"
-    },
-    {
-     "title": "FBI 범죄정보망 해킹 의혹…1,950만 건 기록 안전한가",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-21T09:32:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282440"
-    },
-    {
-     "title": "미 FBI 범죄정보망 침입 정황…농무부도 사이버공격",
-     "press": "kbmaeil.com",
-     "publishedAt": "2026-11-21T09:08:00.000Z",
-     "link": "https://www.kbmaeil.com/article/20261121500139"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 836,
-  "matched": 502,
-  "avgLeadMin": 639,
+  "flagged": 839,
+  "matched": 505,
+  "avgLeadMin": 635,
   "recent": [
+   {
+    "keyword": "성범죄자 전자발찌 진천",
+    "hitKeyword": "성범죄자 전자발찌 도주",
+    "hitAt": "2026-11-21T19:30:00+09:00",
+    "leadMin": 71
+   },
+   {
+    "keyword": "평창 공기총 사고",
+    "hitKeyword": "평창 공기총 사고",
+    "hitAt": "2026-11-21T19:30:00+09:00",
+    "leadMin": 21
+   },
+   {
+    "keyword": "수원 삼성 우승 확정",
+    "hitKeyword": "수원 삼성 K리그2 우승",
+    "hitAt": "2026-11-21T19:30:00+09:00",
+    "leadMin": 1
+   },
    {
     "keyword": "연준",
     "hitKeyword": "TXT 연준 나혼산",
@@ -410,24 +398,6 @@
     "hitKeyword": "LEET 이진우 의혹",
     "hitAt": "2026-11-21T15:00:00+09:00",
     "leadMin": 521
-   },
-   {
-    "keyword": "EU 영국 정상회담",
-    "hitKeyword": "미중러 정상회담 한반도",
-    "hitAt": "2026-11-21T14:00:00+09:00",
-    "leadMin": 732
-   },
-   {
-    "keyword": "나혼산",
-    "hitKeyword": "김신영 나혼산 수영",
-    "hitAt": "2026-11-21T13:30:00+09:00",
-    "leadMin": 773
-   },
-   {
-    "keyword": "김신영 남자들의 직각어깨",
-    "hitKeyword": "김신영 직각 어깨",
-    "hitAt": "2026-11-21T13:00:00+09:00",
-    "leadMin": 270
    }
   ]
  }
