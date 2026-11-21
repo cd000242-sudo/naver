@@ -1,19 +1,19 @@
 {
-  "publishedAt": "2026-11-20T21:46:45.579Z",
+  "publishedAt": "2026-11-21T21:38:16.004Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
     "candidates": 240,
-    "niche": 1,
-    "preemption": 11,
+    "niche": 0,
+    "preemption": 3,
     "pending": 0
   },
   "freeSample": {
-    "day": "2026-11-21",
+    "day": "2026-11-22",
     "keywords": [
-      "천위페이 나이",
-      "엔하이픈 군대"
+      "엔하이픈 군대",
+      "천위페이 나이"
     ]
   },
   "rows": [
@@ -109,7 +109,42 @@
       },
       "subKeywords": null,
       "keywordPool": null,
-      "trend": null,
+      "trend": {
+        "series": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          3,
+          0,
+          100,
+          24,
+          6,
+          4,
+          6,
+          0,
+          0,
+          2,
+          8
+        ],
+        "label": "📉 단발성",
+        "recommendation": "회피! 지난 며칠 폭발 후 급락 중. 글 써도 유입 없음",
+        "measuredAt": "2026-11-21T21:38:16.568Z"
+      },
       "kinCount": 112,
       "kinTop": [
         {
@@ -147,7 +182,8 @@
       "measuredAt": "2026-11-20T21:39:35.203Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
-      "kinMode": "date-views-v2"
+      "kinMode": "date-views-v2",
+      "carried": true
     },
     {
       "keyword": "천위페이 나이",
@@ -243,7 +279,6 @@
       "keywordPool": null,
       "trend": {
         "series": [
-          28,
           35,
           35,
           18,
@@ -271,9 +306,10 @@
           40,
           23,
           18,
-          35
+          35,
+          28
         ],
-        "measuredAt": "2026-11-20T21:46:46.107Z"
+        "measuredAt": "2026-11-21T21:38:16.568Z"
       },
       "kinCount": 0,
       "kinTop": [],
@@ -286,6 +322,202 @@
     }
   ],
   "observations": [
+    {
+      "keyword": "AMF FESTA 수상자",
+      "issue": "AMF FESTA 수상자",
+      "topic": "AMF FESTA 수상자",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 2,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 2",
+        "선점 후보 — 경쟁 문서 2건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-21T21:35:31.115Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "박종민 모의고사",
+      "issue": "박종민",
+      "topic": "박종민",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 174,
+      "documentCountMeasured": true,
+      "searchVolume": 20,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 20",
+        "문서수 174",
+        "선점 후보 — 경쟁 문서 174건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 29,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-21T21:35:31.115Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "입양 산강",
+      "issue": "입양",
+      "topic": "입양",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 149,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 149",
+        "선점 후보 — 경쟁 문서 149건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 296,
+      "kinTop": [
+        {
+          "title": "로블록스 입양 현거 시세 알려주세요 ㅠㅠ",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=211&docId=485296731&answerNo=1",
+          "views": 427,
+          "answers": 1
+        },
+        {
+          "title": "입양 현거 가치",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=11080307&docId=485095711&answerNo=1",
+          "views": 277,
+          "answers": 1
+        },
+        {
+          "title": "로블록스 입양하세요 고슴도치 질문",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=50606&docId=405885256&answerNo=2",
+          "views": 190,
+          "answers": 2
+        },
+        {
+          "title": "입양하세요 거북이vs산강",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=204&docId=483558421&answerNo=2",
+          "views": 151,
+          "answers": 2
+        },
+        {
+          "title": "입양하세요 산강 가치",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=130307&docId=491960334&answerNo=4",
+          "views": 104,
+          "answers": 4
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-11-21T21:35:31.115Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "뉴로퓨전 채용",
       "issue": "뉴로퓨전",
@@ -337,7 +569,8 @@
       "monetize": null,
       "measuredAt": "2026-11-20T21:39:35.203Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "뉴로퓨전 초봉",
@@ -389,7 +622,8 @@
       "monetize": null,
       "measuredAt": "2026-11-20T21:39:35.203Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "뉴로퓨전 주식회사",
@@ -442,7 +676,8 @@
       "monetize": null,
       "measuredAt": "2026-11-20T21:39:35.203Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "뉴로퓨전 잡플래닛",
@@ -494,7 +729,8 @@
       "monetize": null,
       "measuredAt": "2026-11-20T21:39:35.203Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "셀렉트스타 연봉",
@@ -547,7 +783,8 @@
       "monetize": null,
       "measuredAt": "2026-11-20T21:39:35.203Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "뉴로퓨전 블라인드",
@@ -599,7 +836,8 @@
       "monetize": null,
       "measuredAt": "2026-11-20T21:39:35.203Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "셀렉트스타 잡플래닛",
@@ -651,7 +889,8 @@
       "monetize": null,
       "measuredAt": "2026-11-20T21:39:35.203Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "뉴로퓨전 연봉",
@@ -703,7 +942,8 @@
       "monetize": null,
       "measuredAt": "2026-11-20T21:39:35.203Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "뉴로퓨전 투자유치",
@@ -755,7 +995,8 @@
       "monetize": null,
       "measuredAt": "2026-11-20T21:39:35.203Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "뉴로퓨전 매출",
@@ -807,7 +1048,8 @@
       "monetize": null,
       "measuredAt": "2026-11-20T21:39:35.203Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "셀렉트스타 블라인드",
@@ -859,7 +1101,8 @@
       "monetize": null,
       "measuredAt": "2026-11-20T21:39:35.203Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     }
   ],
   "rejectedCount": 0,
@@ -934,7 +1177,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 1
+      "rowCount": 1,
+      "carried": true
     },
     {
       "issue": "천위페이",
@@ -1009,22 +1253,5 @@
       "rowCount": 1,
       "carried": true
     }
-  ],
-  "enrichedAt": "2026-11-20T21:47:05.651Z",
-  "enrichStats": {
-    "enriched": 0,
-    "subsAdded": 0,
-    "titleUpgraded": 0,
-    "proposed": 0,
-    "verified": 0,
-    "judged": 0,
-    "judgedBad": 0,
-    "related": 0,
-    "picked": 0,
-    "pooled": 0,
-    "aiTitled": 0,
-    "trended": 0,
-    "aiCalls": 2,
-    "partial": false
-  }
+  ]
 }
