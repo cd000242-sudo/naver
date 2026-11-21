@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T15:30:55.126Z",
+ "builtAt": "2026-11-21T15:40:58.343Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,45 +11,12 @@
  "measured": 26,
  "candidates": [
   {
-   "keyword": "김혜윤",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-21T14:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'굿파트너2' 김혜윤, 장나라 파트너 됐다...\"이혼에 진심\" [종합]",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-21T14:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002082865"
-    },
-    {
-     "title": "'굿파트너2' 김혜윤, 류승수 떠나…박해진 피해…장나라 손 잡았다 [종합...",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-21T14:28:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000053809"
-    },
-    {
-     "title": "김혜윤, 장나라 손잡은 이유 있었다…친모 등장에 정색('굿파트너2')[셀...",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-21T14:18:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1795268904531343006"
-    }
-   ]
-  },
-  {
    "keyword": "1251회 로또 당첨 번호",
    "sources": [
     "daum"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-21T14:31:00.000Z",
    "exclusive": false,
@@ -74,13 +41,45 @@
      "link": "https://www.bntnews.co.kr/article/view/bnt202611210163"
     }
    ]
+  },
+  {
+   "keyword": "EU 빅테크 디지털세",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-21T14:41:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "EU, 빅테크 디지털세 공식 제안…트럼프와 충돌 예상",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-21T14:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000121913?sid=104"
+    },
+    {
+     "title": "美 중간선거 참패 틈타… EU, 빅테크 겨냥 디지털세 도입 추진",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-21T14:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001206402?sid=104"
+    },
+    {
+     "title": "EU, 빅테크 디지털세 공식 제안…트럼프와 충돌 불가피",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-21T14:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928572?sid=104"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
   "flagged": 889,
-  "matched": 533,
-  "avgLeadMin": 624,
+  "matched": 532,
+  "avgLeadMin": 610,
   "recent": [
    {
     "keyword": "굿파트너 2",
