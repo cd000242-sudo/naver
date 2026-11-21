@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T17:31:37.082Z",
+ "builtAt": "2026-11-21T17:41:40.268Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,73 +8,8 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
- "candidates": [
-  {
-   "keyword": "이란 미 F-16 공격 주장",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-21T16:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이란 \"美 F-16 전투기 공격해 비상착륙\"…미군 \"거짓 주장\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-21T16:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928573?sid=104"
-    },
-    {
-     "title": "이란 \"美 F-16 공격해 비상착륙\"… 미군 \"거짓 주장\"",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-21T16:46:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3450977"
-    },
-    {
-     "title": "美 \"이란의 F-16 공격 주장은 거짓…역내 모든 전투기 안전\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-21T16:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009302918?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "토트넘 입스위치",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-21T16:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[PL REVIEW] '토트넘의 새로운 희망 등장!' 18세 윌리엄스-바넷, PL 첫 선...",
-     "press": "interfootball.co.kr",
-     "publishedAt": "2026-11-21T16:59:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/413/0000226946"
-    },
-    {
-     "title": "대선배 손흥민 말 맞았다…양민혁 헤매는 사이, 토트넘 18살 경쟁자 '선...",
-     "press": "fourfourtwo.co.kr",
-     "publishedAt": "2026-11-21T16:56:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/411/0000090293"
-    },
-    {
-     "title": "\"토트넘에 이런 선수가 있었다니\"...18세 신성, PL 첫 선발부터 1골 1도움...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-21T16:56:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/109/0005643820"
-    }
-   ]
-  }
- ],
+ "measured": 26,
+ "candidates": [],
  "hitRate": {
   "days": 7,
   "flagged": 887,
