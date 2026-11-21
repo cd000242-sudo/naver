@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T20:12:22.300Z",
+ "builtAt": "2026-11-21T20:22:25.458Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -9,40 +9,7 @@
   "minPress": 2
  },
  "measured": 26,
- "candidates": [
-  {
-   "keyword": "아침 기온 영하 9도",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 3,
-   "press": 4,
-   "firstArticleAt": "2026-11-21T19:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오늘의 날씨] 부산·경남(22일, 일)…부산 0도·거창 -5도 '아침 추위 기...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-21T20:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009302936?sid=102"
-    },
-    {
-     "title": "[오늘의 날씨] 경기(22일, 일)…아침 영하 9도 '맹추위'",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-21T20:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009302925?sid=102"
-    },
-    {
-     "title": "[오늘의 날씨] 충북·세종(22일, 일)…제천 -9도·음성 -8도, 아침 영하권",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-21T20:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009302932?sid=102"
-    }
-   ]
-  }
- ],
+ "candidates": [],
  "hitRate": {
   "days": 7,
   "flagged": 886,
