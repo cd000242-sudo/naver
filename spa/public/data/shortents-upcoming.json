@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T12:49:57.837Z",
+ "builtAt": "2026-11-21T13:00:01.850Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 28,
-   "recent20": 3,
-   "press": 22,
+   "articles90": 30,
+   "recent20": 4,
+   "press": 24,
    "firstArticleAt": "2026-11-21T11:40:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
+     "title": "로또 1등 14명 모두 '자동'…당첨금 각 20억7000만원 받는다",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-21T12:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005356626?sid=103"
+    },
+    {
+     "title": "한 판매점서 로또 2등 10게임 당첨…강릉서 1등 나와",
+     "press": "kado.net",
+     "publishedAt": "2026-11-21T12:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000212548?sid=101"
+    },
+    {
      "title": "1251회 로또 1등 당첨번호 '14·18·19·29·40·45'번…1등 당첨지역 어디...",
      "press": "dailian.co.kr",
      "publishedAt": "2026-11-21T12:48:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/119/0003157940?sid=102"
-    },
-    {
-     "title": "로또 2등, 판매점 한곳서 ‘10장’ 쏟아졌다…동일인이면 5억 받는다",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-21T12:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005767064?sid=102"
-    },
-    {
-     "title": "1251회 로또, 1등 당첨자 14명 '20억' 잭팟⋯지난 주 이어 전원 자동",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-21T12:30:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2651235"
     }
    ]
   },
@@ -47,10 +47,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 18,
-   "recent20": 4,
-   "press": 17,
-   "firstArticleAt": "2026-11-21T11:23:00.000Z",
+   "articles90": 15,
+   "recent20": 3,
+   "press": 14,
+   "firstArticleAt": "2026-11-21T11:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -79,10 +79,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-21T11:21:00.000Z",
+   "articles90": 10,
+   "recent20": 0,
+   "press": 10,
+   "firstArticleAt": "2026-11-21T11:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -99,10 +99,10 @@
      "link": "https://n.news.naver.com/mnews/article/018/0006413538?sid=102"
     },
     {
-     "title": "코레일 경부선 일반열차 22일 첫차부터 운행 재개 예정…임시열차 15대...",
-     "press": "cbci.co.kr",
+     "title": "22일 첫차부터 경부선 일반열차 운행 재개 예정",
+     "press": "kukinews.com",
      "publishedAt": "2026-11-21T12:02:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629474"
+     "link": "https://www.kukinews.com/article/view/kuk202611210030"
     }
    ]
   },
@@ -143,10 +143,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 1,
+   "articles90": 3,
+   "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-21T11:30:00.000Z",
+   "firstArticleAt": "2026-11-21T11:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
