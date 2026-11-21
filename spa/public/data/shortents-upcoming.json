@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T10:09:03.587Z",
+ "builtAt": "2026-11-21T10:19:06.770Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,49 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
+  {
+   "keyword": "코르티스 대상",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 24,
+   "recent20": 5,
+   "press": 18,
+   "firstArticleAt": "2026-11-21T08:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "데뷔 1년 만에 MAMA 대상 품은 코르티스… 빅뱅 완전체로 피날레 장식 [...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-21T10:14:00.000Z",
+     "link": "https://m.entertain.naver.com/article/469/0000966953"
+    },
+    {
+     "title": "5관왕 방탄소년단→엔하이픈·코르티스, 하이브 집안 대상 싹쓸이[종합...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-21T10:13:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001189951"
+    },
+    {
+     "title": "'마마 어워즈' BTS·코르티스·엔하이픈 '대상'…빅뱅 '기립' 공개 [종합...",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-21T10:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/015/0005356617"
+    }
+   ]
+  },
   {
    "keyword": "대구 경북 규탄대회",
    "sources": [
     "nate"
    ],
-   "articles90": 25,
-   "recent20": 2,
-   "press": 20,
-   "firstArticleAt": "2026-11-21T08:40:00.000Z",
+   "articles90": 19,
+   "recent20": 1,
+   "press": 15,
+   "firstArticleAt": "2026-11-21T08:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -43,98 +75,34 @@
    ]
   },
   {
-   "keyword": "이 대통령 전통시장 방문",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 18,
-   "recent20": 2,
-   "press": 17,
-   "firstArticleAt": "2026-11-21T08:49:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이 대통령, 울산 전통시장 두 곳 방문…\"내년에는 조금 더 좋아질 것\"",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-21T10:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000521834?sid=100"
-    },
-    {
-     "title": "이 대통령, 울산 전통시장 방문...\"내년은 조금 더 좋아질 것\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-21T09:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436154?sid=100"
-    },
-    {
-     "title": "李, 울산 전통시장서 장바구니 물가 점검‥\"내년엔 좀 더 좋아질 것\"",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-21T09:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001537139?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "평창 공기총 사고",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 12,
+   "articles90": 14,
+   "recent20": 4,
+   "press": 14,
    "firstArticleAt": "2026-11-21T08:56:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
+     "title": "강원 평창서 공기총 사격 연습 중 60대 행인 맞아 숨져",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-21T10:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436158?sid=102"
+    },
+    {
+     "title": "[속보] 비닐하우스 옆 지나던 60대, 공기총에 맞아 사망",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-21T10:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701777?sid=102"
+    },
+    {
      "title": "공기총 사격 연습하다 지나가던 행인 맞혀…60대 남성 사망",
      "press": "wikitree.co.kr",
      "publishedAt": "2026-11-21T10:04:00.000Z",
      "link": "https://www.wikitree.co.kr/articles/1176568"
-    },
-    {
-     "title": "공기총 영점 조절 중 발사된 총알에 길 가던 60대 숨져(종합)",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-21T10:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009302835?sid=102"
-    },
-    {
-     "title": "공기총 사격연습 중 날아간 총알에…길 가던 60대 행인 숨져",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-21T09:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928548?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "경기도교육청 교원 개인정보 유출",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-21T08:41:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "경기도교육청, 교원 158명 개인정보 유출…\"불특정 다수에 공개되지 않...",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-21T09:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652539?sid=102"
-    },
-    {
-     "title": "경기도교육청, 교원 158명 개인정보 유출…\"제3자 열람 정황 없어\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-21T09:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009302833?sid=102"
-    },
-    {
-     "title": "경기도교육청, 교원 158명 개인정보 유출 사고 발생",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-21T09:34:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3450916"
     }
    ]
   },
@@ -145,11 +113,17 @@
    ],
    "articles90": 9,
    "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-21T08:46:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-21T08:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "데뷔 1년 만에 MAMA 대상 품은 코르티스… 빅뱅 완전체로 피날레 장식 [...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-21T10:14:00.000Z",
+     "link": "https://m.entertain.naver.com/article/469/0000966953"
+    },
     {
      "title": "빅뱅 지드래곤, 비녀→파격 장발 스타일링까지..\"머리가 힘드네요\"[스타...",
      "press": "starnewskorea.com",
@@ -161,12 +135,6 @@
      "press": "tenasia.co.kr",
      "publishedAt": "2026-11-21T09:51:00.000Z",
      "link": "https://m.entertain.naver.com/article/312/0000785518"
-    },
-    {
-     "title": "BTS 5관왕→코르티스 1년 만에 첫 대상…빅뱅 20주년까지 빛난 '2026 MAMA'...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-21T09:46:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000640226"
     }
    ]
   },
@@ -175,10 +143,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 9,
-   "recent20": 1,
+   "articles90": 8,
+   "recent20": 0,
    "press": 8,
-   "firstArticleAt": "2026-11-21T08:47:00.000Z",
+   "firstArticleAt": "2026-11-21T08:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -207,10 +175,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-21T08:43:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-21T08:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -235,14 +203,46 @@
    ]
   },
   {
-   "keyword": "FBI 범죄정보망 해킹",
+   "keyword": "경기도교육청 교원 개인정보 유출",
    "sources": [
     "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
-   "firstArticleAt": "2026-11-21T08:42:00.000Z",
+   "firstArticleAt": "2026-11-21T08:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "경기도교육청, 교원 158명 개인정보 유출…\"불특정 다수에 공개되지 않...",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-21T09:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000652539?sid=102"
+    },
+    {
+     "title": "경기도교육청, 교원 158명 개인정보 유출…\"제3자 열람 정황 없어\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-21T09:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009302833?sid=102"
+    },
+    {
+     "title": "경기도교육청, 교원 158명 개인정보 유출 사고 발생",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-21T09:34:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3450916"
+    }
+   ]
+  },
+  {
+   "keyword": "FBI 범죄정보망 해킹",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-21T08:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -269,7 +269,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 829,
+  "flagged": 830,
   "matched": 502,
   "avgLeadMin": 639,
   "recent": [
