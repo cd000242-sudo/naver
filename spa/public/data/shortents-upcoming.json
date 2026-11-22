@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T02:04:29.988Z",
+ "builtAt": "2026-11-22T02:14:33.775Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,10 +15,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 22,
+   "articles90": 21,
    "recent20": 2,
-   "press": 22,
-   "firstArticleAt": "2026-11-22T00:44:00.000Z",
+   "press": 21,
+   "firstArticleAt": "2026-11-22T00:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -47,30 +47,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 18,
-   "recent20": 1,
-   "press": 18,
-   "firstArticleAt": "2026-11-22T00:37:00.000Z",
+   "articles90": 20,
+   "recent20": 4,
+   "press": 20,
+   "firstArticleAt": "2026-11-22T00:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "조국 “당명 속 ‘조국’이 제 이름은 아니지만… 당명 바꾸자”",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-22T01:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004010991?sid=100"
+     "title": "조국 “당명 개정 결정할 시점”…혁신당, 개명 절차 돌입[이런정치]",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-22T02:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002726696?sid=100"
     },
     {
-     "title": "“내 이름과 겹쳐 조롱까지”… 조국, 창당 1,000일 앞두고 당명 교체 제...",
-     "press": "jibs.co.kr",
-     "publishedAt": "2026-11-22T01:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/661/0000086903?sid=100"
+     "title": "조국, 당명 개정 제안…“제 이름과 겹쳐 생각…일부 조롱”",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-22T02:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002834543?sid=100"
     },
     {
-     "title": "조국혁신당 ‘조국’ 빠진다···“확장성 있는 당명 필요”",
-     "press": "weekly.khan.co.kr",
-     "publishedAt": "2026-11-22T01:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/033/0000053556?sid=100"
+     "title": "曺 \"범민주진보진영 좋아할 이름으로\"…혁신, 당명개정 착수",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-22T02:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016456297?sid=100"
     }
    ]
   },
@@ -82,10 +82,16 @@
    "articles90": 17,
    "recent20": 3,
    "press": 17,
-   "firstArticleAt": "2026-11-22T00:38:00.000Z",
+   "firstArticleAt": "2026-11-22T00:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "최태원 \"한일 기업·대학, AI 인재 함께 키우자\"…SK '아이젠' 통한 도쿄...",
+     "press": "greened.kr",
+     "publishedAt": "2026-11-22T02:04:00.000Z",
+     "link": "https://www.greened.kr/news/articleView.html?idxno=355244"
+    },
     {
      "title": "최태원 “한일 기업·대학 함께 AI 인재 키우자”…인턴십·일자리 연계...",
      "press": "ekn.kr",
@@ -97,12 +103,6 @@
      "press": "m-i.kr",
      "publishedAt": "2026-11-22T01:58:00.000Z",
      "link": "https://www.m-i.kr/news/articleView.html?idxno=2021713"
-    },
-    {
-     "title": "최태원 \"한일 기업·대학, AI 인재 함께 키우자\"…취업 연계 제안",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-22T01:47:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261122000037"
     }
    ]
   },
@@ -112,29 +112,61 @@
     "google"
    ],
    "articles90": 19,
-   "recent20": 12,
+   "recent20": 10,
    "press": 14,
-   "firstArticleAt": "2026-11-22T00:45:00.000Z",
+   "firstArticleAt": "2026-11-22T00:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "무신사, 수능 끝낸 수험생에 햄버거 증정…롯데리아와 이색 마케팅",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-22T02:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004684742?sid=101"
+    },
+    {
+     "title": "합천군, 수험생 위한 '별빛 공감 ON 콘서트' 개최",
+     "press": "idomin.com",
+     "publishedAt": "2026-11-22T02:06:00.000Z",
+     "link": "https://www.idomin.com/news/articleView.html?idxno=2020151"
+    },
     {
      "title": "성균관대 2027학년도 수시 논술시험 마친 수험생들 [포토]",
      "press": "etoday.co.kr",
      "publishedAt": "2026-11-22T02:02:00.000Z",
      "link": "https://www.etoday.co.kr/news/view/2651301"
+    }
+   ]
+  },
+  {
+   "keyword": "수능 수학 1등급 미적분 선택",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 13,
+   "recent20": 5,
+   "press": 13,
+   "firstArticleAt": "2026-11-22T01:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"수능 수학 1등급 85.7% '미적분·기하' 선택…확률과 통계 14.3% 그쳐\"",
+     "press": "kado.net",
+     "publishedAt": "2026-11-22T02:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000212572?sid=102"
     },
     {
-     "title": "무신사, 고생한 수험생 위해 '버거 트럭' 운영",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-22T02:02:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086150"
+     "title": "수능 수학 1등급 85.7% '미적분·기하'…이과생 교차지원 계속되나",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T02:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014337845?sid=102"
     },
     {
-     "title": "논술 마친 수험생들",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-22T01:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016456256?sid=102"
+     "title": "수능 수학 1등급 10명 중 8명 ‘미적분·기하’…확률과 통계는 14%",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-22T02:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000545110?sid=101"
     }
    ]
   },
@@ -143,11 +175,11 @@
    "sources": [
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 3,
+   "articles90": 13,
+   "recent20": 1,
    "press": 12,
    "firstArticleAt": "2026-11-22T00:47:00.000Z",
-   "exclusive": false,
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
@@ -171,60 +203,28 @@
    ]
   },
   {
-   "keyword": "수능 수학 1등급 미적분 선택",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 11,
-   "recent20": 6,
-   "press": 11,
-   "firstArticleAt": "2026-11-22T01:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "수능 수학 1등급 10명 중 8명 ‘미적분·기하’…확률과 통계는 14%",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-22T02:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000545110?sid=101"
-    },
-    {
-     "title": "수능 수학 1등급, 확률과 통계 선택자는 14.3% 추정…문과 정시 긴장",
-     "press": "kizmom.com",
-     "publishedAt": "2026-11-22T01:58:00.000Z",
-     "link": "https://www.kizmom.com/news/articleView.html?idxno=114127"
-    },
-    {
-     "title": "수능 수학 1등급 86% ‘미적분·기하’… 문과 교차지원 늘어날 듯",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-22T01:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001206453?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "HD건설기계 통합제품센터 준공",
    "sources": [
     "nate"
    ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 9,
+   "articles90": 10,
+   "recent20": 1,
+   "press": 10,
    "firstArticleAt": "2026-11-22T00:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "HD건설기계, 인도네시아 점유율 5위권 도전…진성티이씨·디와이파워도...",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-22T02:06:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=506688"
+    },
+    {
      "title": "HD건설기계, 인도네시아에 통합제품센터 준공",
      "press": "biz.chosun.com",
      "publishedAt": "2026-11-22T01:40:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/366/0001206449?sid=101"
-    },
-    {
-     "title": "HD건설기계, 인니에 통합제품센터 준공…\"5년 내 점유율 5위권\"",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-22T01:32:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2021699"
     },
     {
      "title": "HD건설기계, 인니에 통합제품센터 준공…\"점유율 5위권 목표\"",
@@ -235,14 +235,46 @@
    ]
   },
   {
+   "keyword": "마마 어워즈",
+   "sources": [
+    "google"
+   ],
+   "articles90": 10,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-22T00:45:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "빅뱅, 데뷔 20년에도 ‘마마’ 휩쓸었다… 4관왕→신곡 ‘기립’ 최초 ...",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-22T02:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/396/0000761579"
+    },
+    {
+     "title": "엔하이픈, 영화 같은 무대 그냥 나온 게 아니었네…'마마' 안무 연습 영...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-22T01:48:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000785568"
+    },
+    {
+     "title": "이대휘, '마마 어워즈' 레드카펫 MC 합격점",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-22T01:48:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611220045"
+    }
+   ]
+  },
+  {
    "keyword": "고경표 음주운전으로 핑계고",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-22T00:43:00.000Z",
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-22T00:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -263,70 +295,6 @@
      "press": "sidae.com",
      "publishedAt": "2026-11-22T01:35:00.000Z",
      "link": "https://m.entertain.naver.com/article/417/0001165160"
-    }
-   ]
-  },
-  {
-   "keyword": "흑백 트리플스타 강승원 재혼 발표",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-22T00:44:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'흑백요리사' 강승원, 재혼 발표 \"안식처가 되어준 사람\"",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-22T01:33:00.000Z",
-     "link": "https://m.entertain.naver.com/article/437/0000521860"
-    },
-    {
-     "title": "‘흑백요리사’ 트리플스타 강승원, 재혼 발표…“평생 함께하기로”",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-22T01:27:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001282566"
-    },
-    {
-     "title": "'흑백' 트리플스타, 재혼 발표..\"부족한 저를 감싸 안아준 사람\" [전문]",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-22T01:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005643873"
-    }
-   ]
-  },
-  {
-   "keyword": "마마 어워즈",
-   "sources": [
-    "google"
-   ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T00:45:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이대휘, '마마 어워즈' 레드카펫 MC 합격점",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-22T01:48:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611220045"
-    },
-    {
-     "title": "엔하이픈, 영화 같은 무대 그냥 나온 게 아니었네…'마마' 안무 연습 영...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-22T01:48:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000785568"
-    },
-    {
-     "title": "[종합]하이브, '마마' 대상 싹쓸이…BTS·코르티스·엔하이픈 정상, 빅뱅...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-22T01:20:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004468598"
     }
    ]
   },
@@ -363,17 +331,55 @@
    ]
   },
   {
+   "keyword": "흑백 트리플스타 강승원 재혼 발표",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-22T00:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'흑백요리사' 강승원, 재혼 발표 \"안식처가 되어준 사람\"",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-22T01:33:00.000Z",
+     "link": "https://m.entertain.naver.com/article/437/0000521860"
+    },
+    {
+     "title": "‘흑백요리사’ 트리플스타 강승원, 재혼 발표…“평생 함께하기로”",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-22T01:27:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001282566"
+    },
+    {
+     "title": "'흑백' 트리플스타, 재혼 발표..\"부족한 저를 감싸 안아준 사람\" [전문]",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-22T01:17:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005643873"
+    }
+   ]
+  },
+  {
    "keyword": "트럼프 얄타회담 사진",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 5,
    "recent20": 1,
-   "press": 4,
+   "press": 5,
    "firstArticleAt": "2026-11-22T01:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "트럼프, 얄타회담과 미중러 회담 사진 나란히 게시",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-22T02:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000652586?sid=104"
+    },
     {
      "title": "'얄타회담'과 '선전회담' 사진 나란히 올린 트럼프",
      "press": "tongilnews.com",
@@ -385,44 +391,6 @@
      "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-22T01:39:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/422/0000928643?sid=104"
-    },
-    {
-     "title": "트럼프, 살인자란 젤렌스키 항변에도 “푸틴은 내 친구”",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-22T01:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701806?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "김태희 보면 감동",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T00:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'냉부해' 비 \"아침마다 김태희 보면 감동\" 깜짝 고백",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-22T01:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/437/0000521858"
-    },
-    {
-     "title": "비, 아내 덕분에 식습관까지 바뀐 사랑꾼 \"김태희 보면 아침마다 감동\"...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-22T00:49:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409139"
-    },
-    {
-     "title": "'냉부' 비, \"아침마다 김태희 보면 감동\"",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-22T00:40:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000328713"
     }
    ]
   },
@@ -459,38 +427,6 @@
    ]
   },
   {
-   "keyword": "1251회 로또 당첨 번호",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T00:45:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한 복권방에서 2등 10장 무더기 당첨…한 사람이면 '5억 대박'",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T01:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014337806?sid=102"
-    },
-    {
-     "title": "로또 2등 10장 한곳서 터졌다…한 사람이 샀다면 5억 횡재",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-22T00:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001273506?sid=103"
-    },
-    {
-     "title": "로또 10장 당첨이 서울 한 곳에서?…동일인이면 '5억' 대박",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-22T00:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413604?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "안소현 레슨 진행",
    "sources": [
     "nate"
@@ -519,6 +455,38 @@
      "press": "mhnse.com",
      "publishedAt": "2026-11-22T01:01:00.000Z",
      "link": "https://m.sports.naver.com/golf/article/445/0000492207"
+    }
+   ]
+  },
+  {
+   "keyword": "1251회 로또 당첨 번호",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T00:45:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한 복권방에서 2등 10장 무더기 당첨…한 사람이면 '5억 대박'",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T01:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014337806?sid=102"
+    },
+    {
+     "title": "로또 2등 10장 한곳서 터졌다…한 사람이 샀다면 5억 횡재",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-22T00:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001273506?sid=103"
+    },
+    {
+     "title": "로또 10장 당첨이 서울 한 곳에서?…동일인이면 '5억' 대박",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-22T00:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413604?sid=102"
     }
    ]
   }
