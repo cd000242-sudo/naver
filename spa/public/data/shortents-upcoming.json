@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T23:01:34.292Z",
+ "builtAt": "2026-11-22T23:11:38.286Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,62 +15,95 @@
    "sources": [
     "google"
    ],
-   "articles90": 18,
-   "recent20": 4,
-   "press": 15,
-   "firstArticleAt": "2026-11-22T21:34:00.000Z",
+   "articles90": 24,
+   "recent20": 8,
+   "press": 19,
+   "firstArticleAt": "2026-11-22T21:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[오늘 날씨] 전국 5~30mm 비·눈…강원내륙 8cm 눈·최대 순간풍속 70km/h...",
-     "press": "mhns.co.kr",
-     "publishedAt": "2026-11-22T22:54:00.000Z",
-     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=770208"
+     "title": "[오늘날씨] 출근길 최저 '-4도'에 전국 비·눈 내려⋯빙판길 주의",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-22T23:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001077310?sid=103"
     },
     {
-     "title": "[출근길 날씨] 추위 주춤, 전국 비·눈…도로 살얼음 유의",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-22T22:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012298964?sid=103"
+     "title": "[오늘날씨] 전국 곳곳 비·눈…강원북부 최대 8cm",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-22T23:05:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261122000107"
     },
     {
-     "title": "[날씨] 전국 대부분 비·눈‥강원 내륙·산지 많은 눈",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-22T22:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001537319?sid=103"
+     "title": "[날씨] '베스티' 강혜연의 아침 인사…\"전국 곳곳 비, 낮에도 쌀쌀\"",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-22T23:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000521924?sid=103"
     }
    ]
   },
   {
-   "keyword": "LPGA 최종전 공동 7위",
+   "keyword": "김아림, 최종전 공동 7위 티띠꾼",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 16,
-   "recent20": 5,
-   "press": 14,
-   "firstArticleAt": "2026-11-22T21:37:00.000Z",
+   "articles90": 17,
+   "recent20": 7,
+   "press": 15,
+   "firstArticleAt": "2026-11-22T21:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[LPGA] 김아림, 김세영과 투어 챔피언십 공동 7위",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-22T23:00:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3759748"
+     "title": "'첫홀 더블보기' 김아림, 아쉬운 7위…'첫홀 이글' 티띠꾼 최종전 역전...",
+     "press": "golfhankook.hankooki.com",
+     "publishedAt": "2026-11-22T23:10:00.000Z",
+     "link": "https://golfhankook.hankooki.com/news/articleView.html?idxno=20022729"
+    },
+    {
+     "title": "김아림, CME그룹 투어 챔피언십 역전패...티띠꾼, 3연패 달성 우승상금...",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-22T23:04:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=202611230724472193daecd3dad5_1"
     },
     {
      "title": "티띠꾼, LPGA 최종전 3연패하며 통산 상금 1위…사흘 동안 선두 달렸던 ...",
      "press": "seoul.co.kr",
      "publishedAt": "2026-11-22T22:57:00.000Z",
      "link": "https://m.sports.naver.com/golf/article/081/0003702000"
+    }
+   ]
+  },
+  {
+   "keyword": "트럼프 이란 새해 공격 경고",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 16,
+   "recent20": 5,
+   "press": 15,
+   "firstArticleAt": "2026-11-22T21:43:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프 \"새해 이후 이란 추가 공격 가능\"…핵협상 지연에 강력 경고",
+     "press": "fntoday.co.kr",
+     "publishedAt": "2026-11-22T23:06:00.000Z",
+     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=399623"
     },
     {
-     "title": "‘역전극’ 티띠꾼 LPGA 최종전 3연패…김아림 7위",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-22T22:53:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/016/0002726838"
+     "title": "트럼프 \"이란, 말만 되풀이\" … 합의 결렬 땐 새해 추가 공격 경고",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-22T23:02:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/23/2026112350019.html"
+    },
+    {
+     "title": "트럼프 “이란 항상 말만 해, 전문 탭 댄서들”···합의 불발 시 새해...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-22T23:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484345?sid=104"
     }
    ]
   },
@@ -79,62 +112,94 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-22T21:34:00.000Z",
+   "articles90": 17,
+   "recent20": 4,
+   "press": 14,
+   "firstArticleAt": "2026-11-22T21:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[오늘 날씨] 전국 5~30mm 비·눈…강원내륙 8cm 눈·최대 순간풍속 70km/h...",
-     "press": "mhns.co.kr",
-     "publishedAt": "2026-11-22T22:54:00.000Z",
-     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=770208"
+     "title": "[오늘날씨] 출근길 최저 '-4도'에 전국 비·눈 내려⋯빙판길 주의",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-22T23:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001077310?sid=103"
     },
     {
-     "title": "[출근길 날씨] 추위 주춤, 전국 비·눈…도로 살얼음 유의",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-22T22:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012298964?sid=103"
+     "title": "[날씨] 전국 비·눈 내린 뒤 기온 급강하…출근길 어는 비·살얼음 주의",
+     "press": "namdonews.com",
+     "publishedAt": "2026-11-22T23:04:00.000Z",
+     "link": "https://www.namdonews.com/news/articleView.html?idxno=930081"
     },
     {
-     "title": "[오늘날씨] 강원 최대 8cm 눈·서울 30mm 비…출근길 '어는 비' 빙판 주의",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-22T22:38:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886796"
+     "title": "[전국 지역별 오늘의 날씨 및 내일날씨]오늘 전국 비 또는 눈, 빙판길과...",
+     "press": "economytalk.kr",
+     "publishedAt": "2026-11-22T23:04:00.000Z",
+     "link": "http://www.economytalk.kr/news/articleView.html?idxno=425470"
     }
    ]
   },
   {
-   "keyword": "김정은, 10개국 신임장 접수",
+   "keyword": "김정은 대사 신임장 접수",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 9,
+   "articles90": 26,
+   "recent20": 17,
+   "press": 12,
    "firstArticleAt": "2026-11-22T21:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김정은 \"패권·팽창 추구 안 해…안전 보장할 힘과 능력 필요\"",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-22T23:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005356859?sid=100"
+     "title": "김정은, 러시아 등 10개국 대사 신임장 받아…\"北, 패권·팽창 추구 안 ...",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-22T23:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928848?sid=100"
     },
     {
-     "title": "김정은 “전 지구적 안보 불안정…북한, 패권 팽창·추구 안 해”",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-22T22:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484344?sid=100"
-    },
-    {
-     "title": "김정은, 주북체코대사 신임장 접수",
+     "title": "김정은, 10개국 신임 대사들 앞에서 연설",
      "press": "news1.kr",
-     "publishedAt": "2026-11-22T22:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009303848?sid=100"
+     "publishedAt": "2026-11-22T23:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009303882?sid=100"
+    },
+    {
+     "title": "김정은, 10개국 신임 대사들과 기념사진 '한 컷'",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-22T23:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009303881?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "한국 남녀 임금 격차",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 12,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-22T21:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한국 남녀 임금 격차 27.8%…여전히 OECD 최대",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-22T23:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979399?sid=102"
+    },
+    {
+     "title": "2000년 이후 줄곧 1위…한국이 OECD서 벗어나지 못한 '불명예 기록'",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-22T22:50:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1176817"
+    },
+    {
+     "title": "한국 남녀 임금 격차 27.8%…OECD 회원국 중 '최대'",
+     "press": "kado.net",
+     "publishedAt": "2026-11-22T22:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000212786?sid=101"
     }
    ]
   },
@@ -144,7 +209,7 @@
     "nate"
    ],
    "articles90": 8,
-   "recent20": 4,
+   "recent20": 3,
    "press": 5,
    "firstArticleAt": "2026-11-22T21:58:00.000Z",
    "exclusive": false,
@@ -203,17 +268,55 @@
    ]
   },
   {
+   "keyword": "주현영 치아 시술",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-22T21:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "주현영, 덧니 없애니 못 알아볼 뻔…‘런닝맨’서 포착",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-22T23:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001306182"
+    },
+    {
+     "title": "주현영, 치아 시술 효과 확실하네…가지런해진 치열로 환한 미소 ('런닝...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-22T23:01:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000785646"
+    },
+    {
+     "title": "주현영, 치아 시술 했을 뿐인데…귀여운 덧니 대신 성숙美 장착 (런닝맨...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-22T22:44:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190293"
+    }
+   ]
+  },
+  {
    "keyword": "조희대 탄핵 연내 처리",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 3,
+   "articles90": 5,
+   "recent20": 2,
    "press": 4,
    "firstArticleAt": "2026-11-22T22:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[정치뷰] 與 '대법원장 탄핵'·野 '장외투쟁'…여야 내홍도 계속",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-22T22:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000652702?sid=004"
+    },
     {
      "title": "전국법관대표회의 의장 “조희대 탄핵 의결 땐 법관들 행동 나서야”",
      "press": "jasm.co.kr",
@@ -225,12 +328,6 @@
      "press": "hankookilbo.com",
      "publishedAt": "2026-11-22T22:50:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/469/0000967125?sid=102"
-    },
-    {
-     "title": "법관회의 의장 \"曺탄핵 도 넘어…의결한다면 우리도 행동 나서야\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-22T22:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652697?sid=102"
     }
    ]
   },
@@ -269,9 +366,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1123,
-  "matched": 627,
-  "avgLeadMin": 616,
+  "flagged": 1121,
+  "matched": 622,
+  "avgLeadMin": 604,
   "recent": [
    {
     "keyword": "한전 152만명 개인정보 유출",
