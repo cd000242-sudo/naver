@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T13:38:38.869Z",
+ "builtAt": "2026-11-22T13:48:43.273Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,101 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "한전 on",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 12,
-   "recent20": 3,
-   "press": 12,
-   "firstArticleAt": "2026-11-22T12:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한전, 고객 주민번호 포함 개인정보 150만 건 유출",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-22T13:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436497?sid=101"
-    },
-    {
-     "title": "나주 한전, 개인정보 152만명분 유출…주민번호·계좌·카드번호까지 털...",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-22T13:25:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085411"
-    },
-    {
-     "title": "한전서 유출된 개인정보 152만건, 내 정보도 담겼나…2차 피해 우려",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-22T13:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003060505?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "솔비 이규한 4월 결혼",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 17,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-22T12:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "솔비, 이규한과 첫 키스 전 가글…결혼 결심한 한마디",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-22T13:32:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283080"
-    },
-    {
-     "title": "이규한, 교제 전 솔비 母에 \"평생 책임질 것\" 약속 [미우새][별별TV]",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-22T13:31:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003489406"
-    },
-    {
-     "title": "'이규한♥' 솔비, 첫 키스 비하인드 공개 \"가글하고 오고 나도 시켜주더...",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-22T13:12:00.000Z",
-     "link": "https://www.insight.co.kr/news/583089"
-    }
-   ]
-  },
-  {
-   "keyword": "철도노조 26일로 연기",
+   "keyword": "증안펀드 가동 준비",
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T12:12:00.000Z",
+   "articles90": 10,
+   "recent20": 0,
+   "press": 10,
+   "firstArticleAt": "2026-11-22T12:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "철도노조, 23일 예정 쟁의행위 26일로 연기...\"사고복구 먼저\"",
+     "title": "경제금융수장들 \"시장 상황 따라 증안펀드 바로 가동할 수 있게 준비 착...",
+     "press": "efnews.co.kr",
+     "publishedAt": "2026-11-22T13:28:00.000Z",
+     "link": "http://www.efnews.co.kr/news/articleView.html?idxno=134194"
+    },
+    {
+     "title": "블랙먼데이 우려 높아지자, 정부 증안펀드 가동 준비 착수",
+     "press": "dnews.co.kr",
+     "publishedAt": "2026-11-22T13:20:00.000Z",
+     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611222213458150078"
+    },
+    {
+     "title": "F4, '블랙먼데이' 우려에 '증안펀드' 준비 착수...18년만 가동되나",
      "press": "slist.kr",
-     "publishedAt": "2026-11-22T13:22:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=783830"
-    },
-    {
-     "title": "'출퇴근 불편, 당장은 피했다'… 철도노조, 준법투쟁 26일로 연기",
-     "press": "m.skyedaily.com",
-     "publishedAt": "2026-11-22T13:16:00.000Z",
-     "link": "https://m.skyedaily.com/news_view.html?ID=315007"
-    },
-    {
-     "title": "철도노조, ‘경부선 탈선’ 여파에 쟁의행위 26일로 연기...“사고 복구...",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-22T13:02:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611220033"
+     "publishedAt": "2026-11-22T13:08:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=783823"
     }
    ]
   },
@@ -111,13 +47,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
    "firstArticleAt": "2026-11-22T12:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'미우새' 이혜영, 전남편 이상민 언급…'재혼' 남편이 \"여길 왜 나가냐...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-22T13:40:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000785624"
+    },
     {
      "title": "이혜영, 남편 부재훈과 함께 견딘 폐암 투병 5년…\"이제 좀 살 것 같다\"",
      "press": "topstarnews.net",
@@ -129,12 +71,6 @@
      "press": "tvreport.co.kr",
      "publishedAt": "2026-11-22T13:04:00.000Z",
      "link": "https://m.entertain.naver.com/article/213/0001409203"
-    },
-    {
-     "title": "이혜영, '수조원대 자산가' 남편♥과 '5년 폐암 투병' 끈끈함…\"잘 견뎌...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-22T12:57:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004468713"
     }
    ]
   },
@@ -143,10 +79,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-22T12:11:00.000Z",
+   "firstArticleAt": "2026-11-22T12:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -171,10 +107,73 @@
    ]
   },
   {
+   "keyword": "엔비디아칩 밀수 중 중국인",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T12:45:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“엔비디아 칩 중국 밀수망에 앨리스 황·캄보디아 범죄조직 얽혀”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-22T13:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012298903?sid=104"
+    },
+    {
+     "title": "\"엔비디아 칩 밀수에 앨리스 황·캄보디아 범죄조직 얽혀\"<FT>",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-22T13:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928781?sid=104"
+    },
+    {
+     "title": "엔비디아 칩 中 우회 공급망에 캄보디아 범죄조직까지 연루 의혹",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-22T12:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005356816?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "철도노조, 투쟁 26일로 연기",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T12:49:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "철도노조, 23일 예정 쟁의행위 26일로 연기...\"사고복구 먼저\"",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-22T13:22:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=783830"
+    },
+    {
+     "title": "'출퇴근 불편, 당장은 피했다'… 철도노조, 준법투쟁 26일로 연기",
+     "press": "m.skyedaily.com",
+     "publishedAt": "2026-11-22T13:16:00.000Z",
+     "link": "https://m.skyedaily.com/news_view.html?ID=315007"
+    },
+    {
+     "title": "철도노조, ‘경부선 탈선’ 여파에 쟁의행위 26일로 연기...“사고 복구...",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-22T13:02:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611220033"
+    }
+   ]
+  },
+  {
    "keyword": "남자 계주 금메달 획득",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 3,
    "recent20": 1,
@@ -206,7 +205,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1112,
+  "flagged": 1114,
   "matched": 631,
   "avgLeadMin": 618,
   "recent": [
