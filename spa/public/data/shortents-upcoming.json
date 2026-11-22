@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T14:18:52.591Z",
+ "builtAt": "2026-11-22T14:28:55.510Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,10 +15,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
+   "articles90": 8,
    "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-22T12:53:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-22T13:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -35,7 +35,7 @@
      "link": "https://n.news.naver.com/mnews/article/008/0005444663?sid=104"
     },
     {
-     "title": "역대 최장 연장에도 합의문 채택 불발…COP31 ‘화석연료’ 끝내 못 담았...",
+     "title": "COP31, 역대 최장 연장에도 합의문 채택 불발…‘화석연료’ 문구 못 담...",
      "press": "hani.co.kr",
      "publishedAt": "2026-11-22T13:54:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/028/0002833426?sid=104"
@@ -47,10 +47,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 10,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-22T12:56:00.000Z",
+   "articles90": 8,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-22T13:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -79,10 +79,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T12:51:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T13:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -103,38 +103,6 @@
      "press": "dnews.co.kr",
      "publishedAt": "2026-11-22T13:20:00.000Z",
      "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611222213458150078"
-    }
-   ]
-  },
-  {
-   "keyword": "최교진 면직안 재가",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T12:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李 대통령, 최교진 장관 사의 공개 약 1시간 만에 수락 '속전속결'",
-     "press": "wolyo.co.kr",
-     "publishedAt": "2026-11-22T14:18:00.000Z",
-     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=320874"
-    },
-    {
-     "title": "이 대통령, '수능 책임 통감' 최교진 장관 면직안 재가",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-22T13:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436493?sid=100"
-    },
-    {
-     "title": "수능 혼란에 결국 물러난 최교진 교육부 장관",
-     "press": "mhj21.com",
-     "publishedAt": "2026-11-22T12:58:00.000Z",
-     "link": "https://www.mhj21.com/news/articleView.html?idxno=254940"
     }
    ]
   },
