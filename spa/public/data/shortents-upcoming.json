@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T05:45:55.615Z",
+ "builtAt": "2026-11-22T05:55:59.174Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -13,32 +13,33 @@
   {
    "keyword": "최교진 장관 사의 수락",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "daum"
    ],
-   "articles90": 65,
+   "articles90": 56,
    "recent20": 8,
-   "press": 59,
-   "firstArticleAt": "2026-11-22T04:16:00.000Z",
+   "press": 50,
+   "firstArticleAt": "2026-11-22T04:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이재명 대통령, 최교진 교육부장관 사의수락",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T05:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014338115?sid=100"
+    },
+    {
+     "title": "이재명 대통령, 교육부장관 사의 수락",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T05:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014338111?sid=100"
+    },
     {
      "title": "수능 부정행위 대책 혼선에 최교진 사의…李대통령 즉각 수리",
      "press": "joongangenews.com",
      "publishedAt": "2026-11-22T05:40:00.000Z",
      "link": "https://www.joongangenews.com/news/articleView.html?idxno=565643"
-    },
-    {
-     "title": "전교조, 최교진 사임에 “리더십 한계…AI 활용 수능 부정행위 대비 부...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-22T05:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002726736?sid=102"
-    },
-    {
-     "title": "수능 혼란에 결국 최교진 장관 사의…李 대통령 즉각 수리",
-     "press": "news.mtn.co.kr",
-     "publishedAt": "2026-11-22T05:38:00.000Z",
-     "link": "https://news.mtn.co.kr/article/2026112214343514986"
     }
    ]
   },
@@ -47,30 +48,62 @@
    "sources": [
     "daum"
    ],
-   "articles90": 46,
-   "recent20": 6,
-   "press": 35,
-   "firstArticleAt": "2026-11-22T04:16:00.000Z",
+   "articles90": 42,
+   "recent20": 5,
+   "press": 31,
+   "firstArticleAt": "2026-11-22T04:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "조국혁신당, 민주당에 '11월 조희대 탄핵소추안' 압박…\"12월까지 미룰 ...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-22T05:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003158032?sid=100"
+    },
+    {
+     "title": "[사설] 대법원장 탄핵소추 추진 재고해야",
+     "press": "kihoilbo.co.kr",
+     "publishedAt": "2026-11-22T05:50:00.000Z",
+     "link": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3041665"
+    },
     {
      "title": "장동혁 “억지·방탄·탈옥 탄핵…법관 인사·재판 재개 막는 게 목적”",
      "press": "seoul.co.kr",
      "publishedAt": "2026-11-22T05:43:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/081/0003701849?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "미라 시신 발견 수사",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 15,
+   "recent20": 4,
+   "press": 15,
+   "firstArticleAt": "2026-11-22T04:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[속보] 건물 지하 보일러실서 '미라화 시신' 발견...경찰 \"범죄 혐의점 ...",
+     "press": "cjb.co.kr",
+     "publishedAt": "2026-11-22T05:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/655/0000033662?sid=102"
     },
     {
-     "title": "조희대 탄핵 명분에 한덕수 판결까지?… 민주당 \"탄핵소추안 연내 처리...",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-22T05:42:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261122500227"
+     "title": "금천구 건물 지하 주차장서 미라화된 시신 발견…경찰 수사",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-22T05:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404897?sid=102"
     },
     {
-     "title": "與 \"올해 안 탄핵안 처리\"…\"한덕수 판결, '절차상 하자' 탄핵 사유\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-22T05:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652635?sid=100"
+     "title": "금천구 건물 지하서 '미라화 시신' 발견…경찰 \"범죄 가능성 낮아\"",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-22T05:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005846044?sid=102"
     }
    ]
   },
@@ -79,10 +112,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 16,
-   "recent20": 3,
-   "press": 16,
-   "firstArticleAt": "2026-11-22T04:17:00.000Z",
+   "articles90": 15,
+   "recent20": 1,
+   "press": 15,
+   "firstArticleAt": "2026-11-22T04:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -103,38 +136,6 @@
      "press": "mk.co.kr",
      "publishedAt": "2026-11-22T05:26:00.000Z",
      "link": "https://m.entertain.naver.com/article/009/0005767147"
-    }
-   ]
-  },
-  {
-   "keyword": "미라 시신 발견 수사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 14,
-   "recent20": 3,
-   "press": 14,
-   "firstArticleAt": "2026-11-22T04:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "건물 보일러실에서 미라화된 시신 발견…경찰 수사 중",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-22T05:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000368308?sid=102"
-    },
-    {
-     "title": "서울 금천구 건물서 미라화 시신…경찰 \"범죄 가능성 낮아\"",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-22T05:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005607786?sid=102"
-    },
-    {
-     "title": "금천구 건물 보일러실서 미라화 시신 발견…경찰 \"범죄 가능성 낮아\"(종...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T05:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014338074?sid=102"
     }
    ]
   },
@@ -175,10 +176,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 5,
-   "press": 12,
-   "firstArticleAt": "2026-11-22T04:16:00.000Z",
+   "articles90": 10,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-22T04:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -207,30 +208,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 16,
-   "recent20": 11,
+   "articles90": 18,
+   "recent20": 7,
    "press": 7,
    "firstArticleAt": "2026-11-22T04:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "최민정 '500m 준준결승 가볍게 1위로 통과'[포토]",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-22T05:54:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/311/0002082945"
+    },
+    {
+     "title": "추월 기회 노리는 최민정",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-22T05:46:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/421/0009303449"
+    },
+    {
      "title": "'여전한 월드클래스' 최민정 은퇴 예고, \"번복 강요하기는 무리지만...\"...",
      "press": "starnewskorea.com",
      "publishedAt": "2026-11-22T05:40:00.000Z",
      "link": "https://m.sports.naver.com/general/article/108/0003489288"
-    },
-    {
-     "title": "최민정 '빈틈을 찾아라'",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T05:36:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/421/0009303416"
-    },
-    {
-     "title": "출발하는 최민정",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T05:36:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/421/0009303417"
     }
    ]
   },
@@ -239,10 +240,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T04:22:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T04:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -271,10 +272,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 3,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T04:16:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-22T04:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -295,38 +296,6 @@
      "press": "khan.co.kr",
      "publishedAt": "2026-11-22T04:42:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/032/0003484189?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "케인 발목 수술 성공적",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T04:22:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김민재 오열할 '공식발표'...'손흥민 절친' 발목 부상으로 수술, 장기 결...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-22T05:31:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/117/0004127116"
-    },
-    {
-     "title": "케인, 발목 인대 파열로 수술…“인생엔 힘든 순간도, 다시 뛸 준비”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-22T05:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764176?sid=104"
-    },
-    {
-     "title": "케인 \"시즌 막판 준비된 모습으로 돌아오겠다\"...발목 인대 파열 수술 마...",
-     "press": "maniareport.com",
-     "publishedAt": "2026-11-22T04:23:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/425/0000215274"
     }
    ]
   }
