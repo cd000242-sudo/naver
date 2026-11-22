@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T21:51:07.289Z",
+ "builtAt": "2026-11-22T22:01:10.374Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,66 +11,66 @@
  "measured": 26,
  "candidates": [
   {
-   "keyword": "트럼프 이란 추가 공격 경고",
+   "keyword": "트럼프 이란 공격 경고",
    "sources": [
     "daum"
    ],
-   "articles90": 17,
+   "articles90": 19,
    "recent20": 3,
-   "press": 16,
-   "firstArticleAt": "2026-11-22T20:23:00.000Z",
+   "press": 18,
+   "firstArticleAt": "2026-11-22T20:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "트럼프 \"이란과 합의 못 하면 새해 공격\"…해상 충돌 경고",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-22T21:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000554389?sid=104"
+    },
+    {
+     "title": "호르무즈 선박 공격, 전쟁 이후 최다…美 봉쇄에 궁지 몰린 이란",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T21:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014338534?sid=104"
+    },
     {
      "title": "트럼프 \"이란, 말만 하는 탭댄서…합의 없으면 새해 공격할 것\"",
      "press": "hankyung.com",
      "publishedAt": "2026-11-22T21:43:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/015/0005356847?sid=104"
-    },
-    {
-     "title": "트럼프 “이란은 말만 한다”…합의 불발 땐 새해 추가 공격 경고",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-22T21:34:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2651379"
-    },
-    {
-     "title": "트럼프 \"이란은 늘 말만 해\"…협상 불발 땐 새해 공격 시사",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-22T21:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413865?sid=104"
     }
    ]
   },
   {
-   "keyword": "한전 고객 개인정보 유출",
+   "keyword": "김아림 LPGA 공동7위",
    "sources": [
     "nate"
    ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-22T20:30:00.000Z",
+   "articles90": 14,
+   "recent20": 3,
+   "press": 13,
+   "firstArticleAt": "2026-11-22T20:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한전 개인정보 대규모 유출, 65만 명 피해자 긴급 대처 필요",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-22T21:36:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886785"
+     "title": "사흘 선두 김아림, 공동 7위…티띠꾼 '최종전 3연패' 신바람(종합)",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-22T21:59:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/277/0005846117"
     },
     {
-     "title": "한전 개인정보 150만 건 유출…2차 피해 우려",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-22T21:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404970?sid=101"
+     "title": "4라운드서 무너진 김아림, LPGA 최종전 '공동 7위' … 우승은 티띠꾼",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-22T21:58:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/23/2026112350009.html"
     },
     {
-     "title": "한전, 고객 등 개인정보 152만여건 유출…경찰 수사 의뢰",
-     "press": "womennews.co.kr",
-     "publishedAt": "2026-11-22T21:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/310/0000141945?sid=102"
+     "title": "김아림, LPGA 최종전 우승 놓쳤다…티띠꾼 3연패",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-22T21:54:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611230017"
     }
    ]
   },
@@ -80,7 +80,7 @@
     "signal.bz"
    ],
    "articles90": 9,
-   "recent20": 4,
+   "recent20": 1,
    "press": 9,
    "firstArticleAt": "2026-11-22T20:36:00.000Z",
    "exclusive": false,
@@ -99,74 +99,10 @@
      "link": "https://www.etoday.co.kr/news/view/2651386"
     },
     {
-     "title": "북한, 영변 핵시설 확장으로 고농축 우라늄 대량 생산 가능성 급부상",
-     "press": "gokorea.kr",
+     "title": "“北 영변 핵시설 증축…우라늄 연 35㎏ 추가 생산 가능”",
+     "press": "donga.com",
      "publishedAt": "2026-11-22T21:32:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886771"
-    }
-   ]
-  },
-  {
-   "keyword": "경제",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T21:04:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "서울시, 중장년 경제교육에 7000명 참여…경제이해도 ‘쑥’",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-22T21:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413864?sid=102"
-    },
-    {
-     "title": "[교육] 사례로 배우는 '경제성평가', 히트뉴스 신약 등재 전략 심화 과정",
-     "press": "hitnews.co.kr",
-     "publishedAt": "2026-11-22T21:12:00.000Z",
-     "link": "https://www.hitnews.co.kr/news/articleView.html?idxno=80994"
-    },
-    {
-     "title": "2025년 웰니스 경제 7.5조弗..전년比 8.9% ↑",
-     "press": "yakup.com",
-     "publishedAt": "2026-11-22T21:08:00.000Z",
-     "link": "https://www.yakup.com/news/index.html?mode=view&cat=12&nid=335524"
-    }
-   ]
-  },
-  {
-   "keyword": "버스",
-   "sources": [
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T20:22:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "51만 명 태우고 달린 ‘내편중구버스’…내년엔 더 편리해진다!",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-22T21:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002834614?sid=102"
-    },
-    {
-     "title": "신교통수단이라더니 세금만 낭비한 ‘3칸 굴절버스’···운행도 못해보...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-22T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484335?sid=102"
-    },
-    {
-     "title": "[서울 버스, 시민 주주시대]③사모펀드가 시민 혈세 싹쓸이?… 서울·인...",
-     "press": "dnews.co.kr",
-     "publishedAt": "2026-11-22T20:22:00.000Z",
-     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611181009065380588"
+     "link": "https://n.news.naver.com/mnews/article/020/0003764333?sid=104"
     }
    ]
   },
@@ -175,13 +111,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
    "firstArticleAt": "2026-11-22T20:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "野, 최교진 사의 속 'AI 부정행위' 대책 모색…23일 국회서 잇달아 토론...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-22T22:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009303823?sid=100"
+    },
     {
      "title": "[청와대 24시] 최교진 사의 즉각 수리한 李대통령…“신임 장관 인선은...",
      "press": "segye.com",
@@ -193,51 +135,77 @@
      "press": "pointdaily.co.kr",
      "publishedAt": "2026-11-22T21:00:00.000Z",
      "link": "https://www.pointdaily.co.kr/news/articleView.html?idxno=326906"
-    },
-    {
-     "title": "靑 \"이 대통령, 최교진 교육부 장관 면직 재가\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-22T20:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928816?sid=100"
     }
    ]
   },
   {
-   "keyword": "대장동",
+   "keyword": "경제",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T21:08:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "반값여행 ‘인기’…관광·경제 ‘두마리 토끼’",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-22T21:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012298933?sid=102"
+    },
+    {
+     "title": "서울시, 중장년 경제교육에 7000명 참여…경제이해도 ‘쑥’",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-22T21:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413864?sid=102"
+    },
+    {
+     "title": "[교육] 사례로 배우는 '경제성평가', 히트뉴스 신약 등재 전략 심화 과정",
+     "press": "hitnews.co.kr",
+     "publishedAt": "2026-11-22T21:12:00.000Z",
+     "link": "https://www.hitnews.co.kr/news/articleView.html?idxno=80994"
+    }
+   ]
+  },
+  {
+   "keyword": "라면",
    "sources": [
     "google"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-22T20:47:00.000Z",
+   "firstArticleAt": "2026-11-22T20:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령, “민간업자 1100억 추가 부담”…대장동 결탁설 반박",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-22T21:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003060518?sid=100"
+     "title": "K라면 10개월 만에 15억불 돌파…연간 20억불 사상 최대 눈앞",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-22T21:42:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=202611230639528110e7e8286d56_1"
     },
     {
-     "title": "李 대통령, '대장동 의혹' 또 반박…\"업자와 결탁한 시장 아냐\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-22T20:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652687?sid=100"
+     "title": "34세 김용빈, 불닭라면 초면에 밸런타인데이 모르다니‥박명수 포기 “...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-22T21:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190272"
     },
     {
-     "title": "\"업자와 결탁한 시장 행동 아냐\"…이 대통령 '대장동 의혹' 연일 반박",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-22T20:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394566?sid=100"
+     "title": "\"바지락 육수로 시원하게\" 쌀쌀해지니 해물 라면· 뜬다",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T20:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014338485?sid=103"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1119,
+  "flagged": 1121,
   "matched": 626,
   "avgLeadMin": 616,
   "recent": [
