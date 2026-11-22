@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T05:25:46.196Z",
+ "builtAt": "2026-11-22T05:35:50.315Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,66 +11,197 @@
  "measured": 25,
  "candidates": [
   {
-   "keyword": "최교진, 수능 책임 통감 사의 표명",
+   "keyword": "최교진 장관 사의 수락",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 81,
-   "recent20": 11,
-   "press": 68,
-   "firstArticleAt": "2026-11-22T03:57:00.000Z",
+   "articles90": 72,
+   "recent20": 7,
+   "press": 64,
+   "firstArticleAt": "2026-11-22T04:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "李 대통령, 최교진 교육부 장관 사표 수리…후임 인선 착수",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-22T05:30:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903948"
+    },
+    {
+     "title": "'수능 부실 대응 논란' 최교진 교육부 장관 사퇴",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-22T05:26:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261122500217"
+    },
     {
      "title": "李대통령, 최교진 교육부 장관 사의 수락…후임 인선 절차 착수",
      "press": "jjan.kr",
      "publishedAt": "2026-11-22T05:24:00.000Z",
      "link": "https://www.jjan.kr/article/20261122500296"
+    }
+   ]
+  },
+  {
+   "keyword": "정년연장 정부안",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 20,
+   "recent20": 2,
+   "press": 20,
+   "firstArticleAt": "2026-11-22T04:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정년연장, 27일 노사 합의 불발 땐 정부안 발표",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-22T05:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001165179?sid=100"
     },
     {
-     "title": "이 대통령, 최교진 교육부 장관 사의 수락…수능 혼란 책임",
-     "press": "idomin.com",
-     "publishedAt": "2026-11-22T05:22:00.000Z",
-     "link": "https://www.idomin.com/news/articleView.html?idxno=2020206"
+     "title": "김영훈 노동장관 “정년연장, 이제 결단만 남았다”…27일 與 특위 분수...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-22T05:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002726731?sid=101"
     },
     {
-     "title": "李대통령, 최교진 교육장관 사의 수락…靑 \"신임 인선 절차대로 진행\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-22T05:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652633?sid=100"
+     "title": "노동장관 “정년연장, 27일까지 결론 안나면 정부안 先발표”",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-22T05:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002834558?sid=100"
     }
    ]
   },
   {
    "keyword": "미라 시신 발견 수사",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 3,
-   "press": 12,
+   "articles90": 15,
+   "recent20": 4,
+   "press": 15,
    "firstArticleAt": "2026-11-22T04:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "서울 금천구 건물 지하에서 미라화된 시신 발견···경찰 수사 중",
-     "press": "khan.co.kr",
+     "title": "건물 보일러실에서 미라화된 시신 발견…경찰 수사 중",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-22T05:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000368308?sid=102"
+    },
+    {
+     "title": "서울 금천구 건물서 미라화 시신…경찰 \"범죄 가능성 낮아\"",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-22T05:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005607786?sid=102"
+    },
+    {
+     "title": "금천구 건물 보일러실서 미라화 시신 발견…경찰 \"범죄 가능성 낮아\"(종...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T05:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014338074?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "고경표 후보 제외",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 15,
+   "recent20": 3,
+   "press": 15,
+   "firstArticleAt": "2026-11-22T04:17:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘음주운전’ 고경표, ‘핑계고 시상식’ 후보 올랐다가 논란 끝 제외",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-22T05:35:00.000Z",
+     "link": "https://m.entertain.naver.com/article/396/0000761596"
+    },
+    {
+     "title": "고경표 음주운전 자숙 중인데 인기상 후보…‘핑계고’, 논란 일자 슬그...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-22T05:26:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005767147"
+    },
+    {
+     "title": "음주운전 사고 여파…고경표, '핑계고' 시상식 후보서 제외",
+     "press": "tvdaily.co.kr",
      "publishedAt": "2026-11-22T05:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484193?sid=102"
+     "link": "https://m.entertain.naver.com/article/440/0000053822"
+    }
+   ]
+  },
+  {
+   "keyword": "이 대통령 순방 비판 반박",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 15,
+   "recent20": 1,
+   "press": 15,
+   "firstArticleAt": "2026-11-22T04:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李대통령 “부처 눈에는 부처만 돼지 눈에는 돼지만…순방외교 대통령...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-22T05:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002726733?sid=100"
     },
     {
-     "title": "서울 한복판 빌라 지하실서 미라 시신 발견…경찰 수사",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-22T05:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005356690?sid=102"
-    },
-    {
-     "title": "금천구 건물 보일러실서 미라화 된 시신 발견…경찰 수사 중",
-     "press": "donga.com",
+     "title": "李 대통령 “권력, 누리고 억압하고 빼앗는 사람들에게 주어지는 것은 ...",
+     "press": "mk.co.kr",
      "publishedAt": "2026-11-22T05:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764173?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/009/0005767143?sid=100"
+    },
+    {
+     "title": "李 대통령 \"돼지 눈에는 돼지만…순방 외교는 빠질 수 없는 업무\"",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-22T05:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000554349?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "북미회담 무산",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 13,
+   "recent20": 3,
+   "press": 13,
+   "firstArticleAt": "2026-11-22T04:09:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"트럼프, 김정은에 만나자 제안했지만 북 '조건' 내걸어 무산\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-22T05:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404892?sid=100"
+    },
+    {
+     "title": "“김정은, 美가 받아들이기 힘든 조건 내걸어 北美회담 무산”",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-22T05:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004011026?sid=104"
+    },
+    {
+     "title": "\"트럼프, 김정은에 만남 요청했지만…북한 조건에 무산\"",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-22T05:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979318?sid=104"
     }
    ]
   },
@@ -79,13 +210,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 3,
-   "press": 11,
+   "articles90": 13,
+   "recent20": 2,
+   "press": 12,
    "firstArticleAt": "2026-11-22T04:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "與 \"12월 내 조희대 탄핵소추안 의결 추진…한덕수 판결 내용은 사유서...",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-22T05:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000652632?sid=100"
+    },
     {
      "title": "민주, '조희대 탄핵' 방아쇠 당겼다… 내달 소추안 의결 추진",
      "press": "m.skyedaily.com",
@@ -97,93 +234,126 @@
      "press": "dt.co.kr",
      "publishedAt": "2026-11-22T05:15:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/029/0003060449?sid=100"
-    },
-    {
-     "title": "민주당 탄핵추진단 \"한덕수 재판 절차적 문제 탄핵 사유로 삼을 것\"",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-22T05:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000521878?sid=100"
     }
    ]
   },
   {
-   "keyword": "철도노조 쟁의행위 예고",
+   "keyword": "40대 마통 연체 급증",
    "sources": [
     "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 3,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T04:32:00.000Z",
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-22T04:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "서울역에 나오는 철도노조 쟁의행위 예고 안내문",
-     "press": "news1.kr",
+     "title": "고금리와 주가 하락에 40대 마통 연체 82% 급증",
+     "press": "joongang.co.kr",
      "publishedAt": "2026-11-22T05:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009303358?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/025/0003566953?sid=101"
     },
     {
-     "title": "철도노조 쟁의행위 예고 안내문 나오는 서울역",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T05:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009303361?sid=102"
+     "title": "\"마통만 믿었는데 이럴수가\" 위험한 40대...연체액 80% 넘어",
+     "press": "economist.co.kr",
+     "publishedAt": "2026-11-22T05:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/243/0000106024?sid=101"
     },
     {
-     "title": "철도노조 23일 오전 9시부터 준법투쟁… 일부 열차 지연 우려",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-22T05:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001206480?sid=102"
+     "title": "‘빚투’ 후 물렸나…40대 마통 연체액 올 들어 82% 급증",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-22T04:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484189?sid=101"
     }
    ]
   },
   {
-   "keyword": "과즙세연 방시혁",
+   "keyword": "한국 수출 1조달러",
    "sources": [
     "daum"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T04:50:00.000Z",
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-22T04:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "과즙세연 \"방시혁과 안 잤습니다\"…재력 과시",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-22T05:04:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002082934"
-    },
-    {
-     "title": "'식사권 700만원' 과즙세연 \"돈 때문에 방시혁과 잤냐고? 안잤다\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-22T05:04:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005444595"
-    },
-    {
-     "title": "“방시혁과 안 잤다”…과즙세연, 루머에 거침없는 독설",
+     "title": "韓만 반도체 대박인 줄 알았더니”…中도 수출 108% 폭증",
      "press": "mk.co.kr",
-     "publishedAt": "2026-11-22T05:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005767142?sid=103"
+     "publishedAt": "2026-11-22T05:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005767148?sid=101"
+    },
+    {
+     "title": "대한민국 수출 1조 달러 달성, 충북 반도체·이차전지 수출 호조 밀어올...",
+     "press": "inews365.com",
+     "publishedAt": "2026-11-22T05:12:00.000Z",
+     "link": "https://www.inews365.com/news/article.html?no=944490"
+    },
+    {
+     "title": "제주도 연간 수출 사상 첫 10억 달러 달성 눈앞",
+     "press": "samdailbo.com",
+     "publishedAt": "2026-11-22T04:46:00.000Z",
+     "link": "http://www.samdailbo.com/news/articleView.html?idxno=272981"
     }
    ]
   },
   {
-   "keyword": "케인 발목 인대 수술 성공",
+   "keyword": "최민정",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T04:11:00.000Z",
+   "articles90": 11,
+   "recent20": 10,
+   "press": 5,
+   "firstArticleAt": "2026-11-22T04:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“준비된 모습으로 돌아올것”…케인, 발목 인대 파열로 수술대 올라",
+     "title": "혼성 계주 4위가 아쉬운 최민정",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-22T05:34:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/001/0016456568"
+    },
+    {
+     "title": "김길리 밀어주는 최민정",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-22T05:34:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/001/0016456565"
+    },
+    {
+     "title": "역주하는 최민정",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-22T05:33:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/001/0016456554"
+    }
+   ]
+  },
+  {
+   "keyword": "케인 발목 수술 성공적",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-22T04:11:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김민재 오열할 '공식발표'...'손흥민 절친' 발목 부상으로 수술, 장기 결...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-22T05:31:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/117/0004127116"
+    },
+    {
+     "title": "케인, 발목 인대 파열로 수술…“인생엔 힘든 순간도, 다시 뛸 준비”",
      "press": "donga.com",
      "publishedAt": "2026-11-22T05:21:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/020/0003764176?sid=104"
@@ -193,54 +363,60 @@
      "press": "maniareport.com",
      "publishedAt": "2026-11-22T04:23:00.000Z",
      "link": "https://m.sports.naver.com/wfootball/article/425/0000215274"
-    },
-    {
-     "title": "'부상' 케인, 왼쪽 발목 수술 받아…재활 프로그램 돌입",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-22T04:22:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110034979992"
     }
    ]
   },
   {
-   "keyword": "트럼프 얄타회담 사진",
+   "keyword": "트럼프 김정은 회동 무산",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-22T03:57:00.000Z",
+   "firstArticleAt": "2026-11-22T04:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "트럼프, 미중러 회담서 한반도 논의 확인...WSJ “김정은과 회담 과도한...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-22T05:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701842?sid=104"
+     "title": "트럼프, 아시아 순방 중 북미 회담 무산…“받아들일 수 없는 조건 때문...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T05:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014338068?sid=104"
     },
     {
-     "title": "\"GOAT\" \"친구들\"…트럼프, 1시간동안 APEC 사진 35장 '폭풍 게시'",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-22T04:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413703?sid=104"
+     "title": "WSJ \"北 무리한 조건 내걸어 미북 회동 무산…美, 종전선언도 검토\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-22T04:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000652618?sid=104"
     },
     {
-     "title": "트럼프 \"미중러 정상회담서 한반도 위험 대응 논의\"…얄타회담과 나란히...",
-     "press": "kado.net",
-     "publishedAt": "2026-11-22T04:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000212581?sid=100"
+     "title": "트럼프, '종전선언'까지 검토하며 김정은 회동 추진…北 조건에 무산",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-22T04:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005846038?sid=104"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 986,
-  "matched": 569,
-  "avgLeadMin": 626,
+  "flagged": 994,
+  "matched": 571,
+  "avgLeadMin": 639,
   "recent": [
+   {
+    "keyword": "무역",
+    "hitKeyword": "중국산 전기차 무역적자",
+    "hitAt": "2026-11-22T14:30:00+09:00",
+    "leadMin": 8809
+   },
+   {
+    "keyword": "삼전 닉스",
+    "hitKeyword": "삼전닉스 반토막",
+    "hitAt": "2026-11-22T14:30:00+09:00",
+    "leadMin": 266
+   },
    {
     "keyword": "유연석 변사체 발견 충격",
     "hitKeyword": "라이어 유연석 변사체",
@@ -288,18 +464,6 @@
     "hitKeyword": "김아림 투어 챔피언십",
     "hitAt": "2026-11-22T12:30:00+09:00",
     "leadMin": 7403
-   },
-   {
-    "keyword": "1등급 국어 수학 예상",
-    "hitKeyword": "수능 수학 1등급 미적분",
-    "hitAt": "2026-11-22T12:30:00+09:00",
-    "leadMin": 3286
-   },
-   {
-    "keyword": "트리플스타 강승원 발표",
-    "hitKeyword": "강승원 셰프 재혼",
-    "hitAt": "2026-11-22T12:30:00+09:00",
-    "leadMin": 166
    }
   ]
  }
