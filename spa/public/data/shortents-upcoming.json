@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T03:14:59.934Z",
+ "builtAt": "2026-11-22T03:25:03.054Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,38 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "최교진 사의 표명",
    "sources": [
+    "nate",
     "daum"
    ],
-   "articles90": 73,
-   "recent20": 29,
-   "press": 62,
+   "articles90": 82,
+   "recent20": 19,
+   "press": 68,
    "firstArticleAt": "2026-11-22T02:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "최교진 교육부 장관, '수능 대혼란'에 책임 통감 사의 표명",
-     "press": "public25.com",
-     "publishedAt": "2026-11-22T03:12:00.000Z",
-     "link": "https://www.public25.com/news/articleView.html?idxno=58792"
+     "title": "나이 때문에 ‘AI 커닝’ 못 막겠다던 최교진 교육장관… 수능 사흘 뒤...",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-22T03:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001206475?sid=102"
     },
     {
-     "title": "최교진, '수능 대혼란'에 사의…\"준비 미흡 책임 통감\"",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-22T03:12:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/326066/?sc=Naver"
+     "title": "최교진 사의 배경엔…수능 직전 바뀐 부정행위 대책∙국회 발언 논란",
+     "press": "kdfnews.com",
+     "publishedAt": "2026-11-22T03:22:00.000Z",
+     "link": "http://www.kdfnews.com/news/articleView.html?idxno=191241"
     },
     {
-     "title": "최교진 교육부 장관 사의 표명…\"수능 책임 통감\"",
-     "press": "sisafocus.co.kr",
-     "publishedAt": "2026-11-22T03:12:00.000Z",
-     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367893"
+     "title": "수능 직전 바뀐 대책에 현장 혼선…최교진 교육장관 사의 표명",
+     "press": "newsgn.com",
+     "publishedAt": "2026-11-22T03:20:00.000Z",
+     "link": "https://www.newsgn.com/news/articleView.html?idxno=587044"
     }
    ]
   },
@@ -47,30 +48,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 74,
-   "recent20": 17,
-   "press": 46,
-   "firstArticleAt": "2026-11-22T02:05:00.000Z",
+   "articles90": 76,
+   "recent20": 10,
+   "press": 47,
+   "firstArticleAt": "2026-11-22T02:06:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "윤상현 \"與 조희대 탄핵은 李 죄 지우기·명청대전 돌파구\"",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-22T03:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413682?sid=100"
+     "title": "민주당 조희대 탄핵 추진단 \"'한덕수 판결' 탄핵 사유 삼지 않을 것\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-22T03:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404862?sid=100"
     },
     {
-     "title": "민주당, '조희대 탄핵안' 연내 처리 추진…\"한덕수 판결, 인내심 한계\"",
-     "press": "sisafocus.co.kr",
-     "publishedAt": "2026-11-22T03:12:00.000Z",
-     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367891"
+     "title": "與 \"12월 내 조희대 탄핵 추진…한덕수 판결은 사유 미포함\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-22T03:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005444571?sid=100"
     },
     {
-     "title": "조희대 대법원장 민주당 탄핵 추진…김민석, 한덕수 파기환송 강력 비판",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-22T03:10:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629485"
+     "title": "민주 \"조희대 탄핵, 올해 안 의결\"...국힘 \"정치적 보복\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-22T03:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436353?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "조희대 탄핵소추 기자간담회",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 56,
+   "recent20": 6,
+   "press": 29,
+   "firstArticleAt": "2026-11-22T01:56:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "민주당 조희대 탄핵 추진단 \"'한덕수 판결' 탄핵 사유 삼지 않을 것\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-22T03:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404862?sid=100"
+    },
+    {
+     "title": "與 \"12월 내 조희대 탄핵 추진…한덕수 판결은 사유 미포함\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-22T03:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005444571?sid=100"
+    },
+    {
+     "title": "민주 \"조희대 탄핵, 올해 안 의결\"...국힘 \"정치적 보복\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-22T03:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436353?sid=100"
     }
    ]
   },
@@ -80,7 +113,7 @@
     "signal.bz"
    ],
    "articles90": 19,
-   "recent20": 4,
+   "recent20": 0,
    "press": 19,
    "firstArticleAt": "2026-11-22T02:00:00.000Z",
    "exclusive": false,
@@ -99,42 +132,10 @@
      "link": "https://n.news.naver.com/mnews/article/666/0000133169?sid=101"
     },
     {
-     "title": "대학생 45% \"올해 취업시장 작년보다 어렵다\" … 1년 이상 취업 준비도 ...",
-     "press": "worktoday.co.kr",
+     "title": "취업문 더 좁아졌다…대학생 45% \"작년보다 취업 어렵다\"",
+     "press": "joongangenews.com",
      "publishedAt": "2026-11-22T02:56:00.000Z",
-     "link": "http://www.worktoday.co.kr/news/articleView.html?idxno=92455"
-    }
-   ]
-  },
-  {
-   "keyword": "수능 수학 1등급 미적분 선택",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 10,
-   "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-22T01:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "수능 수학 1등급 10명 중 8.6명이 미적·기하 선택…정시 ‘문과 침공’...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-22T02:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005767126?sid=102"
-    },
-    {
-     "title": "2027 정시도 '이과 문과침공' 우려… 수학 1등급 85.7%가 미적분·기하",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-22T02:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005607738?sid=102"
-    },
-    {
-     "title": "\"수능 수학 1등급 85.7% '미적분·기하' 선택…확률과 통계 14.3% 그쳐\"",
-     "press": "kado.net",
-     "publishedAt": "2026-11-22T02:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000212572?sid=102"
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=565638"
     }
    ]
   },
@@ -144,12 +145,18 @@
     "signal.bz"
    ],
    "articles90": 9,
-   "recent20": 0,
+   "recent20": 1,
    "press": 9,
-   "firstArticleAt": "2026-11-22T01:47:00.000Z",
+   "firstArticleAt": "2026-11-22T01:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "최태원 SK 회장 \"한일 기업·대학 손잡고 AI 인재 키우자\"",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-22T03:14:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=506692"
+    },
     {
      "title": "최태원 “한일 기업·대학 손잡고 AI 인재 공동 육성하자”",
      "press": "newstomato.com",
@@ -161,12 +168,38 @@
      "press": "mbnmoney.mbn.co.kr",
      "publishedAt": "2026-11-22T02:36:00.000Z",
      "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005963847"
+    }
+   ]
+  },
+  {
+   "keyword": "류재철 CEO 협력사 혁신",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-22T01:57:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "LG전자, 협력사 88곳과 맞선...제조 경쟁력 강화 나선다",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-22T03:16:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=506691"
     },
     {
-     "title": "최태원 \"한일 기업·대학 공동으로 AI 인재 육성하자…기회 열릴 것\"",
+     "title": "LG전자, 협력회 워크숍 개최…공정 자동화·AI 기반 제조 혁신 논의",
+     "press": "zdnet.co.kr",
+     "publishedAt": "2026-11-22T02:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/092/0002446351?sid=105"
+    },
+    {
+     "title": "류재철 LG전자 CEO \"협력사와 제조 혁신으로 성장 기회 잡을 것\"",
      "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-22T02:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004212420?sid=101"
+     "publishedAt": "2026-11-22T02:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004212424?sid=101"
     }
    ]
   },
@@ -176,7 +209,7 @@
     "google"
    ],
    "articles90": 10,
-   "recent20": 5,
+   "recent20": 0,
    "press": 8,
    "firstArticleAt": "2026-11-22T02:12:00.000Z",
    "exclusive": false,
@@ -207,10 +240,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-22T01:45:00.000Z",
+   "articles90": 8,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-22T02:00:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -235,98 +268,66 @@
    ]
   },
   {
-   "keyword": "류재철 CEO, 협력사와 혁신 성장",
+   "keyword": "수능 수학 1등급 미적분 선택",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 8,
+   "articles90": 6,
    "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-22T01:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "LG전자, 협력회 워크숍 개최…공정 자동화·AI 기반 제조 혁신 논의",
-     "press": "zdnet.co.kr",
-     "publishedAt": "2026-11-22T02:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/092/0002446351?sid=105"
-    },
-    {
-     "title": "류재철 LG전자 CEO \"협력사와 제조 혁신으로 성장 기회 잡을 것\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-22T02:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004212424?sid=101"
-    },
-    {
-     "title": "불량률 90%↓·재료비 36%↓...류재철 “협력사 경쟁력이 곧 LG 경쟁력”",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-22T02:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003488209?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "현대엘리베이터 무벡스 지분 매각",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
+   "press": 6,
    "firstArticleAt": "2026-11-22T01:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "현대엘리베이터 현대무벡스 지분 1026억에 매각한다, 주주환원 재원 확...",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-22T02:56:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=452584"
+     "title": "수능 수학 1등급 10명 중 8.6명이 미적·기하 선택…정시 ‘문과 침공’...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-22T02:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005767126?sid=102"
     },
     {
-     "title": "현대엘리베이터, 현대무벡스 지분 1026억원 매각…주주환원 재원으로",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-22T02:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003060415?sid=101"
+     "title": "2027 정시도 '이과 문과침공' 우려… 수학 1등급 85.7%가 미적분·기하",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-22T02:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005607738?sid=102"
     },
     {
-     "title": "[비즈+]현대엘리베이터, 현대무벡스 지분 5.8% 매각…1026억원 주주환원...",
-     "press": "businessplus.kr",
-     "publishedAt": "2026-11-22T02:46:00.000Z",
-     "link": "https://www.businessplus.kr/news/articleView.html?idxno=120255"
+     "title": "\"수능 수학 1등급 85.7% '미적분·기하' 선택…확률과 통계 14.3% 그쳐\"",
+     "press": "kado.net",
+     "publishedAt": "2026-11-22T02:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000212572?sid=102"
     }
    ]
   },
   {
-   "keyword": "김아림, 투어 챔피언십 3R 선두",
+   "keyword": "철인3종 익사 무죄",
    "sources": [
     "nate"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T02:02:00.000Z",
-   "exclusive": true,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T01:58:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[골프] 김아림, LPGA 투어 챔피언십 3R 단독 선두… 우승 눈앞",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-22T02:58:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3451028"
+     "title": "‘수영 실격’ 숨긴 참가자 돌연 익사…철인3종 주최측 5명 2심도 무죄",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-22T03:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003060422?sid=102"
     },
     {
-     "title": "김아림, LPGA 최종전 3R 단독 선두…우승 상금 400만달러 눈앞",
+     "title": "철인3종 경기 중 물에 빠져…'참가자 익사 사고' 2심도 무죄",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-22T02:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001273515?sid=102"
+    },
+    {
+     "title": "철인3종 경기 중 30대 참가자 익사…안전책임자 5명 2심도 무죄",
      "press": "jnilbo.com",
-     "publishedAt": "2026-11-22T02:19:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085276"
-    },
-    {
-     "title": "'사흘째 선두' 김아림, LPGA 최종전 3R 1타 차 리드...우승 상금 53억 보...",
-     "press": "maniareport.com",
-     "publishedAt": "2026-11-22T02:19:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/425/0000215267"
+     "publishedAt": "2026-11-22T02:14:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085275"
     }
    ]
   },
@@ -335,10 +336,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T01:54:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-22T02:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -361,11 +362,43 @@
      "link": "https://n.news.naver.com/mnews/article/081/0003701814?sid=104"
     }
    ]
+  },
+  {
+   "keyword": "트리플스타 강승원 재혼 발표",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T02:29:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘흑백’ 트리플스타 강승원, 재혼 발표에 댓글창 ‘싸늘’…과거 CCTV ...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-22T03:01:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001282582"
+    },
+    {
+     "title": "트리플스타 재혼 발표···에드워드 리·철가방 축하 릴레이",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-22T02:35:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001151095"
+    },
+    {
+     "title": "'흑백요리사' 트리플스타 강승원, 재혼 발표 \"안식처 돼준 고마운 사람...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-22T02:31:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001409149"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 960,
+  "flagged": 964,
   "matched": 555,
   "avgLeadMin": 612,
   "recent": [
