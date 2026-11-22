@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T14:49:02.269Z",
+ "builtAt": "2026-11-22T14:59:05.325Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "조희대 탄핵 추진 논의",
@@ -16,7 +16,7 @@
     "nate"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-22T13:52:00.000Z",
    "exclusive": true,
@@ -43,34 +43,34 @@
    ]
   },
   {
-   "keyword": "증안펀드 가동 준비",
+   "keyword": "이기찬 약국 버스킹",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
    "articles90": 4,
    "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-22T13:20:00.000Z",
+   "firstArticleAt": "2026-11-22T13:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[증시] ‘블랙 먼데이’ 공포에 정부 긴급회의…증안펀드 가동 준비·자...",
-     "press": "news-s.kr",
-     "publishedAt": "2026-11-22T14:30:00.000Z",
-     "link": "https://news-s.kr/view.html?id=L26112223212576da"
+     "title": "‘데뷔 31년 차’ 김기찬, 약국 버스킹→기상청 홍보대사 위촉 (‘미우...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-22T14:51:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005767354"
     },
     {
-     "title": "미 증시 급락에 F4회의 소집...\"증안펀드 가동 준비\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-22T14:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436516?sid=101"
+     "title": "이기찬, 약국에 직접 전화 걸어 “앞에서 노래해도 돼요?” 버스킹 장소...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-22T14:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190244"
     },
     {
-     "title": "경제금융수장들 \"시장 상황 따라 증안펀드 바로 가동할 수 있게 준비 착...",
-     "press": "efnews.co.kr",
-     "publishedAt": "2026-11-22T13:28:00.000Z",
-     "link": "http://www.efnews.co.kr/news/articleView.html?idxno=134194"
+     "title": "‘약국 버스킹’ 이기찬, 사람 없어도 부른다..“무대 없어져, 직접 기...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-22T13:52:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005644029"
     }
    ]
   },
@@ -107,6 +107,38 @@
    ]
   },
   {
+   "keyword": "증안펀드 가동 준비",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T14:03:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'블랙먼데이' 우려에 F4 긴급대응… 증안펀드 18년만에 가동되나",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-22T14:56:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3451144"
+    },
+    {
+     "title": "[증시] ‘블랙 먼데이’ 공포에 정부 긴급회의…증안펀드 가동 준비·자...",
+     "press": "news-s.kr",
+     "publishedAt": "2026-11-22T14:30:00.000Z",
+     "link": "https://news-s.kr/view.html?id=L26112223212576da"
+    },
+    {
+     "title": "미 증시 급락에 F4회의 소집...\"증안펀드 가동 준비\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-22T14:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436516?sid=101"
+    }
+   ]
+  },
+  {
    "keyword": "중국 국가안전부 첨단 칩 작전",
    "sources": [
     "signal.bz"
@@ -135,38 +167,6 @@
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-22T13:30:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002436499?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "이기찬 약국 버스킹",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T13:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이기찬, 약국에 직접 전화 걸어 “앞에서 노래해도 돼요?” 버스킹 장소...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-22T14:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190244"
-    },
-    {
-     "title": "‘약국 버스킹’ 이기찬, 사람 없어도 부른다..“무대 없어져, 직접 기...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-22T13:52:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005644029"
-    },
-    {
-     "title": "'미운 우리 새끼' 이기찬, 집 공개→약국 버스킹 준비",
-     "press": "enter.etoday.co.kr",
-     "publishedAt": "2026-11-22T13:32:00.000Z",
-     "link": "https://enter.etoday.co.kr/news/view/305611"
     }
    ]
   }
