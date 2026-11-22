@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T17:49:57.365Z",
+ "builtAt": "2026-11-22T18:00:00.429Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -9,72 +9,7 @@
   "minPress": 2
  },
  "measured": 27,
- "candidates": [
-  {
-   "keyword": "유엔기후총회 합의 무산",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T16:23:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[COP31] 최종 합의 무산…'화석연료 퇴출' 국제사회 충돌",
-     "press": "4th.kr",
-     "publishedAt": "2026-11-22T17:32:00.000Z",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2122409"
-    },
-    {
-     "title": "유엔기후총회 17년만에 합의 실패…화석연료 놓고 극한대립(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-22T16:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016457014?sid=104"
-    },
-    {
-     "title": "유엔 기후총회, 화석연료 이견 끝 결렬…17년 만에 최종 합의문 채택 실...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-22T16:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005607944?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "화석연료 합의문 채택",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T16:23:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[COP31] 최종 합의 무산…'화석연료 퇴출' 국제사회 충돌",
-     "press": "4th.kr",
-     "publishedAt": "2026-11-22T17:32:00.000Z",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2122409"
-    },
-    {
-     "title": "유엔기후총회 17년만에 합의 실패…화석연료 놓고 극한대립(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-22T16:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016457014?sid=104"
-    },
-    {
-     "title": "유엔 기후총회, 화석연료 이견 끝 결렬…17년 만에 최종 합의문 채택 실...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-22T16:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005607944?sid=104"
-    }
-   ]
-  }
- ],
+ "candidates": [],
  "hitRate": {
   "days": 7,
   "flagged": 1116,
