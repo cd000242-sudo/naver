@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T08:36:56.735Z",
+ "builtAt": "2026-11-22T08:46:59.673Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,134 +8,101 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 23,
  "candidates": [
-  {
-   "keyword": "해저",
-   "sources": [
-    "google"
-   ],
-   "articles90": 35,
-   "recent20": 2,
-   "press": 33,
-   "firstArticleAt": "2026-11-22T07:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "태안 실종 어선 '해광호', 수심 52m 해저서 발견⋯수색 닷새 만",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-22T08:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001077280?sid=102"
-    },
-    {
-     "title": "'실종 어선' 해광호, 태안 해저 52m서 발견⋯선원 7명 생사 미확인",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-22T08:26:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2651357"
-    },
-    {
-     "title": "태안서 사라진 해광호, 53m 해저에서 발견..실종 선원 수색",
-     "press": "tjb.co.kr",
-     "publishedAt": "2026-11-22T08:08:00.000Z",
-     "link": "https://www.tjb.co.kr/news05/bodo/view/id/106362"
-    }
-   ]
-  },
   {
    "keyword": "최교진 수능 사의",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 35,
-   "recent20": 3,
-   "press": 29,
-   "firstArticleAt": "2026-11-22T07:08:00.000Z",
+   "articles90": 33,
+   "recent20": 5,
+   "press": 30,
+   "firstArticleAt": "2026-11-22T07:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "최교진 교육부 장관, ‘수능 대혼란’에 결국 사임",
-     "press": "jndn.com",
-     "publishedAt": "2026-11-22T08:26:00.000Z",
-     "link": "http://www.jndn.com/article.php?aid=1795335789443490093"
+     "title": "실언·AI커닝 늑장대응… 리더십 논란 자초한 '최교진의 입'",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-22T08:46:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261123010008496"
     },
     {
-     "title": "최교진 사퇴에 교원단체들 \"수능 AI 부정 대비 부족…리더십 한계\"(종합...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T08:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014338296?sid=102"
+     "title": "'수능 혼란' 최교진 장관 사퇴",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-22T08:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005356751?sid=102"
     },
     {
-     "title": "교육장관 '수능 대혼란' 책임지고 사임…취임 14개월만",
-     "press": "goodnews1.com",
-     "publishedAt": "2026-11-22T08:18:00.000Z",
-     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466496"
+     "title": "최교진 교육부 장관, 수능 대혼란 책임 사임",
+     "press": "thereport.co.kr",
+     "publishedAt": "2026-11-22T08:42:00.000Z",
+     "link": "https://www.thereport.co.kr/news/articleView.html?idxno=93598"
+    }
+   ]
+  },
+  {
+   "keyword": "해저",
+   "sources": [
+    "google"
+   ],
+   "articles90": 32,
+   "recent20": 3,
+   "press": 30,
+   "firstArticleAt": "2026-11-22T07:19:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "수색 닷새 만에 해저서 해광호 발견…해군 무인탐사기로 최종 확인",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-22T08:44:00.000Z",
+     "link": "https://www.ajunews.com/view/20261122173151207"
+    },
+    {
+     "title": "태안 해저서 실종 어선 해광호 발견",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-22T08:42:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4120094"
+    },
+    {
+     "title": "태안 실종 어선 '해광호', 수심 52m 해저서 발견⋯수색 닷새 만",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-22T08:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001077280?sid=102"
     }
    ]
   },
   {
    "keyword": "고경표 음주 사과",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 3,
-   "press": 11,
-   "firstArticleAt": "2026-11-22T07:12:00.000Z",
+   "articles90": 12,
+   "recent20": 4,
+   "press": 12,
+   "firstArticleAt": "2026-11-22T07:19:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "고경표 결국 '핑계고' 후보 삭제…\"검토 불충분했다\" 사과",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-22T08:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004212481?sid=102"
+    },
+    {
+     "title": "'핑계고', '음주운전' 고경표 인기상 후보 제외 후 사과(종합)",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-22T08:40:00.000Z",
+     "link": "https://m.entertain.naver.com/article/437/0000521889"
+    },
     {
      "title": "'핑계고' 측, 고경표 시상식 후보 논란에 고개 숙였다 \"명단서 제외...심...",
      "press": "tvreport.co.kr",
      "publishedAt": "2026-11-22T08:34:00.000Z",
      "link": "https://m.entertain.naver.com/article/213/0001409176"
-    },
-    {
-     "title": "'음주운전' 고경표, 결국 '핑계고' 시상식 후보 제외…제작진 사과",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-22T08:31:00.000Z",
-     "link": "https://m.entertain.naver.com/article/018/0006413758"
-    },
-    {
-     "title": "[공식] '핑계고' 측, '음주운전' 고경표 인기상 후보 제외…\"충분히 검토...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-22T08:18:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004127132"
-    }
-   ]
-  },
-  {
-   "keyword": "이재명 해외 순방",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-22T07:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이 대통령, 잦은 해외순방 논란 정면 반박…\"돼지 눈에는 돼지만 보여\"",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-22T08:32:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=730507"
-    },
-    {
-     "title": "野 '순방예산 363억 삭감' 주장에 … 李 \"꼭 해야 할 국정과제\"",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-22T08:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005767254?sid=100"
-    },
-    {
-     "title": "이 대통령 \"치아 흔들리고 코피 터져\"... '순방 잦다' 비판에 \"돼지 눈에...",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-22T08:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967070?sid=100"
     }
    ]
   },
@@ -144,10 +111,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 8,
+   "articles90": 6,
    "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-22T07:10:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-22T07:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -168,38 +135,6 @@
      "press": "jasm.co.kr",
      "publishedAt": "2026-11-22T07:40:00.000Z",
      "link": "https://www.jasm.co.kr/news/view/326072/?sc=Naver"
-    }
-   ]
-  },
-  {
-   "keyword": "정부",
-   "sources": [
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 5,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T08:16:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "글로벌 반도체 급락에 '블랙먼데이' 우려…정부, 긴급 F4 회의 소집",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-22T08:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005356733?sid=100"
-    },
-    {
-     "title": "\"공매도 제한 카드 나올까\"...'검은 월요일' 공포에 정부 긴급 F4 회의",
-     "press": "ntoday.co.kr",
-     "publishedAt": "2026-11-22T08:30:00.000Z",
-     "link": "https://www.ntoday.co.kr/news/articleView.html?idxno=131051"
-    },
-    {
-     "title": "불법 국가기술자격 대여, 정부 6개 부처 합동 단속",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-22T08:22:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1732589"
     }
    ]
   },
@@ -232,6 +167,38 @@
      "press": "hankyung.com",
      "publishedAt": "2026-11-22T08:03:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/015/0005356712?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "이형일 부총리 주재 회의",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 3,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T07:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "글로벌 반도체 급락에 '블랙먼데이' 우려…정부, 긴급 F4 회의 소집",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-22T08:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005356733?sid=100"
+    },
+    {
+     "title": "\"공매도 제한 카드 나올까\"...'검은 월요일' 공포에 정부 긴급 F4 회의",
+     "press": "ntoday.co.kr",
+     "publishedAt": "2026-11-22T08:30:00.000Z",
+     "link": "https://www.ntoday.co.kr/news/articleView.html?idxno=131051"
+    },
+    {
+     "title": "美 증시 폭락에 긴급 F4회의…증시 안정책 나오나",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-22T08:28:00.000Z",
+     "link": "https://www.ajunews.com/view/20261122172305194"
     }
    ]
   },
@@ -269,44 +236,12 @@
    ]
   },
   {
-   "keyword": "소설 절기",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T07:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "절기 '소설', 대체로 맑고 추워···23일 대구·경북 비",
-     "press": "dgmbc.com",
-     "publishedAt": "2026-11-22T08:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/657/0000057721?sid=103"
-    },
-    {
-     "title": "[5시 날씨] 오늘 ‘소설’ 추위…내일, 전국 비나 눈",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-22T08:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012298808?sid=103"
-    },
-    {
-     "title": "[날씨] 절기 소설, 대체로 맑고 쌀쌀…내일 전국 비·눈",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-22T07:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928730?sid=103"
-    }
-   ]
-  },
-  {
    "keyword": "코스닥",
    "sources": [
     "google"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-22T07:50:00.000Z",
    "exclusive": false,
@@ -335,7 +270,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1036,
+  "flagged": 1037,
   "matched": 598,
   "avgLeadMin": 627,
   "recent": [
