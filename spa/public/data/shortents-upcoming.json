@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T20:40:45.739Z",
+ "builtAt": "2026-11-22T20:50:48.586Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,7 +16,7 @@
     "signal.bz"
    ],
    "articles90": 9,
-   "recent20": 2,
+   "recent20": 1,
    "press": 8,
    "firstArticleAt": "2026-11-22T19:33:00.000Z",
    "exclusive": false,
@@ -35,7 +35,7 @@
      "link": "https://n.news.naver.com/mnews/article/029/0003060510?sid=101"
     },
     {
-     "title": "'블랙먼데이' 우려에 긴급 F4회의, 18년 만에 증안펀드 가동되나",
+     "title": "'블랙먼데이' 우려 긴급 F4회의, 18년 만에 증안펀드 가동되나",
      "press": "seoulfn.com",
      "publishedAt": "2026-11-22T20:14:00.000Z",
      "link": "https://www.seoulfn.com/news/articleView.html?idxno=643572"
@@ -48,7 +48,7 @@
     "google"
    ],
    "articles90": 9,
-   "recent20": 1,
+   "recent20": 0,
    "press": 7,
    "firstArticleAt": "2026-11-22T19:32:00.000Z",
    "exclusive": false,
@@ -75,15 +75,47 @@
    ]
   },
   {
+   "keyword": "화석연료 합의문 채택 실패",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-22T19:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "유엔기후총회 17년 만에 합의 무산…'화석연료 퇴출' 놓고 산유국·EU 충...",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-22T20:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005846103?sid=104"
+    },
+    {
+     "title": "기후변화총회 17년 만에 합의 실패...\"지금 날 죽여라\" 반발",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-22T20:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436554?sid=104"
+    },
+    {
+     "title": "‘화석연료 이견’ 빈 손으로 끝난 유엔기후총회",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-22T20:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701937?sid=104"
+    }
+   ]
+  },
+  {
    "keyword": "코스피",
    "sources": [
     "signal.bz",
     "google"
    ],
-   "articles90": 6,
+   "articles90": 4,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T19:14:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-22T20:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -108,74 +140,41 @@
    ]
   },
   {
-   "keyword": "화석연료 합의문 채택 실패",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T19:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "기후변화총회 17년 만에 합의 실패...\"지금 날 죽여라\" 반발",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-22T20:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436554?sid=104"
-    },
-    {
-     "title": "‘화석연료 이견’ 빈 손으로 끝난 유엔기후총회",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-22T20:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701937?sid=104"
-    },
-    {
-     "title": "유엔 기후총회 합의 결렬…화석연료 퇴출 놓고 EU·사우디 충돌",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T20:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009303754?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "최교진 사의 수락",
+   "keyword": "이혜영 미우새",
    "sources": [
     "daum"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T19:32:00.000Z",
+   "articles90": 3,
+   "recent20": 3,
+   "press": 2,
+   "firstArticleAt": "2026-11-22T20:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "최교진 교육부 장관 사의…\"수능 준비 미흡 통감\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-22T20:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928790?sid=102"
+     "title": "이혜영, 이하늬 부부 ♥오작교였다…\"남편의 후배와 결혼\" [엑's 이슈]",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-22T20:48:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002083067"
     },
     {
-     "title": "‘수능 혼란 책임’ 최교진 사실상 경질",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-22T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701916?sid=100"
+     "title": "이혜영 “남편이 ‘미우새’ 왜 나가냐고…전남편 이상민 이제 안 나온...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-22T20:46:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190256"
     },
     {
-     "title": "[Why&Next] 李대통령, 최교진 사실상 경질…세 가지 이유",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-22T20:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005846101?sid=100"
+     "title": "이혜영 “이하늬 내가 결혼시켜, 남편 후배 소개…딱 보니까 느낌 와”...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-22T20:45:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190255"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1120,
+  "flagged": 1121,
   "matched": 629,
   "avgLeadMin": 612,
   "recent": [
