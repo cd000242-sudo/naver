@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T03:25:03.054Z",
+ "builtAt": "2026-11-22T03:35:06.799Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,94 +16,63 @@
     "nate",
     "daum"
    ],
-   "articles90": 82,
-   "recent20": 19,
-   "press": 68,
-   "firstArticleAt": "2026-11-22T02:40:00.000Z",
+   "articles90": 84,
+   "recent20": 15,
+   "press": 69,
+   "firstArticleAt": "2026-11-22T02:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "나이 때문에 ‘AI 커닝’ 못 막겠다던 최교진 교육장관… 수능 사흘 뒤...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-22T03:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001206475?sid=102"
+     "title": "“‘수능 대혼란’ 책임” 최교진 교육부장관 사의 표명",
+     "press": "segye.com",
+     "publishedAt": "2026-11-22T03:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177095?sid=102"
     },
     {
-     "title": "최교진 사의 배경엔…수능 직전 바뀐 부정행위 대책∙국회 발언 논란",
-     "press": "kdfnews.com",
-     "publishedAt": "2026-11-22T03:22:00.000Z",
-     "link": "http://www.kdfnews.com/news/articleView.html?idxno=191241"
+     "title": "[속보]이 대통령, 최교진 교육부 장관 사의 표명 수락…靑 \"후임 인선 절...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T03:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014337985?sid=100"
     },
     {
-     "title": "수능 직전 바뀐 대책에 현장 혼선…최교진 교육장관 사의 표명",
-     "press": "newsgn.com",
-     "publishedAt": "2026-11-22T03:20:00.000Z",
-     "link": "https://www.newsgn.com/news/articleView.html?idxno=587044"
-    }
-   ]
-  },
-  {
-   "keyword": "민주당 대법원장 탄핵 추진",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 76,
-   "recent20": 10,
-   "press": 47,
-   "firstArticleAt": "2026-11-22T02:06:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "민주당 조희대 탄핵 추진단 \"'한덕수 판결' 탄핵 사유 삼지 않을 것\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-22T03:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404862?sid=100"
-    },
-    {
-     "title": "與 \"12월 내 조희대 탄핵 추진…한덕수 판결은 사유 미포함\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-22T03:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005444571?sid=100"
-    },
-    {
-     "title": "민주 \"조희대 탄핵, 올해 안 의결\"...국힘 \"정치적 보복\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-22T03:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436353?sid=100"
+     "title": "[속보]李대통령, 최교진 교육부 장관 사의표명 수용",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-22T03:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009303304?sid=100"
     }
    ]
   },
   {
    "keyword": "조희대 탄핵소추 기자간담회",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 56,
+   "articles90": 38,
    "recent20": 6,
-   "press": 29,
-   "firstArticleAt": "2026-11-22T01:56:00.000Z",
+   "press": 25,
+   "firstArticleAt": "2026-11-22T02:08:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "민주당 조희대 탄핵 추진단 \"'한덕수 판결' 탄핵 사유 삼지 않을 것\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-22T03:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404862?sid=100"
+     "title": "與 \"조희대 탄핵안 연내 처리…한덕수 판결, 사유로 삼지 않겠다\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-22T03:34:00.000Z",
+     "link": "https://www.ajunews.com/view/20261122112806596"
     },
     {
-     "title": "與 \"12월 내 조희대 탄핵 추진…한덕수 판결은 사유 미포함\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-22T03:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005444571?sid=100"
-    },
-    {
-     "title": "민주 \"조희대 탄핵, 올해 안 의결\"...국힘 \"정치적 보복\"",
+     "title": "민주 조희대 탄핵추진단 \"한덕수 판결은 탄핵 사유 아냐...절차 하자는 ...",
      "press": "ytn.co.kr",
-     "publishedAt": "2026-11-22T03:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436353?sid=100"
+     "publishedAt": "2026-11-22T03:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436354?sid=100"
+    },
+    {
+     "title": "[속보] 與, 조희대 탄핵안 연내 처리...\"한덕수 판결, 절차상 하자\"",
+     "press": "cjb.co.kr",
+     "publishedAt": "2026-11-22T03:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/655/0000033659?sid=100"
     }
    ]
   },
@@ -112,10 +81,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 19,
+   "articles90": 14,
    "recent20": 0,
-   "press": 19,
-   "firstArticleAt": "2026-11-22T02:00:00.000Z",
+   "press": 14,
+   "firstArticleAt": "2026-11-22T02:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -132,42 +101,140 @@
      "link": "https://n.news.naver.com/mnews/article/666/0000133169?sid=101"
     },
     {
-     "title": "취업문 더 좁아졌다…대학생 45% \"작년보다 취업 어렵다\"",
-     "press": "joongangenews.com",
+     "title": "대학생 45% \"올해 취업시장 작년보다 어렵다\" … 1년 이상 취업 준비도 ...",
+     "press": "worktoday.co.kr",
      "publishedAt": "2026-11-22T02:56:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=565638"
+     "link": "http://www.worktoday.co.kr/news/articleView.html?idxno=92455"
     }
    ]
   },
   {
-   "keyword": "최태원 한일 AI 인재 육성",
+   "keyword": "한국 수출 1조달러",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
    "articles90": 9,
    "recent20": 1,
    "press": 9,
-   "firstArticleAt": "2026-11-22T01:58:00.000Z",
+   "firstArticleAt": "2026-11-22T02:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "최태원 SK 회장 \"한일 기업·대학 손잡고 AI 인재 키우자\"",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-22T03:14:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=506692"
+     "title": "1분에 42억원어치 팔았다…7가지 숫자로 본 수출 1조달러",
+     "press": "dnews.co.kr",
+     "publishedAt": "2026-11-22T03:20:00.000Z",
+     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611211753234320018"
     },
     {
-     "title": "최태원 “한일 기업·대학 손잡고 AI 인재 공동 육성하자”",
-     "press": "newstomato.com",
+     "title": "수출 1조 달러 돌파한 韓, 세계 4위 눈앞…반도체 제외 시 8위",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-22T02:42:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=565635"
+    },
+    {
+     "title": "‘SK하이닉스 1조달러 인수’ 손정의의 빅베팅, 왜 멈췄나",
+     "press": "biz.chosun.com",
      "publishedAt": "2026-11-22T02:40:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321327&inflow=N"
+     "link": "https://n.news.naver.com/mnews/article/366/0001206467?sid=105"
+    }
+   ]
+  },
+  {
+   "keyword": "재산",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 10,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-22T02:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "지식재산연수원, 2027년 상반기 변리사 실무수습 집합교육 참가자 모집",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-22T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003488219?sid=102"
     },
     {
-     "title": "최태원 \"한일 기업·대학, AI 인재 함께 키우자\"",
-     "press": "mbnmoney.mbn.co.kr",
-     "publishedAt": "2026-11-22T02:36:00.000Z",
-     "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005963847"
+     "title": "지식재산처, 특허 통계도 AI가 읽는다…'마크다운' 형식 자료 개방",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-22T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003488226?sid=102"
+    },
+    {
+     "title": "지식재산처, AI 친화적 '마크다운' 형식 통계 간행물 제공",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-22T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005607751?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "고경표 음주운전 중단 논란",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-22T02:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'음주운전' 고경표, 활동중단→방송가도 손절했는데..'핑계고' 인기상 ...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-22T03:06:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005643890"
+    },
+    {
+     "title": "‘음주운전’ 고경표, 인기상 후보 논란…사태 심각성 인지 못하나",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-22T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002726711?sid=102"
+    },
+    {
+     "title": "라미란은 무슨 죄?...'마약 혐의' 유아인→'만취 운전' 고경표에 1년 만...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-22T03:01:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001409150"
+    }
+   ]
+  },
+  {
+   "keyword": "정년연장 정부안 제시",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-22T02:28:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김영훈 노동장관 \"정년연장, 27일 결론 안 나면 정부안 발표\"",
+     "press": "dkilbo.com",
+     "publishedAt": "2026-11-22T03:14:00.000Z",
+     "link": "https://www.dkilbo.com/news/articleView.html?idxno=561551"
+    },
+    {
+     "title": "노동장관 “정년연장, 27일 여당 특위서 결론 없으면 정부안 낸다”",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-22T03:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003566927?sid=102"
+    },
+    {
+     "title": "김영훈 노동장관 \"27일 정년연장 합의 불발 땐 정부안 발표\"",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-22T02:59:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085286"
     }
    ]
   },
@@ -176,10 +243,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 9,
+   "articles90": 7,
    "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-22T01:57:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-22T02:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -204,46 +271,14 @@
    ]
   },
   {
-   "keyword": "재산",
-   "sources": [
-    "google"
-   ],
-   "articles90": 10,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-22T02:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "지식재산연수원, 2027년 상반기 변리사 실무수습 집합교육 참가자 모집",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-22T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003488219?sid=102"
-    },
-    {
-     "title": "지식재산처, AI 친화적 '마크다운' 형식 통계 간행물 제공",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-22T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005607751?sid=102"
-    },
-    {
-     "title": "지식재산처, 특허 통계도 AI가 읽는다…'마크다운' 형식 자료 개방",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-22T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003488226?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "lpga",
    "sources": [
     "google"
    ],
-   "articles90": 8,
+   "articles90": 7,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-22T02:00:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-22T02:10:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -268,46 +303,14 @@
    ]
   },
   {
-   "keyword": "수능 수학 1등급 미적분 선택",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T01:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "수능 수학 1등급 10명 중 8.6명이 미적·기하 선택…정시 ‘문과 침공’...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-22T02:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005767126?sid=102"
-    },
-    {
-     "title": "2027 정시도 '이과 문과침공' 우려… 수학 1등급 85.7%가 미적분·기하",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-22T02:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005607738?sid=102"
-    },
-    {
-     "title": "\"수능 수학 1등급 85.7% '미적분·기하' 선택…확률과 통계 14.3% 그쳐\"",
-     "press": "kado.net",
-     "publishedAt": "2026-11-22T02:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000212572?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "철인3종 익사 무죄",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T01:58:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-22T02:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -330,78 +333,56 @@
      "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085275"
     }
    ]
-  },
-  {
-   "keyword": "젤렌스키 3자 종전협상 동의",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T02:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "젤렌스키 “성탄절 전 3자 종전협상 개최 동의”",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-22T02:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001206461?sid=104"
-    },
-    {
-     "title": "젤렌스키 \"미국, 성탄절 전 3자 종전 협상 제안…G20 계기 가능성\"",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-22T02:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979302?sid=104"
-    },
-    {
-     "title": "트럼프 소원 이뤄지나…젤렌스키 “성탄절 전 종전협상 개최 동의” [밀...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-22T02:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701814?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "트리플스타 강승원 재혼 발표",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T02:29:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘흑백’ 트리플스타 강승원, 재혼 발표에 댓글창 ‘싸늘’…과거 CCTV ...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-22T03:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001282582"
-    },
-    {
-     "title": "트리플스타 재혼 발표···에드워드 리·철가방 축하 릴레이",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-22T02:35:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001151095"
-    },
-    {
-     "title": "'흑백요리사' 트리플스타 강승원, 재혼 발표 \"안식처 돼준 고마운 사람...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-22T02:31:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409149"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 964,
-  "matched": 555,
-  "avgLeadMin": 612,
+  "flagged": 967,
+  "matched": 562,
+  "avgLeadMin": 624,
   "recent": [
+   {
+    "keyword": "레이미, 오스틴 챔피언십 우승",
+    "hitKeyword": "김아림 투어 챔피언십",
+    "hitAt": "2026-11-22T12:30:00+09:00",
+    "leadMin": 7403
+   },
+   {
+    "keyword": "1등급 국어 수학 예상",
+    "hitKeyword": "수능 수학 1등급 미적분",
+    "hitAt": "2026-11-22T12:30:00+09:00",
+    "leadMin": 3286
+   },
+   {
+    "keyword": "트리플스타 강승원 발표",
+    "hitKeyword": "강승원 셰프 재혼",
+    "hitAt": "2026-11-22T12:30:00+09:00",
+    "leadMin": 166
+   },
+   {
+    "keyword": "수능 수학 1등급 미적분 선택",
+    "hitKeyword": "수능 수학 1등급 미적분",
+    "hitAt": "2026-11-22T12:30:00+09:00",
+    "leadMin": 86
+   },
+   {
+    "keyword": "흑백 트리플스타 강승원 재혼 발표",
+    "hitKeyword": "강승원 셰프 재혼",
+    "hitAt": "2026-11-22T12:30:00+09:00",
+    "leadMin": 86
+   },
+   {
+    "keyword": "김아림, 투어 챔피언십 3R 선두",
+    "hitKeyword": "김아림 투어 챔피언십",
+    "hitAt": "2026-11-22T12:30:00+09:00",
+    "leadMin": 25
+   },
+   {
+    "keyword": "트리플스타 강승원 재혼 발표",
+    "hitKeyword": "강승원 셰프 재혼",
+    "hitAt": "2026-11-22T12:30:00+09:00",
+    "leadMin": 5
+   },
    {
     "keyword": "1251회 로또 당첨 번호",
     "hitKeyword": "로또 2등 10장 당첨",
@@ -419,48 +400,6 @@
     "hitKeyword": "해광호 수색",
     "hitAt": "2026-11-22T12:00:00+09:00",
     "leadMin": 15
-   },
-   {
-    "keyword": "고경표 핑계고 논란",
-    "hitKeyword": "고경표 음주운전 핑계고",
-    "hitAt": "2026-11-22T11:30:00+09:00",
-    "leadMin": 86
-   },
-   {
-    "keyword": "30대 고가주택 보유자 급증",
-    "hitKeyword": "30대 주택자산 급증",
-    "hitAt": "2026-11-22T11:30:00+09:00",
-    "leadMin": 66
-   },
-   {
-    "keyword": "고경표, 음주운전 중단 논란",
-    "hitKeyword": "고경표 음주운전 핑계고",
-    "hitAt": "2026-11-22T11:30:00+09:00",
-    "leadMin": 66
-   },
-   {
-    "keyword": "30대 고가주택 보유 급증",
-    "hitKeyword": "30대 주택자산 급증",
-    "hitAt": "2026-11-22T11:30:00+09:00",
-    "leadMin": 56
-   },
-   {
-    "keyword": "고경표 음주운전으로 핑계고",
-    "hitKeyword": "고경표 음주운전 핑계고",
-    "hitAt": "2026-11-22T11:30:00+09:00",
-    "leadMin": 46
-   },
-   {
-    "keyword": "채령",
-    "hitKeyword": "채령 가족 투병 소식",
-    "hitAt": "2026-11-22T11:00:00+09:00",
-    "leadMin": 589
-   },
-   {
-    "keyword": "채령 모친 암 투병 고백",
-    "hitKeyword": "채령 가족 투병 소식",
-    "hitAt": "2026-11-22T11:00:00+09:00",
-    "leadMin": 106
    }
   ]
  }
