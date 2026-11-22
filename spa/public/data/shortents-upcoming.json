@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T19:30:23.221Z",
+ "builtAt": "2026-11-22T19:40:26.534Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,11 +8,44 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
- "candidates": [],
+ "measured": 25,
+ "candidates": [
+  {
+   "keyword": "리비아 러시아 군함 피격",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-22T18:39:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "리비아서 러시아 군함 피격…\"우크라이나 드론 추정\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-22T19:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404960?sid=104"
+    },
+    {
+     "title": "\"리비아 항구서 러시아 군함 피격...우크라 공격 추정\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-22T19:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436541?sid=104"
+    },
+    {
+     "title": "“리비아 항구 정박 러시아 군함 피격…우크라 드론 공격 추정”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-22T19:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012298911?sid=104"
+    }
+   ]
+  }
+ ],
  "hitRate": {
   "days": 7,
-  "flagged": 1115,
+  "flagged": 1116,
   "matched": 630,
   "avgLeadMin": 611,
   "recent": [
