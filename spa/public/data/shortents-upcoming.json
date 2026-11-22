@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T13:08:25.700Z",
+ "builtAt": "2026-11-22T13:18:30.889Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,25 +8,25 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 29,
+ "measured": 28,
  "candidates": [
   {
    "keyword": "정부, 증안펀드 가동 준비",
    "sources": [
     "nate"
    ],
-   "articles90": 24,
+   "articles90": 22,
    "recent20": 3,
-   "press": 24,
-   "firstArticleAt": "2026-11-22T11:40:00.000Z",
+   "press": 22,
+   "firstArticleAt": "2026-11-22T11:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "미 AI 투매에 '검은 월요일' 오나?...\"증안펀드 가동 준비\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-22T13:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436491?sid=101"
+     "title": "F4, '블랙먼데이' 우려에 '증안펀드' 준비 착수...18년만 가동되나",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-22T13:08:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=783823"
     },
     {
      "title": "뉴욕증시 급락에 코스피 '검은 월요일' 우려…정부, 증시 안정 대책 가...",
@@ -35,10 +35,10 @@
      "link": "https://www.gukjenews.com/news/articleView.html?idxno=3759676"
     },
     {
-     "title": "블랙먼데이 우려에 증안펀드 18년만에 가동되나…F4 \"준비 착수\"(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-22T12:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016457004?sid=101"
+     "title": "미 AI 투매에 '검은 월요일' 오나?...\"증안펀드 가동 준비\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-22T13:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436491?sid=101"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
+   "articles90": 13,
    "recent20": 3,
-   "press": 12,
+   "press": 13,
    "firstArticleAt": "2026-11-22T11:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "화석연료 놓고 끝내 갈라졌다…31차 기후총회 합의 무산 [COP31 현장]",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T13:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009303718?sid=101"
+     "title": "‘화석연료 퇴출’ 이견 못 좁혀…유엔기후총회 합의문 채택 불발",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-22T13:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413808?sid=104"
     },
     {
-     "title": "'화석연료 퇴출' 빠진 유엔기후총회, 결국 결렬…합의문 채택 불발",
+     "title": "'화석연료 퇴출' 빠진 유엔기후총회…결국 합의문 채택 불발",
      "press": "hankookilbo.com",
      "publishedAt": "2026-11-22T13:06:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/469/0000967088?sid=104"
     },
     {
-     "title": "유엔기후총회, '화석연료' 이견에 합의문 채택 실패",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-22T12:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404953?sid=102"
+     "title": "화석연료 놓고 끝내 갈라졌다…31차 기후총회 합의 무산 [COP31 현장]",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-22T13:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009303718?sid=101"
     }
    ]
   },
@@ -79,30 +79,62 @@
    "sources": [
     "daum"
    ],
-   "articles90": 14,
-   "recent20": 1,
-   "press": 10,
+   "articles90": 16,
+   "recent20": 3,
+   "press": 11,
    "firstArticleAt": "2026-11-22T11:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘내년 결혼’ 솔비, ♥이규한과 가상 ‘2세’에 꿀뚝뚝..“외모? 오빠 ...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-22T12:53:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005644021"
+     "title": "'이규한♥' 솔비, 첫 키스 비하인드 공개 \"가글하고 오고 나도 시켜주더...",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-22T13:12:00.000Z",
+     "link": "https://www.insight.co.kr/news/583089"
     },
     {
-     "title": "솔비 “♥깔끔한 이규한, 가글 후 첫키스…청소 빨래 설거지 다 해” (미...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-22T12:41:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190240"
+     "title": "솔비 “‘♥이규한’ 설거지 못 하게 해… 그림만 그리라고” (‘미우새...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-22T13:09:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005767349"
     },
     {
-     "title": "이규한, 사귀기도 전에 프러포즈했다…♥솔비 母에 \"평생 책임지겠다\"",
+     "title": "솔비♥이규한, 벌써 2세 얼굴 공개...AI 사진에 \"볼살은 나 닮았으면\"",
      "press": "sportschosun.com",
-     "publishedAt": "2026-11-22T12:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004468709"
+     "publishedAt": "2026-11-22T13:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004468714"
+    }
+   ]
+  },
+  {
+   "keyword": "김정은 러시아 대사 신임장",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-22T11:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김정은, 러시아대사 신임장 직접 접수…30여 년 만의 의전 변화",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-22T13:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404955?sid=104"
+    },
+    {
+     "title": "김정은, 주북 러 대사 신임장 접수…30여년 만에 직접 제정받아",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T13:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014338408?sid=104"
+    },
+    {
+     "title": "김정은, 러시아대사 신임장 직접 접수...30여년만 의전 변화",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-22T12:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701904?sid=100"
     }
    ]
   },
@@ -111,10 +143,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 9,
+   "articles90": 7,
    "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-22T11:46:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-22T11:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -135,102 +167,6 @@
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-22T12:27:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012298860?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "김정은 러시아 대사 신임장",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-22T11:39:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김정은, 러시아대사 신임장 직접 접수...30여년만 의전 변화",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-22T12:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701904?sid=100"
-    },
-    {
-     "title": "김정은, 러시아대사 신임장 직접 받아…외교 의전에서도 ‘최고지도자...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-22T12:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484328?sid=100"
-    },
-    {
-     "title": "北 개헌 뒤 달라진 외교 의전…김정은, 러시아 대사 신임장 직접 받아",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-22T12:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005607938?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "이혜영 남편",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 5,
-   "recent20": 3,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T12:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이혜영 \"美 LA에 수영장 딸린 저택 마련... 비욘세가 이웃\" ('미우새')",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-22T13:04:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409203"
-    },
-    {
-     "title": "이혜영, '수조원대 자산가' 남편♥과 '5년 폐암 투병' 끈끈함…\"잘 견뎌...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-22T12:57:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004468713"
-    },
-    {
-     "title": "“이제 안 나온다며” 이혜영 ‘미우새’ 등판… ‘전남편’ 이상민 간...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-22T12:56:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005767348"
-    }
-   ]
-  },
-  {
-   "keyword": "박채은·양호준 금메달",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T11:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "빙속 박채은·양호준, 2차 월드컵 혼성계주 금메달 합작",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T12:16:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/421/0009303711"
-    },
-    {
-     "title": "빙속 박채은·양호준, 월드컵 혼성계주 금메달",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-22T11:56:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/055/0001404950"
-    },
-    {
-     "title": "스피드스케이팅 박채은·양호준, 월드컵 2차 대회서 혼성계주 금메달",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-22T11:48:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261122000131"
     }
    ]
   }
