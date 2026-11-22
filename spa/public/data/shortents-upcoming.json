@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T12:18:09.294Z",
+ "builtAt": "2026-11-22T12:28:12.457Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "증안펀드 가동 준비",
@@ -16,30 +16,30 @@
     "signal.bz",
     "daum"
    ],
-   "articles90": 29,
-   "recent20": 6,
-   "press": 29,
-   "firstArticleAt": "2026-11-22T10:50:00.000Z",
+   "articles90": 26,
+   "recent20": 2,
+   "press": 26,
+   "firstArticleAt": "2026-11-22T11:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "美 증시 급락에 '증안펀드' 가동 준비…불법 공매도 특별감시",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-22T12:18:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903965"
+    },
+    {
+     "title": "반대매매 완화 이어 증안펀드 준비…정부, 16일 만에 추가 대책",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-22T12:18:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611220029"
+    },
     {
      "title": "정부 증안펀드 가동 준비…미국 증시 급락에 F4 긴급회의, 24일부터 자사...",
      "press": "cbci.co.kr",
      "publishedAt": "2026-11-22T12:08:00.000Z",
      "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629597"
-    },
-    {
-     "title": "36년간 5회 등판 증안펀드…주가 폭락 막았을까",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-22T12:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413801?sid=101"
-    },
-    {
-     "title": "'검은 월요일' 우려에…정부, 10조 규모 증안펀드 투입한다",
-     "press": "econovill.com",
-     "publishedAt": "2026-11-22T12:04:00.000Z",
-     "link": "https://www.econovill.com/news/articleView.html?idxno=758089"
     }
    ]
   },
@@ -48,30 +48,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 20,
-   "recent20": 3,
-   "press": 20,
-   "firstArticleAt": "2026-11-22T10:53:00.000Z",
+   "articles90": 19,
+   "recent20": 4,
+   "press": 18,
+   "firstArticleAt": "2026-11-22T11:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "최교진 교육부 장관, 수능 대혼란 책임지고 사퇴…취임 14개월 만에 물러...",
+     "press": "econovill.com",
+     "publishedAt": "2026-11-22T12:24:00.000Z",
+     "link": "https://www.econovill.com/news/articleView.html?idxno=758090"
+    },
+    {
+     "title": "‘수능 무능 대처’ 최교진 사실상 경질",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-22T12:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484327?sid=100"
+    },
     {
      "title": "최교진 교육부 장관, 수능 대책 혼란 책임지고 사퇴…취임 14개월 만",
      "press": "fntoday.co.kr",
      "publishedAt": "2026-11-22T12:14:00.000Z",
      "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=399608"
-    },
-    {
-     "title": "최교진 교육부 장관 사의…李대통령, 면직안 재가",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-22T12:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005607940?sid=100"
-    },
-    {
-     "title": "최교진 교육장관 사퇴…“수능 책임 통감”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-22T12:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012298835?sid=102"
     }
    ]
   },
@@ -80,10 +80,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 17,
-   "recent20": 2,
-   "press": 17,
-   "firstArticleAt": "2026-11-22T10:52:00.000Z",
+   "articles90": 15,
+   "recent20": 1,
+   "press": 15,
+   "firstArticleAt": "2026-11-22T10:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -112,10 +112,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T10:50:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-22T11:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -144,10 +144,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T10:49:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-22T11:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -172,138 +172,41 @@
    ]
   },
   {
-   "keyword": "전소민 식스센스 B사이드",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T10:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "유재석, 송은이와 먹던 음료수 바꿔 먹어 “진짜 찐친이네” 전소민 감...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-22T12:05:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190235"
-    },
-    {
-     "title": "전소민, 제주도 자연인 시절 고백 “콩벌레 갖고 놀고 개미 잡아먹어”...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-22T11:50:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190234"
-    },
-    {
-     "title": "'식스센스', 음주운전 고경표 논란 속 최종회…전소민 \"내가 갈고닦아 ...",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-22T11:20:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110037873867"
-    }
-   ]
-  },
-  {
-   "keyword": "100일의 거짓말",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T10:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'100일의 거짓말' 김유정, 진선규 향한 반격 준비...대반전 터진다",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-22T12:00:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3759549"
-    },
-    {
-     "title": "'100일의 거짓말' 김유정, 뜻밖에 마주한 새로운 진실은?",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-22T11:23:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000328745"
-    },
-    {
-     "title": "박진영 '100일의 거짓말' 구국단 묘사 논쟁…14회서 양부와 대립",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-22T10:58:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282996"
-    }
-   ]
-  },
-  {
-   "keyword": "영월서 70대 숨져 중독 추정",
+   "keyword": "윤선우·김가은, 2세 성별은 딸",
    "sources": [
     "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T10:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "영월서 차박하던 70대 女 숨져…일산화탄소 중독 추정",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-22T12:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005444659?sid=102"
-    },
-    {
-     "title": "영월서 차박하던 70대 여성 숨져…일산화탄소 중독 추정",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-22T11:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003567005?sid=102"
-    },
-    {
-     "title": "영월서 차박하던 70대 숨져…일산화탄소 중독 추정",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-22T10:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413797?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "한전on",
-   "sources": [
-    "google"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-22T10:52:00.000Z",
+   "firstArticleAt": "2026-11-22T11:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한전, '한전ON'·조달망 뚫려 개인정보 152만여건 유출... 주민번호·카...",
-     "press": "boannews.com",
-     "publishedAt": "2026-11-22T10:58:00.000Z",
-     "link": "https://www.boannews.com/news/articleView.html?idxno=147429"
+     "title": "윤선우·김가은, 2세 성별 딸 공개 \"공주 2명 괜찮아?\"",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-22T11:30:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110037931214"
     },
     {
-     "title": "한전ON∙전자조달시스템서 개인정보 유출…152만여건 규모",
-     "press": "kdfnews.com",
-     "publishedAt": "2026-11-22T10:56:00.000Z",
-     "link": "http://www.kdfnews.com/news/articleView.html?idxno=191245"
+     "title": "‘10년 열애’ 윤선우♥김가은, 2세 성별은 딸… “여보랑 똑같이 생기...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-22T11:13:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003542975"
     },
     {
-     "title": "한전, 개인정보 150여만건 유출…한전ON·SRM 이용자 피해",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-22T10:52:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261122010008514"
+     "title": "윤선우♥김가은, 2세 성별은 딸..\"여보랑 똑같은 애 만나봐\" 환호[핫피플...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-22T11:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005643999"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1094,
+  "flagged": 1095,
   "matched": 620,
   "avgLeadMin": 610,
   "recent": [
