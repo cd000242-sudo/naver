@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T01:04:09.139Z",
+ "builtAt": "2026-11-22T01:14:12.355Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,7 +16,7 @@
     "nate"
    ],
    "articles90": 56,
-   "recent20": 6,
+   "recent20": 2,
    "press": 55,
    "firstArticleAt": "2026-11-22T00:00:00.000Z",
    "exclusive": true,
@@ -47,30 +47,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 23,
-   "recent20": 3,
-   "press": 23,
-   "firstArticleAt": "2026-11-21T23:44:00.000Z",
+   "articles90": 27,
+   "recent20": 5,
+   "press": 27,
+   "firstArticleAt": "2026-11-21T23:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "최태원 “한일 기업·대학, AI 인재 함께 키워 일자리까지 잇자”",
-     "press": "segyebiz.com",
-     "publishedAt": "2026-11-22T00:54:00.000Z",
-     "link": "http://www.segyebiz.com/newsView/20261122503176?OutUrl=naver"
+     "title": "최태원 SK 회장 \"한일 기업·대학 손잡고 AI 인재 공동 육성하자\"",
+     "press": "businesskorea.co.kr",
+     "publishedAt": "2026-11-22T01:12:00.000Z",
+     "link": "https://www.businesskorea.co.kr/news/articleView.html?idxno=281859"
     },
     {
-     "title": "최태원 \"AI시대, 대학 교육 재설계해야\"…한일 인재 공동 육성 제안",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T00:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009303089?sid=101"
+     "title": "최태원 \"AI 네이티브 사회 맞춰 교육 새롭게 설계해야\"",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-22T01:12:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4120046"
     },
     {
-     "title": "최태원 SK그룹 회장, “AI 시대 인재, 대학과 기업이 함께 키워야”",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-22T00:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003488192?sid=101"
+     "title": "최태원 SK그룹 회장 \"한일 기업·대학, AI 인재 공동 육성하자\"",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-22T01:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005607720?sid=101"
     }
    ]
   },
@@ -80,7 +80,7 @@
     "signal.bz"
    ],
    "articles90": 14,
-   "recent20": 2,
+   "recent20": 0,
    "press": 14,
    "firstArticleAt": "2026-11-22T00:00:00.000Z",
    "exclusive": false,
@@ -107,12 +107,44 @@
    ]
   },
   {
+   "keyword": "수험",
+   "sources": [
+    "google"
+   ],
+   "articles90": 11,
+   "recent20": 4,
+   "press": 11,
+   "firstArticleAt": "2026-11-22T00:19:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "무신사, 롯데리아와 수험생 응원 '버거트럭' 이벤트 실시",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-22T01:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003488195?sid=101"
+    },
+    {
+     "title": "'수능 끝' 수험생들 격려한 미미미누…무신사, 햄버거 1000개 쏜다",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-22T01:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005444528?sid=101"
+    },
+    {
+     "title": "성수동에 뜬 ‘미미미누 버거 트럭’…무신사, 수험생에 최대 200만원 쏜...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-22T01:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/117/0004127084?sid=103"
+    }
+   ]
+  },
+  {
    "keyword": "하나금융, 어르신 주거 안전 지원",
    "sources": [
     "nate"
    ],
    "articles90": 11,
-   "recent20": 4,
+   "recent20": 1,
    "press": 11,
    "firstArticleAt": "2026-11-21T23:46:00.000Z",
    "exclusive": false,
@@ -139,34 +171,34 @@
    ]
   },
   {
-   "keyword": "수험",
+   "keyword": "흑백요리사 트리플스타 발표",
    "sources": [
-    "google"
+    "nate"
    ],
-   "articles90": 11,
-   "recent20": 4,
+   "articles90": 10,
+   "recent20": 2,
    "press": 10,
-   "firstArticleAt": "2026-11-21T23:36:00.000Z",
+   "firstArticleAt": "2026-11-22T00:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "성수동에 뜬 ‘미미미누 버거 트럭’…무신사, 수험생에 최대 200만원 쏜...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-22T01:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/117/0004127084?sid=103"
+     "title": "'흑백요리사' 트리플스타, 재혼 발표 \"부끄럽지 않은 남편 될 것\"[셀럽톡...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-22T01:06:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1795309523531349005"
     },
     {
-     "title": "블랙코미디 연극 '죽여주는 이야기, 수능 수험표 소지자 할인",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T00:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014337761?sid=103"
+     "title": "트리플스타 강승원, 전처 사생활 논란 이후 재혼 소식…\"부족한 저 감싸...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-22T01:04:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282723"
     },
     {
-     "title": "수능 끝낸 수험생, 이젠 문제집 대신 ‘이책’ 어때요?… 신간 ‘감정을...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-22T00:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002834527?sid=103"
+     "title": "'트리플스타' 강승원 결혼 발표…예비신부와 평생 함께하기로",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-22T00:50:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626848"
     }
    ]
   },
@@ -195,42 +227,10 @@
      "link": "https://n.news.naver.com/mnews/article/018/0006413581?sid=102"
     },
     {
-     "title": "관계성 범죄에 경찰 개입 어디까지?...국민 참여 토론",
-     "press": "ytn.co.kr",
+     "title": "경찰, 관계성범죄 개입 기준 국민과 논의…숙의 절차 도입",
+     "press": "sedaily.com",
      "publishedAt": "2026-11-22T00:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436277?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "흑백요리사 트리플스타 발표",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-22T00:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'트리플스타' 강승원 결혼 발표…예비신부와 평생 함께하기로",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-22T00:50:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626848"
-    },
-    {
-     "title": "“부끄럽지 않은 남편 될 것”…'트리플스타' 강승원 셰프, 깜짝 재혼 발...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-22T00:44:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1176649"
-    },
-    {
-     "title": "‘흑백요리사’ 트리플스타, 재혼 발표 “부끄럽지 않은 남편 되겠다”...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-22T00:26:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003542909"
+     "link": "https://n.news.naver.com/mnews/article/011/0004684719?sid=102"
     }
    ]
   },
@@ -239,10 +239,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-21T23:44:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-22T00:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -271,10 +271,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-21T23:37:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-21T23:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -303,10 +303,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-21T23:44:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-22T00:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
