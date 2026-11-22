@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T15:29:14.574Z",
+ "builtAt": "2026-11-22T15:39:18.058Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,13 +15,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 14,
-   "recent20": 0,
+   "articles90": 15,
+   "recent20": 1,
    "press": 10,
    "firstArticleAt": "2026-11-22T14:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[사설] 조희대 탄핵 강행은 사실상 재판 불복 아닌가",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-22T15:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003567073?sid=110"
+    },
     {
      "title": "강원 여야, 조희대 대법원장 탄핵 추진 놓고 정면충돌",
      "press": "kado.net",
@@ -33,50 +39,45 @@
      "press": "ksilbo.co.kr",
      "publishedAt": "2026-11-22T15:04:00.000Z",
      "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1073281"
-    },
-    {
-     "title": "[사설] 대법원장 탄핵에 멈춘 국회…민생도 예산도 뒷전인가",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-22T15:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004684899?sid=110"
     }
    ]
   },
   {
-   "keyword": "증안펀드 가동 준비",
+   "keyword": "최교진 수능 사의",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-22T14:03:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T14:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "정부, 증안펀드 가동 준비 착수…시장상황 따라 즉시 투입",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-22T15:18:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626900"
+     "title": "\"수능 책임 통감\" 최교진 교육부장관 사의",
+     "press": "kado.net",
+     "publishedAt": "2026-11-22T15:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000212714?sid=100"
     },
     {
-     "title": "미 AI 투매에 '검은 월요일' 오나?...\"증안펀드 가동 준비\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-22T15:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436526?sid=101"
+     "title": "이재명 대통령, 최교진 교육부 장관 사의 수락",
+     "press": "ksilbo.co.kr",
+     "publishedAt": "2026-11-22T15:04:00.000Z",
+     "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1073279"
     },
     {
-     "title": "카드대란·리먼사태 때 등판… 현재 증안펀드 10조7600억 조성",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-22T15:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001886717?sid=101"
+     "title": "AI 부정행위가 불붙인 수능 개편론⋯“수능 수명 끝났다”",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-22T15:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001232517?sid=102"
     }
    ]
   },
   {
    "keyword": "한전 152만명 개인정보 유출",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 3,
@@ -107,42 +108,42 @@
    ]
   },
   {
-   "keyword": "김승수",
+   "keyword": "한전 on",
    "sources": [
-    "google"
+    "daum"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-22T14:02:00.000Z",
+   "firstArticleAt": "2026-11-22T14:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김승수, 16세 연하 박혜연과 핑크빛 기류",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T15:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014338418"
+     "title": "한전 고객·협력사 152만명 정보 유출… 주민번호에 계좌·카드번호까지",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-22T15:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001886716?sid=101"
     },
     {
-     "title": "김승수 ‘♥박혜연’에 손 포개기… “더 알아가고 싶다” 애프터신청...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-22T14:43:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005767353"
+     "title": "한전 고객 152만명 주민·계좌·카드번호 털려",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-22T15:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003567038?sid=102"
     },
     {
-     "title": "김승수, 16세 연하 맞선녀 박혜연에 고백…다음 데이트 약속까지 ‘달달...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-22T14:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190243"
+     "title": "한국전력 또 뚫렸다···'한전ON' 이용 152만여 명 개인정보 유출",
+     "press": "globale.co.kr",
+     "publishedAt": "2026-11-22T14:14:00.000Z",
+     "link": "https://www.globale.co.kr/news/articleView.html?idxno=41780"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1118,
-  "matched": 635,
+  "flagged": 1116,
+  "matched": 634,
   "avgLeadMin": 613,
   "recent": [
    {
