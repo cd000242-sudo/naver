@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T05:05:39.529Z",
+ "builtAt": "2026-11-22T05:15:42.675Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,101 +8,101 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 24,
  "candidates": [
   {
-   "keyword": "최교진 장관 사의 수락",
+   "keyword": "최교진 교육부 장관 사의",
    "sources": [
     "daum"
    ],
-   "articles90": 90,
-   "recent20": 11,
-   "press": 79,
-   "firstArticleAt": "2026-11-22T03:38:00.000Z",
+   "articles90": 89,
+   "recent20": 12,
+   "press": 73,
+   "firstArticleAt": "2026-11-22T03:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령, '수능 혼란 책임' 최교진 교육장관 사의 수락",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-22T05:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002467009?sid=100"
+     "title": "李대통령, 최교진 교육장관 사의 즉각 수용...수능 대응 혼선에 사실상...",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-22T05:14:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=73430"
     },
     {
-     "title": "최교진 장관 사퇴했지만…정부 AI 부정행위 책임론 확산",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-22T04:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000193194?sid=102"
+     "title": "\"수능 혼란 책임\" 교육부 장관 사퇴에 최은옥 차관 직무대행 체제 예정",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-22T05:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005444598?sid=102"
     },
     {
-     "title": "[이슈] 李대통령, 교육부 장관 사의 즉각 수락…최교진 \"수능 준비 과정...",
-     "press": "polinews.co.kr",
+     "title": "AI 부정행위에 대학도 긴장…교육부 장관 사의",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-22T05:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928700?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "트럼프 얄타회담 사진",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T03:57:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프, 미중러 회담서 한반도 논의 확인...WSJ “김정은과 회담 과도한...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-22T05:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701842?sid=104"
+    },
+    {
+     "title": "\"GOAT\" \"친구들\"…트럼프, 1시간동안 APEC 사진 35장 '폭풍 게시'",
+     "press": "edaily.co.kr",
      "publishedAt": "2026-11-22T04:56:00.000Z",
-     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=748941"
+     "link": "https://n.news.naver.com/mnews/article/018/0006413703?sid=104"
+    },
+    {
+     "title": "트럼프 \"미중러 정상회담서 한반도 위험 대응 논의\"…얄타회담과 나란히...",
+     "press": "kado.net",
+     "publishedAt": "2026-11-22T04:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000212581?sid=100"
     }
    ]
   },
   {
-   "keyword": "조희대 대법원장 탄핵소추 추진",
+   "keyword": "케인 발목 인대 수술 성공",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 40,
-   "recent20": 5,
-   "press": 35,
-   "firstArticleAt": "2026-11-22T03:37:00.000Z",
-   "exclusive": false,
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T03:48:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "민주당 ‘조희대 탄핵추진단’ “한덕수 판결은 탄핵사유 삼지 않을 것...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-22T05:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002726729?sid=100"
+     "title": "케인 \"시즌 막판 준비된 모습으로 돌아오겠다\"...발목 인대 파열 수술 마...",
+     "press": "maniareport.com",
+     "publishedAt": "2026-11-22T04:23:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/425/0000215274"
     },
     {
-     "title": "오세훈 \"조희대 대법원장 탄핵 처리되면 이재명 심판열차 출발\"",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-22T05:02:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/22/2026112250072.html"
+     "title": "'부상' 케인, 왼쪽 발목 수술 받아…재활 프로그램 돌입",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-22T04:22:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110034979992"
     },
     {
-     "title": "與, 조희대 대법원장 탄핵 연내 추진…직무정지·법조계 우려 확산",
-     "press": "newsgn.com",
-     "publishedAt": "2026-11-22T05:00:00.000Z",
-     "link": "https://www.newsgn.com/news/articleView.html?idxno=587156"
-    }
-   ]
-  },
-  {
-   "keyword": "정년연장 정부안 제시",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 3,
-   "press": 7,
-   "firstArticleAt": "2026-11-22T04:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김영훈 노동장관 \"정년 연장, 27일 특위 결론 안 나면 정부안 발표\"",
-     "press": "newsgn.com",
-     "publishedAt": "2026-11-22T05:02:00.000Z",
-     "link": "https://www.newsgn.com/news/articleView.html?idxno=587157"
-    },
-    {
-     "title": "정년 연장 논의 '최후통첩'...\"27일 합의 못하면 정부가 낸다\"",
-     "press": "jibs.co.kr",
-     "publishedAt": "2026-11-22T04:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/661/0000086906?sid=100"
-    },
-    {
-     "title": "김영훈 \"27일 정년 연장 합의 안 되면 정부안 발표\"…여당에 최후통첩",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-22T04:46:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=730397"
+     "title": "[오피셜] 보호대·목발에도 '엄지 척'… 케인, 발목 수술 성공→ 재활 시...",
+     "press": "besteleven.com",
+     "publishedAt": "2026-11-22T04:11:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/343/0000149174"
     }
    ]
   },
@@ -112,7 +112,7 @@
     "nate"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-22T03:48:00.000Z",
    "exclusive": false,
@@ -137,75 +137,11 @@
      "link": "https://www.m-i.kr/news/articleView.html?idxno=2021726"
     }
    ]
-  },
-  {
-   "keyword": "트럼프 얄타회담 사진",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T03:57:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"GOAT\" \"친구들\"…트럼프, 1시간동안 APEC 사진 35장 '폭풍 게시'",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-22T04:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413703?sid=104"
-    },
-    {
-     "title": "트럼프 \"미중러 정상회담서 한반도 위험 대응 논의\"…얄타회담과 나란히...",
-     "press": "kado.net",
-     "publishedAt": "2026-11-22T04:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000212581?sid=100"
-    },
-    {
-     "title": "미·중·러 정상회담 사진 30장 올린 트럼프... 시진핑 껴안고 푸틴엔 “...",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-22T03:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004011016?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "흑백 트리플스타 재혼",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T03:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'흑백요리사' 트리플스타, 재혼 발표... \"든든한 안식처\"",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-22T04:30:00.000Z",
-     "link": "https://www.insight.co.kr/news/583070"
-    },
-    {
-     "title": "\"부끄럽지 않은 남편 될 것\"… '흑백요리사' 트리플스타 강승원, 깜짝 재...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-22T04:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000492229"
-    },
-    {
-     "title": "‘흑백요리사’ 트리플스타 강승원, 재혼 발표…“든든한 안식처 만나”",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-22T03:42:00.000Z",
-     "link": "https://m.entertain.naver.com/article/396/0000761588"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 981,
+  "flagged": 983,
   "matched": 569,
   "avgLeadMin": 626,
   "recent": [
