@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T02:24:37.396Z",
+ "builtAt": "2026-11-22T02:34:45.174Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,101 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "조희대 탄핵 추진",
    "sources": [
     "nate"
    ],
-   "articles90": 60,
-   "recent20": 27,
-   "press": 31,
-   "firstArticleAt": "2026-11-22T01:46:00.000Z",
+   "articles90": 64,
+   "recent20": 21,
+   "press": 34,
+   "firstArticleAt": "2026-11-22T01:58:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "국민의힘 \"조희대 탄핵 정해놓고 사유 찾아...철회해야\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-22T02:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436333?sid=100"
+     "title": "[막전막후] 조희대 탄핵과 이재명 탄핵론",
+     "press": "pennmike.com",
+     "publishedAt": "2026-11-22T02:34:00.000Z",
+     "link": "https://www.pennmike.com/news/articleView.html?idxno=132447"
     },
     {
-     "title": "與 조희대 대법원장 탄핵 추진 공식화…\"12월 내 의결 목표\"",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-22T02:20:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=885870"
+     "title": "민주 내부서 ‘조희대 탄핵’ 반대 목소리…“판결 이유로 탄핵 어렵고...",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-22T02:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003060410?sid=100"
     },
     {
-     "title": "민주당, 조희대 탄핵 12월 내 의결 추진…\"판결 아닌 절차 위반 문제\"",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-22T02:20:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261122000042"
-    }
-   ]
-  },
-  {
-   "keyword": "정점식 블랙먼데이 대응 촉구",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 24,
-   "recent20": 6,
-   "press": 24,
-   "firstArticleAt": "2026-11-22T01:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "국힘 “내일 ‘블랙먼데이’ 우려…긴급 대응조치 준비해야”",
+     "title": "국힘 “조희대 지키자”는데 극우 “당해도 싸다” 왜?",
      "press": "hani.co.kr",
-     "publishedAt": "2026-11-22T02:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833333?sid=100"
-    },
-    {
-     "title": "정점식 “정부, 블랙먼데이 가능성 대비 긴급조치 준비해야”",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-22T02:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005767118?sid=100"
-    },
-    {
-     "title": "[속보]국힘 \"내일 증시 '블랙먼데이' 우려\"",
-     "press": "magazine.hankyung.com",
-     "publishedAt": "2026-11-22T02:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/050/0000113590?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "현대엘리베이터 무벡스 지분 매각",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 19,
-   "recent20": 1,
-   "press": 19,
-   "firstArticleAt": "2026-11-22T00:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "현대엘리베이터, 현대무벡스 지분 1026억원 매각…주주환원 확대",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-22T02:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000554312?sid=101"
-    },
-    {
-     "title": "현대엘리베이터, 현대무벡스 지분 1천26억원 매각…배당 늘린다",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-22T02:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000545112?sid=101"
-    },
-    {
-     "title": "현대엘리베이터, 현대무벡스 지분 126억원 매각…주주환원 일환",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-22T01:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001206454?sid=101"
+     "publishedAt": "2026-11-22T02:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002833334?sid=100"
     }
    ]
   },
@@ -112,7 +48,7 @@
     "signal.bz"
    ],
    "articles90": 18,
-   "recent20": 3,
+   "recent20": 2,
    "press": 18,
    "firstArticleAt": "2026-11-22T01:06:00.000Z",
    "exclusive": false,
@@ -144,29 +80,61 @@
     "google"
    ],
    "articles90": 22,
-   "recent20": 6,
+   "recent20": 4,
    "press": 17,
-   "firstArticleAt": "2026-11-22T01:01:00.000Z",
+   "firstArticleAt": "2026-11-22T01:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "철도노조 23일 준법투쟁…논술·면접 수험생 차질 우려",
+     "press": "incheonilbo.com",
+     "publishedAt": "2026-11-22T02:26:00.000Z",
+     "link": "https://www.incheonilbo.com/news/articleView.html?idxno=1337426"
+    },
+    {
+     "title": "칠곡교육지원청, 2027학년도 대학수학능력시험 시험장 찾아 수험생 격려",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-22T02:24:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2021704"
+    },
     {
      "title": "무신사, 롯데리아와 수험생 응원 '버거 트럭' 운영",
      "press": "zdnet.co.kr",
      "publishedAt": "2026-11-22T02:19:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/092/0002446341?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "현대엘리베이터 무벡스 지분 매각",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 16,
+   "recent20": 2,
+   "press": 16,
+   "firstArticleAt": "2026-11-22T01:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "현대엘리베이터, 무벡스 지분 1026억 매각…배당 확대",
+     "press": "4th.kr",
+     "publishedAt": "2026-11-22T02:28:00.000Z",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2122398"
     },
     {
-     "title": "수능 끝 첫 주말…수험생은 논술 고사장으로",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-22T02:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001886613?sid=102"
+     "title": "현대엘리베이터, 현대무벡스 지분 1026억원 매각…주주환원 확대",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-22T02:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000554312?sid=101"
     },
     {
-     "title": "수험생 1000명에 버거 쏜다… 무신사·롯데리아 '버거 트럭' 운영",
-     "press": "financialpost.co.kr",
-     "publishedAt": "2026-11-22T02:14:00.000Z",
-     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=302354"
+     "title": "현대엘리베이터, 현대무벡스 지분 1천26억원 매각…배당 늘린다",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-22T02:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000545112?sid=101"
     }
    ]
   },
@@ -175,10 +143,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 3,
-   "press": 14,
-   "firstArticleAt": "2026-11-22T01:00:00.000Z",
+   "articles90": 13,
+   "recent20": 1,
+   "press": 13,
+   "firstArticleAt": "2026-11-22T01:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -208,61 +176,61 @@
     "nate"
    ],
    "articles90": 11,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-22T01:01:00.000Z",
-   "exclusive": true,
+   "recent20": 3,
+   "press": 11,
+   "firstArticleAt": "2026-11-22T01:22:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "LG유플러스, 2027년 조직개편…AI 인프라·플랫폼 중심 B2B 재편",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-22T02:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/468/0001282578?sid=101"
+    },
+    {
+     "title": "[LG 사단] LGU+, AI 인프라·플랫폼 중심 조직개편…'B2B 사업' 강화",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-22T02:30:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086191"
+    },
     {
      "title": "LG유플러스, 2027년 조직개편…AI 사업조직 재편·연구개발 통합",
      "press": "smartbizn.com",
      "publishedAt": "2026-11-22T02:16:00.000Z",
      "link": "https://www.smartbizn.com/news/articleView.html?idxno=160189"
-    },
-    {
-     "title": "LGU+, 2027년 조직개편 단행…\"AI시장 변화에 능동적 대응\"",
-     "press": "itbiznews.com",
-     "publishedAt": "2026-11-22T02:00:00.000Z",
-     "link": "https://www.itbiznews.com/news/articleView.html?idxno=232387"
-    },
-    {
-     "title": "LG유플러스, AIDC 키우고 AI 에이전트 확대…AI 수익화 속도 낸다",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-22T01:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004684734?sid=105"
     }
    ]
   },
   {
-   "keyword": "고경표 음주운전으로 핑계고",
+   "keyword": "흑백요리사 트리플스타 발표",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-22T00:57:00.000Z",
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-22T01:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'음주운전' 고경표 지우기 바쁜데…'핑계고' 시상식 후보 선정 논란[셀...",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-22T02:22:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1795313133531352010"
+     "title": "'흑백요리사' 트리플스타 강승원, 재혼 발표 \"안식처 돼준 고마운 사람...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-22T02:31:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001409149"
     },
     {
-     "title": "'음주운전 물의' 고경표, '핑계고' 시상식 후보 논란…사고 후 불과 8일...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T01:59:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009303176"
+     "title": "'흑백요리사' 트리플스타, 각종 논란 딛고 재혼 발표",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-22T02:29:00.000Z",
+     "link": "https://m.entertain.naver.com/article/629/0000554315"
     },
     {
-     "title": "'만취운전' 고경표, 변우석·서강준과 '핑계고' 인기상 후보…적절성 논...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-22T01:54:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002082921"
+     "title": "'흑백요리사' 강승원, 재혼 발표 \"안식처가 되어준 사람\"",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-22T01:33:00.000Z",
+     "link": "https://m.entertain.naver.com/article/437/0000521860"
     }
    ]
   },
@@ -272,7 +240,7 @@
     "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 1,
    "press": 6,
    "firstArticleAt": "2026-11-22T01:18:00.000Z",
    "exclusive": false,
@@ -299,14 +267,46 @@
    ]
   },
   {
+   "keyword": "추성훈 은퇴전",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-22T01:09:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "추성훈, 마지막 MMA 경기서 크리스 리벤에 판정패…48년 격투 인생 마침...",
+     "press": "dailysportshankook.co.kr",
+     "publishedAt": "2026-11-22T01:48:00.000Z",
+     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435802"
+    },
+    {
+     "title": "추성훈, '48년 격투 인생' 마침표' 찍고 다시 시작…\"인생은 안 끝나\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T01:27:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014337790"
+    },
+    {
+     "title": "추성훈, 태극기·일장기 유도복 입고 치른 은퇴전",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-22T01:18:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3759325"
+    }
+   ]
+  },
+  {
    "keyword": "마마 어워즈",
    "sources": [
     "google"
    ],
-   "articles90": 7,
+   "articles90": 5,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T00:58:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-22T01:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -331,34 +331,34 @@
    ]
   },
   {
-   "keyword": "흑백요리사 트리플스타 발표",
+   "keyword": "김유정 박진영 빗속 입맞춤",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 3,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T01:04:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-22T01:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'흑백요리사' 강승원, 재혼 발표 \"안식처가 되어준 사람\"",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-22T01:33:00.000Z",
-     "link": "https://m.entertain.naver.com/article/437/0000521860"
+     "title": "'100일의 거짓말' 김유정♥박진영, 빗속 입맞춤…시청률 12.5% 돌파",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-22T02:10:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=885864"
     },
     {
-     "title": "‘흑백요리사’ 트리플스타 강승원, 재혼 발표…“평생 함께하기로”",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-22T01:27:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001282566"
+     "title": "'100일의 거짓말' 시청률 폭발…김유정·박진영 입맞춤에 최고 12.5%",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-22T01:56:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282740"
     },
     {
-     "title": "'흑백' 트리플스타, 재혼 발표..\"부족한 저를 감싸 안아준 사람\" [전문]",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-22T01:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005643873"
+     "title": "김유정♥박진영, 빗속 애틋 첫 키스→진선규 무너뜨릴 공조 예고(‘백일...",
+     "press": "heraldmuse.com",
+     "publishedAt": "2026-11-22T01:40:00.000Z",
+     "link": "https://m.entertain.naver.com/article/112/0003813989"
     }
    ]
   },
@@ -367,10 +367,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T01:02:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-22T01:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -391,38 +391,6 @@
      "press": "bntnews.co.kr",
      "publishedAt": "2026-11-22T01:06:00.000Z",
      "link": "https://www.bntnews.co.kr/article/view/bnt202611220039"
-    }
-   ]
-  },
-  {
-   "keyword": "30대 고가주택 보유 급증",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T01:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"30대에 벌써 고가주택을\"…젊은 부동산 부자 확 늘었다",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-22T02:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001273513?sid=101"
-    },
-    {
-     "title": "'집값 17억' 넘는 30대만 1만8000명 … 세금 폭탄에 증여 급증 탓",
-     "press": "biz.newdaily.co.kr",
-     "publishedAt": "2026-11-22T01:18:00.000Z",
-     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/22/2026112250033.html"
-    },
-    {
-     "title": "집값 급등에…'시세 17억' 주택보유 30대 1년새 70% 급증",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-22T01:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000161866?sid=101"
     }
    ]
   },
@@ -461,10 +429,40 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 947,
-  "matched": 547,
-  "avgLeadMin": 620,
+  "flagged": 949,
+  "matched": 552,
+  "avgLeadMin": 615,
   "recent": [
+   {
+    "keyword": "고경표 핑계고 논란",
+    "hitKeyword": "고경표 음주운전 핑계고",
+    "hitAt": "2026-11-22T11:30:00+09:00",
+    "leadMin": 86
+   },
+   {
+    "keyword": "30대 고가주택 보유자 급증",
+    "hitKeyword": "30대 주택자산 급증",
+    "hitAt": "2026-11-22T11:30:00+09:00",
+    "leadMin": 66
+   },
+   {
+    "keyword": "고경표, 음주운전 중단 논란",
+    "hitKeyword": "고경표 음주운전 핑계고",
+    "hitAt": "2026-11-22T11:30:00+09:00",
+    "leadMin": 66
+   },
+   {
+    "keyword": "30대 고가주택 보유 급증",
+    "hitKeyword": "30대 주택자산 급증",
+    "hitAt": "2026-11-22T11:30:00+09:00",
+    "leadMin": 56
+   },
+   {
+    "keyword": "고경표 음주운전으로 핑계고",
+    "hitKeyword": "고경표 음주운전 핑계고",
+    "hitAt": "2026-11-22T11:30:00+09:00",
+    "leadMin": 46
+   },
    {
     "keyword": "채령",
     "hitKeyword": "채령 가족 투병 소식",
@@ -494,36 +492,6 @@
     "hitKeyword": "문승원 원클럽맨 계약",
     "hitAt": "2026-11-22T11:00:00+09:00",
     "leadMin": 6
-   },
-   {
-    "keyword": "도경완",
-    "hitKeyword": "도경완 가난 코스프레",
-    "hitAt": "2026-11-22T11:00:00+09:00",
-    "leadMin": 6
-   },
-   {
-    "keyword": "배당",
-    "hitKeyword": "삼성전자 배당 지급",
-    "hitAt": "2026-11-22T10:30:00+09:00",
-    "leadMin": 5958
-   },
-   {
-    "keyword": "굿파트너 2",
-    "hitKeyword": "굿파트너2 시청률 성공",
-    "hitAt": "2026-11-22T10:30:00+09:00",
-    "leadMin": 86
-   },
-   {
-    "keyword": "김유정 박진영 빗속 입맞춤",
-    "hitKeyword": "100일의 거짓말 김유정",
-    "hitAt": "2026-11-22T10:00:00+09:00",
-    "leadMin": 16
-   },
-   {
-    "keyword": "lpga",
-    "hitKeyword": "김아림 LPGA 선두",
-    "hitAt": "2026-11-22T09:30:00+09:00",
-    "leadMin": 177
    }
   ]
  }
