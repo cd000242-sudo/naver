@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T21:00:51.718Z",
+ "builtAt": "2026-11-22T21:10:55.066Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,167 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 26,
  "candidates": [
-  {
-   "keyword": "증안펀드 가동 준비",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-22T19:33:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "미국발 블랙먼데이 공포… F4 “증안펀드 가동 준비 착수”",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-22T20:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001886782?sid=101"
-    },
-    {
-     "title": "오늘 ‘블랙 먼데이’ 공포…18년만 증안펀드, 투매 잠재울까",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-22T20:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003060510?sid=101"
-    },
-    {
-     "title": "'블랙먼데이' 우려 긴급 F4회의, 18년 만에 증안펀드 가동되나",
-     "press": "seoulfn.com",
-     "publishedAt": "2026-11-22T20:14:00.000Z",
-     "link": "https://www.seoulfn.com/news/articleView.html?idxno=643572"
-    }
-   ]
-  },
-  {
-   "keyword": "화석연료 합의문 채택 실패",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T19:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "유엔기후총회 17년 만에 합의 무산…'화석연료 퇴출' 놓고 산유국·EU 충...",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-22T20:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005846103?sid=104"
-    },
-    {
-     "title": "기후변화총회 17년 만에 합의 실패...\"지금 날 죽여라\" 반발",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-22T20:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436554?sid=104"
-    },
-    {
-     "title": "‘화석연료 이견’ 빈 손으로 끝난 유엔기후총회",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-22T20:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701937?sid=104"
-    }
-   ]
-  },
   {
    "keyword": "코스피",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
+   "articles90": 12,
+   "recent20": 7,
+   "press": 9,
    "firstArticleAt": "2026-11-22T20:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[이번주 관전포인트]코스피 급락 뒤 PCE·한은 금리 결정이 이번 주 증시...",
-     "press": "newskr.kr",
-     "publishedAt": "2026-11-22T20:50:00.000Z",
-     "link": "http://www.newskr.kr/news/articleView.html?idxno=108197"
+     "title": "결국 바닥 뚫린 코스피… 증시안정펀드 18년 만에 가동 채비",
+     "press": "segye.com",
+     "publishedAt": "2026-11-22T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177236?sid=101"
     },
     {
-     "title": "미국 증시 급락에 수급·금리 부담, 시험대 오른 코스피",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-22T20:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001165211?sid=101"
+     "title": "같은 4,800선인데도…코스피 '1조클럽' 11% 감소",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-22T21:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928823?sid=101"
     },
     {
-     "title": "[사설] 주저앉은 코스피… 정부는 무슨 노력을 얼마나 했나",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-22T20:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701991?sid=110"
-    }
-   ]
-  },
-  {
-   "keyword": "이혜영 미우새",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 5,
-   "recent20": 5,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T20:45:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이혜영, 폐암 투병 후 LA 초호화 대저택 샀다 “아픈 아내와 살아준 남...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-22T20:52:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190258"
-    },
-    {
-     "title": "이혜영 미우새 등장…이상민 언급도",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-22T20:52:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611230009"
-    },
-    {
-     "title": "이혜영, 이하늬 부부 ♥오작교였다…\"남편의 후배와 결혼\" [엑's 이슈]",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-22T20:48:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002083067"
+     "title": "[주간수급리포트] 외국인 4.5조 '팔자'에 4900선 내준 코스피…반등 열쇠...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-22T21:00:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2651100"
     }
    ]
   },
   {
    "keyword": "2026년 11월 23일 운세",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
+   "articles90": 6,
+   "recent20": 4,
+   "press": 5,
    "firstArticleAt": "2026-11-22T20:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "[오늘의 운세] 2026년 11월 23일 별자리 운세",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-22T21:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413859?sid=103"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 23일 띠별 운세",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-22T21:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413858?sid=103"
+    },
+    {
      "title": "[백운산 오늘의 운세] 2026년 11월 23일",
      "press": "asiatoday.co.kr",
      "publishedAt": "2026-11-22T21:00:00.000Z",
      "link": "https://www.asiatoday.co.kr/kn/view.php?key=20260916001527093"
-    },
-    {
-     "title": "[김동완의 오늘의 운세] 2026년 11월 23일",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-22T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701914?sid=103"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 23일(월) ♣띠별 운세♣",
-     "press": "srtimes.kr",
-     "publishedAt": "2026-11-22T20:00:00.000Z",
-     "link": "http://www.srtimes.kr/news/articleView.html?idxno=217961"
     }
    ]
   },
@@ -177,13 +79,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 1,
-   "press": 3,
+   "press": 4,
    "firstArticleAt": "2026-11-22T20:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "李 대통령, '대장동 의혹' 또 반박…\"업자와 결탁한 시장 아냐\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-22T20:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000652687?sid=100"
+    },
     {
      "title": "\"업자와 결탁한 시장 행동 아냐\"…이 대통령 '대장동 의혹' 연일 반박",
      "press": "joseilbo.com",
@@ -195,22 +103,78 @@
      "press": "kmib.co.kr",
      "publishedAt": "2026-11-22T20:17:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/005/0001886780?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "유엔기후총회 합의 무산",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T20:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "유엔기후총회 17년 만에 합의 무산…'화석연료 퇴출' 놓고 산유국·EU 충...",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-22T20:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005846103?sid=104"
     },
     {
-     "title": "李 “5500억 공익환수가 배임인가”… 대장동 연일 반박",
+     "title": "‘화석연료 이견’ 빈 손으로 끝난 유엔기후총회",
      "press": "seoul.co.kr",
-     "publishedAt": "2026-11-22T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701924?sid=100"
+     "publishedAt": "2026-11-22T20:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701937?sid=104"
+    },
+    {
+     "title": "유엔 기후총회 합의 결렬…화석연료 퇴출 놓고 EU·사우디 충돌",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-22T20:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009303754?sid=104"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1123,
-  "matched": 629,
-  "avgLeadMin": 612,
+  "flagged": 1121,
+  "matched": 633,
+  "avgLeadMin": 613,
   "recent": [
+   {
+    "keyword": "외교",
+    "hitKeyword": "트럼프 얄타 외교",
+    "hitAt": "2026-11-23T06:00:00+09:00",
+    "leadMin": 854
+   },
+   {
+    "keyword": "증안펀드 가동 준비",
+    "hitKeyword": "증안펀드 18년만 가동",
+    "hitAt": "2026-11-23T06:00:00+09:00",
+    "leadMin": 653
+   },
+   {
+    "keyword": "정부 증안펀드 준비 착수",
+    "hitKeyword": "증안펀드 18년만 가동",
+    "hitAt": "2026-11-23T06:00:00+09:00",
+    "leadMin": 622
+   },
+   {
+    "keyword": "정부 증안펀드 가동 준비",
+    "hitKeyword": "증안펀드 18년만 가동",
+    "hitAt": "2026-11-23T06:00:00+09:00",
+    "leadMin": 572
+   },
+   {
+    "keyword": "정부, 증안펀드 가동 준비",
+    "hitKeyword": "증안펀드 18년만 가동",
+    "hitAt": "2026-11-23T06:00:00+09:00",
+    "leadMin": 472
+   },
    {
     "keyword": "솔비 이규한 결혼",
     "hitKeyword": "솔비 이규한 비하인드",
@@ -240,36 +204,6 @@
     "hitKeyword": "삼성전자 기부금 1위",
     "hitAt": "2026-11-22T23:00:00+09:00",
     "leadMin": 746
-   },
-   {
-    "keyword": "철도노조, 26일로 연기",
-    "hitKeyword": "철도노조 쟁의행위 연기",
-    "hitAt": "2026-11-22T23:00:00+09:00",
-    "leadMin": 112
-   },
-   {
-    "keyword": "철도노조 26일로 연기",
-    "hitKeyword": "철도노조 쟁의행위 연기",
-    "hitAt": "2026-11-22T23:00:00+09:00",
-    "leadMin": 31
-   },
-   {
-    "keyword": "영월서 일산화탄소 추정",
-    "hitKeyword": "영월 차박 일산화탄소 중독",
-    "hitAt": "2026-11-22T23:00:00+09:00",
-    "leadMin": 31
-   },
-   {
-    "keyword": "철도노조, 투쟁 26일로 연기",
-    "hitKeyword": "철도노조 쟁의행위 연기",
-    "hitAt": "2026-11-22T23:00:00+09:00",
-    "leadMin": 11
-   },
-   {
-    "keyword": "사랑이 온다",
-    "hitKeyword": "사랑이 온다 친부",
-    "hitAt": "2026-11-22T22:30:00+09:00",
-    "leadMin": 9536
    }
   ]
  }
