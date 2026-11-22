@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T00:03:43.559Z",
+ "builtAt": "2026-11-22T00:13:46.812Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,7 +16,7 @@
     "nate"
    ],
    "articles90": 33,
-   "recent20": 4,
+   "recent20": 3,
    "press": 30,
    "firstArticleAt": "2026-11-21T23:30:00.000Z",
    "exclusive": false,
@@ -48,30 +48,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 13,
-   "recent20": 6,
-   "press": 13,
-   "firstArticleAt": "2026-11-21T22:34:00.000Z",
+   "articles90": 14,
+   "recent20": 4,
+   "press": 14,
+   "firstArticleAt": "2026-11-21T22:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "장나라는 딜, 김혜윤은 고발…‘굿파트너2’, 첫 팀플레이부터 ‘통쾌’",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-22T00:12:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001147959"
+    },
+    {
+     "title": "김동규, '굿파트너2'서 박해진 20대 시절 열연…너드남 고시생 변신",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-22T00:06:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282704"
+    },
     {
      "title": "‘굿파트너2’ 장나라·김혜윤, 마침내 손잡았다… 첫 공조부터 통쾌한...",
      "press": "isplus.com",
      "publishedAt": "2026-11-21T23:58:00.000Z",
      "link": "https://m.entertain.naver.com/article/241/0003542905"
-    },
-    {
-     "title": "'굿파트너2' 김혜윤, 장나라와 완벽 팀플레이 '통쾌한 응징'...시청률 7....",
-     "press": "ize.co.kr",
-     "publishedAt": "2026-11-21T23:57:00.000Z",
-     "link": "https://m.entertain.naver.com/article/465/0000021185"
-    },
-    {
-     "title": "장나라 또 대상받겠네 ‘굿파트너2’ 2회만에 최고 시청률 10% 뚫었다",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-21T23:53:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190076"
     }
    ]
   },
@@ -82,29 +82,93 @@
     "nate"
    ],
    "articles90": 12,
-   "recent20": 3,
+   "recent20": 4,
    "press": 12,
-   "firstArticleAt": "2026-11-21T22:40:00.000Z",
+   "firstArticleAt": "2026-11-21T22:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "코레일, 경부선 일반열차 운행 재개…밤샘 복구 끝 정상화",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-22T00:06:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=885843"
+    },
+    {
+     "title": "코레일, 소정리역 탈선 사고로 중단된 열차 운행 재개…첫 열차부터 정...",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-22T00:06:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626839"
+    },
     {
      "title": "경부선 일반열차 운행 정상화…소정리역 화물열차 탈선 복구 완료",
      "press": "shinailbo.co.kr",
      "publishedAt": "2026-11-21T23:54:00.000Z",
      "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086089"
+    }
+   ]
+  },
+  {
+   "keyword": "김아림 최종전 선두",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 10,
+   "recent20": 4,
+   "press": 10,
+   "firstArticleAt": "2026-11-21T22:45:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김아림, CME그룹 투어 챔피언십 사흘째 선두…2위와 1타 차",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-22T00:10:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626841"
     },
     {
-     "title": "경부선 열차 운행 재개…코레일, 밤샘 복구 끝에 정상화",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-21T23:54:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=848013"
+     "title": "김아림, LPGA 투어 챔피언십 3R 단독 선두",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-22T00:08:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=885844"
     },
     {
-     "title": "경부선 일반열차 정상 운행…화물열차 궤도이탈 복구 완료",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-21T23:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014337691?sid=101"
+     "title": "김아림, LPGA 최종전 사흘째 선두…통산 4승 눈앞",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-22T00:06:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/016/0002726653"
+    }
+   ]
+  },
+  {
+   "keyword": "뉴스",
+   "sources": [
+    "google"
+   ],
+   "articles90": 12,
+   "recent20": 12,
+   "press": 8,
+   "firstArticleAt": "2026-11-21T23:54:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "[카드뉴스] 임산부는 KTX 일반실 운임 40% 할인... 함께 타는 1명까지",
+     "press": "ibabynews.com",
+     "publishedAt": "2026-11-22T00:10:00.000Z",
+     "link": "https://www.ibabynews.com/news/articleView.html?idxno=157170"
+    },
+    {
+     "title": "[뉴스의 인물] 나이브 부켈레 엘살바도르 대통령",
+     "press": "monthly.chosun.com",
+     "publishedAt": "2026-11-22T00:08:00.000Z",
+     "link": "https://monthly.chosun.com/news/articleView.html?idxno=72092"
+    },
+    {
+     "title": "[카드뉴스] 크리스마스 트리 보러 어디 갈까?",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-22T00:08:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5085967"
     }
    ]
   },
@@ -113,13 +177,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 8,
+   "articles90": 6,
    "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-21T22:35:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-21T23:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'라이어' 유연석, 사망 엔딩→최대훈 등장…분당 최고 시청률 5.1%",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-22T00:06:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110032734833"
+    },
     {
      "title": "‘라이어’ 유연석, 男주인공인데 8회 만에 충격 사망…서현진, 악행 폭...",
      "press": "sportsworldi.com",
@@ -131,44 +201,6 @@
      "press": "mediafine.co.kr",
      "publishedAt": "2026-11-21T23:44:00.000Z",
      "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95663"
-    },
-    {
-     "title": "'라이어' 유연석 변사체 발견…8회 엔딩에 남주 사망이라니 '충격', 최고...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-21T23:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002082906"
-    }
-   ]
-  },
-  {
-   "keyword": "뉴스",
-   "sources": [
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 7,
-   "press": 6,
-   "firstArticleAt": "2026-11-21T23:30:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "속초시, 10대 뉴스 시민이 뽑는다…26개 후보, 29일까지",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-22T00:02:00.000Z",
-     "link": "https://www.ajunews.com/view/20261122085801264"
-    },
-    {
-     "title": "[포토뉴스] 자연환경 보전의 중요성, 도심에 내려앉은 곡식을 여문 늦...",
-     "press": "dailyt.co.kr",
-     "publishedAt": "2026-11-22T00:02:00.000Z",
-     "link": "https://www.dailyt.co.kr/newsView/dlt202611220006"
-    },
-    {
-     "title": "[데일리티 뉴스룸] 11월 22일, 어제의 주요 뉴스 네 컷 정리",
-     "press": "dailyt.co.kr",
-     "publishedAt": "2026-11-22T00:02:00.000Z",
-     "link": "https://www.dailyt.co.kr/newsView/dlt202611220007"
     }
    ]
   },
@@ -178,12 +210,18 @@
     "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 2,
    "press": 5,
-   "firstArticleAt": "2026-11-21T22:40:00.000Z",
+   "firstArticleAt": "2026-11-21T23:25:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "EU, 美빅테크 겨냥 디지털稅 제안…트럼프와 갈등 예고",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-22T00:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413585?sid=101"
+    },
     {
      "title": "EU, 빅테크 디지털세 공식 제안…美 충돌 불가피",
      "press": "yonhapnewstv.co.kr",
@@ -195,12 +233,6 @@
      "press": "etoday.co.kr",
      "publishedAt": "2026-11-21T23:42:00.000Z",
      "link": "https://www.etoday.co.kr/news/view/2651248"
-    },
-    {
-     "title": "EU, 미국 빅테크 기업 겨냥 디지털세 3% 부과 추진",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-21T23:37:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085222"
     }
    ]
   },
@@ -210,7 +242,7 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-21T23:06:00.000Z",
    "exclusive": false,
@@ -235,11 +267,43 @@
      "link": "http://www.econonews.co.kr/news/articleView.html?idxno=447507"
     }
    ]
+  },
+  {
+   "keyword": "채령 모친 암 투병 고백",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-21T23:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "있지 채령·이채연 자매, 모친 희소암 투병 고백",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-21T23:39:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014337685"
+    },
+    {
+     "title": "있지 채령, 모친 희귀암 투병 고백… 언니 이채연은 병원서 출퇴근 (전...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-21T23:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003542897"
+    },
+    {
+     "title": "있지 채령, 모친 희귀암 투병 중이었다…'친언니' 이채연 병원서 출퇴근...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-21T23:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000785553"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 898,
+  "flagged": 900,
   "matched": 535,
   "avgLeadMin": 621,
   "recent": [
