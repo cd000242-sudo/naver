@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T21:41:04.397Z",
+ "builtAt": "2026-11-22T21:51:07.289Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,28 +11,28 @@
  "measured": 26,
  "candidates": [
   {
-   "keyword": "트럼프 이란 공격 경고",
+   "keyword": "트럼프 이란 추가 공격 경고",
    "sources": [
     "daum"
    ],
-   "articles90": 20,
-   "recent20": 5,
-   "press": 19,
-   "firstArticleAt": "2026-11-22T20:14:00.000Z",
+   "articles90": 17,
+   "recent20": 3,
+   "press": 16,
+   "firstArticleAt": "2026-11-22T20:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "트럼프 \"이란, 말만 하는 탭댄서…합의 없으면 새해 공격할 것\"",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-22T21:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005356847?sid=104"
+    },
     {
      "title": "트럼프 “이란은 말만 한다”…합의 불발 땐 새해 추가 공격 경고",
      "press": "etoday.co.kr",
      "publishedAt": "2026-11-22T21:34:00.000Z",
      "link": "https://www.etoday.co.kr/news/view/2651379"
-    },
-    {
-     "title": "트럼프, 새해 이란 군사 공격 가능성 경고... 협상 실패 시 긴장 고조",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-22T21:34:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886774"
     },
     {
      "title": "트럼프 \"이란은 늘 말만 해\"…협상 불발 땐 새해 공격 시사",
@@ -43,34 +43,34 @@
    ]
   },
   {
-   "keyword": "김아림 LPGA 최종전 공동 7위",
+   "keyword": "한전 고객 개인정보 유출",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 10,
-   "recent20": 4,
+   "articles90": 11,
+   "recent20": 1,
    "press": 10,
-   "firstArticleAt": "2026-11-22T20:58:00.000Z",
+   "firstArticleAt": "2026-11-22T20:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김아림, LPGA 시즌 최종전 공동 7위…티띠꾼, 3년 연속 우승",
+     "title": "한전 개인정보 대규모 유출, 65만 명 피해자 긴급 대처 필요",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-22T21:36:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886785"
+    },
+    {
+     "title": "한전 개인정보 150만 건 유출…2차 피해 우려",
      "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-22T21:39:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/055/0001404976"
+     "publishedAt": "2026-11-22T21:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404970?sid=101"
     },
     {
-     "title": "김아림, LPGA 시즌 최종전 공동 7위…티띠꾼, 3년 연속 우승(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-22T21:37:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/001/0016457069"
-    },
-    {
-     "title": "김아림, LPGA 시즌 최종전 공동 7위‥티띠꾼, 3년 연속 우승",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-22T21:29:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/214/0001537286"
+     "title": "한전, 고객 등 개인정보 152만여건 유출…경찰 수사 의뢰",
+     "press": "womennews.co.kr",
+     "publishedAt": "2026-11-22T21:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/310/0000141945?sid=102"
     }
    ]
   },
@@ -80,12 +80,18 @@
     "signal.bz"
    ],
    "articles90": 9,
-   "recent20": 3,
+   "recent20": 4,
    "press": 9,
-   "firstArticleAt": "2026-11-22T20:17:00.000Z",
+   "firstArticleAt": "2026-11-22T20:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "영변에 건물 하나 더 세운 북한…핵물질 연 35㎏ 추가 생산 가능성",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-22T21:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005767361?sid=100"
+    },
     {
      "title": "北 영변 우라늄 농축시설 증축…“원심분리기 추가 땐 연 35㎏ 넘게 더 ...",
      "press": "etoday.co.kr",
@@ -97,44 +103,6 @@
      "press": "gokorea.kr",
      "publishedAt": "2026-11-22T21:32:00.000Z",
      "link": "https://www.gokorea.kr/news/articleView.html?idxno=886771"
-    },
-    {
-     "title": "“北 영변 핵시설 증축…우라늄 연 35㎏ 추가 생산 가능”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-22T21:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764333?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황 밀수 의혹",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 3,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T20:21:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“젠슨 황 불륜 상대는 ‘얼굴마담’”…美中 무역전쟁 불씨 되나 [돋보...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-22T21:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701997?sid=104"
-    },
-    {
-     "title": "엔비디아 AI 칩, 중국으로 밀수된 경로의 비밀: 동남아시아 암시장 네트...",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-22T21:34:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886779"
-    },
-    {
-     "title": "젠슨황 불륜 女, 캄보디아 범죄조직까지 연루 의혹",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-22T21:32:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611230014"
     }
    ]
   },
@@ -144,7 +112,7 @@
     "google"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-22T21:04:00.000Z",
    "exclusive": false,
@@ -171,34 +139,34 @@
    ]
   },
   {
-   "keyword": "대장동",
+   "keyword": "버스",
    "sources": [
     "google"
    ],
-   "articles90": 4,
+   "articles90": 6,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T20:17:00.000Z",
-   "exclusive": false,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T20:22:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령, “민간업자 1100억 추가 부담”…대장동 결탁설 반박",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-22T21:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003060518?sid=100"
+     "title": "51만 명 태우고 달린 ‘내편중구버스’…내년엔 더 편리해진다!",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-22T21:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002834614?sid=102"
     },
     {
-     "title": "李 대통령, '대장동 의혹' 또 반박…\"업자와 결탁한 시장 아냐\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-22T20:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652687?sid=100"
+     "title": "신교통수단이라더니 세금만 낭비한 ‘3칸 굴절버스’···운행도 못해보...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-22T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484335?sid=102"
     },
     {
-     "title": "\"업자와 결탁한 시장 행동 아냐\"…이 대통령 '대장동 의혹' 연일 반박",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-22T20:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394566?sid=100"
+     "title": "[서울 버스, 시민 주주시대]③사모펀드가 시민 혈세 싹쓸이?… 서울·인...",
+     "press": "dnews.co.kr",
+     "publishedAt": "2026-11-22T20:22:00.000Z",
+     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611181009065380588"
     }
    ]
   },
@@ -207,10 +175,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-22T20:14:00.000Z",
+   "firstArticleAt": "2026-11-22T20:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -235,43 +203,43 @@
    ]
   },
   {
-   "keyword": "버스",
+   "keyword": "대장동",
    "sources": [
     "google"
    ],
-   "articles90": 5,
+   "articles90": 3,
    "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-22T20:22:00.000Z",
-   "exclusive": true,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T20:47:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "신교통수단이라더니 세금만 낭비한 ‘3칸 굴절버스’···운행도 못해보...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-22T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484335?sid=102"
+     "title": "李대통령, “민간업자 1100억 추가 부담”…대장동 결탁설 반박",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-22T21:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003060518?sid=100"
     },
     {
-     "title": "[서울 버스, 시민 주주시대]②[단독]“환승 할인에 배당 환급까지”… ...",
-     "press": "dnews.co.kr",
-     "publishedAt": "2026-11-22T20:22:00.000Z",
-     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611180957265870582"
+     "title": "李 대통령, '대장동 의혹' 또 반박…\"업자와 결탁한 시장 아냐\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-22T20:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000652687?sid=100"
     },
     {
-     "title": "[서울 버스, 시민 주주시대]①[단독]시민이 버스 주주… ‘국민 펀드’...",
-     "press": "dnews.co.kr",
-     "publishedAt": "2026-11-22T20:22:00.000Z",
-     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611180945105730574"
+     "title": "\"업자와 결탁한 시장 행동 아냐\"…이 대통령 '대장동 의혹' 연일 반박",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-22T20:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002394566?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1120,
-  "matched": 629,
-  "avgLeadMin": 615,
+  "flagged": 1119,
+  "matched": 626,
+  "avgLeadMin": 616,
   "recent": [
    {
     "keyword": "맨유",
