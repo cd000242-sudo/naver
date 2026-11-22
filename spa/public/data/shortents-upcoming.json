@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T03:55:12.843Z",
+ "builtAt": "2026-11-22T04:05:16.175Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,49 +8,50 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "최교진, 수능 책임 통감",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 92,
-   "recent20": 21,
-   "press": 70,
-   "firstArticleAt": "2026-11-22T02:46:00.000Z",
+   "articles90": 91,
+   "recent20": 23,
+   "press": 67,
+   "firstArticleAt": "2026-11-22T02:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"제 나이가 있어서…\" 수능 부정행위 논란에 최교진 장관 사의",
-     "press": "tjb.co.kr",
-     "publishedAt": "2026-11-22T03:54:00.000Z",
-     "link": "https://www.tjb.co.kr/news05/bodo/view/id/106359"
+     "title": "최교진 교육부장관 사의…\"준비 미흡 비판 통감\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-22T04:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928682?sid=102"
     },
     {
-     "title": "최교진 교육부 장관 사의 \"수능 준비 미흡 책임 통감\"...누리꾼들 \"사실...",
-     "press": "pennmike.com",
-     "publishedAt": "2026-11-22T03:50:00.000Z",
-     "link": "https://www.pennmike.com/news/articleView.html?idxno=132452"
+     "title": "[속보] 최교진 교육부장관, 사의 표명...\"수능 준비 부실 책임 통감\"",
+     "press": "cjb.co.kr",
+     "publishedAt": "2026-11-22T04:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/655/0000033660?sid=102"
     },
     {
-     "title": "최교진 교육장관, '수능 대혼란'에 사의 표명..\"준비 미흡 비판 통감\"",
-     "press": "smarttoday.co.kr",
-     "publishedAt": "2026-11-22T03:50:00.000Z",
-     "link": "https://www.smarttoday.co.kr/ko-kr/articles/113942"
+     "title": "李대통령 'AI 부정행위 대응' 논란 최교진 사의 수락…수능 사후조치 만...",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-22T04:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005444575?sid=100"
     }
    ]
   },
   {
-   "keyword": "조희대 탄핵소추 기자간담회",
+   "keyword": "민주당 조희대 탄핵 추진",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 34,
-   "recent20": 7,
-   "press": 26,
-   "firstArticleAt": "2026-11-22T02:28:00.000Z",
+   "articles90": 57,
+   "recent20": 6,
+   "press": 40,
+   "firstArticleAt": "2026-11-22T02:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -61,28 +62,28 @@
      "link": "https://n.news.naver.com/mnews/article/005/0001886630?sid=100"
     },
     {
+     "title": "\"12월 가기 전 조희대 탄핵소추안\" vs \"판결 보복\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-22T03:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404865?sid=100"
+    },
+    {
      "title": "민주당, 조희대 탄핵안 연내 처리…\"한덕수 판결은 탄핵 사유 아냐\"",
      "press": "newstomato.com",
      "publishedAt": "2026-11-22T03:48:00.000Z",
      "link": "http://www.newstomato.com/ReadNews.aspx?no=1321331&inflow=N"
-    },
-    {
-     "title": "민주당 “조희대 탄핵안, 12월 내 의결 목표…한덕수 판결은 ‘절차 하...",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-22T03:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012298778?sid=100"
     }
    ]
   },
   {
    "keyword": "조국, 당명 개정 제안",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 2,
-   "press": 14,
-   "firstArticleAt": "2026-11-22T02:28:00.000Z",
+   "articles90": 11,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-22T02:36:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -111,10 +112,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
+   "articles90": 9,
    "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-22T02:28:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-22T02:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -131,10 +132,138 @@
      "link": "https://n.news.naver.com/mnews/article/666/0000133169?sid=101"
     },
     {
-     "title": "대학생 45% \"올해 취업시장 작년보다 어렵다\" … 1년 이상 취업 준비도 ...",
-     "press": "worktoday.co.kr",
+     "title": "취업문 더 좁아졌다…대학생 45% \"작년보다 취업 어렵다\"",
+     "press": "joongangenews.com",
      "publishedAt": "2026-11-22T02:56:00.000Z",
-     "link": "http://www.worktoday.co.kr/news/articleView.html?idxno=92455"
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=565638"
+    }
+   ]
+  },
+  {
+   "keyword": "해광호 수색 부이 발견",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-22T02:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "해저 52m서 해광호 선박 추정 물체 발견... 7명 태우고 연락 끊긴 지 닷...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-22T03:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000967005?sid=102"
+    },
+    {
+     "title": "태안 실종 어선 ‘해광호’ 추정 물체, 수심 52m 해저서 발견",
+     "press": "segye.com",
+     "publishedAt": "2026-11-22T03:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177096?sid=102"
+    },
+    {
+     "title": "태안해경, 해광호 수중수색 중 선박 추정 물체 발견...해광호 여부 정밀...",
+     "press": "cctimes.kr",
+     "publishedAt": "2026-11-22T03:14:00.000Z",
+     "link": "http://www.cctimes.kr/news/articleView.html?idxno=938385"
+    }
+   ]
+  },
+  {
+   "keyword": "재산",
+   "sources": [
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-22T02:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "전남광주시 무안 계절근로자 숙소서 화재…9500만 원 재산피해",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-22T04:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000554338?sid=102"
+    },
+    {
+     "title": "지식재산연수원, 2027년 상반기 변리사 실무수습 집합교육 참가자 모집",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-22T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003488219?sid=102"
+    },
+    {
+     "title": "지식재산처, AI 친화적 '마크다운' 형식 통계 간행물 제공",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-22T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005607751?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "하루 가수",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T02:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "임영웅, 트로트 가수 브랜드평판 1위…71개월 연속 왕좌",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-22T04:04:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626869"
+    },
+    {
+     "title": "1년 비밀 연애 끝에… 오늘(22일) 4세 연상과 결혼식 올리는 ‘여가수’...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-22T03:12:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1176656"
+    },
+    {
+     "title": "'전국노래자랑' 김연자 오프닝부터 강문경·오유진·하루·이다온 총출...",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-22T02:54:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3759384"
+    }
+   ]
+  },
+  {
+   "keyword": "철도노조 쟁의행위 예고",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T03:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "철도노조, 23일부터 준법투쟁…일부 열차 중지 및 지연 예고 [뉴시스Pic...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T03:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014337984?sid=102"
+    },
+    {
+     "title": "철도노조 쟁의행위, 23일부터 일부 열차 지연 및 중지 예고",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T03:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014337961?sid=102"
+    },
+    {
+     "title": "코레일 23일부터 일부 열차 지연 및 중지 안내, 철도노조 쟁의행위 예고",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T03:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014337966?sid=102"
     }
    ]
   },
@@ -143,10 +272,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
+   "articles90": 3,
    "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-22T02:28:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-22T02:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -167,135 +296,6 @@
      "press": "jnilbo.com",
      "publishedAt": "2026-11-22T02:59:00.000Z",
      "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085286"
-    }
-   ]
-  },
-  {
-   "keyword": "고경표 음주운전 중단 논란",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-22T02:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "고경표, 만취운전 물의 8일 만 인기상 후보에...'핑계고' 시상식 후보 적...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-22T03:53:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409153"
-    },
-    {
-     "title": "'음주운전' 고경표, 활동중단→방송가도 손절했는데..'핑계고' 인기상 ...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-22T03:06:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005643890"
-    },
-    {
-     "title": "라미란은 무슨 죄?...'마약 혐의' 유아인→'만취 운전' 고경표에 1년 만...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-22T03:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409150"
-    }
-   ]
-  },
-  {
-   "keyword": "음주운전으로 핑계고 후보",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T02:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "고경표, 만취운전 물의 8일 만 인기상 후보에...'핑계고' 시상식 후보 적...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-22T03:53:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409153"
-    },
-    {
-     "title": "'음주운전' 고경표, 활동중단→방송가도 손절했는데..'핑계고' 인기상 ...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-22T03:06:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005643890"
-    },
-    {
-     "title": "‘음주운전’ 고경표, 인기상 후보 논란…사태 심각성 인지 못하나",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-22T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002726711?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "철도노조 쟁의행위 예고",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T02:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "철도노조, 23일부터 준법투쟁…일부 열차 중지 및 지연 예고 [뉴시스Pic...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T03:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014337984?sid=102"
-    },
-    {
-     "title": "코레일 23일부터 일부 열차 지연 및 중지 안내, 철도노조 쟁의행위 예고",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T03:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014337966?sid=102"
-    },
-    {
-     "title": "철도노조 쟁의행위, 23일부터 일부 열차 지연 및 중지 예고",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T03:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014337961?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "재산",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T02:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "지식재산처, AI 친화적 '마크다운' 형식 통계 간행물 제공",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-22T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005607751?sid=102"
-    },
-    {
-     "title": "지식재산처, 특허 통계도 AI가 읽는다…'마크다운' 형식 자료 개방",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-22T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003488226?sid=102"
-    },
-    {
-     "title": "지식재산연수원, 2027년 상반기 변리사 실무수습 집합교육 참가자 모집",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-22T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003488219?sid=102"
     }
    ]
   },
@@ -334,10 +334,22 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 971,
-  "matched": 562,
-  "avgLeadMin": 624,
+  "flagged": 974,
+  "matched": 564,
+  "avgLeadMin": 622,
   "recent": [
+   {
+    "keyword": "고경표 음주운전 중단 논란",
+    "hitKeyword": "고경표 핑계고 후보 논란",
+    "hitAt": "2026-11-22T13:00:00+09:00",
+    "leadMin": 25
+   },
+   {
+    "keyword": "음주운전으로 핑계고 후보",
+    "hitKeyword": "고경표 핑계고 후보 논란",
+    "hitAt": "2026-11-22T13:00:00+09:00",
+    "leadMin": 15
+   },
    {
     "keyword": "레이미, 오스틴 챔피언십 우승",
     "hitKeyword": "김아림 투어 챔피언십",
@@ -385,18 +397,6 @@
     "hitKeyword": "로또 2등 10장 당첨",
     "hitAt": "2026-11-22T12:00:00+09:00",
     "leadMin": 56
-   },
-   {
-    "keyword": "추성훈 은퇴전",
-    "hitKeyword": "추성훈 은퇴전",
-    "hitAt": "2026-11-22T12:00:00+09:00",
-    "leadMin": 25
-   },
-   {
-    "keyword": "해광호 수색 부이 발견",
-    "hitKeyword": "해광호 수색",
-    "hitAt": "2026-11-22T12:00:00+09:00",
-    "leadMin": 15
    }
   ]
  }
