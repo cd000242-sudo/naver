@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T14:59:05.325Z",
+ "builtAt": "2026-11-22T15:09:08.579Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,134 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 29,
  "candidates": [
   {
    "keyword": "조희대 탄핵 추진 논의",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
+   "articles90": 7,
+   "recent20": 3,
+   "press": 6,
    "firstArticleAt": "2026-11-22T13:52:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "[사설]조 대법원장 탄핵은 안 된다… 이 대통령이 제동 걸어야",
-     "press": "donga.com",
-     "publishedAt": "2026-11-22T14:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764252?sid=110"
+     "title": "예산안·대법원장 탄핵…연말 정국 갈등 고조",
+     "press": "ksilbo.co.kr",
+     "publishedAt": "2026-11-22T15:04:00.000Z",
+     "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1073281"
     },
     {
-     "title": "野, 민주당 조희대 대법원장 탄핵 추진에 반발…\"사유 정해 놓고 탄핵하...",
-     "press": "fntoday.co.kr",
-     "publishedAt": "2026-11-22T14:32:00.000Z",
-     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=399612"
+     "title": "조희대 탄핵에 뜻 모은 민주·혁신당…범여권 공조 시험대",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-22T15:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000554383?sid=100"
     },
     {
-     "title": "[사설] 대법원장 탄핵 추진에 “입장 없다”는 靑, 무책임하다",
-     "press": "segye.com",
-     "publishedAt": "2026-11-22T14:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177214?sid=110"
+     "title": "조희대 12월 탄핵 급물살…법조계 \"사법부 독립 침해\" 우려",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-22T15:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000554379?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "증안펀드 가동 준비",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-22T14:03:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘블랙 먼데이’ 우려에…증안펀드 꺼낸 당국",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-22T15:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003567046?sid=101"
+    },
+    {
+     "title": "[사설] 증시 급락에 증안펀드 준비…단계별 위기 대응 빈틈 없어야",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-22T15:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004684897?sid=110"
+    },
+    {
+     "title": "'블랙먼데이' 우려에 F4 긴급대응… 증안펀드 18년만에 가동되나",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-22T14:56:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3451144"
+    }
+   ]
+  },
+  {
+   "keyword": "유엔기후총회 합의문 실패",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-22T13:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[포토] 31차 기후총회 합의문 채택 무산",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-22T15:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001886714?sid=104"
+    },
+    {
+     "title": "COP31 합의문 채택 실패…화석연료·적응재원 이견 못 좁혀",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-22T14:10:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626899"
+    },
+    {
+     "title": "'화석연료' 갈등…유엔 기후변화총회 끝내 결렬, 합의문 무산",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-22T13:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005444663?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "김승수",
+   "sources": [
+    "nate",
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T14:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김승수, 16세 연하 박혜연과 핑크빛 기류",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T15:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014338418"
+    },
+    {
+     "title": "김승수 ‘♥박혜연’에 손 포개기… “더 알아가고 싶다” 애프터신청...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-22T14:43:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005767353"
+    },
+    {
+     "title": "김승수, 16세 연하 맞선녀 박혜연에 고백…다음 데이트 약속까지 ‘달달...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-22T14:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190243"
     }
    ]
   },
@@ -47,10 +144,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T13:32:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-22T13:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -73,110 +170,26 @@
      "link": "https://m.entertain.naver.com/article/109/0005644029"
     }
    ]
-  },
-  {
-   "keyword": "유엔기후총회 합의 무산",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T13:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "COP31 합의 무산, 증시 영향은…정유·철강·신재생 엇갈린 셈법",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-22T13:58:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283107"
-    },
-    {
-     "title": "'화석연료' 갈등…유엔 기후변화총회 끝내 결렬, 합의문 무산",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-22T13:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005444663?sid=104"
-    },
-    {
-     "title": "COP31, 역대 최장 연장에도 합의문 채택 불발…‘화석연료’ 문구 못 담...",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-22T13:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833426?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "증안펀드 가동 준비",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T14:03:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'블랙먼데이' 우려에 F4 긴급대응… 증안펀드 18년만에 가동되나",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-22T14:56:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3451144"
-    },
-    {
-     "title": "[증시] ‘블랙 먼데이’ 공포에 정부 긴급회의…증안펀드 가동 준비·자...",
-     "press": "news-s.kr",
-     "publishedAt": "2026-11-22T14:30:00.000Z",
-     "link": "https://news-s.kr/view.html?id=L26112223212576da"
-    },
-    {
-     "title": "미 증시 급락에 F4회의 소집...\"증안펀드 가동 준비\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-22T14:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436516?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "중국 국가안전부 첨단 칩 작전",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T13:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"中 국가안전부, 최소 2년 전부터 AI 반도체 확보 비밀 작전\"",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-22T14:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005607942?sid=104"
-    },
-    {
-     "title": "중국 국가안전부, 美 반도체 통제 우회 작전…최소 2년 전 시작",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-22T14:08:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626898"
-    },
-    {
-     "title": "\"중국 국가안전부, 2년 전부터 첨단 칩 비밀 작전\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-22T13:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436499?sid=104"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
   "flagged": 1121,
   "matched": 638,
-  "avgLeadMin": 613,
+  "avgLeadMin": 612,
   "recent": [
+   {
+    "keyword": "솔비 이규한 결혼",
+    "hitKeyword": "솔비 이규한 비하인드",
+    "hitAt": "2026-11-23T00:00:00+09:00",
+    "leadMin": 142
+   },
+   {
+    "keyword": "솔비 이규한 4월 결혼",
+    "hitKeyword": "솔비 이규한 비하인드",
+    "hitAt": "2026-11-23T00:00:00+09:00",
+    "leadMin": 112
+   },
    {
     "keyword": "이혜영 남편",
     "hitKeyword": "이혜영 폐암 투병",
@@ -224,18 +237,6 @@
     "hitKeyword": "사랑이 온다 친부",
     "hitAt": "2026-11-22T22:30:00+09:00",
     "leadMin": 9536
-   },
-   {
-    "keyword": "해광호 실종자 수색",
-    "hitKeyword": "해광호 해저 발견",
-    "hitAt": "2026-11-22T22:30:00+09:00",
-    "leadMin": 42
-   },
-   {
-    "keyword": "유엔기후총회 합의 무산",
-    "hitKeyword": "유엔기후총회 합의 결렬",
-    "hitAt": "2026-11-22T22:30:00+09:00",
-    "leadMin": 22
    }
   ]
  }
