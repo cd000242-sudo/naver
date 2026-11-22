@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T14:08:49.823Z",
+ "builtAt": "2026-11-22T14:18:52.591Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,10 +15,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 3,
-   "press": 12,
-   "firstArticleAt": "2026-11-22T12:44:00.000Z",
+   "articles90": 9,
+   "recent20": 0,
+   "press": 9,
+   "firstArticleAt": "2026-11-22T12:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -43,14 +43,46 @@
    ]
   },
   {
+   "keyword": "이혜영",
+   "sources": [
+    "google"
+   ],
+   "articles90": 10,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-22T12:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'이상민과 이혼' 이혜영, '미우새' 출연에..'재혼' 현남편 \"미친 거 아니...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-22T14:06:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004468716"
+    },
+    {
+     "title": "'폐암 투병' 이혜영 \"5년간 아픈 여자랑 살아준 ♥남편에 감사\" (미우새...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-22T14:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002083044"
+    },
+    {
+     "title": "'미우새' 이혜영, 정준호 생일 축하하며 전 남편 이상민 간접 언급",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-22T13:48:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626895"
+    }
+   ]
+  },
+  {
    "keyword": "증안펀드 가동 준비",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
+   "articles90": 6,
    "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-22T12:40:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-22T12:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -73,11 +105,75 @@
      "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611222213458150078"
     }
    ]
+  },
+  {
+   "keyword": "최교진 면직안 재가",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T12:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李 대통령, 최교진 장관 사의 공개 약 1시간 만에 수락 '속전속결'",
+     "press": "wolyo.co.kr",
+     "publishedAt": "2026-11-22T14:18:00.000Z",
+     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=320874"
+    },
+    {
+     "title": "이 대통령, '수능 책임 통감' 최교진 장관 면직안 재가",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-22T13:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436493?sid=100"
+    },
+    {
+     "title": "수능 혼란에 결국 물러난 최교진 교육부 장관",
+     "press": "mhj21.com",
+     "publishedAt": "2026-11-22T12:58:00.000Z",
+     "link": "https://www.mhj21.com/news/articleView.html?idxno=254940"
+    }
+   ]
+  },
+  {
+   "keyword": "이기찬 약국 버스킹",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T13:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이기찬, 약국에 직접 전화 걸어 “앞에서 노래해도 돼요?” 버스킹 장소...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-22T14:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190244"
+    },
+    {
+     "title": "‘약국 버스킹’ 이기찬, 사람 없어도 부른다..“무대 없어져, 직접 기...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-22T13:52:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005644029"
+    },
+    {
+     "title": "'미운 우리 새끼' 이기찬, 집 공개→약국 버스킹 준비",
+     "press": "enter.etoday.co.kr",
+     "publishedAt": "2026-11-22T13:32:00.000Z",
+     "link": "https://enter.etoday.co.kr/news/view/305611"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1115,
+  "flagged": 1118,
   "matched": 636,
   "avgLeadMin": 615,
   "recent": [
