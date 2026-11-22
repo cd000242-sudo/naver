@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T15:49:21.454Z",
+ "builtAt": "2026-11-22T16:09:26.740Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 28,
  "candidates": [
   {
    "keyword": "최교진 수능 사의",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T14:34:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-22T15:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -43,9 +43,9 @@
    ]
   },
   {
-   "keyword": "한전 152만명 개인정보 유출",
+   "keyword": "한전, 152만명 개인정보 유출",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
    "articles90": 3,
    "recent20": 0,
@@ -77,7 +77,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1115,
+  "flagged": 1116,
   "matched": 633,
   "avgLeadMin": 614,
   "recent": [
