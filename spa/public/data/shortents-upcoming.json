@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T06:26:08.525Z",
+ "builtAt": "2026-11-22T06:36:11.790Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,102 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "조희대 탄핵 추진",
    "sources": [
     "daum"
    ],
-   "articles90": 53,
-   "recent20": 14,
-   "press": 36,
-   "firstArticleAt": "2026-11-22T05:00:00.000Z",
+   "articles90": 54,
+   "recent20": 12,
+   "press": 38,
+   "firstArticleAt": "2026-11-22T05:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국힘, 與 '조희대 탄핵' 비판…張 \"이게 진짜 내란\"",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-22T06:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000193201?sid=100"
+     "title": "[포토] 발언하는 양부남 조희대 대법원장 탄핵소추 추진단장",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-22T06:34:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3451060"
     },
     {
-     "title": "장동혁 \"이재명 탈옥 위한 탄핵\"…한동훈 \"서부지법 폭력보다 나빠\"",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-22T06:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000521884?sid=100"
+     "title": "민주 \"조희대 탄핵, 한덕수 판결 내용 아닌 절차 하자\"…국힘 \"억지 탄핵...",
+     "press": "lawissue.co.kr",
+     "publishedAt": "2026-11-22T06:34:00.000Z",
+     "link": "https://www.lawissue.co.kr/view.php?ud=2026112215322811699817d053b9_12"
     },
     {
-     "title": "국힘, 與 조희대 탄핵 추진에 \"이게 진짜 내란\"…한동훈·이준석도 반발",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-22T06:20:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=565649"
+     "title": "與, 조희대 탄핵안 연내 처리…野 \"이게 진짜 내란\"",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-22T06:32:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086325"
     }
    ]
   },
   {
    "keyword": "최교진 장관 사의 수락",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 32,
-   "recent20": 4,
-   "press": 26,
-   "firstArticleAt": "2026-11-22T04:57:00.000Z",
+   "articles90": 30,
+   "recent20": 5,
+   "press": 24,
+   "firstArticleAt": "2026-11-22T05:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "최교진 사의 발표 1시간 만에 수락…이 대통령이 국무총리에게 내린 지...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-22T06:34:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1176709"
+    },
+    {
+     "title": "최교진 교육부장관, 수능 혼란 책임지고 사임…취임 14개월 만",
+     "press": "lawissue.co.kr",
+     "publishedAt": "2026-11-22T06:32:00.000Z",
+     "link": "https://www.lawissue.co.kr/view.php?ud=2026112215292136239817d053b9_12"
+    },
     {
      "title": "李대통령, 최교진 교육부 장관 사의 수락… 총리에 “수능 사후 조치 만...",
      "press": "news-s.kr",
      "publishedAt": "2026-11-22T06:24:00.000Z",
      "link": "https://news-s.kr/view.html?id=L261122150918a2bf"
+    }
+   ]
+  },
+  {
+   "keyword": "정년연장 정부안 발표",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 16,
+   "recent20": 2,
+   "press": 15,
+   "firstArticleAt": "2026-11-22T05:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "노동장관 \"정년연장, 27일까지 결론 안나면 정부안 발표\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-22T06:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928717?sid=102"
     },
     {
-     "title": "[아주사설│기본·원칙·상식] 최교진 교육장관 전격 사퇴, 'AI 시대 시험...",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-22T06:22:00.000Z",
-     "link": "https://www.ajunews.com/view/20261122150506924"
-    },
-    {
-     "title": "이 대통령, 교육장관 사의 수락…수능 혼란 책임 물었나",
-     "press": "jnilbo.com",
+     "title": "노동장관 \"정년연장, 27일 여당 특위 합의 안 되면 정부 나설 것\"",
+     "press": "ytn.co.kr",
      "publishedAt": "2026-11-22T06:19:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085322"
+     "link": "https://n.news.naver.com/mnews/article/052/0002436405?sid=102"
+    },
+    {
+     "title": "정년 65세 연장, 노사 이견 여전…정부안 발표 27일 분수령",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-22T06:16:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611220015"
     }
    ]
   },
@@ -79,13 +112,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 10,
+   "articles90": 11,
    "recent20": 2,
-   "press": 10,
+   "press": 11,
    "firstArticleAt": "2026-11-22T05:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "조국 “당명 바꾸자…범민주진보진영 좋아할 이름으로”",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-22T06:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001232464?sid=100"
+    },
     {
      "title": "'조국' 대신 '민주'·'개혁'?…조국 \"확장성 있는 당명으로 개정\" 제안",
      "press": "news.jtbc.co.kr",
@@ -97,24 +136,212 @@
      "press": "ohmynews.com",
      "publishedAt": "2026-11-22T06:11:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/047/0002536784?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "최민정",
+   "sources": [
+    "google"
+   ],
+   "articles90": 30,
+   "recent20": 9,
+   "press": 10,
+   "firstArticleAt": "2026-11-22T05:21:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "최민정, 中 장추통 실격으로 어드밴스…여자 500m 결승 진출",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-22T06:34:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110036033955"
     },
     {
-     "title": "조국, 창당 1천일 앞두고 조국혁신당 당명 개정 제안",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-22T06:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000133214?sid=100"
+     "title": "빙상계 \"최민정, 더 오래 선수 생활 하길\" 한목소리",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-22T06:30:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=885892"
+    },
+    {
+     "title": "역주하는 최민정",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-22T06:29:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/001/0016456693"
+    }
+   ]
+  },
+  {
+   "keyword": "북미회담 무산",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 10,
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-22T05:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프, 종전선언 카드까지 꺼냈지만…北 '조건'에 북·미 회담 무산",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-22T06:34:00.000Z",
+     "link": "https://www.ajunews.com/view/20261122152631002"
+    },
+    {
+     "title": "\"트럼프 구애에도…김정은 '美 수용불가 조건' 제시해 회담 무산\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-22T06:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009303495?sid=104"
+    },
+    {
+     "title": "“트럼프·김정은 만남, 북 조건 탓에 무산…북, 편지 던져버려”",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-22T06:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000368310?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "투자",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 10,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-22T06:02:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "서울투자진흥재단, 싱가포르에서 서울 핀테크 알렸다",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-22T06:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005444615?sid=101"
+    },
+    {
+     "title": "AI 테마 투자심리 공포로 전환…나스닥100 약세장 문턱 접근",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-22T06:18:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/442435"
+    },
+    {
+     "title": "지역투자펀드 2137억 쌓였는데…선정 사업마저 줄줄이 차질",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-22T06:12:00.000Z",
+     "link": "https://www.ajunews.com/view/20261122144139883"
+    }
+   ]
+  },
+  {
+   "keyword": "김재열 ISU 회장 쇼트트랙 한국 개최",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-22T05:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "쇼트트랙 월드투어 8개 대회로 확대… 김재열 “한국 매년 개최 추진”",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-22T06:30:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/005/0001886651"
+    },
+    {
+     "title": "김재열 ISU 회장 \"쇼트트랙 월드투어 매년 국내 개최 추진\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-22T06:04:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/421/0009303485"
+    },
+    {
+     "title": "김재열 ISU 회장 \"쇼트트랙 최민정 기량 탁월...오래 타 줬으면\"",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-22T06:02:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261122000087"
+    }
+   ]
+  },
+  {
+   "keyword": "한국 수출 1조달러",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-22T05:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "수출 1조弗에도 반도체 빼면 세계 8위…제조업 연말 경기 '먹구름'",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-22T06:12:00.000Z",
+     "link": "https://www.ajunews.com/view/20261122150209920"
+    },
+    {
+     "title": "韓 수출 1조달러 돌파했지만 반도체 제외 땐 세계 8위",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-22T06:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001077254?sid=101"
+    },
+    {
+     "title": "수출 1조달러 돌파에도 반도체 비중 43%...산업별 성장 격차",
+     "press": "getnews.co.kr",
+     "publishedAt": "2026-11-22T06:02:00.000Z",
+     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=888023"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 해외 순방",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-22T05:11:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이 대통령 “치아 흔들리고 코피 터지지만 임기 초 순방은 국정과제…돼...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-22T06:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484205?sid=100"
+    },
+    {
+     "title": "李 대통령, '잦은 순방' 비판에 \"순방외교는 대통령의 주요 업무\"",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-22T06:24:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2651340"
+    },
+    {
+     "title": "李, 순방 비판에 \"대통령 주요 업무\"…권력 활용 중요성도 강조",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-22T05:52:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2021737"
     }
    ]
   },
   {
    "keyword": "핑계고 음주운전 고경표",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 10,
+   "articles90": 6,
    "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-22T04:57:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-22T05:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -139,100 +366,35 @@
    ]
   },
   {
-   "keyword": "투자",
+   "keyword": "수능 가채점 설명회",
    "sources": [
     "signal.bz",
-    "google"
-   ],
-   "articles90": 10,
-   "recent20": 7,
-   "press": 8,
-   "firstArticleAt": "2026-11-22T05:54:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "AI 테마 투자심리 공포로 전환…나스닥100 약세장 문턱 접근",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-22T06:18:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/442435"
-    },
-    {
-     "title": "지역투자펀드 2137억 쌓였는데…선정 사업마저 줄줄이 차질",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-22T06:12:00.000Z",
-     "link": "https://www.ajunews.com/view/20261122144139883"
-    },
-    {
-     "title": "앤트로픽 상장에도 AI 투자펀드 줄줄이 하락…기술주 매도세에 손실 확...",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-22T06:12:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=848040"
-    }
-   ]
-  },
-  {
-   "keyword": "최민정",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 26,
-   "recent20": 3,
-   "press": 8,
-   "firstArticleAt": "2026-11-22T04:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "어필하는 최민정[포토]",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-22T06:25:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/311/0002082958"
-    },
-    {
-     "title": "‘중국선수들이 더러운 반칙했지만…’ 비매너플레이 이겨낸 최민정, 1...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-22T06:25:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/109/0005643907"
-    },
-    {
-     "title": "최민정 '이건 반칙이야'[포토]",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-22T06:24:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/311/0002082957"
-    }
-   ]
-  },
-  {
-   "keyword": "김재열 ISU 회장 쇼트트랙 한국 개최",
-   "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-22T05:18:00.000Z",
+   "articles90": 6,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T05:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김재열 ISU 회장 \"쇼트트랙 월드투어 매년 국내 개최 추진\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T06:04:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/421/0009303485"
+     "title": "[포토]청솔학원, 2027학년도 대학수학능력시험 가채점 분석 설명회 열어",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-22T06:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413730?sid=102"
     },
     {
-     "title": "김재열 ISU 회장 \"쇼트트랙 최민정 기량 탁월...오래 타 줬으면\"",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-22T06:02:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261122000087"
+     "title": "[포토]청솔학원, 2027학년도 대학수학능력시험 가채점 분석 설명회",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-22T06:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413729?sid=102"
     },
     {
-     "title": "김재열 ISU 회장 \"쇼트트랙 월드투어,매년 한국 개최 협의 중\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-22T05:52:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/469/0000967028"
+     "title": "수능 가채점 분석 설명회",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T05:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014338120?sid=102"
     }
    ]
   },
@@ -241,10 +403,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 4,
-   "recent20": 1,
+   "articles90": 3,
+   "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-22T05:03:00.000Z",
+   "firstArticleAt": "2026-11-22T05:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -269,44 +431,12 @@
    ]
   },
   {
-   "keyword": "애플",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T05:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "애플·포스텍과 키운 청년 개발자... 포항서 창업까지 이어준다",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-22T06:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003158038?sid=102"
-    },
-    {
-     "title": "늘어나는 애플페이 도입 비용…대안으로 떠오른 '한국형 결제표준 규격...",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-22T05:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003488248?sid=101"
-    },
-    {
-     "title": "현대카드, 해외 결제 점유율 28%...애플페이 기반 장악력 '굳건'",
-     "press": "bloter.net",
-     "publishedAt": "2026-11-22T05:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/293/0000093638?sid=101"
-    }
-   ]
-  },
-  {
    "keyword": "기상",
    "sources": [
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-22T05:35:00.000Z",
    "exclusive": false,
@@ -331,78 +461,38 @@
      "link": "https://n.news.naver.com/mnews/article/421/0009303407?sid=102"
     }
    ]
-  },
-  {
-   "keyword": "김도규, 연간 MVP 선정!",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T05:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "롯데에서 방출→퓨처스 세이브 1위→창단 첫해 MVP까지 \"앞으로도 신뢰...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-22T05:59:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/477/0000640299"
-    },
-    {
-     "title": "'창단 첫해 뒷문 지킨 수호신' 김도규, 울산 웨일즈 초대 MVP",
-     "press": "maniareport.com",
-     "publishedAt": "2026-11-22T05:35:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/425/0000215276"
-    },
-    {
-     "title": "'19세이브' 김도규, 울산 창단 첫 시즌 연간 MVP 선정",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T05:00:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/003/0014338058"
-    }
-   ]
-  },
-  {
-   "keyword": "수능 가채점 설명회",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-22T05:44:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "수능 가채점 분석 설명회",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T05:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014338120?sid=102"
-    },
-    {
-     "title": "2027학년도 수능 가채점 설명회 찾은 학부모들",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T05:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014338129?sid=102"
-    },
-    {
-     "title": "2027 수능 가채점 분석 설명회",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T05:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009303445?sid=102"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1005,
-  "matched": 579,
-  "avgLeadMin": 632,
+  "flagged": 1008,
+  "matched": 583,
+  "avgLeadMin": 628,
   "recent": [
+   {
+    "keyword": "트럼프 얄타회담 사진",
+    "hitKeyword": "트럼프 북한 회담 무산",
+    "hitAt": "2026-11-22T15:30:00+09:00",
+    "leadMin": 296
+   },
+   {
+    "keyword": "과즙세연 방시혁",
+    "hitKeyword": "과즙세연 루머 부인",
+    "hitAt": "2026-11-22T15:30:00+09:00",
+    "leadMin": 115
+   },
+   {
+    "keyword": "트럼프 김정은 회동 무산",
+    "hitKeyword": "트럼프 북한 회담 무산",
+    "hitAt": "2026-11-22T15:30:00+09:00",
+    "leadMin": 54
+   },
+   {
+    "keyword": "과즙세연 방시혁과 안 잤다",
+    "hitKeyword": "과즙세연 루머 부인",
+    "hitAt": "2026-11-22T15:30:00+09:00",
+    "leadMin": 24
+   },
    {
     "keyword": "흑백요리사 트리플스타 발표",
     "hitKeyword": "트리플스타 재혼",
@@ -438,30 +528,6 @@
     "hitKeyword": "북미회담 무산",
     "hitAt": "2026-11-22T15:00:00+09:00",
     "leadMin": 24
-   },
-   {
-    "keyword": "40대 마통 연체 급증",
-    "hitKeyword": "40대 마통 연체급증",
-    "hitAt": "2026-11-22T15:00:00+09:00",
-    "leadMin": 24
-   },
-   {
-    "keyword": "케인 발목 수술 성공적",
-    "hitKeyword": "케인 발목 부상",
-    "hitAt": "2026-11-22T15:00:00+09:00",
-    "leadMin": 24
-   },
-   {
-    "keyword": "무역",
-    "hitKeyword": "중국산 전기차 무역적자",
-    "hitAt": "2026-11-22T14:30:00+09:00",
-    "leadMin": 8809
-   },
-   {
-    "keyword": "삼전 닉스",
-    "hitKeyword": "삼전닉스 반토막",
-    "hitAt": "2026-11-22T14:30:00+09:00",
-    "leadMin": 266
    }
   ]
  }
