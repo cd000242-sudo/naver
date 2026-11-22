@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T08:46:59.673Z",
+ "builtAt": "2026-11-22T08:57:02.641Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 33,
-   "recent20": 5,
+   "articles90": 32,
+   "recent20": 8,
    "press": 30,
-   "firstArticleAt": "2026-11-22T07:20:00.000Z",
+   "firstArticleAt": "2026-11-22T07:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "실언·AI커닝 늑장대응… 리더십 논란 자초한 '최교진의 입'",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-22T08:46:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261123010008496"
+     "title": "'수능 혼선' 최교진 교육장관 전격 사퇴…차기 수장 후보군 누가 될까",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-22T08:54:00.000Z",
+     "link": "https://www.ajunews.com/view/20261122173829246"
     },
     {
-     "title": "'수능 혼란' 최교진 장관 사퇴",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-22T08:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005356751?sid=102"
+     "title": "최교진 교육장관 사퇴…이 대통령 “시험 공정성은 타협할 수 없는 원칙...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-22T08:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002833394?sid=102"
     },
     {
-     "title": "최교진 교육부 장관, 수능 대혼란 책임 사임",
-     "press": "thereport.co.kr",
-     "publishedAt": "2026-11-22T08:42:00.000Z",
-     "link": "https://www.thereport.co.kr/news/articleView.html?idxno=93598"
+     "title": "최교진, 수능 사흘 만에 사임…“책임자로서 리더십 한계” 줄줄이 비판",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-22T08:50:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611220017"
     }
    ]
   },
@@ -47,10 +47,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 32,
-   "recent20": 3,
-   "press": 30,
-   "firstArticleAt": "2026-11-22T07:19:00.000Z",
+   "articles90": 29,
+   "recent20": 2,
+   "press": 29,
+   "firstArticleAt": "2026-11-22T07:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -79,10 +79,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 4,
-   "press": 12,
-   "firstArticleAt": "2026-11-22T07:19:00.000Z",
+   "articles90": 11,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-22T07:29:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -107,12 +107,44 @@
    ]
   },
   {
+   "keyword": "정부",
+   "sources": [
+    "google"
+   ],
+   "articles90": 10,
+   "recent20": 8,
+   "press": 8,
+   "firstArticleAt": "2026-11-22T08:37:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "정부 긴급 F4 회의 소집…증시 안정책 내놓고 '블랙먼데이' 우려 잠재워...",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-22T08:54:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886728"
+    },
+    {
+     "title": "김영훈 “정년연장, 27일 국회 특위 전후로 정부 입장 발표할 것”",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-22T08:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002833391?sid=102"
+    },
+    {
+     "title": "정부, 수능 AI 부정행위 추적…글로벌 AI 기업과 협력",
+     "press": "kyongbuk.co.kr",
+     "publishedAt": "2026-11-22T08:46:00.000Z",
+     "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4091672"
+    }
+   ]
+  },
+  {
    "keyword": "김정은",
    "sources": [
     "google"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-22T07:31:00.000Z",
    "exclusive": false,
@@ -139,12 +171,44 @@
    ]
   },
   {
+   "keyword": "이형일 부총리 주재 회의",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-22T07:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정부 긴급 F4 회의 소집…증시 안정책 내놓고 '블랙먼데이' 우려 잠재워...",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-22T08:54:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886728"
+    },
+    {
+     "title": "글로벌 반도체 급락에 '블랙먼데이' 우려…정부, 긴급 F4 회의 소집",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-22T08:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005356733?sid=100"
+    },
+    {
+     "title": "\"공매도 제한 카드 나올까\"...'검은 월요일' 공포에 정부 긴급 F4 회의",
+     "press": "ntoday.co.kr",
+     "publishedAt": "2026-11-22T08:30:00.000Z",
+     "link": "https://www.ntoday.co.kr/news/articleView.html?idxno=131051"
+    }
+   ]
+  },
+  {
    "keyword": "드파르디외 우엘벡 성폭행",
    "sources": [
     "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 2,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-22T07:38:00.000Z",
    "exclusive": false,
@@ -171,34 +235,34 @@
    ]
   },
   {
-   "keyword": "이형일 부총리 주재 회의",
+   "keyword": "노동자",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 7,
-   "recent20": 3,
+   "articles90": 4,
+   "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-22T07:35:00.000Z",
+   "firstArticleAt": "2026-11-22T07:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "글로벌 반도체 급락에 '블랙먼데이' 우려…정부, 긴급 F4 회의 소집",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-22T08:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005356733?sid=100"
+     "title": "간병노동자, 병원·소개소 지시받는데···'산재보험 적용'은?",
+     "press": "laborplus.co.kr",
+     "publishedAt": "2026-11-22T08:36:00.000Z",
+     "link": "https://www.laborplus.co.kr/news/articleView.html?idxno=41864"
     },
     {
-     "title": "\"공매도 제한 카드 나올까\"...'검은 월요일' 공포에 정부 긴급 F4 회의",
-     "press": "ntoday.co.kr",
-     "publishedAt": "2026-11-22T08:30:00.000Z",
-     "link": "https://www.ntoday.co.kr/news/articleView.html?idxno=131051"
+     "title": "고용허가제 22년…이주노동자는 왜 위험한 일터를 떠나지 못하나",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-22T08:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002833382?sid=102"
     },
     {
-     "title": "美 증시 폭락에 긴급 F4회의…증시 안정책 나오나",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-22T08:28:00.000Z",
-     "link": "https://www.ajunews.com/view/20261122172305194"
+     "title": "인천 계양구, 이동노동자 쉼터 개소... 편안한 휴식공간 마련",
+     "press": "cnbnews.com",
+     "publishedAt": "2026-11-22T08:18:00.000Z",
+     "link": "https://www.cnbnews.com/news/articleView.html?idxno=1024751"
     }
    ]
   },
@@ -209,12 +273,18 @@
     "google"
    ],
    "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T07:24:00.000Z",
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T08:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“이미 속이 시커먼데 또 검은 월요일?”…주말 美증시 투매에 ‘벌벌’",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-22T08:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005767319?sid=101"
+    },
     {
      "title": "美증시 투매에 코스피도 '벌벌'…\"월요일이 두렵다\"",
      "press": "mk.co.kr",
@@ -226,12 +296,6 @@
      "press": "ntoday.co.kr",
      "publishedAt": "2026-11-22T08:30:00.000Z",
      "link": "https://www.ntoday.co.kr/news/articleView.html?idxno=131051"
-    },
-    {
-     "title": "'검은 금요일'에 1.6조 산 개미…'검은 월요일' 오나",
-     "press": "bizhankook.com",
-     "publishedAt": "2026-11-22T08:14:00.000Z",
-     "link": "https://bizhankook.com/articles/retail-investors-buy-record-stocks.html"
     }
    ]
   },
