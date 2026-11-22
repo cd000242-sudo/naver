@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-21T20:28:54.636Z",
+  "generatedAt": "2026-11-22T02:01:22.531Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -74,70 +74,6 @@
           "views": 63,
           "answers": 3,
           "askedAt": "2026.11.15"
-        }
-      ]
-    },
-    {
-      "id": "be2c9760028ca2ae",
-      "urls": [
-        "https://dineroinfo.com/toss-tax-refund-amended-return/",
-        "https://youldad.tistory.com/622",
-        "https://jio-chol.tistory.com/377",
-        "https://flexcorp.tistory.com/289"
-      ],
-      "guide": {
-        "direction": "검색자는 토스 앱의 '환급금 조회'가 경정청구와 같은 건지, 추가납부가 떴을 때 무엇부터 해야 할지를 막혀서 묻는다. 고수 글들은 홈택스 미리보기 흐름이나 절세팁은 다뤘지만 '토스 환급금=당해연도 추정치'와 '경정청구=과거 누락공제 환급'이 다른 개념이라는 점을 한 글에서 구분해주지 않았다. 두 개념의 차이표와 신청 경로(토스는 조회만, 경정청구는 홈택스)를 정리하면 검색을 끝낸다.",
-        "searchTargets": [],
-        "mustInclude": [
-          "토스 앱 '환급금 조회'는 당해연도 연말정산 미리보기 기반 추정치라는 점",
-          "경정청구는 과거 최대 5년치 누락 공제를 환급받는 별도 신청 절차",
-          "경정청구는 토스 앱이 아닌 홈택스에서 직접 신청한다는 점",
-          "홈택스 미리보기 3단계 흐름(카드공제→예상세액→3개년비교)",
-          "추가납부 떴을 때 체크카드 전환·연금저축/IRP 추가납입 대응법"
-        ],
-        "mustAvoid": [
-          "토스 앱에서 경정청구까지 바로 신청되는 것처럼 오해시키는 서술",
-          "토스 앱 환급금 숫자를 홈택스 확정세액과 동일한 것처럼 단정"
-        ],
-        "checkBefore": [
-          "경정청구 신청기한(5년)과 절차(국세청 홈택스 공식 안내)",
-          "토스 앱 환급금 조회가 홈택스 데이터 연동인지 자체 추정인지(토스 공식 고지)"
-        ],
-        "solves": [
-          "토스 환급금과 경정청구가 뭐가 다른지 모름 → 개념·신청경로 비교표로 구분",
-          "미리보기에서 추가납부가 떴을 때 → 체크카드·연금저축 활용 대응법 제공",
-          "연말정산이 처음이라 절차를 모름 → 1~3월 전체 흐름표 정리"
-        ],
-        "actionTitles": [
-          "토스 환급금과 경정청구 차이, 신청 경로까지 확인하기",
-          "연말정산 환급금 조회는 토스로, 경정청구는 홈택스로 하는 법",
-          "홈택스 미리보기 추가납부 떴을 때 환급금 늘리는 법 확인"
-        ]
-      },
-      "at": "2026-11-16T20:19:13.752Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "연말정산 토스 환급금",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40311&docId=494844079&answerNo=10&qb=7Jew66eQ7KCV7IKw7ZmY6riJ6riI7KGw7ZqMIOy2lOqwgOuCqeu2gCDrlrTri6TrqbQg7LSd6riJ7JesIOyXsOq4iOyggOy2lQ==",
-          "views": 694,
-          "answers": 12,
-          "askedAt": "2026.11.03"
-        },
-        {
-          "title": "홈택스 미리보기를 활용한 연말정산 절세 팁....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40311&docId=490946163&answerNo=2&qb=7Jew66eQ7KCV7IKw7ZmY6riJ6riI7KGw7ZqMIOy2lOqwgOuCqeu2gCDrlrTri6TrqbQg7LSd6riJ7JesIOyXsOq4iOyggOy2lQ==",
-          "views": 490,
-          "answers": 10,
-          "askedAt": "2025.12.23"
-        },
-        {
-          "title": "연말정산 소득공제, 처음 시작하는데 꼭 알아....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40311&docId=491507697&answerNo=2&qb=7Jew66eQ7KCV7IKw7ZmY6riJ6riI7KGw7ZqMIOy2lOqwgOuCqeu2gCDrlrTri6TrqbQg7LSd6riJ7JesIOyXsOq4iOyggOy2lQ==",
-          "views": 171,
-          "answers": 2,
-          "askedAt": "2026.01.25"
         }
       ]
     },
@@ -245,73 +181,6 @@
       "at": "2026-11-16T20:19:13.752Z",
       "rules": "2026-10-20-solve",
       "provider": "claude"
-    },
-    {
-      "id": "df4734e90efc1a95",
-      "urls": [
-        "https://bariro.tistory.com/entry/%EC%A4%91%EB%8F%84-%ED%87%B4%EC%82%AC%EC%9E%90-%EC%97%B0%EB%A7%90%EC%A0%95%EC%82%B0-%EC%A7%81%EC%A0%91-%EC%8B%A0%EA%B3%A0-%E2%80%94-5%EC%9B%94-%ED%99%88%ED%83%9D%EC%8A%A4-%ED%99%98%EA%B8%89-%EC%84%9C%EB%A5%98%EC%99%80-%EB%B0%A9%EB%B2%95",
-        "https://onsum.kr/entry/%EC%82%AC%EC%97%85%EC%9E%90-%EA%B2%BD%EC%A0%95%EC%B2%AD%EA%B5%AC-%ED%99%98%EA%B8%89-%EC%8B%A0%EC%B2%AD%EB%B0%A9%EB%B2%95-2026%EF%BD%9C%EA%B0%9C%EC%9D%B8%EC%82%AC%EC%97%85%EC%9E%90-%EB%8C%80%EC%83%81%C2%B75%EB%85%84-%EA%B8%B0%ED%95%9C%C2%B7%ED%99%88%ED%83%9D%EC%8A%A4-%EC%A0%88%EC%B0%A8%C2%B7%EC%84%B1%EA%B3%B5-%EA%B0%80%EB%8A%A5%EC%84%B1",
-        "https://tali.kr/closed-business-refund"
-      ],
-      "guide": {
-        "direction": "검색자는 중도퇴사자 연말정산보다 폐업 사업자의 매입세액 환급 조건과 조회 방법에서 막힌다. '납부세액 초과분도 환급되는지', '개업일=폐업일 신고 시 매입환급 가능한지'가 실제 질문이다. 고수 블로그는 중도퇴사자 연말정산이나 경정청구만 다뤄 폐업자 환급금 자체의 대상·조건·조회 방법은 정리하지 않았다. 이 글은 매입공제 초과분 환급 불가 원칙, 폐업 12개월 환산 기준, 홈택스 조회·신청 순서를 표로 정리해 끝낸다.",
-        "searchTargets": [
-          "폐업자 환급금 조회",
-          "폐업자 환급금 조건",
-          "폐업자 환급금 신청 방법",
-          "폐업자 환급금 대상"
-        ],
-        "mustInclude": [
-          "매입공제액이 납부세액 넘는 부분은 일반적으로 환급되지 않는다는 원칙 (지식인 답변 근거)",
-          "폐업 시 사업기간을 법정기준대로 12개월로 환산하는 방식 (지식인 답변 근거)",
-          "개업일=폐업일 신고 시 매입환급 가능 여부는 세무서 전화 확인 필요 (확인 필요: 관할 세무서)",
-          "생활형숙박시설 등 재등록해도 기존 환급 문제가 자동 해결되지 않음 (지식인 답변 근거)"
-        ],
-        "mustAvoid": [
-          "중도퇴사자 연말정산 환급(근로소득자)과 폐업자 부가세 환급(사업자)을 같은 제도로 혼동",
-          "경정청구와 폐업자 환급금을 같은 절차로 섞어서 설명"
-        ],
-        "checkBefore": [
-          "매입세액 환급 관련 최신 기준은 홈택스 공지와 관할 세무서로 확인",
-          "12개월 환산 기준 등 법정 근거는 국세청 안내로 재확인"
-        ],
-        "solves": [
-          "매입공제액이 납부세액 넘으면 환급되는지 → 원칙상 불가, 예외 조건 정리",
-          "폐업신고와 매입세액 환급신청이 같은 절차인지 → 별개 절차로 신청 순서 정리",
-          "개업일=폐업일 신고해도 매입환급 가능한지 → 세무서 확인 포인트 안내"
-        ],
-        "actionTitles": [
-          "폐업자 환급금 조회 방법과 신청 조건 홈택스에서 확인",
-          "폐업자 환급금 대상·기준 확인하고 홈택스 신청하기",
-          "폐업자 환급금 신청 방법부터 조건, 조회까지 한번에 정리"
-        ]
-      },
-      "at": "2026-11-16T20:19:13.752Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "세금초보자 입니다 권리금도 세금신고 해야....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40304&docId=495859189&answerNo=7&qb=7Y+Q7JeF7J6Q7ZmY6riJ",
-          "views": 265,
-          "answers": 7,
-          "askedAt": "2026.11.07"
-        },
-        {
-          "title": "필라테스 폐업후 환불금문의",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60215&docId=495801084&answerNo=4&qb=7Y+Q7JeF7J6Q7ZmY6riJ",
-          "views": 211,
-          "answers": 4,
-          "askedAt": "2026.11.03"
-        },
-        {
-          "title": "사업자 개업일 날짜에 폐업",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40304&docId=495644072&answerNo=3&qb=7Y+Q7JeF7J6Q7ZmY6riJ",
-          "views": 126,
-          "answers": 3,
-          "askedAt": "2026.10.25"
-        }
-      ]
     },
     {
       "id": "b8af4101ca2aa84f",
