@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T15:39:18.058Z",
+ "builtAt": "2026-11-22T15:49:21.454Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,49 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 26,
  "candidates": [
-  {
-   "keyword": "조희대 탄핵 추진",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 15,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-22T14:15:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[사설] 조희대 탄핵 강행은 사실상 재판 불복 아닌가",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-22T15:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003567073?sid=110"
-    },
-    {
-     "title": "강원 여야, 조희대 대법원장 탄핵 추진 놓고 정면충돌",
-     "press": "kado.net",
-     "publishedAt": "2026-11-22T15:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000212713?sid=100"
-    },
-    {
-     "title": "예산안·대법원장 탄핵…연말 정국 갈등 고조",
-     "press": "ksilbo.co.kr",
-     "publishedAt": "2026-11-22T15:04:00.000Z",
-     "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1073281"
-    }
-   ]
-  },
   {
    "keyword": "최교진 수능 사의",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-22T14:18:00.000Z",
+   "firstArticleAt": "2026-11-22T14:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -77,8 +45,7 @@
   {
    "keyword": "한전 152만명 개인정보 유출",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 3,
    "recent20": 0,
@@ -106,45 +73,13 @@
      "link": "https://www.newswhoplus.com/news/articleView.html?idxno=75064"
     }
    ]
-  },
-  {
-   "keyword": "한전 on",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T14:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한전 고객·협력사 152만명 정보 유출… 주민번호에 계좌·카드번호까지",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-22T15:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001886716?sid=101"
-    },
-    {
-     "title": "한전 고객 152만명 주민·계좌·카드번호 털려",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-22T15:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003567038?sid=102"
-    },
-    {
-     "title": "한국전력 또 뚫렸다···'한전ON' 이용 152만여 명 개인정보 유출",
-     "press": "globale.co.kr",
-     "publishedAt": "2026-11-22T14:14:00.000Z",
-     "link": "https://www.globale.co.kr/news/articleView.html?idxno=41780"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1116,
-  "matched": 634,
-  "avgLeadMin": 613,
+  "flagged": 1115,
+  "matched": 633,
+  "avgLeadMin": 614,
   "recent": [
    {
     "keyword": "솔비 이규한 결혼",
