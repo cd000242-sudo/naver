@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T09:57:24.013Z",
+ "builtAt": "2026-11-22T10:07:27.153Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,70 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "한전 개인정보 유출",
    "sources": [
+    "signal.bz",
     "daum"
    ],
-   "articles90": 33,
-   "recent20": 12,
-   "press": 32,
+   "articles90": 42,
+   "recent20": 15,
+   "press": 40,
    "firstArticleAt": "2026-11-22T09:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한국전력, 고객·직원 등 개인정보 150만건 유출",
-     "press": "segyebiz.com",
-     "publishedAt": "2026-11-22T09:56:00.000Z",
-     "link": "http://www.segyebiz.com/newsView/20261122509748?OutUrl=naver"
+     "title": "한전 고객 152만명 개인정보 유출…주민·계좌·카드번호 털렸다",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-22T10:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003567001?sid=102"
     },
     {
-     "title": "한전, 사이버 공격에 고객정보 152만건 유출… 주민·계좌번호까지 털렸...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-22T09:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177171?sid=102"
+     "title": "한전, 고객 등 152만명 개인정보 유출 확인…\"2차 피해 예방 총력\"",
+     "press": "electimes.com",
+     "publishedAt": "2026-11-22T10:02:00.000Z",
+     "link": "https://www.electimes.com/news/articleView.html?idxno=375104"
     },
     {
-     "title": "한전, 직원 이어 고객 정보도 유출…65만명 주민번호·카드번호 유출",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T09:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009303677?sid=101"
+     "title": "한전, 152만명 개인정보 유출… 주민·계좌번호도",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-22T10:02:00.000Z",
+     "link": "https://www.viva100.com/article/20261122500712"
     }
    ]
   },
   {
-   "keyword": "조희대 대법원장 탄핵",
+   "keyword": "증안펀드 가동 준비",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 31,
-   "recent20": 6,
-   "press": 24,
-   "firstArticleAt": "2026-11-22T08:28:00.000Z",
-   "exclusive": true,
+   "articles90": 45,
+   "recent20": 13,
+   "press": 37,
+   "firstArticleAt": "2026-11-22T09:18:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "조희대 탄핵 추진에 여야 충돌 격화…與 \"연내 처리\" 野 \"진짜 내란\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T09:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014338375?sid=100"
+     "title": "F4 \"시장 상황 따라 증안펀드 바로 가동할 수 있게 준비 착수\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-22T10:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928757?sid=101"
     },
     {
-     "title": "대법원장 탄핵 ‘명분’ 논란… 법조계 “헌법상 파면요건 안 돼”",
-     "press": "segye.com",
-     "publishedAt": "2026-11-22T09:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177165?sid=102"
+     "title": "'블랙먼데이' 우려에⋯정부 \"증안펀드 가동 준비 착수\"",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-22T10:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001077291?sid=101"
     },
     {
-     "title": "장동혁 “탈옥 탄핵”…오세훈 “대통령 심판 열차 출발”",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-22T09:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000368329?sid=100"
+     "title": "'검은 월요일' F4 긴급회의, 증안펀드 즉시 가동?…자사주 매수한도 완...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-22T10:04:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282971"
     }
    ]
   },
@@ -79,63 +80,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 26,
-   "recent20": 4,
-   "press": 23,
-   "firstArticleAt": "2026-11-22T08:36:00.000Z",
+   "articles90": 29,
+   "recent20": 6,
+   "press": 26,
+   "firstArticleAt": "2026-11-22T08:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘수능 대혼란’ 최교진 교육장관 사퇴",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-22T09:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001886684?sid=102"
+     "title": "李대통령, 최교진 사의 수락…靑 \"다음 인선 절차대로 진행\"(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-22T10:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016456972?sid=100"
     },
     {
-     "title": "‘수능 혼란’ 최교진 교육부 장관 사퇴… 李 대통령 “국가시험 전면정...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-22T09:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177161?sid=102"
+     "title": "최교진 교육부 장관 사의…\"준비 미흡 비판 통감\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-22T10:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928755?sid=161"
     },
     {
-     "title": "최교진 '수능 혼란 책임론' 대두…이 대통령, 사의 즉각 수락",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-22T09:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000521892?sid=100"
+     "title": "30년 넘은 수능, 이제 끝물인가… AI 부정행위에 개편론 확산",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-22T10:00:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3451069"
     }
    ]
   },
   {
-   "keyword": "정부",
+   "keyword": "조희대 탄핵 추진에",
    "sources": [
-    "signal.bz",
-    "google"
+    "signal.bz"
    ],
-   "articles90": 21,
-   "recent20": 15,
-   "press": 18,
-   "firstArticleAt": "2026-11-22T09:32:00.000Z",
-   "exclusive": false,
+   "articles90": 26,
+   "recent20": 6,
+   "press": 21,
+   "firstArticleAt": "2026-11-22T08:40:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "[속보]월요일 증시 급락 공포에…정부 “증안펀드 즉시 가동 준비”",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-22T09:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002834583?sid=101"
+     "title": "민주당, 조희대 대법원장 탄핵 추진…12월 안 의결 목표",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-22T10:02:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3759614"
     },
     {
-     "title": "증시 급락 우려에 정부 긴급 대응‥안정펀드 가동 준비",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-22T09:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001537239?sid=101"
+     "title": "\"대법관들, 전원합의체서 각자 소신 판단 … 어떻게 대법원장 탄핵 사유...",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-22T10:00:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/20/2026112050260.html"
     },
     {
-     "title": "[속보] 블랙먼데이 우려에…정부, 증시안정펀드 가동 준비 착수",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-22T09:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001273546?sid=101"
+     "title": "'재판 속도가 다르다' 조희대 탄핵 사유로?…국힘선 맹공",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-22T09:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000521895?sid=100"
     }
    ]
   },
@@ -144,46 +144,52 @@
    "sources": [
     "daum"
    ],
-   "articles90": 13,
-   "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-22T08:28:00.000Z",
+   "articles90": 14,
+   "recent20": 2,
+   "press": 13,
+   "firstArticleAt": "2026-11-22T08:55:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "돌아왔구나 박지수! 15점·19리바운드 더블-더블…KB스타즈 4연패 탈출 ...",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-22T10:01:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/382/0001306132"
+    },
+    {
+     "title": "'박지수 15점 19리바운드' KB, 4연패 탈출",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-22T09:59:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/052/0002436475"
+    },
     {
      "title": "'박지수 15점 19리바운드' KB스타즈, 삼성생명에 26점차 대승…4연패 탈...",
      "press": "stoo.com",
      "publishedAt": "2026-11-22T09:20:00.000Z",
      "link": "http://www.stoo.com/article.php?aid=110037045584"
-    },
-    {
-     "title": "‘괴력의 박지수’ KB 4연패 탈출 이끌다···15점·19리바운드 펄펄, 삼...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-22T09:18:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/144/0001151134"
-    },
-    {
-     "title": "[AI상보] 허예은-박지수 쌍끌이, KB 삼성생명 70-44로 완파하고 4연패 탈...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-22T09:18:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261122000109"
     }
    ]
   },
   {
    "keyword": "남자 5000M 계주 금메달",
    "sources": [
-    "nate",
-    "daum"
+    "signal.bz",
+    "nate"
    ],
    "articles90": 48,
-   "recent20": 6,
+   "recent20": 2,
    "press": 10,
    "firstArticleAt": "2026-11-22T08:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "‘남자 쇼트트랙 계주 5000m 금메달’…신동민 대회 첫 2관왕+최민정 10...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-22T10:06:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/109/0005643966"
+    },
     {
      "title": "금메달 획득한 대한민국 대표팀 선수들",
      "press": "yna.co.kr",
@@ -195,27 +201,59 @@
      "press": "sports.donga.com",
      "publishedAt": "2026-11-22T09:45:00.000Z",
      "link": "https://m.sports.naver.com/general/article/382/0001306131"
-    },
-    {
-     "title": "쇼트트랙 최민정, 서울 대회 최종일 '빈손'…남자 계주 金(종합)",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T09:44:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/421/0009303670"
     }
    ]
   },
   {
-   "keyword": "명륜당 압수수색 영장 기각",
+   "keyword": "검은 월요일",
+   "sources": [
+    "google"
+   ],
+   "articles90": 10,
+   "recent20": 3,
+   "press": 9,
+   "firstArticleAt": "2026-11-22T08:49:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'검은 월요일' F4 긴급회의, 증안펀드 즉시 가동?…자사주 매수한도 완...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-22T10:04:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282971"
+    },
+    {
+     "title": "정부, 검은 월요일 우려…증안펀드 가동 준비",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-22T10:04:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086349"
+    },
+    {
+     "title": "‘검은 월요일’ 우려에…정부 증시안정펀드 가동 준비 착수",
+     "press": "segye.com",
+     "publishedAt": "2026-11-22T09:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177172?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "명륜당 추가 기각",
    "sources": [
     "nate"
    ],
    "articles90": 6,
    "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-22T08:32:00.000Z",
-   "exclusive": false,
+   "firstArticleAt": "2026-11-22T08:47:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "[단독] 중수청 첫 기업 수사부터 '별건' 의혹…공소청·법원 '줄기각'",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-22T10:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000521899?sid=102"
+    },
     {
      "title": "명륜진사갈비 회장 압수수색 영장 기각, 내부거래 수사 제동 걸리나?",
      "press": "gokorea.kr",
@@ -227,27 +265,27 @@
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-22T09:35:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012298816?sid=102"
-    },
-    {
-     "title": "법원, 서울중수청 신청 명륜당 추가 압수수색 영장 기각",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-22T09:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003158056?sid=102"
     }
    ]
   },
   {
-   "keyword": "고경표 음주운전 사과",
+   "keyword": "음주운전 고경표 사과",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T08:31:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T08:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'핑계고' 측, '음주운전' 고경표 후보 삭제 \"검토 불충분했다\" 사과",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-22T10:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000328739"
+    },
     {
      "title": "'핑계고', 결국 '음주운전' 고경표 시상식 후보서 제외…\"신중 기할 것\"...",
      "press": "news1.kr",
@@ -259,12 +297,6 @@
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-22T08:45:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/079/0004212481?sid=102"
-    },
-    {
-     "title": "'핑계고', '음주운전' 고경표 인기상 후보 제외 후 사과(종합)",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-22T08:40:00.000Z",
-     "link": "https://m.entertain.naver.com/article/437/0000521889"
     }
    ]
   },
@@ -274,7 +306,7 @@
     "daum"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-22T09:00:00.000Z",
    "exclusive": false,
@@ -297,6 +329,38 @@
      "press": "topstarnews.net",
      "publishedAt": "2026-11-22T09:18:00.000Z",
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282956"
+    }
+   ]
+  },
+  {
+   "keyword": "40대 아기와 추락",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T09:03:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "아파트 추락 사고: 엄마의 마지막 희생으로 기적적으로 생존한 아기",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-22T09:38:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886745"
+    },
+    {
+     "title": "창원 아파트서 5개월 아기 안고 추락한 40대女 사망…아기는 생존",
+     "press": "donga.com",
+     "publishedAt": "2026-11-22T09:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764214?sid=102"
+    },
+    {
+     "title": "아파트서 5개월 딸 안고 추락한 엄마, 아기는 살았다···40대 여성 사망",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-22T09:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484242?sid=102"
     }
    ]
   },
@@ -335,10 +399,16 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1052,
-  "matched": 602,
-  "avgLeadMin": 624,
+  "flagged": 1057,
+  "matched": 603,
+  "avgLeadMin": 623,
   "recent": [
+   {
+    "keyword": "코스피 급락",
+    "hitKeyword": "코스피 급락 공포",
+    "hitAt": "2026-11-22T19:00:00+09:00",
+    "leadMin": 23
+   },
    {
     "keyword": "철도노조 쟁의행위 예고",
     "hitKeyword": "철도노조 쟁의행위 예고",
@@ -392,12 +462,6 @@
     "hitKeyword": "쇼트트랙 월드투어 확대",
     "hitAt": "2026-11-22T17:00:00+09:00",
     "leadMin": 94
-   },
-   {
-    "keyword": "김재열 ISU 회장 월드투어 한국 개최",
-    "hitKeyword": "쇼트트랙 월드투어 확대",
-    "hitAt": "2026-11-22T17:00:00+09:00",
-    "leadMin": 74
    }
   ]
  }
