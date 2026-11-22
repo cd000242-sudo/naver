@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-21T23:53:39.182Z",
+ "builtAt": "2026-11-22T00:03:43.559Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,17 +11,121 @@
  "measured": 23,
  "candidates": [
   {
-   "keyword": "라이어 유연석 변사체 충격",
+   "keyword": "하나금융 주거 안전용품 지원",
    "sources": [
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-21T22:25:00.000Z",
+   "articles90": 33,
+   "recent20": 4,
+   "press": 30,
+   "firstArticleAt": "2026-11-21T23:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "하나금융, 취약계층 어르신 1000명에 주거 안전용품·보행기 지원",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-22T00:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003060370?sid=101"
+    },
+    {
+     "title": "하나금융그룹, 취약계층 어르신들 일상에 따뜻한 온기",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-21T23:58:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=783737"
+    },
+    {
+     "title": "하나금융, 취약계층 어르신 1000명에 주거 안전·이동 편의 위한 맞춤형...",
+     "press": "public25.com",
+     "publishedAt": "2026-11-21T23:54:00.000Z",
+     "link": "https://www.public25.com/news/articleView.html?idxno=58784"
+    }
+   ]
+  },
+  {
+   "keyword": "굿파트너 2",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 13,
+   "recent20": 6,
+   "press": 13,
+   "firstArticleAt": "2026-11-21T22:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘굿파트너2’ 장나라·김혜윤, 마침내 손잡았다… 첫 공조부터 통쾌한...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-21T23:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003542905"
+    },
+    {
+     "title": "'굿파트너2' 김혜윤, 장나라와 완벽 팀플레이 '통쾌한 응징'...시청률 7....",
+     "press": "ize.co.kr",
+     "publishedAt": "2026-11-21T23:57:00.000Z",
+     "link": "https://m.entertain.naver.com/article/465/0000021185"
+    },
+    {
+     "title": "장나라 또 대상받겠네 ‘굿파트너2’ 2회만에 최고 시청률 10% 뚫었다",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-21T23:53:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190076"
+    }
+   ]
+  },
+  {
+   "keyword": "경부선 일반열차 정상 운행",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 12,
+   "recent20": 3,
+   "press": 12,
+   "firstArticleAt": "2026-11-21T22:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "경부선 일반열차 운행 정상화…소정리역 화물열차 탈선 복구 완료",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-21T23:54:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086089"
+    },
+    {
+     "title": "경부선 열차 운행 재개…코레일, 밤샘 복구 끝에 정상화",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-21T23:54:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=848013"
+    },
+    {
+     "title": "경부선 일반열차 정상 운행…화물열차 궤도이탈 복구 완료",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-21T23:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014337691?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "유연석 변사체 발견 충격",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-21T22:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘라이어’ 유연석, 男주인공인데 8회 만에 충격 사망…서현진, 악행 폭...",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-21T23:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/396/0000761567"
+    },
     {
      "title": "'라이어' 유연석, 악행 폭로 후 바닷가서 변사체로",
      "press": "mediafine.co.kr",
@@ -33,44 +137,38 @@
      "press": "xportsnews.com",
      "publishedAt": "2026-11-21T23:14:00.000Z",
      "link": "https://m.entertain.naver.com/article/311/0002082906"
-    },
-    {
-     "title": "유연석, 충격 사망...서현진이 밝혀낸 추악한 실체 ('라이어')",
-     "press": "nc.press",
-     "publishedAt": "2026-11-21T23:11:00.000Z",
-     "link": "https://www.nc.press/news/articleView.html?idxno=631582"
     }
    ]
   },
   {
-   "keyword": "경부선 일반열차 정상 운행",
+   "keyword": "뉴스",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-21T22:28:00.000Z",
+   "articles90": 8,
+   "recent20": 7,
+   "press": 6,
+   "firstArticleAt": "2026-11-21T23:30:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "논술·면접 가는 길 막혔다…세종 소정리역 화물열차 탈선에 일반열차 ...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-21T23:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177061?sid=102"
+     "title": "속초시, 10대 뉴스 시민이 뽑는다…26개 후보, 29일까지",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-22T00:02:00.000Z",
+     "link": "https://www.ajunews.com/view/20261122085801264"
     },
     {
-     "title": "코레일 \"경부선 일반열차 운행 정상적으로 재개\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-21T23:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928586?sid=102"
+     "title": "[포토뉴스] 자연환경 보전의 중요성, 도심에 내려앉은 곡식을 여문 늦...",
+     "press": "dailyt.co.kr",
+     "publishedAt": "2026-11-22T00:02:00.000Z",
+     "link": "https://www.dailyt.co.kr/newsView/dlt202611220006"
     },
     {
-     "title": "경부선 화물열차 5량 탈선…밤샘 복구 끝 운행 정상화",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-21T23:34:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085220"
+     "title": "[데일리티 뉴스룸] 11월 22일, 어제의 주요 뉴스 네 컷 정리",
+     "press": "dailyt.co.kr",
+     "publishedAt": "2026-11-22T00:02:00.000Z",
+     "link": "https://www.dailyt.co.kr/newsView/dlt202611220007"
     }
    ]
   },
@@ -79,13 +177,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
    "firstArticleAt": "2026-11-21T22:40:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "EU, 빅테크 디지털세 공식 제안…美 충돌 불가피",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-22T00:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928601?sid=104"
+    },
     {
      "title": "EU, 빅테크 디지털세 초안 제안⋯트럼프와 갈등 불가피",
      "press": "etoday.co.kr",
@@ -97,44 +201,6 @@
      "press": "jnilbo.com",
      "publishedAt": "2026-11-21T23:37:00.000Z",
      "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085222"
-    },
-    {
-     "title": "EU, 빅테크 디지털세 공식 제안…트럼프, 관세 100％ 맞대응",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-21T23:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000545087?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "홍대입구역에서 버스 6명",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-21T22:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "홍대입구역서 버스 인도로 '쾅'…6명 다쳐",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-21T23:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928584?sid=102"
-    },
-    {
-     "title": "홍대입구역에서 인도로 돌진한 버스…3중 추돌 '6명 부상'",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-21T23:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001165153?sid=102"
-    },
-    {
-     "title": "홍대입구역 연쇄추돌로 버스 인도 돌진...6명 이송",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-21T22:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436274?sid=102"
     }
    ]
   },
@@ -144,12 +210,18 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 2,
    "press": 3,
-   "firstArticleAt": "2026-11-21T22:30:00.000Z",
+   "firstArticleAt": "2026-11-21T23:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "전세 사기 걱정되면 '안심부동산' 스티커 확인...온라인서도 가능",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-22T00:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000966971?sid=102"
+    },
     {
      "title": "[프리즘] 매물 쌓이는데 거래는 절벽…부동산 변곡점 올까",
      "press": "yonhapnewstv.co.kr",
@@ -161,54 +233,28 @@
      "press": "econonews.co.kr",
      "publishedAt": "2026-11-21T23:06:00.000Z",
      "link": "http://www.econonews.co.kr/news/articleView.html?idxno=447507"
-    },
-    {
-     "title": "\"매매도 전세도 막히면 어디로 가나\"…향후 부동산 시장 판단 기준은",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-21T22:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014337647?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "뉴스",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-21T23:00:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "[금융 HOT 뉴스] \"상장기업 64.7%, '기관투자자 유입 촉진' 시급\"",
-     "press": "bizwnews.com",
-     "publishedAt": "2026-11-21T23:30:00.000Z",
-     "link": "http://www.bizwnews.com/news/articleView.html?idxno=152607"
-    },
-    {
-     "title": "[AI 카드뉴스] 증시 책갈피 | 엔비디아 이어 AMD까지…반도체 규제 공포...",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-21T23:04:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261122500007"
-    },
-    {
-     "title": "[뉴스1 ★] 르세라핌 사쿠라, 블랙으로 뒤덮은 몽환美…파격 그 자체",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-21T23:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009303021"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 895,
-  "matched": 533,
-  "avgLeadMin": 617,
+  "flagged": 898,
+  "matched": 535,
+  "avgLeadMin": 621,
   "recent": [
+   {
+    "keyword": "푸틴 얄타회담 발언",
+    "hitKeyword": "트럼프 얄타회담 언급",
+    "hitAt": "2026-11-22T09:00:00+09:00",
+    "leadMin": 3267
+   },
+   {
+    "keyword": "라이어 유연석 변사체 충격",
+    "hitKeyword": "라이어 민준호 정체",
+    "hitAt": "2026-11-22T09:00:00+09:00",
+    "leadMin": 16
+   },
    {
     "keyword": "굿파트너 2",
     "hitKeyword": "굿파트너2 김혜윤 스카우트",
@@ -256,18 +302,6 @@
     "hitKeyword": "뉴욕증시 AI 급락",
     "hitAt": "2026-11-22T06:30:00+09:00",
     "leadMin": 2815
-   },
-   {
-    "keyword": "김혜윤",
-    "hitKeyword": "굿파트너2 김혜윤",
-    "hitAt": "2026-11-22T06:30:00+09:00",
-    "leadMin": 399
-   },
-   {
-    "keyword": "이란 미 F-16 공격 주장",
-    "hitKeyword": "이란 미 F-16 공격 주장",
-    "hitAt": "2026-11-22T06:30:00+09:00",
-    "leadMin": 258
    }
   ]
  }
