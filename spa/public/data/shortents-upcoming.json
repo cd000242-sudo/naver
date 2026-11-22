@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T17:29:50.845Z",
+ "builtAt": "2026-11-22T17:39:54.377Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "유엔기후총회 합의 무산",
@@ -16,12 +16,18 @@
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-22T16:08:00.000Z",
+   "firstArticleAt": "2026-11-22T16:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[COP31] 최종 합의 무산…'화석연료 퇴출' 국제사회 충돌",
+     "press": "4th.kr",
+     "publishedAt": "2026-11-22T17:32:00.000Z",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2122409"
+    },
     {
      "title": "유엔기후총회 17년만에 합의 실패…화석연료 놓고 극한대립(종합)",
      "press": "yna.co.kr",
@@ -33,12 +39,6 @@
      "press": "fnnews.com",
      "publishedAt": "2026-11-22T16:23:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/014/0005607944?sid=104"
-    },
-    {
-     "title": "유엔 기후총회, 화석연료 전환 이견…17년 만에 합의문 채택 실패(종합...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T16:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014338444?sid=104"
     }
    ]
   },
@@ -48,12 +48,18 @@
     "nate"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-22T16:08:00.000Z",
+   "firstArticleAt": "2026-11-22T16:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[COP31] 최종 합의 무산…'화석연료 퇴출' 국제사회 충돌",
+     "press": "4th.kr",
+     "publishedAt": "2026-11-22T17:32:00.000Z",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2122409"
+    },
     {
      "title": "유엔기후총회 17년만에 합의 실패…화석연료 놓고 극한대립(종합)",
      "press": "yna.co.kr",
@@ -65,12 +71,6 @@
      "press": "fnnews.com",
      "publishedAt": "2026-11-22T16:23:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/014/0005607944?sid=104"
-    },
-    {
-     "title": "유엔 기후총회, 화석연료 전환 이견…17년 만에 합의문 채택 실패(종합...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T16:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014338444?sid=104"
     }
    ]
   }
