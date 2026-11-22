@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T13:48:43.273Z",
+ "builtAt": "2026-11-22T13:58:46.487Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "증안펀드 가동 준비",
@@ -39,70 +39,6 @@
      "press": "slist.kr",
      "publishedAt": "2026-11-22T13:08:00.000Z",
      "link": "https://www.slist.kr/news/articleView.html?idxno=783823"
-    }
-   ]
-  },
-  {
-   "keyword": "이혜영 남편",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-22T12:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'미우새' 이혜영, 전남편 이상민 언급…'재혼' 남편이 \"여길 왜 나가냐...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-22T13:40:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000785624"
-    },
-    {
-     "title": "이혜영, 남편 부재훈과 함께 견딘 폐암 투병 5년…\"이제 좀 살 것 같다\"",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-22T13:14:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283058"
-    },
-    {
-     "title": "이혜영 \"美 LA에 수영장 딸린 저택 마련... 비욘세가 이웃\" ('미우새')",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-22T13:04:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409203"
-    }
-   ]
-  },
-  {
-   "keyword": "내일 날씨",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T12:19:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[날씨] '소설' 추위 서울 노원 -9.4℃...내일 전국 눈비",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-22T13:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436504?sid=103"
-    },
-    {
-     "title": "[내일날씨] 월요일 전국에 비·눈⋯출근길 '어는 비' 주의",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-22T12:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001077300?sid=103"
-    },
-    {
-     "title": "절기 '소설' 낮은 기온...내일(23일) 오후부터 비",
-     "press": "jibs.co.kr",
-     "publishedAt": "2026-11-22T12:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/661/0000086914?sid=103"
     }
    ]
   },
@@ -167,38 +103,6 @@
      "press": "kukinews.com",
      "publishedAt": "2026-11-22T13:02:00.000Z",
      "link": "https://www.kukinews.com/article/view/kuk202611220033"
-    }
-   ]
-  },
-  {
-   "keyword": "남자 계주 금메달 획득",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T12:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "올 시즌 두 번째 계주 金! ‘인코스 장인’의 힘 보여준 쇼트트랙 이정...",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-22T13:33:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/025/0003567012"
-    },
-    {
-     "title": "[아주경제 오늘의 뉴스 종합] 한국 쇼트트랙, 남자 5000ｍ 계주 금매달…...",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-22T12:50:00.000Z",
-     "link": "https://www.ajunews.com/view/20261122192445390"
-    },
-    {
-     "title": "한국 쇼트트랙 남자 계주 金, 신동민 안방대회서 2관왕…김길리 여자 1...",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-22T12:20:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1139129"
     }
    ]
   }
