@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T12:08:06.112Z",
+ "builtAt": "2026-11-22T12:18:09.294Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -13,15 +13,22 @@
   {
    "keyword": "증안펀드 가동 준비",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "daum"
    ],
-   "articles90": 35,
-   "recent20": 9,
-   "press": 34,
-   "firstArticleAt": "2026-11-22T10:41:00.000Z",
+   "articles90": 29,
+   "recent20": 6,
+   "press": 29,
+   "firstArticleAt": "2026-11-22T10:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "정부 증안펀드 가동 준비…미국 증시 급락에 F4 긴급회의, 24일부터 자사...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-22T12:08:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629597"
+    },
     {
      "title": "36년간 5회 등판 증안펀드…주가 폭락 막았을까",
      "press": "edaily.co.kr",
@@ -33,12 +40,6 @@
      "press": "econovill.com",
      "publishedAt": "2026-11-22T12:04:00.000Z",
      "link": "https://www.econovill.com/news/articleView.html?idxno=758089"
-    },
-    {
-     "title": "정부, 증권시장안정펀드 가동 준비 착수...변동성 대응 총력",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-22T12:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001273553?sid=101"
     }
    ]
   },
@@ -47,30 +48,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 23,
-   "recent20": 0,
-   "press": 23,
-   "firstArticleAt": "2026-11-22T10:39:00.000Z",
+   "articles90": 20,
+   "recent20": 3,
+   "press": 20,
+   "firstArticleAt": "2026-11-22T10:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'3선 세종교육감 출신' 최교진 교육부 장관 사임",
-     "press": "tjmbc.co.kr",
-     "publishedAt": "2026-11-22T11:45:00.000Z",
-     "link": "https://tjmbc.co.kr/NewsArticle/874721"
+     "title": "최교진 교육부 장관, 수능 대책 혼란 책임지고 사퇴…취임 14개월 만",
+     "press": "fntoday.co.kr",
+     "publishedAt": "2026-11-22T12:14:00.000Z",
+     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=399608"
     },
     {
-     "title": "이 대통령, 최교진 교육장관 면직안 당일 재가…사의 표명 당일 ‘속전...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-22T11:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484282?sid=100"
+     "title": "최교진 교육부 장관 사의…李대통령, 면직안 재가",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-22T12:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005607940?sid=100"
     },
     {
-     "title": "최교진 교육부 장관 사퇴…\"수능 대응 혼란 책임\"",
-     "press": "babytimes.co.kr",
-     "publishedAt": "2026-11-22T11:20:00.000Z",
-     "link": "http://www.babytimes.co.kr/news/articleView.html?idxno=74740"
+     "title": "최교진 교육장관 사퇴…“수능 책임 통감”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-22T12:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012298835?sid=102"
     }
    ]
   },
@@ -79,13 +80,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 20,
+   "articles90": 17,
    "recent20": 2,
-   "press": 20,
-   "firstArticleAt": "2026-11-22T10:40:00.000Z",
+   "press": 17,
+   "firstArticleAt": "2026-11-22T10:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "철도노조, 안전운행 투쟁 26일로 연기",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-22T12:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005607939?sid=102"
+    },
     {
      "title": "철도노조, 화물차 이탈 사고에 쟁의행위 26일로 연기…“복구 먼저”",
      "press": "news.kbs.co.kr",
@@ -97,12 +104,6 @@
      "press": "cbci.co.kr",
      "publishedAt": "2026-11-22T11:52:00.000Z",
      "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629596"
-    },
-    {
-     "title": "철도노조 준법 투쟁 26일로 연기 \"사고 복구 먼저\"",
-     "press": "tjmbc.co.kr",
-     "publishedAt": "2026-11-22T11:45:00.000Z",
-     "link": "https://tjmbc.co.kr/NewsArticle/874724"
     }
    ]
   },
@@ -111,10 +112,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-22T10:42:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-22T10:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -171,6 +172,38 @@
    ]
   },
   {
+   "keyword": "전소민 식스센스 B사이드",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T10:54:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "유재석, 송은이와 먹던 음료수 바꿔 먹어 “진짜 찐친이네” 전소민 감...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-22T12:05:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190235"
+    },
+    {
+     "title": "전소민, 제주도 자연인 시절 고백 “콩벌레 갖고 놀고 개미 잡아먹어”...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-22T11:50:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190234"
+    },
+    {
+     "title": "'식스센스', 음주운전 고경표 논란 속 최종회…전소민 \"내가 갈고닦아 ...",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-22T11:20:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110037873867"
+    }
+   ]
+  },
+  {
    "keyword": "100일의 거짓말",
    "sources": [
     "signal.bz",
@@ -209,12 +242,18 @@
     "nate"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-22T10:44:00.000Z",
+   "firstArticleAt": "2026-11-22T10:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "영월서 차박하던 70대 女 숨져…일산화탄소 중독 추정",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-22T12:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005444659?sid=102"
+    },
     {
      "title": "영월서 차박하던 70대 여성 숨져…일산화탄소 중독 추정",
      "press": "joongang.co.kr",
@@ -226,12 +265,6 @@
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-22T10:50:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006413797?sid=102"
-    },
-    {
-     "title": "'차박주의보' 영월서 70대 여성 숨져…겨울철 차량 난방 '일산화탄소 중...",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-22T10:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001041659?sid=102"
     }
    ]
   },
