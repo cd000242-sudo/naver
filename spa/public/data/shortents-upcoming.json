@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T00:33:56.800Z",
+ "builtAt": "2026-11-22T00:44:00.358Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,13 +11,44 @@
  "measured": 25,
  "candidates": [
   {
-   "keyword": "주거 안전용품 지원",
+   "keyword": "LG유플러스 AI 사업 강화",
    "sources": [
-    "signal.bz",
     "nate"
    ],
+   "articles90": 49,
+   "recent20": 1,
+   "press": 49,
+   "firstArticleAt": "2026-11-22T00:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "LG유플러스, 2027년 조직개편…AI 사업·기술 조직 전면 재정비",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-22T00:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001206437?sid=105"
+    },
+    {
+     "title": "LG유플러스, 'AI 역량 강화' 초점 조직개편 단행",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-22T00:22:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445877"
+    },
+    {
+     "title": "LG유플러스, B2B·B2C 사업 모두 AI 중심으로 개편한다",
+     "press": "dnews.co.kr",
+     "publishedAt": "2026-11-22T00:20:00.000Z",
+     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611202211390490001"
+    }
+   ]
+  },
+  {
+   "keyword": "주거 안전용품 지원",
+   "sources": [
+    "signal.bz"
+   ],
    "articles90": 31,
-   "recent20": 4,
+   "recent20": 1,
    "press": 28,
    "firstArticleAt": "2026-11-21T23:30:00.000Z",
    "exclusive": false,
@@ -46,33 +77,64 @@
   {
    "keyword": "굿파트너 2",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 20,
-   "recent20": 8,
-   "press": 18,
+   "articles90": 22,
+   "recent20": 3,
+   "press": 20,
    "firstArticleAt": "2026-11-21T23:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "장나라X김혜윤, 손잡자마자 터졌다…‘굿파트너2’ 2회 만에 최고 10% 돌...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-22T00:43:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005643869"
+    },
+    {
+     "title": "‘굿파트너2’ 시청률 7.7%, 동시간대 1위 수성",
+     "press": "enter.etoday.co.kr",
+     "publishedAt": "2026-11-22T00:42:00.000Z",
+     "link": "https://enter.etoday.co.kr/news/view/305589"
+    },
+    {
      "title": "김동규, '굿파트너2'서 빛났다! '강렬 인상' 선사",
      "press": "etnews.com",
      "publishedAt": "2026-11-22T00:32:00.000Z",
      "link": "https://m.entertain.naver.com/article/030/0003488184"
+    }
+   ]
+  },
+  {
+   "keyword": "김유정 박진영 빗속 입맞춤",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 16,
+   "recent20": 3,
+   "press": 16,
+   "firstArticleAt": "2026-11-21T23:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김유정♥박진영, 눈물의 빗속 키스에도…시청률 '10.4%→10.0%' 소폭 하락...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-22T00:31:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000785560"
     },
     {
-     "title": "'굿파트너2' 장나라·김혜윤, 완벽 팀플레이…2회 만에 최고 10%[시청률...",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-22T00:24:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1795306624531347006"
+     "title": "빗속 입맞춤→극적 반격…'100일의 거짓말', 동시간대 '1위'",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-22T00:29:00.000Z",
+     "link": "https://m.entertain.naver.com/article/030/0003488179"
     },
     {
-     "title": "차유진, 로펌 살림꾼 심현주로 등장…동료 전은호에 \"힘드냐\" ('굿파트너...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-22T00:23:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000492193"
+     "title": "'100일의 거짓말' 김유정X박진영, 빗속 애틋 입맞춤…최고 시청률 11.5%",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-22T00:26:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110033180885"
     }
    ]
   },
@@ -81,13 +143,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
+   "articles90": 13,
    "recent20": 1,
-   "press": 12,
+   "press": 13,
    "firstArticleAt": "2026-11-22T00:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "대법 \"소멸시효 지난 과거사 피해자도 국가배상 받을 수 있어\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-22T00:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537186?sid=102"
+    },
     {
      "title": "대법 “소멸시효 지난 여순사건 유족도 국가배상 청구 가능”[세상&]",
      "press": "biz.heraldcorp.com",
@@ -99,44 +167,6 @@
      "press": "lawtimes.co.kr",
      "publishedAt": "2026-11-22T00:06:00.000Z",
      "link": "https://www.lawtimes.co.kr/news/articleView.html?idxno=229761"
-    },
-    {
-     "title": "대법원, 여·순사건 국가상대 손배청구 시효 소멸 판단 원심 파기환송",
-     "press": "lawissue.co.kr",
-     "publishedAt": "2026-11-22T00:04:00.000Z",
-     "link": "https://www.lawissue.co.kr/view.php?ud=2026112209001865649a8c8bf58f_12"
-    }
-   ]
-  },
-  {
-   "keyword": "소설",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-21T23:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "첫눈 온다는 '소설'…대체로 맑지만 영하권 추위",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-22T00:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979289?sid=102"
-    },
-    {
-     "title": "[날씨] 절기 '소설' 영하권 추위…맑지만 대기 건조",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-22T00:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928607?sid=103"
-    },
-    {
-     "title": "일요일 절기상 '소설' 전국 대체로 맑고 쌀쌀...춘천 최저기온 영하 9.5...",
-     "press": "kado.net",
-     "publishedAt": "2026-11-22T00:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000212550?sid=103"
     }
    ]
   },
@@ -145,24 +175,24 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
+   "articles90": 9,
+   "recent20": 1,
+   "press": 9,
    "firstArticleAt": "2026-11-22T00:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "관계성 범죄 경찰 개입 어디까지?‥경찰, 국민 참여 토론 개최",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-22T00:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537184?sid=102"
+    },
+    {
      "title": "관계성범죄 대응책에 국민 의견 반영…경찰, 국민참여단 개최",
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-22T00:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006413581?sid=102"
-    },
-    {
-     "title": "관계성 범죄에 경찰 개입 어디까지?...국민 참여 토론",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-22T00:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436277?sid=102"
     },
     {
      "title": "경찰, 관계성범죄 개입 기준 국민과 논의…숙의 절차 도입",
@@ -173,23 +203,17 @@
    ]
   },
   {
-   "keyword": "경부선 일반열차 재개",
+   "keyword": "경부선 일반열차 정상운행",
    "sources": [
     "nate"
    ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-21T23:34:00.000Z",
+   "articles90": 9,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-21T23:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "열차 탈선 밤샘 복구작업…오늘 첫 차부터 운행 재개",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-22T00:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928610?sid=101"
-    },
     {
      "title": "화물열차 궤도이탈로 멈춘 경부선…22일 첫차부터 정상 운행",
      "press": "news.mtn.co.kr",
@@ -201,39 +225,109 @@
      "press": "hansbiz.co.kr",
      "publishedAt": "2026-11-22T00:06:00.000Z",
      "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=885843"
+    },
+    {
+     "title": "경부선 일반열차 운행 정상화…소정리역 화물열차 탈선 복구 완료",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-21T23:54:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086089"
     }
    ]
   },
   {
-   "keyword": "유연석 변사체 충격",
+   "keyword": "트리플스타 강승원 발표",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-21T23:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘흑백요리사’ 트리플스타, 재혼 발표 “부끄럽지 않은 남편 되겠다”...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-22T00:26:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003542909"
+    },
+    {
+     "title": "‘흑백요리사’ 트리플스타, 재혼 발표 “부끄럽지 않은 남편될 것”",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-22T00:22:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001282551"
+    },
+    {
+     "title": "'흑백요리사' 트리플스타, 깜짝 결혼 발표 \"부족한 날 감싸안아준 사람...",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-22T00:22:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110033016947"
+    }
+   ]
+  },
+  {
+   "keyword": "수험",
    "sources": [
     "signal.bz",
+    "google"
+   ],
+   "articles90": 9,
+   "recent20": 4,
+   "press": 7,
+   "firstArticleAt": "2026-11-21T23:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "무신사, ‘무진장’ 개막 앞두고 성수서 수험생 대상 ‘버거 트럭’ 운...",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-22T00:40:00.000Z",
+     "link": "https://www.viva100.com/article/20261122500190"
+    },
+    {
+     "title": "무신사, '무진장 블프' 앞두고 수험생 버거 트럭…\"1000명에 쏜다\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-22T00:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009303078?sid=101"
+    },
+    {
+     "title": "“수험표 들고 성수로”…미미미누도 뜬 무신사 버거 트럭",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-22T00:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413597?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "어린이집 운영 입소",
+   "sources": [
     "nate"
    ],
    "articles90": 7,
    "recent20": 0,
    "press": 7,
-   "firstArticleAt": "2026-11-21T23:04:00.000Z",
-   "exclusive": false,
+   "firstArticleAt": "2026-11-22T00:00:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "'라이어' 유연석, 사망 엔딩→최대훈 등장…분당 최고 시청률 5.1%",
-     "press": "stoo.com",
+     "title": "신도시 어린이집, 영아반만 운영 가능… 입소 대기 줄인다",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-22T00:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001206432?sid=102"
+    },
+    {
+     "title": "신도시 어린이집 '영아반만 운영' 허용⋯입소 대기 완화 기대",
+     "press": "etoday.co.kr",
      "publishedAt": "2026-11-22T00:06:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110032734833"
+     "link": "https://www.etoday.co.kr/news/view/2651257"
     },
     {
-     "title": "‘라이어’ 유연석, 男주인공인데 8회 만에 충격 사망…서현진, 악행 폭...",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-21T23:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/396/0000761567"
-    },
-    {
-     "title": "'라이어' 유연석, 악행 폭로 후 바닷가서 변사체로",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-21T23:44:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95663"
+     "title": "영아반만으로도 어린이집 운영 가능해져…영아반 입소 대기 완화",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-22T00:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004212392?sid=102"
     }
    ]
   },
@@ -242,10 +336,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 6,
-   "recent20": 3,
-   "press": 6,
-   "firstArticleAt": "2026-11-21T23:06:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-21T23:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -266,39 +360,6 @@
      "press": "breaknews.com",
      "publishedAt": "2026-11-22T00:16:00.000Z",
      "link": "http://www.breaknews.com/1252893"
-    }
-   ]
-  },
-  {
-   "keyword": "수험",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-21T23:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“수능 끝, 무진장 시작”…무신사, 성수서 수험생 응원 이벤트 진행",
-     "press": "socialvalue.kr",
-     "publishedAt": "2026-11-22T00:30:00.000Z",
-     "link": "https://www.socialvalue.kr/news/view/1065572735740310"
-    },
-    {
-     "title": "오프라인 재시험 통보에 2만명이 안 나타났다…‘바보’가 된 수험생들",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-22T00:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005767097?sid=102"
-    },
-    {
-     "title": "'수험생 이동 어쩌나'…철도노조 내일 쟁의 예고",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-21T23:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928587?sid=101"
     }
    ]
   },
@@ -335,41 +396,73 @@
    ]
   },
   {
-   "keyword": "채령 모친 암 투병 고백",
+   "keyword": "음악실 방화 20대 징역 2년",
    "sources": [
-    "daum"
+    "nate"
    ],
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-21T23:08:00.000Z",
+   "firstArticleAt": "2026-11-21T23:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "있지 채령·이채연 모친 희귀암 투병…이채연 병원서 출퇴근하며 간병",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-22T00:20:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626842"
+     "title": "방화 집행유예 중 또 초등학교에 불지른 20대 실형",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-22T00:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001886595?sid=102"
     },
     {
-     "title": "있지 채령·이채연 자매, 모친 희소암 투병 고백",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-21T23:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014337685"
+     "title": "방화 집행유예 중 초등학교 들어가 불 지른 20대…징역 2년",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-21T23:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009303043?sid=102"
     },
     {
-     "title": "있지 채령, 모친 희귀암 투병 고백… 언니 이채연은 병원서 출퇴근 (전...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-21T23:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003542897"
+     "title": "[속보]초등학교 몰래 들어가 음악실에 불지른 20대…집유기간 또 방화범...",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-21T23:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002834504?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "유연석 변사체 충격",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-21T23:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'라이어' 유연석, 사망 엔딩→최대훈 등장…분당 최고 시청률 5.1%",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-22T00:06:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110032734833"
+    },
+    {
+     "title": "‘라이어’ 유연석, 男주인공인데 8회 만에 충격 사망…서현진, 악행 폭...",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-21T23:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/396/0000761567"
+    },
+    {
+     "title": "'라이어' 유연석, 악행 폭로 후 바닷가서 변사체로",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-21T23:44:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95663"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 907,
+  "flagged": 912,
   "matched": 538,
   "avgLeadMin": 618,
   "recent": [
