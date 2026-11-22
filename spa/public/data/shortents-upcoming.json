@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T02:54:52.502Z",
+ "builtAt": "2026-11-22T03:04:56.633Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -13,64 +13,64 @@
   {
    "keyword": "민주당 대법원장 탄핵 추진",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 72,
-   "recent20": 19,
-   "press": 40,
+   "articles90": 74,
+   "recent20": 14,
+   "press": 43,
    "firstArticleAt": "2026-11-22T02:03:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "양부남 추진단장 기자간담회 발언",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-22T02:52:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3759385"
+     "title": "오세훈 “조희대 탄핵 강행 땐 이재명 대통령 심판열차 출발할 것”",
+     "press": "segye.com",
+     "publishedAt": "2026-11-22T03:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177091?sid=102"
     },
     {
-     "title": "조희대 탄핵 나선 민주당 “한덕수 판결, 탄핵 사유 삼지 않기로”",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-22T02:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833336?sid=100"
+     "title": "오세훈 \"대법원장 탄핵 추진, 대통령 재판 없애려는 것\"",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-22T03:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000554325?sid=102"
     },
     {
-     "title": "더불어민주당 조희대 대법원장 탄핵소추 추진단 기자간담회",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-22T02:50:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3759383"
+     "title": "“국회가 대법원 상급심이냐”…변호사단체, 민주당 ‘조희대 탄핵’에...",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-22T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002834551?sid=102"
     }
    ]
   },
   {
-   "keyword": "해광호 수색 부이 발견",
+   "keyword": "대학생 취업인식도 조사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 17,
-   "recent20": 1,
-   "press": 17,
-   "firstArticleAt": "2026-11-22T01:26:00.000Z",
+   "articles90": 19,
+   "recent20": 7,
+   "press": 19,
+   "firstArticleAt": "2026-11-22T02:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "태안 서격렬비열도 인근 수심 52m 해저서 선박 추정체 발견… 해광호 여...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-22T02:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002834546?sid=102"
+     "title": "대학생 45% “취업 작년보다 어렵다”…구직 활동은 오히려 증가",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-22T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003488225?sid=105"
     },
     {
-     "title": "태안해경, 해광호 수중수색 중 선박 추정 물체 발견",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-22T02:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000193156?sid=102"
+     "title": "대학생 45% “취업 더 어려워졌다”…4명 중 1명은 서류전형 전패",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-22T02:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000133169?sid=101"
     },
     {
-     "title": "‘실종된 해광호’ 수색 닷새째…수심 52ｍ 해저서 선박 추정체 발견",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-22T02:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004010997?sid=102"
+     "title": "취업문 더 좁아졌다…대학생 45% \"작년보다 취업 어렵다\"",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-22T02:56:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=565638"
     }
    ]
   },
@@ -79,10 +79,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 1,
-   "press": 14,
-   "firstArticleAt": "2026-11-22T01:31:00.000Z",
+   "articles90": 13,
+   "recent20": 0,
+   "press": 13,
+   "firstArticleAt": "2026-11-22T01:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,14 +107,14 @@
    ]
   },
   {
-   "keyword": "류재철 CEO 제조 혁신 성장",
+   "keyword": "류재철 CEO, 협력사와 혁신 성장",
    "sources": [
     "nate"
    ],
-   "articles90": 13,
-   "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-22T01:26:00.000Z",
+   "articles90": 11,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-22T01:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -139,49 +139,23 @@
    ]
   },
   {
-   "keyword": "LG유플러스 AI 사업 강화",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-22T01:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "LG유플러스 2027년도 조직 개편, AI 사업 역량 강화 추진",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-22T02:48:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=452583"
-    },
-    {
-     "title": "LG유플러스, 2027년 조직개편…\"AI 사업 성과 창출 가속화\"",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-22T02:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005845994?sid=105"
-    },
-    {
-     "title": "LG유플러스, 2027년 조직개편…AI 인프라·플랫폼 중심 B2B 재편",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-22T02:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/468/0001282578?sid=101"
-    }
-   ]
-  },
-  {
    "keyword": "현대엘리베이터 무벡스 지분 매각",
    "sources": [
     "nate"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-22T01:28:00.000Z",
+   "articles90": 10,
+   "recent20": 3,
+   "press": 10,
+   "firstArticleAt": "2026-11-22T01:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "현대엘리베이터 현대무벡스 지분 1026억에 매각한다, 주주환원 재원 확...",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-22T02:56:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=452584"
+    },
     {
      "title": "현대엘리베이터, 현대무벡스 지분 1026억원 매각…주주환원 재원으로",
      "press": "dt.co.kr",
@@ -193,24 +167,18 @@
      "press": "businessplus.kr",
      "publishedAt": "2026-11-22T02:46:00.000Z",
      "link": "https://www.businessplus.kr/news/articleView.html?idxno=120255"
-    },
-    {
-     "title": "현대엘리베이터, 무벡스 지분 1026억 매각…배당 확대",
-     "press": "4th.kr",
-     "publishedAt": "2026-11-22T02:28:00.000Z",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2122398"
     }
    ]
   },
   {
    "keyword": "최태원 한일 AI 인재 육성",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-22T01:26:00.000Z",
+   "articles90": 10,
+   "recent20": 0,
+   "press": 10,
+   "firstArticleAt": "2026-11-22T01:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -239,30 +207,62 @@
    "sources": [
     "google"
    ],
-   "articles90": 8,
-   "recent20": 1,
+   "articles90": 9,
+   "recent20": 2,
    "press": 8,
-   "firstArticleAt": "2026-11-22T01:34:00.000Z",
+   "firstArticleAt": "2026-11-22T01:45:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "[골프] 김민선·유현조, LPGA Q시리즈 최종전 3R 공동 10위",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-22T03:02:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3451029"
+    },
+    {
+     "title": "[골프] 김아림, LPGA 투어 챔피언십 3R 단독 선두… 우승 눈앞",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-22T02:58:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3451028"
+    },
     {
      "title": "LPGA 경기 중인 한국 선수들 현재 순항 중",
      "press": "imaeil.com",
      "publishedAt": "2026-11-22T02:40:00.000Z",
      "link": "https://m.sports.naver.com/golf/article/088/0001041561"
-    },
+    }
+   ]
+  },
+  {
+   "keyword": "김아림, 투어 챔피언십 3R 선두",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-22T02:02:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
     {
-     "title": "김아림, LPGA 최종전 3R 단독 선두…우승 상금 400만달러 눈앞",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-22T02:19:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085276"
+     "title": "[골프] 김아림, LPGA 투어 챔피언십 3R 단독 선두… 우승 눈앞",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-22T02:58:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3451028"
     },
     {
      "title": "'사흘째 선두' 김아림, LPGA 최종전 3R 1타 차 리드...우승 상금 53억 보...",
      "press": "maniareport.com",
      "publishedAt": "2026-11-22T02:19:00.000Z",
      "link": "https://m.sports.naver.com/golf/article/425/0000215267"
+    },
+    {
+     "title": "김아림, LPGA 최종전 3R 단독 선두…우승 상금 400만달러 눈앞",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-22T02:19:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085276"
     }
    ]
   },
@@ -271,10 +271,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 5,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-22T01:29:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-22T01:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -297,46 +297,32 @@
      "link": "https://n.news.naver.com/mnews/article/081/0003701814?sid=104"
     }
    ]
-  },
-  {
-   "keyword": "담보 대출",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T01:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "카드론 잔액 5개월 만에 증가 전환…대환대출·리볼빙 '연중 최고'",
-     "press": "asiatime.co.kr",
-     "publishedAt": "2026-11-22T02:02:00.000Z",
-     "link": "https://www.asiatime.co.kr/article/20261120500369"
-    },
-    {
-     "title": "대출금리 내려준다더니 우대금리 줄였다?…은행들 이달까지 점검",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-22T01:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000545105?sid=101"
-    },
-    {
-     "title": "외담대 상환청구권 폐지 앞두고…납품 중기 대출 조건 달라지나",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-22T01:26:00.000Z",
-     "link": "https://www.viva100.com/article/20261120500824"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 955,
-  "matched": 552,
-  "avgLeadMin": 615,
+  "flagged": 958,
+  "matched": 555,
+  "avgLeadMin": 612,
   "recent": [
+   {
+    "keyword": "1251회 로또 당첨 번호",
+    "hitKeyword": "로또 2등 10장 당첨",
+    "hitAt": "2026-11-22T12:00:00+09:00",
+    "leadMin": 56
+   },
+   {
+    "keyword": "추성훈 은퇴전",
+    "hitKeyword": "추성훈 은퇴전",
+    "hitAt": "2026-11-22T12:00:00+09:00",
+    "leadMin": 25
+   },
+   {
+    "keyword": "해광호 수색 부이 발견",
+    "hitKeyword": "해광호 수색",
+    "hitAt": "2026-11-22T12:00:00+09:00",
+    "leadMin": 15
+   },
    {
     "keyword": "고경표 핑계고 논란",
     "hitKeyword": "고경표 음주운전 핑계고",
@@ -378,24 +364,6 @@
     "hitKeyword": "채령 가족 투병 소식",
     "hitAt": "2026-11-22T11:00:00+09:00",
     "leadMin": 106
-   },
-   {
-    "keyword": "김유정 박진영 빗속 입맞춤",
-    "hitKeyword": "박진영 김유정 키스",
-    "hitAt": "2026-11-22T11:00:00+09:00",
-    "leadMin": 26
-   },
-   {
-    "keyword": "김아림 LPGA 선두 유지",
-    "hitKeyword": "김아림 우승 경쟁",
-    "hitAt": "2026-11-22T11:00:00+09:00",
-    "leadMin": 26
-   },
-   {
-    "keyword": "문승원 SSG 잔류",
-    "hitKeyword": "문승원 원클럽맨 계약",
-    "hitAt": "2026-11-22T11:00:00+09:00",
-    "leadMin": 6
    }
   ]
  }
