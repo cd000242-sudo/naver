@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T00:13:46.812Z",
+ "builtAt": "2026-11-22T00:23:52.507Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,34 @@
  "measured": 23,
  "candidates": [
   {
-   "keyword": "하나금융 주거 안전용품 지원",
+   "keyword": "주거 안전용품 지원",
    "sources": [
     "nate"
    ],
-   "articles90": 33,
+   "articles90": 30,
    "recent20": 3,
-   "press": 30,
+   "press": 27,
    "firstArticleAt": "2026-11-21T23:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "하나금융, 취약계층 어르신 1000명에 주거 안전용품·보행기 지원",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-22T00:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003060370?sid=101"
+     "title": "하나금융, 취약계층에 주거 안전용품·보행보조기 지원",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-22T00:20:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261122500036"
     },
     {
-     "title": "하나금융그룹, 취약계층 어르신들 일상에 따뜻한 온기",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-21T23:58:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=783737"
+     "title": "하나금융, 취약계층 어르신에 방한·주거안전 용품 기부",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-22T00:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413591?sid=101"
     },
     {
-     "title": "하나금융, 취약계층 어르신 1000명에 주거 안전·이동 편의 위한 맞춤형...",
-     "press": "public25.com",
-     "publishedAt": "2026-11-21T23:54:00.000Z",
-     "link": "https://www.public25.com/news/articleView.html?idxno=58784"
+     "title": "하나금융, 취약계층 어르신 1000명에 주거 안전용품·보행보조기 지원",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-22T00:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003488173?sid=101"
     }
    ]
   },
@@ -48,57 +48,56 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 14,
-   "recent20": 4,
-   "press": 14,
+   "articles90": 20,
+   "recent20": 8,
+   "press": 19,
    "firstArticleAt": "2026-11-21T22:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "장나라는 딜, 김혜윤은 고발…‘굿파트너2’, 첫 팀플레이부터 ‘통쾌’",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-22T00:12:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001147959"
+     "title": "차유진, 로펌 살림꾼 심현주로 등장…동료 전은호에 \"힘드냐\" ('굿파트너...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-22T00:23:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000492193"
     },
     {
-     "title": "김동규, '굿파트너2'서 박해진 20대 시절 열연…너드남 고시생 변신",
+     "title": "'굿파트너2' 2회만에 최고 10% 돌파",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-22T00:22:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611220035"
+    },
+    {
+     "title": "'굿파트너2' 차유진, 법무법인 사무장 심현주로 첫 등장",
      "press": "topstarnews.net",
-     "publishedAt": "2026-11-22T00:06:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282704"
-    },
-    {
-     "title": "‘굿파트너2’ 장나라·김혜윤, 마침내 손잡았다… 첫 공조부터 통쾌한...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-21T23:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003542905"
+     "publishedAt": "2026-11-22T00:22:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282715"
     }
    ]
   },
   {
    "keyword": "경부선 일반열차 정상 운행",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 4,
-   "press": 12,
-   "firstArticleAt": "2026-11-21T22:47:00.000Z",
+   "articles90": 11,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-21T22:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "코레일, 경부선 일반열차 운행 재개…밤샘 복구 끝 정상화",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-22T00:06:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=885843"
-    },
     {
      "title": "코레일, 소정리역 탈선 사고로 중단된 열차 운행 재개…첫 열차부터 정...",
      "press": "mdtoday.co.kr",
      "publishedAt": "2026-11-22T00:06:00.000Z",
      "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626839"
+    },
+    {
+     "title": "코레일, 경부선 일반열차 운행 재개…밤샘 복구 끝 정상화",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-22T00:06:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=885843"
     },
     {
      "title": "경부선 일반열차 운행 정상화…소정리역 화물열차 탈선 복구 완료",
@@ -109,77 +108,13 @@
    ]
   },
   {
-   "keyword": "김아림 최종전 선두",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 10,
-   "recent20": 4,
-   "press": 10,
-   "firstArticleAt": "2026-11-21T22:45:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김아림, CME그룹 투어 챔피언십 사흘째 선두…2위와 1타 차",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-22T00:10:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626841"
-    },
-    {
-     "title": "김아림, LPGA 투어 챔피언십 3R 단독 선두",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-22T00:08:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=885844"
-    },
-    {
-     "title": "김아림, LPGA 최종전 사흘째 선두…통산 4승 눈앞",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-22T00:06:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/016/0002726653"
-    }
-   ]
-  },
-  {
-   "keyword": "뉴스",
-   "sources": [
-    "google"
-   ],
-   "articles90": 12,
-   "recent20": 12,
-   "press": 8,
-   "firstArticleAt": "2026-11-21T23:54:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "[카드뉴스] 임산부는 KTX 일반실 운임 40% 할인... 함께 타는 1명까지",
-     "press": "ibabynews.com",
-     "publishedAt": "2026-11-22T00:10:00.000Z",
-     "link": "https://www.ibabynews.com/news/articleView.html?idxno=157170"
-    },
-    {
-     "title": "[뉴스의 인물] 나이브 부켈레 엘살바도르 대통령",
-     "press": "monthly.chosun.com",
-     "publishedAt": "2026-11-22T00:08:00.000Z",
-     "link": "https://monthly.chosun.com/news/articleView.html?idxno=72092"
-    },
-    {
-     "title": "[카드뉴스] 크리스마스 트리 보러 어디 갈까?",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-22T00:08:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5085967"
-    }
-   ]
-  },
-  {
-   "keyword": "유연석 변사체 발견 충격",
+   "keyword": "유연석 변사체 충격",
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
    "firstArticleAt": "2026-11-21T23:04:00.000Z",
    "exclusive": false,
    "capped": false,
@@ -205,12 +140,76 @@
    ]
   },
   {
+   "keyword": "수험",
+   "sources": [
+    "google"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-21T22:57:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "오프라인 재시험 통보에 2만명이 안 나타났다…‘바보’가 된 수험생들",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-22T00:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005767097?sid=102"
+    },
+    {
+     "title": "'수험생 이동 어쩌나'…철도노조 내일 쟁의 예고",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-21T23:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928587?sid=101"
+    },
+    {
+     "title": "열차 선로 밖 튕겨나가…운행 중지로 수험생 '발동동'",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-21T23:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928585?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "부동산",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-21T23:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "경기도, 전세사기 예방 '경기 안심 부동산' 참여 중개사 확대 추진",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-22T00:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009303073?sid=102"
+    },
+    {
+     "title": "경기도, 전세사기 예방 ‘경기 안심 부동산’ 참여 공인중개사 인증 스...",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-22T00:16:00.000Z",
+     "link": "http://www.breaknews.com/1252893"
+    },
+    {
+     "title": "전세 사기 걱정되면 '안심부동산' 스티커 확인...온라인서도 가능",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-22T00:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000966971?sid=102"
+    }
+   ]
+  },
+  {
    "keyword": "EU 빅테크 디지털세",
    "sources": [
     "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 2,
+   "recent20": 1,
    "press": 5,
    "firstArticleAt": "2026-11-21T23:25:00.000Z",
    "exclusive": true,
@@ -235,75 +234,11 @@
      "link": "https://www.etoday.co.kr/news/view/2651248"
     }
    ]
-  },
-  {
-   "keyword": "부동산",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-21T23:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "전세 사기 걱정되면 '안심부동산' 스티커 확인...온라인서도 가능",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-22T00:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000966971?sid=102"
-    },
-    {
-     "title": "[프리즘] 매물 쌓이는데 거래는 절벽…부동산 변곡점 올까",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-21T23:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928590?sid=102"
-    },
-    {
-     "title": "경기도, '경기 안심 부동산' 참여 중개사무소에 스티커 제공…온라인 표...",
-     "press": "econonews.co.kr",
-     "publishedAt": "2026-11-21T23:06:00.000Z",
-     "link": "http://www.econonews.co.kr/news/articleView.html?idxno=447507"
-    }
-   ]
-  },
-  {
-   "keyword": "채령 모친 암 투병 고백",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-21T23:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "있지 채령·이채연 자매, 모친 희소암 투병 고백",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-21T23:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014337685"
-    },
-    {
-     "title": "있지 채령, 모친 희귀암 투병 고백… 언니 이채연은 병원서 출퇴근 (전...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-21T23:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003542897"
-    },
-    {
-     "title": "있지 채령, 모친 희귀암 투병 중이었다…'친언니' 이채연 병원서 출퇴근...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-21T23:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000785553"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 900,
+  "flagged": 903,
   "matched": 535,
   "avgLeadMin": 621,
   "recent": [
