@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T20:20:39.194Z",
+ "builtAt": "2026-11-22T20:30:42.355Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,13 +16,19 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 8,
+   "articles90": 11,
+   "recent20": 2,
+   "press": 9,
    "firstArticleAt": "2026-11-22T19:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "전현무 \"사석에서 만나는 사람 다섯 손가락 안\"...집 초대 깜짝 인맥은...",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-22T20:22:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005444703"
+    },
     {
      "title": "‘시골집’서 벌어진 모녀 사망, 유골 행방도 오리무중? (탐정들의 영업...",
      "press": "sports.khan.co.kr",
@@ -34,44 +40,38 @@
      "press": "seoul.co.kr",
      "publishedAt": "2026-11-22T20:05:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/081/0003701977?sid=101"
-    },
-    {
-     "title": "“입양·위탁 어렵다면, 한 달에 한 번 함께 집밥 한 끼는요?” [월요인...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-22T20:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701944?sid=102"
     }
    ]
   },
   {
-   "keyword": "정부 증안펀드 가동 준비",
+   "keyword": "코스피",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 7,
-   "recent20": 4,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T19:33:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-22T19:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'블랙먼데이' 우려 긴급 F4회의, 18년 만에 증안펀드 가동되나",
-     "press": "seoulfn.com",
-     "publishedAt": "2026-11-22T20:14:00.000Z",
-     "link": "https://www.seoulfn.com/news/articleView.html?idxno=643572"
-    },
-    {
-     "title": "‘증시 최후 방패’ 증안펀드 가동 준비한다",
+     "title": "[사설] 주저앉은 코스피… 정부는 무슨 노력을 얼마나 했나",
      "press": "seoul.co.kr",
-     "publishedAt": "2026-11-22T20:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701973?sid=101"
+     "publishedAt": "2026-11-22T20:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701991?sid=110"
     },
     {
-     "title": "증안펀드 가동 준비에 자사주 매입 완화까지…증권주 반등 계기 될까",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-22T20:04:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=506780"
+     "title": "수출 1조달러인데 코스피 8% 급락…美 하이닉스 13% 폭락, 월요일 개장은...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-22T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177218?sid=101"
+    },
+    {
+     "title": "[사설] 美 증시 줄 잇는 혁신 IPO…올해 코스피 상장은 단 1건",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-22T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413839?sid=110"
     }
    ]
   },
@@ -81,7 +81,7 @@
     "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-22T19:10:00.000Z",
    "exclusive": false,
@@ -113,7 +113,7 @@
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-22T19:40:00.000Z",
    "exclusive": false,
@@ -140,38 +140,6 @@
    ]
   },
   {
-   "keyword": "맨유",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T19:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "포체티노, 맨유 데뷔 14분 만에 \"내일 넌 잘릴 거야\"... 리버풀 팬들 조...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-22T20:04:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/108/0003489423"
-    },
-    {
-     "title": "[pl.review] 포체티노 데뷔전 대참사! '요로 퇴장' 맨유, 리버풀에 0-4 완...",
-     "press": "fourfourtwo.co.kr",
-     "publishedAt": "2026-11-22T20:00:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/411/0000090339"
-    },
-    {
-     "title": "리버풀, 맨유에 4-0 완승… 포체티노 감독 데뷔전부터 굴욕",
-     "press": "dkilbo.com",
-     "publishedAt": "2026-11-22T19:20:00.000Z",
-     "link": "https://www.dkilbo.com/news/articleView.html?idxno=561705"
-    }
-   ]
-  },
-  {
    "keyword": "리비아 러시아 군함 피격",
    "sources": [
     "signal.bz"
@@ -184,16 +152,16 @@
    "capped": false,
    "samples": [
     {
-     "title": "리비아서 러시아 군함 피격…\"우크라이나 드론 추정\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-22T19:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404960?sid=104"
-    },
-    {
      "title": "\"리비아 항구서 러시아 군함 피격...우크라 공격 추정\"",
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-22T19:29:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002436541?sid=104"
+    },
+    {
+     "title": "리비아서 러시아 군함 피격…\"우크라이나 드론 추정\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-22T19:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404960?sid=104"
     },
     {
      "title": "“리비아 항구 정박 러시아 군함 피격…우크라 드론 공격 추정”",
@@ -206,7 +174,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1119,
+  "flagged": 1120,
   "matched": 630,
   "avgLeadMin": 611,
   "recent": [
