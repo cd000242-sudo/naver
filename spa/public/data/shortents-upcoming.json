@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T08:16:47.112Z",
+ "builtAt": "2026-11-22T08:26:53.507Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "최교진 수능 사의",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 45,
-   "recent20": 12,
-   "press": 36,
-   "firstArticleAt": "2026-11-22T06:48:00.000Z",
+   "articles90": 40,
+   "recent20": 7,
+   "press": 33,
+   "firstArticleAt": "2026-11-22T06:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "최교진 교육부 장관, ‘수능 대혼란’에 결국 사임",
+     "press": "jndn.com",
+     "publishedAt": "2026-11-22T08:26:00.000Z",
+     "link": "http://www.jndn.com/article.php?aid=1795335789443490093"
+    },
+    {
+     "title": "교육장관 '수능 대혼란' 책임지고 사임…취임 14개월만",
+     "press": "goodnews1.com",
+     "publishedAt": "2026-11-22T08:18:00.000Z",
+     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466496"
+    },
     {
      "title": "[뉴스1번지] 최교진, '수능 혼란' 책임 사의…이 대통령, 즉시 수락",
      "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-22T08:15:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/422/0000928741?sid=100"
-    },
-    {
-     "title": "국힘 \"최교진 사퇴로 끝낼 일 아냐\"…AI 부정행위 전수조사·특검 촉구",
-     "press": "kado.net",
-     "publishedAt": "2026-11-22T08:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000212639?sid=100"
-    },
-    {
-     "title": "與, 최교진 사의에 \"교육환경 대응할 전문성·책임감 갖춘 인사 선임되...",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-22T08:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000193219?sid=100"
     }
    ]
   },
@@ -47,18 +47,18 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 9,
+   "articles90": 10,
+   "recent20": 3,
+   "press": 10,
    "firstArticleAt": "2026-11-22T07:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "WSJ “트럼프, 북미회담 추진…북한 조건에 무산”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-22T08:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012298807?sid=104"
+     "title": "“北외교관, 트럼프 친서 봉투째 내던졌다”…북미 회담 불발 전말",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-22T08:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003566987?sid=104"
     },
     {
      "title": "\"북한 무리한 요구로 북미회담 무산\"...\"편지도 집어 던져\"",
@@ -67,42 +67,74 @@
      "link": "https://n.news.naver.com/mnews/article/052/0002436448?sid=104"
     },
     {
-     "title": "\"美, 아시아 순방 계기 북미회담 추진…北 '수용 불가 조건'에 무산\"",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-22T07:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005356709?sid=104"
+     "title": "WSJ “트럼프, 북미회담 추진…북한 조건에 무산”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-22T08:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012298807?sid=104"
     }
    ]
   },
   {
-   "keyword": "대중국 자동차 무역적자 최대",
+   "keyword": "고경표 음주 사과",
    "sources": [
     "nate"
    ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-22T06:51:00.000Z",
+   "articles90": 9,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-22T07:12:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[공식] '핑계고' 측, '음주운전' 고경표 인기상 후보 제외…\"충분히 검토...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-22T08:18:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004127132"
+    },
+    {
+     "title": "'핑계고' 결국 고개 숙였다…'음주운전' 고경표 시상식 후보 올렸다가 ...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-22T07:50:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004468681"
+    },
+    {
+     "title": "[공식] '핑계고' 측, 결국 고경표 인기상 후보 제외 \"심려 끼쳐 사과\"",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-22T07:46:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002082988"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 해외 순방",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-22T07:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "對중국 자동차 무역적자 역대 최대…中전기차, 韓시장 확산 가속",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-22T07:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004212472?sid=101"
+     "title": "野 '순방예산 363억 삭감' 주장에 … 李 \"꼭 해야 할 국정과제\"",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-22T08:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005767254?sid=100"
     },
     {
-     "title": "중국산 테슬라·BYD 공세에 對中 자동차 무역적자 6조원 육박",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-22T07:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001077275?sid=103"
+     "title": "이 대통령 \"치아 흔들리고 코피 터져\"... '순방 잦다' 비판에 \"돼지 눈에...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-22T08:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000967070?sid=100"
     },
     {
-     "title": "중국산 자동차 수입 79% 급증...대중국 무역적자 6조원",
-     "press": "getnews.co.kr",
-     "publishedAt": "2026-11-22T07:18:00.000Z",
-     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=888031"
+     "title": "'순방 외유' 논란에 李대통령 \"돼지 눈엔 돼지만\"…靑 \"국제질서 다극화...",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-22T07:51:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=748947"
     }
    ]
   },
@@ -139,66 +171,99 @@
    ]
   },
   {
-   "keyword": "최민정 500M 결승 5위",
+   "keyword": "외교",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 22,
-   "recent20": 0,
+   "articles90": 6,
+   "recent20": 4,
    "press": 5,
-   "firstArticleAt": "2026-11-22T06:55:00.000Z",
+   "firstArticleAt": "2026-11-22T07:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“국익 중심 실용 외교로 한·러 관계 복원해야\"",
+     "press": "busan.com",
+     "publishedAt": "2026-11-22T08:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001408362?sid=101"
+    },
+    {
+     "title": "외교무대서 혀 쏙 내민 다카이치에, 일 네티즌들 “부끄럽고 이상하다”",
+     "press": "weekly.khan.co.kr",
+     "publishedAt": "2026-11-22T08:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/033/0000053563?sid=104"
+    },
+    {
+     "title": "“北외교관, 트럼프 친서 봉투째 내던졌다”…북미 회담 불발 전말",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-22T08:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003566987?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "열린음악회",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T07:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'열린음악회' 김준수·김연자·이무진·라포엠 초호화 라인업",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-22T08:20:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3759575"
+    },
+    {
+     "title": "‘열린음악회’ 출연진 라인업 김연자 外",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-22T07:38:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1176725"
+    },
+    {
+     "title": "김희재, '열린음악회' 출연 예고…다채로운 하트 포즈로 팬심 자극",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-22T07:06:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=848065"
+    }
+   ]
+  },
+  {
+   "keyword": "결승 역주하는 최민정",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 11,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T07:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "결승 향해 역주하는 최민정",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-22T07:45:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/001/0016456797"
+    },
+    {
+     "title": "결승 향해 역주하는 최민정과 김민지",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-22T07:43:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/001/0016456790"
+    },
     {
      "title": "[사진]5위로 역주하는 최민정",
      "press": "osen.co.kr",
      "publishedAt": "2026-11-22T07:30:00.000Z",
      "link": "https://m.sports.naver.com/general/article/109/0005643921"
-    },
-    {
-     "title": "[사진]아쉬운 최민정",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-22T07:21:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/109/0005643919"
-    },
-    {
-     "title": "[사진]역주하는 최민정",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-22T07:18:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/109/0005643917"
-    }
-   ]
-  },
-  {
-   "keyword": "외교",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T06:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“북한 외교관, 트럼프 친서 봉투째 내던져”…북·미 회담 불발의 전말",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-22T08:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003566987?sid=104"
-    },
-    {
-     "title": "[인사] 외교부",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-22T08:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005767230?sid=102"
-    },
-    {
-     "title": "與 \"국민의힘, 대통령 순방 횟수·체류 일수 앞세워 외교 성과 깎아내려...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T07:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014338270?sid=100"
     }
    ]
   },
@@ -237,7 +302,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1029,
+  "flagged": 1031,
   "matched": 594,
   "avgLeadMin": 631,
   "recent": [
