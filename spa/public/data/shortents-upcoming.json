@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T06:56:18.291Z",
+ "builtAt": "2026-11-22T07:06:22.024Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,145 +8,113 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "조희대 탄핵 추진",
    "sources": [
     "daum"
    ],
-   "articles90": 53,
-   "recent20": 11,
-   "press": 41,
-   "firstArticleAt": "2026-11-22T05:30:00.000Z",
+   "articles90": 55,
+   "recent20": 12,
+   "press": 40,
+   "firstArticleAt": "2026-11-22T05:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"조희대 탄핵 추진 與, 이게 진짜 내란\" 보수진영 총공세",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-22T06:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001041627?sid=100"
+     "title": "이준석 \"근조 민주당…조희대 탄핵 강행하면 한 방에 무너질 것\"",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-22T07:02:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261122000096"
     },
     {
-     "title": "오세훈·한동훈, 與 조희대 탄핵 추진에 맹공…“사법부 장악·친위쿠데...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-22T06:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177132?sid=100"
+     "title": "장외 나간 국민의힘... 조작기소특검·조희대 탄핵 겨냥 \"이게 바로 내란...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-22T07:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000967047?sid=100"
     },
     {
-     "title": "\"사법부 겁박\"…국힘, 조희대 탄핵 추진에 반발",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-22T06:52:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321369&inflow=N"
+     "title": "장동혁 \"탄핵당할 사람은 대법원장 아닌 이 대통령\"",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-22T07:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000554358?sid=100"
     }
    ]
   },
   {
-   "keyword": "수능 부정행위 대응",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 42,
-   "recent20": 6,
-   "press": 32,
-   "firstArticleAt": "2026-11-22T05:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "수능은 끝났지만…AI 부정행위 수사 본격화",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-22T06:52:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321358&inflow=N"
-    },
-    {
-     "title": "李대통령, 최교진 교육장관 사표 전격 수리…수능 혼란에 사실상 문책 ...",
-     "press": "dkilbo.com",
-     "publishedAt": "2026-11-22T06:50:00.000Z",
-     "link": "https://www.dkilbo.com/news/articleView.html?idxno=561600"
-    },
-    {
-     "title": "AI 부정행위 파장…수능 평가체계 개편론 급부상",
-     "press": "dkilbo.com",
-     "publishedAt": "2026-11-22T06:50:00.000Z",
-     "link": "https://www.dkilbo.com/news/articleView.html?idxno=561599"
-    }
-   ]
-  },
-  {
-   "keyword": "최교진 장관 사의 수락",
+   "keyword": "최교진 수능 사의",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 27,
-   "recent20": 7,
-   "press": 24,
-   "firstArticleAt": "2026-11-22T05:30:00.000Z",
+   "articles90": 40,
+   "recent20": 12,
+   "press": 33,
+   "firstArticleAt": "2026-11-22T05:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "1년 전부터 울린 'AI 커닝' 경고음 외면… 1시간 만 사의 수리된 교육 장...",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-22T06:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967044?sid=102"
+     "title": "\"수능 책임 통감\"… 최교진 교육장관, 사의 표명",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-22T07:02:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3451070"
     },
     {
-     "title": "李대통령, 최교진 교육장관 사표 전격 수리…수능 혼란에 사실상 문책 ...",
-     "press": "dkilbo.com",
-     "publishedAt": "2026-11-22T06:50:00.000Z",
-     "link": "https://www.dkilbo.com/news/articleView.html?idxno=561600"
+     "title": "이재명 대통령, 최교진 장관 사의 즉각 수리…\"全부처 시험관리실태 점...",
+     "press": "public25.com",
+     "publishedAt": "2026-11-22T07:00:00.000Z",
+     "link": "https://www.public25.com/news/articleView.html?idxno=58799"
     },
     {
-     "title": "교총, 최교진 교육부 장관 사의에 “늦었지만 당연한 결정”",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-22T06:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004011029?sid=102"
+     "title": "수능 혼선에 교육부 장관 사의…대구 수험생 부정행위 후속 처리 주목",
+     "press": "kbmaeil.com",
+     "publishedAt": "2026-11-22T06:58:00.000Z",
+     "link": "https://www.kbmaeil.com/article/20261122500576"
     }
    ]
   },
   {
-   "keyword": "최민정",
+   "keyword": "장동혁 국민의힘 대표",
    "sources": [
-    "google"
+    "nate"
    ],
-   "articles90": 31,
-   "recent20": 3,
-   "press": 11,
-   "firstArticleAt": "2026-11-22T05:27:00.000Z",
+   "articles90": 55,
+   "recent20": 7,
+   "press": 21,
+   "firstArticleAt": "2026-11-22T05:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "최민정 '500m 메달 획득 실패'[포토]",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-22T06:55:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/311/0002082967"
+     "title": "장동혁 \"탄핵당해야 할 사람은 조희대 아닌 범죄자 이재명\"",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-22T07:05:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3451072"
     },
     {
-     "title": "“쇼트트랙 월드투어 8개 대회로 확대” 김재열 ISU 회장 “최민정, 스케...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-22T06:42:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/144/0001151116"
+     "title": "민주당 \"장동혁, 모든 현안 보복정치로…확성기 놓고 국회 복귀하라\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-22T07:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404909?sid=100"
     },
     {
-     "title": "中 반칙에 항의하는 최민정",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T06:40:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/421/0009303504"
+     "title": "장외 나간 국민의힘... 조작기소특검·조희대 탄핵 겨냥 \"이게 바로 내란...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-22T07:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000967047?sid=100"
     }
    ]
   },
   {
    "keyword": "김재열 ISU 회장 월드투어 한국 개최",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-22T05:34:00.000Z",
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-22T05:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -173,12 +141,13 @@
   {
    "keyword": "외교",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-22T05:32:00.000Z",
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-22T05:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -199,38 +168,6 @@
      "press": "etoday.co.kr",
      "publishedAt": "2026-11-22T06:24:00.000Z",
      "link": "https://www.etoday.co.kr/news/view/2651340"
-    }
-   ]
-  },
-  {
-   "keyword": "이재명 해외 순방",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-22T05:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "靑, 대통령 순방 비판하는 국힘에 \"시야 넓혀 보라\" 반박",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-22T06:48:00.000Z",
-     "link": "https://www.insight.co.kr/news/583080"
-    },
-    {
-     "title": "순방 잦다 野 공세에 李·靑 반박…국익외교 강조",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-22T06:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413736?sid=100"
-    },
-    {
-     "title": "이 대통령 “치아 흔들리고 코피 터지지만 임기 초 순방은 국정과제…돼...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-22T06:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484205?sid=100"
     }
    ]
   },
@@ -267,170 +204,104 @@
    ]
   },
   {
-   "keyword": "장동혁 대표 인사말",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T05:49:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "장동혁 \"李 정권 가장 큰 피해자는 청년…정책 전쟁에서 국정 압도해야...",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-22T06:26:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261122500259"
-    },
-    {
-     "title": "인사말 하는 장동혁 국민의힘 대표",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T06:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014338156?sid=100"
-    },
-    {
-     "title": "우재준 청년 최고위원 인사말 듣는 장동혁 대표",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T06:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014338163?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "핑계고 음주운전 고경표",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T05:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "핑계고 측, '음주운전' 고경표 후보 선정 사과⋯\"검토 미흡, 명단 제외\"",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-22T06:48:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2651342"
-    },
-    {
-     "title": "고경표 ‘음주운전 활중’ 8일 만에 ‘핑계고’ 인기상 후보?..뭇매 맞고...",
-     "press": "heraldmuse.com",
-     "publishedAt": "2026-11-22T05:44:00.000Z",
-     "link": "https://m.entertain.naver.com/article/112/0003814001"
-    },
-    {
-     "title": "'음주운전' 고경표, 핑계고 시상식 후보 올랐다 '제외'",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-22T05:40:00.000Z",
-     "link": "https://www.insight.co.kr/news/583073"
-    }
-   ]
-  },
-  {
    "keyword": "투자",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 4,
-   "recent20": 3,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T06:30:00.000Z",
+   "articles90": 5,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T06:42:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
+    {
+     "title": "\"삼전닉스 말고는요?\"…내년 포트폴리오에 담을 종목은 [투자톡]",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-22T07:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005356702?sid=101"
+    },
+    {
+     "title": "영남이공대, 중국 쑤저우공업원구 투자촉진위원회 관계자 초청 간담회 ...",
+     "press": "newsfreezone.co.kr",
+     "publishedAt": "2026-11-22T07:00:00.000Z",
+     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=720670"
+    },
     {
      "title": "앤트로픽 상장 이튿날 급락…월가에 번지는 'AI 투자 회의론'",
      "press": "ajunews.com",
      "publishedAt": "2026-11-22T06:46:00.000Z",
      "link": "https://www.ajunews.com/view/20261122153022012"
-    },
-    {
-     "title": "외국인투자 97% 지방으로···코트라, 지역 투자유치전 가속",
-     "press": "enewstoday.co.kr",
-     "publishedAt": "2026-11-22T06:45:00.000Z",
-     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2495483"
-    },
-    {
-     "title": "안동시, 2027년 본예산 1조7900억원 편성…민생 안정·미래산업 투자 확...",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-22T06:42:00.000Z",
-     "link": "https://www.ajunews.com/view/20261122153313020"
     }
    ]
   },
   {
-   "keyword": "앨리스 황은 밀수 배후는 50대 중국인",
+   "keyword": "결승 역주하는 최민정",
    "sources": [
     "nate"
    ],
-   "articles90": 3,
-   "recent20": 1,
+   "articles90": 6,
+   "recent20": 5,
    "press": 3,
-   "firstArticleAt": "2026-11-22T05:43:00.000Z",
+   "firstArticleAt": "2026-11-22T06:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"앨리스 황은 '얼굴노릇'만…엔비디아칩 中밀수 주도자는 50대 중국인\"",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-22T06:40:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2021745"
+     "title": "최민정 '쉽지 않네'",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-22T07:03:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/001/0016456734"
     },
     {
-     "title": "앨리스황은 '얼굴마담'?…\"50대 중국인이 엔비디아칩 밀수 주도\"",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-22T05:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979321?sid=104"
+     "title": "선수들에게 가로막힌 최민정 '쉽지 않네'[포토]",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-22T07:03:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/311/0002082974"
     },
     {
-     "title": "“엔비디아칩 중국 밀수 주도자는 50대 중국인…엘리스 황은 ‘대외적 ...",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-22T05:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012298790?sid=104"
+     "title": "역주하는 최민정",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-22T07:02:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/001/0016456732"
     }
    ]
   },
   {
-   "keyword": "1251회 로또 당첨 번호",
+   "keyword": "애플",
    "sources": [
-    "daum"
+    "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 2,
    "press": 3,
-   "firstArticleAt": "2026-11-22T06:02:00.000Z",
+   "firstArticleAt": "2026-11-22T06:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "로또 2등, 한 판매점서 10장 ‘무더기 당첨’…동일인이면 5억원",
-     "press": "donga.com",
-     "publishedAt": "2026-11-22T06:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764188?sid=102"
+     "title": "[위클리 뱅크이슈] 은행권 첫 애플페이 연 카뱅… 인터넷銀 '결제 판' 키...",
+     "press": "the-biz.co.kr",
+     "publishedAt": "2026-11-22T07:00:00.000Z",
+     "link": "http://www.the-biz.co.kr/news/articleView.html?idxno=731735"
     },
     {
-     "title": "로또2등 10장, 한 곳서 무더기 당첨…동일인이면 5억 대박",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-22T06:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652641?sid=102"
+     "title": "애플 시리 합의금 아이폰당 61달러 추산…상한 95달러",
+     "press": "coinreaders.com",
+     "publishedAt": "2026-11-22T06:58:00.000Z",
+     "link": "http://coinreaders.com/272428"
     },
     {
-     "title": "제1251회 로또 1등 14명…부산 판매점 2곳",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-22T06:02:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=409428"
+     "title": "애플·포스텍과 키운 청년 개발자... 포항서 창업까지 이어준다",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-22T06:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003158038?sid=102"
     }
    ]
   },
   {
    "keyword": "수능 가채점 설명회",
    "sources": [
-    "signal.bz",
     "nate"
    ],
    "articles90": 6,
@@ -459,14 +330,102 @@
      "link": "https://n.news.naver.com/mnews/article/003/0014338120?sid=102"
     }
    ]
+  },
+  {
+   "keyword": "해저",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T06:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "해경 “태안 앞바다 해저에서 선박 추정 물체 발견”…수중 수색 돌입",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-22T06:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012298791?sid=102"
+    },
+    {
+     "title": "태안 연락두절 홍어잡이 어선 해광호 수색…해저 탐색 확대",
+     "press": "dynews.co.kr",
+     "publishedAt": "2026-11-22T06:10:00.000Z",
+     "link": "https://www.dynews.co.kr/news/articleView.html?idxno=875009"
+    },
+    {
+     "title": "AI·해저케이블 기대에도 주가는 뒷걸음… 5G 관련주 조정 본격화",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-22T06:08:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=506725"
+    }
+   ]
+  },
+  {
+   "keyword": "대구fc",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 2,
+   "firstArticleAt": "2026-11-22T06:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'승격 도전' 대구FC, 김해 3-0 완파…일단 K리그2 3위로 상승",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-22T07:03:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/001/0016456735"
+    },
+    {
+     "title": "[Y리뷰] 대구FC, 마지막 홈 경기서 김해에 3-0 완승",
+     "press": "yeongnam.com",
+     "publishedAt": "2026-11-22T06:54:00.000Z",
+     "link": "https://www.yeongnam.com/web/view.php?key=20261122020092202"
+    },
+    {
+     "title": "“그 경기 잡았다면…” 대구FC 최성용 감독이 꼽은 올해의 아쉬운 경기...",
+     "press": "yeongnam.com",
+     "publishedAt": "2026-11-22T06:18:00.000Z",
+     "link": "https://www.yeongnam.com/web/view.php?key=20261122025202227"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1013,
-  "matched": 583,
-  "avgLeadMin": 628,
+  "flagged": 1018,
+  "matched": 587,
+  "avgLeadMin": 638,
   "recent": [
+   {
+    "keyword": "갤럭시 AI 클래스 도입",
+    "hitKeyword": "불법사채 심사 AI 도입",
+    "hitAt": "2026-11-22T16:00:00+09:00",
+    "leadMin": 7543
+   },
+   {
+    "keyword": "lpga",
+    "hitKeyword": "김아림 LPGA 챔피언십",
+    "hitAt": "2026-11-22T16:00:00+09:00",
+    "leadMin": 255
+   },
+   {
+    "keyword": "로또",
+    "hitKeyword": "로또 2등 10장 당첨",
+    "hitAt": "2026-11-22T16:00:00+09:00",
+    "leadMin": 54
+   },
+   {
+    "keyword": "1251회 로또 당첨 번호",
+    "hitKeyword": "로또 2등 10장 당첨",
+    "hitAt": "2026-11-22T16:00:00+09:00",
+    "leadMin": 14
+   },
    {
     "keyword": "트럼프 얄타회담 사진",
     "hitKeyword": "트럼프 북한 회담 무산",
@@ -502,30 +461,6 @@
     "hitKeyword": "100일의 거짓말 김유정",
     "hitAt": "2026-11-22T15:00:00+09:00",
     "leadMin": 205
-   },
-   {
-    "keyword": "흑백 트리플스타 재혼",
-    "hitKeyword": "트리플스타 재혼",
-    "hitAt": "2026-11-22T15:00:00+09:00",
-    "leadMin": 95
-   },
-   {
-    "keyword": "케인 발목 인대 수술 성공",
-    "hitKeyword": "케인 발목 부상",
-    "hitAt": "2026-11-22T15:00:00+09:00",
-    "leadMin": 44
-   },
-   {
-    "keyword": "미라 시신 발견 수사",
-    "hitKeyword": "금천구 미라화 시신 발견",
-    "hitAt": "2026-11-22T15:00:00+09:00",
-    "leadMin": 34
-   },
-   {
-    "keyword": "북미회담 무산",
-    "hitKeyword": "북미회담 무산",
-    "hitAt": "2026-11-22T15:00:00+09:00",
-    "leadMin": 24
    }
   ]
  }
