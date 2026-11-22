@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T10:57:43.627Z",
+ "builtAt": "2026-11-22T11:07:46.882Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,146 +8,115 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "한전 개인정보 유출",
    "sources": [
-    "signal.bz",
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 59,
-   "recent20": 14,
-   "press": 56,
-   "firstArticleAt": "2026-11-22T09:29:00.000Z",
+   "articles90": 53,
+   "recent20": 10,
+   "press": 51,
+   "firstArticleAt": "2026-11-22T09:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한전ON∙전자조달시스템서 개인정보 유출…152만여건 규모",
-     "press": "kdfnews.com",
-     "publishedAt": "2026-11-22T10:56:00.000Z",
-     "link": "http://www.kdfnews.com/news/articleView.html?idxno=191245"
+     "title": "한전, 152만여명 정보 탈탈…이름·주소에 주민·전화번호까지",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-22T11:00:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086350"
     },
     {
-     "title": "한전, 한 달 만에 개인정보 152만여 건 유출··· 주민·계좌번호도 포...",
-     "press": "dkilbo.com",
-     "publishedAt": "2026-11-22T10:54:00.000Z",
-     "link": "https://www.dkilbo.com/news/articleView.html?idxno=561700"
+     "title": "한전, 주민번호·카드번호 등 150만명 개인정보 유출…대국민 사과",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-22T11:00:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445905"
     },
     {
-     "title": "한전, 개인정보 150여만건 유출…한전ON·SRM 이용자 피해",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-22T10:52:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261122010008514"
+     "title": "한전, '한전ON'·조달망 뚫려 개인정보 152만여건 유출... 주민번호·카...",
+     "press": "boannews.com",
+     "publishedAt": "2026-11-22T10:58:00.000Z",
+     "link": "https://www.boannews.com/news/articleView.html?idxno=147429"
     }
    ]
   },
   {
    "keyword": "증안펀드 가동 준비",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 57,
-   "recent20": 11,
-   "press": 52,
-   "firstArticleAt": "2026-11-22T09:28:00.000Z",
+   "articles90": 51,
+   "recent20": 9,
+   "press": 48,
+   "firstArticleAt": "2026-11-22T09:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"검은 월요일\" 폭락장 우려…정부, 증시안정펀드 가동 준비",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-22T10:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004212489?sid=101"
+     "title": "정부, 미국발 증시 충격에 대응 수위 높여...증안펀드·자사주 매수 규...",
+     "press": "consumernews.co.kr",
+     "publishedAt": "2026-11-22T11:04:00.000Z",
+     "link": "http://www.consumernews.co.kr/news/articleView.html?idxno=768831"
     },
     {
-     "title": "정부, 한·미 등 주식 급락에 증안펀드 가동 준비·자사주 매입 한도 완...",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-22T10:54:00.000Z",
-     "link": "https://www.viva100.com/article/20261122500732"
+     "title": "몰락하는 韓증시에 '최후 방파제' 증안펀드 준비…18년 만에 재가동 되...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T11:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014338391?sid=101"
     },
     {
-     "title": "AI 투매발 국내 증시 급락 우려에…정부 ‘증안펀드’ 가동 준비",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-22T10:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833421?sid=101"
+     "title": "F4 긴급 소집…증안펀드 준비·자사주 풀고 공매도 조인다",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-22T11:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002394565?sid=101"
     }
    ]
   },
   {
-   "keyword": "철도노조 안전운행 투쟁 연기",
+   "keyword": "최교진 교육부 장관 면직",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 34,
-   "recent20": 4,
-   "press": 31,
-   "firstArticleAt": "2026-11-22T09:45:00.000Z",
+   "articles90": 23,
+   "recent20": 8,
+   "press": 19,
+   "firstArticleAt": "2026-11-22T10:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "철도노조, 준법투쟁 26일로 연기…\"사고 복구 먼저\"",
+     "title": "이재명 대통령, 최교진 교육장관 전격 경질…수능 혼란에 문책 인사",
+     "press": "the-today.com",
+     "publishedAt": "2026-11-22T11:06:00.000Z",
+     "link": "https://www.the-today.com/news/articleView.html?idxno=93948"
+    },
+    {
+     "title": "수능 대혼란에 \"책임 통감\"…최교진 교육장관 사퇴",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-22T11:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404933?sid=102"
+    },
+    {
+     "title": "최교진 면직안 재가…與 \"전문성 갖춘 후임 선임\" vs 野 \"대통령 책임져...",
      "press": "ajunews.com",
-     "publishedAt": "2026-11-22T10:52:00.000Z",
-     "link": "https://www.ajunews.com/view/20261122194009400"
-    },
-    {
-     "title": "철도노조, 경부선 탈선 사고 복구 위해 쟁의행위 사흘 연기… 26일 돌입",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-22T10:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001206507?sid=102"
-    },
-    {
-     "title": "철도노조, 쟁의행위 26일로 3일 연기…\"사고 복구가 먼저\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T10:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009303689?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "이 대통령 대장동 의혹 반박",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 18,
-   "recent20": 2,
-   "press": 18,
-   "firstArticleAt": "2026-11-22T09:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이재명 대통령, 대장동 의혹 재차 반박 \"성남시 4300억 이익 보장\" 강조",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-22T10:53:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085401"
-    },
-    {
-     "title": "李대통령, ‘대장동 의혹’ 재차 반박…“업자와 결탁한 시장 아니다”",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-22T10:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701898?sid=100"
-    },
-    {
-     "title": "‘대장동 배임’ 연일 반박하는 李… ‘조작기소 특검’ 정당성 부각하...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-22T10:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001206506?sid=100"
+     "publishedAt": "2026-11-22T11:04:00.000Z",
+     "link": "https://www.ajunews.com/view/20261122190515382"
     }
    ]
   },
   {
    "keyword": "남자 5000M 계주 금메달",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 15,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-22T09:29:00.000Z",
+   "articles90": 12,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-22T09:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -172,7 +141,39 @@
    ]
   },
   {
-   "keyword": "고경표 후보 제외 사과",
+   "keyword": "김동완 SNS 중단",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 3,
+   "press": 7,
+   "firstArticleAt": "2026-11-22T09:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김동완, 돌연 SNS 활동 중단 선언",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-22T11:03:00.000Z",
+     "link": "https://m.entertain.naver.com/article/437/0000521906"
+    },
+    {
+     "title": "김동완, 모든 SNS 활동 끝낸다 \"무너지면 또 올 것\"",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-22T11:00:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110037714534"
+    },
+    {
+     "title": "김동완, SNS 활동 중단 선언 \"그동안 즐거웠다. 무너지면 또 올 것\"",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-22T10:50:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000328742"
+    }
+   ]
+  },
+  {
+   "keyword": "고경표 음주운전으로 사과",
    "sources": [
     "signal.bz"
    ],
@@ -204,108 +205,77 @@
    ]
   },
   {
-   "keyword": "사진작가 이코베",
+   "keyword": "박연수 송종국 이혼 아픔",
    "sources": [
     "daum"
    ],
    "articles90": 4,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T10:16:00.000Z",
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T10:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "정준일, 최소라·이코베 결혼 반대했던 사연 \"최선이냐, 생각 잘해라\" (...",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-22T10:51:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000053832"
+     "title": "박연수, ‘송종국과 이혼’ 후 심경 고백 “12년간 아픔과 상처로 괴로...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-22T10:43:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001151138"
     },
     {
-     "title": "‘이코베♥’ 최소라 만삭 D라인 사진 최초 공개, 출산 전날 집에서 찰...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-22T10:44:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190198"
-    },
-    {
-     "title": "정준일, 최소라♥이코베 교제→결혼 반대했다…\"소라가 먼저 청혼\" ('전...",
+     "title": "박연수, 송종국과 이혼 그 후.. \"아픔과 상처들로 괴로웠던 12년\" [RE:스타...",
      "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-22T10:37:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409190"
+     "publishedAt": "2026-11-22T10:42:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001409191"
+    },
+    {
+     "title": "‘송종국과 이혼’ 박연수, 12년간 아픔 털어놨다… “상처로 괴로웠다...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-22T10:22:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003542969"
     }
    ]
   },
   {
-   "keyword": "북미회담 무산",
+   "keyword": "100일의 거짓말",
    "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T09:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"트럼프, 김정은에 만나자 요청했지만⋯北 조건 내걸어 무산\"",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-22T10:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001077295?sid=104"
-    },
-    {
-     "title": "“트럼프 만남 제안에, 김정은 조건 걸어 무산”",
-     "press": "segye.com",
-     "publishedAt": "2026-11-22T09:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177169?sid=104"
-    },
-    {
-     "title": "트럼프의 아시아 비밀 회담 시도, 북한의 까다로운 조건에 무산되다",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-22T09:42:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886756"
-    }
-   ]
-  },
-  {
-   "keyword": "트럼프 얄타회담 사진",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T09:29:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'얄타 사진' 나란히 올린 트럼프…\"이란 핵 막겠다\" 자신",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-22T10:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000521902?sid=104"
-    },
-    {
-     "title": "슈퍼맨처럼 지구 앞에 선 트럼프…‘1945-2026’ 사진 나란히",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-22T10:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000368335?sid=104"
-    },
-    {
-     "title": "트럼프는 ‘사진’, 시진핑은 ‘위상’, 푸틴은 ‘시간’ 챙겼다…‘강...",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-22T09:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413770?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "김가은 임신 소식",
-   "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 3,
    "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T09:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "박진영 '100일의 거짓말' 구국단 묘사 논쟁…14회서 양부와 대립",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-22T10:58:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282996"
+    },
+    {
+     "title": "'100일의 거짓말' 김유정X박진영, 눈물의 빗속 입맞춤",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-22T10:35:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000328740"
+    },
+    {
+     "title": "‘100일의 거짓말’ 김유정·박진영, 입맞춤 뒤 본격 공조…진선규 향한...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-22T09:52:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005767329"
+    }
+   ]
+  },
+  {
+   "keyword": "김가은 딸 임신 소식",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-22T10:10:00.000Z",
    "exclusive": false,
@@ -334,10 +304,40 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1070,
-  "matched": 607,
-  "avgLeadMin": 620,
+  "flagged": 1076,
+  "matched": 612,
+  "avgLeadMin": 615,
   "recent": [
+   {
+    "keyword": "핑계고 음주운전 고경표",
+    "hitKeyword": "핑계고 공개 사과",
+    "hitAt": "2026-11-22T20:00:00+09:00",
+    "leadMin": 274
+   },
+   {
+    "keyword": "철도노조 안전운행 투쟁 연기",
+    "hitKeyword": "철도노조 쟁의행위 예고",
+    "hitAt": "2026-11-22T20:00:00+09:00",
+    "leadMin": 32
+   },
+   {
+    "keyword": "수원FC K리그1 승격",
+    "hitKeyword": "수원FC 다이렉트 승격",
+    "hitAt": "2026-11-22T20:00:00+09:00",
+    "leadMin": 32
+   },
+   {
+    "keyword": "최소라 모델",
+    "hitKeyword": "최소라 이코베 발리 결혼식",
+    "hitAt": "2026-11-22T20:00:00+09:00",
+    "leadMin": 22
+   },
+   {
+    "keyword": "사진작가 이코베",
+    "hitKeyword": "최소라 이코베 발리 결혼식",
+    "hitAt": "2026-11-22T20:00:00+09:00",
+    "leadMin": 12
+   },
    {
     "keyword": "투자",
     "hitKeyword": "개미 투자자 손실",
@@ -367,36 +367,6 @@
     "hitKeyword": "코스피 급락 공포",
     "hitAt": "2026-11-22T19:00:00+09:00",
     "leadMin": 23
-   },
-   {
-    "keyword": "철도노조 쟁의행위 예고",
-    "hitKeyword": "철도노조 쟁의행위 예고",
-    "hitAt": "2026-11-22T18:30:00+09:00",
-    "leadMin": 345
-   },
-   {
-    "keyword": "북미회담 무산",
-    "hitKeyword": "트럼프 북미회담 무산",
-    "hitAt": "2026-11-22T18:30:00+09:00",
-    "leadMin": 174
-   },
-   {
-    "keyword": "검은 월요일",
-    "hitKeyword": "월요일 전국 비 눈",
-    "hitAt": "2026-11-22T18:30:00+09:00",
-    "leadMin": 53
-   },
-   {
-    "keyword": "대구fc",
-    "hitKeyword": "대구FC 3위",
-    "hitAt": "2026-11-22T18:00:00+09:00",
-    "leadMin": 114
-   },
-   {
-    "keyword": "최민정",
-    "hitKeyword": "최민정 500m 결승",
-    "hitAt": "2026-11-22T17:30:00+09:00",
-    "leadMin": 174
    }
   ]
  }
