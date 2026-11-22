@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T11:37:56.691Z",
+ "builtAt": "2026-11-22T11:47:59.642Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "한전 개인정보 유출",
@@ -16,62 +16,62 @@
     "signal.bz",
     "daum"
    ],
-   "articles90": 40,
-   "recent20": 5,
-   "press": 37,
-   "firstArticleAt": "2026-11-22T10:11:00.000Z",
+   "articles90": 41,
+   "recent20": 6,
+   "press": 38,
+   "firstArticleAt": "2026-11-22T10:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한전, 고객 등 152만명 개인정보 유출…김동철 사장 “책임 통감”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-22T11:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764231?sid=102"
+     "title": "한전, 고객 등 개인정보 152만여 건 유출…주민·계좌·카드번호 등 포함",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-22T11:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000121948?sid=102"
     },
     {
-     "title": "한국전력공사, 152만 명 개인정보 유출 사고",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-22T11:36:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=885923"
+     "title": "한전, 사이버 공격에 개인정보 152만 건 유출…주민번호·계좌번호 포함",
+     "press": "news.cpbc.co.kr",
+     "publishedAt": "2026-11-22T11:44:00.000Z",
+     "link": "https://news.cpbc.co.kr/article/1177183?division=NAVER"
     },
     {
-     "title": "국감 사과 한달만에 또…한전, 3만명 이어 152만명 개인정보 유출",
-     "press": "financialpost.co.kr",
-     "publishedAt": "2026-11-22T11:32:00.000Z",
-     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=302374"
+     "title": "한전 개인정보 유출…사이버 침해로 고객정보 피해 우려, 대국민 사과",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-22T11:42:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629595"
     }
    ]
   },
   {
-   "keyword": "정부 증안펀드 가동 준비",
+   "keyword": "증안펀드 가동 준비",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 35,
+   "articles90": 33,
    "recent20": 3,
-   "press": 32,
-   "firstArticleAt": "2026-11-22T10:08:00.000Z",
+   "press": 29,
+   "firstArticleAt": "2026-11-22T10:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'증안펀드' 가동 준비만 해도 코스피 반등?…과거 사례 보니",
+     "press": "news.bizwatch.co.kr",
+     "publishedAt": "2026-11-22T11:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/648/0000052863?sid=101"
+    },
+    {
+     "title": "증시급락에 '증안펀드' 가동 준비…불법공매도 3개월 특별감시",
+     "press": "seouleconews.com",
+     "publishedAt": "2026-11-22T11:40:00.000Z",
+     "link": "http://www.seouleconews.com/news/articleView.html?idxno=95176"
+    },
     {
      "title": "정부, 증안펀드 즉시 가동 준비 착수…미국발 증시 급락에 선제 대응",
      "press": "newsbrite.net",
      "publishedAt": "2026-11-22T11:30:00.000Z",
      "link": "http://www.newsbrite.net/news/articleView.html?idxno=201670"
-    },
-    {
-     "title": "미 AI 투매에 '검은 월요일' 오나?...\"증안펀드 가동 준비\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-22T11:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436486?sid=101"
-    },
-    {
-     "title": "코스피 5000선 붕괴에 'F4' 긴급 소집…증안펀드 가동 준비",
-     "press": "kado.net",
-     "publishedAt": "2026-11-22T11:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000212666?sid=101"
     }
    ]
   },
@@ -108,15 +108,14 @@
    ]
   },
   {
-   "keyword": "남자 계주 금메달",
+   "keyword": "남자 쇼트트랙 계주 금메달",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 16,
+   "articles90": 11,
    "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-22T10:08:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-22T10:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -127,32 +126,37 @@
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283008"
     },
     {
+     "title": "한국 쇼트트랙, 안방 ISU 월드투어서 금 3·은 2…신동민 2관왕",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-22T11:30:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/277/0005846092"
+    },
+    {
      "title": "임종언 도핑 논란 극복+신동민 2관왕…0.264초 차 짜릿한 금메달 → 한국...",
      "press": "spotvnews.co.kr",
      "publishedAt": "2026-11-22T11:25:00.000Z",
      "link": "https://m.sports.naver.com/general/article/477/0000640317"
-    },
-    {
-     "title": "축제 된 쇼트트랙 월드투어…韓 남자계주, 안방 경기서 0.264초차 금메달",
-     "press": "donga.com",
-     "publishedAt": "2026-11-22T11:07:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/020/0003764226"
     }
    ]
   },
   {
    "keyword": "김동완, SNS 활동 중단 선언",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 8,
    "recent20": 1,
-   "press": 7,
+   "press": 8,
    "firstArticleAt": "2026-11-22T10:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김동완, SNS 중단 선언 “그동안 즐거웠고, 고마웠어”",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-22T11:38:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001282659"
+    },
     {
      "title": "김동완, SNS 활동 중단 선언 “12월 1일부터 끝내려 해”…유료 팬 공간...",
      "press": "sports.khan.co.kr",
@@ -164,54 +168,48 @@
      "press": "news.jtbc.co.kr",
      "publishedAt": "2026-11-22T11:03:00.000Z",
      "link": "https://m.entertain.naver.com/article/437/0000521906"
-    },
-    {
-     "title": "김동완, 모든 SNS 활동 끝낸다 \"무너지면 또 올 것\"",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-22T11:00:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110037714534"
     }
    ]
   },
   {
-   "keyword": "김가은, 2세 성별은 딸",
+   "keyword": "주현영",
    "sources": [
-    "nate"
+    "google"
    ],
    "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T10:10:00.000Z",
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-22T10:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "윤선우·김가은, 2세 성별 딸 공개 \"공주 2명 괜찮아?\"",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-22T11:30:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110037931214"
+     "title": "주현영 “연애하냐” 돌직구에 답 못하자 유재석 “알겠습니다” 정리...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-22T11:40:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005767343"
     },
     {
-     "title": "‘10년 열애’ 윤선우♥김가은, 2세 성별은 딸… “여보랑 똑같이 생기...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-22T11:13:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003542975"
+     "title": "주현영·지예은 'SNL 텃세' 발언, 실제 불화였나…'런닝맨'서 재회",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-22T11:36:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283009"
     },
     {
-     "title": "윤선우♥김가은, 2세 성별은 딸..\"여보랑 똑같은 애 만나봐\" 환호[핫피플...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-22T11:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005643999"
+     "title": "주종혁♥주현영, 결혼 6개월 차 신혼부부로 다시 만난다",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-22T11:28:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001282658"
     }
    ]
   },
   {
-   "keyword": "식스센스 b사이드",
+   "keyword": "전소민 식스센스 B사이드",
    "sources": [
     "daum"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-22T10:46:00.000Z",
    "exclusive": false,
@@ -236,75 +234,11 @@
      "link": "https://www.bntnews.co.kr/article/view/bnt202611220077"
     }
    ]
-  },
-  {
-   "keyword": "정년연장",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T10:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘63세까지 월급 오른다’⋯ 정년연장 정부안 예고에 현대차 인건비 비...",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-22T11:08:00.000Z",
-     "link": "https://www.viva100.com/article/20261122500735"
-    },
-    {
-     "title": "“정년 연장, 與 결론 안내면 정부 입장 낼 것”(종합)",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-22T10:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000161942?sid=101"
-    },
-    {
-     "title": "노동장관 “정년연장, 與특위 결론 안 나면 정부안 먼저 발표”",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-22T10:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001886696?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "주현영 SNL 텃세",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T11:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "주현영·지예은 'SNL 텃세' 발언, 실제 불화였나…'런닝맨'서 재회",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-22T11:36:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283009"
-    },
-    {
-     "title": "'바타♥' 지예은, 'SNL선배' 주현영 텃세 폭로 \"엄격했냐고? 없진 않아\"...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-22T11:25:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000640316"
-    },
-    {
-     "title": "지예은 “주현영 ‘SNL’ 시절 텃세 있었다” 폭탄 고백 (‘런닝맨’)",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-22T11:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005767341"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1086,
+  "flagged": 1089,
   "matched": 617,
   "avgLeadMin": 610,
   "recent": [
