@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T00:23:52.507Z",
+ "builtAt": "2026-11-22T00:33:56.800Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,27 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "주거 안전용품 지원",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 30,
-   "recent20": 3,
-   "press": 27,
+   "articles90": 31,
+   "recent20": 4,
+   "press": 28,
    "firstArticleAt": "2026-11-21T23:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "하나금융, 취약계층 어르신 1000명에 주거 안전용품·보행기",
+     "press": "thetracker.co.kr",
+     "publishedAt": "2026-11-22T00:27:00.000Z",
+     "link": "https://thetracker.co.kr/View.aspx?No=4323582"
+    },
     {
      "title": "하나금융, 취약계층에 주거 안전용품·보행보조기 지원",
      "press": "metroseoul.co.kr",
@@ -33,12 +40,6 @@
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-22T00:20:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006413591?sid=101"
-    },
-    {
-     "title": "하나금융, 취약계층 어르신 1000명에 주거 안전용품·보행보조기 지원",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-22T00:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003488173?sid=101"
     }
    ]
   },
@@ -50,70 +51,167 @@
    ],
    "articles90": 20,
    "recent20": 8,
-   "press": 19,
-   "firstArticleAt": "2026-11-21T22:56:00.000Z",
+   "press": 18,
+   "firstArticleAt": "2026-11-21T23:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김동규, '굿파트너2'서 빛났다! '강렬 인상' 선사",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-22T00:32:00.000Z",
+     "link": "https://m.entertain.naver.com/article/030/0003488184"
+    },
+    {
+     "title": "'굿파트너2' 장나라·김혜윤, 완벽 팀플레이…2회 만에 최고 10%[시청률...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-22T00:24:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1795306624531347006"
+    },
     {
      "title": "차유진, 로펌 살림꾼 심현주로 등장…동료 전은호에 \"힘드냐\" ('굿파트너...",
      "press": "mhnse.com",
      "publishedAt": "2026-11-22T00:23:00.000Z",
      "link": "https://m.entertain.naver.com/article/445/0000492193"
-    },
-    {
-     "title": "'굿파트너2' 2회만에 최고 10% 돌파",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-22T00:22:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611220035"
-    },
-    {
-     "title": "'굿파트너2' 차유진, 법무법인 사무장 심현주로 첫 등장",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-22T00:22:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282715"
     }
    ]
   },
   {
-   "keyword": "경부선 일반열차 정상 운행",
+   "keyword": "대법원 과거사 배상 판결",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-21T22:56:00.000Z",
+   "articles90": 12,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-22T00:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "코레일, 소정리역 탈선 사고로 중단된 열차 운행 재개…첫 열차부터 정...",
-     "press": "mdtoday.co.kr",
+     "title": "대법 “소멸시효 지난 여순사건 유족도 국가배상 청구 가능”[세상&]",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-22T00:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002726658?sid=102"
+    },
+    {
+     "title": "청구권 시효 지난 과거사 피해, 개정법 따라 배상 청구 가능",
+     "press": "lawtimes.co.kr",
      "publishedAt": "2026-11-22T00:06:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626839"
+     "link": "https://www.lawtimes.co.kr/news/articleView.html?idxno=229761"
+    },
+    {
+     "title": "대법원, 여·순사건 국가상대 손배청구 시효 소멸 판단 원심 파기환송",
+     "press": "lawissue.co.kr",
+     "publishedAt": "2026-11-22T00:04:00.000Z",
+     "link": "https://www.lawissue.co.kr/view.php?ud=2026112209001865649a8c8bf58f_12"
+    }
+   ]
+  },
+  {
+   "keyword": "소설",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 9,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-21T23:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "첫눈 온다는 '소설'…대체로 맑지만 영하권 추위",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-22T00:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979289?sid=102"
+    },
+    {
+     "title": "[날씨] 절기 '소설' 영하권 추위…맑지만 대기 건조",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-22T00:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928607?sid=103"
+    },
+    {
+     "title": "일요일 절기상 '소설' 전국 대체로 맑고 쌀쌀...춘천 최저기온 영하 9.5...",
+     "press": "kado.net",
+     "publishedAt": "2026-11-22T00:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000212550?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "경찰 관계성범죄 국민참여단",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-22T00:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "관계성범죄 대응책에 국민 의견 반영…경찰, 국민참여단 개최",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-22T00:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413581?sid=102"
+    },
+    {
+     "title": "관계성 범죄에 경찰 개입 어디까지?...국민 참여 토론",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-22T00:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436277?sid=102"
+    },
+    {
+     "title": "경찰, 관계성범죄 개입 기준 국민과 논의…숙의 절차 도입",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-22T00:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004684719?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "경부선 일반열차 재개",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-21T23:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "열차 탈선 밤샘 복구작업…오늘 첫 차부터 운행 재개",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-22T00:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928610?sid=101"
+    },
+    {
+     "title": "화물열차 궤도이탈로 멈춘 경부선…22일 첫차부터 정상 운행",
+     "press": "news.mtn.co.kr",
+     "publishedAt": "2026-11-22T00:28:00.000Z",
+     "link": "https://news.mtn.co.kr/article/2026112209265527898"
     },
     {
      "title": "코레일, 경부선 일반열차 운행 재개…밤샘 복구 끝 정상화",
      "press": "hansbiz.co.kr",
      "publishedAt": "2026-11-22T00:06:00.000Z",
      "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=885843"
-    },
-    {
-     "title": "경부선 일반열차 운행 정상화…소정리역 화물열차 탈선 복구 완료",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-21T23:54:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086089"
     }
    ]
   },
   {
    "keyword": "유연석 변사체 충격",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 7,
-   "recent20": 1,
+   "recent20": 0,
    "press": 7,
    "firstArticleAt": "2026-11-21T23:04:00.000Z",
    "exclusive": false,
@@ -140,49 +238,23 @@
    ]
   },
   {
-   "keyword": "수험",
-   "sources": [
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-21T22:57:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "오프라인 재시험 통보에 2만명이 안 나타났다…‘바보’가 된 수험생들",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-22T00:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005767097?sid=102"
-    },
-    {
-     "title": "'수험생 이동 어쩌나'…철도노조 내일 쟁의 예고",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-21T23:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928587?sid=101"
-    },
-    {
-     "title": "열차 선로 밖 튕겨나가…운행 중지로 수험생 '발동동'",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-21T23:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928585?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "부동산",
    "sources": [
     "google"
    ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
+   "articles90": 6,
+   "recent20": 3,
+   "press": 6,
    "firstArticleAt": "2026-11-21T23:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "경기도, “전세사기 예방 ‘경기 안심 부동산’에 참여하세요!”",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-22T00:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701798?sid=102"
+    },
     {
      "title": "경기도, 전세사기 예방 '경기 안심 부동산' 참여 중개사 확대 추진",
      "press": "news1.kr",
@@ -194,12 +266,39 @@
      "press": "breaknews.com",
      "publishedAt": "2026-11-22T00:16:00.000Z",
      "link": "http://www.breaknews.com/1252893"
+    }
+   ]
+  },
+  {
+   "keyword": "수험",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 8,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-21T23:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“수능 끝, 무진장 시작”…무신사, 성수서 수험생 응원 이벤트 진행",
+     "press": "socialvalue.kr",
+     "publishedAt": "2026-11-22T00:30:00.000Z",
+     "link": "https://www.socialvalue.kr/news/view/1065572735740310"
     },
     {
-     "title": "전세 사기 걱정되면 '안심부동산' 스티커 확인...온라인서도 가능",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-22T00:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000966971?sid=102"
+     "title": "오프라인 재시험 통보에 2만명이 안 나타났다…‘바보’가 된 수험생들",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-22T00:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005767097?sid=102"
+    },
+    {
+     "title": "'수험생 이동 어쩌나'…철도노조 내일 쟁의 예고",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-21T23:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928587?sid=101"
     }
    ]
   },
@@ -209,7 +308,7 @@
     "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-21T23:25:00.000Z",
    "exclusive": true,
@@ -234,14 +333,64 @@
      "link": "https://www.etoday.co.kr/news/view/2651248"
     }
    ]
+  },
+  {
+   "keyword": "채령 모친 암 투병 고백",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-21T23:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "있지 채령·이채연 모친 희귀암 투병…이채연 병원서 출퇴근하며 간병",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-22T00:20:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626842"
+    },
+    {
+     "title": "있지 채령·이채연 자매, 모친 희소암 투병 고백",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-21T23:39:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014337685"
+    },
+    {
+     "title": "있지 채령, 모친 희귀암 투병 고백… 언니 이채연은 병원서 출퇴근 (전...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-21T23:08:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003542897"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 903,
-  "matched": 535,
-  "avgLeadMin": 621,
+  "flagged": 907,
+  "matched": 538,
+  "avgLeadMin": 618,
   "recent": [
+   {
+    "keyword": "lpga",
+    "hitKeyword": "김아림 LPGA 선두",
+    "hitAt": "2026-11-22T09:30:00+09:00",
+    "leadMin": 177
+   },
+   {
+    "keyword": "김아림 프로",
+    "hitKeyword": "김아림 LPGA 선두",
+    "hitAt": "2026-11-22T09:30:00+09:00",
+    "leadMin": 56
+   },
+   {
+    "keyword": "김아림 최종전 선두",
+    "hitKeyword": "김아림 LPGA 선두",
+    "hitAt": "2026-11-22T09:30:00+09:00",
+    "leadMin": 16
+   },
    {
     "keyword": "푸틴 얄타회담 발언",
     "hitKeyword": "트럼프 얄타회담 언급",
@@ -283,24 +432,6 @@
     "hitKeyword": "트럼프 이란 핵무기 합의",
     "hitAt": "2026-11-22T07:00:00+09:00",
     "leadMin": 651
-   },
-   {
-    "keyword": "뉴욕증시 혼조 마감",
-    "hitKeyword": "뉴욕증시 AI 급락",
-    "hitAt": "2026-11-22T06:30:00+09:00",
-    "leadMin": 4299
-   },
-   {
-    "keyword": "뉴욕증시 혼조",
-    "hitKeyword": "뉴욕증시 AI 급락",
-    "hitAt": "2026-11-22T06:30:00+09:00",
-    "leadMin": 4249
-   },
-   {
-    "keyword": "뉴욕증시 급락",
-    "hitKeyword": "뉴욕증시 AI 급락",
-    "hitAt": "2026-11-22T06:30:00+09:00",
-    "leadMin": 2815
    }
   ]
  }
