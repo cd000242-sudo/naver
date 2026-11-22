@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T11:27:53.133Z",
+ "builtAt": "2026-11-22T11:37:56.691Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "한전 개인정보 유출",
@@ -16,30 +16,30 @@
     "signal.bz",
     "daum"
    ],
-   "articles90": 47,
-   "recent20": 6,
-   "press": 44,
-   "firstArticleAt": "2026-11-22T09:58:00.000Z",
+   "articles90": 40,
+   "recent20": 5,
+   "press": 37,
+   "firstArticleAt": "2026-11-22T10:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한전도 뚫렸다…152만명 개인정보 유출",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-22T11:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005356806?sid=101"
+     "title": "한전, 고객 등 152만명 개인정보 유출…김동철 사장 “책임 통감”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-22T11:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764231?sid=102"
     },
     {
-     "title": "'주민·계좌·카드번호' 털렸다…한전서 150만 건 유출",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-22T11:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404939?sid=102"
+     "title": "한국전력공사, 152만 명 개인정보 유출 사고",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-22T11:36:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=885923"
     },
     {
-     "title": "한전, 고객 주민번호 등 개인정보 150만건 유출",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-22T11:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928776?sid=101"
+     "title": "국감 사과 한달만에 또…한전, 3만명 이어 152만명 개인정보 유출",
+     "press": "financialpost.co.kr",
+     "publishedAt": "2026-11-22T11:32:00.000Z",
+     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=302374"
     }
    ]
   },
@@ -48,30 +48,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 42,
-   "recent20": 5,
-   "press": 39,
-   "firstArticleAt": "2026-11-22T09:59:00.000Z",
+   "articles90": 35,
+   "recent20": 3,
+   "press": 32,
+   "firstArticleAt": "2026-11-22T10:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "정부, 증안펀드 즉시 가동 준비 착수…미국발 증시 급락에 선제 대응",
+     "press": "newsbrite.net",
+     "publishedAt": "2026-11-22T11:30:00.000Z",
+     "link": "http://www.newsbrite.net/news/articleView.html?idxno=201670"
+    },
+    {
+     "title": "미 AI 투매에 '검은 월요일' 오나?...\"증안펀드 가동 준비\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-22T11:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436486?sid=101"
+    },
     {
      "title": "코스피 5000선 붕괴에 'F4' 긴급 소집…증안펀드 가동 준비",
      "press": "kado.net",
      "publishedAt": "2026-11-22T11:19:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/654/0000212666?sid=101"
-    },
-    {
-     "title": "정부, 증안펀드 가동 채비…자사주 매입 규제도 3개월 완화",
-     "press": "newsinside.kr",
-     "publishedAt": "2026-11-22T11:12:00.000Z",
-     "link": "https://www.newsinside.kr/news/articleView.html?idxno=5054131"
-    },
-    {
-     "title": "\"18년 만에 증안펀드 가동 준비\"…정부, 긴급 시장점검 회의",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-22T11:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001165199?sid=101"
     }
    ]
   },
@@ -80,13 +80,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 28,
-   "recent20": 3,
-   "press": 24,
+   "articles90": 29,
+   "recent20": 1,
+   "press": 25,
    "firstArticleAt": "2026-11-22T10:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이 대통령, 최교진 교육장관 면직안 당일 재가…사의 표명 당일 ‘속전...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-22T11:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484282?sid=100"
+    },
     {
      "title": "이 대통령, 최교진 면직 재가…수능 사흘 만에 퇴진",
      "press": "4th.kr",
@@ -98,59 +104,28 @@
      "press": "munhwa.com",
      "publishedAt": "2026-11-22T11:13:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/021/0002834589?sid=100"
-    },
-    {
-     "title": "이 대통령, 최교진 면직안 재가…사의 수락 7시간 만에 사실상 경질",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-22T11:12:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=730539"
-    }
-   ]
-  },
-  {
-   "keyword": "수능 부정행위",
-   "sources": [
-    "google"
-   ],
-   "articles90": 30,
-   "recent20": 5,
-   "press": 23,
-   "firstArticleAt": "2026-11-22T09:59:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "최교진 교육부 장관 사퇴…\"수능 대응 혼란 책임\"",
-     "press": "babytimes.co.kr",
-     "publishedAt": "2026-11-22T11:20:00.000Z",
-     "link": "http://www.babytimes.co.kr/news/articleView.html?idxno=74740"
-    },
-    {
-     "title": "‘나이’ 발언 최교진 교체로 수능 혼란 ‘정부책임론’ 확산 막기",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-22T11:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833422?sid=100"
-    },
-    {
-     "title": "이 대통령, 최교진 면직 재가…수능 사흘 만에 퇴진",
-     "press": "4th.kr",
-     "publishedAt": "2026-11-22T11:16:00.000Z",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2122406"
     }
    ]
   },
   {
    "keyword": "남자 계주 금메달",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 17,
-   "recent20": 1,
+   "articles90": 16,
+   "recent20": 2,
    "press": 12,
-   "firstArticleAt": "2026-11-22T09:58:00.000Z",
+   "firstArticleAt": "2026-11-22T10:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "남자 쇼트트랙 5000m 계주 금메달…0.264초 차 우승, 신동민 2관왕",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-22T11:34:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283008"
+    },
     {
      "title": "임종언 도핑 논란 극복+신동민 2관왕…0.264초 차 짜릿한 금메달 → 한국...",
      "press": "spotvnews.co.kr",
@@ -162,18 +137,13 @@
      "press": "donga.com",
      "publishedAt": "2026-11-22T11:07:00.000Z",
      "link": "https://m.sports.naver.com/general/article/020/0003764226"
-    },
-    {
-     "title": "김태성·신동민 앞세운 한국, ISU 쇼트트랙 월드투어 남자 5,000ｍ 계주 ...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-22T11:06:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282999"
     }
    ]
   },
   {
    "keyword": "김동완, SNS 활동 중단 선언",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 7,
@@ -208,13 +178,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 5,
+   "articles90": 6,
    "recent20": 1,
-   "press": 5,
+   "press": 6,
    "firstArticleAt": "2026-11-22T10:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "윤선우·김가은, 2세 성별 딸 공개 \"공주 2명 괜찮아?\"",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-22T11:30:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110037931214"
+    },
     {
      "title": "‘10년 열애’ 윤선우♥김가은, 2세 성별은 딸… “여보랑 똑같이 생기...",
      "press": "isplus.com",
@@ -226,151 +202,142 @@
      "press": "osen.co.kr",
      "publishedAt": "2026-11-22T11:02:00.000Z",
      "link": "https://m.entertain.naver.com/article/109/0005643999"
-    },
-    {
-     "title": "'윤선우♥' 김가은, 2세는 딸이었다 \"공주 둘 괜찮아?\"[셀럽캡처]",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-22T10:40:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1795343249531361006"
     }
    ]
   },
   {
-   "keyword": "고경표 음주운전으로 사과",
+   "keyword": "식스센스 b사이드",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T10:00:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T10:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"시상식 신중 기하겠다\"는 '핑계고'..'음주운전' 고경표 흔적 여전 [스타...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-22T10:36:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003489392"
+     "title": "'식스센스', 음주운전 고경표 논란 속 최종회…전소민 \"내가 갈고닦아 ...",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-22T11:20:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110037873867"
     },
     {
-     "title": "이름 대신 해당 인물 …‘핑계고’, 고경표 후보 제외하고 사과",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-22T10:23:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001147984"
+     "title": "유노윤호-전소민, '식스센스' 최종회 게스트로 출격",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-22T10:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000328743"
     },
     {
-     "title": "'음주운전' 고경표, 결국 '핑계고' 인기상 후보 삭제..제작진 \"검토 부족...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-22T10:12:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005643974"
+     "title": "'식스센스 비사이드' 제주 해녀 성게김밥 맛집, 메밀 흑돼지 돈가스 식...",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-22T10:54:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611220077"
     }
    ]
   },
   {
-   "keyword": "한전on",
+   "keyword": "정년연장",
    "sources": [
-    "google"
+    "daum"
    ],
    "articles90": 4,
    "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-22T10:36:00.000Z",
+   "firstArticleAt": "2026-11-22T10:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한전, '한전ON'·조달망 뚫려 개인정보 152만여건 유출... 주민번호·카...",
-     "press": "boannews.com",
-     "publishedAt": "2026-11-22T10:58:00.000Z",
-     "link": "https://www.boannews.com/news/articleView.html?idxno=147429"
+     "title": "‘63세까지 월급 오른다’⋯ 정년연장 정부안 예고에 현대차 인건비 비...",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-22T11:08:00.000Z",
+     "link": "https://www.viva100.com/article/20261122500735"
     },
     {
-     "title": "한전ON∙전자조달시스템서 개인정보 유출…152만여건 규모",
-     "press": "kdfnews.com",
-     "publishedAt": "2026-11-22T10:56:00.000Z",
-     "link": "http://www.kdfnews.com/news/articleView.html?idxno=191245"
+     "title": "“정년 연장, 與 결론 안내면 정부 입장 낼 것”(종합)",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-22T10:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000161942?sid=101"
     },
     {
-     "title": "한전, 개인정보 150여만건 유출…한전ON·SRM 이용자 피해",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-22T10:52:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261122010008514"
+     "title": "노동장관 “정년연장, 與특위 결론 안 나면 정부안 먼저 발표”",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-22T10:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001886696?sid=102"
     }
    ]
   },
   {
-   "keyword": "박연수 이혼 후 심경",
+   "keyword": "주현영 SNL 텃세",
    "sources": [
     "daum"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 2,
    "press": 3,
-   "firstArticleAt": "2026-11-22T10:01:00.000Z",
+   "firstArticleAt": "2026-11-22T11:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "박연수, ‘송종국과 이혼’ 후 심경 고백 “12년간 아픔과 상처로 괴로...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-22T10:43:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001151138"
-    },
-    {
-     "title": "박연수, 송종국과 이혼 그 후.. \"아픔과 상처들로 괴로웠던 12년\" [RE:스타...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-22T10:42:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409191"
-    },
-    {
-     "title": "박연수, '송종국 이혼' 그 후 심경 \"아픔·상처들로 괴로운 12년..\"",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-22T10:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003489388"
-    }
-   ]
-  },
-  {
-   "keyword": "100일의 거짓말",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 2,
-   "firstArticleAt": "2026-11-22T10:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'100일의 거짓말' 김유정, 뜻밖에 마주한 새로운 진실은?",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-22T11:23:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000328745"
-    },
-    {
-     "title": "박진영 '100일의 거짓말' 구국단 묘사 논쟁…14회서 양부와 대립",
+     "title": "주현영·지예은 'SNL 텃세' 발언, 실제 불화였나…'런닝맨'서 재회",
      "press": "topstarnews.net",
-     "publishedAt": "2026-11-22T10:58:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282996"
+     "publishedAt": "2026-11-22T11:36:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283009"
     },
     {
-     "title": "'100일의 거짓말' 김유정X박진영, 눈물의 빗속 입맞춤",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-22T10:35:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000328740"
+     "title": "'바타♥' 지예은, 'SNL선배' 주현영 텃세 폭로 \"엄격했냐고? 없진 않아\"...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-22T11:25:00.000Z",
+     "link": "https://m.entertain.naver.com/article/477/0000640316"
+    },
+    {
+     "title": "지예은 “주현영 ‘SNL’ 시절 텃세 있었다” 폭탄 고백 (‘런닝맨’)",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-22T11:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005767341"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1083,
-  "matched": 612,
-  "avgLeadMin": 615,
+  "flagged": 1086,
+  "matched": 617,
+  "avgLeadMin": 610,
   "recent": [
+   {
+    "keyword": "북미회담 무산",
+    "hitKeyword": "트럼프 북미회담 무산",
+    "hitAt": "2026-11-22T20:30:00+09:00",
+    "leadMin": 52
+   },
+   {
+    "keyword": "트럼프 얄타회담 사진",
+    "hitKeyword": "트럼프 북미회담 무산",
+    "hitAt": "2026-11-22T20:30:00+09:00",
+    "leadMin": 32
+   },
+   {
+    "keyword": "100일의 거짓말",
+    "hitKeyword": "100일의 거짓말 김유정",
+    "hitAt": "2026-11-22T20:30:00+09:00",
+    "leadMin": 22
+   },
+   {
+    "keyword": "수능 부정행위",
+    "hitKeyword": "아르헨티나 AI 부정행위",
+    "hitAt": "2026-11-22T20:30:00+09:00",
+    "leadMin": 12
+   },
+   {
+    "keyword": "한전on",
+    "hitKeyword": "한전on",
+    "hitAt": "2026-11-22T20:30:00+09:00",
+    "leadMin": 2
+   },
    {
     "keyword": "핑계고 음주운전 고경표",
     "hitKeyword": "핑계고 공개 사과",
@@ -400,36 +367,6 @@
     "hitKeyword": "최소라 이코베 발리 결혼식",
     "hitAt": "2026-11-22T20:00:00+09:00",
     "leadMin": 12
-   },
-   {
-    "keyword": "투자",
-    "hitKeyword": "개미 투자자 손실",
-    "hitAt": "2026-11-22T19:30:00+09:00",
-    "leadMin": 264
-   },
-   {
-    "keyword": "수능 부정행위 대응",
-    "hitKeyword": "국가자격시험 부정행위 적발",
-    "hitAt": "2026-11-22T19:30:00+09:00",
-    "leadMin": 214
-   },
-   {
-    "keyword": "검은 월요일",
-    "hitKeyword": "월요일 전국 비 눈",
-    "hitAt": "2026-11-22T19:30:00+09:00",
-    "leadMin": 23
-   },
-   {
-    "keyword": "40대 아기와 추락",
-    "hitKeyword": "40대 마통 연체액 급증",
-    "hitAt": "2026-11-22T19:30:00+09:00",
-    "leadMin": 23
-   },
-   {
-    "keyword": "코스피 급락",
-    "hitKeyword": "코스피 급락 공포",
-    "hitAt": "2026-11-22T19:00:00+09:00",
-    "leadMin": 23
    }
   ]
  }
