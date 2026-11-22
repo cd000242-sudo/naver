@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T21:10:55.066Z",
+ "builtAt": "2026-11-22T21:20:58.184Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "코스피",
@@ -16,7 +16,7 @@
     "google"
    ],
    "articles90": 12,
-   "recent20": 7,
+   "recent20": 2,
    "press": 9,
    "firstArticleAt": "2026-11-22T20:02:00.000Z",
    "exclusive": false,
@@ -48,7 +48,7 @@
     "nate"
    ],
    "articles90": 6,
-   "recent20": 4,
+   "recent20": 2,
    "press": 5,
    "firstArticleAt": "2026-11-22T20:00:00.000Z",
    "exclusive": false,
@@ -75,12 +75,44 @@
    ]
   },
   {
+   "keyword": "유엔기후총회 합의 무산",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-22T20:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "유엔기후총회 17년 만에 합의 불발…화석연료 충돌",
+     "press": "kbmaeil.com",
+     "publishedAt": "2026-11-22T21:20:00.000Z",
+     "link": "https://www.kbmaeil.com/article/20261123500007"
+    },
+    {
+     "title": "'화석연료' 극한 대립‥17년 만에 합의 무산",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-22T21:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537281?sid=102"
+    },
+    {
+     "title": "유엔기후총회 17년 만에 합의 무산…'화석연료 퇴출' 놓고 산유국·EU 충...",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-22T20:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005846103?sid=104"
+    }
+   ]
+  },
+  {
    "keyword": "대장동",
    "sources": [
     "google"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-22T20:02:00.000Z",
    "exclusive": false,
@@ -105,44 +137,12 @@
      "link": "https://n.news.naver.com/mnews/article/005/0001886780?sid=100"
     }
    ]
-  },
-  {
-   "keyword": "유엔기후총회 합의 무산",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T20:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "유엔기후총회 17년 만에 합의 무산…'화석연료 퇴출' 놓고 산유국·EU 충...",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-22T20:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005846103?sid=104"
-    },
-    {
-     "title": "‘화석연료 이견’ 빈 손으로 끝난 유엔기후총회",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-22T20:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701937?sid=104"
-    },
-    {
-     "title": "유엔 기후총회 합의 결렬…화석연료 퇴출 놓고 EU·사우디 충돌",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T20:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009303754?sid=104"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1121,
-  "matched": 633,
+  "flagged": 1119,
+  "matched": 631,
   "avgLeadMin": 613,
   "recent": [
    {
