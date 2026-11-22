@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T12:28:12.457Z",
+ "builtAt": "2026-11-22T12:38:15.891Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,26 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 27,
  "candidates": [
   {
-   "keyword": "증안펀드 가동 준비",
+   "keyword": "정부 증안펀드 가동 준비",
    "sources": [
     "signal.bz",
-    "daum"
+    "nate"
    ],
-   "articles90": 26,
-   "recent20": 2,
-   "press": 26,
-   "firstArticleAt": "2026-11-22T11:01:00.000Z",
+   "articles90": 24,
+   "recent20": 1,
+   "press": 24,
+   "firstArticleAt": "2026-11-22T11:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美 증시 급락에 '증안펀드' 가동 준비…불법 공매도 특별감시",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-22T12:18:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903965"
+     "title": "\"검은 월요일 막아라\" 정부 긴급 대응…'증안펀드' 준비",
+     "press": "babytimes.co.kr",
+     "publishedAt": "2026-11-22T12:32:00.000Z",
+     "link": "http://www.babytimes.co.kr/news/articleView.html?idxno=74741"
     },
     {
      "title": "반대매매 완화 이어 증안펀드 준비…정부, 16일 만에 추가 대책",
@@ -36,10 +36,10 @@
      "link": "https://www.kukinews.com/article/view/kuk202611220029"
     },
     {
-     "title": "정부 증안펀드 가동 준비…미국 증시 급락에 F4 긴급회의, 24일부터 자사...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-22T12:08:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629597"
+     "title": "美 증시 급락에 '증안펀드' 가동 준비…불법 공매도 특별감시",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-22T12:18:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903965"
     }
    ]
   },
@@ -48,10 +48,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 19,
-   "recent20": 4,
-   "press": 18,
-   "firstArticleAt": "2026-11-22T11:03:00.000Z",
+   "articles90": 13,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-22T11:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -76,46 +76,79 @@
    ]
   },
   {
-   "keyword": "철도노조, 26일로 연기",
+   "keyword": "솔비 이규한 결혼",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 15,
-   "recent20": 1,
-   "press": 15,
-   "firstArticleAt": "2026-11-22T10:59:00.000Z",
+   "articles90": 12,
+   "recent20": 8,
+   "press": 10,
+   "firstArticleAt": "2026-11-22T11:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "철도노조, 안전운행 투쟁 26일로 연기",
+     "title": "솔비, ♥이규한과 4월 결혼 “47세와 43세 연애가 설렌 적 처음이라고”...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-22T12:32:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190238"
+    },
+    {
+     "title": "이규한, 사귀기도 전에 프러포즈했다…♥솔비 母에 \"평생 책임지겠다\"",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-22T12:32:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004468709"
+    },
+    {
+     "title": "'미우새' 솔비 선택 안 했던 이규한…내년 4월 결혼",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-22T12:32:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283020"
+    }
+   ]
+  },
+  {
+   "keyword": "김정은 러시아 대사 신임장",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-22T11:39:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김정은, 러시아대사 신임장 직접 접수...30여년만 의전 변화",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-22T12:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701904?sid=100"
+    },
+    {
+     "title": "김정은, 러시아대사 신임장 직접 받아…외교 의전에서도 ‘최고지도자...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-22T12:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484328?sid=100"
+    },
+    {
+     "title": "北 개헌 뒤 달라진 외교 의전…김정은, 러시아 대사 신임장 직접 받아",
      "press": "fnnews.com",
-     "publishedAt": "2026-11-22T12:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005607939?sid=102"
-    },
-    {
-     "title": "철도노조, 화물차 이탈 사고에 쟁의행위 26일로 연기…“복구 먼저”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-22T12:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012298834?sid=101"
-    },
-    {
-     "title": "철도노조 안전운행투쟁연기…23일에서 26일로 변경, 화물열차 탈선 복구...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-22T11:52:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629596"
+     "publishedAt": "2026-11-22T12:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005607938?sid=100"
     }
    ]
   },
   {
    "keyword": "김동완 SNS 중단 선언",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 5,
+   "articles90": 3,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T11:00:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-22T11:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -138,78 +171,50 @@
      "link": "https://m.entertain.naver.com/article/144/0001151143"
     }
    ]
-  },
-  {
-   "keyword": "주현영",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T11:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "주현영 “연애하냐” 돌직구에 답 못하자 유재석 “알겠습니다” 정리...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-22T11:40:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005767343"
-    },
-    {
-     "title": "주현영·지예은 'SNL 텃세' 발언, 실제 불화였나…'런닝맨'서 재회",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-22T11:36:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283009"
-    },
-    {
-     "title": "주종혁♥주현영, 결혼 6개월 차 신혼부부로 다시 만난다",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-22T11:28:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001282658"
-    }
-   ]
-  },
-  {
-   "keyword": "윤선우·김가은, 2세 성별은 딸",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T11:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "윤선우·김가은, 2세 성별 딸 공개 \"공주 2명 괜찮아?\"",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-22T11:30:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110037931214"
-    },
-    {
-     "title": "‘10년 열애’ 윤선우♥김가은, 2세 성별은 딸… “여보랑 똑같이 생기...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-22T11:13:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003542975"
-    },
-    {
-     "title": "윤선우♥김가은, 2세 성별은 딸..\"여보랑 똑같은 애 만나봐\" 환호[핫피플...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-22T11:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005643999"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1095,
-  "matched": 620,
-  "avgLeadMin": 610,
+  "flagged": 1097,
+  "matched": 626,
+  "avgLeadMin": 608,
   "recent": [
+   {
+    "keyword": "투어스 도훈, 유재석 위인 발언",
+    "hitKeyword": "유재석 핑계고 사과",
+    "hitAt": "2026-11-22T21:30:00+09:00",
+    "leadMin": 1541
+   },
+   {
+    "keyword": "남자 5000M 계주 금메달!",
+    "hitKeyword": "쇼트트랙 남자계주 금메달",
+    "hitAt": "2026-11-22T21:30:00+09:00",
+    "leadMin": 183
+   },
+   {
+    "keyword": "남자 5000M 계주 금메달",
+    "hitKeyword": "쇼트트랙 남자계주 금메달",
+    "hitAt": "2026-11-22T21:30:00+09:00",
+    "leadMin": 163
+   },
+   {
+    "keyword": "남자 계주 금메달",
+    "hitKeyword": "쇼트트랙 남자계주 금메달",
+    "hitAt": "2026-11-22T21:30:00+09:00",
+    "leadMin": 62
+   },
+   {
+    "keyword": "남자 쇼트트랙 계주 금메달",
+    "hitKeyword": "쇼트트랙 남자계주 금메달",
+    "hitAt": "2026-11-22T21:30:00+09:00",
+    "leadMin": 42
+   },
+   {
+    "keyword": "100일의 거짓말",
+    "hitKeyword": "100일의 거짓말 신태진",
+    "hitAt": "2026-11-22T21:30:00+09:00",
+    "leadMin": 22
+   },
    {
     "keyword": "경기도교육청 교원 개인정보 유출",
     "hitKeyword": "한전 개인정보 유출",
@@ -233,42 +238,6 @@
     "hitKeyword": "트럼프 북미회담 무산",
     "hitAt": "2026-11-22T20:30:00+09:00",
     "leadMin": 52
-   },
-   {
-    "keyword": "트럼프 얄타회담 사진",
-    "hitKeyword": "트럼프 북미회담 무산",
-    "hitAt": "2026-11-22T20:30:00+09:00",
-    "leadMin": 32
-   },
-   {
-    "keyword": "100일의 거짓말",
-    "hitKeyword": "100일의 거짓말 김유정",
-    "hitAt": "2026-11-22T20:30:00+09:00",
-    "leadMin": 22
-   },
-   {
-    "keyword": "수능 부정행위",
-    "hitKeyword": "아르헨티나 AI 부정행위",
-    "hitAt": "2026-11-22T20:30:00+09:00",
-    "leadMin": 12
-   },
-   {
-    "keyword": "한전on",
-    "hitKeyword": "한전on",
-    "hitAt": "2026-11-22T20:30:00+09:00",
-    "leadMin": 2
-   },
-   {
-    "keyword": "핑계고 음주운전 고경표",
-    "hitKeyword": "핑계고 공개 사과",
-    "hitAt": "2026-11-22T20:00:00+09:00",
-    "leadMin": 274
-   },
-   {
-    "keyword": "철도노조 안전운행 투쟁 연기",
-    "hitKeyword": "철도노조 쟁의행위 예고",
-    "hitAt": "2026-11-22T20:00:00+09:00",
-    "leadMin": 32
    }
   ]
  }
