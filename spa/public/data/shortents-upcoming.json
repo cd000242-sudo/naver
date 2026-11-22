@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T16:29:32.634Z",
+ "builtAt": "2026-11-22T16:39:36.139Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 28,
  "candidates": [
   {
-   "keyword": "화석연료 합의문 채택",
+   "keyword": "유엔기후총회 합의 무산",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T15:02:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-22T16:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -43,66 +43,34 @@
    ]
   },
   {
-   "keyword": "최교진 수능 사의",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T15:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[사설] 최교진 교육부 장관 사의… 후속 입시관리 만전 기해야",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-22T16:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001886744?sid=110"
-    },
-    {
-     "title": "\"수능 책임 통감\" 최교진 교육부장관 사의",
-     "press": "kado.net",
-     "publishedAt": "2026-11-22T15:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000212714?sid=100"
-    },
-    {
-     "title": "이재명 대통령, 최교진 교육부 장관 사의 수락",
-     "press": "ksilbo.co.kr",
-     "publishedAt": "2026-11-22T15:04:00.000Z",
-     "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1073279"
-    }
-   ]
-  },
-  {
-   "keyword": "한전, 152만 개인정보 유출",
+   "keyword": "화석연료 합의문 채택",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T15:00:00.000Z",
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T16:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "계좌번호·카드번호 포함…한전 개인정보 152만여건 유출",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-22T15:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002834605?sid=101"
+     "title": "유엔기후총회 17년만에 합의 실패…화석연료 놓고 극한대립(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-22T16:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016457014?sid=104"
     },
     {
-     "title": "한전 고객·협력사 152만명 정보 유출… 주민번호에 계좌·카드번호까지",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-22T15:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001886716?sid=101"
+     "title": "유엔 기후총회, 화석연료 이견 끝 결렬…17년 만에 최종 합의문 채택 실...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-22T16:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005607944?sid=104"
     },
     {
-     "title": "한전 고객 152만명 주민·계좌·카드번호 털려",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-22T15:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003567038?sid=102"
+     "title": "유엔 기후총회, 화석연료 전환 이견…17년 만에 합의문 채택 실패(종합...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T16:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014338444?sid=104"
     }
    ]
   }
