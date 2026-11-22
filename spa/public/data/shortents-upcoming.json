@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T05:15:42.675Z",
+ "builtAt": "2026-11-22T05:25:46.196Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,197 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 25,
  "candidates": [
   {
-   "keyword": "최교진 교육부 장관 사의",
+   "keyword": "최교진, 수능 책임 통감 사의 표명",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 89,
-   "recent20": 12,
-   "press": 73,
-   "firstArticleAt": "2026-11-22T03:55:00.000Z",
+   "articles90": 81,
+   "recent20": 11,
+   "press": 68,
+   "firstArticleAt": "2026-11-22T03:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령, 최교진 교육장관 사의 즉각 수용...수능 대응 혼선에 사실상...",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-22T05:14:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=73430"
+     "title": "李대통령, 최교진 교육부 장관 사의 수락…후임 인선 절차 착수",
+     "press": "jjan.kr",
+     "publishedAt": "2026-11-22T05:24:00.000Z",
+     "link": "https://www.jjan.kr/article/20261122500296"
     },
     {
-     "title": "\"수능 혼란 책임\" 교육부 장관 사퇴에 최은옥 차관 직무대행 체제 예정",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-22T05:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005444598?sid=102"
+     "title": "이 대통령, 최교진 교육부 장관 사의 수락…수능 혼란 책임",
+     "press": "idomin.com",
+     "publishedAt": "2026-11-22T05:22:00.000Z",
+     "link": "https://www.idomin.com/news/articleView.html?idxno=2020206"
     },
     {
-     "title": "AI 부정행위에 대학도 긴장…교육부 장관 사의",
-     "press": "yonhapnewstv.co.kr",
+     "title": "李대통령, 최교진 교육장관 사의 수락…靑 \"신임 인선 절차대로 진행\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-22T05:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000652633?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "미라 시신 발견 수사",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 12,
+   "recent20": 3,
+   "press": 12,
+   "firstArticleAt": "2026-11-22T04:07:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "서울 금천구 건물 지하에서 미라화된 시신 발견···경찰 수사 중",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-22T05:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484193?sid=102"
+    },
+    {
+     "title": "서울 한복판 빌라 지하실서 미라 시신 발견…경찰 수사",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-22T05:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005356690?sid=102"
+    },
+    {
+     "title": "금천구 건물 보일러실서 미라화 된 시신 발견…경찰 수사 중",
+     "press": "donga.com",
      "publishedAt": "2026-11-22T05:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928700?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/020/0003764173?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "조희대 탄핵 한덕수 판결 제외",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 12,
+   "recent20": 3,
+   "press": 11,
+   "firstArticleAt": "2026-11-22T04:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "민주, '조희대 탄핵' 방아쇠 당겼다… 내달 소추안 의결 추진",
+     "press": "m.skyedaily.com",
+     "publishedAt": "2026-11-22T05:18:00.000Z",
+     "link": "https://m.skyedaily.com/news_view.html?ID=314981"
+    },
+    {
+     "title": "민주, 조희대 ‘탄핵 마이웨이’… “연내 의결”",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-22T05:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003060449?sid=100"
+    },
+    {
+     "title": "민주당 탄핵추진단 \"한덕수 재판 절차적 문제 탄핵 사유로 삼을 것\"",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-22T05:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000521878?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "철도노조 쟁의행위 예고",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 6,
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-22T04:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "서울역에 나오는 철도노조 쟁의행위 예고 안내문",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-22T05:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009303358?sid=102"
+    },
+    {
+     "title": "철도노조 쟁의행위 예고 안내문 나오는 서울역",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-22T05:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009303361?sid=102"
+    },
+    {
+     "title": "철도노조 23일 오전 9시부터 준법투쟁… 일부 열차 지연 우려",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-22T05:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001206480?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "과즙세연 방시혁",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-22T04:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "과즙세연 \"방시혁과 안 잤습니다\"…재력 과시",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-22T05:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002082934"
+    },
+    {
+     "title": "'식사권 700만원' 과즙세연 \"돈 때문에 방시혁과 잤냐고? 안잤다\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-22T05:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005444595"
+    },
+    {
+     "title": "“방시혁과 안 잤다”…과즙세연, 루머에 거침없는 독설",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-22T05:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005767142?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "케인 발목 인대 수술 성공",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T04:11:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“준비된 모습으로 돌아올것”…케인, 발목 인대 파열로 수술대 올라",
+     "press": "donga.com",
+     "publishedAt": "2026-11-22T05:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764176?sid=104"
+    },
+    {
+     "title": "케인 \"시즌 막판 준비된 모습으로 돌아오겠다\"...발목 인대 파열 수술 마...",
+     "press": "maniareport.com",
+     "publishedAt": "2026-11-22T04:23:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/425/0000215274"
+    },
+    {
+     "title": "'부상' 케인, 왼쪽 발목 수술 받아…재활 프로그램 돌입",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-22T04:22:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110034979992"
     }
    ]
   },
@@ -48,7 +208,7 @@
     "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-22T03:57:00.000Z",
    "exclusive": false,
@@ -73,75 +233,11 @@
      "link": "https://n.news.naver.com/mnews/article/654/0000212581?sid=100"
     }
    ]
-  },
-  {
-   "keyword": "케인 발목 인대 수술 성공",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T03:48:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "케인 \"시즌 막판 준비된 모습으로 돌아오겠다\"...발목 인대 파열 수술 마...",
-     "press": "maniareport.com",
-     "publishedAt": "2026-11-22T04:23:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/425/0000215274"
-    },
-    {
-     "title": "'부상' 케인, 왼쪽 발목 수술 받아…재활 프로그램 돌입",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-22T04:22:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110034979992"
-    },
-    {
-     "title": "[오피셜] 보호대·목발에도 '엄지 척'… 케인, 발목 수술 성공→ 재활 시...",
-     "press": "besteleven.com",
-     "publishedAt": "2026-11-22T04:11:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/343/0000149174"
-    }
-   ]
-  },
-  {
-   "keyword": "조국, 당명 개정 이름 고민해달라",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T03:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "조국 \"당명 속 '조국' 제 이름 아니지만…바꾸자\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-22T04:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652617?sid=100"
-    },
-    {
-     "title": "조국 \"창당 1000일 조국혁신당…당명 개정 제안한다\"",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-22T04:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000554345?sid=100"
-    },
-    {
-     "title": "조국, 당명 개정 제안…\"확장성 있는 당명 필요\"",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-22T04:16:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2021726"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 983,
+  "flagged": 986,
   "matched": 569,
   "avgLeadMin": 626,
   "recent": [
