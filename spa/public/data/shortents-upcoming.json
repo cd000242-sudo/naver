@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T11:58:02.560Z",
+ "builtAt": "2026-11-22T12:08:06.112Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,38 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 27,
  "candidates": [
   {
-   "keyword": "한전 개인정보 유출",
+   "keyword": "증안펀드 가동 준비",
    "sources": [
-    "signal.bz",
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 37,
-   "recent20": 5,
-   "press": 36,
-   "firstArticleAt": "2026-11-22T10:32:00.000Z",
+   "articles90": 35,
+   "recent20": 9,
+   "press": 34,
+   "firstArticleAt": "2026-11-22T10:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한전, 개인정보 150만건 털렸다…보안 예산 늘리고도 관리 부실 도마",
-     "press": "ziksir.com",
-     "publishedAt": "2026-11-22T11:52:00.000Z",
-     "link": "https://www.ziksir.com/news/articleView.html?idxno=154249"
+     "title": "36년간 5회 등판 증안펀드…주가 폭락 막았을까",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-22T12:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413801?sid=101"
     },
     {
-     "title": "한전 고객정보 152만명분 해킹…65만명은 주민번호·계좌·카드번호까지...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-22T11:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484307?sid=102"
+     "title": "'검은 월요일' 우려에…정부, 10조 규모 증안펀드 투입한다",
+     "press": "econovill.com",
+     "publishedAt": "2026-11-22T12:04:00.000Z",
+     "link": "https://www.econovill.com/news/articleView.html?idxno=758089"
     },
     {
-     "title": "한전, 고객 등 개인정보 152만여 건 유출…주민·계좌·카드번호 등 포함",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-22T11:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000121948?sid=102"
+     "title": "정부, 증권시장안정펀드 가동 준비 착수...변동성 대응 총력",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-22T12:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001273553?sid=101"
     }
    ]
   },
@@ -48,10 +47,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 33,
-   "recent20": 1,
-   "press": 30,
-   "firstArticleAt": "2026-11-22T10:29:00.000Z",
+   "articles90": 23,
+   "recent20": 0,
+   "press": 23,
+   "firstArticleAt": "2026-11-22T10:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -76,73 +75,41 @@
    ]
   },
   {
-   "keyword": "정부 증안펀드 가동 준비",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 31,
-   "recent20": 6,
-   "press": 29,
-   "firstArticleAt": "2026-11-22T10:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "정부, 증안펀드 가동 준비 착수…증시 변동성 확대 대응",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-22T11:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003488291?sid=100"
-    },
-    {
-     "title": "블랙 먼데이 막자…정부 ‘증안펀드’ 가동 준비",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-22T11:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484311?sid=101"
-    },
-    {
-     "title": "정부, 증안펀드 18년 만에 투입하나…가동 준비 착수",
-     "press": "bloter.net",
-     "publishedAt": "2026-11-22T11:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/293/0000093645?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "남자 계주 금메달",
+   "keyword": "철도노조, 26일로 연기",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
+   "articles90": 20,
    "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-22T10:34:00.000Z",
+   "press": 20,
+   "firstArticleAt": "2026-11-22T10:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'안방'서 짜릿한 역전극…남자 계주 '금빛 피날레'",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-22T11:54:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/055/0001404947"
+     "title": "철도노조, 화물차 이탈 사고에 쟁의행위 26일로 연기…“복구 먼저”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-22T12:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012298834?sid=101"
     },
     {
-     "title": "스피드스케이팅 박채은·양호준, 월드컵 2차 대회서 혼성계주 금메달",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-22T11:48:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261122000131"
+     "title": "철도노조 안전운행투쟁연기…23일에서 26일로 변경, 화물열차 탈선 복구...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-22T11:52:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629596"
     },
     {
-     "title": "남자 쇼트트랙 5000m 계주 금메달…0.264초 차 우승, 신동민 2관왕",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-22T11:34:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283008"
+     "title": "철도노조 준법 투쟁 26일로 연기 \"사고 복구 먼저\"",
+     "press": "tjmbc.co.kr",
+     "publishedAt": "2026-11-22T11:45:00.000Z",
+     "link": "https://tjmbc.co.kr/NewsArticle/874724"
     }
    ]
   },
   {
-   "keyword": "김동완, SNS 활동 중단 선언",
+   "keyword": "김동완 SNS 중단 선언",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
    "articles90": 7,
    "recent20": 1,
@@ -177,7 +144,7 @@
     "google"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-22T10:49:00.000Z",
    "exclusive": false,
@@ -204,44 +171,127 @@
    ]
   },
   {
-   "keyword": "전소민 식스센스 B사이드",
+   "keyword": "100일의 거짓말",
    "sources": [
-    "daum"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 5,
+   "articles90": 3,
    "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T10:46:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-22T10:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "전소민, 제주도 자연인 시절 고백 “콩벌레 갖고 놀고 개미 잡아먹어”...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-22T11:50:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190234"
+     "title": "'100일의 거짓말' 김유정, 진선규 향한 반격 준비...대반전 터진다",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-22T12:00:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3759549"
     },
     {
-     "title": "'식스센스', 음주운전 고경표 논란 속 최종회…전소민 \"내가 갈고닦아 ...",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-22T11:20:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110037873867"
-    },
-    {
-     "title": "유노윤호-전소민, '식스센스' 최종회 게스트로 출격",
+     "title": "'100일의 거짓말' 김유정, 뜻밖에 마주한 새로운 진실은?",
      "press": "enews.imbc.com",
+     "publishedAt": "2026-11-22T11:23:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000328745"
+    },
+    {
+     "title": "박진영 '100일의 거짓말' 구국단 묘사 논쟁…14회서 양부와 대립",
+     "press": "topstarnews.net",
      "publishedAt": "2026-11-22T10:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000328743"
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282996"
+    }
+   ]
+  },
+  {
+   "keyword": "영월서 70대 숨져 중독 추정",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T10:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "영월서 차박하던 70대 여성 숨져…일산화탄소 중독 추정",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-22T11:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003567005?sid=102"
+    },
+    {
+     "title": "영월서 차박하던 70대 숨져…일산화탄소 중독 추정",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-22T10:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413797?sid=102"
+    },
+    {
+     "title": "'차박주의보' 영월서 70대 여성 숨져…겨울철 차량 난방 '일산화탄소 중...",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-22T10:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001041659?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "한전on",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T10:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한전, '한전ON'·조달망 뚫려 개인정보 152만여건 유출... 주민번호·카...",
+     "press": "boannews.com",
+     "publishedAt": "2026-11-22T10:58:00.000Z",
+     "link": "https://www.boannews.com/news/articleView.html?idxno=147429"
+    },
+    {
+     "title": "한전ON∙전자조달시스템서 개인정보 유출…152만여건 규모",
+     "press": "kdfnews.com",
+     "publishedAt": "2026-11-22T10:56:00.000Z",
+     "link": "http://www.kdfnews.com/news/articleView.html?idxno=191245"
+    },
+    {
+     "title": "한전, 개인정보 150여만건 유출…한전ON·SRM 이용자 피해",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-22T10:52:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261122010008514"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1089,
-  "matched": 617,
+  "flagged": 1094,
+  "matched": 620,
   "avgLeadMin": 610,
   "recent": [
+   {
+    "keyword": "경기도교육청 교원 개인정보 유출",
+    "hitKeyword": "한전 개인정보 유출",
+    "hitAt": "2026-11-22T21:00:00+09:00",
+    "leadMin": 1601
+   },
+   {
+    "keyword": "해저",
+    "hitKeyword": "해광호 선체 해저 발견",
+    "hitAt": "2026-11-22T21:00:00+09:00",
+    "leadMin": 203
+   },
+   {
+    "keyword": "한전 개인정보 유출",
+    "hitKeyword": "한전 개인정보 유출",
+    "hitAt": "2026-11-22T21:00:00+09:00",
+    "leadMin": 123
+   },
    {
     "keyword": "북미회담 무산",
     "hitKeyword": "트럼프 북미회담 무산",
@@ -283,24 +333,6 @@
     "hitKeyword": "철도노조 쟁의행위 예고",
     "hitAt": "2026-11-22T20:00:00+09:00",
     "leadMin": 32
-   },
-   {
-    "keyword": "수원FC K리그1 승격",
-    "hitKeyword": "수원FC 다이렉트 승격",
-    "hitAt": "2026-11-22T20:00:00+09:00",
-    "leadMin": 32
-   },
-   {
-    "keyword": "최소라 모델",
-    "hitKeyword": "최소라 이코베 발리 결혼식",
-    "hitAt": "2026-11-22T20:00:00+09:00",
-    "leadMin": 22
-   },
-   {
-    "keyword": "사진작가 이코베",
-    "hitKeyword": "최소라 이코베 발리 결혼식",
-    "hitAt": "2026-11-22T20:00:00+09:00",
-    "leadMin": 12
    }
   ]
  }
