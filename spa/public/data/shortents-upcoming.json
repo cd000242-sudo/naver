@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T19:50:29.349Z",
+ "builtAt": "2026-11-22T20:00:32.262Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -23,16 +23,16 @@
    "capped": false,
    "samples": [
     {
-     "title": "\"리비아 항구서 러시아 군함 피격...우크라 공격 추정\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-22T19:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436541?sid=104"
-    },
-    {
      "title": "리비아서 러시아 군함 피격…\"우크라이나 드론 추정\"",
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-22T19:29:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/055/0001404960?sid=104"
+    },
+    {
+     "title": "\"리비아 항구서 러시아 군함 피격...우크라 공격 추정\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-22T19:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436541?sid=104"
     },
     {
      "title": "“리비아 항구 정박 러시아 군함 피격…우크라 드론 공격 추정”",
@@ -48,7 +48,7 @@
     "google"
    ],
    "articles90": 5,
-   "recent20": 2,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-22T18:50:00.000Z",
    "exclusive": false,
@@ -80,23 +80,23 @@
     "nate"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 0,
    "press": 2,
    "firstArticleAt": "2026-11-22T19:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한덕수 판결 존중한다는 與… 절차 문제삼아 “조희대 탄핵”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-22T19:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764318?sid=100"
-    },
-    {
      "title": "與 “‘6·3·3’ 위반도 曺탄핵 사유에 포함”… ‘중대성 요건’ 여부...",
      "press": "donga.com",
      "publishedAt": "2026-11-22T19:33:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/020/0003764316?sid=100"
+    },
+    {
+     "title": "한덕수 판결 존중한다는 與… 절차 문제삼아 “조희대 탄핵”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-22T19:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764318?sid=100"
     },
     {
      "title": "與, 연내 '조희대 탄핵' 못 박았다… \"韓 판결에 인내심 한계\"",
