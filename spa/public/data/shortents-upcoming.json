@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T20:50:48.586Z",
+ "builtAt": "2026-11-22T21:00:51.718Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,9 +15,9 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 8,
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
    "firstArticleAt": "2026-11-22T19:33:00.000Z",
    "exclusive": false,
    "capped": false,
@@ -43,44 +43,12 @@
    ]
   },
   {
-   "keyword": "집",
-   "sources": [
-    "google"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-22T19:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "전현무 \"사석에서 만나는 사람 다섯 손가락 안\"...집 초대 깜짝 인맥은...",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-22T20:22:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005444703"
-    },
-    {
-     "title": "‘시골집’서 벌어진 모녀 사망, 유골 행방도 오리무중? (탐정들의 영업...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-22T20:13:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001151169"
-    },
-    {
-     "title": "‘시세 17억’ 집 보유 30대 1.8만명… 1년 새 70% 급증",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-22T20:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701977?sid=101"
-    }
-   ]
-  },
-  {
    "keyword": "화석연료 합의문 채택 실패",
    "sources": [
     "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 2,
+   "recent20": 1,
    "press": 5,
    "firstArticleAt": "2026-11-22T19:40:00.000Z",
    "exclusive": false,
@@ -112,13 +80,19 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 4,
+   "articles90": 5,
    "recent20": 1,
-   "press": 4,
+   "press": 5,
    "firstArticleAt": "2026-11-22T20:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[이번주 관전포인트]코스피 급락 뒤 PCE·한은 금리 결정이 이번 주 증시...",
+     "press": "newskr.kr",
+     "publishedAt": "2026-11-22T20:50:00.000Z",
+     "link": "http://www.newskr.kr/news/articleView.html?idxno=108197"
+    },
     {
      "title": "미국 증시 급락에 수급·금리 부담, 시험대 오른 코스피",
      "press": "sidae.com",
@@ -130,12 +104,6 @@
      "press": "seoul.co.kr",
      "publishedAt": "2026-11-22T20:16:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/081/0003701991?sid=110"
-    },
-    {
-     "title": "수출 1조달러인데 코스피 8% 급락…美 하이닉스 13% 폭락, 월요일 개장은...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-22T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177218?sid=101"
     }
    ]
   },
@@ -144,37 +112,102 @@
    "sources": [
     "daum"
    ],
-   "articles90": 3,
-   "recent20": 3,
-   "press": 2,
+   "articles90": 5,
+   "recent20": 5,
+   "press": 3,
    "firstArticleAt": "2026-11-22T20:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "이혜영, 폐암 투병 후 LA 초호화 대저택 샀다 “아픈 아내와 살아준 남...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-22T20:52:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190258"
+    },
+    {
+     "title": "이혜영 미우새 등장…이상민 언급도",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-22T20:52:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611230009"
+    },
+    {
      "title": "이혜영, 이하늬 부부 ♥오작교였다…\"남편의 후배와 결혼\" [엑's 이슈]",
      "press": "xportsnews.com",
      "publishedAt": "2026-11-22T20:48:00.000Z",
      "link": "https://m.entertain.naver.com/article/311/0002083067"
+    }
+   ]
+  },
+  {
+   "keyword": "2026년 11월 23일 운세",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T20:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[백운산 오늘의 운세] 2026년 11월 23일",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-22T21:00:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20260916001527093"
     },
     {
-     "title": "이혜영 “남편이 ‘미우새’ 왜 나가냐고…전남편 이상민 이제 안 나온...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-22T20:46:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190256"
+     "title": "[김동완의 오늘의 운세] 2026년 11월 23일",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-22T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701914?sid=103"
     },
     {
-     "title": "이혜영 “이하늬 내가 결혼시켜, 남편 후배 소개…딱 보니까 느낌 와”...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-22T20:45:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190255"
+     "title": "[오늘의 운세] 2026년 11월 23일(월) ♣띠별 운세♣",
+     "press": "srtimes.kr",
+     "publishedAt": "2026-11-22T20:00:00.000Z",
+     "link": "http://www.srtimes.kr/news/articleView.html?idxno=217961"
+    }
+   ]
+  },
+  {
+   "keyword": "대장동",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T20:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"업자와 결탁한 시장 행동 아냐\"…이 대통령 '대장동 의혹' 연일 반박",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-22T20:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002394566?sid=100"
+    },
+    {
+     "title": "“업자와 결탁했다면…” 李대통령, ‘대장동 의혹’ 또 반박",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-22T20:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001886780?sid=100"
+    },
+    {
+     "title": "李 “5500억 공익환수가 배임인가”… 대장동 연일 반박",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-22T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701924?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1121,
+  "flagged": 1123,
   "matched": 629,
   "avgLeadMin": 612,
   "recent": [
