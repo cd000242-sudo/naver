@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T23:41:48.146Z",
+ "builtAt": "2026-11-22T23:51:51.115Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,133 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 23,
  "candidates": [
-  {
-   "keyword": "이 대통령 지지율",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 29,
-   "recent20": 18,
-   "press": 27,
-   "firstArticleAt": "2026-11-22T22:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령 지지율 ‘2주 연속 상승’ 37.3%…국힘 42.5%·민주 35.6% [리얼...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-22T23:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004684958?sid=100"
-    },
-    {
-     "title": "李대통령 지지율 37.3%…2주 연속 상승",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-22T23:36:00.000Z",
-     "link": "https://www.ajunews.com/view/20261123081218616"
-    },
-    {
-     "title": "李대통령 지지율 37.3%…사실상 제자리걸음",
-     "press": "ekn.kr",
-     "publishedAt": "2026-11-22T23:36:00.000Z",
-     "link": "https://www.ekn.kr/web/view.php?key=20261123026303107"
-    }
-   ]
-  },
-  {
-   "keyword": "날씨",
-   "sources": [
-    "google"
-   ],
-   "articles90": 23,
-   "recent20": 3,
-   "press": 20,
-   "firstArticleAt": "2026-11-22T22:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[11월 23일 충청권 날씨] \"오후 비 소식, 내일 기온 뚝\"",
-     "press": "news.skbroadband.com",
-     "publishedAt": "2026-11-22T23:40:00.000Z",
-     "link": "https://news.skbroadband.com/news/articleView.html?idxno=243883"
-    },
-    {
-     "title": "[날씨] 오늘 전국 비에 강풍…강원 내륙 최대 8㎝ 많은 눈",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-22T23:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928849?sid=103"
-    },
-    {
-     "title": "[오늘날씨] 전국 곳곳 비·눈…강원 최대 8㎝ 적설",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-22T23:26:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086365"
-    }
-   ]
-  },
   {
    "keyword": "전국 비 눈 출근길",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 16,
-   "recent20": 2,
-   "press": 16,
+   "articles90": 18,
+   "recent20": 4,
+   "press": 18,
    "firstArticleAt": "2026-11-22T22:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "전국에 눈·비...출근길 '얼어붙는 비'·강원산지 '많은 눈' 주의",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-22T23:42:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=73446"
+    },
+    {
+     "title": "전국 비·눈에 출근길 '어는 비' 조심…강원북부 최대 8㎝",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-22T23:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005356882?sid=103"
+    },
+    {
      "title": "출근길 중부 최저 -10도·서울 -0.2도…오전부터 비, 최대 8㎝ 눈",
      "press": "news1.kr",
      "publishedAt": "2026-11-22T23:35:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009303962?sid=103"
-    },
-    {
-     "title": "전국에 비·눈…출근길 '어는비'·강원산지 '많은 눈' 주의",
-     "press": "cstimes.com",
-     "publishedAt": "2026-11-22T23:34:00.000Z",
-     "link": "https://www.cstimes.com/news/articleView.html?idxno=728902"
-    },
-    {
-     "title": "영하권 추위에 전국 비·눈…강원 최대 8㎝ 폭설 [날씨]",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-22T23:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394576?sid=102"
     }
    ]
   },
   {
-   "keyword": "김정은 패권 팽창",
+   "keyword": "李대통령 지지율 상승",
    "sources": [
     "daum"
    ],
-   "articles90": 15,
-   "recent20": 3,
-   "press": 15,
-   "firstArticleAt": "2026-11-22T22:12:00.000Z",
+   "articles90": 13,
+   "recent20": 5,
+   "press": 12,
+   "firstArticleAt": "2026-11-22T22:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김정은, 외국대사 신임장 접수…30년만의 의전변화로 위상강화",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-22T23:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004212523?sid=100"
+     "title": "[속보] 李대통령 지지율 37.3%로 2주 연속 상승…국힘 42.5%·민주 35.6% [...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-22T23:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/024/0000109823?sid=102"
     },
     {
-     "title": "북미회담 불발 뒤 김정은의 첫 외교 행보..30년만에 주북 대사들 신임장...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-22T23:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005607987?sid=100"
+     "title": "李 지지율 2주 연속 상승한 37.3%…국힘, 민주당에 오차 밖 우세 [리얼미...",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-22T23:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001206556?sid=100"
     },
     {
-     "title": "김정은 “패권·팽창 추구 안 해”",
+     "title": "李대통령 지지율 ‘2주 연속 상승’ 37.3%…국힘 42.5%·민주 35.6% [리얼...",
      "press": "sedaily.com",
-     "publishedAt": "2026-11-22T23:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004684953?sid=100"
+     "publishedAt": "2026-11-22T23:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004684958?sid=100"
     }
    ]
   },
@@ -143,13 +79,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 15,
-   "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-22T22:12:00.000Z",
+   "articles90": 14,
+   "recent20": 3,
+   "press": 12,
+   "firstArticleAt": "2026-11-22T22:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "트럼프, 대이란 '새해 공격' 시사…'핵 개발 차단' 의지",
+     "press": "youthdaily.co.kr",
+     "publishedAt": "2026-11-22T23:48:00.000Z",
+     "link": "https://www.youthdaily.co.kr/news/article.html?no=230181"
+    },
     {
      "title": "트럼프 \"이란은 늘 말만 해\"…새해 공격 경고",
      "press": "yonhapnewstv.co.kr",
@@ -161,12 +103,6 @@
      "press": "ziksir.com",
      "publishedAt": "2026-11-22T23:38:00.000Z",
      "link": "https://www.ziksir.com/news/articleView.html?idxno=154253"
-    },
-    {
-     "title": "트럼프 \"새해 이후 이란 추가 공격 가능\"…핵협상 지연에 강력 경고",
-     "press": "fntoday.co.kr",
-     "publishedAt": "2026-11-22T23:06:00.000Z",
-     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=399623"
     }
    ]
   },
@@ -176,7 +112,7 @@
     "nate"
    ],
    "articles90": 9,
-   "recent20": 4,
+   "recent20": 2,
    "press": 9,
    "firstArticleAt": "2026-11-22T22:25:00.000Z",
    "exclusive": false,
@@ -203,14 +139,78 @@
    ]
   },
   {
+   "keyword": "김정은, 10개국 신임 대사 접수",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 21,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-22T22:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김정은 \"동아시아 안보환경, 힘과 능력 절실히 요구\"",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-22T23:46:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3759804"
+    },
+    {
+     "title": "김정은, 외국대사 신임장 접수…30년만의 의전변화로 위상강화",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-22T23:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004212523?sid=100"
+    },
+    {
+     "title": "김정은, 러시아 등 10개국 대사 신임장 받아…\"北, 패권·팽창 추구 안 ...",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-22T23:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928848?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "이용철 후보자 인사청문회",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T23:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "인사청문회 하루 앞둔 이용철 법무부 장관 후보자",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-22T23:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016457160?sid=102"
+    },
+    {
+     "title": "출근하는 이용철 법무부장관 후보자",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-22T23:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009303923?sid=102"
+    },
+    {
+     "title": "인사청문회 하루 앞둔 이용철 법무장관 후보자",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-22T23:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016457154?sid=102"
+    }
+   ]
+  },
+  {
    "keyword": "쟁의행위",
    "sources": [
     "google"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T22:13:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-22T22:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -233,44 +233,12 @@
      "link": "https://n.news.naver.com/mnews/article/056/0012298980?sid=101"
     }
    ]
-  },
-  {
-   "keyword": "이용철 후보자 인사청문회",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T23:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "인사청문회 하루 앞둔 이용철 법무부 장관 후보자",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-22T23:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016457160?sid=102"
-    },
-    {
-     "title": "인사청문회 하루 앞둔 이용철 법무장관 후보자",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-22T23:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016457154?sid=102"
-    },
-    {
-     "title": "출근하는 이용철 후보자",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T23:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009303918?sid=102"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1125,
-  "matched": 628,
+  "flagged": 1123,
+  "matched": 625,
   "avgLeadMin": 604,
   "recent": [
    {
