@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T02:34:45.174Z",
+ "builtAt": "2026-11-22T02:44:48.912Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,101 +8,197 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 25,
  "candidates": [
   {
-   "keyword": "조희대 탄핵 추진",
+   "keyword": "조희대 대법원장 탄핵",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 64,
-   "recent20": 21,
-   "press": 34,
-   "firstArticleAt": "2026-11-22T01:58:00.000Z",
+   "articles90": 67,
+   "recent20": 22,
+   "press": 38,
+   "firstArticleAt": "2026-11-22T02:02:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "[막전막후] 조희대 탄핵과 이재명 탄핵론",
-     "press": "pennmike.com",
-     "publishedAt": "2026-11-22T02:34:00.000Z",
-     "link": "https://www.pennmike.com/news/articleView.html?idxno=132447"
+     "title": "발언하는 양부남 민주당 조희대 대법원장 탄핵소추 추진단장",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-22T02:42:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3759373"
     },
     {
-     "title": "민주 내부서 ‘조희대 탄핵’ 반대 목소리…“판결 이유로 탄핵 어렵고...",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-22T02:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003060410?sid=100"
+     "title": "오세훈 \"대법원장 탄핵? 李대통령 재판 없애려는 것\"",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-22T02:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005356672?sid=100"
     },
     {
-     "title": "국힘 “조희대 지키자”는데 극우 “당해도 싸다” 왜?",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-22T02:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833334?sid=100"
+     "title": "민주당, 조희대 탄핵 연내 처리 추진…한덕수 판결 '절차상 하자' 검토",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-22T02:40:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=730386"
     }
    ]
   },
   {
-   "keyword": "최태원, 한일 AI 인재",
+   "keyword": "해광호 수색 부이 발견",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 18,
-   "recent20": 2,
+   "articles90": 19,
+   "recent20": 0,
    "press": 18,
-   "firstArticleAt": "2026-11-22T01:06:00.000Z",
+   "firstArticleAt": "2026-11-22T01:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "태안해경, 해광호 수중수색 중 선박 추정 물체 발견",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-22T02:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193156?sid=102"
+    },
+    {
+     "title": "‘실종된 해광호’ 수색 닷새째…수심 52ｍ 해저서 선박 추정체 발견",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-22T02:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004010997?sid=102"
+    },
+    {
+     "title": "해경, '해광호' 수색 중 해저서 '선박 추정 물체' 발견",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-22T02:13:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261122000041"
+    }
+   ]
+  },
+  {
+   "keyword": "최태원 한일 AI 인재 육성",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 15,
+   "recent20": 2,
+   "press": 15,
+   "firstArticleAt": "2026-11-22T01:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "최태원 “한일 기업·대학 손잡고 AI 인재 공동 육성하자”",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-22T02:40:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321327&inflow=N"
+    },
+    {
+     "title": "최태원 \"한일 기업·대학, AI 인재 함께 키우자\"",
+     "press": "mbnmoney.mbn.co.kr",
+     "publishedAt": "2026-11-22T02:36:00.000Z",
+     "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005963847"
+    },
     {
      "title": "최태원 \"한일 기업·대학 공동으로 AI 인재 육성하자…기회 열릴 것\"",
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-22T02:23:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/079/0004212420?sid=101"
-    },
-    {
-     "title": "최태원 \"AI 네이티브 대학, 설계부터 새로\"…한일 공동 인재 육성 제안",
-     "press": "goodkyung.com",
-     "publishedAt": "2026-11-22T02:16:00.000Z",
-     "link": "https://www.goodkyung.com/news/articleView.html?idxno=293723"
-    },
-    {
-     "title": "최태원, 한일 AI 인재 양성 협력 제안…기업이 교육부터 채용까지 참여",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-22T02:14:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=848023"
     }
    ]
   },
   {
-   "keyword": "수험",
+   "keyword": "수능 수학 1등급 미적분 선택",
    "sources": [
-    "google"
+    "signal.bz"
    ],
-   "articles90": 22,
-   "recent20": 4,
-   "press": 17,
-   "firstArticleAt": "2026-11-22T01:10:00.000Z",
+   "articles90": 14,
+   "recent20": 1,
+   "press": 14,
+   "firstArticleAt": "2026-11-22T01:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "철도노조 23일 준법투쟁…논술·면접 수험생 차질 우려",
-     "press": "incheonilbo.com",
-     "publishedAt": "2026-11-22T02:26:00.000Z",
-     "link": "https://www.incheonilbo.com/news/articleView.html?idxno=1337426"
+     "title": "수능 수학 1등급 10명 중 8.6명이 미적·기하 선택…정시 ‘문과 침공’...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-22T02:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005767126?sid=102"
     },
     {
-     "title": "칠곡교육지원청, 2027학년도 대학수학능력시험 시험장 찾아 수험생 격려",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-22T02:24:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2021704"
+     "title": "2027 정시도 '이과 문과침공' 우려… 수학 1등급 85.7%가 미적분·기하",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-22T02:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005607738?sid=102"
     },
     {
-     "title": "무신사, 롯데리아와 수험생 응원 '버거 트럭' 운영",
-     "press": "zdnet.co.kr",
-     "publishedAt": "2026-11-22T02:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/092/0002446341?sid=103"
+     "title": "\"수능 수학 1등급 85.7% '미적분·기하' 선택…확률과 통계 14.3% 그쳐\"",
+     "press": "kado.net",
+     "publishedAt": "2026-11-22T02:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000212572?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "류재철 CEO 제조 혁신 성장",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 13,
+   "recent20": 2,
+   "press": 13,
+   "firstArticleAt": "2026-11-22T01:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "류재철 LG전자 CEO \"협력사와 제조 혁신으로 성장 기회 잡을 것\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-22T02:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004212424?sid=101"
+    },
+    {
+     "title": "불량률 90%↓·재료비 36%↓...류재철 “협력사 경쟁력이 곧 LG 경쟁력”",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-22T02:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003488209?sid=101"
+    },
+    {
+     "title": "류재철 “협력사와 제조 혁신…미래 성장 기회 만들자”",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-22T02:22:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321321&inflow=N"
+    }
+   ]
+  },
+  {
+   "keyword": "LG유플러스 AI 사업 강화",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 12,
+   "recent20": 3,
+   "press": 12,
+   "firstArticleAt": "2026-11-22T01:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "LG유플러스, 2027년 조직개편…\"AI 사업 성과 창출 가속화\"",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-22T02:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005845994?sid=105"
+    },
+    {
+     "title": "LG유플러스, 2027년 조직개편…AI 인프라·플랫폼 중심 B2B 재편",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-22T02:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/468/0001282578?sid=101"
+    },
+    {
+     "title": "[LG 사단] LGU+, AI 인프라·플랫폼 중심 조직개편…'B2B 사업' 강화",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-22T02:30:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086191"
     }
    ]
   },
@@ -111,10 +207,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 16,
-   "recent20": 2,
-   "press": 16,
-   "firstArticleAt": "2026-11-22T01:05:00.000Z",
+   "articles90": 11,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-22T01:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -139,162 +235,66 @@
    ]
   },
   {
-   "keyword": "수능 수학 1등급 미적분 선택",
+   "keyword": "lpga",
+   "sources": [
+    "google"
+   ],
+   "articles90": 9,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-22T01:20:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "LPGA 경기 중인 한국 선수들 현재 순항 중",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-22T02:40:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/088/0001041561"
+    },
+    {
+     "title": "'사흘째 선두' 김아림, LPGA 최종전 3R 1타 차 리드...우승 상금 53억 보...",
+     "press": "maniareport.com",
+     "publishedAt": "2026-11-22T02:19:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/425/0000215267"
+    },
+    {
+     "title": "김아림, LPGA 최종전 3R 단독 선두…우승 상금 400만달러 눈앞",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-22T02:19:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085276"
+    }
+   ]
+  },
+  {
+   "keyword": "젤렌스키 3자 종전협상 동의",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-22T01:31:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "2027 정시도 '이과 문과침공' 우려… 수학 1등급 85.7%가 미적분·기하",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-22T02:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005607738?sid=102"
-    },
-    {
-     "title": "\"수능 수학 1등급 85.7% '미적분·기하' 선택…확률과 통계 14.3% 그쳐\"",
-     "press": "kado.net",
-     "publishedAt": "2026-11-22T02:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000212572?sid=102"
-    },
-    {
-     "title": "수능 수학 1등급 85.7% '미적분·기하'…이과생 교차지원 계속되나",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T02:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014337845?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "LG유플러스 AI 사업 강화",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 3,
-   "press": 11,
-   "firstArticleAt": "2026-11-22T01:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "LG유플러스, 2027년 조직개편…AI 인프라·플랫폼 중심 B2B 재편",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-22T02:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/468/0001282578?sid=101"
-    },
-    {
-     "title": "[LG 사단] LGU+, AI 인프라·플랫폼 중심 조직개편…'B2B 사업' 강화",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-22T02:30:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086191"
-    },
-    {
-     "title": "LG유플러스, 2027년 조직개편…AI 사업조직 재편·연구개발 통합",
-     "press": "smartbizn.com",
-     "publishedAt": "2026-11-22T02:16:00.000Z",
-     "link": "https://www.smartbizn.com/news/articleView.html?idxno=160189"
-    }
-   ]
-  },
-  {
-   "keyword": "흑백요리사 트리플스타 발표",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
+   "articles90": 7,
    "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T01:06:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-22T01:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'흑백요리사' 트리플스타 강승원, 재혼 발표 \"안식처 돼준 고마운 사람...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-22T02:31:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409149"
+     "title": "젤렌스키 “성탄절 전 3자 종전협상 개최 동의”",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-22T02:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001206461?sid=104"
     },
     {
-     "title": "'흑백요리사' 트리플스타, 각종 논란 딛고 재혼 발표",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-22T02:29:00.000Z",
-     "link": "https://m.entertain.naver.com/article/629/0000554315"
+     "title": "젤렌스키 \"미국, 성탄절 전 3자 종전 협상 제안…G20 계기 가능성\"",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-22T02:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979302?sid=104"
     },
     {
-     "title": "'흑백요리사' 강승원, 재혼 발표 \"안식처가 되어준 사람\"",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-22T01:33:00.000Z",
-     "link": "https://m.entertain.naver.com/article/437/0000521860"
-    }
-   ]
-  },
-  {
-   "keyword": "트럼프 얄타회담 사진",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T01:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "트럼프, 얄타회담과 미중러 정상회담 사진 나란히 게시",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-22T02:20:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4120067"
-    },
-    {
-     "title": "트럼프, 얄타회담과 미중러 회담 사진 나란히 게시",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-22T02:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652586?sid=104"
-    },
-    {
-     "title": "'얄타회담'과 '선전회담' 사진 나란히 올린 트럼프",
-     "press": "tongilnews.com",
-     "publishedAt": "2026-11-22T01:46:00.000Z",
-     "link": "http://www.tongilnews.com/news/articleView.html?idxno=218259"
-    }
-   ]
-  },
-  {
-   "keyword": "추성훈 은퇴전",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T01:09:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "추성훈, 마지막 MMA 경기서 크리스 리벤에 판정패…48년 격투 인생 마침...",
-     "press": "dailysportshankook.co.kr",
-     "publishedAt": "2026-11-22T01:48:00.000Z",
-     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435802"
-    },
-    {
-     "title": "추성훈, '48년 격투 인생' 마침표' 찍고 다시 시작…\"인생은 안 끝나\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T01:27:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014337790"
-    },
-    {
-     "title": "추성훈, 태극기·일장기 유도복 입고 치른 은퇴전",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-22T01:18:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3759325"
+     "title": "트럼프 소원 이뤄지나…젤렌스키 “성탄절 전 종전협상 개최 동의” [밀...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-22T02:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701814?sid=104"
     }
    ]
   },
@@ -303,94 +303,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T01:14:00.000Z",
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-22T01:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "아이브, '2026 마마 어워즈' 2관왕… \"뜻깊은 상 받아 정말 감사하고 영...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-22T02:39:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000492222"
+    },
+    {
+     "title": "아이브, 2026 마마 어워즈 2관왕…'여자 그룹상'·'베스트 송 톱 10' 수상",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-22T02:36:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282750"
+    },
     {
      "title": "빅뱅, 데뷔 20년에도 ‘마마’ 휩쓸었다… 4관왕→신곡 ‘기립’ 최초 ...",
      "press": "sportsworldi.com",
      "publishedAt": "2026-11-22T02:04:00.000Z",
      "link": "https://m.entertain.naver.com/article/396/0000761579"
-    },
-    {
-     "title": "엔하이픈, 영화 같은 무대 그냥 나온 게 아니었네…'마마' 안무 연습 영...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-22T01:48:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000785568"
-    },
-    {
-     "title": "이대휘, '마마 어워즈' 레드카펫 MC 합격점",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-22T01:48:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611220045"
-    }
-   ]
-  },
-  {
-   "keyword": "김유정 박진영 빗속 입맞춤",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T01:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'100일의 거짓말' 김유정♥박진영, 빗속 입맞춤…시청률 12.5% 돌파",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-22T02:10:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=885864"
-    },
-    {
-     "title": "'100일의 거짓말' 시청률 폭발…김유정·박진영 입맞춤에 최고 12.5%",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-22T01:56:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282740"
-    },
-    {
-     "title": "김유정♥박진영, 빗속 애틋 첫 키스→진선규 무너뜨릴 공조 예고(‘백일...",
-     "press": "heraldmuse.com",
-     "publishedAt": "2026-11-22T01:40:00.000Z",
-     "link": "https://m.entertain.naver.com/article/112/0003813989"
-    }
-   ]
-  },
-  {
-   "keyword": "비, 아침마다 김태희 감동",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T01:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "비, 김태희와 결혼 10년 차…“아침마다 감동 있어” (냉부해)",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-22T01:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001306082"
-    },
-    {
-     "title": "성시경 부러워서 어쩌나…비, ♥김태희에 \"아침마다 감동…두딸 운동회...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-22T01:25:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000640272"
-    },
-    {
-     "title": "'냉부해' 비♥김태희의 냉장고를 부탁해",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-22T01:06:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611220039"
     }
    ]
   },
@@ -429,7 +365,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 949,
+  "flagged": 954,
   "matched": 552,
   "avgLeadMin": 615,
   "recent": [
