@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T09:07:08.938Z",
+ "builtAt": "2026-11-22T09:17:12.493Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 41,
-   "recent20": 3,
-   "press": 33,
-   "firstArticleAt": "2026-11-22T07:45:00.000Z",
-   "exclusive": false,
+   "articles90": 43,
+   "recent20": 6,
+   "press": 35,
+   "firstArticleAt": "2026-11-22T07:48:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "與 \"연내 조희대 탄핵안 국회 의결\"… 예산안 일정과 조율",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-22T09:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005607839?sid=100"
+     "title": "與, 연내 조희대 탄핵 의결 공식화… \"한덕수 판결 내용 아닌 절차가 탄...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-22T09:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000967077?sid=100"
     },
     {
-     "title": "민주당, 조희대 탄핵안 연내 처리 방침...야권과 갈등 더욱 거세져",
-     "press": "inews365.com",
-     "publishedAt": "2026-11-22T09:02:00.000Z",
-     "link": "https://www.inews365.com/news/article.html?no=944697"
+     "title": "민주당, 조희대 탄핵 12월 처리 추진…야권 \"사유 끼워 맞추기\"",
+     "press": "srtimes.kr",
+     "publishedAt": "2026-11-22T09:12:00.000Z",
+     "link": "http://www.srtimes.kr/news/articleView.html?idxno=218298"
     },
     {
-     "title": "\"10%p 올린다더니 뒷걸음\"…취임 100일 김민석, '조희대 탄핵'으로 돌파...",
-     "press": "idaegu.co.kr",
-     "publishedAt": "2026-11-22T08:54:00.000Z",
-     "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=566066"
+     "title": "이준석, '조희대 탄핵' 추진에…\"근조 민주당, 한방에 무너질 것\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T09:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014338337?sid=100"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 32,
-   "recent20": 7,
+   "articles90": 31,
+   "recent20": 6,
    "press": 30,
-   "firstArticleAt": "2026-11-22T07:38:00.000Z",
+   "firstArticleAt": "2026-11-22T07:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "與, 최교진 사퇴에 \"전문성·책임감 갖춘 인사 신속 선임되길\"",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-22T09:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002467021?sid=100"
+     "title": "지방교육재정교부금 개편 대응 긴급행동 \"장관 사의로 끝날 일 아니다\"...",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-22T09:12:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=243841"
     },
     {
-     "title": "기술개발, 감독 강화부터 시험체계 개편까지…수능 ‘AI 커닝’이 남긴...",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-22T09:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000133243?sid=102"
+     "title": "[사설]‘수능 혼란 책임’ 교육부 장관 사퇴, 시험체계 전면 개편 서둘...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-22T09:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484244?sid=110"
     },
     {
-     "title": "최교진 교육부 장관, 수능 대책 혼선에 사의…이 대통령 수락",
-     "press": "kyongbuk.co.kr",
-     "publishedAt": "2026-11-22T09:00:00.000Z",
-     "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4091677"
+     "title": "'수능 혼란' 최교진 사퇴…민주 \"교육 변화\"·국힘 \"대통령 책임\"",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-22T09:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000554366?sid=100"
     }
    ]
   },
@@ -79,10 +79,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 22,
+   "articles90": 17,
    "recent20": 3,
-   "press": 21,
-   "firstArticleAt": "2026-11-22T07:38:00.000Z",
+   "press": 16,
+   "firstArticleAt": "2026-11-22T07:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,14 +107,78 @@
    ]
   },
   {
+   "keyword": "진도 어선 전복",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 14,
+   "recent20": 1,
+   "press": 14,
+   "firstArticleAt": "2026-11-22T07:49:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "진도 해상서 24t급 어선 전복…승선원 8명 전원 구조",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-22T09:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000121944?sid=102"
+    },
+    {
+     "title": "진도 병풍도 해상서 24톤급 어선 전복…선원 전원 구조",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-22T08:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000652657?sid=102"
+    },
+    {
+     "title": "전남광주 해상서 24톤 어선 전복‥선원 전원 구조",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-22T08:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537234?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "정부",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 9,
+   "recent20": 9,
+   "press": 9,
+   "firstArticleAt": "2026-11-22T08:59:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "범정부 차원 새만금공항 대책을 마련하라",
+     "press": "domin.co.kr",
+     "publishedAt": "2026-11-22T09:14:00.000Z",
+     "link": "http://www.domin.co.kr/news/articleView.html?idxno=1576280"
+    },
+    {
+     "title": "한국마사회, 말문화 앞세워 미래교육 혁신 알린다…정부혁신박람회 참...",
+     "press": "megaeconomy.co.kr",
+     "publishedAt": "2026-11-22T09:14:00.000Z",
+     "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065604209269732"
+    },
+    {
+     "title": "[사설] 정년연장 정부안 예고… 속도전보다 노사정 합의 우선해야",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-22T09:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003060483?sid=110"
+    }
+   ]
+  },
+  {
    "keyword": "18득점 시즌 현대건설",
    "sources": [
     "nate"
    ],
-   "articles90": 10,
+   "articles90": 8,
    "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-22T07:38:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-22T07:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -139,15 +203,47 @@
    ]
   },
   {
+   "keyword": "김정은",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-22T07:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프 애태우는 김정은…APEC 내내 '내치' 집중",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-22T09:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005356777?sid=100"
+    },
+    {
+     "title": "트럼프, 김정은에 만나자 제안했지만 무산",
+     "press": "busan.com",
+     "publishedAt": "2026-11-22T09:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001408386?sid=104"
+    },
+    {
+     "title": "\"트럼프·김정은 만남, 北 조건 탓에 무산\"",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-22T09:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005607841?sid=104"
+    }
+   ]
+  },
+  {
    "keyword": "고경표 후보 사과",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 9,
+   "articles90": 6,
    "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-22T07:45:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-22T07:50:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -172,34 +268,34 @@
    ]
   },
   {
-   "keyword": "정부",
+   "keyword": "코스닥",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 10,
-   "recent20": 7,
-   "press": 8,
-   "firstArticleAt": "2026-11-22T08:46:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T07:50:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "2029년부터 정년 한 살씩 늘리나…65세 정년연장, 정부안 발표 초읽기",
+     "title": "50대 투자자 \"코스닥 종목 평가금액 55억…대주주 양도세 피하고 싶어\"[...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-22T09:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005607853?sid=101"
+    },
+    {
+     "title": "코스닥 시총 상위 10등에 2곳…이젠 '로봇' 시대",
      "press": "mk.co.kr",
-     "publishedAt": "2026-11-22T09:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005767323?sid=101"
+     "publishedAt": "2026-11-22T08:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005767276?sid=101"
     },
     {
-     "title": "국민의힘 포항북당협, 현 정부 사법 현안 및 정책 제도 규탄…화합·조...",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-22T09:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002467022?sid=102"
-    },
-    {
-     "title": "[전남광주, 시민주권정부 전망과 과제]① 기본계획 로드맵",
-     "press": "namdonews.com",
-     "publishedAt": "2026-11-22T09:02:00.000Z",
-     "link": "https://www.namdonews.com/news/articleView.html?idxno=930058"
+     "title": "아델, 코스닥 상장 철회…수요예측서 기관 눈높이 못 맞췄다",
+     "press": "dnews.co.kr",
+     "publishedAt": "2026-11-22T08:20:00.000Z",
+     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611220934247880039"
     }
    ]
   },
@@ -208,10 +304,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T07:38:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-22T08:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -236,77 +332,12 @@
    ]
   },
   {
-   "keyword": "김정은",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T07:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"트럼프, 김정은에 거듭 '대화' 타진…北이 조건 걸어 회담 무산\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-22T08:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005444645?sid=104"
-    },
-    {
-     "title": "\"트럼프, 김정은에 회담 제안했지만 北 '조건' 내걸어 무산\"",
-     "press": "goodnews1.com",
-     "publishedAt": "2026-11-22T08:28:00.000Z",
-     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466498"
-    },
-    {
-     "title": "\"트럼프, 김정은 만나려 비핵화 없는 종전선언 검토\" 파장",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-22T07:50:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/22/2026112250086.html"
-    }
-   ]
-  },
-  {
-   "keyword": "노동자",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T07:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "간병노동자, 병원·소개소 지시받는데···'산재보험 적용'은?",
-     "press": "laborplus.co.kr",
-     "publishedAt": "2026-11-22T08:36:00.000Z",
-     "link": "https://www.laborplus.co.kr/news/articleView.html?idxno=41864"
-    },
-    {
-     "title": "인천 계양구, 이동노동자 쉼터 개소... 편안한 휴식공간 마련",
-     "press": "cnbnews.com",
-     "publishedAt": "2026-11-22T08:18:00.000Z",
-     "link": "https://www.cnbnews.com/news/articleView.html?idxno=1024751"
-    },
-    {
-     "title": "고용허가제 22년…이주노동자는 왜 위험한 일터를 떠나지 못하나",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-22T08:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833382?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "검은 월요일",
    "sources": [
     "google"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-22T08:14:00.000Z",
    "exclusive": false,
@@ -333,41 +364,42 @@
    ]
   },
   {
-   "keyword": "코스닥",
+   "keyword": "노동자",
    "sources": [
+    "signal.bz",
     "google"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-22T07:50:00.000Z",
+   "firstArticleAt": "2026-11-22T08:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "코스닥 시총 상위 10등에 2곳…이젠 '로봇' 시대",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-22T08:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005767276?sid=101"
+     "title": "간병노동자, 병원·소개소 지시받는데···'산재보험 적용'은?",
+     "press": "laborplus.co.kr",
+     "publishedAt": "2026-11-22T08:36:00.000Z",
+     "link": "https://www.laborplus.co.kr/news/articleView.html?idxno=41864"
     },
     {
-     "title": "아델, 코스닥 상장 철회…수요예측서 기관 눈높이 못 맞췄다",
-     "press": "dnews.co.kr",
-     "publishedAt": "2026-11-22T08:20:00.000Z",
-     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611220934247880039"
+     "title": "고용허가제 22년…이주노동자는 왜 위험한 일터를 떠나지 못하나",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-22T08:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002833382?sid=102"
     },
     {
-     "title": "엠비디 코스닥 데뷔…수요예측 흥행 실패한 아델은 공모 철회",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-22T07:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005444633?sid=101"
+     "title": "인천 계양구, 이동노동자 쉼터 개소... 편안한 휴식공간 마련",
+     "press": "cnbnews.com",
+     "publishedAt": "2026-11-22T08:18:00.000Z",
+     "link": "https://www.cnbnews.com/news/articleView.html?idxno=1024751"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1039,
+  "flagged": 1040,
   "matched": 599,
   "avgLeadMin": 626,
   "recent": [
