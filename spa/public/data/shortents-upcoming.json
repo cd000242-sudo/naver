@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T23:31:44.697Z",
+ "builtAt": "2026-11-22T23:41:48.146Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,58 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 24,
  "candidates": [
+  {
+   "keyword": "이 대통령 지지율",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 29,
+   "recent20": 18,
+   "press": 27,
+   "firstArticleAt": "2026-11-22T22:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李대통령 지지율 ‘2주 연속 상승’ 37.3%…국힘 42.5%·민주 35.6% [리얼...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-22T23:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004684958?sid=100"
+    },
+    {
+     "title": "李대통령 지지율 37.3%…2주 연속 상승",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-22T23:36:00.000Z",
+     "link": "https://www.ajunews.com/view/20261123081218616"
+    },
+    {
+     "title": "李대통령 지지율 37.3%…사실상 제자리걸음",
+     "press": "ekn.kr",
+     "publishedAt": "2026-11-22T23:36:00.000Z",
+     "link": "https://www.ekn.kr/web/view.php?key=20261123026303107"
+    }
+   ]
+  },
   {
    "keyword": "날씨",
    "sources": [
     "google"
    ],
-   "articles90": 26,
-   "recent20": 6,
-   "press": 22,
-   "firstArticleAt": "2026-11-22T22:04:00.000Z",
+   "articles90": 23,
+   "recent20": 3,
+   "press": 20,
+   "firstArticleAt": "2026-11-22T22:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[11월 23일 충청권 날씨] \"오후 비 소식, 내일 기온 뚝\"",
+     "press": "news.skbroadband.com",
+     "publishedAt": "2026-11-22T23:40:00.000Z",
+     "link": "https://news.skbroadband.com/news/articleView.html?idxno=243883"
+    },
     {
      "title": "[날씨] 오늘 전국 비에 강풍…강원 내륙 최대 8㎝ 많은 눈",
      "press": "yonhapnewstv.co.kr",
@@ -33,12 +71,6 @@
      "press": "shinailbo.co.kr",
      "publishedAt": "2026-11-22T23:26:00.000Z",
      "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086365"
-    },
-    {
-     "title": "영하권 추위에 전국 비·눈…강원 최대 8㎝ 폭설 [날씨]",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-22T23:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394576?sid=102"
     }
    ]
   },
@@ -47,355 +79,259 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 17,
-   "recent20": 4,
+   "articles90": 16,
+   "recent20": 2,
    "press": 16,
-   "firstArticleAt": "2026-11-22T22:04:00.000Z",
+   "firstArticleAt": "2026-11-22T22:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "출근길 중부 최저 -10도·서울 -0.2도…오전부터 비, 최대 8㎝ 눈",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-22T23:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009303962?sid=103"
+    },
+    {
      "title": "전국에 비·눈…출근길 '어는비'·강원산지 '많은 눈' 주의",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-22T23:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016457159?sid=102"
+     "press": "cstimes.com",
+     "publishedAt": "2026-11-22T23:34:00.000Z",
+     "link": "https://www.cstimes.com/news/articleView.html?idxno=728902"
     },
     {
      "title": "영하권 추위에 전국 비·눈…강원 최대 8㎝ 폭설 [날씨]",
      "press": "joseilbo.com",
      "publishedAt": "2026-11-22T23:19:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/123/0002394576?sid=102"
-    },
-    {
-     "title": "전국 오전부터 비·눈…강원 최대 8㎝",
-     "press": "issuenbiz.com",
-     "publishedAt": "2026-11-22T23:14:00.000Z",
-     "link": "http://www.issuenbiz.com/news/articleView.html?idxno=81866"
     }
    ]
   },
   {
-   "keyword": "김아림, 최종전 공동 7위 티띠꾼",
+   "keyword": "김정은 패권 팽창",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 28,
-   "recent20": 14,
-   "press": 15,
-   "firstArticleAt": "2026-11-22T22:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "2026 CME 챔피언십 우승자 지노 티띠꾼 [포토]",
-     "press": "news.monsterzym.com",
-     "publishedAt": "2026-11-22T23:24:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/409/0000023095"
-    },
-    {
-     "title": "CME 우승자 지노 티띠꾼 '트로피 키스는 언제나 달콤해' [포토]",
-     "press": "news.monsterzym.com",
-     "publishedAt": "2026-11-22T23:23:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/409/0000023092"
-    },
-    {
-     "title": "CME 우승자 지노 티띠꾼 '트로피 잘 나오나요' [포토]",
-     "press": "news.monsterzym.com",
-     "publishedAt": "2026-11-22T23:23:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/409/0000023094"
-    }
-   ]
-  },
-  {
-   "keyword": "이강인 헤타페 3-0 승리",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 17,
+   "articles90": 15,
    "recent20": 3,
    "press": 15,
-   "firstArticleAt": "2026-11-22T22:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'이강인 45분' AT 마드리드, 헤타페 3-0 완파하고 2연패 탈출(종합)",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T23:29:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/421/0009303953"
-    },
-    {
-     "title": "미쳤다! 단 45분 뛴 이강인, 킬패스로 기회창출 2회+퇴장-PK 유도! 西언론...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-22T23:22:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/076/0004468753"
-    },
-    {
-     "title": "\"수비만 하는 축구로 어떻게 345승을 하겠어?\"… 이강인 스승 시메오네...",
-     "press": "besteleven.com",
-     "publishedAt": "2026-11-22T23:14:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/343/0000149202"
-    }
-   ]
-  },
-  {
-   "keyword": "트럼프 이란 새해 공격 경고",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 13,
-   "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-22T22:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "트럼프 \"새해 이후 이란 추가 공격 가능\"…핵협상 지연에 강력 경고",
-     "press": "fntoday.co.kr",
-     "publishedAt": "2026-11-22T23:06:00.000Z",
-     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=399623"
-    },
-    {
-     "title": "트럼프 \"이란, 말만 되풀이\" … 합의 결렬 땐 새해 추가 공격 경고",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-22T23:02:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/23/2026112350019.html"
-    },
-    {
-     "title": "트럼프 “이란 항상 말만 해, 전문 탭 댄서들”···합의 불발 시 새해...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-22T23:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484345?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "한국 남녀 임금 격차",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-22T22:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "남성 100만원이면 여성은 72만원…韓 임금격차 OECD 1위",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-22T23:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000161960?sid=101"
-    },
-    {
-     "title": "한국 남녀 임금 격차 27.8%…여전히 OECD 최대",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-22T23:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979399?sid=102"
-    },
-    {
-     "title": "2000년 이후 줄곧 1위…한국이 OECD서 벗어나지 못한 '불명예 기록'",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-22T22:50:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1176817"
-    }
-   ]
-  },
-  {
-   "keyword": "김정은 대사 신임장 접수",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 23,
-   "recent20": 0,
-   "press": 10,
    "firstArticleAt": "2026-11-22T22:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김정은, 러시아 등 10개국 대사 신임장 받아…\"北, 패권·팽창 추구 안 ...",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-22T23:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928848?sid=100"
+     "title": "김정은, 외국대사 신임장 접수…30년만의 의전변화로 위상강화",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-22T23:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004212523?sid=100"
     },
     {
-     "title": "김정은, 10개국 신임 대사들과 기념사진 '한 컷'",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T23:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009303881?sid=100"
+     "title": "북미회담 불발 뒤 김정은의 첫 외교 행보..30년만에 주북 대사들 신임장...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-22T23:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005607987?sid=100"
     },
     {
-     "title": "김정은, 10개국 신임 대사들 앞에서 연설",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T23:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009303882?sid=100"
+     "title": "김정은 “패권·팽창 추구 안 해”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-22T23:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004684953?sid=100"
     }
    ]
   },
   {
-   "keyword": "아마존 데카르트 인수 임박",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-22T22:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "FT “아마존, 이스라엘계 AI 스타트업 10조원 인수 임박”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-22T23:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012298967?sid=104"
-    },
-    {
-     "title": "아마존, 10조원 베팅으로 '포스트 엔비디아' 승부수…이스라엘 AI칩 스타...",
-     "press": "newsroad.co.kr",
-     "publishedAt": "2026-11-22T22:58:00.000Z",
-     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68207"
-    },
-    {
-     "title": "아마존, AI 스타트업 '데카르트' 10조원에 인수 임박",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-22T22:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413884?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "주현영 치아 시술",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T22:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"같은 사람 맞나\" 180도 바뀐 인상...주현영이 '이곳' 시술의 효과",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-22T23:12:00.000Z",
-     "link": "https://www.insight.co.kr/news/583102"
-    },
-    {
-     "title": "주현영, 덧니 없애니 못 알아볼 뻔…‘런닝맨’서 포착",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-22T23:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001306182"
-    },
-    {
-     "title": "주현영, 치아 시술 효과 확실하네…가지런해진 치열로 환한 미소 ('런닝...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-22T23:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000785646"
-    }
-   ]
-  },
-  {
-   "keyword": "포체티노도 데뷔전부터 참패",
+   "keyword": "트럼프 이란 새해 공격",
    "sources": [
     "nate"
    ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T22:17:00.000Z",
+   "articles90": 15,
+   "recent20": 2,
+   "press": 13,
+   "firstArticleAt": "2026-11-22T22:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘악몽의 데뷔전’ 포체티노, 리버풀에 0-4 참패···8분 만에 요로 퇴...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-22T23:23:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/144/0001151203"
+     "title": "트럼프 \"이란은 늘 말만 해\"…새해 공격 경고",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-22T23:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928854?sid=104"
     },
     {
-     "title": "'악몽의' 포체티노 데뷔전, 리버풀에 0-4 참패 … 포체티노는 '심판 탓'",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-22T22:52:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/23/2026112350017.html"
+     "title": "[이슈 직썰] 트럼프 \"연말까지 합의 못 하면 새해 이란 재공격\"",
+     "press": "ziksir.com",
+     "publishedAt": "2026-11-22T23:38:00.000Z",
+     "link": "https://www.ziksir.com/news/articleView.html?idxno=154253"
     },
     {
-     "title": "감독 바꿔도 소용없다! 맨체스터 유나이티드 '라이벌' 리버풀에 0-4 참패...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-22T22:17:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/117/0004127200"
+     "title": "트럼프 \"새해 이후 이란 추가 공격 가능\"…핵협상 지연에 강력 경고",
+     "press": "fntoday.co.kr",
+     "publishedAt": "2026-11-22T23:06:00.000Z",
+     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=399623"
+    }
+   ]
+  },
+  {
+   "keyword": "강원 최대 8㎝ 눈",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 4,
+   "press": 9,
+   "firstArticleAt": "2026-11-22T22:25:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "전국 비·눈에 출근길 '어는 비' 조심…강원북부 최대 8㎝",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-22T23:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005356882?sid=103"
+    },
+    {
+     "title": "출근길 중부 최저 -10도·서울 -0.2도…오전부터 비, 최대 8㎝ 눈",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-22T23:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009303962?sid=103"
+    },
+    {
+     "title": "[날씨] 오늘 전국 비에 강풍…강원 내륙 최대 8㎝ 많은 눈",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-22T23:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928849?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "쟁의행위",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T22:13:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "철도노조, 오늘(23일) 예정됐던 쟁의행위 26일로 연기... \"사고 복구가 ...",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-22T23:00:00.000Z",
+     "link": "https://www.insight.co.kr/news/583097"
+    },
+    {
+     "title": "철도노조, 쟁의행위 26일로 연기",
+     "press": "enewstoday.co.kr",
+     "publishedAt": "2026-11-22T23:00:00.000Z",
+     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2495508"
+    },
+    {
+     "title": "철도노조, 쟁의행위 26일로 연기…코레일 ‘비상본부 가동’",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-22T22:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012298980?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "이용철 후보자 인사청문회",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T23:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "인사청문회 하루 앞둔 이용철 법무부 장관 후보자",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-22T23:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016457160?sid=102"
+    },
+    {
+     "title": "인사청문회 하루 앞둔 이용철 법무장관 후보자",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-22T23:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016457154?sid=102"
+    },
+    {
+     "title": "출근하는 이용철 후보자",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-22T23:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009303918?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1123,
-  "matched": 621,
-  "avgLeadMin": 605,
+  "flagged": 1125,
+  "matched": 628,
+  "avgLeadMin": 604,
   "recent": [
    {
-    "keyword": "한전 152만명 개인정보 유출",
-    "hitKeyword": "한전 정보 유출",
-    "hitAt": "2026-11-23T07:30:00+09:00",
-    "leadMin": 421
+    "keyword": "부동산",
+    "hitKeyword": "강남 부동산 반전",
+    "hitAt": "2026-11-23T08:30:00+09:00",
+    "leadMin": 1416
    },
    {
-    "keyword": "한전, 152만명 개인정보 유출",
-    "hitKeyword": "한전 정보 유출",
-    "hitAt": "2026-11-23T07:30:00+09:00",
-    "leadMin": 381
+    "keyword": "민주당 대법원장 탄핵 추진",
+    "hitKeyword": "민주당 하원 역사적 승리",
+    "hitAt": "2026-11-23T08:30:00+09:00",
+    "leadMin": 1235
    },
    {
-    "keyword": "한전, 152만 개인정보 유출",
-    "hitKeyword": "한전 정보 유출",
-    "hitAt": "2026-11-23T07:30:00+09:00",
-    "leadMin": 360
+    "keyword": "민주당 조희대 탄핵 추진",
+    "hitKeyword": "민주당 하원 역사적 승리",
+    "hitAt": "2026-11-23T08:30:00+09:00",
+    "leadMin": 1165
    },
    {
-    "keyword": "젠슨 황 밀수 의혹",
-    "hitKeyword": "엔비디아 칩 밀수 의혹",
-    "hitAt": "2026-11-23T07:30:00+09:00",
+    "keyword": "조희대 탄핵 민주당 추진",
+    "hitKeyword": "민주당 하원 역사적 승리",
+    "hitAt": "2026-11-23T08:30:00+09:00",
+    "leadMin": 964
+   },
+   {
+    "keyword": "김아림 LPGA 공동7위",
+    "hitKeyword": "김아림 LPGA 최종전",
+    "hitAt": "2026-11-23T08:30:00+09:00",
+    "leadMin": 89
+   },
+   {
+    "keyword": "아틀레티코 헤타페 승리",
+    "hitKeyword": "이강인 아틀레티코 라리가",
+    "hitAt": "2026-11-23T08:30:00+09:00",
     "leadMin": 59
    },
    {
-    "keyword": "트럼프 이란 공격 경고",
-    "hitKeyword": "트럼프 이란 공습 시사",
-    "hitAt": "2026-11-23T07:30:00+09:00",
+    "keyword": "LPGA 최종전 공동 7위",
+    "hitKeyword": "김아림 LPGA 최종전",
+    "hitAt": "2026-11-23T08:30:00+09:00",
     "leadMin": 49
    },
    {
-    "keyword": "트럼프 이란 추가 공격 경고",
-    "hitKeyword": "트럼프 이란 공습 시사",
-    "hitAt": "2026-11-23T07:30:00+09:00",
+    "keyword": "미국 민주당 거대 야당",
+    "hitKeyword": "민주당 하원 역사적 승리",
+    "hitAt": "2026-11-23T08:30:00+09:00",
+    "leadMin": 49
+   },
+   {
+    "keyword": "아틀레티코 3-0 승리",
+    "hitKeyword": "이강인 아틀레티코 라리가",
+    "hitAt": "2026-11-23T08:30:00+09:00",
     "leadMin": 39
    },
    {
-    "keyword": "한전 고객 개인정보 유출",
-    "hitKeyword": "한전 정보 유출",
-    "hitAt": "2026-11-23T07:30:00+09:00",
-    "leadMin": 39
-   },
-   {
-    "keyword": "검사",
-    "hitKeyword": "수능 감독관 복장 검사",
-    "hitAt": "2026-11-23T07:00:00+09:00",
-    "leadMin": 9456
-   },
-   {
-    "keyword": "태안 어선 실종",
-    "hitKeyword": "실종 어선 해광호 발견",
-    "hitAt": "2026-11-23T07:00:00+09:00",
-    "leadMin": 5628
-   },
-   {
-    "keyword": "김아림 LPGA 최종전 공동 7위",
+    "keyword": "김아림, 최종전 공동 7위 티띠꾼",
     "hitKeyword": "김아림 LPGA 최종전",
-    "hitAt": "2026-11-23T07:00:00+09:00",
-    "leadMin": 19
+    "hitAt": "2026-11-23T08:30:00+09:00",
+    "leadMin": 18
    }
   ]
  }
