@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T14:38:59.002Z",
+ "builtAt": "2026-11-22T14:49:02.269Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 22,
  "candidates": [
   {
-   "keyword": "한전 on",
+   "keyword": "조희대 탄핵 추진 논의",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-22T13:10:00.000Z",
-   "exclusive": false,
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T13:52:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "한국전력 또 뚫렸다···'한전ON' 이용 152만여 명 개인정보 유출",
-     "press": "globale.co.kr",
-     "publishedAt": "2026-11-22T14:14:00.000Z",
-     "link": "https://www.globale.co.kr/news/articleView.html?idxno=41780"
+     "title": "[사설]조 대법원장 탄핵은 안 된다… 이 대통령이 제동 걸어야",
+     "press": "donga.com",
+     "publishedAt": "2026-11-22T14:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764252?sid=110"
     },
     {
-     "title": "한전, 고객 주민번호 포함 개인정보 150만 건 유출",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-22T14:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436520?sid=101"
+     "title": "野, 민주당 조희대 대법원장 탄핵 추진에 반발…\"사유 정해 놓고 탄핵하...",
+     "press": "fntoday.co.kr",
+     "publishedAt": "2026-11-22T14:32:00.000Z",
+     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=399612"
     },
     {
-     "title": "한전, 고객 65만명·전자조달 이용자 87만명 '개인정보 유출'…총 152만명...",
-     "press": "industrynews.co.kr",
-     "publishedAt": "2026-11-22T13:46:00.000Z",
-     "link": "https://www.industrynews.co.kr/news/articleView.html?idxno=89999"
-    }
-   ]
-  },
-  {
-   "keyword": "유엔기후총회 합의 무산",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T13:19:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "COP31 합의 무산, 증시 영향은…정유·철강·신재생 엇갈린 셈법",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-22T13:58:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283107"
-    },
-    {
-     "title": "'화석연료' 갈등…유엔 기후변화총회 끝내 결렬, 합의문 무산",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-22T13:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005444663?sid=104"
-    },
-    {
-     "title": "COP31, 역대 최장 연장에도 합의문 채택 불발…‘화석연료’ 문구 못 담...",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-22T13:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833426?sid=104"
+     "title": "[사설] 대법원장 탄핵 추진에 “입장 없다”는 靑, 무책임하다",
+     "press": "segye.com",
+     "publishedAt": "2026-11-22T14:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177214?sid=110"
     }
    ]
   },
@@ -107,12 +75,44 @@
    ]
   },
   {
+   "keyword": "유엔기후총회 합의 무산",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T13:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "COP31 합의 무산, 증시 영향은…정유·철강·신재생 엇갈린 셈법",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-22T13:58:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283107"
+    },
+    {
+     "title": "'화석연료' 갈등…유엔 기후변화총회 끝내 결렬, 합의문 무산",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-22T13:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005444663?sid=104"
+    },
+    {
+     "title": "COP31, 역대 최장 연장에도 합의문 채택 불발…‘화석연료’ 문구 못 담...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-22T13:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002833426?sid=104"
+    }
+   ]
+  },
+  {
    "keyword": "중국 국가안전부 첨단 칩 작전",
    "sources": [
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-22T13:30:00.000Z",
    "exclusive": false,
@@ -135,38 +135,6 @@
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-22T13:30:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002436499?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "조권 구용규 루머 의식",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T13:25:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"보고 싶은 대로 보는 세상\" 조권, '양성애자' 구용규와의 루머 속 의미...",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-22T14:29:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000053839"
-    },
-    {
-     "title": "\"보고 싶은 대로 보는 세상\" 조권, 구용규와 루머 의식했나...의미심장 ...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-22T13:56:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000640326"
-    },
-    {
-     "title": "조권, '양성애자' 구용규와 루머 의식했나..\"보고 싶은 대로 보는 세상...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-22T13:25:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003489405"
     }
    ]
   },
@@ -205,7 +173,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1120,
+  "flagged": 1121,
   "matched": 638,
   "avgLeadMin": 613,
   "recent": [
