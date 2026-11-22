@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T07:06:22.024Z",
+ "builtAt": "2026-11-22T07:16:25.139Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 25,
  "candidates": [
-  {
-   "keyword": "조희대 탄핵 추진",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 55,
-   "recent20": 12,
-   "press": 40,
-   "firstArticleAt": "2026-11-22T05:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이준석 \"근조 민주당…조희대 탄핵 강행하면 한 방에 무너질 것\"",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-22T07:02:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261122000096"
-    },
-    {
-     "title": "장외 나간 국민의힘... 조작기소특검·조희대 탄핵 겨냥 \"이게 바로 내란...",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-22T07:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967047?sid=100"
-    },
-    {
-     "title": "장동혁 \"탄핵당할 사람은 대법원장 아닌 이 대통령\"",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-22T07:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000554358?sid=100"
-    }
-   ]
-  },
   {
    "keyword": "최교진 수능 사의",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 40,
-   "recent20": 12,
-   "press": 33,
-   "firstArticleAt": "2026-11-22T05:38:00.000Z",
+   "articles90": 41,
+   "recent20": 11,
+   "press": 36,
+   "firstArticleAt": "2026-11-22T05:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"수능 책임 통감\"… 최교진 교육장관, 사의 표명",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-22T07:02:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3451070"
+     "title": "국힘 \"최교진 사퇴로 끝날 일 아냐…'AI 부정' 특검·전수조사해야\"",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-22T07:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001041629?sid=100"
     },
     {
-     "title": "이재명 대통령, 최교진 장관 사의 즉각 수리…\"全부처 시험관리실태 점...",
-     "press": "public25.com",
-     "publishedAt": "2026-11-22T07:00:00.000Z",
-     "link": "https://www.public25.com/news/articleView.html?idxno=58799"
+     "title": "민주당, 최교진 후임에 'AI 교육개혁' 주문…\"교육 전반의 변화 준비해...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-22T07:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003158043?sid=100"
     },
     {
-     "title": "수능 혼선에 교육부 장관 사의…대구 수험생 부정행위 후속 처리 주목",
-     "press": "kbmaeil.com",
-     "publishedAt": "2026-11-22T06:58:00.000Z",
-     "link": "https://www.kbmaeil.com/article/20261122500576"
+     "title": "최교진 장관 사퇴… 교육계 \"입시체계 바꿔야\"",
+     "press": "dtnews24.com",
+     "publishedAt": "2026-11-22T07:10:00.000Z",
+     "link": "http://www.dtnews24.com/news/articleView.html?idxno=817472"
     }
    ]
   },
@@ -80,12 +48,18 @@
     "nate"
    ],
    "articles90": 55,
-   "recent20": 7,
+   "recent20": 5,
    "press": 21,
-   "firstArticleAt": "2026-11-22T05:56:00.000Z",
+   "firstArticleAt": "2026-11-22T05:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"민심의 분기점\"…與조희대 탄핵 비판에 힘주는 국민의힘",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-22T07:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005444623?sid=100"
+    },
     {
      "title": "장동혁 \"탄핵당해야 할 사람은 조희대 아닌 범죄자 이재명\"",
      "press": "newscj.com",
@@ -97,12 +71,70 @@
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-22T07:04:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/055/0001404909?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "북미회담 무산",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 10,
+   "recent20": 4,
+   "press": 10,
+   "firstArticleAt": "2026-11-22T06:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"트럼프, 김정은 회담 막판 추진했지만…北 조건에 무산\"",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-22T07:14:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445895"
     },
     {
-     "title": "장외 나간 국민의힘... 조작기소특검·조희대 탄핵 겨냥 \"이게 바로 내란...",
+     "title": "\"트럼프, 북미 정상회담 추진했지만…北 조건에 무산\"",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-22T07:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193206?sid=104"
+    },
+    {
+     "title": "北, 트럼프 편지 뜯지도 않고 던져…무리한 요구에 북미회담 무산",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-22T07:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413743?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "김정은",
+   "sources": [
+    "google"
+   ],
+   "articles90": 9,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-22T05:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"트럼프, 김정은 회담 막판 추진했지만…北 조건에 무산\"",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-22T07:14:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445895"
+    },
+    {
+     "title": "WSJ \"트럼프, 北 김정은과 정상회담 무산…북한 측 조건에 협상 결렬\"",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-22T07:10:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903955"
+    },
+    {
+     "title": "\"트럼프 편지, 北이 뜯지도 않고 던졌다\"... WSJ \"김정은 만나려 6.25 종...",
      "press": "hankookilbo.com",
-     "publishedAt": "2026-11-22T07:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967047?sid=100"
+     "publishedAt": "2026-11-22T06:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000967038?sid=104"
     }
    ]
   },
@@ -111,13 +143,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
+   "articles90": 9,
+   "recent20": 1,
+   "press": 9,
    "firstArticleAt": "2026-11-22T05:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[현장인터뷰] \"선수들에게 얼마나 돌려줄 수 있을까\" 김재열 회장이 고...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-22T07:06:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/076/0004468672"
+    },
     {
      "title": "김재열 ISU 회장 \"쇼트트랙 월드투어, 새 시즌 8개 대회로 확대\"",
      "press": "ytn.co.kr",
@@ -129,12 +167,6 @@
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-22T06:47:00.000Z",
      "link": "https://m.sports.naver.com/general/article/055/0001404905"
-    },
-    {
-     "title": "“쇼트트랙 월드투어 8개 대회로 확대” 김재열 ISU 회장 “최민정, 스케...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-22T06:42:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/144/0001151116"
     }
    ]
   },
@@ -144,13 +176,19 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 7,
+   "articles90": 8,
    "recent20": 1,
-   "press": 7,
+   "press": 8,
    "firstArticleAt": "2026-11-22T05:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김병주 “이 대통령은 외교 천재···오랫동안 고민하던 걸 딱 기회잡아...",
+     "press": "weekly.khan.co.kr",
+     "publishedAt": "2026-11-22T07:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/033/0000053562?sid=100"
+    },
     {
      "title": "트럼프엔 YMCA 공연, 다카이치엔 악수 두 번…習 ‘맞춤형 양자외교’ ...",
      "press": "joongang.co.kr",
@@ -162,76 +200,70 @@
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-22T06:45:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006413736?sid=100"
-    },
-    {
-     "title": "李 대통령, '잦은 순방' 비판에 \"순방외교는 대통령의 주요 업무\"",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-22T06:24:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2651340"
     }
    ]
   },
   {
-   "keyword": "북미회담 무산",
+   "keyword": "성균관대 수리논술 출제 오류",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 7,
+   "articles90": 8,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-22T05:44:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-22T06:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "트럼프, 종전선언 카드까지 꺼냈지만…北 '조건'에 북·미 회담 무산",
-     "press": "ajunews.com",
+     "title": "\"답 안나오더니\" 성균관대 수리논술 출제 오류…시험중 정정",
+     "press": "news.tvchosun.com",
      "publishedAt": "2026-11-22T06:34:00.000Z",
-     "link": "https://www.ajunews.com/view/20261122152631002"
+     "link": "https://n.news.naver.com/mnews/article/448/0000652645?sid=102"
     },
     {
-     "title": "\"트럼프 구애에도…김정은 '美 수용불가 조건' 제시해 회담 무산\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T06:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009303495?sid=104"
+     "title": "성균관대 수리 논술 출제 오류…시험 도중 정정에 혼란",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-22T06:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979326?sid=102"
     },
     {
-     "title": "“트럼프·김정은 만남, 북 조건 탓에 무산…북, 편지 던져버려”",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-22T06:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000368310?sid=104"
+     "title": "성균관대 수리논술 문항 오류로 시험 도중 정정... 수험생 '혼란'",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-22T06:24:00.000Z",
+     "link": "https://www.insight.co.kr/news/583078"
     }
    ]
   },
   {
-   "keyword": "투자",
+   "keyword": "대구fc",
    "sources": [
     "google"
    ],
    "articles90": 5,
-   "recent20": 2,
+   "recent20": 3,
    "press": 4,
-   "firstArticleAt": "2026-11-22T06:42:00.000Z",
+   "firstArticleAt": "2026-11-22T06:18:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "\"삼전닉스 말고는요?\"…내년 포트폴리오에 담을 종목은 [투자톡]",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-22T07:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005356702?sid=101"
+     "title": "에드가 10호골·세징야 맹활약, 대구FC 김해FC 3-0 완파…K리그2 3위로 도...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-22T07:14:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282852"
     },
     {
-     "title": "영남이공대, 중국 쑤저우공업원구 투자촉진위원회 관계자 초청 간담회 ...",
-     "press": "newsfreezone.co.kr",
-     "publishedAt": "2026-11-22T07:00:00.000Z",
-     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=720670"
+     "title": "대구FC 3위 가는 발판 마련했다…김해 3대0 꺾어",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-22T07:11:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/088/0001041628"
     },
     {
-     "title": "앤트로픽 상장 이튿날 급락…월가에 번지는 'AI 투자 회의론'",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-22T06:46:00.000Z",
-     "link": "https://www.ajunews.com/view/20261122153022012"
+     "title": "'승격 도전' 대구FC, 김해 3-0 완파…일단 K리그2 3위로 상승",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-22T07:03:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/001/0016456735"
     }
    ]
   },
@@ -240,30 +272,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 5,
+   "articles90": 8,
+   "recent20": 7,
    "press": 3,
    "firstArticleAt": "2026-11-22T06:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "[사진]500m 결승 역주하는 최민정",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-22T07:11:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/109/0005643915"
+    },
+    {
+     "title": "[사진]캐나다에 막힌 최민정",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-22T07:06:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/109/0005643912"
+    },
+    {
      "title": "최민정 '쉽지 않네'",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-22T07:03:00.000Z",
      "link": "https://m.sports.naver.com/general/article/001/0016456734"
-    },
-    {
-     "title": "선수들에게 가로막힌 최민정 '쉽지 않네'[포토]",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-22T07:03:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/311/0002082974"
-    },
-    {
-     "title": "역주하는 최민정",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-22T07:02:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/001/0016456732"
     }
    ]
   },
@@ -300,38 +332,6 @@
    ]
   },
   {
-   "keyword": "수능 가채점 설명회",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T05:44:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[포토]청솔학원, 2027학년도 대학수학능력시험 가채점 분석 설명회 열어",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-22T06:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413730?sid=102"
-    },
-    {
-     "title": "[포토]청솔학원, 2027학년도 대학수학능력시험 가채점 분석 설명회",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-22T06:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413729?sid=102"
-    },
-    {
-     "title": "수능 가채점 분석 설명회",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T05:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014338120?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "해저",
    "sources": [
     "google"
@@ -364,41 +364,41 @@
    ]
   },
   {
-   "keyword": "대구fc",
+   "keyword": "수능 가채점 설명회",
    "sources": [
-    "google"
+    "nate"
    ],
-   "articles90": 3,
-   "recent20": 2,
+   "articles90": 4,
+   "recent20": 0,
    "press": 2,
-   "firstArticleAt": "2026-11-22T06:18:00.000Z",
+   "firstArticleAt": "2026-11-22T05:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'승격 도전' 대구FC, 김해 3-0 완파…일단 K리그2 3위로 상승",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-22T07:03:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/001/0016456735"
+     "title": "[포토]청솔학원, 2027학년도 대학수학능력시험 가채점 분석 설명회 열어",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-22T06:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413730?sid=102"
     },
     {
-     "title": "[Y리뷰] 대구FC, 마지막 홈 경기서 김해에 3-0 완승",
-     "press": "yeongnam.com",
-     "publishedAt": "2026-11-22T06:54:00.000Z",
-     "link": "https://www.yeongnam.com/web/view.php?key=20261122020092202"
+     "title": "[포토]청솔학원, 2027학년도 대학수학능력시험 가채점 분석 설명회",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-22T06:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413729?sid=102"
     },
     {
-     "title": "“그 경기 잡았다면…” 대구FC 최성용 감독이 꼽은 올해의 아쉬운 경기...",
-     "press": "yeongnam.com",
-     "publishedAt": "2026-11-22T06:18:00.000Z",
-     "link": "https://www.yeongnam.com/web/view.php?key=20261122025202227"
+     "title": "2027학년도 수능 가채점 설명회 찾은 학부모들",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T05:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014338129?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1018,
+  "flagged": 1020,
   "matched": 587,
   "avgLeadMin": 638,
   "recent": [
