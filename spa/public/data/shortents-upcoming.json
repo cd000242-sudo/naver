@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T05:55:59.174Z",
+ "builtAt": "2026-11-22T06:06:02.816Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 22,
  "candidates": [
   {
    "keyword": "최교진 장관 사의 수락",
@@ -16,94 +16,30 @@
     "signal.bz",
     "daum"
    ],
-   "articles90": 56,
-   "recent20": 8,
-   "press": 50,
-   "firstArticleAt": "2026-11-22T04:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이재명 대통령, 최교진 교육부장관 사의수락",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T05:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014338115?sid=100"
-    },
-    {
-     "title": "이재명 대통령, 교육부장관 사의 수락",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T05:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014338111?sid=100"
-    },
-    {
-     "title": "수능 부정행위 대책 혼선에 최교진 사의…李대통령 즉각 수리",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-22T05:40:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=565643"
-    }
-   ]
-  },
-  {
-   "keyword": "조희대 탄핵 추진",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 42,
-   "recent20": 5,
-   "press": 31,
-   "firstArticleAt": "2026-11-22T04:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "조국혁신당, 민주당에 '11월 조희대 탄핵소추안' 압박…\"12월까지 미룰 ...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-22T05:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003158032?sid=100"
-    },
-    {
-     "title": "[사설] 대법원장 탄핵소추 추진 재고해야",
-     "press": "kihoilbo.co.kr",
-     "publishedAt": "2026-11-22T05:50:00.000Z",
-     "link": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3041665"
-    },
-    {
-     "title": "장동혁 “억지·방탄·탈옥 탄핵…법관 인사·재판 재개 막는 게 목적”",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-22T05:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701849?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "미라 시신 발견 수사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 15,
+   "articles90": 46,
    "recent20": 4,
-   "press": 15,
-   "firstArticleAt": "2026-11-22T04:32:00.000Z",
+   "press": 41,
+   "firstArticleAt": "2026-11-22T04:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] 건물 지하 보일러실서 '미라화 시신' 발견...경찰 \"범죄 혐의점 ...",
-     "press": "cjb.co.kr",
-     "publishedAt": "2026-11-22T05:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/655/0000033662?sid=102"
+     "title": "잇단 구설에도 버텼지만…최교진, AI 수능 혼란에 결국 낙마",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-22T06:04:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=730441"
     },
     {
-     "title": "금천구 건물 지하 주차장서 미라화된 시신 발견…경찰 수사",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-22T05:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404897?sid=102"
+     "title": "최교진 교육장관, 빗발치는 비난에 결국 사의",
+     "press": "viewsnnews.com",
+     "publishedAt": "2026-11-22T06:02:00.000Z",
+     "link": "https://www.viewsnnews.com/article?q=239853"
     },
     {
-     "title": "금천구 건물 지하서 '미라화 시신' 발견…경찰 \"범죄 가능성 낮아\"",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-22T05:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005846044?sid=102"
+     "title": "최교진, '수능 대혼란' 책임지고 사임…취임 14개월 만(종합2보)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-22T06:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016456620?sid=102"
     }
    ]
   },
@@ -112,10 +48,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 1,
-   "press": 15,
-   "firstArticleAt": "2026-11-22T04:32:00.000Z",
+   "articles90": 12,
+   "recent20": 0,
+   "press": 12,
+   "firstArticleAt": "2026-11-22T04:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -140,172 +76,221 @@
    ]
   },
   {
-   "keyword": "북미회담 무산",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 13,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-22T04:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“북미회담 무산은 김정은이 내건 ‘조건’ 때문”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-22T05:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002726737?sid=104"
-    },
-    {
-     "title": "\"트럼프, 김정은에 만나자 제안했지만 북 '조건' 내걸어 무산\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-22T05:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404892?sid=100"
-    },
-    {
-     "title": "“김정은, 美가 받아들이기 힘든 조건 내걸어 北美회담 무산”",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-22T05:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004011026?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "조국, 당명 개정 제안",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 10,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-22T04:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“당명 속 ‘조국’ 제 이름은 아니지만”…당명 개정 제안, 확장성 강...",
-     "press": "donga.com",
-     "publishedAt": "2026-11-22T05:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764179?sid=100"
-    },
-    {
-     "title": "조국, 혁신당 ‘당명 개정’ 제안 “당명 속 ‘조국’ 제 이름 아니지만...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-22T05:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484196?sid=100"
-    },
-    {
-     "title": "‘조국’ 떼고 간판 바꾸는 조국혁신당…자생력 시험대",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-22T05:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003060452?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "최민정",
    "sources": [
     "google"
    ],
-   "articles90": 18,
-   "recent20": 7,
-   "press": 7,
+   "articles90": 23,
+   "recent20": 6,
+   "press": 8,
    "firstArticleAt": "2026-11-22T04:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "최민정 '500m 준준결승 가볍게 1위로 통과'[포토]",
+     "title": "김재열 ISU 회장 \"쇼트트랙 최민정 기량 탁월...오래 타 줬으면\"",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-22T06:02:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261122000087"
+    },
+    {
+     "title": "최민정 '빠르게'[포토]",
      "press": "xportsnews.com",
-     "publishedAt": "2026-11-22T05:54:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/311/0002082945"
+     "publishedAt": "2026-11-22T05:57:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/311/0002082948"
     },
     {
-     "title": "추월 기회 노리는 최민정",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T05:46:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/421/0009303449"
-    },
-    {
-     "title": "'여전한 월드클래스' 최민정 은퇴 예고, \"번복 강요하기는 무리지만...\"...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-22T05:40:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/108/0003489288"
+     "title": "‘쇼트트랙 여제’ 최민정, 대회 2관왕 시동 걸었다…500m도 무난하게 4...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-22T05:56:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/109/0005643903"
     }
    ]
   },
   {
-   "keyword": "김도규, 연간 MVP 선정!",
+   "keyword": "투자",
+   "sources": [
+    "google"
+   ],
+   "articles90": 9,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-22T05:30:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "수주 기대만으론 버티기 어렵다…원전 해체주 투자 기준 달라지나",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-22T06:02:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=506724"
+    },
+    {
+     "title": "나스닥 시총 일주일 새 5천조 ‘증발’…“AI 투자 회의론 점점 커져”",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-22T05:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002833357?sid=104"
+    },
+    {
+     "title": "기술기업 발굴 145개사·투자연계 109억… 창업도시행 '창업-BuS 가속'",
+     "press": "samdailbo.com",
+     "publishedAt": "2026-11-22T05:40:00.000Z",
+     "link": "http://www.samdailbo.com/news/articleView.html?idxno=272999"
+    }
+   ]
+  },
+  {
+   "keyword": "조국, 당명 개정 의견 수렴",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T04:30:00.000Z",
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-22T04:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'창단 첫해 뒷문 지킨 수호신' 김도규, 울산 웨일즈 초대 MVP",
-     "press": "maniareport.com",
-     "publishedAt": "2026-11-22T05:35:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/425/0000215276"
+     "title": "조국, 창당 1천일 앞두고 조국혁신당 당명 개정 제안",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-22T06:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000133214?sid=100"
     },
     {
-     "title": "'19세이브' 김도규, 울산 창단 첫 시즌 연간 MVP 선정",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T05:00:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/003/0014338058"
+     "title": "‘조국혁신당 간판 바뀌나’ 조국 “확장성 있는 당명 개정 제안”",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-22T05:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413720?sid=100"
     },
     {
-     "title": "울산 웨일즈 마무리 김도규. 구단 선정 시즌 MVP",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T04:33:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/421/0009303340"
+     "title": "“당명 속 ‘조국’ 제 이름은 아니지만”…당명 개정 제안, 확장성 강...",
+     "press": "donga.com",
+     "publishedAt": "2026-11-22T05:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764179?sid=100"
     }
    ]
   },
   {
-   "keyword": "40대 마통 연체 급증",
+   "keyword": "과즙세연 방시혁과 안 잤다",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 3,
+   "articles90": 5,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T04:42:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-22T04:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "고금리와 주가 하락에 40대 마통 연체 82% 급증",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-22T05:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003566953?sid=101"
+     "title": "과즙세연 \"방시혁과 안 잤습니다\"…재력 과시",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-22T05:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002082934"
     },
     {
-     "title": "\"마통만 믿었는데 이럴수가\" 위험한 40대...연체액 80% 넘어",
-     "press": "economist.co.kr",
-     "publishedAt": "2026-11-22T05:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/243/0000106024?sid=101"
+     "title": "'식사권 700만원' 과즙세연 \"돈 때문에 방시혁과 잤냐고? 안잤다\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-22T05:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005444595"
     },
     {
-     "title": "‘빚투’ 후 물렸나…40대 마통 연체액 올 들어 82% 급증",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-22T04:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484189?sid=101"
+     "title": "“방시혁과 안 잤다”…과즙세연, 루머에 거침없는 독설",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-22T05:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005767142?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "로또",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T04:53:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "제1251회 로또 1등 14명…부산 판매점 2곳",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-22T06:02:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=409428"
+    },
+    {
+     "title": "1251회 로또 당첨번호 14·18·19·29·40·45…14명으로 각각 20억6884만원...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-22T05:16:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629489"
+    },
+    {
+     "title": "\"당첨 시 시세 차익만 24억\"…잠실 '로또 청약' 3가구 나온다",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-22T05:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000652630?sid=101"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 995,
-  "matched": 571,
-  "avgLeadMin": 639,
+  "flagged": 999,
+  "matched": 579,
+  "avgLeadMin": 632,
   "recent": [
+   {
+    "keyword": "흑백요리사 트리플스타 발표",
+    "hitKeyword": "트리플스타 재혼",
+    "hitAt": "2026-11-22T15:00:00+09:00",
+    "leadMin": 296
+   },
+   {
+    "keyword": "김유정 박진영 빗속 입맞춤",
+    "hitKeyword": "100일의 거짓말 김유정",
+    "hitAt": "2026-11-22T15:00:00+09:00",
+    "leadMin": 205
+   },
+   {
+    "keyword": "흑백 트리플스타 재혼",
+    "hitKeyword": "트리플스타 재혼",
+    "hitAt": "2026-11-22T15:00:00+09:00",
+    "leadMin": 95
+   },
+   {
+    "keyword": "케인 발목 인대 수술 성공",
+    "hitKeyword": "케인 발목 부상",
+    "hitAt": "2026-11-22T15:00:00+09:00",
+    "leadMin": 44
+   },
+   {
+    "keyword": "미라 시신 발견 수사",
+    "hitKeyword": "금천구 미라화 시신 발견",
+    "hitAt": "2026-11-22T15:00:00+09:00",
+    "leadMin": 34
+   },
+   {
+    "keyword": "북미회담 무산",
+    "hitKeyword": "북미회담 무산",
+    "hitAt": "2026-11-22T15:00:00+09:00",
+    "leadMin": 24
+   },
+   {
+    "keyword": "40대 마통 연체 급증",
+    "hitKeyword": "40대 마통 연체급증",
+    "hitAt": "2026-11-22T15:00:00+09:00",
+    "leadMin": 24
+   },
+   {
+    "keyword": "케인 발목 수술 성공적",
+    "hitKeyword": "케인 발목 부상",
+    "hitAt": "2026-11-22T15:00:00+09:00",
+    "leadMin": 24
+   },
    {
     "keyword": "무역",
     "hitKeyword": "중국산 전기차 무역적자",
@@ -317,54 +302,6 @@
     "hitKeyword": "삼전닉스 반토막",
     "hitAt": "2026-11-22T14:30:00+09:00",
     "leadMin": 266
-   },
-   {
-    "keyword": "유연석 변사체 발견 충격",
-    "hitKeyword": "라이어 유연석 변사체",
-    "hitAt": "2026-11-22T14:00:00+09:00",
-    "leadMin": 296
-   },
-   {
-    "keyword": "유연석 변사체 충격",
-    "hitKeyword": "라이어 유연석 변사체",
-    "hitAt": "2026-11-22T14:00:00+09:00",
-    "leadMin": 276
-   },
-   {
-    "keyword": "대학생 취업인식도 조사",
-    "hitKeyword": "대학생 취업 악화",
-    "hitAt": "2026-11-22T14:00:00+09:00",
-    "leadMin": 115
-   },
-   {
-    "keyword": "해광호 수색 부이 발견",
-    "hitKeyword": "해광호 선박 발견",
-    "hitAt": "2026-11-22T14:00:00+09:00",
-    "leadMin": 55
-   },
-   {
-    "keyword": "헌옷수거함 아기 시신 발견",
-    "hitKeyword": "금천구 미라화 시신 발견",
-    "hitAt": "2026-11-22T13:30:00+09:00",
-    "leadMin": 4619
-   },
-   {
-    "keyword": "고경표 음주운전 중단 논란",
-    "hitKeyword": "고경표 핑계고 후보 논란",
-    "hitAt": "2026-11-22T13:00:00+09:00",
-    "leadMin": 25
-   },
-   {
-    "keyword": "음주운전으로 핑계고 후보",
-    "hitKeyword": "고경표 핑계고 후보 논란",
-    "hitAt": "2026-11-22T13:00:00+09:00",
-    "leadMin": 15
-   },
-   {
-    "keyword": "레이미, 오스틴 챔피언십 우승",
-    "hitKeyword": "김아림 투어 챔피언십",
-    "hitAt": "2026-11-22T12:30:00+09:00",
-    "leadMin": 7403
    }
   ]
  }
