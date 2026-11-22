@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T01:34:19.682Z",
+ "builtAt": "2026-11-22T01:44:23.016Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 29,
+ "measured": 27,
  "candidates": [
   {
-   "keyword": "최태원 AI 인재 공동 육성 제안",
+   "keyword": "최태원, 한일 AI 인재",
    "sources": [
     "nate"
    ],
-   "articles90": 24,
-   "recent20": 4,
-   "press": 24,
-   "firstArticleAt": "2026-11-22T00:06:00.000Z",
+   "articles90": 22,
+   "recent20": 2,
+   "press": 22,
+   "firstArticleAt": "2026-11-22T00:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "최태원 SK 회장 \"한일 기업·대학 협력해 AI 인재 공동 육성해야\"",
+     "press": "socialvalue.kr",
+     "publishedAt": "2026-11-22T01:36:00.000Z",
+     "link": "https://www.socialvalue.kr/news/view/1065576803006317"
+    },
     {
      "title": "최태원 SK 회장 \"AI 시대, 대학 교육 틀 바꿔야\"…한일 공동 인재 육성 ...",
      "press": "seoultimes.news",
@@ -29,16 +35,10 @@
      "link": "https://www.seoultimes.news/news/article.html?no=2000102510"
     },
     {
-     "title": "최태원 \"한일 기업·대학, AI 인재 함께 키우자\"",
-     "press": "4th.kr",
+     "title": "최태원 SK 회장 \"한일 기업·대학 함께 AI 시대 인재 키워야\"",
+     "press": "wolyo.co.kr",
      "publishedAt": "2026-11-22T01:24:00.000Z",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2122394"
-    },
-    {
-     "title": "최태원 SK 회장, 한일 AI 인재 양성 협력 제안…\"교육체계부터 바꿔야\"",
-     "press": "consumernews.co.kr",
-     "publishedAt": "2026-11-22T01:24:00.000Z",
-     "link": "http://www.consumernews.co.kr/news/articleView.html?idxno=768819"
+     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=320863"
     }
    ]
   },
@@ -47,10 +47,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 18,
-   "recent20": 6,
-   "press": 18,
-   "firstArticleAt": "2026-11-22T00:12:00.000Z",
+   "articles90": 17,
+   "recent20": 1,
+   "press": 17,
+   "firstArticleAt": "2026-11-22T00:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -61,48 +61,16 @@
      "link": "https://n.news.naver.com/mnews/article/661/0000086903?sid=100"
     },
     {
-     "title": "조국혁신당 ‘조국’ 빠진다···“확장성 있는 당명 필요”",
-     "press": "weekly.khan.co.kr",
-     "publishedAt": "2026-11-22T01:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/033/0000053556?sid=100"
-    },
-    {
      "title": "조국, 당명 개정 제안…\"범민주진영 좋아할 이름 고민해달라\"",
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-22T01:21:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/079/0004212405?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "김태희 아침마다 감동",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 18,
-   "recent20": 2,
-   "press": 16,
-   "firstArticleAt": "2026-11-22T00:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "비, 김태희와 결혼 10년 차…“아침마다 감동 있어” (냉부해)",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-22T01:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001306082"
     },
     {
-     "title": "성시경 부러워서 어쩌나…비, ♥김태희에 \"아침마다 감동…두딸 운동회...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-22T01:25:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000640272"
-    },
-    {
-     "title": "'냉부해' 비♥김태희의 냉장고를 부탁해",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-22T01:06:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611220039"
+     "title": "조국혁신당 ‘조국’ 빠진다···“확장성 있는 당명 필요”",
+     "press": "weekly.khan.co.kr",
+     "publishedAt": "2026-11-22T01:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/033/0000053556?sid=100"
     }
    ]
   },
@@ -113,29 +81,61 @@
     "nate"
    ],
    "articles90": 16,
-   "recent20": 1,
+   "recent20": 3,
    "press": 15,
-   "firstArticleAt": "2026-11-22T00:06:00.000Z",
+   "firstArticleAt": "2026-11-22T00:15:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "LG유플러스, AI B2B 사업 힘준다…김홍근 LG CNS 부사장 영입",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-22T01:22:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261122500099"
+     "title": "LG유플러스 조직개편 단행…“AI 인프라·플랫폼 생태계 구축 속도”",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-22T01:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002834538?sid=101"
     },
     {
-     "title": "LGU+, AI 사업 중심으로 조직 재편…인프라·플랫폼 이원화",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-22T01:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002249475?sid=101"
+     "title": "LG유플러스, AI 사업 성과 확대 중심 조직개편 단행",
+     "press": "epnc.co.kr",
+     "publishedAt": "2026-11-22T01:36:00.000Z",
+     "link": "https://www.epnc.co.kr/news/articleView.html?idxno=410116"
     },
     {
-     "title": "[단독] LGU+, '모두의AI' 전담 TF 꾸린다…기존 조직 AI 중심 재배치",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-22T01:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002249474?sid=101"
+     "title": "LG유플러스, B2B 사업 재편…김홍근 부사장 Enterprise부문 이끌어",
+     "press": "newsbrite.net",
+     "publishedAt": "2026-11-22T01:36:00.000Z",
+     "link": "http://www.newsbrite.net/news/articleView.html?idxno=201666"
+    }
+   ]
+  },
+  {
+   "keyword": "취약계층 주거 지원",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 12,
+   "recent20": 3,
+   "press": 12,
+   "firstArticleAt": "2026-11-22T00:19:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "대구도시개발공사, 범죄피해자 주거안정 지원 협력 강화",
+     "press": "kbsm.net",
+     "publishedAt": "2026-11-22T01:32:00.000Z",
+     "link": "https://www.kbsm.net/news/view.php?idx=542729"
+    },
+    {
+     "title": "하나금융, 취약계층 어르신 1000명에 안전용품·보행기 지원",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-22T01:28:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101753"
+    },
+    {
+     "title": "하나금융, 취약계층 어르신 돕는다…안전용품∙보행보조기 지원",
+     "press": "it-b.co.kr",
+     "publishedAt": "2026-11-22T01:26:00.000Z",
+     "link": "https://www.it-b.co.kr/news/articleView.html?idxno=90797"
     }
    ]
   },
@@ -145,7 +145,7 @@
     "google"
    ],
    "articles90": 12,
-   "recent20": 1,
+   "recent20": 0,
    "press": 12,
    "firstArticleAt": "2026-11-22T00:19:00.000Z",
    "exclusive": false,
@@ -172,78 +172,14 @@
    ]
   },
   {
-   "keyword": "취약계층 안전용품 지원",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 3,
-   "press": 11,
-   "firstArticleAt": "2026-11-22T00:19:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "하나금융, 취약계층 어르신 1000명에 안전용품·보행기 지원",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-22T01:28:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101753"
-    },
-    {
-     "title": "하나금융, 취약계층 어르신 돕는다…안전용품∙보행보조기 지원",
-     "press": "it-b.co.kr",
-     "publishedAt": "2026-11-22T01:26:00.000Z",
-     "link": "https://www.it-b.co.kr/news/articleView.html?idxno=90797"
-    },
-    {
-     "title": "하나금융그룹, 취약계층 어르신 주거 안전·이동 편의 지원",
-     "press": "delighti.co.kr",
-     "publishedAt": "2026-11-22T01:20:00.000Z",
-     "link": "https://www.delighti.co.kr/news/articleView.html?idxno=125354"
-    }
-   ]
-  },
-  {
-   "keyword": "흑백요리사 트리플스타 발표",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-22T00:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘흑백요리사’ 트리플스타 강승원, 재혼 발표…“평생 함께하기로”",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-22T01:27:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001282566"
-    },
-    {
-     "title": "'흑백' 트리플스타, 재혼 발표..\"부족한 저를 감싸 안아준 사람\" [전문]",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-22T01:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005643873"
-    },
-    {
-     "title": "'흑백요리사' 트리플스타, 재혼 발표 \"부끄럽지 않은 남편 될 것\"[셀럽톡...",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-22T01:06:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1795309523531349005"
-    }
-   ]
-  },
-  {
    "keyword": "소정리역 화물열차 탈선",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-22T00:06:00.000Z",
+   "articles90": 8,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-22T00:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -268,12 +204,141 @@
    ]
   },
   {
-   "keyword": "30대 고가주택 보유 급증",
+   "keyword": "고경표 음주운전으로 핑계고",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-22T00:21:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "음주운전→활동중단…고경표, '핑계고' 시상식 후보에?",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-22T01:35:00.000Z",
+     "link": "https://m.entertain.naver.com/article/417/0001165160"
+    },
+    {
+     "title": "음주운전 고경표도 후보 올랐다…제4회 '핑계고 시상식' 명단 공개",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-22T01:22:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282732"
+    },
+    {
+     "title": "'음주운전 사고' 고경표, 자숙 선언 8일 만에 '핑계고' 시상식 후보 선정...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-22T01:16:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000492212"
+    }
+   ]
+  },
+  {
+   "keyword": "김유정 박진영 빗속 입맞춤",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-22T00:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김유정♥박진영, 빗속 애틋 첫 키스→진선규 무너뜨릴 공조 예고(‘백일...",
+     "press": "heraldmuse.com",
+     "publishedAt": "2026-11-22T01:40:00.000Z",
+     "link": "https://m.entertain.naver.com/article/112/0003813989"
+    },
+    {
+     "title": "'100일의 거짓말' 김유정·박진영, 눈물의 빗속 입맞춤…최고 시청률 12...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-22T01:02:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1795308833531348006"
+    },
+    {
+     "title": "'100일의 거짓말' 13회 최고 시청률 12.5% 돌파… 김유정·박진영 빗속 ...",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-22T00:44:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3759316"
+    }
+   ]
+  },
+  {
+   "keyword": "대기업 기부금 감소",
    "sources": [
     "signal.bz"
    ],
    "articles90": 6,
    "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-22T00:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "대기업 영업익 3배 늘었으나, 기부금은 감소…역대 최대 실적 SK하이닉스...",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-22T01:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001206448?sid=101"
+    },
+    {
+     "title": "대기업 영업익 3배로 늘었지만 기부금 2% 줄어… SK하이닉스 120억원↓",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-22T01:10:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3451002"
+    },
+    {
+     "title": "대기업 영업익 3배 급증에도 기부금 감소...LG생건·SK하이닉스 100억↓",
+     "press": "wolyo.co.kr",
+     "publishedAt": "2026-11-22T00:44:00.000Z",
+     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=320861"
+    }
+   ]
+  },
+  {
+   "keyword": "마마 어워즈",
+   "sources": [
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-22T00:45:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[종합]하이브, '마마' 대상 싹쓸이…BTS·코르티스·엔하이픈 정상, 빅뱅...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-22T01:20:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004468598"
+    },
+    {
+     "title": "제로베이스원, '마마 어워즈'서 2관왕 달성",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-22T01:14:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611220041"
+    },
+    {
+     "title": "방탄소년단, 마마 어워즈 5관왕…통산 최다 대상 수상 기록 셀프 경신",
+     "press": "donga.com",
+     "publishedAt": "2026-11-22T00:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764156?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "30대 고가주택 보유 급증",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 6,
+   "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-22T00:22:00.000Z",
    "exclusive": false,
@@ -300,114 +365,23 @@
    ]
   },
   {
-   "keyword": "부동산",
-   "sources": [
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T00:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "전세사기 막는 중개사 한눈에…경기도, ‘안심 부동산’ 참여 표시",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-22T01:22:00.000Z",
-     "link": "https://www.viva100.com/article/20261122500254"
-    },
-    {
-     "title": "\"내 건물, 전문가에게 직접 물어본다\"…소수 한정 부동산 세미나",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-22T01:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005356655?sid=101"
-    },
-    {
-     "title": "[부동산 포커스] 강남서 터진 '재초환 폭탄'…수도권·지방까지 덮쳤다",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-22T00:58:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=506672"
-    }
-   ]
-  },
-  {
-   "keyword": "김유정 박진영 빗속 입맞춤",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T00:07:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'100일의 거짓말' 김유정·박진영, 눈물의 빗속 입맞춤…최고 시청률 12...",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-22T01:02:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1795308833531348006"
-    },
-    {
-     "title": "'100일의 거짓말' 13회 최고 시청률 12.5% 돌파… 김유정·박진영 빗속 ...",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-22T00:44:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3759316"
-    },
-    {
-     "title": "김유정♥박진영, 눈물의 빗속 키스에도…시청률 '10.4%→10.0%' 소폭 하락...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-22T00:31:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000785560"
-    }
-   ]
-  },
-  {
-   "keyword": "대기업 기부금 감소",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T00:05:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "대기업 영업익 3배로 늘었지만 기부금 2% 줄어… SK하이닉스 120억원↓",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-22T01:10:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3451002"
-    },
-    {
-     "title": "영업익 3배 넘게 늘었는데 기부금은 줄었다…SK하이닉스도 120억원 줄여",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-22T00:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000545095?sid=101"
-    },
-    {
-     "title": "대기업 영업익 3배 급증에도 기부금 감소...LG생건·SK하이닉스 100억↓",
-     "press": "wolyo.co.kr",
-     "publishedAt": "2026-11-22T00:44:00.000Z",
-     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=320861"
-    }
-   ]
-  },
-  {
    "keyword": "트럼프 얄타회담 사진",
    "sources": [
     "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 2,
+   "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-22T00:13:00.000Z",
+   "firstArticleAt": "2026-11-22T00:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "트럼프, 얄타회담·미중러 정상회담 사진 나란히 게시",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-22T01:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928643?sid=104"
+    },
     {
      "title": "트럼프, 살인자란 젤렌스키 항변에도 “푸틴은 내 친구”",
      "press": "seoul.co.kr",
@@ -419,60 +393,27 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-22T01:18:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014337783?sid=104"
-    },
-    {
-     "title": "트럼프, 얄타회담·미중러 정상회담 사진 함께 올려…\"강대국들\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T00:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009303076?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "삼전 닉스",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T00:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"삼전닉스 주주는 좋겠다\"...삼전 4.4배·하닉 21배, 3Q 배당성향 ↑",
-     "press": "economist.co.kr",
-     "publishedAt": "2026-11-22T01:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/243/0000106017?sid=101"
-    },
-    {
-     "title": "삼전닉스 韓 수출 대업 견인…수출 1조달러·세계 4위 눈앞",
-     "press": "newsway.co.kr",
-     "publishedAt": "2026-11-22T01:28:00.000Z",
-     "link": "https://www.newsway.co.kr/news/view?ud=2026112210021823466"
-    },
-    {
-     "title": "\"삼전닉스, 내년에도 웃는다\"…무디스 전망에 개미들 '솔깃'",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-22T00:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005845975?sid=101"
     }
    ]
   },
   {
    "keyword": "김아림 LPGA 선두 유지",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T00:06:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T00:15:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "‘통산 4승 보인다’ 김아림, LPGA 투어 최종전 ‘3R 단독 선두 유지’",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-22T01:34:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/382/0001306084"
+    },
     {
      "title": "김아림 LPGA 최종전 3R도 선두, 외이어투와이어 우승 보인다…윤이나·김...",
      "press": "mediapen.com",
@@ -484,84 +425,13 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-22T00:18:00.000Z",
      "link": "https://m.sports.naver.com/golf/article/421/0009303074"
-    },
-    {
-     "title": "김아림, LPGA 최종전 사흘 연속 선두…티띠꾼·코다 추격에 우승 경쟁 '...",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-22T00:15:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/018/0006413589"
-    }
-   ]
-  },
-  {
-   "keyword": "고경표, 음주운전 중단 논란",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T00:21:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'음주운전 사고' 고경표, 자숙 선언 8일 만에 '핑계고' 시상식 후보 선정...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-22T01:16:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000492212"
-    },
-    {
-     "title": "면허취소 수준 음주운전 8일 만에…고경표, ‘핑계고’ 시상식 후보 ‘...",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-22T00:57:00.000Z",
-     "link": "https://m.entertain.naver.com/article/396/0000761575"
-    },
-    {
-     "title": "'음주운전' 고경표, '핑계고' 시상식 후보…적절성 논란",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T00:43:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014337740"
-    }
-   ]
-  },
-  {
-   "keyword": "테이블 생방송 중 주인은",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T00:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'파이널 테이블' 안효섭, 결국 요리 중단",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-22T01:28:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611220042"
-    },
-    {
-     "title": "포기는 없다…안효섭, '파이널 테이블' 뒤흔든 책임감",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-22T00:45:00.000Z",
-     "link": "https://m.entertain.naver.com/article/030/0003488189"
-    },
-    {
-     "title": "‘파이널 테이블’ 안효섭, 생방송 경연 중 쓰러졌다…“파밀리아 주인...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-22T00:35:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001282557"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 931,
+  "flagged": 935,
   "matched": 541,
   "avgLeadMin": 626,
   "recent": [
