@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T22:21:16.803Z",
+ "builtAt": "2026-11-22T22:31:19.881Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "트럼프 이란 공격 경고",
    "sources": [
     "daum"
    ],
-   "articles90": 17,
-   "recent20": 4,
-   "press": 17,
+   "articles90": 19,
+   "recent20": 5,
+   "press": 19,
    "firstArticleAt": "2026-11-22T21:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "트럼프 \"이란, 전문 탭댄서처럼 항상 말만 해\"…새해 공격 재개 시사",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-22T22:28:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=243870"
+    },
+    {
+     "title": "트럼프 \"이란은 항상 말만 해\"…합의 불발시 새해 공격 경고",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-22T22:24:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321400&inflow=N"
+    },
+    {
      "title": "이란 전쟁 다시 확전되나…트럼프 새해 공격 경고 속 호르무즈 유조선 ...",
      "press": "topstarnews.net",
      "publishedAt": "2026-11-22T22:20:00.000Z",
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283301"
-    },
-    {
-     "title": "트럼프 이란 추가 공격 경고…\"드론·미사일 발사 급증, 좌시하지 않겠...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-22T22:16:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629622"
-    },
-    {
-     "title": "\"이란, 항상 말만 해\"…트럼프, 협상 결렬시 새해 공습 시사",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-22T22:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001165220?sid=104"
     }
    ]
   },
@@ -47,63 +47,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-22T21:00:00.000Z",
+   "articles90": 12,
+   "recent20": 4,
+   "press": 12,
+   "firstArticleAt": "2026-11-22T21:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "한전, 고객·직원 등 152만명 개인정보 유출...주민번호·계좌·카드정보...",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-22T22:24:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=73439"
+    },
+    {
+     "title": "한전, 고객 주민번호 포함 개인정보 150만 건 유출",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-22T22:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000368349?sid=101"
+    },
     {
      "title": "한국전력도 개인정보 152만명 유출…직원 정보 이어 고객정보까지 뚫렸...",
      "press": "newsian.co.kr",
      "publishedAt": "2026-11-22T22:18:00.000Z",
      "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101779"
-    },
-    {
-     "title": "한국전력 개인정보 152만 명 유출…주민번호에 계좌·카드번호까지",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-22T22:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979373?sid=101"
-    },
-    {
-     "title": "한전 개인정보 대규모 유출, 65만 명 피해자 긴급 대처 필요",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-22T21:36:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886785"
     }
    ]
   },
   {
-   "keyword": "2026년 11월 23일 운세",
+   "keyword": "아틀레티코 헤타페 승리",
    "sources": [
-    "signal.bz",
-    "nate"
+    "daum"
    ],
-   "articles90": 10,
-   "recent20": 1,
+   "articles90": 7,
+   "recent20": 3,
    "press": 7,
-   "firstArticleAt": "2026-11-22T21:00:00.000Z",
+   "firstArticleAt": "2026-11-22T21:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "오늘의 MBTI 운세 11월 23일 월요일",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-22T22:02:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=409652"
+     "title": "이강인, 헤타페전 45분 출전...킬 패스로 PK 유도→3-0 완승 기여",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-22T22:24:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/241/0003543004"
     },
     {
-     "title": "오늘의 별자리 운세 11월 23일 월요일",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-22T22:00:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=409651"
+     "title": "이강인 '교체 출전' 아틀레티코, 헤타페에 3:0 완승",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-22T22:19:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/055/0001404984"
     },
     {
-     "title": "[오늘의 운세] 2026년 11월 23일 월요일 띠별 운세… 쥐띠·닭띠·뱀띠 '...",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-22T21:58:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3083707"
+     "title": "이강인 45분 활약, 아틀레티코 헤타페 3-0 완파…라리가 3위 유지",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-22T22:16:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283295"
     }
    ]
   },
@@ -112,10 +111,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-22T20:53:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-22T21:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -144,13 +143,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 4,
+   "articles90": 6,
+   "recent20": 3,
+   "press": 5,
    "firstArticleAt": "2026-11-22T21:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김정은 “패권·팽창 추구 안 해”…30여년 만에 외국 대사 직접 맞았다",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-22T22:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005767370?sid=100"
+    },
     {
      "title": "김정은 “평화·발전이 핵심 가치관… 패권·팽창 추구 안 해”",
      "press": "kmib.co.kr",
@@ -162,12 +167,39 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-22T22:12:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014338545?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "2026년 11월 23일 운세",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-22T21:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "오늘의 MBTI 운세 11월 23일 월요일",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-22T22:02:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=409652"
     },
     {
-     "title": "김정은 \"전지구적 안보불안정…북한, 패권·팽창 추구 안 해\"",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-22T21:56:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/326092/?sc=Naver"
+     "title": "오늘의 별자리 운세 11월 23일 월요일",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-22T22:00:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=409651"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 23일 월요일 띠별 운세… 쥐띠·닭띠·뱀띠 '...",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-22T21:58:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3083707"
     }
    ]
   },
@@ -178,7 +210,7 @@
     "google"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-22T21:03:00.000Z",
    "exclusive": false,
@@ -201,39 +233,6 @@
      "press": "consumernews.co.kr",
      "publishedAt": "2026-11-22T21:10:00.000Z",
      "link": "http://www.consumernews.co.kr/news/articleView.html?idxno=768570"
-    }
-   ]
-  },
-  {
-   "keyword": "지스타",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T21:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[더벨][지스타 2026] 웹젠, 웹툰 IP '디겜폭'으로 신작 공백 끊는다",
-     "press": "thebell.co.kr",
-     "publishedAt": "2026-11-22T22:02:00.000Z",
-     "link": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202611191658217320106122"
-    },
-    {
-     "title": "그래도 지스타는 계속돼야 한다 [기자수첩-ICT]",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-22T22:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003158081?sid=105"
-    },
-    {
-     "title": "신작 시연부터 아이브·말왕까지! 나흘간 벡스코 달군 크래프톤, 지스타...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-22T21:48:00.000Z",
-     "link": "https://m.sports.naver.com/esports/article/468/0001282673"
     }
    ]
   },
@@ -268,13 +267,78 @@
      "link": "https://m.entertain.naver.com/article/609/0001190272"
     }
    ]
+  },
+  {
+   "keyword": "임영웅",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T21:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "임영웅, 295주째 왕좌 지켰다…아이돌차트 평점랭킹 1위",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-22T22:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001306161"
+    },
+    {
+     "title": "강혜연, 임영웅 이어 브랜드평판 2위…한 달 새 지수 4배 넘게 뛰었다",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-22T21:48:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=506788"
+    },
+    {
+     "title": "임영웅 팬클럽 라온, 로뎀의집 3300포기 김장봉사",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-22T21:38:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283267"
+    }
+   ]
+  },
+  {
+   "keyword": "지스타",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T21:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[더벨][지스타 2026] 웹젠, 웹툰 IP '디겜폭'으로 신작 공백 끊는다",
+     "press": "thebell.co.kr",
+     "publishedAt": "2026-11-22T22:02:00.000Z",
+     "link": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202611191658217320106122"
+    },
+    {
+     "title": "그래도 지스타는 계속돼야 한다 [기자수첩-ICT]",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-22T22:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003158081?sid=105"
+    },
+    {
+     "title": "신작 시연부터 아이브·말왕까지! 나흘간 벡스코 달군 크래프톤, 지스타...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-22T21:48:00.000Z",
+     "link": "https://m.sports.naver.com/esports/article/468/0001282673"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1121,
-  "matched": 626,
-  "avgLeadMin": 631,
+  "flagged": 1120,
+  "matched": 624,
+  "avgLeadMin": 633,
   "recent": [
    {
     "keyword": "검사",
