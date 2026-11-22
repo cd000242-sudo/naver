@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T19:40:26.534Z",
+ "builtAt": "2026-11-22T19:50:29.349Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,23 +16,23 @@
     "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 3,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-22T18:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "리비아서 러시아 군함 피격…\"우크라이나 드론 추정\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-22T19:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404960?sid=104"
-    },
-    {
      "title": "\"리비아 항구서 러시아 군함 피격...우크라 공격 추정\"",
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-22T19:29:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002436541?sid=104"
+    },
+    {
+     "title": "리비아서 러시아 군함 피격…\"우크라이나 드론 추정\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-22T19:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404960?sid=104"
     },
     {
      "title": "“리비아 항구 정박 러시아 군함 피격…우크라 드론 공격 추정”",
@@ -41,11 +41,75 @@
      "link": "https://n.news.naver.com/mnews/article/056/0012298911?sid=104"
     }
    ]
+  },
+  {
+   "keyword": "집",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T18:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "집 소유 21%가 1인 가구… 270만 가구로 역대 최고",
+     "press": "donga.com",
+     "publishedAt": "2026-11-22T19:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764329?sid=102"
+    },
+    {
+     "title": "매컬리 컬킨 ‘나 홀로 집에’ 34년만에 돌아온다",
+     "press": "donga.com",
+     "publishedAt": "2026-11-22T19:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764287?sid=102"
+    },
+    {
+     "title": "배달 봉투를 집에서 종량제봉투로…고양 12월 11일까지 시범 계획",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-22T19:10:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=409647"
+    }
+   ]
+  },
+  {
+   "keyword": "조희대 탄핵 연내 추진",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 2,
+   "firstArticleAt": "2026-11-22T19:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한덕수 판결 존중한다는 與… 절차 문제삼아 “조희대 탄핵”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-22T19:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764318?sid=100"
+    },
+    {
+     "title": "與 “‘6·3·3’ 위반도 曺탄핵 사유에 포함”… ‘중대성 요건’ 여부...",
+     "press": "donga.com",
+     "publishedAt": "2026-11-22T19:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764316?sid=100"
+    },
+    {
+     "title": "與, 연내 '조희대 탄핵' 못 박았다… \"韓 판결에 인내심 한계\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-22T19:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005444695?sid=100"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1116,
+  "flagged": 1118,
   "matched": 630,
   "avgLeadMin": 611,
   "recent": [
