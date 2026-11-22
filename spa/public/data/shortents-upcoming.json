@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T09:47:21.380Z",
+ "builtAt": "2026-11-22T09:57:24.013Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,101 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 23,
  "candidates": [
   {
-   "keyword": "조희대 탄핵 추진에",
+   "keyword": "한전 개인정보 유출",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 32,
-   "recent20": 4,
-   "press": 27,
-   "firstArticleAt": "2026-11-22T08:21:00.000Z",
+   "articles90": 33,
+   "recent20": 12,
+   "press": 32,
+   "firstArticleAt": "2026-11-22T09:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한국전력, 고객·직원 등 개인정보 150만건 유출",
+     "press": "segyebiz.com",
+     "publishedAt": "2026-11-22T09:56:00.000Z",
+     "link": "http://www.segyebiz.com/newsView/20261122509748?OutUrl=naver"
+    },
+    {
+     "title": "한전, 사이버 공격에 고객정보 152만건 유출… 주민·계좌번호까지 털렸...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-22T09:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177171?sid=102"
+    },
+    {
+     "title": "한전, 직원 이어 고객 정보도 유출…65만명 주민번호·카드번호 유출",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-22T09:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009303677?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "조희대 대법원장 탄핵",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 31,
+   "recent20": 6,
+   "press": 24,
+   "firstArticleAt": "2026-11-22T08:28:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "‘한덕수 판결’ 빼고 조희대 탄핵…“외통수” 우려도",
+     "title": "조희대 탄핵 추진에 여야 충돌 격화…與 \"연내 처리\" 野 \"진짜 내란\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T09:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014338375?sid=100"
+    },
+    {
+     "title": "대법원장 탄핵 ‘명분’ 논란… 법조계 “헌법상 파면요건 안 돼”",
+     "press": "segye.com",
+     "publishedAt": "2026-11-22T09:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177165?sid=102"
+    },
+    {
+     "title": "장동혁 “탈옥 탄핵”…오세훈 “대통령 심판 열차 출발”",
      "press": "ichannela.com",
-     "publishedAt": "2026-11-22T09:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000368328?sid=100"
+     "publishedAt": "2026-11-22T09:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000368329?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "최교진 수능 사의",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 26,
+   "recent20": 4,
+   "press": 23,
+   "firstArticleAt": "2026-11-22T08:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘수능 대혼란’ 최교진 교육장관 사퇴",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-22T09:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001886684?sid=102"
     },
     {
-     "title": "민주당의 조희대 대법원장 탄핵 추진, 국민의힘의 강력한 반발과 논란의...",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-22T09:40:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886753"
+     "title": "‘수능 혼란’ 최교진 교육부 장관 사퇴… 李 대통령 “국가시험 전면정...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-22T09:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177161?sid=102"
     },
     {
-     "title": "\"민주당, 법원 독립성 존중하며 대법원장 탄핵 절차적 문제 집중\"",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-22T09:40:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886751"
+     "title": "최교진 '수능 혼란 책임론' 대두…이 대통령, 사의 즉각 수락",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-22T09:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000521892?sid=100"
     }
    ]
   },
@@ -48,94 +112,62 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 26,
-   "recent20": 21,
-   "press": 24,
-   "firstArticleAt": "2026-11-22T09:24:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "정부, 미국발 증시 불안에 시장안정책 가동…증안펀드 준비 착수",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-22T09:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003158058?sid=101"
-    },
-    {
-     "title": "정부·금융당국, 증안펀드 가동 준비 착수…불법 공매도 집중감시",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T09:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014338372?sid=101"
-    },
-    {
-     "title": "한국마사회, 정부혁신박람회서 말문화 가치 알린다",
-     "press": "s-journal.co.kr",
-     "publishedAt": "2026-11-22T09:42:00.000Z",
-     "link": "https://www.s-journal.co.kr/news/articleView.html?idxno=45514"
-    }
-   ]
-  },
-  {
-   "keyword": "최교진 수능 사의",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 27,
-   "recent20": 5,
-   "press": 24,
-   "firstArticleAt": "2026-11-22T08:18:00.000Z",
+   "articles90": 21,
+   "recent20": 15,
+   "press": 18,
+   "firstArticleAt": "2026-11-22T09:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "최교진 '수능 혼란 책임론' 대두…이 대통령, 사의 즉각 수락",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-22T09:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000521892?sid=100"
+     "title": "[속보]월요일 증시 급락 공포에…정부 “증안펀드 즉시 가동 준비”",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-22T09:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002834583?sid=101"
     },
     {
-     "title": "수능 전후 사라진 최교진…1시간 만에 사표 수리",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-22T09:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000368326?sid=102"
+     "title": "증시 급락 우려에 정부 긴급 대응‥안정펀드 가동 준비",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-22T09:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537239?sid=101"
     },
     {
-     "title": "이재명 대통령, 수능 혼란 속 최교진 교육부 장관 사의 신속 수용... 후...",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-22T09:34:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886732"
+     "title": "[속보] 블랙먼데이 우려에…정부, 증시안정펀드 가동 준비 착수",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-22T09:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001273546?sid=101"
     }
    ]
   },
   {
-   "keyword": "코스피 급락",
+   "keyword": "KB 4연패 탈출",
    "sources": [
     "daum"
    ],
-   "articles90": 17,
-   "recent20": 3,
-   "press": 13,
-   "firstArticleAt": "2026-11-22T08:19:00.000Z",
-   "exclusive": false,
+   "articles90": 13,
+   "recent20": 0,
+   "press": 11,
+   "firstArticleAt": "2026-11-22T08:28:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "정부, 증안펀드 즉시 가동 준비…증시 급락에 긴급 안정책 가동",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-22T09:40:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886750"
+     "title": "'박지수 15점 19리바운드' KB스타즈, 삼성생명에 26점차 대승…4연패 탈...",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-22T09:20:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110037045584"
     },
     {
-     "title": "정부, 증시 급락에 증안펀드 가동 준비 착수…자사주 매입 규제 완화",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-22T09:38:00.000Z",
-     "link": "https://www.ajunews.com/view/20261122183043351"
+     "title": "‘괴력의 박지수’ KB 4연패 탈출 이끌다···15점·19리바운드 펄펄, 삼...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-22T09:18:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/144/0001151134"
     },
     {
-     "title": "[속보] 정부, 증시 급락에 증안펀드 가동 준비",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-22T09:30:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1176741"
+     "title": "[AI상보] 허예은-박지수 쌍끌이, KB 삼성생명 70-44로 완파하고 4연패 탈...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-22T09:18:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261122000109"
     }
    ]
   },
@@ -145,13 +177,19 @@
     "nate",
     "daum"
    ],
-   "articles90": 47,
-   "recent20": 8,
+   "articles90": 48,
+   "recent20": 6,
    "press": 10,
    "firstArticleAt": "2026-11-22T08:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "금메달 획득한 대한민국 대표팀 선수들",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-22T09:52:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/001/0016456967"
+    },
     {
      "title": "한국 쇼트트랙, 안방서 계주 금메달로 월드 투어 3차 대미 장식…금3·은...",
      "press": "sports.donga.com",
@@ -163,12 +201,6 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-22T09:44:00.000Z",
      "link": "https://m.sports.naver.com/general/article/421/0009303670"
-    },
-    {
-     "title": "‘위기론’에 금메달로 응답… 남자 쇼트트랙, 5000m 계주 정상",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-22T09:41:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/469/0000967080"
     }
    ]
   },
@@ -177,10 +209,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-22T08:21:00.000Z",
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-22T08:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -205,47 +237,15 @@
    ]
   },
   {
-   "keyword": "KB 삼성생명 완파",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-22T08:55:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'박지수 15점 19리바운드' KB스타즈, 삼성생명에 26점차 대승…4연패 탈...",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-22T09:20:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110037045584"
-    },
-    {
-     "title": "[현장인터뷰] 4연패 사슬 끊은 KB 김완수 감독, 부활한 박지수 어떻게 봤...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-22T09:20:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/076/0004468693"
-    },
-    {
-     "title": "[AI상보] 허예은-박지수 쌍끌이, KB 삼성생명 70-44로 완파하고 4연패 탈...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-22T09:18:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261122000109"
-    }
-   ]
-  },
-  {
    "keyword": "고경표 음주운전 사과",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T08:18:00.000Z",
-   "exclusive": true,
+   "press": 5,
+   "firstArticleAt": "2026-11-22T08:31:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
@@ -269,14 +269,46 @@
    ]
   },
   {
+   "keyword": "윙슈터",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T09:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "국내 최초 여성 윙슈터 권혜연... 무소유 삶 고백 \"비행 위해 집도 차도...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-22T09:50:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000492402"
+    },
+    {
+     "title": "윙슈터 권혜연, 한국에 집도 차도 없다‥회사 월급 95% 윙슈팅에 올인(...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-22T09:38:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190186"
+    },
+    {
+     "title": "'전집시' 3회 윙슈터 권혜연, 1만4000피트 상공서 낙하",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-22T09:18:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282956"
+    }
+   ]
+  },
+  {
    "keyword": "코스닥",
    "sources": [
     "google"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T08:20:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-22T09:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -299,76 +331,11 @@
      "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=302370"
     }
    ]
-  },
-  {
-   "keyword": "노동자",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T08:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "간병노동자, 병원·소개소 지시받는데···'산재보험 적용'은?",
-     "press": "laborplus.co.kr",
-     "publishedAt": "2026-11-22T08:36:00.000Z",
-     "link": "https://www.laborplus.co.kr/news/articleView.html?idxno=41864"
-    },
-    {
-     "title": "인천 계양구, 이동노동자 쉼터 개소... 편안한 휴식공간 마련",
-     "press": "cnbnews.com",
-     "publishedAt": "2026-11-22T08:18:00.000Z",
-     "link": "https://www.cnbnews.com/news/articleView.html?idxno=1024751"
-    },
-    {
-     "title": "고용허가제 22년…이주노동자는 왜 위험한 일터를 떠나지 못하나",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-22T08:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833382?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "김영훈",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T08:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김영훈 “27일 국회 정년연장 특위서 합의 불발 땐 정부 입장 발표”",
-     "press": "segye.com",
-     "publishedAt": "2026-11-22T09:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177159?sid=102"
-    },
-    {
-     "title": "김영훈 “정년연장, 27일 국회 특위 전후로 정부 입장 발표할 것”",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-22T08:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833391?sid=102"
-    },
-    {
-     "title": "김영훈, 정년 연장 합의 불발 시 정부안 발표 예고…\"더 기다리지 않을...",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-22T08:22:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321385&inflow=N"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1050,
+  "flagged": 1052,
   "matched": 602,
   "avgLeadMin": 624,
   "recent": [
