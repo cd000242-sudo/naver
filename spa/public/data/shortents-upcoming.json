@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T03:35:06.799Z",
+ "builtAt": "2026-11-22T03:45:09.723Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,71 +8,101 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 25,
  "candidates": [
   {
-   "keyword": "최교진 사의 표명",
+   "keyword": "최교진, 수능 책임 통감",
    "sources": [
-    "nate",
-    "daum"
+    "nate"
    ],
-   "articles90": 84,
-   "recent20": 15,
-   "press": 69,
-   "firstArticleAt": "2026-11-22T02:42:00.000Z",
+   "articles90": 88,
+   "recent20": 17,
+   "press": 71,
+   "firstArticleAt": "2026-11-22T02:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“‘수능 대혼란’ 책임” 최교진 교육부장관 사의 표명",
-     "press": "segye.com",
-     "publishedAt": "2026-11-22T03:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177095?sid=102"
+     "title": "[속보] 최교진, '수능 대혼란' 책임지고 사의…\"준비 미흡 비판 통감\"",
+     "press": "tjb.co.kr",
+     "publishedAt": "2026-11-22T03:44:00.000Z",
+     "link": "https://www.tjb.co.kr/news05/bodo/view/id/106357"
     },
     {
-     "title": "[속보]이 대통령, 최교진 교육부 장관 사의 표명 수락…靑 \"후임 인선 절...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T03:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014337985?sid=100"
+     "title": "'수능 대혼란' 책임지고 사의…최교진 입장문 보니",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-22T03:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404863?sid=102"
     },
     {
-     "title": "[속보]李대통령, 최교진 교육부 장관 사의표명 수용",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T03:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009303304?sid=100"
+     "title": "위태로웠던 최교진 교육장관, 결국 사의 표명",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-22T03:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413685?sid=102"
     }
    ]
   },
   {
    "keyword": "조희대 탄핵소추 기자간담회",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 38,
+   "articles90": 33,
    "recent20": 6,
-   "press": 25,
-   "firstArticleAt": "2026-11-22T02:08:00.000Z",
+   "press": 24,
+   "firstArticleAt": "2026-11-22T02:18:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "與 \"조희대 탄핵안 연내 처리…한덕수 판결, 사유로 삼지 않겠다\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-22T03:34:00.000Z",
-     "link": "https://www.ajunews.com/view/20261122112806596"
+     "title": "\"조희대의 시계는 사건마다 다르게 흘러\"...민주당 \"12월 소추안 의결\"",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-22T03:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002536773?sid=100"
     },
     {
-     "title": "민주 조희대 탄핵추진단 \"한덕수 판결은 탄핵 사유 아냐...절차 하자는 ...",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-22T03:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436354?sid=100"
+     "title": "與, 조희대 탄핵안 연내 처리…\"한덕수 판결, 절차상 하자 탄핵 사유\"(종...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T03:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014337989?sid=100"
     },
     {
-     "title": "[속보] 與, 조희대 탄핵안 연내 처리...\"한덕수 판결, 절차상 하자\"",
-     "press": "cjb.co.kr",
-     "publishedAt": "2026-11-22T03:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/655/0000033659?sid=100"
+     "title": "민주당 \"조희대 대법원장 탄핵안 연내 처리\"…정국 긴장 고조",
+     "press": "namdonews.com",
+     "publishedAt": "2026-11-22T03:38:00.000Z",
+     "link": "https://www.namdonews.com/news/articleView.html?idxno=929992"
+    }
+   ]
+  },
+  {
+   "keyword": "조국, 당명 개정 제안",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 15,
+   "recent20": 1,
+   "press": 15,
+   "firstArticleAt": "2026-11-22T02:16:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "조국혁신당 조국, 창당 1000일 앞두고 당명 개정 제안",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-22T03:40:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3759419"
+    },
+    {
+     "title": "조국 \"확장성 있는 당명 필요하다\" 새 당명 찾는다",
+     "press": "mediatoday.co.kr",
+     "publishedAt": "2026-11-22T03:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/006/0000138883?sid=100"
+    },
+    {
+     "title": "‘조국혁신당’에 ‘조국’ 빠지나…조국 “당명 개정하자”",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-22T03:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003566930?sid=100"
     }
    ]
   },
@@ -101,83 +131,17 @@
      "link": "https://n.news.naver.com/mnews/article/666/0000133169?sid=101"
     },
     {
-     "title": "대학생 45% \"올해 취업시장 작년보다 어렵다\" … 1년 이상 취업 준비도 ...",
-     "press": "worktoday.co.kr",
-     "publishedAt": "2026-11-22T02:56:00.000Z",
-     "link": "http://www.worktoday.co.kr/news/articleView.html?idxno=92455"
-    }
-   ]
-  },
-  {
-   "keyword": "한국 수출 1조달러",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-22T02:11:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "1분에 42억원어치 팔았다…7가지 숫자로 본 수출 1조달러",
-     "press": "dnews.co.kr",
-     "publishedAt": "2026-11-22T03:20:00.000Z",
-     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611211753234320018"
-    },
-    {
-     "title": "수출 1조 달러 돌파한 韓, 세계 4위 눈앞…반도체 제외 시 8위",
+     "title": "취업문 더 좁아졌다…대학생 45% \"작년보다 취업 어렵다\"",
      "press": "joongangenews.com",
-     "publishedAt": "2026-11-22T02:42:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=565635"
-    },
-    {
-     "title": "‘SK하이닉스 1조달러 인수’ 손정의의 빅베팅, 왜 멈췄나",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-22T02:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001206467?sid=105"
-    }
-   ]
-  },
-  {
-   "keyword": "재산",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 10,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-22T02:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "지식재산연수원, 2027년 상반기 변리사 실무수습 집합교육 참가자 모집",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-22T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003488219?sid=102"
-    },
-    {
-     "title": "지식재산처, 특허 통계도 AI가 읽는다…'마크다운' 형식 자료 개방",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-22T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003488226?sid=102"
-    },
-    {
-     "title": "지식재산처, AI 친화적 '마크다운' 형식 통계 간행물 제공",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-22T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005607751?sid=102"
+     "publishedAt": "2026-11-22T02:56:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=565638"
     }
    ]
   },
   {
    "keyword": "고경표 음주운전 중단 논란",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 8,
    "recent20": 0,
@@ -225,7 +189,7 @@
      "link": "https://www.dkilbo.com/news/articleView.html?idxno=561551"
     },
     {
-     "title": "노동장관 “정년연장, 27일 여당 특위서 결론 없으면 정부안 낸다”",
+     "title": "노동장관, 與에 ‘정년연장’ 최후통첩…“27일 넘기면 정부안”",
      "press": "joongang.co.kr",
      "publishedAt": "2026-11-22T03:06:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/025/0003566927?sid=102"
@@ -239,34 +203,99 @@
    ]
   },
   {
-   "keyword": "류재철 CEO 협력사 혁신",
+   "keyword": "철도노조 쟁의행위 예고",
    "sources": [
     "nate"
    ],
-   "articles90": 7,
+   "articles90": 10,
    "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-22T02:06:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-22T02:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "LG전자, 협력사 88곳과 맞선...제조 경쟁력 강화 나선다",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-22T03:16:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=506691"
+     "title": "철도노조, 23일부터 준법투쟁…일부 열차 중지 및 지연 예고 [뉴시스Pic...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T03:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014337984?sid=102"
     },
     {
-     "title": "LG전자, 협력회 워크숍 개최…공정 자동화·AI 기반 제조 혁신 논의",
-     "press": "zdnet.co.kr",
-     "publishedAt": "2026-11-22T02:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/092/0002446351?sid=105"
+     "title": "철도노조 23일부터 쟁의행위, 일부 열차 지연 및 중지 예고",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T03:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014337968?sid=102"
     },
     {
-     "title": "류재철 LG전자 CEO \"협력사와 제조 혁신으로 성장 기회 잡을 것\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-22T02:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004212424?sid=101"
+     "title": "코레일 쟁의행위 예고, 수험생 불편 예상",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T03:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014337960?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "재산",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 8,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-22T02:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "지식재산처, AI 친화적 '마크다운' 형식 통계 간행물 제공",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-22T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005607751?sid=102"
+    },
+    {
+     "title": "지식재산처, 특허 통계도 AI가 읽는다…'마크다운' 형식 자료 개방",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-22T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003488226?sid=102"
+    },
+    {
+     "title": "지식재산연수원, 2027년 상반기 변리사 실무수습 집합교육 참가자 모집",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-22T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003488219?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "음주운전으로 핑계고 후보",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-22T02:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'음주운전' 고경표, 활동중단→방송가도 손절했는데..'핑계고' 인기상 ...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-22T03:06:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005643890"
+    },
+    {
+     "title": "‘음주운전’ 고경표, 인기상 후보 논란…사태 심각성 인지 못하나",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-22T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002726711?sid=102"
+    },
+    {
+     "title": "음주운전 8일 만에 '핑계고' 시상식 후보라니…고경표 자격 있나",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-22T02:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005444558"
     }
    ]
   },
@@ -275,10 +304,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 7,
+   "articles90": 5,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T02:10:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-22T02:19:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -301,43 +330,11 @@
      "link": "https://m.sports.naver.com/golf/article/088/0001041561"
     }
    ]
-  },
-  {
-   "keyword": "철인3종 익사 무죄",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T02:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘수영 실격’ 숨긴 참가자 돌연 익사…철인3종 주최측 5명 2심도 무죄",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-22T03:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003060422?sid=102"
-    },
-    {
-     "title": "철인3종 경기 중 물에 빠져…'참가자 익사 사고' 2심도 무죄",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-22T02:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001273515?sid=102"
-    },
-    {
-     "title": "철인3종 경기 중 30대 참가자 익사…안전책임자 5명 2심도 무죄",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-22T02:14:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085275"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 967,
+  "flagged": 971,
   "matched": 562,
   "avgLeadMin": 624,
   "recent": [
