@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T08:57:02.641Z",
+ "builtAt": "2026-11-22T09:07:08.938Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 24,
  "candidates": [
+  {
+   "keyword": "조희대 탄핵 추진",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 41,
+   "recent20": 3,
+   "press": 33,
+   "firstArticleAt": "2026-11-22T07:45:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "與 \"연내 조희대 탄핵안 국회 의결\"… 예산안 일정과 조율",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-22T09:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005607839?sid=100"
+    },
+    {
+     "title": "민주당, 조희대 탄핵안 연내 처리 방침...야권과 갈등 더욱 거세져",
+     "press": "inews365.com",
+     "publishedAt": "2026-11-22T09:02:00.000Z",
+     "link": "https://www.inews365.com/news/article.html?no=944697"
+    },
+    {
+     "title": "\"10%p 올린다더니 뒷걸음\"…취임 100일 김민석, '조희대 탄핵'으로 돌파...",
+     "press": "idaegu.co.kr",
+     "publishedAt": "2026-11-22T08:54:00.000Z",
+     "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=566066"
+    }
+   ]
+  },
   {
    "keyword": "최교진 수능 사의",
    "sources": [
     "signal.bz"
    ],
    "articles90": 32,
-   "recent20": 8,
+   "recent20": 7,
    "press": 30,
-   "firstArticleAt": "2026-11-22T07:30:00.000Z",
+   "firstArticleAt": "2026-11-22T07:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'수능 혼선' 최교진 교육장관 전격 사퇴…차기 수장 후보군 누가 될까",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-22T08:54:00.000Z",
-     "link": "https://www.ajunews.com/view/20261122173829246"
+     "title": "與, 최교진 사퇴에 \"전문성·책임감 갖춘 인사 신속 선임되길\"",
+     "press": "pressian.com",
+     "publishedAt": "2026-11-22T09:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/002/0002467021?sid=100"
     },
     {
-     "title": "최교진 교육장관 사퇴…이 대통령 “시험 공정성은 타협할 수 없는 원칙...",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-22T08:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833394?sid=102"
+     "title": "기술개발, 감독 강화부터 시험체계 개편까지…수능 ‘AI 커닝’이 남긴...",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-22T09:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000133243?sid=102"
     },
     {
-     "title": "최교진, 수능 사흘 만에 사임…“책임자로서 리더십 한계” 줄줄이 비판",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-22T08:50:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611220017"
+     "title": "최교진 교육부 장관, 수능 대책 혼선에 사의…이 대통령 수락",
+     "press": "kyongbuk.co.kr",
+     "publishedAt": "2026-11-22T09:00:00.000Z",
+     "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4091677"
     }
    ]
   },
@@ -47,42 +79,75 @@
    "sources": [
     "google"
    ],
-   "articles90": 29,
-   "recent20": 2,
-   "press": 29,
-   "firstArticleAt": "2026-11-22T07:28:00.000Z",
+   "articles90": 22,
+   "recent20": 3,
+   "press": 21,
+   "firstArticleAt": "2026-11-22T07:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "수색 닷새 만에 해저서 해광호 발견…해군 무인탐사기로 최종 확인",
+     "title": "해저지진은 펄스, 선박은 이어지는 저음",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-22T09:06:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=409494"
+    },
+    {
+     "title": "태안 실종 어선 해광호, 수색 닷새 만에 해저 53m서 발견",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-22T09:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005607838?sid=102"
+    },
+    {
+     "title": "SK브로드밴드, 데이터센터·해저케이블 분할…\"2030년 매출 5조원 목표\"",
      "press": "ajunews.com",
-     "publishedAt": "2026-11-22T08:44:00.000Z",
-     "link": "https://www.ajunews.com/view/20261122173151207"
-    },
-    {
-     "title": "태안 해저서 실종 어선 해광호 발견",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-22T08:42:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4120094"
-    },
-    {
-     "title": "태안 실종 어선 '해광호', 수심 52m 해저서 발견⋯수색 닷새 만",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-22T08:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001077280?sid=102"
+     "publishedAt": "2026-11-22T09:00:00.000Z",
+     "link": "https://www.ajunews.com/view/20261122145202895"
     }
    ]
   },
   {
-   "keyword": "고경표 음주 사과",
+   "keyword": "18득점 시즌 현대건설",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-22T07:29:00.000Z",
+   "articles90": 10,
+   "recent20": 0,
+   "press": 10,
+   "firstArticleAt": "2026-11-22T07:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "현대건설, 흥국생명 3-0 완파…올 시즌 첫 연승",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-22T08:32:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3759580"
+    },
+    {
+     "title": "‘메가 18득점·조던 16득점’ 현대건설, 흥국생명 3-0 완파하고 2연승…...",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-22T08:24:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/382/0001306122"
+    },
+    {
+     "title": "“조던, 메가 범실 적었다” 강성형 현대건설 감독, 안정적 활약에 ‘엄...",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-22T08:20:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/396/0000761616"
+    }
+   ]
+  },
+  {
+   "keyword": "고경표 후보 사과",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 0,
+   "press": 9,
+   "firstArticleAt": "2026-11-22T07:45:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -109,96 +174,32 @@
   {
    "keyword": "정부",
    "sources": [
-    "google"
+    "signal.bz"
    ],
    "articles90": 10,
-   "recent20": 8,
+   "recent20": 7,
    "press": 8,
-   "firstArticleAt": "2026-11-22T08:37:00.000Z",
+   "firstArticleAt": "2026-11-22T08:46:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "정부 긴급 F4 회의 소집…증시 안정책 내놓고 '블랙먼데이' 우려 잠재워...",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-22T08:54:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886728"
+     "title": "2029년부터 정년 한 살씩 늘리나…65세 정년연장, 정부안 발표 초읽기",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-22T09:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005767323?sid=101"
     },
     {
-     "title": "김영훈 “정년연장, 27일 국회 특위 전후로 정부 입장 발표할 것”",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-22T08:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833391?sid=102"
+     "title": "국민의힘 포항북당협, 현 정부 사법 현안 및 정책 제도 규탄…화합·조...",
+     "press": "pressian.com",
+     "publishedAt": "2026-11-22T09:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/002/0002467022?sid=102"
     },
     {
-     "title": "정부, 수능 AI 부정행위 추적…글로벌 AI 기업과 협력",
-     "press": "kyongbuk.co.kr",
-     "publishedAt": "2026-11-22T08:46:00.000Z",
-     "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4091672"
-    }
-   ]
-  },
-  {
-   "keyword": "김정은",
-   "sources": [
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T07:31:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"트럼프, 김정은에 회담 제안했지만 北 '조건' 내걸어 무산\"",
-     "press": "goodnews1.com",
-     "publishedAt": "2026-11-22T08:28:00.000Z",
-     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466498"
-    },
-    {
-     "title": "\"트럼프, 김정은 만나려 비핵화 없는 종전선언 검토\" 파장",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-22T07:50:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/22/2026112250086.html"
-    },
-    {
-     "title": "\"트럼프, 김정은 만나기 위해 '종전선언'까지 검토\"",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-22T07:40:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/326072/?sc=Naver"
-    }
-   ]
-  },
-  {
-   "keyword": "이형일 부총리 주재 회의",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T07:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "정부 긴급 F4 회의 소집…증시 안정책 내놓고 '블랙먼데이' 우려 잠재워...",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-22T08:54:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886728"
-    },
-    {
-     "title": "글로벌 반도체 급락에 '블랙먼데이' 우려…정부, 긴급 F4 회의 소집",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-22T08:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005356733?sid=100"
-    },
-    {
-     "title": "\"공매도 제한 카드 나올까\"...'검은 월요일' 공포에 정부 긴급 F4 회의",
-     "press": "ntoday.co.kr",
-     "publishedAt": "2026-11-22T08:30:00.000Z",
-     "link": "https://www.ntoday.co.kr/news/articleView.html?idxno=131051"
+     "title": "[전남광주, 시민주권정부 전망과 과제]① 기본계획 로드맵",
+     "press": "namdonews.com",
+     "publishedAt": "2026-11-22T09:02:00.000Z",
+     "link": "https://www.namdonews.com/news/articleView.html?idxno=930058"
     }
    ]
   },
@@ -235,8 +236,41 @@
    ]
   },
   {
+   "keyword": "김정은",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T07:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"트럼프, 김정은에 거듭 '대화' 타진…北이 조건 걸어 회담 무산\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-22T08:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005444645?sid=104"
+    },
+    {
+     "title": "\"트럼프, 김정은에 회담 제안했지만 北 '조건' 내걸어 무산\"",
+     "press": "goodnews1.com",
+     "publishedAt": "2026-11-22T08:28:00.000Z",
+     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466498"
+    },
+    {
+     "title": "\"트럼프, 김정은 만나려 비핵화 없는 종전선언 검토\" 파장",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-22T07:50:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/22/2026112250086.html"
+    }
+   ]
+  },
+  {
    "keyword": "노동자",
    "sources": [
+    "signal.bz",
     "google"
    ],
    "articles90": 4,
@@ -253,23 +287,22 @@
      "link": "https://www.laborplus.co.kr/news/articleView.html?idxno=41864"
     },
     {
-     "title": "고용허가제 22년…이주노동자는 왜 위험한 일터를 떠나지 못하나",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-22T08:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833382?sid=102"
-    },
-    {
      "title": "인천 계양구, 이동노동자 쉼터 개소... 편안한 휴식공간 마련",
      "press": "cnbnews.com",
      "publishedAt": "2026-11-22T08:18:00.000Z",
      "link": "https://www.cnbnews.com/news/articleView.html?idxno=1024751"
+    },
+    {
+     "title": "고용허가제 22년…이주노동자는 왜 위험한 일터를 떠나지 못하나",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-22T08:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002833382?sid=102"
     }
    ]
   },
   {
    "keyword": "검은 월요일",
    "sources": [
-    "signal.bz",
     "google"
    ],
    "articles90": 4,
@@ -334,10 +367,16 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1037,
-  "matched": 598,
-  "avgLeadMin": 627,
+  "flagged": 1039,
+  "matched": 599,
+  "avgLeadMin": 626,
   "recent": [
+   {
+    "keyword": "대구fc",
+    "hitKeyword": "대구FC 3위",
+    "hitAt": "2026-11-22T18:00:00+09:00",
+    "leadMin": 114
+   },
    {
     "keyword": "최민정",
     "hitKeyword": "최민정 500m 결승",
@@ -389,12 +428,6 @@
    {
     "keyword": "현대건설 2연승",
     "hitKeyword": "현대건설 2연승",
-    "hitAt": "2026-11-22T17:00:00+09:00",
-    "leadMin": 23
-   },
-   {
-    "keyword": "1251회 로또 당첨 번호",
-    "hitKeyword": "로또 2등 10장 당첨",
     "hitAt": "2026-11-22T17:00:00+09:00",
     "leadMin": 23
    }
