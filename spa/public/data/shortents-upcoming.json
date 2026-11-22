@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T22:31:19.881Z",
+ "builtAt": "2026-11-22T22:41:23.570Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,101 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 24,
  "candidates": [
   {
-   "keyword": "트럼프 이란 공격 경고",
+   "keyword": "전국 비 눈 출근길",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 19,
-   "recent20": 5,
-   "press": 19,
-   "firstArticleAt": "2026-11-22T21:02:00.000Z",
+   "articles90": 16,
+   "recent20": 6,
+   "press": 14,
+   "firstArticleAt": "2026-11-22T21:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "트럼프 \"이란, 전문 탭댄서처럼 항상 말만 해\"…새해 공격 재개 시사",
-     "press": "ngonews.kr",
-     "publishedAt": "2026-11-22T22:28:00.000Z",
-     "link": "https://www.ngonews.kr/news/articleView.html?idxno=243870"
+     "title": "[오늘날씨] 강원 최대 8cm 눈·서울 30mm 비…출근길 '어는 비' 빙판 주의",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-22T22:38:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886796"
     },
     {
-     "title": "트럼프 \"이란은 항상 말만 해\"…합의 불발시 새해 공격 경고",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-22T22:24:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321400&inflow=N"
+     "title": "\"오늘 출근길에 우산 챙기세요\"…전국 비·눈 예보",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-22T22:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979385?sid=102"
     },
     {
-     "title": "이란 전쟁 다시 확전되나…트럼프 새해 공격 경고 속 호르무즈 유조선 ...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-22T22:20:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283301"
+     "title": "전국 곳곳 비·눈 내린다…'이 지역'은 대설특보 가능성",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-22T22:36:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1176803"
     }
    ]
   },
   {
-   "keyword": "한전 고객 개인정보 유출",
+   "keyword": "LPGA 최종전 공동 7위",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 4,
-   "press": 12,
-   "firstArticleAt": "2026-11-22T21:05:00.000Z",
+   "articles90": 15,
+   "recent20": 2,
+   "press": 14,
+   "firstArticleAt": "2026-11-22T21:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한전, 고객·직원 등 152만명 개인정보 유출...주민번호·계좌·카드정보...",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-22T22:24:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=73439"
+     "title": "김아림, LPGA 시즌 최종전 공동 7위…티띠꾼 대회 3연패",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T22:37:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/003/0014338554"
     },
     {
-     "title": "한전, 고객 주민번호 포함 개인정보 150만 건 유출",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-22T22:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000368349?sid=101"
+     "title": "마지막 날 흔들린 김아림, LPGA 최종전 공동 7위…티띠꾼 3년 연속 우승",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-22T22:30:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110039217775"
     },
     {
-     "title": "한국전력도 개인정보 152만명 유출…직원 정보 이어 고객정보까지 뚫렸...",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-22T22:18:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101779"
+     "title": "김아림, LPGA 투어 시즌 최종전 공동 7위… 지노 티띠꾼 대회 3연패",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-22T22:17:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/396/0000761636"
+    }
+   ]
+  },
+  {
+   "keyword": "김정은 대사 신임장 접수",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 4,
+   "press": 8,
+   "firstArticleAt": "2026-11-22T21:45:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김정은 “현 국제정세, 우리의 힘과 능력 요구…패권·팽창 추구 안해”",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-22T22:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003567116?sid=100"
+    },
+    {
+     "title": "김정은 “전지구적 안보 불안정…북, 패권·팽창 추구 안 해”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-22T22:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012298948?sid=100"
+    },
+    {
+     "title": "김정은 \"세계 안보위기 심각…北, 패권·팽창 추구 안 해\"",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-22T22:31:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085441"
     }
    ]
   },
@@ -80,7 +112,7 @@
     "daum"
    ],
    "articles90": 7,
-   "recent20": 3,
+   "recent20": 1,
    "press": 7,
    "firstArticleAt": "2026-11-22T21:56:00.000Z",
    "exclusive": false,
@@ -107,79 +139,78 @@
    ]
   },
   {
-   "keyword": "영변 우라늄 원심분리기",
+   "keyword": "조희대 탄핵 논란이다",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T21:12:00.000Z",
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-22T21:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "영변에 건물 하나 더 세운 북한…핵물질 연 35㎏ 추가 생산 가능성",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-22T21:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005767361?sid=100"
+     "title": "내란 인정·한덕수 일부 책임 부정한 '조희대' 대법원...민주당 '탄핵' ...",
+     "press": "newswhoplus.com",
+     "publishedAt": "2026-11-22T22:30:00.000Z",
+     "link": "https://www.newswhoplus.com/news/articleView.html?idxno=75045"
     },
     {
-     "title": "北 영변 우라늄 농축시설 증축…“원심분리기 추가 땐 연 35㎏ 넘게 더 ...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-22T21:36:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2651386"
+     "title": "'한덕수 판결' 탄핵 사유 넣었다가 뺐다가 '오락가락'",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-22T22:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979377?sid=100"
     },
     {
-     "title": "“北 영변 핵시설 증축…우라늄 연 35㎏ 추가 생산 가능”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-22T21:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764333?sid=100"
+     "title": "조희대 탄핵 결정한 민주당, 최선의 시나리오는?",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-22T22:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002536809?sid=100"
     }
    ]
   },
   {
-   "keyword": "김정은, 10개국 신임장 접수",
+   "keyword": "미국 민주당 거대 야당",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 3,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T21:45:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T21:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김정은 “패권·팽창 추구 안 해”…30여년 만에 외국 대사 직접 맞았다",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-22T22:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005767370?sid=100"
+     "title": "美 민주당, 하원 최소 258석 확보…트럼프 견제할 거대 야당 탄생",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-22T22:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000161958?sid=104"
     },
     {
-     "title": "김정은 “평화·발전이 핵심 가치관… 패권·팽창 추구 안 해”",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-22T22:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001886790?sid=100"
+     "title": "美 민주당, 하원 258석 확보… 클린턴 이후 34년 만의 최대",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-22T21:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000967122?sid=104"
     },
     {
-     "title": "김정은, 대사 신임장 접수…\"북, 패권도 팽창도 추구 안 해\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T22:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014338545?sid=100"
+     "title": "“트럼프 견제할 거대 야당 탄생”…美민주, 하원 34년 만에 최대 의석...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-22T21:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002726810?sid=104"
     }
    ]
   },
   {
    "keyword": "2026년 11월 23일 운세",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 8,
+   "articles90": 6,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T21:02:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-22T21:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -196,150 +227,94 @@
      "link": "https://www.vegannews.co.kr/news/article.html?no=409651"
     },
     {
-     "title": "[오늘의 운세] 2026년 11월 23일 월요일 띠별 운세… 쥐띠·닭띠·뱀띠 '...",
-     "press": "newsclaim.co.kr",
+     "title": "[오늘의 운세] 띠별 운세 11월 23일",
+     "press": "vegannews.co.kr",
      "publishedAt": "2026-11-22T21:58:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3083707"
+     "link": "https://www.vegannews.co.kr/news/article.html?no=409650"
     }
    ]
   },
   {
-   "keyword": "삼성전자",
+   "keyword": "최교진 교육부 장관 면직",
    "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T21:03:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "삼성전자 18만원·SK하이닉스 110만원 지킬까…반도체 업황 전망 엇갈려",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-22T22:16:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283296"
-    },
-    {
-     "title": "D램 가격 400% 상승 전망…SK하이닉스·삼성전자 수익성 개선 기대",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-22T22:06:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=506796"
-    },
-    {
-     "title": "삼성전자·SK하이닉스, 中 매출 3배 이상 급증…매출 증가율 美 크게 앞...",
-     "press": "consumernews.co.kr",
-     "publishedAt": "2026-11-22T21:10:00.000Z",
-     "link": "http://www.consumernews.co.kr/news/articleView.html?idxno=768570"
-    }
-   ]
-  },
-  {
-   "keyword": "라면",
-   "sources": [
-    "google"
+    "signal.bz"
    ],
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-22T21:04:00.000Z",
+   "firstArticleAt": "2026-11-22T22:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "라면값은 내리며 담합 조사받는 식품업계…같은 시기 과자·음료는 줄인...",
-     "press": "dailyt.co.kr",
-     "publishedAt": "2026-11-22T22:20:00.000Z",
-     "link": "https://www.dailyt.co.kr/newsView/dlt202611230001"
+     "title": "이 대통령 최교진 사의 수용…수능 파문에 교육부 수장 교체, 수험생 입...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-22T22:34:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629631"
     },
     {
-     "title": "K라면 10개월 만에 15억불 돌파…연간 20억불 사상 최대 눈앞",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-22T21:42:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=202611230639528110e7e8286d56_1"
-    },
-    {
-     "title": "34세 김용빈, 불닭라면 초면에 밸런타인데이 모르다니‥박명수 포기 “...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-22T21:04:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190272"
-    }
-   ]
-  },
-  {
-   "keyword": "임영웅",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T21:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "임영웅, 295주째 왕좌 지켰다…아이돌차트 평점랭킹 1위",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-22T22:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001306161"
-    },
-    {
-     "title": "강혜연, 임영웅 이어 브랜드평판 2위…한 달 새 지수 4배 넘게 뛰었다",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-22T21:48:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=506788"
-    },
-    {
-     "title": "임영웅 팬클럽 라온, 로뎀의집 3300포기 김장봉사",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-22T21:38:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283267"
-    }
-   ]
-  },
-  {
-   "keyword": "지스타",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T21:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[더벨][지스타 2026] 웹젠, 웹툰 IP '디겜폭'으로 신작 공백 끊는다",
-     "press": "thebell.co.kr",
-     "publishedAt": "2026-11-22T22:02:00.000Z",
-     "link": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202611191658217320106122"
-    },
-    {
-     "title": "그래도 지스타는 계속돼야 한다 [기자수첩-ICT]",
-     "press": "dailian.co.kr",
+     "title": "“AI커닝 못 잡겠다”던 교육부 수장…사실상 경질",
+     "press": "sedaily.com",
      "publishedAt": "2026-11-22T22:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003158081?sid=105"
+     "link": "https://n.news.naver.com/mnews/article/011/0004684935?sid=100"
     },
     {
-     "title": "신작 시연부터 아이브·말왕까지! 나흘간 벡스코 달군 크래프톤, 지스타...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-22T21:48:00.000Z",
-     "link": "https://m.sports.naver.com/esports/article/468/0001282673"
+     "title": "野, 최교진 사의 속 'AI 부정행위' 대책 모색…23일 국회서 잇달아 토론...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-22T22:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009303823?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1120,
-  "matched": 624,
-  "avgLeadMin": 633,
+  "flagged": 1123,
+  "matched": 629,
+  "avgLeadMin": 614,
   "recent": [
+   {
+    "keyword": "한전 152만명 개인정보 유출",
+    "hitKeyword": "한전 정보 유출",
+    "hitAt": "2026-11-23T07:30:00+09:00",
+    "leadMin": 421
+   },
+   {
+    "keyword": "한전, 152만명 개인정보 유출",
+    "hitKeyword": "한전 정보 유출",
+    "hitAt": "2026-11-23T07:30:00+09:00",
+    "leadMin": 381
+   },
+   {
+    "keyword": "한전, 152만 개인정보 유출",
+    "hitKeyword": "한전 정보 유출",
+    "hitAt": "2026-11-23T07:30:00+09:00",
+    "leadMin": 360
+   },
+   {
+    "keyword": "젠슨 황 밀수 의혹",
+    "hitKeyword": "엔비디아 칩 밀수 의혹",
+    "hitAt": "2026-11-23T07:30:00+09:00",
+    "leadMin": 59
+   },
+   {
+    "keyword": "트럼프 이란 공격 경고",
+    "hitKeyword": "트럼프 이란 공습 시사",
+    "hitAt": "2026-11-23T07:30:00+09:00",
+    "leadMin": 49
+   },
+   {
+    "keyword": "트럼프 이란 추가 공격 경고",
+    "hitKeyword": "트럼프 이란 공습 시사",
+    "hitAt": "2026-11-23T07:30:00+09:00",
+    "leadMin": 39
+   },
+   {
+    "keyword": "한전 고객 개인정보 유출",
+    "hitKeyword": "한전 정보 유출",
+    "hitAt": "2026-11-23T07:30:00+09:00",
+    "leadMin": 39
+   },
    {
     "keyword": "검사",
     "hitKeyword": "수능 감독관 복장 검사",
@@ -357,48 +332,6 @@
     "hitKeyword": "김아림 LPGA 최종전",
     "hitAt": "2026-11-23T07:00:00+09:00",
     "leadMin": 19
-   },
-   {
-    "keyword": "맨유",
-    "hitKeyword": "맨유 리그 19위",
-    "hitAt": "2026-11-23T06:30:00+09:00",
-    "leadMin": 79
-   },
-   {
-    "keyword": "코스피",
-    "hitKeyword": "나스닥 급락 코스피 영향",
-    "hitAt": "2026-11-23T06:30:00+09:00",
-    "leadMin": 59
-   },
-   {
-    "keyword": "2026년 11월 23일 운세",
-    "hitKeyword": "23일 전국 눈비",
-    "hitAt": "2026-11-23T06:30:00+09:00",
-    "leadMin": 29
-   },
-   {
-    "keyword": "외교",
-    "hitKeyword": "트럼프 얄타 외교",
-    "hitAt": "2026-11-23T06:00:00+09:00",
-    "leadMin": 854
-   },
-   {
-    "keyword": "증안펀드 가동 준비",
-    "hitKeyword": "증안펀드 18년만 가동",
-    "hitAt": "2026-11-23T06:00:00+09:00",
-    "leadMin": 653
-   },
-   {
-    "keyword": "정부 증안펀드 준비 착수",
-    "hitKeyword": "증안펀드 18년만 가동",
-    "hitAt": "2026-11-23T06:00:00+09:00",
-    "leadMin": 622
-   },
-   {
-    "keyword": "정부 증안펀드 가동 준비",
-    "hitKeyword": "증안펀드 18년만 가동",
-    "hitAt": "2026-11-23T06:00:00+09:00",
-    "leadMin": 572
    }
   ]
  }
