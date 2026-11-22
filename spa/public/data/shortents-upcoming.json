@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T03:04:56.633Z",
+ "builtAt": "2026-11-22T03:14:59.934Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 26,
  "candidates": [
+  {
+   "keyword": "최교진 사의 표명",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 73,
+   "recent20": 29,
+   "press": 62,
+   "firstArticleAt": "2026-11-22T02:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "최교진 교육부 장관, '수능 대혼란'에 책임 통감 사의 표명",
+     "press": "public25.com",
+     "publishedAt": "2026-11-22T03:12:00.000Z",
+     "link": "https://www.public25.com/news/articleView.html?idxno=58792"
+    },
+    {
+     "title": "최교진, '수능 대혼란'에 사의…\"준비 미흡 책임 통감\"",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-22T03:12:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/326066/?sc=Naver"
+    },
+    {
+     "title": "최교진 교육부 장관 사의 표명…\"수능 책임 통감\"",
+     "press": "sisafocus.co.kr",
+     "publishedAt": "2026-11-22T03:12:00.000Z",
+     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367893"
+    }
+   ]
+  },
   {
    "keyword": "민주당 대법원장 탄핵 추진",
    "sources": [
     "signal.bz"
    ],
    "articles90": 74,
-   "recent20": 14,
-   "press": 43,
-   "firstArticleAt": "2026-11-22T02:03:00.000Z",
+   "recent20": 17,
+   "press": 46,
+   "firstArticleAt": "2026-11-22T02:05:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "오세훈 “조희대 탄핵 강행 땐 이재명 대통령 심판열차 출발할 것”",
-     "press": "segye.com",
-     "publishedAt": "2026-11-22T03:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177091?sid=102"
+     "title": "윤상현 \"與 조희대 탄핵은 李 죄 지우기·명청대전 돌파구\"",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-22T03:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413682?sid=100"
     },
     {
-     "title": "오세훈 \"대법원장 탄핵 추진, 대통령 재판 없애려는 것\"",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-22T03:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000554325?sid=102"
+     "title": "민주당, '조희대 탄핵안' 연내 처리 추진…\"한덕수 판결, 인내심 한계\"",
+     "press": "sisafocus.co.kr",
+     "publishedAt": "2026-11-22T03:12:00.000Z",
+     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367891"
     },
     {
-     "title": "“국회가 대법원 상급심이냐”…변호사단체, 민주당 ‘조희대 탄핵’에...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-22T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002834551?sid=102"
+     "title": "조희대 대법원장 민주당 탄핵 추진…김민석, 한덕수 파기환송 강력 비판",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-22T03:10:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629485"
     }
    ]
   },
@@ -48,7 +80,7 @@
     "signal.bz"
    ],
    "articles90": 19,
-   "recent20": 7,
+   "recent20": 4,
    "press": 19,
    "firstArticleAt": "2026-11-22T02:00:00.000Z",
    "exclusive": false,
@@ -67,10 +99,10 @@
      "link": "https://n.news.naver.com/mnews/article/666/0000133169?sid=101"
     },
     {
-     "title": "취업문 더 좁아졌다…대학생 45% \"작년보다 취업 어렵다\"",
-     "press": "joongangenews.com",
+     "title": "대학생 45% \"올해 취업시장 작년보다 어렵다\" … 1년 이상 취업 준비도 ...",
+     "press": "worktoday.co.kr",
      "publishedAt": "2026-11-22T02:56:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=565638"
+     "link": "http://www.worktoday.co.kr/news/articleView.html?idxno=92455"
     }
    ]
   },
@@ -79,10 +111,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
+   "articles90": 10,
    "recent20": 0,
-   "press": 13,
-   "firstArticleAt": "2026-11-22T01:36:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-22T01:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,78 +139,14 @@
    ]
   },
   {
-   "keyword": "류재철 CEO, 협력사와 혁신 성장",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-22T01:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "LG전자, 협력회 워크숍 개최…공정 자동화·AI 기반 제조 혁신 논의",
-     "press": "zdnet.co.kr",
-     "publishedAt": "2026-11-22T02:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/092/0002446351?sid=105"
-    },
-    {
-     "title": "류재철 LG전자 CEO \"협력사와 제조 혁신으로 성장 기회 잡을 것\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-22T02:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004212424?sid=101"
-    },
-    {
-     "title": "불량률 90%↓·재료비 36%↓...류재철 “협력사 경쟁력이 곧 LG 경쟁력”",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-22T02:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003488209?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "현대엘리베이터 무벡스 지분 매각",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 10,
-   "firstArticleAt": "2026-11-22T01:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "현대엘리베이터 현대무벡스 지분 1026억에 매각한다, 주주환원 재원 확...",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-22T02:56:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=452584"
-    },
-    {
-     "title": "현대엘리베이터, 현대무벡스 지분 1026억원 매각…주주환원 재원으로",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-22T02:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003060415?sid=101"
-    },
-    {
-     "title": "[비즈+]현대엘리베이터, 현대무벡스 지분 5.8% 매각…1026억원 주주환원...",
-     "press": "businessplus.kr",
-     "publishedAt": "2026-11-22T02:46:00.000Z",
-     "link": "https://www.businessplus.kr/news/articleView.html?idxno=120255"
-    }
-   ]
-  },
-  {
    "keyword": "최태원 한일 AI 인재 육성",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
+   "articles90": 9,
    "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-22T01:36:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-22T01:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -199,6 +167,38 @@
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-22T02:23:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/079/0004212420?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "재산",
+   "sources": [
+    "google"
+   ],
+   "articles90": 10,
+   "recent20": 5,
+   "press": 8,
+   "firstArticleAt": "2026-11-22T02:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "지식재산연수원, 2027년 상반기 변리사 실무수습 집합교육 참가자 모집",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-22T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003488219?sid=102"
+    },
+    {
+     "title": "지식재산처, AI 친화적 '마크다운' 형식 통계 간행물 제공",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-22T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005607751?sid=102"
+    },
+    {
+     "title": "지식재산처, 특허 통계도 AI가 읽는다…'마크다운' 형식 자료 개방",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-22T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003488226?sid=102"
     }
    ]
   },
@@ -235,6 +235,70 @@
    ]
   },
   {
+   "keyword": "류재철 CEO, 협력사와 혁신 성장",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-22T01:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "LG전자, 협력회 워크숍 개최…공정 자동화·AI 기반 제조 혁신 논의",
+     "press": "zdnet.co.kr",
+     "publishedAt": "2026-11-22T02:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/092/0002446351?sid=105"
+    },
+    {
+     "title": "류재철 LG전자 CEO \"협력사와 제조 혁신으로 성장 기회 잡을 것\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-22T02:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004212424?sid=101"
+    },
+    {
+     "title": "불량률 90%↓·재료비 36%↓...류재철 “협력사 경쟁력이 곧 LG 경쟁력”",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-22T02:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003488209?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "현대엘리베이터 무벡스 지분 매각",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-22T01:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "현대엘리베이터 현대무벡스 지분 1026억에 매각한다, 주주환원 재원 확...",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-22T02:56:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=452584"
+    },
+    {
+     "title": "현대엘리베이터, 현대무벡스 지분 1026억원 매각…주주환원 재원으로",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-22T02:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003060415?sid=101"
+    },
+    {
+     "title": "[비즈+]현대엘리베이터, 현대무벡스 지분 5.8% 매각…1026억원 주주환원...",
+     "press": "businessplus.kr",
+     "publishedAt": "2026-11-22T02:46:00.000Z",
+     "link": "https://www.businessplus.kr/news/articleView.html?idxno=120255"
+    }
+   ]
+  },
+  {
    "keyword": "김아림, 투어 챔피언십 3R 선두",
    "sources": [
     "nate"
@@ -253,16 +317,16 @@
      "link": "https://www.newscj.com/news/articleView.html?idxno=3451028"
     },
     {
-     "title": "'사흘째 선두' 김아림, LPGA 최종전 3R 1타 차 리드...우승 상금 53억 보...",
-     "press": "maniareport.com",
-     "publishedAt": "2026-11-22T02:19:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/425/0000215267"
-    },
-    {
      "title": "김아림, LPGA 최종전 3R 단독 선두…우승 상금 400만달러 눈앞",
      "press": "jnilbo.com",
      "publishedAt": "2026-11-22T02:19:00.000Z",
      "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085276"
+    },
+    {
+     "title": "'사흘째 선두' 김아림, LPGA 최종전 3R 1타 차 리드...우승 상금 53억 보...",
+     "press": "maniareport.com",
+     "publishedAt": "2026-11-22T02:19:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/425/0000215267"
     }
    ]
   },
@@ -301,7 +365,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 958,
+  "flagged": 960,
   "matched": 555,
   "avgLeadMin": 612,
   "recent": [
