@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T08:26:53.507Z",
+ "builtAt": "2026-11-22T08:36:56.735Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,49 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 25,
  "candidates": [
+  {
+   "keyword": "해저",
+   "sources": [
+    "google"
+   ],
+   "articles90": 35,
+   "recent20": 2,
+   "press": 33,
+   "firstArticleAt": "2026-11-22T07:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "태안 실종 어선 '해광호', 수심 52m 해저서 발견⋯수색 닷새 만",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-22T08:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001077280?sid=102"
+    },
+    {
+     "title": "'실종 어선' 해광호, 태안 해저 52m서 발견⋯선원 7명 생사 미확인",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-22T08:26:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2651357"
+    },
+    {
+     "title": "태안서 사라진 해광호, 53m 해저에서 발견..실종 선원 수색",
+     "press": "tjb.co.kr",
+     "publishedAt": "2026-11-22T08:08:00.000Z",
+     "link": "https://www.tjb.co.kr/news05/bodo/view/id/106362"
+    }
+   ]
+  },
   {
    "keyword": "최교진 수능 사의",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 40,
-   "recent20": 7,
-   "press": 33,
-   "firstArticleAt": "2026-11-22T06:57:00.000Z",
+   "articles90": 35,
+   "recent20": 3,
+   "press": 29,
+   "firstArticleAt": "2026-11-22T07:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -29,80 +61,49 @@
      "link": "http://www.jndn.com/article.php?aid=1795335789443490093"
     },
     {
+     "title": "최교진 사퇴에 교원단체들 \"수능 AI 부정 대비 부족…리더십 한계\"(종합...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T08:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014338296?sid=102"
+    },
+    {
      "title": "교육장관 '수능 대혼란' 책임지고 사임…취임 14개월만",
      "press": "goodnews1.com",
      "publishedAt": "2026-11-22T08:18:00.000Z",
      "link": "https://www.goodnews1.com/news/articleView.html?idxno=466496"
-    },
-    {
-     "title": "[뉴스1번지] 최교진, '수능 혼란' 책임 사의…이 대통령, 즉시 수락",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-22T08:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928741?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "북미회담 무산",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 10,
-   "firstArticleAt": "2026-11-22T07:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“北외교관, 트럼프 친서 봉투째 내던졌다”…북미 회담 불발 전말",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-22T08:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003566987?sid=104"
-    },
-    {
-     "title": "\"북한 무리한 요구로 북미회담 무산\"...\"편지도 집어 던져\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-22T08:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436448?sid=104"
-    },
-    {
-     "title": "WSJ “트럼프, 북미회담 추진…북한 조건에 무산”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-22T08:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012298807?sid=104"
     }
    ]
   },
   {
    "keyword": "고경표 음주 사과",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
+   "articles90": 11,
+   "recent20": 3,
+   "press": 11,
    "firstArticleAt": "2026-11-22T07:12:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
+     "title": "'핑계고' 측, 고경표 시상식 후보 논란에 고개 숙였다 \"명단서 제외...심...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-22T08:34:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001409176"
+    },
+    {
+     "title": "'음주운전' 고경표, 결국 '핑계고' 시상식 후보 제외…제작진 사과",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-22T08:31:00.000Z",
+     "link": "https://m.entertain.naver.com/article/018/0006413758"
+    },
+    {
      "title": "[공식] '핑계고' 측, '음주운전' 고경표 인기상 후보 제외…\"충분히 검토...",
      "press": "mydaily.co.kr",
      "publishedAt": "2026-11-22T08:18:00.000Z",
      "link": "https://m.entertain.naver.com/article/117/0004127132"
-    },
-    {
-     "title": "'핑계고' 결국 고개 숙였다…'음주운전' 고경표 시상식 후보 올렸다가 ...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-22T07:50:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004468681"
-    },
-    {
-     "title": "[공식] '핑계고' 측, 결국 고경표 인기상 후보 제외 \"심려 끼쳐 사과\"",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-22T07:46:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002082988"
     }
    ]
   },
@@ -111,13 +112,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 7,
+   "articles90": 8,
    "recent20": 2,
-   "press": 7,
+   "press": 8,
    "firstArticleAt": "2026-11-22T07:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이 대통령, 잦은 해외순방 논란 정면 반박…\"돼지 눈에는 돼지만 보여\"",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-22T08:32:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=730507"
+    },
     {
      "title": "野 '순방예산 363억 삭감' 주장에 … 李 \"꼭 해야 할 국정과제\"",
      "press": "mk.co.kr",
@@ -129,12 +136,6 @@
      "press": "hankookilbo.com",
      "publishedAt": "2026-11-22T08:10:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/469/0000967070?sid=100"
-    },
-    {
-     "title": "'순방 외유' 논란에 李대통령 \"돼지 눈엔 돼지만\"…靑 \"국제질서 다극화...",
-     "press": "polinews.co.kr",
-     "publishedAt": "2026-11-22T07:51:00.000Z",
-     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=748947"
     }
    ]
   },
@@ -143,13 +144,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
    "firstArticleAt": "2026-11-22T07:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"트럼프, 김정은에 회담 제안했지만 北 '조건' 내걸어 무산\"",
+     "press": "goodnews1.com",
+     "publishedAt": "2026-11-22T08:28:00.000Z",
+     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466498"
+    },
     {
      "title": "\"트럼프, 김정은 만나려 비핵화 없는 종전선언 검토\" 파장",
      "press": "newdaily.co.kr",
@@ -161,151 +168,201 @@
      "press": "jasm.co.kr",
      "publishedAt": "2026-11-22T07:40:00.000Z",
      "link": "https://www.jasm.co.kr/news/view/326072/?sc=Naver"
-    },
-    {
-     "title": "“트럼프, 한국전쟁 종전선언까지 준비했는데”…北 김정은 만남 무산된...",
-     "press": "nownews.seoul.co.kr",
-     "publishedAt": "2026-11-22T07:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701863?sid=104"
     }
    ]
   },
   {
-   "keyword": "외교",
+   "keyword": "정부",
    "sources": [
     "google"
    ],
    "articles90": 6,
-   "recent20": 4,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T07:08:00.000Z",
+   "recent20": 5,
+   "press": 6,
+   "firstArticleAt": "2026-11-22T08:16:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "“국익 중심 실용 외교로 한·러 관계 복원해야\"",
-     "press": "busan.com",
-     "publishedAt": "2026-11-22T08:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001408362?sid=101"
+     "title": "글로벌 반도체 급락에 '블랙먼데이' 우려…정부, 긴급 F4 회의 소집",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-22T08:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005356733?sid=100"
     },
     {
-     "title": "외교무대서 혀 쏙 내민 다카이치에, 일 네티즌들 “부끄럽고 이상하다”",
-     "press": "weekly.khan.co.kr",
-     "publishedAt": "2026-11-22T08:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/033/0000053563?sid=104"
+     "title": "\"공매도 제한 카드 나올까\"...'검은 월요일' 공포에 정부 긴급 F4 회의",
+     "press": "ntoday.co.kr",
+     "publishedAt": "2026-11-22T08:30:00.000Z",
+     "link": "https://www.ntoday.co.kr/news/articleView.html?idxno=131051"
     },
     {
-     "title": "“北외교관, 트럼프 친서 봉투째 내던졌다”…북미 회담 불발 전말",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-22T08:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003566987?sid=104"
+     "title": "불법 국가기술자격 대여, 정부 6개 부처 합동 단속",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-22T08:22:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1732589"
     }
    ]
   },
   {
-   "keyword": "열린음악회",
+   "keyword": "드파르디외 우엘벡 성폭행",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-22T07:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'칸 남우주연상' 프랑스 男 배우, 영화 촬영 중 여배우 집단 성폭행 혐...",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-22T08:36:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000053827"
+    },
+    {
+     "title": "국민 배우의 배신, 시나리오에 없는 19금신 찍었다가 ‘집단 성폭행’ ...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-22T08:34:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190163"
+    },
+    {
+     "title": "프랑스 국민배우·최고 작가…집단 성폭행 혐의로 수사",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-22T08:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005356712?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "검은 월요일",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T07:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美증시 투매에 코스피도 '벌벌'…\"월요일이 두렵다\"",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-22T08:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005767297?sid=101"
+    },
+    {
+     "title": "\"공매도 제한 카드 나올까\"...'검은 월요일' 공포에 정부 긴급 F4 회의",
+     "press": "ntoday.co.kr",
+     "publishedAt": "2026-11-22T08:30:00.000Z",
+     "link": "https://www.ntoday.co.kr/news/articleView.html?idxno=131051"
+    },
+    {
+     "title": "'검은 금요일'에 1.6조 산 개미…'검은 월요일' 오나",
+     "press": "bizhankook.com",
+     "publishedAt": "2026-11-22T08:14:00.000Z",
+     "link": "https://bizhankook.com/articles/retail-investors-buy-record-stocks.html"
+    }
+   ]
+  },
+  {
+   "keyword": "소설 절기",
    "sources": [
     "daum"
    ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T07:06:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-22T07:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'열린음악회' 김준수·김연자·이무진·라포엠 초호화 라인업",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-22T08:20:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3759575"
+     "title": "절기 '소설', 대체로 맑고 추워···23일 대구·경북 비",
+     "press": "dgmbc.com",
+     "publishedAt": "2026-11-22T08:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/657/0000057721?sid=103"
     },
     {
-     "title": "‘열린음악회’ 출연진 라인업 김연자 外",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-22T07:38:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1176725"
+     "title": "[5시 날씨] 오늘 ‘소설’ 추위…내일, 전국 비나 눈",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-22T08:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012298808?sid=103"
     },
     {
-     "title": "김희재, '열린음악회' 출연 예고…다채로운 하트 포즈로 팬심 자극",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-22T07:06:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=848065"
-    }
-   ]
-  },
-  {
-   "keyword": "결승 역주하는 최민정",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T07:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "결승 향해 역주하는 최민정",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-22T07:45:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/001/0016456797"
-    },
-    {
-     "title": "결승 향해 역주하는 최민정과 김민지",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-22T07:43:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/001/0016456790"
-    },
-    {
-     "title": "[사진]5위로 역주하는 최민정",
-     "press": "osen.co.kr",
+     "title": "[날씨] 절기 소설, 대체로 맑고 쌀쌀…내일 전국 비·눈",
+     "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-22T07:30:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/109/0005643921"
+     "link": "https://n.news.naver.com/mnews/article/422/0000928730?sid=103"
     }
    ]
   },
   {
-   "keyword": "이스라엘",
+   "keyword": "코스닥",
    "sources": [
     "google"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 2,
    "press": 3,
-   "firstArticleAt": "2026-11-22T07:00:00.000Z",
+   "firstArticleAt": "2026-11-22T07:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美·이스라엘 강경파, 트럼프에 '이란 공격 재개' 압박",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-22T07:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001041633?sid=100"
+     "title": "코스닥 시총 상위 10등에 2곳…이젠 '로봇' 시대",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-22T08:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005767276?sid=101"
     },
     {
-     "title": "美·이스라엘 강경파, “이란 전쟁 더 끌어선 안 돼” 재공격 촉구…트...",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-22T07:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001886665?sid=104"
+     "title": "아델, 코스닥 상장 철회…수요예측서 기관 눈높이 못 맞췄다",
+     "press": "dnews.co.kr",
+     "publishedAt": "2026-11-22T08:20:00.000Z",
+     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611220934247880039"
     },
     {
-     "title": "반환점 돈 이스라엘 연정 협상…야권, ‘아랍계 연대’ 놓고 분열",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-22T07:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833365?sid=104"
+     "title": "엠비디 코스닥 데뷔…수요예측 흥행 실패한 아델은 공모 철회",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-22T07:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005444633?sid=101"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1031,
-  "matched": 594,
-  "avgLeadMin": 631,
+  "flagged": 1036,
+  "matched": 598,
+  "avgLeadMin": 627,
   "recent": [
+   {
+    "keyword": "최민정",
+    "hitKeyword": "최민정 500m 결승",
+    "hitAt": "2026-11-22T17:30:00+09:00",
+    "leadMin": 174
+   },
+   {
+    "keyword": "결승 역주하는 최민정",
+    "hitKeyword": "최민정 500m 결승",
+    "hitAt": "2026-11-22T17:30:00+09:00",
+    "leadMin": 84
+   },
+   {
+    "keyword": "대중국 자동차 무역적자 최대",
+    "hitKeyword": "대중국 자동차 무역적자",
+    "hitAt": "2026-11-22T17:30:00+09:00",
+    "leadMin": 23
+   },
+   {
+    "keyword": "최민정 500M 결승 5위",
+    "hitKeyword": "최민정 500m 결승",
+    "hitAt": "2026-11-22T17:30:00+09:00",
+    "leadMin": 23
+   },
    {
     "keyword": "김재열 ISU 회장 쇼트트랙 한국 개최",
     "hitKeyword": "쇼트트랙 월드투어 확대",
@@ -341,30 +398,6 @@
     "hitKeyword": "로또 2등 10장 당첨",
     "hitAt": "2026-11-22T17:00:00+09:00",
     "leadMin": 23
-   },
-   {
-    "keyword": "성균관대 수리논술 출제 오류",
-    "hitKeyword": "성균관대 수리논술 정정",
-    "hitAt": "2026-11-22T16:30:00+09:00",
-    "leadMin": 14
-   },
-   {
-    "keyword": "갤럭시 AI 클래스 도입",
-    "hitKeyword": "불법사채 심사 AI 도입",
-    "hitAt": "2026-11-22T16:00:00+09:00",
-    "leadMin": 7543
-   },
-   {
-    "keyword": "lpga",
-    "hitKeyword": "김아림 LPGA 챔피언십",
-    "hitAt": "2026-11-22T16:00:00+09:00",
-    "leadMin": 255
-   },
-   {
-    "keyword": "로또",
-    "hitKeyword": "로또 2등 10장 당첨",
-    "hitAt": "2026-11-22T16:00:00+09:00",
-    "leadMin": 54
    }
   ]
  }
