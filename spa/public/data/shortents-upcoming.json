@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T02:44:48.912Z",
+ "builtAt": "2026-11-22T02:54:52.502Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,34 @@
  "measured": 25,
  "candidates": [
   {
-   "keyword": "조희대 대법원장 탄핵",
+   "keyword": "민주당 대법원장 탄핵 추진",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 67,
-   "recent20": 22,
-   "press": 38,
-   "firstArticleAt": "2026-11-22T02:02:00.000Z",
+   "articles90": 72,
+   "recent20": 19,
+   "press": 40,
+   "firstArticleAt": "2026-11-22T02:03:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "발언하는 양부남 민주당 조희대 대법원장 탄핵소추 추진단장",
+     "title": "양부남 추진단장 기자간담회 발언",
      "press": "gukjenews.com",
-     "publishedAt": "2026-11-22T02:42:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3759373"
+     "publishedAt": "2026-11-22T02:52:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3759385"
     },
     {
-     "title": "오세훈 \"대법원장 탄핵? 李대통령 재판 없애려는 것\"",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-22T02:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005356672?sid=100"
+     "title": "조희대 탄핵 나선 민주당 “한덕수 판결, 탄핵 사유 삼지 않기로”",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-22T02:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002833336?sid=100"
     },
     {
-     "title": "민주당, 조희대 탄핵 연내 처리 추진…한덕수 판결 '절차상 하자' 검토",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-22T02:40:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=730386"
+     "title": "더불어민주당 조희대 대법원장 탄핵소추 추진단 기자간담회",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-22T02:50:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3759383"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 19,
-   "recent20": 0,
-   "press": 18,
-   "firstArticleAt": "2026-11-22T01:15:00.000Z",
+   "articles90": 17,
+   "recent20": 1,
+   "press": 17,
+   "firstArticleAt": "2026-11-22T01:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "태안 서격렬비열도 인근 수심 52m 해저서 선박 추정체 발견… 해광호 여...",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-22T02:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002834546?sid=102"
+    },
     {
      "title": "태안해경, 해광호 수중수색 중 선박 추정 물체 발견",
      "press": "daejonilbo.com",
@@ -65,44 +71,6 @@
      "press": "chosun.com",
      "publishedAt": "2026-11-22T02:18:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/023/0004010997?sid=102"
-    },
-    {
-     "title": "해경, '해광호' 수색 중 해저서 '선박 추정 물체' 발견",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-22T02:13:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261122000041"
-    }
-   ]
-  },
-  {
-   "keyword": "최태원 한일 AI 인재 육성",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 15,
-   "recent20": 2,
-   "press": 15,
-   "firstArticleAt": "2026-11-22T01:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "최태원 “한일 기업·대학 손잡고 AI 인재 공동 육성하자”",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-22T02:40:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321327&inflow=N"
-    },
-    {
-     "title": "최태원 \"한일 기업·대학, AI 인재 함께 키우자\"",
-     "press": "mbnmoney.mbn.co.kr",
-     "publishedAt": "2026-11-22T02:36:00.000Z",
-     "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005963847"
-    },
-    {
-     "title": "최태원 \"한일 기업·대학 공동으로 AI 인재 육성하자…기회 열릴 것\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-22T02:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004212420?sid=101"
     }
    ]
   },
@@ -146,10 +114,16 @@
    "articles90": 13,
    "recent20": 2,
    "press": 13,
-   "firstArticleAt": "2026-11-22T01:16:00.000Z",
+   "firstArticleAt": "2026-11-22T01:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "LG전자, 협력회 워크숍 개최…공정 자동화·AI 기반 제조 혁신 논의",
+     "press": "zdnet.co.kr",
+     "publishedAt": "2026-11-22T02:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/092/0002446351?sid=105"
+    },
     {
      "title": "류재철 LG전자 CEO \"협력사와 제조 혁신으로 성장 기회 잡을 것\"",
      "press": "nocutnews.co.kr",
@@ -161,12 +135,6 @@
      "press": "etnews.com",
      "publishedAt": "2026-11-22T02:25:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/030/0003488209?sid=101"
-    },
-    {
-     "title": "류재철 “협력사와 제조 혁신…미래 성장 기회 만들자”",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-22T02:22:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321321&inflow=N"
     }
    ]
   },
@@ -176,12 +144,18 @@
     "signal.bz"
    ],
    "articles90": 12,
-   "recent20": 3,
+   "recent20": 2,
    "press": 12,
-   "firstArticleAt": "2026-11-22T01:22:00.000Z",
+   "firstArticleAt": "2026-11-22T01:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "LG유플러스 2027년도 조직 개편, AI 사업 역량 강화 추진",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-22T02:48:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=452583"
+    },
     {
      "title": "LG유플러스, 2027년 조직개편…\"AI 사업 성과 창출 가속화\"",
      "press": "view.asiae.co.kr",
@@ -193,12 +167,6 @@
      "press": "sportsseoul.com",
      "publishedAt": "2026-11-22T02:33:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/468/0001282578?sid=101"
-    },
-    {
-     "title": "[LG 사단] LGU+, AI 인프라·플랫폼 중심 조직개편…'B2B 사업' 강화",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-22T02:30:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086191"
     }
    ]
   },
@@ -208,29 +176,61 @@
     "nate"
    ],
    "articles90": 11,
-   "recent20": 1,
+   "recent20": 2,
    "press": 11,
-   "firstArticleAt": "2026-11-22T01:16:00.000Z",
+   "firstArticleAt": "2026-11-22T01:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "현대엘리베이터, 현대무벡스 지분 1026억원 매각…주주환원 재원으로",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-22T02:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003060415?sid=101"
+    },
+    {
+     "title": "[비즈+]현대엘리베이터, 현대무벡스 지분 5.8% 매각…1026억원 주주환원...",
+     "press": "businessplus.kr",
+     "publishedAt": "2026-11-22T02:46:00.000Z",
+     "link": "https://www.businessplus.kr/news/articleView.html?idxno=120255"
+    },
     {
      "title": "현대엘리베이터, 무벡스 지분 1026억 매각…배당 확대",
      "press": "4th.kr",
      "publishedAt": "2026-11-22T02:28:00.000Z",
      "link": "http://www.4th.kr/news/articleView.html?idxno=2122398"
+    }
+   ]
+  },
+  {
+   "keyword": "최태원 한일 AI 인재 육성",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 11,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-22T01:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "최태원 “한일 기업·대학 손잡고 AI 인재 공동 육성하자”",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-22T02:40:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321327&inflow=N"
     },
     {
-     "title": "현대엘리베이터, 현대무벡스 지분 1026억원 매각…주주환원 확대",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-22T02:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000554312?sid=101"
+     "title": "최태원 \"한일 기업·대학, AI 인재 함께 키우자\"",
+     "press": "mbnmoney.mbn.co.kr",
+     "publishedAt": "2026-11-22T02:36:00.000Z",
+     "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005963847"
     },
     {
-     "title": "현대엘리베이터, 현대무벡스 지분 1천26억원 매각…배당 늘린다",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-22T02:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000545112?sid=101"
+     "title": "최태원 \"한일 기업·대학 공동으로 AI 인재 육성하자…기회 열릴 것\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-22T02:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004212420?sid=101"
     }
    ]
   },
@@ -239,10 +239,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 9,
+   "articles90": 8,
    "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-22T01:20:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-22T01:34:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -253,16 +253,16 @@
      "link": "https://m.sports.naver.com/golf/article/088/0001041561"
     },
     {
-     "title": "'사흘째 선두' 김아림, LPGA 최종전 3R 1타 차 리드...우승 상금 53억 보...",
-     "press": "maniareport.com",
-     "publishedAt": "2026-11-22T02:19:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/425/0000215267"
-    },
-    {
      "title": "김아림, LPGA 최종전 3R 단독 선두…우승 상금 400만달러 눈앞",
      "press": "jnilbo.com",
      "publishedAt": "2026-11-22T02:19:00.000Z",
      "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085276"
+    },
+    {
+     "title": "'사흘째 선두' 김아림, LPGA 최종전 3R 1타 차 리드...우승 상금 53억 보...",
+     "press": "maniareport.com",
+     "publishedAt": "2026-11-22T02:19:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/425/0000215267"
     }
    ]
   },
@@ -272,7 +272,7 @@
     "signal.bz"
    ],
    "articles90": 7,
-   "recent20": 2,
+   "recent20": 0,
    "press": 7,
    "firstArticleAt": "2026-11-22T01:29:00.000Z",
    "exclusive": false,
@@ -295,38 +295,6 @@
      "press": "seoul.co.kr",
      "publishedAt": "2026-11-22T02:13:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/081/0003701814?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "마마 어워즈",
-   "sources": [
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T01:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "아이브, '2026 마마 어워즈' 2관왕… \"뜻깊은 상 받아 정말 감사하고 영...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-22T02:39:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000492222"
-    },
-    {
-     "title": "아이브, 2026 마마 어워즈 2관왕…'여자 그룹상'·'베스트 송 톱 10' 수상",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-22T02:36:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282750"
-    },
-    {
-     "title": "빅뱅, 데뷔 20년에도 ‘마마’ 휩쓸었다… 4관왕→신곡 ‘기립’ 최초 ...",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-22T02:04:00.000Z",
-     "link": "https://m.entertain.naver.com/article/396/0000761579"
     }
    ]
   },
@@ -365,7 +333,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 954,
+  "flagged": 955,
   "matched": 552,
   "avgLeadMin": 615,
   "recent": [
