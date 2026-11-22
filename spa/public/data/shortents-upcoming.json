@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T16:39:36.139Z",
+ "builtAt": "2026-11-22T16:49:39.146Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,39 +16,7 @@
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T16:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "유엔기후총회 17년만에 합의 실패…화석연료 놓고 극한대립(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-22T16:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016457014?sid=104"
-    },
-    {
-     "title": "유엔 기후총회, 화석연료 이견 끝 결렬…17년 만에 최종 합의문 채택 실...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-22T16:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005607944?sid=104"
-    },
-    {
-     "title": "유엔 기후총회, 화석연료 전환 이견…17년 만에 합의문 채택 실패(종합...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T16:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014338444?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "화석연료 합의문 채택",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 2,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-22T16:08:00.000Z",
    "exclusive": false,
