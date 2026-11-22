@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T12:38:15.891Z",
+ "builtAt": "2026-11-22T12:48:19.108Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -13,97 +13,96 @@
   {
    "keyword": "정부 증안펀드 가동 준비",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 24,
-   "recent20": 1,
+   "recent20": 5,
    "press": 24,
-   "firstArticleAt": "2026-11-22T11:10:00.000Z",
+   "firstArticleAt": "2026-11-22T11:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"검은 월요일 막아라\" 정부 긴급 대응…'증안펀드' 준비",
-     "press": "babytimes.co.kr",
-     "publishedAt": "2026-11-22T12:32:00.000Z",
-     "link": "http://www.babytimes.co.kr/news/articleView.html?idxno=74741"
+     "title": "정부, '증안펀드' 즉시 가동 준비 착수",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-22T12:46:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=885927"
     },
     {
-     "title": "반대매매 완화 이어 증안펀드 준비…정부, 16일 만에 추가 대책",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-22T12:18:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611220029"
+     "title": "18년만에 꺼내든 증안펀드…'블랙 먼데이' 구원투수 될까?",
+     "press": "peoplewatch.co.kr",
+     "publishedAt": "2026-11-22T12:40:00.000Z",
+     "link": "https://www.peoplewatch.co.kr/article/view/ppw202611220002"
     },
     {
-     "title": "美 증시 급락에 '증안펀드' 가동 준비…불법 공매도 특별감시",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-22T12:18:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903965"
-    }
-   ]
-  },
-  {
-   "keyword": "최교진 교육부장관",
-   "sources": [
-    "google"
-   ],
-   "articles90": 13,
-   "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-22T11:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "최교진 교육부 장관, 수능 대혼란 책임지고 사퇴…취임 14개월 만에 물러...",
-     "press": "econovill.com",
-     "publishedAt": "2026-11-22T12:24:00.000Z",
-     "link": "https://www.econovill.com/news/articleView.html?idxno=758090"
-    },
-    {
-     "title": "‘수능 무능 대처’ 최교진 사실상 경질",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-22T12:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484327?sid=100"
-    },
-    {
-     "title": "최교진 교육부 장관, 수능 대책 혼란 책임지고 사퇴…취임 14개월 만",
+     "title": "'연금 동원' 한계 오자 '증안펀드' 만지작… 또 시장 오판하는 건 아니...",
      "press": "fntoday.co.kr",
-     "publishedAt": "2026-11-22T12:14:00.000Z",
-     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=399608"
+     "publishedAt": "2026-11-22T12:38:00.000Z",
+     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=399609"
     }
    ]
   },
   {
-   "keyword": "솔비 이규한 결혼",
+   "keyword": "해광호 실종자 수색",
    "sources": [
     "daum"
    ],
    "articles90": 12,
-   "recent20": 8,
+   "recent20": 0,
    "press": 10,
-   "firstArticleAt": "2026-11-22T11:50:00.000Z",
+   "firstArticleAt": "2026-11-22T11:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "솔비, ♥이규한과 4월 결혼 “47세와 43세 연애가 설렌 적 처음이라고”...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-22T12:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190238"
+     "title": "수색 닷새 만에 해광호 선체 발견…실종 7명 수중수색 돌입",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-22T12:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413805?sid=102"
     },
     {
-     "title": "이규한, 사귀기도 전에 프러포즈했다…♥솔비 母에 \"평생 책임지겠다\"",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-22T12:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004468709"
+     "title": "황종우 해수부 장관, 해광호 선체 확인에 실종자 구조 총력 지시",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T12:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014338402?sid=101"
     },
     {
-     "title": "'미우새' 솔비 선택 안 했던 이규한…내년 4월 결혼",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-22T12:32:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283020"
+     "title": "‘해광호’ 실종 신고 5일 만에 침몰된 채 발견…수색 본격화",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-22T12:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012298840?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "내일 날씨",
+   "sources": [
+    "google"
+   ],
+   "articles90": 10,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-22T11:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[내일날씨] 월요일 전국에 비·눈⋯출근길 '어는 비' 주의",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-22T12:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001077300?sid=103"
+    },
+    {
+     "title": "절기 '소설' 낮은 기온...내일(23일) 오후부터 비",
+     "press": "jibs.co.kr",
+     "publishedAt": "2026-11-22T12:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/661/0000086914?sid=103"
+    },
+    {
+     "title": "[뉴스9 날씨] 내일, 전국 비나 눈…도로 살얼음 주의",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-22T12:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012298860?sid=103"
     }
    ]
   },
@@ -113,7 +112,7 @@
     "signal.bz"
    ],
    "articles90": 7,
-   "recent20": 2,
+   "recent20": 0,
    "press": 7,
    "firstArticleAt": "2026-11-22T11:39:00.000Z",
    "exclusive": false,
@@ -136,6 +135,70 @@
      "press": "fnnews.com",
      "publishedAt": "2026-11-22T12:06:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/014/0005607938?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "개리, 연예계 은퇴 이유 휴직",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T11:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "개리, 'B사 차 사고 은퇴' 농담…실제 활동 중단 이유는 따로 있었다",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-22T12:20:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283018"
+    },
+    {
+     "title": "개리, 연예계 은퇴 부른 억대 외제차…\"안 좋은 일 휘말린다고\"",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-22T11:38:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000785614"
+    },
+    {
+     "title": "리쌍, 연예계 은퇴 이유가 징크스 때문? “드림카 샀다가 6개월 만에 휴...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-22T11:34:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003542977"
+    }
+   ]
+  },
+  {
+   "keyword": "김종민 아내 임신",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T12:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김종민, 내년 3월 아빠된다..초음파 속 꼬물거리는 2세 모습 공개 (미우...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-22T12:42:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004468712"
+    },
+    {
+     "title": "‘11세 연하♥’ 김종민, 2세 성별=아들..초음파 공개에 “아내 닮아야...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-22T12:36:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005644017"
+    },
+    {
+     "title": "[TVis] ‘예비 아빠’ 김종민, 아들 성별에 함박웃음 “든든해”… 탁재...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-22T12:22:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003542982"
     }
    ]
   },
@@ -175,7 +238,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1097,
+  "flagged": 1101,
   "matched": 626,
   "avgLeadMin": 608,
   "recent": [
