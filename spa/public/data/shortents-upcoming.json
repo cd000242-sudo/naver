@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T11:47:59.642Z",
+ "builtAt": "2026-11-22T11:58:02.560Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,77 +16,51 @@
     "signal.bz",
     "daum"
    ],
-   "articles90": 41,
-   "recent20": 6,
-   "press": 38,
-   "firstArticleAt": "2026-11-22T10:20:00.000Z",
+   "articles90": 37,
+   "recent20": 5,
+   "press": 36,
+   "firstArticleAt": "2026-11-22T10:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "한전, 개인정보 150만건 털렸다…보안 예산 늘리고도 관리 부실 도마",
+     "press": "ziksir.com",
+     "publishedAt": "2026-11-22T11:52:00.000Z",
+     "link": "https://www.ziksir.com/news/articleView.html?idxno=154249"
+    },
+    {
+     "title": "한전 고객정보 152만명분 해킹…65만명은 주민번호·계좌·카드번호까지...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-22T11:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484307?sid=102"
+    },
     {
      "title": "한전, 고객 등 개인정보 152만여 건 유출…주민·계좌·카드번호 등 포함",
      "press": "ikbc.co.kr",
      "publishedAt": "2026-11-22T11:46:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/660/0000121948?sid=102"
-    },
-    {
-     "title": "한전, 사이버 공격에 개인정보 152만 건 유출…주민번호·계좌번호 포함",
-     "press": "news.cpbc.co.kr",
-     "publishedAt": "2026-11-22T11:44:00.000Z",
-     "link": "https://news.cpbc.co.kr/article/1177183?division=NAVER"
-    },
-    {
-     "title": "한전 개인정보 유출…사이버 침해로 고객정보 피해 우려, 대국민 사과",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-22T11:42:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629595"
     }
    ]
   },
   {
-   "keyword": "증안펀드 가동 준비",
+   "keyword": "최교진 교육부장관",
    "sources": [
-    "nate"
+    "google"
    ],
    "articles90": 33,
-   "recent20": 3,
-   "press": 29,
-   "firstArticleAt": "2026-11-22T10:21:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'증안펀드' 가동 준비만 해도 코스피 반등?…과거 사례 보니",
-     "press": "news.bizwatch.co.kr",
-     "publishedAt": "2026-11-22T11:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/648/0000052863?sid=101"
-    },
-    {
-     "title": "증시급락에 '증안펀드' 가동 준비…불법공매도 3개월 특별감시",
-     "press": "seouleconews.com",
-     "publishedAt": "2026-11-22T11:40:00.000Z",
-     "link": "http://www.seouleconews.com/news/articleView.html?idxno=95176"
-    },
-    {
-     "title": "정부, 증안펀드 즉시 가동 준비 착수…미국발 증시 급락에 선제 대응",
-     "press": "newsbrite.net",
-     "publishedAt": "2026-11-22T11:30:00.000Z",
-     "link": "http://www.newsbrite.net/news/articleView.html?idxno=201670"
-    }
-   ]
-  },
-  {
-   "keyword": "최교진 교육부 장관 면직",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 29,
    "recent20": 1,
-   "press": 25,
-   "firstArticleAt": "2026-11-22T10:23:00.000Z",
+   "press": 30,
+   "firstArticleAt": "2026-11-22T10:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'3선 세종교육감 출신' 최교진 교육부 장관 사임",
+     "press": "tjmbc.co.kr",
+     "publishedAt": "2026-11-22T11:45:00.000Z",
+     "link": "https://tjmbc.co.kr/NewsArticle/874721"
+    },
     {
      "title": "이 대통령, 최교진 교육장관 면직안 당일 재가…사의 표명 당일 ‘속전...",
      "press": "khan.co.kr",
@@ -94,48 +68,74 @@
      "link": "https://n.news.naver.com/mnews/article/032/0003484282?sid=100"
     },
     {
-     "title": "이 대통령, 최교진 면직 재가…수능 사흘 만에 퇴진",
-     "press": "4th.kr",
-     "publishedAt": "2026-11-22T11:16:00.000Z",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2122406"
-    },
-    {
-     "title": "李대통령, 교육장관 사의 즉각 수락…‘사실상 경질’",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-22T11:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002834589?sid=100"
+     "title": "최교진 교육부 장관 사퇴…\"수능 대응 혼란 책임\"",
+     "press": "babytimes.co.kr",
+     "publishedAt": "2026-11-22T11:20:00.000Z",
+     "link": "http://www.babytimes.co.kr/news/articleView.html?idxno=74740"
     }
    ]
   },
   {
-   "keyword": "남자 쇼트트랙 계주 금메달",
+   "keyword": "정부 증안펀드 가동 준비",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-22T10:24:00.000Z",
+   "articles90": 31,
+   "recent20": 6,
+   "press": 29,
+   "firstArticleAt": "2026-11-22T10:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "정부, 증안펀드 가동 준비 착수…증시 변동성 확대 대응",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-22T11:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003488291?sid=100"
+    },
+    {
+     "title": "블랙 먼데이 막자…정부 ‘증안펀드’ 가동 준비",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-22T11:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484311?sid=101"
+    },
+    {
+     "title": "정부, 증안펀드 18년 만에 투입하나…가동 준비 착수",
+     "press": "bloter.net",
+     "publishedAt": "2026-11-22T11:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/293/0000093645?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "남자 계주 금메달",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 12,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-22T10:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'안방'서 짜릿한 역전극…남자 계주 '금빛 피날레'",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-22T11:54:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/055/0001404947"
+    },
+    {
+     "title": "스피드스케이팅 박채은·양호준, 월드컵 2차 대회서 혼성계주 금메달",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-22T11:48:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261122000131"
+    },
     {
      "title": "남자 쇼트트랙 5000m 계주 금메달…0.264초 차 우승, 신동민 2관왕",
      "press": "topstarnews.net",
      "publishedAt": "2026-11-22T11:34:00.000Z",
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283008"
-    },
-    {
-     "title": "한국 쇼트트랙, 안방 ISU 월드투어서 금 3·은 2…신동민 2관왕",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-22T11:30:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/277/0005846092"
-    },
-    {
-     "title": "임종언 도핑 논란 극복+신동민 2관왕…0.264초 차 짜릿한 금메달 → 한국...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-22T11:25:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/477/0000640317"
     }
    ]
   },
@@ -144,13 +144,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
+   "articles90": 7,
    "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-22T10:24:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-22T10:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김동완, 12월 1일부터 SNS 활동 중단…유튜브·인스타는 유지",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-22T11:54:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283013"
+    },
     {
      "title": "김동완, SNS 중단 선언 “그동안 즐거웠고, 고마웠어”",
      "press": "sportsseoul.com",
@@ -162,12 +168,6 @@
      "press": "sports.khan.co.kr",
      "publishedAt": "2026-11-22T11:22:00.000Z",
      "link": "https://m.entertain.naver.com/article/144/0001151143"
-    },
-    {
-     "title": "김동완, 돌연 SNS 활동 중단 선언",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-22T11:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/437/0000521906"
     }
    ]
   },
@@ -177,7 +177,7 @@
     "google"
    ],
    "articles90": 6,
-   "recent20": 3,
+   "recent20": 1,
    "press": 5,
    "firstArticleAt": "2026-11-22T10:49:00.000Z",
    "exclusive": false,
@@ -208,13 +208,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
    "firstArticleAt": "2026-11-22T10:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "전소민, 제주도 자연인 시절 고백 “콩벌레 갖고 놀고 개미 잡아먹어”...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-22T11:50:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190234"
+    },
     {
      "title": "'식스센스', 음주운전 고경표 논란 속 최종회…전소민 \"내가 갈고닦아 ...",
      "press": "stoo.com",
@@ -226,12 +232,6 @@
      "press": "enews.imbc.com",
      "publishedAt": "2026-11-22T10:58:00.000Z",
      "link": "https://m.entertain.naver.com/article/408/0000328743"
-    },
-    {
-     "title": "'식스센스 비사이드' 제주 해녀 성게김밥 맛집, 메밀 흑돼지 돈가스 식...",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-22T10:54:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611220077"
     }
    ]
   }
