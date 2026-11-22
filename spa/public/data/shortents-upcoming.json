@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T10:17:31.227Z",
+ "builtAt": "2026-11-22T10:27:34.150Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "한전 개인정보 유출",
@@ -16,30 +16,30 @@
     "signal.bz",
     "daum"
    ],
-   "articles90": 44,
-   "recent20": 11,
-   "press": 42,
-   "firstArticleAt": "2026-11-22T09:06:00.000Z",
+   "articles90": 52,
+   "recent20": 10,
+   "press": 49,
+   "firstArticleAt": "2026-11-22T09:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한전, 고객·조달업체 152만명 개인정보 유출…계좌·카드번호 털려",
-     "press": "zdnet.co.kr",
-     "publishedAt": "2026-11-22T10:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/092/0002446367?sid=105"
+     "title": "직원 정보 유출 한 달여 만에 또… 한전, 고객 등 152만명분 개인정보 털...",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-22T10:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001206505?sid=101"
     },
     {
-     "title": "한전, 고객 등 152만명 개인정보 유출…계좌·카드번호까지 털렸다",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-22T10:07:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261122000118"
+     "title": "한전, 고객·직원 150만명 개인정보 유출…카드·계좌번호 포함",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-22T10:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005444653?sid=101"
     },
     {
-     "title": "한전도 해킹당했다…65만명 주민번호·계좌·카드번호 유출",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-22T10:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484250?sid=101"
+     "title": "한전, 고객 등 개인정보 152만여건 유출…주민·계좌번호 포함(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-22T10:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016456978?sid=102"
     }
    ]
   },
@@ -48,30 +48,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 49,
-   "recent20": 12,
-   "press": 41,
+   "articles90": 55,
+   "recent20": 9,
+   "press": 44,
    "firstArticleAt": "2026-11-22T09:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"블랙 먼데이 막아라\"...정부, 10조 증안펀드 가동 준비 착수",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-22T10:16:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/326086/?sc=Naver"
+     "title": "정부, 10조 증안펀드 카드 꺼냈지만…외국인 매도세 막을 수 있을까",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-22T10:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000967084?sid=101"
     },
     {
-     "title": "증안펀드 가동 준비 착수",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-22T10:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001886690?sid=101"
+     "title": "블랙먼데이 공포에…증안펀드 가동 착수",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-22T10:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004684880?sid=101"
     },
     {
-     "title": "정부, 증시 방어 '총력전'…증안펀드·자사주·공매도 대책 가동",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-22T10:10:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101767"
+     "title": "정부, 증시 급락에 증안펀드 가동 준비…불법 공매도 집중 감시",
+     "press": "donga.com",
+     "publishedAt": "2026-11-22T10:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764218?sid=101"
     }
    ]
   },
@@ -80,30 +80,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 27,
-   "recent20": 6,
-   "press": 24,
-   "firstArticleAt": "2026-11-22T08:48:00.000Z",
+   "articles90": 25,
+   "recent20": 3,
+   "press": 23,
+   "firstArticleAt": "2026-11-22T09:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[속보] 이 대통령, 최교진 장관 면직안 재가",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-22T10:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002833417?sid=100"
+    },
+    {
+     "title": "교육장관 사의에 여 \"전문 인사 선임 기대\"·야 \"대통령 입장 표명해야...",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-22T10:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537243?sid=100"
+    },
     {
      "title": "AI커닝 부실 대응으로 불신 키워…수능날에도 모습 안 보였다",
      "press": "sedaily.com",
      "publishedAt": "2026-11-22T10:16:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/011/0004684878?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "철도노조 안전운행 투쟁 연기",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 24,
+   "recent20": 10,
+   "press": 21,
+   "firstArticleAt": "2026-11-22T09:45:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "철도노조, '안전운행 투쟁' 26일로 연기…화물열차 탈선 여파",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-22T10:22:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=730522"
     },
     {
-     "title": "李대통령, 최교진 사의 수락…靑 \"다음 인선 절차대로 진행\"(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-22T10:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016456972?sid=100"
+     "title": "철도노조, 쟁의행위 26일로 연기…경부선 탈선 사고 복구 우선",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-22T10:22:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2651368"
     },
     {
-     "title": "최교진 교육부 장관 사의…\"준비 미흡 비판 통감\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-22T10:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928755?sid=161"
+     "title": "철도노조, 안전운행투쟁 26일로 연기…“탈선 사고 복구 우선”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-22T10:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002726771?sid=102"
     }
    ]
   },
@@ -113,12 +145,18 @@
     "signal.bz"
    ],
    "articles90": 24,
-   "recent20": 7,
+   "recent20": 4,
    "press": 18,
-   "firstArticleAt": "2026-11-22T08:54:00.000Z",
+   "firstArticleAt": "2026-11-22T09:02:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "한덕수 전 국무총리 파기환송 조희대 탄핵 ‘불타는 정치권’",
+     "press": "kyeongin.com",
+     "publishedAt": "2026-11-22T10:24:00.000Z",
+     "link": "https://www.kyeongin.com/article/1775202"
+    },
     {
      "title": "민주당 \"연내 조희대 탄핵\" 공식화",
      "press": "thereport.co.kr",
@@ -129,29 +167,60 @@
      "title": "[뉴스더] 탄핵부터 정한 與, 탄핵 사유는 갈팡질팡?",
      "press": "news.tvchosun.com",
      "publishedAt": "2026-11-22T10:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652669?sid=004"
+     "link": "https://n.news.naver.com/mnews/article/448/0000652669?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "수원FC K리그1 승격",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 20,
+   "recent20": 1,
+   "press": 17,
+   "firstArticleAt": "2026-11-22T09:23:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "K리그2 3위 이랜드 무승부...2위 수원 FC, 수원 삼성과 동반 승격 확정",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-22T10:16:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/052/0002436476"
     },
     {
-     "title": "민주 \"조희대 탄핵 연내 처리\"…국힘 \"억지 탄핵\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-22T10:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928761?sid=161"
+     "title": "[축구] 수원FC, K리그2 준우승… 수원 삼성과 동반 '승격' 확정",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-22T10:04:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3451118"
+    },
+    {
+     "title": "수원FC, 강등 1년 만에 K리그1 재입성",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-22T10:04:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/011/0004684875"
     }
    ]
   },
   {
    "keyword": "남자 5000M 계주 금메달",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 44,
+   "articles90": 45,
    "recent20": 2,
-   "press": 10,
+   "press": 11,
    "firstArticleAt": "2026-11-22T09:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "건재! 한국 남자 쇼트트랙, 홈에서 계주 금메달 쾌거…김길리 은메달",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-22T10:17:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/119/0003158060"
+    },
     {
      "title": "[사진]1등으로 결승선 통과하는 5000m 계주 임종언",
      "press": "osen.co.kr",
@@ -163,44 +232,6 @@
      "press": "osen.co.kr",
      "publishedAt": "2026-11-22T10:06:00.000Z",
      "link": "https://m.sports.naver.com/general/article/109/0005643966"
-    },
-    {
-     "title": "금메달 획득한 대한민국 대표팀 선수들",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-22T09:52:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/001/0016456967"
-    }
-   ]
-  },
-  {
-   "keyword": "명륜당 추가 기각",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T09:07:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[단독] 중수청 첫 기업 수사부터 '별건' 의혹…공소청·법원 '줄기각'",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-22T10:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000521899?sid=102"
-    },
-    {
-     "title": "명륜진사갈비 회장 압수수색 영장 기각, 내부거래 수사 제동 걸리나?",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-22T09:38:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886742"
-    },
-    {
-     "title": "서울중수청, ‘1호 강제수사’ 명륜당 회장 추가 압수수색 영장 기각",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-22T09:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012298816?sid=102"
     }
    ]
   },
@@ -209,13 +240,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 5,
    "recent20": 3,
-   "press": 4,
+   "press": 5,
    "firstArticleAt": "2026-11-22T09:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이름 대신 해당 인물 …‘핑계고’, 고경표 후보 제외하고 사과",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-22T10:23:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001147984"
+    },
     {
      "title": "'음주운전' 고경표, 결국 '핑계고' 인기상 후보 삭제..제작진 \"검토 부족...",
      "press": "osen.co.kr",
@@ -227,12 +264,6 @@
      "press": "spotvnews.co.kr",
      "publishedAt": "2026-11-22T10:10:00.000Z",
      "link": "https://m.entertain.naver.com/article/477/0000640314"
-    },
-    {
-     "title": "'핑계고' 측, '음주운전' 고경표 후보 삭제 \"검토 불충분했다\" 사과",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-22T10:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000328739"
     }
    ]
   },
@@ -265,38 +296,6 @@
      "press": "topstarnews.net",
      "publishedAt": "2026-11-22T09:18:00.000Z",
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282956"
-    }
-   ]
-  },
-  {
-   "keyword": "40대 아기와 추락",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T09:03:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "아파트 추락 사고: 엄마의 마지막 희생으로 기적적으로 생존한 아기",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-22T09:38:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886745"
-    },
-    {
-     "title": "창원 아파트서 5개월 아기 안고 추락한 40대女 사망…아기는 생존",
-     "press": "donga.com",
-     "publishedAt": "2026-11-22T09:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764214?sid=102"
-    },
-    {
-     "title": "아파트서 5개월 딸 안고 추락한 엄마, 아기는 살았다···40대 여성 사망",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-22T09:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484242?sid=102"
     }
    ]
   },
@@ -335,7 +334,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1057,
+  "flagged": 1059,
   "matched": 603,
   "avgLeadMin": 623,
   "recent": [
