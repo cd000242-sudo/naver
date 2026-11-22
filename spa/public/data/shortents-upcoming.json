@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T08:06:43.565Z",
+ "builtAt": "2026-11-22T08:16:47.112Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
+ "measured": 20,
  "candidates": [
   {
    "keyword": "최교진 수능 사의",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 42,
-   "recent20": 6,
-   "press": 34,
-   "firstArticleAt": "2026-11-22T06:38:00.000Z",
+   "articles90": 45,
+   "recent20": 12,
+   "press": 36,
+   "firstArticleAt": "2026-11-22T06:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘최교진 사퇴’했지만…국민의힘 “부실대응 원인 규명해야”",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-22T08:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003060475?sid=100"
+     "title": "[뉴스1번지] 최교진, '수능 혼란' 책임 사의…이 대통령, 즉시 수락",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-22T08:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928741?sid=100"
     },
     {
-     "title": "최교진 사퇴에 與 \"전문성 있는 차기 장관 후보 기대\"",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-22T08:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005607829?sid=100"
+     "title": "국힘 \"최교진 사퇴로 끝낼 일 아냐\"…AI 부정행위 전수조사·특검 촉구",
+     "press": "kado.net",
+     "publishedAt": "2026-11-22T08:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000212639?sid=100"
     },
     {
-     "title": "'최교진 사퇴'에 친정 전교조 \"AI 대응할 교육부 장관 인선해야\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-22T07:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005444635?sid=102"
+     "title": "與, 최교진 사의에 \"교육환경 대응할 전문성·책임감 갖춘 인사 선임되...",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-22T08:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193219?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "북미회담 무산",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 9,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-22T07:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "WSJ “트럼프, 북미회담 추진…북한 조건에 무산”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-22T08:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012298807?sid=104"
+    },
+    {
+     "title": "\"북한 무리한 요구로 북미회담 무산\"...\"편지도 집어 던져\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-22T08:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436448?sid=104"
+    },
+    {
+     "title": "\"美, 아시아 순방 계기 북미회담 추진…北 '수용 불가 조건'에 무산\"",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-22T07:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005356709?sid=104"
     }
    ]
   },
@@ -47,10 +79,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 11,
+   "articles90": 8,
    "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-22T06:42:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-22T06:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,44 +107,12 @@
    ]
   },
   {
-   "keyword": "북미회담 무산",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-22T07:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"美, 아시아 순방 계기 북미회담 추진…北 '수용 불가 조건'에 무산\"",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-22T07:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005356709?sid=104"
-    },
-    {
-     "title": "“트럼프, 한국전쟁 종전선언까지 준비했는데”…北 김정은 만남 무산된...",
-     "press": "nownews.seoul.co.kr",
-     "publishedAt": "2026-11-22T07:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701863?sid=104"
-    },
-    {
-     "title": "\"트럼프, 북미회담 추진했지만, 북한 수용 불가 조건에 무산\"",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-22T07:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000521885?sid=104"
-    }
-   ]
-  },
-  {
    "keyword": "김정은",
    "sources": [
     "google"
    ],
    "articles90": 7,
-   "recent20": 1,
+   "recent20": 0,
    "press": 7,
    "firstArticleAt": "2026-11-22T07:10:00.000Z",
    "exclusive": false,
@@ -171,14 +171,46 @@
    ]
   },
   {
+   "keyword": "외교",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T06:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“북한 외교관, 트럼프 친서 봉투째 내던져”…북·미 회담 불발의 전말",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-22T08:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003566987?sid=104"
+    },
+    {
+     "title": "[인사] 외교부",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-22T08:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005767230?sid=102"
+    },
+    {
+     "title": "與 \"국민의힘, 대통령 순방 횟수·체류 일수 앞세워 외교 성과 깎아내려...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T07:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014338270?sid=100"
+    }
+   ]
+  },
+  {
    "keyword": "이스라엘",
    "sources": [
     "google"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T06:38:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-22T07:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -199,70 +231,6 @@
      "press": "hani.co.kr",
      "publishedAt": "2026-11-22T07:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/028/0002833365?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "외교",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T06:45:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "與 \"국민의힘, 대통령 순방 횟수·체류 일수 앞세워 외교 성과 깎아내려...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T07:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014338270?sid=100"
-    },
-    {
-     "title": "김병주 “이 대통령은 외교 천재···상대 마음을 읽고 합당한 이야기...",
-     "press": "weekly.khan.co.kr",
-     "publishedAt": "2026-11-22T07:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/033/0000053562?sid=100"
-    },
-    {
-     "title": "트럼프엔 YMCA 공연, 다카이치엔 악수 두 번…習 ‘맞춤형 양자외교’ ...",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-22T06:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003566969?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "여자배구",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T06:45:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "여자배구 현대건설, 흥국생명 4연패 빠뜨리고 첫 연승(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-22T07:49:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/001/0016456806"
-    },
-    {
-     "title": "여자배구 현대건설, 흥국생명 꺾고 4연패 뒤 2연승",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T07:00:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/003/0014338225"
-    },
-    {
-     "title": "여자배구 현대건설, 개막 4연패 딛고 시즌 첫 연승",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-22T07:00:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/055/0001404907"
     }
    ]
   }
