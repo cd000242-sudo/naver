@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T12:48:19.108Z",
+ "builtAt": "2026-11-22T12:58:22.282Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 28,
  "candidates": [
   {
    "keyword": "정부 증안펀드 가동 준비",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 24,
-   "recent20": 5,
-   "press": 24,
-   "firstArticleAt": "2026-11-22T11:19:00.000Z",
+   "articles90": 23,
+   "recent20": 3,
+   "press": 23,
+   "firstArticleAt": "2026-11-22T11:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "블랙먼데이 우려에 증안펀드 18년만에 가동되나…F4 \"준비 착수\"(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-22T12:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016457004?sid=101"
+    },
     {
      "title": "정부, '증안펀드' 즉시 가동 준비 착수",
      "press": "hansbiz.co.kr",
@@ -33,12 +39,38 @@
      "press": "peoplewatch.co.kr",
      "publishedAt": "2026-11-22T12:40:00.000Z",
      "link": "https://www.peoplewatch.co.kr/article/view/ppw202611220002"
+    }
+   ]
+  },
+  {
+   "keyword": "솔비 이규한 결혼",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 15,
+   "recent20": 3,
+   "press": 10,
+   "firstArticleAt": "2026-11-22T11:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘내년 결혼’ 솔비, ♥이규한과 가상 ‘2세’에 꿀뚝뚝..“외모? 오빠 ...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-22T12:53:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005644021"
     },
     {
-     "title": "'연금 동원' 한계 오자 '증안펀드' 만지작… 또 시장 오판하는 건 아니...",
-     "press": "fntoday.co.kr",
-     "publishedAt": "2026-11-22T12:38:00.000Z",
-     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=399609"
+     "title": "솔비, ♥이규한 사귀기 전에 모친 집 데려가 “수가 어마어마” 신동엽...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-22T12:51:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190242"
+    },
+    {
+     "title": "솔비 “♥깔끔한 이규한, 가글 후 첫키스…청소 빨래 설거지 다 해” (미...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-22T12:41:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190240"
     }
    ]
   },
@@ -80,7 +112,7 @@
     "google"
    ],
    "articles90": 10,
-   "recent20": 1,
+   "recent20": 0,
    "press": 9,
    "firstArticleAt": "2026-11-22T11:35:00.000Z",
    "exclusive": false,
@@ -139,14 +171,46 @@
    ]
   },
   {
+   "keyword": "이혜영 남편",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T12:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이혜영, '수조원대 자산가' 남편♥과 '5년 폐암 투병' 끈끈함…\"잘 견뎌...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-22T12:57:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004468713"
+    },
+    {
+     "title": "“이제 안 나온다며” 이혜영 ‘미우새’ 등판… ‘전남편’ 이상민 간...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-22T12:56:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005767348"
+    },
+    {
+     "title": "'이상민 전처' 이혜영, '미우새' 깜짝 등장…\"남편이 여길 왜 나가냐고...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-22T12:38:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002083038"
+    }
+   ]
+  },
+  {
    "keyword": "개리, 연예계 은퇴 이유 휴직",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T11:27:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-22T11:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -169,76 +233,11 @@
      "link": "https://m.entertain.naver.com/article/241/0003542977"
     }
    ]
-  },
-  {
-   "keyword": "김종민 아내 임신",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T12:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김종민, 내년 3월 아빠된다..초음파 속 꼬물거리는 2세 모습 공개 (미우...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-22T12:42:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004468712"
-    },
-    {
-     "title": "‘11세 연하♥’ 김종민, 2세 성별=아들..초음파 공개에 “아내 닮아야...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-22T12:36:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005644017"
-    },
-    {
-     "title": "[TVis] ‘예비 아빠’ 김종민, 아들 성별에 함박웃음 “든든해”… 탁재...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-22T12:22:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003542982"
-    }
-   ]
-  },
-  {
-   "keyword": "김동완 SNS 중단 선언",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T11:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김동완, 12월 1일부터 SNS 활동 중단…유튜브·인스타는 유지",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-22T11:54:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283013"
-    },
-    {
-     "title": "김동완, SNS 중단 선언 “그동안 즐거웠고, 고마웠어”",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-22T11:38:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001282659"
-    },
-    {
-     "title": "김동완, SNS 활동 중단 선언 “12월 1일부터 끝내려 해”…유료 팬 공간...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-22T11:22:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001151143"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1101,
+  "flagged": 1102,
   "matched": 626,
   "avgLeadMin": 608,
   "recent": [
