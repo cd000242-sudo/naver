@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T07:56:38.711Z",
+ "builtAt": "2026-11-22T08:06:43.565Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,135 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 22,
  "candidates": [
   {
    "keyword": "최교진 수능 사의",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 41,
-   "recent20": 5,
-   "press": 35,
-   "firstArticleAt": "2026-11-22T06:29:00.000Z",
+   "articles90": 42,
+   "recent20": 6,
+   "press": 34,
+   "firstArticleAt": "2026-11-22T06:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李, 최교진 교육부 장관 사표 즉각 수리...'수능 혼란' 책임",
-     "press": "newsverse.kr",
-     "publishedAt": "2026-11-22T07:50:00.000Z",
-     "link": "https://www.newsverse.kr/news/articleView.html?idxno=12009"
+     "title": "‘최교진 사퇴’했지만…국민의힘 “부실대응 원인 규명해야”",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-22T08:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003060475?sid=100"
     },
     {
-     "title": "국힘, 최교진 교육부장관 사의에 “사퇴로 끝날 일 아냐”…재발 방지 ...",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-22T07:46:00.000Z",
-     "link": "https://www.viva100.com/article/20261122500626"
+     "title": "최교진 사퇴에 與 \"전문성 있는 차기 장관 후보 기대\"",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-22T08:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005607829?sid=100"
     },
     {
-     "title": "최교진 교육부장관 사의… \"수능 대처 미흡 책임 통감\"",
-     "press": "news.cpbc.co.kr",
-     "publishedAt": "2026-11-22T07:40:00.000Z",
-     "link": "https://news.cpbc.co.kr/article/1177180?division=NAVER"
+     "title": "'최교진 사퇴'에 친정 전교조 \"AI 대응할 교육부 장관 인선해야\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-22T07:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005444635?sid=102"
     }
    ]
   },
   {
-   "keyword": "해저",
+   "keyword": "대중국 자동차 무역적자 최대",
    "sources": [
-    "signal.bz",
-    "google"
+    "nate"
    ],
-   "articles90": 28,
-   "recent20": 11,
-   "press": 27,
-   "firstArticleAt": "2026-11-22T07:10:00.000Z",
+   "articles90": 11,
+   "recent20": 0,
+   "press": 11,
+   "firstArticleAt": "2026-11-22T06:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] 태안 해상 실종된 해광호, 수색 닷새 만에 수심 52m 해저서 발견",
-     "press": "kado.net",
-     "publishedAt": "2026-11-22T07:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000212632?sid=102"
+     "title": "對중국 자동차 무역적자 역대 최대…中전기차, 韓시장 확산 가속",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-22T07:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004212472?sid=101"
     },
     {
-     "title": "[속보]태안 해저서 발견된 어선, 실종 '해광호'로 최종 확인",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-22T07:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000121942?sid=102"
+     "title": "중국산 테슬라·BYD 공세에 對中 자동차 무역적자 6조원 육박",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-22T07:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001077275?sid=103"
     },
     {
-     "title": "실종 닷새 만에 '해광호' 선체 확인…수심 52m 해저서 발견",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-22T07:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002536789?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "장동혁 국민의힘 대표",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 25,
-   "recent20": 4,
-   "press": 21,
-   "firstArticleAt": "2026-11-22T06:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "장동혁 “조희대 탄핵, 李대통령 탈옥 위한 방탄 탄핵…결국 자폭될 것...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-22T07:54:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2651352"
-    },
-    {
-     "title": "[김능구·장성철의 직언직썰 11월②] \"장동혁·오세훈·한동훈 보수 '삼...",
-     "press": "polinews.co.kr",
-     "publishedAt": "2026-11-22T07:52:00.000Z",
-     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=748879"
-    },
-    {
-     "title": "국민의힘 “최교진 장관 사퇴로 끝날 일 아냐…대통령 입장 표명하라”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-22T07:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012298800?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "김정은",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-22T06:29:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"트럼프, 김정은 만나려 비핵화 없는 종전선언 검토\" 파장",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-22T07:50:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/22/2026112250086.html"
-    },
-    {
-     "title": "\"트럼프, 김정은 만나기 위해 '종전선언'까지 검토\"",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-22T07:40:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/326072/?sc=Naver"
-    },
-    {
-     "title": "“트럼프, 한국전쟁 종전선언까지 준비했는데”…北 김정은 만남 무산된...",
-     "press": "nownews.seoul.co.kr",
-     "publishedAt": "2026-11-22T07:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701863?sid=104"
+     "title": "중국산 자동차 수입 79% 급증...대중국 무역적자 6조원",
+     "press": "getnews.co.kr",
+     "publishedAt": "2026-11-22T07:18:00.000Z",
+     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=888031"
     }
    ]
   },
@@ -145,10 +79,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
+   "articles90": 7,
    "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-22T06:34:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-22T07:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -173,12 +107,76 @@
    ]
   },
   {
+   "keyword": "김정은",
+   "sources": [
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-22T07:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"트럼프, 김정은 만나려 비핵화 없는 종전선언 검토\" 파장",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-22T07:50:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/22/2026112250086.html"
+    },
+    {
+     "title": "\"트럼프, 김정은 만나기 위해 '종전선언'까지 검토\"",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-22T07:40:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/326072/?sc=Naver"
+    },
+    {
+     "title": "“트럼프, 한국전쟁 종전선언까지 준비했는데”…北 김정은 만남 무산된...",
+     "press": "nownews.seoul.co.kr",
+     "publishedAt": "2026-11-22T07:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701863?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "최민정 500M 결승 5위",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 22,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-22T06:55:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[사진]5위로 역주하는 최민정",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-22T07:30:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/109/0005643921"
+    },
+    {
+     "title": "[사진]아쉬운 최민정",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-22T07:21:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/109/0005643919"
+    },
+    {
+     "title": "[사진]역주하는 최민정",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-22T07:18:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/109/0005643917"
+    }
+   ]
+  },
+  {
    "keyword": "이스라엘",
    "sources": [
     "google"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-22T06:38:00.000Z",
    "exclusive": false,
@@ -191,7 +189,7 @@
      "link": "https://n.news.naver.com/mnews/article/088/0001041633?sid=100"
     },
     {
-     "title": "美·이스라엘 강경파,“이란 전쟁 더 끌어선 안돼”…트럼프 “이란과 ...",
+     "title": "美·이스라엘 강경파, “이란 전쟁 더 끌어선 안 돼” 재공격 촉구…트...",
      "press": "kmib.co.kr",
      "publishedAt": "2026-11-22T07:34:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/005/0001886665?sid=104"
@@ -210,7 +208,7 @@
     "google"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-22T06:45:00.000Z",
    "exclusive": false,
@@ -237,76 +235,80 @@
    ]
   },
   {
-   "keyword": "결승 역주하는 최민정",
+   "keyword": "여자배구",
    "sources": [
-    "nate"
-   ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T06:29:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "결승 향해 역주하는 최민정",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-22T07:45:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/001/0016456801"
-    },
-    {
-     "title": "결승 향해 역주하는 최민정과 김민지",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-22T07:43:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/001/0016456791"
-    },
-    {
-     "title": "[사진]5위로 역주하는 최민정",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-22T07:30:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/109/0005643921"
-    }
-   ]
-  },
-  {
-   "keyword": "수능 가채점 설명회",
-   "sources": [
-    "nate"
+    "daum"
    ],
    "articles90": 4,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-22T06:27:00.000Z",
+   "firstArticleAt": "2026-11-22T06:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "수능 후 첫 주말 입시설명회 북적…입시 변수·부정행위 우려 속 ‘할 수...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-22T07:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484222?sid=102"
+     "title": "여자배구 현대건설, 흥국생명 4연패 빠뜨리고 첫 연승(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-22T07:49:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/001/0016456806"
     },
     {
-     "title": "[포토] 강북청솔학원, ‘2027 수능 가채점 설명회’",
-     "press": "segye.com",
-     "publishedAt": "2026-11-22T07:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177139?sid=102"
+     "title": "여자배구 현대건설, 흥국생명 꺾고 4연패 뒤 2연승",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T07:00:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/003/0014338225"
     },
     {
-     "title": "[포토]청솔학원, 2027학년도 대학수학능력시험 가채점 분석 설명회 열어",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-22T06:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413730?sid=102"
+     "title": "여자배구 현대건설, 개막 4연패 딛고 시즌 첫 연승",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-22T07:00:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/055/0001404907"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1026,
-  "matched": 588,
-  "avgLeadMin": 636,
+  "flagged": 1029,
+  "matched": 594,
+  "avgLeadMin": 631,
   "recent": [
+   {
+    "keyword": "김재열 ISU 회장 쇼트트랙 한국 개최",
+    "hitKeyword": "쇼트트랙 월드투어 확대",
+    "hitAt": "2026-11-22T17:00:00+09:00",
+    "leadMin": 94
+   },
+   {
+    "keyword": "김재열 ISU 회장 월드투어 한국 개최",
+    "hitKeyword": "쇼트트랙 월드투어 확대",
+    "hitAt": "2026-11-22T17:00:00+09:00",
+    "leadMin": 74
+   },
+   {
+    "keyword": "해저",
+    "hitKeyword": "해광호 해저 수중 수색",
+    "hitAt": "2026-11-22T17:00:00+09:00",
+    "leadMin": 54
+   },
+   {
+    "keyword": "시신 미라화된 발견",
+    "hitKeyword": "금천구 미라화 시신 발견",
+    "hitAt": "2026-11-22T17:00:00+09:00",
+    "leadMin": 23
+   },
+   {
+    "keyword": "현대건설 2연승",
+    "hitKeyword": "현대건설 2연승",
+    "hitAt": "2026-11-22T17:00:00+09:00",
+    "leadMin": 23
+   },
+   {
+    "keyword": "1251회 로또 당첨 번호",
+    "hitKeyword": "로또 2등 10장 당첨",
+    "hitAt": "2026-11-22T17:00:00+09:00",
+    "leadMin": 23
+   },
    {
     "keyword": "성균관대 수리논술 출제 오류",
     "hitKeyword": "성균관대 수리논술 정정",
@@ -330,42 +332,6 @@
     "hitKeyword": "로또 2등 10장 당첨",
     "hitAt": "2026-11-22T16:00:00+09:00",
     "leadMin": 54
-   },
-   {
-    "keyword": "1251회 로또 당첨 번호",
-    "hitKeyword": "로또 2등 10장 당첨",
-    "hitAt": "2026-11-22T16:00:00+09:00",
-    "leadMin": 14
-   },
-   {
-    "keyword": "트럼프 얄타회담 사진",
-    "hitKeyword": "트럼프 북한 회담 무산",
-    "hitAt": "2026-11-22T15:30:00+09:00",
-    "leadMin": 296
-   },
-   {
-    "keyword": "과즙세연 방시혁",
-    "hitKeyword": "과즙세연 루머 부인",
-    "hitAt": "2026-11-22T15:30:00+09:00",
-    "leadMin": 115
-   },
-   {
-    "keyword": "트럼프 김정은 회동 무산",
-    "hitKeyword": "트럼프 북한 회담 무산",
-    "hitAt": "2026-11-22T15:30:00+09:00",
-    "leadMin": 54
-   },
-   {
-    "keyword": "과즙세연 방시혁과 안 잤다",
-    "hitKeyword": "과즙세연 루머 부인",
-    "hitAt": "2026-11-22T15:30:00+09:00",
-    "leadMin": 24
-   },
-   {
-    "keyword": "흑백요리사 트리플스타 발표",
-    "hitKeyword": "트리플스타 재혼",
-    "hitAt": "2026-11-22T15:00:00+09:00",
-    "leadMin": 296
    }
   ]
  }
