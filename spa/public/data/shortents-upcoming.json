@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T13:18:30.889Z",
+ "builtAt": "2026-11-22T13:28:35.351Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,31 +8,31 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 30,
  "candidates": [
   {
-   "keyword": "정부, 증안펀드 가동 준비",
+   "keyword": "증안펀드 가동 준비",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 22,
-   "recent20": 3,
-   "press": 22,
-   "firstArticleAt": "2026-11-22T11:50:00.000Z",
+   "articles90": 17,
+   "recent20": 1,
+   "press": 17,
+   "firstArticleAt": "2026-11-22T12:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "블랙먼데이 우려 높아지자, 정부 증안펀드 가동 준비 착수",
+     "press": "dnews.co.kr",
+     "publishedAt": "2026-11-22T13:20:00.000Z",
+     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611222213458150078"
+    },
     {
      "title": "F4, '블랙먼데이' 우려에 '증안펀드' 준비 착수...18년만 가동되나",
      "press": "slist.kr",
      "publishedAt": "2026-11-22T13:08:00.000Z",
      "link": "https://www.slist.kr/news/articleView.html?idxno=783823"
-    },
-    {
-     "title": "뉴욕증시 급락에 코스피 '검은 월요일' 우려…정부, 증시 안정 대책 가...",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-22T13:02:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3759676"
     },
     {
      "title": "미 AI 투매에 '검은 월요일' 오나?...\"증안펀드 가동 준비\"",
@@ -43,34 +43,34 @@
    ]
   },
   {
-   "keyword": "유엔기후총회 합의 무산",
+   "keyword": "유엔기후총회 화석연료 이견",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
    "articles90": 13,
-   "recent20": 3,
+   "recent20": 2,
    "press": 13,
-   "firstArticleAt": "2026-11-22T11:57:00.000Z",
+   "firstArticleAt": "2026-11-22T12:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'화석연료' 놓고 갈라진 유엔기후총회‥17년 만에 합의문 채택 실패",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-22T13:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537271?sid=104"
+    },
+    {
+     "title": "산유국과 이견 끝내 못 좁혔다… 유엔 기후회의 합의안 최종 불발",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-22T13:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004011047?sid=104"
+    },
     {
      "title": "‘화석연료 퇴출’ 이견 못 좁혀…유엔기후총회 합의문 채택 불발",
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-22T13:08:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006413808?sid=104"
-    },
-    {
-     "title": "'화석연료 퇴출' 빠진 유엔기후총회…결국 합의문 채택 불발",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-22T13:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967088?sid=104"
-    },
-    {
-     "title": "화석연료 놓고 끝내 갈라졌다…31차 기후총회 합의 무산 [COP31 현장]",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T13:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009303718?sid=101"
     }
    ]
   },
@@ -79,10 +79,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 16,
-   "recent20": 3,
-   "press": 11,
-   "firstArticleAt": "2026-11-22T11:50:00.000Z",
+   "articles90": 15,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-22T12:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -111,24 +111,24 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
+   "articles90": 7,
    "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-22T11:54:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-22T12:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "김정은, 러시아대사 신임장 직접 접수…30여 년 만의 의전 변화",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-22T13:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404955?sid=104"
-    },
     {
      "title": "김정은, 주북 러 대사 신임장 접수…30여년 만에 직접 제정받아",
      "press": "newsis.com",
      "publishedAt": "2026-11-22T13:15:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014338408?sid=104"
+    },
+    {
+     "title": "김정은, 러시아대사 신임장 직접 접수…30여 년 만의 의전 변화",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-22T13:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404955?sid=104"
     },
     {
      "title": "김정은, 러시아대사 신임장 직접 접수...30여년만 의전 변화",
@@ -139,14 +139,110 @@
    ]
   },
   {
+   "keyword": "해경 해광호 해저 발견",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-22T11:59:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "태안 실종 어선 '해광호' 수심 52m 해저서 발견",
+     "press": "cc.newdaily.co.kr",
+     "publishedAt": "2026-11-22T13:04:00.000Z",
+     "link": "https://cc.newdaily.co.kr/site/data/html/2026/11/22/2026112250101.html"
+    },
+    {
+     "title": "‘해광호’ 실종 신고 5일 만에 침몰된 채 발견…수색 본격화",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-22T12:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012298886?sid=102"
+    },
+    {
+     "title": "수색 닷새 만에 해광호 선체 발견…실종 7명 수중수색 돌입",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-22T12:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413805?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "철도노조 26일로 연기",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-22T12:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "철도노조, 23일 예정 쟁의행위 26일로 연기...\"사고복구 먼저\"",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-22T13:22:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=783830"
+    },
+    {
+     "title": "'출퇴근 불편, 당장은 피했다'… 철도노조, 준법투쟁 26일로 연기",
+     "press": "m.skyedaily.com",
+     "publishedAt": "2026-11-22T13:16:00.000Z",
+     "link": "https://m.skyedaily.com/news_view.html?ID=315007"
+    },
+    {
+     "title": "철도노조, ‘경부선 탈선’ 여파에 쟁의행위 26일로 연기...“사고 복구...",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-22T13:02:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611220033"
+    }
+   ]
+  },
+  {
+   "keyword": "이혜영 남편",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-22T12:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이혜영, 남편 부재훈과 함께 견딘 폐암 투병 5년…\"이제 좀 살 것 같다\"",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-22T13:14:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283058"
+    },
+    {
+     "title": "이혜영 \"美 LA에 수영장 딸린 저택 마련... 비욘세가 이웃\" ('미우새')",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-22T13:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001409203"
+    },
+    {
+     "title": "이혜영, '수조원대 자산가' 남편♥과 '5년 폐암 투병' 끈끈함…\"잘 견뎌...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-22T12:57:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004468713"
+    }
+   ]
+  },
+  {
    "keyword": "내일 날씨",
    "sources": [
     "google"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T11:54:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-22T12:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -169,11 +265,75 @@
      "link": "https://n.news.naver.com/mnews/article/056/0012298860?sid=103"
     }
    ]
+  },
+  {
+   "keyword": "최교진 교육장관 면직안 재가",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T12:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이 대통령, '수능 책임 통감' 최교진 장관 면직안 재가",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-22T13:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436493?sid=100"
+    },
+    {
+     "title": "수능 혼란에 결국 물러난 최교진 교육부 장관",
+     "press": "mhj21.com",
+     "publishedAt": "2026-11-22T12:58:00.000Z",
+     "link": "https://www.mhj21.com/news/articleView.html?idxno=254940"
+    },
+    {
+     "title": "최교진 교육부 장관 사의…李대통령, 면직안 재가",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-22T12:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005607940?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "영월서 일산화탄소 추정",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T12:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "영월서 ‘차박’하던 70대 여성 숨지고 60대 치료 중...경찰, 수사 중",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-22T13:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000133266?sid=102"
+    },
+    {
+     "title": "영월서 차박하던 여성 숨져, 함께 있던 남성도 부상…일산화탄소 중독 ...",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-22T13:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002834597?sid=102"
+    },
+    {
+     "title": "차박 중 켠 난방기구가 화근이었나…영월서 70대 여성 숨져",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-22T12:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005444659?sid=102"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1106,
+  "flagged": 1111,
   "matched": 626,
   "avgLeadMin": 608,
   "recent": [
