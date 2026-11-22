@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T13:58:46.487Z",
+ "builtAt": "2026-11-22T14:08:49.823Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,58 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 24,
  "candidates": [
   {
-   "keyword": "증안펀드 가동 준비",
+   "keyword": "유엔기후총회 합의 무산",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-22T12:32:00.000Z",
+   "articles90": 12,
+   "recent20": 3,
+   "press": 12,
+   "firstArticleAt": "2026-11-22T12:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "COP31 합의 무산, 증시 영향은…정유·철강·신재생 엇갈린 셈법",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-22T13:58:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283107"
+    },
+    {
+     "title": "'화석연료' 갈등…유엔 기후변화총회 끝내 결렬, 합의문 무산",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-22T13:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005444663?sid=104"
+    },
+    {
+     "title": "역대 최장 연장에도 합의문 채택 불발…COP31 ‘화석연료’ 끝내 못 담았...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-22T13:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002833426?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "증안펀드 가동 준비",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-22T12:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "미 증시 급락에 F4회의 소집...\"증안펀드 가동 준비\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-22T14:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436516?sid=101"
+    },
     {
      "title": "경제금융수장들 \"시장 상황 따라 증안펀드 바로 가동할 수 있게 준비 착...",
      "press": "efnews.co.kr",
@@ -33,86 +71,46 @@
      "press": "dnews.co.kr",
      "publishedAt": "2026-11-22T13:20:00.000Z",
      "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611222213458150078"
-    },
-    {
-     "title": "F4, '블랙먼데이' 우려에 '증안펀드' 준비 착수...18년만 가동되나",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-22T13:08:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=783823"
-    }
-   ]
-  },
-  {
-   "keyword": "엔비디아칩 밀수 중 중국인",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T12:45:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“엔비디아 칩 중국 밀수망에 앨리스 황·캄보디아 범죄조직 얽혀”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-22T13:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012298903?sid=104"
-    },
-    {
-     "title": "\"엔비디아 칩 밀수에 앨리스 황·캄보디아 범죄조직 얽혀\"<FT>",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-22T13:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928781?sid=104"
-    },
-    {
-     "title": "엔비디아 칩 中 우회 공급망에 캄보디아 범죄조직까지 연루 의혹",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-22T12:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005356816?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "철도노조, 투쟁 26일로 연기",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T12:49:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "철도노조, 23일 예정 쟁의행위 26일로 연기...\"사고복구 먼저\"",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-22T13:22:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=783830"
-    },
-    {
-     "title": "'출퇴근 불편, 당장은 피했다'… 철도노조, 준법투쟁 26일로 연기",
-     "press": "m.skyedaily.com",
-     "publishedAt": "2026-11-22T13:16:00.000Z",
-     "link": "https://m.skyedaily.com/news_view.html?ID=315007"
-    },
-    {
-     "title": "철도노조, ‘경부선 탈선’ 여파에 쟁의행위 26일로 연기...“사고 복구...",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-22T13:02:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611220033"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1114,
-  "matched": 631,
-  "avgLeadMin": 618,
+  "flagged": 1115,
+  "matched": 636,
+  "avgLeadMin": 615,
   "recent": [
+   {
+    "keyword": "대기업 기부금 감소",
+    "hitKeyword": "삼성전자 기부금 1위",
+    "hitAt": "2026-11-22T23:00:00+09:00",
+    "leadMin": 746
+   },
+   {
+    "keyword": "철도노조, 26일로 연기",
+    "hitKeyword": "철도노조 쟁의행위 연기",
+    "hitAt": "2026-11-22T23:00:00+09:00",
+    "leadMin": 112
+   },
+   {
+    "keyword": "철도노조 26일로 연기",
+    "hitKeyword": "철도노조 쟁의행위 연기",
+    "hitAt": "2026-11-22T23:00:00+09:00",
+    "leadMin": 31
+   },
+   {
+    "keyword": "영월서 일산화탄소 추정",
+    "hitKeyword": "영월 차박 일산화탄소 중독",
+    "hitAt": "2026-11-22T23:00:00+09:00",
+    "leadMin": 31
+   },
+   {
+    "keyword": "철도노조, 투쟁 26일로 연기",
+    "hitKeyword": "철도노조 쟁의행위 연기",
+    "hitAt": "2026-11-22T23:00:00+09:00",
+    "leadMin": 11
+   },
    {
     "keyword": "사랑이 온다",
     "hitKeyword": "사랑이 온다 친부",
@@ -142,36 +140,6 @@
     "hitKeyword": "해광호 해저 발견",
     "hitAt": "2026-11-22T22:30:00+09:00",
     "leadMin": 1
-   },
-   {
-    "keyword": "투어스 도훈, 유재석 위인 발언",
-    "hitKeyword": "유재석 핑계고 사과",
-    "hitAt": "2026-11-22T21:30:00+09:00",
-    "leadMin": 1541
-   },
-   {
-    "keyword": "남자 5000M 계주 금메달!",
-    "hitKeyword": "쇼트트랙 남자계주 금메달",
-    "hitAt": "2026-11-22T21:30:00+09:00",
-    "leadMin": 183
-   },
-   {
-    "keyword": "남자 5000M 계주 금메달",
-    "hitKeyword": "쇼트트랙 남자계주 금메달",
-    "hitAt": "2026-11-22T21:30:00+09:00",
-    "leadMin": 163
-   },
-   {
-    "keyword": "남자 계주 금메달",
-    "hitKeyword": "쇼트트랙 남자계주 금메달",
-    "hitAt": "2026-11-22T21:30:00+09:00",
-    "leadMin": 62
-   },
-   {
-    "keyword": "남자 쇼트트랙 계주 금메달",
-    "hitKeyword": "쇼트트랙 남자계주 금메달",
-    "hitAt": "2026-11-22T21:30:00+09:00",
-    "leadMin": 42
    }
   ]
  }
