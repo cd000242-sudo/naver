@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T12:58:22.282Z",
+ "builtAt": "2026-11-22T13:08:25.700Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,47 +8,79 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 29,
  "candidates": [
   {
-   "keyword": "정부 증안펀드 가동 준비",
+   "keyword": "정부, 증안펀드 가동 준비",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 23,
+   "articles90": 24,
    "recent20": 3,
-   "press": 23,
-   "firstArticleAt": "2026-11-22T11:30:00.000Z",
+   "press": 24,
+   "firstArticleAt": "2026-11-22T11:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "미 AI 투매에 '검은 월요일' 오나?...\"증안펀드 가동 준비\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-22T13:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436491?sid=101"
+    },
+    {
+     "title": "뉴욕증시 급락에 코스피 '검은 월요일' 우려…정부, 증시 안정 대책 가...",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-22T13:02:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3759676"
+    },
     {
      "title": "블랙먼데이 우려에 증안펀드 18년만에 가동되나…F4 \"준비 착수\"(종합)",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-22T12:51:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016457004?sid=101"
-    },
-    {
-     "title": "정부, '증안펀드' 즉시 가동 준비 착수",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-22T12:46:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=885927"
-    },
-    {
-     "title": "18년만에 꺼내든 증안펀드…'블랙 먼데이' 구원투수 될까?",
-     "press": "peoplewatch.co.kr",
-     "publishedAt": "2026-11-22T12:40:00.000Z",
-     "link": "https://www.peoplewatch.co.kr/article/view/ppw202611220002"
     }
    ]
   },
   {
-   "keyword": "솔비 이규한 결혼",
+   "keyword": "유엔기후총회 합의 무산",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 12,
+   "recent20": 3,
+   "press": 12,
+   "firstArticleAt": "2026-11-22T11:57:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "화석연료 놓고 끝내 갈라졌다…31차 기후총회 합의 무산 [COP31 현장]",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-22T13:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009303718?sid=101"
+    },
+    {
+     "title": "'화석연료 퇴출' 빠진 유엔기후총회, 결국 결렬…합의문 채택 불발",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-22T13:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000967088?sid=104"
+    },
+    {
+     "title": "유엔기후총회, '화석연료' 이견에 합의문 채택 실패",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-22T12:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404953?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "솔비 이규한 4월 결혼",
    "sources": [
     "daum"
    ],
-   "articles90": 15,
-   "recent20": 3,
+   "articles90": 14,
+   "recent20": 1,
    "press": 10,
    "firstArticleAt": "2026-11-22T11:50:00.000Z",
    "exclusive": false,
@@ -61,48 +93,16 @@
      "link": "https://m.entertain.naver.com/article/109/0005644021"
     },
     {
-     "title": "솔비, ♥이규한 사귀기 전에 모친 집 데려가 “수가 어마어마” 신동엽...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-22T12:51:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190242"
-    },
-    {
      "title": "솔비 “♥깔끔한 이규한, 가글 후 첫키스…청소 빨래 설거지 다 해” (미...",
      "press": "newsen.com",
      "publishedAt": "2026-11-22T12:41:00.000Z",
      "link": "https://m.entertain.naver.com/article/609/0001190240"
-    }
-   ]
-  },
-  {
-   "keyword": "해광호 실종자 수색",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 12,
-   "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-22T11:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "수색 닷새 만에 해광호 선체 발견…실종 7명 수중수색 돌입",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-22T12:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413805?sid=102"
     },
     {
-     "title": "황종우 해수부 장관, 해광호 선체 확인에 실종자 구조 총력 지시",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T12:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014338402?sid=101"
-    },
-    {
-     "title": "‘해광호’ 실종 신고 5일 만에 침몰된 채 발견…수색 본격화",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-22T12:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012298840?sid=102"
+     "title": "이규한, 사귀기도 전에 프러포즈했다…♥솔비 母에 \"평생 책임지겠다\"",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-22T12:32:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004468709"
     }
    ]
   },
@@ -111,10 +111,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 10,
+   "articles90": 9,
    "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-22T11:35:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-22T11:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -175,13 +175,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
+   "articles90": 5,
+   "recent20": 3,
+   "press": 5,
    "firstArticleAt": "2026-11-22T12:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이혜영 \"美 LA에 수영장 딸린 저택 마련... 비욘세가 이웃\" ('미우새')",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-22T13:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001409203"
+    },
     {
      "title": "이혜영, '수조원대 자산가' 남편♥과 '5년 폐암 투병' 끈끈함…\"잘 견뎌...",
      "press": "sportschosun.com",
@@ -193,51 +199,45 @@
      "press": "mk.co.kr",
      "publishedAt": "2026-11-22T12:56:00.000Z",
      "link": "https://m.entertain.naver.com/article/009/0005767348"
-    },
-    {
-     "title": "'이상민 전처' 이혜영, '미우새' 깜짝 등장…\"남편이 여길 왜 나가냐고...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-22T12:38:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002083038"
     }
    ]
   },
   {
-   "keyword": "개리, 연예계 은퇴 이유 휴직",
+   "keyword": "박채은·양호준 금메달",
    "sources": [
     "nate"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-22T11:34:00.000Z",
+   "firstArticleAt": "2026-11-22T11:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "개리, 'B사 차 사고 은퇴' 농담…실제 활동 중단 이유는 따로 있었다",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-22T12:20:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283018"
+     "title": "빙속 박채은·양호준, 2차 월드컵 혼성계주 금메달 합작",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-22T12:16:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/421/0009303711"
     },
     {
-     "title": "개리, 연예계 은퇴 부른 억대 외제차…\"안 좋은 일 휘말린다고\"",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-22T11:38:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000785614"
+     "title": "빙속 박채은·양호준, 월드컵 혼성계주 금메달",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-22T11:56:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/055/0001404950"
     },
     {
-     "title": "리쌍, 연예계 은퇴 이유가 징크스 때문? “드림카 샀다가 6개월 만에 휴...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-22T11:34:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003542977"
+     "title": "스피드스케이팅 박채은·양호준, 월드컵 2차 대회서 혼성계주 금메달",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-22T11:48:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261122000131"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1102,
+  "flagged": 1106,
   "matched": 626,
   "avgLeadMin": 608,
   "recent": [
