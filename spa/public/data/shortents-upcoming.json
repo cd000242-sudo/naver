@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T20:00:32.262Z",
+ "builtAt": "2026-11-22T20:10:36.298Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,31 +8,128 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 26,
  "candidates": [
+  {
+   "keyword": "집",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 10,
+   "recent20": 5,
+   "press": 8,
+   "firstArticleAt": "2026-11-22T18:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘시세 17억’ 집 보유 30대 1.8만명… 1년 새 70% 급증",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-22T20:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701977?sid=101"
+    },
+    {
+     "title": "“입양·위탁 어렵다면, 한 달에 한 번 함께 집밥 한 끼는요?” [월요인...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-22T20:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701944?sid=102"
+    },
+    {
+     "title": "200만원에 친구 칼부림…술집 여인 도운 ‘거물男’ 뜻밖 정체",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-22T20:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003567091?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "정부 증안펀드 가동 준비",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 5,
+   "press": 5,
+   "firstArticleAt": "2026-11-22T19:33:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘증시 최후 방패’ 증안펀드 가동 준비한다",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-22T20:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701973?sid=101"
+    },
+    {
+     "title": "증안펀드 가동 준비에 자사주 매입 완화까지…증권주 반등 계기 될까",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-22T20:04:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=506780"
+    },
+    {
+     "title": "전설의 보검 '증안펀드' 드디어 꺼낸다…추락하는 K증시 막을까",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-22T20:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004212502?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "조희대 탄핵 연내 추진",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T19:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "역풍 우려에도… 與 “조희대 탄핵 연내 처리”",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-22T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701917?sid=100"
+    },
+    {
+     "title": "조희대 탄핵사유라더니…한덕수 판결내용은 쏙 뺀 여당",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-22T20:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003567082?sid=102"
+    },
+    {
+     "title": "與 “‘6·3·3’ 위반도 曺탄핵 사유에 포함”… ‘중대성 요건’ 여부...",
+     "press": "donga.com",
+     "publishedAt": "2026-11-22T19:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764316?sid=100"
+    }
+   ]
+  },
   {
    "keyword": "리비아 러시아 군함 피격",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T18:39:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-22T18:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "리비아서 러시아 군함 피격…\"우크라이나 드론 추정\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-22T19:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404960?sid=104"
-    },
     {
      "title": "\"리비아 항구서 러시아 군함 피격...우크라 공격 추정\"",
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-22T19:29:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002436541?sid=104"
+    },
+    {
+     "title": "리비아서 러시아 군함 피격…\"우크라이나 드론 추정\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-22T19:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404960?sid=104"
     },
     {
      "title": "“리비아 항구 정박 러시아 군함 피격…우크라 드론 공격 추정”",
@@ -43,73 +140,73 @@
    ]
   },
   {
-   "keyword": "집",
+   "keyword": "유엔기후총회 화석연료 합의 실패",
    "sources": [
-    "google"
+    "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T18:50:00.000Z",
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T19:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "집 소유 21%가 1인 가구… 270만 가구로 역대 최고",
-     "press": "donga.com",
-     "publishedAt": "2026-11-22T19:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764329?sid=102"
+     "title": "‘화석연료 이견’ 빈 손으로 끝난 유엔기후총회",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-22T20:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701937?sid=104"
     },
     {
-     "title": "매컬리 컬킨 ‘나 홀로 집에’ 34년만에 돌아온다",
-     "press": "donga.com",
-     "publishedAt": "2026-11-22T19:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764287?sid=102"
+     "title": "유엔 기후총회 합의 결렬…화석연료 퇴출 놓고 EU·사우디 충돌",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-22T20:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009303754?sid=104"
     },
     {
-     "title": "배달 봉투를 집에서 종량제봉투로…고양 12월 11일까지 시범 계획",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-22T19:10:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=409647"
+     "title": "COP31, 화석연료 이견 끝에 합의문 채택 무산",
+     "press": "goodnews1.com",
+     "publishedAt": "2026-11-22T19:40:00.000Z",
+     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466506"
     }
    ]
   },
   {
-   "keyword": "조희대 탄핵 연내 추진",
+   "keyword": "맨유",
    "sources": [
-    "nate"
+    "google"
    ],
    "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-22T19:10:00.000Z",
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T19:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "與 “‘6·3·3’ 위반도 曺탄핵 사유에 포함”… ‘중대성 요건’ 여부...",
-     "press": "donga.com",
-     "publishedAt": "2026-11-22T19:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764316?sid=100"
+     "title": "포체티노, 맨유 데뷔 14분 만에 \"내일 넌 잘릴 거야\"... 리버풀 팬들 조...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-22T20:04:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/108/0003489423"
     },
     {
-     "title": "한덕수 판결 존중한다는 與… 절차 문제삼아 “조희대 탄핵”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-22T19:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764318?sid=100"
+     "title": "[pl.review] 포체티노 데뷔전 대참사! '요로 퇴장' 맨유, 리버풀에 0-4 완...",
+     "press": "fourfourtwo.co.kr",
+     "publishedAt": "2026-11-22T20:00:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/411/0000090339"
     },
     {
-     "title": "與, 연내 '조희대 탄핵' 못 박았다… \"韓 판결에 인내심 한계\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-22T19:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005444695?sid=100"
+     "title": "리버풀, 맨유에 4-0 완승… 포체티노 감독 데뷔전부터 굴욕",
+     "press": "dkilbo.com",
+     "publishedAt": "2026-11-22T19:20:00.000Z",
+     "link": "https://www.dkilbo.com/news/articleView.html?idxno=561705"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1118,
+  "flagged": 1120,
   "matched": 630,
   "avgLeadMin": 611,
   "recent": [
