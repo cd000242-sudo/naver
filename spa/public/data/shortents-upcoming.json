@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T04:15:19.794Z",
+ "builtAt": "2026-11-22T04:25:23.029Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,70 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "최교진, 수능 책임 통감",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 91,
-   "recent20": 23,
-   "press": 70,
-   "firstArticleAt": "2026-11-22T02:52:00.000Z",
+   "articles90": 90,
+   "recent20": 19,
+   "press": 68,
+   "firstArticleAt": "2026-11-22T02:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "최교진, '수능 대혼란' 책임지고 사의…\"준비 미흡 비판 통감\"(종합)",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-22T04:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004212441?sid=102"
+     "title": "이 대통령, 최교진 교육부장관 사의 수용… 靑 \"신임 장관 인선은 절차...",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-22T04:22:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261122500193"
     },
     {
-     "title": "李, 최교진 교육부 장관 사의 수락…靑 \"후임 인선 진행\"",
-     "press": "sisafocus.co.kr",
-     "publishedAt": "2026-11-22T04:14:00.000Z",
-     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367899"
+     "title": "李대통령, 최교진 교육장관 사의 수락…韓총리에 \"수능 사후조치 만전\"",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-22T04:22:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261122000065"
     },
     {
-     "title": "최교진 교육부 장관, '수능 혼란'에 사임…이 대통령 수락",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-22T04:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003488243?sid=105"
+     "title": "李대통령, 최교진 교육부 장관 사의 즉각 수용",
+     "press": "jeonmae.co.kr",
+     "publishedAt": "2026-11-22T04:20:00.000Z",
+     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1314365"
     }
    ]
   },
   {
-   "keyword": "민주당 조희대 탄핵 추진",
+   "keyword": "조희대 대법원장 탄핵소추 추진",
    "sources": [
     "nate"
    ],
-   "articles90": 50,
-   "recent20": 6,
-   "press": 39,
-   "firstArticleAt": "2026-11-22T02:50:00.000Z",
+   "articles90": 47,
+   "recent20": 11,
+   "press": 37,
+   "firstArticleAt": "2026-11-22T02:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "민주당 “조희대 탄핵안 연내 국회서 처리”",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-22T04:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002834553?sid=100"
+     "title": "여당 조희대 탄핵 당론 채택…야당 \"탄핵냥이\"",
+     "press": "kihoilbo.co.kr",
+     "publishedAt": "2026-11-22T04:22:00.000Z",
+     "link": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3041668"
     },
     {
-     "title": "與 \"'한덕수 판결' 조희대 탄핵사유 삼지 않을 것…12월 가기 전 의결\"",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-22T04:14:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445892"
+     "title": "민주당 “조희대 탄핵소추안 12월 내 국회 의결”",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-22T04:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001206477?sid=100"
     },
     {
-     "title": "與 조희대 탄핵추진단 \"'한덕수 판결' 탄핵사유 삼지 않을 것\"",
-     "press": "wolyo.co.kr",
-     "publishedAt": "2026-11-22T04:12:00.000Z",
-     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=320869"
+     "title": "與, 조희대 탄핵 \"한덕수 판결 내용은 뺀다\"…'절차 하자' 겨냥",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-22T04:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004212445?sid=100"
     }
    ]
   },
@@ -81,12 +80,18 @@
     "signal.bz"
    ],
    "articles90": 10,
-   "recent20": 1,
+   "recent20": 2,
    "press": 10,
-   "firstArticleAt": "2026-11-22T02:46:00.000Z",
+   "firstArticleAt": "2026-11-22T02:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "조국, 당명 개정 제안…\"확장성 있는 당명 필요\"",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-22T04:16:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2021726"
+    },
     {
      "title": "조국, 창당 1000일 앞두고 당명 개정 제안…\"범민주 진영 좋아할 당명 고...",
      "press": "kado.net",
@@ -98,12 +103,38 @@
      "press": "dgmbc.com",
      "publishedAt": "2026-11-22T03:48:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/657/0000057714?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "조국, 범민주당명 고민",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 10,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-22T02:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "조국, 당명 개정 제안…\"확장성 있는 당명 필요\"",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-22T04:16:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2021726"
     },
     {
-     "title": "조국혁신당 조국, 창당 1000일 앞두고 당명 개정 제안",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-22T03:40:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3759419"
+     "title": "조국, 창당 1000일 앞두고 당명 개정 제안…\"범민주 진영 좋아할 당명 고...",
+     "press": "kado.net",
+     "publishedAt": "2026-11-22T04:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000212579?sid=100"
+    },
+    {
+     "title": "조국, 조국혁신당 당명 개정 제안 \"일부는 우리 당 조롱하기도\"",
+     "press": "dgmbc.com",
+     "publishedAt": "2026-11-22T03:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/657/0000057714?sid=100"
     }
    ]
   },
@@ -112,10 +143,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-22T02:48:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-22T02:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -140,49 +171,23 @@
    ]
   },
   {
-   "keyword": "대학생 취업인식도 조사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-22T02:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "대학생 45% “취업 작년보다 어렵다”…구직 활동은 오히려 증가",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-22T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003488225?sid=105"
-    },
-    {
-     "title": "대학생 45% “취업 더 어려워졌다”…4명 중 1명은 서류전형 전패",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-22T02:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000133169?sid=101"
-    },
-    {
-     "title": "대학생 45% \"올해 취업시장 작년보다 어렵다\" … 1년 이상 취업 준비도 ...",
-     "press": "worktoday.co.kr",
-     "publishedAt": "2026-11-22T02:56:00.000Z",
-     "link": "http://www.worktoday.co.kr/news/articleView.html?idxno=92455"
-    }
-   ]
-  },
-  {
    "keyword": "재산",
    "sources": [
     "google"
    ],
-   "articles90": 6,
+   "articles90": 7,
    "recent20": 1,
-   "press": 4,
+   "press": 5,
    "firstArticleAt": "2026-11-22T03:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "괴산 돈사 불, 새끼돼지 600여마리 폐사…2억대 재산피해",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T04:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014338016?sid=102"
+    },
     {
      "title": "전남광주시 무안 계절근로자 숙소서 화재…9500만 원 재산피해",
      "press": "news.tf.co.kr",
@@ -194,12 +199,38 @@
      "press": "etnews.com",
      "publishedAt": "2026-11-22T03:01:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/030/0003488219?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "대학생 취업인식도 조사",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-22T02:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "대학생 45% “취업 더 어려워졌다”…서류 합격률 18.6% 그쳐",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-22T04:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004684766?sid=101"
     },
     {
-     "title": "지식재산처, 특허 통계도 AI가 읽는다…'마크다운' 형식 자료 개방",
+     "title": "대학생 45% “취업 작년보다 어렵다”…구직 활동은 오히려 증가",
      "press": "etnews.com",
      "publishedAt": "2026-11-22T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003488226?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/030/0003488225?sid=105"
+    },
+    {
+     "title": "대학생 45% “취업 더 어려워졌다”…4명 중 1명은 서류전형 전패",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-22T02:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000133169?sid=101"
     }
    ]
   },
@@ -236,38 +267,6 @@
    ]
   },
   {
-   "keyword": "하루 가수",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T02:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "임영웅, 트로트 가수 브랜드평판 1위…71개월 연속 왕좌",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-22T04:04:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626869"
-    },
-    {
-     "title": "1년 비밀 연애 끝에… 오늘(22일) 4세 연상과 결혼식 올리는 ‘여가수’...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-22T03:12:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1176656"
-    },
-    {
-     "title": "'전국노래자랑' 김연자 오프닝부터 강문경·오유진·하루·이다온 총출...",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-22T02:54:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3759384"
-    }
-   ]
-  },
-  {
    "keyword": "철도노조 쟁의행위 예고",
    "sources": [
     "nate"
@@ -298,11 +297,75 @@
      "link": "https://n.news.naver.com/mnews/article/003/0014337966?sid=102"
     }
    ]
+  },
+  {
+   "keyword": "흑백 트리플스타 재혼",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T03:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"부끄럽지 않은 남편 될 것\"… '흑백요리사' 트리플스타 강승원, 깜짝 재...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-22T04:01:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000492229"
+    },
+    {
+     "title": "‘흑백요리사’ 트리플스타 강승원, 재혼 발표…“든든한 안식처 만나”",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-22T03:42:00.000Z",
+     "link": "https://m.entertain.naver.com/article/396/0000761588"
+    },
+    {
+     "title": "[전문] '흑백' 트리플스타, ♥재혼 소식 전했다…횡령 무혐의 처분 이후...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-22T03:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000785579"
+    }
+   ]
+  },
+  {
+   "keyword": "집행유예",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 3,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T04:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "BTS 암표 판매 위해 팔찌 100개 훔친 중국인 징역형 집행유예",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-22T04:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003566942?sid=102"
+    },
+    {
+     "title": "AI안경에 답 띄우고 훔쳐봤는데 “집행유예”…부정행위 파문에 2년 전...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-22T04:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004684764?sid=102"
+    },
+    {
+     "title": "BTS 공연 입장 팔찌 100개 훔친 중국인 집행유예",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-22T04:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004212439?sid=102"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 974,
+  "flagged": 978,
   "matched": 564,
   "avgLeadMin": 622,
   "recent": [
