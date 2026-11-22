@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T04:35:26.438Z",
+ "builtAt": "2026-11-22T04:45:29.551Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,54 +8,58 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "최교진 사의 표명",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 91,
-   "recent20": 24,
-   "press": 72,
-   "firstArticleAt": "2026-11-22T03:34:00.000Z",
+   "recent20": 26,
+   "press": 76,
+   "firstArticleAt": "2026-11-22T03:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이재명 대통령, 최교진 사의 즉각 수용…교육부 장관 교체",
-     "press": "kgnews.co.kr",
-     "publishedAt": "2026-11-22T04:34:00.000Z",
-     "link": "https://www.kgnews.co.kr/news/article.html?no=920623"
+     "title": "'수능 혼란' 최교진 교육부 장관 사의…李대통령 즉각 수용",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-22T04:44:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=885885"
     },
     {
-     "title": "이 대통령, 최교진 교육부 장관 사의 수락…수능 혼란 책임 물어",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-22T04:34:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4120079"
+     "title": "이 대통령, 최교진 교육부 장관 사의 1시간 만에 '즉각 수리'",
+     "press": "goodmorningcc.com",
+     "publishedAt": "2026-11-22T04:42:00.000Z",
+     "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=456283"
     },
     {
-     "title": "‘AI 늑장 대응’ 비판에 최교진 교육부 장관 사의... 이 대통령, 사의 ...",
-     "press": "womennews.co.kr",
-     "publishedAt": "2026-11-22T04:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/310/0000141941?sid=102"
+     "title": "최교진 교육부 장관 사의…\"수능 준비 미흡 책임 통감\"",
+     "press": "jbnews.com",
+     "publishedAt": "2026-11-22T04:42:00.000Z",
+     "link": "https://www.jbnews.com/news/articleView.html?idxno=1516562"
     }
    ]
   },
   {
    "keyword": "조희대 대법원장 탄핵소추 추진",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 47,
-   "recent20": 14,
-   "press": 40,
-   "firstArticleAt": "2026-11-22T03:08:00.000Z",
+   "articles90": 43,
+   "recent20": 10,
+   "press": 35,
+   "firstArticleAt": "2026-11-22T03:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "조희대 탄핵 방아쇠 당긴 '한덕수 판결', 탄핵 사유 제외",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-22T04:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001165176?sid=100"
+    },
     {
      "title": "민주당 \"조희대 대법원장 탄핵소추안 12월 중 처리\"",
      "press": "goodmorningcc.com",
@@ -63,48 +67,10 @@
      "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=456281"
     },
     {
-     "title": "[속보] 오세훈 “조희대 탄핵은 대통령 심판열차의 출발이자 사법부 장...",
+     "title": "[속보] 오세훈 “조희대 탄핵, 대통령 심판열차 출발이자 사법부 장악 ...",
      "press": "kyeonggi.com",
      "publishedAt": "2026-11-22T04:34:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/666/0000133188?sid=100"
-    },
-    {
-     "title": "민주당 “조희대 탄핵 사유에 한덕수 판결 내용은 포함 안해…절차상 하...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-22T04:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484188?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "조국, 범민주당명 고민",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-22T03:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "조국 \"당명 개정 제안...범민주진영이 좋아할 이름으로\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-22T04:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436375?sid=100"
-    },
-    {
-     "title": "조국, 당명 개정 제안…\"확장성 있는 당명 필요\"",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-22T04:16:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2021726"
-    },
-    {
-     "title": "조국, 창당 1000일 앞두고 당명 개정 제안…\"범민주 진영 좋아할 당명 고...",
-     "press": "kado.net",
-     "publishedAt": "2026-11-22T04:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000212579?sid=100"
     }
    ]
   },
@@ -113,10 +79,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 3,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T03:06:00.000Z",
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T04:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -137,199 +103,6 @@
      "press": "khan.co.kr",
      "publishedAt": "2026-11-22T04:24:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/032/0003484186?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "소설 절기",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T03:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "절기상 소설(小雪) 앞두고 겨울 왕국 된 내장산[사진잇슈]",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-22T04:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967009?sid=102"
-    },
-    {
-     "title": "[날씨] 절기 소설, 눈 대신 추위…내일 전국 비·눈",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-22T04:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928686?sid=103"
-    },
-    {
-     "title": "[날씨] '소설' 아침 올가을 최저 기온…한낮에도 '쌀쌀'",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-22T03:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404869?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "흑백 트리플스타 재혼",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T03:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'흑백요리사' 트리플스타, 재혼 발표... \"든든한 안식처\"",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-22T04:30:00.000Z",
-     "link": "https://www.insight.co.kr/news/583070"
-    },
-    {
-     "title": "\"부끄럽지 않은 남편 될 것\"… '흑백요리사' 트리플스타 강승원, 깜짝 재...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-22T04:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000492229"
-    },
-    {
-     "title": "‘흑백요리사’ 트리플스타 강승원, 재혼 발표…“든든한 안식처 만나”",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-22T03:42:00.000Z",
-     "link": "https://m.entertain.naver.com/article/396/0000761588"
-    }
-   ]
-  },
-  {
-   "keyword": "한국 수출 1조달러",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T03:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "수출 1조달러 넘었지만…반도체 걷어내면 日·멕시코에 밀려",
-     "press": "news2day.co.kr",
-     "publishedAt": "2026-11-22T04:22:00.000Z",
-     "link": "https://www.news2day.co.kr/article/20261122500019"
-    },
-    {
-     "title": "'수출 1조달러' 세계 4위 오른 한국…반도체 없으면 멕시코·이탈리아에...",
-     "press": "newsprime.co.kr",
-     "publishedAt": "2026-11-22T03:38:00.000Z",
-     "link": "http://www.newsprime.co.kr/news/article.html?no=755944"
-    },
-    {
-     "title": "1분에 42억원어치 팔았다…7가지 숫자로 본 수출 1조달러",
-     "press": "dnews.co.kr",
-     "publishedAt": "2026-11-22T03:20:00.000Z",
-     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611211753234320018"
-    }
-   ]
-  },
-  {
-   "keyword": "철도노조 쟁의행위 예고",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T03:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "철도노조, 23일부터 준법투쟁…일부 열차 중지 및 지연 예고 [뉴시스Pic...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T03:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014337984?sid=102"
-    },
-    {
-     "title": "코레일 23일부터 일부 열차 지연 및 중지 안내, 철도노조 쟁의행위 예고",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T03:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014337963?sid=102"
-    },
-    {
-     "title": "철도노조 23일부터 쟁의행위, 일부 열차 지연 및 중지 예고",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T03:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014337967?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "트럼프 얄타회담 사진",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T03:13:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "트럼프 \"미중러 정상회담서 한반도 위험 대응 논의\"…얄타회담과 나란히...",
-     "press": "kado.net",
-     "publishedAt": "2026-11-22T04:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000212581?sid=100"
-    },
-    {
-     "title": "미·중·러 정상회담 사진 30장 올린 트럼프... 시진핑 껴안고 푸틴엔 “...",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-22T03:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004011016?sid=104"
-    },
-    {
-     "title": "얄타·미중러회담 사진 나란히 올린 트럼프…푸틴엔 또 “내 친구”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-22T03:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764165?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "과즙세연 방시혁",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T03:09:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "과즙세연 \"너흰 돈 때문에 방시혁이랑 자고 싶냐?…이 거지XX들아\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T03:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009303301?sid=102"
-    },
-    {
-     "title": "과즙세연, 방시혁 언급하며 \"거지들아\"…로스트파티서 루머에 맞불",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-22T03:26:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282765"
-    },
-    {
-     "title": "과즙세연 면전에 대고 성적 비하한 19금 코미디쇼 ‘뭇매’",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-22T03:09:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001147972"
     }
    ]
   }
