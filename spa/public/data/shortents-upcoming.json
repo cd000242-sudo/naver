@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T02:14:33.775Z",
+ "builtAt": "2026-11-22T02:24:37.396Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,90 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 24,
  "candidates": [
+  {
+   "keyword": "조희대 탄핵 추진",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 60,
+   "recent20": 27,
+   "press": 31,
+   "firstArticleAt": "2026-11-22T01:46:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "국민의힘 \"조희대 탄핵 정해놓고 사유 찾아...철회해야\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-22T02:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436333?sid=100"
+    },
+    {
+     "title": "與 조희대 대법원장 탄핵 추진 공식화…\"12월 내 의결 목표\"",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-22T02:20:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=885870"
+    },
+    {
+     "title": "민주당, 조희대 탄핵 12월 내 의결 추진…\"판결 아닌 절차 위반 문제\"",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-22T02:20:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261122000042"
+    }
+   ]
+  },
+  {
+   "keyword": "정점식 블랙먼데이 대응 촉구",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 24,
+   "recent20": 6,
+   "press": 24,
+   "firstArticleAt": "2026-11-22T01:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "국힘 “내일 ‘블랙먼데이’ 우려…긴급 대응조치 준비해야”",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-22T02:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002833333?sid=100"
+    },
+    {
+     "title": "정점식 “정부, 블랙먼데이 가능성 대비 긴급조치 준비해야”",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-22T02:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005767118?sid=100"
+    },
+    {
+     "title": "[속보]국힘 \"내일 증시 '블랙먼데이' 우려\"",
+     "press": "magazine.hankyung.com",
+     "publishedAt": "2026-11-22T02:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/050/0000113590?sid=101"
+    }
+   ]
+  },
   {
    "keyword": "현대엘리베이터 무벡스 지분 매각",
    "sources": [
     "nate"
    ],
-   "articles90": 21,
-   "recent20": 2,
-   "press": 21,
-   "firstArticleAt": "2026-11-22T00:52:00.000Z",
+   "articles90": 19,
+   "recent20": 1,
+   "press": 19,
+   "firstArticleAt": "2026-11-22T00:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "현대엘리베이터, 현대무벡스 지분 1026억원 매각…주주환원 확대",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-22T02:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000554312?sid=101"
+    },
     {
      "title": "현대엘리베이터, 현대무벡스 지분 1천26억원 매각…배당 늘린다",
      "press": "biz.sbs.co.kr",
@@ -33,44 +103,6 @@
      "press": "biz.chosun.com",
      "publishedAt": "2026-11-22T01:58:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/366/0001206454?sid=101"
-    },
-    {
-     "title": "현대엘리베이터, 현대무벡스 지분 1,026억원 매각해 주주환원",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-22T01:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928645?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "조국 당명 개정 제안",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 20,
-   "recent20": 4,
-   "press": 20,
-   "firstArticleAt": "2026-11-22T00:45:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "조국 “당명 개정 결정할 시점”…혁신당, 개명 절차 돌입[이런정치]",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-22T02:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002726696?sid=100"
-    },
-    {
-     "title": "조국, 당명 개정 제안…“제 이름과 겹쳐 생각…일부 조롱”",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-22T02:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002834543?sid=100"
-    },
-    {
-     "title": "曺 \"범민주진보진영 좋아할 이름으로\"…혁신, 당명개정 착수",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-22T02:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016456297?sid=100"
     }
    ]
   },
@@ -79,30 +111,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 17,
+   "articles90": 18,
    "recent20": 3,
-   "press": 17,
-   "firstArticleAt": "2026-11-22T00:49:00.000Z",
+   "press": 18,
+   "firstArticleAt": "2026-11-22T01:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "최태원 \"한일 기업·대학, AI 인재 함께 키우자\"…SK '아이젠' 통한 도쿄...",
-     "press": "greened.kr",
-     "publishedAt": "2026-11-22T02:04:00.000Z",
-     "link": "https://www.greened.kr/news/articleView.html?idxno=355244"
+     "title": "최태원 \"한일 기업·대학 공동으로 AI 인재 육성하자…기회 열릴 것\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-22T02:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004212420?sid=101"
     },
     {
-     "title": "최태원 “한일 기업·대학 함께 AI 인재 키우자”…인턴십·일자리 연계...",
-     "press": "ekn.kr",
-     "publishedAt": "2026-11-22T02:00:00.000Z",
-     "link": "https://www.ekn.kr/web/view.php?key=20261122027562990"
+     "title": "최태원 \"AI 네이티브 대학, 설계부터 새로\"…한일 공동 인재 육성 제안",
+     "press": "goodkyung.com",
+     "publishedAt": "2026-11-22T02:16:00.000Z",
+     "link": "https://www.goodkyung.com/news/articleView.html?idxno=293723"
     },
     {
-     "title": "최태원 회장 \"韓日 기업·대학, AI 인재 공동 육성하자\"",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-22T01:58:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2021713"
+     "title": "최태원, 한일 AI 인재 양성 협력 제안…기업이 교육부터 채용까지 참여",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-22T02:14:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=848023"
     }
    ]
   },
@@ -111,30 +143,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 19,
-   "recent20": 10,
-   "press": 14,
-   "firstArticleAt": "2026-11-22T00:57:00.000Z",
+   "articles90": 22,
+   "recent20": 6,
+   "press": 17,
+   "firstArticleAt": "2026-11-22T01:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "무신사, 수능 끝낸 수험생에 햄버거 증정…롯데리아와 이색 마케팅",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-22T02:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004684742?sid=101"
+     "title": "무신사, 롯데리아와 수험생 응원 '버거 트럭' 운영",
+     "press": "zdnet.co.kr",
+     "publishedAt": "2026-11-22T02:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/092/0002446341?sid=103"
     },
     {
-     "title": "합천군, 수험생 위한 '별빛 공감 ON 콘서트' 개최",
-     "press": "idomin.com",
-     "publishedAt": "2026-11-22T02:06:00.000Z",
-     "link": "https://www.idomin.com/news/articleView.html?idxno=2020151"
+     "title": "수능 끝 첫 주말…수험생은 논술 고사장으로",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-22T02:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001886613?sid=102"
     },
     {
-     "title": "성균관대 2027학년도 수시 논술시험 마친 수험생들 [포토]",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-22T02:02:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2651301"
+     "title": "수험생 1000명에 버거 쏜다… 무신사·롯데리아 '버거 트럭' 운영",
+     "press": "financialpost.co.kr",
+     "publishedAt": "2026-11-22T02:14:00.000Z",
+     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=302354"
     }
    ]
   },
@@ -143,13 +175,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 5,
-   "press": 13,
+   "articles90": 14,
+   "recent20": 3,
+   "press": 14,
    "firstArticleAt": "2026-11-22T01:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "2027 정시도 '이과 문과침공' 우려… 수학 1등급 85.7%가 미적분·기하",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-22T02:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005607738?sid=102"
+    },
     {
      "title": "\"수능 수학 1등급 85.7% '미적분·기하' 선택…확률과 통계 14.3% 그쳐\"",
      "press": "kado.net",
@@ -161,27 +199,27 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-22T02:05:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014337845?sid=102"
-    },
-    {
-     "title": "수능 수학 1등급 10명 중 8명 ‘미적분·기하’…확률과 통계는 14%",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-22T02:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000545110?sid=101"
     }
    ]
   },
   {
-   "keyword": "LG유플러스 AI 사업 실행력 강화",
+   "keyword": "LG유플러스 AI 사업 강화",
    "sources": [
     "nate"
    ],
-   "articles90": 13,
+   "articles90": 11,
    "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-22T00:47:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-22T01:01:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "LG유플러스, 2027년 조직개편…AI 사업조직 재편·연구개발 통합",
+     "press": "smartbizn.com",
+     "publishedAt": "2026-11-22T02:16:00.000Z",
+     "link": "https://www.smartbizn.com/news/articleView.html?idxno=160189"
+    },
     {
      "title": "LGU+, 2027년 조직개편 단행…\"AI시장 변화에 능동적 대응\"",
      "press": "itbiznews.com",
@@ -193,44 +231,70 @@
      "press": "sedaily.com",
      "publishedAt": "2026-11-22T01:53:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/011/0004684734?sid=105"
-    },
-    {
-     "title": "LG유플러스, 2027년 조직개편 단행…AI 사업 실행력 강화",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-22T01:52:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1732575"
     }
    ]
   },
   {
-   "keyword": "HD건설기계 통합제품센터 준공",
+   "keyword": "고경표 음주운전으로 핑계고",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 10,
+   "articles90": 7,
    "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-22T00:52:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-22T00:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "HD건설기계, 인도네시아 점유율 5위권 도전…진성티이씨·디와이파워도...",
-     "press": "pinpointnews.co.kr",
+     "title": "'음주운전' 고경표 지우기 바쁜데…'핑계고' 시상식 후보 선정 논란[셀...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-22T02:22:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1795313133531352010"
+    },
+    {
+     "title": "'음주운전 물의' 고경표, '핑계고' 시상식 후보 논란…사고 후 불과 8일...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-22T01:59:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009303176"
+    },
+    {
+     "title": "'만취운전' 고경표, 변우석·서강준과 '핑계고' 인기상 후보…적절성 논...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-22T01:54:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002082921"
+    }
+   ]
+  },
+  {
+   "keyword": "트럼프 얄타회담 사진",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-22T01:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프, 얄타회담과 미중러 정상회담 사진 나란히 게시",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-22T02:20:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4120067"
+    },
+    {
+     "title": "트럼프, 얄타회담과 미중러 회담 사진 나란히 게시",
+     "press": "news.tvchosun.com",
      "publishedAt": "2026-11-22T02:06:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=506688"
+     "link": "https://n.news.naver.com/mnews/article/448/0000652586?sid=104"
     },
     {
-     "title": "HD건설기계, 인도네시아에 통합제품센터 준공",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-22T01:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001206449?sid=101"
-    },
-    {
-     "title": "HD건설기계, 인니에 통합제품센터 준공…\"점유율 5위권 목표\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-22T01:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005444534?sid=101"
+     "title": "'얄타회담'과 '선전회담' 사진 나란히 올린 트럼프",
+     "press": "tongilnews.com",
+     "publishedAt": "2026-11-22T01:46:00.000Z",
+     "link": "http://www.tongilnews.com/news/articleView.html?idxno=218259"
     }
    ]
   },
@@ -239,10 +303,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-22T00:45:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-22T00:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -267,78 +331,14 @@
    ]
   },
   {
-   "keyword": "고경표 음주운전으로 핑계고",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-22T00:45:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'음주운전 물의' 고경표, '핑계고' 시상식 후보 논란…사고 후 불과 8일...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T01:59:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009303176"
-    },
-    {
-     "title": "'만취운전' 고경표, 변우석·서강준과 '핑계고' 인기상 후보…적절성 논...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-22T01:54:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002082921"
-    },
-    {
-     "title": "음주운전→활동중단…고경표, '핑계고' 시상식 후보에?",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-22T01:35:00.000Z",
-     "link": "https://m.entertain.naver.com/article/417/0001165160"
-    }
-   ]
-  },
-  {
-   "keyword": "30대 고가주택 보유 급증",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T00:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"30대에 벌써 고가주택을\"…젊은 부동산 부자 확 늘었다",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-22T02:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001273513?sid=101"
-    },
-    {
-     "title": "'집값 17억' 넘는 30대만 1만8000명 … 세금 폭탄에 증여 급증 탓",
-     "press": "biz.newdaily.co.kr",
-     "publishedAt": "2026-11-22T01:18:00.000Z",
-     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/22/2026112250033.html"
-    },
-    {
-     "title": "집값 급등에…'시세 17억' 주택보유 30대 1년새 70% 급증",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-22T01:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000161866?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "흑백 트리플스타 강승원 재혼 발표",
+   "keyword": "흑백요리사 트리플스타 발표",
    "sources": [
     "nate"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T00:50:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-22T01:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -363,34 +363,66 @@
    ]
   },
   {
-   "keyword": "트럼프 얄타회담 사진",
+   "keyword": "비, 아침마다 김태희 감동",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T01:18:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T01:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "트럼프, 얄타회담과 미중러 회담 사진 나란히 게시",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-22T02:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652586?sid=104"
+     "title": "비, 김태희와 결혼 10년 차…“아침마다 감동 있어” (냉부해)",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-22T01:32:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001306082"
     },
     {
-     "title": "'얄타회담'과 '선전회담' 사진 나란히 올린 트럼프",
-     "press": "tongilnews.com",
-     "publishedAt": "2026-11-22T01:46:00.000Z",
-     "link": "http://www.tongilnews.com/news/articleView.html?idxno=218259"
+     "title": "성시경 부러워서 어쩌나…비, ♥김태희에 \"아침마다 감동…두딸 운동회...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-22T01:25:00.000Z",
+     "link": "https://m.entertain.naver.com/article/477/0000640272"
     },
     {
-     "title": "트럼프, 얄타회담·미중러 정상회담 사진 나란히 게시",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-22T01:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928643?sid=104"
+     "title": "'냉부해' 비♥김태희의 냉장고를 부탁해",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-22T01:06:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611220039"
+    }
+   ]
+  },
+  {
+   "keyword": "30대 고가주택 보유 급증",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T01:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"30대에 벌써 고가주택을\"…젊은 부동산 부자 확 늘었다",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-22T02:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001273513?sid=101"
+    },
+    {
+     "title": "'집값 17억' 넘는 30대만 1만8000명 … 세금 폭탄에 증여 급증 탓",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-22T01:18:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/22/2026112250033.html"
+    },
+    {
+     "title": "집값 급등에…'시세 17억' 주택보유 30대 1년새 70% 급증",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-22T01:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000161866?sid=101"
     }
    ]
   },
@@ -400,7 +432,7 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-22T01:26:00.000Z",
    "exclusive": false,
@@ -425,75 +457,11 @@
      "link": "https://www.viva100.com/article/20261120500824"
     }
    ]
-  },
-  {
-   "keyword": "안소현 레슨 진행",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T01:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "안소현, 퍼스트 티 코리아 주니어 대상 공개 레슨…재능기부 나섰다",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-22T01:24:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282733"
-    },
-    {
-     "title": "안소현과 퍼스트티 꿈나무들의 특별한 만남…재능 기부로 꿈과 희망 전...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-22T01:03:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/011/0004684724"
-    },
-    {
-     "title": "[mhn포토] 안소현, 수료생 위한 레슨 진행",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-22T01:01:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/445/0000492207"
-    }
-   ]
-  },
-  {
-   "keyword": "1251회 로또 당첨 번호",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T00:45:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한 복권방에서 2등 10장 무더기 당첨…한 사람이면 '5억 대박'",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T01:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014337806?sid=102"
-    },
-    {
-     "title": "로또 2등 10장 한곳서 터졌다…한 사람이 샀다면 5억 횡재",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-22T00:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001273506?sid=103"
-    },
-    {
-     "title": "로또 10장 당첨이 서울 한 곳에서?…동일인이면 '5억' 대박",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-22T00:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413604?sid=102"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 945,
+  "flagged": 947,
   "matched": 547,
   "avgLeadMin": 620,
   "recent": [
