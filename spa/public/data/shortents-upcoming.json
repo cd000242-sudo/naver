@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T10:37:37.661Z",
+ "builtAt": "2026-11-22T10:47:40.730Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "한전 개인정보 유출",
@@ -16,62 +16,62 @@
     "signal.bz",
     "daum"
    ],
-   "articles90": 57,
+   "articles90": 58,
    "recent20": 11,
    "press": 53,
-   "firstArticleAt": "2026-11-22T09:11:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한전 ‘한전ON·조달시스템’ 해킹 피해…주민번호·계좌·카드번호 유...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-22T10:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701897?sid=101"
-    },
-    {
-     "title": "한전, 한달새 또 개인정보 유출… 국정원 등과 원인 조사",
-     "press": "biztribune.co.kr",
-     "publishedAt": "2026-11-22T10:36:00.000Z",
-     "link": "http://www.biztribune.co.kr/news/articleView.html?idxno=362976"
-    },
-    {
-     "title": "한전 개인정보 152만여건 유출…주민·계좌번호 포함",
-     "press": "kbmaeil.com",
-     "publishedAt": "2026-11-22T10:34:00.000Z",
-     "link": "https://www.kbmaeil.com/article/20261122500683"
-    }
-   ]
-  },
-  {
-   "keyword": "정부 증안펀드 준비 착수",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 56,
-   "recent20": 8,
-   "press": 45,
    "firstArticleAt": "2026-11-22T09:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"시장 상황따라 증안펀드 투입, 불법 공매도 단속\"… 금융당국 F4 긴급 ...",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-22T10:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002249492?sid=101"
+     "title": "한전 개인정보 152만명분 유출…주민번호·계좌·카드번호까지",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-22T10:46:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282991"
     },
     {
-     "title": "미 증시 급락에 F4회의 소집...\"증안펀드 가동 준비\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-22T10:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436482?sid=101"
+     "title": "한전, 152만명 개인정보 유출…주민번호·계좌·카드번호 포함",
+     "press": "datanet.co.kr",
+     "publishedAt": "2026-11-22T10:46:00.000Z",
+     "link": "https://www.datanet.co.kr/news/articleView.html?idxno=300426"
     },
     {
-     "title": "정부, 증안펀드 가동 준비 착수..공매도 규제 없어",
-     "press": "smarttoday.co.kr",
-     "publishedAt": "2026-11-22T10:28:00.000Z",
-     "link": "https://www.smarttoday.co.kr/ko-kr/articles/113943"
+     "title": "한전 개인정보 152만건 유출…주민번호까지 털렸다",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-22T10:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005767335?sid=105"
+    }
+   ]
+  },
+  {
+   "keyword": "증안펀드 가동 준비",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 63,
+   "recent20": 8,
+   "press": 51,
+   "firstArticleAt": "2026-11-22T09:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정부·금융당국, 긴급 F4 회의 개최...\"증안펀드 가동 준비 착수\"",
+     "press": "ntoday.co.kr",
+     "publishedAt": "2026-11-22T10:46:00.000Z",
+     "link": "https://www.ntoday.co.kr/news/articleView.html?idxno=131052"
+    },
+    {
+     "title": "정부, 증안펀드 즉시가동 준비 돌입",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-22T10:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005767337?sid=101"
+    },
+    {
+     "title": "정부, 증안펀드 '즉시 가동' 준비 착수… 자사주 매입 한도도 완화",
+     "press": "financialpost.co.kr",
+     "publishedAt": "2026-11-22T10:44:00.000Z",
+     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=302372"
     }
    ]
   },
@@ -80,110 +80,51 @@
    "sources": [
     "daum"
    ],
-   "articles90": 30,
-   "recent20": 11,
-   "press": 27,
+   "articles90": 32,
+   "recent20": 8,
+   "press": 29,
    "firstArticleAt": "2026-11-22T09:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "철도노조, 쟁의행위 26일로 3일 연기…\"사고 복구가 먼저\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-22T10:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009303689?sid=102"
+    },
+    {
+     "title": "철도노조, 준법투쟁 26일로 연기…“화물열차 탈선사고 복구 우선”",
+     "press": "segye.com",
+     "publishedAt": "2026-11-22T10:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177185?sid=102"
+    },
+    {
      "title": "철도노조, 안전운행 투쟁 26일로 연기…“복구 먼저”",
      "press": "kbmaeil.com",
      "publishedAt": "2026-11-22T10:36:00.000Z",
      "link": "https://www.kbmaeil.com/article/20261122500686"
-    },
-    {
-     "title": "[속보] 민노총 철도노조 준법투쟁 23→26일 연기 “경부선 탈선사고 복...",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-22T10:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003060498?sid=102"
-    },
-    {
-     "title": "철도노조, 쟁의행위 26일로 연기…\"사고 복구 먼저\"",
-     "press": "goodnews1.com",
-     "publishedAt": "2026-11-22T10:30:00.000Z",
-     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466502"
     }
    ]
   },
   {
-   "keyword": "수원FC K리그1 승격",
+   "keyword": "남자 5000M 계주 금메달",
    "sources": [
-    "daum"
-   ],
-   "articles90": 21,
-   "recent20": 1,
-   "press": 18,
-   "firstArticleAt": "2026-11-22T09:23:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "서울 이랜드 통한의 ‘무승부’…박건하 감독의 수원FC, 강등 1년만 ‘다...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-22T10:30:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/468/0001282652"
-    },
-    {
-     "title": "K리그2 3위 이랜드 무승부...2위 수원 FC, 수원 삼성과 동반 승격 확정",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-22T10:16:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/052/0002436476"
-    },
-    {
-     "title": "[축구] 수원FC, K리그2 준우승… 수원 삼성과 동반 '승격' 확정",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-22T10:04:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3451118"
-    }
-   ]
-  },
-  {
-   "keyword": "더불어민주당 탄핵 추진",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 20,
-   "recent20": 2,
-   "press": 16,
-   "firstArticleAt": "2026-11-22T09:09:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "민주 “조희대 탄핵사유, 판결내용 아닌 절차위반 문제”",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-22T10:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833418?sid=100"
-    },
-    {
-     "title": "한덕수 전 국무총리 파기환송 조희대 탄핵 ‘불타는 정치권’",
-     "press": "kyeongin.com",
-     "publishedAt": "2026-11-22T10:24:00.000Z",
-     "link": "https://www.kyeongin.com/article/1775202"
-    },
-    {
-     "title": "민주당 \"연내 조희대 탄핵\" 공식화",
-     "press": "thereport.co.kr",
-     "publishedAt": "2026-11-22T10:16:00.000Z",
-     "link": "https://www.thereport.co.kr/news/articleView.html?idxno=93601"
-    }
-   ]
-  },
-  {
-   "keyword": "남자 5000M 계주 우승",
-   "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-22T09:14:00.000Z",
+   "articles90": 21,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-22T09:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "한국 남자 쇼트트랙, 월드투어 5000m 계주 금메달 [뉴시스Pic]",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T10:44:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/003/0014338387"
+    },
     {
      "title": "후배 쓴소리도 반갑다…쇼트트랙 남자계주, 단합으로 만든 금빛 질주",
      "press": "newsis.com",
@@ -191,27 +132,20 @@
      "link": "https://m.sports.naver.com/general/article/003/0014338384"
     },
     {
-     "title": "쇼트트랙 최민정, 서울 대회 최종일 '빈손'…남자 계주 金(종합)",
+     "title": "'도핑 논란' 딛고 계주 金 임종언 \"경기에만 집중…후회 없이 기쁘다\"",
      "press": "news1.kr",
-     "publishedAt": "2026-11-22T09:44:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/421/0009303670"
-    },
-    {
-     "title": "‘위기론’에 금메달로 응답… 남자 쇼트트랙, 5000m 계주 정상",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-22T09:41:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/469/0000967080"
+     "publishedAt": "2026-11-22T10:26:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/421/0009303684"
     }
    ]
   },
   {
    "keyword": "고경표 후보 제외 사과",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 1,
    "press": 6,
    "firstArticleAt": "2026-11-22T09:26:00.000Z",
    "exclusive": false,
@@ -238,28 +172,60 @@
    ]
   },
   {
-   "keyword": "최소라 모델",
+   "keyword": "김가은 임신 소식",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 7,
+   "articles90": 3,
    "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T09:15:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-22T10:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "AI 스마트 안경에 담긴 톱모델 최소라 출산 직후, 머리숱 풍성 딸 엄마 ...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-22T10:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190196"
+     "title": "'윤선우♥' 김가은, 2세는 딸이었다 \"공주 둘 괜찮아?\"[셀럽캡처]",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-22T10:40:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1795343249531361006"
     },
     {
-     "title": "정준일, \"톱모델 최소라♥이코배 결혼 반대했다\"",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-22T10:23:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000492404"
+     "title": "김가은♥윤선우, 2세는 딸이었다⋯“나는 딸내미 아빠” 노래까지",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-22T10:36:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2651371"
+    },
+    {
+     "title": "윤선우 김가은 2세 성별 공개… 두 사람 환호성 터졌다",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-22T10:10:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1176742"
+    }
+   ]
+  },
+  {
+   "keyword": "사진작가 이코베",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 2,
+   "firstArticleAt": "2026-11-22T09:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘이코베♥’ 최소라 만삭 D라인 사진 최초 공개, 출산 전날 집에서 찰...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-22T10:44:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190198"
+    },
+    {
+     "title": "정준일, 최소라♥이코베 교제→결혼 반대했다…\"소라가 먼저 청혼\" ('전...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-22T10:37:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001409190"
     },
     {
      "title": "이코베♥최소라 과태료 고지서도 멋인 한국 집, 딸 출생 6일차에 “가구...",
@@ -270,78 +236,14 @@
    ]
   },
   {
-   "keyword": "금융위기",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T09:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "금융위기 다시 오나…외국인 168조 매도, 2008년과 비교해보니",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-22T10:34:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282989"
-    },
-    {
-     "title": "글로벌 금융위기급 낙폭…'삼전 30조 배당' 반전 마중물 될까",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-22T10:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000521900?sid=101"
-    },
-    {
-     "title": "증시안정펀드 투입 준비... 2008년 금융위기 후 처음",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-22T09:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004011037?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "북미회담 무산",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T09:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“트럼프 만남 제안에, 김정은 조건 걸어 무산”",
-     "press": "segye.com",
-     "publishedAt": "2026-11-22T09:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177169?sid=104"
-    },
-    {
-     "title": "트럼프의 아시아 비밀 회담 시도, 북한의 까다로운 조건에 무산되다",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-22T09:42:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886756"
-    },
-    {
-     "title": "트럼프, 김정은에 만나자 제안했지만 무산",
-     "press": "busan.com",
-     "publishedAt": "2026-11-22T09:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001408386?sid=104"
-    }
-   ]
-  },
-  {
    "keyword": "코스닥",
    "sources": [
     "google"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
    "press": 2,
-   "firstArticleAt": "2026-11-22T09:12:00.000Z",
+   "firstArticleAt": "2026-11-22T09:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -368,7 +270,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1066,
+  "flagged": 1068,
   "matched": 607,
   "avgLeadMin": 620,
   "recent": [
