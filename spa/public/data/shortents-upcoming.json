@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T09:17:12.493Z",
+ "builtAt": "2026-11-22T09:27:15.443Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "조희대 탄핵 추진",
    "sources": [
     "daum"
    ],
-   "articles90": 43,
+   "articles90": 39,
    "recent20": 6,
-   "press": 35,
-   "firstArticleAt": "2026-11-22T07:48:00.000Z",
+   "press": 33,
+   "firstArticleAt": "2026-11-22T08:00:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "‘판결 불복’ 논란에도… 조희대 탄핵 본격 시동 건 與",
+     "press": "segye.com",
+     "publishedAt": "2026-11-22T09:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177157?sid=100"
+    },
+    {
+     "title": "野 “이대통령·민주당 무너지는 ‘자폭 탄핵’…대법원장 직무정지 노...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-22T09:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701886?sid=100"
+    },
     {
      "title": "與, 연내 조희대 탄핵 의결 공식화… \"한덕수 판결 내용 아닌 절차가 탄...",
      "press": "hankookilbo.com",
      "publishedAt": "2026-11-22T09:14:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/469/0000967077?sid=100"
-    },
-    {
-     "title": "민주당, 조희대 탄핵 12월 처리 추진…야권 \"사유 끼워 맞추기\"",
-     "press": "srtimes.kr",
-     "publishedAt": "2026-11-22T09:12:00.000Z",
-     "link": "http://www.srtimes.kr/news/articleView.html?idxno=218298"
-    },
-    {
-     "title": "이준석, '조희대 탄핵' 추진에…\"근조 민주당, 한방에 무너질 것\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T09:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014338337?sid=100"
     }
    ]
   },
@@ -47,158 +47,127 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 31,
-   "recent20": 6,
-   "press": 30,
-   "firstArticleAt": "2026-11-22T07:50:00.000Z",
+   "articles90": 33,
+   "recent20": 7,
+   "press": 31,
+   "firstArticleAt": "2026-11-22T07:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "지방교육재정교부금 개편 대응 긴급행동 \"장관 사의로 끝날 일 아니다\"...",
-     "press": "ngonews.kr",
-     "publishedAt": "2026-11-22T09:12:00.000Z",
-     "link": "https://www.ngonews.kr/news/articleView.html?idxno=243841"
+     "title": "이 대통령, 최교진 교육부 장관 사의 수락…후임 인선 진행",
+     "press": "news.cpbc.co.kr",
+     "publishedAt": "2026-11-22T09:26:00.000Z",
+     "link": "https://news.cpbc.co.kr/article/1177181?division=NAVER"
     },
     {
-     "title": "[사설]‘수능 혼란 책임’ 교육부 장관 사퇴, 시험체계 전면 개편 서둘...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-22T09:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484244?sid=110"
+     "title": "최교진 교육부 장관 사임 “수능 책임 통감”",
+     "press": "busan.com",
+     "publishedAt": "2026-11-22T09:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001408402?sid=102"
     },
     {
-     "title": "'수능 혼란' 최교진 사퇴…민주 \"교육 변화\"·국힘 \"대통령 책임\"",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-22T09:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000554366?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "해저",
-   "sources": [
-    "google"
-   ],
-   "articles90": 17,
-   "recent20": 3,
-   "press": 16,
-   "firstArticleAt": "2026-11-22T07:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "해저지진은 펄스, 선박은 이어지는 저음",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-22T09:06:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=409494"
-    },
-    {
-     "title": "태안 실종 어선 해광호, 수색 닷새 만에 해저 53m서 발견",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-22T09:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005607838?sid=102"
-    },
-    {
-     "title": "SK브로드밴드, 데이터센터·해저케이블 분할…\"2030년 매출 5조원 목표\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-22T09:00:00.000Z",
-     "link": "https://www.ajunews.com/view/20261122145202895"
-    }
-   ]
-  },
-  {
-   "keyword": "진도 어선 전복",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 14,
-   "recent20": 1,
-   "press": 14,
-   "firstArticleAt": "2026-11-22T07:49:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "진도 해상서 24t급 어선 전복…승선원 8명 전원 구조",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-22T09:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000121944?sid=102"
-    },
-    {
-     "title": "진도 병풍도 해상서 24톤급 어선 전복…선원 전원 구조",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-22T08:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652657?sid=102"
-    },
-    {
-     "title": "전남광주 해상서 24톤 어선 전복‥선원 전원 구조",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-22T08:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001537234?sid=102"
+     "title": "'AI 커닝' 수능 대혼란...결국 물러난 교육장관",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-22T09:20:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261123010008499"
     }
    ]
   },
   {
    "keyword": "정부",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 9,
-   "recent20": 9,
-   "press": 9,
-   "firstArticleAt": "2026-11-22T08:59:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "범정부 차원 새만금공항 대책을 마련하라",
-     "press": "domin.co.kr",
-     "publishedAt": "2026-11-22T09:14:00.000Z",
-     "link": "http://www.domin.co.kr/news/articleView.html?idxno=1576280"
-    },
-    {
-     "title": "한국마사회, 말문화 앞세워 미래교육 혁신 알린다…정부혁신박람회 참...",
-     "press": "megaeconomy.co.kr",
-     "publishedAt": "2026-11-22T09:14:00.000Z",
-     "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065604209269732"
-    },
-    {
-     "title": "[사설] 정년연장 정부안 예고… 속도전보다 노사정 합의 우선해야",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-22T09:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003060483?sid=110"
-    }
-   ]
-  },
-  {
-   "keyword": "18득점 시즌 현대건설",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-22T07:49:00.000Z",
+   "articles90": 20,
+   "recent20": 19,
+   "press": 19,
+   "firstArticleAt": "2026-11-22T09:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "현대건설, 흥국생명 3-0 완파…올 시즌 첫 연승",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-22T08:32:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3759580"
+     "title": "[사설] 울산 AI센터, '인력·전력·규제' 정부 뒷받침 더 필요",
+     "press": "iusm.co.kr",
+     "publishedAt": "2026-11-22T09:26:00.000Z",
+     "link": "https://www.iusm.co.kr/news/articleView.html?idxno=1070883"
     },
     {
-     "title": "‘메가 18득점·조던 16득점’ 현대건설, 흥국생명 3-0 완파하고 2연승…...",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-22T08:24:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/382/0001306122"
+     "title": "[속보]정부, 증시 폭락에…\"증안펀드 가동 준비작업 즉시 착수\"",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-22T09:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005846079?sid=101"
     },
     {
-     "title": "“조던, 메가 범실 적었다” 강성형 현대건설 감독, 안정적 활약에 ‘엄...",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-22T08:20:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/396/0000761616"
+     "title": "[속보] 정부, 불법 공매도 3개월간 특별 감시…위법행위 엄정 대응",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-22T09:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005356792?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "남자 5000M 계주 금메달!",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 42,
+   "recent20": 18,
+   "press": 7,
+   "firstArticleAt": "2026-11-22T08:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "대한민국, 남자 5000m 계주 금메달 획득!",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-22T09:22:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/001/0016456913"
+    },
+    {
+     "title": "신동민 '금메달이다!'",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-22T09:19:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/001/0016456911"
+    },
+    {
+     "title": "'이정민 맹활약' 남자 쇼트트랙, 안방서 5000m 계주 금메달 탈환(종합)",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T09:19:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/003/0014338346"
+    }
+   ]
+  },
+  {
+   "keyword": "검은 월요일",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-22T08:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "또 ‘검은 월요일’ 오나… 美 반도체지수 10% 폭락, 코스피 4700 위협",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-22T09:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005607892?sid=101"
+    },
+    {
+     "title": "[속보]'검은 월요일' 우려에…정부, 증안펀드 가동 필요조치 착수",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-22T09:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005444650?sid=101"
+    },
+    {
+     "title": "“이미 속이 시커먼데 또 검은 월요일?”…주말 美증시 투매에 ‘벌벌’",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-22T08:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005767319?sid=101"
     }
    ]
   },
@@ -207,10 +176,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 6,
-   "recent20": 3,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T07:50:00.000Z",
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-22T08:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -237,13 +206,12 @@
   {
    "keyword": "고경표 후보 사과",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T07:50:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-22T08:18:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -273,12 +241,18 @@
     "google"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 2,
    "press": 4,
-   "firstArticleAt": "2026-11-22T07:50:00.000Z",
+   "firstArticleAt": "2026-11-22T08:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "코스피·코스닥 5% 동반 급락… 정부, 월요일 개장 앞두고 긴급 F4 소집",
+     "press": "financialpost.co.kr",
+     "publishedAt": "2026-11-22T09:20:00.000Z",
+     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=302370"
+    },
     {
      "title": "50대 투자자 \"코스닥 종목 평가금액 55억…대주주 양도세 피하고 싶어\"[...",
      "press": "fnnews.com",
@@ -290,12 +264,6 @@
      "press": "mk.co.kr",
      "publishedAt": "2026-11-22T08:24:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/009/0005767276?sid=101"
-    },
-    {
-     "title": "아델, 코스닥 상장 철회…수요예측서 기관 눈높이 못 맞췄다",
-     "press": "dnews.co.kr",
-     "publishedAt": "2026-11-22T08:20:00.000Z",
-     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611220934247880039"
     }
    ]
   },
@@ -332,38 +300,6 @@
    ]
   },
   {
-   "keyword": "검은 월요일",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T08:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“이미 속이 시커먼데 또 검은 월요일?”…주말 美증시 투매에 ‘벌벌’",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-22T08:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005767319?sid=101"
-    },
-    {
-     "title": "美증시 투매에 코스피도 '벌벌'…\"월요일이 두렵다\"",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-22T08:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005767297?sid=101"
-    },
-    {
-     "title": "\"공매도 제한 카드 나올까\"...'검은 월요일' 공포에 정부 긴급 F4 회의",
-     "press": "ntoday.co.kr",
-     "publishedAt": "2026-11-22T08:30:00.000Z",
-     "link": "https://www.ntoday.co.kr/news/articleView.html?idxno=131051"
-    }
-   ]
-  },
-  {
    "keyword": "노동자",
    "sources": [
     "signal.bz",
@@ -383,23 +319,23 @@
      "link": "https://www.laborplus.co.kr/news/articleView.html?idxno=41864"
     },
     {
-     "title": "고용허가제 22년…이주노동자는 왜 위험한 일터를 떠나지 못하나",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-22T08:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833382?sid=102"
-    },
-    {
      "title": "인천 계양구, 이동노동자 쉼터 개소... 편안한 휴식공간 마련",
      "press": "cnbnews.com",
      "publishedAt": "2026-11-22T08:18:00.000Z",
      "link": "https://www.cnbnews.com/news/articleView.html?idxno=1024751"
+    },
+    {
+     "title": "고용허가제 22년…이주노동자는 왜 위험한 일터를 떠나지 못하나",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-22T08:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002833382?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1040,
+  "flagged": 1041,
   "matched": 599,
   "avgLeadMin": 626,
   "recent": [
