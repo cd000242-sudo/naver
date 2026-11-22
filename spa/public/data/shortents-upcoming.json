@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T04:55:32.735Z",
+ "builtAt": "2026-11-22T05:05:39.529Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,34 @@
  "measured": 23,
  "candidates": [
   {
-   "keyword": "최교진 사의 표명",
+   "keyword": "최교진 장관 사의 수락",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
    "articles90": 90,
-   "recent20": 19,
-   "press": 78,
-   "firstArticleAt": "2026-11-22T03:45:00.000Z",
+   "recent20": 11,
+   "press": 79,
+   "firstArticleAt": "2026-11-22T03:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령, 최교진 사의 수락…취임 14개월 만에 불명예 퇴진",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-22T04:54:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=315904"
+     "title": "李대통령, '수능 혼란 책임' 최교진 교육장관 사의 수락",
+     "press": "pressian.com",
+     "publishedAt": "2026-11-22T05:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/002/0002467009?sid=100"
     },
     {
-     "title": "이재명 대통령, 최교진 교육부 장관 사의 전격 수락",
-     "press": "ccnnews.co.kr",
-     "publishedAt": "2026-11-22T04:54:00.000Z",
-     "link": "http://www.ccnnews.co.kr/news/articleView.html?idxno=418168"
+     "title": "최교진 장관 사퇴했지만…정부 AI 부정행위 책임론 확산",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-22T04:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193194?sid=102"
     },
     {
-     "title": "李 대통령, 최교진 교육부 장관 사의 수락…\"신임 장관 인선 절차대로\"",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-22T04:50:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2651321"
+     "title": "[이슈] 李대통령, 교육부 장관 사의 즉각 수락…최교진 \"수능 준비 과정...",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-22T04:56:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=748941"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 42,
-   "recent20": 2,
-   "press": 36,
-   "firstArticleAt": "2026-11-22T03:27:00.000Z",
+   "articles90": 40,
+   "recent20": 5,
+   "press": 35,
+   "firstArticleAt": "2026-11-22T03:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "추경호 '무죄'-한덕수 '파기환송'-조희대 '탄핵'…野, 대여투쟁 탄력받...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T04:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009303348?sid=100"
+     "title": "민주당 ‘조희대 탄핵추진단’ “한덕수 판결은 탄핵사유 삼지 않을 것...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-22T05:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002726729?sid=100"
     },
     {
-     "title": "與, 조희대 탄핵안 연내 처리…대법관 재제청 거부 등 탄핵 사유",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-22T04:48:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2021735"
+     "title": "오세훈 \"조희대 대법원장 탄핵 처리되면 이재명 심판열차 출발\"",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-22T05:02:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/22/2026112250072.html"
     },
     {
-     "title": "조희대 탄핵 방아쇠 '한덕수 판결', 탄핵 사유에선 제외",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-22T04:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001165176?sid=100"
+     "title": "與, 조희대 대법원장 탄핵 연내 추진…직무정지·법조계 우려 확산",
+     "press": "newsgn.com",
+     "publishedAt": "2026-11-22T05:00:00.000Z",
+     "link": "https://www.newsgn.com/news/articleView.html?idxno=587156"
     }
    ]
   },
@@ -79,13 +79,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
+   "articles90": 7,
+   "recent20": 3,
+   "press": 7,
    "firstArticleAt": "2026-11-22T04:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김영훈 노동장관 \"정년 연장, 27일 특위 결론 안 나면 정부안 발표\"",
+     "press": "newsgn.com",
+     "publishedAt": "2026-11-22T05:02:00.000Z",
+     "link": "https://www.newsgn.com/news/articleView.html?idxno=587157"
+    },
     {
      "title": "정년 연장 논의 '최후통첩'...\"27일 합의 못하면 정부가 낸다\"",
      "press": "jibs.co.kr",
@@ -97,22 +103,136 @@
      "press": "hidomin.com",
      "publishedAt": "2026-11-22T04:46:00.000Z",
      "link": "https://www.hidomin.com/news/articleView.html?idxno=730397"
+    }
+   ]
+  },
+  {
+   "keyword": "조국, 당명 개정 이름 고민해달라",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T03:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "조국 \"당명 속 '조국' 제 이름 아니지만…바꾸자\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-22T04:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000652617?sid=100"
     },
     {
-     "title": "'정년 연장 논의' 10개월째 제자리에 이달말 정부안 발표 검토",
-     "press": "news.mtn.co.kr",
-     "publishedAt": "2026-11-22T04:28:00.000Z",
-     "link": "https://news.mtn.co.kr/article/2026112213231771223"
+     "title": "조국 \"창당 1000일 조국혁신당…당명 개정 제안한다\"",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-22T04:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000554345?sid=100"
+    },
+    {
+     "title": "조국, 당명 개정 제안…\"확장성 있는 당명 필요\"",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-22T04:16:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2021726"
+    }
+   ]
+  },
+  {
+   "keyword": "트럼프 얄타회담 사진",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T03:57:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"GOAT\" \"친구들\"…트럼프, 1시간동안 APEC 사진 35장 '폭풍 게시'",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-22T04:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413703?sid=104"
+    },
+    {
+     "title": "트럼프 \"미중러 정상회담서 한반도 위험 대응 논의\"…얄타회담과 나란히...",
+     "press": "kado.net",
+     "publishedAt": "2026-11-22T04:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000212581?sid=100"
+    },
+    {
+     "title": "미·중·러 정상회담 사진 30장 올린 트럼프... 시진핑 껴안고 푸틴엔 “...",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-22T03:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004011016?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "흑백 트리플스타 재혼",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T03:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'흑백요리사' 트리플스타, 재혼 발표... \"든든한 안식처\"",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-22T04:30:00.000Z",
+     "link": "https://www.insight.co.kr/news/583070"
+    },
+    {
+     "title": "\"부끄럽지 않은 남편 될 것\"… '흑백요리사' 트리플스타 강승원, 깜짝 재...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-22T04:01:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000492229"
+    },
+    {
+     "title": "‘흑백요리사’ 트리플스타 강승원, 재혼 발표…“든든한 안식처 만나”",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-22T03:42:00.000Z",
+     "link": "https://m.entertain.naver.com/article/396/0000761588"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 979,
-  "matched": 565,
-  "avgLeadMin": 629,
+  "flagged": 981,
+  "matched": 569,
+  "avgLeadMin": 626,
   "recent": [
+   {
+    "keyword": "유연석 변사체 발견 충격",
+    "hitKeyword": "라이어 유연석 변사체",
+    "hitAt": "2026-11-22T14:00:00+09:00",
+    "leadMin": 296
+   },
+   {
+    "keyword": "유연석 변사체 충격",
+    "hitKeyword": "라이어 유연석 변사체",
+    "hitAt": "2026-11-22T14:00:00+09:00",
+    "leadMin": 276
+   },
+   {
+    "keyword": "대학생 취업인식도 조사",
+    "hitKeyword": "대학생 취업 악화",
+    "hitAt": "2026-11-22T14:00:00+09:00",
+    "leadMin": 115
+   },
+   {
+    "keyword": "해광호 수색 부이 발견",
+    "hitKeyword": "해광호 선박 발견",
+    "hitAt": "2026-11-22T14:00:00+09:00",
+    "leadMin": 55
+   },
    {
     "keyword": "헌옷수거함 아기 시신 발견",
     "hitKeyword": "금천구 미라화 시신 발견",
@@ -148,30 +268,6 @@
     "hitKeyword": "강승원 셰프 재혼",
     "hitAt": "2026-11-22T12:30:00+09:00",
     "leadMin": 166
-   },
-   {
-    "keyword": "수능 수학 1등급 미적분 선택",
-    "hitKeyword": "수능 수학 1등급 미적분",
-    "hitAt": "2026-11-22T12:30:00+09:00",
-    "leadMin": 86
-   },
-   {
-    "keyword": "흑백 트리플스타 강승원 재혼 발표",
-    "hitKeyword": "강승원 셰프 재혼",
-    "hitAt": "2026-11-22T12:30:00+09:00",
-    "leadMin": 86
-   },
-   {
-    "keyword": "김아림, 투어 챔피언십 3R 선두",
-    "hitKeyword": "김아림 투어 챔피언십",
-    "hitAt": "2026-11-22T12:30:00+09:00",
-    "leadMin": 25
-   },
-   {
-    "keyword": "트리플스타 강승원 재혼 발표",
-    "hitKeyword": "강승원 셰프 재혼",
-    "hitAt": "2026-11-22T12:30:00+09:00",
-    "leadMin": 5
    }
   ]
  }
