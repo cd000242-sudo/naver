@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T06:46:15.101Z",
+ "builtAt": "2026-11-22T06:56:18.291Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "조희대 탄핵 추진",
    "sources": [
     "daum"
    ],
-   "articles90": 54,
-   "recent20": 14,
-   "press": 40,
-   "firstArticleAt": "2026-11-22T05:18:00.000Z",
+   "articles90": 53,
+   "recent20": 11,
+   "press": 41,
+   "firstArticleAt": "2026-11-22T05:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "與 조희대 탄핵 추진에 '사법부 독립' 논란",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-22T06:44:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3451067"
+     "title": "\"조희대 탄핵 추진 與, 이게 진짜 내란\" 보수진영 총공세",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-22T06:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001041627?sid=100"
     },
     {
-     "title": "與 \"조희대 탄핵 연내 처리…한덕수 판결 내용은 제외\"",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-22T06:41:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085329"
+     "title": "오세훈·한동훈, 與 조희대 탄핵 추진에 맹공…“사법부 장악·친위쿠데...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-22T06:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177132?sid=100"
     },
     {
-     "title": "장동혁 \"탄핵될 사람은 이재명, 조희대 탄핵은 내란 행위\"",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-22T06:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005607813?sid=100"
+     "title": "\"사법부 겁박\"…국힘, 조희대 탄핵 추진에 반발",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-22T06:52:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321369&inflow=N"
+    }
+   ]
+  },
+  {
+   "keyword": "수능 부정행위 대응",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 42,
+   "recent20": 6,
+   "press": 32,
+   "firstArticleAt": "2026-11-22T05:28:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "수능은 끝났지만…AI 부정행위 수사 본격화",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-22T06:52:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321358&inflow=N"
+    },
+    {
+     "title": "李대통령, 최교진 교육장관 사표 전격 수리…수능 혼란에 사실상 문책 ...",
+     "press": "dkilbo.com",
+     "publishedAt": "2026-11-22T06:50:00.000Z",
+     "link": "https://www.dkilbo.com/news/articleView.html?idxno=561600"
+    },
+    {
+     "title": "AI 부정행위 파장…수능 평가체계 개편론 급부상",
+     "press": "dkilbo.com",
+     "publishedAt": "2026-11-22T06:50:00.000Z",
+     "link": "https://www.dkilbo.com/news/articleView.html?idxno=561599"
     }
    ]
   },
@@ -47,30 +79,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 26,
-   "recent20": 4,
-   "press": 22,
-   "firstArticleAt": "2026-11-22T05:19:00.000Z",
+   "articles90": 27,
+   "recent20": 7,
+   "press": 24,
+   "firstArticleAt": "2026-11-22T05:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령, 최교진 교육장관 사의 수락…\"수능 사후조치 만전 기하라\"",
-     "press": "idaegu.co.kr",
-     "publishedAt": "2026-11-22T06:44:00.000Z",
-     "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=566041"
+     "title": "1년 전부터 울린 'AI 커닝' 경고음 외면… 1시간 만 사의 수리된 교육 장...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-22T06:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000967044?sid=102"
     },
     {
-     "title": "최교진 교육부장관 결국 ‘사의’",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-22T06:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002467011?sid=102"
+     "title": "李대통령, 최교진 교육장관 사표 전격 수리…수능 혼란에 사실상 문책 ...",
+     "press": "dkilbo.com",
+     "publishedAt": "2026-11-22T06:50:00.000Z",
+     "link": "https://www.dkilbo.com/news/articleView.html?idxno=561600"
     },
     {
-     "title": "최교진 사의 발표 1시간 만에 수락…이 대통령이 국무총리에게 내린 지...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-22T06:34:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1176709"
+     "title": "교총, 최교진 교육부 장관 사의에 “늦었지만 당연한 결정”",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-22T06:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004011029?sid=102"
     }
    ]
   },
@@ -79,13 +111,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 34,
-   "recent20": 9,
-   "press": 12,
-   "firstArticleAt": "2026-11-22T05:21:00.000Z",
+   "articles90": 31,
+   "recent20": 3,
+   "press": 11,
+   "firstArticleAt": "2026-11-22T05:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "최민정 '500m 메달 획득 실패'[포토]",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-22T06:55:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/311/0002082967"
+    },
     {
      "title": "“쇼트트랙 월드투어 8개 대회로 확대” 김재열 ISU 회장 “최민정, 스케...",
      "press": "sports.khan.co.kr",
@@ -97,12 +135,6 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-22T06:40:00.000Z",
      "link": "https://m.sports.naver.com/general/article/421/0009303504"
-    },
-    {
-     "title": "질주하는 최민정",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T06:36:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/003/0014338196"
     }
    ]
   },
@@ -112,29 +144,93 @@
     "nate"
    ],
    "articles90": 9,
-   "recent20": 2,
+   "recent20": 3,
    "press": 9,
-   "firstArticleAt": "2026-11-22T05:18:00.000Z",
+   "firstArticleAt": "2026-11-22T05:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김재열 ISU 회장 \"쇼트트랙 월드투어, 새 시즌 8개 대회로 확대\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-22T06:52:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/052/0002436417"
+    },
+    {
+     "title": "김재열 ISU 회장 \"쇼트트랙 월드투어, 새 시즌 8개 대회로 확대…한국 매...",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-22T06:47:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/055/0001404905"
+    },
     {
      "title": "“쇼트트랙 월드투어 8개 대회로 확대” 김재열 ISU 회장 “최민정, 스케...",
      "press": "sports.khan.co.kr",
      "publishedAt": "2026-11-22T06:42:00.000Z",
      "link": "https://m.sports.naver.com/general/article/144/0001151116"
+    }
+   ]
+  },
+  {
+   "keyword": "외교",
+   "sources": [
+    "google"
+   ],
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-22T05:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프엔 YMCA 공연, 다카이치엔 악수 두 번…習 ‘맞춤형 양자외교’ ...",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-22T06:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003566969?sid=104"
     },
     {
-     "title": "쇼트트랙 월드투어 8개 대회로 확대… 김재열 “한국 매년 개최 추진”",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-22T06:30:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/005/0001886651"
+     "title": "순방 잦다 野 공세에 李·靑 반박…국익외교 강조",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-22T06:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413736?sid=100"
     },
     {
-     "title": "김재열 ISU 회장 \"쇼트트랙 월드투어 매년 국내 개최 추진\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T06:04:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/421/0009303485"
+     "title": "李 대통령, '잦은 순방' 비판에 \"순방외교는 대통령의 주요 업무\"",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-22T06:24:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2651340"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 해외 순방",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-22T05:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "靑, 대통령 순방 비판하는 국힘에 \"시야 넓혀 보라\" 반박",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-22T06:48:00.000Z",
+     "link": "https://www.insight.co.kr/news/583080"
+    },
+    {
+     "title": "순방 잦다 野 공세에 李·靑 반박…국익외교 강조",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-22T06:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413736?sid=100"
+    },
+    {
+     "title": "이 대통령 “치아 흔들리고 코피 터지지만 임기 초 순방은 국정과제…돼...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-22T06:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484205?sid=100"
     }
    ]
   },
@@ -143,10 +239,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-22T05:17:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-22T05:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -171,34 +267,66 @@
    ]
   },
   {
-   "keyword": "외교",
+   "keyword": "장동혁 대표 인사말",
    "sources": [
-    "google"
+    "nate"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-22T05:21:00.000Z",
+   "articles90": 11,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-22T05:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "순방 잦다 野 공세에 李·靑 반박…국익외교 강조",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-22T06:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413736?sid=100"
+     "title": "장동혁 \"李 정권 가장 큰 피해자는 청년…정책 전쟁에서 국정 압도해야...",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-22T06:26:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261122500259"
     },
     {
-     "title": "李 대통령, '잦은 순방' 비판에 \"순방외교는 대통령의 주요 업무\"",
+     "title": "인사말 하는 장동혁 국민의힘 대표",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T06:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014338156?sid=100"
+    },
+    {
+     "title": "우재준 청년 최고위원 인사말 듣는 장동혁 대표",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T06:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014338163?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "핑계고 음주운전 고경표",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T05:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "핑계고 측, '음주운전' 고경표 후보 선정 사과⋯\"검토 미흡, 명단 제외\"",
      "press": "etoday.co.kr",
-     "publishedAt": "2026-11-22T06:24:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2651340"
+     "publishedAt": "2026-11-22T06:48:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2651342"
     },
     {
-     "title": "미중러 정상회담이 남긴 것...복잡해진 외교 셈법",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-22T06:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436412?sid=104"
+     "title": "고경표 ‘음주운전 활중’ 8일 만에 ‘핑계고’ 인기상 후보?..뭇매 맞고...",
+     "press": "heraldmuse.com",
+     "publishedAt": "2026-11-22T05:44:00.000Z",
+     "link": "https://m.entertain.naver.com/article/112/0003814001"
+    },
+    {
+     "title": "'음주운전' 고경표, 핑계고 시상식 후보 올랐다 '제외'",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-22T05:40:00.000Z",
+     "link": "https://www.insight.co.kr/news/583073"
     }
    ]
   },
@@ -208,30 +336,30 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T06:10:00.000Z",
+   "articles90": 4,
+   "recent20": 3,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T06:30:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
+    {
+     "title": "앤트로픽 상장 이튿날 급락…월가에 번지는 'AI 투자 회의론'",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-22T06:46:00.000Z",
+     "link": "https://www.ajunews.com/view/20261122153022012"
+    },
+    {
+     "title": "외국인투자 97% 지방으로···코트라, 지역 투자유치전 가속",
+     "press": "enewstoday.co.kr",
+     "publishedAt": "2026-11-22T06:45:00.000Z",
+     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2495483"
+    },
     {
      "title": "안동시, 2027년 본예산 1조7900억원 편성…민생 안정·미래산업 투자 확...",
      "press": "ajunews.com",
      "publishedAt": "2026-11-22T06:42:00.000Z",
      "link": "https://www.ajunews.com/view/20261122153313020"
-    },
-    {
-     "title": "서울투자진흥재단, 싱가포르에서 서울 핀테크 알렸다",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-22T06:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005444615?sid=101"
-    },
-    {
-     "title": "AI 테마 투자심리 공포로 전환…나스닥100 약세장 문턱 접근",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-22T06:18:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/442435"
     }
    ]
   },
@@ -240,10 +368,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 5,
+   "articles90": 3,
    "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T05:18:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-22T05:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -268,66 +396,34 @@
    ]
   },
   {
-   "keyword": "장동혁 대표 인사말",
+   "keyword": "1251회 로또 당첨 번호",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T05:49:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T06:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "장동혁 \"李 정권 가장 큰 피해자는 청년…정책 전쟁에서 국정 압도해야...",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-22T06:26:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261122500259"
+     "title": "로또 2등, 한 판매점서 10장 ‘무더기 당첨’…동일인이면 5억원",
+     "press": "donga.com",
+     "publishedAt": "2026-11-22T06:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764188?sid=102"
     },
     {
-     "title": "우재준 청년 최고위원 인사말 듣는 장동혁 대표",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T06:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014338163?sid=100"
+     "title": "로또2등 10장, 한 곳서 무더기 당첨…동일인이면 5억 대박",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-22T06:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000652641?sid=102"
     },
     {
-     "title": "인사말 하는 장동혁 국민의힘 대표",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T06:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014338162?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "핑계고 음주운전 고경표",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T05:19:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "고경표 ‘음주운전 활중’ 8일 만에 ‘핑계고’ 인기상 후보?..뭇매 맞고...",
-     "press": "heraldmuse.com",
-     "publishedAt": "2026-11-22T05:44:00.000Z",
-     "link": "https://m.entertain.naver.com/article/112/0003814001"
-    },
-    {
-     "title": "'음주운전' 고경표, 핑계고 시상식 후보 올랐다 '제외'",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-22T05:40:00.000Z",
-     "link": "https://www.insight.co.kr/news/583073"
-    },
-    {
-     "title": "‘음주운전’ 고경표, ‘핑계고 시상식’ 후보 올랐다가 논란 끝 제외",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-22T05:35:00.000Z",
-     "link": "https://m.entertain.naver.com/article/396/0000761596"
+     "title": "제1251회 로또 1등 14명…부산 판매점 2곳",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-22T06:02:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=409428"
     }
    ]
   },
@@ -338,7 +434,7 @@
     "nate"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-22T05:44:00.000Z",
    "exclusive": false,
@@ -357,49 +453,17 @@
      "link": "https://n.news.naver.com/mnews/article/018/0006413729?sid=102"
     },
     {
-     "title": "2027학년도 수능 가채점 설명회 찾은 학부모들",
+     "title": "수능 가채점 분석 설명회",
      "press": "newsis.com",
      "publishedAt": "2026-11-22T05:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014338130?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "1251회 로또 당첨 번호",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T06:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "로또 2등 10장 한 판매점서 무더기 당첨…동일인이면 5억원",
-     "press": "donga.com",
-     "publishedAt": "2026-11-22T06:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764188?sid=102"
-    },
-    {
-     "title": "로또2등 10장, 한 곳서 무더기 당첨…동일인이면 5억 대박",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-22T06:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652641?sid=102"
-    },
-    {
-     "title": "제1251회 로또 1등 14명…부산 판매점 2곳",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-22T06:02:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=409428"
+     "link": "https://n.news.naver.com/mnews/article/003/0014338120?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1012,
+  "flagged": 1013,
   "matched": 583,
   "avgLeadMin": 628,
   "recent": [
