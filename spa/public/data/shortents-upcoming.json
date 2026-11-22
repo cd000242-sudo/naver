@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T15:19:11.758Z",
+ "builtAt": "2026-11-22T15:29:14.574Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,15 +8,47 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 27,
  "candidates": [
+  {
+   "keyword": "조희대 탄핵 추진",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 14,
+   "recent20": 0,
+   "press": 10,
+   "firstArticleAt": "2026-11-22T14:15:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "강원 여야, 조희대 대법원장 탄핵 추진 놓고 정면충돌",
+     "press": "kado.net",
+     "publishedAt": "2026-11-22T15:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000212713?sid=100"
+    },
+    {
+     "title": "예산안·대법원장 탄핵…연말 정국 갈등 고조",
+     "press": "ksilbo.co.kr",
+     "publishedAt": "2026-11-22T15:04:00.000Z",
+     "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1073281"
+    },
+    {
+     "title": "[사설] 대법원장 탄핵에 멈춘 국회…민생도 예산도 뒷전인가",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-22T15:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004684899?sid=110"
+    }
+   ]
+  },
   {
    "keyword": "증안펀드 가동 준비",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 4,
+   "articles90": 8,
+   "recent20": 2,
    "press": 7,
    "firstArticleAt": "2026-11-22T14:03:00.000Z",
    "exclusive": false,
@@ -29,91 +61,58 @@
      "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626900"
     },
     {
+     "title": "미 AI 투매에 '검은 월요일' 오나?...\"증안펀드 가동 준비\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-22T15:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436526?sid=101"
+    },
+    {
      "title": "카드대란·리먼사태 때 등판… 현재 증안펀드 10조7600억 조성",
      "press": "kmib.co.kr",
      "publishedAt": "2026-11-22T15:08:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/005/0001886717?sid=101"
-    },
-    {
-     "title": "‘블랙 먼데이’ 우려에…증안펀드 꺼낸 당국",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-22T15:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003567046?sid=101"
     }
    ]
   },
   {
-   "keyword": "조희대 탄핵 추진 논의",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 3,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T13:52:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "예산안·대법원장 탄핵…연말 정국 갈등 고조",
-     "press": "ksilbo.co.kr",
-     "publishedAt": "2026-11-22T15:04:00.000Z",
-     "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1073281"
-    },
-    {
-     "title": "조희대 탄핵에 뜻 모은 민주·혁신당…범여권 공조 시험대",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-22T15:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000554383?sid=100"
-    },
-    {
-     "title": "조희대 12월 탄핵 급물살…법조계 \"사법부 독립 침해\" 우려",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-22T15:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000554379?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "유엔기후총회 합의문 실패",
+   "keyword": "한전 152만명 개인정보 유출",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T13:54:00.000Z",
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T15:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[포토] 31차 기후총회 합의문 채택 무산",
+     "title": "한전 고객·협력사 152만명 정보 유출… 주민번호에 계좌·카드번호까지",
      "press": "kmib.co.kr",
+     "publishedAt": "2026-11-22T15:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001886716?sid=101"
+    },
+    {
+     "title": "한전 고객 152만명 주민·계좌·카드번호 털려",
+     "press": "joongang.co.kr",
      "publishedAt": "2026-11-22T15:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001886714?sid=104"
+     "link": "https://n.news.naver.com/mnews/article/025/0003567038?sid=102"
     },
     {
-     "title": "COP31 합의문 채택 실패…화석연료·적응재원 이견 못 좁혀",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-22T14:10:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626899"
-    },
-    {
-     "title": "'화석연료' 갈등…유엔 기후변화총회 끝내 결렬, 합의문 무산",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-22T13:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005444663?sid=104"
+     "title": "한국전력공사, '보안 혁신' 약속 무색…152만명 개인정보 유출",
+     "press": "newswhoplus.com",
+     "publishedAt": "2026-11-22T15:00:00.000Z",
+     "link": "https://www.newswhoplus.com/news/articleView.html?idxno=75064"
     }
    ]
   },
   {
    "keyword": "김승수",
    "sources": [
-    "nate",
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-22T14:02:00.000Z",
    "exclusive": false,
@@ -138,45 +137,13 @@
      "link": "https://m.entertain.naver.com/article/609/0001190243"
     }
    ]
-  },
-  {
-   "keyword": "이기찬 약국 버스킹",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T13:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘데뷔 31년 차’ 김기찬, 약국 버스킹→기상청 홍보대사 위촉 (‘미우...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-22T14:51:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005767354"
-    },
-    {
-     "title": "이기찬, 약국에 직접 전화 걸어 “앞에서 노래해도 돼요?” 버스킹 장소...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-22T14:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190244"
-    },
-    {
-     "title": "‘약국 버스킹’ 이기찬, 사람 없어도 부른다..“무대 없어져, 직접 기...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-22T13:52:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005644029"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
   "flagged": 1118,
-  "matched": 636,
-  "avgLeadMin": 612,
+  "matched": 635,
+  "avgLeadMin": 613,
   "recent": [
    {
     "keyword": "솔비 이규한 결혼",
