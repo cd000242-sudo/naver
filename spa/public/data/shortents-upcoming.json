@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T20:10:36.298Z",
+ "builtAt": "2026-11-22T20:20:39.194Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -17,12 +17,18 @@
     "google"
    ],
    "articles90": 10,
-   "recent20": 5,
+   "recent20": 3,
    "press": 8,
-   "firstArticleAt": "2026-11-22T18:50:00.000Z",
+   "firstArticleAt": "2026-11-22T19:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "‘시골집’서 벌어진 모녀 사망, 유골 행방도 오리무중? (탐정들의 영업...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-22T20:13:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001151169"
+    },
     {
      "title": "‘시세 17억’ 집 보유 30대 1.8만명… 1년 새 70% 급증",
      "press": "seoul.co.kr",
@@ -34,12 +40,6 @@
      "press": "seoul.co.kr",
      "publishedAt": "2026-11-22T20:03:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/081/0003701944?sid=102"
-    },
-    {
-     "title": "200만원에 친구 칼부림…술집 여인 도운 ‘거물男’ 뜻밖 정체",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-22T20:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003567091?sid=102"
     }
    ]
   },
@@ -48,13 +48,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 5,
-   "press": 5,
+   "articles90": 7,
+   "recent20": 4,
+   "press": 6,
    "firstArticleAt": "2026-11-22T19:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'블랙먼데이' 우려 긴급 F4회의, 18년 만에 증안펀드 가동되나",
+     "press": "seoulfn.com",
+     "publishedAt": "2026-11-22T20:14:00.000Z",
+     "link": "https://www.seoulfn.com/news/articleView.html?idxno=643572"
+    },
     {
      "title": "‘증시 최후 방패’ 증안펀드 가동 준비한다",
      "press": "seoul.co.kr",
@@ -66,12 +72,6 @@
      "press": "pinpointnews.co.kr",
      "publishedAt": "2026-11-22T20:04:00.000Z",
      "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=506780"
-    },
-    {
-     "title": "전설의 보검 '증안펀드' 드디어 꺼낸다…추락하는 K증시 막을까",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-22T20:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004212502?sid=101"
     }
    ]
   },
@@ -81,7 +81,7 @@
     "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 2,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-22T19:10:00.000Z",
    "exclusive": false,
@@ -100,42 +100,10 @@
      "link": "https://n.news.naver.com/mnews/article/025/0003567082?sid=102"
     },
     {
-     "title": "與 “‘6·3·3’ 위반도 曺탄핵 사유에 포함”… ‘중대성 요건’ 여부...",
+     "title": "한덕수 판결 존중한다는 與… 절차 문제삼아 “조희대 탄핵”",
      "press": "donga.com",
      "publishedAt": "2026-11-22T19:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764316?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "리비아 러시아 군함 피격",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T18:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"리비아 항구서 러시아 군함 피격...우크라 공격 추정\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-22T19:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436541?sid=104"
-    },
-    {
-     "title": "리비아서 러시아 군함 피격…\"우크라이나 드론 추정\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-22T19:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404960?sid=104"
-    },
-    {
-     "title": "“리비아 항구 정박 러시아 군함 피격…우크라 드론 공격 추정”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-22T19:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012298911?sid=104"
+     "link": "https://n.news.naver.com/mnews/article/020/0003764318?sid=100"
     }
    ]
   },
@@ -177,7 +145,7 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-22T19:20:00.000Z",
    "exclusive": false,
@@ -202,11 +170,43 @@
      "link": "https://www.dkilbo.com/news/articleView.html?idxno=561705"
     }
    ]
+  },
+  {
+   "keyword": "리비아 러시아 군함 피격",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T19:25:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "리비아서 러시아 군함 피격…\"우크라이나 드론 추정\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-22T19:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404960?sid=104"
+    },
+    {
+     "title": "\"리비아 항구서 러시아 군함 피격...우크라 공격 추정\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-22T19:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436541?sid=104"
+    },
+    {
+     "title": "“리비아 항구 정박 러시아 군함 피격…우크라 드론 공격 추정”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-22T19:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012298911?sid=104"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1120,
+  "flagged": 1119,
   "matched": 630,
   "avgLeadMin": 611,
   "recent": [
