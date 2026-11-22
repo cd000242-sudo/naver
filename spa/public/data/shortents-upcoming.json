@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T21:31:01.079Z",
+ "builtAt": "2026-11-22T21:41:04.397Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,165 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "코스피",
+   "keyword": "트럼프 이란 공격 경고",
    "sources": [
-    "google"
+    "daum"
    ],
-   "articles90": 12,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-22T20:02:00.000Z",
+   "articles90": 20,
+   "recent20": 5,
+   "press": 19,
+   "firstArticleAt": "2026-11-22T20:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "결국 바닥 뚫린 코스피… 증시안정펀드 18년 만에 가동 채비",
-     "press": "segye.com",
-     "publishedAt": "2026-11-22T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177236?sid=101"
+     "title": "트럼프 “이란은 말만 한다”…합의 불발 땐 새해 추가 공격 경고",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-22T21:34:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2651379"
     },
     {
-     "title": "같은 4,800선인데도…코스피 '1조클럽' 11% 감소",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-22T21:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928823?sid=101"
+     "title": "트럼프, 새해 이란 군사 공격 가능성 경고... 협상 실패 시 긴장 고조",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-22T21:34:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886774"
     },
     {
-     "title": "코로나 때보다 더 빠진 코스피…외국인 '놀이터' 공매도 금지론 확산",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009303789?sid=101"
+     "title": "트럼프 \"이란은 늘 말만 해\"…협상 불발 땐 새해 공격 시사",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-22T21:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413865?sid=104"
     }
    ]
   },
   {
-   "keyword": "2026년 11월 23일 운세",
+   "keyword": "김아림 LPGA 최종전 공동 7위",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T20:02:00.000Z",
+   "articles90": 10,
+   "recent20": 4,
+   "press": 10,
+   "firstArticleAt": "2026-11-22T20:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[AI] 오늘의 띠별 운세...2026.11.23(월요일)",
-     "press": "newsroad.co.kr",
-     "publishedAt": "2026-11-22T21:30:00.000Z",
-     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68196"
+     "title": "김아림, LPGA 시즌 최종전 공동 7위…티띠꾼, 3년 연속 우승",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-22T21:39:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/055/0001404976"
     },
     {
-     "title": "[오늘의 운세] 2026년 11월 23일 (월) 띠별운세 '새 주의 첫 단추를 끼우...",
-     "press": "dailypop.kr",
-     "publishedAt": "2026-11-22T21:30:00.000Z",
-     "link": "http://www.dailypop.kr/news/articleView.html?idxno=104282"
+     "title": "김아림, LPGA 시즌 최종전 공동 7위…티띠꾼, 3년 연속 우승(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-22T21:37:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/001/0016457069"
     },
     {
-     "title": "[오늘의 운세] 2026년 11월 23일 별자리 운세",
+     "title": "김아림, LPGA 시즌 최종전 공동 7위‥티띠꾼, 3년 연속 우승",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-22T21:29:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/214/0001537286"
+    }
+   ]
+  },
+  {
+   "keyword": "영변 우라늄 원심분리기",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 9,
+   "recent20": 3,
+   "press": 9,
+   "firstArticleAt": "2026-11-22T20:17:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "北 영변 우라늄 농축시설 증축…“원심분리기 추가 땐 연 35㎏ 넘게 더 ...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-22T21:36:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2651386"
+    },
+    {
+     "title": "북한, 영변 핵시설 확장으로 고농축 우라늄 대량 생산 가능성 급부상",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-22T21:32:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886771"
+    },
+    {
+     "title": "“北 영변 핵시설 증축…우라늄 연 35㎏ 추가 생산 가능”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-22T21:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764333?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황 밀수 의혹",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-22T20:21:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“젠슨 황 불륜 상대는 ‘얼굴마담’”…美中 무역전쟁 불씨 되나 [돋보...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-22T21:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701997?sid=104"
+    },
+    {
+     "title": "엔비디아 AI 칩, 중국으로 밀수된 경로의 비밀: 동남아시아 암시장 네트...",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-22T21:34:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886779"
+    },
+    {
+     "title": "젠슨황 불륜 女, 캄보디아 범죄조직까지 연루 의혹",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-22T21:32:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611230014"
+    }
+   ]
+  },
+  {
+   "keyword": "경제",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T21:04:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "서울시, 중장년 경제교육에 7000명 참여…경제이해도 ‘쑥’",
      "press": "edaily.co.kr",
-     "publishedAt": "2026-11-22T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413859?sid=103"
+     "publishedAt": "2026-11-22T21:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413864?sid=102"
+    },
+    {
+     "title": "[교육] 사례로 배우는 '경제성평가', 히트뉴스 신약 등재 전략 심화 과정",
+     "press": "hitnews.co.kr",
+     "publishedAt": "2026-11-22T21:12:00.000Z",
+     "link": "https://www.hitnews.co.kr/news/articleView.html?idxno=80994"
+    },
+    {
+     "title": "2025년 웰니스 경제 7.5조弗..전년比 8.9% ↑",
+     "press": "yakup.com",
+     "publishedAt": "2026-11-22T21:08:00.000Z",
+     "link": "https://www.yakup.com/news/index.html?mode=view&cat=12&nid=335524"
     }
    ]
   },
@@ -79,10 +175,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T20:02:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-22T20:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,110 +203,14 @@
    ]
   },
   {
-   "keyword": "유엔기후총회 합의 무산",
+   "keyword": "최교진 교육부 장관 면직",
    "sources": [
     "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T20:03:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "유엔기후총회 17년 만에 합의 불발…화석연료 충돌",
-     "press": "kbmaeil.com",
-     "publishedAt": "2026-11-22T21:20:00.000Z",
-     "link": "https://www.kbmaeil.com/article/20261123500007"
-    },
-    {
-     "title": "'화석연료' 극한 대립‥17년 만에 합의 무산",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-22T21:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001537281?sid=102"
-    },
-    {
-     "title": "유엔기후총회 17년 만에 합의 무산…'화석연료 퇴출' 놓고 산유국·EU 충...",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-22T20:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005846103?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "통장",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T21:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "40대 마이너스통장 연체액 399억으로 82% 늘어",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-22T21:29:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085432"
-    },
-    {
-     "title": "청약통장 이탈에 증시 폭락까지…주택 공급 재원 ‘이중고’",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-22T21:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004684924?sid=101"
-    },
-    {
-     "title": "40대 마이너스통장 연체액 올해 82% 늘어",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-22T21:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928834?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황 밀수 의혹",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T20:21:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"엔비디아 칩 밀수에 앨리스 황·캄보디아 범죄조직 얽혀\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-22T21:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404967?sid=104"
-    },
-    {
-     "title": "WSJ \"엔비디아 칩 中밀수 배후에 52세 중국인…앨리스 황과 협력\"",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-22T20:57:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123000005"
-    },
-    {
-     "title": "\"엔비디아 칩 밀수에 앨리스 황·캄보디아 범죄조직 얽혀\"<FT>",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-22T20:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928792?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "최교진 면직",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-22T20:02:00.000Z",
+   "firstArticleAt": "2026-11-22T20:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -221,26 +221,76 @@
      "link": "https://n.news.naver.com/mnews/article/022/0004177265?sid=100"
     },
     {
+     "title": "[출근길 포인트] 한전 고객 152만명 정보유출, '수능 AI 혼선' 교육부장...",
+     "press": "pointdaily.co.kr",
+     "publishedAt": "2026-11-22T21:00:00.000Z",
+     "link": "https://www.pointdaily.co.kr/news/articleView.html?idxno=326906"
+    },
+    {
      "title": "靑 \"이 대통령, 최교진 교육부 장관 면직 재가\"",
      "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-22T20:49:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/422/0000928816?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "버스",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-22T20:22:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "신교통수단이라더니 세금만 낭비한 ‘3칸 굴절버스’···운행도 못해보...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-22T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484335?sid=102"
     },
     {
-     "title": "최교진 교육부 장관 사의…\"수능 준비 미흡 통감\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-22T20:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928790?sid=102"
+     "title": "[서울 버스, 시민 주주시대]②[단독]“환승 할인에 배당 환급까지”… ...",
+     "press": "dnews.co.kr",
+     "publishedAt": "2026-11-22T20:22:00.000Z",
+     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611180957265870582"
+    },
+    {
+     "title": "[서울 버스, 시민 주주시대]①[단독]시민이 버스 주주… ‘국민 펀드’...",
+     "press": "dnews.co.kr",
+     "publishedAt": "2026-11-22T20:22:00.000Z",
+     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611180945105730574"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1121,
-  "matched": 630,
-  "avgLeadMin": 614,
+  "flagged": 1120,
+  "matched": 629,
+  "avgLeadMin": 615,
   "recent": [
+   {
+    "keyword": "맨유",
+    "hitKeyword": "맨유 리그 19위",
+    "hitAt": "2026-11-23T06:30:00+09:00",
+    "leadMin": 79
+   },
+   {
+    "keyword": "코스피",
+    "hitKeyword": "나스닥 급락 코스피 영향",
+    "hitAt": "2026-11-23T06:30:00+09:00",
+    "leadMin": 59
+   },
+   {
+    "keyword": "2026년 11월 23일 운세",
+    "hitKeyword": "23일 전국 눈비",
+    "hitAt": "2026-11-23T06:30:00+09:00",
+    "leadMin": 29
+   },
    {
     "keyword": "외교",
     "hitKeyword": "트럼프 얄타 외교",
@@ -282,24 +332,6 @@
     "hitKeyword": "솔비 이규한 비하인드",
     "hitAt": "2026-11-23T00:00:00+09:00",
     "leadMin": 112
-   },
-   {
-    "keyword": "이혜영 남편",
-    "hitKeyword": "이혜영 폐암 투병",
-    "hitAt": "2026-11-22T23:30:00+09:00",
-    "leadMin": 92
-   },
-   {
-    "keyword": "이혜영",
-    "hitKeyword": "이혜영 폐암 투병",
-    "hitAt": "2026-11-22T23:30:00+09:00",
-    "leadMin": 11
-   },
-   {
-    "keyword": "대기업 기부금 감소",
-    "hitKeyword": "삼성전자 기부금 1위",
-    "hitAt": "2026-11-22T23:00:00+09:00",
-    "leadMin": 746
    }
   ]
  }
