@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T04:05:16.175Z",
+ "builtAt": "2026-11-22T04:15:19.794Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "최교진, 수능 책임 통감",
@@ -18,28 +18,28 @@
    ],
    "articles90": 91,
    "recent20": 23,
-   "press": 67,
-   "firstArticleAt": "2026-11-22T02:50:00.000Z",
+   "press": 70,
+   "firstArticleAt": "2026-11-22T02:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "최교진 교육부장관 사의…\"준비 미흡 비판 통감\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-22T04:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928682?sid=102"
+     "title": "최교진, '수능 대혼란' 책임지고 사의…\"준비 미흡 비판 통감\"(종합)",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-22T04:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004212441?sid=102"
     },
     {
-     "title": "[속보] 최교진 교육부장관, 사의 표명...\"수능 준비 부실 책임 통감\"",
-     "press": "cjb.co.kr",
-     "publishedAt": "2026-11-22T04:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/655/0000033660?sid=102"
+     "title": "李, 최교진 교육부 장관 사의 수락…靑 \"후임 인선 진행\"",
+     "press": "sisafocus.co.kr",
+     "publishedAt": "2026-11-22T04:14:00.000Z",
+     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367899"
     },
     {
-     "title": "李대통령 'AI 부정행위 대응' 논란 최교진 사의 수락…수능 사후조치 만...",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-22T04:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005444575?sid=100"
+     "title": "최교진 교육부 장관, '수능 혼란'에 사임…이 대통령 수락",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-22T04:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003488243?sid=105"
     }
    ]
   },
@@ -48,30 +48,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 57,
+   "articles90": 50,
    "recent20": 6,
-   "press": 40,
-   "firstArticleAt": "2026-11-22T02:36:00.000Z",
+   "press": 39,
+   "firstArticleAt": "2026-11-22T02:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "민주당, 조희대 탄핵안 추진…탄핵안 12월 3일 발의 검토",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-22T03:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001886630?sid=100"
+     "title": "민주당 “조희대 탄핵안 연내 국회서 처리”",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-22T04:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002834553?sid=100"
     },
     {
-     "title": "\"12월 가기 전 조희대 탄핵소추안\" vs \"판결 보복\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-22T03:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404865?sid=100"
+     "title": "與 \"'한덕수 판결' 조희대 탄핵사유 삼지 않을 것…12월 가기 전 의결\"",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-22T04:14:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445892"
     },
     {
-     "title": "민주당, 조희대 탄핵안 연내 처리…\"한덕수 판결은 탄핵 사유 아냐\"",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-22T03:48:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321331&inflow=N"
+     "title": "與 조희대 탄핵추진단 \"'한덕수 판결' 탄핵사유 삼지 않을 것\"",
+     "press": "wolyo.co.kr",
+     "publishedAt": "2026-11-22T04:12:00.000Z",
+     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=320869"
     }
    ]
   },
@@ -80,13 +80,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
+   "articles90": 10,
    "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-22T02:36:00.000Z",
-   "exclusive": true,
+   "press": 10,
+   "firstArticleAt": "2026-11-22T02:46:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "조국, 창당 1000일 앞두고 당명 개정 제안…\"범민주 진영 좋아할 당명 고...",
+     "press": "kado.net",
+     "publishedAt": "2026-11-22T04:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000212579?sid=100"
+    },
     {
      "title": "조국, 조국혁신당 당명 개정 제안 \"일부는 우리 당 조롱하기도\"",
      "press": "dgmbc.com",
@@ -98,44 +104,6 @@
      "press": "gukjenews.com",
      "publishedAt": "2026-11-22T03:40:00.000Z",
      "link": "https://www.gukjenews.com/news/articleView.html?idxno=3759419"
-    },
-    {
-     "title": "조국 \"확장성 있는 당명 필요하다\" 새 당명 찾는다",
-     "press": "mediatoday.co.kr",
-     "publishedAt": "2026-11-22T03:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/006/0000138883?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "대학생 취업인식도 조사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-22T02:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "대학생 45% “취업 작년보다 어렵다”…구직 활동은 오히려 증가",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-22T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003488225?sid=105"
-    },
-    {
-     "title": "대학생 45% “취업 더 어려워졌다”…4명 중 1명은 서류전형 전패",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-22T02:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000133169?sid=101"
-    },
-    {
-     "title": "취업문 더 좁아졌다…대학생 45% \"작년보다 취업 어렵다\"",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-22T02:56:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=565638"
     }
    ]
   },
@@ -172,14 +140,46 @@
    ]
   },
   {
+   "keyword": "대학생 취업인식도 조사",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-22T02:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "대학생 45% “취업 작년보다 어렵다”…구직 활동은 오히려 증가",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-22T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003488225?sid=105"
+    },
+    {
+     "title": "대학생 45% “취업 더 어려워졌다”…4명 중 1명은 서류전형 전패",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-22T02:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000133169?sid=101"
+    },
+    {
+     "title": "대학생 45% \"올해 취업시장 작년보다 어렵다\" … 1년 이상 취업 준비도 ...",
+     "press": "worktoday.co.kr",
+     "publishedAt": "2026-11-22T02:56:00.000Z",
+     "link": "http://www.worktoday.co.kr/news/articleView.html?idxno=92455"
+    }
+   ]
+  },
+  {
    "keyword": "재산",
    "sources": [
     "google"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T02:36:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-22T03:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -196,10 +196,42 @@
      "link": "https://n.news.naver.com/mnews/article/030/0003488219?sid=102"
     },
     {
-     "title": "지식재산처, AI 친화적 '마크다운' 형식 통계 간행물 제공",
-     "press": "fnnews.com",
+     "title": "지식재산처, 특허 통계도 AI가 읽는다…'마크다운' 형식 자료 개방",
+     "press": "etnews.com",
      "publishedAt": "2026-11-22T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005607751?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/030/0003488226?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "정년연장 정부안 제시",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T02:59:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김영훈 노동장관 \"정년연장, 27일 與 특위서 결론 안 나면 정부안 발표...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-22T04:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009303332?sid=101"
+    },
+    {
+     "title": "김영훈 노동장관 \"정년연장, 27일 결론 안 나면 정부안 발표\"",
+     "press": "dkilbo.com",
+     "publishedAt": "2026-11-22T03:14:00.000Z",
+     "link": "https://www.dkilbo.com/news/articleView.html?idxno=561551"
+    },
+    {
+     "title": "노동장관, 與에 ‘정년연장’ 최후통첩…“27일 넘기면 정부안”",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-22T03:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003566927?sid=102"
     }
    ]
   },
@@ -264,70 +296,6 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-22T03:10:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014337966?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "정년연장 정부안 제시",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T02:59:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김영훈 노동장관 \"정년연장, 27일 결론 안 나면 정부안 발표\"",
-     "press": "dkilbo.com",
-     "publishedAt": "2026-11-22T03:14:00.000Z",
-     "link": "https://www.dkilbo.com/news/articleView.html?idxno=561551"
-    },
-    {
-     "title": "노동장관, 與에 ‘정년연장’ 최후통첩…“27일 넘기면 정부안”",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-22T03:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003566927?sid=102"
-    },
-    {
-     "title": "김영훈 노동장관 \"27일 정년연장 합의 불발 땐 정부안 발표\"",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-22T02:59:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085286"
-    }
-   ]
-  },
-  {
-   "keyword": "lpga",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-22T02:40:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[골프] 김민선·유현조, LPGA Q시리즈 최종전 3R 공동 10위",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-22T03:02:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3451029"
-    },
-    {
-     "title": "[골프] 김아림, LPGA 투어 챔피언십 3R 단독 선두… 우승 눈앞",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-22T02:58:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3451028"
-    },
-    {
-     "title": "LPGA 경기 중인 한국 선수들 현재 순항 중",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-22T02:40:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/088/0001041561"
     }
    ]
   }
