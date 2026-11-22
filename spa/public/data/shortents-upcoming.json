@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T01:14:12.355Z",
+ "builtAt": "2026-11-22T01:24:15.699Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,13 +15,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 56,
-   "recent20": 2,
-   "press": 55,
+   "articles90": 57,
+   "recent20": 1,
+   "press": 56,
    "firstArticleAt": "2026-11-22T00:00:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "LG유플러스, AI B2B 사업 힘준다…김홍근 LG CNS 부사장 영입",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-22T01:22:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261122500099"
+    },
     {
      "title": "LGU+, AI 사업 중심으로 조직 재편…인프라·플랫폼 이원화",
      "press": "ddaily.co.kr",
@@ -33,27 +39,27 @@
      "press": "ddaily.co.kr",
      "publishedAt": "2026-11-22T01:01:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/138/0002249474?sid=101"
-    },
-    {
-     "title": "LG유플러스, 2027년 조직개편 단행…AI 사업 강화·기술 역량 통합",
-     "press": "dailysmart.co.kr",
-     "publishedAt": "2026-11-22T00:52:00.000Z",
-     "link": "http://www.dailysmart.co.kr/news/articleView.html?idxno=132917"
     }
    ]
   },
   {
-   "keyword": "최태원 AI 인재 공동 육성",
+   "keyword": "최태원 AI 인재 공동 육성 제안",
    "sources": [
     "nate"
    ],
-   "articles90": 27,
-   "recent20": 5,
-   "press": 27,
+   "articles90": 22,
+   "recent20": 4,
+   "press": 22,
    "firstArticleAt": "2026-11-21T23:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "SK 최태원 \"한국·일본, 기업·대학 함께 AI인재 공동 육성 하자\"",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-22T01:20:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086164"
+    },
     {
      "title": "최태원 SK 회장 \"한일 기업·대학 손잡고 AI 인재 공동 육성하자\"",
      "press": "businesskorea.co.kr",
@@ -61,16 +67,42 @@
      "link": "https://www.businesskorea.co.kr/news/articleView.html?idxno=281859"
     },
     {
-     "title": "최태원 \"AI 네이티브 사회 맞춰 교육 새롭게 설계해야\"",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-22T01:12:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4120046"
-    },
-    {
      "title": "최태원 SK그룹 회장 \"한일 기업·대학, AI 인재 공동 육성하자\"",
      "press": "fnnews.com",
      "publishedAt": "2026-11-22T01:12:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/014/0005607720?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "김태희 아침마다 감동",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 16,
+   "recent20": 1,
+   "press": 14,
+   "firstArticleAt": "2026-11-22T00:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'냉부해' 비♥김태희의 냉장고를 부탁해",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-22T01:06:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611220039"
+    },
+    {
+     "title": "'냉부해' 비 \"아침마다 김태희 보면 감동\" 깜짝 고백",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-22T01:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/437/0000521858"
+    },
+    {
+     "title": "비, 아내 덕분에 식습관까지 바뀐 사랑꾼 \"김태희 보면 아침마다 감동\"...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-22T00:49:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001409139"
     }
    ]
   },
@@ -107,12 +139,44 @@
    ]
   },
   {
+   "keyword": "흑백요리사 트리플스타 발표",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 11,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-22T00:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'흑백' 트리플스타, 재혼 발표..\"부족한 저를 감싸 안아준 사람\" [전문]",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-22T01:17:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005643873"
+    },
+    {
+     "title": "'흑백요리사' 트리플스타, 재혼 발표 \"부끄럽지 않은 남편 될 것\"[셀럽톡...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-22T01:06:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1795309523531349005"
+    },
+    {
+     "title": "트리플스타 강승원, 전처 사생활 논란 이후 재혼 소식…\"부족한 저 감싸...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-22T01:04:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282723"
+    }
+   ]
+  },
+  {
    "keyword": "수험",
    "sources": [
     "google"
    ],
    "articles90": 11,
-   "recent20": 4,
+   "recent20": 1,
    "press": 11,
    "firstArticleAt": "2026-11-22T00:19:00.000Z",
    "exclusive": false,
@@ -139,17 +203,23 @@
    ]
   },
   {
-   "keyword": "하나금융, 어르신 주거 안전 지원",
+   "keyword": "취약계층 안전용품 지원",
    "sources": [
     "nate"
    ],
-   "articles90": 11,
+   "articles90": 10,
    "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-21T23:46:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-21T23:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "하나금융그룹, 취약계층 어르신 주거 안전·이동 편의 지원",
+     "press": "delighti.co.kr",
+     "publishedAt": "2026-11-22T01:20:00.000Z",
+     "link": "https://www.delighti.co.kr/news/articleView.html?idxno=125354"
+    },
     {
      "title": "하나금융, 취약층 어르신 1000명 '안전용품·보행기' 지원",
      "press": "straightnews.co.kr",
@@ -161,44 +231,6 @@
      "press": "getnews.co.kr",
      "publishedAt": "2026-11-22T00:52:00.000Z",
      "link": "https://www.getnews.co.kr/news/articleView.html?idxno=887997"
-    },
-    {
-     "title": "하나금융그룹, 취약계층 어르신 1000명 맞춤형 생활지원",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-22T00:50:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629184"
-    }
-   ]
-  },
-  {
-   "keyword": "흑백요리사 트리플스타 발표",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 10,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-22T00:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'흑백요리사' 트리플스타, 재혼 발표 \"부끄럽지 않은 남편 될 것\"[셀럽톡...",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-22T01:06:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1795309523531349005"
-    },
-    {
-     "title": "트리플스타 강승원, 전처 사생활 논란 이후 재혼 소식…\"부족한 저 감싸...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-22T01:04:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16282723"
-    },
-    {
-     "title": "'트리플스타' 강승원 결혼 발표…예비신부와 평생 함께하기로",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-22T00:50:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626848"
     }
    ]
   },
@@ -239,13 +271,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
    "firstArticleAt": "2026-11-22T00:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "전세사기 막는 중개사 한눈에…경기도, ‘안심 부동산’ 참여 표시",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-22T01:22:00.000Z",
+     "link": "https://www.viva100.com/article/20261122500254"
+    },
     {
      "title": "\"내 건물, 전문가에게 직접 물어본다\"…소수 한정 부동산 세미나",
      "press": "hankyung.com",
@@ -257,59 +295,59 @@
      "press": "pinpointnews.co.kr",
      "publishedAt": "2026-11-22T00:58:00.000Z",
      "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=506672"
-    },
-    {
-     "title": "경기도, “전세사기 예방 ‘경기 안심 부동산’에 참여하세요!”",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-22T00:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701798?sid=102"
     }
    ]
   },
   {
-   "keyword": "초등학교 방화 20대 징역 2년",
+   "keyword": "30대 고가주택 보유자 급증",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-22T00:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'집값 17억' 넘는 30대만 1만8000명 … 세금 폭탄에 증여 급증 탓",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-22T01:18:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/22/2026112250033.html"
+    },
+    {
+     "title": "집값 급등에…'시세 17억' 주택보유 30대 1년새 70% 급증",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-22T01:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000161866?sid=101"
+    },
+    {
+     "title": "시세 17억원 넘는 집 가진 30대 청년 1만8019명…전년보다 70% 급증",
+     "press": "busan.com",
+     "publishedAt": "2026-11-22T00:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001408296?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "고경표, 음주운전 중단 논란",
    "sources": [
     "nate"
    ],
    "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-21T23:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[속보] 초등학교 교실에 몰래 들어가 불 지른 20대 ‘징역 2년’…과거...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-22T00:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701803?sid=102"
-    },
-    {
-     "title": "[속보] 초등 음악실에 불 지른 20대 ‘징역 2년’...집유 두 달 만에 또...",
-     "press": "cjb.co.kr",
-     "publishedAt": "2026-11-22T00:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/655/0000033658?sid=102"
-    },
-    {
-     "title": "방화 집행유예 중 또 초등학교에 불지른 20대 실형",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-22T00:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001886595?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "고경표 핑계고 논란",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
    "recent20": 1,
-   "press": 3,
+   "press": 4,
    "firstArticleAt": "2026-11-22T00:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'음주운전 사고' 고경표, 자숙 선언 8일 만에 '핑계고' 시상식 후보 선정...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-22T01:16:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000492212"
+    },
     {
      "title": "면허취소 수준 음주운전 8일 만에…고경표, ‘핑계고’ 시상식 후보 ‘...",
      "press": "sportsworldi.com",
@@ -321,12 +359,6 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-22T00:43:00.000Z",
      "link": "https://m.entertain.naver.com/article/003/0014337740"
-    },
-    {
-     "title": "고경표 음주운전 자숙 선언에도..'핑계고', 시상식 후보 이름 올렸다 [스...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-22T00:21:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003489251"
     }
    ]
   },
@@ -365,7 +397,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 918,
+  "flagged": 923,
   "matched": 539,
   "avgLeadMin": 617,
   "recent": [
