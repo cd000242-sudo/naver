@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T14:28:55.510Z",
+ "builtAt": "2026-11-22T14:38:59.002Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,14 +11,46 @@
  "measured": 24,
  "candidates": [
   {
-   "keyword": "유엔기후총회 합의 무산",
+   "keyword": "한전 on",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
    "articles90": 8,
    "recent20": 0,
    "press": 8,
-   "firstArticleAt": "2026-11-22T13:06:00.000Z",
+   "firstArticleAt": "2026-11-22T13:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한국전력 또 뚫렸다···'한전ON' 이용 152만여 명 개인정보 유출",
+     "press": "globale.co.kr",
+     "publishedAt": "2026-11-22T14:14:00.000Z",
+     "link": "https://www.globale.co.kr/news/articleView.html?idxno=41780"
+    },
+    {
+     "title": "한전, 고객 주민번호 포함 개인정보 150만 건 유출",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-22T14:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436520?sid=101"
+    },
+    {
+     "title": "한전, 고객 65만명·전자조달 이용자 87만명 '개인정보 유출'…총 152만명...",
+     "press": "industrynews.co.kr",
+     "publishedAt": "2026-11-22T13:46:00.000Z",
+     "link": "https://www.industrynews.co.kr/news/articleView.html?idxno=89999"
+    }
+   ]
+  },
+  {
+   "keyword": "유엔기후총회 합의 무산",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-22T13:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -43,49 +75,23 @@
    ]
   },
   {
-   "keyword": "이혜영",
-   "sources": [
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T13:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'이상민과 이혼' 이혜영, '미우새' 출연에..'재혼' 현남편 \"미친 거 아니...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-22T14:06:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004468716"
-    },
-    {
-     "title": "'폐암 투병' 이혜영 \"5년간 아픈 여자랑 살아준 ♥남편에 감사\" (미우새...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-22T14:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002083044"
-    },
-    {
-     "title": "'미우새' 이혜영, 정준호 생일 축하하며 전 남편 이상민 간접 언급",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-22T13:48:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626895"
-    }
-   ]
-  },
-  {
    "keyword": "증안펀드 가동 준비",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 0,
+   "articles90": 4,
+   "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-22T13:02:00.000Z",
+   "firstArticleAt": "2026-11-22T13:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[증시] ‘블랙 먼데이’ 공포에 정부 긴급회의…증안펀드 가동 준비·자...",
+     "press": "news-s.kr",
+     "publishedAt": "2026-11-22T14:30:00.000Z",
+     "link": "https://news-s.kr/view.html?id=L26112223212576da"
+    },
     {
      "title": "미 증시 급락에 F4회의 소집...\"증안펀드 가동 준비\"",
      "press": "ytn.co.kr",
@@ -97,12 +103,70 @@
      "press": "efnews.co.kr",
      "publishedAt": "2026-11-22T13:28:00.000Z",
      "link": "http://www.efnews.co.kr/news/articleView.html?idxno=134194"
+    }
+   ]
+  },
+  {
+   "keyword": "중국 국가안전부 첨단 칩 작전",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T13:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"中 국가안전부, 최소 2년 전부터 AI 반도체 확보 비밀 작전\"",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-22T14:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005607942?sid=104"
     },
     {
-     "title": "블랙먼데이 우려 높아지자, 정부 증안펀드 가동 준비 착수",
-     "press": "dnews.co.kr",
-     "publishedAt": "2026-11-22T13:20:00.000Z",
-     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611222213458150078"
+     "title": "중국 국가안전부, 美 반도체 통제 우회 작전…최소 2년 전 시작",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-22T14:08:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626898"
+    },
+    {
+     "title": "\"중국 국가안전부, 2년 전부터 첨단 칩 비밀 작전\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-22T13:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436499?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "조권 구용규 루머 의식",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T13:25:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"보고 싶은 대로 보는 세상\" 조권, '양성애자' 구용규와의 루머 속 의미...",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-22T14:29:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000053839"
+    },
+    {
+     "title": "\"보고 싶은 대로 보는 세상\" 조권, 구용규와 루머 의식했나...의미심장 ...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-22T13:56:00.000Z",
+     "link": "https://m.entertain.naver.com/article/477/0000640326"
+    },
+    {
+     "title": "조권, '양성애자' 구용규와 루머 의식했나..\"보고 싶은 대로 보는 세상...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-22T13:25:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003489405"
     }
    ]
   },
@@ -112,7 +176,7 @@
     "daum"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-22T13:32:00.000Z",
    "exclusive": false,
@@ -141,10 +205,22 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1118,
-  "matched": 636,
-  "avgLeadMin": 615,
+  "flagged": 1120,
+  "matched": 638,
+  "avgLeadMin": 613,
   "recent": [
+   {
+    "keyword": "이혜영 남편",
+    "hitKeyword": "이혜영 폐암 투병",
+    "hitAt": "2026-11-22T23:30:00+09:00",
+    "leadMin": 92
+   },
+   {
+    "keyword": "이혜영",
+    "hitKeyword": "이혜영 폐암 투병",
+    "hitAt": "2026-11-22T23:30:00+09:00",
+    "leadMin": 11
+   },
    {
     "keyword": "대기업 기부금 감소",
     "hitKeyword": "삼성전자 기부금 1위",
@@ -192,18 +268,6 @@
     "hitKeyword": "유엔기후총회 합의 결렬",
     "hitAt": "2026-11-22T22:30:00+09:00",
     "leadMin": 22
-   },
-   {
-    "keyword": "유엔기후총회 화석연료 이견",
-    "hitKeyword": "유엔기후총회 합의 결렬",
-    "hitAt": "2026-11-22T22:30:00+09:00",
-    "leadMin": 1
-   },
-   {
-    "keyword": "해경 해광호 해저 발견",
-    "hitKeyword": "해광호 해저 발견",
-    "hitAt": "2026-11-22T22:30:00+09:00",
-    "leadMin": 1
    }
   ]
  }
