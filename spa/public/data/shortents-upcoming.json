@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T07:46:35.350Z",
+ "builtAt": "2026-11-22T07:56:38.711Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 43,
-   "recent20": 7,
-   "press": 37,
-   "firstArticleAt": "2026-11-22T06:19:00.000Z",
+   "articles90": 41,
+   "recent20": 5,
+   "press": 35,
+   "firstArticleAt": "2026-11-22T06:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "李, 최교진 교육부 장관 사표 즉각 수리...'수능 혼란' 책임",
+     "press": "newsverse.kr",
+     "publishedAt": "2026-11-22T07:50:00.000Z",
+     "link": "https://www.newsverse.kr/news/articleView.html?idxno=12009"
+    },
+    {
+     "title": "국힘, 최교진 교육부장관 사의에 “사퇴로 끝날 일 아냐”…재발 방지 ...",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-22T07:46:00.000Z",
+     "link": "https://www.viva100.com/article/20261122500626"
+    },
     {
      "title": "최교진 교육부장관 사의… \"수능 대처 미흡 책임 통감\"",
      "press": "news.cpbc.co.kr",
      "publishedAt": "2026-11-22T07:40:00.000Z",
      "link": "https://news.cpbc.co.kr/article/1177180?division=NAVER"
-    },
-    {
-     "title": "최교진, '수능 대혼란' 책임지고 사임…취임 14개월 만에 사실상 경질",
-     "press": "kbsm.net",
-     "publishedAt": "2026-11-22T07:40:00.000Z",
-     "link": "https://www.kbsm.net/news/view.php?idx=542811"
-    },
-    {
-     "title": "국힘, 수능 혼란에 \"최교진 사퇴로 끝날 일 아냐…대통령이 책임지고 입...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T07:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014338269?sid=100"
     }
    ]
   },
@@ -48,30 +48,30 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 23,
-   "recent20": 16,
-   "press": 22,
+   "articles90": 28,
+   "recent20": 11,
+   "press": 27,
    "firstArticleAt": "2026-11-22T07:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "실종어선 '해광호' 52m 해저에서 발견…수중 선체 수색",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-22T07:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979335?sid=102"
+     "title": "[속보] 태안 해상 실종된 해광호, 수색 닷새 만에 수심 52m 해저서 발견",
+     "press": "kado.net",
+     "publishedAt": "2026-11-22T07:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000212632?sid=102"
     },
     {
-     "title": "[속보] 해경 \"해저서 해광호 선체 발견\"···수색 닷새째만",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-22T07:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928736?sid=102"
+     "title": "[속보]태안 해저서 발견된 어선, 실종 '해광호'로 최종 확인",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-22T07:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000121942?sid=102"
     },
     {
-     "title": "[속보] 해경 “연락 두절된 해광호 선체 수색 닷새째 만에 해저에서 발...",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-22T07:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001232479?sid=102"
+     "title": "실종 닷새 만에 '해광호' 선체 확인…수심 52m 해저서 발견",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-22T07:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002536789?sid=102"
     }
    ]
   },
@@ -83,27 +83,27 @@
    "articles90": 25,
    "recent20": 4,
    "press": 21,
-   "firstArticleAt": "2026-11-22T06:24:00.000Z",
+   "firstArticleAt": "2026-11-22T06:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "장동혁 \"조희대 탄핵은 李 '탈옥 작전'…탄핵당할 사람은 이재명\"",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-22T07:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000142803?sid=100"
+     "title": "장동혁 “조희대 탄핵, 李대통령 탈옥 위한 방탄 탄핵…결국 자폭될 것...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-22T07:54:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2651352"
     },
     {
-     "title": "‘조작기소 특검법’ 규탄 장외집회 이어가는 국힘…장동혁 “탄핵만이...",
-     "press": "busan.com",
-     "publishedAt": "2026-11-22T07:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001408356?sid=100"
+     "title": "[김능구·장성철의 직언직썰 11월②] \"장동혁·오세훈·한동훈 보수 '삼...",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-22T07:52:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=748879"
     },
     {
-     "title": "장동혁 \"정책 전쟁 승리할 무기\"…국힘, 첫 청년 패키지 발표",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-22T07:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413746?sid=100"
+     "title": "국민의힘 “최교진 장관 사퇴로 끝날 일 아냐…대통령 입장 표명하라”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-22T07:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012298800?sid=100"
     }
    ]
   },
@@ -113,13 +113,19 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 7,
-   "recent20": 4,
-   "press": 7,
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
    "firstArticleAt": "2026-11-22T06:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"트럼프, 김정은 만나려 비핵화 없는 종전선언 검토\" 파장",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-22T07:50:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/22/2026112250086.html"
+    },
     {
      "title": "\"트럼프, 김정은 만나기 위해 '종전선언'까지 검토\"",
      "press": "jasm.co.kr",
@@ -131,12 +137,6 @@
      "press": "nownews.seoul.co.kr",
      "publishedAt": "2026-11-22T07:32:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/081/0003701863?sid=104"
-    },
-    {
-     "title": "김정은, ‘트럼프 친서’ 봉투도 안 뜯고 던졌다",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-22T07:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701862?sid=104"
     }
    ]
   },
@@ -145,13 +145,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 8,
    "recent20": 1,
-   "press": 7,
+   "press": 8,
    "firstArticleAt": "2026-11-22T06:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"美, 아시아 순방 계기 북미회담 추진…北 '수용 불가 조건'에 무산\"",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-22T07:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005356709?sid=104"
+    },
     {
      "title": "“트럼프, 한국전쟁 종전선언까지 준비했는데”…北 김정은 만남 무산된...",
      "press": "nownews.seoul.co.kr",
@@ -163,44 +169,6 @@
      "press": "news.jtbc.co.kr",
      "publishedAt": "2026-11-22T07:25:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/437/0000521885?sid=104"
-    },
-    {
-     "title": "\"트럼프, 김정은 회담 막판 추진했지만…北 조건에 무산\"",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-22T07:14:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445895"
-    }
-   ]
-  },
-  {
-   "keyword": "외교",
-   "sources": [
-    "google"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-22T06:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "與 \"국민의힘, 대통령 순방 횟수·체류 일수 앞세워 외교 성과 깎아내려...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T07:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014338270?sid=100"
-    },
-    {
-     "title": "김병주 “이 대통령은 외교 천재···상대 마음을 읽고 합당한 이야기...",
-     "press": "weekly.khan.co.kr",
-     "publishedAt": "2026-11-22T07:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/033/0000053562?sid=100"
-    },
-    {
-     "title": "트럼프엔 YMCA 공연, 다카이치엔 악수 두 번…習 ‘맞춤형 양자외교’ ...",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-22T06:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003566969?sid=104"
     }
    ]
   },
@@ -210,7 +178,7 @@
     "google"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-22T06:38:00.000Z",
    "exclusive": false,
@@ -237,12 +205,44 @@
    ]
   },
   {
+   "keyword": "외교",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T06:45:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "與 \"국민의힘, 대통령 순방 횟수·체류 일수 앞세워 외교 성과 깎아내려...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T07:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014338270?sid=100"
+    },
+    {
+     "title": "김병주 “이 대통령은 외교 천재···상대 마음을 읽고 합당한 이야기...",
+     "press": "weekly.khan.co.kr",
+     "publishedAt": "2026-11-22T07:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/033/0000053562?sid=100"
+    },
+    {
+     "title": "트럼프엔 YMCA 공연, 다카이치엔 악수 두 번…習 ‘맞춤형 양자외교’ ...",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-22T06:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003566969?sid=104"
+    }
+   ]
+  },
+  {
    "keyword": "결승 역주하는 최민정",
    "sources": [
     "nate"
    ],
    "articles90": 12,
-   "recent20": 3,
+   "recent20": 2,
    "press": 3,
    "firstArticleAt": "2026-11-22T06:29:00.000Z",
    "exclusive": false,
@@ -252,13 +252,13 @@
      "title": "결승 향해 역주하는 최민정",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-22T07:45:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/001/0016456797"
+     "link": "https://m.sports.naver.com/general/article/001/0016456801"
     },
     {
      "title": "결승 향해 역주하는 최민정과 김민지",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-22T07:43:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/001/0016456792"
+     "link": "https://m.sports.naver.com/general/article/001/0016456791"
     },
     {
      "title": "[사진]5위로 역주하는 최민정",
@@ -274,7 +274,7 @@
     "nate"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-22T06:27:00.000Z",
    "exclusive": false,
