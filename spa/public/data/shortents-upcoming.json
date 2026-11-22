@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T21:20:58.184Z",
+ "builtAt": "2026-11-22T21:31:01.079Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,7 +16,7 @@
     "google"
    ],
    "articles90": 12,
-   "recent20": 2,
+   "recent20": 0,
    "press": 9,
    "firstArticleAt": "2026-11-22T20:02:00.000Z",
    "exclusive": false,
@@ -35,10 +35,10 @@
      "link": "https://n.news.naver.com/mnews/article/422/0000928823?sid=101"
     },
     {
-     "title": "[주간수급리포트] 외국인 4.5조 '팔자'에 4900선 내준 코스피…반등 열쇠...",
-     "press": "etoday.co.kr",
+     "title": "코로나 때보다 더 빠진 코스피…외국인 '놀이터' 공매도 금지론 확산",
+     "press": "news1.kr",
      "publishedAt": "2026-11-22T21:00:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2651100"
+     "link": "https://n.news.naver.com/mnews/article/421/0009303789?sid=101"
     }
    ]
   },
@@ -47,30 +47,62 @@
    "sources": [
     "nate"
    ],
-   "articles90": 6,
+   "articles90": 7,
    "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T20:00:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-22T20:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[AI] 오늘의 띠별 운세...2026.11.23(월요일)",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-22T21:30:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68196"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 23일 (월) 띠별운세 '새 주의 첫 단추를 끼우...",
+     "press": "dailypop.kr",
+     "publishedAt": "2026-11-22T21:30:00.000Z",
+     "link": "http://www.dailypop.kr/news/articleView.html?idxno=104282"
+    },
     {
      "title": "[오늘의 운세] 2026년 11월 23일 별자리 운세",
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-22T21:03:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006413859?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "대장동",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-22T20:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李대통령, “민간업자 1100억 추가 부담”…대장동 결탁설 반박",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-22T21:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003060518?sid=100"
     },
     {
-     "title": "[오늘의 운세] 2026년 11월 23일 띠별 운세",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-22T21:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413858?sid=103"
+     "title": "李 대통령, '대장동 의혹' 또 반박…\"업자와 결탁한 시장 아냐\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-22T20:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000652687?sid=100"
     },
     {
-     "title": "[백운산 오늘의 운세] 2026년 11월 23일",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-22T21:00:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20260916001527093"
+     "title": "\"업자와 결탁한 시장 행동 아냐\"…이 대통령 '대장동 의혹' 연일 반박",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-22T20:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002394566?sid=100"
     }
    ]
   },
@@ -79,10 +111,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T20:01:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-22T20:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,43 +139,107 @@
    ]
   },
   {
-   "keyword": "대장동",
+   "keyword": "통장",
    "sources": [
     "google"
    ],
    "articles90": 4,
-   "recent20": 0,
+   "recent20": 2,
    "press": 4,
+   "firstArticleAt": "2026-11-22T21:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "40대 마이너스통장 연체액 399억으로 82% 늘어",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-22T21:29:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085432"
+    },
+    {
+     "title": "청약통장 이탈에 증시 폭락까지…주택 공급 재원 ‘이중고’",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-22T21:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004684924?sid=101"
+    },
+    {
+     "title": "40대 마이너스통장 연체액 올해 82% 늘어",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-22T21:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928834?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황 밀수 의혹",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T20:21:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"엔비디아 칩 밀수에 앨리스 황·캄보디아 범죄조직 얽혀\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-22T21:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404967?sid=104"
+    },
+    {
+     "title": "WSJ \"엔비디아 칩 中밀수 배후에 52세 중국인…앨리스 황과 협력\"",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-22T20:57:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261123000005"
+    },
+    {
+     "title": "\"엔비디아 칩 밀수에 앨리스 황·캄보디아 범죄조직 얽혀\"<FT>",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-22T20:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928792?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "최교진 면직",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 3,
    "firstArticleAt": "2026-11-22T20:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李 대통령, '대장동 의혹' 또 반박…\"업자와 결탁한 시장 아냐\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-22T20:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652687?sid=100"
+     "title": "[청와대 24시] 최교진 사의 즉각 수리한 李대통령…“신임 장관 인선은...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-22T21:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177265?sid=100"
     },
     {
-     "title": "\"업자와 결탁한 시장 행동 아냐\"…이 대통령 '대장동 의혹' 연일 반박",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-22T20:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394566?sid=100"
+     "title": "靑 \"이 대통령, 최교진 교육부 장관 면직 재가\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-22T20:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928816?sid=100"
     },
     {
-     "title": "“업자와 결탁했다면…” 李대통령, ‘대장동 의혹’ 또 반박",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-22T20:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001886780?sid=100"
+     "title": "최교진 교육부 장관 사의…\"수능 준비 미흡 통감\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-22T20:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928790?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1119,
-  "matched": 631,
-  "avgLeadMin": 613,
+  "flagged": 1121,
+  "matched": 630,
+  "avgLeadMin": 614,
   "recent": [
    {
     "keyword": "외교",
