@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T13:28:35.351Z",
+ "builtAt": "2026-11-22T13:38:38.869Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 30,
+ "measured": 27,
  "candidates": [
   {
-   "keyword": "증안펀드 가동 준비",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 17,
-   "recent20": 1,
-   "press": 17,
-   "firstArticleAt": "2026-11-22T12:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "블랙먼데이 우려 높아지자, 정부 증안펀드 가동 준비 착수",
-     "press": "dnews.co.kr",
-     "publishedAt": "2026-11-22T13:20:00.000Z",
-     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611222213458150078"
-    },
-    {
-     "title": "F4, '블랙먼데이' 우려에 '증안펀드' 준비 착수...18년만 가동되나",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-22T13:08:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=783823"
-    },
-    {
-     "title": "미 AI 투매에 '검은 월요일' 오나?...\"증안펀드 가동 준비\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-22T13:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436491?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "유엔기후총회 화석연료 이견",
+   "keyword": "한전 on",
    "sources": [
     "daum"
    ],
-   "articles90": 13,
-   "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-22T12:00:00.000Z",
+   "articles90": 12,
+   "recent20": 3,
+   "press": 12,
+   "firstArticleAt": "2026-11-22T12:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'화석연료' 놓고 갈라진 유엔기후총회‥17년 만에 합의문 채택 실패",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-22T13:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001537271?sid=104"
+     "title": "한전, 고객 주민번호 포함 개인정보 150만 건 유출",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-22T13:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436497?sid=101"
     },
     {
-     "title": "산유국과 이견 끝내 못 좁혔다… 유엔 기후회의 합의안 최종 불발",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-22T13:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004011047?sid=104"
+     "title": "나주 한전, 개인정보 152만명분 유출…주민번호·계좌·카드번호까지 털...",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-22T13:25:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085411"
     },
     {
-     "title": "‘화석연료 퇴출’ 이견 못 좁혀…유엔기후총회 합의문 채택 불발",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-22T13:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413808?sid=104"
+     "title": "한전서 유출된 개인정보 152만건, 내 정보도 담겼나…2차 피해 우려",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-22T13:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003060505?sid=101"
     }
    ]
   },
@@ -79,7 +47,7 @@
    "sources": [
     "daum"
    ],
-   "articles90": 15,
+   "articles90": 17,
    "recent20": 2,
    "press": 10,
    "firstArticleAt": "2026-11-22T12:12:00.000Z",
@@ -87,86 +55,22 @@
    "capped": false,
    "samples": [
     {
+     "title": "솔비, 이규한과 첫 키스 전 가글…결혼 결심한 한마디",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-22T13:32:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283080"
+    },
+    {
+     "title": "이규한, 교제 전 솔비 母에 \"평생 책임질 것\" 약속 [미우새][별별TV]",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-22T13:31:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003489406"
+    },
+    {
      "title": "'이규한♥' 솔비, 첫 키스 비하인드 공개 \"가글하고 오고 나도 시켜주더...",
      "press": "insight.co.kr",
      "publishedAt": "2026-11-22T13:12:00.000Z",
      "link": "https://www.insight.co.kr/news/583089"
-    },
-    {
-     "title": "솔비 “‘♥이규한’ 설거지 못 하게 해… 그림만 그리라고” (‘미우새...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-22T13:09:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005767349"
-    },
-    {
-     "title": "솔비♥이규한, 벌써 2세 얼굴 공개...AI 사진에 \"볼살은 나 닮았으면\"",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-22T13:08:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004468714"
-    }
-   ]
-  },
-  {
-   "keyword": "김정은 러시아 대사 신임장",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-22T12:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김정은, 주북 러 대사 신임장 접수…30여년 만에 직접 제정받아",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T13:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014338408?sid=104"
-    },
-    {
-     "title": "김정은, 러시아대사 신임장 직접 접수…30여 년 만의 의전 변화",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-22T13:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404955?sid=104"
-    },
-    {
-     "title": "김정은, 러시아대사 신임장 직접 접수...30여년만 의전 변화",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-22T12:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701904?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "해경 해광호 해저 발견",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-22T11:59:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "태안 실종 어선 '해광호' 수심 52m 해저서 발견",
-     "press": "cc.newdaily.co.kr",
-     "publishedAt": "2026-11-22T13:04:00.000Z",
-     "link": "https://cc.newdaily.co.kr/site/data/html/2026/11/22/2026112250101.html"
-    },
-    {
-     "title": "‘해광호’ 실종 신고 5일 만에 침몰된 채 발견…수색 본격화",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-22T12:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012298886?sid=102"
-    },
-    {
-     "title": "수색 닷새 만에 해광호 선체 발견…실종 7명 수중수색 돌입",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-22T12:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413805?sid=102"
     }
    ]
   },
@@ -175,10 +79,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 2,
+   "articles90": 6,
+   "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-22T12:00:00.000Z",
+   "firstArticleAt": "2026-11-22T12:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -208,7 +112,7 @@
     "daum"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-22T12:38:00.000Z",
    "exclusive": false,
@@ -240,12 +144,18 @@
     "google"
    ],
    "articles90": 6,
-   "recent20": 0,
+   "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-22T12:01:00.000Z",
+   "firstArticleAt": "2026-11-22T12:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[날씨] '소설' 추위 서울 노원 -9.4℃...내일 전국 눈비",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-22T13:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436504?sid=103"
+    },
     {
      "title": "[내일날씨] 월요일 전국에 비·눈⋯출근길 '어는 비' 주의",
      "press": "inews24.com",
@@ -257,86 +167,79 @@
      "press": "jibs.co.kr",
      "publishedAt": "2026-11-22T12:28:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/661/0000086914?sid=103"
-    },
-    {
-     "title": "[뉴스9 날씨] 내일, 전국 비나 눈…도로 살얼음 주의",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-22T12:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012298860?sid=103"
     }
    ]
   },
   {
-   "keyword": "최교진 교육장관 면직안 재가",
+   "keyword": "남자 계주 금메달 획득",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-22T12:12:00.000Z",
+   "firstArticleAt": "2026-11-22T12:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이 대통령, '수능 책임 통감' 최교진 장관 면직안 재가",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-22T13:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436493?sid=100"
+     "title": "올 시즌 두 번째 계주 金! ‘인코스 장인’의 힘 보여준 쇼트트랙 이정...",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-22T13:33:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/025/0003567012"
     },
     {
-     "title": "수능 혼란에 결국 물러난 최교진 교육부 장관",
-     "press": "mhj21.com",
-     "publishedAt": "2026-11-22T12:58:00.000Z",
-     "link": "https://www.mhj21.com/news/articleView.html?idxno=254940"
+     "title": "[아주경제 오늘의 뉴스 종합] 한국 쇼트트랙, 남자 5000ｍ 계주 금매달…...",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-22T12:50:00.000Z",
+     "link": "https://www.ajunews.com/view/20261122192445390"
     },
     {
-     "title": "최교진 교육부 장관 사의…李대통령, 면직안 재가",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-22T12:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005607940?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "영월서 일산화탄소 추정",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T12:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "영월서 ‘차박’하던 70대 여성 숨지고 60대 치료 중...경찰, 수사 중",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-22T13:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000133266?sid=102"
-    },
-    {
-     "title": "영월서 차박하던 여성 숨져, 함께 있던 남성도 부상…일산화탄소 중독 ...",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-22T13:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002834597?sid=102"
-    },
-    {
-     "title": "차박 중 켠 난방기구가 화근이었나…영월서 70대 여성 숨져",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-22T12:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005444659?sid=102"
+     "title": "한국 쇼트트랙 남자 계주 金, 신동민 안방대회서 2관왕…김길리 여자 1...",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-22T12:20:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1139129"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1111,
-  "matched": 626,
-  "avgLeadMin": 608,
+  "flagged": 1112,
+  "matched": 631,
+  "avgLeadMin": 618,
   "recent": [
+   {
+    "keyword": "사랑이 온다",
+    "hitKeyword": "사랑이 온다 친부",
+    "hitAt": "2026-11-22T22:30:00+09:00",
+    "leadMin": 9536
+   },
+   {
+    "keyword": "해광호 실종자 수색",
+    "hitKeyword": "해광호 해저 발견",
+    "hitAt": "2026-11-22T22:30:00+09:00",
+    "leadMin": 42
+   },
+   {
+    "keyword": "유엔기후총회 합의 무산",
+    "hitKeyword": "유엔기후총회 합의 결렬",
+    "hitAt": "2026-11-22T22:30:00+09:00",
+    "leadMin": 22
+   },
+   {
+    "keyword": "유엔기후총회 화석연료 이견",
+    "hitKeyword": "유엔기후총회 합의 결렬",
+    "hitAt": "2026-11-22T22:30:00+09:00",
+    "leadMin": 1
+   },
+   {
+    "keyword": "해경 해광호 해저 발견",
+    "hitKeyword": "해광호 해저 발견",
+    "hitAt": "2026-11-22T22:30:00+09:00",
+    "leadMin": 1
+   },
    {
     "keyword": "투어스 도훈, 유재석 위인 발언",
     "hitKeyword": "유재석 핑계고 사과",
@@ -366,36 +269,6 @@
     "hitKeyword": "쇼트트랙 남자계주 금메달",
     "hitAt": "2026-11-22T21:30:00+09:00",
     "leadMin": 42
-   },
-   {
-    "keyword": "100일의 거짓말",
-    "hitKeyword": "100일의 거짓말 신태진",
-    "hitAt": "2026-11-22T21:30:00+09:00",
-    "leadMin": 22
-   },
-   {
-    "keyword": "경기도교육청 교원 개인정보 유출",
-    "hitKeyword": "한전 개인정보 유출",
-    "hitAt": "2026-11-22T21:00:00+09:00",
-    "leadMin": 1601
-   },
-   {
-    "keyword": "해저",
-    "hitKeyword": "해광호 선체 해저 발견",
-    "hitAt": "2026-11-22T21:00:00+09:00",
-    "leadMin": 203
-   },
-   {
-    "keyword": "한전 개인정보 유출",
-    "hitKeyword": "한전 개인정보 유출",
-    "hitAt": "2026-11-22T21:00:00+09:00",
-    "leadMin": 123
-   },
-   {
-    "keyword": "북미회담 무산",
-    "hitKeyword": "트럼프 북미회담 무산",
-    "hitAt": "2026-11-22T20:30:00+09:00",
-    "leadMin": 52
    }
   ]
  }
