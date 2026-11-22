@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T07:26:28.416Z",
+ "builtAt": "2026-11-22T07:36:32.164Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "조희대 탄핵 민주당 추진",
    "sources": [
     "nate"
    ],
-   "articles90": 62,
-   "recent20": 6,
-   "press": 43,
-   "firstArticleAt": "2026-11-22T05:57:00.000Z",
+   "articles90": 58,
+   "recent20": 7,
+   "press": 40,
+   "firstArticleAt": "2026-11-22T06:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“계엄은 내란” 판결은 패싱하는 국민의힘, 당내서도 비판…‘조희대...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-22T07:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484219?sid=100"
+     "title": "與 \"曺 탄핵 연내 처리\"…野 \"탄핵 억지사유\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-22T07:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928732?sid=100"
     },
     {
-     "title": "與 \"曺탄핵사유, 한덕수 판결 내용 아닌 절차…연내의결 노력\"",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-22T07:20:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=783794"
+     "title": "‘조작기소 특검법’ 규탄 장외집회 이어가는 국힘…장동혁 “탄핵만이...",
+     "press": "busan.com",
+     "publishedAt": "2026-11-22T07:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001408356?sid=100"
     },
     {
-     "title": "‘탄핵, 한덕수 판결 제외’ 여당에 장동혁 “사유조차 끼워 맞추나”",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-22T07:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000368312?sid=100"
+     "title": "[사설] 조 대법원장 '연내 탄핵', 마지막까지 신중해야",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-22T07:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193214?sid=110"
     }
    ]
   },
@@ -47,62 +47,160 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 43,
-   "recent20": 11,
-   "press": 37,
-   "firstArticleAt": "2026-11-22T05:59:00.000Z",
+   "articles90": 41,
+   "recent20": 8,
+   "press": 36,
+   "firstArticleAt": "2026-11-22T06:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "野 “수능마저 믿을 수 없는 나라...교육부 장관 사퇴로 끝날 일 아냐”",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-22T07:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004011033?sid=100"
+     "title": "이 대통령, 최교진 교육부 장관 사의 수락",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-22T07:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001041631?sid=100"
     },
     {
-     "title": "국힘 \"최교진 사퇴로 끝날 일 아냐…근본 대책 내놔야\"",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-22T07:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000193211?sid=100"
+     "title": "국힘 \"수능마저 믿을 수 없는 나라…'최교진 사퇴'로 끝날 일 아냐\"",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-22T07:30:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=783797"
     },
     {
-     "title": "[이슈체크] 정부 수능관리 파문 후폭풍",
-     "press": "idaegu.com",
-     "publishedAt": "2026-11-22T07:20:00.000Z",
-     "link": "https://www.idaegu.com/news/articleView.html?idxno=667172"
+     "title": "與, 최교진 교육장관 사의에 “교육 급변기, 전문성 갖춘 인사 선임되길...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-22T07:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002726752?sid=100"
     }
    ]
   },
   {
    "keyword": "장동혁 국민의힘 대표",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 52,
-   "recent20": 3,
+   "articles90": 28,
+   "recent20": 7,
    "press": 21,
-   "firstArticleAt": "2026-11-22T05:59:00.000Z",
+   "firstArticleAt": "2026-11-22T06:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국힘 '청년정책 패키지' 발표…장동혁 \"진짜 싸움은 국회 정책 전쟁\"[뉴...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T07:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014338246?sid=100"
+     "title": "‘조작기소 특검법’ 규탄 장외집회 이어가는 국힘…장동혁 “탄핵만이...",
+     "press": "busan.com",
+     "publishedAt": "2026-11-22T07:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001408356?sid=100"
     },
     {
-     "title": "장동혁 \"李 정권은 청년 미래 약탈 정권…청년 정책 정당으로 거듭날 것...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T07:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009303544?sid=100"
+     "title": "장동혁 \"정책 전쟁 승리할 무기\"…국힘, 첫 청년 패키지 발표",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-22T07:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413746?sid=100"
     },
     {
-     "title": "‘탄핵, 한덕수 판결 제외’ 여당에 장동혁 “사유조차 끼워 맞추나”",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-22T07:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000368312?sid=100"
+     "title": "국민의힘 \"수능마저 못 믿는 나라…최교진 사퇴로 끝날 일 아냐\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-22T07:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404915?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "해저",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 18,
+   "recent20": 10,
+   "press": 18,
+   "firstArticleAt": "2026-11-22T06:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "해광호 선체 수색 닷새만에 해저서 발견…\"실종자 7명 수색 추진\"(종합...",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-22T07:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016456781?sid=102"
+    },
+    {
+     "title": "해경 “실종 어선 ‘해광호’ 선체 해저서 확인”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-22T07:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004684801?sid=102"
+    },
+    {
+     "title": "해경 “해저서 해광호 선체 발견”…수색 닷새째만",
+     "press": "donga.com",
+     "publishedAt": "2026-11-22T07:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764199?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "시신 미라화된 발견",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 14,
+   "recent20": 2,
+   "press": 14,
+   "firstArticleAt": "2026-11-22T06:13:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "서울 금천구 주차타워서 미라화 시신 발견…경찰 수사",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-22T07:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404913?sid=102"
+    },
+    {
+     "title": "가산동 건물 지하서 신원 미상 시신 발견…경찰, 사망 원인 조사",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-22T07:20:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=848067"
+    },
+    {
+     "title": "가산동 건물 지하에 미라화된 시신이…경찰 “타살 혐의점은 낮아”",
+     "press": "segyebiz.com",
+     "publishedAt": "2026-11-22T07:16:00.000Z",
+     "link": "http://www.segyebiz.com/newsView/20261122508238?OutUrl=naver"
+    }
+   ]
+  },
+  {
+   "keyword": "현대건설 2연승",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 14,
+   "recent20": 2,
+   "press": 14,
+   "firstArticleAt": "2026-11-22T06:41:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"이전보다 범실이 줄었습니다\" 승장 강성형 현대건설 감독이 꼽은 '승인...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-22T07:32:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/076/0004468677"
+    },
+    {
+     "title": "수원 현대건설, 흥국생명 4연패 빠뜨리고 첫 연승",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-22T07:26:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/666/0000133232"
+    },
+    {
+     "title": "[AI상보] '블로킹 14개' 현대건설, 흥국생명 3-0 완파...조던 18점·메가...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-22T07:05:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261122000098"
     }
    ]
   },
@@ -111,139 +209,75 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 4,
-   "press": 10,
-   "firstArticleAt": "2026-11-22T06:06:00.000Z",
+   "articles90": 11,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-22T06:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“트럼프, 한국전쟁 종전선언까지 준비했는데”…北 김정은 만남 무산된...",
+     "press": "nownews.seoul.co.kr",
+     "publishedAt": "2026-11-22T07:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701863?sid=104"
+    },
+    {
+     "title": "\"트럼프, 북미회담 추진했지만, 북한 수용 불가 조건에 무산\"",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-22T07:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000521885?sid=104"
+    },
     {
      "title": "\"트럼프, 김정은 회담 막판 추진했지만…北 조건에 무산\"",
      "press": "news.einfomax.co.kr",
      "publishedAt": "2026-11-22T07:14:00.000Z",
      "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445895"
-    },
-    {
-     "title": "\"트럼프, 북미 정상회담 추진했지만…北 조건에 무산\"",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-22T07:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000193206?sid=104"
-    },
-    {
-     "title": "北, 트럼프 편지 뜯지도 않고 던져…무리한 요구에 북미회담 무산",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-22T07:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413743?sid=104"
     }
    ]
   },
   {
    "keyword": "김정은",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-22T06:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"트럼프, 김정은 회담 막판 추진했지만…北 조건에 무산\"",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-22T07:14:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445895"
-    },
-    {
-     "title": "WSJ \"트럼프, 北 김정은과 정상회담 무산…북한 측 조건에 협상 결렬\"",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-22T07:10:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903955"
-    },
-    {
-     "title": "\"트럼프 편지, 北이 뜯지도 않고 던졌다\"... WSJ \"김정은 만나려 6.25 종...",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-22T06:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967038?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "김재열 ISU 회장 월드투어 한국 개최",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-22T06:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "ISU, 쇼트트랙 월드투어 확대…한국 개최 정례화도 추진",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-22T07:23:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/422/0000928729"
-    },
-    {
-     "title": "[현장인터뷰] \"선수들에게 얼마나 돌려줄 수 있을까\" 김재열 회장이 고...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-22T07:06:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/076/0004468672"
-    },
-    {
-     "title": "김재열 ISU 회장 \"쇼트트랙 월드투어, 새 시즌 8개 대회로 확대\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-22T06:52:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/052/0002436417"
-    }
-   ]
-  },
-  {
-   "keyword": "해저",
-   "sources": [
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 5,
-   "press": 7,
+   "articles90": 10,
+   "recent20": 3,
+   "press": 10,
    "firstArticleAt": "2026-11-22T06:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] 해경 \"해저에서 해광호 선체 발견…수색 닷새 만\"",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-22T07:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012298797?sid=004"
+     "title": "“트럼프, 한국전쟁 종전선언까지 준비했는데”…北 김정은 만남 무산된...",
+     "press": "nownews.seoul.co.kr",
+     "publishedAt": "2026-11-22T07:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701863?sid=104"
     },
     {
-     "title": "실종 해광호, 태안 해저 52m서 침몰 확인…선원 7명은 아직 확인 중",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T07:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009303541?sid=102"
+     "title": "“미, 트럼프-김정은 회담 전 종전선언 검토…북 ‘무리한 조건’에 무...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-22T07:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484223?sid=100"
     },
     {
-     "title": "해경 \"해저서 해광호 선체 발견\"…수색 닷새째만",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-22T07:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016456747?sid=102"
+     "title": "김정은, ‘트럼프 친서’ 봉투도 안 뜯고 던졌다",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-22T07:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701862?sid=104"
     }
    ]
   },
   {
    "keyword": "외교",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-22T06:05:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-22T06:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -268,44 +302,12 @@
    ]
   },
   {
-   "keyword": "이재명 해외 순방",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T06:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령 \"돼지 눈에는 돼지만\"…순방 비판에 \"놀러 가는 걸로 보이나\"",
-     "press": "weekly.chosun.com",
-     "publishedAt": "2026-11-22T07:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/053/0000063262?sid=100"
-    },
-    {
-     "title": "또 \"돼지 눈엔 돼지만\"…이 대통령, '해외순방 비판' 반박",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-22T07:14:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321371&inflow=N"
-    },
-    {
-     "title": "靑, 대통령 순방 비판하는 국힘에 \"시야 넓혀 보라\" 반박",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-22T06:48:00.000Z",
-     "link": "https://www.insight.co.kr/news/583080"
-    }
-   ]
-  },
-  {
    "keyword": "대구fc",
    "sources": [
     "google"
    ],
    "articles90": 6,
-   "recent20": 3,
+   "recent20": 1,
    "press": 5,
    "firstArticleAt": "2026-11-22T06:18:00.000Z",
    "exclusive": false,
@@ -330,14 +332,148 @@
      "link": "https://m.sports.naver.com/kfootball/article/088/0001041628"
     }
    ]
+  },
+  {
+   "keyword": "수능 가채점 설명회",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T06:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "수능 후 첫 주말 입시설명회 북적…입시 변수·부정행위 우려 속 ‘할 수...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-22T07:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484222?sid=102"
+    },
+    {
+     "title": "[포토] 강북청솔학원, ‘2027 수능 가채점 설명회’",
+     "press": "segye.com",
+     "publishedAt": "2026-11-22T07:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177139?sid=102"
+    },
+    {
+     "title": "[포토]청솔학원, 2027학년도 대학수학능력시험 가채점 분석 설명회 열어",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-22T06:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413730?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "이스라엘",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T06:38:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美·이스라엘 강경파,“이란 전쟁 더 끌어선 안돼”…트럼프 “이란과 ...",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-22T07:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001886665?sid=104"
+    },
+    {
+     "title": "반환점 돈 이스라엘 연정 협상…야권, ‘아랍계 연대’ 놓고 분열",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-22T07:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002833365?sid=104"
+    },
+    {
+     "title": "‘군사작전 중에도 학살 성립’… 미얀마 첫 유죄에 긴장하는 이스라엘",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-22T06:38:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261122010008443"
+    }
+   ]
+  },
+  {
+   "keyword": "마이너스 통장",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T06:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[ST PICK]5대 은행 마이너스통장 연체액 68% 늘어…증가분 69%는 40·50대",
+     "press": "smarttimes.co.kr",
+     "publishedAt": "2026-11-22T07:32:00.000Z",
+     "link": "http://www.smarttimes.co.kr/news/articleView.html?idxno=50782"
+    },
+    {
+     "title": "이자 뛰고 주가 꺾이자...40대 '마이너스통장' 연체 82% 폭증",
+     "press": "jibs.co.kr",
+     "publishedAt": "2026-11-22T06:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/661/0000086910?sid=100"
+    },
+    {
+     "title": "마이너스통장 연체액 급증…40대 82%↑",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-22T06:14:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=885891"
+    }
+   ]
+  },
+  {
+   "keyword": "1251회 로또 당첨 번호",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T06:09:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "로또 2등 10장, 서울 중구 한곳서 쏟아져…“한사람이면 5억 대박”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-22T07:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002726750?sid=101"
+    },
+    {
+     "title": "로또 2등, 한 판매점서 10장 ‘무더기 당첨’…동일인이면 5억원",
+     "press": "donga.com",
+     "publishedAt": "2026-11-22T06:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764188?sid=102"
+    },
+    {
+     "title": "로또2등 10장, 한 곳서 무더기 당첨…동일인이면 5억 대박",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-22T06:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000652641?sid=102"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1021,
-  "matched": 587,
-  "avgLeadMin": 638,
+  "flagged": 1026,
+  "matched": 588,
+  "avgLeadMin": 636,
   "recent": [
+   {
+    "keyword": "성균관대 수리논술 출제 오류",
+    "hitKeyword": "성균관대 수리논술 정정",
+    "hitAt": "2026-11-22T16:30:00+09:00",
+    "leadMin": 14
+   },
    {
     "keyword": "갤럭시 AI 클래스 도입",
     "hitKeyword": "불법사채 심사 AI 도입",
@@ -391,12 +527,6 @@
     "hitKeyword": "트리플스타 재혼",
     "hitAt": "2026-11-22T15:00:00+09:00",
     "leadMin": 296
-   },
-   {
-    "keyword": "김유정 박진영 빗속 입맞춤",
-    "hitKeyword": "100일의 거짓말 김유정",
-    "hitAt": "2026-11-22T15:00:00+09:00",
-    "leadMin": 205
    }
   ]
  }
