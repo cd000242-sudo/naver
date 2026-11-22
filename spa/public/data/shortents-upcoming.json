@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T11:07:46.882Z",
+ "builtAt": "2026-11-22T11:17:50.166Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,38 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "한전 개인정보 유출",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "daum"
    ],
-   "articles90": 53,
-   "recent20": 10,
-   "press": 51,
-   "firstArticleAt": "2026-11-22T09:38:00.000Z",
+   "articles90": 51,
+   "recent20": 8,
+   "press": 49,
+   "firstArticleAt": "2026-11-22T09:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한전, 152만여명 정보 탈탈…이름·주소에 주민·전화번호까지",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-22T11:00:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086350"
+     "title": "한전, 고객 주민번호 등 개인정보 150만건 유출",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-22T11:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928776?sid=101"
     },
     {
-     "title": "한전, 주민번호·카드번호 등 150만명 개인정보 유출…대국민 사과",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-22T11:00:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445905"
+     "title": "한전서 고객 개인정보 유출…주민·계좌번호도 포함",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-22T11:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979367?sid=101"
     },
     {
-     "title": "한전, '한전ON'·조달망 뚫려 개인정보 152만여건 유출... 주민번호·카...",
-     "press": "boannews.com",
-     "publishedAt": "2026-11-22T10:58:00.000Z",
-     "link": "https://www.boannews.com/news/articleView.html?idxno=147429"
+     "title": "한전 152만명 개인정보 유출…계좌·카드번호도 털려",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-22T11:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001165198?sid=101"
     }
    ]
   },
@@ -48,30 +49,62 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 51,
-   "recent20": 9,
-   "press": 48,
-   "firstArticleAt": "2026-11-22T09:38:00.000Z",
+   "articles90": 45,
+   "recent20": 8,
+   "press": 41,
+   "firstArticleAt": "2026-11-22T09:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "정부, 미국발 증시 충격에 대응 수위 높여...증안펀드·자사주 매수 규...",
-     "press": "consumernews.co.kr",
-     "publishedAt": "2026-11-22T11:04:00.000Z",
-     "link": "http://www.consumernews.co.kr/news/articleView.html?idxno=768831"
+     "title": "정부, 증안펀드 가동 채비…자사주 매입 규제도 3개월 완화",
+     "press": "newsinside.kr",
+     "publishedAt": "2026-11-22T11:12:00.000Z",
+     "link": "https://www.newsinside.kr/news/articleView.html?idxno=5054131"
     },
     {
-     "title": "몰락하는 韓증시에 '최후 방파제' 증안펀드 준비…18년 만에 재가동 되...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T11:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014338391?sid=101"
+     "title": "\"18년 만에 증안펀드 투입 준비\"…정부, 긴급 시장점검 회의",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-22T11:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001165199?sid=101"
     },
     {
-     "title": "F4 긴급 소집…증안펀드 준비·자사주 풀고 공매도 조인다",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-22T11:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394565?sid=101"
+     "title": "“내일 블랙먼데이 막자”…정부, 증안펀드 18년만에 투입 준비",
+     "press": "donga.com",
+     "publishedAt": "2026-11-22T11:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764227?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "수능 부정행위",
+   "sources": [
+    "google"
+   ],
+   "articles90": 35,
+   "recent20": 10,
+   "press": 26,
+   "firstArticleAt": "2026-11-22T09:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이 대통령, 최교진 면직 재가…수능 혼선에 퇴진",
+     "press": "4th.kr",
+     "publishedAt": "2026-11-22T11:16:00.000Z",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2122406"
+    },
+    {
+     "title": "10분 만에 푼 국영수 '만점'…\"지금의 수능, 더는 안돼\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-22T11:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001404936?sid=102"
+    },
+    {
+     "title": "[참성단] 세계에 경종 울린 한국 수능 대소동",
+     "press": "kyeongin.com",
+     "publishedAt": "2026-11-22T11:10:00.000Z",
+     "link": "https://www.kyeongin.com/article/1775222"
     }
    ]
   },
@@ -80,63 +113,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 23,
-   "recent20": 8,
-   "press": 19,
+   "articles90": 28,
+   "recent20": 9,
+   "press": 24,
    "firstArticleAt": "2026-11-22T10:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이재명 대통령, 최교진 교육장관 전격 경질…수능 혼란에 문책 인사",
-     "press": "the-today.com",
-     "publishedAt": "2026-11-22T11:06:00.000Z",
-     "link": "https://www.the-today.com/news/articleView.html?idxno=93948"
+     "title": "이 대통령, 최교진 면직 재가…수능 혼선에 퇴진",
+     "press": "4th.kr",
+     "publishedAt": "2026-11-22T11:16:00.000Z",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2122406"
     },
     {
-     "title": "수능 대혼란에 \"책임 통감\"…최교진 교육장관 사퇴",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-22T11:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404933?sid=102"
+     "title": "李대통령, 교육장관 사의 즉각 수락…‘사실상 경질’",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-22T11:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002834589?sid=100"
     },
     {
-     "title": "최교진 면직안 재가…與 \"전문성 갖춘 후임 선임\" vs 野 \"대통령 책임져...",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-22T11:04:00.000Z",
-     "link": "https://www.ajunews.com/view/20261122190515382"
-    }
-   ]
-  },
-  {
-   "keyword": "남자 5000M 계주 금메달",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 12,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-22T09:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한국 남자 쇼트트랙, 월드투어 5000m 계주 금메달 [뉴시스Pic]",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T10:44:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/003/0014338387"
-    },
-    {
-     "title": "후배 쓴소리도 반갑다…쇼트트랙 남자계주, 단합으로 만든 금빛 질주",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-22T10:34:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/003/0014338384"
-    },
-    {
-     "title": "'도핑 논란' 딛고 계주 金 임종언 \"경기에만 집중…후회 없이 기쁘다\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T10:26:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/421/0009303684"
+     "title": "이 대통령, 최교진 면직안 재가…사의 수락 7시간 만에 사실상 경질",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-22T11:12:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=730539"
     }
    ]
   },
@@ -145,10 +145,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 3,
-   "press": 7,
-   "firstArticleAt": "2026-11-22T09:46:00.000Z",
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-22T10:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -169,6 +169,39 @@
      "press": "enews.imbc.com",
      "publishedAt": "2026-11-22T10:50:00.000Z",
      "link": "https://m.entertain.naver.com/article/408/0000328742"
+    }
+   ]
+  },
+  {
+   "keyword": "남자 5000M 계주 금메달",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-22T09:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘축제의 장’ 된 쇼트트랙 월드투어…韓, 남자 계주 극적 금메달로 올...",
+     "press": "donga.com",
+     "publishedAt": "2026-11-22T11:07:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/020/0003764226"
+    },
+    {
+     "title": "한국 남자 쇼트트랙, 월드투어 5000m 계주 금메달 [뉴시스Pic]",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T10:44:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/003/0014338387"
+    },
+    {
+     "title": "후배 쓴소리도 반갑다…쇼트트랙 남자계주, 단합으로 만든 금빛 질주",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T10:34:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/003/0014338384"
     }
    ]
   },
@@ -205,34 +238,34 @@
    ]
   },
   {
-   "keyword": "박연수 송종국 이혼 아픔",
+   "keyword": "김가은 딸 임신 소식",
    "sources": [
-    "daum"
+    "nate"
    ],
    "articles90": 4,
-   "recent20": 0,
+   "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-22T10:01:00.000Z",
+   "firstArticleAt": "2026-11-22T10:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "박연수, ‘송종국과 이혼’ 후 심경 고백 “12년간 아픔과 상처로 괴로...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-22T10:43:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001151138"
-    },
-    {
-     "title": "박연수, 송종국과 이혼 그 후.. \"아픔과 상처들로 괴로웠던 12년\" [RE:스타...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-22T10:42:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409191"
-    },
-    {
-     "title": "‘송종국과 이혼’ 박연수, 12년간 아픔 털어놨다… “상처로 괴로웠다...",
+     "title": "‘10년 열애’ 윤선우♥김가은, 2세 성별은 딸… “여보랑 똑같이 생기...",
      "press": "isplus.com",
-     "publishedAt": "2026-11-22T10:22:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003542969"
+     "publishedAt": "2026-11-22T11:13:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003542975"
+    },
+    {
+     "title": "'윤선우♥' 김가은, 2세는 딸이었다 \"공주 둘 괜찮아?\"[셀럽캡처]",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-22T10:40:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1795343249531361006"
+    },
+    {
+     "title": "김가은♥윤선우, 2세는 딸이었다⋯“나는 딸내미 아빠” 노래까지",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-22T10:36:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2651371"
     }
    ]
   },
@@ -268,43 +301,11 @@
      "link": "https://m.entertain.naver.com/article/009/0005767329"
     }
    ]
-  },
-  {
-   "keyword": "김가은 딸 임신 소식",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T10:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'윤선우♥' 김가은, 2세는 딸이었다 \"공주 둘 괜찮아?\"[셀럽캡처]",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-22T10:40:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1795343249531361006"
-    },
-    {
-     "title": "김가은♥윤선우, 2세는 딸이었다⋯“나는 딸내미 아빠” 노래까지",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-22T10:36:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2651371"
-    },
-    {
-     "title": "윤선우 김가은 2세 성별 공개… 두 사람 환호성 터졌다",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-22T10:10:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1176742"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1076,
+  "flagged": 1077,
   "matched": 612,
   "avgLeadMin": 615,
   "recent": [
