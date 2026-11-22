@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T00:54:04.147Z",
+ "builtAt": "2026-11-22T01:04:09.139Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,126 +15,62 @@
    "sources": [
     "nate"
    ],
-   "articles90": 54,
-   "recent20": 5,
-   "press": 54,
+   "articles90": 56,
+   "recent20": 6,
+   "press": 55,
    "firstArticleAt": "2026-11-22T00:00:00.000Z",
-   "exclusive": false,
+   "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "LGU+, AI 사업 중심으로 조직 재편…인프라·플랫폼 이원화",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-22T01:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002249475?sid=101"
+    },
+    {
+     "title": "[단독] LGU+, '모두의AI' 전담 TF 꾸린다…기존 조직 AI 중심 재배치",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-22T01:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002249474?sid=101"
+    },
     {
      "title": "LG유플러스, 2027년 조직개편 단행…AI 사업 강화·기술 역량 통합",
      "press": "dailysmart.co.kr",
      "publishedAt": "2026-11-22T00:52:00.000Z",
      "link": "http://www.dailysmart.co.kr/news/articleView.html?idxno=132917"
-    },
-    {
-     "title": "LG유플러스, 내년 조직개편…AI 사업 중심으로 판 바꾼다",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-22T00:50:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=783761"
-    },
-    {
-     "title": "LG유플러스, 2027년 조직개편 단행…\"AI· 통신 두 마리 토끼 잡겠다\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-22T00:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005444520?sid=105"
     }
    ]
   },
   {
-   "keyword": "주거 안전용품 지원",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 33,
-   "recent20": 3,
-   "press": 29,
-   "firstArticleAt": "2026-11-21T23:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"누구도 소외되지 않게\" 하나금융, 독거 어르신 가정에 안전용품 설치…...",
-     "press": "getnews.co.kr",
-     "publishedAt": "2026-11-22T00:52:00.000Z",
-     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=887997"
-    },
-    {
-     "title": "하나금융그룹, 취약계층 어르신 1000명 맞춤형 생활지원",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-22T00:50:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629184"
-    },
-    {
-     "title": "하나금융, 취약계층 어르신 1000명에 주거 안전용품·보행기 지원",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T00:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009303085?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "굿파트너 2",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 22,
-   "recent20": 2,
-   "press": 20,
-   "firstArticleAt": "2026-11-21T23:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "장나라X김혜윤, 손잡자마자 터졌다…‘굿파트너2’ 2회 만에 최고 10% 돌...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-22T00:43:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005643869"
-    },
-    {
-     "title": "‘굿파트너2’ 시청률 7.7%, 동시간대 1위 수성",
-     "press": "enter.etoday.co.kr",
-     "publishedAt": "2026-11-22T00:42:00.000Z",
-     "link": "https://enter.etoday.co.kr/news/view/305589"
-    },
-    {
-     "title": "김동규, '굿파트너2'서 빛났다! '강렬 인상' 선사",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-22T00:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/030/0003488184"
-    }
-   ]
-  },
-  {
-   "keyword": "김유정 박진영 빗속 입맞춤",
+   "keyword": "최태원 AI 인재 공동 육성",
    "sources": [
     "nate"
    ],
-   "articles90": 17,
-   "recent20": 1,
-   "press": 17,
-   "firstArticleAt": "2026-11-21T23:30:00.000Z",
+   "articles90": 23,
+   "recent20": 3,
+   "press": 23,
+   "firstArticleAt": "2026-11-21T23:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'100일의 거짓말' 13회 최고 시청률 12.5% 돌파… 김유정·박진영 빗속 ...",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-22T00:44:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3759316"
+     "title": "최태원 “한일 기업·대학, AI 인재 함께 키워 일자리까지 잇자”",
+     "press": "segyebiz.com",
+     "publishedAt": "2026-11-22T00:54:00.000Z",
+     "link": "http://www.segyebiz.com/newsView/20261122503176?OutUrl=naver"
     },
     {
-     "title": "김유정♥박진영, 눈물의 빗속 키스에도…시청률 '10.4%→10.0%' 소폭 하락...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-22T00:31:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000785560"
+     "title": "최태원 \"AI시대, 대학 교육 재설계해야\"…한일 인재 공동 육성 제안",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-22T00:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009303089?sid=101"
     },
     {
-     "title": "빗속 입맞춤→극적 반격…'100일의 거짓말', 동시간대 '1위'",
+     "title": "최태원 SK그룹 회장, “AI 시대 인재, 대학과 기업이 함께 키워야”",
      "press": "etnews.com",
-     "publishedAt": "2026-11-22T00:29:00.000Z",
-     "link": "https://m.entertain.naver.com/article/030/0003488179"
+     "publishedAt": "2026-11-22T00:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003488192?sid=101"
     }
    ]
   },
@@ -144,7 +80,7 @@
     "signal.bz"
    ],
    "articles90": 14,
-   "recent20": 3,
+   "recent20": 2,
    "press": 14,
    "firstArticleAt": "2026-11-22T00:00:00.000Z",
    "exclusive": false,
@@ -171,79 +107,110 @@
    ]
   },
   {
-   "keyword": "경부선 일반열차 정상운행",
+   "keyword": "하나금융, 어르신 주거 안전 지원",
    "sources": [
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 3,
-   "press": 12,
-   "firstArticleAt": "2026-11-21T23:26:00.000Z",
+   "articles90": 11,
+   "recent20": 4,
+   "press": 11,
+   "firstArticleAt": "2026-11-21T23:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "경부선 화물열차 탈선 하루 만에 운행 재개...코레일, 180명 투입해 복구",
+     "title": "하나금융, 취약층 어르신 1000명 '안전용품·보행기' 지원",
+     "press": "straightnews.co.kr",
+     "publishedAt": "2026-11-22T01:02:00.000Z",
+     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=315900"
+    },
+    {
+     "title": "\"누구도 소외되지 않게\" 하나금융, 독거 어르신 가정에 안전용품 설치…...",
      "press": "getnews.co.kr",
+     "publishedAt": "2026-11-22T00:52:00.000Z",
+     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=887997"
+    },
+    {
+     "title": "하나금융그룹, 취약계층 어르신 1000명 맞춤형 생활지원",
+     "press": "cbci.co.kr",
      "publishedAt": "2026-11-22T00:50:00.000Z",
-     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=887996"
-    },
-    {
-     "title": "'열차 탈선' 경부선, 오늘 첫차부터 정상 운행",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-22T00:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436303?sid=102"
-    },
-    {
-     "title": "코레일 \"화물열차 탈선 하루 만에 경부선 일반열차 운행 정상화\"",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-22T00:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005607710?sid=102"
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629184"
     }
    ]
   },
   {
    "keyword": "수험",
    "sources": [
-    "signal.bz",
     "google"
    ],
    "articles90": 11,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-21T23:26:00.000Z",
+   "recent20": 4,
+   "press": 10,
+   "firstArticleAt": "2026-11-21T23:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "성수동에 뜬 ‘미미미누 버거 트럭’…무신사, 수험생에 최대 200만원 쏜...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-22T01:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/117/0004127084?sid=103"
+    },
+    {
+     "title": "블랙코미디 연극 '죽여주는 이야기, 수능 수험표 소지자 할인",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T00:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014337761?sid=103"
+    },
     {
      "title": "수능 끝낸 수험생, 이젠 문제집 대신 ‘이책’ 어때요?… 신간 ‘감정을...",
      "press": "munhwa.com",
      "publishedAt": "2026-11-22T00:52:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/021/0002834527?sid=103"
-    },
-    {
-     "title": "“‘이 사진’ 보내주세요”…김선태, 수험생들에 치킨 1000마리 쏜다 [이...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-22T00:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701800?sid=102"
-    },
-    {
-     "title": "무신사, ‘무진장’ 개막 앞두고 성수서 수험생 대상 ‘버거 트럭’ 운...",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-22T00:40:00.000Z",
-     "link": "https://www.viva100.com/article/20261122500190"
     }
    ]
   },
   {
-   "keyword": "트리플스타 강승원 발표",
+   "keyword": "경찰 관계성범죄 국민참여단",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 9,
+   "recent20": 0,
+   "press": 9,
+   "firstArticleAt": "2026-11-22T00:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "관계성 범죄 경찰 개입 어디까지?‥경찰, 국민 참여 토론 개최",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-22T00:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537184?sid=102"
+    },
+    {
+     "title": "관계성범죄 대응책에 국민 의견 반영…경찰, 국민참여단 개최",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-22T00:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413581?sid=102"
+    },
+    {
+     "title": "관계성 범죄에 경찰 개입 어디까지?...국민 참여 토론",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-22T00:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436277?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "흑백요리사 트리플스타 발표",
    "sources": [
     "nate"
    ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-21T23:29:00.000Z",
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-22T00:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -268,103 +235,39 @@
    ]
   },
   {
-   "keyword": "경찰 관계성범죄 국민참여단",
+   "keyword": "부동산",
    "sources": [
-    "signal.bz"
+    "google"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-22T00:00:00.000Z",
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-21T23:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "관계성 범죄 경찰 개입 어디까지?‥경찰, 국민 참여 토론 개최",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-22T00:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001537184?sid=102"
+     "title": "\"내 건물, 전문가에게 직접 물어본다\"…소수 한정 부동산 세미나",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-22T01:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005356655?sid=101"
     },
     {
-     "title": "관계성범죄 대응책에 국민 의견 반영…경찰, 국민참여단 개최",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-22T00:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413581?sid=102"
+     "title": "[부동산 포커스] 강남서 터진 '재초환 폭탄'…수도권·지방까지 덮쳤다",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-22T00:58:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=506672"
     },
     {
-     "title": "경찰, 관계성범죄 개입 기준 국민과 논의…숙의 절차 도입",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-22T00:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004684719?sid=102"
+     "title": "경기도, “전세사기 예방 ‘경기 안심 부동산’에 참여하세요!”",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-22T00:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003701798?sid=102"
     }
    ]
   },
   {
-   "keyword": "어린이집 운영 입소",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-22T00:00:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "영아 수요 급증 지역, 어린이집 유아반 중단 허용…영아반 확대",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-22T00:46:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626847"
-    },
-    {
-     "title": "신도시 어린이집, 영아반만 운영 가능… 입소 대기 줄인다",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-22T00:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001206432?sid=102"
-    },
-    {
-     "title": "신도시 어린이집 '영아반만 운영' 허용⋯입소 대기 완화 기대",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-22T00:06:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2651257"
-    }
-   ]
-  },
-  {
-   "keyword": "EU 빅테크 디지털세",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-21T23:25:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "트럼프 레임덕 빠지자... EU, 빅테크 겨냥 '매출 3%' 디지털세 추진",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-22T00:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000966977?sid=104"
-    },
-    {
-     "title": "EU, 美빅테크 겨냥 디지털稅 제안…트럼프와 갈등 예고",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-22T00:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413585?sid=101"
-    },
-    {
-     "title": "EU, 빅테크 디지털세 공식 제안…美 충돌 불가피",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-22T00:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928601?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "음악실 방화 20대 징역 2년",
+   "keyword": "초등학교 방화 20대 징역 2년",
    "sources": [
     "nate"
    ],
@@ -396,41 +299,9 @@
    ]
   },
   {
-   "keyword": "부동산",
+   "keyword": "고경표 핑계고 논란",
    "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-21T23:44:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "경기도, “전세사기 예방 ‘경기 안심 부동산’에 참여하세요!”",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-22T00:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003701798?sid=102"
-    },
-    {
-     "title": "경기도, 전세사기 예방 '경기 안심 부동산' 참여 중개사 확대 추진",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T00:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009303073?sid=102"
-    },
-    {
-     "title": "경기도, 전세사기 예방 ‘경기 안심 부동산’ 참여 공인중개사 인증 스...",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-22T00:16:00.000Z",
-     "link": "http://www.breaknews.com/1252893"
-    }
-   ]
-  },
-  {
-   "keyword": "유연석 변사체 충격",
-   "sources": [
-    "signal.bz"
+    "nate"
    ],
    "articles90": 4,
    "recent20": 1,
@@ -440,32 +311,70 @@
    "capped": false,
    "samples": [
     {
-     "title": "'성범죄자' 유연석 사망엔딩 '충격'→최대훈 첫등장…'라이어' 8회의 파...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-22T00:53:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000640266"
-    },
-    {
-     "title": "'라이어' 유연석, 사망 엔딩→최대훈 등장…분당 최고 시청률 5.1%",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-22T00:06:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110032734833"
-    },
-    {
-     "title": "‘라이어’ 유연석, 男주인공인데 8회 만에 충격 사망…서현진, 악행 폭...",
+     "title": "면허취소 수준 음주운전 8일 만에…고경표, ‘핑계고’ 시상식 후보 ‘...",
      "press": "sportsworldi.com",
-     "publishedAt": "2026-11-21T23:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/396/0000761567"
+     "publishedAt": "2026-11-22T00:57:00.000Z",
+     "link": "https://m.entertain.naver.com/article/396/0000761575"
+    },
+    {
+     "title": "'음주운전' 고경표, '핑계고' 시상식 후보…적절성 논란",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T00:43:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014337740"
+    },
+    {
+     "title": "고경표 음주운전 자숙 선언에도..'핑계고', 시상식 후보 이름 올렸다 [스...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-22T00:21:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003489251"
+    }
+   ]
+  },
+  {
+   "keyword": "삼전 닉스",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T00:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"삼전닉스, 내년에도 웃는다\"…무디스 전망에 개미들 '솔깃'",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-22T00:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005845975?sid=101"
+    },
+    {
+     "title": "삼전닉스, 3분기 배당성향 큰 폭 상승…상반기 대비 4.4배·21배",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-22T00:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001206436?sid=101"
+    },
+    {
+     "title": "[기획] 외국인 매도 85% '삼전닉스'…수급 돌아올까",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-22T00:16:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2021665"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 912,
-  "matched": 538,
-  "avgLeadMin": 618,
+  "flagged": 918,
+  "matched": 539,
+  "avgLeadMin": 617,
   "recent": [
+   {
+    "keyword": "김유정 박진영 빗속 입맞춤",
+    "hitKeyword": "100일의 거짓말 김유정",
+    "hitAt": "2026-11-22T10:00:00+09:00",
+    "leadMin": 16
+   },
    {
     "keyword": "lpga",
     "hitKeyword": "김아림 LPGA 선두",
@@ -519,12 +428,6 @@
     "hitKeyword": "한은 금리 인상 재개",
     "hitAt": "2026-11-22T07:30:00+09:00",
     "leadMin": 4339
-   },
-   {
-    "keyword": "트럼프 한반도 논의",
-    "hitKeyword": "트럼프 이란 핵무기 합의",
-    "hitAt": "2026-11-22T07:00:00+09:00",
-    "leadMin": 651
    }
   ]
  }
