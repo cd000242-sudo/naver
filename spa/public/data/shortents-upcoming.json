@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T22:41:23.570Z",
+ "builtAt": "2026-11-22T22:51:26.937Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,14 +11,46 @@
  "measured": 24,
  "candidates": [
   {
+   "keyword": "날씨",
+   "sources": [
+    "google"
+   ],
+   "articles90": 19,
+   "recent20": 3,
+   "press": 16,
+   "firstArticleAt": "2026-11-22T21:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[날씨] 전국 대부분 비·눈‥강원 내륙·산지 많은 눈",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-22T22:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537319?sid=103"
+    },
+    {
+     "title": "[공항날씨] 여수공항 순간풍속 35kt…전국 공항 7곳 이틀간 강풍·급변풍...",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-22T22:42:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886797"
+    },
+    {
+     "title": "[오늘날씨] 강원 최대 8cm 눈·서울 30mm 비…출근길 '어는 비' 빙판 주의",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-22T22:38:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886796"
+    }
+   ]
+  },
+  {
    "keyword": "전국 비 눈 출근길",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 16,
-   "recent20": 6,
-   "press": 14,
-   "firstArticleAt": "2026-11-22T21:18:00.000Z",
+   "articles90": 15,
+   "recent20": 3,
+   "press": 13,
+   "firstArticleAt": "2026-11-22T21:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -47,10 +79,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 2,
-   "press": 14,
-   "firstArticleAt": "2026-11-22T21:16:00.000Z",
+   "articles90": 13,
+   "recent20": 1,
+   "press": 13,
+   "firstArticleAt": "2026-11-22T21:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -80,7 +112,7 @@
     "nate"
    ],
    "articles90": 9,
-   "recent20": 4,
+   "recent20": 2,
    "press": 8,
    "firstArticleAt": "2026-11-22T21:45:00.000Z",
    "exclusive": false,
@@ -107,49 +139,23 @@
    ]
   },
   {
-   "keyword": "아틀레티코 헤타페 승리",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-22T21:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이강인, 헤타페전 45분 출전...킬 패스로 PK 유도→3-0 완승 기여",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-22T22:24:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/241/0003543004"
-    },
-    {
-     "title": "이강인 '교체 출전' 아틀레티코, 헤타페에 3:0 완승",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-22T22:19:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/055/0001404984"
-    },
-    {
-     "title": "이강인 45분 활약, 아틀레티코 헤타페 3-0 완파…라리가 3위 유지",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-22T22:16:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283295"
-    }
-   ]
-  },
-  {
    "keyword": "조희대 탄핵 논란이다",
    "sources": [
     "nate"
    ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
    "firstArticleAt": "2026-11-22T21:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "조희대 탄핵 나선 민주당… 동아 \"이재명 대통령이 제동 걸어야\"",
+     "press": "mediatoday.co.kr",
+     "publishedAt": "2026-11-22T22:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/006/0000138891?sid=102"
+    },
     {
      "title": "내란 인정·한덕수 일부 책임 부정한 '조희대' 대법원...민주당 '탄핵' ...",
      "press": "newswhoplus.com",
@@ -161,44 +167,6 @@
      "press": "mbn.co.kr",
      "publishedAt": "2026-11-22T22:23:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/057/0001979377?sid=100"
-    },
-    {
-     "title": "조희대 탄핵 결정한 민주당, 최선의 시나리오는?",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-22T22:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002536809?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "미국 민주당 거대 야당",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T21:19:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美 민주당, 하원 최소 258석 확보…트럼프 견제할 거대 야당 탄생",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-22T22:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000161958?sid=104"
-    },
-    {
-     "title": "美 민주당, 하원 258석 확보… 클린턴 이후 34년 만의 최대",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-22T21:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967122?sid=104"
-    },
-    {
-     "title": "“트럼프 견제할 거대 야당 탄생”…美민주, 하원 34년 만에 최대 의석...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-22T21:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002726810?sid=104"
     }
    ]
   },
@@ -207,13 +175,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 4,
+   "articles90": 7,
+   "recent20": 1,
+   "press": 5,
    "firstArticleAt": "2026-11-22T21:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[오늘의 운세] 11월 23일 月(음력 10월 15일) 띠별 운세",
+     "press": "fntimes.com",
+     "publishedAt": "2026-11-22T22:42:00.000Z",
+     "link": "https://www.fntimes.com/html/view.php?ud=202611230740337720c1c16452b0_18"
+    },
     {
      "title": "오늘의 MBTI 운세 11월 23일 월요일",
      "press": "vegannews.co.kr",
@@ -225,12 +199,6 @@
      "press": "vegannews.co.kr",
      "publishedAt": "2026-11-22T22:00:00.000Z",
      "link": "https://www.vegannews.co.kr/news/article.html?no=409651"
-    },
-    {
-     "title": "[오늘의 운세] 띠별 운세 11월 23일",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-22T21:58:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=409650"
     }
    ]
   },
@@ -265,13 +233,109 @@
      "link": "https://n.news.naver.com/mnews/article/421/0009303823?sid=100"
     }
    ]
+  },
+  {
+   "keyword": "주현영 치아 시술",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T21:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "주현영, 치아 시술 했을 뿐인데…귀여운 덧니 대신 성숙美 장착 (런닝맨...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-22T22:44:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190293"
+    },
+    {
+     "title": "주현영 맞아? 청순 여배우인 줄…건치 미소로 완성한 미모",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-22T22:28:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001282687"
+    },
+    {
+     "title": "주현영, 덧니 사라지자 단아한 미소 부각",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-22T21:52:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95688"
+    }
+   ]
+  },
+  {
+   "keyword": "미국 민주당 거대 야당",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T21:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美 민주당, 하원 최소 258석 확보…트럼프 견제할 거대 야당 탄생",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-22T22:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000161958?sid=104"
+    },
+    {
+     "title": "美 민주당, 하원 258석 확보… 클린턴 이후 34년 만의 최대",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-22T21:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000967122?sid=104"
+    },
+    {
+     "title": "“트럼프 견제할 거대 야당 탄생”…美민주, 하원 34년 만에 최대 의석...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-22T21:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002726810?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "아틀레티코 3-0 승리",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T22:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이강인 '교체 출전' 아틀레티코, 헤타페에 3:0 완승",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-22T22:19:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/055/0001404984"
+    },
+    {
+     "title": "이강인 45분 활약, 아틀레티코 헤타페 3-0 완파…라리가 3위 유지",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-22T22:16:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283295"
+    },
+    {
+     "title": "'이강인 교체 투입 후 PK 유도' 아틀레티코, 헤타페 원정 3-0 승! '바에나...",
+     "press": "footballist.co.kr",
+     "publishedAt": "2026-11-22T22:10:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/436/0000115178"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
   "flagged": 1123,
-  "matched": 629,
-  "avgLeadMin": 614,
+  "matched": 628,
+  "avgLeadMin": 615,
   "recent": [
    {
     "keyword": "한전 152만명 개인정보 유출",
