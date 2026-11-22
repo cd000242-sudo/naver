@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T16:09:26.740Z",
+ "builtAt": "2026-11-22T16:19:29.757Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,13 +15,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
    "firstArticleAt": "2026-11-22T15:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[사설] 최교진 교육부 장관 사의… 후속 입시관리 만전 기해야",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-22T16:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001886744?sid=110"
+    },
     {
      "title": "\"수능 책임 통감\" 최교진 교육부장관 사의",
      "press": "kado.net",
@@ -33,12 +39,6 @@
      "press": "ksilbo.co.kr",
      "publishedAt": "2026-11-22T15:04:00.000Z",
      "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1073279"
-    },
-    {
-     "title": "AI 부정행위가 불붙인 수능 개편론⋯“수능 수명 끝났다”",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-22T15:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001232517?sid=102"
     }
    ]
   },
