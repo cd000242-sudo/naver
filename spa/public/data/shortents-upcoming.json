@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T23:21:41.463Z",
+ "builtAt": "2026-11-22T23:31:44.697Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "날씨",
@@ -16,93 +16,29 @@
     "google"
    ],
    "articles90": 26,
-   "recent20": 10,
-   "press": 23,
-   "firstArticleAt": "2026-11-22T21:56:00.000Z",
+   "recent20": 6,
+   "press": 22,
+   "firstArticleAt": "2026-11-22T22:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[날씨] 오늘 전국 비에 강풍…강원 내륙 최대 8㎝ 많은 눈",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-22T23:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928849?sid=103"
+    },
+    {
+     "title": "[오늘날씨] 전국 곳곳 비·눈…강원 최대 8㎝ 적설",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-22T23:26:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086365"
+    },
     {
      "title": "영하권 추위에 전국 비·눈…강원 최대 8㎝ 폭설 [날씨]",
      "press": "joseilbo.com",
      "publishedAt": "2026-11-22T23:19:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/123/0002394576?sid=102"
-    },
-    {
-     "title": "[날씨] 중부 최대 30mm 비…오늘 강추위 잠시 주춤",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-22T23:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979401?sid=102"
-    },
-    {
-     "title": "[오늘 날씨] 출근길 '어는 비' 살얼음 주의…서울 아침 1도·낮 10도, 오...",
-     "press": "upkoreanews.kr",
-     "publishedAt": "2026-11-22T23:12:00.000Z",
-     "link": "https://www.upkoreanews.kr/news/articleView.html?idxno=101317"
-    }
-   ]
-  },
-  {
-   "keyword": "이강인 헤타페 3-0 승리",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 20,
-   "recent20": 4,
-   "press": 18,
-   "firstArticleAt": "2026-11-22T21:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"수비만 하는 축구로 어떻게 345승을 하겠어?\"… 이강인 스승 시메오네...",
-     "press": "besteleven.com",
-     "publishedAt": "2026-11-22T23:14:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/343/0000149202"
-    },
-    {
-     "title": "‘후반전 출전’ 이강인, 킬패스 2회에도 ‘선발 경쟁 본격화’···카...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-22T23:09:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/144/0001151200"
-    },
-    {
-     "title": "'이강인 교체 출전' AT마드리드, 헤타페에 3-0 완승",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-22T23:08:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2021844"
-    }
-   ]
-  },
-  {
-   "keyword": "김아림, 최종전 공동 7위 티띠꾼",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 19,
-   "recent20": 4,
-   "press": 17,
-   "firstArticleAt": "2026-11-22T21:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "티띠꾼, 최종전 3연패로 53억원 잭팟…상금왕·통산 상금 1위까지",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-22T23:18:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/018/0006413905"
-    },
-    {
-     "title": "[LPGA] 김아림, 시즌 최종전 공동 7위…티띠꾼 대회 3연패",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-22T23:13:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123000048"
-    },
-    {
-     "title": "'첫홀 더블보기' 김아림, 아쉬운 7위…'첫홀 이글' 티띠꾼 최종전 역전...",
-     "press": "golfhankook.hankooki.com",
-     "publishedAt": "2026-11-22T23:10:00.000Z",
-     "link": "https://golfhankook.hankooki.com/news/articleView.html?idxno=20022729"
     }
    ]
   },
@@ -111,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 18,
-   "recent20": 6,
+   "articles90": 17,
+   "recent20": 4,
    "press": 16,
-   "firstArticleAt": "2026-11-22T21:56:00.000Z",
+   "firstArticleAt": "2026-11-22T22:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "전국에 비·눈…출근길 '어는비'·강원산지 '많은 눈' 주의",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-22T23:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016457159?sid=102"
+    },
     {
      "title": "영하권 추위에 전국 비·눈…강원 최대 8㎝ 폭설 [날씨]",
      "press": "joseilbo.com",
@@ -129,12 +71,70 @@
      "press": "issuenbiz.com",
      "publishedAt": "2026-11-22T23:14:00.000Z",
      "link": "http://www.issuenbiz.com/news/articleView.html?idxno=81866"
+    }
+   ]
+  },
+  {
+   "keyword": "김아림, 최종전 공동 7위 티띠꾼",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 28,
+   "recent20": 14,
+   "press": 15,
+   "firstArticleAt": "2026-11-22T22:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "2026 CME 챔피언십 우승자 지노 티띠꾼 [포토]",
+     "press": "news.monsterzym.com",
+     "publishedAt": "2026-11-22T23:24:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/409/0000023095"
     },
     {
-     "title": "[오늘 날씨] 출근길 '어는 비' 살얼음 주의…서울 아침 1도·낮 10도, 오...",
-     "press": "upkoreanews.kr",
-     "publishedAt": "2026-11-22T23:12:00.000Z",
-     "link": "https://www.upkoreanews.kr/news/articleView.html?idxno=101317"
+     "title": "CME 우승자 지노 티띠꾼 '트로피 키스는 언제나 달콤해' [포토]",
+     "press": "news.monsterzym.com",
+     "publishedAt": "2026-11-22T23:23:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/409/0000023092"
+    },
+    {
+     "title": "CME 우승자 지노 티띠꾼 '트로피 잘 나오나요' [포토]",
+     "press": "news.monsterzym.com",
+     "publishedAt": "2026-11-22T23:23:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/409/0000023094"
+    }
+   ]
+  },
+  {
+   "keyword": "이강인 헤타페 3-0 승리",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 17,
+   "recent20": 3,
+   "press": 15,
+   "firstArticleAt": "2026-11-22T22:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'이강인 45분' AT 마드리드, 헤타페 3-0 완파하고 2연패 탈출(종합)",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-22T23:29:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/421/0009303953"
+    },
+    {
+     "title": "미쳤다! 단 45분 뛴 이강인, 킬패스로 기회창출 2회+퇴장-PK 유도! 西언론...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-22T23:22:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/076/0004468753"
+    },
+    {
+     "title": "\"수비만 하는 축구로 어떻게 345승을 하겠어?\"… 이강인 스승 시메오네...",
+     "press": "besteleven.com",
+     "publishedAt": "2026-11-22T23:14:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/343/0000149202"
     }
    ]
   },
@@ -143,10 +143,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 2,
-   "press": 14,
-   "firstArticleAt": "2026-11-22T21:59:00.000Z",
+   "articles90": 13,
+   "recent20": 0,
+   "press": 12,
+   "firstArticleAt": "2026-11-22T22:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -175,13 +175,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
+   "articles90": 11,
    "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-22T21:56:00.000Z",
+   "press": 11,
+   "firstArticleAt": "2026-11-22T22:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "남성 100만원이면 여성은 72만원…韓 임금격차 OECD 1위",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-22T23:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000161960?sid=101"
+    },
     {
      "title": "한국 남녀 임금 격차 27.8%…여전히 OECD 최대",
      "press": "mbn.mk.co.kr",
@@ -193,12 +199,6 @@
      "press": "wikitree.co.kr",
      "publishedAt": "2026-11-22T22:50:00.000Z",
      "link": "https://www.wikitree.co.kr/articles/1176817"
-    },
-    {
-     "title": "한국 남녀 임금 격차 27.8%…OECD 회원국 중 '최대'",
-     "press": "kado.net",
-     "publishedAt": "2026-11-22T22:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000212786?sid=101"
     }
    ]
   },
@@ -207,10 +207,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 24,
-   "recent20": 14,
-   "press": 11,
-   "firstArticleAt": "2026-11-22T21:56:00.000Z",
+   "articles90": 23,
+   "recent20": 0,
+   "press": 10,
+   "firstArticleAt": "2026-11-22T22:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -221,16 +221,48 @@
      "link": "https://n.news.naver.com/mnews/article/422/0000928848?sid=100"
     },
     {
-     "title": "김정은, 10개국 신임 대사들 앞에서 연설",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T23:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009303882?sid=100"
-    },
-    {
      "title": "김정은, 10개국 신임 대사들과 기념사진 '한 컷'",
      "press": "news1.kr",
      "publishedAt": "2026-11-22T23:07:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009303881?sid=100"
+    },
+    {
+     "title": "김정은, 10개국 신임 대사들 앞에서 연설",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-22T23:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009303882?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "아마존 데카르트 인수 임박",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 8,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-22T22:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "FT “아마존, 이스라엘계 AI 스타트업 10조원 인수 임박”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-22T23:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012298967?sid=104"
+    },
+    {
+     "title": "아마존, 10조원 베팅으로 '포스트 엔비디아' 승부수…이스라엘 AI칩 스타...",
+     "press": "newsroad.co.kr",
+     "publishedAt": "2026-11-22T22:58:00.000Z",
+     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68207"
+    },
+    {
+     "title": "아마존, AI 스타트업 '데카르트' 10조원에 인수 임박",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-22T22:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413884?sid=101"
     }
    ]
   },
@@ -239,10 +271,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T21:52:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-22T22:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -267,81 +299,23 @@
    ]
   },
   {
-   "keyword": "아틀레티코 3-0 승리",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T22:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이강인 후반 교체 출전, 킬패스로 PK 유도 활약…아틀레티코, 헤타페에...",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-22T23:00:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1139147"
-    },
-    {
-     "title": "이강인 킬패스 빛났다…아틀레티코 헤타페 3-0 완승",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-22T22:52:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611230057"
-    },
-    {
-     "title": "이강인 '교체 출전' 아틀레티코, 헤타페에 3:0 완승",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-22T22:19:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/055/0001404984"
-    }
-   ]
-  },
-  {
-   "keyword": "최교진 교육부 장관 면직",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T22:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이 대통령, 최교진 교육부 장관 면직안 재가…“시험 공정성 타협할 수...",
-     "press": "ibabynews.com",
-     "publishedAt": "2026-11-22T23:14:00.000Z",
-     "link": "https://www.ibabynews.com/news/articleView.html?idxno=157176"
-    },
-    {
-     "title": "이 대통령 최교진 사의 수용…수능 파문에 교육부 수장 교체, 수험생 입...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-22T22:34:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629631"
-    },
-    {
-     "title": "“AI커닝 못 잡겠다”던 교육부 수장…사실상 경질",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-22T22:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004684935?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "포체티노도 데뷔전부터 참패",
    "sources": [
     "nate"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-22T22:00:00.000Z",
+   "firstArticleAt": "2026-11-22T22:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "‘악몽의 데뷔전’ 포체티노, 리버풀에 0-4 참패···8분 만에 요로 퇴...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-22T23:23:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/144/0001151203"
+    },
     {
      "title": "'악몽의' 포체티노 데뷔전, 리버풀에 0-4 참패 … 포체티노는 '심판 탓'",
      "press": "newdaily.co.kr",
@@ -353,12 +327,6 @@
      "press": "mydaily.co.kr",
      "publishedAt": "2026-11-22T22:17:00.000Z",
      "link": "https://m.sports.naver.com/wfootball/article/117/0004127200"
-    },
-    {
-     "title": "'포체티노 데뷔전부터 폭망' 요로 광속 퇴장 속 맨유, 리버풀 원정 0-4 참...",
-     "press": "footballist.co.kr",
-     "publishedAt": "2026-11-22T22:00:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/436/0000115177"
     }
    ]
   }
@@ -366,8 +334,8 @@
  "hitRate": {
   "days": 7,
   "flagged": 1123,
-  "matched": 622,
-  "avgLeadMin": 604,
+  "matched": 621,
+  "avgLeadMin": 605,
   "recent": [
    {
     "keyword": "한전 152만명 개인정보 유출",
