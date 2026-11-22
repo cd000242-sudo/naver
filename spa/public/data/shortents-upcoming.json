@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T22:11:13.868Z",
+ "builtAt": "2026-11-22T22:21:16.803Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "트럼프 이란 공격 경고",
    "sources": [
     "daum"
    ],
-   "articles90": 20,
+   "articles90": 17,
    "recent20": 4,
-   "press": 19,
-   "firstArticleAt": "2026-11-22T20:46:00.000Z",
+   "press": 17,
+   "firstArticleAt": "2026-11-22T21:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "트럼프 “이란, 항상 말만 해”…합의 불발 땐 새해 군사공격 경고",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-22T22:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003158087?sid=104"
+     "title": "이란 전쟁 다시 확전되나…트럼프 새해 공격 경고 속 호르무즈 유조선 ...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-22T22:20:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283301"
     },
     {
-     "title": "트럼프 \"이란, 말만 하는 탭댄서\"… 합의 불발 땐 새해 추가 공격",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-22T22:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967123?sid=104"
+     "title": "트럼프 이란 추가 공격 경고…\"드론·미사일 발사 급증, 좌시하지 않겠...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-22T22:16:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629622"
     },
     {
-     "title": "트럼프 \"이란과 합의 못 하면 새해 공격\"…해상 충돌 경고",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-22T21:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000554389?sid=104"
+     "title": "\"이란, 항상 말만 해\"…트럼프, 협상 결렬시 새해 공습 시사",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-22T22:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001165220?sid=104"
     }
    ]
   },
@@ -47,62 +47,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 9,
+   "articles90": 11,
+   "recent20": 2,
+   "press": 11,
    "firstArticleAt": "2026-11-22T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "한국전력도 개인정보 152만명 유출…직원 정보 이어 고객정보까지 뚫렸...",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-22T22:18:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101779"
+    },
+    {
+     "title": "한국전력 개인정보 152만 명 유출…주민번호에 계좌·카드번호까지",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-22T22:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979373?sid=101"
+    },
+    {
      "title": "한전 개인정보 대규모 유출, 65만 명 피해자 긴급 대처 필요",
      "press": "gokorea.kr",
      "publishedAt": "2026-11-22T21:36:00.000Z",
      "link": "https://www.gokorea.kr/news/articleView.html?idxno=886785"
-    },
-    {
-     "title": "한전 개인정보 150만 건 유출…2차 피해 우려",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-22T21:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001404970?sid=101"
-    },
-    {
-     "title": "한전, 고객 등 개인정보 152만여건 유출…경찰 수사 의뢰",
-     "press": "womennews.co.kr",
-     "publishedAt": "2026-11-22T21:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/310/0000141945?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "영변 우라늄 원심분리기",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-22T20:49:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "영변에 건물 하나 더 세운 북한…핵물질 연 35㎏ 추가 생산 가능성",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-22T21:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005767361?sid=100"
-    },
-    {
-     "title": "北 영변 우라늄 농축시설 증축…“원심분리기 추가 땐 연 35㎏ 넘게 더 ...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-22T21:36:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2651386"
-    },
-    {
-     "title": "북한, 영변 핵시설 확장으로 고농축 우라늄 대량 생산 가능성 급부상",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-22T21:32:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886771"
     }
    ]
   },
@@ -113,7 +81,7 @@
     "nate"
    ],
    "articles90": 10,
-   "recent20": 4,
+   "recent20": 1,
    "press": 7,
    "firstArticleAt": "2026-11-22T21:00:00.000Z",
    "exclusive": false,
@@ -140,13 +108,110 @@
    ]
   },
   {
-   "keyword": "지스타",
+   "keyword": "영변 우라늄 원심분리기",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-22T20:53:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "영변에 건물 하나 더 세운 북한…핵물질 연 35㎏ 추가 생산 가능성",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-22T21:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005767361?sid=100"
+    },
+    {
+     "title": "北 영변 우라늄 농축시설 증축…“원심분리기 추가 땐 연 35㎏ 넘게 더 ...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-22T21:36:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2651386"
+    },
+    {
+     "title": "“北 영변 핵시설 증축…우라늄 연 35㎏ 추가 생산 가능”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-22T21:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764333?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "김정은, 10개국 신임장 접수",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T21:45:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김정은 “평화·발전이 핵심 가치관… 패권·팽창 추구 안 해”",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-22T22:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001886790?sid=100"
+    },
+    {
+     "title": "김정은, 대사 신임장 접수…\"북, 패권도 팽창도 추구 안 해\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-22T22:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014338545?sid=100"
+    },
+    {
+     "title": "김정은 \"전지구적 안보불안정…북한, 패권·팽창 추구 안 해\"",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-22T21:56:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/326092/?sc=Naver"
+    }
+   ]
+  },
+  {
+   "keyword": "삼성전자",
    "sources": [
     "signal.bz",
     "google"
    ],
    "articles90": 4,
    "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-22T21:03:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "삼성전자 18만원·SK하이닉스 110만원 지킬까…반도체 업황 전망 엇갈려",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-22T22:16:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283296"
+    },
+    {
+     "title": "D램 가격 400% 상승 전망…SK하이닉스·삼성전자 수익성 개선 기대",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-22T22:06:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=506796"
+    },
+    {
+     "title": "삼성전자·SK하이닉스, 中 매출 3배 이상 급증…매출 증가율 美 크게 앞...",
+     "press": "consumernews.co.kr",
+     "publishedAt": "2026-11-22T21:10:00.000Z",
+     "link": "http://www.consumernews.co.kr/news/articleView.html?idxno=768570"
+    }
+   ]
+  },
+  {
+   "keyword": "지스타",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-22T21:01:00.000Z",
    "exclusive": false,
@@ -173,76 +238,43 @@
    ]
   },
   {
-   "keyword": "삼성전자",
+   "keyword": "라면",
    "sources": [
-    "signal.bz",
     "google"
    ],
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-22T21:03:00.000Z",
+   "firstArticleAt": "2026-11-22T21:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "D램 가격 400% 상승 전망…SK하이닉스·삼성전자 수익성 개선 기대",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-22T22:06:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=506796"
+     "title": "라면값은 내리며 담합 조사받는 식품업계…같은 시기 과자·음료는 줄인...",
+     "press": "dailyt.co.kr",
+     "publishedAt": "2026-11-22T22:20:00.000Z",
+     "link": "https://www.dailyt.co.kr/newsView/dlt202611230001"
     },
     {
-     "title": "삼성전자·SK하이닉스, 中 매출 3배 이상 급증…매출 증가율 美 크게 앞...",
-     "press": "consumernews.co.kr",
-     "publishedAt": "2026-11-22T21:10:00.000Z",
-     "link": "http://www.consumernews.co.kr/news/articleView.html?idxno=768570"
+     "title": "K라면 10개월 만에 15억불 돌파…연간 20억불 사상 최대 눈앞",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-22T21:42:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=202611230639528110e7e8286d56_1"
     },
     {
-     "title": "삼성전자 사장단 개편… ‘안정 속 성과 극대화’",
-     "press": "segye.com",
-     "publishedAt": "2026-11-22T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177239?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "최교진 사의 수용",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T20:49:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이 대통령, 최교진 교육부 장관 사의 수용",
-     "press": "labortoday.co.kr",
-     "publishedAt": "2026-11-22T21:34:00.000Z",
-     "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237861"
-    },
-    {
-     "title": "[청와대 24시] 최교진 사의 즉각 수리한 李대통령…“신임 장관 인선은...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-22T21:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177265?sid=100"
-    },
-    {
-     "title": "靑 \"이 대통령, 최교진 교육부 장관 면직 재가\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-22T20:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928816?sid=100"
+     "title": "34세 김용빈, 불닭라면 초면에 밸런타인데이 모르다니‥박명수 포기 “...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-22T21:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190272"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1123,
-  "matched": 628,
-  "avgLeadMin": 638,
+  "flagged": 1121,
+  "matched": 626,
+  "avgLeadMin": 631,
   "recent": [
    {
     "keyword": "검사",
