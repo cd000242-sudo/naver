@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T18:42:53.802Z",
+ "builtAt": "2026-11-23T18:52:57.418Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 26,
-   "recent20": 6,
-   "press": 16,
-   "firstArticleAt": "2026-11-23T17:16:00.000Z",
+   "articles90": 25,
+   "recent20": 5,
+   "press": 15,
+   "firstArticleAt": "2026-11-23T17:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "트럼프 \"젠슨 황 복귀에 내 개입 중요…엔비디아 이사회 설득\"(종합)",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-23T18:52:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446112"
+    },
+    {
+     "title": "美정치권, 젠슨황 복귀에 \"안보 팔아넘겨…불법행위 조사\"(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-23T18:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016459340?sid=104"
+    },
     {
      "title": "몰락했다가 깜짝 복귀한 AI제국 황제…청문회 등 가시밭길 예고",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-23T18:39:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016459339?sid=104"
-    },
-    {
-     "title": "\"엔비디아 이사회, 트럼프 설득에 젠슨 황 복귀 결정\"",
-     "press": "zdnet.co.kr",
-     "publishedAt": "2026-11-23T18:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/092/0002446567?sid=105"
-    },
-    {
-     "title": "비트코인, 엔비디아 CEO 복귀에 회복세",
-     "press": "khgames.co.kr",
-     "publishedAt": "2026-11-23T18:34:00.000Z",
-     "link": "https://www.khgames.co.kr/news/articleView.html?idxno=310639"
     }
    ]
   },
@@ -48,12 +48,18 @@
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-23T17:16:00.000Z",
+   "firstArticleAt": "2026-11-23T17:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'선거 개표상황표 은닉' 선관위 직원 8명 중 1명 구속",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-23T18:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005846686?sid=102"
+    },
     {
      "title": "'개표상황표 은닉' 선관위 직원 1명 구속…7명 영장 기각(종합)",
      "press": "news1.kr",
@@ -65,12 +71,6 @@
      "press": "newsis.com",
      "publishedAt": "2026-11-23T17:33:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/003/0014340829?sid=102"
-    },
-    {
-     "title": "'선거 개표상황표 은닉' 선관위 직원 8명 중 1명 구속(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-23T17:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016459332?sid=102"
     }
    ]
   }
