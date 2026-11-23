@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T19:23:07.473Z",
+ "builtAt": "2026-11-23T19:33:10.653Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,38 +8,39 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 28,
  "candidates": [
   {
    "keyword": "젠슨 황 복귀",
    "sources": [
+    "signal.bz",
     "nate",
     "daum"
    ],
    "articles90": 30,
-   "recent20": 11,
-   "press": 18,
-   "firstArticleAt": "2026-11-23T17:55:00.000Z",
+   "recent20": 8,
+   "press": 17,
+   "firstArticleAt": "2026-11-23T18:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美정치권, 젠슨황 복귀에 \"안보 팔아넘겨…불법행위 조사\"",
+     "title": "젠슨 황 복귀 뒤엔 트럼프…'면죄부' 부메랑 되나",
      "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-23T19:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000545407?sid=104"
+     "publishedAt": "2026-11-23T19:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000545412?sid=104"
     },
     {
-     "title": "트럼프가 되돌린 젠슨 황…11일 만에 CEO 복귀",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-23T19:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005767949?sid=105"
+     "title": "머스크 “실수 바로잡혔다”…젠슨 황 복귀에 기술업계·투자자 환영",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-23T19:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002833621?sid=104"
     },
     {
-     "title": "머스크 \"실수 바로 잡혀\"...실리콘밸리도 젠슨 황 복귀 환영",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-23T19:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437078?sid=104"
+     "title": "뉴욕증시, 젠슨 황 복귀에 '환호'...월가, 추세전환은 '글쎄'",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-23T19:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000545408?sid=104"
     }
    ]
   }
