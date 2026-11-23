@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T17:42:32.065Z",
+ "builtAt": "2026-11-23T17:52:35.990Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 35,
-   "recent20": 2,
-   "press": 22,
-   "firstArticleAt": "2026-11-23T16:14:00.000Z",
+   "articles90": 30,
+   "recent20": 6,
+   "press": 19,
+   "firstArticleAt": "2026-11-23T16:24:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨황, 11일만에 엔비디아 CEO 전격복귀…이사회 “안보위험 없다”(종...",
-     "press": "koreatimes.com",
-     "publishedAt": "2026-11-23T17:40:00.000Z",
-     "link": "https://www.koreatimes.com/article/11632545?utm_source=naver"
+     "title": "젠슨 황 '깜짝 복귀' 배경은?…\"트럼프, 직접 물밑 지휘·복직에 환호\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-23T17:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014340831?sid=104"
     },
     {
-     "title": "엔비디아 수장 복귀 소식에 기술주 급등…시장 분위기 반전",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-23T17:26:00.000Z",
-     "link": "https://www.tokenpost.kr/news/cryptocurrency/443113"
+     "title": "트럼프 \"엔비디아 이사회와 젠슨 황 복귀 문제 직접 논의\"",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-23T17:48:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446110"
     },
     {
-     "title": "트럼프, 젠슨황에 '안보 면죄부'…AI패권·스캔들 불똥 의식했나",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-23T17:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016459333?sid=104"
+     "title": "트럼프 “젠슨 황 복귀, 내 개입 컸다”… 민주 “안보 팔아넘겨” 반발",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-23T17:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004011344?sid=104"
     }
    ]
   },
@@ -47,10 +47,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 17,
+   "articles90": 15,
    "recent20": 2,
    "press": 12,
-   "firstArticleAt": "2026-11-23T16:21:00.000Z",
+   "firstArticleAt": "2026-11-23T16:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -79,10 +79,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T16:14:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-23T16:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
