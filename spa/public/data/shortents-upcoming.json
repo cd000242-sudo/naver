@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T04:03:14.975Z",
+ "builtAt": "2026-11-23T04:16:33.660Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 7,
  "candidates": [
   {
    "keyword": "코스피 매도 사이드카",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 78,
+   "articles90": 45,
    "recent20": 5,
-   "press": 64,
-   "firstArticleAt": "2026-11-23T02:34:00.000Z",
+   "press": 40,
+   "firstArticleAt": "2026-11-23T02:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'검은 월요일' 현실로…코스피 5%대 급락에 매도 사이드카",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-23T04:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000652801?sid=101"
+    },
+    {
+     "title": "'검은 월요일' 코스피 5%대 급락…매도 사이드카 발동",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-23T04:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004212742?sid=101"
+    },
     {
      "title": "코스피 5%대 급락에 매도 사이드카···외국인 매도 전환",
      "press": "smartbizn.com",
      "publishedAt": "2026-11-23T04:02:00.000Z",
      "link": "https://www.smartbizn.com/news/articleView.html?idxno=160269"
-    },
-    {
-     "title": "코스피 4600선 위협받아…美 기술주 충격에 증시 안전장치 재가동",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-23T04:00:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=848135"
-    },
-    {
-     "title": "머스크 경고 'AI 돈맥경화'… 빅테크 회사채 1년 새 2.6배, 코스피 4600선...",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-23T04:00:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3083781"
     }
    ]
   },
@@ -47,255 +47,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 54,
-   "recent20": 5,
-   "press": 46,
-   "firstArticleAt": "2026-11-23T02:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "정부, 증안펀드 투입 시점·규모 유보…자사주 매입 확대부터 시행",
-     "press": "sateconomy.co.kr",
-     "publishedAt": "2026-11-23T03:50:00.000Z",
-     "link": "https://sateconomy.co.kr/news/view/1065584496541479"
-    },
-    {
-     "title": "코스피 4500대까지 밀렸다…\"증안펀드 가동 준비, 추가 비상대책도\"",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-23T03:50:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1732672"
-    },
-    {
-     "title": "“증안펀드 외 추가 비상계획도 있다”…정부, 증시 급락에 대응책 마련",
-     "press": "ddaily.co.kr",
-     "publishedAt": "2026-11-23T03:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/138/0002249559?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "삼성증권",
-   "sources": [
-    "google"
-   ],
-   "articles90": 25,
+   "articles90": 33,
    "recent20": 4,
-   "press": 22,
-   "firstArticleAt": "2026-11-23T02:36:00.000Z",
+   "press": 29,
+   "firstArticleAt": "2026-11-23T02:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼성증권도 해킹 사고…8,241명 개인정보 유출",
-     "press": "itbiznews.com",
-     "publishedAt": "2026-11-23T04:00:00.000Z",
-     "link": "https://www.itbiznews.com/news/articleView.html?idxno=232442"
+     "title": "이형일 부총리 “증안펀드, 시장 상황 보고 결정”…추가 대책도 준비",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-23T04:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/117/0004127337?sid=103"
     },
     {
-     "title": "삼성증권도 8241명 개인정보 유출",
-     "press": "koreareport.co.kr",
-     "publishedAt": "2026-11-23T04:00:00.000Z",
-     "link": "https://www.koreareport.co.kr/news/articleView.html?idxno=55025"
+     "title": "이형일 \"증안펀드 외 추가 조치 마련돼 있어…올해 3% 후반 성장 가능\"(...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-23T04:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014339697?sid=101"
     },
     {
-     "title": "삼성증권, '고객의 소리' 해킹....개인정보 유출",
-     "press": "econovill.com",
-     "publishedAt": "2026-11-23T03:56:00.000Z",
-     "link": "https://www.econovill.com/news/articleView.html?idxno=758168"
-    }
-   ]
-  },
-  {
-   "keyword": "조작기소 특검법 권한쟁의심판",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 26,
-   "recent20": 1,
-   "press": 16,
-   "firstArticleAt": "2026-11-23T02:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "국힘, '조작기소 특검법' 헌재에 권한쟁의심판 청구…여론전 '본격화'",
-     "press": "thepublic.kr",
-     "publishedAt": "2026-11-23T03:56:00.000Z",
-     "link": "https://www.thepublic.kr/news/articleView.html?idxno=327985"
-    },
-    {
-     "title": "국힘, ‘與 조작기소 특검법’ 처리 절차 문제 삼아 헌재에 권한쟁의심...",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-23T03:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000133319?sid=100"
-    },
-    {
-     "title": "국힘, '조작기소 특검법' 무효심판 청구",
-     "press": "sisafocus.co.kr",
-     "publishedAt": "2026-11-23T03:28:00.000Z",
-     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367933"
+     "title": "靑, 사회적 약자 대상 범죄 대응 강화…증시 급락에 증안펀드 가동 예고",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-23T04:04:00.000Z",
+     "link": "https://www.viva100.com/article/20261123500677"
     }
    ]
   },
   {
    "keyword": "삼성물산",
    "sources": [
-    "signal.bz",
-    "google"
+    "signal.bz"
    ],
-   "articles90": 16,
-   "recent20": 1,
-   "press": 16,
-   "firstArticleAt": "2026-11-23T02:34:00.000Z",
+   "articles90": 12,
+   "recent20": 3,
+   "press": 12,
+   "firstArticleAt": "2026-11-23T02:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "삼성물산 '최영재 건설부문장 사장 승진",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-23T04:12:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904033"
+    },
+    {
+     "title": "삼성물산 건설부문 최영재 사장 선임",
+     "press": "naeil.com",
+     "publishedAt": "2026-11-23T04:04:00.000Z",
+     "link": "https://www.naeil.com/news/read/609714?ref=naver"
+    },
     {
      "title": "삼성물산 건설, 6년 만 수장 교체···'숫자·현장' 겸비한 50대 전진 배...",
      "press": "newsfreezone.co.kr",
      "publishedAt": "2026-11-23T04:00:00.000Z",
      "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=720761"
-    },
-    {
-     "title": "삼성물산, 건설부문 최영재 부사장 사장 승진",
-     "press": "datasom.co.kr",
-     "publishedAt": "2026-11-23T03:36:00.000Z",
-     "link": "https://www.datasom.co.kr/news/articleView.html?idxno=210932"
-    },
-    {
-     "title": "삼성물산 건설부문 새 수장에 최영재 사장…실적 반등 이끈 하이테크 전...",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-23T03:26:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1176934"
-    }
-   ]
-  },
-  {
-   "keyword": "국가장학금",
-   "sources": [
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-23T03:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "2027학년도 1학기 국가장학금 1차 신청, 11월 24일부터…대학 미정인 신...",
-     "press": "kizmom.com",
-     "publishedAt": "2026-11-23T03:56:00.000Z",
-     "link": "https://www.kizmom.com/news/articleView.html?idxno=114151"
-    },
-    {
-     "title": "2027 국가장학금 신청기간 11월 24일부터…소득분위 기준·지급일·지원...",
-     "press": "christiantoday.co.kr",
-     "publishedAt": "2026-11-23T03:40:00.000Z",
-     "link": "https://www.christiantoday.co.kr/news/378814"
-    },
-    {
-     "title": "'재학생 반드시 신청하세요' 국가장학금 신청, 내일부터",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-23T03:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000545286?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "에이티즈 빌보드 1위",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-23T02:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "에이티즈 빌보드 네번째 1위에 \"벅차고 감사…초심 잃지 않겠다\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-23T03:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016458132?sid=103"
-    },
-    {
-     "title": "에이티즈, 미국 빌보드 200 네 번째 1위…2020년대 그룹 최다 톱10 기록으...",
-     "press": "lecturernews.com",
-     "publishedAt": "2026-11-23T03:20:00.000Z",
-     "link": "https://www.lecturernews.com/news/articleView.html?idxno=214376"
-    },
-    {
-     "title": "에이티즈, 네번째 ‘빌보드 정상’… 10개 앨범 연속 ‘톱10’",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-23T02:43:00.000Z",
-     "link": "https://m.entertain.naver.com/article/021/0002834744"
-    }
-   ]
-  },
-  {
-   "keyword": "이재명 지지율 상승",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T02:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령 지지율 2주 연속 상승, 37.3%... 민주당은 35.6% [리얼미터]",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-23T03:46:00.000Z",
-     "link": "https://www.insight.co.kr/news/583138"
-    },
-    {
-     "title": "김민석 대표 취임 100일…'당내 통합·지지율 회복' 핵심 과제로",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-23T03:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003488534?sid=100"
-    },
-    {
-     "title": "[이재명 직무평가] 지지율 37.3%...2주 연속 상승세",
-     "press": "00news.co.kr",
-     "publishedAt": "2026-11-23T03:28:00.000Z",
-     "link": "http://www.00news.co.kr/news/articleView.html?idxno=108271"
-    }
-   ]
-  },
-  {
-   "keyword": "한-몽골 외교장관 회담",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 24,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T02:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "발언하는 바트체첵 몽골 외교장관",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-23T03:28:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123000667"
-    },
-    {
-     "title": "몽골 외교장관 만난 조현 외교부 장관",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-23T03:28:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123000662"
-    },
-    {
-     "title": "몽골 외교장관과 회담 갖는 조현 외교부 장관",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-23T03:28:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123000663"
     }
    ]
   },
@@ -304,18 +111,18 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
+   "articles90": 5,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T02:39:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-23T03:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "「M포토」 의원 질의에 답변하는 강신철 국방부 장관",
-     "press": "m-economynews.com",
+     "title": "[포토] 강신철 국방부 장관, 의원질의 답변",
+     "press": "newscj.com",
      "publishedAt": "2026-11-23T03:18:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=73472"
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3451245"
     },
     {
      "title": "[포토] 강신철 국방부 장관 답변",
@@ -324,115 +131,18 @@
      "link": "https://www.newscj.com/news/articleView.html?idxno=3451246"
     },
     {
-     "title": "[포토] 강신철 국방부 장관, 의원질의 답변",
-     "press": "newscj.com",
+     "title": "「M포토」 의원 질의에 답변하는 강신철 국방부 장관",
+     "press": "m-economynews.com",
      "publishedAt": "2026-11-23T03:18:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3451245"
-    }
-   ]
-  },
-  {
-   "keyword": "lpga",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T03:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "LPGA CME Group Championship",
-     "press": null,
-     "publishedAt": "2026-11-23T03:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/077/0007247012?sid=104"
-    },
-    {
-     "title": "김아림, LPGA 시즌 최종전 공동 7위로 마감",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-23T03:29:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/088/0001041723"
-    },
-    {
-     "title": "韓 여자골프, 2년 연속 LPGA 6승… 개인 타이틀 무관",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-23T03:28:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=886082"
-    }
-   ]
-  },
-  {
-   "keyword": "합동 청사 방호훈련",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 34,
-   "recent20": 4,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T02:51:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "법원 소요사태 방호 훈련하는 경찰",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T03:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009304854?sid=102"
-    },
-    {
-     "title": "법원·경찰, 서부지법 통합 방호훈련",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T03:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009304851?sid=102"
-    },
-    {
-     "title": "서부지법·마포경찰서, 합동 청사 방호 훈련",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T03:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009304853?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "김종철 경찰청장 참배",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-23T02:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "새 경찰청장 김종철 “수사 역량 강화·신뢰 회복”",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-23T02:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002834760?sid=102"
-    },
-    {
-     "title": "김종철 경찰청장이 남긴 방명록",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-23T02:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016457927?sid=102"
-    },
-    {
-     "title": "국기에 경례하는 김종철 경찰청장",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-23T02:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016457926?sid=102"
+     "link": "https://www.m-economynews.com/news/article.html?no=73472"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1166,
-  "matched": 663,
+  "flagged": 1163,
+  "matched": 662,
   "avgLeadMin": 612,
   "recent": [
    {
