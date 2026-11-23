@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T23:24:50.058Z",
+ "builtAt": "2026-11-23T23:34:53.325Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,85 +8,123 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 25,
  "candidates": [
   {
-   "keyword": "선관위 직원 1명 구속",
+   "keyword": "메가스피드 제재",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 15,
-   "recent20": 5,
-   "press": 15,
-   "firstArticleAt": "2026-11-23T22:02:00.000Z",
+   "articles90": 28,
+   "recent20": 2,
+   "press": 27,
+   "firstArticleAt": "2026-11-23T22:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "트럼프 정부, 젠슨황 복귀 당일 중국 첩자 의혹 내연녀 회사 제재",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-23T23:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537584?sid=104"
+    },
+    {
+     "title": "트럼프 정부, 젠슨황 복귀 당일 中첩자 의혹 내연녀 회사 제재",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-23T23:16:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/326247/?sc=Naver"
+    },
+    {
+     "title": "美상무부, 젠슨 황 복귀 당일 내연녀 회사 제재",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-23T23:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929252?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "선관위 직원 1명만 구속",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 15,
+   "recent20": 1,
+   "press": 15,
+   "firstArticleAt": "2026-11-23T22:13:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'투표율 허위입력' 선관위 직원 1명 구속… 7명은 기각",
+     "press": "lawtimes.co.kr",
+     "publishedAt": "2026-11-23T23:30:00.000Z",
+     "link": "https://www.lawtimes.co.kr/news/articleView.html?idxno=229935"
+    },
+    {
      "title": "'투표율 허위 입력' 선관위 직원 8명 중 1명만 구속…특검 \"납득 어려워...",
      "press": "news.tvchosun.com",
      "publishedAt": "2026-11-23T23:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652962?sid=004"
+     "link": "https://n.news.naver.com/mnews/article/448/0000652962?sid=102"
     },
     {
      "title": "선관위특검 '1호 구속' 1명에 그쳐...7명 기각",
      "press": "fnnews.com",
      "publishedAt": "2026-11-23T23:11:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/014/0005608635?sid=102"
-    },
-    {
-     "title": "‘개표상황표 위조·은닉’ 선관위 직원 1명 구속…7명은 영장 기각",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-23T23:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000162075?sid=102"
     }
    ]
   },
   {
-   "keyword": "오늘 날씨 영하권",
+   "keyword": "김민선 유현조 이다연, LPGA 출전권 확보",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 16,
-   "recent20": 4,
-   "press": 14,
-   "firstArticleAt": "2026-11-23T22:00:00.000Z",
+   "articles90": 12,
+   "recent20": 3,
+   "press": 11,
+   "firstArticleAt": "2026-11-23T22:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[전국 지역별 오늘의 날씨 및 내일날씨]제주도, 충남권서부와 전라권서...",
-     "press": "economytalk.kr",
-     "publishedAt": "2026-11-23T23:18:00.000Z",
-     "link": "http://www.economytalk.kr/news/articleView.html?idxno=425494"
+     "title": "김민선·유현조·이다연, LPGA 퀄리파잉 시리즈 통과-2027시즌 미국 무대...",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-23T23:32:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95773"
     },
     {
-     "title": "[오늘날씨] 최저 '영하 6도' 강추위⋯전국 비·눈 속 제주도는 '최고 10도...",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-23T23:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001077712?sid=103"
+     "title": "김민선7·유현조·이다연, LPGA Q 시리즈 통과…내년 미국 무대 진출",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T23:26:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/421/0009306100"
     },
     {
-     "title": "낮부터 기온 내림세‥내일 아침 영하권 추위",
-     "press": "usmbc.co.kr",
-     "publishedAt": "2026-11-23T23:10:00.000Z",
-     "link": "https://www.usmbc.co.kr/NewsArticle/875049"
+     "title": "김민선7·유현조·이다연 LPGA투어 출전권 획득..이정은6는 1타 차로 고...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-23T23:19:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/016/0002727432"
     }
    ]
   },
   {
    "keyword": "나의 유죄인간",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 11,
-   "recent20": 6,
-   "press": 9,
+   "articles90": 12,
+   "recent20": 4,
+   "press": 10,
    "firstArticleAt": "2026-11-23T22:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "임시완♥설인아, 동반 총격 피습…새드엔딩? (나의 유죄인간)",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-23T23:29:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001306411"
+    },
     {
      "title": "'나의 유죄인간' 임시완X설인아, 피격 엔딩...시청률 5.5% [종합]",
      "press": "ize.co.kr",
@@ -98,12 +136,71 @@
      "press": "topstarnews.net",
      "publishedAt": "2026-11-23T23:20:00.000Z",
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284508"
+    }
+   ]
+  },
+  {
+   "keyword": "나스닥 100",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 8,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-23T22:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[뉴욕증시] 젠슨 황 복귀에 엔비디아 31% 폭등…나스닥 6.51%↑",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-23T23:10:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086868"
     },
     {
-     "title": "'나의 유죄인간' 임시완·설인아, 나란히 총격...최종회 앞두고 충격 엔...",
-     "press": "nc.press",
-     "publishedAt": "2026-11-23T23:19:00.000Z",
-     "link": "https://www.nc.press/news/articleView.html?idxno=631733"
+     "title": "돌아온 '젠슨 황' 엔비디아 31.48% 급등... 나스닥 6.51% ↑ [뉴욕증시]",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-23T23:04:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2022405"
+    },
+    {
+     "title": "미국증시 나스닥 6.51% 폭등…SK하이닉스 ADR 20%↑",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-23T22:36:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284463"
+    }
+   ]
+  },
+  {
+   "keyword": "김서형 대시 하차",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 6,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-23T22:28:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "촬영까지 했는데…김서형, 건강 악화로 '대시' 하차→'진선규♥' 박보경...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-23T23:33:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004468995"
+    },
+    {
+     "title": "김서형, '대시' 촬영 중 건강 악화로 하차…박보경 대체 투입",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-23T23:24:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005445343"
+    },
+    {
+     "title": "김서형, 4년만 안방 복귀 무산…건강 악화로 '대시' 하차",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-23T23:24:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002083367"
     }
    ]
   },
@@ -142,11 +239,10 @@
   {
    "keyword": "개인정보",
    "sources": [
-    "signal.bz",
     "google"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-23T22:45:00.000Z",
    "exclusive": false,
@@ -175,16 +271,21 @@
   {
    "keyword": "투수",
    "sources": [
-    "signal.bz",
     "google"
    ],
    "articles90": 4,
    "recent20": 2,
    "press": 3,
-   "firstArticleAt": "2026-11-23T22:02:00.000Z",
+   "firstArticleAt": "2026-11-23T22:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "11일 만에 컴백 젠슨 황...엔비디아·AI생태계 '구원투수' 되나",
+     "press": "choicenews.co.kr",
+     "publishedAt": "2026-11-23T23:34:00.000Z",
+     "link": "http://www.choicenews.co.kr/news/articleView.html?idxno=173449"
+    },
     {
      "title": "\"야마모토 이제보니 '가성비'였잖아\" 美 투수 최고액 뺏긴 日 '정신승리...",
      "press": "sportschosun.com",
@@ -196,54 +297,54 @@
      "press": "sportschosun.com",
      "publishedAt": "2026-11-23T23:12:00.000Z",
      "link": "https://m.sports.naver.com/kbaseball/article/076/0004468985"
-    },
-    {
-     "title": "개인·외국인 팔아치우는데...빗장 풀린 자사주 매입 증시 ‘구원 투수...",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-23T22:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004011366?sid=101"
     }
    ]
   },
   {
-   "keyword": "박보경 배우",
+   "keyword": "한동훈 제명",
    "sources": [
     "daum"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 2,
    "press": 3,
-   "firstArticleAt": "2026-11-23T22:28:00.000Z",
+   "firstArticleAt": "2026-11-23T22:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김서형, 건강 악화로 SBS '대시' 하차…박보경 합류",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-23T23:24:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005445343"
+     "title": "김현정 “장동혁 물러나도 한동훈 복당 어려워, 창당해야” [김은지의 ...",
+     "press": "sisain.co.kr",
+     "publishedAt": "2026-11-23T23:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/308/0000039019?sid=100"
     },
     {
-     "title": "\"촬영 중 건강 악화\" 김서형, 4년 만의 복귀작 '대시' 하차…박보경 긴...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-23T22:47:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004127506"
+     "title": "장동혁, 한동훈 제명 후 \"고생하셨다\" 문자…野 윤리위원 3차 폭로",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-23T23:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000652968?sid=100"
     },
     {
-     "title": "김서형, 건강 악화로 '대시' 촬영 중 하차…박보경 대체 투입",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-23T22:28:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=627181"
+     "title": "국민의힘 윤리위원, ‘조작 징계’ 추가 폭로…“기획에 따라 한동훈 제...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-23T22:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012299747?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1219,
-  "matched": 656,
+  "flagged": 1221,
+  "matched": 655,
   "avgLeadMin": 593,
   "recent": [
+   {
+    "keyword": "오늘 날씨 영하권",
+    "hitKeyword": "전국 영하권 추위",
+    "hitAt": "2026-11-24T08:30:00+09:00",
+    "leadMin": 86
+   },
    {
     "keyword": "한국 수출 1조달러",
     "hitKeyword": "중국산 수출 1조달러 위기",
@@ -297,12 +398,6 @@
     "hitKeyword": "놀부 회생신청 기각",
     "hitAt": "2026-11-24T06:30:00+09:00",
     "leadMin": 650
-   },
-   {
-    "keyword": "법원 놀부 회생 기각",
-    "hitKeyword": "놀부 회생신청 기각",
-    "hitAt": "2026-11-24T06:30:00+09:00",
-    "leadMin": 459
    }
   ]
  }
