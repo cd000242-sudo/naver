@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T21:53:58.985Z",
+ "builtAt": "2026-11-23T22:04:01.970Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 22,
  "candidates": [
   {
-   "keyword": "소비심리 하락",
+   "keyword": "엔비디아 폭등",
    "sources": [
     "daum"
    ],
-   "articles90": 26,
-   "recent20": 0,
-   "press": 26,
+   "articles90": 73,
+   "recent20": 16,
+   "press": 53,
    "firstArticleAt": "2026-11-23T21:00:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "젠슨 황 복귀에 월가 폭발⋯엔비디아 31.5% 급등 시총 9500억달러 증가",
+     "press": "autodaily.co.kr",
+     "publishedAt": "2026-11-23T22:02:00.000Z",
+     "link": "https://www.autodaily.co.kr/news/articleView.html?idxno=602359"
+    },
+    {
+     "title": "엔비디아 시총 하루 새 1천300조원↑...AI·반도체주 급등",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-23T22:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437103?sid=104"
+    },
+    {
+     "title": "[굿모닝 美 증시] 엔비디아발 반등에 '뉴욕증시 급등'…나스닥 6.51%↑",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-23T22:00:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261124010009048"
+    }
+   ]
+  },
+  {
+   "keyword": "오늘 날씨 영하권",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 15,
+   "recent20": 5,
+   "press": 13,
+   "firstArticleAt": "2026-11-23T20:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘증시 조정·대출금리 상승’에 소비심리 두 달째 ‘악화’",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-23T21:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394666?sid=101"
+     "title": "[오늘날씨] 충남·전라 비·눈, 서울 낮 3도…제주 산지 최대 5㎝",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-23T22:02:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284441"
     },
     {
-     "title": "주식 시장 하락, 금리 상승에…소비 심리 두 달 연속 ‘뚝’",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-23T21:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004011355?sid=101"
+     "title": "[기상청 오늘의 날씨 및 내일날씨]제주도, 충남권서부와 전라권서부 중...",
+     "press": "economytalk.kr",
+     "publishedAt": "2026-11-23T22:00:00.000Z",
+     "link": "http://www.economytalk.kr/news/articleView.html?idxno=425493"
     },
     {
-     "title": "11월 소비자심리 2.3p 하락…증시 조정·대출금리 상승에 두 달 연속 ‘...",
-     "press": "segyebiz.com",
-     "publishedAt": "2026-11-23T21:06:00.000Z",
-     "link": "http://www.segyebiz.com/newsView/20261123516983?OutUrl=naver"
+     "title": "오늘 날씨, 서울 영하권 추위…강풍에 곳곳 눈·비",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-23T22:00:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611240022"
     }
    ]
   },
@@ -47,94 +79,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-23T20:34:00.000Z",
+   "articles90": 12,
+   "recent20": 3,
+   "press": 11,
+   "firstArticleAt": "2026-11-23T20:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"증거인멸 우려'…'투표율 허위입력' 선관위 8명 중 1명 구속",
+     "title": "개표상황표 은닉·위조 혐의 선관위 직원 1명 구속…7명 영장 기각",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-23T22:02:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=784186"
+    },
+    {
+     "title": "'투표율 허위 입력' 선관위 직원 1명 구속...7명 영장 기각",
+     "press": "womennews.co.kr",
+     "publishedAt": "2026-11-23T21:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/310/0000141985?sid=102"
+    },
+    {
+     "title": "\"증거인멸 우려\"…'투표율 허위입력' 선관위 8명 중 1명 구속",
      "press": "hankyung.com",
      "publishedAt": "2026-11-23T21:45:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/015/0005357363?sid=102"
-    },
-    {
-     "title": "'선거 개표상황표 은닉' 선관위 직원 구속…7명 영장 기각",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-23T21:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929232?sid=102"
-    },
-    {
-     "title": "‘선거 개표상황표 은닉’ 선관위 직원 8명 중 1명 구속",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-23T21:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002727392?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "강금실 국정원장 후보",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-23T20:53:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "강금실·임웅순…‘위성락 외교 전문성’에 힘 실었다[송종호의 국정쏙...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-23T21:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004685366?sid=100"
-    },
-    {
-     "title": "그때도 지금도 '첫 여성' 파격…돌아온 강금실",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-23T21:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001405280?sid=100"
-    },
-    {
-     "title": "석 달 만에 '중폭 개각'‥최초 여성 국정원장 발탁",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-23T21:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001537535?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "미국 디지털 301조 조사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-23T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "트럼프 행정부, 한국·EU 겨냥 디지털 규제 조사 착수? 미국 관세 폭탄 ...",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-23T21:52:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886988"
-    },
-    {
-     "title": "美, 한국 디지털 규제 ‘301조 조사’ 검토",
-     "press": "kbmaeil.com",
-     "publishedAt": "2026-11-23T21:46:00.000Z",
-     "link": "https://www.kbmaeil.com/article/20261124500018"
-    },
-    {
-     "title": "\"美, 한국 디지털 규제에 301조 조사 검토\"…추가 관세 나오나",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-23T21:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005445323?sid=104"
     }
    ]
   },
@@ -143,73 +111,84 @@
    "sources": [
     "google"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
    "firstArticleAt": "2026-11-23T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "아리바이오, 치매 치료제 78주 임상서도 효과…내년 하반기 FDA 허가 신...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-23T22:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004685373?sid=103"
+    },
+    {
+     "title": "‘깜빡깜빡’ 노화일까 치매의 신호일까⋯“조기 진단 따라 치료 선택지...",
+     "press": "kormedi.com",
+     "publishedAt": "2026-11-23T22:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/296/0000107721?sid=103"
+    },
+    {
      "title": "치매 환자 가족들 “기억 굿즈 팝니다”",
      "press": "segye.com",
      "publishedAt": "2026-11-23T21:04:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/022/0004177576?sid=102"
-    },
-    {
-     "title": "삼진제약, 아리바이오 ‘먹는 치매약’ 국내 허가·생산 준비",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-23T21:02:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611230141"
-    },
-    {
-     "title": "치매·희귀질환 재도전과 퇴장…'비아그라 대항마' K-신약 3종의 흥망성...",
-     "press": "apsk.co.kr",
-     "publishedAt": "2026-11-23T21:00:00.000Z",
-     "link": "https://www.apsk.co.kr/news/articleView.html?idxno=541120"
     }
    ]
   },
   {
    "keyword": "연금",
    "sources": [
-    "signal.bz",
     "google"
    ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
+   "articles90": 7,
+   "recent20": 4,
+   "press": 6,
    "firstArticleAt": "2026-11-23T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "연금행동 \"기초연금 개편 사회적 논의로\"",
-     "press": "labortoday.co.kr",
-     "publishedAt": "2026-11-23T21:34:00.000Z",
-     "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237880"
+     "title": "퇴직연금이 연 2%대 수익률에 갇힌 이유",
+     "press": "weekly.donga.com",
+     "publishedAt": "2026-11-23T22:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/037/0000039203?sid=101"
     },
     {
-     "title": "부부가 함께 부은 연금, 사별하면 유족연금 70% 깎인다",
-     "press": "segye.com",
-     "publishedAt": "2026-11-23T21:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177582?sid=101"
+     "title": "국민연금공단, 한국노인인력개발원과 '초고령사회 대응 공동 세미나' 개...",
+     "press": "cstimes.com",
+     "publishedAt": "2026-11-23T22:02:00.000Z",
+     "link": "https://www.cstimes.com/news/articleView.html?idxno=729076"
     },
     {
-     "title": "송상은 KB증권 연금그룹장 “IRP 연 56% 성장…연금은 가입보다 관리가...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-23T21:00:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2651897"
+     "title": "[Invest]산은에 PEF 주도권 뺏긴 국민연금, 출자사업 재개해도 매칭 걱정",
+     "press": "investchosun.com",
+     "publishedAt": "2026-11-23T22:02:00.000Z",
+     "link": "https://www.investchosun.com/site/data/html_dir/2026/11/23/2026112380131.html"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1219,
-  "matched": 661,
-  "avgLeadMin": 587,
+  "flagged": 1221,
+  "matched": 663,
+  "avgLeadMin": 598,
   "recent": [
+   {
+    "keyword": "상철 방귀 계약결혼",
+    "hitKeyword": "계약결혼 상철 영숙",
+    "hitAt": "2026-11-24T07:00:00+09:00",
+    "leadMin": 8557
+   },
+   {
+    "keyword": "미국 디지털 301조 조사",
+    "hitKeyword": "미국 한국 투자 조사",
+    "hitAt": "2026-11-24T07:00:00+09:00",
+    "leadMin": 26
+   },
    {
     "keyword": "놀부 기업회생 신청 기각",
     "hitKeyword": "놀부 회생신청 기각",
@@ -257,18 +236,6 @@
     "hitKeyword": "젠슨 황 CEO 복귀",
     "hitAt": "2026-11-24T06:00:00+09:00",
     "leadMin": 853
-   },
-   {
-    "keyword": "노소영 재산 분할금",
-    "hitKeyword": "최태원 노소영 재산분할",
-    "hitAt": "2026-11-24T06:00:00+09:00",
-    "leadMin": 560
-   },
-   {
-    "keyword": "반도체 메모리",
-    "hitKeyword": "반도체 시장 약세",
-    "hitAt": "2026-11-24T06:00:00+09:00",
-    "leadMin": 529
    }
   ]
  }
