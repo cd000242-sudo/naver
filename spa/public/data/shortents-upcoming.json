@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T22:24:16.252Z",
+ "builtAt": "2026-11-23T22:34:19.283Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,92 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 27,
  "candidates": [
+  {
+   "keyword": "트럼프, 젠슨 황 복귀 결정 개입",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 50,
+   "recent20": 9,
+   "press": 43,
+   "firstArticleAt": "2026-11-23T21:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프 \"젠슨 황 복귀, 내가 직접 개입\"⋯美 재계·정가 '후폭풍', \"안보...",
+     "press": "autodaily.co.kr",
+     "publishedAt": "2026-11-23T22:32:00.000Z",
+     "link": "https://www.autodaily.co.kr/news/articleView.html?idxno=602360"
+    },
+    {
+     "title": "[테크인사이드] 돌아온 젠슨 황...AI 버블론까지 잠재울까",
+     "press": "digitaltoday.co.kr",
+     "publishedAt": "2026-11-23T22:30:00.000Z",
+     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=717570"
+    },
+    {
+     "title": "[젠슨 황 복귀] 美 의회 초당적 반발…조사·규제 강화 촉구",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-23T22:28:00.000Z",
+     "link": "https://www.ajunews.com/view/20261124072452671"
+    }
+   ]
+  },
+  {
+   "keyword": "선관위 직원 1명 구속",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 12,
+   "recent20": 3,
+   "press": 12,
+   "firstArticleAt": "2026-11-23T21:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "6·3 지방선거 개표상황표 위조 선관위 직원 1명 구속…나머지 7명 영장...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-23T22:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177598?sid=102"
+    },
+    {
+     "title": "'개표상황표 은닉' 혐의 선관위 직원 1명 구속…특검 첫 신병 확보",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-23T22:24:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=243974"
+    },
+    {
+     "title": "'6.3 지선 관리부실' 선관위 직원, 8명 중 1명 구속",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-23T22:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002394672?sid=100"
+    }
+   ]
+  },
   {
    "keyword": "오늘 날씨 영하권",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-23T21:00:00.000Z",
+   "articles90": 12,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-23T21:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'서울 -0.4도' 영하권 추위도 추위인데…오늘 출근길 '이것' 비상",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-23T22:30:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1177134"
+    },
     {
      "title": "[날씨] 전국 곳곳 영하권 추위…찬 바람에 체감 온도 '뚝'",
      "press": "yonhapnewstv.co.kr",
@@ -33,44 +105,6 @@
      "press": "topstarnews.net",
      "publishedAt": "2026-11-23T22:02:00.000Z",
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284441"
-    },
-    {
-     "title": "오늘 날씨, 서울 영하권 추위…강풍에 곳곳 눈·비",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-23T22:00:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611240022"
-    }
-   ]
-  },
-  {
-   "keyword": "선관위 직원 1명 구속",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-23T20:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "선관위 직원 1명만 구속...특검, '윗선 개입' 규명 차질 우려",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-23T22:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437106?sid=102"
-    },
-    {
-     "title": "개표상황표 은닉·위조 혐의 선관위 직원 1명 구속…7명 영장 기각",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-23T22:02:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=784186"
-    },
-    {
-     "title": "'투표율 허위 입력' 선관위 직원 1명 구속...7명 영장 기각",
-     "press": "womennews.co.kr",
-     "publishedAt": "2026-11-23T21:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/310/0000141985?sid=102"
     }
    ]
   },
@@ -79,40 +113,104 @@
    "sources": [
     "google"
    ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-23T20:56:00.000Z",
+   "articles90": 8,
+   "recent20": 3,
+   "press": 7,
+   "firstArticleAt": "2026-11-23T21:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[핀테크핫이슈] 바닥 뚫린 韓 증시...AI·스테이블코인이 달군 SFF 2026",
+     "press": "digitaltoday.co.kr",
+     "publishedAt": "2026-11-23T22:30:00.000Z",
+     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=717428"
+    },
+    {
+     "title": "[AI 모닝브리핑] 내 대화, 상대 폰 AI가 볼 수도…시그널 ‘스크린샷 차...",
+     "press": "coinreaders.com",
+     "publishedAt": "2026-11-23T22:28:00.000Z",
+     "link": "http://coinreaders.com/272779"
+    },
     {
      "title": "글로벌 보안 업계, AI 해킹 확산 속 잇단 대형 M&A....점점 '규모의 경쟁...",
      "press": "digitaltoday.co.kr",
      "publishedAt": "2026-11-23T22:18:00.000Z",
      "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=717571"
-    },
-    {
-     "title": "‘자율제조’ CJ제일제당 vs ‘오픈이노베이션’ 풀무원…AI로 바뀌는 식...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-23T22:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/468/0001282972?sid=101"
-    },
-    {
-     "title": "AI 상담 서비스, 이동통신사와 네이버의 제약으로 궁금증 증폭",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-23T21:56:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886998"
     }
    ]
   },
   {
-   "keyword": "이지훈·아야네, 둘째 딸 출산!",
+   "keyword": "국정원장 후보 강금실",
    "sources": [
-    "signal.bz"
+    "daum"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-23T21:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "강금실 국정원장 후보 지명…임웅순·홍익표 등 외교안보라인 대폭 교체",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-23T22:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979554?sid=100"
+    },
+    {
+     "title": "이재명 정부, 첫 여성 국정원장 강금실 지명…외교·통일부 대폭 교체 ...",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-23T21:58:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=887006"
+    },
+    {
+     "title": "강금실·임웅순…‘위성락 외교 전문성’에 힘 실었다[송종호의 국정쏙...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-23T21:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004685366?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "행안 한준호 지명",
+   "sources": [
+    "daum"
    ],
    "articles90": 3,
    "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T21:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "행안 한준호·문체 강유정 발탁…'국정 실행력'에 방점?",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-23T22:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979556?sid=100"
+    },
+    {
+     "title": "'국정원·통일·외교·문체·행안' 이재명 대통령 대규모 개각",
+     "press": "labortoday.co.kr",
+     "publishedAt": "2026-11-23T21:34:00.000Z",
+     "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237887"
+    },
+    {
+     "title": "국정원장 후보자에 강금실 전 장관…외교·행안 등 중폭 개각",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-23T21:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012299709?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "이지훈♥아야네, 둘째 딸 출산",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-23T21:10:00.000Z",
    "exclusive": false,
@@ -137,14 +235,52 @@
      "link": "https://m.entertain.naver.com/article/609/0001190545"
     }
    ]
+  },
+  {
+   "keyword": "정동영 이종석 교체",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T21:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "외교·안보 라인 전면 교체‥동맹파에 힘 실었나?",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-23T21:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537543?sid=100"
+    },
+    {
+     "title": "[뉴스분석] 동맹파·자주파 '불안한 동거' 청산...외교안보 라인 교체의...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-23T21:10:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261124000002"
+    },
+    {
+     "title": "李, 외교·안보라인 동시 교체…국정원장에 강금실 [오늘 뉴스 4컷]",
+     "press": "segye.com",
+     "publishedAt": "2026-11-23T21:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177581?sid=100"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1219,
-  "matched": 660,
+  "flagged": 1220,
+  "matched": 658,
   "avgLeadMin": 599,
   "recent": [
+   {
+    "keyword": "엔비디아 폭등",
+    "hitKeyword": "엔비디아 CEO 복귀",
+    "hitAt": "2026-11-24T07:30:00+09:00",
+    "leadMin": 26
+   },
    {
     "keyword": "상철 방귀 계약결혼",
     "hitKeyword": "계약결혼 상철 영숙",
@@ -198,12 +334,6 @@
     "hitKeyword": "삼성전자 MX 수장 교체",
     "hitAt": "2026-11-24T06:00:00+09:00",
     "leadMin": 1369
-   },
-   {
-    "keyword": "김정관 장관, 석유화학 CEO 간담회",
-    "hitKeyword": "젠슨 황 CEO 복귀",
-    "hitAt": "2026-11-24T06:00:00+09:00",
-    "leadMin": 853
    }
   ]
  }
