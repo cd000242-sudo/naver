@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T21:23:49.042Z",
+ "builtAt": "2026-11-23T21:33:52.342Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,58 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 21,
+ "measured": 24,
  "candidates": [
+  {
+   "keyword": "소비심리 하락",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 26,
+   "recent20": 1,
+   "press": 26,
+   "firstArticleAt": "2026-11-23T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘증시 조정·대출금리 상승’에 소비심리 두 달째 ‘악화’",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-23T21:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002394666?sid=101"
+    },
+    {
+     "title": "주식 시장 하락, 금리 상승에…소비 심리 두 달 연속 ‘뚝’",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-23T21:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004011355?sid=101"
+    },
+    {
+     "title": "11월 소비자심리 2.3p 하락…증시 조정·대출금리 상승에 두 달 연속 ‘...",
+     "press": "segyebiz.com",
+     "publishedAt": "2026-11-23T21:06:00.000Z",
+     "link": "http://www.segyebiz.com/newsView/20261123516983?OutUrl=naver"
+    }
+   ]
+  },
   {
    "keyword": "선관위 직원 1명 구속",
    "sources": [
     "nate"
    ],
-   "articles90": 8,
+   "articles90": 9,
    "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-23T20:00:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-23T20:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "‘선거 개표상황표 은닉’ 선관위 직원 8명 중 1명만 구속",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-23T21:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002727392?sid=102"
+    },
     {
      "title": "'개표 은닉' 선관위 직원 1명 구속…7명 기각",
      "press": "news.sbs.co.kr",
@@ -29,48 +67,10 @@
      "link": "https://n.news.naver.com/mnews/article/055/0001405272?sid=102"
     },
     {
-     "title": "‘투표율 허위 입력’ 선관위 직원 1명 구속…7명 영장 기각",
-     "press": "donga.com",
-     "publishedAt": "2026-11-23T21:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764647?sid=102"
-    },
-    {
-     "title": "‘투표율 허위입력’ 선관위 직원 8명 중 1명 구속…“증거인멸 염려”",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-23T21:02:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611240003"
-    }
-   ]
-  },
-  {
-   "keyword": "국정원장 후보 강금실",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-23T20:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "석 달 만에 '중폭 개각'‥최초 여성 국정원장 발탁",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-23T21:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001537535?sid=100"
-    },
-    {
-     "title": "李, 외교·안보라인 동시 교체…국정원장에 강금실 [오늘 뉴스 4컷]",
-     "press": "segye.com",
-     "publishedAt": "2026-11-23T21:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177581?sid=100"
-    },
-    {
-     "title": "국정원장 등 외교안보 라인 물갈이…대미·대북 돌파구",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-23T20:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001165362?sid=101"
+     "title": "‘개표상황표 위조 혐의’ 선관위 직원 1명 구속…7명은 기각",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-23T21:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012299712?sid=102"
     }
    ]
   },
@@ -80,7 +80,7 @@
     "google"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-23T21:00:00.000Z",
    "exclusive": false,
@@ -99,20 +99,96 @@
      "link": "https://www.kukinews.com/article/view/kuk202611230141"
     },
     {
-     "title": "\"FDA와 논의할 가치 있다\"…아리바이오, 먹는 치매약 출사표",
-     "press": "hansbiz.co.kr",
+     "title": "\"치매 '통곡의 벽' 넘었다\"...아리바이오 ,'AR1001' FDA 허가 자신",
+     "press": "pharmnews.com",
      "publishedAt": "2026-11-23T21:00:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=886264"
+     "link": "https://www.pharmnews.com/news/articleView.html?idxno=308235"
+    }
+   ]
+  },
+  {
+   "keyword": "강금실 국정원장 후보",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-23T20:53:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "석 달 만에 '중폭 개각'‥최초 여성 국정원장 발탁",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-23T21:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537535?sid=100"
+    },
+    {
+     "title": "국정원장 후보자에 강금실 전 장관…외교·행안 등 중폭 개각",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-23T21:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012299709?sid=100"
+    },
+    {
+     "title": "李, 외교·안보라인 동시 교체…국정원장에 강금실 [오늘 뉴스 4컷]",
+     "press": "segye.com",
+     "publishedAt": "2026-11-23T21:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177581?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "미국 디지털 301조 조사",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"美, 한국 디지털 규제에 301조 조사 검토\"…추가 관세 나오나",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-23T21:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005445323?sid=104"
+    },
+    {
+     "title": "[데스크 칼럼] 한국 디지털 규제, 서울·워싱턴 시각차 '심각'…커지는...",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-23T21:02:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261122010008224"
+    },
+    {
+     "title": "\"美, 한국·EU·호주 디지털 규제 301조 조사 검토\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-23T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929226?sid=104"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1229,
-  "matched": 668,
-  "avgLeadMin": 581,
+  "flagged": 1230,
+  "matched": 669,
+  "avgLeadMin": 582,
   "recent": [
+   {
+    "keyword": "놀부 기업회생 신청 기각",
+    "hitKeyword": "놀부 회생신청 기각",
+    "hitAt": "2026-11-24T06:30:00+09:00",
+    "leadMin": 650
+   },
+   {
+    "keyword": "법원 놀부 회생 기각",
+    "hitKeyword": "놀부 회생신청 기각",
+    "hitAt": "2026-11-24T06:30:00+09:00",
+    "leadMin": 459
+   },
    {
     "keyword": "어벤져스",
     "hitKeyword": "어벤져스 둠스데이 예고편",
@@ -160,18 +236,6 @@
     "hitKeyword": "반도체 시장 약세",
     "hitAt": "2026-11-24T06:00:00+09:00",
     "leadMin": 529
-   },
-   {
-    "keyword": "노태우 비자금 노소영 증인신문",
-    "hitKeyword": "최태원 노소영 재산분할",
-    "hitAt": "2026-11-24T06:00:00+09:00",
-    "leadMin": 499
-   },
-   {
-    "keyword": "젠슨 황 복귀",
-    "hitKeyword": "젠슨 황 CEO 복귀",
-    "hitAt": "2026-11-24T06:00:00+09:00",
-    "leadMin": 399
    }
   ]
  }
