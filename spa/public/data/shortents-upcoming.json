@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T01:02:14.992Z",
+ "builtAt": "2026-11-23T01:12:18.605Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,70 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 23,
  "candidates": [
+  {
+   "keyword": "박종복 전 SC제일은행장",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 70,
+   "recent20": 11,
+   "press": 67,
+   "firstArticleAt": "2026-11-22T23:44:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "10년간 SC제일은행 이끈 박종복, 은행연합회장 내정…금융권 '최장수 CE...",
+     "press": "techm.kr",
+     "publishedAt": "2026-11-23T01:10:00.000Z",
+     "link": "https://www.techm.kr/news/articleView.html?idxno=157690"
+    },
+    {
+     "title": "은행연합회장에 박종복 전 SC제일은행장 내정",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-23T01:08:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626927"
+    },
+    {
+     "title": "박종복 전 SC제일은행장, 차기 은행연합회장에 내정…26일 최종 선출",
+     "press": "betanews.net",
+     "publishedAt": "2026-11-23T01:06:00.000Z",
+     "link": "https://www.betanews.net/article/view/beta202611230026"
+    }
+   ]
+  },
   {
    "keyword": "코스피 급락",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 82,
-   "recent20": 29,
+   "articles90": 83,
+   "recent20": 25,
    "press": 66,
-   "firstArticleAt": "2026-11-23T00:18:00.000Z",
+   "firstArticleAt": "2026-11-23T00:26:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "코스피, 美 증시발 충격에 4700선 후퇴…정부 '증시 방어'에 총력",
-     "press": "industrynews.co.kr",
-     "publishedAt": "2026-11-23T01:00:00.000Z",
-     "link": "https://www.industrynews.co.kr/news/articleView.html?idxno=90016"
+     "title": "[속보] 코오롱티슈진 VI 발동, 주가 11%대 급등…코스피·코스닥 동반 하...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-23T01:10:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629732"
     },
     {
-     "title": "코스피, 美 기술주 급락 여파에 2%대 하락 출발···4700선 후퇴",
-     "press": "seoulfn.com",
-     "publishedAt": "2026-11-23T00:59:00.000Z",
-     "link": "https://www.seoulfn.com/news/articleView.html?idxno=643588"
+     "title": "[개장시황]美 반도체 급락 부담에 코스피 3%대↓…코스닥도 1%대 약세",
+     "press": "namdonews.com",
+     "publishedAt": "2026-11-23T01:10:00.000Z",
+     "link": "https://www.namdonews.com/news/articleView.html?idxno=930091"
     },
     {
-     "title": "[장중시황] 코스피, 美 기술주 급락에 4700선 붕괴…반도체주 동반 약세",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-23T00:58:00.000Z",
-     "link": "https://www.viva100.com/article/20261123500296"
+     "title": "AI 거품 꺼지나…반도체 급락에 닷컴버블의 그림자",
+     "press": "hinews.co.kr",
+     "publishedAt": "2026-11-23T01:08:00.000Z",
+     "link": "https://www.hinews.co.kr/view.php?ud=202611231004094316cd8b879b3c_48"
     }
    ]
   },
@@ -47,30 +80,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 62,
-   "recent20": 26,
-   "press": 47,
-   "firstArticleAt": "2026-11-22T23:44:00.000Z",
+   "articles90": 72,
+   "recent20": 27,
+   "press": 54,
+   "firstArticleAt": "2026-11-22T23:50:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "법관대표회의 의장 \"대법원장 탄핵은 도 넘어선 것…행동 나서야\"",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-23T01:00:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903976"
+     "title": "장동혁 \"조 대법원장 탄핵은 정권 자폭\", 민주당 \"12월 안으로 탄핵 의결...",
+     "press": "dgmbc.com",
+     "publishedAt": "2026-11-23T01:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/657/0000057737?sid=100"
     },
     {
-     "title": "[정치家] 김민석 더불어민주당 대표 ⑫ㅣ 조희대 탄핵 강공·당내 기강...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-23T01:00:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629721"
+     "title": "[속보]장동혁 “대법원장 탄핵의 최종 목표는 이재명 탈옥⋯탄핵안 처리...",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-23T01:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001232629?sid=100"
     },
     {
-     "title": "김재원 \"'조희대 탄핵' 김민석 위기 돌파용…친청은 李 궁지 빠뜨리려고...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T00:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009304225?sid=100"
+     "title": "[속보]靑 \"조희대 대법원장 탄핵 문제, 국회에서 논의할 사안…그 이상...",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-23T01:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005444840?sid=100"
     }
    ]
   },
@@ -79,62 +112,63 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 51,
-   "recent20": 13,
-   "press": 42,
+   "articles90": 57,
+   "recent20": 10,
+   "press": 48,
    "firstArticleAt": "2026-11-23T00:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "11월 1~20일 수출 774억달러…반도체 385억달러",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-23T00:56:00.000Z",
-     "link": "https://www.tokenpost.kr/news/economy/442648"
+     "title": "11월 중순 수출 역대 최대···반도체 비중 49.7%",
+     "press": "thereport.co.kr",
+     "publishedAt": "2026-11-23T01:10:00.000Z",
+     "link": "https://www.thereport.co.kr/news/articleView.html?idxno=93608"
     },
     {
-     "title": "반도체 294% 폭증에… 이달 중순 수출 774억 달러 '역대 최대'",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-23T00:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000193244?sid=101"
+     "title": "11월 1~20일 수출 774억 달러 역대 최대… 연간 누적 1조 달러 돌파",
+     "press": "fntoday.co.kr",
+     "publishedAt": "2026-11-23T01:10:00.000Z",
+     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=399659"
     },
     {
-     "title": "'1조달러' 넘어선 韓수출…\"연말엔 1조1700억달러 간다\"(종합)",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-23T00:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005846284?sid=101"
+     "title": "수출 '파죽지세'... 11월 1~20일 전년동기보다 2배 증가",
+     "press": "weeklytrade.co.kr",
+     "publishedAt": "2026-11-23T01:10:00.000Z",
+     "link": "https://weeklytrade.co.kr/news/view.html?section=1&category=3&item=&no=102374"
     }
    ]
   },
   {
-   "keyword": "에이티즈 빌보드 200 1위",
+   "keyword": "스쿠발",
    "sources": [
-    "daum"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 25,
-   "recent20": 4,
-   "press": 23,
-   "firstArticleAt": "2026-11-22T23:36:00.000Z",
+   "articles90": 12,
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-22T23:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "에이티즈, 美 빌보드 200 차트 1위… 통산 4번째",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-23T00:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001206592?sid=004"
+     "title": "“다저스 10년↑계약은 오타니·베츠·야마모토에게만…” 스쿠발은 어...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-23T01:02:00.000Z",
+     "link": "https://m.sports.naver.com/wbaseball/article/117/0004127256"
     },
     {
-     "title": "에이티즈, 통산 네 번째 빌보드 200 1위",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-23T00:48:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611230039"
+     "title": "\"다저스 제안조차 못했다\"…'억만장자' 스케일 미쳤다! 스쿠발 6054억 역...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-23T00:40:00.000Z",
+     "link": "https://m.sports.naver.com/wbaseball/article/109/0005644092"
     },
     {
-     "title": "에이티즈, 미국 빌보드 메인 앨범 차트 4번째 1위",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-23T00:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436622?sid=103"
+     "title": "'FA 최대어' 행선지 나왔다…스쿠발, 뉴욕 메츠와 역대 투수 최고액 계...",
+     "press": "sports.hankooki.com",
+     "publishedAt": "2026-11-23T00:36:00.000Z",
+     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6944013"
     }
    ]
   },
@@ -171,14 +205,78 @@
    ]
   },
   {
-   "keyword": "현대차 N 컵 결승 개최",
+   "keyword": "강금실",
+   "sources": [
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-22T23:49:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'이종석 교체·강금실 후임설'…靑 \"인사 사항 확인 어려워\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-23T00:56:00.000Z",
+     "link": "https://www.ajunews.com/view/20261123095019156"
+    },
+    {
+     "title": "靑, '이종석 국정원장 후임 강금실 검토설'에 \"인사 관련 확인 어려워\"",
+     "press": "goodmorningcc.com",
+     "publishedAt": "2026-11-23T00:44:00.000Z",
+     "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=456315"
+    },
+    {
+     "title": "\"이종석 국정원장 강금실로 교체\" 보도‥靑 \"확인 어렵다\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-23T00:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537328?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "이용철 후보자 인사청문회 준비",
    "sources": [
     "nate"
    ],
    "articles90": 5,
-   "recent20": 2,
+   "recent20": 3,
    "press": 5,
-   "firstArticleAt": "2026-11-22T23:42:00.000Z",
+   "firstArticleAt": "2026-11-23T00:29:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "청문회 D-1 이용철, '李 공소취소' 여전히 침묵 … \"청문회서 답변하겠...",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-23T01:10:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/23/2026112350082.html"
+    },
+    {
+     "title": "'청문회 D-1' 이용철, 공소취소 묻자 \"내일 성실히 답변\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-23T01:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436632?sid=102"
+    },
+    {
+     "title": "성남산업진흥재단, 이용철 후보자 대표 시절 호남향우회장 자녀 채용",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-23T00:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003158183?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "현대차 N 컵 결승 개최",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-23T00:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -235,98 +333,34 @@
    ]
   },
   {
-   "keyword": "이용철 후보자 인사청문회 준비",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T00:29:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "성남산업진흥재단, 이용철 후보자 대표 시절 호남향우회장 자녀 채용",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-23T00:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003158183?sid=102"
-    },
-    {
-     "title": "법무장관 인사청문회 D-1…공소취소 입장 묻자 \"내일 답변\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-23T00:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652739?sid=100"
-    },
-    {
-     "title": "인사청문회 D-1…이용철, 공소취소 입장에 \"내일 답변\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-23T00:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014338750?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "김정근 아나운서",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T23:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "전 MBC 아나운서, 배우 데뷔했다…KBS 대하사극 '문무' 깜짝 출연한 김정...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-23T00:44:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000785675"
-    },
-    {
-     "title": "아나운서 출신 김정근, KBS2 ‘문무’로 연기 본격 도전",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-23T00:07:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001151215"
-    },
-    {
-     "title": "김정근 전 아나운서, 배우 도전…사극 '문무' 깜짝 출연",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-22T23:52:00.000Z",
-     "link": "https://m.entertain.naver.com/article/437/0000521938"
-    }
-   ]
-  },
-  {
-   "keyword": "노시환",
+   "keyword": "나스닥 선물",
    "sources": [
     "google"
    ],
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-22T23:55:00.000Z",
+   "firstArticleAt": "2026-11-22T23:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"307억 계약, 진짜 시작도 못 하고 사라질까\"… 캔자스시티까지 노시환...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-23T01:01:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/014/0005608074"
+     "title": "나스닥100 선물 3% 가까이 반등, 코스피는 장초반 3%대 하락",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-23T01:08:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/442661"
     },
     {
-     "title": "노시환 MLB행, 양키스·캔자스시티 후보로 거론…307억 한화 계약은 어떻...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-23T00:30:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283462"
+     "title": "나스닥 선물 2.7% 급반등…골드만 \"저가매수 기회지만 위험 여전\"(종합)",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T00:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009304180?sid=104"
     },
     {
-     "title": "‘한·일 포스팅 역사’ 307억 포기한 노시환에 빅리그 문 열릴까 [머니...",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-22T23:55:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/119/0003158123"
+     "title": "나스닥 '코로나 이후 최악의 한 주'…아시아 증시 또 흔들리나",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-22T23:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413924?sid=101"
     }
    ]
   },
@@ -361,137 +395,73 @@
      "link": "https://n.news.naver.com/mnews/article/003/0014338742?sid=100"
     }
    ]
-  },
-  {
-   "keyword": "오지헌 딸 공개",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T23:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'박상미♥' 오지헌, 미모의 세 딸 공개…'174cm' 고2 장녀에 \"모델해도 ...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-23T00:22:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002083098"
-    },
-    {
-     "title": "'아침마당' 오지헌 부부, 세 딸 사진 공개…고등학생·중학생·초등학생",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-23T00:02:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626932"
-    },
-    {
-     "title": "오지헌 딸 농사 대박, 배우 비주얼 ♥아내 닮아 다행 “고2 장녀, 키 174...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-22T23:48:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190305"
-    }
-   ]
-  },
-  {
-   "keyword": "나스닥 선물",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-22T23:39:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "나스닥 선물 2.7% 급반등…골드만 \"저가매수 기회지만 위험 여전\"(종합)",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T00:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009304180?sid=104"
-    },
-    {
-     "title": "나스닥 '코로나 이후 최악의 한 주'…아시아 증시 또 흔들리나",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-22T23:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413924?sid=101"
-    },
-    {
-     "title": "나스닥 선물 1.3% 상승…추수감사절 앞두고 저가 매수에 반등 시도",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T23:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009303975?sid=104"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1149,
-  "matched": 635,
-  "avgLeadMin": 598,
+  "flagged": 1152,
+  "matched": 647,
+  "avgLeadMin": 601,
   "recent": [
    {
-    "keyword": "코레일 첫차 정상운행",
-    "hitKeyword": "코레일 장애인 전형 취소",
-    "hitAt": "2026-11-23T09:30:00+09:00",
-    "leadMin": 2080
+    "keyword": "고경표 후보 제외",
+    "hitKeyword": "고경표 시상식 논란",
+    "hitAt": "2026-11-23T10:00:00+09:00",
+    "leadMin": 1164
    },
    {
-    "keyword": "트럼프 이란 새해 공격 경고",
-    "hitKeyword": "트럼프 증시 폭락 책임",
-    "hitAt": "2026-11-23T09:30:00+09:00",
-    "leadMin": 78
+    "keyword": "음주운전 고경표 후보 제외",
+    "hitKeyword": "고경표 시상식 논란",
+    "hitAt": "2026-11-23T10:00:00+09:00",
+    "leadMin": 1124
    },
    {
-    "keyword": "트럼프 이란 새해 공격",
-    "hitKeyword": "트럼프 증시 폭락 책임",
-    "hitAt": "2026-11-23T09:30:00+09:00",
-    "leadMin": 48
+    "keyword": "기상",
+    "hitKeyword": "나는솔로 19기 상철 결혼",
+    "hitAt": "2026-11-23T10:00:00+09:00",
+    "leadMin": 1124
    },
    {
-    "keyword": "박종복 은행연합회장 내정",
-    "hitKeyword": "박종복 은행연합회장",
-    "hitAt": "2026-11-23T09:30:00+09:00",
-    "leadMin": 28
+    "keyword": "고경표 음주 사과",
+    "hitKeyword": "고경표 시상식 논란",
+    "hitAt": "2026-11-23T10:00:00+09:00",
+    "leadMin": 993
    },
    {
-    "keyword": "트럼프 이란, 새해 공격 경고",
-    "hitKeyword": "트럼프 증시 폭락 책임",
-    "hitAt": "2026-11-23T09:30:00+09:00",
-    "leadMin": 28
+    "keyword": "고경표 후보 사과",
+    "hitKeyword": "고경표 시상식 논란",
+    "hitAt": "2026-11-23T10:00:00+09:00",
+    "leadMin": 953
    },
    {
-    "keyword": "대학",
-    "hitKeyword": "대학 연구 성과",
-    "hitAt": "2026-11-23T09:30:00+09:00",
-    "leadMin": 18
+    "keyword": "고경표 음주운전 사과",
+    "hitKeyword": "고경표 시상식 논란",
+    "hitAt": "2026-11-23T10:00:00+09:00",
+    "leadMin": 923
    },
    {
-    "keyword": "김원효 트랜스젠더 바",
-    "hitKeyword": "심진화 김원효 해명",
-    "hitAt": "2026-11-23T09:30:00+09:00",
-    "leadMin": 18
+    "keyword": "음주운전 고경표 사과",
+    "hitKeyword": "고경표 시상식 논란",
+    "hitAt": "2026-11-23T10:00:00+09:00",
+    "leadMin": 893
    },
    {
-    "keyword": "창원 아파트서 40대 엄마 아기와 추락",
-    "hitKeyword": "창원 아파트 모녀 추락",
-    "hitAt": "2026-11-23T09:30:00+09:00",
-    "leadMin": 18
+    "keyword": "고경표 후보 제외 사과",
+    "hitKeyword": "고경표 시상식 논란",
+    "hitAt": "2026-11-23T10:00:00+09:00",
+    "leadMin": 862
    },
    {
-    "keyword": "이혜영 미우새",
-    "hitKeyword": "이혜영 재혼 폭로",
-    "hitAt": "2026-11-23T09:00:00+09:00",
-    "leadMin": 189
+    "keyword": "고경표 음주운전으로 사과",
+    "hitKeyword": "고경표 시상식 논란",
+    "hitAt": "2026-11-23T10:00:00+09:00",
+    "leadMin": 832
    },
    {
-    "keyword": "한국 남녀 임금 격차",
-    "hitKeyword": "한국 남녀 임금 격차",
-    "hitAt": "2026-11-23T09:00:00+09:00",
-    "leadMin": 48
+    "keyword": "에이티즈 빌보드 200 1위",
+    "hitKeyword": "에이티즈 빌보드 200 1위",
+    "hitAt": "2026-11-23T10:00:00+09:00",
+    "leadMin": 38
    }
   ]
  }
