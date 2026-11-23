@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T03:33:04.775Z",
+ "builtAt": "2026-11-23T03:43:08.763Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,86 +8,61 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
-  {
-   "keyword": "삼성증권",
-   "sources": [
-    "google"
-   ],
-   "articles90": 59,
-   "recent20": 2,
-   "press": 58,
-   "firstArticleAt": "2026-11-23T02:04:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“증권사 보안망 줄줄이 뚫렸다”…삼성증권도 8241명 정보 유출",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-23T03:26:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611230101"
-    },
-    {
-     "title": "삼성증권, 고객 8241명 계좌·주소 등 개인정보 유출",
-     "press": "sisafocus.co.kr",
-     "publishedAt": "2026-11-23T03:22:00.000Z",
-     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367929"
-    },
-    {
-     "title": "삼성증권 개인정보 8241명 유출…'일괄 지원' 묻자 \"추후 논의\"",
-     "press": "ppss.kr",
-     "publishedAt": "2026-11-23T03:09:00.000Z",
-     "link": "https://www.ppss.kr/news/articleView.html?idxno=322377"
-    }
-   ]
-  },
   {
    "keyword": "조희대 탄핵 추진",
    "sources": [
-    "nate"
+    "nate",
+    "daum"
    ],
-   "articles90": 75,
+   "articles90": 74,
    "recent20": 6,
-   "press": 51,
-   "firstArticleAt": "2026-11-23T02:18:00.000Z",
+   "press": 52,
+   "firstArticleAt": "2026-11-23T02:21:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
+    {
+     "title": "[일요서울TV] 민주, 조희대 탄핵 추진...사법권 독립 지켜라!",
+     "press": "ilyoseoul.co.kr",
+     "publishedAt": "2026-11-23T03:42:00.000Z",
+     "link": "https://www.ilyoseoul.co.kr/news/articleView.html?idxno=525394"
+    },
+    {
+     "title": "김민석, '조희대 탄핵' 재확인…\"당내외 의견 모아 발의·처리\"",
+     "press": "gobalnews.com",
+     "publishedAt": "2026-11-23T03:40:00.000Z",
+     "link": "https://www.gobalnews.com/news/articleView.html?idxno=203149"
+    },
     {
      "title": "[속보] 조희대 탄핵 두고…국힘 \"방탄 탄핵\" 민주 \"내란 동조\"",
      "press": "jmbc.co.kr",
      "publishedAt": "2026-11-23T03:31:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/659/0000048935?sid=100"
-    },
-    {
-     "title": "여 \"조희대 탄핵은 내란 청산\"…야 \"자폭 탄핵\"",
-     "press": "natv.go.kr",
-     "publishedAt": "2026-11-23T03:28:00.000Z",
-     "link": "https://www.natv.go.kr/natv/news/newsView.do?newsId=514632"
-    },
-    {
-     "title": "장동혁 \"조희대 탄핵은 '李 방탄 탄핵'… 법원, 당장 재판 재개하라\"",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-23T03:28:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3451250"
     }
    ]
   },
   {
-   "keyword": "이형일 증안펀드",
+   "keyword": "이형일 부총리 증안펀드",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 57,
-   "recent20": 5,
+   "articles90": 53,
+   "recent20": 4,
    "press": 47,
-   "firstArticleAt": "2026-11-23T02:04:00.000Z",
+   "firstArticleAt": "2026-11-23T02:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "정부, 증안펀드 가동 준비 착수…추가 시장 안정책도 검토",
+     "title": "이형일 \"공매도 규제보다 불공정거래 감시 강화에 더 중점\"",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-23T03:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000161980?sid=101"
+    },
+    {
+     "title": "정부, 증안펀드 가동 여부 검토…투입 시점·규모는 미정",
      "press": "viva100.com",
      "publishedAt": "2026-11-23T03:30:00.000Z",
      "link": "https://www.viva100.com/article/20261123500641"
@@ -97,28 +72,59 @@
      "press": "joongang.co.kr",
      "publishedAt": "2026-11-23T03:28:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/025/0003567177?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "삼성증권",
+   "sources": [
+    "google"
+   ],
+   "articles90": 38,
+   "recent20": 5,
+   "press": 36,
+   "firstArticleAt": "2026-11-23T02:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "삼성증권, 고객정보 유출에 전사적 보안 강화 나서",
+     "press": "press9.kr",
+     "publishedAt": "2026-11-23T03:42:00.000Z",
+     "link": "http://www.press9.kr/news/articleView.html?idxno=86849"
     },
     {
-     "title": "정부, 증안펀드 가동 준비 착수…불법 공매도 3개월 집중 감시",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-23T03:24:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/442718"
+     "title": "삼성증권 해킹으로 고객정보 유출",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-23T03:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014339659?sid=101"
+    },
+    {
+     "title": "삼성증권도 개인정보 유출 사고",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-23T03:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014339658?sid=101"
     }
    ]
   },
   {
    "keyword": "최고위원회의 김민석 대표",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 52,
    "recent20": 3,
-   "press": 26,
+   "press": 27,
    "firstArticleAt": "2026-11-23T02:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김민석, '조희대 탄핵' 재확인…\"당내외 의견 모아 발의·처리\"",
+     "press": "gobalnews.com",
+     "publishedAt": "2026-11-23T03:40:00.000Z",
+     "link": "https://www.gobalnews.com/news/articleView.html?idxno=203149"
+    },
     {
      "title": "민주 최고위 '신천지' 막말 충돌…김민석, 박선원에 경고",
      "press": "sisafocus.co.kr",
@@ -130,12 +136,6 @@
      "press": "breaknews.com",
      "publishedAt": "2026-11-23T03:24:00.000Z",
      "link": "http://www.breaknews.com/1253005"
-    },
-    {
-     "title": "\"조희대 탄핵 사유 차고 넘친다\"…김민석, 탄핵안 처리 방침 재확인",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-23T03:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005357022?sid=100"
     }
    ]
   },
@@ -144,62 +144,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 24,
-   "recent20": 1,
-   "press": 24,
-   "firstArticleAt": "2026-11-23T02:05:00.000Z",
+   "articles90": 21,
+   "recent20": 2,
+   "press": 20,
+   "firstArticleAt": "2026-11-23T02:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "장윤기 사건 핵심 증거 인멸 경찰 간부 아버지…'중징계' 처분",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-23T03:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000133320?sid=102"
+    },
+    {
+     "title": "경찰, ‘리얼돌 폐기’ 장윤기 부친 중징계 처분",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-23T03:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002727150?sid=102"
+    },
     {
      "title": "경찰, 리얼돌 폐기한 '장윤기 父' 중징계…정확한 수위는 비공개",
      "press": "sisajournal.com",
      "publishedAt": "2026-11-23T03:22:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/586/0000142840?sid=102"
-    },
-    {
-     "title": "'리얼돌 폐기' 등 증거 은폐...경찰, 장윤기 부친에 '중징계 처분'",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-23T03:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000521978?sid=102"
-    },
-    {
-     "title": "경찰, ‘여고생 살해’ 장윤기 부친 경찰 간부 ‘중징계’ 처분",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-23T02:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005767556?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "김신영, 정오의 희망곡 하차",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-23T02:06:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김신영, 14년 지킨 '정오의 희망곡' 떠난다…29일 마지막 방송 \"새로운 ...",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-23T03:31:00.000Z",
-     "link": "https://m.entertain.naver.com/article/088/0001041725"
-    },
-    {
-     "title": "김신영 ‘정희’ 복귀와 동시에 하차 발표 “마지막 인사 예의라 생각해...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-23T03:24:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190388"
-    },
-    {
-     "title": "김신영, 14년 만에 '정오의 희망곡' DJ 하차…29일 막방",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T02:46:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009304732"
     }
    ]
   },
@@ -208,13 +176,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 10,
+   "articles90": 8,
    "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-23T02:04:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-23T02:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "에이티즈 빌보드 네번째 1위에 \"벅차고 감사…초심 잃지 않겠다\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-23T03:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016458132?sid=103"
+    },
     {
      "title": "에이티즈, 미국 빌보드 200 네 번째 1위…2020년대 그룹 최다 톱10 기록으...",
      "press": "lecturernews.com",
@@ -226,44 +200,38 @@
      "press": "munhwa.com",
      "publishedAt": "2026-11-23T02:43:00.000Z",
      "link": "https://m.entertain.naver.com/article/021/0002834744"
-    },
-    {
-     "title": "에이티즈, 빌보드 200 네 번째 정상 … 초동 205만 장 '더블 밀리언셀러...",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-23T02:42:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/23/2026112350169.html"
     }
    ]
   },
   {
-   "keyword": "이재명 지지율 상승",
+   "keyword": "lpga",
    "sources": [
-    "daum"
+    "google"
    ],
-   "articles90": 7,
-   "recent20": 1,
+   "articles90": 8,
+   "recent20": 4,
    "press": 7,
-   "firstArticleAt": "2026-11-23T02:05:00.000Z",
+   "firstArticleAt": "2026-11-23T02:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[이재명 직무평가] 지지율 37.3%...2주 연속 상승세",
-     "press": "00news.co.kr",
+     "title": "LPGA CME Group Championship",
+     "press": null,
+     "publishedAt": "2026-11-23T03:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/077/0007247012?sid=104"
+    },
+    {
+     "title": "김아림, LPGA 시즌 최종전 공동 7위로 마감",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-23T03:29:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/088/0001041723"
+    },
+    {
+     "title": "韓 여자골프, 2년 연속 LPGA 6승… 개인 타이틀 무관",
+     "press": "hansbiz.co.kr",
      "publishedAt": "2026-11-23T03:28:00.000Z",
-     "link": "http://www.00news.co.kr/news/articleView.html?idxno=108271"
-    },
-    {
-     "title": "李대통령 지지율 37.3% … 2주 연속 소폭 상승",
-     "press": "cnbnews.com",
-     "publishedAt": "2026-11-23T02:54:00.000Z",
-     "link": "https://www.cnbnews.com/news/articleView.html?idxno=1024766"
-    },
-    {
-     "title": "이재명 대통령 지지율 37.3%…2주 연속 상승, 국민의힘 42.5%·민주당 35....",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-23T02:12:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629762"
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=886082"
     }
    ]
   },
@@ -273,13 +241,19 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 6,
+   "articles90": 7,
    "recent20": 1,
-   "press": 6,
+   "press": 7,
    "firstArticleAt": "2026-11-23T03:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "2027 국가장학금 신청기간 11월 24일부터…소득분위 기준·지급일·지원...",
+     "press": "christiantoday.co.kr",
+     "publishedAt": "2026-11-23T03:40:00.000Z",
+     "link": "https://www.christiantoday.co.kr/news/378814"
+    },
     {
      "title": "'재학생 반드시 신청하세요' 국가장학금 신청, 내일부터",
      "press": "biz.sbs.co.kr",
@@ -291,12 +265,38 @@
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-23T03:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006414102?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "한전 on",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-23T02:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한국전력, 한전ON 개인정보 유출 사고 발생…고객번호·계좌번호·카드...",
+     "press": "aitimes.kr",
+     "publishedAt": "2026-11-23T03:34:00.000Z",
+     "link": "https://www.aitimes.kr/news/articleView.html?idxno=42850"
     },
     {
-     "title": "국가장학금 1차 24일부터 신청…내년 지방 국립대 등록금 전액 지원",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T03:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009304783?sid=102"
+     "title": "한전 '주민번호 포함' 유출‥삼성증권도 뚫려",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-23T03:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537381?sid=101"
+    },
+    {
+     "title": "삼성증권 8241명 정보유출… 한전도 152만명분 보안 구멍",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-23T02:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002834772?sid=101"
     }
    ]
   },
@@ -307,17 +307,17 @@
     "nate"
    ],
    "articles90": 11,
-   "recent20": 4,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-23T02:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "「M포토」 의원 질의에 답변하는 강신철 국방부 장관",
-     "press": "m-economynews.com",
+     "title": "[포토] 강신철 국방부 장관, 의원질의 답변",
+     "press": "newscj.com",
      "publishedAt": "2026-11-23T03:18:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=73472"
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3451245"
     },
     {
      "title": "[포토] 강신철 국방부 장관 답변",
@@ -326,42 +326,10 @@
      "link": "https://www.newscj.com/news/articleView.html?idxno=3451246"
     },
     {
-     "title": "[포토] 강신철 국방부 장관, 의원질의 답변",
-     "press": "newscj.com",
+     "title": "「M포토」 의원 질의에 답변하는 강신철 국방부 장관",
+     "press": "m-economynews.com",
      "publishedAt": "2026-11-23T03:18:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3451245"
-    }
-   ]
-  },
-  {
-   "keyword": "대만 증시",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-23T02:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“폭락장에 꺼낸 카드가 준비 중”...대만은 증시대책 ‘총력전’",
-     "press": "ekn.kr",
-     "publishedAt": "2026-11-23T03:20:00.000Z",
-     "link": "https://www.ekn.kr/web/view.php?key=20261123029593309"
-    },
-    {
-     "title": "증시 대책 효과 달랐다…대만 반등, 한국 급락",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-23T03:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000545284?sid=104"
-    },
-    {
-     "title": "“정부가 나서도 안 통하네”…韓·中·대만 증시 부양 총력전도 역부족...",
-     "press": "ekn.kr",
-     "publishedAt": "2026-11-23T03:12:00.000Z",
-     "link": "https://www.ekn.kr/web/view.php?key=20261123027253126"
+     "link": "https://www.m-economynews.com/news/article.html?no=73472"
     }
    ]
   },
@@ -371,10 +339,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 10,
+   "articles90": 9,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-23T02:04:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-23T02:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -399,14 +367,79 @@
    ]
   },
   {
+   "keyword": "서부지법 청사 방호훈련",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 38,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T02:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "서부지법 합동 방호훈련",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-23T03:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016458142?sid=102"
+    },
+    {
+     "title": "서부지법 합동 청사 방호훈련",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-23T03:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016458108?sid=102"
+    },
+    {
+     "title": "서부지법에서 진행된 합동 청사 방호훈련",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-23T03:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016458097?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "100일의 거짓말",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T02:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'100일의 거짓말' 김유정·박진영 어머니가 송지효였다…사진으로 드러...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-23T03:21:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004468842"
+    },
+    {
+     "title": "'100일의거짓말' 김유정·박진영, 송지효와 인연 드러났다…11.7% 자체 최...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T02:43:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009304715"
+    },
+    {
+     "title": "‘100일의 거짓말’ 이무생, 사랑 앞에서는 애틋한 진심",
+     "press": "swtvnews.com",
+     "publishedAt": "2026-11-23T02:30:00.000Z",
+     "link": "https://www.swtvnews.com/news/newsview.php?ncode=1065577421563219"
+    }
+   ]
+  },
+  {
    "keyword": "구혜리 박강균 결혼",
    "sources": [
     "daum"
    ],
-   "articles90": 5,
+   "articles90": 3,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-23T02:11:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-23T02:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -429,78 +462,32 @@
      "link": "https://m.entertain.naver.com/article/445/0000492525"
     }
    ]
-  },
-  {
-   "keyword": "구조조정",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T02:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "금산군, '171억 구조조정'…민생예산 늘리고 빚 줄인다",
-     "press": "bzeronews.com",
-     "publishedAt": "2026-11-23T02:46:00.000Z",
-     "link": "https://www.bzeronews.com/news/articleView.html?idxno=825690"
-    },
-    {
-     "title": "[사실은 이렇습니다] (보도설명) 지출구조조정은 집행률 외에도 사업 성...",
-     "press": "korea.kr",
-     "publishedAt": "2026-11-23T02:27:00.000Z",
-     "link": "https://www.korea.kr/briefing/actuallyView.do?newsId=148976292&call_from=naver_news"
-    },
-    {
-     "title": "금산군, 내년 예산 6751억 편성…세출구조조정 89억 증액",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-23T02:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014339314?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "정년연장",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T02:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "정년연장, 27일 담판?…정부안 먼저 낸다",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-23T02:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000545276?sid=101"
-    },
-    {
-     "title": "진보당 노혜령, \"저임금 재고용 아닌 65세 정년연장 필요\"",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-23T02:26:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3760005"
-    },
-    {
-     "title": "‘정년연장 개입’ 시사 정부, 임금개편 살핀다",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-23T02:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002727068?sid=101"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1160,
-  "matched": 660,
+  "flagged": 1161,
+  "matched": 662,
   "avgLeadMin": 613,
   "recent": [
+   {
+    "keyword": "18득점 시즌 현대건설",
+    "hitKeyword": "배유나 현대건설 활약",
+    "hitAt": "2026-11-23T12:30:00+09:00",
+    "leadMin": 1103
+   },
+   {
+    "keyword": "블리츠웨이 엔터테인먼트",
+    "hitKeyword": "정승환 블리츠웨이",
+    "hitAt": "2026-11-23T12:30:00+09:00",
+    "leadMin": 87
+   },
+   {
+    "keyword": "김신영, 정오의 희망곡 하차",
+    "hitKeyword": "김신영 정오의희망곡 하차",
+    "hitAt": "2026-11-23T12:30:00+09:00",
+    "leadMin": 27
+   },
    {
     "keyword": "드파르디외 우엘벡 성폭행",
     "hitKeyword": "의붓딸 성폭행 계부 처벌",
@@ -542,24 +529,6 @@
     "hitKeyword": "삼성증권 해킹",
     "hitAt": "2026-11-23T11:30:00+09:00",
     "leadMin": 27
-   },
-   {
-    "keyword": "정승환, 안테나 11년 떠난다",
-    "hitKeyword": "정승환 안테나 계약 만료",
-    "hitAt": "2026-11-23T11:30:00+09:00",
-    "leadMin": 27
-   },
-   {
-    "keyword": "이부진 아들 성 변경",
-    "hitKeyword": "이부진 아들 성변경",
-    "hitAt": "2026-11-23T11:30:00+09:00",
-    "leadMin": 17
-   },
-   {
-    "keyword": "삼성증권 8241명 개인정보 유출",
-    "hitKeyword": "삼성증권 해킹",
-    "hitAt": "2026-11-23T11:30:00+09:00",
-    "leadMin": 7
    }
   ]
  }
