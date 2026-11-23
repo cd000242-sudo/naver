@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T19:13:03.976Z",
+ "builtAt": "2026-11-23T19:23:07.473Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,35 @@
  "measured": 27,
  "candidates": [
   {
-   "keyword": "젠슨 황 CEO 복귀",
+   "keyword": "젠슨 황 복귀",
    "sources": [
-    "nate"
+    "nate",
+    "daum"
    ],
-   "articles90": 31,
-   "recent20": 7,
-   "press": 17,
-   "firstArticleAt": "2026-11-23T17:44:00.000Z",
+   "articles90": 30,
+   "recent20": 11,
+   "press": 18,
+   "firstArticleAt": "2026-11-23T17:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨황 복귀에 나스닥 장중 7%대 급등…엔비디아 30%대↑(종합2보)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-23T19:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016459342?sid=104"
-    },
-    {
-     "title": "트럼프 \"젠슨황 복귀 안보위험 아냐…내가 이사회 설득해 성사\"",
+     "title": "美정치권, 젠슨황 복귀에 \"안보 팔아넘겨…불법행위 조사\"",
      "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-23T19:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000545403?sid=101"
+     "publishedAt": "2026-11-23T19:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000545407?sid=104"
     },
     {
-     "title": "트럼프 \"젠슨 황 복귀 안보위험 아냐…내가 이사회 설득\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-23T19:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001405267?sid=104"
+     "title": "트럼프가 되돌린 젠슨 황…11일 만에 CEO 복귀",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-23T19:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005767949?sid=105"
+    },
+    {
+     "title": "머스크 \"실수 바로 잡혀\"...실리콘밸리도 젠슨 황 복귀 환영",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-23T19:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437078?sid=104"
     }
    ]
   }
