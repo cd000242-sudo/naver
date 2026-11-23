@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T00:11:58.260Z",
+ "builtAt": "2026-11-23T00:22:01.681Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "이재명 대통령 지지율",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 44,
-   "recent20": 12,
-   "press": 42,
-   "firstArticleAt": "2026-11-22T22:48:00.000Z",
+   "articles90": 50,
+   "recent20": 11,
+   "press": 48,
+   "firstArticleAt": "2026-11-22T22:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이 대통령 지지율 37.3%…전주 대비 0.9%p↑[리얼미터]",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-23T00:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000368351?sid=100"
+     "title": "李 지지율 2주 연속 올라 37.3%.. 민주 35.6%·국힘 42.5%",
+     "press": "jibs.co.kr",
+     "publishedAt": "2026-11-23T00:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/661/0000086933?sid=100"
     },
     {
-     "title": "李대통령 지지율 37.3%…코스피 하락에 발목 잡힌 외교 성과 [리얼미터...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-23T00:07:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123000114"
+     "title": "이 대통령 지지율 37.3%, 2주 연속 상승…외교 성과 속 국내 악재는 부담",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-23T00:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000521946?sid=100"
     },
     {
-     "title": "민주 서울 지지율 '29.4%', 30% 붕괴 … 李는 서울 '30.8%' 위태위태 [심...",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-23T00:04:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/23/2026112350047.html"
+     "title": "이재명 대통령 지지율 상승, 대구·경북서 급등하며 30%대 후반 기록",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-23T00:16:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886803"
     }
    ]
   },
@@ -47,63 +47,94 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 35,
-   "recent20": 9,
-   "press": 30,
+   "articles90": 43,
+   "recent20": 14,
+   "press": 34,
    "firstArticleAt": "2026-11-22T22:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "코스피, 美 기술주 급락 여파에 3%대↓…4700선까지 후퇴",
-     "press": "iminju.net",
-     "publishedAt": "2026-11-23T00:10:00.000Z",
-     "link": "http://www.iminju.net/news/articleView.html?idxno=172864"
+     "title": "주가 급락에도 퇴직연금 계좌 반도체 ETF 순매수 이어져",
+     "press": "sentv.co.kr",
+     "publishedAt": "2026-11-23T00:20:00.000Z",
+     "link": "https://www.sentv.co.kr/article/view/sentv202611230017"
     },
     {
-     "title": "\"美반도체 폭락에…\" 삼성전자·SK하닉, 장 초반 3% 하락[핫스탁]",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-23T00:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014338682?sid=101"
+     "title": "美 반도체지수 10% 급락…삼성전자 3%·SK하이닉스 2%↓[핫종목]",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T00:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009304106?sid=101"
     },
     {
-     "title": "코스피 2.77% 급락 출발… 삼성전자 3.22%·현대차 4.31% 약세",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-23T00:06:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3759843"
+     "title": "코스피, 장초반 3% 가까이 급락해 4700선 후퇴...美 AI주 폭락 충격",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-23T00:18:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=506867"
     }
    ]
   },
   {
    "keyword": "박종복 은행연합회장 내정",
    "sources": [
-    "nate",
     "daum"
    ],
-   "articles90": 24,
-   "recent20": 11,
-   "press": 24,
+   "articles90": 27,
+   "recent20": 5,
+   "press": 27,
    "firstArticleAt": "2026-11-22T23:18:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "차기 은행연합회장에 박종복 전 SC제일은행장 내정",
-     "press": "livebiz.today",
-     "publishedAt": "2026-11-23T00:06:00.000Z",
-     "link": "https://www.livebiz.today/news/articleView.html?idxno=206774"
-    },
-    {
      "title": "박종복 전 SC제일은행장, 차기 은행연합회장 내정",
-     "press": "enewstoday.co.kr",
-     "publishedAt": "2026-11-23T00:05:00.000Z",
-     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2495549"
+     "press": "newscj.com",
+     "publishedAt": "2026-11-23T00:18:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3451169"
     },
     {
-     "title": "박종복 차기 은행연합회장 만장일치…26일 사원총회서 선출 [종합]",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-23T00:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001077319?sid=101"
+     "title": "차기 은행연합회장에 박종복 전 SC제일은행장 내정",
+     "press": "tfmedia.co.kr",
+     "publishedAt": "2026-11-23T00:18:00.000Z",
+     "link": "https://www.tfmedia.co.kr/news/article.html?no=209119"
+    },
+    {
+     "title": "\"박종복 전 SC제일은행장의 은행연합회 수장 내정, 금융계 지각 변동 예...",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-23T00:16:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886808"
+    }
+   ]
+  },
+  {
+   "keyword": "에이티즈 빌보드 200 1위",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 22,
+   "recent20": 5,
+   "press": 21,
+   "firstArticleAt": "2026-11-22T22:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "에이티즈, 美 빌보드 200 네 번째 정상…2020년대 그룹 최다 톱10 기록",
+     "press": "mhns.co.kr",
+     "publishedAt": "2026-11-23T00:20:00.000Z",
+     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=770233"
+    },
+    {
+     "title": "에이티즈, 美 '빌보드 200' 또 1위…통산 4번째",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-23T00:14:00.000Z",
+     "link": "https://m.entertain.naver.com/article/629/0000554411"
+    },
+    {
+     "title": "에이티즈, 빌보드 200 네 번째 1위…미국·국내 판매 흐름 엇갈려",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-23T00:12:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283415"
     }
    ]
   },
@@ -113,30 +144,62 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 12,
-   "recent20": 12,
-   "press": 12,
-   "firstArticleAt": "2026-11-22T23:54:00.000Z",
+   "articles90": 14,
+   "recent20": 14,
+   "press": 14,
+   "firstArticleAt": "2026-11-23T00:06:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "성남시의료원 누적 손실 2852억원…대학병원 위탁 결정은 언제",
-     "press": "discoverynews.kr",
-     "publishedAt": "2026-11-23T00:10:00.000Z",
-     "link": "https://www.discoverynews.kr/news/articleView.html?idxno=1107489"
+     "title": "불광사 경북불교대학 수계대법회...\"새로운 삶 응원\"",
+     "press": "ibulgyo.com",
+     "publishedAt": "2026-11-23T00:16:00.000Z",
+     "link": "http://www.ibulgyo.com/news/articleView.html?idxno=444389"
     },
     {
-     "title": "사람인 코메이트, 오프라인 영역 확장…대학가 공략 ↑",
-     "press": "etoday.co.kr",
+     "title": "가톨릭관동대 중앙도서관, ‘제24차 강원지역대학도서관협의회 총회 및...",
+     "press": "dhnews.co.kr",
+     "publishedAt": "2026-11-23T00:16:00.000Z",
+     "link": "https://dhnews.co.kr/news/view/1065570361007526"
+    },
+    {
+     "title": "배민, 서대문구 3개 대학으로 다회용기 배달 확대",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-23T00:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003158147?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "김아림, LPGA 최종전 공동 7위",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 14,
+   "recent20": 4,
+   "press": 13,
+   "firstArticleAt": "2026-11-22T22:53:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "티띠꾼, LPGA 최종전 3연패…우승 상금 54억 '잭팟'(종합)",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T00:20:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/421/0009304108"
+    },
+    {
+     "title": "‘태국 골프 여제’ 티띠꾼, 소렌스탐 넘어 25년 만에 LPGA 통산 상금 1위...",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-23T00:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004011147?sid=104"
+    },
+    {
+     "title": "티티쿨, LPGA투어 CME그룹 챔피언십 3연패 '400만 달러 잿팟'…김아림, 공...",
+     "press": "swtvnews.com",
      "publishedAt": "2026-11-23T00:08:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2651482"
-    },
-    {
-     "title": "강원대학교 G-LAMP사업단, 웨스트레이크대 라이 콴 응 교수 초청 특별강...",
-     "press": "lecturernews.com",
-     "publishedAt": "2026-11-23T00:06:00.000Z",
-     "link": "https://www.lecturernews.com/news/articleView.html?idxno=214353"
+     "link": "https://swtvnews.com/news/newsview.php?ncode=1065570991186493"
     }
    ]
   },
@@ -146,93 +209,61 @@
     "signal.bz"
    ],
    "articles90": 12,
-   "recent20": 4,
+   "recent20": 5,
    "press": 12,
-   "firstArticleAt": "2026-11-22T22:42:00.000Z",
+   "firstArticleAt": "2026-11-22T23:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한전, 개인정보 152만 건 유출…주민번호에 계좌·카드 정보까지",
-     "press": "itdaily.kr",
-     "publishedAt": "2026-11-23T00:10:00.000Z",
-     "link": "https://www.itdaily.kr/news/articleView.html?idxno=243113"
+     "title": "[디지털포스트 모닝픽] 한전, 152만명 개인정보 샜다… 주민·계좌·카드...",
+     "press": "ilovepc.co.kr",
+     "publishedAt": "2026-11-23T00:18:00.000Z",
+     "link": "https://www.ilovepc.co.kr/news/articleView.html?idxno=61405"
     },
     {
-     "title": "집주소·카드번호·전기료까지 털렸다…한전 152만명 개인정보 유출",
-     "press": "thescoop.co.kr",
-     "publishedAt": "2026-11-23T00:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/665/0000008627?sid=102"
+     "title": "한국전력 5% 하락…하락장에 정보유출까지",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-23T00:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005444772?sid=101"
     },
     {
-     "title": "한전, 개인정보 152만여건 유출…주민·계좌번호 등 포함",
-     "press": "asiatime.co.kr",
-     "publishedAt": "2026-11-22T23:56:00.000Z",
-     "link": "https://www.asiatime.co.kr/article/20261123500025"
+     "title": "한전on 개인정보 유출 확인…고객번호·계좌번호·카드정보 등 포함",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-23T00:14:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629693"
     }
    ]
   },
   {
-   "keyword": "김아림, LPGA 최종전 공동 7위",
+   "keyword": "김윤석·구교환 폭설 1위 기록",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-22T22:53:00.000Z",
+   "articles90": 9,
+   "recent20": 3,
+   "press": 9,
+   "firstArticleAt": "2026-11-22T22:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "티티쿨, LPGA투어 CME그룹 챔피언십 3연패 '400만 달러 잿팟'…김아림, 공...",
-     "press": "swtvnews.com",
-     "publishedAt": "2026-11-23T00:08:00.000Z",
-     "link": "https://swtvnews.com/news/newsview.php?ncode=1065570991186493"
+     "title": "김윤석·구교환 ‘폭설’, 5일 연속 박스오피스 1위..42만 관객 돌파",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-23T00:20:00.000Z",
+     "link": "http://www.breaknews.com/1252956"
     },
     {
-     "title": "김아림, 시즌 최종전 역전 우승 무산…지노 티띠꾼은 대회 3연패",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-23T00:03:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085454"
-    },
-    {
-     "title": "김아림, LPGA 시즌 최종전 공동 7위…티띠꾼 대회 3연패·역대 상금 1위",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-22T23:46:00.000Z",
-     "link": "https://www.ajunews.com/view/20261123084107753"
-    }
-   ]
-  },
-  {
-   "keyword": "김정은, 10개국 신임 대사 접수",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 23,
-   "recent20": 4,
-   "press": 10,
-   "firstArticleAt": "2026-11-22T22:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김정은 “동아시아 환경, 힘과 능력 절실히 요구”…러시아 등 10개국 대...",
-     "press": "donga.com",
-     "publishedAt": "2026-11-23T00:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764338?sid=100"
-    },
-    {
-     "title": "김정은 \"패권·팽창 추구 안 해\"…\"권익 보장에 모든 것 다할 것\"",
+     "title": "영화 '폭설', 개봉 첫 주말 박스오피스 1위…31만892명 동원",
      "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-23T00:00:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626930"
+     "publishedAt": "2026-11-23T00:08:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626934"
     },
     {
-     "title": "김정은, 10개국 대사 신임장 직접 접수…30여 년 만에 왜?",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-23T00:00:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283404"
+     "title": "[파발마] 제392호. 철도역에서 벌어진 미스터리 영화 '폭설'",
+     "press": "redaily.co.kr",
+     "publishedAt": "2026-11-23T00:06:00.000Z",
+     "link": "https://www.redaily.co.kr/news/articleView.html?idxno=18270"
     }
    ]
   },
@@ -241,13 +272,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 1,
+   "articles90": 10,
+   "recent20": 2,
    "press": 9,
-   "firstArticleAt": "2026-11-22T22:43:00.000Z",
+   "firstArticleAt": "2026-11-22T22:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이스라엘군, 네타냐후에 이란 공격 경고…\"중동 전역 확전 위험\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T00:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009304086?sid=104"
+    },
     {
      "title": "[월드앤이슈] 트럼프 \"합의 없으면 새해 이란 추가 공격 검토\"",
      "press": "yonhapnewstv.co.kr",
@@ -259,44 +296,70 @@
      "press": "youthdaily.co.kr",
      "publishedAt": "2026-11-22T23:48:00.000Z",
      "link": "https://www.youthdaily.co.kr/news/article.html?no=230181"
-    },
-    {
-     "title": "트럼프 \"이란은 늘 말만 해\"…새해 공격 경고",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-22T23:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928854?sid=104"
     }
    ]
   },
   {
-   "keyword": "김원효 트랜스젠더 바",
+   "keyword": "김정은, 10개국 신임 대사 접수",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 21,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T22:57:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-22T23:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김원효 '트랜스젠더바 논란'에 뜻밖의 인물 나섰다..\"건전하고 성실한 ...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-22T23:49:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004468766"
+     "title": "김정은, 10개국 대사 신임장 받아…30년만의 의전변화, 왜?",
+     "press": "donga.com",
+     "publishedAt": "2026-11-23T00:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764338?sid=100"
     },
     {
-     "title": "심진화, 김원효 트랜스젠더 바 해프닝 일축…일상 공개",
-     "press": "news.jtbc.co.kr",
+     "title": "김정은, 10개국 대사 신임장 직접 접수…30여 년 만에 왜?",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-23T00:00:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283404"
+    },
+    {
+     "title": "김정은 \"패권·팽창 추구 안 해\"…\"권익 보장에 모든 것 다할 것\"",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-23T00:00:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626930"
+    }
+   ]
+  },
+  {
+   "keyword": "강원 최대 8㎝ 눈",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-22T23:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[날씨] 오늘 전국 비바람…강원 최대 8㎝ 많은 눈",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-23T00:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928862?sid=103"
+    },
+    {
+     "title": "[강원날씨]23일 북부내륙·산지 최대 8㎝ 눈⋯빙판길 유의",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-23T00:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/087/0001232627?sid=102"
+    },
+    {
+     "title": "전국 비·눈에 출근길 '어는 비' 조심…강원북부 최대 8㎝",
+     "press": "hankyung.com",
      "publishedAt": "2026-11-22T23:41:00.000Z",
-     "link": "https://m.entertain.naver.com/article/437/0000521935"
-    },
-    {
-     "title": "'트랜스젠더 바 후배 찾은' 김원효, 심진화와 결혼 비화…\"1억 있다 아닌...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-22T23:37:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005644082"
+     "link": "https://n.news.naver.com/mnews/article/015/0005356882?sid=103"
     }
    ]
   },
@@ -306,7 +369,7 @@
     "signal.bz"
    ],
    "articles90": 11,
-   "recent20": 2,
+   "recent20": 1,
    "press": 5,
    "firstArticleAt": "2026-11-22T23:08:00.000Z",
    "exclusive": false,
@@ -337,24 +400,24 @@
    "sources": [
     "nate"
    ],
-   "articles90": 11,
+   "articles90": 8,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-22T22:52:00.000Z",
+   "firstArticleAt": "2026-11-22T23:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "박종복 전 SC제일은행장, 은행연합회장 내정",
-     "press": "koreareport.co.kr",
-     "publishedAt": "2026-11-22T23:44:00.000Z",
-     "link": "https://www.koreareport.co.kr/news/articleView.html?idxno=55014"
-    },
     {
      "title": "차기 은행연합회 차기 회장에 박종복 전 SC제일은행장 내정",
      "press": "tjb.co.kr",
      "publishedAt": "2026-11-22T23:44:00.000Z",
      "link": "https://www.tjb.co.kr/news05/bodo/view/id/106375"
+    },
+    {
+     "title": "박종복 전 SC제일은행장, 은행연합회장 내정",
+     "press": "koreareport.co.kr",
+     "publishedAt": "2026-11-22T23:44:00.000Z",
+     "link": "https://www.koreareport.co.kr/news/articleView.html?idxno=55014"
     },
     {
      "title": "은행연합회 회장후보추천위 회의 참석하는 최우형 케이뱅크 행장",
@@ -365,34 +428,34 @@
    ]
   },
   {
-   "keyword": "창원 아파트서 40대 엄마 아기와 추락",
+   "keyword": "2027년 전망 하나증권",
    "sources": [
     "nate"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-22T23:01:00.000Z",
+   "firstArticleAt": "2026-11-22T23:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "창원 아파트서 추락 40대 엄마 사망…5개월 아기 무사",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-22T23:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004212522?sid=102"
+     "title": "에쓰오일, 올해 영업익 4조 회복 전망…내년 샤힌이 변수",
+     "press": "datanews.co.kr",
+     "publishedAt": "2026-11-22T23:46:00.000Z",
+     "link": "http://www.datanews.co.kr/news/article.html?no=147735"
     },
     {
-     "title": "\"아가가 울고 있었다\"...창원 아파트서 40대 엄마·생후 5개월 아기 추락",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-22T23:04:00.000Z",
-     "link": "https://www.insight.co.kr/news/583098"
+     "title": "11월 금통위 만장일치 25bp↑ 전망…\"반도체 성장 자신감\"",
+     "press": "ftoday.co.kr",
+     "publishedAt": "2026-11-22T23:22:00.000Z",
+     "link": "http://www.ftoday.co.kr/news/articleView.html?idxno=370289"
     },
     {
-     "title": "창원 아파트서 40대 여성, 아기와 추락…엄마 숨지고 아이 무사",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-22T23:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436583?sid=102"
+     "title": "“AI 투자 확대 지속”…2027년 전기전자 업종 성장 기대 [하나증권]",
+     "press": "ekn.kr",
+     "publishedAt": "2026-11-22T23:00:00.000Z",
+     "link": "https://www.ekn.kr/web/view.php?key=20261122024233057"
     }
    ]
   },
@@ -409,16 +472,16 @@
    "capped": false,
    "samples": [
     {
-     "title": "철도노조, 오늘(23일) 예정됐던 쟁의행위 26일로 연기... \"사고 복구가 ...",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-22T23:00:00.000Z",
-     "link": "https://www.insight.co.kr/news/583097"
-    },
-    {
      "title": "철도노조, 쟁의행위 26일로 연기",
      "press": "enewstoday.co.kr",
      "publishedAt": "2026-11-22T23:00:00.000Z",
      "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2495508"
+    },
+    {
+     "title": "철도노조, 오늘(23일) 예정됐던 쟁의행위 26일로 연기... \"사고 복구가 ...",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-22T23:00:00.000Z",
+     "link": "https://www.insight.co.kr/news/583097"
     },
     {
      "title": "철도노조, 쟁의행위 26일로 연기…코레일 ‘비상본부 가동’",
@@ -431,7 +494,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1134,
+  "flagged": 1137,
   "matched": 627,
   "avgLeadMin": 602,
   "recent": [
