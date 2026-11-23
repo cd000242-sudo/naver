@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T01:12:18.605Z",
+ "builtAt": "2026-11-23T01:22:21.692Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,70 +8,101 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 22,
  "candidates": [
-  {
-   "keyword": "박종복 전 SC제일은행장",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 70,
-   "recent20": 11,
-   "press": 67,
-   "firstArticleAt": "2026-11-22T23:44:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "10년간 SC제일은행 이끈 박종복, 은행연합회장 내정…금융권 '최장수 CE...",
-     "press": "techm.kr",
-     "publishedAt": "2026-11-23T01:10:00.000Z",
-     "link": "https://www.techm.kr/news/articleView.html?idxno=157690"
-    },
-    {
-     "title": "은행연합회장에 박종복 전 SC제일은행장 내정",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-23T01:08:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626927"
-    },
-    {
-     "title": "박종복 전 SC제일은행장, 차기 은행연합회장에 내정…26일 최종 선출",
-     "press": "betanews.net",
-     "publishedAt": "2026-11-23T01:06:00.000Z",
-     "link": "https://www.betanews.net/article/view/beta202611230026"
-    }
-   ]
-  },
   {
    "keyword": "코스피 급락",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 83,
-   "recent20": 25,
-   "press": 66,
-   "firstArticleAt": "2026-11-23T00:26:00.000Z",
+   "articles90": 81,
+   "recent20": 20,
+   "press": 70,
+   "firstArticleAt": "2026-11-23T00:30:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "[속보] 코오롱티슈진 VI 발동, 주가 11%대 급등…코스피·코스닥 동반 하...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-23T01:10:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629732"
+     "title": "靑, 코스피 5000선 붕괴에 “美 증시와 연동되는 측면 있어”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-23T01:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004685036?sid=100"
     },
     {
-     "title": "[개장시황]美 반도체 급락 부담에 코스피 3%대↓…코스닥도 1%대 약세",
-     "press": "namdonews.com",
-     "publishedAt": "2026-11-23T01:10:00.000Z",
-     "link": "https://www.namdonews.com/news/articleView.html?idxno=930091"
+     "title": "\"코스피 4200선까지 밀릴 수도\"…최악의 전망 나왔다",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-23T01:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005356957?sid=101"
     },
     {
-     "title": "AI 거품 꺼지나…반도체 급락에 닷컴버블의 그림자",
-     "press": "hinews.co.kr",
-     "publishedAt": "2026-11-23T01:08:00.000Z",
-     "link": "https://www.hinews.co.kr/view.php?ud=202611231004094316cd8b879b3c_48"
+     "title": "‘검은 월요일’ 코스피 장중 4700선 이탈…코스닥 연저점",
+     "press": "kbmaeil.com",
+     "publishedAt": "2026-11-23T01:20:00.000Z",
+     "link": "https://www.kbmaeil.com/article/20261123500144"
+    }
+   ]
+  },
+  {
+   "keyword": "박종복 전 SC제일은행장",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 65,
+   "recent20": 12,
+   "press": 64,
+   "firstArticleAt": "2026-11-22T23:54:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "박종복 차기 은행연합회장, 신한금융 사외이사 8개월 만에 물러난다",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-23T01:20:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445985"
+    },
+    {
+     "title": "박종복 전 SC제일은행장, 은행연합회장 내정…회추위 단독 추천",
+     "press": "sisaon.co.kr",
+     "publishedAt": "2026-11-23T01:20:00.000Z",
+     "link": "https://www.sisaon.co.kr/news/articleView.html?idxno=206287"
+    },
+    {
+     "title": "KB 견제론 통했나..박종복, 세대 교체론 넘었다",
+     "press": "newsfreezone.co.kr",
+     "publishedAt": "2026-11-23T01:18:00.000Z",
+     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=720711"
+    }
+   ]
+  },
+  {
+   "keyword": "이재근 KB금융 글로벌 플랫폼 전환",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 56,
+   "recent20": 10,
+   "press": 56,
+   "firstArticleAt": "2026-11-22T23:56:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이재근 KB금융 회장 취임 \"글로벌 리딩플랫폼으로\"",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-23T01:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001273584?sid=101"
+    },
+    {
+     "title": "이재근 KB금융 회장 취임…\"리딩뱅크 넘어 리딩플랫폼으로\"",
+     "press": "paxetv.com",
+     "publishedAt": "2026-11-23T01:18:00.000Z",
+     "link": "http://www.paxetv.com/news/articleView.html?idxno=287585"
+    },
+    {
+     "title": "KB금융 ‘이재근號’ 공식 출범…첫 내부 일정은 ‘정보보호 강화’ 논...",
+     "press": "economist.co.kr",
+     "publishedAt": "2026-11-23T01:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/243/0000106047?sid=101"
     }
    ]
   },
@@ -80,30 +111,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 72,
-   "recent20": 27,
-   "press": 54,
-   "firstArticleAt": "2026-11-22T23:50:00.000Z",
+   "articles90": 75,
+   "recent20": 31,
+   "press": 53,
+   "firstArticleAt": "2026-11-23T00:24:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "장동혁 \"조 대법원장 탄핵은 정권 자폭\", 민주당 \"12월 안으로 탄핵 의결...",
-     "press": "dgmbc.com",
-     "publishedAt": "2026-11-23T01:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/657/0000057737?sid=100"
+     "title": "추미애 \"조희대 대법원장 탄핵 실행, 좌고우면 안 돼\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-23T01:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001405039?sid=102"
     },
     {
-     "title": "[속보]장동혁 “대법원장 탄핵의 최종 목표는 이재명 탈옥⋯탄핵안 처리...",
-     "press": "kwnews.co.kr",
-     "publishedAt": "2026-11-23T01:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/087/0001232629?sid=100"
+     "title": "김재원 \"조희대 탄핵, 대통령에 기쁨 주려는 아부꾼들의 헌사\"",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-23T01:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005356955?sid=100"
     },
     {
-     "title": "[속보]靑 \"조희대 대법원장 탄핵 문제, 국회에서 논의할 사안…그 이상...",
+     "title": "장동혁 \"조희대 탄핵은 '李 방탄 탄핵'…법원, 당장 재판 재개하라\"",
      "press": "mt.co.kr",
-     "publishedAt": "2026-11-23T01:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005444840?sid=100"
+     "publishedAt": "2026-11-23T01:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005444857?sid=100"
     }
    ]
   },
@@ -112,63 +143,94 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 57,
-   "recent20": 10,
-   "press": 48,
+   "articles90": 61,
+   "recent20": 9,
+   "press": 52,
    "firstArticleAt": "2026-11-23T00:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "11월 중순 수출 역대 최대···반도체 비중 49.7%",
-     "press": "thereport.co.kr",
-     "publishedAt": "2026-11-23T01:10:00.000Z",
-     "link": "https://www.thereport.co.kr/news/articleView.html?idxno=93608"
+     "title": "한국 수출 역대 최대 행진…11월 중순까지 774억달러 돌파",
+     "press": "jeonmae.co.kr",
+     "publishedAt": "2026-11-23T01:20:00.000Z",
+     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1314590"
     },
     {
-     "title": "11월 1~20일 수출 774억 달러 역대 최대… 연간 누적 1조 달러 돌파",
-     "press": "fntoday.co.kr",
-     "publishedAt": "2026-11-23T01:10:00.000Z",
-     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=399659"
+     "title": "11월 중순 수출 774억달러 역대 최대…전년比 101.5%↑",
+     "press": "newscape.co.kr",
+     "publishedAt": "2026-11-23T01:18:00.000Z",
+     "link": "http://www.newscape.co.kr/news/articleView.html?idxno=125999"
     },
     {
-     "title": "수출 '파죽지세'... 11월 1~20일 전년동기보다 2배 증가",
-     "press": "weeklytrade.co.kr",
-     "publishedAt": "2026-11-23T01:10:00.000Z",
-     "link": "https://weeklytrade.co.kr/news/view.html?section=1&category=3&item=&no=102374"
+     "title": "역대급 수출에도 웃지 못하는 한국 … 반도체 의존도 50% 육박",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-23T01:14:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/23/2026112350065.html"
     }
    ]
   },
   {
-   "keyword": "스쿠발",
+   "keyword": "스쿠발 메츠와 계약",
    "sources": [
-    "signal.bz",
-    "google"
+    "nate"
    ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 10,
-   "firstArticleAt": "2026-11-22T23:46:00.000Z",
+   "articles90": 15,
+   "recent20": 3,
+   "press": 12,
+   "firstArticleAt": "2026-11-23T00:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“다저스 10년↑계약은 오타니·베츠·야마모토에게만…” 스쿠발은 어...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-23T01:02:00.000Z",
-     "link": "https://m.sports.naver.com/wbaseball/article/117/0004127256"
+     "title": "이래서 다저스 대신 메츠였나, '9년 4억 5000만 달러' 스쿠발 옵트아웃 ...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-23T01:16:00.000Z",
+     "link": "https://m.sports.naver.com/wbaseball/article/477/0000640365"
     },
     {
-     "title": "\"다저스 제안조차 못했다\"…'억만장자' 스케일 미쳤다! 스쿠발 6054억 역...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-23T00:40:00.000Z",
-     "link": "https://m.sports.naver.com/wbaseball/article/109/0005644092"
+     "title": "소토→스쿠발, 메츠 6038억 원 베팅…MLB 역대 계약 TOP 5에 2명",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-23T01:13:00.000Z",
+     "link": "https://m.sports.naver.com/wbaseball/article/241/0003543042"
     },
     {
-     "title": "'FA 최대어' 행선지 나왔다…스쿠발, 뉴욕 메츠와 역대 투수 최고액 계...",
-     "press": "sports.hankooki.com",
-     "publishedAt": "2026-11-23T00:36:00.000Z",
-     "link": "https://sports.hankooki.com/news/articleView.html?idxno=6944013"
+     "title": "'FA 최대어' 스쿠발, 메츠와 9년 4억 5000만 달러 계약…투수 역대 최고...",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-23T01:12:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110040439280"
+    }
+   ]
+  },
+  {
+   "keyword": "발언하는 장동혁 대표",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 19,
+   "recent20": 2,
+   "press": 12,
+   "firstArticleAt": "2026-11-23T00:15:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "장동혁 “조희대 탄핵은 정권 자폭 탄핵...최종 목표는 이재명 탈옥”",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-23T01:16:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1139226"
+    },
+    {
+     "title": "장동혁 \"조작기소특검 아니라 주가조작특검 해야 한다\"",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-23T01:06:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261123500065"
+    },
+    {
+     "title": "장동혁 \"조희대 탄핵은 이재명 정권의 자폭 탄핵\" [TF사진관]",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-23T00:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000554436?sid=100"
     }
    ]
   },
@@ -177,10 +239,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
+   "articles90": 9,
    "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-22T23:50:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-22T23:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -209,10 +271,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T23:49:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-23T00:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -235,171 +297,11 @@
      "link": "https://n.news.naver.com/mnews/article/214/0001537328?sid=100"
     }
    ]
-  },
-  {
-   "keyword": "이용철 후보자 인사청문회 준비",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 3,
-   "press": 5,
-   "firstArticleAt": "2026-11-23T00:29:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "청문회 D-1 이용철, '李 공소취소' 여전히 침묵 … \"청문회서 답변하겠...",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-23T01:10:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/23/2026112350082.html"
-    },
-    {
-     "title": "'청문회 D-1' 이용철, 공소취소 묻자 \"내일 성실히 답변\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-23T01:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436632?sid=102"
-    },
-    {
-     "title": "성남산업진흥재단, 이용철 후보자 대표 시절 호남향우회장 자녀 채용",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-23T00:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003158183?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "현대차 N 컵 결승 개최",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T00:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "현대차, 지스타서 'N 버츄얼컵' 결승 개최… 고성능 N 브랜드 체험 공간...",
-     "press": "ilyoseoul.co.kr",
-     "publishedAt": "2026-11-23T00:58:00.000Z",
-     "link": "https://www.ilyoseoul.co.kr/news/articleView.html?idxno=525443"
-    },
-    {
-     "title": "현대차, '2026 현대 N 버츄얼컵' 마무리…김규민 시즌 챔피언",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-23T00:52:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2021934"
-    },
-    {
-     "title": "현대차, 지스타서 '현대 N 버츄얼컵' 시즌 결승 개최",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-23T00:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004212540?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "2027년 전망 하나증권",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T23:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "KB금융 이재근 회장 \"국내 1등에 안주 않겠다\"…2027년 글로벌 금융플랫...",
-     "press": "news.ifm.kr",
-     "publishedAt": "2026-11-23T01:00:00.000Z",
-     "link": "https://news.ifm.kr/news/articleView.html?idxno=485175"
-    },
-    {
-     "title": "유안타證, 내년 코스피 최저 4000선 전망…외국인 매도 공세 영향",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-23T00:28:00.000Z",
-     "link": "https://www.ajunews.com/view/20261123091418891"
-    },
-    {
-     "title": "에쓰오일, 올해 영업익 4조 회복 전망…내년 샤힌이 변수",
-     "press": "datanews.co.kr",
-     "publishedAt": "2026-11-22T23:46:00.000Z",
-     "link": "http://www.datanews.co.kr/news/article.html?no=147735"
-    }
-   ]
-  },
-  {
-   "keyword": "나스닥 선물",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T23:47:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "나스닥100 선물 3% 가까이 반등, 코스피는 장초반 3%대 하락",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-23T01:08:00.000Z",
-     "link": "https://www.tokenpost.kr/news/breaking/442661"
-    },
-    {
-     "title": "나스닥 선물 2.7% 급반등…골드만 \"저가매수 기회지만 위험 여전\"(종합)",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T00:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009304180?sid=104"
-    },
-    {
-     "title": "나스닥 '코로나 이후 최악의 한 주'…아시아 증시 또 흔들리나",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-22T23:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413924?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "장동혁 최고위 참석",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T00:21:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "최고위 참석하는 장동혁 대표",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-23T00:28:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123000264"
-    },
-    {
-     "title": "최고위 참석하는 장동혁·정점식",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T00:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009304138?sid=100"
-    },
-    {
-     "title": "최고위 참석하는 장동혁 국민의힘 대표",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-23T00:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014338742?sid=100"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1152,
+  "flagged": 1154,
   "matched": 647,
   "avgLeadMin": 601,
   "recent": [
