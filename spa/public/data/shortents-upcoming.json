@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T23:04:41.500Z",
+ "builtAt": "2026-11-23T23:14:46.058Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,62 +15,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 14,
-   "recent20": 8,
-   "press": 13,
+   "articles90": 18,
+   "recent20": 9,
+   "press": 17,
    "firstArticleAt": "2026-11-23T21:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[구광모의 LG]④CEO 유임 속 실행조직 재편…AI·본업 경쟁력 강화",
-     "press": "smarttoday.co.kr",
-     "publishedAt": "2026-11-23T23:02:00.000Z",
-     "link": "https://www.smarttoday.co.kr/ko-kr/articles/113965"
+     "title": "데이원컴퍼니, 2027년 기업 AI 전환 이끌 9대 트렌드 발표",
+     "press": "beyondpost.co.kr",
+     "publishedAt": "2026-11-23T23:10:00.000Z",
+     "link": "http://www.beyondpost.co.kr/view.php?ud=20261124080645849646a9e4dd7f_30"
     },
     {
-     "title": "[기고] AI 자율 침투 도구 '아르텍스'가 드러낸 보안의 새 과제②",
-     "press": "itdaily.kr",
-     "publishedAt": "2026-11-23T23:00:00.000Z",
-     "link": "https://www.itdaily.kr/news/articleView.html?idxno=243110"
+     "title": "오브젠, 대형 사업 수주에 3분기 수익성 개선까지…AI·데이터 사업 경...",
+     "press": "newsprime.co.kr",
+     "publishedAt": "2026-11-23T23:08:00.000Z",
+     "link": "http://www.newsprime.co.kr/news/article.html?no=756151"
     },
     {
-     "title": "'불량 잡는 AI' 투입…포스코, 재검사 줄이고 생산 효율 높인다",
-     "press": "ezyeconomy.com",
-     "publishedAt": "2026-11-23T23:00:00.000Z",
-     "link": "https://www.ezyeconomy.com/news/articleView.html?idxno=242115"
-    }
-   ]
-  },
-  {
-   "keyword": "오늘 날씨 영하권",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 15,
-   "recent20": 4,
-   "press": 13,
-   "firstArticleAt": "2026-11-23T21:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "부산경남 낮부터 추워져...내일 아침 영하권",
-     "press": "news.knn.co.kr",
-     "publishedAt": "2026-11-23T23:04:00.000Z",
-     "link": "https://news.knn.co.kr/news/article/194849"
-    },
-    {
-     "title": "[오늘 날씨] 충남·전라 서부 1mm 안팎 비·눈…빙판길·강풍, 낮기온 2도...",
-     "press": "mhns.co.kr",
-     "publishedAt": "2026-11-23T22:56:00.000Z",
-     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=770382"
-    },
-    {
-     "title": "[날씨]오늘도 '영하권 추위'…칼바람·빙판길 주의",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-23T22:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005846732?sid=103"
+     "title": "GS샵, 직원들이 직접 AI 업무혁신 주도… 178명 참여해 94개 솔루션 구현",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-23T23:06:00.000Z",
+     "link": "https://www.viva100.com/article/20261124500056"
     }
    ]
   },
@@ -80,30 +48,62 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 13,
-   "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-23T21:35:00.000Z",
+   "articles90": 16,
+   "recent20": 5,
+   "press": 16,
+   "firstArticleAt": "2026-11-23T21:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "선관위 직원 8명 영장 청구 결과는 '1명 구속'…특검 “이해 안 돼”",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-23T22:56:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1177143"
+     "title": "선관위특검 '1호 구속' 1명에 그쳐...7명 기각",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-23T23:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005608635?sid=102"
     },
     {
-     "title": "‘투표율 허위입력’ 선관위 직원 1명 구속…“증거인멸 염려”",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-23T22:48:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2651935"
+     "title": "‘개표상황표 위조·은닉’ 선관위 직원 1명 구속…7명은 영장 기각",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-23T23:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000162075?sid=102"
     },
     {
-     "title": "선관위 직원 8명 중 1명 구속...선관위 특검 수사 전망은?",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-23T22:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979566?sid=102"
+     "title": "선관위 특검 '1호 영장 청구' 선관위 직원 8명 중 7명 기각",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-23T23:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005445340?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "오늘 날씨 영하권",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 17,
+   "recent20": 5,
+   "press": 15,
+   "firstArticleAt": "2026-11-23T21:45:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오늘날씨] 최저 '영하 6도' 강추위⋯전국 비·눈 속 제주도는 '최고 10도...",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-23T23:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001077712?sid=103"
+    },
+    {
+     "title": "[날씨] 서울 낮 3도 칼바람… 충남·호남 서해안 비 또는 눈",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-23T23:10:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3083900"
+    },
+    {
+     "title": "낮부터 기온 내림세‥내일 아침 영하권 추위",
+     "press": "usmbc.co.kr",
+     "publishedAt": "2026-11-23T23:10:00.000Z",
+     "link": "https://www.usmbc.co.kr/NewsArticle/875049"
     }
    ]
   },
@@ -112,30 +112,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 10,
-   "recent20": 2,
-   "press": 10,
+   "articles90": 12,
+   "recent20": 3,
+   "press": 12,
    "firstArticleAt": "2026-11-23T22:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "‘11월 대표팀 제외’ 조규성, 보란 듯 결승골···홍현석도 추가골 관...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-23T23:08:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/144/0001151368"
+    },
+    {
+     "title": "조규성 선제골, 홍현석 상대 자책골 유도…'코리안 듀오' 활약 미트윌란...",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-23T23:04:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1139458"
+    },
+    {
      "title": "조규성, 시즌 6호 골...홍현석도 득점에 기여",
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-23T22:58:00.000Z",
      "link": "https://m.sports.naver.com/wfootball/article/052/0002437113"
-    },
-    {
-     "title": "조규성 6호골-홍현석 자책골 유도… 미트윌란, 코리안 듀오 덕에 웃었다",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-23T22:45:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/396/0000761756"
-    },
-    {
-     "title": "조규성, 시즌 '6호골' 작렬 … 평점 6.5점",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-23T22:32:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/24/2026112450014.html"
     }
    ]
   },
@@ -145,13 +145,19 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 5,
-   "recent20": 3,
-   "press": 5,
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
    "firstArticleAt": "2026-11-23T21:45:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "HD현대로보틱스 해킹으로 개인정보 유출, 기업명·부서·직책 등 10개 항...",
+     "press": "dailysecu.com",
+     "publishedAt": "2026-11-23T23:12:00.000Z",
+     "link": "https://www.dailysecu.com/news/articleView.html?idxno=209681"
+    },
     {
      "title": "삼성증권, 민원 제기한 8241명 개인정보 유출...배상은? [전문]",
      "press": "dailybrief.co.kr",
@@ -163,12 +169,39 @@
      "press": "biztribune.co.kr",
      "publishedAt": "2026-11-23T22:48:00.000Z",
      "link": "http://www.biztribune.co.kr/news/articleView.html?idxno=363049"
+    }
+   ]
+  },
+  {
+   "keyword": "나의 유죄인간",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-23T22:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "임시완·설인아, 저격수 공격에 나란히 총격…생사 기로 위기 ('나의 유...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-23T23:13:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000492704"
     },
     {
-     "title": "한전 개인정보 유출 대국민 사과..경찰 수사의뢰",
-     "press": "kjmbc.co.kr",
-     "publishedAt": "2026-11-23T22:45:00.000Z",
-     "link": "https://kjmbc.co.kr/NewsArticle/1547056"
+     "title": "'나의 유죄인간' 임시완·설인아, 나란히 총격 당했다…충격 엔딩에 시...",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-23T23:04:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=784226"
+    },
+    {
+     "title": "'나의 유죄인간' 시청률 5.5%…'우리들의 발라드2' 4.8%·'크래시2' 3.6%",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-23T22:48:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284474"
     }
    ]
   },
@@ -205,44 +238,44 @@
    ]
   },
   {
-   "keyword": "나의 유죄인간",
+   "keyword": "투수",
    "sources": [
     "signal.bz",
-    "nate"
+    "google"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-23T22:10:00.000Z",
+   "firstArticleAt": "2026-11-23T22:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'나의 유죄인간' 시청률 5.5%…'우리들의 발라드2' 4.8%·'크래시2' 3.6%",
-     "press": "topstarnews.net",
+     "title": "150㎞ 넘치는데 투수가 부족하다?…'구속 혁명' 너머 '커맨드 혁명'으로...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-23T23:12:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/076/0004468985"
+    },
+    {
+     "title": "개인·외국인 팔아치우는데...빗장 풀린 자사주 매입 증시 ‘구원 투수...",
+     "press": "chosun.com",
      "publishedAt": "2026-11-23T22:48:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284474"
+     "link": "https://n.news.naver.com/mnews/article/023/0004011366?sid=101"
     },
     {
-     "title": "‘나의 유죄인간’ 종영 설인아 “도전의 즐거움 다시 느꼈죠”[일문일...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-23T22:44:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001151362"
-    },
-    {
-     "title": "‘나의 유죄인간’ 설인아 “남장부터 액션까지, 쉽지 않았지만 뜻깊었...",
-     "press": "swtvnews.com",
-     "publishedAt": "2026-11-23T22:40:00.000Z",
-     "link": "https://swtvnews.com/news/newsview.php?ncode=1065564363363904"
+     "title": "[더벨]BNK증권 CEO 숏리스트 4명 압축…IB 구원투수는",
+     "press": "thebell.co.kr",
+     "publishedAt": "2026-11-23T22:02:00.000Z",
+     "link": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202611200733324200109343"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1221,
-  "matched": 660,
-  "avgLeadMin": 600,
+  "flagged": 1218,
+  "matched": 657,
+  "avgLeadMin": 602,
   "recent": [
    {
     "keyword": "한국 수출 1조달러",
