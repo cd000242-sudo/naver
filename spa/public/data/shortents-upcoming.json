@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T09:59:51.692Z",
+ "builtAt": "2026-11-23T10:09:54.712Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -13,64 +13,66 @@
   {
    "keyword": "롯데월드타워 담보 해지",
    "sources": [
-    "nate"
+    "signal.bz",
+    "nate",
+    "daum"
    ],
-   "articles90": 60,
-   "recent20": 1,
-   "press": 60,
-   "firstArticleAt": "2026-11-23T08:30:00.000Z",
+   "articles90": 45,
+   "recent20": 2,
+   "press": 45,
+   "firstArticleAt": "2026-11-23T08:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "롯데 시중은행 롯데월드타워 담보 해지",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-23T10:08:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3083858"
+    },
+    {
+     "title": "롯데그룹, 월드타워 담보 풀고 기지개…1조7000억 자산매각 뒤 실적도 반...",
+     "press": "sateconomy.co.kr",
+     "publishedAt": "2026-11-23T10:04:00.000Z",
+     "link": "http://sateconomy.co.kr/news/view/1065607314686479"
+    },
     {
      "title": "'유동성 우려' 털어낸 롯데, 롯데월드타워 담보 해지…롯데케미칼 회사...",
      "press": "thepublic.kr",
      "publishedAt": "2026-11-23T09:40:00.000Z",
      "link": "https://www.thepublic.kr/news/articleView.html?idxno=328061"
-    },
-    {
-     "title": "롯데, 롯데월드타워 담보 약 2년 만에 해지…회사채 8,000억원 상환",
-     "press": "webeconomy.co.kr",
-     "publishedAt": "2026-11-23T09:38:00.000Z",
-     "link": "https://www.webeconomy.co.kr/news/articleView.html?idxno=2387288"
-    },
-    {
-     "title": "롯데그룹, 롯데월드타워 담보 2년 만에 해지…재무구조 개선 속도",
-     "press": "newsway.co.kr",
-     "publishedAt": "2026-11-23T09:32:00.000Z",
-     "link": "https://www.newsway.co.kr/news/view?ud=2026112318300413604"
     }
    ]
   },
   {
-   "keyword": "강금실 국정원장 지명",
+   "keyword": "국정원장 강금실 지명",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 42,
-   "recent20": 6,
-   "press": 40,
-   "firstArticleAt": "2026-11-23T08:30:00.000Z",
+   "articles90": 39,
+   "recent20": 5,
+   "press": 36,
+   "firstArticleAt": "2026-11-23T08:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "강금실 국정원장 후보 지명…임웅순·홍익표 등 외교안보라인 대폭 교체",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-23T10:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979513?sid=100"
+    },
+    {
+     "title": "이 대통령, 국정원장·장관 4명 중폭 개각... 외교안보 라인 교체·靑 참...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-23T10:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000967296?sid=100"
+    },
     {
      "title": "'中 지방정부 특별고문' 출신이 국정원장으로…강금실은 누구?",
      "press": "sisajournal.com",
      "publishedAt": "2026-11-23T09:51:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/586/0000142890?sid=100"
-    },
-    {
-     "title": "'첫 여성 정보수장' 강금실…외교·안보라인 새판 짰다",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-23T09:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522059?sid=100"
-    },
-    {
-     "title": "국정원장 후보에 강금실 발탁… 李 외교·통일부 포함 개각 단행",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-23T09:50:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1194981"
     }
    ]
   },
@@ -79,77 +81,83 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 48,
-   "recent20": 8,
-   "press": 39,
-   "firstArticleAt": "2026-11-23T08:30:00.000Z",
+   "articles90": 40,
+   "recent20": 3,
+   "press": 30,
+   "firstArticleAt": "2026-11-23T08:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이 대통령, 국정원장·장관 4명 중폭 개각... 외교안보 라인 교체·靑 참...",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-23T10:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000967296?sid=100"
+    },
+    {
+     "title": "이 대통령 APEC 다녀와서 '자주파' 두 축 물갈이…왜?",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-23T09:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522060?sid=100"
+    },
     {
      "title": "국정원장 후보에 강금실 발탁… 李 외교·통일부 포함 개각 단행",
      "press": "ggilbo.com",
      "publishedAt": "2026-11-23T09:50:00.000Z",
      "link": "https://www.ggilbo.com/news/articleView.html?idxno=1194981"
-    },
-    {
-     "title": "홍익표 통일장관 후보, 北 경제·남북협력 전문 연구 이력 [李대통령, 중...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-23T09:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177468?sid=100"
-    },
-    {
-     "title": "한준호 행안장관 후보, 李 공소취소 모임 주도 [李대통령, 중폭 개각]",
-     "press": "segye.com",
-     "publishedAt": "2026-11-23T09:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177469?sid=100"
     }
    ]
   },
   {
-   "keyword": "고경표 음주운전 혐의",
+   "keyword": "롯데카드 과징금",
    "sources": [
     "daum"
    ],
-   "articles90": 34,
-   "recent20": 4,
-   "press": 34,
-   "firstArticleAt": "2026-11-23T08:30:00.000Z",
+   "articles90": 18,
+   "recent20": 1,
+   "press": 18,
+   "firstArticleAt": "2026-11-23T08:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] 고경표, 음주운전 혐의로 오후 7시 경찰 출석 요구",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-23T09:50:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001148055"
+     "title": "금융위, '해킹 위험 부실 공시' 롯데카드에 과징금 10억 부과",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-23T10:04:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904125"
     },
     {
-     "title": "'음주운전 혐의' 배우 고경표, 잠시 뒤 첫 경찰 출석",
-     "press": "tjb.co.kr",
-     "publishedAt": "2026-11-23T09:48:00.000Z",
-     "link": "https://www.tjb.co.kr/news05/bodo/view/id/106418"
+     "title": "금융위, 공시의무 위반 롯데카드에 10억원 과징금",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-23T09:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006414370?sid=101"
     },
     {
-     "title": "경찰, '음주운전' 고경표 오후 7시 첫 소환 통보",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-23T09:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929101?sid=102"
+     "title": "금융위, 롯데카드에 '유출위험 공시 불충분' 10억 원 과징금",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-23T09:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001405178?sid=101"
     }
    ]
   },
   {
-   "keyword": "강유정 문체부 장관 후보",
+   "keyword": "강유정 문체부 장관 지명",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-23T08:32:00.000Z",
+   "articles90": 10,
+   "recent20": 2,
+   "press": 9,
+   "firstArticleAt": "2026-11-23T08:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "행안 한준호·문체 강유정 발탁…'국정 실행력'에 방점?",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-23T10:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979514?sid=100"
+    },
     {
      "title": "강유정 문체장관 후보, 평론부문 신춘문예 3관왕… 靑 대변인 맡아 [李...",
      "press": "segye.com",
@@ -161,44 +169,6 @@
      "press": "kyongbuk.co.kr",
      "publishedAt": "2026-11-23T09:10:00.000Z",
      "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4091781"
-    },
-    {
-     "title": "국정원장 후보자에 강금실…외교·통일·행안·문체부 장관 교체",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-23T09:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012299372?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "암표 의심 70명 수사 의뢰",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-23T08:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "6억원대 암표 거래 정황 포착…문체부, 판매 의심자 70명 경찰에 넘겨",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-23T09:46:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=848202"
-    },
-    {
-     "title": "\"혼자 210장이나?\"…6억원어치 암표 팔려던 70명 경찰 수사의뢰",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-23T09:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005445225?sid=103"
-    },
-    {
-     "title": "‘무려 6억 규모’ 선 넘은 암표 거래…문체부, 혐의자 70명 수사의뢰",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-23T09:08:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/011/0004685290"
     }
    ]
   },
@@ -208,12 +178,18 @@
     "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 2,
    "press": 5,
-   "firstArticleAt": "2026-11-23T08:30:00.000Z",
+   "firstArticleAt": "2026-11-23T08:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "시내버스 파업에도 시민 이동권 보장…필수공익사업 지정 놓고 쟁점 부...",
+     "press": "newswhoplus.com",
+     "publishedAt": "2026-11-23T10:06:00.000Z",
+     "link": "https://www.newswhoplus.com/news/articleView.html?idxno=75184"
+    },
     {
      "title": "오세훈 서울시장, 내일 국무회의 참석…대통령에 부동산·현안 등 건의",
      "press": "news.sbs.co.kr",
@@ -225,22 +201,16 @@
      "press": "biz.heraldcorp.com",
      "publishedAt": "2026-11-23T09:11:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/016/0002727287?sid=102"
-    },
-    {
-     "title": "오세훈 \"시내버스 파업해도 시민 이동권 보장돼야\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-23T09:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436962?sid=102"
     }
    ]
   },
   {
-   "keyword": "박준현 1심 승소",
+   "keyword": "박준현, 학폭 소송 1심 승소",
    "sources": [
     "nate"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-23T09:00:00.000Z",
    "exclusive": false,
@@ -267,44 +237,74 @@
    ]
   },
   {
-   "keyword": "이재근 회장, 청년·소상공인 소통",
+   "keyword": "김원효 트젠바 방문 해명하러",
    "sources": [
     "nate"
    ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-23T08:34:00.000Z",
-   "exclusive": true,
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-23T09:10:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이재근 KB금융 회장, 취임 첫날 청년·소상공인 만났다",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-23T09:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001273668?sid=101"
+     "title": "\"거길 왜 갔냐고? OO 확인하러 갔다\"…김원효, '트젠바' 방문 인정→직...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-23T09:51:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000492640"
     },
     {
-     "title": "이재근 KB금융 회장, 첫 행보로 청년·소상공인 만나…포용금융 강조",
-     "press": "thetracker.co.kr",
-     "publishedAt": "2026-11-23T09:01:00.000Z",
-     "link": "https://thetracker.co.kr/View.aspx?No=4325382"
+     "title": "'트젠바 논란' 김원효, 결국 라방 켰다…\"촬영 상대=남고 후배, 근황 궁...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-23T09:40:00.000Z",
+     "link": "https://m.entertain.naver.com/article/477/0000640460"
     },
     {
-     "title": "이재근 KB금융 회장, 첫 공식 일정…청년·소상공인 소통",
-     "press": "newsprime.co.kr",
-     "publishedAt": "2026-11-23T08:54:00.000Z",
-     "link": "http://www.newsprime.co.kr/news/article.html?no=756131"
+     "title": "\"심진화도 알고 있어\"…김원효 '트젠바' 영상 알고 보니",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-23T09:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005357284?sid=103"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1198,
-  "matched": 657,
-  "avgLeadMin": 602,
+  "flagged": 1201,
+  "matched": 662,
+  "avgLeadMin": 605,
   "recent": [
+   {
+    "keyword": "ai 데이터 센터",
+    "hitKeyword": "머스크 AI 데이터센터 차질",
+    "hitAt": "2026-11-23T19:00:00+09:00",
+    "leadMin": 4945
+   },
+   {
+    "keyword": "김종국",
+    "hitKeyword": "김종국 생활고 고백",
+    "hitAt": "2026-11-23T19:00:00+09:00",
+    "leadMin": 81
+   },
+   {
+    "keyword": "고경표 음주운전 혐의",
+    "hitKeyword": "고경표 음주운전 혐의",
+    "hitAt": "2026-11-23T19:00:00+09:00",
+    "leadMin": 71
+   },
+   {
+    "keyword": "고경표 음주운전 조사",
+    "hitKeyword": "고경표 음주운전 혐의",
+    "hitAt": "2026-11-23T19:00:00+09:00",
+    "leadMin": 50
+   },
+   {
+    "keyword": "고경표 경찰 출석",
+    "hitKeyword": "고경표 음주운전 혐의",
+    "hitAt": "2026-11-23T19:00:00+09:00",
+    "leadMin": 10
+   },
    {
     "keyword": "수능 부정 신고 최소 1억 포상",
     "hitKeyword": "수능 부정 논술 합격",
@@ -334,36 +334,6 @@
     "hitKeyword": "앨리스 황 중국 정보기관 의혹",
     "hitAt": "2026-11-23T18:30:00+09:00",
     "leadMin": 1604
-   },
-   {
-    "keyword": "엔비디아칩 밀수 중 중국인",
-    "hitKeyword": "중국인 학생 감사 선물",
-    "hitAt": "2026-11-23T18:30:00+09:00",
-    "leadMin": 1181
-   },
-   {
-    "keyword": "AI 부정행위 차단",
-    "hitKeyword": "리트 만점자 부정행위 의혹",
-    "hitAt": "2026-11-23T18:30:00+09:00",
-    "leadMin": 0
-   },
-   {
-    "keyword": "정부",
-    "hitKeyword": "정부 증시 대응",
-    "hitAt": "2026-11-23T18:00:00+09:00",
-    "leadMin": 1463
-   },
-   {
-    "keyword": "최태원, 한일 대학 AI 플랫폼 제안",
-    "hitKeyword": "최태원 재산분할금",
-    "hitAt": "2026-11-23T17:30:00+09:00",
-    "leadMin": 2831
-   },
-   {
-    "keyword": "최태원 AI 대학 재설계",
-    "hitKeyword": "최태원 재산분할금",
-    "hitAt": "2026-11-23T17:30:00+09:00",
-    "leadMin": 2821
    }
   ]
  }
