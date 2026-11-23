@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T17:22:25.631Z",
+ "builtAt": "2026-11-23T17:32:28.527Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,38 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 29,
  "candidates": [
   {
-   "keyword": "젠슨 황 엔비디아 복귀",
+   "keyword": "젠슨 황, 엔비디아 복귀",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 55,
-   "recent20": 6,
-   "press": 31,
-   "firstArticleAt": "2026-11-23T15:53:00.000Z",
+   "articles90": 42,
+   "recent20": 4,
+   "press": 26,
+   "firstArticleAt": "2026-11-23T16:03:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "엔비디아 수장 복귀 소식에 기술주 급등…시장 분위기 반전",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-23T17:26:00.000Z",
+     "link": "https://www.tokenpost.kr/news/cryptocurrency/443113"
+    },
+    {
+     "title": "트럼프, 젠슨황에 '안보 면죄부'…AI패권·스캔들 불똥 의식했나",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-23T17:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016459333?sid=104"
+    },
     {
      "title": "트럼프 \"젠슨 황 복귀, 내가 해내...안보 위협 없어\"",
      "press": "fnnews.com",
      "publishedAt": "2026-11-23T17:17:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/014/0005608593?sid=101"
-    },
-    {
-     "title": "젠슨 황, 엔비디아 CEO 복귀…이사회 만장일치 결정",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-23T17:16:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=627138"
-    },
-    {
-     "title": "美 국채가, 젠슨 황 엔비디아 CEO 복귀에 '베어 플랫'",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-23T17:12:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446108"
     }
    ]
   },
@@ -48,7 +49,7 @@
     "daum"
    ],
    "articles90": 15,
-   "recent20": 5,
+   "recent20": 1,
    "press": 12,
    "firstArticleAt": "2026-11-23T16:21:00.000Z",
    "exclusive": false,
@@ -110,7 +111,7 @@
  "hitRate": {
   "days": 7,
   "flagged": 1236,
-  "matched": 664,
+  "matched": 663,
   "avgLeadMin": 556,
   "recent": [
    {
