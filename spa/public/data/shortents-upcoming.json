@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T04:56:49.487Z",
+ "builtAt": "2026-11-23T05:06:52.684Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,229 +8,101 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "유족 경찰 출석",
    "sources": [
     "nate"
    ],
-   "articles90": 33,
+   "articles90": 32,
    "recent20": 3,
-   "press": 31,
-   "firstArticleAt": "2026-11-23T03:32:00.000Z",
+   "press": 30,
+   "firstArticleAt": "2026-11-23T03:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "‘리트 만점자’ 故 이모 씨 유족, 경찰 출석",
+     "press": "donga.com",
+     "publishedAt": "2026-11-23T05:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764394?sid=102"
+    },
+    {
+     "title": "'리트 만점' 故 이진우 유족 경찰 출석… 증거물 확보될까",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-23T05:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000967189?sid=102"
+    },
     {
      "title": "'리트 만점자' 이진우 사망 후 유족 경찰 출석",
      "press": "topstarnews.net",
      "publishedAt": "2026-11-23T04:56:00.000Z",
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283808"
-    },
-    {
-     "title": "리트 만점자 유족 경찰 출석...\"증거제출 의사 확인\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-23T04:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436767?sid=102"
-    },
-    {
-     "title": "리트 만점 고 이진우 유족 경찰 출석…'증거 제출' 면담",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-23T04:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001405092?sid=102"
     }
    ]
   },
   {
-   "keyword": "코스피 매도 사이드카",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 27,
-   "recent20": 9,
-   "press": 27,
-   "firstArticleAt": "2026-11-23T03:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "나스닥 선물·대만 지수 상승에 코스피 4700선 공방 [이런국장 저런주식...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-23T04:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004685112?sid=101"
-    },
-    {
-     "title": "[오전시황] 코스피 이틀 연속 매도 사이드카, 상한가는 코스닥 4종목",
-     "press": "junggi.co.kr",
-     "publishedAt": "2026-11-23T04:48:00.000Z",
-     "link": "https://www.junggi.co.kr/news/articleView.html?idxno=38599"
-    },
-    {
-     "title": "코스피 4700선 이어 4600선까지 내줘…이틀 연속 매도 사이드카",
-     "press": "thepowernews.co.kr",
-     "publishedAt": "2026-11-23T04:46:00.000Z",
-     "link": "https://www.thepowernews.co.kr/view.php?ud=202611231344314368de3f0aa1be_7"
-    }
-   ]
-  },
-  {
-   "keyword": "박선원 신천지 추산",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 17,
-   "recent20": 4,
-   "press": 17,
-   "firstArticleAt": "2026-11-23T03:29:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "박선원 \"신천지 1만4388명 당원 일치\"…민주 최고위 또 충돌",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-23T04:56:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2651698"
-    },
-    {
-     "title": "여당 지도부 맞나… 민주당 최고위, 신천지로 또 '공개 충돌'",
-     "press": "sisaweek.com",
-     "publishedAt": "2026-11-23T04:42:00.000Z",
-     "link": "https://www.sisaweek.com/news/articleView.html?idxno=239124"
-    },
-    {
-     "title": "민주 \"탄핵은 내란청산\"…최고위 또 신천지 충돌",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-23T04:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928980?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "삼성증권 개인정보 유출",
+   "keyword": "코스피 급락 매도 사이드카",
    "sources": [
     "nate"
    ],
-   "articles90": 18,
-   "recent20": 4,
-   "press": 16,
-   "firstArticleAt": "2026-11-23T03:41:00.000Z",
+   "articles90": 28,
+   "recent20": 8,
+   "press": 28,
+   "firstArticleAt": "2026-11-23T03:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼성증권도 해킹에 뚫렸다…해킹수법과 다크웹 2차 유출 확인 안 돼",
-     "press": "m.skyedaily.com",
-     "publishedAt": "2026-11-23T04:56:00.000Z",
-     "link": "https://m.skyedaily.com/news_view.html?ID=315048"
+     "title": "코스피, 장중 4600선 붕괴…매도 사이드카 발동[장중시황]",
+     "press": "newsway.co.kr",
+     "publishedAt": "2026-11-23T05:04:00.000Z",
+     "link": "https://www.newsway.co.kr/news/view?ud=2026112313533071536"
     },
     {
-     "title": "삼성증권도 고객 8000명 개인정보 유출",
-     "press": "smedaily.co.kr",
-     "publishedAt": "2026-11-23T04:54:00.000Z",
-     "link": "http://www.smedaily.co.kr/news/articleView.html?idxno=366473"
+     "title": "\"코스피 거품이 아닌 수급이 무너진 상태\"",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-23T05:02:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2022095"
     },
     {
-     "title": "삼성증권, 고객 민원창구 뚫렸다…8241명 개인정보 유출",
-     "press": "1conomynews.co.kr",
-     "publishedAt": "2026-11-23T04:50:00.000Z",
-     "link": "https://www.1conomynews.co.kr/news/articleView.html?idxno=51465"
+     "title": "[포토] 코스피, 장중 4,600선도 붕괴...2거래일 연속 매도 사이드카",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-23T05:00:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/23/2026112350230.html"
     }
    ]
   },
   {
-   "keyword": "이형일 석유 최고가격제",
+   "keyword": "생계급여 기준 확대",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 4,
-   "press": 11,
-   "firstArticleAt": "2026-11-23T03:34:00.000Z",
+   "articles90": 23,
+   "recent20": 5,
+   "press": 22,
+   "firstArticleAt": "2026-11-23T04:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이형일 \"최고가격제 물가 인하 효과 확실…내년에도 유지\"",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-23T04:53:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123000746"
+     "title": "생계급여 2030년 중위소득의 35%로…위기가구 30만원 우선 지급",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T05:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009305005?sid=101"
     },
     {
-     "title": "이형일 \"증안펀드 규모는 시장 상황 봐서…반도체 호황 내년에도\"",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-23T04:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005357047?sid=101"
+     "title": "생계급여 지원 대상자 확대…기초생활보장 문턱 낮춘다",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-23T05:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001273623?sid=102"
     },
     {
-     "title": "이형일 \"증안펀드 필요할 때 가동…추가 시장 안정 대책도 준비\"",
-     "press": "hidomin.com",
-     "publishedAt": "2026-11-23T04:46:00.000Z",
-     "link": "https://www.hidomin.com/news/articleView.html?idxno=730576"
-    }
-   ]
-  },
-  {
-   "keyword": "삼성물산",
-   "sources": [
-    "google"
-   ],
-   "articles90": 10,
-   "recent20": 4,
-   "press": 10,
-   "firstArticleAt": "2026-11-23T03:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "삼성물산, 건설부문장에 최영재 사장 선임",
-     "press": "koreastocknews.com",
-     "publishedAt": "2026-11-23T04:48:00.000Z",
-     "link": "http://www.koreastocknews.com/news/articleView.html?idxno=122432"
-    },
-    {
-     "title": "삼성물산 건설, 6년 만에 바뀌는 수장…최영재 하이테크사업부장 사장 ...",
-     "press": "sisacast.kr",
-     "publishedAt": "2026-11-23T04:46:00.000Z",
-     "link": "http://www.sisacast.kr/news/articleView.html?idxno=102229"
-    },
-    {
-     "title": "삼성물산 건설부문 사장에 최영재 부사장 승진",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-23T04:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005767585?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "국힘 조작기소특검법 권한쟁의",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-23T03:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘조작기소 특검법’ 헌재로 가져간 국힘…거리에서도 반대 여론전",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-23T04:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005767586?sid=100"
-    },
-    {
-     "title": "국힘 \"조작기소 특검법 처리로 표결권 침해\" 권한쟁의심판 청구",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-23T04:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001537399?sid=100"
-    },
-    {
-     "title": "국민의힘 “조작기소 특검법은 무효”…조정식·서영교 권한쟁의심판 청...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-23T04:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003702134?sid=100"
+     "title": "생계급여 기준 2030년까지 중위소득 35%로 상향…장애인 가구 부양의무...",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-23T05:02:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2022149"
     }
    ]
   },
@@ -239,40 +111,40 @@
    "sources": [
     "daum"
    ],
-   "articles90": 6,
-   "recent20": 3,
-   "press": 6,
-   "firstArticleAt": "2026-11-23T03:32:00.000Z",
+   "articles90": 7,
+   "recent20": 4,
+   "press": 7,
+   "firstArticleAt": "2026-11-23T04:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'4번째 빌보드200 1위' 에이티즈 \"초심 잃지 않을 것\"",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-23T05:03:00.000Z",
+     "link": "https://m.entertain.naver.com/article/018/0006414148"
+    },
+    {
+     "title": "에이티즈, 빌보드 앨범 차트 네 번째 1위…2020년대 그룹 최다 톱10",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-23T05:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001886835?sid=103"
+    },
     {
      "title": "에이티즈, '골든아워 : 파트6'로 美 '빌보드 200' 네 번째 정상",
      "press": "idaegu.co.kr",
      "publishedAt": "2026-11-23T04:54:00.000Z",
      "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=566152"
-    },
-    {
-     "title": "에이티즈, 美 '빌보드 200' 통산 네 번째 1위…글로벌 파워 입증",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T04:49:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009304964"
-    },
-    {
-     "title": "에이티즈, 美빌보드 네번째 1위에 \"벅차고 감사...초심 잃지 않겠다\"",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-23T04:40:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=784085"
     }
    ]
   },
   {
    "keyword": "국힘, 헌재 특검법 심판 청구",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-23T03:37:00.000Z",
    "exclusive": false,
@@ -299,12 +171,76 @@
    ]
   },
   {
+   "keyword": "김종철 경찰청장 국민참여단 회의",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 18,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-23T04:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김종철 경찰청장, 경챁정책 국민참여단 회의",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-23T04:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014339784?sid=100"
+    },
+    {
+     "title": "김종철 신임 경찰청장, 취임 첫 일정 '경찰정책 국민참여단 회의'",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T04:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009304943?sid=102"
+    },
+    {
+     "title": "警, 김종철 경찰청장 취임… 2년 가까운 공백 끝에 수사개혁 시험대",
+     "press": "mediawatch.kr",
+     "publishedAt": "2026-11-23T04:38:00.000Z",
+     "link": "https://www.mediawatch.kr/news/article.html?no=261837"
+    }
+   ]
+  },
+  {
+   "keyword": "구혜리 3월 결혼",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-23T04:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "커플 연기 뒤엔 5년 비밀연애가…'오징어커플' 박강균♥구혜리, 실제 결...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-23T04:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004468862"
+    },
+    {
+     "title": "연예계 결혼 소식 또 터졌다…코미디언 박강균♥구혜리, 내년 3월 백년가...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-23T04:54:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000785727"
+    },
+    {
+     "title": "'오징어커플' 박강균♥구혜리, 커플 연기 실제였다…5년 열애 끝 3월 결...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-23T04:17:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002083187"
+    }
+   ]
+  },
+  {
    "keyword": "원자력 추진",
    "sources": [
     "google"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-23T03:44:00.000Z",
    "exclusive": false,
@@ -331,18 +267,23 @@
    ]
   },
   {
-   "keyword": "합동 청사 방호훈련",
+   "keyword": "서부지법 청사 방호훈련",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 11,
+   "articles90": 8,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-23T03:32:00.000Z",
+   "firstArticleAt": "2026-11-23T03:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "서부지법, 마포경찰서와 합동으로 법원 청사 방호 훈련 실시 [뉴시스Pic...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-23T04:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014339844?sid=102"
+    },
     {
      "title": "[뉴스1 PICK] 1·19 폭동 재현을 막아라…서부지법 통합 방호 훈련",
      "press": "news1.kr",
@@ -354,86 +295,104 @@
      "press": "khan.co.kr",
      "publishedAt": "2026-11-23T04:21:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/032/0003484391?sid=102"
-    },
-    {
-     "title": "서부지법·마포경찰서, 합동 청사 방호 훈련",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T03:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009304853?sid=102"
     }
    ]
   },
   {
-   "keyword": "박강균 구혜리 3월 결혼",
+   "keyword": "선관위 직원 영장심사",
    "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T04:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "연예계 결혼 소식 또 터졌다…코미디언 박강균♥구혜리, 내년 3월 백년가...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-23T04:54:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000785727"
-    },
-    {
-     "title": "'오징어커플' 박강균♥구혜리, 커플 연기 실제였다…5년 열애 끝 3월 결...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-23T04:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002083187"
-    },
-    {
-     "title": "'개그맨 부부' 탄생…박강균·구혜리, 내년 3월 결혼",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-23T04:06:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110042962315"
-    }
-   ]
-  },
-  {
-   "keyword": "lpga",
-   "sources": [
-    "google"
+    "signal.bz"
    ],
    "articles90": 4,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-23T03:28:00.000Z",
+   "firstArticleAt": "2026-11-23T03:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김아림 '54억원 대박' 무산, LPGA 시즌 최종전 공동 7위",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-23T04:33:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/666/0000133329"
+     "title": "'투표율 허위입력' 선관위 직원 8명 구속기로",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-23T04:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928983?sid=102"
     },
     {
-     "title": "LPGA CME Group Championship",
-     "press": null,
-     "publishedAt": "2026-11-23T03:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/077/0007247011?sid=104"
+     "title": "'투표율 허위 입력·투표록 위변조' 선관위 직원 8명 구속심사",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-23T04:28:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=565835"
     },
     {
-     "title": "김아림, LPGA 시즌 최종전 공동 7위로 마감",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-23T03:29:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/088/0001041723"
+     "title": "선관위 직원 구속기로…김건희 '관저이전' 첫 재판",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-23T04:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928949?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "연평도 전투영웅 추모",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 15,
+   "recent20": 1,
+   "press": 2,
+   "firstArticleAt": "2026-11-23T04:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "연평도 포격전 16주년 전승기념식…\"해병대 준4군체제 차질없이\"",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-23T05:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005846447?sid=100"
+    },
+    {
+     "title": "연평도 포격전 16주기",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T04:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009304906?sid=102"
+    },
+    {
+     "title": "고인 추모하는 부모",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T04:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009304897?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1162,
-  "matched": 657,
-  "avgLeadMin": 609,
+  "flagged": 1164,
+  "matched": 659,
+  "avgLeadMin": 606,
   "recent": [
+   {
+    "keyword": "노시환",
+    "hitKeyword": "노시환 MLB 포스팅",
+    "hitAt": "2026-11-23T14:00:00+09:00",
+    "leadMin": 238
+   },
+   {
+    "keyword": "이형일 증안펀드",
+    "hitKeyword": "증안펀드 가동 검토",
+    "hitAt": "2026-11-23T14:00:00+09:00",
+    "leadMin": 117
+   },
+   {
+    "keyword": "이형일 부총리 증안펀드",
+    "hitKeyword": "증안펀드 가동 검토",
+    "hitAt": "2026-11-23T14:00:00+09:00",
+    "leadMin": 77
+   },
+   {
+    "keyword": "이진우 유족 경찰 출석",
+    "hitKeyword": "이진우 만점 의혹 수사",
+    "hitAt": "2026-11-23T14:00:00+09:00",
+    "leadMin": 23
+   },
    {
     "keyword": "장윤기 부친 중징계",
     "hitKeyword": "장윤기 부친 경찰 중징계",
@@ -469,30 +428,6 @@
     "hitKeyword": "의붓딸 성폭행 계부 처벌",
     "hitAt": "2026-11-23T12:00:00+09:00",
     "leadMin": 1103
-   },
-   {
-    "keyword": "주현영 SNL 텃세",
-    "hitKeyword": "주현영 런닝맨 출연",
-    "hitAt": "2026-11-23T11:30:00+09:00",
-    "leadMin": 892
-   },
-   {
-    "keyword": "주현영",
-    "hitKeyword": "주현영 런닝맨 출연",
-    "hitAt": "2026-11-23T11:30:00+09:00",
-    "leadMin": 882
-   },
-   {
-    "keyword": "주현영 치아 시술",
-    "hitKeyword": "주현영 런닝맨 출연",
-    "hitAt": "2026-11-23T11:30:00+09:00",
-    "leadMin": 219
-   },
-   {
-    "keyword": "삼성증권 개인정보 유출",
-    "hitKeyword": "삼성증권 해킹",
-    "hitAt": "2026-11-23T11:30:00+09:00",
-    "leadMin": 48
    }
   ]
  }
