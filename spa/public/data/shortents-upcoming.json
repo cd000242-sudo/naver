@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T18:32:50.600Z",
+ "builtAt": "2026-11-23T18:42:53.802Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,49 +8,49 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 29,
+ "measured": 27,
  "candidates": [
   {
-   "keyword": "젠슨 황 복귀",
+   "keyword": "젠슨 황 CEO 복귀",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
    "articles90": 26,
    "recent20": 6,
-   "press": 18,
-   "firstArticleAt": "2026-11-23T17:06:00.000Z",
+   "press": 16,
+   "firstArticleAt": "2026-11-23T17:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "엔비디아, 젠슨 황 CEO 전격 복귀 결정…트럼프·투자자 압박 영향",
-     "press": "bloter.net",
-     "publishedAt": "2026-11-23T18:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/293/0000093701?sid=101"
+     "title": "몰락했다가 깜짝 복귀한 AI제국 황제…청문회 등 가시밭길 예고",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-23T18:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016459339?sid=104"
     },
     {
-     "title": "조사도 안 끝났는데 젠슨 황 복귀…엔비디아 이사회에 비판 쏟아져",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-23T18:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833620?sid=104"
+     "title": "\"엔비디아 이사회, 트럼프 설득에 젠슨 황 복귀 결정\"",
+     "press": "zdnet.co.kr",
+     "publishedAt": "2026-11-23T18:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/092/0002446567?sid=105"
     },
     {
-     "title": "젠슨 황 복귀에 나스닥 장중 7%대 급등…엔비디아 30%대↑(종합)",
-     "press": "koreatimes.com",
-     "publishedAt": "2026-11-23T18:26:00.000Z",
-     "link": "https://www.koreatimes.com/article/11632546?utm_source=naver"
+     "title": "비트코인, 엔비디아 CEO 복귀에 회복세",
+     "press": "khgames.co.kr",
+     "publishedAt": "2026-11-23T18:34:00.000Z",
+     "link": "https://www.khgames.co.kr/news/articleView.html?idxno=310639"
     }
    ]
   },
   {
-   "keyword": "선관위 직원 1명 구속",
+   "keyword": "선관위 직원 영장심사",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 7,
+   "articles90": 3,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-23T17:04:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-23T17:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
