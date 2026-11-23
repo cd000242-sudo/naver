@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T02:02:35.379Z",
+ "builtAt": "2026-11-23T02:12:38.965Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 22,
  "candidates": [
   {
    "keyword": "삼성증권도 개인정보 유출",
    "sources": [
     "nate"
    ],
-   "articles90": 96,
-   "recent20": 35,
-   "press": 91,
-   "firstArticleAt": "2026-11-23T01:22:00.000Z",
+   "articles90": 94,
+   "recent20": 36,
+   "press": 92,
+   "firstArticleAt": "2026-11-23T01:29:00.000Z",
    "exclusive": true,
    "capped": true,
    "samples": [
     {
-     "title": "삼성증권도 뜷렸다...해킹에 8241명 정보 유출",
-     "press": "digitaltoday.co.kr",
-     "publishedAt": "2026-11-23T02:00:00.000Z",
-     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=717351"
+     "title": "삼성증권 ‘고객의 소리’ 뚫려…8241명 계좌번호·운전면허번호 유출",
+     "press": "nongmin.com",
+     "publishedAt": "2026-11-23T02:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/662/0000109084?sid=102"
     },
     {
-     "title": "삼성증권 고객 민원 시스템 해킹…8241명 개인정보 유출",
-     "press": "smarttimes.co.kr",
-     "publishedAt": "2026-11-23T02:00:00.000Z",
-     "link": "http://www.smarttimes.co.kr/news/articleView.html?idxno=50791"
+     "title": "삼성증권, 개인정보 유출 긴급 대응… IP 차단·사고 경위 조사",
+     "press": "biztribune.co.kr",
+     "publishedAt": "2026-11-23T02:10:00.000Z",
+     "link": "http://www.biztribune.co.kr/news/articleView.html?idxno=362985"
     },
     {
-     "title": "삼성증권 8241명 고객정보 유출…\"사고 원인 파악 중\"",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-23T01:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003158242?sid=101"
+     "title": "삼성증권도 뚫렸다…고객 8241명 개인정보 유출, 금융권 보안 '비상'",
+     "press": "newsmap.co.kr",
+     "publishedAt": "2026-11-23T02:10:00.000Z",
+     "link": "https://www.newsmap.co.kr/news/articleView.html?idxno=5642"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 74,
-   "recent20": 25,
-   "press": 69,
-   "firstArticleAt": "2026-11-23T01:14:00.000Z",
+   "articles90": 91,
+   "recent20": 26,
+   "press": 86,
+   "firstArticleAt": "2026-11-23T01:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼성증권 고객 민원 시스템 해킹…8241명 개인정보 유출",
-     "press": "smarttimes.co.kr",
-     "publishedAt": "2026-11-23T02:00:00.000Z",
-     "link": "http://www.smarttimes.co.kr/news/articleView.html?idxno=50791"
+     "title": "삼성증권 '고객의 소리' 해킹...8241명 개인정보 유출",
+     "press": "wolyo.co.kr",
+     "publishedAt": "2026-11-23T02:10:00.000Z",
+     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=320897"
     },
     {
-     "title": "삼성증권 8241명 개인정보 유출됐다",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-23T01:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001165254?sid=101"
+     "title": "삼성증권 ‘고객의 소리’ 뚫려…8241명 계좌번호·운전면허번호 유출",
+     "press": "nongmin.com",
+     "publishedAt": "2026-11-23T02:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/662/0000109084?sid=102"
     },
     {
-     "title": "삼성증권 해킹 피해…8천여 명 개인정보 유출",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-23T01:58:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544633"
+     "title": "삼성증권, 고객 민원 첨부파일 해킹…외부 침입 경로·접근권한 조사",
+     "press": "e-science.co.kr",
+     "publishedAt": "2026-11-23T02:10:00.000Z",
+     "link": "https://www.e-science.co.kr/news/articleView.html?idxno=140430"
     }
    ]
   },
@@ -79,30 +79,62 @@
    "sources": [
     "nate"
    ],
-   "articles90": 68,
-   "recent20": 3,
-   "press": 66,
+   "articles90": 73,
+   "recent20": 8,
+   "press": 71,
    "firstArticleAt": "2026-11-23T01:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "싱가포르에 ‘AI홈’ 차린 LG전자…“7억명 동남아 공략”",
-     "press": "ekn.kr",
-     "publishedAt": "2026-11-23T02:00:00.000Z",
-     "link": "https://www.ekn.kr/web/view.php?key=20261123025493112"
+     "title": "[뉴스워커_LG전자] 싱가포르에 AI홈 체험 거점 구축…말레이시아로 확대...",
+     "press": "newsworker.co.kr",
+     "publishedAt": "2026-11-23T02:10:00.000Z",
+     "link": "https://www.newsworker.co.kr/news/articleView.html?idxno=515430"
     },
     {
-     "title": "LG전자, 싱가포르에 AI홈 체험공간…동남아 시장 공략",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-23T02:00:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=886045"
+     "title": "[산업계 동향] 삼성전자ㆍLG전자(11.23)",
+     "press": "weeklytoday.com",
+     "publishedAt": "2026-11-23T02:08:00.000Z",
+     "link": "http://www.weeklytoday.com/news/articleView.html?idxno=802955"
     },
     {
-     "title": "LG전자, 싱가포르서 'AI홈' 체험공간 선보인다…동남아 고객 접점 넓혀",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-23T01:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652765?sid=101"
+     "title": "LG전자, 싱가포르에 AI홈 체험공간 개설…동남아 시장 공략 확대",
+     "press": "pointdaily.co.kr",
+     "publishedAt": "2026-11-23T02:08:00.000Z",
+     "link": "https://www.pointdaily.co.kr/news/articleView.html?idxno=326999"
+    }
+   ]
+  },
+  {
+   "keyword": "이부진 아들 성 변경",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 33,
+   "recent20": 15,
+   "press": 33,
+   "firstArticleAt": "2026-11-23T00:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이부진 아들, 어머니 따라 성(姓) 바꿨다…임→이씨로 새출발",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-23T02:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001041707?sid=102"
+    },
+    {
+     "title": "이부진 사장 아들, 성인되자 아버지 성 ‘임씨’ 버리고 어머니 성 ‘이...",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-23T02:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000133305?sid=102"
+    },
+    {
+     "title": "이부진 호텔신라 사장 아들, 어머니 성 따라 이 씨로 변경",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-23T02:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928924?sid=102"
     }
    ]
   },
@@ -112,62 +144,30 @@
     "signal.bz",
     "daum"
    ],
-   "articles90": 40,
+   "articles90": 49,
    "recent20": 17,
-   "press": 27,
+   "press": 29,
    "firstArticleAt": "2026-11-23T00:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "경찰청장 공백 23개월 만에 끝… AI 부정행위·관계성 범죄 등 산적",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-23T02:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001206634?sid=102"
+     "title": "김종철 경찰청장 \"형사사법 개혁, 권한 아닌 책임 확대\"",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-23T02:10:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4120154"
     },
     {
-     "title": "김종철 경찰청장 취임…4대 목표·12대 역점과제 제시",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-23T02:00:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544634"
+     "title": "인사하는 김종철 경찰청장",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-23T02:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014339269?sid=102"
     },
     {
-     "title": "23개월 수장 공백 끝낸 경찰...김종철 신임 청장, 부실수사 쇄신 시험대",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-23T02:00:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=565801"
-    }
-   ]
-  },
-  {
-   "keyword": "정승환, 안테나 11년 떠난다",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 26,
-   "recent20": 3,
-   "press": 25,
-   "firstArticleAt": "2026-11-23T00:38:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "정승환, 11년 만에 소속사와 결별... 안테나 전속계약 종료",
-     "press": "sisunnews.co.kr",
-     "publishedAt": "2026-11-23T01:50:00.000Z",
-     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=250228"
-    },
-    {
-     "title": "정승환, 안테나와 전속계약 만료…11년 동행 마무리",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-23T01:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016457648?sid=103"
-    },
-    {
-     "title": "정승환, 11년 만에 유희열 품 떠난다…'K팝스타' 출신 전원 안테나와 이...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-23T01:45:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409235"
+     "title": "김종철 경찰청장, 취임사",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-23T02:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014339264?sid=102"
     }
    ]
   },
@@ -176,30 +176,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 21,
-   "recent20": 10,
-   "press": 19,
+   "articles90": 29,
+   "recent20": 9,
+   "press": 27,
    "firstArticleAt": "2026-11-23T01:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "靑 “스토킹·관계성 범죄 강력 대응…가석방 없는 무기형 검토”",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-23T01:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003060564?sid=100"
+     "title": "靑 \"스토킹 접근금지 연장, 가석방 없는 무기형 도입 검토\"",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-23T02:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005608160?sid=100"
     },
     {
-     "title": "靑, 스토킹 접근금지 연장·가석방 없는 무기형 검토",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-23T01:52:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085518"
+     "title": "청와대 \"가석방 없는 무기형·스토킹 접근금지기간 연장 등 검토\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-23T02:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001405061?sid=100"
     },
     {
-     "title": "靑 “'가석방 없는 무기형' 검토…스토킹 피해자 보호 강화”",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-23T01:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006414047?sid=100"
+     "title": "靑 \"스토킹 접근금지 기간 연장·가석방 없는 무기형 등 검토\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-23T02:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537370?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "정승환, 안테나 11년 떠난다",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 23,
+   "recent20": 2,
+   "press": 23,
+   "firstArticleAt": "2026-11-23T00:44:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정승환, 안테나 떠난다…11년 동행 끝 아름다운 이별",
+     "press": "atstar1.com",
+     "publishedAt": "2026-11-23T02:09:00.000Z",
+     "link": "https://m.entertain.naver.com/article/415/0000054085"
+    },
+    {
+     "title": "정승환, 11년 만에 안테나 떠난다…다음 달 데뷔 10주년 콘서트 일정 등...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-23T02:04:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283559"
+    },
+    {
+     "title": "정승환, 11년 만에 소속사와 결별... 안테나 전속계약 종료",
+     "press": "sisunnews.co.kr",
+     "publishedAt": "2026-11-23T01:50:00.000Z",
+     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=250228"
     }
    ]
   },
@@ -209,23 +241,23 @@
     "signal.bz"
    ],
    "articles90": 16,
-   "recent20": 3,
+   "recent20": 2,
    "press": 16,
    "firstArticleAt": "2026-11-23T01:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "산업장관, 카타르에 \"LNG 우선 달라\" … 도입 비중 5%대 6위 국가의 읍소",
-     "press": "biz.newdaily.co.kr",
-     "publishedAt": "2026-11-23T01:54:00.000Z",
-     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/23/2026112350100.html"
-    },
-    {
      "title": "카타르 LNG 공급 정상화 시, \"한국 우선 공급\" 요청",
      "press": "energy-news.co.kr",
      "publishedAt": "2026-11-23T01:54:00.000Z",
      "link": "https://www.energy-news.co.kr/news/articleView.html?idxno=229992"
+    },
+    {
+     "title": "산업장관, 카타르에 \"LNG 우선 달라\" … 도입 비중 5%대 6위 국가의 읍소",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-23T01:54:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/23/2026112350100.html"
     },
     {
      "title": "김정관 산업장관, 카타르에 LNG 우선 공급 요청…에너지·조선 협력 확대...",
@@ -236,14 +268,46 @@
    ]
   },
   {
+   "keyword": "에이티즈 빌보드 200 1위",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 15,
+   "recent20": 4,
+   "press": 15,
+   "firstArticleAt": "2026-11-23T00:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "에이티즈, 美 '빌보드 200' 통산 네 번째 1위 대기록…한미 차트 동시 점...",
+     "press": "ent.sbs.co.kr",
+     "publishedAt": "2026-11-23T02:07:00.000Z",
+     "link": "https://m.entertain.naver.com/article/416/0000328232"
+    },
+    {
+     "title": "에이티즈 ‘빌보드 200’ 통산 4번째 1위…2020년대 그룹 최다 톱10",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-23T02:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484370?sid=103"
+    },
+    {
+     "title": "네 번째 정상…'빌보드 200' 또 한번 접수",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-23T02:04:00.000Z",
+     "link": "https://m.entertain.naver.com/article/030/0003488506"
+    }
+   ]
+  },
+  {
    "keyword": "발언하는 장동혁 대표",
    "sources": [
     "nate"
    ],
-   "articles90": 20,
-   "recent20": 2,
+   "articles90": 19,
+   "recent20": 1,
    "press": 13,
-   "firstArticleAt": "2026-11-23T00:40:00.000Z",
+   "firstArticleAt": "2026-11-23T00:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -268,34 +332,34 @@
    ]
   },
   {
-   "keyword": "에이티즈 빌보드 200 1위",
+   "keyword": "한전 on",
    "sources": [
     "daum"
    ],
-   "articles90": 13,
-   "recent20": 0,
-   "press": 13,
-   "firstArticleAt": "2026-11-23T00:42:00.000Z",
+   "articles90": 10,
+   "recent20": 4,
+   "press": 10,
+   "firstArticleAt": "2026-11-23T00:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "에이티즈, 빌보드앨범 네 번째 1위…2020년대 그룹 최다 톱10",
-     "press": "tbs.seoul.kr",
-     "publishedAt": "2026-11-23T01:34:00.000Z",
-     "link": "http://tbs.seoul.kr/news/newsView.do?typ_800=5&idx_800=3538819&seq_800=20531720"
+     "title": "한전 외부 해킹으로 152만여 명 개인정보 유출, 주민등록번호 계좌번호...",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-23T02:10:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=452621"
     },
     {
-     "title": "'퍼포먼스돌' 에이티즈, 美 '빌보드 200' 네 번째 정상…첫 주 205만장 판...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-23T01:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005608108?sid=103"
+     "title": "한전, 152만여 건 개인정보 유출에 대국민 사과…“고객 편의 서비스, 사...",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-23T02:06:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261123500115"
     },
     {
-     "title": "이게 바로 ‘월드클래스의 멋’…에이티즈, 美 ‘빌보드 200’ 또 1위",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-23T01:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001306239"
+     "title": "한전ON 고객 65만명 정보 유출…계좌·카드번호 포함",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-23T02:04:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=409766"
     }
    ]
   },
@@ -304,10 +368,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-23T00:34:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-23T00:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -337,10 +401,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-23T00:37:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-23T00:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -365,38 +429,6 @@
    ]
   },
   {
-   "keyword": "블리츠웨이 엔터테인먼트",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-23T00:52:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "정승환, 도경수와 한솥밥 먹나…블리츠웨이뮤직 이적 \"긍정 논의 중\" [공...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-23T01:37:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002083113"
-    },
-    {
-     "title": "정승환, 도경수와 한솥밥 먹나…블리츠웨이뮤직 측 \"긍정 논의 중\"[공식...",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-23T01:26:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1795396824531374007"
-    },
-    {
-     "title": "‘11년 동행’ 안테나 떠난 정승환, 블리츠웨이 가나 “긍정 논의 중”...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-23T01:12:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005767446"
-    }
-   ]
-  },
-  {
    "keyword": "부산항",
    "sources": [
     "signal.bz",
@@ -405,10 +437,16 @@
    "articles90": 4,
    "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-23T00:42:00.000Z",
+   "firstArticleAt": "2026-11-23T01:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "부산항만공사, 중소기업 혁신기술 '공공조달 진입문' 넓힌다",
+     "press": "industrynews.co.kr",
+     "publishedAt": "2026-11-23T02:04:00.000Z",
+     "link": "https://www.industrynews.co.kr/news/articleView.html?idxno=90040"
+    },
     {
      "title": "부산항만공사, 美 LACP 어워즈 3년 연속 최고등급",
      "press": "ksg.co.kr",
@@ -420,12 +458,6 @@
      "press": "joongang.co.kr",
      "publishedAt": "2026-11-23T01:30:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/025/0003567139?sid=102"
-    },
-    {
-     "title": "부산항 '북항재개발 입찰 비리' 시행사 대표 징역 15년 구형",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-23T01:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004212603?sid=102"
     }
    ]
   },
@@ -448,48 +480,16 @@
      "link": "https://n.news.naver.com/mnews/article/421/0009304352?sid=102"
     },
     {
-     "title": "회의 자료 살펴보는 정은경 보건복지부 장관",
+     "title": "제81차 중앙생활보장위원회 주재하는 정은경 장관",
      "press": "newspim.com",
      "publishedAt": "2026-11-23T01:29:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123000426"
+     "link": "https://www.newspim.com/news/view/20261123000429"
     },
     {
-     "title": "참석자들과 인사하는 정은경 보건복지부 장관",
+     "title": "정은경 장관, 제81차 중앙생활보장위원회 주재",
      "press": "newspim.com",
      "publishedAt": "2026-11-23T01:29:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123000432"
-    }
-   ]
-  },
-  {
-   "keyword": "오지헌",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 3,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T01:47:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "오지헌, '청담동 금수저' 출신이었다…\"父 한 달 수입 5000만 원\"→8년 절...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-23T01:56:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409237"
-    },
-    {
-     "title": "\"저와 가장 많이 닮은 건 막내\"…오지헌, 174㎝ 첫째 포함 세 딸 근황 공...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-23T01:48:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283553"
-    },
-    {
-     "title": "\"일타 강사 부친, 90년대 월수입 5000만원\"…오지헌, 과거 눈길",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-23T01:47:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005444882"
+     "link": "https://www.newspim.com/news/view/20261123000431"
     }
    ]
   },
@@ -506,64 +506,68 @@
    "capped": false,
    "samples": [
     {
-     "title": "윤한홍 의원, 관저 공사 특혜 의혹 공판 출석",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-23T01:38:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123000455"
-    },
-    {
-     "title": "법정 향하며 취재진 질문 답변하는 윤한홍",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-23T01:38:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123000456"
-    },
-    {
      "title": "취재진 질문 답변하는 윤한홍 의원",
      "press": "newspim.com",
      "publishedAt": "2026-11-23T01:38:00.000Z",
      "link": "https://www.newspim.com/news/view/20261123000457"
-    }
-   ]
-  },
-  {
-   "keyword": "구혜리 박강균 결혼",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T01:08:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "무려 5년간 '비밀 연애' 하다가… 깜짝 결혼 발표한 코미디언 커플",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-23T01:36:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1176875"
     },
     {
-     "title": "커플 연기하다 실제 연인 됐다…'급식왕' 박강균, ♥구혜리와 내년 3월...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-23T01:33:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409234"
+     "title": "법정 향하는 윤한홍 국민의힘 의원",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-23T01:38:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261123000458"
     },
     {
-     "title": "'급식왕' 그 커플, 어디까지 연기였나…박강균ㆍ구혜리가 밝힌 5년 연애...",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-23T01:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000053849"
+     "title": "윤한홍 의원, 관저 공사 특혜 의혹 공판 출석",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-23T01:38:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261123000455"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1175,
-  "matched": 665,
-  "avgLeadMin": 634,
+  "flagged": 1176,
+  "matched": 671,
+  "avgLeadMin": 639,
   "recent": [
+   {
+    "keyword": "한동훈, 12월 3일에 꼭 하라",
+    "hitKeyword": "신도시 계양 12월 입주",
+    "hitAt": "2026-11-23T11:00:00+09:00",
+    "leadMin": 2391
+   },
+   {
+    "keyword": "김태희 아침마다 감동",
+    "hitKeyword": "비 김태희 딸 캐비아",
+    "hitAt": "2026-11-23T11:00:00+09:00",
+    "leadMin": 1476
+   },
+   {
+    "keyword": "김태희 보면 감동",
+    "hitKeyword": "비 김태희 딸 캐비아",
+    "hitAt": "2026-11-23T11:00:00+09:00",
+    "leadMin": 1436
+   },
+   {
+    "keyword": "비, 아침마다 김태희 감동",
+    "hitKeyword": "비 김태희 딸 캐비아",
+    "hitAt": "2026-11-23T11:00:00+09:00",
+    "leadMin": 1415
+   },
+   {
+    "keyword": "김아림, LPGA 최종전 공동 7위",
+    "hitKeyword": "티띠꾼 LPGA 3연패",
+    "hitAt": "2026-11-23T11:00:00+09:00",
+    "leadMin": 108
+   },
+   {
+    "keyword": "오지헌",
+    "hitKeyword": "오지헌 딸 공개",
+    "hitAt": "2026-11-23T11:00:00+09:00",
+    "leadMin": 18
+   },
    {
     "keyword": "조희대 탄핵 추진",
     "hitKeyword": "조희대 탄핵 법관 반발",
@@ -587,42 +591,6 @@
     "hitKeyword": "조희대 탄핵 법관 반발",
     "hitAt": "2026-11-23T10:30:00+09:00",
     "leadMin": 4566
-   },
-   {
-    "keyword": "조희대 탄핵 당론 추진",
-    "hitKeyword": "조희대 탄핵 법관 반발",
-    "hitAt": "2026-11-23T10:30:00+09:00",
-    "leadMin": 3382
-   },
-   {
-    "keyword": "조희대 탄핵 여론",
-    "hitKeyword": "조희대 탄핵 법관 반발",
-    "hitAt": "2026-11-23T10:30:00+09:00",
-    "leadMin": 3080
-   },
-   {
-    "keyword": "조희대 대법원장 탄핵",
-    "hitKeyword": "조희대 탄핵 법관 반발",
-    "hitAt": "2026-11-23T10:30:00+09:00",
-    "leadMin": 1707
-   },
-   {
-    "keyword": "조희대 탄핵소추 기자간담회",
-    "hitKeyword": "조희대 탄핵 법관 반발",
-    "hitAt": "2026-11-23T10:30:00+09:00",
-    "leadMin": 1325
-   },
-   {
-    "keyword": "조희대 대법원장 탄핵소추 추진",
-    "hitKeyword": "조희대 탄핵 법관 반발",
-    "hitAt": "2026-11-23T10:30:00+09:00",
-    "leadMin": 1265
-   },
-   {
-    "keyword": "조희대 탄핵 한덕수 판결 제외",
-    "hitKeyword": "조희대 탄핵 법관 반발",
-    "hitAt": "2026-11-23T10:30:00+09:00",
-    "leadMin": 1204
    }
   ]
  }
