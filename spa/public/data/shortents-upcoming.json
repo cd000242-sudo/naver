@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T21:03:42.288Z",
+ "builtAt": "2026-11-23T21:13:45.444Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,13 +15,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 6,
+   "articles90": 7,
    "recent20": 3,
-   "press": 6,
+   "press": 7,
    "firstArticleAt": "2026-11-23T20:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "‘투표율 허위 입력’ 선관위 직원 1명 구속…7명 영장 기각",
+     "press": "donga.com",
+     "publishedAt": "2026-11-23T21:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764647?sid=102"
+    },
     {
      "title": "‘투표율 허위입력’ 선관위 직원 8명 중 1명 구속…“증거인멸 염려”",
      "press": "kukinews.com",
@@ -33,17 +39,43 @@
      "press": "news.bbsi.co.kr",
      "publishedAt": "2026-11-23T20:56:00.000Z",
      "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4120389"
-    },
-    {
-     "title": "선관위 직원 8명 중 1명만 구속…'윗선' 수사 제동 걸린 특검",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-23T20:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006414438?sid=102"
     }
    ]
   },
   {
-   "keyword": "강유정 문체부 장관",
+   "keyword": "치매",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 5,
+   "press": 5,
+   "firstArticleAt": "2026-11-23T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "치매 환자 가족들 “기억 굿즈 팝니다”",
+     "press": "segye.com",
+     "publishedAt": "2026-11-23T21:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177576?sid=102"
+    },
+    {
+     "title": "삼진제약, 아리바이오 ‘먹는 치매약’ 국내 허가·생산 준비",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-23T21:02:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611230141"
+    },
+    {
+     "title": "치매·희귀질환 재도전과 퇴장…'비아그라 대항마' K-신약 3종의 흥망성...",
+     "press": "apsk.co.kr",
+     "publishedAt": "2026-11-23T21:00:00.000Z",
+     "link": "https://www.apsk.co.kr/news/articleView.html?idxno=541120"
+    }
+   ]
+  },
+  {
+   "keyword": "강유정 대변인",
    "sources": [
     "daum"
    ],
@@ -55,16 +87,16 @@
    "capped": false,
    "samples": [
     {
-     "title": "평론가~靑대변인 강유정, 문체부 수장으로…문화정책 향방은",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-23T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014340882?sid=103"
-    },
-    {
      "title": "대변인·안보실 차장·전 정무수석을 장관으로, 외교안보 '회전문 개각...",
      "press": "gokorea.kr",
      "publishedAt": "2026-11-23T21:00:00.000Z",
      "link": "https://www.gokorea.kr/news/articleView.html?idxno=886965"
+    },
+    {
+     "title": "평론가~靑대변인 강유정, 문체부 수장으로…문화정책 향방은",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-23T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014340882?sid=103"
     },
     {
      "title": "신임 두터운 한준호, ‘청와대의 입’ 강유정… 국정 이해도 높은 실무...",
@@ -75,17 +107,23 @@
    ]
   },
   {
-   "keyword": "강금실 국정원장 후보자",
+   "keyword": "국정원장 후보 강금실",
    "sources": [
     "daum"
    ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 1,
-   "press": 3,
+   "press": 4,
    "firstArticleAt": "2026-11-23T20:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "李, 외교·안보라인 동시 교체…국정원장에 강금실 [오늘 뉴스 4컷]",
+     "press": "segye.com",
+     "publishedAt": "2026-11-23T21:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177581?sid=100"
+    },
     {
      "title": "국정원장 등 외교안보 라인 물갈이…대미·대북 돌파구",
      "press": "sidae.com",
@@ -97,21 +135,15 @@
      "press": "seoul.co.kr",
      "publishedAt": "2026-11-23T20:03:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/081/0003702355?sid=100"
-    },
-    {
-     "title": "‘李 대통령과 밀착’ 이때부터 였다…‘원조 친노’ 강금실의 귀환",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-23T20:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003567425?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1231,
-  "matched": 672,
-  "avgLeadMin": 578,
+  "flagged": 1230,
+  "matched": 669,
+  "avgLeadMin": 580,
   "recent": [
    {
     "keyword": "어벤져스",
