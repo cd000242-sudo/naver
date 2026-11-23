@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T10:19:58.171Z",
+ "builtAt": "2026-11-23T10:30:01.450Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,66 @@
  "measured": 25,
  "candidates": [
   {
-   "keyword": "국정원장 강금실 지명",
+   "keyword": "강금실 국정원장 후보자",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 33,
-   "recent20": 7,
-   "press": 29,
-   "firstArticleAt": "2026-11-23T08:50:00.000Z",
+   "articles90": 25,
+   "recent20": 2,
+   "press": 23,
+   "firstArticleAt": "2026-11-23T09:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "강금실 국정원장 후보자 \"국익·국민 안녕 위해 최선\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-23T10:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537468?sid=100"
+    },
+    {
+     "title": "국정원장 강금실 파격발탁…외교·안보 포함 중폭개각",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-23T10:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929114?sid=161"
+    },
     {
      "title": "임웅순·강유정·홍익표 등 '친명' 내각 전진 배치… 강금실, 사상 첫 女...",
      "press": "kdfnews.com",
      "publishedAt": "2026-11-23T10:10:00.000Z",
      "link": "http://www.kdfnews.com/news/articleView.html?idxno=191307"
+    }
+   ]
+  },
+  {
+   "keyword": "이재명 대통령 개각",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 29,
+   "recent20": 3,
+   "press": 21,
+   "firstArticleAt": "2026-11-23T09:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이 대통령, 측근 전면배치…국정중반 동력 확보",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-23T10:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929115?sid=161"
     },
     {
-     "title": "이 대통령, 첫 여성 국정원장에 강금실 지명",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-23T10:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000368429?sid=100"
+     "title": "국정원장 강금실 파격발탁…외교·안보 포함 중폭개각",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-23T10:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929114?sid=161"
     },
     {
-     "title": "[뉴스추적] 강금실 깜짝 발탁 이유는?",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-23T10:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979515?sid=100"
+     "title": "이재명 정부 개각에 與 “실용·전문성 인선” 환영…野 “회전문·보은...",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-23T10:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000133451?sid=100"
     }
    ]
   },
@@ -48,158 +80,190 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 28,
+   "articles90": 19,
    "recent20": 4,
-   "press": 28,
-   "firstArticleAt": "2026-11-23T08:50:00.000Z",
+   "press": 19,
+   "firstArticleAt": "2026-11-23T09:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "롯데 자존심 ‘롯데월드타워’ 2년 만에 되찾았다",
+     "press": "newstopkorea.com",
+     "publishedAt": "2026-11-23T10:28:00.000Z",
+     "link": "https://www.newstopkorea.com/ko-kr/articles/49257"
+    },
+    {
+     "title": "롯데, 2년 만에 롯데월드타워 담보 해지",
+     "press": "the-biz.co.kr",
+     "publishedAt": "2026-11-23T10:24:00.000Z",
+     "link": "http://www.the-biz.co.kr/news/articleView.html?idxno=731929"
+    },
     {
      "title": "롯데, 롯데월드타워 담보 해지…롯데케미칼 회사채 8000억 상환",
      "press": "press9.kr",
      "publishedAt": "2026-11-23T10:16:00.000Z",
      "link": "http://www.press9.kr/news/articleView.html?idxno=86870"
-    },
-    {
-     "title": "롯데월드타워 담보 해제 결정…롯데케미칼 8000억원대 채무 상환",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-23T10:12:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=848212"
-    },
-    {
-     "title": "롯데 시중은행 롯데월드타워 담보 해지",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-23T10:08:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3083858"
     }
    ]
   },
   {
-   "keyword": "이재명 대통령 개각",
+   "keyword": "금융위 롯데카드에 과징금 10억",
    "sources": [
-    "signal.bz"
-   ],
-   "articles90": 34,
-   "recent20": 2,
-   "press": 24,
-   "firstArticleAt": "2026-11-23T08:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이재명 정부 개각에 與 “실용·전문성 인선” 환영…野 “회전문·보은...",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-23T10:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000133451?sid=100"
-    },
-    {
-     "title": "이 대통령, 국정원장·장관 4명 중폭 개각... 외교안보 라인 교체·靑 참...",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-23T10:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967296?sid=100"
-    },
-    {
-     "title": "이 대통령 APEC 다녀와서 '자주파' 두 축 물갈이…왜?",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-23T09:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522060?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "한준호 인선",
-   "sources": [
-    "daum"
+    "nate"
    ],
    "articles90": 13,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-23T08:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이재명 정부 개각에 與 “실용·전문성 인선” 환영…野 “회전문·보은...",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-23T10:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000133451?sid=100"
-    },
-    {
-     "title": "한준호 행안장관 후보자, 중수청 안착 과제…2차 세종이전도 현안(종합...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-23T09:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014340691?sid=100"
-    },
-    {
-     "title": "민주, '외교·통일' 등 개각에 \"실용성·전문성 살린 인선 환영\"",
-     "press": "getnews.co.kr",
-     "publishedAt": "2026-11-23T09:40:00.000Z",
-     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=888202"
-    }
-   ]
-  },
-  {
-   "keyword": "김원효 트젠바 방문 해명하러",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
    "recent20": 3,
-   "press": 7,
-   "firstArticleAt": "2026-11-23T09:10:00.000Z",
+   "press": 13,
+   "firstArticleAt": "2026-11-23T09:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“트젠바 그런 곳 아니야” 김원효, 트젠바 방문 논란→‘화끈 농담’에...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-23T10:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001282901"
+     "title": "금융위 롯데카드에 과징금 10억 부과, \"해킹 위험 공시 불충분\"",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-23T10:28:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=452715"
     },
     {
-     "title": "김원효 \"왜 갔냐니, XX 달렸나 확인하러\"..트젠바 방문 직접 해명",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-23T10:16:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003489600"
+     "title": "금융위, 롯데카드에 10억 과징금…해킹 유출위험 공시 미흡",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-23T10:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002249635?sid=101"
     },
-    {
-     "title": "'트젠바 해명' 김원효, 조용히 김신영 응원…\"지나고 보면 다 괜찮아\" [...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-23T10:09:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409313"
-    }
-   ]
-  },
-  {
-   "keyword": "금융위, 롯데카드 과징금 10억원",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-23T08:57:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
     {
      "title": "금융위, 롯데카드에 10억원 과징금…“유출위험 공시 불충분”",
      "press": "etnews.com",
      "publishedAt": "2026-11-23T10:18:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/030/0003488795?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "한준호 강유정 전진배치",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-23T09:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "청와대 출신·친명 내각 전진배치…국정 3년 차 친정체제 강화",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-23T10:12:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=202611231902594940e7e8286d56_1"
     },
     {
-     "title": "금융위, 공시의무 위반 롯데카드에 10억원 과징금",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-23T09:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006414370?sid=101"
+     "title": "임웅순·강유정·홍익표 등 '친명' 내각 전진 배치… 강금실, 사상 첫 女...",
+     "press": "kdfnews.com",
+     "publishedAt": "2026-11-23T10:10:00.000Z",
+     "link": "http://www.kdfnews.com/news/articleView.html?idxno=191307"
     },
     {
-     "title": "금융위, 롯데카드에 '유출위험 공시 불충분' 10억 원 과징금",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-23T09:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001405178?sid=101"
+     "title": "한준호 행안·강유정 문체…내각에 측근 전진 배치",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-23T10:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000368426?sid=115"
+    }
+   ]
+  },
+  {
+   "keyword": "김원효 방문 이유 확인하러 갔다",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-23T09:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘심진화♥’김원효, 트젠바 논란 해명도 화끈했다 “왜 갔냐니‥달려...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-23T10:29:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190471"
+    },
+    {
+     "title": "\"거길 왜 갔냐고? OO 확인하러 갔다\"…김원효, '트젠바' 방문 인정→직...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-23T09:51:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000492640"
+    },
+    {
+     "title": "'트젠바 논란' 김원효, 결국 라방 켰다…\"촬영 상대=남고 후배, 근황 궁...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-23T09:40:00.000Z",
+     "link": "https://m.entertain.naver.com/article/477/0000640460"
+    }
+   ]
+  },
+  {
+   "keyword": "안전공업 대표 등 기소",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-23T09:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘72명 사상’ 안전공업 화재 대표 등 12명ㆍ법인 기소",
+     "press": "fpn119.co.kr",
+     "publishedAt": "2026-11-23T09:44:00.000Z",
+     "link": "http://fpn119.co.kr/259906"
+    },
+    {
+     "title": "대전 안전공업 화재 참사 72명 사상…대표 등 12명 기소, 안전관리 부실...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-23T09:42:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629919"
+    },
+    {
+     "title": "'14명 사망' 대전 안전공업 화재…대표이사 기소",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-23T09:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193326?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "문체부 암표 수사 의뢰",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-23T09:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "6억원대 암표 거래 정황 포착…문체부, 판매 의심자 70명 경찰에 넘겨",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-23T09:46:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=848202"
+    },
+    {
+     "title": "\"혼자 210장이나?\"…6억원어치 암표 팔려던 70명 경찰 수사의뢰",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-23T09:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005445225?sid=103"
+    },
+    {
+     "title": "‘무려 6억 규모’ 선 넘은 암표 거래…문체부, 혐의자 70명 수사의뢰",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-23T09:08:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/011/0004685290"
     }
    ]
   },
@@ -208,10 +272,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-23T08:50:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-23T09:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -236,14 +300,14 @@
    ]
   },
   {
-   "keyword": "박준현, 학폭 소송 1심 승소",
+   "keyword": "박준현 학폭 소송 승소",
    "sources": [
     "nate"
    ],
-   "articles90": 5,
+   "articles90": 3,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-23T09:00:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-23T09:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -270,9 +334,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1201,
-  "matched": 660,
-  "avgLeadMin": 604,
+  "flagged": 1205,
+  "matched": 659,
+  "avgLeadMin": 605,
   "recent": [
    {
     "keyword": "ai 데이터 센터",
