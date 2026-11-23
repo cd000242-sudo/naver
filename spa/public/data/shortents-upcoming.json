@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T01:32:24.780Z",
+ "builtAt": "2026-11-23T01:42:28.821Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
+ "measured": 21,
  "candidates": [
   {
-   "keyword": "코스피 급락",
+   "keyword": "삼성증권 개인정보 유출",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 79,
-   "recent20": 20,
-   "press": 69,
-   "firstArticleAt": "2026-11-23T00:36:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "靑, 코스피 5000선 붕괴에 \"美증시와 연동되는 측면 있어\"",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-23T01:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000545228?sid=101"
-    },
-    {
-     "title": "코스피, 미 AI 쇼크에 급락…4,700선 내줘",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-23T01:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928901?sid=101"
-    },
-    {
-     "title": "[오늘증시] 코스피 4600선까지 추락…증권가 전망치도 '뚝'",
-     "press": "startuptoday.co.kr",
-     "publishedAt": "2026-11-23T01:28:00.000Z",
-     "link": "https://www.startuptoday.co.kr/news/articleView.html?idxno=819720"
-    }
-   ]
-  },
-  {
-   "keyword": "이재근 KB금융 글로벌 플랫폼 전환",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 55,
-   "recent20": 7,
-   "press": 55,
-   "firstArticleAt": "2026-11-23T00:10:00.000Z",
+   "articles90": 72,
+   "recent20": 50,
+   "press": 67,
+   "firstArticleAt": "2026-11-23T01:12:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "이재근 KB금융 회장 취임..2027 '대전환 원년·One KB' 선언",
-     "press": "choicenews.co.kr",
-     "publishedAt": "2026-11-23T01:30:00.000Z",
-     "link": "http://www.choicenews.co.kr/news/articleView.html?idxno=173415"
+     "title": "삼성증권, VOC 시스템 뚫려 '8241명' 정보 유출…증권가 ‘외부 접점’ ...",
+     "press": "megaeconomy.co.kr",
+     "publishedAt": "2026-11-23T01:40:00.000Z",
+     "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065576916403276"
     },
     {
-     "title": "KB금융 이재근號 출범…'리딩 플랫폼'으로 성공 방정식 바꾼다",
-     "press": "apnews.kr",
-     "publishedAt": "2026-11-23T01:30:00.000Z",
-     "link": "https://www.apnews.kr/news/articleView.html?idxno=3053424"
+     "title": "삼성증권, 고객 8241명 개인정보 유출…홈페이지 VOC 시스템 뚫렸다",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-23T01:40:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=172878"
     },
     {
-     "title": "KB금융 이재근 회장 취임…‘리딩뱅크’ 넘어 ‘리딩플랫폼’ 도약 선언",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-23T01:26:00.000Z",
-     "link": "https://www.viva100.com/article/20261123500395"
+     "title": "삼성증권, VOC 시스템 해킹 피해…고객 8241명 개인정보 유출",
+     "press": "pointe.co.kr",
+     "publishedAt": "2026-11-23T01:40:00.000Z",
+     "link": "https://www.pointe.co.kr/news/articleView.html?idxno=88232"
     }
    ]
   },
@@ -79,205 +47,245 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 59,
-   "recent20": 7,
-   "press": 54,
-   "firstArticleAt": "2026-11-23T00:04:00.000Z",
+   "articles90": 54,
+   "recent20": 6,
+   "press": 51,
+   "firstArticleAt": "2026-11-23T00:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "11월 중순 수출 역대 최대 ... 누적 수출액 1조76억달러",
-     "press": "efnews.co.kr",
-     "publishedAt": "2026-11-23T01:26:00.000Z",
-     "link": "http://www.efnews.co.kr/news/articleView.html?idxno=134197"
+     "title": "11월 1~20일 수출, 101.5% 급증에 '역대 최대'",
+     "press": "todaykorea.co.kr",
+     "publishedAt": "2026-11-23T01:38:00.000Z",
+     "link": "https://www.todaykorea.co.kr/news/articleView.html?idxno=408990"
     },
     {
-     "title": "1~20일 수출 774억달러 '역대 최대'…반도체 4배 급증",
-     "press": "seouleconews.com",
-     "publishedAt": "2026-11-23T01:26:00.000Z",
-     "link": "http://www.seouleconews.com/news/articleView.html?idxno=95180"
+     "title": "'꿈의 수출 1조 달러' 시대 활짝…11월 초·중순 수출도 '역대 최대'",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-23T01:32:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4120149"
     },
     {
-     "title": "반도체 질주에 수출 신기록…11월 1~20일 수출 774억 달러 '역대 최대', ...",
-     "press": "queen.co.kr",
-     "publishedAt": "2026-11-23T01:26:00.000Z",
-     "link": "http://www.queen.co.kr/news/articleView.html?idxno=466725"
+     "title": "수출 누적 1조달러 첫 돌파…11월 1~20일 774억달러 '역대 최대'",
+     "press": "sisafocus.co.kr",
+     "publishedAt": "2026-11-23T01:32:00.000Z",
+     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367908"
     }
    ]
   },
   {
-   "keyword": "조희대 대법원장 탄핵",
+   "keyword": "박종복 은행연합회장 내정",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 77,
-   "recent20": 36,
-   "press": 49,
-   "firstArticleAt": "2026-11-23T00:45:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "한병도 \"조희대 탄핵, 내란 청산이라는 역사적 소명 담겨\"",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-23T01:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006414024?sid=100"
-    },
-    {
-     "title": "양부남 \"법관 집단행동은 특권적 행태⋯탄핵소추안 이번 주 완성\"",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-23T01:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001077367?sid=100"
-    },
-    {
-     "title": "유승민, 與 조희대 탄핵 추진에 \"판사들 일어나 사법부 독립 지켜야\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-23T01:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014339013?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "박종복 전 SC제일은행장",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 50,
-   "recent20": 10,
-   "press": 48,
-   "firstArticleAt": "2026-11-23T00:03:00.000Z",
+   "articles90": 23,
+   "recent20": 2,
+   "press": 20,
+   "firstArticleAt": "2026-11-23T00:14:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "차기 은행연합회장에 박종복 전 SC제일은행장",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-23T01:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001273585?sid=101"
-    },
-    {
-     "title": "은행연합회장 '윤종규 대세론' 뒤집은 박종복…'KB 쏠림' 견제 작용했나",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-23T01:25:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123000299"
+     "title": "은행연합회장 또 '정통 은행원'…이번엔 4대 금융 밖에서 나왔다",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T01:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009304343?sid=101"
     },
     {
      "title": "박종복 은행연합회장 내정자 \"AI시대 역할 고민…당국 소통도 충실\"",
      "press": "news.einfomax.co.kr",
      "publishedAt": "2026-11-23T01:24:00.000Z",
      "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445990"
+    },
+    {
+     "title": "박종복 차기 은행연합회장, 신한금융 사외이사 8개월 만에 물러난다",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-23T01:20:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445985"
+    }
+   ]
+  },
+  {
+   "keyword": "에이티즈 빌보드 200 1위",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 19,
+   "recent20": 3,
+   "press": 19,
+   "firstArticleAt": "2026-11-23T00:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "에이티즈, 빌보드앨범 네 번째 1위…2020년대 그룹 최다 톱10",
+     "press": "tbs.seoul.kr",
+     "publishedAt": "2026-11-23T01:34:00.000Z",
+     "link": "http://tbs.seoul.kr/news/newsView.do?typ_800=5&idx_800=3538819&seq_800=20531720"
+    },
+    {
+     "title": "'퍼포먼스돌' 에이티즈, 美 '빌보드 200' 네 번째 정상…첫 주 205만장 판...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-23T01:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005608108?sid=103"
+    },
+    {
+     "title": "이게 바로 ‘월드클래스의 멋’…에이티즈, 美 ‘빌보드 200’ 또 1위",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-23T01:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001306239"
     }
    ]
   },
   {
    "keyword": "발언하는 장동혁 대표",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 27,
-   "recent20": 10,
-   "press": 12,
+   "articles90": 30,
+   "recent20": 7,
+   "press": 14,
    "firstArticleAt": "2026-11-23T00:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "장동혁 대표, 수능·자격시험 공정성 간담회 발언",
+     "title": "장동혁, 與 '조희대 탄핵' 추진 맹비난…\"사유 끼워 맞춰\"",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-23T01:36:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086451"
+    },
+    {
+     "title": "장동혁 대표, 수능·자격시험 공정성 간담회",
      "press": "yna.co.kr",
-     "publishedAt": "2026-11-23T01:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016457573?sid=102"
+     "publishedAt": "2026-11-23T01:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016457591?sid=102"
     },
     {
-     "title": "장동혁 “조희대 탄핵은 자폭 탄핵…李 재판 재개의 마중물 될 것”",
-     "press": "segye.com",
-     "publishedAt": "2026-11-23T01:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177309?sid=100"
-    },
-    {
-     "title": "시험 공정성 논의하는 장동혁 대표",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T01:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009304324?sid=100"
+     "title": "장동혁 \"정부, AI 컨닝에 무대책…수험생만 골탕\"",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-23T01:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006414028?sid=100"
     }
    ]
   },
   {
-   "keyword": "스쿠발 메츠와 계약",
+   "keyword": "정승환 안테나 전속계약 종료",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 14,
+   "recent20": 3,
+   "press": 13,
+   "firstArticleAt": "2026-11-23T00:38:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정승환, 도경수와 한솥밥 먹나…블리츠웨이뮤직 이적 \"긍정 논의 중\" [공...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-23T01:37:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002083113"
+    },
+    {
+     "title": "정승환, 안테나 전속계약 종료 \"11년 간의 동행 마무리\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-23T01:35:00.000Z",
+     "link": "https://m.entertain.naver.com/article/079/0004212636"
+    },
+    {
+     "title": "정승환, 도경수와 한솥밥 먹나…블리츠웨이뮤직 측 \"긍정 논의 중\"[공식...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-23T01:26:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1795396824531374007"
+    }
+   ]
+  },
+  {
+   "keyword": "LG전자, 싱가포르 AI홈 매장 오픈",
    "sources": [
     "nate"
    ],
-   "articles90": 14,
+   "articles90": 13,
    "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-23T00:04:00.000Z",
+   "press": 13,
+   "firstArticleAt": "2026-11-23T01:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이래서 다저스 대신 메츠였나, '9년 4억 5000만 달러' 스쿠발 옵트아웃 ...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-23T01:16:00.000Z",
-     "link": "https://m.sports.naver.com/wbaseball/article/477/0000640365"
+     "title": "LG전자, 싱가포르에 AI홈 체험공간 오픈·'2026 협력회 워크숍' 개최",
+     "press": "wsobi.com",
+     "publishedAt": "2026-11-23T01:34:00.000Z",
+     "link": "http://www.wsobi.com/news/articleView.html?idxno=322291"
     },
     {
-     "title": "소토→스쿠발, 메츠 6038억 원 베팅…MLB 역대 계약 TOP 5에 2명",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-23T01:13:00.000Z",
-     "link": "https://m.sports.naver.com/wbaseball/article/241/0003543042"
+     "title": "LG전자, 싱가포르에 AI 체험공간 오픈.... 동남아 'AI홈 시장' 공략",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-23T01:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005608102?sid=101"
     },
     {
-     "title": "'FA 최대어' 스쿠발, 메츠와 9년 4억 5000만 달러 계약…투수 역대 최고...",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-23T01:12:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110040439280"
+     "title": "LG전자, 싱가포르에 ‘AI홈’ 체험공간 오픈…동남아 AI홈 확대",
+     "press": "inthenews.co.kr",
+     "publishedAt": "2026-11-23T01:20:00.000Z",
+     "link": "https://www.inthenews.co.kr/news/article.html?no=94832"
     }
    ]
   },
   {
-   "keyword": "유엔기후총회 합의 무산",
+   "keyword": "이란 미사일 발사대 공개",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
+   "articles90": 7,
    "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-23T00:04:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-23T00:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "COP31, 17년 만에 기후합의 불발…화석연료 전환 이견",
-     "press": "ajunews.com",
+     "title": "이란, 새 미사일 발사대 최초 공개…\"적군에 굴욕 줄 것\"",
+     "press": "news.tvchosun.com",
      "publishedAt": "2026-11-23T01:24:00.000Z",
-     "link": "https://www.ajunews.com/view/20261123100819300"
+     "link": "https://n.news.naver.com/mnews/article/448/0000652756?sid=104"
     },
     {
-     "title": "'화석연료' 대립‥17년 만에 합의문 채택 무산",
+     "title": "이란 신형 미사일 발사대 공개‥혁명수비대 \"적군에 굴욕 줄 것\"",
      "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-23T00:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001537333?sid=104"
+     "publishedAt": "2026-11-23T01:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537346?sid=104"
     },
     {
-     "title": "COP31 합의 결렬 [ESG 뉴스 5]",
-     "press": "magazine.hankyung.com",
-     "publishedAt": "2026-11-23T00:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/050/0000113603?sid=101"
+     "title": "[포착] 트럼프 보란 듯…이란, 미사일 두 발 동시 쏘는 ‘이중 발사대’...",
+     "press": "nownews.seoul.co.kr",
+     "publishedAt": "2026-11-23T01:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003702034?sid=104"
     }
    ]
   },
   {
    "keyword": "강금실",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
    "firstArticleAt": "2026-11-23T00:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'한미 이상기류' 속 이종석 국정원장 교체설…후임은 강금실?",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-23T01:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000142817?sid=100"
+    },
     {
      "title": "'이종석 교체·강금실 후임설'…靑 \"인사 사항 확인 어려워\"",
      "press": "ajunews.com",
@@ -289,12 +297,6 @@
      "press": "goodmorningcc.com",
      "publishedAt": "2026-11-23T00:44:00.000Z",
      "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=456315"
-    },
-    {
-     "title": "\"이종석 국정원장 강금실로 교체\" 보도‥靑 \"확인 어렵다\"",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-23T00:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001537328?sid=100"
     }
    ]
   },
@@ -329,73 +331,138 @@
      "link": "https://www.ajunews.com/view/20261123091418891"
     }
    ]
+  },
+  {
+   "keyword": "정년연장",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 2,
+   "firstArticleAt": "2026-11-23T00:19:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "민주노총 “정년연장 연내 입법”…25일 양대노총 공동 기자회견",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-23T01:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002727005?sid=101"
+    },
+    {
+     "title": "정년연장 65세, 11월 27일 중대 고비…SNS 관심 집중",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-23T01:02:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629729"
+    },
+    {
+     "title": "정년연장 ‘임금 해법’ 찾는 정부…부총리, 임금체계 개편 현장 방문",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-23T00:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002726915?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "오지헌",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-23T00:15:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "오지헌 아내 “혼전순결 지켰다”‥상견례 반응은? “母, 오지헌 얼굴 ...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-23T00:22:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190314"
+    },
+    {
+     "title": "'박상미♥' 오지헌, 미모의 세 딸 공개…'174cm' 고2 장녀에 \"모델해도 ...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-23T00:22:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002083098"
+    },
+    {
+     "title": "오지헌 “청담동 금수저 출신, 1타 강사 父 90년대 월수입 5천만원”(아...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-23T00:15:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190311"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1154,
-  "matched": 647,
-  "avgLeadMin": 601,
+  "flagged": 1161,
+  "matched": 665,
+  "avgLeadMin": 634,
   "recent": [
    {
-    "keyword": "고경표 후보 제외",
-    "hitKeyword": "고경표 시상식 논란",
-    "hitAt": "2026-11-23T10:00:00+09:00",
-    "leadMin": 1164
+    "keyword": "조희대 탄핵 추진",
+    "hitKeyword": "조희대 탄핵 법관 반발",
+    "hitAt": "2026-11-23T10:30:00+09:00",
+    "leadMin": 4948
    },
    {
-    "keyword": "음주운전 고경표 후보 제외",
-    "hitKeyword": "고경표 시상식 논란",
-    "hitAt": "2026-11-23T10:00:00+09:00",
-    "leadMin": 1124
+    "keyword": "與, 조희대 탄핵 추진",
+    "hitKeyword": "조희대 탄핵 법관 반발",
+    "hitAt": "2026-11-23T10:30:00+09:00",
+    "leadMin": 4646
    },
    {
-    "keyword": "기상",
-    "hitKeyword": "나는솔로 19기 상철 결혼",
-    "hitAt": "2026-11-23T10:00:00+09:00",
-    "leadMin": 1124
+    "keyword": "조희대 탄핵 당론 채택",
+    "hitKeyword": "조희대 탄핵 법관 반발",
+    "hitAt": "2026-11-23T10:30:00+09:00",
+    "leadMin": 4606
    },
    {
-    "keyword": "고경표 음주 사과",
-    "hitKeyword": "고경표 시상식 논란",
-    "hitAt": "2026-11-23T10:00:00+09:00",
-    "leadMin": 993
+    "keyword": "與 조희대 탄핵 추진",
+    "hitKeyword": "조희대 탄핵 법관 반발",
+    "hitAt": "2026-11-23T10:30:00+09:00",
+    "leadMin": 4566
    },
    {
-    "keyword": "고경표 후보 사과",
-    "hitKeyword": "고경표 시상식 논란",
-    "hitAt": "2026-11-23T10:00:00+09:00",
-    "leadMin": 953
+    "keyword": "조희대 탄핵 당론 추진",
+    "hitKeyword": "조희대 탄핵 법관 반발",
+    "hitAt": "2026-11-23T10:30:00+09:00",
+    "leadMin": 3382
    },
    {
-    "keyword": "고경표 음주운전 사과",
-    "hitKeyword": "고경표 시상식 논란",
-    "hitAt": "2026-11-23T10:00:00+09:00",
-    "leadMin": 923
+    "keyword": "조희대 탄핵 여론",
+    "hitKeyword": "조희대 탄핵 법관 반발",
+    "hitAt": "2026-11-23T10:30:00+09:00",
+    "leadMin": 3080
    },
    {
-    "keyword": "음주운전 고경표 사과",
-    "hitKeyword": "고경표 시상식 논란",
-    "hitAt": "2026-11-23T10:00:00+09:00",
-    "leadMin": 893
+    "keyword": "조희대 대법원장 탄핵",
+    "hitKeyword": "조희대 탄핵 법관 반발",
+    "hitAt": "2026-11-23T10:30:00+09:00",
+    "leadMin": 1707
    },
    {
-    "keyword": "고경표 후보 제외 사과",
-    "hitKeyword": "고경표 시상식 논란",
-    "hitAt": "2026-11-23T10:00:00+09:00",
-    "leadMin": 862
+    "keyword": "조희대 탄핵소추 기자간담회",
+    "hitKeyword": "조희대 탄핵 법관 반발",
+    "hitAt": "2026-11-23T10:30:00+09:00",
+    "leadMin": 1325
    },
    {
-    "keyword": "고경표 음주운전으로 사과",
-    "hitKeyword": "고경표 시상식 논란",
-    "hitAt": "2026-11-23T10:00:00+09:00",
-    "leadMin": 832
+    "keyword": "조희대 대법원장 탄핵소추 추진",
+    "hitKeyword": "조희대 탄핵 법관 반발",
+    "hitAt": "2026-11-23T10:30:00+09:00",
+    "leadMin": 1265
    },
    {
-    "keyword": "에이티즈 빌보드 200 1위",
-    "hitKeyword": "에이티즈 빌보드 200 1위",
-    "hitAt": "2026-11-23T10:00:00+09:00",
-    "leadMin": 38
+    "keyword": "조희대 탄핵 한덕수 판결 제외",
+    "hitKeyword": "조희대 탄핵 법관 반발",
+    "hitAt": "2026-11-23T10:30:00+09:00",
+    "leadMin": 1204
    }
   ]
  }
