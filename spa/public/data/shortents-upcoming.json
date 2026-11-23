@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T20:53:39.243Z",
+ "builtAt": "2026-11-23T21:03:42.288Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,170 +8,170 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 21,
  "candidates": [
-  {
-   "keyword": "젠슨 황 CEO 복귀",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 54,
-   "recent20": 12,
-   "press": 28,
-   "firstArticleAt": "2026-11-23T19:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "젠슨황 복귀…트럼프 개입에 논란",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-23T20:52:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611240007"
-    },
-    {
-     "title": "트럼프, 밴스 부통령에 '주말 특명'…젠슨 황 복귀 물밑 주도",
-     "press": "goodnews1.com",
-     "publishedAt": "2026-11-23T20:50:00.000Z",
-     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466565"
-    },
-    {
-     "title": "젠슨 황, 사임 11일 만에 엔비디아 복귀…직원들 환호 속 첫 출근(종합)",
-     "press": "news.mtn.co.kr",
-     "publishedAt": "2026-11-23T20:50:00.000Z",
-     "link": "https://news.mtn.co.kr/article/2026112405493928839"
-    }
-   ]
-  },
   {
    "keyword": "선관위 직원 1명 구속",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 6,
    "recent20": 3,
-   "press": 4,
+   "press": 6,
    "firstArticleAt": "2026-11-23T20:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "‘투표율 허위입력’ 선관위 직원 8명 중 1명 구속…“증거인멸 염려”",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-23T21:02:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611240003"
+    },
+    {
+     "title": "'선거 개표상황표 은닉' 선관위 직원 8명 중 1명만 구속",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-23T20:56:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4120389"
+    },
+    {
      "title": "선관위 직원 8명 중 1명만 구속…'윗선' 수사 제동 걸린 특검",
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-23T20:51:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/018/0006414438?sid=102"
-    },
-    {
-     "title": "'투표율 허위입력' 선관위 8명 중 1명 구속",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-23T20:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929217?sid=102"
-    },
-    {
-     "title": "‘실시간 투표율 허위 입력’ 선관위 직원 8명 중 1명만 구속",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-23T20:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887036?sid=102"
     }
    ]
   },
   {
-   "keyword": "전자발찌 훼손 정영모 검거",
+   "keyword": "강유정 문체부 장관",
    "sources": [
-    "nate"
+    "daum"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 2,
    "press": 4,
-   "firstArticleAt": "2026-11-23T19:28:00.000Z",
+   "firstArticleAt": "2026-11-23T19:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "전자발찌 끊고 변장하며 도주…정영모 세종서 체포",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-23T20:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929216?sid=102"
+     "title": "평론가~靑대변인 강유정, 문체부 수장으로…문화정책 향방은",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-23T21:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014340882?sid=103"
     },
     {
-     "title": "‘전자발찌 끊고 도주’ 공개수배 정영모, 이틀 만에 세종서 검거",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-23T20:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887035?sid=102"
+     "title": "대변인·안보실 차장·전 정무수석을 장관으로, 외교안보 '회전문 개각...",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-23T21:00:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886965"
     },
     {
-     "title": "전자발찌 차고 \"죽인다\" 10대 성폭행…정영모, 성범죄만 3번",
-     "press": "mt.co.kr",
+     "title": "신임 두터운 한준호, ‘청와대의 입’ 강유정… 국정 이해도 높은 실무...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-23T20:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003702356?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "강금실 국정원장 후보자",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T20:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "국정원장 등 외교안보 라인 물갈이…대미·대북 돌파구",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-23T20:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001165362?sid=101"
+    },
+    {
+     "title": "李 파격… 국정원 ‘첫 여성 수장’ 강금실",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-23T20:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003702355?sid=100"
+    },
+    {
+     "title": "‘李 대통령과 밀착’ 이때부터 였다…‘원조 친노’ 강금실의 귀환",
+     "press": "joongang.co.kr",
      "publishedAt": "2026-11-23T20:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005445298?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/025/0003567425?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1230,
-  "matched": 655,
-  "avgLeadMin": 557,
+  "flagged": 1231,
+  "matched": 672,
+  "avgLeadMin": 578,
   "recent": [
    {
-    "keyword": "리트 만점자 부정행위 수사",
-    "hitKeyword": "리트 만점자 유족 출석",
-    "hitAt": "2026-11-24T00:00:00+09:00",
-    "leadMin": 79
+    "keyword": "어벤져스",
+    "hitKeyword": "어벤져스 둠스데이 예고편",
+    "hitAt": "2026-11-24T06:00:00+09:00",
+    "leadMin": 9904
    },
    {
-    "keyword": "정부 증안펀드 가동 준비",
-    "hitKeyword": "증안펀드 실효성",
-    "hitAt": "2026-11-23T23:00:00+09:00",
-    "leadMin": 321
+    "keyword": "류재철 CEO 제조 혁신 성장",
+    "hitKeyword": "젠슨 황 CEO 복귀",
+    "hitAt": "2026-11-24T06:00:00+09:00",
+    "leadMin": 2535
    },
    {
-    "keyword": "정점식 블랙먼데이 대응 촉구",
-    "hitKeyword": "코스피 블랙먼데이",
-    "hitAt": "2026-11-23T22:30:00+09:00",
-    "leadMin": 2105
+    "keyword": "류재철 CEO, 협력사와 혁신 성장",
+    "hitKeyword": "젠슨 황 CEO 복귀",
+    "hitAt": "2026-11-24T06:00:00+09:00",
+    "leadMin": 2515
    },
    {
-    "keyword": "박준현 서면사과 승소",
-    "hitKeyword": "박준현 학폭 서면사과 취소",
-    "hitAt": "2026-11-23T22:00:00+09:00",
-    "leadMin": 352
+    "keyword": "류재철 CEO 협력사 혁신",
+    "hitKeyword": "젠슨 황 CEO 복귀",
+    "hitAt": "2026-11-24T06:00:00+09:00",
+    "leadMin": 2495
    },
    {
-    "keyword": "박준현 서면사과 취소소송",
-    "hitKeyword": "박준현 학폭 서면사과 취소",
-    "hitAt": "2026-11-23T22:00:00+09:00",
-    "leadMin": 322
+    "keyword": "삼성전자",
+    "hitKeyword": "삼성전자 MX 수장 교체",
+    "hitAt": "2026-11-24T06:00:00+09:00",
+    "leadMin": 1369
    },
    {
-    "keyword": "박준현 1심 승소",
-    "hitKeyword": "박준현 학폭 서면사과 취소",
-    "hitAt": "2026-11-23T22:00:00+09:00",
-    "leadMin": 190
+    "keyword": "김정관 장관, 석유화학 CEO 간담회",
+    "hitKeyword": "젠슨 황 CEO 복귀",
+    "hitAt": "2026-11-24T06:00:00+09:00",
+    "leadMin": 853
    },
    {
-    "keyword": "박준현, 학폭 소송 1심 승소",
-    "hitKeyword": "박준현 학폭 서면사과 취소",
-    "hitAt": "2026-11-23T22:00:00+09:00",
-    "leadMin": 170
+    "keyword": "노소영 재산 분할금",
+    "hitKeyword": "최태원 노소영 재산분할",
+    "hitAt": "2026-11-24T06:00:00+09:00",
+    "leadMin": 560
    },
    {
-    "keyword": "박준현 학폭 소송 승소",
-    "hitKeyword": "박준현 학폭 서면사과 취소",
-    "hitAt": "2026-11-23T22:00:00+09:00",
-    "leadMin": 150
+    "keyword": "반도체 메모리",
+    "hitKeyword": "반도체 시장 약세",
+    "hitAt": "2026-11-24T06:00:00+09:00",
+    "leadMin": 529
    },
    {
-    "keyword": "박준현 서면사과 취소 1심 승소",
-    "hitKeyword": "박준현 학폭 서면사과 취소",
-    "hitAt": "2026-11-23T22:00:00+09:00",
-    "leadMin": 90
+    "keyword": "노태우 비자금 노소영 증인신문",
+    "hitKeyword": "최태원 노소영 재산분할",
+    "hitAt": "2026-11-24T06:00:00+09:00",
+    "leadMin": 499
    },
    {
-    "keyword": "박준현 서면사과 취소",
-    "hitKeyword": "박준현 학폭 서면사과 취소",
-    "hitAt": "2026-11-23T22:00:00+09:00",
-    "leadMin": 39
+    "keyword": "젠슨 황 복귀",
+    "hitKeyword": "젠슨 황 CEO 복귀",
+    "hitAt": "2026-11-24T06:00:00+09:00",
+    "leadMin": 399
    }
   ]
  }
