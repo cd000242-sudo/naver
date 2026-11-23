@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T09:09:35.605Z",
+ "builtAt": "2026-11-23T09:19:38.679Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "강금실 국정원장 지명",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 56,
-   "recent20": 11,
-   "press": 48,
-   "firstArticleAt": "2026-11-23T07:45:00.000Z",
+   "articles90": 54,
+   "recent20": 7,
+   "press": 47,
+   "firstArticleAt": "2026-11-23T07:50:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "국정원장 후보 강금실",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-23T09:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005608466?sid=100"
+     "title": "외교·안보 등 5개 부처·기관장 교체…강금실 국정원장 지명",
+     "press": "idomin.com",
+     "publishedAt": "2026-11-23T09:12:00.000Z",
+     "link": "https://www.idomin.com/news/articleView.html?idxno=2020365"
     },
     {
-     "title": "李대통령, 외교·통일 등 5개 부처 중폭 개각…국정원장에 강금실",
-     "press": "econovill.com",
-     "publishedAt": "2026-11-23T09:02:00.000Z",
-     "link": "https://www.econovill.com/news/articleView.html?idxno=758233"
+     "title": "국힘, '강금실 국정원장' 등 개각에 \"재활용 인사, 레임덕 징후\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-23T09:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004212975?sid=100"
     },
     {
-     "title": "'첫 여성 국정원장' 강금실…'WYD 주무부처' 문체부 강유정 발탁",
-     "press": "news.cpbc.co.kr",
-     "publishedAt": "2026-11-23T09:00:00.000Z",
-     "link": "https://news.cpbc.co.kr/article/1177195?division=NAVER"
+     "title": "이 대통령, 국정원장에 강금실 지명…외교·통일 등 장관 4명 인선",
+     "press": "kyongbuk.co.kr",
+     "publishedAt": "2026-11-23T09:10:00.000Z",
+     "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4091781"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 46,
-   "recent20": 8,
-   "press": 42,
+   "articles90": 48,
+   "recent20": 6,
+   "press": 43,
    "firstArticleAt": "2026-11-23T07:51:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "'음주운전' 고경표, 피의자 신분으로 경찰 소환…사고 9일만",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-23T09:07:00.000Z",
-     "link": "https://m.entertain.naver.com/article/437/0000522044"
+     "title": "[속보]‘음주운전 혐의’ 고경표, 오후 7시 경찰 소환",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-23T09:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002834892?sid=102"
     },
     {
-     "title": "경찰, ‘음주운전 혐의’ 배우 고경표 오후 7시부터 소환 조사",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-23T09:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001206772?sid=102"
+     "title": "고경표, 음주운전 9일 만→포토라인 설까…오늘(23일) 경찰 소환 통보",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-23T09:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000492629"
     },
     {
-     "title": "고경표, 음주운전 혐의 오늘 오후 7시 마포경찰서 소환",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-23T09:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005445223?sid=102"
+     "title": "'만취 음주운전' 고경표 잠시 뒤 첫 경찰 소환조사",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-23T09:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436953?sid=102"
     }
    ]
   },
@@ -79,10 +79,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 35,
-   "recent20": 8,
-   "press": 35,
-   "firstArticleAt": "2026-11-23T07:40:00.000Z",
+   "articles90": 31,
+   "recent20": 6,
+   "press": 31,
+   "firstArticleAt": "2026-11-23T07:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,34 +107,34 @@
    ]
   },
   {
-   "keyword": "한준호 장관 후보자",
+   "keyword": "한준호 행안부 장관 후보자",
    "sources": [
     "daum"
    ],
-   "articles90": 33,
-   "recent20": 7,
-   "press": 32,
-   "firstArticleAt": "2026-11-23T08:00:00.000Z",
+   "articles90": 30,
+   "recent20": 3,
+   "press": 28,
+   "firstArticleAt": "2026-11-23T07:50:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "강금실·임웅순·홍익표·한준호·강유정…추가 개각",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-23T09:06:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544676"
+     "title": "행안부 한준호·국정원 강금실…이재명 정부 중폭 개각 단행",
+     "press": "seoulfn.com",
+     "publishedAt": "2026-11-23T09:16:00.000Z",
+     "link": "https://www.seoulfn.com/news/articleView.html?idxno=643689"
+    },
+    {
+     "title": "이 대통령, 국정원장에 강금실 지명…외교·통일 등 장관 4명 인선",
+     "press": "kyongbuk.co.kr",
+     "publishedAt": "2026-11-23T09:10:00.000Z",
+     "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4091781"
     },
     {
      "title": "한준호 행안장관 후보자 \"실용행정으로 국민 삶 책임질 것\"",
      "press": "mbn.mk.co.kr",
      "publishedAt": "2026-11-23T09:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/057/0001979498?sid=100"
-    },
-    {
-     "title": "한준호 이어 고민정…‘아나운서 출신 장관’ 연속 탄생하나[이슈S]",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-23T08:54:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000640453"
     }
    ]
   },
@@ -143,30 +143,62 @@
    "sources": [
     "daum"
    ],
-   "articles90": 26,
+   "articles90": 24,
    "recent20": 4,
-   "press": 25,
-   "firstArticleAt": "2026-11-23T07:40:00.000Z",
+   "press": 23,
+   "firstArticleAt": "2026-11-23T07:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'첫 여성 국정원장' 강금실…'WYD 주무부처' 문체부 강유정 발탁",
-     "press": "news.cpbc.co.kr",
-     "publishedAt": "2026-11-23T09:00:00.000Z",
-     "link": "https://news.cpbc.co.kr/article/1177195?division=NAVER"
+     "title": "이 대통령, 국정원장에 강금실 지명…외교·통일 등 장관 4명 인선",
+     "press": "kyongbuk.co.kr",
+     "publishedAt": "2026-11-23T09:10:00.000Z",
+     "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4091781"
+    },
+    {
+     "title": "국정원장 후보자에 강금실…외교·통일·행안·문체부 장관 교체",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-23T09:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012299372?sid=100"
     },
     {
      "title": "[프로필] 강유정 문체부 장관 후보자, 현장·국정 두루 거친 문화통",
      "press": "newdaily.co.kr",
      "publishedAt": "2026-11-23T09:00:00.000Z",
      "link": "https://www.newdaily.co.kr/site/data/html/2026/11/23/2026112350345.html"
+    }
+   ]
+  },
+  {
+   "keyword": "안전공업 대표 기소",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 18,
+   "recent20": 5,
+   "press": 18,
+   "firstArticleAt": "2026-11-23T07:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'14명 사망' 대전 안전공업 화재…대표이사 기소",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-23T09:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193326?sid=102"
     },
     {
-     "title": "중수청 거느린 행안 장관에 '친명'…K컬처 수장에 '대통령의 입' 발탁",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-23T08:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005357233?sid=100"
+     "title": "고질적 안전불감증 더해진 인재”…공소청, 안전공업 손주환 대표 등 기...",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-23T09:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003567291?sid=102"
+    },
+    {
+     "title": "‘72명 사상’ 안전공업 화재 참사 책임자 무더기 기소…불법 증축에 경...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-23T09:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177451?sid=102"
     }
    ]
   },
@@ -175,62 +207,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 31,
-   "recent20": 3,
-   "press": 22,
-   "firstArticleAt": "2026-11-23T07:42:00.000Z",
+   "articles90": 28,
+   "recent20": 4,
+   "press": 18,
+   "firstArticleAt": "2026-11-23T07:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "정점식, 경제6단체 만나 \"정년 연장 신중히 접근해야\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-23T09:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436954?sid=100"
+    },
+    {
+     "title": "與 \"수출성과 골목 확산\" 野 \"정년연장 신중\"…경제6단체 회동(종합)",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T09:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009305727?sid=100"
+    },
     {
      "title": "정점식 경제6단체 만나 “정년 연장, 청년 고용 위축 우려…종합적 노동...",
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-23T09:01:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012299369?sid=100"
-    },
-    {
-     "title": "정점식, 경제 6단체 만나 \"기업·근로자 죽이는 악법 반드시 폐지\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-23T09:00:00.000Z",
-     "link": "https://www.ajunews.com/view/20261123163908931"
-    },
-    {
-     "title": "여야, 경제6단체와 각각 간담회…“필요 입법·정책 지원” 한목소리",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-23T08:52:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1139419"
-    }
-   ]
-  },
-  {
-   "keyword": "안전공업 화재 기소",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 16,
-   "recent20": 3,
-   "press": 16,
-   "firstArticleAt": "2026-11-23T07:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘72명 사상’ 안전공업 화재 참사 책임자 무더기 기소…불법 증축에 경...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-23T09:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177451?sid=102"
-    },
-    {
-     "title": "공소청 “안전공업 화재는 안전불감증이 부른 인재”… 손주환 대표 등...",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-23T09:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833578?sid=102"
-    },
-    {
-     "title": "\"불난 지 2분 만에 불법 휴게실로 화염 퍼져\"... '72명 사상' 안전공업 ...",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-23T09:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967283?sid=102"
     }
    ]
   },
@@ -239,30 +239,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 17,
-   "recent20": 1,
+   "articles90": 16,
+   "recent20": 2,
    "press": 14,
-   "firstArticleAt": "2026-11-23T07:42:00.000Z",
+   "firstArticleAt": "2026-11-23T07:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "오세훈 “조희대 탄핵 소추, 정권 붕괴 서막 될 것”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-23T09:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002727287?sid=102"
+    },
+    {
+     "title": "오세훈 \"시내버스 파업해도 시민 이동권 보장돼야\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-23T09:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436962?sid=102"
+    },
     {
      "title": "오세훈 \"조희대 탄핵 추진, 정권 붕괴 서막…전 국민적 저항 직면\"(종합...",
      "press": "news1.kr",
      "publishedAt": "2026-11-23T08:50:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009305702?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "국힘 李 개각",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-23T08:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李대통령 중폭 개각 단행...與 \"국익·변화·속도\" vs 국힘 \"코드·보은·...",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-23T08:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002394651?sid=100"
     },
     {
-     "title": "오세훈 \"시내버스 필수공익사업으로 지정해야...대통령에 건의할 것\"",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-23T08:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979494?sid=100"
+     "title": "국힘, 李정부 개각에 “레임덕 인사”…총리 포함 전면 교체 요구",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-23T08:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004685249?sid=100"
     },
     {
-     "title": "오세훈 \"시내버스 파업 중에도 일정 수준 운행해야\"",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-23T08:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001077633?sid=102"
+     "title": "국힘 \"李 개각, 코드·보은 앞세운 회전문 인사… 국정 쇄신 요구 외면...",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-23T08:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193315?sid=100"
     }
    ]
   },
@@ -271,13 +303,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
+   "articles90": 5,
+   "recent20": 3,
+   "press": 5,
    "firstArticleAt": "2026-11-23T08:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "29조 핵잠 개발 본격화···'조선·원자력' 산업 협력이 좌우",
+     "press": "enewstoday.co.kr",
+     "publishedAt": "2026-11-23T09:08:00.000Z",
+     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2495946"
+    },
     {
      "title": "[인사]한전원자력연료 기술본부장 이재일",
      "press": "news.bbsi.co.kr",
@@ -289,53 +327,15 @@
      "press": "zdnet.co.kr",
      "publishedAt": "2026-11-23T09:03:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/092/0002446544?sid=102"
-    },
-    {
-     "title": "한수원, 국제 품질경진대회 14회 연속 '금상'…원자력발전 회사 최초",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-23T08:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004212949?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "휴림로봇",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T07:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오늘의 특징주] 휴림로봇·금양그린파워 상한가…삼성전기 로봇 공급·...",
-     "press": "ppss.kr",
-     "publishedAt": "2026-11-23T08:16:00.000Z",
-     "link": "https://www.ppss.kr/news/articleView.html?idxno=322489"
-    },
-    {
-     "title": "휴림로봇 주가 ‘불기둥’...한화로보틱스와 로봇 공급 계약 [오늘, 이 ...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-23T08:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/024/0000109840?sid=101"
-    },
-    {
-     "title": "휴림로봇, 증시 폭락에도 30% 치솟아…삼성전기 자동화 사업 진출",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-23T07:46:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=848174"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1195,
-  "matched": 658,
-  "avgLeadMin": 593,
+  "flagged": 1194,
+  "matched": 656,
+  "avgLeadMin": 592,
   "recent": [
    {
     "keyword": "정부",
