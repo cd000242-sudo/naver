@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T03:02:55.022Z",
+ "builtAt": "2026-11-23T03:12:58.422Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,135 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
+  {
+   "keyword": "삼성증권",
+   "sources": [
+    "google",
+    "daum"
+   ],
+   "articles90": 89,
+   "recent20": 8,
+   "press": 87,
+   "firstArticleAt": "2026-11-23T01:47:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "삼성증권 개인정보 8241명 유출…'일괄 지원' 묻자 \"추후 논의\"",
+     "press": "ppss.kr",
+     "publishedAt": "2026-11-23T03:09:00.000Z",
+     "link": "https://www.ppss.kr/news/articleView.html?idxno=322377"
+    },
+    {
+     "title": "삼성증권도 해킹 피해…8천여 명 고객 정보 유출",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-23T03:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001405077?sid=101"
+    },
+    {
+     "title": "한전 '주민번호 포함' 유출‥삼성증권도 뚫려",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-23T03:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537381?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "조희대 탄핵 추진",
+   "sources": [
+    "nate",
+    "daum"
+   ],
+   "articles90": 75,
+   "recent20": 12,
+   "press": 49,
+   "firstArticleAt": "2026-11-23T02:11:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "靑, 민주당의 대법원장 탄핵 추진에 \"국회서 논의할 사항\"",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-23T03:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000142838?sid=100"
+    },
+    {
+     "title": "민주당 \"조희대 대법원장 탄핵 추진, 역사적 결단이자 국민의 명령\"",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-23T03:10:00.000Z",
+     "link": "http://www.breaknews.com/1253004"
+    },
+    {
+     "title": "“헌재 인용전망 제로” 라는데… 曺 탄핵 강행하는 巨與",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-23T03:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002834803?sid=100"
+    }
+   ]
+  },
   {
    "keyword": "이형일 증안펀드",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 51,
-   "recent20": 14,
-   "press": 42,
-   "firstArticleAt": "2026-11-23T01:36:00.000Z",
+   "articles90": 55,
+   "recent20": 11,
+   "press": 46,
+   "firstArticleAt": "2026-11-23T01:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보]이형일 부총리 “증안펀드 외 컨틴전시플랜도 마련”",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-23T03:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000368375?sid=101"
+     "title": "증안펀드 예고에도 4600 무너졌다",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-23T03:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002834804?sid=101"
     },
     {
-     "title": "이형일 \"증안펀드 외 컨틴전시플랜도 마련...규모는 상황 봐서\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-23T02:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436722?sid=101"
+     "title": "[속보] 이형일 부총리 “증안펀드 외 컨틴전시플랜도 마련”",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-23T03:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003060595?sid=101"
     },
     {
-     "title": "이형일 \"증안펀드 적절한 시기에 시행…규모는 시장상황 보며 검토\"",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-23T02:56:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2651654"
+     "title": "[속보]연일 급락에...이형일 부총리 \"증안펀드 외 추가 대책 마련, 적절...",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-23T03:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000121992?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "박남춘 인천공항공사 사장",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 52,
+   "recent20": 1,
+   "press": 23,
+   "firstArticleAt": "2026-11-23T01:53:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "인천공항공사 제11대 사장에 박남춘 전 인천시장 취임",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-23T03:02:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4120174"
+    },
+    {
+     "title": "박남춘 인천공항공사 사장 취임…“노사 상생 바탕으로 대한민국 성장 ...",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-23T02:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003567169?sid=101"
+    },
+    {
+     "title": "박남춘 인천공항공사 사장 취임…“임기 내 연간 여객 9000만명 달성”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-23T02:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004685091?sid=102"
     }
    ]
   },
@@ -47,10 +145,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 28,
-   "recent20": 2,
-   "press": 27,
-   "firstArticleAt": "2026-11-23T01:34:00.000Z",
+   "articles90": 18,
+   "recent20": 0,
+   "press": 18,
+   "firstArticleAt": "2026-11-23T01:43:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -75,110 +173,14 @@
    ]
   },
   {
-   "keyword": "박남춘 인천공항공사 사장",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 56,
-   "recent20": 1,
-   "press": 25,
-   "firstArticleAt": "2026-11-23T01:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "박남춘 인천공항공사 사장 취임…“노사 상생 바탕으로 대한민국 성장 ...",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-23T02:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003567169?sid=101"
-    },
-    {
-     "title": "박남춘 인천공항공사 사장 취임…“임기 내 연간 여객 9000만명 달성”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-23T02:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004685091?sid=102"
-    },
-    {
-     "title": "박남춘 신임 인천공항 사장 \"여객 7400만→9000만명 늘린다\"",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-23T02:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005357003?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "김종철 경찰청장 취임",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 62,
-   "recent20": 16,
-   "press": 20,
-   "firstArticleAt": "2026-11-23T02:07:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[뉴스1 PICK] 김종철 경찰청장 취임 \"수사권 확대 아닌 책임 확대\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T03:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009304793?sid=102"
-    },
-    {
-     "title": "[헤럴드pic] 취임사 하는 김종철 신임 경찰청장",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-23T02:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002727141?sid=102"
-    },
-    {
-     "title": "[헤럴드pic] 제25대 김종철 경찰청장 취임식",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-23T02:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002727142?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "한전 on",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-23T01:45:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "삼성증권 8241명 정보유출… 한전도 152만명분 보안 구멍",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-23T02:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002834772?sid=101"
-    },
-    {
-     "title": "한전, 고객 개인정보 152만건 유출…주민번호·계좌·카드번호도 털렸다",
-     "press": "srtimes.kr",
-     "publishedAt": "2026-11-23T02:42:00.000Z",
-     "link": "http://www.srtimes.kr/news/articleView.html?idxno=218350"
-    },
-    {
-     "title": "고객 카드번호 등 민감한 정보 150만 건...줄줄이 털린 한전 [자막뉴스]",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-23T02:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436710?sid=101"
-    }
-   ]
-  },
-  {
    "keyword": "에이티즈 빌보드 200 1위",
    "sources": [
     "daum"
    ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-23T01:34:00.000Z",
+   "articles90": 10,
+   "recent20": 0,
+   "press": 10,
+   "firstArticleAt": "2026-11-23T02:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -207,10 +209,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 10,
+   "articles90": 9,
    "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-23T01:42:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-23T01:45:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -235,34 +237,67 @@
    ]
   },
   {
-   "keyword": "구혜리 박강균 결혼",
+   "keyword": "김종철 경찰청장 경례",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 2,
+   "articles90": 16,
+   "recent20": 3,
    "press": 7,
-   "firstArticleAt": "2026-11-23T01:33:00.000Z",
+   "firstArticleAt": "2026-11-23T02:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'오징어 커플' 박강균♥구혜리, 내년 3월 결혼…코미디언 커플 또 탄생",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-23T02:52:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1795402200531377006"
+     "title": "[헤럴드pic] 경례하는 김종철 신임 경찰청장",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-23T02:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002727143?sid=102"
     },
     {
-     "title": "‘급식왕’ 박강균·구혜리, 내년 3월 결혼…커플 연기하다 부부로",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-23T02:43:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005767546"
+     "title": "[헤럴드pic] 취임식 참석한 김종철 신임 경찰청장",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-23T02:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002727140?sid=102"
     },
     {
-     "title": "개그맨 26호 부부 탄생…박강균♥구혜리, 내년 3월 결혼",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-23T02:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000492525"
+     "title": "김종철 신임 경찰청장 \"수사권 확대 아닌 책임 강화\"…공정 수사 강조",
+     "press": "jeonmae.co.kr",
+     "publishedAt": "2026-11-23T02:54:00.000Z",
+     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1314724"
+    }
+   ]
+  },
+  {
+   "keyword": "국가장학금",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 6,
+   "recent20": 5,
+   "press": 6,
+   "firstArticleAt": "2026-11-23T02:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“대학생 국가장학금 신청하세요”…국립대 신입생 전액 지원",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-23T03:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006414102?sid=102"
+    },
+    {
+     "title": "\"빠트리지 마롱~\" 내년 국가장학금 신청 24일 시작",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-23T03:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014339578?sid=102"
+    },
+    {
+     "title": "2027학년도 국가장학금 24일부터 신청…소득구간 10개→5개 개편",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-23T03:00:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261123000075"
     }
    ]
   },
@@ -271,10 +306,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 9,
+   "articles90": 8,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-23T01:41:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-23T01:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -306,10 +341,16 @@
    "articles90": 5,
    "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-23T01:42:00.000Z",
+   "firstArticleAt": "2026-11-23T01:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"항상 휴대폰 분출 받으면 수원 축구 분석\"...이정효 체제서 단숨에 자...",
+     "press": "sportalkorea.com",
+     "publishedAt": "2026-11-23T03:06:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/139/0002256434"
+    },
     {
      "title": "‘4전 5기’ 끝 이룬 10년의 꿈… 경주한수원여자축구단, 창단 첫 WK리그...",
      "press": "geconomy.co.kr",
@@ -321,45 +362,38 @@
      "press": "idaegu.com",
      "publishedAt": "2026-11-23T02:26:00.000Z",
      "link": "https://www.idaegu.com/news/articleView.html?idxno=667192"
-    },
-    {
-     "title": "4번의 준우승, 10년의 기다림…경주한수원 여자축구단 마침내 정상",
-     "press": "newsquest.co.kr",
-     "publishedAt": "2026-11-23T02:18:00.000Z",
-     "link": "https://www.newsquest.co.kr/news/articleView.html?idxno=305603"
     }
    ]
   },
   {
-   "keyword": "국가장학금",
+   "keyword": "구혜리 박강균 결혼",
    "sources": [
-    "signal.bz",
-    "google"
+    "daum"
    ],
-   "articles90": 4,
-   "recent20": 3,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T02:00:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-23T02:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "내년 1학기 국가장학금 신청하세요…내일부터 내년 1월7일까지",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-23T03:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016458086?sid=102"
+     "title": "'오징어 커플' 박강균♥구혜리, 내년 3월 결혼…코미디언 커플 또 탄생",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-23T02:52:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1795402200531377006"
     },
     {
-     "title": "\"빠트리지 마롱~\" 내년 국가장학금 신청 24일 시작",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-23T03:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014339578?sid=102"
+     "title": "‘급식왕’ 박강균·구혜리, 내년 3월 결혼…커플 연기하다 부부로",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-23T02:43:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005767546"
     },
     {
-     "title": "국가장학금 1차 24일부터 신청…내년 지방 국립대 등록금 전액 지원",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T03:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009304783?sid=102"
+     "title": "개그맨 26호 부부 탄생…박강균♥구혜리, 내년 3월 결혼",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-23T02:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000492525"
     }
    ]
   },
@@ -382,16 +416,48 @@
      "link": "https://www.newdaily.co.kr/site/data/html/2026/11/23/2026112350186.html"
     },
     {
-     "title": "강신철 국방부 장관, 의원 질의 답변",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-23T02:39:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123000594"
-    },
-    {
      "title": "의원 질의 답변하는 강신철 장관",
      "press": "newspim.com",
      "publishedAt": "2026-11-23T02:39:00.000Z",
      "link": "https://www.newspim.com/news/view/20261123000592"
+    },
+    {
+     "title": "답변하는 강신철 국방부 장관",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-23T02:39:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261123000593"
+    }
+   ]
+  },
+  {
+   "keyword": "윤한홍 의원 공판 출석",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T02:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김건희·윤한홍 '관저 이전 특혜 의혹' 첫 공판서 혐의 부인",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-23T03:09:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261123000613"
+    },
+    {
+     "title": "김건희·윤한홍, '관저 이전 의혹' 첫 정식 재판…혐의 부인",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-23T02:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014339564?sid=102"
+    },
+    {
+     "title": "[포토] 대통령 관저 이전, 첫 공판 출석하는 윤한홍 의원",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-23T02:22:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/23/2026112350151.html"
     }
    ]
   },
@@ -400,10 +466,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T01:35:00.000Z",
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T02:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -426,78 +492,20 @@
      "link": "https://n.news.naver.com/mnews/article/003/0014339314?sid=102"
     }
    ]
-  },
-  {
-   "keyword": "윤한홍 의원 공판 출석",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T01:37:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김건희·윤한홍, '관저 이전 의혹' 첫 정식 재판…혐의 부인",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-23T02:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014339564?sid=102"
-    },
-    {
-     "title": "[포토] 대통령 관저 이전, 첫 공판 출석하는 윤한홍 의원",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-23T02:22:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/23/2026112350151.html"
-    },
-    {
-     "title": "취재진 질문 답변하는 윤한홍 의원",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-23T01:38:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123000457"
-    }
-   ]
-  },
-  {
-   "keyword": "kospi",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-23T02:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "Bourse operator activates sell-side sidecar for KOSPI on sharp fall",
-     "press": "en.yna.co.kr",
-     "publishedAt": "2026-11-23T02:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016457951?sid=104"
-    },
-    {
-     "title": "(URGENT) Bourse operator activates sell-side sidecar for KOSPI on sharp f...",
-     "press": "en.yna.co.kr",
-     "publishedAt": "2026-11-23T02:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016457930?sid=104"
-    },
-    {
-     "title": "[Opening Market] KOSPI Sinks Back to 4,700 Level on AI-Led Rout",
-     "press": "businesskorea.co.kr",
-     "publishedAt": "2026-11-23T02:16:00.000Z",
-     "link": "https://www.businesskorea.co.kr/news/articleView.html?idxno=281907"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1161,
+  "flagged": 1163,
   "matched": 663,
-  "avgLeadMin": 616,
+  "avgLeadMin": 617,
   "recent": [
+   {
+    "keyword": "드파르디외 우엘벡 성폭행",
+    "hitKeyword": "의붓딸 성폭행 계부 처벌",
+    "hitAt": "2026-11-23T12:00:00+09:00",
+    "leadMin": 1103
+   },
    {
     "keyword": "주현영 SNL 텃세",
     "hitKeyword": "주현영 런닝맨 출연",
@@ -549,12 +557,6 @@
    {
     "keyword": "삼성증권 8241명 개인정보 유출",
     "hitKeyword": "삼성증권 해킹",
-    "hitAt": "2026-11-23T11:30:00+09:00",
-    "leadMin": 7
-   },
-   {
-    "keyword": "이부진 아들 이씨 변경",
-    "hitKeyword": "이부진 아들 성변경",
     "hitAt": "2026-11-23T11:30:00+09:00",
     "leadMin": 7
    }
