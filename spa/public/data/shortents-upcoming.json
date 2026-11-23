@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T23:34:53.325Z",
+ "builtAt": "2026-11-23T23:44:56.551Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,82 +8,50 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 24,
  "candidates": [
   {
-   "keyword": "메가스피드 제재",
+   "keyword": "울릉도 경계경보",
    "sources": [
+    "nate",
     "daum"
    ],
-   "articles90": 28,
-   "recent20": 2,
-   "press": 27,
-   "firstArticleAt": "2026-11-23T22:06:00.000Z",
-   "exclusive": false,
+   "articles90": 30,
+   "recent20": 20,
+   "press": 29,
+   "firstArticleAt": "2026-11-23T22:59:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "트럼프 정부, 젠슨황 복귀 당일 중국 첩자 의혹 내연녀 회사 제재",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-23T23:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001537584?sid=104"
+     "title": "러시아 군용기 울릉도 근접에 경계경보…군 전투기 출격 대응 \"영공 침...",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-23T23:44:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=784272"
     },
     {
-     "title": "트럼프 정부, 젠슨황 복귀 당일 中첩자 의혹 내연녀 회사 제재",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-23T23:16:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/326247/?sc=Naver"
+     "title": "울릉군 한때 경계경보…합참 “러 군용기, 영공 침범 없어”",
+     "press": "kbmaeil.com",
+     "publishedAt": "2026-11-23T23:44:00.000Z",
+     "link": "https://www.kbmaeil.com/article/20261124500036"
     },
     {
-     "title": "美상무부, 젠슨 황 복귀 당일 내연녀 회사 제재",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-23T23:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929252?sid=104"
+     "title": "[속보] 軍 “러 군용기 울릉도 근접에 경계경보 발령…영공침범 없어”",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-23T23:42:00.000Z",
+     "link": "https://www.viva100.com/article/20261124500091"
     }
    ]
   },
   {
-   "keyword": "선관위 직원 1명만 구속",
+   "keyword": "김민선 유현조 이다연 LPGA 출전",
    "sources": [
     "nate"
    ],
-   "articles90": 15,
-   "recent20": 1,
-   "press": 15,
-   "firstArticleAt": "2026-11-23T22:13:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'투표율 허위입력' 선관위 직원 1명 구속… 7명은 기각",
-     "press": "lawtimes.co.kr",
-     "publishedAt": "2026-11-23T23:30:00.000Z",
-     "link": "https://www.lawtimes.co.kr/news/articleView.html?idxno=229935"
-    },
-    {
-     "title": "'투표율 허위 입력' 선관위 직원 8명 중 1명만 구속…특검 \"납득 어려워...",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-23T23:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652962?sid=102"
-    },
-    {
-     "title": "선관위특검 '1호 구속' 1명에 그쳐...7명 기각",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-23T23:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005608635?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "김민선 유현조 이다연, LPGA 출전권 확보",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 12,
+   "articles90": 16,
    "recent20": 3,
-   "press": 11,
-   "firstArticleAt": "2026-11-23T22:06:00.000Z",
+   "press": 15,
+   "firstArticleAt": "2026-11-23T22:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -100,10 +68,42 @@
      "link": "https://m.sports.naver.com/golf/article/421/0009306100"
     },
     {
-     "title": "김민선7·유현조·이다연 LPGA투어 출전권 획득..이정은6는 1타 차로 고...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-23T23:19:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/016/0002727432"
+     "title": "‘김민선7·유현조·이다연’ KLPGA 간판 3인방 미국행 확정",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-23T23:26:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/119/0003158604"
+    }
+   ]
+  },
+  {
+   "keyword": "선관위 직원 1명 구속",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 15,
+   "recent20": 2,
+   "press": 15,
+   "firstArticleAt": "2026-11-23T22:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'선거 개표상황표 은닉' 선관위 직원 8명 중 1명 구속",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-23T23:36:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/326251/?sc=Naver"
+    },
+    {
+     "title": "'투표율 허위입력' 선관위 직원 1명 구속… 7명은 기각",
+     "press": "lawtimes.co.kr",
+     "publishedAt": "2026-11-23T23:30:00.000Z",
+     "link": "https://www.lawtimes.co.kr/news/articleView.html?idxno=229935"
+    },
+    {
+     "title": "'투표율 허위 입력' 선관위 직원 8명 중 1명만 구속…특검 \"납득 어려워...",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-23T23:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000652962?sid=102"
     }
    ]
   },
@@ -112,30 +112,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 12,
+   "articles90": 14,
    "recent20": 4,
-   "press": 10,
-   "firstArticleAt": "2026-11-23T22:10:00.000Z",
+   "press": 11,
+   "firstArticleAt": "2026-11-23T22:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "임시완♥설인아, 동반 총격 피습…새드엔딩? (나의 유죄인간)",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-23T23:29:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001306411"
+     "title": "'나의 유죄인간' 김인권, 종영 소감",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-23T23:40:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611240112"
     },
     {
-     "title": "'나의 유죄인간' 임시완X설인아, 피격 엔딩...시청률 5.5% [종합]",
+     "title": "설인아 \"'나의 유죄인간', 새로운 도전의 즐거움 느끼게 해준 작품\"",
      "press": "ize.co.kr",
-     "publishedAt": "2026-11-23T23:20:00.000Z",
-     "link": "https://m.entertain.naver.com/article/465/0000021230"
+     "publishedAt": "2026-11-23T23:40:00.000Z",
+     "link": "https://m.entertain.naver.com/article/465/0000021233"
     },
     {
-     "title": "'나의 유죄인간' 임시완·설인아, 총격 속 생사 기로",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-23T23:20:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284508"
+     "title": "‘크래시2’ 간신히 이긴 ‘나의 유죄인간’ 오늘(24일) 끝나는데 시청...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-23T23:36:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190583"
     }
    ]
   },
@@ -146,44 +146,50 @@
     "google"
    ],
    "articles90": 8,
-   "recent20": 0,
+   "recent20": 2,
    "press": 8,
-   "firstArticleAt": "2026-11-23T22:10:00.000Z",
-   "exclusive": false,
+   "firstArticleAt": "2026-11-23T22:15:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "[뉴스모음] '젠슨황 복귀' 나스닥 6.5% 폭등…엔비디아 시총 1조달러 늘...",
+     "press": "dealsite.co.kr",
+     "publishedAt": "2026-11-23T23:44:00.000Z",
+     "link": "https://dealsite.co.kr/articles/173359"
+    },
+    {
+     "title": "한투운용, 토스뱅크서 나스닥100·반도체 펀드 단독 판매",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-23T23:40:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=566065"
+    },
     {
      "title": "[뉴욕증시] 젠슨 황 복귀에 엔비디아 31% 폭등…나스닥 6.51%↑",
      "press": "shinailbo.co.kr",
      "publishedAt": "2026-11-23T23:10:00.000Z",
      "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086868"
-    },
-    {
-     "title": "돌아온 '젠슨 황' 엔비디아 31.48% 급등... 나스닥 6.51% ↑ [뉴욕증시]",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-23T23:04:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2022405"
-    },
-    {
-     "title": "미국증시 나스닥 6.51% 폭등…SK하이닉스 ADR 20%↑",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-23T22:36:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284463"
     }
    ]
   },
   {
-   "keyword": "김서형 대시 하차",
+   "keyword": "김서형 하차, 박보경 합류",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 6,
-   "recent20": 3,
-   "press": 6,
-   "firstArticleAt": "2026-11-23T22:28:00.000Z",
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-23T22:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김서형 '대시', 4년 만의 안방 복귀 무산-박보경 대체",
+     "press": "mediafine.co.kr",
+     "publishedAt": "2026-11-23T23:40:00.000Z",
+     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95777"
+    },
     {
      "title": "촬영까지 했는데…김서형, 건강 악화로 '대시' 하차→'진선규♥' 박보경...",
      "press": "sportschosun.com",
@@ -191,48 +197,10 @@
      "link": "https://m.entertain.naver.com/article/076/0004468995"
     },
     {
-     "title": "김서형, '대시' 촬영 중 건강 악화로 하차…박보경 대체 투입",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-23T23:24:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005445343"
-    },
-    {
-     "title": "김서형, 4년만 안방 복귀 무산…건강 악화로 '대시' 하차",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-23T23:24:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002083367"
-    }
-   ]
-  },
-  {
-   "keyword": "하정우 차정원 10년 열애",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-23T22:17:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"6년 열애 아니었어?\"…하정우·차정원, 청첩장에 담긴 '진실'",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-23T22:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001273717?sid=103"
-    },
-    {
-     "title": "'12월 결혼' 하정우♥차정원, 청첩장엔 \"열 번째 겨울\" 문구…10년 열애...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T22:34:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009306060"
-    },
-    {
-     "title": "하정우♥차정원, 들통난 10년 열애..청첩장에 담긴 '열 번째 겨울'",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-23T22:25:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003489692"
+     "title": "'53세' 김서형, 드라마 중도 하차했다…이유는 건강 악화, 4년 만의 복귀...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-23T22:57:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000785845"
     }
    ]
   },
@@ -274,7 +242,7 @@
     "google"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-23T22:48:00.000Z",
    "exclusive": false,
@@ -301,43 +269,43 @@
    ]
   },
   {
-   "keyword": "한동훈 제명",
+   "keyword": "진주시",
    "sources": [
-    "daum"
+    "google"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-23T22:37:00.000Z",
+   "firstArticleAt": "2026-11-23T22:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김현정 “장동혁 물러나도 한동훈 복당 어려워, 창당해야” [김은지의 ...",
-     "press": "sisain.co.kr",
-     "publishedAt": "2026-11-23T23:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/308/0000039019?sid=100"
+     "title": "진주시의회, 국외출장 보고회 의무화한다",
+     "press": "knnews.co.kr",
+     "publishedAt": "2026-11-23T22:58:00.000Z",
+     "link": "https://www.knnews.co.kr/news/articleView.php?idxno=1555777"
     },
     {
-     "title": "장동혁, 한동훈 제명 후 \"고생하셨다\" 문자…野 윤리위원 3차 폭로",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-23T23:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652968?sid=100"
+     "title": "진주시, 내년 예산 1조9424억원 편성",
+     "press": "kfenews.co.kr",
+     "publishedAt": "2026-11-23T22:56:00.000Z",
+     "link": "https://www.kfenews.co.kr/news/articleView.html?idxno=668568"
     },
     {
-     "title": "국민의힘 윤리위원, ‘조작 징계’ 추가 폭로…“기획에 따라 한동훈 제...",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-23T22:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012299747?sid=100"
+     "title": "진주시 내년 예산안 1조 9424억 편성",
+     "press": "pressian.com",
+     "publishedAt": "2026-11-23T22:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/002/0002467230?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1221,
-  "matched": 655,
-  "avgLeadMin": 593,
+  "flagged": 1220,
+  "matched": 650,
+  "avgLeadMin": 589,
   "recent": [
    {
     "keyword": "오늘 날씨 영하권",
