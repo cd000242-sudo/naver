@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T15:41:49.878Z",
+ "builtAt": "2026-11-23T15:51:53.553Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "젠슨 황 CEO 복귀 결정",
    "sources": [
     "nate"
    ],
-   "articles90": 96,
-   "recent20": 24,
-   "press": 71,
-   "firstArticleAt": "2026-11-23T14:47:00.000Z",
+   "articles90": 97,
+   "recent20": 13,
+   "press": 70,
+   "firstArticleAt": "2026-11-23T14:49:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "젠슨황, 이사회 만장일치로 엔비디아 복귀...주가는 폭등[박신영의 개장...",
+     "title": "트럼프 \"젠슨 황 잃는 게 더 큰 안보 위협…이사회 맞섰으면 재앙됐을 ...",
      "press": "hankyung.com",
-     "publishedAt": "2026-11-23T15:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005357340?sid=104"
+     "publishedAt": "2026-11-23T15:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005357341?sid=104"
     },
     {
-     "title": "美 민주 상원의원, 엔비디아 젠슨 황 복귀 \"무모하다\" 비판",
+     "title": "젠슨 황, 엔비디아 CEO로 귀환…이사회 만장일치 복귀 의결",
+     "press": "livebiz.today",
+     "publishedAt": "2026-11-23T15:44:00.000Z",
+     "link": "https://www.livebiz.today/news/articleView.html?idxno=206821"
+    },
+    {
+     "title": "트럼프 '젠슨황 구하기' 통했다…SNS 11시간 뒤 이사회 \"복귀\" 발표",
      "press": "news1.kr",
-     "publishedAt": "2026-11-23T15:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009305912?sid=104"
-    },
-    {
-     "title": "젠슨 황 복귀",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-23T15:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003567406?sid=101"
+     "publishedAt": "2026-11-23T15:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009305913?sid=104"
     }
    ]
   },
@@ -48,7 +48,7 @@
     "signal.bz"
    ],
    "articles90": 19,
-   "recent20": 2,
+   "recent20": 1,
    "press": 15,
    "firstArticleAt": "2026-11-23T14:22:00.000Z",
    "exclusive": false,
@@ -80,7 +80,7 @@
     "daum"
    ],
    "articles90": 7,
-   "recent20": 4,
+   "recent20": 1,
    "press": 7,
    "firstArticleAt": "2026-11-23T15:01:00.000Z",
    "exclusive": false,
@@ -103,6 +103,38 @@
      "press": "cbci.co.kr",
      "publishedAt": "2026-11-23T15:30:00.000Z",
      "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630008"
+    }
+   ]
+  },
+  {
+   "keyword": "롯데월드타워 담보 해지",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 3,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T15:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "신동빈의 'ROIC 승부수'…롯데월드타워, 2년 만에 담보 풀렸다",
+     "press": "apnews.kr",
+     "publishedAt": "2026-11-23T15:48:00.000Z",
+     "link": "https://www.apnews.kr/news/articleView.html?idxno=3053444"
+    },
+    {
+     "title": "롯데월드타워 담보 2년 만에 해제… 재무 개선 성과",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-23T15:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001886987?sid=101"
+    },
+    {
+     "title": "123층 ‘롯데월드타워’ 2년 만에 담보에서 풀려",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-23T15:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004011280?sid=101"
     }
    ]
   }
