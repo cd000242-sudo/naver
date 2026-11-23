@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T20:33:31.682Z",
+ "builtAt": "2026-11-23T20:43:35.353Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 29,
+ "measured": 27,
  "candidates": [
   {
-   "keyword": "젠슨 황 복귀",
+   "keyword": "젠슨 황 CEO 복귀",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 52,
+   "articles90": 49,
    "recent20": 12,
-   "press": 25,
-   "firstArticleAt": "2026-11-23T19:05:00.000Z",
+   "press": 27,
+   "firstArticleAt": "2026-11-23T19:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨 황의 귀환…엔비디아 36% 폭등, 월가 환호",
-     "press": "the-today.com",
-     "publishedAt": "2026-11-23T20:32:00.000Z",
-     "link": "https://www.the-today.com/news/articleView.html?idxno=94004"
+     "title": "\"트럼프·밴스, 주말 엔비디아 이사회 복귀 결정에 개입…러트닉 배제\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T20:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009305971?sid=104"
+    },
+    {
+     "title": "“트럼프, 은밀히 젠슨 황 CEO 복귀 작전 지시…밴스에 주말 특명” [1일...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-23T20:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002727374?sid=104"
     },
     {
      "title": "[핫이슈] 젠슨 황 11일 만에 엔비디아 복귀…트럼프 \"내가 합의 만들었...",
      "press": "the-today.com",
      "publishedAt": "2026-11-23T20:32:00.000Z",
      "link": "https://www.the-today.com/news/articleView.html?idxno=94005"
-    },
-    {
-     "title": "\"트럼프, 은밀히 젠슨 황 CEO 복귀 작전...밴스에 주말 특명\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-23T20:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437087?sid=104"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
    "firstArticleAt": "2026-11-23T19:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "전자발찌 끊고 변장하며 도주…정영모 세종서 체포",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-23T20:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929216?sid=102"
+    },
     {
      "title": "‘전자발찌 끊고 도주’ 공개수배 정영모, 이틀 만에 세종서 검거",
      "press": "kmib.co.kr",
@@ -65,21 +71,47 @@
      "press": "mt.co.kr",
      "publishedAt": "2026-11-23T20:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/008/0005445298?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "선관위 직원 1명 구속",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T20:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'투표율 허위입력' 선관위 8명 중 1명 구속",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-23T20:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929217?sid=102"
     },
     {
-     "title": "전자발찌 끊고 도주한 성범죄자 정영모, 세종서 검거",
-     "press": "dtnews24.com",
-     "publishedAt": "2026-11-23T19:28:00.000Z",
-     "link": "http://www.dtnews24.com/news/articleView.html?idxno=817535"
+     "title": "‘실시간 투표율 허위 입력’ 선관위 직원 8명 중 1명만 구속",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-23T20:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001887036?sid=102"
+    },
+    {
+     "title": "'개표상황표 위조 혐의' 선관위 직원 1명 구속… 7명 영장 기각",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-23T20:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000967337?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1235,
-  "matched": 660,
-  "avgLeadMin": 559,
+  "flagged": 1230,
+  "matched": 655,
+  "avgLeadMin": 557,
   "recent": [
    {
     "keyword": "리트 만점자 부정행위 수사",
