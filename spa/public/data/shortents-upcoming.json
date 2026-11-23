@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T15:01:35.667Z",
+ "builtAt": "2026-11-23T15:11:39.071Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,52 +8,59 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 27,
  "candidates": [
   {
    "keyword": "젠슨 황 CEO 복귀 결정",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 97,
-   "recent20": 49,
-   "press": 74,
-   "firstArticleAt": "2026-11-23T14:28:00.000Z",
+   "articles90": 96,
+   "recent20": 43,
+   "press": 72,
+   "firstArticleAt": "2026-11-23T14:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[마켓인사이드] 젠슨 황, 전격 복귀에 엔비디아 30% 껑충…이사회 결정...",
-     "press": "news2day.co.kr",
-     "publishedAt": "2026-11-23T15:00:00.000Z",
-     "link": "https://www.news2day.co.kr/article/20261123500321"
+     "title": "[속보]엔비디아 젠슨 황, 반도체 왕의 귀환인가 복귀인가…반도체 종목...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-23T15:10:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629999"
     },
     {
-     "title": "'왕의 귀환' 젠슨 황..CEO 복귀에 엔비디아 주가 폭등",
-     "press": "peoplewatch.co.kr",
-     "publishedAt": "2026-11-23T15:00:00.000Z",
-     "link": "https://www.peoplewatch.co.kr/article/view/ppw202611230019"
+     "title": "젠슨 황, 엔비디아 CEO 전격 복귀...사임 11일 만에 이사회 만장일치",
+     "press": "wikileaks-kr.org",
+     "publishedAt": "2026-11-23T15:10:00.000Z",
+     "link": "https://www.wikileaks-kr.org/news/articleView.html?idxno=195140"
     },
     {
-     "title": "젠슨 황, 엔비디아 CEO 복귀…이사회 만장일치 의결",
-     "press": "getnews.co.kr",
-     "publishedAt": "2026-11-23T15:00:00.000Z",
-     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=888220"
+     "title": "트럼프, 젠슨 황 복귀에 공개 지지…\"엔비디아 넘어 미국 경제에도 필수...",
+     "press": "autodaily.co.kr",
+     "publishedAt": "2026-11-23T15:10:00.000Z",
+     "link": "https://www.autodaily.co.kr/news/articleView.html?idxno=602358"
     }
    ]
   },
   {
-   "keyword": "정영모 전자발찌",
+   "keyword": "정영모 전자발찌 검거",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 16,
-   "recent20": 9,
+   "articles90": 17,
+   "recent20": 3,
    "press": 13,
    "firstArticleAt": "2026-11-23T14:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "전자발찌 훼손하고 도주한 성범죄자 정영모…이틀만에 세종서 검거",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-23T15:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004213010?sid=102"
+    },
     {
      "title": "전자발찌 끊고 도주한 성범죄자 정영모, 사흘 만에 세종서 검거",
      "press": "hankookilbo.com",
@@ -65,12 +72,6 @@
      "press": "imnews.imbc.com",
      "publishedAt": "2026-11-23T14:58:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/214/0001537516?sid=102"
-    },
-    {
-     "title": "'전자발찌 훼손·도주' 정영모, 이틀 만에 세종서 검거",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-23T14:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004213009?sid=102"
     }
    ]
   },
@@ -80,94 +81,94 @@
     "google",
     "daum"
    ],
-   "articles90": 16,
-   "recent20": 6,
-   "press": 9,
+   "articles90": 23,
+   "recent20": 10,
+   "press": 12,
    "firstArticleAt": "2026-11-23T14:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "나스닥, 젠슨 황 복귀에 7% 넘게 급등…엔비디아 33%↑",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-23T14:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929178?sid=101"
+     "title": "[속보]엔비디아 젠슨 황, 반도체 왕의 귀환인가 복귀인가…반도체 종목...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-23T15:10:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629999"
     },
     {
-     "title": "[속보] 젠슨황 CEO 복귀 … 엔비디아 30% 급등, 美 반도체·기술주 '환호...",
-     "press": "biz.newdaily.co.kr",
-     "publishedAt": "2026-11-23T14:56:00.000Z",
-     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/23/2026112350381.html"
+     "title": "젠슨황 복귀에 美증시 기사회생…엔비디아 30%,나스닥 6.7%↑",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-23T15:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005357334?sid=101"
     },
     {
-     "title": "젠슨 황, 엔비디아 CEO 복귀…이사회 만장일치",
-     "press": "yonhapnewstv.co.kr",
+     "title": "젠슨 황 전격 복귀에 엔비디아 30% 폭등...트럼프 \"젠슨황 리더십 필요\"",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-23T15:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005608590?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "EU 사이버공격 중국 해킹",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-23T13:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“유럽연합, 사이버 공격 배후로 중국 해킹 조직 의심”",
+     "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-23T14:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929177?sid=104"
+     "link": "https://n.news.naver.com/mnews/article/056/0012299705?sid=104"
+    },
+    {
+     "title": "\"EU, 사이버 공격 배후로 중국 연계 해킹조직 의심\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-23T14:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437048?sid=104"
+    },
+    {
+     "title": "\"EU, 광범위한 사이버 공격 배후로 中 연계 해킹 조직 의심\"",
+     "press": "tfmedia.co.kr",
+     "publishedAt": "2026-11-23T14:22:00.000Z",
+     "link": "https://www.tfmedia.co.kr/news/article.html?no=209150"
     }
    ]
   },
   {
-   "keyword": "이지훈♥아야네 둘째 출산",
+   "keyword": "강금실 국정원장 후보자",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T13:38:00.000Z",
+   "articles90": 5,
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-23T13:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이지훈♥아야네, 오늘(23일) 둘째 출산…\"아빠가 평생 사랑할게\"[셀럽샷...",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-23T14:26:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1795443708531413005"
+     "title": "이 대통령 외교·안보라인 중폭 개각…국정원장에 강금실",
+     "press": "kado.net",
+     "publishedAt": "2026-11-23T15:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000213001?sid=100"
     },
     {
-     "title": "이지훈♥아야네, 두 차례 유산 아픔 딛고 둘째 득녀… \"또 하나의 기적...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-23T14:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000492678"
+     "title": "이재명 대통령, 4개 부처 장관·국정원장 동시 교체",
+     "press": "ksilbo.co.kr",
+     "publishedAt": "2026-11-23T15:04:00.000Z",
+     "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1073368"
     },
     {
-     "title": "\"또 하나의 기적 만나\"…이지훈·아야네, 둘째 딸 품에 안았다",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-23T13:48:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005445261"
-    }
-   ]
-  },
-  {
-   "keyword": "반도체 메모리",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T13:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "젠슨 황, 엔비디아 CEO 전격 복귀에… 美증시 반도체주 폭등",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-23T14:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003060737?sid=104"
-    },
-    {
-     "title": "산업연 “내년 수출 14% 늘어 1조 3000억 달러…반도체 빼면 1.5% 증가 그...",
-     "press": "busan.com",
-     "publishedAt": "2026-11-23T14:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001408611?sid=101"
-    },
-    {
-     "title": "“더 팔아도 소용없다” 반도체값 10%만 떨어져도 ‘이 정도’라니…韓...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-23T14:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004685324?sid=101"
+     "title": "국정원장에 강금실 '파격 발탁'…정보·방첩 역량은 시험대",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-23T15:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000554791?sid=100"
     }
    ]
   },
@@ -205,76 +206,114 @@
    ]
   },
   {
-   "keyword": "리트 만점자 부정행위 수사",
+   "keyword": "이지훈♥아야네 둘째 출산",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-23T13:37:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'리트 만점자' 책 사고 손해배상 청구한 구매자들, 소 취하",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-23T14:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006414403?sid=102"
-    },
-    {
-     "title": "[단독] 경찰, 세무사 부정행위 피의자 답안지 확보…감독관도 불러 조사",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-23T14:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012299689?sid=102"
-    },
-    {
-     "title": "'리트 만점' 진상규명 첫 고비...유족, 수사 협조할까?",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-23T13:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437031?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "강금실 국정원장 후보자",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T13:32:00.000Z",
+   "firstArticleAt": "2026-11-23T13:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[투나잇이슈] 5개 부처 전격적인 '중폭 개각'…첫 女국정원장 가시화",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-23T14:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929157?sid=100"
+     "title": "이지훈♥아야네, 오늘(23일) 둘째 출산…\"아빠가 평생 사랑할게\"[셀럽샷...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-23T14:26:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1795443708531413005"
     },
     {
-     "title": "국정원장 후보자에 강금실 전 장관…외교·행안 등 중폭 개각",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-23T13:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012299687?sid=100"
+     "title": "이지훈♥아야네, 두 차례 유산 아픔 딛고 둘째 득녀… \"또 하나의 기적...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-23T14:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000492678"
     },
     {
-     "title": "[시사천국] 임기 중반에 친정체제?…강금실·강유정·한준호 발탁의 속...",
-     "press": "news.cpbc.co.kr",
-     "publishedAt": "2026-11-23T13:32:00.000Z",
-     "link": "https://news.cpbc.co.kr/article/1177198?division=NAVER"
+     "title": "\"또 하나의 기적 만나\"…이지훈·아야네, 둘째 딸 품에 안았다",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-23T13:48:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005445261"
+    }
+   ]
+  },
+  {
+   "keyword": "상장",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 3,
+   "press": 2,
+   "firstArticleAt": "2026-11-23T15:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'블랙 먼데이' 후폭풍…강원 상장사도 휘청",
+     "press": "kado.net",
+     "publishedAt": "2026-11-23T15:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000213010?sid=101"
+    },
+    {
+     "title": "AI 인프라·LLM 투자 ETF 2종, 24일 코스피 신규 상장",
+     "press": "kjdaily.com",
+     "publishedAt": "2026-11-23T15:06:00.000Z",
+     "link": "http://www.kjdaily.com/article.php?aid=1795446142692997276"
+    },
+    {
+     "title": "엠비디, 24일 코스닥 신규 상장…공모가 7천원",
+     "press": "kjdaily.com",
+     "publishedAt": "2026-11-23T15:06:00.000Z",
+     "link": "http://www.kjdaily.com/article.php?aid=1795446137692993276"
+    }
+   ]
+  },
+  {
+   "keyword": "jensen huang",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-23T14:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "Nvidia restituye a Jensen Huang como director ejecutivo",
+     "press": "nytimes.com",
+     "publishedAt": "2026-11-23T14:46:00.000Z",
+     "link": "https://www.nytimes.com/es/2026/11/23/espanol/negocios/jensen-huang-nvidia.html?partner=naver"
+    },
+    {
+     "title": "(FILE) USA BUSINESS NVIDIA HUANG",
+     "press": null,
+     "publishedAt": "2026-11-23T14:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/091/0010376358?sid=104"
+    },
+    {
+     "title": "Nvidia reinstates Jensen Huang as CEO after scandal-driven exit",
+     "press": "koreaherald.com",
+     "publishedAt": "2026-11-23T14:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/044/0000292579?sid=104"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1229,
+  "flagged": 1231,
   "matched": 669,
-  "avgLeadMin": 561,
+  "avgLeadMin": 560,
   "recent": [
+   {
+    "keyword": "리트 만점자 부정행위 수사",
+    "hitKeyword": "리트 만점자 유족 출석",
+    "hitAt": "2026-11-24T00:00:00+09:00",
+    "leadMin": 79
+   },
    {
     "keyword": "정부 증안펀드 가동 준비",
     "hitKeyword": "증안펀드 실효성",
@@ -328,12 +367,6 @@
     "hitKeyword": "박준현 학폭 서면사과 취소",
     "hitAt": "2026-11-23T22:00:00+09:00",
     "leadMin": 39
-   },
-   {
-    "keyword": "딜라이트",
-    "hitKeyword": "딜라이트 계약 종료",
-    "hitAt": "2026-11-23T22:00:00+09:00",
-    "leadMin": 19
    }
   ]
  }
