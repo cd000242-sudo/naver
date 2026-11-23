@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T16:22:03.290Z",
+ "builtAt": "2026-11-23T16:32:06.637Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,29 +16,29 @@
     "signal.bz"
    ],
    "articles90": 95,
-   "recent20": 12,
-   "press": 64,
-   "firstArticleAt": "2026-11-23T15:02:00.000Z",
+   "recent20": 11,
+   "press": 65,
+   "firstArticleAt": "2026-11-23T15:04:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "\"실수 바로잡혀\" vs \"무모한 결정\"…젠슨 황 복귀에 갈린 美",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-23T16:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006414418?sid=101"
+     "title": "트럼프 \"엔비디아, 젠슨 황 CEO 복귀는 정확하고 적절한 결정\"(상보)",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-23T16:26:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446106"
     },
     {
-     "title": "트럼프가 되돌린 젠슨 황…엔비디아 이사회 독립성 논란",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-23T16:20:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=2026112401154774409a1f309431_1"
+     "title": "엔비디아 CEO 복귀 젠슨 황… “겸손하게 다시 헌신하겠다”",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-23T16:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003060739?sid=104"
     },
     {
-     "title": "트럼프 \"젠슨 황 복귀, 엔비디아 이사회와 직간접 소통\"(종합)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-23T16:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014340823?sid=104"
+     "title": "트럼프 \"젠슨황 복귀에 내 개입 컸다…이사회에 대리인 참석\"(종합)",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T16:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009305918?sid=104"
     }
    ]
   },
@@ -47,10 +47,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 9,
+   "articles90": 8,
    "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-23T15:01:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-23T15:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -80,29 +80,29 @@
     "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 3,
    "press": 6,
-   "firstArticleAt": "2026-11-23T14:58:00.000Z",
+   "firstArticleAt": "2026-11-23T15:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“전자발찌 끊고 도주”…성범죄자 정영모, 세종서 검거",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-23T16:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003702351?sid=102"
+    },
+    {
+     "title": "'전자발찌 끊고 도주' 정영모, 이틀 만에 세종서 검거",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-23T16:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016459323?sid=102"
+    },
     {
      "title": "[속보]전자발찌 끊고 도주 성범죄자 정영모, 세종서 잡혔다",
      "press": "munhwa.com",
      "publishedAt": "2026-11-23T16:14:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/021/0002834934?sid=102"
-    },
-    {
-     "title": "전자감독망 벗어난 정영모, 세종서 신병 확보…도주극 사흘 만에 종료",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-23T15:40:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=848242"
-    },
-    {
-     "title": "전자발찌 끊고 도주한 정영모, 세종서 검거",
-     "press": "joongdo.co.kr",
-     "publishedAt": "2026-11-23T15:26:00.000Z",
-     "link": "https://www.joongdo.co.kr/web/view.php?key=20261124010008084"
     }
    ]
   },
@@ -111,10 +111,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-23T14:56:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-23T15:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -135,6 +135,38 @@
      "press": "jemin.com",
      "publishedAt": "2026-11-23T15:20:00.000Z",
      "link": "https://www.jemin.com/news/articleView.html?idxno=848238"
+    }
+   ]
+  },
+  {
+   "keyword": "우리들의 발라드2",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T15:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'우리들의 발라드2' 임바다·허채민·김소연·정다은·박진서 등 세미파...",
+     "press": "enter.etoday.co.kr",
+     "publishedAt": "2026-11-23T16:30:00.000Z",
+     "link": "https://enter.etoday.co.kr/news/view/305681"
+    },
+    {
+     "title": "'우리들의 발라드2' 김소연·박예승 세미파이널 직행…TOP12→탈락자 보...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-23T16:12:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284409"
+    },
+    {
+     "title": "'우리들의 발라드 2', 세미파이널 12인 확정…추가 합격자는?",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-23T15:06:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=784170"
     }
    ]
   },
@@ -190,23 +222,23 @@
      "link": "https://n.news.naver.com/mnews/article/021/0002834932?sid=100"
     },
     {
-     "title": "진보 시당 \"한덕수에 면죄부, 조희대 대법원장 탄핵 촉구\"",
-     "press": "ksilbo.co.kr",
-     "publishedAt": "2026-11-23T15:04:00.000Z",
-     "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1073377"
-    },
-    {
      "title": "'조희대 탄핵' 격돌…與 \"내란청산\" 野 \"사법부 압박\"",
      "press": "ksilbo.co.kr",
      "publishedAt": "2026-11-23T15:04:00.000Z",
      "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1073375"
+    },
+    {
+     "title": "진보 시당 \"한덕수에 면죄부, 조희대 대법원장 탄핵 촉구\"",
+     "press": "ksilbo.co.kr",
+     "publishedAt": "2026-11-23T15:04:00.000Z",
+     "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1073377"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1234,
+  "flagged": 1235,
   "matched": 666,
   "avgLeadMin": 561,
   "recent": [
