@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T09:49:48.583Z",
+ "builtAt": "2026-11-23T09:59:51.692Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "롯데월드타워 담보 해지",
    "sources": [
     "nate"
    ],
-   "articles90": 83,
-   "recent20": 3,
-   "press": 83,
-   "firstArticleAt": "2026-11-23T08:20:00.000Z",
+   "articles90": 60,
+   "recent20": 1,
+   "press": 60,
+   "firstArticleAt": "2026-11-23T08:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -43,17 +43,55 @@
    ]
   },
   {
+   "keyword": "강금실 국정원장 지명",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 42,
+   "recent20": 6,
+   "press": 40,
+   "firstArticleAt": "2026-11-23T08:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'中 지방정부 특별고문' 출신이 국정원장으로…강금실은 누구?",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-23T09:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000142890?sid=100"
+    },
+    {
+     "title": "'첫 여성 정보수장' 강금실…외교·안보라인 새판 짰다",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-23T09:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522059?sid=100"
+    },
+    {
+     "title": "국정원장 후보에 강금실 발탁… 李 외교·통일부 포함 개각 단행",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-23T09:50:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1194981"
+    }
+   ]
+  },
+  {
    "keyword": "이재명 대통령 개각",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 54,
-   "recent20": 12,
-   "press": 45,
-   "firstArticleAt": "2026-11-23T08:20:00.000Z",
+   "articles90": 48,
+   "recent20": 8,
+   "press": 39,
+   "firstArticleAt": "2026-11-23T08:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "국정원장 후보에 강금실 발탁… 李 외교·통일부 포함 개각 단행",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-23T09:50:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1194981"
+    },
     {
      "title": "홍익표 통일장관 후보, 北 경제·남북협력 전문 연구 이력 [李대통령, 중...",
      "press": "segye.com",
@@ -61,63 +99,31 @@
      "link": "https://n.news.naver.com/mnews/article/022/0004177468?sid=100"
     },
     {
-     "title": "강금실 국정원장 후보, 정보기관 본연 기능·조직관리에 무게 [李대통령...",
+     "title": "한준호 행안장관 후보, 李 공소취소 모임 주도 [李대통령, 중폭 개각]",
      "press": "segye.com",
-     "publishedAt": "2026-11-23T09:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177466?sid=100"
-    },
-    {
-     "title": "임웅순 외교장관 후보, 對美 경험 풍부… 한·미관계 방점 [李대통령, 중...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-23T09:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177467?sid=100"
+     "publishedAt": "2026-11-23T09:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177469?sid=100"
     }
    ]
   },
   {
-   "keyword": "강금실 국정원장 지명",
+   "keyword": "고경표 음주운전 혐의",
    "sources": [
     "daum"
    ],
-   "articles90": 45,
-   "recent20": 8,
-   "press": 41,
-   "firstArticleAt": "2026-11-23T08:20:00.000Z",
+   "articles90": 34,
+   "recent20": 4,
+   "press": 34,
+   "firstArticleAt": "2026-11-23T08:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘자주파’ 두 축 물러나고 靑 참모 출신 전면에…“강금실은 국정원 민...",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-23T09:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003567304?sid=100"
+     "title": "[속보] 고경표, 음주운전 혐의로 오후 7시 경찰 출석 요구",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-23T09:50:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001148055"
     },
-    {
-     "title": "강금실 국정원장 후보, 정보기관 본연 기능·조직관리에 무게 [李대통령...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-23T09:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177466?sid=100"
-    },
-    {
-     "title": "이재명 정부, 외교·안보 진용 새판 짰다…강금실 첫 여성 국정원장 예...",
-     "press": "dailysportshankook.co.kr",
-     "publishedAt": "2026-11-23T09:44:00.000Z",
-     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435868"
-    }
-   ]
-  },
-  {
-   "keyword": "고경표 경찰 출석",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 35,
-   "recent20": 4,
-   "press": 34,
-   "firstArticleAt": "2026-11-23T08:21:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
     {
      "title": "'음주운전 혐의' 배우 고경표, 잠시 뒤 첫 경찰 출석",
      "press": "tjb.co.kr",
@@ -129,76 +135,6 @@
      "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-23T09:47:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/422/0000929101?sid=102"
-    },
-    {
-     "title": "배우 고경표, 음주운전 혐의로 오늘 오후 7시 경찰 출석",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-23T09:42:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544714"
-    }
-   ]
-  },
-  {
-   "keyword": "한준호 행안부 장관 후보자",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 22,
-   "recent20": 1,
-   "press": 22,
-   "firstArticleAt": "2026-11-23T08:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李 장관 대폭교체 전북정치 힘 빠지나",
-     "press": "jjn.co.kr",
-     "publishedAt": "2026-11-23T09:34:00.000Z",
-     "link": "http://www.jjn.co.kr/news/articleView.html?idxno=1058102"
-    },
-    {
-     "title": "‘李 복심’ 한준호·강유정 전진배치…野선 “회전문·보은인사”[5개...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-23T09:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004685297?sid=100"
-    },
-    {
-     "title": "행안부 한준호·국정원 강금실…이재명 정부 중폭 개각 단행",
-     "press": "seoulfn.com",
-     "publishedAt": "2026-11-23T09:16:00.000Z",
-     "link": "https://www.seoulfn.com/news/articleView.html?idxno=643689"
-    }
-   ]
-  },
-  {
-   "keyword": "오세훈 시내버스 필수공익사업",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 13,
-   "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-23T08:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "오세훈 “조희대 탄핵 소추, 정권 붕괴 서막 될 것”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-23T09:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002727287?sid=102"
-    },
-    {
-     "title": "오세훈 \"시내버스 파업해도 시민 이동권 보장돼야\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-23T09:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436962?sid=102"
-    },
-    {
-     "title": "오세훈 \"조희대 탄핵 추진, 정권 붕괴 서막…전 국민적 저항 직면\"(종합...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T08:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009305702?sid=102"
     }
    ]
   },
@@ -207,13 +143,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-23T08:24:00.000Z",
+   "articles90": 12,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-23T08:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "강유정 문체장관 후보, 평론부문 신춘문예 3관왕… 靑 대변인 맡아 [李...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-23T09:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177470?sid=100"
+    },
     {
      "title": "이 대통령, 국정원장에 강금실 지명…외교·통일 등 장관 4명 인선",
      "press": "kyongbuk.co.kr",
@@ -225,12 +167,6 @@
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-23T09:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012299372?sid=100"
-    },
-    {
-     "title": "[프로필] 강유정 문체부 장관 후보자, 현장·국정 두루 거친 문화통",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-23T09:00:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/23/2026112350345.html"
     }
    ]
   },
@@ -239,10 +175,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
+   "articles90": 5,
    "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-23T08:21:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-23T08:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -253,7 +189,7 @@
      "link": "https://www.jemin.com/news/articleView.html?idxno=848202"
     },
     {
-     "title": "입장권 2335장·6억원어치 판매 시도…암표 의심 70명 추가 수사의뢰",
+     "title": "\"혼자 210장이나?\"…6억원어치 암표 팔려던 70명 경찰 수사의뢰",
      "press": "mt.co.kr",
      "publishedAt": "2026-11-23T09:10:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/008/0005445225?sid=103"
@@ -267,14 +203,78 @@
    ]
   },
   {
+   "keyword": "오세훈 시내버스 필수공익사업",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-23T08:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "오세훈 서울시장, 내일 국무회의 참석…대통령에 부동산·현안 등 건의",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-23T09:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001405185?sid=102"
+    },
+    {
+     "title": "오세훈 “조희대 탄핵 소추, 정권 붕괴 서막 될 것”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-23T09:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002727287?sid=102"
+    },
+    {
+     "title": "오세훈 \"시내버스 파업해도 시민 이동권 보장돼야\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-23T09:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436962?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "박준현 1심 승소",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-23T09:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "키움 박준현, 고교 시절 학폭 서면사과 조치 취소 소송 1심 승소",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-23T09:48:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/001/0016459173"
+    },
+    {
+     "title": "'학폭 논란' 키움 박준현, 서면사과 처분 취소 소송 1심 승소",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T09:13:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/421/0009305734"
+    },
+    {
+     "title": "키움 박준현, 학폭 '서면사과 결정' 취소 소송 1심 승소",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-23T09:11:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/003/0014340661"
+    }
+   ]
+  },
+  {
    "keyword": "이재근 회장, 청년·소상공인 소통",
    "sources": [
     "nate"
    ],
-   "articles90": 7,
+   "articles90": 5,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-23T08:24:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-23T08:34:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -297,77 +297,12 @@
      "link": "http://www.newsprime.co.kr/news/article.html?no=756131"
     }
    ]
-  },
-  {
-   "keyword": "박준현 1심 승소",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T09:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'학폭 논란' 키움 박준현, 서면사과 처분 취소 소송 1심 승소",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T09:13:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/421/0009305734"
-    },
-    {
-     "title": "키움 박준현, 학폭 '서면사과 결정' 취소 소송 1심 승소",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-23T09:11:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/003/0014340661"
-    },
-    {
-     "title": "'학폭 서면사과 취소 소송' 키움 박준현, 1심서 이겼다…윤리센터 징계...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-23T09:00:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/311/0002083258"
-    }
-   ]
-  },
-  {
-   "keyword": "정점식 원내대표 발언",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T08:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "정점식, 경제 6단체 만나 \"기업·근로자 죽이는 악법 반드시 폐지\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-23T09:00:00.000Z",
-     "link": "https://www.ajunews.com/view/20261123163908931"
-    },
-    {
-     "title": "여야 원내대표, 경제6단체와 간담회서 쟁점법안·수출 1조달러 성과 두...",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-23T08:26:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886958"
-    },
-    {
-     "title": "경제6단체 간담회서 발언하는 정점식",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-23T08:22:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3760614"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1199,
-  "matched": 658,
+  "flagged": 1198,
+  "matched": 657,
   "avgLeadMin": 602,
   "recent": [
    {
