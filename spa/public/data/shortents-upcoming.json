@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T19:03:00.823Z",
+ "builtAt": "2026-11-23T19:13:03.976Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,62 +15,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 28,
-   "recent20": 5,
-   "press": 15,
-   "firstArticleAt": "2026-11-23T17:40:00.000Z",
+   "articles90": 31,
+   "recent20": 7,
+   "press": 17,
+   "firstArticleAt": "2026-11-23T17:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "블룸버그 \"엔비디아 이사회, 경영진 모르게 젠슨 황 복귀 결정\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T19:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009305928?sid=104"
-    },
-    {
-     "title": "\"젠슨 황, 12월3일 상원 은행위 공개 청문회 출석 예정\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-23T18:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014340834?sid=104"
-    },
-    {
-     "title": "트럼프 \"젠슨황 복귀 안보위험 아냐…내가 이사회 설득해 성사\"(종합)",
+     "title": "젠슨황 복귀에 나스닥 장중 7%대 급등…엔비디아 30%대↑(종합2보)",
      "press": "yna.co.kr",
-     "publishedAt": "2026-11-23T18:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016459341?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "선관위 직원 1명 구속",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T17:39:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'투표록 위변조' 선관위 직원 1명 구속...\"증거인멸 우려\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-23T18:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437068?sid=102"
+     "publishedAt": "2026-11-23T19:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016459342?sid=104"
     },
     {
-     "title": "'선거 개표상황표 은닉' 선관위 직원 8명 중 1명 구속",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-23T18:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005846686?sid=102"
+     "title": "트럼프 \"젠슨황 복귀 안보위험 아냐…내가 이사회 설득해 성사\"",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-23T19:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000545403?sid=101"
     },
     {
-     "title": "'개표상황표 은닉' 선관위 직원 1명 구속…7명 영장 기각(종합)",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T17:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009305922?sid=102"
+     "title": "트럼프 \"젠슨 황 복귀 안보위험 아냐…내가 이사회 설득\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-23T19:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001405267?sid=104"
     }
    ]
   }
