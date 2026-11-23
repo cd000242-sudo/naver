@@ -64,6 +64,18 @@ function tail(text: string): string {
   return text.length > 800 ? text.slice(-800) : text;
 }
 
+// Under `--json` codex prints its failure as `error` events on stdout; stderr only holds this banner plus log noise.
+const STDERR_BANNER = /^Reading prompt from stdin\.\.\.\s*$/gm;
+
+/**
+ * The text shown to the user / usage tracker for a failed run: the error events first (they name the real reason and
+ * the reset time), then stderr without its banner, then stdout.
+ */
+function failureDetail(res: SpawnResult, errorText: string): string {
+  const stderr = String(res.stderr ?? '').replace(STDERR_BANNER, '').trim();
+  return tail(errorText || stderr || res.stdout || '');
+}
+
 function failure(code: AgentErrorCode, detail: string, model: string | undefined): AgentCliError {
   const message = code === 'model_unavailable'
     ? buildModelUnavailableMessage('codex', model, detail)
@@ -115,8 +127,7 @@ export async function runCodexImageSession(
     });
     const errorText = extractCodexErrorText(res.stdout);
     if (res.code !== 0) {
-      const detail = tail(res.stderr || errorText || res.stdout || '');
-      throw failure(classifyExit('codex', res.stderr, errorText || res.stdout), detail, model);
+      throw failure(classifyExit('codex', res.stderr, errorText || res.stdout), failureDetail(res, errorText), model);
     }
 
     const threadId = parseCodexThreadId(res.stdout);
