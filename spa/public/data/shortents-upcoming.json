@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T21:43:55.347Z",
+ "builtAt": "2026-11-23T21:53:58.985Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -47,13 +47,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 10,
+   "articles90": 11,
    "recent20": 2,
-   "press": 9,
+   "press": 10,
    "firstArticleAt": "2026-11-23T20:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"증거인멸 우려'…'투표율 허위입력' 선관위 8명 중 1명 구속",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-23T21:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005357363?sid=102"
+    },
     {
      "title": "'선거 개표상황표 은닉' 선관위 직원 구속…7명 영장 기각",
      "press": "yonhapnewstv.co.kr",
@@ -61,16 +67,74 @@
      "link": "https://n.news.naver.com/mnews/article/422/0000929232?sid=102"
     },
     {
-     "title": "‘선거 개표상황표 은닉’ 선관위 직원 8명 중 1명만 구속",
+     "title": "‘선거 개표상황표 은닉’ 선관위 직원 8명 중 1명 구속",
      "press": "biz.heraldcorp.com",
      "publishedAt": "2026-11-23T21:32:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/016/0002727392?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "강금실 국정원장 후보",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-23T20:53:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "강금실·임웅순…‘위성락 외교 전문성’에 힘 실었다[송종호의 국정쏙...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-23T21:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004685366?sid=100"
     },
     {
-     "title": "'개표 은닉' 선관위 직원 1명 구속…7명 기각",
+     "title": "그때도 지금도 '첫 여성' 파격…돌아온 강금실",
      "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-23T21:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001405272?sid=102"
+     "publishedAt": "2026-11-23T21:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001405280?sid=100"
+    },
+    {
+     "title": "석 달 만에 '중폭 개각'‥최초 여성 국정원장 발탁",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-23T21:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537535?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "미국 디지털 301조 조사",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-23T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프 행정부, 한국·EU 겨냥 디지털 규제 조사 착수? 미국 관세 폭탄 ...",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-23T21:52:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886988"
+    },
+    {
+     "title": "美, 한국 디지털 규제 ‘301조 조사’ 검토",
+     "press": "kbmaeil.com",
+     "publishedAt": "2026-11-23T21:46:00.000Z",
+     "link": "https://www.kbmaeil.com/article/20261124500018"
+    },
+    {
+     "title": "\"美, 한국 디지털 규제에 301조 조사 검토\"…추가 관세 나오나",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-23T21:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005445323?sid=104"
     }
    ]
   },
@@ -138,43 +202,11 @@
      "link": "https://www.etoday.co.kr/news/view/2651897"
     }
    ]
-  },
-  {
-   "keyword": "미국 디지털 301조 조사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"美, 한국 디지털 규제에 301조 조사 검토\"…추가 관세 나오나",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-23T21:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005445323?sid=104"
-    },
-    {
-     "title": "[데스크 칼럼] 한국 디지털 규제, 서울·워싱턴 시각차 '심각'…커지는...",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-23T21:02:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261122010008224"
-    },
-    {
-     "title": "\"美, 한국·EU·호주 디지털 규제 301조 조사 검토\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-23T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929226?sid=104"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1221,
+  "flagged": 1219,
   "matched": 661,
   "avgLeadMin": 587,
   "recent": [
