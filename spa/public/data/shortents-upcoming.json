@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T03:23:01.495Z",
+ "builtAt": "2026-11-23T03:33:04.775Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "삼성증권",
    "sources": [
     "google"
    ],
-   "articles90": 76,
-   "recent20": 4,
-   "press": 75,
-   "firstArticleAt": "2026-11-23T01:54:00.000Z",
+   "articles90": 59,
+   "recent20": 2,
+   "press": 58,
+   "firstArticleAt": "2026-11-23T02:04:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "“증권사 보안망 줄줄이 뚫렸다”…삼성증권도 8241명 정보 유출",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-23T03:26:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611230101"
+    },
     {
      "title": "삼성증권, 고객 8241명 계좌·주소 등 개인정보 유출",
      "press": "sisafocus.co.kr",
@@ -33,45 +39,38 @@
      "press": "ppss.kr",
      "publishedAt": "2026-11-23T03:09:00.000Z",
      "link": "https://www.ppss.kr/news/articleView.html?idxno=322377"
-    },
-    {
-     "title": "삼성증권도 해킹 피해…8천여 명 고객 정보 유출",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-23T03:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001405077?sid=101"
     }
    ]
   },
   {
    "keyword": "조희대 탄핵 추진",
    "sources": [
-    "nate",
-    "daum"
+    "nate"
    ],
    "articles90": 75,
-   "recent20": 17,
+   "recent20": 6,
    "press": 51,
-   "firstArticleAt": "2026-11-23T02:16:00.000Z",
+   "firstArticleAt": "2026-11-23T02:18:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "\"조희대 탄핵 사유 차고 넘친다\" 김민석, 탄핵안 처리 방침 재확인",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-23T03:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005357022?sid=100"
+     "title": "[속보] 조희대 탄핵 두고…국힘 \"방탄 탄핵\" 민주 \"내란 동조\"",
+     "press": "jmbc.co.kr",
+     "publishedAt": "2026-11-23T03:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/659/0000048935?sid=100"
     },
     {
-     "title": "\"정권 자멸 탄핵\"… 국민의힘, 민주당 '조희대 탄핵' 맹공",
-     "press": "sisaweek.com",
-     "publishedAt": "2026-11-23T03:16:00.000Z",
-     "link": "https://www.sisaweek.com/news/articleView.html?idxno=239123"
+     "title": "여 \"조희대 탄핵은 내란 청산\"…야 \"자폭 탄핵\"",
+     "press": "natv.go.kr",
+     "publishedAt": "2026-11-23T03:28:00.000Z",
+     "link": "https://www.natv.go.kr/natv/news/newsView.do?newsId=514632"
     },
     {
-     "title": "강동원 법관대표회의 의장 \"조희대 탄핵 땐 행동\"…일선 판사들도 민주...",
-     "press": "ppss.kr",
-     "publishedAt": "2026-11-23T03:13:00.000Z",
-     "link": "https://www.ppss.kr/news/articleView.html?idxno=322385"
+     "title": "장동혁 \"조희대 탄핵은 '李 방탄 탄핵'… 법원, 당장 재판 재개하라\"",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-23T03:28:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3451250"
     }
    ]
   },
@@ -80,62 +79,95 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 56,
-   "recent20": 7,
+   "articles90": 57,
+   "recent20": 5,
    "press": 47,
-   "firstArticleAt": "2026-11-23T01:54:00.000Z",
+   "firstArticleAt": "2026-11-23T02:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이형일 \"증안펀드 가동·규모 검토…공매도, 규제 강화보다 불법 단속 ...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T03:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009304806?sid=101"
+     "title": "정부, 증안펀드 가동 준비 착수…추가 시장 안정책도 검토",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-23T03:30:00.000Z",
+     "link": "https://www.viva100.com/article/20261123500641"
     },
     {
-     "title": "재경부, 증안펀드 가동 준비 착수…이형일 \"추가 시장안정 대책도 준비...",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-23T03:16:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4120178"
+     "title": "증시 급락에 정부 비상계획 가동 채비…이형일 “증안펀드 외 대책도 마...",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-23T03:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003567177?sid=101"
     },
     {
-     "title": "증안펀드 예고에도 4600 무너졌다",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-23T03:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002834804?sid=101"
+     "title": "정부, 증안펀드 가동 준비 착수…불법 공매도 3개월 집중 감시",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-23T03:24:00.000Z",
+     "link": "https://www.tokenpost.kr/news/breaking/442718"
     }
    ]
   },
   {
    "keyword": "최고위원회의 김민석 대표",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 52,
-   "recent20": 4,
-   "press": 24,
-   "firstArticleAt": "2026-11-23T02:19:00.000Z",
+   "recent20": 3,
+   "press": 26,
+   "firstArticleAt": "2026-11-23T02:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"조희대 탄핵 사유 차고 넘친다\" 김민석, 탄핵안 처리 방침 재확인",
+     "title": "민주 최고위 '신천지' 막말 충돌…김민석, 박선원에 경고",
+     "press": "sisafocus.co.kr",
+     "publishedAt": "2026-11-23T03:30:00.000Z",
+     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367934"
+    },
+    {
+     "title": "김민석 민주당 대표 \"조희대 탄핵안 준비…한덕수 판결, 두고두고 비판...",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-23T03:24:00.000Z",
+     "link": "http://www.breaknews.com/1253005"
+    },
+    {
+     "title": "\"조희대 탄핵 사유 차고 넘친다\"…김민석, 탄핵안 처리 방침 재확인",
      "press": "hankyung.com",
      "publishedAt": "2026-11-23T03:20:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/015/0005357022?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "장윤기 부친 중징계",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 24,
+   "recent20": 1,
+   "press": 24,
+   "firstArticleAt": "2026-11-23T02:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "경찰, 리얼돌 폐기한 '장윤기 父' 중징계…정확한 수위는 비공개",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-23T03:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000142840?sid=102"
     },
     {
-     "title": "김민석 “조희대 대법원장 탄핵 사유 차고도 넘쳐”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-23T03:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764378?sid=100"
+     "title": "'리얼돌 폐기' 등 증거 은폐...경찰, 장윤기 부친에 '중징계 처분'",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-23T03:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000521978?sid=102"
     },
     {
-     "title": "김민석 \"대법, 한덕수 판결 내란 행위인지 명료하게 해야…조희대 탄핵...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-23T03:07:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123000600"
+     "title": "경찰, ‘여고생 살해’ 장윤기 부친 경찰 간부 ‘중징계’ 처분",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-23T02:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005767556?sid=102"
     }
    ]
   },
@@ -144,30 +176,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 13,
-   "recent20": 0,
-   "press": 13,
-   "firstArticleAt": "2026-11-23T01:58:00.000Z",
+   "articles90": 12,
+   "recent20": 2,
+   "press": 12,
+   "firstArticleAt": "2026-11-23T02:06:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "김신영, 14년 지킨 '정오의 희망곡' 떠난다…29일 마지막 방송 \"새로운 ...",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-23T03:31:00.000Z",
+     "link": "https://m.entertain.naver.com/article/088/0001041725"
+    },
+    {
+     "title": "김신영 ‘정희’ 복귀와 동시에 하차 발표 “마지막 인사 예의라 생각해...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-23T03:24:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190388"
+    },
     {
      "title": "김신영, 14년 만에 '정오의 희망곡' DJ 하차…29일 막방",
      "press": "news1.kr",
      "publishedAt": "2026-11-23T02:46:00.000Z",
      "link": "https://m.entertain.naver.com/article/421/0009304732"
-    },
-    {
-     "title": "14년 지킨 ‘정희’ 안방마님 김신영 하차…“또 다른 도전 위해 결정”",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-23T02:46:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001282786"
-    },
-    {
-     "title": "김신영, 14년 진행한 ‘정오의 희망곡’ 마이크 내려놓는다",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-23T02:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001151250"
     }
    ]
   },
@@ -176,15 +208,15 @@
    "sources": [
     "daum"
    ],
-   "articles90": 11,
+   "articles90": 10,
    "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-23T02:02:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-23T02:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "에이티즈, 신보로 미국 빌보드 200 네 번째 1위…2020년대 그룹 최다 톱...",
+     "title": "에이티즈, 미국 빌보드 200 네 번째 1위…2020년대 그룹 최다 톱10 기록으...",
      "press": "lecturernews.com",
      "publishedAt": "2026-11-23T03:20:00.000Z",
      "link": "https://www.lecturernews.com/news/articleView.html?idxno=214376"
@@ -204,15 +236,47 @@
    ]
   },
   {
+   "keyword": "이재명 지지율 상승",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-23T02:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[이재명 직무평가] 지지율 37.3%...2주 연속 상승세",
+     "press": "00news.co.kr",
+     "publishedAt": "2026-11-23T03:28:00.000Z",
+     "link": "http://www.00news.co.kr/news/articleView.html?idxno=108271"
+    },
+    {
+     "title": "李대통령 지지율 37.3% … 2주 연속 소폭 상승",
+     "press": "cnbnews.com",
+     "publishedAt": "2026-11-23T02:54:00.000Z",
+     "link": "https://www.cnbnews.com/news/articleView.html?idxno=1024766"
+    },
+    {
+     "title": "이재명 대통령 지지율 37.3%…2주 연속 상승, 국민의힘 42.5%·민주당 35....",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-23T02:12:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629762"
+    }
+   ]
+  },
+  {
    "keyword": "국가장학금",
    "sources": [
     "signal.bz",
     "google"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-23T02:00:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-23T03:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -229,80 +293,17 @@
      "link": "https://n.news.naver.com/mnews/article/018/0006414102?sid=102"
     },
     {
-     "title": "\"빠트리지 마롱~\" 내년 국가장학금 신청 24일 시작",
-     "press": "newsis.com",
+     "title": "국가장학금 1차 24일부터 신청…내년 지방 국립대 등록금 전액 지원",
+     "press": "news1.kr",
      "publishedAt": "2026-11-23T03:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014339578?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "김종철 경찰청장 경례",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 16,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-23T02:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[헤럴드pic] 취임식 참석한 김종철 신임 경찰청장",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-23T02:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002727140?sid=102"
-    },
-    {
-     "title": "[헤럴드pic] 경례하는 김종철 신임 경찰청장",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-23T02:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002727143?sid=102"
-    },
-    {
-     "title": "김종철 신임 경찰청장 \"수사권 확대 아닌 책임 강화\"…공정 수사 강조",
-     "press": "jeonmae.co.kr",
-     "publishedAt": "2026-11-23T02:54:00.000Z",
-     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1314724"
-    }
-   ]
-  },
-  {
-   "keyword": "이재명 지지율 상승",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-23T02:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령 지지율 37.3% … 2주 연속 소폭 상승",
-     "press": "cnbnews.com",
-     "publishedAt": "2026-11-23T02:54:00.000Z",
-     "link": "https://www.cnbnews.com/news/articleView.html?idxno=1024766"
-    },
-    {
-     "title": "이재명 대통령 지지율 37.3%…2주 연속 상승, 국민의힘 42.5%·민주당 35....",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-23T02:12:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629762"
-    },
-    {
-     "title": "[리얼미터] 이재명 대통령 국정 수행 '긍정' 37.3% vs. '부정' 59.9%",
-     "press": "newscape.co.kr",
-     "publishedAt": "2026-11-23T02:12:00.000Z",
-     "link": "http://www.newscape.co.kr/news/articleView.html?idxno=126004"
+     "link": "https://n.news.naver.com/mnews/article/421/0009304783?sid=102"
     }
    ]
   },
   {
    "keyword": "강신철 장관 질의 답변",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 11,
@@ -319,16 +320,16 @@
      "link": "https://www.m-economynews.com/news/article.html?no=73472"
     },
     {
-     "title": "[포토] 강신철 국방부 장관, 의원질의 답변",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-23T03:18:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3451245"
-    },
-    {
      "title": "[포토] 강신철 국방부 장관 답변",
      "press": "newscj.com",
      "publishedAt": "2026-11-23T03:18:00.000Z",
      "link": "https://www.newscj.com/news/articleView.html?idxno=3451246"
+    },
+    {
+     "title": "[포토] 강신철 국방부 장관, 의원질의 답변",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-23T03:18:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3451245"
     }
    ]
   },
@@ -338,7 +339,7 @@
     "daum"
    ],
    "articles90": 6,
-   "recent20": 3,
+   "recent20": 2,
    "press": 5,
    "firstArticleAt": "2026-11-23T02:30:00.000Z",
    "exclusive": false,
@@ -361,6 +362,39 @@
      "press": "ekn.kr",
      "publishedAt": "2026-11-23T03:12:00.000Z",
      "link": "https://www.ekn.kr/web/view.php?key=20261123027253126"
+    }
+   ]
+  },
+  {
+   "keyword": "김종철 경찰청장 참배",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 10,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-23T02:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "새 경찰청장 김종철 “수사 역량 강화·신뢰 회복”",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-23T02:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002834760?sid=102"
+    },
+    {
+     "title": "김종철 경찰청장이 남긴 방명록",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-23T02:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016457927?sid=102"
+    },
+    {
+     "title": "방명록 작성하는 김종철 경찰청장",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-23T02:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016457924?sid=102"
     }
    ]
   },
@@ -397,38 +431,6 @@
    ]
   },
   {
-   "keyword": "수원 fc",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T02:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"항상 휴대폰 분출 받으면 수원 축구 분석\"...이정효 체제서 단숨에 자...",
-     "press": "sportalkorea.com",
-     "publishedAt": "2026-11-23T03:06:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/139/0002256434"
-    },
-    {
-     "title": "‘4전 5기’ 끝 이룬 10년의 꿈… 경주한수원여자축구단, 창단 첫 WK리그...",
-     "press": "geconomy.co.kr",
-     "publishedAt": "2026-11-23T02:46:00.000Z",
-     "link": "https://www.geconomy.co.kr/news/article.html?no=325950"
-    },
-    {
-     "title": "대구FC, 자동승격권 확보는 실패…이랜드·부산·화성과 준PO 대결한다",
-     "press": "idaegu.com",
-     "publishedAt": "2026-11-23T02:26:00.000Z",
-     "link": "https://www.idaegu.com/news/articleView.html?idxno=667192"
-    }
-   ]
-  },
-  {
    "keyword": "구조조정",
    "sources": [
     "google"
@@ -459,13 +461,45 @@
      "link": "https://n.news.naver.com/mnews/article/003/0014339314?sid=102"
     }
    ]
+  },
+  {
+   "keyword": "정년연장",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T02:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정년연장, 27일 담판?…정부안 먼저 낸다",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-23T02:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000545276?sid=101"
+    },
+    {
+     "title": "진보당 노혜령, \"저임금 재고용 아닌 65세 정년연장 필요\"",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-23T02:26:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3760005"
+    },
+    {
+     "title": "‘정년연장 개입’ 시사 정부, 임금개편 살핀다",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-23T02:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002727068?sid=101"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1164,
-  "matched": 663,
-  "avgLeadMin": 617,
+  "flagged": 1160,
+  "matched": 660,
+  "avgLeadMin": 613,
   "recent": [
    {
     "keyword": "드파르디외 우엘벡 성폭행",
