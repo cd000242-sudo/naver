@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T09:39:45.225Z",
+ "builtAt": "2026-11-23T09:49:48.583Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 26,
  "candidates": [
+  {
+   "keyword": "롯데월드타워 담보 해지",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 83,
+   "recent20": 3,
+   "press": 83,
+   "firstArticleAt": "2026-11-23T08:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'유동성 우려' 털어낸 롯데, 롯데월드타워 담보 해지…롯데케미칼 회사...",
+     "press": "thepublic.kr",
+     "publishedAt": "2026-11-23T09:40:00.000Z",
+     "link": "https://www.thepublic.kr/news/articleView.html?idxno=328061"
+    },
+    {
+     "title": "롯데, 롯데월드타워 담보 약 2년 만에 해지…회사채 8,000억원 상환",
+     "press": "webeconomy.co.kr",
+     "publishedAt": "2026-11-23T09:38:00.000Z",
+     "link": "https://www.webeconomy.co.kr/news/articleView.html?idxno=2387288"
+    },
+    {
+     "title": "롯데그룹, 롯데월드타워 담보 2년 만에 해지…재무구조 개선 속도",
+     "press": "newsway.co.kr",
+     "publishedAt": "2026-11-23T09:32:00.000Z",
+     "link": "https://www.newsway.co.kr/news/view?ud=2026112318300413604"
+    }
+   ]
+  },
   {
    "keyword": "이재명 대통령 개각",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 55,
-   "recent20": 8,
-   "press": 47,
-   "firstArticleAt": "2026-11-23T08:12:00.000Z",
+   "articles90": 54,
+   "recent20": 12,
+   "press": 45,
+   "firstArticleAt": "2026-11-23T08:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "여야, 개각에 엇갈린 반응…與 \"국정 활력 기대\"· 野 \"회전문 인사\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-23T09:34:00.000Z",
-     "link": "https://www.ajunews.com/view/20261123171212084"
+     "title": "홍익표 통일장관 후보, 北 경제·남북협력 전문 연구 이력 [李대통령, 중...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-23T09:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177468?sid=100"
     },
     {
-     "title": "李대통령, 외교·통일 포함 중폭개각 단행... 첫 여성 국정원장 강금실...",
-     "press": "getnews.co.kr",
-     "publishedAt": "2026-11-23T09:32:00.000Z",
-     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=888198"
+     "title": "강금실 국정원장 후보, 정보기관 본연 기능·조직관리에 무게 [李대통령...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-23T09:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177466?sid=100"
     },
     {
-     "title": "[사설]외교안보 라인 포함 중폭 개각, 국정 심기일전 전기 되길",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-23T09:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484492?sid=110"
-    }
-   ]
-  },
-  {
-   "keyword": "고경표 음주운전 혐의",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 49,
-   "recent20": 1,
-   "press": 46,
-   "firstArticleAt": "2026-11-23T08:10:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "만취 운전하다 청소차 '쾅'…배우 고경표, 오늘 경찰 소환",
-     "press": "weekly.chosun.com",
-     "publishedAt": "2026-11-23T09:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/053/0000063284?sid=102"
-    },
-    {
-     "title": "'만취 음주운전' 고경표 잠시 뒤 첫 경찰 소환조사",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-23T09:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436953?sid=102"
-    },
-    {
-     "title": "[속보]‘음주운전 혐의’ 고경표, 오후 7시 경찰 소환",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-23T09:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002834892?sid=102"
+     "title": "임웅순 외교장관 후보, 對美 경험 풍부… 한·미관계 방점 [李대통령, 중...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-23T09:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177467?sid=100"
     }
    ]
   },
@@ -80,61 +80,61 @@
     "daum"
    ],
    "articles90": 45,
-   "recent20": 6,
+   "recent20": 8,
    "press": 41,
-   "firstArticleAt": "2026-11-23T08:14:00.000Z",
+   "firstArticleAt": "2026-11-23T08:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "강금실 국정원장 발탁 배경…李대통령 신뢰·쇄신과 통합 의미 담겼다",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T09:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009305762?sid=100"
+     "title": "‘자주파’ 두 축 물러나고 靑 참모 출신 전면에…“강금실은 국정원 민...",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-23T09:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003567304?sid=100"
     },
     {
-     "title": "강금실·홍익표 대북 라인…한반도 상황 관리·대북 정보역량 강화 주력...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-23T09:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014340676?sid=100"
+     "title": "강금실 국정원장 후보, 정보기관 본연 기능·조직관리에 무게 [李대통령...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-23T09:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177466?sid=100"
     },
     {
-     "title": "李대통령, 외교·통일 포함 중폭개각 단행... 첫 여성 국정원장 강금실...",
-     "press": "getnews.co.kr",
-     "publishedAt": "2026-11-23T09:32:00.000Z",
-     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=888198"
+     "title": "이재명 정부, 외교·안보 진용 새판 짰다…강금실 첫 여성 국정원장 예...",
+     "press": "dailysportshankook.co.kr",
+     "publishedAt": "2026-11-23T09:44:00.000Z",
+     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435868"
     }
    ]
   },
   {
-   "keyword": "한미약품, 베하르 박사 영입",
+   "keyword": "고경표 경찰 출석",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 26,
-   "recent20": 2,
-   "press": 26,
-   "firstArticleAt": "2026-11-23T08:10:00.000Z",
-   "exclusive": false,
+   "articles90": 35,
+   "recent20": 4,
+   "press": 34,
+   "firstArticleAt": "2026-11-23T08:21:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "한미약품, 글로벌 항암 권위자 라파엘 베하르 박사 영입",
-     "press": "thetracker.co.kr",
-     "publishedAt": "2026-11-23T09:29:00.000Z",
-     "link": "https://thetracker.co.kr/View.aspx?No=4325491"
+     "title": "'음주운전 혐의' 배우 고경표, 잠시 뒤 첫 경찰 출석",
+     "press": "tjb.co.kr",
+     "publishedAt": "2026-11-23T09:48:00.000Z",
+     "link": "https://www.tjb.co.kr/news05/bodo/view/id/106418"
     },
     {
-     "title": "한미약품 美 항암 전문가 영입…항암신약 개발 강화",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-23T09:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000545397?sid=101"
+     "title": "경찰, '음주운전' 고경표 오후 7시 첫 소환 통보",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-23T09:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929101?sid=102"
     },
     {
-     "title": "한미약품, 항암 전문가 라파엘 베하르 영입…글로벌 신약 개발 강화",
-     "press": "swtvnews.com",
-     "publishedAt": "2026-11-23T09:10:00.000Z",
-     "link": "https://www.swtvnews.com/news/newsview.php?ncode=1065603187196193"
+     "title": "배우 고경표, 음주운전 혐의로 오늘 오후 7시 경찰 출석",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-23T09:42:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544714"
     }
    ]
   },
@@ -143,10 +143,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 23,
-   "recent20": 2,
-   "press": 23,
-   "firstArticleAt": "2026-11-23T08:10:00.000Z",
+   "articles90": 22,
+   "recent20": 1,
+   "press": 22,
+   "firstArticleAt": "2026-11-23T08:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -171,34 +171,34 @@
    ]
   },
   {
-   "keyword": "안전공업 화재 기소",
+   "keyword": "오세훈 시내버스 필수공익사업",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 16,
+   "articles90": 13,
    "recent20": 0,
-   "press": 16,
-   "firstArticleAt": "2026-11-23T08:10:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-23T08:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'14명 사망' 대전 안전공업 화재…대표이사 기소",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-23T09:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000193326?sid=102"
-    },
-    {
-     "title": "“고질적 안전불감증 더해진 인재”…안전공업 손주환 대표 등 기소",
-     "press": "joongang.co.kr",
+     "title": "오세훈 “조희대 탄핵 소추, 정권 붕괴 서막 될 것”",
+     "press": "biz.heraldcorp.com",
      "publishedAt": "2026-11-23T09:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003567291?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/016/0002727287?sid=102"
     },
     {
-     "title": "‘72명 사상’ 안전공업 화재 참사 책임자 무더기 기소…불법 증축에 경...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-23T09:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177451?sid=102"
+     "title": "오세훈 \"시내버스 파업해도 시민 이동권 보장돼야\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-23T09:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436962?sid=102"
+    },
+    {
+     "title": "오세훈 \"조희대 탄핵 추진, 정권 붕괴 서막…전 국민적 저항 직면\"(종합...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T08:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009305702?sid=102"
     }
    ]
   },
@@ -207,10 +207,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 16,
+   "articles90": 13,
    "recent20": 0,
-   "press": 15,
-   "firstArticleAt": "2026-11-23T08:10:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-23T08:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -235,50 +235,23 @@
    ]
   },
   {
-   "keyword": "오세훈 시내버스 필수공익사업",
+   "keyword": "암표 의심 70명 수사 의뢰",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-23T08:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "오세훈 \"시내버스 파업해도 시민 이동권 보장돼야\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-23T09:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436962?sid=102"
-    },
-    {
-     "title": "오세훈 “조희대 탄핵 소추, 정권 붕괴 서막 될 것”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-23T09:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002727287?sid=102"
-    },
-    {
-     "title": "오세훈 \"조희대 탄핵 추진, 정권 붕괴 서막…전 국민적 저항 직면\"(종합...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T08:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009305702?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "암표 의심 70명 수사 의뢰",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
    "articles90": 8,
-   "recent20": 0,
+   "recent20": 1,
    "press": 8,
-   "firstArticleAt": "2026-11-23T08:12:00.000Z",
+   "firstArticleAt": "2026-11-23T08:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "6억원대 암표 거래 정황 포착…문체부, 판매 의심자 70명 경찰에 넘겨",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-23T09:46:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=848202"
+    },
     {
      "title": "입장권 2335장·6억원어치 판매 시도…암표 의심 70명 추가 수사의뢰",
      "press": "mt.co.kr",
@@ -290,44 +263,70 @@
      "press": "sedaily.com",
      "publishedAt": "2026-11-23T09:08:00.000Z",
      "link": "https://m.sports.naver.com/general/article/011/0004685290"
-    },
-    {
-     "title": "가을야구 티켓 웃돈 붙여 팔려다 딱 걸렸다…문체부, 암표상 70명 경찰 ...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-23T09:01:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/445/0000492628"
     }
    ]
   },
   {
-   "keyword": "이재근 회장 청년 소상공인 만남",
+   "keyword": "이재근 회장, 청년·소상공인 소통",
    "sources": [
     "nate"
    ],
-   "articles90": 6,
+   "articles90": 7,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-23T08:18:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-23T08:24:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "KB금융 이재근, 첫 현장은 상생·포용금융",
-     "press": "4th.kr",
-     "publishedAt": "2026-11-23T08:58:00.000Z",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2122503"
+     "title": "이재근 KB금융 회장, 취임 첫날 청년·소상공인 만났다",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-23T09:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001273668?sid=101"
     },
     {
-     "title": "이재근 \"KB, 국내 1등서 글로벌 리딩 플랫폼으로\"",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-23T08:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005357224?sid=101"
+     "title": "이재근 KB금융 회장, 첫 행보로 청년·소상공인 만나…포용금융 강조",
+     "press": "thetracker.co.kr",
+     "publishedAt": "2026-11-23T09:01:00.000Z",
+     "link": "https://thetracker.co.kr/View.aspx?No=4325382"
     },
     {
-     "title": "이재근 KB금융 회장, 취임 첫 대외 행보는 '청년·소상공인' 만남",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-23T08:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000554763?sid=101"
+     "title": "이재근 KB금융 회장, 첫 공식 일정…청년·소상공인 소통",
+     "press": "newsprime.co.kr",
+     "publishedAt": "2026-11-23T08:54:00.000Z",
+     "link": "http://www.newsprime.co.kr/news/article.html?no=756131"
+    }
+   ]
+  },
+  {
+   "keyword": "박준현 1심 승소",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-23T09:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'학폭 논란' 키움 박준현, 서면사과 처분 취소 소송 1심 승소",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T09:13:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/421/0009305734"
+    },
+    {
+     "title": "키움 박준현, 학폭 '서면사과 결정' 취소 소송 1심 승소",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-23T09:11:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/003/0014340661"
+    },
+    {
+     "title": "'학폭 서면사과 취소 소송' 키움 박준현, 1심서 이겼다…윤리센터 징계...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-23T09:00:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/311/0002083258"
     }
    ]
   },
@@ -337,10 +336,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T08:18:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-23T08:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -367,7 +366,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1196,
+  "flagged": 1199,
   "matched": 658,
   "avgLeadMin": 602,
   "recent": [
