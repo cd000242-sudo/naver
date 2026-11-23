@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T14:31:24.751Z",
+ "builtAt": "2026-11-23T14:41:27.924Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,42 +15,42 @@
    "sources": [
     "daum"
    ],
-   "articles90": 83,
-   "recent20": 83,
-   "press": 66,
-   "firstArticleAt": "2026-11-23T14:14:00.000Z",
-   "exclusive": true,
+   "articles90": 91,
+   "recent20": 87,
+   "press": 69,
+   "firstArticleAt": "2026-11-23T14:20:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "엔비디아, 젠슨 황 CEO 재선임…이사회 만장일치",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-23T14:30:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=410040"
+     "title": "젠슨 황 “가족의 사랑과 지지에 감사…새 각오”",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-23T14:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002833617?sid=104"
     },
     {
-     "title": "젠슨 황, 11일 만에 엔비디아 CEO 전격 복귀 [종합]",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-23T14:30:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2651908"
+     "title": "젠슨 황 \"엔비디아 다시 이끌게 돼 영광 … 빨리 업무 복귀하고파\"",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-23T14:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005357324?sid=104"
     },
     {
-     "title": "젠슨 황 복귀에 엔비디아 주가 30% 폭등…이사회 만장일치 결정",
-     "press": "econovill.com",
-     "publishedAt": "2026-11-23T14:30:00.000Z",
-     "link": "https://www.econovill.com/news/articleView.html?idxno=758250"
+     "title": "엔비디아, 젠슨 황 CEO 복귀…다시 힘 실린 '창업자 리더십'",
+     "press": "fetv.co.kr",
+     "publishedAt": "2026-11-23T14:40:00.000Z",
+     "link": "https://www.fetv.co.kr/news/articleView.html?idxno=314164"
     }
    ]
   },
   {
-   "keyword": "이지훈·아야네 둘째 딸 출산",
+   "keyword": "이지훈 아야네, 둘째 딸 출산 성공",
    "sources": [
     "nate"
    ],
-   "articles90": 7,
+   "articles90": 5,
    "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-23T13:06:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-23T13:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -139,103 +139,6 @@
    ]
   },
   {
-   "keyword": "나의 유죄인간",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T13:03:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "임시완, '나의 유죄인간' 11회 앞두고 설렘 가득 투샷",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-23T14:22:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284393"
-    },
-    {
-     "title": "'나의 유죄인간' 정한설, 종영 소감",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-23T14:20:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1195012"
-    },
-    {
-     "title": "'나의 유죄인간' 설인아 임시완, 이별 후 밀당 전개",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-23T13:14:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284367"
-    }
-   ]
-  },
-  {
-   "keyword": "신한은행 하나은행 4연승",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T13:09:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "9-0으로 문 열고 63-59로 닫았다... 신한은행, 하나은행 꺾고 4연승",
-     "press": "stnsports.co.kr",
-     "publishedAt": "2026-11-23T13:48:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/450/0000155642"
-    },
-    {
-     "title": "'이기는 습관' 장착한 신한은행, 뒤를 받치는 신신 듀오와 더 확장될 '최...",
-     "press": "rookie.co.kr",
-     "publishedAt": "2026-11-23T13:42:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/398/0000105700"
-    },
-    {
-     "title": "여자농구 신한은행, 하나은행 꺾고 4연승…1경기 차 단독 선두 질주",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-23T13:21:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/055/0001405230"
-    }
-   ]
-  },
-  {
-   "keyword": "공항",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T13:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“2공항 갈등조정협의회 부당성 바로 잡아야”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-23T13:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012299658?sid=102"
-    },
-    {
-     "title": "“통합신공항 국가가 맡아야”…시민추진단 촉구",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-23T13:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012299671?sid=102"
-    },
-    {
-     "title": "인천 영종구 공항소음대책지역 주민 대상 스마트팜 가을여행 운영",
-     "press": "kpenews.com",
-     "publishedAt": "2026-11-23T13:06:00.000Z",
-     "link": "https://kpenews.com/View.aspx?No=4325928"
-    }
-   ]
-  },
-  {
    "keyword": "리트 만점자 부정행위 수사",
    "sources": [
     "signal.bz"
@@ -268,43 +171,76 @@
    ]
   },
   {
-   "keyword": "독일 학교 폭탄 협박",
+   "keyword": "신한은행 하나은행 4연승",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-23T13:03:00.000Z",
+   "firstArticleAt": "2026-11-23T13:21:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "9-0으로 문 열고 63-59로 닫았다... 신한은행, 하나은행 꺾고 4연승",
+     "press": "stnsports.co.kr",
+     "publishedAt": "2026-11-23T13:48:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/450/0000155642"
+    },
+    {
+     "title": "'이기는 습관' 장착한 신한은행, 뒤를 받치는 신신 듀오와 더 확장될 '최...",
+     "press": "rookie.co.kr",
+     "publishedAt": "2026-11-23T13:42:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/398/0000105700"
+    },
+    {
+     "title": "여자농구 신한은행, 하나은행 꺾고 4연승…1경기 차 단독 선두 질주",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-23T13:21:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/055/0001405230"
+    }
+   ]
+  },
+  {
+   "keyword": "나의 유죄인간",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 2,
+   "firstArticleAt": "2026-11-23T13:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "독일 전역 학교에 폭파 위협 이메일...대피 소동",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-23T13:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437028?sid=104"
+     "title": "임시완, '나의 유죄인간' 11회 앞두고 설렘 가득 투샷",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-23T14:22:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284393"
     },
     {
-     "title": "\"죽음이 널 기다린다\"…독일 전역 학교에 폭탄 협박 이메일 무더기 발송",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-23T13:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005608581?sid=104"
+     "title": "'나의 유죄인간' 정한설, 종영 소감",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-23T14:20:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1195012"
     },
     {
-     "title": "“죽음이 너를 기다린다” 독일 전역 학교에 폭파 위협 이메일",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-23T13:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003567328?sid=104"
+     "title": "'나의 유죄인간' 설인아 임시완, 이별 후 밀당 전개",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-23T13:14:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284367"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1228,
-  "matched": 671,
-  "avgLeadMin": 568,
+  "flagged": 1226,
+  "matched": 669,
+  "avgLeadMin": 561,
   "recent": [
    {
     "keyword": "정부 증안펀드 가동 준비",
