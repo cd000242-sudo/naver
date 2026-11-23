@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T08:49:29.411Z",
+ "builtAt": "2026-11-23T08:59:32.111Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,66 +11,34 @@
  "measured": 24,
  "candidates": [
   {
-   "keyword": "롯데월드타워 담보 해지",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 77,
-   "recent20": 35,
-   "press": 77,
-   "firstArticleAt": "2026-11-23T08:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "롯데월드타워 담보 해지…롯데케미칼 EOD 상실 이후 2년만",
-     "press": "dealsite.co.kr",
-     "publishedAt": "2026-11-23T08:48:00.000Z",
-     "link": "https://dealsite.co.kr/articles/173344"
-    },
-    {
-     "title": "‘롯데 상징’ 월드타워, 2년 만에 담보 해지",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-23T08:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001206768?sid=101"
-    },
-    {
-     "title": "롯데지주, 롯데월드타워 담보 해지…재무 개선 속도 붙나",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-23T08:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003158511?sid=101"
-    }
-   ]
-  },
-  {
    "keyword": "강금실 국정원장 지명",
    "sources": [
     "nate"
    ],
    "articles90": 55,
-   "recent20": 15,
-   "press": 48,
-   "firstArticleAt": "2026-11-23T07:34:00.000Z",
+   "recent20": 18,
+   "press": 47,
+   "firstArticleAt": "2026-11-23T07:42:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "국정원장에 강금실 지명…외교·안보라인 전면 개편",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-23T08:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929088?sid=100"
+     "title": "李 대통령, 중폭 개각…국정원장에 강금실",
+     "press": "bigtanews.co.kr",
+     "publishedAt": "2026-11-23T08:56:00.000Z",
+     "link": "https://www.bigtanews.co.kr/article/view/big202611230023"
     },
     {
-     "title": "국정원장 후보 제주 강금실…행안부 장관 후보 한준호",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-23T08:48:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=848192"
+     "title": "신임 국정원장 강금실 … 외교·안보팀 전면개편",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-23T08:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005767872?sid=100"
     },
     {
-     "title": "5개 부처 개각…국정원장 강금실, 외교부장관 임웅순",
-     "press": "pointdaily.co.kr",
-     "publishedAt": "2026-11-23T08:48:00.000Z",
-     "link": "https://www.pointdaily.co.kr/news/articleView.html?idxno=327080"
+     "title": "강금실 등 개각 공방…與 \"전문성 살린 인사\" 野 \"코드·보은 인사\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T08:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009305706?sid=100"
     }
    ]
   },
@@ -79,30 +47,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 62,
-   "recent20": 10,
-   "press": 47,
-   "firstArticleAt": "2026-11-23T07:20:00.000Z",
+   "articles90": 58,
+   "recent20": 9,
+   "press": 43,
+   "firstArticleAt": "2026-11-23T07:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "진안군 내년 예산 6,109억 원 편성… 민생-미래성장 집중",
-     "press": "jjn.co.kr",
-     "publishedAt": "2026-11-23T08:48:00.000Z",
-     "link": "http://www.jjn.co.kr/news/articleView.html?idxno=1058037"
+     "title": "경기도, 내년 국비 매칭에 지방채 안쓴다...2462억 전액 자체사업 편성",
+     "press": "kgnews.co.kr",
+     "publishedAt": "2026-11-23T08:58:00.000Z",
+     "link": "https://www.kgnews.co.kr/news/article.html?no=920863"
     },
     {
-     "title": "부천시의회, 정례회 개회…부천시 예산안 2조 7천여억 원 제출",
-     "press": "news.lghellovision.net",
-     "publishedAt": "2026-11-23T08:46:00.000Z",
-     "link": "http://news.lghellovision.net/news/articleView.html?idxno=563423"
+     "title": "금산군의회, 25일부터 제344회 2차 정례회…예산안 심사",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-23T08:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014340648?sid=102"
     },
     {
-     "title": "사업 지연에 국비 반납까지…울산시의회, 예산 심사 송곳 점검",
-     "press": "iusm.co.kr",
-     "publishedAt": "2026-11-23T08:46:00.000Z",
-     "link": "https://www.iusm.co.kr/news/articleView.html?idxno=1070913"
+     "title": "\"민생경제 마중물이라더니\" 제주도 탐나는전 예산 6개월분 편성에 우려",
+     "press": "headlinejeju.co.kr",
+     "publishedAt": "2026-11-23T08:52:00.000Z",
+     "link": "https://www.headlinejeju.co.kr/news/articleView.html?idxno=602622"
     }
    ]
   },
@@ -111,62 +79,62 @@
    "sources": [
     "daum"
    ],
-   "articles90": 39,
-   "recent20": 17,
-   "press": 36,
+   "articles90": 45,
+   "recent20": 13,
+   "press": 41,
    "firstArticleAt": "2026-11-23T07:51:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "경찰, 음주운전 고경표 소환 통보",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-23T08:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004011228?sid=102"
+     "title": "[속보] 고경표, 결국 포토라인 서나…경찰, '만취 사고' 9일 만에 오늘(...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-23T08:58:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001409302"
     },
     {
-     "title": "[속보]'음주운전' 고경표, 오늘(23일) 오후 7시 경찰 출석…사고 9일 만",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-23T08:47:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004468922"
+     "title": "[속보] '음주운전' 고경표, 오후 7시 경찰 소환 조사",
+     "press": "cjb.co.kr",
+     "publishedAt": "2026-11-23T08:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/655/0000033674?sid=102"
     },
     {
-     "title": "경찰, '음주운전 피의자' 배우 고경표 오늘(23일) 오후 7시 출석 요구",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-23T08:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003158510?sid=102"
+     "title": "경찰, ‘음주운전 혐의’ 고경표 오후 7시 출석 통보",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-23T08:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004685284?sid=102"
     }
    ]
   },
   {
-   "keyword": "한준호, 행안부 장관 지명",
+   "keyword": "임웅순 외교부 장관 지명",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 36,
-   "recent20": 9,
-   "press": 30,
-   "firstArticleAt": "2026-11-23T07:20:00.000Z",
+   "articles90": 35,
+   "recent20": 7,
+   "press": 33,
+   "firstArticleAt": "2026-11-23T07:36:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "국정원장 후보 제주 강금실…행안부 장관 후보 한준호",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-23T08:48:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=848192"
+     "title": "李, 외교안보 라인 쇄신…첫 여성 국정원장에 강금실 지명",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-23T08:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006414359?sid=100"
     },
     {
-     "title": "경찰청·중수청 품은 '공룡 행안부' 이끄는 한준호…수사 중립성·지방...",
-     "press": "pointe.co.kr",
-     "publishedAt": "2026-11-23T08:48:00.000Z",
-     "link": "https://www.pointe.co.kr/news/articleView.html?idxno=88306"
+     "title": "국정원장 강금실...행안장관 후보 한준호 지명",
+     "press": "jeollailbo.com",
+     "publishedAt": "2026-11-23T08:52:00.000Z",
+     "link": "http://www.jeollailbo.com/news/articleView.html?idxno=817592"
     },
     {
-     "title": "한준호 행안장관 후보자 \"국민 삶 책임지는 실용행정 펼칠 것\"",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-23T08:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005608460?sid=100"
+     "title": "국정원장에 강금실 지명…외교·안보라인 전면 개편",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-23T08:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929088?sid=100"
     }
    ]
   },
@@ -175,13 +143,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 42,
-   "recent20": 4,
-   "press": 20,
-   "firstArticleAt": "2026-11-23T07:23:00.000Z",
+   "articles90": 29,
+   "recent20": 3,
+   "press": 21,
+   "firstArticleAt": "2026-11-23T07:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "여야, 경제6단체와 각각 간담회…“필요 입법·정책 지원” 한목소리",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-23T08:52:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1139419"
+    },
     {
      "title": "정점식, 경제6단체 만나 “李 정부, 온갖 규제와 세금으로 발목 잡아”",
      "press": "biz.heraldcorp.com",
@@ -193,12 +167,6 @@
      "press": "dnews.co.kr",
      "publishedAt": "2026-11-23T08:40:00.000Z",
      "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611231723501550254"
-    },
-    {
-     "title": "與, 경제6단체 만나 \"성장동력 키울 것\"…野 \"악법 폐지\"",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-23T08:38:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446090"
     }
    ]
   },
@@ -210,27 +178,27 @@
    "articles90": 17,
    "recent20": 7,
    "press": 17,
-   "firstArticleAt": "2026-11-23T07:23:00.000Z",
+   "firstArticleAt": "2026-11-23T07:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "李, 외교안보 라인 쇄신…첫 여성 국정원장에 강금실 지명",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-23T08:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006414359?sid=100"
+    },
+    {
+     "title": "李대통령, 외교안보라인 대폭 개편… 자주파 퇴진",
+     "press": "segye.com",
+     "publishedAt": "2026-11-23T08:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177443?sid=100"
+    },
     {
      "title": "이재명 대통령, 외교·안보라인 대폭 교체…국정원장 후보에 강금실 파...",
      "press": "geconomy.co.kr",
      "publishedAt": "2026-11-23T08:46:00.000Z",
      "link": "https://www.geconomy.co.kr/news/article.html?no=325965"
-    },
-    {
-     "title": "정동영 교체·외교안보라인 전면 교체…미국대사 회동 사흘 만에 인사 ...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-23T08:44:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629900"
-    },
-    {
-     "title": "野 “李대통령 개각, 레임덕·회전문·보은 인사…강금실 정보·방첩 경...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-23T08:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003702298?sid=100"
     }
    ]
   },
@@ -239,10 +207,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 7,
+   "articles90": 5,
    "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-23T07:26:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-23T07:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -267,15 +235,47 @@
    ]
   },
   {
+   "keyword": "국민의힘 법왜곡죄 고발",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-23T07:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "국민의힘, '계엄 2주년' 사과 대신 \"이진관 판사 고발\"",
+     "press": "pressian.com",
+     "publishedAt": "2026-11-23T08:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/002/0002467165?sid=100"
+    },
+    {
+     "title": "추경호 기소한 특검 고발 검토…‘소급처벌’ 쟁점",
+     "press": "kbmaeil.com",
+     "publishedAt": "2026-11-23T08:02:00.000Z",
+     "link": "https://www.kbmaeil.com/article/20261123500681"
+    },
+    {
+     "title": "국힘, 이진관 판사 ‘법왜곡죄’ 고발 추진…“한덕수 23년형 상급심서...",
+     "press": "donga.com",
+     "publishedAt": "2026-11-23T07:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764451?sid=100"
+    }
+   ]
+  },
+  {
    "keyword": "원자력",
    "sources": [
     "signal.bz",
     "google"
    ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T07:20:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T08:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -296,38 +296,6 @@
      "press": "tk.newdaily.co.kr",
      "publishedAt": "2026-11-23T08:16:00.000Z",
      "link": "https://tk.newdaily.co.kr/site/data/html/2026/11/23/2026112350334.html"
-    }
-   ]
-  },
-  {
-   "keyword": "휴림로봇",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T07:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오늘의 특징주] 휴림로봇·금양그린파워 상한가…삼성전기 로봇 공급·...",
-     "press": "ppss.kr",
-     "publishedAt": "2026-11-23T08:16:00.000Z",
-     "link": "https://www.ppss.kr/news/articleView.html?idxno=322489"
-    },
-    {
-     "title": "휴림로봇 주가 ‘불기둥’...한화로보틱스와 로봇 공급 계약 [오늘, 이 ...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-23T08:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/024/0000109840?sid=101"
-    },
-    {
-     "title": "휴림로봇, 증시 폭락에도 30% 치솟아…삼성전기 자동화 사업 진출",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-23T07:46:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=848174"
     }
    ]
   },
@@ -360,6 +328,38 @@
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-23T07:33:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002436884?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "휴림로봇",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T07:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오늘의 특징주] 휴림로봇·금양그린파워 상한가…삼성전기 로봇 공급·...",
+     "press": "ppss.kr",
+     "publishedAt": "2026-11-23T08:16:00.000Z",
+     "link": "https://www.ppss.kr/news/articleView.html?idxno=322489"
+    },
+    {
+     "title": "휴림로봇 주가 ‘불기둥’...한화로보틱스와 로봇 공급 계약 [오늘, 이 ...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-23T08:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/024/0000109840?sid=101"
+    },
+    {
+     "title": "휴림로봇, 증시 폭락에도 30% 치솟아…삼성전기 자동화 사업 진출",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-23T07:46:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=848174"
     }
    ]
   }
