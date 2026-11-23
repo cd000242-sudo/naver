@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T20:03:20.693Z",
+ "builtAt": "2026-11-23T20:13:24.096Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,30 +16,62 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 39,
-   "recent20": 12,
-   "press": 20,
-   "firstArticleAt": "2026-11-23T18:34:00.000Z",
+   "articles90": 41,
+   "recent20": 10,
+   "press": 21,
+   "firstArticleAt": "2026-11-23T18:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "잡스·올트먼처럼 돌아온 젠슨황…쫓겨난 창업자 또 귀환",
+     "title": "젠슨 황 복귀 배경은…트럼프 개입·주가 폭락·후임자 난항",
+     "press": "aitimes.com",
+     "publishedAt": "2026-11-23T20:08:00.000Z",
+     "link": "https://www.aitimes.com/news/articleView.html?idxno=217708"
+    },
+    {
+     "title": "‘젠슨황 복귀’ 엔비디아 장중 30%대 폭등… 나스닥은 7%대↑",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-23T20:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001887034?sid=104"
+    },
+    {
+     "title": "젠슨 황 CEO 복귀에 실리콘밸리·월가 환호…\"GPU 예수 부활\"",
      "press": "yna.co.kr",
-     "publishedAt": "2026-11-23T19:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016459345?sid=104"
+     "publishedAt": "2026-11-23T20:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016459349?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "강금실 국정원장 후보자",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T18:47:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李 파격… 국정원 ‘첫 여성 수장’ 강금실",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-23T20:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003702355?sid=100"
     },
     {
-     "title": "트럼프 “젠슨 황 복귀, 내 개입 컸다”…미 의회 여야 “안보 팔아넘겨...",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-23T19:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833622?sid=104"
+     "title": "‘李 대통령과 밀착’ 이때부터 였다…‘원조 친노’ 강금실의 귀환",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-23T20:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003567425?sid=100"
     },
     {
-     "title": "젠슨 황 CEO 복귀에 엔비디아 30% 급등…반도체·나스닥 동반↑",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-23T19:58:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261124500006"
+     "title": "국정원장 후보 강금실",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-23T18:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005445278?sid=100"
     }
    ]
   },
