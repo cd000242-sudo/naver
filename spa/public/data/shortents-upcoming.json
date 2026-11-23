@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T04:16:33.660Z",
+ "builtAt": "2026-11-23T04:26:39.388Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 7,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "코스피 매도 사이드카",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 45,
-   "recent20": 5,
-   "press": 40,
-   "firstArticleAt": "2026-11-23T02:47:00.000Z",
+   "articles90": 33,
+   "recent20": 3,
+   "press": 32,
+   "firstArticleAt": "2026-11-23T02:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "‘반토막’ 코스피…장중 4600선으로 내려앉아",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-23T04:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000368388?sid=115"
+    },
+    {
+     "title": "코스피, 4600선도 무너졌다…정부 증안펀드 가동 준비",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-23T04:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001165276?sid=101"
+    },
     {
      "title": "'검은 월요일' 현실로…코스피 5%대 급락에 매도 사이드카",
      "press": "news.tvchosun.com",
      "publishedAt": "2026-11-23T04:09:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/448/0000652801?sid=101"
-    },
-    {
-     "title": "'검은 월요일' 코스피 5%대 급락…매도 사이드카 발동",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-23T04:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004212742?sid=101"
-    },
-    {
-     "title": "코스피 5%대 급락에 매도 사이드카···외국인 매도 전환",
-     "press": "smartbizn.com",
-     "publishedAt": "2026-11-23T04:02:00.000Z",
-     "link": "https://www.smartbizn.com/news/articleView.html?idxno=160269"
     }
    ]
   },
@@ -47,45 +47,148 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 33,
-   "recent20": 4,
-   "press": 29,
-   "firstArticleAt": "2026-11-23T02:47:00.000Z",
+   "articles90": 27,
+   "recent20": 5,
+   "press": 25,
+   "firstArticleAt": "2026-11-23T02:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이형일 부총리 “증안펀드, 시장 상황 보고 결정”…추가 대책도 준비",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-23T04:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/117/0004127337?sid=103"
+     "title": "코스피, 4600선도 무너졌다…정부 증안펀드 가동 준비",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-23T04:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001165276?sid=101"
     },
     {
-     "title": "이형일 \"증안펀드 외 추가 조치 마련돼 있어…올해 3% 후반 성장 가능\"(...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-23T04:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014339697?sid=101"
+     "title": "이형일 부총리, \"증안기금, 비상계획(컨틴전시 플랜)에 따라 적절한 시...",
+     "press": "beyondpost.co.kr",
+     "publishedAt": "2026-11-23T04:18:00.000Z",
+     "link": "http://www.beyondpost.co.kr/view.php?ud=2026112313112072192aaae0046f_30"
     },
     {
-     "title": "靑, 사회적 약자 대상 범죄 대응 강화…증시 급락에 증안펀드 가동 예고",
-     "press": "viva100.com",
+     "title": "증시 급락에 정부·금융당국 긴급 대응…증안펀드 가동 준비 착수",
+     "press": "fetv.co.kr",
+     "publishedAt": "2026-11-23T04:16:00.000Z",
+     "link": "https://www.fetv.co.kr/news/articleView.html?idxno=314125"
+    }
+   ]
+  },
+  {
+   "keyword": "김종철 경찰청장 취임",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 16,
+   "recent20": 2,
+   "press": 13,
+   "firstArticleAt": "2026-11-23T02:57:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘신뢰받는 경찰 만들 것’ 김종철 경찰청장 취임",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-23T04:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001886830?sid=102"
+    },
+    {
+     "title": "'李 정부' 첫 경찰청장 김종철 취임…\"경찰 국민 신뢰받게 할 것\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-23T04:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000652805?sid=102"
+    },
+    {
+     "title": "23개월 만에 지휘 공백 해소···“관계성 범죄 특단 대책” 김종철 경...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-23T04:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484388?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "국가장학금",
+   "sources": [
+    "google"
+   ],
+   "articles90": 11,
+   "recent20": 3,
+   "press": 11,
+   "firstArticleAt": "2026-11-23T03:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "내년 1학기 국가장학금 24일 접수… 지방 국립대 전액 장학금도 신청해...",
+     "press": "news.unn.net",
+     "publishedAt": "2026-11-23T04:24:00.000Z",
+     "link": "https://news.unn.net/news/articleView.html?idxno=601191"
+    },
+    {
+     "title": "2027학년도 국가장학금 신청 24일 시작... 개편된 지원금액·소득구간은...",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-23T04:24:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1194885"
+    },
+    {
+     "title": "내년 1학기 국가장학금 신청하세요…내일부터 내년 1월7일까지",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-23T04:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004212745?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "국민의힘, 특검법 심판 청구",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 19,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-23T02:57:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "국민의힘 “조작기소 특검법은 무효”…조정식·서영교 권한쟁의심판 청...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-23T04:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003702134?sid=100"
+    },
+    {
+     "title": "국힘, '조작기소 특검법' 강행 처리 \"의회 민주주의 훼손\" 권한쟁의심판...",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-23T04:20:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544649"
+    },
+    {
+     "title": "국민의힘 “대법원장 탄핵은 이 대통령 방탄·탈옥용”",
+     "press": "naeil.com",
      "publishedAt": "2026-11-23T04:04:00.000Z",
-     "link": "https://www.viva100.com/article/20261123500677"
+     "link": "https://www.naeil.com/news/read/609705?ref=naver"
     }
    ]
   },
   {
    "keyword": "삼성물산",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 12,
-   "recent20": 3,
-   "press": 12,
-   "firstArticleAt": "2026-11-23T02:47:00.000Z",
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-23T03:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "삼성물산 건설부문 사장에 최영재 부사장 승진",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-23T04:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000967185?sid=101"
+    },
     {
      "title": "삼성물산 '최영재 건설부문장 사장 승진",
      "press": "newsworks.co.kr",
@@ -97,12 +200,102 @@
      "press": "naeil.com",
      "publishedAt": "2026-11-23T04:04:00.000Z",
      "link": "https://www.naeil.com/news/read/609714?ref=naver"
+    }
+   ]
+  },
+  {
+   "keyword": "합동 청사 방호훈련",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 24,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-23T03:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "서부지법 폭동 사태 재현…청사 방호훈련 실시 [현장 화보]",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-23T04:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484391?sid=102"
     },
     {
-     "title": "삼성물산 건설, 6년 만 수장 교체···'숫자·현장' 겸비한 50대 전진 배...",
-     "press": "newsfreezone.co.kr",
-     "publishedAt": "2026-11-23T04:00:00.000Z",
-     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=720761"
+     "title": "서부지법·마포경찰서, 합동 청사 방호 훈련",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T03:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009304853?sid=102"
+    },
+    {
+     "title": "서부지법 청사 방호훈련",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T03:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009304855?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "에이티즈 빌보드 1위",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-23T03:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "에이티즈, 美 ‘빌보드 200’ 통산 네 번째 1위..‘글로벌 최정상 그룹’...",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-23T04:08:00.000Z",
+     "link": "http://www.breaknews.com/1253034"
+    },
+    {
+     "title": "에이티즈, 통산 네 번째 '빌보드 200' 1위에 \"초심 잃지 않겠다\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-23T04:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014339678"
+    },
+    {
+     "title": "에이티즈 빌보드 네번째 1위에 \"벅차고 감사…초심 잃지 않겠다\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-23T03:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016458132?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "lpga",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-23T03:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "LPGA CME Group Championship",
+     "press": null,
+     "publishedAt": "2026-11-23T03:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/077/0007247011?sid=104"
+    },
+    {
+     "title": "김아림, LPGA 시즌 최종전 공동 7위로 마감",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-23T03:29:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/088/0001041723"
+    },
+    {
+     "title": "韓 여자골프, 2년 연속 LPGA 6승… 개인 타이틀 무관",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-23T03:28:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=886082"
     }
    ]
   },
@@ -141,9 +334,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1163,
-  "matched": 662,
-  "avgLeadMin": 612,
+  "flagged": 1158,
+  "matched": 660,
+  "avgLeadMin": 607,
   "recent": [
    {
     "keyword": "장윤기 부친 중징계",
