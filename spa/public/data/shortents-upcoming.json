@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T22:04:01.970Z",
+ "builtAt": "2026-11-23T22:14:05.102Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,46 +11,14 @@
  "measured": 22,
  "candidates": [
   {
-   "keyword": "엔비디아 폭등",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 73,
-   "recent20": 16,
-   "press": 53,
-   "firstArticleAt": "2026-11-23T21:00:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "젠슨 황 복귀에 월가 폭발⋯엔비디아 31.5% 급등 시총 9500억달러 증가",
-     "press": "autodaily.co.kr",
-     "publishedAt": "2026-11-23T22:02:00.000Z",
-     "link": "https://www.autodaily.co.kr/news/articleView.html?idxno=602359"
-    },
-    {
-     "title": "엔비디아 시총 하루 새 1천300조원↑...AI·반도체주 급등",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-23T22:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437103?sid=104"
-    },
-    {
-     "title": "[굿모닝 美 증시] 엔비디아발 반등에 '뉴욕증시 급등'…나스닥 6.51%↑",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-23T22:00:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261124010009048"
-    }
-   ]
-  },
-  {
    "keyword": "오늘 날씨 영하권",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
-   "recent20": 5,
-   "press": 13,
-   "firstArticleAt": "2026-11-23T20:36:00.000Z",
+   "articles90": 13,
+   "recent20": 3,
+   "press": 12,
+   "firstArticleAt": "2026-11-23T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -79,10 +47,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 3,
+   "articles90": 11,
+   "recent20": 1,
    "press": 11,
-   "firstArticleAt": "2026-11-23T20:39:00.000Z",
+   "firstArticleAt": "2026-11-23T20:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,34 +75,34 @@
    ]
   },
   {
-   "keyword": "치매",
+   "keyword": "ai 에이전트",
    "sources": [
     "google"
    ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-23T21:00:00.000Z",
+   "articles90": 9,
+   "recent20": 3,
+   "press": 9,
+   "firstArticleAt": "2026-11-23T20:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "아리바이오, 치매 치료제 78주 임상서도 효과…내년 하반기 FDA 허가 신...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-23T22:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004685373?sid=103"
+     "title": "‘자율제조’ CJ제일제당 vs ‘오픈이노베이션’ 풀무원…AI로 바뀌는 식...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-23T22:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/468/0001282972?sid=101"
     },
     {
-     "title": "‘깜빡깜빡’ 노화일까 치매의 신호일까⋯“조기 진단 따라 치료 선택지...",
-     "press": "kormedi.com",
-     "publishedAt": "2026-11-23T22:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/296/0000107721?sid=103"
+     "title": "\"코딩 없는 현업 직원들이 직접 AI 솔루션 94개 구현\"… GS샵, '현장 발(...",
+     "press": "popcornnews.net",
+     "publishedAt": "2026-11-23T21:56:00.000Z",
+     "link": "http://www.popcornnews.net/news/articleView.html?idxno=141181"
     },
     {
-     "title": "치매 환자 가족들 “기억 굿즈 팝니다”",
-     "press": "segye.com",
-     "publishedAt": "2026-11-23T21:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177576?sid=102"
+     "title": "AI 상담 서비스, 이동통신사와 네이버의 제약으로 궁금증 증폭",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-23T21:56:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886998"
     }
    ]
   },
@@ -169,13 +137,45 @@
      "link": "https://www.investchosun.com/site/data/html_dir/2026/11/23/2026112380131.html"
     }
    ]
+  },
+  {
+   "keyword": "이지훈·아야네, 둘째 딸 출산!",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T21:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이지훈♥아야네, 두 번의 아픔 이겨내고 둘째 딸 복복이 출산",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-23T22:13:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004127499"
+    },
+    {
+     "title": "이지훈♥아야네, 둘째 득녀",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-23T21:56:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611240021"
+    },
+    {
+     "title": "이지훈 둘째 딸 득녀, 아내 ♥아야네 얼굴 자랑 “지금 출산하신 분 맞...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-23T21:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190545"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1221,
-  "matched": 663,
-  "avgLeadMin": 598,
+  "flagged": 1220,
+  "matched": 660,
+  "avgLeadMin": 599,
   "recent": [
    {
     "keyword": "상철 방귀 계약결혼",
