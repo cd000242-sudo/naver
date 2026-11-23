@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T19:53:17.536Z",
+ "builtAt": "2026-11-23T20:03:20.693Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,35 +11,67 @@
  "measured": 27,
  "candidates": [
   {
-   "keyword": "젠슨 황 복귀",
+   "keyword": "젠슨 황 CEO 복귀",
    "sources": [
     "signal.bz",
-    "daum"
+    "nate"
    ],
-   "articles90": 38,
-   "recent20": 13,
+   "articles90": 39,
+   "recent20": 12,
    "press": 20,
-   "firstArticleAt": "2026-11-23T18:26:00.000Z",
+   "firstArticleAt": "2026-11-23T18:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[美증시 특징주] '대체불가' 젠슨 황 전격 복귀에 엔비디아 31% 대폭등",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-23T19:52:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1139437"
+     "title": "잡스·올트먼처럼 돌아온 젠슨황…쫓겨난 창업자 또 귀환",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-23T19:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016459345?sid=104"
     },
     {
-     "title": "젠슨 황, 사임 11일 만에 엔비디아 CEO 복귀…트럼프 직접 개입",
-     "press": "aitimes.com",
-     "publishedAt": "2026-11-23T19:50:00.000Z",
-     "link": "https://www.aitimes.com/news/articleView.html?idxno=217707"
+     "title": "트럼프 “젠슨 황 복귀, 내 개입 컸다”…미 의회 여야 “안보 팔아넘겨...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-23T19:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002833622?sid=104"
     },
     {
-     "title": "젠슨 황 복귀에 뉴욕증시 폭등…나스닥 7.3% 급등 출발",
-     "press": "goodnews1.com",
-     "publishedAt": "2026-11-23T19:48:00.000Z",
-     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466562"
+     "title": "젠슨 황 CEO 복귀에 엔비디아 30% 급등…반도체·나스닥 동반↑",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-23T19:58:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261124500006"
+    }
+   ]
+  },
+  {
+   "keyword": "선관위 직원 1명 구속",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T18:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'개표상황표 위조 혐의' 선관위 직원 1명 구속… 7명 영장 기각",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-23T20:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000967337?sid=102"
+    },
+    {
+     "title": "'투표록 위변조' 선관위 1명 구속...특검 \"납득 어려워\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-23T18:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437068?sid=102"
+    },
+    {
+     "title": "'선거 개표상황표 은닉' 선관위 직원 8명 중 1명 구속",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-23T18:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005846686?sid=102"
     }
    ]
   }
