@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T05:27:00.216Z",
+ "builtAt": "2026-11-23T05:37:03.585Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,52 +8,155 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "카카오",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 33,
-   "recent20": 14,
-   "press": 28,
-   "firstArticleAt": "2026-11-23T04:06:00.000Z",
+   "articles90": 36,
+   "recent20": 13,
+   "press": 32,
+   "firstArticleAt": "2026-11-23T04:12:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "카카오페이 \"네이버·토스 결제 단말기 경쟁 참전 안 한다\"",
-     "press": "newsway.co.kr",
-     "publishedAt": "2026-11-23T05:26:00.000Z",
-     "link": "https://www.newsway.co.kr/news/view?ud=2026112313582580749"
+     "title": "카카오, TPG 지분회수용 美 상장 거부에 국제중재…계약 의무 공방",
+     "press": "sateconomy.co.kr",
+     "publishedAt": "2026-11-23T05:36:00.000Z",
+     "link": "https://sateconomy.co.kr/news/view/1065590243648484"
     },
     {
-     "title": "[현장] 카카오페이, 생활금융 데이터로 AI 에이전트 고도화…초개인화 ...",
-     "press": "thevaluenews.co.kr",
-     "publishedAt": "2026-11-23T05:24:00.000Z",
-     "link": "http://www.thevaluenews.co.kr/news/view.php?idx=203542"
+     "title": "카카오페이, 데이터 발상의 전환…더 많이 모으기보다 '오래' 붙잡기",
+     "press": "bloter.net",
+     "publishedAt": "2026-11-23T05:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/293/0000093676?sid=101"
     },
     {
-     "title": "국내 안착 ‘도깨비의세계’, 내년 글로벌 출격…카카오게임즈, 장기 흥...",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-23T05:22:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1139257"
+     "title": "카카오, AI 경진대회서 인재 100명 실력 겨뤄... 대상에 이선민씨",
+     "press": "issuenbiz.com",
+     "publishedAt": "2026-11-23T05:36:00.000Z",
+     "link": "http://www.issuenbiz.com/news/articleView.html?idxno=81905"
     }
    ]
   },
   {
-   "keyword": "생계급여 기준 35%",
+   "keyword": "신세계백화점 폭발물 협박",
    "sources": [
     "daum"
    ],
-   "articles90": 30,
-   "recent20": 7,
-   "press": 27,
+   "articles90": 29,
+   "recent20": 4,
+   "press": 24,
+   "firstArticleAt": "2026-11-23T04:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "신세계백화점에 5000만원 요구한 폭파 협박…전국 13곳 긴급 수색",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-23T05:36:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=848140"
+    },
+    {
+     "title": "신세계百 폭발물 협박…허위신고 무게·정상영업",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-23T05:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000545308?sid=104"
+    },
+    {
+     "title": "“신세계백화점에 폭탄 설치했다”…부산 센텀시티점도 수색, 폭발물 미...",
+     "press": "busan.com",
+     "publishedAt": "2026-11-23T05:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001408501?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "유족 경찰 출석 확인",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 25,
+   "recent20": 3,
+   "press": 22,
+   "firstArticleAt": "2026-11-23T04:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[사건현장] 고 이진우 씨 유족 경찰 출석…수사 본격화",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-23T05:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929004?sid=102"
+    },
+    {
+     "title": "'리트 만점자' 유족 경찰 출석…수능 과외교사도 이번주 조사",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-23T05:31:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261123000803"
+    },
+    {
+     "title": "[자막뉴스] 고 이진우 유족 경찰 출석해 면담…'증거물 확보' 동의할까...",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-23T05:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001405101?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "삼성증권 8241명 정보 유출",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 18,
+   "recent20": 5,
+   "press": 18,
+   "firstArticleAt": "2026-11-23T04:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "삼성증권 해킹 8241명 개인정보 유출",
+     "press": "thereport.co.kr",
+     "publishedAt": "2026-11-23T05:36:00.000Z",
+     "link": "https://www.thereport.co.kr/news/articleView.html?idxno=93629"
+    },
+    {
+     "title": "고객정보 유출에 대표이사 직접 사과... 삼성증권, 보안 강화·배상 방침",
+     "press": "thefirstmedia.net",
+     "publishedAt": "2026-11-23T05:30:00.000Z",
+     "link": "http://www.thefirstmedia.net/news/articleView.html?idxno=214393"
+    },
+    {
+     "title": "삼성증권, 외부 해킹으로 8241명 개인정보 유출",
+     "press": "consumernews.co.kr",
+     "publishedAt": "2026-11-23T05:30:00.000Z",
+     "link": "http://www.consumernews.co.kr/news/articleView.html?idxno=768885"
+    }
+   ]
+  },
+  {
+   "keyword": "생계급여 기준 상향",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 19,
+   "recent20": 4,
+   "press": 18,
    "firstArticleAt": "2026-11-23T04:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "2030년까지 생계급여 기준 35%로 확대…주거급여도 50%로 상향",
+     "press": "iminju.net",
+     "publishedAt": "2026-11-23T05:30:00.000Z",
+     "link": "http://www.iminju.net/news/articleView.html?idxno=172893"
+    },
     {
      "title": "정부, 제4차 기초생활보장 종합계획 발표…생계급여 확대·사각지대 해...",
      "press": "news.tf.co.kr",
@@ -65,140 +168,70 @@
      "press": "kyeonggi.com",
      "publishedAt": "2026-11-23T05:21:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/666/0000133342?sid=102"
-    },
-    {
-     "title": "[그래픽] 생계급여 기준 2030년 35%로 인상…4인 가구 최대 242만원",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-23T05:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014339908?sid=102"
     }
    ]
   },
   {
-   "keyword": "신세계백화점 폭발물 협박",
+   "keyword": "기초생활보장 종합계획",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 28,
-   "recent20": 9,
-   "press": 23,
-   "firstArticleAt": "2026-11-23T04:06:00.000Z",
+   "articles90": 21,
+   "recent20": 11,
+   "press": 8,
+   "firstArticleAt": "2026-11-23T04:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“신세계백화점에 폭탄 설치했다”…부산 센텀시티점도 수색, 폭발물 미...",
-     "press": "busan.com",
-     "publishedAt": "2026-11-23T05:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001408501?sid=102"
+     "title": "정부, 제4차 기초생활보장 종합계획 브리핑",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-23T05:26:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261123000799"
     },
     {
-     "title": "신세계백화점 폭발물 협박에 경찰 수색…5000만원 요구",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-23T05:20:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2022175"
+     "title": "제4차 기초생활보장 종합계획 브리핑하는 정은경 보건복지부 장관",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-23T05:26:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261123000800"
     },
     {
-     "title": "'신세계백화점 폭탄 설치' 협박… 부산 센텀시티점 1시간 수색 종료",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-23T05:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928996?sid=102"
+     "title": "제4차 기초생활보장 종합계획 발표하는 정은경 장관",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-23T05:26:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261123000797"
     }
    ]
   },
   {
-   "keyword": "유족 경찰 출석 확인",
+   "keyword": "선관위 직원 영장심사",
    "sources": [
-    "nate"
-   ],
-   "articles90": 24,
-   "recent20": 4,
-   "press": 22,
-   "firstArticleAt": "2026-11-23T03:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이진우 유족 경찰 출석…사망 후에도 수사 계속하는 이유, 휴대전화·노...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-23T05:16:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283826"
-    },
-    {
-     "title": "고 이진우 씨 유족, 오늘 경찰 출석…증거 제출 협조 논의",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-23T05:14:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4120211"
-    },
-    {
-     "title": "고 이진우 씨 사건, 유족 증거 제출로 수사 급물살? 네티즌들 주목",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-23T05:14:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886879"
-    }
-   ]
-  },
-  {
-   "keyword": "삼성증권 8241명 정보 유출",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 16,
-   "recent20": 2,
-   "press": 16,
-   "firstArticleAt": "2026-11-23T04:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "삼성증권 민원 첨부파일 유출···고객 8241명 정보 빠져나가",
-     "press": "womaneconomy.co.kr",
-     "publishedAt": "2026-11-23T05:22:00.000Z",
-     "link": "https://www.womaneconomy.co.kr/news/articleView.html?idxno=261472"
-    },
-    {
-     "title": "삼성증권도 뚫렸다…한 달 새 증권사 4곳 침해 사고",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-23T05:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394613?sid=101"
-    },
-    {
-     "title": "삼성증권 고객 8241명 해킹 피해…계좌번호·운전면허번호까지 털려",
-     "press": "digitalchosun.dizzo.com",
-     "publishedAt": "2026-11-23T05:06:00.000Z",
-     "link": "http://digitalchosun.dizzo.com/site/data/html_dir/2026/11/23/2026112380096.html"
-    }
-   ]
-  },
-  {
-   "keyword": "배현성 차강윤 박윤호, 대리수능 도전!",
-   "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-23T04:00:00.000Z",
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-23T04:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "수능 부정행위 논란 속 '대리수능' 공개…박소연 감독 \"공정성 무겁게 ...",
-     "press": "starnewsk.com",
-     "publishedAt": "2026-11-23T05:18:00.000Z",
-     "link": "http://www.starnewsk.com/news/articleView.html?idxno=61280"
+     "title": "선관위 특검 '1호 영장 청구' 선관위 직원 8명 구속 갈림길",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-23T05:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005445003?sid=102"
     },
     {
-     "title": "\"수능 공정성 이슈 무겁게 느껴…'대리수능' 메시지에 집중하길\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-23T04:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016458209?sid=103"
+     "title": "'투표율 허위입력' 선관위직원 8명 구속심사",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-23T05:20:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2022181"
     },
     {
-     "title": "'AI 부정행위' 이슈 속 공개…'대리수능'이 전하는 선택의 대가 [현장]",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-23T04:24:00.000Z",
-     "link": "https://m.entertain.naver.com/article/119/0003158332"
+     "title": "특검 출범 후 첫 승부수, 선관위 직원 8명 구속 결정의 날",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-23T05:16:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886884"
     }
    ]
   },
@@ -207,10 +240,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 8,
+   "articles90": 7,
    "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-23T04:02:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-23T04:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -235,81 +268,24 @@
    ]
   },
   {
-   "keyword": "국힘, 헌재 특검법 심판 청구",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 3,
-   "press": 7,
-   "firstArticleAt": "2026-11-23T04:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "국힘, 조작기소특검법 헌재에 권한쟁의심판 청구",
-     "press": "kihoilbo.co.kr",
-     "publishedAt": "2026-11-23T05:24:00.000Z",
-     "link": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3041814"
-    },
-    {
-     "title": "국힘, '조작기소 특검법' 헌재에 권한쟁의심판 청구…\"심의·표결권 침...",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-23T05:18:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904036"
-    },
-    {
-     "title": "국힘, 與 조작기소 특검법 처리 헌재 권한쟁의심판 청구",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-23T05:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006414158?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "선관위 직원 영장심사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 4,
-   "press": 6,
-   "firstArticleAt": "2026-11-23T04:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'투표율 허위입력' 선관위직원 8명 구속심사",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-23T05:20:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2022181"
-    },
-    {
-     "title": "특검 출범 후 첫 승부수, 선관위 직원 8명 구속 결정의 날",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-23T05:16:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886884"
-    },
-    {
-     "title": "선관위 직원 8명 구속 심사...'투표록 조작' 등 혐의",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-23T05:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436778?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "주차",
    "sources": [
+    "signal.bz",
     "google"
    ],
    "articles90": 5,
-   "recent20": 4,
+   "recent20": 3,
    "press": 5,
-   "firstArticleAt": "2026-11-23T04:36:00.000Z",
+   "firstArticleAt": "2026-11-23T05:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "공지·주차 예약 쓰던 아파트 앱에서 수전·주방후드 교체까지, 단지 앱...",
+     "press": "platum.kr",
+     "publishedAt": "2026-11-23T05:28:00.000Z",
+     "link": "https://platum.kr/archives/299254"
+    },
     {
      "title": "최찬규 안산시의원 “지역주민 만성 주차난 대책 마련해야”",
      "press": "kyeonggi.com",
@@ -321,12 +297,39 @@
      "press": "shinailbo.co.kr",
      "publishedAt": "2026-11-23T05:26:00.000Z",
      "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086634"
+    }
+   ]
+  },
+  {
+   "keyword": "배현성 차강윤 박윤호, 대리수능 도전!",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-23T04:09:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "수능 부정행위 논란 속 '대리수능' 공개…박소연 감독 \"공정성 무겁게 ...",
+     "press": "starnewsk.com",
+     "publishedAt": "2026-11-23T05:18:00.000Z",
+     "link": "http://www.starnewsk.com/news/articleView.html?idxno=61280"
     },
     {
-     "title": "“전동킥보드 안전하게 타고 세우려면”…도로·주차 규제 해법 분분",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-23T05:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003488619?sid=101"
+     "title": "\"수능 공정성 이슈 무겁게 느껴…'대리수능' 메시지에 집중하길\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-23T04:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016458209?sid=103"
+    },
+    {
+     "title": "'AI 부정행위' 이슈 속 공개…'대리수능'이 전하는 선택의 대가 [현장]",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-23T04:24:00.000Z",
+     "link": "https://m.entertain.naver.com/article/119/0003158332"
     }
    ]
   },
@@ -337,7 +340,7 @@
     "nate"
    ],
    "articles90": 5,
-   "recent20": 2,
+   "recent20": 1,
    "press": 5,
    "firstArticleAt": "2026-11-23T04:21:00.000Z",
    "exclusive": false,
@@ -364,76 +367,100 @@
    ]
   },
   {
-   "keyword": "김종철 경찰청장 국민참여단 회의",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 18,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-23T04:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김종철 경찰청장, 경챁정책 국민참여단 회의",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-23T04:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014339784?sid=100"
-    },
-    {
-     "title": "김종철 신임 경찰청장, 취임 첫 일정 '경찰정책 국민참여단 회의'",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T04:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009304943?sid=102"
-    },
-    {
-     "title": "警, 김종철 경찰청장 취임… 2년 가까운 공백 끝에 수사개혁 시험대",
-     "press": "mediawatch.kr",
-     "publishedAt": "2026-11-23T04:38:00.000Z",
-     "link": "https://www.mediawatch.kr/news/article.html?no=261837"
-    }
-   ]
-  },
-  {
    "keyword": "원자력 추진",
    "sources": [
     "google"
    ],
-   "articles90": 4,
-   "recent20": 1,
+   "articles90": 5,
+   "recent20": 3,
    "press": 4,
-   "firstArticleAt": "2026-11-23T04:02:00.000Z",
+   "firstArticleAt": "2026-11-23T04:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "과기정통부, ‘AI 과학자’ 개발 추진…연내 통합플랫폼 시범 운영",
+     "press": "smarttoday.co.kr",
+     "publishedAt": "2026-11-23T05:32:00.000Z",
+     "link": "https://www.smarttoday.co.kr/ko-kr/articles/113952"
+    },
+    {
+     "title": "과기정통부, 'AI 과학자' 개발 추진…국가 연구 역량 결집",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-23T05:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000554613?sid=105"
+    },
     {
      "title": "팀코리아 “체코 원전 차질 없이 추진…적기 준공 약속 지킬 것”",
      "press": "smarttoday.co.kr",
      "publishedAt": "2026-11-23T05:20:00.000Z",
      "link": "https://www.smarttoday.co.kr/ko-kr/articles/113972"
+    }
+   ]
+  },
+  {
+   "keyword": "최동석 필사",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-23T04:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘박지윤과 이혼’ 최동석, 의미심장 SNS..“이미 절반은 이긴 셈. 포기...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-23T05:33:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004468874"
     },
     {
-     "title": "원전 공론화 원자력 측 전문위원, 2050년 비중 전망 요구하며 참여 중단",
-     "press": "e2news.com",
-     "publishedAt": "2026-11-23T04:38:00.000Z",
-     "link": "http://www.e2news.com/news/articleView.html?idxno=336391"
+     "title": "최동석, 이혼 갈등 속 필사 의미심장…박지윤 '뒷담화' 주장도 파장",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-23T04:47:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014339804"
     },
     {
-     "title": "한수원·팀코리아 \"체코 원전 차질 없이 추진\"",
-     "press": "kbsm.net",
-     "publishedAt": "2026-11-23T04:34:00.000Z",
-     "link": "https://www.kbsm.net/news/view.php?idx=542911"
+     "title": "최동석, 박지윤과 이혼 갈등 속 남긴 글…\"이미 절반은 이긴 셈\"",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-23T04:46:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004127343"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1167,
-  "matched": 656,
-  "avgLeadMin": 609,
+  "flagged": 1168,
+  "matched": 660,
+  "avgLeadMin": 607,
   "recent": [
+   {
+    "keyword": "조권 구용규 루머 의식",
+    "hitKeyword": "조권 구용규 루머",
+    "hitAt": "2026-11-23T14:30:00+09:00",
+    "leadMin": 891
+   },
+   {
+    "keyword": "구혜리 박강균 결혼",
+    "hitKeyword": "박강균 구혜리 웨딩",
+    "hitAt": "2026-11-23T14:30:00+09:00",
+    "leadMin": 207
+   },
+   {
+    "keyword": "박강균 구혜리 3월 결혼",
+    "hitKeyword": "박강균 구혜리 웨딩",
+    "hitAt": "2026-11-23T14:30:00+09:00",
+    "leadMin": 33
+   },
+   {
+    "keyword": "구혜리 3월 결혼",
+    "hitKeyword": "박강균 구혜리 웨딩",
+    "hitAt": "2026-11-23T14:30:00+09:00",
+    "leadMin": 23
+   },
    {
     "keyword": "노시환",
     "hitKeyword": "노시환 MLB 포스팅",
@@ -469,30 +496,6 @@
     "hitKeyword": "100일의 거짓말 정체 공개",
     "hitAt": "2026-11-23T13:00:00+09:00",
     "leadMin": 17
-   },
-   {
-    "keyword": "18득점 시즌 현대건설",
-    "hitKeyword": "배유나 현대건설 활약",
-    "hitAt": "2026-11-23T12:30:00+09:00",
-    "leadMin": 1103
-   },
-   {
-    "keyword": "블리츠웨이 엔터테인먼트",
-    "hitKeyword": "정승환 블리츠웨이",
-    "hitAt": "2026-11-23T12:30:00+09:00",
-    "leadMin": 87
-   },
-   {
-    "keyword": "김신영, 정오의 희망곡 하차",
-    "hitKeyword": "김신영 정오의희망곡 하차",
-    "hitAt": "2026-11-23T12:30:00+09:00",
-    "leadMin": 27
-   },
-   {
-    "keyword": "드파르디외 우엘벡 성폭행",
-    "hitKeyword": "의붓딸 성폭행 계부 처벌",
-    "hitAt": "2026-11-23T12:00:00+09:00",
-    "leadMin": 1103
    }
   ]
  }
