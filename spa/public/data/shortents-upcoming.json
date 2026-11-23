@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T18:12:42.857Z",
+ "builtAt": "2026-11-23T18:22:47.076Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -13,33 +13,32 @@
   {
    "keyword": "젠슨 황 엔비디아 복귀",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 33,
-   "recent20": 7,
-   "press": 21,
-   "firstArticleAt": "2026-11-23T16:44:00.000Z",
-   "exclusive": true,
+   "articles90": 31,
+   "recent20": 6,
+   "press": 17,
+   "firstArticleAt": "2026-11-23T16:54:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "엔비디아 CEO 후보로 거론됐던 하스, 2033년까지 Arm CEO로",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-23T18:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016459338?sid=104"
+     "title": "젠슨 황 복귀 환영한 트럼프, '피습 사건' 패러디 사진으로 축하",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T18:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009305925?sid=104"
     },
     {
-     "title": "가뭄에 단비 된 '젠슨 황 복귀'...추세전환은 '글쎄'",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-23T18:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005608595?sid=101"
+     "title": "블룸버그 \"엔비디아 이사회, 경영진과 상의 없이 젠슨 황 복귀 결정\"",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-23T18:14:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261124000009"
     },
     {
-     "title": "젠슨 황, 사임 11일 만에 전격 복귀…엔비디아 지휘봉 다시 잡았다",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-23T18:04:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101864"
+     "title": "\"젠슨 황 엔비디아 CEO, 내달 3일 미 상원 청문회 출석\"",
+     "press": "zdnet.co.kr",
+     "publishedAt": "2026-11-23T18:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/092/0002446566?sid=105"
     }
    ]
   },
@@ -48,10 +47,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 9,
+   "articles90": 7,
    "recent20": 0,
    "press": 7,
-   "firstArticleAt": "2026-11-23T16:44:00.000Z",
+   "firstArticleAt": "2026-11-23T17:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
