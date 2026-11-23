@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T12:50:50.185Z",
+ "builtAt": "2026-11-23T13:00:53.374Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,7 +16,7 @@
     "nate"
    ],
    "articles90": 25,
-   "recent20": 6,
+   "recent20": 1,
    "press": 20,
    "firstArticleAt": "2026-11-23T11:52:00.000Z",
    "exclusive": true,
@@ -43,14 +43,78 @@
    ]
   },
   {
-   "keyword": "강금실 국정원장 후보자",
+   "keyword": "노태우 비자금 증인신문",
    "sources": [
-    "daum"
+    "nate"
    ],
    "articles90": 11,
    "recent20": 2,
    "press": 11,
-   "firstArticleAt": "2026-11-23T11:21:00.000Z",
+   "firstArticleAt": "2026-11-23T11:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "공소청, '노태우 비자금 의혹' 노소영 관장 공판 전 증인신문 청구",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-23T12:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537511?sid=102"
+    },
+    {
+     "title": "공소청, 노소영 증인신문 청구…'노태우 비자금 의혹' 수사",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-23T12:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979547?sid=102"
+    },
+    {
+     "title": "‘노태우 비자금 의혹’ 공소청, 노소영 증인신문 청구",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-23T12:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001206784?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "수능 부정신고 5억 포상",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 10,
+   "recent20": 3,
+   "press": 10,
+   "firstArticleAt": "2026-11-23T11:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "수능 부정행위 신고 포상금 1억→5억원 상향…인원수 따라 가산 지급",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-23T12:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000133461?sid=102"
+    },
+    {
+     "title": "\"수능 부정행위 신고하면 최대 5억\"...자수해도 포상금 지급",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-23T12:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000122036?sid=102"
+    },
+    {
+     "title": "권익위 “수능 부정행위 신고 포상금 건당 최대 5억원”",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-23T12:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004011243?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "강금실 국정원장 후보자",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 10,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-23T11:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -67,106 +131,10 @@
      "link": "https://www.ulsanpress.net/news/articleView.html?idxno=587435"
     },
     {
-     "title": "국정원장 강금실·외교 임웅순·통일 홍익표",
+     "title": "李 대통령, 중폭 개각 단행…국정원장 강금실·외교 임웅순·통일 홍익...",
      "press": "idaegu.co.kr",
      "publishedAt": "2026-11-23T12:24:00.000Z",
      "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=566227"
-    }
-   ]
-  },
-  {
-   "keyword": "노태우 비자금 노소영 증인신문",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 10,
-   "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-23T11:29:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘노태우 비자금 의혹’ 공소청, 노소영 증인신문 청구",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-23T12:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001206784?sid=102"
-    },
-    {
-     "title": "공소청, '노태우 비자금 의혹' 노소영 공판 전 증인신문 청구",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-23T12:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005846664?sid=102"
-    },
-    {
-     "title": "공소청, '노태우 비자금' 수사 노소영 증인신문 청구…출석은 불발",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-23T12:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005445251?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "이지훈♥아야네, 둘째 출산 소식",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-23T12:05:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“세상에 와줘 고마워” 이지훈♥아야네, 두 차례 유산 아픔 딛고 오늘...",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-23T12:49:00.000Z",
-     "link": "https://m.entertain.naver.com/article/396/0000761743"
-    },
-    {
-     "title": "이지훈♥아야네, 유산 아픔 딛고 둘째 딸 출산.. \"이런 순간이 또 있을...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-23T12:44:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409329"
-    },
-    {
-     "title": "이지훈♥아야네, 둘째 품에 안았다…\"또 하나의 기적, 평생 사랑할게\"",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-23T12:36:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005644310"
-    }
-   ]
-  },
-  {
-   "keyword": "수능 부정신고 5억 포상",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-23T11:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"수능 부정행위 신고하면 최대 5억\"...자수해도 포상금 지급",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-23T12:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000122036?sid=102"
-    },
-    {
-     "title": "권익위 “수능 부정행위 신고 포상금 건당 최대 5억원”",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-23T12:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004011243?sid=102"
-    },
-    {
-     "title": "[따져보니] 커닝 10건 신고하면…포상금 50억 받는다?",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-23T12:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652913?sid=102"
     }
    ]
   },
@@ -175,13 +143,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 8,
-   "recent20": 0,
+   "articles90": 9,
+   "recent20": 1,
    "press": 8,
    "firstArticleAt": "2026-11-23T11:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "박남춘 사장 “인천공항, 메가 허브공항 실현”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-23T12:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012299591?sid=102"
+    },
     {
      "title": "[임재현 칼럼] 경북 원전과 통합신공항, 위협 드론은 누가 막는가",
      "press": "ksmnews.co.kr",
@@ -193,44 +167,6 @@
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-23T12:27:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012299548?sid=104"
-    },
-    {
-     "title": "'셋째 임신' 박슬기, 7살 딸 어학연수 보냈다...공항서 애틋한 이별",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-23T12:18:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004468944"
-    }
-   ]
-  },
-  {
-   "keyword": "한준호 행안부 장관 후보",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-23T11:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "전북 출신 한준호, 행안부 장관 후보 지명···조현·정동영 교체",
-     "press": "jtv.co.kr",
-     "publishedAt": "2026-11-23T12:30:00.000Z",
-     "link": "https://jtv.co.kr/news/article.php?id=72272"
-    },
-    {
-     "title": "한준호 '행안부 장관' 지명자 \"李가 맡긴 소임의 무게 새기겠다\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-23T12:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652906?sid=100"
-    },
-    {
-     "title": "한준호 행안부 장관 내정자, 이 대통령 대선 후보 때부터 수행실장 ‘밀...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-23T12:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484563?sid=100"
     }
    ]
   },
@@ -241,7 +177,7 @@
     "google"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-23T12:23:00.000Z",
    "exclusive": false,
@@ -264,38 +200,6 @@
      "press": "idaegu.co.kr",
      "publishedAt": "2026-11-23T12:24:00.000Z",
      "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=566223"
-    }
-   ]
-  },
-  {
-   "keyword": "박준현 서면사과 취소",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T11:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "키움 박준현, 학폭 서면사과 취소 소송 1심 승소…법원 \"증거 부족\"",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-23T12:46:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/018/0006414397"
-    },
-    {
-     "title": "'학폭' 꼬리표 떼나, 키움 박준현 '서면 사과' 취소 행정 소송 1심 승소...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-23T12:02:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/117/0004127446"
-    },
-    {
-     "title": "'초대형 반전' KBO 전체 1순위 박준현, 학폭 논란 뒤집혔다...법원서 1심...",
-     "press": "sportalkorea.com",
-     "publishedAt": "2026-11-23T11:41:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/139/0002256458"
     }
    ]
   },
@@ -332,105 +236,138 @@
    ]
   },
   {
-   "keyword": "딜라이트",
+   "keyword": "한준호 행안장관 후보",
    "sources": [
-    "google"
+    "daum"
    ],
    "articles90": 4,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T11:23:00.000Z",
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-23T11:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[오피셜] DK, 마지막 퍼즐에 '딜라이트' 유환중, 5인 완성",
-     "press": "inven.co.kr",
-     "publishedAt": "2026-11-23T12:35:00.000Z",
-     "link": "https://m.sports.naver.com/esports/article/442/0000199165"
+     "title": "국정원장 후보자에 강금실 전 장관…외교·행안 등 중폭 개각",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-23T12:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012299531?sid=100"
     },
     {
-     "title": "'도카쇼스딜 렛츠고'....디플러스 기아, 딜라이트 영입과 함께 27시즌 로...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-23T12:33:00.000Z",
-     "link": "https://m.sports.naver.com/esports/article/311/0002083302"
+     "title": "靑, 한준호에 “차세대 리더”…李 수행실장 출신, 행안장관 후보로",
+     "press": "donga.com",
+     "publishedAt": "2026-11-23T11:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764496?sid=100"
     },
     {
-     "title": "딜라이트' 유환중, '스매쉬'와 호흡 맞춘다… 디플러스 기아로 이적",
-     "press": "dailyesports.com",
-     "publishedAt": "2026-11-23T11:51:00.000Z",
-     "link": "https://m.sports.naver.com/esports/article/347/0000196781"
+     "title": "[2차 개각 후보자 5인 프로필] 강금실·임웅순·홍익표·한준호·강유정...",
+     "press": "news-s.kr",
+     "publishedAt": "2026-11-23T11:42:00.000Z",
+     "link": "https://news-s.kr/view.html?id=L261123203129f83d"
     }
    ]
   },
   {
-   "keyword": "이진관 판사",
+   "keyword": "리비아 러시아 군함 피격",
    "sources": [
-    "google"
+    "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 0,
+   "recent20": 2,
    "press": 3,
-   "firstArticleAt": "2026-11-23T11:22:00.000Z",
+   "firstArticleAt": "2026-11-23T12:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "홍준표, 국민의힘 향해 \"위헌적 법왜곡죄로 판사 고발 말이 되나? 계엄...",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-23T12:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001041864?sid=100"
+     "title": "지중해까지 넘본다…우크라, 리비아 정박 러 군함 타격",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-23T12:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012299598?sid=104"
     },
     {
-     "title": "국힘, ‘한덕수 1심’ 이진관 판사 법왜곡죄 고발 추진",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-23T11:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394660?sid=100"
+     "title": "발트해 이어 리비아 앞바다까지…러 선박 잇단 피격",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-23T12:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000652926?sid=004"
     },
     {
-     "title": "홍준표 “기괴한 법률 수단 삼아”...‘이진관 판사 고발’ 국민의힘 비...",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-23T11:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000133458?sid=100"
+     "title": "우크라, 리비아서 러 군함 격침… 전선 확대되나",
+     "press": "segye.com",
+     "publishedAt": "2026-11-23T12:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177507?sid=104"
     }
    ]
   },
   {
-   "keyword": "작전 지시하는 감독",
+   "keyword": "박준현 서면사과 취소",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T11:41:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "키움 박준현, 학폭 서면사과 취소 소송 1심 승소…법원 \"증거 부족\"",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-23T12:46:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/018/0006414397"
+    },
+    {
+     "title": "'학폭' 꼬리표 떼나, 키움 박준현 '서면 사과' 취소 행정 소송 1심 승소...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-23T12:02:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/117/0004127446"
+    },
+    {
+     "title": "'초대형 반전' KBO 전체 1순위 박준현, 학폭 논란 뒤집혔다...법원서 1심...",
+     "press": "sportalkorea.com",
+     "publishedAt": "2026-11-23T11:41:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/139/0002256458"
+    }
+   ]
+  },
+  {
+   "keyword": "이지훈♥아야네, 둘째 딸 출산 축하!",
    "sources": [
     "nate"
    ],
    "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-23T11:44:00.000Z",
-   "exclusive": false,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T12:05:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "작전 지시하는 이상범 하나은행 감독",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-23T12:08:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/001/0016459274"
+     "title": "“세상에 와줘 고마워” 이지훈♥아야네, 두 차례 유산 아픔 딛고 오늘...",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-23T12:49:00.000Z",
+     "link": "https://m.entertain.naver.com/article/396/0000761743"
     },
     {
-     "title": "작전 지시하는 최윤아 신한은행 감독",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-23T12:08:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/001/0016459276"
+     "title": "이지훈♥아야네, 둘째 품에 안았다…\"또 하나의 기적, 평생 사랑할게\"",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-23T12:36:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005644310"
     },
     {
-     "title": "작전 지시하는 최윤아 감독",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T11:44:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/421/0009305858"
+     "title": "[공식] 이지훈♥아야네, 둘째 '복복이' 득녀…\"또 하나의 기적을 만났습...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-23T12:05:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004127448"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1222,
+  "flagged": 1224,
   "matched": 663,
   "avgLeadMin": 570,
   "recent": [
