@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T11:10:16.025Z",
+ "builtAt": "2026-11-23T11:20:19.556Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 21,
+ "measured": 20,
  "candidates": [
   {
-   "keyword": "강금실 국정원장 후보",
+   "keyword": "강금실 국정원장 후보자",
    "sources": [
     "daum"
    ],
-   "articles90": 25,
+   "articles90": 22,
    "recent20": 5,
-   "press": 19,
-   "firstArticleAt": "2026-11-23T09:44:00.000Z",
+   "press": 17,
+   "firstArticleAt": "2026-11-23T09:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "청와대 \"국정원장 강금실 후보등 외교, 통일, 행안, 문체부 장관 지명\"",
-     "press": "kdpress.co.kr",
-     "publishedAt": "2026-11-23T11:04:00.000Z",
-     "link": "https://www.kdpress.co.kr/news/articleView.html?idxno=210011"
+     "title": "국정원장 강금실·통일장관 홍익표…대미 관계 재정비",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-23T11:18:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544702"
     },
     {
-     "title": "“강금실, 안보과제 풀 적임자… 임웅순, 실용외교 극대화”",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-23T11:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/396/0000761737?sid=103"
+     "title": "李대통령 ‘2차 개각’ 국정원장 강금실, 정보·외교·안보 대폭 쇄신…...",
+     "press": "news-s.kr",
+     "publishedAt": "2026-11-23T11:12:00.000Z",
+     "link": "https://news-s.kr/view.html?id=L261123200756f320"
     },
     {
-     "title": "그때도 지금도 '첫 여성' 파격 기용…돌아온 강금실",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-23T10:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001405193?sid=100"
+     "title": "청와대, 외교·통일 포함 중폭 개각...국정원장 후보자에 강금실",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-23T11:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436996?sid=100"
     }
    ]
   },
@@ -47,10 +47,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 15,
+   "articles90": 14,
    "recent20": 2,
-   "press": 15,
-   "firstArticleAt": "2026-11-23T09:46:00.000Z",
+   "press": 14,
+   "firstArticleAt": "2026-11-23T09:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -71,38 +71,6 @@
      "press": "newstomato.com",
      "publishedAt": "2026-11-23T10:48:00.000Z",
      "link": "http://www.newstomato.com/ReadNews.aspx?no=1321570&inflow=N"
-    }
-   ]
-  },
-  {
-   "keyword": "한준호 장관 후보자 지명",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 11,
-   "recent20": 3,
-   "press": 11,
-   "firstArticleAt": "2026-11-23T09:49:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "청와대 \"국정원장 강금실 후보등 외교, 통일, 행안, 문체부 장관 지명\"",
-     "press": "kdpress.co.kr",
-     "publishedAt": "2026-11-23T11:04:00.000Z",
-     "link": "https://www.kdpress.co.kr/news/articleView.html?idxno=210011"
-    },
-    {
-     "title": "李대통령, 국정원장에 강금실 전 장관 지명",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-23T10:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/396/0000761733?sid=103"
-    },
-    {
-     "title": "국정원장 강금실·통일장관 홍익표 '중폭' 개각",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-23T10:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001405192?sid=100"
     }
    ]
   },
@@ -144,19 +112,13 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-23T09:41:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-23T10:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "금융위, 공시의무 위반 롯데카드에 10억원 과징금 부과",
-     "press": "segyebiz.com",
-     "publishedAt": "2026-11-23T10:54:00.000Z",
-     "link": "http://www.segyebiz.com/newsView/20261123517024?OutUrl=naver"
-    },
     {
      "title": "금융위, 롯데카드에 10억원 과징금",
      "press": "fnnews.com",
@@ -164,43 +126,16 @@
      "link": "https://n.news.naver.com/mnews/article/014/0005608570?sid=101"
     },
     {
+     "title": "금융위, 공시의무 위반 롯데카드에 10억원 과징금 부과",
+     "press": "segyebiz.com",
+     "publishedAt": "2026-11-23T10:54:00.000Z",
+     "link": "http://www.segyebiz.com/newsView/20261123517024?OutUrl=naver"
+    },
+    {
      "title": "롯데카드, 해킹 위험 공시 누락에 10억원대 제재…금융위 과징금 의결",
      "press": "jemin.com",
      "publishedAt": "2026-11-23T10:40:00.000Z",
      "link": "https://www.jemin.com/news/articleView.html?idxno=848218"
-    }
-   ]
-  },
-  {
-   "keyword": "이진관 판사",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T10:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "국힘, 이진관 법왜곡죄 고발 추진‥\"정의의 사도처럼 행동\"",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-23T10:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001537476?sid=100"
-    },
-    {
-     "title": "\"깡통 탄핵!\" 외치는 국힘, \"이진관 법왜곡죄 고발\" 예고",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-23T10:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522076?sid=100"
-    },
-    {
-     "title": "“판사들 저항하라”…법원 내부 “집단 사직도 생각”",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-23T10:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000368436?sid=100"
     }
    ]
   },
@@ -237,43 +172,44 @@
    ]
   },
   {
-   "keyword": "리비아 러시아 군함 피격",
+   "keyword": "이진관 판사",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "google"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-23T09:47:00.000Z",
+   "firstArticleAt": "2026-11-23T10:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "우크라, 리비아 해상서 러시아 군함 침몰시켜",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-23T10:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005767919?sid=104"
+     "title": "사법부 지킨다며 판사 겁박? 국힘 \"이진관 법왜곡죄 고발\"",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-23T10:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537476?sid=100"
     },
     {
-     "title": "젤렌스키, 리비아 연안 러 군함 공격 확인...\"목표 달성\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-23T09:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436979?sid=104"
+     "title": "\"깡통 탄핵!\" 외치는 국힘, \"이진관 법왜곡죄 고발\" 예고",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-23T10:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522076?sid=100"
     },
     {
-     "title": "러 코르벳함, 리비아 벵가지항 정박 중 해상드론 공격에 침몰… 우크라...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-23T09:47:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123001157"
+     "title": "“판사들 저항하라”…법원 내부 “집단 사직도 생각”",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-23T10:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000368436?sid=100"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1217,
-  "matched": 672,
-  "avgLeadMin": 597,
+  "flagged": 1215,
+  "matched": 671,
+  "avgLeadMin": 598,
   "recent": [
    {
     "keyword": "수험",
