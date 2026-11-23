@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-22T20:43:11.544Z",
+  "generatedAt": "2026-11-23T02:25:37.229Z",
   "rules": "2026-10-20-solve",
   "model": "sonnet",
   "guides": [
@@ -40,74 +40,6 @@
       "at": "2026-11-16T20:19:13.752Z",
       "rules": "2026-10-20-solve",
       "provider": "claude"
-    },
-    {
-      "id": "b8af4101ca2aa84f",
-      "urls": [
-        "https://issuesnap.dateinsight.co.kr/feeds/6398813627158896306/comments/default",
-        "https://wellbeing-wave.tistory.com/entry/11%EC%9B%94-%EB%8F%85%EA%B0%90-%EC%98%88%EB%B0%A9%EC%A0%91%EC%A2%85-%EB%8A%A6%EC%97%88%EB%82%98-%EA%B3%A0%EB%AF%BC%EB%90%9C%EB%8B%A4%EB%A9%B4-%EB%94%B1-3%EA%B0%80%EC%A7%80%EB%A7%8C-%ED%99%95%EC%9D%B8%ED%95%98%EC%84%B8%EC%9A%94",
-        "https://windjiny.tistory.com/entry/%EB%8F%85%EA%B0%90-%EC%98%88%EB%B0%A9%EC%A0%91%EC%A2%85-%EB%B9%84%EC%9A%A9-%EC%9E%90%EC%84%B8%ED%9E%88-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0"
-      ],
-      "guide": {
-        "direction": "지식인 질문처럼 기초수급자·장애인 무료대상 조건, 접종 후 음주·발열이 정상인지가 헷갈려 검색한다. 고수 글들은 총정리·3가지 확인·비용은 다루지만 대상자별 무료여부와 접종 후 대처법을 한 표로 묶지 못했다. 연령·대상별 무료여부표와 접종 후 체크리스트로 한 번에 끝내준다.",
-        "searchTargets": [
-          "독감 예방접종 가격",
-          "독감예방접종 무료",
-          "독감 예방접종 시기",
-          "독감예방접종 술"
-        ],
-        "mustInclude": [
-          "대상자별 무료여부 표: 어린이·임신부·65세·장애인/기초수급자 (확인 필요: 질병관리청 공지)",
-          "접종 가격대 (확인 필요: 보건소·병원 공지)",
-          "복지카드 지참+지정 접종일에만 해당 병원 방문해야 무료(장애인/기초수급자)",
-          "접종 후 발열·근육통은 1~2일 내 가능, 음주는 몸살 증상과 혼동 주의",
-          "병원 진료시간 내 접종 가능하면 시간대 무관, 이상반응 관찰 필요"
-        ],
-        "mustAvoid": [
-          "코로나19 백신 접종과 혼동되는 표현 쓰지 않기"
-        ],
-        "checkBefore": [
-          "2026년 무료접종 대상·기간 - 질병관리청/보건소 공식 공지 확인",
-          "장애인·기초수급자 전용 접종일 운영 여부 - 보건소 공지 확인",
-          "실제 접종 가격 - 인근 병원·보건소 공고 확인"
-        ],
-        "solves": [
-          "\"장애인도 무료인가요?\" → 복지카드+지정 접종일에 해당 병원 방문해야 함을 표로 안내",
-          "\"접종 후 술 마셔도 되나요?\" → 소량 음주와 발열·몸살 증상 구분법 제시",
-          "\"11월인데 늦었나요?\" → 시기별 접종 가능 여부와 적절한 시간대 안내"
-        ],
-        "actionTitles": [
-          "독감예방접종 무료대상 조회: 어린이·임신부·65세 총정리",
-          "독감예방접종 비용·가격 확인하고 늦기 전에 접종하는 법",
-          "독감예방접종 후 음주·발열 대처법을 한눈에 체크하는 법"
-        ]
-      },
-      "at": "2026-11-16T20:19:13.752Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "독감예방접종",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6100101&docId=495612983&answerNo=1&qb=64+F6rCQ7JiI67Cp7KCR7KKF",
-          "views": 786,
-          "answers": 6,
-          "askedAt": "2026.10.19"
-        },
-        {
-          "title": "독감 예방 접종후 음주",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70122&docId=495948567&answerNo=1&qb=64+F6rCQ7JiI67Cp7KCR7KKF",
-          "views": 96,
-          "answers": 4,
-          "askedAt": "2026.11.14"
-        },
-        {
-          "title": "독감 예방 접종",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=7010102&docId=495828914&answerNo=2&qb=64+F6rCQ7JiI67Cp7KCR7KKF",
-          "views": 183,
-          "answers": 2,
-          "askedAt": "2026.11.05"
-        }
-      ]
     },
     {
       "id": "f2956806e8e7cdba",
@@ -483,72 +415,6 @@
           "views": 1017,
           "answers": 8,
           "askedAt": "2026.11.03"
-        }
-      ]
-    },
-    {
-      "id": "012d1c3730d58418",
-      "urls": [
-        "https://brainblg.com/tsushima-mounjaro-prescription-carry-in/",
-        "https://kinghell.tistory.com/entry/%EA%B5%AD%EA%B0%80%EC%9E%90%EA%B2%A9%EC%A6%9D-%EC%8B%9C%ED%97%98-%EC%8B%9C%EA%B3%84-%ED%97%88%EC%9A%A9-%EA%B7%9C%EC%A0%95%EA%B3%BC-%EC%A0%84%EC%9E%90%EC%8B%9C%EA%B3%84-%EB%B0%98%EC%9E%85-%EC%9A%94%EB%A0%B9"
-      ],
-      "guide": {
-        "direction": "검색자는 국가자격증 시험장이 어디로 배정되는지, 필기 합격 전 실기 접수가 가능한지, 시험 연기가 되는지에서 막힌다. 고수 블로그는 시계 반입 규정만 다루고 연도별 일정과 접수·연기 절차는 다루지 않는다. 종목별 2026·2027 일정표와 접수부터 시험장 배정까지 순서를 정리하면 독자가 접수 절차를 끝까지 마칠 수 있다.",
-        "searchTargets": [
-          "국가자격증 시험 일정 2026",
-          "국가자격증 시험 일정 2027",
-          "국가자격증시험장",
-          "국가자격증 시험 연기"
-        ],
-        "mustInclude": [
-          "종목별·회차별 필기·실기 일정이 따로 공고됨 (확인 필요: 큐넷 공고)",
-          "시험장은 접수 시 선택한 지역·회차에 따라 배정되며 같은 지역도 실·회차별로 달라질 수 있음",
-          "실기시험은 필기 합격 후에만 응시 가능",
-          "응시확인서로 학교 출결(인정조퇴·결석) 처리가 가능한지는 학교 학사 규정마다 다름",
-          "시험 연기·재접수 가능 여부와 환불 규정은 종목별로 다름"
-        ],
-        "mustAvoid": [
-          "미용사 등 특정 종목의 사례를 모든 국가자격증에 동일하게 적용되는 것처럼 일반화하지 않기",
-          "제목의 '대마도·마운자' 등 무관한 소재를 끌어와 혼란을 주지 않기"
-        ],
-        "checkBefore": [
-          "큐넷(Q-net) 공식 사이트에서 종목별 2026·2027 시험일정 공고 확인",
-          "응시확인서·출결 인정 여부는 해당 학교 학사 규정 확인"
-        ],
-        "solves": [
-          "국가자격증 시험장이 어디로 배정되는지 모름 → 접수 지역·회차별 배정 기준 정리",
-          "필기 합격 전 실기 접수가 가능한지 궁금함 → 필기 합격 후 실기 응시 가능 규정 명시",
-          "시험 연기나 재접수가 가능한지 모름 → 연기·환불 규정 정리"
-        ],
-        "actionTitles": [
-          "국가자격증 시험 일정 2026·2027 한눈에 확인하는 법",
-          "국가자격증 시험 연기 가능 여부와 재접수 절차 확인하기"
-        ]
-      },
-      "at": "2026-11-18T12:42:13.044Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude",
-      "kinQuestions": [
-        {
-          "title": "메이크업 국가 자격증 시험장",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=80306&docId=495340069&answerNo=2&qb=6rWt6rCA7J6Q6rKp7Kad7Iuc7ZeY",
-          "views": 146,
-          "answers": 2,
-          "askedAt": "2026.11.13"
-        },
-        {
-          "title": "헤어국가자격증 실기시험",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=708&docId=495742373&answerNo=1&qb=6rWt6rCA7J6Q6rKp7Kad7Iuc7ZeY",
-          "views": 89,
-          "answers": 1,
-          "askedAt": "2026.10.29"
-        },
-        {
-          "title": "국가자격증 시험 인정조퇴?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=80306&docId=495706620&answerNo=3&qb=6rWt6rCA7J6Q6rKp7Kad7Iuc7ZeY",
-          "views": 89,
-          "answers": 5,
-          "askedAt": "2026.10.27"
         }
       ]
     },
@@ -951,53 +817,6 @@
           "askedAt": "2026.11.18"
         }
       ]
-    },
-    {
-      "id": "d1fc4cad4d7d9a84",
-      "urls": [
-        "https://jseolbl.tistory.com/67",
-        "https://donpoint.co.kr/pension-savings-tax-credit/",
-        "https://avatar72.tistory.com/entry/2026-%EA%B0%9C%EC%9D%B8%ED%98%95-%ED%87%B4%EC%A7%81%EC%97%B0%EA%B8%88-irp-900%EB%A7%8C-%EC%9B%90-%EC%B1%84%EC%9A%B0%EB%A9%B4-%ED%99%98%EA%B8%89%EC%95%A1%EC%9D%80-%EC%96%BC%EB%A7%88%EC%9D%BC%EA%B9%8C",
-        "https://jjyiu.tistory.com/entry/%EC%97%B0%EA%B8%88%EC%A0%80%EC%B6%95-IRP-%EC%84%B8%EC%95%A1%EA%B3%B5%EC%A0%9C-900%EB%A7%8C%EC%9B%90-%ED%95%9C%EB%8F%84-%EC%B1%84%EC%9A%B0%EB%A9%B4-%EB%82%B4-%EC%97%B0%EB%B4%89%EB%B3%84-%ED%99%98%EA%B8%89%EC%95%A1-%EC%96%BC%EB%A7%88-12%EC%9B%94-%EB%A7%89%ED%8C%90-%EB%82%A9%EC%9E%85-%EC%A0%84%EB%9E%B5",
-        "https://sweetonion1005.tistory.com/entry/%EC%97%B0%EA%B8%88%EC%A0%80%EC%B6%95%ED%8E%80%EB%93%9C%EC%99%80-IRP-%EB%B9%84%EA%B5%90-2026-%EC%84%B8%EC%95%A1%EA%B3%B5%EC%A0%9C-%ED%95%9C%EB%8F%84%EC%99%80-%EB%85%B8%ED%9B%84-%EC%9E%90%EC%82%B0%EC%A6%9D%EC%8B%9D-%EC%A0%84%EB%9E%B5",
-        "https://flameleaf.tistory.com/entry/%EC%97%B0%EA%B8%88%EC%A0%80%EC%B6%95%ED%8E%80%EB%93%9C-%EC%84%B8%EC%95%A1%EA%B3%B5%EC%A0%9C-%EC%96%BC%EB%A7%88%EA%B9%8C%EC%A7%80-%EB%B0%9B%EC%9D%84-%EC%88%98-%EC%9E%88%EC%9D%84%EA%B9%8C"
-      ],
-      "guide": {
-        "direction": "검색자는 연금저축과 IRP 한도를 따로 채워야 하는지, 900만원을 어떻게 나눠 넣어야 하는지 헷갈려 한다(자동완성: 연금저축 irp 차이·한도·비교). 고수 글들은 한도·전략은 다뤘지만 소득 구간별 실제 환급액 숫자표가 없다. 세액공제율·구간별 환급액표와 12월 마감일 전 이전 가능 여부를 체크리스트로 주면 글 하나로 끝난다.",
-        "searchTargets": [
-          "연금저축 irp 차이",
-          "연금저축 irp 한도",
-          "연금저축 irp 비교",
-          "연금저축 irp 이전"
-        ],
-        "mustInclude": [
-          "연금저축 600만원+IRP 300만원 합산 900만원 한도 구조(확인 필요: 국세청 세액공제 고시)",
-          "소득 5,500만원 이하 16.5%, 초과 13.2% 세액공제율(확인 필요: 국세청 자료)",
-          "900만원 채웠을 때 연봉 구간별 환급액 예시표",
-          "2026년 12월 납입 마감 영업일(확인 필요: 각 금융사 안내)",
-          "연금저축→IRP 계좌 이전 절차 요약"
-        ],
-        "mustAvoid": [
-          "IRP와 ISA 세액공제 혜택을 같은 것으로 혼동해서 설명",
-          "연금저축·IRP 각각 900만원으로 오인하게 하는 표현"
-        ],
-        "checkBefore": [
-          "국세청 홈택스 공지로 2026년 세액공제율·한도 변동 여부 확인",
-          "각 증권사·은행 공식 안내로 12월 납입 마감 영업일 확인"
-        ],
-        "solves": [
-          "연금저축과 IRP 차이를 모르는 것 → 세액공제 구조 비교표로 정리",
-          "900만원 넣으면 얼마 돌려받는지 모르는 것 → 연봉 구간별 환급액표",
-          "마감 전 이전해도 되는지 모르는 것 → 이전 절차와 마감일 체크리스트"
-        ],
-        "actionTitles": [
-          "연금저축 IRP 900만원 한도, 연봉별 환급액 계산하는 법",
-          "연금저축 IRP 이전 방법과 한도 비교, 마감일 체크리스트"
-        ]
-      },
-      "at": "2026-11-19T03:42:15.805Z",
-      "rules": "2026-10-20-solve",
-      "provider": "claude"
     },
     {
       "id": "75feb5969535e963",
