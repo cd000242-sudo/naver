@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T22:44:24.578Z",
+ "builtAt": "2026-11-23T22:54:32.933Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,34 @@
  "measured": 28,
  "candidates": [
   {
-   "keyword": "젠슨 황 복귀",
+   "keyword": "트럼프, 젠슨 황 복귀 결정 개입",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 84,
-   "recent20": 77,
-   "press": 63,
-   "firstArticleAt": "2026-11-23T22:22:00.000Z",
+   "articles90": 56,
+   "recent20": 17,
+   "press": 45,
+   "firstArticleAt": "2026-11-23T21:26:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "\"컴퓨터 없으니 새 PC 달라\" 젠슨황, 복귀 첫날 '농담'…직원은 3개 층서...",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-23T22:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001041890?sid=104"
+     "title": "[뉴스+]젠슨 황 엔비디아 CEO 복귀에 AI 투자심리 회복…한국 반도체 공...",
+     "press": "businessplus.kr",
+     "publishedAt": "2026-11-23T22:52:00.000Z",
+     "link": "https://www.businessplus.kr/news/articleView.html?idxno=120347"
     },
     {
-     "title": "젠슨 황 돌아왔는데…트럼프 정부, ‘내연녀’ 회사 제재",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-23T22:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003702463?sid=104"
+     "title": "美, 젠슨 황 복귀 당일 ‘스캔들 핵심’ 메가스피드 제재",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-23T22:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003060758?sid=104"
     },
     {
-     "title": "젠슨 황 내보냈다 다시 불러들인 엔비디아… 전문가들 “이사회가 CEO 견...",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-23T22:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004011365?sid=101"
+     "title": "젠슨 황 복귀한 날…'中 칩 밀반출 의혹' 메가스피드 블랙리스트行",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-23T22:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006414468?sid=104"
     }
    ]
   },
@@ -49,12 +49,18 @@
     "nate"
    ],
    "articles90": 13,
-   "recent20": 4,
+   "recent20": 3,
    "press": 13,
-   "firstArticleAt": "2026-11-23T21:15:00.000Z",
+   "firstArticleAt": "2026-11-23T21:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "‘투표율 허위입력’ 선관위 직원 1명 구속…“증거인멸 염려”",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-23T22:48:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2651935"
+    },
     {
      "title": "선관위 직원 8명 중 1명 구속...선관위 특검 수사 전망은?",
      "press": "mbn.co.kr",
@@ -66,12 +72,6 @@
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-23T22:36:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/079/0004213040?sid=102"
-    },
-    {
-     "title": "'개표상황표 위조·은닉' 선관위 직원 1명 구속…7명은 기각",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-23T22:34:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261124000025"
     }
    ]
   },
@@ -82,28 +82,28 @@
    ],
    "articles90": 14,
    "recent20": 3,
-   "press": 11,
-   "firstArticleAt": "2026-11-23T21:16:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-23T21:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[출근길 날씨] 비 그치고 찬바람…강한 바람 더해져",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-23T22:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012299763?sid=103"
+    },
+    {
+     "title": "[날씨] 평년보다 낮아·체감온도 뚝‥충남서부, 전라서부 비·눈",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-23T22:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537581?sid=103"
+    },
     {
      "title": "다시 찬 바람에 영하권 뚝…충청·제주 곳곳 눈",
      "press": "yonhapnewstv.co.kr",
      "publishedAt": "2026-11-23T22:40:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/422/0000929242?sid=103"
-    },
-    {
-     "title": "[날씨] 출근길 다시 영하권 추위...'도로 살얼음' 주의",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-23T22:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437108?sid=103"
-    },
-    {
-     "title": "'서울 -0.4도' 영하권 추위도 추위인데…오늘 출근길 '이것' 비상",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-23T22:30:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1177134"
     }
    ]
   },
@@ -112,30 +112,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 7,
+   "articles90": 11,
+   "recent20": 3,
+   "press": 10,
    "firstArticleAt": "2026-11-23T21:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[핀테크핫이슈] 바닥 뚫린 韓 증시...AI·스테이블코인이 달군 SFF 2026",
-     "press": "digitaltoday.co.kr",
-     "publishedAt": "2026-11-23T22:30:00.000Z",
-     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=717428"
+     "title": "메타 AI 책임자 \"초지능 시대 도래 경고\"…클로드, 150년 난제 '리만 가...",
+     "press": "fntoday.co.kr",
+     "publishedAt": "2026-11-23T22:46:00.000Z",
+     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=399887"
     },
     {
-     "title": "[AI 모닝브리핑] 내 대화, 상대 폰 AI가 볼 수도…시그널 ‘스크린샷 차...",
-     "press": "coinreaders.com",
-     "publishedAt": "2026-11-23T22:28:00.000Z",
-     "link": "http://coinreaders.com/272779"
+     "title": "AI·로봇 건설현장 속으로···국토부, 스마트건설·안전·AI EXPO 개최",
+     "press": "koscaj.com",
+     "publishedAt": "2026-11-23T22:46:00.000Z",
+     "link": "https://www.koscaj.com/news/articleView.html?idxno=327607"
     },
     {
-     "title": "글로벌 보안 업계, AI 해킹 확산 속 잇단 대형 M&A....점점 '규모의 경쟁...",
-     "press": "digitaltoday.co.kr",
-     "publishedAt": "2026-11-23T22:18:00.000Z",
-     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=717571"
+     "title": "포스코 광양제철소, AI 활용 현장 혁신 성과…제품 결함 66%↓",
+     "press": "ferrotimes.com",
+     "publishedAt": "2026-11-23T22:46:00.000Z",
+     "link": "http://www.ferrotimes.com/news/articleView.html?idxno=51638"
     }
    ]
   },
@@ -145,7 +145,7 @@
     "nate"
    ],
    "articles90": 5,
-   "recent20": 3,
+   "recent20": 1,
    "press": 5,
    "firstArticleAt": "2026-11-23T22:17:00.000Z",
    "exclusive": false,
@@ -170,12 +170,45 @@
      "link": "https://m.entertain.naver.com/article/108/0003489692"
     }
    ]
+  },
+  {
+   "keyword": "나의 유죄인간",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 3,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T22:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'나의 유죄인간' 시청률 5.5%…'우리들의 발라드2' 4.8%·'크래시2' 3.6%",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-23T22:48:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284474"
+    },
+    {
+     "title": "‘나의 유죄인간’ 종영 설인아 “도전의 즐거움 다시 느꼈죠”[일문일...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-23T22:44:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001151362"
+    },
+    {
+     "title": "‘나의 유죄인간’ 설인아 “남장부터 액션까지, 쉽지 않았지만 뜻깊었...",
+     "press": "swtvnews.com",
+     "publishedAt": "2026-11-23T22:40:00.000Z",
+     "link": "https://swtvnews.com/news/newsview.php?ncode=1065564363363904"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1219,
-  "matched": 656,
+  "flagged": 1218,
+  "matched": 655,
   "avgLeadMin": 600,
   "recent": [
    {
