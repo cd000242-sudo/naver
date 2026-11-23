@@ -1,20 +1,82 @@
 {
-  "publishedAt": "2026-11-23T03:53:48.790Z",
+  "publishedAt": "2026-11-23T21:36:38.356Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 17,
-    "candidates": 135,
+    "candidates": 240,
     "niche": 0,
-    "preemption": 0,
+    "preemption": 1,
     "pending": 0
   },
   "freeSample": {
-    "day": "2026-11-23",
+    "day": "2026-11-24",
     "keywords": []
   },
   "rows": [],
   "observations": [
+    {
+      "keyword": "북남고속철도 구간",
+      "issue": "북남고속철도",
+      "topic": "북남고속철도",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 288,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 288",
+        "선점 후보 — 경쟁 문서 288건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "한국 참여 컨소시엄이 95조 베트남 북남 고속철도 설계용역 5600억 수주",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "북남고속철도 구간 95조 베트남 고속철 한국 5600억 수주",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "북남고속철도 구간 한국이 따낸 게 95조 사업의 시작일 뿐이더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 4,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-11-23T21:30:05.981Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "박종민 모의고사",
       "issue": "박종민",
@@ -305,149 +367,1095 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "AMF FESTA 수상자",
-      "issue": "AMF FESTA 수상자",
-      "topic": "AMF FESTA 수상자",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 2,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 2",
-        "선점 후보 — 경쟁 문서 2건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-11-21T21:35:31.115Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "입양 산강",
-      "issue": "입양",
-      "topic": "입양",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 149,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 149",
-        "선점 후보 — 경쟁 문서 149건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 296,
-      "kinTop": [
-        {
-          "title": "로블록스 입양 현거 시세 알려주세요 ㅠㅠ",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=211&docId=485296731&answerNo=1",
-          "views": 427,
-          "answers": 1
-        },
-        {
-          "title": "입양 현거 가치",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=11080307&docId=485095711&answerNo=1",
-          "views": 277,
-          "answers": 1
-        },
-        {
-          "title": "로블록스 입양하세요 고슴도치 질문",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=50606&docId=405885256&answerNo=2",
-          "views": 190,
-          "answers": 2
-        },
-        {
-          "title": "입양하세요 거북이vs산강",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=204&docId=483558421&answerNo=2",
-          "views": 151,
-          "answers": 2
-        },
-        {
-          "title": "입양하세요 산강 가치",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=130307&docId=491960334&answerNo=4",
-          "views": 104,
-          "answers": 4
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-11-21T21:35:31.115Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
-  "issues": []
+  "issues": [
+    {
+      "issue": "젠슨 황 CEO",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "dead",
+      "isHot": true,
+      "why": "엔비디아 이사회가 젠슨 황 CEO 즉시 복귀를 만장일치로 결정, 주가 급등",
+      "headlines": [
+        {
+          "title": "젠슨 황, 엔비디아 CEO 전격 복귀…이사회 만장일치 결정",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-23T14:15:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016459302?sid=104"
+        },
+        {
+          "title": "젠슨 황 엔비디아 CEO 즉시 복귀…이사회 만장일치 결정",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-23T14:13:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014340783?sid=104"
+        },
+        {
+          "title": "엔디비아 이사회, 젠슨 황 'CEO 즉시 복귀' 결정",
+          "press": "news.tvchosun.com",
+          "publishedAt": "2026-11-23T15:30:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/448/0000652936?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "젠슨황",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "젠슨",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "고경표",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "음주운전 혐의 고경표가 경찰에 출석해 조사받고 사과",
+      "headlines": [
+        {
+          "title": "음주운전 배우 고경표 경찰 출석…\"무책임한 모습 죄송\"(종합)",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-23T10:28:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016459204?sid=102"
+        },
+        {
+          "title": "\"많이 사랑받았는데‥\" '만취 음주운전' 고경표 울먹이더니",
+          "press": "imnews.imbc.com",
+          "publishedAt": "2026-11-23T11:40:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/214/0001537492?sid=102"
+        },
+        {
+          "title": "'음주사고' 고경표, 1시간30분 조사…\"무책임한 모습 죄송\" 울먹(종합)",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-23T11:53:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014340757?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "고경표 입장문",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "고경표 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "고경표 차",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "놀면뭐하니 고경표",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "고경표 막국수",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "고경표 사주",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "고경표 류혜영",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "고경표 만취",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "고경표 처벌",
+          "reason": "혐의 조사 뒤 형량 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "고경표 하차",
+          "reason": "출연작 하차 여부",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "고경표 위약금",
+          "reason": "광고 손해배상 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "고경표 복귀",
+          "reason": "자숙 후 복귀 시점",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "정영모 전자발찌 검거",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "전자발찌 훼손 후 도주한 성범죄자 정영모가 이틀 만에 세종서 검거",
+      "headlines": [
+        {
+          "title": "'전자발찌 훼손' 56살 정영모 세종서 검거",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-11-23T14:37:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/055/0001405234?sid=102"
+        },
+        {
+          "title": "'전자발찌' 파손 후 도주한 정영모 세종서 검거",
+          "press": "news.tvchosun.com",
+          "publishedAt": "2026-11-23T14:26:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/448/0000652932?sid=102"
+        },
+        {
+          "title": "'전자발찌 끊고 도주' 정영모, 이틀 만에 세종서 검거",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-23T16:24:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016459323?sid=102"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "선관위 직원 영장심사",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "개표상황표 은닉 혐의 선관위 직원 8명 중 1명 구속, 7명 기각",
+      "headlines": [
+        {
+          "title": "'선거 개표상황표 은닉' 선관위 직원 8명 중 1명 구속(종합)",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-23T17:16:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016459332?sid=102"
+        },
+        {
+          "title": "선관위 직원 8명 영장심사...특검 출범 77일 만",
+          "press": "ytn.co.kr",
+          "publishedAt": "2026-11-23T03:16:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/052/0002436727?sid=102"
+        },
+        {
+          "title": "'투표율 허위 입력' 선관위 직원 1명 구속·7명 기각",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-11-23T16:26:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/055/0001405250?sid=102"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "100일의 거짓말",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "100일의 거짓말이 11.7%로 자체 최고 시청률 경신, 두 사람 인연 드러남",
+      "headlines": [
+        {
+          "title": "'100일의거짓말' 김유정·박진영, 송지효와 인연 드러났다…11.7% 자체 최...",
+          "press": "news1.kr",
+          "publishedAt": "2026-11-23T02:43:00.000Z",
+          "link": "https://m.entertain.naver.com/article/421/0009304715"
+        },
+        {
+          "title": "2회 남기고 파국? 오열하는 김유정에 ‘100일의 거짓말’ 자체 최고 시청...",
+          "press": "biz.heraldcorp.com",
+          "publishedAt": "2026-11-23T12:52:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/016/0002727348?sid=103"
+        },
+        {
+          "title": "'100일의 거짓말' 알고 보니 남매",
+          "press": "bntnews.co.kr",
+          "publishedAt": "2026-11-22T21:14:00.000Z",
+          "link": "https://www.bntnews.co.kr/article/view/bnt202611230012"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "100일의 거짓말 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "100일의 거짓말 몇부작",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "100일의 거짓말 시청률",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "100일의 거짓말 등장인물",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "100일의 거짓말 재방송",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "100일의 거짓말 작가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "100일의 거짓말 원작",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "100일의 거짓말 송지효",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "100일의 거짓말 결말",
+          "reason": "2회 남아 결말 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "100일의 거짓말 마지막회",
+          "reason": "종영 시청률 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "100일의 거짓말 시즌2",
+          "reason": "흥행 뒤 후속 여부",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "데블스 플랜 시즌",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "데블스플랜3에서 정현규가 공황장애로 하차하고 유배지 설정 논쟁",
+      "headlines": [
+        {
+          "title": "정현규 공황장애 호소 속…존박, '데블스 플랜3' 배신은 인성 문제 아닌...",
+          "press": "tenasia.co.kr",
+          "publishedAt": "2026-11-23T09:00:00.000Z",
+          "link": "https://m.entertain.naver.com/article/312/0000785794"
+        },
+        {
+          "title": "‘데블스 플랜: 데드 어게인’ 유배지 논쟁 터졌다…24일 11~14회로 우승...",
+          "press": "wikitree.co.kr",
+          "publishedAt": "2026-11-22T11:24:00.000Z",
+          "link": "https://www.wikitree.co.kr/articles/1176757"
+        },
+        {
+          "title": "“게임 중 손 떨고 과호흡” 촬영 중단 후 의료진 긴급 투입…‘데블스...",
+          "press": "seoul.co.kr",
+          "publishedAt": "2026-11-17T21:54:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/081/0003700551?sid=103"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "강성태",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "rising",
+      "isHot": true,
+      "why": "강성태가 수능 결시자 5400명을 두고 AI 커닝 포기 가능성 제기",
+      "headlines": [
+        {
+          "title": "“수능장 나타나지 않은 5400명”…강성태가 제기한 의혹",
+          "press": "munhwa.com",
+          "publishedAt": "2026-11-23T05:59:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/021/0002834837?sid=102"
+        },
+        {
+          "title": "학교 10개 통째로 비어…강성태 \"수능장 안 온 5400명에 주목해야\"",
+          "press": "inews24.com",
+          "publishedAt": "2026-11-23T11:08:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/031/0001077672?sid=102"
+        },
+        {
+          "title": "'공신' 강성태 \"수능 결시율 급등…AI 부정행위 포기했나\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-23T01:47:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014339132?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "강성태 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "공부의신 강성태",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "강성태 근황",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "강성태 ai",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "강성태 특이점",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "강성태 해병대",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "강성태 수능 점수",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "강성태 수능",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "북남고속철도",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "한국 참여 컨소시엄이 95조 베트남 북남 고속철도 설계용역 5600억 수주",
+      "headlines": [
+        {
+          "title": "韓기업 참여한 컨소, 베트남 고속철도 설계용역 5600억 수주",
+          "press": "hankyung.com",
+          "publishedAt": "2026-11-22T02:55:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005356675?sid=101"
+        },
+        {
+          "title": "'95조' 베트남 북남 고속철…한국 참여 컨소시엄 설계 수주",
+          "press": "nocutnews.co.kr",
+          "publishedAt": "2026-11-22T01:16:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/079/0004212402?sid=101"
+        },
+        {
+          "title": "韓 참여 컨소시엄, 5600억원 규모 베트남 고속철도 기본설계 수주",
+          "press": "news.tvchosun.com",
+          "publishedAt": "2026-11-23T06:25:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/448/0000652844?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "베트남 북남고속철도",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "나의 유죄인간",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "나의 유죄인간에서 임시완·설인아가 이별 후 밀당 전개, OST 24일 발매",
+      "headlines": [
+        {
+          "title": "임시완 밀어내고 설인아 붙잡는다…'나의 유죄인간' 이별 후 팽팽한 밀...",
+          "press": "news1.kr",
+          "publishedAt": "2026-11-23T08:14:00.000Z",
+          "link": "https://m.entertain.naver.com/article/421/0009305668"
+        },
+        {
+          "title": "임시완, 설인아 밀어내며 이별 통보…사랑 줄다리기 시작 (나의 유죄인...",
+          "press": "sports.khan.co.kr",
+          "publishedAt": "2026-11-23T10:47:00.000Z",
+          "link": "https://m.entertain.naver.com/article/144/0001151329"
+        },
+        {
+          "title": "'나의 유죄인간' 설인아 임시완, 이별 후 밀당 전개",
+          "press": "topstarnews.net",
+          "publishedAt": "2026-11-23T13:14:00.000Z",
+          "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284367"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "나의 유죄인간 몇부작",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "나의 유죄인간 재방송",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "나의 유죄인간 웹툰",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "나의 유죄인간 시청률",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "나의 유죄인간 인물관계도",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "나의 유죄인간 ott",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "나의 유죄인간 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "나의 유죄인간 등장인물",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "나의 유죄인간 결말",
+          "reason": "줄다리기 끝 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "광주 상무역",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "광주 상무역이 AI 열차 도착 예측 도입하고 안전대상 소방청장상 수상",
+      "headlines": [
+        {
+          "title": "광주 상무역, AI로 열차 도착시간 예측…30초 남으면 표시 중단",
+          "press": "aitimes.com",
+          "publishedAt": "2026-11-23T08:36:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=217697"
+        },
+        {
+          "title": "전남광주 상무역, 대한민국 안전대상 소방청장상 수상",
+          "press": "namdonews.com",
+          "publishedAt": "2026-11-22T05:30:00.000Z",
+          "link": "https://www.namdonews.com/news/articleView.html?idxno=930010"
+        },
+        {
+          "title": "광주 상무역, 대한민국 안전대상 소방청장상 수상",
+          "press": "jnilbo.com",
+          "publishedAt": "2026-11-19T06:11:00.000Z",
+          "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000084631"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "광주 상무역 맛집",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "광주 상무역 카페",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "광주 상무역 호텔",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "광주 상무역 술집",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "광주 상무역 점심",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "광주 상무역 숙소",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "광주 상무역 전화번호",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "광주",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "패스트프레임",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "애플이 36ms 지연의 실시간 영상 생성 AI 패스트프레임 공개",
+      "headlines": [
+        {
+          "title": "애플, 실시간 영상 생성 AI '패스트프레임' 공개...36ms 지연",
+          "press": "aitimes.com",
+          "publishedAt": "2026-11-23T08:10:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=217686"
+        },
+        {
+          "title": "\"글로벌 표준 목표\" 매니패스트, AI 네이티브 기획서로 북미 간다···투...",
+          "press": "it.donga.com",
+          "publishedAt": "2026-11-23T05:16:00.000Z",
+          "link": "https://it.donga.com/109986/"
+        },
+        {
+          "title": "\"여전히 느린 개발 기획, AI로 빠르게\"…매니패스트, 美 투자유치",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-11-19T08:10:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005443745?sid=101"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [
+        {
+          "keyword": "패스트프레임 출시일",
+          "reason": "공개 뒤 상용화 시점",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "애플",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "애플이 아이폰18·맥북 네오2 신제품 예고하고 애플페이 국내 확산",
+      "headlines": [
+        {
+          "title": "애플, 시리 개선에도 AI 경쟁 뒤처지나…개발 속도가 발목[모닝폰]",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-11-22T22:22:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006413871?sid=105"
+        },
+        {
+          "title": "\"애플, 내년 초 신제품 쏟아낸다…아이폰18·맥북 네오2 출격\"",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-11-22T23:44:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002446374?sid=105"
+        },
+        {
+          "title": "‘유료’ 애플페이 도입 확산… 연 3000억 국부 유출 가능성",
+          "press": "segye.com",
+          "publishedAt": "2026-11-23T21:03:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/022/0004177567?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "애플 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 서비스센터",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 ceo",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 환불",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 보증 확인",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 주식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 폴더블",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 폴더블폰",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "엔비디아",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "젠슨 황 CEO 복귀 결정에 엔비디아 주가 30% 폭등",
+      "headlines": [
+        {
+          "title": "젠슨 황, 엔비디아 CEO 전격 복귀…이사회 만장일치 결정",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-23T14:15:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016459302?sid=104"
+        },
+        {
+          "title": "젠슨 황 CEO 즉시 복귀…엔비디아 주가 30% 폭등",
+          "press": "hankyung.com",
+          "publishedAt": "2026-11-23T14:23:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005357321?sid=101"
+        },
+        {
+          "title": "[속보] 엔비디아 이사회, 젠슨 황 CEO 복귀 결정",
+          "press": "ytn.co.kr",
+          "publishedAt": "2026-11-23T14:12:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/052/0002437044?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "엔비디아 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "엔비디아 실적발표",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "엔비디아 젠슨황",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "엔비디아 회장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "엔비디아 주식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "엔비디아 그래픽카드",
+          "searchVolume": 6220,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "엔비디아 ai",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "엔비디아 실적",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "엔비디아 주가 전망",
+          "reason": "폭등 뒤 추가 상승 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "엔비디아 실적발표",
+          "reason": "다음 실적 주목",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "엔비디아 루빈",
+          "reason": "차세대 칩 기대",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "머스크",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "머스크가 데이터센터 차질로 내년 AI 기업 심각한 자금난을 경고",
+      "headlines": [
+        {
+          "title": "'개미들 가뜩이나 불안한데'…머스크까지 던진 섬뜩한 경고",
+          "press": "wowtv.co.kr",
+          "publishedAt": "2026-11-23T04:04:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/215/0001273615?sid=101"
+        },
+        {
+          "title": "머스크, 데이터센터 차질에 우려…\"AI기업 내년에 자금난\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-23T03:46:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016458154?sid=104"
+        },
+        {
+          "title": "\"내년에 엄청난 일 벌어진다\"…머스크의 섬뜩한 경고",
+          "press": "hankyung.com",
+          "publishedAt": "2026-11-23T04:11:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005357033?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "머스크 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "키엘 머스크 향수",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "머스크 재산",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "머스크 향 특징",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "머스크 차",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "머스크 냄새",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "머스크 메론",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "머스크 본사",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "뎁스 프로 2",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "애플이 사진·영상 속 실제 거리 추정하는 AI 뎁스 프로 2 공개",
+      "headlines": [
+        {
+          "title": "애플, 사진·영상 속 실제 거리 추정하는 AI '뎁스 프로 2' 공개",
+          "press": "aitimes.com",
+          "publishedAt": "2026-11-23T07:16:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=217692"
+        },
+        {
+          "title": "프로야구 롯데-키움, 투수 정철원-외야수 임지열 트레이드",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-20T07:19:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/001/0016455061"
+        },
+        {
+          "title": "프로야구 롯데-키움, 투수 정철원-외야수 임지열 트레이드 합의",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-11-20T08:11:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/055/0001404598"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "뎁스",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "앤트로픽",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "rising",
+      "isHot": true,
+      "why": "1조 달러 몸값 앤트로픽이 상장했지만 신용등급은 정크 전망",
+      "headlines": [
+        {
+          "title": "\"쓰레기\" 앤트로픽에 날선 평가...AI 돈줄 마르나",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-11-23T07:48:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005445139?sid=104"
+        },
+        {
+          "title": "몸값 1조 달러 앤트로픽, 신용등급은 '정크' 전망…AI 투자에 경고등",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-23T04:23:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014339722?sid=104"
+        },
+        {
+          "title": "주식시장선 '환호', 채권시장선 '의구심'…앤트로픽의 두 얼굴",
+          "press": "nocutnews.co.kr",
+          "publishedAt": "2026-11-23T07:51:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/079/0004212930?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "앤트로픽 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 상장일",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 클로드",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 ipo",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 공모가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 ceo",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "앤트로픽 주가 전망",
+          "reason": "상장 뒤 주가 방향 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "앤트로픽 락업 해제",
+          "reason": "물량 출회 시점 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "KT",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "KT가 행안부와 사회연대경제 AX 협약, 수자원공사와 피지컬AI 협력",
+      "headlines": [
+        {
+          "title": "KT, 수자원공사와 피지컬AI 인프라 구축 협력",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-11-23T05:32:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002446483?sid=105"
+        },
+        {
+          "title": "행안부-KT 사회연대경제 AX 활성화 지원 업무협약",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-11-23T06:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016458537?sid=101"
+        },
+        {
+          "title": "사회연대경제 AX활성화를 위한 행정안전부-KT 업무협약식",
+          "press": "newsis.com",
+          "publishedAt": "2026-11-23T05:32:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014339970?sid=100"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "kt 고객센터",
+          "searchVolume": 186700,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kt 인터넷",
+          "searchVolume": 60700,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kt m모바일",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kt&g",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kt 착신전환 방법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kt 알뜰폰",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kt 택배",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kt wiz",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "KT 시범사업 지역",
+          "reason": "춘천·청도 사업 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "KT AI 수혜",
+          "reason": "AX 사업 실적 기대",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "KT 주가",
+          "reason": "협약 뒤 주가 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    }
+  ]
 }
