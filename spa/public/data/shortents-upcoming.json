@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T00:42:08.888Z",
+ "builtAt": "2026-11-23T00:52:11.870Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 47,
-   "recent20": 1,
-   "press": 45,
-   "firstArticleAt": "2026-11-22T23:17:00.000Z",
+   "articles90": 45,
+   "recent20": 4,
+   "press": 44,
+   "firstArticleAt": "2026-11-22T23:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李 대통령 지지율 37.3%…2주 연속 소폭 상승",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-23T00:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000554425?sid=100"
+     "title": "李대통령 지지율 37.3% 횡보…국민의힘 42.5%·민주당 35.6% [리얼미터]",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-23T00:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003158175?sid=100"
     },
     {
-     "title": "[속보] 이 대통령 지지율 2주 연속 오른 37.3%… 민주 35.6%·국힘 42.5%",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-23T00:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000193240?sid=100"
+     "title": "이 대통령 지지율 2주 연속 상승 37.3%…30%대 중후반 횡보",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-23T00:45:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085501"
     },
     {
-     "title": "李 지지율 2주 연속 올라 37.3%.. 민주 35.6%·국힘 42.5%",
-     "press": "jibs.co.kr",
-     "publishedAt": "2026-11-23T00:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/661/0000086933?sid=100"
+     "title": "李 지지율 37.3%, 2주 연속 소폭 상승",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-23T00:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001886801?sid=100"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 46,
-   "recent20": 14,
-   "press": 40,
-   "firstArticleAt": "2026-11-22T23:18:00.000Z",
+   "articles90": 41,
+   "recent20": 10,
+   "press": 37,
+   "firstArticleAt": "2026-11-22T23:50:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "삼성전자·SK하이닉스 동반 급락… 코스피 ‘블랙먼데이’ 현실화하나",
-     "press": "mediawatch.kr",
-     "publishedAt": "2026-11-23T00:40:00.000Z",
-     "link": "https://www.mediawatch.kr/news/article.html?no=261831"
+     "title": "[신윤우의 외환분석] 엄습하는 증시 급락의 어두운 그림자",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-23T00:50:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445972"
     },
     {
-     "title": "[이 시각 시황] 뉴욕발 공포에 코스피 4700선 붕괴…반도체 급락 속 로봇...",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-23T00:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000545205?sid=101"
+     "title": "美 기술주 급락 충격…코스피 4700선까지 밀렸다 [시황]",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-23T00:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003158178?sid=101"
     },
     {
-     "title": "[개장시황] 코스피, 반도체 악재에 2%대 급락…4730선 거래",
-     "press": "meconomynews.com",
-     "publishedAt": "2026-11-23T00:38:00.000Z",
-     "link": "https://www.meconomynews.com/news/articleView.html?idxno=203978"
+     "title": "AI 급락, 저점 매수 기회일까…월가의 판단은",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-23T00:48:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445970"
     }
    ]
   },
@@ -79,30 +79,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 20,
-   "recent20": 4,
-   "press": 18,
-   "firstArticleAt": "2026-11-22T23:16:00.000Z",
+   "articles90": 24,
+   "recent20": 5,
+   "press": 22,
+   "firstArticleAt": "2026-11-22T23:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "에이티즈, 美 ‘빌보드 200’ 통산 네 번째 1위..대기록",
-     "press": "heraldmuse.com",
-     "publishedAt": "2026-11-23T00:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/112/0003814064"
+     "title": "에이티즈, 통산 네 번째 빌보드 200 1위",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-23T00:48:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611230039"
     },
     {
-     "title": "에이티즈, 美 '빌보드 200' 네 번째 1위",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-23T00:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005356912?sid=103"
+     "title": "에이티즈, 미국 빌보드 메인 앨범 차트 4번째 1위",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-23T00:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436622?sid=103"
     },
     {
-     "title": "에이티즈, 빌보드 200 통산 4번째 1위…10개 앨범 연속 톱10",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-23T00:30:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626941"
+     "title": "에이티즈, '빌보드 200' 네 번째 정상...10개 앨범 연속 톱10",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-23T00:44:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=565724"
     }
    ]
   },
@@ -111,13 +111,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
+   "articles90": 10,
    "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-22T23:14:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-22T23:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'화석연료' 대립‥17년 만에 합의문 채택 무산",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-23T00:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537333?sid=104"
+    },
     {
      "title": "COP31 합의 결렬 [ESG 뉴스 5]",
      "press": "magazine.hankyung.com",
@@ -129,12 +135,6 @@
      "press": "ohmynews.com",
      "publishedAt": "2026-11-23T00:21:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/047/0002536820?sid=104"
-    },
-    {
-     "title": "[COP31] 폐막을 앞두고 ‘합의 결렬’과 ‘과학 흔들기’에 갇힌 안탈리...",
-     "press": "sciencetimes.co.kr",
-     "publishedAt": "2026-11-23T00:18:00.000Z",
-     "link": "https://www.sciencetimes.co.kr/news/sn/262701"
     }
    ]
   },
@@ -146,10 +146,16 @@
    "articles90": 6,
    "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-22T23:22:00.000Z",
+   "firstArticleAt": "2026-11-22T23:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "‘우크라 공격 추정’ 리비아항 러 군함 피격…러, 키이우 공습",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-23T00:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012299043?sid=104"
+    },
     {
      "title": "우크라戰 확전 조짐…리비아서 러시아 군함 피격",
      "press": "nocutnews.co.kr",
@@ -161,12 +167,6 @@
      "press": "imnews.imbc.com",
      "publishedAt": "2026-11-23T00:17:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/214/0001537325?sid=104"
-    },
-    {
-     "title": "\"리비아에서 러시아 군함 등 선박 잇달아 피격\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-22T23:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436601?sid=104"
     }
    ]
   },
@@ -175,13 +175,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
    "firstArticleAt": "2026-11-22T23:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "전 MBC 아나운서, 배우 데뷔했다…KBS 대하사극 '문무' 깜짝 출연한 김정...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-23T00:44:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000785675"
+    },
     {
      "title": "아나운서 출신 김정근, KBS2 ‘문무’로 연기 본격 도전",
      "press": "sports.khan.co.kr",
@@ -193,12 +199,6 @@
      "press": "news.jtbc.co.kr",
      "publishedAt": "2026-11-22T23:52:00.000Z",
      "link": "https://m.entertain.naver.com/article/437/0000521938"
-    },
-    {
-     "title": "이게 김정근 아나운서라고? ‘문무’서 상투 틀고 수염 덥수룩‥본격 배...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-22T23:29:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190301"
     }
    ]
   },
@@ -208,12 +208,18 @@
     "google"
    ],
    "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-22T23:20:00.000Z",
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T23:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "나스닥 선물 2.7% 급반등…골드만 \"저가매수 기회지만 위험 여전\"(종합)",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T00:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009304180?sid=104"
+    },
     {
      "title": "나스닥 '코로나 이후 최악의 한 주'…아시아 증시 또 흔들리나",
      "press": "edaily.co.kr",
@@ -225,108 +231,6 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-22T23:39:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009303975?sid=104"
-    },
-    {
-     "title": "코스피200 야간 선물 6.99% 급락, 국내증시 '검은 월요일' 공포",
-     "press": "globale.co.kr",
-     "publishedAt": "2026-11-22T23:26:00.000Z",
-     "link": "https://www.globale.co.kr/news/articleView.html?idxno=41783"
-    }
-   ]
-  },
-  {
-   "keyword": "출근하는 이용철 후보자",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T23:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "인사청문회 D-1…이용철, 공소취소 입장에 \"내일 답변\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-23T00:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014338750?sid=102"
-    },
-    {
-     "title": "인사청문회 하루 앞둔 이용철 법무부 장관 후보자",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-22T23:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016457160?sid=102"
-    },
-    {
-     "title": "이용철 후보자, 인사청문회 준비사무실 출근",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T23:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009303921?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "2027년 전망 하나증권",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T23:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "유안타證, 내년 코스피 최저 4000선 전망…외국인 매도 공세 영향",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-23T00:28:00.000Z",
-     "link": "https://www.ajunews.com/view/20261123091418891"
-    },
-    {
-     "title": "에쓰오일, 올해 영업익 4조 회복 전망…내년 샤힌이 변수",
-     "press": "datanews.co.kr",
-     "publishedAt": "2026-11-22T23:46:00.000Z",
-     "link": "http://www.datanews.co.kr/news/article.html?no=147735"
-    },
-    {
-     "title": "11월 금통위 만장일치 25bp↑ 전망…\"반도체 성장 자신감\"",
-     "press": "ftoday.co.kr",
-     "publishedAt": "2026-11-22T23:22:00.000Z",
-     "link": "http://www.ftoday.co.kr/news/articleView.html?idxno=370289"
-    }
-   ]
-  },
-  {
-   "keyword": "남유정 솔로라이프 공개",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-22T23:30:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "브브걸 출신 남유정, 결별 후 여전히 솔로..‘솔로라서2’ 합류[공식]",
-     "press": "heraldmuse.com",
-     "publishedAt": "2026-11-23T00:32:00.000Z",
-     "link": "https://m.entertain.naver.com/article/112/0003814065"
-    },
-    {
-     "title": "남유정, 이규한과 결별 2년 만 솔로 일상 공개…‘솔로라서2’ 출격",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-22T23:34:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001306200"
-    },
-    {
-     "title": "남유정, '솔로라서2' 출격...이사 후 달라진 일상·요리 홀릭 근황 공개",
-     "press": "socialvalue.kr",
-     "publishedAt": "2026-11-22T23:30:00.000Z",
-     "link": "https://www.socialvalue.kr/news/view/1065567828642736"
     }
    ]
   },
@@ -361,11 +265,43 @@
      "link": "https://www.greened.kr/news/articleView.html?idxno=355260"
     }
    ]
+  },
+  {
+   "keyword": "오지헌 딸 공개",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T23:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'박상미♥' 오지헌, 미모의 세 딸 공개…'174cm' 고2 장녀에 \"모델해도 ...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-23T00:22:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002083098"
+    },
+    {
+     "title": "'아침마당' 오지헌 부부, 세 딸 사진 공개…고등학생·중학생·초등학생",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-23T00:02:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=626932"
+    },
+    {
+     "title": "오지헌 딸 농사 대박, 배우 비주얼 ♥아내 닮아 다행 “고2 장녀, 키 174...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-22T23:48:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190305"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1143,
+  "flagged": 1144,
   "matched": 635,
   "avgLeadMin": 598,
   "recent": [
