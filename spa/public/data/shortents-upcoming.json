@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T16:52:13.676Z",
+ "builtAt": "2026-11-23T17:02:16.754Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,34 @@
  "measured": 28,
  "candidates": [
   {
-   "keyword": "젠슨 황 엔비디아 복귀",
+   "keyword": "젠슨 황 CEO 복귀",
    "sources": [
     "nate"
    ],
-   "articles90": 77,
-   "recent20": 4,
-   "press": 42,
-   "firstArticleAt": "2026-11-23T15:23:00.000Z",
-   "exclusive": false,
+   "articles90": 59,
+   "recent20": 9,
+   "press": 33,
+   "firstArticleAt": "2026-11-23T15:34:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨 황 귀환에 엔비디아·SK하이닉스 폭등…트럼프 \"내 개입 중요\"(종합...",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-23T16:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006414419?sid=101"
+     "title": "트럼프 압박에 주가 부담까지…엔비디아, 젠슨황 전격 복귀 결정",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-23T17:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001405255?sid=104"
     },
     {
-     "title": "주가 급락에 후계자 공백…젠슨 황 다시 택한 엔비디아",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-23T16:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001206796?sid=104"
+     "title": "Arm \"르네 하스 CEO, 2033년까지 계약 연장\"",
+     "press": "zdnet.co.kr",
+     "publishedAt": "2026-11-23T17:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/092/0002446564?sid=105"
     },
     {
-     "title": "젠슨 황 복귀 환영한 트럼프… “불법행위 관여 증거 없다”",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-23T16:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003060740?sid=104"
+     "title": "젠슨 황 CEO 복귀에 美기술업계 환영…머스크 \"실수 바로 잡혀\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-23T16:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014340827?sid=104"
     }
    ]
   },
@@ -47,10 +47,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-23T15:26:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-23T15:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -71,38 +71,6 @@
      "press": "yna.co.kr",
      "publishedAt": "2026-11-23T16:24:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016459323?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "강금실 국정원장 후보자",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-23T15:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "국정원장 강금실… 방미 앞두고 ‘자주파’ 교체",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-23T15:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004011341?sid=100"
-    },
-    {
-     "title": "강금실, 정보분야 경력 거의 없어… 李대통령 대선 캠프 두차례 참여",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-23T15:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004011335?sid=100"
-    },
-    {
-     "title": "[사진] 이재명 후원회장→선대위장→국정원장",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-23T15:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003567407?sid=100"
     }
    ]
   },
@@ -170,11 +138,75 @@
      "link": "https://n.news.naver.com/mnews/article/023/0004011280?sid=101"
     }
    ]
+  },
+  {
+   "keyword": "스페이스x 주가",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 2,
+   "firstArticleAt": "2026-11-23T15:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "HSBC, 테슬라 적정주가 128% 넘게 올려…스페이스X 인수 가능성 반영",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-23T16:48:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=848239"
+    },
+    {
+     "title": "젠슨황, 이사회 만장일치로 엔비디아 복귀…주가는 폭등 [박신영의 개장...",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-23T15:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005357340?sid=104"
+    },
+    {
+     "title": "스페이스X, 하루 만에 9%대 반등…위성통신 성장에 월가도 주목",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-23T15:36:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=848241"
+    }
+   ]
+  },
+  {
+   "keyword": "강금실 국정원장 후보자",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-23T15:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "국정원장 강금실… 방미 앞두고 ‘자주파’ 교체",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-23T15:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004011341?sid=100"
+    },
+    {
+     "title": "강금실, 정보분야 경력 거의 없어… 李대통령 대선 캠프 두차례 참여",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-23T15:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004011335?sid=100"
+    },
+    {
+     "title": "[사진] 이재명 후원회장→선대위장→국정원장",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-23T15:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003567407?sid=100"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1234,
+  "flagged": 1235,
   "matched": 664,
   "avgLeadMin": 556,
   "recent": [
