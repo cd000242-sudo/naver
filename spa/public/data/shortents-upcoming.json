@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T02:32:45.446Z",
+ "builtAt": "2026-11-23T02:42:48.908Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 23,
  "candidates": [
   {
-   "keyword": "삼성증권 개인정보 유출",
+   "keyword": "박남춘 인천공항공사 사장",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 99,
-   "recent20": 18,
-   "press": 97,
-   "firstArticleAt": "2026-11-23T01:38:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "삼성증권, 민원 시스템 보안 뚫렸다…고객 8,241명 정보 외부 노출",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-23T02:30:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=848130"
-    },
-    {
-     "title": "삼성증권 '고객의소리' 해킹···8241명 개인정보 유출",
-     "press": "koreastocknews.com",
-     "publishedAt": "2026-11-23T02:28:00.000Z",
-     "link": "http://www.koreastocknews.com/news/articleView.html?idxno=122419"
-    },
-    {
-     "title": "금융사 해킹 계속되나…삼성증권도 8000여 명 개인정보 유출",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-23T02:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000161975?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "이부진 아들 성 변경",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 41,
-   "recent20": 12,
-   "press": 41,
-   "firstArticleAt": "2026-11-23T01:10:00.000Z",
+   "articles90": 59,
+   "recent20": 5,
+   "press": 27,
+   "firstArticleAt": "2026-11-23T01:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이부진 아들, 성인 된 뒤 어머니 성으로 변경",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-23T02:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833483?sid=102"
+     "title": "박남춘 인천공항공사 사장 취임…“임기 내 연간 여객 9000만명 달성”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-23T02:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004685091?sid=102"
     },
     {
-     "title": "'서울대생' 이부진 아들, 엄마 성으로 바꿨다…'임씨→이씨' [이거 봤어...",
+     "title": "박남춘 신임 인천공항 사장 \"여객 7400만→9000만명 늘린다\"",
      "press": "hankyung.com",
-     "publishedAt": "2026-11-23T02:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005357000?sid=101"
+     "publishedAt": "2026-11-23T02:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005357003?sid=102"
     },
     {
-     "title": "서울대 간 이부진 아들, 엄마 성으로 변경...'임씨'에서 '이씨'로",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-23T02:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000521969?sid=101"
+     "title": "박남춘, 인천공항공사 사장 취임…\"임기 내 여객 9000만 목표\"",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-23T02:30:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904005"
     }
    ]
   },
@@ -79,30 +47,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 51,
-   "recent20": 27,
-   "press": 27,
-   "firstArticleAt": "2026-11-23T01:42:00.000Z",
+   "articles90": 58,
+   "recent20": 22,
+   "press": 21,
+   "firstArticleAt": "2026-11-23T01:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "박수치는 김종철 경찰청장",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-23T02:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014339384?sid=100"
+     "title": "2년째 공석이던 경찰청장에 김종철 취임",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-23T02:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000161978?sid=102"
     },
     {
-     "title": "미소짓는 김종철 경찰청장",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-23T02:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014339387?sid=100"
+     "title": "김종철 경찰청장이 남긴 방명록",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-23T02:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016457927?sid=102"
     },
     {
-     "title": "김종철 경찰청장 취임... “신뢰 위에 당당한 경찰 만들 것”",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-23T02:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004011177?sid=102"
+     "title": "입장하는 김종철 경찰청장",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T02:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009304650?sid=102"
     }
    ]
   },
@@ -111,95 +79,62 @@
    "sources": [
     "daum"
    ],
-   "articles90": 12,
+   "articles90": 13,
    "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-23T01:10:00.000Z",
+   "press": 13,
+   "firstArticleAt": "2026-11-23T01:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "에이티즈, 빌보드 200 네 번째 1위...스트레이 키즈·BTS 이어 K팝 그룹 ...",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-23T02:38:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3760086"
+    },
+    {
+     "title": "[피플] 'UP' 외친 에이티즈, 새로운 기록은 현재진행형",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-23T02:35:00.000Z",
+     "link": "https://m.entertain.naver.com/article/437/0000521970"
+    },
     {
      "title": "에이티즈, 빌보드 200 1위 4번째-K팝 그룹 최다 톱10",
      "press": "mediafine.co.kr",
      "publishedAt": "2026-11-23T02:16:00.000Z",
      "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95717"
-    },
-    {
-     "title": "에이티즈, 美 ‘빌보드 200’ 4번째 정상… 미니 15집, 국내외 차트 ‘쌍...",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-23T02:14:00.000Z",
-     "link": "https://www.viva100.com/article/20261123500527"
-    },
-    {
-     "title": "에이티즈 ‘빌보드 200’ 통산 4번째 1위…2020년대 그룹 최다 톱10",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-23T02:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484370?sid=103"
     }
    ]
   },
   {
    "keyword": "발언하는 장동혁 대표",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 18,
-   "recent20": 1,
+   "articles90": 20,
+   "recent20": 4,
    "press": 12,
-   "firstArticleAt": "2026-11-23T01:06:00.000Z",
+   "firstArticleAt": "2026-11-23T01:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "수험생 만난 장동혁 \"AI 커닝에 정부 대책 없어\" [TF사진관]",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-23T02:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000554539?sid=100"
+     "title": "정권 실책에 개미 무덤 된 국내 증시...장동혁 \"이재명 리딩방 주가조작...",
+     "press": "thepublic.kr",
+     "publishedAt": "2026-11-23T02:38:00.000Z",
+     "link": "https://www.thepublic.kr/news/articleView.html?idxno=327962"
     },
     {
-     "title": "장동혁 “탄핵안 의결하면 이미 늦는다”…법원에 李 재판 재개 촉구",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-23T01:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005767482?sid=100"
+     "title": "조희대 탄핵 급발진 걷어찬 장동혁 \"이재명 정권의 자폭 탄핵\"",
+     "press": "thepublic.kr",
+     "publishedAt": "2026-11-23T02:38:00.000Z",
+     "link": "https://www.thepublic.kr/news/articleView.html?idxno=327961"
     },
     {
-     "title": "[포토] 장동혁 “대법원장 탄핵, 정권 자멸 축지법”",
-     "press": "ilyosisa.co.kr",
-     "publishedAt": "2026-11-23T01:50:00.000Z",
-     "link": "https://www.ilyosisa.co.kr/news/article.html?no=259120"
-    }
-   ]
-  },
-  {
-   "keyword": "정승환, 안테나와 동행 종료",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-23T01:12:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "정승환, 안테나 떠나 도경수와 한솥밥 먹나",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-23T02:19:00.000Z",
-     "link": "https://m.entertain.naver.com/article/629/0000554531"
-    },
-    {
-     "title": "정승환, 11년 만에 안테나 떠난다…다음 달 데뷔 10주년 콘서트 일정 등...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-23T02:04:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283559"
-    },
-    {
-     "title": "정승환, 11년 만에 소속사와 결별... 안테나 전속계약 종료",
-     "press": "sisunnews.co.kr",
-     "publishedAt": "2026-11-23T01:50:00.000Z",
-     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=250228"
+     "title": "수능뿐 아닌 여러 국가 시험 부정행위 봇물?...장동혁 \"공정 무너트린 ...",
+     "press": "thepublic.kr",
+     "publishedAt": "2026-11-23T02:38:00.000Z",
+     "link": "https://www.thepublic.kr/news/articleView.html?idxno=327963"
     }
    ]
   },
@@ -209,7 +144,7 @@
     "google"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 1,
    "press": 6,
    "firstArticleAt": "2026-11-23T01:20:00.000Z",
    "exclusive": false,
@@ -240,11 +175,11 @@
    "sources": [
     "daum"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-23T01:08:00.000Z",
-   "exclusive": true,
+   "firstArticleAt": "2026-11-23T01:32:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
@@ -268,46 +203,111 @@
    ]
   },
   {
-   "keyword": "정년연장",
+   "keyword": "중앙생활보장위원회 정은경 장관",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-23T01:37:00.000Z",
+   "articles90": 24,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-23T01:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "진보당 노혜령, \"저임금 재고용 아닌 65세 정년연장 필요\"",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-23T02:26:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3760005"
+     "title": "제81차 중앙생활보장위원회 회의",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T01:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009304352?sid=102"
     },
     {
-     "title": "‘정년연장 개입’ 시사 정부, 임금개편 살핀다",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-23T02:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002727068?sid=101"
+     "title": "제81차 중앙생활보장위원회 주재하는 정은경 장관",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-23T01:29:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261123000429"
     },
     {
-     "title": "[사설]정년연장 정부 주도, 임금개혁까지 결단해야",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-23T02:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005846365?sid=110"
+     "title": "회의 자료 살펴보는 정은경 보건복지부 장관",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-23T01:29:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261123000426"
     }
    ]
   },
   {
-   "keyword": "공판 출석 윤한홍 의원",
+   "keyword": "강신철 장관 질의 답변",
    "sources": [
     "nate"
    ],
-   "articles90": 14,
+   "articles90": 6,
+   "recent20": 6,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T02:28:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "강신철 국방부 장관, 의원 질의 답변",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-23T02:39:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261123000594"
+    },
+    {
+     "title": "답변하는 강신철 국방부 장관",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-23T02:39:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261123000593"
+    },
+    {
+     "title": "의원 질의 답변하는 강신철 장관",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-23T02:39:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261123000592"
+    }
+   ]
+  },
+  {
+   "keyword": "구조조정",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 3,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T01:04:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-23T01:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[사실은 이렇습니다] (보도설명) 지출구조조정은 집행률 외에도 사업 성...",
+     "press": "korea.kr",
+     "publishedAt": "2026-11-23T02:27:00.000Z",
+     "link": "https://www.korea.kr/briefing/actuallyView.do?newsId=148976292&call_from=naver_news"
+    },
+    {
+     "title": "금산군, 내년 예산 6751억 편성…세출구조조정 89억 증액",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-23T02:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014339314?sid=102"
+    },
+    {
+     "title": "금산군, 내년 예산 6751억 원 편성…자체사업 171억 원 구조조정",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-23T01:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000554472?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "윤한홍 의원 공판 출석",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 13,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T01:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -332,46 +332,14 @@
    ]
   },
   {
-   "keyword": "정은경 장관 중앙생활보장위원회",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 27,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T01:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "제81차 중앙생활보장위원회 회의",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T01:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009304352?sid=102"
-    },
-    {
-     "title": "제81차 중앙생활보장위원회 주재하는 정은경 장관",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-23T01:29:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123000429"
-    },
-    {
-     "title": "정부서울청사에서 열린 제81차 중앙생활보장위원회",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-23T01:29:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123000430"
-    }
-   ]
-  },
-  {
    "keyword": "부산항",
    "sources": [
     "google"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T01:12:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-23T01:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -394,73 +362,105 @@
      "link": "https://n.news.naver.com/mnews/article/025/0003567139?sid=102"
     }
    ]
+  },
+  {
+   "keyword": "kospi",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 2,
+   "firstArticleAt": "2026-11-23T02:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "Bourse operator activates sell-side sidecar for KOSPI on sharp fall",
+     "press": "en.yna.co.kr",
+     "publishedAt": "2026-11-23T02:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016457951?sid=104"
+    },
+    {
+     "title": "(URGENT) Bourse operator activates sell-side sidecar for KOSPI on sharp f...",
+     "press": "en.yna.co.kr",
+     "publishedAt": "2026-11-23T02:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016457930?sid=104"
+    },
+    {
+     "title": "[Opening Market] KOSPI Sinks Back to 4,700 Level on AI-Led Rout",
+     "press": "businesskorea.co.kr",
+     "publishedAt": "2026-11-23T02:16:00.000Z",
+     "link": "https://www.businesskorea.co.kr/news/articleView.html?idxno=281907"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1171,
-  "matched": 666,
-  "avgLeadMin": 642,
+  "flagged": 1167,
+  "matched": 670,
+  "avgLeadMin": 626,
   "recent": [
    {
-    "keyword": "한동훈, 12월 3일에 꼭 하라",
-    "hitKeyword": "신도시 계양 12월 입주",
-    "hitAt": "2026-11-23T11:00:00+09:00",
-    "leadMin": 2391
+    "keyword": "주현영 SNL 텃세",
+    "hitKeyword": "주현영 런닝맨 출연",
+    "hitAt": "2026-11-23T11:30:00+09:00",
+    "leadMin": 892
    },
    {
-    "keyword": "김태희 아침마다 감동",
-    "hitKeyword": "비 김태희 딸 캐비아",
-    "hitAt": "2026-11-23T11:00:00+09:00",
-    "leadMin": 1476
+    "keyword": "주현영",
+    "hitKeyword": "주현영 런닝맨 출연",
+    "hitAt": "2026-11-23T11:30:00+09:00",
+    "leadMin": 882
    },
    {
-    "keyword": "김태희 보면 감동",
-    "hitKeyword": "비 김태희 딸 캐비아",
-    "hitAt": "2026-11-23T11:00:00+09:00",
-    "leadMin": 1436
+    "keyword": "주현영 치아 시술",
+    "hitKeyword": "주현영 런닝맨 출연",
+    "hitAt": "2026-11-23T11:30:00+09:00",
+    "leadMin": 219
    },
    {
-    "keyword": "비, 아침마다 김태희 감동",
-    "hitKeyword": "비 김태희 딸 캐비아",
-    "hitAt": "2026-11-23T11:00:00+09:00",
-    "leadMin": 1415
+    "keyword": "삼성증권 개인정보 유출",
+    "hitKeyword": "삼성증권 해킹",
+    "hitAt": "2026-11-23T11:30:00+09:00",
+    "leadMin": 48
    },
    {
-    "keyword": "김아림, LPGA 최종전 공동 7위",
-    "hitKeyword": "티띠꾼 LPGA 3연패",
-    "hitAt": "2026-11-23T11:00:00+09:00",
-    "leadMin": 108
+    "keyword": "정승환 안테나 전속계약 종료",
+    "hitKeyword": "정승환 안테나 계약 만료",
+    "hitAt": "2026-11-23T11:30:00+09:00",
+    "leadMin": 48
    },
    {
-    "keyword": "오지헌",
-    "hitKeyword": "오지헌 딸 공개",
-    "hitAt": "2026-11-23T11:00:00+09:00",
-    "leadMin": 18
+    "keyword": "삼성증권 해킹 피해",
+    "hitKeyword": "삼성증권 해킹",
+    "hitAt": "2026-11-23T11:30:00+09:00",
+    "leadMin": 27
    },
    {
-    "keyword": "조희대 탄핵 추진",
-    "hitKeyword": "조희대 탄핵 법관 반발",
-    "hitAt": "2026-11-23T10:30:00+09:00",
-    "leadMin": 4948
+    "keyword": "정승환, 안테나 11년 떠난다",
+    "hitKeyword": "정승환 안테나 계약 만료",
+    "hitAt": "2026-11-23T11:30:00+09:00",
+    "leadMin": 27
    },
    {
-    "keyword": "與, 조희대 탄핵 추진",
-    "hitKeyword": "조희대 탄핵 법관 반발",
-    "hitAt": "2026-11-23T10:30:00+09:00",
-    "leadMin": 4646
+    "keyword": "이부진 아들 성 변경",
+    "hitKeyword": "이부진 아들 성변경",
+    "hitAt": "2026-11-23T11:30:00+09:00",
+    "leadMin": 17
    },
    {
-    "keyword": "조희대 탄핵 당론 채택",
-    "hitKeyword": "조희대 탄핵 법관 반발",
-    "hitAt": "2026-11-23T10:30:00+09:00",
-    "leadMin": 4606
+    "keyword": "삼성증권 8241명 개인정보 유출",
+    "hitKeyword": "삼성증권 해킹",
+    "hitAt": "2026-11-23T11:30:00+09:00",
+    "leadMin": 7
    },
    {
-    "keyword": "與 조희대 탄핵 추진",
-    "hitKeyword": "조희대 탄핵 법관 반발",
-    "hitAt": "2026-11-23T10:30:00+09:00",
-    "leadMin": 4566
+    "keyword": "이부진 아들 이씨 변경",
+    "hitKeyword": "이부진 아들 성변경",
+    "hitAt": "2026-11-23T11:30:00+09:00",
+    "leadMin": 7
    }
   ]
  }
