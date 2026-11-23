@@ -11,6 +11,8 @@ import {
   requireAgentProvider,
 } from '../../agentCli/validation.js';
 import { isAllowedAgentLoginUrl } from '../../agentCli/loginUrl.js';
+import { isValidAgentAccountId } from '../../agentCli/accounts/accountRegistry.js';
+import { registerAgentAccountHandlers } from './agentAccountHandlers.js';
 import type { AgentProvider } from '../../agentCli/types.js';
 import {
   assertAgentProviderAllowed,
@@ -264,7 +266,7 @@ export function registerAgentHandlers(options: RegisterAgentHandlerOptions): voi
   });
 
   // 구독 로그인 (브라우저 OAuth) — 완료까지 대기 후 결과 반환.
-  ipcMain.handle('agent:login', async (event, provider: unknown) => {
+  ipcMain.handle('agent:login', async (event, provider: unknown, loginOptions?: unknown) => {
     let cleanupProvider: AgentProvider | undefined;
     let cleanupSessionId: string | undefined;
     let cleanupDestroyedListener: (() => void) | undefined;
@@ -272,6 +274,11 @@ export function registerAgentHandlers(options: RegisterAgentHandlerOptions): voi
       assertTrustedAgentSender(event, trustedRendererPath);
       const validatedProvider = requireAgentProvider(provider);
       assertAgentProviderAllowed(validatedProvider, productPolicyContext);
+      // A saved account that is not active yet (adding an account). Anything else is rejected.
+      const requestedAccountId = (loginOptions as { accountId?: unknown } | undefined)?.accountId;
+      if (requestedAccountId !== undefined && !isValidAgentAccountId(requestedAccountId)) {
+        throw codedError('invalid_input', '로그인할 계정 정보가 올바르지 않습니다.');
+      }
       const sessionId = randomUUID();
       cleanupProvider = validatedProvider;
       cleanupSessionId = sessionId;
@@ -355,7 +362,7 @@ export function registerAgentHandlers(options: RegisterAgentHandlerOptions): voi
               const current = activeLoginSessions[validatedProvider];
               if (current?.sessionId === sessionId) setActiveLoginSession(validatedProvider, undefined);
             },
-          });
+          }, ...(requestedAccountId === undefined ? [] : [{ accountId: requestedAccountId }] as const));
         } finally {
           const current = activeLoginSessions[validatedProvider];
           if (current?.sessionId === sessionId) setActiveLoginSession(validatedProvider, undefined);
@@ -562,6 +569,13 @@ export function registerAgentHandlers(options: RegisterAgentHandlerOptions): voi
         message: rendererSafeErrorMessage(e, '로그아웃 중 오류가 발생했습니다.'),
       };
     }
+  });
+
+  // Saved accounts (list / create / switch / remove). Shares the auth lock with login and logout.
+  registerAgentAccountHandlers({
+    assertTrustedSender: (event) => assertTrustedAgentSender(event, trustedRendererPath),
+    runExclusive: runExclusiveAuthAction,
+    assertProviderAllowed: (provider) => assertAgentProviderAllowed(provider, productPolicyContext),
   });
 
   // One-shot generation. Errors carry a stable code so the renderer can show the right modal.

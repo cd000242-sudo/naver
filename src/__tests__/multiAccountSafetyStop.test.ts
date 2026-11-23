@@ -60,7 +60,7 @@ async function runRenderer(code: string, extra: Record<string, unknown> = {}) {
     return { stopRequested, safetyStopped, totalFail, queueSnapshot, networkWaitFailures: Object.fromEntries(networkWaitFailures) };`;
   const result = await compile(run, { ...classifierBindings, window: { stopFullAutoPublish: false, api: { multiAccountPublish: publish } },
     addMALog() {}, addProgressItem() {}, updateMAStep() {}, resolveInterruptedPublishStatus: (started: boolean, fallback: string) => started ? 'uncertain' : fallback,
-    console: { log() {} }, rotate });
+    console: { log() {} }, rotate, GstopHaltedError: class GstopHaltedError extends Error {} });
   return { result, publish, rotate };
 }
 

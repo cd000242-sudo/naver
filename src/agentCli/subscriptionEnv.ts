@@ -14,6 +14,7 @@ import {
   withAgentRuntimePath,
   withPathEntries,
 } from './agentRuntime.js';
+import { applyAgentAccountEnv } from './accounts/accountEnv.js';
 
 const SHARED_SUBSCRIPTION_ENV_KEYS = new Set([
   'PATH',
@@ -123,24 +124,34 @@ export const CLAUDE_SUBSCRIPTION_IMAGE_READ_ARGS = [
   '--no-session-persistence',
 ] as const;
 
+/**
+ * [2026-11-24] Every Claude Code / Codex launch (generate, image, helper calls, harmony, login,
+ * status probes) builds its environment here, so the saved-account choice is applied in exactly
+ * one place. accountId is only for flows that must address an account that is not the active one
+ * yet (adding an account); everything else follows the active account.
+ */
 export function buildClaudeSubscriptionEnv(
   source: NodeJS.ProcessEnv = process.env,
+  accountId?: string,
 ): NodeJS.ProcessEnv {
   // [2026-08-18] claude 공식 설치 경로(~/.local/bin)를 명시 추가 — 설치 시 User PATH
   // 레지스트리에만 기록돼, 이미 떠 있던 앱은 "설치되어 있지 않습니다"로 오판했다(실측).
   // agy와 동일한 함정·동일한 조치. 앱 관리 prefix가 맨 앞을 유지하도록 안쪽에서 삽입.
-  return withAgentRuntimePath(
+  const env = withAgentRuntimePath(
     withPathEntries(pickSubscriptionEnv(source, CLAUDE_SUBSCRIPTION_ENV_KEYS), getClaudeInstallDirs()),
   );
+  return applyAgentAccountEnv('claude', env, accountId);
 }
 
 export function buildCodexSubscriptionEnv(
   source: NodeJS.ProcessEnv = process.env,
+  accountId?: string,
 ): NodeJS.ProcessEnv {
   // codex는 npm 전역 prefix(%APPDATA%\npm)에 설치된다 — 동일한 stale PATH 노출.
-  return withAgentRuntimePath(
+  const env = withAgentRuntimePath(
     withPathEntries(pickSubscriptionEnv(source, CODEX_SUBSCRIPTION_ENV_KEYS), getCodexInstallDirs()),
   );
+  return applyAgentAccountEnv('codex', env, accountId);
 }
 
 export function buildGeminiSubscriptionEnv(

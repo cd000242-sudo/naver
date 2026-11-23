@@ -28,6 +28,10 @@ import { reconcileOpenaiImageModelSelection } from '../../image/openaiImageModel
 import { noteAccountPauseDispatch, showAccountPauseModal } from './accountPauseModal.js';
 import { gsPrefetchBatchProvider, gsPrefetchLabel, gsPrefetchMatchImages } from '../../image/fullAuto/gensparkBodyPrefetch.js';
 import { mergeCustomPrompt } from '../../contentRequestSections.js';
+import { gstopCreateLedger } from '../../generationStop/stageGate.js';
+import { gstopFillShoppingSlots } from '../../generationStop/shoppingSlots.js';
+import { generationStopIsEngineLevelError } from './generationStopImages.js';
+import { generationStopEndRun, generationStopResolveFailure, generationStopRunStage } from './generationStopGate.js';
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.emitLog = emitLog;
 exports.resolveImageManagerKeys = resolveImageManagerKeys;
@@ -764,7 +768,14 @@ async function executeFullAutoFlow(formData) {
         else {
             appendLog('📝 콘텐츠 생성 중...');
             await yieldToUI();
-            structuredContent = await generateFullAutoContent(formData);
+            // [2026-11-24] A writing stop (limit / login / model) opens the stop window: same engine, another engine, or stop here.
+            const textEngineNow = (document.querySelector('input[name="primaryGeminiTextModel"]:checked'))?.value || formData.generator;
+            structuredContent = (await generationStopRunStage('text', textEngineNow,
+                { kind: 'full-auto', label: String(formData.keywords || formData.title || '').slice(0, 40), noRecord: true },
+                async (_engine, attempt) => {
+                    if (attempt > 1) formData.generator = UnifiedDOMCache.getGenerator();
+                    return generateFullAutoContent(formData);
+                })).value;
             checkShouldStop();
         }
         if (!structuredContent) {
@@ -997,7 +1008,17 @@ async function executeFullAutoFlow(formData) {
                 : formData.imageSource;
             const IMAGE_GEN_MAX_RETRIES = getFullAutoImageMaxAttempts(originalProvider);
             let imageGenSuccess = false;
-            const imageGenerationStartedAt = Date.now();
+            // [2026-11-24] Stop window state: the engine in use (changes only when the owner picks another one), the finished
+            //   slots (never drawn again) and the finished thumbnail. The time budget restarts after the owner answered.
+            let activeProvider = originalProvider;
+            const imageStopCtx = { kind: 'full-auto', label: String(formData.keywords || formData.title || '').slice(0, 40), noRecord: true, ledger: gstopCreateLedger(), shopping: isShoppingAiMode };
+            let preservedThumbnail = null;
+            let imageGenerationStartedAt = Date.now();
+            const handOffImageStop = async (error) => {
+                const next = await generationStopResolveFailure('image', activeProvider, error, imageStopCtx);
+                imageGenerationStartedAt = Date.now();
+                return next;
+            };
             const getRemainingImageBudgetMs = () => Math.max(0, getFullAutoTotalImageBudgetMs(originalProvider) - (Date.now() - imageGenerationStartedAt));
             const getBoundedImageTimeoutMs = (maxMs) => {
                 const remainingMs = getRemainingImageBudgetMs();
@@ -1009,7 +1030,7 @@ async function executeFullAutoFlow(formData) {
             const isImageBudgetError = (error) => String(error?.message || '').includes('이미지 생성 전체 제한 시간 초과');
             const getProviderForAttempt = (attempt) => {
                 void attempt;
-                return originalProvider;
+                return activeProvider;
             };
             const RETRY_DELAYS = [0, 8, 12];
             for (let imageAttempt = 1; imageAttempt <= IMAGE_GEN_MAX_RETRIES && !imageGenSuccess; imageAttempt++) {
@@ -1077,6 +1098,10 @@ async function executeFullAutoFlow(formData) {
                         );
                         appendLog('🛒 쇼핑커넥트: 대표 상품 이미지를 원본 그대로 썸네일로 사용합니다.');
                     }
+                    else if (preservedThumbnail) {
+                        dedicatedThumbnailImage = preservedThumbnail;
+                        appendLog('♻️ 이미 만든 썸네일을 그대로 씁니다.');
+                    }
                     else
                         try {
                             const thumbnailAllowText = !!formData.includeThumbnailText;
@@ -1124,6 +1149,7 @@ async function executeFullAutoFlow(formData) {
                             });
                             if (thumbResult?.success && thumbResult.images && thumbResult.images.length > 0) {
                                 dedicatedThumbnailImage = registerFullAutoThumbnailImage(thumbResult.images[0], currentProvider, formData, fullAutoTitle || '블로그 썸네일');
+                                preservedThumbnail = dedicatedThumbnailImage;
                                 appendLog(`✅ [풀오토] 전용 썸네일 생성 완료!`);
                                 syncImageTabFromFullAuto(structuredContent);
                                 modal?.addLog(`✅ 전용 썸네일 생성 완료`);
@@ -1183,14 +1209,17 @@ async function executeFullAutoFlow(formData) {
                         appendLog('🖼️ 썸네일 전용 모드: 대표이미지만 사용합니다.');
                         break;
                     }
-                    const imageResult = await generateImagesWithCostSafety({
+                    // [2026-11-24] Batch first; the slots that did not arrive are made again ONE AT A TIME with the SAME engine.
+                    //   Finished slots stay in the ledger across attempts and across the stop window — nothing is drawn twice.
+                    const requestBodyImages = async (slots) => {
+                        const result = await generateImagesWithCostSafety({
                         provider: currentProvider,
                         title: fullAutoTitle,
                         postTitle: fullAutoTitle,
                         articleTitle: fullAutoTitle,
                         globalSubject: fullAutoKeywordSource.trim() || fullAutoTitle,
                         articleContext: fullAutoArticleContext,
-                        items: fullAutoBodyItems,
+                        items: slots,
                         category: formData.category || formData.categoryName || '',
                         referenceImagePath,
                         imageRatio: formData.subheadingImageRatio || formData.imageRatio,
@@ -1199,8 +1228,40 @@ async function executeFullAutoFlow(formData) {
                         isContinuousMode: !!isContinuousMode,
                         isShoppingConnect: isShoppingAiMode,
                         collectedImages: isShoppingAiMode ? collectedImgs : undefined,
-                        imageGenerationTimeoutMs: getBoundedImageTimeoutMs(getFullAutoBodyImageTimeoutMs(currentProvider, fullAutoBodyItems.length)),
+                        allowPartialResults: true,
+                        imageGenerationTimeoutMs: getBoundedImageTimeoutMs(getFullAutoBodyImageTimeoutMs(currentProvider, slots.length)),
+                        });
+                        if (result?.success === false && result.message) throw new Error(result.message);
+                        return result;
+                    };
+                    let rawBodyResult = null;
+                    const filled = await gstopFillShoppingSlots({
+                        items: fullAutoBodyItems,
+                        ledger: imageStopCtx.ledger,
+                        stopCheck: () => isFullAutoStopRequested(),
+                        onProgress: (message) => appendLog(message),
+                        match: gsPrefetchMatchImages,
+                        isEngineLevelError: generationStopIsEngineLevelError,
+                        accept: isShoppingAiMode
+                            ? (image, accepted) => resolveShoppingAiPublishImages(null, [...accepted, image], collectedImgs).images.length === accepted.length + 1
+                            : () => true,
+                        batch: async (slots) => {
+                            rawBodyResult = await requestBodyImages(slots);
+                            return Array.isArray(rawBodyResult?.images) ? rawBodyResult.images : [];
+                        },
+                        single: async (slot) => {
+                            // "No body image by the heading-image mode" is a result, not a gap to fill.
+                            if (rawBodyResult?.filteredByMode === true) return null;
+                            const one = await requestBodyImages([slot]);
+                            const image = Array.isArray(one?.images) ? one.images[0] : null;
+                            return image ? { ...image, heading: image.heading || slot.heading, originalIndex: image.originalIndex ?? slot.originalIndex } : null;
+                        },
                     });
+                    const modeFilteredAll = rawBodyResult?.filteredByMode === true && filled.images.length === 0;
+                    if (filled.missing.length > 0 && !modeFilteredAll) {
+                        throw new Error(`소제목 이미지 ${filled.images.length}/${fullAutoBodyItems.length}개만 만들어졌습니다. 같은 엔진으로 빠진 칸을 한 장씩 다시 만들었지만 ${filled.missing.length}칸이 남았습니다. 만든 이미지는 그대로 있습니다.`);
+                    }
+                    const imageResult = modeFilteredAll ? rawBodyResult : { success: filled.images.length > 0, images: filled.images, message: rawBodyResult?.message };
                     if (imageResult?.success && imageResult.filteredByMode === true
                         && (!Array.isArray(imageResult.images) || imageResult.images.length === 0)) {
                         // FINAL §1: the heading-image mode leaves every body heading out — not a failure.
@@ -1271,26 +1332,36 @@ async function executeFullAutoFlow(formData) {
                         modal?.addLog('⏱️ 이미지 제한 시간 초과, 발행 중단');
                         throw imgError;
                     }
+                    if (generationStopIsEngineLevelError(imgError)) {
+                        // A subscription engine out of quota / logged out / without the model fails every further request the same way.
+                        activeProvider = await handOffImageStop(imgError);
+                        imageAttempt = 0;
+                        continue;
+                    }
                     if (isFatalApiError(imgError)) {
                         if (imageAttempt >= IMAGE_GEN_MAX_RETRIES) {
                             emitLog(`${friendlyErrorMessage(imgError)} 이미지 없이 발행하지 않고 중단합니다.`, modal, 'warn');
-                            throw imgError;
+                            activeProvider = await handOffImageStop(imgError);
+                            imageAttempt = 0;
+                            continue;
                         }
-                        appendLog(`⚠️ ${currentProvider} API 에러 (${imgError.message}), 다른 엔진으로 재시도...`);
-                        modal?.addLog(`⚠️ API 에러 → 엔진 교체 재시도`);
+                        appendLog(`⚠️ ${currentProvider} API 에러 (${imgError.message}), 같은 엔진으로 다시 시도합니다...`);
+                        modal?.addLog(`⚠️ API 에러 → 같은 엔진으로 재시도`);
                         continue;
                     }
                     if (imageAttempt < IMAGE_GEN_MAX_RETRIES) {
                         const nextProvider = getProviderForAttempt(imageAttempt + 1);
                         const switchMsg = nextProvider !== currentProvider ? ` → 엔진 변경: ${nextProvider}` : '';
                         appendLog(`⚠️ 이미지 생성 실패 (${imageAttempt}/${IMAGE_GEN_MAX_RETRIES}): ${imgError.message}`);
-                        appendLog(`🔄 자동 재시도합니다...${switchMsg}`);
+                        appendLog(`🔄 같은 엔진으로 다시 시도합니다...${switchMsg}`);
                         modal?.addLog(`⚠️ 실패 ${imageAttempt}/${IMAGE_GEN_MAX_RETRIES}, 재시도 중...`);
                         continue;
                     }
-                    appendLog(`❌ ${IMAGE_GEN_MAX_RETRIES}회 모두 실패. 이미지 없이 발행하지 않고 중단합니다.`);
-                    emitLog(`${friendlyErrorMessage(imgError)} ${IMAGE_GEN_MAX_RETRIES}회 재시도 후에도 실패하여 발행을 중단합니다.`, modal, 'warn');
-                    throw imgError;
+                    appendLog(`❌ ${IMAGE_GEN_MAX_RETRIES}회 모두 실패. 이미지 없이 발행하지 않고 멈춥니다.`);
+                    emitLog(`${friendlyErrorMessage(imgError)} ${IMAGE_GEN_MAX_RETRIES}회 재시도 후에도 실패하여 멈췄습니다.`, modal, 'warn');
+                    activeProvider = await handOffImageStop(imgError);
+                    imageAttempt = 0;
+                    continue;
                 }
             }
         }
@@ -1473,6 +1544,9 @@ async function executeFullAutoFlow(formData) {
         }
         catch (e) { }
         throw error;
+    }
+    finally {
+        if (!isContinuousInvocation) void generationStopEndRun();
     }
 }
 async function executeSemiAutoFlow(formData) {
@@ -3121,44 +3195,70 @@ async function generateAIImagesForHeadings(headings, formData, structuredContent
         }
 
         appendLog(`🎨 쇼핑 소제목 ${shoppingBatchItems.length}개를 한 배치로 생성해 중복을 검사합니다.`);
-        const shoppingBatchResult = await generateImagesWithCostSafety({
-            provider: imageSource,
-            imageModel,
-            items: shoppingBatchItems,
-            postTitle: imageArticleTitle,
-            postId: imagePostId,
-            isFullAuto: formData.mode === 'full-auto',
-            longRunImageGeneration: true,
-            isContinuousMode: !!isContinuousMode,
-            isShoppingConnect: true,
-            collectedImages,
-            referenceImagePath: representativeImageUrl,
-            thumbnailTextInclude: false,
-            imageFallbackPolicy,
-            imageGenerationTimeoutMs: getFullAutoBodyImageTimeoutMs(imageSource, shoppingBatchItems.length),
-        });
-        if (!shoppingBatchResult?.success || !Array.isArray(shoppingBatchResult.images)) {
-            throw new Error(shoppingBatchResult?.message || '쇼핑 AI 이미지 배치 생성 결과가 없습니다.');
-        }
-
-        const normalizedBatchImages = shoppingBatchResult.images.map((img, index) => ({
-            ...img,
-            heading: img?.heading || shoppingBatchItems[index]?.heading,
-            isThumbnail: false,
-            originalIndex: img?.originalIndex ?? shoppingBatchItems[index]?.originalIndex,
-        }));
-        const safeBatch = resolveShoppingAiPublishImages(
-            dedicatedShopThumbnail,
-            normalizedBatchImages,
-            collectedImages,
-        );
-        const actualBodyCount = safeBatch.images.length - (dedicatedShopThumbnail ? 1 : 0);
-        if (actualBodyCount !== shoppingBatchItems.length) {
-            throw new Error(
-                `SHOPPING_AI_IMAGE_BATCH_INCOMPLETE: AI 소제목 이미지 ${actualBodyCount}/${shoppingBatchItems.length}개만 고유 결과로 확인되었습니다. `
-                + `수집 원본 ${safeBatch.removedCollectedCount}개, 중복 ${safeBatch.removedDuplicateCount}개를 차단했습니다.`,
+        // [2026-11-24] Batch first; the slots that did not arrive are made again ONE AT A TIME with the SAME engine. A slot that
+        //   still fails goes to the stop window (same engine / another engine / stop here); finished slots stay in the ledger.
+        const shoppingStopCtx = { kind: 'full-auto', label: String(imageArticleTitle || '').slice(0, 40), noRecord: true, ledger: gstopCreateLedger(), shopping: true };
+        const safeBatch = (await generationStopRunStage('image', imageSource, shoppingStopCtx, async (engine) => {
+            const requestShopping = async (slots) => {
+                const result = await generateImagesWithCostSafety({
+                    provider: engine,
+                    imageModel,
+                    items: slots,
+                    postTitle: imageArticleTitle,
+                    postId: imagePostId,
+                    isFullAuto: formData.mode === 'full-auto',
+                    longRunImageGeneration: true,
+                    isContinuousMode: !!isContinuousMode,
+                    isShoppingConnect: true,
+                    collectedImages,
+                    referenceImagePath: representativeImageUrl,
+                    thumbnailTextInclude: false,
+                    imageFallbackPolicy,
+                    allowPartialResults: true,
+                    imageGenerationTimeoutMs: getFullAutoBodyImageTimeoutMs(engine, slots.length),
+                });
+                if (result?.success === false && result.message) throw new Error(result.message);
+                return result;
+            };
+            const filled = await gstopFillShoppingSlots({
+                items: shoppingBatchItems,
+                ledger: shoppingStopCtx.ledger,
+                stopCheck: () => isFullAutoStopRequested(),
+                onProgress: (message) => appendLog(message),
+                match: gsPrefetchMatchImages,
+                isEngineLevelError: generationStopIsEngineLevelError,
+                accept: (image, accepted) => resolveShoppingAiPublishImages(null, [...accepted, image], collectedImages).images.length === accepted.length + 1,
+                batch: async (slots) => {
+                    const result = await requestShopping(slots);
+                    return Array.isArray(result?.images) ? result.images : [];
+                },
+                single: async (slot) => {
+                    const one = await requestShopping([slot]);
+                    const image = Array.isArray(one?.images) ? one.images[0] : null;
+                    return image ? { ...image, heading: image.heading || slot.heading, originalIndex: image.originalIndex ?? slot.originalIndex } : null;
+                },
+            });
+            const normalizedBatchImages = filled.images.map((img, index) => ({
+                ...img,
+                heading: img?.heading || shoppingBatchItems[index]?.heading,
+                isThumbnail: false,
+                originalIndex: img?.originalIndex ?? shoppingBatchItems[index]?.originalIndex,
+            }));
+            const safe = resolveShoppingAiPublishImages(
+                dedicatedShopThumbnail,
+                normalizedBatchImages,
+                collectedImages,
             );
-        }
+            const actual = safe.images.length - (dedicatedShopThumbnail ? 1 : 0);
+            if (filled.missing.length > 0 || actual !== shoppingBatchItems.length) {
+                throw new Error(
+                    `SHOPPING_AI_IMAGE_BATCH_INCOMPLETE: AI 소제목 이미지 ${actual}/${shoppingBatchItems.length}개만 고유 결과로 확인되었습니다. `
+                    + `같은 엔진으로 빠진 칸을 한 장씩 다시 만들었지만 ${filled.missing.length}칸이 남았습니다. 만든 이미지는 그대로 있습니다.`,
+                );
+            }
+            return safe;
+        })).value;
+        const actualBodyCount = safeBatch.images.length - (dedicatedShopThumbnail ? 1 : 0);
         appendLog(`✅ 대표이미지 원본 1장 + AI 소제목 이미지 ${actualBodyCount}장 확인 완료`);
         return safeBatch.images;
     }

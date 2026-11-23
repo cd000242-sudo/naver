@@ -5,6 +5,7 @@ import type {
   RevenueSettings,
 } from '../analytics/revenueOperations.js';
 import type { AgentCliStatus, AgentProvider } from '../agentCli/types.js';
+import type { AgentAccountListing } from '../agentCli/accounts/accountService.js';
 
 type RiskLevel = 'low' | 'medium' | 'high';
 type LegalRiskLevel = 'safe' | 'caution' | 'danger';
@@ -306,7 +307,11 @@ interface AutomationAPI {
   agentGenerate: (payload: { provider: AgentProvider; prompt: string; schema?: Record<string, unknown>; model?: string; tier?: 'main' | 'light'; timeoutMs?: number }) => Promise<{ success: boolean; provider?: AgentProvider; text?: string; json?: unknown; durationMs?: number; code?: string; message?: string }>;
   agentInstall: (provider: AgentProvider) => Promise<{ success: boolean; version?: string; code?: string; message?: string }>;
   onAgentInstallProgress?: (listener: (progress: AgentInstallProgress) => void) => () => void;
-  agentLogin: (provider: AgentProvider) => Promise<{ success: boolean; status?: AgentCliStatus; authState?: 'already_authenticated' | 'authenticated'; code?: string; message?: string }>;
+  agentLogin: (provider: AgentProvider, options?: { accountId?: string }) => Promise<{ success: boolean; status?: AgentCliStatus; authState?: 'already_authenticated' | 'authenticated'; code?: string; message?: string }>;
+  agentAccountList: (provider: AgentProvider) => Promise<{ success: boolean; listing?: AgentAccountListing; code?: string; message?: string }>;
+  agentAccountCreate: (provider: AgentProvider) => Promise<{ success: boolean; accountId?: string; code?: string; message?: string }>;
+  agentAccountSwitch: (provider: AgentProvider, accountId: string) => Promise<{ success: boolean; code?: string; message?: string }>;
+  agentAccountRemove: (provider: AgentProvider, accountId: string) => Promise<{ success: boolean; removedActive?: boolean; code?: string; message?: string }>;
   onAgentLoginProgress: (listener: (progress: AgentLoginProgress) => void) => () => void;
   agentLoginOpenBrowser: (provider: AgentProvider, sessionId: string) => Promise<AgentLoginActionResult>;
   agentLoginSubmitCode: (provider: AgentProvider, sessionId: string, attempt: number, code: string) => Promise<AgentLoginActionResult>;
@@ -792,6 +797,10 @@ interface AutomationAPI {
   setActiveBlogAccount: (accountId: string) => Promise<{ success: boolean; message?: string }>;
   getActiveBlogAccount: () => Promise<{ success: boolean; account?: BlogAccount; message?: string }>;
   getAllBlogAccounts: () => Promise<{ success: boolean; accounts?: BlogAccount[]; message?: string }>;
+  generationStopList: () => Promise<{ success: boolean; records: any[] }>;
+  generationStopSave: (record: unknown, options?: { notify?: boolean }) => Promise<{ success: boolean; message?: string }>;
+  generationStopRemove: (id: string) => Promise<{ success: boolean }>;
+  generationStopNotify: (title: string, body: string) => Promise<{ success: boolean }>;
   dailyPublishingRequest: (method: 'GET' | 'POST', path: string, body?: unknown) => Promise<{ status: number; body: Record<string, any> }>;
   // 블로그별 초기 설정(2026-10-21)
   getBlogProfile: (accountId: string) => Promise<{ success: boolean; profile?: any; warning?: string; account?: { id: string; name: string; blogId: string }; code?: string; message?: string }>;

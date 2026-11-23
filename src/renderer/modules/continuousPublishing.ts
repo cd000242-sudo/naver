@@ -10,6 +10,9 @@ import { normalizeRetiredNanoEngine } from '../../runtime/imageProviderMigration
 import { createTime24Select, bindTime24Events, setTime24Value, setTime24ValueByIdx } from '../utils/time24Select';
 import { applyKeywordPrefixToTitle } from '../utils/titleUtils.js';
 import type { ContinuousQueueItem } from '../types/index';
+import { GstopHaltedError } from '../../generationStop/stageGate.js';
+import { generationStopEndRun, generationStopRunStage } from './generationStopGate.js';
+import { continuousStopClear, continuousStopContext, continuousStopRestoreQueue } from './continuousStopResume.js';
 import { resolvePublishModeAfterScheduleRemoved } from './continuousPublishModeHelpers';
 import {
   resolveShoppingRepresentativeReference,
@@ -469,6 +472,13 @@ export function switchExternalLinksTab(tabName: string) {
 }
 
 // 연속 발행 기능 함수들
+/** Puts the queue of a saved stop record back (finished posts stay "completed") and returns how many items came back. */
+export function restoreContinuousQueueFromStop(record: any): number {
+  const count = continuousStopRestoreQueue(continuousQueueV2 as any, record);
+  if (count > 0) requestAnimationFrame(() => renderQueueListV2());
+  return count;
+}
+
 export function startContinuousMode(urls: string[]): void {
   void refreshPublishIntervalSetting();   // 최소 발행 간격 설정 반영 (실패해도 권장값 60분)
   console.log('[Continuous] startContinuousMode 호출됨');
@@ -4840,19 +4850,33 @@ async function startContinuousPublishingV2(): Promise<void> {
       }
 
       // ✅ [2026-04-03 FIX] withStopCheck 래퍼: 중지 버튼 즉시 반응 (AI API 15분 대기 중에도)
-      if (item.type === 'url') {
-        const customKeyword = item.customKeyword || '';
-        // ✅ [2026-01-21] 다중 URL 지원: 메인 URL + additionalUrls 합치기
-        let combinedUrls = item.value;
-        if (item.additionalUrls && item.additionalUrls.length > 0) {
-          combinedUrls = [item.value, ...item.additionalUrls].join('\n');
-          console.log(`[Continuous] 📚 다중 URL 사용: ${1 + item.additionalUrls.length}개 소스`);
-        }
-        await withStopCheck(generateContentFromUrl(combinedUrls, customKeyword, item.toneStyle, true, item.contentMode, item.category));
+      // [2026-11-24] A finished article is never written again (stop window continue / restart / retry). A writing stop
+      //   (limit / login / model) opens the stop window: same engine, another engine, or stop here with the queue left in place.
+      if ((item as any)._resumeArticle) {
+        (window as any).currentStructuredContent = (item as any)._resumeArticle;
+        currentStructuredContent = (item as any)._resumeArticle;
+        appendLog('♻️ 멈추기 전에 만들어 둔 글을 그대로 씁니다. 글은 다시 쓰지 않습니다.');
       } else {
-        // ✅ [2026-02-13] V2 큐: 키워드 제목 옵션 적용
-        setKeywordTitleOptionsFromItem(item.value, item.keywordAsTitle, item.keywordTitlePrefix);
-        await withStopCheck(generateContentFromKeywords(item.customTitle || '', item.value, item.toneStyle, true, item.contentMode, item.category));
+        const textEngineNow = (document.querySelector('input[name="primaryGeminiTextModel"]:checked') as HTMLInputElement | null)?.value || UnifiedDOMCache.getGenerator();
+        await generationStopRunStage('text', textEngineNow,
+          continuousStopContext(item as any, continuousQueueV2 as any, () => undefined, `${currentIdx}/${totalCount}번째 글 · 글 쓰는 중`), async () => {
+            (window as any).currentStructuredContent = null;
+            currentStructuredContent = null;
+            if (item.type === 'url') {
+              const customKeyword = item.customKeyword || '';
+              // ✅ [2026-01-21] 다중 URL 지원: 메인 URL + additionalUrls 합치기
+              let combinedUrls = item.value;
+              if (item.additionalUrls && item.additionalUrls.length > 0) {
+                combinedUrls = [item.value, ...item.additionalUrls].join('\n');
+                console.log(`[Continuous] 📚 다중 URL 사용: ${1 + item.additionalUrls.length}개 소스`);
+              }
+              await withStopCheck(generateContentFromUrl(combinedUrls, customKeyword, item.toneStyle, true, item.contentMode, item.category));
+            } else {
+              // ✅ [2026-02-13] V2 큐: 키워드 제목 옵션 적용
+              setKeywordTitleOptionsFromItem(item.value, item.keywordAsTitle, item.keywordTitlePrefix);
+              await withStopCheck(generateContentFromKeywords(item.customTitle || '', item.value, item.toneStyle, true, item.contentMode, item.category));
+            }
+          });
       }
       // ✅ [v2.7.77] 다음 항목에 영향 없도록 정리
       (window as any)._publishForceOptions = null;
@@ -4910,6 +4934,7 @@ async function startContinuousPublishingV2(): Promise<void> {
         // [NAVER FULL AUTO] This is the "final text" point (title / H2 / body fixed); images come next.
         //   It used to say "블로그 발행 중" here, before the images, and the percentage then went backwards.
         item.fullAutoStage = 'content-ready';
+        (item as any)._resumeArticle = finalStructuredContent;
         updateContinuousProgressModal({
           step: '최종 글 확정',
           log: `[${currentIdx}/${totalCount}] 제목·소제목·본문을 확정했습니다. 이 글 기준으로 이미지를 만듭니다.`,
@@ -5006,6 +5031,7 @@ async function startContinuousPublishingV2(): Promise<void> {
                   onLog: (msg: string) => appendLog(msg),
                   aiFallbackFn: generateImagesForAutomation,
                   aiOptions: {
+                    stopContext: continuousStopContext(item as any, continuousQueueV2 as any, () => finalStructuredContent, `${currentIdx}/${totalCount}번째 글 · 이미지`),
                     headingImageMode: itemPipelineCfg.image.headingImageMode,
                     fallbackProvider: resolveImageProviderFallback(),
                     stopCheck: () => !isContinuousMode,
@@ -5029,6 +5055,7 @@ async function startContinuousPublishingV2(): Promise<void> {
                     requestAnimationFrame(() => renderQueueListV2());
                   },
                   baseOptions: {
+                    stopContext: continuousStopContext(item as any, continuousQueueV2 as any, () => finalStructuredContent, `${currentIdx}/${totalCount}번째 글 · 이미지`),
                     imageModel: itemPipelineCfg.image.imageModel,
                     fallbackProvider: resolveImageProviderFallback(),
                     stopCheck: () => !isContinuousMode,
@@ -5068,6 +5095,7 @@ async function startContinuousPublishingV2(): Promise<void> {
                   headings,
                   finalStructuredContent.selectedTitle,
                   {
+                    stopContext: continuousStopContext(item as any, continuousQueueV2 as any, () => finalStructuredContent, `${currentIdx}/${totalCount}번째 글 · 이미지`),
                     headingImageMode: itemPipelineCfg.image.headingImageMode,
                     imageModel: isShoppingAiMode
                       ? itemPipelineCfg.shopping.aiImageModel
@@ -5118,6 +5146,7 @@ async function startContinuousPublishingV2(): Promise<void> {
             }
 
           } catch (imgErr) {
+            if (imgErr instanceof GstopHaltedError) throw imgErr;
             console.error('[Continuous] 이미지 생성 실패:', imgErr);
             // Circuit breaker: two posts failing image generation in a row
             // means a persistent cause (provider/session/quota) — stop the run
@@ -5327,6 +5356,7 @@ async function startContinuousPublishingV2(): Promise<void> {
       }
 
       item.status = 'completed';
+      continuousStopClear(item as any);
       delete (item as any)._publishStarted;
       // Memory hygiene: drop heavy payload references after success.
       // Queue length is preserved for progress and retry tracking,
@@ -5352,6 +5382,16 @@ async function startContinuousPublishingV2(): Promise<void> {
     } catch (error) {
       const errMsg = (error as Error).message || '';
       const publishWasDispatched = (window as any)._publishAutomationDispatched === true;
+
+      // [2026-11-24] "여기서 멈추기" / a run nobody can be asked: the post waits at its place (article and finished images stay on
+      //   the item and in the saved record), finished posts stay "completed", the next start continues from this post.
+      if (error instanceof GstopHaltedError) {
+        item.status = 'pending';
+        appendLog(`⏸️ ${error.info.stage === 'text' ? '글 쓰기' : '이미지'} 단계에서 멈췄습니다. 만든 글·이미지는 그대로 두었어요. 다시 시작하면 이 글부터 이어서 합니다.`);
+        updateContinuousProgressModal({ step: '멈춤 — 이어서 발행할 수 있어요', log: errMsg, percentage: (currentIdx / totalCount) * 100 });
+        stopContinuousMode('manual');
+        break;
+      }
 
       // ✅ [2026-04-11 FIX] instanceof + 메시지 텍스트 양쪽으로 사용자 취소 판별
       // 이미지 생성/콘텐츠 생성 등 하위 모듈에서 일반 Error로 취소를 throw하는 경우 대응
@@ -5577,6 +5617,9 @@ async function startContinuousPublishingV2(): Promise<void> {
       }
     }
   }
+
+  // [2026-11-24] The engine picked "for this run only" in the stop window ends with the run.
+  void generationStopEndRun();
 
   // [NAVER FULL AUTO] Give the one-click full auto back the writing mode the user selected.
   try {

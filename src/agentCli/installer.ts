@@ -134,10 +134,11 @@ export interface AgentLoginSessionControls {
   readonly cancel: () => void;
 }
 
-function buildAgentCommandEnv(provider: AgentProvider): NodeJS.ProcessEnv {
-  if (provider === 'codex') return buildCodexSubscriptionEnv();
+/** accountId is only for a login that targets a saved account which is not the active one yet. */
+function buildAgentCommandEnv(provider: AgentProvider, accountId?: string): NodeJS.ProcessEnv {
+  if (provider === 'codex') return buildCodexSubscriptionEnv(process.env, accountId);
   if (provider === 'gemini') return buildGeminiSubscriptionEnv();
-  return buildClaudeSubscriptionEnv();
+  return buildClaudeSubscriptionEnv(process.env, accountId);
 }
 
 /**
@@ -289,13 +290,32 @@ function loginCommand(provider: 'codex' | 'claude'): { command: string; args: st
  * Trigger the subscription login flow and wait for completion.
  * @throws AgentCliError if login fails or times out.
  */
+export interface AgentLoginOptions {
+  /**
+   * [2026-11-24] Log in to this saved account folder instead of the active account. The active
+   * account is left alone, and the "already logged in" shortcut is skipped because it describes
+   * the active account, not the one being added.
+   */
+  readonly accountId?: string;
+}
+
 export async function loginAgent(
   provider: AgentProvider,
   hooks: AgentLoginHooks = {},
+  options: AgentLoginOptions = {},
 ): Promise<AgentCliStatus> {
   provider = requireAgentProvider(provider);
+  const targetAccountId = options.accountId;
+  if (targetAccountId !== undefined) {
+    const { isAccountScopedProvider, hasAgentAccount } = await import('./accounts/accountRegistry.js');
+    if (!isAccountScopedProvider(provider) || !hasAgentAccount(provider, targetAccountId)) {
+      throw new AgentCliError('spawn_failed', provider, '저장된 계정이 아니라서 로그인할 수 없습니다.');
+    }
+  }
   const detection = await import('./detect.js');
-  const existingStatus = await detection.detectAgent(provider, { forceRefresh: true }).catch(() => undefined);
+  const existingStatus = targetAccountId !== undefined
+    ? undefined
+    : await detection.detectAgent(provider, { forceRefresh: true }).catch(() => undefined);
   if (existingStatus?.loggedIn && existingStatus.available) {
     return Object.freeze({
       ...existingStatus,
@@ -341,7 +361,7 @@ export async function loginAgent(
     args,
     provider,
     timeoutMs: LOGIN_TIMEOUT_MS,
-    env: buildAgentCommandEnv(provider),
+    env: buildAgentCommandEnv(provider, targetAccountId),
     onStdoutChunk: observeLoginOutput,
     onStderrChunk: observeLoginOutput,
   });
@@ -369,6 +389,19 @@ export async function loginAgent(
       `${provider} 로그인에 실패했거나 취소되었습니다. 브라우저에서 로그인을 완료했는지 확인해주세요.`,
       sanitizeUserVisibleError(res.stderr || res.stdout || ''),
     );
+  }
+  if (targetAccountId !== undefined) {
+    // Verify the folder that was just logged in to, not the active account the cache describes.
+    const { readAgentAccountIdentity, invalidateAgentIdentityCache } = await import('./accounts/accountService.js');
+    invalidateAgentIdentityCache(provider);
+    const identity = await readAgentAccountIdentity(provider, targetAccountId);
+    if (identity.state !== 'ok') {
+      throw new AgentCliError('not_logged_in', provider, `${provider} 로그인이 이 계정에 저장되지 않았습니다. 다시 시도해주세요.`);
+    }
+    return Object.freeze({
+      provider, installed: true, loggedIn: true, available: true,
+      availabilityCheck: 'authentication' as const, loginAction: 'authenticated' as const,
+    });
   }
   detection.clearAgentDetectionCache(provider);
   const status = await detection.detectAgent(provider, { forceRefresh: true });

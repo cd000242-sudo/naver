@@ -343,6 +343,11 @@ function readSecretInputValue(inputId: string, currentValue?: string): string | 
 }
 
 export async function initPriceInfoModal(): Promise<void> {
+  // [2026-11-24] 설정에서 계정을 바꾸면 그 에이전트의 상태 배지를 바로 다시 읽는다.
+  window.addEventListener('agent-account-changed', (event) => {
+    const provider = (event as CustomEvent<{ provider?: AgentStatusProvider }>).detail?.provider;
+    if (provider) void refreshAgentStatusBadges({ providers: [provider], forceRefresh: true });
+  });
   // ✅ 가격 정보 모달 열기/닫기 로직 추가
   const openPriceInfoBtn = document.getElementById('open-price-info-btn');
   const priceInfoModal = document.getElementById('price-info-modal');

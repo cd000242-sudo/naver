@@ -36,6 +36,9 @@ const SESSION_MIRROR_BLACKLIST_EXACT = new Set([
     'DawnGraphiteCache',
     'DawnWebGPUCache',
     'ShaderCache',
+    // [2026-11-24] Saved agent accounts hold login tokens (CODEX_HOME / CLAUDE_CONFIG_DIR per account).
+    // They must never be copied into a backup, at any depth.
+    'agent-profiles',
 ]);
 const SESSION_MIRROR_BLACKLIST_PREFIX = [
     'playwright-session',

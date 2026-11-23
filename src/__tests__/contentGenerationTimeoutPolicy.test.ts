@@ -144,7 +144,7 @@ describe('content generation timeout policy', () => {
     expect(fullAutoSrc).toMatch(/FULL_AUTO_IMAGE_MAX_ATTEMPTS\s*=\s*3/);
     expect(fullAutoSrc).toMatch(/FULL_AUTO_IMAGE_TOTAL_BUDGET_MS\s*=\s*35 \* 60 \* 1000/);
     expect(fullAutoSrc).toMatch(/imageGenerationTimeoutMs:\s*getBoundedImageTimeoutMs\(getFullAutoThumbnailImageTimeoutMs\(currentProvider\)\)/);
-    expect(fullAutoSrc).toMatch(/imageGenerationTimeoutMs:\s*getBoundedImageTimeoutMs\(getFullAutoBodyImageTimeoutMs\(currentProvider,\s*fullAutoBodyItems\.length\)\)/);
+    expect(fullAutoSrc).toMatch(/imageGenerationTimeoutMs:\s*getBoundedImageTimeoutMs\(getFullAutoBodyImageTimeoutMs\(currentProvider,\s*slots\.length\)\)/); // 2026-11-24: 묶음·빠진 칸 한 장씩 모두 남은 예산으로 제한된다
   });
 
   it('records custom prompt drift without spending another request unless explicitly opted in', () => {

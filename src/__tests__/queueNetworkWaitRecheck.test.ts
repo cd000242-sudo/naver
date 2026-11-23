@@ -36,7 +36,7 @@ describe('실행 중 NETWORK_WAIT', () => {
       showAccountPauseModal: vi.fn(), window: { _publishAutomationDispatched: false, stopFullAutoPublish: false },
       resolveInterruptedPublishStatus: (started: boolean, fallback: string) => (started ? 'uncertain' : fallback),
       appendLog: (m: string) => logs.push(m), updateContinuousProgressModal: vi.fn(), console: { log() {}, warn() {} },
-      UserCancelledError: class UserCancelledError extends Error {}, ImageManager: undefined,
+      UserCancelledError: class UserCancelledError extends Error {}, GstopHaltedError: class GstopHaltedError extends Error {}, ImageManager: undefined,
       revokeAllImageDataUrls() {}, clearImageGenerationLocks() {},
     });
     return { result, item, stopContinuousMode, logs };

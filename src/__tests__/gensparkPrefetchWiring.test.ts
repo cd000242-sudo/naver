@@ -24,7 +24,9 @@ describe('generateImagesForAutomation — 젠스파크 미리 한꺼번에', () 
 
   it('한꺼번에 요청이 실패해도 멈추지 않고 1장씩으로 넘어간다', () => {
     expect(prefetchBlock).toMatch(/catch \(gsPrefetchError\) \{[\s\S]*1장씩 만듭니다/);
-    expect(prefetchBlock).not.toMatch(/throw /);
+    // Limit / login / model stops are the same for every slot: they go to the stop window instead of being hammered one by one.
+    expect(prefetchBlock).toContain('if (generationStopIsEngineLevelError(gsPrefetchError)) throw gsPrefetchError;');
+    expect(prefetchBlock.replace('throw gsPrefetchError;', '')).not.toMatch(/throw /);
   });
 
   it('받은 칸은 루프 맨 앞에서 그대로 쓰고(재생성·재시도 없음) 칸 결과를 SUCCESS 로 알린다', () => {

@@ -289,6 +289,7 @@ import * as AuthUtils from './main/utils/authUtils.js'; // ✅ 충돌 방지용 
 import { AutomationService, injectDependencies as injectBlogExecutorDeps } from './main/services/index.js';
 import type { IAutomationInstance } from './types/automation.js';
 import { registerAllHandlers, registerAccountHandlers, registerAdminHandlers } from './main/ipc/index.js';
+import { createGenerationStopIpc, createGenerationStopStore } from './main/services/generationStopStore.js';
 import { registerConfigHandlers } from './main/ipc/configHandlers.js';
 import { registerContentHandlers } from './main/ipc/contentHandlers.js';
 import { registerHeadingHandlers } from './main/ipc/headingHandlers.js';
@@ -5071,6 +5072,7 @@ const startLdbBridgeIfEnabled = createSerializedRefresh(async () => {
         },
         lewordKeywords: request => dailyLewordSource.keywords(request),
         notify: (title, body) => { try { if (Notification.isSupported()) new Notification({ title, body }).show(); } catch { /* 알림은 선택 사항 */ } },
+        recordStop: record => generationStopStore().save(record),
         // A manual job that already won the lane (publishLane claim) counts as busy before its run locks are set.
         busy: () => Boolean(automationRunning || AutomationService.isRunning() || getExecutionLock() || publishLane.isUserClaimed()),
         safety: accountId => accountSafety.status(accountId),
@@ -5146,6 +5148,15 @@ ipcMain.handle('dailyPublishing:request', createDailyPublishingIpc({
   },
 }));
 app.on('will-quit', () => dailyPublishingRuntime?.dispose());
+// Generation-stop records (resume after a stop, also after the app is closed and opened again).
+const generationStopNotify = (title: string, body: string): void => { try { if (Notification.isSupported()) new Notification({ title, body }).show(); } catch { /* notification is optional */ } };
+let generationStopStoreInstance: ReturnType<typeof createGenerationStopStore> | undefined;
+const generationStopStore = () => (generationStopStoreInstance ??= createGenerationStopStore(app.getPath('userData')));
+const generationStopIpc = createGenerationStopIpc({ store: { list: () => generationStopStore().list(), save: record => generationStopStore().save(record), remove: id => generationStopStore().remove(id) }, notify: generationStopNotify });
+ipcMain.handle('generationStop:list', () => generationStopIpc.list());
+ipcMain.handle('generationStop:save', (_event, record, options) => generationStopIpc.save(record, options || {}));
+ipcMain.handle('generationStop:remove', (_event, id) => generationStopIpc.remove(id));
+ipcMain.handle('generationStop:notify', (_event, title, body) => { generationStopNotify(String(title || '발행이 멈췄어요').slice(0, 80), String(body || '').slice(0, 240)); return { success: true }; });
 
 /** Shared by the settings switch and the connect prompt so both reach the bridge the same way. */
 const refreshLdbBridgeAfterConfigChange = async (): Promise<void> => {

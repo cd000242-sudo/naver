@@ -28,6 +28,11 @@ import { FULL_AUTO_THUMBNAIL_SLOT_KEY, describeFullAutoImageStage, fullAutoItems
 import { buildFullAutoDirectorRequest, buildFullAutoImageCallOptions } from '../../image/fullAuto/fullAutoImageRequest.js';
 import { gsPrefetchBodyIndexes, gsPrefetchLabel, gsPrefetchMatchImages, gsPrefetchTimeoutMs } from '../../image/fullAuto/gensparkBodyPrefetch.js';
 import { describeFullAutoImagePolicy } from '../../image/fullAuto/fullAutoImagePolicy.js';
+import { GstopHaltedError, gstopSlotKey } from '../../generationStop/stageGate.js';
+import { generationStopEndRun, generationStopRunStage } from './generationStopGate.js';
+import { gstopFillShoppingSlots } from '../../generationStop/shoppingSlots.js';
+import { gstopClassify } from '../../generationStop/stopClassifier.js';
+import { generationStopIsEngineLevelError, generationStopRunImages } from './generationStopImages.js';
 import { describeFullAutoImageReview } from '../../image/fullAuto/fullAutoPublishDecision.js';
 import { recheckFullAutoDecisionBeforePublish, runFullAutoImages } from '../../image/fullAuto/fullAutoImageRunner.js';
 import { escapeHtml } from '../utils/htmlUtils.js';
@@ -449,7 +454,11 @@ async function generateImagesForAutomation(provider, headings, postTitle, option
     }
     if (flightKey) _giaInFlight.set(flightKey, Date.now());
     try {
-        return await generateImagesForAutomationInner(provider, headings, postTitle, options);
+        // [2026-11-24] A stop (limit / login / model / failed slot) opens the stop window instead of ending the run; finished
+        //   slots stay in the ledger, so same-engine / other-engine continues only make the open ones.
+        return await generationStopRunImages(provider, postTitle, options, (engine, ledger) => generateImagesForAutomationInner(
+            engine, headings, postTitle, { ...options, imageLedger: ledger, engineStopThrows: true },
+        ));
     } finally {
         if (flightKey) _giaInFlight.delete(flightKey);
     }
@@ -715,10 +724,11 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
             return [representativeThumbnail];
         }
         onProgress?.(`🎨 [run #${runId}] 쇼핑 소제목 ${bodyItems.length}개를 한 배치로 생성합니다.`);
-        const batchResult = await generateImagesWithCostSafety({
+        // [2026-11-24] Batch first; the slots that did not arrive are made again ONE AT A TIME with the SAME engine
+        //   (like the non-shopping path). A slot that still fails goes to the stop window — nothing finished is thrown away.
+        const shoppingCallBase = {
             provider,
             imageModel: options.imageModel,
-            items: shoppingBatchPlan.bodyItems,
             postTitle,
             regenerate: false,
             referenceImagePath: usableShoppingReferenceUrl,
@@ -729,34 +739,37 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
             imageFallbackPolicy: 'engine-only',
             isMultiAccount: true,
             longRunImageGeneration: true,
-            imageGenerationTimeoutMs: BATCH_TIMEOUT_MS,
+        };
+        const filled = await gstopFillShoppingSlots({
+            items: bodyItems,
+            ledger: options.imageLedger,
+            stopCheck,
+            onProgress,
+            match: gsPrefetchMatchImages,
+            isEngineLevelError: generationStopIsEngineLevelError,
+            accept: (image, accepted) => resolveShoppingAiPublishImages(null, [...accepted, image], options.collectedImages).images.length === accepted.length + 1,
+            batch: async (slots) => {
+                const batchResult = await generateImagesWithCostSafety({ ...shoppingCallBase, items: slots, allowPartialResults: true, longRunImageGeneration: true, imageGenerationTimeoutMs: BATCH_TIMEOUT_MS });
+                // The engine's own failure text must reach the stop classifier (a failed result carries it in `message`).
+                if (batchResult?.success === false && batchResult.message) throw new Error(batchResult.message);
+                return Array.isArray(batchResult?.images) ? batchResult.images : [];
+            },
+            single: async (slot) => {
+                const one = await generateImagesWithCostSafety({ ...shoppingCallBase, items: [slot], longRunImageGeneration: true, imageGenerationTimeoutMs: Math.min(BATCH_TIMEOUT_MS, 180000 + perItemBudgetMs) });
+                if (one?.success === false && one.message) throw new Error(one.message);
+                const image = Array.isArray(one?.images) ? one.images[0] : null;
+                return image ? { ...image, heading: image.heading || slot.heading, isThumbnail: false, originalIndex: image.originalIndex ?? slot.originalIndex } : null;
+            },
         });
         if (stopCheck && stopCheck())
             return [];
-        if (!batchResult?.success || !Array.isArray(batchResult.images)) {
-            throw new Error(batchResult?.message || '쇼핑 AI 이미지 배치 생성 결과가 없습니다.');
-        }
-
-        const normalizedBatchImages = batchResult.images.map((img, index) => {
-            const fallbackItem = bodyItems[index];
-            return {
-                ...img,
-                heading: img?.heading || fallbackItem?.heading,
-                isThumbnail: img?.isThumbnail ?? fallbackItem?.isThumbnail ?? false,
-                originalIndex: img?.originalIndex ?? fallbackItem?.originalIndex,
-            };
-        });
-        const safeBatch = resolveShoppingAiPublishImages(
-            representativeThumbnail,
-            normalizedBatchImages,
-            options.collectedImages,
-        );
+        const safeBatch = resolveShoppingAiPublishImages(representativeThumbnail, filled.images, options.collectedImages);
         const expectedBodyCount = bodyItems.length;
         const actualBodyCount = safeBatch.images.length - 1;
-        if (actualBodyCount !== expectedBodyCount) {
+        if (filled.missing.length > 0 || actualBodyCount !== expectedBodyCount) {
             throw new Error(
                 `SHOPPING_AI_IMAGE_BATCH_INCOMPLETE: AI 소제목 이미지 ${actualBodyCount}/${expectedBodyCount}개만 고유 결과로 확인되었습니다. `
-                + `수집 원본 ${safeBatch.removedCollectedCount}개, 중복 ${safeBatch.removedDuplicateCount}개를 차단했습니다.`,
+                + `같은 엔진으로 빠진 칸을 한 장씩 다시 만들었지만 ${filled.missing.length}칸이 남았습니다. 만든 이미지는 그대로 있습니다.`,
             );
         }
         onProgress?.(`✅ [run #${runId}] 대표 원본 1장 + AI 소제목 ${actualBodyCount}장 확인 완료`);
@@ -792,6 +805,8 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
             onProgress?.(`✅ [run #${runId}] ${gsPrefetchLabel(provider)}: ${gsPrefetched.size}/${gsPrefetchIndexes.length}장 받음${gsMissing > 0 ? ` — 못 받은 ${gsMissing}칸은 1장씩 다시 만듭니다` : ''}${gsPrefetched.size === 0 && gsPrefetchResult?.message ? ` (${String(gsPrefetchResult.message).substring(0, 160)})` : ''}`);
         }
         catch (gsPrefetchError) {
+            // [2026-11-24] A limit / login / model stop of a subscription engine is the same for every slot: go to the stop window now.
+            if (generationStopIsEngineLevelError(gsPrefetchError)) throw gsPrefetchError;
             // 로그인·모델·보안 확인 오류는 1장씩 해도 같으므로 아래 루프가 같은 오류를 만나 지금처럼 멈춘다.
             onProgress?.(`⚠️ [run #${runId}] ${gsPrefetchLabel(provider)} 한꺼번에 요청 실패 — 1장씩 만듭니다: ${String(gsPrefetchError?.message || gsPrefetchError).substring(0, 160)}`);
         }
@@ -810,6 +825,7 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
         if (gsReady) {
             // 한꺼번에 받은 칸: 다시 만들지 않는다.
             sequentialImages.push(gsReady);
+            options.imageLedger?.set(gstopSlotKey(item), gsReady);
             reportSlot(itemIndex, { state: 'SUCCESS', image: gsReady });
             onProgress?.(`✅ [${itemIndex + 1}/${_displayCount}][run #${runId}] 이미지 준비됨(한꺼번에 받음): ${String(gsReady.heading || '').substring(0, 30)}...`);
             continue;
@@ -838,6 +854,15 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
                 item.heading || postTitle,
             ));
             onProgress?.(`🛒 [${itemIndex + 1}/${_displayCount}] 대표 상품 원본을 썸네일로 배치했습니다.`);
+            continue;
+        }
+        const ledgerKey = gstopSlotKey(item);
+        const ledgerDone = options.imageLedger?.get(ledgerKey);
+        if (ledgerDone) {
+            // Made before the stop: reuse it, never draw it again.
+            sequentialImages.push(ledgerDone);
+            reportSlot(itemIndex, { state: 'SUCCESS', image: ledgerDone });
+            onProgress?.(`✅ [${itemIndex + 1}/${_displayCount}][run #${runId}] 이미 만든 이미지를 그대로 씁니다: ${String(item?.heading || '').substring(0, 30)}...`);
             continue;
         }
         let itemSucceeded = false;
@@ -890,6 +915,7 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
                         originalIndex: img?.originalIndex ?? item.originalIndex,
                     }));
                     sequentialImages.push(...normalizedImages);
+                    options.imageLedger?.set(ledgerKey, normalizedImages[0]);
                     itemSucceeded = true;
                     reportSlot(itemIndex, { state: 'SUCCESS', image: normalizedImages[0] });
                     onProgress?.(`✅ [${itemIndex + 1}/${_displayCount}][run #${runId}] 이미지 생성 완료: ${headingName}...`);
@@ -910,14 +936,16 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
                 const isUnrecoverableGenspark = errMsg.includes('[젠스파크]') && (errMsg.includes('로그인') ||
                     errMsg.includes('모델') ||
                     errMsg.includes('보안'));
-                if (isUnrecoverableGenspark || (errMsg.includes('[ImageFX]') && (errMsg.includes('시간당 한도') ||
+                // [2026-11-24] A subscription engine (Codex / Gemini / Claude Code) that is out of quota, logged out or without the model
+                //   fails every further request of the account the same way — do not send them; hand the stop to the window.
+                if (isUnrecoverableGenspark || generationStopIsEngineLevelError(lastError) || (errMsg.includes('[ImageFX]') && (errMsg.includes('시간당 한도') ||
                     errMsg.includes('한도를 초과') ||
                     errMsg.includes('세션이 만료') ||
                     errMsg.includes('접근이 거부') ||
                     errMsg.includes('안전 필터')))) {
                     console.warn(`[generateImagesForAutomation] ⛔ 회복 불가능한 이미지 엔진 오류 → 이미지 생성 중단`);
                     onProgress?.(`⛔ ${errMsg.substring(0, 200)}`);
-                    if (continueOnImageFailure) {
+                    if (continueOnImageFailure && !options.engineStopThrows) {
                         // Same engine, same account: every later slot would fail the same way.
                         failRemainingSlots(itemIndex, errMsg.substring(0, 160));
                         return sequentialImages;
@@ -937,6 +965,8 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
         if (!itemSucceeded) {
             const headingName = String(item?.heading || `image-${itemIndex + 1}`).substring(0, 30);
             const failCause = lastError?.message || 'empty image generation result';
+            const stopCause = options.engineStopThrows ? gstopClassify(lastError, 'image', provider)?.cause : undefined;
+            if (continueOnImageFailure && (stopCause === 'limit' || stopCause === 'login' || stopCause === 'model')) throw lastError;
             if (continueOnImageFailure) {
                 // [NAVER FULL AUTO] Keep the good images and the article; this slot stays empty and the
                 //   caller's publish decision holds the post for review instead of publishing it silently.
@@ -3452,20 +3482,34 @@ async function initMultiAccountPublishModal() {
                         contentPayload.assembly.draftText = queueItem.sourceUrl;
                     }
                     console.log('[FullAuto] 콘텐츠 생성 요청:', contentPayload);
-                    const apiClient = EnhancedApiClient.getInstance();
-                    const apiResponse = await apiClient.call('generateStructuredContent', [contentPayload], {
-                        retryCount: 2,
-                        retryDelay: 3000,
-                        timeout: 900000
-                    });
-                    const contentResult = apiResponse.data || { success: false, message: apiResponse.error };
-                    console.log('[FullAuto] 콘텐츠 생성 결과:', contentResult);
-                    if (isPaywallPayload(contentResult)) {
-                        activatePaywall(contentResult);
-                        throw new Error(contentResult.message || '콘텐츠 생성 실패');
-                    }
-                    if (!contentResult.success || !contentResult.content) {
-                        throw new Error(contentResult.message || '콘텐츠 생성 실패');
+                    // [2026-11-24] A writing stop (limit / login / model) opens the stop window: same engine, another engine, or stop here.
+                    //   (No saved record for multi-account: the choice is made on the spot.)
+                    const maTextEngine = (document.querySelector('input[name="primaryGeminiTextModel"]:checked'))?.value || contentPayload.assembly.generator;
+                    let paywalledResult = null;
+                    const contentResult = (await generationStopRunStage('text', maTextEngine,
+                        { kind: 'multi', label: String(queueItem.accountName || ''), noRecord: true },
+                        async (_engine, attempt) => {
+                            if (attempt > 1) contentPayload.assembly.generator = UnifiedDOMCache.getGenerator();
+                            const apiClient = EnhancedApiClient.getInstance();
+                            const apiResponse = await apiClient.call('generateStructuredContent', [contentPayload], {
+                                retryCount: 2,
+                                retryDelay: 3000,
+                                timeout: 900000
+                            });
+                            const result = apiResponse.data || { success: false, message: apiResponse.error };
+                            console.log('[FullAuto] 콘텐츠 생성 결과:', result);
+                            if (isPaywallPayload(result)) {
+                                activatePaywall(result);
+                                paywalledResult = result;
+                                return result;
+                            }
+                            if (!result.success || !result.content) {
+                                throw new Error(result.message || '콘텐츠 생성 실패');
+                            }
+                            return result;
+                        })).value;
+                    if (paywalledResult) {
+                        throw new Error(paywalledResult.message || '콘텐츠 생성 실패');
                     }
                     structuredContent = contentResult.content;
                     console.log('[FullAuto] 구조화된 콘텐츠:', structuredContent);
@@ -3831,6 +3875,7 @@ async function initMultiAccountPublishModal() {
                             break;
                     }
                     catch (imgErr) {
+                        if (imgErr instanceof GstopHaltedError) throw imgErr;
                         console.error('[FullAuto] 이미지 생성 중 오류:', imgErr);
                         addMALog(`⚠️ 이미지 생성 중 오류 발생: ${imgErr.message}`, 'warning');
                         const shoppingAiImagesRequired = queueItem.contentMode === 'affiliate' && itemPipelineCfg.shopping.subImageMode === 'ai';
@@ -4125,7 +4170,13 @@ async function initMultiAccountPublishModal() {
                     }
                 }
                 catch (error) {
-                    if (publishConfirmed) {
+                    if (error instanceof GstopHaltedError) {
+                        // [2026-11-24] "여기서 멈추기": nothing finished is thrown away, the post waits, the queue stops here.
+                        stopRequested = true;
+                        queueItem.pipelineStatus = 'pending';
+                        addMALog(`⏸️ ${queueItem.accountName}: ${error.info.stage === 'text' ? '글 쓰기' : '이미지'} 단계에서 멈췄습니다. 만든 글·이미지는 그대로 두었어요.`, 'warning');
+                    }
+                    else if (publishConfirmed) {
                         addMALog(`⚠️ ${queueItem.accountName}: 발행은 성공했지만 후처리에 실패했습니다. ${error.message}`, 'warning');
                     }
                     else {
@@ -4210,6 +4261,7 @@ async function initMultiAccountPublishModal() {
         finally {
             window.__pipelineRunCoordinator?.releasePipelineRun?.(runLease);
             isPublishing = false;
+            void generationStopEndRun();
             const wasStopped = stopRequested || window.stopFullAutoPublish;
             destroyMAFloatingBar();
             publishQueue = publishQueue.filter(item => item.pipelineStatus !== 'completed');

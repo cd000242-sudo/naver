@@ -110,7 +110,7 @@ describe('버그 1 — 배선(소스 단언)', () => {
     expect(body).not.toMatch(/api\.generateImages\(/);
   });
   it('풀오토 · 다중계정의 모든 호출은 longRunImageGeneration 표식을 달고 있다', () => {
-    for (const [file, expected] of [['fullAutoFlow', 6], ['multiAccountManager', 3]] as const) {
+    for (const [file, expected] of [['fullAutoFlow', 6], ['multiAccountManager', 4]] as const) {
       const source = read(`src/renderer/modules/${file}.ts`);
       const starts = [...source.matchAll(/generateImagesWithCostSafety\(\{/g)].map((m) => m.index ?? 0);
       expect(starts.length).toBe(expected);

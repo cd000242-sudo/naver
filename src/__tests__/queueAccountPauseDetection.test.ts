@@ -171,7 +171,7 @@ describe('continuous queue wiring (executed from the real source)', () => {
       window: { _publishAutomationDispatched: flags.dispatched, stopFullAutoPublish: false },
       resolveInterruptedPublishStatus: (started: boolean, fallback: string) => (started ? 'uncertain' : fallback),
       appendLog: (message: string) => logs.push(message), updateContinuousProgressModal: vi.fn(), console: { log() {}, warn() {} },
-      UserCancelledError: class UserCancelledError extends Error {}, ImageManager: undefined,
+      UserCancelledError: class UserCancelledError extends Error {}, GstopHaltedError: class GstopHaltedError extends Error {}, ImageManager: undefined,
       revokeAllImageDataUrls() {}, clearImageGenerationLocks() {},
     });
     return { result, item, logs, stopContinuousMode, showAccountPauseModal };

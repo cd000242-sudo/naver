@@ -6,6 +6,7 @@ import type { ContentPolicyDashboard } from './contentPolicy/operatorService.js'
 import type { PublicationState } from './contentPolicy/types.js';
 import type { RevenueDashboard, RevenueEntry, RevenueEntryInput, RevenueSettings } from './analytics/revenueOperations.js';
 import type { AgentCliStatus, AgentProvider } from './agentCli/types.js';
+import type { AgentAccountListing } from './agentCli/accounts/accountService.js';
 
 type AgentLoginProgress = Readonly<{
   provider: AgentProvider;
@@ -230,8 +231,18 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.on('agent:install-progress', handler);
     return () => { if (!active) return; active = false; ipcRenderer.removeListener('agent:install-progress', handler); };
   },
-  agentLogin: (provider: AgentProvider): Promise<{ success: boolean; status?: AgentCliStatus; authState?: 'already_authenticated' | 'authenticated'; code?: string; message?: string }> =>
-    ipcRenderer.invoke('agent:login', provider),
+  // options.accountId: log in to a saved account that is not active yet (adding an account).
+  agentLogin: (provider: AgentProvider, options?: { accountId?: string }): Promise<{ success: boolean; status?: AgentCliStatus; authState?: 'already_authenticated' | 'authenticated'; code?: string; message?: string }> =>
+    options === undefined ? ipcRenderer.invoke('agent:login', provider) : ipcRenderer.invoke('agent:login', provider, options),
+  // [2026-11-24] Saved accounts per agent: list / create a folder / switch the active one / remove.
+  agentAccountList: (provider: AgentProvider): Promise<{ success: boolean; listing?: AgentAccountListing; code?: string; message?: string }> =>
+    ipcRenderer.invoke('agent-account:list', provider),
+  agentAccountCreate: (provider: AgentProvider): Promise<{ success: boolean; accountId?: string; code?: string; message?: string }> =>
+    ipcRenderer.invoke('agent-account:create', provider),
+  agentAccountSwitch: (provider: AgentProvider, accountId: string): Promise<{ success: boolean; code?: string; message?: string }> =>
+    ipcRenderer.invoke('agent-account:switch', provider, accountId),
+  agentAccountRemove: (provider: AgentProvider, accountId: string): Promise<{ success: boolean; removedActive?: boolean; code?: string; message?: string }> =>
+    ipcRenderer.invoke('agent-account:remove', provider, accountId),
   onAgentLoginProgress: (listener: (progress: AgentLoginProgress) => void): (() => void) => {
     const handler = (_event: Electron.IpcRendererEvent, progress: AgentLoginProgress): void => listener(progress);
     ipcRenderer.on('agent:login-progress', handler);
@@ -1139,6 +1150,11 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.invoke('account:safety', accountId, action, version, outcome, token, lookup),
   getAllBlogAccounts: (): Promise<{ success: boolean; accounts?: any[]; message?: string }> =>
     ipcRenderer.invoke('account:getAll'),
+  // Generation-stop records (resume after a stop)
+  generationStopList: (): Promise<{ success: boolean; records: any[] }> => ipcRenderer.invoke('generationStop:list'),
+  generationStopSave: (record: unknown, options?: { notify?: boolean }): Promise<{ success: boolean; message?: string }> => ipcRenderer.invoke('generationStop:save', record, options),
+  generationStopRemove: (id: string): Promise<{ success: boolean }> => ipcRenderer.invoke('generationStop:remove', id),
+  generationStopNotify: (title: string, body: string): Promise<{ success: boolean }> => ipcRenderer.invoke('generationStop:notify', title, body),
   dailyPublishingRequest: (method: 'GET' | 'POST', path: string, body?: unknown): Promise<{ status: number; body: Record<string, any> }> =>
     ipcRenderer.invoke('dailyPublishing:request', method, path, body),
   // 블로그별 초기 설정(2026-10-21)

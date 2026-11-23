@@ -9,6 +9,7 @@ import {
     isMaskedSecretValue,
 } from '../../security/secretValueUtils.js';
 import { GEMINI_TEXT_MODELS, normalizeGeminiTextModelId } from '../../runtime/modelRegistry.js';
+import { setupSettingsAgentOverview, refreshSettingsAgentUsage } from './settingsAgentOverview.js';
 import {
     resolvePersistedTextModelConfig,
     resolveTextModelSelection,
@@ -201,6 +202,9 @@ function configureBrowserPreviewSaveButton(saveBtn: HTMLElement | null): void {
 // ==================== 모달 열기/닫기 ====================
 
 export function openSettingsModal(): void {
+    setupSettingsAgentOverview();
+    document.querySelectorAll<HTMLDetailsElement>('details[data-settings-api-keys]').forEach((section) => { section.open = false; });
+    void refreshSettingsAgentUsage();
     const els = getElements();
     if (!els.modal) {
         console.error('[SettingsModal] 모달 요소를 찾을 수 없습니다.');
@@ -493,6 +497,7 @@ async function saveSettings(): Promise<void> {
 let _settingsModalInitialized = false; // ✅ [2026-02-08] 이중 초기화 방지 가드
 
 export function initSettingsModal(): void {
+    setupSettingsAgentOverview();
     // ✅ [2026-02-08 FIX] 이중 초기화 방지 — 이벤트 리스너 중복 등록으로 인한 UI 깜빡거림 수정
     if (_settingsModalInitialized) {
         console.log('[SettingsModal] ⚠️ 이미 초기화됨 — 중복 호출 무시');

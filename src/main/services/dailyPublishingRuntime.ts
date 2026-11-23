@@ -6,6 +6,8 @@ import { stopsAllAccounts } from '../../automation/publishFailureClassifier.js';
 import type { DailyPublishingPlan } from '../../scheduler/dailyPublishingTypes.js';
 import { nextDailyRunAt, nextDailyScheduledFor, resolveDailyCaptureCategory, resolveDailyImageMode, usesDailyAiImages } from '../../scheduler/dailyPublishingModel.js';
 import { collectNewMissedJobs, markMissedJobsSeen, missedNoticeText } from './dailyMissedNotice.js';
+import { dailyGenerationStopRecord } from './dailyGenerationStop.js';
+import type { GstopRecord } from '../../generationStop/resumeRecord.js';
 import path from 'node:path';
 
 interface Dependencies extends Omit<DailyPublishingExecutorDeps, 'reserveSource'> {
@@ -19,6 +21,8 @@ interface Dependencies extends Omit<DailyPublishingExecutorDeps, 'reserveSource'
   keepAwake?: (on: boolean) => void;
   /** Tells the owner the plan stopped and why (desktop notification). */
   notify?: (title: string, body: string) => void;
+  /** Saves a "generation stopped here" record (limit / login / model) so the app can show the resume card. */
+  recordStop?: (record: GstopRecord) => Promise<void>;
   /** False only when the engine clearly reports a logged-out session; an unknown result must not block saving. */
   imageEngineReady?: (provider: string) => Promise<boolean>;
 }
@@ -26,6 +30,14 @@ interface Dependencies extends Omit<DailyPublishingExecutorDeps, 'reserveSource'
 export function createDailyPublishingRuntime(deps: Dependencies) {
   let running = false;
   const active = new Map<string, AbortController>();
+  /** A post that stopped while writing or drawing: save the record and notify. The engine is never switched (no window to ask). */
+  const recordGenerationStop = async (plan: DailyPublishingPlan, job: { key: string }, message: unknown) => {
+    if (!deps.recordStop || typeof message !== 'string' || !message) return;
+    const record = dailyGenerationStopRecord({ plan, job, message, now: (deps.now || (() => new Date()))().getTime() });
+    if (!record) return;
+    await deps.recordStop(record).catch(() => undefined);
+    deps.notify?.('매일 자동발행이 멈췄어요', `${record.summary} — 앱을 열어 확인해 주세요. 모델은 자동으로 바꾸지 않았어요.`);
+  };
   const executor = createDailyPublishingExecutor({ ...deps, assertAllowed: async () => {
     if (!running) throw Error('DAILY_RUNTIME_STOPPED');
     await deps.assertAllowed?.();
@@ -55,8 +67,13 @@ export function createDailyPublishingRuntime(deps: Dependencies) {
       if (!running || !status.ready || !status.paid) return { confirmed: false };
       const controller = new AbortController();
       active.set(plan.accountId, controller);
-      try { return await executor({ ...plan, id: job.key, scheduledFor: job.scheduledFor, prepareAt: job.prepareAt, signal: controller.signal }); }
+      try {
+        const outcome = await executor({ ...plan, id: job.key, scheduledFor: job.scheduledFor, prepareAt: job.prepareAt, signal: controller.signal });
+        if (!outcome.confirmed) await recordGenerationStop(plan, job, outcome.message);
+        return outcome;
+      }
       catch (error) {
+        await recordGenerationStop(plan, job, error instanceof Error ? error.message : undefined);
         // A thrown login/protection block still stops the plan; any other error skips only this post.
         if (dailyStopsAccount(error) || stopsAllAccounts(error)) return { confirmed: false, stopAccount: true, stopAll: stopsAllAccounts(error) };
         // Every keyword of a search/mate plan (and, unless it says stop, every related search) was used: nothing left to write.

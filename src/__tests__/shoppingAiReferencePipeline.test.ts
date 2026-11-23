@@ -125,7 +125,13 @@ describe('shopping AI reference pipeline', () => {
     const fullAuto = read('renderer/modules/fullAutoFlow.ts');
 
     expect(sharedGenerator).toContain('createShoppingAiBatchPlan({');
-    expect(sharedGenerator).toContain('items: shoppingBatchPlan.bodyItems');
+    // [2026-11-24] The batch request is owned by gstopFillShoppingSlots: every body slot is requested at once (items: bodyItems =
+    //   the plan's bodyItems), then only the open slots are made again with the same engine. Collected originals and duplicates
+    //   are filtered in `accept` by the same function.
+    expect(sharedGenerator).toContain('const bodyItems = shoppingBatchPlan.bodyItems;');
+    expect(sharedGenerator).toContain('gstopFillShoppingSlots({');
+    expect(sharedGenerator).toContain('items: bodyItems,');
+    expect(sharedGenerator).toMatch(/batch: async \(slots\) => \{[\s\S]*?items: slots,/);
     expect(sharedGenerator).toContain('resolveShoppingAiPublishImages(');
     expect(fullAuto).toContain('const shoppingBatchItems =');
     expect(fullAuto).toContain('items: shoppingBatchItems');

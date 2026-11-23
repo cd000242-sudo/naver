@@ -19,6 +19,7 @@ import {
   stripSecretSchemaArtifacts,
 } from './security/secretValueUtils.js';
 import { dropRemovedConfigKeysOnce } from './security/removedConfigKeys.js';
+import { withFirstRunEngineDefaults } from './configFirstRunDefaults.js';
 import {
   normalizeGeminiPrepaidTextModelId,
 } from './runtime/geminiTextModelNormalization.js';
@@ -759,7 +760,7 @@ export async function loadConfig(): Promise<AppConfig> {
       console.log('[Config] 설정 파일이 없습니다. 새로 생성합니다:', filePath);
       // 배포 모드에서 기본 설정 생성 (모든 민감 정보 없음)
       if (isPackaged) {
-        const defaultConfig: AppConfig = {
+        const defaultConfig: AppConfig = withFirstRunEngineDefaults<AppConfig>({
           // API 키들 빈 값
           geminiApiKey: '',
           openaiApiKey: '',
@@ -782,7 +783,7 @@ export async function loadConfig(): Promise<AppConfig> {
           dailyPostLimit: Number.MAX_SAFE_INTEGER, // [2026-08-04] 발행 한도 해제 — 사용자 지시
           hideDailyLimitWarning: false,
           enableFreeTrialButton: true,
-        };
+        });
         try {
           await fs.writeFile(filePath, JSON.stringify(defaultConfig, null, 2), 'utf-8');
           console.log('[Config] 배포 모드: 기본 설정 파일 생성 완료 (모든 민감 정보 없음)');
@@ -796,7 +797,8 @@ export async function loadConfig(): Promise<AppConfig> {
       console.error('[Config] 설정 파일 읽기 실패:', err.message);
       console.error('[Config] 파일 경로:', filePath);
     }
-    cachedConfig = {};
+    // Only a missing settings file is a first run; a damaged or unreadable one is not.
+    cachedConfig = err.code === 'ENOENT' ? withFirstRunEngineDefaults<AppConfig>({}) : {};
     return cachedConfig;
   }
 }

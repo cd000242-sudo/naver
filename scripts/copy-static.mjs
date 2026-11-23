@@ -266,6 +266,9 @@ try {
     // UI/이벤트 관련 (마지막에 로드)
     'categoryModalUtils.js',
     'appEventsHandler.js',
+    // [2026-11-24] 계정 목록 — settingsAgentOverview 가 import 하므로 먼저 로드. settingsAgentAcct 접두사로 유일.
+    'settingsAgentAccounts.js',
+    'settingsAgentOverview.js',
     'settingsModal.js',
   ];
   let utilsSource = '';
@@ -538,6 +541,23 @@ try {
       label: 'image/fullAuto/fullAutoImageAsset.js',
       filePath: path.join(projectRoot, 'dist', 'image', 'fullAuto', 'fullAutoImageAsset.js'),
     },
+    // [2026-11-24] 생성 멈춤 창 · 이어 가기 — 순수 파일(식별자 gstop 접두 유일). 의존 순서: stopClassifier → stageGate → resumeRecord · shoppingSlots.
+    {
+      label: 'generationStop/stopClassifier.js',
+      filePath: path.join(projectRoot, 'dist', 'generationStop', 'stopClassifier.js'),
+    },
+    {
+      label: 'generationStop/stageGate.js',
+      filePath: path.join(projectRoot, 'dist', 'generationStop', 'stageGate.js'),
+    },
+    {
+      label: 'generationStop/resumeRecord.js',
+      filePath: path.join(projectRoot, 'dist', 'generationStop', 'resumeRecord.js'),
+    },
+    {
+      label: 'generationStop/shoppingSlots.js',
+      filePath: path.join(projectRoot, 'dist', 'generationStop', 'shoppingSlots.js'),
+    },
   ];
 
   let rendererRuntimeDependencySource = '';
@@ -607,6 +627,12 @@ try {
     // [2026-11-07] 연속발행·다중계정 시작 전 에이전트/Codex 이미지 연결 확인 — 두 모듈이 호출하므로 먼저 로드
     //   (agentConnectFlow·agentConnectGate 는 위에서 이미 로드). 식별자는 publishPreflight 접두사로 유일.
     'publishStartPreflight.js',
+    // [2026-11-24] 생성이 멈췄을 때 막는 창 + 이어 가기 관문 (continuousPublishing · multiAccountManager · fullAutoFlow 가 호출 — 먼저 로드). 식별자는 generationStop 접두사로 유일.
+    'generationStopModal.js',
+    'generationStopGate.js',
+    'generationStopImages.js',
+    'continuousStopResume.js',
+    'generationStopResumeCard.js',
     'pipelineConfig.js',  // [Phase 7.1] 발행 파이프라인 설정 단일 해석처 (publishingHandlers/continuousPublishing/multiAccountManager보다 먼저 로드)
     'accountPauseModal.js',  // [2026-10-09] 메인 화면 발행 중 계정 멈춤 안내 패널 (continuousPublishing/fullAutoFlow 가 import)
     'accountConnectPanel.js',  // [2026-11-03] 🔗 네이버 계정 연결 칸 (accountManageWindow 가 import — 먼저 로드, 메인 화면 #naver-connect-slot 에도 스스로 붙음)

@@ -15,6 +15,11 @@ import { readFileSync, writeFileSync, mkdirSync } from 'fs';
 import { join, dirname } from 'path';
 import type { AgentProvider } from './types.js';
 import { parseAbsoluteResetAt } from './rateLimitReset.js';
+import {
+  DEFAULT_ACCOUNT_ID,
+  getActiveAgentAccountId,
+  isAccountScopedProvider,
+} from './accounts/accountRegistry.js';
 
 export const AGENT_USAGE_WINDOW_MS = 5 * 60 * 60 * 1000;
 const MAX_EVENTS_PER_PROVIDER = 500;
@@ -51,7 +56,17 @@ interface ProviderUsage {
   manualLimit?: number;
 }
 
-type UsageFile = Partial<Record<AgentProvider, ProviderUsage>>;
+/**
+ * Keyed by provider for the default account (unchanged from before) and by "<provider>:<id>" for a
+ * saved account, so one account's calls and rate limit never describe another account.
+ */
+type UsageFile = Record<string, ProviderUsage | undefined>;
+
+function usageKey(provider: AgentProvider, accountId?: string): string {
+  if (!isAccountScopedProvider(provider)) return provider;
+  const target = accountId ?? getActiveAgentAccountId(provider);
+  return target === DEFAULT_ACCOUNT_ID ? provider : `${provider}:${target}`;
+}
 
 export interface AgentUsageWindow {
   provider: AgentProvider;
@@ -121,11 +136,12 @@ function pruned(entry: ProviderUsage | undefined, now: number): ProviderUsage {
 /** 사용자가 입력한 한도를 저장한다. 0 이하를 주면 지운다. */
 export function recordAgentManualLimit(provider: AgentProvider, limit: number): void {
   const data = loadFile();
-  const entry = pruned(data[provider], Date.now());
+  const key = usageKey(provider);
+  const entry = pruned(data[key], Date.now());
   const normalized = Math.floor(Number(limit) || 0);
   if (normalized > 0) entry.manualLimit = normalized;
   else delete entry.manualLimit;
-  data[provider] = entry;
+  data[key] = entry;
   saveFile(data);
 }
 
@@ -134,19 +150,21 @@ export function recordAgentPlan(provider: AgentProvider, plan: string | undefine
   const normalized = String(plan ?? '').trim();
   if (!normalized) return;
   const data = loadFile();
-  const entry = pruned(data[provider], Date.now());
+  const key = usageKey(provider);
+  const entry = pruned(data[key], Date.now());
   if (entry.plan === normalized) return; // 같은 값이면 파일을 다시 쓰지 않는다.
   entry.plan = normalized;
-  data[provider] = entry;
+  data[key] = entry;
   saveFile(data);
 }
 
 /** Record one successful generate call. */
 export function recordAgentCall(provider: AgentProvider, now: number = Date.now()): void {
   const data = loadFile();
-  const entry = pruned(data[provider], now);
+  const key = usageKey(provider);
+  const entry = pruned(data[key], now);
   entry.calls.push(now);
-  data[provider] = entry;
+  data[key] = entry;
   saveFile(data);
 }
 
@@ -199,7 +217,8 @@ export function recordAgentRateLimit(
   now: number = Date.now(),
 ): void {
   const data = loadFile();
-  const entry = pruned(data[provider], now);
+  const key = usageKey(provider);
+  const entry = pruned(data[key], now);
   const resetAt = parseRateLimitReset(rawMessage, now);
   entry.rateLimit = { at: now, ...(resetAt ? { resetAt } : {}) };
   // [2026-08-26] 막힌 순간의 창 내 호출 수 = 이 플랜이 앱에 허용한 실측 용량.
@@ -208,16 +227,17 @@ export function recordAgentRateLimit(
     entry.observedLimits = [...(entry.observedLimits ?? []), entry.calls.length]
       .slice(-OBSERVED_LIMIT_HISTORY);
   }
-  data[provider] = entry;
+  data[key] = entry;
   saveFile(data);
 }
 
-/** Current rolling-window snapshot for the UI. */
+/** Current rolling-window snapshot for the UI. accountId defaults to the active account. */
 export function getAgentUsageWindow(
   provider: AgentProvider,
   now: number = Date.now(),
+  accountId?: string,
 ): AgentUsageWindow {
-  const entry = pruned(loadFile()[provider], now);
+  const entry = pruned(loadFile()[usageKey(provider, accountId)], now);
   const oldest = entry.calls[0];
   // 관측값 중 최솟값을 쓴다 — 가장 보수적인 추정이라 "된다고 했는데 막혔다"를 줄인다.
   const observedLimit = entry.observedLimits?.length

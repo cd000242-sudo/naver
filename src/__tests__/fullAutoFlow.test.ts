@@ -230,7 +230,10 @@ describe('full-auto image failure policy', () => {
     expect(source).toContain('const originalProvider = isShoppingAiMode');
     expect(source).toContain('? (formData.scAIImageEngine || formData.imageSource)');
     expect(source).toContain(': formData.imageSource');
-    expect(source).toMatch(/return originalProvider/);
+    // [2026-11-24] The engine changes only by the owner's answer in the stop window (handOffImageStop); never by the app.
+    expect(source).toMatch(/let activeProvider = originalProvider;/);
+    expect(source).toMatch(/return activeProvider;/);
+    expect([...source.matchAll(/activeProvider = ([^;]+);/g)].map((m) => m[1].trim()).filter((v) => v !== 'originalProvider' && v !== 'await handOffImageStop(imgError)')).toEqual([]);
     expect(source).not.toMatch(/const FALLBACK_CHAIN/);
   });
 
