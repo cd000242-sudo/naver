@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T00:52:11.870Z",
+ "builtAt": "2026-11-23T01:02:14.992Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,101 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 24,
  "candidates": [
   {
-   "keyword": "이재명 대통령 지지율",
+   "keyword": "코스피 급락",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 45,
-   "recent20": 4,
-   "press": 44,
-   "firstArticleAt": "2026-11-22T23:25:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령 지지율 37.3% 횡보…국민의힘 42.5%·민주당 35.6% [리얼미터]",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-23T00:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003158175?sid=100"
-    },
-    {
-     "title": "이 대통령 지지율 2주 연속 상승 37.3%…30%대 중후반 횡보",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-23T00:45:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085501"
-    },
-    {
-     "title": "李 지지율 37.3%, 2주 연속 소폭 상승",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-23T00:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001886801?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "삼성전자 SK하이닉스 급락",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 41,
-   "recent20": 10,
-   "press": 37,
-   "firstArticleAt": "2026-11-22T23:50:00.000Z",
+   "articles90": 82,
+   "recent20": 29,
+   "press": 66,
+   "firstArticleAt": "2026-11-23T00:18:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "[신윤우의 외환분석] 엄습하는 증시 급락의 어두운 그림자",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-23T00:50:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445972"
+     "title": "코스피, 美 증시발 충격에 4700선 후퇴…정부 '증시 방어'에 총력",
+     "press": "industrynews.co.kr",
+     "publishedAt": "2026-11-23T01:00:00.000Z",
+     "link": "https://www.industrynews.co.kr/news/articleView.html?idxno=90016"
     },
     {
-     "title": "美 기술주 급락 충격…코스피 4700선까지 밀렸다 [시황]",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-23T00:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003158178?sid=101"
+     "title": "코스피, 美 기술주 급락 여파에 2%대 하락 출발···4700선 후퇴",
+     "press": "seoulfn.com",
+     "publishedAt": "2026-11-23T00:59:00.000Z",
+     "link": "https://www.seoulfn.com/news/articleView.html?idxno=643588"
     },
     {
-     "title": "AI 급락, 저점 매수 기회일까…월가의 판단은",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-23T00:48:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445970"
+     "title": "[장중시황] 코스피, 美 기술주 급락에 4700선 붕괴…반도체주 동반 약세",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-23T00:58:00.000Z",
+     "link": "https://www.viva100.com/article/20261123500296"
+    }
+   ]
+  },
+  {
+   "keyword": "조희대 대법원장 탄핵",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 62,
+   "recent20": 26,
+   "press": 47,
+   "firstArticleAt": "2026-11-22T23:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "법관대표회의 의장 \"대법원장 탄핵은 도 넘어선 것…행동 나서야\"",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-23T01:00:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=903976"
+    },
+    {
+     "title": "[정치家] 김민석 더불어민주당 대표 ⑫ㅣ 조희대 탄핵 강공·당내 기강...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-23T01:00:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629721"
+    },
+    {
+     "title": "김재원 \"'조희대 탄핵' 김민석 위기 돌파용…친청은 李 궁지 빠뜨리려고...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T00:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009304225?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "11월 수출 역대 최대",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 51,
+   "recent20": 13,
+   "press": 42,
+   "firstArticleAt": "2026-11-23T00:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "11월 1~20일 수출 774억달러…반도체 385억달러",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-23T00:56:00.000Z",
+     "link": "https://www.tokenpost.kr/news/economy/442648"
+    },
+    {
+     "title": "반도체 294% 폭증에… 이달 중순 수출 774억 달러 '역대 최대'",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-23T00:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193244?sid=101"
+    },
+    {
+     "title": "'1조달러' 넘어선 韓수출…\"연말엔 1조1700억달러 간다\"(종합)",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-23T00:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005846284?sid=101"
     }
    ]
   },
@@ -79,13 +111,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 24,
-   "recent20": 5,
-   "press": 22,
+   "articles90": 25,
+   "recent20": 4,
+   "press": 23,
    "firstArticleAt": "2026-11-22T23:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "에이티즈, 美 빌보드 200 차트 1위… 통산 4번째",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-23T00:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001206592?sid=004"
+    },
     {
      "title": "에이티즈, 통산 네 번째 빌보드 200 1위",
      "press": "kukinews.com",
@@ -97,12 +135,6 @@
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-23T00:46:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002436622?sid=103"
-    },
-    {
-     "title": "에이티즈, '빌보드 200' 네 번째 정상...10개 앨범 연속 톱10",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-23T00:44:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=565724"
     }
    ]
   },
@@ -112,7 +144,7 @@
     "signal.bz"
    ],
    "articles90": 10,
-   "recent20": 1,
+   "recent20": 0,
    "press": 10,
    "firstArticleAt": "2026-11-22T23:50:00.000Z",
    "exclusive": false,
@@ -139,34 +171,98 @@
    ]
   },
   {
-   "keyword": "리비아 러시아 군함 피격",
+   "keyword": "현대차 N 컵 결승 개최",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-22T23:35:00.000Z",
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-22T23:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘우크라 공격 추정’ 리비아항 러 군함 피격…러, 키이우 공습",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-23T00:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012299043?sid=104"
+     "title": "현대차, 지스타서 'N 버츄얼컵' 결승 개최… 고성능 N 브랜드 체험 공간...",
+     "press": "ilyoseoul.co.kr",
+     "publishedAt": "2026-11-23T00:58:00.000Z",
+     "link": "https://www.ilyoseoul.co.kr/news/articleView.html?idxno=525443"
     },
     {
-     "title": "우크라戰 확전 조짐…리비아서 러시아 군함 피격",
+     "title": "현대차, '2026 현대 N 버츄얼컵' 마무리…김규민 시즌 챔피언",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-23T00:52:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2021934"
+    },
+    {
+     "title": "현대차, 지스타서 '현대 N 버츄얼컵' 시즌 결승 개최",
      "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-23T00:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004212553?sid=104"
+     "publishedAt": "2026-11-23T00:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004212540?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "2027년 전망 하나증권",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-22T23:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "KB금융 이재근 회장 \"국내 1등에 안주 않겠다\"…2027년 글로벌 금융플랫...",
+     "press": "news.ifm.kr",
+     "publishedAt": "2026-11-23T01:00:00.000Z",
+     "link": "https://news.ifm.kr/news/articleView.html?idxno=485175"
     },
     {
-     "title": "우크라 전선 넓히나‥리비아서 러 군함 등 연달아 피격",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-23T00:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001537325?sid=104"
+     "title": "유안타證, 내년 코스피 최저 4000선 전망…외국인 매도 공세 영향",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-23T00:28:00.000Z",
+     "link": "https://www.ajunews.com/view/20261123091418891"
+    },
+    {
+     "title": "에쓰오일, 올해 영업익 4조 회복 전망…내년 샤힌이 변수",
+     "press": "datanews.co.kr",
+     "publishedAt": "2026-11-22T23:46:00.000Z",
+     "link": "http://www.datanews.co.kr/news/article.html?no=147735"
+    }
+   ]
+  },
+  {
+   "keyword": "이용철 후보자 인사청문회 준비",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T00:29:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "성남산업진흥재단, 이용철 후보자 대표 시절 호남향우회장 자녀 채용",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-23T00:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003158183?sid=102"
+    },
+    {
+     "title": "법무장관 인사청문회 D-1…공소취소 입장 묻자 \"내일 답변\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-23T00:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000652739?sid=100"
+    },
+    {
+     "title": "인사청문회 D-1…이용철, 공소취소 입장에 \"내일 답변\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-23T00:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014338750?sid=102"
     }
    ]
   },
@@ -175,10 +271,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 5,
+   "articles90": 3,
    "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-22T23:24:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-22T23:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -203,66 +299,66 @@
    ]
   },
   {
-   "keyword": "나스닥 선물",
+   "keyword": "노시환",
    "sources": [
     "google"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-22T23:26:00.000Z",
+   "firstArticleAt": "2026-11-22T23:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "나스닥 선물 2.7% 급반등…골드만 \"저가매수 기회지만 위험 여전\"(종합)",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T00:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009304180?sid=104"
+     "title": "\"307억 계약, 진짜 시작도 못 하고 사라질까\"… 캔자스시티까지 노시환...",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-23T01:01:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/014/0005608074"
     },
     {
-     "title": "나스닥 '코로나 이후 최악의 한 주'…아시아 증시 또 흔들리나",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-22T23:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006413924?sid=101"
+     "title": "노시환 MLB행, 양키스·캔자스시티 후보로 거론…307억 한화 계약은 어떻...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-23T00:30:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283462"
     },
     {
-     "title": "나스닥 선물 1.3% 상승…추수감사절 앞두고 저가 매수에 반등 시도",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T23:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009303975?sid=104"
+     "title": "‘한·일 포스팅 역사’ 307억 포기한 노시환에 빅리그 문 열릴까 [머니...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-22T23:55:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/119/0003158123"
     }
    ]
   },
   {
-   "keyword": "현대차 N 버츄얼컵 결승 진행",
+   "keyword": "장동혁 최고위 참석",
    "sources": [
     "nate"
    ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-22T23:29:00.000Z",
+   "firstArticleAt": "2026-11-23T00:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "지스타 달군 '현대 N 버츄얼컵', 초대형 스크린 앞 12인 결승 질주",
-     "press": "newsroad.co.kr",
-     "publishedAt": "2026-11-23T00:10:00.000Z",
-     "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=68216"
+     "title": "최고위 참석하는 장동혁 대표",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-23T00:28:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261123000264"
     },
     {
-     "title": "[지스타2026] 현대차, 'N 버츄얼컵' 결승…김규민 2점차 우승",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-22T23:58:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086381"
+     "title": "최고위 참석하는 장동혁·정점식",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T00:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009304138?sid=100"
     },
     {
-     "title": "지스타 2026 나흘간 20만1000명…현대차·AI 플랫폼 등 이종 산업으로 외...",
-     "press": "greened.kr",
-     "publishedAt": "2026-11-22T23:29:00.000Z",
-     "link": "https://www.greened.kr/news/articleView.html?idxno=355260"
+     "title": "최고위 참석하는 장동혁 국민의힘 대표",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-23T00:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014338742?sid=100"
     }
    ]
   },
@@ -297,11 +393,43 @@
      "link": "https://m.entertain.naver.com/article/609/0001190305"
     }
    ]
+  },
+  {
+   "keyword": "나스닥 선물",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-22T23:39:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "나스닥 선물 2.7% 급반등…골드만 \"저가매수 기회지만 위험 여전\"(종합)",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T00:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009304180?sid=104"
+    },
+    {
+     "title": "나스닥 '코로나 이후 최악의 한 주'…아시아 증시 또 흔들리나",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-22T23:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006413924?sid=101"
+    },
+    {
+     "title": "나스닥 선물 1.3% 상승…추수감사절 앞두고 저가 매수에 반등 시도",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-22T23:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009303975?sid=104"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1144,
+  "flagged": 1149,
   "matched": 635,
   "avgLeadMin": 598,
   "recent": [
