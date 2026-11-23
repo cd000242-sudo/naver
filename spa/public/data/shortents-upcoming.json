@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T15:21:42.909Z",
+ "builtAt": "2026-11-23T15:31:46.464Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,63 +15,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 98,
-   "recent20": 38,
-   "press": 74,
-   "firstArticleAt": "2026-11-23T14:38:00.000Z",
+   "articles90": 97,
+   "recent20": 30,
+   "press": 72,
+   "firstArticleAt": "2026-11-23T14:44:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "젠슨 황, 엔비디아 복귀한다…이사회, 만장일치 복귀 결정",
-     "press": "byline.network",
-     "publishedAt": "2026-11-23T15:20:00.000Z",
-     "link": "https://byline.network/?p=9004111222628875"
+     "title": "위기 속 엔비디아 '선발' 젠슨 황, CEO·이사회 이사로 즉시 복직",
+     "press": "globale.co.kr",
+     "publishedAt": "2026-11-23T15:30:00.000Z",
+     "link": "https://www.globale.co.kr/news/articleView.html?idxno=41807"
     },
     {
-     "title": "엔비디아 이사회, 젠슨 황 복귀 결정…사임 11일 만",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-23T15:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001405236?sid=104"
+     "title": "11일 만에 돌아온 젠슨 황…트럼프 “국가적 보물”",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-23T15:30:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611240001"
     },
     {
-     "title": "[종합] 젠슨 황, 엔비디아 CEO 전격 복귀…트럼프 \"위대한 애국자\" 극찬",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-23T15:18:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904137"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨황 복귀",
-   "sources": [
-    "google",
-    "daum"
-   ],
-   "articles90": 25,
-   "recent20": 9,
-   "press": 13,
-   "firstArticleAt": "2026-11-23T14:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "트럼프, 젠슨 황 CEO 복귀 환영…\"불법행위 관여 증거 없다\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-23T15:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929181?sid=104"
-    },
-    {
-     "title": "‘유퀴즈 저주 깼다’ 젠슨 황, 사임 11일 만에 엔비디아 CEO 전격 복귀",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-23T15:12:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001148066"
-    },
-    {
-     "title": "[속보]엔비디아 젠슨 황, 반도체 왕의 귀환인가 복귀인가…반도체 종목...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-23T15:10:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629999"
+     "title": "가족도 품었다?..젠슨 황, 불륜 인정 후 CEO 복귀 \"사랑과 응원 감사\"",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-23T15:29:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005644339"
     }
    ]
   },
@@ -80,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 17,
+   "articles90": 18,
    "recent20": 1,
-   "press": 13,
+   "press": 14,
    "firstArticleAt": "2026-11-23T14:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "전자발찌 끊고 도주한 정영모, 세종서 검거",
+     "press": "joongdo.co.kr",
+     "publishedAt": "2026-11-23T15:26:00.000Z",
+     "link": "https://www.joongdo.co.kr/web/view.php?key=20261124010008084"
+    },
     {
      "title": "전자발찌 훼손하고 도주한 성범죄자 정영모…이틀만에 세종서 검거",
      "press": "nocutnews.co.kr",
@@ -98,12 +71,70 @@
      "press": "hankookilbo.com",
      "publishedAt": "2026-11-23T14:59:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/469/0000967309?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨황 복귀",
+   "sources": [
+    "google"
+   ],
+   "articles90": 27,
+   "recent20": 4,
+   "press": 13,
+   "firstArticleAt": "2026-11-23T14:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "트럼프 “젠슨황, 위대한 애국자…CEO 복귀 타당”",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-23T15:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002834931?sid=101"
     },
     {
-     "title": "충북 진천서 전자발찌 훼손하고 도주한 50대 이틀 만에 검거",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-23T14:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001537516?sid=102"
+     "title": "젠슨황 11일 만에 전격 컴백 … 엔비디아 30%대, 나스닥 7%대 급등 출발",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-23T15:22:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/24/2026112450003.html"
+    },
+    {
+     "title": "트럼프, 젠슨 황 CEO 복귀 환영…\"불법행위 관여 증거 없다\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-23T15:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929181?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "강금실 국정원장 후보자",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-23T14:03:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "강금실 국정원장 후보자…네팔 기후외교에서 정보기관 수장 후보로, 저...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-23T15:30:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630008"
+    },
+    {
+     "title": "국정원장 강금실·통일장관 홍익표 '중폭' 개각",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-23T15:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001405237?sid=100"
+    },
+    {
+     "title": "이 대통령 외교·안보라인 중폭 개각…국정원장에 강금실",
+     "press": "kado.net",
+     "publishedAt": "2026-11-23T15:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000213001?sid=100"
     }
    ]
   },
@@ -112,10 +143,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-23T13:58:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-23T14:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -136,38 +167,6 @@
      "press": "tfmedia.co.kr",
      "publishedAt": "2026-11-23T14:22:00.000Z",
      "link": "https://www.tfmedia.co.kr/news/article.html?no=209150"
-    }
-   ]
-  },
-  {
-   "keyword": "강금실 국정원장 후보자",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-23T13:55:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이 대통령 외교·안보라인 중폭 개각…국정원장에 강금실",
-     "press": "kado.net",
-     "publishedAt": "2026-11-23T15:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000213001?sid=100"
-    },
-    {
-     "title": "이재명 대통령, 4개 부처 장관·국정원장 동시 교체",
-     "press": "ksilbo.co.kr",
-     "publishedAt": "2026-11-23T15:04:00.000Z",
-     "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1073368"
-    },
-    {
-     "title": "국정원장에 강금실 '파격 발탁'…정보·방첩 역량은 시험대",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-23T15:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000554791?sid=100"
     }
    ]
   },
@@ -232,38 +231,6 @@
      "press": "ggilbo.com",
      "publishedAt": "2026-11-23T14:20:00.000Z",
      "link": "https://www.ggilbo.com/news/articleView.html?idxno=1195012"
-    }
-   ]
-  },
-  {
-   "keyword": "jensen huang",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-23T14:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "Nvidia restituye a Jensen Huang como director ejecutivo",
-     "press": "nytimes.com",
-     "publishedAt": "2026-11-23T14:46:00.000Z",
-     "link": "https://www.nytimes.com/es/2026/11/23/espanol/negocios/jensen-huang-nvidia.html?partner=naver"
-    },
-    {
-     "title": "(FILE) USA BUSINESS NVIDIA HUANG",
-     "press": null,
-     "publishedAt": "2026-11-23T14:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/091/0010376358?sid=104"
-    },
-    {
-     "title": "Nvidia reinstates Jensen Huang as CEO after scandal-driven exit",
-     "press": "koreaherald.com",
-     "publishedAt": "2026-11-23T14:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/044/0000292579?sid=104"
     }
    ]
   }
