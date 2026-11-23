@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T22:34:19.283Z",
+ "builtAt": "2026-11-23T22:44:24.578Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,38 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 28,
  "candidates": [
   {
-   "keyword": "트럼프, 젠슨 황 복귀 결정 개입",
+   "keyword": "젠슨 황 복귀",
    "sources": [
-    "signal.bz",
-    "nate"
+    "daum"
    ],
-   "articles90": 50,
-   "recent20": 9,
-   "press": 43,
-   "firstArticleAt": "2026-11-23T21:05:00.000Z",
+   "articles90": 84,
+   "recent20": 77,
+   "press": 63,
+   "firstArticleAt": "2026-11-23T22:22:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "트럼프 \"젠슨 황 복귀, 내가 직접 개입\"⋯美 재계·정가 '후폭풍', \"안보...",
-     "press": "autodaily.co.kr",
-     "publishedAt": "2026-11-23T22:32:00.000Z",
-     "link": "https://www.autodaily.co.kr/news/articleView.html?idxno=602360"
+     "title": "\"컴퓨터 없으니 새 PC 달라\" 젠슨황, 복귀 첫날 '농담'…직원은 3개 층서...",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-23T22:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001041890?sid=104"
     },
     {
-     "title": "[테크인사이드] 돌아온 젠슨 황...AI 버블론까지 잠재울까",
-     "press": "digitaltoday.co.kr",
-     "publishedAt": "2026-11-23T22:30:00.000Z",
-     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=717570"
+     "title": "젠슨 황 돌아왔는데…트럼프 정부, ‘내연녀’ 회사 제재",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-23T22:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003702463?sid=104"
     },
     {
-     "title": "[젠슨 황 복귀] 美 의회 초당적 반발…조사·규제 강화 촉구",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-23T22:28:00.000Z",
-     "link": "https://www.ajunews.com/view/20261124072452671"
+     "title": "젠슨 황 내보냈다 다시 불러들인 엔비디아… 전문가들 “이사회가 CEO 견...",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-23T22:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004011365?sid=101"
     }
    ]
   },
@@ -49,30 +48,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 3,
-   "press": 12,
-   "firstArticleAt": "2026-11-23T21:10:00.000Z",
+   "articles90": 13,
+   "recent20": 4,
+   "press": 13,
+   "firstArticleAt": "2026-11-23T21:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "6·3 지방선거 개표상황표 위조 선관위 직원 1명 구속…나머지 7명 영장...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-23T22:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177598?sid=102"
+     "title": "선관위 직원 8명 중 1명 구속...선관위 특검 수사 전망은?",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-23T22:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979566?sid=102"
     },
     {
-     "title": "'개표상황표 은닉' 혐의 선관위 직원 1명 구속…특검 첫 신병 확보",
-     "press": "ngonews.kr",
-     "publishedAt": "2026-11-23T22:24:00.000Z",
-     "link": "https://www.ngonews.kr/news/articleView.html?idxno=243974"
+     "title": "'투표록 위조' 선관위 직원 1명 구속…특검 \"7명 기각, 납득 어려워\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-23T22:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004213040?sid=102"
     },
     {
-     "title": "'6.3 지선 관리부실' 선관위 직원, 8명 중 1명 구속",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-23T22:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394672?sid=100"
+     "title": "'개표상황표 위조·은닉' 선관위 직원 1명 구속…7명은 기각",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-23T22:34:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261124000025"
     }
    ]
   },
@@ -81,30 +80,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 2,
+   "articles90": 14,
+   "recent20": 3,
    "press": 11,
    "firstArticleAt": "2026-11-23T21:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "다시 찬 바람에 영하권 뚝…충청·제주 곳곳 눈",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-23T22:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929242?sid=103"
+    },
+    {
+     "title": "[날씨] 출근길 다시 영하권 추위...'도로 살얼음' 주의",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-23T22:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437108?sid=103"
+    },
+    {
      "title": "'서울 -0.4도' 영하권 추위도 추위인데…오늘 출근길 '이것' 비상",
      "press": "wikitree.co.kr",
      "publishedAt": "2026-11-23T22:30:00.000Z",
      "link": "https://www.wikitree.co.kr/articles/1177134"
-    },
-    {
-     "title": "[날씨] 전국 곳곳 영하권 추위…찬 바람에 체감 온도 '뚝'",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-23T22:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929236?sid=103"
-    },
-    {
-     "title": "[오늘날씨] 충남·전라 비·눈, 서울 낮 3도…제주 산지 최대 5㎝",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-23T22:02:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284441"
     }
    ]
   },
@@ -114,7 +113,7 @@
     "google"
    ],
    "articles90": 8,
-   "recent20": 3,
+   "recent20": 2,
    "press": 7,
    "firstArticleAt": "2026-11-23T21:34:00.000Z",
    "exclusive": false,
@@ -141,139 +140,43 @@
    ]
   },
   {
-   "keyword": "국정원장 후보 강금실",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-23T21:05:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "강금실 국정원장 후보 지명…임웅순·홍익표 등 외교안보라인 대폭 교체",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-23T22:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979554?sid=100"
-    },
-    {
-     "title": "이재명 정부, 첫 여성 국정원장 강금실 지명…외교·통일부 대폭 교체 ...",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-23T21:58:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=887006"
-    },
-    {
-     "title": "강금실·임웅순…‘위성락 외교 전문성’에 힘 실었다[송종호의 국정쏙...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-23T21:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004685366?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "행안 한준호 지명",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T21:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "행안 한준호·문체 강유정 발탁…'국정 실행력'에 방점?",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-23T22:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979556?sid=100"
-    },
-    {
-     "title": "'국정원·통일·외교·문체·행안' 이재명 대통령 대규모 개각",
-     "press": "labortoday.co.kr",
-     "publishedAt": "2026-11-23T21:34:00.000Z",
-     "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237887"
-    },
-    {
-     "title": "국정원장 후보자에 강금실 전 장관…외교·행안 등 중폭 개각",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-23T21:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012299709?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "이지훈♥아야네, 둘째 딸 출산",
+   "keyword": "하정우♥차정원 10년 열애",
    "sources": [
     "nate"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T21:10:00.000Z",
+   "articles90": 5,
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-23T22:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이지훈♥아야네, 두 번의 아픔 이겨내고 둘째 딸 복복이 출산",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-23T22:13:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004127499"
+     "title": "\"6년 열애 아니었어?\"…하정우·차정원, 청첩장에 담긴 '진실'",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-23T22:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001273717?sid=103"
     },
     {
-     "title": "이지훈♥아야네, 둘째 득녀",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-23T21:56:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611240021"
+     "title": "'12월 결혼' 하정우♥차정원, 청첩장엔 \"열 번째 겨울\" 문구…10년 열애...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T22:34:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009306060"
     },
     {
-     "title": "이지훈 둘째 딸 득녀, 아내 ♥아야네 얼굴 자랑 “지금 출산하신 분 맞...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-23T21:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190545"
-    }
-   ]
-  },
-  {
-   "keyword": "정동영 이종석 교체",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T21:05:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "외교·안보 라인 전면 교체‥동맹파에 힘 실었나?",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-23T21:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001537543?sid=100"
-    },
-    {
-     "title": "[뉴스분석] 동맹파·자주파 '불안한 동거' 청산...외교안보 라인 교체의...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-23T21:10:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261124000002"
-    },
-    {
-     "title": "李, 외교·안보라인 동시 교체…국정원장에 강금실 [오늘 뉴스 4컷]",
-     "press": "segye.com",
-     "publishedAt": "2026-11-23T21:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177581?sid=100"
+     "title": "하정우♥차정원, 들통난 10년 열애..청첩장에 담긴 '열 번째 겨울'",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-23T22:25:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003489692"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1220,
-  "matched": 658,
-  "avgLeadMin": 599,
+  "flagged": 1219,
+  "matched": 656,
+  "avgLeadMin": 600,
   "recent": [
    {
     "keyword": "엔비디아 폭등",
