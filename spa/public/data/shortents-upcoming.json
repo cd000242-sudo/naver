@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T07:17:39.855Z",
+ "builtAt": "2026-11-23T07:27:43.601Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,107 +16,106 @@
     "nate",
     "daum"
    ],
-   "articles90": 92,
-   "recent20": 28,
-   "press": 83,
-   "firstArticleAt": "2026-11-23T06:16:00.000Z",
+   "articles90": 98,
+   "recent20": 30,
+   "press": 91,
+   "firstArticleAt": "2026-11-23T06:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "최태원, 9년 송사 정리하고 'AI 경영' 전념…대법원에 화해권고 신청",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-23T07:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003158445?sid=101"
+     "title": "최태원 SK 회장, 대법원에 화해권고결정 신청… 재산분할 9440억원 전액...",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-23T07:26:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3451364"
     },
     {
-     "title": "최태원 SK 회장, 대법원에 화해권고결정 신청…9440억원 전액 지급 의사",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-23T07:16:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629875"
+     "title": "최태원 회장 \"9440억원 전액 지급···SK와 국가경제 발전에 기여할 것...",
+     "press": "smartbizn.com",
+     "publishedAt": "2026-11-23T07:26:00.000Z",
+     "link": "https://www.smartbizn.com/news/articleView.html?idxno=160324"
     },
     {
-     "title": "최태원 \"재산분할금 9440억 전액 납부하겠다\" 화해권고 신청",
-     "press": "whitepaper.co.kr",
-     "publishedAt": "2026-11-23T07:14:00.000Z",
-     "link": "http://www.whitepaper.co.kr/news/articleView.html?idxno=269062"
+     "title": "최태원 SK 회장, 재산분할금 9440억원 전액 지급 의사…대법에 화해권고...",
+     "press": "thefairnews.co.kr",
+     "publishedAt": "2026-11-23T07:26:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=95217"
     }
    ]
   },
   {
    "keyword": "국정원장 강금실 지명",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 83,
-   "recent20": 28,
+   "articles90": 81,
+   "recent20": 21,
    "press": 71,
-   "firstArticleAt": "2026-11-23T06:33:00.000Z",
+   "firstArticleAt": "2026-11-23T06:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "野 “회전문·보은 인사”…강금실엔 “정보-방첩 분야 경험 전무”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-23T07:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764434?sid=100"
+     "title": "李대통령, 국정원장 강금실 지명...외교 임웅순·통일 홍익표·행안 한준...",
+     "press": "ntoday.co.kr",
+     "publishedAt": "2026-11-23T07:26:00.000Z",
+     "link": "https://www.ntoday.co.kr/news/articleView.html?idxno=131066"
     },
     {
-     "title": "국정원장에 강금실 지명…외교 임웅순·통일 홍익표",
-     "press": "newsgn.com",
-     "publishedAt": "2026-11-23T07:14:00.000Z",
-     "link": "https://www.newsgn.com/news/articleView.html?idxno=587426"
+     "title": "제주 출신 강금실 전 법무부 장관, 국가정보원장 발탁",
+     "press": "jejunews.com",
+     "publishedAt": "2026-11-23T07:26:00.000Z",
+     "link": "http://www.jejunews.com/news/articleView.html?idxno=2229001"
     },
     {
-     "title": "[속보] 이 대통령, 국정원장 후보자에 강금실 전 장관 지명",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-23T07:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/024/0000109836?sid=102"
+     "title": "강금실, 사상 첫 여성 국정원장 도전…李, 외교·안보 등 5개 부처 개각",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-23T07:25:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000085788"
     }
    ]
   },
   {
-   "keyword": "한준호 행안부 장관 후보",
+   "keyword": "한준호 행안부 장관 후보자",
    "sources": [
     "daum"
    ],
    "articles90": 55,
-   "recent20": 12,
-   "press": 41,
+   "recent20": 8,
+   "press": 43,
    "firstArticleAt": "2026-11-23T06:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국정원장 강금실·외교 임웅순·통일 홍익표 등…'李대통령 지명' 장관...",
-     "press": "tjb.co.kr",
-     "publishedAt": "2026-11-23T07:12:00.000Z",
-     "link": "https://www.tjb.co.kr/news05/bodo/view/id/106403"
+     "title": "이 대통령, 외교·안보라인 등 장관급 5명 교체…TK 출신은 전무",
+     "press": "kbmaeil.com",
+     "publishedAt": "2026-11-23T07:24:00.000Z",
+     "link": "https://www.kbmaeil.com/article/20261123500645"
+    },
+    {
+     "title": "행안부 장관 후보에 한준호 의원…문체부 장관 후보자에 강유정 대변인",
+     "press": "journal.kobeta.com",
+     "publishedAt": "2026-11-23T07:20:00.000Z",
+     "link": "http://journal.kobeta.com/?post_type=post&p=64539"
     },
     {
      "title": "국정원장 후보자에 강금실…외교 임웅순·통일 홍익표·행안 한준호·문...",
      "press": "weekly.hankooki.com",
      "publishedAt": "2026-11-23T07:12:00.000Z",
      "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7195262"
-    },
-    {
-     "title": "한준호 행안부 장관 후보자…아나운서 출신 친명계 재선 의원",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-23T07:10:00.000Z",
-     "link": "https://www.viva100.com/article/20261123501177"
     }
    ]
   },
   {
-   "keyword": "특검, 발급기 압수수색",
+   "keyword": "특검 외국계 압수수색",
    "sources": [
     "nate"
    ],
-   "articles90": 24,
-   "recent20": 2,
-   "press": 24,
-   "firstArticleAt": "2026-11-23T05:48:00.000Z",
+   "articles90": 19,
+   "recent20": 0,
+   "press": 19,
+   "firstArticleAt": "2026-11-23T06:03:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -141,82 +140,87 @@
    ]
   },
   {
-   "keyword": "박선원",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 17,
-   "recent20": 2,
-   "press": 17,
-   "firstArticleAt": "2026-11-23T05:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "與, 또 신천지 공개충돌…박선원 “내게도 명예가” vs 친청 “윤심원 ...",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-23T07:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001886877?sid=100"
-    },
-    {
-     "title": "박선원 ‘신천지’ 발언에 최고위 발칵…한민수 반발·최민희 회의 중 ...",
-     "press": "kgnews.co.kr",
-     "publishedAt": "2026-11-23T07:04:00.000Z",
-     "link": "https://www.kgnews.co.kr/news/article.html?no=920798"
-    },
-    {
-     "title": "與박선원, 김민석 '구두 경고'에 \"다른 최고위원들 발언도 경고해달라\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-23T06:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014340328?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "한덕수",
    "sources": [
     "google"
    ],
-   "articles90": 27,
+   "articles90": 28,
    "recent20": 5,
    "press": 16,
-   "firstArticleAt": "2026-11-23T05:54:00.000Z",
+   "firstArticleAt": "2026-11-23T05:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'한덕수 파기환송' 조희대, 법왜곡죄로 고발당해",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-23T07:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436870?sid=102"
+    },
+    {
+     "title": "한덕수 대법 판결에 판사가 의문 제기…동조·반박 댓글 잇달아",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-23T07:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001405141?sid=102"
+    },
     {
      "title": "한덕수 1심 재판장·내란특검 법왜곡죄 고발?…\"소급처벌 불가\"",
      "press": "yna.co.kr",
      "publishedAt": "2026-11-23T07:15:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016458889?sid=102"
-    },
-    {
-     "title": "송승용 부장판사 \"한덕수 판결문, 법관도 이해 못 해\"",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-23T07:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000554698?sid=102"
-    },
-    {
-     "title": "현직 부장판사 \"한덕수 판결문 불분명\"…\"의구심 과해\" 반박도(종합)",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T07:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009305510?sid=102"
     }
    ]
   },
   {
-   "keyword": "고규필 아빠 판박이 딸",
+   "keyword": "경제6단체 간담회",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 58,
+   "recent20": 20,
+   "press": 15,
+   "firstArticleAt": "2026-11-23T06:19:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "경제6단체 부회장 간담회에서 발언하는 김정일 부회장",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-23T07:25:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261123001055"
+    },
+    {
+     "title": "경제6단체 만난 정점식 원내대표",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-23T07:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016458923?sid=101"
+    },
+    {
+     "title": "경제6단체 부회장단 만난 국민의힘",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-23T07:25:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261123001050"
+    }
+   ]
+  },
+  {
+   "keyword": "고규필, 딸 판박이",
    "sources": [
     "nate"
    ],
    "articles90": 15,
-   "recent20": 4,
+   "recent20": 2,
    "press": 15,
-   "firstArticleAt": "2026-11-23T05:48:00.000Z",
+   "firstArticleAt": "2026-11-23T06:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "고규필♥에이민, 오늘(23일) 득녀…母도 헷갈리는 父 판박이 딸",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-23T07:22:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001282842"
+    },
     {
      "title": "고규필, 결혼 3년 만에 판박이 딸 봤다",
      "press": "mediafine.co.kr",
@@ -228,12 +232,39 @@
      "press": "news.jtbc.co.kr",
      "publishedAt": "2026-11-23T07:03:00.000Z",
      "link": "https://m.entertain.naver.com/article/437/0000522028"
+    }
+   ]
+  },
+  {
+   "keyword": "박선원",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 15,
+   "recent20": 1,
+   "press": 15,
+   "firstArticleAt": "2026-11-23T05:58:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "의사진행 발언하는 박선원 의원",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-23T07:26:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3760518"
     },
     {
-     "title": "고규필-에이민, 부모 됐다⋯\"내 인생 가장 잘한 일\"",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-23T07:00:00.000Z",
-     "link": "http://www.joynews24.com/view/2029366"
+     "title": "與, 또 신천지 공개충돌…박선원 “내게도 명예가” vs 친청 “윤심원 ...",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-23T07:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001886877?sid=100"
+    },
+    {
+     "title": "박선원 ‘신천지’ 발언에 최고위 발칵…한민수 반발·최민희 회의 중 ...",
+     "press": "kgnews.co.kr",
+     "publishedAt": "2026-11-23T07:04:00.000Z",
+     "link": "https://www.kgnews.co.kr/news/article.html?no=920798"
     }
    ]
   },
@@ -245,10 +276,16 @@
    "articles90": 13,
    "recent20": 3,
    "press": 13,
-   "firstArticleAt": "2026-11-23T05:52:00.000Z",
+   "firstArticleAt": "2026-11-23T06:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "李, 국정원장에 강금실 파격 인사…외교 임웅순·통일 홍익표 [종합]",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-23T07:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001077571?sid=100"
+    },
     {
      "title": "李 정부 '증폭 개각'에 날 세운 국힘…\"보은.회전문 인사\"",
      "press": "news.bbsi.co.kr",
@@ -260,108 +297,6 @@
      "press": "ilyoseoul.co.kr",
      "publishedAt": "2026-11-23T07:12:00.000Z",
      "link": "https://www.ilyoseoul.co.kr/news/articleView.html?idxno=525475"
-    },
-    {
-     "title": "외교안보 라인 전면 교체...국정원장 강금실·외교 임웅순·통일 홍익표",
-     "press": "wikileaks-kr.org",
-     "publishedAt": "2026-11-23T07:02:00.000Z",
-     "link": "https://www.wikileaks-kr.org/news/articleView.html?idxno=195114"
-    }
-   ]
-  },
-  {
-   "keyword": "김정관 장관, 석유화학 CEO 간담회",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-23T06:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "울산 석화 재편 논의 평행선 속 김정관 “골든타임 놓치지 않도록 연내...",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-23T07:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004011213?sid=101"
-    },
-    {
-     "title": "석화 CEO 소집한 산업장관...\"연내 사업재편 논의 매듭지어야\"",
-     "press": "asiaa.co.kr",
-     "publishedAt": "2026-11-23T06:54:00.000Z",
-     "link": "https://www.asiaa.co.kr/news/articleView.html?idxno=272422"
-    },
-    {
-     "title": "김정관 산업장관, 석화업계 사업재편 촉구…“연내 논의 매듭지어야”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-23T06:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012299294?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "대한민국 인구의 판을",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 23,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-23T06:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[포토] 인구의 판을 바꾸자! 국회서 열린 희망선언",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-23T07:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833539?sid=102"
-    },
-    {
-     "title": "“인구의 판 바꾸자”선언…한병도·정성호 등 與의원들도 참석",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-23T06:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005767687?sid=100"
-    },
-    {
-     "title": "인구전략위, “대한민국, 인구 판을 바꾸다” 희망선언",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-23T06:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012299295?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "내년 예산안 편성 완료",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
-   "firstArticleAt": "2026-11-23T05:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "단양군, 내년 예산 5459억 역대 최대...체류형 관광·미래 신산업 육성 ...",
-     "press": "ttlnews.com",
-     "publishedAt": "2026-11-23T07:06:00.000Z",
-     "link": "http://www.ttlnews.com/news/articleView.html?idxno=3165192"
-    },
-    {
-     "title": "공소자 고양특례시의원, 행감 '완료' 보고 재점검… 현장 이행·예산 조...",
-     "press": "kmaeil.com",
-     "publishedAt": "2026-11-23T07:04:00.000Z",
-     "link": "https://www.kmaeil.com/news/articleView.html?idxno=659427"
-    },
-    {
-     "title": "영양군, 내년 예산 4418억 원 편성…단계적 재정 운용 도입",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-23T06:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000554674?sid=102"
     }
    ]
   },
@@ -371,7 +306,7 @@
     "nate"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-23T06:08:00.000Z",
    "exclusive": false,
@@ -434,10 +369,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T05:48:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-23T06:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -460,77 +395,13 @@
      "link": "https://n.news.naver.com/mnews/article/119/0003158397?sid=102"
     }
    ]
-  },
-  {
-   "keyword": "박준현 서면사과 승소",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T05:54:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"학폭? 떳떳하다\"...키움 박준현 '학폭 서면사과' 취소소송 1심 승소",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-23T07:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522029?sid=102"
-    },
-    {
-     "title": "키움 박준현, '고교 학폭 서면사과' 취소 소송 1심 승소→스포츠윤리센...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-23T06:25:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/108/0003489557"
-    },
-    {
-     "title": "[단독] 키움 박준현 ‘서면사과 결정’ 취소소송 1심 승소",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-23T05:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833515?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "기초생활보장 종합계획",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T05:49:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "참여연대 \"약속 4년 미루고 '검토'만 가득\"... 기초생활보장 계획 비판",
-     "press": "ohmynews.com",
-     "publishedAt": "2026-11-23T06:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/047/0002536923?sid=102"
-    },
-    {
-     "title": "생계급여 기준 2030년 중위소득 35%로…기초생활보장 확대",
-     "press": "korea.kr",
-     "publishedAt": "2026-11-23T06:13:00.000Z",
-     "link": "https://www.korea.kr/news/policyNewsView.do?newsId=148976314&call_from=naver_news"
-    },
-    {
-     "title": "정은경 장관, 기초생활보장 종합계획 발표",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T05:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009305185?sid=102"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
   "flagged": 1184,
-  "matched": 652,
-  "avgLeadMin": 593,
+  "matched": 649,
+  "avgLeadMin": 594,
   "recent": [
    {
     "keyword": "유족 경찰 출석",
