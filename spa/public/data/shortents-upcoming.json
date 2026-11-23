@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T22:14:05.102Z",
+ "builtAt": "2026-11-23T22:24:16.252Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,31 +8,31 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "오늘 날씨 영하권",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 3,
+   "articles90": 14,
+   "recent20": 1,
    "press": 12,
    "firstArticleAt": "2026-11-23T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "[날씨] 전국 곳곳 영하권 추위…찬 바람에 체감 온도 '뚝'",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-23T22:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929236?sid=103"
+    },
+    {
      "title": "[오늘날씨] 충남·전라 비·눈, 서울 낮 3도…제주 산지 최대 5㎝",
      "press": "topstarnews.net",
      "publishedAt": "2026-11-23T22:02:00.000Z",
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284441"
-    },
-    {
-     "title": "[기상청 오늘의 날씨 및 내일날씨]제주도, 충남권서부와 전라권서부 중...",
-     "press": "economytalk.kr",
-     "publishedAt": "2026-11-23T22:00:00.000Z",
-     "link": "http://www.economytalk.kr/news/articleView.html?idxno=425493"
     },
     {
      "title": "오늘 날씨, 서울 영하권 추위…강풍에 곳곳 눈·비",
@@ -50,10 +50,16 @@
    "articles90": 11,
    "recent20": 1,
    "press": 11,
-   "firstArticleAt": "2026-11-23T20:51:00.000Z",
+   "firstArticleAt": "2026-11-23T20:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "선관위 직원 1명만 구속...특검, '윗선 개입' 규명 차질 우려",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-23T22:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437106?sid=102"
+    },
     {
      "title": "개표상황표 은닉·위조 혐의 선관위 직원 1명 구속…7명 영장 기각",
      "press": "slist.kr",
@@ -65,12 +71,6 @@
      "press": "womennews.co.kr",
      "publishedAt": "2026-11-23T21:54:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/310/0000141985?sid=102"
-    },
-    {
-     "title": "\"증거인멸 우려\"…'투표율 허위입력' 선관위 8명 중 1명 구속",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-23T21:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005357363?sid=102"
     }
    ]
   },
@@ -79,24 +79,24 @@
    "sources": [
     "google"
    ],
-   "articles90": 9,
-   "recent20": 3,
-   "press": 9,
+   "articles90": 10,
+   "recent20": 1,
+   "press": 10,
    "firstArticleAt": "2026-11-23T20:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "글로벌 보안 업계, AI 해킹 확산 속 잇단 대형 M&A....점점 '규모의 경쟁...",
+     "press": "digitaltoday.co.kr",
+     "publishedAt": "2026-11-23T22:18:00.000Z",
+     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=717571"
+    },
+    {
      "title": "‘자율제조’ CJ제일제당 vs ‘오픈이노베이션’ 풀무원…AI로 바뀌는 식...",
      "press": "sportsseoul.com",
      "publishedAt": "2026-11-23T22:00:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/468/0001282972?sid=101"
-    },
-    {
-     "title": "\"코딩 없는 현업 직원들이 직접 AI 솔루션 94개 구현\"… GS샵, '현장 발(...",
-     "press": "popcornnews.net",
-     "publishedAt": "2026-11-23T21:56:00.000Z",
-     "link": "http://www.popcornnews.net/news/articleView.html?idxno=141181"
     },
     {
      "title": "AI 상담 서비스, 이동통신사와 네이버의 제약으로 궁금증 증폭",
@@ -107,44 +107,12 @@
    ]
   },
   {
-   "keyword": "연금",
-   "sources": [
-    "google"
-   ],
-   "articles90": 7,
-   "recent20": 4,
-   "press": 6,
-   "firstArticleAt": "2026-11-23T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "퇴직연금이 연 2%대 수익률에 갇힌 이유",
-     "press": "weekly.donga.com",
-     "publishedAt": "2026-11-23T22:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/037/0000039203?sid=101"
-    },
-    {
-     "title": "국민연금공단, 한국노인인력개발원과 '초고령사회 대응 공동 세미나' 개...",
-     "press": "cstimes.com",
-     "publishedAt": "2026-11-23T22:02:00.000Z",
-     "link": "https://www.cstimes.com/news/articleView.html?idxno=729076"
-    },
-    {
-     "title": "[Invest]산은에 PEF 주도권 뺏긴 국민연금, 출자사업 재개해도 매칭 걱정",
-     "press": "investchosun.com",
-     "publishedAt": "2026-11-23T22:02:00.000Z",
-     "link": "https://www.investchosun.com/site/data/html_dir/2026/11/23/2026112380131.html"
-    }
-   ]
-  },
-  {
    "keyword": "이지훈·아야네, 둘째 딸 출산!",
    "sources": [
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-23T21:10:00.000Z",
    "exclusive": false,
@@ -173,7 +141,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1220,
+  "flagged": 1219,
   "matched": 660,
   "avgLeadMin": 599,
   "recent": [
