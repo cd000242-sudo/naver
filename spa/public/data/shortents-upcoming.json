@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T13:41:07.100Z",
+ "builtAt": "2026-11-23T13:51:10.852Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,76 +11,44 @@
  "measured": 26,
  "candidates": [
   {
-   "keyword": "이지훈♥아야네 둘째 출산",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 13,
-   "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-23T12:12:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이지훈♥아야네, 두 번의 유산 딛고 '네 식구' 됐다..신화 이민우도 축...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-23T13:38:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005644318"
-    },
-    {
-     "title": "이지훈♥아야네, 두 번의 유산 딛고 둘째 출산…네 식구 됐다",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-23T13:20:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001306375"
-    },
-    {
-     "title": "이지훈♥아야네, 두 아이 부모 됐다...두번의 유산 아픔 후 둘째 딸 출산",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-23T13:06:00.000Z",
-     "link": "http://www.joynews24.com/view/2029492"
-    }
-   ]
-  },
-  {
    "keyword": "신한은행 하나은행 4연승",
    "sources": [
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 0,
-   "press": 12,
+   "articles90": 14,
+   "recent20": 2,
+   "press": 13,
    "firstArticleAt": "2026-11-23T12:22:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
+     "title": "9-0으로 문 열고 63-59로 닫았다... 신한은행, 하나은행 꺾고 4연승",
+     "press": "stnsports.co.kr",
+     "publishedAt": "2026-11-23T13:48:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/450/0000155642"
+    },
+    {
+     "title": "'이기는 습관' 장착한 신한은행, 뒤를 받치는 신신 듀오와 더 확장될 '최...",
+     "press": "rookie.co.kr",
+     "publishedAt": "2026-11-23T13:42:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/398/0000105700"
+    },
+    {
      "title": "여자농구 신한은행, 하나은행 꺾고 4연승…1경기 차 단독 선두 질주",
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-23T13:21:00.000Z",
      "link": "https://m.sports.naver.com/basketball/article/055/0001405230"
-    },
-    {
-     "title": "'4연승과 단독 선두' 신한은행 최윤아 감독 \"다시 생각해 봐야 할 경기다...",
-     "press": "rookie.co.kr",
-     "publishedAt": "2026-11-23T13:09:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/398/0000105697"
-    },
-    {
-     "title": "“길동아!” “하루야!” ‘돌풍’ 신한은행의 특별한 작전타임",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-23T12:55:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/056/0012299629"
     }
    ]
   },
   {
-   "keyword": "강금실 국정원장 후보",
+   "keyword": "강금실 국정원장 후보자",
    "sources": [
     "daum"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 1,
    "press": 6,
    "firstArticleAt": "2026-11-23T12:24:00.000Z",
    "exclusive": false,
@@ -107,14 +75,47 @@
    ]
   },
   {
+   "keyword": "상장",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-23T12:23:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "미래라는 어음 - 앤트로픽 상장, 젠슨 황의 퇴장, 서로를 가리키는 욕망",
+     "press": "ilemonde.com",
+     "publishedAt": "2026-11-23T13:40:00.000Z",
+     "link": "https://www.ilemonde.com/news/articleView.html?idxno=31051"
+    },
+    {
+     "title": "바이비트(Bybit), 마브렉스(MBX)·오비터 파이낸스(OBT) 상장 폐지",
+     "press": "nbntv.co.kr",
+     "publishedAt": "2026-11-23T12:44:00.000Z",
+     "link": "https://www.nbntv.co.kr/news/articleView.html?idxno=4027849"
+    },
+    {
+     "title": "카카오 인적분할 일정은?... 카카오AI·카카오X 상장일 보니",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-23T12:36:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1195016"
+    }
+   ]
+  },
+  {
    "keyword": "공항",
    "sources": [
     "google"
    ],
-   "articles90": 9,
+   "articles90": 8,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-23T12:18:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-23T12:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -139,44 +140,12 @@
    ]
   },
   {
-   "keyword": "수능 부정 신고 5억 포상",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-23T12:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "권익위, 수능 부정행위 신고 포상금 최대 5억원 지급",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-23T13:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000162070?sid=102"
-    },
-    {
-     "title": "수능 부정행위 신고 포상금 1억→5억원 상향…인원수 따라 가산 지급",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-23T12:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000133461?sid=102"
-    },
-    {
-     "title": "\"수능 부정행위 신고하면 최대 5억\"...자수해도 포상금 지급",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-23T12:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000122036?sid=102"
-    }
-   ]
-  },
-  {
    "keyword": "반도체 메모리",
    "sources": [
     "google"
    ],
    "articles90": 5,
-   "recent20": 2,
+   "recent20": 1,
    "press": 4,
    "firstArticleAt": "2026-11-23T12:22:00.000Z",
    "exclusive": false,
@@ -195,10 +164,10 @@
      "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=886384"
     },
     {
-     "title": "\"반도체 호시절도 내년까지\"…삼전닉스 목표가 잇따라 낮춘 IB들",
-     "press": "inews24.com",
+     "title": "글로벌 IB 잇단 반도체 경고…삼성전자·하이닉스 목표가 줄하향",
+     "press": "hansbiz.co.kr",
      "publishedAt": "2026-11-23T12:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001077687?sid=101"
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=886382"
     }
    ]
   },
@@ -208,7 +177,7 @@
     "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-23T12:51:00.000Z",
    "exclusive": false,
@@ -231,103 +200,6 @@
      "press": "joongang.co.kr",
      "publishedAt": "2026-11-23T13:03:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/025/0003567328?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "연속 세계랭킹 1위",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T12:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한국 펜싱, FIE 총회서 여자 에페 단체전 시즌 1위 수상",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-23T13:33:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/055/0001405231"
-    },
-    {
-     "title": "\"K-펜싱 키다리아저씨\" 최신원 대한펜싱협회장, '세계1위' 女에페 단체상...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-23T13:09:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/076/0004468952"
-    },
-    {
-     "title": "한국 여자 에페, FIE 총회서 2025-2026시즌 단체전 세계 1위 트로피",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-23T12:42:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284344"
-    }
-   ]
-  },
-  {
-   "keyword": "상장",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T12:23:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "바이비트(Bybit), 마브렉스(MBX)·오비터 파이낸스(OBT) 상장 폐지",
-     "press": "nbntv.co.kr",
-     "publishedAt": "2026-11-23T12:44:00.000Z",
-     "link": "https://www.nbntv.co.kr/news/articleView.html?idxno=4027849"
-    },
-    {
-     "title": "카카오 인적분할 일정은?... 카카오AI·카카오X 상장일 보니",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-23T12:36:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1195016"
-    },
-    {
-     "title": "대구 상장사 3분기 실적 '껑충'",
-     "press": "idaegu.co.kr",
-     "publishedAt": "2026-11-23T12:24:00.000Z",
-     "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=566223"
-    }
-   ]
-  },
-  {
-   "keyword": "리트 만점자 부정행위 수사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T12:17:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'리트 만점' 진상규명 첫 고비...유족, 수사 협조할까?",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-23T13:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437031?sid=102"
-    },
-    {
-     "title": "'리트 만점' 故이진우 책 구매자들, 손해배상 소송 취하",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-23T12:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014340766?sid=102"
-    },
-    {
-     "title": "경찰, '리트 만점자' 유족 면담…과외교사 이번주 소환",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-23T12:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652911?sid=102"
     }
    ]
   },
@@ -395,12 +267,44 @@
      "link": "https://n.news.naver.com/mnews/article/022/0004177507?sid=104"
     }
    ]
+  },
+  {
+   "keyword": "법원 놀부 회생 기각",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T12:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "놀부 부대찌개 ‘이제 못 먹나’…회생신청 기각한 법원, 즉시항고 가능...",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-23T13:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003060732?sid=101"
+    },
+    {
+     "title": "서울회생법원, 외식업체 놀부 회생 개시 신청 기각",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-23T13:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437026?sid=102"
+    },
+    {
+     "title": "법원, 외식업체 놀부 회생신청 기각",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-23T12:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005846668?sid=102"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
   "flagged": 1226,
-  "matched": 671,
+  "matched": 670,
   "avgLeadMin": 568,
   "recent": [
    {
