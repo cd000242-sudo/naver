@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T21:33:52.342Z",
+ "builtAt": "2026-11-23T21:43:55.347Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,7 +16,7 @@
     "daum"
    ],
    "articles90": 26,
-   "recent20": 1,
+   "recent20": 0,
    "press": 26,
    "firstArticleAt": "2026-11-23T21:00:00.000Z",
    "exclusive": false,
@@ -47,13 +47,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 9,
+   "articles90": 10,
    "recent20": 2,
    "press": 9,
    "firstArticleAt": "2026-11-23T20:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'선거 개표상황표 은닉' 선관위 직원 구속…7명 영장 기각",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-23T21:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929232?sid=102"
+    },
     {
      "title": "‘선거 개표상황표 은닉’ 선관위 직원 8명 중 1명만 구속",
      "press": "biz.heraldcorp.com",
@@ -65,12 +71,6 @@
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-23T21:15:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/055/0001405272?sid=102"
-    },
-    {
-     "title": "‘개표상황표 위조 혐의’ 선관위 직원 1명 구속…7명은 기각",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-23T21:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012299712?sid=102"
     }
    ]
   },
@@ -99,42 +99,43 @@
      "link": "https://www.kukinews.com/article/view/kuk202611230141"
     },
     {
-     "title": "\"치매 '통곡의 벽' 넘었다\"...아리바이오 ,'AR1001' FDA 허가 자신",
-     "press": "pharmnews.com",
+     "title": "치매·희귀질환 재도전과 퇴장…'비아그라 대항마' K-신약 3종의 흥망성...",
+     "press": "apsk.co.kr",
      "publishedAt": "2026-11-23T21:00:00.000Z",
-     "link": "https://www.pharmnews.com/news/articleView.html?idxno=308235"
+     "link": "https://www.apsk.co.kr/news/articleView.html?idxno=541120"
     }
    ]
   },
   {
-   "keyword": "강금실 국정원장 후보",
+   "keyword": "연금",
    "sources": [
-    "daum"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T20:53:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "석 달 만에 '중폭 개각'‥최초 여성 국정원장 발탁",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-23T21:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001537535?sid=100"
+     "title": "연금행동 \"기초연금 개편 사회적 논의로\"",
+     "press": "labortoday.co.kr",
+     "publishedAt": "2026-11-23T21:34:00.000Z",
+     "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237880"
     },
     {
-     "title": "국정원장 후보자에 강금실 전 장관…외교·행안 등 중폭 개각",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-23T21:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012299709?sid=100"
-    },
-    {
-     "title": "李, 외교·안보라인 동시 교체…국정원장에 강금실 [오늘 뉴스 4컷]",
+     "title": "부부가 함께 부은 연금, 사별하면 유족연금 70% 깎인다",
      "press": "segye.com",
      "publishedAt": "2026-11-23T21:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177581?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/022/0004177582?sid=101"
+    },
+    {
+     "title": "송상은 KB증권 연금그룹장 “IRP 연 56% 성장…연금은 가입보다 관리가...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-23T21:00:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2651897"
     }
    ]
   },
@@ -144,7 +145,7 @@
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-23T21:00:00.000Z",
    "exclusive": false,
@@ -173,9 +174,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1230,
-  "matched": 669,
-  "avgLeadMin": 582,
+  "flagged": 1221,
+  "matched": 661,
+  "avgLeadMin": 587,
   "recent": [
    {
     "keyword": "놀부 기업회생 신청 기각",
