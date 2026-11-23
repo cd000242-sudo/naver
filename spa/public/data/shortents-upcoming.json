@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T14:21:20.890Z",
+ "builtAt": "2026-11-23T14:31:24.751Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "daum"
    ],
-   "articles90": 56,
-   "recent20": 53,
-   "press": 48,
-   "firstArticleAt": "2026-11-23T13:21:00.000Z",
-   "exclusive": false,
+   "articles90": 83,
+   "recent20": 83,
+   "press": 66,
+   "firstArticleAt": "2026-11-23T14:14:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "[속보]엔비디아, 젠슨 황 CEO 전격 복귀… 사임 11일 만",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-23T14:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833616?sid=104"
+     "title": "엔비디아, 젠슨 황 CEO 재선임…이사회 만장일치",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-23T14:30:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=410040"
     },
     {
-     "title": "[속보] \"젠슨 황, 엔비디아 CEO 복귀\"",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-23T14:20:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1195018"
+     "title": "젠슨 황, 11일 만에 엔비디아 CEO 전격 복귀 [종합]",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-23T14:30:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2651908"
     },
     {
-     "title": "젠슨 황 11일만에 엔비디아 CEO 복귀…주가 29% 폭등(종합)",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-23T14:20:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446101"
+     "title": "젠슨 황 복귀에 엔비디아 주가 30% 폭등…이사회 만장일치 결정",
+     "press": "econovill.com",
+     "publishedAt": "2026-11-23T14:30:00.000Z",
+     "link": "https://www.econovill.com/news/articleView.html?idxno=758250"
     }
    ]
   },
@@ -48,12 +48,18 @@
     "nate"
    ],
    "articles90": 7,
-   "recent20": 2,
+   "recent20": 1,
    "press": 7,
-   "firstArticleAt": "2026-11-23T12:56:00.000Z",
+   "firstArticleAt": "2026-11-23T13:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이지훈♥아야네, 오늘(23일) 둘째 출산…\"아빠가 평생 사랑할게\"[셀럽샷...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-23T14:26:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1795443708531413005"
+    },
     {
      "title": "이지훈♥아야네, 두 차례 유산 아픔 딛고 둘째 득녀… \"또 하나의 기적...",
      "press": "mhnse.com",
@@ -65,44 +71,6 @@
      "press": "stoo.com",
      "publishedAt": "2026-11-23T14:06:00.000Z",
      "link": "http://www.stoo.com/article.php?aid=110052922275"
-    },
-    {
-     "title": "이지훈·아야네, 두 아이 부모 됐다…\"가장 큰 선물\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-23T13:48:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005445261"
-    }
-   ]
-  },
-  {
-   "keyword": "강금실 국정원장 후보자",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-23T12:59:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[투나잇이슈] 5개 부처 전격적인 '중폭 개각'…첫 女국정원장 가시화",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-23T14:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929157?sid=100"
-    },
-    {
-     "title": "국정원장 후보자에 강금실 전 장관…외교·행안 등 중폭 개각",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-23T13:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012299687?sid=100"
-    },
-    {
-     "title": "[시사천국] 임기 중반에 친정체제?…강금실·강유정·한준호 발탁의 속...",
-     "press": "news.cpbc.co.kr",
-     "publishedAt": "2026-11-23T13:32:00.000Z",
-     "link": "https://news.cpbc.co.kr/article/1177198?division=NAVER"
     }
    ]
   },
@@ -112,7 +80,7 @@
     "google"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-23T13:30:00.000Z",
    "exclusive": false,
@@ -139,14 +107,79 @@
    ]
   },
   {
+   "keyword": "강금실 국정원장 후보자",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-23T13:31:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[투나잇이슈] 5개 부처 전격적인 '중폭 개각'…첫 女국정원장 가시화",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-23T14:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929157?sid=100"
+    },
+    {
+     "title": "국정원장 후보자에 강금실 전 장관…외교·행안 등 중폭 개각",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-23T13:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012299687?sid=100"
+    },
+    {
+     "title": "[시사천국] 임기 중반에 친정체제?…강금실·강유정·한준호 발탁의 속...",
+     "press": "news.cpbc.co.kr",
+     "publishedAt": "2026-11-23T13:32:00.000Z",
+     "link": "https://news.cpbc.co.kr/article/1177198?division=NAVER"
+    }
+   ]
+  },
+  {
+   "keyword": "나의 유죄인간",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T13:03:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "임시완, '나의 유죄인간' 11회 앞두고 설렘 가득 투샷",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-23T14:22:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284393"
+    },
+    {
+     "title": "'나의 유죄인간' 정한설, 종영 소감",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-23T14:20:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1195012"
+    },
+    {
+     "title": "'나의 유죄인간' 설인아 임시완, 이별 후 밀당 전개",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-23T13:14:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284367"
+    }
+   ]
+  },
+  {
    "keyword": "신한은행 하나은행 4연승",
    "sources": [
     "nate"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T12:55:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-23T13:09:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -167,71 +200,6 @@
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-23T13:21:00.000Z",
      "link": "https://m.sports.naver.com/basketball/article/055/0001405230"
-    }
-   ]
-  },
-  {
-   "keyword": "리트 만점자 부정행위 수사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T13:37:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'리트 만점자' 책 사고 손해배상 청구한 구매자들, 소 취하",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-23T14:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006414403?sid=102"
-    },
-    {
-     "title": "[단독] 경찰, 세무사 부정행위 피의자 답안지 확보…감독관도 불러 조사",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-23T14:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012299689?sid=102"
-    },
-    {
-     "title": "'리트 만점' 진상규명 첫 고비...유족, 수사 협조할까?",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-23T13:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437031?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "나의 유죄인간",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T13:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'나의 유죄인간' 정한설, 종영 소감",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-23T14:20:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1195012"
-    },
-    {
-     "title": "'나의 유죄인간' 설인아 임시완, 이별 후 밀당 전개",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-23T13:14:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284367"
-    },
-    {
-     "title": "임시완X설인아, 서로 구하려다 나란히 총 맞았다 ('나의 유죄인간')",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-23T13:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000492670"
     }
    ]
   },
@@ -264,6 +232,38 @@
      "press": "kpenews.com",
      "publishedAt": "2026-11-23T13:06:00.000Z",
      "link": "https://kpenews.com/View.aspx?No=4325928"
+    }
+   ]
+  },
+  {
+   "keyword": "리트 만점자 부정행위 수사",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T13:37:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'리트 만점자' 책 사고 손해배상 청구한 구매자들, 소 취하",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-23T14:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006414403?sid=102"
+    },
+    {
+     "title": "[단독] 경찰, 세무사 부정행위 피의자 답안지 확보…감독관도 불러 조사",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-23T14:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012299689?sid=102"
+    },
+    {
+     "title": "'리트 만점' 진상규명 첫 고비...유족, 수사 협조할까?",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-23T13:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437031?sid=102"
     }
    ]
   },
@@ -302,7 +302,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1229,
+  "flagged": 1228,
   "matched": 671,
   "avgLeadMin": 568,
   "recent": [
