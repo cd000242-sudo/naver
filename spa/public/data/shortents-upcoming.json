@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T12:30:42.754Z",
+ "builtAt": "2026-11-23T12:40:46.430Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,98 @@
  "measured": 27,
  "candidates": [
   {
-   "keyword": "수능 부정신고 5억 포상",
+   "keyword": "신한은행 하나은행 4연승",
    "sources": [
     "nate"
    ],
-   "articles90": 15,
-   "recent20": 2,
-   "press": 15,
-   "firstArticleAt": "2026-11-23T11:01:00.000Z",
+   "articles90": 24,
+   "recent20": 8,
+   "press": 19,
+   "firstArticleAt": "2026-11-23T11:52:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "신한은행, 하나은행 추격 뿌리치고 4연승… 단독 선두 질주",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-23T12:39:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/023/0004011242"
+    },
+    {
+     "title": "'노구치 22점 폭발' 신한은행, 하나은행 맹추격 따돌리고 4연승 질주…단...",
+     "press": "dailysportshankook.co.kr",
+     "publishedAt": "2026-11-23T12:38:00.000Z",
+     "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=435877"
+    },
+    {
+     "title": "신한은행, 하나은행 꺾고 4연승 질주...1위 수성",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-23T12:36:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/052/0002437014"
+    }
+   ]
+  },
+  {
+   "keyword": "노태우 비자금 노소영 증인신문",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 11,
+   "recent20": 0,
+   "press": 11,
+   "firstArticleAt": "2026-11-23T11:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[따져보니] 커닝 10건 신고하면…포상금 50억 받는다?",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-23T12:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652913?sid=004"
+     "title": "‘노태우 비자금 의혹’ 공소청, 노소영 증인신문 청구",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-23T12:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001206784?sid=102"
     },
     {
-     "title": "\"수능 커닝 제보하면 최대 5억\"…자수해도 포상금 준다",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-23T12:14:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1177096"
+     "title": "공소청, '노태우 비자금 의혹' 노소영 공판 전 증인신문 청구",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-23T12:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005846664?sid=102"
     },
     {
-     "title": "권익위 “수능 부정행위 신고 포상금 최대 5억 원 지급”",
+     "title": "공소청, '노태우 비자금' 수사 노소영 증인신문 청구…출석은 불발",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-23T12:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005445251?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "공항",
+   "sources": [
+    "google"
+   ],
+   "articles90": 12,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-23T11:15:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[임재현 칼럼] 경북 원전과 통합신공항, 위협 드론은 누가 막는가",
+     "press": "ksmnews.co.kr",
+     "publishedAt": "2026-11-23T12:30:00.000Z",
+     "link": "https://www.ksmnews.co.kr/news/view.php?idx=630715"
+    },
+    {
+     "title": "미 ICE 또 과잉 단속 논란…복면 쓰고 공항 탑승교서 급습",
      "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-23T12:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012299532?sid=100"
+     "publishedAt": "2026-11-23T12:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012299548?sid=104"
+    },
+    {
+     "title": "'셋째 임신' 박슬기, 7살 딸 어학연수 보냈다...공항서 애틋한 이별",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-23T12:18:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004468944"
     }
    ]
   },
@@ -47,10 +111,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 14,
+   "articles90": 11,
    "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-23T11:02:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-23T11:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,29 +139,124 @@
    ]
   },
   {
-   "keyword": "반도체 메모리",
+   "keyword": "수능 부정신고 5억 포상",
    "sources": [
-    "signal.bz",
-    "google"
+    "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 3,
-   "press": 8,
-   "firstArticleAt": "2026-11-23T11:08:00.000Z",
+   "articles90": 10,
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-23T11:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"반도체 호시절도 내년까지\"…삼전닉스 목표가 잇따라 낮춘 IB들",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-23T12:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001077687?sid=101"
+     "title": "[따져보니] 커닝 10건 신고하면…포상금 50억 받는다?",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-23T12:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000652913?sid=102"
     },
+    {
+     "title": "\"수능 커닝 제보하면 최대 5억\"…자수해도 포상금 준다",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-23T12:14:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1177096"
+    },
+    {
+     "title": "권익위 “수능 부정행위 신고 포상금 최대 5억 원 지급”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-23T12:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012299532?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "이지훈♥아야네, 둘째 출산 소식",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-23T12:05:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이지훈♥아야네, 둘째 품에 안았다…\"또 하나의 기적, 평생 사랑할게\"",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-23T12:36:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005644310"
+    },
+    {
+     "title": "이지훈·아야네, 두 번 유산 아픔 딛고 오늘 둘째 득녀…\"또 기적\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-23T12:25:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014340765"
+    },
+    {
+     "title": "[속보] 두번 유산 끝에..이지훈♥아야네, 오늘(23일) 둘째 득녀",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-23T12:20:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003489650"
+    }
+   ]
+  },
+  {
+   "keyword": "한준호 행안부 장관 후보",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-23T11:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "전북 출신 한준호, 행안부 장관 후보 지명···조현·정동영 교체",
+     "press": "jtv.co.kr",
+     "publishedAt": "2026-11-23T12:30:00.000Z",
+     "link": "https://jtv.co.kr/news/article.php?id=72272"
+    },
+    {
+     "title": "한준호 '행안부 장관' 지명자 \"李가 맡긴 소임의 무게 새기겠다\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-23T12:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000652906?sid=100"
+    },
+    {
+     "title": "한준호 행안부 장관 내정자, 이 대통령 대선 후보 때부터 수행실장 ‘밀...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-23T12:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484563?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "반도체 메모리",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 3,
+   "press": 5,
+   "firstArticleAt": "2026-11-23T11:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
     {
      "title": "글로벌 IB 잇단 반도체 경고…삼성전자·하이닉스 목표가 줄하향",
      "press": "hansbiz.co.kr",
      "publishedAt": "2026-11-23T12:24:00.000Z",
      "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=886382"
+    },
+    {
+     "title": "\"반도체 호시절도 내년까지\"…삼전닉스 목표가 잇따라 낮춘 IB들",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-23T12:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001077687?sid=101"
     },
     {
      "title": "AI 반도체 호황 내년까지?…글로벌 IB, 삼전닉스 목표가 잇달아 하향 조...",
@@ -108,110 +267,14 @@
    ]
   },
   {
-   "keyword": "공항",
-   "sources": [
-    "google"
-   ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-23T11:15:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'셋째 임신' 박슬기, 7살 딸 어학연수 보냈다...공항서 애틋한 이별",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-23T12:18:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004468944"
-    },
-    {
-     "title": "제2공항 갈등조정협의회 잡음 계속…찬성 단체 \"공정성·투명성 훼손\"",
-     "press": "jibs.co.kr",
-     "publishedAt": "2026-11-23T12:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/661/0000086979?sid=100"
-    },
-    {
-     "title": "제2공항 갈등조정협의회 찬성 주민대표 배제",
-     "press": "jejumbc.com",
-     "publishedAt": "2026-11-23T11:54:00.000Z",
-     "link": "https://jejumbc.com/NewsArticle/874932"
-    }
-   ]
-  },
-  {
-   "keyword": "신한은행 단독 선두 유지",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-23T11:53:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[WKBL] '사쿠라 22점' 신한은행, 1천383일 만에 4연승…하나은행 63-59 제...",
-     "press": "swtvnews.com",
-     "publishedAt": "2026-11-23T12:22:00.000Z",
-     "link": "https://swtvnews.com/news/newsview.php?ncode=1065613967005202"
-    },
-    {
-     "title": "흔들릴지언정, 무너지지는 않는다…신한은행, 하나은행 꺾고 ‘파죽의 ...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-23T11:59:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/144/0001151339"
-    },
-    {
-     "title": "'윤아 매직' 단독 선두 신한은행! 하나은행 격파하며 돌풍 같은 4연승 질...",
-     "press": "rookie.co.kr",
-     "publishedAt": "2026-11-23T11:57:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/398/0000105693"
-    }
-   ]
-  },
-  {
-   "keyword": "러시아 핵무장 위성 발사",
+   "keyword": "박준현 서면사과 취소",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-23T11:05:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"러, 이르면 12월 핵탄두 탑재 위성 발사 가능성\"…서방 정보당국 경고",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T12:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009305873?sid=104"
-    },
-    {
-     "title": "독일 정보당국 \"러시아, 이르면 12월 핵무장 위성 발사 전망\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-23T11:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967304?sid=104"
-    },
-    {
-     "title": "“러, 핵무장 인공위성 연내 발사…단시간 내 작전 태세 갖출 것”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-23T11:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004685316?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "박준현 서면사과 취소",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-23T11:08:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-23T11:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -236,49 +299,24 @@
    ]
   },
   {
-   "keyword": "한동훈 제명 날, 장동혁 문자",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T11:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "최규동 “대표님 시간” 장동혁 “편히 눕겠다”…尹 구형날 ‘한동훈...",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-23T12:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003060731?sid=100"
-    },
-    {
-     "title": "김종혁 \"조작징계 의혹에 법적 조치 검토…장동혁, 대국민 사기극\"",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-23T12:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000142891?sid=100"
-    },
-    {
-     "title": "황경성 3차 폭로 \"尹 사형선고 맞춰 한동훈 제명\"",
-     "press": "viewsnnews.com",
-     "publishedAt": "2026-11-23T11:02:00.000Z",
-     "link": "https://www.viewsnnews.com/article?q=239889"
-    }
-   ]
-  },
-  {
    "keyword": "상장",
    "sources": [
+    "signal.bz",
     "google"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 3,
    "press": 3,
-   "firstArticleAt": "2026-11-23T11:10:00.000Z",
+   "firstArticleAt": "2026-11-23T12:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "카카오 인적분할 일정은?... 카카오AI·카카오X 상장일 보니",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-23T12:36:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1195016"
+    },
     {
      "title": "대구 상장사 3분기 실적 '껑충'",
      "press": "idaegu.co.kr",
@@ -290,12 +328,70 @@
      "press": "munhwa.com",
      "publishedAt": "2026-11-23T12:23:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/021/0002834906?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "딜라이트",
+   "sources": [
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T11:23:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오피셜] DK, 마지막 퍼즐에 '딜라이트' 유환중, 5인 완성",
+     "press": "inven.co.kr",
+     "publishedAt": "2026-11-23T12:35:00.000Z",
+     "link": "https://m.sports.naver.com/esports/article/442/0000199165"
     },
     {
-     "title": "상장기업의 자기주식 1일 취득한도 확대를 3개월간 시행합니다",
-     "press": "intn.co.kr",
-     "publishedAt": "2026-11-23T11:10:00.000Z",
-     "link": "https://www.intn.co.kr/news/articleView.html?idxno=3000446"
+     "title": "'도카쇼스딜 렛츠고'....디플러스 기아, 딜라이트 영입과 함께 27시즌 로...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-23T12:33:00.000Z",
+     "link": "https://m.sports.naver.com/esports/article/311/0002083302"
+    },
+    {
+     "title": "딜라이트' 유환중, '스매쉬'와 호흡 맞춘다… 디플러스 기아로 이적",
+     "press": "dailyesports.com",
+     "publishedAt": "2026-11-23T11:51:00.000Z",
+     "link": "https://m.sports.naver.com/esports/article/347/0000196781"
+    }
+   ]
+  },
+  {
+   "keyword": "한성숙 총리 접견",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T11:13:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "몽골 외교장관 접견하는 한성숙 국무총리",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-23T11:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016459250?sid=100"
+    },
+    {
+     "title": "韓총리, 카타르·몽골 장관과 접견…에너지·핵심광물 등 협력 강화 논...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-23T11:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014340749?sid=100"
+    },
+    {
+     "title": "한성숙 총리, 몽골 외교부 장관 접견",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T11:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009305839?sid=100"
     }
    ]
   },
@@ -305,7 +401,7 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-23T11:22:00.000Z",
    "exclusive": false,
@@ -332,41 +428,41 @@
    ]
   },
   {
-   "keyword": "원전 공론화 확대 측 참여 중단",
+   "keyword": "작전 지시하는 감독",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
    "articles90": 3,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T11:01:00.000Z",
+   "press": 2,
+   "firstArticleAt": "2026-11-23T11:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "확대 측 불참 선언에 원전 공론화 파행 기로…“논의 형해화”",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-23T11:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001886946?sid=101"
+     "title": "작전 지시하는 이상범 하나은행 감독",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-23T12:08:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/001/0016459275"
     },
     {
-     "title": "원전 공론화위 \"확대 측 전문가 참여 중단에도 공론화 일정 예정대로 진...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-23T11:02:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2651892"
+     "title": "작전 지시하는 최윤아 신한은행 감독",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-23T12:08:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/001/0016459278"
     },
     {
-     "title": "원전공론화위원회, \"원칙대로 공론화 끝까지 진행\"",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-23T11:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005846654?sid=101"
+     "title": "작전 지시하는 최윤아 감독",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T11:44:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/421/0009305858"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1220,
+  "flagged": 1225,
   "matched": 664,
   "avgLeadMin": 569,
   "recent": [
