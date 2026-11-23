@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T02:52:52.114Z",
+ "builtAt": "2026-11-23T03:02:55.022Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,81 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 26,
  "candidates": [
+  {
+   "keyword": "이형일 증안펀드",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 51,
+   "recent20": 14,
+   "press": 42,
+   "firstArticleAt": "2026-11-23T01:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[속보]이형일 부총리 “증안펀드 외 컨틴전시플랜도 마련”",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-23T03:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000368375?sid=101"
+    },
+    {
+     "title": "이형일 \"증안펀드 외 컨틴전시플랜도 마련...규모는 상황 봐서\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-23T02:58:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436722?sid=101"
+    },
+    {
+     "title": "이형일 \"증안펀드 적절한 시기에 시행…규모는 시장상황 보며 검토\"",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-23T02:56:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2651654"
+    }
+   ]
+  },
+  {
+   "keyword": "김신영, 정오의 희망곡 하차",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 28,
+   "recent20": 2,
+   "press": 27,
+   "firstArticleAt": "2026-11-23T01:34:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김신영, 14년 만에 '정오의 희망곡' DJ 하차…29일 막방",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T02:46:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009304732"
+    },
+    {
+     "title": "14년 지킨 ‘정희’ 안방마님 김신영 하차…“또 다른 도전 위해 결정”",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-23T02:46:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001282786"
+    },
+    {
+     "title": "김신영, 14년 진행한 ‘정오의 희망곡’ 마이크 내려놓는다",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-23T02:32:00.000Z",
+     "link": "https://m.entertain.naver.com/article/144/0001151250"
+    }
+   ]
+  },
   {
    "keyword": "박남춘 인천공항공사 사장",
    "sources": [
     "nate"
    ],
-   "articles90": 58,
-   "recent20": 3,
-   "press": 27,
-   "firstArticleAt": "2026-11-23T01:24:00.000Z",
+   "articles90": 56,
+   "recent20": 1,
+   "press": 25,
+   "firstArticleAt": "2026-11-23T01:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -47,30 +111,62 @@
    "sources": [
     "daum"
    ],
-   "articles90": 58,
-   "recent20": 23,
+   "articles90": 62,
+   "recent20": 16,
    "press": 20,
-   "firstArticleAt": "2026-11-23T02:00:00.000Z",
+   "firstArticleAt": "2026-11-23T02:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김종철 경찰청장 취임… \"신뢰 위에 당당한 경찰 만들 것\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-23T02:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004212725?sid=102"
+     "title": "[뉴스1 PICK] 김종철 경찰청장 취임 \"수사권 확대 아닌 책임 확대\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T03:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009304793?sid=102"
     },
     {
-     "title": "김종철 경찰청장 취임식",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-23T02:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004212724?sid=102"
+     "title": "[헤럴드pic] 취임사 하는 김종철 신임 경찰청장",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-23T02:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002727141?sid=102"
     },
     {
-     "title": "'李정부 초대 경찰청장'…김종철 제25대 경찰청장 취임",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-23T02:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004212723?sid=102"
+     "title": "[헤럴드pic] 제25대 김종철 경찰청장 취임식",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-23T02:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002727142?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "한전 on",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 12,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-23T01:45:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "삼성증권 8241명 정보유출… 한전도 152만명분 보안 구멍",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-23T02:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002834772?sid=101"
+    },
+    {
+     "title": "한전, 고객 개인정보 152만건 유출…주민번호·계좌·카드번호도 털렸다",
+     "press": "srtimes.kr",
+     "publishedAt": "2026-11-23T02:42:00.000Z",
+     "link": "http://www.srtimes.kr/news/articleView.html?idxno=218350"
+    },
+    {
+     "title": "고객 카드번호 등 민감한 정보 150만 건...줄줄이 털린 한전 [자막뉴스]",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-23T02:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436710?sid=101"
     }
    ]
   },
@@ -79,10 +175,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 13,
-   "recent20": 4,
-   "press": 13,
-   "firstArticleAt": "2026-11-23T01:30:00.000Z",
+   "articles90": 11,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-23T01:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,66 +203,34 @@
    ]
   },
   {
-   "keyword": "한전 on",
+   "keyword": "이재명 지지율 상승",
    "sources": [
     "daum"
    ],
-   "articles90": 11,
+   "articles90": 10,
    "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-23T01:45:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-23T01:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한전, 고객 개인정보 152만건 유출…주민번호·계좌·카드번호도 털렸다",
-     "press": "srtimes.kr",
-     "publishedAt": "2026-11-23T02:42:00.000Z",
-     "link": "http://www.srtimes.kr/news/articleView.html?idxno=218350"
+     "title": "李대통령 지지율 37.3% … 2주 연속 소폭 상승",
+     "press": "cnbnews.com",
+     "publishedAt": "2026-11-23T02:54:00.000Z",
+     "link": "https://www.cnbnews.com/news/articleView.html?idxno=1024766"
     },
     {
-     "title": "고객 카드번호 등 민감한 정보 150만 건...줄줄이 털린 한전 [자막뉴스]",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-23T02:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436710?sid=101"
+     "title": "이재명 대통령 지지율 37.3%…2주 연속 상승, 국민의힘 42.5%·민주당 35....",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-23T02:12:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629762"
     },
     {
-     "title": "한전, 152만명 개인정보 유출…\"유출대상자 계좌 비번 바꿔야\"",
-     "press": "newsfc.co.kr",
-     "publishedAt": "2026-11-23T02:22:00.000Z",
-     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82662"
-    }
-   ]
-  },
-  {
-   "keyword": "발언하는 장동혁 대표",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 13,
-   "recent20": 3,
-   "press": 10,
-   "firstArticleAt": "2026-11-23T01:26:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "조희대 탄핵 급발진 걷어찬 장동혁 \"이재명 정권의 자폭 탄핵\"",
-     "press": "thepublic.kr",
-     "publishedAt": "2026-11-23T02:38:00.000Z",
-     "link": "https://www.thepublic.kr/news/articleView.html?idxno=327961"
-    },
-    {
-     "title": "정권 실책에 개미 무덤 된 국내 증시...장동혁 \"이재명 리딩방 주가조작...",
-     "press": "thepublic.kr",
-     "publishedAt": "2026-11-23T02:38:00.000Z",
-     "link": "https://www.thepublic.kr/news/articleView.html?idxno=327962"
-    },
-    {
-     "title": "수능뿐 아닌 여러 국가 시험 부정행위 봇물?...장동혁 \"공정 무너트린 ...",
-     "press": "thepublic.kr",
-     "publishedAt": "2026-11-23T02:38:00.000Z",
-     "link": "https://www.thepublic.kr/news/articleView.html?idxno=327963"
+     "title": "[리얼미터] 이재명 대통령 국정 수행 '긍정' 37.3% vs. '부정' 59.9%",
+     "press": "newscape.co.kr",
+     "publishedAt": "2026-11-23T02:12:00.000Z",
+     "link": "http://www.newscape.co.kr/news/articleView.html?idxno=126004"
     }
    ]
   },
@@ -175,10 +239,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 8,
+   "articles90": 7,
    "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-23T01:32:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-23T01:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -203,14 +267,46 @@
    ]
   },
   {
+   "keyword": "김민석 최고위 참석",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-23T01:41:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[포토] 최고위 참석하는 김민석·최민희",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-23T02:22:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261123010008727"
+    },
+    {
+     "title": "최고위 참석하는 김민석 대표",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-23T02:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005767513?sid=100"
+    },
+    {
+     "title": "최고위 참석하는 김민석 대표와 최민희 최고위원",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-23T02:16:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261123000525"
+    }
+   ]
+  },
+  {
    "keyword": "수원 fc",
    "sources": [
     "google"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-23T01:24:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-23T01:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -235,9 +331,73 @@
    ]
   },
   {
-   "keyword": "구조조정",
+   "keyword": "국가장학금",
    "sources": [
     "signal.bz",
+    "google"
+   ],
+   "articles90": 4,
+   "recent20": 3,
+   "press": 4,
+   "firstArticleAt": "2026-11-23T02:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "내년 1학기 국가장학금 신청하세요…내일부터 내년 1월7일까지",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-23T03:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016458086?sid=102"
+    },
+    {
+     "title": "\"빠트리지 마롱~\" 내년 국가장학금 신청 24일 시작",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-23T03:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014339578?sid=102"
+    },
+    {
+     "title": "국가장학금 1차 24일부터 신청…내년 지방 국립대 등록금 전액 지원",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T03:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009304783?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "강신철 장관 질의 답변",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-23T02:28:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[포토] 호르무즈 관련 답변하는 강신철 국방부 장관",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-23T03:02:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/23/2026112350186.html"
+    },
+    {
+     "title": "강신철 국방부 장관, 의원 질의 답변",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-23T02:39:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261123000594"
+    },
+    {
+     "title": "의원 질의 답변하는 강신철 장관",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-23T02:39:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261123000592"
+    }
+   ]
+  },
+  {
+   "keyword": "구조조정",
+   "sources": [
     "google"
    ],
    "articles90": 4,
@@ -268,98 +428,34 @@
    ]
   },
   {
-   "keyword": "강신철 장관 질의 답변",
+   "keyword": "윤한홍 의원 공판 출석",
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 3,
+   "articles90": 10,
+   "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-23T02:28:00.000Z",
+   "firstArticleAt": "2026-11-23T01:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "강신철 국방부 장관, 의원 질의 답변",
+     "title": "김건희·윤한홍, '관저 이전 의혹' 첫 정식 재판…혐의 부인",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-23T02:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014339564?sid=102"
+    },
+    {
+     "title": "[포토] 대통령 관저 이전, 첫 공판 출석하는 윤한홍 의원",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-23T02:22:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/23/2026112350151.html"
+    },
+    {
+     "title": "취재진 질문 답변하는 윤한홍 의원",
      "press": "newspim.com",
-     "publishedAt": "2026-11-23T02:39:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123000594"
-    },
-    {
-     "title": "답변하는 강신철 국방부 장관",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-23T02:39:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123000593"
-    },
-    {
-     "title": "의원 질의 답변하는 강신철 장관",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-23T02:39:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123000592"
-    }
-   ]
-  },
-  {
-   "keyword": "중앙생활보장위원회 정은경 장관",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 19,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T01:23:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "제81차 중앙생활보장위원회 회의",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T01:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009304352?sid=102"
-    },
-    {
-     "title": "참석자들과 인사하는 정은경 보건복지부 장관",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-23T01:29:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123000432"
-    },
-    {
-     "title": "회의 자료 살펴보는 정은경 보건복지부 장관",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-23T01:29:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123000426"
-    }
-   ]
-  },
-  {
-   "keyword": "부산항",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T01:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "부산항만공사, 중소기업 혁신기술 '공공조달 진입문' 넓힌다",
-     "press": "industrynews.co.kr",
-     "publishedAt": "2026-11-23T02:04:00.000Z",
-     "link": "https://www.industrynews.co.kr/news/articleView.html?idxno=90040"
-    },
-    {
-     "title": "부산항만공사, 美 LACP 어워즈 3년 연속 최고등급",
-     "press": "ksg.co.kr",
-     "publishedAt": "2026-11-23T01:52:00.000Z",
-     "link": "https://www.ksg.co.kr/news/main_newsView.jsp?pNum=148554"
-    },
-    {
-     "title": "부산항 북항재개발 비리 핵심 시행사 대표에 징역 15년 구형",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-23T01:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003567139?sid=102"
+     "publishedAt": "2026-11-23T01:38:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261123000457"
     }
    ]
   },
@@ -369,7 +465,7 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 0,
    "press": 2,
    "firstArticleAt": "2026-11-23T02:16:00.000Z",
    "exclusive": false,
@@ -394,45 +490,13 @@
      "link": "https://www.businesskorea.co.kr/news/articleView.html?idxno=281907"
     }
    ]
-  },
-  {
-   "keyword": "윤한홍 의원 공판 출석",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-23T01:37:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[포토] 대통령 관저 이전, 첫 공판 출석하는 윤한홍 의원",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-23T02:22:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/23/2026112350151.html"
-    },
-    {
-     "title": "윤한홍 의원, 관저 공사 특혜 의혹 공판 출석",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-23T01:38:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123000455"
-    },
-    {
-     "title": "법정 향하며 취재진 질문 답변하는 윤한홍",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-23T01:38:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123000456"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1165,
-  "matched": 668,
-  "avgLeadMin": 627,
+  "flagged": 1161,
+  "matched": 663,
+  "avgLeadMin": 616,
   "recent": [
    {
     "keyword": "주현영 SNL 텃세",
