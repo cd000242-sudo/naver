@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T13:31:03.865Z",
+ "builtAt": "2026-11-23T13:41:07.100Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,49 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 26,
  "candidates": [
+  {
+   "keyword": "이지훈♥아야네 둘째 출산",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 13,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-23T12:12:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이지훈♥아야네, 두 번의 유산 딛고 '네 식구' 됐다..신화 이민우도 축...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-23T13:38:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005644318"
+    },
+    {
+     "title": "이지훈♥아야네, 두 번의 유산 딛고 둘째 출산…네 식구 됐다",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-23T13:20:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001306375"
+    },
+    {
+     "title": "이지훈♥아야네, 두 아이 부모 됐다...두번의 유산 아픔 후 둘째 딸 출산",
+     "press": "joynews24.com",
+     "publishedAt": "2026-11-23T13:06:00.000Z",
+     "link": "http://www.joynews24.com/view/2029492"
+    }
+   ]
+  },
   {
    "keyword": "신한은행 하나은행 4연승",
    "sources": [
     "nate"
    ],
-   "articles90": 15,
-   "recent20": 1,
-   "press": 15,
-   "firstArticleAt": "2026-11-23T12:06:00.000Z",
+   "articles90": 12,
+   "recent20": 0,
+   "press": 12,
+   "firstArticleAt": "2026-11-23T12:22:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -43,98 +75,34 @@
    ]
   },
   {
-   "keyword": "이지훈♥아야네 둘째 출산",
+   "keyword": "강금실 국정원장 후보",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 13,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-23T12:05:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이지훈♥아야네, 두 번의 유산 딛고 둘째 출산…네 식구 됐다",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-23T13:20:00.000Z",
-     "link": "https://m.entertain.naver.com/article/382/0001306375"
-    },
-    {
-     "title": "이지훈♥아야네, 두 아이 부모 됐다...두번의 유산 아픔 후 둘째 딸 출산",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-23T13:06:00.000Z",
-     "link": "http://www.joynews24.com/view/2029492"
-    },
-    {
-     "title": "이지훈♥아야네, 둘째 득녀 \"또 하나의 기적을 만나\"",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-23T12:56:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000328870"
-    }
-   ]
-  },
-  {
-   "keyword": "수능 부정행위 신고 포상금 5억 지급",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-23T12:05:00.000Z",
+   "articles90": 6,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-23T12:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "권익위, 수능 부정행위 신고 포상금 최대 5억원 지급",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-23T13:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000162070?sid=102"
+     "title": "[시사천국] 임기 중반에 친정체제?…강금실·강유정·한준호 발탁의 속...",
+     "press": "news.cpbc.co.kr",
+     "publishedAt": "2026-11-23T13:32:00.000Z",
+     "link": "https://news.cpbc.co.kr/article/1177198?division=NAVER"
     },
     {
-     "title": "수능 부정행위 신고 포상금 1억→5억원 상향…인원수 따라 가산 지급",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-23T12:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000133461?sid=102"
+     "title": "박민영 \"강금실은 '친중', 한준호는 '추미애 견제용'?\"[일타뉴스]",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-23T13:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001041866?sid=100"
     },
     {
-     "title": "\"수능 부정행위 신고하면 최대 5억\"...자수해도 포상금 지급",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-23T12:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000122036?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "이지훈 아야네 둘째 득녀",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-23T12:05:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이지훈♥아야네, 둘째 득녀 \"또 하나의 기적을 만나\"",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-23T12:56:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000328870"
-    },
-    {
-     "title": "“세상에 와줘 고마워” 이지훈♥아야네, 두 차례 유산 아픔 딛고 오늘...",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-23T12:49:00.000Z",
-     "link": "https://m.entertain.naver.com/article/396/0000761743"
-    },
-    {
-     "title": "이지훈♥아야네, 유산 아픔 딛고 둘째 딸 출산.. \"이런 순간이 또 있을...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-23T12:44:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409329"
+     "title": "[김종석의 왜]23년 만에 강금실 재등판, 왜?",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-23T12:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000368471?sid=100"
     }
    ]
   },
@@ -143,10 +111,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 10,
+   "articles90": 9,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-23T12:07:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-23T12:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -171,34 +139,34 @@
    ]
   },
   {
-   "keyword": "강금실 국정원장 후보",
+   "keyword": "수능 부정 신고 5억 포상",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-23T12:03:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-23T12:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[김종석의 왜]23년 만에 강금실 재등판, 왜?",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-23T12:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000368471?sid=100"
+     "title": "권익위, 수능 부정행위 신고 포상금 최대 5억원 지급",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-23T13:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000162070?sid=102"
     },
     {
-     "title": "청와대, 외교·통일 포함 중폭 개각...국정원장 후보자에 강금실",
-     "press": "ytn.co.kr",
+     "title": "수능 부정행위 신고 포상금 1억→5억원 상향…인원수 따라 가산 지급",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-23T12:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000133461?sid=102"
+    },
+    {
+     "title": "\"수능 부정행위 신고하면 최대 5억\"...자수해도 포상금 지급",
+     "press": "ikbc.co.kr",
      "publishedAt": "2026-11-23T12:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437015?sid=100"
-    },
-    {
-     "title": "강금실·임웅순·홍익표·한준호·강유정",
-     "press": "ulsanpress.net",
-     "publishedAt": "2026-11-23T12:42:00.000Z",
-     "link": "https://www.ulsanpress.net/news/articleView.html?idxno=587435"
+     "link": "https://n.news.naver.com/mnews/article/660/0000122036?sid=102"
     }
    ]
   },
@@ -208,12 +176,18 @@
     "google"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 2,
    "press": 4,
-   "firstArticleAt": "2026-11-23T12:05:00.000Z",
+   "firstArticleAt": "2026-11-23T12:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "해외 투자銀, 삼전닉스 목표가 잇단 하향...2028년 메모리 부족 해소",
+     "press": "tjb.co.kr",
+     "publishedAt": "2026-11-23T13:34:00.000Z",
+     "link": "https://www.tjb.co.kr/news05/bodo/view/id/106433"
+    },
     {
      "title": "\"코스피 3000선 후반도 가능\"…엔비디아발 반도체 충격 경고",
      "press": "hansbiz.co.kr",
@@ -225,12 +199,70 @@
      "press": "inews24.com",
      "publishedAt": "2026-11-23T12:24:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/031/0001077687?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "독일 학교 폭탄 협박",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-23T12:51:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "독일 전역 학교에 폭파 위협 이메일...대피 소동",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-23T13:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437028?sid=104"
     },
     {
-     "title": "글로벌 IB 잇단 반도체 경고…삼성전자·하이닉스 목표가 줄하향",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-23T12:24:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=886382"
+     "title": "\"죽음이 널 기다린다\"…독일 전역 학교에 폭탄 협박 이메일 무더기 발송",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-23T13:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005608581?sid=104"
+    },
+    {
+     "title": "“죽음이 너를 기다린다” 독일 전역 학교에 폭파 위협 이메일",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-23T13:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003567328?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "연속 세계랭킹 1위",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-23T12:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한국 펜싱, FIE 총회서 여자 에페 단체전 시즌 1위 수상",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-23T13:33:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/055/0001405231"
+    },
+    {
+     "title": "\"K-펜싱 키다리아저씨\" 최신원 대한펜싱협회장, '세계1위' 女에페 단체상...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-23T13:09:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/076/0004468952"
+    },
+    {
+     "title": "한국 여자 에페, FIE 총회서 2025-2026시즌 단체전 세계 1위 트로피",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-23T12:42:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284344"
     }
    ]
   },
@@ -268,34 +300,34 @@
    ]
   },
   {
-   "keyword": "한준호 행안부 장관 후보",
+   "keyword": "리트 만점자 부정행위 수사",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T12:04:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T12:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "행정안전부 장관 후보자에 전북 출신 한준호 지명",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-23T12:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012299569?sid=100"
+     "title": "'리트 만점' 진상규명 첫 고비...유족, 수사 협조할까?",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-23T13:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437031?sid=102"
     },
     {
-     "title": "전북 출신 한준호, 행안부 장관 후보 지명···조현·정동영 교체",
-     "press": "jtv.co.kr",
-     "publishedAt": "2026-11-23T12:30:00.000Z",
-     "link": "https://jtv.co.kr/news/article.php?id=72272"
+     "title": "'리트 만점' 故이진우 책 구매자들, 손해배상 소송 취하",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-23T12:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014340766?sid=102"
     },
     {
-     "title": "한준호 '행안부 장관' 지명자 \"李가 맡긴 소임의 무게 새기겠다\"",
+     "title": "경찰, '리트 만점자' 유족 면담…과외교사 이번주 소환",
      "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-23T12:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652906?sid=100"
+     "publishedAt": "2026-11-23T12:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000652911?sid=102"
     }
    ]
   },
@@ -306,7 +338,7 @@
     "nate"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-23T12:42:00.000Z",
    "exclusive": false,
@@ -363,46 +395,20 @@
      "link": "https://n.news.naver.com/mnews/article/022/0004177507?sid=104"
     }
    ]
-  },
-  {
-   "keyword": "연속 세계랭킹 1위",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T12:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"K-펜싱 키다리아저씨\" 최신원 대한펜싱협회장, '세계1위' 女에페 단체상...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-23T13:09:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/076/0004468952"
-    },
-    {
-     "title": "한국 여자 에페, FIE 총회서 2025-2026시즌 단체전 세계 1위 트로피",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-23T12:42:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284344"
-    },
-    {
-     "title": "한국 펜싱, 국제연맹 총회서 여자 에페 단체전 시즌 1위 수상",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-23T12:20:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/001/0016459285"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1225,
-  "matched": 670,
-  "avgLeadMin": 566,
+  "flagged": 1226,
+  "matched": 671,
+  "avgLeadMin": 568,
   "recent": [
+   {
+    "keyword": "정점식 블랙먼데이 대응 촉구",
+    "hitKeyword": "코스피 블랙먼데이",
+    "hitAt": "2026-11-23T22:30:00+09:00",
+    "leadMin": 2105
+   },
    {
     "keyword": "박준현 서면사과 승소",
     "hitKeyword": "박준현 학폭 서면사과 취소",
@@ -454,12 +460,6 @@
    {
     "keyword": "수능 부정행위 신고하면 최대 5억 지급",
     "hitKeyword": "수능 부정행위 적발",
-    "hitAt": "2026-11-23T21:00:00+09:00",
-    "leadMin": 20
-   },
-   {
-    "keyword": "김원효 트젠바 방문 해명",
-    "hitKeyword": "김원효 바 논란 해명",
     "hitAt": "2026-11-23T21:00:00+09:00",
     "leadMin": 20
    }
