@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T02:42:48.908Z",
+ "builtAt": "2026-11-23T02:52:52.114Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "박남춘 인천공항공사 사장",
    "sources": [
     "nate"
    ],
-   "articles90": 59,
-   "recent20": 5,
+   "articles90": 58,
+   "recent20": 3,
    "press": 27,
-   "firstArticleAt": "2026-11-23T01:14:00.000Z",
+   "firstArticleAt": "2026-11-23T01:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "박남춘 인천공항공사 사장 취임…“노사 상생 바탕으로 대한민국 성장 ...",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-23T02:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003567169?sid=101"
+    },
     {
      "title": "박남춘 인천공항공사 사장 취임…“임기 내 연간 여객 9000만명 달성”",
      "press": "sedaily.com",
@@ -33,12 +39,6 @@
      "press": "hankyung.com",
      "publishedAt": "2026-11-23T02:34:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/015/0005357003?sid=102"
-    },
-    {
-     "title": "박남춘, 인천공항공사 사장 취임…\"임기 내 여객 9000만 목표\"",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-23T02:30:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904005"
     }
    ]
   },
@@ -48,29 +48,29 @@
     "daum"
    ],
    "articles90": 58,
-   "recent20": 22,
-   "press": 21,
-   "firstArticleAt": "2026-11-23T01:48:00.000Z",
+   "recent20": 23,
+   "press": 20,
+   "firstArticleAt": "2026-11-23T02:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "2년째 공석이던 경찰청장에 김종철 취임",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-23T02:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000161978?sid=102"
+     "title": "김종철 경찰청장 취임… \"신뢰 위에 당당한 경찰 만들 것\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-23T02:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004212725?sid=102"
     },
     {
-     "title": "김종철 경찰청장이 남긴 방명록",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-23T02:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016457927?sid=102"
+     "title": "김종철 경찰청장 취임식",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-23T02:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004212724?sid=102"
     },
     {
-     "title": "입장하는 김종철 경찰청장",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T02:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009304650?sid=102"
+     "title": "'李정부 초대 경찰청장'…김종철 제25대 경찰청장 취임",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-23T02:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004212723?sid=102"
     }
    ]
   },
@@ -80,29 +80,61 @@
     "daum"
    ],
    "articles90": 13,
-   "recent20": 2,
+   "recent20": 4,
    "press": 13,
-   "firstArticleAt": "2026-11-23T01:13:00.000Z",
+   "firstArticleAt": "2026-11-23T01:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "에이티즈, 네번째 ‘빌보드 정상’… 10개 앨범 연속 ‘톱10’",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-23T02:43:00.000Z",
+     "link": "https://m.entertain.naver.com/article/021/0002834744"
+    },
+    {
+     "title": "에이티즈, 빌보드 200 네 번째 정상 … 초동 205만 장 '더블 밀리언셀러...",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-23T02:42:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/23/2026112350169.html"
+    },
     {
      "title": "에이티즈, 빌보드 200 네 번째 1위...스트레이 키즈·BTS 이어 K팝 그룹 ...",
      "press": "gukjenews.com",
      "publishedAt": "2026-11-23T02:38:00.000Z",
      "link": "https://www.gukjenews.com/news/articleView.html?idxno=3760086"
+    }
+   ]
+  },
+  {
+   "keyword": "한전 on",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 11,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-23T01:45:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한전, 고객 개인정보 152만건 유출…주민번호·계좌·카드번호도 털렸다",
+     "press": "srtimes.kr",
+     "publishedAt": "2026-11-23T02:42:00.000Z",
+     "link": "http://www.srtimes.kr/news/articleView.html?idxno=218350"
     },
     {
-     "title": "[피플] 'UP' 외친 에이티즈, 새로운 기록은 현재진행형",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-23T02:35:00.000Z",
-     "link": "https://m.entertain.naver.com/article/437/0000521970"
+     "title": "고객 카드번호 등 민감한 정보 150만 건...줄줄이 털린 한전 [자막뉴스]",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-23T02:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436710?sid=101"
     },
     {
-     "title": "에이티즈, 빌보드 200 1위 4번째-K팝 그룹 최다 톱10",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-23T02:16:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95717"
+     "title": "한전, 152만명 개인정보 유출…\"유출대상자 계좌 비번 바꿔야\"",
+     "press": "newsfc.co.kr",
+     "publishedAt": "2026-11-23T02:22:00.000Z",
+     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82662"
     }
    ]
   },
@@ -111,19 +143,13 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 20,
-   "recent20": 4,
-   "press": 12,
-   "firstArticleAt": "2026-11-23T01:16:00.000Z",
+   "articles90": 13,
+   "recent20": 3,
+   "press": 10,
+   "firstArticleAt": "2026-11-23T01:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "정권 실책에 개미 무덤 된 국내 증시...장동혁 \"이재명 리딩방 주가조작...",
-     "press": "thepublic.kr",
-     "publishedAt": "2026-11-23T02:38:00.000Z",
-     "link": "https://www.thepublic.kr/news/articleView.html?idxno=327962"
-    },
     {
      "title": "조희대 탄핵 급발진 걷어찬 장동혁 \"이재명 정권의 자폭 탄핵\"",
      "press": "thepublic.kr",
@@ -131,10 +157,48 @@
      "link": "https://www.thepublic.kr/news/articleView.html?idxno=327961"
     },
     {
+     "title": "정권 실책에 개미 무덤 된 국내 증시...장동혁 \"이재명 리딩방 주가조작...",
+     "press": "thepublic.kr",
+     "publishedAt": "2026-11-23T02:38:00.000Z",
+     "link": "https://www.thepublic.kr/news/articleView.html?idxno=327962"
+    },
+    {
      "title": "수능뿐 아닌 여러 국가 시험 부정행위 봇물?...장동혁 \"공정 무너트린 ...",
      "press": "thepublic.kr",
      "publishedAt": "2026-11-23T02:38:00.000Z",
      "link": "https://www.thepublic.kr/news/articleView.html?idxno=327963"
+    }
+   ]
+  },
+  {
+   "keyword": "구혜리 박강균 결혼",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-23T01:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'오징어 커플' 박강균♥구혜리, 내년 3월 결혼…코미디언 커플 또 탄생",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-23T02:52:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1795402200531377006"
+    },
+    {
+     "title": "‘급식왕’ 박강균·구혜리, 내년 3월 결혼…커플 연기하다 부부로",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-23T02:43:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005767546"
+    },
+    {
+     "title": "개그맨 26호 부부 탄생…박강균♥구혜리, 내년 3월 결혼",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-23T02:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000492525"
     }
    ]
   },
@@ -146,10 +210,16 @@
    "articles90": 6,
    "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-23T01:20:00.000Z",
+   "firstArticleAt": "2026-11-23T01:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "‘4전 5기’ 끝 이룬 10년의 꿈… 경주한수원여자축구단, 창단 첫 WK리그...",
+     "press": "geconomy.co.kr",
+     "publishedAt": "2026-11-23T02:46:00.000Z",
+     "link": "https://www.geconomy.co.kr/news/article.html?no=325950"
+    },
     {
      "title": "대구FC, 자동승격권 확보는 실패…이랜드·부산·화성과 준PO 대결한다",
      "press": "idaegu.com",
@@ -161,76 +231,39 @@
      "press": "newsquest.co.kr",
      "publishedAt": "2026-11-23T02:18:00.000Z",
      "link": "https://www.newsquest.co.kr/news/articleView.html?idxno=305603"
-    },
-    {
-     "title": "\"수원삼성X수원FC 공존의 이유,시민구단의 존재가치\" '축도 수원 구단주...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-23T01:50:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/076/0004468809"
     }
    ]
   },
   {
-   "keyword": "구혜리 박강균 결혼",
+   "keyword": "구조조정",
    "sources": [
-    "daum"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 6,
+   "articles90": 4,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-23T01:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "개그맨 26호 부부 탄생…박강균♥구혜리, 내년 3월 결혼",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-23T02:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000492525"
-    },
-    {
-     "title": "'급식왕' 박강균♥구혜리, 5년 열애 내년 3월 결혼",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-23T02:12:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95716"
-    },
-    {
-     "title": "개그 부부 또 탄생…박강균·구혜리 3월에 부부 된다",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-23T02:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014339300"
-    }
-   ]
-  },
-  {
-   "keyword": "중앙생활보장위원회 정은경 장관",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 24,
-   "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-23T01:16:00.000Z",
+   "firstArticleAt": "2026-11-23T01:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "제81차 중앙생활보장위원회 회의",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T01:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009304352?sid=102"
+     "title": "금산군, '171억 구조조정'…민생예산 늘리고 빚 줄인다",
+     "press": "bzeronews.com",
+     "publishedAt": "2026-11-23T02:46:00.000Z",
+     "link": "https://www.bzeronews.com/news/articleView.html?idxno=825690"
     },
     {
-     "title": "제81차 중앙생활보장위원회 주재하는 정은경 장관",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-23T01:29:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123000429"
+     "title": "[사실은 이렇습니다] (보도설명) 지출구조조정은 집행률 외에도 사업 성...",
+     "press": "korea.kr",
+     "publishedAt": "2026-11-23T02:27:00.000Z",
+     "link": "https://www.korea.kr/briefing/actuallyView.do?newsId=148976292&call_from=naver_news"
     },
     {
-     "title": "회의 자료 살펴보는 정은경 보건복지부 장관",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-23T01:29:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123000426"
+     "title": "금산군, 내년 예산 6751억 편성…세출구조조정 89억 증액",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-23T02:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014339314?sid=102"
     }
    ]
   },
@@ -240,7 +273,7 @@
     "nate"
    ],
    "articles90": 6,
-   "recent20": 6,
+   "recent20": 3,
    "press": 3,
    "firstArticleAt": "2026-11-23T02:28:00.000Z",
    "exclusive": false,
@@ -267,67 +300,34 @@
    ]
   },
   {
-   "keyword": "구조조정",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T01:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[사실은 이렇습니다] (보도설명) 지출구조조정은 집행률 외에도 사업 성...",
-     "press": "korea.kr",
-     "publishedAt": "2026-11-23T02:27:00.000Z",
-     "link": "https://www.korea.kr/briefing/actuallyView.do?newsId=148976292&call_from=naver_news"
-    },
-    {
-     "title": "금산군, 내년 예산 6751억 편성…세출구조조정 89억 증액",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-23T02:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014339314?sid=102"
-    },
-    {
-     "title": "금산군, 내년 예산 6751억 원 편성…자체사업 171억 원 구조조정",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-23T01:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000554472?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "윤한홍 의원 공판 출석",
+   "keyword": "중앙생활보장위원회 정은경 장관",
    "sources": [
     "nate"
    ],
-   "articles90": 13,
+   "articles90": 19,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-23T01:18:00.000Z",
+   "firstArticleAt": "2026-11-23T01:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[포토] 대통령 관저 이전, 첫 공판 출석하는 윤한홍 의원",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-23T02:22:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/23/2026112350151.html"
+     "title": "제81차 중앙생활보장위원회 회의",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T01:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009304352?sid=102"
     },
     {
-     "title": "취재진 질문 답변하는 윤한홍 의원",
+     "title": "참석자들과 인사하는 정은경 보건복지부 장관",
      "press": "newspim.com",
-     "publishedAt": "2026-11-23T01:38:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123000457"
+     "publishedAt": "2026-11-23T01:29:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261123000432"
     },
     {
-     "title": "법정 향하는 윤한홍 국민의힘 의원",
+     "title": "회의 자료 살펴보는 정은경 보건복지부 장관",
      "press": "newspim.com",
-     "publishedAt": "2026-11-23T01:38:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123000458"
+     "publishedAt": "2026-11-23T01:29:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261123000426"
     }
    ]
   },
@@ -394,13 +394,45 @@
      "link": "https://www.businesskorea.co.kr/news/articleView.html?idxno=281907"
     }
    ]
+  },
+  {
+   "keyword": "윤한홍 의원 공판 출석",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-23T01:37:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[포토] 대통령 관저 이전, 첫 공판 출석하는 윤한홍 의원",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-23T02:22:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/23/2026112350151.html"
+    },
+    {
+     "title": "윤한홍 의원, 관저 공사 특혜 의혹 공판 출석",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-23T01:38:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261123000455"
+    },
+    {
+     "title": "법정 향하며 취재진 질문 답변하는 윤한홍",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-23T01:38:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261123000456"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1167,
-  "matched": 670,
-  "avgLeadMin": 626,
+  "flagged": 1165,
+  "matched": 668,
+  "avgLeadMin": 627,
   "recent": [
    {
     "keyword": "주현영 SNL 텃세",
