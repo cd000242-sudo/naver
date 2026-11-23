@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T11:50:29.252Z",
+ "builtAt": "2026-11-23T12:00:32.402Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 25,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "수능 부정행위 신고하면 최대 5억 지급",
@@ -16,29 +16,29 @@
     "signal.bz"
    ],
    "articles90": 16,
-   "recent20": 1,
+   "recent20": 3,
    "press": 16,
-   "firstArticleAt": "2026-11-23T10:21:00.000Z",
+   "firstArticleAt": "2026-11-23T10:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "권익위, 수능 부정행위 신고에 최소 1억·최대 5억원 포상",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-23T11:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001886950?sid=102"
+    },
+    {
+     "title": "수능 부정행위 신고하면 '최대 5억' 준다…자수자도 혜택 유지",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-23T11:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001273683?sid=102"
+    },
     {
      "title": "권익위, 수능 부정행위 신고하면 '최대 5억' 포상",
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-23T11:46:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/079/0004212994?sid=103"
-    },
-    {
-     "title": "수능 부정행위 신고하면 최대 5억원…권익위, 포상금 지급",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-23T11:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005846657?sid=102"
-    },
-    {
-     "title": "국민권익위, 수능 부정행위 신고 포상금 '최대 5억' 지급 제도 시행",
-     "press": "businesspost.co.kr",
-     "publishedAt": "2026-11-23T11:16:00.000Z",
-     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=452716"
     }
    ]
   },
@@ -49,28 +49,28 @@
    ],
    "articles90": 18,
    "recent20": 3,
-   "press": 12,
-   "firstArticleAt": "2026-11-23T10:21:00.000Z",
+   "press": 14,
+   "firstArticleAt": "2026-11-23T10:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "강금실 전 장관, 국정원장 후보자 지명",
+     "press": "jejumbc.com",
+     "publishedAt": "2026-11-23T11:54:00.000Z",
+     "link": "https://jejumbc.com/NewsArticle/874937"
+    },
+    {
+     "title": "이재명 대통령, 국정원장·장관 후보자 5명 지명…외교안보라인 전면 교...",
+     "press": "ksmnews.co.kr",
+     "publishedAt": "2026-11-23T11:52:00.000Z",
+     "link": "https://www.ksmnews.co.kr/news/view.php?idx=630805"
+    },
     {
      "title": "[2차 개각 후보자 5인 프로필] 강금실·임웅순·홍익표·한준호·강유정...",
      "press": "news-s.kr",
      "publishedAt": "2026-11-23T11:42:00.000Z",
      "link": "https://news-s.kr/view.html?id=L261123203129f83d"
-    },
-    {
-     "title": "강금실 ‘첫 여성 발탁’ 파격…“국정원 권력기관 이미지 탈피 무게”",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-23T11:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833613?sid=100"
-    },
-    {
-     "title": "李대통령, 국정원장에 강금실 발탁…4개 부처 중폭 개각",
-     "press": "dkilbo.com",
-     "publishedAt": "2026-11-23T11:36:00.000Z",
-     "link": "https://www.dkilbo.com/news/articleView.html?idxno=561840"
     }
    ]
   },
@@ -79,10 +79,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
+   "articles90": 8,
    "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-23T10:28:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-23T10:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,14 +107,46 @@
    ]
   },
   {
+   "keyword": "강금실과 홍익표 지명",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-23T10:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이재명 대통령, 국정원장·장관 후보자 5명 지명…외교안보라인 전면 교...",
+     "press": "ksmnews.co.kr",
+     "publishedAt": "2026-11-23T11:52:00.000Z",
+     "link": "https://www.ksmnews.co.kr/news/view.php?idx=630805"
+    },
+    {
+     "title": "[2차 개각 후보자 5인 프로필] 강금실·임웅순·홍익표·한준호·강유정...",
+     "press": "news-s.kr",
+     "publishedAt": "2026-11-23T11:42:00.000Z",
+     "link": "https://news-s.kr/view.html?id=L261123203129f83d"
+    },
+    {
+     "title": "국정원장 강금실·통일장관 홍익표…대미 관계 재정비",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-23T11:18:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544702"
+    }
+   ]
+  },
+  {
    "keyword": "금융위 롯데카드에 과징금 10억",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-23T10:28:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-23T10:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -139,60 +171,28 @@
    ]
   },
   {
-   "keyword": "강금실과 홍익표 지명",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-23T10:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[2차 개각 후보자 5인 프로필] 강금실·임웅순·홍익표·한준호·강유정...",
-     "press": "news-s.kr",
-     "publishedAt": "2026-11-23T11:42:00.000Z",
-     "link": "https://news-s.kr/view.html?id=L261123203129f83d"
-    },
-    {
-     "title": "국정원장 강금실·통일장관 홍익표…대미 관계 재정비",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-23T11:18:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544702"
-    },
-    {
-     "title": "청와대 \"국정원장 강금실 후보등 외교, 통일, 행안, 문체부 장관 지명\"",
-     "press": "kdpress.co.kr",
-     "publishedAt": "2026-11-23T11:04:00.000Z",
-     "link": "https://www.kdpress.co.kr/news/articleView.html?idxno=210011"
-    }
-   ]
-  },
-  {
-   "keyword": "한준호 행안장관 후보",
+   "keyword": "강유정 문체부 장관 지명",
    "sources": [
     "daum"
    ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-23T10:32:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-23T10:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[2차 개각 후보자 5인 프로필] 강금실·임웅순·홍익표·한준호·강유정...",
-     "press": "news-s.kr",
-     "publishedAt": "2026-11-23T11:42:00.000Z",
-     "link": "https://news-s.kr/view.html?id=L261123203129f83d"
+     "title": "이재명 대통령, 국정원장·장관 후보자 5명 지명…외교안보라인 전면 교...",
+     "press": "ksmnews.co.kr",
+     "publishedAt": "2026-11-23T11:52:00.000Z",
+     "link": "https://www.ksmnews.co.kr/news/view.php?idx=630805"
     },
     {
-     "title": "한준호 행안장관 후보자 \"국민 일상 바꾸는 실용행정 펼치겠다\"",
-     "press": "dongponews.net",
-     "publishedAt": "2026-11-23T11:36:00.000Z",
-     "link": "https://www.dongponews.net/news/articleView.html?idxno=61853"
+     "title": "李 정부 5개 장관급 인사에…국힘, “코드·돌려막기 인사” 맹비난",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-23T11:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003060729?sid=100"
     },
     {
      "title": "청와대 \"국정원장 강금실 후보등 외교, 통일, 행안, 문체부 장관 지명\"",
@@ -207,10 +207,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-23T10:26:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-23T11:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -333,8 +333,8 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1218,
-  "matched": 667,
+  "flagged": 1216,
+  "matched": 665,
   "avgLeadMin": 588,
   "recent": [
    {
