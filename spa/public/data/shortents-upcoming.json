@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T15:11:39.071Z",
+ "builtAt": "2026-11-23T15:21:42.909Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,38 +8,70 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "젠슨 황 CEO 복귀 결정",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 96,
-   "recent20": 43,
-   "press": 72,
-   "firstArticleAt": "2026-11-23T14:34:00.000Z",
+   "articles90": 98,
+   "recent20": 38,
+   "press": 74,
+   "firstArticleAt": "2026-11-23T14:38:00.000Z",
+   "exclusive": false,
+   "capped": true,
+   "samples": [
+    {
+     "title": "젠슨 황, 엔비디아 복귀한다…이사회, 만장일치 복귀 결정",
+     "press": "byline.network",
+     "publishedAt": "2026-11-23T15:20:00.000Z",
+     "link": "https://byline.network/?p=9004111222628875"
+    },
+    {
+     "title": "엔비디아 이사회, 젠슨 황 복귀 결정…사임 11일 만",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-23T15:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001405236?sid=104"
+    },
+    {
+     "title": "[종합] 젠슨 황, 엔비디아 CEO 전격 복귀…트럼프 \"위대한 애국자\" 극찬",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-23T15:18:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904137"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨황 복귀",
+   "sources": [
+    "google",
+    "daum"
+   ],
+   "articles90": 25,
+   "recent20": 9,
+   "press": 13,
+   "firstArticleAt": "2026-11-23T14:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "트럼프, 젠슨 황 CEO 복귀 환영…\"불법행위 관여 증거 없다\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-23T15:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929181?sid=104"
+    },
+    {
+     "title": "‘유퀴즈 저주 깼다’ 젠슨 황, 사임 11일 만에 엔비디아 CEO 전격 복귀",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-23T15:12:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001148066"
+    },
     {
      "title": "[속보]엔비디아 젠슨 황, 반도체 왕의 귀환인가 복귀인가…반도체 종목...",
      "press": "cbci.co.kr",
      "publishedAt": "2026-11-23T15:10:00.000Z",
      "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629999"
-    },
-    {
-     "title": "젠슨 황, 엔비디아 CEO 전격 복귀...사임 11일 만에 이사회 만장일치",
-     "press": "wikileaks-kr.org",
-     "publishedAt": "2026-11-23T15:10:00.000Z",
-     "link": "https://www.wikileaks-kr.org/news/articleView.html?idxno=195140"
-    },
-    {
-     "title": "트럼프, 젠슨 황 복귀에 공개 지지…\"엔비디아 넘어 미국 경제에도 필수...",
-     "press": "autodaily.co.kr",
-     "publishedAt": "2026-11-23T15:10:00.000Z",
-     "link": "https://www.autodaily.co.kr/news/articleView.html?idxno=602358"
     }
    ]
   },
@@ -49,7 +81,7 @@
     "signal.bz"
    ],
    "articles90": 17,
-   "recent20": 3,
+   "recent20": 1,
    "press": 13,
    "firstArticleAt": "2026-11-23T14:22:00.000Z",
    "exclusive": false,
@@ -76,45 +108,12 @@
    ]
   },
   {
-   "keyword": "젠슨황 복귀",
-   "sources": [
-    "google",
-    "daum"
-   ],
-   "articles90": 23,
-   "recent20": 10,
-   "press": 12,
-   "firstArticleAt": "2026-11-23T14:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[속보]엔비디아 젠슨 황, 반도체 왕의 귀환인가 복귀인가…반도체 종목...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-23T15:10:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629999"
-    },
-    {
-     "title": "젠슨황 복귀에 美증시 기사회생…엔비디아 30%,나스닥 6.7%↑",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-23T15:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005357334?sid=101"
-    },
-    {
-     "title": "젠슨 황 전격 복귀에 엔비디아 30% 폭등...트럼프 \"젠슨황 리더십 필요\"",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-23T15:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005608590?sid=101"
-    }
-   ]
-  },
-  {
    "keyword": "EU 사이버공격 중국 해킹",
    "sources": [
     "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-23T13:58:00.000Z",
    "exclusive": false,
@@ -146,7 +145,7 @@
     "daum"
    ],
    "articles90": 5,
-   "recent20": 3,
+   "recent20": 2,
    "press": 5,
    "firstArticleAt": "2026-11-23T13:55:00.000Z",
    "exclusive": false,
@@ -173,99 +172,66 @@
    ]
   },
   {
-   "keyword": "옆자리 프란체스카",
-   "sources": [
-    "nate",
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T13:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'옆자리 프란체스카' 결말, 한수아가 김현진 피를 원하는 이유",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-23T14:52:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284401"
-    },
-    {
-     "title": "'옆자리 프란체스카' 등장인물 관계도 전개…몇부작?",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-23T13:58:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611230281"
-    },
-    {
-     "title": "'옆자리, 프란체스카' 등장 인물 관계도 본격 전개…레전드 시트콤 스핀...",
-     "press": "enter.etoday.co.kr",
-     "publishedAt": "2026-11-23T13:46:00.000Z",
-     "link": "https://enter.etoday.co.kr/news/view/305664"
-    }
-   ]
-  },
-  {
-   "keyword": "이지훈♥아야네 둘째 출산",
+   "keyword": "수능 부정행위 신고하면 5억 포상",
    "sources": [
     "nate"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-23T13:48:00.000Z",
+   "firstArticleAt": "2026-11-23T14:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이지훈♥아야네, 오늘(23일) 둘째 출산…\"아빠가 평생 사랑할게\"[셀럽샷...",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-23T14:26:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1795443708531413005"
+     "title": "AI 커닝 논란에… 수능 부정행위 신고 포상금 최대 5억",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-23T14:56:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3451440"
     },
     {
-     "title": "이지훈♥아야네, 두 차례 유산 아픔 딛고 둘째 득녀… \"또 하나의 기적...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-23T14:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000492678"
+     "title": "권익위, 수능 부정행위 근절 위해 신고 포상금 확대...'최소 1억~'최대 ...",
+     "press": "livebiz.today",
+     "publishedAt": "2026-11-23T14:44:00.000Z",
+     "link": "https://www.livebiz.today/news/articleView.html?idxno=206819"
     },
     {
-     "title": "\"또 하나의 기적 만나\"…이지훈·아야네, 둘째 딸 품에 안았다",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-23T13:48:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005445261"
+     "title": "수능 부정행위 신고 포상금 최대 5억...\"자수하며 공범 신고해도 전액 ...",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-23T14:22:00.000Z",
+     "link": "https://www.insight.co.kr/news/583276"
     }
    ]
   },
   {
-   "keyword": "상장",
+   "keyword": "나의 유죄인간",
    "sources": [
-    "google"
+    "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 3,
+   "recent20": 1,
    "press": 2,
-   "firstArticleAt": "2026-11-23T15:06:00.000Z",
+   "firstArticleAt": "2026-11-23T14:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'블랙 먼데이' 후폭풍…강원 상장사도 휘청",
-     "press": "kado.net",
-     "publishedAt": "2026-11-23T15:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000213010?sid=101"
+     "title": "'나의 유죄인간' 임시완·설인아, 나란히 총상…결말 어떻게 될까?",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-23T15:12:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284405"
     },
     {
-     "title": "AI 인프라·LLM 투자 ETF 2종, 24일 코스피 신규 상장",
-     "press": "kjdaily.com",
-     "publishedAt": "2026-11-23T15:06:00.000Z",
-     "link": "http://www.kjdaily.com/article.php?aid=1795446142692997276"
+     "title": "임시완, '나의 유죄인간' 11회 앞두고 설렘 가득 투샷",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-23T14:22:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284393"
     },
     {
-     "title": "엠비디, 24일 코스닥 신규 상장…공모가 7천원",
-     "press": "kjdaily.com",
-     "publishedAt": "2026-11-23T15:06:00.000Z",
-     "link": "http://www.kjdaily.com/article.php?aid=1795446137692993276"
+     "title": "'나의 유죄인간' 정한설, 종영 소감",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-23T14:20:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1195012"
     }
    ]
   },
@@ -304,7 +270,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1231,
+  "flagged": 1232,
   "matched": 669,
   "avgLeadMin": 560,
   "recent": [
