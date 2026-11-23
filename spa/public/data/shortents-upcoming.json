@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-22T23:51:51.115Z",
+ "builtAt": "2026-11-23T00:01:54.749Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,91 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 21,
  "candidates": [
+  {
+   "keyword": "이 대통령 지지율",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 39,
+   "recent20": 11,
+   "press": 35,
+   "firstArticleAt": "2026-11-22T22:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李대통령 지지율 37.3%로 2주연속 소폭상승…30%대 중후반 횡보[리얼미터...",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-23T00:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016457225?sid=100"
+    },
+    {
+     "title": "李대통령 지지율 37.3%…與 35.6%·국힘 42.5%",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-22T23:58:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2021869"
+    },
+    {
+     "title": "이재명 국정지지율 37.3%로 2주 연속 상승…정당지지율 국힘 42.5%·민주...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-22T23:58:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283400"
+    }
+   ]
+  },
+  {
+   "keyword": "박종복 은행연합회장 내정",
+   "sources": [
+    "nate",
+    "daum"
+   ],
+   "articles90": 21,
+   "recent20": 12,
+   "press": 21,
+   "firstArticleAt": "2026-11-22T23:18:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "차기 은행연합회장에 박종복 전 SC제일은행장…‘최장수 행장’ 구원등...",
+     "press": "globalepic.co.kr",
+     "publishedAt": "2026-11-23T00:00:00.000Z",
+     "link": "https://www.globalepic.co.kr/view.php?ud=2026112308561949907cc35ccc5c_29"
+    },
+    {
+     "title": "차기 은행연합회장에 박종복 전 SC제일은행장 내정",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-23T00:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001165229?sid=101"
+    },
+    {
+     "title": "은행연합회 새 수장에 박종복 전 SC제일은행장 낙점…26일 최종 선출",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-23T00:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/117/0004127230?sid=103"
+    }
+   ]
+  },
   {
    "keyword": "전국 비 눈 출근길",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 18,
-   "recent20": 4,
-   "press": 18,
-   "firstArticleAt": "2026-11-22T22:23:00.000Z",
+   "articles90": 16,
+   "recent20": 2,
+   "press": 16,
+   "firstArticleAt": "2026-11-22T22:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "공포의 '어는 비', 출근길 초긴장...강풍 탓 체감추위 심해",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-22T23:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001273569?sid=103"
+    },
     {
      "title": "전국에 눈·비...출근길 '얼어붙는 비'·강원산지 '많은 눈' 주의",
      "press": "m-economynews.com",
@@ -33,56 +104,18 @@
      "press": "hankyung.com",
      "publishedAt": "2026-11-22T23:41:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/015/0005356882?sid=103"
-    },
-    {
-     "title": "출근길 중부 최저 -10도·서울 -0.2도…오전부터 비, 최대 8㎝ 눈",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T23:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009303962?sid=103"
     }
    ]
   },
   {
-   "keyword": "李대통령 지지율 상승",
+   "keyword": "트럼프 이란, 새해 공격 경고",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 5,
-   "press": 12,
-   "firstArticleAt": "2026-11-22T22:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[속보] 李대통령 지지율 37.3%로 2주 연속 상승…국힘 42.5%·민주 35.6% [...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-22T23:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/024/0000109823?sid=102"
-    },
-    {
-     "title": "李 지지율 2주 연속 상승한 37.3%…국힘, 민주당에 오차 밖 우세 [리얼미...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-22T23:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001206556?sid=100"
-    },
-    {
-     "title": "李대통령 지지율 ‘2주 연속 상승’ 37.3%…국힘 42.5%·민주 35.6% [리얼...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-22T23:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004684958?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "트럼프 이란 새해 공격",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 14,
-   "recent20": 3,
-   "press": 12,
-   "firstArticleAt": "2026-11-22T22:24:00.000Z",
+   "articles90": 10,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-22T22:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,98 +140,34 @@
    ]
   },
   {
-   "keyword": "강원 최대 8㎝ 눈",
+   "keyword": "은행연합회 회장후보추천위 회의",
    "sources": [
     "nate"
    ],
-   "articles90": 9,
+   "articles90": 11,
    "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-22T22:25:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "전국 비·눈에 출근길 '어는 비' 조심…강원북부 최대 8㎝",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-22T23:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005356882?sid=103"
-    },
-    {
-     "title": "출근길 중부 최저 -10도·서울 -0.2도…오전부터 비, 최대 8㎝ 눈",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-22T23:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009303962?sid=103"
-    },
-    {
-     "title": "[날씨] 오늘 전국 비에 강풍…강원 내륙 최대 8㎝ 많은 눈",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-22T23:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928849?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "김정은, 10개국 신임 대사 접수",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 21,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-22T22:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김정은 \"동아시아 안보환경, 힘과 능력 절실히 요구\"",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-22T23:46:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3759804"
-    },
-    {
-     "title": "김정은, 외국대사 신임장 접수…30년만의 의전변화로 위상강화",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-22T23:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004212523?sid=100"
-    },
-    {
-     "title": "김정은, 러시아 등 10개국 대사 신임장 받아…\"北, 패권·팽창 추구 안 ...",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-22T23:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928848?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "이용철 후보자 인사청문회",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-22T23:08:00.000Z",
+   "firstArticleAt": "2026-11-22T22:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "인사청문회 하루 앞둔 이용철 법무부 장관 후보자",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-22T23:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016457160?sid=102"
+     "title": "박종복 전 SC제일은행장, 은행연합회장 내정",
+     "press": "koreareport.co.kr",
+     "publishedAt": "2026-11-22T23:44:00.000Z",
+     "link": "https://www.koreareport.co.kr/news/articleView.html?idxno=55014"
     },
     {
-     "title": "출근하는 이용철 법무부장관 후보자",
+     "title": "차기 은행연합회 차기 회장에 박종복 전 SC제일은행장 내정",
+     "press": "tjb.co.kr",
+     "publishedAt": "2026-11-22T23:44:00.000Z",
+     "link": "https://www.tjb.co.kr/news05/bodo/view/id/106375"
+    },
+    {
+     "title": "은행연합회 회장후보추천위 회의 참석하는 최우형 케이뱅크 행장",
      "press": "news1.kr",
-     "publishedAt": "2026-11-22T23:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009303923?sid=102"
-    },
-    {
-     "title": "인사청문회 하루 앞둔 이용철 법무장관 후보자",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-22T23:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016457154?sid=102"
+     "publishedAt": "2026-11-22T23:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009303945?sid=101"
     }
    ]
   },
@@ -233,11 +202,43 @@
      "link": "https://n.news.naver.com/mnews/article/056/0012298980?sid=101"
     }
    ]
+  },
+  {
+   "keyword": "아침마당",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 2,
+   "firstArticleAt": "2026-11-22T23:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "성리, '아침마당' 출격",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-22T23:54:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611230130"
+    },
+    {
+     "title": "'아침마당' 오지헌 \"3살 터울 세 딸, 눈·코·입 하나씩 날 닮아\"",
+     "press": "joynews24.com",
+     "publishedAt": "2026-11-22T23:46:00.000Z",
+     "link": "http://www.joynews24.com/view/2029041"
+    },
+    {
+     "title": "'아침마당' 박상미 \"♥오지헌, 잘생기진 않았지만⋯살 빠지면 비율 좋아...",
+     "press": "joynews24.com",
+     "publishedAt": "2026-11-22T23:40:00.000Z",
+     "link": "http://www.joynews24.com/view/2029036"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1123,
+  "flagged": 1127,
   "matched": 625,
   "avgLeadMin": 604,
   "recent": [
