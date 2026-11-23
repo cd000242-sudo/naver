@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T10:09:54.712Z",
+ "builtAt": "2026-11-23T10:19:58.171Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,68 +11,67 @@
  "measured": 25,
  "candidates": [
   {
-   "keyword": "롯데월드타워 담보 해지",
+   "keyword": "국정원장 강금실 지명",
    "sources": [
-    "signal.bz",
-    "nate",
-    "daum"
+    "nate"
    ],
-   "articles90": 45,
-   "recent20": 2,
-   "press": 45,
-   "firstArticleAt": "2026-11-23T08:40:00.000Z",
+   "articles90": 33,
+   "recent20": 7,
+   "press": 29,
+   "firstArticleAt": "2026-11-23T08:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "임웅순·강유정·홍익표 등 '친명' 내각 전진 배치… 강금실, 사상 첫 女...",
+     "press": "kdfnews.com",
+     "publishedAt": "2026-11-23T10:10:00.000Z",
+     "link": "http://www.kdfnews.com/news/articleView.html?idxno=191307"
+    },
+    {
+     "title": "이 대통령, 첫 여성 국정원장에 강금실 지명",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-23T10:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000368429?sid=100"
+    },
+    {
+     "title": "[뉴스추적] 강금실 깜짝 발탁 이유는?",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-23T10:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979515?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "롯데월드타워 담보 해지",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 28,
+   "recent20": 4,
+   "press": 28,
+   "firstArticleAt": "2026-11-23T08:50:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "롯데, 롯데월드타워 담보 해지…롯데케미칼 회사채 8000억 상환",
+     "press": "press9.kr",
+     "publishedAt": "2026-11-23T10:16:00.000Z",
+     "link": "http://www.press9.kr/news/articleView.html?idxno=86870"
+    },
+    {
+     "title": "롯데월드타워 담보 해제 결정…롯데케미칼 8000억원대 채무 상환",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-23T10:12:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=848212"
+    },
     {
      "title": "롯데 시중은행 롯데월드타워 담보 해지",
      "press": "newsclaim.co.kr",
      "publishedAt": "2026-11-23T10:08:00.000Z",
      "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3083858"
-    },
-    {
-     "title": "롯데그룹, 월드타워 담보 풀고 기지개…1조7000억 자산매각 뒤 실적도 반...",
-     "press": "sateconomy.co.kr",
-     "publishedAt": "2026-11-23T10:04:00.000Z",
-     "link": "http://sateconomy.co.kr/news/view/1065607314686479"
-    },
-    {
-     "title": "'유동성 우려' 털어낸 롯데, 롯데월드타워 담보 해지…롯데케미칼 회사...",
-     "press": "thepublic.kr",
-     "publishedAt": "2026-11-23T09:40:00.000Z",
-     "link": "https://www.thepublic.kr/news/articleView.html?idxno=328061"
-    }
-   ]
-  },
-  {
-   "keyword": "국정원장 강금실 지명",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 39,
-   "recent20": 5,
-   "press": 36,
-   "firstArticleAt": "2026-11-23T08:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "강금실 국정원장 후보 지명…임웅순·홍익표 등 외교안보라인 대폭 교체",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-23T10:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979513?sid=100"
-    },
-    {
-     "title": "이 대통령, 국정원장·장관 4명 중폭 개각... 외교안보 라인 교체·靑 참...",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-23T10:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967296?sid=100"
-    },
-    {
-     "title": "'中 지방정부 특별고문' 출신이 국정원장으로…강금실은 누구?",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-23T09:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000142890?sid=100"
     }
    ]
   },
@@ -81,13 +80,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 40,
-   "recent20": 3,
-   "press": 30,
-   "firstArticleAt": "2026-11-23T08:40:00.000Z",
+   "articles90": 34,
+   "recent20": 2,
+   "press": 24,
+   "firstArticleAt": "2026-11-23T08:50:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이재명 정부 개각에 與 “실용·전문성 인선” 환영…野 “회전문·보은...",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-23T10:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000133451?sid=100"
+    },
     {
      "title": "이 대통령, 국정원장·장관 4명 중폭 개각... 외교안보 라인 교체·靑 참...",
      "press": "hankookilbo.com",
@@ -99,32 +104,90 @@
      "press": "news.jtbc.co.kr",
      "publishedAt": "2026-11-23T09:59:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/437/0000522060?sid=100"
-    },
-    {
-     "title": "국정원장 후보에 강금실 발탁… 李 외교·통일부 포함 개각 단행",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-23T09:50:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1194981"
     }
    ]
   },
   {
-   "keyword": "롯데카드 과징금",
+   "keyword": "한준호 인선",
    "sources": [
     "daum"
    ],
-   "articles90": 18,
+   "articles90": 13,
    "recent20": 1,
-   "press": 18,
-   "firstArticleAt": "2026-11-23T08:43:00.000Z",
+   "press": 13,
+   "firstArticleAt": "2026-11-23T08:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "금융위, '해킹 위험 부실 공시' 롯데카드에 과징금 10억 부과",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-23T10:04:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904125"
+     "title": "이재명 정부 개각에 與 “실용·전문성 인선” 환영…野 “회전문·보은...",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-23T10:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000133451?sid=100"
+    },
+    {
+     "title": "한준호 행안장관 후보자, 중수청 안착 과제…2차 세종이전도 현안(종합...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-23T09:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014340691?sid=100"
+    },
+    {
+     "title": "민주, '외교·통일' 등 개각에 \"실용성·전문성 살린 인선 환영\"",
+     "press": "getnews.co.kr",
+     "publishedAt": "2026-11-23T09:40:00.000Z",
+     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=888202"
+    }
+   ]
+  },
+  {
+   "keyword": "김원효 트젠바 방문 해명하러",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 3,
+   "press": 7,
+   "firstArticleAt": "2026-11-23T09:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“트젠바 그런 곳 아니야” 김원효, 트젠바 방문 논란→‘화끈 농담’에...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-23T10:17:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001282901"
+    },
+    {
+     "title": "김원효 \"왜 갔냐니, XX 달렸나 확인하러\"..트젠바 방문 직접 해명",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-23T10:16:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003489600"
+    },
+    {
+     "title": "'트젠바 해명' 김원효, 조용히 김신영 응원…\"지나고 보면 다 괜찮아\" [...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-23T10:09:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001409313"
+    }
+   ]
+  },
+  {
+   "keyword": "금융위, 롯데카드 과징금 10억원",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-23T08:57:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "금융위, 롯데카드에 10억원 과징금…“유출위험 공시 불충분”",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-23T10:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003488795?sid=101"
     },
     {
      "title": "금융위, 공시의무 위반 롯데카드에 10억원 과징금",
@@ -141,44 +204,12 @@
    ]
   },
   {
-   "keyword": "강유정 문체부 장관 지명",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 10,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-23T08:41:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "행안 한준호·문체 강유정 발탁…'국정 실행력'에 방점?",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-23T10:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979514?sid=100"
-    },
-    {
-     "title": "강유정 문체장관 후보, 평론부문 신춘문예 3관왕… 靑 대변인 맡아 [李...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-23T09:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177470?sid=100"
-    },
-    {
-     "title": "이 대통령, 국정원장에 강금실 지명…외교·통일 등 장관 4명 인선",
-     "press": "kyongbuk.co.kr",
-     "publishedAt": "2026-11-23T09:10:00.000Z",
-     "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4091781"
-    }
-   ]
-  },
-  {
    "keyword": "오세훈 시내버스 필수공익사업",
    "sources": [
     "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 2,
+   "recent20": 1,
    "press": 5,
    "firstArticleAt": "2026-11-23T08:50:00.000Z",
    "exclusive": false,
@@ -235,45 +266,13 @@
      "link": "https://m.sports.naver.com/kbaseball/article/003/0014340661"
     }
    ]
-  },
-  {
-   "keyword": "김원효 트젠바 방문 해명하러",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T09:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"거길 왜 갔냐고? OO 확인하러 갔다\"…김원효, '트젠바' 방문 인정→직...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-23T09:51:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000492640"
-    },
-    {
-     "title": "'트젠바 논란' 김원효, 결국 라방 켰다…\"촬영 상대=남고 후배, 근황 궁...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-23T09:40:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000640460"
-    },
-    {
-     "title": "\"심진화도 알고 있어\"…김원효 '트젠바' 영상 알고 보니",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-23T09:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005357284?sid=103"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
   "flagged": 1201,
-  "matched": 662,
-  "avgLeadMin": 605,
+  "matched": 660,
+  "avgLeadMin": 604,
   "recent": [
    {
     "keyword": "ai 데이터 센터",
