@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T09:29:41.975Z",
+ "builtAt": "2026-11-23T09:39:45.225Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,25 +8,57 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 23,
  "candidates": [
+  {
+   "keyword": "이재명 대통령 개각",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 55,
+   "recent20": 8,
+   "press": 47,
+   "firstArticleAt": "2026-11-23T08:12:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "여야, 개각에 엇갈린 반응…與 \"국정 활력 기대\"· 野 \"회전문 인사\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-23T09:34:00.000Z",
+     "link": "https://www.ajunews.com/view/20261123171212084"
+    },
+    {
+     "title": "李대통령, 외교·통일 포함 중폭개각 단행... 첫 여성 국정원장 강금실...",
+     "press": "getnews.co.kr",
+     "publishedAt": "2026-11-23T09:32:00.000Z",
+     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=888198"
+    },
+    {
+     "title": "[사설]외교안보 라인 포함 중폭 개각, 국정 심기일전 전기 되길",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-23T09:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484492?sid=110"
+    }
+   ]
+  },
   {
    "keyword": "고경표 음주운전 혐의",
    "sources": [
     "daum"
    ],
    "articles90": 49,
-   "recent20": 3,
-   "press": 45,
-   "firstArticleAt": "2026-11-23T08:09:00.000Z",
+   "recent20": 1,
+   "press": 46,
+   "firstArticleAt": "2026-11-23T08:10:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "[속보]‘음주운전 혐의’ 고경표, 오후 7시 경찰 소환",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-23T09:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002834892?sid=102"
+     "title": "만취 운전하다 청소차 '쾅'…배우 고경표, 오늘 경찰 소환",
+     "press": "weekly.chosun.com",
+     "publishedAt": "2026-11-23T09:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/053/0000063284?sid=102"
     },
     {
      "title": "'만취 음주운전' 고경표 잠시 뒤 첫 경찰 소환조사",
@@ -35,43 +67,42 @@
      "link": "https://n.news.naver.com/mnews/article/052/0002436953?sid=102"
     },
     {
-     "title": "고경표, 음주운전 9일 만→포토라인 설까…오늘(23일) 경찰 소환 통보",
-     "press": "mhnse.com",
+     "title": "[속보]‘음주운전 혐의’ 고경표, 오후 7시 경찰 소환",
+     "press": "munhwa.com",
      "publishedAt": "2026-11-23T09:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000492629"
+     "link": "https://n.news.naver.com/mnews/article/021/0002834892?sid=102"
     }
    ]
   },
   {
    "keyword": "강금실 국정원장 지명",
    "sources": [
-    "signal.bz",
     "daum"
    ],
-   "articles90": 46,
-   "recent20": 4,
+   "articles90": 45,
+   "recent20": 6,
    "press": 41,
-   "firstArticleAt": "2026-11-23T08:00:00.000Z",
+   "firstArticleAt": "2026-11-23T08:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "靑, 신임 국정원장에 강금실 지명···외교장관 임웅순·통일장관 홍익...",
-     "press": "todaykorea.co.kr",
-     "publishedAt": "2026-11-23T09:20:00.000Z",
-     "link": "https://www.todaykorea.co.kr/news/articleView.html?idxno=409039"
+     "title": "강금실 국정원장 발탁 배경…李대통령 신뢰·쇄신과 통합 의미 담겼다",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T09:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009305762?sid=100"
     },
     {
-     "title": "외교·안보 등 5개 부처·기관장 교체…강금실 국정원장 지명",
-     "press": "idomin.com",
-     "publishedAt": "2026-11-23T09:12:00.000Z",
-     "link": "https://www.idomin.com/news/articleView.html?idxno=2020365"
+     "title": "강금실·홍익표 대북 라인…한반도 상황 관리·대북 정보역량 강화 주력...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-23T09:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014340676?sid=100"
     },
     {
-     "title": "국힘, '강금실 국정원장' 등 개각에 \"재활용 인사, 레임덕 징후\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-23T09:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004212975?sid=100"
+     "title": "李대통령, 외교·통일 포함 중폭개각 단행... 첫 여성 국정원장 강금실...",
+     "press": "getnews.co.kr",
+     "publishedAt": "2026-11-23T09:32:00.000Z",
+     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=888198"
     }
    ]
   },
@@ -80,13 +111,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 35,
-   "recent20": 3,
-   "press": 35,
-   "firstArticleAt": "2026-11-23T08:02:00.000Z",
+   "articles90": 26,
+   "recent20": 2,
+   "press": 26,
+   "firstArticleAt": "2026-11-23T08:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "한미약품, 글로벌 항암 권위자 라파엘 베하르 박사 영입",
+     "press": "thetracker.co.kr",
+     "publishedAt": "2026-11-23T09:29:00.000Z",
+     "link": "https://thetracker.co.kr/View.aspx?No=4325491"
+    },
     {
      "title": "한미약품 美 항암 전문가 영입…항암신약 개발 강화",
      "press": "biz.sbs.co.kr",
@@ -98,44 +135,6 @@
      "press": "swtvnews.com",
      "publishedAt": "2026-11-23T09:10:00.000Z",
      "link": "https://www.swtvnews.com/news/newsview.php?ncode=1065603187196193"
-    },
-    {
-     "title": "한미약품, '투스페티닙' 글로벌 개발 이끈 라파엘 베하르 박사 영입",
-     "press": "industrynews.co.kr",
-     "publishedAt": "2026-11-23T09:10:00.000Z",
-     "link": "https://www.industrynews.co.kr/news/articleView.html?idxno=90075"
-    }
-   ]
-  },
-  {
-   "keyword": "AI 부정행위 차단",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 33,
-   "recent20": 5,
-   "press": 32,
-   "firstArticleAt": "2026-11-23T08:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "우재준, AI 글라스 착용하고 수능 풀이 시연",
-     "press": "queen.co.kr",
-     "publishedAt": "2026-11-23T09:20:00.000Z",
-     "link": "http://www.queen.co.kr/news/articleView.html?idxno=466789"
-    },
-    {
-     "title": "전남광주교육청, 학교 시험 ‘AI 부정행위 꼼짝마’",
-     "press": "jndn.com",
-     "publishedAt": "2026-11-23T09:18:00.000Z",
-     "link": "http://www.jndn.com/article.php?aid=1795425326443627005"
-    },
-    {
-     "title": "코닉글로리, AI 시험 부정행위 차단 나선다…무선 보안기술 활용",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-23T09:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003488787?sid=105"
     }
    ]
   },
@@ -144,13 +143,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 25,
-   "recent20": 3,
-   "press": 24,
-   "firstArticleAt": "2026-11-23T08:00:00.000Z",
+   "articles90": 23,
+   "recent20": 2,
+   "press": 23,
+   "firstArticleAt": "2026-11-23T08:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "李 장관 대폭교체 전북정치 힘 빠지나",
+     "press": "jjn.co.kr",
+     "publishedAt": "2026-11-23T09:34:00.000Z",
+     "link": "http://www.jjn.co.kr/news/articleView.html?idxno=1058102"
+    },
     {
      "title": "‘李 복심’ 한준호·강유정 전진배치…野선 “회전문·보은인사”[5개...",
      "press": "sedaily.com",
@@ -162,12 +167,70 @@
      "press": "seoulfn.com",
      "publishedAt": "2026-11-23T09:16:00.000Z",
      "link": "https://www.seoulfn.com/news/articleView.html?idxno=643689"
+    }
+   ]
+  },
+  {
+   "keyword": "안전공업 화재 기소",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 16,
+   "recent20": 0,
+   "press": 16,
+   "firstArticleAt": "2026-11-23T08:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'14명 사망' 대전 안전공업 화재…대표이사 기소",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-23T09:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193326?sid=102"
     },
+    {
+     "title": "“고질적 안전불감증 더해진 인재”…안전공업 손주환 대표 등 기소",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-23T09:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003567291?sid=102"
+    },
+    {
+     "title": "‘72명 사상’ 안전공업 화재 참사 책임자 무더기 기소…불법 증축에 경...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-23T09:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177451?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "강유정 문체부 장관 후보",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 16,
+   "recent20": 0,
+   "press": 15,
+   "firstArticleAt": "2026-11-23T08:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
     {
      "title": "이 대통령, 국정원장에 강금실 지명…외교·통일 등 장관 4명 인선",
      "press": "kyongbuk.co.kr",
      "publishedAt": "2026-11-23T09:10:00.000Z",
      "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4091781"
+    },
+    {
+     "title": "국정원장 후보자에 강금실…외교·통일·행안·문체부 장관 교체",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-23T09:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012299372?sid=100"
+    },
+    {
+     "title": "[프로필] 강유정 문체부 장관 후보자, 현장·국정 두루 거친 문화통",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-23T09:00:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/23/2026112350345.html"
     }
    ]
   },
@@ -176,24 +239,24 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 2,
+   "articles90": 13,
+   "recent20": 0,
    "press": 12,
-   "firstArticleAt": "2026-11-23T08:08:00.000Z",
+   "firstArticleAt": "2026-11-23T08:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "오세훈 “조희대 탄핵 소추, 정권 붕괴 서막 될 것”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-23T09:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002727287?sid=102"
-    },
     {
      "title": "오세훈 \"시내버스 파업해도 시민 이동권 보장돼야\"",
      "press": "ytn.co.kr",
      "publishedAt": "2026-11-23T09:11:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/052/0002436962?sid=102"
+    },
+    {
+     "title": "오세훈 “조희대 탄핵 소추, 정권 붕괴 서막 될 것”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-23T09:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002727287?sid=102"
     },
     {
      "title": "오세훈 \"조희대 탄핵 추진, 정권 붕괴 서막…전 국민적 저항 직면\"(종합...",
@@ -204,14 +267,15 @@
    ]
   },
   {
-   "keyword": "문체부 암표 수사 의뢰",
+   "keyword": "암표 의심 70명 수사 의뢰",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-23T08:01:00.000Z",
+   "articles90": 8,
+   "recent20": 0,
+   "press": 8,
+   "firstArticleAt": "2026-11-23T08:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -270,6 +334,7 @@
   {
    "keyword": "정점식 원내대표 발언",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 5,
@@ -298,46 +363,56 @@
      "link": "https://www.gukjenews.com/news/articleView.html?idxno=3760614"
     }
    ]
-  },
-  {
-   "keyword": "이장우 조혜원 결혼 1주년 사진 공개",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T08:08:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이장우♥조혜원, 결혼 1주년 자축…미공개 본식 사진 공개 [N샷]",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T08:36:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009305690"
-    },
-    {
-     "title": "조혜원♥이장우, 결혼 1년 만에 웨딩 사진 대방출…행복했던 그날",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-23T08:13:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001148052"
-    },
-    {
-     "title": "조혜원♥이장우, 결혼 1주년 맞아 웨딩 사진 공개",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-23T08:08:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611230265"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1198,
-  "matched": 654,
-  "avgLeadMin": 585,
+  "flagged": 1196,
+  "matched": 658,
+  "avgLeadMin": 602,
   "recent": [
+   {
+    "keyword": "수능 부정 신고 최소 1억 포상",
+    "hitKeyword": "수능 부정 논술 합격",
+    "hitAt": "2026-11-23T18:30:00+09:00",
+    "leadMin": 2891
+   },
+   {
+    "keyword": "수능 부정 신고 1억 가산",
+    "hitKeyword": "수능 부정 논술 합격",
+    "hitAt": "2026-11-23T18:30:00+09:00",
+    "leadMin": 2871
+   },
+   {
+    "keyword": "수능 부정 신고 포상금 1억",
+    "hitKeyword": "수능 부정 논술 합격",
+    "hitAt": "2026-11-23T18:30:00+09:00",
+    "leadMin": 2700
+   },
+   {
+    "keyword": "수능 부정 신고 포상금",
+    "hitKeyword": "수능 부정 논술 합격",
+    "hitAt": "2026-11-23T18:30:00+09:00",
+    "leadMin": 2690
+   },
+   {
+    "keyword": "앨리스 황은 밀수 배후는 50대 중국인",
+    "hitKeyword": "앨리스 황 중국 정보기관 의혹",
+    "hitAt": "2026-11-23T18:30:00+09:00",
+    "leadMin": 1604
+   },
+   {
+    "keyword": "엔비디아칩 밀수 중 중국인",
+    "hitKeyword": "중국인 학생 감사 선물",
+    "hitAt": "2026-11-23T18:30:00+09:00",
+    "leadMin": 1181
+   },
+   {
+    "keyword": "AI 부정행위 차단",
+    "hitKeyword": "리트 만점자 부정행위 의혹",
+    "hitAt": "2026-11-23T18:30:00+09:00",
+    "leadMin": 0
+   },
    {
     "keyword": "정부",
     "hitKeyword": "정부 증시 대응",
@@ -355,48 +430,6 @@
     "hitKeyword": "최태원 재산분할금",
     "hitAt": "2026-11-23T17:30:00+09:00",
     "leadMin": 2821
-   },
-   {
-    "keyword": "최태원 AI 인재 공동 육성",
-    "hitKeyword": "최태원 재산분할금",
-    "hitAt": "2026-11-23T17:30:00+09:00",
-    "leadMin": 1886
-   },
-   {
-    "keyword": "최태원 AI 인재 공동 육성 제안",
-    "hitKeyword": "최태원 재산분할금",
-    "hitAt": "2026-11-23T17:30:00+09:00",
-    "leadMin": 1866
-   },
-   {
-    "keyword": "최태원, 한일 AI 인재",
-    "hitKeyword": "최태원 재산분할금",
-    "hitAt": "2026-11-23T17:30:00+09:00",
-    "leadMin": 1846
-   },
-   {
-    "keyword": "최태원 한일 AI 인재 육성",
-    "hitKeyword": "최태원 재산분할금",
-    "hitAt": "2026-11-23T17:30:00+09:00",
-    "leadMin": 1785
-   },
-   {
-    "keyword": "재산",
-    "hitKeyword": "최태원 재산분할금",
-    "hitAt": "2026-11-23T17:30:00+09:00",
-    "leadMin": 1755
-   },
-   {
-    "keyword": "삼성전자 SK하이닉스 급락",
-    "hitKeyword": "손정의 SK하이닉스 인수설",
-    "hitAt": "2026-11-23T17:30:00+09:00",
-    "leadMin": 498
-   },
-   {
-    "keyword": "하정우 차정원 청첩장",
-    "hitKeyword": "하정우 차정원 결혼",
-    "hitAt": "2026-11-23T17:30:00+09:00",
-    "leadMin": 163
    }
   ]
  }
