@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T14:41:27.924Z",
+ "builtAt": "2026-11-23T14:51:32.465Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,66 @@
  "measured": 26,
  "candidates": [
   {
-   "keyword": "젠슨 황 복귀",
+   "keyword": "젠슨 황 CEO 복귀 결정",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 91,
-   "recent20": 87,
-   "press": 69,
-   "firstArticleAt": "2026-11-23T14:20:00.000Z",
+   "articles90": 95,
+   "recent20": 54,
+   "press": 68,
+   "firstArticleAt": "2026-11-23T14:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨 황 “가족의 사랑과 지지에 감사…새 각오”",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-23T14:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833617?sid=104"
+     "title": "[속보] 엔비디아 젠슨 황, 사임 11일 만에 CEO 전격 복귀…이사회 만장일...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-23T14:50:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005644329"
     },
     {
-     "title": "젠슨 황 \"엔비디아 다시 이끌게 돼 영광 … 빨리 업무 복귀하고파\"",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-23T14:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005357324?sid=104"
+     "title": "젠슨 황, 사임 11일 만에 엔비디아 전격 복귀···이사회 만장일치 결정",
+     "press": "todaykorea.co.kr",
+     "publishedAt": "2026-11-23T14:50:00.000Z",
+     "link": "https://www.todaykorea.co.kr/news/articleView.html?idxno=409060"
     },
     {
-     "title": "엔비디아, 젠슨 황 CEO 복귀…다시 힘 실린 '창업자 리더십'",
-     "press": "fetv.co.kr",
+     "title": "젠슨 황 복귀에 엔비디아 33% 폭등...나스닥도 7% ↑",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-23T14:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004685330?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "반도체 메모리",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-23T13:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "젠슨 황, 엔비디아 CEO 전격 복귀에… 美증시 반도체주 폭등",
+     "press": "dt.co.kr",
      "publishedAt": "2026-11-23T14:40:00.000Z",
-     "link": "https://www.fetv.co.kr/news/articleView.html?idxno=314164"
+     "link": "https://n.news.naver.com/mnews/article/029/0003060737?sid=104"
+    },
+    {
+     "title": "산업연 “내년 수출 14% 늘어 1조 3000억 달러…반도체 빼면 1.5% 증가 그...",
+     "press": "busan.com",
+     "publishedAt": "2026-11-23T14:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001408611?sid=101"
+    },
+    {
+     "title": "“더 팔아도 소용없다” 반도체값 10%만 떨어져도 ‘이 정도’라니…韓...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-23T14:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004685324?sid=101"
     }
    ]
   },
@@ -47,10 +79,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-23T13:20:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-23T13:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -71,38 +103,6 @@
      "press": "stoo.com",
      "publishedAt": "2026-11-23T14:06:00.000Z",
      "link": "http://www.stoo.com/article.php?aid=110052922275"
-    }
-   ]
-  },
-  {
-   "keyword": "반도체 메모리",
-   "sources": [
-    "google"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T13:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "산업연 “내년 수출 14% 늘어 1조 3000억 달러…반도체 빼면 1.5% 증가 그...",
-     "press": "busan.com",
-     "publishedAt": "2026-11-23T14:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/082/0001408611?sid=101"
-    },
-    {
-     "title": "“더 팔아도 소용없다” 반도체값 10%만 떨어져도 ‘이 정도’라니…韓...",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-23T14:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004685324?sid=101"
-    },
-    {
-     "title": "해외 투자銀, 삼전닉스 목표가 잇단 하향...2028년 메모리 부족 해소",
-     "press": "tjb.co.kr",
-     "publishedAt": "2026-11-23T13:34:00.000Z",
-     "link": "https://www.tjb.co.kr/news05/bodo/view/id/106433"
     }
    ]
   },
@@ -169,76 +169,11 @@
      "link": "https://n.news.naver.com/mnews/article/052/0002437031?sid=102"
     }
    ]
-  },
-  {
-   "keyword": "신한은행 하나은행 4연승",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T13:21:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "9-0으로 문 열고 63-59로 닫았다... 신한은행, 하나은행 꺾고 4연승",
-     "press": "stnsports.co.kr",
-     "publishedAt": "2026-11-23T13:48:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/450/0000155642"
-    },
-    {
-     "title": "'이기는 습관' 장착한 신한은행, 뒤를 받치는 신신 듀오와 더 확장될 '최...",
-     "press": "rookie.co.kr",
-     "publishedAt": "2026-11-23T13:42:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/398/0000105700"
-    },
-    {
-     "title": "여자농구 신한은행, 하나은행 꺾고 4연승…1경기 차 단독 선두 질주",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-23T13:21:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/055/0001405230"
-    }
-   ]
-  },
-  {
-   "keyword": "나의 유죄인간",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 2,
-   "firstArticleAt": "2026-11-23T13:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "임시완, '나의 유죄인간' 11회 앞두고 설렘 가득 투샷",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-23T14:22:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284393"
-    },
-    {
-     "title": "'나의 유죄인간' 정한설, 종영 소감",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-23T14:20:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1195012"
-    },
-    {
-     "title": "'나의 유죄인간' 설인아 임시완, 이별 후 밀당 전개",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-23T13:14:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284367"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1226,
+  "flagged": 1227,
   "matched": 669,
   "avgLeadMin": 561,
   "recent": [
