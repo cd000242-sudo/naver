@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T11:40:25.392Z",
+ "builtAt": "2026-11-23T11:50:29.252Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,21 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "수능 부정행위 신고하면 최대 5억 지급",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 16,
-   "recent20": 0,
-   "press": 15,
-   "firstArticleAt": "2026-11-23T10:20:00.000Z",
+   "recent20": 1,
+   "press": 16,
+   "firstArticleAt": "2026-11-23T10:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "권익위, 수능 부정행위 신고하면 '최대 5억' 포상",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-23T11:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004212994?sid=103"
+    },
     {
      "title": "수능 부정행위 신고하면 최대 5억원…권익위, 포상금 지급",
      "press": "view.asiae.co.kr",
@@ -34,53 +39,15 @@
      "press": "businesspost.co.kr",
      "publishedAt": "2026-11-23T11:16:00.000Z",
      "link": "https://www.businesspost.co.kr/BP?command=article_view&num=452716"
-    },
-    {
-     "title": "수능 부정행위 신고하면 포상금 최대 5억 준다",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-23T11:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003702334?sid=102"
     }
    ]
   },
   {
-   "keyword": "민주당 탄핵 추진",
+   "keyword": "강금실 국정원장 후보자",
    "sources": [
     "daum"
    ],
-   "articles90": 16,
-   "recent20": 5,
-   "press": 12,
-   "firstArticleAt": "2026-11-23T10:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[속보]與전용기 “조희대, 중대한 위법 아니지만 징계성 탄핵”",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-23T11:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002834901?sid=100"
-    },
-    {
-     "title": "\"조희대 탄핵은 도 넘어, 삼권분립 파괴\" 집단행동 시사",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-23T11:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001405202?sid=102"
-    },
-    {
-     "title": "국힘·개혁신당, 조희대 탄핵에 맞불…\"이 대통령 재판 즉각 재개해야\"",
-     "press": "dkilbo.com",
-     "publishedAt": "2026-11-23T11:36:00.000Z",
-     "link": "https://www.dkilbo.com/news/articleView.html?idxno=561844"
-    }
-   ]
-  },
-  {
-   "keyword": "강금실 국정원장 지명",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 17,
+   "articles90": 18,
    "recent20": 3,
    "press": 12,
    "firstArticleAt": "2026-11-23T10:21:00.000Z",
@@ -88,67 +55,66 @@
    "capped": false,
    "samples": [
     {
-     "title": "李대통령, 국정원장에 강금실 발탁…4개 부처 중폭 개각",
-     "press": "dkilbo.com",
-     "publishedAt": "2026-11-23T11:36:00.000Z",
-     "link": "https://www.dkilbo.com/news/articleView.html?idxno=561840"
+     "title": "[2차 개각 후보자 5인 프로필] 강금실·임웅순·홍익표·한준호·강유정...",
+     "press": "news-s.kr",
+     "publishedAt": "2026-11-23T11:42:00.000Z",
+     "link": "https://news-s.kr/view.html?id=L261123203129f83d"
     },
     {
-     "title": "강금실 발탁 “국정원 권력기관 이미지 탈피”…대북 경험 부족 지적도",
+     "title": "강금실 ‘첫 여성 발탁’ 파격…“국정원 권력기관 이미지 탈피 무게”",
      "press": "hani.co.kr",
      "publishedAt": "2026-11-23T11:36:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/028/0002833613?sid=100"
     },
     {
-     "title": "[뉴스프라임] 이 대통령, 중폭개각 단행…국정원장에 강금실",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-23T11:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929131?sid=100"
+     "title": "李대통령, 국정원장에 강금실 발탁…4개 부처 중폭 개각",
+     "press": "dkilbo.com",
+     "publishedAt": "2026-11-23T11:36:00.000Z",
+     "link": "https://www.dkilbo.com/news/articleView.html?idxno=561840"
     }
    ]
   },
   {
-   "keyword": "노소영 재산 분할금",
+   "keyword": "박준현 서면사과 취소 1심 승소",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 9,
+   "articles90": 10,
    "recent20": 1,
    "press": 9,
-   "firstArticleAt": "2026-11-23T10:18:00.000Z",
+   "firstArticleAt": "2026-11-23T10:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "9440억원 이혼소송 재산분할금 “전액 내겠다” 마음 바꾼 최태원… 대...",
-     "press": "womennews.co.kr",
-     "publishedAt": "2026-11-23T11:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/310/0000141981?sid=101"
+     "title": "'초대형 반전' KBO 전체 1순위 박준현, 학폭 논란 뒤집혔다...법원서 1심...",
+     "press": "sportalkorea.com",
+     "publishedAt": "2026-11-23T11:41:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/139/0002256458"
     },
     {
-     "title": "최태원 \"재산분할금 9천440억 원 전액\" 화해권고 신청",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-23T11:16:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544722"
+     "title": "키움 박준현, 고교 시절 학폭 서면사과 취소 소송 1심 승소",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-23T11:24:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110051838558"
     },
     {
-     "title": "최태원 \"재산분할금 9440억원 전액 지급\"…노소영과 소송 마무리 추진",
-     "press": "dongponews.net",
+     "title": "키움 박준현, 고교시절 학폭 서면사과 조치 취소소송 '1심 승소'",
+     "press": "slist.kr",
      "publishedAt": "2026-11-23T11:12:00.000Z",
-     "link": "https://www.dongponews.net/news/articleView.html?idxno=61852"
+     "link": "https://www.slist.kr/news/articleView.html?idxno=784160"
     }
    ]
   },
   {
    "keyword": "금융위 롯데카드에 과징금 10억",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-23T10:18:00.000Z",
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-23T10:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -165,43 +131,106 @@
      "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247836"
     },
     {
-     "title": "금융위, 공시의무 위반 롯데카드에 10억원 과징금 부과",
-     "press": "segyebiz.com",
+     "title": "금융위, 롯데카드에 10억원 과징금",
+     "press": "fnnews.com",
      "publishedAt": "2026-11-23T10:54:00.000Z",
-     "link": "http://www.segyebiz.com/newsView/20261123517024?OutUrl=naver"
+     "link": "https://n.news.naver.com/mnews/article/014/0005608570?sid=101"
     }
    ]
   },
   {
-   "keyword": "박준현 서면사과 취소 1심 승소",
+   "keyword": "강금실과 홍익표 지명",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 9,
+   "articles90": 6,
    "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-23T10:28:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-23T10:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "키움 박준현, 고교 시절 학폭 서면사과 취소 소송 1심 승소",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-23T11:24:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110051838558"
+     "title": "[2차 개각 후보자 5인 프로필] 강금실·임웅순·홍익표·한준호·강유정...",
+     "press": "news-s.kr",
+     "publishedAt": "2026-11-23T11:42:00.000Z",
+     "link": "https://news-s.kr/view.html?id=L261123203129f83d"
     },
     {
-     "title": "키움 박준현, 고교시절 학폭 서면사과 조치 취소소송 '1심 승소'",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-23T11:12:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=784160"
+     "title": "국정원장 강금실·통일장관 홍익표…대미 관계 재정비",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-23T11:18:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544702"
     },
     {
-     "title": "키움 박준현, 학폭 서면사과 조치 취소 소송 1심 승소",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-23T11:08:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=886366"
+     "title": "청와대 \"국정원장 강금실 후보등 외교, 통일, 행안, 문체부 장관 지명\"",
+     "press": "kdpress.co.kr",
+     "publishedAt": "2026-11-23T11:04:00.000Z",
+     "link": "https://www.kdpress.co.kr/news/articleView.html?idxno=210011"
+    }
+   ]
+  },
+  {
+   "keyword": "한준호 행안장관 후보",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-23T10:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[2차 개각 후보자 5인 프로필] 강금실·임웅순·홍익표·한준호·강유정...",
+     "press": "news-s.kr",
+     "publishedAt": "2026-11-23T11:42:00.000Z",
+     "link": "https://news-s.kr/view.html?id=L261123203129f83d"
+    },
+    {
+     "title": "한준호 행안장관 후보자 \"국민 일상 바꾸는 실용행정 펼치겠다\"",
+     "press": "dongponews.net",
+     "publishedAt": "2026-11-23T11:36:00.000Z",
+     "link": "https://www.dongponews.net/news/articleView.html?idxno=61853"
+    },
+    {
+     "title": "청와대 \"국정원장 강금실 후보등 외교, 통일, 행안, 문체부 장관 지명\"",
+     "press": "kdpress.co.kr",
+     "publishedAt": "2026-11-23T11:04:00.000Z",
+     "link": "https://www.kdpress.co.kr/news/articleView.html?idxno=210011"
+    }
+   ]
+  },
+  {
+   "keyword": "러시아 핵무장 위성 발사",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-23T10:26:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "독일 정보당국 \"러시아, 이르면 12월 핵무장 위성 발사 전망\"",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-23T11:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000967304?sid=104"
+    },
+    {
+     "title": "“러, 핵무장 인공위성 연내 발사…단시간 내 작전 태세 갖출 것”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-23T11:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004685316?sid=104"
+    },
+    {
+     "title": "\"러, 핵무장 인공위성 연내 발사할 듯\"",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-23T11:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005846656?sid=104"
     }
    ]
   },
@@ -210,10 +239,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 5,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-23T10:18:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-23T10:51:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -238,130 +267,66 @@
    ]
   },
   {
-   "keyword": "러시아 핵무장 위성 발사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-23T10:13:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“러, 핵무장 인공위성 연내 발사…단시간 내 작전 태세 갖출 것”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-23T11:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004685316?sid=104"
-    },
-    {
-     "title": "\"러, 핵무장 인공위성 연내 발사할 듯\"",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-23T11:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005846656?sid=104"
-    },
-    {
-     "title": "\"러시아, 핵무장 인공위성 연내 발사\"...\"근거 없는 주장\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-23T11:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436994?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "김원효 트젠바 방문 해명",
+   "keyword": "지연수 일상 생활 힘들",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T10:16:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-23T10:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'심진화♥' 김원효, 트젠바 방문 화끈한 해명…\"XX 달렸나 확인하러\" [엑...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-23T10:45:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002083290"
-    },
-    {
-     "title": "‘심진화♥’김원효, 트젠바 논란 해명도 화끈했다 “왜 갔냐니‥달려...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-23T10:29:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190471"
-    },
-    {
-     "title": "“트젠바 그런 곳 아니야” 김원효, 트젠바 방문 논란→‘화끈 농담’에...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-23T10:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001282901"
-    }
-   ]
-  },
-  {
-   "keyword": "강유정 문체부 장관 지명",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T10:12:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李 정부 5개 장관급 인사에…국힘, “코드·돌려막기 인사” 맹비난",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-23T11:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003060729?sid=100"
-    },
-    {
-     "title": "청와대 \"국정원장 강금실 후보등 외교, 통일, 행안, 문체부 장관 지명\"",
-     "press": "kdpress.co.kr",
-     "publishedAt": "2026-11-23T11:04:00.000Z",
-     "link": "https://www.kdpress.co.kr/news/articleView.html?idxno=210011"
-    },
-    {
-     "title": "국정원장 강금실·통일장관 홍익표 '중폭' 개각",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-23T10:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001405192?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "대리수능",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 2,
-   "firstArticleAt": "2026-11-23T10:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[포토] 대리수능 차강윤 '케미 기대하세요'",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-23T11:24:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/23/2026112350363.html"
-    },
-    {
-     "title": "[포토] 대리수능 주연 맡은 배우 박윤호",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-23T11:22:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/23/2026112350362.html"
-    },
-    {
-     "title": "[포토] 티빙 오리지널 '대리수능' 오늘 첫 공개",
-     "press": "newdaily.co.kr",
+     "title": "'일라이와 이혼' 지연수, 결국 병원行…\"몸 쓰는 알바해서\" ('연수롭다'...",
+     "press": "tenasia.co.kr",
      "publishedAt": "2026-11-23T11:20:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/23/2026112350361.html"
+     "link": "https://m.entertain.naver.com/article/312/0000785811"
+    },
+    {
+     "title": "'싱글맘' 지연수, 알바 뛰며 버티다 결국 병원行 \"몸 너무 많이 써\" [연...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-23T10:41:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003489613"
+    },
+    {
+     "title": "'모델 출신' 지연수 \"몸 쓰는 일로 돈 벌다 보니 통증 후유증.. 일상생활...",
+     "press": "tvreport.co.kr",
+     "publishedAt": "2026-11-23T10:35:00.000Z",
+     "link": "https://m.entertain.naver.com/article/213/0001409316"
+    }
+   ]
+  },
+  {
+   "keyword": "한성숙 총리, 카타르 국무장관 접견",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-23T10:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "韓총리, 카타르·몽골 장관과 접견…에너지·핵심광물 등 협력 강화 논...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-23T11:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014340749?sid=100"
+    },
+    {
+     "title": "한성숙 장관 \"에너지 수급 협조에 감사\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T10:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009305825?sid=100"
+    },
+    {
+     "title": "한성숙 총리, 카타르 에너지 담당 국무장관 일행과 기념촬영",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T10:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009305826?sid=100"
     }
    ]
   }
@@ -369,8 +334,8 @@
  "hitRate": {
   "days": 7,
   "flagged": 1218,
-  "matched": 669,
-  "avgLeadMin": 593,
+  "matched": 667,
+  "avgLeadMin": 588,
   "recent": [
    {
     "keyword": "음주운전 고경표 출석",
