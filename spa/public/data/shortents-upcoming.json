@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T13:51:10.852Z",
+ "builtAt": "2026-11-23T14:01:13.900Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "신한은행 하나은행 4연승",
    "sources": [
     "nate"
    ],
-   "articles90": 14,
+   "articles90": 11,
    "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-23T12:22:00.000Z",
+   "press": 10,
+   "firstArticleAt": "2026-11-23T12:34:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -43,14 +43,46 @@
    ]
   },
   {
+   "keyword": "이지훈, 둘째 딸 출산",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-23T12:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이지훈·아야네, 두 아이 부모 됐다…\"가장 큰 선물\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-23T13:48:00.000Z",
+     "link": "https://m.entertain.naver.com/article/008/0005445261"
+    },
+    {
+     "title": "이지훈♥아야네, 두 번의 유산 딛고 '네 식구' 됐다..신화 이민우도 축...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-23T13:38:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005644318"
+    },
+    {
+     "title": "이지훈♥아야네, 두 번의 유산 딛고 둘째 출산…네 식구 됐다",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-23T13:20:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001306375"
+    }
+   ]
+  },
+  {
    "keyword": "강금실 국정원장 후보자",
    "sources": [
     "daum"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-23T12:24:00.000Z",
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-23T12:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -71,103 +103,6 @@
      "press": "ichannela.com",
      "publishedAt": "2026-11-23T12:59:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/449/0000368471?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "상장",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-23T12:23:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "미래라는 어음 - 앤트로픽 상장, 젠슨 황의 퇴장, 서로를 가리키는 욕망",
-     "press": "ilemonde.com",
-     "publishedAt": "2026-11-23T13:40:00.000Z",
-     "link": "https://www.ilemonde.com/news/articleView.html?idxno=31051"
-    },
-    {
-     "title": "바이비트(Bybit), 마브렉스(MBX)·오비터 파이낸스(OBT) 상장 폐지",
-     "press": "nbntv.co.kr",
-     "publishedAt": "2026-11-23T12:44:00.000Z",
-     "link": "https://www.nbntv.co.kr/news/articleView.html?idxno=4027849"
-    },
-    {
-     "title": "카카오 인적분할 일정은?... 카카오AI·카카오X 상장일 보니",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-23T12:36:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1195016"
-    }
-   ]
-  },
-  {
-   "keyword": "공항",
-   "sources": [
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-23T12:27:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“2공항 갈등조정협의회 부당성 바로 잡아야”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-23T13:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012299658?sid=102"
-    },
-    {
-     "title": "“통합신공항 국가가 맡아야”…시민추진단 촉구",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-23T13:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012299671?sid=102"
-    },
-    {
-     "title": "인천 영종구 공항소음대책지역 주민 대상 스마트팜 가을여행 운영",
-     "press": "kpenews.com",
-     "publishedAt": "2026-11-23T13:06:00.000Z",
-     "link": "https://kpenews.com/View.aspx?No=4325928"
-    }
-   ]
-  },
-  {
-   "keyword": "반도체 메모리",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T12:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "해외 투자銀, 삼전닉스 목표가 잇단 하향...2028년 메모리 부족 해소",
-     "press": "tjb.co.kr",
-     "publishedAt": "2026-11-23T13:34:00.000Z",
-     "link": "https://www.tjb.co.kr/news05/bodo/view/id/106433"
-    },
-    {
-     "title": "\"코스피 3000선 후반도 가능\"…엔비디아발 반도체 충격 경고",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-23T13:30:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=886384"
-    },
-    {
-     "title": "글로벌 IB 잇단 반도체 경고…삼성전자·하이닉스 목표가 줄하향",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-23T12:24:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=886382"
     }
    ]
   },
@@ -200,6 +135,70 @@
      "press": "joongang.co.kr",
      "publishedAt": "2026-11-23T13:03:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/025/0003567328?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "수능 부정 신고 포상 최대 5억",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-23T12:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "권익위, 수능 부정행위 신고 포상금 최대 5억원 지급",
+     "press": "kookje.co.kr",
+     "publishedAt": "2026-11-23T13:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/658/0000162070?sid=102"
+    },
+    {
+     "title": "수능 부정행위 신고 포상금 1억→5억원 상향…인원수 따라 가산 지급",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-23T12:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000133461?sid=102"
+    },
+    {
+     "title": "\"수능 부정행위 신고하면 최대 5억\"...자수해도 포상금 지급",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-23T12:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000122036?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "공항",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T12:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“2공항 갈등조정협의회 부당성 바로 잡아야”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-23T13:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012299658?sid=102"
+    },
+    {
+     "title": "“통합신공항 국가가 맡아야”…시민추진단 촉구",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-23T13:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012299671?sid=102"
+    },
+    {
+     "title": "인천 영종구 공항소음대책지역 주민 대상 스마트팜 가을여행 운영",
+     "press": "kpenews.com",
+     "publishedAt": "2026-11-23T13:06:00.000Z",
+     "link": "https://kpenews.com/View.aspx?No=4325928"
     }
    ]
   },
@@ -237,73 +236,42 @@
    ]
   },
   {
-   "keyword": "리비아 러시아 군함 피격",
+   "keyword": "상장",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "google"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-23T12:22:00.000Z",
+   "firstArticleAt": "2026-11-23T12:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "지중해까지 넘본다…우크라, 리비아 정박 러 군함 타격",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-23T12:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012299598?sid=104"
+     "title": "미래라는 어음 - 앤트로픽 상장, 젠슨 황의 퇴장, 서로를 가리키는 욕망",
+     "press": "ilemonde.com",
+     "publishedAt": "2026-11-23T13:40:00.000Z",
+     "link": "https://www.ilemonde.com/news/articleView.html?idxno=31051"
     },
     {
-     "title": "발트해 이어 리비아 앞바다까지…러 선박 잇단 피격",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-23T12:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652926?sid=104"
+     "title": "바이비트(Bybit), 마브렉스(MBX)·오비터 파이낸스(OBT) 상장 폐지",
+     "press": "nbntv.co.kr",
+     "publishedAt": "2026-11-23T12:44:00.000Z",
+     "link": "https://www.nbntv.co.kr/news/articleView.html?idxno=4027849"
     },
     {
-     "title": "우크라, 리비아서 러 군함 격침… 전선 확대되나",
-     "press": "segye.com",
-     "publishedAt": "2026-11-23T12:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177507?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "법원 놀부 회생 기각",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T12:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "놀부 부대찌개 ‘이제 못 먹나’…회생신청 기각한 법원, 즉시항고 가능...",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-23T13:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003060732?sid=101"
-    },
-    {
-     "title": "서울회생법원, 외식업체 놀부 회생 개시 신청 기각",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-23T13:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437026?sid=102"
-    },
-    {
-     "title": "법원, 외식업체 놀부 회생신청 기각",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-23T12:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005846668?sid=102"
+     "title": "카카오 인적분할 일정은?... 카카오AI·카카오X 상장일 보니",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-23T12:36:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1195016"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1226,
+  "flagged": 1228,
   "matched": 670,
   "avgLeadMin": 568,
   "recent": [
