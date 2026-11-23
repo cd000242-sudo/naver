@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T04:36:42.463Z",
+ "builtAt": "2026-11-23T04:46:46.130Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,34 @@
  "measured": 27,
  "candidates": [
   {
-   "keyword": "이진우 유족 경찰 출석",
+   "keyword": "유족 경찰 출석",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 33,
-   "recent20": 7,
+   "articles90": 35,
+   "recent20": 8,
    "press": 33,
-   "firstArticleAt": "2026-11-23T03:12:00.000Z",
+   "firstArticleAt": "2026-11-23T03:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "LEET 만점자 이진우 씨 유족 경찰 출석…증거 제출 의사 확인",
-     "press": "mdtoday.co.kr",
-     "publishedAt": "2026-11-23T04:34:00.000Z",
-     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=627022"
+     "title": "리트 만점자 유족 경찰 출석...\"증거제출 의사 확인\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-23T04:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436767?sid=102"
     },
     {
-     "title": "‘LEET 만점’ 故이진우 유족 경찰 출석…수사 본격화",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-23T04:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004685101?sid=102"
+     "title": "리트 만점 고 이진우 유족 경찰 출석…'증거 제출' 면담",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-23T04:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001405092?sid=102"
     },
     {
-     "title": "'리트 만점자' 유족 경찰 출석…과외교사도 참고인 조사 예정",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-23T04:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005444970?sid=102"
+     "title": "리트 만점자 故이진우씨 유족 경찰 출석…증거물 제출 의사 확인",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-23T04:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001886832?sid=102"
     }
    ]
   },
@@ -47,95 +47,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 28,
-   "recent20": 4,
-   "press": 27,
-   "firstArticleAt": "2026-11-23T03:07:00.000Z",
+   "articles90": 30,
+   "recent20": 9,
+   "press": 29,
+   "firstArticleAt": "2026-11-23T03:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "코스피, 매도 사이드카 뒤 낙폭 3%대로 축소",
-     "press": "straightnews.co.kr",
-     "publishedAt": "2026-11-23T04:34:00.000Z",
-     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=315956"
+     "title": "코스피 5%대 급락에 매도 사이드카... 장중 4,600선 붕괴도",
+     "press": "vop.co.kr",
+     "publishedAt": "2026-11-23T04:42:00.000Z",
+     "link": "https://vop.co.kr/A00001697714.html"
     },
     {
-     "title": "4,600도 내준 코스피...2거래일 연속 매도 사이드카",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-23T04:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436762?sid=101"
+     "title": "'美 반도체 쇼크' 덮친 증시…코스피 4600선마저 무너졌다",
+     "press": "newsquest.co.kr",
+     "publishedAt": "2026-11-23T04:42:00.000Z",
+     "link": "https://www.newsquest.co.kr/news/articleView.html?idxno=305615"
     },
     {
-     "title": "‘반토막’ 코스피…장중 4600선으로 내려앉아",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-23T04:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000368388?sid=115"
+     "title": "코스피 장중 5.8% 급락해 4600선 이탈...2거래일 연속 매도 사이드카",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-23T04:42:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=73475"
     }
    ]
   },
   {
-   "keyword": "김종철 경찰청장 취임",
+   "keyword": "삼성증권 개인정보 유출",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 5,
-   "press": 10,
-   "firstArticleAt": "2026-11-23T03:10:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "취임 첫 일정으로 국민참여단 만난 김종철 신임 경찰청장",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T04:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009304936?sid=102"
-    },
-    {
-     "title": "김종철 신임 경찰청장, 취임 첫 일정으로 국민참여단 회의",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T04:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009304937?sid=102"
-    },
-    {
-     "title": "취임 첫 일정으로 국민참여단 회의 참석한 김종철 신임 경찰청장",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T04:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009304938?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "이형일 석유 최고가격제",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-23T03:14:00.000Z",
+   "articles90": 16,
+   "recent20": 3,
+   "press": 14,
+   "firstArticleAt": "2026-11-23T03:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이형일 “올해 3%대 후반 성장 가능”…반도체 호황 속 양극화 해소 과...",
-     "press": "dailian.co.kr",
+     "title": "삼성증권 고객정보 털렸다…8천여명 피해",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-23T04:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928965?sid=101"
+    },
+    {
+     "title": "삼성증권, 외부 해킹으로 8241명 개인정보 유출",
+     "press": "finomy.com",
      "publishedAt": "2026-11-23T04:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003158336?sid=101"
+     "link": "http://www.finomy.com/news/articleView.html?idxno=267552"
     },
     {
-     "title": "이형일 “올해 3%대 후반 성장 가능…증안펀드 외 추가 비상계획 마련”",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-23T04:29:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003488565?sid=100"
-    },
-    {
-     "title": "이형일 \"증안펀드 외 추가 조치 마련돼 있어…올해 3% 후반 성장 가능\"(...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-23T04:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014339697?sid=101"
+     "title": "[특징주] 삼성증권, 고객 8241명 개인정보 유출…2%대 약세",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-23T04:28:00.000Z",
+     "link": "https://www.ajunews.com/view/20261123131854925"
     }
    ]
   },
@@ -144,62 +111,62 @@
    "sources": [
     "google"
    ],
-   "articles90": 9,
-   "recent20": 2,
-   "press": 9,
+   "articles90": 12,
+   "recent20": 5,
+   "press": 12,
    "firstArticleAt": "2026-11-23T03:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼성물산 건설부문장에 최영재 사장…6년만에 수장 교체",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-23T04:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003060605?sid=101"
+     "title": "삼성물산 건설, 6년 만에 바뀌는 수장…최영재 하이테크사업부장 사장 ...",
+     "press": "sisacast.kr",
+     "publishedAt": "2026-11-23T04:46:00.000Z",
+     "link": "http://www.sisacast.kr/news/articleView.html?idxno=102229"
     },
     {
      "title": "삼성물산 건설부문 사장에 최영재 부사장 승진",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-23T04:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967185?sid=101"
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-23T04:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005767585?sid=101"
     },
     {
-     "title": "삼성물산, 최영재 건설부문장 사장 승진…6년 만에 CEO 교체",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-23T04:12:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904033"
+     "title": "삼성물산 건설부문 새 사장 '최영재'의 과제는?",
+     "press": "globalepic.co.kr",
+     "publishedAt": "2026-11-23T04:38:00.000Z",
+     "link": "https://www.globalepic.co.kr/view.php?ud=20261123133311518448439a4874_29"
     }
    ]
   },
   {
-   "keyword": "국민의힘, 특검법 심판 청구",
+   "keyword": "이형일 석유 최고가격제",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 17,
-   "recent20": 3,
-   "press": 8,
-   "firstArticleAt": "2026-11-23T03:20:00.000Z",
+   "articles90": 10,
+   "recent20": 4,
+   "press": 10,
+   "firstArticleAt": "2026-11-23T03:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국힘 \"조작기소 특검법 처리로 표결권 침해\" 권한쟁의심판 청구",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-23T04:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001537399?sid=100"
+     "title": "이형일 \"증안펀드 필요할 때 가동…추가 시장 안정 대책도 준비\"",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-23T04:46:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=730576"
     },
     {
-     "title": "국민의힘 “조작기소 특검법은 무효”…조정식·서영교 권한쟁의심판 청...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-23T04:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003702134?sid=100"
+     "title": "이형일 \"증안펀드 외 컨틴전시플랜 있어...규모는 상황 봐서\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-23T04:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436763?sid=101"
     },
     {
-     "title": "국힘, '조작기소 특검법' 강행 처리 \"의회 민주주의 훼손\" 권한쟁의심판...",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-23T04:20:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544649"
+     "title": "이형일 “올해 3%대 후반 성장 가능”…반도체 호황 속 양극화 해소 과...",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-23T04:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003158336?sid=101"
     }
    ]
   },
@@ -208,13 +175,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
-   "recent20": 3,
-   "press": 7,
+   "articles90": 11,
+   "recent20": 2,
+   "press": 8,
    "firstArticleAt": "2026-11-23T03:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "‘조작기소 특검법’ 헌재로 가져간 국힘…거리에서도 반대 여론전",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-23T04:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005767586?sid=100"
+    },
     {
      "title": "국힘 \"조작기소 특검법 처리로 표결권 침해\" 권한쟁의심판 청구",
      "press": "imnews.imbc.com",
@@ -226,12 +199,38 @@
      "press": "seoul.co.kr",
      "publishedAt": "2026-11-23T04:23:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/081/0003702134?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "국힘, 헌재 특검법 심판 청구",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 8,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-23T03:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘조작기소 특검법’ 헌재로 가져간 국힘…거리에서도 반대 여론전",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-23T04:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005767586?sid=100"
     },
     {
-     "title": "국힘, '조작기소 특검법' 강행 처리 \"의회 민주주의 훼손\" 권한쟁의심판...",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-23T04:20:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544649"
+     "title": "국힘 \"조작기소 특검법 처리로 표결권 침해\" 권한쟁의심판 청구",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-23T04:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537399?sid=100"
+    },
+    {
+     "title": "국민의힘 “조작기소 특검법은 무효”…조정식·서영교 권한쟁의심판 청...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-23T04:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003702134?sid=100"
     }
    ]
   },
@@ -241,18 +240,12 @@
     "google"
    ],
    "articles90": 7,
-   "recent20": 2,
+   "recent20": 0,
    "press": 7,
    "firstArticleAt": "2026-11-23T03:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
-    {
-     "title": "2027학년도 국가장학금 신청 24일 시작... 개편된 지원금액·소득구간은...",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-23T04:24:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1194885"
-    },
     {
      "title": "내년 1학기 국가장학금 24일 접수… 지방 국립대 전액 장학금도 신청해...",
      "press": "news.unn.net",
@@ -260,10 +253,48 @@
      "link": "https://news.unn.net/news/articleView.html?idxno=601191"
     },
     {
+     "title": "2027학년도 국가장학금 신청 24일 시작... 개편된 지원금액·소득구간은...",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-23T04:24:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1194885"
+    },
+    {
      "title": "내년 1학기 국가장학금 신청하세요…내일부터 내년 1월7일까지",
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-23T04:14:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/079/0004212745?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "에이티즈 빌보드 1위",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-23T03:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "에이티즈, 美빌보드 네번째 1위에 \"벅차고 감사...초심 잃지 않겠다\"",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-23T04:40:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=784085"
+    },
+    {
+     "title": "에이티즈, 美 ‘빌보드 200’ 통산 네 번째 1위..‘글로벌 최정상 그룹’...",
+     "press": "breaknews.com",
+     "publishedAt": "2026-11-23T04:08:00.000Z",
+     "link": "http://www.breaknews.com/1253034"
+    },
+    {
+     "title": "에이티즈, 통산 네 번째 '빌보드 200' 1위에 \"초심 잃지 않겠다\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-23T04:02:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014339678"
     }
    ]
   },
@@ -300,45 +331,13 @@
    ]
   },
   {
-   "keyword": "에이티즈 빌보드 1위",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T03:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "에이티즈, 美 ‘빌보드 200’ 통산 네 번째 1위..‘글로벌 최정상 그룹’...",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-23T04:08:00.000Z",
-     "link": "http://www.breaknews.com/1253034"
-    },
-    {
-     "title": "에이티즈, 통산 네 번째 '빌보드 200' 1위에 \"초심 잃지 않겠다\"",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-23T04:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/003/0014339678"
-    },
-    {
-     "title": "에이티즈 빌보드 네번째 1위에 \"벅차고 감사…초심 잃지 않겠다\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-23T03:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016458132?sid=103"
-    }
-   ]
-  },
-  {
    "keyword": "합동 청사 방호훈련",
    "sources": [
     "signal.bz",
     "nate"
    ],
    "articles90": 10,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-23T03:32:00.000Z",
    "exclusive": false,
@@ -351,57 +350,25 @@
      "link": "https://n.news.naver.com/mnews/article/032/0003484391?sid=102"
     },
     {
-     "title": "서부지법·마포경찰서, 합동 청사 방호 훈련",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T03:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009304853?sid=102"
-    },
-    {
      "title": "서부지법 청사 방호훈련",
      "press": "news1.kr",
      "publishedAt": "2026-11-23T03:49:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009304855?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "이재명 지지율 상승",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T03:28:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李대통령 지지율 2주 연속 상승, 37.3%... 민주당은 35.6% [리얼미터]",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-23T03:46:00.000Z",
-     "link": "https://www.insight.co.kr/news/583138"
     },
     {
-     "title": "김민석 대표 취임 100일…'당내 통합·지지율 회복' 핵심 과제로",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-23T03:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003488534?sid=100"
-    },
-    {
-     "title": "[이재명 직무평가] 지지율 37.3%...2주 연속 상승세",
-     "press": "00news.co.kr",
-     "publishedAt": "2026-11-23T03:28:00.000Z",
-     "link": "http://www.00news.co.kr/news/articleView.html?idxno=108271"
+     "title": "서부지법·마포경찰서, 합동 청사 방호 훈련",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T03:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009304853?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1160,
-  "matched": 660,
-  "avgLeadMin": 607,
+  "flagged": 1159,
+  "matched": 657,
+  "avgLeadMin": 609,
   "recent": [
    {
     "keyword": "장윤기 부친 중징계",
