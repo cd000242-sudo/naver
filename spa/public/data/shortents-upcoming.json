@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T16:01:56.542Z",
+ "builtAt": "2026-11-23T16:11:59.595Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 27,
  "candidates": [
   {
-   "keyword": "젠슨 황 CEO 복귀",
+   "keyword": "젠슨 황 CEO 복귀 결정",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 94,
+   "articles90": 96,
    "recent20": 18,
-   "press": 62,
-   "firstArticleAt": "2026-11-23T14:59:00.000Z",
+   "press": 67,
+   "firstArticleAt": "2026-11-23T14:56:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "트럼프 젠슨 황 복귀 옹호에 美 의회 반발…수출통제 강화 촉구",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-23T16:00:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=2026112400560384999a1f309431_1"
+     "title": "젠슨 황 복귀에 베팅하는 도박사들",
+     "press": "ddanzi.com",
+     "publishedAt": "2026-11-23T16:06:00.000Z",
+     "link": "http://www.ddanzi.com/899530904"
     },
     {
-     "title": "엔비디아 이사회, 젠슨 황을 왜 다시 CEO로 불렀나",
-     "press": "zdnet.co.kr",
-     "publishedAt": "2026-11-23T15:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/092/0002446562?sid=105"
+     "title": "“트럼프가 직접 전화까지”…젠슨 황 복귀의 숨겨진 내막 [이슈+]",
+     "press": "ekn.kr",
+     "publishedAt": "2026-11-23T16:06:00.000Z",
+     "link": "https://www.ekn.kr/web/view.php?key=20261124022273647"
     },
     {
-     "title": "트럼프 \"젠슨황은 中밀반출 몰랐다…이사회에 '안보 보증' 해줘\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T15:58:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009305915?sid=104"
+     "title": "젠슨 황 “가족의 사랑·지지 감사”…트럼프 “위대한 애국자, 보물”",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-23T16:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003702350?sid=104"
     }
    ]
   },
@@ -47,10 +47,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
+   "articles90": 12,
    "recent20": 0,
-   "press": 13,
-   "firstArticleAt": "2026-11-23T14:34:00.000Z",
+   "press": 11,
+   "firstArticleAt": "2026-11-23T14:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -109,10 +109,11 @@
   {
    "keyword": "롯데월드타워 담보 해지",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-23T15:35:00.000Z",
    "exclusive": false,
@@ -144,7 +145,7 @@
     "nate"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-23T14:44:00.000Z",
    "exclusive": false,
@@ -169,13 +170,45 @@
      "link": "https://www.livebiz.today/news/articleView.html?idxno=206819"
     }
    ]
+  },
+  {
+   "keyword": "샌디스크 주가",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T14:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[속보]엔비디아 주가 폭등…젠슨 황 CEO 복귀에 장중 30% 넘게 급등",
+     "press": "donga.com",
+     "publishedAt": "2026-11-23T15:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764523?sid=101"
+    },
+    {
+     "title": "[삼전닉스동반하락] 장중 6%대 폭락에 가슴 철렁… 8개월 전 주가로 뒷걸...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-23T15:06:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629953"
+    },
+    {
+     "title": "젠슨 황 복귀에 엔비디아 주가 30%대 급등 출발",
+     "press": "tjb.co.kr",
+     "publishedAt": "2026-11-23T14:48:00.000Z",
+     "link": "https://www.tjb.co.kr/news05/bodo/view/id/106435"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
   "flagged": 1233,
-  "matched": 668,
-  "avgLeadMin": 561,
+  "matched": 667,
+  "avgLeadMin": 560,
   "recent": [
    {
     "keyword": "리트 만점자 부정행위 수사",
