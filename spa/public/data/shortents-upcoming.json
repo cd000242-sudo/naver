@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T19:33:10.653Z",
+ "builtAt": "2026-11-23T19:43:13.934Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,39 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 27,
  "candidates": [
   {
-   "keyword": "젠슨 황 복귀",
+   "keyword": "젠슨 황 CEO 복귀",
    "sources": [
-    "signal.bz",
-    "nate",
-    "daum"
+    "nate"
    ],
-   "articles90": 30,
-   "recent20": 8,
-   "press": 17,
-   "firstArticleAt": "2026-11-23T18:04:00.000Z",
+   "articles90": 33,
+   "recent20": 9,
+   "press": 19,
+   "firstArticleAt": "2026-11-23T18:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨 황 복귀 뒤엔 트럼프…'면죄부' 부메랑 되나",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-23T19:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000545412?sid=104"
+     "title": "젠슨 황, 사임 11일 만에 엔비디아 CEO로 전격 복귀",
+     "press": "goodnews1.com",
+     "publishedAt": "2026-11-23T19:40:00.000Z",
+     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466561"
     },
     {
-     "title": "머스크 “실수 바로잡혔다”…젠슨 황 복귀에 기술업계·투자자 환영",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-23T19:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833621?sid=104"
+     "title": "젠슨 황, 엔비디아 CEO로 11일만에 복귀…이사회가 결정한 세가지 이유",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-23T19:38:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101866"
     },
     {
-     "title": "뉴욕증시, 젠슨 황 복귀에 '환호'...월가, 추세전환은 '글쎄'",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-23T19:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000545408?sid=104"
+     "title": "젠슨 황, 남색 자켓 입고 엔비디아 첫 출근…\"이번엔 더 나은 CEO 되겠다...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-23T19:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014340837?sid=104"
     }
    ]
   }
