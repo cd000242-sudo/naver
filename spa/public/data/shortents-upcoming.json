@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T03:43:08.763Z",
+ "builtAt": "2026-11-23T03:53:11.861Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 27,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "조희대 탄핵 추진",
@@ -19,59 +19,59 @@
    "articles90": 74,
    "recent20": 6,
    "press": 52,
-   "firstArticleAt": "2026-11-23T02:21:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "[일요서울TV] 민주, 조희대 탄핵 추진...사법권 독립 지켜라!",
-     "press": "ilyoseoul.co.kr",
-     "publishedAt": "2026-11-23T03:42:00.000Z",
-     "link": "https://www.ilyoseoul.co.kr/news/articleView.html?idxno=525394"
-    },
-    {
-     "title": "김민석, '조희대 탄핵' 재확인…\"당내외 의견 모아 발의·처리\"",
-     "press": "gobalnews.com",
-     "publishedAt": "2026-11-23T03:40:00.000Z",
-     "link": "https://www.gobalnews.com/news/articleView.html?idxno=203149"
-    },
-    {
-     "title": "[속보] 조희대 탄핵 두고…국힘 \"방탄 탄핵\" 민주 \"내란 동조\"",
-     "press": "jmbc.co.kr",
-     "publishedAt": "2026-11-23T03:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/659/0000048935?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "이형일 부총리 증안펀드",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 53,
-   "recent20": 4,
-   "press": 47,
    "firstArticleAt": "2026-11-23T02:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이형일 \"공매도 규제보다 불공정거래 감시 강화에 더 중점\"",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-23T03:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000161980?sid=101"
+     "title": "민주당 “조희대 탄핵안 준비·발의·처리에 당력 집중”",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-23T03:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003488540?sid=100"
     },
     {
-     "title": "정부, 증안펀드 가동 여부 검토…투입 시점·규모는 미정",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-23T03:30:00.000Z",
-     "link": "https://www.viva100.com/article/20261123500641"
+     "title": "[속보] 김어준의 ‘꽃’, 조희대 탄핵 6번째 설문…전화면접 반대 50% 첫...",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-23T03:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003060597?sid=100"
     },
     {
-     "title": "증시 급락에 정부 비상계획 가동 채비…이형일 “증안펀드 외 대책도 마...",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-23T03:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003567177?sid=101"
+     "title": "민주당 조희대 탄핵 추진에.. 靑 \"국회서 논의할 사항\"",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-23T03:48:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=565831"
+    }
+   ]
+  },
+  {
+   "keyword": "이형일 증안펀드",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 59,
+   "recent20": 6,
+   "press": 50,
+   "firstArticleAt": "2026-11-23T02:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정부, 증안펀드 투입 시점·규모 유보…자사주 매입 확대부터 시행",
+     "press": "sateconomy.co.kr",
+     "publishedAt": "2026-11-23T03:50:00.000Z",
+     "link": "https://sateconomy.co.kr/news/view/1065584496541479"
+    },
+    {
+     "title": "코스피 4500대까지 밀렸다…\"증안펀드 가동 준비, 추가 비상대책도\"",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-23T03:50:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1732672"
+    },
+    {
+     "title": "“증안펀드 외 추가 비상계획도 있다”…정부, 증시 급락에 대응책 마련",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-11-23T03:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002249559?sid=101"
     }
    ]
   },
@@ -80,13 +80,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 38,
+   "articles90": 29,
    "recent20": 5,
-   "press": 36,
-   "firstArticleAt": "2026-11-23T02:14:00.000Z",
+   "press": 26,
+   "firstArticleAt": "2026-11-23T02:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "삼성증권, 고객 8241명 정보 유출…VOC 시스템 외부 침입",
+     "press": "metroseoul.co.kr",
+     "publishedAt": "2026-11-23T03:52:00.000Z",
+     "link": "http://www.metroseoul.co.kr/article/20261123500206"
+    },
     {
      "title": "삼성증권, 고객정보 유출에 전사적 보안 강화 나서",
      "press": "press9.kr",
@@ -94,16 +100,10 @@
      "link": "http://www.press9.kr/news/articleView.html?idxno=86849"
     },
     {
-     "title": "삼성증권 해킹으로 고객정보 유출",
+     "title": "삼성증권 고객 개인정보 유출 사고 발생",
      "press": "newsis.com",
      "publishedAt": "2026-11-23T03:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014339659?sid=101"
-    },
-    {
-     "title": "삼성증권도 개인정보 유출 사고",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-23T03:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014339658?sid=101"
+     "link": "https://n.news.naver.com/mnews/article/003/0014339656?sid=101"
     }
    ]
   },
@@ -112,13 +112,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 52,
-   "recent20": 3,
-   "press": 27,
-   "firstArticleAt": "2026-11-23T02:20:00.000Z",
+   "articles90": 47,
+   "recent20": 2,
+   "press": 25,
+   "firstArticleAt": "2026-11-23T02:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김민석, '신천지 비판' 반박 박선원에 구두경고",
+     "press": "mediaus.co.kr",
+     "publishedAt": "2026-11-23T03:50:00.000Z",
+     "link": "https://www.mediaus.co.kr/news/articleView.html?idxno=319128"
+    },
     {
      "title": "김민석, '조희대 탄핵' 재확인…\"당내외 의견 모아 발의·처리\"",
      "press": "gobalnews.com",
@@ -130,12 +136,38 @@
      "press": "sisafocus.co.kr",
      "publishedAt": "2026-11-23T03:30:00.000Z",
      "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367934"
+    }
+   ]
+  },
+  {
+   "keyword": "삼성물산",
+   "sources": [
+    "google"
+   ],
+   "articles90": 20,
+   "recent20": 1,
+   "press": 20,
+   "firstArticleAt": "2026-11-23T02:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "삼성물산, 건설부문 최영재 부사장 사장 승진",
+     "press": "datasom.co.kr",
+     "publishedAt": "2026-11-23T03:36:00.000Z",
+     "link": "https://www.datasom.co.kr/news/articleView.html?idxno=210932"
     },
     {
-     "title": "김민석 민주당 대표 \"조희대 탄핵안 준비…한덕수 판결, 두고두고 비판...",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-23T03:24:00.000Z",
-     "link": "http://www.breaknews.com/1253005"
+     "title": "삼성물산 건설부문 새 수장에 최영재 사장…실적 반등 이끈 하이테크 전...",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-23T03:26:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1176934"
+    },
+    {
+     "title": "삼성물산 건설부문 신임 사장에 최영재 부사장 승진",
+     "press": "kdfnews.com",
+     "publishedAt": "2026-11-23T03:26:00.000Z",
+     "link": "http://www.kdfnews.com/news/articleView.html?idxno=191280"
     }
    ]
   },
@@ -144,13 +176,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 21,
+   "articles90": 19,
    "recent20": 2,
-   "press": 20,
-   "firstArticleAt": "2026-11-23T02:15:00.000Z",
+   "press": 18,
+   "firstArticleAt": "2026-11-23T02:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "경찰, 리얼돌 폐기한 '여고생 살해' 장윤기 부친 중징계",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-23T03:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436744?sid=102"
+    },
     {
      "title": "장윤기 사건 핵심 증거 인멸 경찰 간부 아버지…'중징계' 처분",
      "press": "kyeonggi.com",
@@ -162,76 +200,6 @@
      "press": "biz.heraldcorp.com",
      "publishedAt": "2026-11-23T03:33:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/016/0002727150?sid=102"
-    },
-    {
-     "title": "경찰, 리얼돌 폐기한 '장윤기 父' 중징계…정확한 수위는 비공개",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-23T03:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000142840?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "에이티즈 빌보드 200 1위",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-23T02:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "에이티즈 빌보드 네번째 1위에 \"벅차고 감사…초심 잃지 않겠다\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-23T03:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016458132?sid=103"
-    },
-    {
-     "title": "에이티즈, 미국 빌보드 200 네 번째 1위…2020년대 그룹 최다 톱10 기록으...",
-     "press": "lecturernews.com",
-     "publishedAt": "2026-11-23T03:20:00.000Z",
-     "link": "https://www.lecturernews.com/news/articleView.html?idxno=214376"
-    },
-    {
-     "title": "에이티즈, 네번째 ‘빌보드 정상’… 10개 앨범 연속 ‘톱10’",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-23T02:43:00.000Z",
-     "link": "https://m.entertain.naver.com/article/021/0002834744"
-    }
-   ]
-  },
-  {
-   "keyword": "lpga",
-   "sources": [
-    "google"
-   ],
-   "articles90": 8,
-   "recent20": 4,
-   "press": 7,
-   "firstArticleAt": "2026-11-23T02:16:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "LPGA CME Group Championship",
-     "press": null,
-     "publishedAt": "2026-11-23T03:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/077/0007247012?sid=104"
-    },
-    {
-     "title": "김아림, LPGA 시즌 최종전 공동 7위로 마감",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-23T03:29:00.000Z",
-     "link": "https://m.sports.naver.com/golf/article/088/0001041723"
-    },
-    {
-     "title": "韓 여자골프, 2년 연속 LPGA 6승… 개인 타이틀 무관",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-23T03:28:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=886082"
     }
    ]
   },
@@ -269,34 +237,98 @@
    ]
   },
   {
-   "keyword": "한전 on",
+   "keyword": "與 최고위 신천지 충돌",
    "sources": [
     "daum"
    ],
    "articles90": 7,
-   "recent20": 1,
+   "recent20": 0,
    "press": 7,
-   "firstArticleAt": "2026-11-23T02:18:00.000Z",
+   "firstArticleAt": "2026-11-23T02:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한국전력, 한전ON 개인정보 유출 사고 발생…고객번호·계좌번호·카드...",
-     "press": "aitimes.kr",
-     "publishedAt": "2026-11-23T03:34:00.000Z",
-     "link": "https://www.aitimes.kr/news/articleView.html?idxno=42850"
-    },
-    {
-     "title": "한전 '주민번호 포함' 유출‥삼성증권도 뚫려",
-     "press": "imnews.imbc.com",
+     "title": "“신천지 당원 4만3000명 추산” 친명 발언에 與최고위 또 충돌",
+     "press": "joongang.co.kr",
      "publishedAt": "2026-11-23T03:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001537381?sid=101"
+     "link": "https://n.news.naver.com/mnews/article/025/0003567174?sid=100"
     },
     {
-     "title": "삼성증권 8241명 정보유출… 한전도 152만명분 보안 구멍",
+     "title": "'曺탄핵'으로 단합하나 했더니…與 최고위서 신천지 또 공개충돌(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-23T02:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016458077?sid=100"
+    },
+    {
+     "title": "與 최고위서 또 '신천지 설전'…박선원·한민수 정면충돌",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-23T02:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005357013?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "lpga",
+   "sources": [
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-23T02:28:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "LPGA CME Group Championship",
+     "press": null,
+     "publishedAt": "2026-11-23T03:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/077/0007247012?sid=104"
+    },
+    {
+     "title": "김아림, LPGA 시즌 최종전 공동 7위로 마감",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-23T03:29:00.000Z",
+     "link": "https://m.sports.naver.com/golf/article/088/0001041723"
+    },
+    {
+     "title": "韓 여자골프, 2년 연속 LPGA 6승… 개인 타이틀 무관",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-23T03:28:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=886082"
+    }
+   ]
+  },
+  {
+   "keyword": "에이티즈 빌보드 200 1위",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-23T02:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "에이티즈 빌보드 네번째 1위에 \"벅차고 감사…초심 잃지 않겠다\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-23T03:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016458132?sid=103"
+    },
+    {
+     "title": "에이티즈, 미국 빌보드 200 네 번째 1위…2020년대 그룹 최다 톱10 기록으...",
+     "press": "lecturernews.com",
+     "publishedAt": "2026-11-23T03:20:00.000Z",
+     "link": "https://www.lecturernews.com/news/articleView.html?idxno=214376"
+    },
+    {
+     "title": "에이티즈, 네번째 ‘빌보드 정상’… 10개 앨범 연속 ‘톱10’",
      "press": "munhwa.com",
-     "publishedAt": "2026-11-23T02:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002834772?sid=101"
+     "publishedAt": "2026-11-23T02:43:00.000Z",
+     "link": "https://m.entertain.naver.com/article/021/0002834744"
     }
    ]
   },
@@ -334,15 +366,47 @@
    ]
   },
   {
+   "keyword": "서부지법 청사 방호훈련",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 42,
+   "recent20": 5,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T02:36:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "법원·경찰, 서부지법 통합 방호훈련",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T03:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009304851?sid=102"
+    },
+    {
+     "title": "서부지법 소요사태 대응 통합 훈련",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T03:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009304852?sid=102"
+    },
+    {
+     "title": "서부지법 청사 방호훈련",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T03:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009304855?sid=102"
+    }
+   ]
+  },
+  {
    "keyword": "김종철 경찰청장 참배",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 9,
+   "articles90": 5,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T02:18:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-23T02:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -363,38 +427,6 @@
      "press": "yna.co.kr",
      "publishedAt": "2026-11-23T02:34:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016457924?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "서부지법 청사 방호훈련",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 38,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T02:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "서부지법 합동 방호훈련",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-23T03:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016458142?sid=102"
-    },
-    {
-     "title": "서부지법 합동 청사 방호훈련",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-23T03:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016458108?sid=102"
-    },
-    {
-     "title": "서부지법에서 진행된 합동 청사 방호훈련",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-23T03:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016458097?sid=102"
     }
    ]
   },
@@ -466,7 +498,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1161,
+  "flagged": 1162,
   "matched": 662,
   "avgLeadMin": 613,
   "recent": [
