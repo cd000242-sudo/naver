@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T13:21:00.653Z",
+ "builtAt": "2026-11-23T13:31:03.865Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "신한은행 하나은행 4연승",
    "sources": [
     "nate"
    ],
-   "articles90": 27,
+   "articles90": 15,
    "recent20": 1,
-   "press": 21,
-   "firstArticleAt": "2026-11-23T11:52:00.000Z",
+   "press": 15,
+   "firstArticleAt": "2026-11-23T12:06:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "여자농구 신한은행, 하나은행 꺾고 4연승…1경기 차 단독 선두 질주",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-23T13:21:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/055/0001405230"
+    },
     {
      "title": "'4연승과 단독 선두' 신한은행 최윤아 감독 \"다시 생각해 봐야 할 경기다...",
      "press": "rookie.co.kr",
@@ -33,12 +39,6 @@
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-23T12:55:00.000Z",
      "link": "https://m.sports.naver.com/basketball/article/056/0012299629"
-    },
-    {
-     "title": "'4연승 단독 선두' 신한은행, 노구치 22점 앞세워 하나은행 63-59 제압",
-     "press": "maniareport.com",
-     "publishedAt": "2026-11-23T12:49:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/425/0000215320"
     }
    ]
   },
@@ -48,7 +48,7 @@
     "nate"
    ],
    "articles90": 13,
-   "recent20": 2,
+   "recent20": 1,
    "press": 13,
    "firstArticleAt": "2026-11-23T12:05:00.000Z",
    "exclusive": true,
@@ -75,78 +75,14 @@
    ]
   },
   {
-   "keyword": "강금실 국정원장 후보",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 10,
-   "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-23T11:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[김종석의 왜]23년 만에 강금실 재등판, 왜?",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-23T12:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000368471?sid=100"
-    },
-    {
-     "title": "청와대, 외교·통일 포함 중폭 개각...국정원장 후보자에 강금실",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-23T12:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437015?sid=100"
-    },
-    {
-     "title": "강금실·임웅순·홍익표·한준호·강유정",
-     "press": "ulsanpress.net",
-     "publishedAt": "2026-11-23T12:42:00.000Z",
-     "link": "https://www.ulsanpress.net/news/articleView.html?idxno=587435"
-    }
-   ]
-  },
-  {
-   "keyword": "공항",
-   "sources": [
-    "google"
-   ],
-   "articles90": 11,
-   "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-23T11:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“2공항 갈등조정협의회 부당성 바로 잡아야”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-23T13:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012299658?sid=102"
-    },
-    {
-     "title": "인천 영종구 공항소음대책지역 주민 대상 스마트팜 가을여행 운영",
-     "press": "kpenews.com",
-     "publishedAt": "2026-11-23T13:06:00.000Z",
-     "link": "https://kpenews.com/View.aspx?No=4325928"
-    },
-    {
-     "title": "군공항 소음은 경계 없는데…주변지역 주민 참여는?",
-     "press": "mpmbc.co.kr",
-     "publishedAt": "2026-11-23T13:04:00.000Z",
-     "link": "https://mpmbc.co.kr/NewsArticle/1546958"
-    }
-   ]
-  },
-  {
    "keyword": "수능 부정행위 신고 포상금 5억 지급",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
+   "articles90": 8,
    "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-23T11:59:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-23T12:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -203,34 +139,98 @@
    ]
   },
   {
-   "keyword": "한준호 행안부 장관 후보",
+   "keyword": "공항",
    "sources": [
-    "daum"
+    "google"
    ],
-   "articles90": 6,
+   "articles90": 10,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-23T11:52:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-23T12:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "행정안전부 장관 후보자에 전북 출신 한준호 지명",
+     "title": "“2공항 갈등조정협의회 부당성 바로 잡아야”",
      "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-23T12:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012299569?sid=100"
+     "publishedAt": "2026-11-23T13:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012299658?sid=102"
     },
     {
-     "title": "전북 출신 한준호, 행안부 장관 후보 지명···조현·정동영 교체",
-     "press": "jtv.co.kr",
-     "publishedAt": "2026-11-23T12:30:00.000Z",
-     "link": "https://jtv.co.kr/news/article.php?id=72272"
+     "title": "“통합신공항 국가가 맡아야”…시민추진단 촉구",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-23T13:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012299671?sid=102"
     },
     {
-     "title": "한준호 '행안부 장관' 지명자 \"李가 맡긴 소임의 무게 새기겠다\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-23T12:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000652906?sid=100"
+     "title": "인천 영종구 공항소음대책지역 주민 대상 스마트팜 가을여행 운영",
+     "press": "kpenews.com",
+     "publishedAt": "2026-11-23T13:06:00.000Z",
+     "link": "https://kpenews.com/View.aspx?No=4325928"
+    }
+   ]
+  },
+  {
+   "keyword": "강금실 국정원장 후보",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-23T12:03:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[김종석의 왜]23년 만에 강금실 재등판, 왜?",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-23T12:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000368471?sid=100"
+    },
+    {
+     "title": "청와대, 외교·통일 포함 중폭 개각...국정원장 후보자에 강금실",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-23T12:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437015?sid=100"
+    },
+    {
+     "title": "강금실·임웅순·홍익표·한준호·강유정",
+     "press": "ulsanpress.net",
+     "publishedAt": "2026-11-23T12:42:00.000Z",
+     "link": "https://www.ulsanpress.net/news/articleView.html?idxno=587435"
+    }
+   ]
+  },
+  {
+   "keyword": "반도체 메모리",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-23T12:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"코스피 3000선 후반도 가능\"…엔비디아발 반도체 충격 경고",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-23T13:30:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=886384"
+    },
+    {
+     "title": "\"반도체 호시절도 내년까지\"…삼전닉스 목표가 잇따라 낮춘 IB들",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-23T12:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001077687?sid=101"
+    },
+    {
+     "title": "글로벌 IB 잇단 반도체 경고…삼성전자·하이닉스 목표가 줄하향",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-23T12:24:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=886382"
     }
    ]
   },
@@ -268,34 +268,34 @@
    ]
   },
   {
-   "keyword": "반도체 메모리",
+   "keyword": "한준호 행안부 장관 후보",
    "sources": [
-    "google"
+    "daum"
    ],
    "articles90": 4,
    "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-23T12:05:00.000Z",
+   "firstArticleAt": "2026-11-23T12:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "글로벌 IB 잇단 반도체 경고…삼성전자·하이닉스 목표가 줄하향",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-23T12:24:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=886382"
+     "title": "행정안전부 장관 후보자에 전북 출신 한준호 지명",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-23T12:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012299569?sid=100"
     },
     {
-     "title": "\"반도체 호시절도 내년까지\"…삼전닉스 목표가 잇따라 낮춘 IB들",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-23T12:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001077687?sid=101"
+     "title": "전북 출신 한준호, 행안부 장관 후보 지명···조현·정동영 교체",
+     "press": "jtv.co.kr",
+     "publishedAt": "2026-11-23T12:30:00.000Z",
+     "link": "https://jtv.co.kr/news/article.php?id=72272"
     },
     {
-     "title": "\"반도체 호황이라 버틴다\"…반등 기다린 삼전·닉스 주주들에 날아든 '...",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-23T12:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005846666?sid=101"
+     "title": "한준호 '행안부 장관' 지명자 \"李가 맡긴 소임의 무게 새기겠다\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-23T12:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000652906?sid=100"
     }
    ]
   },
@@ -306,7 +306,7 @@
     "nate"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-23T12:42:00.000Z",
    "exclusive": false,
@@ -329,38 +329,6 @@
      "press": "topstarnews.net",
      "publishedAt": "2026-11-23T13:00:00.000Z",
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284362"
-    }
-   ]
-  },
-  {
-   "keyword": "연속 세계랭킹 1위",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T12:20:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"K-펜싱 키다리아저씨\" 최신원 대한펜싱협회장, '세계1위' 女에페 단체상...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-23T13:09:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/076/0004468952"
-    },
-    {
-     "title": "한국 여자 에페, FIE 총회서 2025-2026시즌 단체전 세계 1위 트로피",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-23T12:42:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284344"
-    },
-    {
-     "title": "한국 펜싱, 국제연맹 총회서 여자 에페 단체전 시즌 1위 수상",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-23T12:20:00.000Z",
-     "link": "https://m.sports.naver.com/general/article/001/0016459285"
     }
    ]
   },
@@ -393,6 +361,38 @@
      "press": "segye.com",
      "publishedAt": "2026-11-23T12:22:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/022/0004177507?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "연속 세계랭킹 1위",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T12:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"K-펜싱 키다리아저씨\" 최신원 대한펜싱협회장, '세계1위' 女에페 단체상...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-23T13:09:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/076/0004468952"
+    },
+    {
+     "title": "한국 여자 에페, FIE 총회서 2025-2026시즌 단체전 세계 1위 트로피",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-23T12:42:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284344"
+    },
+    {
+     "title": "한국 펜싱, 국제연맹 총회서 여자 에페 단체전 시즌 1위 수상",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-23T12:20:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/001/0016459285"
     }
    ]
   }
