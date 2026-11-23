@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T17:12:20.089Z",
+ "builtAt": "2026-11-23T17:22:25.631Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,66 @@
  "measured": 28,
  "candidates": [
   {
-   "keyword": "젠슨 황 CEO 복귀",
+   "keyword": "젠슨 황 엔비디아 복귀",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 55,
-   "recent20": 9,
-   "press": 30,
-   "firstArticleAt": "2026-11-23T15:43:00.000Z",
+   "recent20": 6,
+   "press": 31,
+   "firstArticleAt": "2026-11-23T15:53:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨 황, 사임 11일 만에 엔비디아 CEO 복귀…주가 장중 35% 급등",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-23T17:06:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261124010009038"
+     "title": "트럼프 \"젠슨 황 복귀, 내가 해내...안보 위협 없어\"",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-23T17:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005608593?sid=101"
     },
     {
-     "title": "젠슨 황, 다시 엔비디아 CEO로…\"안보상 위험 없어\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-23T17:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929192?sid=104"
+     "title": "젠슨 황, 엔비디아 CEO 복귀…이사회 만장일치 결정",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-23T17:16:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=627138"
     },
     {
-     "title": "미국 민주당, '젠슨황 복귀' 비판…\"트럼프가 안보 팔아넘겨\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-23T17:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929190?sid=104"
+     "title": "美 국채가, 젠슨 황 엔비디아 CEO 복귀에 '베어 플랫'",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-23T17:12:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446108"
+    }
+   ]
+  },
+  {
+   "keyword": "선관위",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 15,
+   "recent20": 5,
+   "press": 12,
+   "firstArticleAt": "2026-11-23T16:21:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'선거 개표상황표 은닉' 선관위 직원 8명 중 1명 구속(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-23T17:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016459332?sid=102"
+    },
+    {
+     "title": "‘개표 상황표 위조 혐의’ 선관위 직원 1명 구속…7명 영장 기각",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-23T17:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001206797?sid=102"
+    },
+    {
+     "title": "‘6·3 지방선거 관리 부실’ 선관위 직원 8명 중 1명만 구속",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-23T17:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004011343?sid=102"
     }
    ]
   },
@@ -73,44 +105,11 @@
      "link": "https://n.news.naver.com/mnews/article/001/0016459323?sid=102"
     }
    ]
-  },
-  {
-   "keyword": "테슬라 주가",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T15:48:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "HSBC, 테슬라 적정주가 128% 넘게 올려…스페이스X 인수 가능성 반영",
-     "press": "jemin.com",
-     "publishedAt": "2026-11-23T16:48:00.000Z",
-     "link": "https://www.jemin.com/news/articleView.html?idxno=848239"
-    },
-    {
-     "title": "엔비디아 주가, 젠슨 황 사임 전으로…복귀 소식에 35% 급반등",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-23T15:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005445273?sid=101"
-    },
-    {
-     "title": "‘AI 버블’ 공포가 최고 실적을 삼켰다… 반도체 투톱, 주가 반토막",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-23T15:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004011327?sid=105"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1235,
+  "flagged": 1236,
   "matched": 664,
   "avgLeadMin": 556,
   "recent": [
