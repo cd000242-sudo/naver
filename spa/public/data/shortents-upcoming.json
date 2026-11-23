@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T03:12:58.422Z",
+ "builtAt": "2026-11-23T03:23:01.495Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -13,16 +13,21 @@
   {
    "keyword": "삼성증권",
    "sources": [
-    "google",
-    "daum"
+    "google"
    ],
-   "articles90": 89,
-   "recent20": 8,
-   "press": 87,
-   "firstArticleAt": "2026-11-23T01:47:00.000Z",
+   "articles90": 76,
+   "recent20": 4,
+   "press": 75,
+   "firstArticleAt": "2026-11-23T01:54:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "삼성증권, 고객 8241명 계좌·주소 등 개인정보 유출",
+     "press": "sisafocus.co.kr",
+     "publishedAt": "2026-11-23T03:22:00.000Z",
+     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367929"
+    },
     {
      "title": "삼성증권 개인정보 8241명 유출…'일괄 지원' 묻자 \"추후 논의\"",
      "press": "ppss.kr",
@@ -34,12 +39,6 @@
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-23T03:07:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/055/0001405077?sid=101"
-    },
-    {
-     "title": "한전 '주민번호 포함' 유출‥삼성증권도 뚫려",
-     "press": "imnews.imbc.com",
-     "publishedAt": "2026-11-23T03:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/214/0001537381?sid=101"
     }
    ]
   },
@@ -50,29 +49,29 @@
     "daum"
    ],
    "articles90": 75,
-   "recent20": 12,
-   "press": 49,
-   "firstArticleAt": "2026-11-23T02:11:00.000Z",
+   "recent20": 17,
+   "press": 51,
+   "firstArticleAt": "2026-11-23T02:16:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "靑, 민주당의 대법원장 탄핵 추진에 \"국회서 논의할 사항\"",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-23T03:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000142838?sid=100"
+     "title": "\"조희대 탄핵 사유 차고 넘친다\" 김민석, 탄핵안 처리 방침 재확인",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-23T03:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005357022?sid=100"
     },
     {
-     "title": "민주당 \"조희대 대법원장 탄핵 추진, 역사적 결단이자 국민의 명령\"",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-23T03:10:00.000Z",
-     "link": "http://www.breaknews.com/1253004"
+     "title": "\"정권 자멸 탄핵\"… 국민의힘, 민주당 '조희대 탄핵' 맹공",
+     "press": "sisaweek.com",
+     "publishedAt": "2026-11-23T03:16:00.000Z",
+     "link": "https://www.sisaweek.com/news/articleView.html?idxno=239123"
     },
     {
-     "title": "“헌재 인용전망 제로” 라는데… 曺 탄핵 강행하는 巨與",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-23T03:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002834803?sid=100"
+     "title": "강동원 법관대표회의 의장 \"조희대 탄핵 땐 행동\"…일선 판사들도 민주...",
+     "press": "ppss.kr",
+     "publishedAt": "2026-11-23T03:13:00.000Z",
+     "link": "https://www.ppss.kr/news/articleView.html?idxno=322385"
     }
    ]
   },
@@ -81,62 +80,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 55,
-   "recent20": 11,
-   "press": 46,
-   "firstArticleAt": "2026-11-23T01:45:00.000Z",
+   "articles90": 56,
+   "recent20": 7,
+   "press": 47,
+   "firstArticleAt": "2026-11-23T01:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이형일 \"증안펀드 가동·규모 검토…공매도, 규제 강화보다 불법 단속 ...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T03:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009304806?sid=101"
+    },
+    {
+     "title": "재경부, 증안펀드 가동 준비 착수…이형일 \"추가 시장안정 대책도 준비...",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-23T03:16:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4120178"
+    },
     {
      "title": "증안펀드 예고에도 4600 무너졌다",
      "press": "munhwa.com",
      "publishedAt": "2026-11-23T03:10:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/021/0002834804?sid=101"
-    },
-    {
-     "title": "[속보] 이형일 부총리 “증안펀드 외 컨틴전시플랜도 마련”",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-23T03:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003060595?sid=101"
-    },
-    {
-     "title": "[속보]연일 급락에...이형일 부총리 \"증안펀드 외 추가 대책 마련, 적절...",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-23T03:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000121992?sid=101"
     }
    ]
   },
   {
-   "keyword": "박남춘 인천공항공사 사장",
+   "keyword": "최고위원회의 김민석 대표",
    "sources": [
     "nate"
    ],
    "articles90": 52,
-   "recent20": 1,
-   "press": 23,
-   "firstArticleAt": "2026-11-23T01:53:00.000Z",
+   "recent20": 4,
+   "press": 24,
+   "firstArticleAt": "2026-11-23T02:19:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "인천공항공사 제11대 사장에 박남춘 전 인천시장 취임",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-23T03:02:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4120174"
+     "title": "\"조희대 탄핵 사유 차고 넘친다\" 김민석, 탄핵안 처리 방침 재확인",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-23T03:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005357022?sid=100"
     },
     {
-     "title": "박남춘 인천공항공사 사장 취임…“노사 상생 바탕으로 대한민국 성장 ...",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-23T02:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003567169?sid=101"
+     "title": "김민석 “조희대 대법원장 탄핵 사유 차고도 넘쳐”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-23T03:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764378?sid=100"
     },
     {
-     "title": "박남춘 인천공항공사 사장 취임…“임기 내 연간 여객 9000만명 달성”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-23T02:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004685091?sid=102"
+     "title": "김민석 \"대법, 한덕수 판결 내란 행위인지 명료하게 해야…조희대 탄핵...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-23T03:07:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261123000600"
     }
    ]
   },
@@ -145,10 +144,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 18,
+   "articles90": 13,
    "recent20": 0,
-   "press": 18,
-   "firstArticleAt": "2026-11-23T01:43:00.000Z",
+   "press": 13,
+   "firstArticleAt": "2026-11-23T01:58:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -177,13 +176,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 10,
-   "recent20": 0,
-   "press": 10,
+   "articles90": 11,
+   "recent20": 1,
+   "press": 11,
    "firstArticleAt": "2026-11-23T02:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "에이티즈, 신보로 미국 빌보드 200 네 번째 1위…2020년대 그룹 최다 톱...",
+     "press": "lecturernews.com",
+     "publishedAt": "2026-11-23T03:20:00.000Z",
+     "link": "https://www.lecturernews.com/news/articleView.html?idxno=214376"
+    },
     {
      "title": "에이티즈, 네번째 ‘빌보드 정상’… 10개 앨범 연속 ‘톱10’",
      "press": "munhwa.com",
@@ -195,12 +200,71 @@
      "press": "newdaily.co.kr",
      "publishedAt": "2026-11-23T02:42:00.000Z",
      "link": "https://www.newdaily.co.kr/site/data/html/2026/11/23/2026112350169.html"
+    }
+   ]
+  },
+  {
+   "keyword": "국가장학금",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-23T02:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'재학생 반드시 신청하세요' 국가장학금 신청, 내일부터",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-23T03:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000545286?sid=103"
     },
     {
-     "title": "에이티즈, 빌보드 200 네 번째 1위...스트레이 키즈·BTS 이어 K팝 그룹 ...",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-23T02:38:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3760086"
+     "title": "“대학생 국가장학금 신청하세요”…국립대 신입생 전액 지원",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-23T03:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006414102?sid=102"
+    },
+    {
+     "title": "\"빠트리지 마롱~\" 내년 국가장학금 신청 24일 시작",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-23T03:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014339578?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "김종철 경찰청장 경례",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 16,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-23T02:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[헤럴드pic] 취임식 참석한 김종철 신임 경찰청장",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-23T02:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002727140?sid=102"
+    },
+    {
+     "title": "[헤럴드pic] 경례하는 김종철 신임 경찰청장",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-23T02:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002727143?sid=102"
+    },
+    {
+     "title": "김종철 신임 경찰청장 \"수사권 확대 아닌 책임 강화\"…공정 수사 강조",
+     "press": "jeonmae.co.kr",
+     "publishedAt": "2026-11-23T02:54:00.000Z",
+     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1314724"
     }
    ]
   },
@@ -209,10 +273,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-23T01:45:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-23T02:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -237,131 +301,66 @@
    ]
   },
   {
-   "keyword": "김종철 경찰청장 경례",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 16,
-   "recent20": 3,
-   "press": 7,
-   "firstArticleAt": "2026-11-23T02:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[헤럴드pic] 경례하는 김종철 신임 경찰청장",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-23T02:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002727143?sid=102"
-    },
-    {
-     "title": "[헤럴드pic] 취임식 참석한 김종철 신임 경찰청장",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-23T02:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002727140?sid=102"
-    },
-    {
-     "title": "김종철 신임 경찰청장 \"수사권 확대 아닌 책임 강화\"…공정 수사 강조",
-     "press": "jeonmae.co.kr",
-     "publishedAt": "2026-11-23T02:54:00.000Z",
-     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1314724"
-    }
-   ]
-  },
-  {
-   "keyword": "국가장학금",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 5,
-   "press": 6,
-   "firstArticleAt": "2026-11-23T02:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "“대학생 국가장학금 신청하세요”…국립대 신입생 전액 지원",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-23T03:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006414102?sid=102"
-    },
-    {
-     "title": "\"빠트리지 마롱~\" 내년 국가장학금 신청 24일 시작",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-23T03:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014339578?sid=102"
-    },
-    {
-     "title": "2027학년도 국가장학금 24일부터 신청…소득구간 10개→5개 개편",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-23T03:00:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123000075"
-    }
-   ]
-  },
-  {
-   "keyword": "김민석 최고위 참석",
+   "keyword": "강신철 장관 질의 답변",
    "sources": [
     "nate"
    ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-23T01:48:00.000Z",
+   "articles90": 11,
+   "recent20": 4,
+   "press": 5,
+   "firstArticleAt": "2026-11-23T02:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[포토] 최고위 참석하는 김민석·최민희",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-23T02:22:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261123010008727"
+     "title": "「M포토」 의원 질의에 답변하는 강신철 국방부 장관",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-23T03:18:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=73472"
     },
     {
-     "title": "최고위 참석하는 김민석 대표",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-23T02:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005767513?sid=100"
+     "title": "[포토] 강신철 국방부 장관, 의원질의 답변",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-23T03:18:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3451245"
     },
     {
-     "title": "최고위 참석하는 김민석 대표와 최민희 최고위원",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-23T02:16:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123000525"
+     "title": "[포토] 강신철 국방부 장관 답변",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-23T03:18:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3451246"
     }
    ]
   },
   {
-   "keyword": "수원 fc",
+   "keyword": "대만 증시",
    "sources": [
-    "google"
+    "daum"
    ],
-   "articles90": 5,
-   "recent20": 1,
+   "articles90": 6,
+   "recent20": 3,
    "press": 5,
-   "firstArticleAt": "2026-11-23T01:50:00.000Z",
+   "firstArticleAt": "2026-11-23T02:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"항상 휴대폰 분출 받으면 수원 축구 분석\"...이정효 체제서 단숨에 자...",
-     "press": "sportalkorea.com",
-     "publishedAt": "2026-11-23T03:06:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/139/0002256434"
+     "title": "“폭락장에 꺼낸 카드가 준비 중”...대만은 증시대책 ‘총력전’",
+     "press": "ekn.kr",
+     "publishedAt": "2026-11-23T03:20:00.000Z",
+     "link": "https://www.ekn.kr/web/view.php?key=20261123029593309"
     },
     {
-     "title": "‘4전 5기’ 끝 이룬 10년의 꿈… 경주한수원여자축구단, 창단 첫 WK리그...",
-     "press": "geconomy.co.kr",
-     "publishedAt": "2026-11-23T02:46:00.000Z",
-     "link": "https://www.geconomy.co.kr/news/article.html?no=325950"
+     "title": "증시 대책 효과 달랐다…대만 반등, 한국 급락",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-23T03:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000545284?sid=104"
     },
     {
-     "title": "대구FC, 자동승격권 확보는 실패…이랜드·부산·화성과 준PO 대결한다",
-     "press": "idaegu.com",
-     "publishedAt": "2026-11-23T02:26:00.000Z",
-     "link": "https://www.idaegu.com/news/articleView.html?idxno=667192"
+     "title": "“정부가 나서도 안 통하네”…韓·中·대만 증시 부양 총력전도 역부족...",
+     "press": "ekn.kr",
+     "publishedAt": "2026-11-23T03:12:00.000Z",
+     "link": "https://www.ekn.kr/web/view.php?key=20261123027253126"
     }
    ]
   },
@@ -398,66 +397,34 @@
    ]
   },
   {
-   "keyword": "강신철 장관 질의 답변",
+   "keyword": "수원 fc",
    "sources": [
-    "nate"
+    "google"
    ],
-   "articles90": 7,
+   "articles90": 4,
    "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-23T02:28:00.000Z",
+   "firstArticleAt": "2026-11-23T02:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[포토] 호르무즈 관련 답변하는 강신철 국방부 장관",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-23T03:02:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/23/2026112350186.html"
+     "title": "\"항상 휴대폰 분출 받으면 수원 축구 분석\"...이정효 체제서 단숨에 자...",
+     "press": "sportalkorea.com",
+     "publishedAt": "2026-11-23T03:06:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/139/0002256434"
     },
     {
-     "title": "의원 질의 답변하는 강신철 장관",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-23T02:39:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123000592"
+     "title": "‘4전 5기’ 끝 이룬 10년의 꿈… 경주한수원여자축구단, 창단 첫 WK리그...",
+     "press": "geconomy.co.kr",
+     "publishedAt": "2026-11-23T02:46:00.000Z",
+     "link": "https://www.geconomy.co.kr/news/article.html?no=325950"
     },
     {
-     "title": "답변하는 강신철 국방부 장관",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-23T02:39:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123000593"
-    }
-   ]
-  },
-  {
-   "keyword": "윤한홍 의원 공판 출석",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T02:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김건희·윤한홍 '관저 이전 특혜 의혹' 첫 공판서 혐의 부인",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-23T03:09:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123000613"
-    },
-    {
-     "title": "김건희·윤한홍, '관저 이전 의혹' 첫 정식 재판…혐의 부인",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-23T02:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014339564?sid=102"
-    },
-    {
-     "title": "[포토] 대통령 관저 이전, 첫 공판 출석하는 윤한홍 의원",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-23T02:22:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/23/2026112350151.html"
+     "title": "대구FC, 자동승격권 확보는 실패…이랜드·부산·화성과 준PO 대결한다",
+     "press": "idaegu.com",
+     "publishedAt": "2026-11-23T02:26:00.000Z",
+     "link": "https://www.idaegu.com/news/articleView.html?idxno=667192"
     }
    ]
   },
@@ -496,7 +463,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1163,
+  "flagged": 1164,
   "matched": 663,
   "avgLeadMin": 617,
   "recent": [
