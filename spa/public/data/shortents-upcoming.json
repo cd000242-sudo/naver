@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T21:13:45.444Z",
+ "builtAt": "2026-11-23T21:23:49.042Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,13 +15,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 3,
-   "press": 7,
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
    "firstArticleAt": "2026-11-23T20:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'개표 은닉' 선관위 직원 1명 구속…7명 기각",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-23T21:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001405272?sid=102"
+    },
     {
      "title": "‘투표율 허위 입력’ 선관위 직원 1명 구속…7명 영장 기각",
      "press": "donga.com",
@@ -33,12 +39,38 @@
      "press": "kukinews.com",
      "publishedAt": "2026-11-23T21:02:00.000Z",
      "link": "https://www.kukinews.com/article/view/kuk202611240003"
+    }
+   ]
+  },
+  {
+   "keyword": "국정원장 후보 강금실",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-23T20:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "석 달 만에 '중폭 개각'‥최초 여성 국정원장 발탁",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-23T21:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537535?sid=100"
     },
     {
-     "title": "'선거 개표상황표 은닉' 선관위 직원 8명 중 1명만 구속",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-23T20:56:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4120389"
+     "title": "李, 외교·안보라인 동시 교체…국정원장에 강금실 [오늘 뉴스 4컷]",
+     "press": "segye.com",
+     "publishedAt": "2026-11-23T21:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177581?sid=100"
+    },
+    {
+     "title": "국정원장 등 외교안보 라인 물갈이…대미·대북 돌파구",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-23T20:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001165362?sid=101"
     }
    ]
   },
@@ -48,7 +80,7 @@
     "google"
    ],
    "articles90": 5,
-   "recent20": 5,
+   "recent20": 1,
    "press": 5,
    "firstArticleAt": "2026-11-23T21:00:00.000Z",
    "exclusive": false,
@@ -67,83 +99,19 @@
      "link": "https://www.kukinews.com/article/view/kuk202611230141"
     },
     {
-     "title": "치매·희귀질환 재도전과 퇴장…'비아그라 대항마' K-신약 3종의 흥망성...",
-     "press": "apsk.co.kr",
+     "title": "\"FDA와 논의할 가치 있다\"…아리바이오, 먹는 치매약 출사표",
+     "press": "hansbiz.co.kr",
      "publishedAt": "2026-11-23T21:00:00.000Z",
-     "link": "https://www.apsk.co.kr/news/articleView.html?idxno=541120"
-    }
-   ]
-  },
-  {
-   "keyword": "강유정 대변인",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T19:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "대변인·안보실 차장·전 정무수석을 장관으로, 외교안보 '회전문 개각...",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-23T21:00:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886965"
-    },
-    {
-     "title": "평론가~靑대변인 강유정, 문체부 수장으로…문화정책 향방은",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-23T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014340882?sid=103"
-    },
-    {
-     "title": "신임 두터운 한준호, ‘청와대의 입’ 강유정… 국정 이해도 높은 실무...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-23T20:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003702356?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "국정원장 후보 강금실",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T20:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "李, 외교·안보라인 동시 교체…국정원장에 강금실 [오늘 뉴스 4컷]",
-     "press": "segye.com",
-     "publishedAt": "2026-11-23T21:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177581?sid=100"
-    },
-    {
-     "title": "국정원장 등 외교안보 라인 물갈이…대미·대북 돌파구",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-23T20:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001165362?sid=101"
-    },
-    {
-     "title": "李 파격… 국정원 ‘첫 여성 수장’ 강금실",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-23T20:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003702355?sid=100"
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=886264"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1230,
-  "matched": 669,
-  "avgLeadMin": 580,
+  "flagged": 1229,
+  "matched": 668,
+  "avgLeadMin": 581,
   "recent": [
    {
     "keyword": "어벤져스",
