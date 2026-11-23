@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T14:11:17.183Z",
+ "builtAt": "2026-11-23T14:21:20.890Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,58 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 26,
  "candidates": [
   {
-   "keyword": "이지훈, 둘째 딸 출산",
+   "keyword": "젠슨 황 복귀",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-23T12:44:00.000Z",
+   "articles90": 56,
+   "recent20": 53,
+   "press": 48,
+   "firstArticleAt": "2026-11-23T13:21:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[속보]엔비디아, 젠슨 황 CEO 전격 복귀… 사임 11일 만",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-23T14:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002833616?sid=104"
+    },
+    {
+     "title": "[속보] \"젠슨 황, 엔비디아 CEO 복귀\"",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-23T14:20:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1195018"
+    },
+    {
+     "title": "젠슨 황 11일만에 엔비디아 CEO 복귀…주가 29% 폭등(종합)",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-23T14:20:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446101"
+    }
+   ]
+  },
+  {
+   "keyword": "이지훈·아야네 둘째 딸 출산",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-23T12:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이지훈♥아야네, 두 차례 유산 아픔 딛고 둘째 득녀… \"또 하나의 기적...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-23T14:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000492678"
+    },
     {
      "title": "이지훈·아야네, 두 딸 부모 됐다 \"평생 사랑할게\"",
      "press": "stoo.com",
@@ -33,12 +71,6 @@
      "press": "mt.co.kr",
      "publishedAt": "2026-11-23T13:48:00.000Z",
      "link": "https://m.entertain.naver.com/article/008/0005445261"
-    },
-    {
-     "title": "이지훈♥아야네, 두 번의 유산 딛고 '네 식구' 됐다..신화 이민우도 축...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-23T13:38:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005644318"
     }
    ]
   },
@@ -47,10 +79,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-23T12:42:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-23T12:59:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -71,38 +103,6 @@
      "press": "news.cpbc.co.kr",
      "publishedAt": "2026-11-23T13:32:00.000Z",
      "link": "https://news.cpbc.co.kr/article/1177198?division=NAVER"
-    }
-   ]
-  },
-  {
-   "keyword": "신한은행 하나은행 4연승",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-23T12:49:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "9-0으로 문 열고 63-59로 닫았다... 신한은행, 하나은행 꺾고 4연승",
-     "press": "stnsports.co.kr",
-     "publishedAt": "2026-11-23T13:48:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/450/0000155642"
-    },
-    {
-     "title": "'이기는 습관' 장착한 신한은행, 뒤를 받치는 신신 듀오와 더 확장될 '최...",
-     "press": "rookie.co.kr",
-     "publishedAt": "2026-11-23T13:42:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/398/0000105700"
-    },
-    {
-     "title": "여자농구 신한은행, 하나은행 꺾고 4연승…1경기 차 단독 선두 질주",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-23T13:21:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/055/0001405230"
     }
    ]
   },
@@ -139,66 +139,99 @@
    ]
   },
   {
-   "keyword": "독일 학교 폭탄 협박",
+   "keyword": "신한은행 하나은행 4연승",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 4,
+   "articles90": 5,
    "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-23T12:51:00.000Z",
-   "exclusive": false,
+   "firstArticleAt": "2026-11-23T12:55:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "독일 전역 학교에 폭파 위협 이메일...대피 소동",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-23T13:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437028?sid=104"
+     "title": "9-0으로 문 열고 63-59로 닫았다... 신한은행, 하나은행 꺾고 4연승",
+     "press": "stnsports.co.kr",
+     "publishedAt": "2026-11-23T13:48:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/450/0000155642"
     },
     {
-     "title": "\"죽음이 널 기다린다\"…독일 전역 학교에 폭탄 협박 이메일 무더기 발송",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-23T13:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005608581?sid=104"
+     "title": "'이기는 습관' 장착한 신한은행, 뒤를 받치는 신신 듀오와 더 확장될 '최...",
+     "press": "rookie.co.kr",
+     "publishedAt": "2026-11-23T13:42:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/398/0000105700"
     },
     {
-     "title": "“죽음이 너를 기다린다” 독일 전역 학교에 폭파 위협 이메일",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-23T13:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003567328?sid=104"
+     "title": "여자농구 신한은행, 하나은행 꺾고 4연승…1경기 차 단독 선두 질주",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-23T13:21:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/055/0001405230"
     }
    ]
   },
   {
-   "keyword": "수능 부정 신고 포상 최대 5억",
+   "keyword": "리트 만점자 부정행위 수사",
    "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T13:37:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'리트 만점자' 책 사고 손해배상 청구한 구매자들, 소 취하",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-23T14:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006414403?sid=102"
+    },
+    {
+     "title": "[단독] 경찰, 세무사 부정행위 피의자 답안지 확보…감독관도 불러 조사",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-23T14:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012299689?sid=102"
+    },
+    {
+     "title": "'리트 만점' 진상규명 첫 고비...유족, 수사 협조할까?",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-23T13:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437031?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "나의 유죄인간",
+   "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T12:42:00.000Z",
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T13:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "권익위, 수능 부정행위 신고 포상금 최대 5억원 지급",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-23T13:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000162070?sid=102"
+     "title": "'나의 유죄인간' 정한설, 종영 소감",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-23T14:20:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1195012"
     },
     {
-     "title": "수능 부정행위 신고 포상금 1억→5억원 상향…인원수 따라 가산 지급",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-23T12:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000133461?sid=102"
+     "title": "'나의 유죄인간' 설인아 임시완, 이별 후 밀당 전개",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-23T13:14:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284367"
     },
     {
-     "title": "\"수능 부정행위 신고하면 최대 5억\"...자수해도 포상금 지급",
-     "press": "ikbc.co.kr",
-     "publishedAt": "2026-11-23T12:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000122036?sid=102"
+     "title": "임시완X설인아, 서로 구하려다 나란히 총 맞았다 ('나의 유죄인간')",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-23T13:03:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000492670"
     }
    ]
   },
@@ -207,10 +240,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-23T12:48:00.000Z",
+   "firstArticleAt": "2026-11-23T13:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -235,74 +268,41 @@
    ]
   },
   {
-   "keyword": "나의 유죄인간",
+   "keyword": "독일 학교 폭탄 협박",
    "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T12:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'나의 유죄인간' 설인아 임시완, 이별 후 밀당 전개",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-23T13:14:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284367"
-    },
-    {
-     "title": "임시완X설인아, 서로 구하려다 나란히 총 맞았다 ('나의 유죄인간')",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-23T13:03:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000492670"
-    },
-    {
-     "title": "최희진, 올블랙 겨울 화보 같은 일상…'나의 유죄인간' 열연 잇는 존재...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-23T13:00:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284362"
-    }
-   ]
-  },
-  {
-   "keyword": "한준호 행안부 장관 후보",
-   "sources": [
-    "daum"
+    "signal.bz"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-23T12:44:00.000Z",
+   "firstArticleAt": "2026-11-23T13:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[시사천국] 임기 중반에 친정체제?…강금실·강유정·한준호 발탁의 속...",
-     "press": "news.cpbc.co.kr",
-     "publishedAt": "2026-11-23T13:32:00.000Z",
-     "link": "https://news.cpbc.co.kr/article/1177198?division=NAVER"
+     "title": "독일 전역 학교에 폭파 위협 이메일...대피 소동",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-23T13:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437028?sid=104"
     },
     {
-     "title": "박민영 \"강금실은 '친중', 한준호는 '추미애 견제용'?\"[일타뉴스]",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-23T13:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001041866?sid=100"
+     "title": "\"죽음이 널 기다린다\"…독일 전역 학교에 폭탄 협박 이메일 무더기 발송",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-23T13:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005608581?sid=104"
     },
     {
-     "title": "행정안전부 장관 후보자에 전북 출신 한준호 지명",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-23T12:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012299569?sid=100"
+     "title": "“죽음이 너를 기다린다” 독일 전역 학교에 폭파 위협 이메일",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-23T13:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003567328?sid=104"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1227,
+  "flagged": 1229,
   "matched": 671,
   "avgLeadMin": 568,
   "recent": [
