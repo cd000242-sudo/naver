@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T12:20:39.631Z",
+ "builtAt": "2026-11-23T12:30:42.754Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,13 +15,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 16,
-   "recent20": 3,
-   "press": 16,
-   "firstArticleAt": "2026-11-23T10:57:00.000Z",
+   "articles90": 15,
+   "recent20": 2,
+   "press": 15,
+   "firstArticleAt": "2026-11-23T11:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[따져보니] 커닝 10건 신고하면…포상금 50억 받는다?",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-23T12:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000652913?sid=004"
+    },
     {
      "title": "\"수능 커닝 제보하면 최대 5억\"…자수해도 포상금 준다",
      "press": "wikitree.co.kr",
@@ -33,12 +39,6 @@
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-23T12:09:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012299532?sid=100"
-    },
-    {
-     "title": "권익위,수능 부정행위 신고 포상금 '최대 5억' 지급",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-23T12:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967306?sid=100"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 16,
-   "recent20": 2,
+   "articles90": 14,
+   "recent20": 1,
    "press": 13,
-   "firstArticleAt": "2026-11-23T10:54:00.000Z",
+   "firstArticleAt": "2026-11-23T11:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "국정원장 강금실·외교 임웅순·통일 홍익표",
+     "press": "idaegu.co.kr",
+     "publishedAt": "2026-11-23T12:24:00.000Z",
+     "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=566227"
+    },
     {
      "title": "제주 출신 강금실 전 법무장관, 국정원장 후보자 지명",
      "press": "jibs.co.kr",
@@ -65,12 +71,39 @@
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-23T12:01:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012299531?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "반도체 메모리",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 8,
+   "recent20": 3,
+   "press": 8,
+   "firstArticleAt": "2026-11-23T11:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"반도체 호시절도 내년까지\"…삼전닉스 목표가 잇따라 낮춘 IB들",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-23T12:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001077687?sid=101"
     },
     {
-     "title": "강금실 전 장관, 국정원장 후보자 지명",
-     "press": "jejumbc.com",
-     "publishedAt": "2026-11-23T11:54:00.000Z",
-     "link": "https://jejumbc.com/NewsArticle/874937"
+     "title": "글로벌 IB 잇단 반도체 경고…삼성전자·하이닉스 목표가 줄하향",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-23T12:24:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=886382"
+    },
+    {
+     "title": "AI 반도체 호황 내년까지?…글로벌 IB, 삼전닉스 목표가 잇달아 하향 조...",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-23T12:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005846666?sid=101"
     }
    ]
   },
@@ -79,10 +112,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-23T11:00:00.000Z",
+   "articles90": 10,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-23T11:15:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -99,75 +132,42 @@
      "link": "https://n.news.naver.com/mnews/article/661/0000086979?sid=100"
     },
     {
-     "title": "R)'또 역대 최다' 청주국제공항.. 높아지는 민간 활주로 기대감",
-     "press": "news.mbccb.co.kr",
+     "title": "제2공항 갈등조정협의회 찬성 주민대표 배제",
+     "press": "jejumbc.com",
      "publishedAt": "2026-11-23T11:54:00.000Z",
-     "link": "http://news.mbccb.co.kr/home/sub.php?menukey=61&mod=view&RECEIVE_DATE=20261123&SEQUENCE=0122"
+     "link": "https://jejumbc.com/NewsArticle/874932"
     }
    ]
   },
   {
-   "keyword": "반도체 메모리",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-23T10:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "반도체 \"내년에도 호황\"…하반기 성장세는 꺾여",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-23T12:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929145?sid=161"
-    },
-    {
-     "title": "[2027 산업 대전환 ①] 수출 1조달러 이끈 반도체… 철강·석화는 수익성...",
-     "press": "pressman.kr",
-     "publishedAt": "2026-11-23T11:18:00.000Z",
-     "link": "https://www.pressman.kr/news/articleView.html?idxno=104619"
-    },
-    {
-     "title": "반도체 하락 언제까지···SK하이닉스, '약세 시나리오'보다 아래로",
-     "press": "seoulfn.com",
-     "publishedAt": "2026-11-23T11:18:00.000Z",
-     "link": "https://www.seoulfn.com/news/articleView.html?idxno=643691"
-    }
-   ]
-  },
-  {
-   "keyword": "박준현 서면사과 취소",
+   "keyword": "신한은행 단독 선두 유지",
    "sources": [
     "nate"
    ],
    "articles90": 6,
    "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-23T10:58:00.000Z",
-   "exclusive": false,
+   "firstArticleAt": "2026-11-23T11:53:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "'학폭' 꼬리표 떼나, 키움 박준현 '서면 사과' 취소 행정 소송 1심 승소...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-23T12:02:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/117/0004127446"
+     "title": "[WKBL] '사쿠라 22점' 신한은행, 1천383일 만에 4연승…하나은행 63-59 제...",
+     "press": "swtvnews.com",
+     "publishedAt": "2026-11-23T12:22:00.000Z",
+     "link": "https://swtvnews.com/news/newsview.php?ncode=1065613967005202"
     },
     {
-     "title": "'초대형 반전' KBO 전체 1순위 박준현, 학폭 논란 뒤집혔다...법원서 1심...",
-     "press": "sportalkorea.com",
-     "publishedAt": "2026-11-23T11:41:00.000Z",
-     "link": "https://m.sports.naver.com/kbaseball/article/139/0002256458"
+     "title": "흔들릴지언정, 무너지지는 않는다…신한은행, 하나은행 꺾고 ‘파죽의 ...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-23T11:59:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/144/0001151339"
     },
     {
-     "title": "키움 박준현, 고교 시절 학폭 서면사과 취소 소송 1심 승소",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-23T11:24:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110051838558"
+     "title": "'윤아 매직' 단독 선두 신한은행! 하나은행 격파하며 돌풍 같은 4연승 질...",
+     "press": "rookie.co.kr",
+     "publishedAt": "2026-11-23T11:57:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/398/0000105693"
     }
    ]
   },
@@ -177,7 +177,7 @@
     "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-23T11:05:00.000Z",
    "exclusive": false,
@@ -204,14 +204,110 @@
    ]
   },
   {
+   "keyword": "박준현 서면사과 취소",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-23T11:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'학폭' 꼬리표 떼나, 키움 박준현 '서면 사과' 취소 행정 소송 1심 승소...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-23T12:02:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/117/0004127446"
+    },
+    {
+     "title": "'초대형 반전' KBO 전체 1순위 박준현, 학폭 논란 뒤집혔다...법원서 1심...",
+     "press": "sportalkorea.com",
+     "publishedAt": "2026-11-23T11:41:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/139/0002256458"
+    },
+    {
+     "title": "키움 박준현, 고교 시절 학폭 서면사과 취소 소송 1심 승소",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-23T11:24:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110051838558"
+    }
+   ]
+  },
+  {
+   "keyword": "한동훈 제명 날, 장동혁 문자",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T11:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "최규동 “대표님 시간” 장동혁 “편히 눕겠다”…尹 구형날 ‘한동훈...",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-23T12:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003060731?sid=100"
+    },
+    {
+     "title": "김종혁 \"조작징계 의혹에 법적 조치 검토…장동혁, 대국민 사기극\"",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-23T12:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000142891?sid=100"
+    },
+    {
+     "title": "황경성 3차 폭로 \"尹 사형선고 맞춰 한동훈 제명\"",
+     "press": "viewsnnews.com",
+     "publishedAt": "2026-11-23T11:02:00.000Z",
+     "link": "https://www.viewsnnews.com/article?q=239889"
+    }
+   ]
+  },
+  {
+   "keyword": "상장",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T11:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "대구 상장사 3분기 실적 '껑충'",
+     "press": "idaegu.co.kr",
+     "publishedAt": "2026-11-23T12:24:00.000Z",
+     "link": "https://www.idaegu.co.kr/news/articleView.html?idxno=566223"
+    },
+    {
+     "title": "기보, 투자기업 상장 지원 위한 코스닥시장 상장설명회 개최",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-23T12:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002834906?sid=101"
+    },
+    {
+     "title": "상장기업의 자기주식 1일 취득한도 확대를 3개월간 시행합니다",
+     "press": "intn.co.kr",
+     "publishedAt": "2026-11-23T11:10:00.000Z",
+     "link": "https://www.intn.co.kr/news/articleView.html?idxno=3000446"
+    }
+   ]
+  },
+  {
    "keyword": "이진관 판사",
    "sources": [
     "google"
    ],
-   "articles90": 5,
+   "articles90": 3,
    "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-23T10:51:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-23T11:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -232,38 +328,6 @@
      "press": "kyeonggi.com",
      "publishedAt": "2026-11-23T11:22:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/666/0000133458?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "신한은행 단독 선두 유지",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-23T11:53:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "흔들릴지언정, 무너지지는 않는다…신한은행, 하나은행 꺾고 ‘파죽의 ...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-23T11:59:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/144/0001151339"
-    },
-    {
-     "title": "'윤아 매직' 단독 선두 신한은행! 하나은행 격파하며 돌풍 같은 4연승 질...",
-     "press": "rookie.co.kr",
-     "publishedAt": "2026-11-23T11:57:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/398/0000105693"
-    },
-    {
-     "title": "최윤아 매직! '단독 1위' 신한은행 14년 만에 개막 7G 중 6승...사쿠라 2...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-23T11:55:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/117/0004127443"
     }
    ]
   },
@@ -298,45 +362,13 @@
      "link": "https://n.news.naver.com/mnews/article/277/0005846654?sid=101"
     }
    ]
-  },
-  {
-   "keyword": "한성숙 총리, 카타르 국무장관 접견",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-23T10:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "韓총리, 카타르·몽골 장관과 접견…에너지·핵심광물 등 협력 강화 논...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-23T11:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014340749?sid=100"
-    },
-    {
-     "title": "한성숙 총리, 카타르 에너지 담당 국무장관 일행과 기념촬영",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T10:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009305826?sid=100"
-    },
-    {
-     "title": "한성숙 장관 \"에너지 수급 협조에 감사\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T10:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009305825?sid=100"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
   "flagged": 1220,
-  "matched": 666,
-  "avgLeadMin": 580,
+  "matched": 664,
+  "avgLeadMin": 569,
   "recent": [
    {
     "keyword": "수능 부정행위 신고하면 최대 5억 지급",
