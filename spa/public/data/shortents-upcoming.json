@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T09:19:38.679Z",
+ "builtAt": "2026-11-23T09:29:41.975Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,59 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 24,
  "candidates": [
+  {
+   "keyword": "고경표 음주운전 혐의",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 49,
+   "recent20": 3,
+   "press": 45,
+   "firstArticleAt": "2026-11-23T08:09:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[속보]‘음주운전 혐의’ 고경표, 오후 7시 경찰 소환",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-23T09:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002834892?sid=102"
+    },
+    {
+     "title": "'만취 음주운전' 고경표 잠시 뒤 첫 경찰 소환조사",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-23T09:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436953?sid=102"
+    },
+    {
+     "title": "고경표, 음주운전 9일 만→포토라인 설까…오늘(23일) 경찰 소환 통보",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-23T09:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000492629"
+    }
+   ]
+  },
   {
    "keyword": "강금실 국정원장 지명",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "daum"
    ],
-   "articles90": 54,
-   "recent20": 7,
-   "press": 47,
-   "firstArticleAt": "2026-11-23T07:50:00.000Z",
+   "articles90": 46,
+   "recent20": 4,
+   "press": 41,
+   "firstArticleAt": "2026-11-23T08:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "靑, 신임 국정원장에 강금실 지명···외교장관 임웅순·통일장관 홍익...",
+     "press": "todaykorea.co.kr",
+     "publishedAt": "2026-11-23T09:20:00.000Z",
+     "link": "https://www.todaykorea.co.kr/news/articleView.html?idxno=409039"
+    },
     {
      "title": "외교·안보 등 5개 부처·기관장 교체…강금실 국정원장 지명",
      "press": "idomin.com",
@@ -33,76 +72,70 @@
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-23T09:11:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/079/0004212975?sid=100"
-    },
-    {
-     "title": "이 대통령, 국정원장에 강금실 지명…외교·통일 등 장관 4명 인선",
-     "press": "kyongbuk.co.kr",
-     "publishedAt": "2026-11-23T09:10:00.000Z",
-     "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4091781"
     }
    ]
   },
   {
-   "keyword": "고경표 음주운전 조사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 48,
-   "recent20": 6,
-   "press": 43,
-   "firstArticleAt": "2026-11-23T07:51:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[속보]‘음주운전 혐의’ 고경표, 오후 7시 경찰 소환",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-23T09:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002834892?sid=102"
-    },
-    {
-     "title": "고경표, 음주운전 9일 만→포토라인 설까…오늘(23일) 경찰 소환 통보",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-23T09:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000492629"
-    },
-    {
-     "title": "'만취 음주운전' 고경표 잠시 뒤 첫 경찰 소환조사",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-23T09:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436953?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "이재근 KB금융 회장 첫행보 청년 소상공인 만나",
+   "keyword": "한미약품, 베하르 박사 영입",
    "sources": [
     "nate"
    ],
-   "articles90": 31,
-   "recent20": 6,
-   "press": 31,
-   "firstArticleAt": "2026-11-23T07:54:00.000Z",
+   "articles90": 35,
+   "recent20": 3,
+   "press": 35,
+   "firstArticleAt": "2026-11-23T08:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이재근 KB금융 회장, 취임 첫 대외 행보 청년·소상공인 만나…포용금융...",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-23T09:06:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=202611231643264505bb91c46fcd_1"
+     "title": "한미약품 美 항암 전문가 영입…항암신약 개발 강화",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-23T09:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000545397?sid=101"
     },
     {
-     "title": "이재근 KB금융 회장, 대학생·소상공인 만나 금융지원 방안 논의",
-     "press": "digitaltoday.co.kr",
-     "publishedAt": "2026-11-23T09:06:00.000Z",
-     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=717543"
+     "title": "한미약품, 항암 전문가 라파엘 베하르 영입…글로벌 신약 개발 강화",
+     "press": "swtvnews.com",
+     "publishedAt": "2026-11-23T09:10:00.000Z",
+     "link": "https://www.swtvnews.com/news/newsview.php?ncode=1065603187196193"
     },
     {
-     "title": "이재근 KB금융 회장, 취임 첫 대외 행보로 청년·소상공인 만나",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-23T09:04:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2651876"
+     "title": "한미약품, '투스페티닙' 글로벌 개발 이끈 라파엘 베하르 박사 영입",
+     "press": "industrynews.co.kr",
+     "publishedAt": "2026-11-23T09:10:00.000Z",
+     "link": "https://www.industrynews.co.kr/news/articleView.html?idxno=90075"
+    }
+   ]
+  },
+  {
+   "keyword": "AI 부정행위 차단",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 33,
+   "recent20": 5,
+   "press": 32,
+   "firstArticleAt": "2026-11-23T08:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "우재준, AI 글라스 착용하고 수능 풀이 시연",
+     "press": "queen.co.kr",
+     "publishedAt": "2026-11-23T09:20:00.000Z",
+     "link": "http://www.queen.co.kr/news/articleView.html?idxno=466789"
+    },
+    {
+     "title": "전남광주교육청, 학교 시험 ‘AI 부정행위 꼼짝마’",
+     "press": "jndn.com",
+     "publishedAt": "2026-11-23T09:18:00.000Z",
+     "link": "http://www.jndn.com/article.php?aid=1795425326443627005"
+    },
+    {
+     "title": "코닉글로리, AI 시험 부정행위 차단 나선다…무선 보안기술 활용",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-23T09:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003488787?sid=105"
     }
    ]
   },
@@ -111,13 +144,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 30,
+   "articles90": 25,
    "recent20": 3,
-   "press": 28,
-   "firstArticleAt": "2026-11-23T07:50:00.000Z",
+   "press": 24,
+   "firstArticleAt": "2026-11-23T08:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "‘李 복심’ 한준호·강유정 전진배치…野선 “회전문·보은인사”[5개...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-23T09:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004685297?sid=100"
+    },
     {
      "title": "행안부 한준호·국정원 강금실…이재명 정부 중폭 개각 단행",
      "press": "seoulfn.com",
@@ -129,108 +168,6 @@
      "press": "kyongbuk.co.kr",
      "publishedAt": "2026-11-23T09:10:00.000Z",
      "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4091781"
-    },
-    {
-     "title": "한준호 행안장관 후보자 \"실용행정으로 국민 삶 책임질 것\"",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-23T09:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979498?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "강유정 문체부 장관 지명",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 24,
-   "recent20": 4,
-   "press": 23,
-   "firstArticleAt": "2026-11-23T07:54:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이 대통령, 국정원장에 강금실 지명…외교·통일 등 장관 4명 인선",
-     "press": "kyongbuk.co.kr",
-     "publishedAt": "2026-11-23T09:10:00.000Z",
-     "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4091781"
-    },
-    {
-     "title": "국정원장 후보자에 강금실…외교·통일·행안·문체부 장관 교체",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-23T09:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012299372?sid=100"
-    },
-    {
-     "title": "[프로필] 강유정 문체부 장관 후보자, 현장·국정 두루 거친 문화통",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-23T09:00:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/23/2026112350345.html"
-    }
-   ]
-  },
-  {
-   "keyword": "안전공업 대표 기소",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 18,
-   "recent20": 5,
-   "press": 18,
-   "firstArticleAt": "2026-11-23T07:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'14명 사망' 대전 안전공업 화재…대표이사 기소",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-23T09:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000193326?sid=102"
-    },
-    {
-     "title": "고질적 안전불감증 더해진 인재”…공소청, 안전공업 손주환 대표 등 기...",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-23T09:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003567291?sid=102"
-    },
-    {
-     "title": "‘72명 사상’ 안전공업 화재 참사 책임자 무더기 기소…불법 증축에 경...",
-     "press": "segye.com",
-     "publishedAt": "2026-11-23T09:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177451?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "경제6단체 간담회",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 28,
-   "recent20": 4,
-   "press": 18,
-   "firstArticleAt": "2026-11-23T07:51:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "정점식, 경제6단체 만나 \"정년 연장 신중히 접근해야\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-23T09:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436954?sid=100"
-    },
-    {
-     "title": "與 \"수출성과 골목 확산\" 野 \"정년연장 신중\"…경제6단체 회동(종합)",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T09:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009305727?sid=100"
-    },
-    {
-     "title": "정점식 경제6단체 만나 “정년 연장, 청년 고용 위축 우려…종합적 노동...",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-23T09:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012299369?sid=100"
     }
    ]
   },
@@ -239,10 +176,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 16,
+   "articles90": 14,
    "recent20": 2,
-   "press": 14,
-   "firstArticleAt": "2026-11-23T07:56:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-23T08:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -267,75 +204,139 @@
    ]
   },
   {
-   "keyword": "국힘 李 개각",
+   "keyword": "문체부 암표 수사 의뢰",
    "sources": [
-    "daum"
+    "signal.bz"
+   ],
+   "articles90": 9,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-23T08:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "입장권 2335장·6억원어치 판매 시도…암표 의심 70명 추가 수사의뢰",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-23T09:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005445225?sid=103"
+    },
+    {
+     "title": "‘무려 6억 규모’ 선 넘은 암표 거래…문체부, 혐의자 70명 수사의뢰",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-23T09:08:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/011/0004685290"
+    },
+    {
+     "title": "가을야구 티켓 웃돈 붙여 팔려다 딱 걸렸다…문체부, 암표상 70명 경찰 ...",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-23T09:01:00.000Z",
+     "link": "https://m.sports.naver.com/general/article/445/0000492628"
+    }
+   ]
+  },
+  {
+   "keyword": "이재근 회장 청년 소상공인 만남",
+   "sources": [
+    "nate"
    ],
    "articles90": 6,
    "recent20": 0,
    "press": 6,
    "firstArticleAt": "2026-11-23T08:18:00.000Z",
-   "exclusive": false,
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령 중폭 개각 단행...與 \"국익·변화·속도\" vs 국힘 \"코드·보은·...",
-     "press": "joseilbo.com",
+     "title": "KB금융 이재근, 첫 현장은 상생·포용금융",
+     "press": "4th.kr",
+     "publishedAt": "2026-11-23T08:58:00.000Z",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2122503"
+    },
+    {
+     "title": "이재근 \"KB, 국내 1등서 글로벌 리딩 플랫폼으로\"",
+     "press": "hankyung.com",
      "publishedAt": "2026-11-23T08:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394651?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/015/0005357224?sid=101"
     },
     {
-     "title": "국힘, 李정부 개각에 “레임덕 인사”…총리 포함 전면 교체 요구",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-23T08:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004685249?sid=100"
-    },
-    {
-     "title": "국힘 \"李 개각, 코드·보은 앞세운 회전문 인사… 국정 쇄신 요구 외면...",
-     "press": "daejonilbo.com",
+     "title": "이재근 KB금융 회장, 취임 첫 대외 행보는 '청년·소상공인' 만남",
+     "press": "news.tf.co.kr",
      "publishedAt": "2026-11-23T08:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000193315?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/629/0000554763?sid=101"
     }
    ]
   },
   {
-   "keyword": "원자력",
+   "keyword": "정점식 원내대표 발언",
    "sources": [
-    "google"
+    "nate"
    ],
    "articles90": 5,
-   "recent20": 3,
-   "press": 5,
-   "firstArticleAt": "2026-11-23T08:16:00.000Z",
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-23T08:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "29조 핵잠 개발 본격화···'조선·원자력' 산업 협력이 좌우",
-     "press": "enewstoday.co.kr",
-     "publishedAt": "2026-11-23T09:08:00.000Z",
-     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2495946"
+     "title": "정점식, 경제 6단체 만나 \"기업·근로자 죽이는 악법 반드시 폐지\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-23T09:00:00.000Z",
+     "link": "https://www.ajunews.com/view/20261123163908931"
     },
     {
-     "title": "[인사]한전원자력연료 기술본부장 이재일",
-     "press": "news.bbsi.co.kr",
-     "publishedAt": "2026-11-23T09:04:00.000Z",
-     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4120363"
+     "title": "여야 원내대표, 경제6단체와 간담회서 쟁점법안·수출 1조달러 성과 두...",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-23T08:26:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886958"
     },
     {
-     "title": "[인사] 한전원자력연료",
-     "press": "zdnet.co.kr",
-     "publishedAt": "2026-11-23T09:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/092/0002446544?sid=102"
+     "title": "경제6단체 간담회서 발언하는 정점식",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-23T08:22:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3760614"
+    }
+   ]
+  },
+  {
+   "keyword": "이장우 조혜원 결혼 1주년 사진 공개",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T08:08:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이장우♥조혜원, 결혼 1주년 자축…미공개 본식 사진 공개 [N샷]",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T08:36:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009305690"
+    },
+    {
+     "title": "조혜원♥이장우, 결혼 1년 만에 웨딩 사진 대방출…행복했던 그날",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-23T08:13:00.000Z",
+     "link": "https://m.entertain.naver.com/article/410/0001148052"
+    },
+    {
+     "title": "조혜원♥이장우, 결혼 1주년 맞아 웨딩 사진 공개",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-23T08:08:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611230265"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1194,
-  "matched": 656,
-  "avgLeadMin": 592,
+  "flagged": 1198,
+  "matched": 654,
+  "avgLeadMin": 585,
   "recent": [
    {
     "keyword": "정부",
