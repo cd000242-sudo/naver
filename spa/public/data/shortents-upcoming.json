@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T01:42:28.821Z",
+ "builtAt": "2026-11-23T01:52:32.159Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 21,
+ "measured": 22,
  "candidates": [
   {
    "keyword": "삼성증권 개인정보 유출",
    "sources": [
     "daum"
    ],
-   "articles90": 72,
-   "recent20": 50,
-   "press": 67,
-   "firstArticleAt": "2026-11-23T01:12:00.000Z",
+   "articles90": 90,
+   "recent20": 43,
+   "press": 82,
+   "firstArticleAt": "2026-11-23T01:17:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "삼성증권, VOC 시스템 뚫려 '8241명' 정보 유출…증권가 ‘외부 접점’ ...",
-     "press": "megaeconomy.co.kr",
-     "publishedAt": "2026-11-23T01:40:00.000Z",
-     "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065576916403276"
+     "title": "삼성증권 해킹에 고객 8천명 정보유출, 금융권 보안 비상",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-23T01:50:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886838"
     },
     {
-     "title": "삼성증권, 고객 8241명 개인정보 유출…홈페이지 VOC 시스템 뚫렸다",
-     "press": "iminju.net",
-     "publishedAt": "2026-11-23T01:40:00.000Z",
-     "link": "http://www.iminju.net/news/articleView.html?idxno=172878"
+     "title": "삼성증권 VOC 서비스 해킹…고객 8241명 개인정보 유출",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-23T01:50:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=886040"
     },
     {
-     "title": "삼성증권, VOC 시스템 해킹 피해…고객 8241명 개인정보 유출",
-     "press": "pointe.co.kr",
-     "publishedAt": "2026-11-23T01:40:00.000Z",
-     "link": "https://www.pointe.co.kr/news/articleView.html?idxno=88232"
+     "title": "삼성증권도 해킹 피해…8241명 개인정보 유출",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-23T01:50:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321418&inflow=N"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 54,
-   "recent20": 6,
-   "press": 51,
-   "firstArticleAt": "2026-11-23T00:16:00.000Z",
+   "articles90": 46,
+   "recent20": 2,
+   "press": 45,
+   "firstArticleAt": "2026-11-23T00:24:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "반도체 수출 4배 급증···11월 중순 수출 774억달러 '역대 최대'",
+     "press": "whitepaper.co.kr",
+     "publishedAt": "2026-11-23T01:50:00.000Z",
+     "link": "http://www.whitepaper.co.kr/news/articleView.html?idxno=269033"
+    },
     {
      "title": "11월 1~20일 수출, 101.5% 급증에 '역대 최대'",
      "press": "todaykorea.co.kr",
@@ -65,12 +71,6 @@
      "press": "news.bbsi.co.kr",
      "publishedAt": "2026-11-23T01:32:00.000Z",
      "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4120149"
-    },
-    {
-     "title": "수출 누적 1조달러 첫 돌파…11월 1~20일 774억달러 '역대 최대'",
-     "press": "sisafocus.co.kr",
-     "publishedAt": "2026-11-23T01:32:00.000Z",
-     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367908"
     }
    ]
   },
@@ -79,30 +79,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 23,
-   "recent20": 2,
+   "articles90": 22,
+   "recent20": 3,
    "press": 20,
-   "firstArticleAt": "2026-11-23T00:14:00.000Z",
+   "firstArticleAt": "2026-11-23T00:26:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "은행연합회장 또 '정통 은행원'…이번엔 4대 금융 밖에서 나왔다",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T01:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009304343?sid=101"
+     "title": "SC제일은행 10년 이끈 박종복, 차기 은행연합회장 내정",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-23T01:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000142819?sid=101"
     },
     {
-     "title": "박종복 은행연합회장 내정자 \"AI시대 역할 고민…당국 소통도 충실\"",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-23T01:24:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445990"
+     "title": "은행연합회, 차기 회장에 박종복 전 SC제일은행장 내정",
+     "press": "sisafocus.co.kr",
+     "publishedAt": "2026-11-23T01:48:00.000Z",
+     "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367909"
     },
     {
-     "title": "박종복 차기 은행연합회장, 신한금융 사외이사 8개월 만에 물러난다",
-     "press": "news.einfomax.co.kr",
-     "publishedAt": "2026-11-23T01:20:00.000Z",
-     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445985"
+     "title": "차기 은행연합회장에 박종복 전 SC제일은행장 내정…26일 최종 선출",
+     "press": "sateconomy.co.kr",
+     "publishedAt": "2026-11-23T01:46:00.000Z",
+     "link": "https://sateconomy.co.kr/news/view/1065572495646291"
     }
    ]
   },
@@ -111,10 +111,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 19,
-   "recent20": 3,
-   "press": 19,
-   "firstArticleAt": "2026-11-23T00:14:00.000Z",
+   "articles90": 17,
+   "recent20": 1,
+   "press": 17,
+   "firstArticleAt": "2026-11-23T00:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -144,13 +144,19 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 30,
-   "recent20": 7,
+   "articles90": 27,
+   "recent20": 4,
    "press": 14,
-   "firstArticleAt": "2026-11-23T00:15:00.000Z",
+   "firstArticleAt": "2026-11-23T00:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[포토] 장동혁 “대법원장 탄핵, 정권 자멸 축지법”",
+     "press": "ilyosisa.co.kr",
+     "publishedAt": "2026-11-23T01:50:00.000Z",
+     "link": "https://www.ilyosisa.co.kr/news/article.html?no=259120"
+    },
     {
      "title": "장동혁, 與 '조희대 탄핵' 추진 맹비난…\"사유 끼워 맞춰\"",
      "press": "shinailbo.co.kr",
@@ -162,44 +168,6 @@
      "press": "yna.co.kr",
      "publishedAt": "2026-11-23T01:33:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/001/0016457591?sid=102"
-    },
-    {
-     "title": "장동혁 \"정부, AI 컨닝에 무대책…수험생만 골탕\"",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-23T01:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006414028?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "정승환 안테나 전속계약 종료",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 14,
-   "recent20": 3,
-   "press": 13,
-   "firstArticleAt": "2026-11-23T00:38:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "정승환, 도경수와 한솥밥 먹나…블리츠웨이뮤직 이적 \"긍정 논의 중\" [공...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-23T01:37:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002083113"
-    },
-    {
-     "title": "정승환, 안테나 전속계약 종료 \"11년 간의 동행 마무리\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-23T01:35:00.000Z",
-     "link": "https://m.entertain.naver.com/article/079/0004212636"
-    },
-    {
-     "title": "정승환, 도경수와 한솥밥 먹나…블리츠웨이뮤직 측 \"긍정 논의 중\"[공식...",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-23T01:26:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1795396824531374007"
     }
    ]
   },
@@ -208,30 +176,62 @@
    "sources": [
     "nate"
    ],
-   "articles90": 13,
-   "recent20": 2,
-   "press": 13,
+   "articles90": 14,
+   "recent20": 3,
+   "press": 14,
    "firstArticleAt": "2026-11-23T01:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "LG전자, 싱가포르에 AI홈 체험공간 오픈…동남아 시장 공략 확대",
+     "press": "it-b.co.kr",
+     "publishedAt": "2026-11-23T01:42:00.000Z",
+     "link": "https://www.it-b.co.kr/news/articleView.html?idxno=90807"
+    },
+    {
+     "title": "LG전자, 싱가포르에 140㎡ 'AI홈' 거점 매장 오픈…동남아 공략 박차",
+     "press": "widedaily.com",
+     "publishedAt": "2026-11-23T01:42:00.000Z",
+     "link": "https://www.widedaily.com/news/articleView.html?idxno=304402"
+    },
+    {
      "title": "LG전자, 싱가포르에 AI홈 체험공간 오픈·'2026 협력회 워크숍' 개최",
      "press": "wsobi.com",
      "publishedAt": "2026-11-23T01:34:00.000Z",
      "link": "http://www.wsobi.com/news/articleView.html?idxno=322291"
+    }
+   ]
+  },
+  {
+   "keyword": "수원 fc",
+   "sources": [
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 6,
+   "firstArticleAt": "2026-11-23T00:37:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"수원삼성X수원FC 공존의 이유, 시민구단의 존재가치\" ' 축도 수원 구단...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-23T01:50:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/076/0004468809"
     },
     {
-     "title": "LG전자, 싱가포르에 AI 체험공간 오픈.... 동남아 'AI홈 시장' 공략",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-23T01:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005608102?sid=101"
+     "title": "이재준 수원시장, 남자 두 팀 동반 승격·위민 3관왕에 잇단 축하",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-23T01:42:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2651593"
     },
     {
-     "title": "LG전자, 싱가포르에 ‘AI홈’ 체험공간 오픈…동남아 AI홈 확대",
-     "press": "inthenews.co.kr",
-     "publishedAt": "2026-11-23T01:20:00.000Z",
-     "link": "https://www.inthenews.co.kr/news/article.html?no=94832"
+     "title": "내년엔 K리그2 수원 더비 없다…내년 시즌 나란히 1부로",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-23T01:24:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/417/0001165244"
     }
    ]
   },
@@ -240,10 +240,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-23T00:18:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-23T00:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -301,12 +301,44 @@
    ]
   },
   {
+   "keyword": "최교진 퇴진",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-23T01:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李대통령, 최교진 사실상 경질 이어 연말 중폭 개각까지?",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-23T01:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002727004?sid=100"
+    },
+    {
+     "title": "최교진 '임명' 때부터 논란...1년 2개월 만에 퇴진",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-23T01:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436640?sid=102"
+    },
+    {
+     "title": "李대통령, 최교진 교육장관 면직안 재가···사실상 경질",
+     "press": "smartbizn.com",
+     "publishedAt": "2026-11-23T01:02:00.000Z",
+     "link": "https://www.smartbizn.com/news/articleView.html?idxno=160221"
+    }
+   ]
+  },
+  {
    "keyword": "2027년 전망 하나증권",
    "sources": [
     "nate"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-23T00:28:00.000Z",
    "exclusive": false,
@@ -333,74 +365,41 @@
    ]
   },
   {
-   "keyword": "정년연장",
+   "keyword": "부산항",
    "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 2,
-   "firstArticleAt": "2026-11-23T00:19:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "민주노총 “정년연장 연내 입법”…25일 양대노총 공동 기자회견",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-23T01:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002727005?sid=101"
-    },
-    {
-     "title": "정년연장 65세, 11월 27일 중대 고비…SNS 관심 집중",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-23T01:02:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629729"
-    },
-    {
-     "title": "정년연장 ‘임금 해법’ 찾는 정부…부총리, 임금체계 개편 현장 방문",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-23T00:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002726915?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "오지헌",
-   "sources": [
-    "signal.bz",
     "google"
    ],
    "articles90": 3,
    "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-23T00:15:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-23T00:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "오지헌 아내 “혼전순결 지켰다”‥상견례 반응은? “母, 오지헌 얼굴 ...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-23T00:22:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190314"
+     "title": "부산항 북항재개발 비리 핵심 시행사 대표에 징역 15년 구형",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-23T01:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003567139?sid=102"
     },
     {
-     "title": "'박상미♥' 오지헌, 미모의 세 딸 공개…'174cm' 고2 장녀에 \"모델해도 ...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-23T00:22:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002083098"
+     "title": "부산항 '북항재개발 입찰 비리' 시행사 대표 징역 15년 구형",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-23T01:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004212603?sid=102"
     },
     {
-     "title": "오지헌 “청담동 금수저 출신, 1타 강사 父 90년대 월수입 5천만원”(아...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-23T00:15:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190311"
+     "title": "부산항만공사, 지속가능경영보고서 세계 6위… 3년 연속 최고등급",
+     "press": "dnews.co.kr",
+     "publishedAt": "2026-11-23T00:42:00.000Z",
+     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611211524530770009"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1161,
+  "flagged": 1164,
   "matched": 665,
   "avgLeadMin": 634,
   "recent": [
