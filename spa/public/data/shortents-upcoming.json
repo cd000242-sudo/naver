@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T12:00:32.402Z",
+ "builtAt": "2026-11-23T12:10:35.891Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,84 +8,58 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 25,
  "candidates": [
   {
-   "keyword": "수능 부정행위 신고하면 최대 5억 지급",
+   "keyword": "강금실 국정원장 지명",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 16,
-   "recent20": 3,
+   "articles90": 19,
+   "recent20": 5,
    "press": 16,
-   "firstArticleAt": "2026-11-23T10:40:00.000Z",
+   "firstArticleAt": "2026-11-23T10:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "권익위, 수능 부정행위 신고에 최소 1억·최대 5억원 포상",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-23T11:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001886950?sid=102"
+     "title": "국정원장에 '李 후원회장', 사정라인 총괄에 '李 수행실장'…또 요직에...",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-23T12:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000652903?sid=004"
     },
     {
-     "title": "수능 부정행위 신고하면 '최대 5억' 준다…자수자도 혜택 유지",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-23T11:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001273683?sid=102"
+     "title": "제주 출신 강금실 전 법무장관, 국정원장 후보자 지명",
+     "press": "jibs.co.kr",
+     "publishedAt": "2026-11-23T12:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/661/0000086966?sid=102"
     },
     {
-     "title": "권익위, 수능 부정행위 신고하면 '최대 5억' 포상",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-23T11:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004212994?sid=103"
-    }
-   ]
-  },
-  {
-   "keyword": "강금실 국정원장 후보자",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 18,
-   "recent20": 3,
-   "press": 14,
-   "firstArticleAt": "2026-11-23T10:32:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "강금실 전 장관, 국정원장 후보자 지명",
-     "press": "jejumbc.com",
-     "publishedAt": "2026-11-23T11:54:00.000Z",
-     "link": "https://jejumbc.com/NewsArticle/874937"
-    },
-    {
-     "title": "이재명 대통령, 국정원장·장관 후보자 5명 지명…외교안보라인 전면 교...",
-     "press": "ksmnews.co.kr",
-     "publishedAt": "2026-11-23T11:52:00.000Z",
-     "link": "https://www.ksmnews.co.kr/news/view.php?idx=630805"
-    },
-    {
-     "title": "[2차 개각 후보자 5인 프로필] 강금실·임웅순·홍익표·한준호·강유정...",
-     "press": "news-s.kr",
-     "publishedAt": "2026-11-23T11:42:00.000Z",
-     "link": "https://news-s.kr/view.html?id=L261123203129f83d"
+     "title": "국정원장 후보자에 강금실 전 장관…외교·행안 등 중폭 개각",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-23T12:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012299531?sid=100"
     }
    ]
   },
   {
    "keyword": "박준현 서면사과 취소 1심 승소",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
    "articles90": 8,
    "recent20": 1,
    "press": 8,
-   "firstArticleAt": "2026-11-23T10:39:00.000Z",
+   "firstArticleAt": "2026-11-23T10:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'학폭' 꼬리표 떼나, 키움 박준현 '서면 사과' 취소 행정 소송 1심 승소...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-23T12:02:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/117/0004127446"
+    },
     {
      "title": "'초대형 반전' KBO 전체 1순위 박준현, 학폭 논란 뒤집혔다...법원서 1심...",
      "press": "sportalkorea.com",
@@ -97,76 +71,71 @@
      "press": "stoo.com",
      "publishedAt": "2026-11-23T11:24:00.000Z",
      "link": "http://www.stoo.com/article.php?aid=110051838558"
-    },
-    {
-     "title": "키움 박준현, 고교시절 학폭 서면사과 조치 취소소송 '1심 승소'",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-23T11:12:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=784160"
     }
    ]
   },
   {
-   "keyword": "강금실과 홍익표 지명",
+   "keyword": "반도체 메모리",
    "sources": [
-    "nate"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-23T10:32:00.000Z",
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-23T10:54:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이재명 대통령, 국정원장·장관 후보자 5명 지명…외교안보라인 전면 교...",
-     "press": "ksmnews.co.kr",
-     "publishedAt": "2026-11-23T11:52:00.000Z",
-     "link": "https://www.ksmnews.co.kr/news/view.php?idx=630805"
+     "title": "반도체 \"내년에도 호황\"…하반기 성장세는 꺾여",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-23T12:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929145?sid=161"
     },
     {
-     "title": "[2차 개각 후보자 5인 프로필] 강금실·임웅순·홍익표·한준호·강유정...",
-     "press": "news-s.kr",
-     "publishedAt": "2026-11-23T11:42:00.000Z",
-     "link": "https://news-s.kr/view.html?id=L261123203129f83d"
-    },
-    {
-     "title": "국정원장 강금실·통일장관 홍익표…대미 관계 재정비",
-     "press": "obsnews.co.kr",
+     "title": "[2027 산업 대전환 ①] 수출 1조달러 이끈 반도체… 철강·석화는 수익성...",
+     "press": "pressman.kr",
      "publishedAt": "2026-11-23T11:18:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544702"
+     "link": "https://www.pressman.kr/news/articleView.html?idxno=104619"
+    },
+    {
+     "title": "반도체 하락 언제까지···SK하이닉스, '약세 시나리오'보다 아래로",
+     "press": "seoulfn.com",
+     "publishedAt": "2026-11-23T11:18:00.000Z",
+     "link": "https://www.seoulfn.com/news/articleView.html?idxno=643691"
     }
    ]
   },
   {
-   "keyword": "금융위 롯데카드에 과징금 10억",
+   "keyword": "러시아 핵무장 위성 발사",
    "sources": [
     "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 0,
+   "recent20": 1,
    "press": 5,
-   "firstArticleAt": "2026-11-23T10:40:00.000Z",
+   "firstArticleAt": "2026-11-23T11:05:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "금융위, 롯데카드에 과징금 10억원…해킹 위험 공시 미흡",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-23T11:34:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611230222"
+     "title": "\"러, 이르면 12월 핵탄두 탑재 위성 발사 가능성\"…서방 정보당국 경고",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T12:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009305873?sid=104"
     },
     {
-     "title": "롯데카드 해킹 위험 공시 누락 '과징금 10억'",
-     "press": "safetimes.co.kr",
-     "publishedAt": "2026-11-23T11:26:00.000Z",
-     "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=247836"
+     "title": "독일 정보당국 \"러시아, 이르면 12월 핵무장 위성 발사 전망\"",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-23T11:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000967304?sid=104"
     },
     {
-     "title": "금융위, 롯데카드에 10억원 과징금",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-23T10:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005608570?sid=101"
+     "title": "“러, 핵무장 인공위성 연내 발사…단시간 내 작전 태세 갖출 것”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-23T11:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004685316?sid=104"
     }
    ]
   },
@@ -203,34 +172,34 @@
    ]
   },
   {
-   "keyword": "러시아 핵무장 위성 발사",
+   "keyword": "원전 공론화 확대 측 참여 중단",
    "sources": [
     "signal.bz"
    ],
    "articles90": 4,
    "recent20": 0,
    "press": 4,
-   "firstArticleAt": "2026-11-23T11:05:00.000Z",
+   "firstArticleAt": "2026-11-23T10:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "독일 정보당국 \"러시아, 이르면 12월 핵무장 위성 발사 전망\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-23T11:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967304?sid=104"
+     "title": "확대 측 불참 선언에 원전 공론화 파행 기로…“논의 형해화”",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-23T11:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001886946?sid=101"
     },
     {
-     "title": "“러, 핵무장 인공위성 연내 발사…단시간 내 작전 태세 갖출 것”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-23T11:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004685316?sid=104"
+     "title": "원전 공론화위 \"확대 측 전문가 참여 중단에도 공론화 일정 예정대로 진...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-23T11:02:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2651892"
     },
     {
-     "title": "\"러, 핵무장 인공위성 연내 발사할 듯\"",
+     "title": "원전공론화위원회, \"원칙대로 공론화 끝까지 진행\"",
      "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-23T11:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005846656?sid=104"
+     "publishedAt": "2026-11-23T11:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005846654?sid=101"
     }
    ]
   },
@@ -267,49 +236,23 @@
    ]
   },
   {
-   "keyword": "지연수 일상 생활 힘들",
+   "keyword": "한성숙 총리 접견",
    "sources": [
     "nate"
    ],
-   "articles90": 3,
+   "articles90": 15,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-23T10:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'일라이와 이혼' 지연수, 결국 병원行…\"몸 쓰는 알바해서\" ('연수롭다'...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-23T11:20:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000785811"
-    },
-    {
-     "title": "'싱글맘' 지연수, 알바 뛰며 버티다 결국 병원行 \"몸 너무 많이 써\" [연...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-23T10:41:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003489613"
-    },
-    {
-     "title": "'모델 출신' 지연수 \"몸 쓰는 일로 돈 벌다 보니 통증 후유증.. 일상생활...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-23T10:35:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409316"
-    }
-   ]
-  },
-  {
-   "keyword": "한성숙 총리, 카타르 국무장관 접견",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 2,
    "firstArticleAt": "2026-11-23T10:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "몽골 외교장관 접견하는 한성숙 국무총리",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-23T11:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016459250?sid=100"
+    },
     {
      "title": "韓총리, 카타르·몽골 장관과 접견…에너지·핵심광물 등 협력 강화 논...",
      "press": "newsis.com",
@@ -317,16 +260,10 @@
      "link": "https://n.news.naver.com/mnews/article/003/0014340749?sid=100"
     },
     {
-     "title": "한성숙 장관 \"에너지 수급 협조에 감사\"",
+     "title": "한성숙 총리, 몽골 외교부 장관 접견",
      "press": "news1.kr",
-     "publishedAt": "2026-11-23T10:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009305825?sid=100"
-    },
-    {
-     "title": "한성숙 총리, 카타르 에너지 담당 국무장관 일행과 기념촬영",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T10:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009305826?sid=100"
+     "publishedAt": "2026-11-23T11:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009305839?sid=100"
     }
    ]
   }
@@ -334,9 +271,27 @@
  "hitRate": {
   "days": 7,
   "flagged": 1216,
-  "matched": 665,
-  "avgLeadMin": 588,
+  "matched": 666,
+  "avgLeadMin": 580,
   "recent": [
+   {
+    "keyword": "수능 부정행위 신고하면 최대 5억 지급",
+    "hitKeyword": "수능 부정행위 적발",
+    "hitAt": "2026-11-23T21:00:00+09:00",
+    "leadMin": 20
+   },
+   {
+    "keyword": "김원효 트젠바 방문 해명",
+    "hitKeyword": "김원효 바 논란 해명",
+    "hitAt": "2026-11-23T21:00:00+09:00",
+    "leadMin": 20
+   },
+   {
+    "keyword": "대리수능",
+    "hitKeyword": "드라마 대리수능",
+    "hitAt": "2026-11-23T21:00:00+09:00",
+    "leadMin": 20
+   },
    {
     "keyword": "음주운전 고경표 출석",
     "hitKeyword": "고경표 경찰 출석",
@@ -378,24 +333,6 @@
     "hitKeyword": "수원 수험생 수사 의뢰",
     "hitAt": "2026-11-23T20:00:00+09:00",
     "leadMin": 80
-   },
-   {
-    "keyword": "김원효 트젠바 방문 해명하러",
-    "hitKeyword": "김원효 바 논란 해명",
-    "hitAt": "2026-11-23T20:00:00+09:00",
-    "leadMin": 50
-   },
-   {
-    "keyword": "김원효 방문 이유 확인하러 갔다",
-    "hitKeyword": "김원효 바 논란 해명",
-    "hitAt": "2026-11-23T20:00:00+09:00",
-    "leadMin": 30
-   },
-   {
-    "keyword": "고경표 경찰 출석",
-    "hitKeyword": "고경표 경찰 조사",
-    "hitAt": "2026-11-23T20:00:00+09:00",
-    "leadMin": 20
    }
   ]
  }
