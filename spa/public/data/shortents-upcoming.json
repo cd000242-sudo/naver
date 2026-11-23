@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T05:06:52.684Z",
+ "builtAt": "2026-11-23T05:16:56.726Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,98 +11,130 @@
  "measured": 25,
  "candidates": [
   {
-   "keyword": "유족 경찰 출석",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 32,
-   "recent20": 3,
-   "press": 30,
-   "firstArticleAt": "2026-11-23T03:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘리트 만점자’ 故 이모 씨 유족, 경찰 출석",
-     "press": "donga.com",
-     "publishedAt": "2026-11-23T05:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764394?sid=102"
-    },
-    {
-     "title": "'리트 만점' 故 이진우 유족 경찰 출석… 증거물 확보될까",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-23T05:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967189?sid=102"
-    },
-    {
-     "title": "'리트 만점자' 이진우 사망 후 유족 경찰 출석",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-23T04:56:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283808"
-    }
-   ]
-  },
-  {
    "keyword": "코스피 급락 매도 사이드카",
    "sources": [
     "nate"
    ],
-   "articles90": 28,
-   "recent20": 8,
-   "press": 28,
-   "firstArticleAt": "2026-11-23T03:40:00.000Z",
+   "articles90": 32,
+   "recent20": 10,
+   "press": 32,
+   "firstArticleAt": "2026-11-23T03:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "코스피, 장중 4600선 붕괴…매도 사이드카 발동[장중시황]",
-     "press": "newsway.co.kr",
-     "publishedAt": "2026-11-23T05:04:00.000Z",
-     "link": "https://www.newsway.co.kr/news/view?ud=2026112313533071536"
+     "title": "코스피 급락에 프로그램 매도 일시 정지, 삼성전자·SK하이닉스도 하락...",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-23T05:16:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886890"
     },
     {
-     "title": "\"코스피 거품이 아닌 수급이 무너진 상태\"",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-23T05:02:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2022095"
+     "title": "코스피 4600선 붕괴에 사이드카까지…美 반도체 쇼크 직격탄",
+     "press": "weekly.chosun.com",
+     "publishedAt": "2026-11-23T05:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/053/0000063280?sid=101"
     },
     {
-     "title": "[포토] 코스피, 장중 4,600선도 붕괴...2거래일 연속 매도 사이드카",
-     "press": "biz.newdaily.co.kr",
-     "publishedAt": "2026-11-23T05:00:00.000Z",
-     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/23/2026112350230.html"
+     "title": "코스피 장중 5%대 급락…20일 이어 매도 사이드카",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-23T05:12:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4120206"
     }
    ]
   },
   {
-   "keyword": "생계급여 기준 확대",
+   "keyword": "유족 경찰 출석",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 23,
-   "recent20": 5,
-   "press": 22,
+   "articles90": 29,
+   "recent20": 6,
+   "press": 26,
+   "firstArticleAt": "2026-11-23T03:47:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이진우 유족 경찰 출석…사망 후에도 수사 계속하는 이유, 휴대전화·노...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-23T05:16:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283826"
+    },
+    {
+     "title": "고 이진우 씨 유족, 오늘 경찰 출석…증거 제출 협조 논의",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-23T05:14:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4120211"
+    },
+    {
+     "title": "고 이진우 씨 사건, 유족 증거 제출로 수사 급물살? 네티즌들 주목",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-23T05:14:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886879"
+    }
+   ]
+  },
+  {
+   "keyword": "생계급여 기준 35%",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 25,
+   "recent20": 7,
+   "press": 24,
    "firstArticleAt": "2026-11-23T04:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "생계급여 문턱 낮춘다…긴급 위기가구에 30만원 즉시지원(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-23T05:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016458326?sid=102"
+    },
+    {
+     "title": "생계급여 문턱 낮춘다…위기가구에 30만 원 당일 긴급지원",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-23T05:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000928994?sid=101"
+    },
+    {
      "title": "생계급여 2030년 중위소득의 35%로…위기가구 30만원 우선 지급",
      "press": "news1.kr",
      "publishedAt": "2026-11-23T05:03:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009305005?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "구혜리 3월 결혼",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 4,
+   "press": 7,
+   "firstArticleAt": "2026-11-23T04:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "커플 연기하더니 실제였다…‘급식왕’ 박강균♥구혜리, 내년 3월 결혼",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-23T05:14:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003543095"
     },
     {
-     "title": "생계급여 지원 대상자 확대…기초생활보장 문턱 낮춘다",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-23T05:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001273623?sid=102"
+     "title": "개그맨 부부 또 나왔다..'오징어커플' 박강균♥︎구혜리 내년 3월 결혼 ...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-23T05:14:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005644204"
     },
     {
-     "title": "생계급여 기준 2030년까지 중위소득 35%로 상향…장애인 가구 부양의무...",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-23T05:02:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2022149"
+     "title": "박강균♥구혜리, 5년 열애 끝 결혼…'급식왕' 커플이 진짜 부부로",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-23T05:08:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=784096"
     }
    ]
   },
@@ -112,7 +144,7 @@
     "daum"
    ],
    "articles90": 7,
-   "recent20": 4,
+   "recent20": 2,
    "press": 7,
    "firstArticleAt": "2026-11-23T04:02:00.000Z",
    "exclusive": false,
@@ -139,17 +171,55 @@
    ]
   },
   {
+   "keyword": "선관위 직원 영장심사",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 7,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-23T03:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "특검 출범 후 첫 승부수, 선관위 직원 8명 구속 결정의 날",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-23T05:16:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=886884"
+    },
+    {
+     "title": "선관위 직원 8명 구속 심사...'투표록 조작' 등 혐의",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-23T05:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002436778?sid=102"
+    },
+    {
+     "title": "선관위 직원 8명 구속 기로…지방선거 5개월여 만",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-23T05:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012299223?sid=102"
+    }
+   ]
+  },
+  {
    "keyword": "국힘, 헌재 특검법 심판 청구",
    "sources": [
     "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 0,
+   "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-23T03:37:00.000Z",
+   "firstArticleAt": "2026-11-23T03:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "국힘, 與 조작기소 특검법 처리 헌재 권한쟁의심판 청구",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-23T05:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006414158?sid=100"
+    },
     {
      "title": "‘조작기소 특검법’ 헌재로 가져간 국힘…거리에서도 반대 여론전",
      "press": "mk.co.kr",
@@ -161,12 +231,6 @@
      "press": "imnews.imbc.com",
      "publishedAt": "2026-11-23T04:31:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/214/0001537399?sid=100"
-    },
-    {
-     "title": "국민의힘 “조작기소 특검법은 무효”…조정식·서영교 권한쟁의심판 청...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-23T04:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003702134?sid=100"
     }
    ]
   },
@@ -203,34 +267,66 @@
    ]
   },
   {
-   "keyword": "구혜리 3월 결혼",
+   "keyword": "연평도 전투영웅 추모",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
-   "recent20": 2,
+   "articles90": 17,
+   "recent20": 3,
    "press": 4,
-   "firstArticleAt": "2026-11-23T04:06:00.000Z",
+   "firstArticleAt": "2026-11-23T04:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "커플 연기 뒤엔 5년 비밀연애가…'오징어커플' 박강균♥구혜리, 실제 결...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-23T04:58:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004468862"
+     "title": "해병대, 연평도 포격전 16주년 전승기념식… \"준4군체제로 국민 신뢰에...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-23T05:06:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261123000770"
     },
     {
-     "title": "연예계 결혼 소식 또 터졌다…코미디언 박강균♥구혜리, 내년 3월 백년가...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-23T04:54:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000785727"
+     "title": "연평도 포격전 16주년 전승 기념식‥해병대 \"준4군 체제 차질 없이 추진...",
+     "press": "imnews.imbc.com",
+     "publishedAt": "2026-11-23T05:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/214/0001537409?sid=100"
     },
     {
-     "title": "'오징어커플' 박강균♥구혜리, 커플 연기 실제였다…5년 열애 끝 3월 결...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-23T04:17:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002083187"
+     "title": "연평도 포격전 16주년 전승기념식…\"해병대 준4군체제 차질없이\"",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-23T05:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005846447?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "합동 청사 방호훈련",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-23T03:49:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[포토] 서울서부지방법원-서울마포경찰서 합동 청사 방호훈련",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-23T05:08:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/23/2026112350232.html"
+    },
+    {
+     "title": "서부지법, 마포경찰서와 합동으로 법원 청사 방호 훈련 실시 [뉴시스Pic...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-23T04:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014339844?sid=102"
+    },
+    {
+     "title": "[뉴스1 PICK] 1·19 폭동 재현을 막아라…서부지법 통합 방호 훈련",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T04:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009304951?sid=102"
     }
    ]
   },
@@ -239,10 +335,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T03:44:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-23T04:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -265,109 +361,13 @@
      "link": "https://www.bizwork.co.kr/news/articleView.html?idxno=421067"
     }
    ]
-  },
-  {
-   "keyword": "서부지법 청사 방호훈련",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T03:49:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "서부지법, 마포경찰서와 합동으로 법원 청사 방호 훈련 실시 [뉴시스Pic...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-23T04:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014339844?sid=102"
-    },
-    {
-     "title": "[뉴스1 PICK] 1·19 폭동 재현을 막아라…서부지법 통합 방호 훈련",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T04:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009304951?sid=102"
-    },
-    {
-     "title": "서부지법 폭동 사태 재현…청사 방호훈련 실시 [현장 화보]",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-23T04:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484391?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "선관위 직원 영장심사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T03:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'투표율 허위입력' 선관위 직원 8명 구속기로",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-23T04:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928983?sid=102"
-    },
-    {
-     "title": "'투표율 허위 입력·투표록 위변조' 선관위 직원 8명 구속심사",
-     "press": "joongangenews.com",
-     "publishedAt": "2026-11-23T04:28:00.000Z",
-     "link": "https://www.joongangenews.com/news/articleView.html?idxno=565835"
-    },
-    {
-     "title": "선관위 직원 구속기로…김건희 '관저이전' 첫 재판",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-23T04:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000928949?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "연평도 전투영웅 추모",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 15,
-   "recent20": 1,
-   "press": 2,
-   "firstArticleAt": "2026-11-23T04:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "연평도 포격전 16주년 전승기념식…\"해병대 준4군체제 차질없이\"",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-23T05:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005846447?sid=100"
-    },
-    {
-     "title": "연평도 포격전 16주기",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T04:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009304906?sid=102"
-    },
-    {
-     "title": "고인 추모하는 부모",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T04:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009304897?sid=102"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1164,
-  "matched": 659,
-  "avgLeadMin": 606,
+  "flagged": 1163,
+  "matched": 657,
+  "avgLeadMin": 608,
   "recent": [
    {
     "keyword": "노시환",
