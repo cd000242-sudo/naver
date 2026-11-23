@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-23T05:57:10.960Z",
+ "builtAt": "2026-11-23T06:07:14.160Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "카카오",
@@ -16,30 +16,30 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 37,
-   "recent20": 12,
-   "press": 35,
-   "firstArticleAt": "2026-11-23T04:49:00.000Z",
-   "exclusive": false,
+   "articles90": 42,
+   "recent20": 11,
+   "press": 39,
+   "firstArticleAt": "2026-11-23T04:56:00.000Z",
+   "exclusive": true,
    "capped": true,
    "samples": [
     {
-     "title": "카카오페이·토스, 비대면으로 '주민등록증 사진' 검증…12월 도입",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-23T05:56:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=507040"
+     "title": "[단독] 카카오표 모두의 AI, '톡톡'으로 선보일까",
+     "press": "zdnet.co.kr",
+     "publishedAt": "2026-11-23T06:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/092/0002446490?sid=105"
     },
     {
-     "title": "MBK “고려아연 돈은 카카오로, 카카오 돈은 최윤범 측으로”",
-     "press": "newstopkorea.com",
-     "publishedAt": "2026-11-23T05:54:00.000Z",
-     "link": "https://www.newstopkorea.com/ko-kr/articles/49244"
+     "title": "카카오페이지, 12월 '초신작 프로젝트' 웹소설 2편 공개",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-23T06:02:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4120247"
     },
     {
-     "title": "카카오페이·토스, 23일부터 주민등록증 사진도 진위 확인",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-23T05:52:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=409865"
+     "title": "카카오 반대에 모빌리티 美 상장 불발하자 TPG 국제중재…청구 가치 1.5...",
+     "press": "socialvalue.kr",
+     "publishedAt": "2026-11-23T06:02:00.000Z",
+     "link": "https://www.socialvalue.kr/news/view/1065590791227209"
     }
    ]
   },
@@ -48,62 +48,94 @@
    "sources": [
     "daum"
    ],
-   "articles90": 33,
-   "recent20": 8,
-   "press": 28,
-   "firstArticleAt": "2026-11-23T04:29:00.000Z",
+   "articles90": 38,
+   "recent20": 12,
+   "press": 33,
+   "firstArticleAt": "2026-11-23T04:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "신세계百 또 폭발물 협박…경찰 전국 점포 수색 후 정상 영업(종합)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-23T05:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014340069?sid=101"
+     "title": "\"5천만 원 안 주면 신세계 백화점 폭파\" 협박 팩스에 경찰 긴급 수색",
+     "press": "news.lghellovision.net",
+     "publishedAt": "2026-11-23T06:06:00.000Z",
+     "link": "http://news.lghellovision.net/news/articleView.html?idxno=563366"
     },
     {
-     "title": "신세계백화점 폭발물 설치 '협박'… 전국 점포 긴급 점검 후 정상영업",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-23T05:54:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3451284"
+     "title": "신세계백화점 폭파물 협박 팩스 접수…부산 센텀시티점 폭발물 긴급 수...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-23T06:04:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=629852"
     },
     {
-     "title": "\"신세계백화점 폭발물 설치\"…광주점 수색했지만 없었다(종합)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-23T05:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014340064?sid=102"
+     "title": "신세계百 폭발물 설치 협박…경찰, 전국 13개 점포 수색",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-23T06:00:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=565873"
     }
    ]
   },
   {
-   "keyword": "코스피 5% 급락 매도",
+   "keyword": "생계급여 기준 35% 확대",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 24,
-   "recent20": 3,
-   "press": 22,
-   "firstArticleAt": "2026-11-23T04:34:00.000Z",
+   "articles90": 30,
+   "recent20": 7,
+   "press": 29,
+   "firstArticleAt": "2026-11-23T04:41:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[오후장 체크포인트] 코스피, 연초 수준으로 '뚝' 정부 대책에도 '속수...",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-23T05:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000545316?sid=101"
+     "title": "생계급여 기준 상향…1인 87만원·4인 221만원까지, 2030년 35% 확대",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-23T06:06:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283862"
     },
     {
-     "title": "코스피 연초로 회귀…정부, '자사주 매입 빗장' 푼다",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-23T05:42:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1732685"
+     "title": "생계급여 기준 낮춘다…2030년까지 중위소득 35%로 확대",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-23T06:02:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086655"
     },
     {
-     "title": "장중 4,600선도 무너졌다…2거래일 연속 '매도 사이드카'",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-23T05:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979454?sid=101"
+     "title": "생계급여 기준 35%로 '상향 확대'…'위기가구' 30만원 당일 지원",
+     "press": "youthdaily.co.kr",
+     "publishedAt": "2026-11-23T05:58:00.000Z",
+     "link": "https://www.youthdaily.co.kr/news/article.html?no=230211"
+    }
+   ]
+  },
+  {
+   "keyword": "삼성증권 개인정보 유출",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 30,
+   "recent20": 3,
+   "press": 28,
+   "firstArticleAt": "2026-11-23T04:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한전 이어 증권·보험사까지… 개인정보 유출 잇따라",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-23T06:06:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3451310"
+    },
+    {
+     "title": "공기업∙금융사 해킹 당했다…한전 152만명∙삼성증권 8천명 개인정보 ...",
+     "press": "it-b.co.kr",
+     "publishedAt": "2026-11-23T06:00:00.000Z",
+     "link": "https://www.it-b.co.kr/news/articleView.html?idxno=90814"
+    },
+    {
+     "title": "삼성증권도 해킹 피해...고객 8241명 개인정보 유출, 금융권 보안 비상",
+     "press": "abcn.kr",
+     "publishedAt": "2026-11-23T06:00:00.000Z",
+     "link": "https://www.abcn.kr/news/articleView.html?idxno=94898"
     }
    ]
   },
@@ -112,94 +144,158 @@
    "sources": [
     "google"
    ],
-   "articles90": 19,
-   "recent20": 16,
-   "press": 18,
-   "firstArticleAt": "2026-11-23T05:36:00.000Z",
+   "articles90": 45,
+   "recent20": 45,
+   "press": 22,
+   "firstArticleAt": "2026-11-23T05:57:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "경찰, '간호사 태움'에 '상해죄' 첫 적용…\"우울증 유발\"",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-23T05:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979461?sid=102"
+     "title": "충남 이륜차 사망자 3명 중 2명 고령자… 경찰 예방책 추진",
+     "press": "jbnews.com",
+     "publishedAt": "2026-11-23T06:06:00.000Z",
+     "link": "https://www.jbnews.com/news/articleView.html?idxno=1516681"
     },
     {
-     "title": "신세계百 또 폭발물 협박…경찰 전국 점포 수색 후 정상 영업(종합)",
+     "title": "\"5천만 원 안 주면 신세계 백화점 폭파\" 협박 팩스에 경찰 긴급 수색",
+     "press": "news.lghellovision.net",
+     "publishedAt": "2026-11-23T06:06:00.000Z",
+     "link": "http://news.lghellovision.net/news/articleView.html?idxno=563366"
+    },
+    {
+     "title": "아들 원룸서 리얼돌 폐기…광주경찰, 장윤기 父 중징계(종합)",
      "press": "newsis.com",
-     "publishedAt": "2026-11-23T05:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014340069?sid=101"
-    },
-    {
-     "title": "경찰 수사 인력 '돌려막기' 한계…실질적 증원·전문성 강화해야",
-     "press": "ccdn.co.kr",
-     "publishedAt": "2026-11-23T05:48:00.000Z",
-     "link": "https://www.ccdn.co.kr/news/articleView.html?idxno=1112864"
+     "publishedAt": "2026-11-23T06:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014340125?sid=102"
     }
    ]
   },
   {
-   "keyword": "삼성증권 해킹 8241명 유출",
+   "keyword": "김정관 사업재편 논의",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 13,
+   "articles90": 17,
    "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-23T04:50:00.000Z",
+   "press": 16,
+   "firstArticleAt": "2026-11-23T05:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼성증권 고객정보 8241명 유출…VOC 첨부파일 외부 노출",
-     "press": "lcnews.co.kr",
-     "publishedAt": "2026-11-23T05:46:00.000Z",
-     "link": "https://www.lcnews.co.kr/news/articleView.html?idxno=211853"
+     "title": "석화업계 사업재편 촉구한 김정관 산업장관 \"연내 논의 매듭 끝내야\"[한...",
+     "press": "newsway.co.kr",
+     "publishedAt": "2026-11-23T06:06:00.000Z",
+     "link": "https://www.newsway.co.kr/news/view?ud=2026112314212942629"
     },
     {
-     "title": "삼성증권 홈페이지 해킹…고객 8241명 정보 유출",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-23T05:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009305172?sid=101"
+     "title": "'사업재편' 논의 위해 한자리 모인 김정관 산업장관·석화업계 대표들[...",
+     "press": "newsway.co.kr",
+     "publishedAt": "2026-11-23T05:58:00.000Z",
+     "link": "https://www.newsway.co.kr/news/view?ud=2026112314465827052"
     },
     {
-     "title": "삼성증권 해킹 8241명 개인정보 유출",
-     "press": "thereport.co.kr",
-     "publishedAt": "2026-11-23T05:36:00.000Z",
-     "link": "https://www.thereport.co.kr/news/articleView.html?idxno=93629"
+     "title": "김정관 \"석화 사업재편 골든타임 놓쳐선 안 돼…연내 논의 마무리해야\"",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-23T05:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005846464?sid=101"
     }
    ]
   },
   {
-   "keyword": "선관위 직원 영장심사",
+   "keyword": "민형배 시장 의대 선정 사과",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 15,
+   "recent20": 5,
+   "press": 15,
+   "firstArticleAt": "2026-11-23T04:41:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "의대 갈등에 고개 숙인 민형배 시장 “닷새의 한계 인정…검증하겠다”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-23T06:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004685159?sid=102"
+    },
+    {
+     "title": "민형배 \"소통 부족\"…의대 선정 공정성 논란 인정·공식 사과",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-23T06:03:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261123000865"
+    },
+    {
+     "title": "민형배, 서남권 의료체계 강화…500병상급 국가병원 추진",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-23T05:56:00.000Z",
+     "link": "https://www.viva100.com/article/20261123500911"
+    }
+   ]
+  },
+  {
+   "keyword": "연평도 포격전 추모",
    "sources": [
     "signal.bz"
    ],
    "articles90": 10,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-23T04:28:00.000Z",
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-23T04:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'투표율 허위입력' 혐의 선관위직원 8명 구속심사",
-     "press": "kado.net",
-     "publishedAt": "2026-11-23T05:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000212840?sid=102"
+     "title": "[포토타임] “영웅들의 고귀한 희생 잊지 않겠습니다”... 연평도 포격전...",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-23T05:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003567211?sid=102"
     },
     {
-     "title": "선관위 직원 8명 영장심사…특검, 출범 77일 만에 첫 신병확보 시도",
-     "press": "biz.chosun.com",
+     "title": "연평도 포격전 16주년 전승기념식…\"해병대 준4군체제 차질 없이\"",
+     "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-23T05:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001206687?sid=102"
+     "link": "https://n.news.naver.com/mnews/article/055/0001405106?sid=100"
     },
     {
-     "title": "선관위 직원 8명 구속 갈림길...'윗선 공모' 규명 핵심",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-23T05:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002436803?sid=102"
+     "title": "연평도 포격전 16주년 기념식…“해병대 준4군체제 차질 없이”",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-23T05:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000368401?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "에이티즈 빌보드 200 1위",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 10,
+   "recent20": 3,
+   "press": 9,
+   "firstArticleAt": "2026-11-23T04:40:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "에이티즈, '빌보드 200' 4번째 1위…세계 최대 음악시장 또 정복 [공식]",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-23T06:05:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002083206"
+    },
+    {
+     "title": "에이티즈, 빌보드 200 통산 4번째 1위…\"벅차고 감사, 초심 잃지 않겠다...",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-23T05:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000652828?sid=103"
+    },
+    {
+     "title": "‘BAD 신드롬’ 에이티즈, 빌보드도 집어삼켰다…통산 4번째 1위 [돌파구...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-23T05:51:00.000Z",
+     "link": "https://m.entertain.naver.com/article/009/0005767636"
     }
    ]
   },
@@ -208,10 +304,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 21,
+   "articles90": 20,
    "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-23T04:30:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-23T04:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -228,10 +324,10 @@
      "link": "https://n.news.naver.com/mnews/article/421/0009305184?sid=102"
     },
     {
-     "title": "정부, 제4차 기초생활보장 종합계획 발표",
+     "title": "제4차 기초생활보장 종합계획 브리핑하는 정은경 보건복지부 장관",
      "press": "newspim.com",
      "publishedAt": "2026-11-23T05:26:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261123000796"
+     "link": "https://www.newspim.com/news/view/20261123000800"
     }
    ]
   },
@@ -242,11 +338,11 @@
     "google"
    ],
    "articles90": 7,
-   "recent20": 2,
+   "recent20": 1,
    "press": 7,
    "firstArticleAt": "2026-11-23T05:15:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
      "title": "마산회원구, 석전동 갈뫼산 입구 공영주차장 조성, 3전4기 끝 '결실'",
@@ -269,49 +365,23 @@
    ]
   },
   {
-   "keyword": "에이티즈 빌보드 200 1위",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-23T04:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘BAD 신드롬’ 에이티즈, 빌보드도 집어삼켰다…통산 4번째 1위 [돌파구...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-23T05:51:00.000Z",
-     "link": "https://m.entertain.naver.com/article/009/0005767636"
-    },
-    {
-     "title": "에이티즈, 빌보드 200 통산 4번째 1위… 10개 앨범 연속 TOP 10",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-23T05:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005767629?sid=103"
-    },
-    {
-     "title": "네 번째 '빌보드 200' 정상…에이티즈가 써 내려가는 성장의 역사 [ST이...",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-23T05:22:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110044886192"
-    }
-   ]
-  },
-  {
    "keyword": "배현성, 차강윤, 박윤호 대리수능",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 14,
+   "articles90": 10,
    "recent20": 2,
    "press": 6,
-   "firstArticleAt": "2026-11-23T04:28:00.000Z",
+   "firstArticleAt": "2026-11-23T04:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "남자판 '피라미드 게임'일까, 제2의 '스카이캐슬'일까…'대리수능' 감독...",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-23T06:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000785743"
+    },
     {
      "title": "‘대리수능’ 배현성vs차강윤 그리고 박윤호…위태로운 거래 시작된다",
      "press": "isplus.com",
@@ -323,12 +393,38 @@
      "press": "enews.imbc.com",
      "publishedAt": "2026-11-23T05:40:00.000Z",
      "link": "https://m.entertain.naver.com/article/408/0000328852"
+    }
+   ]
+  },
+  {
+   "keyword": "정은경 장관 계획 발표",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 17,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-23T04:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정은경 장관, 기초생활보장 종합계획 발표",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-23T05:49:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009305185?sid=102"
     },
     {
-     "title": "[영상] 배현성-차강윤-박윤호, 수능 당시 떠올리며 \"수험생들 노력 잘 알...",
-     "press": "enews.imbc.com",
-     "publishedAt": "2026-11-23T05:33:00.000Z",
-     "link": "https://m.entertain.naver.com/article/408/0000328850"
+     "title": "정부, 제4차 기초생활보장 종합계획 발표",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-23T05:26:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261123000796"
+    },
+    {
+     "title": "제4차 기초생활보장 종합계획 발표하는 정은경 장관",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-23T05:26:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261123000797"
     }
    ]
   },
@@ -337,10 +433,10 @@
    "sources": [
     "google"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T04:34:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-23T04:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -363,110 +459,38 @@
      "link": "https://www.smarttoday.co.kr/ko-kr/articles/113972"
     }
    ]
-  },
-  {
-   "keyword": "합동 청사 방호훈련",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-23T04:45:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "서부지법 합동 청사 방호훈련, 왜 실시했나…윤석열 구속 당시 난입 사...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-23T05:20:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16283832"
-    },
-    {
-     "title": "[포토] 서울서부지방법원-서울마포경찰서 합동 청사 방호훈련",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-23T05:08:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/23/2026112350232.html"
-    },
-    {
-     "title": "서부지법, 마포경찰서와 합동으로 법원 청사 방호 훈련 실시 [뉴시스Pic...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-23T04:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014339844?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "주민등록증 진위확인",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 2,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T05:13:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "카카오페이·토스, 비대면으로 '주민등록증 사진' 검증…12월 도입",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-23T05:56:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=507040"
-    },
-    {
-     "title": "카카오페이·토스, 23일부터 주민등록증 사진도 진위 확인",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-23T05:52:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=409865"
-    },
-    {
-     "title": "카카오페이·토스도 주민등록증 진위확인…위·변조 걸러낸다",
-     "press": "korea.kr",
-     "publishedAt": "2026-11-23T05:13:00.000Z",
-     "link": "https://www.korea.kr/news/policyNewsView.do?newsId=148976306&call_from=naver_news"
-    }
-   ]
-  },
-  {
-   "keyword": "하정우 차정원 청첩장",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-23T05:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "6년 연애 아니었나…하정우♥차정원 청첩장 보니 \"열번째 겨울\" [액's 이...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-23T05:56:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002083203"
-    },
-    {
-     "title": "하정우♥차정원, 6년 열애라더니…청접장엔 \"열 번째 함께 맞는 겨울\"[S...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-23T05:29:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004468872"
-    },
-    {
-     "title": "\"열 번째 겨울, 마침내 평생\"…하정우♥차정원, 화려함 뺀 청첩장 공개...",
-     "press": "tvreport.co.kr",
-     "publishedAt": "2026-11-23T05:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/213/0001409266"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1170,
-  "matched": 657,
-  "avgLeadMin": 600,
+  "flagged": 1171,
+  "matched": 658,
+  "avgLeadMin": 591,
   "recent": [
+   {
+    "keyword": "11월 수출 역대 최대",
+    "hitKeyword": "스쿠벌 역대 최대 계약",
+    "hitAt": "2026-11-23T15:00:00+09:00",
+    "leadMin": 328
+   },
+   {
+    "keyword": "코스피 매도 사이드카",
+    "hitKeyword": "코스피 4600선",
+    "hitAt": "2026-11-23T15:00:00+09:00",
+    "leadMin": 117
+   },
+   {
+    "keyword": "코스피 급락 매도 사이드카",
+    "hitKeyword": "코스피 4600선",
+    "hitAt": "2026-11-23T15:00:00+09:00",
+    "leadMin": 53
+   },
+   {
+    "keyword": "코스피 5% 급락 매도",
+    "hitKeyword": "코스피 4600선",
+    "hitAt": "2026-11-23T15:00:00+09:00",
+    "leadMin": 13
+   },
    {
     "keyword": "조권 구용규 루머 의식",
     "hitKeyword": "조권 구용규 루머",
@@ -502,30 +526,6 @@
     "hitKeyword": "증안펀드 가동 검토",
     "hitAt": "2026-11-23T14:00:00+09:00",
     "leadMin": 117
-   },
-   {
-    "keyword": "이형일 부총리 증안펀드",
-    "hitKeyword": "증안펀드 가동 검토",
-    "hitAt": "2026-11-23T14:00:00+09:00",
-    "leadMin": 77
-   },
-   {
-    "keyword": "이진우 유족 경찰 출석",
-    "hitKeyword": "이진우 만점 의혹 수사",
-    "hitAt": "2026-11-23T14:00:00+09:00",
-    "leadMin": 23
-   },
-   {
-    "keyword": "장윤기 부친 중징계",
-    "hitKeyword": "장윤기 부친 경찰 중징계",
-    "hitAt": "2026-11-23T13:00:00+09:00",
-    "leadMin": 27
-   },
-   {
-    "keyword": "100일의 거짓말",
-    "hitKeyword": "100일의 거짓말 정체 공개",
-    "hitAt": "2026-11-23T13:00:00+09:00",
-    "leadMin": 17
    }
   ]
  }
