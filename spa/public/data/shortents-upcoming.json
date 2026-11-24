@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T01:25:32.928Z",
+ "builtAt": "2026-11-24T01:35:36.241Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,144 +8,179 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 20,
  "candidates": [
   {
-   "keyword": "삼성전자 임원 131명 승진",
+   "keyword": "젠슨 황 CEO 복귀 소식",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 100,
-   "recent20": 22,
-   "press": 92,
-   "firstArticleAt": "2026-11-24T00:22:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "삼성전자 여성 임원 승진자 11명 ‘역대 최다’… 반도체 핵심 직무서 ...",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-24T01:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001206889?sid=105"
-    },
-    {
-     "title": "삼성전자, 임원 승진 19% 감소···HBM4·로봇·AI 인재 전진 배치",
-     "press": "enewstoday.co.kr",
-     "publishedAt": "2026-11-24T01:23:00.000Z",
-     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2496223"
-    },
-    {
-     "title": "삼성전자, 사상최대 실적에도 임원승진 전년 대비 30명 줄어",
-     "press": "dailybrief.co.kr",
-     "publishedAt": "2026-11-24T01:21:00.000Z",
-     "link": "https://www.dailybrief.co.kr/news/articleView.html?idxno=7397"
-    }
-   ]
-  },
-  {
-   "keyword": "사이드카",
-   "sources": [
-    "google"
-   ],
-   "articles90": 51,
-   "recent20": 12,
+   "articles90": 66,
+   "recent20": 35,
    "press": 48,
-   "firstArticleAt": "2026-11-24T00:38:00.000Z",
+   "firstArticleAt": "2026-11-24T01:00:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "한국거래소, 코스닥 매수 사이드카 발동...올해 22번째",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-24T01:24:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=507403"
+     "title": "[특징주] 삼전닉스 동반 폭등…젠슨 황 복귀에 코스피 5천선 안착 시도",
+     "press": "namdonews.com",
+     "publishedAt": "2026-11-24T01:34:00.000Z",
+     "link": "https://www.namdonews.com/news/articleView.html?idxno=930239"
     },
     {
-     "title": "코스피 6%대 급반등…코스피·코스닥 매수 사이드카",
-     "press": "whitepaper.co.kr",
-     "publishedAt": "2026-11-24T01:22:00.000Z",
-     "link": "http://www.whitepaper.co.kr/news/articleView.html?idxno=269084"
+     "title": "'왕의 귀환' 젠슨 황…엔비디아 31.48% 폭등·코스피 5000선 탈환",
+     "press": "mstoday.co.kr",
+     "publishedAt": "2026-11-24T01:34:00.000Z",
+     "link": "https://www.mstoday.co.kr/news/articleView.html?idxno=200571"
     },
     {
-     "title": "코스피, 젠슨 황 복귀에 장중 7%대 급등…양 시장 매수 사이드카 [fn오전...",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-24T01:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005608763?sid=101"
+     "title": "코스피, 젠슨 황 복귀에 5000선 회복…삼전·닉스 8~10% 급등",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-24T01:32:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=202611241025515307923c501012_1"
     }
    ]
   },
   {
-   "keyword": "러시아 군용기 울릉도 접근",
+   "keyword": "이용철 청문회 공소취소",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 46,
-   "recent20": 4,
-   "press": 42,
-   "firstArticleAt": "2026-11-23T23:56:00.000Z",
+   "articles90": 35,
+   "recent20": 12,
+   "press": 29,
+   "firstArticleAt": "2026-11-24T00:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "러시아 군용기 울릉도 인근 접근에 경계경보…경북도 재난문자 오발송...",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-24T01:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002467246?sid=102"
+     "title": "이용철 법무장관 후보자 “공소청 공정한 기소” 강조…'李 공소취소' ...",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-24T01:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005846922?sid=102"
     },
     {
-     "title": "\"북한 항공기 접근\" 잘못 보낸 재난문자…울릉도 '발칵'",
-     "press": "wowtv.co.kr",
+     "title": "한병도 \"적재적소 개각 환영…野, 청문회 정쟁의 장 활용 안 돼\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-24T01:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005445473?sid=100"
+    },
+    {
+     "title": "이용철 법무장관 청문회 시작...李공소취소·조희대 탄핵 등 입장 밝히...",
+     "press": "pennmike.com",
+     "publishedAt": "2026-11-24T01:28:00.000Z",
+     "link": "https://www.pennmike.com/news/articleView.html?idxno=132602"
+    }
+   ]
+  },
+  {
+   "keyword": "서울시 비상수송대책",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 28,
+   "recent20": 7,
+   "press": 27,
+   "firstArticleAt": "2026-11-24T00:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "서울시, 지하철 파업에 '버스 증편' 비상수송대책 마련",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-24T01:30:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544774"
+    },
+    {
+     "title": "비상열차 편성·버스 배차 확대…서울시, 지하철 파업 대비 비상수송대...",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-24T01:30:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611240059"
+    },
+    {
+     "title": "서울시, 25일 지하철 파업 대비 비상수송대책 추진",
+     "press": "news2day.co.kr",
      "publishedAt": "2026-11-24T01:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001273736?sid=102"
-    },
-    {
-     "title": "러 군용기 울릉 근접에 경계경보",
-     "press": "newsgn.com",
-     "publishedAt": "2026-11-24T01:08:00.000Z",
-     "link": "https://www.newsgn.com/news/articleView.html?idxno=587516"
+     "link": "https://www.news2day.co.kr/article/20261124500099"
     }
    ]
   },
   {
    "keyword": "김민석 취임 100일, 당청 안정 필요",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 22,
-   "recent20": 2,
-   "press": 20,
-   "firstArticleAt": "2026-11-24T00:03:00.000Z",
+   "articles90": 25,
+   "recent20": 7,
+   "press": 24,
+   "firstArticleAt": "2026-11-24T00:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "민주 김민석 대표 취임 100일…\"당청 안정 성과, 체감 민생 주력\"",
-     "press": "goodnews1.com",
-     "publishedAt": "2026-11-24T01:24:00.000Z",
-     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466573"
+     "title": "취임 100일 맞은 김민석 \"당청 관계 안정…당내 결속과 체감 민생 주력...",
+     "press": "hg-times.com",
+     "publishedAt": "2026-11-24T01:32:00.000Z",
+     "link": "https://www.hg-times.com/news/articleView.html?idxno=307285"
     },
     {
-     "title": "'취임 100일' 맞은 김민석 \"주요 성과는 당청 관계 안정… 당 안정화는 ...",
+     "title": "김민석 \"100일, 가장 만만치 않았던 기간\"",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-24T01:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005357483?sid=100"
+    },
+    {
+     "title": "'취임 100일' 맞은 김민석, 당청 관계 안정화 평가... \"당내 더 안정돼야...",
+     "press": "lawissue.co.kr",
+     "publishedAt": "2026-11-24T01:30:00.000Z",
+     "link": "https://www.lawissue.co.kr/view.php?ud=20261124102721324b3279dfb36_12"
+    }
+   ]
+  },
+  {
+   "keyword": "원내대책회의 정점식 원내대표",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 45,
+   "recent20": 6,
+   "press": 19,
+   "firstArticleAt": "2026-11-24T00:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정점식 \"이용철, 성남 카르텔 출신 李 탈옥 도우미… 장관 함량 미달\"",
      "press": "newscj.com",
-     "publishedAt": "2026-11-24T01:18:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3451512"
+     "publishedAt": "2026-11-24T01:34:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3451519"
     },
     {
-     "title": "박선원 \"김민석 경고 수용…金 100일 평가? 노력은 150점\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-24T01:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004213104?sid=100"
+     "title": "정점식 \"국민연금 증시 폭락 가담…'이재명 버블 특검' 추진\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-24T01:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001405349?sid=100"
+    },
+    {
+     "title": "정점식 \"성남 카르텔 일원인 이용철 후보자, 대통령 탈옥 도우미\"",
+     "press": "mediapen.com",
+     "publishedAt": "2026-11-24T01:24:00.000Z",
+     "link": "https://www.mediapen.com/news/view/1139541"
     }
    ]
   },
   {
    "keyword": "현혹 내년 1월 공개",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 18,
-   "recent20": 2,
+   "recent20": 0,
    "press": 18,
    "firstArticleAt": "2026-11-24T00:10:00.000Z",
    "exclusive": true,
@@ -172,195 +207,99 @@
    ]
   },
   {
-   "keyword": "원내대책회의 정점식 원내대표",
+   "keyword": "조규성 자책골 유도",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 43,
-   "recent20": 5,
-   "press": 17,
-   "firstArticleAt": "2026-11-24T00:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "정점식 \"성남 카르텔 일원인 이용철 후보자, 대통령 탈옥 도우미\"",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-24T01:24:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1139541"
-    },
-    {
-     "title": "정점식 \"이용철, 공소취소 포석…'대통령 탈옥 도우미'\"",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-24T01:22:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544771"
-    },
-    {
-     "title": "정점식 “법무부 장관은 대통령의 탈옥 도우미…본인이 대장동 카르텔 ...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-24T01:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005768043?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "조규성 시즌 6호 골!",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 12,
-   "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-23T23:58:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'교체 투입' 조규성, 한 달 만에 시즌 6호골…미트윌란은 15경기 무패 행...",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-24T01:00:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110055726327"
-    },
-    {
-     "title": "조규성, 왼발로 시즌 6호 골…팀은 선두 탈환",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-24T00:59:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/448/0000653001"
-    },
-    {
-     "title": "조규성, 시즌 6호 골 폭발",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-24T00:56:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611240159"
-    }
-   ]
-  },
-  {
-   "keyword": "축구",
-   "sources": [
-    "signal.bz"
-   ],
    "articles90": 10,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-24T00:00:00.000Z",
+   "recent20": 4,
+   "press": 10,
+   "firstArticleAt": "2026-11-24T00:12:00.000Z",
    "exclusive": false,
-   "capped": true,
+   "capped": false,
    "samples": [
     {
-     "title": "감사원, 시민구단 실지감사 착수…프로축구연맹 ‘운영 부실’ 사과",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-24T01:14:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/666/0000133493"
+     "title": "'코리안듀오'가 해냈다! 조규성 교체 투입 10분 만에 선제골→홍현석 자...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-24T01:33:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/117/0004127571"
     },
     {
-     "title": "프로축구선수협 \"연맹 쇄신안, 선수에 공금 횡령 책임 돌려\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-24T01:08:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/052/0002437180"
+     "title": "'코리안 듀오' 맹활약! 조규성, 5경기 만에 시즌 6호 골→홍현석은 자책...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-24T01:32:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/311/0002083396"
     },
     {
-     "title": "\"일본 축구 수준 높아져… 감바전처럼 포항다운 축구해야\" 조상혁의 교...",
+     "title": "'한국인이 다했다' 조규성 시원한 결승골 작렬! 홍현석도 자책골 유도!...",
      "press": "footballist.co.kr",
-     "publishedAt": "2026-11-24T00:51:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/436/0000115196"
+     "publishedAt": "2026-11-24T01:27:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/436/0000115197"
     }
    ]
   },
   {
-   "keyword": "박보경 대시 합류",
+   "keyword": "남다름 길스토리 전속계약",
    "sources": [
     "daum"
    ],
    "articles90": 9,
-   "recent20": 2,
+   "recent20": 1,
    "press": 9,
-   "firstArticleAt": "2026-11-24T00:06:00.000Z",
+   "firstArticleAt": "2026-11-24T00:17:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "김서형, 건강 문제로 SBS '대시' 하차… 박보경 합류",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-24T01:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/469/0000967362"
+     "title": "남다름, 김남길·이현욱 소속사 길스토리이엔티와 전속계약",
+     "press": "swtvnews.com",
+     "publishedAt": "2026-11-24T01:16:00.000Z",
+     "link": "https://www.swtvnews.com/news/newsview.php?ncode=1065574306063134"
     },
     {
-     "title": "김서형, 건강상 이유로 '대시' 하차…박보경 대체 투입",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-24T01:08:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261124000250"
+     "title": "[공식] '꽃남' 아역 남다름, 김남길 식구 됐다",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-24T01:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003489738"
     },
     {
-     "title": "김서형, 건강상 이유로 '대시' 하차…빈자리 박보경이 채운다 [공식입장...",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-24T00:56:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110055862659"
+     "title": "남다름, 김남길 품으로…개인 SNS도 개설",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-24T01:01:00.000Z",
+     "link": "https://m.entertain.naver.com/article/119/0003158689"
     }
    ]
   },
   {
-   "keyword": "아버지",
+   "keyword": "안철수 강금실 지명",
    "sources": [
-    "signal.bz",
-    "google"
+    "daum"
    ],
    "articles90": 8,
-   "recent20": 1,
+   "recent20": 5,
    "press": 8,
-   "firstArticleAt": "2026-11-24T00:06:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "한국인 아버지 뿌리는 몰리지만 어머니는 다양…UNIST 한국인 1만명 게놈...",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-24T01:22:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904166"
-    },
-    {
-     "title": "\"아버지는 변호사, 동국대 연영과 휴학 중\"…광명 붕은우 '반전 정체'",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-24T01:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005846883?sid=102"
-    },
-    {
-     "title": "추성훈, 故 아버지 영정 들고 은퇴전 큰절…야노시호·사랑이도 오열",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-24T01:02:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004469021"
-    }
-   ]
-  },
-  {
-   "keyword": "서울지하철 총파업 담판",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-24T00:04:00.000Z",
+   "firstArticleAt": "2026-11-24T00:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "서울지하철 노사 오늘 막판 담판…결렬 땐 내일 첫차부터 파업",
-     "press": "tbs.seoul.kr",
-     "publishedAt": "2026-11-24T01:20:00.000Z",
-     "link": "http://tbs.seoul.kr/news/newsView.do?typ_800=3&idx_800=3538831&seq_800=20531732"
+     "title": "안철수 \"친중 강금실 지명, 한미동맹 파탄 … 中간첩 국정원 접수 판단...",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-24T01:34:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/24/2026112450120.html"
     },
     {
-     "title": "서울지하철 노사 오늘 막판 담판...결렬 땐 내일 첫차 파업",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-24T00:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437156?sid=102"
+     "title": "친중 나가고 또 친중?…안철수, 강금실 과거 '친중 전력' 문제제기",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-24T01:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003158719?sid=100"
     },
     {
-     "title": "서울지하철 노사, 총파업 하루 앞둔 24일 최종 담판… 결렬 땐 내일 첫차...",
-     "press": "fntoday.co.kr",
-     "publishedAt": "2026-11-24T00:42:00.000Z",
-     "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=399897"
+     "title": "국힘, 개각에 \"靑 만기친람…'정보 문외한' 강금실 지명 철회해야\"",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-24T01:30:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=784338"
     }
    ]
   },
@@ -369,18 +308,18 @@
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 0,
+   "articles90": 7,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-24T00:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "출근하는 조희대 대법원장",
+     "title": "천준호 \"한덕수 판결, 법원 내부서도 의문…조희대 탄핵 추진은 역사적...",
      "press": "newsis.com",
-     "publishedAt": "2026-11-24T00:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014341202?sid=102"
+     "publishedAt": "2026-11-24T01:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014341443?sid=100"
     },
     {
      "title": "조희대 대법원장 출근",
@@ -389,79 +328,111 @@
      "link": "https://n.news.naver.com/mnews/article/003/0014341204?sid=102"
     },
     {
-     "title": "[정치쇼] 정성호 \"한준호? 차기 대권주자 기반 쌓여…조희대 탄핵 인용...",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-24T00:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001405331?sid=100"
+     "title": "출근하는 조희대 대법원장",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-24T00:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014341206?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "kospi",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 2,
+   "firstArticleAt": "2026-11-24T00:07:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "Kospi surge triggers buy-side trading curb",
+     "press": "koreajoongangdaily.com",
+     "publishedAt": "2026-11-24T00:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/640/0000097251?sid=101"
+    },
+    {
+     "title": "KRX activates buy-side sidecar for KOSPI on sharp rise",
+     "press": "en.yna.co.kr",
+     "publishedAt": "2026-11-24T00:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016459562?sid=104"
+    },
+    {
+     "title": "(URGENT) KRX activates buy-side sidecar for KOSPI on sharp rise",
+     "press": "en.yna.co.kr",
+     "publishedAt": "2026-11-24T00:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016459560?sid=104"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1231,
-  "matched": 643,
-  "avgLeadMin": 531,
+  "flagged": 1235,
+  "matched": 663,
+  "avgLeadMin": 539,
   "recent": [
    {
-    "keyword": "군용기 KADIZ 진입 대응",
-    "hitKeyword": "동해 KADIZ 러 항공기",
-    "hitAt": "2026-11-24T10:00:00+09:00",
-    "leadMin": 10053
+    "keyword": "LG 임원 11명 승진",
+    "hitKeyword": "삼성전자 임원 승진 축소",
+    "hitAt": "2026-11-24T10:30:00+09:00",
+    "leadMin": 6368
    },
    {
-    "keyword": "이지훈♥아야네, 둘째 출산 소식",
-    "hitKeyword": "옥순 영호 출산 소식",
-    "hitAt": "2026-11-24T10:00:00+09:00",
-    "leadMin": 739
+    "keyword": "신한은행 3연승 공동 선두",
+    "hitKeyword": "신한은행 사쿠라 활약",
+    "hitAt": "2026-11-24T10:30:00+09:00",
+    "leadMin": 3801
    },
    {
-    "keyword": "북한 항공기 추정 비행체",
-    "hitKeyword": "동해 KADIZ 러 항공기",
-    "hitAt": "2026-11-24T10:00:00+09:00",
-    "leadMin": 65
+    "keyword": "신한은행, 3연승 공동 선두",
+    "hitKeyword": "신한은행 사쿠라 활약",
+    "hitAt": "2026-11-24T10:30:00+09:00",
+    "leadMin": 3781
    },
    {
-    "keyword": "구하라 7주기 여전히 그리움",
-    "hitKeyword": "구하라 7주기 추모",
-    "hitAt": "2026-11-24T10:00:00+09:00",
-    "leadMin": 35
+    "keyword": "신한은행, 3연승 선두 공동",
+    "hitKeyword": "신한은행 사쿠라 활약",
+    "hitAt": "2026-11-24T10:30:00+09:00",
+    "leadMin": 3741
    },
    {
-    "keyword": "러시아 군용기 KADIZ",
-    "hitKeyword": "동해 KADIZ 러 항공기",
-    "hitAt": "2026-11-24T10:00:00+09:00",
-    "leadMin": 25
+    "keyword": "김정은 러시아 대사 신임장",
+    "hitKeyword": "러시아 군용기 울릉도",
+    "hitAt": "2026-11-24T10:30:00+09:00",
+    "leadMin": 2212
    },
    {
-    "keyword": "우서윤 미스코리아",
-    "hitKeyword": "우서윤 아빠 우지원",
-    "hitAt": "2026-11-24T10:00:00+09:00",
-    "leadMin": 25
+    "keyword": "리비아 러시아 군함 피격",
+    "hitKeyword": "러시아 군용기 울릉도",
+    "hitAt": "2026-11-24T10:30:00+09:00",
+    "leadMin": 1790
    },
    {
-    "keyword": "울릉도 경계경보",
-    "hitKeyword": "울릉군 경계경보",
-    "hitAt": "2026-11-24T09:30:00+09:00",
-    "leadMin": 45
+    "keyword": "러시아 우크라이나 키이우 공습",
+    "hitKeyword": "러시아 군용기 울릉도",
+    "hitAt": "2026-11-24T10:30:00+09:00",
+    "leadMin": 1011
    },
    {
-    "keyword": "홈플러스 온라인 배송 중단",
-    "hitKeyword": "홈플러스 배송 중단",
-    "hitAt": "2026-11-24T09:30:00+09:00",
-    "leadMin": 25
+    "keyword": "러시아 핵무장 위성 발사",
+    "hitKeyword": "러시아 군용기 울릉도",
+    "hitAt": "2026-11-24T10:30:00+09:00",
+    "leadMin": 830
    },
    {
-    "keyword": "울릉도 경계경보 발령",
-    "hitKeyword": "울릉군 경계경보",
-    "hitAt": "2026-11-24T09:30:00+09:00",
-    "leadMin": 15
+    "keyword": "신한은행 단독 선두 유지",
+    "hitKeyword": "신한은행 사쿠라 활약",
+    "hitAt": "2026-11-24T10:30:00+09:00",
+    "leadMin": 789
    },
    {
-    "keyword": "조규성 골! 미트윌란 승리!",
-    "hitKeyword": "조규성 6호골 미트윌란",
-    "hitAt": "2026-11-24T09:00:00+09:00",
-    "leadMin": 55
+    "keyword": "신한은행 하나은행 4연승",
+    "hitKeyword": "신한은행 사쿠라 활약",
+    "hitAt": "2026-11-24T10:30:00+09:00",
+    "leadMin": 769
    }
   ]
  }
