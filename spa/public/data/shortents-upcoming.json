@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T18:17:30.044Z",
+ "builtAt": "2026-11-24T18:37:34.814Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,11 +8,44 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 18,
- "candidates": [],
+ "measured": 8,
+ "candidates": [
+  {
+   "keyword": "서울 지하철 노사 협상 타결",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 12,
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-24T17:15:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "서울지하철 노조 밤샘 교섭 끝 총파업 철회…출근길 정상 운행 [종합]",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-24T18:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005357822?sid=103"
+    },
+    {
+     "title": "서울지하철 노사 교섭 타결...총파업 철회",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-24T18:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009308150?sid=102"
+    },
+    {
+     "title": "서울지하철 노사 밤샘 교섭 끝 극적 타결…출근길 정상 운행",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-24T18:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009308148?sid=102"
+    }
+   ]
+  }
+ ],
  "hitRate": {
   "days": 7,
-  "flagged": 1395,
+  "flagged": 1396,
   "matched": 725,
   "avgLeadMin": 510,
   "recent": [
