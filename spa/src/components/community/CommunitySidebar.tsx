@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { isAssociate } from '../../lib/communityLevel.mjs';
 import type { CommunityProfile } from '../../lib/communitySession';
@@ -8,7 +9,11 @@ import Avatar from './Avatar';
 import { GradeBadge } from './Badges';
 
 type Props = {
-    profile: CommunityProfile;
+    /** null = a guest: `guestCard` takes the place of my activity. */
+    profile: CommunityProfile | null;
+    guestCard?: ReactNode;
+    /** Board link (a guest's members-only boards go to the login); the board list itself when not given. */
+    hrefOf?: (id: string) => string;
     boards: readonly BoardConfig[];
     boardId: string;
     /** Post counts per board id, as far as they are known. */
@@ -56,16 +61,16 @@ function boardEntries(boards: readonly BoardConfig[]) {
 }
 
 /** Desktop side column: my activity, the board menu, the grade guide. */
-function CommunitySidebar({ profile, boards, boardId, counts, grades = GRADE_GUIDE, scoreRules = SCORE_RULES }: Props) {
+function CommunitySidebar({ profile, guestCard = null, hrefOf, boards, boardId, counts, grades = GRADE_GUIDE, scoreRules = SCORE_RULES }: Props) {
     return (
         <aside className="cm-side">
-            <MyActivity profile={profile} />
+            {profile ? <MyActivity profile={profile} /> : guestCard}
             <nav className="lp-box cm-menu" aria-label="게시판">
                 <h2>게시판</h2>
                 <ul>
                     {boardEntries(boards).map((entry) => (
                         <li key={entry.id}>
-                            <Link className={`cm-tab${entry.id === boardId ? ' on' : ''}`} to={communityPath({ board: entry.id })}
+                            <Link className={`cm-tab${entry.id === boardId ? ' on' : ''}`} to={hrefOf ? hrefOf(entry.id) : communityPath({ board: entry.id })}
                                 aria-current={entry.id === boardId ? 'page' : undefined}>
                                 <span>{entry.label}</span>
                                 {typeof counts[entry.id] === 'number' ? <em>{counts[entry.id]}</em> : null}
@@ -98,11 +103,11 @@ function CommunitySidebar({ profile, boards, boardId, counts, grades = GRADE_GUI
 }
 
 /** Phone / narrow screens: the boards as a row of round tabs above the list. */
-export function BoardTabs({ boards, boardId }: { boards: readonly BoardConfig[]; boardId: string }) {
+export function BoardTabs({ boards, boardId, hrefOf }: { boards: readonly BoardConfig[]; boardId: string; hrefOf?: (id: string) => string }) {
     return (
         <nav className="cm-htabs" aria-label="게시판 바로가기">
             {boardEntries(boards).map((entry) => (
-                <Link key={entry.id} className={`cm-htab${entry.id === boardId ? ' on' : ''}`} to={communityPath({ board: entry.id })}
+                <Link key={entry.id} className={`cm-htab${entry.id === boardId ? ' on' : ''}`} to={hrefOf ? hrefOf(entry.id) : communityPath({ board: entry.id })}
                     aria-current={entry.id === boardId ? 'page' : undefined}>{entry.label}</Link>
             ))}
         </nav>

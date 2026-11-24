@@ -3,7 +3,7 @@
  * The list never waits for them (letters are drawn first). A photo is public information, so the store holds only
  * key -> picture; never a token, a phone number or an id. Everything read back is checked again before it is drawn.
  */
-import { callWithToken } from './communityApi';
+import { callReader, callWithToken } from './communityApi';
 import { AVATAR_KEYS_PER_CALL, chunkKeys, isAvatarKey, safeAvatarUrl } from './communityAvatarModel.mjs';
 import { COMMUNITY_ACTIONS, COMMUNITY_CODES } from './communityContract.mjs';
 import { loadCommunitySession, saveCommunitySession } from './communitySession';
@@ -82,7 +82,7 @@ export async function fetchAvatars(keys: readonly unknown[]): Promise<Record<str
     const have = readCachedAvatars(wanted);
     const missing = wanted.filter((key) => !(key in have));
     if (missing.length === 0 || Date.now() < pausedUntil) return have;
-    const answers = await Promise.all(chunkKeys(missing, AVATAR_KEYS_PER_CALL).map((chunk) => callWithToken(COMMUNITY_ACTIONS.avatars, { keys: chunk })));
+    const answers = await Promise.all(chunkKeys(missing, AVATAR_KEYS_PER_CALL).map((chunk) => callReader(COMMUNITY_ACTIONS.avatars, { keys: chunk })));
     const found: Record<string, string> = {};
     for (const answer of answers) {
         if (!answer.ok) { pausedUntil = Date.now() + PAUSE_MS; continue; }

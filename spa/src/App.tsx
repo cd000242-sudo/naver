@@ -20,7 +20,7 @@ const PricingPage = lazy(() => import('./pages/PricingPage'));
 const DownloadPage = lazy(() => import('./pages/DownloadPage'));
 const ChatbotsPage = lazy(() => import('./pages/ChatbotsPage'));
 const ReviewsPage = lazy(() => import('./pages/ReviewsPage'));
-const CommunityPage = lazy(() => import('./pages/CommunityPage'));
+const CommunityEntry = lazy(() => import('./pages/CommunityEntry'));
 const MyPage = lazy(() => import('./pages/MyPage'));
 const LookupPage = lazy(() => import('./pages/LookupPage'));
 const RefundPage = lazy(() => import('./pages/RefundPage'));
@@ -85,11 +85,11 @@ function App() {
                     <Route path="/chatbots.html" element={<ChatbotsPage />} />
                     <Route path="/reviews" element={<ReviewsPage />} />
                     <Route path="/reviews.html" element={<ReviewsPage />} />
-                    {/* One site login window for community and LEWORD; the community is closed to visitors who are not logged in. */}
+                    {/* One site login window for community and LEWORD; without a login the community opens its read-only boards (CommunityEntry). */}
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/signup" element={<SignupPage />} />
-                    <Route path="/community" element={<RequireLogin area="community"><CommunityPage /></RequireLogin>} />
-                    <Route path="/community.html" element={<RequireLogin area="community"><CommunityPage /></RequireLogin>} />
+                    <Route path="/community" element={<CommunityEntry />} />
+                    <Route path="/community.html" element={<CommunityEntry />} />
                     <Route path="/me" element={<RequireLogin area="account"><MyPage /></RequireLogin>} />
                     <Route path="/lookup" element={<LookupPage />} />
                     <Route path="/lookup.html" element={<LookupPage />} />

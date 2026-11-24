@@ -1,0 +1,7 @@
+/* Guest (no login) parts of the community: the side login card and the comment line. */
+.cm-guest-card h2 { font-size: 16px; margin: 0 0 6px; }
+.cm-guest-card p { font-size: 14px; margin: 0 0 12px; color: #4b5563; }
+.cm-guest-actions { display: flex; gap: 8px; }
+.cm-guest-actions .lp-btn { flex: 1; justify-content: center; }
+.cm-guest-cmts { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.cm-guest-cmts p { font-size: 15px; margin: 0; }

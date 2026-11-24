@@ -56,6 +56,14 @@ export async function callWithToken<T = Record<string, unknown>>(action: string,
     return callCommunity<T>(action, { ...body, communityToken: session.communityToken });
 }
 
+/**
+ * A read that a guest may make too (community-feed / -post / -avatars): with a login it is exactly callWithToken;
+ * without one it goes without a token, and the server answers the guest boards only (or LOGIN_REQUIRED).
+ */
+export async function callReader<T = Record<string, unknown>>(action: string, body: Record<string, unknown> = {}): Promise<ApiResult<T>> {
+    return loadCommunitySession() ? callWithToken<T>(action, body) : callCommunity<T>(action, body);
+}
+
 /** Same request id twice = the server answers with the first post, so a double click cannot post twice. */
 export function newRequestId(): string {
     const random = typeof crypto !== 'undefined' && 'randomUUID' in crypto
@@ -96,7 +104,7 @@ export const boardApi = {
         const { platform, ...rest } = query;
         return callWithToken('community-posts', { pageSize: 20, ...rest, ...platformField(query.board, platform) });
     },
-    post: (id: string) => callWithToken('community-post', { id }),
+    post: (id: string) => callReader('community-post', { id }),
     weeklyTop: (limit = 10) => callWithToken('community-weekly-top', { limit }),
     /** Pass the same `requestId` when sending again: the server then answers with the first post instead of making a twin. */
     writePost: (draft: PostDraft, requestId: string = newRequestId()): Promise<ApiResult> => (draft.board === NOTICE_BOARD

@@ -3,7 +3,7 @@
  * (list, board settings, weekly top, counts, profile). A server that does not know the action yet (the site can be
  * deployed before the server) is read the old way — one call per piece — so deploy order never breaks the page.
  */
-import { boardApi, callWithToken, type ApiFailure } from './communityApi';
+import { boardApi, callReader, type ApiFailure } from './communityApi';
 import { keepToken } from './communityAuth';
 import { COMMUNITY_ACTIONS, NOTICE_BOARD } from './communityContract.mjs';
 import { normalizePosts, type PostItem } from './communityData';
@@ -132,7 +132,7 @@ export async function loadCommunityFeed(view: FeedView, wants: LegacyWants = { c
 const isMixedBoard = (view: FeedView): boolean => view.board === NOTICE_BOARD || view.board === 'news';
 
 /** One call of the new action. */
-const askFeed = (view: FeedView) => callWithToken(COMMUNITY_ACTIONS.feed, {
+const askFeed = (view: FeedView) => callReader(COMMUNITY_ACTIONS.feed, {
     board: view.board, sort: view.sort, page: view.page, pageSize: FEED_PAGE_SIZE, weeklyLimit: WEEKLY_LIMIT,
     ...(view.board === 'promo' ? { platform: normalizePlatform(view.platform) } : {}),
 });

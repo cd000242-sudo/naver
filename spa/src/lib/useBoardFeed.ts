@@ -16,6 +16,8 @@ export type Feed = {
     total: number;
     totalPages: number;
     message: string;
+    /** Server code of the last failed read ('' when none): LOGIN_REQUIRED tells a guest page the server is still members-only. */
+    code: string;
     /** Post counts per board, as far as they are known. */
     counts: Record<string, number>;
     /** Board settings and this week's top: from the same answer as the list, or saved from the last visit. */
@@ -36,7 +38,7 @@ export function useBoardFeed(view: FeedView, reloadKey: number): Feed & { reload
     const saved = useMemo(() => peekCommunityFeed(view)?.bundle ?? null, [key]); // eslint-disable-line react-hooks/exhaustive-deps
     const [fresh, setFresh] = useState<Fresh | null>(null);
     const [extras, setExtras] = useState<Extras>({ config: null, weekly: null, counts: {} });
-    const [read, setRead] = useState({ refreshing: true, error: '' });
+    const [read, setRead] = useState({ refreshing: true, error: '', code: '' });
     const [again, setAgain] = useState(0);
     const reload = useCallback(() => setAgain((value) => value + 1), []);
     // Only an old server needs the settings and the weekly top as calls of their own.
@@ -46,11 +48,11 @@ export function useBoardFeed(view: FeedView, reloadKey: number): Feed & { reload
 
     useEffect(() => {
         let alive = true;
-        setRead({ refreshing: true, error: '' });
+        setRead({ refreshing: true, error: '', code: '' });
         const wants = { config: !settingsRead.current, weekly: weeklyFor.current !== reloadKey };
         void loadCommunityFeed(view, wants).then((result) => {
             if (!alive) return;
-            if (!result.ok) { setRead({ refreshing: false, error: result.message }); return; }
+            if (!result.ok) { setRead({ refreshing: false, error: result.message, code: result.code }); return; }
             const { bundle } = result;
             if (bundle.config) settingsRead.current = true;
             if (bundle.weekly) weeklyFor.current = reloadKey;
@@ -64,7 +66,7 @@ export function useBoardFeed(view: FeedView, reloadKey: number): Feed & { reload
                 weekly: bundle.weekly ?? previous.weekly,
                 counts: { ...previous.counts, ...bundle.counts },
             }));
-            setRead({ refreshing: false, error: '' });
+            setRead({ refreshing: false, error: '', code: '' });
         });
         return () => { alive = false; };
     }, [view.board, view.sort, view.page, view.platform, reloadKey, again]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -80,6 +82,7 @@ export function useBoardFeed(view: FeedView, reloadKey: number): Feed & { reload
         total: shown?.total ?? 0,
         totalPages: shown?.totalPages ?? 0,
         message: read.error,
+        code: read.code,
         counts: { ...shown?.counts, ...extras.counts },
         config: extras.config ?? shown?.config ?? null,
         weekly: extras.weekly ?? shown?.weekly ?? [],

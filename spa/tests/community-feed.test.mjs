@@ -129,10 +129,13 @@ test('a dead login and a lost connection are shown as they are: no fallback stor
         assert.deepEqual([result.ok, result.code], [false, 'NETWORK']);
         assert.deepEqual(browser.actions(), ['community-feed']);
     });
-    await withFeed({}, async ({ browser, feed }) => {
+    // 2026-11-24: a guest reads too (open boards). No login = ONE call without a token; a members-only (old) server
+    // answers LOGIN_REQUIRED, which comes back as it is (no fallback storm either).
+    await withFeed({ 'community-feed': { ok: false, code: 'LOGIN_REQUIRED', message: '로그인이 필요합니다.' } }, async ({ browser, feed }) => {
         const result = await feed.loadCommunityFeed(VIEW);
         assert.equal(result.code, 'LOGIN_REQUIRED');
-        assert.deepEqual(browser.calls, [], 'no login, no request');
+        assert.deepEqual(browser.actions(), ['community-feed']);
+        assert.equal('communityToken' in browser.calls[0], false, 'no login, no token');
     }, null);
 });
 
