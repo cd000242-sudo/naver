@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T12:51:30.431Z",
+ "builtAt": "2026-11-24T13:01:33.327Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 25,
  "candidates": [
   {
-   "keyword": "김혜경 여사, 권양숙 여사 오찬",
+   "keyword": "김혜경 여사 오찬",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 32,
-   "recent20": 10,
-   "press": 26,
+   "articles90": 33,
+   "recent20": 6,
+   "press": 27,
    "firstArticleAt": "2026-11-24T11:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "金여사 만난 권양숙 여사 “盧와 李, 식성부터 성격까지 닮아”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-24T12:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764849?sid=100"
+    },
     {
      "title": "권양숙 여사 “노무현과 이재명, 식성·수면 패턴·성격까지 모든 부분...",
      "press": "weekly.khan.co.kr",
@@ -33,44 +39,38 @@
      "press": "news.jtbc.co.kr",
      "publishedAt": "2026-11-24T12:47:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/437/0000522287?sid=100"
-    },
-    {
-     "title": "김혜경 여사 만난 노건호 “李 대통령이라 다행…너무 잘하고 계셔”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-24T12:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004685771?sid=100"
     }
    ]
   },
   {
-   "keyword": "젠슨 황 복귀로 엔비디아 급등",
+   "keyword": "젠슨 황 복귀로 주가 폭등",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 22,
-   "recent20": 2,
-   "press": 15,
-   "firstArticleAt": "2026-11-24T11:22:00.000Z",
+   "articles90": 14,
+   "recent20": 1,
+   "press": 14,
+   "firstArticleAt": "2026-11-24T11:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨 황 돌아왔지만 끝나지 않은 논란…美 의회 청문회까지",
-     "press": "inews24.com",
-     "publishedAt": "2026-11-24T12:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/031/0001078142?sid=105"
+     "title": "[김종석의 왜]젠슨 황, ‘불륜 불륜 불륜’에도 왜?",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-24T12:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000368594?sid=101"
     },
     {
-     "title": "[AI 예측] 앤트로픽 공모가 83달러 하회 확률 86%…엔비디아 뛸 때 내렸...",
-     "press": "coinreaders.com",
-     "publishedAt": "2026-11-24T12:40:00.000Z",
-     "link": "http://coinreaders.com/272995"
+     "title": "앤트로픽 주가, 개장전 거래서 나흘만에 공모가 아래로 하락",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-24T12:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014343100?sid=104"
     },
     {
-     "title": "독일 외무장관 \"트럼프의 젠슨 황 복귀 개입 충격…자제해야\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-24T12:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005445892?sid=104"
+     "title": "트럼프 개입에 '젠슨 황' 복귀... 하루 200억 벌었다",
+     "press": "newsbrite.net",
+     "publishedAt": "2026-11-24T12:36:00.000Z",
+     "link": "http://www.newsbrite.net/news/articleView.html?idxno=201721"
     }
    ]
   },
@@ -79,62 +79,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 0,
+   "articles90": 14,
+   "recent20": 2,
    "press": 13,
-   "firstArticleAt": "2026-11-24T11:29:00.000Z",
+   "firstArticleAt": "2026-11-24T11:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“작년 수능시험지 최소 17만여부 폐기…세종만 전량 보존”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-24T12:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004685772?sid=102"
+    },
+    {
+     "title": "경기도 지난해 수능 시험지 17.1% 폐기…보관 지시 앞서 처분",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-24T12:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012300356?sid=102"
+    },
     {
      "title": "‘부정행위’ 여진 계속…교사노조 “수능 개편해야”",
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-24T12:26:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012300320?sid=102"
-    },
-    {
-     "title": "지난해 수능 시험지 최소 17만부 이미 폐기됐다",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-24T12:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887212?sid=102"
-    },
-    {
-     "title": "AI 부정행위 잡겠다지만…\"작년 수능시험지 17만부는 폐기 확인\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-24T12:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929566?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "대전 ACLE 베이징 3-2 승리",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 14,
-   "recent20": 2,
-   "press": 10,
-   "firstArticleAt": "2026-11-24T11:55:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[ACLE 기자회견] 베이징 잡고도 아쉬운 황선홍 감독 \"상대 요리할 수 있...",
-     "press": "interfootball.co.kr",
-     "publishedAt": "2026-11-24T12:44:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/413/0000227096"
-    },
-    {
-     "title": "[GOAL 현장] ‘대전 3골 폭발에도 2실점’ 황선홍 감독의 진단, “침착함...",
-     "press": "goal.com",
-     "publishedAt": "2026-11-24T12:41:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/216/0000143944"
-    },
-    {
-     "title": "'마사 결승골' 대전, ACLE 5차전서 베이징에 3-2 진땀승(종합)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-24T12:26:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/003/0014343096"
     }
    ]
   },
@@ -143,10 +111,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
+   "articles90": 8,
    "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-24T11:25:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-24T11:35:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -176,12 +144,18 @@
     "signal.bz"
    ],
    "articles90": 8,
-   "recent20": 0,
+   "recent20": 1,
    "press": 8,
-   "firstArticleAt": "2026-11-24T11:29:00.000Z",
+   "firstArticleAt": "2026-11-24T11:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "한국산 EU행 하이브리드차 6만7924대까지…내달부터 무관세 제한",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-24T12:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005768463?sid=101"
+    },
     {
      "title": "정부, EU 하이브리드車 세이프가드 최종조치 앞두고 전방위 협의…수출...",
      "press": "etnews.com",
@@ -193,44 +167,38 @@
      "press": "chosun.com",
      "publishedAt": "2026-11-24T12:11:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/023/0004011483?sid=101"
-    },
-    {
-     "title": "'EU로 수출' 국산 하이브리드차, 내달부터 6만7924대로 제한",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-24T12:10:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=202611242107591851a6e8311f64_1"
     }
    ]
   },
   {
-   "keyword": "하나저축은행 552명 개인정보 유출",
+   "keyword": "정상빈 1골 1도움",
    "sources": [
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-24T11:34:00.000Z",
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-24T11:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "하나저축은행, 모바일 시스템 뚫렸다…고객 552명 정보 유출",
-     "press": "paxetv.com",
-     "publishedAt": "2026-11-24T12:42:00.000Z",
-     "link": "http://www.paxetv.com/news/articleView.html?idxno=287762"
+     "title": "美 프로축구 PO 정상빈, 손흥민 잡고 '펄펄'…'1골 1도움' 활약",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-24T12:48:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/448/0000653178"
     },
     {
-     "title": "하나저축銀 해킹…고객 552명 개인정보 유출",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-24T12:34:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=2026112421323681a6e8311f64_1"
+     "title": "'롤모델' 손흥민 앞에서…'1골 1도움' 정상빈 MVP",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-24T12:26:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/055/0001405540"
     },
     {
-     "title": "하나저축은행 해킹 피해…고객 552명 정보 유출",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-24T12:04:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101946"
+     "title": "손흥민, 정상빈과 ‘코리안 더비’서 침묵…LAFC 탈락 위기",
+     "press": "kwnews.co.kr",
+     "publishedAt": "2026-11-24T12:16:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/087/0001233152"
     }
    ]
   },
@@ -271,13 +239,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
    "firstArticleAt": "2026-11-24T11:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이란, 히잡 벗은 여가수에 태형 74대…잔혹한 신체형과 트럼프 전쟁의 ...",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-24T12:54:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285142"
+    },
     {
      "title": "\"감히 히잡 안 쓰고 공연을?\"…이란, 女가수에 태형 74대 집행",
      "press": "weekly.chosun.com",
@@ -289,51 +263,13 @@
      "press": "donga.com",
      "publishedAt": "2026-11-24T11:46:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/020/0003764845?sid=104"
-    },
-    {
-     "title": "“무대서 히잡 벗었다가”…이란 女가수에 태형 74대, 예술 활동 2년 금...",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-24T11:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000133652?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "전광훈",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-24T11:25:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[자유통일당 성명서] 전광훈 목사 구속영장 신청, 수사는 정치적 영향으...",
-     "press": "christiantoday.co.kr",
-     "publishedAt": "2026-11-24T12:20:00.000Z",
-     "link": "https://www.christiantoday.co.kr/news/378855"
-    },
-    {
-     "title": "사랑제일교회 “전광훈 목사 구속영장 신청, 법과 상식에 따른 판단 기...",
-     "press": "christiantoday.co.kr",
-     "publishedAt": "2026-11-24T12:12:00.000Z",
-     "link": "https://www.christiantoday.co.kr/news/378851"
-    },
-    {
-     "title": "102억 교회 돈을 당에 '불법제공'…전광훈 또 구속 기로",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-24T11:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522265?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1391,
+  "flagged": 1393,
   "matched": 729,
   "avgLeadMin": 526,
   "recent": [
