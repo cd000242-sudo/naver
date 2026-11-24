@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T01:45:39.604Z",
+ "builtAt": "2026-11-24T01:55:43.221Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 75,
-   "recent20": 64,
+   "articles90": 80,
+   "recent20": 69,
    "press": 56,
-   "firstArticleAt": "2026-11-24T01:23:00.000Z",
+   "firstArticleAt": "2026-11-24T01:30:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "엔비디아 CEO 복귀, 코스피 5천피 회복의 신호탄 될까?",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-24T01:44:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=887031"
+     "title": "젠슨 황이 구한 엔비디아 주가…하지만 WSJ “글쎄”",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-24T01:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/024/0000109848?sid=101"
     },
     {
-     "title": "코스피 5030선 회복 시도, 젠슨 황 효과",
-     "press": "sidae.com",
-     "publishedAt": "2026-11-24T01:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/417/0001165406?sid=101"
-    },
-    {
-     "title": "젠슨 황 복귀에 엔비디아 시총 1,275조원↑…\"트럼프, 200억 번 듯\"",
+     "title": "얼굴 핏자국, 손엔 여성 속옷…트럼프가 올린 '젠슨 황 밈' 사진",
      "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-24T01:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979605?sid=104"
+     "publishedAt": "2026-11-24T01:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979606?sid=104"
+    },
+    {
+     "title": "젠슨황 복귀에 한술 돌렸지만 … 美·유럽 데이터센터 규제, 낸드 공급...",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-24T01:54:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/24/2026112450086.html"
     }
    ]
   },
@@ -47,30 +47,30 @@
    "sources": [
     "nate"
    ],
-   "articles90": 63,
-   "recent20": 45,
-   "press": 35,
-   "firstArticleAt": "2026-11-24T01:18:00.000Z",
+   "articles90": 69,
+   "recent20": 49,
+   "press": 42,
+   "firstArticleAt": "2026-11-24T01:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령 “시험 부정행위, 주가조작과 본질 같아”…국가시험 전반 합...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-24T01:44:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2652143"
+     "title": "이 대통령 \"불법행위 종교단체 해산 검토\"…문체부에 보고 지시",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-24T01:54:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4120494"
     },
     {
-     "title": "회의자료 검토하는 이재명 대통령",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-24T01:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016459977?sid=100"
+     "title": "이 대통령 \"예산안·민생 과제 처리에 초당적 협력해야\"",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-24T01:54:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4120497"
     },
     {
-     "title": "李대통령, 사이비 종교단체 해산 “현실적으로 검토할 때”…문체부에...",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-24T01:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003060791?sid=100"
+     "title": "이 대통령 \"시험 부정행위 일벌백계\"…범정부 합동조사·처벌 강화 지시",
+     "press": "news.bbsi.co.kr",
+     "publishedAt": "2026-11-24T01:54:00.000Z",
+     "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4120493"
     }
    ]
   },
@@ -79,30 +79,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 41,
-   "recent20": 12,
-   "press": 33,
+   "articles90": 48,
+   "recent20": 15,
+   "press": 38,
    "firstArticleAt": "2026-11-24T00:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "정점식 \"이용철, 李 탈옥 도우미\"…'이재명 버블 특검' 추진",
+     "title": "이용철 \"검찰개혁, 국민 불편으로 이어져선 안 돼…새 형사사법체계 안...",
+     "press": "wolyo.co.kr",
+     "publishedAt": "2026-11-24T01:54:00.000Z",
+     "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=320964"
+    },
+    {
+     "title": "민주 \"국힘, 이용철 청문회 시작부터 흠집 내기...정쟁 활용 심산\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-24T01:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437205?sid=100"
+    },
+    {
+     "title": "이용철 \"무리한 공소 취소 지휘 안 해\"…주진우와 설전",
      "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-24T01:44:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086940"
-    },
-    {
-     "title": "이용철 송곳 검증 예고한 박형수 \"반드시 공소취소 명확 입장 밝혀라\"",
-     "press": "thepublic.kr",
-     "publishedAt": "2026-11-24T01:42:00.000Z",
-     "link": "https://www.thepublic.kr/news/articleView.html?idxno=328178"
-    },
-    {
-     "title": "국회, 이용철 법무장관·이태현 KBS 사장 후보 인사청문회 개최",
-     "press": "lawissue.co.kr",
-     "publishedAt": "2026-11-24T01:42:00.000Z",
-     "link": "https://www.lawissue.co.kr/view.php?ud=202611241040485795b3279dfb36_12"
+     "publishedAt": "2026-11-24T01:52:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5087019"
     }
    ]
   },
@@ -111,30 +111,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 27,
-   "recent20": 7,
-   "press": 26,
-   "firstArticleAt": "2026-11-24T00:18:00.000Z",
+   "articles90": 26,
+   "recent20": 4,
+   "press": 25,
+   "firstArticleAt": "2026-11-24T00:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "당청 엇박자 해소 자평한 '취임 100일' 김민석…당내 갈등엔 \"초반에 조...",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-24T01:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000142906?sid=100"
+    },
+    {
+     "title": "‘취임 100일' 김민석 \"당청 비교적 안정...당내 더 안정돼야\"",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-24T01:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002394693?sid=100"
+    },
     {
      "title": "취임 100일 맞은 김민석 “당청 관계 안정됐다”…당내 갈등·민생은 과...",
      "press": "kyeonggi.com",
      "publishedAt": "2026-11-24T01:39:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/666/0000133501?sid=100"
-    },
-    {
-     "title": "'당청 관계 안정'이 성과라는 김민석...과연 현실은?",
-     "press": "goodmorningcc.com",
-     "publishedAt": "2026-11-24T01:36:00.000Z",
-     "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=456411"
-    },
-    {
-     "title": "취임 100일 맞은 김민석 \"당청 관계 안정…당내 결속과 체감 민생 주력...",
-     "press": "hg-times.com",
-     "publishedAt": "2026-11-24T01:32:00.000Z",
-     "link": "https://www.hg-times.com/news/articleView.html?idxno=307285"
     }
    ]
   },
@@ -143,24 +143,24 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 50,
-   "recent20": 7,
+   "articles90": 42,
+   "recent20": 5,
    "press": 24,
-   "firstArticleAt": "2026-11-24T00:18:00.000Z",
+   "firstArticleAt": "2026-11-24T00:26:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "정점식 \"이용철, '벌의 순간' 기다리라…李대통령 탈옥 도우미 전락\"",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-24T01:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003158730?sid=100"
+    },
     {
      "title": "정점식 \"이용철, 李 탈옥 도우미\"…'이재명 버블 특검' 추진",
      "press": "shinailbo.co.kr",
      "publishedAt": "2026-11-24T01:44:00.000Z",
      "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086940"
-    },
-    {
-     "title": "이용철 결격 조목조목 지적한 정점식 \"대통령 탈옥 위한 한 조각 퍼즐\"",
-     "press": "thepublic.kr",
-     "publishedAt": "2026-11-24T01:42:00.000Z",
-     "link": "https://www.thepublic.kr/news/articleView.html?idxno=328175"
     },
     {
      "title": "정점식 \"이용철은 '대통령 탈옥 도우미'…공소 취소 포석\"",
@@ -171,17 +171,55 @@
    ]
   },
   {
+   "keyword": "강금실 국정원장 후보자",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 24,
+   "recent20": 7,
+   "press": 19,
+   "firstArticleAt": "2026-11-24T00:33:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "안철수, 강금실 국정원장 후보자 지명 철회 촉구…한미 정보공조 우려 ...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-24T01:54:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630174"
+    },
+    {
+     "title": "안철수 \"강금실, 단순 친중 아냐…中 위해 일하고 지도자 찬양\" 지명 철...",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-24T01:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000142905?sid=100"
+    },
+    {
+     "title": "국민의힘, 강금실 국정원장 지명에 반발... \"국가 안보 위협 우려\"",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-24T01:46:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=887040"
+    }
+   ]
+  },
+  {
    "keyword": "현혹 1월 6일 공개",
    "sources": [
     "nate"
    ],
-   "articles90": 22,
-   "recent20": 3,
-   "press": 21,
-   "firstArticleAt": "2026-11-24T00:16:00.000Z",
+   "articles90": 15,
+   "recent20": 4,
+   "press": 14,
+   "firstArticleAt": "2026-11-24T00:30:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
+    {
+     "title": "수지, 뱀파이어로 파격 변신…김선호와 ‘현혹’ 내년 1월 6일 공개",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-24T01:48:00.000Z",
+     "link": "https://www.viva100.com/article/20261124500512"
+    },
     {
      "title": "수지, 뱀파이어 송정화로 돌아온다…김선호와 '현혹' 공개일?",
      "press": "topstarnews.net",
@@ -193,44 +231,102 @@
      "press": "edaily.co.kr",
      "publishedAt": "2026-11-24T01:40:00.000Z",
      "link": "https://m.entertain.naver.com/article/018/0006414629"
-    },
-    {
-     "title": "수지, 푸른 눈에 날카로운 송곳니 '치명적 뱀파이어'..김선호 현혹될까...",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-24T01:36:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005644404"
     }
    ]
   },
   {
-   "keyword": "강금실 국정원장 후보자",
+   "keyword": "하이닉스 주가",
    "sources": [
-    "daum"
+    "google"
    ],
-   "articles90": 22,
-   "recent20": 9,
-   "press": 18,
-   "firstArticleAt": "2026-11-24T00:18:00.000Z",
+   "articles90": 8,
+   "recent20": 3,
+   "press": 8,
+   "firstArticleAt": "2026-11-24T00:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "안철수 \"강금실, 중국 위해 복무한 사람… 한미 방첩동맹 파탄 날 것\"",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-24T01:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967368?sid=100"
+     "title": "젠슨 황 복귀 전날 ‘16억 자사주 매입’…SK하이닉스 사장, 하루 만에 ...",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-24T01:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000133509?sid=101"
     },
     {
-     "title": "국민의힘 \"정보 문외한 강금실 지명 철회해야\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-24T01:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001405352?sid=100"
+     "title": "젠슨 황 복귀로 삼성전자·SK하이닉스 주가 급등, 투자자들 몰린다",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-24T01:48:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=887044"
     },
     {
-     "title": "국민의힘, 정부 중편 개각 명단 혹평... \"강금실 지명 철회해야\"",
-     "press": "lawissue.co.kr",
+     "title": "코스피, 5천선 회복...삼전 8%·SK하이닉스 10%대 급등",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-24T01:46:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=627262"
+    }
+   ]
+  },
+  {
+   "keyword": "북한 항공기 오발송 혼란",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-24T00:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "실제 경계경보에 놀란 울릉군 주민들…경북도 ‘북한 항공기’ 문자 오...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-24T01:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002833663?sid=102"
+    },
+    {
+     "title": "경보 해제 44분 뒤에도 ‘영공 침범’…울릉 주민 혼란 키운 재난문자",
+     "press": "yeongnam.com",
      "publishedAt": "2026-11-24T01:36:00.000Z",
-     "link": "https://www.lawissue.co.kr/view.php?ud=202611241034189025b3279dfb36_12"
+     "link": "https://www.yeongnam.com/web/view.php?key=20261124026142645"
+    },
+    {
+     "title": "러시아 군용기 울릉도 인근 접근에 경계경보…경북도 재난문자 오발송...",
+     "press": "pressian.com",
+     "publishedAt": "2026-11-24T01:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/002/0002467246?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "화성시",
+   "sources": [
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-24T00:46:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "화성시 ‘올해의 SNS’ 4관왕…블로그·인스타·유튜브 대상",
+     "press": "gg.newdaily.co.kr",
+     "publishedAt": "2026-11-24T01:38:00.000Z",
+     "link": "https://gg.newdaily.co.kr/site/data/html/2026/11/24/2026112450103.html"
+    },
+    {
+     "title": "덕성여대, 화성시인재육성재단 도봉나래관 입사생 대상 교육 실시",
+     "press": "enewstoday.co.kr",
+     "publishedAt": "2026-11-24T01:35:00.000Z",
+     "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2496235"
+    },
+    {
+     "title": "화성시, 4개 구별 공공보건서비스 차별화… 지역 맞춤형 건강관리",
+     "press": "kyeongin.com",
+     "publishedAt": "2026-11-24T01:32:00.000Z",
+     "link": "https://www.kyeongin.com/article/1775291"
     }
    ]
   },
@@ -240,10 +336,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 7,
-   "recent20": 3,
-   "press": 7,
-   "firstArticleAt": "2026-11-24T00:23:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-24T00:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -268,41 +364,41 @@
    ]
   },
   {
-   "keyword": "북한 항공기 오발송 혼란",
+   "keyword": "한준호 발탁",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 8,
+   "articles90": 5,
    "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-24T00:17:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-24T00:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "경보 해제 44분 뒤에도 ‘영공 침범’…울릉 주민 혼란 키운 재난문자",
-     "press": "yeongnam.com",
-     "publishedAt": "2026-11-24T01:36:00.000Z",
-     "link": "https://www.yeongnam.com/web/view.php?key=20261124026142645"
+     "title": "“한준호 행안부장관 후보…차기 대권주자로 성장할 계기” 정성호 밝혀",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-24T01:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005768066?sid=100"
     },
     {
-     "title": "러시아 군용기 울릉도 인근 접근에 경계경보…경북도 재난문자 오발송...",
-     "press": "pressian.com",
-     "publishedAt": "2026-11-24T01:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/002/0002467246?sid=102"
+     "title": "정성호 \"최고위원들 동네 애들 막싸움 … 조희대 탄핵엔 의문, 한준호는...",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-24T01:32:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/24/2026112450119.html"
     },
     {
-     "title": "\"북한? 러시아?\"…울릉 주민들 혼란 부른 '문자 오발송'",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-24T01:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001405340?sid=102"
+     "title": "한준호 국회의원 행정안전부 장관 후보자 지명…김민석 발언에 담긴 인...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-24T01:26:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630150"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1237,
+  "flagged": 1240,
   "matched": 662,
   "avgLeadMin": 539,
   "recent": [
