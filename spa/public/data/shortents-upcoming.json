@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T12:11:16.121Z",
+ "builtAt": "2026-11-24T12:21:19.470Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,38 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "중앙행정기관 세종 이전",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "daum"
    ],
-   "articles90": 44,
-   "recent20": 5,
-   "press": 42,
+   "articles90": 49,
+   "recent20": 8,
+   "press": 46,
    "firstArticleAt": "2026-11-24T11:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "정부, 31개 기관·5460명 세종 이전 확정",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-24T12:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005609227?sid=100"
+     "title": "내년 22개 기관·1600명 세종으로 이전한다…계획 고시",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-24T12:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001078140?sid=100"
     },
     {
-     "title": "감사원·경찰청 등 중앙행정기관 31곳 세종 이전 확정",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-24T12:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000193467?sid=100"
+     "title": "정부, 2031년까지 31개 기관 세종 이전…인권위는 일정 늦춰져",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-24T12:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002727939?sid=100"
     },
     {
-     "title": "금융위는 내년, 감사원ㆍ경찰청 2031년까지⋯31개 기관 세종으로",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-24T12:02:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2652467"
+     "title": "금융위·개보위·방미통위 등 22개 기관 1600명 내년 세종시 이전…인권...",
+     "press": "public25.com",
+     "publishedAt": "2026-11-24T12:16:00.000Z",
+     "link": "https://www.public25.com/news/articleView.html?idxno=58989"
     }
    ]
   },
@@ -48,42 +49,137 @@
     "signal.bz"
    ],
    "articles90": 15,
-   "recent20": 3,
+   "recent20": 5,
    "press": 15,
-   "firstArticleAt": "2026-11-24T10:42:00.000Z",
+   "firstArticleAt": "2026-11-24T10:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "정부, EU 하이브리드車 세이프가드 최종조치 앞두고 전방위 협의…수출...",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-24T12:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003489304?sid=100"
+    },
+    {
+     "title": "EU, 한국산 하이브리드차 수출 내년 6월까지 6만7924대로 제한",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-24T12:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004011483?sid=101"
+    },
     {
      "title": "'EU로 수출' 국산 하이브리드차, 내달부터 6만7924대로 제한",
      "press": "g-enews.com",
      "publishedAt": "2026-11-24T12:10:00.000Z",
      "link": "https://www.g-enews.com/view.php?ud=202611242107591851a6e8311f64_1"
+    }
+   ]
+  },
+  {
+   "keyword": "권양숙 여사와 김혜경 여사",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 20,
+   "recent20": 8,
+   "press": 13,
+   "firstArticleAt": "2026-11-24T11:47:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "권양숙 여사 \"이재명 대통령, 盧 전 대통령과 모든 부분 닮아\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-24T12:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005445890?sid=100"
     },
     {
-     "title": "EU, 내달부터 하이브리드차 수입 제한.. 한국산 200일간 6만7924대만 허용",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-24T12:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005609225?sid=101"
+     "title": "김혜경 여사, 권양숙 여사와 오찬…“李대통령, 盧와 모든 부분 닮아”",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-24T12:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003702794?sid=100"
     },
     {
-     "title": "EU 하이브리드차 세이프가드…정부 \"단기적 영향 제한적\"",
-     "press": "energy-news.co.kr",
-     "publishedAt": "2026-11-24T12:04:00.000Z",
-     "link": "https://www.energy-news.co.kr/news/articleView.html?idxno=230051"
+     "title": "김혜경 여사, 권양숙 여사와 오찬... 權 \"이 대통령 건강 잘 챙기라\"",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-24T12:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000967540?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황 복귀로 주가 폭등",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 12,
+   "recent20": 0,
+   "press": 12,
+   "firstArticleAt": "2026-11-24T11:15:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "젠슨 황, 11일 만에 전격 복귀…엔비디아 30%대 급등",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-24T12:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012300305?sid=104"
+    },
+    {
+     "title": "‘젠슨 황 구원투수 자처’ 트럼프, 정권 명운 걸었다 [1일1트]",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-24T12:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002727935?sid=104"
+    },
+    {
+     "title": "[사설] 젠슨 황 복귀에 주가 급등… 일희일비 말고 '여진' 대비해야",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-24T12:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001165516?sid=110"
+    }
+   ]
+  },
+  {
+   "keyword": "이관희·유시은 민폐 논란 사과",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 11,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-24T11:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이관희·유시은, 버진로드 걸은 '민폐 하객' 맞았다 “경솔했다”",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-24T12:12:00.000Z",
+     "link": "https://m.entertain.naver.com/article/437/0000522276"
+    },
+    {
+     "title": "이관희♥유시은, 윤하정 결혼식 민폐 논란에 '결국 사과'…\"무지하고 경...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-24T12:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002083593"
+    },
+    {
+     "title": "이관희♥유시은, 윤하정 결혼식 민폐 하객 논란에 \"무지하고 경솔\" 사과...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-24T11:58:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1795520320531468005"
     }
    ]
   },
   {
    "keyword": "삼성 준감위 주주환원 결정",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-24T10:46:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-24T11:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -100,15 +196,15 @@
      "link": "https://www.jemin.com/news/articleView.html?idxno=848378"
     },
     {
-     "title": "삼성 준감위 \"이재용 증여세·내년 1월 주주환원 이해상충 문제 없다\"",
-     "press": "bloter.net",
+     "title": "삼성준감위 “삼성전자 주주환원 유보, 준법 위반·이해상충 아냐”",
+     "press": "kukinews.com",
      "publishedAt": "2026-11-24T11:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/293/0000093771?sid=101"
+     "link": "https://www.kukinews.com/article/view/kuk202611240253"
     }
    ]
   },
   {
-   "keyword": "2가구 줍줍에 5만3447명 몰려",
+   "keyword": "당첨되면 줍줍에 5만3447명 몰려",
    "sources": [
     "nate"
    ],
@@ -144,13 +240,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-24T10:46:00.000Z",
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-24T11:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "수사 1년여 만 '불구속 송치'…'용두사미' 논란",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-24T12:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001405537?sid=102"
+    },
     {
      "title": "14개월 걸린 수사 끝에…'6개 혐의' 김병기 불구속 송치",
      "press": "news.jtbc.co.kr",
@@ -162,44 +264,6 @@
      "press": "donga.com",
      "publishedAt": "2026-11-24T11:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/020/0003764839?sid=102"
-    },
-    {
-     "title": "경찰, 김병기 아들 취업 특혜 등 7개 의혹 ‘혐의 인정’ 송치",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-24T10:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000368582?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "호르무즈 유조선 기뢰 충돌",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-24T10:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "호르무즈에서 유조선 2척 기뢰 충돌...UAE 인근 화물선 피격",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-24T11:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437524?sid=104"
-    },
-    {
-     "title": "이란 \"호르무즈서 유조선 2척 기뢰 충돌\"…UAE 해역서도 선박 피격",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-24T11:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979711?sid=104"
-    },
-    {
-     "title": "호르무즈 해협서 유조선 2척 기뢰 충돌로 화재…UAE 인근 화물선도 피격",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-24T10:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009308052?sid=104"
     }
    ]
   },
@@ -234,11 +298,75 @@
      "link": "https://n.news.naver.com/mnews/article/666/0000133652?sid=104"
     }
    ]
+  },
+  {
+   "keyword": "호르무즈 유조선 기뢰 충돌",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-24T10:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "호르무즈에서 유조선 2척 기뢰 충돌...UAE 인근 화물선 피격",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-24T11:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437524?sid=104"
+    },
+    {
+     "title": "이란 \"호르무즈서 유조선 2척 기뢰 충돌\"…UAE 해역서도 선박 피격",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-24T11:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979711?sid=104"
+    },
+    {
+     "title": "호르무즈 해협서 유조선 2척 기뢰 충돌로 화재…UAE 인근 화물선도 피격",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-24T10:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009308052?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "전광훈",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 2,
+   "firstArticleAt": "2026-11-24T11:25:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[자유통일당 성명서] 전광훈 목사 구속영장 신청, 수사는 정치적 영향으...",
+     "press": "christiantoday.co.kr",
+     "publishedAt": "2026-11-24T12:20:00.000Z",
+     "link": "https://www.christiantoday.co.kr/news/378855"
+    },
+    {
+     "title": "사랑제일교회 “전광훈 목사 구속영장 신청, 법과 상식에 따른 판단 기...",
+     "press": "christiantoday.co.kr",
+     "publishedAt": "2026-11-24T12:12:00.000Z",
+     "link": "https://www.christiantoday.co.kr/news/378851"
+    },
+    {
+     "title": "102억 교회 돈을 당에 '불법제공'…전광훈 또 구속 기로",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-24T11:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522265?sid=102"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1380,
+  "flagged": 1385,
   "matched": 724,
   "avgLeadMin": 529,
   "recent": [
