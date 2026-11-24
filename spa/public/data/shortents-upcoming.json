@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T15:46:39.547Z",
+ "builtAt": "2026-11-24T15:56:42.750Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,38 +11,6 @@
  "measured": 10,
  "candidates": [
   {
-   "keyword": "미국 과잉생산 관세 조사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 14,
-   "recent20": 1,
-   "press": 14,
-   "firstArticleAt": "2026-11-24T14:17:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "미국, 이르면 이번주 '과잉생산 관세' 발표…한국 15% 유지되나",
-     "press": "news.mtn.co.kr",
-     "publishedAt": "2026-11-24T15:28:00.000Z",
-     "link": "https://news.mtn.co.kr/article/2026112500242274013"
-    },
-    {
-     "title": "美 이르면 이번주 '과잉생산 관세' 발표…韓 15% 유지할 듯",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-24T15:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005847290?sid=101"
-    },
-    {
-     "title": "\"美USTR, 이르면 이번주 '과잉생산 관세' 조사 결과 발표\"(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-24T15:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016461542?sid=104"
-    }
-   ]
-  },
-  {
    "keyword": "젠슨 황, 11일 만에 복귀",
    "sources": [
     "nate"
@@ -50,7 +18,7 @@
    "articles90": 14,
    "recent20": 1,
    "press": 12,
-   "firstArticleAt": "2026-11-24T14:22:00.000Z",
+   "firstArticleAt": "2026-11-24T14:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,17 +43,55 @@
    ]
   },
   {
-   "keyword": "정부 세종 이전 계획",
+   "keyword": "미국 과잉생산 관세 조사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
+   "articles90": 10,
    "recent20": 0,
-   "press": 4,
+   "press": 10,
    "firstArticleAt": "2026-11-24T14:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "미국, 이르면 이번주 '과잉생산 관세' 발표…한국 15% 유지되나",
+     "press": "news.mtn.co.kr",
+     "publishedAt": "2026-11-24T15:28:00.000Z",
+     "link": "https://news.mtn.co.kr/article/2026112500242274013"
+    },
+    {
+     "title": "美 이르면 이번주 '과잉생산 관세' 발표…韓 15% 유지할 듯",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-24T15:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005847290?sid=101"
+    },
+    {
+     "title": "\"美USTR, 이르면 이번주 '과잉생산 관세' 조사 결과 발표\"(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-24T15:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016461542?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "정부 세종 이전 계획",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-24T14:34:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정부, 31개 기관 세종 이전계획 고시",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-24T15:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001405566?sid=102"
+    },
     {
      "title": "금융위 등 31개 기관 2031년까지 세종행 확정",
      "press": "kmib.co.kr",
@@ -97,12 +103,6 @@
      "press": "news.tf.co.kr",
      "publishedAt": "2026-11-24T15:01:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/629/0000555213?sid=102"
-    },
-    {
-     "title": "정부, 내년 개인정보위 등 22곳 세종 우선 이전…인권위, 청사신축 후 옮...",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-24T14:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003489331?sid=100"
     }
    ]
   },
@@ -112,7 +112,7 @@
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-24T14:30:00.000Z",
    "exclusive": false,
@@ -137,45 +137,13 @@
      "link": "https://it.chosun.com/news/articleView.html?idxno=3000000001743"
     }
    ]
-  },
-  {
-   "keyword": "김혜경·권양숙 오찬",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-24T14:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김혜경 만난 권양숙의 당부…\"李, 노무현과 모든 부분이 정말 닮았다\"",
-     "press": "weekly.chosun.com",
-     "publishedAt": "2026-11-24T15:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/053/0000063323?sid=100"
-    },
-    {
-     "title": "김혜경 여사, 권양숙 여사·노건호 씨와 오찬 환담",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-24T14:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001405557?sid=100"
-    },
-    {
-     "title": "김혜경 여사 만난 권양숙 여사 \"李대통령, 盧와 식성·수면·성격 닮아\"",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-24T14:18:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5087408"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1404,
-  "matched": 736,
-  "avgLeadMin": 514,
+  "flagged": 1402,
+  "matched": 734,
+  "avgLeadMin": 513,
   "recent": [
    {
     "keyword": "아침마당",
