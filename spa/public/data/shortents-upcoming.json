@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T21:28:26.251Z",
+ "builtAt": "2026-11-24T21:38:28.895Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,79 +8,260 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 18,
  "candidates": [
   {
-   "keyword": "서울 지하철 파업 철회 타결",
+   "keyword": "기업 체감경기 하락",
    "sources": [
-    "nate"
+    "daum"
    ],
-   "articles90": 28,
-   "recent20": 6,
+   "articles90": 25,
+   "recent20": 0,
    "press": 25,
-   "firstArticleAt": "2026-11-24T20:00:00.000Z",
+   "firstArticleAt": "2026-11-24T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[속보] ‘출근길 대란’ 피했다…서울지하철 임단협 타결, 파업 철회",
-     "press": "dt.co.kr",
-     "publishedAt": "2026-11-24T21:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/029/0003060986?sid=102"
+     "title": "재고 쌓이고 비용 부담 커져 … 11월 기업 체감경기 두 달 만에 하락",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-24T21:06:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/24/2026112450359.html"
     },
     {
-     "title": "출근길 대란 피했다…서울지하철 총파업 철회, 노사 임단협 타결",
-     "press": "munhwa.com",
-     "publishedAt": "2026-11-24T21:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/021/0002835251?sid=102"
+     "title": "11월 기업심리 0.7p 하락…제조업 재고 누적·비제조업 비용 부담",
+     "press": "segyebiz.com",
+     "publishedAt": "2026-11-24T21:02:00.000Z",
+     "link": "http://www.segyebiz.com/newsView/20261124518788?OutUrl=naver"
     },
     {
-     "title": "서울지하철 파업 철회… 인력 500명 충원·구조조정 보류 합의",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-24T21:12:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3451870"
+     "title": "국내 기업 체감경기 11월 들어 한풀 꺾여",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-24T21:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002833818?sid=101"
     }
    ]
   },
   {
-   "keyword": "국내 코인 발행 허용",
+   "keyword": "과잉생산 관세 발표",
    "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-24T20:06:00.000Z",
+   "articles90": 12,
+   "recent20": 7,
+   "press": 11,
+   "firstArticleAt": "2026-11-24T20:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "코인거래소 대주주 지분 최대 34%...스테이블코인 발행은 은행 주도로",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-24T21:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004685810?sid=101"
+     "title": "美, 이르면 오늘 ‘과잉생산’ 조사 결과 발표...韓 관세 15% 유지 전망",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-24T21:36:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2652487"
     },
     {
-     "title": "코인시장 판이 바뀐다…은행엔 열린 문, 거래소엔 높아지는 벽",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-24T21:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005445947?sid=101"
+     "title": "美 '과잉생산 관세' 이르면 오늘 발표…韓 15% 관세 상한 유지 전망",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-24T21:36:00.000Z",
+     "link": "https://www.ajunews.com/view/20261125063123823"
     },
     {
-     "title": "거래소 대주주 지분 20% ‘원칙’… 원화 코인, 과반 지분 은행 주도",
+     "title": "美 과잉생산 관세 이르면 이번주 발표…한국도 영향권에",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-24T21:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003159054?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "서울 지하철 노사 협상 타결",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 11,
+   "recent20": 3,
+   "press": 11,
+   "firstArticleAt": "2026-11-24T20:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[속보] 서울지하철 파업 철회…노사 극적 타결로 ‘출근길 대란’ 피했...",
      "press": "seoul.co.kr",
-     "publishedAt": "2026-11-24T20:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003702884?sid=101"
+     "publishedAt": "2026-11-24T21:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003702905?sid=102"
+    },
+    {
+     "title": "서울 지하철 노사 임단협 극적 타결…출근길 정상운행",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-24T21:28:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101952"
+    },
+    {
+     "title": "서울지하철 노사 교섭 타결…출근길 정상운행",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-24T21:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009308256?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "건설",
+   "sources": [
+    "google"
+   ],
+   "articles90": 18,
+   "recent20": 12,
+   "press": 10,
+   "firstArticleAt": "2026-11-24T20:11:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "영업익 흑자인데 순익 적자…태영건설, 미완의 수익성 개선",
+     "press": "news.bizwatch.co.kr",
+     "publishedAt": "2026-11-24T21:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/648/0000052944?sid=101"
+    },
+    {
+     "title": "'건폭몰이' 윤석열 삭감 건설 교육훈련 예산 증액 요구",
+     "press": "labortoday.co.kr",
+     "publishedAt": "2026-11-24T21:34:00.000Z",
+     "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237922"
+    },
+    {
+     "title": "이우형 의원, '지역업체 참여 확대'... 건설산업 활성화 조례 개정 추진",
+     "press": "newsworker.co.kr",
+     "publishedAt": "2026-11-24T21:30:00.000Z",
+     "link": "https://www.newsworker.co.kr/news/articleView.html?idxno=515978"
+    }
+   ]
+  },
+  {
+   "keyword": "한미 외교안보라인 교체",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-24T20:16:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美, 韓 외교·안보라인 교체에 \"한미동맹 긴밀한 협력 중요\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-24T21:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653190?sid=100"
+    },
+    {
+     "title": "美, 韓 외교·안보라인 교체에 “한미동맹 내 긴밀 협력 중요”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-24T21:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002727979?sid=104"
+    },
+    {
+     "title": "美, 韓 외교안보라인 교체에 \"한미동맹 긴밀 협력 중요\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-24T20:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929631?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "오정태 딸 카이스트 입학",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-24T20:35:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "오정태 \"17살 딸, 카이스트 조기입학…합격 선물로 성형수술\"('동상이몽...",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-24T21:32:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1795555800531471010"
+    },
+    {
+     "title": "‘동상이몽2’ 오정태♥백아영 “첫 딸, 카이스트 합격…성형 약속” [...",
+     "press": "tvdaily.co.kr",
+     "publishedAt": "2026-11-24T21:03:00.000Z",
+     "link": "https://m.entertain.naver.com/article/440/0000054035"
+    },
+    {
+     "title": "오정태 딸 카이스트 합격…축하 선물 '성형'",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-24T21:00:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611250005"
+    }
+   ]
+  },
+  {
+   "keyword": "배당",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-24T20:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'월드시리즈 우승팀' 밀워키, 포스트시즌 배당금 1인 6억 6천만 원 수령",
+     "press": "thesportstimes.co.kr",
+     "publishedAt": "2026-11-24T21:05:00.000Z",
+     "link": "https://m.sports.naver.com/wbaseball/article/472/0000042602"
+    },
+    {
+     "title": "JB우리 박춘원·김기덕, 4900억 수혈…배당으로 탕진할까[더시그널]",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-24T21:00:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=885149"
+    },
+    {
+     "title": "[종목 브리핑] 티쓰리, 3분기 주당 40원 배당 결정",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-24T20:56:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=410824"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1383,
-  "matched": 721,
-  "avgLeadMin": 536,
+  "flagged": 1388,
+  "matched": 724,
+  "avgLeadMin": 542,
   "recent": [
+   {
+    "keyword": "현대차 N 버츄얼컵 결승 진행",
+    "hitKeyword": "현대차 내수",
+    "hitAt": "2026-11-25T06:30:00+09:00",
+    "leadMin": 2688
+   },
+   {
+    "keyword": "현대차 N 컵 결승 개최",
+    "hitKeyword": "현대차 내수",
+    "hitAt": "2026-11-25T06:30:00+09:00",
+    "leadMin": 2668
+   },
+   {
+    "keyword": "2가구 줍줍에 5만3447명 몰려",
+    "hitKeyword": "잠실 2가구 청약 경쟁",
+    "hitAt": "2026-11-25T06:30:00+09:00",
+    "leadMin": 569
+   },
    {
     "keyword": "교육청",
     "hitKeyword": "시도교육청 시험지 파쇄",
@@ -122,24 +303,6 @@
     "hitKeyword": "오정태 딸 카이스트 입학",
     "hitAt": "2026-11-25T06:00:00+09:00",
     "leadMin": 368
-   },
-   {
-    "keyword": "유시은과 이관희, 민폐 하객 사과",
-    "hitKeyword": "이관희 유시은 사과",
-    "hitAt": "2026-11-25T06:00:00+09:00",
-    "leadMin": 348
-   },
-   {
-    "keyword": "젠슨 황, 11일 만에 복귀",
-    "hitKeyword": "젠슨 황 엔비디아 복귀",
-    "hitAt": "2026-11-25T06:00:00+09:00",
-    "leadMin": 313
-   },
-   {
-    "keyword": "젠슨 황의 복귀",
-    "hitKeyword": "젠슨 황 엔비디아 복귀",
-    "hitAt": "2026-11-25T06:00:00+09:00",
-    "leadMin": 243
    }
   ]
  }
