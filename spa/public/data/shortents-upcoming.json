@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T20:38:11.054Z",
+ "builtAt": "2026-11-24T20:48:14.422Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,45 +8,12 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 13,
+ "measured": 10,
  "candidates": [
-  {
-   "keyword": "서울 지하철 파업 타결",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 27,
-   "recent20": 2,
-   "press": 18,
-   "firstArticleAt": "2026-11-24T19:09:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "파업 피했지만 적자는 여전…서울지하철 노사 타결에도 남은 숙제",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-24T20:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009308198?sid=102"
-    },
-    {
-     "title": "서울지하철 노조, 총파업 철회…출근길 정상 운행",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-24T20:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005445938?sid=102"
-    },
-    {
-     "title": "서울지하철 임단협, 파업 목전서 타결…'출근 대란' 피해",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-24T20:18:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004213522?sid=102"
-    }
-   ]
-  },
   {
    "keyword": "젠슨 황 복귀로 시장 영향",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 11,
    "recent20": 1,
@@ -74,13 +41,77 @@
      "link": "https://n.news.naver.com/mnews/article/081/0003702807?sid=104"
     }
    ]
+  },
+  {
+   "keyword": "미국 과잉생산 관세 조사",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-24T20:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "“美USTR, 이르면 이번주 ‘과잉생산 관세’ 조사 결과 발표”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-24T20:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002727971?sid=104"
+    },
+    {
+     "title": "미 USTR, 이번주 과잉생산 관세 조사결과 발표",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-24T20:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929617?sid=104"
+    },
+    {
+     "title": "美USTR, 이번주 韓포함 16개국 과잉생산 관세 조사 결과 발표",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-24T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004213521?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "서울 지하철 노사 협상 타결",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-24T19:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "서울지하철 ‘출근길 대란’ 피했다…밤샘 협상 끝 3개 노조 파업 철회",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-24T20:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002727969?sid=101"
+    },
+    {
+     "title": "서울지하철 총파업 극적 철회…18시간 마라톤 협상 끝 임단협 잠정 합의",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-24T19:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005847293?sid=102"
+    },
+    {
+     "title": "서울 지하철 파업 위기 넘겼다...서울교통공사 노사 임단협 극적 타결",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-24T19:44:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261125000028"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1388,
-  "matched": 716,
-  "avgLeadMin": 515,
+  "flagged": 1387,
+  "matched": 715,
+  "avgLeadMin": 516,
   "recent": [
    {
     "keyword": "아침마당",
