@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T19:57:58.958Z",
+ "builtAt": "2026-11-24T20:08:01.826Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,99 @@
  "measured": 20,
  "candidates": [
   {
-   "keyword": "서울 지하철 협상 타결",
+   "keyword": "젠슨 황의 복귀",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-24T18:31:00.000Z",
+   "articles90": 31,
+   "recent20": 20,
+   "press": 18,
+   "firstArticleAt": "2026-11-24T19:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "서울지하철 3개 노조 파업 철회...출근길 혼잡 피해",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-24T19:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437620?sid=102"
+     "title": "엔비디아 CEO 복귀에 AI주 반전…한미반도체·ISC까지 온기 퍼지나",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-24T20:06:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=507710"
     },
     {
-     "title": "서울 지하철 파업 위기 넘겼다...서울교통공사 노사 임단협 극적 타결",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-24T19:44:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261125000028"
-    },
-    {
-     "title": "서울지하철 임단협 타결로 파업 철회…'출근길 대란' 피했다(종합2보)",
+     "title": "젠슨황, 엔비디아 전사회의 열고 사과…\"심리치료 받고 있다\"",
      "press": "yna.co.kr",
-     "publishedAt": "2026-11-24T19:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016461571?sid=102"
+     "publishedAt": "2026-11-24T20:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016461577?sid=104"
+    },
+    {
+     "title": "젠슨 황 복귀 당일에 맞춰… 뒤늦게 ‘수출통제 명단’ 오른 내연녀 회...",
+     "press": "seoul.co.kr",
+     "publishedAt": "2026-11-24T20:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/081/0003702826?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "서울 지하철 파업 철회",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 22,
+   "recent20": 8,
+   "press": 16,
+   "firstArticleAt": "2026-11-24T18:39:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "서울교통공사 제1·2·3 노조, 교섭 타결...총파업 철회",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-24T20:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437621?sid=102"
+    },
+    {
+     "title": "서울지하철 노사 임단협 타결…총파업 철회",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-24T20:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929609?sid=102"
+    },
+    {
+     "title": "[종합] 서울 지하철 노사, 밤샘 교섭 끝 극적 타결…총파업 철회",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-24T20:00:00.000Z",
+     "link": "https://www.ajunews.com/view/20261125045308776"
+    }
+   ]
+  },
+  {
+   "keyword": "정치",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 8,
+   "recent20": 7,
+   "press": 7,
+   "firstArticleAt": "2026-11-24T19:35:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[인터뷰] “트럼프 집권이 평범한 사람 정치판에 불러” 공화당 텃밭 뒤...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-24T20:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002833815?sid=104"
+    },
+    {
+     "title": "정치인엔 상소 포기, 기업인에겐 끝까지 재판?",
+     "press": "lawtimes.co.kr",
+     "publishedAt": "2026-11-24T20:02:00.000Z",
+     "link": "https://www.lawtimes.co.kr/news/articleView.html?idxno=229973"
+    },
+    {
+     "title": "[단독] 오세훈 “떼밥, 진솔한 얘기 못 해”…국힘 전원과 ‘식사정치’",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-24T20:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003567746?sid=100"
     }
    ]
   }
@@ -46,8 +111,8 @@
  "hitRate": {
   "days": 7,
   "flagged": 1390,
-  "matched": 720,
-  "avgLeadMin": 513,
+  "matched": 719,
+  "avgLeadMin": 514,
   "recent": [
    {
     "keyword": "아침마당",
