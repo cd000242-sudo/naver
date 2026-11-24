@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T13:41:50.359Z",
+ "builtAt": "2026-11-24T15:36:28.149Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,143 +8,187 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 22,
+ "measured": 14,
  "candidates": [
   {
-   "keyword": "비",
+   "keyword": "미국 과잉생산 관세 조사",
    "sources": [
-    "google"
+    "signal.bz"
    ],
-   "articles90": 16,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-24T12:23:00.000Z",
+   "articles90": 14,
+   "recent20": 2,
+   "press": 14,
+   "firstArticleAt": "2026-11-24T14:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'김태희♥' 비, 자기 관리 끝판왕 아니었어? 지방간 고백 깜짝 \"이렇게 ...",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-24T13:36:00.000Z",
-     "link": "http://www.joynews24.com/view/2030028"
+     "title": "미국, 이르면 이번주 '과잉생산 관세' 발표…한국 15% 유지되나",
+     "press": "news.mtn.co.kr",
+     "publishedAt": "2026-11-24T15:28:00.000Z",
+     "link": "https://news.mtn.co.kr/article/2026112500242274013"
     },
     {
-     "title": "유재석, 비 콘서트 초대에 \"가족이랑 같이 가기는 좀...\"(틈만나면)[종합...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-24T13:20:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002083602"
+     "title": "美 이르면 이번주 '과잉생산 관세' 발표…韓 15% 유지할 듯",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-24T15:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005847290?sid=101"
     },
     {
-     "title": "비 “내일 당장 죽는다면 마지막으로 치즈버거 오징어볶음 먹을 것” (...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-24T13:16:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190848"
+     "title": "\"美USTR, 이르면 이번주 '과잉생산 관세' 조사 결과 발표\"(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-24T15:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016461542?sid=104"
     }
    ]
   },
   {
-   "keyword": "내신 부정행위 퇴학 최대",
+   "keyword": "정부 세종 이전 계획",
    "sources": [
-    "signal.bz"
-   ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-24T12:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "중·고등학교 내신도 감독 강화...부정행위자 최대 퇴학",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-24T13:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437545?sid=102"
-    },
-    {
-     "title": "교육부, 중·고교 내신평가 관리·감독 강화",
-     "press": "gnmaeil.com",
-     "publishedAt": "2026-11-24T12:52:00.000Z",
-     "link": "http://www.gnmaeil.com/news/articleView.html?idxno=599377"
-    },
-    {
-     "title": "내신 부정행위 단속 강화…현장 감독·기준 ‘막막’",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-24T12:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012300342?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "수능 시험지 폐기",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-24T12:13:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"수능 부정행위 조사한다더니…지난해 시험지 17만부 폐기\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-24T13:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004213501?sid=102"
-    },
-    {
-     "title": "지난해 수능 시험지 17만여 부 폐기…세종만 한 부도 안 버렸다",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-24T13:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003567652?sid=102"
-    },
-    {
-     "title": "“작년 수능시험지 최소 17만여부 폐기…세종만 전량 보존”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-24T12:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004685772?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "중국 대미 수출통제 유예",
-   "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
    "articles90": 6,
    "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-24T12:13:00.000Z",
+   "firstArticleAt": "2026-11-24T14:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "중국 대미 수출통제 유예, 일본엔 압박…한국 실용외교 시험대",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-24T13:24:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285161"
+     "title": "금융위 등 31개 기관 2031년까지 세종행 확정",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-24T15:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001887220?sid=102"
     },
     {
-     "title": "中, 핵심광물 美 수출통제 2개월 뒤로 미루고 보잉 구매",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-24T13:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967542?sid=104"
+     "title": "'친명' 한준호, 행안장관 출사표…'중수청·지방이전' 시험대",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-24T15:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000555213?sid=102"
     },
     {
-     "title": "中, 핵심 광물 대미 수출통제 2개월 추가 유예…보잉 항공기 50대도 구매",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-24T12:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002727949?sid=104"
+     "title": "정부, 내년 개인정보위 등 22곳 세종 우선 이전…인권위, 청사신축 후 옮...",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-24T14:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003489331?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "EU 하이브리드차 수입 제한",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 2,
+   "press": 3,
+   "firstArticleAt": "2026-11-24T14:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "EU, 하이브리드차도 수입 제한… 국산차 ‘빨간불’",
+     "press": "donga.com",
+     "publishedAt": "2026-11-24T15:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764880?sid=103"
+    },
+    {
+     "title": "EU, 하이브리드차 수입 제한… 한국은 6만7924대 허용",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-24T15:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001887221?sid=101"
+    },
+    {
+     "title": "EU, 한국산 HEV 수입 쿼터 6만7924대로 제한… 수출 확대 제동",
+     "press": "it.chosun.com",
+     "publishedAt": "2026-11-24T14:30:00.000Z",
+     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000001743"
+    }
+   ]
+  },
+  {
+   "keyword": "김혜경·권양숙 오찬",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-24T14:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김혜경 만난 권양숙의 당부…\"李, 노무현과 모든 부분이 정말 닮았다\"",
+     "press": "weekly.chosun.com",
+     "publishedAt": "2026-11-24T15:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/053/0000063323?sid=100"
+    },
+    {
+     "title": "김혜경 여사, 권양숙 여사·노건호 씨와 오찬 환담",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-24T14:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001405557?sid=100"
+    },
+    {
+     "title": "김혜경 여사 만난 권양숙 여사 \"李대통령, 盧와 식성·수면·성격 닮아\"",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-24T14:18:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5087408"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1399,
-  "matched": 740,
-  "avgLeadMin": 520,
+  "flagged": 1404,
+  "matched": 737,
+  "avgLeadMin": 513,
   "recent": [
+   {
+    "keyword": "아침마당",
+    "hitKeyword": "아침마당 우서윤",
+    "hitAt": "2026-11-25T00:00:00+09:00",
+    "leadMin": 2338
+   },
+   {
+    "keyword": "12월 3일 공휴일 지정",
+    "hitKeyword": "12월 3일 국가기념일",
+    "hitAt": "2026-11-25T00:00:00+09:00",
+    "leadMin": 370
+   },
+   {
+    "keyword": "대전 ACLE 베이징 3-2 승리",
+    "hitKeyword": "대전 베이징 3-2 승리",
+    "hitAt": "2026-11-24T23:30:00+09:00",
+    "leadMin": 109
+   },
+   {
+    "keyword": "대전 베이징 승리",
+    "hitKeyword": "대전 베이징 3-2 승리",
+    "hitAt": "2026-11-24T23:30:00+09:00",
+    "leadMin": 78
+   },
+   {
+    "keyword": "내신 부정행위 퇴학 최대",
+    "hitKeyword": "수능 부정행위 적발",
+    "hitAt": "2026-11-24T23:30:00+09:00",
+    "leadMin": 68
+   },
+   {
+    "keyword": "대전, 베이징 3-2로 ACLE 연패 탈출!",
+    "hitKeyword": "대전 베이징 3-2 승리",
+    "hitAt": "2026-11-24T23:30:00+09:00",
+    "leadMin": 28
+   },
+   {
+    "keyword": "정상빈 1골 1도움",
+    "hitKeyword": "정상빈 MLS컵 활약",
+    "hitAt": "2026-11-24T23:30:00+09:00",
+    "leadMin": 18
+   },
    {
     "keyword": "정상빈 1골 1도움 폭발!",
     "hitKeyword": "정상빈 1골 1도움",
@@ -162,48 +206,6 @@
     "hitKeyword": "엔비디아 젠슨 황 복귀",
     "hitAt": "2026-11-24T22:30:00+09:00",
     "leadMin": 240
-   },
-   {
-    "keyword": "젠슨 황 CEO 전격 복귀",
-    "hitKeyword": "엔비디아 젠슨 황 복귀",
-    "hitAt": "2026-11-24T22:30:00+09:00",
-    "leadMin": 199
-   },
-   {
-    "keyword": "젠슨 황 전격 복귀",
-    "hitKeyword": "엔비디아 젠슨 황 복귀",
-    "hitAt": "2026-11-24T22:30:00+09:00",
-    "leadMin": 189
-   },
-   {
-    "keyword": "EU 하이브리드차 수입 제한",
-    "hitKeyword": "EU 하이브리드차 제한",
-    "hitAt": "2026-11-24T22:30:00+09:00",
-    "leadMin": 79
-   },
-   {
-    "keyword": "젠슨 황 복귀로 엔비디아 급등",
-    "hitKeyword": "엔비디아 젠슨 황 복귀",
-    "hitAt": "2026-11-24T22:30:00+09:00",
-    "leadMin": 38
-   },
-   {
-    "keyword": "정상빈 1골 1도움",
-    "hitKeyword": "정상빈 1골 1도움",
-    "hitAt": "2026-11-24T22:30:00+09:00",
-    "leadMin": 28
-   },
-   {
-    "keyword": "세종 이전 확정",
-    "hitKeyword": "세종 행정기관 이전",
-    "hitAt": "2026-11-24T22:30:00+09:00",
-    "leadMin": 18
-   },
-   {
-    "keyword": "젠슨 황 복귀 후 급등하는 주가",
-    "hitKeyword": "엔비디아 젠슨 황 복귀",
-    "hitAt": "2026-11-24T22:30:00+09:00",
-    "leadMin": 18
    }
   ]
  }
