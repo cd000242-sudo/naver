@@ -37,12 +37,28 @@ async function mount(provider: 'codex' | 'claude' | 'gemini' = 'codex') {
   return host.querySelector(`[data-settings-agent-accounts="${provider}"]`) as HTMLElement;
 }
 const radios = (box: HTMLElement) => Array.from(box.querySelectorAll<HTMLInputElement>('input[type="radio"]'));
-const button = (box: HTMLElement, text: string) => Array.from(box.querySelectorAll('button')).find((b) => b.textContent?.includes(text)) as HTMLButtonElement;
+const button = (box: HTMLElement, text: string) => Array.from(box.querySelectorAll('button')).find((b) => b.textContent?.includes(text)) as HTMLButtonElement | undefined;
+const rows = (box: HTMLElement) => Array.from(box.querySelectorAll<HTMLElement>('[role="listitem"]'));
+const rowButton = (row: HTMLElement, text: string) => Array.from(row.querySelectorAll('button')).find((b) => b.textContent?.trim() === text);
+const inUse = (box: HTMLElement) => rows(box).map((row) => row.textContent?.includes('✓ 사용 중') === true);
+const click = (target: HTMLElement | undefined) => { expect(target).toBeTruthy(); target!.click(); };
 
 describe('settings: saved agent accounts', () => {
+  it('lists the accounts as a plain list: one "✓ 사용 중" mark on the active row, a use button on the others', async () => {
+    const box = await mount();
+    const list = box.querySelector('[data-settings-agent-account-list]') as HTMLElement;
+    expect(list.getAttribute('role')).toBe('list');
+    expect(radios(box)).toHaveLength(0);
+    expect(rows(box)).toHaveLength(2);
+    expect(inUse(box)).toEqual([true, false]);
+    expect(rows(box).map((row) => row.getAttribute('aria-current'))).toEqual(['true', null]);
+    expect(rowButton(rows(box)[0], '이 계정 사용')).toBeUndefined();
+    expect(rowButton(rows(box)[1], '이 계정 사용')).toBeTruthy();
+    expect(Array.from(box.querySelectorAll('[data-settings-agent-account-active]')).every((node) => node.tagName !== 'BUTTON')).toBe(true);
+  });
+
   it('shows the account in use with its email and plan, plus the saved ones and this app\'s usage', async () => {
     const box = await mount();
-    expect(radios(box).map((r) => [r.value, r.checked])).toEqual([['default', true], [ID_A, false]]);
     expect(box.textContent).toContain('기본 계정');
     expect(box.textContent).toContain('main@example.com');
     expect(box.textContent).toContain('Plus');
@@ -61,33 +77,79 @@ describe('settings: saved agent accounts', () => {
     expect((await mount()).textContent).toContain('로그인 안 됨');
   });
 
-  it('switches immediately when another account is picked, and announces it', async () => {
+  it('does nothing when a row is merely clicked: only the use button switches', async () => {
+    const box = await mount();
+    rows(box)[1].click();
+    await flush();
+    expect(api.agentAccountSwitch).not.toHaveBeenCalled();
+  });
+
+  it('switches the clicked account only after "이 계정 사용", announces it, and moves the "✓ 사용 중" mark', async () => {
     const box = await mount();
     const changed = vi.fn();
     window.addEventListener('agent-account-changed', changed);
     api.agentAccountList.mockResolvedValue(listing('codex', [defaultAccount({ active: false }), savedAccount({ active: true })]));
-    const target = radios(box)[1];
-    target.checked = true; target.dispatchEvent(new Event('change', { bubbles: true }));
+    click(rowButton(rows(box)[1], '이 계정 사용'));
     await flush();
+    expect(api.agentAccountSwitch).toHaveBeenCalledTimes(1);
     expect(api.agentAccountSwitch).toHaveBeenCalledWith('codex', ID_A);
     expect(changed).toHaveBeenCalledOnce();
-    expect(radios(box)[1].checked).toBe(true);
+    expect(inUse(box)).toEqual([false, true]);
+    expect(rows(box).map((row) => row.getAttribute('aria-current'))).toEqual([null, 'true']);
+    expect(rowButton(rows(box)[0], '이 계정 사용')).toBeTruthy();
+    expect(box.textContent).toContain('계정을 바꿨습니다.');
     window.removeEventListener('agent-account-changed', changed);
+  });
+
+  it('locks every row button while a switch is running and ignores a second click', async () => {
+    const box = await mount();
+    let finish!: (value: unknown) => void;
+    api.agentAccountSwitch.mockReturnValue(new Promise((resolve) => { finish = resolve; }));
+    const use = rowButton(rows(box)[1], '이 계정 사용') as HTMLButtonElement;
+    use.click();
+    await flush();
+    expect(Array.from(box.querySelectorAll('[role="listitem"] button')).every((b) => (b as HTMLButtonElement).disabled)).toBe(true);
+    use.click();
+    expect(api.agentAccountSwitch).toHaveBeenCalledTimes(1);
+    finish({ success: true });
+    await flush();
+    expect(Array.from(box.querySelectorAll('[role="listitem"] button')).some((b) => (b as HTMLButtonElement).disabled)).toBe(false);
   });
 
   it('keeps the previous account and explains when the switch fails', async () => {
     api.agentAccountSwitch.mockResolvedValue({ success: false, message: '계정을 바꾸지 못했습니다.' });
     const box = await mount();
-    const target = radios(box)[1];
-    target.checked = true; target.dispatchEvent(new Event('change', { bubbles: true }));
+    click(rowButton(rows(box)[1], '이 계정 사용'));
     await flush();
-    expect(radios(box)[0].checked).toBe(true);
+    expect(inUse(box)).toEqual([true, false]);
     expect(box.textContent).toContain('계정을 바꾸지 못했습니다.');
+  });
+
+  it('never shows an unsafe message from the main process when a switch fails', async () => {
+    api.agentAccountSwitch.mockResolvedValue({ success: false, message: 'C:\\Users\\secret\\token=abc\nstack' });
+    const box = await mount();
+    click(rowButton(rows(box)[1], '이 계정 사용'));
+    await flush();
+    expect(box.textContent).toContain('계정을 바꾸지 못했습니다.');
+    expect(box.textContent).not.toContain('secret');
+  });
+
+  it('ignores a late list answer that was overtaken by a newer one', async () => {
+    const box = await mount();
+    let late!: (value: unknown) => void;
+    api.agentAccountList
+      .mockReturnValueOnce(new Promise((resolve) => { late = resolve; }))
+      .mockResolvedValueOnce(listing('codex', [defaultAccount({ active: false }), savedAccount({ active: true })]));
+    const old = refreshSettingsAgentAccounts(['codex']);
+    await refreshSettingsAgentAccounts(['codex']);
+    late(listing('codex', [defaultAccount(), savedAccount()]));
+    await old;
+    expect(inUse(box)).toEqual([false, true]);
   });
 
   it('adds an account through the login window and switches to it right away when idle', async () => {
     const box = await mount();
-    button(box, '계정 추가').click();
+    click(button(box, '계정 추가'));
     await flush(); await flush();
     expect(api.agentAccountCreate).toHaveBeenCalledWith('codex');
     expect(api.agentLogin).toHaveBeenCalledWith('codex', { accountId: ID_A });
@@ -100,7 +162,7 @@ describe('settings: saved agent accounts', () => {
     const lease = tryAcquirePipelineRun('unified');
     try {
       const box = await mount();
-      button(box, '계정 추가').click();
+      click(button(box, '계정 추가'));
       await flush(); await flush();
       expect(api.agentAccountSwitch).not.toHaveBeenCalled();
       expect(api.agentAccountRemove).not.toHaveBeenCalled();
@@ -113,34 +175,53 @@ describe('settings: saved agent accounts', () => {
   it('cleans up the empty account when the login fails or is cancelled', async () => {
     api.agentLogin.mockResolvedValue({ success: false, message: '로그인이 취소되었습니다.' });
     const box = await mount();
-    button(box, '계정 추가').click();
+    click(button(box, '계정 추가'));
     await flush(); await flush();
     expect(api.agentAccountRemove).toHaveBeenCalledWith('codex', ID_A);
     expect(box.textContent).toContain('로그인이 취소되었습니다.');
     expect(api.agentAccountSwitch).not.toHaveBeenCalled();
   });
 
-  it('removes the selected saved account only after confirmation, never the default', async () => {
-    api.agentAccountList.mockResolvedValue(listing('codex', [defaultAccount({ active: false }), savedAccount({ active: true })]));
+  it('removes the account of the clicked row only after confirmation, and the default row has no remove button', async () => {
     const box = await mount();
+    expect(rowButton(rows(box)[0], '빼기')).toBeUndefined();
+    expect(button(box, '이 계정 빼기')).toBeUndefined();
     (confirm as any).mockReturnValueOnce(false);
-    button(box, '계정 빼기').click(); await flush();
+    click(rowButton(rows(box)[1], '빼기')); await flush();
     expect(api.agentAccountRemove).not.toHaveBeenCalled();
-    button(box, '계정 빼기').click(); await flush();
+    // The default account stays in use: the target is the clicked row, not the active one.
+    click(rowButton(rows(box)[1], '빼기')); await flush();
+    expect(api.agentAccountRemove).toHaveBeenCalledTimes(1);
     expect(api.agentAccountRemove).toHaveBeenCalledWith('codex', ID_A);
+    expect(api.agentAccountSwitch).not.toHaveBeenCalled();
+  });
 
-    api.agentAccountList.mockResolvedValue(listing('codex', [defaultAccount(), savedAccount()]));
-    await refreshSettingsAgentAccounts(['codex']);
-    expect(button(box, '계정 빼기').disabled).toBe(true);
+  it('says the default account is back when the removed account was the one in use', async () => {
+    api.agentAccountList.mockResolvedValue(listing('codex', [defaultAccount({ active: false }), savedAccount({ active: true })]));
+    api.agentAccountRemove.mockResolvedValue({ success: true, removedActive: true });
+    const box = await mount();
+    const changed = vi.fn();
+    window.addEventListener('agent-account-changed', changed);
+    api.agentAccountList.mockResolvedValue(listing('codex', [defaultAccount()]));
+    click(rowButton(rows(box)[1], '빼기')); await flush();
+    expect(changed).toHaveBeenCalledOnce();
+    expect(inUse(box)).toEqual([true]);
+    expect(box.textContent).toContain('기본 계정으로 돌아갑니다');
+    window.removeEventListener('agent-account-changed', changed);
   });
 
   it('Antigravity cannot keep several accounts: shows the current one and a re-login button', async () => {
     api.agentAccountList.mockResolvedValue(listing('gemini', [defaultAccount({ plan: undefined, email: 'g@example.com' })], false));
     const box = await mount('gemini');
     expect(radios(box)).toHaveLength(0);
+    expect(rows(box)).toHaveLength(0);
+    expect(box.querySelector('[data-settings-agent-account-list]')?.getAttribute('role')).toBe('group');
+    expect(box.textContent).not.toContain('사용 중');
+    expect(button(box, '이 계정 사용')).toBeUndefined();
+    expect(button(box, '빼기')).toBeUndefined();
     expect(box.textContent).toContain('g@example.com');
     expect(box.textContent).toContain('한 번에 한 계정');
-    button(box, '다른 계정으로 로그인').click();
+    click(button(box, '다른 계정으로 로그인'));
     await flush(); await flush();
     expect(api.agentLogout).toHaveBeenCalledWith('gemini');
     expect(api.agentLogin).toHaveBeenCalledWith('gemini');
@@ -164,5 +245,41 @@ describe('settings overview puts account controls inside each agent card', () =>
     for (const provider of ['codex', 'claude', 'gemini']) {
       expect(document.querySelectorAll(`#settings-agent-overview [data-settings-agent-accounts="${provider}"]`)).toHaveLength(1);
     }
+  });
+
+  it('hides the old "계정 전환" button for good once the card has its account box, without removing it', async () => {
+    document.documentElement.innerHTML = readFileSync('public/index.html', 'utf8').replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '').replace(/<link\b[^>]*>/gi, '');
+    (window as any).api = api;
+    const handler = vi.fn();
+    for (const provider of ['codex', 'claude', 'gemini']) document.getElementById(`agent-${provider}-switch-btn`)!.addEventListener('click', handler);
+    setupSettingsAgentOverview();
+    for (const provider of ['codex', 'claude', 'gemini']) {
+      const old = document.getElementById(`agent-${provider}-switch-btn`) as HTMLElement;
+      expect(old, provider).not.toBeNull();
+      expect(getComputedStyle(old).display, provider).toBe('none');
+      // The status refresh shows it again for a logged-in agent: it must stay hidden anyway.
+      old.style.display = 'inline-block';
+      await flush();
+      expect(getComputedStyle(old).display, provider).toBe('none');
+      old.style.cssText = 'display: flex;';
+      await flush();
+      expect(getComputedStyle(old).display, provider).toBe('none');
+      old.click();
+    }
+    expect(handler).toHaveBeenCalledTimes(3);
+    setupSettingsAgentOverview();
+    const rule = document.querySelector('style[data-settings-agent-acct-legacy-style]');
+    expect(document.querySelectorAll('style[data-settings-agent-acct-legacy-style]')).toHaveLength(1);
+    // The engine ranks an !important stylesheet rule above inline display, so the rule must name this button.
+    expect(rule?.textContent).toMatch(/display:\s*none\s*!important/);
+    expect(document.getElementById('agent-claude-switch-btn')!.matches('[data-settings-agent-acct-legacy]')).toBe(true);
+  });
+
+  it('leaves the old button alone when no account box was made for its card', () => {
+    document.body.innerHTML = '<div id="host"></div><button id="agent-codex-switch-btn" style="display:none">전환</button>';
+    setupSettingsAgentAccounts('claude', document.getElementById('host') as HTMLElement);
+    const old = document.getElementById('agent-codex-switch-btn') as HTMLElement;
+    old.style.display = 'inline-block';
+    expect(getComputedStyle(old).display).toBe('inline-block');
   });
 });

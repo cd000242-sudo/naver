@@ -1,7 +1,7 @@
 /**
  * Settings-only: saved accounts inside each agent card (Codex / Claude Code / Antigravity).
- * Codex and Claude Code keep one folder per account, so the list switches instantly. Antigravity
- * keeps a single OS login, so it only offers "log in with another account".
+ * Codex and Claude Code keep one folder per account: the row in use is marked, every other row
+ * has a use button. Antigravity keeps a single OS login, so it only offers "log in with another account".
  * The bridge never carries tokens: only an email, a plan label and this app's own usage count.
  *
  * Renderer bundle note: copy-static joins renderer files into one scope, so every top-level
@@ -25,6 +25,7 @@ interface SettingsAgentAcctLoginResult { success?: boolean; message?: string }
 
 const SETTINGS_AGENT_ACCT_PROVIDERS: readonly SettingsAgentAcctProvider[] = ['codex', 'claude', 'gemini'];
 const settingsAgentAcctBusy = new Set<string>();
+const settingsAgentAcctChanging = new Set<string>();
 const settingsAgentAcctVersions = new Map<string, number>();
 
 function settingsAgentAcctApi(): any { return (window as any).api; }
@@ -75,26 +76,74 @@ function settingsAgentAcctAnnounce(provider: SettingsAgentAcctProvider): void {
   try { window.dispatchEvent(new CustomEvent('agent-account-changed', { detail: { provider } })); } catch { /* UI refresh is best-effort */ }
 }
 
+function settingsAgentAcctRowButton(text: string, label: string, flag: string): HTMLButtonElement {
+  const button = settingsAgentAcctButton(text);
+  button.style.padding = '6px 10px'; button.style.marginRight = '0';
+  button.setAttribute('aria-label', `${text}: ${label}`);
+  button.dataset[flag] = 'true';
+  return button;
+}
+
+function settingsAgentAcctRow(provider: SettingsAgentAcctProvider, account: SettingsAgentAcctSummary): HTMLElement {
+  const label = settingsAgentAcctText(account);
+  const row = settingsAgentAcctNode('div');
+  row.setAttribute('role', 'listitem');
+  row.dataset.settingsAgentAccountId = account.id;
+  row.style.cssText = `display:flex;align-items:center;gap:8px;padding:6px 8px;font-size:0.85rem;border-left:3px solid ${account.active ? '#34d399' : 'transparent'};`;
+  const text = settingsAgentAcctNode('span', label);
+  text.style.flex = '1';
+  row.append(text);
+  if (account.active) {
+    row.setAttribute('aria-current', 'true');
+    const mark = settingsAgentAcctNode('span', '✓ 사용 중');
+    mark.dataset.settingsAgentAccountActive = 'true';
+    mark.style.cssText = 'color:#34d399;font-weight:700;font-size:0.85rem;white-space:nowrap;';
+    row.append(mark);
+  } else {
+    const use = settingsAgentAcctRowButton('이 계정 사용', label, 'settingsAgentAccountUse');
+    use.addEventListener('click', () => { void settingsAgentAcctSwitch(provider, account.id); });
+    row.append(use);
+  }
+  if (!account.isDefault) {
+    const remove = settingsAgentAcctRowButton('빼기', label, 'settingsAgentAccountRemove');
+    remove.addEventListener('click', () => { void settingsAgentAcctRemove(provider, account.id); });
+    row.append(remove);
+  }
+  return row;
+}
+
 function settingsAgentAcctRender(provider: SettingsAgentAcctProvider, accounts: readonly SettingsAgentAcctSummary[], separable: boolean): void {
-  const box = settingsAgentAcctBox(provider);
-  const list = box?.querySelector<HTMLElement>('[data-settings-agent-account-list]');
-  if (!box || !list) return;
+  const list = settingsAgentAcctBox(provider)?.querySelector<HTMLElement>('[data-settings-agent-account-list]');
+  if (!list) return;
+  list.setAttribute('role', separable ? 'list' : 'group');
   list.replaceChildren();
   for (const account of accounts) {
+    if (separable) { list.append(settingsAgentAcctRow(provider, account)); continue; }
     const row = settingsAgentAcctNode('label');
     row.style.cssText = 'display:flex;align-items:center;gap:8px;padding:6px 0;font-size:0.85rem;';
-    if (separable) {
-      const radio = settingsAgentAcctNode('input');
-      radio.type = 'radio'; radio.name = `settings-agent-account-${provider}`; radio.value = account.id; radio.checked = account.active;
-      radio.addEventListener('change', () => { void settingsAgentAcctSwitch(provider, account.id); });
-      row.append(radio);
-    }
     row.append(settingsAgentAcctNode('span', settingsAgentAcctText(account)));
     list.append(row);
   }
-  const remove = box.querySelector<HTMLButtonElement>('[data-settings-agent-account-remove]');
-  const current = accounts.find((account) => account.active);
-  if (remove) remove.disabled = !current || current.isDefault;
+}
+
+/** Row buttons stay locked while an account is being switched or removed. */
+function settingsAgentAcctLock(provider: SettingsAgentAcctProvider, locked: boolean): void {
+  settingsAgentAcctBox(provider)?.querySelectorAll<HTMLButtonElement>('[role="listitem"] button').forEach((button) => { button.disabled = locked; });
+}
+
+/** The account box replaces the old "계정 전환" button. It stays in the DOM; status refreshes that show it again are undone. */
+function settingsAgentAcctHideLegacySwitch(provider: SettingsAgentAcctProvider, parent: HTMLElement): void {
+  const legacy = parent.querySelector<HTMLElement>(`#agent-${provider}-switch-btn`); // parent may still be detached
+  if (!legacy || legacy.dataset.settingsAgentAcctLegacy) return;
+  legacy.dataset.settingsAgentAcctLegacy = 'true';
+  const hide = () => { if (legacy.style.display !== 'none') legacy.style.display = 'none'; };
+  hide();
+  new MutationObserver(hide).observe(legacy, { attributes: true, attributeFilter: ['style'] });
+  // The stylesheet rule keeps it hidden in the browser even for a copy of the node that nothing observes.
+  if (document.querySelector('style[data-settings-agent-acct-legacy-style]')) return;
+  const style = settingsAgentAcctNode('style', '[data-settings-agent-acct-legacy]{display:none !important;}');
+  style.dataset.settingsAgentAcctLegacyStyle = 'true';
+  document.head.append(style);
 }
 
 function settingsAgentAcctUnknown(provider: SettingsAgentAcctProvider): void {
@@ -119,6 +168,9 @@ export async function refreshSettingsAgentAccounts(providers: readonly SettingsA
 }
 
 async function settingsAgentAcctSwitch(provider: SettingsAgentAcctProvider, accountId: string): Promise<boolean> {
+  if (settingsAgentAcctChanging.has(provider)) return false;
+  settingsAgentAcctChanging.add(provider);
+  settingsAgentAcctLock(provider, true);
   let message = '';
   let switched = false;
   try {
@@ -127,7 +179,10 @@ async function settingsAgentAcctSwitch(provider: SettingsAgentAcctProvider, acco
     message = switched ? '계정을 바꿨습니다.' : settingsAgentAcctSafe(result?.message, '계정을 바꾸지 못했습니다.');
   } catch { message = '계정을 바꾸지 못했습니다.'; }
   if (switched) settingsAgentAcctAnnounce(provider);
-  await refreshSettingsAgentAccounts([provider]);
+  try { await refreshSettingsAgentAccounts([provider]); } finally {
+    settingsAgentAcctChanging.delete(provider);
+    settingsAgentAcctLock(provider, false);
+  }
   settingsAgentAcctSay(provider, message);
   return switched;
 }
@@ -171,20 +226,23 @@ async function settingsAgentAcctAdd(provider: SettingsAgentAcctProvider): Promis
   }
 }
 
-async function settingsAgentAcctRemove(provider: SettingsAgentAcctProvider): Promise<void> {
-  const box = settingsAgentAcctBox(provider);
-  const checked = box?.querySelector<HTMLInputElement>('input[type="radio"]:checked');
-  if (!checked || checked.value === 'default') return;
+async function settingsAgentAcctRemove(provider: SettingsAgentAcctProvider, accountId: string): Promise<void> {
+  if (accountId === 'default' || settingsAgentAcctChanging.has(provider)) return;
   if (!confirm('이 계정을 앱에서 뺄까요? 서비스 계정은 지워지지 않습니다.')) return;
+  settingsAgentAcctChanging.add(provider);
+  settingsAgentAcctLock(provider, true);
   let message = '';
   let removedActive = false;
   try {
-    const result = await settingsAgentAcctApi()?.agentAccountRemove?.(provider, checked.value);
+    const result = await settingsAgentAcctApi()?.agentAccountRemove?.(provider, accountId);
     removedActive = result?.removedActive === true;
     message = result?.success ? (removedActive ? '뺐습니다. 기본 계정으로 돌아갑니다.' : '뺐습니다.') : settingsAgentAcctSafe(result?.message, '계정을 빼지 못했습니다.');
   } catch { message = '계정을 빼지 못했습니다.'; }
   if (removedActive) settingsAgentAcctAnnounce(provider);
-  await refreshSettingsAgentAccounts([provider]);
+  try { await refreshSettingsAgentAccounts([provider]); } finally {
+    settingsAgentAcctChanging.delete(provider);
+    settingsAgentAcctLock(provider, false);
+  }
   settingsAgentAcctSay(provider, message);
 }
 
@@ -220,7 +278,7 @@ export function setupSettingsAgentAccounts(provider: SettingsAgentAcctProvider, 
   box.style.cssText = 'padding:12px;border:1px solid var(--nv-line,#6b7280);border-radius:10px;background:var(--bg-secondary);';
   const list = settingsAgentAcctNode('div');
   list.dataset.settingsAgentAccountList = 'true';
-  list.setAttribute('role', provider === 'gemini' ? 'group' : 'radiogroup');
+  list.setAttribute('role', provider === 'gemini' ? 'group' : 'list');
   list.append(settingsAgentAcctNode('span', '계정을 확인하고 있습니다.'));
   const status = settingsAgentAcctNode('p');
   status.setAttribute('role', 'status');
@@ -234,10 +292,8 @@ export function setupSettingsAgentAccounts(provider: SettingsAgentAcctProvider, 
   } else {
     const add = settingsAgentAcctButton('+ 계정 추가');
     add.addEventListener('click', () => { void settingsAgentAcctAdd(provider); });
-    const remove = settingsAgentAcctButton('이 계정 빼기');
-    remove.dataset.settingsAgentAccountRemove = 'true'; remove.disabled = true;
-    remove.addEventListener('click', () => { void settingsAgentAcctRemove(provider); });
-    box.append(add, remove);
+    box.append(add);
   }
   parent.append(box);
+  settingsAgentAcctHideLegacySwitch(provider, parent);
 }

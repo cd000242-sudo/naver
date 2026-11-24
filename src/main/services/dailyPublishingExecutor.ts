@@ -3,7 +3,7 @@ import { statSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { parsePreviousPostUrl } from '../../shared/previousPostPolicy.js';
 import { extractAccountStopCode, stopsAllAccounts } from '../../automation/publishFailureClassifier.js';
-import { normalizeBlogId } from '../../automation/expectedBlogIdentity.js';
+import { normalizeBlogId, resolveExpectedBlogId } from '../../automation/expectedBlogIdentity.js';
 import { resolveFullAutoImagePolicy } from '../../image/fullAuto/fullAutoImagePolicy.js';
 import { buildFullAutoImageSlots, reconcileFullAutoSlotsWithImages } from '../../image/fullAuto/fullAutoImageSlots.js';
 import { fullAutoFinalHeadingTitles, type FullAutoArticleLike } from '../../image/fullAuto/fullAutoImageRequest.js';
@@ -164,7 +164,11 @@ export function createDailyPublishingExecutor(deps: DailyPublishingExecutorDeps)
     if (!job.id || !job.accountId || !/^[1-9]\d{0,15}$/u.test(job.categoryId) || !['draft', 'publish', 'schedule'].includes(job.mode)) throw new Error('DAILY_JOB_INVALID');
     const account = await deps.readAccount(job.accountId);
     if (!account || account.id !== job.accountId) throw new Error('DAILY_ACCOUNT_NOT_FOUND');
-    const expectedBlog = normalizeBlogId(account.blogId);
+    // Same lookup as the category check (ldb-destinations): a Korean display label in blogId falls back to the login ID.
+    // An empty blogId stays an unknown destination; the session probe still compares the editor's blog before writing.
+    let expectedBlog: string | undefined;
+    try { expectedBlog = account.blogId?.trim() ? resolveExpectedBlogId(account.naverId?.trim() || account.blogId.trim(), [{ naverId: account.naverId, blogId: account.blogId }]) : undefined; }
+    catch { expectedBlog = undefined; }
     if (!expectedBlog) throw new Error('DAILY_BLOG_ID_REQUIRED');
     const config = await deps.readConfig();
     const generator = job.generator && job.generator !== 'app-settings' ? job.generator : config.defaultAiProvider;

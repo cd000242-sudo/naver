@@ -135,6 +135,27 @@ describe('daily publishing executor', () => {
     expect(deps.reserveSource).not.toHaveBeenCalled(); expect(publish).not.toHaveBeenCalled();
   });
 
+  // [2026-11-24] Old account forms stored a Korean display label in blogId: the panel and save check already fall back to the
+  //   login ID (resolveExpectedBlogId), so the executor must not stop the same plan with DAILY_BLOG_ID_REQUIRED.
+  it('uses the login ID when the saved blog ID is a Korean display label', async () => {
+    const { deps, publish, job } = setup();
+    publish.mockResolvedValueOnce({ success: true, results: [{ accountId: 'a', success: true, publishMode: 'publish', url: 'https://blog.naver.com/carlogin/12345' }] });
+    const readAccount = async () => ({ id: 'a', blogId: '리빙, 쇼핑 블로그', naverId: 'CarLogin', settings: { keywords: ['소재'] } });
+    expect(await createDailyPublishingExecutor({ ...deps, readAccount })(job)).toMatchObject({ confirmed: true, publishedUrl: 'https://blog.naver.com/carlogin/12345' });
+  });
+  it('keeps an id-shaped blog ID ahead of the login ID when checking the result', async () => {
+    const { deps, publish, job } = setup();
+    publish.mockResolvedValueOnce({ success: true, results: [{ accountId: 'a', success: true, publishMode: 'publish', url: 'https://blog.naver.com/other-login/12345' }] });
+    const readAccount = async () => ({ id: 'a', blogId: 'real_blog', naverId: 'other-login', settings: { keywords: ['소재'] } });
+    expect(await createDailyPublishingExecutor({ ...deps, readAccount })(job)).toMatchObject({ confirmed: false });
+  });
+  it('still requires a blog when the label has no login ID to fall back to', async () => {
+    const { deps, publish, job } = setup();
+    const readAccount = async () => ({ id: 'a', blogId: '리빙, 쇼핑 블로그', settings: { keywords: ['소재'] } });
+    await expect(createDailyPublishingExecutor({ ...deps, readAccount })(job)).rejects.toThrow('DAILY_BLOG_ID_REQUIRED');
+    expect(publish).not.toHaveBeenCalled();
+  });
+
   it.each(['LOGIN_CHALLENGE', 'ACCOUNT_PROTECTED'])('propagates %s as a stop of all daily accounts', async code => {
     const { deps, publish, job } = setup();
     publish.mockResolvedValueOnce({ success: true, results: [{ accountId: 'a', success: false, publishMode: 'publish', failureCode: code } as never] });

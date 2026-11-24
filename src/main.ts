@@ -4748,16 +4748,23 @@ registerLicenseHandlers(_earlyCtx);
 try { ipcMain.handle('app:getVersion', async () => app.getVersion()); } catch { /* 이미 등록됨 */ }
 ipcMain.handle('app:getActiveNotice', async (): Promise<string> => latestActiveNotice);
 // ✅ openExternalUrl — 로그인 창 구매문의 버튼용
-try { ipcMain.handle('openExternalUrl', async (_e: any, url: string) => {
+try { ipcMain.handle('openExternalUrl', async (_e: any, url: string): Promise<{ success: boolean; message?: string }> => {
   // ✅ [v2.7.56 SEC-V2-H3] file:/javascript: 차단
-  if (typeof url !== 'string' || !url) return;
+  // Callers read the answer (e.g. the settings "official quota" button), so every path replies.
+  if (typeof url !== 'string' || !url) return { success: false, message: 'URL이 비어있습니다.' };
   const ALLOWED = ['http:', 'https:', 'mailto:'];
   try {
     const u = new URL(url);
-    if (!ALLOWED.includes(u.protocol)) { console.warn(`[SEC] 차단된 프로토콜: ${u.protocol}`); return; }
-  } catch { return; }
-  const { shell } = require('electron');
-  await shell.openExternal(url);
+    if (!ALLOWED.includes(u.protocol)) { console.warn(`[SEC] 차단된 프로토콜: ${u.protocol}`); return { success: false, message: '열 수 없는 주소입니다.' }; }
+  } catch { return { success: false, message: '유효하지 않은 URL 형식입니다.' }; }
+  try {
+    const { shell } = require('electron');
+    await shell.openExternal(url);
+    return { success: true };
+  } catch (error) {
+    console.error('[openExternalUrl] 열기 실패:', (error as Error).message);
+    return { success: false, message: '주소를 열지 못했습니다.' };
+  }
 }); } catch { /* 이미 등록됨 */ }
 // 기존 IPC 이름은 호환용으로 유지하되 일반 최소화로 처리한다.
 try { ipcMain.handle('app:minimize-to-tray', async () => {

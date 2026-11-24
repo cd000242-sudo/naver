@@ -1,6 +1,9 @@
 import type { DailyPublishingPlan } from '../../scheduler/dailyPublishingTypes.js';
 
-type Account = { id: string; blogId?: string; name?: string };
+type Account = { id: string; blogId?: string; naverId?: string; name?: string };
+// Same rule as resolveExpectedBlog: old account forms stored a Korean display label in blogId; then the login ID names the blog.
+const lookupBlogId = (account?: Account) => { const saved = account?.blogId?.trim().toLowerCase() || '';
+  return /^[a-z0-9_-]{1,100}$/.test(saved) ? saved : account?.naverId?.trim().toLowerCase() || ''; };
 type Snapshot = { revision: number; plans: Array<DailyPublishingPlan & { nextAt?: string; nextScheduledFor?: string }>;
   runs: Array<{ accountId: string; status: string; time: string; date: string; ordinal: number; reason?: string; updatedAt?: string }>;
   availability?: { ready: boolean; paid: boolean; label: string };
@@ -48,7 +51,7 @@ export function mountDailyPublishingPanel(root: HTMLDialogElement, api: DailyPan
     <div class="daily-panel-table-wrap"><table><thead><tr><th>공개 날짜·시각</th><th>번호</th><th>상태</th><th>사유</th><th>기록 시각</th></tr></thead><tbody data-daily="history"></tbody></table></div></section>`;
   const el = <T extends HTMLElement = HTMLInputElement>(name: string) => root.querySelector(`[data-daily="${name}"]`) as T;
   const value = (name: string) => el<HTMLInputElement>(name).value;
-  let state: Snapshot | undefined, accounts: Account[] = [], busy = false, refreshing = false, previewing = false, disposed = false, revision = 0, generation = 0;
+  let state: Snapshot | undefined, accounts: Account[] = [], busy = false, refreshing = false, previewing = false, disposed = false, revision = 0, generation = 0, categoryError = '';
   let timer: ReturnType<typeof setInterval> | undefined;
   const message = (text: string, error = false) => { el('status').textContent = text; el('status').dataset.error = String(error); };
   const selectedPlan = () => state?.plans.find(plan => plan.accountId === value('account'));
@@ -76,7 +79,7 @@ export function mountDailyPublishingPanel(root: HTMLDialogElement, api: DailyPan
     if (value('mode') === 'schedule' && state.scheduling?.nativeReservationReady !== true) return '실제 네이버 예약 목록 확인 연결이 준비되지 않았습니다.';
     if (value('image-mode') === 'official-capture' && state.imageCapabilities?.officialCaptureReady !== true)
       return state.imageCapabilities?.officialCaptureReason || '공식 출처 승인과 캡처 묶음 준비가 필요합니다. 현재 자동 수집 연결은 준비되지 않았습니다.';
-    if (!/^[1-9]\d{0,15}$/.test(value('category'))) return '실제 블로그 카테고리를 선택해 주세요.';
+    if (!/^[1-9]\d{0,15}$/.test(value('category'))) return categoryError || '실제 블로그 카테고리를 선택해 주세요.';
     if (usesLeword() ? !lewordTopics().length : !value('topic').trim()) return usesLeword() ? 'LEWORD 추천을 받을 주제를 1~3개 골라 주세요.' : '주제·키워드 또는 소재 URL을 입력해 주세요.';
     if (usesAi() && !value('image-source')) return '이미지 엔진을 직접 선택해 주세요.';
     if (collects() && !el('collect-consent').checked) return '실제 사진 수집 저작권 안내를 읽고 동의해 주세요.';
@@ -152,14 +155,17 @@ export function mountDailyPublishingPanel(root: HTMLDialogElement, api: DailyPan
     el('topic').value = plan?.topic || ''; el('keyword-exhaustion').value = plan?.keywordExhaustion || 'expand'; el('consent').checked = false;
     setOptions('image-source', [{ id: '', label: '이미지 엔진 선택' }, ...(state?.imageProviders || [])], plan?.imageSource);
     drawSlots(plan?.slots || [{ time: '', count: 1 }]); drawHistory();
-    busy = true; controls(); setOptions('category', [{ id: '', label: '카테고리 확인 중' }]);
+    busy = true; categoryError = ''; controls(); setOptions('category', [{ id: '', label: '카테고리 확인 중' }]);
     try {
-      const categories = account?.blogId ? await api.fetchBlogCategories(account.blogId) : { success: false, categories: [] };
+      const blogId = lookupBlogId(account);
+      const categories = blogId ? await api.fetchBlogCategories(blogId) : { success: false, categories: [], message: '블로그 ID 없음' };
       if (disposed || ticket !== generation) return false;
-      if (!categories.success) throw Error('계정의 실제 카테고리를 불러오지 못했습니다.');
-      setOptions('category', [{ id: '', label: '카테고리 선택' }, ...(categories.categories || []).filter(c => /^[1-9]\d{0,15}$/.test(c.id)).map(c => ({ id: c.id, label: c.name }))], plan?.categoryId);
+      const choices = (categories.categories || []).filter(c => /^[1-9]\d{0,15}$/.test(c.id)).map(c => ({ id: c.id, label: c.name }));
+      // Category 0 is only the app's fallback entry: an empty real list must say why instead of showing a blank select.
+      if (!categories.success || !choices.length) throw Error(`계정의 실제 카테고리를 불러오지 못했습니다${categories.message ? ` (${String(categories.message).slice(0, 120)})` : ''}. [상태 새로 확인]을 눌러 다시 불러오세요.`);
+      setOptions('category', [{ id: '', label: '카테고리 선택' }, ...choices], plan?.categoryId);
       return true;
-    } catch (error) { if (!disposed && ticket === generation) { setOptions('category', [{ id: '', label: '카테고리 확인 필요' }]); message((error as Error).message, true); } return false; }
+    } catch (error) { if (!disposed && ticket === generation) { setOptions('category', [{ id: '', label: '카테고리 확인 필요' }]); categoryError = (error as Error).message; message(categoryError, true); } return false; }
     finally { if (ticket === generation) { busy = false; controls(); } }
   }
   async function request(method: 'GET' | 'POST', path: string, body?: unknown): Promise<Snapshot> {
