@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T02:46:00.374Z",
+ "builtAt": "2026-11-24T02:56:07.085Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,67 +11,67 @@
  "measured": 26,
  "candidates": [
   {
+   "keyword": "젠슨 황 복귀로 급등한 증시",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 78,
+   "recent20": 18,
+   "press": 54,
+   "firstArticleAt": "2026-11-24T01:48:00.000Z",
+   "exclusive": true,
+   "capped": true,
+   "samples": [
+    {
+     "title": "TSMC 상한가 찍었다…대만, 日 증시 급등",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-24T02:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000545525?sid=104"
+    },
+    {
+     "title": "젠슨 황의 귀환…韓 AI 산업에 다시 볕 드나",
+     "press": "dealsite.co.kr",
+     "publishedAt": "2026-11-24T02:54:00.000Z",
+     "link": "https://dealsite.co.kr/articles/173385"
+    },
+    {
+     "title": "[코인시황] 젠슨 황 복귀에 美 기술주 급등…비트코인은 6만달러선 '잠잠...",
+     "press": "newsworks.co.kr",
+     "publishedAt": "2026-11-24T02:52:00.000Z",
+     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904195"
+    }
+   ]
+  },
+  {
    "keyword": "이재명 대통령 국무회의",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 71,
-   "recent20": 28,
-   "press": 56,
-   "firstArticleAt": "2026-11-24T02:08:00.000Z",
+   "articles90": 69,
+   "recent20": 16,
+   "press": 53,
+   "firstArticleAt": "2026-11-24T02:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李대통령 \"주가 널뛰기 대응책 필요…주주 중심으로 재편해야\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-24T02:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009306947?sid=100"
+     "title": "李대통령 \"소모적 다툼보다 내년 예산·민생경제과제 처리 먼저\"(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-24T02:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016460295?sid=100"
     },
     {
-     "title": "李대통령 \"사이비종교 범죄행위에 실효조치 검토해야\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-24T02:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004213186?sid=100"
+     "title": "李 대통령 \"주식시장, 주주 중심으로 재편돼야\" [영상]",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-24T02:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005357519?sid=100"
     },
     {
-     "title": "李대통령 \"배달 수수료 이야기 들을 때마다 가슴 철렁…공공앱 만들어야...",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-24T02:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009306945?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황 복귀로 급등한 증시",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 76,
-   "recent20": 20,
-   "press": 56,
-   "firstArticleAt": "2026-11-24T01:38:00.000Z",
-   "exclusive": true,
-   "capped": true,
-   "samples": [
-    {
-     "title": "\"젠슨황이 돌아왔다\" 투자자 열광…대만증시 9%↑[Asia오전]",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-24T02:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005445551?sid=101"
-    },
-    {
-     "title": "젠슨 황 \"더 나은 CEO 되겠다\"…업계도, 월가도 복귀 환영",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-24T02:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929355?sid=104"
-    },
-    {
-     "title": "'AI 거품론' 잠재운 黃의 귀환…증시 패닉 분위기 하루 만에 폭등세로",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-24T02:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005608858?sid=101"
+     "title": "이 대통령 \"부동산 시장 조정될 것이란 게 일반적 예측…'미분양 불안'...",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-24T02:47:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001405377?sid=100"
     }
    ]
   },
@@ -80,13 +80,19 @@
    "sources": [
     "daum"
    ],
-   "articles90": 53,
-   "recent20": 7,
-   "press": 40,
-   "firstArticleAt": "2026-11-24T01:18:00.000Z",
+   "articles90": 48,
+   "recent20": 4,
+   "press": 35,
+   "firstArticleAt": "2026-11-24T01:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김민석의 조용한 취임 100일…지지율은 뒷걸음, 당내 갈등은 여전",
+     "press": "straightnews.co.kr",
+     "publishedAt": "2026-11-24T02:50:00.000Z",
+     "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=316068"
+    },
     {
      "title": "취임 100일 맞은 김민석…지지율 반등 실패 속 ‘당내 통합’ 시험대",
      "press": "asiatime.co.kr",
@@ -98,12 +104,38 @@
      "press": "mbn.mk.co.kr",
      "publishedAt": "2026-11-24T02:39:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/057/0001979623?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "이용철 후보자 답변",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 62,
+   "recent20": 17,
+   "press": 34,
+   "firstArticleAt": "2026-11-24T01:33:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이용철 \"진상 규명 안 되면 공소취소 안 해\"…지휘권 행사 여지 남겨",
+     "press": "sisajournal.com",
+     "publishedAt": "2026-11-24T02:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/586/0000142921?sid=102"
     },
     {
-     "title": "정청래 \"반분신 3자 연합 폭탄으로 당 초토화\"... 취임 100일 김민석 맹...",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-24T02:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967393?sid=100"
+     "title": "이용철 \"진상 명확히 규명 안 되면 공소취소 안 해\"",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-11-24T02:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002537021?sid=102"
+    },
+    {
+     "title": "이용철 \"국민 납득 어려운 지휘 않겠다\"...기소계획서 의혹 조사 촉구엔...",
+     "press": "joongangenews.com",
+     "publishedAt": "2026-11-24T02:50:00.000Z",
+     "link": "https://www.joongangenews.com/news/articleView.html?idxno=566183"
     }
    ]
   },
@@ -112,10 +144,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 34,
-   "recent20": 4,
-   "press": 33,
-   "firstArticleAt": "2026-11-24T01:18:00.000Z",
+   "articles90": 29,
+   "recent20": 0,
+   "press": 29,
+   "firstArticleAt": "2026-11-24T01:27:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -140,34 +172,34 @@
    ]
   },
   {
-   "keyword": "이용철 후보자 답변",
+   "keyword": "두산 수아레즈 영입",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 63,
-   "recent20": 19,
-   "press": 32,
-   "firstArticleAt": "2026-11-24T01:17:00.000Z",
-   "exclusive": false,
+   "articles90": 17,
+   "recent20": 2,
+   "press": 17,
+   "firstArticleAt": "2026-11-24T01:49:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "의원 질의에 답변하는 이용철 법무부 장관 후보자",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-24T02:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004213199?sid=100"
+     "title": "두산 마운드에 메이저리그 출신 좌완 합류…호세 수아레즈 100만 달러에...",
+     "press": "jemin.com",
+     "publishedAt": "2026-11-24T02:50:00.000Z",
+     "link": "https://www.jemin.com/news/articleView.html?idxno=848284"
     },
     {
-     "title": "질의에 답변하는 이용철 법무부 장관 후보자",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-24T02:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004213197?sid=100"
+     "title": "두산, MLB 23승 좌완 수아레즈 영입…100만 달러 계약",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-24T02:48:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=784363"
     },
     {
-     "title": "답변하는 이용철 법무부 장관 후보자",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-24T02:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004213196?sid=100"
+     "title": "두산, 새 외국인 투수 수아레즈 영입",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-24T02:33:00.000Z",
+     "link": "https://m.sports.naver.com/kbaseball/article/052/0002437245"
     }
    ]
   },
@@ -177,10 +209,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 10,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-24T01:21:00.000Z",
+   "articles90": 8,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-24T01:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -209,10 +241,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-24T01:22:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-24T01:38:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
@@ -241,10 +273,10 @@
    "sources": [
     "daum"
    ],
-   "articles90": 7,
+   "articles90": 6,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-24T01:26:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-24T01:32:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -274,13 +306,19 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 4,
+   "articles90": 5,
    "recent20": 2,
-   "press": 4,
+   "press": 5,
    "firstArticleAt": "2026-11-24T01:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'음주 뺑소니' 김호중, 오늘(24일) 형기 끝…연예계 복귀는 미정",
+     "press": "tenasia.co.kr",
+     "publishedAt": "2026-11-24T02:52:00.000Z",
+     "link": "https://m.entertain.naver.com/article/312/0000785912"
+    },
     {
      "title": "김호중, 오늘 형기 만료",
      "press": "bntnews.co.kr",
@@ -292,12 +330,6 @@
      "press": "newsen.com",
      "publishedAt": "2026-11-24T02:31:00.000Z",
      "link": "https://m.entertain.naver.com/article/609/0001190633"
-    },
-    {
-     "title": "'가석방 147일' 김호중, 오늘 형기 만료일 … 무대 다시 설까",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-24T02:08:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/24/2026112450145.html"
     }
    ]
   },
@@ -315,7 +347,7 @@
    "capped": false,
    "samples": [
     {
-     "title": "\"추워서\"…서울역서 라이터 3개 쥐고 불 붙인 남성, 시민들이 막아섰다",
+     "title": "\"추워서\" 서울역서 라이터 3개 쥐고 불붙인 남성, 시민들이 막아섰다",
      "press": "imaeil.com",
      "publishedAt": "2026-11-24T02:39:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/088/0001041951?sid=102"
@@ -333,45 +365,13 @@
      "link": "https://n.news.naver.com/mnews/article/422/0000929325?sid=102"
     }
    ]
-  },
-  {
-   "keyword": "하이닉스 사장 주가 자사주 매입",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-24T01:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "젠슨 황 복귀 전날 ‘16억 자사주 매입’…SK하이닉스 사장, 하루 만에 ...",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-24T01:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000133509?sid=101"
-    },
-    {
-     "title": "‘젠슨황 복귀’에 주가 급등…하루 전 주식 산 SK하닉 사장 화제",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-24T01:38:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002727566?sid=101"
-    },
-    {
-     "title": "윤풍영 SK하이닉스 사장 자사주 매입…책임경영 의지",
-     "press": "newspost.kr",
-     "publishedAt": "2026-11-24T01:22:00.000Z",
-     "link": "https://www.newspost.kr/news/articleView.html?idxno=227702"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1249,
-  "matched": 671,
-  "avgLeadMin": 563,
+  "flagged": 1246,
+  "matched": 670,
+  "avgLeadMin": 564,
   "recent": [
    {
     "keyword": "오세훈 결승골 1-0 승리",
