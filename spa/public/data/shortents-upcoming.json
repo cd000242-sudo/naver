@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T10:30:42.268Z",
+ "builtAt": "2026-11-24T10:40:46.129Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,63 +8,64 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 22,
  "candidates": [
   {
-   "keyword": "젠슨 황 복귀에 증시 급등",
+   "keyword": "삼성 준감위 주주환원 결정",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 36,
-   "recent20": 7,
-   "press": 28,
-   "firstArticleAt": "2026-11-24T09:01:00.000Z",
+   "articles90": 20,
+   "recent20": 4,
+   "press": 20,
+   "firstArticleAt": "2026-11-24T09:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[올댓차이나] 홍콩 증시, 美 대중 규제·금리인상 경계에 엿새째 속락…...",
+     "title": "삼성 준감위 \"주주환원 결정, 준법 위반·이해상충 없어\"",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-24T10:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001078125?sid=101"
+    },
+    {
+     "title": "삼성준감위 \"증여세·주주환원 결정, 준법 위반·이해상충 해당 안해\"",
      "press": "newsis.com",
-     "publishedAt": "2026-11-24T10:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014343049?sid=104"
+     "publishedAt": "2026-11-24T10:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014343051?sid=101"
     },
     {
-     "title": "[참성단] 젠슨 황 복귀",
-     "press": "kyeongin.com",
-     "publishedAt": "2026-11-24T10:22:00.000Z",
-     "link": "https://www.kyeongin.com/article/1775326"
-    },
-    {
-     "title": "'젠슨 황 고향' 타이완 증시 9% 급등...TSMC 상한가",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-24T10:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437505?sid=104"
+     "title": "삼성 준감위, 주주환원안 발표 시점 논란에 “이해상충 없다”",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-24T10:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006414986?sid=101"
     }
    ]
   },
   {
    "keyword": "젠슨 황 전격 복귀",
    "sources": [
+    "signal.bz",
     "nate"
    ],
-   "articles90": 24,
-   "recent20": 5,
-   "press": 18,
-   "firstArticleAt": "2026-11-24T09:01:00.000Z",
+   "articles90": 19,
+   "recent20": 4,
+   "press": 16,
+   "firstArticleAt": "2026-11-24T09:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[코인 시황] 젠슨 황 복귀에 비트코인 6만4000달러 돌파 후 후퇴…美 의...",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-24T10:30:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261124001417"
+    },
     {
      "title": "[이슈빡] 대마불사? 돌아온 젠슨 황…증시 반등 어디까지",
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-24T10:24:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/055/0001405510?sid=101"
-    },
-    {
-     "title": "[참성단] 젠슨 황 복귀",
-     "press": "kyeongin.com",
-     "publishedAt": "2026-11-24T10:22:00.000Z",
-     "link": "https://www.kyeongin.com/article/1775326"
     },
     {
      "title": "엔비디아 젠슨 황 복귀…K반도체 ‘협력·다변화’ 속도",
@@ -75,14 +76,111 @@
    ]
   },
   {
+   "keyword": "EU 하이브리드차 수입 제한",
+   "sources": [
+    "signal.bz",
+    "daum"
+   ],
+   "articles90": 14,
+   "recent20": 2,
+   "press": 13,
+   "firstArticleAt": "2026-11-24T09:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "EU, 한국산 하이브리드차 수입 제한…200일간 6만7924대 허용",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-24T10:26:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1732874"
+    },
+    {
+     "title": "EU, 하이브리드車 수입 제한…한국은 6만7,924대만 허용",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-24T10:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001273830?sid=103"
+    },
+    {
+     "title": "EU, 하이브리드차 세이프가드 발동…산업부 \"韓 단기 영향 제한적\"",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-24T10:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009308036?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "오세훈 특검",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 12,
+   "recent20": 4,
+   "press": 11,
+   "firstArticleAt": "2026-11-24T09:19:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "吳 \"특검·탄핵 민심 전달\" 꺼내자 李대통령, 발언 끊고 국무회의 끝내",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-24T10:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005768440?sid=102"
+    },
+    {
+     "title": "오세훈 \"민심 전달\" 손 들었지만…발언 못 하고 건의문만 전달",
+     "press": "mbn.co.kr",
+     "publishedAt": "2026-11-24T10:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979697?sid=100"
+    },
+    {
+     "title": "오세훈, 대통령 자리에 건의문…한 총리 “부적절한 행위”",
+     "press": "ichannela.com",
+     "publishedAt": "2026-11-24T10:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/449/0000368570?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "내년 공인회계사 1100명 선발",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 11,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-24T09:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'내년 공인회계사 선발 50명 줄인다'…금융위, 1100명으로 확정",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-24T10:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005847271?sid=101"
+    },
+    {
+     "title": "내년 공인회계사 1100명 선발…올해 대비 50명↓",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-24T10:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005445873?sid=101"
+    },
+    {
+     "title": "공인회계사 3년 연속 감축…내년 최소 1100명 선발",
+     "press": "news.mtn.co.kr",
+     "publishedAt": "2026-11-24T09:42:00.000Z",
+     "link": "https://news.mtn.co.kr/article/2026112418405947050"
+    }
+   ]
+  },
+  {
    "keyword": "민주당 사제폭탄 협박",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 3,
-   "press": 12,
-   "firstArticleAt": "2026-11-24T09:01:00.000Z",
+   "articles90": 10,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-24T09:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -107,78 +205,14 @@
    ]
   },
   {
-   "keyword": "달",
-   "sources": [
-    "google"
-   ],
-   "articles90": 11,
-   "recent20": 2,
-   "press": 9,
-   "firstArticleAt": "2026-11-24T09:20:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "'내달 출범' 2기 친일재산조사위원장에 박영립 변호사 내정",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-24T10:17:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016461446?sid=102"
-    },
-    {
-     "title": "[포토타임] 초겨울 밤하늘 수놓은 수퍼문…성탄 전야엔 더 큰 달 뜬다",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-24T10:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003567634?sid=102"
-    },
-    {
-     "title": "내달부터 EU행 한국산 하이브리드차 무관세 6만7천924대로 제한(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-24T10:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016461442?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "전주·창원 도심융합특구 선정",
+   "keyword": "제8차 미세먼지 관리제 시행",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-24T09:01:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김윤덕 \"전주 AI 허브 기회 잡았다\"",
-     "press": "sjbnews.com",
-     "publishedAt": "2026-11-24T10:17:00.000Z",
-     "link": "https://sjbnews.com/news/news.php?number=893556"
-    },
-    {
-     "title": "전주 도심융합특구 후보지 선정...AI 산업거점 조성 탄력",
-     "press": "jeonmin.co.kr",
-     "publishedAt": "2026-11-24T09:40:00.000Z",
-     "link": "http://www.jeonmin.co.kr/news/articleView.html?idxno=451067"
-    },
-    {
-     "title": "창원시, 도심융합특구 후보지 선정…\"방위·원자력 혁신거점으로\"",
-     "press": "cnbnews.com",
-     "publishedAt": "2026-11-24T09:34:00.000Z",
-     "link": "https://www.cnbnews.com/news/articleView.html?idxno=1025144"
-    }
-   ]
-  },
-  {
-   "keyword": "제8차 미세먼지 관리제 시행",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 9,
+   "articles90": 6,
    "recent20": 0,
-   "press": 8,
-   "firstArticleAt": "2026-11-24T09:03:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-24T09:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -203,76 +237,13 @@
    ]
   },
   {
-   "keyword": "송민호 102일 추가 복무",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-24T09:05:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"한 달에 겨우 4일 출근\"…송민호, 이달 말 재복무 시작",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-24T10:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005357780?sid=102"
-    },
-    {
-     "title": "'102일 무단이탈' 송민호, 결국 추가 복무…이달 재소집",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-24T10:04:00.000Z",
-     "link": "https://m.entertain.naver.com/article/396/0000761852"
-    },
-    {
-     "title": "송민호, 이달 말 사회복무요원 재소집…102일 추가 복무",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-24T10:00:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1139793"
-    }
-   ]
-  },
-  {
-   "keyword": "한화 국방 AI 데이터센터",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-24T09:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "한화에어로스페이스, 창원에 국방 AI 데이터센터 구축…2028년 7월 가동 ...",
-     "press": "consumernews.co.kr",
-     "publishedAt": "2026-11-24T09:54:00.000Z",
-     "link": "http://www.consumernews.co.kr/news/articleView.html?idxno=769031"
-    },
-    {
-     "title": "한화에어로, 창원에 180MW급 국방 AI 데이터센터 구축",
-     "press": "thelec.kr",
-     "publishedAt": "2026-11-24T09:46:00.000Z",
-     "link": "https://www.thelec.kr/news/articleView.html?idxno=65875"
-    },
-    {
-     "title": "한화, 10조 들여 국방 AIDC 짓는다",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-24T09:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005609183?sid=101"
-    }
-   ]
-  },
-  {
    "keyword": "스테이블코인",
    "sources": [
+    "signal.bz",
     "google"
    ],
    "articles90": 4,
-   "recent20": 1,
+   "recent20": 0,
    "press": 4,
    "firstArticleAt": "2026-11-24T09:24:00.000Z",
    "exclusive": false,
@@ -299,34 +270,34 @@
    ]
   },
   {
-   "keyword": "이마트 임원 근무 1시간 연장",
+   "keyword": "신규 택시 전기차 전환",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-24T09:02:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-24T09:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이마트, 임원 근무 시간 1시간 연장…리프레시데이 운영 중단",
-     "press": "srtimes.kr",
-     "publishedAt": "2026-11-24T09:24:00.000Z",
-     "link": "http://www.srtimes.kr/news/articleView.html?idxno=218515"
+     "title": "신규 택시 2035년까지 전기차로...정부·택시업계 협약",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-24T09:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437497?sid=101"
     },
     {
-     "title": "이마트·SSG닷컴, 임원 고삐 죈다…월례휴무 폐지·4개사 6시 퇴근",
-     "press": "4th.kr",
-     "publishedAt": "2026-11-24T09:22:00.000Z",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2122606"
+     "title": "정부·택시업계 \"신규 택시 2035년까지 전기차 전환\" 맞손",
+     "press": "livebiz.today",
+     "publishedAt": "2026-11-24T09:48:00.000Z",
+     "link": "https://www.livebiz.today/news/articleView.html?idxno=206858"
     },
     {
-     "title": "이마트, 임원 '9 to 5' 근무제 8년만에 종료…월례 휴무도 폐지",
-     "press": "daily.hankooki.com",
-     "publishedAt": "2026-11-24T09:04:00.000Z",
-     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1428569"
+     "title": "“새로 도입하는 택시는 전기차로”…정부·택시업계 업무협약",
+     "press": "busan.com",
+     "publishedAt": "2026-11-24T09:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001408801?sid=101"
     }
    ]
   },
@@ -336,7 +307,7 @@
     "google"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 0,
    "press": 2,
    "firstArticleAt": "2026-11-24T09:44:00.000Z",
    "exclusive": false,
@@ -355,20 +326,56 @@
      "link": "https://n.news.naver.com/mnews/article/421/0009308024?sid=103"
     },
     {
-     "title": "서울 하늘 떠오른 슈퍼문",
+     "title": "가지 끝에 걸린 11월의 슈퍼문 '비버문'",
      "press": "news1.kr",
      "publishedAt": "2026-11-24T09:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009308021?sid=103"
+     "link": "https://n.news.naver.com/mnews/article/421/0009308023?sid=103"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1358,
-  "matched": 707,
-  "avgLeadMin": 523,
+  "flagged": 1362,
+  "matched": 713,
+  "avgLeadMin": 533,
   "recent": [
+   {
+    "keyword": "상속",
+    "hitKeyword": "중산층 상속세 부담",
+    "hitAt": "2026-11-24T19:30:00+09:00",
+    "leadMin": 9227
+   },
+   {
+    "keyword": "하이닉스 주가",
+    "hitKeyword": "삼성 하이닉스 목표가 하향",
+    "hitAt": "2026-11-24T19:30:00+09:00",
+    "leadMin": 514
+   },
+   {
+    "keyword": "송민호 이달 102일 복무",
+    "hitKeyword": "송민호 재복무 확정",
+    "hitAt": "2026-11-24T19:30:00+09:00",
+    "leadMin": 120
+   },
+   {
+    "keyword": "송민호 102일 복무",
+    "hitKeyword": "송민호 재복무 확정",
+    "hitAt": "2026-11-24T19:30:00+09:00",
+    "leadMin": 100
+   },
+   {
+    "keyword": "송민호, 이달 102일 복무 재소집",
+    "hitKeyword": "송민호 재복무 확정",
+    "hitAt": "2026-11-24T19:30:00+09:00",
+    "leadMin": 50
+   },
+   {
+    "keyword": "송민호 102일 추가 복무",
+    "hitKeyword": "송민호 재복무 확정",
+    "hitAt": "2026-11-24T19:30:00+09:00",
+    "leadMin": 40
+   },
    {
     "keyword": "mls",
     "hitKeyword": "손흥민 MLS 플레이오프 패배",
@@ -392,42 +399,6 @@
     "hitKeyword": "BTS 뷔 예비군 목격담",
     "hitAt": "2026-11-24T18:30:00+09:00",
     "leadMin": 4060
-   },
-   {
-    "keyword": "공항",
-    "hitKeyword": "공항 과잉경호 논란",
-    "hitAt": "2026-11-24T18:30:00+09:00",
-    "leadMin": 1269
-   },
-   {
-    "keyword": "박지현 에미상 수상 불발",
-    "hitKeyword": "박지현 국제에미상 후보",
-    "hitAt": "2026-11-24T18:30:00+09:00",
-    "leadMin": 120
-   },
-   {
-    "keyword": "마라톤",
-    "hitKeyword": "김희애 하프 마라톤 완주",
-    "hitAt": "2026-11-24T17:00:00+09:00",
-    "leadMin": 425
-   },
-   {
-    "keyword": "홈플러스 온라인배송 중단",
-    "hitKeyword": "홈플러스 경영난",
-    "hitAt": "2026-11-24T17:00:00+09:00",
-    "leadMin": 171
-   },
-   {
-    "keyword": "홈플러스, 26일 온라인배송 중단",
-    "hitKeyword": "홈플러스 경영난",
-    "hitAt": "2026-11-24T17:00:00+09:00",
-    "leadMin": 151
-   },
-   {
-    "keyword": "임지연 이도현 결별",
-    "hitKeyword": "임지연 이도현 결별",
-    "hitAt": "2026-11-24T17:00:00+09:00",
-    "leadMin": 30
    }
   ]
  }
