@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T16:46:59.658Z",
+ "builtAt": "2026-11-24T16:57:04.165Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,15 +8,47 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 14,
  "candidates": [
+  {
+   "keyword": "젠슨 황의 복귀",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 14,
+   "recent20": 1,
+   "press": 12,
+   "firstArticleAt": "2026-11-24T15:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"국가자본주의·마오이즘\"…'젠슨황 복귀' 트럼프 개입 비판 고조",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-24T16:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016461554?sid=104"
+    },
+    {
+     "title": "엔비디아 3%대 하락 출발…전날 ‘젠슨황 복귀’ 랠리 일부 반납",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-24T16:35:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012300504?sid=104"
+    },
+    {
+     "title": "\"젠슨황 복귀, 대중 기술정책 완화 신호 아냐…中, 반도체 자립 더 서두...",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-24T16:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006415037?sid=101"
+    }
+   ]
+  },
   {
    "keyword": "젠슨 황 복귀와 증시 변동",
    "sources": [
     "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 1,
+   "recent20": 0,
    "press": 5,
    "firstArticleAt": "2026-11-24T15:30:00.000Z",
    "exclusive": false,
@@ -43,14 +75,46 @@
    ]
   },
   {
+   "keyword": "미국 과잉생산 관세 조사",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
+   "firstArticleAt": "2026-11-24T15:28:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "블룸버그 \"트럼프 과잉생산 관세, 무역협정 세율 안 넘는다\"",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-24T16:46:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261125000013"
+    },
+    {
+     "title": "美 과잉생산 관세 이르면 이번 주 윤곽…韓 15% 유지 주목",
+     "press": "kbmaeil.com",
+     "publishedAt": "2026-11-24T16:44:00.000Z",
+     "link": "https://www.kbmaeil.com/article/20261125500003"
+    },
+    {
+     "title": "美 USTR, 이르면 이번주 '과잉생산 관세' 결과 발표할 듯(종합)",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-24T16:00:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3451853"
+    }
+   ]
+  },
+  {
    "keyword": "국내 코인 발행 허용",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-24T15:21:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-24T15:31:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -73,44 +137,12 @@
      "link": "https://n.news.naver.com/mnews/article/023/0004011504?sid=101"
     }
    ]
-  },
-  {
-   "keyword": "미국 과잉생산 관세 조사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-24T15:23:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美 과잉생산 관세 이르면 이번 주 윤곽…韓 15% 유지 주목",
-     "press": "kbmaeil.com",
-     "publishedAt": "2026-11-24T16:44:00.000Z",
-     "link": "https://www.kbmaeil.com/article/20261125500003"
-    },
-    {
-     "title": "美 USTR, 이르면 이번주 '과잉생산 관세' 결과 발표할 듯(종합)",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-24T16:00:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3451853"
-    },
-    {
-     "title": "미국, 이르면 이번주 '과잉생산 관세' 발표…한국 15% 유지되나",
-     "press": "news.mtn.co.kr",
-     "publishedAt": "2026-11-24T15:28:00.000Z",
-     "link": "https://news.mtn.co.kr/article/2026112500242274013"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
   "flagged": 1400,
-  "matched": 732,
+  "matched": 731,
   "avgLeadMin": 514,
   "recent": [
    {
