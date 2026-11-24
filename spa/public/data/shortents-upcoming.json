@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T11:20:59.239Z",
+ "builtAt": "2026-11-24T11:31:02.274Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,27 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 24,
+ "measured": 25,
  "candidates": [
   {
    "keyword": "삼성 준감위 주주환원 결정",
    "sources": [
-    "nate"
+    "nate",
+    "daum"
    ],
-   "articles90": 21,
+   "articles90": 18,
    "recent20": 1,
-   "press": 21,
-   "firstArticleAt": "2026-11-24T09:55:00.000Z",
+   "press": 18,
+   "firstArticleAt": "2026-11-24T10:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "삼성 준감위 “주주환원 결정 시점, 이해상충 해당 안해”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-24T11:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764843?sid=101"
+    },
     {
      "title": "삼성 준감위 “주주환원 결정 과정, 준법 위반·이해상충 아니다”",
      "press": "sedaily.com",
@@ -33,12 +40,6 @@
      "press": "newstomato.com",
      "publishedAt": "2026-11-24T10:48:00.000Z",
      "link": "http://www.newstomato.com/ReadNews.aspx?no=1321745&inflow=N"
-    },
-    {
-     "title": "삼성 준감위 \"주주환원 시점 이해상충 없다\"",
-     "press": "4th.kr",
-     "publishedAt": "2026-11-24T10:46:00.000Z",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2122610"
     }
    ]
   },
@@ -47,30 +48,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 20,
-   "recent20": 4,
-   "press": 19,
-   "firstArticleAt": "2026-11-24T09:52:00.000Z",
+   "articles90": 18,
+   "recent20": 5,
+   "press": 16,
+   "firstArticleAt": "2026-11-24T10:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "EU행 韓하이브리드차 무관세, 다음달부터 6만 7924대로 제한",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-24T11:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004213495?sid=104"
+     "title": "[그래픽] EU 세이프가드 주요국 하이브리드차 수입 허용 물량",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-24T11:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016461465?sid=101"
+    },
+    {
+     "title": "EU, 한국산 하이브리드차 수입 제한…200일 간 6만 7924대",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-24T11:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/119/0003159026?sid=104"
     },
     {
      "title": "EU 한국산 하이브리드차 내달부터 200일간 6만7924대로 제한, 세이프가드...",
      "press": "businesspost.co.kr",
      "publishedAt": "2026-11-24T11:20:00.000Z",
      "link": "https://www.businesspost.co.kr/BP?command=article_view&num=452839"
+    }
+   ]
+  },
+  {
+   "keyword": "지하철 파업",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 16,
+   "recent20": 5,
+   "press": 12,
+   "firstArticleAt": "2026-11-24T10:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[속보] 내일 지하철 파업하나…공사 “오해 풀었다” vs 올바른노조 “...",
+     "press": "ekn.kr",
+     "publishedAt": "2026-11-24T11:20:00.000Z",
+     "link": "https://www.ekn.kr/web/view.php?key=20261124028194184"
     },
     {
-     "title": "EU, 한국산 하이브리드차 물량 제한…\"수출 제동 우려\"",
-     "press": "m-i.kr",
-     "publishedAt": "2026-11-24T11:20:00.000Z",
-     "link": "https://www.m-i.kr/news/articleView.html?idxno=2022903"
+     "title": "서울 지하철 노사 막판 교섭 난항…내일 첫차부터 파업 예고",
+     "press": "news.tf.co.kr",
+     "publishedAt": "2026-11-24T11:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/629/0000555209?sid=102"
+    },
+    {
+     "title": "서울지하철 총파업 D-1…노사 막판 교섭 ‘난항’, 출근길 혼란 우려",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-24T11:17:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002727925?sid=102"
     }
    ]
   },
@@ -79,10 +112,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
-   "recent20": 2,
-   "press": 11,
-   "firstArticleAt": "2026-11-24T09:58:00.000Z",
+   "articles90": 10,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-24T10:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -112,7 +145,7 @@
     "signal.bz"
    ],
    "articles90": 9,
-   "recent20": 3,
+   "recent20": 0,
    "press": 8,
    "firstArticleAt": "2026-11-24T10:03:00.000Z",
    "exclusive": false,
@@ -135,38 +168,6 @@
      "press": "fnnews.com",
      "publishedAt": "2026-11-24T11:05:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/014/0005609220?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "제8차 미세먼지 계절관리제",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-24T09:52:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "올겨울 미세먼지 지난겨울보다 짙을 것으로 예상",
-     "press": "segyebiz.com",
-     "publishedAt": "2026-11-24T11:08:00.000Z",
-     "link": "http://www.segyebiz.com/newsView/20261124518612?OutUrl=naver"
-    },
-    {
-     "title": "올겨울 초미세먼지 악화 전망… 정부, 석탄발전 최대 18기 가동 중단",
-     "press": "segye.com",
-     "publishedAt": "2026-11-24T11:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177803?sid=102"
-    },
-    {
-     "title": "미세먼지 감축 '삼중고'…국외 유입·엘니뇨·LNG 급등",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-24T09:54:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321744&inflow=N"
     }
    ]
   },
