@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T06:39:21.834Z",
+ "builtAt": "2026-11-24T06:49:25.221Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,22 +11,182 @@
  "measured": 28,
  "candidates": [
   {
-   "keyword": "거래소 지분 20% 제한",
+   "keyword": "김병기 의원 송치",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 53,
+   "recent20": 5,
+   "press": 48,
+   "firstArticleAt": "2026-11-24T05:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "경찰, 김병기 '13개 중 7개 의혹' 불구속 송치… 수사 1년2개월 만",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-24T06:44:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3451698"
+    },
+    {
+     "title": "경찰, 김병기 1년 2개월 만에 송치…차남 취업 특혜 등 7개 혐의",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-24T06:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004685598?sid=102"
+    },
+    {
+     "title": "늑장수사 비판 끝에…경찰, 김병기 6개 의혹 송치",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-24T06:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929431?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "오세훈 국무회의 발언",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 67,
+   "recent20": 6,
+   "press": 41,
+   "firstArticleAt": "2026-11-24T05:21:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "오세훈, 재건축·재개발 규제 완화 촉구 \"집 지으라면서 짓는 길 막아\"",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-24T06:44:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261124010009431"
+    },
+    {
+     "title": "오세훈 \"특검·탄핵 민심 전하려 했는데…기회 못 얻어\"",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-24T06:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005609024?sid=102"
+    },
+    {
+     "title": "오세훈 “대통령, 공소취소 멈추고 조희대 탄핵 막아야”",
+     "press": "ekn.kr",
+     "publishedAt": "2026-11-24T06:36:00.000Z",
+     "link": "https://www.ekn.kr/web/view.php?key=20261124020064058"
+    }
+   ]
+  },
+  {
+   "keyword": "금감원 거래소 TF 가동",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 41,
+   "recent20": 5,
+   "press": 40,
+   "firstArticleAt": "2026-11-24T05:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "불법 공매도 3개월 집중 감시… 금감원·거래소 합동 TF 가동",
+     "press": "daejonilbo.com",
+     "publishedAt": "2026-11-24T06:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/656/0000193409?sid=101"
+    },
+    {
+     "title": "금감원·거래소, 불법공매도 합동 TF 가동 ... \"조기 포착하고, 적발시 ...",
+     "press": "efnews.co.kr",
+     "publishedAt": "2026-11-24T06:44:00.000Z",
+     "link": "http://www.efnews.co.kr/news/articleView.html?idxno=134269"
+    },
+    {
+     "title": "금감원·거래소, 불법 공매도 합동점검 TF 가동…3개월간 집중감시",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-24T06:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002727823?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황, 복귀와 우려",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 60,
+   "recent20": 15,
+   "press": 36,
+   "firstArticleAt": "2026-11-24T05:24:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "젠슨 황에 출렁이는 코스피 … 신현송의 '호미질' 시험대 [N-경제포커스...",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-24T06:48:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/24/2026112450305.html"
+    },
+    {
+     "title": "코스피, 젠슨 황 복귀에 6.32% 급등…5000선 회복 성공",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-24T06:44:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1732850"
+    },
+    {
+     "title": "결국 '대마불사'…美경제에 젠슨황·엔비디아 위상은",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-24T06:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016461027?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "이용철 공소취소 청문회",
    "sources": [
     "daum"
    ],
-   "articles90": 69,
-   "recent20": 17,
-   "press": 51,
-   "firstArticleAt": "2026-11-24T05:16:00.000Z",
+   "articles90": 36,
+   "recent20": 10,
+   "press": 31,
+   "firstArticleAt": "2026-11-24T05:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이용철 법무장관 후보 “李 대통령 사건, 무리한 지휘권 행사 않겠다”",
+     "press": "m.skyedaily.com",
+     "publishedAt": "2026-11-24T06:48:00.000Z",
+     "link": "https://m.skyedaily.com/news_view.html?ID=315152"
+    },
+    {
+     "title": "이용철, '공소취소 지휘 안 하겠다는 말 못 하나' 질문에 \"예\"",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-24T06:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005609027?sid=102"
+    },
+    {
+     "title": "이용철 \"무리한 지휘권 행사 않겠다\"",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-24T06:40:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2022772"
+    }
+   ]
+  },
+  {
+   "keyword": "가상자산거래소 지분 분산",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 42,
+   "recent20": 3,
+   "press": 31,
+   "firstArticleAt": "2026-11-24T06:00:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "가상자산거래소 지분 20% 제한…국내 ICO도 허용",
-     "press": "kado.net",
-     "publishedAt": "2026-11-24T06:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000213108?sid=101"
+     "title": "[스테이블코인 어디로] 거래소 지분 20% 상한·초과분 의결권 제한…강...",
+     "press": "dealsite.co.kr",
+     "publishedAt": "2026-11-24T06:46:00.000Z",
+     "link": "https://dealsite.co.kr/articles/173400"
     },
     {
      "title": "가상자산거래소 대주주 지분제한 강행…입법되면 지배구조 대수술",
@@ -43,130 +203,34 @@
    ]
   },
   {
-   "keyword": "김병기 의원 송치",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 50,
-   "recent20": 11,
-   "press": 45,
-   "firstArticleAt": "2026-11-24T05:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "늑장수사 비판 끝에…경찰, 김병기 6개 의혹 송치",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-24T06:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929431?sid=102"
-    },
-    {
-     "title": "경찰, 김병기 불구속 송치…수사 1년 2개월 만에 종료",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-24T06:32:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904253"
-    },
-    {
-     "title": "경찰, 김병기 불구속 송치…1년 2개월 만에 수사 마무리",
-     "press": "kookje.co.kr",
-     "publishedAt": "2026-11-24T06:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/658/0000162122?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "오세훈 국무회의 발언",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 67,
-   "recent20": 7,
-   "press": 41,
-   "firstArticleAt": "2026-11-24T05:14:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "오세훈 “대통령, 공소취소 멈추고 조희대 탄핵 막아야”",
-     "press": "ekn.kr",
-     "publishedAt": "2026-11-24T06:36:00.000Z",
-     "link": "https://www.ekn.kr/web/view.php?key=20261124020064058"
-    },
-    {
-     "title": "오세훈, 대통령 향해 \"국정의 중심, 국민 삶으로 되돌려 달라\"",
-     "press": "tbs.seoul.kr",
-     "publishedAt": "2026-11-24T06:35:00.000Z",
-     "link": "http://tbs.seoul.kr/news/newsView.do?typ_800=9&idx_800=3538841&seq_800=20531742"
-    },
-    {
-     "title": "오세훈, 국무회의서 발언 불발…국토장관에 재건축 규제 완화·세운4구...",
-     "press": "ekn.kr",
-     "publishedAt": "2026-11-24T06:34:00.000Z",
-     "link": "https://www.ekn.kr/web/view.php?key=20261124020314040"
-    }
-   ]
-  },
-  {
-   "keyword": "원화 스테이블코인 발행 허용",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 49,
-   "recent20": 11,
-   "press": 39,
-   "firstArticleAt": "2026-11-24T06:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "원화 스테이블코인 은행 주도 발행",
-     "press": "metroseoul.co.kr",
-     "publishedAt": "2026-11-24T06:38:00.000Z",
-     "link": "http://www.metroseoul.co.kr/article/20261124500434"
-    },
-    {
-     "title": "스테이블코인 발행 넘어 예치·신탁까지…은행에 열리는 디지털자산 신...",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-24T06:34:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2652338"
-    },
-    {
-     "title": "가상자산거래소 지분 20% 제한…국내 ICO도 허용",
-     "press": "kado.net",
-     "publishedAt": "2026-11-24T06:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000213108?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "국가시험 공정성 확보 회의",
+   "keyword": "국가시험 공정성 회의",
    "sources": [
     "nate"
    ],
    "articles90": 40,
-   "recent20": 6,
-   "press": 25,
-   "firstArticleAt": "2026-11-24T05:30:00.000Z",
+   "recent20": 4,
+   "press": 24,
+   "firstArticleAt": "2026-11-24T05:39:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "韓총리 \"과거국가시험 철저조사…부정행위시 유사시험 제한검토\"",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-24T06:46:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2022803"
+    },
+    {
+     "title": "수능 끝나도 부정행위 논란 계속…\"국가시험 감독 체계 재설계해야\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-24T06:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005445704?sid=102"
+    },
     {
      "title": "한성숙 총리 \"과거 국가시험 철저 조사…적발 땐 자격 박탈·형사책임\"",
      "press": "mt.co.kr",
      "publishedAt": "2026-11-24T06:38:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/008/0005445696?sid=100"
-    },
-    {
-     "title": "한 총리 \"과거 국가시험 철저 조사…부정행위 시 유사시험 제한 검토\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-24T06:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001405453?sid=100"
-    },
-    {
-     "title": "한 총리 \"예정 국가시험 AI 부정행위 막을 것…응시제한·형사책임 강화...",
-     "press": "iminju.net",
-     "publishedAt": "2026-11-24T06:28:00.000Z",
-     "link": "http://www.iminju.net/news/articleView.html?idxno=173003"
     }
    ]
   },
@@ -175,41 +239,73 @@
    "sources": [
     "google"
    ],
-   "articles90": 22,
-   "recent20": 7,
-   "press": 21,
-   "firstArticleAt": "2026-11-24T05:33:00.000Z",
+   "articles90": 21,
+   "recent20": 10,
+   "press": 19,
+   "firstArticleAt": "2026-11-24T05:46:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "KB국민은행, 기업형 퇴직연금 수수료 전면 개편",
-     "press": "newscape.co.kr",
-     "publishedAt": "2026-11-24T06:38:00.000Z",
-     "link": "http://www.newscape.co.kr/news/articleView.html?idxno=126053"
+     "title": "케이뱅크, 연 3.89% 금리 앞세워 퇴직연금 시장 진출",
+     "press": "financialpost.co.kr",
+     "publishedAt": "2026-11-24T06:46:00.000Z",
+     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=302855"
     },
     {
-     "title": "희망퇴직 넘어 인력 순환…SKT, 주니어 채용 확대 검토",
-     "press": "popcornnews.net",
-     "publishedAt": "2026-11-24T06:38:00.000Z",
-     "link": "http://www.popcornnews.net/news/articleView.html?idxno=141304"
+     "title": "NH농협, 26일까지 명퇴 신청… 최대 40개월분 퇴직금 지급",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-24T06:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001207024?sid=101"
     },
     {
-     "title": "진격의 인뱅, '돈 굴리는 시장'으로…통장이자부터 퇴직연금까지",
-     "press": "sisaon.co.kr",
-     "publishedAt": "2026-11-24T06:38:00.000Z",
-     "link": "https://www.sisaon.co.kr/news/articleView.html?idxno=206348"
+     "title": "위스키 시장 침체에…골든블루, 2년 만에 희망퇴직",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-24T06:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006414844?sid=101"
     }
    ]
   },
   {
-   "keyword": "한덕수 대법원 판결 긴급토론회",
+   "keyword": "박수진 배용준 귀국",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 37,
-   "recent20": 2,
-   "press": 11,
+   "articles90": 19,
+   "recent20": 0,
+   "press": 17,
+   "firstArticleAt": "2026-11-24T05:23:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "배용준♥박수진 4년 하와이 생활 끝→반포 정착, 10년만 연예계 복귀 수...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-24T06:21:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190671"
+    },
+    {
+     "title": "배용준♥박수진, 하와이 생활 청산…반포에 새 보금자리",
+     "press": "celuvmedia.com",
+     "publishedAt": "2026-11-24T06:18:00.000Z",
+     "link": "http://www.celuvmedia.com/article.php?aid=1795498992531446006"
+    },
+    {
+     "title": "‘은퇴설’ 배용준·박수진, 뜻밖의 근황…4년 하와이 생활 접고 한국행",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-24T06:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005768210?sid=103"
+    }
+   ]
+  },
+  {
+   "keyword": "한덕수 대법원 판결 토론회 김민석",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 53,
+   "recent20": 0,
+   "press": 12,
    "firstArticleAt": "2026-11-24T05:20:00.000Z",
    "exclusive": false,
    "capped": false,
@@ -221,32 +317,37 @@
      "link": "https://n.news.naver.com/mnews/article/123/0002394728?sid=100"
     },
     {
+     "title": "[포토] 참석자들과 인사 나누는 김민석 민주당 대표",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-24T06:24:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/24/2026112450286.html"
+    },
+    {
      "title": "[포토] '한덕수 대법원 판결, 무엇이 문제인가' 긴급토론회",
      "press": "newdaily.co.kr",
      "publishedAt": "2026-11-24T06:24:00.000Z",
      "link": "https://www.newdaily.co.kr/site/data/html/2026/11/24/2026112450285.html"
-    },
-    {
-     "title": "[포토] ‘한덕수 대법원 판결’ 더불어민주당 긴급토론회",
-     "press": "ilyosisa.co.kr",
-     "publishedAt": "2026-11-24T06:08:00.000Z",
-     "link": "https://www.ilyosisa.co.kr/news/article.html?no=259173"
     }
    ]
   },
   {
    "keyword": "우리카드 비예나 영입",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 11,
-   "firstArticleAt": "2026-11-24T05:12:00.000Z",
+   "articles90": 10,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-24T05:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "우리카드, V리그 ‘득점왕’ 출신 비예나 영입…아라우조 부상 대체",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-24T06:46:00.000Z",
+     "link": "https://m.sports.naver.com/volleyball/article/028/0002833724"
+    },
     {
      "title": "'득점왕이 돌아왔다' 우리카드, 아라우조 대체 외국인 선수로 비예나 영...",
      "press": "osen.co.kr",
@@ -258,39 +359,32 @@
      "press": "mydaily.co.kr",
      "publishedAt": "2026-11-24T06:07:00.000Z",
      "link": "https://m.sports.naver.com/volleyball/article/117/0004127639"
-    },
-    {
-     "title": "'검증된 에이스' 비예나, 우리카드 합류…V리그 복귀",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-24T06:00:00.000Z",
-     "link": "https://m.sports.naver.com/volleyball/article/422/0000929413"
     }
    ]
   },
   {
    "keyword": "젠슨 황 복귀에도 여전한 논란",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 8,
-   "recent20": 2,
+   "recent20": 0,
    "press": 7,
    "firstArticleAt": "2026-11-24T05:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[젠슨 황 복귀] 힘 받는 트럼프 AI 패권 전략…투자·정책 리스크는 여전",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-24T06:26:00.000Z",
-     "link": "https://www.ajunews.com/view/20261124143306285"
-    },
-    {
      "title": "젠슨 황 귀환에 안도한 K기업…“이젠 이름만으론 안 들떠”",
      "press": "joongang.co.kr",
      "publishedAt": "2026-11-24T06:26:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/025/0003567569?sid=101"
+    },
+    {
+     "title": "[젠슨 황 복귀] 힘 받는 트럼프 AI 패권 전략…투자·정책 리스크는 여전",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-24T06:26:00.000Z",
+     "link": "https://www.ajunews.com/view/20261124143306285"
     },
     {
      "title": "젠슨 황 복귀에 차분한 국내 테크업계… \"비즈니스 파트너는 개인 아닌...",
@@ -306,7 +400,7 @@
     "signal.bz"
    ],
    "articles90": 7,
-   "recent20": 2,
+   "recent20": 0,
    "press": 7,
    "firstArticleAt": "2026-11-24T06:00:00.000Z",
    "exclusive": false,
@@ -333,74 +427,41 @@
    ]
   },
   {
-   "keyword": "이태현 KBS 사장 후보자",
+   "keyword": "이태현 인사청문회",
    "sources": [
     "daum"
    ],
-   "articles90": 7,
-   "recent20": 2,
-   "press": 7,
-   "firstArticleAt": "2026-11-24T05:14:00.000Z",
+   "articles90": 6,
+   "recent20": 3,
+   "press": 6,
+   "firstArticleAt": "2026-11-24T05:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "이태현 KBS 사장 후보자 “보도·편성·제작에 개입하지 않겠다”",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-24T06:44:00.000Z",
+     "link": "https://m.entertain.naver.com/article/021/0002835180"
+    },
+    {
+     "title": "국회 과방위 박정하 의원, 이태현 KBS 사장 후보자 인사청문회 '송곳 검...",
+     "press": "kado.net",
+     "publishedAt": "2026-11-24T06:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000213112?sid=100"
+    },
     {
      "title": "이태현 KBS 사장 후보자 “정치적 중립성 확보…뉴스 신뢰 되찾겠다”",
      "press": "segye.com",
      "publishedAt": "2026-11-24T06:35:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/022/0004177720?sid=103"
-    },
-    {
-     "title": "이태현 KBS 사장후보 \"AI 전격도입\" 계획…마구잡이 인력대체 우려 나와",
-     "press": "mediatoday.co.kr",
-     "publishedAt": "2026-11-24T06:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/006/0000138918?sid=100"
-    },
-    {
-     "title": "최형두 \"KBS 사장 후보자 장남 5억 증여, 참고인 불러 밝혀야\"",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-24T06:15:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005847149?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "정상빈 1골 1도움 활약",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-24T05:33:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "MLS컵 PO ‘코리안 더비’ 주연은 세인트루이스 정상빈, 1G·1AS로 팀 첫 ...",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-24T06:13:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/382/0001306523"
-    },
-    {
-     "title": "손흥민과 코리안 더비서 웃은 ‘1골1도움’ 정상빈…미트윌란 ‘코리안...",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-24T06:11:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/396/0000761816"
-    },
-    {
-     "title": "‘1골 1도움’ 정상빈, ‘코리안 더비’서 손흥민에 완승 ‘LAFC 탈락 위...",
-     "press": "sports.donga.com",
-     "publishedAt": "2026-11-24T06:06:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/382/0001306521"
     }
    ]
   },
   {
    "keyword": "질문에 장동혁 대표",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 13,
    "recent20": 0,
@@ -410,16 +471,16 @@
    "capped": false,
    "samples": [
     {
-     "title": "장동혁 대표, 한동훈 겨냥… \"국민의힘에 발붙일 곳 없다”",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-24T06:11:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261124001102"
-    },
-    {
      "title": "한동훈 향한 장동혁의 직격탄… “국힘에 발붙일 곳 없다”",
      "press": "newspim.com",
      "publishedAt": "2026-11-24T06:11:00.000Z",
      "link": "https://www.newspim.com/news/view/20261124001101"
+    },
+    {
+     "title": "장동혁 대표, 한동훈 겨냥… \"국민의힘에 발붙일 곳 없다”",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-24T06:11:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261124001102"
     },
     {
      "title": "장동혁 “한동훈은 보수 궤멸의 핵심”",
@@ -462,66 +523,98 @@
    ]
   },
   {
-   "keyword": "이지영 연봉 100억",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-24T05:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘연세 20만원’ 이재민→‘13년째 연봉100억’ 이지영…집 3채 오가는 ...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-24T06:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001283144"
-    },
-    {
-     "title": "‘연봉 100억’ 이지영, 집만 세 채..“원하는 곳으로 퇴근해”(‘짠한...",
-     "press": "heraldmuse.com",
-     "publishedAt": "2026-11-24T05:45:00.000Z",
-     "link": "https://m.entertain.naver.com/article/112/0003814222"
-    },
-    {
-     "title": "'100억 연봉' 이지영, 허벅지 포크로 찌르고 생커피 먹다 '위천공'...\"미...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-24T05:36:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004469097"
-    }
-   ]
-  },
-  {
-   "keyword": "치이카와 클리닉",
+   "keyword": "임성한",
    "sources": [
     "google"
    ],
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-24T05:22:00.000Z",
+   "firstArticleAt": "2026-11-24T05:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "더현대 '치이카와 클리닉' 팝업, 1차 사전예약 매진…2차 오픈일?",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-24T06:20:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284876"
-    },
-    {
-     "title": "더현대 치이카와 팝업 굿즈 사전예약",
+     "title": "임성한 작가 자택 첫 공개… 엄은향 “내비 켤 정도”",
      "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-24T05:34:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611240230"
+     "publishedAt": "2026-11-24T06:44:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611240243"
     },
     {
-     "title": "'치이카와 클리닉' 팝업 1차 사전예약 오픈…대기자 7만 명 넘게 몰렸다",
-     "press": "gukjenews.com",
-     "publishedAt": "2026-11-24T05:22:00.000Z",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3761468"
+     "title": "\"숨길 수 없는 재산\" … 임성한 작가, 샹들리에 달린 자택 최초 공개",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-24T05:54:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/24/2026112450207.html"
+    },
+    {
+     "title": "임성한 작가, 집 공개…엄은향 “집이 너무 넓어 내비 켜”",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-24T05:23:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001283124"
+    }
+   ]
+  },
+  {
+   "keyword": "군용기 정부 초치해",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-24T06:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[이슈] 러시아 군용기 또 동해 KADIZ 진입, 울릉도 근접에 한때 경계경보...",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-24T06:29:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=749106"
+    },
+    {
+     "title": "러 군용기, 울릉도 영공 '초근접'…정부, 무관 초치해 항의",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-24T06:18:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2022755"
+    },
+    {
+     "title": "울릉도 경계경보 부른 러 군용기···정부, 무관 초치해 항의키로",
+     "press": "todaykorea.co.kr",
+     "publishedAt": "2026-11-24T06:04:00.000Z",
+     "link": "https://www.todaykorea.co.kr/news/articleView.html?idxno=409105"
+    }
+   ]
+  },
+  {
+   "keyword": "군인",
+   "sources": [
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-24T05:56:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "피겨 국대 출신부터 3대 군인가족까지…공군 장교 146명 임관",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-24T06:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012300041?sid=100"
+    },
+    {
+     "title": "함양군재향군인회, 반찬 나눔 봉사",
+     "press": "newsgn.com",
+     "publishedAt": "2026-11-24T06:12:00.000Z",
+     "link": "https://www.newsgn.com/news/articleView.html?idxno=587706"
+    },
+    {
+     "title": "공군 신임 장교 146명 임관…3대 군인가족·세 번째 군번 화제",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-24T05:56:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5087204"
     }
    ]
   },
@@ -560,7 +653,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1277,
+  "flagged": 1287,
   "matched": 685,
   "avgLeadMin": 525,
   "recent": [
