@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T01:35:36.241Z",
+ "builtAt": "2026-11-24T01:45:39.604Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,38 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 20,
+ "measured": 22,
  "candidates": [
   {
-   "keyword": "젠슨 황 CEO 복귀 소식",
+   "keyword": "젠슨 황 CEO 복귀",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 66,
-   "recent20": 35,
-   "press": 48,
-   "firstArticleAt": "2026-11-24T01:00:00.000Z",
+   "articles90": 75,
+   "recent20": 64,
+   "press": 56,
+   "firstArticleAt": "2026-11-24T01:23:00.000Z",
    "exclusive": false,
    "capped": true,
    "samples": [
     {
-     "title": "[특징주] 삼전닉스 동반 폭등…젠슨 황 복귀에 코스피 5천선 안착 시도",
-     "press": "namdonews.com",
-     "publishedAt": "2026-11-24T01:34:00.000Z",
-     "link": "https://www.namdonews.com/news/articleView.html?idxno=930239"
+     "title": "엔비디아 CEO 복귀, 코스피 5천피 회복의 신호탄 될까?",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-24T01:44:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=887031"
     },
     {
-     "title": "'왕의 귀환' 젠슨 황…엔비디아 31.48% 폭등·코스피 5000선 탈환",
-     "press": "mstoday.co.kr",
-     "publishedAt": "2026-11-24T01:34:00.000Z",
-     "link": "https://www.mstoday.co.kr/news/articleView.html?idxno=200571"
+     "title": "코스피 5030선 회복 시도, 젠슨 황 효과",
+     "press": "sidae.com",
+     "publishedAt": "2026-11-24T01:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/417/0001165406?sid=101"
     },
     {
-     "title": "코스피, 젠슨 황 복귀에 5000선 회복…삼전·닉스 8~10% 급등",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-24T01:32:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=202611241025515307923c501012_1"
+     "title": "젠슨 황 복귀에 엔비디아 시총 1,275조원↑…\"트럼프, 200억 번 듯\"",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-24T01:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979605?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "국무회의 이재명 대통령",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 63,
+   "recent20": 45,
+   "press": 35,
+   "firstArticleAt": "2026-11-24T01:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "李대통령 “시험 부정행위, 주가조작과 본질 같아”…국가시험 전반 합...",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-24T01:44:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2652143"
+    },
+    {
+     "title": "회의자료 검토하는 이재명 대통령",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-24T01:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016459977?sid=100"
+    },
+    {
+     "title": "李대통령, 사이비 종교단체 해산 “현실적으로 검토할 때”…문체부에...",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-24T01:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003060791?sid=100"
     }
    ]
   },
@@ -48,72 +79,71 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 35,
+   "articles90": 41,
    "recent20": 12,
-   "press": 29,
-   "firstArticleAt": "2026-11-24T00:08:00.000Z",
+   "press": 33,
+   "firstArticleAt": "2026-11-24T00:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이용철 법무장관 후보자 “공소청 공정한 기소” 강조…'李 공소취소' ...",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-24T01:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005846922?sid=102"
+     "title": "정점식 \"이용철, 李 탈옥 도우미\"…'이재명 버블 특검' 추진",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-24T01:44:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086940"
     },
     {
-     "title": "한병도 \"적재적소 개각 환영…野, 청문회 정쟁의 장 활용 안 돼\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-24T01:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005445473?sid=100"
+     "title": "이용철 송곳 검증 예고한 박형수 \"반드시 공소취소 명확 입장 밝혀라\"",
+     "press": "thepublic.kr",
+     "publishedAt": "2026-11-24T01:42:00.000Z",
+     "link": "https://www.thepublic.kr/news/articleView.html?idxno=328178"
     },
     {
-     "title": "이용철 법무장관 청문회 시작...李공소취소·조희대 탄핵 등 입장 밝히...",
-     "press": "pennmike.com",
-     "publishedAt": "2026-11-24T01:28:00.000Z",
-     "link": "https://www.pennmike.com/news/articleView.html?idxno=132602"
-    }
-   ]
-  },
-  {
-   "keyword": "서울시 비상수송대책",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 28,
-   "recent20": 7,
-   "press": 27,
-   "firstArticleAt": "2026-11-24T00:06:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "서울시, 지하철 파업에 '버스 증편' 비상수송대책 마련",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-24T01:30:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544774"
-    },
-    {
-     "title": "비상열차 편성·버스 배차 확대…서울시, 지하철 파업 대비 비상수송대...",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-24T01:30:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611240059"
-    },
-    {
-     "title": "서울시, 25일 지하철 파업 대비 비상수송대책 추진",
-     "press": "news2day.co.kr",
-     "publishedAt": "2026-11-24T01:22:00.000Z",
-     "link": "https://www.news2day.co.kr/article/20261124500099"
+     "title": "국회, 이용철 법무장관·이태현 KBS 사장 후보 인사청문회 개최",
+     "press": "lawissue.co.kr",
+     "publishedAt": "2026-11-24T01:42:00.000Z",
+     "link": "https://www.lawissue.co.kr/view.php?ud=202611241040485795b3279dfb36_12"
     }
    ]
   },
   {
    "keyword": "김민석 취임 100일, 당청 안정 필요",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 25,
+   "articles90": 27,
+   "recent20": 7,
+   "press": 26,
+   "firstArticleAt": "2026-11-24T00:18:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "취임 100일 맞은 김민석 “당청 관계 안정됐다”…당내 갈등·민생은 과...",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-24T01:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000133501?sid=100"
+    },
+    {
+     "title": "'당청 관계 안정'이 성과라는 김민석...과연 현실은?",
+     "press": "goodmorningcc.com",
+     "publishedAt": "2026-11-24T01:36:00.000Z",
+     "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=456411"
+    },
+    {
+     "title": "취임 100일 맞은 김민석 \"당청 관계 안정…당내 결속과 체감 민생 주력...",
+     "press": "hg-times.com",
+     "publishedAt": "2026-11-24T01:32:00.000Z",
+     "link": "https://www.hg-times.com/news/articleView.html?idxno=307285"
+    }
+   ]
+  },
+  {
+   "keyword": "원내대책회의 정점식 원내대표",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 50,
    "recent20": 7,
    "press": 24,
    "firstArticleAt": "2026-11-24T00:18:00.000Z",
@@ -121,88 +151,86 @@
    "capped": false,
    "samples": [
     {
-     "title": "취임 100일 맞은 김민석 \"당청 관계 안정…당내 결속과 체감 민생 주력...",
-     "press": "hg-times.com",
-     "publishedAt": "2026-11-24T01:32:00.000Z",
-     "link": "https://www.hg-times.com/news/articleView.html?idxno=307285"
+     "title": "정점식 \"이용철, 李 탈옥 도우미\"…'이재명 버블 특검' 추진",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-24T01:44:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5086940"
     },
     {
-     "title": "김민석 \"100일, 가장 만만치 않았던 기간\"",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-24T01:30:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005357483?sid=100"
+     "title": "이용철 결격 조목조목 지적한 정점식 \"대통령 탈옥 위한 한 조각 퍼즐\"",
+     "press": "thepublic.kr",
+     "publishedAt": "2026-11-24T01:42:00.000Z",
+     "link": "https://www.thepublic.kr/news/articleView.html?idxno=328175"
     },
     {
-     "title": "'취임 100일' 맞은 김민석, 당청 관계 안정화 평가... \"당내 더 안정돼야...",
-     "press": "lawissue.co.kr",
-     "publishedAt": "2026-11-24T01:30:00.000Z",
-     "link": "https://www.lawissue.co.kr/view.php?ud=20261124102721324b3279dfb36_12"
+     "title": "정점식 \"이용철은 '대통령 탈옥 도우미'…공소 취소 포석\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-24T01:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929327?sid=100"
     }
    ]
   },
   {
-   "keyword": "원내대책회의 정점식 원내대표",
+   "keyword": "현혹 1월 6일 공개",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 45,
-   "recent20": 6,
-   "press": 19,
+   "articles90": 22,
+   "recent20": 3,
+   "press": 21,
+   "firstArticleAt": "2026-11-24T00:16:00.000Z",
+   "exclusive": true,
+   "capped": false,
+   "samples": [
+    {
+     "title": "수지, 뱀파이어 송정화로 돌아온다…김선호와 '현혹' 공개일?",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-24T01:44:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284687"
+    },
+    {
+     "title": "수지, 파격적인 변신으로 돌아온다…'현혹' 1월 6일 공개",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-24T01:40:00.000Z",
+     "link": "https://m.entertain.naver.com/article/018/0006414629"
+    },
+    {
+     "title": "수지, 푸른 눈에 날카로운 송곳니 '치명적 뱀파이어'..김선호 현혹될까...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-24T01:36:00.000Z",
+     "link": "https://m.entertain.naver.com/article/109/0005644404"
+    }
+   ]
+  },
+  {
+   "keyword": "강금실 국정원장 후보자",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 22,
+   "recent20": 9,
+   "press": 18,
    "firstArticleAt": "2026-11-24T00:18:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "정점식 \"이용철, 성남 카르텔 출신 李 탈옥 도우미… 장관 함량 미달\"",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-24T01:34:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3451519"
+     "title": "안철수 \"강금실, 중국 위해 복무한 사람… 한미 방첩동맹 파탄 날 것\"",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-24T01:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000967368?sid=100"
     },
     {
-     "title": "정점식 \"국민연금 증시 폭락 가담…'이재명 버블 특검' 추진\"",
+     "title": "국민의힘 \"정보 문외한 강금실 지명 철회해야\"",
      "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-24T01:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001405349?sid=100"
+     "publishedAt": "2026-11-24T01:40:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001405352?sid=100"
     },
     {
-     "title": "정점식 \"성남 카르텔 일원인 이용철 후보자, 대통령 탈옥 도우미\"",
-     "press": "mediapen.com",
-     "publishedAt": "2026-11-24T01:24:00.000Z",
-     "link": "https://www.mediapen.com/news/view/1139541"
-    }
-   ]
-  },
-  {
-   "keyword": "현혹 내년 1월 공개",
-   "sources": [
-    "signal.bz",
-    "nate"
-   ],
-   "articles90": 18,
-   "recent20": 0,
-   "press": 18,
-   "firstArticleAt": "2026-11-24T00:10:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "수지, 뱀파이어 변신…‘현혹’ 내년 1월 6일 공개 [공식]",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-24T01:12:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003543213"
-    },
-    {
-     "title": "수지X김선호 ‘현혹’, 내년 1월 6일 공개 확정..뱀파이어 미스터리 ‘...",
-     "press": "breaknews.com",
-     "publishedAt": "2026-11-24T01:06:00.000Z",
-     "link": "http://www.breaknews.com/1253390"
-    },
-    {
-     "title": "‘美친 비주얼’ 뱀파이어 수지에 이미 ‘현혹’… 내년 1월 공개 확정",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-24T00:46:00.000Z",
-     "link": "https://m.entertain.naver.com/article/144/0001151391"
+     "title": "국민의힘, 정부 중편 개각 명단 혹평... \"강금실 지명 철회해야\"",
+     "press": "lawissue.co.kr",
+     "publishedAt": "2026-11-24T01:36:00.000Z",
+     "link": "https://www.lawissue.co.kr/view.php?ud=202611241034189025b3279dfb36_12"
     }
    ]
   },
@@ -212,10 +240,10 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 10,
-   "recent20": 4,
-   "press": 10,
-   "firstArticleAt": "2026-11-24T00:12:00.000Z",
+   "articles90": 7,
+   "recent20": 3,
+   "press": 7,
+   "firstArticleAt": "2026-11-24T00:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -240,138 +268,42 @@
    ]
   },
   {
-   "keyword": "남다름 길스토리 전속계약",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-24T00:17:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "남다름, 김남길·이현욱 소속사 길스토리이엔티와 전속계약",
-     "press": "swtvnews.com",
-     "publishedAt": "2026-11-24T01:16:00.000Z",
-     "link": "https://www.swtvnews.com/news/newsview.php?ncode=1065574306063134"
-    },
-    {
-     "title": "[공식] '꽃남' 아역 남다름, 김남길 식구 됐다",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-24T01:11:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003489738"
-    },
-    {
-     "title": "남다름, 김남길 품으로…개인 SNS도 개설",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-24T01:01:00.000Z",
-     "link": "https://m.entertain.naver.com/article/119/0003158689"
-    }
-   ]
-  },
-  {
-   "keyword": "안철수 강금실 지명",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 8,
-   "recent20": 5,
-   "press": 8,
-   "firstArticleAt": "2026-11-24T00:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "안철수 \"친중 강금실 지명, 한미동맹 파탄 … 中간첩 국정원 접수 판단...",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-24T01:34:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/24/2026112450120.html"
-    },
-    {
-     "title": "친중 나가고 또 친중?…안철수, 강금실 과거 '친중 전력' 문제제기",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-24T01:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003158719?sid=100"
-    },
-    {
-     "title": "국힘, 개각에 \"靑 만기친람…'정보 문외한' 강금실 지명 철회해야\"",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-24T01:30:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=784338"
-    }
-   ]
-  },
-  {
-   "keyword": "조희대 대법원장 출근",
+   "keyword": "북한 항공기 오발송 혼란",
    "sources": [
     "nate"
    ],
-   "articles90": 7,
+   "articles90": 8,
    "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-24T00:16:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-24T00:17:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "천준호 \"한덕수 판결, 법원 내부서도 의문…조희대 탄핵 추진은 역사적...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-24T01:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014341443?sid=100"
+     "title": "경보 해제 44분 뒤에도 ‘영공 침범’…울릉 주민 혼란 키운 재난문자",
+     "press": "yeongnam.com",
+     "publishedAt": "2026-11-24T01:36:00.000Z",
+     "link": "https://www.yeongnam.com/web/view.php?key=20261124026142645"
     },
     {
-     "title": "조희대 대법원장 출근",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-24T00:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014341204?sid=102"
+     "title": "러시아 군용기 울릉도 인근 접근에 경계경보…경북도 재난문자 오발송...",
+     "press": "pressian.com",
+     "publishedAt": "2026-11-24T01:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/002/0002467246?sid=102"
     },
     {
-     "title": "출근하는 조희대 대법원장",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-24T00:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014341206?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "kospi",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-24T00:07:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "Kospi surge triggers buy-side trading curb",
-     "press": "koreajoongangdaily.com",
-     "publishedAt": "2026-11-24T00:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/640/0000097251?sid=101"
-    },
-    {
-     "title": "KRX activates buy-side sidecar for KOSPI on sharp rise",
-     "press": "en.yna.co.kr",
-     "publishedAt": "2026-11-24T00:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016459562?sid=104"
-    },
-    {
-     "title": "(URGENT) KRX activates buy-side sidecar for KOSPI on sharp rise",
-     "press": "en.yna.co.kr",
-     "publishedAt": "2026-11-24T00:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016459560?sid=104"
+     "title": "\"북한? 러시아?\"…울릉 주민들 혼란 부른 '문자 오발송'",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-24T01:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001405340?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1235,
-  "matched": 663,
+  "flagged": 1237,
+  "matched": 662,
   "avgLeadMin": 539,
   "recent": [
    {
