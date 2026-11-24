@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T11:00:52.447Z",
+ "builtAt": "2026-11-24T11:10:56.070Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,20 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 24,
  "candidates": [
   {
    "keyword": "준감위 주주환원 결정",
    "sources": [
     "nate"
    ],
-   "articles90": 23,
-   "recent20": 2,
-   "press": 23,
+   "articles90": 24,
+   "recent20": 1,
+   "press": 24,
    "firstArticleAt": "2026-11-24T09:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "삼성 준감위 “주주환원 결정 과정, 준법 위반·이해상충 아니다”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-24T11:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004685762?sid=101"
+    },
     {
      "title": "삼성 준감위, 주주환원 유보 ‘이해상충 없다’ 결론",
      "press": "newstomato.com",
@@ -33,12 +39,6 @@
      "press": "4th.kr",
      "publishedAt": "2026-11-24T10:46:00.000Z",
      "link": "http://www.4th.kr/news/articleView.html?idxno=2122610"
-    },
-    {
-     "title": "삼성 준감위, 주주환원 시점 논란에 \"준법 위반 없다\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-24T10:40:00.000Z",
-     "link": "https://www.ajunews.com/view/20261124193753568"
     }
    ]
   },
@@ -49,12 +49,18 @@
     "daum"
    ],
    "articles90": 19,
-   "recent20": 4,
+   "recent20": 3,
    "press": 18,
-   "firstArticleAt": "2026-11-24T09:36:00.000Z",
+   "firstArticleAt": "2026-11-24T09:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "국산 하이브리드차 'EU 수출 6만7924대 제한…EU 집행위, 내달 1일 세이...",
+     "press": "livebiz.today",
+     "publishedAt": "2026-11-24T11:08:00.000Z",
+     "link": "https://www.livebiz.today/news/articleView.html?idxno=206859"
+    },
     {
      "title": "EU, 하이브리드차 긴급수입제한…韓 무관세 쿼터 6만7,924대",
      "press": "goodnews1.com",
@@ -66,12 +72,6 @@
      "press": "news1.kr",
      "publishedAt": "2026-11-24T10:52:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/421/0009308048?sid=104"
-    },
-    {
-     "title": "EU 수출되는 한국산 하이브리드차, 200일간 6만7924대로 제한",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-24T10:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833799?sid=104"
     }
    ]
   },
@@ -80,13 +80,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 1,
-   "press": 14,
-   "firstArticleAt": "2026-11-24T09:31:00.000Z",
+   "articles90": 12,
+   "recent20": 2,
+   "press": 11,
+   "firstArticleAt": "2026-11-24T09:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[뉴스프라임] 젠슨 황의 귀환…트럼프 \"이사회 직접 설득했다\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-24T11:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929547?sid=104"
+    },
     {
      "title": "'만인의 남자' 젠슨 황, 회사 복귀 전 추가 불륜 자백",
      "press": "hansbiz.co.kr",
@@ -98,12 +104,6 @@
      "press": "newspim.com",
      "publishedAt": "2026-11-24T10:30:00.000Z",
      "link": "https://www.newspim.com/news/view/20261124001417"
-    },
-    {
-     "title": "[이슈빡] 대마불사? 돌아온 젠슨 황…증시 반등 어디까지",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-24T10:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001405510?sid=101"
     }
    ]
   },
@@ -113,29 +113,29 @@
     "signal.bz"
    ],
    "articles90": 10,
-   "recent20": 2,
+   "recent20": 3,
    "press": 9,
-   "firstArticleAt": "2026-11-24T09:39:00.000Z",
+   "firstArticleAt": "2026-11-24T09:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "경찰, '사제폭탄으로 민주당 무너뜨릴 것' 협박글 작성자 추적",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-24T11:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005847275?sid=102"
+    },
+    {
+     "title": "경찰, \"폭탄으로 민주당 테러\" 협박글 작성자 추적",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-24T11:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005609220?sid=102"
+    },
     {
      "title": "\"민주당에 사제폭탄\" 협박 글에 '발칵'…작성자 추적",
      "press": "wowtv.co.kr",
      "publishedAt": "2026-11-24T10:54:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/215/0001273833?sid=102"
-    },
-    {
-     "title": "\"폭탄으로 민주당 무너뜨린다\" 협박글…작성자 추적(종합 2보)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-24T10:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016461453?sid=102"
-    },
-    {
-     "title": "“사제폭탄으로 무너뜨리겠다” 민주당 수색 소동…무슨 일",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-24T10:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003567637?sid=102"
     }
    ]
   },
@@ -144,13 +144,19 @@
    "sources": [
     "nate"
    ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-24T09:33:00.000Z",
+   "articles90": 7,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-24T09:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[뉴스프라임] 젠슨 황의 귀환…트럼프 \"이사회 직접 설득했다\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-24T11:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929547?sid=104"
+    },
     {
      "title": "머스크 \"실수 바로잡혔다\"…실리콘밸리·월가 '젠슨 귀환' 환호",
      "press": "financialpost.co.kr",
@@ -162,12 +168,38 @@
      "press": "news.sbs.co.kr",
      "publishedAt": "2026-11-24T10:19:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/055/0001405509?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "제8차 미세먼지 계절관리제",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-24T09:42:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "올겨울 미세먼지 지난겨울보다 짙을 것으로 예상",
+     "press": "segyebiz.com",
+     "publishedAt": "2026-11-24T11:08:00.000Z",
+     "link": "http://www.segyebiz.com/newsView/20261124518612?OutUrl=naver"
     },
     {
-     "title": "트럼프가 올린 ‘젠슨 황 밈’은?",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-24T10:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000368558?sid=104"
+     "title": "올겨울 초미세먼지 악화 전망… 정부, 석탄발전 최대 18기 가동 중단",
+     "press": "segye.com",
+     "publishedAt": "2026-11-24T11:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177803?sid=102"
+    },
+    {
+     "title": "미세먼지 감축 '삼중고'…국외 유입·엘니뇨·LNG 급등",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-24T09:54:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321744&inflow=N"
     }
    ]
   },
@@ -176,10 +208,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 6,
+   "articles90": 3,
    "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-24T09:34:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-24T09:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -202,111 +234,44 @@
      "link": "https://news.mtn.co.kr/article/2026112418405947050"
     }
    ]
-  },
-  {
-   "keyword": "제8차 미세먼지 관리제 시행",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-24T09:38:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "미세먼지 감축 '삼중고'…국외 유입·엘니뇨·LNG 급등",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-24T09:54:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321744&inflow=N"
-    },
-    {
-     "title": "올겨울 '미세먼지' 짙어진다…정부, 석탄발전 18기 가동중단",
-     "press": "newstree.kr",
-     "publishedAt": "2026-11-24T09:52:00.000Z",
-     "link": "https://www.newstree.kr/newsView/ntr202611240024"
-    },
-    {
-     "title": "12월 1일부터 미세먼지 계절관리제 시행…수도권·6대 특별·광역시 5등...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-24T09:42:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285046"
-    }
-   ]
-  },
-  {
-   "keyword": "스테이블코인",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-24T09:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "가상자산 거래소 대주주 지분 20% 제한 원칙…스테이블코인 은행 과반 ...",
-     "press": "fntimes.com",
-     "publishedAt": "2026-11-24T10:12:00.000Z",
-     "link": "https://www.fntimes.com/html/view.php?ud=2026112416063790790f4390e77d_18"
-    },
-    {
-     "title": "'디지털자산기본법' 정부안 베일 벗어…은행 중심 스테이블코인·거래소...",
-     "press": "g-enews.com",
-     "publishedAt": "2026-11-24T10:04:00.000Z",
-     "link": "https://www.g-enews.com/view.php?ud=202611241902266701a6e8311f64_1"
-    },
-    {
-     "title": "원화 스테이블코인 제도화 시동…은행권 '디지털 자산' 선점 경쟁",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-24T09:40:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261124010009447"
-    }
-   ]
-  },
-  {
-   "keyword": "슈퍼문",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-24T09:44:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "초겨울 떠오른 슈퍼문",
-     "press": "news-s.kr",
-     "publishedAt": "2026-11-24T10:20:00.000Z",
-     "link": "https://news-s.kr/view.html?id=L261124190607132a"
-    },
-    {
-     "title": "서울 하늘에 떠오른 슈퍼문",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-24T09:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009308024?sid=103"
-    },
-    {
-     "title": "늦가을 비추는 슈퍼문",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-24T09:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009308022?sid=103"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1365,
-  "matched": 713,
-  "avgLeadMin": 533,
+  "flagged": 1366,
+  "matched": 718,
+  "avgLeadMin": 531,
   "recent": [
+   {
+    "keyword": "서울지하철 총파업 담판",
+    "hitKeyword": "서울지하철 총파업 예정",
+    "hitAt": "2026-11-24T20:00:00+09:00",
+    "leadMin": 595
+   },
+   {
+    "keyword": "러 군용기 울릉도 영공 접근",
+    "hitKeyword": "울릉도 오발송 재난문자",
+    "hitAt": "2026-11-24T20:00:00+09:00",
+    "leadMin": 200
+   },
+   {
+    "keyword": "러 군용기 울릉도 영공 초근접",
+    "hitKeyword": "울릉도 오발송 재난문자",
+    "hitAt": "2026-11-24T20:00:00+09:00",
+    "leadMin": 170
+   },
+   {
+    "keyword": "울릉도 러 군용기 초치",
+    "hitKeyword": "울릉도 오발송 재난문자",
+    "hitAt": "2026-11-24T20:00:00+09:00",
+    "leadMin": 150
+   },
+   {
+    "keyword": "러시아 군용기 울릉도 접근",
+    "hitKeyword": "울릉도 오발송 재난문자",
+    "hitAt": "2026-11-24T20:00:00+09:00",
+    "leadMin": 140
+   },
    {
     "keyword": "상속",
     "hitKeyword": "중산층 상속세 부담",
@@ -336,36 +301,6 @@
     "hitKeyword": "송민호 재복무 확정",
     "hitAt": "2026-11-24T19:30:00+09:00",
     "leadMin": 50
-   },
-   {
-    "keyword": "송민호 102일 추가 복무",
-    "hitKeyword": "송민호 재복무 확정",
-    "hitAt": "2026-11-24T19:30:00+09:00",
-    "leadMin": 40
-   },
-   {
-    "keyword": "mls",
-    "hitKeyword": "손흥민 MLS 플레이오프 패배",
-    "hitAt": "2026-11-24T19:00:00+09:00",
-    "leadMin": 333
-   },
-   {
-    "keyword": "장원영",
-    "hitKeyword": "장원영 안유진 레드카펫",
-    "hitAt": "2026-11-24T19:00:00+09:00",
-    "leadMin": 160
-   },
-   {
-    "keyword": "젠슨 황 추가 불륜 고백",
-    "hitKeyword": "젠슨 황 추가 불륜 고백",
-    "hitAt": "2026-11-24T19:00:00+09:00",
-    "leadMin": 10
-   },
-   {
-    "keyword": "BTS 코르티스 대상 수상",
-    "hitKeyword": "BTS 뷔 예비군 목격담",
-    "hitAt": "2026-11-24T18:30:00+09:00",
-    "leadMin": 4060
    }
   ]
  }
