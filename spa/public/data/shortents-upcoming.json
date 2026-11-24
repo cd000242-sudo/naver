@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T13:11:37.019Z",
+ "builtAt": "2026-11-24T13:21:40.773Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,17 +11,23 @@
  "measured": 28,
  "candidates": [
   {
-   "keyword": "김혜경 여사 오찬",
+   "keyword": "김혜경 여사, 권양숙 여사 오찬",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 35,
+   "articles90": 33,
    "recent20": 3,
-   "press": 28,
-   "firstArticleAt": "2026-11-24T11:47:00.000Z",
+   "press": 29,
+   "firstArticleAt": "2026-11-24T11:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "김혜경 여사 만난 권양숙 여사 “노무현·이재명 대통령 정말 닮아”",
+     "press": "segye.com",
+     "publishedAt": "2026-11-24T13:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177830?sid=100"
+    },
     {
      "title": "권양숙 여사 “노무현·이재명 대통령 식성·수면·성격 닮아…건강 챙...",
      "press": "kyeonggi.com",
@@ -33,12 +39,6 @@
      "press": "news.jtbc.co.kr",
      "publishedAt": "2026-11-24T13:06:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/437/0000522291?sid=100"
-    },
-    {
-     "title": "金여사 만난 권양숙 여사 “盧와 李, 식성부터 성격까지 닮아”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-24T12:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764849?sid=100"
     }
    ]
   },
@@ -47,13 +47,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 22,
+   "articles90": 20,
    "recent20": 1,
-   "press": 22,
-   "firstArticleAt": "2026-11-24T11:42:00.000Z",
+   "press": 20,
+   "firstArticleAt": "2026-11-24T11:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "금융위·경찰청 등 31개 기관 세종행 확정… 인권위는 청사 신축 후 이전",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-11-24T13:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001207078?sid=102"
+    },
     {
      "title": "금융위 등 31개 기관 세종 이전 확정... 외교·국방·통일·법무 등 미정",
      "press": "jasm.co.kr",
@@ -65,12 +71,38 @@
      "press": "joseilbo.com",
      "publishedAt": "2026-11-24T12:44:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/123/0002394747?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "대전 베이징 승리",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 19,
+   "recent20": 4,
+   "press": 14,
+   "firstArticleAt": "2026-11-24T11:55:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "대전, 베이징 상대로 진땀승…ACLE 16강 희망 살렸다",
+     "press": "dailian.co.kr",
+     "publishedAt": "2026-11-24T13:20:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/119/0003159034"
     },
     {
-     "title": "인천 재외동포청 ‘세종 이전’ 확정… 박찬대 시장 책임론 커질듯",
-     "press": "kyeongin.com",
-     "publishedAt": "2026-11-24T12:42:00.000Z",
-     "link": "https://www.kyeongin.com/article/1775352"
+     "title": "'실수 놓치지 않은 압박' 대전, ACLE 베이징 궈안 3-2 꺾고 2연패 탈출.....",
+     "press": "maniareport.com",
+     "publishedAt": "2026-11-24T13:14:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/425/0000215350"
+    },
+    {
+     "title": "[ACLE 스타] '2경기 연속골' 마사가 있어야 대전이 빛난다...차이 만드는...",
+     "press": "interfootball.co.kr",
+     "publishedAt": "2026-11-24T13:14:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/413/0000227098"
     }
    ]
   },
@@ -79,13 +111,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 21,
-   "recent20": 5,
-   "press": 17,
-   "firstArticleAt": "2026-11-24T11:42:00.000Z",
+   "articles90": 17,
+   "recent20": 2,
+   "press": 14,
+   "firstArticleAt": "2026-11-24T11:53:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[젠슨 황 귀환①] 한·일·대만 증시 '환호'…TSMC 상한가·반도체주 폭...",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-24T13:14:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101947"
+    },
     {
      "title": "‘젠슨 황 복귀’ 급등 후 나스닥 선물 하락세로 돌아서",
      "press": "khan.co.kr",
@@ -97,44 +135,70 @@
      "press": "news.jtbc.co.kr",
      "publishedAt": "2026-11-24T13:01:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/437/0000522290?sid=104"
-    },
-    {
-     "title": "뉴욕증시 프리뷰, 미 주가선물 일제 하락...엔비디아發 랠리 하루 만에...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-24T13:01:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261124001464"
     }
    ]
   },
   {
-   "keyword": "대전 베이징 승리",
+   "keyword": "젠슨 황 11일 만에 복귀",
    "sources": [
-    "daum"
+    "nate"
    ],
-   "articles90": 16,
-   "recent20": 3,
-   "press": 12,
-   "firstArticleAt": "2026-11-24T11:55:00.000Z",
+   "articles90": 18,
+   "recent20": 1,
+   "press": 14,
+   "firstArticleAt": "2026-11-24T12:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "베이징 3-2 제압 황선홍 감독, 승리 했지만 선수들 침착함 가져야",
-     "press": "joongdo.co.kr",
-     "publishedAt": "2026-11-24T13:10:00.000Z",
-     "link": "https://www.joongdo.co.kr/web/view.php?key=20261124010008554"
+     "title": "[젠슨 황 귀환①] 한·일·대만 증시 '환호'…TSMC 상한가·반도체주 폭...",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-24T13:14:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101947"
     },
     {
-     "title": "‘전반에만 3골’ 대전, 베이징 3-2 꺾고 ACLE 2연패 탈출…포항은 교토...",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-24T12:59:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/144/0001151505"
+     "title": "젠슨 황 11일 만의 귀환…엔비디아 급등, 한국 증시에 가져온 건?｜빽투...",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-24T13:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522290?sid=104"
     },
     {
-     "title": "대전하나시티즌, 베이징 궈안 3대 2 제압…ACLE 3경기 만에 승리",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-24T12:56:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/656/0000193469"
+     "title": "\"돌아온 '젠슨 황' 대군\"...'주가 구원' 밈 봇물",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-24T12:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437539?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "비",
+   "sources": [
+    "google"
+   ],
+   "articles90": 15,
+   "recent20": 4,
+   "press": 12,
+   "firstArticleAt": "2026-11-24T12:23:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "유재석, 비 콘서트 초대에 \"가족이랑 같이 가기는 좀...\"(틈만나면)[종합...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-24T13:20:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002083602"
+    },
+    {
+     "title": "비 “내일 당장 죽는다면 마지막으로 치즈버거 오징어볶음 먹을 것” (...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-24T13:16:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190848"
+    },
+    {
+     "title": "[acle.live] '날씨도 도왔다' 비도 피해간 전북 마지막 담금질! 日 가시마...",
+     "press": "fourfourtwo.co.kr",
+     "publishedAt": "2026-11-24T13:15:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/411/0000090424"
     }
    ]
   },
@@ -143,13 +207,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 12,
+   "articles90": 13,
    "recent20": 1,
-   "press": 11,
+   "press": 12,
    "firstArticleAt": "2026-11-24T12:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "지난해 수능 시험지 17만여 부 폐기…세종만 한 부도 안 버렸다",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-24T13:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003567652?sid=102"
+    },
     {
      "title": "“작년 수능시험지 최소 17만여부 폐기…세종만 전량 보존”",
      "press": "sedaily.com",
@@ -161,44 +231,6 @@
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-24T12:47:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012300356?sid=102"
-    },
-    {
-     "title": "‘부정행위’ 여진 계속…교사노조 “수능 개편해야”",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-24T12:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012300320?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "비",
-   "sources": [
-    "google"
-   ],
-   "articles90": 12,
-   "recent20": 4,
-   "press": 10,
-   "firstArticleAt": "2026-11-24T11:50:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'틈만나면' 비, 오징어볶음 백반 맛집",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-24T13:00:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611240234"
-    },
-    {
-     "title": "[TVis] ‘김태희♥’ 비, 부부싸움 사연에 ‘발끈’ “과거 얘기 꺼내지...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-24T12:59:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003543319"
-    },
-    {
-     "title": "'틈만나면' 비, 신촌 오징어볶음 백반 맛집 추천",
-     "press": "enter.etoday.co.kr",
-     "publishedAt": "2026-11-24T12:58:00.000Z",
-     "link": "https://enter.etoday.co.kr/news/view/305729"
     }
    ]
   },
@@ -235,14 +267,46 @@
    ]
   },
   {
+   "keyword": "내신 부정행위 퇴학 최대",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 9,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-24T12:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "중·고등학교 내신도 감독 강화...부정행위자 최대 퇴학",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-24T13:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437545?sid=102"
+    },
+    {
+     "title": "교육부, 중·고교 내신평가 관리·감독 강화",
+     "press": "gnmaeil.com",
+     "publishedAt": "2026-11-24T12:52:00.000Z",
+     "link": "http://www.gnmaeil.com/news/articleView.html?idxno=599377"
+    },
+    {
+     "title": "내신 부정행위 단속 강화…현장 감독·기준 ‘막막’",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-24T12:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012300342?sid=102"
+    }
+   ]
+  },
+  {
    "keyword": "EU 하이브리드차 수입 제한",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-24T11:50:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-24T12:04:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -299,70 +363,6 @@
    ]
   },
   {
-   "keyword": "젠슨 황 복귀 후 급등하는 주가",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-24T11:42:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "‘젠슨 황 복귀’ 급등 후 나스닥 선물 하락세로 돌아서",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-24T13:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484858?sid=104"
-    },
-    {
-     "title": "젠슨 황, 11일 만에 전격 복귀…엔비디아 30%대 급등",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-24T12:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012300305?sid=104"
-    },
-    {
-     "title": "‘젠슨 황 구원투수 자처’ 트럼프, 정권 명운 걸었다 [1일1트]",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-24T12:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002727935?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "히잡",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-24T11:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이란, 히잡 벗은 여가수에 태형 74대…잔혹한 신체형과 트럼프 전쟁의 ...",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-24T12:54:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285142"
-    },
-    {
-     "title": "\"감히 히잡 안 쓰고 공연을?\"…이란, 女가수에 태형 74대 집행",
-     "press": "weekly.chosun.com",
-     "publishedAt": "2026-11-24T12:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/053/0000063314?sid=104"
-    },
-    {
-     "title": "히잡 벗은 공연 영상 올렸다고…이란 ‘태형 74대’ 집행",
-     "press": "donga.com",
-     "publishedAt": "2026-11-24T11:46:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764845?sid=104"
-    }
-   ]
-  },
-  {
    "keyword": "부천시",
    "sources": [
     "google"
@@ -397,7 +397,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1397,
+  "flagged": 1399,
   "matched": 729,
   "avgLeadMin": 526,
   "recent": [
