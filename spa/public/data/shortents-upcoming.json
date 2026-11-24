@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T15:36:28.149Z",
+ "builtAt": "2026-11-24T15:46:39.547Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,7 +8,7 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 14,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "미국 과잉생산 관세 조사",
@@ -16,7 +16,7 @@
     "signal.bz"
    ],
    "articles90": 14,
-   "recent20": 2,
+   "recent20": 1,
    "press": 14,
    "firstArticleAt": "2026-11-24T14:17:00.000Z",
    "exclusive": false,
@@ -43,15 +43,46 @@
    ]
   },
   {
-   "keyword": "정부 세종 이전 계획",
+   "keyword": "젠슨 황, 11일 만에 복귀",
    "sources": [
-    "signal.bz",
     "nate"
    ],
-   "articles90": 6,
+   "articles90": 14,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-24T14:08:00.000Z",
+   "press": 12,
+   "firstArticleAt": "2026-11-24T14:22:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "젠슨황 복귀에 삼성전자·SK하이닉스 HBM 협력 기대",
+     "press": "kjdaily.com",
+     "publishedAt": "2026-11-24T15:40:00.000Z",
+     "link": "http://www.kjdaily.com/article.php?aid=1795534622693329276"
+    },
+    {
+     "title": "젠슨 황 효과, 일단 2400조",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-24T15:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003567723?sid=101"
+    },
+    {
+     "title": "[미국 특징주] 엔비디아, 젠슨 황 복귀 랠리 하루 만에 꺾여…6%대 급락",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-24T15:15:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261125000007"
+    }
+   ]
+  },
+  {
+   "keyword": "정부 세종 이전 계획",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-24T14:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -81,7 +112,7 @@
     "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 2,
+   "recent20": 1,
    "press": 3,
    "firstArticleAt": "2026-11-24T14:30:00.000Z",
    "exclusive": false,
@@ -110,11 +141,10 @@
   {
    "keyword": "김혜경·권양숙 오찬",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-24T14:18:00.000Z",
    "exclusive": false,
@@ -144,8 +174,8 @@
  "hitRate": {
   "days": 7,
   "flagged": 1404,
-  "matched": 737,
-  "avgLeadMin": 513,
+  "matched": 736,
+  "avgLeadMin": 514,
   "recent": [
    {
     "keyword": "아침마당",
