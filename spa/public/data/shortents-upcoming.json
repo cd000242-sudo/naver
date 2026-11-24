@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T08:50:08.140Z",
+ "builtAt": "2026-11-24T12:41:26.976Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,395 +8,394 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 21,
+ "measured": 23,
  "candidates": [
   {
-   "keyword": "이용철 인사청문회",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 61,
-   "recent20": 12,
-   "press": 48,
-   "firstArticleAt": "2026-11-24T07:22:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "여야, 이용철 청문회서 충돌...\"공소취소용 장관\" vs \"정치적 선동\"",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-24T08:48:00.000Z",
-     "link": "https://www.ajunews.com/view/20261124165728047"
-    },
-    {
-     "title": "이용철 법무장관 후보자 “진상 규명되지 않으면 공소취소 안 해”… 즉...",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-24T08:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003702755?sid=102"
-    },
-    {
-     "title": "[영상] 무슨 질문을 하신거죠?...김민전 5분 공격을 2초만에 끝낸 이용철...",
-     "press": "facttv.kr",
-     "publishedAt": "2026-11-24T08:46:00.000Z",
-     "link": "https://www.facttv.kr/news/articleView.html?idxno=51090"
-    }
-   ]
-  },
-  {
-   "keyword": "러시아 군용기 울릉도 접근",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 32,
-   "recent20": 3,
-   "press": 30,
-   "firstArticleAt": "2026-11-24T07:28:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "러 군용기 울릉도 영공 '초근접'…국방부, 국방무관 초치·항의",
-     "press": "newsworks.co.kr",
-     "publishedAt": "2026-11-24T08:42:00.000Z",
-     "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=904280"
-    },
-    {
-     "title": "러 군용기 울릉도 영공 근접…국방부, 무관 초치 항의",
-     "press": "ichannela.com",
-     "publishedAt": "2026-11-24T08:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/449/0000368542?sid=100"
-    },
-    {
-     "title": "울릉도 향해 내려온 러 폭격기, 이례적 영공 '초근접' 비행(종합2보)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-24T08:40:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016461350?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "송민호 102일 복무",
+   "keyword": "김혜경 여사, 권양숙 여사 오찬",
    "sources": [
     "nate"
    ],
-   "articles90": 34,
+   "articles90": 27,
    "recent20": 7,
-   "press": 29,
-   "firstArticleAt": "2026-11-24T07:21:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "'병역법 위반' 송민호, 이달 말 재복무...102일 추가 근무",
-     "press": "starnewsk.com",
-     "publishedAt": "2026-11-24T08:46:00.000Z",
-     "link": "http://www.starnewsk.com/news/articleView.html?idxno=61351"
-    },
-    {
-     "title": "‘근무지 무단이탈’ 송민호, 102일 재복무 이달 말 시작",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-24T08:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887165?sid=102"
-    },
-    {
-     "title": "위너 송민호, 무단 이탈 날짜만큼 재복무…102일 추가 확정",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-24T08:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522223?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "화장실",
-   "sources": [
-    "google"
-   ],
-   "articles90": 15,
-   "recent20": 3,
-   "press": 14,
-   "firstArticleAt": "2026-11-24T07:29:00.000Z",
+   "press": 21,
+   "firstArticleAt": "2026-11-24T11:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "서울시, WYD 앞두고 관광특구 화장실·청결 인프라 확충",
-     "press": "news.cpbc.co.kr",
-     "publishedAt": "2026-11-24T08:42:00.000Z",
-     "link": "https://news.cpbc.co.kr/article/1177252?division=NAVER"
+     "title": "金여사, 권양숙 여사·노건호씨와 오찬 환담...한남동 관저",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-24T12:40:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/326380/?sc=Naver"
     },
     {
-     "title": "중고교 내신도 전자기기 금지 … 화장실만 가도 금속탐지기 댄다",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-24T08:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005768403?sid=101"
+     "title": "\"노무현·이재명, 식성·수면 패턴·성격까지 닮아\"…김혜경 여사, 권양...",
+     "press": "busan.com",
+     "publishedAt": "2026-11-24T12:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001408812?sid=100"
     },
     {
-     "title": "어린이집 화장실 몰카 40대, 2심서 집행유예로 감형",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-24T08:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004011469?sid=102"
+     "title": "김혜경 여사, 권양숙 여사와 관저 오찬…\"李대통령, 盧와 닮아\"",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-24T12:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005357792?sid=100"
     }
    ]
   },
   {
-   "keyword": "미세먼지특별대책위원회 한성숙 총리",
+   "keyword": "젠슨 황 복귀로 주가 폭등",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 16,
+   "recent20": 3,
+   "press": 16,
+   "firstArticleAt": "2026-11-24T11:15:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "앤트로픽 주가, 개장전 거래서 나흘만에 공모가 아래로 하락",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-24T12:38:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014343100?sid=104"
+    },
+    {
+     "title": "트럼프 개입에 '젠슨 황' 복귀...하루 200억 벌었다",
+     "press": "newsbrite.net",
+     "publishedAt": "2026-11-24T12:36:00.000Z",
+     "link": "http://www.newsbrite.net/news/articleView.html?idxno=201721"
+    },
+    {
+     "title": "젠슨 황 복귀 트럼프 개입에 “이런 정치 본 적 없어, 충격”···독일 ...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-24T12:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484838?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "수능 시험지 폐기",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 13,
+   "recent20": 2,
+   "press": 13,
+   "firstArticleAt": "2026-11-24T11:29:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "‘부정행위’ 여진 계속…교사노조 “수능 개편해야”",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-24T12:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012300320?sid=102"
+    },
+    {
+     "title": "지난해 수능 시험지 최소 17만부 이미 폐기됐다",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-24T12:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001887212?sid=102"
+    },
+    {
+     "title": "AI 부정행위 잡겠다지만…\"작년 수능시험지 17만부는 폐기 확인\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-24T12:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929566?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "EU 하이브리드차 수입 제한",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 12,
+   "recent20": 0,
+   "press": 12,
+   "firstArticleAt": "2026-11-24T11:20:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "정부, EU 하이브리드車 세이프가드 최종조치 앞두고 전방위 협의…수출...",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-24T12:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003489304?sid=100"
+    },
+    {
+     "title": "EU, 한국산 하이브리드차 수출 내년 6월까지 6만7924대로 제한",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-24T12:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004011483?sid=101"
+    },
+    {
+     "title": "'EU로 수출' 국산 하이브리드차, 내달부터 6만7924대로 제한",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-24T12:10:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=202611242107591851a6e8311f64_1"
+    }
+   ]
+  },
+  {
+   "keyword": "대전 ACLE 베이징 3-2 승리",
    "sources": [
     "nate"
    ],
-   "articles90": 22,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-24T07:22:00.000Z",
+   "articles90": 12,
+   "recent20": 2,
+   "press": 10,
+   "firstArticleAt": "2026-11-24T11:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한 총리 \"미세먼지 마음 놓을 상황 아냐…12월부터 계절관리제\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-24T08:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929492?sid=100"
+     "title": "'마사 결승골' 대전, ACLE 5차전서 베이징에 3-2 진땀승(종합)",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-24T12:26:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/003/0014343096"
     },
     {
-     "title": "한 총리 “내달부터 계절관리제 시행…국민 건강 보호 최우선”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-24T08:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002727886?sid=100"
+     "title": "[ACLE 스타] 간절함 담긴 집념...'무한 압박' 이순민 헌신이 이끈 대전의...",
+     "press": "interfootball.co.kr",
+     "publishedAt": "2026-11-24T12:24:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/413/0000227093"
     },
     {
-     "title": "韓총리 \"미세먼지 마음 놓을 상황 아냐…국민 건강 보호 최우선\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-24T08:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016461283?sid=100"
+     "title": "대전하나시티즌, ACLE 베이징에 3-2 진땀승…2연패 끊고 승점 7",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-24T12:20:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285132"
     }
    ]
   },
   {
-   "keyword": "KBL 30주년 시사회",
+   "keyword": "중국 대미 수출통제 유예",
    "sources": [
-    "signal.bz",
+    "signal.bz"
+   ],
+   "articles90": 8,
+   "recent20": 1,
+   "press": 8,
+   "firstArticleAt": "2026-11-24T11:13:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "중국, 대미 핵심광물 수출통제 2개월 미루고 보잉 구매",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-24T12:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929571?sid=104"
+    },
+    {
+     "title": "中, 핵심광물 美수출통제 미루고 보잉 구매…\"휴전 의지\" 관측(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-24T12:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016461507?sid=104"
+    },
+    {
+     "title": "시진핑 방미 앞둔 中, 갈륨·게르마늄 등 대미 수출 통제 유예 2개월 연...",
+     "press": "segye.com",
+     "publishedAt": "2026-11-24T12:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177824?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "하나저축은행 552명 개인정보 유출",
+   "sources": [
     "nate"
    ],
    "articles90": 6,
-   "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-24T07:34:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "KBL 출범 30주년 역사 담았다... 다큐멘터리 '백코트' 공개",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-24T08:48:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/469/0000967513"
-    },
-    {
-     "title": "KBL, '출범 30주년 기념' 다큐멘터리 시사회…'추억의 스타'들 참석",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-24T08:45:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/055/0001405494"
-    },
-    {
-     "title": "[화보] 프로 출범 30주년 기념 다큐멘터리[백코트 30년의 시간 속으로] ...",
-     "press": null,
-     "publishedAt": "2026-11-24T08:27:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/065/0000305192"
-    }
-   ]
-  },
-  {
-   "keyword": "장동혁·우고 아스투토 접견",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 2,
-   "press": 4,
-   "firstArticleAt": "2026-11-24T07:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "장동혁, EU대사에 \"한국 정부 우크라 입장에 국제사회 우려 알아\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-24T08:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437466?sid=100"
-    },
-    {
-     "title": "장동혁, 주한 EU 대사 접견…北포로 한국행 도운 국제사회에 감사",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-24T08:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003489276?sid=100"
-    },
-    {
-     "title": "장동혁, 주한EU대사 만나 \"우크라 침공 러 규탄…흔들림 없는 안보 연대...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-24T08:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014342870?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "12월 3일 공휴일 지정",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
    "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-24T07:35:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-24T11:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "정부, 12월3일 ‘국민주권의 날’로 지정…공휴일은 아냐",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-24T08:32:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833753?sid=100"
+     "title": "하나저축銀 해킹…고객 552명 개인정보 유출",
+     "press": "g-enews.com",
+     "publishedAt": "2026-11-24T12:34:00.000Z",
+     "link": "https://www.g-enews.com/view.php?ud=2026112421323681a6e8311f64_1"
     },
     {
-     "title": "12월 3일 '국민주권의 날' 국가기념일 지정..공휴일은 아냐",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-24T08:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005609091?sid=100"
+     "title": "하나저축은행 해킹 피해…고객 552명 정보 유출",
+     "press": "newsian.co.kr",
+     "publishedAt": "2026-11-24T12:04:00.000Z",
+     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101946"
     },
     {
-     "title": "빛의위원장 \"국민주권의날 4월 4일 의견도…12월 3일로 뜻 모아\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-24T07:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016461206?sid=100"
+     "title": "하나저축은행 해킹에 552명 정보유출 … 추가 피해 조사 중",
+     "press": "biz.newdaily.co.kr",
+     "publishedAt": "2026-11-24T11:56:00.000Z",
+     "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/24/2026112450386.html"
     }
    ]
   },
   {
-   "keyword": "로치",
+   "keyword": "부천시",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-24T11:32:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "부천시 공무원, 396억원 예산 '부당 이체' 시도…결국 '해임'",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-24T12:14:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=244089"
+    },
+    {
+     "title": "시 예산 396억 '셀프 결재' 시도…부천시 공무원 해임",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-24T12:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006414999?sid=102"
+    },
+    {
+     "title": "동원대 웹툰창작과, 부천시 웹툰 융합 공모전 입상",
+     "press": "cnbnews.com",
+     "publishedAt": "2026-11-24T12:04:00.000Z",
+     "link": "https://www.cnbnews.com/news/articleView.html?idxno=1025126"
+    }
+   ]
+  },
+  {
+   "keyword": "히잡",
    "sources": [
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-24T07:42:00.000Z",
+   "firstArticleAt": "2026-11-24T11:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "T1, ‘로치’ 김강희 감독 선임…엄티·이지훈으로 코치진 구성",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-24T08:48:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611240231"
+     "title": "\"감히 히잡 안 쓰고 공연을?\"…이란, 女가수에 태형 74대 집행",
+     "press": "weekly.chosun.com",
+     "publishedAt": "2026-11-24T12:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/053/0000063314?sid=104"
     },
     {
-     "title": "T1 새 사령탑에 '로치' 김강희 선임… 코치진 인선 완료",
-     "press": "dailyesports.com",
-     "publishedAt": "2026-11-24T08:05:00.000Z",
-     "link": "https://m.sports.naver.com/esports/article/347/0000196789"
+     "title": "히잡 벗은 공연 영상 올렸다고…이란 ‘태형 74대’ 집행",
+     "press": "donga.com",
+     "publishedAt": "2026-11-24T11:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764845?sid=104"
     },
     {
-     "title": "[오피셜] '월즈 2연패' 코치, 사령탑으로 리턴…T1, 신임 감독으로 '로치...",
-     "press": "sportalkorea.com",
-     "publishedAt": "2026-11-24T07:42:00.000Z",
-     "link": "https://m.sports.naver.com/esports/article/139/0002256504"
+     "title": "“무대서 히잡 벗었다가”…이란 女가수에 태형 74대, 예술 활동 2년 금...",
+     "press": "kyeonggi.com",
+     "publishedAt": "2026-11-24T11:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/666/0000133652?sid=104"
     }
    ]
   },
   {
-   "keyword": "미국 이란 제재",
+   "keyword": "전광훈",
    "sources": [
-    "signal.bz"
+    "google"
    ],
    "articles90": 3,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-24T07:22:00.000Z",
+   "press": 2,
+   "firstArticleAt": "2026-11-24T11:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "美 \"파산한 이란 정권 마지막 금융 생명선 끊겠다\"",
-     "press": "nocutnews.co.kr",
-     "publishedAt": "2026-11-24T08:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/079/0004213426?sid=104"
+     "title": "[자유통일당 성명서] 전광훈 목사 구속영장 신청, 수사는 정치적 영향으...",
+     "press": "christiantoday.co.kr",
+     "publishedAt": "2026-11-24T12:20:00.000Z",
+     "link": "https://www.christiantoday.co.kr/news/378855"
     },
     {
-     "title": "美, 이란 ‘그림자 금융’ 대규모 제재…“마지막 생명줄 끊겠다”",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-24T08:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887149?sid=104"
+     "title": "사랑제일교회 “전광훈 목사 구속영장 신청, 법과 상식에 따른 판단 기...",
+     "press": "christiantoday.co.kr",
+     "publishedAt": "2026-11-24T12:12:00.000Z",
+     "link": "https://www.christiantoday.co.kr/news/378851"
     },
     {
-     "title": "미국, 이란 '돈줄' 더 옥죈다…\"마지막 생명줄 끊겠다\"",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-24T07:22:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979654?sid=104"
+     "title": "102억 교회 돈을 당에 '불법제공'…전광훈 또 구속 기로",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-24T11:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522265?sid=102"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1328,
-  "matched": 701,
-  "avgLeadMin": 519,
+  "flagged": 1390,
+  "matched": 729,
+  "avgLeadMin": 526,
   "recent": [
    {
-    "keyword": "마라톤",
-    "hitKeyword": "김희애 하프 마라톤 완주",
-    "hitAt": "2026-11-24T17:00:00+09:00",
-    "leadMin": 425
+    "keyword": "이란 여가수 태형 74대",
+    "hitKeyword": "이란 여가수 태형 처벌",
+    "hitAt": "2026-11-24T21:30:00+09:00",
+    "leadMin": 260
    },
    {
-    "keyword": "홈플러스 온라인배송 중단",
-    "hitKeyword": "홈플러스 경영난",
-    "hitAt": "2026-11-24T17:00:00+09:00",
-    "leadMin": 171
+    "keyword": "신규 택시 전기차 전환",
+    "hitKeyword": "전기차 자동주차 오류",
+    "hitAt": "2026-11-24T21:30:00+09:00",
+    "leadMin": 109
    },
    {
-    "keyword": "홈플러스, 26일 온라인배송 중단",
-    "hitKeyword": "홈플러스 경영난",
-    "hitAt": "2026-11-24T17:00:00+09:00",
-    "leadMin": 151
+    "keyword": "31개 기관 세종 이전",
+    "hitKeyword": "세종 행정기관 이전 결정",
+    "hitAt": "2026-11-24T21:30:00+09:00",
+    "leadMin": 49
    },
    {
-    "keyword": "임지연 이도현 결별",
-    "hitKeyword": "임지연 이도현 결별",
-    "hitAt": "2026-11-24T17:00:00+09:00",
-    "leadMin": 30
+    "keyword": "중앙행정기관 세종 이전",
+    "hitKeyword": "세종 행정기관 이전 결정",
+    "hitAt": "2026-11-24T21:30:00+09:00",
+    "leadMin": 19
    },
    {
-    "keyword": "코스피 5000선 탈환",
-    "hitKeyword": "코스피 5000선 탈환",
-    "hitAt": "2026-11-24T17:00:00+09:00",
-    "leadMin": 30
+    "keyword": "이관희·유시은 민폐 논란 사과",
+    "hitKeyword": "이관희 유시은 논란",
+    "hitAt": "2026-11-24T21:30:00+09:00",
+    "leadMin": 9
    },
    {
-    "keyword": "코스피 급등 사이드카",
-    "hitKeyword": "코스피 5000선 탈환",
-    "hitAt": "2026-11-24T17:00:00+09:00",
-    "leadMin": 20
+    "keyword": "서울역",
+    "hitKeyword": "서울역 노숙자 라이터",
+    "hitAt": "2026-11-24T21:00:00+09:00",
+    "leadMin": 554
    },
    {
-    "keyword": "젠슨 황 복귀로 주가 상승",
-    "hitKeyword": "젠슨 황 복귀",
-    "hitAt": "2026-11-24T16:30:00+09:00",
-    "leadMin": 163
+    "keyword": "지하철 파업",
+    "hitKeyword": "서울지하철 파업 위기",
+    "hitAt": "2026-11-24T21:00:00+09:00",
+    "leadMin": 140
    },
    {
-    "keyword": "박수진 하와이 생활 정리",
-    "hitKeyword": "배용준 박수진 한국 복귀",
-    "hitAt": "2026-11-24T16:30:00+09:00",
-    "leadMin": 111
+    "keyword": "서울지하철 파업 막판 협상",
+    "hitKeyword": "서울지하철 파업 위기",
+    "hitAt": "2026-11-24T21:00:00+09:00",
+    "leadMin": 19
    },
    {
-    "keyword": "젠슨 황 복귀에도 여전한 논란",
-    "hitKeyword": "젠슨 황 복귀",
-    "hitAt": "2026-11-24T16:30:00+09:00",
-    "leadMin": 61
+    "keyword": "양홍원 원현주 이혼",
+    "hitKeyword": "원현주 양홍원 이혼",
+    "hitAt": "2026-11-24T21:00:00+09:00",
+    "leadMin": 19
    },
    {
-    "keyword": "원화 스테이블코인 발행 허용",
-    "hitKeyword": "스테이블코인 지분 구조",
-    "hitAt": "2026-11-24T16:30:00+09:00",
-    "leadMin": 51
+    "keyword": "하정우♥차정원 10년 열애",
+    "hitKeyword": "방어 몸값 10년 4배",
+    "hitAt": "2026-11-24T20:30:00+09:00",
+    "leadMin": 766
    }
   ]
  }
