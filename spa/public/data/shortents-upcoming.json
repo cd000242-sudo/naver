@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T17:07:07.855Z",
+ "builtAt": "2026-11-24T17:17:11.799Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 19,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "젠슨 황의 복귀",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
+   "articles90": 7,
    "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-24T15:40:00.000Z",
+   "press": 7,
+   "firstArticleAt": "2026-11-24T15:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -39,38 +39,6 @@
      "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-24T16:35:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/056/0012300504?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "리야드 최고층 빌딩 피격",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-24T15:46:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "사우디 385m 초고층 빌딩 또 피격… 11명 부상",
-     "press": "dkilbo.com",
-     "publishedAt": "2026-11-24T16:36:00.000Z",
-     "link": "https://www.dkilbo.com/news/articleView.html?idxno=562042"
-    },
-    {
-     "title": "사우디 수도 최고층 빌딩, 경보도 없이 또 피격…11명 부상",
-     "press": "segye.com",
-     "publishedAt": "2026-11-24T16:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177851?sid=104"
-    },
-    {
-     "title": "사우디 수도 최고층 빌딩, 경보도 없이 또 피격…11명 부상(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-24T16:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016461550?sid=104"
     }
    ]
   },
@@ -107,43 +75,43 @@
    ]
   },
   {
-   "keyword": "화재",
+   "keyword": "리야드 최고층 빌딩 피격",
    "sources": [
-    "google"
+    "signal.bz"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-24T15:44:00.000Z",
+   "firstArticleAt": "2026-11-24T16:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "삼성화재, 보험·의료·헬스케어 연계 '알츠하이머 지원 모델' 만든다",
-     "press": "apnews.kr",
-     "publishedAt": "2026-11-24T16:20:00.000Z",
-     "link": "https://www.apnews.kr/news/articleView.html?idxno=3053505"
+     "title": "사우디 385m 초고층 빌딩 또 피격… 11명 부상",
+     "press": "dkilbo.com",
+     "publishedAt": "2026-11-24T16:36:00.000Z",
+     "link": "https://www.dkilbo.com/news/articleView.html?idxno=562042"
     },
     {
-     "title": "화재로 일가족 3명 숨져…\"현장에 기름 냄새\"",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-24T15:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001405567?sid=102"
+     "title": "사우디 수도 최고층 빌딩, 경보도 없이 또 피격…11명 부상",
+     "press": "segye.com",
+     "publishedAt": "2026-11-24T16:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177851?sid=104"
     },
     {
-     "title": "유종상 도의원, 공장·창고 화재안전 실태조사 실효성 집중 추궁",
-     "press": "joygm.com",
-     "publishedAt": "2026-11-24T15:44:00.000Z",
-     "link": "http://www.joygm.com/news/articleView.html?idxno=215624"
+     "title": "사우디 수도 최고층 빌딩, 경보도 없이 또 피격…11명 부상(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-24T16:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016461550?sid=104"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1401,
-  "matched": 731,
-  "avgLeadMin": 514,
+  "flagged": 1399,
+  "matched": 729,
+  "avgLeadMin": 512,
   "recent": [
    {
     "keyword": "아침마당",
