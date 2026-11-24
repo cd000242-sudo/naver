@@ -13,6 +13,10 @@ export interface PreviousPostCandidate {
   readonly publishedAt?: string;
   readonly publishMode?: string;
   readonly isPublished?: boolean;
+  /** Public likes from the Naver post list (0 when unknown). */
+  readonly sympathyCount?: number;
+  /** Public comments from the Naver post list (0 when unknown). */
+  readonly commentCount?: number;
 }
 
 export function normalizePreviousPostCategoryId(value: unknown): string | undefined {

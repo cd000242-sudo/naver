@@ -1,5 +1,7 @@
-import { fetchNaverPreviousPostCandidates, resolveNaverPreviousPostCategoryId } from './main/services/naverPreviousPostLookup.js';
-import { refreshRuntimePreviousPost, readEditorBlogId } from './automation/previousPostRuntimePolicy.js';
+import { fetchNaverBlogWidePreviousPostCandidates, fetchNaverPreviousPostCandidates, resolveNaverPreviousPostCategoryId } from './main/services/naverPreviousPostLookup.js';
+import { getDefaultPreviousPostCardHistory, recordPreviousPostCardsAfterPublish } from './main/services/previousPostCardHistory.js';
+import { refreshRuntimePreviousPost, readEditorBlogId, type RuntimePreviousPostCardSources } from './automation/previousPostRuntimePolicy.js';
+import { alignPreviousPostCardsInEditor } from './automation/previousPostCardAlign.js';
 import { markAiImageWithRetries, summarizeAiMarkResults, type AiImageMarkResult } from './automation/aiImageMark.js';
 import type { PreviousPostCandidate } from './shared/previousPostPolicy.js';
 // ✅ puppeteer-extra + stealth plugin 적용 (봇 감지 완벽 우회)
@@ -1106,14 +1108,36 @@ export class NaverBlogAutomation {
 
   private async guardPreviousPostBeforeTyping(options: ResolvedRunOptions): Promise<ResolvedRunOptions> {
     const editorUrls = [this.page?.url() || '', this.mainFrame?.url() || ''];
+    (this as any).__previousPostCardsAttached = undefined;
     const guarded = await refreshRuntimePreviousPost(
       options, editorUrls, fetchNaverPreviousPostCandidates,
       (message) => this.log(message), resolveNaverPreviousPostCategoryId,
+      this.previousPostCardSources?.(),
     );
     this.options = { ...this.options, categoryId: guarded.categoryId };
     (this as any).__publicationBlogId = readEditorBlogId(editorUrls);
     (this as any).__strictCategoryForPreviousPost = Boolean(guarded.previousPostUrl);
     return guarded;
+  }
+
+  /** Centers the previous-post cards through the editor's own document data and confirms it on screen. Never throws. */
+  private async alignPreviousPostCards(urls: readonly string[]): Promise<void> {
+    const frame = await this.getAttachedFrame();
+    await alignPreviousPostCardsInEditor(frame as any, urls, { log: (message) => this.log(message), delay: (ms) => this.delay(ms) });
+  }
+
+  /** Extra sources for up to three previous-post cards (blog-wide fill + recent-card history). */
+  private previousPostCardSources(): RuntimePreviousPostCardSources {
+    const cardHistory = getDefaultPreviousPostCardHistory();
+    return {
+      lookupBlogWide: (blogId) => fetchNaverBlogWidePreviousPostCandidates(blogId),
+      readRecentCardUrls: (blogId) => cardHistory?.readRecentUrls(blogId) ?? [],
+    };
+  }
+
+  /** Success path only: remember the cards of this confirmed post. Never throws. */
+  private recordPublishedPreviousPostCards(publishMode: unknown): void {
+    recordPreviousPostCardsAfterPublish(this as any, publishMode);
   }
 
   async setupBrowser(): Promise<void> {
@@ -6308,6 +6332,7 @@ export class NaverBlogAutomation {
         throw publishError;
       }
       this.log('🎉 포스팅이 성공적으로 완료되었습니다!');
+      this.recordPublishedPreviousPostCards?.(resolvedOptions.publishMode);
       const modeText = resolvedOptions.publishMode === 'draft' ? '임시저장' :
         resolvedOptions.publishMode === 'publish' ? '즉시발행' :
           `예약발행 (${resolvedOptions.scheduleDate})`;
@@ -6896,6 +6921,7 @@ export class NaverBlogAutomation {
         this.log(`📎 발행된 글 URL: ${this.publishedUrl}`);
       }
 
+      this.recordPublishedPreviousPostCards?.(resolvedOptions.publishMode);
       const verifiedCategory = (this as any).__verifiedPublicationCategoryId as string | undefined;
       const verifiedBlog = (this as any).__publicationBlogId as string | undefined;
       return { success: true, url: this.publishedUrl || undefined,

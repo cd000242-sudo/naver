@@ -34,8 +34,56 @@ export function parseNaverPreviousPostCandidates(data: unknown, scope: PreviousP
       publishedAt: new Date(timestamp).toISOString(),
       publishMode: 'publish',
       isPublished: true,
+      ...readEngagementCounts(item),
     }];
   });
+}
+
+/** readCount is null in the public list, so only likes and comments are read. */
+function readEngagementCounts(item: Record<string, unknown>): { sympathyCount: number; commentCount: number } {
+  const count = (value: unknown) => (typeof value === 'number' && Number.isFinite(value) && value > 0 ? Math.floor(value) : 0);
+  return { sympathyCount: count(item.sympathyCnt), commentCount: count(item.commentCnt) };
+}
+
+/** categoryNo=0 lists every category; each item keeps its own category and passes the same item checks. */
+export function parseNaverBlogWidePreviousPostCandidates(data: unknown, blogIdValue: string, now = Date.now()): PreviousPostCandidate[] {
+  const blogId = String(blogIdValue || '').trim().toLowerCase();
+  const response = data as { isSuccess?: boolean; result?: { items?: unknown[] } };
+  if (!/^[a-z0-9_-]{1,100}$/.test(blogId) || response?.isSuccess !== true || !Array.isArray(response.result?.items)) {
+    throw new Error('PREVIOUS_POST_RESPONSE_INVALID');
+  }
+  return response.result.items.flatMap(value => {
+    if (!value || typeof value !== 'object') return [];
+    const categoryId = normalizePreviousPostCategoryId((value as Record<string, unknown>).categoryNo);
+    if (!categoryId) return [];
+    const wrapped = { isSuccess: true, result: { categoryNo: categoryId, items: [value] } };
+    return parseNaverPreviousPostCandidates(wrapped, { blogId, categoryId }, now);
+  });
+}
+
+/** One or two pages of the whole blog, used only to fill cards the same category cannot supply. */
+export async function fetchNaverBlogWidePreviousPostCandidates(
+  blogIdValue: string,
+  options: { fetchImpl?: typeof fetch; now?: number; pages?: number } = {},
+): Promise<PreviousPostCandidate[]> {
+  const blogId = String(blogIdValue || '').trim().toLowerCase();
+  if (!/^[a-z0-9_-]{1,100}$/.test(blogId)) return [];
+  const url = new URL(`https://m.blog.naver.com/api/blogs/${blogId}/post-list`);
+  const signal = AbortSignal.timeout(8000);
+  const pages = Math.max(1, Math.min(2, Math.floor(options.pages ?? 2)));
+  const collected: PreviousPostCandidate[] = [];
+  for (let page = 1; page <= pages; page += 1) {
+    url.search = new URLSearchParams({ categoryNo: '0', itemCount: '30', page: String(page) }).toString();
+    const response = await (options.fetchImpl || fetch)(url.href, {
+      headers: { 'User-Agent': 'Mozilla/5.0', Referer: 'https://m.blog.naver.com/' + blogId, Accept: 'application/json', 'Cache-Control': 'no-cache' },
+      redirect: 'error', signal,
+    });
+    if (!response.ok) throw new Error('PREVIOUS_POST_HTTP_' + response.status);
+    const data = await response.json();
+    collected.push(...parseNaverBlogWidePreviousPostCandidates(data, blogId, options.now ?? Date.now()));
+    if (data.result.items.length < 30) break;
+  }
+  return collected;
 }
 
 /** Retry a transient API failure or confirm an empty index before declaring that no history exists. */

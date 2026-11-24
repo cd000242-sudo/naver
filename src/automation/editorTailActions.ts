@@ -1,9 +1,9 @@
 import { Page } from 'puppeteer';
 import { PREV_POST_HOOKS } from './ctaHelpers.js';
-import { recordSilentFailure } from './silentFailureCounter.js';
 import { safeKeyboardType } from './typingUtils.js';
 import { ensureTailTypingReady } from './richTextPaste.js';
-import { getHashtagGapEnterCount, normalizeComparableUrl } from './editorTailPlan.js';
+import { getHashtagGapEnterCount, resolvePreviousPostCardList } from './editorTailPlan.js';
+import { refocusPreviousPostTail, runPreviousPostCardsLayoutHook } from './previousPostTailHelpers.js';
 
 function emitTailDebug(stage: string, payload: Record<string, unknown>): void {
   try {
@@ -24,7 +24,7 @@ export async function insertPreviousPostTailBlock(
   resolved: ResolvedRunOptions,
   _effectiveCtas: TailCtaLike[] = [],
   context = 'tail'
-): Promise<{ inserted: boolean; cardReady: boolean }> {
+): Promise<{ inserted: boolean; cardReady: boolean; cardCount?: number; cardUrls?: string[] }> {
   const previousPostUrl = String(resolved.previousPostUrl || '').trim();
   emitTailDebug('previous-post-tail-start', {
     hasPreviousPostUrl: previousPostUrl.length > 0,
@@ -34,21 +34,20 @@ export async function insertPreviousPostTailBlock(
     return { inserted: false, cardReady: false };
   }
 
-  const prevUrlUsedAsCta =
-    normalizeComparableUrl(resolved.affiliateLink) === normalizeComparableUrl(previousPostUrl);
-
-  if (prevUrlUsedAsCta) {
+  const cards = resolvePreviousPostCardList({ ...resolved, ctas: _effectiveCtas });
+  if (cards.length === 0) {
     emitTailDebug('previous-post-tail-skip-duplicate-cta', {
       previousPostUrl,
     });
     self.log(`   ⚠️ [이전글] CTA 링크와 동일 URL → 중복 삽입 건너뜀`);
     return { inserted: false, cardReady: false };
   }
+  // A single card keeps the legacy flow exactly; several cards skip (and clean up) any card that times out.
+  const multiCard = cards.length > 1;
 
   const randomPrevHook = PREV_POST_HOOKS[Math.floor(Math.random() * PREV_POST_HOOKS.length)];
   const previousPostTitle = String(resolved.previousPostTitle || '이전 글 보기').trim();
-
-  self.log(`   📖 [이전글] 리치 본문 뒤 이전글 연결 (${context})`);
+  self.log(`   📖 [이전글] 리치 본문 뒤 이전글 연결 (${context}, 카드 ${cards.length}개)`);
   try {
     const frame = typeof self.getAttachedFrame === 'function' ? await self.getAttachedFrame() : null;
     if (frame) await ensureTailTypingReady(page, frame, (m: string) => self.log(m));
@@ -59,39 +58,39 @@ export async function insertPreviousPostTailBlock(
   await safeKeyboardType(page, PREVIOUS_POST_SEPARATOR, { delay: 5 });
   await page.keyboard.press('Enter');
   await safeKeyboardType(page, randomPrevHook || previousPostTitle, { delay: 10 });
-  await page.keyboard.press('Enter');
-  await safeKeyboardType(page, previousPostUrl, { delay: 10 });
-  await self.delay(600);
-  await page.keyboard.press('Enter');
 
-  const cardReady = typeof self.waitForLinkCard === 'function'
-    ? await self.waitForLinkCard(15000, 500)
-    : false;
-  emitTailDebug('previous-post-card-check', {
-    cardReady,
-    waitMs: 15000,
-    previousPostTitle,
-    previousPostUrl,
-  });
+  const placedUrls: string[] = [];
+  let lastCardReady = false;
+  for (const card of cards) {
+    const previousPostUrl = card.url;
+    await page.keyboard.press('Enter');
+    await safeKeyboardType(page, previousPostUrl, { delay: 10 });
+    await self.delay(600);
+    await page.keyboard.press('Enter');
 
-  if (cardReady && typeof self.removeBareUrlTextAfterLinkCard === 'function') {
-    await self.removeBareUrlTextAfterLinkCard(previousPostUrl);
-  }
+    const cardReady = typeof self.waitForLinkCard === 'function'
+      ? await self.waitForLinkCard(15000, 500)
+      : false;
+    lastCardReady = cardReady;
+    emitTailDebug('previous-post-card-check', {
+      cardReady,
+      waitMs: 15000,
+      previousPostTitle: card.title || previousPostTitle,
+      previousPostUrl,
+    });
 
-  if (cardReady) {
-    try {
-      const frame = typeof self.getAttachedFrame === 'function' ? await self.getAttachedFrame() : null;
-      if (frame) {
-        const ready = await ensureTailTypingReady(page, frame, (m: string) => self.log(m));
-        if (!ready) recordSilentFailure('editor:previous-post-tail-refocus');
-      }
-    } catch (error) {
-      recordSilentFailure('editor:previous-post-tail-refocus');
-      emitTailDebug('previous-post-tail-refocus-failed', {
-        message: error instanceof Error ? error.message : String(error),
-      });
+    if ((cardReady || multiCard) && typeof self.removeBareUrlTextAfterLinkCard === 'function') {
+      await self.removeBareUrlTextAfterLinkCard(previousPostUrl);
     }
-  } else {
+    if (cardReady || !multiCard) placedUrls.push(previousPostUrl);
+    if (!cardReady && multiCard) self.log(`   ⚠️ 이전글 카드가 제한 시간 안에 확인되지 않아 이 카드는 건너뜁니다: ${previousPostUrl}`);
+    if (cardReady || multiCard) await refocusPreviousPostTail(self, page);
+  }
+  self.__previousPostCardsAttached = [...placedUrls];
+
+  const cardReady = multiCard ? placedUrls.length > 0 : lastCardReady;
+  if (cardReady) await runPreviousPostCardsLayoutHook(self, page, placedUrls);
+  if (!cardReady) {
     emitTailDebug('previous-post-tail-refocus-skipped', {
       reason: 'card-timeout',
       previousPostUrl,
@@ -99,13 +98,16 @@ export async function insertPreviousPostTailBlock(
     self.log('   ⚠️ 이전글 카드가 제한 시간 안에 확인되지 않아 추가 tail 포커스 검증 없이 해시태그 단계로 넘깁니다.');
   }
   await self.delay(200);
-  self.log(`   ✅ 이전글 연결 완료 (후킹: ${randomPrevHook}, 카드: ${cardReady ? '감지' : '대기 초과'})`);
+  self.log(`   ✅ 이전글 연결 완료 (후킹: ${randomPrevHook}, 카드: ${multiCard ? `${placedUrls.length}/${cards.length}` : (cardReady ? '감지' : '대기 초과')})`);
 
   emitTailDebug('previous-post-tail-complete', {
     inserted: true,
     cardReady,
+    cardCount: placedUrls.length,
   });
-  return { inserted: true, cardReady };
+  return multiCard
+    ? { inserted: true, cardReady, cardCount: placedUrls.length, cardUrls: [...placedUrls] }
+    : { inserted: true, cardReady };
 }
 
 export async function applyTailHashtagsAfterCards(input: {

@@ -1,3 +1,5 @@
+import { parsePreviousPostUrl } from '../shared/previousPostPolicy.js';
+
 export type EditorTailCta = {
   readonly text?: string;
   readonly link?: string;
@@ -122,12 +124,55 @@ export function getHashtagGapEnterCount(previousPostTailInserted: boolean): numb
   return 5;
 }
 
+/** `previousPostCards` is the number of previous-post cards actually left in the body (true = legacy single card). */
 export function getExpectedLinkCardMin(
-  previousPostTailInserted: boolean,
+  previousPostCards: boolean | number,
   effectiveCtas: readonly EditorTailCta[] = [],
 ): number {
   const ctaLinkCount = effectiveCtas.filter((cta) => Boolean(cta?.link)).length;
-  return (previousPostTailInserted ? 1 : 0) + ctaLinkCount;
+  const previousCount = typeof previousPostCards === 'number'
+    ? Math.max(0, Math.floor(previousPostCards) || 0)
+    : (previousPostCards ? 1 : 0);
+  return previousCount + ctaLinkCount;
+}
+
+export const MAX_PREVIOUS_POST_TAIL_CARDS = 3;
+
+export type PreviousPostCardEntry = { readonly url: string; readonly title?: string };
+
+/**
+ * Ordered previous-post cards to type at the tail. The legacy previousPostUrl stays first;
+ * extra cards must be same-blog Naver posts and never repeat the affiliate link, a CTA link
+ * or another card.
+ */
+export function resolvePreviousPostCardList(input: {
+  readonly previousPostUrl?: string;
+  readonly previousPostTitle?: string;
+  readonly previousPostCards?: readonly PreviousPostCardEntry[];
+  readonly affiliateLink?: string;
+  readonly ctas?: readonly EditorTailCta[];
+}): PreviousPostCardEntry[] {
+  const firstUrl = String(input.previousPostUrl || '').trim();
+  if (!firstUrl) return [];
+  const affiliate = normalizeComparableUrl(input.affiliateLink);
+  const ctaLinks = new Set((input.ctas || []).map((cta) => normalizeComparableUrl(cta?.link)).filter(Boolean));
+  const firstBlog = parsePreviousPostUrl(firstUrl)?.blogId;
+  const seen = new Set<string>();
+  const list: PreviousPostCardEntry[] = [];
+  if (normalizeComparableUrl(firstUrl) !== affiliate) {
+    list.push({ url: firstUrl, title: input.previousPostTitle });
+  }
+  seen.add(normalizeComparableUrl(firstUrl));
+  for (const card of Array.isArray(input.previousPostCards) ? input.previousPostCards : []) {
+    const url = String(card?.url || '').trim();
+    const key = normalizeComparableUrl(url);
+    if (list.length >= MAX_PREVIOUS_POST_TAIL_CARDS) break;
+    if (!key || seen.has(key) || key === affiliate || ctaLinks.has(key)) continue;
+    if (!firstBlog || parsePreviousPostUrl(url)?.blogId !== firstBlog) continue;
+    seen.add(key);
+    list.push({ url, title: card.title });
+  }
+  return list;
 }
 
 function selectTailHashtags(hashtags: readonly string[] = [], limit = 5): string[] {

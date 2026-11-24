@@ -1,4 +1,7 @@
 import { applyPreviousPostPolicy, normalizePreviousPostCategoryId, type PreviousPostCandidate, type PreviousPostScope } from '../shared/previousPostPolicy.js';
+import { attachRuntimePreviousPostCards, type RuntimePreviousPostCardSources } from './previousPostCardsRuntime.js';
+
+export type { RuntimePreviousPostCardSources } from './previousPostCardsRuntime.js';
 
 /** Read only Naver editor addresses after the account/editor readiness gate succeeded. */
 export function readEditorBlogId(urls: readonly string[]): string | undefined {
@@ -37,8 +40,25 @@ export function verifyCategorySelection(id: unknown, itemName: string, selectedN
   return categoryLabel(itemName) === categoryLabel(selectedName) ? normalizePreviousPostCategoryId(id) : undefined;
 }
 
-/** Refresh automatic selection immediately before typing, after the actual editor identity is known. */
+/** Refresh automatic selection immediately before typing, then attach up to three same-blog cards. */
 export async function refreshRuntimePreviousPost<T extends Record<string, any>>(
+  payload: T,
+  editorUrls: readonly string[],
+  lookup: (scope: PreviousPostScope) => Promise<PreviousPostCandidate[]>,
+  log: (message: string) => void = () => undefined,
+  resolveCategory?: (scope: PreviousPostScope, categoryName: string) => Promise<string | undefined>,
+  cardSources?: RuntimePreviousPostCardSources,
+): Promise<T> {
+  let sameCategory: PreviousPostCandidate[] | undefined;
+  const recordingLookup = async (scope: PreviousPostScope) => (sameCategory = await lookup(scope));
+  const single = await refreshSingleRuntimePreviousPost(payload, editorUrls, recordingLookup, log, resolveCategory);
+  return attachRuntimePreviousPostCards(single, {
+    blogId: readEditorBlogId(editorUrls), sameCategory, lookup, log, sources: cardSources,
+  });
+}
+
+/** Single previous-post selection (legacy contract: previousPostUrl/Title/Candidate). */
+async function refreshSingleRuntimePreviousPost<T extends Record<string, any>>(
   payload: T,
   editorUrls: readonly string[],
   lookup: (scope: PreviousPostScope) => Promise<PreviousPostCandidate[]>,

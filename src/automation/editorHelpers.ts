@@ -2585,6 +2585,8 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
     let effectiveCtas = resolved.ctas || [];
     let previousPostTailInserted = false;
     let previousPostCardReady = false;
+    // Previous-post cards left in the body (legacy single card counts as 1 once typed).
+    let previousPostCardCount = 0;
     let tailLinkCardInserted = false;
     let tailLinkCardReady = false;
     if (!resolved.skipCta && resolved.affiliateLink && effectiveCtas.length === 0) {
@@ -2727,6 +2729,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
             );
             previousPostTailInserted = previousPostTailInserted || previousResult.inserted;
             previousPostCardReady = previousPostCardReady || previousResult.cardReady;
+            previousPostCardCount += previousResult.cardCount ?? (previousResult.inserted ? 1 : 0);
             tailLinkCardInserted = tailLinkCardInserted || previousResult.inserted;
             tailLinkCardReady = tailLinkCardReady || previousResult.cardReady;
           }
@@ -2793,6 +2796,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
               );
               previousPostTailInserted = previousPostTailInserted || previousResult.inserted;
               previousPostCardReady = previousPostCardReady || previousResult.cardReady;
+              previousPostCardCount += previousResult.cardCount ?? (previousResult.inserted ? 1 : 0);
               tailLinkCardInserted = tailLinkCardInserted || previousResult.inserted;
               tailLinkCardReady = tailLinkCardReady || previousResult.cardReady;
             }
@@ -2837,6 +2841,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
         );
         previousPostTailInserted = previousPostTailInserted || previousResult.inserted;
         previousPostCardReady = previousPostCardReady || previousResult.cardReady;
+        previousPostCardCount += previousResult.cardCount ?? (previousResult.inserted ? 1 : 0);
         tailLinkCardInserted = tailLinkCardInserted || previousResult.inserted;
         tailLinkCardReady = tailLinkCardReady || previousResult.cardReady;
       }
@@ -2904,7 +2909,9 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
         // so misses log a ❌ for calibration, they do not block.)
         // effectiveCtas (post-dedup) — resolved.ctas would re-count the CTA
         // that S16 skipped as a previous-post duplicate.
-        expectedLinkCardMin: getExpectedLinkCardMin(previousPostTailInserted, effectiveCtas),
+        // Legacy count assumes one previous-post card; add the difference to the cards actually placed.
+        expectedLinkCardMin: getExpectedLinkCardMin(previousPostTailInserted, effectiveCtas)
+          + (previousPostCardCount - (previousPostTailInserted ? 1 : 0)),
         expectedDividerMin: previousPostTailInserted ? 1 : 0,
         expectedTableMin: countExpectedArticleTables(
           resolved.structuredContent?.bodyPlain || resolved.content || ''
