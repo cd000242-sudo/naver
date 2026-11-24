@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T21:08:20.188Z",
+ "builtAt": "2026-11-24T21:18:23.447Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 9,
  "candidates": [
   {
    "keyword": "서울 지하철 노사 극적 타결",
    "sources": [
     "nate"
    ],
-   "articles90": 15,
-   "recent20": 2,
-   "press": 15,
-   "firstArticleAt": "2026-11-24T19:44:00.000Z",
+   "articles90": 20,
+   "recent20": 8,
+   "press": 20,
+   "firstArticleAt": "2026-11-24T19:49:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "서울 지하철 ‘출근길 대란’ 피했다…서울교통공사 노사 임단협 타결",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-24T21:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000133670?sid=102"
+     "title": "출근길 대란 피했다…서울지하철 총파업 철회, 노사 임단협 타결",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-24T21:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002835251?sid=102"
     },
     {
-     "title": "출근길 대란 피했다…서울지하철 임단협 극적 타결",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-24T21:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005357826?sid=102"
+     "title": "서울지하철 임단협 타결, 파업 철회...'출근길 대란' 피했다",
+     "press": "ikbc.co.kr",
+     "publishedAt": "2026-11-24T21:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/660/0000122125?sid=102"
     },
     {
-     "title": "서울지하철 노사, 임단협 극적 타결",
-     "press": "goodnews1.com",
-     "publishedAt": "2026-11-24T20:40:00.000Z",
-     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466610"
+     "title": "서울지하철 임단협, 파업 목전서 타결…'출근길 대란' 피했다",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-24T21:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001273845?sid=102"
     }
    ]
   },
@@ -77,8 +77,8 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1385,
-  "matched": 723,
+  "flagged": 1384,
+  "matched": 722,
   "avgLeadMin": 535,
   "recent": [
    {
