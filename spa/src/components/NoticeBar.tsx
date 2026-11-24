@@ -118,9 +118,14 @@ function NoticeBar() {
                     .lp-notice-bar .lp-notice-date { display: none; }
                 }
             `}</style>
-            <div style={{ background: light.surface, borderBottom: `1px solid ${light.line}` }}>
+            <div style={{ background: light.surface, borderBottom: `1px solid ${light.line}`, padding: '8px var(--lp-notice-pad)' }}>
+              {/* The notice sits in a green box so it stands out from the page (owner request 2026-11-24). */}
+              <div className="lp-notice-box" style={{
+                  boxSizing: 'border-box', maxWidth: 1232, margin: '0 auto',
+                  border: `2px solid ${light.positive}`, borderRadius: lightRadius.card, background: light.positiveSoft,
+              }}>
                 <div style={{
-                    boxSizing: 'border-box', maxWidth: 1280, margin: '0 auto', padding: '4px var(--lp-notice-pad)',
+                    boxSizing: 'border-box', padding: '4px 12px',
                     display: 'flex', alignItems: 'center', gap: 8, minHeight: 52,
                 }}>
                     <span style={{
@@ -177,7 +182,7 @@ function NoticeBar() {
                         id={PANEL_ID}
                         role="region"
                         aria-label="공지 내용"
-                        style={{ boxSizing: 'border-box', maxWidth: 1280, margin: '0 auto', padding: '8px var(--lp-notice-pad) 20px' }}
+                        style={{ boxSizing: 'border-box', padding: '8px 16px 20px' }}
                     >
                         <div style={{ maxWidth: 760 }}>
                             <h2 style={{ margin: 0, color: light.text, fontSize: type.lead, fontWeight: 600, lineHeight: 1.4, wordBreak: 'keep-all' }}>
@@ -237,6 +242,7 @@ function NoticeBar() {
                         </div>
                     </div>
                 )}
+              </div>
             </div>
         </aside>
     );
