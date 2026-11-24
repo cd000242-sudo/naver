@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T05:58:58.610Z",
+ "builtAt": "2026-11-24T06:09:02.641Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 26,
+ "measured": 23,
  "candidates": [
   {
    "keyword": "불법공매도 합동점검 TF",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 41,
-   "recent20": 15,
-   "press": 40,
+   "articles90": 45,
+   "recent20": 11,
+   "press": 44,
    "firstArticleAt": "2026-11-24T05:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "금감원·거래소, 불법 공매도 합동TF 가동…이상거래 조기 포착한다",
-     "press": "ezyeconomy.com",
-     "publishedAt": "2026-11-24T05:56:00.000Z",
-     "link": "https://www.ezyeconomy.com/news/articleView.html?idxno=242150"
+     "title": "금감원·거래소, 불법 공매도 뿌리 뽑는다…3개월 합동 감시 돌입",
+     "press": "ziksir.com",
+     "publishedAt": "2026-11-24T06:08:00.000Z",
+     "link": "https://www.ziksir.com/news/articleView.html?idxno=154506"
     },
     {
-     "title": "\"불법 공매도 적발시 엄단\"…금감원·거래소, 합동 TF 가동",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-24T05:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009307497?sid=101"
+     "title": "불법 공매도 3개월 집중감시⋯금감원·거래소 합동 TF 가동",
+     "press": "viva100.com",
+     "publishedAt": "2026-11-24T06:06:00.000Z",
+     "link": "https://www.viva100.com/article/20261124501014"
     },
     {
-     "title": "증시 급락 틈탄 불법공매도 잡는다… 금감원·거래소 합동 감시 강화",
-     "press": "the-biz.co.kr",
-     "publishedAt": "2026-11-24T05:54:00.000Z",
-     "link": "http://www.the-biz.co.kr/news/articleView.html?idxno=732002"
+     "title": "[마켓 인사이트] 금감원·거래소, 불법 공매도 3개월 집중 감시…주가 ...",
+     "press": "moneystorm.kr",
+     "publishedAt": "2026-11-24T06:04:00.000Z",
+     "link": "https://www.moneystorm.kr/news/articleView.html?idxno=8802"
     }
    ]
   },
@@ -47,62 +47,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 50,
-   "recent20": 7,
-   "press": 35,
-   "firstArticleAt": "2026-11-24T04:30:00.000Z",
+   "articles90": 46,
+   "recent20": 9,
+   "press": 34,
+   "firstArticleAt": "2026-11-24T04:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이용철, ‘李 대통령 사건 공소취소 지휘권 행사 여부’ 청문회 질문에",
-     "press": "siminilbo.co.kr",
-     "publishedAt": "2026-11-24T05:58:00.000Z",
-     "link": "https://www.siminilbo.co.kr/news/newsview.php?ncode=1160286942919454"
+     "title": "\"서영교 원맨쇼야!\"…2주 만에 법사위 돌아온 국힘, 이용철 청문회서 왜...",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-24T06:07:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004213303?sid=100"
     },
     {
-     "title": "이용철 법무후보, 대통령 친분 지적에 \"오랜 친분 맞지만 측근은 아냐....",
-     "press": "lawissue.co.kr",
-     "publishedAt": "2026-11-24T05:58:00.000Z",
-     "link": "https://www.lawissue.co.kr/view.php?ud=202611241456089253b3279dfb36_12"
+     "title": "이용철 청문회, 대통령 공소취소 공방…지휘권 행사 여부엔 즉답 피해",
+     "press": "newswhoplus.com",
+     "publishedAt": "2026-11-24T06:06:00.000Z",
+     "link": "https://www.newswhoplus.com/news/articleView.html?idxno=75278"
     },
     {
-     "title": "“공소취소용 장관”·“정치 선동”…여야 이용철 청문회 공방",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-24T05:58:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2652318"
+     "title": "이용철 법무부 장관 후보 \"내란 청산, 아직도 노력해야 할 부분 많아\"",
+     "press": "queen.co.kr",
+     "publishedAt": "2026-11-24T06:00:00.000Z",
+     "link": "http://www.queen.co.kr/news/articleView.html?idxno=466835"
     }
    ]
   },
   {
-   "keyword": "김새롬 재혼",
+   "keyword": "퇴직",
    "sources": [
-    "daum"
+    "google"
    ],
-   "articles90": 34,
-   "recent20": 4,
-   "press": 30,
-   "firstArticleAt": "2026-11-24T04:42:00.000Z",
-   "exclusive": true,
-   "capped": false,
+   "articles90": 27,
+   "recent20": 6,
+   "press": 27,
+   "firstArticleAt": "2026-11-24T05:12:00.000Z",
+   "exclusive": false,
+   "capped": true,
    "samples": [
     {
-     "title": "‘39세’ 김새롬, 이혼 9년 만에 재혼 발표…“법적 짝꿍이 생겼어요”...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-24T05:51:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001148097"
+     "title": "NH농협은행, 40세 이상 명예퇴직 접수…최대 40개월치 임금 지급",
+     "press": "segyebiz.com",
+     "publishedAt": "2026-11-24T06:04:00.000Z",
+     "link": "http://www.segyebiz.com/newsView/20261124512603?OutUrl=naver"
     },
     {
-     "title": "방송인 김새롬 재혼, SNS로 깜짝 발표…“11월 11일 법적 짝꿍 생겼다”",
-     "press": "sportsworldi.com",
-     "publishedAt": "2026-11-24T05:45:00.000Z",
-     "link": "https://m.entertain.naver.com/article/396/0000761810"
+     "title": "NH농협은행, 40세부터 명퇴..48~53세 특별퇴직금 두 배",
+     "press": "4th.kr",
+     "publishedAt": "2026-11-24T06:04:00.000Z",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2122572"
     },
     {
-     "title": "김새롬, 이혼 9년 만에 재혼 “법적 짝꿍 생겨” [셀럽톡]",
-     "press": "celuvmedia.com",
-     "publishedAt": "2026-11-24T05:44:00.000Z",
-     "link": "http://www.celuvmedia.com/article.php?aid=1795496976531443005"
+     "title": "KB국민은행, 기업형 퇴직연금 수수료 대폭 낮춘다…\"중소기업·돌봄기관...",
+     "press": "smarttimes.co.kr",
+     "publishedAt": "2026-11-24T06:00:00.000Z",
+     "link": "http://www.smarttimes.co.kr/news/articleView.html?idxno=50861"
     }
    ]
   },
@@ -111,172 +111,202 @@
    "sources": [
     "google"
    ],
-   "articles90": 30,
-   "recent20": 11,
-   "press": 29,
-   "firstArticleAt": "2026-11-24T04:50:00.000Z",
+   "articles90": 25,
+   "recent20": 9,
+   "press": 24,
+   "firstArticleAt": "2026-11-24T05:12:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "12월 3일 ‘국민주권의 날’ 지정…유류세 인하 내년 1월까지 연장",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-24T05:54:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2652315"
+     "title": "12울 3일 국가주권의날 국가기념일 지정...공휴일 여부는?",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-11-24T06:08:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3761536"
     },
     {
-     "title": "李대통령, 12월 3일 '국민주권의 날' 지정…'공휴일'은 아냐",
-     "press": "namdonews.com",
-     "publishedAt": "2026-11-24T05:52:00.000Z",
-     "link": "https://www.namdonews.com/news/articleView.html?idxno=930265"
+     "title": "12월 3일부터 공무원 난임휴직 시행…최대 2년까지 가능",
+     "press": "korea.kr",
+     "publishedAt": "2026-11-24T06:04:00.000Z",
+     "link": "https://www.korea.kr/news/policyNewsView.do?newsId=148976392&call_from=naver_news"
     },
     {
-     "title": "12월 3일 ‘국민주권의 날’ 지정…국회서 1만명 첫 기념식(종합)",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-24T05:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014342372?sid=100"
+     "title": "12·3 비상계엄 2년 만에 국가기념일 지정…‘국민주권의 날’ 의결",
+     "press": "asiatime.co.kr",
+     "publishedAt": "2026-11-24T06:04:00.000Z",
+     "link": "https://www.asiatime.co.kr/article/20261124500350"
     }
    ]
   },
   {
-   "keyword": "퇴직",
+   "keyword": "울산 중학생 신세계백화점 협박",
    "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 28,
-   "recent20": 7,
-   "press": 27,
-   "firstArticleAt": "2026-11-24T04:58:00.000Z",
-   "exclusive": false,
-   "capped": true,
-   "samples": [
-    {
-     "title": "주류 소비 위축에 '허리띠'…주류업계 덮친 희망퇴직 '칼바람'",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-24T05:58:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1732836"
-    },
-    {
-     "title": "\"퇴직연금시장 첫발\" 케이뱅크, 연3.89% 'DB 정기예금' 출시",
-     "press": "catchnews.kr",
-     "publishedAt": "2026-11-24T05:55:00.000Z",
-     "link": "https://www.catchnews.kr/news/articleView.html?idxno=130918"
-    },
-    {
-     "title": "NH농협은행, 연말 명퇴 보상 확대…48~53세 특별퇴직금 두 배로",
-     "press": "sateconomy.co.kr",
-     "publishedAt": "2026-11-24T05:50:00.000Z",
-     "link": "https://sateconomy.co.kr/news/view/1065588366620283"
-    }
-   ]
-  },
-  {
-   "keyword": "경기도교육청 교복 비리",
-   "sources": [
-    "signal.bz"
+    "nate"
    ],
    "articles90": 22,
    "recent20": 4,
-   "press": 22,
-   "firstArticleAt": "2026-11-24T04:29:00.000Z",
+   "press": 21,
+   "firstArticleAt": "2026-11-24T04:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"교육계 고질병 뿌리 뽑는다\"…안민석, '교복 비리와의 전쟁' 선포",
-     "press": "asiatoday.co.kr",
-     "publishedAt": "2026-11-24T05:58:00.000Z",
-     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261124010009330"
+     "title": "\"신세계백화점 폭파\" 간 큰 팩스 협박범…잡고 보니 울산 중학생",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-24T06:08:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/326341/?sc=Naver"
     },
     {
-     "title": "안민석 경기교육감, '교복 비리와의 전쟁' 선포…입찰 담합 의혹 수사 ...",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-24T05:56:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5087208"
+     "title": "신세계백화점 폭파 협박 팩스 보낸 울산 중학생, 경찰에 발송 시인",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-24T06:06:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284866"
     },
     {
-     "title": "안민석 교육감 \"교육 비리 더 이상 관용 없다\"...교복·급식·시설 비리...",
-     "press": "ajunews.com",
-     "publishedAt": "2026-11-24T05:46:00.000Z",
-     "link": "https://www.ajunews.com/view/20261124141705232"
+     "title": "신세계백화점 폭파 협박 용의자는 울산 중학생",
+     "press": "4th.kr",
+     "publishedAt": "2026-11-24T06:02:00.000Z",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2122567"
     }
    ]
   },
   {
-   "keyword": "박수진 하와이 생활 정리",
+   "keyword": "국가시험 공정성 TF 회의",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 42,
+   "recent20": 16,
+   "press": 20,
+   "firstArticleAt": "2026-11-24T05:15:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "민주당, AI부정행위 확산 우려에 \"국가시험 공정성 TF 구성… 정기국회...",
+     "press": "lawissue.co.kr",
+     "publishedAt": "2026-11-24T06:08:00.000Z",
+     "link": "https://www.lawissue.co.kr/view.php?ud=202611241506539252b3279dfb36_12"
+    },
+    {
+     "title": "韓총리 \"AI가 시험 못 풀도록 방안 강구…과거 국가시험도 철저 조사\"",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-24T06:08:00.000Z",
+     "link": "https://www.ajunews.com/view/20261124150015410"
+    },
+    {
+     "title": "한 총리 “과거 국가시험 철저조사…부정행위시 유사시험 제한검토”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-24T06:02:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002727804?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "오세훈 시장 브리핑",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 44,
+   "recent20": 20,
+   "press": 16,
+   "firstArticleAt": "2026-11-24T05:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "오세훈 “국무회의서 또 발언 기회 못 얻어…특검·대법원장 탄핵 막아...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-24T06:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004685579?sid=102"
+    },
+    {
+     "title": "오세훈, 국무회의 발언 불발에도 참석 의지…\"국민 목소리 전할 것\"",
+     "press": "newspim.com",
+     "publishedAt": "2026-11-24T06:03:00.000Z",
+     "link": "https://www.newspim.com/news/view/20261124001061"
+    },
+    {
+     "title": "오세훈, 국무회의서 못한 말… \"국민의 어깨는 무거운데 대통령과 정부...",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-24T06:02:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3451677"
+    }
+   ]
+  },
+  {
+   "keyword": "강금실 국정원장 후보자",
    "sources": [
     "daum"
    ],
-   "articles90": 17,
-   "recent20": 4,
-   "press": 15,
-   "firstArticleAt": "2026-11-24T04:47:00.000Z",
-   "exclusive": true,
+   "articles90": 11,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-24T04:45:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "배용준♥박수진, 4년 하와이 생활 정리…반포 아파트 이사",
-     "press": "mt.co.kr",
+     "title": "강금실 국정원장 지명에 이준석 \"뭔 뜬금포…오답 지우랬더니 더 진하게...",
+     "press": "news.tvchosun.com",
      "publishedAt": "2026-11-24T05:54:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005445645"
+     "link": "https://n.news.naver.com/mnews/article/448/0000653095?sid=100"
     },
     {
-     "title": "배용준·박수진, 하와이 생활 정리…반포 주민 됐다",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-24T05:49:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001273781?sid=103"
+     "title": "이준석, 강금실 국정원장 지명에 \"청개구리도 아니고...뜬금포\"",
+     "press": "hidomin.com",
+     "publishedAt": "2026-11-24T05:48:00.000Z",
+     "link": "https://www.hidomin.com/news/articleView.html?idxno=730779"
     },
     {
-     "title": "배용준·박수진, 4년 美 하와이 생활 정리하고 귀국…서울 거주 중",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-24T05:47:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000053961"
+     "title": "[정치 포커스] 김종필서 박지원 거쳐 강금실까지…국정원 수장 변천사",
+     "press": "ekn.kr",
+     "publishedAt": "2026-11-24T05:44:00.000Z",
+     "link": "https://www.ekn.kr/web/view.php?key=20261124026533957"
     }
    ]
   },
   {
-   "keyword": "정상빈 1골 1도움 활약",
+   "keyword": "한덕수 판결 토론회",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 13,
-   "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-24T04:29:00.000Z",
-   "exclusive": true,
+   "articles90": 38,
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-24T05:20:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "MLS 코리안 더비 승자는 ‘1골 1도움’ 정상빈…손흥민은 침묵",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-24T05:55:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/011/0004685567"
+     "title": "[포토] ‘한덕수 대법원 판결’ 더불어민주당 긴급토론회",
+     "press": "ilyosisa.co.kr",
+     "publishedAt": "2026-11-24T06:08:00.000Z",
+     "link": "https://www.ilyosisa.co.kr/news/article.html?no=259173"
     },
     {
-     "title": "손흥민 제치고 POTM 선정! 정상빈, 1골 1기점으로 코리안 더비 승리",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-24T05:50:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1195198"
+     "title": "[포토] 민주당 '한덕수 대법원 판결, 무엇이 문제인가?' 긴급토론회",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-24T05:46:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261124010009379"
     },
     {
-     "title": "또 침묵한 92년생 손흥민, 1골·1도움 펄펄 난 02년생 정상빈",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-24T05:33:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/081/0003702625"
+     "title": "[포토] 김민석 대표 '한덕수 대법원 판결 관련 긴급토론회 발언'",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-24T05:44:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261124010009378"
     }
    ]
   },
   {
    "keyword": "홈플러스, 26일 온라인배송 중단",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-24T04:30:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-24T05:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -301,22 +331,22 @@
    ]
   },
   {
-   "keyword": "강성범 오늘 부친상",
+   "keyword": "강성범 부친상 슬픔",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-24T04:31:00.000Z",
-   "exclusive": true,
+   "articles90": 6,
+   "recent20": 0,
+   "press": 6,
+   "firstArticleAt": "2026-11-24T04:56:00.000Z",
+   "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'수다맨' 강성범, 오늘(24일) 부친상 비보",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-24T05:51:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004127634"
+     "title": "개그맨 강성범 부친상…빈소 안산 한도병원장례식장",
+     "press": "mdtoday.co.kr",
+     "publishedAt": "2026-11-24T05:38:00.000Z",
+     "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=627354"
     },
     {
      "title": "개그맨 강성범, 오늘(24일) 부친상... 유튜브 방송은 게스트 대체 공지",
@@ -400,9 +430,33 @@
  "hitRate": {
   "days": 7,
   "flagged": 1271,
-  "matched": 687,
-  "avgLeadMin": 532,
+  "matched": 686,
+  "avgLeadMin": 526,
   "recent": [
+   {
+    "keyword": "아버지",
+    "hitKeyword": "추사랑 아버지 응원",
+    "hitAt": "2026-11-24T15:00:00+09:00",
+    "leadMin": 295
+   },
+   {
+    "keyword": "이재명 시험 부정행위 처벌",
+    "hitKeyword": "내신시험 부정행위 강화",
+    "hitAt": "2026-11-24T15:00:00+09:00",
+    "leadMin": 113
+   },
+   {
+    "keyword": "윤하정",
+    "hitKeyword": "윤하정 민폐 하객 폭로",
+    "hitAt": "2026-11-24T15:00:00+09:00",
+    "leadMin": 83
+   },
+   {
+    "keyword": "김새롬 재혼",
+    "hitKeyword": "김새롬 재혼 발표",
+    "hitAt": "2026-11-24T15:00:00+09:00",
+    "leadMin": 11
+   },
    {
     "keyword": "신세계백화점 폭파 중학생 검거",
     "hitKeyword": "제주 중학생 사망 의혹",
@@ -438,30 +492,6 @@
     "hitKeyword": "삼성전자 임원 승진",
     "hitAt": "2026-11-24T14:00:00+09:00",
     "leadMin": 94
-   },
-   {
-    "keyword": "호세 수아레즈",
-    "hitKeyword": "두산 수아레즈 영입",
-    "hitAt": "2026-11-24T14:00:00+09:00",
-    "leadMin": 73
-   },
-   {
-    "keyword": "NC 원태인 관심",
-    "hitKeyword": "원태인 FA 시장",
-    "hitAt": "2026-11-24T14:00:00+09:00",
-    "leadMin": 63
-   },
-   {
-    "keyword": "임원 승진 인사",
-    "hitKeyword": "삼성전자 임원 승진",
-    "hitAt": "2026-11-24T14:00:00+09:00",
-    "leadMin": 53
-   },
-   {
-    "keyword": "삼성전자 임원 인사",
-    "hitKeyword": "삼성전자 임원 승진",
-    "hitAt": "2026-11-24T14:00:00+09:00",
-    "leadMin": 33
    }
   ]
  }
