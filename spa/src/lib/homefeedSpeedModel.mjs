@@ -9,11 +9,14 @@
  * 순수 함수만 둔다(React · fetch 없음) — spa/tests/homefeed-speed.test.mjs 가 검사한다.
  */
 
-const KNOWN_REASONS = ['censored', 'no_first_seen', 'sample_capped', 'no_news_sample', 'within_one_minute'];
+const KNOWN_REASONS = ['censored', 'no_first_seen', 'sample_capped', 'no_news_sample', 'within_one_minute', 'outside_window'];
 const STATUSES = ['ahead', 'behind', 'unmeasured'];
 const DEFAULT_RESOLUTION_MINUTES = 10;
 const DEFAULT_WINDOW_DAYS = 7;
 const MAX_BUCKETS = 96;
+const MINUTE_MS = 60_000;
+const MAX_LEAD_MINUTES = 12 * 60;
+const ALLOWED_CLOCK_SKEW_MS = 2 * MINUTE_MS;
 
 export const SPEED_REASON_LABEL = Object.freeze({
     censored: '앱이 꺼져 있던 구간이라 처음 본 시각을 믿을 수 없음',
@@ -21,6 +24,7 @@ export const SPEED_REASON_LABEL = Object.freeze({
     sample_capped: '기사가 많아 첫 기사가 표본 밖에 있을 수 있음',
     no_news_sample: '뉴스 표본이 없음',
     within_one_minute: '1분 안의 차이라 먼저 · 늦게를 가릴 수 없음',
+    outside_window: '처음 관측과 12시간 넘게 떨어진 기사여서 속도 비교에서 제외',
 });
 
 const isObject = (value) => Boolean(value) && typeof value === 'object' && !Array.isArray(value);
@@ -43,7 +47,7 @@ export function normalizeBuckets(raw) {
     };
 }
 
-/** 판정 검사 — 앞섬/늦음은 분이 양수일 때만 인정하고, 아니면 null. 알 수 없는 사유는 비운다. */
+/** 비교에 필요한 두 시각과 보고된 방향·차이가 일치하는지 검사한다. */
 export function normalizeLead(raw) {
     if (!isObject(raw) || !STATUSES.includes(raw.status)) return null;
     const resolutionMinutes = typeof raw.resolutionMinutes === 'number' && Number.isFinite(raw.resolutionMinutes) && raw.resolutionMinutes > 0
@@ -53,6 +57,12 @@ export function normalizeLead(raw) {
         return { status: 'unmeasured', minutes: null, reason: KNOWN_REASONS.includes(raw.reason) ? raw.reason : null, ...base };
     }
     if (typeof raw.minutes !== 'number' || !Number.isFinite(raw.minutes) || raw.minutes <= 0) return null;
+    if (!base.firstSeenAt || !base.firstNewsAt) return null;
+    const diff = (Date.parse(base.firstNewsAt) - Date.parse(base.firstSeenAt)) / MINUTE_MS;
+    if (Math.abs(diff) > MAX_LEAD_MINUTES) {
+        return { ...base, status: 'unmeasured', minutes: null, reason: 'outside_window' };
+    }
+    if (Math.abs(diff) < 1 || (diff > 0 ? 'ahead' : 'behind') !== raw.status || Math.round(Math.abs(diff)) !== raw.minutes) return null;
     return { status: raw.status, minutes: raw.minutes, reason: null, ...base };
 }
 
@@ -103,6 +113,46 @@ export function normalizeSpeedBoard(raw) {
     };
 }
 
+function latestTime(values, maxTime = Infinity) {
+    return values.reduce((latest, time) => {
+        const ms = Date.parse(time || '');
+        return Number.isFinite(ms) && ms <= maxTime && (!latest || ms > Date.parse(latest)) ? time : latest;
+    }, null);
+}
+
+/** 최신 회차와 실제 뉴스 표본 수집 시각을 분리한다. */
+export function normalizeSpeedCandidate(raw, source) {
+    const board = normalizeSpeedBoard(raw);
+    if (!board) return null;
+    const resolution = raw.settings?.snapshotIntervalMinutes ?? raw.resolutionMinutes;
+    const maxBucketAt = board.snapshotAt ? Date.parse(board.snapshotAt) + ALLOWED_CLOCK_SKEW_MS : Infinity;
+    return {
+        ...board,
+        source,
+        measuredAt: latestTime(board.cards.map((card) => card.buckets?.endAt), maxBucketAt),
+        resolutionMinutes: Number.isFinite(resolution) && resolution > 0
+            ? resolution : board.scoreboard?.resolutionMinutes ?? DEFAULT_RESOLUTION_MINUTES,
+    };
+}
+
+/** 실제 표본을 우선한다. 같은 시각에는 공개 자료를 유지한다. */
+export function chooseSpeedBoard(candidates, nowMs, previous = null) {
+    const maxTime = nowMs + ALLOWED_CLOCK_SKEW_MS;
+    const priority = { service: 2, legacy: 1, app: 0 };
+    const valid = [...candidates, previous?.board].filter((candidate) => candidate && latestTime([candidate.snapshotAt, candidate.measuredAt], maxTime));
+    const stamp = (time) => latestTime([time], maxTime) ? Date.parse(time) : -1;
+    valid.sort((a, b) => stamp(b.measuredAt) - stamp(a.measuredAt)
+        || stamp(b.snapshotAt) - stamp(a.snapshotAt) || priority[b.source] - priority[a.source]);
+    return { board: valid[0] ?? null, latestSnapshotAt: latestTime([...valid.map((candidate) => candidate.snapshotAt), previous?.latestSnapshotAt], maxTime) };
+}
+
+export function speedCollectionState(board, nowMs) {
+    if (!board) return 'unavailable';
+    if (!board.measuredAt) return 'unmeasured';
+    const maxAgeMinutes = Math.max(30, board.resolutionMinutes * 3);
+    return nowMs - Date.parse(board.measuredAt) > maxAgeMinutes * MINUTE_MS ? 'stale' : 'fresh';
+}
+
 /** 분 → "N분" / "N시간 M분". */
 export function formatMinutes(minutes) {
     const total = Math.round(minutes);
@@ -150,6 +200,14 @@ export function kstClock(iso) {
     return `${pad(shifted.getUTCHours())}:${pad(shifted.getUTCMinutes())}`;
 }
 
+/** 여러 날짜에 걸친 수집 기록은 한국 달력 날짜와 함께 표기한다. */
+export function kstDateTime(iso) {
+    const ms = Date.parse(iso);
+    if (!Number.isFinite(ms)) return '';
+    const shifted = new Date(ms + 9 * 3_600_000).toISOString();
+    return `${shifted.slice(0, 10)} ${shifted.slice(11, 16)}`;
+}
+
 /** 막대 SVG 좌표. 센 값에 비례할 뿐 다듬지 않는다(0 은 높이 0, 1 이상은 최소 2px). */
 export function barGeometry(buckets, { width = 240, height = 56, gap = 2 } = {}) {
     const count = buckets.counts.length;
@@ -166,7 +224,7 @@ export function barGeometry(buckets, { width = 240, height = 56, gap = 2 } = {})
 export function bucketCaption(buckets) {
     const totalMinutes = buckets.counts.length * buckets.bucketMinutes;
     const span = totalMinutes % 60 === 0 ? `${totalMinutes / 60}시간` : `${totalMinutes}분`;
-    const parts = [`최근 ${span} 뉴스 기사 ${buckets.counted}건`, '서로 다른 제목 기준'];
+    const parts = [`수집 직전 ${span} 뉴스 기사 ${buckets.counted}건`, '서로 다른 제목 기준'];
     if (buckets.undated > 0) parts.push(`시각 없는 ${buckets.undated}건 제외`);
     if (buckets.outOfRange > 0) parts.push(`범위 밖 ${buckets.outOfRange}건 제외`);
     return parts.join(' · ');
@@ -176,5 +234,5 @@ export function bucketCaption(buckets) {
 export function bucketAxis(buckets) {
     const totalMinutes = buckets.counts.length * buckets.bucketMinutes;
     const left = totalMinutes % 60 === 0 ? `${totalMinutes / 60}시간 전` : `${totalMinutes}분 전`;
-    return { left, right: `${kstClock(buckets.endAt)} 수집` };
+    return { left, right: `${kstDateTime(buckets.endAt)} 수집` };
 }
