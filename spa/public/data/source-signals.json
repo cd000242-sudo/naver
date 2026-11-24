@@ -8,11 +8,197 @@
         {
           "id": "naver-1",
           "rank": 1,
-          "keyword": "삼성전자 임원 131명 승진",
-          "title": "삼성전자 임원 131명 승진",
-          "rawKeyword": "삼성전자 임원 131명 승진",
+          "keyword": "이용철 후보자 인사청문회",
+          "title": "이용철 후보자 인사청문회",
+          "rawKeyword": "이용철 후보자 인사청문회",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 100,
+          "source": "naver",
+          "expansions": [
+            "이용철 인사청문회",
+            "이용철 법무부장관",
+            "이용철 나무위키",
+            "이용철프로필",
+            "이용철 청문회",
+            "이용철변호사",
+            "이용철 단독",
+            "이용철777"
+          ],
+          "expansionSeed": "이용철",
+          "insight": {
+            "titles": {
+              "seo": "이용철 후보자 인사청문회 최신 이슈와 핵심 내용 정리",
+              "home": "이용철 후보자 인사청문회, 이용철, '李대통령 공소취소' 질의에 \"무리한 지휘 않겠다\"(종합) 관련 확인할 점",
+              "topic": "이용철 후보자 인사청문회",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "",
+                "sourceIndex": 0
+              },
+              {
+                "text": "이용철 법무부 장관 후보자 가 새로운 형사사법 체계를 안정적으로 정착시켜 검찰개혁을 완성하겠다고 밝혔다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.yna.co.kr/view/AKR20261124078951004?input=1195m",
+                "press": "연합뉴스"
+              },
+              {
+                "url": "https://biz.chosun.com/topics/law_firm/2026/11/24/ZUBUUNIGSFEUBEOX5MSLV36UKE/?utm_source=naver&utm_medium=original&utm_campaign=biz",
+                "press": "조선비즈"
+              }
+            ],
+            "images": [
+              "https://img3.yna.co.kr/photo/yna/YH/2026/11/24/PYH2026112407120001300_P4.jpg"
+            ],
+            "press": [
+              "연합뉴스",
+              "조선비즈"
+            ],
+            "headlines": [
+              "이용철, '李대통령 공소취소' 질의에 \"무리한 지휘 않겠다\"(종합)",
+              "이용철 법무장관 후보자 “형사사법 체계 안착시켜 검찰개혁 완성”"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-24T04:09:40.571Z"
+          }
+        },
+        {
+          "id": "naver-2",
+          "rank": 2,
+          "keyword": "젠슨 황 돌아왔다",
+          "title": "젠슨 황 돌아왔다",
+          "rawKeyword": "젠슨 황 돌아왔다",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 99,
+          "source": "naver",
+          "expansions": [
+            "젠슨황",
+            "젠슨황 여자",
+            "젠슨황 와이프",
+            "젠슨황 국적",
+            "젠슨황 복귀",
+            "젠슨황 스파이",
+            "젠슨황 나무위키",
+            "젠슨 황 배우자"
+          ],
+          "expansionSeed": "젠슨",
+          "insight": {
+            "titles": {
+              "seo": "젠슨 황 돌아왔다 최신 이슈와 핵심 내용 정리",
+              "home": "젠슨 황 돌아왔다, 젠슨 황이 돌아왔다…美전역 '들썩', 엔비디아는 31% '폭등' 관련 확인할 점",
+              "topic": "젠슨 황 돌아왔다",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "'불륜 스캔들'로 물러났던 젠슨 황 전 엔비디아 최고경영자(CEO)가 23일(현지시간) 전격 복귀하면서 미 전역이 떠들썩해졌다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "젠슨 황 엔비디아 최고경영자(CEO) 복귀 소식이 알려지면서 AI 산업의 불확실성이 해소될 것이란 기대감까지 폭발했다. 황 CEO는 자신의 트레이드마크인 가죽 재킷을 벗고 돌아왔다 .",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.nocutnews.co.kr/news/6611437?utm_source=naver&utm_medium=article&utm_campaign=20261124092200",
+                "press": "노컷뉴스"
+              },
+              {
+                "url": "https://www.hankyung.com/article/202611245393g",
+                "press": "한국경제"
+              }
+            ],
+            "images": [
+              "https://file2.nocutnews.co.kr/newsroom/image/2026/11/24/202611240557263266_0.jpg"
+            ],
+            "press": [
+              "노컷뉴스",
+              "한국경제"
+            ],
+            "headlines": [
+              "젠슨 황이 돌아왔다…美전역 '들썩', 엔비디아는 31% '폭등'",
+              "\"해임하기엔 너무 거물\"… 젠슨 황 복귀로 드러난 엔비디아 민낯 [분석+]"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-24T04:09:40.571Z"
+          }
+        },
+        {
+          "id": "naver-3",
+          "rank": 3,
+          "keyword": "이재명 시험 부정행위 처벌",
+          "title": "이재명 시험 부정행위 처벌",
+          "rawKeyword": "이재명 시험 부정행위 처벌",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 98,
+          "source": "naver",
+          "expansions": [
+            "이재명 지지율",
+            "이재명 임기",
+            "이재명 탄핵",
+            "이재명 대통령",
+            "이재명 재판",
+            "이재명 주식",
+            "이재명 북한",
+            "이재명 울산"
+          ],
+          "expansionSeed": "이재명",
+          "insight": {
+            "titles": {
+              "seo": "이재명 시험 부정행위 처벌 최신 이슈와 핵심 내용 정리",
+              "home": "이재명 시험 부정행위 처벌, 李대통령 \"시험 부정행위, 중대범죄…엄두도 못 내게 처벌 강화\" 관련 확인할 점",
+              "topic": "이재명 시험 부정행위 처벌",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "통해 부정행위 를 시도하겠다는 엄두조차 낼 수 없도록 처벌 과 제재 수위를 획기적으로 강화해야 한다\"고 강조했다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "국가기술자격 시험 에서 부정행위 적발 시 형사 처벌 은 현행 2년 이하 징역에서 5년 이하 징역으로 상향한다. 교육부와 고용노동부는 이날 이재명 대통령이 청와대에서 주재한 국무회의에 대학별 고사·내신 및 국가자격 시험 공정성 확보 방안을 보고했다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.yna.co.kr/view/AKR20261124068100001?input=1195m",
+                "press": "연합뉴스"
+              },
+              {
+                "url": "https://www.mediatoday.co.kr/news/articleView.html?idxno=338672",
+                "press": "미디어오늘"
+              }
+            ],
+            "images": [
+              "https://img1.yna.co.kr/photo/yna/YH/2026/11/24/PYH2026112404840001300_P4.jpg"
+            ],
+            "press": [
+              "연합뉴스",
+              "미디어오늘"
+            ],
+            "headlines": [
+              "李대통령 \"시험 부정행위, 중대범죄…엄두도 못 내게 처벌 강화\"",
+              "내신도 부정행위 하면 당일 전 과목 '0점'… 시험 부정행위 대응 방안"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-24T04:09:40.571Z"
+          }
+        },
+        {
+          "id": "naver-4",
+          "rank": 4,
+          "keyword": "임원 승진 소식",
+          "title": "임원 승진 소식",
+          "rawKeyword": "임원 승진 소식",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 97,
           "source": "naver",
           "expansions": [
             "임원희",
@@ -27,74 +213,10 @@
           "expansionSeed": "임원",
           "insight": {
             "titles": {
-              "seo": "삼성전자 임원 131명 승진 최신 이슈와 핵심 내용 정리",
-              "home": "삼성전자 임원 131명 승진, Attention Required! 관련 확인할 점",
-              "topic": "삼성전자 임원 131명 승진",
+              "seo": "임원 승진 소식 최신 이슈와 핵심 내용 정리",
+              "home": "임원 승진 소식, [특징주] 인탑스, 로봇 이어 국방부 교육용 드론 생산 돌입 소식에 10.91%↑ 관련 확인할 점",
+              "topic": "임원 승진 소식",
               "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "여성 신임 승진 자는 역대 가장 많은 11명을 배출했다. 삼성전자 는 24일 부사장 39명, 상무 78명, 펠로우(Fellow) 2명, 마스터(Master) 12명 등 총 131명 에 대한 2027년 정기 임원 인사를 발표했다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "부사장 39명·상무 78명 등 총 131명 승진 … 지난해 161명보다 18.6% 감소 HBM4·차세대 D램 개발 인재 중용… 파운드리 기술·고객 확보 인력 발탁 로봇·AI 등 미래사업 기술 인재 승진 … 여성 신임 승진 자 11명 ‘역대 최다’ 삼성전자 가 올해 정기 임원 인사에서 지난해보다",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.hankyung.com/article/202611245923g",
-                "press": "한국경제"
-              },
-              {
-                "url": "https://biz.chosun.com/it-science/ict/2026/11/24/H4FLN22LI5HFJF6AVD5RO2A4WI/?utm_source=naver&utm_medium=original&utm_campaign=biz",
-                "press": "조선비즈"
-              }
-            ],
-            "images": [
-              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F015%2F2026%2F11%2F24%2F5357434.jpg&type=fface200_200&expire=2&refresh=true"
-            ],
-            "press": [
-              "한국경제",
-              "조선비즈"
-            ],
-            "headlines": [
-              "Attention Required!",
-              "삼성전자 , 임원 131명 승진 … HBM·AI·로봇 기술 인재 발탁"
-            ],
-            "extraction": "search-card",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
-          }
-        },
-        {
-          "id": "naver-2",
-          "rank": 2,
-          "keyword": "젠슨 황 CEO 복귀",
-          "title": "젠슨 황 CEO 복귀",
-          "rawKeyword": "젠슨 황 CEO 복귀",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 99,
-          "source": "naver",
-          "expansions": [
-            "젠슨황 복귀",
-            "젠슨황",
-            "젠슨황 여자",
-            "젠슨황 와이프",
-            "젠슨황 국적",
-            "젠슨황 스파이",
-            "젠슨황 나무위키",
-            "젠슨 황 배우자"
-          ],
-          "expansionSeed": "젠슨",
-          "insight": {
-            "titles": {
-              "seo": "젠슨 황 CEO 복귀, 이사회가 미 정부 의견까지 들은 이유",
-              "home": "젠슨 황 CEO 복귀, 불륜 스캔들 뒤 이사회가 내린 뜻밖의 판단",
-              "topic": "젠슨 황 CEO 복귀",
-              "topicGroup": "네이버 실시간 검색어",
-              "summary": "불륜 스캔들로 물러났던 젠슨 황 엔비디아 전 CEO가 23일 전격 복귀했다. 이사회는 미 정부 고위 관계자 의견을 수렴해 국가 안보에 위협이 없다고 판단했다.",
-              "aiTitled": true
             },
             "facts": [
               {
@@ -102,105 +224,353 @@
                 "sourceIndex": 0
               },
               {
-                "text": "젠슨 황 엔비디아 최고경영자( CEO )가 복귀 첫날 본사를 찾아가 직원들에게 사과와 감사의 뜻을 표했다. 직원들은 박수를 치며 환호했다.",
+                "text": "다른 임원 들이 금시초문인 정보를 알고 있었다\"며 \"(회의에서) 젠슨 황의 결정이라며 말을 전달하기도 했다\"고 설명했다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.yna.co.kr/view/AKR20261124005500071?input=1195m",
-                "press": "연합뉴스"
+                "url": "https://www.widedaily.com/news/articleView.html?idxno=304537",
+                "press": "와이드경제"
               },
               {
-                "url": "https://www.kmib.co.kr/article/20261124500059",
-                "press": "국민일보"
+                "url": "https://www.mt.co.kr/world/2026/11/18/2026111810550077473",
+                "press": "머니투데이"
               }
             ],
             "images": [
-              "https://img5.yna.co.kr/photo/reuters/2026/11/21/PRU20261121049901009_P4.jpg"
+              "https://cdn.widedaily.com/news/thumbnail/202611/304537_311935_2737_v150.jpg"
             ],
             "press": [
-              "연합뉴스",
-              "국민일보"
+              "와이드경제",
+              "머니투데이"
             ],
             "headlines": [
-              "\"트럼프, 은밀히 젠슨 황 CEO 복귀 작전…밴스에 주말 특명\"",
-              "본사 찾아간 젠슨 황 “더 나은 CEO 될 것”… 직원들 박수·환호"
+              "[특징주] 인탑스, 로봇 이어 국방부 교육용 드론 생산 돌입 소식에 10.91%↑",
+              "\"젠슨 황 빼닮아\" 갑질로 임원 10명 퇴사...엔비디아 실세 '매디슨' 누구"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         },
         {
-          "id": "naver-3",
-          "rank": 3,
-          "keyword": "국무회의 이재명 대통령",
-          "title": "국무회의 이재명 대통령",
-          "rawKeyword": "국무회의 이재명 대통령",
+          "id": "naver-5",
+          "rank": 5,
+          "keyword": "김민석 취임 100일",
+          "title": "김민석 취임 100일",
+          "rawKeyword": "김민석 취임 100일",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 98,
+          "priority": 96,
           "source": "naver",
           "expansions": [
-            "이재명 대통령",
-            "이재명 지지율",
-            "이재명 임기",
-            "이재명 탄핵",
-            "이재명 재판",
-            "이재명 주식",
-            "이재명 북한",
-            "이재명 울산"
+            "멜로망스 김민석",
+            "김민석 국무총리",
+            "김민석 배우",
+            "김민석 신천지",
+            "김민석 직무정지",
+            "김민석 김우석",
+            "김민석 야구",
+            "두산 김민석"
           ],
-          "expansionSeed": "이재명",
+          "expansionSeed": "김민석",
           "insight": {
             "titles": {
-              "seo": "국무회의 이재명 대통령 최신 이슈와 핵심 내용 정리",
-              "home": "국무회의 이재명 대통령, [속보] 李대통령 “시험 부정행위, 주가조작 범죄와 본질 다르지 않아” - 매일경제 관련 확인할 점",
-              "topic": "국무회의 이재명 대통령",
+              "seo": "김민석 취임 100일 최신 이슈와 핵심 내용 정리",
+              "home": "김민석 취임 100일, 취임 100일 김민석 “당청 관계 안정적…당내 더 안정돼야” 관련 확인할 점",
+              "topic": "김민석 취임 100일",
               "topicGroup": "네이버 실시간 검색어"
             },
             "facts": [
               {
-                "text": "공유 글자 크기 편의기능 공유 글자크기 인쇄 북마크 댓글 AI기능 정치 > 행정 [속보] 李대통령 “시험 부정행위, 주가조작 범죄와 본질 다르지 않아” 이미연 기자 입력 : 2026.11.24 10:33 업데이트 : 2026.11.24 10:37 닫기 구글 검색 선호 추가 Google 검색에서 매일경제 기사를 더 자주 볼 수 있습니다. 번역 ENG JPN CHN 이재명 대통령이 24일 청와대에서 열린 국무회의에서 발언하고 있다. [뉴시스] 이재명 대통령이 24일 시험 부정행위를 ‘주가조작 범죄’에 비유하며 국가시험 전반에 대한 범정부 합동조사와 처벌 강화를 지시했다.",
+                "text": "더불어민주당 김민석 대표가 취임 100일을 맞아 당청 관계의 안정적 정착을 성과로 언급하며 향후 민생을 위한 당내 결속을 강조함.",
                 "sourceIndex": 0
               },
               {
-                "text": "이재명 대통령 이 24일 “종교활동 빙자 불법행위에 대해 실효적 조치를 검토해야 한다”고 밝혔다. 이 대통령 은 이날 청와대에서 열린 제50회 국무회의 에서 “종교활동을 빙자해서 범죄행위, 불법행위를 자행하는 사이비 종교단체에 대한 해산 절차를 제가 말씀드린 바 있다”며 이같이 말했다.",
+                "text": "더불어민주당 김민석 대표는 취임 100일 인 오늘(24일) 당청 관계 안정화를 성과로 꼽으면서 당내 안정 필요성을 강조했습니다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.mk.co.kr/article/12216913",
-                "press": "매일경제"
+                "url": "https://www.chosun.com/politics/politics_general/2026/11/24/BAWWMQ3SOJFTHCL3PKLDRSHTUQ/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
+                "press": "조선일보"
               },
               {
-                "url": "https://www.joongang.co.kr/article/25481404",
-                "press": "중앙일보"
+                "url": "http://mbn.mk.co.kr/pages/news/newsView.php?category=mbn00006&news_seq_no=5232596",
+                "press": "MBN"
               }
             ],
             "images": [
-              "https://pimg.mk.co.kr/news/cms/202611/24/rcv.NEWSIS.NEWSIS.20261124.NISI20261124_0021543546_R.jpg"
+              "https://www.chosun.com/resizer/v2/H5HBXKRC2RAADHU6OTKZMBWENU.jpg?auth=842132cef491e5cc7488678d1e481067e33e3bfe67565928493f3c3047032921&width=1200&height=630&smart=true"
             ],
             "press": [
-              "매일경제",
-              "중앙일보"
+              "조선일보",
+              "MBN"
             ],
             "headlines": [
-              "[속보] 李대통령 “시험 부정행위, 주가조작 범죄와 본질 다르지 않아” - 매일경제",
-              "[속보] 李 대통령 “종교활동 빙자 불법행위…실효적 조치 검토해야”"
+              "취임 100일 김민석 “당청 관계 안정적…당내 더 안정돼야”",
+              "' 취임 100일 ' 김민석 \"당청, 이제 '엇박자' 없이 안정\" 자평"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         },
         {
-          "id": "naver-4",
-          "rank": 4,
+          "id": "naver-6",
+          "rank": 6,
+          "keyword": "순항 미사일",
+          "title": "순항 미사일",
+          "rawKeyword": "순항 미사일",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 95,
+          "source": "naver",
+          "expansions": [
+            "순항 미사일 팝업 고도",
+            "순항미사일 뜻",
+            "순항미사일 꿈",
+            "순항미사일 속도",
+            "순항미사일 요격",
+            "순항미사일 발사",
+            "순항미사일 고도",
+            "순항미사일 탄도미사일"
+          ],
+          "expansionSeed": "순항 미사일",
+          "insight": {
+            "titles": {
+              "seo": "순항 미사일 최신 이슈와 핵심 내용 정리",
+              "home": "순항 미사일, 이란 신형 미사일 발사대 공개…혁명수비대 \"적군에 굴욕 줄것\" 관련 확인할 점",
+              "topic": "순항 미사일",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "(서울=연합뉴스) 곽민서 기자 = 이란이 새로운 미사일 발사대를 공개하며 미국을 향해 재차 강경한 메시지를 발신했다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "러시아제 순항미사일 잔해가 폴란드 영토에서 발견된 사건을 계기로 북대서양조약기구(나토·NATO)가 동부전선 방어 태세 강화에 나섰다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.yna.co.kr/view/AKR20261123022200009?input=1195m",
+                "press": "연합뉴스"
+              },
+              {
+                "url": "https://www.seoul.co.kr/news/international/europe/2026/11/24/20261124500044?wlog_tag3=naver",
+                "press": "서울신문"
+              }
+            ],
+            "images": [
+              "https://img5.yna.co.kr/photo/etc/af/2026/11/13/PAF20261113227301009_P4.jpg"
+            ],
+            "press": [
+              "연합뉴스",
+              "서울신문"
+            ],
+            "headlines": [
+              "이란 신형 미사일 발사대 공개…혁명수비대 \"적군에 굴욕 줄것\"",
+              "종전 후 대비 훈련 중 날아든 러 미사일 …폴란드, 나토에 F-35·조기경보..."
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-24T04:09:40.571Z"
+          }
+        },
+        {
+          "id": "naver-7",
+          "rank": 7,
+          "keyword": "강은희 교육감 재산 허위신고 송치",
+          "title": "강은희 교육감 재산 허위신고 송치",
+          "rawKeyword": "강은희 교육감 재산 허위신고 송치",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 94,
+          "source": "naver",
+          "expansions": [
+            "강은희 교육감",
+            "송치 뜻",
+            "검찰 송치 뜻",
+            "송치돈까스",
+            "송치 가죽",
+            "공소청 송치",
+            "불구속 송치",
+            "경기도교육감"
+          ],
+          "expansionSeed": "강은희",
+          "insight": {
+            "titles": {
+              "seo": "강은희 교육감 재산 허위신고 송치 최신 이슈와 핵심 내용 정리",
+              "home": "강은희 교육감 재산 허위신고 송치, 경찰, '재산 허위 신고' 강은희 교육감 기소 의견 송치 관련 확인할 점",
+              "topic": "강은희 교육감 재산 허위신고 송치",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "지난 6·3 지방선거 교육감 선거와 관련해 허위 재산 신고를 한 혐의로 고발돼 수사를 받아온 강은희 대구시교육감이 공소청에 송치됐다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "대구경찰청은 6·3지방선거 당시 명의신탁한 부부공동 소유 주식을 누락한 채 허위 로 재산 을 신고 하는 등 혐의(공직선거법상 허위 사실공표)로 고발된 강은희 대구시 교육감 을 수사해 공소청에 송치 했다고 24일 밝혔다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.nocutnews.co.kr/news/6611657?utm_source=naver&utm_medium=article&utm_campaign=20261124113201",
+                "press": "노컷뉴스"
+              },
+              {
+                "url": "https://www.yna.co.kr/view/AKR20261124077700053?input=1195m",
+                "press": "연합뉴스"
+              }
+            ],
+            "images": [
+              "https://file2.nocutnews.co.kr/newsroom/image/2026/11/24/202611241130449328_0.jpg"
+            ],
+            "press": [
+              "노컷뉴스",
+              "연합뉴스"
+            ],
+            "headlines": [
+              "경찰, '재산 허위 신고' 강은희 교육감 기소 의견 송치",
+              "경찰, 허위 재산 신고 혐의로 고발된 강은희 대구 교육감 송치"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-24T04:09:40.571Z"
+          }
+        },
+        {
+          "id": "naver-8",
+          "rank": 8,
+          "keyword": "이종석 국정원장 정보위 출석",
+          "title": "이종석 국정원장 정보위 출석",
+          "rawKeyword": "이종석 국정원장 정보위 출석",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 93,
+          "source": "naver",
+          "expansions": [
+            "이종석 아이유",
+            "이종석 나무위키",
+            "이종석 김우빈",
+            "이종석 권나라",
+            "이종석 새",
+            "아이유 이종석",
+            "이종석 w",
+            "이종석 신민아"
+          ],
+          "expansionSeed": "이종석",
+          "insight": {
+            "titles": {
+              "seo": "이종석 국정원장 정보위 출석 최신 이슈와 핵심 내용 정리",
+              "home": "이종석 국정원장 정보위 출석, 정보위 전체회의 출석한 이종석 국정원장 관련 확인할 점",
+              "topic": "이종석 국정원장 정보위 출석",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "(서울=연합뉴스) 이종석 국가정보원장이 24일 국회에서 열린 정보위원회 전체회의에 출석한 가운데 이양수 정보위원장이 의사봉을 두드리고 있다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "국회사진기자단 = 이종석 국정원장 이 29일 오전 국가정보원 청사에서 열린 국회 정보위 의 국정원에 대한 국정감사에 출석 하고 있다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.yna.co.kr/view/PYH20261124082900013?input=1196m",
+                "press": "연합뉴스"
+              },
+              {
+                "url": "https://www.newsis.com/view/NISI20261029_0021509961",
+                "press": "뉴시스"
+              }
+            ],
+            "images": [
+              "https://img0.yna.co.kr/photo/yna/YH/2026/11/24/PYH2026112408290001300_P4.jpg"
+            ],
+            "press": [
+              "연합뉴스",
+              "뉴시스"
+            ],
+            "headlines": [
+              "정보위 전체회의 출석한 이종석 국정원장",
+              "이종석 국정원장 , 국정감사 출석"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-24T04:09:40.571Z"
+          }
+        },
+        {
+          "id": "naver-9",
+          "rank": 9,
+          "keyword": "호세 수아레즈",
+          "title": "호세 수아레즈",
+          "rawKeyword": "호세 수아레즈",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 92,
+          "source": "naver",
+          "expansions": [
+            "호세 수아레즈",
+            "호세쿠엘보",
+            "호세 무뇨스",
+            "호세 페르난데스",
+            "펠릭스 호세",
+            "호세 수아레스",
+            "루이스 수아레즈",
+            "알버트 수아레즈"
+          ],
+          "expansionSeed": "호세",
+          "insight": {
+            "titles": {
+              "seo": "호세 수아레즈 최신 이슈와 핵심 내용 정리",
+              "home": "호세 수아레즈, 두산, '최고 154㎞' 현역 빅리거 투수 수아레즈 영입 관련 확인할 점",
+              "topic": "호세 수아레즈",
+              "topicGroup": "네이버 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "MLB 통산 151경기 23승 33패 ERA 5.37 \"기대에 부응해 팀 우승에 보탬 되겠다\"",
+                "sourceIndex": 0
+              },
+              {
+                "text": "프로야구 두산베어스가 메이저리그에서 두 시즌 연속 8승을 거둔 왼손 투수 호세 수아레즈 (28)를 영입했다. 두산베어스 새 외국인투수 호세 수아레스.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.newsis.com/view/NISX20261124_0003880767",
+                "press": "뉴시스"
+              },
+              {
+                "url": "https://www.edaily.co.kr/News/Read?newsId=02709286645649000&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+                "press": "이데일리"
+              }
+            ],
+            "images": [
+              "https://img1.newsis.com/2026/11/24/NISI20261124_0002300648_web.jpg"
+            ],
+            "press": [
+              "뉴시스",
+              "이데일리"
+            ],
+            "headlines": [
+              "두산, '최고 154㎞' 현역 빅리거 투수 수아레즈 영입",
+              "두산베어스, '빅리그 통산 23승' 좌완 호세 수아레스 영입"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-24T04:09:40.571Z"
+          }
+        },
+        {
+          "id": "naver-10",
+          "rank": 10,
           "keyword": "국민주권의 날 지정",
           "title": "국민주권의 날 지정",
           "rawKeyword": "국민주권의 날 지정",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 97,
+          "priority": 91,
           "source": "naver",
           "expansions": [
             "국민주권의날",
@@ -216,411 +586,43 @@
           "insight": {
             "titles": {
               "seo": "국민주권의 날 지정 최신 이슈와 핵심 내용 정리",
-              "home": "국민주권의 날 지정, 이 대통령 \"빛의 혁명 12·3 국가기념일 '국민주권의 날'로 지정\" 관련 확인할 점",
+              "home": "국민주권의 날 지정, [속보]李대통령 \"12월3일, 국가기념일 '국민주권의 날' 지정 안건 처리 예정\" - 머니투데이 관련 확인할 점",
               "topic": "국민주권의 날 지정",
               "topicGroup": "네이버 실시간 검색어"
             },
             "facts": [
               {
-                "text": "조재완 김경록 기자 = 이재명 대통령은 24일 \"오늘 국무회의에서는 빛의 혁명이 있었던 12월 3일을 국가 기념일인 국민 주권의 날 로 지정 하는 안건을 처리할 예정\"이라고 밝혔다.",
+                "text": "[속보]李대통령 \"12월3일, 국가기념일 '국민주권의 날' 지정 안건 처리 예정\" [the300] (서울=뉴스1) 허경 기자 = 이재명 대통령이 24일 청와대에서 열린 국무회의에서 의사봉을 두드리고 있다. 2026.11.24/뉴스1 Copyright © 뉴스1. All rights reserved.",
                 "sourceIndex": 0
               },
               {
-                "text": "이재명 대통령이 24일 \"오늘 국무회의에서는 빛의 혁명이 있었던 12월 3일을 국가 기념일인 국민 주권의 날 로 지정 하는 안건을 처리할 예정\"이라고 밝혔다. 이 대통령은 이날 청와대에서 국무회의를 주재하고 \"2024년 12월 3일 대한민국의 헌정 질서는 중대한 위기에 직면했다.",
+                "text": "조재완 김경록 기자 = 이재명 대통령은 24일 \"오늘 국무회의에서는 빛의 혁명이 있었던 12월 3일을 국가 기념일인 국민 주권의 날 로 지정 하는 안건을 처리할 예정\"이라고 밝혔다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
+              {
+                "url": "https://www.mt.co.kr/politics/2026/11/24/2026112410082482330",
+                "press": "머니투데이"
+              },
               {
                 "url": "https://www.newsis.com/view/NISX20261124_0003880591",
                 "press": "뉴시스"
-              },
-              {
-                "url": "http://www.inews24.com/view/2029638",
-                "press": "아이뉴스24"
               }
             ],
             "images": [
-              "https://img1.newsis.com/2026/11/24/NISI20261124_0021543522_web.jpg"
+              "https://thumb.mt.co.kr/cdn-cgi/image/f=avif/21/2026/11/2026112410082482330_1.jpg"
             ],
             "press": [
-              "뉴시스",
-              "아이뉴스24"
+              "머니투데이",
+              "뉴시스"
             ],
             "headlines": [
-              "이 대통령 \"빛의 혁명 12·3 국가기념일 '국민주권의 날'로 지정\"",
-              "李 \"빛의 혁명 12월 3일, 국가 기념일로 지정 \""
+              "[속보]李대통령 \"12월3일, 국가기념일 '국민주권의 날' 지정 안건 처리 예정\" - 머니투데이",
+              "이 대통령 \"빛의 혁명 12·3 국가기념일 ' 국민주권의 날 '로 지정 \""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
-          }
-        },
-        {
-          "id": "naver-5",
-          "rank": 5,
-          "keyword": "남도일보",
-          "title": "남도일보",
-          "rawKeyword": "남도일보",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 96,
-          "source": "naver",
-          "expansions": [
-            "남도일보 기사",
-            "남도일보 대표",
-            "남도일보오늘의운세",
-            "남도일보tv",
-            "남도일보운세",
-            "남도일보 유자",
-            "남도일보매출",
-            "남도일보 무안"
-          ],
-          "expansionSeed": "남도일보",
-          "insight": {
-            "titles": {
-              "seo": "남도일보 최신 이슈와 핵심 내용 정리",
-              "home": "남도일보, [어반스케치 남도의 풍경] 전남대학교 캠퍼스 5.18광장의 가을색 [23] - 남도일보 관련 확인할 점",
-              "topic": "남도일보",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "그림으로 보도한다는 생각에서 남도일보 의 어반스케치 기자로 불리고 싶어한다. 의미는 (사)푸른길의 답사모임 '잇다'에서 15년간 해오던 광주 답사를 다른 형식으로 잇고 았다, 회원으로서 광주의 도시풍경 공동체를 지향하며, 인스타그램(아이디 hakoze_bohm)을 통해 발신하고 있다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "국민 일보 가 한국 실험미술의 거장 이건용 미술가의 후원을 받아 신경다양성(자폐·정신장애 등) 신진 작가 발굴을 위해 제정한 제5회 ‘국민 일보 아르브뤼미술상’ 대상에 전민재(26·사진)씨의 회화 ‘눈 감고 둥둥’이 선정됐다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.namdonews.com/news/articleView.html?idxno=930136",
-                "press": "남도일보"
-              },
-              {
-                "url": "https://www.kmib.co.kr/article/20261122501319",
-                "press": "국민일보"
-              }
-            ],
-            "images": [
-              "https://cdn.namdonews.com/news/photo/202611/930136_639411_5616.jpg"
-            ],
-            "press": [
-              "남도일보",
-              "국민일보"
-            ],
-            "headlines": [
-              "[어반스케치 남도의 풍경] 전남대학교 캠퍼스 5.18광장의 가을색 [23] - 남도일보",
-              "제5회 국민 일보 아르브뤼 미술상 대상에 전민재씨"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
-          }
-        },
-        {
-          "id": "naver-6",
-          "rank": 6,
-          "keyword": "하이닉스 주가",
-          "title": "하이닉스 주가",
-          "rawKeyword": "하이닉스 주가",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 95,
-          "source": "naver",
-          "expansions": [
-            "SK하이닉스 주가",
-            "삼성전자 하이닉스 주가",
-            "하이닉스 주가전망",
-            "삼성 하이닉스 주가",
-            "SK하이닉스 주가 전망",
-            "에스케이하이닉스 주가",
-            "삼성전자 sk하이닉스 주가",
-            "오늘 sk하이닉스 주가"
-          ],
-          "expansionSeed": "하이닉스 주가",
-          "insight": {
-            "titles": {
-              "seo": "하이닉스 주가 최신 이슈와 핵심 내용 정리",
-              "home": "하이닉스 주가, 글로벌IB, 삼전닉스 목표가 잇달아 하향…2028년 업황 둔화 우려 관련 확인할 점",
-              "topic": "하이닉스 주가",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "(서울=연합뉴스) 정회인 기자 = 글로벌 투자은행(IB)들이 삼성전자와 SK하이닉스의 목표주가를 잇달아 낮추고 있다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "이로써 윤 사장은 하루 만에 2억원이 넘는 평가이익을 기록 중이다. 이 시각 현재 넥스트레이드(NXT) 프리마켓에서 SK 하이닉스 주가 는 전날 대비 12.18% 뛴 121만8000원을 기록 중이다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.yna.co.kr/view/AKR20261123166100008?input=1195m",
-                "press": "연합뉴스"
-              },
-              {
-                "url": "https://www.hankyung.com/article/2026112456346",
-                "press": "한국경제"
-              }
-            ],
-            "images": [
-              "https://img2.yna.co.kr/photo/cms/2026/10/29/29/PCM20261029000029990_P4.jpg"
-            ],
-            "press": [
-              "연합뉴스",
-              "한국경제"
-            ],
-            "headlines": [
-              "글로벌IB, 삼전닉스 목표가 잇달아 하향…2028년 업황 둔화 우려",
-              "젠슨 황 복귀 하루 전 16억 매입…SK하닉 사장 '절묘한 타이밍'"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
-          }
-        },
-        {
-          "id": "naver-7",
-          "rank": 7,
-          "keyword": "전광훈 구속영장 신청",
-          "title": "전광훈 구속영장 신청",
-          "rawKeyword": "전광훈 구속영장 신청",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 94,
-          "source": "naver",
-          "expansions": [
-            "전광훈 목사",
-            "전광훈목사근황",
-            "전광훈 교회",
-            "전광훈 알박기",
-            "전광훈 나무위키",
-            "전광훈사랑교회",
-            "전광훈영어",
-            "전광훈교회 조합"
-          ],
-          "expansionSeed": "전광훈",
-          "insight": {
-            "titles": {
-              "seo": "전광훈 구속영장 신청 최신 이슈와 핵심 내용 정리",
-              "home": "전광훈 구속영장 신청, [단독] 경찰, '불법 정치자금 의혹' 전광훈 목사 구속영장 신청 관련 확인할 점",
-              "topic": "전광훈 구속영장 신청",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "교회 기부금을 모아 자유통일당에 불법으로 건넨 의혹을 받고 있는 전광훈 사랑제일교회 목사에 대해 경찰이 신병 확보에 나섰습니다. 서울경찰청 반부패수사대는 어제(23일) 정치자금법 위반 혐의로 전 목사에 대한 구속영장 을 서울북부지방공소청에 신청 했습니다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "경찰, 정치자금법 위반 혐의 적용 교회 자금을 자유통일당에 쓴 혐의로 전광훈 사랑제일교회 목사에 대한 구속영장 이 신청 됐다. 24일 경찰에 따르면 서울경찰청 광역수사단 반부패수사대는 전날 전 목사에 대해 정치자금법 위반 혐의 구속영장 을 서울북부지방공소청에 신청 했다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "http://mbn.mk.co.kr/pages/news/newsView.php?category=mbn00009&news_seq_no=5232585",
-                "press": "MBN"
-              },
-              {
-                "url": "https://www.yna.co.kr/view/AKR20261124069800004?input=1195m",
-                "press": "연합뉴스"
-              }
-            ],
-            "images": [
-              "https://img.mbn.co.kr//filewww/news/2026/11/24/17954780966b04d2506b2eb.jpg"
-            ],
-            "press": [
-              "MBN",
-              "연합뉴스"
-            ],
-            "headlines": [
-              "[단독] 경찰, '불법 정치자금 의혹' 전광훈 목사 구속영장 신청",
-              "\"교회 돈 102억 자유통일당에\"… 전광훈 목사 구속영장 신청 돼"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
-          }
-        },
-        {
-          "id": "naver-8",
-          "rank": 8,
-          "keyword": "세종의사당",
-          "title": "세종의사당",
-          "rawKeyword": "세종의사당",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 93,
-          "source": "naver",
-          "expansions": [
-            "국회세종의사당",
-            "세종 의사당 부지",
-            "세종의사당 건립",
-            "세종의사당 예산"
-          ],
-          "expansionSeed": "세종의사당",
-          "insight": {
-            "titles": {
-              "seo": "세종의사당 최신 이슈와 핵심 내용 정리",
-              "home": "세종의사당, 황운하 '국회의사당 세종 완전 이전 국회법' 개정안 발의 관련 확인할 점",
-              "topic": "세종의사당",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "황운하 '국회의사당 세종 완전 이전 국회법' 개정안 발의장동열 기자2026.11.23 오후 03:52구글에서 뉴스1 즐겨찾기AI 요약 정보황운하 의원, 국회법 개정안 대표 발의세종의사당 ‘분원’ 설치 조항 삭제 추진황 의원 “국회 완전 이전 위한 법률 정비”구글에서 뉴스1 즐겨찾기세종의사당 '분원' 설치 규정 삭제가 핵심황운하 조국혁신당 의원이 4일 오전 세종시 정부세종청사 앞에서 세종시장 출마를 선언하며 세종시 발전을 위한 비전과 공약을 발표하고 있다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "개정안의 핵심은 현행 국회법 제22조의5에 규정된 국회 세종의사당 설치 조항을 삭제하는 것으로, 국회 세종의사당 을 별도의 분원으로 규정한 현행 법체계를 정비하고 국회 전체의 세종 이전을 추진하는 행정수도특별법과 법률 간 정합성을 확보하겠다는 것이 골자다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.news1.kr/local/sejong-chungbuk/6363107",
-                "press": "뉴스1"
-              },
-              {
-                "url": "http://www.cctimes.kr/news/articleView.html?idxno=938697",
-                "press": "충청타임즈"
-              }
-            ],
-            "images": [
-              "https://i3n.news1.kr/system/photos/2026/3/4/7778743/high.jpg"
-            ],
-            "press": [
-              "뉴스1",
-              "충청타임즈"
-            ],
-            "headlines": [
-              "황운하 '국회의사당 세종 완전 이전 국회법' 개정안 발의",
-              "황운하 주도, 국회 의사당 전부 세종 시 이전 '국회법 개정안' 발의"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
-          }
-        },
-        {
-          "id": "naver-9",
-          "rank": 9,
-          "keyword": "조규성 자책골 유도",
-          "title": "조규성 자책골 유도",
-          "rawKeyword": "조규성 자책골 유도",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 92,
-          "source": "naver",
-          "expansions": [
-            "조규성 나무위키",
-            "축구선수 조규성",
-            "조규성 리즈",
-            "조규성 국대",
-            "조규성 연봉",
-            "조규성포지션",
-            "자책골 뜻",
-            "자책골 영어"
-          ],
-          "expansionSeed": "조규성",
-          "insight": {
-            "titles": {
-              "seo": "조규성 자책골 유도 최신 이슈와 핵심 내용 정리",
-              "home": "조규성 자책골 유도, 미트윌란 조규성, 시즌 6호 골‥홍현석은 자책골 유도 관련 확인할 점",
-              "topic": "조규성 자책골 유도",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "덴마크 프로축구 미트윌란의 조규성 선수가 결승골로 팀 승리를 이끌었습니다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "후반 4분 에메필레의 패스를 받은 조규성 이 슈팅을 때렸지만 빗나갔다. 미트윌란이 다시 한 번 카드를 사용했다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://imnews.imbc.com/news/2026/sports/article/6868020_36946.html",
-                "press": "MBC"
-              },
-              {
-                "url": "https://www.fourfourtwo.co.kr/news/articleView.html?idxno=101219",
-                "press": "포포투"
-              }
-            ],
-            "images": [
-              "https://image.imnews.imbc.com/news/2026/sports/article/__icsFiles/afieldfile/2026/11/24/kds_20261124_12.jpg"
-            ],
-            "press": [
-              "MBC",
-              "포포투"
-            ],
-            "headlines": [
-              "미트윌란 조규성, 시즌 6호 골‥홍현석은 자책골 유도",
-              "[super.review] ' 조규성 결승골+홍현석 자책골 유도 ' 미트윌란, 브뢴비 2..."
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
-          }
-        },
-        {
-          "id": "naver-10",
-          "rank": 10,
-          "keyword": "홈플러스 온라인 배송 중단",
-          "title": "홈플러스 온라인 배송 중단",
-          "rawKeyword": "홈플러스 온라인 배송 중단",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 91,
-          "source": "naver",
-          "expansions": [
-            "홈플러스 휴무일",
-            "홈플러스 익스프레스",
-            "홈플러스 폐점",
-            "홈플러스 회생",
-            "홈플러스몰",
-            "홈플러스 문화센터",
-            "홈플러스 전단",
-            "홈플러스 인수"
-          ],
-          "expansionSeed": "홈플러스",
-          "insight": {
-            "titles": {
-              "seo": "홈플러스 온라인 배송 중단 최신 이슈와 핵심 내용 정리",
-              "home": "홈플러스 온라인 배송 중단, 홈플러스, 26일부터 온라인 배송 중단…\"상품 수급 차질\" 관련 확인할 점",
-              "topic": "홈플러스 온라인 배송 중단",
-              "topicGroup": "네이버 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "예약 주문 자동 취소·전액 환불…'매각' 익스프레스는 정상 운영 기업회생 절차를 밟고 있는 홈플러스 가 자금난에 따른 상품 수급 차질로 오는 26일부터 온라인 배송 서비스를 중단 한다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "이번 온라인 배송 중단 은 최근까지도 홈플러스 납품업체 대금 지급이 지연되고 이에 따른 상품 공급 불안이 계속되는 데 따른 불가피한 조치로 풀이된다. 유통업계에선 배송 중단 이 장기화될 경우 홈플러스 고객 이탈이 가속화될 것이라는 전망이 나온다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.yna.co.kr/view/AKR20261124019600030?input=1195m",
-                "press": "연합뉴스"
-              },
-              {
-                "url": "http://www.inews24.com/view/2029537",
-                "press": "아이뉴스24"
-              }
-            ],
-            "images": [
-              "https://img1.yna.co.kr/photo/yna/YH/2026/11/08/PYH2026110802570001300_P4.jpg"
-            ],
-            "press": [
-              "연합뉴스",
-              "아이뉴스24"
-            ],
-            "headlines": [
-              "홈플러스, 26일부터 온라인 배송 중단…\"상품 수급 차질\"",
-              "홈플러스 , 26일부터 온라인 배송 중단 …재개 시점 미정"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         }
       ]
@@ -632,73 +634,11 @@
         {
           "id": "daum-1",
           "rank": 1,
-          "keyword": "박보경 대시 대체 투입",
-          "title": "박보경 대시 대체 투입",
-          "rawKeyword": "박보경 대시 대체 투입",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 100,
-          "source": "daum",
-          "expansions": [
-            "박보경 배우",
-            "진선규 박보경",
-            "박보경 나무위키",
-            "박보경 진선규",
-            "배우 박보경",
-            "박보경프로",
-            "우씨왕후 박보경",
-            "레이디두아 박보경"
-          ],
-          "expansionSeed": "박보경",
-          "insight": {
-            "titles": {
-              "seo": "박보경 대시 대체 투입 최신 이슈와 핵심 내용 정리",
-              "home": "박보경 대시 대체 투입, 김서형, 건강 문제로 ' 대시 ' 하차… 박보경 대체 투입 관련 확인할 점",
-              "topic": "박보경 대시 대체 투입",
-              "topicGroup": "다음 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "배우 김서형이 건강 문제로 SBS 새 드라마 ' 대시 '에서 하차하고 박보경 이 대체 투입 된다. 24일 SBS에 따르면 김서형은 최근 건강 악화로 인해 ' 대시 '에서 하차했다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "구체적인 건강 상태와 기존 촬영분 처리 방안은 알려지지 않았으며, 김서형의 빈자리는 배우 박보경 이 대신할 예정이다. 김서형은 2023년 4월 방송된 ENA 드라마 '종이달' 이후 약 4년 만에 TV 드라마 복귀를 앞두고 있었기에, 그의 열연을 기다렸던 팬들에게 아쉬움을 남기게 됐다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://news.jtbc.co.kr/article/NB12329523?influxDiv=NAVER",
-                "press": "JTBC"
-              },
-              {
-                "url": "https://www.newsis.com/view/NISX20261124_0003880341",
-                "press": "뉴시스"
-              }
-            ],
-            "images": [
-              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F437%2F2026%2F11%2F24%2F522150.jpg&type=fface200_200&expire=2&refresh=true"
-            ],
-            "press": [
-              "JTBC",
-              "뉴시스"
-            ],
-            "headlines": [
-              "김서형, 건강 문제로 ' 대시 ' 하차… 박보경 대체 투입",
-              "김서형, 건강 악화로 드라마 ' 대시 ' 하차… 박보경 대체 투입"
-            ],
-            "extraction": "search-card",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
-          }
-        },
-        {
-          "id": "daum-2",
-          "rank": 2,
           "keyword": "강금실 국정원장 후보자",
           "title": "강금실 국정원장 후보자",
           "rawKeyword": "강금실 국정원장 후보자",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 99,
+          "priority": 100,
           "source": "daum",
           "expansions": [
             "강금실 국정원장",
@@ -752,43 +692,43 @@
               "이 대통령, 국정원장 후보자 에 강금실 전 법무장관 지명"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         },
         {
-          "id": "daum-3",
-          "rank": 3,
-          "keyword": "한준호 행안부장관 후보",
-          "title": "한준호 행안부장관 후보",
-          "rawKeyword": "한준호 행안부장관 후보",
+          "id": "daum-2",
+          "rank": 2,
+          "keyword": "한준호 발탁",
+          "title": "한준호 발탁",
+          "rawKeyword": "한준호 발탁",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 98,
+          "priority": 99,
           "source": "daum",
           "expansions": [
-            "행안부장관 한준호",
-            "행안부장관 후보",
-            "한준호 행안부장관",
-            "행안부장관 후보자",
             "한준호의원",
             "한준호 나무위키",
             "한준호 국회의원",
-            "한준호 프로필"
+            "행안부장관 한준호",
+            "한준호 프로필",
+            "한준호 아나운서",
+            "한준호 행안부",
+            "한준호 장관"
           ],
           "expansionSeed": "한준호",
           "insight": {
             "titles": {
-              "seo": "한준호 행안부장관 후보 최신 이슈와 핵심 내용 정리",
-              "home": "한준호 행안부장관 후보, KBS 뉴스 관련 확인할 점",
-              "topic": "한준호 행안부장관 후보",
+              "seo": "한준호 발탁 최신 이슈와 핵심 내용 정리",
+              "home": "한준호 발탁, 외교·안보라인 전면 교체… 한준호 ·강유정도 ‘ 발탁 ’ [지금뉴스] 관련 확인할 점",
+              "topic": "한준호 발탁",
               "topicGroup": "다음 실시간 검색어"
             },
             "facts": [
               {
-                "text": "한준호 민주당 의원은 행안부 장관 후보 자로 발탁됐습니다.",
+                "text": "한준호 민주당 의원은 행안부 장관 후보자로 발탁 됐습니다.",
                 "sourceIndex": 0
               },
               {
-                "text": "한준호 행안부 장관 후보 자는 전북 전주 출신으로 우석고와 연세대 수학과를 졸업했다. MBC 아나운서 출신으로 대통령비서실 국민소통수석실 행정관을 거쳐 21·22대 국회의원에 당선됐다.",
+                "text": "두 부처엔 이재명 대통령과 정치적 호흡을 맞춰 온 여권 핵심 인사들이 나란히 발탁 됐습니다. 행안부 장관 후보자엔 언론인 출신의 경기 고양을 재선 한준호 더불어민주당 의원이 지명됐습니다.",
                 "sourceIndex": 1
               }
             ],
@@ -798,169 +738,112 @@
                 "press": "KBS"
               },
               {
-                "url": "https://www.newsis.com/view/NISX20261123_0003879544",
-                "press": "뉴시스"
+                "url": "http://www.mbn.co.kr/pages/news/newsView.php?news_seq_no=5232542",
+                "press": "MBN"
               }
             ],
             "images": [
-              "https://news.kbs.co.kr/resource/image/common/img_meta.png"
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F056%2F2026%2F11%2F23%2F12299301.jpg&type=fface200_200&expire=2&refresh=true"
             ],
             "press": [
               "KBS",
-              "뉴시스"
+              "MBN"
             ],
             "headlines": [
-              "KBS 뉴스",
-              "이 대통령, 국정원장 후보 자에 강금실 지명…외교 장관 임웅순·통일 장관 ..."
+              "외교·안보라인 전면 교체… 한준호 ·강유정도 ‘ 발탁 ’ [지금뉴스]",
+              "행안 한준호 ·문체 강유정 발탁 …'국정 실행력'에 방점?"
+            ],
+            "extraction": "search-card",
+            "collectedAt": "2026-11-24T04:09:40.571Z"
+          }
+        },
+        {
+          "id": "daum-3",
+          "rank": 3,
+          "keyword": "정상빈 1골 1도움",
+          "title": "정상빈 1골 1도움",
+          "rawKeyword": "정상빈 1골 1도움",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 98,
+          "source": "daum",
+          "expansions": [
+            "정상빈 기자",
+            "정상빈혈수치",
+            "1골드 가격",
+            "1골드 얼마",
+            "1골드 무게",
+            "조던1 골프화",
+            "1고르뜻",
+            "1고루 뜻"
+          ],
+          "expansionSeed": "정상빈",
+          "insight": {
+            "titles": {
+              "seo": "정상빈 1골 1도움 최신 이슈와 핵심 내용 정리",
+              "home": "정상빈 1골 1도움, '침묵' 손흥민, '1골 1도움' 정상빈에 덜미…MLS컵 PO 1R 탈락 위기(종합) 관련 확인할 점",
+              "topic": "정상빈 1골 1도움",
+              "topicGroup": "다음 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "기록한 정상빈 은 1골 1도움 맹활약을 펼쳐 세인트루이스에 귀중한 1차전 승리를 선사했다. 미국 입성 이후 LAFC와 통산 8차례 맞붙어 2승(1무 5패)에 그쳤고 한 골도 기록하지 못했지만, 이날 손흥민과 코리안 더비에서 득점포를 가동하며 기쁨을 만끽했다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "정상빈 은 기점 도움 을 적립했다. 후반전도 정상빈 의 시간이었다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.newsis.com/view/NISX20261124_0003880877",
+                "press": "뉴시스"
+              },
+              {
+                "url": "https://www.chosun.com/international/international_general/2026/11/24/P7KX5DO6MVBJ7C3EHHPRRWL2KI/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
+                "press": "조선일보"
+              }
+            ],
+            "images": [
+              "https://img1.newsis.com/2026/11/24/NISI20261124_0001773452_web.jpg"
+            ],
+            "press": [
+              "뉴시스",
+              "조선일보"
+            ],
+            "headlines": [
+              "'침묵' 손흥민, '1골 1도움' 정상빈에 덜미…MLS컵 PO 1R 탈락 위기(종합)",
+              "‘침묵’ 손흥민 앞에서… 세인트루이스 정상빈 1골 1도움 폭발"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         },
         {
           "id": "daum-4",
           "rank": 4,
-          "keyword": "젠슨 황 CEO 복귀",
-          "title": "젠슨 황 CEO 복귀",
-          "rawKeyword": "젠슨 황 CEO 복귀",
+          "keyword": "박보경 대시 합류",
+          "title": "박보경 대시 합류",
+          "rawKeyword": "박보경 대시 합류",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
           "priority": 97,
           "source": "daum",
           "expansions": [
-            "젠슨황 복귀",
-            "젠슨황",
-            "젠슨황 여자",
-            "젠슨황 와이프",
-            "젠슨황 국적",
-            "젠슨황 스파이",
-            "젠슨황 나무위키",
-            "젠슨 황 배우자"
+            "박보경 배우",
+            "진선규 박보경",
+            "박보경 나무위키",
+            "박보경 진선규",
+            "배우 박보경",
+            "박보경프로",
+            "우씨왕후 박보경",
+            "레이디두아 박보경"
           ],
-          "expansionSeed": "젠슨",
+          "expansionSeed": "박보경",
           "insight": {
             "titles": {
-              "seo": "젠슨 황 CEO 복귀, 이사회가 미 정부 의견까지 들은 이유",
-              "home": "젠슨 황 CEO 복귀, 불륜 스캔들 뒤 이사회가 내린 뜻밖의 판단",
-              "topic": "젠슨 황 CEO 복귀",
-              "topicGroup": "다음 실시간 검색어",
-              "summary": "불륜 스캔들로 물러났던 젠슨 황 엔비디아 전 CEO가 23일 전격 복귀했다. 이사회는 미 정부 고위 관계자 의견을 수렴해 국가 안보에 위협이 없다고 판단했다.",
-              "aiTitled": true
-            },
-            "facts": [
-              {
-                "text": "",
-                "sourceIndex": 0
-              },
-              {
-                "text": "젠슨 황 엔비디아 최고경영자( CEO )가 복귀 첫날 본사를 찾아가 직원들에게 사과와 감사의 뜻을 표했다. 직원들은 박수를 치며 환호했다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.yna.co.kr/view/AKR20261124005500071?input=1195m",
-                "press": "연합뉴스"
-              },
-              {
-                "url": "https://www.kmib.co.kr/article/20261124500059",
-                "press": "국민일보"
-              }
-            ],
-            "images": [
-              "https://img5.yna.co.kr/photo/reuters/2026/11/21/PRU20261121049901009_P4.jpg"
-            ],
-            "press": [
-              "연합뉴스",
-              "국민일보"
-            ],
-            "headlines": [
-              "\"트럼프, 은밀히 젠슨 황 CEO 복귀 작전…밴스에 주말 특명\"",
-              "본사 찾아간 젠슨 황 “더 나은 CEO 될 것”… 직원들 박수·환호"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
-          }
-        },
-        {
-          "id": "daum-5",
-          "rank": 5,
-          "keyword": "이용철 청문회",
-          "title": "이용철 청문회",
-          "rawKeyword": "이용철 청문회",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 96,
-          "source": "daum",
-          "expansions": [
-            "이용철 청문회 일정"
-          ],
-          "expansionSeed": "이용철 청문회",
-          "insight": {
-            "titles": {
-              "seo": "이용철 청문회 최신 이슈와 핵심 내용 정리",
-              "home": "이용철 청문회, 이용철 법무장관 후보 오늘 청문회…'공소취소' 최대 뇌관 관련 확인할 점",
-              "topic": "이용철 청문회",
-              "topicGroup": "다음 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "이용철 법무장관 후보 오늘 청문회…'공소취소' 최대 뇌관업데이트 2026.11.24 오전 08:47 구글에서 뉴스1 즐겨찾기AI 요약 정보이용철 법무장관 후보자, 24일 국회 청문회공소취소 입장 불명확…최대 쟁점 전망이 대통령과 20여년 인연에 이해충돌 지적구글에서 뉴스1 즐겨찾기李 공소취소 가능성 열어놔…'성남라인' 분류 이해충돌 소지대장동 비리 연루설·근로기준법 위반 등 소명해야이용철 법무부 장관 후보자가 16일 오전 서울시 송파구 정의로 서울출입국·외국인청에 마련된 인사청문회 준비단 사무실로 출근하고 있다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "인사 청문회 에 출석한 이용철 법무부 장관 후보자가 새로운 형사사법 체계를 안착시켜 개혁을 완성하겠다고 밝혔다. 이 후보자는 24일 오전 국회에서 열린 청문회 모두발언에서 \"장관으로 취임하게 된다면 국민과 시대의 요구에 부응할 수 있도록 선진 법무행정을 실현하겠다\"고 말했다.",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.news1.kr/society/court-prosecution/6362819",
-                "press": "뉴스1"
-              },
-              {
-                "url": "https://www.yna.co.kr/view/AKR20261124056800004?input=1195m",
-                "press": "연합뉴스"
-              }
-            ],
-            "images": [
-              "https://i3n.news1.kr/system/photos/2026/11/16/8215212/high.jpg"
-            ],
-            "press": [
-              "뉴스1",
-              "연합뉴스"
-            ],
-            "headlines": [
-              "이용철 법무장관 후보 오늘 청문회…'공소취소' 최대 뇌관",
-              "이용철 법무후보 \"새 형사사법체계 안착시켜 개혁 완성하겠다\""
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
-          }
-        },
-        {
-          "id": "daum-6",
-          "rank": 6,
-          "keyword": "김서형 드라마 하차",
-          "title": "김서형 드라마 하차",
-          "rawKeyword": "김서형 드라마 하차",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 95,
-          "source": "daum",
-          "expansions": [
-            "김서형 드라마",
-            "김서형 배우",
-            "김서형 나무위키",
-            "김서형 종이달",
-            "김서형완도본점",
-            "버스 하차 미태그",
-            "간선하차",
-            "테이 라디오 하차"
-          ],
-          "expansionSeed": "김서형",
-          "insight": {
-            "titles": {
-              "seo": "김서형 드라마 하차 최신 이슈와 핵심 내용 정리",
-              "home": "김서형 드라마 하차, [단독] 김서형, 건강 악화로 SBS &lsquo;대시&rsquo; 하차... 빈자리 박보경이 채운다 - 일간스포츠 관련 확인할 점",
-              "topic": "김서형 드라마 하차",
+              "seo": "박보경 대시 합류 최신 이슈와 핵심 내용 정리",
+              "home": "박보경 대시 합류, [단독] 김서형, 건강 악화로 SBS &lsquo;대시&rsquo; 하차... 빈자리 박보경이 채운다 - 일간스포츠 관련 확인할 점",
+              "topic": "박보경 대시 합류",
               "topicGroup": "다음 실시간 검색어"
             },
             "facts": [
@@ -969,7 +852,7 @@
                 "sourceIndex": 0
               },
               {
-                "text": "배우 박보경이 ‘로또 1등도 출근합니다’의 흥행에 이어 SBS 새 드라마 ‘대시’에 합류하며 대세 행보를 이어간다. 24일 일간스포츠 취재에 따르면 박보경은 건강상의 이유로 ‘대시’에서 하차 한 김서형 의 빈자리를 채울 예정이다.",
+                "text": "‘ 대시 ’는 자신의 손으로 정의를 바로 세우려는 검사 민화영이 살인 용의자가 돼 버린 남편을 둘러싼 진실을 향해 끝까지 ‘ 대시 ’하는 미스터리 서스펜스 멜로 드라마다. 해당 역할은 새롭게 합류 한 박보경 이 소화할 예정이다.",
                 "sourceIndex": 1
               }
             ],
@@ -979,270 +862,397 @@
                 "press": "일간스포츠"
               },
               {
-                "url": "https://isplus.com/article/view/isp202611230151",
-                "press": "일간스포츠"
+                "url": "https://sports.donga.com/ent/article/all/20261124/135078690/1",
+                "press": "스포츠동아"
               }
             ],
             "images": [
               "https://isplus.com/data/isp/image/2024/01/10/isp20240110000145.800x.0.jpg"
             ],
             "press": [
-              "일간스포츠"
+              "일간스포츠",
+              "스포츠동아"
             ],
             "headlines": [
               "[단독] 김서형, 건강 악화로 SBS &lsquo;대시&rsquo; 하차... 빈자리 박보경이 채운다 - 일간스포츠",
-              "[단독] “로또 같았던 한해” 박보경, 차기작 정해졌다… ‘대시’로 명..."
+              "김서형 건강 악화로 ‘ 대시 하차…김보경 대체 투입 [공식]"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
+          }
+        },
+        {
+          "id": "daum-5",
+          "rank": 5,
+          "keyword": "2분기 임금근로 일자리 증가",
+          "title": "2분기 임금근로 일자리 증가",
+          "rawKeyword": "2분기 임금근로 일자리 증가",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 96,
+          "source": "daum",
+          "expansions": [
+            "2분기 뜻",
+            "2분기 재산세",
+            "2분기 애니 순위",
+            "2분기 부가세 신고",
+            "2분기 자동차세",
+            "2분기 재산세 기간",
+            "2분기 근로장려금",
+            "2분기 언제"
+          ],
+          "expansionSeed": "2분기",
+          "insight": {
+            "titles": {
+              "seo": "2분기 임금근로 일자리 증가 최신 이슈와 핵심 내용 정리",
+              "home": "2분기 임금근로 일자리 증가, 임금 근로 일자리 4년 만에 최대폭 증가했지만…20대만 뒷걸음질 관련 확인할 점",
+              "topic": "2분기 임금근로 일자리 증가",
+              "topicGroup": "다음 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "(세종=연합뉴스) 김수현 기자 = 올해 2분기 임금 근로 일자리가 4년 만에 가장 큰 폭으로 증가했다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "연구원은 종사상지위별 비중을 적용하면 비 임금근로 자가 약 1만2000명 증가 하고 임금근로 자는 감소한 것으로 추산했다. 건설업 취업자는 9000명, 농림어업은 5000명 증가 한 반면 도소매·숙박·음식점업은 1만1000명(10.5%) 감소했다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.yna.co.kr/view/AKR20261124075400002?input=1195m",
+                "press": "연합뉴스"
+              },
+              {
+                "url": "https://www.newsjeju.net/news/articleView.html?idxno=428810",
+                "press": "뉴스제주"
+              }
+            ],
+            "images": [
+              "https://img5.yna.co.kr/photo/yna/YH/2026/05/19/PYH2026051914670001300_P4.jpg"
+            ],
+            "press": [
+              "연합뉴스",
+              "뉴스제주"
+            ],
+            "headlines": [
+              "임금 근로 일자리 4년 만에 최대폭 증가했지만…20대만 뒷걸음질",
+              "제주경제 ' 일자리 만 증가 '…생산·소비·관광 회복은 제자리"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-24T04:09:40.571Z"
+          }
+        },
+        {
+          "id": "daum-6",
+          "rank": 6,
+          "keyword": "원태인 FA 협상 단계",
+          "title": "원태인 FA 협상 단계",
+          "rawKeyword": "원태인 FA 협상 단계",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 95,
+          "source": "daum",
+          "expansions": [
+            "원태인 fa",
+            "원태인 깡패",
+            "원태인 나무위키",
+            "원태인 기아",
+            "원태인 연봉",
+            "원태인 일본",
+            "원태인 롯데",
+            "삼성 원태인"
+          ],
+          "expansionSeed": "원태인",
+          "insight": {
+            "titles": {
+              "seo": "원태인 FA 협상 단계 최신 이슈와 핵심 내용 정리",
+              "home": "원태인 FA 협상 단계, \"원태인 관심 있다. 한번 연락했다\" 복병 등장, FA 의외의 큰 손 등장하나 관련 확인할 점",
+              "topic": "원태인 FA 협상 단계",
+              "topicGroup": "다음 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "'푸른 피의 에이스'를 향한 뜨거운 관심. NC 다이노스가 원태인 영입에 관심을 가지고 있다. 이번 FA 시장이 열린 후 아직 외부 이적은 일어나지 않고있다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "올해 삼성에선 외야수 구자욱, 선발투수 원태인 , 내야수 전병우가 FA 권리를 행사했다. 이번 FA 시장의 최대어는 단연 구자욱과 원태인 이다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.sportschosun.com/baseball/2026-11-24/202611240100146510013644",
+                "press": "스포츠조선"
+              },
+              {
+                "url": "https://www.spotvnews.co.kr/news/articleView.html?idxno=1021511",
+                "press": "스포티비뉴스"
+              }
+            ],
+            "images": [
+              "https://www.sportschosun.com/article/html/2026/11/24/2026112401001465100136441_w.jpg"
+            ],
+            "press": [
+              "스포츠조선",
+              "스포티비뉴스"
+            ],
+            "headlines": [
+              "\"원태인 관심 있다. 한번 연락했다\" 복병 등장, FA 의외의 큰 손 등장하나",
+              "삼성, 구자욱 만났다 \"의견 조율 중\"… 원태인 과도 협상 단계 →\"어떻게든..."
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         },
         {
           "id": "daum-7",
           "rank": 7,
-          "keyword": "안철수 강금실 지명",
-          "title": "안철수 강금실 지명",
-          "rawKeyword": "안철수 강금실 지명",
+          "keyword": "이태현 인사청문회",
+          "title": "이태현 인사청문회",
+          "rawKeyword": "이태현 인사청문회",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
           "priority": 94,
           "source": "daum",
           "expansions": [
-            "안철수 로블록스",
-            "강금실 나무위키",
-            "강금실프로필",
-            "강금실고향",
-            "강금실장관",
-            "강금실 국정원장",
-            "국정원장 강금실",
-            "강금실 학력"
+            "이태현헤어",
+            "이태현 씨름",
+            "kbs 이태현",
+            "kbs 사장 이태현",
+            "이태현 사장",
+            "이태현치과",
+            "진주 이태현헤어",
+            "이태현 kbs"
           ],
-          "expansionSeed": "안철수",
+          "expansionSeed": "이태현",
           "insight": {
             "titles": {
-              "seo": "안철수 강금실 지명 최신 이슈와 핵심 내용 정리",
-              "home": "안철수 강금실 지명, 안철수 \"美, 강금실 지명 '중국 간첩' 국정원 접수로 볼 것\" 관련 확인할 점",
-              "topic": "안철수 강금실 지명",
+              "seo": "이태현 인사청문회 최신 이슈와 핵심 내용 정리",
+              "home": "이태현 인사청문회, 국회, 이용철 법무장관·이태현 KBS 사장 후보 인사청문회 개최 관련 확인할 점",
+              "topic": "이태현 인사청문회",
               "topicGroup": "다음 실시간 검색어"
             },
             "facts": [
               {
-                "text": "안철수 국민의힘 의원이 강금실 국가정보원장 후보자 지명을 두고 미국이 “‘중국 간첩’의 국정원 접수로 판단하지 않겠느냐”며 이재명 대통령을 향해 지명 즉각 철회를 촉구했다. 안철수 국민의힘 의원.",
+                "text": "(서울=연합뉴스) 최주성 기자 = 국회는 24일 이용철 법무부 장관 후보자와 이태현 KBS 사장 후보자에 대한 인사청문회를 각각 개최한다.",
                 "sourceIndex": 0
               },
               {
-                "text": "이재명 대통령이 국가정보원장 후보자로 강금실 전 법무부 장관을 지명 한 가운데 안철수 국민의힘 의원이 강 후보자의 과거 중국 관련 활동을 문제 삼으며 지명 철회를 요구했다.",
+                "text": "한병도 \"적재적소 개각 환영…野, 청문회 정쟁의 장 활용 안 돼\"",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.edaily.co.kr/News/Read?newsId=01918806645649000&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
-                "press": "이데일리"
+                "url": "https://www.yna.co.kr/view/AKR20261123145400001?input=1195m",
+                "press": "연합뉴스"
               },
               {
-                "url": "https://www.mk.co.kr/article/12216764",
-                "press": "매일경제"
+                "url": "https://www.mt.co.kr/politics/2026/11/24/2026112409571561465",
+                "press": "머니투데이"
               }
             ],
             "images": [
-              "https://image.edaily.co.kr/images/Photo/files/NP/S/2026/11/PS26112400340.jpg"
+              "https://img1.yna.co.kr/photo/yna/YH/2026/11/24/PYH2026112405570001301_P4.jpg"
             ],
             "press": [
-              "이데일리",
-              "매일경제"
+              "연합뉴스",
+              "머니투데이"
             ],
             "headlines": [
-              "안철수 \"美, 강금실 지명 '중국 간첩' 국정원 접수로 볼 것\"",
-              "안철수 “중국 간첩이 국정원 접수했다고 보지 않겠나”… 강금실 지명 ..."
+              "국회, 이용철 법무장관·이태현 KBS 사장 후보 인사청문회 개최",
+              "한병도 \"적재적소 개각 환영…野, 청문회 정쟁의 장 활용 안 돼\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         },
         {
           "id": "daum-8",
           "rank": 8,
-          "keyword": "황영묵 SNS 부탁",
-          "title": "황영묵 SNS 부탁",
-          "rawKeyword": "황영묵 SNS 부탁",
+          "keyword": "목동역 인근 건물 화재",
+          "title": "목동역 인근 건물 화재",
+          "rawKeyword": "목동역 인근 건물 화재",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
           "priority": 93,
           "source": "daum",
           "expansions": [
-            "황영묵 아기",
-            "황영묵 나무위키",
-            "한화 황영묵",
-            "황영묵 연봉",
-            "냉장고를 부탁해",
-            "부탁 영어로",
-            "여름아 부탁해",
-            "양해 부탁드려요"
+            "목동역 맛집",
+            "목동역 카페",
+            "목동역 술집",
+            "목동역 미용실",
+            "목동역 한의원",
+            "목동역 한우",
+            "목동역 정형외과",
+            "목동역 횟집"
           ],
-          "expansionSeed": "황영묵",
+          "expansionSeed": "목동역",
           "insight": {
             "titles": {
-              "seo": "황영묵 SNS 부탁 최신 이슈와 핵심 내용 정리",
-              "home": "황영묵 SNS 부탁, \"추측하고 조롱·비난 멈춰주세요\"…29일 품절남 되는 황영묵, SNS에 전한 간곡한 부탁 관련 확인할 점",
-              "topic": "황영묵 SNS 부탁",
+              "seo": "목동역 인근 건물 화재 최신 이슈와 핵심 내용 정리",
+              "home": "목동역 인근 건물 화재, 목동역 인근 고층건물 화재 발생…1명 사망·5명 부상 관련 확인할 점",
+              "topic": "목동역 인근 건물 화재",
               "topicGroup": "다음 실시간 검색어"
             },
             "facts": [
               {
-                "text": "'간곡히 부탁드립니다.' 한화 이글스 내야수 황영묵(27) 오는 29일 결혼식을 올린다. 황영묵은 지인의 소개로 예비 신부를 만나 1년 3개월간의 교제 끝에 결혼이라는 결실을 맺게 됐다.",
+                "text": "호텔에서 화재 가 발생해 1명이 숨지고 5명이 다치는 인명피해가 났다. 서울시 교통정보시스템(TOPIS)에 따르면 목동로 홍익병원 앞에서 목동역 방면 하위 3개 차로의 차량 통행이 한때 제한됐다.",
                 "sourceIndex": 0
               },
               {
-                "text": "한편 황영묵 은 자신의 SNS 를 통해서도 결혼 소식을 전했다. 커뮤니티와 SNS 에서 출산일로 만남 시기를 추측하고 이를 이유로 조롱과 비난의 대상으로 삼고 있다는 사실을 알게 됐다.",
+                "text": "서울 양천구 목동역 인근 5층 건물 에서 불이 나 소방당국이 진화에 나섰다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.sportschosun.com/baseball/2026-11-24/202611240100146190013627",
-                "press": "스포츠조선"
+                "url": "https://www.hankyung.com/article/2026112466677",
+                "press": "한국경제"
               },
               {
-                "url": "http://www.osen.co.kr/article/G1112914157",
-                "press": "OSEN"
+                "url": "https://www.edaily.co.kr/News/Read?newsId=02368166645649000&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+                "press": "이데일리"
               }
             ],
             "images": [
-              "https://www.sportschosun.com/article/html/2026/11/24/2026112401001461900136272.jpg"
+              "https://img.hankyung.com/photo/202611/ZK.46526723.1.jpg"
             ],
             "press": [
-              "스포츠조선",
-              "OSEN"
+              "한국경제",
+              "이데일리"
             ],
             "headlines": [
-              "\"추측하고 조롱·비난 멈춰주세요\"…29일 품절남 되는 황영묵, SNS에 전한 간곡한 부탁",
-              "\"간곡히 부탁 드립니다\" 결혼식 앞둔 한화 황영묵 , SNS 에 직접 글 올려 호..."
+              "목동역 인근 고층건물 화재 발생…1명 사망·5명 부상",
+              "목동역 인근 5층 건물 서 화재 …목동로 3개 차로 통제"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         },
         {
           "id": "daum-9",
           "rank": 9,
-          "keyword": "장가연 당구선수",
-          "title": "장가연 당구선수",
-          "rawKeyword": "장가연 당구선수",
+          "keyword": "국가장학금",
+          "title": "국가장학금",
+          "rawKeyword": "국가장학금",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
           "priority": 92,
           "source": "daum",
           "expansions": [
-            "당구선수 장가연",
-            "장가연 당구선수",
-            "장가연 인스타",
-            "장가연 나무위키",
-            "장가연 당구",
-            "당구 장가연",
-            "장가연 배우",
-            "당구 장가연 인스타"
+            "국가장학금 신청기간",
+            "2027 국가장학금",
+            "국가장학금 소득분위",
+            "국가장학금 기준",
+            "국가장학금 신청",
+            "2027 국가장학금 신청",
+            "국가장학금 2차",
+            "국가장학금 지급일"
           ],
-          "expansionSeed": "장가연",
+          "expansionSeed": "국가장학금",
           "insight": {
             "titles": {
-              "seo": "장가연 당구선수 최신 이슈와 핵심 내용 정리",
-              "home": "장가연 당구선수, '국내 강자' 조재호&middot;강동궁&middot;최성원 나란히 64강행&hellip;'당구 여제' 김가영도 16강 진출 관련 확인할 점",
-              "topic": "장가연 당구선수",
+              "seo": "국가장학금 최신 이슈와 핵심 내용 정리",
+              "home": "국가장학금, 내년 1학기 국가장학금 신청하세요…내일부터 내년 1월7일까지 관련 확인할 점",
+              "topic": "국가장학금",
               "topicGroup": "다음 실시간 검색어"
             },
             "facts": [
               {
-                "text": "김민아(NH농협카드)는 승부치기 끝에 장가연 (우리금융캐피탈)을 꺾었으며 김보미(NH농협카드)는 오수정을 세트스코어 3-1로 제압했다.",
+                "text": "교육부와 한국장학재단은 2027학년도 국가장학금 1학기 1차 신청을 이달 24일 오전 9시부터 내년 1월 7일 오후 6시까지 받는다고 23일 밝혔다.",
                 "sourceIndex": 0
               },
               {
-                "text": "프로 당구 시즌 두 차례 우승을 차지한 조건휘(웰컴저축은행)가 6차 투어에서 세 번째 우승에 도전한다. 여자부에선 이우경(에스와이), 김민영· 장가연 (이상 우리금융캐피탈), 정보윤(하림) 등이 32위권 진입을 노린다.",
+                "text": "2027 국가장학금 신청기간…소득 기준·지원금액·지급일은 언제? 소득 기준, 월급만 보지 않는다…2027 국가장학금 1유형 얼마 받나?, 신청 방법은 2027 국가장학금 신청기간…소득 기준·지원금액·지급일은 언제 ©교육부2027학년도 1학기 국가장학금 신청은 11월 24일부터 내년 1월 7일까지다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.mydaily.co.kr/page/view/2026112408541333397",
-                "press": "마이데일리"
+                "url": "https://www.nocutnews.co.kr/news/6611004?utm_source=naver&utm_medium=article&utm_campaign=20261123131349",
+                "press": "노컷뉴스"
               },
               {
-                "url": "https://www.edaily.co.kr/News/Read?newsId=02187766645646376&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
-                "press": "이데일리"
+                "url": "https://www.bntnews.co.kr/article/view/bnt202611230275",
+                "press": "bnt뉴스"
               }
             ],
             "images": [
-              "https://img.mydaily.co.kr/photos/2026/11/24/2026112408530549067_x.jpg"
+              "https://file2.nocutnews.co.kr/newsroom/image/2026/11/23/202611231312486992_0.jpg"
             ],
             "press": [
-              "마이데일리",
-              "이데일리"
+              "노컷뉴스",
+              "bnt뉴스"
             ],
             "headlines": [
-              "'국내 강자' 조재호&middot;강동궁&middot;최성원 나란히 64강행&hellip;'당구 여제' 김가영도 16강 진출",
-              "조건휘, 시즌 3승 도전…프로 당구 PBA-LPBA 6차 투어 열린다"
+              "내년 1학기 국가장학금 신청하세요…내일부터 내년 1월7일까지",
+              "2027 국가장학금 신청기간…소득분위 기준은"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         },
         {
           "id": "daum-10",
           "rank": 10,
-          "keyword": "남다름 길스토리 전속계약",
-          "title": "남다름 길스토리 전속계약",
-          "rawKeyword": "남다름 길스토리 전속계약",
+          "keyword": "대리수능",
+          "title": "대리수능",
+          "rawKeyword": "대리수능",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
           "priority": 91,
           "source": "daum",
           "expansions": [
-            "남다름 배우",
-            "남다름 나무위키",
-            "남다름스타일",
-            "배우 남다름",
-            "남다름헤어",
-            "남다름 아역",
-            "남다름뷰티",
-            "전속계약 뜻"
+            "드라마 대리수능",
+            "대리수능 드라마",
+            "대리수능 몇부작",
+            "대리수능 나무위키",
+            "티빙 대리수능",
+            "대리수능 영화",
+            "영화 대리수능",
+            "대리수능 등장인물"
           ],
-          "expansionSeed": "남다름",
+          "expansionSeed": "대리수능",
           "insight": {
             "titles": {
-              "seo": "남다름 길스토리 전속계약 최신 이슈와 핵심 내용 정리",
-              "home": "남다름 길스토리 전속계약, [단독] 남다름, 김남길 품으로…길스토리이엔티 전속계약 관련 확인할 점",
-              "topic": "남다름 길스토리 전속계약",
-              "topicGroup": "다음 실시간 검색어"
+              "seo": "대리수능 티빙 오리지널 공개, 수능 소재 범죄 스릴러 제작발표회",
+              "home": "대리수능, 수능 소재 티빙 스릴러에 시선 쏠린 의외의 이유",
+              "topic": "대리수능",
+              "topicGroup": "다음 실시간 검색어",
+              "summary": "수능을 소재로 한 티빙 오리지널 범죄 스릴러 '대리수능'이 공개된다. 23일 서울 구로구 더 링크 호텔에서 제작발표회가 열렸다.",
+              "aiTitled": true
             },
             "facts": [
               {
-                "text": "배우 남다름이 김남길 소속사 길스토리이엔티로 향한다. 24일 iMBC연예 취재 결과 남다름은 최근 길스토리이엔티와 전속계약을 체결했다. 남다름은 지난 2009년 KBS 드라마 '꽃보다",
+                "text": "최근 ‘세무냥이’와 리트 만점자 故 이진우씨 등 인공지능(AI) 등을 활용한 시험 부정행위를 사건으로 한국 사회에서 시험의 공정성에 대한 논란이 확산하는 가운데, 대학수학능력시험(수능)을 소재로 한 범죄 스릴러가 공개되어서 주목을 끌고 있다.",
                 "sourceIndex": 0
               },
               {
-                "text": "길스토리 이엔티는 24일 남다름 과의 전속계약 을 알리며 그의 든든한 울타리가 될 것을 약속했다. 길스토리 이엔티는 배우 김남길이 설립한 종합 엔터테인먼트 기업이다.",
+                "text": "박윤호는 지난 23일 첫 공개된 티빙 오리지널 시리즈 ‘ 대리수능 ’에서 건태(차강윤)의 유일한 절친 주희동 역으로 등장했다. 극 중 희동은 부상을 입은 건태에게 가장 먼저 달려가 걱정스러운 마음을 드러냈다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "http://enews.imbc.com/News/RetrieveNewsInfo/525768",
-                "press": "MBC연예"
+                "url": "https://www.mediatoday.co.kr/news/articleView.html?idxno=338648",
+                "press": "미디어오늘"
               },
               {
-                "url": "http://www.joynews24.com/view/2029524",
-                "press": "조이뉴스24"
+                "url": "https://sports.khan.co.kr/article/202611241154013?pt=nv",
+                "press": "스포츠경향"
               }
             ],
             "images": [
-              "https://talkimg.imbc.com/TVianUpload/tvian/TViews/image/2026/11/23/b4fde78a-4d63-4765-b7a2-53a6a24358a9.jpg"
+              "https://cdn.mediatoday.co.kr/news/photo/202611/338648_486090_3855.jpg"
             ],
             "press": [
-              "MBC연예",
-              "조이뉴스24"
+              "미디어오늘",
+              "스포츠경향"
             ],
             "headlines": [
-              "[단독] 남다름, 김남길 품으로…길스토리이엔티 전속계약",
-              "남다름 , 김남길 품으로⋯ 길스토리 이엔티와 전속계약"
+              "‘AI 부정행위’ 속 등판한 스릴러 ‘대리수능’…“잘못된 선택과 책임 이야기”",
+              "‘들쥐’ 박윤호, ‘ 대리수능 ’으로 순수미 장착"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         }
       ]
@@ -1254,304 +1264,311 @@
         {
           "id": "nate-1",
           "rank": 1,
-          "keyword": "젠슨 황 복귀시킨",
-          "title": "젠슨 황 복귀시킨",
-          "rawKeyword": "젠슨 황 복귀시킨",
+          "keyword": "기관 순매수행진",
+          "title": "기관 순매수행진",
+          "rawKeyword": "기관 순매수행진",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 100,
           "source": "nate",
           "expansions": [
-            "젠슨황",
-            "젠슨황 여자",
-            "젠슨황 와이프",
-            "젠슨황 국적",
-            "젠슨황 복귀",
-            "젠슨황 스파이",
-            "젠슨황 나무위키",
-            "젠슨 황 배우자"
+            "기관지염 증상",
+            "기관지염",
+            "기관지",
+            "열기관",
+            "기관사",
+            "공공기관",
+            "공공기관 알리오",
+            "기관총"
           ],
-          "expansionSeed": "젠슨",
+          "expansionSeed": "기관",
           "insight": {
             "titles": {
-              "seo": "젠슨 황 복귀시킨 최신 이슈와 핵심 내용 정리",
-              "home": "젠슨 황 복귀시킨, \"트럼프, 은밀히 젠슨 황 CEO 복귀 작전…밴스에 주말 특명\" 관련 확인할 점",
-              "topic": "젠슨 황 복귀시킨",
+              "seo": "기관 순매수행진 최신 이슈와 핵심 내용 정리",
+              "home": "기관 순매수행진, “웰컴백 외국인”…돌아온 큰손, 돈 쓸어담은 곳 봤더니 - 매일경제 관련 확인할 점",
+              "topic": "기관 순매수행진",
               "topicGroup": "네이트 실시간 검색어"
             },
             "facts": [
               {
-                "text": "",
+                "text": "공유 글자 크기 편의기능 공유 글자크기 인쇄 북마크 댓글 AI기능 추천질문 관련종목 AI해설 증권 > 국내 주식 “웰컴백 외국인”…돌아온 큰손, 돈 쓸어담은 곳 봤더니 김민주 기자 입력 : 2026.11.11 16:39 업데이트 : 2026.11.11 17:01 닫기 구글 검색 선호 추가 Google 검색에서 매일경제 기사를 더 자주 볼 수 있습니다. 번역 ENG JPN CHN 외국인, 반도체 대형주 위주 매수 전환매수 상위 5개에 집중…자금 쏠림 커져“추세적 복귀는 매수 연속성이 관건” 외국인 투자자 관련 이미지.",
                 "sourceIndex": 0
               },
               {
-                "text": "美 상무부, 젠슨 황 복귀 당일 내연녀 회사 제재",
+                "text": "이날 외국인과 기관 은 각각 1931억원, 635억원을 순매수 하며 지수 상승을 이끌고 있다. 특히 외국인은 나흘째 순매수 행진 을 이어가고 있다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.yna.co.kr/view/AKR20261124005500071?input=1195m",
-                "press": "연합뉴스"
+                "url": "https://www.mk.co.kr/article/12205485",
+                "press": "매일경제"
               },
               {
-                "url": "https://biz.chosun.com/international/international_general/2026/11/24/R7637YMEONF67HWQNALV5QWWRU/?utm_source=naver&utm_medium=original&utm_campaign=biz",
-                "press": "조선비즈"
+                "url": "https://www.sentv.co.kr/article/view/sentv202611130048",
+                "press": "서울경제TV"
               }
             ],
             "images": [
-              "https://img5.yna.co.kr/photo/reuters/2026/11/21/PRU20261121049901009_P4.jpg"
+              "https://pimg.mk.co.kr/news/cms/202611/11/news-p.v1.20261111.34f18902c17f449d8c10aae89686685f_R.png"
             ],
             "press": [
-              "연합뉴스",
-              "조선비즈"
+              "매일경제",
+              "서울경제TV"
             ],
             "headlines": [
-              "\"트럼프, 은밀히 젠슨 황 CEO 복귀 작전…밴스에 주말 특명\"",
-              "美 상무부, 젠슨 황 복귀 당일 내연녀 회사 제재"
+              "“웰컴백 외국인”…돌아온 큰손, 돈 쓸어담은 곳 봤더니 - 매일경제",
+              "코스피, 외국인 순매수 에 2%대 상승 출발"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         },
         {
           "id": "nate-2",
           "rank": 2,
-          "keyword": "이재명 대통령 국무회의",
-          "title": "이재명 대통령 국무회의",
-          "rawKeyword": "이재명 대통령 국무회의",
+          "keyword": "서울교통공사 임단협",
+          "title": "서울교통공사 임단협",
+          "rawKeyword": "서울교통공사 임단협",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 99,
           "source": "nate",
           "expansions": [
-            "이재명 대통령",
-            "이재명 지지율",
-            "이재명 임기",
-            "이재명 탄핵",
-            "이재명 재판",
-            "이재명 주식",
-            "이재명 북한",
-            "이재명 울산"
+            "임단협 뜻",
+            "포스코 임단협",
+            "테크젠 임단협",
+            "한화에어로 임단협",
+            "유플러스 임단협",
+            "ls전선 임단협",
+            "현대차 임단협",
+            "현대위아 임단협"
           ],
-          "expansionSeed": "이재명",
+          "expansionSeed": "임단협",
           "insight": {
             "titles": {
-              "seo": "이재명 대통령 국무회의 최신 이슈와 핵심 내용 정리",
-              "home": "이재명 대통령 국무회의, [속보] 李대통령 “시험 부정행위, 주가조작 범죄와 본질 다르지 않아” - 매일경제 관련 확인할 점",
-              "topic": "이재명 대통령 국무회의",
+              "seo": "서울교통공사 임단협 최신 이슈와 핵심 내용 정리",
+              "home": "서울교통공사 임단협, 임단협 최종교섭 참석한 김태균 서울교통공사 사장 관련 확인할 점",
+              "topic": "서울교통공사 임단협",
               "topicGroup": "네이트 실시간 검색어"
             },
             "facts": [
               {
-                "text": "공유 글자 크기 편의기능 공유 글자크기 인쇄 북마크 댓글 AI기능 정치 > 행정 [속보] 李대통령 “시험 부정행위, 주가조작 범죄와 본질 다르지 않아” 이미연 기자 입력 : 2026.11.24 10:33 업데이트 : 2026.11.24 10:37 닫기 구글 검색 선호 추가 Google 검색에서 매일경제 기사를 더 자주 볼 수 있습니다. 번역 ENG JPN CHN 이재명 대통령이 24일 청와대에서 열린 국무회의에서 발언하고 있다. [뉴시스] 이재명 대통령이 24일 시험 부정행위를 ‘주가조작 범죄’에 비유하며 국가시험 전반에 대한 범정부 합동조사와 처벌 강화를 지시했다.",
+                "text": "(서울=연합뉴스) 김성민 기자 = 김태균 서울교통공사 사장이 24일 서울 성동구 서울교통공사 본사에서 열린 임단협 최종교섭에 참석하고 있다.",
                 "sourceIndex": 0
               },
               {
-                "text": "이재명 대통령 이 24일 “종교활동 빙자 불법행위에 대해 실효적 조치를 검토해야 한다”고 밝혔다. 이 대통령 은 이날 청와대에서 열린 제50회 국무회의 에서 “종교활동을 빙자해서 범죄행위, 불법행위를 자행하는 사이비 종교단체에 대한 해산 절차를 제가 말씀드린 바 있다”며 이같이 말했다.",
+                "text": "24일 오전 서울 성동구 서울교통공사 에서 올바른노조(3노조) 임단협 최종 교섭이 열리고 있다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.mk.co.kr/article/12216913",
-                "press": "매일경제"
+                "url": "https://www.yna.co.kr/view/PYH20261124060200013?input=1196m",
+                "press": "연합뉴스"
               },
               {
-                "url": "https://www.joongang.co.kr/article/25481404",
-                "press": "중앙일보"
+                "url": "https://www.newsis.com/view/NISI20261124_0021543757",
+                "press": "뉴시스"
               }
             ],
             "images": [
-              "https://pimg.mk.co.kr/news/cms/202611/24/rcv.NEWSIS.NEWSIS.20261124.NISI20261124_0021543546_R.jpg"
+              "https://img1.yna.co.kr/photo/yna/YH/2026/11/24/PYH2026112406020001300_P4.jpg"
             ],
             "press": [
-              "매일경제",
-              "중앙일보"
+              "연합뉴스",
+              "뉴시스"
             ],
             "headlines": [
-              "[속보] 李대통령 “시험 부정행위, 주가조작 범죄와 본질 다르지 않아” - 매일경제",
-              "[속보] 李 대통령 “종교활동 빙자 불법행위…실효적 조치 검토해야”"
+              "임단협 최종교섭 참석한 김태균 서울교통공사 사장",
+              "서울교통공사 3노조 임단협 최종 교섭"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         },
         {
           "id": "nate-3",
           "rank": 3,
-          "keyword": "삼성전자 임원 승진",
-          "title": "삼성전자 임원 승진",
-          "rawKeyword": "삼성전자 임원 승진",
+          "keyword": "목동역 인근 화재",
+          "title": "목동역 인근 화재",
+          "rawKeyword": "목동역 인근 화재",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 98,
           "source": "nate",
           "expansions": [
-            "삼성전자 임원 승진 2026"
+            "목동역 맛집",
+            "목동역 카페",
+            "목동역 술집",
+            "목동역 미용실",
+            "목동역 한의원",
+            "목동역 한우",
+            "목동역 정형외과",
+            "목동역 횟집"
           ],
-          "expansionSeed": "삼성전자 임원 승진",
+          "expansionSeed": "목동역",
           "insight": {
             "titles": {
-              "seo": "삼성전자 임원 승진 최신 이슈와 핵심 내용 정리",
-              "home": "삼성전자 임원 승진, Attention Required! 관련 확인할 점",
-              "topic": "삼성전자 임원 승진",
+              "seo": "목동역 인근 화재 최신 이슈와 핵심 내용 정리",
+              "home": "목동역 인근 화재, 목동역 인근 호텔서 화재…1명 사망·5명 부상(종합) 관련 확인할 점",
+              "topic": "목동역 인근 화재",
               "topicGroup": "네이트 실시간 검색어"
             },
             "facts": [
               {
-                "text": "삼성전자 가 올해 임원 승진 규모를 지난해보다 HBM4 개발과 양산에 기여한 기술 인력을 부사장으로 발탁하고, 휴머노이드 로봇 개발을 이끄는 인재들도 임원 으로 승진 시켰다.",
+                "text": "서울 양천구 목동 홍익병원 인근 호텔에서 불이 나 1명이 숨졌다. 서울시 교통정보시스템(TOPIS)에 따르면 화재 진압 작업으로 목동로 홍익병원 앞에서 목동역 방면 하위 3개 차로가 통제됐다.",
                 "sourceIndex": 0
               },
               {
-                "text": "부사장 39명·상무 78명 등 총 131명 승진 … 지난해 161명보다 18.6% 감소 HBM4·차세대 D램 개발 인재 중용… 파운드리 기술·고객 확보 인력 발탁 로봇·AI 등 미래사업 기술 인재 승진 … 여성 신임 승진 자 11명 ‘역대 최다’ 삼성전자 가 올해 정기 임원 인사에서 지난해보다",
+                "text": "24일 오전 9시7분 서울 양천구 목동역 인근 5층짜리 숙박시설에서 불이 나 1명이 사망하고 5명이 다친 것으로 확인됐다. 이날 소방 등에 따르면 당국은 장비 29대, 인력 94명 등을 투입해 화재 1시간 만인 오전 10시9분 불을 완전히 껐다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.hankyung.com/article/202611245923g",
-                "press": "한국경제"
+                "url": "https://www.newsis.com/view/NISX20261124_0003880719",
+                "press": "뉴시스"
               },
               {
-                "url": "https://biz.chosun.com/it-science/ict/2026/11/24/H4FLN22LI5HFJF6AVD5RO2A4WI/?utm_source=naver&utm_medium=original&utm_campaign=biz",
-                "press": "조선비즈"
+                "url": "https://www.segye.com/newsView/20261124507953?OutUrl=naver",
+                "press": "세계일보"
               }
             ],
             "images": [
-              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F015%2F2026%2F11%2F24%2F5357434.jpg&type=fface200_200&expire=2&refresh=true"
+              "https://img1.newsis.com/2026/07/01/NISI20260701_0002174440_web.jpg"
             ],
             "press": [
-              "한국경제",
-              "조선비즈"
+              "뉴시스",
+              "세계일보"
             ],
             "headlines": [
-              "Attention Required!",
-              "삼성전자 , 임원 131명 승진 … HBM·AI·로봇 기술 인재 발탁"
+              "목동역 인근 호텔서 화재…1명 사망·5명 부상(종합)",
+              "서울 목동역 인근 호텔서 화재 … 사망 1명, 부상 5명"
             ],
-            "extraction": "search-card",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "extraction": "playwright",
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         },
         {
           "id": "nate-4",
           "rank": 4,
-          "keyword": "원내대책회의 정점식 원내대표",
-          "title": "원내대책회의 정점식 원내대표",
-          "rawKeyword": "원내대책회의 정점식 원내대표",
+          "keyword": "터치드 윤민 컨디션",
+          "title": "터치드 윤민 컨디션",
+          "rawKeyword": "터치드 윤민 컨디션",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 97,
           "source": "nate",
           "expansions": [
-            "원내대책회의 나무위키",
-            "민주당 원내대표",
-            "국힘 원내대표",
-            "국민의힘 원내대표",
-            "원내대표 뜻",
-            "조국혁신당 원내대표",
-            "원내대표 당대표 차이",
-            "민주당 전 원내대표"
+            "터치드 윤민",
+            "터치드 콘서트",
+            "터치드 갤",
+            "터치드 나무위키",
+            "터치드마이너",
+            "터치드 공연",
+            "터치드 갤러리",
+            "컨디션 뜻"
           ],
-          "expansionSeed": "정점식",
+          "expansionSeed": "터치드",
           "insight": {
             "titles": {
-              "seo": "원내대책회의 정점식 원내대표 최신 이슈와 핵심 내용 정리",
-              "home": "원내대책회의 정점식 원내대표, 정점식 \"이용철, 성남 카르텔 출신의 李 탈옥 도우미…실체 밝힐 것\" 관련 확인할 점",
-              "topic": "원내대책회의 정점식 원내대표",
+              "seo": "터치드 윤민 컨디션 최신 이슈와 핵심 내용 정리",
+              "home": "터치드 윤민 컨디션, 터치드 윤민 , 컨디션 난조로 입원 치료 \"스케줄 취소\" 관련 확인할 점",
+              "topic": "터치드 윤민 컨디션",
               "topicGroup": "네이트 실시간 검색어"
             },
             "facts": [
               {
-                "text": "정 원내대표 는 이날 오전 국회 원내대책회의 에서 \"이재명 탈옥법, 조희대 대법원장 탄핵, 이용철 법무부 장관 지명이 지향하는 목표는 하나다.",
+                "text": "밴드 터치드 멤버 윤민 이 컨디션 난조로 입원했다.",
                 "sourceIndex": 0
               },
               {
-                "text": "국민의힘 정점식 원내대표 가 24일 국회에서 열린 원내대책회의 에서 발언하고 있다.",
+                "text": "밴드 ' 터치드 ' 보컬 윤민 이 건강상의 이유로 스케줄을 중단한다. 엠피엠지뮤직은 지난 23일 인스타그램에서 \" 윤민 은 최근 컨디션 난조로 병원에서 검사를 진행했다\"며 \"의료진의 소견에 따라 긴급으로 입원 치료가 필요하다는 진단을 받았다\"고 밝혔다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.newsis.com/view/NISX20261124_0003880479",
-                "press": "뉴시스"
+                "url": "https://news.jtbc.co.kr/article/NB12329525?influxDiv=NAVER",
+                "press": "JTBC"
               },
               {
-                "url": "https://www.yna.co.kr/view/PYH20261124020900013?input=1196m",
-                "press": "연합뉴스"
+                "url": "http://www.dispatch.co.kr/2351258",
+                "press": "디스패치"
               }
             ],
             "images": [
-              "https://img1.newsis.com/2026/11/24/NISI20261124_0021543461_web.jpg"
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F437%2F2026%2F11%2F24%2F522152.jpg&type=fface200_200&expire=2&refresh=true"
             ],
             "press": [
-              "뉴시스",
-              "연합뉴스"
+              "JTBC",
+              "디스패치"
             ],
             "headlines": [
-              "정점식 \"이용철, 성남 카르텔 출신의 李 탈옥 도우미…실체 밝힐 것\"",
-              "원내대책회의 서 발언하는 정점식 원내대표"
+              "터치드 윤민 , 컨디션 난조로 입원 치료 \"스케줄 취소\"",
+              "' 터치드 ' 윤민 , 긴급 입원…\" 컨디션 난조, 스케줄 취소\""
             ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "extraction": "search-card",
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         },
         {
           "id": "nate-5",
           "rank": 5,
-          "keyword": "김서형 대시 하차",
-          "title": "김서형 대시 하차",
-          "rawKeyword": "김서형 대시 하차",
+          "keyword": "두산 수아레즈 영입",
+          "title": "두산 수아레즈 영입",
+          "rawKeyword": "두산 수아레즈 영입",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 96,
           "source": "nate",
           "expansions": [
-            "김서형 배우",
-            "김서형 나무위키",
-            "김서형 드라마",
-            "김서형 종이달",
-            "김서형완도본점",
-            "버스 하차 미태그",
-            "간선하차",
-            "테이 라디오 하차"
+            "두산 수아레즈",
+            "두산에너빌리티",
+            "두산로보틱스",
+            "두산베어스",
+            "두산퓨얼셀",
+            "두산 주가",
+            "두산테스나",
+            "두산에너빌주가"
           ],
-          "expansionSeed": "김서형",
+          "expansionSeed": "두산",
           "insight": {
             "titles": {
-              "seo": "김서형 대시 하차 최신 이슈와 핵심 내용 정리",
-              "home": "김서형 대시 하차, [단독] 김서형, 건강 악화로 SBS &lsquo;대시&rsquo; 하차... 빈자리 박보경이 채운다 - 일간스포츠 관련 확인할 점",
-              "topic": "김서형 대시 하차",
+              "seo": "두산 수아레즈 영입 최신 이슈와 핵심 내용 정리",
+              "home": "두산 수아레즈 영입, 두산, '최고 154㎞' 현역 빅리거 투수 수아레즈 영입 관련 확인할 점",
+              "topic": "두산 수아레즈 영입",
               "topicGroup": "네이트 실시간 검색어"
             },
             "facts": [
               {
-                "text": "배우 김서형이 건강상의 이유로 SBS 새 드라마 ‘대시’에서 하차한다.",
+                "text": "MLB 통산 151경기 23승 33패 ERA 5.37 \"기대에 부응해 팀 우승에 보탬 되겠다\"",
                 "sourceIndex": 0
               },
               {
-                "text": "배우 김서형 이 건강 악화로 인해 SBS 드라마 ' 대시 '에서 하차 했다. 24일 SBS 관계자는 iMBC연예에 \" 김서형 배우가 건강 악화로 인해서 하차 했다\"며 \"해당 배역에 박보경 배우가 합류해 촬영 중\"이라고 밝혔다.",
+                "text": "프로야구 두산 베어스가 메이저리그에서 두 시즌 연속 8승을 거둔 왼손 투수 호세 수아레즈 (28)를 영입 했다. 두산 은 24일 베네수엘라 출신 수아레즈 와 총액 100만 달러에 계약했다고 밝혔다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://isplus.com/article/view/isp202611230148",
-                "press": "일간스포츠"
+                "url": "https://www.newsis.com/view/NISX20261124_0003880767",
+                "press": "뉴시스"
               },
               {
-                "url": "http://enews.imbc.com/News/RetrieveNewsInfo/525795",
-                "press": "MBC연예"
+                "url": "https://www.edaily.co.kr/News/Read?newsId=02709286645649000&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+                "press": "이데일리"
               }
             ],
             "images": [
-              "https://isplus.com/data/isp/image/2024/01/10/isp20240110000145.800x.0.jpg"
+              "https://img1.newsis.com/2026/11/24/NISI20261124_0002300648_web.jpg"
             ],
             "press": [
-              "일간스포츠",
-              "MBC연예"
+              "뉴시스",
+              "이데일리"
             ],
             "headlines": [
-              "[단독] 김서형, 건강 악화로 SBS &lsquo;대시&rsquo; 하차... 빈자리 박보경이 채운다 - 일간스포츠",
-              "김서형 , 건강 악화로 드라마 하차 …박보경 대체 투입 [공식입장]"
+              "두산, '최고 154㎞' 현역 빅리거 투수 수아레즈 영입",
+              "두산 베어스, '빅리그 통산 23승' 좌완 호세 수아레스 영입"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         }
       ]
@@ -1619,7 +1636,7 @@
               "수능 끝나면 대학가 자취방 시즌… 청년 노린 전세사기 ·부동산 경매 물..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         },
         {
@@ -1683,7 +1700,7 @@
               "[2026 국감] ' 책무구조도 ' 도입후 금융사고 203건… 제재 '0건'"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         },
         {
@@ -1746,7 +1763,7 @@
               "'1조달러' 수출 , 이달 일평균까지 역대 최대...'월평균 1000억달러' 시대..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         },
         {
@@ -1810,7 +1827,7 @@
               "LH 임대주택 150만호 돌파…하자관리·화재안전 대책 강화"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         },
         {
@@ -1874,7 +1891,7 @@
               "물가·성장 모두 ↑…시장은 힘겨워도 “ 한은 금리 는 올라간다”"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         }
       ]
@@ -1935,7 +1952,7 @@
               "'강정호도 아니라는데' 키움은 또 틀렸고 NC는 옳았다...데이비슨, 확실히 하락세, 키움 2용타 완전 실패"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         },
         {
@@ -2000,7 +2017,7 @@
               "'韓 수비 에이스 ' 김민재 미쳤다 , 독일 생활 마침표 찍고 EPL 입성할까....."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         },
         {
@@ -2055,7 +2072,7 @@
               "403 Forbidden"
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         },
         {
@@ -2120,7 +2137,7 @@
               "[공식발표] ' 손흥민 선발 명단 제외 ' LAFC, 콜로라도전 'BEST 11' 공개!…..."
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         },
         {
@@ -2175,7 +2192,7 @@
               "\"와, 대박이다!\" 7번 물려준 그리즈만도 환호성...'데뷔전 데뷔골' 이강인 '후계자 자격' 완벽 증명"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         },
         {
@@ -2230,7 +2247,7 @@
               "'와' 한국 야구 대박 터지나! 17억 이도류 유망주 156km '쾅'→2이닝 4K 무실점 호투...\"정말 인상적\" 美 극찬 이어져"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         },
         {
@@ -2285,7 +2302,7 @@
               "[오피셜] 이럴수가, 배지환 ML 생존 벼랑 끝 몰렸다! 30개 구단 모두 외면…웨이버 통과→트리플A 이관 \"FA 선택할 듯\" 美 전망"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         },
         {
@@ -2340,7 +2357,7 @@
               "안세영이 돌아왔다! 압승, 쾌승!…유럽 최강자 블리치펠트 43분 만에 2-0 완파→세계선수권 8강행 성공"
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         },
         {
@@ -2395,7 +2412,7 @@
               "[오피셜] '충격' 아슬아슬했던 전북현대 끝내 무너졌다...디펜딩 챔피언 코리아컵 16강 탈락, K3 당진 '자이언트 킬링' 성공→8개 팀 생존"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         },
         {
@@ -2460,7 +2477,7 @@
               "아직도 ' 손흥민 공백' 메우지 못한 토트넘 …현지 매체는 '日 에이스 영입 ..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         }
       ]
@@ -2500,37 +2517,37 @@
             },
             "facts": [
               {
-                "text": "지원 내용은 산전검사비, 출산·분만 의료비, 영아 초기 의료비, 산후회복 및 아이돌봄 지원, 양육키트 제공 등이다. 고위험 임신이나 신생아 질환 등 긴급 상황에는 추가 의료비를 지원하고 통역과 병원 동행 서비스 도 연계한다.",
+                "text": "KB국민은행이 영세·중소기업의 퇴직연금 수수료 부담을 낮추고 돌봄·복지기관 등 지원 대상을 넓힌다.",
                 "sourceIndex": 0
               },
               {
-                "text": "한 곳에서 방과 후 돌봄 과 아픈 아이 긴급 돌봄 , 공동육아 지원 서비스 를 제공해 부모들의 육아 부담이 크게 줄어들 것으로 기대된다. 경주시는 지난 18일 준공한 아이 행복키움센터를 올 연말까지 시범운영한다고 23일 밝혔다.",
+                "text": "지원 내용은 산전검사비, 출산·분만 의료비, 영아 초기 의료비, 산후회복 및 아이돌봄 지원, 양육키트 제공 등이다. 고위험 임신이나 신생아 질환 등 긴급 상황에는 추가 의료비를 지원하고 통역과 병원 동행 서비스 도 연계한다.",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.news1.kr/finance/insurance-card/6363699",
-                "press": "뉴스1"
+                "url": "https://economist.co.kr/article/view/ecn202611240035",
+                "press": "이코노미스트"
               },
               {
-                "url": "https://www.segye.com/newsView/20261123516368?OutUrl=naver",
-                "press": "세계일보"
+                "url": "https://www.news1.kr/finance/insurance-card/6363699",
+                "press": "뉴스1"
               }
             ],
             "images": [
-              "https://i3n.news1.kr/system/photos/2026/11/24/8229309/high.jpg"
+              "https://economist.co.kr/data/ecn/image/2026/11/24/ecn20261124000065.800x.0.jpg"
             ],
             "press": [
-              "뉴스1",
-              "세계일보"
+              "이코노미스트",
+              "뉴스1"
             ],
             "headlines": [
-              "KB손해보험, 이주배경 산모·영아 20가구 의료·돌봄 지원",
-              "\"방과후·아픈 아이 긴급 돌봄 까지\", 경주 통합 돌봄 거점 시범 운영"
+              "국민은행, 퇴직연금 수수료 인하&hellip;중소기업&middot;돌봄기관 지원 확대",
+              "KB손해보험, 이주배경 산모·영아 20가구 의료· 돌봄 지원"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         },
         {
@@ -2594,7 +2611,7 @@
               "롯데백화점, 8개 계열사 통합 '엘패스' 캠페인 진행"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         },
         {
@@ -2651,7 +2668,7 @@
               "복지부-23개 장애인 단체, 정책 현안 논의를 위한 대규모 소통의 장 마련"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         },
         {
@@ -2705,7 +2722,7 @@
               "서영석 의원, 의료급여 수급권자 장기 요양비 국가 80% 부담 법안 발의"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         },
         {
@@ -2766,7 +2783,7 @@
               "파스쿠찌, 장애인 카페 매니저 대상 운영 노하우 교육"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         },
         {
@@ -2823,7 +2840,7 @@
               "고혈압 · 당뇨병 등록관리 예산 52억 '전액 삭감'"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         },
         {
@@ -2880,7 +2897,7 @@
               "포항시, 고용위기 선제대응지역 1년 연장…철강업 고용 안정 지원 확대"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         },
         {
@@ -2911,7 +2928,7 @@
                 "sourceIndex": 0
               },
               {
-                "text": "박 의원이 제출받은 자료에 따르면 콜센터·온라인 상담, 주거취약계층 주거상향 지원 , 찾아가는 상담 등 주요 이에 내년 임대주택 유형별 공급 목표와 추진 현황을 점검하고 지원 단가 등 사업 여건을 개선할 대책을 요청했다.",
+                "text": "= 종로소방서(서장 장만석)는 주거상향 지원사업 을 통해 임대주택에 거주하는 안전 취약계층 의 화재안전환경을 개선하고 안전한 주거 환경을 조성하기 위해 ‘임대주택 보금자리 안전채움’ 사업 을 3차 추진한다고 밝혔다.",
                 "sourceIndex": 1
               }
             ],
@@ -2921,8 +2938,8 @@
                 "press": "아주경제"
               },
               {
-                "url": "https://www.nspna.com/news/?mode=view&newsid=837331",
-                "press": "NSP통신"
+                "url": "http://fpn119.co.kr/259939",
+                "press": "FPN"
               }
             ],
             "images": [
@@ -2930,14 +2947,14 @@
             ],
             "press": [
               "아주경제",
-              "NSP통신"
+              "FPN"
             ],
             "headlines": [
               "민경선 고양시장, 시민과 함께한 주거복지 결실...주거복지문화대상 수상",
-              "[의정의 요구] 주거 상담 늘어도 예산 10% 감액…박흥석, 지원 재원 재검토..."
+              "종로소방서, 임대주택 취약계층 재난안전채움 3차 추진"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         },
         {
@@ -2995,7 +3012,7 @@
               "부산신항 6단지 '부영 사랑으로 어린이집' 교육부장관상"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         },
         {
@@ -3059,7 +3076,7 @@
               "李대통령, 주택공급 채찍질…“사줄테니 분양 걱정말고 지어라”"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         }
       ]
@@ -3071,11 +3088,553 @@
         {
           "id": "issue-1",
           "rank": 1,
+          "keyword": "이무진, 전 소속사와 소송에 군 입대도 미뤘다..\"추억의 가수로 남을까 걱정\"",
+          "title": "이무진, 전 소속사와 소송에 군 입대도 미뤘다..\"추억의 가수로 남을까 걱정\"",
+          "rawKeyword": "이무진, 전 소속사와 소송에 군 입대도 미뤘다..\"추억의 가수로 남을까 걱정\"",
+          "description": "스타뉴스 최신 기사 · 이무진, 전 소속사와 소송에 군 입대도 미뤘다..\"추억의 가수로 남을까 걱정\"",
+          "priority": 100,
+          "source": "issue",
+          "officialUrl": "https://www.starnewskorea.com/broadcast-show/2026/11/24/2026112413013829504",
+          "sourceLabel": "스타뉴스",
+          "expansions": [
+            "이무진 콘서트",
+            "이무진 나무위키",
+            "이무진 소속사",
+            "이무진 신호등",
+            "이무진 청춘만화",
+            "이무진 노래",
+            "이무진 에피소드",
+            "이무진 싱어게인"
+          ],
+          "expansionSeed": "이무진",
+          "ago": "1분 전",
+          "agoMinutes": 1,
+          "publishedLabel": "2026-11-24T04:08:18.000Z",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112413013829504_1.jpg",
+          "insight": {
+            "titles": {
+              "seo": "이무진, 전 소속사와 소송에 군 입대도 미뤘다..\"추억의 가수로 남을까 걱정\" 최신 이슈와 핵심 내용 정리",
+              "home": "이무진, 전 소속사와 소송에 군 입대도 미뤘다..\"추억의 가수로 남을까 걱정\", 이무진, 전 소속사와 소송에 군 입대도 미뤘다..\"추억의 가수로 남을까 걱정\" 관련 확인할 점",
+              "topic": "이무진, 전 소속사와 소송에 군 입대도 미뤘다..\"추억의 가수로 남을까 걱정\"",
+              "topicGroup": "이슈 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "스타뉴스 최신 기사 · 이무진, 전 소속사와 소송에 군 입대도 미뤘다..\"추억의 가수로 남을까 걱정\"",
+                "sourceIndex": 0
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.starnewskorea.com/broadcast-show/2026/11/24/2026112413013829504",
+                "press": "스타뉴스"
+              }
+            ],
+            "images": [
+              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112413013829504_1.jpg"
+            ],
+            "press": [
+              "스타뉴스"
+            ],
+            "headlines": [
+              "이무진, 전 소속사와 소송에 군 입대도 미뤘다..\"추억의 가수로 남을까 걱정\""
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-24T04:09:40.571Z"
+          }
+        },
+        {
+          "id": "issue-2",
+          "rank": 2,
+          "keyword": "단독 '수다맨' 개그맨 강성범, 오늘(24일) 부친상..슬픔 속 빈소 지켜",
+          "title": "단독 '수다맨' 개그맨 강성범, 오늘(24일) 부친상..슬픔 속 빈소 지켜",
+          "rawKeyword": "단독 '수다맨' 개그맨 강성범, 오늘(24일) 부친상..슬픔 속 빈소 지켜",
+          "description": "스타뉴스 최신 기사 · 단독 '수다맨' 개그맨 강성범, 오늘(24일) 부친상..슬픔 속 빈소 지켜",
+          "priority": 99,
+          "source": "issue",
+          "officialUrl": "https://www.starnewskorea.com/star/2026/11/24/2026112411423170290",
+          "sourceLabel": "스타뉴스",
+          "expansions": [
+            "지켜텐",
+            "지켜텀",
+            "지구를 지켜라",
+            "다지켜",
+            "집지켜",
+            "지켜보다",
+            "지켜텐 도시락",
+            "지켜줄게"
+          ],
+          "expansionSeed": "강성범",
+          "ago": "59분 전",
+          "agoMinutes": 59,
+          "publishedLabel": "2026-11-24T03:08:29.000Z",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112411423170290_1.jpg",
+          "insight": {
+            "titles": {
+              "seo": "단독 '수다맨' 개그맨 강성범, 오늘(24일) 부친상..슬픔 속 빈소 지켜 최신 이슈와 핵심 내용 정리",
+              "home": "단독 '수다맨' 개그맨 강성범, 오늘(24일) 부친상..슬픔 속 빈소 지켜, 단독 '수다맨' 개그맨 강성범, 오늘(24일) 부친상..슬픔 속 빈소 지켜 관련 확인할 점",
+              "topic": "단독 '수다맨' 개그맨 강성범, 오늘(24일) 부친상..슬픔 속 빈소 지켜",
+              "topicGroup": "이슈 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "스타뉴스 최신 기사 · 단독 '수다맨' 개그맨 강성범, 오늘(24일) 부친상..슬픔 속 빈소 지켜",
+                "sourceIndex": 0
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.starnewskorea.com/star/2026/11/24/2026112411423170290",
+                "press": "스타뉴스"
+              }
+            ],
+            "images": [
+              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112411423170290_1.jpg"
+            ],
+            "press": [
+              "스타뉴스"
+            ],
+            "headlines": [
+              "단독 '수다맨' 개그맨 강성범, 오늘(24일) 부친상..슬픔 속 빈소 지켜"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-24T04:09:40.571Z"
+          }
+        },
+        {
+          "id": "issue-3",
+          "rank": 3,
+          "keyword": "어차피 우승은 장동민?..'데블스 플랜3' 최종 우승자, 오늘(24일) 공개",
+          "title": "어차피 우승은 장동민?..'데블스 플랜3' 최종 우승자, 오늘(24일) 공개",
+          "rawKeyword": "어차피 우승은 장동민?..'데블스 플랜3' 최종 우승자, 오늘(24일) 공개",
+          "description": "스타뉴스 최신 기사 · 어차피 우승은 장동민?..'데블스 플랜3' 최종 우승자, 오늘(24일) 공개",
+          "priority": 98,
+          "source": "issue",
+          "officialUrl": "https://www.starnewskorea.com/star/2026/11/24/2026112411485664703",
+          "sourceLabel": "스타뉴스",
+          "expansions": [
+            "어짜피 어차피",
+            "어차피 어짜피",
+            "어차피 뜻",
+            "어차피떠난사람",
+            "어차피 영어로",
+            "어차피감자탕",
+            "어차피한번 살아",
+            "어차피해야되는일"
+          ],
+          "expansionSeed": "어차피",
+          "ago": "1시간 전",
+          "agoMinutes": 60,
+          "publishedLabel": "2026-11-24T02:58:19.000Z",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112411485664703_1.jpg",
+          "insight": {
+            "titles": {
+              "seo": "어차피 우승은 장동민?..'데블스 플랜3' 최종 우승자, 오늘(24일) 공개 최신 이슈와 핵심 내용 정리",
+              "home": "어차피 우승은 장동민?..'데블스 플랜3' 최종 우승자, 오늘(24일) 공개, 어차피 우승은 장동민?..'데블스 플랜3' 최종 우승자, 오늘(24일) 공개 관련 확인할 점",
+              "topic": "어차피 우승은 장동민?..'데블스 플랜3' 최종 우승자, 오늘(24일) 공개",
+              "topicGroup": "이슈 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "스타뉴스 최신 기사 · 어차피 우승은 장동민?..'데블스 플랜3' 최종 우승자, 오늘(24일) 공개",
+                "sourceIndex": 0
+              },
+              {
+                "text": "오늘(24일) 공개 되는 넷플릭스 예능 ' 데블스 플랜 : 데드 어게인' 11~14회에서는 악마의 세 번째 계획에서 살아남을 단 한 명의 최종 우승자 가 결정된다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.starnewskorea.com/star/2026/11/24/2026112411485664703",
+                "press": "스타뉴스"
+              },
+              {
+                "url": "https://www.topstarnews.net/news/articleView.html?idxno=16284567",
+                "press": "톱스타뉴스"
+              }
+            ],
+            "images": [
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F5353%2F2026%2F11%2F24%2F1343934.jpg&type=fface200_200&expire=2&refresh=true"
+            ],
+            "press": [
+              "스타뉴스",
+              "톱스타뉴스"
+            ],
+            "headlines": [
+              "어차피 우승은 장동민?..'데블스 플랜3' 최종 우승자, 오늘(24일) 공개",
+              "' 데블스 플랜3' , 오늘(24일) 최종 회 우승자 공개 … 어차피 우승은 장동민 ..."
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-24T04:09:40.571Z"
+          }
+        },
+        {
+          "id": "issue-4",
+          "rank": 4,
+          "keyword": "추성훈, 세상 떠난 父추계이 사진 들고 은퇴전 무대..아내·딸도 눈물",
+          "title": "추성훈, 세상 떠난 父추계이 사진 들고 은퇴전 무대..아내·딸도 눈물",
+          "rawKeyword": "추성훈, 세상 떠난 父추계이 사진 들고 은퇴전 무대..아내·딸도 눈물",
+          "description": "스타뉴스 최신 기사 · 추성훈, 세상 떠난 父추계이 사진 들고 은퇴전 무대..아내·딸도 눈물",
+          "priority": 97,
+          "source": "issue",
+          "officialUrl": "https://www.starnewskorea.com/broadcast-show/2026/11/24/2026112411263560792",
+          "sourceLabel": "스타뉴스",
+          "expansions": [
+            "추성훈 은퇴전",
+            "추성훈 은퇴전 중계",
+            "추성훈 은퇴전 시간",
+            "세상에 이런일이",
+            "배달세상",
+            "세상의 모든 아침",
+            "굴세상",
+            "이편한세상"
+          ],
+          "expansionSeed": "추성훈",
+          "ago": "1시간 전",
+          "agoMinutes": 60,
+          "publishedLabel": "2026-11-24T02:53:25.000Z",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112411263560792_1.jpg",
+          "insight": {
+            "titles": {
+              "seo": "추성훈, 세상 떠난 父추계이 사진 들고 은퇴전 무대..아내·딸도 눈물 최신 이슈와 핵심 내용 정리",
+              "home": "추성훈, 세상 떠난 父추계이 사진 들고 은퇴전 무대..아내·딸도 눈물, 추성훈, 세상 떠난 父추계이 사진 들고 은퇴전 무대..아내·딸도 눈물 관련 확인할 점",
+              "topic": "추성훈, 세상 떠난 父추계이 사진 들고 은퇴전 무대..아내·딸도 눈물",
+              "topicGroup": "이슈 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "스타뉴스 최신 기사 · 추성훈, 세상 떠난 父추계이 사진 들고 은퇴전 무대..아내·딸도 눈물",
+                "sourceIndex": 0
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.starnewskorea.com/broadcast-show/2026/11/24/2026112411263560792",
+                "press": "스타뉴스"
+              }
+            ],
+            "images": [
+              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112411263560792_1.jpg"
+            ],
+            "press": [
+              "스타뉴스"
+            ],
+            "headlines": [
+              "추성훈, 세상 떠난 父추계이 사진 들고 은퇴전 무대..아내·딸도 눈물"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-24T04:09:40.571Z"
+          }
+        },
+        {
+          "id": "issue-5",
+          "rank": 5,
+          "keyword": "'육사 수석' 서경석, AI 부정행위 논란에 불똥? \"요즘 제 한국사 만점도 의심\"",
+          "title": "'육사 수석' 서경석, AI 부정행위 논란에 불똥? \"요즘 제 한국사 만점도 의심\"",
+          "rawKeyword": "'육사 수석' 서경석, AI 부정행위 논란에 불똥? \"요즘 제 한국사 만점도 의심\"",
+          "description": "스타뉴스 최신 기사 · '육사 수석' 서경석, AI 부정행위 논란에 불똥? \"요즘 제 한국사 만점도 의심\"",
+          "priority": 96,
+          "source": "issue",
+          "officialUrl": "https://www.starnewskorea.com/broadcast-show/2026/11/24/2026112411234462919",
+          "sourceLabel": "스타뉴스",
+          "expansions": [
+            "서경석 한국사",
+            "한국사능력검정",
+            "한국사 시험일정",
+            "한국사 등급컷",
+            "한국사능력시험",
+            "한국사 기출문제",
+            "한국사 답지",
+            "한국사 정답"
+          ],
+          "expansionSeed": "서경석",
+          "ago": "1시간 전",
+          "agoMinutes": 60,
+          "publishedLabel": "2026-11-24T02:53:01.000Z",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112411234462919_1.jpg",
+          "insight": {
+            "titles": {
+              "seo": "'육사 수석' 서경석, AI 부정행위 논란에 불똥? \"요즘 제 한국사 만점도 의심\" 최신 이슈와 핵심 내용 정리",
+              "home": "'육사 수석' 서경석, AI 부정행위 논란에 불똥? \"요즘 제 한국사 만점도 의심\", '육사 수석' 서경석, AI 부정행위 논란에 불똥? \"요즘 제 한국사 만점도 의심\" 관련 확인할 점",
+              "topic": "'육사 수석' 서경석, AI 부정행위 논란에 불똥? \"요즘 제 한국사 만점도 의심\"",
+              "topicGroup": "이슈 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "스타뉴스 최신 기사 · '육사 수석' 서경석, AI 부정행위 논란에 불똥? \"요즘 제 한국사 만점도 의심\"",
+                "sourceIndex": 0
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.starnewskorea.com/broadcast-show/2026/11/24/2026112411234462919",
+                "press": "스타뉴스"
+              }
+            ],
+            "images": [
+              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112411234462919_1.jpg"
+            ],
+            "press": [
+              "스타뉴스"
+            ],
+            "headlines": [
+              "'육사 수석' 서경석, AI 부정행위 논란에 불똥? \"요즘 제 한국사 만점도 의심\""
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-24T04:09:40.571Z"
+          }
+        },
+        {
+          "id": "issue-6",
+          "rank": 6,
+          "keyword": "김혜수, 조진웅 논란 딛고 '시그널2' 홍보 나섰다..송혜교도 '좋아요'",
+          "title": "김혜수, 조진웅 논란 딛고 '시그널2' 홍보 나섰다..송혜교도 '좋아요'",
+          "rawKeyword": "김혜수, 조진웅 논란 딛고 '시그널2' 홍보 나섰다..송혜교도 '좋아요'",
+          "description": "스타뉴스 최신 기사 · 김혜수, 조진웅 논란 딛고 '시그널2' 홍보 나섰다..송혜교도 '좋아요'",
+          "priority": 95,
+          "source": "issue",
+          "officialUrl": "https://www.starnewskorea.com/star/2026/11/24/2026112411332615512",
+          "sourceLabel": "스타뉴스",
+          "expansions": [
+            "조진웅 소년범",
+            "조진웅 근황",
+            "조진웅 나무위키",
+            "조진웅 복귀",
+            "조진웅 시그널2",
+            "조진웅 정해인",
+            "조진웅 영화",
+            "시그널2 조진웅"
+          ],
+          "expansionSeed": "김혜수",
+          "ago": "1시간 전",
+          "agoMinutes": 60,
+          "publishedLabel": "2026-11-24T02:49:25.000Z",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112411332615512_1.jpg",
+          "insight": {
+            "titles": {
+              "seo": "김혜수, 조진웅 논란 딛고 '시그널2' 홍보 나섰다..송혜교도 '좋아요' 최신 이슈와 핵심 내용 정리",
+              "home": "김혜수, 조진웅 논란 딛고 '시그널2' 홍보 나섰다..송혜교도 '좋아요', 김혜수, 조진웅 논란 딛고 '시그널2' 홍보 나섰다..송혜교도 '좋아요' 관련 확인할 점",
+              "topic": "김혜수, 조진웅 논란 딛고 '시그널2' 홍보 나섰다..송혜교도 '좋아요'",
+              "topicGroup": "이슈 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "스타뉴스 최신 기사 · 김혜수, 조진웅 논란 딛고 '시그널2' 홍보 나섰다..송혜교도 '좋아요'",
+                "sourceIndex": 0
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.starnewskorea.com/star/2026/11/24/2026112411332615512",
+                "press": "스타뉴스"
+              }
+            ],
+            "images": [
+              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112411332615512_1.jpg"
+            ],
+            "press": [
+              "스타뉴스"
+            ],
+            "headlines": [
+              "김혜수, 조진웅 논란 딛고 '시그널2' 홍보 나섰다..송혜교도 '좋아요'"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-24T04:09:40.571Z"
+          }
+        },
+        {
+          "id": "issue-7",
+          "rank": 7,
+          "keyword": "고경표 눈물·찢어진 입술, 통할 리가..\"술 많이 마셨지만, 대리운전 안 불렀다\" 안일한 인식 박제",
+          "title": "고경표 눈물·찢어진 입술, 통할 리가..\"술 많이 마셨지만, 대리운전 안 불렀다\" 안일한 인식 박제",
+          "rawKeyword": "고경표 눈물·찢어진 입술, 통할 리가..\"술 많이 마셨지만, 대리운전 안 불렀다\" 안일한 인식 박제",
+          "description": "스타뉴스 최신 기사 · 고경표 눈물·찢어진 입술, 통할 리가..\"술 많이 마셨지만, 대리운전 안 불렀다\" 안일한 인식 박제",
+          "priority": 94,
+          "source": "issue",
+          "officialUrl": "https://www.starnewskorea.com/star/2026/11/24/2026112411294527854",
+          "sourceLabel": "스타뉴스",
+          "expansions": [
+            "고경표 입장문",
+            "고경표 차",
+            "고경표 나무위키",
+            "놀면뭐하니 고경표",
+            "고경표 막국수",
+            "고경표 사주",
+            "고경표 만취",
+            "고경표 류혜영"
+          ],
+          "expansionSeed": "고경표",
+          "ago": "1시간 전",
+          "agoMinutes": 60,
+          "publishedLabel": "2026-11-24T02:41:34.000Z",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112411294527854_1.jpg",
+          "insight": {
+            "titles": {
+              "seo": "고경표 눈물·찢어진 입술, 통할 리가..\"술 많이 마셨지만, 대리운전 안 불렀다\" 안일한 인식 박제 최신 이슈와 핵심 내용 정리",
+              "home": "고경표 눈물·찢어진 입술, 통할 리가..\"술 많이 마셨지만, 대리운전 안 불렀다\" 안일한 인식 박제, 고경표 눈물·찢어진 입술, 통할 리가..\"술 많이 마셨지만, 대리운전 안 불렀다\" 안일한 인식 박제 관련 확인할 점",
+              "topic": "고경표 눈물·찢어진 입술, 통할 리가..\"술 많이 마셨지만, 대리운전 안 불렀다\" 안일한 인식 박제",
+              "topicGroup": "이슈 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "스타뉴스 최신 기사 · 고경표 눈물·찢어진 입술, 통할 리가..\"술 많이 마셨지만, 대리운전 안 불렀다\" 안일한 인식 박제",
+                "sourceIndex": 0
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.starnewskorea.com/star/2026/11/24/2026112411294527854",
+                "press": "스타뉴스"
+              }
+            ],
+            "images": [
+              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112411294527854_1.jpg"
+            ],
+            "press": [
+              "스타뉴스"
+            ],
+            "headlines": [
+              "고경표 눈물·찢어진 입술, 통할 리가..\"술 많이 마셨지만, 대리운전 안 불렀다\" 안일한 인식 박제"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-24T04:09:40.571Z"
+          }
+        },
+        {
+          "id": "issue-8",
+          "rank": 8,
+          "keyword": "'조정석♥' 거미, 딸 그림 신곡 재킷으로..\"예술가 집안? 귀여워서\"",
+          "title": "'조정석♥' 거미, 딸 그림 신곡 재킷으로..\"예술가 집안? 귀여워서\"",
+          "rawKeyword": "'조정석♥' 거미, 딸 그림 신곡 재킷으로..\"예술가 집안? 귀여워서\"",
+          "description": "스타뉴스 최신 기사 · '조정석♥' 거미, 딸 그림 신곡 재킷으로..\"예술가 집안? 귀여워서\"",
+          "priority": 93,
+          "source": "issue",
+          "officialUrl": "https://www.starnewskorea.com/star/2026/11/24/2026112411132453494",
+          "sourceLabel": "스타뉴스",
+          "expansions": [
+            "조정석 나무위키",
+            "조정석 거미",
+            "조정석 영양제",
+            "조정석 영화",
+            "조정석 짬뽕",
+            "거미 조정석",
+            "조정석 아로하",
+            "조정석 드라마"
+          ],
+          "expansionSeed": "조정석",
+          "ago": "1시간 전",
+          "agoMinutes": 60,
+          "publishedLabel": "2026-11-24T02:28:14.000Z",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112411132453494_1.jpg",
+          "insight": {
+            "titles": {
+              "seo": "'조정석♥' 거미, 딸 그림 신곡 재킷으로..\"예술가 집안? 귀여워서\" 최신 이슈와 핵심 내용 정리",
+              "home": "'조정석♥' 거미, 딸 그림 신곡 재킷으로..\"예술가 집안? 귀여워서\", '조정석♥' 거미, 딸 그림 신곡 재킷으로..\"예술가 집안? 귀여워서\" 관련 확인할 점",
+              "topic": "'조정석♥' 거미, 딸 그림 신곡 재킷으로..\"예술가 집안? 귀여워서\"",
+              "topicGroup": "이슈 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "스타뉴스 최신 기사 · '조정석♥' 거미, 딸 그림 신곡 재킷으로..\"예술가 집안? 귀여워서\"",
+                "sourceIndex": 0
+              },
+              {
+                "text": "거미 가 첫째 딸의 그림 을 소개하자 누리꾼들은 “역시 예술가 집안 이다”라면서 놀랐다. 거미 는 “나는 이 그림 이 너무 귀엽다고 생각했다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.starnewskorea.com/star/2026/11/24/2026112411132453494",
+                "press": "스타뉴스"
+              },
+              {
+                "url": "http://www.osen.co.kr/article/G1112914104",
+                "press": "OSEN"
+              }
+            ],
+            "images": [
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F109%2F2026%2F11%2F24%2F5644367.jpg&type=fface200_200&expire=2&refresh=true"
+            ],
+            "press": [
+              "스타뉴스",
+              "OSEN"
+            ],
+            "headlines": [
+              "'조정석♥' 거미, 딸 그림 신곡 재킷으로..\"예술가 집안? 귀여워서\"",
+              "조정석♥거미 7살 딸 , 놀라운 그림 실력 공개..\"역시 예술가 집안 \"[핫피..."
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-24T04:09:40.571Z"
+          }
+        },
+        {
+          "id": "issue-9",
+          "rank": 9,
+          "keyword": "강재준, 얼마나 힘들었길래 \"상황 안 좋아..양세찬이 1억 도와줘\"",
+          "title": "강재준, 얼마나 힘들었길래 \"상황 안 좋아..양세찬이 1억 도와줘\"",
+          "rawKeyword": "강재준, 얼마나 힘들었길래 \"상황 안 좋아..양세찬이 1억 도와줘\"",
+          "description": "스타뉴스 최신 기사 · 강재준, 얼마나 힘들었길래 \"상황 안 좋아..양세찬이 1억 도와줘\"",
+          "priority": 92,
+          "source": "issue",
+          "officialUrl": "https://www.starnewskorea.com/broadcast-show/2026/11/24/2026112410354438402",
+          "sourceLabel": "스타뉴스",
+          "expansions": [
+            "얼마나 맛있게요",
+            "얼마나 좋아",
+            "장혁 얼마나좋아",
+            "얼마나 영어로",
+            "발리 환전 얼마나",
+            "그 사랑 얼마나",
+            "독감 얼마나",
+            "베트남 환전 얼마나"
+          ],
+          "expansionSeed": "강재준",
+          "ago": "1시간 전",
+          "agoMinutes": 60,
+          "publishedLabel": "2026-11-24T02:20:32.000Z",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112410354438402_1.jpg",
+          "insight": {
+            "titles": {
+              "seo": "강재준, 얼마나 힘들었길래 \"상황 안 좋아..양세찬이 1억 도와줘\" 최신 이슈와 핵심 내용 정리",
+              "home": "강재준, 얼마나 힘들었길래 \"상황 안 좋아..양세찬이 1억 도와줘\", 강재준, 얼마나 힘들었길래 \"상황 안 좋아..양세찬이 1억 도와줘\" 관련 확인할 점",
+              "topic": "강재준, 얼마나 힘들었길래 \"상황 안 좋아..양세찬이 1억 도와줘\"",
+              "topicGroup": "이슈 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "스타뉴스 최신 기사 · 강재준, 얼마나 힘들었길래 \"상황 안 좋아..양세찬이 1억 도와줘\"",
+                "sourceIndex": 0
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.starnewskorea.com/broadcast-show/2026/11/24/2026112410354438402",
+                "press": "스타뉴스"
+              }
+            ],
+            "images": [
+              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112410354438402_1.jpg"
+            ],
+            "press": [
+              "스타뉴스"
+            ],
+            "headlines": [
+              "강재준, 얼마나 힘들었길래 \"상황 안 좋아..양세찬이 1억 도와줘\""
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-11-24T04:09:40.571Z"
+          }
+        },
+        {
+          "id": "issue-10",
+          "rank": 10,
           "keyword": "문수아, 꿈에서 나온 친오빠 故문빈에 눈물 펑펑 \"오열하며 일어나\"",
           "title": "문수아, 꿈에서 나온 친오빠 故문빈에 눈물 펑펑 \"오열하며 일어나\"",
           "rawKeyword": "문수아, 꿈에서 나온 친오빠 故문빈에 눈물 펑펑 \"오열하며 일어나\"",
           "description": "스타뉴스 최신 기사 · 문수아, 꿈에서 나온 친오빠 故문빈에 눈물 펑펑 \"오열하며 일어나\"",
-          "priority": 100,
+          "priority": 91,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/star/2026/11/24/2026112410473374021",
           "sourceLabel": "스타뉴스",
@@ -3090,8 +3649,8 @@
             "문수암 템플스테이"
           ],
           "expansionSeed": "문수아",
-          "ago": "8분 전",
-          "agoMinutes": 8,
+          "ago": "2시간 전",
+          "agoMinutes": 120,
           "publishedLabel": "2026-11-24T02:04:57.000Z",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112410473374021_1.jpg",
           "insight": {
@@ -3123,553 +3682,11 @@
               "문수아, 꿈에서 나온 친오빠 故문빈에 눈물 펑펑 \"오열하며 일어나\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
-          }
-        },
-        {
-          "id": "issue-2",
-          "rank": 2,
-          "keyword": "'셋째 임신' 박슬기, 첫째 딸과 한 달간 이별 \"나만 발걸음 안 떨어져\"",
-          "title": "'셋째 임신' 박슬기, 첫째 딸과 한 달간 이별 \"나만 발걸음 안 떨어져\"",
-          "rawKeyword": "'셋째 임신' 박슬기, 첫째 딸과 한 달간 이별 \"나만 발걸음 안 떨어져\"",
-          "description": "스타뉴스 최신 기사 · '셋째 임신' 박슬기, 첫째 딸과 한 달간 이별 \"나만 발걸음 안 떨어져\"",
-          "priority": 99,
-          "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/star/2026/11/24/2026112410232244475",
-          "sourceLabel": "스타뉴스",
-          "expansions": [
-            "박슬기 나무위키",
-            "박슬기 셋째",
-            "박슬기 셋째 성별",
-            "박슬기 발레리나",
-            "셋째 대학등록금",
-            "셋째주",
-            "셋째 출산 혜택",
-            "셋째 고민"
-          ],
-          "expansionSeed": "박슬기",
-          "ago": "12분 전",
-          "agoMinutes": 12,
-          "publishedLabel": "2026-11-24T02:00:30.000Z",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112410232244475_1.jpg",
-          "insight": {
-            "titles": {
-              "seo": "'셋째 임신' 박슬기, 첫째 딸과 한 달간 이별 \"나만 발걸음 안 떨어져\" 최신 이슈와 핵심 내용 정리",
-              "home": "'셋째 임신' 박슬기, 첫째 딸과 한 달간 이별 \"나만 발걸음 안 떨어져\", '셋째 임신' 박슬기, 첫째 딸과 한 달간 이별 \"나만 발걸음 안 떨어져\" 관련 확인할 점",
-              "topic": "'셋째 임신' 박슬기, 첫째 딸과 한 달간 이별 \"나만 발걸음 안 떨어져\"",
-              "topicGroup": "이슈 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "스타뉴스 최신 기사 · '셋째 임신' 박슬기, 첫째 딸과 한 달간 이별 \"나만 발걸음 안 떨어져\"",
-                "sourceIndex": 0
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.starnewskorea.com/star/2026/11/24/2026112410232244475",
-                "press": "스타뉴스"
-              }
-            ],
-            "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112410232244475_1.jpg"
-            ],
-            "press": [
-              "스타뉴스"
-            ],
-            "headlines": [
-              "'셋째 임신' 박슬기, 첫째 딸과 한 달간 이별 \"나만 발걸음 안 떨어져\""
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
-          }
-        },
-        {
-          "id": "issue-3",
-          "rank": 3,
-          "keyword": "김명수♥표예진, '연대보증 로맨스'",
-          "title": "김명수♥표예진, '연대보증 로맨스'",
-          "rawKeyword": "김명수♥표예진, '연대보증 로맨스'",
-          "description": "스타뉴스 최신 기사 · 김명수♥표예진, '연대보증 로맨스'",
-          "priority": 98,
-          "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/star/2026/11/24/2026112410431384903",
-          "sourceLabel": "스타뉴스",
-          "expansions": [
-            "연대보증로맨스",
-            "연대보증 뜻",
-            "연대보증 폐지",
-            "연대보증인",
-            "연대보증인 폐지",
-            "연대 보증인 뜻",
-            "연대보증 조회",
-            "연대보증 확인방법"
-          ],
-          "expansionSeed": "연대보증",
-          "ago": "25분 전",
-          "agoMinutes": 25,
-          "publishedLabel": "2026-11-24T01:47:58.000Z",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112410431384903_1.jpg",
-          "insight": {
-            "titles": {
-              "seo": "김명수♥표예진, '연대보증 로맨스' 최신 이슈와 핵심 내용 정리",
-              "home": "김명수♥표예진, '연대보증 로맨스', 김명수♥표예진, '연대보증 로맨스' 관련 확인할 점",
-              "topic": "김명수♥표예진, '연대보증 로맨스'",
-              "topicGroup": "이슈 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "스타뉴스 최신 기사 · 김명수♥표예진, '연대보증 로맨스'",
-                "sourceIndex": 0
-              },
-              {
-                "text": "(서울=연합뉴스) 고가혜 기자 = 배우 김명수와 표예진이 신혼부부 대출을 위해 서로의 연대보증인으로 얽힌다.",
-                "sourceIndex": 1
-              },
-              {
-                "text": "연대보증 로맨스 , 김명수 · 표예진 현실 로코 출격. (사진=루크 미디어) 연대보증 로맨스 가 김명수 · 표예진 의 현실 로코를 예고했다.",
-                "sourceIndex": 2
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.starnewskorea.com/star/2026/11/24/2026112410431384903",
-                "press": "스타뉴스"
-              },
-              {
-                "url": "https://www.yna.co.kr/view/AKR20261124049300005?input=1195m",
-                "press": "연합뉴스"
-              },
-              {
-                "url": "https://www.topstarnews.net/news/articleView.html?idxno=16284593",
-                "press": "톱스타뉴스"
-              }
-            ],
-            "images": [
-              "https://img5.yna.co.kr/etc/inner/KR/2026/11/24/AKR20261124049300005_01_i_P4.jpg"
-            ],
-            "press": [
-              "스타뉴스",
-              "연합뉴스",
-              "톱스타뉴스"
-            ],
-            "headlines": [
-              "김명수♥표예진, '연대보증 로맨스'",
-              "대출 위해 결혼한 김명수·표예진…'연대보증 로맨스' 내년 첫선",
-              "연대보증 로맨스 , 김명수 · 표예진 현실 로코 출격"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
-          }
-        },
-        {
-          "id": "issue-4",
-          "rank": 4,
-          "keyword": "'인터뷰 지각' 터치드 윤민, 컨디션 난조로 결국 스케줄 취소",
-          "title": "'인터뷰 지각' 터치드 윤민, 컨디션 난조로 결국 스케줄 취소",
-          "rawKeyword": "'인터뷰 지각' 터치드 윤민, 컨디션 난조로 결국 스케줄 취소",
-          "description": "스타뉴스 최신 기사 · '인터뷰 지각' 터치드 윤민, 컨디션 난조로 결국 스케줄 취소",
-          "priority": 97,
-          "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/music/2026/11/24/2026112410422612328",
-          "sourceLabel": "스타뉴스",
-          "expansions": [
-            "공소취소",
-            "ktx 취소 수수료",
-            "공소취소 특검법",
-            "세무사 합격취소",
-            "세무사 취소",
-            "놀티켓 취소표",
-            "이재명 공소취소",
-            "ktx 취소"
-          ],
-          "expansionSeed": "취소",
-          "ago": "25분 전",
-          "agoMinutes": 25,
-          "publishedLabel": "2026-11-24T01:47:27.000Z",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112410422612328_1.jpg",
-          "insight": {
-            "titles": {
-              "seo": "'인터뷰 지각' 터치드 윤민, 컨디션 난조로 결국 스케줄 취소 최신 이슈와 핵심 내용 정리",
-              "home": "'인터뷰 지각' 터치드 윤민, 컨디션 난조로 결국 스케줄 취소, '인터뷰 지각' 터치드 윤민, 컨디션 난조로 결국 스케줄 취소 관련 확인할 점",
-              "topic": "'인터뷰 지각' 터치드 윤민, 컨디션 난조로 결국 스케줄 취소",
-              "topicGroup": "이슈 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "스타뉴스 최신 기사 · '인터뷰 지각' 터치드 윤민, 컨디션 난조로 결국 스케줄 취소",
-                "sourceIndex": 0
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.starnewskorea.com/music/2026/11/24/2026112410422612328",
-                "press": "스타뉴스"
-              }
-            ],
-            "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112410422612328_1.jpg"
-            ],
-            "press": [
-              "스타뉴스"
-            ],
-            "headlines": [
-              "'인터뷰 지각' 터치드 윤민, 컨디션 난조로 결국 스케줄 취소"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
-          }
-        },
-        {
-          "id": "issue-5",
-          "rank": 5,
-          "keyword": "드러머 리노, 시각장애인 고백 \"장님으로 살아..동공 확대 검사받다 시신경 손상\"",
-          "title": "드러머 리노, 시각장애인 고백 \"장님으로 살아..동공 확대 검사받다 시신경 손상\"",
-          "rawKeyword": "드러머 리노, 시각장애인 고백 \"장님으로 살아..동공 확대 검사받다 시신경 손상\"",
-          "description": "스타뉴스 최신 기사 · 드러머 리노, 시각장애인 고백 \"장님으로 살아..동공 확대 검사받다 시신경 손상\"",
-          "priority": 96,
-          "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/star/2026/11/24/2026112410312516590",
-          "sourceLabel": "스타뉴스",
-          "expansions": [
-            "드러머 리노",
-            "리노 드러머",
-            "최현진 드러머",
-            "가면 드러머",
-            "리틀 드러머 걸",
-            "일본 드러머",
-            "아이엠드러머",
-            "안드레 드러먼드"
-          ],
-          "expansionSeed": "드러머",
-          "ago": "28분 전",
-          "agoMinutes": 28,
-          "publishedLabel": "2026-11-24T01:44:36.000Z",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112410312516590_1.jpg",
-          "insight": {
-            "titles": {
-              "seo": "드러머 리노, 시각장애인 고백 \"장님으로 살아..동공 확대 검사받다 시신경 손상\" 최신 이슈와 핵심 내용 정리",
-              "home": "드러머 리노, 시각장애인 고백 \"장님으로 살아..동공 확대 검사받다 시신경 손상\", 드러머 리노, 시각장애인 고백 \"장님으로 살아..동공 확대 검사받다 시신경 손상\" 관련 확인할 점",
-              "topic": "드러머 리노, 시각장애인 고백 \"장님으로 살아..동공 확대 검사받다 시신경 손상\"",
-              "topicGroup": "이슈 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "스타뉴스 최신 기사 · 드러머 리노, 시각장애인 고백 \"장님으로 살아..동공 확대 검사받다 시신경 손상\"",
-                "sourceIndex": 0
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.starnewskorea.com/star/2026/11/24/2026112410312516590",
-                "press": "스타뉴스"
-              }
-            ],
-            "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112410312516590_1.jpg"
-            ],
-            "press": [
-              "스타뉴스"
-            ],
-            "headlines": [
-              "드러머 리노, 시각장애인 고백 \"장님으로 살아..동공 확대 검사받다 시신경 손상\""
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
-          }
-        },
-        {
-          "id": "issue-6",
-          "rank": 6,
-          "keyword": "김유정, 데뷔 24년 차 내공 빛났다..'100일의 거짓말' 꽉 채운 존재감",
-          "title": "김유정, 데뷔 24년 차 내공 빛났다..'100일의 거짓말' 꽉 채운 존재감",
-          "rawKeyword": "김유정, 데뷔 24년 차 내공 빛났다..'100일의 거짓말' 꽉 채운 존재감",
-          "description": "스타뉴스 최신 기사 · 김유정, 데뷔 24년 차 내공 빛났다..'100일의 거짓말' 꽉 채운 존재감",
-          "priority": 95,
-          "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/broadcast-drama/2026/11/24/2026112410014624345",
-          "sourceLabel": "스타뉴스",
-          "expansions": [
-            "존재감 뜻",
-            "존재감 없다",
-            "존재감 있는 사람",
-            "존재감 뿜뿜",
-            "존재감 영어로",
-            "존재감 없는 여자",
-            "존재감 없는",
-            "존재감의뜻"
-          ],
-          "expansionSeed": "김유정",
-          "ago": "41분 전",
-          "agoMinutes": 41,
-          "publishedLabel": "2026-11-24T01:31:23.000Z",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112410014624345_1.jpg",
-          "insight": {
-            "titles": {
-              "seo": "김유정, 데뷔 24년 차 내공 빛났다..'100일의 거짓말' 꽉 채운 존재감 최신 이슈와 핵심 내용 정리",
-              "home": "김유정, 데뷔 24년 차 내공 빛났다..'100일의 거짓말' 꽉 채운 존재감, 김유정, 데뷔 24년 차 내공 빛났다..'100일의 거짓말' 꽉 채운 존재감 관련 확인할 점",
-              "topic": "김유정, 데뷔 24년 차 내공 빛났다..'100일의 거짓말' 꽉 채운 존재감",
-              "topicGroup": "이슈 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "스타뉴스 최신 기사 · 김유정, 데뷔 24년 차 내공 빛났다..'100일의 거짓말' 꽉 채운 존재감",
-                "sourceIndex": 0
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.starnewskorea.com/broadcast-drama/2026/11/24/2026112410014624345",
-                "press": "스타뉴스"
-              }
-            ],
-            "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112410014624345_1.jpg"
-            ],
-            "press": [
-              "스타뉴스"
-            ],
-            "headlines": [
-              "김유정, 데뷔 24년 차 내공 빛났다..'100일의 거짓말' 꽉 채운 존재감"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
-          }
-        },
-        {
-          "id": "issue-7",
-          "rank": 7,
-          "keyword": "드러머 리노, 극단적 선택 시도에 병원 감금 \"손다리 묶이고 재갈 물려\"",
-          "title": "드러머 리노, 극단적 선택 시도에 병원 감금 \"손다리 묶이고 재갈 물려\"",
-          "rawKeyword": "드러머 리노, 극단적 선택 시도에 병원 감금 \"손다리 묶이고 재갈 물려\"",
-          "description": "스타뉴스 최신 기사 · 드러머 리노, 극단적 선택 시도에 병원 감금 \"손다리 묶이고 재갈 물려\"",
-          "priority": 94,
-          "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/star/2026/11/24/2026112410141142820",
-          "sourceLabel": "스타뉴스",
-          "expansions": [
-            "드러머 리노",
-            "리노 드러머",
-            "최현진 드러머",
-            "가면 드러머",
-            "리틀 드러머 걸",
-            "일본 드러머",
-            "아이엠드러머",
-            "손 다리 저림 약"
-          ],
-          "expansionSeed": "손다리",
-          "ago": "42분 전",
-          "agoMinutes": 42,
-          "publishedLabel": "2026-11-24T01:30:49.000Z",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112410141142820_1.jpg",
-          "insight": {
-            "titles": {
-              "seo": "드러머 리노, 극단적 선택 시도에 병원 감금 \"손다리 묶이고 재갈 물려\" 최신 이슈와 핵심 내용 정리",
-              "home": "드러머 리노, 극단적 선택 시도에 병원 감금 \"손다리 묶이고 재갈 물려\", 드러머 리노, 극단적 선택 시도에 병원 감금 \"손다리 묶이고 재갈 물려\" 관련 확인할 점",
-              "topic": "드러머 리노, 극단적 선택 시도에 병원 감금 \"손다리 묶이고 재갈 물려\"",
-              "topicGroup": "이슈 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "스타뉴스 최신 기사 · 드러머 리노, 극단적 선택 시도에 병원 감금 \"손다리 묶이고 재갈 물려\"",
-                "sourceIndex": 0
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.starnewskorea.com/star/2026/11/24/2026112410141142820",
-                "press": "스타뉴스"
-              }
-            ],
-            "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112410141142820_1.jpg"
-            ],
-            "press": [
-              "스타뉴스"
-            ],
-            "headlines": [
-              "드러머 리노, 극단적 선택 시도에 병원 감금 \"손다리 묶이고 재갈 물려\""
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
-          }
-        },
-        {
-          "id": "issue-8",
-          "rank": 8,
-          "keyword": "박수홍♥김다예, 25개월 딸 가정 보육..\"다양한 경험 위해 노력 중\"",
-          "title": "박수홍♥김다예, 25개월 딸 가정 보육..\"다양한 경험 위해 노력 중\"",
-          "rawKeyword": "박수홍♥김다예, 25개월 딸 가정 보육..\"다양한 경험 위해 노력 중\"",
-          "description": "스타뉴스 최신 기사 · 박수홍♥김다예, 25개월 딸 가정 보육..\"다양한 경험 위해 노력 중\"",
-          "priority": 93,
-          "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/star/2026/11/24/2026112410022369174",
-          "sourceLabel": "스타뉴스",
-          "expansions": [
-            "25개월 언어",
-            "25개월 아기 발달",
-            "25개월 키",
-            "25개월 책",
-            "25개월 이앓이",
-            "25개월 아기",
-            "25개월 아기 언어",
-            "25개월 평균키"
-          ],
-          "expansionSeed": "25개월",
-          "ago": "50분 전",
-          "agoMinutes": 50,
-          "publishedLabel": "2026-11-24T01:22:55.000Z",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112410022369174_1.jpg",
-          "insight": {
-            "titles": {
-              "seo": "박수홍♥김다예, 25개월 딸 가정 보육..\"다양한 경험 위해 노력 중\" 최신 이슈와 핵심 내용 정리",
-              "home": "박수홍♥김다예, 25개월 딸 가정 보육..\"다양한 경험 위해 노력 중\", 박수홍♥김다예, 25개월 딸 가정 보육..\"다양한 경험 위해 노력 중\" 관련 확인할 점",
-              "topic": "박수홍♥김다예, 25개월 딸 가정 보육..\"다양한 경험 위해 노력 중\"",
-              "topicGroup": "이슈 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "스타뉴스 최신 기사 · 박수홍♥김다예, 25개월 딸 가정 보육..\"다양한 경험 위해 노력 중\"",
-                "sourceIndex": 0
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.starnewskorea.com/star/2026/11/24/2026112410022369174",
-                "press": "스타뉴스"
-              }
-            ],
-            "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112410022369174_1.jpg"
-            ],
-            "press": [
-              "스타뉴스"
-            ],
-            "headlines": [
-              "박수홍♥김다예, 25개월 딸 가정 보육..\"다양한 경험 위해 노력 중\""
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
-          }
-        },
-        {
-          "id": "issue-9",
-          "rank": 9,
-          "keyword": "'꽃남' 아역 남다름, 김남길 식구 됐다",
-          "title": "'꽃남' 아역 남다름, 김남길 식구 됐다",
-          "rawKeyword": "'꽃남' 아역 남다름, 김남길 식구 됐다",
-          "description": "스타뉴스 최신 기사 · '꽃남' 아역 남다름, 김남길 식구 됐다",
-          "priority": 92,
-          "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/star/2026/11/24/2026112410034241146",
-          "sourceLabel": "스타뉴스",
-          "expansions": [
-            "남다름 아역",
-            "김남길 드라마",
-            "김남길 나무위키",
-            "김남길 더쿠",
-            "김남길 팬미팅",
-            "김남길갤",
-            "비담 김남길",
-            "김남길갤러리"
-          ],
-          "expansionSeed": "남다름",
-          "ago": "1시간 전",
-          "agoMinutes": 60,
-          "publishedLabel": "2026-11-24T01:11:47.000Z",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112410034241146_1.jpg",
-          "insight": {
-            "titles": {
-              "seo": "'꽃남' 아역 남다름, 김남길 식구 됐다 최신 이슈와 핵심 내용 정리",
-              "home": "'꽃남' 아역 남다름, 김남길 식구 됐다, '꽃남' 아역 남다름, 김남길 식구 됐다 관련 확인할 점",
-              "topic": "'꽃남' 아역 남다름, 김남길 식구 됐다",
-              "topicGroup": "이슈 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "스타뉴스 최신 기사 · '꽃남' 아역 남다름, 김남길 식구 됐다",
-                "sourceIndex": 0
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.starnewskorea.com/star/2026/11/24/2026112410034241146",
-                "press": "스타뉴스"
-              }
-            ],
-            "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112410034241146_1.jpg"
-            ],
-            "press": [
-              "스타뉴스"
-            ],
-            "headlines": [
-              "'꽃남' 아역 남다름, 김남길 식구 됐다"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
-          }
-        },
-        {
-          "id": "issue-10",
-          "rank": 10,
-          "keyword": "'하정우♥' 차정원, 청첩장 공개날 광고만 올렸다가..\"소통하는 느낌이 안 들어\" 팬 서운",
-          "title": "'하정우♥' 차정원, 청첩장 공개날 광고만 올렸다가..\"소통하는 느낌이 안 들어\" 팬 서운",
-          "rawKeyword": "'하정우♥' 차정원, 청첩장 공개날 광고만 올렸다가..\"소통하는 느낌이 안 들어\" 팬 서운",
-          "description": "스타뉴스 최신 기사 · '하정우♥' 차정원, 청첩장 공개날 광고만 올렸다가..\"소통하는 느낌이 안 들어\" 팬 서운",
-          "priority": 91,
-          "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/star/2026/11/24/2026112409505618952",
-          "sourceLabel": "스타뉴스",
-          "expansions": [
-            "서운칼국수",
-            "서운대학교",
-            "서운하다",
-            "서운중학교",
-            "서운고",
-            "서운동산",
-            "서운대",
-            "서운산"
-          ],
-          "expansionSeed": "하정우",
-          "ago": "1시간 전",
-          "agoMinutes": 60,
-          "publishedLabel": "2026-11-24T01:02:38.000Z",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112409505618952_1.jpg",
-          "insight": {
-            "titles": {
-              "seo": "'하정우♥' 차정원, 청첩장 공개날 광고만 올렸다가..\"소통하는 느낌이 안 들어\" 팬 서운 최신 이슈와 핵심 내용 정리",
-              "home": "'하정우♥' 차정원, 청첩장 공개날 광고만 올렸다가..\"소통하는 느낌이 안 들어\" 팬 서운, '하정우♥' 차정원, 청첩장 공개날 광고만 올렸다가..\"소통하는 느낌이 안 들어\" 팬 서운 관련 확인할 점",
-              "topic": "'하정우♥' 차정원, 청첩장 공개날 광고만 올렸다가..\"소통하는 느낌이 안 들어\" 팬 서운",
-              "topicGroup": "이슈 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "스타뉴스 최신 기사 · '하정우♥' 차정원, 청첩장 공개날 광고만 올렸다가..\"소통하는 느낌이 안 들어\" 팬 서운",
-                "sourceIndex": 0
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.starnewskorea.com/star/2026/11/24/2026112409505618952",
-                "press": "스타뉴스"
-              }
-            ],
-            "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/11/2026112409505618952_1.jpg"
-            ],
-            "press": [
-              "스타뉴스"
-            ],
-            "headlines": [
-              "'하정우♥' 차정원, 청첩장 공개날 광고만 올렸다가..\"소통하는 느낌이 안 들어\" 팬 서운"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-11-24T02:14:55.715Z"
+            "collectedAt": "2026-11-24T04:09:40.571Z"
           }
         }
       ]
     }
   ],
-  "updatedAt": "2026-11-24T02:17:28.096Z"
+  "updatedAt": "2026-11-24T04:12:15.004Z"
 }
