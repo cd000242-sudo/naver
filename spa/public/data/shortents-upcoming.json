@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T23:18:59.265Z",
+ "builtAt": "2026-11-24T23:29:01.878Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 13,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "5·18 진압경찰 포상취소",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 23,
+   "articles90": 24,
    "recent20": 4,
-   "press": 21,
-   "firstArticleAt": "2026-11-24T21:51:00.000Z",
+   "press": 22,
+   "firstArticleAt": "2026-11-24T22:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李 대통령, ‘5·18진압’ 경찰 포상취소에 “당연한 조치…역사교정 계...",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-24T23:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887290?sid=100"
+     "title": "李 대통령, 5·18 진압경찰 등 포상 취소에 \"당연한 조치... 역사 교정 계...",
+     "press": "insight.co.kr",
+     "publishedAt": "2026-11-24T23:24:00.000Z",
+     "link": "https://www.insight.co.kr/news/583454"
     },
     {
-     "title": "이 대통령, 5·18 진압 경찰 등 포상 취소에 \"당연한 조치…역사 교정 계...",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-24T23:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001405616?sid=100"
+     "title": "5·18 진압 경찰 포상 취소…이 대통령 \"당연한 조치, 마지막 한 명까지...",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-24T23:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522313?sid=100"
     },
     {
-     "title": "李대통령, 5·18 진압경찰 포상취소에 “만시지탄이나 너무 당연”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-24T23:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004685849?sid=100"
+     "title": "李 대통령 “5·18 진압경찰 서훈 박탈 당연…마지막 한 명까지 역사 교...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-24T23:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005768511?sid=102"
     }
    ]
   },
   {
-   "keyword": "소송",
+   "keyword": "황인범 포르투 UCL 2연승",
    "sources": [
-    "google"
+    "nate"
    ],
-   "articles90": 11,
-   "recent20": 5,
-   "press": 11,
-   "firstArticleAt": "2026-11-24T22:00:00.000Z",
+   "articles90": 12,
+   "recent20": 2,
+   "press": 12,
+   "firstArticleAt": "2026-11-24T22:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[세상 읽는 법] 소송 이기고도 떼였던 '소송비용 이자', 이제 한 번에 받...",
-     "press": "ntoday.co.kr",
-     "publishedAt": "2026-11-24T23:10:00.000Z",
-     "link": "https://www.ntoday.co.kr/news/articleView.html?idxno=131079"
+     "title": "친정팀 상대로 ‘교체 출전’ 황인범…포르투, 페예노르트에 1-0 신승, ...",
+     "press": "sports.khan.co.kr",
+     "publishedAt": "2026-11-24T23:22:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/144/0001151541"
     },
     {
-     "title": "의약품 과잉공급 책임 어디까지…美 유통 빅3, '오피오이드' 소송 승소",
-     "press": "medipana.com",
-     "publishedAt": "2026-11-24T23:08:00.000Z",
-     "link": "https://www.medipana.com/news/articleView.html?idxno=422585"
+     "title": "‘35분’ 황인범, 친정팀 페예노르트전 교체출전…포르투, UCL 2연승",
+     "press": "sportsworldi.com",
+     "publishedAt": "2026-11-24T23:21:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/396/0000761880"
     },
     {
-     "title": "[변호사 칼럼] 이혼소송 중 재산 처분 우려...가압류 통한 권리 보전 중...",
-     "press": "idsn.co.kr",
-     "publishedAt": "2026-11-24T23:06:00.000Z",
-     "link": "https://idsn.co.kr/news/view/1065575969353610"
+     "title": "황인범, 전 소속팀 페예노르트전 교체 출전…포르투는 1-0 승리",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-24T23:01:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/421/0009308317"
     }
    ]
   },
@@ -80,7 +80,7 @@
     "signal.bz"
    ],
    "articles90": 8,
-   "recent20": 3,
+   "recent20": 0,
    "press": 7,
    "firstArticleAt": "2026-11-24T22:33:00.000Z",
    "exclusive": false,
@@ -93,16 +93,16 @@
      "link": "https://m.entertain.naver.com/article/440/0000054038"
     },
     {
-     "title": "'임지연과 결별' 이도현, 7주전 올린 사진엔…\"내가 당신을 더 사랑했어...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-24T23:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004127786"
-    },
-    {
      "title": "이도현, 임지연과 결별 암시였나…SNS 의미심장 문구 \"난 당신을 더 사랑...",
      "press": "tenasia.co.kr",
      "publishedAt": "2026-11-24T23:00:00.000Z",
      "link": "https://m.entertain.naver.com/article/312/0000786040"
+    },
+    {
+     "title": "'임지연과 결별' 이도현, 7주전 올린 사진엔…\"내가 당신을 더 사랑했어...",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-24T23:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004127786"
     }
    ]
   },
@@ -111,13 +111,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 2,
+   "press": 4,
    "firstArticleAt": "2026-11-24T22:20:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "젠슨 황 효과 하루 만에 끝…금리·반도체 이익에 '촉각'",
+     "press": "ebn.co.kr",
+     "publishedAt": "2026-11-24T23:26:00.000Z",
+     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1732895"
+    },
     {
      "title": "[속보]'젠슨 황' 약발 하루 만에 끝?...반도체주 일제히 급락",
      "press": "ikbc.co.kr",
@@ -129,53 +135,15 @@
      "press": "biz.heraldcorp.com",
      "publishedAt": "2026-11-24T22:55:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/016/0002728008?sid=101"
-    },
-    {
-     "title": "[스타트 경제] 젠슨 황 돌아오긴 했는데...'전격 복귀 효과' 하루 만에 ...",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-24T22:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437648?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "2026년 11월 25일 운세",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-24T22:18:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "2026년 11월 25일, 오늘의 띠별 운세 [인포그래픽]",
-     "press": "sisunnews.co.kr",
-     "publishedAt": "2026-11-24T23:00:00.000Z",
-     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=250010"
-    },
-    {
-     "title": "[오늘의 띠별 운세] 2026년 11월 25일 수요일",
-     "press": "mhns.co.kr",
-     "publishedAt": "2026-11-24T22:56:00.000Z",
-     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=770553"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 25일 수요일 띠별 운세… 양·돼지·개띠 '대...",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-24T22:18:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3084061"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1380,
-  "matched": 719,
-  "avgLeadMin": 533,
+  "flagged": 1375,
+  "matched": 716,
+  "avgLeadMin": 509,
   "recent": [
    {
     "keyword": "나스닥 선물",
