@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T09:20:18.042Z",
+ "builtAt": "2026-11-24T09:30:21.166Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,52 +8,154 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 12,
+ "measured": 23,
  "candidates": [
   {
-   "keyword": "국방 AI 데이터센터 창원 구축",
+   "keyword": "젠슨 황 CEO 복귀",
    "sources": [
     "nate"
    ],
-   "articles90": 28,
-   "recent20": 3,
-   "press": 28,
-   "firstArticleAt": "2026-11-24T07:52:00.000Z",
+   "articles90": 70,
+   "recent20": 21,
+   "press": 52,
+   "firstArticleAt": "2026-11-24T08:44:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "한화, 10조 원 투입 국방 AI 데이터센터 구축…2028년 7월 첫 가동 목표",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-24T09:10:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285014"
+     "title": "“CEO 한 명의 가치가 1350조 원?”…월가 뒤집고 한국 증시까지 뒤흔든...",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-24T09:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002835219?sid=104"
     },
     {
-     "title": "한화, 창원에 국방 AI 데이터센터 구축…1단계 10조원 투자",
-     "press": "newsinside.kr",
-     "publishedAt": "2026-11-24T09:06:00.000Z",
-     "link": "https://www.newsinside.kr/news/articleView.html?idxno=5055717"
+     "title": "젠슨 황 돌아오자 삼성전자·SK하이닉스 시총 123조원 껑충",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-24T09:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001078109?sid=105"
     },
     {
-     "title": "한화, 창원에 국방 AI 데이터센터 구축…2028년 첫 가동 목표",
-     "press": "gndomin.com",
-     "publishedAt": "2026-11-24T09:02:00.000Z",
-     "link": "http://www.gndomin.com/news/articleView.html?idxno=498119"
+     "title": "[마감시황] 젠슨 황 복귀에 반도체·로봇주 급등…코스피 6.32%↑",
+     "press": "polinews.co.kr",
+     "publishedAt": "2026-11-24T09:22:00.000Z",
+     "link": "https://www.polinews.co.kr/news/articleView.html?idxno=749135"
     }
    ]
   },
   {
-   "keyword": "김병기 뇌물 혐의 송치 1년 2개월",
+   "keyword": "전주·창원 도심융합특구 후보 선정",
    "sources": [
     "nate"
    ],
-   "articles90": 18,
-   "recent20": 1,
-   "press": 17,
-   "firstArticleAt": "2026-11-24T07:53:00.000Z",
+   "articles90": 33,
+   "recent20": 2,
+   "press": 29,
+   "firstArticleAt": "2026-11-24T08:01:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[전북] 전주 도심융합특구 후보지 선정",
+     "press": "newsfreezone.co.kr",
+     "publishedAt": "2026-11-24T09:12:00.000Z",
+     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=721106"
+    },
+    {
+     "title": "전주 도심융합특구 후보지 선정…AI 거점 조성 탄력",
+     "press": "mhns.co.kr",
+     "publishedAt": "2026-11-24T09:12:00.000Z",
+     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=770530"
+    },
+    {
+     "title": "창원에 방위·원자력 도심융합특구 들어선다",
+     "press": "busan.com",
+     "publishedAt": "2026-11-24T09:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/082/0001408789?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "미세먼지 계절관리제 시행",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 34,
+   "recent20": 2,
+   "press": 27,
+   "firstArticleAt": "2026-11-24T08:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한 총리 \"미세먼지 대응 위해 다음 달부터 계절관리제 시행\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-24T09:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437486?sid=100"
+    },
+    {
+     "title": "올겨울 초미세먼지 작년보다 짙을 가능성 50%…생활 주변 집중 관리",
+     "press": "kukinews.com",
+     "publishedAt": "2026-11-24T09:12:00.000Z",
+     "link": "https://www.kukinews.com/article/view/kuk202611240239"
+    },
+    {
+     "title": "다음 달부터 ‘미세먼지 계절관리제’ 시행…“이번 겨울 지난해보다 짙...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-24T09:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012300136?sid=102"
+    }
+   ]
+  },
+  {
+   "keyword": "러시아 군용기 울릉도 접근",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 22,
+   "recent20": 4,
+   "press": 21,
+   "firstArticleAt": "2026-11-24T08:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "러 군용기, 울릉도 영공 접근…軍 \"무관 초치해 엄중 항의\"",
+     "press": "asiatoday.co.kr",
+     "publishedAt": "2026-11-24T09:22:00.000Z",
+     "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261125010009555"
+    },
+    {
+     "title": "러시아 군용기 울릉도 근접 비행에 정부, 항의···주한 러시아 국방무...",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-24T09:20:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=244068"
+    },
+    {
+     "title": "러 군용기, 울릉도 영공 침범 ‘직전’까지 접근…軍, 경계경보 첫 요청",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-24T09:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002727904?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "김병기",
+   "sources": [
+    "google"
+   ],
+   "articles90": 23,
+   "recent20": 2,
+   "press": 20,
+   "firstArticleAt": "2026-11-24T08:01:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "경찰, 김병기 송치... 뉴스타파 보도 1년 2개월 만",
+     "press": "newstapa.org",
+     "publishedAt": "2026-11-24T09:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/607/0000003616?sid=102"
+    },
     {
      "title": "14개월 끈 김병기 수사… 의혹 절반만 송치",
      "press": "segye.com",
@@ -65,12 +167,38 @@
      "press": "ajunews.com",
      "publishedAt": "2026-11-24T08:58:00.000Z",
      "link": "https://www.ajunews.com/view/20261124172204118"
+    }
+   ]
+  },
+  {
+   "keyword": "송민호 102일 복무",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 20,
+   "recent20": 1,
+   "press": 19,
+   "firstArticleAt": "2026-11-24T08:06:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "송민호, '102일' 추가 복무 카운트다운…부실복무 대가 치른다 \"이달중...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-24T09:28:00.000Z",
+     "link": "https://m.entertain.naver.com/article/477/0000640622"
     },
     {
-     "title": "경찰, 김병기 의원 뇌물·업무방해 혐의 송치…수사 1년 2개월만",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-24T08:54:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544813"
+     "title": "'102일 이탈' 송민호, 결국 재복무...이달 말 재소집",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-24T09:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006414967?sid=100"
+    },
+    {
+     "title": "송민호, 이달 내 사회복무요원 재소집…102일 추가 복무",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-24T09:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929514?sid=100"
     }
    ]
   },
@@ -79,13 +207,19 @@
    "sources": [
     "google"
    ],
-   "articles90": 17,
-   "recent20": 3,
-   "press": 15,
-   "firstArticleAt": "2026-11-24T07:53:00.000Z",
+   "articles90": 16,
+   "recent20": 2,
+   "press": 14,
+   "firstArticleAt": "2026-11-24T08:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“누가 피 흘려요”…20대女, 대낮 학교 앞 화장실서 필로폰 투약",
+     "press": "munhwa.com",
+     "publishedAt": "2026-11-24T09:22:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002835217?sid=102"
+    },
     {
      "title": "수능 중 화장실서 휴대전화 사용·은닉…수원 수험생 2명 경찰 수사",
      "press": "kgnews.co.kr",
@@ -97,44 +231,135 @@
      "press": "newsmaker.or.kr",
      "publishedAt": "2026-11-24T09:08:00.000Z",
      "link": "http://www.newsmaker.or.kr/news/articleView.html?idxno=186390"
-    },
-    {
-     "title": "화장실 비상벨 누른 아이의 최후…긴급 출동한 경찰의 뜻밖의 반응｜5살...",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-24T09:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929518?sid=102"
     }
    ]
   },
   {
-   "keyword": "러 군용기 영공 초치",
+   "keyword": "유승민 FIFA 서한 정관 충돌",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 3,
-   "press": 14,
-   "firstArticleAt": "2026-11-24T07:56:00.000Z",
+   "articles90": 13,
+   "recent20": 1,
+   "press": 13,
+   "firstArticleAt": "2026-11-24T08:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "러 군용기 영공 '초근접'.. 정부, 무관 초치해 항의",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-24T09:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005609135?sid=100"
+     "title": "유승민 회장 “FIFA의 축구협회 관련 서한...체육회 정관 충돌 소지”",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-24T09:20:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/025/0003567628"
     },
     {
-     "title": "러, 군용기 KADIZ 또 무단 진입… 울릉 ‘北 항공기’ 재난문자 혼란",
-     "press": "segye.com",
-     "publishedAt": "2026-11-24T09:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177774?sid=100"
+     "title": "유승민 대한체육회 회장, FIFA·AFC 서한에 “체육회 독립성·권한도 존...",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-24T09:06:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/382/0001306576"
     },
     {
-     "title": "러 군용기 접근에 울릉도 '경계경보'",
-     "press": "hankyung.com",
+     "title": "유승민 대한체육회장 “축구협회 관련 FIFA 서한, 체육회 정관과 충돌 소...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-24T08:59:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/009/0005768421"
+    }
+   ]
+  },
+  {
+   "keyword": "미세먼지특별대책위원회 한성숙 총리",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-24T08:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한 총리 \"미세먼지 대응 위해 다음 달부터 계절관리제 시행\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-24T09:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437486?sid=100"
+    },
+    {
+     "title": "한 총리 “미세먼지, 마음 놓을 상황 아냐…정책 실효성 높이는데 최선...",
+     "press": "news.kbs.co.kr",
      "publishedAt": "2026-11-24T09:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005357755?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/056/0012300135?sid=100"
+    },
+    {
+     "title": "한 총리 \"미세먼지 마음 놓을 상황 아냐…12월부터 계절관리제\"",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-24T08:27:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929492?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "KBL 30주년 시사회",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 11,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-24T08:07:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[사진]KCC 유소년 추온유에게 기념유니폼-사인볼 전달한 이수광 KBL 총재...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-24T08:56:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/109/0005644545"
+    },
+    {
+     "title": "[사진]프로농구 레전드들의 사인 새겨진 KBL 30주년 기념 유니폼",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-24T08:56:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/109/0005644544"
+    },
+    {
+     "title": "[사진]KBL 30주년 다큐멘터리 '백코트' 특별 시사회 찾은 이상민-유도훈...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-24T08:56:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/109/0005644543"
+    }
+   ]
+  },
+  {
+   "keyword": "고양시",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-24T08:02:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "고양시, ‘제3회 대한민국 지자체 홍보대상’ 축제 부문 대상",
+     "press": "dnews.co.kr",
+     "publishedAt": "2026-11-24T09:22:00.000Z",
+     "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611240956551420310"
+    },
+    {
+     "title": "고양시 중·고교 ‘교복 입찰 나눠 먹기’ 정황…경기교육청, 수사 의뢰",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-24T08:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002833748?sid=102"
+    },
+    {
+     "title": "고양시 원당역서 동료 역무원 흉기 휘두른 30대 男 구속기소",
+     "press": "kihoilbo.co.kr",
+     "publishedAt": "2026-11-24T08:02:00.000Z",
+     "link": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3042003"
     }
    ]
   },
@@ -145,7 +370,7 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-24T08:10:00.000Z",
    "exclusive": false,
@@ -172,35 +397,34 @@
    ]
   },
   {
-   "keyword": "고양시",
+   "keyword": "장동혁·우고 아스투토 접견",
    "sources": [
-    "signal.bz",
-    "google"
+    "signal.bz"
    ],
    "articles90": 3,
    "recent20": 0,
    "press": 3,
-   "firstArticleAt": "2026-11-24T07:54:00.000Z",
+   "firstArticleAt": "2026-11-24T08:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "고양시 중·고교 ‘교복 입찰 나눠 먹기’ 정황…경기교육청, 수사 의뢰",
-     "press": "hani.co.kr",
-     "publishedAt": "2026-11-24T08:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/028/0002833748?sid=102"
+     "title": "장동혁, EU대사에 \"한국 정부 우크라 입장에 국제사회 우려 알아\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-24T08:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437466?sid=100"
     },
     {
-     "title": "고양시 원당역서 동료 역무원 흉기 휘두른 30대 男 구속기소",
-     "press": "kihoilbo.co.kr",
-     "publishedAt": "2026-11-24T08:02:00.000Z",
-     "link": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3042003"
+     "title": "장동혁, 주한 EU 대사 접견…北포로 한국행 도운 국제사회에 감사",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-24T08:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003489276?sid=100"
     },
     {
-     "title": "고양시, 대한민국 지자체 홍보 대상서 축제 부문 대상",
-     "press": "obsnews.co.kr",
-     "publishedAt": "2026-11-24T07:54:00.000Z",
-     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544824"
+     "title": "장동혁, 주한EU대사 만나 \"우크라 침공 러 규탄…흔들림 없는 안보 연대...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-24T08:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014342870?sid=100"
     }
    ]
   },
@@ -239,7 +463,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1335,
+  "flagged": 1338,
   "matched": 701,
   "avgLeadMin": 519,
   "recent": [
