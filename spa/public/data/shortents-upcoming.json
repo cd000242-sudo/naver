@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T18:57:41.172Z",
+ "builtAt": "2026-11-24T19:07:44.000Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 14,
+ "measured": 20,
  "candidates": [
   {
    "keyword": "서울 지하철 노사 협상 타결",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 11,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-24T17:28:00.000Z",
+   "articles90": 9,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-24T17:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -45,8 +45,8 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1395,
-  "matched": 724,
+  "flagged": 1394,
+  "matched": 723,
   "avgLeadMin": 511,
   "recent": [
    {
