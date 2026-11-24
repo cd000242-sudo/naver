@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T15:56:42.750Z",
+ "builtAt": "2026-11-24T16:06:45.811Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -13,12 +13,12 @@
   {
    "keyword": "젠슨 황, 11일 만에 복귀",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 14,
-   "recent20": 1,
-   "press": 12,
-   "firstArticleAt": "2026-11-24T14:30:00.000Z",
+   "articles90": 13,
+   "recent20": 0,
+   "press": 11,
+   "firstArticleAt": "2026-11-24T14:47:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -48,12 +48,18 @@
     "signal.bz"
    ],
    "articles90": 10,
-   "recent20": 0,
-   "press": 10,
-   "firstArticleAt": "2026-11-24T14:34:00.000Z",
+   "recent20": 1,
+   "press": 9,
+   "firstArticleAt": "2026-11-24T14:38:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "美 USTR, 이르면 이번주 '과잉생산 관세' 결과 발표할 듯(종합)",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-24T16:00:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3451853"
+    },
     {
      "title": "미국, 이르면 이번주 '과잉생산 관세' 발표…한국 15% 유지되나",
      "press": "news.mtn.co.kr",
@@ -65,85 +71,47 @@
      "press": "view.asiae.co.kr",
      "publishedAt": "2026-11-24T15:23:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/277/0005847290?sid=101"
-    },
-    {
-     "title": "\"美USTR, 이르면 이번주 '과잉생산 관세' 조사 결과 발표\"(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-24T15:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016461542?sid=104"
     }
    ]
   },
   {
-   "keyword": "정부 세종 이전 계획",
+   "keyword": "국내 코인 발행 허용",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 6,
    "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-24T14:34:00.000Z",
+   "press": 6,
+   "firstArticleAt": "2026-11-24T15:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "정부, 31개 기관 세종 이전계획 고시",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-24T15:50:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001405566?sid=102"
+     "title": "[이슈+] 미 CFTC, 비트코인·스테이블코인을 거래소 자기자본에 넣도록...",
+     "press": "biztribune.co.kr",
+     "publishedAt": "2026-11-24T15:56:00.000Z",
+     "link": "http://www.biztribune.co.kr/news/articleView.html?idxno=363147"
     },
     {
-     "title": "금융위 등 31개 기관 2031년까지 세종행 확정",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-24T15:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887220?sid=102"
+     "title": "국내 코인 발행 허용…9년 만에 빗장 푼다",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-24T15:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929604?sid=101"
     },
     {
-     "title": "'친명' 한준호, 행안장관 출사표…'중수청·지방이전' 시험대",
-     "press": "news.tf.co.kr",
-     "publishedAt": "2026-11-24T15:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/629/0000555213?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "EU 하이브리드차 수입 제한",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-24T14:30:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "EU, 하이브리드차도 수입 제한… 국산차 ‘빨간불’",
-     "press": "donga.com",
-     "publishedAt": "2026-11-24T15:31:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764880?sid=103"
-    },
-    {
-     "title": "EU, 하이브리드차 수입 제한… 한국은 6만7924대 허용",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-24T15:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887221?sid=101"
-    },
-    {
-     "title": "EU, 한국산 HEV 수입 쿼터 6만7924대로 제한… 수출 확대 제동",
-     "press": "it.chosun.com",
-     "publishedAt": "2026-11-24T14:30:00.000Z",
-     "link": "https://it.chosun.com/news/articleView.html?idxno=3000000001743"
+     "title": "기업들의 코인 국내 발행, 9년만에 풀린다",
+     "press": "chosun.com",
+     "publishedAt": "2026-11-24T15:32:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/023/0004011504?sid=101"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1402,
-  "matched": 734,
-  "avgLeadMin": 513,
+  "flagged": 1401,
+  "matched": 733,
+  "avgLeadMin": 514,
   "recent": [
    {
     "keyword": "아침마당",
