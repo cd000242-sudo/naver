@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T09:00:11.409Z",
+ "builtAt": "2026-11-24T09:10:14.920Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,34 +11,34 @@
  "measured": 21,
  "candidates": [
   {
-   "keyword": "이용철 인사청문회",
+   "keyword": "국방 AI 데이터센터 창원 구축",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 64,
-   "recent20": 14,
-   "press": 51,
-   "firstArticleAt": "2026-11-24T07:31:00.000Z",
+   "articles90": 31,
+   "recent20": 4,
+   "press": 31,
+   "firstArticleAt": "2026-11-24T07:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이용철, '성남 라인' 김현지 교류 부인…'靑 공소취소 요청'엔 즉답 피해",
-     "press": "sisajournal.com",
-     "publishedAt": "2026-11-24T08:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/586/0000142977?sid=102"
+     "title": "한화, 창원에 국방 AI 데이터센터 구축…1단계 10조원 투자",
+     "press": "newsinside.kr",
+     "publishedAt": "2026-11-24T09:06:00.000Z",
+     "link": "https://www.newsinside.kr/news/articleView.html?idxno=5055717"
     },
     {
-     "title": "이용철 “공소취소는 검사 일… 무리한 지휘 안 해”",
-     "press": "segye.com",
-     "publishedAt": "2026-11-24T08:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177753?sid=102"
+     "title": "한화, 창원에 국방 AI 데이터센터 구축…2028년 첫 가동 목표",
+     "press": "gndomin.com",
+     "publishedAt": "2026-11-24T09:02:00.000Z",
+     "link": "http://www.gndomin.com/news/articleView.html?idxno=498119"
     },
     {
-     "title": "[속보]이용철 법무 후보 \"대장동 밑그림? 사실 아냐\"...성남FC 사건엔 \"잘...",
-     "press": "ikbc.co.kr",
+     "title": "한화, 창원에 국방 AI 데이터센터 구축…\"2028년 가동 목표\"",
+     "press": "wowtv.co.kr",
      "publishedAt": "2026-11-24T08:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/660/0000122096?sid=100"
+     "link": "https://n.news.naver.com/mnews/article/215/0001273818?sid=101"
     }
    ]
   },
@@ -47,62 +47,126 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 32,
-   "recent20": 4,
-   "press": 29,
-   "firstArticleAt": "2026-11-24T07:36:00.000Z",
+   "articles90": 30,
+   "recent20": 5,
+   "press": 28,
+   "firstArticleAt": "2026-11-24T07:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "러, 군용기 KADIZ 또 무단 진입… 울릉 ‘北 항공기’ 재난문자 혼란",
+     "press": "segye.com",
+     "publishedAt": "2026-11-24T09:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177774?sid=100"
+    },
+    {
+     "title": "러 군용기 접근에 울릉도 '경계경보'",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-24T09:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005357755?sid=100"
+    },
     {
      "title": "러 군용기 울릉도 근접 비행에 “용납 안돼”…국방부, 러 국방무관 초...",
      "press": "dt.co.kr",
      "publishedAt": "2026-11-24T08:57:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/029/0003060941?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "미세먼지 계절관리제 시행",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 33,
+   "recent20": 5,
+   "press": 26,
+   "firstArticleAt": "2026-11-24T07:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "한 총리 “미세먼지, 마음 놓을 상황 아냐…정책 실효성 높이는데 최선...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-24T09:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012300135?sid=100"
     },
     {
-     "title": "러 군용기, 울릉도 영공 '초근접'…초유의 경계경보까지",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-24T08:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929507?sid=100"
+     "title": "다음 달부터 ‘미세먼지 계절관리제’ 시행…“이번 겨울 지난해보다 짙...",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-24T09:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012300136?sid=102"
     },
     {
-     "title": "\"북한 항공기 추정 비행체 접근\" 긴급재난문자에 경계경보 발령…울릉군...",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-24T08:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005847243?sid=102"
+     "title": "올겨울 미세먼지 더 짙어진다…“엘니뇨 영향에 대기 정체”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-24T09:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002727902?sid=102"
     }
    ]
   },
   {
    "keyword": "송민호 102일 복무",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 24,
-   "recent20": 6,
+   "articles90": 25,
+   "recent20": 4,
    "press": 24,
-   "firstArticleAt": "2026-11-24T07:32:00.000Z",
+   "firstArticleAt": "2026-11-24T07:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "‘부실 복무’ 송민호, 이달 말 재소집…102일 채운다",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-24T08:51:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003567623?sid=102"
+     "title": "'102일 이탈' 송민호, 결국 재복무...이달 말 재소집",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-11-24T09:05:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006414967?sid=100"
     },
     {
-     "title": "'병역법 위반' 송민호, 이달 말 재복무...102일 추가 근무",
-     "press": "starnewsk.com",
-     "publishedAt": "2026-11-24T08:46:00.000Z",
-     "link": "http://www.starnewsk.com/news/articleView.html?idxno=61351"
+     "title": "송민호, 이달 내 사회복무요원 재소집…102일 추가 복무",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-24T09:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929514?sid=100"
     },
     {
-     "title": "‘근무지 무단이탈’ 송민호, 102일 재복무 이달 말 시작",
-     "press": "kmib.co.kr",
-     "publishedAt": "2026-11-24T08:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/005/0001887165?sid=102"
+     "title": "'근무지 무단이탈' 송민호, 102일 재복무 한다…이달 말 시작",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-24T08:59:00.000Z",
+     "link": "https://m.entertain.naver.com/article/437/0000522225"
+    }
+   ]
+  },
+  {
+   "keyword": "김병기 뇌물 혐의 송치 1년 2개월",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 19,
+   "recent20": 2,
+   "press": 17,
+   "firstArticleAt": "2026-11-24T07:43:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김병기, 1년 2개월 수사 끝에 불구속 송치…의혹 절반 무혐의",
+     "press": "ajunews.com",
+     "publishedAt": "2026-11-24T08:58:00.000Z",
+     "link": "https://www.ajunews.com/view/20261124172204118"
+    },
+    {
+     "title": "경찰, 김병기 의원 뇌물·업무방해 혐의 송치…수사 1년 2개월만",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-24T08:54:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544813"
+    },
+    {
+     "title": "경찰, 김병기 수사 1년2개월 만에 종료…혐의 일부 불구속 송치",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-24T08:48:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321710&inflow=N"
     }
    ]
   },
@@ -111,107 +175,140 @@
    "sources": [
     "google"
    ],
-   "articles90": 15,
-   "recent20": 2,
-   "press": 14,
-   "firstArticleAt": "2026-11-24T07:35:00.000Z",
+   "articles90": 16,
+   "recent20": 3,
+   "press": 15,
+   "firstArticleAt": "2026-11-24T07:43:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "서울시 관광특구 · 전통시장 QR코드로 화장실 안내",
+     "press": "newsmaker.or.kr",
+     "publishedAt": "2026-11-24T09:08:00.000Z",
+     "link": "http://www.newsmaker.or.kr/news/articleView.html?idxno=186390"
+    },
+    {
+     "title": "화장실 비상벨 누른 아이의 최후…긴급 출동한 경찰의 뜻밖의 반응｜5살...",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-24T09:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929518?sid=102"
+    },
     {
      "title": "커피 물처럼 마시면 화장실 자주 가는 이유",
      "press": "elle.co.kr",
      "publishedAt": "2026-11-24T08:58:00.000Z",
      "link": "https://www.elle.co.kr/article/1913591"
+    }
+   ]
+  },
+  {
+   "keyword": "유승민 FIFA 서한 정관 충돌",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 14,
+   "recent20": 3,
+   "press": 14,
+   "firstArticleAt": "2026-11-24T07:52:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "유승민 대한체육회 회장, FIFA·AFC 서한에 “체육회 독립성·권한도 존...",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-11-24T09:06:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/382/0001306576"
     },
     {
-     "title": "서울시, WYD 앞두고 관광특구 화장실·청결 인프라 확충",
-     "press": "news.cpbc.co.kr",
-     "publishedAt": "2026-11-24T08:42:00.000Z",
-     "link": "https://news.cpbc.co.kr/article/1177252?division=NAVER"
-    },
-    {
-     "title": "중고교 내신도 전자기기 금지 … 화장실만 가도 금속탐지기 댄다",
+     "title": "유승민 대한체육회장 “축구협회 관련 FIFA 서한, 체육회 정관과 충돌 소...",
      "press": "mk.co.kr",
-     "publishedAt": "2026-11-24T08:36:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005768403?sid=101"
+     "publishedAt": "2026-11-24T08:59:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/009/0005768421"
+    },
+    {
+     "title": "유승민 회장 \"대한체육회 독립성·권한도 존중돼야\"…축구협회 관리단체...",
+     "press": "stoo.com",
+     "publishedAt": "2026-11-24T08:58:00.000Z",
+     "link": "http://www.stoo.com/article.php?aid=110067099361"
     }
    ]
   },
   {
    "keyword": "KBL 30주년 시사회",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 13,
-   "recent20": 9,
-   "press": 6,
-   "firstArticleAt": "2026-11-24T07:34:00.000Z",
+   "articles90": 11,
+   "recent20": 7,
+   "press": 4,
+   "firstArticleAt": "2026-11-24T08:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "[사진]KCC 유소년 추온유에게 기념유니폼-사인볼 전달한 이수광 KBL 총재...",
+     "title": "[사진]KBL 출범 30주년 다큐멘터리 '백코트:30년의 시간 속으로'",
      "press": "osen.co.kr",
      "publishedAt": "2026-11-24T08:56:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/109/0005644545"
-    },
-    {
-     "title": "[사진]프로농구 레전드들의 사인 새겨진 KBL 30주년 기념 유니폼",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-24T08:56:00.000Z",
-     "link": "https://m.sports.naver.com/basketball/article/109/0005644544"
+     "link": "https://m.sports.naver.com/basketball/article/109/0005644546"
     },
     {
      "title": "[사진]KBL 30주년 다큐멘터리 '백코트' 특별 시사회 찾은 이상민-유도훈...",
      "press": "osen.co.kr",
      "publishedAt": "2026-11-24T08:56:00.000Z",
      "link": "https://m.sports.naver.com/basketball/article/109/0005644543"
+    },
+    {
+     "title": "[사진]KCC 유소년 추온유에게 기념유니폼-사인볼 전달한 이수광 KBL 총재...",
+     "press": "osen.co.kr",
+     "publishedAt": "2026-11-24T08:56:00.000Z",
+     "link": "https://m.sports.naver.com/basketball/article/109/0005644545"
     }
    ]
   },
   {
-   "keyword": "미세먼지특별대책위원회 한성숙 총리",
+   "keyword": "몸매",
    "sources": [
-    "nate"
+    "signal.bz",
+    "google"
    ],
-   "articles90": 11,
-   "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-24T07:31:00.000Z",
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-24T07:42:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한 총리 \"미세먼지 마음 놓을 상황 아냐…12월부터 계절관리제\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-24T08:27:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929492?sid=100"
+     "title": "'57세' 엄정화, 나이만 먹었네…필라테스로 다진 탄탄한 몸매 [★해시태...",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-11-24T09:06:00.000Z",
+     "link": "https://m.entertain.naver.com/article/311/0002083563"
     },
     {
-     "title": "한 총리 “내달부터 계절관리제 시행…국민 건강 보호 최우선”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-24T08:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002727886?sid=100"
+     "title": "57세 엄정화, 얼굴에 놀라고 몸매 라인에 또 놀라…세월 무색하게 만든...",
+     "press": "newsen.com",
+     "publishedAt": "2026-11-24T08:42:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190768"
     },
     {
-     "title": "韓총리 \"미세먼지 마음 놓을 상황 아냐…국민 건강 보호 최우선\"",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-24T08:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016461283?sid=100"
+     "title": "[포토] 미야오 나린 '가녀린 몸매'",
+     "press": "mhnse.com",
+     "publishedAt": "2026-11-24T08:10:00.000Z",
+     "link": "https://m.entertain.naver.com/article/445/0000492892"
     }
    ]
   },
   {
    "keyword": "고양시",
    "sources": [
+    "signal.bz",
     "google"
    ],
-   "articles90": 6,
+   "articles90": 4,
    "recent20": 0,
-   "press": 5,
-   "firstArticleAt": "2026-11-24T07:32:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-24T07:46:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -236,46 +333,14 @@
    ]
   },
   {
-   "keyword": "장동혁·우고 아스투토 접견",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-24T07:35:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "장동혁, EU대사에 \"한국 정부 우크라 입장에 국제사회 우려 알아\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-24T08:43:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437466?sid=100"
-    },
-    {
-     "title": "장동혁, 주한 EU 대사 접견…北포로 한국행 도운 국제사회에 감사",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-24T08:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003489276?sid=100"
-    },
-    {
-     "title": "장동혁, 주한EU대사 만나 \"우크라 침공 러 규탄…흔들림 없는 안보 연대...",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-24T08:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014342870?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "12월 3일 공휴일 지정",
    "sources": [
     "nate"
    ],
-   "articles90": 4,
+   "articles90": 3,
    "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-24T07:35:00.000Z",
+   "press": 3,
+   "firstArticleAt": "2026-11-24T08:14:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -300,34 +365,34 @@
    ]
   },
   {
-   "keyword": "몸매",
+   "keyword": "장동혁·우고 아스투토 접견",
    "sources": [
-    "google"
+    "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-24T07:37:00.000Z",
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-24T08:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "57세 엄정화, 얼굴에 놀라고 몸매 라인에 또 놀라…세월 무색하게 만든...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-24T08:42:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190768"
+     "title": "장동혁, EU대사에 \"한국 정부 우크라 입장에 국제사회 우려 알아\"",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-24T08:43:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437466?sid=100"
     },
     {
-     "title": "[포토] 미야오 나린 '가녀린 몸매'",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-24T08:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000492892"
+     "title": "장동혁, 주한 EU 대사 접견…北포로 한국행 도운 국제사회에 감사",
+     "press": "etnews.com",
+     "publishedAt": "2026-11-24T08:33:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/030/0003489276?sid=100"
     },
     {
-     "title": "미야오 나린 ‘가녀린 몸매’ [MK포토]",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-24T07:42:00.000Z",
-     "link": "https://m.entertain.naver.com/article/410/0001148128"
+     "title": "장동혁, 주한EU대사 만나 \"우크라 침공 러 규탄…흔들림 없는 안보 연대...",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-24T08:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014342870?sid=100"
     }
    ]
   },
@@ -337,7 +402,7 @@
     "google"
    ],
    "articles90": 3,
-   "recent20": 1,
+   "recent20": 0,
    "press": 3,
    "firstArticleAt": "2026-11-24T07:42:00.000Z",
    "exclusive": false,
@@ -366,7 +431,7 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1330,
+  "flagged": 1334,
   "matched": 701,
   "avgLeadMin": 519,
   "recent": [
