@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T20:48:14.422Z",
+ "builtAt": "2026-11-24T20:58:17.302Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -18,10 +18,16 @@
    "articles90": 11,
    "recent20": 1,
    "press": 11,
-   "firstArticleAt": "2026-11-24T19:21:00.000Z",
+   "firstArticleAt": "2026-11-24T19:33:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "복귀한 젠슨 황, 코스피 6.32% 띄웠지만…청문회가 기다린다 [글로벌 모...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-24T20:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004685803?sid=104"
+    },
     {
      "title": "트럼프가 밀고 밴스가 뛰었다…미국이 젠슨 황을 놓지 못한 이유",
      "press": "mt.co.kr",
@@ -33,12 +39,38 @@
      "press": "nocutnews.co.kr",
      "publishedAt": "2026-11-24T20:02:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/079/0004213515?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "서울 지하철 노사 협상 타결",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-24T19:44:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "서울 지하철 노사 협상 타결…출근길 대란 피해",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-24T20:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929634?sid=102"
     },
     {
-     "title": "트럼프·젠슨 황 ‘위험한 거래’",
-     "press": "seoul.co.kr",
-     "publishedAt": "2026-11-24T20:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/081/0003702807?sid=104"
+     "title": "서울지하철 ‘출근길 대란’ 피했다…밤샘 협상 끝 3개 노조 파업 철회",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-24T20:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002727969?sid=101"
+    },
+    {
+     "title": "서울지하철 총파업 극적 철회…18시간 마라톤 협상 끝 임단협 잠정 합의",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-24T19:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005847293?sid=102"
     }
    ]
   },
@@ -73,43 +105,11 @@
      "link": "https://n.news.naver.com/mnews/article/079/0004213521?sid=104"
     }
    ]
-  },
-  {
-   "keyword": "서울 지하철 노사 협상 타결",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-24T19:44:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "서울지하철 ‘출근길 대란’ 피했다…밤샘 협상 끝 3개 노조 파업 철회",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-24T20:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002727969?sid=101"
-    },
-    {
-     "title": "서울지하철 총파업 극적 철회…18시간 마라톤 협상 끝 임단협 잠정 합의",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-24T19:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005847293?sid=102"
-    },
-    {
-     "title": "서울 지하철 파업 위기 넘겼다...서울교통공사 노사 임단협 극적 타결",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-24T19:44:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261125000028"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1387,
+  "flagged": 1386,
   "matched": 715,
   "avgLeadMin": 516,
   "recent": [
