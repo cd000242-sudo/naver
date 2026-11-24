@@ -5,7 +5,7 @@
 // a publish: when the editor API is missing or the read-back fails, the cards simply stay where they were.
 
 export interface PreviousPostCardAlignResult {
-  readonly status: 'aligned' | 'unchanged' | 'no-api' | 'no-cards' | 'error';
+  readonly status: 'aligned' | 'unchanged' | 'no-api' | 'no-cards' | 'unsafe' | 'error';
   /** Cards of this post found in the document data. */
   readonly matched: number;
   /** Cards whose alignment was written this time. */
@@ -49,6 +49,14 @@ export function previousPostCardAlignInPage(urls: readonly string[]): PreviousPo
     const cards = (data?.document?.components || []).filter(isCard);
     if (cards.length === 0) return { status: 'no-cards', ...empty };
     const keys = Object.keys(cards[0]).sort();
+    // Writing the document back redraws the editor from this data. Only do it when the data and the screen hold the
+    // same photos, cards and text blocks, so a redraw cannot drop anything that exists on the screen only.
+    const inData = (type: string): number => (data?.document?.components || []).filter((component) => component?.['@ctype'] === type).length;
+    const onScreen = (name: string): number => document.querySelectorAll(`.se-component.se-${name}`).length;
+    const counts = `사진 ${inData('image')}/${onScreen('image')} · 카드 ${inData('oglink')}/${onScreen('oglink')} · 글 ${inData('text')}/${onScreen('text')}`;
+    if (inData('image') !== onScreen('image') || inData('oglink') !== onScreen('oglink') || inData('text') !== onScreen('text')) {
+      return { status: 'unsafe', matched: cards.length, changed: 0, centeredInData: 0, keys, message: `문서/화면 ${counts}` };
+    }
     const pending = cards.filter((component) => component.align !== 'center');
     for (const component of pending) component.align = 'center';
     if (pending.length > 0) editor.setDocumentData(data);
@@ -65,7 +73,7 @@ export function previousPostCardAlignInPage(urls: readonly string[]): PreviousPo
 }
 
 /** Runs INSIDE the editor frame: how many of this post's cards the screen shows centered, and how many it shows at all. */
-export function previousPostCardAlignReadScreen(urls: readonly string[]): { shown: number; centered: number } {
+export function previousPostCardAlignReadScreen(urls: readonly string[]): { shown: number; centered: number; photos: number } {
   const cardKey = (value: unknown): string => {
     const text = String(value || '').trim();
     const path = /blog\.naver\.com\/([A-Za-z0-9_-]+)\/(\d+)/i.exec(text);
@@ -86,7 +94,7 @@ export function previousPostCardAlignReadScreen(urls: readonly string[]): { show
       .map((node) => String((node as Element).className || '')).join(' ');
     if (/align-center/.test(classes)) centered += 1;
   }
-  return { shown, centered };
+  return { shown, centered, photos: document.querySelectorAll('.se-component.se-image').length };
 }
 
 interface PreviousPostCardAlignFrame {
@@ -115,7 +123,9 @@ export async function alignPreviousPostCardsInEditor(
   catch (error) {
     result = { status: 'error', matched: 0, changed: 0, centeredInData: 0, keys: [], message: String((error as Error)?.message || error).slice(0, 160) };
   }
-  let screen = { shown: 0, centered: 0 };
+  let screen = { shown: 0, centered: 0, photos: 0 };
+  let photosBefore = -1;
+  try { photosBefore = (await frame.evaluate(previousPostCardAlignReadScreen, urls)).photos; } catch { /* unknown: no comparison */ }
   if (result.status === 'aligned' || result.status === 'unchanged') {
     const deadline = Date.now() + (options.screenWaitMs ?? 4000);
     do {
@@ -125,6 +135,9 @@ export async function alignPreviousPostCardsInEditor(
     } while (Date.now() < deadline);
   }
   const confirmed = result.matched > 0 && screen.centered >= result.matched;
+  if (result.changed > 0 && photosBefore >= 0 && screen.photos < photosBefore) {
+    log(`   ⚠️ 이전글 카드 정렬 뒤 사진 수가 줄었습니다 (${photosBefore} → ${screen.photos}). 발행 전에 글을 확인해 주세요.`);
+  }
   log(confirmed
     ? `   🎯 이전글 카드 ${result.matched}개를 가운데로 맞췄습니다.`
     : `   ⚠️ 이전글 카드 가운데 정렬을 확인하지 못해 그대로 둡니다 (상태 ${result.status} · 문서 ${result.centeredInData}/${result.matched} · 화면 ${screen.centered}/${screen.shown} · 칸 ${result.keys.join(',') || '-'}${result.message ? ` · ${result.message}` : ''})`);

@@ -24,6 +24,8 @@ function install(components: Component[], behaviour: { keepAlign?: boolean; thro
     },
   };
   (window as any).SmartEditor = { _editors: { main: editor } };
+  // The screen holds the same blocks as the data unless a test says otherwise.
+  document.body.innerHTML = components.map((c) => `<div class="se-component se-${String(c['@ctype'])}"></div>`).join('');
   return state;
 }
 const oglink = (link: string, extra: Component = {}): Component => ({ id: `SE-${link.slice(-3)}`, layout: 'large_image', link, '@ctype': 'oglink', ...extra });
@@ -66,19 +68,31 @@ describe('previous-post cards: write the alignment into the editor document', ()
   });
 });
 
+describe('previous-post cards: never redraw when the screen holds something the data does not', () => {
+  it('leaves the document untouched when a photo exists on the screen only', () => {
+    const state = install([paragraph, oglink(A)]);
+    document.body.innerHTML += '<div class="se-component se-image"></div>';
+    const result = previousPostCardAlignInPage([A]);
+    expect(result).toMatchObject({ status: 'unsafe', matched: 1, changed: 0 });
+    expect(result.message).toContain('사진 0/1');
+    expect(state.sets).toBe(0);
+    expect(state.data.document.components[1].align).toBeUndefined();
+  });
+});
+
 describe('previous-post cards: read the alignment back from the screen', () => {
   const card = (href: string, sectionClass: string) =>
     `<div class="se-component se-oglink"><div class="se-component-content"><div class="se-section se-section-oglink ${sectionClass}"><a href="${href}">t</a></div></div></div>`;
 
   it('counts the cards of this post that the screen shows centered', () => {
     document.body.innerHTML = card(A, 'se-section-align-center') + card(B, 'se-l-large_image') + card(OTHER, 'se-section-align-center');
-    expect(previousPostCardAlignReadScreen([A, B])).toEqual({ shown: 2, centered: 1 });
+    expect(previousPostCardAlignReadScreen([A, B])).toEqual({ shown: 2, centered: 1, photos: 0 });
   });
 
   it('confirms only when the screen agrees, and never throws', async () => {
     const logs: string[] = [];
-    const frame = (screen: { shown: number; centered: number }, page: unknown) => ({
-      evaluate: async (fn: (urls: readonly string[]) => unknown) => (fn === previousPostCardAlignInPage ? page : screen),
+    const frame = (screen: { shown: number; centered: number; photos?: number }, page: unknown) => ({
+      evaluate: async (fn: (urls: readonly string[]) => unknown) => (fn === previousPostCardAlignInPage ? page : { photos: 0, ...screen }),
     });
     const ok = await alignPreviousPostCardsInEditor(frame({ shown: 2, centered: 2 }, { status: 'aligned', matched: 2, changed: 2, centeredInData: 2, keys: ['align'] }) as never,
       [A, B], { log: (m) => logs.push(m), delay: async () => undefined, screenWaitMs: 5 });
