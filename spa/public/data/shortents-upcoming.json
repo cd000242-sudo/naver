@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T22:48:50.215Z",
+ "builtAt": "2026-11-24T22:58:53.008Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,69 +8,101 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 14,
+ "measured": 16,
  "candidates": [
   {
    "keyword": "서울 지하철 노조 임단협 타결",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 30,
-   "recent20": 5,
-   "press": 29,
-   "firstArticleAt": "2026-11-24T21:25:00.000Z",
+   "articles90": 33,
+   "recent20": 8,
+   "press": 32,
+   "firstArticleAt": "2026-11-24T21:34:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "출근길 교통대란 위기 넘겼다…서울교통공사 노사 임단협 타결로 1∼8호...",
-     "press": "thefairnews.co.kr",
-     "publishedAt": "2026-11-24T22:46:00.000Z",
-     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=95390"
+     "title": "서울지하철 노사, 밤샘 교섭 끝 '극적 타결'…25일 총파업 철회",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-24T22:57:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001078156?sid=102"
     },
     {
-     "title": "'출근길 대란' 피했다…서울지하철 밤샘 협상 끝 극적 타결",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-24T22:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522299?sid=102"
+     "title": "서울교통공사 노사, 파업 직전 임단협 극적 타결…지하철 정상 운행",
+     "press": "delighti.co.kr",
+     "publishedAt": "2026-11-24T22:56:00.000Z",
+     "link": "https://www.delighti.co.kr/news/articleView.html?idxno=125544"
     },
     {
-     "title": "서울 지하철 1·2노조 임단협 극적 타결…출근길 파업 철회",
-     "press": "kado.net",
-     "publishedAt": "2026-11-24T22:39:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/654/0000213298?sid=102"
+     "title": "[이슈 직썰] 파업 1시간 앞두고 극적 반전…서울지하철 1~8호선 정상 운...",
+     "press": "ziksir.com",
+     "publishedAt": "2026-11-24T22:56:00.000Z",
+     "link": "https://www.ziksir.com/news/articleView.html?idxno=154557"
     }
    ]
   },
   {
-   "keyword": "뉴스",
+   "keyword": "젠슨 황 복귀 효과",
    "sources": [
-    "google"
+    "daum"
    ],
-   "articles90": 8,
-   "recent20": 6,
-   "press": 8,
-   "firstArticleAt": "2026-11-24T22:28:00.000Z",
+   "articles90": 32,
+   "recent20": 8,
+   "press": 25,
+   "firstArticleAt": "2026-11-24T21:29:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“네이버 뉴스제휴위 심사 기준 개선하라”",
-     "press": "knnews.co.kr",
-     "publishedAt": "2026-11-24T22:46:00.000Z",
-     "link": "https://www.knnews.co.kr/news/articleView.php?idxno=1555887"
+     "title": "‘젠슨 황 효과’ 하루만에 끝? 美 반도체 지수 8% 폭락…AI 관련주 줄하...",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-24T22:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002728008?sid=101"
     },
     {
-     "title": "2026_11_25 오늘의 주요뉴스",
-     "press": "kjmbc.co.kr",
-     "publishedAt": "2026-11-24T22:45:00.000Z",
-     "link": "https://kjmbc.co.kr/NewsArticle/1547239"
+     "title": "[애프터마켓 리뷰] 젠슨황 복귀에 '깐부주' 부활…현대오토에버 급등",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-11-24T22:51:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000545713?sid=101"
     },
     {
-     "title": "[포토뉴스] 박정수 유성구의원 \"유성국화축제, 지역 상권 상생 방안 마...",
-     "press": "daily.hankooki.com",
-     "publishedAt": "2026-11-24T22:44:00.000Z",
-     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1428602"
+     "title": "젠슨 황 효과 하루 만에 반도체주 폭락…피크아웃 보고서도 잇따라",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-24T22:50:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653204?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "임지연 이도현 결별",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 11,
+   "recent20": 4,
+   "press": 10,
+   "firstArticleAt": "2026-11-24T21:48:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"당신보다 더 사랑했어\"…'임지연과 결별' 이도현, SNS 속 문구 뒤늦게 ...",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-24T22:56:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009308311"
+    },
+    {
+     "title": "'임지연과 결별' 이도현, 얼굴이 반쪽 됐다..열흘전 수척한 모습 포착",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-24T22:53:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004469235"
+    },
+    {
+     "title": "이도현·임지연 결별, 양홍원·원현주 이혼…연예계 잇단 이별 [종합]",
+     "press": "enews.imbc.com",
+     "publishedAt": "2026-11-24T22:50:00.000Z",
+     "link": "https://m.entertain.naver.com/article/408/0000329030"
     }
    ]
   },
@@ -79,13 +111,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 7,
    "recent20": 1,
-   "press": 6,
+   "press": 7,
    "firstArticleAt": "2026-11-24T21:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "핀테크, 원화 스테이블코인 발행 주역?…네이버·두나무 재편 주목",
+     "press": "ftoday.co.kr",
+     "publishedAt": "2026-11-24T22:58:00.000Z",
+     "link": "http://www.ftoday.co.kr/news/articleView.html?idxno=370495"
+    },
     {
      "title": "[AM크립토] 비트코인은 6만 달러 안팎···원화 스테이블코인은 누가 발...",
      "press": "womaneconomy.co.kr",
@@ -97,45 +135,70 @@
      "press": "fntimes.com",
      "publishedAt": "2026-11-24T22:28:00.000Z",
      "link": "https://www.fntimes.com/html/view.php?ud=202611250709505712141825007d_18"
-    },
-    {
-     "title": "국내 코인 발행 허용 추진…비트코인·리플에 미칠 영향은?",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-24T22:12:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285413"
     }
    ]
   },
   {
-   "keyword": "이도현 임지연 결별 추측",
+   "keyword": "알테오젠",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 5,
-   "recent20": 4,
+   "recent20": 2,
    "press": 5,
-   "firstArticleAt": "2026-11-24T21:48:00.000Z",
+   "firstArticleAt": "2026-11-24T21:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "임지연과 결별 이도현, SNS 마지막 게시물 사진 속 '의미심장' 문구",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-24T22:46:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1177516"
+     "title": "알테오젠, 11월 생물공학 상장기업 브랜드평판 1위...에이비엘바이오·...",
+     "press": "thebigdata.co.kr",
+     "publishedAt": "2026-11-24T22:48:00.000Z",
+     "link": "https://www.thebigdata.co.kr/view.php?ud=202611250745174527d0a8833aad_23"
     },
     {
-     "title": "이도현, 뒤늦게 터진 ‘결별 복선’…임지연과 이별 전 남긴 의미심장 ...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-24T22:36:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001283239"
+     "title": "하나증권 \"알테오젠, 엔허투SC 1상 등록 17명…용량 확장 단계 진입 관건...",
+     "press": "popcornnews.net",
+     "publishedAt": "2026-11-24T22:48:00.000Z",
+     "link": "http://www.popcornnews.net/news/articleView.html?idxno=141359"
     },
     {
-     "title": "“이때 이미?”…‘임지연과 결별’ 이도현, SNS에 올린 글귀 눈길 [왓I...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-24T22:35:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003543341"
+     "title": "알테오젠 주가, 증시 반등에도 약세…하나증권 \"신뢰와 수급 회복 필요...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-24T22:12:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630404"
+    }
+   ]
+  },
+  {
+   "keyword": "테슬라",
+   "sources": [
+    "google"
+   ],
+   "articles90": 5,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-24T22:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[모빌리티핫이슈] \"GTA 보는 줄\"...테슬라 리얼리티 뷰에 글로벌 車업계...",
+     "press": "digitaltoday.co.kr",
+     "publishedAt": "2026-11-24T22:30:00.000Z",
+     "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=717779"
+    },
+    {
+     "title": "스페이스X·테슬라 연내 합병 추진…3조5000억달러 역대급 M&A",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-24T22:29:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005847324?sid=101"
+    },
+    {
+     "title": "[굿모닝 오늘의 증시] '황의 귀환' 후 美 차익실현…테슬라·스페이스X ...",
+     "press": "mbnmoney.mbn.co.kr",
+     "publishedAt": "2026-11-24T22:20:00.000Z",
+     "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005969469"
     }
    ]
   },
@@ -144,10 +207,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-24T21:21:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-24T21:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -172,82 +235,24 @@
    ]
   },
   {
-   "keyword": "알테오젠",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-24T21:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "하나증권 \"알테오젠, 엔허투SC 1상 등록 17명…용량 확장 단계 진입 관건...",
-     "press": "popcornnews.net",
-     "publishedAt": "2026-11-24T22:48:00.000Z",
-     "link": "http://www.popcornnews.net/news/articleView.html?idxno=141359"
-    },
-    {
-     "title": "알테오젠 주가, 증시 반등에도 약세…하나증권 \"신뢰와 수급 회복 필요...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-24T22:12:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630404"
-    },
-    {
-     "title": "바이오 브랜드 빅데이터 28.89% 감소…알테오젠 1위 지켰다",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-24T21:50:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=507721"
-    }
-   ]
-  },
-  {
-   "keyword": "한미 외교안보라인 교체",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-24T21:19:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美, 韓 외교안보라인 교체에 \"한미동맹 내 긴밀한 협력 중요\"",
-     "press": "getnews.co.kr",
-     "publishedAt": "2026-11-24T22:44:00.000Z",
-     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=888371"
-    },
-    {
-     "title": "이재명 대통령의 깜짝 인사 개편, 한미동맹 강화에 어떤 변화가 있을까",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-24T22:22:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=887169"
-    },
-    {
-     "title": "美, 韓 외교·안보라인 교체에 \"한미동맹 긴밀한 협력 중요\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-24T21:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653190?sid=100"
-    }
-   ]
-  },
-  {
    "keyword": "2026년 11월 운세",
    "sources": [
     "signal.bz",
     "nate"
    ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
    "firstArticleAt": "2026-11-24T21:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[오늘의 띠별 운세] 2026년 11월 25일 수요일",
+     "press": "mhns.co.kr",
+     "publishedAt": "2026-11-24T22:56:00.000Z",
+     "link": "https://www.mhns.co.kr/news/articleView.html?idxno=770553"
+    },
     {
      "title": "[오늘의 운세] 2026년 11월 25일 수요일 띠별 운세… 양·돼지·개띠 '대...",
      "press": "newsclaim.co.kr",
@@ -259,19 +264,13 @@
      "press": "ggilbo.com",
      "publishedAt": "2026-11-24T21:30:00.000Z",
      "link": "https://www.ggilbo.com/news/articleView.html?idxno=1194719"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 25일 (수) 띠별운세 '한 주를 잘 넘기자'",
-     "press": "dailypop.kr",
-     "publishedAt": "2026-11-24T21:30:00.000Z",
-     "link": "http://www.dailypop.kr/news/articleView.html?idxno=104284"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1378,
+  "flagged": 1380,
   "matched": 723,
   "avgLeadMin": 545,
   "recent": [
