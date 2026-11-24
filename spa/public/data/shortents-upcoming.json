@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T22:38:46.978Z",
+ "builtAt": "2026-11-24T22:48:50.215Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,134 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 15,
+ "measured": 14,
  "candidates": [
-  {
-   "keyword": "뉴욕증시 혼조 마감",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 42,
-   "recent20": 8,
-   "press": 36,
-   "firstArticleAt": "2026-11-24T21:10:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "뉴욕증시, 젠슨 황 복귀 효과 하루 만에 약화...나스닥 1.48% 하락",
-     "press": "m-economynews.com",
-     "publishedAt": "2026-11-24T22:36:00.000Z",
-     "link": "https://www.m-economynews.com/news/article.html?no=73543"
-    },
-    {
-     "title": "[오늘의 글로벌마켓] 뉴욕증시, 엔비디아 6% 하락...3대지수 혼조세",
-     "press": "opinionnews.co.kr",
-     "publishedAt": "2026-11-24T22:34:00.000Z",
-     "link": "http://www.opinionnews.co.kr/news/articleView.html?idxno=147441"
-    },
-    {
-     "title": "뉴욕증시,혼조세 나스닥 1.48% 하락 엔비디아 5.9%↓...국제유가 WTI 2.35...",
-     "press": "public25.com",
-     "publishedAt": "2026-11-24T22:28:00.000Z",
-     "link": "https://www.public25.com/news/articleView.html?idxno=58997"
-    }
-   ]
-  },
   {
    "keyword": "서울 지하철 노조 임단협 타결",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 30,
    "recent20": 5,
    "press": 29,
-   "firstArticleAt": "2026-11-24T21:10:00.000Z",
+   "firstArticleAt": "2026-11-24T21:25:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "서울지하철 파업 직전 극적 타결…1~8호선 정상 운행",
-     "press": "ngonews.kr",
-     "publishedAt": "2026-11-24T22:32:00.000Z",
-     "link": "https://www.ngonews.kr/news/articleView.html?idxno=244094"
+     "title": "출근길 교통대란 위기 넘겼다…서울교통공사 노사 임단협 타결로 1∼8호...",
+     "press": "thefairnews.co.kr",
+     "publishedAt": "2026-11-24T22:46:00.000Z",
+     "link": "https://www.thefairnews.co.kr/news/articleView.html?idxno=95390"
     },
     {
-     "title": "서울 지하철 협상 타결로 파업 철회…출근대란 없어",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-24T22:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929643?sid=102"
+     "title": "'출근길 대란' 피했다…서울지하철 밤샘 협상 끝 극적 타결",
+     "press": "news.jtbc.co.kr",
+     "publishedAt": "2026-11-24T22:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/437/0000522299?sid=102"
     },
     {
-     "title": "서울 지하철 합의…임금 3.5% 인상 500명 신규 채용",
-     "press": "koreareport.co.kr",
-     "publishedAt": "2026-11-24T22:20:00.000Z",
-     "link": "https://www.koreareport.co.kr/news/articleView.html?idxno=55130"
+     "title": "서울 지하철 1·2노조 임단협 극적 타결…출근길 파업 철회",
+     "press": "kado.net",
+     "publishedAt": "2026-11-24T22:39:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/654/0000213298?sid=102"
     }
    ]
   },
   {
-   "keyword": "美 관세 발표, 韓 15% 유지?",
+   "keyword": "뉴스",
    "sources": [
-    "nate"
-   ],
-   "articles90": 14,
-   "recent20": 3,
-   "press": 13,
-   "firstArticleAt": "2026-11-24T21:09:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"美, '과잉생산 관세' 이르면 오늘 발표…韓 15% 유지 예상\"",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-24T22:37:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005357848?sid=104"
-    },
-    {
-     "title": "\"美, 16개 교역 상대국 '과잉생산 관세' 이르면 오늘 발표\"",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-24T22:34:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394754?sid=104"
-    },
-    {
-     "title": "美 과잉생산 관세 조사 결과, 이르면 이번 주 공개...韓 15% 유지 전망",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-24T22:26:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=784500"
-    }
-   ]
-  },
-  {
-   "keyword": "임지연 이도현 결별",
-   "sources": [
-    "daum"
+    "google"
    ],
    "articles90": 8,
    "recent20": 6,
-   "press": 7,
-   "firstArticleAt": "2026-11-24T21:14:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-24T22:28:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'곰신' 임지연과 결별 시그널?..이도현 \"당신을 더 사랑했어요\" 절절 SN...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-24T22:36:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003489927"
+     "title": "“네이버 뉴스제휴위 심사 기준 개선하라”",
+     "press": "knnews.co.kr",
+     "publishedAt": "2026-11-24T22:46:00.000Z",
+     "link": "https://www.knnews.co.kr/news/articleView.php?idxno=1555887"
     },
     {
-     "title": "이도현, 뒤늦게 터진 ‘결별 복선’…임지연과 이별 전 남긴 의미심장 ...",
-     "press": "sportsseoul.com",
-     "publishedAt": "2026-11-24T22:36:00.000Z",
-     "link": "https://m.entertain.naver.com/article/468/0001283239"
+     "title": "2026_11_25 오늘의 주요뉴스",
+     "press": "kjmbc.co.kr",
+     "publishedAt": "2026-11-24T22:45:00.000Z",
+     "link": "https://kjmbc.co.kr/NewsArticle/1547239"
     },
     {
-     "title": "“이때 이미?”…‘임지연과 결별’ 이도현, SNS에 올린 글귀 눈길 [왓I...",
-     "press": "isplus.com",
-     "publishedAt": "2026-11-24T22:35:00.000Z",
-     "link": "https://m.entertain.naver.com/article/241/0003543341"
+     "title": "[포토뉴스] 박정수 유성구의원 \"유성국화축제, 지역 상권 상생 방안 마...",
+     "press": "daily.hankooki.com",
+     "publishedAt": "2026-11-24T22:44:00.000Z",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1428602"
     }
    ]
   },
@@ -145,7 +80,7 @@
     "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 2,
+   "recent20": 1,
    "press": 6,
    "firstArticleAt": "2026-11-24T21:44:00.000Z",
    "exclusive": false,
@@ -172,67 +107,131 @@
    ]
   },
   {
-   "keyword": "젠슨 황 첫 회의 사과",
+   "keyword": "이도현 임지연 결별 추측",
    "sources": [
     "signal.bz",
     "nate"
    ],
    "articles90": 5,
-   "recent20": 1,
+   "recent20": 4,
    "press": 5,
-   "firstArticleAt": "2026-11-24T21:14:00.000Z",
+   "firstArticleAt": "2026-11-24T21:48:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "임지연과 결별 이도현, SNS 마지막 게시물 사진 속 '의미심장' 문구",
+     "press": "wikitree.co.kr",
+     "publishedAt": "2026-11-24T22:46:00.000Z",
+     "link": "https://www.wikitree.co.kr/articles/1177516"
+    },
+    {
+     "title": "이도현, 뒤늦게 터진 ‘결별 복선’…임지연과 이별 전 남긴 의미심장 ...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-24T22:36:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001283239"
+    },
+    {
+     "title": "“이때 이미?”…‘임지연과 결별’ 이도현, SNS에 올린 글귀 눈길 [왓I...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-24T22:35:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003543341"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황 첫 회의 사과",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 5,
+   "recent20": 2,
+   "press": 5,
+   "firstArticleAt": "2026-11-24T21:21:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "젠슨 황 “지금 치료받고 있는 중…아내와의 대화가 가장 힘들었다”",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-24T22:46:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003060996?sid=104"
+    },
+    {
+     "title": "젠슨 황 복귀에도 여전한 불안, 엔비디아는 다시 급락: 슬로우레터 11월...",
+     "press": "slownews.kr",
+     "publishedAt": "2026-11-24T22:44:00.000Z",
+     "link": "https://slownews.kr/170124"
+    },
     {
      "title": "젠슨 황 \"아내와의 대화 가장 힘들었다\"…복귀 후 첫 직원회의서 사과",
      "press": "news.mtn.co.kr",
      "publishedAt": "2026-11-24T22:22:00.000Z",
      "link": "https://news.mtn.co.kr/article/2026112507200782875"
-    },
-    {
-     "title": "젠슨 황 \"아내와 대화 가장 힘들었다…CEO 승계 계획 필요 없어\"",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-24T21:48:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005445957?sid=105"
-    },
-    {
-     "title": "젠슨 황, 직원회의서 사과…“매일 심리치료, 승계계획 필요없다”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-24T21:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764984?sid=104"
     }
    ]
   },
   {
-   "keyword": "김새롬 재혼",
+   "keyword": "알테오젠",
    "sources": [
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 1,
-   "press": 3,
-   "firstArticleAt": "2026-11-24T21:30:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-24T21:40:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "김새롬, 이혼 10년 만에 재혼 발표…“법적 짝꿍 생겼다”",
-     "press": "segye.com",
-     "publishedAt": "2026-11-24T22:28:00.000Z",
-     "link": "https://m.entertain.naver.com/article/022/0004177903"
+     "title": "하나증권 \"알테오젠, 엔허투SC 1상 등록 17명…용량 확장 단계 진입 관건...",
+     "press": "popcornnews.net",
+     "publishedAt": "2026-11-24T22:48:00.000Z",
+     "link": "http://www.popcornnews.net/news/articleView.html?idxno=141359"
     },
     {
-     "title": "김새롬 재혼…엄마 꿈 이룰까",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-24T21:40:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611250018"
+     "title": "알테오젠 주가, 증시 반등에도 약세…하나증권 \"신뢰와 수급 회복 필요...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-24T22:12:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630404"
     },
     {
-     "title": "\"엄마 되는게 꿈\"이라던 김새롬, 기습 재혼 발표...\"오래도록 사랑할게...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-24T21:30:00.000Z",
-     "link": "https://m.entertain.naver.com/article/076/0004469227"
+     "title": "바이오 브랜드 빅데이터 28.89% 감소…알테오젠 1위 지켰다",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-24T21:50:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=507721"
+    }
+   ]
+  },
+  {
+   "keyword": "한미 외교안보라인 교체",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-24T21:19:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美, 韓 외교안보라인 교체에 \"한미동맹 내 긴밀한 협력 중요\"",
+     "press": "getnews.co.kr",
+     "publishedAt": "2026-11-24T22:44:00.000Z",
+     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=888371"
+    },
+    {
+     "title": "이재명 대통령의 깜짝 인사 개편, 한미동맹 강화에 어떤 변화가 있을까",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-24T22:22:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=887169"
+    },
+    {
+     "title": "美, 韓 외교·안보라인 교체에 \"한미동맹 긴밀한 협력 중요\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-24T21:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653190?sid=100"
     }
    ]
   },
@@ -268,46 +267,13 @@
      "link": "http://www.dailypop.kr/news/articleView.html?idxno=104284"
     }
    ]
-  },
-  {
-   "keyword": "알테오젠",
-   "sources": [
-    "signal.bz",
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-24T21:40:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "알테오젠 주가, 증시 반등에도 약세…하나증권 \"신뢰와 수급 회복 필요...",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-24T22:12:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630404"
-    },
-    {
-     "title": "바이오 브랜드 빅데이터 28.89% 감소…알테오젠 1위 지켰다",
-     "press": "pinpointnews.co.kr",
-     "publishedAt": "2026-11-24T21:50:00.000Z",
-     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=507721"
-    },
-    {
-     "title": "[브랜드평판] 알테오젠, 생물공학 상장기업 11월 1위... 에이비엘바이오...",
-     "press": "enetnews.co.kr",
-     "publishedAt": "2026-11-24T21:40:00.000Z",
-     "link": "https://www.enetnews.co.kr/news/articleView.html?idxno=56749"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1380,
-  "matched": 725,
-  "avgLeadMin": 544,
+  "flagged": 1378,
+  "matched": 723,
+  "avgLeadMin": 545,
   "recent": [
    {
     "keyword": "나스닥 선물",
