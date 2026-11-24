@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T17:17:11.799Z",
+ "builtAt": "2026-11-24T17:27:14.892Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-24T15:48:00.000Z",
+   "articles90": 8,
+   "recent20": 2,
+   "press": 8,
+   "firstArticleAt": "2026-11-24T16:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "\"국가자본주의·마오이즘\"...'젠슨황 복귀' 트럼프 개입 비판 고조",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-24T17:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437598?sid=104"
+    },
+    {
+     "title": "젠슨 황 복귀에 엔비디아 급등…추가 상승 놓고는 엇갈린 시각",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-24T17:18:00.000Z",
+     "link": "https://www.tokenpost.kr/news/cryptocurrency/443735"
+    },
     {
      "title": "젠슨 황 복귀에 코스피 급반등…AI 반도체주, 살아나나",
      "press": "jnilbo.com",
      "publishedAt": "2026-11-24T17:00:00.000Z",
      "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000086233"
+    }
+   ]
+  },
+  {
+   "keyword": "리야드 최고층 빌딩 피격",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 4,
+   "recent20": 1,
+   "press": 4,
+   "firstArticleAt": "2026-11-24T16:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "사우디 수도 최고층 빌딩 또 피격...11명 부상",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-24T17:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437601?sid=104"
     },
     {
-     "title": "\"국가자본주의·마오이즘\"…'젠슨황 복귀' 트럼프 개입 비판 고조",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-24T16:42:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016461554?sid=104"
+     "title": "사우디 385m 초고층 빌딩 또 피격… 11명 부상",
+     "press": "dkilbo.com",
+     "publishedAt": "2026-11-24T16:36:00.000Z",
+     "link": "https://www.dkilbo.com/news/articleView.html?idxno=562042"
     },
     {
-     "title": "엔비디아 3%대 하락 출발…전날 ‘젠슨황 복귀’ 랠리 일부 반납",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-24T16:35:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012300504?sid=104"
+     "title": "사우디 수도 최고층 빌딩, 경보도 없이 또 피격…11명 부상",
+     "press": "segye.com",
+     "publishedAt": "2026-11-24T16:28:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/022/0004177851?sid=104"
     }
    ]
   },
@@ -71,38 +103,6 @@
      "press": "newscj.com",
      "publishedAt": "2026-11-24T16:00:00.000Z",
      "link": "https://www.newscj.com/news/articleView.html?idxno=3451853"
-    }
-   ]
-  },
-  {
-   "keyword": "리야드 최고층 빌딩 피격",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-24T16:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "사우디 385m 초고층 빌딩 또 피격… 11명 부상",
-     "press": "dkilbo.com",
-     "publishedAt": "2026-11-24T16:36:00.000Z",
-     "link": "https://www.dkilbo.com/news/articleView.html?idxno=562042"
-    },
-    {
-     "title": "사우디 수도 최고층 빌딩, 경보도 없이 또 피격…11명 부상",
-     "press": "segye.com",
-     "publishedAt": "2026-11-24T16:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177851?sid=104"
-    },
-    {
-     "title": "사우디 수도 최고층 빌딩, 경보도 없이 또 피격…11명 부상(종합)",
-     "press": "yna.co.kr",
-     "publishedAt": "2026-11-24T16:00:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/001/0016461550?sid=104"
     }
    ]
   }
