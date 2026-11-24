@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T14:52:14.743Z",
+ "builtAt": "2026-11-24T15:02:17.958Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,80 +8,112 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 23,
+ "measured": 26,
  "candidates": [
   {
    "keyword": "미국 과잉생산 관세 조사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 18,
-   "recent20": 4,
-   "press": 17,
-   "firstArticleAt": "2026-11-24T13:28:00.000Z",
+   "articles90": 20,
+   "recent20": 5,
+   "press": 20,
+   "firstArticleAt": "2026-11-24T13:37:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "트럼프 정부, '과잉생산' 관세 예고…한국은 괜찮을까",
-     "press": "hankyung.com",
-     "publishedAt": "2026-11-24T14:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/015/0005357800?sid=101"
+     "title": "美 USTR 조사결과 과잉생산 관세 발표 임박…한국 등 16개 경제주체 대상...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-24T15:00:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630348"
     },
     {
-     "title": "“美USTR, 이르면 이번주 ‘과잉생산 관세’ 조사 결과 발표”",
-     "press": "segye.com",
-     "publishedAt": "2026-11-24T14:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177844?sid=104"
+     "title": "美 ‘과잉생산 관세’ 결과 이르면 이번주 공개…한국도 포함됐다",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-24T14:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003567660?sid=104"
     },
     {
-     "title": "美 과잉생산 관세, 이르면 이번주 발표할 듯",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-24T14:38:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3451834"
+     "title": "美, 이르면 이번주 '과잉생산 관세' 발표…韓 15% 상한 유지 촉각",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-24T14:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005445899?sid=101"
     }
    ]
   },
   {
-   "keyword": "오정태 딸 카이스트 입학",
+   "keyword": "비",
    "sources": [
-    "daum"
+    "google"
    ],
-   "articles90": 9,
-   "recent20": 0,
-   "press": 9,
-   "firstArticleAt": "2026-11-24T13:53:00.000Z",
+   "articles90": 11,
+   "recent20": 6,
+   "press": 10,
+   "firstArticleAt": "2026-11-24T13:36:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "오정태, '17세 카이스트 합격' 딸에 성형수술 선물…\"나 닮아 대시 못 받...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-24T14:31:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004127736"
+     "title": "출근길 추위 오늘이 고비…내일은 한낮 18도까지 풀려[오늘날씨]",
+     "press": "news.unn.net",
+     "publishedAt": "2026-11-24T15:00:00.000Z",
+     "link": "https://news.unn.net/news/articleView.html?idxno=601342"
     },
     {
-     "title": "오정태, \"첫째 딸 만 17세에 카이스트 조기 입학…나 닮아 성형 선물 약...",
-     "press": "mhnse.com",
-     "publishedAt": "2026-11-24T14:19:00.000Z",
-     "link": "https://m.entertain.naver.com/article/445/0000492929"
+     "title": "[오늘날씨]서해안 눈 또는 비...꽁꽁 언 아침 영하 8도",
+     "press": "gametoc.co.kr",
+     "publishedAt": "2026-11-24T15:00:00.000Z",
+     "link": "https://www.gametoc.co.kr/news/articleView.html?idxno=113370"
     },
     {
-     "title": "오정태, 16세 딸 카이스트行 확정..성형수술 약속 \"의느님 찾아가야\"[동...",
-     "press": "starnewskorea.com",
-     "publishedAt": "2026-11-24T14:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/108/0003489890"
+     "title": "\"아내 김태희표 아침 식단\"…비, 근육질 몸매 지키는 특급 레시피",
+     "press": "newsis.com",
+     "publishedAt": "2026-11-24T15:00:00.000Z",
+     "link": "https://m.entertain.naver.com/article/003/0014343151"
     }
    ]
   },
   {
-   "keyword": "31개 기관 세종 이전 확정",
+   "keyword": "김혜경, 권양숙 여사 오찬",
    "sources": [
     "nate"
    ],
-   "articles90": 6,
-   "recent20": 2,
-   "press": 6,
+   "articles90": 7,
+   "recent20": 1,
+   "press": 7,
+   "firstArticleAt": "2026-11-24T13:45:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "김혜경 여사, 권양숙 여사·노건호 씨와 오찬 환담",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-11-24T14:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/055/0001405557?sid=100"
+    },
+    {
+     "title": "김혜경 여사 만난 권양숙 여사 \"李대통령, 盧와 식성·수면·성격 닮아\"",
+     "press": "shinailbo.co.kr",
+     "publishedAt": "2026-11-24T14:18:00.000Z",
+     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5087408"
+    },
+    {
+     "title": "\"노무현과 李대통령, 수면패턴까지 닮았다\" 권양숙 여사의 말",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-24T13:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001042115?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "31개 기관 세종 이전",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
    "firstArticleAt": "2026-11-24T13:41:00.000Z",
    "exclusive": false,
    "capped": false,
@@ -112,10 +144,10 @@
     "signal.bz",
     "google"
    ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-24T13:30:00.000Z",
+   "articles90": 4,
+   "recent20": 0,
+   "press": 4,
+   "firstArticleAt": "2026-11-24T14:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -138,107 +170,11 @@
      "link": "https://www.youngnong.co.kr/news/articleView.html?idxno=72026"
     }
    ]
-  },
-  {
-   "keyword": "김혜경, 권양숙 오찬",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 6,
-   "recent20": 0,
-   "press": 6,
-   "firstArticleAt": "2026-11-24T13:45:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김혜경 여사 만난 권양숙 여사 \"李대통령, 盧와 식성·수면·성격 닮아\"",
-     "press": "shinailbo.co.kr",
-     "publishedAt": "2026-11-24T14:18:00.000Z",
-     "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5087408"
-    },
-    {
-     "title": "\"노무현과 李대통령, 수면패턴까지 닮았다\" 권양숙 여사의 말",
-     "press": "imaeil.com",
-     "publishedAt": "2026-11-24T13:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/088/0001042115?sid=100"
-    },
-    {
-     "title": "김혜경 여사 만난 권양숙 여사…“盧·李, 모든 부분 닮아”",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-24T13:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004011486?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "비",
-   "sources": [
-    "google"
-   ],
-   "articles90": 5,
-   "recent20": 1,
-   "press": 5,
-   "firstArticleAt": "2026-11-24T13:36:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "수요일 아침 최저 영하 8도 ‘뚝’…곳곳 비·눈 내려 빙판길 주의",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-24T14:33:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003567659?sid=103"
-    },
-    {
-     "title": "'사업가♥' 아유미, 딸 낳고 80평 집 샀다…\"인테리어 비용만 1억\"",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-24T13:46:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004127731"
-    },
-    {
-     "title": "유재석 유연석 디스하는 후배에 비 의리 폭발 “우도환 도움 많이 받아...",
-     "press": "newsen.com",
-     "publishedAt": "2026-11-24T13:43:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190850"
-    }
-   ]
-  },
-  {
-   "keyword": "중국 대미 수출통제 유예",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-24T13:24:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "中, 갈륨 등 ‘이중 용도’ 광물 수출 제한 유예 2개월 연장",
-     "press": "newsis.com",
-     "publishedAt": "2026-11-24T14:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/003/0014343119?sid=104"
-    },
-    {
-     "title": "中, 핵심광물 美수출 통제 유예 … 보잉항공기 50대 구매하기로",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-24T13:41:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005768475?sid=104"
-    },
-    {
-     "title": "중국 대미 수출통제 유예, 일본엔 압박…한국 실용외교 시험대",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-24T13:24:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285161"
-    }
-   ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1408,
+  "flagged": 1410,
   "matched": 745,
   "avgLeadMin": 517,
   "recent": [
