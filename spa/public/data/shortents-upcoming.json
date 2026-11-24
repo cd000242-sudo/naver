@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T17:27:14.892Z",
+ "builtAt": "2026-11-24T17:37:18.155Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,109 +8,12 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
- "candidates": [
-  {
-   "keyword": "젠슨 황의 복귀",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 2,
-   "press": 8,
-   "firstArticleAt": "2026-11-24T16:13:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "\"국가자본주의·마오이즘\"...'젠슨황 복귀' 트럼프 개입 비판 고조",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-24T17:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437598?sid=104"
-    },
-    {
-     "title": "젠슨 황 복귀에 엔비디아 급등…추가 상승 놓고는 엇갈린 시각",
-     "press": "tokenpost.kr",
-     "publishedAt": "2026-11-24T17:18:00.000Z",
-     "link": "https://www.tokenpost.kr/news/cryptocurrency/443735"
-    },
-    {
-     "title": "젠슨 황 복귀에 코스피 급반등…AI 반도체주, 살아나나",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-24T17:00:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000086233"
-    }
-   ]
-  },
-  {
-   "keyword": "리야드 최고층 빌딩 피격",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
-   "firstArticleAt": "2026-11-24T16:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "사우디 수도 최고층 빌딩 또 피격...11명 부상",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-24T17:24:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437601?sid=104"
-    },
-    {
-     "title": "사우디 385m 초고층 빌딩 또 피격… 11명 부상",
-     "press": "dkilbo.com",
-     "publishedAt": "2026-11-24T16:36:00.000Z",
-     "link": "https://www.dkilbo.com/news/articleView.html?idxno=562042"
-    },
-    {
-     "title": "사우디 수도 최고층 빌딩, 경보도 없이 또 피격…11명 부상",
-     "press": "segye.com",
-     "publishedAt": "2026-11-24T16:28:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177851?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "미국 과잉생산 관세 조사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-24T16:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "블룸버그 \"트럼프 과잉생산 관세, 무역협정 세율 안 넘는다\"",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-24T16:46:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261125000013"
-    },
-    {
-     "title": "美 과잉생산 관세 이르면 이번 주 윤곽…韓 15% 유지 주목",
-     "press": "kbmaeil.com",
-     "publishedAt": "2026-11-24T16:44:00.000Z",
-     "link": "https://www.kbmaeil.com/article/20261125500003"
-    },
-    {
-     "title": "美 USTR, 이르면 이번주 '과잉생산 관세' 결과 발표할 듯(종합)",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-24T16:00:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3451853"
-    }
-   ]
-  }
- ],
+ "measured": 14,
+ "candidates": [],
  "hitRate": {
   "days": 7,
-  "flagged": 1399,
-  "matched": 729,
+  "flagged": 1398,
+  "matched": 728,
   "avgLeadMin": 512,
   "recent": [
    {
