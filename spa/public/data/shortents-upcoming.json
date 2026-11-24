@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T16:36:55.435Z",
+ "builtAt": "2026-11-24T16:46:59.658Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -13,8 +13,7 @@
   {
    "keyword": "젠슨 황 복귀와 증시 변동",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
    "articles90": 6,
    "recent20": 1,
@@ -81,12 +80,18 @@
     "signal.bz"
    ],
    "articles90": 4,
-   "recent20": 0,
+   "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-24T15:08:00.000Z",
+   "firstArticleAt": "2026-11-24T15:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "美 과잉생산 관세 이르면 이번 주 윤곽…韓 15% 유지 주목",
+     "press": "kbmaeil.com",
+     "publishedAt": "2026-11-24T16:44:00.000Z",
+     "link": "https://www.kbmaeil.com/article/20261125500003"
+    },
     {
      "title": "美 USTR, 이르면 이번주 '과잉생산 관세' 결과 발표할 듯(종합)",
      "press": "newscj.com",
@@ -98,19 +103,13 @@
      "press": "news.mtn.co.kr",
      "publishedAt": "2026-11-24T15:28:00.000Z",
      "link": "https://news.mtn.co.kr/article/2026112500242274013"
-    },
-    {
-     "title": "美 이르면 이번주 '과잉생산 관세' 발표…韓 15% 유지할 듯",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-24T15:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005847290?sid=101"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1401,
+  "flagged": 1400,
   "matched": 732,
   "avgLeadMin": 514,
   "recent": [
