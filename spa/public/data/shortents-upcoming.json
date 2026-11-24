@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T23:29:01.878Z",
+ "builtAt": "2026-11-24T23:39:04.683Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,37 +8,69 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 9,
  "candidates": [
   {
-   "keyword": "5·18 진압경찰 포상취소",
+   "keyword": "미국 과잉생산 관세 조사",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 24,
-   "recent20": 4,
-   "press": 22,
-   "firstArticleAt": "2026-11-24T22:01:00.000Z",
+   "articles90": 36,
+   "recent20": 7,
+   "press": 35,
+   "firstArticleAt": "2026-11-24T22:16:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "李 대통령, 5·18 진압경찰 등 포상 취소에 \"당연한 조치... 역사 교정 계...",
-     "press": "insight.co.kr",
-     "publishedAt": "2026-11-24T23:24:00.000Z",
-     "link": "https://www.insight.co.kr/news/583454"
+     "title": "美 '과잉생산 관세' 이르면 25일 발표...강제노동 관세와 합쳐 15% 상한 ...",
+     "press": "livebiz.today",
+     "publishedAt": "2026-11-24T23:36:00.000Z",
+     "link": "https://www.livebiz.today/news/articleView.html?idxno=206862"
     },
     {
-     "title": "5·18 진압 경찰 포상 취소…이 대통령 \"당연한 조치, 마지막 한 명까지...",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-24T23:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522313?sid=100"
+     "title": "젠슨 황, 복귀 하루만 공개 사과…美 '과잉생산 관세' 발표 전망",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-24T23:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929662?sid=104"
     },
     {
-     "title": "李 대통령 “5·18 진압경찰 서훈 박탈 당연…마지막 한 명까지 역사 교...",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-24T23:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005768511?sid=102"
+     "title": "[국제금융 브리핑] 미국, 과잉생산 관세 발표 임박...한·EU·일본 15% 이...",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-11-24T23:32:00.000Z",
+     "link": "https://www.tokenpost.kr/news/economy/443876"
+    }
+   ]
+  },
+  {
+   "keyword": "전국 영하권 추위",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 16,
+   "recent20": 3,
+   "press": 14,
+   "firstArticleAt": "2026-11-24T22:13:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "전국 영하권 ‘칼바람’ 추위…내일은 누그러져요",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-24T23:26:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002833825?sid=105"
+    },
+    {
+     "title": "오늘 아침 영하권 추위..내일부터 추위 풀려",
+     "press": "busanmbc.co.kr",
+     "publishedAt": "2026-11-24T23:26:00.000Z",
+     "link": "https://busanmbc.co.kr/01_new/new01_view.asp?idx=291340"
+    },
+    {
+     "title": "[날씨] 전국 아침 영하권 추위…서울 최저 체감 -8.4도",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-24T23:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929656?sid=103"
     }
    ]
   },
@@ -47,10 +79,10 @@
    "sources": [
     "nate"
    ],
-   "articles90": 12,
+   "articles90": 11,
    "recent20": 2,
-   "press": 12,
-   "firstArticleAt": "2026-11-24T22:09:00.000Z",
+   "press": 11,
+   "firstArticleAt": "2026-11-24T22:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -75,54 +107,23 @@
    ]
   },
   {
-   "keyword": "이도현 임지연 결별 추측",
+   "keyword": "젠슨 황 복귀 이틀만에 효과 감소",
    "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-24T22:33:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이도현, 임지연과 결별 암시했었나…\"사랑했어요\" 의미심장 SNS 글",
-     "press": "tvdaily.co.kr",
-     "publishedAt": "2026-11-24T23:06:00.000Z",
-     "link": "https://m.entertain.naver.com/article/440/0000054038"
-    },
-    {
-     "title": "이도현, 임지연과 결별 암시였나…SNS 의미심장 문구 \"난 당신을 더 사랑...",
-     "press": "tenasia.co.kr",
-     "publishedAt": "2026-11-24T23:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/312/0000786040"
-    },
-    {
-     "title": "'임지연과 결별' 이도현, 7주전 올린 사진엔…\"내가 당신을 더 사랑했어...",
-     "press": "mydaily.co.kr",
-     "publishedAt": "2026-11-24T23:00:00.000Z",
-     "link": "https://m.entertain.naver.com/article/117/0004127786"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황 효과 하루 만에 끝",
-   "sources": [
-    "signal.bz"
+    "signal.bz",
+    "nate"
    ],
    "articles90": 4,
-   "recent20": 2,
+   "recent20": 1,
    "press": 4,
-   "firstArticleAt": "2026-11-24T22:20:00.000Z",
+   "firstArticleAt": "2026-11-24T22:11:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨 황 효과 하루 만에 끝…금리·반도체 이익에 '촉각'",
-     "press": "ebn.co.kr",
-     "publishedAt": "2026-11-24T23:26:00.000Z",
-     "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1732895"
+     "title": "젠슨황 효과 '1일 천하'...반도체주 급락, 상승분 60% 반납",
+     "press": "jasm.co.kr",
+     "publishedAt": "2026-11-24T23:30:00.000Z",
+     "link": "https://www.jasm.co.kr/news/view/326397/?sc=Naver"
     },
     {
      "title": "[속보]'젠슨 황' 약발 하루 만에 끝?...반도체주 일제히 급락",
@@ -131,20 +132,26 @@
      "link": "https://n.news.naver.com/mnews/article/660/0000122130?sid=101"
     },
     {
-     "title": "‘젠슨 황 효과’ 하루만에 끝? 美 반도체 지수 8% 폭락…AI 관련주 줄하...",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-24T22:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002728008?sid=101"
+     "title": "'젠슨황 효과' 의문에 美증시 반도체지수 8% 급반락",
+     "press": "getnews.co.kr",
+     "publishedAt": "2026-11-24T22:18:00.000Z",
+     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=888370"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1375,
-  "matched": 716,
-  "avgLeadMin": 509,
+  "flagged": 1372,
+  "matched": 712,
+  "avgLeadMin": 515,
   "recent": [
+   {
+    "keyword": "날씨",
+    "hitKeyword": "전국 강추위 날씨",
+    "hitAt": "2026-11-25T08:30:00+09:00",
+    "leadMin": 2919
+   },
    {
     "keyword": "나스닥 선물",
     "hitKeyword": "엔비디아 나스닥",
@@ -198,12 +205,6 @@
     "hitKeyword": "사우디 빌딩 피격",
     "hitAt": "2026-11-25T07:00:00+09:00",
     "leadMin": 6083
-   },
-   {
-    "keyword": "상장",
-    "hitKeyword": "ETF 상장폐지 위험",
-    "hitAt": "2026-11-25T07:00:00+09:00",
-    "leadMin": 2009
    }
   ]
  }
