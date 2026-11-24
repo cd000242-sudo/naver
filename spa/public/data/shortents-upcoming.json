@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T02:15:49.844Z",
+ "builtAt": "2026-11-24T02:25:53.598Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,66 +11,98 @@
  "measured": 25,
  "candidates": [
   {
-   "keyword": "국무회의 이재명 대통령",
+   "keyword": "젠슨 황 복귀로 급등한 증시",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 67,
-   "recent20": 43,
-   "press": 44,
-   "firstArticleAt": "2026-11-24T01:44:00.000Z",
+   "articles90": 70,
+   "recent20": 22,
+   "press": 58,
+   "firstArticleAt": "2026-11-24T01:26:00.000Z",
    "exclusive": false,
-   "capped": false,
+   "capped": true,
    "samples": [
     {
-     "title": "중수청장, 국무회의 한 차례 불참 후 다시 배석…신임 경찰청장도 참석",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-24T02:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001206919?sid=102"
+     "title": "[특징주] 로보스타, 젠슨 황 복귀·삼성전자 로봇 인사발 테마 훈풍에 1...",
+     "press": "widedaily.com",
+     "publishedAt": "2026-11-24T02:24:00.000Z",
+     "link": "https://www.widedaily.com/news/articleView.html?idxno=304533"
     },
     {
-     "title": "이 대통령 \"사이비 종교단체 해산, 실효적 조치 검토할 때\"",
-     "press": "newstomato.com",
-     "publishedAt": "2026-11-24T02:14:00.000Z",
-     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321602&inflow=N"
+     "title": "‘젠슨 황 귀환’에 전 세계 증시 들썩…“AI 불확실성 해소” vs “신용...",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-11-24T02:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002833669?sid=101"
     },
     {
-     "title": "이 대통령 \"행정력 총동원해 시험 부정 범죄 엄정 대응\"",
-     "press": "daejonilbo.com",
-     "publishedAt": "2026-11-24T02:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/656/0000193373?sid=100"
+     "title": "젠슨 황 복귀에 삼전닉스 '반색'… K반도체 '깐부동맹' 문제 없나",
+     "press": "newsfc.co.kr",
+     "publishedAt": "2026-11-24T02:22:00.000Z",
+     "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82690"
     }
    ]
   },
   {
-   "keyword": "이용철 후보자 발언",
+   "keyword": "국무회의 이재명 대통령",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 50,
-   "recent20": 8,
-   "press": 36,
-   "firstArticleAt": "2026-11-24T00:47:00.000Z",
+   "articles90": 72,
+   "recent20": 44,
+   "press": 52,
+   "firstArticleAt": "2026-11-24T01:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "\"공소취소는 무슨\" \"잘된 인사\" 이용철 청문회 시작부터 '으르렁'",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-24T02:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006414662?sid=100"
+     "title": "李대통령, LH 매입확약 조기 시행 지시…\"미분양 걱정 말고 집 지어라\"",
+     "press": "news.einfomax.co.kr",
+     "publishedAt": "2026-11-24T02:24:00.000Z",
+     "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446240"
     },
     {
-     "title": "이용철 법무부 장관 후보자 인사청문회…\"공소취소는 검사가 하는 것\"",
-     "press": "cbci.co.kr",
-     "publishedAt": "2026-11-24T02:10:00.000Z",
-     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630180"
+     "title": "김지용 중수청장, 국무회의 다시 참석…\"정책소통·협력 목적\"(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-24T02:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016460184?sid=102"
     },
     {
-     "title": "與 '조희대 탄핵' 박차…이용철 청문회 돌입",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-24T02:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929334?sid=100"
+     "title": "국무회의 참석한 오세훈 서울시장",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-24T02:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016460180?sid=100"
+    }
+   ]
+  },
+  {
+   "keyword": "국민주권의 날 지정",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 36,
+   "recent20": 6,
+   "press": 31,
+   "firstArticleAt": "2026-11-24T01:07:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "12월 3일 '국민주권의 날' 국가기념일 지정…이 대통령 \"위대한 국민 승...",
+     "press": "goodmorningcc.com",
+     "publishedAt": "2026-11-24T02:24:00.000Z",
+     "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=456423"
+    },
+    {
+     "title": "李대통령, 12월 3일 '국민주권의 날' 지정 안건 처리 예정",
+     "press": "sisunnews.co.kr",
+     "publishedAt": "2026-11-24T02:22:00.000Z",
+     "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=250320"
+    },
+    {
+     "title": "李대통령 “빛의 혁명 12·3 국가기념일로 지정”",
+     "press": "kmib.co.kr",
+     "publishedAt": "2026-11-24T02:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/005/0001887079?sid=100"
     }
    ]
   },
@@ -80,61 +112,61 @@
     "signal.bz"
    ],
    "articles90": 31,
-   "recent20": 6,
+   "recent20": 5,
    "press": 31,
-   "firstArticleAt": "2026-11-24T00:49:00.000Z",
+   "firstArticleAt": "2026-11-24T00:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "홈플러스, 26일부터 온라인 배송 중단 \"상품 수급 차질\"",
-     "press": "getnews.co.kr",
-     "publishedAt": "2026-11-24T02:14:00.000Z",
-     "link": "https://www.getnews.co.kr/news/articleView.html?idxno=888258"
+     "title": "홈플러스, 26일부터 온라인 배송 중단…\"상품수급 차질\"",
+     "press": "seouleconews.com",
+     "publishedAt": "2026-11-24T02:24:00.000Z",
+     "link": "http://www.seouleconews.com/news/articleView.html?idxno=95214"
     },
     {
-     "title": "홈플러스, 자금난에 온라인 배송 중단···경영 정상화 '빨간불'",
-     "press": "newsfreezone.co.kr",
-     "publishedAt": "2026-11-24T02:06:00.000Z",
-     "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=720971"
+     "title": "홈플러스, '자금난'에 결국…\"온라인 배송 중단\"",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-24T02:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979618?sid=102"
     },
     {
-     "title": "홈플러스, 자금난에 온라인 배송마저 중단…경영 정상화 '기로'",
-     "press": "dailysmart.co.kr",
-     "publishedAt": "2026-11-24T02:00:00.000Z",
-     "link": "http://www.dailysmart.co.kr/news/articleView.html?idxno=133015"
+     "title": "홈플러스, 26일부터 온라인배송 중단…\"신선식품 납품 10% 미만\"",
+     "press": "cstimes.com",
+     "publishedAt": "2026-11-24T02:16:00.000Z",
+     "link": "https://www.cstimes.com/news/articleView.html?idxno=729151"
     }
    ]
   },
   {
-   "keyword": "국민주권의 날 지정",
+   "keyword": "이용철 후보자 답변",
    "sources": [
-    "signal.bz"
+    "nate"
    ],
-   "articles90": 31,
-   "recent20": 5,
-   "press": 26,
-   "firstArticleAt": "2026-11-24T01:07:00.000Z",
+   "articles90": 54,
+   "recent20": 18,
+   "press": 28,
+   "firstArticleAt": "2026-11-24T00:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'빛의 혁명' 12월 3일 '국민주권의날'로...이 대통령 \"오늘 처리 예정\"",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-24T02:08:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437220?sid=100"
+     "title": "[포토] 답변하는 이용철 법무부 장관 후보자",
+     "press": "inews24.com",
+     "publishedAt": "2026-11-24T02:24:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/031/0001077809?sid=100"
     },
     {
-     "title": "이 대통령, 12월 3일 '국민주권의 날'…국가기념일 제정",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-24T02:05:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394699?sid=100"
+     "title": "이용철 법무부 장관 후보자, 국회 청문회에서 '이재명 공소 취소' 답변...",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-24T02:22:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=887053"
     },
     {
-     "title": "李 “빛의 혁명, 위대한 국민 승리”…‘12·3 국민주권의 날’ 지정안...",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-24T02:02:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611240061"
+     "title": "이용철, '李공소취소' 묻자 \"국민 납득 어려운 무리한 지휘 안 해\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-24T02:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004213172?sid=102"
     }
    ]
   },
@@ -144,7 +176,7 @@
     "signal.bz"
    ],
    "articles90": 22,
-   "recent20": 5,
+   "recent20": 1,
    "press": 21,
    "firstArticleAt": "2026-11-24T00:57:00.000Z",
    "exclusive": false,
@@ -171,66 +203,66 @@
    ]
   },
   {
-   "keyword": "김서형 대시 하차",
+   "keyword": "원내대책회의 정점식 원내대표",
    "sources": [
     "nate"
    ],
-   "articles90": 17,
-   "recent20": 4,
-   "press": 17,
-   "firstArticleAt": "2026-11-24T00:46:00.000Z",
+   "articles90": 19,
+   "recent20": 2,
+   "press": 18,
+   "firstArticleAt": "2026-11-24T01:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[헤럴드pic] 모두발언하는 정점식 국민의힘 원내대표",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-24T02:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002727622?sid=100"
+    },
+    {
+     "title": "[헤럴드pic] 회의에 참석하는 정점식 국민의힘 원내대표",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-24T02:13:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002727623?sid=100"
+    },
+    {
+     "title": "정점식 \"지선용 증시부양 주가조작…'이재명 버블' 특검 추진\"",
+     "press": "newstomato.com",
+     "publishedAt": "2026-11-24T02:02:00.000Z",
+     "link": "http://www.newstomato.com/ReadNews.aspx?no=1321600&inflow=N"
+    }
+   ]
+  },
+  {
+   "keyword": "김서형, 건강 문제로 대시 하차",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 10,
+   "recent20": 1,
+   "press": 10,
+   "firstArticleAt": "2026-11-24T01:01:00.000Z",
    "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "\"건강 악화\" 김서형, 3년만 안방 복귀 무산..박보경 '대시' 합류 [종합]",
-     "press": "osen.co.kr",
-     "publishedAt": "2026-11-24T02:10:00.000Z",
-     "link": "https://m.entertain.naver.com/article/109/0005644417"
-    },
-    {
-     "title": "김서형 ‘대시’ 하차, 왜? 공석에 박보경 투입",
-     "press": "kukinews.com",
-     "publishedAt": "2026-11-24T02:06:00.000Z",
-     "link": "https://www.kukinews.com/article/view/kuk202611240078"
+     "title": "김서형, 건강 악화로 '대시' 촬영 중 하차…박보경 대체 투입",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-24T02:24:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=784354"
     },
     {
      "title": "김서형, 건강악하로 ‘대시’ 하차…박보경 투입",
      "press": "sports.khan.co.kr",
      "publishedAt": "2026-11-24T02:03:00.000Z",
      "link": "https://m.entertain.naver.com/article/144/0001151423"
-    }
-   ]
-  },
-  {
-   "keyword": "현혹 1월 6일 공개 확정",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 9,
-   "recent20": 1,
-   "press": 9,
-   "firstArticleAt": "2026-11-24T00:46:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "수지·김선호의 치명적 만남…'현혹', 내년 1월 6일 공개 확정 [공식]",
-     "press": "stoo.com",
-     "publishedAt": "2026-11-24T01:58:00.000Z",
-     "link": "http://www.stoo.com/article.php?aid=110057065626"
     },
     {
-     "title": "수지, 뱀파이어로 파격 변신…김선호와 ‘현혹’ 내년 1월 6일 공개",
-     "press": "viva100.com",
-     "publishedAt": "2026-11-24T01:48:00.000Z",
-     "link": "https://www.viva100.com/article/20261124500512"
-    },
-    {
-     "title": "수지, 뱀파이어 송정화로 돌아온다…김선호와 '현혹' 공개일?",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-24T01:44:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16284687"
+     "title": "박보경, 김서형 하차한 SBS 드라마 '대시' 합류",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-11-24T02:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016460090?sid=103"
     }
    ]
   },
@@ -240,7 +272,7 @@
     "google"
    ],
    "articles90": 10,
-   "recent20": 2,
+   "recent20": 1,
    "press": 8,
    "firstArticleAt": "2026-11-24T00:56:00.000Z",
    "exclusive": false,
@@ -267,14 +299,46 @@
    ]
   },
   {
+   "keyword": "하이닉스 주가",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 7,
+   "recent20": 2,
+   "press": 7,
+   "firstArticleAt": "2026-11-24T01:05:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "\"갑자기 부자될 수 없다…주가 출렁이는게 건강한 것\" 존리, 폭락장 개...",
+     "press": "imaeil.com",
+     "publishedAt": "2026-11-24T02:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/088/0001041944?sid=101"
+    },
+    {
+     "title": "\"350만원 간다더니\" 골드만삭스, '삼전닉스' 목표주가 또 내렸다",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-24T02:18:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005608844?sid=101"
+    },
+    {
+     "title": "[특징주] SK하이닉스, 젠슨황 엔비디아 CEO 복귀 소식 영향 '상승'",
+     "press": "jeonmae.co.kr",
+     "publishedAt": "2026-11-24T01:56:00.000Z",
+     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1315194"
+    }
+   ]
+  },
+  {
    "keyword": "화성시",
    "sources": [
     "google"
    ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-24T00:46:00.000Z",
+   "articles90": 7,
+   "recent20": 0,
+   "press": 7,
+   "firstArticleAt": "2026-11-24T00:57:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -299,34 +363,34 @@
    ]
   },
   {
-   "keyword": "하이닉스 주가",
+   "keyword": "박보경 대시 대체 투입",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 6,
+   "articles90": 5,
    "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-24T00:53:00.000Z",
-   "exclusive": false,
+   "press": 5,
+   "firstArticleAt": "2026-11-24T01:08:00.000Z",
+   "exclusive": true,
    "capped": false,
    "samples": [
     {
-     "title": "[특징주] SK하이닉스, 젠슨황 엔비디아 CEO 복귀 소식 영향 '상승'",
-     "press": "jeonmae.co.kr",
-     "publishedAt": "2026-11-24T01:56:00.000Z",
-     "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1315194"
+     "title": "김서형, 건강 악화로 '대시' 촬영 중 하차…박보경 대체 투입",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-24T02:24:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=784354"
     },
     {
-     "title": "젠슨 황 복귀 전날 ‘16억 자사주 매입’…SK하이닉스 사장, 하루 만에 ...",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-24T01:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000133509?sid=101"
+     "title": "\"건강 상태 악화\" 김서형, '대시' 촬영 중 하차…박보경 대체 투입[공식...",
+     "press": "spotvnews.co.kr",
+     "publishedAt": "2026-11-24T01:38:00.000Z",
+     "link": "https://m.entertain.naver.com/article/477/0000640538"
     },
     {
-     "title": "젠슨 황 복귀로 삼성전자·SK하이닉스 주가 급등, 투자자들 몰린다",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-24T01:48:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=887044"
+     "title": "김서형, '대시' 촬영 도중 건강문제로 하차…박보경 대체 투입",
+     "press": "news1.kr",
+     "publishedAt": "2026-11-24T01:38:00.000Z",
+     "link": "https://m.entertain.naver.com/article/421/0009306619"
     }
    ]
   },
@@ -359,38 +423,6 @@
      "press": "footballist.co.kr",
      "publishedAt": "2026-11-24T01:27:00.000Z",
      "link": "https://m.sports.naver.com/wfootball/article/436/0000115197"
-    }
-   ]
-  },
-  {
-   "keyword": "박보경 대시 대체 투입",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 4,
-   "recent20": 0,
-   "press": 4,
-   "firstArticleAt": "2026-11-24T01:08:00.000Z",
-   "exclusive": true,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김서형, '대시' 촬영 도중 건강문제로 하차…박보경 대체 투입",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-24T01:38:00.000Z",
-     "link": "https://m.entertain.naver.com/article/421/0009306619"
-    },
-    {
-     "title": "\"건강 상태 악화\" 김서형, '대시' 촬영 중 하차…박보경 대체 투입[공식...",
-     "press": "spotvnews.co.kr",
-     "publishedAt": "2026-11-24T01:38:00.000Z",
-     "link": "https://m.entertain.naver.com/article/477/0000640538"
-    },
-    {
-     "title": "김서형, 건강 문제로 '대시' 하차…박보경 대체 투입",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-24T01:22:00.000Z",
-     "link": "https://m.entertain.naver.com/article/437/0000522150"
     }
    ]
   },
@@ -430,8 +462,8 @@
  "hitRate": {
   "days": 7,
   "flagged": 1246,
-  "matched": 667,
-  "avgLeadMin": 546,
+  "matched": 666,
+  "avgLeadMin": 542,
   "recent": [
    {
     "keyword": "관광",
