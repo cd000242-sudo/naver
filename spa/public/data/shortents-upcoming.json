@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T22:08:38.216Z",
+ "builtAt": "2026-11-24T22:18:41.262Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -16,30 +16,30 @@
     "signal.bz",
     "nate"
    ],
-   "articles90": 34,
-   "recent20": 8,
-   "press": 31,
-   "firstArticleAt": "2026-11-24T20:40:00.000Z",
+   "articles90": 37,
+   "recent20": 9,
+   "press": 34,
+   "firstArticleAt": "2026-11-24T20:56:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "서울 지하철 노사 협상 극적 타결…출근길 교통대란 피했다",
-     "press": "mbn.co.kr",
-     "publishedAt": "2026-11-24T22:07:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979718?sid=102"
+     "title": "출근길 지하철 정상 운행한다… 서울 지하철 노조, 파업 철회",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-24T22:16:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005768492?sid=102"
     },
     {
-     "title": "'출근길 대란' 피했다...서울 지하철 1·2·3노조 협상 타결",
-     "press": "wikitree.co.kr",
-     "publishedAt": "2026-11-24T22:02:00.000Z",
-     "link": "https://www.wikitree.co.kr/articles/1177502"
+     "title": "서울 지하철 노사 극적 타결 … 출근길 교통대란 피했다",
+     "press": "newdaily.co.kr",
+     "publishedAt": "2026-11-24T22:14:00.000Z",
+     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/25/2026112550012.html"
     },
     {
-     "title": "출근길 대란 피했다…서울지하철 노사 18시간 만에 극적 타결",
-     "press": "biz.sbs.co.kr",
-     "publishedAt": "2026-11-24T22:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/374/0000545695?sid=101"
+     "title": "서울지하철 파업 철회…노사 극적 합의",
+     "press": "mbn.mk.co.kr",
+     "publishedAt": "2026-11-24T22:09:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/057/0001979719?sid=102"
     }
    ]
   },
@@ -48,30 +48,30 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 20,
-   "recent20": 6,
-   "press": 18,
-   "firstArticleAt": "2026-11-24T20:42:00.000Z",
+   "articles90": 22,
+   "recent20": 5,
+   "press": 19,
+   "firstArticleAt": "2026-11-24T21:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "“트럼프 행정부, 이르면 오늘 밤 과잉생산 관세 발표”···외신, 한국...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-24T21:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484869?sid=104"
+     "title": "엔비디아 7% 급락에 이더리움도 휘청…트럼프 관세 충격에 1,444달러까지...",
+     "press": "coinreaders.com",
+     "publishedAt": "2026-11-24T22:16:00.000Z",
+     "link": "http://coinreaders.com/273121"
     },
     {
-     "title": "\"美, 이르면 이번주 '과잉생산' 관세 예고...韓 영향 주목-[굿모닝 글로...",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-24T21:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001273852?sid=101"
+     "title": "뉴욕증시, 기술주 매도ㆍ관세 우려 속 혼조 ⋯나스닥 1.5%↓[종합]",
+     "press": "etoday.co.kr",
+     "publishedAt": "2026-11-24T22:16:00.000Z",
+     "link": "https://www.etoday.co.kr/news/view/2652490"
     },
     {
-     "title": "美USTR, 이르면 오늘 저녁 '과잉생산 관세 발표...한국, 15% 관세 유지 예",
-     "press": "beyondpost.co.kr",
-     "publishedAt": "2026-11-24T21:54:00.000Z",
-     "link": "http://www.beyondpost.co.kr/view.php?ud=2026112506502192142aaae0046f_30"
+     "title": "미, 이르면 오늘 ‘과잉생산 관세’ 발표…‘한국 15% 유지’ 촉각",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-11-24T22:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012300563?sid=104"
     }
    ]
   },
@@ -80,103 +80,39 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 4,
-   "recent20": 1,
-   "press": 4,
+   "articles90": 6,
+   "recent20": 3,
+   "press": 6,
    "firstArticleAt": "2026-11-24T21:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "국내 코인 발행 허용 추진…비트코인·리플에 미칠 영향은?",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-24T22:12:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285413"
+    },
+    {
+     "title": "금융위, 은행 중심 원화코인···거래소 지분 20% 제한 추진",
+     "press": "hansbiz.co.kr",
+     "publishedAt": "2026-11-24T22:10:00.000Z",
+     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=886878"
+    },
+    {
      "title": "[스테이블코인 어디로] 디지털자산법 베일 벗었지만…업계 \"성장보다 규...",
      "press": "dealsite.co.kr",
      "publishedAt": "2026-11-24T22:04:00.000Z",
      "link": "https://dealsite.co.kr/articles/173432"
-    },
-    {
-     "title": "민간이 키운 코인거래소…성장 대가는 ‘지분 족쇄’",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-24T21:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/119/0003159055?sid=101"
-    },
-    {
-     "title": "코인거래소 대주주 지분 최대 34%...스테이블코인 발행은 은행 주도로",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-24T21:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004685810?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "한미 외교안보라인 교체",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-24T20:47:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美, 韓 외교·안보라인 교체에 \"한미동맹 긴밀한 협력 중요\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-24T21:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653190?sid=100"
-    },
-    {
-     "title": "美, 韓 외교·안보라인 교체에 “한미동맹 내 긴밀 협력 중요”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-24T21:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002727979?sid=104"
-    },
-    {
-     "title": "美, 韓 외교안보라인 교체에 \"한미동맹 긴밀 협력 중요\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-24T20:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929631?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "이도현 임지연 결별?",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-24T20:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "이도현, 임지연과 결별 암시?-7주 전 의미심장한 문구",
-     "press": "mediafine.co.kr",
-     "publishedAt": "2026-11-24T21:48:00.000Z",
-     "link": "https://www.mediafine.co.kr/news/articleView.html?idxno=95857"
-    },
-    {
-     "title": "'임지연과 결별' 이도현…\"당신을 더 사랑했어요\" SNS 눈길",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-24T21:14:00.000Z",
-     "link": "https://m.entertain.naver.com/article/008/0005445954"
-    },
-    {
-     "title": "'찼네 차였네'…임지연·이도현 결별에 때아닌 논쟁",
-     "press": "bntnews.co.kr",
-     "publishedAt": "2026-11-24T20:56:00.000Z",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202611250004"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1379,
-  "matched": 723,
-  "avgLeadMin": 549,
+  "flagged": 1377,
+  "matched": 721,
+  "avgLeadMin": 542,
   "recent": [
    {
     "keyword": "후티 사우디 공습 예고",
