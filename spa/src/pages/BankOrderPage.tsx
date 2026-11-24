@@ -72,7 +72,7 @@ async function fetchOrderStatus(orderId: string) {
  * 알아서 담아온 것을 통째로 무시했다(사장님 실측 2026-08-20). 값은 카탈로그
  * 실측이다. 자동 인상은 껐다(배수 1) — 배수를 되살리면 여기서도 전환된다.
  */
-function readCartOrder(params: URLSearchParams, catalog: Product[]): { label: string; names: string[]; amount: number; monthly: boolean; taxNote: string } | null {
+function readCartOrder(params: URLSearchParams, catalog: Product[]): { id: string; label: string; names: string[]; amount: number; monthly: boolean; taxNote: string } | null {
     const ids = (params.get('items') || '').split(',').map((id) => id.trim()).filter(Boolean);
     const term = params.get('term') as TermId | null;
     if (ids.length === 0 || !term || !TERMS.some((item) => item.id === term)) return null;
@@ -87,6 +87,8 @@ function readCartOrder(params: URLSearchParams, catalog: Product[]): { label: st
     }, 0);
     const termLabel = TERMS.find((item) => item.id === term)?.label || '';
     return {
+        // The same id the card payment sends (ids joined by +, then the term): the server checks the amount and issues by it.
+        id: `${picked.map((product) => product.id).join('+')}-${term}`,
         label: `${picked.map((product) => product.name).join(' · ')} ${termLabel}`,
         names: picked.map((product) => `${product.name} ${termLabel}`),
         amount,
@@ -235,7 +237,7 @@ function BankOrderPage() {
             const res = await fetch(GAS_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'text/plain' },
-                body: JSON.stringify({ action: 'bank-order', name: n, email: e, product: productLabel, amount: orderAmount }),
+                body: JSON.stringify({ action: 'bank-order', name: n, email: e, product: productLabel, amount: orderAmount, productId: cartOrder ? cartOrder.id : selected.id }),
             });
             const data = await parseGasJson(res);
             if (data.ok) {
@@ -495,10 +497,16 @@ function ResultView({ info, copyLicense, licCopyLabel }: { info: ResultInfo; cop
                     <div style={{ ...softBox, padding: 24, marginTop: 20, textAlign: 'left' }}>
                         <h2 style={{ textAlign: 'center', color: light.positive, fontSize: type.lead, fontWeight: 600, marginBottom: 16 }}>라이선스 발급 완료</h2>
                         <div style={{ color: light.textSecondary, fontSize: type.meta, marginBottom: 8 }}>{purchaseGuide(info.product || '').codeLabel}</div>
-                        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-                            <input readOnly value={code} style={{ ...inputBase, flex: 1, minWidth: 0, fontFamily: 'monospace', fontWeight: 600, letterSpacing: 0.5 }} />
-                            <button onClick={() => copyLicense(code)} style={{ minHeight: 48, padding: '0 20px', background: light.accent, color: light.onAccent, border: 'none', borderRadius: lightRadius.control, fontWeight: 600, cursor: 'pointer', fontSize: type.small, whiteSpace: 'nowrap' }}>{licCopyLabel}</button>
-                        </div>
+                        {/* A cart gets one licence per product (the server joins them with a comma): one row and one copy button each. */}
+                        {String(code).split(/\s*,\s*/).filter(Boolean).map((one, index, all) => (
+                            <div key={one} style={{ marginTop: index ? 12 : 0 }}>
+                                {all.length > 1 && <div style={{ color: light.textSecondary, fontSize: type.meta, marginBottom: 4 }}>{(info.product || '').replace(/\s(1개월|3개월|1년|영구제)$/, '').split(' · ')[index] || ''}</div>}
+                                <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                                    <input readOnly value={one} style={{ ...inputBase, flex: 1, minWidth: 0, fontFamily: 'monospace', fontWeight: 600, letterSpacing: 0.5 }} />
+                                    <button onClick={() => copyLicense(one)} style={{ minHeight: 48, padding: '0 20px', background: light.accent, color: light.onAccent, border: 'none', borderRadius: lightRadius.control, fontWeight: 600, cursor: 'pointer', fontSize: type.small, whiteSpace: 'nowrap' }}>{licCopyLabel}</button>
+                                </div>
+                            </div>
+                        ))}
                         <div style={{ color: light.textSecondary, fontSize: type.small, marginTop: 16, lineHeight: 1.6 }}>
                             이 코드는 입력하신 이메일로도 발송되었습니다.<br />
                             {purchaseGuide(info.product || '').usage}

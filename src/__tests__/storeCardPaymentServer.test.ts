@@ -53,7 +53,7 @@ function server(siteContent: unknown = {}, siteReads = { count: 0 }) {
   const context = vm.createContext(stubs);
   const code = [
     ...['STORE_PRODUCT_SEEDS_', 'STORE_TERMS_', 'SUBSCRIPTION_PRODUCTS'].map(varSource),
-    ...['storeCatalog_', 'storeCardAmount_', 'resolveStoreOrder_', 'subscriptionProductFor_', 'subscriptionShape_', 'subscriptionAlreadyHeld_', 'handleConfirmPaymentJSONP'].map(functionSource),
+    ...['storeCatalog_', 'storeCardAmount_', 'storeOrderShape_', 'resolveStoreOrder_', 'subscriptionProductFor_', 'subscriptionShape_', 'subscriptionAlreadyHeld_', 'handleConfirmPaymentJSONP'].map(functionSource),
   ].join('\n');
   vm.runInContext(code, context);
   return { fn: context as unknown as Record<string, (...args: unknown[]) => any>, log };
