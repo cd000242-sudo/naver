@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T22:18:41.262Z",
+ "builtAt": "2026-11-24T22:28:44.119Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,38 +8,37 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 10,
+ "measured": 14,
  "candidates": [
   {
    "keyword": "서울 지하철 협상 타결",
    "sources": [
-    "signal.bz",
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 37,
+   "articles90": 41,
    "recent20": 9,
-   "press": 34,
-   "firstArticleAt": "2026-11-24T20:56:00.000Z",
+   "press": 37,
+   "firstArticleAt": "2026-11-24T21:02:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "출근길 지하철 정상 운행한다… 서울 지하철 노조, 파업 철회",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-24T22:16:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005768492?sid=102"
+     "title": "서울지하철 3개 노조 본교섭 2~4분 만에 정회",
+     "press": "vegannews.co.kr",
+     "publishedAt": "2026-11-24T22:24:00.000Z",
+     "link": "https://www.vegannews.co.kr/news/article.html?no=410865"
     },
     {
-     "title": "서울 지하철 노사 극적 타결 … 출근길 교통대란 피했다",
-     "press": "newdaily.co.kr",
-     "publishedAt": "2026-11-24T22:14:00.000Z",
-     "link": "https://www.newdaily.co.kr/site/data/html/2026/11/25/2026112550012.html"
+     "title": "서울 지하철 협상 타결로 파업 철회…출근대란 없어",
+     "press": "yonhapnewstv.co.kr",
+     "publishedAt": "2026-11-24T22:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/422/0000929643?sid=102"
     },
     {
-     "title": "서울지하철 파업 철회…노사 극적 합의",
-     "press": "mbn.mk.co.kr",
-     "publishedAt": "2026-11-24T22:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/057/0001979719?sid=102"
+     "title": "서울지하철 파업 철회로 군포 출근길 1·4호선 감축 우려 해소",
+     "press": "mediagunpo.co.kr",
+     "publishedAt": "2026-11-24T22:20:00.000Z",
+     "link": "http://www.mediagunpo.co.kr/22150"
     }
    ]
   },
@@ -48,30 +47,62 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 22,
-   "recent20": 5,
-   "press": 19,
+   "articles90": 28,
+   "recent20": 8,
+   "press": 23,
    "firstArticleAt": "2026-11-24T21:07:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "엔비디아 7% 급락에 이더리움도 휘청…트럼프 관세 충격에 1,444달러까지...",
-     "press": "coinreaders.com",
-     "publishedAt": "2026-11-24T22:16:00.000Z",
-     "link": "http://coinreaders.com/273121"
+     "title": "美 과잉생산 관세 조사 결과, 이르면 이번 주 공개...韓 15% 유지 전망",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-24T22:26:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=784500"
     },
     {
-     "title": "뉴욕증시, 기술주 매도ㆍ관세 우려 속 혼조 ⋯나스닥 1.5%↓[종합]",
-     "press": "etoday.co.kr",
-     "publishedAt": "2026-11-24T22:16:00.000Z",
-     "link": "https://www.etoday.co.kr/news/view/2652490"
+     "title": "美 과잉생산 관세 발표 임박…한국 15% 유지 전망",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-11-24T22:25:00.000Z",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000086274"
     },
     {
-     "title": "미, 이르면 오늘 ‘과잉생산 관세’ 발표…‘한국 15% 유지’ 촉각",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-24T22:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012300563?sid=104"
+     "title": "트럼프 추가관세·젠슨 황 복귀효과 소진에 미국 증시 부진···엔트로...",
+     "press": "khan.co.kr",
+     "publishedAt": "2026-11-24T22:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/032/0003484874?sid=101"
+    }
+   ]
+  },
+  {
+   "keyword": "美 관세 발표, 韓 15% 유지?",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 12,
+   "recent20": 1,
+   "press": 11,
+   "firstArticleAt": "2026-11-24T21:09:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "美 과잉생산 관세 조사 결과, 이르면 이번 주 공개...韓 15% 유지 전망",
+     "press": "slist.kr",
+     "publishedAt": "2026-11-24T22:26:00.000Z",
+     "link": "https://www.slist.kr/news/articleView.html?idxno=784500"
+    },
+    {
+     "title": "\"美, 이르면 이번주 '과잉생산' 관세 예고...韓 영향 주목-[굿모닝 글로...",
+     "press": "wowtv.co.kr",
+     "publishedAt": "2026-11-24T21:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/215/0001273852?sid=101"
+    },
+    {
+     "title": "美 '과잉생산 관세' 이르면 오늘 발표…외신 \"韓 15% 유지 예상\"",
+     "press": "fnnews.com",
+     "publishedAt": "2026-11-24T21:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/014/0005609261?sid=104"
     }
    ]
   },
@@ -81,7 +112,7 @@
     "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 3,
+   "recent20": 2,
    "press": 6,
    "firstArticleAt": "2026-11-24T21:00:00.000Z",
    "exclusive": false,
@@ -106,13 +137,109 @@
      "link": "https://dealsite.co.kr/articles/173432"
     }
    ]
+  },
+  {
+   "keyword": "2026년 11월 운세",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 7,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-24T21:00:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오늘의 운세] 2026년 11월 25일 수요일 띠별 운세… 양·돼지·개띠 '대...",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-24T22:18:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3084061"
+    },
+    {
+     "title": "[오늘의 운세] 25일 수요일 나의 운세는?",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-24T21:30:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1194719"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 25일 (수) 띠별운세 '한 주를 잘 넘기자'",
+     "press": "dailypop.kr",
+     "publishedAt": "2026-11-24T21:30:00.000Z",
+     "link": "http://www.dailypop.kr/news/articleView.html?idxno=104284"
+    }
+   ]
+  },
+  {
+   "keyword": "젠슨 황 첫 회의 사과",
+   "sources": [
+    "nate"
+   ],
+   "articles90": 5,
+   "recent20": 1,
+   "press": 5,
+   "firstArticleAt": "2026-11-24T21:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "젠슨 황 \"아내와의 대화 가장 힘들었다\"…복귀 후 첫 직원회의서 사과",
+     "press": "news.mtn.co.kr",
+     "publishedAt": "2026-11-24T22:22:00.000Z",
+     "link": "https://news.mtn.co.kr/article/2026112507200782875"
+    },
+    {
+     "title": "젠슨 황 \"아내와 대화 가장 힘들었다…CEO 승계 계획 필요 없어\"",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-11-24T21:48:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005445957?sid=105"
+    },
+    {
+     "title": "젠슨 황, 직원회의서 사과…“매일 심리치료, 승계계획 필요없다”",
+     "press": "donga.com",
+     "publishedAt": "2026-11-24T21:21:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764984?sid=104"
+    }
+   ]
+  },
+  {
+   "keyword": "한미 외교안보라인 교체",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 3,
+   "recent20": 1,
+   "press": 3,
+   "firstArticleAt": "2026-11-24T21:04:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "이재명 대통령의 깜짝 인사 개편, 한미동맹 강화에 어떤 변화가 있을까",
+     "press": "gokorea.kr",
+     "publishedAt": "2026-11-24T22:22:00.000Z",
+     "link": "https://www.gokorea.kr/news/articleView.html?idxno=887169"
+    },
+    {
+     "title": "美, 韓 외교·안보라인 교체에 \"한미동맹 긴밀한 협력 중요\"",
+     "press": "news.tvchosun.com",
+     "publishedAt": "2026-11-24T21:19:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/448/0000653190?sid=100"
+    },
+    {
+     "title": "美, 韓 외교·안보라인 교체에 “한미동맹 내 긴밀 협력 중요”",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-24T21:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002727979?sid=104"
+    }
+   ]
   }
  ],
  "hitRate": {
   "days": 7,
   "flagged": 1377,
-  "matched": 721,
-  "avgLeadMin": 542,
+  "matched": 719,
+  "avgLeadMin": 544,
   "recent": [
    {
     "keyword": "후티 사우디 공습 예고",
