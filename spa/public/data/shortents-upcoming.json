@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T13:31:44.174Z",
+ "builtAt": "2026-11-24T13:41:50.359Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,180 +8,26 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 28,
+ "measured": 22,
  "candidates": [
-  {
-   "keyword": "김혜경 여사, 권양숙 여사 오찬",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 25,
-   "recent20": 1,
-   "press": 24,
-   "firstArticleAt": "2026-11-24T12:03:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "김혜경 여사 만난 권양숙 여사 “노무현·이재명 대통령 정말 닮아”",
-     "press": "segye.com",
-     "publishedAt": "2026-11-24T13:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/022/0004177830?sid=100"
-    },
-    {
-     "title": "권양숙 여사 “노무현·이재명 대통령 식성·수면·성격 닮아…건강 챙...",
-     "press": "kyeonggi.com",
-     "publishedAt": "2026-11-24T13:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/666/0000133660?sid=100"
-    },
-    {
-     "title": "김 여사 만난 권양숙 여사 \"두 대통령 식성부터 성격도 닮아\"",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-24T13:06:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522291?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "세종 이전 확정",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 18,
-   "recent20": 1,
-   "press": 18,
-   "firstArticleAt": "2026-11-24T12:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "금융위·경찰청 등 31개 기관 세종행 확정… 인권위는 청사 신축 후 이전",
-     "press": "biz.chosun.com",
-     "publishedAt": "2026-11-24T13:12:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/366/0001207078?sid=102"
-    },
-    {
-     "title": "금융위 등 31개 기관 세종 이전 확정... 외교·국방·통일·법무 등 미정",
-     "press": "jasm.co.kr",
-     "publishedAt": "2026-11-24T12:54:00.000Z",
-     "link": "https://www.jasm.co.kr/news/view/326382/?sc=Naver"
-    },
-    {
-     "title": "감사원·경찰청 등 31개 기관 5460명, 2031년까지 세종 이전",
-     "press": "joseilbo.com",
-     "publishedAt": "2026-11-24T12:44:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/123/0002394747?sid=100"
-    }
-   ]
-  },
-  {
-   "keyword": "대전 베이징 승리",
-   "sources": [
-    "daum"
-   ],
-   "articles90": 16,
-   "recent20": 3,
-   "press": 13,
-   "firstArticleAt": "2026-11-24T12:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "대전, 베이징 상대로 진땀승…ACLE 16강 희망 살렸다",
-     "press": "dailian.co.kr",
-     "publishedAt": "2026-11-24T13:20:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/119/0003159034"
-    },
-    {
-     "title": "'실수 놓치지 않은 압박' 대전, ACLE 베이징 궈안 3-2 꺾고 2연패 탈출.....",
-     "press": "maniareport.com",
-     "publishedAt": "2026-11-24T13:14:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/425/0000215350"
-    },
-    {
-     "title": "[ACLE 스타] '2경기 연속골' 마사가 있어야 대전이 빛난다...차이 만드는...",
-     "press": "interfootball.co.kr",
-     "publishedAt": "2026-11-24T13:14:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/413/0000227098"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황 복귀로 엔비디아 급등",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 13,
-   "recent20": 2,
-   "press": 13,
-   "firstArticleAt": "2026-11-24T12:03:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "엔비디아 이사회와 통화한 트럼프 “美경제 위해 젠슨 황 필요”",
-     "press": "donga.com",
-     "publishedAt": "2026-11-24T13:25:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/020/0003764851?sid=104"
-    },
-    {
-     "title": "[젠슨 황 귀환①] 한·일·대만 증시 '환호'…TSMC 상한가·반도체주 폭...",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-24T13:14:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101947"
-    },
-    {
-     "title": "‘젠슨 황 복귀’ 급등 후 나스닥 선물 하락세로 돌아서",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-24T13:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484858?sid=104"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황 11일 만에 복귀",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 16,
-   "recent20": 1,
-   "press": 13,
-   "firstArticleAt": "2026-11-24T12:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[젠슨 황 귀환①] 한·일·대만 증시 '환호'…TSMC 상한가·반도체주 폭...",
-     "press": "newsian.co.kr",
-     "publishedAt": "2026-11-24T13:14:00.000Z",
-     "link": "https://www.newsian.co.kr/news/articleView.html?idxno=101947"
-    },
-    {
-     "title": "젠슨 황 11일 만의 귀환…엔비디아 급등, 한국 증시에 가져온 건?｜빽투...",
-     "press": "news.jtbc.co.kr",
-     "publishedAt": "2026-11-24T13:01:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/437/0000522290?sid=104"
-    },
-    {
-     "title": "\"돌아온 '젠슨 황' 대군\"...'주가 구원' 밈 봇물",
-     "press": "ytn.co.kr",
-     "publishedAt": "2026-11-24T12:57:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/052/0002437539?sid=104"
-    }
-   ]
-  },
   {
    "keyword": "비",
    "sources": [
     "google"
    ],
-   "articles90": 15,
-   "recent20": 4,
-   "press": 12,
+   "articles90": 16,
+   "recent20": 1,
+   "press": 13,
    "firstArticleAt": "2026-11-24T12:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "'김태희♥' 비, 자기 관리 끝판왕 아니었어? 지방간 고백 깜짝 \"이렇게 ...",
+     "press": "joynews24.com",
+     "publishedAt": "2026-11-24T13:36:00.000Z",
+     "link": "http://www.joynews24.com/view/2030028"
+    },
     {
      "title": "유재석, 비 콘서트 초대에 \"가족이랑 같이 가기는 좀...\"(틈만나면)[종합...",
      "press": "xportsnews.com",
@@ -193,83 +39,13 @@
      "press": "newsen.com",
      "publishedAt": "2026-11-24T13:16:00.000Z",
      "link": "https://m.entertain.naver.com/article/609/0001190848"
-    },
-    {
-     "title": "[acle.live] '날씨도 도왔다' 비도 피해간 전북 마지막 담금질! 日 가시마...",
-     "press": "fourfourtwo.co.kr",
-     "publishedAt": "2026-11-24T13:15:00.000Z",
-     "link": "https://m.sports.naver.com/kfootball/article/411/0000090424"
-    }
-   ]
-  },
-  {
-   "keyword": "수능 시험지 폐기",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 13,
-   "recent20": 0,
-   "press": 12,
-   "firstArticleAt": "2026-11-24T12:02:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "지난해 수능 시험지 17만여 부 폐기…세종만 한 부도 안 버렸다",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-24T13:10:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003567652?sid=102"
-    },
-    {
-     "title": "“작년 수능시험지 최소 17만여부 폐기…세종만 전량 보존”",
-     "press": "sedaily.com",
-     "publishedAt": "2026-11-24T12:55:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/011/0004685772?sid=102"
-    },
-    {
-     "title": "경기도 지난해 수능 시험지 17.1% 폐기…보관 지시 앞서 처분",
-     "press": "news.kbs.co.kr",
-     "publishedAt": "2026-11-24T12:47:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/056/0012300356?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "중국 대미 수출통제 유예",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 7,
-   "firstArticleAt": "2026-11-24T12:03:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "중국 대미 수출통제 유예, 일본엔 압박…한국 실용외교 시험대",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-24T13:24:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285161"
-    },
-    {
-     "title": "中, 핵심광물 美 수출통제 2개월 뒤로 미루고 보잉 구매",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-24T13:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967542?sid=104"
-    },
-    {
-     "title": "中, 핵심 광물 대미 수출통제 2개월 추가 유예…보잉 항공기 50대도 구매",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-24T12:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002727949?sid=104"
     }
    ]
   },
   {
    "keyword": "내신 부정행위 퇴학 최대",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 9,
    "recent20": 0,
@@ -299,98 +75,66 @@
    ]
   },
   {
-   "keyword": "정상빈 1골 1도움",
+   "keyword": "수능 시험지 폐기",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
-   "articles90": 6,
+   "articles90": 7,
    "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-24T12:02:00.000Z",
+   "firstArticleAt": "2026-11-24T12:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "MLS 우승 길목에서 이루어진 코리안 더비...'침묵' 손흥민 울고, '1골-1도...",
-     "press": "sportschosun.com",
-     "publishedAt": "2026-11-24T13:29:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/076/0004469195"
+     "title": "\"수능 부정행위 조사한다더니…지난해 시험지 17만부 폐기\"",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-24T13:31:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004213501?sid=102"
     },
     {
-     "title": "풀타임 뛰고 빈손…76분 뛴 정상빈 1골·1도움",
-     "press": "sports.khan.co.kr",
-     "publishedAt": "2026-11-24T13:05:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/144/0001151507"
+     "title": "지난해 수능 시험지 17만여 부 폐기…세종만 한 부도 안 버렸다",
+     "press": "joongang.co.kr",
+     "publishedAt": "2026-11-24T13:10:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/025/0003567652?sid=102"
     },
     {
-     "title": "美 프로축구 PO 정상빈, 손흥민 잡고 '펄펄'…'1골 1도움' 활약",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-24T12:48:00.000Z",
-     "link": "https://m.sports.naver.com/wfootball/article/448/0000653178"
+     "title": "“작년 수능시험지 최소 17만여부 폐기…세종만 전량 보존”",
+     "press": "sedaily.com",
+     "publishedAt": "2026-11-24T12:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004685772?sid=102"
     }
    ]
   },
   {
-   "keyword": "EU 하이브리드차 수입 제한",
+   "keyword": "중국 대미 수출통제 유예",
    "sources": [
     "signal.bz"
    ],
    "articles90": 6,
-   "recent20": 0,
+   "recent20": 1,
    "press": 6,
-   "firstArticleAt": "2026-11-24T12:04:00.000Z",
+   "firstArticleAt": "2026-11-24T12:13:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "한국산 EU행 하이브리드차 6만7924대까지…내달부터 무관세 제한",
-     "press": "mk.co.kr",
-     "publishedAt": "2026-11-24T12:56:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/009/0005768463?sid=101"
+     "title": "중국 대미 수출통제 유예, 일본엔 압박…한국 실용외교 시험대",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-24T13:24:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285161"
     },
     {
-     "title": "정부, EU 하이브리드車 세이프가드 최종조치 앞두고 전방위 협의…수출...",
-     "press": "etnews.com",
-     "publishedAt": "2026-11-24T12:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/030/0003489304?sid=100"
+     "title": "中, 핵심광물 美 수출통제 2개월 뒤로 미루고 보잉 구매",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-24T13:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000967542?sid=104"
     },
     {
-     "title": "EU, 한국산 하이브리드차 수출 내년 6월까지 6만7924대로 제한",
-     "press": "chosun.com",
-     "publishedAt": "2026-11-24T12:11:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/023/0004011483?sid=101"
-    }
-   ]
-  },
-  {
-   "keyword": "부천시",
-   "sources": [
-    "google"
-   ],
-   "articles90": 3,
-   "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-24T12:04:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "부천시 공무원, 396억원 예산 '부당 이체' 시도…결국 '해임'",
-     "press": "ngonews.kr",
-     "publishedAt": "2026-11-24T12:14:00.000Z",
-     "link": "https://www.ngonews.kr/news/articleView.html?idxno=244089"
-    },
-    {
-     "title": "시 예산 396억 '셀프 결재' 시도…부천시 공무원 해임",
-     "press": "edaily.co.kr",
-     "publishedAt": "2026-11-24T12:09:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/018/0006414999?sid=102"
-    },
-    {
-     "title": "동원대 웹툰창작과, 부천시 웹툰 융합 공모전 입상",
-     "press": "cnbnews.com",
-     "publishedAt": "2026-11-24T12:04:00.000Z",
-     "link": "https://www.cnbnews.com/news/articleView.html?idxno=1025126"
+     "title": "中, 핵심 광물 대미 수출통제 2개월 추가 유예…보잉 항공기 50대도 구매",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-11-24T12:45:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002727949?sid=104"
     }
    ]
   }
@@ -398,68 +142,68 @@
  "hitRate": {
   "days": 7,
   "flagged": 1399,
-  "matched": 729,
-  "avgLeadMin": 526,
+  "matched": 740,
+  "avgLeadMin": 520,
   "recent": [
    {
-    "keyword": "이란 여가수 태형 74대",
-    "hitKeyword": "이란 여가수 태형 처벌",
-    "hitAt": "2026-11-24T21:30:00+09:00",
-    "leadMin": 260
+    "keyword": "정상빈 1골 1도움 폭발!",
+    "hitKeyword": "정상빈 1골 1도움",
+    "hitAt": "2026-11-24T22:30:00+09:00",
+    "leadMin": 501
    },
    {
-    "keyword": "신규 택시 전기차 전환",
-    "hitKeyword": "전기차 자동주차 오류",
-    "hitAt": "2026-11-24T21:30:00+09:00",
-    "leadMin": 109
+    "keyword": "정상빈 1골 1도움 활약",
+    "hitKeyword": "정상빈 1골 1도움",
+    "hitAt": "2026-11-24T22:30:00+09:00",
+    "leadMin": 481
    },
    {
-    "keyword": "31개 기관 세종 이전",
-    "hitKeyword": "세종 행정기관 이전 결정",
-    "hitAt": "2026-11-24T21:30:00+09:00",
-    "leadMin": 49
+    "keyword": "젠슨 황 CEO 복귀",
+    "hitKeyword": "엔비디아 젠슨 황 복귀",
+    "hitAt": "2026-11-24T22:30:00+09:00",
+    "leadMin": 240
    },
    {
-    "keyword": "중앙행정기관 세종 이전",
-    "hitKeyword": "세종 행정기관 이전 결정",
-    "hitAt": "2026-11-24T21:30:00+09:00",
-    "leadMin": 19
+    "keyword": "젠슨 황 CEO 전격 복귀",
+    "hitKeyword": "엔비디아 젠슨 황 복귀",
+    "hitAt": "2026-11-24T22:30:00+09:00",
+    "leadMin": 199
    },
    {
-    "keyword": "이관희·유시은 민폐 논란 사과",
-    "hitKeyword": "이관희 유시은 논란",
-    "hitAt": "2026-11-24T21:30:00+09:00",
-    "leadMin": 9
+    "keyword": "젠슨 황 전격 복귀",
+    "hitKeyword": "엔비디아 젠슨 황 복귀",
+    "hitAt": "2026-11-24T22:30:00+09:00",
+    "leadMin": 189
    },
    {
-    "keyword": "서울역",
-    "hitKeyword": "서울역 노숙자 라이터",
-    "hitAt": "2026-11-24T21:00:00+09:00",
-    "leadMin": 554
+    "keyword": "EU 하이브리드차 수입 제한",
+    "hitKeyword": "EU 하이브리드차 제한",
+    "hitAt": "2026-11-24T22:30:00+09:00",
+    "leadMin": 79
    },
    {
-    "keyword": "지하철 파업",
-    "hitKeyword": "서울지하철 파업 위기",
-    "hitAt": "2026-11-24T21:00:00+09:00",
-    "leadMin": 140
+    "keyword": "젠슨 황 복귀로 엔비디아 급등",
+    "hitKeyword": "엔비디아 젠슨 황 복귀",
+    "hitAt": "2026-11-24T22:30:00+09:00",
+    "leadMin": 38
    },
    {
-    "keyword": "서울지하철 파업 막판 협상",
-    "hitKeyword": "서울지하철 파업 위기",
-    "hitAt": "2026-11-24T21:00:00+09:00",
-    "leadMin": 19
+    "keyword": "정상빈 1골 1도움",
+    "hitKeyword": "정상빈 1골 1도움",
+    "hitAt": "2026-11-24T22:30:00+09:00",
+    "leadMin": 28
    },
    {
-    "keyword": "양홍원 원현주 이혼",
-    "hitKeyword": "원현주 양홍원 이혼",
-    "hitAt": "2026-11-24T21:00:00+09:00",
-    "leadMin": 19
+    "keyword": "세종 이전 확정",
+    "hitKeyword": "세종 행정기관 이전",
+    "hitAt": "2026-11-24T22:30:00+09:00",
+    "leadMin": 18
    },
    {
-    "keyword": "하정우♥차정원 10년 열애",
-    "hitKeyword": "방어 몸값 10년 4배",
-    "hitAt": "2026-11-24T20:30:00+09:00",
-    "leadMin": 766
+    "keyword": "젠슨 황 복귀 후 급등하는 주가",
+    "hitKeyword": "엔비디아 젠슨 황 복귀",
+    "hitAt": "2026-11-24T22:30:00+09:00",
+    "leadMin": 18
    }
   ]
  }
