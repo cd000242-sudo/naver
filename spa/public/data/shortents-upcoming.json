@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T13:41:50.359Z",
+ "builtAt": "2026-11-24T13:51:53.649Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -15,30 +15,30 @@
    "sources": [
     "google"
    ],
-   "articles90": 16,
-   "recent20": 1,
-   "press": 13,
+   "articles90": 19,
+   "recent20": 4,
+   "press": 15,
    "firstArticleAt": "2026-11-24T12:23:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'김태희♥' 비, 자기 관리 끝판왕 아니었어? 지방간 고백 깜짝 \"이렇게 ...",
-     "press": "joynews24.com",
-     "publishedAt": "2026-11-24T13:36:00.000Z",
-     "link": "http://www.joynews24.com/view/2030028"
+     "title": "'사업가♥' 아유미, 딸 낳고 80평 집 샀다…\"인테리어 비용만 1억\"",
+     "press": "mydaily.co.kr",
+     "publishedAt": "2026-11-24T13:46:00.000Z",
+     "link": "https://m.entertain.naver.com/article/117/0004127731"
     },
     {
-     "title": "유재석, 비 콘서트 초대에 \"가족이랑 같이 가기는 좀...\"(틈만나면)[종합...",
-     "press": "xportsnews.com",
-     "publishedAt": "2026-11-24T13:20:00.000Z",
-     "link": "https://m.entertain.naver.com/article/311/0002083602"
-    },
-    {
-     "title": "비 “내일 당장 죽는다면 마지막으로 치즈버거 오징어볶음 먹을 것” (...",
+     "title": "유재석 유연석 디스하는 후배에 비 의리 폭발 “우도환 도움 많이 받아...",
      "press": "newsen.com",
-     "publishedAt": "2026-11-24T13:16:00.000Z",
-     "link": "https://m.entertain.naver.com/article/609/0001190848"
+     "publishedAt": "2026-11-24T13:43:00.000Z",
+     "link": "https://m.entertain.naver.com/article/609/0001190850"
+    },
+    {
+     "title": "[날씨] 수요일 아침 전국 대부분 영하권…곳곳 비와 눈, 빙판길 주의",
+     "press": "dt.co.kr",
+     "publishedAt": "2026-11-24T13:42:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/029/0003060975?sid=103"
     }
    ]
   },
@@ -75,14 +75,46 @@
    ]
   },
   {
+   "keyword": "중국 대미 수출통제 유예",
+   "sources": [
+    "signal.bz"
+   ],
+   "articles90": 6,
+   "recent20": 1,
+   "press": 6,
+   "firstArticleAt": "2026-11-24T12:27:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "中, 핵심광물 美수출 통제 유예 … 보잉항공기 50대 구매하기로",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-24T13:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005768475?sid=104"
+    },
+    {
+     "title": "중국 대미 수출통제 유예, 일본엔 압박…한국 실용외교 시험대",
+     "press": "topstarnews.net",
+     "publishedAt": "2026-11-24T13:24:00.000Z",
+     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285161"
+    },
+    {
+     "title": "中, 핵심광물 美 수출통제 2개월 뒤로 미루고 보잉 구매",
+     "press": "hankookilbo.com",
+     "publishedAt": "2026-11-24T13:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/469/0000967542?sid=104"
+    }
+   ]
+  },
+  {
    "keyword": "수능 시험지 폐기",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-24T12:13:00.000Z",
+   "articles90": 6,
+   "recent20": 0,
+   "press": 5,
+   "firstArticleAt": "2026-11-24T12:22:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -103,38 +135,6 @@
      "press": "sedaily.com",
      "publishedAt": "2026-11-24T12:55:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/011/0004685772?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "중국 대미 수출통제 유예",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 6,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-24T12:13:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "중국 대미 수출통제 유예, 일본엔 압박…한국 실용외교 시험대",
-     "press": "topstarnews.net",
-     "publishedAt": "2026-11-24T13:24:00.000Z",
-     "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285161"
-    },
-    {
-     "title": "中, 핵심광물 美 수출통제 2개월 뒤로 미루고 보잉 구매",
-     "press": "hankookilbo.com",
-     "publishedAt": "2026-11-24T13:03:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/469/0000967542?sid=104"
-    },
-    {
-     "title": "中, 핵심 광물 대미 수출통제 2개월 추가 유예…보잉 항공기 50대도 구매",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-24T12:45:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002727949?sid=104"
     }
    ]
   }
