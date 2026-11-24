@@ -24,21 +24,6 @@ export const FOREST_GRADE = Object.freeze({ key: 'forest', label: '숲', min: 15
 /** Shown for the owner instead of a score bar. */
 export const OWNER_GRADE_TEXT = '숲 · 최고 등급(관리자)';
 
-/**
- * Where a score stands on the grade scale by points alone: "열매까지 266점". Used for the owner, who always wears
- * 숲 but still wants to see how far the next grade is. `grades` is the guide list (server's or the table).
- */
-export function scoreStanding(score, grades = GRADE_TABLE) {
-    const points = Math.max(0, Math.floor(Number(score) || 0));
-    const scale = [...(Array.isArray(grades) ? grades : [])].filter((grade) => Number.isFinite(grade?.min)).sort((a, b) => a.min - b.min);
-    const next = scale.find((grade) => grade.min > points);
-    if (!next) return { percent: 100, remain: 0, nextLabel: null, text: '점수로도 가장 높은 등급이에요' };
-    const base = scale.filter((grade) => grade.min <= points).pop()?.min ?? 0;
-    const span = Math.max(1, next.min - base);
-    const remain = next.min - points;
-    return { percent: Math.round(((points - base) / span) * 100), remain, nextLabel: next.label, text: `${next.label}까지 ${remain}점` };
-}
-
 /** The score sentence when the server sent no numbers. */
 export const SCORE_RULES = '글 10점 · 댓글 2점 · 들르기 1점 · 내 글 좋아요 1점 · 하루 최대 50점';
 

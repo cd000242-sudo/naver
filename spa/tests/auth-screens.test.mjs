@@ -66,7 +66,8 @@ test('signup screen: account fields and the phone block, the short promise about
 test('community without a login: guidance with login and signup buttons that return to the same page; the page itself is not rendered', () => {
     const html = show('../../src/components/auth/RequireLogin.tsx', '/community?board=free', { props: { area: 'community' }, children: 'SECRET-BOARD' });
     assert.match(html, /로그인이 필요해요/);
-    assert.match(html, /커뮤니티/);
+    // 공지사항·최근 소식 are open to visitors now, so the line names "this board", not the whole community (2026-11-24).
+    assert.match(html, /이 게시판은 로그인한 분만/);
     assert.ok(!html.includes('SECRET-BOARD'));
     assert.ok(hrefs(html).includes('/login?next=%2Fcommunity%3Fboard%3Dfree'));
     assert.ok(hrefs(html).includes('/signup?next=%2Fcommunity%3Fboard%3Dfree'));

@@ -64,6 +64,24 @@ const routes = [
     title: '커뮤니티 | Leaders Pro',
     description: 'Leaders Pro 공지, 업데이트, 사용 팁과 커뮤니티 소식을 확인하세요.',
   },
+  // [2026-11-24] Share addresses of the notice board: one board, three cards (notice / update / tip). The board is
+  // picked by ?board= inside /community, and a share card cannot differ by query, so each kind gets its own path
+  // that opens the notice board (App.tsx redirects).
+  {
+    path: 'notice',
+    title: '공지사항 | Leaders Pro',
+    description: 'Leaders Pro 의 주요 소식과 공지를 확인하세요.',
+  },
+  {
+    path: 'updates',
+    title: '업데이트 | Leaders Pro',
+    description: '새로운 기능과 개선 사항을 확인하세요.',
+  },
+  {
+    path: 'tips',
+    title: '사용 팁 | Leaders Pro',
+    description: '더 효율적으로 블로그를 운영하는 사용 팁을 확인하세요.',
+  },
   {
     path: 'login',
     title: '로그인 | Leaders Pro',
@@ -322,6 +340,9 @@ const OG_IMAGE_BY_ROUTE = {
   chatbots: 'og/chatbot.jpg',
   reviews: 'og/revenue.jpg',         // 수익 후기
   community: 'og/community.jpg',
+  notice: 'og/notice.jpg',
+  updates: 'og/updates.jpg',
+  tips: 'og/tips.jpg',
 };
 
 /**

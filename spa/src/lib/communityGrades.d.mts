@@ -12,7 +12,6 @@ export const SCORE_RULES: string;
 export function rewardText(reward: { days?: unknown; mode?: unknown } | null | undefined): string;
 export function pickGrades(raw: unknown): Array<{ key: string; label: string; min: number; reward: ServerReward; extra?: { likesMin: number; topsMin: number; topLikesMin: number } }>;
 export function gradeGuide(config: { grades?: unknown } | null | undefined): readonly GradeEntry[];
-export function scoreStanding(score: unknown, grades?: readonly { min: number; label: string }[]): { percent: number; remain: number; nextLabel: string | null; text: string };
 export function pickScoreRules(raw: unknown): ScoreRules | null;
 export function scoreRulesText(raw: unknown): string;
 export function normalizeRewards(raw: unknown): RewardItem[];

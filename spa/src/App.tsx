@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Navigate, Routes, Route, useLocation } from 'react-router-dom';
 import Layout from './components/Layout';
 import { recordPageView } from './lib/siteOps';
 import LewordGate from './components/auth/LewordGate';
@@ -90,6 +90,10 @@ function App() {
                     <Route path="/signup" element={<SignupPage />} />
                     <Route path="/community" element={<CommunityEntry />} />
                     <Route path="/community.html" element={<CommunityEntry />} />
+                    {/* Share addresses with their own link cards (notice / update / tip): all open the notice board. */}
+                    {['/notice', '/updates', '/tips'].flatMap((path) => [path, `${path}.html`]).map((path) => (
+                        <Route key={path} path={path} element={<Navigate to="/community?board=notice" replace />} />
+                    ))}
                     <Route path="/me" element={<RequireLogin area="account"><MyPage /></RequireLogin>} />
                     <Route path="/lookup" element={<LookupPage />} />
                     <Route path="/lookup.html" element={<LookupPage />} />

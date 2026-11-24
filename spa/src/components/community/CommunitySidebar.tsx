@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { isAssociate } from '../../lib/communityLevel.mjs';
 import type { CommunityProfile } from '../../lib/communitySession';
 import { ALL_BOARD, GRADE_GUIDE, SCORE_RULES, communityPath, gradeProgress, type BoardConfig } from '../../lib/communityModel.mjs';
-import { scoreStanding, type GradeEntry } from '../../lib/communityGrades.mjs';
+import type { GradeEntry } from '../../lib/communityGrades.mjs';
 import { useAvatars } from '../../lib/useAvatars';
 import Avatar from './Avatar';
 import { GradeBadge } from './Badges';
@@ -24,10 +24,8 @@ type Props = {
     scoreRules?: string;
 };
 
-function MyActivity({ profile, grades }: { profile: CommunityProfile; grades: readonly { min: number; label: string }[] }) {
+function MyActivity({ profile }: { profile: CommunityProfile }) {
     const progress = gradeProgress(profile);
-    // The owner always wears 숲; the points alone still say how far the next grade is.
-    const standing = profile.role === 'owner' ? scoreStanding(profile.score, grades) : null;
     const photos = useAvatars([profile.avatarKey]);
     return (
         <section className="lp-box cm-me" aria-labelledby="cm-me-title">
@@ -39,16 +37,8 @@ function MyActivity({ profile, grades }: { profile: CommunityProfile; grades: re
                     : <b className="cm-me-nick is-empty">닉네임을 정해 주세요</b>}
                 <GradeBadge grade={profile.grade} isOperator={profile.role === 'owner'} />
             </div>
-            {standing ? (
-                <>
-                    <p className="cm-me-score is-owner"><b>{profile.score}점</b><span>{progress.text}</span><em className="cm-me-next">{standing.text}</em></p>
-                    {standing.nextLabel ? (
-                        <div className="cm-bar" role="progressbar" aria-label="다음 등급까지" aria-valuemin={0} aria-valuemax={100} aria-valuenow={standing.percent}>
-                            <i style={{ width: `${standing.percent}%` }} />
-                        </div>
-                    ) : null}
-                </>
-            ) : (
+            {/* The owner already wears the top grade: the score is shown, a "points to the next grade" line is not. */}
+            {profile.role === 'owner' ? <p className="cm-me-score is-owner"><b>{profile.score}점</b><span>{progress.text}</span></p> : (
                 <>
                     <p className="cm-me-score"><b>{profile.score}점</b><span>{progress.text}</span></p>
                     {isAssociate(profile) ? null : (
@@ -75,7 +65,7 @@ function boardEntries(boards: readonly BoardConfig[]) {
 function CommunitySidebar({ profile, guestCard = null, hrefOf, boards, boardId, counts, grades = GRADE_GUIDE, scoreRules = SCORE_RULES }: Props) {
     return (
         <aside className="cm-side">
-            {profile ? <MyActivity profile={profile} grades={grades} /> : guestCard}
+            {profile ? <MyActivity profile={profile} /> : guestCard}
             <nav className="lp-box cm-menu" aria-label="게시판">
                 <h2>게시판</h2>
                 <ul>
