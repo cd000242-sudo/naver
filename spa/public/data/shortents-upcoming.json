@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T11:10:56.070Z",
+ "builtAt": "2026-11-24T11:20:59.239Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -11,14 +11,14 @@
  "measured": 24,
  "candidates": [
   {
-   "keyword": "준감위 주주환원 결정",
+   "keyword": "삼성 준감위 주주환원 결정",
    "sources": [
     "nate"
    ],
-   "articles90": 24,
+   "articles90": 21,
    "recent20": 1,
-   "press": 24,
-   "firstArticleAt": "2026-11-24T09:43:00.000Z",
+   "press": 21,
+   "firstArticleAt": "2026-11-24T09:55:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -45,33 +45,32 @@
   {
    "keyword": "EU 하이브리드차 수입 제한",
    "sources": [
-    "signal.bz",
-    "daum"
+    "signal.bz"
    ],
-   "articles90": 19,
-   "recent20": 3,
-   "press": 18,
-   "firstArticleAt": "2026-11-24T09:42:00.000Z",
+   "articles90": 20,
+   "recent20": 4,
+   "press": 19,
+   "firstArticleAt": "2026-11-24T09:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "국산 하이브리드차 'EU 수출 6만7924대 제한…EU 집행위, 내달 1일 세이...",
-     "press": "livebiz.today",
-     "publishedAt": "2026-11-24T11:08:00.000Z",
-     "link": "https://www.livebiz.today/news/articleView.html?idxno=206859"
+     "title": "EU행 韓하이브리드차 무관세, 다음달부터 6만 7924대로 제한",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-11-24T11:20:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004213495?sid=104"
     },
     {
-     "title": "EU, 하이브리드차 긴급수입제한…韓 무관세 쿼터 6만7,924대",
-     "press": "goodnews1.com",
-     "publishedAt": "2026-11-24T10:58:00.000Z",
-     "link": "https://www.goodnews1.com/news/articleView.html?idxno=466603"
+     "title": "EU 한국산 하이브리드차 내달부터 200일간 6만7924대로 제한, 세이프가드...",
+     "press": "businesspost.co.kr",
+     "publishedAt": "2026-11-24T11:20:00.000Z",
+     "link": "https://www.businesspost.co.kr/BP?command=article_view&num=452839"
     },
     {
-     "title": "中, EU 하이브리드차 수입 제한에 \"WTO 제소 권리 보유\"",
-     "press": "news1.kr",
-     "publishedAt": "2026-11-24T10:52:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/421/0009308048?sid=104"
+     "title": "EU, 한국산 하이브리드차 물량 제한…\"수출 제동 우려\"",
+     "press": "m-i.kr",
+     "publishedAt": "2026-11-24T11:20:00.000Z",
+     "link": "https://www.m-i.kr/news/articleView.html?idxno=2022903"
     }
    ]
   },
@@ -83,10 +82,16 @@
    "articles90": 12,
    "recent20": 2,
    "press": 11,
-   "firstArticleAt": "2026-11-24T09:46:00.000Z",
+   "firstArticleAt": "2026-11-24T09:58:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "젠슨 황 복귀에 증시 환호…AI 리스크는 여전",
+     "press": "obsnews.co.kr",
+     "publishedAt": "2026-11-24T11:12:00.000Z",
+     "link": "https://www.obsnews.co.kr/news/articleView.html?idxno=1544845"
+    },
     {
      "title": "[뉴스프라임] 젠슨 황의 귀환…트럼프 \"이사회 직접 설득했다\"",
      "press": "yonhapnewstv.co.kr",
@@ -98,12 +103,6 @@
      "press": "hansbiz.co.kr",
      "publishedAt": "2026-11-24T11:00:00.000Z",
      "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=886855"
-    },
-    {
-     "title": "[코인 시황] 젠슨 황 복귀에 비트코인 6만4000달러 돌파 후 후퇴…美 의...",
-     "press": "newspim.com",
-     "publishedAt": "2026-11-24T10:30:00.000Z",
-     "link": "https://www.newspim.com/news/view/20261124001417"
     }
    ]
   },
@@ -112,13 +111,19 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 10,
+   "articles90": 9,
    "recent20": 3,
-   "press": 9,
-   "firstArticleAt": "2026-11-24T09:42:00.000Z",
+   "press": 8,
+   "firstArticleAt": "2026-11-24T10:03:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "“폭탄으로 민주당 무너뜨린다” 협박글…경찰, 작성자 추적",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-11-24T11:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005768446?sid=102"
+    },
     {
      "title": "경찰, '사제폭탄으로 민주당 무너뜨릴 것' 협박글 작성자 추적",
      "press": "view.asiae.co.kr",
@@ -130,44 +135,6 @@
      "press": "fnnews.com",
      "publishedAt": "2026-11-24T11:05:00.000Z",
      "link": "https://n.news.naver.com/mnews/article/014/0005609220?sid=102"
-    },
-    {
-     "title": "\"민주당에 사제폭탄\" 협박 글에 '발칵'…작성자 추적",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-24T10:54:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001273833?sid=102"
-    }
-   ]
-  },
-  {
-   "keyword": "젠슨 황 환영합니다",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-24T09:56:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[뉴스프라임] 젠슨 황의 귀환…트럼프 \"이사회 직접 설득했다\"",
-     "press": "yonhapnewstv.co.kr",
-     "publishedAt": "2026-11-24T11:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/422/0000929547?sid=104"
-    },
-    {
-     "title": "머스크 \"실수 바로잡혔다\"…실리콘밸리·월가 '젠슨 귀환' 환호",
-     "press": "financialpost.co.kr",
-     "publishedAt": "2026-11-24T10:28:00.000Z",
-     "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=302923"
-    },
-    {
-     "title": "GPU 예수 부활?…젠슨 황 복귀에 환영? 아부?",
-     "press": "news.sbs.co.kr",
-     "publishedAt": "2026-11-24T10:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/055/0001405509?sid=104"
     }
    ]
   },
@@ -176,10 +143,10 @@
    "sources": [
     "signal.bz"
    ],
-   "articles90": 5,
+   "articles90": 4,
    "recent20": 2,
-   "press": 5,
-   "firstArticleAt": "2026-11-24T09:42:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-24T09:52:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -204,34 +171,34 @@
    ]
   },
   {
-   "keyword": "내년 회계사 1100명 선발",
+   "keyword": "국민주권의 날 지정",
    "sources": [
     "nate"
    ],
-   "articles90": 3,
+   "articles90": 4,
    "recent20": 0,
-   "press": 3,
-   "firstArticleAt": "2026-11-24T09:42:00.000Z",
+   "press": 4,
+   "firstArticleAt": "2026-11-24T10:06:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "'내년 공인회계사 선발 50명 줄인다'…금융위, 1100명으로 확정",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-24T10:21:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005847271?sid=101"
+     "title": "12월 3일 '국민주권의 날' 지정... 공휴일은 아냐",
+     "press": "chungnamilbo.co.kr",
+     "publishedAt": "2026-11-24T10:38:00.000Z",
+     "link": "http://www.chungnamilbo.co.kr/news/articleView.html?idxno=922769"
     },
     {
-     "title": "내년 공인회계사 1100명 선발…올해 대비 50명↓",
-     "press": "mt.co.kr",
-     "publishedAt": "2026-11-24T10:02:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/008/0005445873?sid=101"
+     "title": "12월 3일 ‘국민주권의 날’ 지정… 李 “어둠의 세력 국민의 힘으로 몰...",
+     "press": "donga.com",
+     "publishedAt": "2026-11-24T10:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003764836?sid=100"
     },
     {
-     "title": "공인회계사 3년 연속 감축…내년 최소 1100명 선발",
-     "press": "news.mtn.co.kr",
-     "publishedAt": "2026-11-24T09:42:00.000Z",
-     "link": "https://news.mtn.co.kr/article/2026112418405947050"
+     "title": "12월 3일 '국민주권의날' 기념일 지정...공휴일은 아냐",
+     "press": "ytn.co.kr",
+     "publishedAt": "2026-11-24T10:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/052/0002437499?sid=100"
     }
    ]
   }
