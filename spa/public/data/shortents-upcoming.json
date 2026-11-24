@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T16:16:49.528Z",
+ "builtAt": "2026-11-24T16:26:52.570Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 9,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "젠슨 황, 11일 만에 복귀",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 13,
+   "articles90": 11,
    "recent20": 0,
-   "press": 11,
-   "firstArticleAt": "2026-11-24T14:47:00.000Z",
+   "press": 9,
+   "firstArticleAt": "2026-11-24T15:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -39,38 +39,6 @@
      "press": "newspim.com",
      "publishedAt": "2026-11-24T15:15:00.000Z",
      "link": "https://www.newspim.com/news/view/20261125000007"
-    }
-   ]
-  },
-  {
-   "keyword": "미국 과잉생산 관세 조사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 8,
-   "recent20": 1,
-   "press": 8,
-   "firstArticleAt": "2026-11-24T14:47:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美 USTR, 이르면 이번주 '과잉생산 관세' 결과 발표할 듯(종합)",
-     "press": "newscj.com",
-     "publishedAt": "2026-11-24T16:00:00.000Z",
-     "link": "https://www.newscj.com/news/articleView.html?idxno=3451853"
-    },
-    {
-     "title": "미국, 이르면 이번주 '과잉생산 관세' 발표…한국 15% 유지되나",
-     "press": "news.mtn.co.kr",
-     "publishedAt": "2026-11-24T15:28:00.000Z",
-     "link": "https://news.mtn.co.kr/article/2026112500242274013"
-    },
-    {
-     "title": "美 이르면 이번주 '과잉생산 관세' 발표…韓 15% 유지할 듯",
-     "press": "view.asiae.co.kr",
-     "publishedAt": "2026-11-24T15:23:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/277/0005847290?sid=101"
     }
    ]
   },
@@ -107,34 +75,34 @@
    ]
   },
   {
-   "keyword": "젠슨 황이 돌아왔다",
+   "keyword": "미국 과잉생산 관세 조사",
    "sources": [
-    "nate"
+    "signal.bz"
    ],
    "articles90": 5,
    "recent20": 0,
-   "press": 2,
-   "firstArticleAt": "2026-11-24T14:56:00.000Z",
+   "press": 5,
+   "firstArticleAt": "2026-11-24T15:00:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "젠슨 황 효과, 일단 2400조",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-24T15:26:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003567723?sid=101"
+     "title": "美 USTR, 이르면 이번주 '과잉생산 관세' 결과 발표할 듯(종합)",
+     "press": "newscj.com",
+     "publishedAt": "2026-11-24T16:00:00.000Z",
+     "link": "https://www.newscj.com/news/articleView.html?idxno=3451853"
     },
     {
-     "title": "[안혜리의 시선]젠슨의 복귀, 대체불가의 대가",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-24T15:14:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003567712?sid=110"
+     "title": "미국, 이르면 이번주 '과잉생산 관세' 발표…한국 15% 유지되나",
+     "press": "news.mtn.co.kr",
+     "publishedAt": "2026-11-24T15:28:00.000Z",
+     "link": "https://news.mtn.co.kr/article/2026112500242274013"
     },
     {
-     "title": "깐부가 돌아왔다…‘AI·로봇 동맹’ 한숨 돌린 K기업",
-     "press": "joongang.co.kr",
-     "publishedAt": "2026-11-24T15:13:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/025/0003567711?sid=101"
+     "title": "美 이르면 이번주 '과잉생산 관세' 발표…韓 15% 유지할 듯",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-11-24T15:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005847290?sid=101"
     }
    ]
   }
