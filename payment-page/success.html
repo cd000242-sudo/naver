@@ -307,21 +307,34 @@
 
         // ===== 코드 표시 =====
         function showCode(code, product, sendEmail = true) {
-            currentCode = code;
+            // [2026-11-24] 여러 제품 묶음은 제품마다 코드가 한 장씩 나온다(서버가 쉼표로 이어 보낸다).
+            // 한 칸에 이어 보여 주면 복사한 값이 앱에서 안 먹으니, 제품 이름과 함께 한 줄에 하나씩 보여 준다.
+            const codes = String(code || '').split(/\s*,\s*/).filter(Boolean);
+            const many = codes.length > 1;
+            const names = many ? purchasedIds(getParams().productId || '').map((id) => PURCHASE_NAMES[id] || id) : [];
+            currentCode = many ? codes.join('\n') : code;
             currentProduct = product;
 
-            document.getElementById('license-code').textContent = code;
+            const codeBox = document.getElementById('license-code');
+            codeBox.textContent = many ? codes.map((one, index) => (names[index] ? names[index] + '  ' : '') + one).join('\n') : code;
+            codeBox.style.whiteSpace = many ? 'pre-line' : '';
             document.getElementById('product-name').textContent = product;
 
             document.getElementById('loading-section').classList.add('hidden');
             document.getElementById('error-section').classList.add('hidden');
             document.getElementById('code-section').classList.remove('hidden');
             applyPurchaseInfo(getParams().productId || '');
+            if (many) {
+                document.getElementById('license-code-label').textContent = '라이선스 코드 (제품마다 1장)';
+                document.getElementById('license-usage').textContent = '제품마다 코드가 따로입니다. 각 앱의 라이선스 등록 화면에 그 제품 이름 옆의 코드를 입력하세요. 같은 코드가 제품별 메일로도 갔습니다.';
+                const headline = document.getElementById('success-headline');
+                if (headline && headline.textContent.indexOf('올인원') >= 0) headline.textContent = '라이선스 발급 완료!';
+            }
 
             document.title = '라이선스 발급 완료 — Leaders Pro';
 
-            // 이메일이 있으면 자동 발송
-            if (buyerEmail && sendEmail) {
+            // 이메일이 있으면 자동 발송 — 묶음은 서버가 제품별로 이미 보냈다(이어 붙인 코드를 또 보내지 않는다)
+            if (buyerEmail && sendEmail && !many) {
                 autoSendEmail(buyerEmail, code, product);
             }
         }

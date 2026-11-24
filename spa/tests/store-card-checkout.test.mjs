@@ -64,3 +64,55 @@ test('the success page hands the product id to confirm-payment', () => {
     const html = fs.readFileSync(new URL('../../payment-page/success.html', import.meta.url), 'utf8');
     assert.match(html, /action=confirm-payment[\s\S]{0,400}&product=\$\{encodeURIComponent\(params\.productId/);
 });
+
+// ── the success page after a one-time payment ──
+import vm from 'node:vm';
+
+function successPage({ productId, result }) {
+    const html = fs.readFileSync(new URL('../../payment-page/success.html', import.meta.url), 'utf8');
+    const source = html.match(/<script>([\s\S]*?)<\/script>/)[1];
+    const nodes = new Map();
+    const node = (id) => {
+        if (!nodes.has(id)) {
+            const classes = new Set(['hidden']);
+            nodes.set(id, { id, textContent: '', innerHTML: '', style: {}, href: '', classList: { add: (n) => classes.add(n), remove: (n) => classes.delete(n), contains: (n) => classes.has(n) }, remove() {} });
+        }
+        return nodes.get(id);
+    };
+    const calls = [];
+    let emailCalls = 0;
+    const context = vm.createContext({
+        URLSearchParams, encodeURIComponent, console, setTimeout, clearTimeout,
+        window: { location: { search: '?' + new URLSearchParams({ paymentKey: 'pk_test', orderId: 'LP-1-ABC', amount: '770000', productId, email: 'mock@example.test' }) } },
+        localStorage: { getItem: () => null, setItem: () => undefined },
+        document: { title: '', getElementById: node, querySelector: node, createElement: () => ({ remove() {} }), addEventListener() {}, head: { appendChild(script) {
+            calls.push(new URL(script.src));
+            queueMicrotask(() => context.window[new URL(script.src).searchParams.get('callback')](result));
+        } } },
+    });
+    vm.runInContext(source, context);
+    context.autoSendEmail = () => { emailCalls++; };
+    return { run: () => context.main(), calls, node, emailCalls: () => emailCalls, copied: () => vm.runInContext('currentCode', context) };
+}
+
+test('a cart shows one licence per product on its own line, copies them apart, and does not mail the joined string', async () => {
+    const p = successPage({ productId: 'naver+orbit-yearly', result: { ok: true, code: 'LP-AAAA-1111, LP-BBBB-2222', product: 'Leaders Pro Better Life Naver · Leadernam Orbit 1년' } });
+    await p.run();
+    assert.equal(p.calls[0].searchParams.get('action'), 'confirm-payment');
+    assert.equal(p.calls[0].searchParams.get('product'), 'naver+orbit-yearly');
+    assert.equal(p.node('license-code').textContent, 'Better Life Naver  LP-AAAA-1111\nLeadernam Orbit  LP-BBBB-2222');
+    assert.equal(p.node('license-code').style.whiteSpace, 'pre-line');
+    assert.equal(p.copied(), 'LP-AAAA-1111\nLP-BBBB-2222');
+    assert.match(p.node('license-code-label').textContent, /제품마다/);
+    assert.match(p.node('license-usage').textContent, /제품마다/);
+    assert.doesNotMatch(p.node('license-usage').textContent, /올인원 코드/);
+    assert.equal(p.emailCalls(), 0);
+});
+
+test('a single product still shows its one code as before', async () => {
+    const p = successPage({ productId: 'all-yearly', result: { ok: true, code: 'LP-ONLY-0001', product: 'Leaders Pro 올인원 1년' } });
+    await p.run();
+    assert.equal(p.node('license-code').textContent, 'LP-ONLY-0001');
+    assert.equal(p.copied(), 'LP-ONLY-0001');
+    assert.equal(p.emailCalls(), 1);
+});
