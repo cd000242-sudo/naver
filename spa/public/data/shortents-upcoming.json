@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T19:17:47.441Z",
+ "builtAt": "2026-11-24T19:27:50.289Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,17 +8,17 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 8,
+ "measured": 10,
  "candidates": [
   {
    "keyword": "서울 지하철 노사 협상 타결",
    "sources": [
     "signal.bz"
    ],
-   "articles90": 9,
+   "articles90": 3,
    "recent20": 0,
-   "press": 7,
-   "firstArticleAt": "2026-11-24T17:48:00.000Z",
+   "press": 2,
+   "firstArticleAt": "2026-11-24T18:08:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
@@ -45,9 +45,9 @@
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1394,
-  "matched": 723,
-  "avgLeadMin": 511,
+  "flagged": 1392,
+  "matched": 722,
+  "avgLeadMin": 512,
   "recent": [
    {
     "keyword": "아침마당",
