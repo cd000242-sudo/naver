@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-11-24T22:28:44.119Z",
+ "builtAt": "2026-11-24T22:38:46.978Z",
  "source": "realtime-keywords-news-sample",
  "rule": {
   "windowMin": 90,
@@ -8,25 +8,58 @@
   "minArticles": 3,
   "minPress": 2
  },
- "measured": 14,
+ "measured": 15,
  "candidates": [
   {
-   "keyword": "서울 지하철 협상 타결",
+   "keyword": "뉴욕증시 혼조 마감",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
-   "articles90": 41,
-   "recent20": 9,
-   "press": 37,
-   "firstArticleAt": "2026-11-24T21:02:00.000Z",
+   "articles90": 42,
+   "recent20": 8,
+   "press": 36,
+   "firstArticleAt": "2026-11-24T21:10:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "서울지하철 3개 노조 본교섭 2~4분 만에 정회",
-     "press": "vegannews.co.kr",
-     "publishedAt": "2026-11-24T22:24:00.000Z",
-     "link": "https://www.vegannews.co.kr/news/article.html?no=410865"
+     "title": "뉴욕증시, 젠슨 황 복귀 효과 하루 만에 약화...나스닥 1.48% 하락",
+     "press": "m-economynews.com",
+     "publishedAt": "2026-11-24T22:36:00.000Z",
+     "link": "https://www.m-economynews.com/news/article.html?no=73543"
+    },
+    {
+     "title": "[오늘의 글로벌마켓] 뉴욕증시, 엔비디아 6% 하락...3대지수 혼조세",
+     "press": "opinionnews.co.kr",
+     "publishedAt": "2026-11-24T22:34:00.000Z",
+     "link": "http://www.opinionnews.co.kr/news/articleView.html?idxno=147441"
+    },
+    {
+     "title": "뉴욕증시,혼조세 나스닥 1.48% 하락 엔비디아 5.9%↓...국제유가 WTI 2.35...",
+     "press": "public25.com",
+     "publishedAt": "2026-11-24T22:28:00.000Z",
+     "link": "https://www.public25.com/news/articleView.html?idxno=58997"
+    }
+   ]
+  },
+  {
+   "keyword": "서울 지하철 노조 임단협 타결",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 30,
+   "recent20": 5,
+   "press": 29,
+   "firstArticleAt": "2026-11-24T21:10:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "서울지하철 파업 직전 극적 타결…1~8호선 정상 운행",
+     "press": "ngonews.kr",
+     "publishedAt": "2026-11-24T22:32:00.000Z",
+     "link": "https://www.ngonews.kr/news/articleView.html?idxno=244094"
     },
     {
      "title": "서울 지하철 협상 타결로 파업 철회…출근대란 없어",
@@ -35,42 +68,10 @@
      "link": "https://n.news.naver.com/mnews/article/422/0000929643?sid=102"
     },
     {
-     "title": "서울지하철 파업 철회로 군포 출근길 1·4호선 감축 우려 해소",
-     "press": "mediagunpo.co.kr",
+     "title": "서울 지하철 합의…임금 3.5% 인상 500명 신규 채용",
+     "press": "koreareport.co.kr",
      "publishedAt": "2026-11-24T22:20:00.000Z",
-     "link": "http://www.mediagunpo.co.kr/22150"
-    }
-   ]
-  },
-  {
-   "keyword": "미국 과잉생산 관세 조사",
-   "sources": [
-    "signal.bz"
-   ],
-   "articles90": 28,
-   "recent20": 8,
-   "press": 23,
-   "firstArticleAt": "2026-11-24T21:07:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "美 과잉생산 관세 조사 결과, 이르면 이번 주 공개...韓 15% 유지 전망",
-     "press": "slist.kr",
-     "publishedAt": "2026-11-24T22:26:00.000Z",
-     "link": "https://www.slist.kr/news/articleView.html?idxno=784500"
-    },
-    {
-     "title": "美 과잉생산 관세 발표 임박…한국 15% 유지 전망",
-     "press": "jnilbo.com",
-     "publishedAt": "2026-11-24T22:25:00.000Z",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000086274"
-    },
-    {
-     "title": "트럼프 추가관세·젠슨 황 복귀효과 소진에 미국 증시 부진···엔트로...",
-     "press": "khan.co.kr",
-     "publishedAt": "2026-11-24T22:20:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/032/0003484874?sid=101"
+     "link": "https://www.koreareport.co.kr/news/articleView.html?idxno=55130"
     }
    ]
   },
@@ -79,30 +80,62 @@
    "sources": [
     "nate"
    ],
-   "articles90": 12,
-   "recent20": 1,
-   "press": 11,
+   "articles90": 14,
+   "recent20": 3,
+   "press": 13,
    "firstArticleAt": "2026-11-24T21:09:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
+     "title": "\"美, '과잉생산 관세' 이르면 오늘 발표…韓 15% 유지 예상\"",
+     "press": "hankyung.com",
+     "publishedAt": "2026-11-24T22:37:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005357848?sid=104"
+    },
+    {
+     "title": "\"美, 16개 교역 상대국 '과잉생산 관세' 이르면 오늘 발표\"",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-11-24T22:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002394754?sid=104"
+    },
+    {
      "title": "美 과잉생산 관세 조사 결과, 이르면 이번 주 공개...韓 15% 유지 전망",
      "press": "slist.kr",
      "publishedAt": "2026-11-24T22:26:00.000Z",
      "link": "https://www.slist.kr/news/articleView.html?idxno=784500"
+    }
+   ]
+  },
+  {
+   "keyword": "임지연 이도현 결별",
+   "sources": [
+    "daum"
+   ],
+   "articles90": 8,
+   "recent20": 6,
+   "press": 7,
+   "firstArticleAt": "2026-11-24T21:14:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "'곰신' 임지연과 결별 시그널?..이도현 \"당신을 더 사랑했어요\" 절절 SN...",
+     "press": "starnewskorea.com",
+     "publishedAt": "2026-11-24T22:36:00.000Z",
+     "link": "https://m.entertain.naver.com/article/108/0003489927"
     },
     {
-     "title": "\"美, 이르면 이번주 '과잉생산' 관세 예고...韓 영향 주목-[굿모닝 글로...",
-     "press": "wowtv.co.kr",
-     "publishedAt": "2026-11-24T21:59:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/215/0001273852?sid=101"
+     "title": "이도현, 뒤늦게 터진 ‘결별 복선’…임지연과 이별 전 남긴 의미심장 ...",
+     "press": "sportsseoul.com",
+     "publishedAt": "2026-11-24T22:36:00.000Z",
+     "link": "https://m.entertain.naver.com/article/468/0001283239"
     },
     {
-     "title": "美 '과잉생산 관세' 이르면 오늘 발표…외신 \"韓 15% 유지 예상\"",
-     "press": "fnnews.com",
-     "publishedAt": "2026-11-24T21:53:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/014/0005609261?sid=104"
+     "title": "“이때 이미?”…‘임지연과 결별’ 이도현, SNS에 올린 글귀 눈길 [왓I...",
+     "press": "isplus.com",
+     "publishedAt": "2026-11-24T22:35:00.000Z",
+     "link": "https://m.entertain.naver.com/article/241/0003543341"
     }
    ]
   },
@@ -114,65 +147,34 @@
    "articles90": 6,
    "recent20": 2,
    "press": 6,
-   "firstArticleAt": "2026-11-24T21:00:00.000Z",
+   "firstArticleAt": "2026-11-24T21:44:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
+    {
+     "title": "[AM크립토] 비트코인은 6만 달러 안팎···원화 스테이블코인은 누가 발...",
+     "press": "womaneconomy.co.kr",
+     "publishedAt": "2026-11-24T22:32:00.000Z",
+     "link": "https://www.womaneconomy.co.kr/news/articleView.html?idxno=261549"
+    },
+    {
+     "title": "[KFT 모닝 브리프] 2026.11.25 — 오늘 꼭 알아야 할 국내외 경제뉴스",
+     "press": "fntimes.com",
+     "publishedAt": "2026-11-24T22:28:00.000Z",
+     "link": "https://www.fntimes.com/html/view.php?ud=202611250709505712141825007d_18"
+    },
     {
      "title": "국내 코인 발행 허용 추진…비트코인·리플에 미칠 영향은?",
      "press": "topstarnews.net",
      "publishedAt": "2026-11-24T22:12:00.000Z",
      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16285413"
-    },
-    {
-     "title": "금융위, 은행 중심 원화코인···거래소 지분 20% 제한 추진",
-     "press": "hansbiz.co.kr",
-     "publishedAt": "2026-11-24T22:10:00.000Z",
-     "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=886878"
-    },
-    {
-     "title": "[스테이블코인 어디로] 디지털자산법 베일 벗었지만…업계 \"성장보다 규...",
-     "press": "dealsite.co.kr",
-     "publishedAt": "2026-11-24T22:04:00.000Z",
-     "link": "https://dealsite.co.kr/articles/173432"
-    }
-   ]
-  },
-  {
-   "keyword": "2026년 11월 운세",
-   "sources": [
-    "nate"
-   ],
-   "articles90": 7,
-   "recent20": 1,
-   "press": 6,
-   "firstArticleAt": "2026-11-24T21:00:00.000Z",
-   "exclusive": false,
-   "capped": false,
-   "samples": [
-    {
-     "title": "[오늘의 운세] 2026년 11월 25일 수요일 띠별 운세… 양·돼지·개띠 '대...",
-     "press": "newsclaim.co.kr",
-     "publishedAt": "2026-11-24T22:18:00.000Z",
-     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3084061"
-    },
-    {
-     "title": "[오늘의 운세] 25일 수요일 나의 운세는?",
-     "press": "ggilbo.com",
-     "publishedAt": "2026-11-24T21:30:00.000Z",
-     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1194719"
-    },
-    {
-     "title": "[오늘의 운세] 2026년 11월 25일 (수) 띠별운세 '한 주를 잘 넘기자'",
-     "press": "dailypop.kr",
-     "publishedAt": "2026-11-24T21:30:00.000Z",
-     "link": "http://www.dailypop.kr/news/articleView.html?idxno=104284"
     }
    ]
   },
   {
    "keyword": "젠슨 황 첫 회의 사과",
    "sources": [
+    "signal.bz",
     "nate"
    ],
    "articles90": 5,
@@ -203,44 +205,158 @@
    ]
   },
   {
-   "keyword": "한미 외교안보라인 교체",
+   "keyword": "김새롬 재혼",
    "sources": [
-    "signal.bz"
+    "daum"
    ],
    "articles90": 3,
    "recent20": 1,
    "press": 3,
-   "firstArticleAt": "2026-11-24T21:04:00.000Z",
+   "firstArticleAt": "2026-11-24T21:30:00.000Z",
    "exclusive": false,
    "capped": false,
    "samples": [
     {
-     "title": "이재명 대통령의 깜짝 인사 개편, 한미동맹 강화에 어떤 변화가 있을까",
-     "press": "gokorea.kr",
-     "publishedAt": "2026-11-24T22:22:00.000Z",
-     "link": "https://www.gokorea.kr/news/articleView.html?idxno=887169"
+     "title": "김새롬, 이혼 10년 만에 재혼 발표…“법적 짝꿍 생겼다”",
+     "press": "segye.com",
+     "publishedAt": "2026-11-24T22:28:00.000Z",
+     "link": "https://m.entertain.naver.com/article/022/0004177903"
     },
     {
-     "title": "美, 韓 외교·안보라인 교체에 \"한미동맹 긴밀한 협력 중요\"",
-     "press": "news.tvchosun.com",
-     "publishedAt": "2026-11-24T21:19:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/448/0000653190?sid=100"
+     "title": "김새롬 재혼…엄마 꿈 이룰까",
+     "press": "bntnews.co.kr",
+     "publishedAt": "2026-11-24T21:40:00.000Z",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202611250018"
     },
     {
-     "title": "美, 韓 외교·안보라인 교체에 “한미동맹 내 긴밀 협력 중요”",
-     "press": "biz.heraldcorp.com",
-     "publishedAt": "2026-11-24T21:04:00.000Z",
-     "link": "https://n.news.naver.com/mnews/article/016/0002727979?sid=104"
+     "title": "\"엄마 되는게 꿈\"이라던 김새롬, 기습 재혼 발표...\"오래도록 사랑할게...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-11-24T21:30:00.000Z",
+     "link": "https://m.entertain.naver.com/article/076/0004469227"
+    }
+   ]
+  },
+  {
+   "keyword": "2026년 11월 운세",
+   "sources": [
+    "signal.bz",
+    "nate"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-24T21:30:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "[오늘의 운세] 2026년 11월 25일 수요일 띠별 운세… 양·돼지·개띠 '대...",
+     "press": "newsclaim.co.kr",
+     "publishedAt": "2026-11-24T22:18:00.000Z",
+     "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3084061"
+    },
+    {
+     "title": "[오늘의 운세] 25일 수요일 나의 운세는?",
+     "press": "ggilbo.com",
+     "publishedAt": "2026-11-24T21:30:00.000Z",
+     "link": "https://www.ggilbo.com/news/articleView.html?idxno=1194719"
+    },
+    {
+     "title": "[오늘의 운세] 2026년 11월 25일 (수) 띠별운세 '한 주를 잘 넘기자'",
+     "press": "dailypop.kr",
+     "publishedAt": "2026-11-24T21:30:00.000Z",
+     "link": "http://www.dailypop.kr/news/articleView.html?idxno=104284"
+    }
+   ]
+  },
+  {
+   "keyword": "알테오젠",
+   "sources": [
+    "signal.bz",
+    "google"
+   ],
+   "articles90": 3,
+   "recent20": 0,
+   "press": 3,
+   "firstArticleAt": "2026-11-24T21:40:00.000Z",
+   "exclusive": false,
+   "capped": false,
+   "samples": [
+    {
+     "title": "알테오젠 주가, 증시 반등에도 약세…하나증권 \"신뢰와 수급 회복 필요...",
+     "press": "cbci.co.kr",
+     "publishedAt": "2026-11-24T22:12:00.000Z",
+     "link": "https://www.cbci.co.kr/news/articleView.html?idxno=630404"
+    },
+    {
+     "title": "바이오 브랜드 빅데이터 28.89% 감소…알테오젠 1위 지켰다",
+     "press": "pinpointnews.co.kr",
+     "publishedAt": "2026-11-24T21:50:00.000Z",
+     "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=507721"
+    },
+    {
+     "title": "[브랜드평판] 알테오젠, 생물공학 상장기업 11월 1위... 에이비엘바이오...",
+     "press": "enetnews.co.kr",
+     "publishedAt": "2026-11-24T21:40:00.000Z",
+     "link": "https://www.enetnews.co.kr/news/articleView.html?idxno=56749"
     }
    ]
   }
  ],
  "hitRate": {
   "days": 7,
-  "flagged": 1377,
-  "matched": 719,
+  "flagged": 1380,
+  "matched": 725,
   "avgLeadMin": 544,
   "recent": [
+   {
+    "keyword": "나스닥 선물",
+    "hitKeyword": "엔비디아 나스닥",
+    "hitAt": "2026-11-25T07:30:00+09:00",
+    "leadMin": 2748
+   },
+   {
+    "keyword": "나스닥 100",
+    "hitKeyword": "엔비디아 나스닥",
+    "hitAt": "2026-11-25T07:30:00+09:00",
+    "leadMin": 1375
+   },
+   {
+    "keyword": "31개 기관 세종 이전 확정",
+    "hitKeyword": "중앙행정기관 세종 이전",
+    "hitAt": "2026-11-25T07:30:00+09:00",
+    "leadMin": 468
+   },
+   {
+    "keyword": "31개 기관 세종 이전",
+    "hitKeyword": "중앙행정기관 세종 이전",
+    "hitAt": "2026-11-25T07:30:00+09:00",
+    "leadMin": 448
+   },
+   {
+    "keyword": "중앙행정기관 세종 이전",
+    "hitKeyword": "중앙행정기관 세종 이전",
+    "hitAt": "2026-11-25T07:30:00+09:00",
+    "leadMin": 438
+   },
+   {
+    "keyword": "정부 세종 이전 계획",
+    "hitKeyword": "중앙행정기관 세종 이전",
+    "hitAt": "2026-11-25T07:30:00+09:00",
+    "leadMin": 414
+   },
+   {
+    "keyword": "과잉생산 관세 발표",
+    "hitKeyword": "미국 과잉생산 관세",
+    "hitAt": "2026-11-25T07:30:00+09:00",
+    "leadMin": 52
+   },
+   {
+    "keyword": "미국 과잉생산 관세 조사",
+    "hitKeyword": "미국 과잉생산 관세",
+    "hitAt": "2026-11-25T07:30:00+09:00",
+    "leadMin": 21
+   },
    {
     "keyword": "후티 사우디 공습 예고",
     "hitKeyword": "사우디 빌딩 피격",
@@ -252,54 +368,6 @@
     "hitKeyword": "ETF 상장폐지 위험",
     "hitAt": "2026-11-25T07:00:00+09:00",
     "leadMin": 2009
-   },
-   {
-    "keyword": "EU 하이브리드차 수입 제한",
-    "hitKeyword": "EU 하이브리드차 제한",
-    "hitAt": "2026-11-25T07:00:00+09:00",
-    "leadMin": 384
-   },
-   {
-    "keyword": "리야드 최고층 빌딩 피격",
-    "hitKeyword": "사우디 빌딩 피격",
-    "hitAt": "2026-11-25T07:00:00+09:00",
-    "leadMin": 293
-   },
-   {
-    "keyword": "서울 지하철 파업 철회",
-    "hitKeyword": "서울지하철 파업 철회",
-    "hitAt": "2026-11-25T07:00:00+09:00",
-    "leadMin": 112
-   },
-   {
-    "keyword": "서울 지하철 파업 철회 타결",
-    "hitKeyword": "서울지하철 파업 철회",
-    "hitAt": "2026-11-25T07:00:00+09:00",
-    "leadMin": 32
-   },
-   {
-    "keyword": "오정태 딸 카이스트 입학",
-    "hitKeyword": "오정태 딸 카이스트 입학",
-    "hitAt": "2026-11-25T07:00:00+09:00",
-    "leadMin": 22
-   },
-   {
-    "keyword": "현대차 N 버츄얼컵 결승 진행",
-    "hitKeyword": "현대차 내수",
-    "hitAt": "2026-11-25T06:30:00+09:00",
-    "leadMin": 2688
-   },
-   {
-    "keyword": "현대차 N 컵 결승 개최",
-    "hitKeyword": "현대차 내수",
-    "hitAt": "2026-11-25T06:30:00+09:00",
-    "leadMin": 2668
-   },
-   {
-    "keyword": "2가구 줍줍에 5만3447명 몰려",
-    "hitKeyword": "잠실 2가구 청약 경쟁",
-    "hitAt": "2026-11-25T06:30:00+09:00",
-    "leadMin": 569
    }
   ]
  }
